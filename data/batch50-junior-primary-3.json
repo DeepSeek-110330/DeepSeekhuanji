@@ -1,0 +1,915 @@
+[
+  {
+    "id": "negative-numbers-elementary",
+    "title": "负数的初步认识",
+    "titleEn": "An Introduction to Negative Numbers",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "比 0 小的数叫做负数。气温零下、海拔低于海平面、支出比收入多，都可以用负数表示；0 既不是正数也不是负数。",
+    "summaryEn": "Numbers smaller than 0 are called negative numbers; temperatures below zero, heights below sea level and spending more than you earn can all be written with them, while 0 is neither positive nor negative.",
+    "definition": "数数的时候我们用 1、2、3……来表示物体的个数，可生活里有不少「比 0 还小」的量：冬天的气温零下 3 摄氏度、电梯下到地下 2 层、这个月花掉的钱比挣到的还多……这些量就要请**负数**来表示。\n\n**比 0 小的数叫做负数**。负数前面有一个小小的减号「-」，叫做**负号**，读的时候要读出来：-3 读作**负三**，写的时候负号千万不能丢。比 0 大的数（像 1、2、5）叫**正数**，前面的正号「+」通常省略不写。特别要记住：**0 既不是正数，也不是负数**，它是正数和负数的分界点。\n\n把这些数请到**数轴**上就一目了然：0 站在中间，正数排在 0 的右边，负数排在 0 的左边。数轴上还有一条重要的规矩：**右边的数总比左边的数大**。所以 $-1>-3$；而看着大一些的 -5 其实比 -1 小——离 0 越远的负数反而越小。\n\n用正负数还能记录生活中相反意义的量：零上 5 ℃ 记作 5 ℃，零下 5 ℃ 记作 -5 ℃；高出海平面 100 米记作 +100 米，低于海平面 100 米记作 -100 米；收入 50 元记作 +50 元，支出 50 元就记作 -50 元。",
+    "definitionEn": "When we count objects we use 1, 2, 3, … But many things in life are smaller than 0: a winter temperature of 3 degrees below zero, an elevator going down to the second basement floor, a month in which you spend more than you earn. For such amounts we use **negative numbers**.\n\n**A number smaller than 0 is called a negative number.** It carries a small minus sign in front — the **negative sign** — and that sign is read aloud: -3 is read negative three, and it must never be left out when writing. Numbers greater than 0 (1, 2, 5, …) are **positive numbers**, and their plus sign is usually omitted. Remember especially: **0 is neither positive nor negative**; it is the dividing point between them.\n\nPut these numbers on a **number line** and everything becomes clear: 0 stands in the middle, positive numbers line up to its right and negative numbers to its left. The number line has an important rule: **a number on the right is always greater than one on the left**. So $-1>-3$; and -5, which looks bigger, is actually smaller than -1 — the farther a negative number is from 0, the smaller it is.\n\nNegative numbers also record opposite quantities in daily life: 5 ℃ above zero is 5 ℃ and 5 ℃ below zero is -5 ℃; 100 m above sea level is +100 m and 100 m below is -100 m; earning 50 yuan is +50 yuan and spending 50 yuan is -50 yuan.",
+    "formulas": [
+      {
+        "latex": "-3<0<2",
+        "note": "负数比 0 小，比 0 大的数是正数：负数 < 0 < 正数。",
+        "noteEn": "A negative number is smaller than 0 and a positive number is greater than 0: negative < 0 < positive."
+      },
+      {
+        "latex": "-1>-3",
+        "note": "数轴上右边的数总比左边的数大：-1 在 -3 的右边，所以 -1 比 -3 大。",
+        "noteEn": "A number on the right of the number line is always greater than one on the left: -1 lies to the right of -3, so -1 > -3."
+      },
+      {
+        "latex": "-5<-2<0",
+        "note": "两个负数比大小：离 0 越远的负数越小，所以 -5 比 -2 小。",
+        "noteEn": "Comparing two negative numbers: the farther from 0, the smaller it is, so -5 < -2."
+      },
+      {
+        "latex": "12-15=-3",
+        "note": "不够减的时候结果就是负数：从 12 减到 0 还要再往下减 3，所以 12-15=-3。",
+        "noteEn": "When there is not enough to subtract, the answer is negative: going down from 12 to 0 and 3 further gives 12-15=-3."
+      }
+    ],
+    "expression": {
+      "text": "负数：-1、-2、-3、…（比 0 小）；正数：1、2、3、…（比 0 大）",
+      "symbol": "0",
+      "note": "0 是分界点：它既不是正数，也不是负数，负数写在数字前面加负号。",
+      "noteEn": "0 is the dividing point: it is neither positive nor negative, and a negative number is written with a negative sign before its digits."
+    },
+    "properties": [
+      "比 0 小的数叫做负数，负数前面有负号「-」；-3 读作负三，负号不能丢",
+      "0 既不是正数也不是负数，它是正数和负数的分界点",
+      "数轴上，负数都在 0 的左边，正数都在 0 的右边",
+      "数轴上右边的数总比左边的数大，所以 -1 > -3，-5 < -2",
+      "用正负数可以表示相反意义的量：零上与零下、收入与支出、高于海平面与低于海平面"
+    ],
+    "propertiesEn": [
+      "A number smaller than 0 is a negative number, written with a negative sign before it; -3 is read negative three",
+      "0 is neither positive nor negative; it is the dividing point between the two",
+      "On the number line the negative numbers all lie to the left of 0 and the positive numbers to the right",
+      "A number on the right is always greater than one on the left, so -1 > -3 and -5 < -2",
+      "Positive and negative numbers record opposite quantities: above and below zero, income and spending, above and below sea level"
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        -5,
+        5
+      ],
+      "points": [
+        {
+          "at": -3,
+          "label": "-3",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": -1,
+          "label": "-1",
+          "color": "#ff8f5e"
+        },
+        {
+          "at": 0,
+          "label": "0",
+          "color": "#ffd166"
+        },
+        {
+          "at": 2,
+          "label": "2",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 4,
+          "label": "4",
+          "color": "#06d6a0"
+        }
+      ],
+      "title": "数轴：负数在 0 左边，右边的数总比左边的大（-1 > -3）"
+    },
+    "examples": [
+      {
+        "problem": "冬天，哈尔滨的气温是零下 18 摄氏度，三亚的气温是零上 25 摄氏度。把这两个温度分别用正数、负数表示，并比一比哪里更冷。",
+        "solution": "零下 18 ℃ 比 0 小，记作 **-18 ℃**；零上 25 ℃ 比 0 大，记作 **+25 ℃**（也可以直接写成 25 ℃）。把两个数放到数轴上：-18 在 0 的左边，25 在 0 的右边，「右边的数总比左边的大」，所以 $-18<25$，哈尔滨更冷，三亚更暖和。"
+      },
+      {
+        "problem": "妈妈记账：本月工资收入 3000 元，各项支出共 3200 元。把收入记作正数、支出记作负数，算一算本月结余多少元。",
+        "solution": "收入 3000 元记作 **+3000 元**，支出 3200 元记作 **-3200 元**。结余 = $3000-3200=$ **-200（元）**，是一个负数，说明这个月不但没有结余，还多花了 200 元。"
+      }
+    ],
+    "tags": [
+      "负数",
+      "数轴",
+      "温度",
+      "海拔",
+      "正负数"
+    ],
+    "links": [
+      "whole-numbers",
+      "decimals-elementary",
+      "addition-subtraction",
+      "real-numbers"
+    ]
+  },
+  {
+    "id": "ratio-elementary",
+    "title": "比与比例",
+    "titleEn": "Ratio and Proportion",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "两个数相除又叫做两个数的比；表示两个比相等的式子叫比例。这里还有正比例、反比例和比例尺。",
+    "summaryEn": "Dividing one number by another gives their ratio, and a proportion says that two ratios are equal — together with direct and inverse proportion and scale drawings.",
+    "definition": "**两个数相除又叫做两个数的比**。比如 3 杯水配 2 杯糖，水与糖的比就是 3:2：「:」叫**比号**，3 是**前项**，2 是**后项**。**比值 = 前项 ÷ 后项**，所以 3:2 的比值是 $3\\div 2=1.5$。比、除法、分数其实是一家人：$a:b=a\\div b=\\dfrac{a}{b}$（b 不能是 0），只是写法和读法不同。\n\n化简要靠**比的基本性质**：比的前项和后项同时乘或同时除以相同的数（0 除外），比值不变，例如 $12:18=(12\\div 6):(18\\div 6)=2:3$。注意：**化简比的结果还是一个比**（写成 2:3），而**求比值的结果是一个数**（写成 $\\dfrac{2}{3}$ 或约 0.67），两种答案不能混。比最常见的用处是**按比分配**：把 600 克按 1:2 分，先算总份数 1+2=3，求出一份，再分别乘 1 和乘 2。\n\n**表示两个比相等的式子叫做比例**，比如 $3:2=6:4$。比例也有重要性质：**两个外项的积等于两个内项的积**，$3:2=6:4$ 里就有 $3\\times 4=2\\times 6$。知道比例中的三项，就能用它求出第四项，这就是**解比例**。\n\n两种相关联的量，比值（商）一定时成**正比例**：$\\dfrac{y}{x}=k$（一定），如 y=2x；乘积一定时成**反比例**：$xy=k$（一定），如 xy=12。画地图、看图纸要用**比例尺**：比例尺 = 图上距离 : 实际距离，它是一个**比**（如 1:1000 表示图上 1 厘米代表实际 1000 厘米），不要当成面积比；比例尺有数值、线段、文字三种形式。",
+    "definitionEn": "**Dividing one number by another is also called the ratio of the two numbers.** If there are 3 cups of water and 2 cups of sugar, the ratio of water to sugar is 3:2: the colon is the **ratio sign**, 3 is the first term and 2 the second term. The **value of the ratio is the first term divided by the second**, so the value of 3:2 is $3\\div 2=1.5$. Ratios, division and fractions are one family: $a:b=a\\div b=\\dfrac{a}{b}$ (b must not be 0) — only the writing and the reading differ.\n\nSimplifying uses the **basic property of ratios**: multiplying or dividing both terms by the same non-zero number leaves the value unchanged, for example $12:18=2:3$. Note carefully: **simplifying gives another ratio** (written 2:3), while **finding the value gives a number** (written $\\dfrac{2}{3}$, about 0.67) — the two answers are different in kind. A common use is **sharing in a given ratio**: to split 600 g in the ratio 1:2, first add the parts (1+2=3), find one part, then multiply by 1 and by 2.\n\n**An equation saying that two ratios are equal is called a proportion**, for example $3:2=6:4$. It has a key property: **the product of the outer terms equals the product of the inner terms**, so $3:2=6:4$ gives $3\\times 4=2\\times 6$. Three known terms determine the fourth — that is how we **solve a proportion**.\n\nWhen two related quantities have a constant quotient they are in **direct proportion**: $\\dfrac{y}{x}=k$ (constant), for example y=2x; when their product is constant they are in **inverse proportion**: $xy=k$ (constant), for example xy=12. Maps and drawings use a **scale**: the scale is the ratio of the distance on the drawing to the real distance — a **ratio of lengths** such as 1:1000, meaning 1 cm on the map stands for 1000 cm on the ground. It is never a ratio of areas, and it can be written as a numerical, line or word scale.",
+    "formulas": [
+      {
+        "latex": "a:b=a\\div b=\\dfrac{a}{b}\\quad(b\\neq 0)",
+        "note": "比的意义：两个数相除又叫做两个数的比；比值 = 前项 ÷ 后项，比值是一个数。",
+        "noteEn": "The meaning of a ratio: dividing one number by another; the value is the first term divided by the second and is a number."
+      },
+      {
+        "latex": "a:b=(a\\times k):(b\\times k)=(a\\div k):(b\\div k)\\quad(k\\neq 0)",
+        "note": "比的基本性质：前项、后项同乘或同除以相同的数（0 除外），比值不变；用它把比化简成最简整数比，结果仍是一个比，如 3:2。",
+        "noteEn": "The basic property of ratios: multiplying or dividing both terms by the same non-zero number leaves the value unchanged; it is used to simplify a ratio into lowest terms, and the answer is still a ratio such as 3:2."
+      },
+      {
+        "latex": "a:b=c:d\\ \\Longrightarrow\\ ad=bc",
+        "note": "比例的基本性质：两个外项的积等于两个内项的积，解比例时用它把比例变成等式求未知数。",
+        "noteEn": "The basic property of proportions: the product of the outer terms equals the product of the inner terms; it turns a proportion into an equation for solving the unknown."
+      },
+      {
+        "latex": "\\dfrac{y}{x}=k\\quad\\text{（一定）}",
+        "note": "正比例：两个量的比值（商）一定，例如 y=2x 时 y 与 x 成正比例，图象是过原点的直线。",
+        "noteEn": "Direct proportion: the quotient of the two quantities is constant, for example y=2x, and the graph is a straight line through the origin."
+      },
+      {
+        "latex": "xy=k\\quad\\text{（一定）}",
+        "note": "反比例：两个量的乘积一定，例如 xy=12 时 y 与 x 成反比例，图象是曲线。判断成什么比例，就看商一定还是积一定。",
+        "noteEn": "Inverse proportion: the product of the two quantities is constant, for example xy=12, and the graph is a curve. To decide which kind, check whether the quotient or the product is fixed."
+      }
+    ],
+    "expression": {
+      "text": "比 a:b；比例 a:b=c:d；比例尺 = 图上距离 : 实际距离（如 1:1000）",
+      "symbol": "a:b=a\\div b",
+      "note": "三个容易混淆的记号：比是一个除法，比例是两个比相等的等式，比例尺是图上距离与实际距离的比（长度之比，不是面积比）。",
+      "noteEn": "Three easily confused notations: a ratio is a division, a proportion is an equality of two ratios, and a scale is the ratio of a drawing length to a real length (a ratio of lengths, not of areas)."
+    },
+    "properties": [
+      "比表示两个数相除：$a:b=a\\div b=\\dfrac{a}{b}$（b≠0），前项除以后项所得的商叫比值，比值是一个数",
+      "比的基本性质：前项和后项同乘或同除以相同的数（0 除外），比值不变，这是化简比的依据",
+      "化简比的结果还是一个比（如 3:2），求比值的结果是一个数（如 1.5）——这两件事要分清",
+      "表示两个比相等的式子叫比例；比例的基本性质是两外项之积等于两内项之积（a:b=c:d ⇒ ad=bc），可以据此解比例",
+      "正比例：两个量的比值一定（y÷x=k）；反比例：两个量的乘积一定（x×y=k）；比例尺 = 图上距离 : 实际距离，它是一个比"
+    ],
+    "propertiesEn": [
+      "A ratio is a division: $a:b=a\\div b=\\dfrac{a}{b}$ (b≠0); the quotient of the two terms is the value of the ratio, and it is a number",
+      "Basic property of ratios: multiplying or dividing both terms by the same non-zero number leaves the value unchanged — the basis for simplifying",
+      "Simplifying a ratio gives a ratio such as 3:2, while finding its value gives a number such as 1.5 — keep the two apart",
+      "An equation between two equal ratios is a proportion; its basic property is that the products of the outer and inner terms are equal (a:b=c:d ⇒ ad=bc), which solves proportions",
+      "Direct proportion: the quotient is constant (y÷x=k); inverse proportion: the product is constant (x×y=k); a scale is the ratio of drawing length to real length"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2*x",
+          "color": "#4cc9f0",
+          "label": "正比例 y = 2x"
+        },
+        {
+          "expr": "12/x",
+          "color": "#ff6b9d",
+          "label": "反比例 y = 12/x"
+        }
+      ],
+      "xRange": [
+        0.5,
+        6
+      ],
+      "yRange": [
+        0,
+        14
+      ],
+      "title": "正比例 y=2x 与反比例 y=12/x（商一定与积一定）"
+    },
+    "examples": [
+      {
+        "problem": "（1）把 12:18 化成最简整数比，再求它的比值。（2）解比例：$3:4=x:12$。",
+        "solution": "（1）前项、后项同时除以它们的最大公因数 6：$12:18=(12\\div 6):(18\\div 6)=2:3$，**化简比的结果是一个比**；比值 $=12\\div 18=\\dfrac{2}{3}$（约 0.67），**求比值的结果是一个数**。（2）根据比例的基本性质，两外项之积等于两内项之积：$4x=3\\times 12=36$，所以 $x=36\\div 4=9$。验算：$9:12=(9\\div 3):(12\\div 3)=3:4$ ✓。"
+      },
+      {
+        "problem": "（1）妈妈把 600 克糖果按 1:2 分给弟弟和姐姐，两人各分到多少克？（2）单价一定时，总价与数量成什么比例？路程一定时，速度与时间又成什么比例？",
+        "solution": "（1）总份数 1+2=3，每份 $600\\div 3=200$（克）：弟弟 $200\\times 1=200$ 克，姐姐 $200\\times 2=400$ 克。验算：200+400=600，200:400=1:2 ✓。（2）总价 ÷ 数量 = 单价（一定），**商一定，成正比例**；速度 × 时间 = 路程（一定），**积一定，成反比例**。"
+      }
+    ],
+    "tags": [
+      "比",
+      "比值",
+      "比例",
+      "正比例",
+      "反比例",
+      "比例尺",
+      "按比分配"
+    ],
+    "links": [
+      "fractions-elementary",
+      "percentage-elementary",
+      "multiplication-division",
+      "inverse-variation-function",
+      "similarity"
+    ]
+  },
+  {
+    "id": "percentage-elementary",
+    "title": "百分数",
+    "titleEn": "Percentages",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "表示一个数是另一个数的百分之几的数叫百分数，也叫百分率或百分比；它只表示倍比关系，不能带单位名称。",
+    "summaryEn": "A percentage states how many hundredths one number is of another; it expresses only a relative comparison and never carries a unit.",
+    "definition": "像 25%、50%、110% 这样的数，**表示一个数是另一个数的百分之几**，叫做**百分数**，也叫**百分率**或**百分比**。百分数的分母永远是 100，所以 25% 就是 $\\dfrac{25}{100}=0.25$。考试的及格率、投篮的命中率、牛奶的含奶量……都是在用百分数说话。\n\n百分数**只表示两个数之间的倍比关系**，所以后面**不能带单位名称**：可以说「一根绳子长 0.5 米」，但不能说「一根绳子长 50% 米」——50% 必须配上「谁的 50%」才有意义。\n\n百分数与小数、分数可以互相改写：小数化成百分数，把**小数点向右移两位、添上 %**（0.75 → 75%）；百分数化成小数，**去掉 %、小数点向左移两位**（75% → 0.75）。百分数化成分数，先写成分母是 100 的分数再约分；分数化成百分数，先化成小数再化成百分数。\n\n生活里到处是百分数：**折扣**「打八折」就是按原价的 80% 出售；**成数**「增产三成」就是增产 30%；还有**利息、纳税、浓度**等。做题时先找准「一个数」和「另一个数」分别是谁，再列式计算。",
+    "definitionEn": "Numbers such as 25%, 50% or 110% state **how many hundredths one number is of another**; they are called **percentages**. The denominator is always 100, so 25% means $\\dfrac{25}{100}=0.25$. Pass rates, shooting accuracy and the milk content on a carton are all percentages.\n\nA percentage **expresses only a relative comparison between two numbers**, so it **never carries a unit**: we may say that a rope is 0.5 m long, but not that it is 50% m long — 50% only makes sense once we know 50% of what.\n\nPercentages, decimals and fractions convert into one another: decimal to percentage, **move the decimal point two places to the right and add %** (0.75 → 75%); percentage to decimal, **drop the % and move the point two places to the left** (75% → 0.75). To turn a percentage into a fraction, write it over 100 and simplify; to turn a fraction into a percentage, first change it into a decimal.\n\nPercentages are everywhere in life: **discounts**, where paying eight tenths means paying 80% of the original price; **tenths of growth**, where three tenths means 30% more; and also **interest, tax and concentration**. In a problem, first decide which number is the one and which is the other.",
+    "formulas": [
+      {
+        "latex": "0.75=\\dfrac{3}{4}=75\\%",
+        "note": "75% 就是 75 个 1%，等于 0.75，也可以约分成 $\\dfrac{3}{4}$——百分数、小数、分数可以互化。",
+        "noteEn": "75% means 75 hundredths, equal to 0.75, which simplifies to $\\dfrac{3}{4}$ — percentages, decimals and fractions convert into each other."
+      },
+      {
+        "latex": "0.08=8\\%,\\qquad 45\\%=0.45",
+        "note": "互化口诀：小数 → 百分数，小数点向右移两位、添上 %；百分数 → 小数，去掉 %、小数点向左移两位。",
+        "noteEn": "Conversion rule: decimal to percentage, move the point two places right and add %; percentage to decimal, drop the % and move the point two places left."
+      },
+      {
+        "latex": "\\dfrac{\\text{一个数}}{\\text{另一个数}}\\times 100\\%",
+        "note": "求百分数：用一个数除以另一个数，再把商化成百分数，如 20÷50=0.4=40%，表示 20 是 50 的 40%。",
+        "noteEn": "Finding a percentage: divide one number by the other and change the quotient into a percentage, e.g. 20÷50=0.4=40%, meaning 20 is 40% of 50."
+      },
+      {
+        "latex": "\\text{八折}=80\\%,\\qquad \\text{三成}=30\\%",
+        "note": "几折就是百分之几十（八五折 = 85%），几成也是百分之几十（三成 = 30%）。",
+        "noteEn": "Eight tenths of the price is 80% (and eight and a half tenths is 85%); three tenths, or three cheng, is 30%."
+      },
+      {
+        "latex": "\\text{利息}=\\text{本金}\\times\\text{利率}\\times\\text{时间}",
+        "note": "利息、纳税、浓度等问题都以百分率为基础：本金 2000 元、年利率 2%、存一年，利息 = 2000×2%×1 = 40 元。",
+        "noteEn": "Interest, tax and concentration problems all rest on percentages: with 2000 yuan at 2% a year for one year, the interest is 2000×2%×1 = 40 yuan."
+      }
+    ],
+    "expression": {
+      "text": "25% = 0.25 = 1/4；50% = 0.5 = 1/2；75% = 0.75 = 3/4",
+      "symbol": "%",
+      "note": "「%」叫百分号，读作百分之几。写百分数时 % 不能丢，去掉 % 它就变成小数或分数了；百分数不能带单位名称。",
+      "noteEn": "The sign % is read per cent. Never drop it when writing a percentage, for without it the number becomes a decimal or a fraction; and a percentage never carries a unit."
+    },
+    "properties": [
+      "百分数表示一个数是另一个数的百分之几，分母固定是 100，只表示两个数的倍比关系",
+      "百分数不能带单位名称：不能说「50% 米」，但可以说某个量的 50%（如绳子的 50%）",
+      "小数化成百分数：小数点向右移两位、添上 %；百分数化成小数：去掉 %、小数点向左移两位",
+      "分数化成百分数先化成小数，再化成百分数；百分数化成分数先写成分母 100 的分数再约分",
+      "折扣、成数、利息、纳税、浓度都用百分数表示：几折、几成就是百分之几十"
+    ],
+    "propertiesEn": [
+      "A percentage says how many hundredths one number is of another; its denominator is always 100 and it expresses only a relative comparison",
+      "A percentage never carries a unit: 50% m is wrong, though 50% of some quantity is fine",
+      "Decimal to percentage: move the point two places right and add %; percentage to decimal: drop the % and move the point two places left",
+      "A fraction becomes a percentage via its decimal form; a percentage becomes a fraction by writing it over 100 and simplifying",
+      "Discounts, tenths of growth, interest, tax and concentration are all percentages: eight tenths or three cheng means 80% or 30%"
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        1
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0",
+          "color": "#ffd166"
+        },
+        {
+          "at": 0.25,
+          "label": "25%",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 0.5,
+          "label": "50%",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 0.75,
+          "label": "75%",
+          "color": "#06d6a0"
+        },
+        {
+          "at": 1,
+          "label": "100%",
+          "color": "#b388ff"
+        }
+      ],
+      "title": "数轴 0 ~ 1：25%、50%、75%、100% 的位置"
+    },
+    "examples": [
+      {
+        "problem": "一件羽绒服原价 400 元，商店「打八折」出售。现价是多少元？比原价便宜了多少元？",
+        "solution": "打八折就是按原价的 80% 出售：$400\\times 80\\%=400\\times 0.8=320$（元），现价 320 元。比原价便宜 $400-320=80$（元）。验算：$320\\div 400=0.8=80\\%$ ✓。"
+      },
+      {
+        "problem": "（1）把 0.06 化成百分数，把 45% 化成小数。（2）把 2000 元存入银行，年利率 2%，存一年到期可得利息多少元？",
+        "solution": "（1）0.06 的小数点向右移两位得 6，添上 % 就是 **6%**；45% 去掉 % 后小数点向左移两位得 **0.45**。（2）利息 = 本金 × 利率 × 时间 $=2000\\times 2\\%\\times 1=2000\\times 0.02=40$（元）。注意 2% 只表示倍比关系、不带单位，算出的利息才带单位「元」。"
+      }
+    ],
+    "tags": [
+      "百分数",
+      "百分率",
+      "折扣",
+      "成数",
+      "利率",
+      "小数互化"
+    ],
+    "links": [
+      "fractions-elementary",
+      "decimals-elementary",
+      "ratio-elementary",
+      "average-elementary",
+      "statistics-charts"
+    ]
+  },
+  {
+    "id": "length-units",
+    "title": "长度单位",
+    "titleEn": "Units of Length",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "千米、米、分米、厘米、毫米——量长度要挑合适的单位，换算时记住每个进率。",
+    "summaryEn": "Kilometres, metres, decimetres, centimetres and millimetres — choose a sensible unit for each length and convert using fixed rates.",
+    "definition": "量铅笔有多长、教室有多宽、两地相距多远，用的都是**长度单位**。常用的长度单位从小到大有：**毫米（mm）、厘米（cm）、分米（dm）、米（m）、千米（km）**。一枚硬币的厚度大约是 1 毫米，一根手指的宽度大约是 1 厘米，粉笔盒的高大约是 1 分米，教室门的高大约是 2 米，两个公交站之间大约有 1 千米。\n\n它们之间的关系要记牢：**1 千米 = 1000 米**；**1 米 = 10 分米 = 100 厘米 = 1000 毫米**；1 分米 = 10 厘米；1 厘米 = 10 毫米。可以想成一把「十进梯子」：米、分米、厘米、毫米之间每走一级都是 10，只有米和千米之间是 1000。\n\n换算方法是：**大单位化成小单位，乘进率**；**小单位化成大单位，除以进率**。例如 3 米 = 3×100 = 300 厘米；4000 米 = 4000÷1000 = 4 千米。换算前先想清楚「1 个大单位里有多少个小单位」，就不会乘错、除错了。",
+    "definitionEn": "We measure a pencil, a classroom or a road with **units of length**. From small to large the common ones are the **millimetre (mm), centimetre (cm), decimetre (dm), metre (m) and kilometre (km)**. A coin is about 1 mm thick, a finger about 1 cm wide, a chalk box about 1 dm high, a classroom door about 2 m high, and two bus stops about 1 km apart.\n\nThe relations must be memorised: **1 km = 1000 m**; **1 m = 10 dm = 100 cm = 1000 mm**; 1 dm = 10 cm; 1 cm = 10 mm. Picture a ladder of tens: every step from metre down through decimetre and centimetre to millimetre is a step of 10, while the step between metre and kilometre is 1000.\n\nTo convert: **a bigger unit to a smaller unit — multiply by the rate**; **a smaller unit to a bigger unit — divide by the rate**. For example 3 m = 3×100 = 300 cm and 4000 m = 4000÷1000 = 4 km. Always ask first how many small units one big unit contains.",
+    "formulas": [
+      {
+        "latex": "1\\ \\mathrm{km}=1000\\ \\mathrm{m}",
+        "note": "千米和米之间的进率是 1000：1 千米就是 1000 米，400 米的跑道跑 2 圈半正好 1 千米。",
+        "noteEn": "The rate between kilometre and metre is 1000: 1 km is 1000 m, and two and a half laps of a 400 m track make exactly 1 km."
+      },
+      {
+        "latex": "1\\ \\mathrm{m}=10\\ \\mathrm{dm}=100\\ \\mathrm{cm}=1000\\ \\mathrm{mm}",
+        "note": "米、分米、厘米、毫米之间每相邻两个单位的进率都是 10，所以 1 米 = 100 厘米 = 1000 毫米。",
+        "noteEn": "Between metre, decimetre, centimetre and millimetre every neighbouring rate is 10, so 1 m = 100 cm = 1000 mm."
+      },
+      {
+        "latex": "1\\ \\mathrm{dm}=10\\ \\mathrm{cm},\\qquad 1\\ \\mathrm{cm}=10\\ \\mathrm{mm}",
+        "note": "分米和厘米、厘米和毫米之间的进率也都是 10。",
+        "noteEn": "The rate from decimetre to centimetre and from centimetre to millimetre is 10 as well."
+      },
+      {
+        "latex": "\\text{大单位}\\to\\text{小单位：乘进率},\\qquad \\text{小单位}\\to\\text{大单位：除以进率}",
+        "note": "换算口诀。如 5 米 = 5×100 = 500 厘米；200 毫米 = 200÷10 = 20 厘米。",
+        "noteEn": "The conversion rule: big to small, multiply by the rate; small to big, divide by the rate; e.g. 5 m = 500 cm and 200 mm = 20 cm."
+      }
+    ],
+    "properties": [
+      "常用长度单位从小到大：毫米（mm）、厘米（cm）、分米（dm）、米（m）、千米（km）",
+      "1 千米 = 1000 米；1 米 = 10 分米 = 100 厘米 = 1000 毫米",
+      "米、分米、厘米、毫米中，每相邻两个单位之间的进率都是 10",
+      "换算口诀：大单位化小单位乘进率，小单位化大单位除以进率",
+      "选单位要有分寸：量小东西（硬币、铅笔）用毫米、厘米；量房间用米；量两地距离用千米"
+    ],
+    "propertiesEn": [
+      "Common units of length from small to large: millimetre, centimetre, decimetre, metre, kilometre",
+      "1 km = 1000 m; 1 m = 10 dm = 100 cm = 1000 mm",
+      "Between metre, decimetre, centimetre and millimetre every neighbouring rate is 10",
+      "Conversion rule: big to small, multiply by the rate; small to big, divide by the rate",
+      "Choose the unit to fit the object: millimetres and centimetres for coins and pencils, metres for rooms, kilometres for distances between towns"
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        10
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0",
+          "color": "#ffd166"
+        },
+        {
+          "at": 1,
+          "label": "1 分米 = 100 毫米",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 5,
+          "label": "5 分米 = 500 毫米",
+          "color": "#06d6a0"
+        },
+        {
+          "at": 10,
+          "label": "1 米",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "1 米 = 10 分米 = 100 厘米 = 1000 毫米（每小段 1 分米）"
+    },
+    "examples": [
+      {
+        "problem": "一支铅笔长 18 厘米，合多少毫米？教室的门高 2 米，合多少厘米？",
+        "solution": "厘米化成毫米是大单位化小单位，乘进率 10：$18\\times 10=180$（毫米）。米化成厘米也是大化小，进率是 100：$2\\times 100=200$（厘米）。"
+      },
+      {
+        "problem": "小明家到学校有 1 千米 500 米。这段路合多少米？如果小明每分钟走 75 米，从家走到学校要用多少分钟？",
+        "solution": "1 千米 = 1000 米，所以 1 千米 500 米 = 1000+500 = **1500 米**。时间 = 路程 ÷ 速度 $=1500\\div 75=20$（分钟）。验算：$75\\times 20=1500$ ✓。"
+      }
+    ],
+    "tags": [
+      "长度单位",
+      "米",
+      "厘米",
+      "毫米",
+      "千米",
+      "单位换算"
+    ],
+    "links": [
+      "decimals-elementary",
+      "area-elementary",
+      "perimeter-elementary",
+      "area-volume-units",
+      "rounding-approximation"
+    ]
+  },
+  {
+    "id": "area-volume-units",
+    "title": "面积与体积单位",
+    "titleEn": "Units of Area and Volume",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "面积单位之间的进率是 100，体积单位之间的进率是 1000；升和毫升是容积单位，1 升 = 1 立方分米。",
+    "summaryEn": "Neighbouring area units step by 100 and volume units by 1000, while the litre and millilitre measure capacity, with 1 L = 1 dm³.",
+    "definition": "**面积**是图形占平面的大小，常用的面积单位有**平方厘米（cm²）、平方分米（dm²）、平方米（m²）**。边长 1 厘米的正方形面积是 1 平方厘米，边长 1 分米的是 1 平方分米，边长 1 米的是 1 平方米。计量大片土地还要用**公顷**和**平方千米（km²）**：1 公顷 = 10000 平方米，1 平方千米 = 100 公顷 = 1000000 平方米。\n\n为什么面积单位的进率是 100？因为 1 米 = 10 分米，1 平方米里正好能摆 10×10 = 100 个 1 平方分米的小正方形，所以 **1 平方米 = 100 平方分米 = 10000 平方厘米**。相邻两个面积单位之间的进率都是 100，这一点最容易和长度单位（进率 10）弄混。\n\n**体积**是物体占空间的大小，常用单位有**立方厘米（cm³）、立方分米（dm³）、立方米（m³）**。因为 1 分米 = 10 厘米，一个棱长 1 分米的正方体里能装 10×10×10 = 1000 个棱长 1 厘米的小正方体，所以 **1 立方米 = 1000 立方分米 = 1000000 立方厘米**，相邻体积单位的进率是 1000。\n\n计量液体还要用**容积单位：升（L）和毫升（mL）**，并且 **1 升 = 1 立方分米、1 毫升 = 1 立方厘米**。容积和体积不一样：体积从物体**外部**测量，容积从容器**内部**测量，所以同一个容器的体积比它的容积大一些，差别就是容器壁占去的地方。",
+    "definitionEn": "**Area** is how much flat surface a shape covers; the common units are the **square centimetre (cm²), square decimetre (dm²) and square metre (m²)**. A square 1 cm on a side has area 1 cm², one 1 dm on a side has 1 dm², and one 1 m on a side has 1 m². Large pieces of land use the **hectare** and the **square kilometre (km²)**: 1 hectare = 10 000 m² and 1 km² = 100 hectares = 1 000 000 m².\n\nWhy is the rate between area units 100? Because 1 m = 10 dm, a 1 m² square holds 10×10 = 100 squares of 1 dm², so **1 m² = 100 dm² = 10 000 cm²**. Neighbouring area units always step by 100 — easily confused with units of length, which step by 10.\n\n**Volume** is how much space an object takes up, measured in **cubic centimetres (cm³), cubic decimetres (dm³) and cubic metres (m³)**. Since 1 dm = 10 cm, a cube 1 dm on a side holds 10×10×10 = 1000 cubes of 1 cm³, so **1 m³ = 1000 dm³ = 1 000 000 cm³**, and neighbouring volume units step by 1000.\n\nFor liquids we also use **units of capacity, the litre (L) and the millilitre (mL)**, with **1 L = 1 dm³ and 1 mL = 1 cm³**. Volume and capacity are not the same: volume is measured from the **outside** of an object, capacity from the **inside** of a container, so the volume of a container is a little larger than its capacity — the difference is the space taken by the walls.",
+    "formulas": [
+      {
+        "latex": "1\\ \\mathrm{m}^{2}=100\\ \\mathrm{dm}^{2}=10000\\ \\mathrm{cm}^{2}",
+        "note": "相邻面积单位之间的进率是 100（不是 10）：1 平方米 = 100 平方分米 = 10000 平方厘米。",
+        "noteEn": "Neighbouring area units step by 100 (not 10): 1 m² = 100 dm² = 10 000 cm²."
+      },
+      {
+        "latex": "1\\ \\text{公顷}=10000\\ \\mathrm{m}^{2},\\qquad 1\\ \\mathrm{km}^{2}=100\\ \\text{公顷}=1000000\\ \\mathrm{m}^{2}",
+        "note": "计量土地用公顷和平方千米：1 公顷 = 10000 平方米，1 平方千米 = 100 公顷 = 1000000 平方米。",
+        "noteEn": "Land is measured in hectares and square kilometres: 1 hectare = 10 000 m² and 1 km² = 100 hectares = 1 000 000 m²."
+      },
+      {
+        "latex": "1\\ \\mathrm{m}^{3}=1000\\ \\mathrm{dm}^{3}=1000000\\ \\mathrm{cm}^{3}",
+        "note": "相邻体积单位之间的进率是 1000：1 立方米 = 1000 立方分米 = 1000000 立方厘米。",
+        "noteEn": "Neighbouring volume units step by 1000: 1 m³ = 1000 dm³ = 1 000 000 cm³."
+      },
+      {
+        "latex": "1\\ \\mathrm{L}=1\\ \\mathrm{dm}^{3},\\qquad 1\\ \\mathrm{mL}=1\\ \\mathrm{cm}^{3}",
+        "note": "容积单位：1 升 = 1 立方分米，1 毫升 = 1 立方厘米，所以 1 升 = 1000 毫升。",
+        "noteEn": "Capacity units: 1 L = 1 dm³ and 1 mL = 1 cm³, hence 1 L = 1000 mL."
+      },
+      {
+        "latex": "\\text{面积进率 }100,\\qquad \\text{体积进率 }1000",
+        "note": "口诀：长度进率 10、面积进率 100、体积进率 1000——长度乘 10，面积就要乘 10 再乘 10，体积乘 10 再乘 10 再乘 10。",
+        "noteEn": "A memory hook: length steps by 10, area by 100 and volume by 1000 — one factor of 10 per dimension."
+      }
+    ],
+    "properties": [
+      "相邻面积单位之间的进率是 100，不是 10：1 平方米 = 100 平方分米 = 10000 平方厘米",
+      "相邻体积单位之间的进率是 1000：1 立方米 = 1000 立方分米 = 1000000 立方厘米",
+      "土地面积用公顷和平方千米：1 公顷 = 10000 平方米，1 平方千米 = 100 公顷 = 1000000 平方米",
+      "容积单位升和毫升：1 升 = 1 立方分米，1 毫升 = 1 立方厘米，1 升 = 1000 毫升",
+      "体积从物体外部测量，容积从容器内部测量；同一个容器的容积比体积小，相差的就是容器壁占的空间"
+    ],
+    "propertiesEn": [
+      "Neighbouring area units step by 100, not 10: 1 m² = 100 dm² = 10 000 cm²",
+      "Neighbouring volume units step by 1000: 1 m³ = 1000 dm³ = 1 000 000 cm³",
+      "Land uses hectares and square kilometres: 1 hectare = 10 000 m² and 1 km² = 100 hectares = 1 000 000 m²",
+      "Capacity units: 1 L = 1 dm³ and 1 mL = 1 cm³, so 1 L = 1000 mL",
+      "Volume is measured from the outside of an object and capacity from the inside of a container, so capacity is smaller"
+    ],
+    "plot": {
+      "type": "geometry",
+      "height": 300,
+      "xRange": [
+        -0.45,
+        1.45
+      ],
+      "yRange": [
+        -0.16,
+        1.14
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.10)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0.9
+            ],
+            [
+              0.1,
+              0.9
+            ],
+            [
+              0.1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.55)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.1,
+            0
+          ],
+          "to": [
+            0.1,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.1
+          ],
+          "to": [
+            1,
+            0.1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.2,
+            0
+          ],
+          "to": [
+            0.2,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.2
+          ],
+          "to": [
+            1,
+            0.2
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.3,
+            0
+          ],
+          "to": [
+            0.3,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.3
+          ],
+          "to": [
+            1,
+            0.3
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.4,
+            0
+          ],
+          "to": [
+            0.4,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.4
+          ],
+          "to": [
+            1,
+            0.4
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.5,
+            0
+          ],
+          "to": [
+            0.5,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.5
+          ],
+          "to": [
+            1,
+            0.5
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.6,
+            0
+          ],
+          "to": [
+            0.6,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.6
+          ],
+          "to": [
+            1,
+            0.6
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.7,
+            0
+          ],
+          "to": [
+            0.7,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.7
+          ],
+          "to": [
+            1,
+            0.7
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.8,
+            0
+          ],
+          "to": [
+            0.8,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.8
+          ],
+          "to": [
+            1,
+            0.8
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.9,
+            0
+          ],
+          "to": [
+            0.9,
+            1
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.9
+          ],
+          "to": [
+            1,
+            0.9
+          ],
+          "color": "rgba(140,165,230,0.45)",
+          "width": 1
+        },
+        {
+          "type": "point",
+          "at": [
+            0.1,
+            1
+          ],
+          "label": "1 厘米",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.33,
+            0.5
+          ],
+          "text": "边长 1 分米"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.5,
+            -0.09
+          ],
+          "text": "每小格 = 1 平方厘米，共 100 格",
+          "color": "rgba(220,228,250,0.95)"
+        }
+      ],
+      "title": "1 平方分米 = 100 平方厘米（分成 10 × 10 个小格）"
+    },
+    "examples": [
+      {
+        "problem": "一张正方形桌布的边长是 1 米。它的面积是多少平方分米？合多少平方厘米？",
+        "solution": "面积 = 边长 × 边长 $=1\\times 1=1$（平方米）。1 平方米 = 100 平方分米，所以是 **100 平方分米**；1 平方分米 = 100 平方厘米，合 $100\\times 100=10000$（平方厘米）。也可以先换单位再算：边长 1 米 = 10 分米，$10\\times 10=100$ 平方分米 ✓。"
+      },
+      {
+        "problem": "一个正方体鱼缸（从里面量）棱长是 30 厘米。它的容积是多少立方厘米？合多少升？",
+        "solution": "容积 = 棱长 × 棱长 × 棱长 $=30\\times 30\\times 30=27000$（立方厘米）。1 立方厘米 = 1 毫升，所以 27000 立方厘米 = 27000 毫升；又因为 1 升 = 1000 毫升，$27000\\div 1000=27$（升）。"
+      }
+    ],
+    "tags": [
+      "面积单位",
+      "体积单位",
+      "容积",
+      "公顷",
+      "平方千米",
+      "升"
+    ],
+    "links": [
+      "length-units",
+      "area-elementary",
+      "solid-volume-elementary",
+      "solid-figures-elementary",
+      "perimeter-elementary"
+    ]
+  },
+  {
+    "id": "mass-time-units",
+    "title": "质量与时间单位",
+    "titleEn": "Units of Mass and Time",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "吨、千克、克量质量，时、分、秒量时间；年月日里还藏着大月、小月和闰年的规律。",
+    "summaryEn": "Tonnes, kilograms and grams measure mass, while hours, minutes and seconds measure time — and the calendar hides the rules of big months, small months and leap years.",
+    "definition": "称一称东西有多重，用的是**质量单位**：**吨（t）、千克（kg）、克（g）**。一枚 1 元硬币大约重 6 克，5 个苹果大约 1 千克，一头大象大约 5 吨。它们之间的进率是 1000：**1 吨 = 1000 千克，1 千克 = 1000 克**。\n\n量时间的长短，用的是**时间单位**：**时（h）、分（min）、秒（s）**。眨一下眼大约 1 秒，跳绳 1 分钟大约能跳 100 下，一节数学课 40 分钟，1 天有 24 小时。时间单位的进率是 **60**，不是 100：**1 时 = 60 分，1 分 = 60 秒**。\n\n比「时」更大的时间单位有日、月、年：**1 日 = 24 时，一年有 12 个月**。其中**大月有 31 天**（1、3、5、7、8、10、12 月），**小月有 30 天**（4、6、9、11 月），**二月最特别：平年 28 天，闰年 29 天**。所以**平年全年 365 天，闰年全年 366 天**，多出来的那 1 天就藏在二月里。\n\n**怎样判断闰年？**口诀是「**四年一闰，百年不闰，四百年再闰**」：公历年份是 4 的倍数的一般是闰年；但遇到整百年（如 1900 年、2000 年），必须同时是 400 的倍数才是闰年。所以 **1900 年不是闰年**（1900÷400 有余数），**2000 年是闰年**（2000÷400 = 5）。",
+    "definitionEn": "We weigh things with **units of mass**: the **tonne (t), kilogram (kg) and gram (g)**. A 1-yuan coin weighs about 6 g, five apples about 1 kg, and an elephant about 5 t. The rate is 1000: **1 t = 1000 kg and 1 kg = 1000 g**.\n\nTime is measured with the **hour (h), minute (min) and second (s)**. A blink lasts about 1 s, a minute of skipping rope is about 100 turns, a maths lesson is 40 minutes, and a day has 24 hours. Here the rate is **60**, not 100: **1 h = 60 min and 1 min = 60 s**.\n\nBeyond hours come days, months and years: **1 day = 24 h and one year has 12 months**. **Big months have 31 days** (January, March, May, July, August, October, December) and **small months have 30 days** (April, June, September, November), while **February is special: 28 days in a common year and 29 in a leap year**. So a **common year has 365 days and a leap year 366**, and the extra day hides in February.\n\n**How do we spot a leap year?** The old rhyme says: one leap in four, none in a hundred, one in four hundred. A year divisible by 4 is usually a leap year, but a century year such as 1900 or 2000 must also be divisible by 400. Hence **1900 is not a leap year** (1900 ÷ 400 leaves a remainder), while **2000 is a leap year** (2000 ÷ 400 = 5).",
+    "formulas": [
+      {
+        "latex": "1\\ \\mathrm{t}=1000\\ \\mathrm{kg},\\qquad 1\\ \\mathrm{kg}=1000\\ \\mathrm{g}",
+        "note": "质量单位之间的进率都是 1000：吨、千克、克每相邻两个单位都相差 1000 倍。",
+        "noteEn": "Every neighbouring mass unit steps by 1000: tonne, kilogram and gram differ by a factor of 1000."
+      },
+      {
+        "latex": "1\\ \\mathrm{h}=60\\ \\mathrm{min},\\qquad 1\\ \\mathrm{min}=60\\ \\mathrm{s}",
+        "note": "时间单位的进率是 60，不是 100；另外 1 日 = 24 时。",
+        "noteEn": "Time units step by 60, not 100; also 1 day = 24 h."
+      },
+      {
+        "latex": "\\text{大月 }31\\ \\text{天},\\qquad \\text{小月 }30\\ \\text{天}",
+        "note": "大月是 1、3、5、7、8、10、12 月（31 天），小月是 4、6、9、11 月（30 天）；二月平年 28 天、闰年 29 天，既不是大月也不是小月。",
+        "noteEn": "Big months are January, March, May, July, August, October and December with 31 days; small months are April, June, September and November with 30 days; February has 28 or 29 days and is neither."
+      },
+      {
+        "latex": "\\text{平年 }365\\ \\text{天},\\qquad \\text{闰年 }366\\ \\text{天}",
+        "note": "闰年比平年多 1 天，多出来的正是 2 月 29 日。",
+        "noteEn": "A leap year has one day more than a common year, and that extra day is 29 February."
+      },
+      {
+        "latex": "\\text{闰年：年份是 }4\\text{ 的倍数（整百年须是 }400\\text{ 的倍数）}",
+        "note": "「四年一闰，百年不闰，四百年再闰」：2024 年是闰年，1900 年不是闰年，2000 年是闰年。",
+        "noteEn": "One leap in four, none in a hundred, one in four hundred: 2024 is a leap year, 1900 is not, and 2000 is."
+      }
+    ],
+    "properties": [
+      "质量单位的进率是 1000：1 吨 = 1000 千克，1 千克 = 1000 克",
+      "时间单位的进率是 60（不是 100）：1 时 = 60 分，1 分 = 60 秒；1 日 = 24 时",
+      "一年 12 个月：大月 31 天（1、3、5、7、8、10、12 月），小月 30 天（4、6、9、11 月），二月平年 28 天、闰年 29 天",
+      "闰年判断：公历年份是 4 的倍数一般是闰年，整百年必须是 400 的倍数才是闰年——所以 1900 年不是闰年，2000 年是闰年",
+      "平年全年 365 天、闰年全年 366 天；换算和长度单位一样：大单位化小单位乘进率，小单位化大单位除以进率（如 180 分 = 3 时）"
+    ],
+    "propertiesEn": [
+      "Mass units step by 1000: 1 t = 1000 kg and 1 kg = 1000 g",
+      "Time units step by 60, not 100: 1 h = 60 min, 1 min = 60 s, and 1 day = 24 h",
+      "A year has 12 months: big months have 31 days (January, March, May, July, August, October, December), small months have 30 days (April, June, September, November), and February has 28 days in a common year and 29 in a leap year",
+      "Leap years: a year divisible by 4 is usually a leap year, but a century year must be divisible by 400 — so 1900 is not a leap year and 2000 is",
+      "A common year has 365 days and a leap year 366; convert as with length: big to small multiply, small to big divide, e.g. 180 min = 3 h"
+    ],
+    "examples": [
+      {
+        "problem": "妈妈买了一箱牛奶，每盒牛奶重 250 克，一箱有 24 盒。这箱牛奶一共重多少克？合多少千克？",
+        "solution": "总质量 $=250\\times 24=6000$（克）。千克和克之间的进率是 1000，小单位化大单位要除以进率：$6000\\div 1000=6$（千克）。验算：$6\\times 1000=6000$ ✓。"
+      },
+      {
+        "problem": "判断下面这些年份是不是闰年，并说出这一年二月有多少天：（1）2024 年；（2）1900 年；（3）2000 年。",
+        "solution": "（1）$2024\\div 4=506$，2024 是 4 的倍数，又不是整百年，所以 2024 年是**闰年**，二月有 29 天。（2）1900 是整百年，要用 400 去除：$1900\\div 400=4$ 余 300，有余数，所以 1900 年**不是闰年**（是平年），二月有 28 天。（3）$2000\\div 400=5$，没有余数，所以 2000 年是**闰年**，二月有 29 天。"
+      }
+    ],
+    "tags": [
+      "质量单位",
+      "时间单位",
+      "年月日",
+      "平年",
+      "闰年",
+      "大月小月"
+    ],
+    "links": [
+      "length-units",
+      "area-volume-units",
+      "average-elementary",
+      "rounding-approximation"
+    ]
+  }
+]

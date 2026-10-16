@@ -1,0 +1,697 @@
+[
+  {
+    "id": "random-vector",
+    "title": "二维随机变量与联合分布",
+    "titleEn": "Two-Dimensional Random Variables and Joint Distributions",
+    "branch": "probability",
+    "level": 4,
+    "summary": "把两个随机变量放在一起研究：联合分布函数 F(x,y)=P(X≤x, Y≤y) 与联合密度 f(x,y) 完整刻画 (X,Y) 的概率规律。",
+    "summaryEn": "Studying two random variables together: the joint CDF F(x,y)=P(X≤x, Y≤y) and joint density f(x,y) fully capture the law of (X,Y).",
+    "definition": "设 $X$、$Y$ 是定义在同一样本空间上的两个随机变量，称 $(X,Y)$ 为**二维随机变量**（随机向量）。它的概率规律不能只靠 $X$、$Y$ 各自的分布来描述，而要用**联合分布函数**\n\n$$F(x,y) = P(X \\le x,\\ Y \\le y), \\qquad (x,y) \\in \\mathbb{R}^2$$\n\n来刻画：$F(x,y)$ 就是点 $(X,Y)$ 落在左下角矩形 $(-\\infty, x] \\times (-\\infty, y]$ 内的概率。\n\n若存在非负可积函数 $f(x,y)$ 使 $F(x,y) = \\int_{-\\infty}^{x}\\int_{-\\infty}^{y} f(u,v)\\,dv\\,du$，就称 $(X,Y)$ 为**连续型**，$f$ 叫**联合密度函数**。联合密度必须非负，且在全平面上的积分为 1；而求任何事件的概率都归结为在区域上积分：$P\\big((X,Y) \\in D\\big) = \\iint_D f(x,y)\\,dx\\,dy$。\n\n为什么要研究联合分布？因为现实中的量总是成对出现：身高与体重、气温与湿度。只有联合分布才能回答「$X$ 大时 $Y$ 是否也倾向于大」这类问题，它也是随后边缘分布、条件分布与独立性等概念的共同出发点。",
+    "definitionEn": "Let $X$ and $Y$ be two random variables on the same sample space; the pair $(X,Y)$ is a **two-dimensional random variable** (random vector). Its probabilistic behavior is not determined by the two separate laws alone, but by the **joint distribution function**\n\n$$F(x,y) = P(X \\le x,\\ Y \\le y), \\qquad (x,y) \\in \\mathbb{R}^2,$$\n\nthe probability that the point $(X,Y)$ falls in the lower-left rectangle $(-\\infty,x]\\times(-\\infty,y]$.\n\nIf a nonnegative integrable function $f$ satisfies $F(x,y)=\\int_{-\\infty}^{x}\\int_{-\\infty}^{y} f(u,v)\\,dv\\,du$, the pair is called **continuous** and $f$ its **joint density**: it must be nonnegative with total integral 1, and probabilities are obtained by integrating over regions, $P((X,Y)\\in D)=\\iint_D f\\,dx\\,dy$.\n\nThe joint law is the right tool for questions about how two quantities move together (height and weight, temperature and humidity), and it is the common starting point for marginal, conditional and independence concepts.",
+    "formulas": [
+      {
+        "latex": "F(x,y) = P(X \\le x,\\ Y \\le y)",
+        "note": "联合分布函数的定义：点 $(X,Y)$ 落在左下角矩形内的概率。",
+        "noteEn": "Definition of the joint CDF: probability that $(X,Y)$ lies in the lower-left rectangle."
+      },
+      {
+        "latex": "f(x,y) = \\frac{\\partial^2 F(x,y)}{\\partial x\\,\\partial y} \\ge 0",
+        "note": "连续型情形：联合密度非负，可由分布函数混合偏导得到。",
+        "noteEn": "In the continuous case the joint density is nonnegative and obtained from the mixed partial derivative of $F$."
+      },
+      {
+        "latex": "\\int_{-\\infty}^{+\\infty}\\int_{-\\infty}^{+\\infty} f(x,y)\\,dx\\,dy = 1",
+        "note": "归一化条件：联合密度在全平面上的积分为 1。",
+        "noteEn": "Normalization: the joint density integrates to 1 over the whole plane."
+      },
+      {
+        "latex": "P\\big((X,Y) \\in D\\big) = \\iint_D f(x,y)\\,dx\\,dy",
+        "note": "用联合密度求事件的概率：把密度在区域 $D$ 上积分。",
+        "noteEn": "Probabilities of events are computed by integrating the density over the region $D$."
+      },
+      {
+        "latex": "p_{ij} = P(X = x_i,\\ Y = y_j), \\qquad \\sum_i \\sum_j p_{ij} = 1",
+        "note": "离散型情形：联合分布律及归一化。",
+        "noteEn": "Discrete case: the joint probability mass function and its normalization."
+      }
+    ],
+    "properties": [
+      "$F(x,y)$ 关于每个变量单调不减；$F(-\\infty, y) = F(x, -\\infty) = 0$，且 $F(+\\infty, +\\infty) = 1$",
+      "联合密度 $f(x,y) \\ge 0$ 且全平面积分等于 1；反过来，任意满足这两条的非负可积函数都对应某个二维随机变量",
+      "二维均匀分布：在区域 $D$ 上密度为常数 $1/|D|$（$|D|$ 为 $D$ 的面积），区域外为 0",
+      "由联合分布可以计算任意区域事件的概率，如 $P(X+Y<1)$、$P(Y>1/2)$、$P(X<Y)$，方法就是在相应区域上积分",
+      "边缘分布、条件分布、独立性都要从联合分布派生：先有联合，才有这些派生概念"
+    ],
+    "propertiesEn": [
+      "$F(x,y)$ is nondecreasing in each variable; $F(-\\infty,y)=F(x,-\\infty)=0$ and $F(+\\infty,+\\infty)=1$",
+      "A joint density satisfies $f(x,y)\\ge 0$ and integrates to 1; conversely any nonnegative integrable function with these properties comes from some pair $(X,Y)$",
+      "Two-dimensional uniform distribution: constant density $1/|D|$ on a region $D$ (where $|D|$ is its area) and zero outside",
+      "The joint law computes probabilities of any region event, e.g. $P(X+Y<1)$, by integrating over that region",
+      "Marginals, conditionals and independence are all derived from the joint distribution; the joint law comes first"
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "exp(-(x^2+y^2))",
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "levels": 10,
+      "title": "联合密度 f(x,y) = e^(−(x²+y²)) 的等高线：钟形曲面向外衰减"
+    },
+    "examples": [
+      {
+        "problem": "设 $(X,Y)$ 的联合密度为 $f(x,y) = c(x+y)$（$0<x<1,\\ 0<y<1$），其他位置为 0。求常数 $c$ 以及概率 $P(X+Y<1)$。",
+        "solution": "利用归一化条件：\n$$\\int_0^1\\!\\!\\int_0^1 c(x+y)\\,dx\\,dy = c\\left(\\frac12 + \\frac12\\right) = c = 1,$$\n所以 $c = 1$。\n\n求 $P(X+Y<1)$，在三角形 $0<x<1,\\ 0<y<1-x$ 上积分：\n$$P(X+Y<1) = \\int_0^1\\!\\!\\int_0^{1-x} (x+y)\\,dy\\,dx = \\int_0^1 \\left[x(1-x) + \\frac{(1-x)^2}{2}\\right]dx = \\int_0^1 \\left(\\frac12 - \\frac{x^2}{2}\\right)dx = \\frac12 - \\frac16 = \\frac13.$$"
+      },
+      {
+        "problem": "设 $(X,Y)$ 在圆盘 $x^2+y^2 \\le 4$ 上均匀分布。写出联合密度，并求 $P(X^2+Y^2 \\le 1)$。",
+        "solution": "圆盘面积 $|D| = 4\\pi$，故联合密度\n$$f(x,y) = \\begin{cases} \\dfrac{1}{4\\pi}, & x^2+y^2 \\le 4,\\\\[4pt] 0, & \\text{其他}.\\end{cases}$$\n单位圆盘面积为 $\\pi$，所以\n$$P(X^2+Y^2 \\le 1) = \\frac{\\pi}{4\\pi} = \\frac14.$$\n均匀分布的概率只与面积有关，这是二维均匀分布最方便的性质。"
+      }
+    ],
+    "tags": [
+      "联合分布",
+      "联合密度",
+      "二维随机变量"
+    ],
+    "links": [
+      "random-variable",
+      "continuous-distributions",
+      "double-integral",
+      "marginal-conditional-independence"
+    ]
+  },
+  {
+    "id": "marginal-conditional-independence",
+    "title": "边缘分布、条件分布与独立性",
+    "titleEn": "Marginal, Conditional Distributions and Independence",
+    "branch": "probability",
+    "level": 4,
+    "summary": "从联合分布出发：单独看一个变量得到边缘分布，固定一个变量得到条件分布，两者互不影响就是独立。",
+    "summaryEn": "From the joint law: marginals describe one variable alone, conditionals describe one variable given the other, and independence means neither carries information about the other.",
+    "definition": "有了联合分布，就可以回答两个方向相反的问题：**只看其中一个变量**时，它的分布是什么？**已知一个变量取值**时，另一个变量又服从什么分布？\n\n**边缘分布**回答第一个问题：把联合分布中对另一个变量的所有可能取值「累加」掉。连续型时\n\n$$f_X(x) = \\int_{-\\infty}^{+\\infty} f(x,y)\\,dy, \\qquad f_Y(y) = \\int_{-\\infty}^{+\\infty} f(x,y)\\,dx.$$\n\n**条件分布**回答第二个问题：固定 $X=x$，在联合密度上「切一刀」再归一化。当 $f_X(x)>0$ 时\n\n$$f_{Y|X}(y\\,|\\,x) = \\frac{f(x,y)}{f_X(x)},$$\n\n它表示在 $X=x$ 的条件下 $Y$ 的分布，对 $y$ 积分同样等于 1，所以是一个合法的密度。\n\n**独立性**是最特殊也最重要的情况：如果联合密度等于两个边缘密度之积，$f(x,y) = f_X(x)\\,f_Y(y)$，就说 $X$ 与 $Y$ **相互独立**；此时条件密度不依赖 $x$，一个变量的取值不携带另一个变量的任何信息。要特别注意：边缘分布由联合分布决定，但反过来，仅知道两个边缘分布一般**恢复不出**联合分布。",
+    "definitionEn": "Given the joint law, one can ask two opposite questions: what is the distribution of **one variable alone**, and what is the distribution of one variable **given the value of the other**?\n\n**Marginal distributions** answer the first question by integrating the joint density over the other variable:\n\n$$f_X(x) = \\int_{-\\infty}^{+\\infty} f(x,y)\\,dy, \\qquad f_Y(y) = \\int_{-\\infty}^{+\\infty} f(x,y)\\,dx.$$\n\n**Conditional distributions** answer the second: fix $X=x$, slice the joint density and renormalize. For $f_X(x)>0$,\n\n$$f_{Y|X}(y\\,|\\,x) = \\frac{f(x,y)}{f_X(x)},$$\n\nwhich is again a legitimate density in $y$ (it integrates to 1).\n\n**Independence** is the special case $f(x,y) = f_X(x)\\,f_Y(y)$: the conditional density no longer depends on $x$, so one variable carries no information about the other. Note carefully: marginals are determined by the joint law, but the marginals alone generally **cannot** recover the joint law.",
+    "formulas": [
+      {
+        "latex": "f_X(x) = \\int_{-\\infty}^{+\\infty} f(x,y)\\,dy, \\qquad f_Y(y) = \\int_{-\\infty}^{+\\infty} f(x,y)\\,dx",
+        "note": "边缘密度：把联合密度对另一个变量积分。",
+        "noteEn": "Marginal densities: integrate the joint density over the other variable."
+      },
+      {
+        "latex": "f_{Y|X}(y\\,|\\,x) = \\frac{f(x,y)}{f_X(x)}, \\qquad f_X(x) > 0",
+        "note": "条件密度：固定 $x$ 后归一化，关于 $y$ 积分为 1。",
+        "noteEn": "Conditional density: slice and renormalize; it integrates to 1 in $y$."
+      },
+      {
+        "latex": "f(x,y) = f_X(x)\\,f_Y(y)",
+        "note": "连续型独立的判据：联合密度可分解为边缘密度之积。",
+        "noteEn": "Independence criterion in the continuous case: the joint density factors into the marginals."
+      },
+      {
+        "latex": "F(x,y) = F_X(x)\\,F_Y(y)",
+        "note": "独立性的分布函数等价形式，离散与连续都适用。",
+        "noteEn": "Equivalent CDF form of independence, valid for both discrete and continuous variables."
+      },
+      {
+        "latex": "p_{ij} = p_i\\,p_j",
+        "note": "离散型独立判据：联合分布律等于边缘分布律之积。",
+        "noteEn": "Discrete independence criterion: the joint pmf equals the product of the marginal pmfs."
+      }
+    ],
+    "properties": [
+      "边缘分布由联合分布唯一确定：$f_X(x)=\\int f(x,y)\\,dy$；但反过来不成立——不同的联合分布可以拥有完全相同的两个边缘分布",
+      "独立的等价刻画：$f(x,y)=f_X(x)f_Y(y)$，离散型即 $p_{ij}=p_ip_j$，分布函数形式为 $F(x,y)=F_X(x)F_Y(y)$",
+      "独立时条件密度退化为边缘密度：$f_{Y|X}(y\\,|\\,x) = f_Y(y)$，即 $X$ 的取值不提供关于 $Y$ 的任何信息",
+      "条件密度是关于 $y$ 的密度：固定 $x$ 后 $\\int_{-\\infty}^{+\\infty} f_{Y|X}(y\\,|\\,x)\\,dy = 1$",
+      "若 $X$ 与 $Y$ 独立，则对任意函数 $u$、$v$ 有 $E[u(X)v(Y)] = E[u(X)]\\,E[v(Y)]$，这是后面用协方差判断独立性的基础"
+    ],
+    "propertiesEn": [
+      "Marginals are uniquely determined by the joint law, but not conversely: different joint distributions can share the same two marginals",
+      "Independence means $f(x,y)=f_X(x)f_Y(y)$; in the discrete case $p_{ij}=p_ip_j$, and in CDF form $F(x,y)=F_X(x)F_Y(y)$",
+      "Under independence the conditional density reduces to the marginal, $f_{Y|X}(y|x)=f_Y(y)$: knowing $X$ gives no information about $Y$",
+      "A conditional density is a genuine density in $y$: $\\int f_{Y|X}(y|x)\\,dy = 1$",
+      "If $X$ and $Y$ are independent, then $E[u(X)v(Y)] = E[u(X)]E[v(Y)]$ for any functions $u,v$; this underlies the covariance criterion for dependence"
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "exp(-(x^2+y^2)/2)",
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "levels": 10,
+      "title": "X,Y 独立同标准正态时的联合密度 e^(−(x²+y²)/2)：等值线是同心圆"
+    },
+    "examples": [
+      {
+        "problem": "设 $(X,Y)$ 在区域 $0<x<y<1$ 上的联合密度为 $f(x,y)=2$（其他位置为 0）。求边缘密度 $f_X(x)$ 与条件密度 $f_{Y|X}(y\\,|\\,x)$，并计算 $P\\left(Y>\\frac12 \\ \\Big|\\ X=\\frac14\\right)$。",
+        "solution": "当 $0<x<1$ 时，$f_X(x) = \\int_x^1 2\\,dy = 2(1-x)$；其他 $x$ 处为 0。于是对 $x \\in (0,1)$，\n$$f_{Y|X}(y\\,|\\,x) = \\frac{2}{2(1-x)} = \\frac{1}{1-x}, \\qquad x < y < 1,$$\n即条件是 $(x,1)$ 上的均匀分布。取 $x = \\frac14$，条件密度在 $\\left(\\frac14, 1\\right)$ 上等于 $\\frac{4}{3}$，故\n$$P\\left(Y>\\frac12 \\ \\Big|\\ X=\\frac14\\right) = \\int_{1/2}^{1} \\frac{4}{3}\\,dy = \\frac{2}{3}.$$"
+      },
+      {
+        "problem": "设 $X,Y$ 独立同分布于 $N(0,1)$，写出联合密度，并结合等值线图说明它为什么是旋转对称的钟形。",
+        "solution": "独立意味着联合密度等于边缘密度之积：\n$$f(x,y) = \\frac{1}{\\sqrt{2\\pi}}e^{-x^2/2} \\cdot \\frac{1}{\\sqrt{2\\pi}}e^{-y^2/2} = \\frac{1}{2\\pi}\\,e^{-(x^2+y^2)/2}.$$\n密度只依赖于 $x^2+y^2$，即在以原点为圆心的每个圆上取相同的值，所以等值线是一族同心圆，曲面是旋转对称的钟形。这也说明：标准正态的联合密度在旋转 $45^\\circ$ 或任意角度后形式不变。"
+      }
+    ],
+    "tags": [
+      "边缘分布",
+      "条件分布",
+      "独立性"
+    ],
+    "links": [
+      "random-vector",
+      "conditional-probability-bayes",
+      "continuous-distributions",
+      "random-variable",
+      "normal-distribution"
+    ]
+  },
+  {
+    "id": "expectation-variance",
+    "title": "数学期望与方差",
+    "titleEn": "Expectation and Variance",
+    "branch": "probability",
+    "level": 3,
+    "summary": "期望是随机变量的加权平均中心，方差度量它偏离中心的程度，是刻画一个分布最重要的两个数字特征。",
+    "summaryEn": "Expectation is the weighted-average center of a random variable and variance measures its spread, the two most important numerical summaries of a distribution.",
+    "definition": "**数学期望**（简称期望）是随机变量取值的加权平均：离散型按概率加权求和，连续型用密度加权积分\n\n$$E(X) = \\sum_k x_k p_k, \\qquad E(X) = \\int_{-\\infty}^{+\\infty} x\\,f(x)\\,dx.$$\n\n直观上，它是大量重复观测的平均水平，是分布的中心位置。需要注意的是，期望不一定存在（例如柯西分布），求和或积分必须绝对收敛才有意义。\n\n**方差**度量随机变量围绕期望的波动幅度：$\\operatorname{Var}(X) = E\\left[(X - E(X))^2\\right]$，即偏差平方的期望；标准差 $\\sigma = \\sqrt{\\operatorname{Var}(X)}$ 与 $X$ 同量纲。方差越大，取值越分散。\n\n期望最重要的性质是**线性性**：$E(aX + bY) = aE(X) + bE(Y)$ 对任意 $a,b$ 成立，不要求独立。乘积的期望一般不能拆开；独立时 $E(XY) = E(X)E(Y)$，更一般地，只要 $X,Y$ 不相关（$\\operatorname{Cov}(X,Y)=0$）该式即成立，而\"不相关\"推不出独立。另外，计算函数 $g(X)$ 的期望不必先求 $g(X)$ 的分布，可以直接用「无意识统计学家定律」$E(g(X)) = \\int g(x)f(x)\\,dx$。",
+    "definitionEn": "The **expectation** (mean) of a random variable is its probability-weighted average: a weighted sum in the discrete case and a weighted integral in the continuous case,\n\n$$E(X) = \\sum_k x_k p_k, \\qquad E(X) = \\int_{-\\infty}^{+\\infty} x\\,f(x)\\,dx.$$\n\nIt is the long-run average of repeated observations, i.e. the center of the distribution (provided the sum or integral converges absolutely).\n\nThe **variance** measures the spread around the mean, $\\operatorname{Var}(X) = E[(X-E(X))^2]$, the expected squared deviation; its square root $\\sigma$ is the standard deviation, in the same units as $X$.\n\nThe key property of expectation is **linearity**: $E(aX+bY)=aE(X)+bE(Y)$ for all $a,b$, with no independence needed. Products do not split in general; $E(XY)=E(X)E(Y)$ requires independence. Finally, expectations of functions need no new distribution: $E(g(X)) = \\int g(x)f(x)\\,dx$ (the law of the unconscious statistician).",
+    "formulas": [
+      {
+        "latex": "E(X) = \\sum_k x_k p_k",
+        "note": "离散型期望：取值乘概率求和。",
+        "noteEn": "Discrete expectation: values times probabilities, summed."
+      },
+      {
+        "latex": "E(X) = \\int_{-\\infty}^{+\\infty} x\\,f(x)\\,dx",
+        "note": "连续型期望：用密度作权的积分。",
+        "noteEn": "Continuous expectation: an integral with the density as weight."
+      },
+      {
+        "latex": "E(g(X)) = \\int_{-\\infty}^{+\\infty} g(x)\\,f(x)\\,dx",
+        "note": "函数的期望不必先求 $g(X)$ 的分布，直接用 $X$ 的密度积分。",
+        "noteEn": "The expectation of $g(X)$ uses the density of $X$ directly, without finding the law of $g(X)$."
+      },
+      {
+        "latex": "E(aX + bY) = a\\,E(X) + b\\,E(Y)",
+        "note": "线性性：对任意 $a,b$ 成立，不需要独立。",
+        "noteEn": "Linearity: holds for all $a,b$, with no independence required."
+      },
+      {
+        "latex": "\\operatorname{Var}(X) = E(X^2) - [E(X)]^2",
+        "note": "计算方差最常用的公式：先算一阶、二阶原点矩。",
+        "noteEn": "The practical variance formula: compute the first two raw moments."
+      }
+    ],
+    "properties": [
+      "$E(aX+b) = aE(X)+b$，而 $\\operatorname{Var}(aX+b) = a^2\\operatorname{Var}(X)$：平移不改变波动，伸缩按平方放缩",
+      "期望的线性性无条件成立：$E(X+Y) = E(X)+E(Y)$；但乘积一般不能拆，独立时 $E(XY) = E(X)E(Y)$（更一般地，$X,Y$ 不相关时即成立；反之不蕴含独立）",
+      "方差非负；$\\operatorname{Var}(X) = 0$ 当且仅当 $X$ 几乎处处等于常数 $E(X)$",
+      "$\\operatorname{Var}(X \\pm Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y) \\pm 2\\operatorname{Cov}(X,Y)$；当 $X,Y$ 独立（更强：不相关）时简化为方差相加",
+      "标准化：令 $X^* = \\dfrac{X - E(X)}{\\sqrt{\\operatorname{Var}(X)}}$，则 $E(X^*) = 0$、$\\operatorname{Var}(X^*) = 1$，任何分布都可标准化后比较"
+    ],
+    "propertiesEn": [
+      "$E(aX+b)=aE(X)+b$ and $\\operatorname{Var}(aX+b)=a^2\\operatorname{Var}(X)$: shifts do not change spread, scaling does so quadratically",
+      "Linearity always holds, $E(X+Y)=E(X)+E(Y)$, but products split only under independence: $E(XY)=E(X)E(Y)$",
+      "Variance is nonnegative, and $\\operatorname{Var}(X)=0$ iff $X$ equals a constant almost surely",
+      "$\\operatorname{Var}(X\\pm Y)=\\operatorname{Var}(X)+\\operatorname{Var}(Y)\\pm 2\\operatorname{Cov}(X,Y)$; for independent (indeed, uncorrelated) variables variances add",
+      "Standardization: $X^*=(X-E(X))/\\sqrt{\\operatorname{Var}(X)}$ has mean 0 and variance 1, making different distributions comparable"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "color": "#4cc9f0",
+          "label": "σ = 1 的正态密度"
+        },
+        {
+          "expr": "exp(-x^2/8)/sqrt(8*PI)",
+          "color": "#ff6b9d",
+          "label": "σ = 2 的正态密度"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "from": -1,
+          "to": 1,
+          "base": 0,
+          "color": "#06d6a0",
+          "label": "P(μ−σ<X<μ+σ) ≈ 68.3%"
+        }
+      ],
+      "xRange": [
+        -6,
+        6
+      ],
+      "yRange": [
+        -0.05,
+        0.45
+      ],
+      "title": "期望定中心、方差定胖瘦：两条正态密度曲线与 ±σ 面积"
+    },
+    "examples": [
+      {
+        "problem": "设 $X$ 的密度为 $f(x) = 2x$（$0<x<1$），其他位置为 0。求 $E(X)$ 与 $\\operatorname{Var}(X)$。",
+        "solution": "$E(X) = \\int_0^1 x \\cdot 2x\\,dx = \\int_0^1 2x^2\\,dx = \\frac23$；$E(X^2) = \\int_0^1 x^2 \\cdot 2x\\,dx = \\int_0^1 2x^3\\,dx = \\frac12$。于是\n$$\\operatorname{Var}(X) = E(X^2) - [E(X)]^2 = \\frac12 - \\frac49 = \\frac1{18} \\approx 0.0556,$$\n标准差约 $0.236$，说明取值平均偏离中心 $2/3$ 约 $0.236$。"
+      },
+      {
+        "problem": "设 $X \\sim N(\\mu, \\sigma^2)$，利用密度的对称性说明 $E(X) = \\mu$，并化简 $\\operatorname{Var}(X) = \\sigma^2$。",
+        "solution": "密度 $f(x) = \\frac{1}{\\sqrt{2\\pi}\\,\\sigma}e^{-(x-\\mu)^2/(2\\sigma^2)}$ 关于 $x=\\mu$ 对称：令 $t = x-\\mu$，则\n$$E(X) - \\mu = \\int_{-\\infty}^{+\\infty} t\\, f(\\mu+t)\\,dt = 0$$\n因为被积函数是 $t$ 的奇函数。再作同样的换元：\n$$\\operatorname{Var}(X) = \\int_{-\\infty}^{+\\infty}(x-\\mu)^2 f(x)\\,dx = \\sigma^2 \\int_{-\\infty}^{+\\infty} t^2 \\frac{e^{-t^2/2}}{\\sqrt{2\\pi}}\\,dt = \\sigma^2,$$\n因为标准正态的 $E(T^2) = 1$。正态分布正是由这两个参数完全确定的。"
+      }
+    ],
+    "tags": [
+      "数学期望",
+      "方差",
+      "数字特征"
+    ],
+    "links": [
+      "random-variable",
+      "discrete-distributions",
+      "continuous-distributions",
+      "covariance-correlation",
+      "normal-distribution"
+    ]
+  },
+  {
+    "id": "covariance-correlation",
+    "title": "协方差与相关系数",
+    "titleEn": "Covariance and Correlation",
+    "branch": "probability",
+    "level": 4,
+    "summary": "协方差衡量两个变量同增同减的倾向，相关系数把它标准化到 [−1,1]，只度量线性关系：独立必不相关，反之不然。",
+    "summaryEn": "Covariance measures the tendency of two variables to move together, correlation normalizes it to [−1,1]; it captures linear dependence only: independence implies zero correlation, but not the other way around.",
+    "definition": "两个随机变量一起出现时，我们关心它们**是否同涨同落**。**协方差**定义为\n\n$$\\operatorname{Cov}(X,Y) = E\\big[(X - E(X))(Y - E(Y))\\big] = E(XY) - E(X)E(Y).$$\n\n当 $X$ 高于平均值时 $Y$ 也倾向于高于平均值，$X-E(X)$ 与 $Y-E(Y)$ 多半同号，乘积的正部占优，协方差为正；倾向相反时协方差为负；两种倾向相互抵消时协方差为零。\n\n协方差有量纲、大小受尺度影响，于是再标准化为**相关系数**\n\n$$\\rho = \\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X \\sigma_Y}, \\qquad -1 \\le \\rho \\le 1.$$\n\n$|\\rho| = 1$ 当且仅当 $X$ 与 $Y$ 以概率 1 成线性关系 $Y = aX + b$（$a>0$ 时 $\\rho = 1$，$a<0$ 时 $\\rho = -1$）。\n\n最重要的提醒：**独立 $\\Rightarrow$ 不相关**（$\\rho = 0$），但**不相关推不出独立**。$\\rho$ 只反映线性依赖，像 $Y = X^2$ 这样的非线性依赖可以完全不体现在协方差上。",
+    "definitionEn": "When two random variables are observed together, one asks whether they **rise and fall together**. The **covariance** is\n\n$$\\operatorname{Cov}(X,Y) = E\\big[(X - E(X))(Y - E(Y))\\big] = E(XY) - E(X)E(Y).$$\n\nIt is positive when $X$ above its mean tends to go with $Y$ above its mean (deviations share signs), negative for opposite tendencies, and zero when the tendencies cancel.\n\nCovariance carries units and depends on scale, so we standardize it into the **correlation coefficient**\n\n$$\\rho = \\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X \\sigma_Y}, \\qquad -1 \\le \\rho \\le 1.$$\n\nMoreover $|\\rho|=1$ iff $X$ and $Y$ are related linearly almost surely, $Y = aX+b$ (with $\\rho=1$ for $a>0$, $\\rho=-1$ for $a<0$).\n\nCrucial warning: **independence implies zero correlation**, but **zero correlation does not imply independence**. The coefficient $\\rho$ only measures linear dependence; a nonlinear link such as $Y=X^2$ can be completely invisible to covariance.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{Cov}(X,Y) = E(XY) - E(X)E(Y)",
+        "note": "协方差的计算公式：先算混合矩与两个一阶矩。",
+        "noteEn": "Computing covariance from the mixed moment and the two means."
+      },
+      {
+        "latex": "\\rho_{XY} = \\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X\\,\\sigma_Y}, \\qquad -1 \\le \\rho \\le 1",
+        "note": "相关系数：协方差除以两个标准差之积，取值必在 $[-1,1]$。",
+        "noteEn": "Correlation: covariance divided by the product of standard deviations, always in $[-1,1]$."
+      },
+      {
+        "latex": "\\operatorname{Cov}(aX,\\, bY) = ab\\,\\operatorname{Cov}(X,Y), \\qquad \\operatorname{Cov}(X,X) = \\operatorname{Var}(X)",
+        "note": "协方差的双线性：常数乘进去按乘积提出，特例是方差。",
+        "noteEn": "Bilinearity of covariance; the special case $\\operatorname{Cov}(X,X)$ is the variance."
+      },
+      {
+        "latex": "\\operatorname{Var}(X \\pm Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y) \\pm 2\\operatorname{Cov}(X,Y)",
+        "note": "两变量和差的方差公式；不相关时方差可加。",
+        "noteEn": "Variance of a sum or difference; variances add when the variables are uncorrelated."
+      },
+      {
+        "latex": "X, Y \\text{ 独立} \\;\\Rightarrow\\; \\operatorname{Cov}(X,Y) = 0",
+        "note": "独立时 $E(XY)=E(X)E(Y)$，协方差为零；反之不成立（见性质与例题）。",
+        "noteEn": "Independence gives $E(XY)=E(X)E(Y)$ and hence zero covariance; the converse fails (see properties and example)."
+      }
+    ],
+    "properties": [
+      "独立 $\\Rightarrow$ 不相关；但不相关 $\\not\\Rightarrow$ 独立。反例：$X \\sim U(-1,1)$，$Y = X^2$，则 $\\operatorname{Cov}(X,Y) = E(X^3) - E(X)E(X^2) = 0$，然而 $Y$ 由 $X$ 完全决定，显然不独立",
+      "$|\\rho| = 1$ 当且仅当 $X$ 与 $Y$ 以概率 1 成线性关系；$|\\rho|$ 越接近 1 线性关系越强，越接近 0 线性关系越弱，但 $\\rho = 0$ 只表示没有线性关系，不表示没有关系",
+      "协方差对称且双线性：$\\operatorname{Cov}(X,Y)=\\operatorname{Cov}(Y,X)$，$\\operatorname{Cov}(X+Y,Z)=\\operatorname{Cov}(X,Z)+\\operatorname{Cov}(Y,Z)$",
+      "由 $\\operatorname{Var}(X \\pm Y) = \\operatorname{Var}(X)+\\operatorname{Var}(Y) \\pm 2\\operatorname{Cov}(X,Y)$ 可知：不相关时方差可加，$\\operatorname{Var}(X+Y)=\\operatorname{Var}(X)+\\operatorname{Var}(Y)$",
+      "相关系数对正线性变换不变：$\\rho(aX+b,\\ cY+d) = \\rho(X,Y)$（当 $ac>0$）；若 $ac<0$ 则符号反转，因此 $\\rho$ 与量纲无关"
+    ],
+    "propertiesEn": [
+      "Independence implies zero correlation, but zero correlation does not imply independence. Counterexample: $X\\sim U(-1,1)$, $Y=X^2$ gives $\\operatorname{Cov}(X,Y)=E(X^3)-E(X)E(X^2)=0$, yet $Y$ is fully determined by $X$",
+      "$|\\rho|=1$ iff $X$ and $Y$ are linearly related almost surely; larger $|\\rho|$ means stronger linear relation, but $\\rho=0$ only rules out linear dependence",
+      "Covariance is symmetric and bilinear: $\\operatorname{Cov}(X+Y,Z)=\\operatorname{Cov}(X,Z)+\\operatorname{Cov}(Y,Z)$",
+      "From $\\operatorname{Var}(X\\pm Y)=\\operatorname{Var}(X)+\\operatorname{Var}(Y)\\pm 2\\operatorname{Cov}(X,Y)$: variances add exactly when the variables are uncorrelated",
+      "Correlation is invariant under positive linear changes: $\\rho(aX+b,\\ cY+d)=\\rho(X,Y)$ for $ac>0$, and flips sign for $ac<0$"
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          2.2
+        ],
+        [
+          2,
+          3.5
+        ],
+        [
+          3,
+          5.3
+        ],
+        [
+          4,
+          6.6
+        ],
+        [
+          5,
+          8.4
+        ],
+        [
+          6,
+          10.1
+        ],
+        [
+          7,
+          11.9
+        ],
+        [
+          8,
+          14.2
+        ],
+        [
+          9,
+          15.8
+        ],
+        [
+          10,
+          18.1
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 1.7655,
+          "intercept": -0.1,
+          "color": "#ffd166",
+          "label": "回归直线 y ≈ 1.77x − 0.1"
+        }
+      ],
+      "xRange": [
+        0,
+        11
+      ],
+      "yRange": [
+        0,
+        20
+      ],
+      "pointColor": "#4cc9f0",
+      "title": "散点与回归直线：线性趋势越强，|ρ| 越接近 1（此图 r ≈ 0.998）"
+    },
+    "examples": [
+      {
+        "problem": "设 $(X,Y)$ 的联合分布律为 $P(0,0)=0.2,\\ P(0,1)=0.2,\\ P(0,2)=0.2$；$P(1,0)=0.1,\\ P(1,1)=0.1,\\ P(1,2)=0.2$。求 $\\operatorname{Cov}(X,Y)$ 与相关系数 $\\rho$。",
+        "solution": "先求边缘分布：$P(X=0)=0.6$，$P(X=1)=0.4$；$P(Y=0)=0.3$，$P(Y=1)=0.3$，$P(Y=2)=0.4$。\n\n$E(X) = 0 \\times 0.6 + 1 \\times 0.4 = 0.4$；$E(Y) = 0\\times 0.3 + 1\\times 0.3 + 2\\times 0.4 = 1.1$；$E(XY) = 1\\times 1\\times 0.1 + 1\\times 2\\times 0.2 = 0.5$。\n\n所以 $\\operatorname{Cov}(X,Y) = 0.5 - 0.4 \\times 1.1 = 0.06$。又 $E(X^2) = 0.4$，故 $\\operatorname{Var}(X) = 0.4 - 0.16 = 0.24$；$E(Y^2) = 1.9$，故 $\\operatorname{Var}(Y) = 1.9 - 1.21 = 0.69$。\n$$\\rho = \\frac{0.06}{\\sqrt{0.24 \\times 0.69}} = \\frac{0.06}{\\sqrt{0.1656}} \\approx 0.147.$$\n相关系数为正但很小，说明二者的正线性关系很弱（注意协方差 0.06 本身也依赖量纲，单独看说明不了强弱）。"
+      },
+      {
+        "problem": "设 $X \\sim U(-1,1)$，$Y = X^2$。证明 $X$ 与 $Y$ 不相关，但它们不独立。",
+        "solution": "由对称性 $E(X) = 0$，且 $E(XY) = E(X^3) = 0$（奇函数在对称区间上的积分），于是\n$$\\operatorname{Cov}(X,Y) = E(XY) - E(X)E(Y) = 0,$$\n即 $\\rho = 0$，两者不相关。\n\n但不独立：取 $0<a<1$。因为 $X>a$ 蕴含 $|X|>a$，所以 $\\{X>a,\\ Y>a^2\\} = \\{X>a\\}$，从而\n$$P(X>a,\\ Y>a^2) = P(X>a) = \\frac{1-a}{2},$$\n而\n$$P(X>a)\\,P(Y>a^2) = \\frac{1-a}{2} \\cdot (1-a) \\ne \\frac{1-a}{2}.$$\n更直观地说：$Y$ 完全由 $X$ 决定（抛物线型依赖），这种依赖真实存在，只是没有线性成分，因此协方差看不见它。这正是「不相关推不出独立」的标准反例。"
+      }
+    ],
+    "tags": [
+      "协方差",
+      "相关系数",
+      "线性相关"
+    ],
+    "links": [
+      "random-vector",
+      "expectation-variance",
+      "marginal-conditional-independence",
+      "regression-analysis",
+      "normal-distribution"
+    ]
+  },
+  {
+    "id": "moments-mgf",
+    "title": "矩与矩母函数",
+    "titleEn": "Moments and Moment Generating Functions",
+    "branch": "probability",
+    "level": 5,
+    "summary": "矩 E(Xⁿ) 是刻画分布的数字特征，矩母函数 M(t)=E(e^{tX}) 把全部矩打包成一个函数，独立和的矩母函数等于乘积。",
+    "summaryEn": "Moments E(Xⁿ) are the numerical fingerprints of a distribution; the moment generating function M(t)=E(e^{tX}) packages them all, and MGFs multiply for sums of independent variables.",
+    "definition": "随机变量的 **$k$ 阶原点矩**是 $E(X^k)$（一阶矩就是期望），**$k$ 阶中心矩**是 $E[(X-E(X))^k]$（二阶中心矩就是方差）。这些矩依次刻画分布的集中位置、波动、偏斜、尖峰等特征。\n\n**矩母函数**（moment generating function，MGF）把全部矩打包成一个函数：\n\n$$M_X(t) = E\\left(e^{tX}\\right),$$\n\n只要这个期望在 $t=0$ 附近的某个区间内存在。把 $e^{tX}$ 展开成幂级数并取期望，得 $M_X(t) = \\sum_{n=0}^{\\infty} \\dfrac{E(X^n)}{n!}t^n$——矩母函数在 $0$ 处的泰勒系数乘以 $n!$ 就是各阶矩，因此 $E(X^n) = M_X^{(n)}(0)$。\n\n矩母函数最漂亮的用途是处理**独立随机变量之和**：若 $X$、$Y$ 独立，则\n\n$$M_{X+Y}(t) = E\\left(e^{t(X+Y)}\\right) = E(e^{tX})\\,E(e^{tY}) = M_X(t)\\,M_Y(t),$$\n\n独立和的矩母函数等于矩母函数之积。许多分布族（二项、泊松、正态）正是借此识别「和仍属于同一族」。如果矩母函数在 $0$ 的某个邻域内存在且有限，它就**唯一决定分布**。",
+    "definitionEn": "The **$n$-th moment** of a random variable is $E(X^n)$ (the first moment is the mean); the $n$-th **central moment** is $E[(X-E(X))^n]$ (the second is the variance). Moments describe center, spread, skewness and peakedness.\n\nThe **moment generating function** (MGF) packages all moments into one function:\n\n$$M_X(t) = E\\left(e^{tX}\\right),$$\n\nprovided this expectation exists in some neighborhood of $t=0$. Expanding $e^{tX}$ and taking expectations gives $M_X(t) = \\sum_{n\\ge 0} \\frac{E(X^n)}{n!}t^n$, so the coefficients are the moments and $E(X^n) = M_X^{(n)}(0)$.\n\nThe most elegant use of MGFs concerns **sums of independent variables**: if $X$ and $Y$ are independent, then\n\n$$M_{X+Y}(t) = M_X(t)\\,M_Y(t),$$\n\nwhich identifies families closed under addition (binomial, Poisson, normal). If the MGF exists and is finite near $0$, it **determines the distribution uniquely**.",
+    "formulas": [
+      {
+        "latex": "M_X(t) = E\\left(e^{tX}\\right)",
+        "note": "矩母函数的定义；要求在 $t=0$ 附近存在。",
+        "noteEn": "Definition of the MGF; it must exist near $t=0$."
+      },
+      {
+        "latex": "E(X^n) = M_X^{(n)}(0)",
+        "note": "对矩母函数求 $n$ 阶导数并在 0 取值，得到 $n$ 阶原点矩。",
+        "noteEn": "The $n$-th derivative at 0 gives the $n$-th raw moment."
+      },
+      {
+        "latex": "M_{X+Y}(t) = M_X(t)\\,M_Y(t) \\quad (X,\\,Y \\text{ 独立})",
+        "note": "独立和的矩母函数等于乘积，这是证明极限定理的核心工具。",
+        "noteEn": "For independent sums the MGF factors, a key tool for limit theorems."
+      },
+      {
+        "latex": "M_{aX+b}(t) = e^{bt}\\,M_X(at)",
+        "note": "线性变换下的矩母函数；取 $b=0$ 即伸缩情形。",
+        "noteEn": "MGF under linear transformations; the scaling case is $b=0$."
+      },
+      {
+        "latex": "X \\sim N(\\mu,\\sigma^2): \\quad M_X(t) = \\exp\\left(\\mu t + \\frac{\\sigma^2 t^2}{2}\\right)",
+        "note": "正态分布的矩母函数；类似地二项为 $(1-p+pe^t)^n$，泊松为 $e^{\\lambda(e^t-1)}$，指数为 $\\lambda/(\\lambda-t)$。",
+        "noteEn": "Normal MGF; similarly binomial is $(1-p+pe^t)^n$, Poisson $e^{\\lambda(e^t-1)}$ and exponential $\\lambda/(\\lambda-t)$."
+      }
+    ],
+    "properties": [
+      "矩母函数在 $t=0$ 的邻域存在时，由泰勒展开 $M_X(t)=\\sum_{n\\ge 0}\\frac{E(X^n)}{n!}t^n$ 可读出全部矩：$E(X^n)=M_X^{(n)}(0)$",
+      "独立时 $M_{X+Y} = M_X M_Y$：独立和的分布问题化为矩母函数相乘，二项、泊松、正态的和分布都由此证明",
+      "存在且有限的矩母函数唯一决定分布：如果两个随机变量的矩母函数在 0 的同一邻域内相同，则它们的分布相同",
+      "矩母函数不一定存在：柯西分布的期望都不存在，$E(e^{tX})$ 处处发散；此时改用特征函数 $\\varphi_X(t)=E(e^{itX})$（对一切分布都存在）",
+      "矩母函数可以读出原点矩，但不能直接读出中心矩；方差仍需 $\\operatorname{Var}(X)=M_X''(0)-[M_X'(0)]^2$ 组合计算"
+    ],
+    "propertiesEn": [
+      "If the MGF exists near 0, its Taylor expansion $M_X(t)=\\sum E(X^n)t^n/n!$ encodes all moments: $E(X^n)=M_X^{(n)}(0)$",
+      "For independent variables $M_{X+Y}=M_XM_Y$; this proves closure results for binomial, Poisson and normal sums",
+      "An MGF that exists and is finite near 0 determines the distribution uniquely",
+      "MGFs need not exist: the Cauchy distribution has no mean, and $E(e^{tX})$ diverges everywhere; the characteristic function $\\varphi_X(t)=E(e^{itX})$ always exists instead",
+      "MGFs yield raw moments directly; central moments still require combining them, e.g. $\\operatorname{Var}(X)=M_X''(0)-[M_X'(0)]^2$"
+    ],
+    "examples": [
+      {
+        "problem": "设 $X \\sim \\operatorname{Exp}(\\lambda)$，即密度 $f(x)=\\lambda e^{-\\lambda x}$（$x>0$）。求矩母函数，并用它计算 $E(X)$ 与 $\\operatorname{Var}(X)$。",
+        "solution": "当 $t < \\lambda$ 时，\n$$M_X(t) = \\int_0^{\\infty} e^{tx}\\lambda e^{-\\lambda x}\\,dx = \\lambda \\int_0^{\\infty} e^{-(\\lambda-t)x}\\,dx = \\frac{\\lambda}{\\lambda - t}.$$\n求导：$M_X'(t) = \\dfrac{\\lambda}{(\\lambda-t)^2}$，$M_X''(t) = \\dfrac{2\\lambda}{(\\lambda-t)^3}$。于是\n$$E(X) = M_X'(0) = \\frac1\\lambda, \\qquad E(X^2) = M_X''(0) = \\frac{2}{\\lambda^2},$$\n$$\\operatorname{Var}(X) = \\frac{2}{\\lambda^2} - \\frac{1}{\\lambda^2} = \\frac{1}{\\lambda^2}.$$\n例如 $\\lambda = 2$ 时 $E(X) = 1/2$，$\\operatorname{Var}(X) = 1/4$。"
+      },
+      {
+        "problem": "设 $X \\sim B(n,p)$，利用矩母函数推出 $E(X)$ 与 $\\operatorname{Var}(X)$。",
+        "solution": "把 $X$ 看成 $n$ 次独立试验的成功次数，单次试验取 1 的概率为 $p$，其矩母函数为 $1-p+pe^t = q + pe^t$（$q = 1-p$）。由独立性，\n$$M_X(t) = (q + pe^t)^n.$$\n求导：$M_X'(t) = n(q+pe^t)^{n-1}pe^t$，故 $E(X) = M_X'(0) = np$。再求一次导并代入 $t=0$：\n$$M_X''(0) = np + n(n-1)p^2,$$\n$$\\operatorname{Var}(X) = M_X''(0) - [M_X'(0)]^2 = np + n(n-1)p^2 - n^2p^2 = np(1-p).$$\n与二项分布的经典结果一致。"
+      }
+    ],
+    "tags": [
+      "矩",
+      "矩母函数",
+      "独立和"
+    ],
+    "links": [
+      "expectation-variance",
+      "random-variable",
+      "normal-distribution",
+      "discrete-distributions",
+      "central-limit-theorem"
+    ]
+  },
+  {
+    "id": "law-of-large-numbers",
+    "title": "大数定律",
+    "titleEn": "Law of Large Numbers",
+    "branch": "probability",
+    "level": 5,
+    "summary": "大量独立重复观测的平均值依概率收敛于期望：这是用频率估计概率、用样本均值估计期望的理论保证。",
+    "summaryEn": "Averages of many independent observations converge in probability to the mean, justifying estimating probabilities by frequencies and means by sample averages.",
+    "definition": "把同一个试验独立重复 $n$ 次，得到 $X_1, \\dots, X_n$ 独立同分布，记样本均值 $\\bar X_n = \\frac1n\\sum_{i=1}^n X_i$。**大数定律**断言：只要期望 $E(X_i) = \\mu$ 存在，当 $n$ 很大时 $\\bar X_n$ 就会接近 $\\mu$——这就是「平均值的稳定性」。\n\n「接近」的严格含义是**依概率收敛**：对任意 $\\varepsilon > 0$，\n\n$$P\\left(|\\bar X_n - \\mu| \\ge \\varepsilon\\right) \\to 0 \\quad (n \\to \\infty).$$\n\n也就是说，样本均值偏离期望超过 $\\varepsilon$ 的可能性随 $n$ 增大而趋于 0。**辛钦大数定律**指出：独立同分布且期望存在即可，不要求方差存在。**伯努利大数定律**是抛硬币场景下的特例：事件发生的频率 $\\nu_n/n$ 依概率收敛于其概率 $p$，这是「频率稳定」的数学表述。\n\n若方差也存在，大数定律有一个简洁的证明工具——**切比雪夫不等式**：$P\\left(|X - E(X)| \\ge \\varepsilon\\right) \\le \\frac{\\operatorname{Var}(X)}{\\varepsilon^2}$。把它用到 $\\bar X_n$ 上，由 $\\operatorname{Var}(\\bar X_n) = \\frac{\\sigma^2}{n}$ 得偏离概率不超过 $\\frac{\\sigma^2}{n\\varepsilon^2} \\to 0$。大数定律是统计推断的第一块基石。",
+    "definitionEn": "Repeat an experiment $n$ times independently, getting i.i.d. variables $X_1,\\dots,X_n$ with sample mean $\\bar X_n = \\frac1n\\sum_{i=1}^n X_i$. The **law of large numbers** states that, as long as the expectation $E(X_i)=\\mu$ exists, $\\bar X_n$ stays close to $\\mu$ for large $n$: the stability of averages.\n\nCloseness is made precise by **convergence in probability**: for every $\\varepsilon>0$,\n\n$$P\\left(|\\bar X_n - \\mu| \\ge \\varepsilon\\right) \\to 0 \\quad (n\\to\\infty).$$\n\n**Khinchin's law** requires only i.i.d. variables with a finite mean, not finite variance. **Bernoulli's law** is the coin-flipping special case: the frequency $\\nu_n/n$ of an event converges in probability to its probability $p$.\n\nWhen the variance exists, the classical tool is **Chebyshev's inequality**: $P(|X-E(X)|\\ge\\varepsilon) \\le \\operatorname{Var}(X)/\\varepsilon^2$. Applied to $\\bar X_n$ with $\\operatorname{Var}(\\bar X_n)=\\sigma^2/n$, it bounds the deviation probability by $\\sigma^2/(n\\varepsilon^2)\\to 0$. The law of large numbers is the first cornerstone of statistical inference.",
+    "formulas": [
+      {
+        "latex": "P\\left(|X - E(X)| \\ge \\varepsilon\\right) \\le \\frac{\\operatorname{Var}(X)}{\\varepsilon^2}",
+        "note": "切比雪夫不等式：偏离期望越远，概率被方差/ε² 控制。",
+        "noteEn": "Chebyshev's inequality: deviations beyond $\\varepsilon$ are controlled by $\\operatorname{Var}(X)/\\varepsilon^2$."
+      },
+      {
+        "latex": "\\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i \\xrightarrow{P} \\mu \\quad (n \\to \\infty)",
+        "note": "辛钦大数定律：独立同分布、期望存在，样本均值依概率收敛于 μ。",
+        "noteEn": "Khinchin's law: for i.i.d. variables with a mean, the sample mean converges in probability to $\\mu$."
+      },
+      {
+        "latex": "\\lim_{n \\to \\infty} P\\left(|\\bar X_n - \\mu| \\ge \\varepsilon\\right) = 0",
+        "note": "依概率收敛的定义：对任意 ε>0，偏离事件概率趋于 0。",
+        "noteEn": "Definition of convergence in probability: for every $\\varepsilon>0$ the deviation probability tends to 0."
+      },
+      {
+        "latex": "\\frac{\\nu_n}{n} \\xrightarrow{P} p",
+        "note": "伯努利大数定律：事件频率收敛于其概率（νₙ 为 n 次试验中的发生次数）。",
+        "noteEn": "Bernoulli's law: the relative frequency converges in probability to the probability."
+      },
+      {
+        "latex": "\\operatorname{Var}(\\bar X_n) = \\frac{\\sigma^2}{n}",
+        "note": "样本均值的方差随 n 减小；这是切比雪夫证明大数定律的关键一步。",
+        "noteEn": "The variance of the sample mean shrinks like $\\sigma^2/n$, the key step in the Chebyshev proof."
+      }
+    ],
+    "properties": [
+      "辛钦大数定律只要求「独立同分布 + 期望存在」，不要求方差存在；方差存在时可用切比雪夫不等式给出简洁证明",
+      "大数定律说的是依概率收敛（弱大数定律）：样本均值落在 μ 附近的概率趋于 1；在更强条件下还有几乎必然收敛（强大数定律）",
+      "伯努利大数定律说明频率依概率收敛于概率，是用频率估计概率、用蒙特卡洛方法计算积分的根据",
+      "大数定律只保证样本均值「趋近」期望，不给出误差的分布形态与收敛速度——这正由中心极限定理补充",
+      "样本量越大样本均值波动越小：方差按 $1/n$ 衰减，样本量翻四倍才能把标准差减半"
+    ],
+    "propertiesEn": [
+      "Khinchin's law needs only i.i.d. variables with a finite mean; when the variance exists, Chebyshev's inequality gives a short proof",
+      "The law states convergence in probability (the weak law): the sample mean lies near $\\mu$ with probability tending to 1; stronger assumptions give almost sure convergence",
+      "Bernoulli's law says frequencies converge in probability to probabilities, the basis of estimating probabilities by relative frequencies",
+      "The law guarantees convergence but says nothing about the shape of the error or the rate; the central limit theorem supplies both",
+      "Larger samples fluctuate less: the variance decays like $1/n$, so the standard deviation is halved only by quadrupling the sample size"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1 - 1/x",
+          "color": "#4cc9f0",
+          "label": "示意：样本均值从下方逼近 μ"
+        },
+        {
+          "expr": "1 + 1/x",
+          "color": "#b388ff",
+          "label": "示意：样本均值从上方逼近 μ"
+        },
+        {
+          "expr": "1",
+          "color": "#ffd166",
+          "label": "期望 μ = 1"
+        }
+      ],
+      "xRange": [
+        1,
+        25
+      ],
+      "yRange": [
+        0,
+        2
+      ],
+      "title": "大数定律示意：样本均值被越来越紧地夹在期望 μ = 1 附近"
+    },
+    "examples": [
+      {
+        "problem": "掷一枚均匀骰子 $n=100$ 次，$X_i$ 为第 $i$ 次点数，$\\bar X$ 为平均点数。用切比雪夫不等式估计 $P(|\\bar X - 3.5| \\ge 0.5)$ 的上界。",
+        "solution": "均匀骰子 $E(X_i) = 3.5$，$\\operatorname{Var}(X_i) = \\frac{91}{6} - 3.5^2 = \\frac{35}{12}$。样本均值的方差\n$$\\operatorname{Var}(\\bar X) = \\frac{35/12}{100} = \\frac{7}{240} \\approx 0.0292.$$\n切比雪夫不等式给出\n$$P(|\\bar X - 3.5| \\ge 0.5) \\le \\frac{7/240}{0.5^2} = \\frac{7}{60} \\approx 0.117,$$\n即平均点数偏离 3.5 超过 0.5 的概率不超过约 11.7%。"
+      },
+      {
+        "problem": "抛一枚均匀硬币 $n = 10000$ 次，$\\nu_n$ 为正面次数。估计 $P\\left(\\left|\\frac{\\nu_n}{n} - 0.5\\right| \\ge 0.02\\right)$ 的上界。",
+        "solution": "频率 $\\nu_n/n$ 的期望为 $p = 0.5$，方差为\n$$\\operatorname{Var}\\left(\\frac{\\nu_n}{n}\\right) = \\frac{p(1-p)}{n} = \\frac{0.25}{10000} = 2.5 \\times 10^{-5}.$$\n由切比雪夫不等式，\n$$P\\left(\\left|\\frac{\\nu_n}{n} - 0.5\\right| \\ge 0.02\\right) \\le \\frac{2.5 \\times 10^{-5}}{0.02^2} = 0.0625,$$\n频率与 0.5 相差超过 0.02 的概率不超过 6.25%，而且 $n$ 越大这个上界越小——这正是伯努利大数定律的定量版本。"
+      }
+    ],
+    "tags": [
+      "大数定律",
+      "依概率收敛",
+      "切比雪夫不等式"
+    ],
+    "links": [
+      "expectation-variance",
+      "central-limit-theorem",
+      "probability-basics",
+      "random-variable",
+      "statistics-sampling"
+    ]
+  },
+  {
+    "id": "central-limit-theorem",
+    "title": "中心极限定理",
+    "titleEn": "Central Limit Theorem",
+    "branch": "probability",
+    "level": 5,
+    "summary": "大量独立同分布随机变量之和经标准化后依分布收敛于标准正态：无论原来什么分布，正态总在极限处出现。",
+    "summaryEn": "Sums of many i.i.d. variables, once standardized, converge in distribution to the standard normal: normality emerges in the limit regardless of the original distribution.",
+    "definition": "大数定律说样本均值趋于常数 $\\mu$，但没有说明它是「怎样」围绕 $\\mu$ 波动的。**中心极限定理**（CLT）回答的正是这个问题：设 $X_1, \\dots, X_n$ 独立同分布，均值 $\\mu$、方差 $0 < \\sigma^2 < \\infty$，把和标准化为\n\n$$Z_n = \\frac{\\sum_{i=1}^n X_i - n\\mu}{\\sigma\\sqrt{n}} = \\frac{\\bar X_n - \\mu}{\\sigma/\\sqrt{n}},$$\n\n则当 $n \\to \\infty$ 时，$Z_n$ 的分布**收敛于标准正态分布 $N(0,1)$**（林德伯格-莱维定理）。\n\n它的威力在于普适性：$X_i$ 可以是均匀、指数、伯努利……只要独立同分布且方差有限，标准化和都会趋于正态。于是当 $n$ 足够大时可用\n\n$$\\sum_{i=1}^n X_i \\approx N(n\\mu,\\ n\\sigma^2), \\qquad \\bar X_n \\approx N\\!\\left(\\mu, \\frac{\\sigma^2}{n}\\right)$$\n\n来近似计算概率，这解释了大样本统计中正态分布无处不在。历史上最早的特例是**棣莫弗-拉普拉斯定理**：二项分布 $B(n,p)$ 的标准化趋于标准正态。\n\n注意收敛方式：CLT 是**依分布收敛**——$Z_n$ 的分布函数逐点趋于标准正态分布函数 $\\Phi$，而不是依概率收敛：$Z_n$ 本身并不依概率收敛于某个随机变量。这与大数定律的收敛类型不同。",
+    "definitionEn": "The law of large numbers says the sample mean tends to the constant $\\mu$; it does not describe how the mean fluctuates around $\\mu$. The **central limit theorem** (CLT) answers that: for i.i.d. variables $X_1,\\dots,X_n$ with mean $\\mu$ and variance $0<\\sigma^2<\\infty$, standardize the sum as\n\n$$Z_n = \\frac{\\sum_{i=1}^n X_i - n\\mu}{\\sigma\\sqrt{n}} = \\frac{\\bar X_n - \\mu}{\\sigma/\\sqrt{n}},$$\n\nthen as $n\\to\\infty$ the distribution of $Z_n$ **converges to the standard normal $N(0,1)$** (Lindeberg–Lévy theorem).\n\nIts power is universality: whether the $X_i$ are uniform, exponential or Bernoulli, as long as they are i.i.d. with finite variance, the standardized sum becomes normal. For large $n$ one may use\n\n$$\\sum_{i=1}^n X_i \\approx N(n\\mu,\\ n\\sigma^2), \\qquad \\bar X_n \\approx N\\!\\left(\\mu, \\frac{\\sigma^2}{n}\\right),$$\n\nwhich is why the normal distribution pervades large-sample statistics. The earliest special case is the **De Moivre–Laplace theorem**: standardized binomial variables converge to the standard normal.\n\nNote the type of convergence: the CLT is **convergence in distribution** — the CDF of $Z_n$ tends pointwise to the standard normal CDF $\\Phi$, not convergence in probability: $Z_n$ itself does not converge in probability to any random variable.",
+    "formulas": [
+      {
+        "latex": "\\frac{\\sum_{i=1}^n X_i - n\\mu}{\\sigma\\sqrt{n}} \\xrightarrow{d} N(0,1)",
+        "note": "林德伯格-莱维中心极限定理：标准化和依分布收敛于标准正态。",
+        "noteEn": "Lindeberg–Lévy CLT: the standardized sum converges in distribution to the standard normal."
+      },
+      {
+        "latex": "\\frac{\\bar X_n - \\mu}{\\sigma/\\sqrt{n}} \\xrightarrow{d} N(0,1)",
+        "note": "样本均值形式的 CLT：均值误差以 σ/√n 为尺度呈正态波动。",
+        "noteEn": "Sample-mean form: the error of the mean fluctuates normally on the scale $\\sigma/\\sqrt{n}$."
+      },
+      {
+        "latex": "P\\left(a < \\frac{\\sum X_i - n\\mu}{\\sigma\\sqrt{n}} \\le b\\right) \\to \\Phi(b) - \\Phi(a)",
+        "note": "依分布收敛的实用形式：用标准正态分布函数 Φ 近似任意区间概率。",
+        "noteEn": "The practical form: interval probabilities are approximated with the standard normal CDF $\\Phi$."
+      },
+      {
+        "latex": "\\frac{S_n - np}{\\sqrt{np(1-p)}} \\xrightarrow{d} N(0,1)",
+        "note": "棣莫弗-拉普拉斯定理：二项分布是 CLT 的伯努利特例（Sₙ 为成功次数）。",
+        "noteEn": "De Moivre–Laplace theorem: binomial is the Bernoulli special case of the CLT."
+      },
+      {
+        "latex": "\\sum_{i=1}^n X_i \\ \\approx\\ N(n\\mu,\\ n\\sigma^2), \\qquad \\bar X_n \\approx N\\!\\left(\\mu,\\ \\frac{\\sigma^2}{n}\\right)",
+        "note": "大样本近似：和与均值的分布都可用正态近似，均值的误差量级是 σ/√n。",
+        "noteEn": "Large-sample approximation for sums and means; the error of the mean has order $\\sigma/\\sqrt{n}$."
+      }
+    ],
+    "properties": [
+      "收敛方式是依分布收敛：$Z_n$ 的分布函数逐点趋于 $\\Phi$；不是依概率收敛——$Z_n$ 自身并不趋于某个固定随机变量，这是 CLT 与 LLN 的本质区别",
+      "条件：独立同分布、方差存在且 $0 < \\sigma^2 < \\infty$；不要求原分布对称或接近正态，$n$ 越大、原分布越接近正态，近似越好",
+      "棣莫弗-拉普拉斯定理是 CLT 的特例：伯努利分布的和（二项分布）标准化后趋于标准正态，通常当 $np \\ge 5$ 且 $n(1-p) \\ge 5$ 时近似效果较好",
+      "与大数定律互补：LLN 说明样本均值依概率收敛到 μ，CLT 说明围绕 μ 的波动量级为 σ/√n 且近似正态",
+      "CLT 解释了正态分布在自然与统计中无处不在：置信区间与假设检验的大样本理论都以它为基础"
+    ],
+    "propertiesEn": [
+      "The convergence is in distribution: the CDF of $Z_n$ tends pointwise to $\\Phi$; it is not convergence in probability, as $Z_n$ does not tend to a fixed random variable",
+      "Assumptions: i.i.d. variables with $0<\\sigma^2<\\infty$; no symmetry or near-normality of the original distribution is required",
+      "The De Moivre–Laplace theorem is the Bernoulli special case; the normal approximation to binomial is good when $np\\ge 5$ and $n(1-p)\\ge 5$",
+      "Complementing the LLN: the law says the mean converges in probability to $\\mu$, the CLT describes its $\\sigma/\\sqrt{n}$-scale normal fluctuation",
+      "The CLT explains why the normal distribution is everywhere in nature and statistics; large-sample confidence intervals and tests rest on it"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "color": "#4cc9f0",
+          "label": "标准正态密度 φ(x)"
+        },
+        {
+          "expr": "((sqrt(6)-abs(x)) + abs(sqrt(6)-abs(x)))/12",
+          "color": "#ff6b9d",
+          "label": "n = 2 的标准化和密度（两均匀变量之和）"
+        }
+      ],
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -0.05,
+        0.45
+      ],
+      "title": "中心极限定理：标准化和的密度随 n 增大逼近标准正态（蓝：φ(x)，粉：n = 2）"
+    },
+    "examples": [
+      {
+        "problem": "抛一枚均匀硬币 100 次，$S$ 为正面次数。用中心极限定理近似 $P(S \\le 55)$（含连续性修正）。",
+        "solution": "$S \\sim B(100,\\ 0.5)$，$E(S) = 50$，$\\operatorname{Var}(S) = 100 \\times 0.5 \\times 0.5 = 25$，标准差为 5。标准化 $Z = \\frac{S - 50}{5}$ 近似服从 $N(0,1)$。\n\n用连续性修正把 $S \\le 55$ 写成 $S \\le 55.5$：\n$$P(S \\le 55) \\approx P\\left(Z \\le \\frac{55.5 - 50}{5}\\right) = P(Z \\le 1.1) = \\Phi(1.1) \\approx 0.8643.$$"
+      },
+      {
+        "problem": "设 $X_1, \\dots, X_{100}$ 独立同分布，$E(X_i) = 3$，标准差 $\\sigma = 2$。近似计算 $P(2.6 \\le \\bar X \\le 3.4)$。",
+        "solution": "$\\bar X$ 的期望为 3，标准差为 $\\frac{\\sigma}{\\sqrt{n}} = \\frac{2}{10} = 0.2$。标准化后\n$$P(2.6 \\le \\bar X \\le 3.4) = P\\left(\\frac{2.6-3}{0.2} \\le Z \\le \\frac{3.4-3}{0.2}\\right) = P(-2 \\le Z \\le 2) \\approx \\Phi(2) - \\Phi(-2) = 2\\Phi(2) - 1 \\approx 0.9545.$$\n注意这里只用到了 $n = 100$ 和两个总体数字特征，没有用到 $X_i$ 的具体分布，这正是 CLT 普适性的体现。"
+      }
+    ],
+    "tags": [
+      "中心极限定理",
+      "依分布收敛",
+      "正态近似"
+    ],
+    "links": [
+      "normal-distribution",
+      "law-of-large-numbers",
+      "random-variable",
+      "sampling-distributions",
+      "expectation-variance"
+    ]
+  }
+]

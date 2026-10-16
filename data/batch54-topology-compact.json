@@ -1,0 +1,579 @@
+[
+  {
+    "id": "compactness",
+    "title": "紧致性",
+    "titleEn": "Compactness",
+    "branch": "topology",
+    "level": 5,
+    "summary": "任意开覆盖都能挑出有限子覆盖——这条条件把闭区间上「有界、取到最值」的种种好处提炼成一个可以搬到任意拓扑空间的性质。",
+    "summaryEn": "Every open cover has a finite subcover — one condition that captures the good behaviour of a closed interval and travels to any topological space.",
+    "definition": "**紧致性**（compactness）是拓扑学中「有限性」的化身。设 $X$ 是拓扑空间，$\\{U_i\\}_{i\\in I}$ 是 $X$ 的一族**开覆盖**：每个 $U_i$ 都是开集，并且 $X=\\bigcup_{i\\in I}U_i$。若**任意**这样的开覆盖都能从中挑出**有限个**成员就已经盖住 $X$（即存在 $i_1,\\dots,i_n$ 使 $X=U_{i_1}\\cup\\cdots\\cup U_{i_n}$），就称 $X$ 是**紧空间**。定义里有两个词必须咬住：「**任意**」——要对所有可能的开覆盖都成立；「**子**覆盖」——有限个成员必须来自原来那一族，不是另找有限个开集。把定义说成「存在有限开覆盖」是典型错误：任何空间里 $\\{X\\}$ 自己就是一个开覆盖，「存在」毫无约束力。\\n\\n紧性有一个用闭集写出的等价形式，称为**有限交性质**（finite intersection property，简称 FIP）：$X$ 紧，当且仅当任意一族闭集 $\\{F_i\\}$ 只要「任意有限个之交非空」，整族的交就非空。取补集即可看出两种说法互为翻译。这个形式在证明「解存在」时极好用：只要能说明每个有限子问题都有解（解集是闭集），紧性就奉上一个整体解。\\n\\n$X$ 的子集 $K$ 称为**紧集**，如果 $K$ 配上子空间拓扑是紧空间；等价地，$X$ 中任意一族覆盖 $K$ 的开集都有有限个成员覆盖 $K$。紧性的直觉是「不逃向无穷，也不留缺口」：$\\mathbb{R}$ 不紧，$(0,1)$ 不紧，$\\mathbb{Q}$ 不紧，而任何有限集都紧。$(0,1)$ 的毛病出在两个端点上：开覆盖 $\\{(1/n,1)\\}_{n\\ge1}$ 随着 $x$ 越接近 $0$ 需要越多成员，永远挑不出有限个。\\n\\n紧性之所以是拓扑学的主干概念，是因为它既是被连续映射保持的**拓扑性质**（同胚不变），又足以承载分析中最有用的那些结论：紧集上的连续函数有界且取到最大最小值；紧度量空间上的连续映射一致连续；有限多个紧集之并、紧空间之积仍然紧。在度量空间里它还能改写成更好用的列紧、完备＋全有界（见「度量空间中的紧致性」），在 $\\mathbb{R}^n$ 里更简化为「有界且闭」。",
+    "definitionEn": "**Compactness** is the topological incarnation of finiteness. Let $X$ be a topological space and let $\\{U_i\\}_{i\\in I}$ be an **open cover** of $X$: every $U_i$ is open and $X=\\bigcup_{i\\in I}U_i$. If **every** such cover already contains finitely many members that still cover $X$ (that is, $X=U_{i_1}\\cup\\cdots\\cup U_{i_n}$ for some $i_1,\\dots,i_n$), then $X$ is called **compact**. Two words carry the whole definition: **every** cover, and a finite **sub**cover — the finitely many sets must be taken from the given family, not chosen afresh. Saying 「there exists a finite open cover」 is a typical error: $\\{X\\}$ is always a finite cover, so existence alone says nothing.\\n\\nThere is an equivalent formulation in terms of closed sets, the **finite intersection property** (FIP): $X$ is compact iff every family of closed sets $\\{F_i\\}$ such that every finite subfamily meets has nonempty total intersection. Taking complements translates one form into the other, and the FIP form is what one uses to manufacture solutions: show that every finite subproblem has a solution (the solution sets being closed) and compactness delivers a global solution.\\n\\nA subset $K\\subset X$ is a **compact set** if $K$ with the subspace topology is compact; equivalently, every family of open sets of $X$ that covers $K$ has finitely many members covering $K$. The intuition is 「no escape to infinity and no gap」: $\\mathbb{R}$ is not compact, $(0,1)$ is not compact, $\\mathbb{Q}$ is not compact, while every finite set is compact. The failure of $(0,1)$ sits at its two endpoints: with the cover $\\{(1/n,1)\\}_{n\\ge1}$, points closer to $0$ need ever more members, and no finite subfamily suffices.\\n\\nCompactness is a pillar of topology because it is a **topological invariant** (preserved by every continuous map) and at the same time carries the most useful analytic conclusions: a continuous function on a compact set is bounded and attains its maximum and minimum; a continuous map on a compact metric space is uniformly continuous; finite unions and products of compact spaces are compact. In metric spaces it can be rephrased as sequential compactness or as completeness plus total boundedness (see 「Compactness in Metric Spaces」), and in $\\mathbb{R}^n$ it reduces to 「bounded and closed」.",
+    "formulas": [
+      {
+        "latex": "X\\ \\text{紧}\\iff \\forall\\,\\{U_i\\}_{i\\in I}\\ \\text{开},\\ X=\\bigcup_{i\\in I}U_i\\ \\Longrightarrow\\ \\exists\\,i_1,\\dots,i_n:\\ X=U_{i_1}\\cup\\cdots\\cup U_{i_n}",
+        "note": "紧性的定义写全：对**任意**开覆盖，**从原覆盖中**挑出有限个仍然覆盖。写成「存在有限开覆盖」或漏掉「子」字都会把条件废掉。",
+        "noteEn": "The definition in full: for **every** open cover there are finitely many members **of that cover** that still cover the space. Omitting 「arbitrary」 or 「sub」 destroys the condition."
+      },
+      {
+        "latex": "X\\ \\text{紧}\\iff \\Big(\\forall\\{F_i\\}\\ \\text{闭}:\\ \\forall\\ \\text{有限}\\ J,\\ \\bigcap_{i\\in J}F_i\\neq\\varnothing\\ \\Longrightarrow\\ \\bigcap_{i\\in I}F_i\\neq\\varnothing\\Big)",
+        "note": "有限交性质（FIP）：把「整体有解」化归为「每个有限子问题有解」，是紧性最常见的用法。",
+        "noteEn": "The finite intersection property: a global solution exists as soon as every finite subproblem has one — the most common way compactness is applied."
+      },
+      {
+        "latex": "f:X\\to Y\\ \\text{连续},\\ X\\ \\text{紧}\\ \\Longrightarrow\\ f(X)\\ \\text{紧}",
+        "note": "紧性被连续映射保持（开集的原像开集，把 $f(X)$ 的开覆盖拉回成 $X$ 的开覆盖）。因此紧性只依赖拓扑结构。",
+        "noteEn": "Compactness is preserved by continuous maps: pull an open cover of $f(X)$ back to $X$. Hence compactness depends only on the topology."
+      },
+      {
+        "latex": "X\\ \\text{Hausdorff},\\ K\\subset X\\ \\text{紧}\\ \\Longrightarrow\\ K\\ \\text{是闭集}",
+        "note": "Hausdorff 条件不可去：Sierpiński 空间 $X=\\{0,1\\}$（开集为 $\\varnothing,\\{0\\},X$）中单点集 $\\{0\\}$ 紧却不是闭集（它的闭包是整个 $X$）。",
+        "noteEn": "The Hausdorff hypothesis cannot be dropped: in the Sierpiński space $X=\\{0,1\\}$ with open sets $\\varnothing,\\{0\\},X$, the singleton $\\{0\\}$ is compact but not closed (its closure is all of $X$)."
+      },
+      {
+        "latex": "X\\ \\text{紧},\\ f:X\\to\\mathbb{R}\\ \\text{连续}\\ \\Longrightarrow\\ f(X)\\ \\text{有界且闭},\\ \\sup f(X)\\in f(X),\\ \\inf f(X)\\in f(X)",
+        "note": "极值定理：闭区间上连续函数必有最大最小值的完全推广。证明只用两步——$f(X)$ 紧，而 $\\mathbb{R}$ 的紧子集恰是有界闭集。",
+        "noteEn": "The extreme value theorem, a complete generalisation of the closed-interval case: $f(X)$ is compact, and compact subsets of $\\mathbb{R}$ are exactly the closed bounded ones."
+      }
+    ],
+    "expression": {
+      "text": "K ⊂ X 紧：K 的每个开覆盖都有有限子覆盖，K = U₁ ∪ ⋯ ∪ Uₙ",
+      "symbol": "K 紧",
+      "note": "对偶记法：K 紧 ⟺ 任意「有限交非空」的 K 中闭集族 {Fᵢ} 满足 ∩Fᵢ ≠ ∅。",
+      "noteEn": "Dual form: $K$ is compact iff every family of closed subsets of $K$ with the finite intersection property has nonempty intersection."
+    },
+    "properties": [
+      "紧集的**闭子集**紧（闭集之补是开集，把它加进任何覆盖就退化成对全空间的覆盖）；在 Hausdorff 空间里反过来也成立：**紧集必是闭集**。两者合起来说明 Hausdorff 空间中紧集与闭集配合良好——紧集与闭集的交紧，任意多个紧集的交也紧。",
+      "「紧 ⇒ 闭」中的 Hausdorff 条件不能去：Sierpiński 空间 $X=\\{0,1\\}$（开集为 $\\varnothing,\\{0\\},X$）中 $\\{0\\}$ 紧而不闭，该空间连 $T_1$ 都不是。若只要求 $T_1$ 仍不够：无限集上的余有限拓扑是 $T_1$，其中无限真子集（如偶数集）紧而不闭。所以标准叙述一律写 Hausdorff。",
+      "连续像是紧的；有限多个紧集的并是紧的（把各自的有限子覆盖拼起来即可）；紧 Hausdorff 空间一定是正规（$T_4$）的：任意两个不交闭集可用不交开集分开。",
+      "紧空间的连续实值函数取到最大与最小值：$f(X)$ 紧，因而是 $\\mathbb{R}$ 中的有界闭集，故 $\\sup f(X)$ 与 $\\inf f(X)$ 都属于 $f(X)$。这正是微积分里「闭区间上连续函数最值定理」的来源——它的本质是 $[a,b]$ 紧。",
+      "紧性在有限积下保持（管引理直接证明），在**任意**多个因子下也保持（吉洪诺夫定理，与选择公理等价）；紧度量空间必完备且全有界，从而必可分、第二可数。因此「紧」比「完备＋有界」强得多。"
+    ],
+    "propertiesEn": [
+      "A **closed subset** of a compact set is compact (its complement is open, so it can be added to any cover); conversely, in a Hausdorff space every **compact set is closed**. Together these make compact and closed sets behave well: the intersection of a compact set with a closed set is compact, and any intersection of compact sets is compact.",
+      "Hausdorffness cannot be dropped from 「compact implies closed」: in the Sierpiński space $X=\\{0,1\\}$ (open sets $\\varnothing,\\{0\\},X$) the set $\\{0\\}$ is compact but not closed — indeed the space is not even $T_1$.",
+      "Continuous images of compact spaces are compact; a finite union of compact sets is compact (glue the finite subcovers together); a compact Hausdorff space is normal ($T_4$): disjoint closed sets can be separated by disjoint open sets.",
+      "A continuous real-valued function on a compact space attains its maximum and minimum: $f(X)$ is compact, hence closed and bounded in $\\mathbb{R}$, so $\\sup f(X)$ and $\\inf f(X)$ belong to $f(X)$. This is the topological content of the classical extreme value theorem on a closed interval.",
+      "Compactness is preserved by finite products (tube lemma) and by **arbitrary** products (Tychonoff's theorem, equivalent to the axiom of choice); a compact metric space is complete and totally bounded, hence separable and second countable. So compactness is far stronger than completeness plus boundedness."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        -1,
+        2
+      ],
+      "intervals": [
+        {
+          "from": 0,
+          "to": 1,
+          "color": "#06d6a0"
+        }
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0（含入 → 紧）",
+          "color": "#06d6a0"
+        },
+        {
+          "at": 1,
+          "label": "1（挖去 → 不紧）",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "[0,1] 紧：端点在区间内；(0,1) 不紧：端点被挖去——差别就在两个端点上"
+    },
+    "examples": [
+      {
+        "problem": "用开覆盖的定义直接证明 $[0,1]$ 紧，并说明 $(0,1)$ 不紧。",
+        "solution": "$[0,1]$ 紧：反设存在开覆盖 $\\{U_i\\}_{i\\in I}$ 没有有限子覆盖。把 $[0,1]$ 对半分成 $[0,\\tfrac12]$ 与 $[\\tfrac12,1]$，至少有一半不能被有限个 $U_i$ 覆盖（否则整体就能被有限个覆盖），取这一半继续对分。如此得到闭区间套 $I_1\\supset I_2\\supset\\cdots$，$I_n=[a_n,b_n]$，长度 $b_n-a_n=2^{-n}$，且每个 $I_n$ 都不能被有限个 $U_i$ 覆盖。\\n\\n由区间套定理，$\\bigcap_n I_n=\\{x^{*}\\}$，且 $x^{*}=\\sup a_n=\\inf b_n\\in[0,1]$。由覆盖，$x^{*}\\in U_{i_0}$ 对某个 $i_0$ 成立；$U_{i_0}$ 开，故存在 $r>0$ 使 $(x^{*}-r,x^{*}+r)\\subset U_{i_0}$。取 $n$ 充分大，使 $2^{-n}<r$；又因 $a_n\\uparrow x^{*}$、$b_n\\downarrow x^{*}$，可再取大一些使 $a_n>x^{*}-r$ 且 $b_n<x^{*}+r$。于是 $I_n\\subset(x^{*}-r,x^{*}+r)\\subset U_{i_0}$：这个 $I_n$ 被**一个**开集就覆盖了，与它「不能被有限个覆盖」矛盾。所以 $[0,1]$ 的每个开覆盖都有有限子覆盖，$[0,1]$ 紧。\\n\\n$(0,1)$ 不紧：取开覆盖 $\\{(1/n,1)\\}_{n\\ge1}$（对每个 $x\\in(0,1)$ 取 $n>1/x$ 即得 $x\\in(1/n,1)$，故确实是覆盖）。这些集合相互包含、随 $n$ 增大而变大，任意有限个的最大下标记为 $N$，则它们的并就是 $(1/N,1)$，遗漏了点 $\\dfrac{1}{N+1}\\in(0,1)$。故不存在有限子覆盖，$(0,1)$ 不紧。"
+      },
+      {
+        "problem": "设 $X$ 是 Hausdorff 空间，$K\\subset X$ 紧。证明 $K$ 是闭集；并说明把 Hausdorff 条件去掉后结论会失效。",
+        "solution": "任取 $x\\notin K$，要造一个不含 $K$ 中点的 $x$ 的开邻域。对每个 $y\\in K$，由 Hausdorff 性存在开集 $U_y\\ni y$ 与 $V_y\\ni x$ 使 $U_y\\cap V_y=\\varnothing$。由 $y$ 任意，$\\{U_y\\}_{y\\in K}$ 是紧集 $K$ 的开覆盖，故有有限子覆盖 $U_{y_1},\\dots,U_{y_n}$。令\\n$$V=V_{y_1}\\cap\\cdots\\cap V_{y_n},\\qquad U=U_{y_1}\\cup\\cdots\\cup U_{y_n}.$$\\n则 $V$ 是 $x$ 的开邻域（有限个开集之交），$K\\subset U$，且 $U\\cap V=\\varnothing$：因为 $V\\subset V_{y_k}$ 而 $V_{y_k}\\cap U_{y_k}=\\varnothing$，故 $V$ 与每个 $U_{y_k}$ 都不交。于是 $V$ 与 $K$ 不交。\\n\\n对每个 $x\\notin K$ 都找到了与 $K$ 不交的开邻域，故 $X\\setminus K$ 是开集，$K$ 是闭集。\\n\\n反过来，若去掉 Hausdorff 条件，取 Sierpiński 空间 $X=\\{0,1\\}$，开集为 $\\varnothing,\\{0\\},X$。单点集 $K=\\{0\\}$ 一定是紧的（只有两个开集和它相交，总能用有限个盖住）；但 $K$ 的补集 $\\{1\\}$ 不是开集，故 $K$ 不闭——事实上 $X$ 的闭集只有 $X,\\{1\\},\\varnothing$，其中含 $0$ 的只有 $X$，所以 $\\overline{\\{0\\}}=X$。这说明紧集闭需要空间「能把不同的点分开」。"
+      }
+    ],
+    "tags": [
+      "紧性",
+      "开覆盖",
+      "有限子覆盖",
+      "有限交性质",
+      "极值定理",
+      "Hausdorff"
+    ],
+    "links": [
+      "topological-space",
+      "closed-sets-interior",
+      "separation-axioms",
+      "continuity",
+      "compactness-metric",
+      "tychonoff-theorem"
+    ]
+  },
+  {
+    "id": "compactness-metric",
+    "title": "度量空间中的紧致性",
+    "titleEn": "Compactness in Metric Spaces",
+    "branch": "topology",
+    "level": 5,
+    "summary": "在度量空间里紧性等价于列紧、也等价于完备加全有界；Heine–Borel 定理、勒贝格数引理与一致连续性都是这套刻画的自然产物。",
+    "summaryEn": "In metric spaces compactness equals sequential compactness equals completeness plus total boundedness; Heine–Borel, the Lebesgue number lemma and uniform continuity all follow.",
+    "definition": "紧性一般用开覆盖定义，但在**度量空间**中它等价于一串更「初等」的条件，这是度量空间最好用的地方。基本定理是：$(X,d)$ 紧 $\\iff$ $(X,d)$ **列紧**（每个序列都有收敛子列，且极限落在 $X$ 内）$\\iff$ $(X,d)$ **完备且全有界**。其中**全有界**（totally bounded，又叫**预紧**）指：对每个 $\\varepsilon>0$，都存在有限个点 $x_1,\\dots,x_n\\in X$ 使 $X=B(x_1,\\varepsilon)\\cup\\cdots\\cup B(x_n,\\varepsilon)$——这样的有限集称为一个有限的 $\\varepsilon$-**网**。\\n\\n全有界严格强于有界。有界只说「所有点装得进一个大球」，全有界却说「用有限多个任意小的球就能盖住」。在 $\\mathbb{R}^n$ 里两者等价，在无穷维空间里则分道扬镳：$\\ell^2$ 的闭单位球 $\\{x:\\|x\\|\\le1\\}$ 显然有界，却不全有界——标准基 $\\{e_n\\}$ 两两距离为 $\\sqrt2$，有限多个半径 $1/2$ 的球每个至多装下其中一个。所以「有界＋闭＋完备」绝不等于紧；紧度量空间当然有界、闭、完备，但真正多出来的那一条是**全有界**。\\n\\n在 $\\mathbb{R}^n$ 中有一个极简判据：**Heine–Borel 定理**——$K\\subset\\mathbb{R}^n$ 紧 $\\iff$ $K$ 有界且闭。它依赖有限维性，**不能推广到一般度量空间**：任何无穷维巴拿赫空间（$\\ell^2$、$C[0,1]$、$L^2[0,1]$）的闭单位球都有界、闭、完备，却都不紧。\\n\\n紧度量空间还有两条「分析味」的结论。**勒贝格数引理**：对开覆盖 $\\{U_i\\}$ 存在 $\\delta>0$，使任何直径小于 $\\delta$ 的子集都落在某个 $U_i$ 里，$\\delta$ 就是覆盖的「统一最小尺度」。**一致连续性**：紧度量空间上的连续映射一定一致连续。这两条都是紧性把「局部」升级成「整体」的典型表现——局部能分别做到的事，紧性保证可以统一地做到。",
+    "definitionEn": "Compactness is defined by open covers, but in a **metric space** it is equivalent to a chain of more elementary conditions, which is what makes metric spaces so workable. The basic theorem reads: $(X,d)$ is compact $\\iff$ $(X,d)$ is **sequentially compact** (every sequence has a convergent subsequence with limit in $X$) $\\iff$ $(X,d)$ is **complete and totally bounded**. **Totally bounded** (also called **precompact**) means: for every $\\varepsilon>0$ there are finitely many points $x_1,\\dots,x_n\\in X$ with $X=B(x_1,\\varepsilon)\\cup\\cdots\\cup B(x_n,\\varepsilon)$ — a finite $\\varepsilon$-**net**.\\n\\nTotal boundedness is strictly stronger than boundedness. Boundedness only says that all points fit inside one large ball; total boundedness says finitely many arbitrarily small balls suffice. The two agree on $\\mathbb{R}^n$ and part ways in infinite dimensions: the closed unit ball of $\\ell^2$ is plainly bounded but not totally bounded, since the standard basis vectors $e_n$ are pairwise at distance $\\sqrt2$, so finitely many balls of radius $1/2$ contain at most one of them each. Hence 「bounded + closed + complete」 never implies compact; a compact metric space is of course bounded, closed and complete, but the extra ingredient is **total boundedness**.\\n\\nOn $\\mathbb{R}^n$ there is a one-line criterion, the **Heine–Borel theorem**: $K\\subset\\mathbb{R}^n$ is compact iff $K$ is bounded and closed. It uses finite dimensionality and **does not generalise** to arbitrary metric spaces: the closed unit ball of any infinite-dimensional Banach space ($\\ell^2$, $C[0,1]$, $L^2[0,1]$) is bounded, closed and complete, yet not compact.\\n\\nTwo further results on compact metric spaces have an analytic flavour. The **Lebesgue number lemma**: for an open cover $\\{U_i\\}$ there is $\\delta>0$ such that every subset of diameter less than $\\delta$ lies inside some $U_i$; $\\delta$ is a uniform minimal scale of the cover. **Uniform continuity**: a continuous map on a compact metric space is automatically uniformly continuous. Both are instances of compactness upgrading local statements to global ones.",
+    "formulas": [
+      {
+        "latex": "(X,d)\\ \\text{紧}\\iff (X,d)\\ \\text{列紧}\\iff (X,d)\\ \\text{完备且全有界}",
+        "note": "度量空间中紧性的三种等价语言。列紧＝每个序列都有收敛子列；在一般拓扑空间中紧与列紧并不等价，这是度量空间的特权。",
+        "noteEn": "Three equivalent languages for compactness in a metric space. Sequential compactness means every sequence has a convergent subsequence; in general topological spaces the two notions differ."
+      },
+      {
+        "latex": "\\text{全有界}:\\ \\forall\\varepsilon>0\\ \\exists x_1,\\dots,x_n:\\ X=\\bigcup_{k=1}^{n}B(x_k,\\varepsilon)\\quad(\\text{对比有界}:\\ \\exists x_0,R:\\ X=B(x_0,R))",
+        "note": "全有界＝对每个 $\\varepsilon$ 存在有限 $\\varepsilon$-网；它比有界强得多，$\\ell^2$ 的闭单位球有界而不全有界。",
+        "noteEn": "Totally bounded means a finite $\\varepsilon$-net exists for every $\\varepsilon$; it is much stronger than boundedness — the closed unit ball of $\\ell^2$ is bounded but not totally bounded."
+      },
+      {
+        "latex": "K\\subset\\mathbb{R}^n:\\quad K\\ \\text{紧}\\iff K\\ \\text{有界且闭}",
+        "note": "Heine–Borel 定理。这是 $\\mathbb{R}^n$ 的特权：无穷维巴拿赫空间的闭单位球有界且闭，却不紧。",
+        "noteEn": "The Heine–Borel theorem. This is a privilege of $\\mathbb{R}^n$: closed unit balls in infinite-dimensional Banach spaces are bounded and closed but not compact."
+      },
+      {
+        "latex": "X\\ \\text{紧},\\ \\{U_i\\}\\ \\text{开覆盖}\\ \\Longrightarrow\\ \\exists\\delta>0:\\ \\operatorname{diam}A<\\delta\\ \\Longrightarrow\\ \\exists i,\\ A\\subset U_i",
+        "note": "勒贝格数引理：紧度量空间的开覆盖有统一的「最小尺度」$\\delta$，任何足够细的集合必然落在某个成员之内。",
+        "noteEn": "The Lebesgue number lemma: an open cover of a compact metric space has a uniform scale $\\delta$; any set of diameter below $\\delta$ lies in a single member."
+      },
+      {
+        "latex": "f:(X,d)\\to(Y,d')\\ \\text{连续},\\ X\\ \\text{紧}\\ \\Longrightarrow\\ \\forall\\varepsilon>0\\ \\exists\\delta>0:\\ d(x,y)<\\delta\\Rightarrow d'(f(x),f(y))<\\varepsilon",
+        "note": "紧度量空间上连续 ⇒ 一致连续，换句话说在紧度量空间上「连续」与「一致连续」是同一件事（反向是平凡的：一致连续必连续）。$\\delta$ 只依赖 $\\varepsilon$、与点无关；去掉紧性即失效，例如 $f(x)=1/x$ 在 $(0,1)$ 上、$x^2$ 在 $\\mathbb{R}$ 上。",
+        "noteEn": "Continuity implies uniform continuity on a compact metric space: $\\delta$ depends only on $\\varepsilon$, not on the point. Compactness is indispensable — $f(x)=1/x$ on $(0,1)$ is continuous but not uniformly continuous."
+      }
+    ],
+    "expression": {
+      "text": "紧 ⟺ 列紧 ⟺ 完备 + 全有界；ℝⁿ 中另有：紧 ⟺ 有界且闭（Heine–Borel）",
+      "symbol": "K 紧 ⟺ K 有界且闭（ℝⁿ）",
+      "note": "使用顺序建议：要证紧，先证「完备 + 全有界」；要证不紧，找一个两两距离有正下界的无穷序列即可。",
+      "noteEn": "Practical order: to prove compactness verify 「complete + totally bounded」; to disprove it, exhibit an infinite sequence with a positive lower bound on pairwise distances."
+    },
+    "properties": [
+      "紧 ⇒ 完备且全有界（全有界由对覆盖 $\\{B(x,\\varepsilon)\\}_{x\\in X}$ 取有限子覆盖得到）；反过来，完备＋全有界 ⇒ 紧。所以三者（紧、列紧、完备＋全有界）是同一件事。",
+      "**有界不是全有界**：$\\ell^2$ 的闭单位球有界、闭、完备却不紧——标准基 $e_n$ 两两距离 $\\sqrt2$，半径 $1/2$ 的有限多个球盖不住它。同样地，$C[0,1]$ 的闭单位球也不紧。这解释了为什么 Heine–Borel 定理不能搬到无穷维空间。",
+      "对 $\\mathbb{R}^n$：紧 ⟺ 有界且闭（Heine–Borel）；一维情形就是「闭区间紧」。其中「紧 ⇒ 有界」用覆盖 $\\{(-m,m)\\}_{m\\ge1}$ 即得，「紧 ⇒ 闭」用的是 Hausdorff 论证（对 $x\\notin K$ 把 $K$ 的每点和 $x$ 用不交开球分开，紧性给出有限的那些球）。",
+      "**勒贝格数引理**：紧度量空间的开覆盖有统一的尺度 $\\delta$，任何直径小于 $\\delta$ 的集合都落在某个成员内。由它可直接证明「连续 ⇒ 一致连续」：对 $\\varepsilon>0$，用 $\\{f^{-1}(B(f(x),\\varepsilon/3))\\}_{x}$ 覆盖 $X$，取其勒贝格数 $\\delta$，则 $d(x,y)<\\delta$ 时 $x,y$ 落在同一个原像里，从而 $d'(f(x),f(y))<2\\varepsilon/3<\\varepsilon$。",
+      "紧度量空间必**可分**且**第二可数**：对每个 $n$ 取一个有限的 $1/n$-网，所有网心合起来是可数稠密集，而半径 $1/n$ 的开球（以这些网心为心）构成可数基。"
+    ],
+    "propertiesEn": [
+      "Compact implies complete and totally bounded (take a finite subcover of $\\{B(x,\\varepsilon)\\}_{x\\in X}$), and conversely complete plus totally bounded implies compact — the three descriptions are one and the same condition.",
+      "**Bounded is not totally bounded**: the closed unit ball of $\\ell^2$ is bounded, closed and complete yet not compact, because the basis vectors $e_n$ are pairwise $\\sqrt2$ apart and finitely many balls of radius $1/2$ cannot cover them. The same holds for the closed unit ball of $C[0,1]$, which is why Heine–Borel cannot be extended to infinite dimensions.",
+      "On $\\mathbb{R}^n$: compact iff bounded and closed (Heine–Borel), the one-dimensional case being 「a closed interval is compact」. Boundedness follows by applying compactness to the cover $\\{(-m,m)\\}_{m\\ge1}$, and closedness from the Hausdorff argument separating each point of $K$ from an outside point $x$.",
+      "**Lebesgue number lemma**: an open cover of a compact metric space has a uniform scale $\\delta$, every set of diameter less than $\\delta$ lying in one member. It yields uniform continuity directly: cover $X$ by $\\{f^{-1}(B(f(x),\\varepsilon/3))\\}_{x}$, take the Lebesgue number $\\delta$; if $d(x,y)<\\delta$ then $x,y$ lie in the same preimage, so $d'(f(x),f(y))<\\varepsilon$.",
+      "A compact metric space is necessarily **separable** and **second countable**: take a finite $1/n$-net for each $n$; the centres form a countable dense set, and the balls of radius $1/n$ about them form a countable base."
+    ],
+    "examples": [
+      {
+        "problem": "证明 $\\ell^2$ 的闭单位球 $B=\\{x:\\|x\\|\\le1\\}$ 有界、闭、完备，却不紧，从而说明 Heine–Borel 定理不能推广到无穷维空间。",
+        "solution": "设 $\\ell^2=\\{x=(x_1,x_2,\\dots):\\sum_{n}x_n^2<\\infty\\}$，$e_n=(0,\\dots,0,1,0,\\dots)$（第 $n$ 位为 $1$）。\\n\\n有界：$\\|x\\|\\le1$，即 $B\\subset B(0,1)$。\\n\\n闭：范数 $\\|\\cdot\\|$ 是连续函数，$B=\\|\\cdot\\|^{-1}([0,1])$ 是闭集 $[0,1]$ 的原像，故闭。\\n\\n完备：$\\ell^2$ 本身完备，而完备空间的闭子集完备，故 $B$ 完备。\\n\\n不紧：对 $m\\ne n$，$\\|e_m-e_n\\|=\\sqrt2$，且 $\\|e_n\\|=1$ 故全部 $e_n\\in B$。若 $B$ 能被有限多个半径 $1/2$ 的球 $B(y_1,\\tfrac12),\\dots,B(y_k,\\tfrac12)$ 覆盖，则每个球至多含一个 $e_n$——若 $e_m,e_n\\ (m\\ne n)$ 同在该球内，三角不等式给出\\n$$\\sqrt2=\\|e_m-e_n\\|\\le\\|e_m-y_j\\|+\\|y_j-e_n\\|<\\tfrac12+\\tfrac12=1,$$\\n矛盾。于是有限个球至多容纳 $k$ 个 $e_n$，而 $\\{e_n:n\\ge1\\}$ 是无限集，覆盖不可能。故 $B$ 不全有界。\\n\\n由「紧 ⇒ 全有界」，$B$ 不紧。这说明「有界＋闭」只在有限维空间里等价于紧；无穷维里还差**全有界**这一条。"
+      },
+      {
+        "problem": "设 $(X,d)$ 紧，$f:X\\to\\mathbb{R}$ 连续。用列紧性证明 $f$ 一致连续；并说明用 $(0,1)$ 代替 $X$ 时结论确实可以失败。",
+        "solution": "反设 $f$ 不一致连续：存在 $\\varepsilon>0$，使得对每个 $n$ 都能找到 $x_n,y_n\\in X$ 满足\\n$$d(x_n,y_n)<\\tfrac1n,\\qquad |f(x_n)-f(y_n)|\\ge\\varepsilon.$$\\n由 $X$ 紧从而列紧，$(x_n)$ 有子列 $x_{n_k}\\to x$（$x\\in X$）。又 $d(x_{n_k},y_{n_k})<1/n_k\\to0$，于是 $y_{n_k}\\to x$ 也成立（夹在 $x_{n_k}$ 与 $x$ 之间）。由 $f$ 连续，$f(x_{n_k})\\to f(x)$ 且 $f(y_{n_k})\\to f(x)$，故\\n$$|f(x_{n_k})-f(y_{n_k})|\\le|f(x_{n_k})-f(x)|+|f(x)-f(y_{n_k})|\\longrightarrow0,$$\\n与它恒 $\\ge\\varepsilon$ 矛盾。所以 $f$ 一致连续。\\n\\n紧性不可去：$f(x)=1/x$ 在 $(0,1)$ 上连续但不一致连续。取 $x_n=\\dfrac1n$，$y_n=\\dfrac{1}{n+1}$，则 $|x_n-y_n|=\\dfrac{1}{n(n+1)}\\to0$，而 $|f(x_n)-f(y_n)|=|n-(n+1)|=1$ 恒为 $1$，取 $\\varepsilon=\\tfrac12$ 即违反一致连续的定义。根本原因正是 $(0,1)$ 不紧。"
+      }
+    ],
+    "tags": [
+      "列紧",
+      "全有界",
+      "Heine-Borel",
+      "一致连续",
+      "勒贝格数引理",
+      "无穷维反例"
+    ],
+    "links": [
+      "compactness",
+      "metric-space",
+      "complete-metric-space",
+      "continuity-theorems",
+      "countability-axioms"
+    ]
+  },
+  {
+    "id": "connectedness",
+    "title": "连通性与道路连通性",
+    "titleEn": "Connectedness and Path Connectedness",
+    "branch": "topology",
+    "level": 5,
+    "summary": "「一整块、没被切开」的拓扑表述：不能写成两个非空不交开集之并；道路连通更强，但两者之间有著名的拓扑学家的正弦曲线。",
+    "summaryEn": "The topological meaning of 「one piece」: the space cannot be split into two disjoint nonempty open sets. Path connectedness is stronger, and the topologist's sine curve separates the two notions.",
+    "definition": "**连通性**说的是「整块、没被切开」。拓扑空间 $X$ 称为**连通**（connected），若它不能写成两个非空不交开集的并：不存在开集 $U,V$ 使 $U\\ne\\varnothing$，$V\\ne\\varnothing$，$U\\cap V=\\varnothing$，$X=U\\cup V$（这样的一对 $U,V$ 叫做 $X$ 的一个**分离**）。由于此时 $V=X\\setminus U$，集合 $U$ 既开又闭，所以定义还可以等价地说成：$X$ 中除 $\\varnothing$ 与 $X$ 自身外，没有既开又闭的子集。把「开」换成「闭」也一样成立——互补的两个集合一个开另一个就自动是闭，于是「两个非空不交开集」与「两个非空不交闭集」两种说法完全等价。\\n\\n子集 $A\\subset X$ 连通，指 $A$ 配上子空间拓扑连通。实用的判别法是：$A$ 不连通，当且仅当存在 $X$ 中的开集 $U,V$ 使 $A\\subset U\\cup V$，$A\\cap U\\ne\\varnothing$，$A\\cap V\\ne\\varnothing$，$A\\cap U\\cap V=\\varnothing$。注意 $U,V$ 要取在**大空间 $X$** 中，不能随手换成 $A$ 中的开集。\\n\\n**道路连通**是另一个更直观的概念：若对任意 $x,y\\in X$ 都存在连续映射 $\\gamma:[0,1]\\to X$ 使 $\\gamma(0)=x$、$\\gamma(1)=y$，就称 $X$ **道路连通**（path connected），$\\gamma$ 称为连接 $x,y$ 的**道路**——直观上就是「能在空间内部从一点走到另一点」。因为 $[0,1]$ 连通，连续像 $\\gamma([0,1])$ 也连通；固定基点 $x_0$，每个点都由一条与 $x_0$ 相连的连通集提供，这些集合有公共点 $x_0$，它们的并（即 $X$）连通。所以**道路连通 ⇒ 连通**。反过来**不成立**，最著名的反例是**拓扑学家的正弦曲线**：$y=\\sin(1/x)$ 在 $x\\to0^+$ 时振荡得越来越快，它连同极限线段的并集连通，却没有任何道路能从竖直线段走到振荡的曲线上。\\n\\n为了说清「块」的分解，引入**连通分支**：按「存在连通集同时包含这两点」这一等价关系分类，每个等价类称为一个**连通分支**，它恰是极大的连通子集；各分支两两不交、并为全空间，且每个分支在 $X$ 中都是闭集。类似地用「存在连接两点的道路」定义**道路连通分支**。一条道路的像是连通集，所以每个道路连通分支都含在某个连通分支里，道路连通分支的划分比连通分支**更细**：拓扑学家的正弦曲线只有一个连通分支，却有两个道路连通分支。当空间**局部道路连通**（每点有道路连通的邻域基，例如 $\\mathbb{R}^n$ 的任何开子集）时两者一致：此时连通 ⟺ 道路连通，并且每个分支既开又闭。",
+    "definitionEn": "**Connectedness** is the precise meaning of 「one single piece」. A topological space $X$ is **connected** if it cannot be written as the union of two disjoint nonempty open sets: there are no open $U,V$ with $U\\ne\\varnothing$, $V\\ne\\varnothing$, $U\\cap V=\\varnothing$, $X=U\\cup V$ (such a pair is called a **separation** of $X$). Since then $V=X\\setminus U$, the set $U$ is both open and closed, so equivalently: apart from $\\varnothing$ and $X$ itself, no subset of $X$ is both open and closed. Replacing 「open」 by 「closed」 gives the same notion, because complementary sets are automatically one open and one closed — hence 「two disjoint nonempty open sets」 and 「two disjoint nonempty closed sets」 are interchangeable.\\n\\nA subset $A\\subset X$ is connected when $A$ with the subspace topology is connected. A practical criterion: $A$ is disconnected iff there are open sets $U,V$ **of $X$** with $A\\subset U\\cup V$, $A\\cap U\\ne\\varnothing$, $A\\cap V\\ne\\varnothing$, $A\\cap U\\cap V=\\varnothing$.\\n\\n**Path connectedness** is the more intuitive notion: $X$ is **path connected** if for all $x,y\\in X$ there is a continuous $\\gamma:[0,1]\\to X$ with $\\gamma(0)=x$, $\\gamma(1)=y$; $\\gamma$ is a **path** from $x$ to $y$. Since $[0,1]$ is connected, each image $\\gamma([0,1])$ is connected, and fixing a base point $x_0$ the connected sets joining the points of $X$ to $x_0$ share $x_0$, so their union $X$ is connected: **path connected implies connected**. The converse **fails**, the traditional counterexample being the **topologist's sine curve**: $y=\\sin(1/x)$ oscillates faster and faster as $x\\to0^+$, and the curve together with its limiting vertical segment is connected, yet no path leads from that segment into the oscillating part.\\n\\nTo describe the pieces one introduces **components**: declaring two points equivalent when some connected set contains both, each equivalence class is a **connected component**, exactly a maximal connected subset; components are pairwise disjoint, cover $X$, and each is closed in $X$. Replacing 「connected」 by 「joined by a path」 gives **path components**. Since the image of a path is connected, every path component lies inside a connected component, so the path components form a **finer** partition: the topologist's sine curve has one connected component but two path components. When the space is **locally path connected** (every point has a base of path connected neighbourhoods — every open subset of $\\mathbb{R}^n$, for instance), the two notions agree: connected iff path connected, and every component is both open and closed.",
+    "formulas": [
+      {
+        "latex": "X\\ \\text{连通}\\iff \\nexists\\ U,V\\ \\text{非空不交开集}:\\ X=U\\cup V\\iff \\text{只有}\\ \\varnothing\\ \\text{与}\\ X\\ \\text{既开又闭}",
+        "note": "主定义，三种等价写法：不能拆成两个非空不交开集 / 不能拆成两个非空不交闭集 / 没有非平凡的既开又闭子集。",
+        "noteEn": "The definition in three equivalent forms: no separation by disjoint nonempty open sets, none by closed sets, and no nontrivial clopen subset."
+      },
+      {
+        "latex": "f:X\\to Y\\ \\text{连续},\\ X\\ \\text{连通}\\ \\Longrightarrow\\ f(X)\\ \\text{连通}",
+        "note": "连通性被连续映射保持。取 $X=[a,b]$、$Y=\\mathbb{R}$ 即得**介值定理**：连续函数取遍介于两端值之间的一切值。",
+        "noteEn": "Continuous images of connected sets are connected. With $X=[a,b]$ and $Y=\\mathbb{R}$ this is the intermediate value theorem."
+      },
+      {
+        "latex": "A\\ \\text{连通}\\ \\Longrightarrow\\ \\overline{A}\\ \\text{连通};\\qquad A,B\\ \\text{连通},\\ A\\cap B\\ne\\varnothing\\ \\Longrightarrow\\ A\\cup B\\ \\text{连通}",
+        "note": "闭包保持连通；有公共点的连通集之并连通。两条一起解释了为什么「连通集加极限点」仍然连通。",
+        "noteEn": "Closures of connected sets are connected, and a union of connected sets with a common point is connected — adding limit points never disconnects a connected set."
+      },
+      {
+        "latex": "A\\subset\\mathbb{R}\\ \\text{连通}\\iff A\\ \\text{是区间}",
+        "note": "实数轴上的连通子集恰是区间（含单点集、开区间、闭区间、半开区间与无限区间）。这为介值定理提供了拓扑解释。",
+        "noteEn": "The connected subsets of $\\mathbb{R}$ are exactly the intervals, which is the topological explanation of the intermediate value theorem."
+      },
+      {
+        "latex": "\\text{道路连通}\\ \\Longrightarrow\\ \\text{连通};\\qquad \\text{反之不成立：}\\ S=\\Big\\{\\big(x,\\sin\\tfrac1x\\big):0<x\\le1\\Big\\}\\cup\\big(\\{0\\}\\times[-1,1]\\big)",
+        "note": "蕴含方向只有一个。$S$ 连通但不道路连通：它只有一个连通分支，却有两个道路连通分支。",
+        "noteEn": "The implication goes one way only. The topologist's sine curve $S$ is connected but not path connected: one connected component, two path components."
+      }
+    ],
+    "expression": {
+      "text": "X 连通：X ≠ U ∪ V（U, V 非空不交开集）；道路连通：∀x,y ∃连续 γ: [0,1] → X, γ(0)=x, γ(1)=y",
+      "symbol": "道路连通 ⇒ 连通",
+      "note": "判别流程：先查连通分支个数（连通性的粗筛）；要证道路连通，写出显式 γ；要证不道路连通，常用反证＋介值定理制造振荡矛盾。",
+      "noteEn": "Workflow: count components first; to prove path connectedness exhibit explicit paths; to disprove it, argue by contradiction using the intermediate value theorem to force oscillations."
+    },
+    "properties": [
+      "$\\mathbb{R}$ 的连通子集恰是区间。连通与紧是彼此独立的条件：$[0,1]$ 既连通又紧，$(0,1)$ 连通但不紧，$\\{0,1\\}$ 紧却不连通。",
+      "连通集的连续像连通（介值定理就是它的特例）；连通的**闭包仍连通**；有公共点的连通集族之并连通。由此 $\\Gamma=\\{(x,\\sin(1/x)):0<x\\le1\\}$ 连通，而拓扑学家的正弦曲线 $S=\\overline{\\Gamma}$ 也连通。",
+      "道路连通 ⇒ 连通，反之不成立。相应地**连通分支**比**道路连通分支**粗：拓扑学家的正弦曲线只有一个连通分支，却有两个道路连通分支（一段竖直线段，一条振荡曲线）。",
+      "连通分支是极大连通子集，两两不交、并为全空间，且每个分支在 $X$ 中闭。若空间**局部连通**（每点有连通邻域基），则每个分支既开又闭；若空间**局部道路连通**，则连通 ⟺ 道路连通。",
+      "连通性是可用于区分空间的不变量：$\\mathbb{R}$ 与 $\\mathbb{R}^2$ 不同胚——挖去一点后 $\\mathbb{R}\\setminus\\{0\\}$ 不连通，而 $\\mathbb{R}^2\\setminus\\{p\\}$ 仍道路连通。同胚保持连通性与道路连通性。"
+    ],
+    "propertiesEn": [
+      "The connected subsets of $\\mathbb{R}$ are exactly the intervals. Connectedness and compactness are independent: $[0,1]$ is both, $(0,1)$ is connected but not compact, and $\\{0,1\\}$ is compact but disconnected.",
+      "Continuous images of connected sets are connected (the intermediate value theorem is the special case); the **closure of a connected set is connected**; a union of connected sets with a common point is connected. Hence both $\\Gamma=\\{(x,\\sin(1/x)):0<x\\le1\\}$ and the topologist's sine curve $S=\\overline{\\Gamma}$ are connected.",
+      "Path connected implies connected, but not conversely, and accordingly **connected components** are coarser than **path components**: the topologist's sine curve has one connected component and two path components (the vertical segment, and the oscillating curve).",
+      "Components are maximal connected subsets; they are pairwise disjoint, cover the space, and each is closed in $X$. If the space is **locally connected** each component is also open; if it is **locally path connected** then connected iff path connected.",
+      "Connectedness distinguishes spaces: $\\mathbb{R}$ and $\\mathbb{R}^2$ are not homeomorphic, since after deleting one point $\\mathbb{R}\\setminus\\{0\\}$ is disconnected while $\\mathbb{R}^2\\setminus\\{p\\}$ stays path connected. Both connectedness and path connectedness are homeomorphism invariants."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/x",
+          "color": "#4cc9f0",
+          "label": "y = 1/x"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -4,
+        4
+      ],
+      "title": "y = 1/x 的图形分成互不相连的两支：y 轴（x = 0）把它们隔开，整体不连通"
+    },
+    "examples": [
+      {
+        "problem": "证明拓扑学家的正弦曲线 $S=\\{(x,\\sin\\frac1x):0<x\\le1\\}\\cup\\big(\\{0\\}\\times[-1,1]\\big)$ 连通，但不是道路连通。",
+        "solution": "**连通**：令 $\\Gamma=\\{(x,\\sin\\frac1x):0<x\\le1\\}$。$\\Gamma$ 是连续映射 $x\\mapsto(x,\\sin\\frac1x)$ 在连通集 $(0,1]$ 上的像，故连通。又 $S=\\overline{\\Gamma}$：对任意 $y\\in[-1,1]$，可取 $x_k\\to0^+$ 使 $\\sin\\frac1{x_k}=y$（例如取 $\\frac1{x_k}=\\arcsin y+2k\\pi$），于是 $(0,y)\\in\\overline{\\Gamma}$；而 $\\Gamma$ 中的点显然都在 $S$ 内。由「连通的闭包连通」，$\\overline{\\Gamma}=S$ 连通。\\n\\n**不道路连通**：反设有连续道路 $p:[0,1]\\to S$ 从 $(0,y_0)\\in\\{0\\}\\times[-1,1]$ 出发、终点落在 $\\Gamma$ 上（连接轴上一点与曲线上一点的道路只要存在，就可重新参数化）。以 $x(p(t))$ 记横坐标，令\\n$$t_0=\\sup\\{t\\in[0,1]:x(p(t))=0\\}.$$\\n因终点横坐标 $>0$，有 $t_0<1$；又横坐标连续，故 $x(p(t_0))=0$，而当 $t>t_0$ 时必有 $x(p(t))>0$（否则与上确界定义矛盾），即 $p(t)\\in\\Gamma$。\\n\\n记 $s(t)=x(p(t))$。在 $(t_0,t_1]$ 上 $s>0$ 连续，且 $s(t)\\to s(t_0)=0$（$t\\to t_0^+$）。于是对任意 $\\varepsilon>0$，先取 $t_1\\in(t_0,t_0+\\varepsilon)$ 使 $s(t_1)$ 很小，再由介值定理 $s$ 在 $(t_0,t_1)$ 上取遍 $(0,s(t_1))$ 中的一切值，因此其中存在点使 $\\sin\\frac1{s(t)}=1$，也存在点使 $\\sin\\frac1{s(t)}=-1$。也就是说，无论 $\\varepsilon$ 多小，$(t_0,t_0+\\varepsilon)$ 内都有横坐标对应的纵坐标为 $1$ 的点，也有纵坐标为 $-1$ 的点。\\n\\n另一方面 $p$ 连续给出 $y(p(t))=\\sin\\frac1{s(t)}\\to y(p(t_0))=y_0\\in[-1,1]$。取 $\\varepsilon$ 使该邻域落入 $(y_0-\\tfrac12,y_0+\\tfrac12)$：但 $1$ 与 $-1$ 相差 $2$，不可能同时落在一个长为 $1$ 的区间里，矛盾（若 $y_0\\le0$ 则纵坐标 $1$ 的点越界，若 $y_0\\ge0$ 则纵坐标 $-1$ 的点越界）。故不存在这样的道路，$S$ 不道路连通。\\n\\n结论：$S$ 连通但非道路连通，所以「道路连通」严格强于「连通」，且连通分支比道路连通分支粗。"
+      },
+      {
+        "problem": "利用连通性证明 $\\mathbb{R}$ 与 $\\mathbb{R}^2$ 不同胚。",
+        "solution": "反设存在同胚 $h:\\mathbb{R}\\to\\mathbb{R}^2$，令 $p=h(0)$。把 $h$ 限制在 $\\mathbb{R}\\setminus\\{0\\}$ 上，得到同胚\\n$$h|_{\\mathbb{R}\\setminus\\{0\\}}:\\ \\mathbb{R}\\setminus\\{0\\}\\ \\longrightarrow\\ \\mathbb{R}^2\\setminus\\{p\\}.$$\\n（双射与连续性、逆映射的连续性都继承自 $h$。）\\n\\n但 $\\mathbb{R}\\setminus\\{0\\}=(-\\infty,0)\\cup(0,\\infty)$ 是两个非空不交开集之并，**不连通**；而 $\\mathbb{R}^2\\setminus\\{p\\}$ 道路连通：任给两点 $a,b$，若线段 $ab$ 不经过 $p$，走这条线段；若经过 $p$，取直线 $ab$ 外的一点 $q$（这样的点一定存在），则折线 $a\\to q\\to b$ 的两条线段都不经过 $p$（因为它们除端点外都离开直线 $ab$），再沿两条线段分别走直线即可。\\n\\n若 $\\mathbb{R}\\setminus\\{0\\}\\cong\\mathbb{R}^2\\setminus\\{p\\}$，则连续满射（同胚）会把连通空间 $\\mathbb{R}^2\\setminus\\{p\\}$ 映成连通空间，与 $\\mathbb{R}\\setminus\\{0\\}$ 不连通矛盾。故 $\\mathbb{R}$ 与 $\\mathbb{R}^2$ 不同胚。（这一步只用到「删去一点后的连通性」，它已足以区分 $\\mathbb{R}$ 与 $\\mathbb{R}^n\\ (n\\ge2)$；若要比较 $\\mathbb{R}^m$ 与 $\\mathbb{R}^n\\ (m,n\\ge2)$，需要同调群、Brouwer 不动点定理等更强的工具。）"
+      }
+    ],
+    "tags": [
+      "连通性",
+      "道路连通",
+      "连通分支",
+      "拓扑学家的正弦曲线",
+      "介值定理",
+      "局部道路连通"
+    ],
+    "links": [
+      "topological-space",
+      "continuity",
+      "compactness",
+      "metric-space",
+      "fundamental-group"
+    ]
+  },
+  {
+    "id": "countability-axioms",
+    "title": "可数性公理与可分性",
+    "titleEn": "Countability Axioms and Separability",
+    "branch": "topology",
+    "level": 5,
+    "summary": "第一可数、第二可数、可分、Lindelöf：衡量空间「有多小」的四个刻度；在度量空间里它们恰好塌缩为同一个条件。",
+    "summaryEn": "First countable, second countable, separable, Lindelöf — four measures of how small a space is; in metric spaces they all collapse into one condition.",
+    "definition": "**第一可数公理（$C_1$）**：空间 $X$ 的每个点 $x$ 都有**可数的邻域基**——存在可数个邻域 $B_1(x),B_2(x),\\dots$，使得 $x$ 的每个邻域都包含其中某个 $B_n(x)$。直观地说，在每一点「邻近关系可以用可数多条信息描述」。度量空间自动满足 $C_1$（取 $B(x,1/n)$ 即可），而 $C_1$ 的作用在于：在 $C_1$ 空间里序列仍然足以刻画收敛与连续。\\n\\n**第二可数公理（$C_2$）**：整个拓扑有**可数基**——存在可数个开集 $\\mathcal{B}=\\{B_1,B_2,\\dots\\}$，使每个开集都是 $\\mathcal{B}$ 中若干成员的并（等价地：对每个开集 $U$ 与每个 $x\\in U$，存在 $B\\in\\mathcal{B}$ 使 $x\\in B\\subset U$）。$\\mathbb{R}$ 满足 $C_2$（以有理端点的开区间为基），$\\mathbb{R}^n$ 亦然；$C_2$ 对子空间遗传，故 $\\mathbb{R}^n$ 的任何子空间也满足（但一般度量空间不必是 $C_2$）。$C_2$ 蕴含 $C_1$：把可数基中所有含 $x$ 的成员取出来，就是 $x$ 的可数邻域基。\\n\\n另外还有两个「小」的性质。**可分**：存在可数稠密子集 $D$，即 $\\overline{D}=X$，例如 $\\mathbb{Q}\\subset\\mathbb{R}$。**Lindelöf**：每个开覆盖都有**可数**子覆盖（紧性要求有限子覆盖，这里放宽成可数）。基本蕴含关系是\\n$$C_2\\Rightarrow C_1,\\qquad C_2\\Rightarrow \\text{可分},\\qquad C_2\\Rightarrow \\text{Lindelöf},$$\\n这三条都不难证：从每个基元素里取一点就得到可数稠密集（可数基的成员只需非空即可取点）；用基元素把开覆盖细化，每个基元素含于某个覆盖成员，取这些基元素即得可数子覆盖。\\n\\n关键在于**反向一般不成立**。可分 ⇏ $C_2$：下限拓扑（Sorgenfrey）直线中 $\\mathbb{Q}$ 稠密，却没有可数基；可分 ⇏ Lindelöf：下限拓扑平面可分而非 Lindelöf；$C_1$ ⇏ Lindelöf：不可数离散空间满足 $C_1$ 却没有可数子覆盖。但在**度量空间**中三个条件全部塌缩成一个：\\n$$\\text{可分}\\iff C_2\\iff \\text{Lindelöf}\\qquad(\\text{度量空间}),$$\\n这是度量空间理论的便利之处——想验证 $C_2$ 或 Lindelöf，只需造出一个可数稠密集。",
+    "definitionEn": "The **first countability axiom ($C_1$)**: every point $x$ of $X$ has a **countable neighbourhood base** — countably many neighbourhoods $B_1(x),B_2(x),\\dots$ such that every neighbourhood of $x$ contains some $B_n(x)$. Informally, nearness at each point can be described by countably much information. Every metric space satisfies $C_1$ (take $B(x,1/n)$), and the point of $C_1$ is that sequences still suffice to describe convergence and continuity.\\n\\nThe **second countability axiom ($C_2$)**: the topology has a **countable base** — countably many open sets $\\mathcal{B}=\\{B_1,B_2,\\dots\\}$ such that every open set is a union of members of $\\mathcal{B}$ (equivalently, for every open $U$ and $x\\in U$ there is $B\\in\\mathcal{B}$ with $x\\in B\\subset U$). The real line satisfies $C_2$ (open intervals with rational endpoints form a base), and so does $\\mathbb{R}^n$. $C_2$ implies $C_1$: the members of the countable base containing $x$ form a countable neighbourhood base at $x$.\\n\\nTwo further smallness properties: **separable** — there is a countable dense subset $D$, i.e. $\\overline D=X$, for instance $\\mathbb{Q}\\subset\\mathbb{R}$; and **Lindelöf** — every open cover has a **countable** subcover (compactness would demand finitely many, here countably many are allowed). The basic implications are $C_2\\Rightarrow C_1$, $C_2\\Rightarrow$ separable, $C_2\\Rightarrow$ Lindelöf, all easy: picking one point from each nonempty member of a countable base gives a countable dense set, while refining an open cover by base elements gives a countable subcover.\\n\\nThe crucial point is that the converses **fail in general**. Separable does not imply $C_2$: in the Sorgenfrey (lower limit) line $\\mathbb{Q}$ is dense yet there is no countable base. Separable does not imply Lindelöf: the Sorgenfrey plane is separable but not Lindelöf. And $C_1$ does not imply Lindelöf: an uncountable discrete space is $C_1$ yet has no countable subcover. In a **metric space**, however, all three collapse into one condition: separable $\\iff$ $C_2$ $\\iff$ Lindelöf. That is the convenience of metric space theory — verifying second countability or the Lindelöf property amounts to exhibiting a countable dense set.",
+    "formulas": [
+      {
+        "latex": "C_1:\\ \\forall x\\ \\exists\\{B_n(x)\\}_{n\\in\\mathbb{N}}\\ \\text{可数邻域基}:\\ \\forall U\\ni x\\ \\text{开}\\ \\exists n,\\ B_n(x)\\subset U",
+        "note": "第一可数公理。度量空间自动满足（$B(x,1/n)$）；$C_1$ 的价值在于序列足以刻画收敛与连续。",
+        "noteEn": "First countability. Metric spaces satisfy it via $B(x,1/n)$; its value is that sequences then describe convergence and continuity."
+      },
+      {
+        "latex": "C_2:\\ \\exists \\mathcal{B}=\\{B_1,B_2,\\dots\\}\\ \\text{可数基}:\\ \\forall U\\ \\text{开},\\ \\forall x\\in U\\ \\exists B\\in\\mathcal{B},\\ x\\in B\\subset U",
+        "note": "第二可数公理＝整个拓扑有可数基。$\\mathbb{R}$（以有理端点的开区间为基）与 $\\mathbb{R}^n$ 都满足 $C_2$。",
+        "noteEn": "Second countability: the topology has a countable base. Both $\\mathbb{R}$ (rational-endpoint intervals) and $\\mathbb{R}^n$ satisfy it."
+      },
+      {
+        "latex": "C_2\\ \\Longrightarrow\\ C_1,\\qquad C_2\\ \\Longrightarrow\\ \\text{可分},\\qquad C_2\\ \\Longrightarrow\\ \\text{Lindelöf}",
+        "note": "三条基本蕴含。反向一般不成立，反例：下限拓扑直线（可分非 $C_2$）、下限拓扑平面（可分非 Lindelöf）、不可数离散空间（$C_1$ 非 Lindelöf）。",
+        "noteEn": "The three basic implications. The converses fail in general: the Sorgenfrey line is separable but not $C_2$, the Sorgenfrey plane is separable but not Lindelöf, and an uncountable discrete space is $C_1$ but not Lindelöf."
+      },
+      {
+        "latex": "\\text{可分}:\\ \\exists D\\ \\text{可数}:\\ \\overline{D}=X;\\qquad \\text{Lindelöf}:\\ \\text{每个开覆盖有可数子覆盖}",
+        "note": "两个「小」性质的定义。紧 ⇒ Lindelöf（有限子覆盖自动可数）；可分空间的子空间不必可分。",
+        "noteEn": "Definitions of the two smallness properties. Compact implies Lindelöf (finite subcovers are countable); separability is not hereditary."
+      },
+      {
+        "latex": "(X,d)\\ \\text{度量空间}:\\qquad \\text{可分}\\iff C_2\\iff \\text{Lindelöf}",
+        "note": "度量空间的特权：三个刻度塌缩成一个。因此度量空间里验证 $C_2$ 只需造可数稠密集。",
+        "noteEn": "The metric-space privilege: the four measurements collapse into one, so exhibiting a countable dense set suffices for $C_2$."
+      }
+    ],
+    "expression": {
+      "text": "C₁：每点有可数邻域基（度量空间自动）；C₂：拓扑有可数基；可分：有可数稠密子集；Lindelöf：开覆盖有可数子覆盖",
+      "symbol": "C₂ ⇒ C₁、可分、Lindelöf；度量空间：可分 ⟺ C₂ ⟺ Lindelöf",
+      "note": "记忆要点：蕴含方向只有从 $C_2$ 出发的三个箭头；「可分 ⇒ $C_2$」必须加上度量空间这个前提。",
+      "noteEn": "Remember: the arrows start from $C_2$; the implication 「separable implies $C_2$」 needs the metric-space hypothesis."
+    },
+    "properties": [
+      "蕴含链只有三个方向：$C_2\\Rightarrow C_1$、$C_2\\Rightarrow$ 可分、$C_2\\Rightarrow$ Lindelöf，反向都不成立——可分不必 $C_2$（下限拓扑直线），可分不必 Lindelöf（下限拓扑平面），$C_2$ 也不必紧（$\\mathbb{R}$）。",
+      "度量空间里三者等价。证明「可分 ⇒ $C_2$」：取可数稠密集 $D$，令 $\\mathcal{B}=\\{B(d,1/n):d\\in D,\\ n\\ge1\\}$，这是可数族；给定开集 $U$ 与 $x\\in U$，取 $r>0$ 使 $B(x,r)\\subset U$，再取 $n$ 与 $d\\in D$ 使 $1/n<r/2$ 且 $d(x,d)<1/n$，于是 $x\\in B(d,1/n)\\subset B(x,r)\\subset U$。故 $\\mathcal{B}$ 是基。",
+      "紧空间一定是 Lindelöf（有限子覆盖本身就是可数子覆盖），紧度量空间必可分、必 $C_2$：对每个 $n$ 取有限的 $1/n$-网，所有网心合起来就是可数稠密集。",
+      "遗传性：$C_1$ 与 $C_2$ 都能传给子空间，也都在可数积下保持（$C_1$、$C_2$ 只对**可数**积封闭，不可数积一般不 $C_1$）。可分性**不遗传**：下限拓扑平面可分，但它的反对角线 $\\{(x,-x)\\}$ 是离散的不可数子空间，不可分。",
+      "度量化：**乌雷松度量化定理**说「正则 + $C_2$ ⇒ 可度量化」，所以 $C_2$ 是度量化理论的核心条件；另一个经典结论是「Lindelöf + 正则 ⇒ 正规」，两者都把可数性条件转化为分离性结论。"
+    ],
+    "propertiesEn": [
+      "Only three implications hold: $C_2$ implies $C_1$, separability and the Lindelöf property. All converses fail — separable need not be $C_2$ (Sorgenfrey line), separable need not be Lindelöf (Sorgenfrey plane), and $C_2$ need not be compact ($\\mathbb{R}$).",
+      "In a metric space the three notions coincide. Proof of 「separable implies $C_2$」: take a countable dense $D$ and let $\\mathcal{B}=\\{B(d,1/n):d\\in D,n\\ge1\\}$, a countable family; given open $U$ and $x\\in U$ choose $r>0$ with $B(x,r)\\subset U$, then $n$ and $d\\in D$ with $1/n<r/2$ and $d(x,d)<1/n$, so $x\\in B(d,1/n)\\subset B(x,r)\\subset U$.",
+      "Compact spaces are Lindelöf (a finite subcover is countable), and compact metric spaces are separable and $C_2$: take a finite $1/n$-net for each $n$; the centres form a countable dense set.",
+      "$C_1$ and $C_2$ pass to subspaces and are preserved by **countable** products (uncountable products usually fail to be $C_1$). Separability, however, is **not hereditary**: the Sorgenfrey plane is separable while its anti-diagonal $\\{(x,-x)\\}$ is a discrete uncountable subspace.",
+      "Metrisation: the **Urysohn metrisation theorem** states that a regular space with a countable base is metrisable, so $C_2$ is central to metrisation theory; another classical result is that Lindelöf plus regular implies normal."
+    ],
+    "examples": [
+      {
+        "problem": "在下限拓扑（Sorgenfrey 拓扑）的实数轴 $(\\mathbb{R},\\mathcal{T}_{\\text{下限}})$ 上证明：它是可分的，却不是第二可数的。",
+        "solution": "下限拓扑的基取为所有形如 $[a,b)$（$a<b$）的半开区间；它的开集是这些区间的并。\\n\\n**可分**：证明 $\\mathbb{Q}$ 稠密。任取 $x\\in\\mathbb{R}$ 与其开邻域，不妨设该邻域就是基元素 $[a,b)$，$x\\in[a,b)$。区间 $[a,b)$ 的长度 $b-a>0$，故其中含有一个有理数 $q$（有理数在任意非退化区间内稠密），于是 $q\\in[a,b)$。这说明 $\\mathbb{Q}$ 与每个非空开集相交，$\\overline{\\mathbb{Q}}=\\mathbb{R}$，空间可分。\\n\\n**不 $C_2$**：反设 $\\mathcal{B}$ 是它的可数基。对每个 $x$，$[x,x+1)$ 是开集，故存在 $B_x\\in\\mathcal{B}$ 使 $x\\in B_x\\subset[x,x+1)$。注意每个 $B_x$ 是若干 $[a,b)$ 的并，由 $x\\in B_x\\subseteq[x,x+1)$ 知 $B_x$ 中每个元素都 $\\ge x$，故 $x=\\min B_x$。由 $B_x\\subset[x,x+1)$ 得 $\\min B_x\\ge x$；又 $x\\in B_x$ 得 $\\min B_x\\le x$；于是 $\\min B_x=x$。因此映射 $x\\mapsto B_x$ 是单射（$B_x$ 唯一决定 $x=\\min B_x$），但 $\\mathcal{B}$ 可数而 $x$ 跑遍不可数的 $\\mathbb{R}$，矛盾。故下限拓扑直线没有可数基，不 $C_2$。\\n\\n结论：$(\\mathbb{R},\\mathcal{T}_{\\text{下限}})$ 可分但不 $C_2$，说明「可分 ⇒ $C_2$」一般情形下不成立。（它的平方——下限拓扑平面——仍可分但不是 Lindelöf，故「可分 ⇒ Lindelöf」也不成立。）"
+      },
+      {
+        "problem": "证明紧度量空间必可分，从而必第二可数。",
+        "solution": "设 $(X,d)$ 紧。\\n\\n**第一步：全有界。** 固定 $n\\ge1$，考虑开覆盖 $\\{B(x,1/n):x\\in X\\}$（每个点都在自己的球里，故确实是覆盖）。由紧性取有限子覆盖\\n$$X=\\bigcup_{k=1}^{m_n}B\\big(x_k^{(n)},\\tfrac1n\\big).$$\\n这些 $x_k^{(n)}$ 构成一个有限的 $1/n$-网。（这一步就是「紧 ⇒ 全有界」。）\\n\\n**第二步：造可数稠密集。** 令\\n$$D=\\bigcup_{n=1}^{\\infty}\\big\\{x_1^{(n)},\\dots,x_{m_n}^{(n)}\\big\\},$$\\n它是可数多个有限集的并，故可数。\\n\\n**第三步：验证稠密。** 任取 $x\\in X$ 与 $r>0$，取 $n$ 使 $1/n<r$。由第一步，$x\\in B(x_k^{(n)},1/n)$ 对某个 $k$ 成立，即 $d(x,x_k^{(n)})<1/n<r$，而 $x_k^{(n)}\\in D$。于是每个球 $B(x,r)$ 都含 $D$ 中的点，故 $\\overline{D}=X$，$D$ 是 $X$ 的可数稠密子集，$X$ 可分。\\n\\n**第四步：$C_2$。** 由度量空间中「可分 ⇒ $C_2$」，$\\mathcal{B}=\\{B(d,1/n):d\\in D,\\,n\\ge1\\}$ 是可数基，故 $X$ 第二可数。\\n\\n附带结论：紧 Hausdorff 空间不必 $C_2$（例如某些不可数积），但**紧度量**空间一定 $C_2$——这正是度量空间的额外好处。"
+      }
+    ],
+    "tags": [
+      "第一可数",
+      "第二可数",
+      "可分",
+      "Lindelöf",
+      "Sorgenfrey 直线",
+      "乌雷松度量化定理"
+    ],
+    "links": [
+      "topological-space",
+      "basis-subbasis",
+      "metric-space",
+      "separation-axioms",
+      "compactness-metric"
+    ]
+  },
+  {
+    "id": "tychonoff-theorem",
+    "title": "吉洪诺夫定理",
+    "titleEn": "Tychonoff's Theorem",
+    "branch": "topology",
+    "level": 5,
+    "summary": "任意多个紧空间之积（配积拓扑）仍然紧；这里的「任意」不仅包含无限，还与选择公理等价。",
+    "summaryEn": "An arbitrary product of compact spaces is compact in the product topology; the 「arbitrary」 is essential, and the theorem is equivalent to the axiom of choice.",
+    "definition": "**吉洪诺夫定理**（Tychonoff's theorem，1930）：设 $\\{X_i\\}_{i\\in I}$ 是一族紧拓扑空间，则装备**积拓扑**的积空间\\n$$X=\\prod_{i\\in I}X_i=\\{(x_i)_{i\\in I}:x_i\\in X_i\\}$$\\n也是紧空间。只有两句话，但每一句都要留意：其一，指标集 $I$ 是**任意**的，可以无限、可以不可数；其二，拓扑必须是**积拓扑**（由投影 $\\pi_i:X\\to X_i$ 的原像 $\\pi_i^{-1}(U_i)$ 生成，等价于「坐标逐个收敛」的那种拓扑），换成箱拓扑结论就**不成立**。\\n\\n有限情形是初等的：$X_1\\times X_2$ 紧可以用**管引理**（tube lemma）直接证明——若开集 $W$ 包含整条「横梁」$\\{x_0\\}\\times Y$，则存在 $x_0$ 的邻域 $U$ 使整根「管子」$U\\times Y$ 落在 $W$ 内。有限多个因子归纳地处理，全程不需要选择公理。真正的困难出现在无限积：覆盖的组合方式有不可数多种，证明必须借助工具。标准路线是**亚历山大子基定理**——若存在一组**子基**，使每个由子基元素组成的开覆盖都有有限子覆盖，则空间紧——再用超滤子（或极大过滤子、超网）完成论证：证明每个超滤子都有聚点，而不含聚点的极大过滤子会导出矛盾。\\n\\n这条定理与选择公理的关系是拓扑学中最著名的逻辑现象。在 ZF（不加选择公理的集合论）中，**吉洪诺夫定理（对任意紧空间、任意指标集）与选择公理等价**（Kelley，1950）。若把空间限制为紧 **Hausdorff** 空间，则它与**超滤子引理**（等价于布尔素理想定理 BPI）等价，而 BPI 严格弱于选择公理——它在 ZF 中证不出来，却推不出完整的选择公理。所以「找不到不用选择公理的证明」不是技巧不够，而是逻辑必然。\\n\\n应用很广：$\\{0,1\\}^{\\mathbb{N}}$（Cantor 空间）、$[0,1]^{\\mathbb{N}}$（希尔伯特方体）、$[0,1]^{[0,1]}$、$\\prod_{n}[a_n,b_n]$ 全都紧；紧 Hausdorff 空间的任意积仍紧 Hausdorff，这为 Stone–Čech 紧化的存在性提供了基础；概率论中「无穷次抛硬币」的样本空间 $\\{0,1\\}^{\\mathbb{N}}$ 紧，使极限与聚点论证合法。更一般地，这条定理说明「紧」这种被推广到无限情形的有限性，能够通过任意乘积传递下去。",
+    "definitionEn": "**Tychonoff's theorem** (1930): if $\\{X_i\\}_{i\\in I}$ is a family of compact topological spaces, then the product space $X=\\prod_{i\\in I}X_i$ equipped with the **product topology** is compact. Two words deserve attention: the index set $I$ is **arbitrary** — infinite, even uncountable; and the topology must be the **product topology** (generated by the preimages $\\pi_i^{-1}(U_i)$ of the projections, the topology of coordinatewise convergence). With the box topology the statement is simply false.\\n\\nThe finite case is elementary: $X_1\\times X_2$ is compact by the **tube lemma** — if an open set $W$ contains the whole slice $\\{x_0\\}\\times Y$, then some neighbourhood $U$ of $x_0$ satisfies $U\\times Y\\subset W$ — and induction handles finitely many factors, with no use of the axiom of choice. The genuine difficulty is the infinite product, where covers can be combined in uncountably many ways. The standard route is **Alexander's subbase theorem** (if some subbase has the property that every cover by subbase elements has a finite subcover, the space is compact) together with ultrafilters (or maximal filters, or ultranets): one shows every ultrafilter has a cluster point, while a maximal filter without a cluster point leads to a contradiction.\\n\\nThe logical status of the theorem is the most famous such phenomenon in topology. In ZF, Tychonoff's theorem for arbitrary compact spaces is **equivalent to the axiom of choice** (Kelley, 1950). Restricted to compact **Hausdorff** spaces it is instead equivalent to the **ultrafilter lemma** (equivalently the Boolean prime ideal theorem, BPI), which is strictly weaker than choice: unprovable in ZF, yet unable to derive full choice. So the absence of a choice-free proof is a logical necessity, not a lack of technique.\\n\\nApplications abound: $\\{0,1\\}^{\\mathbb{N}}$ (Cantor space), $[0,1]^{\\mathbb{N}}$ (the Hilbert cube), $[0,1]^{[0,1]}$, and $\\prod_n[a_n,b_n]$ are all compact; arbitrary products of compact Hausdorff spaces remain compact Hausdorff, which underlies the existence of the Stone–Čech compactification; and in probability the sample space $\\{0,1\\}^{\\mathbb{N}}$ of infinitely many coin tosses is compact, making limiting and cluster-point arguments legitimate.",
+    "formulas": [
+      {
+        "latex": "\\Big(\\forall i\\in I,\\ X_i\\ \\text{紧}\\Big)\\ \\Longrightarrow\\ \\prod_{i\\in I}X_i\\ \\text{紧}\\quad(\\text{积拓扑},\\ I\\ \\text{任意})",
+        "note": "定理本体：任意（包括无限、不可数）多个紧空间之积紧。必须用积拓扑；箱拓扑下结论失效。",
+        "noteEn": "The theorem itself: an arbitrary (infinite, even uncountable) product of compact spaces is compact. The product topology is required — the box topology fails."
+      },
+      {
+        "latex": "X\\times Y\\ \\text{紧};\\qquad \\text{管引理}:\\ Y\\ \\text{紧},\\ \\{x_0\\}\\times Y\\subset W\\ \\text{开}\\ \\Longrightarrow\\ \\exists U\\ni x_0:\\ U\\times Y\\subset W",
+        "note": "有限积的初等证明工具：管引理把每条「横梁」加粗成整根管子。有限情形不需要选择公理。",
+        "noteEn": "The elementary tool for finite products: the tube lemma thickens each slice into a tube. Finitely many factors need no choice."
+      },
+      {
+        "latex": "\\text{积拓扑的基}:\\ \\Big\\{\\prod_{i\\in I}U_i:\\ U_i\\ \\text{开},\\ \\text{除有限多个}\\ i\\ \\text{外}\\ U_i=X_i\\Big\\}",
+        "note": "关键限制：非平凡的因子只有有限多个——这正是「坐标逐个收敛」的含义，也是定理成立的原因；去掉这一限制就是箱拓扑。",
+        "noteEn": "The key restriction: only finitely many factors are nontrivial. This is exactly coordinatewise convergence, and the reason the theorem holds; dropping it yields the box topology."
+      },
+      {
+        "latex": "\\text{ZF}\\ \\vdash\\ \\Big(\\text{吉洪诺夫定理（任意紧空间）}\\iff \\text{选择公理}\\Big)",
+        "note": "Kelley 1950：完整形式与选择公理等价。若限定紧 Hausdorff 空间，则等价于超滤子引理（BPI），后者严格弱于选择公理但在 ZF 中不可证。",
+        "noteEn": "Kelley (1950): the full form is equivalent to the axiom of choice. Restricted to compact Hausdorff spaces it is equivalent to the ultrafilter lemma (BPI), strictly weaker than choice yet unprovable in ZF."
+      },
+      {
+        "latex": "\\text{亚历山大子基定理}:\\ X\\ \\text{紧}\\iff \\text{每个由子基元素组成的开覆盖有有限子覆盖}",
+        "note": "标准证明路线的核心工具：积拓扑的子基是 $\\pi_i^{-1}(U)$；对子基覆盖逐坐标考察，正是「同时为每个坐标挑一个点」这一步用到了选择公理。",
+        "noteEn": "The core tool of the standard proof: a subbase for the product is given by the sets $\\pi_i^{-1}(U)$, and examining each coordinate — picking one point for every coordinate at once — is exactly where choice enters."
+      }
+    ],
+    "expression": {
+      "text": "∏ᵢ∈I Xᵢ 紧 ⟺ 每个 Xᵢ 紧（积拓扑；I 任意）",
+      "symbol": "∏ Xᵢ 紧",
+      "note": "使用清单：① 确认每个因子紧；② 确认用的是积拓扑（非平凡因子有限个）；③ 只要指标集无限，就要意识到结论依赖选择公理。",
+      "noteEn": "Checklist: every factor compact; the product topology (finitely many nontrivial factors); and for infinite $I$, remember the conclusion rests on the axiom of choice."
+    },
+    "properties": [
+      "「任意」是定理的本质：有限积的紧性可用管引理初等证明、不需要任何选择；任意（尤其不可数）多个因子的情形与选择公理等价，说明这种推广有真实的逻辑代价。",
+      "必须用**积拓扑**。箱拓扑下定理失效：此时 $D=\\{0,1\\}^{\\mathbb{N}}$ 是 $\\Box_{n\\in\\mathbb{N}}[0,1]$ 的无限闭离散子空间（每点用箱子 $\\prod_n(a_n-\\tfrac13,a_n+\\tfrac13)$ 就能被孤立），而紧空间不能含有无限闭离散子空间，故箱乘积不紧，尽管每个因子 $[0,1]$ 都紧。",
+      "必要性方向是平凡的：若 $\\prod_i X_i$ 紧，每个因子都是投影 $\\pi_i$ 的连续像（投影是连续满射），故紧。于是定理实际等价于「积空间紧 $\\iff$ 每个因子紧」。",
+      "推论与应用：任意多个紧 Hausdorff 空间之积仍紧 Hausdorff；$[0,1]^{I}$、$\\{0,1\\}^{\\mathbb{N}}$（Cantor 空间）、希尔伯特方体 $[0,1]^{\\mathbb{N}}$（还 $C_2$、可度量化）都紧；Stone–Čech 紧化 $\\beta X$ 的存在性正是把 $X$ 嵌进 $[0,1]^{C(X,[0,1])}$ 再取闭包。",
+      "逻辑上还有一层：吉洪诺夫定理在 ZF 中不可证，因此凡用到它的论证（$\\beta X$ 的存在性、Banach–Alaoglu 定理等紧性结果）都隐含选择原理。这也是拓扑学中「非构造性证明」讨论的经典入口。"
+    ],
+    "propertiesEn": [
+      "The word 「arbitrary」 is the heart of the theorem: finite products are compact by the tube lemma with no choice at all, whereas arbitrary (in particular uncountable) products are equivalent to the axiom of choice — the generalisation has a real logical cost.",
+      "The **product topology** is indispensable. In the box topology the theorem fails: $D=\\{0,1\\}^{\\mathbb{N}}$ is an infinite closed discrete subspace of $\\Box_{n\\in\\mathbb{N}}[0,1]$ (each point is isolated by the box $\\prod_n(a_n-\\tfrac13,a_n+\\tfrac13)$), and a compact space cannot contain an infinite closed discrete subspace — so the box product is not compact although every factor $[0,1]$ is.",
+      "The necessary direction is trivial: if $\\prod_i X_i$ is compact, each factor is a continuous image of the projection (a continuous surjection), hence compact. So the theorem is really the equivalence 「the product is compact iff every factor is」.",
+      "Consequences: arbitrary products of compact Hausdorff spaces stay compact Hausdorff; $[0,1]^{I}$, Cantor space $\\{0,1\\}^{\\mathbb{N}}$, and the Hilbert cube $[0,1]^{\\mathbb{N}}$ (second countable and metrisable too) are compact; the Stone–Čech compactification $\\beta X$ is built by embedding $X$ into $[0,1]^{C(X,[0,1])}$ and taking a closure.",
+      "Logically, Tychonoff's theorem is not provable in ZF, so any argument using it — existence of $\\beta X$, Banach–Alaoglu and similar compactness results — carries a hidden choice principle. This is the classical entry point for the discussion of non-constructive proofs in topology."
+    ],
+    "examples": [
+      {
+        "problem": "说明吉洪诺夫定理中的积拓扑不能换成箱拓扑：证明 $\\Box_{n\\in\\mathbb{N}}[0,1]$ 不紧，尽管每个因子 $[0,1]$ 都紧。",
+        "solution": "记 $D=\\prod_{n\\in\\mathbb{N}}\\{0,1\\}\\subset\\Box_{n\\in\\mathbb{N}}[0,1]$。\\n\\n**$D$ 是闭集**：$D=\\prod_n F_n$，其中 $F_n=\\{0,1\\}$ 在每个 $[0,1]$ 中是闭集。对任意 $x\\notin D$，存在坐标 $j$ 使 $x_j\\notin\\{0,1\\}$；取箱子 $\\prod_n V_n$，其中 $V_j=[0,1]\\setminus\\{0,1\\}$（在 $[0,1]$ 中开），其余 $V_n=[0,1]$。这个箱子含 $x$ 且与 $D$ 不交。所有这样的箱子之并就是 $[0,1]^{\\mathbb{N}}\\setminus D$，故补集开、$D$ 闭。\\n\\n**$D$ 是离散子空间**：对每个 $a\\in D$，箱子\\n$$\\prod_{n\\in\\mathbb{N}}\\big(a_n-\\tfrac13,\\ a_n+\\tfrac13\\big)\\cap[0,1]$$\\n是 $a$ 的邻域（在箱拓扑下允许无穷多个坐标取真子区间，这正是箱拓扑的强处），而它与 $D$ 只交于 $a$——因为每个坐标的因子长度小于 $1$，不可能再容下另一个 $0$ 或 $1$。故 $D$ 中每个单点集都是开集，$D$ 是离散空间，且不可数（与 $\\{0,1\\}^{\\mathbb{N}}$ 一一对应）。\\n\\n**矛盾**：若箱乘积紧，则其闭子集 $D$ 紧；但 $D$ 是无限离散空间，用开覆盖 $\\big\\{\\{a\\}:a\\in D\\big\\}$（每个单点集开）没有有限子覆盖，故 $D$ 不紧，矛盾。因此 $\\Box_{n\\in\\mathbb{N}}[0,1]$ 不紧。\\n\\n对照：同样的 $D$ 在**积拓扑**下不是离散的（积拓扑的邻域只允许有限多个坐标取真子区间），而由吉洪诺夫定理它是紧的——它就是 Cantor 空间。"
+      },
+      {
+        "problem": "用管引理证明两个紧空间之积紧，并指出为什么这个证明没有用到选择公理。",
+        "solution": "设 $X,Y$ 紧，$\\mathcal{U}$ 是 $X\\times Y$ 的开覆盖。\\n\\n**第一步（横梁装进管子）**：固定 $y\\in Y$。对每个 $x\\in X$，点 $(x,y)$ 落在某个 $U\\in\\mathcal{U}$ 中；由积拓扑的基，存在 $x$ 的邻域 $V_x$ 与 $y$ 的邻域 $W_x$ 使 $V_x\\times W_x\\subset U$。族 $\\{V_x\\}_{x\\in X}$ 覆盖紧空间 $X$，取有限子覆盖 $V_{x_1},\\dots,V_{x_n}$。令\\n$$W_y=W_{x_1}\\cap\\cdots\\cap W_{x_n},$$\\n它是 $y$ 的开邻域，且\\n$$X\\times W_y\\subset\\bigcup_{k=1}^{n}\\big(V_{x_k}\\times W_{x_k}\\big)\\subset\\bigcup_{k=1}^{n}U_{x_k}.$$\\n（这就是管引理：包含整条横梁 $X\\times\\{y\\}$ 的开集，必含一整根管子 $X\\times W_y$，且管子被 $\\mathcal{U}$ 中有限个成员覆盖。）\\n\\n**第二步（管子覆盖整个乘积）**：$\\{W_y\\}_{y\\in Y}$ 是紧空间 $Y$ 的开覆盖，取有限子覆盖 $W_{y_1},\\dots,W_{y_m}$。于是\\n$$X\\times Y=\\bigcup_{j=1}^{m}X\\times W_{y_j},$$\\n每个 $X\\times W_{y_j}$ 都被 $\\mathcal{U}$ 中有限个成员覆盖，把这 $m$ 组有限个成员合起来，就得到 $\\mathcal{U}$ 的一个有限子覆盖。故 $X\\times Y$ 紧。\\n\\n**为什么没有用到选择公理**：全程只做了「有限次选取」——第一步对固定的 $y$ 从有限子覆盖里挑成员，第二步从 $Y$ 的有限子覆盖里挑 $m$ 个 $y_j$。有限多次选择在 ZF 中总是合法的，不需要选择公理。困难出现在无限积：那里要**同时**为不可数多个坐标各挑一个点，正是这一步（亚历山大子基定理证明中「对每个 $i$ 取 $x_i$ 落在该坐标所有基元素之外」）使用了选择公理。"
+      }
+    ],
+    "tags": [
+      "吉洪诺夫定理",
+      "积拓扑",
+      "箱拓扑",
+      "选择公理",
+      "超滤子引理",
+      "康托尔空间"
+    ],
+    "links": [
+      "compactness",
+      "compactness-metric",
+      "separation-axioms",
+      "subspace-product-quotient",
+      "local-compactification"
+    ]
+  },
+  {
+    "id": "local-compactification",
+    "title": "局部紧性与紧化",
+    "titleEn": "Local Compactness and Compactification",
+    "branch": "topology",
+    "level": 5,
+    "summary": "每点都有紧邻域的空间可以补上一个无穷远点变成紧空间——实直线加一点就是圆周，Rⁿ 加一点就是球面。",
+    "summaryEn": "A space in which every point has a compact neighbourhood can be made compact by adjoining a single point at infinity: the line plus one point is a circle, Rⁿ plus one point is a sphere.",
+    "definition": "**局部紧**：空间 $X$ 称为局部紧，若每点 $x$ 都有**紧邻域**——存在开集 $U\\ni x$ 使 $\\overline{U}$ 紧（等价的表述：存在 $x$ 的邻域 $K$ 使 $K$ 紧）。在 Hausdorff 空间里两种说法一致，因为紧邻域内总可以取到闭的紧邻域。$\\mathbb{R}^n$ 局部紧（闭球是每点的紧邻域）却并不紧；$\\mathbb{Q}$ 不局部紧（它的紧子集都没有内点）；紧空间自然局部紧。局部紧 Hausdorff 空间是「局部行为与紧空间一样好」的空间，它必是完全正则（Tychonoff）的，因此分离性质与嵌入理论都能照常使用。\\n\\n**单点紧化（Alexandrov 紧化）**：设 $X$ 是局部紧 Hausdorff 空间且不紧。取一个新点 $\\infty$，令 $X^{*}=X\\cup\\{\\infty\\}$，拓扑规定为：$X$ 中原有的开集仍是开集，$\\infty$ 的邻域取形如\\n$$(X\\setminus K)\\cup\\{\\infty\\}\\qquad(K\\subset X\\ \\text{紧})$$\\n的集合，也就是「把 $X$ 中一个紧集挖掉，再补上 $\\infty$」。于是 $X^{*}$ 是紧 Hausdorff 空间，$X$ 在 $X^{*}$ 中稠密且是开子集。直观解释：$X$ 中「跑向无穷」的序列在 $X^*$ 里收敛到 $\\infty$——这一步把「无穷远」从一个说法实体化成一个点。\\n\\n最经典的例子是 $\\mathbb{R}$：$\\mathbb{R}^{*}=\\mathbb{R}\\cup\\{\\infty\\}$ 同胚于圆周 $S^{1}$。要看出这点，只需把 $\\mathbb{R}$ 用「球极投影」卷到圆周上（例如 $t\\mapsto\\big(\\frac{2t}{1+t^2},\\frac{1-t^2}{1+t^2}\\big)$），剩下的那一点就留给 $\\infty$：因为一条直线只有一个无穷远点，$t\\to+\\infty$ 与 $t\\to-\\infty$ 在 $\\mathbb{R}^{*}$ 中收敛到同一个点。一般地，$\\mathbb{R}^n$ 的单点紧化同胚于球面 $S^n$，球极投影把 $\\mathbb{R}^n$ 映满 $S^n$ 减去北极点，北极点就是 $\\infty$。所以「紧化」不是抽象游戏：直线加一个无穷远点**就是**圆周。\\n\\n紧化的用处是把「无穷」翻译成普通的点。例如 $\\lim_{x\\to\\infty}f(x)=L$ 等价于：$f$ 延拓到 $X^{*}$ 后在 $\\infty$ 处**连续**且取值 $L$；又例如「在无穷远处消失」的函数恰好是延拓后在 $\\infty$ 处取零的函数，这就是 $C_0(X)$ 与 $C(X^{*})$ 之间的对应。复分析里 $\\mathbb{C}\\cup\\{\\infty\\}$ 就是**黎曼球面**，它的去心邻域、极点以及在无穷远点的留数都在这个框架下定义；泛函分析中「消失函数」「紧算子」等概念也以紧化为背景。",
+    "definitionEn": "**Local compactness**: $X$ is locally compact if every point $x$ has a **compact neighbourhood** — an open $U\\ni x$ with $\\overline U$ compact (equivalently, a neighbourhood $K$ of $x$ that is compact). The two formulations agree in a Hausdorff space, where a closed compact neighbourhood can always be found inside a compact one. $\\mathbb{R}^n$ is locally compact (closed balls serve as compact neighbourhoods) but not compact; $\\mathbb{Q}$ is not locally compact (its compact subsets have empty interior); compact spaces are of course locally compact. A locally compact Hausdorff space behaves locally like a compact space and is necessarily completely regular (Tychonoff), so separation and embedding theory apply.\\n\\n**The one-point (Alexandrov) compactification**: let $X$ be locally compact Hausdorff and non-compact. Adjoin a new point $\\infty$ and put $X^{*}=X\\cup\\{\\infty\\}$, topologised by keeping all open sets of $X$ open and declaring the neighbourhoods of $\\infty$ to be the sets $(X\\setminus K)\\cup\\{\\infty\\}$ with $K\\subset X$ compact — remove a compact piece of $X$ and add $\\infty$. Then $X^{*}$ is compact Hausdorff and $X$ is a dense open subset of it. Intuitively, every sequence 「escaping to infinity」 in $X$ converges to $\\infty$ in $X^{*}$: infinity has been turned from a phrase into a point.\\n\\nThe classical example is $\\mathbb{R}$: $\\mathbb{R}^{*}=\\mathbb{R}\\cup\\{\\infty\\}$ is homeomorphic to the circle $S^{1}$. Rolling $\\mathbb{R}$ onto a circle by stereographic projection, say $t\\mapsto\\big(\\frac{2t}{1+t^2},\\frac{1-t^2}{1+t^2}\\big)$, leaves exactly one point available for $\\infty$, because a line has a single end: both $t\\to+\\infty$ and $t\\to-\\infty$ converge to the same point. In general the one-point compactification of $\\mathbb{R}^n$ is $S^n$, stereographic projection mapping $\\mathbb{R}^n$ onto $S^n$ minus the north pole. Compactification is thus no abstraction: a line plus one point **is** a circle.\\n\\nThe payoff is translating 「infinity」 into an ordinary point. For instance $\\lim_{x\\to\\infty}f(x)=L$ becomes the continuity at $\\infty$ of the extension of $f$, with value $L$; functions 「vanishing at infinity」 are exactly the restrictions of functions on $X^{*}$ that take the value $0$ at $\\infty$, which is the correspondence between $C_0(X)$ and $C(X^{*})$. In complex analysis $\\mathbb{C}\\cup\\{\\infty\\}$ is the **Riemann sphere**, on which punctured neighbourhoods, poles and residues at infinity are defined; in functional analysis vanishing functions and compact operators are phrased in the same language.",
+    "formulas": [
+      {
+        "latex": "X\\ \\text{局部紧}\\iff \\forall x\\ \\exists U\\ \\text{开},\\ x\\in U,\\ \\overline{U}\\ \\text{紧}",
+        "note": "局部紧的定义（Hausdorff 空间中也可说成「每点有紧邻域」）。$\\mathbb{R}^n$ 局部紧但不紧；$\\mathbb{Q}$ 不局部紧。",
+        "noteEn": "Definition of local compactness (in a Hausdorff space equivalently: every point has a compact neighbourhood). $\\mathbb{R}^n$ is locally compact but not compact; $\\mathbb{Q}$ is neither."
+      },
+      {
+        "latex": "X^{*}=X\\cup\\{\\infty\\},\\qquad \\infty\\ \\text{的邻域基}:\\ \\big\\{(X\\setminus K)\\cup\\{\\infty\\}:K\\subset X\\ \\text{紧}\\big\\}",
+        "note": "单点紧化的拓扑：挖掉一个紧集再加 $\\infty$。于是「跑向无穷」的序列收敛到 $\\infty$。",
+        "noteEn": "The topology of the one-point compactification: remove a compact set and add $\\infty$. Sequences escaping to infinity then converge to $\\infty$."
+      },
+      {
+        "latex": "X\\ \\text{局部紧 Hausdorff 且不紧}\\ \\Longrightarrow\\ X^{*}\\ \\text{紧 Hausdorff},\\ X\\ \\text{在}\\ X^{*}\\ \\text{中稠密且开}",
+        "note": "存在性定理。反向也成立：若 $X^{*}$ Hausdorff，则 $X$ 局部紧 Hausdorff（$X$ 是 $X^*$ 的开子集）。",
+        "noteEn": "The existence theorem. The converse holds too: if $X^{*}$ is Hausdorff then $X$ is locally compact Hausdorff ($X$ is open in $X^*$)."
+      },
+      {
+        "latex": "\\mathbb{R}^{*}=\\mathbb{R}\\cup\\{\\infty\\}\\cong S^{1},\\qquad \\mathbb{R}^{n}\\cup\\{\\infty\\}\\cong S^{n},\\qquad \\mathbb{C}\\cup\\{\\infty\\}\\cong S^{2}",
+        "note": "球极投影给出显式同胚；$\\mathbb{C}\\cup\\{\\infty\\}=S^{2}$ 就是黎曼球面，复分析中的无穷远点、极点、留数都在它上面讨论。",
+        "noteEn": "Stereographic projection gives explicit homeomorphisms; $\\mathbb{C}\\cup\\{\\infty\\}=S^{2}$ is the Riemann sphere, where points at infinity, poles and residues live."
+      },
+      {
+        "latex": "\\lim_{x\\to\\infty}f(x)=L\\iff \\text{延拓}\\ F:X^{*}\\to Y\\ \\text{在}\\ \\infty\\ \\text{处连续},\\ F(\\infty)=L",
+        "note": "紧化的用途：把「趋于无穷」的极限转化为「在 $\\infty$ 点连续」。由此 $C_0(X)=\\{F|_X:F\\in C(X^{*}),\\ F(\\infty)=0\\}$。",
+        "noteEn": "The point of compactification: a limit at infinity becomes continuity at the point $\\infty$, giving $C_0(X)=\\{F|_X:F\\in C(X^{*}),F(\\infty)=0\\}$."
+      }
+    ],
+    "expression": {
+      "text": "X* = X ∪ {∞}，∞ 的邻域 = (X \\ K) ∪ {∞}（K 紧）；ℝ* ≅ S¹，ℝⁿ ∪ {∞} ≅ Sⁿ",
+      "symbol": "X* 紧 Haudorff ⟺ X 局部紧 Hausdorff",
+      "note": "三步使用法：① 确认 $X$ 局部紧 Hausdorff；② 用 $(X\\setminus K)\\cup\\{\\infty\\}$ 造邻域基；③ 用「$\\infty$ 处连续」改写关于无穷的陈述。",
+      "noteEn": "Three steps: check $X$ locally compact Hausdorff; build the neighbourhood base $(X\\setminus K)\\cup\\{\\infty\\}$; restate statements about infinity as continuity at $\\infty$."
+    },
+    "properties": [
+      "$\\mathbb{R}^n$ 局部紧但不紧（闭球给出紧邻域）；紧空间自然局部紧；$\\mathbb{Q}$ **不**局部紧——它的紧子集都没有内点。局部紧 Hausdorff 空间必完全正则（Tychonoff），因此正则性与嵌入定理都能用（注意：完全正则**不蕴含正规**）。",
+      "单点紧化是「**最小**」的紧化：对局部紧 Hausdorff 空间 $X$ 的任一紧化 $Y$（即 $Y$ 紧 Hausdorff、$X$ 在 $Y$ 中稠密，此时 $X$ 自动是 $Y$ 的开子集），把 $Y\\setminus X$ 压成一点就得到连续满射 $Y\\to X^{*}$，它在 $X$ 上恒等。另一个极端是 Stone–Čech 紧化 $\\beta X$，「最大」；$X^{*}$ 与 $\\beta X$ 分别对应对无穷远行为的「最粗」与「最细」刻画。",
+      "$\\mathbb{R}^{*}=\\mathbb{R}\\cup\\{\\infty\\}\\cong S^{1}$，$\\mathbb{R}^{n}\\cup\\{\\infty\\}\\cong S^{n}$；$\\mathbb{C}\\cup\\{\\infty\\}=S^{2}$ 就是**黎曼球面**。注意 $\\mathbb{R}$ 只有一个无穷远点：$+\\infty$ 与 $-\\infty$ 在 $\\mathbb{R}^{*}$ 中是同一个点，这正是「直线卷成圆周」的拓扑含义。",
+      "局部紧性与 Hausdorff 的单点紧化互为充要：$X$ 局部紧 Hausdorff $\\iff X^{*}$ Hausdorff（此时 $X^{*}$ 紧）。$\\mathbb{Q}$ 不局部紧，它的单点紧化是紧的，但不是 Hausdorff：$\\infty$ 的任一邻域形如 $(\\mathbb{Q}\\setminus K)\\cup\\{\\infty\\}$，而 $K$ 无内点意味着 $\\mathbb{Q}\\setminus K$ 稠密，必与任何非空开集相交，无法与 $\\mathbb{Q}$ 中的点分离。",
+      "紧化把「在无穷远处的行为」变成「在一点处的行为」：$\\lim_{x\\to\\infty}f(x)=L$ 等价于延拓在 $\\infty$ 处连续；$C_0(X)=\\{f\\in C(X):\\forall\\varepsilon>0\\ \\exists K\\ \\text{紧},\\ |f|<\\varepsilon\\ \\text{于}\\ X\\setminus K\\}$ 与 $\\{F|_X:F\\in C(X^{*}),\\ F(\\infty)=0\\}$ 一一对应。这正是测度论中「紧支集」「在无穷处消失」，以及泛函分析中紧算子理论常用的语言。"
+    ],
+    "propertiesEn": [
+      "$\\mathbb{R}^n$ is locally compact but not compact (closed balls give compact neighbourhoods); compact spaces are locally compact; $\\mathbb{Q}$ is **not** locally compact — its compact subsets have empty interior. A locally compact Hausdorff space is completely regular (Tychonoff), so regularity and embedding theorems remain available (complete regularity does **not** imply normality).",
+      "The one-point compactification is the **smallest** compactification: for any compactification $Y$ of a locally compact Hausdorff $X$ (with $X$ dense and open in $Y$), collapsing $Y\\setminus X$ to a point yields a continuous surjection $Y\\to X^{*}$ that is the identity on $X$. At the other extreme sits the Stone–Čech compactification $\\beta X$, the largest one.",
+      "$\\mathbb{R}^{*}=\\mathbb{R}\\cup\\{\\infty\\}\\cong S^{1}$ and $\\mathbb{R}^{n}\\cup\\{\\infty\\}\\cong S^{n}$; $\\mathbb{C}\\cup\\{\\infty\\}=S^{2}$ is the **Riemann sphere**. Note that $\\mathbb{R}$ has only one point at infinity: $+\\infty$ and $-\\infty$ coincide in $\\mathbb{R}^{*}$, which is exactly what it means to roll a line into a circle.",
+      "Local compactness and Hausdorffness of the one-point compactification are equivalent: $X$ is locally compact Hausdorff iff $X^{*}$ is Hausdorff (and then $X^{*}$ is compact). As $\\mathbb{Q}$ is not locally compact, its one-point compactification is compact but not Hausdorff: every neighbourhood of $\\infty$ has the form $(\\mathbb{Q}\\setminus K)\\cup\\{\\infty\\}$ with $K$ of empty interior, so $\\mathbb{Q}\\setminus K$ is dense and meets every nonempty open set.",
+      "Compactification converts behaviour 「at infinity」 into behaviour 「at a point」: $\\lim_{x\\to\\infty}f(x)=L$ means the extension is continuous at $\\infty$, and $C_0(X)$ corresponds bijectively to $\\{F|_X:F\\in C(X^{*}),F(\\infty)=0\\}$. This is the language of 「vanishing at infinity」 in measure theory and of compact operator theory in functional analysis."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        -5,
+        5
+      ],
+      "intervals": [
+        {
+          "from": -5,
+          "to": 5,
+          "color": "#4cc9f0"
+        }
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0",
+          "color": "#ffd166"
+        },
+        {
+          "at": -5,
+          "label": "−∞",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 5,
+          "label": "+∞",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "实直线加一个无穷远点：−∞ 与 +∞ 粘成同一点 ∞，于是 ℝ ∪ {∞} 同胚于圆周 S¹"
+    },
+    "examples": [
+      {
+        "problem": "证明 $\\mathbb{R}^{*}=\\mathbb{R}\\cup\\{\\infty\\}$ 同胚于圆周 $S^{1}$。",
+        "solution": "考虑映射\\n$$\\varphi(t)=\\Big(\\frac{2t}{1+t^{2}},\\ \\frac{1-t^{2}}{1+t^{2}}\\Big)\\in S^{1}\\subset\\mathbb{R}^{2}\\qquad(t\\in\\mathbb{R}),$$\\n并补充定义 $\\varphi(\\infty)=(0,-1)$。\\n\\n**取值在单位圆上**：直接计算\\n$$\\Big(\\frac{2t}{1+t^{2}}\\Big)^{2}+\\Big(\\frac{1-t^{2}}{1+t^{2}}\\Big)^{2}=\\frac{4t^{2}+(1-t^{2})^{2}}{(1+t^{2})^{2}}=\\frac{(1+t^{2})^{2}}{(1+t^{2})^{2}}=1.$$\\n\\n**是双射**：若记 $t=\\tan\\frac{\\theta}{2}$，则上述坐标恰是 $(\\sin\\theta,\\cos\\theta)$，故 $\\varphi$ 就是 $\\theta\\mapsto(\\sin\\theta,\\cos\\theta)$；当 $t$ 跑遍 $\\mathbb{R}$ 时 $\\theta$ 跑遍 $(-\\pi,\\pi)$，像集恰为 $S^{1}\\setminus\\{(0,-1)\\}$（即圆周去掉角度 $\\theta=\\pi$ 的那一点），补上 $\\varphi(\\infty)=(0,-1)$ 后是满射，且显然单射。\\n\\n**连续**：$t\\mapsto\\varphi(t)$ 是分母恒正的连续函数（$1+t^{2}>0$），故在 $\\mathbb{R}$ 上连续；当 $|t|\\to\\infty$ 时 $\\frac{2t}{1+t^{2}}\\to0$、$\\frac{1-t^{2}}{1+t^{2}}\\to-1$，即 $\\varphi(t)\\to(0,-1)=\\varphi(\\infty)$。这正是 $\\varphi$ 在 $\\infty$ 处连续的定义（$\\infty$ 的邻域是 $(\\mathbb{R}\\setminus K)\\cup\\{\\infty\\}$，$K$ 紧即 $K$ 有界，故当 $|t|$ 充分大时 $t$ 落在该邻域中，函数值却已接近 $(0,-1)$）。\\n\\n**逆连续**：$S^{1}\\setminus\\{(0,-1)\\}$ 上的点即 $\\theta\\in(-\\pi,\\pi)$，逆映射为 $\\theta\\mapsto t=\\tan\\frac{\\theta}{2}$，在开区间 $(-\\pi,\\pi)$ 上连续；当 $\\theta\\to\\pm\\pi$ 时 $t\\to\\pm\\infty$，与把两端都送到 $\\infty$ 的约定一致。于是 $\\varphi$ 是连续双射且逆连续，是同胚：$\\mathbb{R}^{*}\\cong S^{1}$。\\n\\n顺带得到一个有用的图像：$\\mathbb{R}^{*}$ 中 $t\\to+\\infty$ 与 $t\\to-\\infty$ 收敛到**同一个**点 $\\infty$——直线只有一个无穷远点，卷起来正好是圆周。"
+      },
+      {
+        "problem": "证明 $\\mathbb{Q}$（配通常度量）不是局部紧的，并说明 $\\mathbb{Q}$ 的单点紧化不是 Hausdorff 空间。",
+        "solution": "**第一步：紧子集无内点。** 反设 $K\\subset\\mathbb{Q}$ 紧且含一个非空开集（相对拓扑下），即存在 $x\\in\\mathbb{Q}$ 与 $r>0$ 使 $(x-r,x+r)\\cap\\mathbb{Q}\\subset K$。取无理数 $\\alpha\\in(x-r,x+r)$（无理数在此区间内稠密），再取有理数列 $q_n\\in(x-r,x+r)$ 使 $q_n\\to\\alpha$ 且 $q_n\\ne\\alpha$，则 $q_n\\in K$。\\n\\n若 $K$ 紧，则 $K$ 作为度量空间的子集列紧，故 $(q_n)$ 有子列收敛到某 $q\\in K\\subset\\mathbb{Q}$。但在 $\\mathbb{R}$ 中 $(q_n)$ 收敛于 $\\alpha$，任何子列也收敛于 $\\alpha$，由极限唯一性 $q=\\alpha\\notin\\mathbb{Q}$，与 $q\\in K\\subset\\mathbb{Q}$ 矛盾。故 $\\mathbb{Q}$ 的任何紧子集都没有内点——特别地，没有点能有紧邻域，$\\mathbb{Q}$ **不局部紧**。\\n\\n**第二步：单点紧化不 Hausdorff。** 若 $X^{*}$ 是 Hausdorff 的，则 $X=\\mathbb{Q}$ 作为 $X^{*}$ 的开子集也是局部紧的（$X^{*}$ 的紧邻域与 $X$ 相交即得 $X$ 中的紧邻域），与第一步矛盾。也可以直接看：$\\infty$ 的任一邻域是 $(\\mathbb{Q}\\setminus K)\\cup\\{\\infty\\}$，$K$ 紧故无内点，于是 $\\mathbb{Q}\\setminus K$ 在 $\\mathbb{Q}$ 中稠密，它必与任意的非空开集（例如 $\\mathbb{Q}$ 中含某点的任意邻域）相交——所以 $\\infty$ 无法与 $\\mathbb{Q}$ 的任何点用不交开集分开，$\\mathbb{Q}^{*}$ 不 Hausdorff。（顺带地，$\\mathbb{Q}^{*}$ 是紧的——单点紧化对任何空间都紧——只是不 Hausdorff。）\\n\\n对照 $\\mathbb{R}$：它局部紧，故 $\\mathbb{R}^{*}\\cong S^{1}$ 紧而 Hausdorff。可见「单点紧化是 Hausdorff 的」这条路正是局部紧性的判据。"
+      }
+    ],
+    "tags": [
+      "局部紧",
+      "单点紧化",
+      "Alexandrov 紧化",
+      "球极投影",
+      "黎曼球面",
+      "Stone-Čech 紧化"
+    ],
+    "links": [
+      "compactness",
+      "tychonoff-theorem",
+      "separation-axioms",
+      "topological-space",
+      "continuity"
+    ]
+  }
+]

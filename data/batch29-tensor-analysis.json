@@ -1,0 +1,285 @@
+[
+  {
+    "id": "index-notation",
+    "title": "指标记号与爱因斯坦求和约定",
+    "titleEn": "Index Notation and Einstein Summation Convention",
+    "branch": "vector",
+    "level": 5,
+    "summary": "用带上下标的指标书写张量分量，并约定同一项中重复出现两次的指标自动求和，从而省去成串的求和号。",
+    "summaryEn": "Writing tensor components with upper and lower indices, with the convention that an index repeated twice in one term is summed automatically, eliminating long summation signs.",
+    "definition": "**指标记号**用带指标的字母表示张量的分量，例如 $v^i$、$w_i$、$T^i{}_j$ 与 $R^i{}_{jkl}$。指标取值 $1,2,\\dots,n$（$n$ 为空间维数）。上下标的位置本身带着信息：**上标叫逆变指标，下标叫协变指标**，它们在坐标变换下的变换方式相反，因此不能随意上下挪动。\n\n**爱因斯坦求和约定**：在同一项中，同一个指标字母**恰好重复出现两次**（通常要求一上一下）时，就自动对该指标从 $1$ 到 $n$ 求和，不再写 $\\sum$ 号，如 $x^iy_i=\\sum_{i=1}^nx^iy_i$。被求和的指标称为**哑指标**，它只是配对的占位符，可以整体改名；不参与求和的指标叫**自由指标**，等式两边出现的自由指标必须同名、同上下位置。在直角坐标（正交归一基底）下分量不分协变逆变，重复两次的指标即使都写成下标也照常求和，例如 $\\varepsilon_{ijk}a_jb_k$。\n\n两个由对称性确定的常数张量非常好用：**克罗内克符号** $\\delta^i_j$ 在 $i=j$ 时等于 $1$、否则等于 $0$，作用是「换名」，$\\delta^i_jv^j=v^i$；**置换符号**（列维-奇维塔符号）$\\varepsilon_{ijk}$ 由完全反对称性确定：$\\varepsilon_{123}=1$，偶排列取 $+1$、奇排列取 $-1$、有重复指标取 $0$。用它可以写出叉积的指标式 $(\\boldsymbol{a}\\times\\boldsymbol{b})_i=\\varepsilon_{ijk}a_jb_k$，以及最常用的 $\\varepsilon$-$\\delta$ 恒等式 $\\varepsilon_{ijk}\\varepsilon_{ilm}=\\delta_{jl}\\delta_{km}-\\delta_{jm}\\delta_{kl}$。\n\n指标记号把张量运算变成对指标做「配对与改名」的机械操作：省去大量求和号，同时让张量结构一目了然。它是微分几何、相对论与连续介质力学的通用语言。",
+    "definitionEn": "**Index notation** writes tensor components with indices (superscripts and subscripts): $v^i$, $w_i$, $T^i{}_j$, $R^i{}_{jkl}$. Indices run from $1$ to $n$, the dimension of the space. The position of an index carries information: an **upper index is contravariant and a lower index is covariant**, and the two transform in opposite ways under a change of coordinates, so they cannot be moved up or down at will.\n\nThe **Einstein summation convention** states that when the same index letter appears **exactly twice in one term** (normally once up and once down), it is summed from $1$ to $n$ automatically, without any $\\sum$ sign: $x^iy_i=\\sum_{i=1}^nx^iy_i$. A summed index is a **dummy index**, a placeholder that may be renamed everywhere; an index that is not summed is a **free index**, and both sides of an equation must carry the same free indices with the same names and positions. In Cartesian coordinates with an orthonormal basis there is no distinction between up and down, so an index repeated twice as a subscript is also summed, as in $\\varepsilon_{ijk}a_jb_k$.\n\nTwo constant tensors fixed by symmetry are especially useful. The **Kronecker delta** $\\delta^i_j$ equals $1$ when $i=j$ and $0$ otherwise, and it renames indices: $\\delta^i_jv^j=v^i$. The **Levi-Civita symbol** $\\varepsilon_{ijk}$ is determined by complete antisymmetry: $\\varepsilon_{123}=1$, even permutations give $+1$, odd permutations give $-1$, and a repeated index gives $0$. It writes the cross product as $(\\boldsymbol{a}\\times\\boldsymbol{b})_i=\\varepsilon_{ijk}a_jb_k$ and yields the $\\varepsilon$-$\\delta$ identity $\\varepsilon_{ijk}\\varepsilon_{ilm}=\\delta_{jl}\\delta_{km}-\\delta_{jm}\\delta_{kl}$.\n\nIndex notation turns tensor algebra into a mechanical game of matching and renaming indices: it removes sums and reveals structure, and it is the standard language of differential geometry, relativity and continuum mechanics.",
+    "formulas": [
+      { "latex": "x^{i}y_{i}\\equiv\\sum_{i=1}^{n}x^{i}y_{i}", "note": "爱因斯坦求和约定：同一项中重复出现两次（一上一下）的指标自动求和，被求和的指标称为哑指标，可以任意改名。", "noteEn": "Einstein summation convention: an index repeated twice in one term (once up, once down) is summed automatically; such a dummy index may be renamed freely." },
+      { "latex": "\\delta^{i}_{j}v^{j}=v^{i},\\qquad \\delta^{i}_{i}=n", "note": "克罗内克符号 $\\delta^i_j$ 在 $i=j$ 时为 $1$、否则为 $0$，起「换名」作用；它的迹 $\\delta^i_i$ 等于空间维数 $n$。", "noteEn": "The Kronecker delta $\\delta^i_j$ is $1$ when $i=j$ and $0$ otherwise; it renames indices, and its trace $\\delta^i_i$ equals the dimension $n$." },
+      { "latex": "\\varepsilon_{123}=1,\\qquad \\varepsilon_{ijk}=-\\varepsilon_{ikj},\\qquad \\varepsilon_{iik}=0,\\qquad (\\boldsymbol{a}\\times\\boldsymbol{b})_{i}=\\varepsilon_{ijk}a_{j}b_{k}", "note": "置换符号：偶排列 $+1$、奇排列 $-1$、有重复指标 $0$；叉积的第 $i$ 个分量由 $\\varepsilon_{ijk}a_jb_k$ 给出。", "noteEn": "The Levi-Civita symbol: $+1$ for even permutations, $-1$ for odd ones, $0$ when an index repeats; the $i$-th component of the cross product is $\\varepsilon_{ijk}a_jb_k$." },
+      { "latex": "\\varepsilon_{ijk}\\varepsilon_{ilm}=\\delta_{jl}\\delta_{km}-\\delta_{jm}\\delta_{kl}", "note": "$\\varepsilon$-$\\delta$ 恒等式：两个置换符号的乘积化为克罗内克符号之差，是化简叉积恒等式（如 BAC-CAB 公式）的关键。", "noteEn": "The $\\varepsilon$-$\\delta$ identity converts a product of two Levi-Civita symbols into differences of Kronecker deltas; it is the key to cross-product identities such as BAC-CAB." },
+      { "latex": "v'{}^i=\\dfrac{\\partial x'{}^i}{\\partial x^{j}}v^{j},\\qquad w'{}_i=\\dfrac{\\partial x^{j}}{\\partial x'{}^i}w_{j},\\qquad T'{}^i{}_j=\\dfrac{\\partial x'{}^i}{\\partial x^{k}}\\dfrac{\\partial x^{l}}{\\partial x'{}^j}T^{k}{}_{l}", "note": "张量变换规律：每个逆变指标配一个 $\\partial x'/\\partial x$ 因子，每个协变指标配一个反向因子；有 $p$ 个上标、$q$ 个下标的张量称为 $(p,q)$ 型张量。", "noteEn": "Transformation laws: each contravariant index brings a factor $\\partial x'/\\partial x$, each covariant index the inverse factor; a tensor with $p$ upper and $q$ lower indices is of type $(p,q)$." }
+    ],
+    "expression": {
+      "text": "T^{i}_{j}、T^{ij}、T_{ij} —— 上标为逆变指标、下标为协变指标；重复出现的上下指标自动求和",
+      "symbol": "\\delta^{i}_{j},\\ \\varepsilon_{ijk},\\ A^{i}B_{i}",
+      "note": "写指标时先分清哪些是自由指标（等式两边必须一致）、哪些是哑指标（自动求和、可整体改名）。",
+      "noteEn": "When writing indices, first distinguish free indices (which must match on both sides) from dummy indices (summed automatically and freely renamable)."
+    },
+    "properties": [
+      "哑指标可以任意改名（$A^iB_i=A^jB_j$），自由指标则不能单独改名，等式两边的自由指标必须同名、同位置",
+      "克罗内克符号起「换名」作用：$\\delta^i_jv^j=v^i$，且 $\\delta^i_i=n$（$n$ 为空间维数）",
+      "置换符号 $\\varepsilon_{ijk}$ 全反对称：交换任意两个指标变号，$\\varepsilon_{123}=1$，有重复指标时为 $0$",
+      "$\\varepsilon$-$\\delta$ 恒等式把两个置换符号的乘积化为克罗内克符号的乘积，是化简叉积、旋度与行列式表达式的基本工具",
+      "阶数由自由指标数决定：0 阶张量没有自由指标（标量），1 阶有一个（向量），2 阶有两个；上标与下标分别计数"
+    ],
+    "propertiesEn": [
+      "Dummy indices may be renamed freely ($A^iB_i=A^jB_j$), while a free index must keep the same name and position in every term of an equation",
+      "The Kronecker delta renames indices: $\\delta^i_jv^j=v^i$, and its trace is the dimension, $\\delta^i_i=n$",
+      "The Levi-Civita symbol is totally antisymmetric — swapping two indices flips the sign, with $\\varepsilon_{123}=1$ — and vanishes when any index repeats",
+      "The $\\varepsilon$-$\\delta$ identity converts a product of two Levi-Civita symbols into products of Kronecker deltas, the basic tool for simplifying cross products, curls and determinants",
+      "The rank equals the number of free indices: 0 for a scalar, 1 for a vector, 2 for a two-index tensor, counting upper and lower indices separately"
+    ],
+    "examples": [
+      {
+        "problem": "用指标记号计算 $\\boldsymbol{a}=(1,2,3)$ 与 $\\boldsymbol{b}=(4,5,6)$ 的叉积，并验证 $\\boldsymbol{a}\\cdot(\\boldsymbol{a}\\times\\boldsymbol{b})=0$。",
+        "solution": "由 $(\\boldsymbol{a}\\times\\boldsymbol{b})_i=\\varepsilon_{ijk}a_jb_k$ 逐分量计算：\n\n$(\\boldsymbol{a}\\times\\boldsymbol{b})_1=\\varepsilon_{1jk}a_jb_k=a_2b_3-a_3b_2=2\\times6-3\\times5=-3$；\n\n$(\\boldsymbol{a}\\times\\boldsymbol{b})_2=\\varepsilon_{2jk}a_jb_k=a_3b_1-a_1b_3=3\\times4-1\\times6=6$；\n\n$(\\boldsymbol{a}\\times\\boldsymbol{b})_3=\\varepsilon_{3jk}a_jb_k=a_1b_2-a_2b_1=1\\times5-2\\times4=-3$。\n\n所以 $\\boldsymbol{a}\\times\\boldsymbol{b}=(-3,\\,6,\\,-3)$，再算 $\\boldsymbol{a}\\cdot(\\boldsymbol{a}\\times\\boldsymbol{b})=1\\times(-3)+2\\times6+3\\times(-3)=-3+12-9=0$。\n\n用指标记号可以一步看出原因：$a_i(\\boldsymbol{a}\\times\\boldsymbol{b})_i=\\varepsilon_{ijk}a_ia_jb_k$，把哑指标 $i\\leftrightarrow j$ 交换后利用 $\\varepsilon_{jik}=-\\varepsilon_{ijk}$ 得它等于自身的相反数，故必为零。"
+      },
+      {
+        "problem": "用指标记号证明 $\\boldsymbol{a}\\times(\\boldsymbol{b}\\times\\boldsymbol{c})=\\boldsymbol{b}(\\boldsymbol{a}\\cdot\\boldsymbol{c})-\\boldsymbol{c}(\\boldsymbol{a}\\cdot\\boldsymbol{b})$（BAC-CAB 公式）。",
+        "solution": "把左边写成指标式并展开：\n\n$[\\boldsymbol{a}\\times(\\boldsymbol{b}\\times\\boldsymbol{c})]_i=\\varepsilon_{ijk}a_j(\\boldsymbol{b}\\times\\boldsymbol{c})_k=\\varepsilon_{ijk}a_j\\varepsilon_{klm}b_lc_m$。\n\n利用循环对称性 $\\varepsilon_{ijk}=\\varepsilon_{kij}$，再套用 $\\varepsilon$-$\\delta$ 恒等式：$\\varepsilon_{kij}\\varepsilon_{klm}=\\delta_{il}\\delta_{jm}-\\delta_{im}\\delta_{jl}$。于是\n\n$\\varepsilon_{ijk}\\varepsilon_{klm}a_jb_lc_m=(\\delta_{il}\\delta_{jm}-\\delta_{im}\\delta_{jl})a_jb_lc_m=a_mb_ic_m-a_lb_lc_i=b_i(\\boldsymbol{a}\\cdot\\boldsymbol{c})-c_i(\\boldsymbol{a}\\cdot\\boldsymbol{b})$。\n\n第 $i$ 个分量对每个 $i$ 都成立，正是 $\\boldsymbol{b}(\\boldsymbol{a}\\cdot\\boldsymbol{c})-\\boldsymbol{c}(\\boldsymbol{a}\\cdot\\boldsymbol{b})$ 的第 $i$ 个分量，公式得证。"
+      }
+    ],
+    "tags": ["张量", "指标记号", "爱因斯坦求和", "克罗内克符号", "置换符号"],
+    "links": ["tensor-introduction", "tensor-algebra", "metric-tensor", "del-operator"]
+  },
+  {
+    "id": "tensor-algebra",
+    "title": "张量代数：缩并、对称与反对称",
+    "titleEn": "Tensor Algebra: Contraction, Symmetry and Antisymmetry",
+    "branch": "vector",
+    "level": 5,
+    "summary": "张量的加法、张量积与缩并等基本运算，以及二阶张量按对称性唯一分解为对称部分与反对称部分。",
+    "summaryEn": "The basic operations on tensors — addition, tensor products and contraction — and the unique splitting of a rank-2 tensor into symmetric and antisymmetric parts.",
+    "definition": "**张量代数**研究同一点的张量之间的基本运算：加法、数乘、**张量积（外积）**与**缩并**。张量按阶数分层：0 阶是标量，1 阶是向量，$(p,q)$ 型张量有 $p$ 个上标（逆变）与 $q$ 个下标（协变）。张量积把阶数相加，缩并把阶数减少 $2$，二者配合可以生成并化简一切张量表达式。\n\n**张量积**（记作 $\\otimes$）把两个张量拼成更高阶的张量：$(A\\otimes B)^i{}_j{}^k{}_l=A^i{}_jB^k{}_l$，它是「不缩并的乘法」。**缩并**则是把一个上指标与一个下标配对求和，如 $T^i{}_i$ 或 $T^{ij}{}_{jk}$；被配对的指标在上、下位置各带一个互逆的坐标变换因子，相乘后恰好抵消，因此缩并的结果仍是张量。缩并一次使阶数减少 $2$，$T^i{}_i$ 正是二阶张量的**迹**，是一个标量。\n\n二阶张量按两个指标交换的表现分为两类：**对称张量** $T^{ij}=T^{ji}$ 与**反对称张量** $T^{ij}=-T^{ji}$。任何二阶张量都能唯一地写成对称部分与反对称部分之和：$T^{ij}=T^{(ij)}+T^{[ij]}$，其中圆括号表示对称化、方括号表示反对称化。反对称张量的对角元必为零（因为 $T^{ii}=-T^{ii}$），因此在 $n$ 维空间中只有 $C(n,2)=n(n-1)/2$ 个独立分量；对称张量则有 $n(n+1)/2$ 个独立分量。\n\n一个反复出现的技巧：对称张量与反对称张量完全缩并恒为零，$S^{ij}A_{ij}=0$。含有特定对称性的物理量会自动「过滤」掉不匹配的项——这正是应力张量的对称性与应变能中转动部分可以分离的深层原因。",
+    "definitionEn": "**Tensor algebra** is the study of the basic operations on tensors at a point: addition, scalar multiplication, the **tensor (outer) product** and **contraction**. Tensors are graded by rank: scalars have rank 0, vectors rank 1, and a $(p,q)$-tensor carries $p$ upper (contravariant) and $q$ lower (covariant) indices. The tensor product adds ranks while contraction lowers the rank by $2$; together they generate and simplify every tensor expression.\n\nThe **tensor product** ($\\otimes$) builds higher-rank tensors: $(A\\otimes B)^i{}_j{}^k{}_l=A^i{}_jB^k{}_l$; it is multiplication without summation. **Contraction** pairs one upper with one lower index and sums, as in $T^i{}_i$ or $T^{ij}{}_{jk}$: the two partners carry mutually inverse coordinate-transformation factors, which cancel, so the result is again a tensor. Each contraction lowers the rank by $2$, and $T^i{}_i$ is the **trace** of a rank-2 tensor — a scalar.\n\nA rank-2 tensor is **symmetric**, $T^{ij}=T^{ji}$, or **antisymmetric**, $T^{ij}=-T^{ji}$. Every rank-2 tensor splits uniquely into the sum of its symmetric and antisymmetric parts, $T^{ij}=T^{(ij)}+T^{[ij]}$, where round brackets denote symmetrization and square brackets antisymmetrization. An antisymmetric tensor has vanishing diagonal ($T^{ii}=-T^{ii}$), so in $n$ dimensions it has $C(n,2)=n(n-1)/2$ independent components, while a symmetric one has $n(n+1)/2$.\n\nA recurring trick: the full contraction of a symmetric with an antisymmetric tensor always vanishes, $S^{ij}A_{ij}=0$. A physical quantity with a given symmetry therefore filters out mismatched terms automatically — the reason symmetric stress tensors and energy arguments work so cleanly.",
+    "formulas": [
+      { "latex": "T^{i}{}_{i}=T^{1}{}_{1}+T^{2}{}_{2}+\\cdots+T^{n}{}_{n}", "note": "缩并：把一上一下的指标配对求和，阶数减少 2；二阶张量缩并得到标量，即它的迹。", "noteEn": "Contraction: pair one upper with one lower index and sum; the rank drops by 2, and a rank-2 tensor contracts to a scalar, its trace." },
+      { "latex": "(A\\otimes B)^{i}{}_{j}{}^{k}{}_{l}=A^{i}{}_{j}B^{k}{}_{l}", "note": "张量积（外积）：阶数相加的乘法，不做任何求和。", "noteEn": "Tensor (outer) product: multiplication that adds ranks, with no summation involved." },
+      { "latex": "T^{ij}=T^{(ij)}+T^{[ij]},\\qquad T^{(ij)}=\\tfrac{1}{2}\\left(T^{ij}+T^{ji}\\right),\\qquad T^{[ij]}=\\tfrac{1}{2}\\left(T^{ij}-T^{ji}\\right)", "note": "任意二阶张量唯一分解为对称部分与反对称部分；圆括号是对称化、方括号是反对称化记号。", "noteEn": "Every rank-2 tensor splits uniquely into symmetric and antisymmetric parts; round brackets symmetrize and square brackets antisymmetrize." },
+      { "latex": "S^{ij}A_{ij}=0\\qquad\\left(S^{ij}=S^{ji},\\ A_{ij}=-A_{ji}\\right)", "note": "对称张量与反对称张量完全缩并为零：哑指标改名并交换指标后，表达式等于自身的相反数。", "noteEn": "The full contraction of a symmetric and an antisymmetric tensor vanishes: renaming and swapping the dummy indices makes the expression equal to its own negative." },
+      { "latex": "A^{ij}A_{ij}=A^{(ij)}A_{(ij)}+A^{[ij]}A_{[ij]}", "note": "张量的二次「能量」也按对称化、反对称化分解（交叉项为零）；力学中应变能因此分成变形部分与转动部分。", "noteEn": "The quadratic form of a tensor splits along symmetrization and antisymmetrization (the cross terms vanish), separating deformation energy from rotation energy in mechanics." }
+    ],
+    "expression": {
+      "text": "T^(ij) = (T^{ij}+T^{ji})/2（对称部分），T^[ij] = (T^{ij}−T^{ji})/2（反对称部分）",
+      "symbol": "T^{(ij)},\\qquad T^{[ij]}",
+      "note": "圆括号 ( ) 表示对称化，方括号 [ ] 表示反对称化，这是指标运算的通用记号。",
+      "noteEn": "Round brackets ( ) denote symmetrization and square brackets [ ] antisymmetrization, the standard notation for these index operations."
+    },
+    "properties": [
+      "缩并具有坐标无关性：$T^i{}_i$、$T^{ij}{}_{jk}$ 都是张量，阶数比原来少 2",
+      "分解 $T^{ij}=T^{(ij)}+T^{[ij]}$ 唯一；$n\\times n$ 矩阵空间是维数 $n(n+1)/2$ 的对称子空间与维数 $n(n-1)/2$ 的反对称子空间的直和",
+      "反对称二阶张量的对角元全为 0，因此三维空间中只有 3 个独立分量（如 $\\varepsilon_{ijk}$ 型对象）",
+      "对称张量与反对称张量缩并为零：$S^{ij}A_{ij}=0$，可用于快速判断某些项必定消失",
+      "指标的对称性在坐标变换下保持：对称性是张量的内在性质，而不是某一组坐标下的巧合"
+    ],
+    "propertiesEn": [
+      "Contraction is coordinate-independent: $T^i{}_i$ and $T^{ij}{}_{jk}$ are tensors, with rank lowered by 2",
+      "The splitting $T^{ij}=T^{(ij)}+T^{[ij]}$ is unique; the space of $n\\times n$ matrices is the direct sum of the symmetric subspace of dimension $n(n+1)/2$ and the antisymmetric subspace of dimension $n(n-1)/2$",
+      "An antisymmetric rank-2 tensor has zero diagonal, leaving only 3 independent components in three dimensions (objects of the type $\\varepsilon_{ijk}$)",
+      "A symmetric and an antisymmetric tensor contract to zero: $S^{ij}A_{ij}=0$, which instantly kills certain terms",
+      "Index symmetries are preserved by coordinate transformations: symmetry is an intrinsic tensor property, not an accident of one coordinate system"
+    ],
+    "examples": [
+      {
+        "problem": "把二阶张量的分量 $T^{11}=1$、$T^{12}=2$、$T^{21}=3$、$T^{22}=4$ 分解为对称部分与反对称部分。",
+        "solution": "按公式 $T^{(ij)}=\\frac{1}{2}(T^{ij}+T^{ji})$ 与 $T^{[ij]}=\\frac{1}{2}(T^{ij}-T^{ji})$ 逐项计算。\n\n对称部分：$T^{(11)}=1$，$T^{(22)}=4$，$T^{(12)}=T^{(21)}=\\frac{2+3}{2}=2.5$。\n\n反对称部分：$T^{[11]}=T^{[22]}=0$，$T^{[12]}=\\frac{2-3}{2}=-0.5$，$T^{[21]}=\\frac{3-2}{2}=0.5$。\n\n逐项相加：$1+0=1$，$2.5+(-0.5)=2$，$2.5+0.5=3$，$4+0=4$，恰好还原原来的四个分量，验证了分解 $T^{ij}=T^{(ij)}+T^{[ij]}$。注意反对称部分对角元为 0，且 $T^{[21]}=-T^{[12]}$。"
+      },
+      {
+        "problem": "证明对称张量 $S^{ij}$ 与反对称张量 $A_{ij}$ 的完全缩并为零。",
+        "solution": "设 $X=S^{ij}A_{ij}$。由于 $i,j$ 都是哑指标，把它们的名字整体互换不改变表达式的值：$X=S^{ji}A_{ji}$。\n\n利用对称性 $S^{ji}=S^{ij}$ 与反对称性 $A_{ji}=-A_{ij}$，得到\n\n$X=S^{ij}\\cdot(-A_{ij})=-X$。\n\n于是 $2X=0$，即 $S^{ij}A_{ij}=0$。这个技巧在力学中反复出现：对称的应力张量与反对称的转动张量缩并恒为零，因此转动部分不会出现在应变能中。"
+      }
+    ],
+    "tags": ["张量", "缩并", "对称张量", "反对称张量", "张量积"],
+    "links": ["tensor-introduction", "index-notation", "metric-tensor", "stress-strain-tensor"]
+  },
+  {
+    "id": "metric-tensor",
+    "title": "度量张量与指标升降",
+    "titleEn": "Metric Tensor and Raising/Lowering Indices",
+    "branch": "vector",
+    "level": 5,
+    "summary": "由基向量内积定义的对称正定张量：它决定长度、角度与体积，并在协变与逆变分量之间做「升降」翻译。",
+    "summaryEn": "The symmetric positive-definite tensor of basis-vector inner products; it determines lengths, angles and volumes and translates between covariant and contravariant components.",
+    "definition": "**度量张量**（度规）$g_{ij}$ 是度量空间的「尺子」，由局部基向量的内积定义：$g_{ij}=e_i\\cdot e_j$。有了它，无穷小位移 $dx^i$ 的长度平方——**线元**——就是二次型 $ds^2=g_{ij}\\,dx^idx^j$；曲线弧长、两向量夹角、面积与体积都可以由 $g_{ij}$ 依次算出。\n\n度规矩阵对称、正定，因而可逆；逆矩阵的分量记作 $g^{ij}$，满足 $g_{ij}g^{jk}=\\delta^k_i$。逆度规用来**升降指标**：$v_i=g_{ij}v^j$ 把逆变分量变成协变分量，$v^i=g^{ij}v_j$ 反过来。上标与下标其实是同一个几何对象的两种账本，度规就是它们之间的汇率；内积可以写成 $u\\cdot v=u^iv_i=g_{ij}u^iv^j$，用哪种分量计算，结果都一样。\n\n在直角坐标中 $g_{ij}=\\delta_{ij}$，协变与逆变没有分别；到了弯曲坐标两者开始分家。球坐标 $(r,\\theta,\\varphi)$ 的度规是对角阵 $\\operatorname{diag}(1,\\,r^2,\\,r^2\\sin^2\\theta)$，线元 $ds^2=dr^2+r^2d\\theta^2+r^2\\sin^2\\theta\\,d\\varphi^2$ 中的尺度因子 $r$ 与 $r\\sin\\theta$ 表明：同样的角增量，离原点越远、越靠近赤道，走过的弧长越长。\n\n度规行列式 $g=\\det(g_{ij})$ 控制体积：$dV=\\sqrt{g}\\,dx^1\\cdots dx^n$，球坐标下 $\\sqrt{g}=r^2\\sin\\theta$，恰好还原体积元 $dV=r^2\\sin\\theta\\,dr\\,d\\theta\\,d\\varphi$。度规还满足**度规相容性** $\\nabla_kg_{ij}=0$，并唯一决定无挠的 Christoffel 联络，是一切张量分析计算的起点。",
+    "definitionEn": "The **metric tensor** $g_{ij}$ is the ruler of a metric space; it is defined by the inner products of the local basis vectors, $g_{ij}=e_i\\cdot e_j$. With it, the squared length of an infinitesimal displacement $dx^i$ — the **line element** — is the quadratic form $ds^2=g_{ij}\\,dx^idx^j$, and arc length, angles, areas and volumes all follow from $g_{ij}$.\n\nThe metric matrix is symmetric and positive definite, hence invertible; its inverse components $g^{ij}$ satisfy $g_{ij}g^{jk}=\\delta^k_i$. The inverse metric **raises and lowers indices**: $v_i=g_{ij}v^j$ turns contravariant components into covariant ones, and $v^i=g^{ij}v_j$ does the reverse. Upper and lower indices are two ledgers for the same geometric object, and the metric is the exchange rate between them; the inner product reads $u\\cdot v=u^iv_i=g_{ij}u^iv^j$ whichever components are used.\n\nIn Cartesian coordinates $g_{ij}=\\delta_{ij}$ and the two kinds of components coincide; in curvilinear coordinates they part ways. For spherical coordinates $(r,\\theta,\\varphi)$ the metric is the diagonal matrix $\\operatorname{diag}(1,\\,r^2,\\,r^2\\sin^2\\theta)$, giving the line element $ds^2=dr^2+r^2d\\theta^2+r^2\\sin^2\\theta\\,d\\varphi^2$: the same angular increment covers more arc length farther from the origin and nearer the equator.\n\nThe determinant $g=\\det(g_{ij})$ controls volume: $dV=\\sqrt{g}\\,dx^1\\cdots dx^n$. For spherical coordinates $\\sqrt{g}=r^2\\sin\\theta$, recovering the familiar volume element $dV=r^2\\sin\\theta\\,dr\\,d\\theta\\,d\\varphi$. The metric also obeys **metric compatibility** $\\nabla_kg_{ij}=0$ and uniquely determines the torsion-free Christoffel connection — the starting point of all tensor calculus.",
+    "formulas": [
+      { "latex": "g_{ij}=e_{i}\\cdot e_{j},\\qquad ds^{2}=g_{ij}\\,dx^{i}dx^{j}", "note": "度规是基向量内积；线元是度规作用在位移上的二次型，是一切几何量的出发点。", "noteEn": "The metric is the matrix of basis-vector inner products; the line element is the metric applied to an infinitesimal displacement, the root of all geometry." },
+      { "latex": "v_{i}=g_{ij}v^{j},\\qquad v^{i}=g^{ij}v_{j},\\qquad g_{ij}g^{jk}=\\delta^{k}_{i}", "note": "用度规与逆度规升降指标；逆度规由 $g_{ij}g^{jk}=\\delta^k_i$ 定义，两者互为逆矩阵。", "noteEn": "The metric lowers indices and the inverse metric raises them; the inverse is defined by $g_{ij}g^{jk}=\\delta^k_i$." },
+      { "latex": "(g_{ij})=\\operatorname{diag}\\left(1,\\ r^{2},\\ r^{2}\\sin^{2}\\theta\\right)", "note": "球坐标的度规矩阵：径向系数为 1，两个角方向的尺度因子分别是 $r$ 与 $r\\sin\\theta$。", "noteEn": "The metric matrix in spherical coordinates: a unit radial coefficient with angular scale factors $r$ and $r\\sin\\theta$." },
+      { "latex": "ds^{2}=dr^{2}+r^{2}\\,d\\theta^{2}+r^{2}\\sin^{2}\\theta\\,d\\varphi^{2}", "note": "球坐标线元；沿 $\\theta$、$\\varphi$ 方向的弧长要分别乘上尺度因子 $r$ 与 $r\\sin\\theta$。", "noteEn": "The spherical line element: arcs in the $\\theta$ and $\\varphi$ directions are scaled by $r$ and $r\\sin\\theta$." },
+      { "latex": "g^{rr}=1,\\qquad g^{\\theta\\theta}=\\frac{1}{r^{2}},\\qquad g^{\\varphi\\varphi}=\\frac{1}{r^{2}\\sin^{2}\\theta},\\qquad \\sqrt{g}=r^{2}\\sin\\theta", "note": "球坐标的逆度规（对角元取倒数）与体积元系数；$\\det(g_{ij})=r^{4}\\sin^{2}\\theta$。", "noteEn": "The inverse metric in spherical coordinates (reciprocals of the diagonal entries) and the volume factor; $\\det(g_{ij})=r^{4}\\sin^{2}\\theta$." }
+    ],
+    "expression": {
+      "text": "ds² = g_ij dx^i dx^j；球坐标：ds² = dr² + r²dθ² + r²sin²θ dφ²",
+      "symbol": "g_{ij}",
+      "note": "度规是对称正定的二阶协变张量；它决定长度、角度与体积，并负责升降指标。",
+      "noteEn": "The metric is a symmetric positive-definite covariant rank-2 tensor; it fixes lengths, angles and volumes and raises or lowers indices."
+    },
+    "properties": [
+      "对称正定：$g_{ij}=g_{ji}$，且对非零向量恒有 $g_{ij}v^iv^j>0$，因此逆度规 $g^{ij}$ 总存在",
+      "直角坐标下 $g_{ij}=\\delta_{ij}$，协变与逆变分量数值相同；一般坐标下二者不同，但内积 $u^iv_i$ 不变",
+      "度规相容性：$\\nabla_kg_{ij}=0$，求协变导数与升降指标可以交换次序",
+      "体积元 $\\sqrt{g}\\,dx^1\\cdots dx^n$ 在坐标变换下不变（$\\sqrt{g}$ 的变化与 Jacobi 因子恰好抵消）",
+      "球坐标中 $\\det(g_{ij})=r^{4}\\sin^{2}\\theta$，$\\sqrt{g}=r^{2}\\sin\\theta$（除极轴外处处正则）"
+    ],
+    "propertiesEn": [
+      "Symmetric and positive definite: $g_{ij}=g_{ji}$ and $g_{ij}v^iv^j>0$ for every nonzero vector, so the inverse metric $g^{ij}$ always exists",
+      "In Cartesian coordinates $g_{ij}=\\delta_{ij}$ and the two kinds of components coincide; in general coordinates they differ while the inner product $u^iv_i$ stays the same",
+      "Metric compatibility $\\nabla_kg_{ij}=0$: differentiation and raising or lowering indices may be interchanged",
+      "The volume element $\\sqrt{g}\\,dx^1\\cdots dx^n$ is invariant under coordinate changes (the change in $\\sqrt{g}$ cancels the Jacobian factor)",
+      "For spherical coordinates $\\det(g_{ij})=r^{4}\\sin^{2}\\theta$ and $\\sqrt{g}=r^{2}\\sin\\theta$ (regular away from the polar axis)"
+    ],
+    "examples": [
+      {
+        "problem": "写出球坐标的逆度规，验证 $g_{ij}g^{jk}=\\delta^{k}_{i}$，并计算 $\\det(g_{ij})$。",
+        "solution": "球坐标度规是对角阵 $g=\\operatorname{diag}(1,\\ r^{2},\\ r^{2}\\sin^{2}\\theta)$，对角阵的逆就是对角元取倒数：\n\n$g^{rr}=1$，$g^{\\theta\\theta}=\\frac{1}{r^{2}}$，$g^{\\varphi\\varphi}=\\frac{1}{r^{2}\\sin^{2}\\theta}$。\n\n验证乘法：$r$ 行 $r$ 列为 $1\\times1=1$，$\\theta$ 行 $\\theta$ 列为 $r^{2}\\cdot\\frac{1}{r^{2}}=1$，$\\varphi$ 行 $\\varphi$ 列为 $r^{2}\\sin^{2}\\theta\\cdot\\frac{1}{r^{2}\\sin^{2}\\theta}=1$，所有非对角元为 $0$，故乘积恰为 $\\delta^{k}_{i}$。\n\n行列式 $\\det(g_{ij})=1\\cdot r^{2}\\cdot r^{2}\\sin^{2}\\theta=r^{4}\\sin^{2}\\theta$，取平方根得 $\\sqrt{g}=r^{2}\\sin\\theta$（$r>0$，$0<\\theta<\\pi$），代入 $dV=\\sqrt{g}\\,dr\\,d\\theta\\,d\\varphi$ 正是熟悉的球坐标体积元。"
+      },
+      {
+        "problem": "球坐标中某点的逆变分量为 $v^{i}=(1,\\ 0,\\ 2)$，求协变分量 $v_i$ 以及向量长度的平方 $g_{ij}v^{i}v^{j}$。",
+        "solution": "用降指标公式 $v_i=g_{ij}v^j$ 逐项计算：\n\n$v_r=g_{rr}v^{r}=1\\cdot1=1$；\n\n$v_{\\theta}=g_{\\theta\\theta}v^{\\theta}=r^{2}\\cdot0=0$；\n\n$v_{\\varphi}=g_{\\varphi\\varphi}v^{\\varphi}=r^{2}\\sin^{2}\\theta\\cdot2=2r^{2}\\sin^{2}\\theta$。\n\n长度平方 $=g_{ij}v^{i}v^{j}=g_{rr}(v^{r})^{2}+g_{\\varphi\\varphi}(v^{\\varphi})^{2}=1+4r^{2}\\sin^{2}\\theta$。\n\n也可直接用协变分量：$v^{i}v_{i}=1\\cdot1+2\\cdot2r^{2}\\sin^{2}\\theta=1+4r^{2}\\sin^{2}\\theta$，两种算法结果一致，说明指标升降不改变几何量。"
+      }
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [-2.5, 2.5],
+      "yRange": [-2.5, 2.5],
+      "levels": 10,
+      "title": "等距线 x² + y² = 常数：度规给出「距离」的标准"
+    },
+    "tags": ["度规", "指标升降", "球坐标", "线元"],
+    "links": ["tensor-introduction", "index-notation", "christoffel-symbols", "curvilinear-coordinates"]
+  },
+  {
+    "id": "christoffel-symbols",
+    "title": "Christoffel 符号与协变导数",
+    "titleEn": "Christoffel Symbols and the Covariant Derivative",
+    "branch": "vector",
+    "level": 5,
+    "summary": "由度规导数构成的联络系数，补偿弯曲坐标下基向量的变化，使导数成为张量并定义测地线。",
+    "summaryEn": "Connection coefficients built from derivatives of the metric; they compensate for the variation of basis vectors, making derivatives tensorial and defining geodesics.",
+    "definition": "在弯曲坐标中基向量随位置改变，普通偏导数 $\\partial_jv^i$ 不再是张量：坐标变换时它会多出与基向量变化相关的项。**Christoffel 符号**（第二类联络系数）正是为修正这一项而引入的组合量：\n$$\\Gamma^{k}{}_{ij}=\\frac{1}{2}g^{kl}\\left(\\partial_ig_{jl}+\\partial_jg_{il}-\\partial_lg_{ij}\\right),$$\n其中 $g^{kl}$ 是逆度规，括号内三项的符号依次是「$+$、$+$、$-$」。它完全由度规及其一阶导数决定。\n\n一个关键事实：**Christoffel 符号不是张量**。在坐标变换下，它除了按张量方式变换外还会多出一项与坐标变换二阶导数有关的非齐次项；因此「在某点选坐标使 $\\Gamma^k{}_{ij}=0$」可以做到（局部惯性系），但这并不意味着它在邻域中也为零。它在下指标上对称：$\\Gamma^k{}_{ij}=\\Gamma^k{}_{ji}$；而缩并 $\\Gamma^k{}_{ik}=\\partial_i\\ln\\sqrt{g}$ 反而是协变向量的分量。度规相容 $\\nabla_kg_{ij}=0$ 加上下指标对称（无挠），唯一地确定这套 Levi-Civita 联络。\n\n**协变导数**把偏导修正为真正的张量导数：对逆变向量 $\\nabla_jv^i=\\partial_jv^i+\\Gamma^i{}_{jk}v^k$，对协变向量 $\\nabla_jw_i=\\partial_jw_i-\\Gamma^k{}_{ij}w_k$；对高阶张量，每个指标配一个与它类型相应的 $\\pm\\Gamma$ 项。口诀：**逆变指标用加号、协变指标用减号**。标量的协变导数就是普通偏导 $\\nabla_if=\\partial_if$；协变导数满足莱布尼茨法则，并与度规可交换（$\\nabla_kg_{ij}=0$），所以升降指标与求导可以互换次序。\n\n协变导数为零的曲线是**测地线**，即弯曲空间中的「直线」：\n$$\\frac{d^{2}x^{k}}{ds^{2}}+\\Gamma^{k}{}_{ij}\\frac{dx^{i}}{ds}\\frac{dx^{j}}{ds}=0.$$\n在球面上它给出大圆；在广义相对论中，自由下落的粒子正沿着时空的测地线运动。",
+    "definitionEn": "In curvilinear coordinates the basis vectors change from point to point, so the partial derivative $\\partial_jv^i$ of a vector field is not a tensor: under a change of coordinates an extra term appears, produced by the variation of the basis. The **Christoffel symbols** (connection coefficients of the second kind) are exactly the corrections, built from the metric and its first derivatives:\n$$\\Gamma^{k}{}_{ij}=\\frac{1}{2}g^{kl}\\left(\\partial_ig_{jl}+\\partial_jg_{il}-\\partial_lg_{ij}\\right),$$\nwhere the signs inside the bracket are $+$, $+$, $-$.\n\nA crucial fact: **the Christoffel symbols are not a tensor.** Under a change of coordinates they pick up a non-homogeneous term containing second derivatives of the transformation, so although coordinates can be chosen to make all $\\Gamma^k{}_{ij}=0$ at a single point (a locally inertial frame), this cannot hold in a neighborhood. They are symmetric in the lower indices, $\\Gamma^k{}_{ij}=\\Gamma^k{}_{ji}$, and the contraction $\\Gamma^k{}_{ik}=\\partial_i\\ln\\sqrt{g}$ is a genuine covector. Metric compatibility $\\nabla_kg_{ij}=0$ together with this symmetry uniquely determines the Levi-Civita connection.\n\nThe **covariant derivative** turns partial derivatives into tensors: for a contravariant vector $\\nabla_jv^i=\\partial_jv^i+\\Gamma^i{}_{jk}v^k$, for a covariant vector $\\nabla_jw_i=\\partial_jw_i-\\Gamma^k{}_{ij}w_k$, and for higher-rank tensors every index receives its own $\\pm\\Gamma$ term. The rule of thumb: **plus for contravariant indices, minus for covariant ones**. For a scalar $\\nabla_if=\\partial_if$, and the covariant derivative obeys the Leibniz rule and commutes with the metric, so raising and lowering indices can be interchanged with differentiation.\n\nCurves with zero covariant acceleration are **geodesics**,\n$$\\frac{d^{2}x^{k}}{ds^{2}}+\\Gamma^{k}{}_{ij}\\frac{dx^{i}}{ds}\\frac{dx^{j}}{ds}=0,$$\nthe curved-space version of straight lines: great circles on a sphere, and free-fall worldlines in general relativity.",
+    "formulas": [
+      { "latex": "\\Gamma^{k}{}_{ij}=\\frac{1}{2}g^{kl}\\left(\\partial_{i}g_{jl}+\\partial_{j}g_{il}-\\partial_{l}g_{ij}\\right)", "note": "由度规及其导数计算第二类 Christoffel 符号；括号内三项符号依次为 $+$、$+$、$-$，别把第三项的负号写丢。", "noteEn": "The Christoffel symbols of the second kind from the metric and its derivatives; the signs are $+$, $+$, $-$ — the minus in the third term is essential." },
+      { "latex": "\\nabla_{j}v^{i}=\\partial_{j}v^{i}+\\Gamma^{i}{}_{jk}v^{k},\\qquad \\nabla_{j}w_{i}=\\partial_{j}w_{i}-\\Gamma^{k}{}_{ij}w_{k}", "note": "协变导数：逆变向量用加号、协变向量用减号；标量则 $\\nabla_if=\\partial_if$。", "noteEn": "Covariant derivative: plus for contravariant vectors, minus for covariant ones; scalars satisfy $\\nabla_if=\\partial_if$." },
+      { "latex": "\\Gamma^{k}{}_{ij}=\\Gamma^{k}{}_{ji},\\qquad \\Gamma^{k}{}_{ik}=\\partial_{i}\\ln\\sqrt{g}", "note": "下指标对称；缩并 $\\Gamma^k{}_{ik}$ 由度规行列式给出——它是向量，而 $\\Gamma^k{}_{ij}$ 本身不是张量。", "noteEn": "Symmetry in the lower indices; the contraction $\\Gamma^k{}_{ik}$ is given by the metric determinant — it is a covector although $\\Gamma^k{}_{ij}$ itself is not a tensor." },
+      { "latex": "\\nabla_{k}g_{ij}=0,\\qquad \\nabla_{k}\\delta^{i}_{j}=0", "note": "度规相容性：可以把指标自由地移入、移出协变导数。", "noteEn": "Metric compatibility: indices may be moved freely into and out of the covariant derivative." },
+      { "latex": "\\frac{d^{2}x^{k}}{ds^{2}}+\\Gamma^{k}{}_{ij}\\frac{dx^{i}}{ds}\\frac{dx^{j}}{ds}=0", "note": "测地线方程：协变加速度为零的曲线；球面上是大圆，弯曲时空中是自由粒子的轨道。", "noteEn": "The geodesic equation: the curve with zero covariant acceleration — great circles on a sphere, free-particle orbits in curved spacetime." }
+    ],
+    "expression": {
+      "text": "Γ^k_ij = ½ g^kl (∂_i g_jl + ∂_j g_il − ∂_l g_ij)；∇_j v^i = ∂_j v^i + Γ^i_jk v^k",
+      "symbol": "\\Gamma^{k}{}_{ij},\\qquad \\nabla_{j}v^{i}",
+      "note": "Christoffel 符号不是张量，专门用来补偿基向量随坐标的变化；它是 Levi-Civita 联络的分量。",
+      "noteEn": "Christoffel symbols are not tensors; they compensate for the variation of basis vectors and are the components of the Levi-Civita connection."
+    },
+    "properties": [
+      "Christoffel 符号不是张量：坐标变换时会多出与二阶导数 $\\partial^{2}x^{a}/\\partial x'{}^i\\partial x'{}^j$ 有关的非齐次项，所以「在某点为零」不能推广到邻域",
+      "下指标对称 $\\Gamma^k{}_{ij}=\\Gamma^k{}_{ji}$（无挠）；缩并 $\\Gamma^k{}_{ik}=\\partial_i\\ln\\sqrt{g}$ 是货真价实的向量",
+      "可以通过选择坐标（局部惯性系）让某点全部 $\\Gamma^k{}_{ij}$ 为零，在这一点局部的物理规律回到平直形式",
+      "度规相容性 $\\nabla_kg_{ij}=0$ 与下指标对称合起来唯一确定 Levi-Civita 联络",
+      "$n$ 维空间中独立的联络系数有 $n^{2}(n+1)/2$ 个（$n=3$ 时 18 个，$n=4$ 时 40 个）"
+    ],
+    "propertiesEn": [
+      "Christoffel symbols are not tensors: a coordinate change adds a non-homogeneous term involving $\\partial^{2}x^{a}/\\partial x'{}^i\\partial x'{}^j$, so vanishing at one point does not extend to a neighborhood",
+      "Symmetry in the lower indices, $\\Gamma^k{}_{ij}=\\Gamma^k{}_{ji}$ (torsion-free); the contraction $\\Gamma^k{}_{ik}=\\partial_i\\ln\\sqrt{g}$ is a genuine covector",
+      "Coordinates can be chosen (a locally inertial frame) so that all $\\Gamma^k{}_{ij}$ vanish at a given point, where physics locally takes its flat-space form",
+      "Metric compatibility $\\nabla_kg_{ij}=0$ together with lower-index symmetry uniquely determines the Levi-Civita connection",
+      "In $n$ dimensions there are $n^{2}(n+1)/2$ independent connection coefficients (18 for $n=3$, 40 for $n=4$)"
+    ],
+    "examples": [
+      {
+        "problem": "用度规公式计算球坐标下的 Christoffel 符号 $\\Gamma^{r}{}_{\\theta\\theta}$、$\\Gamma^{\\varphi}{}_{r\\varphi}$ 与 $\\Gamma^{\\theta}{}_{\\varphi\\varphi}$。",
+        "solution": "球坐标度规为 $g_{rr}=1$、$g_{\\theta\\theta}=r^{2}$、$g_{\\varphi\\varphi}=r^{2}\\sin^{2}\\theta$，逆度规为 $g^{rr}=1$、$g^{\\theta\\theta}=1/r^{2}$、$g^{\\varphi\\varphi}=1/(r^{2}\\sin^{2}\\theta)$。\n\n$\\Gamma^{r}{}_{\\theta\\theta}=\\frac{1}{2}g^{rr}\\left(\\partial_{\\theta}g_{\\theta r}+\\partial_{\\theta}g_{r\\theta}-\\partial_{r}g_{\\theta\\theta}\\right)=\\frac{1}{2}\\left(0+0-2r\\right)=-r$。\n\n$\\Gamma^{\\varphi}{}_{r\\varphi}=\\frac{1}{2}g^{\\varphi\\varphi}\\left(\\partial_{r}g_{\\varphi\\varphi}+\\partial_{\\varphi}g_{r\\varphi}-\\partial_{\\varphi}g_{r\\varphi}\\right)=\\frac{1}{2}\\cdot\\frac{1}{r^{2}\\sin^{2}\\theta}\\cdot2r\\sin^{2}\\theta=\\frac{1}{r}$。\n\n$\\Gamma^{\\theta}{}_{\\varphi\\varphi}=\\frac{1}{2}g^{\\theta\\theta}\\left(\\partial_{\\varphi}g_{\\varphi\\theta}+\\partial_{\\varphi}g_{\\theta\\varphi}-\\partial_{\\theta}g_{\\varphi\\varphi}\\right)=\\frac{1}{2}\\cdot\\frac{1}{r^{2}}\\cdot\\left(-2r^{2}\\sin\\theta\\cos\\theta\\right)=-\\sin\\theta\\cos\\theta$。\n\n其余非零的还有 $\\Gamma^{r}{}_{\\varphi\\varphi}=-r\\sin^{2}\\theta$、$\\Gamma^{\\theta}{}_{r\\theta}=\\Gamma^{\\theta}{}_{\\theta r}=\\frac{1}{r}$ 以及 $\\Gamma^{\\varphi}{}_{\\theta\\varphi}=\\cot\\theta$。"
+      },
+      {
+        "problem": "验证球坐标下的度规相容性 $\\nabla_{\\theta}g_{\\varphi\\varphi}=0$。",
+        "solution": "度规的协变导数公式为 $\\nabla_{k}g_{ij}=\\partial_{k}g_{ij}-\\Gamma^{l}{}_{ki}g_{lj}-\\Gamma^{l}{}_{kj}g_{il}$。取 $k=\\theta$、$i=j=\\varphi$：\n\n第一项 $\\partial_{\\theta}g_{\\varphi\\varphi}=\\partial_{\\theta}\\left(r^{2}\\sin^{2}\\theta\\right)=2r^{2}\\sin\\theta\\cos\\theta$。\n\n由于度规是对角阵，两个 $\\Gamma$ 项中只有 $l=\\varphi$ 的项存活，而 $\\Gamma^{\\varphi}{}_{\\theta\\varphi}=\\cot\\theta$，故两项合计 $2\\Gamma^{\\varphi}{}_{\\theta\\varphi}g_{\\varphi\\varphi}=2\\cot\\theta\\cdot r^{2}\\sin^{2}\\theta=2r^{2}\\sin\\theta\\cos\\theta$。\n\n相减得 $\\nabla_{\\theta}g_{\\varphi\\varphi}=2r^{2}\\sin\\theta\\cos\\theta-2r^{2}\\sin\\theta\\cos\\theta=0$，度规相容性成立。"
+      }
+    ],
+    "tags": ["联络", "协变导数", "测地线", "球坐标"],
+    "links": ["metric-tensor", "tensor-introduction", "curvilinear-coordinates", "index-notation"]
+  },
+  {
+    "id": "stress-strain-tensor",
+    "title": "应力张量与应变张量",
+    "titleEn": "Stress and Strain Tensors",
+    "branch": "vector",
+    "level": 5,
+    "summary": "描述连续介质一点受力与变形的两个二阶对称张量，由柯西公式、几何方程与广义胡克定律相互联系。",
+    "summaryEn": "The two symmetric rank-2 tensors describing force and deformation at a point of a continuous medium, linked by the Cauchy formula, the strain-displacement relation and Hooke's law.",
+    "definition": "**应力张量** $\\sigma_{ij}$ 描述连续介质内部一点的受力状态。过该点取一个法向量为 $n$ 的小面元，面上单位面积的作用力（面力）$t_i$ 由**柯西公式** $t_i=\\sigma_{ij}n_j$ 给出。分量 $\\sigma_{ij}$ 的读法是：作用在法向为 $e_i$ 的面上、沿 $e_j$ 方向的应力分量。**角动量守恒要求应力张量对称**：$\\sigma_{ij}=\\sigma_{ji}$——这正是二维单元体上切应力必须成对反向出现的含义，也是应力张量可以正交对角化（得到主应力与主方向）的原因。\n\n**应变张量** $\\varepsilon_{ij}$ 描述物体的小变形，由位移场 $u_i$ 的梯度构造：$\\varepsilon_{ij}=\\frac{1}{2}(\\partial_iu_j+\\partial_ju_i)$。对称化是必需的：只有位移梯度的对称部分才产生应力；反对称部分 $\\omega_{ij}=\\frac{1}{2}(\\partial_iu_j-\\partial_ju_i)$ 描述局部刚体转动，与应力无关。应变张量的迹 $\\varepsilon_{ii}$ 是体积应变（单位体积的体积变化），而应力张量的迹 $\\sigma_{ii}$ 与平均压强相联系。\n\n在弹性范围内应力与应变成正比。最一般的线性关系是**广义胡克定律** $\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}$，其中四阶张量 $C_{ijkl}$ 是弹性刚度张量。对**各向同性**材料，独立的弹性常数只有两个，本构关系简化为 $\\sigma_{ij}=\\lambda\\varepsilon_{kk}\\delta_{ij}+2\\mu\\varepsilon_{ij}$，$\\lambda$、$\\mu$ 是拉梅常数（$\\mu$ 就是剪切模量）。\n\n最后，平衡状态下动量守恒给出**平衡方程**：含体力时为 $\\partial_j\\sigma_{ij}+f_i=0$，无体力时退化为 $\\partial_j\\sigma_{ij}=0$——应力的散度为零。平衡方程、几何方程（应变-位移关系）与本构方程合起来，构成弹性静力学的基本方程组；再配上边界条件，即可求解应力场与位移场。",
+    "definitionEn": "The **stress tensor** $\\sigma_{ij}$ describes the state of force at a point of a continuous medium. Take a small surface element with unit normal $n$; the force per unit area (traction) is given by the **Cauchy formula** $t_i=\\sigma_{ij}n_j$. The component $\\sigma_{ij}$ is the force per unit area acting in the direction $e_j$ on the surface whose normal is $e_i$. **Conservation of angular momentum forces the stress tensor to be symmetric**, $\\sigma_{ij}=\\sigma_{ji}$: shear stresses appear in opposing pairs on adjacent faces, and the stress tensor can be diagonalized, yielding the principal stresses and principal directions.\n\nThe **strain tensor** $\\varepsilon_{ij}$ describes small deformations; it is built from the displacement field $u_i$ as $\\varepsilon_{ij}=\\frac{1}{2}(\\partial_iu_j+\\partial_ju_i)$. The symmetrization is essential: only the symmetric part of the displacement gradient creates stress, while the antisymmetric part $\\omega_{ij}=\\frac{1}{2}(\\partial_iu_j-\\partial_ju_i)$ is a local rigid rotation. The trace $\\varepsilon_{ii}$ is the volumetric strain (relative volume change), and the trace $\\sigma_{ii}$ is connected with the mean pressure.\n\nWithin the elastic range, stress is proportional to strain. The general linear relation is **Hooke's law** $\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}$, with the fourth-rank tensor $C_{ijkl}$ the elastic stiffness. For an **isotropic** material only two elastic constants survive and the constitutive law becomes $\\sigma_{ij}=\\lambda\\varepsilon_{kk}\\delta_{ij}+2\\mu\\varepsilon_{ij}$, where $\\lambda$ and $\\mu$ are the Lamé constants ($\\mu$ is the shear modulus).\n\nFinally, in equilibrium the conservation of momentum gives the **equilibrium equation** $\\partial_j\\sigma_{ij}+f_i=0$ with a body force $f_i$, reducing to $\\partial_j\\sigma_{ij}=0$ without body forces: the divergence of the stress vanishes. Together with the geometric relations and the constitutive law it forms the basic system of elastostatics, solved under appropriate boundary conditions.",
+    "formulas": [
+      { "latex": "t_{i}=\\sigma_{ij}n_{j}", "note": "柯西公式：法向量为 $n$ 的面元上，单位面积作用力由应力张量与法向缩并得到。", "noteEn": "The Cauchy formula: on a surface element with normal $n$, the traction is the stress tensor contracted with the normal." },
+      { "latex": "\\sigma_{ij}=\\sigma_{ji}", "note": "应力张量对称：由微元体的角动量守恒得到，切应力在互相垂直的两面上成对相等。", "noteEn": "The stress tensor is symmetric: angular momentum balance of an infinitesimal element makes shear stresses equal on mutually perpendicular faces." },
+      { "latex": "\\varepsilon_{ij}=\\frac{1}{2}\\left(\\partial_{i}u_{j}+\\partial_{j}u_{i}\\right)", "note": "小变形应变张量：位移梯度的对称部分；它的迹 $\\varepsilon_{ii}$ 是体积应变。", "noteEn": "The infinitesimal strain tensor: the symmetric part of the displacement gradient, whose trace $\\varepsilon_{ii}$ is the volumetric strain." },
+      { "latex": "\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}", "note": "广义胡克定律：应力是应变的线性函数，四阶张量 $C_{ijkl}$ 为弹性刚度张量。", "noteEn": "The generalized Hooke law: stress is a linear function of strain, with the fourth-rank stiffness tensor $C_{ijkl}$." },
+      { "latex": "\\sigma_{ij}=\\lambda\\varepsilon_{kk}\\delta_{ij}+2\\mu\\varepsilon_{ij}", "note": "各向同性材料的胡克定律；$\\lambda$、$\\mu$ 是拉梅常数，$\\mu$ 为剪切模量；无体力时的平衡方程为 $\\partial_j\\sigma_{ij}=0$。", "noteEn": "Hooke's law for isotropic materials; $\\lambda$ and $\\mu$ are the Lamé constants ($\\mu$ is the shear modulus), and equilibrium without body forces reads $\\partial_j\\sigma_{ij}=0$." }
+    ],
+    "expression": {
+      "text": "σ_ij：作用在法向为 e_i 的面上、沿 e_j 方向的应力分量；ε_ij = ½(∂_i u_j + ∂_j u_i)",
+      "symbol": "\\sigma_{ij},\\qquad \\varepsilon_{ij}",
+      "note": "两个二阶对称张量由本构关系联系：$\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}$；各向同性时 $\\sigma_{ij}=\\lambda\\varepsilon_{kk}\\delta_{ij}+2\\mu\\varepsilon_{ij}$。",
+      "noteEn": "The two symmetric rank-2 tensors are linked by the constitutive law $\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}$; for isotropic media $\\sigma_{ij}=\\lambda\\varepsilon_{kk}\\delta_{ij}+2\\mu\\varepsilon_{ij}$."
+    },
+    "properties": [
+      "对称性 $\\sigma_{ij}=\\sigma_{ji}$ 来自角动量守恒；对称张量可正交对角化，三个主应力与三个正交主方向刻画一点的受力",
+      "平衡方程（无体力）：$\\partial_j\\sigma_{ij}=0$；含体力时 $\\partial_j\\sigma_{ij}+f_i=0$，是动量守恒的静态形式",
+      "应变是位移梯度的对称部分；反对称部分 $\\omega_{ij}=\\frac{1}{2}(\\partial_iu_j-\\partial_ju_i)$ 是刚体转动，不产生应力",
+      "体积应变 $\\varepsilon_{ii}$：静水压部分 $-p\\delta_{ij}$ 只改变体积、不改变形状；应力可分解为 $\\sigma_{ij}=-p\\delta_{ij}+s_{ij}$",
+      "各向同性弹性体 $\\sigma_{ii}=(3\\lambda+2\\mu)\\varepsilon_{kk}$，体积模量 $K=\\lambda+\\frac{2\\mu}{3}$；独立弹性常数只有两个"
+    ],
+    "propertiesEn": [
+      "Symmetry $\\sigma_{ij}=\\sigma_{ji}$ follows from conservation of angular momentum; a symmetric tensor can be diagonalized, so three principal stresses along three orthogonal directions describe the state of stress",
+      "Equilibrium without body forces: $\\partial_j\\sigma_{ij}=0$; with body forces $\\partial_j\\sigma_{ij}+f_i=0$ — the static form of momentum conservation",
+      "Strain is the symmetric part of the displacement gradient; the antisymmetric part $\\omega_{ij}=\\frac{1}{2}(\\partial_iu_j-\\partial_ju_i)$ is a rigid rotation and creates no stress",
+      "Volumetric strain $\\varepsilon_{ii}$: the hydrostatic part $-p\\delta_{ij}$ changes volume but not shape, splitting the stress as $\\sigma_{ij}=-p\\delta_{ij}+s_{ij}$",
+      "For an isotropic elastic solid $\\sigma_{ii}=(3\\lambda+2\\mu)\\varepsilon_{kk}$ with bulk modulus $K=\\lambda+\\frac{2\\mu}{3}$; only two elastic constants are independent"
+    ],
+    "examples": [
+      {
+        "problem": "已知二维位移场 $u_1=3x^{2}$、$u_2=2xy$（设 $u_3=0$），求应变张量 $\\varepsilon_{ij}$ 与体积应变 $\\varepsilon_{ii}$。",
+        "solution": "按定义逐项求偏导：\n\n$\\varepsilon_{11}=\\partial_x(3x^{2})=6x$；\n\n$\\varepsilon_{22}=\\partial_y(2xy)=2x$；\n\n$\\varepsilon_{33}=\\partial_z(0)=0$；\n\n$\\varepsilon_{12}=\\varepsilon_{21}=\\frac{1}{2}\\left(\\partial_x(2xy)+\\partial_y(3x^{2})\\right)=\\frac{1}{2}(2y+0)=y$；\n\n含指标 3 的其余分量全为 $0$。\n\n体积应变 $\\varepsilon_{ii}=\\varepsilon_{11}+\\varepsilon_{22}+\\varepsilon_{33}=6x+2x+0=8x$，即该点附近单位体积随 $x$ 线性膨胀。"
+      },
+      {
+        "problem": "某点应力张量的非零分量（单位 MPa）为 $\\sigma_{11}=3$、$\\sigma_{22}=-1$、$\\sigma_{12}=\\sigma_{21}=1$。求法向 $n=\\frac{1}{\\sqrt{2}}(1,\\,1,\\,0)$ 的面上的面力 $t_i$ 及其法向分量。",
+        "solution": "由柯西公式 $t_i=\\sigma_{ij}n_j$：\n\n$t_1=\\sigma_{11}n_1+\\sigma_{12}n_2=3\\cdot\\frac{1}{\\sqrt{2}}+1\\cdot\\frac{1}{\\sqrt{2}}=\\frac{4}{\\sqrt{2}}=2\\sqrt{2}$；\n\n$t_2=\\sigma_{21}n_1+\\sigma_{22}n_2=1\\cdot\\frac{1}{\\sqrt{2}}+(-1)\\cdot\\frac{1}{\\sqrt{2}}=0$；\n\n$t_3=0$。于是 $\\boldsymbol{t}=(2\\sqrt{2},\\,0,\\,0)$，恰好沿 $x$ 方向。\n\n法向分量 $\\sigma_n=\\boldsymbol{t}\\cdot\\boldsymbol{n}=2\\sqrt{2}\\cdot\\frac{1}{\\sqrt{2}}=2$ MPa；切向分量的大小为 $\\sqrt{|\\boldsymbol{t}|^{2}-\\sigma_n^{2}}=\\sqrt{8-4}=2$ MPa。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [-2.6, 6.6],
+      "yRange": [-2.6, 6.6],
+      "elements": [
+        { "type": "polygon", "points": [[0, 0], [4, 0], [4, 4], [0, 4]], "fill": "rgba(76,201,240,0.10)", "color": "#4cc9f0" },
+        { "type": "segment", "from": [4, 2], "to": [5.4, 2], "color": "#4cc9f0", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [0, 2], "to": [-1.4, 2], "color": "#4cc9f0", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [2, 4], "to": [2, 5.4], "color": "#ff6b9d", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [2, 0], "to": [2, -1.4], "color": "#ff6b9d", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [0.9, 4], "to": [2.3, 4], "color": "#ffd166", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [4, 0.9], "to": [4, 2.3], "color": "#ffd166", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [3.1, 0], "to": [1.7, 0], "color": "#ffd166", "arrow": true, "width": 2 },
+        { "type": "segment", "from": [0, 3.1], "to": [0, 1.7], "color": "#ffd166", "arrow": true, "width": 2 },
+        { "type": "label", "at": [5.55, 2.3], "text": "σₓ", "color": "#4cc9f0" },
+        { "type": "label", "at": [-2.0, 2.35], "text": "σₓ", "color": "#4cc9f0" },
+        { "type": "label", "at": [2.35, 5.5], "text": "σᵧ", "color": "#ff6b9d" },
+        { "type": "label", "at": [2.35, -1.8], "text": "σᵧ", "color": "#ff6b9d" },
+        { "type": "label", "at": [2.5, 4.3], "text": "τᵧₓ", "color": "#ffd166" },
+        { "type": "label", "at": [4.3, 2.5], "text": "τₓᵧ", "color": "#ffd166" },
+        { "type": "label", "at": [1.35, -0.5], "text": "τᵧₓ", "color": "#ffd166" },
+        { "type": "label", "at": [-0.6, 1.35], "text": "τₓᵧ", "color": "#ffd166" }
+      ],
+      "title": "二维应力单元体：正应力 σ 与切应力 τ 成对出现"
+    },
+    "tags": ["应力张量", "应变张量", "胡克定律", "弹性力学"],
+    "links": ["index-notation", "tensor-algebra", "tensor-introduction", "divergence-curl"]
+  }
+]

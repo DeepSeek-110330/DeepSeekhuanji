@@ -1,0 +1,148 @@
+[
+  {
+    "id": "exponential-function",
+    "title": "指数函数",
+    "titleEn": "Exponential Function",
+    "branch": "function",
+    "level": 3,
+    "summary": "形如 a^x 的函数，描述成倍增长或衰减。",
+    "summaryEn": "A function of the form a^x, describing exponential growth or decay.",
+    "definition": "设 $a > 0$ 且 $a \\neq 1$，则函数\n\n$$f(x) = a^x \\quad (x \\in \\mathbb{R})$$\n\n称为**指数函数**，其中 $a$ 叫底数。它的定义域是整个实数集 $\\mathbb{R}$，值域是正实数集 $(0, +\\infty)$。\n\n当 $a > 1$ 时函数单调递增（增长）；当 $0 < a < 1$ 时单调递减（衰减）。指数函数最重要的特征是：自变量每增加 1，函数值就乘以固定的倍数 $a$。",
+    "definitionEn": "For $a > 0$ and $a \\neq 1$, the function\n\n$$f(x) = a^x \\quad (x \\in \\mathbb{R})$$\n\nis called the **exponential function** with base $a$. Its domain is all real numbers $\\mathbb{R}$ and its range is the positive reals $(0, +\\infty)$. It is increasing when $a > 1$ (growth) and decreasing when $0 < a < 1$ (decay). Its defining feature is that each unit increase in the exponent multiplies the value by the fixed factor $a$.",
+    "formulas": [
+      { "latex": "f(x) = a^x,\\quad a>0,\\ a\\neq 1", "note": "指数函数的定义式", "noteEn": "Definition of the exponential function" },
+      { "latex": "a^{x+y} = a^x \\cdot a^y", "note": "指数运算法则：相乘时指数相加", "noteEn": "Product rule: exponents add when bases multiply" },
+      { "latex": "(a^x)^y = a^{xy}", "note": "幂的幂法则", "noteEn": "Power of a power" },
+      { "latex": "\\lim_{x\\to\\infty}\\left(1+\\frac{1}{x}\\right)^x = e", "note": "自然常数 e 的极限定义", "noteEn": "The limit defining Euler's number e" }
+    ],
+    "expression": {
+      "text": "f(x)=a^x  (a>0, a≠1)",
+      "symbol": "a^x",
+      "note": "底数 a 必须为正且不等于 1；指数 x 可以是任意实数。",
+      "noteEn": "The base a must be positive and not equal to 1; the exponent x can be any real number."
+    },
+    "properties": [
+      "图像恒过定点 $(0, 1)$，因为 $a^0 = 1$",
+      "图像永远在 $x$ 轴上方，值域为 $(0, +\\infty)$",
+      "不接触 $x$ 轴，$y = 0$ 是水平渐近线",
+      "$a>1$ 时单调递增，$0<a<1$ 时单调递减"
+    ],
+    "propertiesEn": [
+      "Always passes through $(0, 1)$ since $a^0 = 1$",
+      "Always above the x-axis; range is $(0, +\\infty)$",
+      "Never touches the x-axis; $y = 0$ is a horizontal asymptote",
+      "Increasing for $a > 1$, decreasing for $0 < a < 1$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "a^x", "params": { "a": 2 }, "color": "#00d4d4", "label": "y = 2^x" },
+        { "expr": "(1/2)^x", "color": "#ff6b9d", "label": "y = (1/2)^x" }
+      ],
+      "xRange": [-3, 3],
+      "yRange": [-1, 9],
+      "title": "指数函数图像"
+    },
+    "examples": [
+      { "problem": "比较 $2^{0.3}$ 与 $2^{0.5}$ 的大小。", "solution": "因为底数 $2 > 1$，函数单调递增，而 $0.3 < 0.5$，所以 $2^{0.3} < 2^{0.5}$。" },
+      { "problem": "解方程 $2^{x} = 8$。", "solution": "把 8 写成 2 的幂：$8 = 2^3$，所以 $2^x = 2^3$，由指数函数单调性得 $x = 3$。" }
+    ],
+    "tags": ["指数", "初等函数", "增长"],
+    "links": ["logarithm", "derivative", "rational-exponent", "exponential-growth-decay"]
+  },
+  {
+    "id": "unit-circle",
+    "title": "单位圆",
+    "titleEn": "Unit Circle",
+    "branch": "trigonometry",
+    "level": 2,
+    "summary": "半径为 1、以原点为圆心的圆，是三角函数的几何基础。",
+    "summaryEn": "The circle of radius 1 centered at the origin; the geometric foundation of trigonometry.",
+    "definition": "在平面直角坐标系中，以原点 $O$ 为圆心、半径为 $1$ 的圆称为**单位圆**，方程为\n\n$$x^2 + y^2 = 1$$\n\n从 $x$ 轴正半轴出发逆时针转过角 $\\theta$，终边与单位圆的交点坐标恰好是 $(\\cos\\theta, \\sin\\theta)$。\n\n这就是三角函数的**单位圆定义**：它把三角函数从「直角三角形的边长之比」推广到了一切实数的角，是理解周期性、诱导公式的关键工具。",
+    "definitionEn": "In the Cartesian plane, the circle centered at the origin $O$ with radius $1$ is the **unit circle**, with equation\n\n$$x^2 + y^2 = 1$$\n\nStarting from the positive x-axis and rotating counterclockwise by an angle $\\theta$, the terminal side meets the unit circle at the point $(\\cos\\theta, \\sin\\theta)$.\n\nThis is the **unit-circle definition** of the trigonometric functions: it extends them from ratios of triangle sides to all real angles and is the key to understanding periodicity and the reduction formulas.",
+    "formulas": [
+      { "latex": "x^2 + y^2 = 1", "note": "单位圆的标准方程", "noteEn": "Equation of the unit circle" },
+      { "latex": "P(\\theta) = (\\cos\\theta,\\ \\sin\\theta)", "note": "终边与单位圆的交点坐标", "noteEn": "Coordinates where the terminal side meets the circle" },
+      { "latex": "\\cos^2\\theta + \\sin^2\\theta = 1", "note": "由单位圆方程直接得到的基本恒等式", "noteEn": "Fundamental identity, immediate from the circle equation" },
+      { "latex": "\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}", "note": "正切是正弦与余弦之比", "noteEn": "Tangent as the ratio of sine to cosine" }
+    ],
+    "expression": {
+      "text": "x² + y² = 1,   P(θ) = (cos θ, sin θ)",
+      "symbol": "x^2+y^2=1",
+      "note": "圆上任意一点到原点的距离恒为 1。",
+      "noteEn": "Every point on the circle is exactly 1 unit from the origin."
+    },
+    "properties": [
+      "圆上每一点的坐标都满足 $x^2 + y^2 = 1$",
+      "角度每增加 $2\\pi$，交点回到原处，体现三角函数的周期性",
+      "四个特殊角 $0, \\frac{\\pi}{2}, \\pi, \\frac{3\\pi}{2}$ 对应圆上四个顶点",
+      "点的坐标符号决定三角函数在各象限的正负"
+    ],
+    "propertiesEn": [
+      "Every point satisfies $x^2 + y^2 = 1$",
+      "Adding $2\\pi$ to the angle returns to the same point, showing periodicity",
+      "The four special angles $0, \\frac{\\pi}{2}, \\pi, \\frac{3\\pi}{2}$ give the four vertices",
+      "The signs of the coordinates determine the signs of the trig functions in each quadrant"
+    ],
+    "plot": { "type": "unitcircle", "angle": 1.047, "title": "单位圆与三角函数" },
+    "examples": [
+      { "problem": "已知角 $\\theta$ 的终边过点 $P\\left(\\frac{3}{5}, \\frac{4}{5}\\right)$，求 $\\sin\\theta$ 与 $\\cos\\theta$。", "solution": "因为点在单位圆上，直接读出 $\\cos\\theta = \\frac{3}{5}$，$\\sin\\theta = \\frac{4}{5}$。验证：$\\left(\\frac{3}{5}\\right)^2 + \\left(\\frac{4}{5}\\right)^2 = \\frac{9+16}{25} = 1$。" }
+    ],
+    "tags": ["单位圆", "三角函数", "几何"],
+    "links": ["trigonometric-definition", "sine-function", "cosine-function", "fundamental-identities", "angle-radian"]
+  },
+  {
+    "id": "triangle",
+    "title": "三角形",
+    "titleEn": "Triangle",
+    "branch": "trigonometry",
+    "level": 1,
+    "summary": "三条线段首尾相接围成的最基本多边形。",
+    "summaryEn": "The simplest polygon, bounded by three line segments.",
+    "definition": "由不在同一直线上的三条线段首尾顺次相接组成的封闭图形叫做**三角形**。三个内角之和恒为 $180^\\circ$，即 $\\pi$ 弧度。\n\n三角形是解三角形与三角学的起点：正弦定理、余弦定理、面积公式都建立在它的边角关系之上。按角可分为锐角、直角、钝角三角形；按边可分为等边、等腰、不等边三角形。",
+    "definitionEn": "A **triangle** is the closed figure formed by three line segments joining three non-collinear points. Its three interior angles always sum to $180^\\circ$, i.e. $\\pi$ radians.\n\nTriangles are the starting point of trigonometry: the law of sines, the law of cosines, and the area formulas all rest on their side-angle relations. They are classified by angles (acute, right, obtuse) or by sides (equilateral, isosceles, scalene).",
+    "formulas": [
+      { "latex": "A + B + C = \\pi", "note": "三角形内角和定理（弧度）", "noteEn": "Interior angle sum (radians)" },
+      { "latex": "a + b > c", "note": "三角不等式：两边之和大于第三边", "noteEn": "Triangle inequality" },
+      { "latex": "S = \\frac{1}{2}ab\\sin C", "note": "已知两边及其夹角的面积公式", "noteEn": "Area from two sides and the included angle" }
+    ],
+    "expression": {
+      "text": "A + B + C = 180°,  a + b > c",
+      "symbol": "A+B+C=\\pi",
+      "note": "三个内角 A、B、C 之和恒为 π。",
+      "noteEn": "The interior angles A, B, C always sum to π."
+    },
+    "properties": [
+      "内角和恒为 $180^\\circ$（$\\pi$ 弧度），与三角形大小形状无关",
+      "任意两边之和大于第三边，任意两边之差小于第三边",
+      "大边对大角，大角对大边",
+      "直角三角形满足勾股定理 $a^2 + b^2 = c^2$"
+    ],
+    "propertiesEn": [
+      "Interior angles sum to $180^\\circ$ ($\\pi$) regardless of size or shape",
+      "Any two sides together exceed the third; their difference is less than the third",
+      "The larger side is opposite the larger angle",
+      "A right triangle satisfies the Pythagorean theorem $a^2 + b^2 = c^2$"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [-1, 6],
+      "yRange": [-1, 5],
+      "elements": [
+        { "type": "polygon", "points": [[0, 0], [5, 0], [2, 4]], "fill": "rgba(76,201,240,0.12)", "color": "#4cc9f0" },
+        { "type": "point", "at": [0, 0], "label": "A" },
+        { "type": "point", "at": [5, 0], "label": "B" },
+        { "type": "point", "at": [2, 4], "label": "C" },
+        { "type": "label", "at": [2.5, -0.55], "text": "c" },
+        { "type": "label", "at": [0.7, 2.1], "text": "b" },
+        { "type": "label", "at": [3.9, 2.1], "text": "a" }
+      ],
+      "title": "三角形 ABC（A + B + C = 180°）"
+    },
+    "examples": [
+      { "problem": "在 $\\triangle ABC$ 中，$A = 50^\\circ$，$B = 60^\\circ$，求 $C$。", "solution": "由内角和定理 $A + B + C = 180^\\circ$，得 $C = 180^\\circ - 50^\\circ - 60^\\circ = 70^\\circ$。" }
+    ],
+    "tags": ["三角形", "几何", "内角和"],
+    "links": ["law-of-sines", "law-of-cosines", "pythagorean", "triangle-area"]
+  }
+]

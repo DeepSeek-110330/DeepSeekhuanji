@@ -1,0 +1,504 @@
+[
+  {
+    "id": "gaussian-quadrature",
+    "title": "高斯求积公式",
+    "titleEn": "Gaussian Quadrature",
+    "branch": "numerical",
+    "level": 5,
+    "summary": "节点取 n 次勒让德多项式 P_n(x) 的零点、权重取 A_i=2/[(1-x_i^2)(P_n'(x_i))^2]，n 个节点就达到 2n-1 次代数精度——相同节点数下精度最高的数值积分公式。",
+    "summaryEn": "Take the zeros of the n-th Legendre polynomial as nodes with weights A_i=2/[(1-x_i^2)(P_n'(x_i))^2]; n nodes achieve degree 2n-1 exactness, the highest possible for any n-point rule.",
+    "definition": "数值积分公式一般写作 $\\int_a^b f(x)\\,dx\\approx\\sum_{i=1}^n A_if(x_i)$。牛顿-科特斯型公式（梯形、辛普森等）把节点固定成等距点，只优化权重；高斯求积反其道而行：**节点位置与权重一起优化**，让 $n$ 个节点能精确积分尽可能高次的多项式。可以证明，$n$ 个节点的求积公式代数精度最高只有 $2n-1$，而达到这一上界的唯一选择是取节点为 **$n$ 次勒让德多项式 $P_n(x)$ 的零点**，权重为\n$$A_i=\\frac{2}{(1-x_i^2)\\,[P_n'(x_i)]^2},$$\n于是得到标准区间 $[-1,1]$ 上的高斯-勒让德公式\n$$\\int_{-1}^{1}f(x)\\,dx\\approx\\sum_{i=1}^{n}A_if(x_i).$$\n\n为什么偏偏是勒让德零点？勒让德多项式在 $[-1,1]$ 上关于权 1 正交。取 $P_n$ 的零点作节点后，任何次数低于 $n$ 的多项式 $q$ 都可写成 $P_0,\\dots,P_{n-1}$ 的组合，故 $\\int_{-1}^{1}q(x)P_n(x)\\,dx=0$。对任意次数不超过 $2n-1$ 的 $f$ 做带余除法 $f=qP_n+r$（$\\deg q,\\deg r\\le n-1$）：积分只留下 $\\int r$；而求积公式作用在 $f$ 上时，$P_n(x_i)=0$ 使含 $qP_n$ 的项全部消失，只剩在 $r$ 上的作用——$n$ 个节点恰好能把不高于 $n-1$ 次的多项式精确积分，两边相等。这就是 $2n-1$ 次精度的来源：节点把 $P_n$ 的正交性带进了求积。\n\n低阶公式可以逐一手算核对：$n=1$ 时节点为 $0$、权重 $2$（即中点公式）；$n=2$ 时节点为 $\\pm1/\\sqrt3$、权重都是 $1$；$n=3$ 时节点为 $0,\\pm\\sqrt{3/5}$，权重为 $8/9,5/9,5/9$。注意效率对比：辛普森公式用 3 个等距节点才达到 3 次代数精度，而两点高斯公式只用 2 个节点就做到同一件事；$n$ 点高斯的 $2n-1$ 次精度正是「不浪费节点」的含义。\n\n一般区间 $[a,b]$ 上先作线性变换 $x=\\frac{a+b}{2}+\\frac{b-a}{2}\\,t$（$t\\in[-1,1]$，$dx=\\frac{b-a}{2}\\,dt$）：\n$$\\int_a^b f(x)\\,dx=\\frac{b-a}{2}\\int_{-1}^{1}f\\!\\left(\\frac{a+b}{2}+\\frac{b-a}{2}t\\right)dt,$$\n再套用标准节点与权重即可。当 $f\\in C^{2n}[a,b]$ 时误差为\n$$R_n=\\frac{(b-a)^{2n+1}(n!)^4}{(2n+1)[(2n)!]^3}f^{(2n)}(\\xi),$$\n与 $f$ 的第 $2n$ 阶导数成正比：对光滑函数增大 $n$ 收敛极快；但对不光滑、有奇性、或在宽区间上高阶导数很大的函数（如 $e^{-x^2}$ 在 $[-2,2]$ 上），固定阶数的误差未必随节点数迅速降低，这时常先把区间分段、每个子区间再用低阶高斯公式。",
+    "definitionEn": "A numerical integration rule is written $\\int_a^b f(x)\\,dx\\approx\\sum_{i=1}^n A_if(x_i)$. Newton-Cotes rules (trapezoid, Simpson) fix equispaced nodes and optimise only the weights; Gaussian quadrature does the opposite: it **optimises node positions and weights together**, so that $n$ nodes integrate polynomials of as high a degree as possible. It can be shown that no $n$-point rule can exceed degree $2n-1$, and the unique way to attain this bound is to take the nodes as the **zeros of the $n$-th Legendre polynomial $P_n(x)$**, with weights\n$$A_i=\\frac{2}{(1-x_i^2)\\,[P_n'(x_i)]^2},$$\ngiving the Gauss-Legendre rule on the standard interval,\n$$\\int_{-1}^{1}f(x)\\,dx\\approx\\sum_{i=1}^{n}A_if(x_i).$$\n\nWhy Legendre zeros? The Legendre polynomials are orthogonal on $[-1,1]$ with weight 1. With the zeros of $P_n$ as nodes, any polynomial $q$ of degree below $n$ is a combination of $P_0,\\dots,P_{n-1}$, hence $\\int_{-1}^{1}q(x)P_n(x)\\,dx=0$. For any $f$ of degree at most $2n-1$ write $f=qP_n+r$ with $\\deg q,\\deg r\\le n-1$: the integral reduces to $\\int r$, while the quadrature applied to $f$ kills the whole $qP_n$ part since $P_n(x_i)=0$, leaving its action on $r$ — and $n$ nodes integrate polynomials of degree at most $n-1$ exactly. Hence the $2n-1$ exactness: the nodes import the orthogonality of $P_n$ into the rule.\n\nLow-order rules are easily checked by hand: $n=1$ has node $0$ and weight $2$ (the midpoint rule); $n=2$ has nodes $\\pm1/\\sqrt3$ with weights $1$; $n=3$ has nodes $0,\\pm\\sqrt{3/5}$ with weights $8/9,5/9,5/9$. Note the efficiency: Simpson's rule needs three equispaced nodes to reach degree 3, while two Gauss nodes already do the same job.\n\nOn a general interval $[a,b]$, first use the linear map $x=\\frac{a+b}{2}+\\frac{b-a}{2}\\,t$ ($t\\in[-1,1]$, $dx=\\frac{b-a}{2}\\,dt$):\n$$\\int_a^b f(x)\\,dx=\\frac{b-a}{2}\\int_{-1}^{1}f\\!\\left(\\frac{a+b}{2}+\\frac{b-a}{2}t\\right)dt,$$\nthen apply the standard nodes and weights. For $f\\in C^{2n}[a,b]$ the error is\n$$R_n=\\frac{(b-a)^{2n+1}(n!)^4}{(2n+1)[(2n)!]^3}f^{(2n)}(\\xi),$$\nproportional to the $2n$-th derivative: for smooth functions the convergence as $n$ grows is extremely fast, but for nonsmooth or singular integrands — or for wide intervals where high derivatives are huge (e.g. $e^{-x^2}$ on $[-2,2]$) — a fixed low order may improve slowly, and one should subdivide the interval and use a low-order Gauss rule on each piece.",
+    "formulas": [
+      {
+        "latex": "\\int_{-1}^{1}f(x)\\,dx\\approx\\sum_{i=1}^{n}A_if(x_i)",
+        "note": "$n$ 点高斯-勒让德求积公式：节点 $x_i$ 是 $P_n$ 的零点，权重由下式给出。",
+        "noteEn": "The $n$-point Gauss-Legendre rule: nodes are the zeros of $P_n$, weights as below."
+      },
+      {
+        "latex": "A_i=\\frac{2}{(1-x_i^2)\\,[P_n'(x_i)]^2}",
+        "note": "权重的闭式；所有权重为正，$\\sum_i A_i=2$。",
+        "noteEn": "Closed form of the weights; all are positive and $\\sum_i A_i=2$."
+      },
+      {
+        "latex": "\\int_a^b f(x)\\,dx=\\frac{b-a}{2}\\int_{-1}^{1}f\\!\\left(\\frac{a+b}{2}+\\frac{b-a}{2}t\\right)dt",
+        "note": "区间变换：把任意 $[a,b]$ 化到标准区间 $[-1,1]$，权重整体乘以 $\\frac{b-a}{2}$。",
+        "noteEn": "Change of variables: reduce any $[a,b]$ to $[-1,1]$; all weights are scaled by $\\frac{b-a}{2}$."
+      },
+      {
+        "latex": "n=1:\\ x=0,\\ A=2;\\qquad n=2:\\ x=\\pm\\frac{1}{\\sqrt3},\\ A=1;\\qquad n=3:\\ x=0,\\ \\pm\\sqrt{\\frac35},\\ A=\\frac89,\\ \\frac59,\\ \\frac59",
+        "note": "最常用的低阶节点与权重；$n=2$ 就有 3 次代数精度。",
+        "noteEn": "The standard low-order nodes and weights; the 2-point rule already has degree 3 exactness."
+      },
+      {
+        "latex": "R_n=\\frac{(b-a)^{2n+1}(n!)^4}{(2n+1)[(2n)!]^3}f^{(2n)}(\\xi)",
+        "note": "误差公式（$f\\in C^{2n}$）：与第 $2n$ 阶导数成正比，光滑函数收敛极快。",
+        "noteEn": "Error formula ($f\\in C^{2n}$): proportional to the $2n$-th derivative, hence very fast convergence for smooth functions."
+      }
+    ],
+    "expression": {
+      "text": "∫₋₁¹ f(x)dx ≈ A₁f(x₁)+…+Aₙf(xₙ)",
+      "symbol": "Σ Aᵢ f(xᵢ)",
+      "note": "标准区间上的 n 点高斯公式；一般区间先作线性变换。",
+      "noteEn": "The n-point Gauss rule on the standard interval; reduce [a,b] with a linear map first."
+    },
+    "properties": [
+      "**代数精度为 $2n-1$，且这是 $n$ 节点公式的理论上限**：不存在用 $n$ 个节点达到 $2n$ 次或更高精度的求积公式，高斯公式恰好达到最优。",
+      "节点是 $P_n$ 的 $n$ 个互异实根，全部落在 $(-1,1)$ 内部；关于区间中点对称，对称位置的权重相等，且 $\\sum_{i=1}^n A_i=b-a$。",
+      "所有权重 $A_i>0$，求积时不出现相消放大，数值上稳定；$n\\to\\infty$ 时对连续函数收敛到积分真值。",
+      "精度阶数随 $n$ 成倍增长（误差依赖 $f^{(2n)}$），光滑函数收敛很快；但 $n$ 大时节点需数值求解（牛顿迭代或查表），实际常取低阶公式分段复使用。",
+      "与等距公式相比：达到同样代数精度用的节点最少；代价是节点不固定，不能像复合梯形/辛普森那样直接复用前一层的函数值。"
+    ],
+    "propertiesEn": [
+      "**The algebraic degree is $2n-1$, and this is the theoretical bound for $n$ nodes**: no $n$-point rule can reach degree $2n$, so Gauss achieves the optimum.",
+      "The nodes are the $n$ distinct real roots of $P_n$, all inside $(-1,1)$; they are symmetric about the midpoint, symmetric nodes carry equal weights, and the weights sum to $b-a$.",
+      "All weights are positive, so no catastrophic cancellation occurs; the rule is numerically stable and converges to the integral for continuous integrands as $n\\to\\infty$.",
+      "The order of accuracy doubles with each added node (the error involves $f^{(2n})$), so smooth integrands converge extremely fast; for large $n$ the nodes must be computed numerically (Newton iteration or tables), and in practice low-order rules are applied piecewise.",
+      "Compared with equispaced rules it uses the fewest nodes for a given algebraic degree; the price is that nodes are not reusable across refinements, unlike composite trapezoid or Simpson."
+    ],
+    "plot": {
+      "type": "quadrature",
+      "expr": "exp(-x^2)",
+      "from": -2,
+      "to": 2,
+      "n": 4,
+      "method": "simpson",
+      "color": "#06d6a0",
+      "curveColor": "#4cc9f0",
+      "title": "辛普森法（4 段）逼近 ∫₋₂² e^(-x²)dx：近似 1.6599，精确值 1.7642"
+    },
+    "examples": [
+      {
+        "problem": "用 3 点高斯公式计算 $\\int_{-1}^{1}x^4\\,dx$，并说明结果为何精确。",
+        "solution": "节点为 $x=0,\\pm\\sqrt{3/5}$，权重为 $8/9,5/9,5/9$，于是\n$$\\sum_{i=1}^{3}A_if(x_i)=\\frac89\\cdot0+\\frac59\\left(\\frac35\\right)^2+\\frac59\\left(\\frac35\\right)^2=2\\cdot\\frac59\\cdot\\frac9{25}=\\frac25,$$\n与 $\\int_{-1}^{1}x^4dx=\\frac25$ 完全一致。原因：$x^4$ 的次数 $4\\le 2n-1=5$，落在 3 点高斯公式的精确范围之内。"
+      },
+      {
+        "problem": "在 $[0,1]$ 上用 2 点与 4 点高斯公式计算 $\\int_0^1e^{-x^2}dx$（精确值约 $0.7468241$），并与辛普森法比较。",
+        "solution": "作变换 $x=\\frac12+\\frac12t$，权重都乘以 $\\frac12$。2 点公式的节点为 $x=\\frac12\\pm\\frac{1}{2\\sqrt3}\\approx0.2113,\\ 0.7887$，得\n$$\\frac12\\left(e^{-0.2113^2}+e^{-0.7887^2}\\right)\\approx0.746595,$$\n误差约 $-2.3\\times10^{-4}$，只用了 2 次求值。4 点公式得 $0.7468245$，误差约 $+3.4\\times10^{-7}$，也只用 4 次求值。对照：4 段辛普森（5 次求值）得 $0.7468554$，误差约 $+3.1\\times10^{-5}$；要到 $1.2\\times10^{-7}$ 量级需要 16 段辛普森（17 次求值）。同样的精度，高斯公式用的信息少得多。"
+      }
+    ],
+    "tags": [
+      "高斯求积",
+      "勒让德多项式",
+      "代数精度",
+      "数值积分",
+      "节点与权重"
+    ],
+    "links": [
+      "numerical-integration",
+      "numerical-error",
+      "interpolation",
+      "taylor-formula"
+    ]
+  },
+  {
+    "id": "matrix-condition",
+    "title": "矩阵范数与条件数",
+    "titleEn": "Matrix Norms and Condition Numbers",
+    "branch": "numerical",
+    "level": 5,
+    "summary": "矩阵范数把矩阵当作线性算子度量其放大能力；条件数 cond(A)=‖A‖·‖A⁻¹‖ 度量方程组 Ax=b 的解对扰动的敏感度，远大于 1 意味着病态、误差被放大 cond(A) 倍。",
+    "summaryEn": "Matrix norms measure the stretching power of a linear map; the condition number cond(A)=‖A‖‖A⁻¹‖ measures how sensitive the solution of Ax=b is to perturbations — values far above 1 mean ill-conditioning.",
+    "definition": "矩阵既可以看成一堆数，也可以看成线性算子 $x\\mapsto Ax$。算子视角下最重要的量是它「最多能把向量放大多少倍」，即由向量范数诱导的**矩阵范数**\n$$\\|A\\|=\\max_{x\\ne0}\\frac{\\|Ax\\|}{\\|x\\|}=\\max_{\\|x\\|=1}\\|Ax\\|.$$\n这样定义的范数天然与向量范数**相容**：$\\|Ax\\|\\le\\|A\\|\\,\\|x\\|$，并满足次可乘性 $\\|AB\\|\\le\\|A\\|\\,\\|B\\|$——这两条是后面一切误差估计的基石。不同的向量范数给出不同的矩阵范数，最常用的有四种：1-范数（最大列和）、$\\infty$-范数（最大行和）、2-范数（最大奇异值）与 Frobenius 范数。最容易记反的是：**1-范数是列和最大，$\\infty$-范数是行和最大**；转置恰好把两者互换，$\\|A^{\\mathsf T}\\|_1=\\|A\\|_\\infty$。\n\n2-范数 $\\|A\\|_2=\\sigma_{\\max}(A)=\\sqrt{\\lambda_{\\max}(A^{\\mathsf T}A)}$ 是最大奇异值：把单位球经 $A$ 映射成椭球后，它是最长半轴的长度。Frobenius 范数 $\\|A\\|_F=\\sqrt{\\sum_{i,j}a_{ij}^2}$ 不是算子范数（它不来自某个「最大值」），但与 2-范数相容，且 $\\|A\\|_2\\le\\|A\\|_F\\le\\sqrt{r}\\,\\|A\\|_2$（$r$ 为秩），计算方便，常用来估计 2-范数。\n\n实际解方程组 $Ax=b$ 时，$b$ 和 $A$ 都带有测量误差或舍入误差。研究「输入的小扰动会被放大多少倍」，得到的量就是**条件数**\n$$\\operatorname{cond}(A)=\\|A\\|\\,\\|A^{-1}\\|.$$\n在 2-范数下它等于最大与最小奇异值之比 $\\sigma_{\\max}/\\sigma_{\\min}$。由 $1=\\|I\\|=\\|AA^{-1}\\|\\le\\|A\\|\\,\\|A^{-1}\\|$ 立刻得到 $\\operatorname{cond}(A)\\ge1$，且 $\\operatorname{cond}(I)=1$；正交（酉）矩阵的 2-范数条件数为 1。几何上，单位球被 $A$ 映成椭球，$\\operatorname{cond}_2$ 就是最长与最短半轴之比：条件数越大椭球越「扁」，某些方向的误差被放大得越厉害。若右端有扰动 $\\delta b$，解的相对误差满足\n$$\\frac{\\|\\delta x\\|}{\\|x\\|}\\le\\operatorname{cond}(A)\\,\\frac{\\|\\delta b\\|}{\\|b\\|},$$\n这个界是紧的：存在特定的扰动方向使等号近似成立。经验法则：$\\operatorname{cond}(A)\\approx10^{k}$ 时，解大约损失 $k$ 位有效数字。\n\n经典病态例子是希尔伯特矩阵 $H_n=\\left(\\frac{1}{i+j-1}\\right)$：$H_3$ 的 2-范数条件数已约 $524$，$H_4$ 约 $1.55\\times10^4$，随 $n$ 迅速膨胀。判断病态必须看条件数而不是行列式：$10^{-6}I$ 的行列式是 $10^{-18}$ 却完全良态（条件数为 1）。消元法的误差、迭代法的收敛速度都与 $\\operatorname{cond}(A)$ 直接挂钩，因此对病态问题常要先做**预处理**或改用更高精度。",
+    "definitionEn": "A matrix is both a table of numbers and a linear operator $x\\mapsto Ax$. In the operator view the key quantity is how much it can stretch a vector, i.e. the induced **matrix norm**\n$$\\|A\\|=\\max_{x\\ne0}\\frac{\\|Ax\\|}{\\|x\\|}=\\max_{\\|x\\|=1}\\|Ax\\|.$$\nIt is automatically **compatible** with the vector norm, $\\|Ax\\|\\le\\|A\\|\\,\\|x\\|$, and submultiplicative, $\\|AB\\|\\le\\|A\\|\\,\\|B\\|$ — the two facts behind all perturbation estimates. Different vector norms give different matrix norms; the four most used are the 1-norm (largest column sum), the $\\infty$-norm (largest row sum), the 2-norm (largest singular value) and the Frobenius norm. The easiest pair to confuse: **the 1-norm is the max column sum and the $\\infty$-norm is the max row sum**; transposition swaps them, $\\|A^{\\mathsf T}\\|_1=\\|A\\|_\\infty$.\n\nThe 2-norm $\\|A\\|_2=\\sigma_{\\max}(A)=\\sqrt{\\lambda_{\\max}(A^{\\mathsf T}A)}$ is the largest singular value: the longest semi-axis of the ellipsoid into which $A$ maps the unit ball. The Frobenius norm $\\|A\\|_F=\\sqrt{\\sum_{i,j}a_{ij}^2}$ is not an operator norm, but it is compatible and satisfies $\\|A\\|_2\\le\\|A\\|_F\\le\\sqrt{r}\\,\\|A\\|_2$ ($r$ = rank); it is easy to compute and often used to bound the 2-norm.\n\nWhen solving $Ax=b$, both $b$ and $A$ carry measurement or rounding errors. How much a small input perturbation is amplified is quantified by the **condition number**\n$$\\operatorname{cond}(A)=\\|A\\|\\,\\|A^{-1}\\|.$$\nIn the 2-norm it equals $\\sigma_{\\max}/\\sigma_{\\min}$. From $1=\\|I\\|=\\|AA^{-1}\\|\\le\\|A\\|\\,\\|A^{-1}\\|$ we get $\\operatorname{cond}(A)\\ge1$, with $\\operatorname{cond}(I)=1$; orthogonal (unitary) matrices have 2-norm condition number 1. Geometrically the unit ball becomes an ellipsoid and $\\operatorname{cond}_2$ is the ratio of its longest to shortest semi-axis: the larger the condition number, the flatter the ellipsoid and the more some directions are amplified. For a right-hand-side perturbation $\\delta b$,\n$$\\frac{\\|\\delta x\\|}{\\|x\\|}\\le\\operatorname{cond}(A)\\,\\frac{\\|\\delta b\\|}{\\|b\\|},$$\nand the bound is sharp: there are perturbations attaining it in the worst direction. Rule of thumb: $\\operatorname{cond}(A)\\approx10^{k}$ costs about $k$ significant digits in the solution.\n\nThe classical ill-conditioned family is the Hilbert matrix $H_n=\\left(\\frac{1}{i+j-1}\\right)$: already $\\operatorname{cond}_2(H_3)\\approx524$ and $\\operatorname{cond}_2(H_4)\\approx1.55\\times10^4$, growing fast with $n$. Ill-conditioning must be judged by the condition number, not the determinant: $10^{-6}I$ has determinant $10^{-18}$ yet is perfectly conditioned. Elimination error and iterative-method convergence rates are governed directly by $\\operatorname{cond}(A)$, so ill-conditioned problems call for **preconditioning** or higher precision.",
+    "formulas": [
+      {
+        "latex": "\\|A\\|=\\max_{x\\ne0}\\frac{\\|Ax\\|}{\\|x\\|}=\\max_{\\|x\\|=1}\\|Ax\\|,\\qquad \\|Ax\\|\\le\\|A\\|\\,\\|x\\|,\\qquad \\|AB\\|\\le\\|A\\|\\,\\|B\\|",
+        "note": "诱导矩阵范数的定义，以及与向量范数的相容性、次可乘性。",
+        "noteEn": "The induced matrix norm, its compatibility with the vector norm, and submultiplicativity."
+      },
+      {
+        "latex": "\\|A\\|_1=\\max_j\\sum_i|a_{ij}|\\quad(\\text{最大列和}),\\qquad \\|A\\|_\\infty=\\max_i\\sum_j|a_{ij}|\\quad(\\text{最大行和})",
+        "note": "1-范数与 $\\infty$-范数；转置互换两者：$\\|A^{\\mathsf T}\\|_1=\\|A\\|_\\infty$。",
+        "noteEn": "The 1- and $\\infty$-norms: max column sum and max row sum; transposition swaps them."
+      },
+      {
+        "latex": "\\|A\\|_2=\\sigma_{\\max}(A)=\\sqrt{\\lambda_{\\max}(A^{\\mathsf T}A)},\\qquad \\|A\\|_F=\\sqrt{\\sum_{i,j}a_{ij}^2}=\\sqrt{\\sum_k\\sigma_k^2}",
+        "note": "2-范数是最大奇异值；Frobenius 范数是全体奇异值的平方和开方。",
+        "noteEn": "The 2-norm is the largest singular value; the Frobenius norm is the root-sum-square of all singular values."
+      },
+      {
+        "latex": "\\operatorname{cond}(A)=\\|A\\|\\,\\|A^{-1}\\|,\\qquad \\operatorname{cond}_2(A)=\\frac{\\sigma_{\\max}}{\\sigma_{\\min}}\\ge1",
+        "note": "条件数的定义；2-范数下为最大与最小奇异值之比，恒不小于 1。",
+        "noteEn": "Definition of the condition number; in the 2-norm it is the singular-value ratio and is never below 1."
+      },
+      {
+        "latex": "\\frac{\\|\\delta x\\|}{\\|x\\|}\\le\\operatorname{cond}(A)\\,\\frac{\\|\\delta b\\|}{\\|b\\|}",
+        "note": "右端扰动引起的解的相对误差上界；界是紧的。",
+        "noteEn": "Relative error bound caused by a right-hand-side perturbation; the bound is sharp."
+      }
+    ],
+    "expression": {
+      "text": "cond(A)=‖A‖·‖A⁻¹‖，2-范数下 = σ_max/σ_min",
+      "symbol": "cond(A)",
+      "note": "条件数越大，解对扰动越敏感；cond(A) ≥ 1。",
+      "noteEn": "The larger the condition number, the more sensitive the solution; cond(A) ≥ 1."
+    },
+    "properties": [
+      "$\\operatorname{cond}(A)\\ge1$ 恒成立，等号只被「不放大误差」的矩阵取到（如单位阵、正交阵）；$\\operatorname{cond}(\\alpha A)=\\operatorname{cond}(A)$，$\\operatorname{cond}_2$ 在正交变换下不变。",
+      "$\\operatorname{cond}_2(A)=\\sigma_{\\max}/\\sigma_{\\min}$；对称、正规矩阵的 2-范数条件数为特征值绝对值之比 $|\\lambda|_{\\max}/|\\lambda|_{\\min}$；矩阵奇异时条件数视为 $\\infty$。",
+      "不同范数给出的条件数彼此相差不超过 $n^2$ 倍的因子（范数等价性），因此「是否病态」的判断通常与范数选择无关。",
+      "条件数刻画的是最坏情况下的相对误差放大：若扰动恰好落在「良态方向」，实际误差可能远小于上界；但上界是可达的。",
+      "消元法的精度、迭代法的收敛速度都与 $\\operatorname{cond}(A)$ 有关；病态问题的对策包括更高精度计算、正则化与预处理。"
+    ],
+    "propertiesEn": [
+      "$\\operatorname{cond}(A)\\ge1$ always, with equality for matrices that never amplify errors (identity, orthogonal matrices); $\\operatorname{cond}(\\alpha A)=\\operatorname{cond}(A)$ and $\\operatorname{cond}_2$ is invariant under orthogonal transformations.",
+      "$\\operatorname{cond}_2(A)=\\sigma_{\\max}/\\sigma_{\\min}$; for symmetric or normal matrices this is $|\\lambda|_{\\max}/|\\lambda|_{\\min}$; a singular matrix has condition number $\\infty$.",
+      "Condition numbers from different norms differ by at most a factor $n^2$ (norm equivalence), so the judgement 'ill-conditioned or not' rarely depends on the norm.",
+      "The condition number quantifies worst-case relative error growth: a perturbation along a favourable direction may cause much less error, but the bound is attainable.",
+      "Elimination accuracy and iterative-solver convergence rates both involve $\\operatorname{cond}(A)$; remedies for ill-conditioning include higher precision, regularisation and preconditioning."
+    ],
+    "examples": [
+      {
+        "problem": "求 $A=\\begin{pmatrix}4&-1\\\\-1&4\\end{pmatrix}$ 的 $\\infty$-范数、2-范数与条件数。",
+        "solution": "行和分别为 $4+1=5$ 与 $1+4=5$，故 $\\|A\\|_\\infty=5$（列和也相同，$\\|A\\|_1=5$）。逆矩阵 $A^{-1}=\\frac1{15}\\begin{pmatrix}4&1\\\\1&4\\end{pmatrix}$，其行和为 $\\frac{5}{15}=\\frac13$，于是\n$$\\operatorname{cond}_\\infty(A)=5\\times\\frac13=\\frac53.$$\n$A$ 对称，特征值为 $3$ 与 $5$，即 $\\sigma_{\\max}=5,\\ \\sigma_{\\min}=3$，所以 $\\operatorname{cond}_2(A)=\\frac53\\approx1.67$，是良态矩阵。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&1\\\\1&1.0001\\end{pmatrix}$，$b=(2,2)^{\\mathsf T}$。求 $\\operatorname{cond}_\\infty(A)$，并考察右端扰动 $\\delta b=(0,10^{-4})^{\\mathsf T}$ 对解的影响。",
+        "solution": "行和为 $2$ 与 $2.0001$，故 $\\|A\\|_\\infty=2.0001$；$A^{-1}=10^4\\begin{pmatrix}1.0001&-1\\\\-1&1\\end{pmatrix}$，行和都是 $10^4\\times2.0001$，于是\n$$\\operatorname{cond}_\\infty(A)=2.0001\\times2.0001\\times10^4\\approx4.0\\times10^4,$$\n严重病态。未扰动时由 $x_1+x_2=2,\\ x_1+1.0001x_2=2$ 得 $x=(2,0)^{\\mathsf T}$；加扰动后 $x'=(1,1)^{\\mathsf T}$。相对误差 $\\frac{\\|\\delta x\\|_\\infty}{\\|x\\|_\\infty}=\\frac12=50\\%$，而右端的相对扰动只有 $\\frac{\\|\\delta b\\|_\\infty}{\\|b\\|_\\infty}=5\\times10^{-5}$——放大了约 $10^4$ 倍，与上界 $\\operatorname{cond}_\\infty(A)\\times5\\times10^{-5}\\approx2$ 相符。"
+      }
+    ],
+    "tags": [
+      "矩阵范数",
+      "条件数",
+      "病态方程组",
+      "奇异值",
+      "误差放大"
+    ],
+    "links": [
+      "direct-linear-solvers",
+      "iterative-linear-solvers",
+      "numerical-error",
+      "numerical-stability"
+    ]
+  },
+  {
+    "id": "euler-methods",
+    "title": "欧拉法与改进欧拉法",
+    "titleEn": "Euler and Improved Euler Methods",
+    "branch": "numerical",
+    "level": 4,
+    "summary": "欧拉法沿方向场的切线一步步外推，显式、简单，但只有一阶精度且条件稳定；改进欧拉法（Heun）先用它预测、再用两端斜率平均校正，把精度提高到二阶。",
+    "summaryEn": "Euler's method marches along tangent lines of the slope field - explicit and simple, but only first order and conditionally stable; the improved Euler (Heun) predictor-corrector averages the endpoint slopes and is second order.",
+    "definition": "给定一阶初值问题 $y'=f(x,y),\\ y(x_0)=y_0$，数值解法把区间分成节点 $x_n=x_0+nh$，逐步求出近似值 $y_n\\approx y(x_n)$。**欧拉法**是最简单的一种：由 Taylor 展开 $y(x+h)=y(x)+hy'(x)+\\frac{h^2}{2}y''(\\xi)$，舍去二阶以上项并把导数换成 $f(x_n,y_n)$，得\n$$y_{n+1}=y_n+h\\,f(x_n,y_n).$$\n几何意义：在点 $(x_n,y_n)$ 处沿方向场给出的斜率直线走一步 $h$——整条数值解就是一小段一小段切线拼成的折线。它**显式**（右端只用已知量）、**单步自启动**（不依赖历史点、也不用迭代），是理解一切数值方法的起点。\n\n精度方面：每步被丢弃的项是 $\\frac{h^2}{2}y''(\\xi)$，称为局部截断误差，量级 $O(h^2)$；但误差逐段累积——固定终点 $x$ 时步数 $n\\propto1/h$，整体截断误差只有 $O(h)$。所以欧拉法是**一阶方法**：步长减半，误差大约减半。实际计算中 $h$ 也不能一味取小，因为舍入误差会累积，总误差在「截断误差 $\\sim h$」与「舍入误差 $\\sim\\varepsilon/h$」的折中处最小。数值实验里欧拉解常整体偏向精确解的一侧（切线总在凸曲线同侧），偏差是系统性的。\n\n**改进欧拉法**的出发点是梯形公式 $y_{n+1}=y_n+\\frac h2[f(x_n,y_n)+f(x_{n+1},y_{n+1})]$：它是二阶精度的，但右端含未知的 $y_{n+1}$（隐式）。解决办法是先预测、再校正：先用欧拉法算出预测值\n$$\\bar y_{n+1}=y_n+h\\,f(x_n,y_n),$$\n再用它近似终点斜率，取两端斜率的平均作校正：\n$$y_{n+1}=y_n+\\frac h2\\left[f(x_n,y_n)+f(x_{n+1},\\bar y_{n+1})\\right].$$\n这一「预测-校正」格式又称 **Heun 方法**：局部截断误差 $O(h^3)$、整体 $O(h^2)$，是**二阶方法**，步长减半误差约降为四分之一。它其实是两级 Runge-Kutta 公式：$k_1=f(x_n,y_n)$，$k_2=f(x_n+h,\\ y_n+hk_1)$，$y_{n+1}=y_n+\\frac h2(k_1+k_2)$。\n\n两者都是显式单步法，步长合适时收敛到精确解（相容 + 稳定 $\\Rightarrow$ 收敛），但稳定区间有限：对试验方程 $y'=\\lambda y$，欧拉法的放大因子是 $1+h\\lambda$，$\\lambda<0$ 时要求 $0<h<2/|\\lambda|$；改进欧拉法的放大因子是 $1+h\\lambda+\\frac{(h\\lambda)^2}{2}$，在负实轴上的稳定区间同样是 $(-2,0)$。步长一旦越界，数值解会像坏掉的复利一样振荡放大——这是刚性问题不能直接用它们的原因（见「数值方法的收敛性与稳定性」）。",
+    "definitionEn": "For the initial value problem $y'=f(x,y),\\ y(x_0)=y_0$, numerical methods split the interval into nodes $x_n=x_0+nh$ and compute approximations $y_n\\approx y(x_n)$. **Euler's method** is the simplest: truncate the Taylor expansion $y(x+h)=y(x)+hy'(x)+\\frac{h^2}{2}y''(\\xi)$ after the first term and replace the derivative by $f(x_n,y_n)$:\n$$y_{n+1}=y_n+h\\,f(x_n,y_n).$$\nGeometrically, step $h$ along the tangent given by the slope field at $(x_n,y_n)$ — the numerical solution is a polyline of short tangent segments. It is **explicit** (the right-hand side uses known data only) and a **single-step, self-starting** method, the natural starting point for the whole subject.\n\nAccuracy: the term dropped each step is $\\frac{h^2}{2}y''(\\xi)$, the local truncation error, of size $O(h^2)$; errors accumulate, however, and with $n\\propto1/h$ steps to a fixed final $x$ the global error is only $O(h)$. Euler's method is therefore **first order**: halving the step roughly halves the error. The step cannot be taken arbitrarily small either, since rounding errors accumulate; the best total error balances truncation $\\sim h$ against rounding $\\sim\\varepsilon/h$. In experiments the Euler solution often deviates systematically to one side of the exact solution (tangents lie on one side of a convex curve).\n\nThe **improved Euler method** starts from the trapezoidal formula $y_{n+1}=y_n+\\frac h2[f(x_n,y_n)+f(x_{n+1},y_{n+1})]$, which is second order but implicit. The fix is to predict, then correct: predict $\\bar y_{n+1}=y_n+h\\,f(x_n,y_n)$ with one Euler step, use it to estimate the slope at the right end, and average the two slopes:\n$$y_{n+1}=y_n+\\frac h2\\left[f(x_n,y_n)+f(x_{n+1},\\bar y_{n+1})\\right].$$\nThis predictor-corrector scheme is also called **Heun's method**: local error $O(h^3)$, global error $O(h^2)$ — **second order**, so halving the step cuts the error by about four. It is a two-stage Runge-Kutta method with $k_1=f(x_n,y_n)$, $k_2=f(x_n+h,\\ y_n+hk_1)$ and $y_{n+1}=y_n+\\frac h2(k_1+k_2)$.\n\nBoth are explicit single-step methods that converge to the exact solution for suitable steps (consistency plus stability implies convergence), but their stability intervals are finite: for the test equation $y'=\\lambda y$ with $\\lambda<0$, Euler has amplification factor $1+h\\lambda$ and requires $0<h<2/|\\lambda|$, while Heun has $1+h\\lambda+\\frac{(h\\lambda)^2}{2}$ and its interval on the negative real axis is likewise $(-2,0)$. Beyond the limit the numerical solution oscillates and blows up, which is why they cannot be used directly on stiff problems.",
+    "formulas": [
+      {
+        "latex": "y_{n+1}=y_n+h\\,f(x_n,y_n)",
+        "note": "显式欧拉公式：沿当前点的方向场斜率向前走一步，几何上是切线外推。",
+        "noteEn": "Explicit Euler: one step along the current slope — tangent extrapolation."
+      },
+      {
+        "latex": "T_{n+1}=\\frac{h^2}{2}y''(\\xi)=O(h^2),\\qquad e_n=\\max_{k\\le n}|y(x_k)-y_k|=O(h)",
+        "note": "局部截断误差是二阶，但累积后的整体误差只有一阶。",
+        "noteEn": "The local truncation error is second order, but the accumulated global error is only first order."
+      },
+      {
+        "latex": "\\bar y_{n+1}=y_n+h\\,f(x_n,y_n),\\qquad y_{n+1}=y_n+\\frac h2\\left[f(x_n,y_n)+f(x_{n+1},\\bar y_{n+1})\\right]",
+        "note": "改进欧拉法：先预测、再校正，两端斜率的平均即梯形思想的显式实现。",
+        "noteEn": "Improved Euler: predict, then correct; averaging endpoint slopes is the explicit version of the trapezoidal idea."
+      },
+      {
+        "latex": "k_1=f(x_n,y_n),\\quad k_2=f(x_n+h,\\ y_n+hk_1),\\qquad y_{n+1}=y_n+\\frac h2(k_1+k_2)",
+        "note": "改进欧拉法的两级 Runge-Kutta 形式，权系数各为 $1/2$。",
+        "noteEn": "The improved Euler method as a two-stage Runge-Kutta scheme with weights $1/2$."
+      },
+      {
+        "latex": "T^{\\text{Heun}}_{n+1}=O(h^3),\\qquad e_n^{\\text{Heun}}=O(h^2)",
+        "note": "改进欧拉是二阶方法：步长减半，误差约降为四分之一。",
+        "noteEn": "Heun is second order: halving the step reduces the error by about a factor of four."
+      }
+    ],
+    "expression": {
+      "text": "y_{n+1}=y_n+h f(x_n,y_n)（欧拉法）；先预测后校正（改进欧拉法）",
+      "symbol": "y_{n+1}=y_n+h f_n",
+      "note": "一步沿一个切线方向；改进版用两个斜率的平均。",
+      "noteEn": "One tangent step at a time; the improved version averages two slopes."
+    },
+    "properties": [
+      "显式单步：$y_{n+1}$ 由已知量直接算出，自启动、易编程，步长可以边走边改。",
+      "阶数：欧拉法一阶（$h$ 减半误差约减半），改进欧拉法二阶（误差约降 4 倍）；误差常数依赖 $f$ 的光滑性，非光滑右端会跌破理论阶数。",
+      "稳定性：对 $y'=\\lambda y\\ (\\lambda<0)$，两种方法在负实轴上的稳定区间都是 $(-2,0)$，即要求 $0<h<2/|\\lambda|$；越界的数值解振荡发散。",
+      "相容性与收敛性：两种格式的局部截断误差除以 $h$ 都趋于 0（相容），加上稳定即保证收敛——步长合理时会越来越接近真解。",
+      "欧拉法常用于为高阶单步法提供起步值，也是用大步长演示误差累积与失稳的最好例子；高精度计算请改用 RK4 或自适应方法。"
+    ],
+    "propertiesEn": [
+      "Explicit and single-step: $y_{n+1}$ is computed directly from known data; self-starting, easy to code, and the step size may change as you go.",
+      "Order: Euler is first order (halving $h$ halves the error), improved Euler is second order (error divided by about four); the constants depend on the smoothness of $f$.",
+      "Stability: for $y'=\\lambda y$ with $\\lambda<0$ both have the same interval $(-2,0)$ on the negative real axis, i.e. $0<h<2/|\\lambda|$; beyond it the solution oscillates and diverges.",
+      "Both schemes are consistent (local error over $h$ tends to zero) and hence convergent when stable — with a sensible step they approach the true solution.",
+      "Euler's method often bootstraps higher-order single-step methods and is the classic laboratory for error accumulation and instability; for accuracy use RK4 or adaptive schemes."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "x - y",
+      "xRange": [
+        -1,
+        3
+      ],
+      "yRange": [
+        -2,
+        3.5
+      ],
+      "initial": [
+        {
+          "x": 0,
+          "y": 1,
+          "color": "#ff6b9d",
+          "label": "y(0)=1"
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "color": "#06d6a0",
+          "label": "y(0)=-1"
+        }
+      ],
+      "title": "y' = x - y 的方向场与两条解曲线：y(0)=1 与 y(0)=-1"
+    },
+    "examples": [
+      {
+        "problem": "用欧拉法解 $y'=x-y,\\ y(0)=1$，取 $h=0.1$，求 $y_1,y_2$ 并与精确解 $y=x-1+2e^{-x}$ 比较。",
+        "solution": "$y_1=1+0.1\\times(0-1)=0.9$；$y_2=0.9+0.1\\times(0.1-0.9)=0.82$。精确值 $y(0.1)=0.909675$、$y(0.2)=0.837462$，误差分别为 $-0.009675$ 与 $-0.017462$：欧拉解系统性偏低，且误差随步数不断增大。"
+      },
+      {
+        "problem": "同一问题用改进欧拉法算一步，并比较两种方法在 $x=1$ 处把步长减半时误差的变化。",
+        "solution": "$k_1=f(0,1)=-1$，预测 $\\bar y_1=1+0.1\\times(-1)=0.9$，$k_2=f(0.1,0.9)=-0.8$，故\n$$y_1=1+\\frac{0.1}{2}(-1-0.8)=0.91,$$\n与精确值 $0.909675$ 只差 $+0.000325$。在 $x=1$ 处（精确值 $0.735759$）：$h=0.1$ 时欧拉误差 $-0.038402$，$h=0.05$ 时 $-0.018787$（约减半，一阶）；改进欧拉相应为 $+0.001323$ 与 $+0.000318$（约降为四分之一，二阶）。"
+      }
+    ],
+    "tags": [
+      "欧拉法",
+      "改进欧拉法",
+      "Heun 方法",
+      "预测-校正",
+      "一阶精度"
+    ],
+    "links": [
+      "ode-basic-concepts",
+      "first-order-linear-ode",
+      "runge-kutta",
+      "numerical-stability"
+    ]
+  },
+  {
+    "id": "runge-kutta",
+    "title": "龙格-库塔方法",
+    "titleEn": "Runge–Kutta Methods",
+    "branch": "numerical",
+    "level": 5,
+    "summary": "在一步内取若干中间点的斜率做加权平均，只调用 f 本身就能达到高阶精度；经典四级四阶公式（RK4）是应用最广的通用常微分方程数值解法。",
+    "summaryEn": "Slopes sampled at intermediate stages inside each step are combined with suitable weights, reaching high order while calling only f; the classical fourth-order scheme (RK4) is the most widely used ODE solver.",
+    "definition": "显式单步法的一般形式是 $y_{n+1}=y_n+h\\,\\Phi(x_n,y_n;h)$：取 $\\Phi=f$ 得到欧拉法。沿 Taylor 展开逐项匹配可以得到更高阶（Taylor 法），但需要计算 $y'',y''',\\dots$，实际并不好用。Runge（1895）与 Kutta（1901）的思路是：**不引入高阶导数，而是用 $f$ 在一整步内若干中间点（称为「级」）的取值组合来模拟 Taylor 展开**。这就是 $s$ 级 Runge-Kutta 方法：\n$$y_{n+1}=y_n+h\\sum_{i=1}^{s}b_ik_i,\\qquad k_i=f\\Big(x_n+c_ih,\\ y_n+h\\sum_{j=1}^{i-1}a_{ij}k_j\\Big),$$\n系数 $(a_{ij},b_i,c_i)$ 组成 Butcher 表；选得恰当，展开就能与精确解的 Taylor 级数匹配到尽量高的阶。\n\n**经典四级四阶公式（经典 RK4）**是最著名的成员：\n$$k_1=f(x_n,y_n),\\qquad k_2=f\\!\\left(x_n+\\frac h2,\\ y_n+\\frac h2k_1\\right),$$\n$$k_3=f\\!\\left(x_n+\\frac h2,\\ y_n+\\frac h2k_2\\right),\\qquad k_4=f\\!\\left(x_n+h,\\ y_n+hk_3\\right),$$\n$$y_{n+1}=y_n+\\frac h6\\,(k_1+2k_2+2k_3+k_4).$$\n权系数依次为 $\\frac16,\\frac26,\\frac26,\\frac16$，与辛普森公式的 1-4-1 结构同源：两个中点级各占 $2/6$，两个端点级各占 $1/6$。事实上当 $f$ 只依赖 $x$ 时，RK4 恰好退化为辛普森公式 $\\frac h6\\left[f(x_n)+4f(x_n+\\frac h2)+f(x_n+h)\\right]$。每步需要 4 次 $f$ 求值：$k_1$ 是起点斜率；$k_2,k_3$ 是前半步的两个中点斜率（分别由 $k_1$、$k_2$ 独立预测）；$k_4$ 是用 $k_3$ 推进整步得到的终点斜率。\n\n精度：局部截断误差 $O(h^5)$，整体误差 $O(h^4)$——步长减半误差约降 16 倍（$f$ 足够光滑且 $h$ 位于稳定域内时）。阶数与级数之间有关系：$s\\le4$ 时，$s$ 级显式 RK 最高只能达到 $s$ 阶；5 阶公式至少需要 6 级。精度高、无需导数、实现简单，使 RK4 至今仍是很多实际问题的默认选择。\n\n稳定性与局限：把公式用于试验方程 $y'=\\lambda y$ 得 $y_{n+1}=R(h\\lambda)y_n$，其中 $R(z)=1+z+\\frac{z^2}{2}+\\frac{z^3}{6}+\\frac{z^4}{24}$ 是截断的指数级数；稳定条件是 $|R(z)|<1$。RK4 的稳定域是复平面上的有界区域，与负实轴的交集约为 $(-2.785,\\,0)$——它仍是条件稳定的显式方法（步长须小于约 $2.8/|\\lambda|$），对刚性方程力不从心，应改用 A-稳定的隐式方法。工程上为自动选步长，常用嵌入低阶公式的自适应 RK 对（如 Dormand-Prince 5(4)）；各类绘图工具中画斜率场解曲线，用的也正是 RK4。",
+    "definitionEn": "An explicit single-step method has the form $y_{n+1}=y_n+h\\,\\Phi(x_n,y_n;h)$; taking $\\Phi=f$ gives Euler's method. Matching Taylor expansions term by term leads to higher order (Taylor methods) but requires $y'',y''',\\dots$, which is impractical. Runge (1895) and Kutta (1901) realised that one can **mimic the Taylor expansion using combinations of $f$ evaluated at intermediate points (stages) inside the step, without ever forming higher derivatives**. This yields the $s$-stage Runge-Kutta methods:\n$$y_{n+1}=y_n+h\\sum_{i=1}^{s}b_ik_i,\\qquad k_i=f\\Big(x_n+c_ih,\\ y_n+h\\sum_{j=1}^{i-1}a_{ij}k_j\\Big),$$\nwith coefficients $(a_{ij},b_i,c_i)$ collected in a Butcher tableau; chosen well, the expansion matches the exact Taylor series to high order.\n\nThe **classical fourth-order scheme (RK4)** is the most famous member:\n$$k_1=f(x_n,y_n),\\qquad k_2=f\\!\\left(x_n+\\frac h2,\\ y_n+\\frac h2k_1\\right),$$\n$$k_3=f\\!\\left(x_n+\\frac h2,\\ y_n+\\frac h2k_2\\right),\\qquad k_4=f\\!\\left(x_n+h,\\ y_n+hk_3\\right),$$\n$$y_{n+1}=y_n+\\frac h6\\,(k_1+2k_2+2k_3+k_4).$$\nThe weights are $\\frac16,\\frac26,\\frac26,\\frac16$ — the same 1-4-1 pattern as Simpson's rule: two midpoint stages share weight $2/6$ and the two endpoint stages take $1/6$ each. Indeed, when $f$ depends on $x$ only, RK4 degenerates exactly to Simpson's rule $\\frac h6\\big[f(x_n)+4f(x_n+\\frac h2)+f(x_n+h)\\big]$. Each step costs four evaluations: $k_1$ is the slope at the start; $k_2,k_3$ are midpoint slopes predicted independently from $k_1$ and $k_2$; $k_4$ is the endpoint slope from a full step with $k_3$.\n\nAccuracy: the local truncation error is $O(h^5)$ and the global error $O(h^4)$: halving the step divides the error by about 16 (for smooth $f$ and $h$ inside the stability region). Order is limited by the number of stages: for $s\\le4$ an $s$-stage explicit RK method has order at most $s$, and a fifth-order formula needs at least six stages. High accuracy, no derivatives, and simple implementation keep RK4 the default general-purpose solver.\n\nStability and limitations: on the test equation $y'=\\lambda y$ the scheme gives $y_{n+1}=R(h\\lambda)y_n$ with $R(z)=1+z+\\frac{z^2}{2}+\\frac{z^3}{6}+\\frac{z^4}{24}$, a truncated exponential; stability requires $|R(z)|<1$. The stability region is a bounded set in the complex plane meeting the negative real axis in about $(-2.785,\\,0)$ — RK4 is still only conditionally stable (the step must stay below roughly $2.8/|\\lambda|$), so it struggles on stiff problems, where A-stable implicit methods are needed. For automatic step-size control, embedded RK pairs such as Dormand-Prince 5(4) are standard.",
+    "formulas": [
+      {
+        "latex": "k_1=f(x_n,y_n),\\quad k_2=f\\!\\left(x_n+\\frac h2,\\ y_n+\\frac h2k_1\\right),\\quad k_3=f\\!\\left(x_n+\\frac h2,\\ y_n+\\frac h2k_2\\right),\\quad k_4=f(x_n+h,\\ y_n+hk_3)",
+        "note": "经典 RK4 的四个级：两个中点级与两个端点级。",
+        "noteEn": "The four stages of classical RK4: two at the midpoint and two at the endpoints."
+      },
+      {
+        "latex": "y_{n+1}=y_n+\\frac h6\\,(k_1+2k_2+2k_3+k_4)",
+        "note": "权系数 $1/6,2/6,2/6,1/6$ 不能记错；$f$ 只依赖 $x$ 时它退化为辛普森公式。",
+        "noteEn": "Weights $1/6,2/6,2/6,1/6$; for $f=f(x)$ it reduces to Simpson's rule."
+      },
+      {
+        "latex": "\\text{Butcher 表：}\\ c=(0,\\tfrac12,\\tfrac12,1),\\quad b=(\\tfrac16,\\tfrac26,\\tfrac26,\\tfrac16),\\quad a_{21}=a_{32}=\\tfrac12,\\ a_{43}=1",
+        "note": "RK4 的系数表；一般 $s$ 级方法由这套系数刻画。",
+        "noteEn": "The Butcher tableau of RK4; general $s$-stage methods are described by such coefficients."
+      },
+      {
+        "latex": "T_{n+1}=O(h^5),\\qquad y(x_n)-y_n=O(h^4)",
+        "note": "局部五阶、整体四阶：步长减半，误差约降为 $1/16$。",
+        "noteEn": "Local order five, global order four: halving the step cuts the error by about 16."
+      },
+      {
+        "latex": "R(z)=1+z+\\frac{z^2}{2}+\\frac{z^3}{6}+\\frac{z^4}{24},\\qquad |R(z)|<1,\\qquad \\text{负实轴稳定区间}\\approx(-2.785,\\,0)",
+        "note": "稳定性多项式与稳定域；RK4 仍是条件稳定的显式方法。",
+        "noteEn": "The stability polynomial and region; RK4 remains conditionally stable."
+      }
+    ],
+    "expression": {
+      "text": "y_{n+1}=y_n+h(k₁+2k₂+2k₃+k₄)/6，kᵢ 为一步内四个中间点的斜率",
+      "symbol": "RK4",
+      "note": "每步 4 次 f 求值，整体四阶精度；无需高阶导数。",
+      "noteEn": "Four evaluations of f per step for fourth-order accuracy, with no derivatives needed."
+    },
+    "properties": [
+      "单步显式、自启动：每步 4 次 $f$ 求值，不需任何高阶导数，也不依赖历史点；步长可随走随调。",
+      "精度与代价平衡：每步 4 次 $f$ 求值换来四阶精度，通常比把欧拉法或 Heun 法步长缩到同等精度划算得多。",
+      "条件稳定：负实轴稳定区间约 $(-2.785,0)$，刚性方程上被迫取过小步长，应改用 A-稳定的隐式方法。",
+      "阶数限制：$s$ 级显式 RK 的阶数 $p\\le s$（$s\\le4$）；$p=5$ 至少需要 $s=6$，高阶公式的系数条件越来越苛刻。",
+      "变体丰富：3/8 法则（权 $1/8,3/8,3/8,1/8$）同为四阶；嵌入对（Dormand-Prince 等）实现误差估计与自适应步长；隐式 RK 可兼顾 A-稳定与高阶。"
+    ],
+    "propertiesEn": [
+      "Explicit, single-step and self-starting: four evaluations of $f$ per step, no higher derivatives, no history; the step size can vary freely.",
+      "Favourable accuracy/cost balance: four evaluations per step buy fourth-order accuracy, usually far cheaper than shrinking Euler or Heun steps to the same precision.",
+      "Conditionally stable: the stability interval on the negative real axis is about $(-2.785,0)$; stiff problems force tiny steps and call for A-stable implicit schemes.",
+      "Order is capped by stages: an $s$-stage explicit RK method has order $p\\le s$ for $s\\le4$, and $p=5$ requires $s\\ge6$.",
+      "Many variants: the 3/8 rule (weights $1/8,3/8,3/8,1/8$) is also fourth order; embedded pairs (Dormand-Prince etc.) give error estimates and adaptive steps; implicit RK methods can be both A-stable and high order."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x - 1 + 2*exp(-x)",
+          "color": "#4cc9f0",
+          "label": "精确解 y=x-1+2e^(-x)"
+        },
+        {
+          "expr": "1 -0.5729166667*x + 0.6185167101*((x-0.5)+abs(x-0.5))/2 + 0.3752978996*((x-1)+abs(x-1))/2 + 0.2277198193*((x-1.5)+abs(x-1.5))/2 + 0.1381737445*((x-2)+abs(x-2))/2 + 0.0838397981*((x-2.5)+abs(x-2.5))/2",
+          "color": "#06d6a0",
+          "label": "RK4 h=0.5"
+        },
+        {
+          "expr": "1 -1*x + 1*((x-0.5)+abs(x-0.5))/2 + 0.5*((x-1)+abs(x-1))/2 + 0.25*((x-1.5)+abs(x-1.5))/2 + 0.125*((x-2)+abs(x-2))/2 + 0.0625*((x-2.5)+abs(x-2.5))/2",
+          "color": "#ff6b9d",
+          "label": "欧拉 h=0.5"
+        }
+      ],
+      "xRange": [
+        0,
+        3
+      ],
+      "yRange": [
+        -0.5,
+        2.5
+      ],
+      "title": "y' = x-y，y(0)=1：h=0.5 时 RK4 与欧拉法对比（数值解为节点折线）"
+    },
+    "examples": [
+      {
+        "problem": "用经典 RK4 解 $y'=x-y,\\ y(0)=1$，取大步长 $h=0.5$ 计算一步，并与精确解比较。",
+        "solution": "依次算得 $k_1=0-1=-1$；$k_2=f(0.25,\\ 1+\\frac{0.5}{2}(-1))=0.25-0.75=-0.5$；$k_3=f(0.25,\\ 1+\\frac{0.5}{2}(-0.5))=0.25-0.875=-0.625$；$k_4=f(0.5,\\ 1+0.5\\times(-0.625))=0.5-0.6875=-0.1875$。于是\n$$y_1=1+\\frac{0.5}{6}\\,[-1+2(-0.5)+2(-0.625)+(-0.1875)]=1-\\frac{0.5\\times3.4375}{6}=0.713542.$$\n精确解 $y=x-1+2e^{-x}$ 给出 $y(0.5)=0.713061$，误差仅 $4.8\\times10^{-4}$；而同样取 $h=0.5$ 时欧拉法只给出 $0.5$（误差约 $-0.21$）。配图中两条近似曲线就是把各自节点用直线连接画出的效果。"
+      },
+      {
+        "problem": "对 $y'=x-y,\\ y(0)=1$，在 $x=1$ 处（精确值 $0.73575888$）用欧拉、改进欧拉、RK4 三种方法、三种步长比较误差，验证各自的阶数。",
+        "solution": "数值误差如下（$h=0.1\\to0.05\\to0.025$）：欧拉 $-3.84\\times10^{-2}\\to-1.88\\times10^{-2}\\to-9.29\\times10^{-3}$，每次约减半（一阶）；改进欧拉 $+1.32\\times10^{-3}\\to+3.18\\times10^{-4}\\to+7.81\\times10^{-5}$，约降 4 倍（二阶）；RK4 $+6.66\\times10^{-7}\\to+4.00\\times10^{-8}\\to+2.45\\times10^{-9}$，约降 16 倍（四阶）。理论与实验完全吻合。"
+      }
+    ],
+    "tags": [
+      "龙格-库塔",
+      "RK4",
+      "四阶精度",
+      "单步法",
+      "Butcher 表"
+    ],
+    "links": [
+      "euler-methods",
+      "numerical-stability",
+      "ode-basic-concepts",
+      "taylor-formula"
+    ]
+  },
+  {
+    "id": "numerical-stability",
+    "title": "数值方法的收敛性与稳定性",
+    "titleEn": "Convergence and Stability of Numerical Methods",
+    "branch": "numerical",
+    "level": 5,
+    "summary": "相容性保证格式逼近方程，稳定性保证误差不被放大，二者合起来（Lax 等价定理）保证收敛；显式方法的稳定区间有限，刚性问题必须用 A-稳定的隐式方法。",
+    "summaryEn": "Consistency ties the scheme to the equation, stability keeps perturbations from growing, and together (Lax equivalence) they yield convergence; explicit schemes have bounded stability intervals, so stiff problems need A-stable implicit methods.",
+    "definition": "讨论微分方程数值解时，三个概念必须分清。**相容性**：把精确解代入数值格式，单步留下的局部截断误差 $T_{n+1}$ 满足 $T_{n+1}/h\\to0$（$h\\to0$），即格式确实在逼近微分方程——$p$ 阶方法有 $T_{n+1}=O(h^{p+1})$，自动相容。**收敛性**：固定 $x=x_n$，当 $h\\to0$ 时数值解 $y_n\\to y(x)$。**稳定性**：格式不会把扰动（初始误差、每步舍入误差）无界放大。三者不是一回事：格式可以相容却因不稳定而不收敛（例如把中心差分直接用于初值问题），也可以稳定但只有低阶精度。\n\n**Lax 等价定理**（初值问题版本）把三者串起来：对相容的单步法，**稳定 $\\Longleftrightarrow$ 收敛**。因此误差分析总把两件事分开讲：阶数决定「收敛多快」，稳定性决定「能否收敛」。\n\n稳定性的标准测试是**试验方程** $y'=\\lambda y$（取 $\\operatorname{Re}\\lambda<0$，精确解 $e^{\\lambda x}\\to0$ 衰减）。数值格式作用上去一般得到 $y_{n+1}=R(h\\lambda)y_n$，$R$ 称为放大因子。要求扰动不放大即 $|R(z)|<1$，满足它的 $z=h\\lambda$ 的集合称为**绝对稳定域**。对显式欧拉法 $R(z)=1+z$，稳定域是以 $-1$ 为心、半径 1 的圆盘；$\\lambda=-a<0$ 为负实数时要求 $0<h<2/a$。$h=2/a$ 时 $|R|=1$，数值解 $(-1)^n$ 等幅振荡、永不衰减；$h>2/a$ 时振荡发散。以 $y'=-10y$ 为例：$h<0.2$ 稳定；取 $h=0.3$，放大因子为 $1-3=-2$，数值解 $(-2)^n$ 一步一变号、指数爆炸，而精确解 $e^{-10x}$ 早就衰减到 0（$x=3$ 时约 $9.4\\times10^{-14}$）——数值解与真解已经毫无关系。\n\n**A-稳定与刚性方程**：若稳定域包含整个左半平面 $\\{\\operatorname{Re}z\\le0\\}$，称方法是 **A-稳定**的——对任何衰减的试验方程都无条件稳定。隐式欧拉法 $y_{n+1}=y_n+hf(x_{n+1},y_{n+1})$ 对试验方程给出 $R(z)=\\frac{1}{1-z}$，$\\operatorname{Re}z<0$ 时恒有 $|R(z)|<1$，因此 A-稳定（但只有一阶精度）。梯形法 $R(z)=\\frac{1+z/2}{1-z/2}$ 同样 A-稳定，并且是二阶。Dahlquist 定理指出：A-稳定的线性多步法阶数不超过 2；但这不妨碍隐式 Runge-Kutta（如 Gauss-Legendre 方法）兼顾 A-稳定与高阶。**刚性方程**是快慢时间尺度共存、$\\operatorname{Re}\\lambda$ 的绝对值相差悬殊的方程：显式法被最快的衰减分量限制在 $h\\sim2/|\\lambda_{\\max}|$，代价无法忍受；正确做法是改用 A-稳定的隐式方法（隐式欧拉、梯形法、BDF2、隐式 RK），每步解方程或迭代的代价换来对步长的解放。",
+    "definitionEn": "Three notions must be kept apart. **Consistency**: substituting the exact solution into the scheme leaves a local truncation error $T_{n+1}$ with $T_{n+1}/h\\to0$ as $h\\to0$ — the scheme really approximates the differential equation (a $p$-th order method has $T_{n+1}=O(h^{p+1})$ and is consistent automatically). **Convergence**: with $x=x_n$ fixed, $y_n\\to y(x)$ as $h\\to0$. **Stability**: perturbations (initial error, rounding error) are not amplified without bound. These differ: a consistent scheme can fail to converge because of instability (applying central differences directly to an initial value problem), and a stable scheme can be of low order.\n\nThe **Lax equivalence theorem** (initial value form) links them: for a consistent single-step method, **stable $\\Longleftrightarrow$ convergent**. Hence error analysis always separates two questions: the order says how fast convergence happens, stability says whether it happens at all.\n\nThe standard stability test is the **test equation** $y'=\\lambda y$ with $\\operatorname{Re}\\lambda<0$ (exact solution $e^{\\lambda x}\\to0$). A scheme becomes $y_{n+1}=R(h\\lambda)y_n$, where $R$ is the amplification factor; perturbations stay bounded iff $|R(z)|<1$, and the set of such $z=h\\lambda$ is the **absolute stability region**. Explicit Euler has $R(z)=1+z$, a disk of radius 1 about $-1$; for real $\\lambda=-a<0$ this means $0<h<2/a$. At $h=2/a$ one has $|R|=1$ and the solution $(-1)^n$ oscillates forever without decaying; for $h>2/a$ it diverges. Example: for $y'=-10y$, $h<0.2$ is stable; with $h=0.3$ the factor is $1-3=-2$ and the solution $(-2)^n$ flips sign and explodes, while the exact solution $e^{-10x}$ has long decayed to zero (about $9.4\\times10^{-14}$ at $x=3$) — the numerical solution no longer resembles the truth.\n\n**A-stability and stiff equations**: if the stability region contains the entire left half-plane $\\{\\operatorname{Re}z\\le0\\}$, the method is **A-stable** — unconditionally stable for every decaying test equation. Implicit Euler, $y_{n+1}=y_n+hf(x_{n+1},y_{n+1})$, gives $R(z)=\\frac{1}{1-z}$, which satisfies $|R(z)|<1$ for all $\\operatorname{Re}z<0$: A-stable, but only first order. The trapezoidal rule, $R(z)=\\frac{1+z/2}{1-z/2}$, is A-stable and second order. Dahlquist's theorem says an A-stable linear multistep method has order at most 2 — though implicit Runge-Kutta methods (e.g. Gauss-Legendre) can be both A-stable and high order. **Stiff equations** mix fast and slow time scales with widely differing $\\operatorname{Re}\\lambda$; explicit methods are then restricted to $h\\sim2/|\\lambda_{\\max}|$, which is intolerable, and one switches to A-stable implicit schemes (implicit Euler, trapezoidal rule, BDF2, implicit RK), paying a linear solve or iteration per step for freedom in the step size.",
+    "formulas": [
+      {
+        "latex": "T_{n+1}=O(h^{p+1}),\\qquad \\frac{T_{n+1}}{h}\\to0\\ (h\\to0)\\qquad(\\text{相容性})",
+        "note": "相容性：局部截断误差比步长高一阶，除以 $h$ 后趋于 0，格式确实逼近方程。",
+        "noteEn": "Consistency: the local truncation error is one order above $h$, so dividing by $h$ gives zero in the limit."
+      },
+      {
+        "latex": "y'=\\lambda y:\\qquad y_{n+1}=(1+h\\lambda)y_n,\\qquad y_n=(1+h\\lambda)^ny_0",
+        "note": "试验方程上的显式欧拉：每步乘放大因子 $R=1+h\\lambda$。",
+        "noteEn": "Explicit Euler on the test equation: each step multiplies by the amplification factor $R=1+h\\lambda$."
+      },
+      {
+        "latex": "|1+h\\lambda|<1;\\qquad \\lambda<0\\ \\text{实数时}\\quad 0<h<\\frac{2}{|\\lambda|}",
+        "note": "绝对稳定条件；$h=2/|\\lambda|$ 是边界（等幅振荡），越界即振荡发散。",
+        "noteEn": "The absolute stability condition; $h=2/|\\lambda|$ is the boundary (persistent oscillation), beyond which the solution diverges."
+      },
+      {
+        "latex": "y_{n+1}=\\frac{y_n}{1-h\\lambda},\\qquad \\left|\\frac{1}{1-h\\lambda}\\right|<1\\quad(\\operatorname{Re}\\lambda<0)\\qquad(\\text{A-稳定})",
+        "note": "隐式欧拉法无条件 A-稳定：整个左半平面都在稳定域内。",
+        "noteEn": "Implicit Euler is unconditionally A-stable: the whole left half-plane lies in the stability region."
+      },
+      {
+        "latex": "R(z)=\\frac{1+z/2}{1-z/2},\\qquad |R(z)|<1\\quad(\\operatorname{Re}z<0)",
+        "note": "梯形法（Crank-Nicolson）的放大因子：A-稳定且二阶。",
+        "noteEn": "Amplification factor of the trapezoidal (Crank-Nicolson) rule: A-stable and second order."
+      }
+    ],
+    "expression": {
+      "text": "|R(hλ)|<1：放大因子落在稳定域内，误差才不被放大",
+      "symbol": "|R(hλ)|<1",
+      "note": "显式方法稳定区间有限（欧拉为 0<h<2/|λ|），隐式方法可无条件稳定。",
+      "noteEn": "Explicit methods have bounded stability intervals (Euler: 0<h<2/|λ|); implicit ones can be unconditionally stable."
+    },
+    "properties": [
+      "相容 + 稳定 $\\Longleftrightarrow$ 收敛（Lax 等价定理，单步法）：阶数决定收敛速度，稳定性决定能否收敛。",
+      "显式方法的稳定域有界：欧拉与 Heun 在负实轴上是 $(-2,0)$，RK4 约为 $(-2.785,0)$；对 $\\lambda=-a<0$，欧拉与 Heun 要求 $h<2/a$；RK4 的要求约是 $h<2.785/a$，因此 $h<2/a$ 对 RK4 只是充分条件、不是必要条件。",
+      "A-稳定性：稳定域包含整个左半平面；隐式欧拉（一阶）与梯形法（二阶）都 A-稳定，隐式 RK 可以更高阶；Dahlquist 定理：A-稳定的线性多步法阶数不超过 2。",
+      "刚性方程中 $|\\lambda|$ 很大，显式法的最稳步长 $2/|\\lambda|$ 小到不可接受，必须用 A-稳定或刚性稳定的隐式方法（隐式欧拉、梯形法、BDF、隐式 RK）。",
+      "稳定不等于精确：$|R(z)|<1$ 只保证扰动衰减；稳定区间内误差仍由阶数与误差常数决定（例如 $h=0.19$ 时欧拉法稳定，精度却可能一般）。"
+    ],
+    "propertiesEn": [
+      "Consistency plus stability $\\Longleftrightarrow$ convergence (Lax equivalence, single-step methods): order sets the speed, stability decides whether convergence happens at all.",
+      "Explicit methods have bounded stability regions: $(-2,0)$ on the negative real axis for Euler and Heun, about $(-2.785,0)$ for RK4; for $\\lambda=-a<0$, Euler and Heun require $h<2/a$ while RK4 allows about $h<2.785/a$, so $h<2/a$ is only sufficient, not necessary, for RK4.",
+      "A-stability: the stability region contains the whole left half-plane; implicit Euler (first order) and the trapezoidal rule (second order) are A-stable, implicit RK can be higher order; Dahlquist: an A-stable linear multistep method has order at most 2.",
+      "In stiff equations $|\\lambda|$ is huge, the explicit stability limit $2/|\\lambda|$ is unacceptably small, and A-stable or stiffly stable implicit methods (implicit Euler, trapezoidal rule, BDF, implicit RK) are required.",
+      "Stable is not the same as accurate: $|R(z)|<1$ only damps perturbations; within the stability region the error is still governed by order and error constants (Euler with $h=0.19$ is stable but may be inaccurate)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-10*x)",
+          "color": "#4cc9f0",
+          "label": "精确解 e^(-10x)"
+        },
+        {
+          "expr": "exp(-x)",
+          "color": "#ffd166",
+          "label": "对照 e^(-x)"
+        },
+        {
+          "expr": "cos(PI*x/0.3)*2^(x/0.3)",
+          "color": "#ff6b9d",
+          "label": "欧拉 h=0.3：(-2)^n"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        -10,
+        10
+      ],
+      "title": "y' = -10y：欧拉法 h=0.3 超过稳定界限 2/|λ| = 0.2 时振荡发散"
+    },
+    "examples": [
+      {
+        "problem": "对 $y'=-10y,\\ y(0)=1$，取 $h=0.3$，考察显式欧拉法的稳定性，并写出前几个数值。",
+        "solution": "放大因子 $R=1+h\\lambda=1-3=-2$，$|R|=2>1$，越过稳定条件 $0<h<2/|\\lambda|=0.2$。数值解为\n$$y_n=(-2)^n:\\qquad 1,\\ -2,\\ 4,\\ -8,\\ 16,\\ \\dots$$\n一步一变号、振幅翻倍；而精确解 $e^{-10x}$ 单调衰减，$x=0.3$ 时约 $0.0498$，$x=3$ 时约 $9.4\\times10^{-14}$。到 $x=3$（10 步）时欧拉解已达 $(-2)^{10}=1024$：这不是精度问题，而是稳定性的彻底失效。（临界情形 $h=0.2$ 时 $R=-1$，数值解 $(-1)^n$ 等幅振荡、永不衰减。）"
+      },
+      {
+        "problem": "同一问题改用隐式欧拉法与梯形法（均为 A-稳定），仍取大步长 $h=0.3$，说明结果。",
+        "solution": "隐式欧拉：$y_{n+1}=\\frac{y_n}{1-h\\lambda}=\\frac{y_n}{1+3}=0.25\\,y_n$，数值解 $1,0.25,0.0625,\\dots$ 单调衰减，与精确解的定性行为一致——$h$ 再大也不会爆炸，只是数值衰减比 $e^{-10x}$ 慢（精度有限）。梯形法：$R=\\frac{1+h\\lambda/2}{1-h\\lambda/2}=\\frac{1-1.5}{1+1.5}=-0.2$，误差按 $0.2^n$ 快速衰减，且它是二阶方法，比隐式欧拉更接近真解。可见「无条件稳定」是用每步解一次方程（或迭代）换来的；对刚性方程，这笔交易非常划算。"
+      }
+    ],
+    "tags": [
+      "稳定性",
+      "收敛性",
+      "相容性",
+      "A-稳定",
+      "刚性方程",
+      "稳定域"
+    ],
+    "links": [
+      "euler-methods",
+      "runge-kutta",
+      "stability",
+      "ode-basic-concepts"
+    ]
+  }
+]

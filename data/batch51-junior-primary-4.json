@@ -1,0 +1,1589 @@
+[
+  {
+    "id": "solid-figures-elementary",
+    "title": "认识立体图形",
+    "titleEn": "Recognizing Solid Figures",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "认识长方体、正方体、圆柱和球，数清它们的面、棱和顶点。",
+    "summaryEn": "Get to know the cuboid, cube, cylinder and sphere, and count their faces, edges and vertices.",
+    "definition": "我们身边到处都是立体图形：牙膏盒、鞋盒是**长方体**，魔方、骰子是**正方体**，饮料罐、笔筒是**圆柱**，皮球、地球仪是**球**。它们都占一定的空间，这就是「立体的」。\n\n长方体上平平的部分叫**面**，两个面相交的边叫**棱**，三条棱相交的点叫**顶点**。数一数：长方体有 **6 个面**、**12 条棱**、**8 个顶点**，可以记成口诀「六面十二棱八顶点」。正方体的 6 个面都是完全相同的正方形，12 条棱长度都相等——所以**正方体是特殊的长方体**，就像正方形是特殊的长方形一样。\n\n圆柱上下有 **2 个底面**，是两个同样大的圆；周围是 **1 个侧面**，是弯弯的**曲面**。球最特别：它的表面全是曲面，**没有平面**，也没有棱和顶点，往哪个方向都能滚。",
+    "definitionEn": "Solid figures are all around us: a toothpaste box or a shoe box is a **cuboid**, a die or a Rubik's cube is a **cube**, a drink can is a **cylinder**, and a ball is a **sphere**. They all take up space — that is what makes them solid.\n\nThe flat parts of a cuboid are its **faces**, the edges where two faces meet are its **edges**, and the points where three edges meet are its **vertices**. Count them: a cuboid has **6 faces**, **12 edges** and **8 vertices**. A cube has 6 identical square faces and 12 equal edges, so **a cube is a special cuboid**, just as a square is a special rectangle.\n\nA cylinder has **2 bases**, two congruent circles, and **1 curved side**. A sphere is even more special: its whole surface is curved, with **no flat face**, no edges and no vertices, so it rolls in every direction.",
+    "formulas": [
+      {
+        "latex": "6\\ \\text{个面}\\quad 12\\ \\text{条棱}\\quad 8\\ \\text{个顶点}",
+        "note": "长方体有 6 个面、12 条棱、8 个顶点，口诀是「六面十二棱八顶点」；正方体也一样。",
+        "noteEn": "A cuboid has 6 faces, 12 edges and 8 vertices (a cube has the same counts)."
+      },
+      {
+        "latex": "8 \\times 3 = 12 \\times 2 = 24",
+        "note": "每个顶点连着 3 条棱，每条棱连着 2 个顶点——8×3 和 12×2 正好相等，数完可以这样验算。",
+        "noteEn": "Each vertex joins 3 edges and each edge joins 2 vertices, so 8×3 = 12×2 — a handy double-check when counting."
+      },
+      {
+        "latex": "\\text{正方体} \\subset \\text{长方体}",
+        "note": "正方体是特殊的长方体：6 个面都是完全相同的正方形，12 条棱长度都相等。",
+        "noteEn": "A cube is a special cuboid: its 6 faces are identical squares and its 12 edges are equal."
+      },
+      {
+        "latex": "\\text{圆柱} = 2\\ \\text{个圆底面} + 1\\ \\text{个侧面（曲面）}",
+        "note": "圆柱有 2 个同样大的圆形底面和 1 个曲面侧面，所以放倒后能滚动。",
+        "noteEn": "A cylinder has 2 congruent circular bases and 1 curved side, so it can roll."
+      },
+      {
+        "latex": "\\text{球} : \\text{没有平面，也没有棱和顶点}",
+        "note": "球的表面全是曲面，朝任何方向都能滚。",
+        "noteEn": "A sphere's surface is all curved — no flat face, no edges, no vertices."
+      }
+    ],
+    "expression": {
+      "text": "长方体：6 个面、12 条棱、8 个顶点；正方体是特殊的长方体",
+      "symbol": "6 面 · 12 棱 · 8 顶点",
+      "note": "数面、数棱时可以按「上下、前后、左右」一对一对地数，就不会漏。",
+      "noteEn": "Count faces and edges in pairs (top-bottom, front-back, left-right) so that nothing is missed."
+    },
+    "properties": [
+      "长方体有 6 个面、12 条棱、8 个顶点；正方体也有 6 个面、12 条棱、8 个顶点",
+      "正方体是特殊的长方体：它的 6 个面都是完全相同的正方形，12 条棱长度都相等",
+      "圆柱有 2 个同样大的圆形底面和 1 个曲面侧面，放倒后可以滚动",
+      "球没有平面，没有棱和顶点，在任何方向都能滚动"
+    ],
+    "propertiesEn": [
+      "A cuboid has 6 faces, 12 edges and 8 vertices; a cube has 6 faces, 12 edges and 8 vertices too",
+      "A cube is a special cuboid: its 6 faces are identical squares and its 12 edges are equal",
+      "A cylinder has 2 congruent circular bases and 1 curved side; laid on its side it can roll",
+      "A sphere has no flat face, no edges and no vertices, and it rolls in every direction"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.8,
+        11.2
+      ],
+      "yRange": [
+        -2.0,
+        4.6
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.3,
+              0.3
+            ],
+            [
+              3.9,
+              0.3
+            ],
+            [
+              3.9,
+              2.4
+            ],
+            [
+              0.3,
+              2.4
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.14)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.9,
+            0.3
+          ],
+          "to": [
+            4.8,
+            1.1
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.9,
+            2.4
+          ],
+          "to": [
+            4.8,
+            3.2
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.3,
+            2.4
+          ],
+          "to": [
+            1.2,
+            3.2
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.8,
+            1.1
+          ],
+          "to": [
+            4.8,
+            3.2
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.8,
+            3.2
+          ],
+          "to": [
+            1.2,
+            3.2
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.1
+          ],
+          "to": [
+            4.8,
+            1.1
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.1
+          ],
+          "to": [
+            1.2,
+            3.2
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.3,
+            0.3
+          ],
+          "to": [
+            1.2,
+            1.1
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "dash": true
+        },
+        {
+          "type": "point",
+          "at": [
+            0.3,
+            0.3
+          ],
+          "label": "顶点"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.1,
+            0.3
+          ],
+          "label": "棱"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.5,
+            1.4
+          ],
+          "label": "面"
+        },
+        {
+          "type": "circle",
+          "cx": 8.0,
+          "cy": 2.6,
+          "r": 1.25,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.10)"
+        },
+        {
+          "type": "circle",
+          "cx": 8.0,
+          "cy": 0.8,
+          "r": 1.25,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.10)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            6.75,
+            0.8
+          ],
+          "to": [
+            6.75,
+            2.6
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            9.25,
+            0.8
+          ],
+          "to": [
+            9.25,
+            2.6
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            8.0,
+            0.8
+          ],
+          "label": "底面"
+        },
+        {
+          "type": "point",
+          "at": [
+            6.75,
+            1.7
+          ],
+          "label": "侧面"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.1,
+            -0.65
+          ],
+          "text": "长方体"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.0,
+            -1.05
+          ],
+          "text": "圆柱"
+        }
+      ],
+      "title": "长方体与圆柱"
+    },
+    "examples": [
+      {
+        "problem": "数一数：一个长方体饼干盒有几个面、几条棱、几个顶点？如果它的长、宽、高都变成 6 厘米，它变成了什么图形？",
+        "solution": "长方体有 6 个面、12 条棱、8 个顶点，记成口诀「六面十二棱八顶点」。当长、宽、高都是 6 厘米时，6 个面都成了完全相同的正方形，12 条棱也一样长，它就变成了**正方体**——正方形是特殊的长方形，正方体是特殊的长方体。"
+      },
+      {
+        "problem": "小明说：「皮球和易拉罐都会滚，它们差不多。」他说得对吗？请分别说说它们各有几个平面。",
+        "solution": "不对。易拉罐是**圆柱**：有 2 个同样大的圆形底面，1 个侧面是曲面，它只能沿着一个方向滚；皮球是**球**：表面全是曲面，没有平面，朝哪个方向都能滚。它们的面完全不同，不是「差不多」。"
+      }
+    ],
+    "tags": [
+      "立体图形",
+      "长方体",
+      "正方体",
+      "圆柱",
+      "球"
+    ],
+    "links": [
+      "solid-volume-elementary",
+      "observing-objects",
+      "area-volume-units"
+    ]
+  },
+  {
+    "id": "angles-elementary",
+    "title": "角的初步认识与度量",
+    "titleEn": "Angles: An Introduction and Measurement",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "从一点引出两条射线组成角；用度来量角，分清锐角、直角、钝角、平角和周角。",
+    "summaryEn": "Two rays from one point form an angle; measure it in degrees and tell acute, right, obtuse, straight and full angles apart.",
+    "definition": "从一点引出两条**射线**，就组成一个**角**。这个点叫角的**顶点**，两条射线叫角的**两条边**。角也可以看成一条射线绕它的端点旋转形成的图形。\n\n角的大小只跟两条边**张开的程度**有关，跟两条边画得**长还是短没有关系**——把边画得再长，角也一点都不会变大！比较两个角时，要把顶点对齐、一条边重合，再看另一条边张开得大不大。\n\n量角要用**量角器**，角的单位是**度**，记作「°」：把半圆平均分成 180 份，每一份所对的角就是 1 度（1°）。按大小分类：小于 90° 的叫**锐角**，等于 90° 的叫**直角**，大于 90° 而小于 180° 的叫**钝角**；两条边成一条直线时是**平角**（180°），绕一圈回到原处是**周角**（360°）。所以 1 平角 = 2 直角，1 周角 = 2 平角 = 4 直角。",
+    "definitionEn": "Two **rays** drawn from one point form an **angle**. The point is the **vertex**, and the two rays are the **sides** of the angle. An angle can also be seen as what a ray sweeps out while it turns about its endpoint.\n\nThe size of an angle depends only on how wide its two sides are **open**, and never on how long the sides are drawn — making the sides longer does not make the angle bigger! To compare two angles, put their vertices together, make one pair of sides overlap, and look at how widely the other pair opens.\n\nWe measure angles with a **protractor**, in **degrees**, written °: divide a half circle into 180 equal parts, and each part is 1 degree (1°). By size: an angle smaller than 90° is **acute**, one equal to 90° is a **right angle**, and one greater than 90° but less than 180° is **obtuse**. When the two sides form a straight line, the angle is a **straight angle** (180°), and one full turn gives a **full angle** (360°). Hence 1 straight angle = 2 right angles, and 1 full angle = 2 straight angles = 4 right angles.",
+    "formulas": [
+      {
+        "latex": "0^\\circ < \\alpha < 90^\\circ",
+        "note": "锐角：比直角小的角，开口比直角窄。",
+        "noteEn": "Acute angle: smaller than a right angle."
+      },
+      {
+        "latex": "\\alpha = 90^\\circ",
+        "note": "直角：可以拿三角尺上的直角去比一比，正好重合就是直角。",
+        "noteEn": "Right angle: compare with the right angle of a set square — if they fit exactly, it is a right angle."
+      },
+      {
+        "latex": "90^\\circ < \\alpha < 180^\\circ",
+        "note": "钝角：比直角大，但又比平角小。",
+        "noteEn": "Obtuse angle: greater than a right angle but smaller than a straight angle."
+      },
+      {
+        "latex": "\\text{平角} = 180^\\circ = 2 \\times 90^\\circ",
+        "note": "两条边成一条直线，就是平角。1 平角 = 2 直角。",
+        "noteEn": "When the two sides form a straight line we get a straight angle; 1 straight angle = 2 right angles."
+      },
+      {
+        "latex": "\\text{周角} = 360^\\circ = 2 \\times 180^\\circ = 4 \\times 90^\\circ",
+        "note": "一条射线绕端点转一圈，就是周角。1 周角 = 2 平角 = 4 直角。",
+        "noteEn": "One full turn of a ray about its endpoint gives a full angle; 1 full angle = 2 straight angles = 4 right angles."
+      }
+    ],
+    "expression": {
+      "text": "角 AOB 记作 ∠AOB；∠AOB = 90° 表示它是直角",
+      "symbol": "∠AOB",
+      "note": "角可以用三个大写字母表示（顶点字母写在中间），也可以用「∠1」这样的数字来表示。",
+      "noteEn": "An angle can be named by three capital letters with the vertex in the middle, or by a label such as ∠1."
+    },
+    "properties": [
+      "角有一个顶点、两条边，两条边都是射线",
+      "角的大小只与两条边张开的程度有关，与两条边画得长短无关",
+      "锐角 < 90°，直角 = 90°，90° < 钝角 < 180°",
+      "1 平角 = 2 直角 = 180°；1 周角 = 2 平角 = 4 直角 = 360°",
+      "量角口诀：中心对顶点，零刻度线对一条边，另一条边对着的刻度就是这个角的度数"
+    ],
+    "propertiesEn": [
+      "An angle has one vertex and two sides, and both sides are rays",
+      "The size of an angle depends only on how widely its sides open, not on how long they are drawn",
+      "Acute < 90°, right = 90°, and 90° < obtuse < 180°",
+      "1 straight angle = 2 right angles = 180°; 1 full angle = 2 straight angles = 4 right angles = 360°",
+      "Protractor rule: centre on the vertex, zero line along one side, and read the mark on the other side"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.5,
+        9.5
+      ],
+      "yRange": [
+        -1.7,
+        3.8
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            0.4,
+            0.3
+          ],
+          "to": [
+            1.9,
+            0.3
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.4,
+            0.3
+          ],
+          "to": [
+            1.46,
+            1.36
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "arc",
+          "cx": 0.4,
+          "cy": 0.3,
+          "r": 0.45,
+          "start": 0,
+          "end": 0.785,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.9,
+            0.3
+          ],
+          "to": [
+            5.4,
+            0.3
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.9,
+            0.3
+          ],
+          "to": [
+            3.9,
+            1.8
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.2,
+            0.3
+          ],
+          "to": [
+            4.2,
+            0.6
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.2,
+            0.6
+          ],
+          "to": [
+            3.9,
+            0.6
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            7.4,
+            0.3
+          ],
+          "to": [
+            8.9,
+            0.3
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            7.4,
+            0.3
+          ],
+          "to": [
+            6.34,
+            1.36
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "arc",
+          "cx": 7.4,
+          "cy": 0.3,
+          "r": 0.45,
+          "start": 0,
+          "end": 2.356,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.15,
+            -0.4
+          ],
+          "text": "锐角 < 90°",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.65,
+            -0.4
+          ],
+          "text": "直角 = 90°",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            7.7,
+            -0.4
+          ],
+          "text": "钝角 > 90°",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.9,
+            -1.1
+          ],
+          "text": "角的大小与边画多长无关"
+        }
+      ],
+      "title": "锐角、直角和钝角"
+    },
+    "examples": [
+      {
+        "problem": "下面各是什么角？35°、90°、120°、180°、360°。",
+        "solution": "35° 比 90° 小，是**锐角**；90° 是**直角**；120° 比 90° 大、比 180° 小，是**钝角**；180° 是**平角**；360° 是**周角**。"
+      },
+      {
+        "problem": "把角的两条边都画成原来的 2 倍长，角变大了吗？1 个周角等于几个直角？半个平角是多少度？",
+        "solution": "角没有变大。角的大小只跟两条边张开的程度有关，与边画得长短无关。1 周角 = 360°，1 直角 = 90°，360° ÷ 90° = 4，所以 1 周角 = 2 平角 = 4 直角；半个平角是 180° ÷ 2 = 90°，正好是一个直角。"
+      }
+    ],
+    "tags": [
+      "角",
+      "锐角",
+      "直角",
+      "钝角",
+      "平角",
+      "周角",
+      "量角器"
+    ],
+    "links": [
+      "lines-angle-basics",
+      "intersecting-lines"
+    ]
+  },
+  {
+    "id": "perimeter-elementary",
+    "title": "周长",
+    "titleEn": "Perimeter",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "封闭图形一周的长度叫周长；长方形周长 =（长 + 宽）× 2，正方形周长 = 边长 × 4。",
+    "summaryEn": "The perimeter is the distance all the way round a closed figure: (length + width) × 2 for a rectangle and side × 4 for a square.",
+    "definition": "沿着操场跑一圈，这一圈的长度就是操场的**周长**。说得准确一点：**封闭图形一周的长度**，叫做它的**周长**。\n\n要算周长，就把围成这个图形的每一条边都加起来。长方形有 2 条长、2 条宽，所以**长方形的周长 =（长 + 宽）× 2**；正方形的 4 条边一样长，所以**正方形的周长 = 边长 × 4**；三角形的周长就是三条边长度之和。\n\n要特别注意：周长的单位是**长度单位**（厘米、分米、米……），它是一条「线」的长度，不是图形里面有多大。算组合图形的周长时，要把最外面一圈的边全部加起来，一条也不能漏。",
+    "definitionEn": "Walk one full lap around a playground: the distance you cover is its **perimeter**. More exactly, the **perimeter** of a closed figure is the length of its whole boundary.\n\nTo find it, add up every side of the figure. A rectangle has 2 lengths and 2 widths, so **perimeter = (length + width) × 2**; a square has 4 equal sides, so **perimeter = side × 4**; for a triangle it is simply the sum of its three sides.\n\nRemember: a perimeter is measured in **units of length** (cm, dm, m …). It is how long the boundary is, not how large the inside is. For a combined figure, add up the whole outer boundary — not a single side may be missed.",
+    "formulas": [
+      {
+        "latex": "C = (a + b) \\times 2 = 2a + 2b",
+        "note": "长方形的周长 =（长 + 宽）× 2，也就是两条长加两条宽。",
+        "noteEn": "Rectangle: perimeter = (length + width) × 2, that is, two lengths plus two widths."
+      },
+      {
+        "latex": "C = a \\times 4",
+        "note": "正方形的周长 = 边长 × 4，因为四条边一样长。",
+        "noteEn": "Square: perimeter = side × 4, because all four sides are equal."
+      },
+      {
+        "latex": "C = a + b + c",
+        "note": "三角形的周长就是三条边的长度相加。",
+        "noteEn": "Triangle: perimeter = the sum of its three sides."
+      },
+      {
+        "latex": "a = C \\div 4",
+        "note": "反过来用：已知正方形的周长，边长 = 周长 ÷ 4。",
+        "noteEn": "Working backwards: side of a square = perimeter ÷ 4."
+      },
+      {
+        "latex": "a = C \\div 2 - b",
+        "note": "已知长方形的周长和宽，长 = 周长 ÷ 2 − 宽（周长的一半是一条长加一条宽）。",
+        "noteEn": "For a rectangle, length = perimeter ÷ 2 − width (half the perimeter is one length plus one width)."
+      }
+    ],
+    "expression": {
+      "text": "长方形周长 C =（长 + 宽）× 2；正方形周长 C = 边长 × 4",
+      "symbol": "C = (a + b) \\times 2",
+      "note": "周长常用字母 C 表示，长和宽分别用 a、b 表示。",
+      "noteEn": "The perimeter is often written C, with a and b for length and width."
+    },
+    "properties": [
+      "周长是封闭图形一周的长度，单位是长度单位：厘米、分米、米……",
+      "长方形周长 =（长 + 宽）× 2；正方形周长 = 边长 × 4",
+      "已知周长求边长：正方形的边长 = 周长 ÷ 4；长方形的长 = 周长 ÷ 2 − 宽",
+      "算组合图形的周长时，要把最外面一圈的边全部加起来，一条都不能漏"
+    ],
+    "propertiesEn": [
+      "A perimeter is the length of the boundary of a closed figure, measured in units of length: cm, dm, m …",
+      "Rectangle: perimeter = (length + width) × 2; square: perimeter = side × 4",
+      "Working backwards: side of a square = perimeter ÷ 4; length of a rectangle = perimeter ÷ 2 − width",
+      "For a combined figure, add up the whole outer boundary without missing any side"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.75,
+        11.25
+      ],
+      "yRange": [
+        -2.1,
+        4.5
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0.8
+            ],
+            [
+              5,
+              0.8
+            ],
+            [
+              5,
+              3.8
+            ],
+            [
+              0,
+              3.8
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              7.2,
+              0.8
+            ],
+            [
+              10.2,
+              0.8
+            ],
+            [
+              10.2,
+              3.8
+            ],
+            [
+              7.2,
+              3.8
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.12)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.5,
+            0.15
+          ],
+          "text": "长 = 5 厘米",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.5,
+            4.1
+          ],
+          "text": "宽 = 3 厘米",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.7,
+            4.1
+          ],
+          "text": "边长 = 3 厘米",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.5,
+            -0.75
+          ],
+          "text": "周长 =（5+3）×2 = 16 厘米",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.7,
+            -0.75
+          ],
+          "text": "周长 = 3×4 = 12 厘米",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "长方形与正方形（标出边长）"
+    },
+    "examples": [
+      {
+        "problem": "学校有一个长方形花坛，长 8 米、宽 5 米。沿着花坛走一圈，一共走多少米？",
+        "solution": "周长 =（长 + 宽）× 2 =（8 + 5）× 2 = 13 × 2 = 26（米）。答：沿花坛走一圈一共 26 米。"
+      },
+      {
+        "problem": "一根 36 厘米长的铁丝，正好围成一个正方形（接头处忽略不计）。这个正方形的边长是多少厘米？",
+        "solution": "正方形周长 = 边长 × 4，反过来：边长 = 周长 ÷ 4 = 36 ÷ 4 = 9（厘米）。答：这个正方形的边长是 9 厘米。"
+      }
+    ],
+    "tags": [
+      "周长",
+      "长方形",
+      "正方形",
+      "长度单位"
+    ],
+    "links": [
+      "area-elementary",
+      "length-units",
+      "area-volume-units"
+    ]
+  },
+  {
+    "id": "area-elementary",
+    "title": "面积与面积公式",
+    "titleEn": "Area and Area Formulas",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "面积是物体表面或封闭图形的大小；掌握长方形、正方形、平行四边形、三角形和梯形的面积公式。",
+    "summaryEn": "Area measures the size of a surface; learn the formulas for rectangles, squares, parallelograms, triangles and trapezoids.",
+    "definition": "摸一摸课桌的桌面和课本的封面，哪个大？比面的大小，比的就是**面积**——**物体的表面或封闭图形的大小**，叫做它们的**面积**。常用的面积单位有**平方厘米、平方分米、平方米**：边长 1 厘米的正方形，面积就是 1 平方厘米。\n\n长方形的面积怎么算？用 1 平方厘米的小正方形去摆：每行摆「长」个，一共摆「宽」行，一共摆了 长 × 宽 个，所以**长方形面积 = 长 × 宽**；正方形是特殊的长方形，**正方形面积 = 边长 × 边长**。\n\n其他图形都可以「变身」成学过的图形：沿着高把平行四边形剪开再平移，正好拼成长方形，所以**平行四边形面积 = 底 × 高**；两个**完全一样**的三角形能拼成一个平行四边形，所以**三角形面积 = 底 × 高 ÷ 2**——**这个「÷ 2」千万不能忘**；两个完全一样的梯形也能拼成平行四边形，所以**梯形面积 =（上底 + 下底）× 高 ÷ 2**。遇到组合图形，可以用「分割」或「添补」的办法，把它变成上面这些图形再求面积。",
+    "definitionEn": "Compare a desk top with the cover of a book — which is bigger? Comparing surfaces means comparing **areas**: the **area** of an object's surface, or of a closed figure, tells how large it is. Common units are **square centimetres, square decimetres and square metres**: a square of side 1 cm has area 1 cm².\n\nHow do we measure a rectangle? Tile it with 1 cm² squares: 「length」 squares in each row, 「width」 rows in all, so **area = length × width**. A square is a special rectangle, so **area = side × side**.\n\nEvery other shape can be turned into one we know. Cut a parallelogram along a height, slide the piece over, and it becomes a rectangle, so **area = base × height**. Two **identical** triangles make a parallelogram, so **area = base × height ÷ 2** — never forget that ÷2! Two identical trapezoids also make a parallelogram, so **area = (upper base + lower base) × height ÷ 2**. For a combined figure, split it up or fill it out into these shapes first.",
+    "formulas": [
+      {
+        "latex": "S = a \\times b",
+        "note": "长方形面积 = 长 × 宽，用 1 平方厘米的小正方形摆一摆就能看出来。",
+        "noteEn": "Rectangle: area = length × width; a grid of 1 cm² squares shows exactly why."
+      },
+      {
+        "latex": "S = a \\times a = a^2",
+        "note": "正方形面积 = 边长 × 边长，也可以写成 $a^2$（读作 a 的平方）。",
+        "noteEn": "Square: area = side × side, also written a² (a squared)."
+      },
+      {
+        "latex": "S = a \\times h",
+        "note": "平行四边形面积 = 底 × 高（割补法：沿高剪开拼成长方形）。",
+        "noteEn": "Parallelogram: area = base × height (cut along the height and slide the piece to form a rectangle)."
+      },
+      {
+        "latex": "S = a \\times h \\div 2",
+        "note": "三角形面积 = 底 × 高 ÷ 2：两个完全一样的三角形正好拼成一个平行四边形，所以要除以 2。",
+        "noteEn": "Triangle: area = base × height ÷ 2 — two identical triangles form a parallelogram, hence the division by 2."
+      },
+      {
+        "latex": "S = (a + b) \\times h \\div 2",
+        "note": "梯形面积 =（上底 + 下底）× 高 ÷ 2：两个完全一样的梯形拼成平行四边形，也要除以 2。",
+        "noteEn": "Trapezoid: area = (upper base + lower base) × height ÷ 2 — again two identical trapezoids make a parallelogram."
+      },
+      {
+        "latex": "1\\ \\text{m}^2 = 100\\ \\text{dm}^2,\\quad 1\\ \\text{dm}^2 = 100\\ \\text{cm}^2",
+        "note": "面积单位之间的进率是 100（长度单位进率才是 10）。",
+        "noteEn": "Adjacent area units differ by a factor of 100 (length units differ by 10)."
+      }
+    ],
+    "expression": {
+      "text": "S 表示面积：长方形 S = ab；平行四边形 S = ah；三角形 S = ah ÷ 2",
+      "symbol": "S = a \\times h \\div 2",
+      "note": "同一个公式里，底 a 和它对应的高 h 要「配对」，不能拿另一条底的高来算。",
+      "noteEn": "In each formula the base a must pair with its own height h; do not mix a base with the height of another side."
+    },
+    "properties": [
+      "面积表示物体的表面或封闭图形的大小；常用单位：平方厘米、平方分米、平方米",
+      "长方形面积 = 长 × 宽；正方形面积 = 边长 × 边长",
+      "平行四边形面积 = 底 × 高（割补法：转化成长方形）；底和高必须是相对应的一组",
+      "三角形面积 = 底 × 高 ÷ 2；梯形面积 =（上底 + 下底）× 高 ÷ 2，「÷ 2」都不能丢",
+      "面积单位换算：1 平方米 = 100 平方分米，1 平方分米 = 100 平方厘米"
+    ],
+    "propertiesEn": [
+      "Area measures the size of a surface or a closed figure; common units: cm², dm², m²",
+      "Rectangle: area = length × width; square: area = side × side",
+      "Parallelogram: area = base × height (found by cutting and sliding it into a rectangle); base and height must match each other",
+      "Triangle: area = base × height ÷ 2; trapezoid: area = (upper base + lower base) × height ÷ 2 — never drop the ÷2",
+      "Conversions: 1 m² = 100 dm² and 1 dm² = 100 cm²"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.7,
+        12.0
+      ],
+      "yRange": [
+        -1.7,
+        5.3
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.6,
+              3.0
+            ],
+            [
+              6.6,
+              3.0
+            ],
+            [
+              8.2,
+              5.0
+            ],
+            [
+              2.2,
+              5.0
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            5.0
+          ],
+          "to": [
+            2.2,
+            3.0
+          ],
+          "color": "#ffd166",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            3.0
+          ],
+          "to": [
+            2.5,
+            3.0
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.5,
+            3.0
+          ],
+          "to": [
+            2.5,
+            3.3
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.8,
+              0.2
+            ],
+            [
+              6.8,
+              0.2
+            ],
+            [
+              3.8,
+              2.2
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.12)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.8,
+            2.2
+          ],
+          "to": [
+            3.8,
+            0.2
+          ],
+          "color": "#ffd166",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.8,
+            0.2
+          ],
+          "to": [
+            4.1,
+            0.2
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.1,
+            0.2
+          ],
+          "to": [
+            4.1,
+            0.5
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            7.5,
+            1.2
+          ],
+          "to": [
+            7.5,
+            0.2
+          ],
+          "color": "#ffd166",
+          "dash": true,
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            7.5,
+            1.2
+          ],
+          "to": [
+            7.5,
+            2.2
+          ],
+          "color": "#ffd166",
+          "dash": true,
+          "arrow": true
+        },
+        {
+          "type": "label",
+          "at": [
+            3.6,
+            2.5
+          ],
+          "text": "底 = 6 米",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.4,
+            4.05
+          ],
+          "text": "高 = 4 米",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.8,
+            -0.3
+          ],
+          "text": "底 = 5 米",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.85,
+            1.4
+          ],
+          "text": "高 = 3 米",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.6,
+            -0.9
+          ],
+          "text": "平行四边形：面积 = 底 × 高",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.6,
+            -1.55
+          ],
+          "text": "三角形：面积 = 底 × 高 ÷ 2",
+          "color": "#06d6a0"
+        }
+      ],
+      "title": "平行四边形与三角形（标出底和高）"
+    },
+    "examples": [
+      {
+        "problem": "一块平行四边形菜地，底是 6 米，高是 4 米。它的面积是多少平方米？",
+        "solution": "平行四边形面积 = 底 × 高 = 6 × 4 = 24（平方米）。答：它的面积是 24 平方米。（高要选与这条底相对应的高）"
+      },
+      {
+        "problem": "一面三角形小红旗，底是 5 分米、高是 4 分米，面积是多少平方分米？一个梯形零件，上底 3 厘米、下底 5 厘米、高 4 厘米，面积是多少平方厘米？",
+        "solution": "三角形：面积 = 底 × 高 ÷ 2 = 5 × 4 ÷ 2 = 10（平方分米）——别忘了除以 2！梯形：面积 =（上底 + 下底）× 高 ÷ 2 =（3 + 5）× 4 ÷ 2 = 8 × 4 ÷ 2 = 16（平方厘米）。"
+      }
+    ],
+    "tags": [
+      "面积",
+      "长方形",
+      "正方形",
+      "平行四边形",
+      "三角形",
+      "梯形",
+      "割补法"
+    ],
+    "links": [
+      "perimeter-elementary",
+      "area-volume-units",
+      "parallelogram"
+    ]
+  },
+  {
+    "id": "circle-elementary",
+    "title": "圆的周长与面积",
+    "titleEn": "Circumference and Area of a Circle",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "认识圆心、半径、直径和圆周率；圆的周长 C = πd = 2πr，面积 S = πr²。",
+    "summaryEn": "Meet the centre, radius, diameter and π; the circumference is C = πd = 2πr and the area is S = πr².",
+    "definition": "圆中心的一点叫**圆心**（通常记作 $O$），它决定圆的位置。从圆心到圆上任意一点的线段叫**半径** $r$，半径的长短决定圆的大小；通过圆心并且两端都在圆上的线段叫**直径** $d$。在同一个圆里，**直径是半径的 2 倍：$d = 2r$**。\n\n圆的周长（绕圆一圈的长度）和直径有关系：量一量就会发现，无论圆大圆小，周长总是直径的 **3 倍多一些**。这个固定的倍数叫**圆周率**，记作 $\\pi$。$\\pi$ 是一个**无限不循环小数**（$\\pi = 3.1415926\\ldots$），计算时通常取 $\\pi \\approx 3.14$。所以**圆的周长 $C = \\pi d = 2\\pi r$**。\n\n把圆平均分成很多个小扇形再拼起来，可以拼成一个近似的长方形：长是圆周长的一半 $\\pi r$，宽是半径 $r$，所以**圆的面积 $S = \\pi r^2$**。注意 $r^2$ 是「半径乘半径」，不是「半径乘 2」！另外还有：圆环面积 $= \\pi (R^2 - r^2)$；扇形面积 $= \\frac{n}{360} \\times \\pi r^2$（$n$ 是圆心角的度数）。算**半圆的周长**时千万别忘了加上直径：半圆周长 $= \\pi r + 2r$。",
+    "definitionEn": "The point at the centre of a circle is the **centre**, usually written $O$, and it fixes where the circle lies. A segment from the centre to any point on the circle is a **radius** $r$, and its length fixes how big the circle is. A segment that passes through the centre with both ends on the circle is a **diameter** $d$. In the same circle the diameter is twice the radius: $d = 2r$.\n\nMeasure around any circle and you find that the circumference is always a little more than 3 diameters — big circle or small. This fixed ratio is called **π (pi)**. It is an **infinite non-repeating decimal** ($\\pi = 3.1415926\\ldots$), and we usually take $\\pi \\approx 3.14$. Hence **$C = \\pi d = 2\\pi r$**.\n\nCut a circle into many small sectors and rearrange them, and they almost form a rectangle: its length is half the circumference $\\pi r$ and its width is the radius $r$. So **$S = \\pi r^2$** — remember, $r^2$ means $r \\times r$, not $2r$! Two more to know: the area of a ring is $\\pi (R^2 - r^2)$, and the area of a sector is $\\frac{n}{360}\\pi r^2$, where $n$ is the central angle in degrees. For the **perimeter of a semicircle**, do not forget the diameter: $\\pi r + 2r$.",
+    "formulas": [
+      {
+        "latex": "d = 2r",
+        "note": "在同一个圆里，直径是半径的 2 倍；半径是直径的一半。",
+        "noteEn": "In the same circle the diameter is twice the radius, and the radius is half the diameter."
+      },
+      {
+        "latex": "C = \\pi d = 2\\pi r",
+        "note": "圆的周长 = 圆周率 × 直径 = 2 × 圆周率 × 半径；计算时取 $\\pi \\approx 3.14$。",
+        "noteEn": "Circumference = π × diameter = 2πr, with π ≈ 3.14 in calculations."
+      },
+      {
+        "latex": "S = \\pi r^2",
+        "note": "圆的面积 = 圆周率 × 半径 × 半径。$r^2$ 是半径的平方，不是半径乘 2。",
+        "noteEn": "Area = π × r × r. Here r² is the radius squared, not 2 × r."
+      },
+      {
+        "latex": "S_{\\text{圆环}} = \\pi (R^2 - r^2)",
+        "note": "圆环面积 = 外圆面积 − 内圆面积；$R$ 是大圆半径，$r$ 是小圆半径。",
+        "noteEn": "Ring: area = outer circle − inner circle, where R is the outer radius and r the inner radius."
+      },
+      {
+        "latex": "S_{\\text{扇形}} = \\frac{n}{360} \\times \\pi r^2",
+        "note": "扇形面积 = 圆心角 $n$ 占 360° 的几分之几，就占圆面积的几分之几。",
+        "noteEn": "Sector: the area is the same fraction of the circle's area as n° is of 360°."
+      },
+      {
+        "latex": "C_{\\text{半圆}} = \\pi r + 2r",
+        "note": "半圆的周长 = 圆周长的一半 + 一条直径（最容易漏掉直径！）。",
+        "noteEn": "Semicircle perimeter = half the circumference + the diameter (the diameter is the classic slip-up)."
+      }
+    ],
+    "expression": {
+      "text": "圆心是 O 的圆记作 ⊙O；半径 r，直径 d = 2r",
+      "symbol": "⊙O",
+      "note": "画圆时，圆规两脚之间的距离就是半径；圆的位置由圆心决定，大小由半径决定。",
+      "noteEn": "When drawing a circle, the gap between the compass legs is the radius; the centre fixes the position and the radius fixes the size."
+    },
+    "properties": [
+      "同一个圆里，直径是半径的 2 倍：d = 2r；圆心决定圆的位置，半径决定圆的大小",
+      "圆周率 π 是圆的周长与直径的比值，是一个无限不循环小数，π ≈ 3.14",
+      "圆的周长 C = πd = 2πr；半圆周长 = πr + 2r，别忘了加上直径",
+      "圆的面积 S = πr²，是半径乘半径再乘 π，不是半径乘 2",
+      "圆环面积 = π(R² − r²)；扇形面积 = (n/360)πr²，n 是圆心角的度数"
+    ],
+    "propertiesEn": [
+      "In any circle the diameter is twice the radius, d = 2r; the centre fixes the position and the radius fixes the size",
+      "π is the ratio of a circle's circumference to its diameter; it is an infinite non-repeating decimal, π ≈ 3.14",
+      "Circumference C = πd = 2πr; a semicircle's perimeter is πr + 2r — do not forget the diameter",
+      "Area S = πr², that is radius × radius × π, not 2 × radius",
+      "Ring: area = π(R² − r²); sector: area = (n/360)πr², where n is the central angle in degrees"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.0,
+        11.0
+      ],
+      "yRange": [
+        -1.4,
+        5.2
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": 5.5,
+          "cy": 2.7,
+          "r": 2.4,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.10)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.1,
+            2.7
+          ],
+          "to": [
+            7.9,
+            2.7
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            5.5,
+            2.7
+          ],
+          "to": [
+            7.2,
+            4.4
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.5,
+            2.7
+          ],
+          "label": "O",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.2,
+            3.2
+          ],
+          "text": "直径 d = 2r",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            6.2,
+            4.5
+          ],
+          "text": "半径 r",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.5,
+            -0.45
+          ],
+          "text": "C = πd = 2πr",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.5,
+            -1.1
+          ],
+          "text": "S = πr²，π ≈ 3.14",
+          "color": "#4cc9f0"
+        }
+      ],
+      "title": "圆心、半径与直径"
+    },
+    "examples": [
+      {
+        "problem": "一个圆的半径是 3 厘米，它的周长和面积各是多少？",
+        "solution": "周长 C = 2πr = 2 × 3.14 × 3 = 18.84（厘米）。面积 S = πr² = 3.14 × 3² = 3.14 × 9 = 28.26（平方厘米）。注意 3² = 3 × 3 = 9，不是 3 × 2。"
+      },
+      {
+        "problem": "一个半圆形花坛，直径是 8 米。它的周长是多少米？面积是多少平方米？",
+        "solution": "直径 d = 8 米，半径 r = 8 ÷ 2 = 4（米）。半圆周长 = 圆周长的一半 + 一条直径 = πr + 2r = 3.14 × 4 + 8 = 12.56 + 8 = 20.56（米），千万别漏掉直径！半圆面积 = πr² ÷ 2 = 3.14 × 4² ÷ 2 = 3.14 × 16 ÷ 2 = 25.12（平方米）。"
+      }
+    ],
+    "tags": [
+      "圆",
+      "圆周率",
+      "半径",
+      "直径",
+      "周长",
+      "面积",
+      "扇形",
+      "圆环"
+    ],
+    "links": [
+      "circle-junior",
+      "perimeter-elementary",
+      "area-elementary"
+    ]
+  },
+  {
+    "id": "solid-volume-elementary",
+    "title": "立体图形的体积",
+    "titleEn": "Volumes of Solids",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "物体占空间的大小叫体积；掌握长方体、正方体、圆柱、圆锥的体积公式和表面积公式。",
+    "summaryEn": "Volume is how much space a solid occupies; learn the volume and surface-area formulas for cuboids, cubes, cylinders and cones.",
+    "definition": "物体所占空间的大小叫**体积**。把长方体切成棱长 1 厘米的小正方体：每行摆「长」个、摆「宽」行、叠「高」层，一共能摆 长 × 宽 × 高 个，所以**长方体的体积 = 长 × 宽 × 高 = 底面积 × 高**。正方体是特殊的长方体，**正方体的体积 = 棱长 × 棱长 × 棱长 = 棱长³**（不是 3 × 棱长！）。\n\n把圆柱切成许多小块，也能拼成一个近似的长方体：底面积是 $\\pi r^2$，高是 $h$，所以**圆柱的体积 = 底面积 × 高 = $\\pi r^2 h$**。圆锥最有意思：等底等高时，用装满沙子的圆锥往圆柱里倒，正好倒 **3 次**才装满——所以**圆锥的体积是圆柱的 $\\frac{1}{3}$**，即 $V = \\frac{1}{3} \\times$ 底面积 × 高 $= \\frac{1}{3}\\pi r^2 h$。这个 $\\frac{1}{3}$ 最容易被忘掉！\n\n求**表面积**就是求所有面的面积之和：长方体表面积 =（长×宽 + 长×高 + 宽×高）× 2；正方体表面积 = 棱长² × 6；圆柱的侧面展开是一个长方形，侧面积 = 底面周长 × 高 = $2\\pi rh$，再加上两个底面，圆柱表面积 = $2\\pi rh + 2\\pi r^2$。体积单位有立方厘米、立方分米、立方米：**1 立方米 = 1000 立方分米，1 立方分米 = 1000 立方厘米**；其中 1 立方分米就是 1 升。",
+    "definitionEn": "The **volume** of a solid is how much space it takes up. Slice a cuboid into 1 cm cubes: 「length」 cubes per row, 「width」 rows and 「height」 layers, so you need length × width × height cubes. Hence **volume of a cuboid = length × width × height = base area × height**. A cube is a special cuboid, so **volume of a cube = edge × edge × edge = edge³** (not 3 × edge!).\n\nSlice a cylinder into many pieces and they rearrange into an approximate cuboid, with base area $\\pi r^2$ and height $h$, so **volume of a cylinder = base area × height = $\\pi r^2 h$**. A cone is the most surprising: with equal base and equal height, you must pour a full cone of sand into the cylinder exactly **3 times** to fill it — so **a cone is $\\frac{1}{3}$ of the cylinder**, i.e. $V = \\frac{1}{3}\\pi r^2 h$. That $\\frac{1}{3}$ is the most commonly forgotten factor!\n\nA **surface area** is the sum of the areas of all the faces: cuboid = (length×width + length×height + width×height) × 2; cube = edge² × 6. The side of a cylinder unrolls into a rectangle, so its lateral area = base circumference × height = $2\\pi rh$, and adding the two bases gives $2\\pi rh + 2\\pi r^2$. Volume units: **1 m³ = 1000 dm³, 1 dm³ = 1000 cm³**, and 1 dm³ is exactly 1 litre.",
+    "formulas": [
+      {
+        "latex": "V_{\\text{长方体}} = a \\times b \\times h",
+        "note": "长方体体积 = 长 × 宽 × 高，也可以写成「底面积 × 高」。",
+        "noteEn": "Cuboid: volume = length × width × height, also written as base area × height."
+      },
+      {
+        "latex": "V_{\\text{正方体}} = a^3",
+        "note": "正方体体积 = 棱长 × 棱长 × 棱长 = 棱长³；$a^3$ 是三个 a 相乘，不是 3 × a。",
+        "noteEn": "Cube: volume = edge × edge × edge = edge³; a³ is three a's multiplied, not 3 × a."
+      },
+      {
+        "latex": "S_{\\text{长方体}} = 2(ab + ah + bh)",
+        "note": "长方体表面积 =（长×宽 + 长×高 + 宽×高）× 2；正方体表面积 = 棱长² × 6。",
+        "noteEn": "Cuboid surface area = 2(lw + lh + wh); cube surface area = edge² × 6."
+      },
+      {
+        "latex": "S_{\\text{圆柱}} = 2\\pi r h + 2\\pi r^2",
+        "note": "圆柱表面积 = 侧面积（$2\\pi rh$，侧面展开是长方形）+ 两个底面（$2\\pi r^2$）。",
+        "noteEn": "Cylinder surface area = lateral area 2πrh (the side unrolls to a rectangle) + two bases 2πr²."
+      },
+      {
+        "latex": "V_{\\text{圆柱}} = \\pi r^2 h",
+        "note": "圆柱体积 = 底面积 × 高 = $\\pi r^2 h$。",
+        "noteEn": "Cylinder: volume = base area × height = πr²h."
+      },
+      {
+        "latex": "V_{\\text{圆锥}} = \\frac{1}{3}\\pi r^2 h",
+        "note": "圆锥体积 = $\\frac{1}{3}$ × 底面积 × 高；等底等高时圆锥正好是圆柱的 $\\frac{1}{3}$，这个 $\\frac{1}{3}$ 最易错！",
+        "noteEn": "Cone: volume = 1/3 × base area × height; with the same base and height a cone holds exactly 1/3 of the cylinder — the classic mistake is dropping the 1/3."
+      }
+    ],
+    "expression": {
+      "text": "V 表示体积：长方体 V = abh；圆柱 V = πr²h；圆锥 V = (1/3)πr²h",
+      "symbol": "V = \\frac{1}{3}\\pi r^2 h",
+      "note": "用 1/3 的关系必须是「等底等高」；不相等时要先分别算出底面积。",
+      "noteEn": "The 1/3 rule needs equal bases and equal heights; otherwise work out each base area first."
+    },
+    "properties": [
+      "长方体体积 = 长 × 宽 × 高 = 底面积 × 高；正方体体积 = 棱长³",
+      "长方体表面积 =（长×宽 + 长×高 + 宽×高）× 2；正方体表面积 = 棱长² × 6",
+      "圆柱侧面积 = 底面周长 × 高 = 2πrh；圆柱表面积 = 2πrh + 2πr²",
+      "圆柱体积 = 底面积 × 高 = πr²h；等底等高时，圆锥体积正好是圆柱的 1/3",
+      "体积单位进率：1 立方米 = 1000 立方分米，1 立方分米 = 1000 立方厘米；1 升 = 1 立方分米"
+    ],
+    "propertiesEn": [
+      "Cuboid: volume = length × width × height = base area × height; cube: volume = edge³",
+      "Cuboid surface area = (lw + lh + wh) × 2; cube surface area = edge² × 6",
+      "Cylinder lateral area = base circumference × height = 2πrh; total surface area = 2πrh + 2πr²",
+      "Cylinder volume = base area × height = πr²h; with equal base and height a cone has exactly 1/3 of that volume",
+      "Volume conversions: 1 m³ = 1000 dm³, 1 dm³ = 1000 cm³, and 1 L = 1 dm³"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.9,
+        11.3
+      ],
+      "yRange": [
+        -2.0,
+        4.7
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.3,
+              0.5
+            ],
+            [
+              4.0,
+              0.5
+            ],
+            [
+              4.0,
+              2.5
+            ],
+            [
+              0.3,
+              2.5
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.14)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.0,
+            0.5
+          ],
+          "to": [
+            4.9,
+            1.3
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.0,
+            2.5
+          ],
+          "to": [
+            4.9,
+            3.3
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.3,
+            2.5
+          ],
+          "to": [
+            1.2,
+            3.3
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.9,
+            1.3
+          ],
+          "to": [
+            4.9,
+            3.3
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.9,
+            3.3
+          ],
+          "to": [
+            1.2,
+            3.3
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.3
+          ],
+          "to": [
+            4.9,
+            1.3
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.3
+          ],
+          "to": [
+            1.2,
+            3.3
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.3,
+            0.5
+          ],
+          "to": [
+            1.2,
+            1.3
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "dash": true
+        },
+        {
+          "type": "circle",
+          "cx": 7.0,
+          "cy": 2.7,
+          "r": 1.15,
+          "color": "#06d6a0",
+          "fill": "rgba(6,214,160,0.10)"
+        },
+        {
+          "type": "circle",
+          "cx": 7.0,
+          "cy": 0.8,
+          "r": 1.15,
+          "color": "#06d6a0",
+          "fill": "rgba(6,214,160,0.10)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            5.85,
+            0.8
+          ],
+          "to": [
+            5.85,
+            2.7
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.15,
+            0.8
+          ],
+          "to": [
+            8.15,
+            2.7
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "circle",
+          "cx": 10.0,
+          "cy": 0.8,
+          "r": 1.1,
+          "color": "#ff6b9d",
+          "fill": "rgba(255,107,157,0.10)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            10.0,
+            2.7
+          ],
+          "to": [
+            8.9,
+            0.8
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            10.0,
+            2.7
+          ],
+          "to": [
+            11.1,
+            0.8
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.15,
+            0.0
+          ],
+          "text": "长 = 5 厘米",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.95,
+            1.5
+          ],
+          "text": "高 = 4 厘米",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.55,
+            3.62
+          ],
+          "text": "宽 = 3 厘米",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            7.0,
+            -0.85
+          ],
+          "text": "圆柱",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            7.0,
+            -1.5
+          ],
+          "text": "V = πr²h",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            10.0,
+            -0.85
+          ],
+          "text": "圆锥",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            10.0,
+            -1.5
+          ],
+          "text": "V = πr²h ÷ 3",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.5,
+            4.15
+          ],
+          "text": "等底等高：圆锥 = 1/3 圆柱",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "长方体、圆柱与圆锥"
+    },
+    "examples": [
+      {
+        "problem": "一个长方体木块，长 5 厘米、宽 3 厘米、高 4 厘米。它的体积和表面积各是多少？",
+        "solution": "体积 V = 长 × 宽 × 高 = 5 × 3 × 4 = 60（立方厘米）。表面积 S =（长×宽 + 长×高 + 宽×高）× 2 =（5×3 + 5×4 + 3×4）× 2 =（15 + 20 + 12）× 2 = 47 × 2 = 94（平方厘米）。"
+      },
+      {
+        "problem": "一个圆柱和一个圆锥等底等高：底面半径都是 2 厘米，高都是 6 厘米。圆柱的体积是多少？圆锥的体积是多少？",
+        "solution": "圆柱 V = πr²h = 3.14 × 2² × 6 = 3.14 × 4 × 6 = 75.36（立方厘米）。圆锥 V = 1/3 × πr²h = 75.36 ÷ 3 = 25.12（立方厘米）。等底等高时，圆锥体积正好是圆柱的 1/3（圆柱是圆锥的 3 倍），这个 1/3 千万别漏掉！"
+      }
+    ],
+    "tags": [
+      "体积",
+      "表面积",
+      "长方体",
+      "正方体",
+      "圆柱",
+      "圆锥",
+      "立方厘米"
+    ],
+    "links": [
+      "solid-figures-elementary",
+      "circle-elementary",
+      "area-volume-units"
+    ]
+  }
+]

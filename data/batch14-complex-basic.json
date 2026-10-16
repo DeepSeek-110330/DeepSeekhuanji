@@ -1,0 +1,873 @@
+[
+  {
+    "id": "complex-number",
+    "title": "复数",
+    "titleEn": "Complex Numbers",
+    "branch": "complex",
+    "level": 2,
+    "summary": "复数把实数系扩充为 z = x + iy（i² = −1）的形式；实部与虚部、共轭与模是它的四个基本刻画，也是复变函数的起点。",
+    "summaryEn": "Complex numbers extend the reals to expressions z = x + iy with i² = −1; real part, imaginary part, conjugate and modulus are the basic structure on which complex analysis is built.",
+    "definition": "在实数范围内，方程 $x^2+1=0$ 没有解。为了让它有解，引入一个数 $i$，规定 $i^2=-1$，就得到**复数**：形如 $z=x+iy$ 的数，其中 $x$、$y$ 都是实数，$x$ 称为 $z$ 的**实部**（记作 $\\operatorname{Re}z$），$y$ 称为 $z$ 的**虚部**（记作 $\\operatorname{Im}z$）。当 $y=0$ 时 $z$ 就是实数；当 $x=0$ 且 $y\\ne 0$ 时 $z$ 称为纯虚数。全体复数记作 $\\mathbb{C}$，显然 $\\mathbb{R}\\subset\\mathbb{C}$。\n\n两个复数相等，当且仅当实部与虚部分别相等，因此一个复数等式相当于两个实数等式。复数的加法、减法、乘法按多项式法则进行，只需把 $i^2$ 换成 $-1$：$$(a+bi)(c+di)=ac+adi+bci+bdi^2=(ac-bd)+(ad+bc)i.$$ 除法（除数非零）通过分母实数化完成：$\\dfrac{a+bi}{c+di}=\\dfrac{(a+bi)(c-di)}{c^2+d^2}$。复数对加、减、乘、除都封闭，构成一个**数域**。\n\n与 $z=x+iy$ 配套的两个概念是**共轭复数** $\\bar z=x-iy$ 与**模** $|z|=\\sqrt{x^2+y^2}$。模是非负实数，几何上表示点 $z$ 到原点的距离。由定义直接可得 $z\\bar z=x^2+y^2=|z|^2$，所以非零复数的倒数可以写成 $z^{-1}=\\dfrac{\\bar z}{|z|^2}$，这样除法就化成了乘法。\n\n复数与实数最本质的区别是**不能比较大小**：无论怎样规定顺序，都无法让大小关系与加法、乘法运算相容。复数的意义在于「补齐」了实数在代数上的缺口：在 $\\mathbb{C}$ 中任何非零复数都能开 $n$ 次方，且代数基本定理保证 $n$ 次复系数多项式恰有 $n$ 个复根（计重数）。几何上，复数又把平面上的点变成可以乘除的对象，这为复变函数搭好了舞台。",
+    "definitionEn": "In the real numbers the equation $x^2+1=0$ has no solution. Introducing a symbol $i$ with $i^2=-1$ leads to the **complex numbers**: expressions of the form $z=x+iy$ with real $x$ and $y$, where $x=\\operatorname{Re}z$ is the **real part** and $y=\\operatorname{Im}z$ is the **imaginary part**. If $y=0$ the number is real; if $x=0$ and $y\\ne 0$ it is purely imaginary. The set of all complex numbers is denoted by $\\mathbb{C}$, and $\\mathbb{R}\\subset\\mathbb{C}$.\n\nTwo complex numbers are equal exactly when their real and imaginary parts are equal, so one complex equation is really two real equations. Addition, subtraction and multiplication follow the rules of polynomials with $i^2$ replaced by $-1$: $$(a+bi)(c+di)=(ac-bd)+(ad+bc)i,$$ and division (by a nonzero number) is done by multiplying numerator and denominator by the conjugate: $\\frac{a+bi}{c+di}=\\frac{(a+bi)(c-di)}{c^2+d^2}$. The complex numbers form a field.\n\nAssociated with $z=x+iy$ are the **conjugate** $\\bar z=x-iy$ and the **modulus** $|z|=\\sqrt{x^2+y^2}$. The modulus is a nonnegative real number, the distance from the point $z$ to the origin. By definition $z\\bar z=x^2+y^2=|z|^2$, hence $z^{-1}=\\frac{\\bar z}{|z|^2}$ for $z\\ne 0$, which turns division into multiplication.\n\nThe deepest difference from the reals is that complex numbers **cannot be ordered**: no total order can be compatible with both addition and multiplication. Their value lies in completing the reals algebraically: every nonzero complex number has $n$-th roots, and the fundamental theorem of algebra guarantees that a polynomial of degree $n$ with complex coefficients has exactly $n$ complex roots (counted with multiplicity). Geometrically, complex numbers turn points of the plane into objects that can be multiplied and divided, which sets the stage for complex functions.",
+    "formulas": [
+      {
+        "latex": "z=x+iy,\\qquad x=\\operatorname{Re}z,\\quad y=\\operatorname{Im}z,\\qquad i^2=-1",
+        "note": "复数的代数形式与虚数单位；$i$ 是方程 $x^2+1=0$ 的一个根。",
+        "noteEn": "Algebraic form of a complex number; $i$ is a root of $x^2+1=0$."
+      },
+      {
+        "latex": "(a+bi)(c+di)=(ac-bd)+(ad+bc)i",
+        "note": "乘法法则：按多项式展开，再把 $i^2$ 换成 $-1$。",
+        "noteEn": "Multiplication rule: expand as polynomials and replace $i^2$ by $-1$."
+      },
+      {
+        "latex": "\\bar z=x-iy,\\qquad z\\bar z=|z|^2",
+        "note": "共轭与模的基本关系；由此得到倒数公式 $z^{-1}=\\dfrac{\\bar z}{|z|^2}$（$z\\ne 0$）。",
+        "noteEn": "Basic relation between conjugate and modulus; it gives the reciprocal $z^{-1}=\\frac{\\bar z}{|z|^2}$ for $z\\ne 0$."
+      },
+      {
+        "latex": "|z|=\\sqrt{x^2+y^2}",
+        "note": "模等于复平面上点 $z$ 到原点的距离，是复数的「大小」。",
+        "noteEn": "The modulus is the distance from the point $z$ to the origin, the size of the complex number."
+      },
+      {
+        "latex": "|z_1+z_2|\\le|z_1|+|z_2|",
+        "note": "三角不等式；等号成立当且仅当 $z_1$、$z_2$ 同向（或其中之一为零）。",
+        "noteEn": "Triangle inequality; equality holds exactly when $z_1$ and $z_2$ point in the same direction (or one of them is zero)."
+      }
+    ],
+    "expression": {
+      "text": "z = x + iy（x, y 为实数，i² = −1）",
+      "symbol": "z=x+iy",
+      "note": "实部 $x$、虚部 $y$ 都是实数；共轭 $\\bar z=x-iy$，模 $|z|=\\sqrt{x^2+y^2}$。",
+      "noteEn": "Both the real part $x$ and the imaginary part $y$ are real numbers; $\\bar z=x-iy$ and $|z|=\\sqrt{x^2+y^2}$."
+    },
+    "properties": [
+      "复数集对加、减、乘、除（除数非零）封闭，构成一个数域；实数域 $\\mathbb{R}$ 是它的子域。",
+      "复数不能比较大小：不存在与加法、乘法都相容的全序关系，所以「$z>0$」这样的写法没有意义。",
+      "共轭是对合运算：$\\bar{\\bar z}=z$；$z$ 为实数 $\\iff \\bar z=z$；$z$ 为非零纯虚数 $\\iff \\bar z=-z$。",
+      "模具有乘法性：$|z_1z_2|=|z_1||z_2|$，且 $\\left|\\dfrac{z_1}{z_2}\\right|=\\dfrac{|z_1|}{|z_2|}$（$z_2\\ne 0$）。",
+      "代数基本定理：任一 $n$（$n\\ge 1$）次复系数多项式在 $\\mathbb{C}$ 中恰有 $n$ 个根（按重数计）。"
+    ],
+    "propertiesEn": [
+      "The complex numbers are closed under addition, subtraction, multiplication and division (by nonzero numbers), forming a field; the real field $\\mathbb{R}$ is a subfield.",
+      "Complex numbers cannot be ordered: no total order is compatible with both addition and multiplication, so an inequality such as $z>0$ is meaningless.",
+      "Conjugation is an involution: $\\bar{\\bar z}=z$; $z$ is real iff $\\bar z=z$; a nonzero $z$ is purely imaginary iff $\\bar z=-z$.",
+      "The modulus is multiplicative: $|z_1z_2|=|z_1||z_2|$ and $\\left|\\frac{z_1}{z_2}\\right|=\\frac{|z_1|}{|z_2|}$ for $z_2\\ne 0$.",
+      "Fundamental theorem of algebra: every polynomial of degree $n\\ge 1$ with complex coefficients has exactly $n$ complex roots, counted with multiplicity."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1,
+        4.2
+      ],
+      "yRange": [
+        -1,
+        3.2
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3,
+            0
+          ],
+          "to": [
+            3,
+            2
+          ],
+          "color": "#ffd166",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            2
+          ],
+          "to": [
+            3,
+            2
+          ],
+          "color": "#ffd166",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            2
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            2
+          ],
+          "label": "z = 3 + 2i"
+        },
+        {
+          "type": "label",
+          "at": [
+            3,
+            -0.42
+          ],
+          "text": "3"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.42,
+            2
+          ],
+          "text": "2"
+        }
+      ],
+      "title": "复平面上表示复数 z = 3 + 2i（实部 3，虚部 2）"
+    },
+    "examples": [
+      {
+        "problem": "化简 $(2+3i)(1-2i)$，并求所得复数的模。",
+        "solution": "按多项式乘法展开，并把 $i^2$ 换成 $-1$：\n$$(2+3i)(1-2i)=2-4i+3i-6i^2=2-i+6=8-i.$$\n所以 $\\operatorname{Re}z=8$、$\\operatorname{Im}z=-1$，模为\n$$|z|=\\sqrt{8^2+(-1)^2}=\\sqrt{65}.$$"
+      },
+      {
+        "problem": "设 $z=\\dfrac{1+2i}{3-i}$，求 $z$ 以及 $|z|$。",
+        "solution": "分子分母同乘分母的共轭 $3+i$，使分母变成实数：\n$$z=\\frac{(1+2i)(3+i)}{(3-i)(3+i)}=\\frac{3+i+6i+2i^2}{3^2+1^2}=\\frac{3+7i-2}{10}=\\frac{1}{10}+\\frac{7}{10}i.$$\n用模的乘除性质可以更快地算出模：\n$$|z|=\\frac{|1+2i|}{|3-i|}=\\frac{\\sqrt{1^2+2^2}}{\\sqrt{3^2+(-1)^2}}=\\frac{\\sqrt{5}}{\\sqrt{10}}=\\frac{\\sqrt{2}}{2}.$$\n这与直接计算 $\\sqrt{(1/10)^2+(7/10)^2}=\\sqrt{50}/10=\\sqrt{2}/2$ 的结果一致。"
+      }
+    ],
+    "tags": [
+      "复数",
+      "虚数单位",
+      "共轭复数",
+      "模"
+    ],
+    "links": [
+      "complex-plane",
+      "complex-function",
+      "quadratic-function",
+      "polynomial"
+    ]
+  },
+  {
+    "id": "complex-plane",
+    "title": "复平面与复数的表示",
+    "titleEn": "The Complex Plane and Representations",
+    "branch": "complex",
+    "level": 3,
+    "summary": "复平面用横轴表示实部、纵轴表示虚部，把复数画成点或向量；由此得到三角形式 z = r(cos θ + i sin θ) 与指数形式 r e^{iθ}。",
+    "summaryEn": "The complex plane plots the real part horizontally and the imaginary part vertically, picturing a complex number as a point or vector; this yields the polar form z = r(cos θ + i sin θ) and the exponential form r e^{iθ}.",
+    "definition": "取平面直角坐标系，横轴（**实轴**）上的点表示实数，纵轴（**虚轴**）上除原点外的点表示纯虚数，任意复数 $z=x+iy$ 就用坐标为 $(x,y)$ 的点表示。这个平面叫做**复平面**（也叫高斯平面），点 $z$ 也可以看成从原点出发、终点为 $z$ 的向量。习惯上说「点 $z$」或「向量 $z$」——复平面只负责放置自变量或函数值，复变函数的「图像」需要四维空间，是画不出来的。\n\n在复平面上，复数的加法就是向量加法（平行四边形法则）。$z$ 到原点的距离是**模** $r=|z|=\\sqrt{x^2+y^2}$；从正实轴转到向量 $z$ 的角 $\\theta$ 叫做 $z$ 的**辐角**。辐角不唯一：相差 $2\\pi$ 整数倍的两个角表示同一方向，所以 $\\operatorname{Arg}z$ 是**多值**的；把辐角限制在 $(-\\pi,\\pi]$ 内，就得到**辐角主值** $\\arg z$，二者满足 $\\operatorname{Arg}z=\\arg z+2k\\pi$（$k\\in\\mathbb{Z}$）。当 $z=0$ 时模为零，辐角没有意义。\n\n由 $r$ 与 $\\theta$ 可以还原直角坐标 $x=r\\cos\\theta$、$y=r\\sin\\theta$，于是得到复数的**三角形式**与**指数形式**：$$z=r(\\cos\\theta+i\\sin\\theta)=re^{i\\theta},$$ 后者来自**欧拉公式** $e^{i\\theta}=\\cos\\theta+i\\sin\\theta$。例如 $|i|=1$、$\\arg i=\\dfrac{\\pi}{2}$，所以 $i=e^{\\frac{\\pi}{2}i}$；又如 $e^{i\\pi}+1=0$，把五个最基本的常数连在了一起。\n\n乘法与除法在复平面上的几何意义特别清晰：若 $z_1=r_1e^{i\\theta_1}$、$z_2=r_2e^{i\\theta_2}$，则 $$z_1z_2=r_1r_2e^{i(\\theta_1+\\theta_2)},\\qquad \\frac{z_1}{z_2}=\\frac{r_1}{r_2}e^{i(\\theta_1-\\theta_2)},$$ 即**模相乘、辐角相加**（除法则模相除、辐角相减）。因此乘以 $i$ 相当于把向量逆时针旋转 $90^\\circ$，乘以 $e^{i\\theta}$ 就是旋转 $\\theta$ 角；共轭 $\\bar z$ 则是关于实轴的对称点。这套「模—辐角」语言是复变函数中一切几何结论的基础。",
+    "definitionEn": "Take the usual coordinate plane, use the horizontal axis (the **real axis**) for real numbers and the vertical axis (the **imaginary axis**) for purely imaginary ones. A complex number $z=x+iy$ is represented by the point $(x,y)$; the plane is called the **complex plane** (or Gauss plane), and $z$ can also be viewed as the vector from the origin to that point. One says 'the point $z$' or 'the vector $z$' — the plane merely carries the variable or the value, because a genuine graph of a complex function would need four real dimensions.\n\nIn the complex plane, addition is vector addition (the parallelogram law). The distance from $z$ to the origin is the **modulus** $r=|z|=\\sqrt{x^2+y^2}$, and the angle $\\theta$ from the positive real axis to the vector $z$ is an **argument** of $z$. Arguments are not unique: angles differing by multiples of $2\\pi$ describe the same direction, so $\\operatorname{Arg}z$ is multivalued. Restricting to $(-\\pi,\\pi]$ gives the **principal value** $\\arg z$, with $\\operatorname{Arg}z=\\arg z+2k\\pi$, $k\\in\\mathbb{Z}$. The number $z=0$ has modulus zero and no argument.\n\nFrom $r$ and $\\theta$ one recovers $x=r\\cos\\theta$, $y=r\\sin\\theta$, hence the **trigonometric form** and the **exponential form** $$z=r(\\cos\\theta+i\\sin\\theta)=re^{i\\theta},$$ the latter following from **Euler's formula** $e^{i\\theta}=\\cos\\theta+i\\sin\\theta$. For instance $|i|=1$ and $\\arg i=\\frac{\\pi}{2}$, so $i=e^{\\frac{\\pi}{2}i}$; similarly $e^{i\\pi}+1=0$ ties together the five most basic constants.\n\nMultiplication and division have a clean geometric meaning: if $z_1=r_1e^{i\\theta_1}$ and $z_2=r_2e^{i\\theta_2}$, then $$z_1z_2=r_1r_2e^{i(\\theta_1+\\theta_2)},\\qquad \\frac{z_1}{z_2}=\\frac{r_1}{r_2}e^{i(\\theta_1-\\theta_2)},$$ that is, **moduli multiply and arguments add** (for quotients, moduli divide and arguments subtract). Hence multiplication by $i$ rotates a vector by $90^\\circ$ counterclockwise, multiplication by $e^{i\\theta}$ rotates it by $\\theta$, and conjugation $\\bar z$ reflects it in the real axis. This modulus-argument language underlies all the geometry of complex functions.",
+    "formulas": [
+      {
+        "latex": "r=|z|=\\sqrt{x^2+y^2},\\qquad x=r\\cos\\theta,\\quad y=r\\sin\\theta",
+        "note": "模与辐角同直角坐标的互换公式；$r\\ge 0$。",
+        "noteEn": "Conversion between polar and rectangular data: modulus and argument versus $x$ and $y$."
+      },
+      {
+        "latex": "z=r(\\cos\\theta+i\\sin\\theta)=re^{i\\theta}",
+        "note": "复数的三角形式与指数形式，其中 $r=|z|$、$\\theta$ 是 $z$ 的一个辐角。",
+        "noteEn": "Trigonometric and exponential form of a complex number, with $r=|z|$ and $\\theta$ an argument of $z$."
+      },
+      {
+        "latex": "e^{i\\theta}=\\cos\\theta+i\\sin\\theta",
+        "note": "欧拉公式，把指数函数与三角函数联系起来，是指数形式的依据。",
+        "noteEn": "Euler's formula, linking the exponential and the trigonometric functions; it justifies the exponential form."
+      },
+      {
+        "latex": "\\operatorname{Arg}z=\\arg z+2k\\pi,\\ \\ k\\in\\mathbb{Z},\\qquad \\arg z\\in(-\\pi,\\pi]",
+        "note": "辐角多值，主值 $\\arg z$ 取在 $(-\\pi,\\pi]$ 内；$z=0$ 的辐角无意义。",
+        "noteEn": "Arguments are multivalued; the principal value $\\arg z$ lies in $(-\\pi,\\pi]$. The argument of $z=0$ is undefined."
+      },
+      {
+        "latex": "z_1z_2=r_1r_2e^{i(\\theta_1+\\theta_2)},\\qquad \\frac{z_1}{z_2}=\\frac{r_1}{r_2}e^{i(\\theta_1-\\theta_2)}",
+        "note": "乘除法的指数形式：模相乘（除）、辐角相加（减），这是复数乘法的几何意义。",
+        "noteEn": "Products and quotients in exponential form: moduli multiply (divide) while arguments add (subtract); this is the geometric meaning of complex multiplication."
+      }
+    ],
+    "expression": {
+      "text": "z = r(cos θ + i sin θ) = r e^{iθ}（r = |z| ≥ 0，θ 为辐角）",
+      "symbol": "z=re^{i\\theta}",
+      "note": "r 是到原点的距离，θ 是辐角（多值）；主值取 $\\arg z\\in(-\\pi,\\pi]$。",
+      "noteEn": "$r$ is the distance to the origin and $\\theta$ an argument (multivalued); the principal value satisfies $\\arg z\\in(-\\pi,\\pi]$."
+    },
+    "properties": [
+      "点与向量一一对应：$|z_1-z_2|$ 表示两点 $z_1$、$z_2$ 之间的距离，加法满足平行四边形法则。",
+      "辐角多值：$\\operatorname{Arg}z=\\arg z+2k\\pi$；两个非零复数相等当且仅当模相等且辐角相差 $2\\pi$ 的整数倍。",
+      "共轭 $\\bar z$ 与 $z$ 关于实轴对称；$|\\bar z|=|z|$，且辐角集合满足 $\\operatorname{Arg}\\bar z=-\\operatorname{Arg}z$。",
+      "乘法几何意义：模相乘、辐角相加；乘以 $e^{i\\theta}$ 相当于绕原点旋转 $\\theta$ 角（逆时针为正）。",
+      "三角不等式 $|z_1+z_2|\\le|z_1|+|z_2|$ 及反向形式 $\\bigl||z_1|-|z_2|\\bigr|\\le|z_1+z_2|$；几何上就是三角形两边之和大于第三边。"
+    ],
+    "propertiesEn": [
+      "Points and vectors correspond one-to-one: $|z_1-z_2|$ is the distance between $z_1$ and $z_2$, and addition follows the parallelogram law.",
+      "Arguments are multivalued: $\\operatorname{Arg}z=\\arg z+2k\\pi$; two nonzero complex numbers are equal iff their moduli agree and their arguments differ by an integer multiple of $2\\pi$.",
+      "The conjugate $\\bar z$ is the reflection of $z$ in the real axis; $|\\bar z|=|z|$ and $\\operatorname{Arg}\\bar z=-\\operatorname{Arg}z$ as sets of arguments.",
+      "Geometric meaning of multiplication: moduli multiply and arguments add; multiplication by $e^{i\\theta}$ rotates by $\\theta$ about the origin (counterclockwise for $\\theta>0$).",
+      "Triangle inequality $|z_1+z_2|\\le|z_1|+|z_2|$ and its reverse form $\\bigl||z_1|-|z_2|\\bigr|\\le|z_1+z_2|$; geometrically, two sides of a triangle sum to at least the third."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1,
+        3.2
+      ],
+      "yRange": [
+        -1,
+        3.0
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 2,
+          "color": "rgba(179,136,255,0.5)"
+        },
+        {
+          "type": "arc",
+          "cx": 0,
+          "cy": 0,
+          "r": 0.7,
+          "start": 0,
+          "end": 1.047,
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            1.732
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            1.732
+          ],
+          "label": "z = 1 + √3 i"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.05,
+            0.28
+          ],
+          "text": "θ = π/3"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.38,
+            1.42
+          ],
+          "text": "r = 2"
+        }
+      ],
+      "title": "复平面：z = 1 + √3 i 的模 r = 2 与辐角 θ = π/3"
+    },
+    "examples": [
+      {
+        "problem": "求 $z=-1+\\sqrt{3}i$ 的模与辐角主值，并写出它的三角形式与指数形式。",
+        "solution": "$$r=|z|=\\sqrt{(-1)^2+(\\sqrt{3})^2}=\\sqrt{4}=2.$$\n因为实部为负、虚部为正，$z$ 在第二象限，辐角主值取\n$$\\arg z=\\pi-\\arctan\\frac{\\sqrt{3}}{1}=\\pi-\\frac{\\pi}{3}=\\frac{2\\pi}{3}.$$\n于是\n$$z=2\\left(\\cos\\frac{2\\pi}{3}+i\\sin\\frac{2\\pi}{3}\\right)=2e^{\\frac{2\\pi}{3}i}.$$\n它的全部辐角为 $\\dfrac{2\\pi}{3}+2k\\pi$（$k\\in\\mathbb{Z}$）。"
+      },
+      {
+        "problem": "利用极坐标形式计算 $(1+i)(\\sqrt{3}+i)$ 的模与辐角主值。",
+        "solution": "$1+i$ 的模为 $\\sqrt{2}$、辐角为 $\\dfrac{\\pi}{4}$；$\\sqrt{3}+i$ 的模为 $2$、辐角为 $\\dfrac{\\pi}{6}$。由「模相乘、辐角相加」：\n$$|z|=\\sqrt{2}\\cdot 2=2\\sqrt{2},\\qquad \\arg z=\\frac{\\pi}{4}+\\frac{\\pi}{6}=\\frac{5\\pi}{12}.$$\n直接展开可以验证：$(1+i)(\\sqrt{3}+i)=(\\sqrt{3}-1)+(1+\\sqrt{3})i$，其模为\n$$\\sqrt{(\\sqrt{3}-1)^2+(1+\\sqrt{3})^2}=\\sqrt{(4-2\\sqrt{3})+(4+2\\sqrt{3})}=\\sqrt{8}=2\\sqrt{2},$$\n而 $\\dfrac{5\\pi}{12}\\in(-\\pi,\\pi]$，确实是辐角主值。"
+      }
+    ],
+    "tags": [
+      "复平面",
+      "辐角",
+      "三角形式",
+      "欧拉公式"
+    ],
+    "links": [
+      "complex-number",
+      "complex-function",
+      "unit-circle",
+      "elementary-complex-functions",
+      "angle-radian"
+    ]
+  },
+  {
+    "id": "complex-function",
+    "title": "复变函数",
+    "titleEn": "Complex Functions",
+    "branch": "complex",
+    "level": 3,
+    "summary": "复变函数把复平面上的点映到复平面上的点，w = f(z) 等价于 u(x,y) + i v(x,y)；它画不出来，但可以看成两个复平面之间的映射。",
+    "summaryEn": "A complex function maps points of the complex plane to points of the complex plane; w = f(z) is the same data as u(x,y) + i v(x,y), and is visualized as a mapping between two planes rather than a graph.",
+    "definition": "设 $G$ 是复平面上的一个点集（通常是一个区域）。按照某个法则，如果对每个 $z\\in G$ 都有确定的复数 $w$ 与之对应，就称 $f$ 是定义在 $G$ 上的**复变函数**，记作 $w=f(z)$；$G$ 称为定义域，函数值的全体称为值域。自变量与函数值都是复数，所以 $f$ 的「图像」本来位于四维空间。常用的画法是摆两个复平面：一个是 $z$ 平面（原像），一个是 $w$ 平面（像），用箭头表示点的对应，这叫做**映射**的观点。\n\n把 $z=x+iy$、$w=u+iv$ 写开，$f$ 就等价于一对二元实函数：$$w=f(z)=u(x,y)+i\\,v(x,y),$$ 其中 $u=\\operatorname{Re}f$、$v=\\operatorname{Im}f$。例如 $$w=z^2=(x+iy)^2=(x^2-y^2)+2xy\\,i,$$ 所以 $u=x^2-y^2$、$v=2xy$。研究复变函数常常先化成 $u$、$v$ 两个实函数，但这只是手段，本质上是「两个实变量到两个实变量」的映射。\n\n与实变量函数类似的术语照搬过来：由 $f$ 可以定义和、差、积、商与复合；也可以讨论极限、连续与导数。多数时候我们只研究**单值**函数（每个 $z$ 只对应一个 $w$）；像辐角 $\\operatorname{Arg}z$、对数 $\\operatorname{Ln}z$ 这样的**多值**函数，则通过限制辐角的范围取出**单值分支**来处理。\n\n复变函数的几何语言是「变换」：$w=z+a$ 是平移，$w=az$ 是旋转加伸缩，$w=\\dfrac{1}{z}$ 由关于单位圆的反演与关于实轴的反射复合而成，$w=z^2$ 把直角网格变成两族互相正交的曲线（见配图）。能保持两条曲线夹角不变的映射称为**共形映射**，它是解析函数在几何上的面貌——这正是后续「解析函数」要展开的主题。",
+    "definitionEn": "Let $G$ be a set of points in the complex plane (usually a region). If to every $z\\in G$ there corresponds, by some rule, a definite complex number $w$, then $f$ is a **complex function** defined on $G$, written $w=f(z)$; $G$ is its domain and the set of all values is its range. Since both the variable and the values are complex, a genuine graph of $f$ would live in four real dimensions. Instead one draws two planes — the $z$-plane of preimages and the $w$-plane of images — and views $f$ as a **mapping** between them.\n\nWriting $z=x+iy$ and $w=u+iv$, a complex function is the same data as a pair of real functions of two variables: $$w=f(z)=u(x,y)+i\\,v(x,y),$$ where $u=\\operatorname{Re}f$ and $v=\\operatorname{Im}f$. For instance $$w=z^2=(x+iy)^2=(x^2-y^2)+2xy\\,i,$$ so $u=x^2-y^2$ and $v=2xy$. Splitting $f$ into $u$ and $v$ is a useful device, but conceptually $f$ maps pairs of real numbers to pairs of real numbers.\n\nSum, difference, product, quotient and composition are defined as in the real case, and one can discuss limits, continuity and derivatives. Most of the time we study **single-valued** functions (each $z$ gives one $w$). Multivalued functions such as the argument $\\operatorname{Arg}z$ or the logarithm $\\operatorname{Ln}z$ are handled by restricting the range of the argument, which selects a **single-valued branch**.\n\nGeometrically a complex function is a transformation: $w=z+a$ is a translation, $w=az$ a rotation together with a scaling, $w=\\frac{1}{z}$ is inversion in the unit circle composed with reflection in the real axis, and $w=z^2$ turns the rectangular grid into two families of mutually orthogonal curves (see the figure). Mappings that preserve the angle between curves are called **conformal**; they are precisely the analytic functions discussed in the following nodes.",
+    "formulas": [
+      {
+        "latex": "w=f(z)=u(x,y)+i\\,v(x,y)",
+        "note": "复变函数的标准分解：实部 $u$、虚部 $v$ 是二元实函数，$f$ 的性质由它们决定。",
+        "noteEn": "Standard decomposition of a complex function: the real part $u$ and imaginary part $v$ are real functions of two variables, and they determine the behaviour of $f$."
+      },
+      {
+        "latex": "w=z^2:\\quad u=x^2-y^2,\\qquad v=2xy",
+        "note": "最常见的例子：$z^2$ 的实部与虚部；$u$、$v$ 都是 $x$、$y$ 的多项式。",
+        "noteEn": "The basic example: real and imaginary parts of $z^2$, both polynomials in $x$ and $y$."
+      },
+      {
+        "latex": "\\Phi:(x,y)\\mapsto\\bigl(u(x,y),\\,v(x,y)\\bigr)",
+        "note": "复变函数恒等地说就是平面到平面的映射 $(x,y)\\mapsto(u,v)$。",
+        "noteEn": "A complex function is literally a map of the plane, $(x,y)\\mapsto(u,v)$."
+      },
+      {
+        "latex": "w=z^2:\\quad |w|=|z|^2,\\qquad \\operatorname{Arg}w=2\\operatorname{Arg}z",
+        "note": "$w=z^2$ 的映射规律：模平方、辐角加倍（辐角集合乘 2）。",
+        "noteEn": "Mapping rule for $w=z^2$: moduli are squared and arguments are doubled (the argument set is multiplied by 2)."
+      },
+      {
+        "latex": "w=\\frac{az+b}{cz+d}\\ \\ (ad-bc\\ne 0)\\ \\text{把直线与圆映为直线或圆}",
+        "note": "分式线性函数（莫比乌斯变换）把直线和圆统一地映成直线或圆，是最简单的共形映射之一。",
+        "noteEn": "A linear fractional (Möbius) transformation maps lines and circles to lines or circles, and is one of the simplest conformal maps."
+      }
+    ],
+    "expression": {
+      "text": "w = f(z) = u(x, y) + i v(x, y)",
+      "symbol": "w=f(z)",
+      "note": "自变量与函数值都是复数；$u$、$v$ 是二元实函数，分别称为实部与虚部。",
+      "noteEn": "Both variable and value are complex; $u$ and $v$ are real functions of two variables, called the real and imaginary parts."
+    },
+    "properties": [
+      "复变函数等价于一对二元实函数 $(u,v)$：研究 $f$ 常常化为研究 $u$、$v$，而 $u$、$v$ 的许多性质也能提升为 $f$ 的性质。",
+      "复变函数不能用一张平面图完整画出（「图像」在四维空间），通常用 $z$ 平面到 $w$ 平面的映射来表示。",
+      "$w=z^2$ 的映射规律：模平方、辐角加倍；除 $z=0$ 外它保持两族曲线的夹角（共形）。",
+      "多项式函数与分式线性函数 $w=\\dfrac{az+b}{cz+d}$（$ad-bc\\ne 0$）是最基本的单值复变函数；后者把直线和圆映成直线或圆。",
+      "多值函数（如 $\\operatorname{Arg}z$、$\\operatorname{Ln}z$、一般的 $z^\\alpha$）通过限定辐角范围可取单值分支，从而化为通常的函数。"
+    ],
+    "propertiesEn": [
+      "A complex function is equivalent to a pair of real functions $(u,v)$; studying $f$ often reduces to studying $u$ and $v$, and many properties of $u$ and $v$ lift back to $f$.",
+      "A complex function cannot be drawn as one planar graph (its graph lives in four dimensions); it is usually represented as a mapping from the $z$-plane to the $w$-plane.",
+      "For $w=z^2$ the rule is: square the modulus, double the argument; except at $z=0$ it preserves the angle between two curves (it is conformal).",
+      "Polynomials and linear fractional functions $w=\\frac{az+b}{cz+d}$ with $ad-bc\\ne 0$ are the most basic single-valued complex functions; the latter map lines and circles to lines or circles.",
+      "Multivalued functions such as $\\operatorname{Arg}z$, $\\operatorname{Ln}z$ and general $z^\\alpha$ become ordinary single-valued functions after selecting a branch by restricting the argument."
+    ],
+    "plot": {
+      "type": "conformal",
+      "re": "x^2 - y^2",
+      "im": "2*x*y",
+      "zRange": [
+        -1.4,
+        1.4
+      ],
+      "density": 9,
+      "title": "w = z²：z 平面的正交网格映成两族互相正交的曲线"
+    },
+    "examples": [
+      {
+        "problem": "设 $w=z^2+2z$，写出它的实部 $u$ 与虚部 $v$。",
+        "solution": "由 $z=x+iy$：\n$$z^2=(x+iy)^2=(x^2-y^2)+2xyi,\\qquad 2z=2x+2yi.$$\n合并同类项得\n$$u(x,y)=x^2-y^2+2x,\\qquad v(x,y)=2xy+2y.$$\n因此 $w=z^2+2z$ 等价于映射 $(x,y)\\mapsto\\bigl(x^2-y^2+2x,\\ 2xy+2y\\bigr)$。"
+      },
+      {
+        "problem": "说明 $w=z^2$ 把圆周 $|z|=2$ 映成什么集合，把射线 $\\arg z=\\dfrac{\\pi}{4}$（$|z|>0$）映成什么。",
+        "solution": "若 $z=re^{i\\theta}$，则 $w=z^2=r^2e^{2i\\theta}$，即模被平方、辐角被加倍。\n\n圆周 $|z|=2$：$r=2$，故 $|w|=r^2=4$，像落在圆周 $|w|=4$ 上；当 $z$ 沿圆周走一圈时 $\\theta$ 增加 $2\\pi$，$2\\theta$ 增加 $4\\pi$，所以 $w$ 沿 $|w|=4$ **绕两圈**。\n\n射线 $\\arg z=\\dfrac{\\pi}{4}$：像的辐角为 $2\\cdot\\dfrac{\\pi}{4}=\\dfrac{\\pi}{2}$，即正虚轴（原点除外）。"
+      }
+    ],
+    "tags": [
+      "复变函数",
+      "映射",
+      "实部与虚部",
+      "变换"
+    ],
+    "links": [
+      "complex-number",
+      "complex-plane",
+      "multivariable-function",
+      "multivariable-limit",
+      "analytic-function"
+    ]
+  },
+  {
+    "id": "complex-limit-continuity",
+    "title": "复变函数的极限与连续",
+    "titleEn": "Limits and Continuity of Complex Functions",
+    "branch": "complex",
+    "level": 4,
+    "summary": "复变函数的极限要求 z 沿平面上任意路径趋近 z₀ 时 f(z) 都趋于同一个复数 A；它等价于实部、虚部两个二元实函数极限同时成立。",
+    "summaryEn": "The limit of a complex function requires f(z) to tend to one and the same complex number A along every path in the plane; equivalently, the two real limits of the real and imaginary parts must exist.",
+    "definition": "设函数 $f$ 在 $z_0$ 的某去心邻域内有定义。如果存在复数 $A$，使得对任意给定的 $\\varepsilon>0$ 都能找到 $\\delta>0$，只要 $0<|z-z_0|<\\delta$ 就有 $|f(z)-A|<\\varepsilon$，就称当 $z$ 趋于 $z_0$ 时 $f(z)$ 以 $A$ 为**极限**，记作 $$\\lim_{z\\to z_0}f(z)=A.$$ 与实变量情形相比，$0<|z-z_0|<\\delta$ 不再区分左、右两侧，而是让 $z$ 从平面上的**任意方向、沿任意路径**趋近 $z_0$。因此极限存在意味着「沿一切路径」都趋于同一个 $A$；只要找到两条路径使 $f(z)$ 趋于不同的值，极限就不存在。\n\n复数的模就是平面上两点间的距离，所以 $z\\to z_0$ 与 $(x,y)\\to(x_0,y_0)$ 是同一件事。把 $f$ 写成 $f(z)=u(x,y)+iv(x,y)$，设 $A=a+ib$，就有 $$\\lim_{z\\to z_0}f(z)=A\\iff \\lim_{(x,y)\\to(x_0,y_0)}u(x,y)=a\\ \\text{且}\\ \\lim_{(x,y)\\to(x_0,y_0)}v(x,y)=b.$$ 也就是说，复极限的存在性完全由实部、虚部的二重极限决定。这条等价性把复极限的判定化为熟悉的二元实函数问题：分别讨论 $u$、$v$ 的极限即可。\n\n复极限满足与实变量极限相同的性质：唯一性、局部有界性，以及四则运算法则（分母的极限不为零时，商的极限等于极限之商）。多项式函数与有理函数在分母不为零的点处，极限就等于函数值；遇到分母为零的表达式，先做代数化简再求极限，例如 $$\\lim_{z\\to i}\\frac{z^2+1}{z-i}=\\lim_{z\\to i}\\frac{(z-i)(z+i)}{z-i}=\\lim_{z\\to i}(z+i)=2i.$$\n\n若 $f$ 在 $z_0$ 的某个邻域内有定义，且 $\\lim\\limits_{z\\to z_0}f(z)=f(z_0)$，就称 $f$ 在 $z_0$ **连续**。由上面的等价性，$f$ 连续当且仅当 $u$、$v$ 在 $(x_0,y_0)$ 连续；连续函数的和、差、积、商（分母非零）与复合仍连续。复变函数的极限与连续是定义复导数的铺垫：复导数要求差商沿**任意方向**的极限都相同，这道「方向一致性」的门槛正是复分析与实分析分道扬镳的地方。",
+    "definitionEn": "Let $f$ be defined in a punctured neighbourhood of $z_0$. If there is a complex number $A$ such that for every $\\varepsilon>0$ there exists $\\delta>0$ with $|f(z)-A|<\\varepsilon$ whenever $0<|z-z_0|<\\delta$, then $f(z)$ tends to $A$ as $z$ tends to $z_0$, written $$\\lim_{z\\to z_0}f(z)=A.$$ Unlike the real case, the condition $0<|z-z_0|<\\delta$ distinguishes no left from right: $z$ may approach $z_0$ from any direction and along any curve, and the limit exists only if **all** such approaches give the same value $A$. Exhibiting two paths with different limiting values proves that the limit does not exist.\n\nThe modulus of a complex number is the distance between two points of the plane, so $z\\to z_0$ is the same statement as $(x,y)\\to(x_0,y_0)$. Writing $f(z)=u(x,y)+iv(x,y)$ and $A=a+ib$, $$\\lim_{z\\to z_0}f(z)=A\\iff \\lim_{(x,y)\\to(x_0,y_0)}u(x,y)=a\\ \\text{and}\\ \\lim_{(x,y)\\to(x_0,y_0)}v(x,y)=b.$$ The existence of the complex limit is thus completely determined by the two real double limits of the real and imaginary parts, which reduces the problem to the familiar real two-variable setting.\n\nComplex limits obey the same rules as real ones: uniqueness, local boundedness, and the algebra of limits (the limit of a quotient is the quotient of the limits when the denominator does not vanish). For polynomials and rational functions the limit at a point where the denominator is nonzero is simply the value of the function; when the denominator vanishes, simplify algebraically first, as in $$\\lim_{z\\to i}\\frac{z^2+1}{z-i}=\\lim_{z\\to i}\\frac{(z-i)(z+i)}{z-i}=\\lim_{z\\to i}(z+i)=2i.$$\n\nIf $f$ is defined in a neighbourhood of $z_0$ and $\\lim_{z\\to z_0}f(z)=f(z_0)$, then $f$ is **continuous** at $z_0$. By the equivalence above, $f$ is continuous exactly when $u$ and $v$ are continuous at $(x_0,y_0)$; sums, differences, products, quotients (with nonzero denominator) and compositions of continuous functions are continuous. Limits and continuity pave the way for the complex derivative, which demands that the difference quotient has the same limit from **every** direction — the very requirement where complex analysis parts company with real analysis.",
+    "formulas": [
+      {
+        "latex": "\\lim_{z\\to z_0}f(z)=A:\\quad \\forall\\varepsilon>0,\\ \\exists\\delta>0,\\ 0<|z-z_0|<\\delta\\Rightarrow|f(z)-A|<\\varepsilon",
+        "note": "极限的 ε-δ 定义；$z$ 沿任意路径趋近 $z_0$ 都要求成立。",
+        "noteEn": "The epsilon-delta definition of the limit; it must hold along every path approaching $z_0$."
+      },
+      {
+        "latex": "\\lim_{z\\to z_0}f(z)=A\\iff \\lim_{(x,y)\\to(x_0,y_0)}u(x,y)=a,\\quad \\lim_{(x,y)\\to(x_0,y_0)}v(x,y)=b",
+        "note": "其中 $f=u+iv$、$A=a+ib$：复极限等价于实部、虚部的极限分别成立。",
+        "noteEn": "Here $f=u+iv$ and $A=a+ib$: the complex limit is equivalent to the separate limits of the real and imaginary parts."
+      },
+      {
+        "latex": "\\lim_{z\\to z_0}(f\\pm g)=\\lim f\\pm\\lim g,\\qquad \\lim_{z\\to z_0}(fg)=\\lim f\\cdot\\lim g,\\qquad \\lim_{z\\to z_0}\\frac{f}{g}=\\frac{\\lim f}{\\lim g}\\ \\ (\\lim g\\ne 0)",
+        "note": "极限的四则运算法则，与实变量情形完全一致。",
+        "noteEn": "The algebra of limits, identical in form to the real-variable case."
+      },
+      {
+        "latex": "f\\ \\text{在}\\ z_0\\ \\text{连续}\\iff \\lim_{z\\to z_0}f(z)=f(z_0)\\iff u,v\\ \\text{在}\\ (x_0,y_0)\\ \\text{连续}",
+        "note": "连续的定义与它和实部、虚部连续性的等价关系。",
+        "noteEn": "Definition of continuity and its equivalence with continuity of the real and imaginary parts."
+      }
+    ],
+    "expression": {
+      "text": "lim_{z→z₀} f(z) = A（沿任意路径趋近都得到 A）",
+      "symbol": "\\lim_{z\\to z_0}f(z)=A",
+      "note": "极限必须与趋近路径无关；路径不同结果不同则极限不存在。",
+      "noteEn": "The limit must be independent of the path; two paths with different limits mean the limit does not exist."
+    },
+    "properties": [
+      "极限存在要求沿一切趋近路径都得到同一个值；若两条路径结果不同，极限不存在（例如 $\\bar z/z$ 当 $z\\to 0$）。",
+      "复极限存在等价于实部、虚部的二重极限分别存在，且极限值分别是 $\\operatorname{Re}A$、$\\operatorname{Im}A$。",
+      "极限具有唯一性与局部有界性，并满足四则运算法则。",
+      "连续 = 极限等于函数值；$f$ 连续当且仅当 $u$、$v$ 连续，且连续函数的和、差、积、商（分母非零）与复合仍连续。",
+      "多项式在整个复平面上连续；有理函数在分母不为零的点处连续。"
+    ],
+    "propertiesEn": [
+      "A limit exists only if every approach path gives the same value; two paths with different limits mean no limit exists (for example $\\bar z/z$ as $z\\to 0$).",
+      "The complex limit exists iff the two double limits of the real and imaginary parts exist, with values $\\operatorname{Re}A$ and $\\operatorname{Im}A$ respectively.",
+      "Limits are unique, locally bounded, and satisfy the algebra of limits.",
+      "Continuity means the limit equals the function value; $f$ is continuous iff $u$ and $v$ are, and sums, differences, products, quotients (nonzero denominator) and compositions of continuous functions stay continuous.",
+      "Polynomials are continuous on the whole plane; rational functions are continuous wherever the denominator does not vanish."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "levels": 12,
+      "title": "|z²| = x² + y² 的等值线：同心圆，z→0 时 |f(z)|→0"
+    },
+    "examples": [
+      {
+        "problem": "讨论极限 $\\lim\\limits_{z\\to 0}\\dfrac{\\bar z}{z}$ 是否存在。",
+        "solution": "沿实轴趋近：取 $z=x$（$x\\to 0$，$x\\ne 0$），则 $\\dfrac{\\bar z}{z}=\\dfrac{x}{x}=1$，沿此路径极限为 $1$。\n\n沿虚轴趋近：取 $z=iy$（$y\\to 0$，$y\\ne 0$），则 $\\bar z=-iy$，$\\dfrac{\\bar z}{z}=\\dfrac{-iy}{iy}=-1$，沿此路径极限为 $-1$。\n\n两条路径得到不同的值，所以极限不存在。这说明复极限必须对一切趋近方式成立，方向不统一就不算极限。"
+      },
+      {
+        "problem": "求 $\\lim\\limits_{z\\to i}\\dfrac{z^2+1}{z-i}$，并说明 $f$ 在 $z=i$ 处能否通过补充定义变得连续。",
+        "solution": "注意 $z^2+1=z^2-i^2=(z-i)(z+i)$。当 $z\\ne i$ 时\n$$\\frac{z^2+1}{z-i}=z+i,$$\n而 $z+i$ 在 $z=i$ 处连续，所以\n$$\\lim_{z\\to i}\\frac{z^2+1}{z-i}=\\lim_{z\\to i}(z+i)=2i.$$\n极限存在，只需补充定义 $f(i)=2i$，函数就在 $z=i$ 处连续——这类点称为可去奇点，是后续复分析的重要概念。"
+      }
+    ],
+    "tags": [
+      "复极限",
+      "连续性",
+      "路径无关",
+      "ε-δ"
+    ],
+    "links": [
+      "complex-function",
+      "complex-number",
+      "limit",
+      "multivariable-limit",
+      "analytic-function"
+    ]
+  },
+  {
+    "id": "analytic-function",
+    "title": "解析函数",
+    "titleEn": "Analytic Functions",
+    "branch": "complex",
+    "level": 4,
+    "summary": "若 f 在 z₀ 的某个邻域内处处可导，就称 f 在 z₀ 解析（全纯）；解析比「一点可导」强得多，并要求柯西-黎曼方程成立。",
+    "summaryEn": "If f is differentiable throughout some neighbourhood of z₀, it is analytic (holomorphic) at z₀; analyticity is far stronger than differentiability at a single point and forces the Cauchy–Riemann equations.",
+    "definition": "先定义复导数：设 $f$ 在 $z_0$ 的某邻域内有定义，如果差商极限 $$f'(z_0)=\\lim_{\\Delta z\\to 0}\\frac{f(z_0+\\Delta z)-f(z_0)}{\\Delta z}$$ 存在（$\\Delta z$ 沿**任何方向**趋于 $0$ 时极限都相同），就称 $f$ 在 $z_0$ **可导（可微）**。形式上它与实变量导数完全一样，但在复平面上 $\\Delta z$ 可以从任意方向趋于 $0$，要求严苛得多：很多在实分析里很光滑的函数（如 $f(z)=\\bar z=x-iy$）在复意义下处处不可导——因为 $\\overline{\\Delta z}/\\Delta z=e^{-2i\\varphi}$ 依赖于趋近的方向角 $\\varphi$。\n\n若 $f$ 在 $z_0$ 的某个邻域内**处处可导**，则称 $f$ 在 $z_0$ **解析**（也称全纯、正则）。如果 $f$ 在区域 $D$ 内每一点解析（等价于在 $D$ 内处处可导），就称 $f$ 是 $D$ 内的解析函数。由定义可见：解析 $\\Rightarrow$ 可导，但只在单独一点可导的函数在该点并不解析——这正是「解析」与「可导」的区别。由于区域是开集，区域内的可导性与解析性是同一件事，所以教材常直接说「解析函数」，不再逐点强调邻域的存在。\n\n判断解析性的实用工具是**柯西-黎曼方程**：对 $f=u+iv$，若 $f$ 在区域 $D$ 上解析，则 $u$、$v$ 在 $D$ 内满足 $$u_x=v_y,\\qquad u_y=-v_x;$$ 反之，若 $u$、$v$ 在 $D$ 内有一阶连续偏导数且满足柯西-黎曼方程，则 $f$ 在 $D$ 内解析。此时导数可由任一方向的偏导算出：$$f'(z)=u_x+iv_x=v_y-iu_y.$$\n\n解析函数满足与实变量微积分完全平行的四则运算与链式法则：两个解析函数的和、差、积、商（分母不为零）以及复合仍解析。常数函数、$z$ 的多项式、$e^z$、$\\sin z$、$\\cos z$ 都是**整函数**（在整个复平面上解析），有理函数在分母不为零处解析。解析性是复分析的核心：只有解析函数才有柯西积分定理、幂级数展开、留数定理那一整套强有力的结论，也才有保角的几何性质。",
+    "definitionEn": "The complex derivative is defined by the same difference quotient as in real calculus: $f$ is differentiable at $z_0$ if the limit $$f'(z_0)=\\lim_{\\Delta z\\to 0}\\frac{f(z_0+\\Delta z)-f(z_0)}{\\Delta z}$$ exists, where $\\Delta z\\to 0$ must give the same value from **every direction**. The definition looks familiar, but in the plane it is far more restrictive: many functions that are perfectly smooth in the real sense (for example $f(z)=\\bar z=x-iy$) have no complex derivative anywhere, because $\\overline{\\Delta z}/\\Delta z=e^{-2i\\varphi}$ depends on the direction angle $\\varphi$ of $\\Delta z$.\n\nIf $f$ is differentiable at **every point of some neighbourhood** of $z_0$, then $f$ is **analytic** (holomorphic, regular) at $z_0$. If $f$ is analytic at every point of a region $D$, it is an analytic function in $D$. Thus analytic implies differentiable, but differentiability at a single point does not make $f$ analytic there — that is exactly the difference between the two notions. Since a region is open, differentiability at every point of a region and analyticity there coincide, so textbooks simply say 'analytic function' without repeating 'in a neighbourhood'.\n\nThe practical criterion is the **Cauchy–Riemann equations**: for $f=u+iv$ analytic in a region $D$, the functions $u$ and $v$ satisfy $$u_x=v_y,\\qquad u_y=-v_x$$ throughout $D$; conversely, if $u$ and $v$ have continuous first-order partial derivatives in $D$ and satisfy the Cauchy–Riemann equations, then $f$ is analytic in $D$. The derivative can then be computed from either direction: $$f'(z)=u_x+iv_x=v_y-iu_y.$$\n\nAnalytic functions obey the same sum, product, quotient and chain rules as in real calculus: sums, differences, products, quotients (with nonzero denominator) and compositions of analytic functions are analytic. Constants, polynomials in $z$, $e^z$, $\\sin z$ and $\\cos z$ are **entire** (analytic on the whole plane), and rational functions are analytic wherever the denominator does not vanish. Analyticity is the central notion of complex analysis: only analytic functions enjoy the Cauchy integral theorem, power-series expansions and the residue calculus — and only they are conformal where $f'\\ne 0$.",
+    "formulas": [
+      {
+        "latex": "f'(z_0)=\\lim_{\\Delta z\\to 0}\\frac{f(z_0+\\Delta z)-f(z_0)}{\\Delta z}",
+        "note": "复导数的定义；极限必须与 $\\Delta z$ 趋近的方向无关。",
+        "noteEn": "Definition of the complex derivative; the limit must not depend on the direction of $\\Delta z$."
+      },
+      {
+        "latex": "f'(z)=u_x+iv_x=v_y-iu_y",
+        "note": "解析函数导数的计算公式；两个相等的形式来自柯西-黎曼方程。",
+        "noteEn": "Formula for the derivative of an analytic function; the two equal expressions follow from the Cauchy–Riemann equations."
+      },
+      {
+        "latex": "u_x=v_y,\\qquad u_y=-v_x",
+        "note": "柯西-黎曼方程：可导（从而解析）的必要条件。",
+        "noteEn": "The Cauchy–Riemann equations: a necessary condition for differentiability and hence for analyticity."
+      },
+      {
+        "latex": "(f\\pm g)'=f'\\pm g',\\qquad (fg)'=f'g+fg',\\qquad \\Bigl(\\frac{f}{g}\\Bigr)'=\\frac{f'g-fg'}{g^2},\\qquad \\bigl(f(g(z))\\bigr)'=f'(g(z))\\,g'(z)",
+        "note": "解析函数的四则运算与链式法则，与实变量微积分完全一致。",
+        "noteEn": "Sum, product, quotient and chain rules for analytic functions, identical in form to real calculus."
+      },
+      {
+        "latex": "f\\ \\text{在区域}\\ D\\ \\text{内解析且}\\ f'(z)\\equiv 0\\ \\Longrightarrow\\ f\\ \\text{在}\\ D\\ \\text{内为常数}",
+        "note": "解析函数的一个刚性性质：导数为零就意味着函数是常数。",
+        "noteEn": "A rigidity property of analytic functions: vanishing derivative forces the function to be constant."
+      }
+    ],
+    "expression": {
+      "text": "f′(z₀) = lim_{Δz→0} [f(z₀+Δz) − f(z₀)]/Δz（沿任意方向趋近，极限相同）",
+      "symbol": "f'(z_0)=\\lim_{\\Delta z\\to 0}\\frac{f(z_0+\\Delta z)-f(z_0)}{\\Delta z}",
+      "note": "复导数存在即「可导」；若在 $z_0$ 的某邻域内处处可导，则称 $f$ 在 $z_0$ 解析。",
+      "noteEn": "Existence of this limit means $f$ is differentiable; if it holds throughout a neighbourhood of $z_0$, then $f$ is analytic at $z_0$."
+    },
+    "properties": [
+      "解析是「邻域内处处可导」，比一点可导强：只在一点可导的函数在该点不解析（如 $f(z)=|z|^2$ 只在 $z=0$ 可导，处处不解析）。",
+      "区域内的可导性与解析性等价；解析性是后续一切结论（积分、幂级数、留数）的前提。",
+      "解析函数的和、差、积、商（分母非零）与复合仍解析；常数、多项式、$e^z$、$\\sin z$、$\\cos z$ 是整函数。",
+      "必要条件：解析函数的实部、虚部满足柯西-黎曼方程；配合偏导数连续时它也是充分条件。",
+      "解析函数的实部与虚部都是调和函数，且虚部是实部的共轭调和函数；在区域上 $f'\\equiv 0$ 的解析函数必为常数。"
+    ],
+    "propertiesEn": [
+      "Analyticity means differentiability throughout a neighbourhood, which is stronger than differentiability at one point (e.g. $f(z)=|z|^2$ is differentiable only at $z=0$ and analytic nowhere).",
+      "On a region, differentiability and analyticity coincide; analyticity is the prerequisite for everything that follows (integrals, power series, residues).",
+      "Sums, differences, products, quotients (nonzero denominator) and compositions of analytic functions are analytic; constants, polynomials, $e^z$, $\\sin z$ and $\\cos z$ are entire.",
+      "Necessary condition: the real and imaginary parts of an analytic function satisfy the Cauchy–Riemann equations; together with continuity of the partials this is also sufficient.",
+      "The real and imaginary parts of an analytic function are harmonic, the imaginary part being a harmonic conjugate of the real part; an analytic function with $f'\\equiv 0$ on a region is constant."
+    ],
+    "plot": {
+      "type": "conformal",
+      "re": "x^2 - y^2",
+      "im": "2*x*y",
+      "zRange": [
+        -1.4,
+        1.4
+      ],
+      "density": 8,
+      "title": "解析函数 w = z² 的映射：网格保持正交，曲线夹角不变"
+    },
+    "examples": [
+      {
+        "problem": "判断 $f(z)=|z|^2$ 在哪些点可导，它是否解析？",
+        "solution": "$f(z)=|z|^2=x^2+y^2$，即 $u=x^2+y^2$、$v=0$。\n\n若 $f$ 在某点可导，则由柯西-黎曼方程（必要条件）：\n$$u_x=v_y\\ \\Longrightarrow\\ 2x=0,\\qquad u_y=-v_x\\ \\Longrightarrow\\ 2y=0,$$\n所以候选点只有 $z=0$。\n\n在 $z=0$ 处直接验证差商：\n$$\\frac{f(0+\\Delta z)-f(0)}{\\Delta z}=\\frac{|\\Delta z|^2}{\\Delta z}=\\overline{\\Delta z}\\to 0,$$\n故 $f'(0)=0$ 确实存在。但任何邻域内都有 $x,y\\ne 0$ 的点，那里不可导，因此 $f$ 处处不解析。这个例子清楚展示了「可导」与「解析」的区别。"
+      },
+      {
+        "problem": "验证 $w=z^2$ 在复平面上解析，并求它的导数。",
+        "solution": "写 $z=x+iy$，则\n$$z^2=(x^2-y^2)+2xyi,\\qquad u=x^2-y^2,\\quad v=2xy.$$\n计算偏导并核对柯西-黎曼方程：\n$$u_x=2x=v_y,\\qquad u_y=-2y=-v_x.$$\n$u$、$v$ 的一阶偏导处处连续且满足柯西-黎曼方程，所以 $f$ 处处解析（整函数）。由求导公式\n$$f'(z)=u_x+iv_x=2x+2yi=2z,$$\n与直接用导数法则算出的 $(z^2)'=2z$ 一致。"
+      }
+    ],
+    "tags": [
+      "解析函数",
+      "全纯",
+      "可导性",
+      "柯西-黎曼方程"
+    ],
+    "links": [
+      "complex-function",
+      "cauchy-riemann",
+      "derivative",
+      "complex-limit-continuity",
+      "harmonic-function"
+    ]
+  },
+  {
+    "id": "cauchy-riemann",
+    "title": "柯西-黎曼方程",
+    "titleEn": "Cauchy–Riemann Equations",
+    "branch": "complex",
+    "level": 4,
+    "summary": "对 f = u + iv，f 可导的必要条件是 u_x = v_y、u_y = −v_x；当 u、v 的偏导连续时，这组方程也是 f 解析的充分条件。",
+    "summaryEn": "For f = u + iv, differentiability forces u_x = v_y and u_y = −v_x; when the partial derivatives are continuous, these equations are also sufficient for analyticity.",
+    "definition": "复导数要求 $\\Delta z$ 沿任意方向趋于 $0$ 时差商极限相同。分别让 $\\Delta z=\\Delta x$（水平方向）与 $\\Delta z=i\\Delta y$（竖直方向）趋于 $0$，比较两个极限，就得到**柯西-黎曼方程**（简称 C-R 方程）。设 $f(z)=u(x,y)+iv(x,y)$ 在 $z_0=x_0+iy_0$ 可导，则 $u$、$v$ 在 $(x_0,y_0)$ 处的一阶偏导数存在，且 $$u_x=v_y,\\qquad u_y=-v_x.$$ 这是 $f$ 可导的**必要条件**，用它不计算差商就能快速排除一批函数。注意这组方程本身不能单独保证可导：还需要 $u$、$v$ 作为二元实函数在该点**可微**——而偏导数连续是保证可微的常用充分条件。\n\n反过来，若 $u$、$v$ 在点 $(x_0,y_0)$ 处可微且满足 C-R 方程，则 $f$ 在 $z_0$ 可导。教材中最常用的充分性版本是：若 $u$、$v$ 在区域 $D$ 内具有**一阶连续偏导数**且处处满足 C-R 方程，则 $f$ 在 $D$ 内解析。此时导数可以由任一方向的偏导算出：$$f'(z)=u_x+iv_x=v_y-iu_y.$$\n\nC-R 方程有两层意义。其一是**判别工具**：许多看似光滑的函数（$\\bar z$、$\\operatorname{Re}z$、$|z|^2$ 等）不满足它就立刻被排除在解析函数之外。其二是**结构定理**：把 C-R 方程再求一次偏导并消去交叉项，可得 $$u_{xx}+u_{yy}=0,\\qquad v_{xx}+v_{yy}=0,$$ 即解析函数的实部、虚部都是调和函数；进一步还能证明 $u=c$ 与 $v=c$ 两组等值线在梯度不为零处互相正交，这正解释了解析映射的保角性。\n\n在极坐标 $z=re^{i\\theta}$ 下，C-R 方程取更对称的形式 $$u_r=\\frac{1}{r}v_\\theta,\\qquad v_r=-\\frac{1}{r}u_\\theta,$$ 讨论与圆对称有关的函数（如对数、幂函数）时用起来更方便。例如 $f(z)=1/z$ 在极坐标下求导，能直接看出它与单位圆反演的联系。",
+    "definitionEn": "Complex differentiability requires the difference quotient to have one and the same limit when $\\Delta z\\to 0$ from every direction. Comparing the limits along the horizontal direction $\\Delta z=\\Delta x$ and the vertical direction $\\Delta z=i\\Delta y$ yields the **Cauchy–Riemann equations** (C-R equations for short). If $f(z)=u(x,y)+iv(x,y)$ is differentiable at $z_0=x_0+iy_0$, then the first partial derivatives of $u$ and $v$ exist at $(x_0,y_0)$ and $$u_x=v_y,\\qquad u_y=-v_x.$$ This is a **necessary condition** for differentiability; it lets one rule out whole families of functions without computing any difference quotient. The equations alone do not guarantee differentiability: one also needs $u$ and $v$ to be differentiable as functions of two real variables at that point, which is automatic when the first partials are continuous.\n\nConversely, if $u$ and $v$ are differentiable at $(x_0,y_0)$ and satisfy the C-R equations there, then $f$ is differentiable at $z_0$. The version used most often is: if $u$ and $v$ have **continuous first-order partial derivatives** in a region $D$ and satisfy the C-R equations throughout $D$, then $f$ is analytic in $D$. The derivative is then computed from either direction: $$f'(z)=u_x+iv_x=v_y-iu_y.$$\n\nThe equations serve two purposes. First, as a **test**: functions such as $\\bar z$, $\\operatorname{Re}z$ or $|z|^2$ fail them immediately and are therefore not analytic. Second, as a **structural theorem**: differentiating the equations once more and eliminating the mixed terms gives $$u_{xx}+u_{yy}=0,\\qquad v_{xx}+v_{yy}=0,$$ so the real and imaginary parts of an analytic function are harmonic; moreover the level curves of $u$ and of $v$ are orthogonal wherever the gradients do not vanish, which explains the angle-preserving nature of analytic maps.\n\nIn polar coordinates $z=re^{i\\theta}$ the equations take the more symmetric form $$u_r=\\frac{1}{r}v_\\theta,\\qquad v_r=-\\frac{1}{r}u_\\theta,$$ which is convenient for functions with circular symmetry such as the logarithm or powers.",
+    "formulas": [
+      {
+        "latex": "u_x=v_y,\\qquad u_y=-v_x",
+        "note": "柯西-黎曼方程本体；$f=u+iv$ 可导（进而在区域上解析）的必要条件。",
+        "noteEn": "The Cauchy–Riemann equations themselves; a necessary condition for differentiability of $f=u+iv$, and hence for analyticity on a region."
+      },
+      {
+        "latex": "f'(z)=u_x+iv_x=v_y-iu_y",
+        "note": "用偏导数计算导数；两个表达式相等正是 C-R 方程的内容。",
+        "noteEn": "Computing the derivative from partials; the equality of the two expressions is exactly the content of the C-R equations."
+      },
+      {
+        "latex": "\\text{若 }u,v\\text{ 在区域 }D\\text{ 内有连续一阶偏导且满足 C-R 方程，则 }f=u+iv\\text{ 在 }D\\text{ 内解析}",
+        "note": "常用的充分条件；导数连续是保证 $u$、$v$ 可微的便捷方式。",
+        "noteEn": "A commonly used sufficient condition; continuity of the partials is a convenient way to ensure $u$ and $v$ are differentiable."
+      },
+      {
+        "latex": "u_{xx}+u_{yy}=0,\\qquad v_{xx}+v_{yy}=0",
+        "note": "由 C-R 方程推出的拉普拉斯方程：解析函数的实部与虚部都是调和函数。",
+        "noteEn": "Laplace equations derived from the C-R equations: the real and imaginary parts of an analytic function are harmonic."
+      },
+      {
+        "latex": "u_r=\\frac{1}{r}v_\\theta,\\qquad v_r=-\\frac{1}{r}u_\\theta",
+        "note": "极坐标形式的 C-R 方程，适合处理与辐角、模有关的函数。",
+        "noteEn": "The C-R equations in polar form, suited to functions involving modulus and argument."
+      }
+    ],
+    "expression": {
+      "text": "u_x = v_y，u_y = −v_x（f = u + iv 可导的必要条件）",
+      "symbol": "u_x=v_y,\\qquad u_y=-v_x",
+      "note": "配合 $u$、$v$ 的可微性（偏导连续即可）时，C-R 方程也是充分条件。",
+      "noteEn": "Together with differentiability of $u$ and $v$ (continuity of the partials suffices), the C-R equations are also sufficient."
+    },
+    "properties": [
+      "C-R 方程是可导的必要条件而非充分条件；充分性需要 $u$、$v$ 的可微性（一阶偏导连续最常用）。",
+      "不满足 C-R 方程的函数不可导、更不解析；例如 $f(z)=\\bar z$：$u=x$、$v=-y$，$u_x=1\\ne v_y=-1$，处处不可导。",
+      "若 $f$ 解析，则 $f'=u_x+iv_x=v_y-iu_y$；两条方向算出同一个导数，这正是 C-R 方程的意义。",
+      "若 $f$ 解析，则 $u$、$v$ 各自满足拉普拉斯方程，且虚部 $v$ 是实部 $u$ 的共轭调和函数（反过来 $-u$ 是 $v$ 的共轭调和函数）；这一结论是下一批「调和函数」的出发点。",
+      "极坐标形式 $u_r=\\frac{1}{r}v_\\theta$、$v_r=-\\frac{1}{r}u_\\theta$，在讨论圆对称函数时更方便。"
+    ],
+    "propertiesEn": [
+      "The C-R equations are necessary but not sufficient for differentiability; sufficiency needs differentiability of $u$ and $v$ (continuous partials is the standard convenient hypothesis).",
+      "A function failing the C-R equations is nowhere differentiable, hence nowhere analytic; e.g. $f(z)=\\bar z$ has $u=x$, $v=-y$, and $u_x=1\\ne v_y=-1$.",
+      "If $f$ is analytic then $f'=u_x+iv_x=v_y-iu_y$; the two directions produce the same derivative, which is exactly the content of the C-R equations.",
+      "If $f$ is analytic, each of $u$ and $v$ satisfies Laplace's equation, and the imaginary part $v$ is a harmonic conjugate of the real part $u$ (conversely $-u$ is a harmonic conjugate of $v$); this leads to the next topic, harmonic functions.",
+      "In polar form $u_r=\\frac{1}{r}v_\\theta$ and $v_r=-\\frac{1}{r}u_\\theta$, which simplifies functions with circular symmetry."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "levels": 12,
+      "title": "u = x² − y² 的等值线；它与 v = 2xy 满足 u_x = v_y、u_y = −v_x"
+    },
+    "examples": [
+      {
+        "problem": "用柯西-黎曼方程验证 $f(z)=z^2$ 处处可导，并求 $f'(z)$。",
+        "solution": "写 $f(z)=z^2=(x^2-y^2)+2xyi$，即 $u=x^2-y^2$、$v=2xy$。计算四个偏导：\n$$u_x=2x,\\quad u_y=-2y,\\quad v_x=2y,\\quad v_y=2x.$$\n验证：$u_x=2x=v_y$，$u_y=-2y=-v_x$，处处成立；又 $u$、$v$ 的偏导处处连续，故 $f$ 处处可导（解析）。由公式\n$$f'(z)=u_x+iv_x=2x+2yi=2z.$$"
+      },
+      {
+        "problem": "设 $f(z)=x^2+iy^2$（即 $u=x^2$、$v=y^2$），讨论它在哪里可导、是否解析。",
+        "solution": "四个偏导为\n$$u_x=2x,\\quad u_y=0,\\quad v_x=0,\\quad v_y=2y.$$\nC-R 方程要求 $2x=2y$ 且 $0=0$，所以只有直线 $y=x$ 上的点满足。由必要条件，直线之外的点必不可导；又因 $u$、$v$ 是多项式、偏导处处连续，在 $y=x$ 上的点满足 C-R 方程就确实可导。\n\n因此 $f$ 的可导点集恰是直线 $y=x$；但这条直线上任何一点的邻域内都含有不满足 C-R 方程的点，所以 $f$ 处处不解析。"
+      }
+    ],
+    "tags": [
+      "柯西-黎曼方程",
+      "可导条件",
+      "解析判别",
+      "偏导数"
+    ],
+    "links": [
+      "analytic-function",
+      "complex-function",
+      "partial-derivative",
+      "harmonic-function",
+      "complex-limit-continuity"
+    ]
+  },
+  {
+    "id": "harmonic-function",
+    "title": "调和函数",
+    "titleEn": "Harmonic Functions",
+    "branch": "complex",
+    "level": 5,
+    "summary": "调和函数是满足拉普拉斯方程 Δu = 0 的二元函数；解析函数的实部与虚部都是调和函数，并且虚部是实部的共轭调和函数。",
+    "summaryEn": "A harmonic function is a real function of two variables satisfying Laplace's equation Δu = 0; the real and imaginary parts of an analytic function are harmonic, the imaginary part being a harmonic conjugate of the real part.",
+    "definition": "设二元实函数 $u(x,y)$ 在区域 $D$ 内有二阶连续偏导数，且处处满足**拉普拉斯方程** $$\\Delta u=\\frac{\\partial^2 u}{\\partial x^2}+\\frac{\\partial^2 u}{\\partial y^2}=0,$$ 就称 $u$ 是 $D$ 上的**调和函数**。拉普拉斯方程描述稳态温度分布、静电势、不可压缩无旋流的速度势等，是最重要的偏微分方程之一；「调和」一词正来自「各方向的平均互相抵消、达到平衡」的直觉。\n\n调和函数与解析函数之间有一条深刻的纽带。若 $f(z)=u(x,y)+iv(x,y)$ 在区域 $D$ 内解析，把柯西-黎曼方程 $u_x=v_y$、$u_y=-v_x$ 再求一次偏导并消去交叉项，就得到 $$u_{xx}+u_{yy}=0,\\qquad v_{xx}+v_{yy}=0.$$ 解析函数的各阶导数都存在（这是复分析的深刻结论，可用柯西积分公式证明），所以 $u$、$v$ 不只满足方程，而且是足够光滑的。总之：**解析函数的实部与虚部都是调和函数**。\n\n反过来，给定调和函数 $u$，如果存在解析函数 $f=u+iv$，就称 $v$ 是 $u$ 的**共轭调和函数**（这里的「共轭」指通过柯西-黎曼方程相联系，与复数共轭 $\\bar z$ 是两件不同的事）。在单连通区域上，任何调和函数都存在共轭调和函数，且 $v$ 在相差一个常数的意义下唯一；区域不是单连通时可能不存在——例如 $u=\\ln|z|$ 在去心邻域上就没有单值的共轭调和函数，因为它的共轭「候选」是辐角，而辐角是多值的。\n\n求共轭调和函数的常用办法是积分柯西-黎曼方程：由 $v_y=u_x$ 得 $v=\\displaystyle\\int u_x\\,\\mathrm{d}y+\\varphi(x)$，再用 $v_x=-u_y$ 定出 $\\varphi(x)$（至多相差常数）。也有观察法：因为 $f'(z)=u_x-iu_y$ 是解析函数，把其中 $x$ 换成 $z$、$y$ 换成 $0$ 即可确定 $f'$（Milne-Thomson 方法），再对 $z$ 积分得到 $f$。",
+    "definitionEn": "A real function $u(x,y)$ with continuous second-order partial derivatives on a region $D$ is called **harmonic** if it satisfies **Laplace's equation** $$\\Delta u=\\frac{\\partial^2 u}{\\partial x^2}+\\frac{\\partial^2 u}{\\partial y^2}=0$$ everywhere in $D$. Laplace's equation describes steady-state temperature, electrostatic potential and velocity potentials of incompressible irrotational flow; it is one of the most important partial differential equations, and 'harmonic' reflects the balance of averages in all directions.\n\nThe link with complex analysis is deep. If $f(z)=u(x,y)+iv(x,y)$ is analytic in $D$, differentiating the Cauchy–Riemann equations $u_x=v_y$, $u_y=-v_x$ once more and eliminating the mixed terms gives $$u_{xx}+u_{yy}=0,\\qquad v_{xx}+v_{yy}=0.$$ Analytic functions possess derivatives of every order (a profound fact proved via the Cauchy integral formula), so $u$ and $v$ are automatically smooth enough. In short: **the real and imaginary parts of an analytic function are harmonic functions**.\n\nConversely, given a harmonic function $u$, if there exists an analytic function $f=u+iv$, then $v$ is called a **harmonic conjugate** of $u$ (here 'conjugate' refers to the Cauchy–Riemann link, not to complex conjugation). On a simply connected region every harmonic function has a harmonic conjugate, unique up to an additive constant; on a multiply connected region a single-valued conjugate may fail to exist — for example $u=\\ln|z|$ on a punctured neighbourhood would need the argument of $z$, which is multivalued.\n\nThe standard way to find the conjugate is to integrate the Cauchy–Riemann equations: from $v_y=u_x$ one gets $v=\\int u_x\\,\\mathrm{d}y+\\varphi(x)$, and $v_x=-u_y$ determines $\\varphi(x)$ up to a constant. There is also a shortcut: since $f'(z)=u_x-iu_y$ is analytic, replacing $x$ by $z$ and $y$ by $0$ in $u_x-iu_y$ determines $f'$ (the Milne–Thomson method); integrating in $z$ then gives $f$.",
+    "formulas": [
+      {
+        "latex": "\\Delta u=\\frac{\\partial^2 u}{\\partial x^2}+\\frac{\\partial^2 u}{\\partial y^2}=0",
+        "note": "拉普拉斯方程，调和函数的定义式。",
+        "noteEn": "Laplace's equation, the defining equation of a harmonic function."
+      },
+      {
+        "latex": "f=u+iv\\ \\text{解析}\\ \\Longrightarrow\\ u_{xx}+u_{yy}=0,\\qquad v_{xx}+v_{yy}=0",
+        "note": "解析函数的实部与虚部都满足拉普拉斯方程；证明只需对柯西-黎曼方程再求一次偏导。",
+        "noteEn": "Both parts of an analytic function satisfy Laplace's equation; the proof differentiates the Cauchy–Riemann equations one more time."
+      },
+      {
+        "latex": "u_x=v_y,\\qquad u_y=-v_x",
+        "note": "共轭调和函数之间的联系：$v$ 由 $u$ 经柯西-黎曼方程确定（相差常数）。",
+        "noteEn": "The link between conjugate harmonic functions: $v$ is determined by $u$ through the Cauchy–Riemann equations, up to an additive constant."
+      },
+      {
+        "latex": "v=\\int u_x\\,\\mathrm{d}y+\\varphi(x),\\qquad \\text{再用}\\ v_x=-u_y\\ \\text{定出}\\ \\varphi'(x)",
+        "note": "求共轭调和函数的积分法步骤。",
+        "noteEn": "The integration recipe for finding a harmonic conjugate."
+      },
+      {
+        "latex": "\\nabla u\\cdot\\nabla v=u_xv_x+u_yv_y=0",
+        "note": "等值线正交：$u$ 与 $v$ 的等值线在梯度不为零处互相垂直，这是解析映射保角的来源。",
+        "noteEn": "Orthogonal level curves: the level curves of $u$ and $v$ meet at right angles wherever the gradients do not vanish, which is the source of conformality."
+      }
+    ],
+    "expression": {
+      "text": "Δu = u_xx + u_yy = 0（拉普拉斯方程）",
+      "symbol": "\\Delta u=u_{xx}+u_{yy}=0",
+      "note": "若解析函数 $f=u+iv$，则 $u$、$v$ 都是调和函数，且 $v$ 是 $u$ 的共轭调和函数。",
+      "noteEn": "For an analytic function $f=u+iv$, both $u$ and $v$ are harmonic and $v$ is a harmonic conjugate of $u$."
+    },
+    "properties": [
+      "解析函数的实部与虚部都是调和函数；虚部是实部的共轭调和函数（反过来 $-u$ 是 $v$ 的共轭调和函数）。",
+      "在单连通区域上，每个调和函数都存在共轭调和函数，且彼此相差常数；多连通区域上可能不存在单值的共轭调和函数。",
+      "平均值性质：调和函数在圆心的值等于它在任何完全位于区域内的圆周上的平均值。",
+      "极值原理：在连通区域上非常数的调和函数不能在区域内部取得最大值或最小值。",
+      "调和函数与其共轭调和函数的等值线在梯度不为零处互相正交，这解释了共形映射为何保持角度。"
+    ],
+    "propertiesEn": [
+      "The real and imaginary parts of an analytic function are harmonic; the imaginary part is a harmonic conjugate of the real part (conversely $-u$ is a harmonic conjugate of $v$).",
+      "On a simply connected region every harmonic function has a harmonic conjugate, unique up to an additive constant; on a multiply connected region a single-valued conjugate may fail to exist.",
+      "Mean value property: the value of a harmonic function at the centre of a disc equals its average over any circle lying inside the region.",
+      "Maximum principle: a nonconstant harmonic function on a connected region attains neither a maximum nor a minimum in the interior.",
+      "The level curves of a harmonic function and of its harmonic conjugate are orthogonal wherever the gradients do not vanish, which explains why conformal maps preserve angles."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "levels": 12,
+      "title": "调和函数 u = x² − y² 的等值线（与共轭函数 v = 2xy 的等值线正交）"
+    },
+    "examples": [
+      {
+        "problem": "验证 $u=x^2-y^2$ 是调和函数，并求它的共轭调和函数 $v$ 与相应的解析函数 $f$。",
+        "solution": "先算二阶偏导：\n$$u_{xx}=2,\\qquad u_{yy}=-2,\\qquad \\Delta u=u_{xx}+u_{yy}=2-2=0,$$\n所以 $u$ 是调和函数。\n\n由 C-R 方程求 $v$：$v_y=u_x=2x$，对 $y$ 积分得\n$$v=2xy+\\varphi(x).$$\n再用 $v_x=-u_y$：$v_x=2y+\\varphi'(x)$，而 $-u_y=2y$，故 $\\varphi'(x)=0$，即 $\\varphi(x)=C$。于是\n$$v=2xy+C,\\qquad f(z)=u+iv=(x^2-y^2)+2xyi+iC=z^2+iC.$$\n$f$ 是解析函数，$C$ 为任意实常数。"
+      },
+      {
+        "problem": "判断 $u=x^2+y^2$ 能否成为某个解析函数的实部。",
+        "solution": "计算拉普拉斯算子：\n$$u_{xx}=2,\\qquad u_{yy}=2,\\qquad \\Delta u=4\\ne 0.$$\n$u$ 不是调和函数。而解析函数的实部必须是调和函数，所以 $u=x^2+y^2$ 不能是任何解析函数的实部。这在几何上也说得通：$x^2+y^2=|z|^2$ 在原点取极小值，违反调和函数的极值原理。"
+      }
+    ],
+    "tags": [
+      "调和函数",
+      "拉普拉斯方程",
+      "共轭调和函数",
+      "正交等值线"
+    ],
+    "links": [
+      "cauchy-riemann",
+      "analytic-function",
+      "partial-derivative",
+      "higher-order-partial",
+      "complex-function"
+    ]
+  },
+  {
+    "id": "elementary-complex-functions",
+    "title": "初等复变函数",
+    "titleEn": "Elementary Complex Functions",
+    "branch": "complex",
+    "level": 4,
+    "summary": "指数函数 e^z 是周期为 2πi 的整函数；由它导出多值的对数 Ln z、一般的幂 z^α，以及在整个复平面上无界的 sin z、cos z。",
+    "summaryEn": "The exponential e^z is an entire function with period 2πi; it gives rise to the multivalued logarithm Ln z and powers z^α, as well as sin z and cos z, which are unbounded on the whole complex plane.",
+    "definition": "把欧拉公式推广到复指数：对 $z=x+iy$ 定义 $$e^z=e^{x+iy}=e^x(\\cos y+i\\sin y).$$ 当 $y=0$ 时它还原为实指数 $e^x$。$e^z$ 是整个复平面上的解析函数（整函数），且 $(e^z)'=e^z$；由于 $\\cos y$、$\\sin y$ 以 $2\\pi$ 为周期，$e^z$ 满足 $$e^{z+2\\pi i}=e^z,$$ 即以 $2\\pi i$ 为周期——这是实指数函数（它是单射）所没有的性质。另外 $|e^z|=e^x>0$ 恒成立，所以 $e^z\\ne 0$ 对一切 $z$ 成立，$0$ 不在指数函数的值域中。\n\n指数函数不是单射，反函数只能局部地定义：**对数函数** $\\operatorname{Ln}z$ 是多值的。设 $w=u+iv$ 满足 $e^w=z$（$z\\ne 0$），则 $e^u=|z|$、$v=\\operatorname{Arg}z$，于是 $$\\operatorname{Ln}z=\\ln|z|+i(\\arg z+2k\\pi),\\qquad k\\in\\mathbb{Z}.$$ 把 $k$ 固定就得到对数的一个**单值分支**；通常取 $k=0$ 与 $\\arg z\\in(-\\pi,\\pi]$，称为**主值**，记作 $\\ln z=\\ln|z|+i\\arg z$。$\\operatorname{Ln}z$ 的任意两个值相差 $2k\\pi i$；主值分支在去掉原点与负实轴的复平面上解析，且 $(\\ln z)'=\\dfrac{1}{z}$。\n\n有了对数就可以定义一般的**幂函数**：$$z^\\alpha=e^{\\alpha\\operatorname{Ln}z}\\qquad(z\\ne 0).$$ 由于 $\\operatorname{Ln}z$ 多值，$z^\\alpha$ 一般也是多值的：当 $\\alpha$ 为整数时它是单值的；当 $\\alpha=\\dfrac{p}{q}$（既约分数）时它恰有 $q$ 个不同的值；当 $\\alpha$ 为无理数或非实复数时它有无穷多值。例如 $z^{1/2}$ 的两个值恰为相反数，$z^{1/3}$ 的三个值均匀分布在以原点为心的圆周上。\n\n**三角函数**由指数函数定义为 $$\\sin z=\\frac{e^{iz}-e^{-iz}}{2i},\\qquad \\cos z=\\frac{e^{iz}+e^{-iz}}{2}.$$ 它们在 $\\mathbb{C}$ 上解析，保留实三角函数的和角公式、导数公式 $(\\sin z)'=\\cos z$、$(\\cos z)'=-\\sin z$ 与零点位置。但与实变情形不同：$\\sin z$、$\\cos z$ 在复平面上**无界**。取 $z=it$（$t$ 为实数），由定义可直接算出 $$\\sin(it)=i\\,\\frac{e^{t}-e^{-t}}{2}=i\\sinh t,\\qquad \\cos(it)=\\cosh t,$$ 当 $t\\to\\pm\\infty$ 时它们的模趋于无穷。|sin z|、|cos z| 能取到任意大的值，这是「复变函数与实变函数很不一样」的典型例证。",
+    "definitionEn": "Extend the real exponential by Euler's formula: for $z=x+iy$ define $$e^z=e^{x+iy}=e^x(\\cos y+i\\sin y).$$ For $y=0$ this is the usual $e^x$. The function $e^z$ is analytic on the whole plane (entire) with $(e^z)'=e^z$; since $\\cos y$ and $\\sin y$ are $2\\pi$-periodic, $$e^{z+2\\pi i}=e^z,$$ so the complex exponential has the purely imaginary period $2\\pi i$ — a property the real exponential (which is injective) does not share. Moreover $|e^z|=e^x>0$ for all $z$, so $e^z\\ne 0$ everywhere: zero is not in the range of the exponential.\n\nThe exponential is not injective, so an inverse can only be defined locally: the **complex logarithm** $\\operatorname{Ln}z$ is multivalued. If $e^w=z$ with $z\\ne 0$, writing $w=u+iv$ gives $e^u=|z|$ and $v=\\operatorname{Arg}z$, hence $$\\operatorname{Ln}z=\\ln|z|+i(\\arg z+2k\\pi),\\qquad k\\in\\mathbb{Z}.$$ Fixing $k$ selects a **single-valued branch**; the standard choice $k=0$ with $\\arg z\\in(-\\pi,\\pi]$ is the **principal value** $\\ln z=\\ln|z|+i\\arg z$. Any two values of $\\operatorname{Ln}z$ differ by $2k\\pi i$; the principal branch is analytic on the plane slit along the negative real axis (origin removed), with $(\\ln z)'=1/z$.\n\nThe logarithm allows one to define general **powers**: $$z^\\alpha=e^{\\alpha\\operatorname{Ln}z}\\qquad(z\\ne 0).$$ Because $\\operatorname{Ln}z$ is multivalued, $z^\\alpha$ is generally multivalued as well: single-valued for integer $\\alpha$; exactly $q$ distinct values when $\\alpha=p/q$ is in lowest terms; infinitely many values when $\\alpha$ is irrational or non-real. For instance the two values of $z^{1/2}$ are opposite numbers, and the three values of $z^{1/3}$ are equally spaced on a circle centred at the origin.\n\nThe **trigonometric functions** are defined through the exponential: $$\\sin z=\\frac{e^{iz}-e^{-iz}}{2i},\\qquad \\cos z=\\frac{e^{iz}+e^{-iz}}{2}.$$ They are analytic on $\\mathbb{C}$ and keep the addition formulas, the derivative rules $(\\sin z)'=\\cos z$, $(\\cos z)'=-\\sin z$, and the same zeros as in the real case. But unlike the real situation, $\\sin z$ and $\\cos z$ are **unbounded** on the complex plane: for $z=it$ with real $t$, a direct computation gives $$\\sin(it)=i\\,\\frac{e^{t}-e^{-t}}{2}=i\\sinh t,\\qquad \\cos(it)=\\cosh t,$$ whose moduli grow without bound as $t\\to\\pm\\infty$. This is a typical illustration of how complex analysis differs from real analysis.",
+    "formulas": [
+      {
+        "latex": "e^z=e^x(\\cos y+i\\sin y),\\qquad |e^z|=e^x,\\qquad (e^z)'=e^z",
+        "note": "复指数函数的定义与基本性质：模等于 $e^x$，导数是自身。",
+        "noteEn": "Definition and basic properties of the complex exponential: modulus $e^x$ and derivative equal to itself."
+      },
+      {
+        "latex": "e^{z+2\\pi i}=e^z",
+        "note": "周期性质：$e^z$ 以 $2\\pi i$ 为周期（实指数函数没有这种周期）。",
+        "noteEn": "Periodicity: $e^z$ has period $2\\pi i$, something the real exponential does not have."
+      },
+      {
+        "latex": "\\operatorname{Ln}z=\\ln|z|+i(\\arg z+2k\\pi),\\qquad \\ln z=\\ln|z|+i\\arg z",
+        "note": "多值对数与它的主值分支；任意两个值相差 $2k\\pi i$。",
+        "noteEn": "The multivalued logarithm and its principal branch; any two values differ by $2k\\pi i$."
+      },
+      {
+        "latex": "z^\\alpha=e^{\\alpha\\operatorname{Ln}z}\\qquad(z\\ne 0)",
+        "note": "一般幂函数的定义；多值性由 $\\alpha$ 决定（整数单值、既约分数 $p/q$ 恰有 $q$ 个值、无理数或非实数无穷多值）。",
+        "noteEn": "Definition of a general power; the multivaluedness depends on $\\alpha$ (single-valued for integers, exactly $q$ values for a reduced fraction $p/q$, infinitely many for irrational or non-real $\\alpha$)."
+      },
+      {
+        "latex": "\\sin z=\\frac{e^{iz}-e^{-iz}}{2i},\\qquad \\cos z=\\frac{e^{iz}+e^{-iz}}{2}",
+        "note": "复三角函数的定义；它们在 $\\mathbb{C}$ 上解析但在复平面上无界。",
+        "noteEn": "Definitions of the complex trigonometric functions; they are analytic on $\\mathbb{C}$ but unbounded on the complex plane."
+      }
+    ],
+    "expression": {
+      "text": "e^z = e^x(cos y + i sin y)；Ln z = ln|z| + i(arg z + 2kπ)",
+      "symbol": "e^z=e^x(\\cos y+i\\sin y)",
+      "note": "指数函数与对数函数是复变初等函数的核心；$e^z$ 以 $2\\pi i$ 为周期，$\\operatorname{Ln}z$ 多值。",
+      "noteEn": "The exponential and logarithm are the core of elementary complex functions; $e^z$ has period $2\\pi i$ and $\\operatorname{Ln}z$ is multivalued."
+    },
+    "properties": [
+      "e^z 是整函数，$(e^z)'=e^z$，且 $e^z\\ne 0$ 对一切 $z$ 成立。",
+      "e^z 以 $2\\pi i$ 为周期：$e^{z+2\\pi i}=e^z$；同一函数值对应无穷多个 $z$，这是对数多值的根源。",
+      "对数 $\\operatorname{Ln}z$ 多值，任意两个值相差 $2k\\pi i$；主值 $\\ln z$ 在去掉原点与负实轴的复平面上解析，$(\\ln z)'=\\frac{1}{z}$。",
+      "z^α 的多值性由 $\\alpha$ 决定：整数 → 单值；既约分数 $p/q$ → 恰有 $q$ 个值；无理数或非实数 → 无穷多值。",
+      "sin z、cos z 在 $\\mathbb{C}$ 上解析、以 $2\\pi$ 为周期且保留实三角函数的公式与零点，但 |sin z|、|cos z| 无界（$|\\sin it|=\\sinh|t|$ 可任意大）。"
+    ],
+    "propertiesEn": [
+      "$e^z$ is entire, $(e^z)'=e^z$, and $e^z\\ne 0$ for every $z$.",
+      "$e^z$ has period $2\\pi i$: $e^{z+2\\pi i}=e^z$; infinitely many $z$ share the same value, which is the root of the multivaluedness of the logarithm.",
+      "The logarithm $\\operatorname{Ln}z$ is multivalued, any two values differing by $2k\\pi i$; the principal value $\\ln z$ is analytic on the plane slit along the negative real axis, with $(\\ln z)'=\\frac{1}{z}$.",
+      "The multivaluedness of $z^\\alpha$ depends on $\\alpha$: single-valued for integers; exactly $q$ values for a reduced fraction $p/q$; infinitely many for irrational or non-real $\\alpha$.",
+      "$\\sin z$ and $\\cos z$ are analytic on $\\mathbb{C}$, have period $2\\pi$, and keep the identities and zeros of the real trigonometric functions, but $|\\sin z|$ and $|\\cos z|$ are unbounded, since $|\\sin it|=\\sinh|t|$ can be arbitrarily large."
+    ],
+    "plot": {
+      "type": "conformal",
+      "re": "exp(x)*cos(y)",
+      "im": "exp(x)*sin(y)",
+      "zRange": [
+        -1.2,
+        1.2
+      ],
+      "density": 8,
+      "title": "w = e^z：水平网格线映成射线，竖直网格线映成圆"
+    },
+    "examples": [
+      {
+        "problem": "计算 $e^{1+\\frac{\\pi}{2}i}$ 与 $e^{2+\\pi i}$，并验证 $e^{z+2\\pi i}=e^z$。",
+        "solution": "由 $e^{x+iy}=e^x(\\cos y+i\\sin y)$：\n$$e^{1+\\frac{\\pi}{2}i}=e\\left(\\cos\\frac{\\pi}{2}+i\\sin\\frac{\\pi}{2}\\right)=ei;$$\n$$e^{2+\\pi i}=e^2(\\cos\\pi+i\\sin\\pi)=-e^2.$$\n周期性：对任意 $z=x+iy$，\n$$e^{z+2\\pi i}=e^x\\bigl(\\cos(y+2\\pi)+i\\sin(y+2\\pi)\\bigr)=e^x(\\cos y+i\\sin y)=e^z.$$\n所以 $ei$ 也等于 $e^{1+\\frac{5\\pi}{2}i}=e^{1-\\frac{3\\pi}{2}i}$：同一个值对应无穷多个指数。"
+      },
+      {
+        "problem": "求 $\\operatorname{Ln}(-1)$ 的全部值、主值 $\\ln(-1)$，以及 $\\ln(1+i)$。",
+        "solution": "$|-1|=1$、$\\arg(-1)=\\pi$，故\n$$\\operatorname{Ln}(-1)=\\ln 1+i(\\pi+2k\\pi)=(2k+1)\\pi i,\\qquad k\\in\\mathbb{Z};$$\n主值取 $k=0$，得 $\\ln(-1)=\\pi i$（这正是欧拉公式 $e^{i\\pi}+1=0$ 的另一种写法）。\n\n对 $1+i$：$|1+i|=\\sqrt{2}$、$\\arg(1+i)=\\frac{\\pi}{4}$，所以\n$$\\ln(1+i)=\\ln\\sqrt{2}+i\\frac{\\pi}{4}=\\frac{1}{2}\\ln 2+\\frac{\\pi}{4}i.$$"
+      },
+      {
+        "problem": "证明 $\\sin z$ 在复平面上无界（与实数情形 |sin x| ≤ 1 形成对比）。",
+        "solution": "取 $z=it$（$t\\in\\mathbb{R}$），代入定义：\n$$\\sin(it)=\\frac{e^{i\\cdot it}-e^{-i\\cdot it}}{2i}=\\frac{e^{-t}-e^{t}}{2i}=\\frac{e^{t}-e^{-t}}{2}\\cdot i=i\\sinh t,$$\n其中用到 $\\frac{1}{2i}=-\\frac{i}{2}$。于是\n$$|\\sin(it)|=\\sinh t.$$\n当 $t\\to+\\infty$ 时 $\\sinh t\\to+\\infty$，所以 $|\\sin z|$ 可以取到任意大的值，$\\sin z$ 在复平面上无界。同理 $\\cos(it)=\\cosh t$ 也无界。"
+      }
+    ],
+    "tags": [
+      "初等复变函数",
+      "欧拉公式",
+      "对数多值性",
+      "周期函数"
+    ],
+    "links": [
+      "complex-function",
+      "complex-plane",
+      "exponential-function",
+      "logarithm",
+      "analytic-function"
+    ]
+  }
+]

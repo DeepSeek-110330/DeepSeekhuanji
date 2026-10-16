@@ -1,0 +1,481 @@
+[
+  {
+    "id": "orthonormal-basis",
+    "title": "正交基与傅里叶展开",
+    "titleEn": "Orthonormal Bases and Fourier Expansion",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "标准正交系是两两正交的单位向量系；它让求坐标只需做内积，贝塞尔不等式对任何标准正交系成立，而帕塞瓦尔等式与范数收敛的傅里叶展开恰好刻画完备性（正交基）。",
+    "summaryEn": "Orthonormal systems consist of mutually orthogonal unit vectors, making coordinates computable by inner products; Bessel's inequality always holds, while Parseval's identity and norm-convergent expansion characterize completeness (an orthonormal basis).",
+    "definition": "设 $H$ 是内积空间。若一列非零向量 $\\{e_n\\}$ 两两正交且每个都是单位向量，即 $\\langle e_i,e_j\\rangle=0$（$i\\ne j$）且 $\\|e_n\\|=1$，就称它是**标准正交系**；用克罗内克符号可简写为 $\\langle e_i,e_j\\rangle=\\delta_{ij}$（$i=j$ 时为 $1$，$i\\ne j$ 时为 $0$）。在标准正交系中求坐标不用解方程组：向量 $x$ 沿 $e_n$ 方向的坐标就是内积 $\\hat x_n=\\langle x,e_n\\rangle$，称为 $x$ 的**傅里叶系数**——因为把 $x$ 中其它方向的成分投影掉后，只剩下 $e_n$ 方向的贡献。\n\n这些坐标满足**贝塞尔不等式**：$\\sum_{n=1}^{\\infty}|\\langle x,e_n\\rangle|^2\\le\\|x\\|^2$。它说明所有坐标的「能量」之和不超过向量自身的能量，于是系数平方可和、$\\langle x,e_n\\rangle\\to0$。注意这条不等式**对任意标准正交系都成立，完全不需要完备性**。一般地，余项 $x-\\sum_{n=1}^N\\langle x,e_n\\rangle e_n$ 与每个 $e_n$ 都正交，由勾股定理得到能量等式：$\\|x\\|^2-\\sum_{n=1}^N|\\langle x,e_n\\rangle|^2=\\|x-\\sum_{n=1}^N\\langle x,e_n\\rangle e_n\\|^2$。\n\n**帕塞瓦尔等式** $\\sum_{n=1}^{\\infty}|\\langle x,e_n\\rangle|^2=\\|x\\|^2$ 成立**当且仅当** $\\{e_n\\}$ **完备**：唯一与所有 $e_n$ 正交的向量是零向量（等价地，$\\operatorname{span}\\{e_n\\}$ 在 $H$ 中稠密）。完备时每个向量都能展开成 $x=\\sum_{n=1}^{\\infty}\\langle x,e_n\\rangle e_n$（部分和**按范数收敛**），完备的标准正交系称为**正交基**（Hilbert 基）。若不完备，等号就不成立：如上式所见，差值恰恰是正交余项的平方长度。\n\n正交基把希尔伯特空间变成「坐标空间」：**可分**希尔伯特空间必有可数正交基（对可数稠密子集作 Gram–Schmidt 标准正交化），并且 $Ux=(\\langle x,e_1\\rangle,\\langle x,e_2\\rangle,\\dots)$ 给出 $H\\to\\ell^2$ 的**等距同构**——保内积、保范数。因此每个可分希尔伯特空间在几何上「就是」$\\ell^2$（「可分」不可省：不可分空间中完备标准正交系一定不可数）。经典实例是 $L^2[0,2\\pi]$ 的三角系 $\\frac1{\\sqrt{2\\pi}},\\frac{\\cos nx}{\\sqrt\\pi},\\frac{\\sin nx}{\\sqrt\\pi}$，它的展开就是通常的傅里叶级数。",
+    "definitionEn": "Let $H$ be an inner product space. A sequence of nonzero vectors $\\{e_n\\}$ is an **orthonormal system** if the vectors are pairwise orthogonal and have norm $1$, i.e. $\\langle e_i,e_j\\rangle=0$ for $i\\ne j$ and $\\|e_n\\|=1$; with the Kronecker symbol this reads $\\langle e_i,e_j\\rangle=\\delta_{ij}$ ($1$ if $i=j$, $0$ otherwise). In an orthonormal system coordinates require no linear system to solve: the coordinate of $x$ along $e_n$ is simply the inner product $\\hat x_n=\\langle x,e_n\\rangle$, the **Fourier coefficient** of $x$ — projecting away all other directions leaves exactly the $e_n$ contribution.\n\nThese coefficients satisfy **Bessel's inequality**: $\\sum_{n=1}^{\\infty}|\\langle x,e_n\\rangle|^2\\le\\|x\\|^2$. The total squared coordinate energy never exceeds that of the vector itself, so the coefficients are square-summable and $\\langle x,e_n\\rangle\\to0$. Crucially, this holds for **every** orthonormal system and **requires no completeness whatsoever**. In general the remainder $x-\\sum_{n=1}^N\\langle x,e_n\\rangle e_n$ is orthogonal to every $e_n$, and Pythagoras gives the energy identity $\\|x\\|^2-\\sum_{n=1}^N|\\langle x,e_n\\rangle|^2=\\|x-\\sum_{n=1}^N\\langle x,e_n\\rangle e_n\\|^2$.\n\n**Parseval's identity** $\\sum_{n=1}^{\\infty}|\\langle x,e_n\\rangle|^2=\\|x\\|^2$ holds **if and only if** $\\{e_n\\}$ is **complete**: the only vector orthogonal to every $e_n$ is the zero vector (equivalently, $\\operatorname{span}\\{e_n\\}$ is dense in $H$). Completeness is exactly what allows every $x$ to expand as $x=\\sum_{n=1}^{\\infty}\\langle x,e_n\\rangle e_n$, the partial sums converging **in norm**. A complete orthonormal system is called an **orthonormal basis** (Hilbert basis). If the system is incomplete, equality fails, and the deficit is precisely the squared length of the orthogonal remainder.\n\nAn orthonormal basis turns a Hilbert space into a coordinate space: every **separable** Hilbert space possesses a countable orthonormal basis (Gram–Schmidt applied to a countable dense subset), and $Ux=(\\langle x,e_1\\rangle,\\langle x,e_2\\rangle,\\dots)$ is an **isometric isomorphism** $H\\to\\ell^2$ preserving inner products and norms. Hence every separable Hilbert space is geometrically the same as $\\ell^2$ (separability cannot be dropped: in a non-separable space every complete orthonormal system is uncountable). The classical example is the trigonometric system $\\frac1{\\sqrt{2\\pi}},\\frac{\\cos nx}{\\sqrt\\pi},\\frac{\\sin nx}{\\sqrt\\pi}$ in $L^2[0,2\\pi]$, whose expansion is the ordinary Fourier series.",
+    "formulas": [
+      {
+        "latex": "\\langle e_i,e_j\\rangle=\\delta_{ij}:\\quad \\delta_{ij}=1\\ (i=j),\\qquad \\delta_{ij}=0\\ (i\\ne j)",
+        "note": "标准正交系的定义：两两正交（$i\\ne j$ 时内积为 $0$）且范数为 $1$（正交归一）；$\\delta_{ij}$ 是克罗内克符号。",
+        "noteEn": "Definition of an orthonormal system: pairwise orthogonal ($\\langle e_i,e_j\\rangle=0$ for $i\\ne j$) unit vectors; $\\delta_{ij}$ is the Kronecker delta."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}|\\langle x,e_n\\rangle|^2\\le\\|x\\|^2",
+        "note": "贝塞尔不等式：对**任意**标准正交系成立（不要求完备）；它保证系数平方可和，且 $\\langle x,e_n\\rangle\\to0$。",
+        "noteEn": "Bessel's inequality: valid for **every** orthonormal system (no completeness needed); it makes the coefficients square-summable and forces $\\langle x,e_n\\rangle\\to0$."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}|\\langle x,e_n\\rangle|^2=\\|x\\|^2\\iff \\{e_n\\}\\text{ complete}",
+        "note": "帕塞瓦尔等式：等号成立**当且仅当** $\\{e_n\\}$ 是完备的标准正交系（正交基）；不完备时严格小于。",
+        "noteEn": "Parseval's identity: equality holds **if and only if** $\\{e_n\\}$ is complete (an orthonormal basis); otherwise the inequality is strict."
+      },
+      {
+        "latex": "x=\\sum_{n=1}^{\\infty}\\langle x,e_n\\rangle e_n\\qquad\\text{(norm convergence)}",
+        "note": "傅里叶展开：$\\{e_n\\}$ 完备时成立，部分和按范数收敛到 $x$；这是通常傅里叶级数的抽象版本。",
+        "noteEn": "Fourier expansion: valid when $\\{e_n\\}$ is complete, with partial sums converging to $x$ in norm; the abstract version of the usual Fourier series."
+      },
+      {
+        "latex": "U:H\\to\\ell^2,\\qquad Ux=(\\langle x,e_1\\rangle,\\langle x,e_2\\rangle,\\dots),\\qquad \\|Ux\\|_{\\ell^2}=\\|x\\|",
+        "note": "可分希尔伯特空间与 $\\ell^2$ 等距同构：正交基提供坐标，把 $H$ 化归为唯一的 $\\ell^2$。",
+        "noteEn": "A separable Hilbert space is isometrically isomorphic to $\\ell^2$: an orthonormal basis supplies coordinates that reduce $H$ to the one and only $\\ell^2$."
+      }
+    ],
+    "properties": [
+      "标准正交系一定线性无关；若 $\\{e_n\\}$ 完备且 $\\langle x,e_n\\rangle=0$ 对一切 $n$ 成立，则 $x=0$。",
+      "对任意标准正交系都有贝塞尔不等式 $\\sum|\\langle x,e_n\\rangle|^2\\le\\|x\\|^2$（不需完备）；帕塞瓦尔等式 $\\sum|\\langle x,e_n\\rangle|^2=\\|x\\|^2$ 成立当且仅当该系完备。",
+      "正交基的部分和是最佳逼近：$\\|x-\\sum_{n=1}^N c_ne_n\\|^2$ 在 $c_n=\\langle x,e_n\\rangle$ 时取最小值 $\\|x\\|^2-\\sum_{n=1}^N|\\langle x,e_n\\rangle|^2$。",
+      "**可分**希尔伯特空间存在可数正交基，并通过 $U$ 与 $\\ell^2$ 等距同构；不可分空间的完备标准正交系不可数。",
+      "Gram–Schmidt 标准正交化：任意线性无关列 $\\{v_n\\}$ 可化为标准正交系 $e_n=\\big(v_n-\\sum_{k<n}\\langle v_n,e_k\\rangle e_k\\big)/\\big\\|v_n-\\sum_{k<n}\\langle v_n,e_k\\rangle e_k\\big\\|$，这是构造正交基的通用手段。"
+    ],
+    "propertiesEn": [
+      "An orthonormal system is linearly independent; if it is complete and $\\langle x,e_n\\rangle=0$ for all $n$, then $x=0$.",
+      "Bessel's inequality $\\sum|\\langle x,e_n\\rangle|^2\\le\\|x\\|^2$ holds for any orthonormal system (no completeness), while Parseval's identity $\\sum|\\langle x,e_n\\rangle|^2=\\|x\\|^2$ holds exactly when the system is complete.",
+      "Partial sums of an orthonormal basis give best approximation: $\\|x-\\sum_{n=1}^N c_ne_n\\|^2$ is minimized at $c_n=\\langle x,e_n\\rangle$, with minimum $\\|x\\|^2-\\sum_{n=1}^N|\\langle x,e_n\\rangle|^2$.",
+      "Every **separable** Hilbert space has a countable orthonormal basis and is isometrically isomorphic to $\\ell^2$ via $U$; in a non-separable space every complete orthonormal system is uncountable.",
+      "Gram–Schmidt: any linearly independent sequence $\\{v_n\\}$ becomes orthonormal via $e_n=\\big(v_n-\\sum_{k<n}\\langle v_n,e_k\\rangle e_k\\big)/\\big\\|v_n-\\sum_{k<n}\\langle v_n,e_k\\rangle e_k\\big\\|$, the standard way to build orthonormal bases."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "y = sin x"
+        },
+        {
+          "expr": "sin(2*x)",
+          "color": "#ff6b9d",
+          "label": "y = sin 2x"
+        },
+        {
+          "expr": "sin(3*x)",
+          "color": "#06d6a0",
+          "label": "y = sin 3x"
+        },
+        {
+          "expr": "sin(4*x)",
+          "color": "#ffd166",
+          "label": "y = sin 4x"
+        }
+      ],
+      "xRange": [
+        0,
+        6.3
+      ],
+      "yRange": [
+        -1.4,
+        1.4
+      ],
+      "title": "正交函数系 sin x, sin 2x, sin 3x, sin 4x（在 [0, 2π] 上两两正交）"
+    },
+    "examples": [
+      {
+        "problem": "验证贝塞尔不等式（并体会完备性的作用）：在 $L^2[0,2\\pi]$ 中取标准正交系 $e_n(x)=\\frac1{\\sqrt\\pi}\\sin nx$（$n\\ge1$），对 $f(x)=x$ 计算 $\\sum_{n=1}^{\\infty}|\\langle f,e_n\\rangle|^2$，并与 $\\|f\\|^2$ 比较。",
+        "solution": "先算傅里叶系数：$\\langle f,e_n\\rangle=\\frac1{\\sqrt\\pi}\\int_0^{2\\pi}x\\sin nx\\,dx=\\frac1{\\sqrt\\pi}\\cdot\\big(-\\frac{2\\pi}{n}\\big)=-\\frac{2\\sqrt\\pi}{n}$，故 $\\sum_{n=1}^{\\infty}|\\langle f,e_n\\rangle|^2=4\\pi\\sum_{n=1}^{\\infty}\\frac1{n^2}=4\\pi\\cdot\\frac{\\pi^2}{6}=\\frac{2\\pi^3}{3}$。又 $\\|f\\|^2=\\int_0^{2\\pi}x^2\\,dx=\\frac{8\\pi^3}{3}$。于是 $\\sum|\\langle f,e_n\\rangle|^2=\\frac{2\\pi^3}{3}<\\frac{8\\pi^3}{3}=\\|f\\|^2$，贝塞尔不等式成立且为严格不等式。由于取等号才意味着完备，可见 $\\{\\sin nx\\}$ 在 $L^2[0,2\\pi]$ 上**不完备**——事实上常数函数与 $\\cos x$ 都和所有 $\\sin nx$ 正交。（若改在 $[0,\\pi]$ 上取 $e_n=\\sqrt{2/\\pi}\\sin nx$，则它完备。）"
+      },
+      {
+        "problem": "用帕塞瓦尔等式求 $\\sum_{n=1}^{\\infty}\\frac1{n^2}$：在 $L^2[-\\pi,\\pi]$ 中取完备标准正交系 $\\frac1{\\sqrt{2\\pi}},\\frac{\\cos nx}{\\sqrt\\pi},\\frac{\\sin nx}{\\sqrt\\pi}\\ (n\\ge1)$，对 $f(x)=x$ 应用帕塞瓦尔等式。",
+        "solution": "$f(x)=x$ 是奇函数，故常数系数 $\\langle f,\\frac1{\\sqrt{2\\pi}}\\rangle=0$，余弦系数 $\\langle f,\\frac{\\cos nx}{\\sqrt\\pi}\\rangle=0$。正弦系数：$\\langle f,\\frac{\\sin nx}{\\sqrt\\pi}\\rangle=\\frac1{\\sqrt\\pi}\\int_{-\\pi}^{\\pi}x\\sin nx\\,dx=-\\frac{2\\sqrt\\pi(-1)^n}{n}$，平方和为 $\\sum_{n\\ge1}\\frac{4\\pi}{n^2}$。完备性使帕塞瓦尔等式成立：$\\sum_{n\\ge1}\\frac{4\\pi}{n^2}=\\|f\\|^2=\\int_{-\\pi}^{\\pi}x^2\\,dx=\\frac{2\\pi^3}{3}$，解出 $\\sum_{n=1}^{\\infty}\\frac1{n^2}=\\frac{\\pi^2}{6}$（巴塞尔问题）。"
+      }
+    ],
+    "tags": [
+      "希尔伯特空间",
+      "标准正交系",
+      "傅里叶展开",
+      "帕塞瓦尔等式"
+    ],
+    "links": [
+      "inner-product-space",
+      "orthogonality-projection",
+      "fourier-series",
+      "sturm-liouville"
+    ]
+  },
+  {
+    "id": "bounded-operators",
+    "title": "有界线性算子与算子范数",
+    "titleEn": "Bounded Linear Operators and the Operator Norm",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "有界线性算子就是连续线性算子；算子范数衡量它最大的拉伸倍数，算子空间配此范数成为赋范空间，目标空间完备时成为巴拿赫空间。",
+    "summaryEn": "Bounded linear operators are exactly the continuous ones; the operator norm measures the largest stretching factor, and the space of operators with this norm is a Banach space whenever the target space is complete.",
+    "definition": "设 $X,Y$ 是赋范线性空间，$T:X\\to Y$ 是线性算子。若存在常数 $C\\ge0$ 使 $\\|Tx\\|\\le C\\|x\\|$ 对一切 $x\\in X$ 成立，就称 $T$ **有界**。这里的有界指「像的大小被 $\\|x\\|$ 线性控制」，而不是函数论中「值域有界」的意思（对线性算子而言值域有界只有 $T=0$ 才可能）。所有可行常数 $C$ 中最小者称为**算子范数**：$\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|=\\sup_{x\\ne0}\\frac{\\|Tx\\|}{\\|x\\|}=\\inf\\{C\\ge0:\\|Tx\\|\\le C\\|x\\|\\ \\forall x\\}$。上确界不一定取到，所以写 $\\sup$ 而不是 $\\max$。由定义立得基本估计 $\\|Tx\\|\\le\\|T\\|\\,\\|x\\|$。\n\n线性算子的连续性有一条格外好用的等价链：**$T$ 有界 $\\iff$ $T$ 连续 $\\iff$ $T$ 在某一点连续**。只需在一个点验证连续性，线性性会自动把它扩散到全空间：若 $T$ 在 $x_0$ 连续而 $x_n\\to x$，则 $x_n-x_0\\to x-x_0$，由连续性 $T(x_n-x_0)\\to0$，于是 $Tx_n=Tx_0+T(x_n-x_0)\\to Tx_0$——注意论证方向是「有界 $\\Rightarrow$ 连续 $\\Rightarrow$ 一点连续」，反向由「一点连续 + 线性」推出有界。有界算子还是 Lipschitz 连续的：$\\|Tx-Ty\\|\\le\\|T\\|\\,\\|x-y\\|$。\n\n把全体有界线性算子记为 $B(X,Y)$（也写作 $\\mathcal L(X,Y)$），在逐点加法、数乘和算子范数下它构成**赋范线性空间**，并且 $\\|T\\|=0\\iff T=0$，复合满足次可乘性 $\\|ST\\|\\le\\|S\\|\\,\\|T\\|$。完备性由目标空间「买单」：只要 $Y$ 完备，$B(X,Y)$ 就是**巴拿赫空间**，与 $X$ 是否完备无关。理由很直观：算子列在每点处的 Cauchy 性借助 $Y$ 的完备性得到极限 $Tx=\\lim_nT_nx$，再验证 $T$ 线性、有界即可。数域 $\\mathbb F=\\mathbb R,\\mathbb C$ 总是完备的，所以对偶空间 $X^*=B(X,\\mathbb F)$ 对任何赋范空间 $X$ 都永远完备。\n\n与有限维线性代数不同，无穷维世界里「线性」绝不蕴含「连续」：例如求导算子只能定义在稠密子空间 $C^1[0,1]$ 上且无界，而有限维赋范空间上的任意线性算子自动有界。算子范数正是衡量连续性的刻度：它是 $T$ 把单位球拉伸的最大倍数。",
+    "definitionEn": "Let $X,Y$ be normed spaces and let $T:X\\to Y$ be linear. $T$ is **bounded** if there is a constant $C\\ge0$ with $\\|Tx\\|\\le C\\|x\\|$ for all $x\\in X$. Here boundedness means the image size is controlled linearly by $\\|x\\|$, not that the range is a bounded set — for a linear operator the latter forces $T=0$. The smallest admissible $C$ is the **operator norm** $\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|=\\sup_{x\\ne0}\\frac{\\|Tx\\|}{\\|x\\|}=\\inf\\{C\\ge0:\\|Tx\\|\\le C\\|x\\|\\ \\forall x\\}$; the supremum need not be attained, hence $\\sup$ rather than $\\max$. The basic estimate $\\|Tx\\|\\le\\|T\\|\\,\\|x\\|$ is immediate.\n\nFor linear maps, continuity collapses into one convenient chain: **$T$ is bounded $\\iff$ $T$ is continuous $\\iff$ $T$ is continuous at one point**. Checking a single point suffices, since linearity spreads continuity over the whole space: if $T$ is continuous at $x_0$ and $x_n\\to x$, then $T(x_n-x_0)\\to0$ and hence $Tx_n=Tx_0+T(x_n-x_0)\\to Tx_0$; conversely, continuity at one point plus linearity yields boundedness. A bounded operator is even Lipschitz: $\\|Tx-Ty\\|\\le\\|T\\|\\,\\|x-y\\|$.\n\nThe space $B(X,Y)$ (also written $\\mathcal L(X,Y)$) of all bounded linear operators, with pointwise operations and the operator norm, is a **normed space**, with $\\|T\\|=0$ iff $T=0$ and the submultiplicativity $\\|ST\\|\\le\\|S\\|\\,\\|T\\|$. Completeness is paid for by the target space: if $Y$ is complete then $B(X,Y)$ is a **Banach space**, no matter whether $X$ is complete. Indeed, a Cauchy sequence of operators is Cauchy in $Y$ at each fixed $x$; completeness of $Y$ produces a pointwise limit $Tx=\\lim_nT_nx$, and linearity plus boundedness of the limit follow routinely. Since $\\mathbb F=\\mathbb R,\\mathbb C$ is always complete, the dual space $X^*=B(X,\\mathbb F)$ is complete for every normed space $X$.\n\nUnlike finite-dimensional linear algebra, linearity never implies continuity in infinite dimensions: the differentiation operator, for instance, is unbounded and can only live on a dense subspace such as $C^1[0,1]$, whereas every linear operator on a finite-dimensional normed space is automatically bounded. The operator norm is precisely the scale of continuity — the largest factor by which $T$ stretches the unit ball.",
+    "formulas": [
+      {
+        "latex": "\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|=\\sup_{x\\ne0}\\frac{\\|Tx\\|}{\\|x\\|}=\\inf\\{C\\ge0:\\|Tx\\|\\le C\\|x\\|\\ \\forall x\\}",
+        "note": "算子范数的三种等价写法：单位球上的最大像长、最大相对拉伸倍数、最小控制常数；上确界不必取到。",
+        "noteEn": "Three equivalent expressions for the operator norm: largest image length on the unit ball, largest relative stretching factor, smallest domination constant; the supremum need not be attained."
+      },
+      {
+        "latex": "\\|Tx\\|\\le\\|T\\|\\,\\|x\\|",
+        "note": "基本估计式，一切算子估计的出发点；也说明有界算子把单位球映进半径 $\\|T\\|$ 的球。",
+        "noteEn": "The basic estimate underlying all operator inequalities; it says a bounded operator maps the unit ball into the ball of radius $\\|T\\|$."
+      },
+      {
+        "latex": "T\\ \\text{bounded}\\iff T\\ \\text{continuous}\\iff T\\ \\text{continuous at one point}",
+        "note": "等价链：有界 $\\Rightarrow$ 连续（Lipschitz）$\\Rightarrow$ 一点连续，反向由「一点连续 + 线性」推出有界；对线性算子验连续性只需验一点。",
+        "noteEn": "The equivalence chain: bounded $\\Rightarrow$ continuous (Lipschitz) $\\Rightarrow$ continuous at one point, and conversely one point plus linearity gives boundedness; for linear maps one point suffices."
+      },
+      {
+        "latex": "Y\\ \\text{complete}\\ \\Longrightarrow\\ B(X,Y)\\ \\text{is a Banach space}",
+        "note": "算子空间完备性只依赖目标空间 $Y$ 完备（$X$ 不必完备）；特别地 $X^*=B(X,\\mathbb F)$ 永远完备。",
+        "noteEn": "Completeness of $B(X,Y)$ requires only the target $Y$ to be complete ($X$ may be incomplete); in particular $X^*=B(X,\\mathbb F)$ is always complete."
+      },
+      {
+        "latex": "\\|ST\\|\\le\\|S\\|\\,\\|T\\|",
+        "note": "次可乘性：$\\|STx\\|\\le\\|S\\|\\,\\|Tx\\|\\le\\|S\\|\\,\\|T\\|\\,\\|x\\|$，故复合的范数不超过范数之积。",
+        "noteEn": "Submultiplicativity: $\\|STx\\|\\le\\|S\\|\\,\\|Tx\\|\\le\\|S\\|\\,\\|T\\|\\,\\|x\\|$, so the norm of a composition is at most the product of the norms."
+      }
+    ],
+    "properties": [
+      "有界性给出 Lipschitz 连续性：$\\|Tx-Ty\\|\\le\\|T\\|\\,\\|x-y\\|$；因此「有界 $\\iff$ 连续 $\\iff$ 在某一点连续」。",
+      "有限维赋范空间上的线性算子自动有界；无穷维中存在无界线性算子（如求导算子，定义在稠密子空间上），所以线性与连续之间没有「免费」的桥梁。",
+      "$B(X,Y)$ 在逐点运算与算子范数下是赋范空间，复合满足 $\\|ST\\|\\le\\|S\\|\\,\\|T\\|$；算子序列按范数收敛（一致收敛）蕴含逐点收敛，反之不然。",
+      "**$Y$ 完备 $\\Rightarrow$ $B(X,Y)$ 是巴拿赫空间**（$X$ 是否完备无关）；特别地 $X^*=B(X,\\mathbb F)$ 永远完备。",
+      "按范数收敛严格强于逐点收敛：$\\ell^2$ 上 $T_nx=x_ne_1$ 满足 $T_nx\\to0$ 对每个 $x$，但 $\\|T_n\\|=1\\not\\to0$。"
+    ],
+    "propertiesEn": [
+      "Boundedness yields Lipschitz continuity: $\\|Tx-Ty\\|\\le\\|T\\|\\,\\|x-y\\|$; hence bounded $\\iff$ continuous $\\iff$ continuous at one point.",
+      "Every linear operator on a finite-dimensional normed space is bounded; in infinite dimensions unbounded linear operators exist (e.g. differentiation on a dense subspace), so linearity alone never buys continuity.",
+      "$B(X,Y)$ is a normed space under pointwise operations and the operator norm, with $\\|ST\\|\\le\\|S\\|\\,\\|T\\|$; norm convergence (uniform convergence) implies pointwise convergence, but not conversely.",
+      "$Y$ complete $\\Rightarrow$ $B(X,Y)$ is a Banach space (no completeness needed on $X$); in particular $X^*=B(X,\\mathbb F)$ is always complete.",
+      "Norm convergence is strictly stronger than pointwise convergence: on $\\ell^2$, $T_nx=x_ne_1$ gives $T_nx\\to0$ for every $x$, yet $\\|T_n\\|=1\\not\\to0$."
+    ],
+    "examples": [
+      {
+        "problem": "设 $C[0,1]$ 用上确界范数，$T:C[0,1]\\to C[0,1]$，$(Tf)(x)=\\int_0^xf(t)\\,dt$。证明 $T$ 有界并求 $\\|T\\|$。",
+        "solution": "对任意 $x\\in[0,1]$，$|(Tf)(x)|\\le\\int_0^x|f(t)|\\,dt\\le x\\|f\\|_\\infty\\le\\|f\\|_\\infty$，故 $\\|Tf\\|_\\infty\\le\\|f\\|_\\infty$，得 $\\|T\\|\\le1$。取 $f\\equiv1$，则 $\\|f\\|_\\infty=1$ 且 $(Tf)(x)=x$，$\\|Tf\\|_\\infty=1$，所以 $\\|T\\|=1$（由 $f\\equiv1$ 取到）。注意 $T$ 有界且单射但不满射（像中函数满足 $g(0)=0$），有界性不等于可逆性。"
+      },
+      {
+        "problem": "在 $\\ell^2$ 上定义对角算子 $T(x_1,x_2,\\dots)=(\\lambda_1x_1,\\lambda_2x_2,\\dots)$。证明：$T$ 有界当且仅当 $(\\lambda_n)$ 有界，且此时 $\\|T\\|=\\sup_n|\\lambda_n|$。",
+        "solution": "由基本估计式：$\\|Tx\\|_2^2=\\sum_n|\\lambda_n|^2|x_n|^2\\le M^2\\|x\\|_2^2$（$M=\\sup_n|\\lambda_n|$），故 $\\|T\\|\\le M$。反向：给定 $\\varepsilon>0$，取 $N$ 使 $|\\lambda_N|>M-\\varepsilon$（若 $M=\\infty$，取 $|\\lambda_N|>1/\\varepsilon$），令 $x=e_N$，则 $\\|x\\|_2=1$ 且 $\\|Tx\\|_2=|\\lambda_N|$，故 $\\|T\\|\\ge M-\\varepsilon$（或 $\\ge1/\\varepsilon$）。令 $\\varepsilon\\to0$ 得 $\\|T\\|=M$，于是 $T$ 有界 $\\iff M<\\infty$。当 $M=\\infty$ 时把 $T$ 定义在稠密子空间 $\\{x:\\sum n^2|x_n|^2<\\infty\\}$ 上，就得到无界线性算子的典型例子。"
+      }
+    ],
+    "tags": [
+      "算子范数",
+      "有界线性算子",
+      "连续线性算子",
+      "巴拿赫空间"
+    ],
+    "links": [
+      "normed-space",
+      "banach-space",
+      "dual-space",
+      "compact-operators"
+    ]
+  },
+  {
+    "id": "dual-space",
+    "title": "对偶空间与里斯表示定理",
+    "titleEn": "Dual Spaces and the Riesz Representation Theorem",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "对偶空间由全体有界线性泛函组成，永远完备；在希尔伯特空间上，每个有界线性泛函都由唯一的一个内积给出（里斯表示定理），且范数相符。",
+    "summaryEn": "The dual space of all bounded linear functionals is always complete; on a Hilbert space every bounded linear functional is given by a unique inner product representation (Riesz), with equal norms.",
+    "definition": "设 $X$ 是数域 $\\mathbb F$（$\\mathbb R$ 或 $\\mathbb C$）上的赋范线性空间。$X$ 上的**有界线性泛函**就是线性映射 $f:X\\to\\mathbb F$，即标量值的有界线性算子，其范数为 $\\|f\\|=\\sup_{\\|x\\|\\le1}|f(x)|=\\sup_{x\\ne0}\\frac{|f(x)|}{\\|x\\|}$。全体这样的泛函构成 $X$ 的**对偶空间** $X^*=B(X,\\mathbb F)$。由于标量域 $\\mathbb F$ 总是完备的，由算子空间的完备性定理立刻得到一条极重要的结论：**$X^*$ 永远是巴拿赫空间，无论 $X$ 本身是否完备**（例如 $X=c_{00}$ 只是赋范空间，$X^*$ 仍然完备）。这与开映射、闭图像等「必须要求定义域完备」的定理形成鲜明对照。\n\n对偶空间的作用是用「函数」观察「向量」：$x$ 的全部信息记录在数组 $(f(x))_{f\\in X^*}$ 中。这种做法可行的前提是对偶空间足够「大」，即对每个 $x\\ne0$ 都存在 $f\\in X^*$ 使 $f(x)\\ne0$；这条性质一般要靠哈恩-巴拿赫定理来保证，并进一步给出范数的对偶表示 $\\|x\\|=\\max_{\\|f\\|\\le1}|f(x)|$。\n\n当 $H$ 是**希尔伯特空间**时，对偶空间可以完全算清——这就是**里斯表示定理**：设 $H$ 是希尔伯特空间（约定内积 $\\langle\\cdot,\\cdot\\rangle$ 对第一个变量线性、对第二个变量共轭线性），$f:H\\to\\mathbb F$ 是任意有界线性泛函，则存在**唯一**的 $y\\in H$ 使 $f(x)=\\langle x,y\\rangle$ 对一切 $x\\in H$ 成立，并且 $\\|f\\|=\\|y\\|$。也就是说，$H^*$ 中每个泛函都「是」一个内积，范数完全由表示向量承担。证明的几何想法很干净：若 $f\\ne0$，则 $\\ker f$ 是真**闭**子空间，取 $z\\perp\\ker f$、$\\|z\\|=1$，由正交分解 $H=\\ker f\\oplus(\\ker f)^\\perp$ 知 $(\\ker f)^\\perp$ 是一维的，于是必有 $y=\\overline{f(z)}\\,z$。\n\n对应 $f\\mapsto y$ 是 $H^*\\to H$ 的**共轭线性等距同构**：$f+g\\mapsto y_f+y_g$，$\\alpha f\\mapsto\\overline\\alpha\\,y_f$，实情形即普通的等距同构，因此常说希尔伯特空间是**自对偶**的。定理的两个条件都不能省：$H$ 必须**完备**（否则表示向量可能根本不存在，见例题），$f$ 必须**有界**（内积表示天然有界：$|f(x)|\\le\\|y\\|\\,\\|x\\|$，故无界线性泛函不可能有内积表示）。此外还有 $L^p$ 版本：$(L^p)^*\\cong L^q$（$\\frac1p+\\frac1q=1$，$1<p<\\infty$），对偶元素由积分配对 $\\int fg$ 给出；$\\ell^p$ 的对偶是 $\\ell^q$，特别地 $(\\ell^1)^*=\\ell^\\infty$。",
+    "definitionEn": "Let $X$ be a normed space over $\\mathbb F=\\mathbb R$ or $\\mathbb C$. A **bounded linear functional** on $X$ is a linear map $f:X\\to\\mathbb F$ — a scalar-valued bounded linear operator — with norm $\\|f\\|=\\sup_{\\|x\\|\\le1}|f(x)|=\\sup_{x\\ne0}\\frac{|f(x)|}{\\|x\\|}$. All of them form the **dual space** $X^*=B(X,\\mathbb F)$. Since the scalar field $\\mathbb F$ is complete, completeness of $B(X,Y)$ yields a key fact: **$X^*$ is always a Banach space, whether or not $X$ is complete** (e.g. $X=c_{00}$ is merely normed, yet $X^*$ is complete). This stands in sharp contrast with open mapping and closed graph theorems, which do require completeness of the domain.\n\nThe dual space is designed to observe vectors by functions: all information about $x$ is recorded in the array $(f(x))_{f\\in X^*}$. This requires the dual to be large enough — for every $x\\ne0$ there should exist $f\\in X^*$ with $f(x)\\ne0$ — a fact usually provided by the Hahn–Banach theorem, which also gives the dual formula for the norm $\\|x\\|=\\max_{\\|f\\|\\le1}|f(x)|$.\n\nWhen $H$ is a **Hilbert space**, the dual can be computed completely — this is the **Riesz representation theorem**: let $H$ be a Hilbert space (inner product linear in the first variable, conjugate-linear in the second) and $f:H\\to\\mathbb F$ a bounded linear functional. Then there is a **unique** $y\\in H$ with $f(x)=\\langle x,y\\rangle$ for all $x\\in H$, and $\\|f\\|=\\|y\\|$. Every functional on $H^*$ *is* an inner product, with the norm entirely carried by the representing vector. The geometric proof is clean: if $f\\ne0$, then $\\ker f$ is a proper **closed** subspace; pick $z\\perp\\ker f$ with $\\|z\\|=1$. The orthogonal decomposition $H=\\ker f\\oplus(\\ker f)^\\perp$ makes $(\\ker f)^\\perp$ one-dimensional, so necessarily $y=\\overline{f(z)}\\,z$.\n\nThe map $f\\mapsto y$ is a **conjugate-linear isometric isomorphism** $H^*\\to H$: $f+g\\mapsto y_f+y_g$ and $\\alpha f\\mapsto\\overline\\alpha\\,y_f$, and in the real case simply an isometric isomorphism; hence Hilbert spaces are called **self-dual**. Both hypotheses are indispensable: $H$ must be **complete** (otherwise the representing vector may not exist — see the example), and $f$ must be **bounded** (an inner product representation is automatically bounded: $|f(x)|\\le\\|y\\|\\,\\|x\\|$, so unbounded functionals admit no such representation). There is also an $L^p$ version: $(L^p)^*\\cong L^q$ for $\\frac1p+\\frac1q=1$, $1<p<\\infty$, with the integral pairing $\\int fg$; in particular $(\\ell^p)^*=\\ell^q$ and $(\\ell^1)^*=\\ell^\\infty$.",
+    "formulas": [
+      {
+        "latex": "X^*=B(X,\\mathbb F),\\qquad \\|f\\|=\\sup_{\\|x\\|\\le1}|f(x)|",
+        "note": "对偶空间的定义与范数；由 $\\mathbb F$ 完备立得 **$X^*$ 是巴拿赫空间，不要求 $X$ 完备**。",
+        "noteEn": "Definition and norm of the dual; completeness of $\\mathbb F$ makes **$X^*$ a Banach space, with no completeness required of $X$**."
+      },
+      {
+        "latex": "\\forall f\\in H^*\\ \\ \\exists!\\,y\\in H:\\quad f(x)=\\langle x,y\\rangle\\quad\\forall x\\in H",
+        "note": "里斯表示定理：存在且**唯一**；唯一性由「$\\langle x,y\\rangle=0$ 对一切 $x$ 成立 $\\Rightarrow y=0$」立得。",
+        "noteEn": "The Riesz representation theorem: existence and **uniqueness**; uniqueness follows since $\\langle x,y\\rangle=0$ for all $x$ forces $y=0$."
+      },
+      {
+        "latex": "\\|f\\|=\\|y\\|",
+        "note": "范数等式：表示映射是等距的。$|f(x)|\\le\\|y\\|\\,\\|x\\|$ 给出 $\\le$；取 $x=y/\\|y\\|$（$y=0$ 时平凡）给出 $\\ge$。",
+        "noteEn": "The representation is isometric: $|f(x)|\\le\\|y\\|\\,\\|x\\|$ gives $\\le$, while $x=y/\\|y\\|$ (trivial if $y=0$) gives $\\ge$."
+      },
+      {
+        "latex": "H^*\\cong H\\qquad(\\text{conjugate-linear isometric isomorphism})",
+        "note": "复情形 $f\\mapsto y$ 共轭线性（$\\alpha f\\mapsto\\overline\\alpha y_f$），实情形是等距同构；故希尔伯特空间自对偶。",
+        "noteEn": "In the complex case $f\\mapsto y$ is conjugate-linear ($\\alpha f\\mapsto\\overline\\alpha y_f$), in the real case an isometric isomorphism; hence Hilbert spaces are self-dual."
+      },
+      {
+        "latex": "(L^p)^*\\cong L^q,\\qquad \\frac1p+\\frac1q=1,\\qquad 1<p<\\infty",
+        "note": "$L^p$ 的里斯表示：对偶由 $L^q$ 通过积分配对 $\\int fg$ 给出；特例 $(\\ell^p)^*=\\ell^q$、$(\\ell^1)^*=\\ell^\\infty$。",
+        "noteEn": "Riesz representation for $L^p$: the dual is $L^q$ via the integral pairing $\\int fg$; special cases $(\\ell^p)^*=\\ell^q$ and $(\\ell^1)^*=\\ell^\\infty$."
+      }
+    ],
+    "properties": [
+      "$X^*=B(X,\\mathbb F)$ **永远完备**：即使 $X$ 不完备，$X^*$ 也是巴拿赫空间（完备性来自值域 $\\mathbb F$）。",
+      "里斯表示定理要求 $H$ **完备**、$f$ **有界**：缺了完备性，表示向量可能不存在（$c_{00}$ 上的反例）；无界线性泛函则没有内积表示。",
+      "$f\\mapsto y$ 是 $H^*\\to H$ 的共轭线性等距同构，$\\|f\\|=\\|y\\|$；因此 $H^*$ 可以「当成」$H$ 本身（自对偶）。",
+      "范数的对偶表示 $\\|x\\|=\\max_{\\|f\\|\\le1}|f(x)|$：右端的最大值一定取到（依赖哈恩-巴拿赫定理），说明对偶泛函不仅「足够多」，还能精确读出范数。",
+      "由里斯对应可以看清两种收敛的差别：$\\ell^2$ 中 $e_n$ 作为泛函满足 $f_n(x)=\\langle x,e_n\\rangle\\to0$ 对每个 $x$，但 $\\|f_n\\|=\\|e_n\\|=1$——对偶空间中的「逐点收敛」（弱*收敛）严格弱于范数收敛。"
+    ],
+    "propertiesEn": [
+      "$X^*=B(X,\\mathbb F)$ is **always complete**: even if $X$ is incomplete, $X^*$ is a Banach space (completeness comes from the scalar field $\\mathbb F$).",
+      "The Riesz representation theorem needs $H$ **complete** and $f$ **bounded**: without completeness the representing vector may fail to exist (counterexample on $c_{00}$), and unbounded functionals have no inner product representation.",
+      "The map $f\\mapsto y$ is a conjugate-linear isometric isomorphism $H^*\\to H$ with $\\|f\\|=\\|y\\|$; so $H^*$ may be identified with $H$ itself (self-duality).",
+      "Dual formula for the norm: $\\|x\\|=\\max_{\\|f\\|\\le1}|f(x)|$ — the maximum is attained (via Hahn–Banach), so dual functionals not only abound, they read off the norm exactly.",
+      "The Riesz correspondence exhibits two notions of convergence: in $\\ell^2$, the functionals $f_n(x)=\\langle x,e_n\\rangle$ satisfy $f_n(x)\\to0$ for every $x$, while $\\|f_n\\|=\\|e_n\\|=1$ — pointwise convergence in the dual (weak-star) is strictly weaker than norm convergence."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\ell^2$ 上定义 $f(x)=\\sum_{n=1}^{\\infty}\\frac{x_n}{n}$。证明 $f$ 有界，并用里斯表示定理求出表示向量与 $\\|f\\|$。",
+        "solution": "由柯西-施瓦茨不等式，$|f(x)|\\le\\big(\\sum_{n\\ge1}\\frac1{n^2}\\big)^{1/2}\\|x\\|_2=\\frac{\\pi}{\\sqrt6}\\|x\\|_2$，故 $f\\in(\\ell^2)^*$。由 $f(e_n)=\\frac1n=\\langle e_n,y\\rangle=\\overline{y_n}$ 得表示向量 $y=(1/n)_{n\\ge1}\\in\\ell^2$，且 $\\|f\\|=\\|y\\|_2=\\Big(\\sum_{n\\ge1}\\frac1{n^2}\\Big)^{1/2}=\\frac{\\pi}{\\sqrt6}\\approx1.2825$。"
+      },
+      {
+        "problem": "取 $H_0=c_{00}$（有限支撑数列）配 $\\ell^2$ 内积，说明它不是希尔伯特空间，且里斯表示定理在它上面失效。",
+        "solution": "$c_{00}$ 在 $\\ell^2$ 中稠密但不闭。例如 $x^{(N)}=(1,\\frac12,\\dots,\\frac1N,0,\\dots)$ 是 Cauchy 列，但其极限 $(1/n)\\notin c_{00}$，故 $(c_{00},\\langle\\cdot,\\cdot\\rangle_{\\ell^2})$ 不完备。泛函 $f(x)=\\sum_n\\frac{x_n}{n}$ 在 $c_{00}$ 上有界；若存在 $y\\in c_{00}$ 使 $f(x)=\\langle x,y\\rangle$ 对一切 $x\\in c_{00}$ 成立，则由 $x=e_n$ 得 $y_n=\\overline{f(e_n)}=\\frac1n$，即 $y=(1/n)\\notin c_{00}$，矛盾。完备性确实不可省：不完备时对偶空间可能比空间本身「大得多」，表示向量无处安放。"
+      }
+    ],
+    "tags": [
+      "对偶空间",
+      "有界线性泛函",
+      "里斯表示定理",
+      "自对偶"
+    ],
+    "links": [
+      "inner-product-space",
+      "bounded-operators",
+      "hahn-banach",
+      "orthogonality-projection"
+    ]
+  },
+  {
+    "id": "hahn-banach",
+    "title": "哈恩-巴拿赫定理",
+    "titleEn": "The Hahn–Banach Theorem",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "子空间上的线性泛函只要被次线性泛函控制，就能延拓到整个空间并保持控制；几何上它等价于凸集分离定理，是「对偶空间足够多」的根本保证。",
+    "summaryEn": "A linear functional dominated by a sublinear functional on a subspace extends to the whole space while keeping the domination; geometrically it is the separation theorem for convex sets and the source of the abundance of dual functionals.",
+    "definition": "**哈恩-巴拿赫定理（延拓形式）**：设 $X$ 是**实**线性空间，$p:X\\to\\mathbb R$ 是**次线性泛函**，即满足 $p(x+y)\\le p(x)+p(y)$ 与 $p(\\alpha x)=\\alpha\\,p(x)$（$\\alpha\\ge0$）；设 $M\\subseteq X$ 是**子空间**，$f:M\\to\\mathbb R$ 是线性泛函，且在 $M$ 上被 $p$ 控制：$f(x)\\le p(x)$ 对一切 $x\\in M$。那么存在 $X$ 上的线性泛函 $F$，使 $F|_M=f$（延拓）且 $F(x)\\le p(x)$ 对一切 $x\\in X$（保持控制）。注意假设之弱：$X$ 只需是线性空间——不需要范数、更不需要完备性；$p$ 只需次线性；结论是**存在性**，延拓一般并不唯一。\n\n**复形式**：设 $X$ 是复线性空间，$p$ 是**半范数**（$p(\\alpha x)=|\\alpha|\\,p(x)$ 且次线性），$f:M\\to\\mathbb C$ 复线性且 $|f(x)|\\le p(x)$ 在 $M$ 上成立，则存在复线性延拓 $F$ 使 $|F(x)|\\le p(x)$ 在 $X$ 上成立。证明思路：先对实部使用实形式的定理（$\\operatorname{Re}f$ 被 $p$ 控制），再用 $f(x)=\\operatorname{Re}f(x)-i\\,\\operatorname{Re}f(ix)$ 把虚部补回来。定理的证明工具是**佐恩引理**：在「被 $p$ 控制的全体延拓」组成的偏序集中取极大元，再用一次一维延拓论证说明极大元必须定义在整个 $X$ 上——把 $f$ 从 $M$ 向 $M+\\mathbb R x_0$ 延拓时，斜率可选范围由 $p$ 的次可加性保证非空。\n\n**赋范空间的两条核心推论**。其一，**保范延拓**：设 $M$ 是赋范空间 $X$ 的子空间，$f\\in M^*$，则存在 $F\\in X^*$ 使 $F|_M=f$ 且 $\\|F\\|_{X^*}=\\|f\\|_{M^*}$（对 $p(x)=\\|f\\|\\,\\|x\\|$ 使用定理即得）。其二，**对偶分离点**：对每个 $x_0\\ne0$，存在 $f\\in X^*$ 使 $\\|f\\|=1$ 且 $f(x_0)=\\|x_0\\|$——先在 $M=\\operatorname{span}\\{x_0\\}$ 上定义 $f(tx_0)=t\\|x_0\\|$ 再保范延拓。这条看似简单的结论**必须**依赖哈恩-巴拿赫定理（其存在性没有初等证明），它是「对偶空间有足够多泛函」的精确含义，也顺带给出范数公式 $\\|x\\|=\\max\\{|f(x)|:\\|f\\|\\le1\\}$。\n\n**几何形式（凸集分离定理）**：设 $A,B$ 是赋范空间 $X$ 中两个不交的非空凸集，其中 $A$ 是开集（更一般地 $\\operatorname{int}A\\ne\\varnothing$）。则存在非零 $f\\in X^*$ 与实数 $c$，使 $f(a)<c\\le f(b)$ 对一切 $a\\in A$、$b\\in B$ 成立；即超平面 $\\{x:f(x)=c\\}$ 把 $A$ 与 $B$ 分离。证明办法是把问题化为泛函延拓：以闵可夫斯基泛函 $p(x)=\\inf\\{\\lambda>0:\\ x\\in\\lambda C\\}$（凸吸收集 $C$ 上的次线性泛函）为控制函数。几何形式与泛函形式等价，是凸分析、最优化与支撑超平面理论的出发点。",
+    "definitionEn": "**The Hahn–Banach theorem (extension form)**: let $X$ be a **real** linear space, $p:X\\to\\mathbb R$ a **sublinear functional**, i.e. $p(x+y)\\le p(x)+p(y)$ and $p(\\alpha x)=\\alpha\\,p(x)$ for $\\alpha\\ge0$; let $M\\subseteq X$ be a **subspace** and $f:M\\to\\mathbb R$ linear with $f(x)\\le p(x)$ on all of $M$. Then there exists a linear functional $F$ on $X$ with $F|_M=f$ (extension) and $F(x)\\le p(x)$ for all $x\\in X$ (the domination is preserved). Note how weak the hypotheses are: $X$ need only be a linear space — no norm, and certainly no completeness; $p$ merely sublinear; and the conclusion is **existence** — the extension is generally not unique.\n\n**Complex form**: let $X$ be a complex linear space, $p$ a **seminorm** ($p(\\alpha x)=|\\alpha|\\,p(x)$, sublinear), and $f:M\\to\\mathbb C$ complex-linear with $|f(x)|\\le p(x)$ on $M$. Then $f$ admits a complex-linear extension $F$ with $|F(x)|\\le p(x)$ on $X$. Idea: apply the real form to the real part ($\\operatorname{Re}f$ is dominated by $p$) and recover the imaginary part through $f(x)=\\operatorname{Re}f(x)-i\\,\\operatorname{Re}f(ix)$. The proof uses **Zorn's lemma**: take a maximal element among all extensions dominated by $p$, then show by a one-dimensional extension argument that maximality forces the domain to be all of $X$ — extending $f$ from $M$ to $M+\\mathbb R x_0$ is always possible because subadditivity of $p$ leaves a nonempty interval of admissible slopes.\n\n**Two central corollaries in normed spaces.** First, **norm-preserving extension**: if $M$ is a subspace of a normed space $X$ and $f\\in M^*$, then there is $F\\in X^*$ with $F|_M=f$ and $\\|F\\|_{X^*}=\\|f\\|_{M^*}$ (apply the theorem with $p(x)=\\|f\\|\\,\\|x\\|$). Second, **separation of points**: for every $x_0\\ne0$ there exists $f\\in X^*$ with $\\|f\\|=1$ and $f(x_0)=\\|x_0\\|$ — define $f(tx_0)=t\\|x_0\\|$ on $M=\\operatorname{span}\\{x_0\\}$ and extend with equal norm. Simple as it looks, this **requires** the Hahn–Banach theorem (no elementary proof exists); it is the precise meaning of the dual space being rich, and it yields the norm formula $\\|x\\|=\\max\\{|f(x)|:\\|f\\|\\le1\\}$.\n\n**Geometric form (separation of convex sets)**: let $A,B$ be disjoint nonempty convex sets in a normed space $X$, with $A$ open (more generally $\\operatorname{int}A\\ne\\varnothing$). Then there are a nonzero $f\\in X^*$ and a real $c$ with $f(a)<c\\le f(b)$ for all $a\\in A$, $b\\in B$; that is, the hyperplane $\\{x:f(x)=c\\}$ separates $A$ from $B$. The proof reduces separation to extension, using the Minkowski functional $p(x)=\\inf\\{\\lambda>0:\\ x\\in\\lambda C\\}$ of a convex absorbing set $C$ as the dominating sublinear functional. The geometric form is equivalent to the functional one and is the starting point of convex analysis, optimization, and supporting hyperplane theory.",
+    "formulas": [
+      {
+        "latex": "f(x)\\le p(x)\\ (x\\in M)\\quad\\Longrightarrow\\quad\\exists F\\ \\text{linear on } X:\\quad F|_M=f,\\quad F(x)\\le p(x)\\ (x\\in X)",
+        "note": "实形式延拓定理：$X$ 只需线性空间、$p$ 只需次线性；结论是存在性，$F$ 一般并不唯一。",
+        "noteEn": "The real extension theorem: $X$ need only be a linear space and $p$ sublinear; the conclusion is existence — $F$ is generally not unique."
+      },
+      {
+        "latex": "F|_M=f,\\qquad \\|F\\|_{X^*}=\\|f\\|_{M^*}",
+        "note": "赋范空间的保范延拓推论——哈恩-巴拿赫最常用的形式（取 $p(x)=\\|f\\|\\,\\|x\\|$）。",
+        "noteEn": "Norm-preserving extension in normed spaces, the most frequently used form (apply the theorem with $p(x)=\\|f\\|\\,\\|x\\|$)."
+      },
+      {
+        "latex": "\\forall x_0\\ne0\\quad\\exists f\\in X^*:\\quad \\|f\\|=1,\\quad f(x_0)=\\|x_0\\|",
+        "note": "对偶分离点：存在范数为 $1$ 的泛函把 $x_0$ 处的值「拉满」到 $\\|x_0\\|$；存在性依赖哈恩-巴拿赫定理。",
+        "noteEn": "Separation of points by the dual: some unit functional attains the value $\\|x_0\\|$ at $x_0$; existence relies on Hahn–Banach."
+      },
+      {
+        "latex": "\\|x\\|=\\max\\{|f(x)|:\\ f\\in X^*,\\ \\|f\\|\\le1\\}",
+        "note": "范数的对偶公式：$\\le$ 由 $|f(x)|\\le\\|f\\|\\,\\|x\\|$ 立得，等号由上一行的 $f$ 取到；最大值可达。",
+        "noteEn": "Dual formula for the norm: $\\le$ follows from $|f(x)|\\le\\|f\\|\\,\\|x\\|$, equality is attained by the functional above; the maximum exists."
+      },
+      {
+        "latex": "A\\cap B=\\varnothing,\\ A\\ \\text{convex open}\\quad\\Longrightarrow\\quad\\exists f\\ne0,\\ c:\\quad f(a)<c\\le f(b)\\ \\ (a\\in A,\\ b\\in B)",
+        "note": "几何形式（凸集分离定理）：不交凸集可由闭超平面 $\\{f=c\\}$ 分离，与泛函形式等价。",
+        "noteEn": "Geometric form (separation of convex sets): disjoint convex sets are separated by the hyperplane $\\{f=c\\}$; equivalent to the functional form."
+      }
+    ],
+    "properties": [
+      "假设极弱：$X$ 无需完备、甚至无需赋范（线性空间即可），$p$ 只需求次线性；因此定理对纯代数的对偶也适用。",
+      "结论是**存在性**：延拓一般不唯一（见例题 1），定理也不给出构造公式（证明是非构造性的，依赖佐恩引理）。",
+      "赋范空间的两条推论：任何有界线性泛函可保范延拓到全空间；对任意 $x\\ne0$ 存在 $\\|f\\|=1$ 且 $f(x)=\\|x\\|$ 的泛函——它们是「对偶空间足够多」的来源，也是自然嵌入 $J:X\\to X^{**}$ 等距的原因。",
+      "范数对偶表示：$\\|x\\|=\\max_{\\|f\\|\\le1}|f(x)|$（最大值可达）；由此可证自然嵌入 $J$ 等距，并在自反空间中导出对偶几何的大量结论。",
+      "几何形式即凸集分离定理／支撑超平面定理，与泛函形式互相等价——注意它同样只要求赋范（不需完备），与开映射、闭图像、一致有界原理「必须完备」形成对比。"
+    ],
+    "propertiesEn": [
+      "Extremely weak hypotheses: $X$ need not be complete or even normed (any linear space works), and $p$ only has to be sublinear; the theorem applies to purely algebraic duals as well.",
+      "The conclusion is **existence**: extensions are generally not unique (see Example 1), and no constructive formula is produced (the proof is non-constructive, via Zorn's lemma).",
+      "Normed-space corollaries: every bounded functional extends with equal norm, and for every $x\\ne0$ there is $f$ with $\\|f\\|=1$, $f(x)=\\|x\\|$ — the source of a rich dual and of the fact that the natural embedding $J:X\\to X^{**}$ is isometric.",
+      "Dual formula for the norm: $\\|x\\|=\\max_{\\|f\\|\\le1}|f(x)|$ (attained); it makes the natural embedding $J$ isometric and drives much of dual geometry in reflexive spaces.",
+      "The geometric form is the separation/supporting hyperplane theorem, equivalent to the functional form — again assuming only a normed space, in contrast with the completeness required by open mapping, closed graph and uniform boundedness."
+    ],
+    "examples": [
+      {
+        "problem": "取 $X=\\mathbb R^2$ 配范数 $\\|(x,y)\\|_1=|x|+|y|$，$M=\\{(x,0):x\\in\\mathbb R\\}$，$f(x,0)=x$。求 $f$ 的保范延拓，并说明它不唯一。",
+        "solution": "在 $M$ 上 $|f(x,0)|=|x|\\le\\|(x,0)\\|_1$，取 $x=1$ 得等号，故 $\\|f\\|=1$。对任意实数 $\\alpha$ 定义 $F_\\alpha(x,y)=x+\\alpha y$：它是线性延拓，且 $\\|F_\\alpha\\|=\\sup\\{|x+\\alpha y|:|x|+|y|\\le1\\}=\\max(1,|\\alpha|)$——上界由 $|x+\\alpha y|\\le\\max(1,|\\alpha|)\\,(|x|+|y|)$ 给出，等号分别在 $(1,0)$ 与 $(0,\\operatorname{sign}\\alpha)$ 处取到。于是每个 $|\\alpha|\\le1$ 都给出保范延拓（$\\|F_\\alpha\\|=1=\\|f\\|$）：保范延拓有无穷多个，哈恩-巴拿赫定理只保证存在、不保证唯一。"
+      },
+      {
+        "problem": "对 $X=\\ell^1$ 与 $x_0=(1,-\\frac12,\\frac14,-\\frac18,\\dots)\\in\\ell^1$，找出 $f\\in(\\ell^1)^*$ 使 $\\|f\\|=1$ 且 $f(x_0)=\\|x_0\\|_1$。",
+        "solution": "$\\|x_0\\|_1=1+\\frac12+\\frac14+\\cdots=2$，且 $(\\ell^1)^*=\\ell^\\infty$，泛函由 $f(x)=\\sum_nf_nx_n$ 给出、$\\|f\\|=\\sup_n|f_n|$。取 $f_n=\\operatorname{sgn}(x_0)_n$，即 $f=(1,-1,1,-1,\\dots)\\in\\ell^\\infty$，则 $\\|f\\|_\\infty=1$ 且 $f(x_0)=\\sum_n|(x_0)_n|=\\|x_0\\|_1=2$。这正是哈恩-巴拿赫推论「$x_0\\ne0$ 处存在范数为 $1$ 的泛函达到 $\\|x_0\\|$」在具体空间中的实现。"
+      }
+    ],
+    "tags": [
+      "哈恩-巴拿赫定理",
+      "延拓定理",
+      "凸集分离定理",
+      "次线性泛函"
+    ],
+    "links": [
+      "dual-space",
+      "bounded-operators",
+      "normed-space",
+      "banach-space"
+    ]
+  },
+  {
+    "id": "open-mapping",
+    "title": "开映射定理与逆算子定理",
+    "titleEn": "The Open Mapping and Inverse Operator Theorems",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "巴拿赫空间之间连续的满射线性算子自动把开集映成开集；双射时逆算子自动有界——「满射/双射 + 完备」让连续性免费升级。",
+    "summaryEn": "A bounded surjective linear operator between Banach spaces automatically maps open sets to open sets; a bounded bijection has a bounded inverse — surjectivity plus completeness upgrades continuity for free.",
+    "definition": "**开映射定理**：设 $X,Y$ 都是**巴拿赫空间**，$T\\in B(X,Y)$ 是**满射**（$T(X)=Y$），则 $T$ 把开集映成开集，即是**开映射**。对线性算子，开性有一个定量的等价形式：存在 $\\rho>0$ 使 $B_Y(0,\\rho)\\subseteq T(B_X(0,1))$，即单位球的像包含以原点为中心的一个球。定理的三个前提都不能省：$X$ **完备**、$Y$ **完备**、$T$ **满射**；特别注意它并不要求 $T$ 单射——满射的连续线性算子在巴拿赫空间之间会自动变得「规整」。\n\n**逆算子定理（有界逆定理）**：设 $X,Y$ 是巴拿赫空间，$T\\in B(X,Y)$ 是**双射**（既单又满），则 $T^{-1}:Y\\to X$ 存在且**有界**，即 $T^{-1}\\in B(Y,X)$；等价地，存在 $m>0$ 使 $\\|Tx\\|\\ge m\\|x\\|$ 对一切 $x\\in X$ 成立，并且此时 $\\|T^{-1}\\|\\le\\frac1m$。它是开映射定理的直接推论：满射性把球「铺满」某个 $B_Y(0,\\rho)$，单射性又保证原像唯一，于是对 $\\|y\\|<\\rho$ 有 $\\|T^{-1}y\\|<1$，线性放大即得逆算子的有界性。\n\n证明的细节值得记住，因为两处「完备性成本」都在这里出现。第一步用 **$X$ 完备 + 贝尔纲定理**：由满射性 $X=\\bigcup_{n=1}^\\infty\\overline{T(nB_X)}$，故某个闭包含内点，由线性性推出 $\\overline{T(B_X(0,1))}$ 包含原点邻域——这给出「近似解」总可求得。第二步用 **$Y$ 完备**：把近似解的误差按固定比例缩小，逐次修正得到 $x_k$ 使 $y=\\sum_kTx_k=T\\big(\\sum_kx_k\\big)$，无穷级数因绝对收敛而收敛（在巴拿赫空间中绝对收敛蕴含收敛）。两步合起来，就把「像的闭包含球」升级为「像含球」。\n\n开映射定理与其孪生兄弟**闭图像定理**可以互相推出；把开映射定理用于双射就得到逆算子定理。最常用的推论是**范数等价定理**：同一线性空间上的两个范数若都使它成为巴拿赫空间，且其中一个被另一个控制，则两范数等价。逆算子定理的另一层意义是：在巴拿赫空间中，「连续的双射线性算子」自动是拓扑同构——线性同胚不需要单独验证逆的连续性。",
+    "definitionEn": "**Open mapping theorem**: let $X,Y$ be **Banach spaces** and let $T\\in B(X,Y)$ be **onto** ($T(X)=Y$). Then $T$ maps open sets to open sets, i.e. $T$ is an **open map**. For a linear operator, openness has a quantitative equivalent form: there is $\\rho>0$ with $B_Y(0,\\rho)\\subseteq T(B_X(0,1))$ — the image of the unit ball contains a ball about the origin. None of the three hypotheses can be dropped: $X$ **complete**, $Y$ **complete**, $T$ **onto**; in particular no injectivity is required — a bounded surjection between Banach spaces is automatically well behaved.\n\n**Inverse mapping theorem (bounded inverse theorem)**: let $X,Y$ be Banach spaces and let $T\\in B(X,Y)$ be a **bijection**. Then $T^{-1}:Y\\to X$ exists and is **bounded**, i.e. $T^{-1}\\in B(Y,X)$; equivalently, there is $m>0$ with $\\|Tx\\|\\ge m\\|x\\|$ for all $x\\in X$, and then $\\|T^{-1}\\|\\le\\frac1m$. It is a direct corollary of the open mapping theorem: surjectivity spreads the image over some $B_Y(0,\\rho)$ while injectivity makes preimages unique, so $\\|y\\|<\\rho$ gives $\\|T^{-1}y\\|<1$, and scaling yields boundedness of the inverse.\n\nThe proof is worth remembering, as both completeness costs appear here. Step one uses **completeness of $X$ and Baire's category theorem**: surjectivity gives $X=\\bigcup_{n=1}^\\infty\\overline{T(nB_X)}$, so some closure contains an interior point, and linearity upgrades this to a neighborhood of the origin inside $\\overline{T(B_X(0,1))}$ — approximate solutions always exist. Step two uses **completeness of $Y$**: shrink the error of an approximate solution by a fixed factor and correct successively to obtain $x_k$ with $y=\\sum_kTx_k=T\\big(\\sum_kx_k\\big)$; the series converges because it is absolutely convergent in a Banach space. Together the two steps upgrade a ball in the closure of the image to a ball in the image itself.\n\nThe open mapping theorem and its twin, the **closed graph theorem**, imply each other; applying openness to bijections gives the inverse mapping theorem. Its most used corollary is the **equivalence of norms**: if two norms on the same linear space both make it a Banach space and one dominates the other, they are equivalent. Another meaning of the inverse theorem: in Banach spaces a continuous linear bijection is automatically a topological isomorphism — for linear homeomorphisms the continuity of the inverse need not be checked separately.",
+    "formulas": [
+      {
+        "latex": "X,Y\\ \\text{Banach},\\quad T\\in B(X,Y)\\ \\text{onto}\\quad\\Longrightarrow\\quad T\\ \\text{is an open map}",
+        "note": "开映射定理：定义域与值域都完备、且 $T$ 满射——三者缺一不可；不要求单射。",
+        "noteEn": "Open mapping theorem: both spaces Banach and $T$ onto — all three hypotheses are needed; injectivity is not required."
+      },
+      {
+        "latex": "\\exists\\rho>0:\\quad B_Y(0,\\rho)\\subseteq T(B_X(0,1))",
+        "note": "开性的定量刻画（单位球的像包含原点附近的一个球）；对线性算子它与开映射完全等价。",
+        "noteEn": "Quantitative form of openness (the image of the unit ball contains a ball around $0$); for linear maps it is equivalent to being open."
+      },
+      {
+        "latex": "T\\ \\text{bijective}\\quad\\Longrightarrow\\quad T^{-1}\\in B(Y,X)",
+        "note": "逆算子定理：双射的连续线性算子，其逆自动连续（巴拿赫空间与线性是关键）。",
+        "noteEn": "Inverse mapping theorem: the inverse of a bounded bijection is automatically bounded (Banach spaces and linearity are essential)."
+      },
+      {
+        "latex": "T^{-1}\\in B(Y,X)\\iff \\exists m>0:\\quad \\|Tx\\|\\ge m\\|x\\|\\quad\\forall x\\in X",
+        "note": "逆有界的等价刻画（双射情形）：逆的连续性等价于 $T$ 有正下界 $m$；此时 $\\|T^{-1}\\|\\le\\frac1m$。",
+        "noteEn": "Characterization of a bounded inverse (bijective case): continuity of $T^{-1}$ is equivalent to a positive lower bound $m$ for $T$, and then $\\|T^{-1}\\|\\le\\frac1m$."
+      },
+      {
+        "latex": "\\|x\\|_1\\le C\\|x\\|_2\\ \\text{ and both norms complete}\\quad\\Longrightarrow\\quad \\|x\\|_2\\le C'\\|x\\|_1",
+        "note": "推论（范数等价定理）：两个完备范数若一方控制另一方，则彼此等价——对恒等映射用逆算子定理即得。",
+        "noteEn": "Corollary (equivalence of norms): two complete norms, one dominating the other, are mutually equivalent — apply the inverse theorem to the identity map."
+      }
+    ],
+    "properties": [
+      "三个前提缺一不可：$X$ 完备、$Y$ 完备、$T$ 满射。不满射时结论失效：$Tf(x)=\\int_0^xf$ 在 $C[0,1]$ 上有界单射，若它是开映射则 $T(B)$ 含原点邻域，任意 $y$ 都能按比例写成 $Tx$，$T$ 便满射，矛盾。",
+      "完备性不可省：例题 1 给出值域不完备时「连续双射的逆无界、开性失效」的构造（$\\ell^1$ 配 $\\ell^1$ 范数与 $\\ell^2$ 范数）；去掉定义域的完备性，定理同样会失效——这正对应证明中两次使用完备性。",
+      "逆算子定理是开映射定理在双射情形的改写；开映射定理与闭图像定理可以互相推出，三者（连同一致有界原理）都以定义域空间完备为共同前提。",
+      "范数等价定理：同一空间上两个完备范数一方控制另一方则互相控制——这是逆算子定理最常用的非平凡推论。",
+      "对偶刻画（闭值域定理的初步面貌）：记 $T^*:Y^*\\to X^*$，$T^*g=g\\circ T$，则 $T^*$ 单射 $\\iff$ $\\operatorname{Im}T$ 在 $Y$ 中稠密；$T^*$ 满射 $\\iff$ $T$ 单射且 $\\operatorname{Im}T$ 闭。"
+    ],
+    "propertiesEn": [
+      "All three hypotheses are indispensable: $X$ complete, $Y$ complete, $T$ onto. Without surjectivity the conclusion fails: $Tf(x)=\\int_0^xf$ is bounded and injective on $C[0,1]$; being open would force $T(B)$ to contain a ball about $0$, by scaling every $y$ would be some $Tx$, contradicting non-surjectivity.",
+      "Completeness cannot be dropped: Example 1 constructs a bounded bijection with unbounded inverse when the target is incomplete ($\\ell^1$ with the $\\ell^1$-norm versus the $\\ell^2$-norm). Dropping completeness of the domain breaks the theorem as well — matching the two uses of completeness in the proof.",
+      "The inverse mapping theorem is the bijective case of openness; the open mapping and closed graph theorems imply each other, and all three (together with uniform boundedness) rest on completeness of the domain space.",
+      "Equivalence of norms: two complete norms on the same space, one dominating the other, are mutually equivalent — the most used non-trivial corollary of the inverse mapping theorem.",
+      "Dual description (first glimpse of the closed range theorem): for $T^*:Y^*\\to X^*$, $T^*g=g\\circ T$, one has $T^*$ injective $\\iff$ $\\operatorname{Im}T$ dense in $Y$, and $T^*$ surjective $\\iff$ $T$ injective with $\\operatorname{Im}T$ closed."
+    ],
+    "examples": [
+      {
+        "problem": "设 $X=(\\ell^1,\\|\\cdot\\|_1)$，$Y=(\\ell^1,\\|\\cdot\\|_2)$（同一集合、不同范数），恒等映射 $T:X\\to Y$，$Tx=x$。说明 $Y$ 不完备，$T$ 是有界双射，但 $T^{-1}$ 无界——逆算子定理的两条完备性假设确实必要。",
+        "solution": "$(\\ell^1,\\|\\cdot\\|_2)$ 是 $\\ell^2$ 的稠密真子空间（$c_{00}\\subset\\ell^1$ 在 $\\ell^2$ 中稠密，而 $(1/n)\\in\\ell^2\\setminus\\ell^1$），$\\ell^2$ 完备故它不完备。$T$ 显然是双射，且 $\\|Tx\\|_2=\\|x\\|_2\\le\\|x\\|_1$，故 $T\\in B(X,Y)$。若 $T^{-1}$ 有界，即存在 $C$ 使 $\\|x\\|_1\\le C\\|x\\|_2$ 对一切 $x\\in\\ell^1$ 成立；但取 $x^{(n)}=(1,1,\\dots,1,0,\\dots)/\\sqrt n$（前 $n$ 项为 $1/\\sqrt n$），则 $\\|x^{(n)}\\|_2=1$，而 $\\|x^{(n)}\\|_1=\\sqrt n\\to\\infty$，矛盾。因此 $T^{-1}$ 无界、$T$ 不是开映射：值域完备性不可省。"
+      },
+      {
+        "problem": "在 $\\ell^2$ 上取有界数列 $(\\lambda_n)$ 满足 $0<\\inf_n|\\lambda_n|$ 与 $\\sup_n|\\lambda_n|<\\infty$，$T(x_n)=(\\lambda_nx_n)$。验证 $T$ 是双射并求 $\\|T^{-1}\\|$；再说明若 $\\lambda_n\\to0$（如 $\\lambda_n=1/n$）会发生什么。",
+        "solution": "$T$ 有界：$\\|Tx\\|_2\\le(\\sup_n|\\lambda_n|)\\|x\\|_2$；因 $\\inf_n|\\lambda_n|>0$，对任意 $y\\in\\ell^2$ 取 $x_n=y_n/\\lambda_n$，则 $\\|x\\|_2\\le\\frac1{\\inf_n|\\lambda_n|}\\|y\\|_2<\\infty$，故 $T$ 满射；单射显然。由逆算子定理 $T^{-1}\\in B(\\ell^2)$，且 $T^{-1}(y_n)=(y_n/\\lambda_n)$，$\\|T^{-1}\\|=\\sup_n\\frac1{|\\lambda_n|}=\\frac1{\\inf_n|\\lambda_n|}$。若 $\\lambda_n\\to0$，$T$ 仍单射但不满射（像稠密非闭），逆算子定理不适用；此时 $T^{-1}$（定义在像上）无界：取 $y^{(n)}=e_n$，$\\|y^{(n)}\\|_2=1$ 而 $T^{-1}y^{(n)}=e_n/\\lambda_n$ 的范数为 $1/|\\lambda_n|\\to\\infty$。"
+      }
+    ],
+    "tags": [
+      "开映射定理",
+      "逆算子定理",
+      "巴拿赫空间",
+      "满射算子"
+    ],
+    "links": [
+      "banach-space",
+      "bounded-operators",
+      "closed-graph",
+      "complete-metric-space"
+    ]
+  },
+  {
+    "id": "closed-graph",
+    "title": "闭图像定理与一致有界原理",
+    "titleEn": "The Closed Graph Theorem and the Uniform Boundedness Principle",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "巴拿赫空间上图像闭的线性算子自动有界；算子族逐点有界则一致有界。加上开映射定理，它们构成泛函分析「自动连续性」的三大定理。",
+    "summaryEn": "A linear operator with closed graph between Banach spaces is automatically bounded, and a pointwise bounded family of operators is uniformly bounded — together with the open mapping theorem, the automatic-continuity trio of functional analysis.",
+    "definition": "设 $X,Y$ 是赋范空间，乘积空间 $X\\times Y$ 配范数 $\\|(x,y)\\|=\\|x\\|+\\|y\\|$（配 $\\max$ 也可以，范数等价）；$X,Y$ 都是巴拿赫空间时 $X\\times Y$ 也是。线性算子 $T:X\\supseteq D(T)\\to Y$ 的**图像**是子空间 $G(T)=\\{(x,Tx):x\\in D(T)\\}\\subseteq X\\times Y$。$T$ 称为**闭算子**，若 $G(T)$ 在 $X\\times Y$ 中闭；当 $D(T)=X$（处处定义）时，闭性等价于好用的序列判据：$x_n\\to x$ 且 $Tx_n\\to y$ 蕴含 $y=Tx$。\n\n**闭图像定理**：设 $X,Y$ 都是**巴拿赫空间**，$T:X\\to Y$ 是**处处定义的线性算子**（$D(T)=X$），且 $T$ 的图像在 $X\\times Y$ 中**闭**，则 $T$ **有界**（因而连续）。请特别留意：定理的前提中**没有**假设 $T$ 有界——有界性是结论，这正是定理的威力：「图像闭」通常比「连续」容易验证，而定理把两者画上了等号。两个完备性与「处处定义」都不能少：连续线性算子显然有闭图像（容易方向），而只闭不连续的算子确实存在——它们只能定义在$X$ 的非闭真子空间（可以不稠密）上（如 $C[0,1]$ 或 $L^2$ 上的求导算子）。同一思想还可表述为：当 $X,Y$ 都是巴拿赫空间时，$T$ 闭当且仅当 $D(T)$ 配图像范数 $\\|x\\|_{G(T)}=\\|x\\|+\\|Tx\\|$ 是巴拿赫空间；于是闭算子无非是「配了图像范数的巴拿赫空间之间的有界算子」。\n\n**一致有界原理（共鸣定理，Banach–Steinhaus）**：设 $X$ 是**巴拿赫空间**、$Y$ 是**赋范空间**（不必完备），$\\{T_\\alpha\\}_{\\alpha\\in A}\\subseteq B(X,Y)$ 是一族有界线性算子。若这族算子**逐点有界**，即对每个 $x\\in X$ 有 $\\sup_\\alpha\\|T_\\alpha x\\|<\\infty$，则它**一致有界**：$\\sup_\\alpha\\|T_\\alpha\\|<\\infty$。证明仍用贝尔纲定理：从 $X=\\bigcup_{m}\\{x:\\sup_\\alpha\\|T_\\alpha x\\|\\le m\\}$ 中挑出一个含内点的闭集，再用线性性把内点放大到单位球。方向的要害是「逐点有界 $\\Rightarrow$ 一致有界」；反向（一致有界 $\\Rightarrow$ 逐点有界）由 $\\|T_\\alpha x\\|\\le\\|T_\\alpha\\|\\,\\|x\\|$ 显然成立，所以方向不能、也不需要反着用。两个假设也不可省：$X$ 不完备时结论可能失效（例如在 $c_{00}$ 上 $T_n(x)=nx_n$ 逐点有界但 $\\|T_n\\|=n$）；而 $Y$ 只需是赋范空间，这一点确实够用。\n\n**常用推论**：若 $X$ 巴拿赫、$Y$ 赋范，$T_n\\in B(X,Y)$ 且 $T_nx\\to Tx$ 对每个 $x$ 成立，则极限算子 $T\\in B(X,Y)$ 且 $\\|T\\|\\le\\liminf_n\\|T_n\\|\\le\\sup_n\\|T_n\\|<\\infty$——逐点收敛的极限算子自动有界。逆否形式同样有力：若 $\\sup_\\alpha\\|T_\\alpha\\|=\\infty$，则必存在 $x$ 使 $\\sup_\\alpha\\|T_\\alpha x\\|=\\infty$。逐点收敛还能升级为**紧集上的一致收敛**。三个定理——开映射、闭图像、一致有界——都以**定义域空间完备**（贝尔纲定理）为基石：它们与哈恩-巴拿赫定理一起构成泛函分析的骨干，后者说的是「线性结构让延拓免费」，前者说的是「完备性让连续性免费」。",
+    "definitionEn": "Let $X,Y$ be normed spaces and give $X\\times Y$ the norm $\\|(x,y)\\|=\\|x\\|+\\|y\\|$ (with $\\max$ it is equivalent); $X\\times Y$ is Banach when both $X,Y$ are. The **graph** of a linear operator $T:X\\supseteq D(T)\\to Y$ is the subspace $G(T)=\\{(x,Tx):x\\in D(T)\\}\\subseteq X\\times Y$. $T$ is **closed** if $G(T)$ is closed in $X\\times Y$; when $D(T)=X$ (everywhere defined) this is equivalent to the convenient sequential criterion: $x_n\\to x$ and $Tx_n\\to y$ imply $y=Tx$.\n\n**Closed graph theorem**: let $X,Y$ be **Banach spaces** and $T:X\\to Y$ **linear and everywhere defined** ($D(T)=X$). If the graph of $T$ is **closed** in $X\\times Y$, then $T$ is **bounded** (hence continuous). Note carefully that the hypotheses **do not include** boundedness — boundedness is the conclusion, and that is the theorem's power: closedness of the graph is usually easier to check than continuity, yet the two coincide here. Neither completeness nor the everywhere-defined hypothesis can be dropped: continuous linear maps visibly have closed graphs (the easy direction), while closed but discontinuous operators do exist — they can only live on non-closed proper subspaces of $X$ (not necessarily dense) (e.g. differentiation on $C[0,1]$ or $L^2$). The same idea reads: when $X,Y$ are Banach, $T$ is closed if and only if $D(T)$ equipped with the graph norm $\\|x\\|_{G(T)}=\\|x\\|+\\|Tx\\|$ is a Banach space; a closed operator is thus nothing but a bounded operator between Banach spaces in disguise.\n\n**Uniform boundedness principle (Banach–Steinhaus)**: let $X$ be a **Banach space**, $Y$ a **normed space** (not necessarily complete), and $\\{T_\\alpha\\}_{\\alpha\\in A}\\subseteq B(X,Y)$ a family of bounded operators. If the family is **pointwise bounded**, $\\sup_\\alpha\\|T_\\alpha x\\|<\\infty$ for every $x\\in X$, then it is **uniformly bounded**: $\\sup_\\alpha\\|T_\\alpha\\|<\\infty$. The proof again uses Baire's theorem: extract from $X=\\bigcup_m\\{x:\\sup_\\alpha\\|T_\\alpha x\\|\\le m\\}$ a closed set with an interior point, then magnify that interior point to the unit ball by linearity. The essential direction is *pointwise bounded $\\Rightarrow$ uniformly bounded*; the converse is trivial since $\\|T_\\alpha x\\|\\le\\|T_\\alpha\\|\\,\\|x\\|$, so the implication is never used backwards. Both hypotheses matter: the conclusion can fail when $X$ is incomplete (on $c_{00}$, $T_n(x)=nx_n$ is pointwise bounded yet $\\|T_n\\|=n$), whereas $Y$ really only needs to be normed.\n\n**Standard corollary**: if $X$ is Banach, $Y$ normed, $T_n\\in B(X,Y)$ and $T_nx\\to Tx$ for every $x$, then $T\\in B(X,Y)$ with $\\|T\\|\\le\\liminf_n\\|T_n\\|\\le\\sup_n\\|T_n\\|<\\infty$ — pointwise limits of bounded operators are bounded. The contrapositive is equally powerful: $\\sup_\\alpha\\|T_\\alpha\\|=\\infty$ forces the existence of some $x$ with $\\sup_\\alpha\\|T_\\alpha x\\|=\\infty$. Pointwise convergence can even be upgraded to **uniform convergence on compact sets**. All three theorems — open mapping, closed graph, uniform boundedness — rest on **completeness of the domain space** (Baire); together with Hahn–Banach they form the backbone of functional analysis: the latter says linear structure makes extension free, the former say completeness makes continuity free.",
+    "formulas": [
+      {
+        "latex": "G(T)=\\{(x,Tx):x\\in D(T)\\}\\subseteq X\\times Y",
+        "note": "线性算子的图像是乘积空间的子空间；$T$ 闭即指 $G(T)$ 在 $X\\times Y$ 中闭。",
+        "noteEn": "The graph of a linear operator is a subspace of the product; $T$ is closed exactly when $G(T)$ is closed in $X\\times Y$."
+      },
+      {
+        "latex": "G(T)\\ \\text{closed},\\quad X,Y\\ \\text{Banach},\\quad T\\ \\text{linear on all of } X\\quad\\Longrightarrow\\quad T\\in B(X,Y)",
+        "note": "闭图像定理：有界性是**结论**，不得先假设；定义域必须是完备的整个 $X$。",
+        "noteEn": "Closed graph theorem: boundedness is the **conclusion**, never a hypothesis; the domain must be all of the Banach space $X$."
+      },
+      {
+        "latex": "x_n\\to x,\\quad Tx_n\\to y\\quad\\Longrightarrow\\quad y=Tx",
+        "note": "处处定义算子的闭性序列判据；验证图像闭时用这一条最方便。",
+        "noteEn": "Sequential criterion for closedness of an everywhere defined operator; the most convenient way to verify a closed graph."
+      },
+      {
+        "latex": "\\sup_\\alpha\\|T_\\alpha x\\|<\\infty\\ \\ (\\forall x\\in X)\\quad\\Longrightarrow\\quad \\sup_\\alpha\\|T_\\alpha\\|<\\infty",
+        "note": "一致有界原理：只需 $X$ 巴拿赫、$Y$ 赋范；方向是「逐点有界 $\\Rightarrow$ 一致有界」，反向平凡（一致有界当然逐点有界）。",
+        "noteEn": "Uniform boundedness principle: only $X$ Banach and $Y$ normed are needed; the direction is pointwise bounded $\\Rightarrow$ uniformly bounded (the converse is trivial)."
+      },
+      {
+        "latex": "T_nx\\to Tx\\ (\\forall x)\\quad\\Longrightarrow\\quad T\\in B(X,Y),\\qquad \\|T\\|\\le\\liminf_n\\|T_n\\|",
+        "note": "逐点收敛算子列的标准推论：极限有界，且范数不超过范数的下极限（从而 $\\le\\sup_n\\|T_n\\|<\\infty$）。",
+        "noteEn": "Standard corollary for pointwise convergent sequences: the limit is bounded with norm controlled by the lower limit of the norms (hence $\\le\\sup_n\\|T_n\\|<\\infty$)."
+      }
+    ],
+    "properties": [
+      "共同前提：开映射／逆算子／闭图像要求 $X,Y$ **都完备**，一致有界原理只要求**定义域 $X$ 完备**（$Y$ 赋范即可）；但三者都必须用贝尔纲定理，定义域完备是不可让的。",
+      "闭性弱于连续性（连续 $\\Rightarrow$ 图像闭是容易方向）；在「$X,Y$ 巴拿赫 + 处处定义 + 线性」下两者等价。缺条件时差距可以很大：存在闭而无界的算子，但它们只能定义在$X$ 的非闭真子空间（可以不稠密）上。",
+      "一致有界原理的逆否形式极其有用：$\\sup_\\alpha\\|T_\\alpha\\|=\\infty$ 时必存在「共鸣点」$x$ 使 $\\sup_\\alpha\\|T_\\alpha x\\|=\\infty$；它使该定理成为「算子范数无界 $\\Rightarrow$ 存在坏点」这类存在性结论的发动机。",
+      "熟悉的反例（$X$ 不完备时定理失效）：在 $c_{00}$（配 $\\sup$ 范数）上 $T_n(x)=nx_n$ 逐点有界（有限支撑的 $x$ 最终为零）但 $\\|T_n\\|=n$；联系 Fourier 分析，部分和泛函的勒贝格常数 $L_N\\sim\\frac4{\\pi^2}\\ln N$ 无界，由逆否形式即得「存在连续函数其 Fourier 级数在一点发散」（见例题 2）。",
+      "闭图像定理与开映射定理互相等价，逆算子定理是开映射定理的双射特例；三者常与哈恩-巴拿赫并列为泛函分析基本定理——区别在于哈恩-巴拿赫不需要任何完备性。"
+    ],
+    "propertiesEn": [
+      "Common hypothesis: open mapping, inverse mapping and closed graph theorems need **both** $X,Y$ complete, while uniform boundedness needs only the **domain** $X$ complete ($Y$ normed is enough); all of them rely on Baire's theorem, so completeness of the domain is indispensable.",
+      "Closedness is weaker than continuity (continuous $\\Rightarrow$ closed graph is the easy direction); under Banach spaces, everywhere defined and linear, the two coincide. Without the hypotheses the gap can be vast: closed unbounded operators exist, but only on non-closed proper subspaces of $X$ (not necessarily dense).",
+      "The contrapositive of uniform boundedness is extremely useful: $\\sup_\\alpha\\|T_\\alpha\\|=\\infty$ forces some resonance point $x$ with $\\sup_\\alpha\\|T_\\alpha x\\|=\\infty$; this makes the theorem an engine of existence results (unbounded operator norms produce bad points).",
+      "A familiar counterexample (the theorem fails when $X$ is incomplete): on $c_{00}$ with the sup norm, $T_n(x)=nx_n$ is pointwise bounded (finitely supported $x$ eventually vanish) while $\\|T_n\\|=n$. In Fourier analysis the partial-sum functionals have Lebesgue constants $L_N\\sim\\frac4{\\pi^2}\\ln N$, so the contrapositive yields a continuous function whose Fourier series diverges at a point (Example 2).",
+      "The closed graph and open mapping theorems are equivalent, and the inverse mapping theorem is the bijective case of openness; the trio is usually listed with Hahn–Banach among the fundamental theorems of functional analysis — which, unlike the others, requires no completeness at all."
+    ],
+    "examples": [
+      {
+        "problem": "取 $D(T)=C^1[0,1]\\subset X=C[0,1]$（上确界范数），$T=\\frac{d}{dx}:D(T)\\to C[0,1]$。证明 $T$ 是闭算子但无界，并解释为何不违背闭图像定理。",
+        "solution": "(a) 闭性：若 $f_n\\to f$ 且 $f_n'\\to g$ 在 $C[0,1]$ 中（一致收敛），由微积分基本定理 $f_n(x)=f_n(0)+\\int_0^xf_n'(t)\\,dt$，令 $n\\to\\infty$ 得 $f(x)=f(0)+\\int_0^xg(t)\\,dt$，故 $f\\in C^1$ 且 $f'=g$，即 $g=Tf$，图像闭。(b) 无界：取 $f_n(x)=\\frac{\\sin nx}{n}$，则 $\\|f_n\\|_\\infty=\\frac1n\\to0$ 而 $\\|Tf_n\\|_\\infty=\\|\\cos nx\\|_\\infty=1$，不存在 $C$ 使 $\\|Tf\\|\\le C\\|f\\|$。(c) 不矛盾：$D(T)=C^1[0,1]\\ne X$，且在 $X$ 中不完备——闭图像定理要求定义域是完备的整个空间，这里恰恰缺了「处处定义 + 定义域完备」，所以 $T$ 只能是定义在$X$ 的非闭真子空间（可以不稠密）上的无界闭算子。"
+      },
+      {
+        "problem": "用一致有界原理证明：存在连续周期函数，其 Fourier 级数在某一点发散。",
+        "solution": "在 $X=C[-\\pi,\\pi]$（上确界范数，巴拿赫空间）上定义泛函 $T_Nf=(S_Nf)(0)$（$f$ 的 Fourier 级数第 $N$ 部分和在 $0$ 点的值）。由于 $S_Nf(0)=\\frac1{2\\pi}\\int_{-\\pi}^{\\pi}f(t)D_N(t)\\,dt$（$D_N$ 为 Dirichlet 核），$\\|T_N\\|=L_N=\\frac1{2\\pi}\\int_{-\\pi}^{\\pi}|D_N(t)|\\,dt\\sim\\frac4{\\pi^2}\\ln N\\to\\infty$。若 $\\{T_N\\}$ 逐点有界，一致有界原理（$X$ 巴拿赫、$Y=\\mathbb R$ 完备）将给出 $\\sup_N\\|T_N\\|<\\infty$，矛盾。故由逆否形式，存在 $f\\in C[-\\pi,\\pi]$ 使 $\\sup_N|(S_Nf)(0)|=\\infty$，即 $f$ 的 Fourier 级数在 $0$ 点发散。这说明一致有界原理是「范数无界 $\\Rightarrow$ 存在坏点」的存在性发动机。"
+      }
+    ],
+    "tags": [
+      "闭图像定理",
+      "一致有界原理",
+      "共鸣定理",
+      "贝尔纲定理"
+    ],
+    "links": [
+      "banach-space",
+      "bounded-operators",
+      "open-mapping",
+      "unbounded-operators",
+      "fourier-series"
+    ]
+  }
+]

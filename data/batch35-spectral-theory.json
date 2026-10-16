@@ -1,0 +1,494 @@
+[
+  {
+    "id": "compact-operators",
+    "title": "紧算子",
+    "titleEn": "Compact Operators",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "把有界集映成相对紧集的有界算子：无限维中「接近有限秩」的算子，也是谱结构最像矩阵的一类算子。",
+    "summaryEn": "Bounded operators that map bounded sets to relatively compact sets: the operators closest to finite rank in infinite dimensions, and the ones whose spectra behave most like matrices.",
+    "definition": "设 $X,Y$ 是巴拿赫空间，$T\\in B(X,Y)$。若 $T$ 把 $X$ 的每一个有界集都映成 $Y$ 中的**相对紧集**（像集的闭包是紧集），就称 $T$ 是**紧算子**，也称全连续算子。有一个完全等价的序列刻画，是做题时最常用的形式：$X$ 中任何有界序列 $\\{x_n\\}$ 都有子列 $\\{x_{n_k}\\}$，使 $\\{Tx_{n_k}\\}$ 在 $Y$ 中收敛。用单位球写出来，只要 $\\overline{T(B_X)}$ 紧就够了——因为有界集都含于单位球的某个倍数中。\n\n紧算子的直观是「无限维中的有限秩算子」：它把无穷多条独立方向的信息压进近乎有限维的像里。$\\ell^2$ 上的对角算子 $T(x)=(\\lambda_nx_n)$ 就是标准测试例：$T$ 紧当且仅当 $\\lambda_n\\to0$；而恒等算子对应 $\\lambda_n\\equiv1$，不紧。一般地，**恒等算子紧 $\\iff$ 空间有限维**，这是判别紧性、也是间接判别「空间无限维」最常用的判据。\n\n为什么要紧算子？因为它把有限维线性代数搬进了无限维：无限维空间中紧算子的谱由必然出现的 $0$ 与至多可数个特征值组成，特征值只能以 $0$ 为聚点，第二类弗雷德霍姆积分方程的解集结构与矩阵方程一模一样（见弗雷德霍姆二择一）。连续性核、平方可和核给出的积分算子都是紧算子，它们是泛函分析、积分方程与量子力学中最常见的一类「好算子」。",
+    "definitionEn": "Let $X,Y$ be Banach spaces and $T\\in B(X,Y)$. Then $T$ is **compact** (also called completely continuous) if it maps every bounded subset of $X$ to a **relatively compact** subset of $Y$, that is, the closure of every image of a bounded set is compact. There is a fully equivalent sequential description, used in virtually every proof: every bounded sequence $\\{x_n\\}\\subset X$ has a subsequence $\\{x_{n_k}\\}$ for which $\\{Tx_{n_k}\\}$ converges in $Y$. In terms of the closed unit ball it is enough that $\\overline{T(B_X)}$ be compact, because every bounded set lies in some multiple of the unit ball.\n\nThe intuition is that a compact operator is ``a finite rank operator up to arbitrarily small error'': it crushes infinitely many independent directions into a nearly finite-dimensional image. The diagonal operator $T(x)=(\\lambda_nx_n)$ on $\\ell^2$ is the standard test case: it is compact exactly when $\\lambda_n\\to0$, while the identity operator corresponds to $\\lambda_n\\equiv1$ and is not compact. In general, **the identity is compact if and only if the space is finite-dimensional** — the most useful criterion both for compactness and, indirectly, for infinite-dimensionality.\n\nCompact operators matter because they carry finite-dimensional linear algebra into infinite dimensions: on an infinite-dimensional space the spectrum of a compact operator consists of the inevitable point $0$ together with at most countably many eigenvalues, accumulating only at $0$, and the solution structure of Fredholm integral equations of the second kind is exactly that of matrix equations (see the Fredholm alternative). Integral operators with continuous or square-summable kernels are compact; they are the most common ``well-behaved'' operators in functional analysis, integral equations and quantum mechanics.",
+    "formulas": [
+      {
+        "latex": "T\\ \\text{紧}\\iff \\overline{T(B_X)}\\ \\text{在}\\ Y\\ \\text{中紧}",
+        "note": "定义的单位球版本：$B_X$ 是 $X$ 的闭单位球。只要单位球像的闭包紧，由齐次性与线性性，一切有界集的像都相对紧。",
+        "noteEn": "The unit-ball form of the definition: $B_X$ is the closed unit ball of $X$. Once the closure of the image of the unit ball is compact, homogeneity and linearity make the image of every bounded set relatively compact."
+      },
+      {
+        "latex": "\\{x_n\\}\\ \\text{有界}\\ \\Longrightarrow\\ \\exists\\,x_{n_k}:\\ \\{Tx_{n_k}\\}\\ \\text{在}\\ Y\\ \\text{中收敛}",
+        "note": "序列刻画。它是证明紧性时最常用的入口，也是证明「不紧」的常用出口：找一个有界序列，其像的任何子列都不收敛（如标准正交基）。",
+        "noteEn": "The sequential characterisation: the usual entry point for proving compactness, and the usual exit for disproving it — exhibit a bounded sequence whose image has no convergent subsequence (e.g. an orthonormal basis)."
+      },
+      {
+        "latex": "\\|T_n-T\\|\\to0,\\quad T_n\\ \\text{紧}\\ \\Longrightarrow\\ T\\ \\text{紧}",
+        "note": "紧算子在算子范数下封闭：紧算子全体 $\\mathcal K(X,Y)$ 是 $B(X,Y)$ 的闭子空间，因此「有限秩算子的一致极限」自动紧，这是构造紧算子最常用的办法。",
+        "noteEn": "Compact operators are closed in the operator norm: the set $\\mathcal K(X,Y)$ is a closed subspace of $B(X,Y)$, so uniform limits of finite rank operators are compact — the standard way to construct compact operators."
+      },
+      {
+        "latex": "T\\ \\text{紧},\\ S\\ \\text{有界}\\ \\Longrightarrow\\ ST\\ \\text{与}\\ TS\\ \\text{紧}",
+        "note": "紧算子与有界算子复合仍紧：$\\mathcal K(X)$ 是 $B(X)$ 的闭双边理想。特别地，$T$ 紧则 $T^n$ 紧。",
+        "noteEn": "Composing a compact operator with bounded operators stays compact: $\\mathcal K(X)$ is a closed two-sided ideal of $B(X)$. In particular $T$ compact implies $T^n$ compact."
+      },
+      {
+        "latex": "I_X\\ \\text{紧}\\iff \\dim X<\\infty",
+        "note": "无限维空间上恒等算子不紧：取标准正交基，$\\|e_m-e_n\\|=\\sqrt2$，像序列没有收敛子列。这是最常用的非紧性判据。",
+        "noteEn": "The identity on an infinite-dimensional space is not compact: for an orthonormal basis, $\\|e_m-e_n\\|=\\sqrt2$, so no subsequence of the image converges. This is the standard non-compactness criterion."
+      }
+    ],
+    "expression": {
+      "text": "T ∈ B(X,Y) 紧 ⟺ T 把 X 的每个有界集映成 Y 的相对紧集；B_X 为 X 的闭单位球",
+      "symbol": "T\\in\\mathcal K(X,Y),\\quad \\overline{T(B_X)}\\ \\text{紧}",
+      "note": "记号：$\\mathcal K(X,Y)$ 表示 $B(X,Y)$ 中的紧算子全体；$B_X$ 是闭单位球。",
+      "noteEn": "Notation: $\\mathcal K(X,Y)$ denotes the compact operators inside $B(X,Y)$; $B_X$ is the closed unit ball."
+    },
+    "properties": [
+      "有限秩算子（值域有限维）必紧；紧算子全体 $\\mathcal K(X,Y)$ 是 $B(X,Y)$ 的闭子空间，故有限秩算子的一致极限必紧。",
+      "紧算子与有界算子复合仍紧（$\\mathcal K(X)$ 是 $B(X)$ 的闭双边理想）；特别地 $T$ 紧则 $T^n$ 紧。",
+      "恒等算子紧当且仅当空间有限维；无限维空间上恒等算子不紧，这是判定算子非紧的标准入口。",
+      "紧算子把弱收敛升级为范数收敛：$x_n\\rightharpoonup x\\Rightarrow Tx_n\\to Tx$；从而紧算子的值域是可分的。",
+      "（Schauder 定理）$T\\in B(X,Y)$ 紧当且仅当其伴随 $T^*\\in B(Y^*,X^*)$ 紧。"
+    ],
+    "propertiesEn": [
+      "Every finite rank operator (finite-dimensional range) is compact; the set $\\mathcal K(X,Y)$ of compact operators is a closed subspace of $B(X,Y)$, so uniform limits of finite rank operators are compact.",
+      "Composing a compact operator with bounded operators stays compact ($\\mathcal K(X)$ is a closed two-sided ideal of $B(X)$); in particular $T$ compact implies $T^n$ compact.",
+      "The identity is compact iff the space is finite-dimensional; on an infinite-dimensional space the identity is not compact — the standard first step in showing that an operator fails to be compact.",
+      "A compact operator upgrades weak convergence to norm convergence: $x_n\\rightharpoonup x\\Rightarrow Tx_n\\to Tx$; consequently the range of a compact operator is separable.",
+      "(Schauder) $T\\in B(X,Y)$ is compact iff its adjoint $T^*\\in B(Y^*,X^*)$ is compact."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\ell^2$ 上定义对角算子 $T(x_1,x_2,\\dots)=(\\lambda_1x_1,\\lambda_2x_2,\\dots)$，其中 $(\\lambda_n)$ 有界。证明：若 $\\lambda_n\\to0$ 则 $T$ 紧；并用 $e_n$ 说明若沿无穷子列 $|\\lambda_n|\\ge c>0$，则 $T$ 不紧。",
+        "solution": "令 $T_N(x)=(\\lambda_1x_1,\\dots,\\lambda_Nx_N,0,\\dots)$。$T_N$ 值域至多 $N$ 维，是有限秩算子，从而紧。并且\n$$\\|T-T_N\\|=\\sup_{n>N}|\\lambda_n|\\to0\\qquad(N\\to\\infty),$$\n紧算子全体是闭子空间，故 $T$ 作为紧算子的一致极限仍紧。反之设 $|\\lambda_{n_k}|\\ge c>0$，考虑有界序列 $\\{e_{n_k}\\}$：对 $k\\ne j$，\n$$\\|Te_{n_k}-Te_{n_j}\\|=\\|\\lambda_{n_k}e_{n_k}-\\lambda_{n_j}e_{n_j}\\|=\\sqrt{|\\lambda_{n_k}|^2+|\\lambda_{n_j}|^2}\\ge\\sqrt2\\,c,$$\n任何子列都不是柯西列，故 $T$ 不紧。综合得：对角算子 $T$ 紧 $\\iff$ $\\lambda_n\\to0$。"
+      },
+      {
+        "problem": "用标准正交基说明：无限维希尔伯特空间上的恒等算子不紧。",
+        "solution": "取标准正交基 $\\{e_n\\}$，则 $\\|e_n\\|=1$ 是有界序列。对任意 $m\\ne n$，\n$$\\|Ie_m-Ie_n\\|=\\|e_m-e_n\\|=\\sqrt2.$$\n若恒等算子紧，则存在子列 $\\{e_{n_k}\\}$ 使 $\\{Ie_{n_k}\\}=\\{e_{n_k}\\}$ 收敛；但该子列中任意两项的距离恒为 $\\sqrt2$，不可能是柯西列，矛盾。故恒等算子不紧——由「恒等算子紧 $\\iff$ 空间有限维」，无限维空间上的恒等算子永远不紧。"
+      }
+    ],
+    "tags": [
+      "紧算子",
+      "全连续算子",
+      "相对紧",
+      "有限秩逼近",
+      "巴拿赫空间"
+    ],
+    "links": [
+      "bounded-operators",
+      "spectrum",
+      "fredholm-alternative",
+      "banach-space",
+      "orthonormal-basis"
+    ]
+  },
+  {
+    "id": "spectrum",
+    "title": "谱与预解集",
+    "titleEn": "Spectrum and Resolvent Set",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "使 λI−T 不存在有界逆的复数 λ 的集合：特征值概念在无限维的正确推广，它是复巴拿赫空间上的非空紧集，大小由谱半径公式控制。",
+    "summaryEn": "The set of λ for which λI−T has no bounded inverse — the right infinite-dimensional generalisation of eigenvalues: a nonempty compact subset of the complex plane whose size is governed by the spectral radius formula.",
+    "definition": "设 $X$ 是复巴拿赫空间，$T\\in B(X)$。若 $\\lambda I-T$ 在 $B(X)$ 中可逆，即存在有界逆算子 $(\\lambda I-T)^{-1}\\in B(X)$，就称 $\\lambda$ 属于 $T$ 的**预解集** $\\rho(T)$，而 $R(\\lambda,T)=(\\lambda I-T)^{-1}$ 称为 $T$ 在 $\\lambda$ 处的**预解算子**。不属于预解集的复数就是**谱点**：\n$$\\sigma(T)=\\{\\lambda\\in\\mathbb C:\\lambda I-T\\ \\text{不可逆}\\},\\qquad \\rho(T)=\\mathbb C\\setminus\\sigma(T).$$\n「可逆」是对算子所在的巴拿赫空间说的：同一个公式作用在别的空间上可能变得可逆，谱因此依赖空间。在巴拿赫空间里，由开映射定理（有界逆定理），$\\lambda I-T$ 可逆等价于它是有界双射，所以检验谱点时「单射」或「满射」任何一条失效都算数。\n\n在有限维空间里，$\\lambda I-T$ 可逆 $\\iff$ $\\det(\\lambda I-T)\\ne0$ $\\iff$ $\\lambda$ 是特征值，所以谱就是特征值集合，且必非空（代数基本定理）。无限维的谱比特征值大得多，按 $\\lambda I-T$ 失效的方式分成三类：**点谱** $\\sigma_p(T)$（特征值：$(\\lambda I-T)x=0$ 有非零解）、**连续谱** $\\sigma_c(T)$（$\\lambda I-T$ 单射、值域稠密但不等于 $X$）、**剩余谱** $\\sigma_r(T)$（其余情形：单射但值域不稠密）。三者两两不交、并为 $\\sigma(T)$。方向必须记牢：**特征值一定属于谱**（不可逆最粗暴的一种失效），**但谱点未必是特征值**。乘法算子 $(Mx)(t)=tx(t)$ 在 $L^2[0,1]$ 上给出标准例子：$\\sigma(M)=[0,1]$，而 $(t-\\lambda)x(t)=0$ 几乎处处推出 $x=0$，故它没有特征值，整条谱都是连续谱。\n\n谱有多大？**谱半径** $r(T)=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|$ 由 Gelfand 的**谱半径公式** $r(T)=\\lim_{n\\to\\infty}\\|T^n\\|^{1/n}$ 计算，特别地 $r(T)\\le\\|T\\|$，非正规算子上等号可能取不到。谱在哪里？当 $|\\lambda|>\\|T\\|$ 时 $\\lambda I-T=\\lambda(I-T/\\lambda)$ 按 Neumann 级数可逆，所以 $\\sigma(T)$ 含于闭圆盘 $\\{|\\lambda|\\le\\|T\\|\\}$；由 $\\rho(T)$ 开知 $\\sigma(T)$ 闭，于是**谱是紧集**。最后，若 $X$ 是**复**巴拿赫空间则 $\\sigma(T)\\ne\\varnothing$：否则预解算子在整条 $\\mathbb C$ 上解析、在无穷远处趋于零因而有界，由 Liouville 定理只能恒为零，矛盾（$R(\\lambda,T)$ 是可逆算子，不为零）。实空间上谱却可能空无一点，例如平面旋转 $90^\\circ$ 的矩阵在 $\\mathbb R^2$ 上没有实特征值。",
+    "definitionEn": "Let $X$ be a complex Banach space and $T\\in B(X)$. If $\\lambda I-T$ is invertible in $B(X)$, that is, a bounded inverse $(\\lambda I-T)^{-1}\\in B(X)$ exists, then $\\lambda$ lies in the **resolvent set** $\\rho(T)$ and $R(\\lambda,T)=(\\lambda I-T)^{-1}$ is called the **resolvent** of $T$ at $\\lambda$. The remaining complex numbers form the **spectrum**: $\\sigma(T)=\\{\\lambda\\in\\mathbb C:\\lambda I-T\\ \\text{is not invertible}\\}$ and $\\rho(T)=\\mathbb C\\setminus\\sigma(T)$. ``Invertible'' is meant with respect to the Banach space on which the operator acts: the same formula may become invertible on another space, so the spectrum depends on the space. In a Banach space the bounded inverse theorem (a corollary of the open mapping theorem) says that $\\lambda I-T$ is invertible iff it is a bounded bijection, so a failure of injectivity or of surjectivity already produces a spectral point.\n\nIn finite dimensions $\\lambda I-T$ is invertible iff $\\det(\\lambda I-T)\\ne0$ iff $\\lambda$ is an eigenvalue, so the spectrum is exactly the set of eigenvalues and is nonempty by the fundamental theorem of algebra. In infinite dimensions the spectrum is much larger than the point spectrum and is classified by the way $\\lambda I-T$ fails: the **point spectrum** $\\sigma_p(T)$ (eigenvalues, $\\ker(\\lambda I-T)\\ne\\{0\\}$), the **continuous spectrum** $\\sigma_c(T)$ ($\\lambda I-T$ injective, with dense range different from $X$) and the **residual spectrum** $\\sigma_r(T)$ (the rest: injective with non-dense range). These three sets are disjoint and their union is $\\sigma(T)$. Keep the direction straight: **every eigenvalue belongs to the spectrum** — non-injectivity is the crudest possible failure — **but a spectral point need not be an eigenvalue.** The multiplication operator $(Mx)(t)=tx(t)$ on $L^2[0,1]$ is the standard example: $\\sigma(M)=[0,1]$, while $(t-\\lambda)x(t)=0$ almost everywhere forces $x=0$, so $M$ has no eigenvalues and its whole spectrum is continuous.\n\nHow large is the spectrum? Its **spectral radius** $r(T)=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|$ is computed by Gelfand's **spectral radius formula** $r(T)=\\lim_{n\\to\\infty}\\|T^n\\|^{1/n}$; in particular $r(T)\\le\\|T\\|$, and for non-normal operators equality may fail. Where does it sit? For $|\\lambda|>\\|T\\|$ the Neumann series makes $\\lambda I-T=\\lambda(I-T/\\lambda)$ invertible, so $\\sigma(T)$ lies in the closed disc $\\{|\\lambda|\\le\\|T\\|\\}$; since $\\rho(T)$ is open, $\\sigma(T)$ is closed, hence **compact**. Finally, if $X$ is a **complex** Banach space then $\\sigma(T)\\ne\\varnothing$: otherwise the resolvent would be analytic on all of $\\mathbb C$, bounded (it tends to $0$ at infinity), and nowhere zero, contradicting Liouville's theorem. Over a real Banach space the spectrum can be empty — the matrix of a $90^\\circ$ rotation has no real eigenvalue.",
+    "formulas": [
+      {
+        "latex": "\\sigma(T)=\\mathbb C\\setminus\\rho(T),\\qquad \\rho(T)=\\{\\lambda\\in\\mathbb C:\\ (\\lambda I-T)^{-1}\\in B(X)\\ \\text{存在}\\}",
+        "note": "谱与预解集的定义：$\\lambda I-T$ 在 $B(X)$ 中存在有界逆。$R(\\lambda,T)=(\\lambda I-T)^{-1}$ 称为预解算子。",
+        "noteEn": "Definition of spectrum and resolvent set: $\\lambda I-T$ has a bounded inverse in $B(X)$. The operator $R(\\lambda,T)=(\\lambda I-T)^{-1}$ is the resolvent."
+      },
+      {
+        "latex": "\\lambda\\in\\rho(T)\\iff \\lambda I-T\\ \\text{是双射}\\iff (\\lambda I-T)^{-1}\\in B(X)",
+        "note": "有界逆定理（开映射定理的推论）：巴拿赫空间上单射满射的有界算子必有有界逆，所以验证可逆性只需验证双射。",
+        "noteEn": "Bounded inverse theorem (a corollary of the open mapping theorem): a bounded bijection between Banach spaces has a bounded inverse, so invertibility need only be checked as a bijection."
+      },
+      {
+        "latex": "|\\lambda|>\\|T\\|\\ \\Longrightarrow\\ \\lambda\\in\\rho(T);\\qquad \\sigma(T)\\ \\text{是紧集},\\quad \\sigma(T)\\subseteq\\{\\lambda:\\ |\\lambda|\\le\\|T\\|\\}",
+        "note": "$|\\lambda|>\\|T\\|$ 时用 Neumann 级数 $R(\\lambda,T)=\\sum_{n\\ge0}T^n/\\lambda^{n+1}$ 求逆；由此谱有界，又谱闭，故紧。",
+        "noteEn": "For $|\\lambda|>\\|T\\|$ the Neumann series gives $R(\\lambda,T)=\\sum_{n\\ge0}T^n/\\lambda^{n+1}$; the spectrum is bounded and closed, hence compact."
+      },
+      {
+        "latex": "r(T)=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|=\\lim_{n\\to\\infty}\\|T^n\\|^{1/n}=\\inf_{n\\ge1}\\|T^n\\|^{1/n}\\le\\|T\\|",
+        "note": "Gelfand 谱半径公式：极限恒存在，且等于下确界。自伴（更一般地正规）算子满足 $r(T)=\\|T\\|$。",
+        "noteEn": "Gelfand's spectral radius formula: the limit always exists and equals the infimum. For self-adjoint (more generally normal) operators $r(T)=\\|T\\|$."
+      },
+      {
+        "latex": "\\sigma(T)=\\sigma_p(T)\\cup\\sigma_c(T)\\cup\\sigma_r(T)\\quad(\\text{不交并}),\\qquad \\sigma_p(T)=\\{\\lambda:\\ \\ker(\\lambda I-T)\\ne\\{0\\}\\}",
+        "note": "谱的划分：点谱（特征值）、连续谱、剩余谱。特征值必在谱中，但谱点可以是连续谱或剩余谱而非特征值。",
+        "noteEn": "Classification of the spectrum: point spectrum (eigenvalues), continuous spectrum, residual spectrum. Eigenvalues are always spectral points, but a spectral point can be continuous or residual rather than an eigenvalue."
+      }
+    ],
+    "expression": {
+      "text": "σ(T) = {λ ∈ ℂ : λI−T 不可逆}；ρ(T) = ℂ∖σ(T)；R(λ,T) = (λI−T)⁻¹；r(T) = lim_{n→∞} ‖Tⁿ‖^(1/n)",
+      "symbol": "R(\\lambda,T)=(\\lambda I-T)^{-1}",
+      "note": "复巴拿赫空间上谱非空，且是含于 $\\{|\\lambda|\\le\\|T\\|\\}$ 的紧集；谱半径 $r(T)\\le\\|T\\|$。",
+      "noteEn": "Over a complex Banach space the spectrum is nonempty and compact, contained in $\\{|\\lambda|\\le\\|T\\|\\}$; the spectral radius satisfies $r(T)\\le\\|T\\|$."
+    },
+    "properties": [
+      "谱是紧集且含于闭圆盘 $\\{|\\lambda|\\le\\|T\\|\\}$；$|\\lambda|>\\|T\\|$ 时 $\\lambda\\in\\rho(T)$，且 $R(\\lambda,T)=\\sum_{n\\ge0}T^n/\\lambda^{n+1}$。",
+      "$\\rho(T)$ 是开集，预解算子在其上解析，并满足第一预解等式 $R(\\lambda,T)-R(\\mu,T)=-(\\lambda-\\mu)R(\\lambda,T)R(\\mu,T)$；复巴拿赫空间上 $\\sigma(T)\\ne\\varnothing$（Liouville），实空间上可以为空。",
+      "特征值必属于谱，但谱点不必是特征值；谱分成点谱、连续谱、剩余谱的不交并。例：$L^2[0,1]$ 上 $(Mx)(t)=tx(t)$ 的谱为 $[0,1]=\\sigma_c(M)$，没有特征值。",
+      "谱半径公式 $r(T)=\\lim_{n\\to\\infty}\\|T^n\\|^{1/n}=\\inf_{n\\ge1}\\|T^n\\|^{1/n}$，且 $r(T)\\le\\|T\\|$；自伴（更一般地正规）算子有 $r(T)=\\|T\\|$。",
+      "谱在相似变换下不变：$\\sigma(S^{-1}TS)=\\sigma(T)$；$T$ 可逆当且仅当 $0\\notin\\sigma(T)$；有限维时 $\\sigma(T)$ 恰是特征值全体，由 $\\det(\\lambda I-T)=0$ 给出。"
+    ],
+    "propertiesEn": [
+      "The spectrum is compact and lies in the closed disc $\\{|\\lambda|\\le\\|T\\|\\}$; for $|\\lambda|>\\|T\\|$ one has $\\lambda\\in\\rho(T)$ with $R(\\lambda,T)=\\sum_{n\\ge0}T^n/\\lambda^{n+1}$.",
+      "$\\rho(T)$ is open and the resolvent is analytic there, satisfying the first resolvent identity $R(\\lambda,T)-R(\\mu,T)=-(\\lambda-\\mu)R(\\lambda,T)R(\\mu,T)$; on a complex Banach space $\\sigma(T)\\ne\\varnothing$ (Liouville), while over $\\mathbb R$ it can be empty.",
+      "Eigenvalues always belong to the spectrum, but spectral points need not be eigenvalues; the spectrum is the disjoint union of point, continuous and residual spectrum. Example: $(Mx)(t)=tx(t)$ on $L^2[0,1]$ has spectrum $[0,1]=\\sigma_c(M)$ and no eigenvalues.",
+      "Spectral radius formula: $r(T)=\\lim_{n\\to\\infty}\\|T^n\\|^{1/n}=\\inf_{n\\ge1}\\|T^n\\|^{1/n}$, and $r(T)\\le\\|T\\|$; for self-adjoint (more generally normal) operators $r(T)=\\|T\\|$.",
+      "The spectrum is invariant under similarity, $\\sigma(S^{-1}TS)=\\sigma(T)$; $T$ is invertible iff $0\\notin\\sigma(T)$; in finite dimensions $\\sigma(T)$ is exactly the set of eigenvalues, given by $\\det(\\lambda I-T)=0$."
+    ],
+    "examples": [
+      {
+        "problem": "设 $T$ 是 $\\ell^2$ 上的对角算子 $T=\\operatorname{diag}(1,\\tfrac12,\\tfrac13,\\dots)$。求 $\\sigma(T)$ 与 $\\sigma_p(T)$，并指出哪些谱点不是特征值。",
+        "solution": "$((\\lambda I-T)x)_n=(\\lambda-\\frac1n)x_n$。$\\lambda I-T$ 可逆当且仅当其系数列有正下界，即 $\\inf_n|\\lambda-\\frac1n|>0$，这等价于 $\\lambda\\notin\\{0\\}\\cup\\{\\frac1n:n\\ge1\\}$。因此\n$$\\sigma(T)=\\{0\\}\\cup\\{1/n:n\\ge1\\}$$\n（注：由谱闭也可直接看出 $0$ 必须补进去，它是特征值集合的唯一聚点）。每个 $1/n$ 都是特征值：$Te_n=\\frac1ne_n$，故 $\\sigma_p(T)=\\{1/n:n\\ge1\\}$。而 $0\\notin\\sigma_p(T)$：$Tx=0$ 迫使 $x_n=0$ 对所有 $n$ 成立，即 $T$ 单射；但 $T$ 不满射——解 $Tx=y$ 需要 $x_n=ny_n$ 平方可和，例如 $y=(1/n)$ 就不在值域之中（$\\sum n^2\\cdot\\frac1{n^2}=\\infty$），故 $T$ 不可逆。于是 $0\\in\\sigma(T)\\setminus\\sigma_p(T)$，且值域稠密（含所有有限支撑向量），所以 $0$ 属于连续谱：这正说明「谱点未必是特征值」。"
+      },
+      {
+        "problem": "对 $T=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 计算 $r(T)$ 与 $\\|T\\|$，并验证谱半径公式。",
+        "solution": "$T$ 是上三角矩阵，特征多项式为 $(\\lambda-1)^2$，故 $\\sigma(T)=\\{1\\}$，$r(T)=1$。而 $\\|T\\|$ 等于最大奇异值：$T^*T=\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix}$，其特征值为 $\\frac{3\\pm\\sqrt5}{2}$，故\n$$\\|T\\|=\\sqrt{\\frac{3+\\sqrt5}{2}}=\\frac{1+\\sqrt5}{2}\\approx1.618>1=r(T),$$\n说明 $r(T)<\\|T\\|$ 完全可以发生（非正规算子）。另一方面 $T^n=\\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$，其最大奇异值为 $\\frac{n+\\sqrt{n^2+4}}{2}$，于是\n$$\\|T^n\\|^{1/n}=\\left(\\frac{n+\\sqrt{n^2+4}}{2}\\right)^{1/n}\\to1=r(T),$$\n谱半径公式得到验证。"
+      }
+    ],
+    "tags": [
+      "谱",
+      "预解集",
+      "预解算子",
+      "谱半径",
+      "特征值"
+    ],
+    "links": [
+      "bounded-operators",
+      "compact-operators",
+      "spectral-theorem",
+      "open-mapping",
+      "banach-space"
+    ]
+  },
+  {
+    "id": "spectral-theorem",
+    "title": "自伴算子的谱定理",
+    "titleEn": "The Spectral Theorem for Self-Adjoint Operators",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "自伴算子的谱落在实轴上且范数等于谱半径；紧自伴算子更可以像对称矩阵一样用特征向量组成标准正交基来对角化。",
+    "summaryEn": "The spectrum of a self-adjoint operator lies on the real axis and its norm equals its spectral radius; a compact self-adjoint operator diagonalises along an orthonormal basis of eigenvectors, exactly like a symmetric matrix.",
+    "definition": "设 $H$ 是希尔伯特空间，$T\\in B(H)$。若 $T$ 等于它的伴随算子：$T=T^*$，即\n$$\\langle Tx,y\\rangle=\\langle x,Ty\\rangle,\\qquad \\forall x,y\\in H,$$\n则称 $T$ 是**自伴算子**。这是「实对称矩阵」在无限维的推广，两个基本结论是：二次型取实值，$\\langle Tx,x\\rangle\\in\\mathbb R$；并且**自伴算子的谱含于实轴**。同时范数与谱之间不再有间隙——对自伴（更一般地，正规）算子有\n$$\\|T\\|=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|=r(T),$$\n而一般算子只满足 $r(T)\\le\\|T\\|$（$2\\times2$ 的非正规 Jordan 块就是严格小于的例子）。还有一条自伴算子特有的「二次型范数」等式：$\\|T\\|=\\sup_{\\|x\\|=1}|\\langle Tx,x\\rangle|$。\n\n**紧自伴算子的谱定理**（希尔伯特—施密特定理的算子形式）：设 $H$ 是可分希尔伯特空间，$T$ 紧且自伴，则存在由 $T$ 的特征向量组成的**标准正交基** $\\{e_k\\}$，对应特征值 $\\lambda_k$ 全为实数；非零特征值至多可数，每个非零特征值的特征子空间有限维，并且非零特征值只能以 $0$ 为聚点。换句话说，$\\sigma(T)$ 中除可能的 $0$ 之外全部是特征值。按这组基把算子写开：\n$$Tx=\\sum_k\\lambda_k\\langle x,e_k\\rangle e_k,$$\n形式上与对称矩阵的谱分解 $T=\\sum_k\\lambda_kP_k$（$P_k$ 为到特征子空间的正交投影）完全相同；特别地 $\\|T\\|=\\max_k|\\lambda_k|$。\n\n当 $H$ 不可分或 $T$ 不紧时，一般自伴算子仍有谱定理，只是把「特征值展开」换成**投影值测度**（谱测度）$E$：$T=\\int_{\\sigma(T)}\\lambda\\,dE(\\lambda)$；在可分希尔伯特空间上，这等价于说 $T$ 酉等价于某个「乘实函数的乘法算子」。紧自伴情形之所以重要，正是因为它把抽象的谱定理退化回最熟悉的矩阵对角化，是积分算子理论与 Sturm–Liouville 问题的核心工具。",
+    "definitionEn": "Let $H$ be a Hilbert space and $T\\in B(H)$. Then $T$ is **self-adjoint** if it equals its adjoint, $T=T^*$, that is, $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in H$. This is the infinite-dimensional version of a real symmetric matrix, and two facts are basic: the quadratic form is real, $\\langle Tx,x\\rangle\\in\\mathbb R$, and **the spectrum of a self-adjoint operator lies on the real axis**. Moreover the gap between norm and spectrum closes: for self-adjoint (more generally normal) operators $\\|T\\|=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|=r(T)$, whereas a general operator only satisfies $r(T)\\le\\|T\\|$ (a $2\\times2$ non-normal Jordan block is a strict example). A further identity peculiar to self-adjoint operators is the ``quadratic form norm'' $\\|T\\|=\\sup_{\\|x\\|=1}|\\langle Tx,x\\rangle|$.\n\n**The spectral theorem for compact self-adjoint operators** (the operator form of the Hilbert–Schmidt theorem): let $H$ be a separable Hilbert space and let $T$ be compact and self-adjoint. Then $H$ has an **orthonormal basis** $\\{e_k\\}$ consisting of eigenvectors of $T$, with all eigenvalues $\\lambda_k$ real; the nonzero eigenvalues are at most countably many, each nonzero eigenspace is finite-dimensional, and the nonzero eigenvalues can accumulate only at $0$. In other words, every point of $\\sigma(T)$ except possibly $0$ is an eigenvalue. Expanding along this basis, $Tx=\\sum_k\\lambda_k\\langle x,e_k\\rangle e_k$, formally identical with the spectral decomposition $T=\\sum_k\\lambda_kP_k$ of a symmetric matrix ($P_k$ the orthogonal projection onto the eigenspace); in particular $\\|T\\|=\\max_k|\\lambda_k|$.\n\nWhen $H$ is non-separable or $T$ is not compact, the general self-adjoint spectral theorem replaces the eigenvalue expansion by a **projection-valued measure** (spectral measure) $E$: $T=\\int_{\\sigma(T)}\\lambda\\,dE(\\lambda)$; on a separable Hilbert space this says that $T$ is unitarily equivalent to multiplication by a real function. The compact self-adjoint case matters precisely because it reduces the abstract theorem to the familiar diagonalisation of a matrix; it is the central tool in the theory of integral operators and Sturm–Liouville problems.",
+    "formulas": [
+      {
+        "latex": "T=T^{*}\\iff \\langle Tx,y\\rangle=\\langle x,Ty\\rangle\\qquad\\forall x,y\\in H",
+        "note": "自伴的定义：$T$ 与伴随算子相等。等价地，二次型 $\\langle Tx,x\\rangle$ 对一切 $x$ 取实值。",
+        "noteEn": "Definition of self-adjointness: $T$ equals its adjoint. Equivalently, the quadratic form $\\langle Tx,x\\rangle$ is real for every $x$."
+      },
+      {
+        "latex": "T=T^{*}\\ \\Longrightarrow\\ \\sigma(T)\\subseteq\\mathbb R,\\qquad \\|T\\|=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|=r(T)=\\sup_{\\|x\\|=1}|\\langle Tx,x\\rangle|",
+        "note": "自伴算子的谱在实轴上，且范数等于谱半径（自伴算子是正规算子：$T^*T=TT^*$）。",
+        "noteEn": "A self-adjoint operator has real spectrum, and its norm equals its spectral radius (self-adjoint operators are normal: $T^*T=TT^*$)."
+      },
+      {
+        "latex": "T\\ \\text{紧自伴}\\ \\Longrightarrow\\ \\exists\\,\\{e_k\\}\\ \\text{标准正交基}:\\quad Te_k=\\lambda_k e_k,\\quad \\lambda_k\\in\\mathbb R,\\quad H=\\overline{\\operatorname{span}}\\{e_k\\}",
+        "note": "紧自伴算子的谱定理（希尔伯特—施密特）：特征向量构成标准正交基，特征值全为实数。",
+        "noteEn": "Spectral theorem for compact self-adjoint operators (Hilbert–Schmidt): the eigenvectors form an orthonormal basis and the eigenvalues are all real."
+      },
+      {
+        "latex": "Tx=\\sum_k\\lambda_k\\langle x,e_k\\rangle e_k,\\qquad \\|T\\|=\\max_k|\\lambda_k|",
+        "note": "按特征基展开，与对称矩阵的对角化完全同形（级数在范数意义下收敛）。",
+        "noteEn": "Expansion along the eigenbasis, exactly as for the diagonalisation of a symmetric matrix (the series converges in norm)."
+      },
+      {
+        "latex": "\\lambda_k\\ne0\\ \\text{至多可数},\\qquad \\lambda_k\\to0\\ (\\text{若有无穷多个}),\\qquad \\dim\\ker(T-\\lambda_kI)<\\infty",
+        "note": "非零特征值至多可数、只能以 $0$ 为聚点，且每个非零特征子空间有限维；$0$ 本身可以不是特征值（如 $\\operatorname{diag}(1/n)$）。",
+        "noteEn": "The nonzero eigenvalues are at most countable, can accumulate only at $0$, and each nonzero eigenspace is finite-dimensional; $0$ itself need not be an eigenvalue (e.g. $\\operatorname{diag}(1/n)$)."
+      }
+    ],
+    "expression": {
+      "text": "T = T*：⟨Tx,y⟩ = ⟨x,Ty⟩；紧自伴时 Tx = Σ λₖ⟨x,eₖ⟩eₖ，{eₖ} 为标准正交基，λₖ ∈ ℝ 且 λₖ→0",
+      "symbol": "T=\\sum_k\\lambda_k\\langle\\,\\cdot\\,,e_k\\rangle e_k",
+      "note": "自伴算子的谱在实轴上且 $\\|T\\|=r(T)$；紧自伴算子可由标准正交特征基完全对角化。",
+      "noteEn": "A self-adjoint operator has real spectrum with $\\|T\\|=r(T)$; a compact self-adjoint operator is completely diagonalised by an orthonormal eigenbasis."
+    },
+    "properties": [
+      "自伴算子的特征值全为实数：若 $Tx=\\lambda x$（$x\\ne0$），则 $\\lambda\\|x\\|^2=\\langle Tx,x\\rangle=\\overline{\\langle x,Tx\\rangle}=\\bar\\lambda\\|x\\|^2$；不同特征值的特征向量相互正交。",
+      "自伴算子的谱含于实轴，且 $\\|T\\|=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|=r(T)$；此外 $m=\\inf_{\\|x\\|=1}\\langle Tx,x\\rangle$ 与 $M=\\sup_{\\|x\\|=1}\\langle Tx,x\\rangle$ 都属于 $\\sigma(T)$，且 $\\sigma(T)\\subseteq[m,M]$。",
+      "紧自伴算子的谱定理：存在特征向量的标准正交基；非零特征值至多可数、特征子空间有限维、只能以 $0$ 为聚点。$0$ 可以不成为特征值（如 $\\operatorname{diag}(1/n)$，此时 $0\\in\\sigma_c(T)$）。",
+      "紧性不能去掉：乘法算子 $(Mx)(t)=tx(t)$ 在 $L^2[0,1]$ 上自伴但不紧，谱为 $[0,1]$ 且没有特征向量；一般自伴算子用投影值测度表达：$T=\\int\\lambda\\,dE(\\lambda)$。",
+      "常见应用：正算子（$\\langle Tx,x\\rangle\\ge0$）的谱非负，可开平方 $\\sqrt T$；把特征值按绝对值排序 $|\\lambda_1|\\ge|\\lambda_2|\\ge\\cdots$ 后 $\\|T\\|=|\\lambda_1|$，这是积分算子、Sturm–Liouville 问题的标准工具。"
+    ],
+    "propertiesEn": [
+      "Eigenvalues of a self-adjoint operator are real: if $Tx=\\lambda x$ with $x\\ne0$, then $\\lambda\\|x\\|^2=\\langle Tx,x\\rangle=\\overline{\\langle x,Tx\\rangle}=\\bar\\lambda\\|x\\|^2$; eigenvectors of distinct eigenvalues are orthogonal.",
+      "The spectrum of a self-adjoint operator is real and $\\|T\\|=\\sup_{\\lambda\\in\\sigma(T)}|\\lambda|=r(T)$; moreover both $m=\\inf_{\\|x\\|=1}\\langle Tx,x\\rangle$ and $M=\\sup_{\\|x\\|=1}\\langle Tx,x\\rangle$ belong to $\\sigma(T)$, and $\\sigma(T)\\subseteq[m,M]$.",
+      "Spectral theorem for compact self-adjoint operators: an orthonormal basis of eigenvectors exists; the nonzero eigenvalues are at most countable, their eigenspaces finite-dimensional, and they can accumulate only at $0$. The point $0$ need not be an eigenvalue (e.g. $\\operatorname{diag}(1/n)$, where $0\\in\\sigma_c(T)$).",
+      "Compactness cannot be dropped: the multiplication operator $(Mx)(t)=tx(t)$ on $L^2[0,1]$ is self-adjoint but not compact, with spectrum $[0,1]$ and no eigenvectors; the general self-adjoint spectral theorem is expressed through a projection-valued measure, $T=\\int\\lambda\\,dE(\\lambda)$.",
+      "Standard applications: positive operators ($\\langle Tx,x\\rangle\\ge0$) have nonnegative spectrum and admit a square root $\\sqrt T$; ordering the eigenvalues $|\\lambda_1|\\ge|\\lambda_2|\\ge\\cdots$ gives $\\|T\\|=|\\lambda_1|$, the standard tool for integral operators and Sturm–Liouville problems."
+    ],
+    "examples": [
+      {
+        "problem": "设 $G(t,s)=\\min(t,s)\\bigl(1-\\max(t,s)\\bigr)$（即 $t\\le s$ 时 $G(t,s)=t(1-s)$，$t>s$ 时 $G(t,s)=s(1-t)$），在 $L^2[0,1]$ 上定义 $(Kx)(t)=\\int_0^1G(t,s)x(s)\\,ds$。说明 $K$ 是紧自伴算子，并求全部特征值与特征向量。",
+        "solution": "$G$ 对称且连续，故 $K$ 自伴（交换积分次序即得 $\\langle Kx,y\\rangle=\\langle x,Ky\\rangle$）；核连续保证 $K$ 紧（可用对 $G$ 的多项式逼近得到有限秩算子的一致逼近）。设 $u=Kx$：$G$ 是边值问题 $-u''=x$、$u(0)=u(1)=0$ 的格林函数（对 $t$ 求二阶偏导时，$G$ 在 $s=t$ 处的斜率跳跃为 $1$，产生 $\\delta$ 源），于是 $u$ 满足 $-u''=x$、$u(0)=u(1)=0$。取 $u_k(t)=\\sin(k\\pi t)$：$-u_k''=(k\\pi)^2u_k$，故\n$$Ku_k=\\frac{1}{(k\\pi)^2}\\,u_k,$$\n即特征值 $\\lambda_k=\\frac{1}{(k\\pi)^2}$、特征向量 $\\sin(k\\pi t)$。归一化后的 $\\{\\sqrt2\\sin(k\\pi t)\\}$ 正是 $L^2[0,1]$ 的标准正交基，与谱定理完全一致：\n$$\\sigma(K)=\\{0\\}\\cup\\left\\{\\frac{1}{(k\\pi)^2}:k\\ge1\\right\\},$$\n非零特征值以 $0$ 为唯一聚点，而 $0$ 不是特征值（若 $Ku=0$ 则 $u''=0$ 且 $u(0)=u(1)=0$，故 $u=0$）。"
+      },
+      {
+        "problem": "用 $T=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ 验证谱定理：写出特征向量的标准正交基，并核对 $\\|T\\|=\\max_k|\\lambda_k|$。",
+        "solution": "$T=T^*$ 自伴。特征多项式 $(\\lambda-2)^2-1=(\\lambda-3)(\\lambda-1)$，特征值 $3,1$，对应单位特征向量 $e_1=\\frac{1}{\\sqrt2}(1,1)$、$e_2=\\frac{1}{\\sqrt2}(1,-1)$；二者正交，构成 $\\mathbb R^2$ 的标准正交基，谱分解为 $T=3P_1+P_2$。由于 $T$ 对称，$\\|T\\|=3=\\max\\{3,1\\}=\\sup|\\sigma(T)|$，与 $\\|T\\|=r(T)$ 一致。"
+      }
+    ],
+    "tags": [
+      "谱定理",
+      "自伴算子",
+      "紧算子",
+      "特征值",
+      "标准正交基"
+    ],
+    "links": [
+      "spectrum",
+      "compact-operators",
+      "inner-product-space",
+      "orthonormal-basis",
+      "bounded-operators"
+    ]
+  },
+  {
+    "id": "unbounded-operators",
+    "title": "无界算子初步",
+    "titleEn": "Introduction to Unbounded Operators",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "定义域只取稠密子空间、不能处处有界的算子；微分算子是原型，而 Hellinger–Toeplitz 定理表明任何无界对称算子都不可能定义在全空间上。",
+    "summaryEn": "Operators defined on a proper subspace (dense by convention) rather than the whole space and unbounded there; differentiation is the paradigm, and the Hellinger–Toeplitz theorem shows that no unbounded symmetric operator can be defined on the whole space.",
+    "definition": "**无界算子**是定义在希尔伯特空间（或巴拿赫空间）$H$ 的线性子空间 $D(T)$ 上的线性映射 $T:D(T)\\to H$，它不有界：不存在常数 $C$ 使 $\\|Tx\\|\\le C\\|x\\|$ 对一切 $x\\in D(T)$ 成立。有限维空间上每个线性算子都有界，因此无界算子只在无限维出现；它们的典型来源是微分：$L^2$ 中一个函数可以范数很小却剧烈振荡，微商把振荡放大，于是 $\\|Tf\\|/\\|f\\|$ 可以任意大。\n\n一个自然的念头是「把定义域扩到全空间不就可以回避这些麻烦了吗？」**Hellinger–Toeplitz 定理**说不可以：处处定义（$D(T)=H$）的对称算子必定有界。证明只用闭图像定理与对称性：若 $x_n\\to x$ 且 $Tx_n\\to z$，则对每个 $y$ 有\n$$\\langle z,y\\rangle=\\lim\\langle Tx_n,y\\rangle=\\lim\\langle x_n,Ty\\rangle=\\langle x,Ty\\rangle=\\langle Tx,y\\rangle,$$\n故 $z=Tx$，图像闭，$T$ 有界。结论：**任何无界对称算子的定义域都是 $H$ 的真子空间**，通常取为稠密子空间。\n\n定义域还决定「伴随」的含义。$T$ 的**伴随** $T^*$ 的定义域由有界性条件给出：\n$$D(T^*)=\\{y\\in H:\\exists C,\\ |\\langle Tx,y\\rangle|\\le C\\|x\\|\\ \\ \\forall x\\in D(T)\\},$$\n对这样的 $y$，$x\\mapsto\\langle Tx,y\\rangle$ 可连续延拓到 $H$，再由 Riesz 表示定理唯一确定 $T^*y$。若 $T\\subseteq T^*$（在 $D(T)$ 上二者一致），称 $T$ **对称**；若 $T=T^*$，称 $T$ **自伴**——这要求两个定义域完全相同，比对称强得多，而且微调定义域就能改变自伴性（例如区间上导数算子取不同的边界条件）。若对称算子 $T$ 的闭包 $\\overline T$ 自伴，则称 $T$ **本质自伴**：它有唯一的自伴扩张，这正是量子力学中「该选哪个自伴扩张」问题的答案。",
+    "definitionEn": "An **unbounded operator** is a linear map $T:D(T)\\to H$ defined on a linear subspace $D(T)$ of a Hilbert space (or Banach space) $H$ which is not bounded: no constant $C$ satisfies $\\|Tx\\|\\le C\\|x\\|$ for all $x\\in D(T)$. Every linear operator on a finite-dimensional space is bounded, so unbounded operators appear only in infinite dimensions; their typical source is differentiation, since a function in $L^2$ can have small norm while oscillating violently, and differentiation amplifies those oscillations without bound.\n\nA natural hope is to enlarge the domain to all of $H$ and avoid the complications. The **Hellinger–Toeplitz theorem** rules this out: a symmetric operator defined everywhere ($D(T)=H$) is automatically bounded. The proof uses only the closed graph theorem and symmetry: if $x_n\\to x$ and $Tx_n\\to z$, then for every $y$,\n$\\langle z,y\\rangle=\\lim\\langle Tx_n,y\\rangle=\\lim\\langle x_n,Ty\\rangle=\\langle x,Ty\\rangle=\\langle Tx,y\\rangle$,\nso $z=Tx$; the graph is closed and $T$ is bounded. Consequently, **every unbounded symmetric operator has a proper domain** in $H$, usually taken dense.\n\nThe domain also governs what ``adjoint'' means. The **adjoint** $T^*$ has domain\n$D(T^*)=\\{y\\in H:\\exists C,\\ |\\langle Tx,y\\rangle|\\le C\\|x\\|\\ \\ \\forall x\\in D(T)\\}$;\nfor such a $y$ the functional $x\\mapsto\\langle Tx,y\\rangle$ extends continuously to $H$, and Riesz representation determines $T^*y$ uniquely. If $T\\subseteq T^*$ (the two agree on $D(T)$), $T$ is called **symmetric**; if $T=T^*$, it is **self-adjoint** — note that this requires the two domains to coincide, which is much stronger than symmetry, and adjusting the domain (for instance boundary conditions for a derivative on an interval) can change self-adjointness. If a symmetric operator $T$ has a self-adjoint closure $\\overline T$, then $T$ is called **essentially self-adjoint**: it has a unique self-adjoint extension, which is precisely the answer to the physicist's question of which self-adjoint extension to choose.",
+    "formulas": [
+      {
+        "latex": "T:D(T)\\to H,\\qquad D(T)\\ \\text{是}\\ H\\ \\text{的真子空间（稠密性属通常约定）},\\qquad \\sup_{x\\ne0}\\frac{\\|Tx\\|}{\\|x\\|}=\\infty",
+        "note": "无界算子的画像：定义域是稠密真子空间，且 $\\|Tx\\|/\\|x\\|$ 无上界。",
+        "noteEn": "The picture of an unbounded operator: a dense proper domain, with $\\|Tx\\|/\\|x\\|$ unbounded."
+      },
+      {
+        "latex": "D(T)=H\\ \\text{且}\\ T\\ \\text{对称}\\ \\Longrightarrow\\ T\\in B(H)\\qquad(\\text{Hellinger–Toeplitz})",
+        "note": "处处定义的对称算子必有界（闭图像定理）。因此无界对称算子（如动量算子）只能定义在真子空间上。",
+        "noteEn": "An everywhere defined symmetric operator is bounded (closed graph theorem). Hence an unbounded symmetric operator such as the momentum operator can only have a proper domain."
+      },
+      {
+        "latex": "T\\ \\text{对称}:\\ T\\subseteq T^{*};\\qquad T\\ \\text{自伴}:\\ T=T^{*},\\ \\text{即}\\ D(T)=D(T^{*})",
+        "note": "对称只是「图像包含」，自伴要求定义域完全相同；自伴必对称，反之不成立。",
+        "noteEn": "Symmetry is a graph inclusion, while self-adjointness requires identical domains; self-adjoint implies symmetric, but not conversely."
+      },
+      {
+        "latex": "D(T^{*})=\\{y\\in H:\\ \\exists C,\\ |\\langle Tx,y\\rangle|\\le C\\|x\\|\\ \\ \\forall x\\in D(T)\\}",
+        "note": "伴随算子的定义域：使 $x\\mapsto\\langle Tx,y\\rangle$ 有界的那些 $y$，$T^*y$ 由 Riesz 表示定理确定。",
+        "noteEn": "The domain of the adjoint consists of those $y$ for which $x\\mapsto\\langle Tx,y\\rangle$ is bounded; then $T^*y$ is determined by the Riesz representation theorem."
+      },
+      {
+        "latex": "p=-i\\frac{d}{dx},\\qquad D(p)=H^{1}(\\mathbb R),\\qquad p=p^{*},\\qquad \\sigma(p)=\\mathbb R",
+        "note": "动量算子：定义域取索伯列夫空间 $H^1(\\mathbb R)$（函数与弱导数都平方可和）时自伴，谱为全实轴且无特征值。",
+        "noteEn": "The momentum operator: with domain the Sobolev space $H^1(\\mathbb R)$ (function and weak derivative square-integrable) it is self-adjoint, with spectrum the whole real line and no eigenvalues."
+      }
+    ],
+    "expression": {
+      "text": "p = −i d/dx，D(p) = H¹(ℝ)，p = p*；M x(t) = t x(t)，D(M) = {x ∈ L²(ℝ) : t x ∈ L²(ℝ)}",
+      "symbol": "T\\subseteq T^{*}\\ (\\text{对称}),\\qquad T=T^{*}\\ (\\text{自伴})",
+      "note": "自伴要求定义域相同；Hellinger–Toeplitz：处处定义的对称算子必有界。",
+      "noteEn": "Self-adjointness requires equal domains; Hellinger–Toeplitz: an everywhere defined symmetric operator is bounded."
+    },
+    "properties": [
+      "Hellinger–Toeplitz 定理：处处定义的对称算子必有界；因此无界对称算子（如动量算子）不可能定义在全空间上，其定义域必是稠密真子空间。",
+      "对称算子满足 $T\\subseteq T^*$，而伴随算子总是闭的，故对称算子可闭；闭包 $\\overline T$ 的伴随仍为 $T^*$。",
+      "自伴严格强于对称：要求 $D(T)=D(T^*)$。例如 $\\frac{d}{dx}$ 在 $H^1(\\mathbb R)$ 上只是斜对称（$D\\subseteq-D^*$），而 $p=-i\\frac{d}{dx}$（同一定义域）自伴；在有界区间上，$-i\\frac{d}{dx}$ 由 $C_c^\\infty(0,1)$ 出发有整族边界条件 $f(1)=e^{i\\theta}f(0)$ 给出的自伴扩张。",
+      "无界自伴算子的例子：位置算子 $(Mx)(t)=tx(t)$，$D(M)=\\{x\\in L^2(\\mathbb R):tx\\in L^2(\\mathbb R)\\}$，自伴无界，$\\sigma(M)=\\mathbb R$ 且无特征值；动量算子 $p=-i\\,d/dx$ 在 $H^1(\\mathbb R)$ 上自伴无界，$\\sigma(p)=\\mathbb R$ 为连续谱。",
+      "本质自伴的对称算子有唯一自伴扩张；一般的对称算子可能没有或有多个自伴扩张（由亏指数分类）。有界自伴算子的谱定理可通过 Cayley 变换推广到无界自伴算子。"
+    ],
+    "propertiesEn": [
+      "Hellinger–Toeplitz: an everywhere defined symmetric operator is bounded; hence an unbounded symmetric operator such as the momentum operator cannot be defined on all of $H$ and must have a dense proper domain.",
+      "A symmetric operator satisfies $T\\subseteq T^*$, and adjoints are always closed, so symmetric operators are closable; the adjoint of the closure $\\overline T$ is again $T^*$.",
+      "Self-adjointness is strictly stronger than symmetry: it requires $D(T)=D(T^*)$. For example $\\frac{d}{dx}$ on $H^1(\\mathbb R)$ is only skew-symmetric ($D\\subseteq-D^*$), whereas $p=-i\\frac{d}{dx}$ on the same domain is self-adjoint; on a bounded interval $-i\\frac{d}{dx}$ starting from $C_c^\\infty(0,1)$ has a whole family of self-adjoint extensions given by boundary conditions $f(1)=e^{i\\theta}f(0)$.",
+      "Examples of unbounded self-adjoint operators: the position operator $(Mx)(t)=tx(t)$ with $D(M)=\\{x\\in L^2(\\mathbb R):tx\\in L^2(\\mathbb R)\\}$, self-adjoint and unbounded with $\\sigma(M)=\\mathbb R$ and no eigenvalues; the momentum operator $p=-i\\,d/dx$ on $H^1(\\mathbb R)$, self-adjoint and unbounded with purely continuous spectrum $\\mathbb R$.",
+      "An essentially self-adjoint symmetric operator has a unique self-adjoint extension; a general symmetric operator may have none or several, classified by deficiency indices. The spectral theorem for bounded self-adjoint operators extends to unbounded self-adjoint operators via the Cayley transform."
+    ],
+    "examples": [
+      {
+        "problem": "证明位置算子 $(Mx)(t)=tx(t)$（定义在 $L^2(\\mathbb R)$ 上，$D(M)=\\{x:\\int_{\\mathbb R}t^2|x(t)|^2\\,dt<\\infty\\}$）定义域稠密、无界且自伴。",
+        "solution": "稠密性：$C_c(\\mathbb R)$ 中的函数有界支撑，显然属于 $D(M)$。无界性：取 $x_n=\\frac{1}{\\sqrt n}\\mathbf{1}_{(0,n)}$，则 $\\|x_n\\|=1$，而\n$$\\|Mx_n\\|^2=\\frac1n\\int_0^nt^2\\,dt=\\frac{n^2}{3}\\to\\infty,$$\n故无界。自伴性：对 $x,y\\in D(M)$ 直接计算得 $\\langle Mx,y\\rangle=\\int tx\\bar y=\\langle x,My\\rangle$（积分绝对收敛），故 $M\\subseteq M^*$。反之设 $y\\in D(M^*)$：若 $y\\notin D(M)$，令 $c_N=\\|My\\,\\mathbf 1_{[-N,N]}\\|$（随 $N$ 单调递增，由 $\\|My\\|=\\infty$ 知 $c_N\\to\\infty$），取 $x_N=\\frac{My\\,\\mathbf 1_{[-N,N]}}{c_N}$，则 $\\|x_N\\|=1$、$x_N\\in D(M)$，且 $\\langle Mx_N,y\\rangle=c_N\\to\\infty$，与 $y\\in D(M^*)$ 矛盾。故 $D(M^*)=D(M)$，$M$ 自伴。"
+      },
+      {
+        "problem": "验证动量算子 $p=-i\\frac{d}{dx}$、$D(p)=H^1(\\mathbb R)$ 是无界对称算子，并说明它为什么不能处处定义。",
+        "solution": "对 $f,g\\in H^1(\\mathbb R)$ 分部积分。$H^1$ 函数在 $\\pm\\infty$ 处趋于 $0$，边界项消失：\n$$\\langle pf,g\\rangle=-i\\int f'\\bar g=i\\int f\\bar g'=\\langle f,pg\\rangle,$$\n故 $p$ 对称（可以进一步证明 $D(p^*)=H^1$，即 $p$ 自伴）。无界性：取非零 $\\varphi\\in C_c^\\infty(\\mathbb R)$，令 $f_n(t)=e^{int}\\varphi(t)$，则 $\\|f_n\\|=\\|\\varphi\\|$ 不随 $n$ 变化，而\n$$\\|pf_n\\|=\\|n\\varphi-i\\varphi'\\|\\ge n\\|\\varphi\\|-\\|\\varphi'\\|\\to\\infty,$$\n故 $p$ 无界。由 Hellinger–Toeplitz 定理，处处定义的对称算子必有界，所以 $p$ 的自伴性只能在真子空间 $H^1(\\mathbb R)$ 上实现，定义域不能扩为整个 $L^2(\\mathbb R)$。"
+      }
+    ],
+    "tags": [
+      "无界算子",
+      "定义域",
+      "Hellinger–Toeplitz",
+      "自伴算子",
+      "微分算子"
+    ],
+    "links": [
+      "bounded-operators",
+      "closed-graph",
+      "spectrum",
+      "spectral-theorem",
+      "inner-product-space"
+    ]
+  },
+  {
+    "id": "weak-convergence",
+    "title": "弱收敛与自反空间",
+    "titleEn": "Weak Convergence and Reflexive Spaces",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "与所有连续线性泛函配对检验的收敛：比范数收敛弱，却换来自反空间中「有界序列必有弱收敛子列」的紧性。",
+    "summaryEn": "Convergence tested against every continuous linear functional — weaker than norm convergence, but in exchange every bounded sequence in a reflexive space has a weakly convergent subsequence.",
+    "definition": "设 $X$ 是巴拿赫空间，$\\{x_n\\}\\subset X$，$x\\in X$。若对**每个** $f\\in X^*$ 都有 $f(x_n)\\to f(x)$，就说 $x_n$ **弱收敛**于 $x$，记作 $x_n\\rightharpoonup x$。它的含义是让对偶空间中全体连续线性泛函一起当「检验员」：$X^*$ 越丰富，能看穿的细节越多，弱收敛就越接近范数收敛。最基本的比较是：**范数收敛必弱收敛**（每个 $f$ 都连续），**反之不成立**——$\\ell^2$ 中的标准正交基满足 $e_n\\rightharpoonup0$（对任意 $y\\in\\ell^2$ 有 $\\langle e_n,y\\rangle=y_n\\to0$），但 $\\|e_n\\|=1$ 不趋于 $0$。（在希尔伯特空间中，补上范数条件即可反推：$x_n\\to x$ 当且仅当 $x_n\\rightharpoonup x$ 且 $\\|x_n\\|\\to\\|x\\|$。）\n\n弱收敛虽弱，却自带两条正则性。其一是**有界性**：弱收敛序列必有界。证法是把每个 $x_n$ 看作 $X^*$ 上的泛函 $f\\mapsto f(x_n)$（这正是典范嵌入），它们逐点有界，由一致有界原理其范数有界。其二是**范数的弱下半连续性**：$\\|x\\|\\le\\liminf_{n\\to\\infty}\\|x_n\\|$，弱极限的范数只会更小。在希尔伯特空间里，Riesz 表示定理把弱收敛翻译成「对每个 $y$ 有 $\\langle x_n,y\\rangle\\to\\langle x,y\\rangle$」。\n\n弱收敛真正的好处是紧性。称 $X$ **自反**，如果典范嵌入 $\\kappa(x)(f)=f(x)$ 把 $X$ 映满 $X^{**}$（即 $X^{**}=\\kappa(X)$）。自反空间的核心红利是 **Eberlein–Šmulian 定理**：单位球弱紧，从而**自反空间中任何有界序列都有弱收敛子列**——这是无限维中替代「有界闭集紧」的标准结论。$L^p(1<p<\\infty)$ 与希尔伯特空间都自反；$L^1$、$L^\\infty$ 与 $C[a,b]$ 都不自反。一个容易混淆的对比：对偶空间 $X^*$ 的单位球总是弱*紧的（Banach–Alaoglu 定理），这只需以 $X$ 为检验员；而**单位球弱紧等价于 $X$ 自反**（Kakutani 定理）。$L^1$ 不自反的一个具体表现是：有界序列 $n\\mathbf 1_{(0,1/n)}$ 没有任何弱收敛子列。",
+    "definitionEn": "Let $X$ be a Banach space, $\\{x_n\\}\\subset X$ and $x\\in X$. We say that $x_n$ **converges weakly** to $x$, written $x_n\\rightharpoonup x$, if $f(x_n)\\to f(x)$ for **every** $f\\in X^*$. The idea is that all continuous linear functionals act together as detectors: the richer $X^*$ is, the more detail they see, and the closer weak convergence comes to norm convergence. The basic comparison: **norm convergence implies weak convergence** (every $f$ is continuous), **but not conversely** — in $\\ell^2$ the standard orthonormal basis satisfies $e_n\\rightharpoonup0$ (for every $y\\in\\ell^2$, $\\langle e_n,y\\rangle=y_n\\to0$) although $\\|e_n\\|=1$ does not tend to $0$. (In a Hilbert space one extra hypothesis reverses the implication: $x_n\\to x$ iff $x_n\\rightharpoonup x$ and $\\|x_n\\|\\to\\|x\\|$.)\n\nWeak convergence is weak, but it comes with two regularity properties for free. First, **boundedness**: a weakly convergent sequence is bounded. The proof views each $x_n$ as the functional $f\\mapsto f(x_n)$ on $X^*$ (this is exactly the canonical embedding); the sequence is pointwise bounded, so the uniform boundedness principle bounds the norms. Second, **weak lower semicontinuity of the norm**: $\\|x\\|\\le\\liminf_{n\\to\\infty}\\|x_n\\|$, so a weak limit can only be smaller in norm. In a Hilbert space the Riesz representation theorem translates weak convergence into $\\langle x_n,y\\rangle\\to\\langle x,y\\rangle$ for every $y$.\n\nThe real gain of weak convergence is compactness. A Banach space $X$ is **reflexive** if the canonical embedding $\\kappa(x)(f)=f(x)$ maps $X$ onto $X^{**}$, i.e. $X^{**}=\\kappa(X)$. The payoff is the **Eberlein–Šmulian theorem**: the unit ball is weakly compact, hence **every bounded sequence in a reflexive space has a weakly convergent subsequence** — the standard infinite-dimensional substitute for ``bounded closed sets are compact''. The spaces $L^p(1<p<\\infty)$ and all Hilbert spaces are reflexive, whereas $L^1$, $L^\\infty$ and $C[a,b]$ are not. One contrast is easily confused: the unit ball of a dual space $X^*$ is always weak-star compact (Banach–Alaoglu), which only uses testing against $X$; weak compactness of the unit ball, by contrast, is equivalent to reflexivity (Kakutani). A concrete sign that $L^1$ is not reflexive: the bounded sequence $n\\mathbf 1_{(0,1/n)}$ has no weakly convergent subsequence.",
+    "formulas": [
+      {
+        "latex": "x_n\\rightharpoonup x\\iff f(x_n)\\to f(x)\\qquad\\forall f\\in X^{*}",
+        "note": "弱收敛的定义：与 $X^*$ 中每个连续线性泛函配对都收敛。$X^*$ 越丰富，弱收敛就越强。",
+        "noteEn": "Definition of weak convergence: convergence when paired with every continuous linear functional in $X^*$. The richer $X^*$, the stronger weak convergence is."
+      },
+      {
+        "latex": "x_n\\to x\\ \\Longrightarrow\\ x_n\\rightharpoonup x\\qquad(\\text{反之不成立})",
+        "note": "范数收敛必弱收敛，反之不然：$\\ell^2$ 中 $e_n\\rightharpoonup0$ 但 $\\|e_n\\|=1$ 不收敛到 $0$。方向不能写反。",
+        "noteEn": "Norm convergence implies weak convergence, but not conversely: in $\\ell^2$, $e_n\\rightharpoonup0$ while $\\|e_n\\|=1$ does not tend to $0$. The direction must not be reversed."
+      },
+      {
+        "latex": "x_n\\rightharpoonup x\\ \\Longrightarrow\\ \\sup_n\\|x_n\\|<\\infty\\quad\\text{且}\\quad \\|x\\|\\le\\liminf_{n\\to\\infty}\\|x_n\\|",
+        "note": "弱收敛序列有界（一致有界原理），且范数是弱下半连续的：弱极限的范数不超过范数的下极限。",
+        "noteEn": "A weakly convergent sequence is bounded (uniform boundedness principle), and the norm is weakly lower semicontinuous: the limit has norm at most the lower limit of the norms."
+      },
+      {
+        "latex": "H\\ \\text{希尔伯特}:\\quad x_n\\rightharpoonup x\\iff \\langle x_n,y\\rangle\\to\\langle x,y\\rangle\\ \\forall y\\in H;\\qquad x_n\\to x\\iff x_n\\rightharpoonup x\\ \\text{且}\\ \\|x_n\\|\\to\\|x\\|",
+        "note": "里斯表示定理把弱收敛写成内积收敛；此时「弱收敛 + 范数收敛到极限的范数」等价于范数收敛。",
+        "noteEn": "Riesz representation rewrites weak convergence as convergence of all inner products; here weak convergence plus convergence of the norms to the norm of the limit is equivalent to norm convergence."
+      },
+      {
+        "latex": "X\\ \\text{自反}:\\quad \\|x_n\\|\\le C\\ \\Longrightarrow\\ \\exists\\,x_{n_k},\\ \\exists\\,x:\\ x_{n_k}\\rightharpoonup x\\qquad(\\text{Eberlein–Šmulian})",
+        "note": "自反空间中单位球弱紧，故有界序列必有弱收敛子列。$L^p(1<p<\\infty)$、希尔伯特空间自反；$L^1$、$L^\\infty$、$C[a,b]$ 不自反。",
+        "noteEn": "In a reflexive space the unit ball is weakly compact, so every bounded sequence has a weakly convergent subsequence. $L^p(1<p<\\infty)$ and Hilbert spaces are reflexive; $L^1$, $L^\\infty$ and $C[a,b]$ are not."
+      }
+    ],
+    "expression": {
+      "text": "xₙ ⇀ x ⟺ 对每个 f∈X* 有 f(xₙ)→f(x)；X 自反 ⟺ 典范嵌入满射，κ(x)(f)=f(x)",
+      "symbol": "x_n\\rightharpoonup x",
+      "note": "范数收敛 ⇒ 弱收敛；自反空间中有界序列必有弱收敛子列。",
+      "noteEn": "Norm convergence implies weak convergence; every bounded sequence in a reflexive space has a weakly convergent subsequence."
+    },
+    "properties": [
+      "弱极限唯一，线性运算保持弱收敛；范数收敛必弱收敛，反之不然（$\\ell^2$ 中 $e_n\\rightharpoonup0$ 而 $\\|e_n\\|=1$）。",
+      "弱收敛序列必有界（典范嵌入 + 一致有界原理），且范数弱下半连续：$\\|x\\|\\le\\liminf_{n}\\|x_n\\|$。",
+      "自反空间中单位球弱紧，有界序列必有弱收敛子列（Eberlein–Šmulian）；$L^p(1<p<\\infty)$ 与希尔伯特空间自反，$L^1$、$L^\\infty$、$C[a,b]$ 不自反。",
+      "希尔伯特空间中弱收敛等价于对每个 $y$ 有 $\\langle x_n,y\\rangle\\to\\langle x,y\\rangle$（里斯表示定理）；弱收敛且 $\\|x_n\\|\\to\\|x\\|$ 时即范数收敛。",
+      "紧算子把弱收敛升级为范数收敛：$x_n\\rightharpoonup x$ 且 $T$ 紧 $\\Rightarrow Tx_n\\to Tx$；当 $X$ 自反时该性质反过来刻画紧性。"
+    ],
+    "propertiesEn": [
+      "Weak limits are unique and linear operations preserve weak convergence; norm convergence implies weak convergence but not conversely ($e_n\\rightharpoonup0$ with $\\|e_n\\|=1$ in $\\ell^2$).",
+      "A weakly convergent sequence is bounded (canonical embedding plus the uniform boundedness principle), and the norm is weakly lower semicontinuous: $\\|x\\|\\le\\liminf_{n}\\|x_n\\|$.",
+      "In a reflexive space the unit ball is weakly compact, so every bounded sequence has a weakly convergent subsequence (Eberlein–Šmulian); $L^p$, $1<p<\\infty$, and Hilbert spaces are reflexive, while $L^1$, $L^\\infty$ and $C[a,b]$ are not.",
+      "In a Hilbert space weak convergence is equivalent to $\\langle x_n,y\\rangle\\to\\langle x,y\\rangle$ for every $y$ (Riesz representation); weak convergence together with $\\|x_n\\|\\to\\|x\\|$ gives norm convergence.",
+      "A compact operator turns weak convergence into norm convergence: $x_n\\rightharpoonup x$ with $T$ compact implies $Tx_n\\to Tx$; when $X$ is reflexive this property characterises compactness."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\ell^2$ 中证明 $e_n\\rightharpoonup0$ 但不范数收敛，并验证 $\\|0\\|\\le\\liminf_n\\|e_n\\|$。",
+        "solution": "任取 $y=(y_k)\\in\\ell^2$。由 $\\sum_k|y_k|^2<\\infty$ 得 $y_n\\to0$，故\n$$\\langle e_n,y\\rangle=y_n\\to0=\\langle0,y\\rangle,$$\n即 $e_n\\rightharpoonup0$。但 $\\|e_n-0\\|=1\\not\\to0$，所以弱收敛确实严格弱于范数收敛，两个方向不能互换。同时 $\\|0\\|=0\\le1=\\liminf_n\\|e_n\\|$，说明范数只是弱下半连续的，弱极限的范数可以严格更小。"
+      },
+      {
+        "problem": "用 $f_n=n\\mathbf 1_{(0,1/n)}\\in L^1[0,1]$ 说明 $L^1[0,1]$ 不自反。",
+        "solution": "$\\|f_n\\|_1=1$，是有界序列。假设某个子列 $f_{n_k}\\rightharpoonup f$（$f\\in L^1$），则对每个 $g\\in L^\\infty$ 有 $\\int_0^1f_{n_k}g\\to\\int_0^1fg$。特别取 $g\\in C[0,1]$：\n$$\\int_0^1f_{n_k}g=n_k\\int_0^{1/n_k}g(t)\\,dt\\to g(0)\\qquad(\\text{积分平均}),$$\n于是必须有 $\\int_0^1fg=g(0)$ 对一切连续 $g$ 成立。取 $g_m(t)=(1-t)^m$：左边由控制收敛定理趋于 $0$，而右边 $g_m(0)=1$，矛盾。（等价地说，泛函 $g\\mapsto g(0)$ 不能由任何 $L^1$ 函数表示。）故该有界序列没有弱收敛子列；若 $L^1$ 自反，Eberlein–Šmulian 定理保证有界序列必有弱收敛子列，矛盾——所以 $L^1[0,1]$ 不自反。"
+      }
+    ],
+    "tags": [
+      "弱收敛",
+      "自反空间",
+      "Eberlein–Šmulian",
+      "弱拓扑",
+      "一致有界原理"
+    ],
+    "links": [
+      "dual-space",
+      "hahn-banach",
+      "banach-space",
+      "lp-spaces",
+      "compact-operators"
+    ]
+  },
+  {
+    "id": "fredholm-alternative",
+    "title": "弗雷德霍姆二择一定理",
+    "titleEn": "The Fredholm Alternative",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "对紧算子与 λ≠0，方程 (λI−T)x=y 要么对每个 y 唯一可解，要么齐次方程有非零解（此时非齐次方程无解或有无穷多解）；等价地，紧算子的非零谱点全是特征值。",
+    "summaryEn": "For a compact operator T and λ≠0, the equation (λI−T)x=y either has a unique solution for every y, or the homogeneous equation has a nonzero solution (then the equation has either no solution or infinitely many); equivalently, every nonzero spectral point of a compact operator is an eigenvalue.",
+    "definition": "设 $X$ 是巴拿赫空间，$T\\in B(X)$ 紧，$\\lambda\\ne0$，考察方程 $(\\lambda I-T)x=y$（$y\\in X$）。**弗雷德霍姆二择一定理**断言：下列两种情形必居其一。\n\n**情形一（唯一可解）**：对每个 $y\\in X$，方程有唯一解 $x=(\\lambda I-T)^{-1}y$。此时 $\\lambda\\in\\rho(T)$，$\\lambda I-T$ 在 $B(X)$ 中可逆且逆有界。\n\n**情形二（齐次方程有非零解）**：$(\\lambda I-T)x=0$ 有非零解，即 $\\lambda$ 是 $T$ 的特征值，且特征子空间有限维。此时 $\\lambda I-T$ 的值域是真子空间：非齐次方程**要么无解，要么有无穷多个解**——只要有一个解 $x_0$，$x_0+\\ker(\\lambda I-T)$ 全是解。哪些 $y$ 有解由正交条件给出：$y$ 可解当且仅当 $y$ 与伴随方程 $(\\lambda I-T^*)f=0$ 的每个解正交，即 $f(y)=0$ 对一切 $f\\in\\ker(\\lambda I-T^*)$ 成立（等价写法 $y\\in\\operatorname{ran}(\\lambda I-T)$）。当 $T$ 自伴时条件化简为 $y\\perp\\ker(\\lambda I-T)$。\n\n与有限维对照，这就是「$A$ 可逆则 $Ax=y$ 唯一可解；$A$ 奇异则 $Ax=y$ 无解或有无穷多解」的无限维版本：紧性使 $\\lambda I-T$ 表现得像有限维矩阵，谱里因此没有「怪东西」。换言之，它是谱论形式的陈述：**紧算子的每个非零谱点都是特征值**，即 $\\lambda\\in\\sigma(T)$、$\\lambda\\ne0$ 时必有 $\\lambda\\in\\sigma_p(T)$，并且 $\\dim\\ker(\\lambda I-T)=\\dim\\ker(\\lambda I-T^*)<\\infty$、值域闭（弗雷德霍姆算子的指标为零）。最后必须强调 $\\lambda=0$ 被排除在二择一之外：无限维空间中紧算子总有 $0\\in\\sigma(T)$（若 $T$ 可逆，则 $I=T^{-1}T$ 作为紧算子之积也紧，迫使 $\\dim X<\\infty$），而 $0$ 可能只是连续谱——对角算子 $\\operatorname{diag}(1/n)$ 满足 $0\\in\\sigma(T)\\setminus\\sigma_p(T)$，在 $\\lambda=0$ 处二择一失效。",
+    "definitionEn": "Let $X$ be a Banach space, let $T\\in B(X)$ be compact and let $\\lambda\\ne0$. Consider the equation $(\\lambda I-T)x=y$ with $y\\in X$. **The Fredholm alternative** states that exactly one of the following two alternatives holds.\n\n**First alternative (unique solvability).** For every $y\\in X$ the equation has a unique solution $x=(\\lambda I-T)^{-1}y$; equivalently $\\lambda\\in\\rho(T)$, so $\\lambda I-T$ is invertible in $B(X)$ with bounded inverse.\n\n**Second alternative (the homogeneous equation has a nonzero solution).** $(\\lambda I-T)x=0$ has a nonzero solution, i.e. $\\lambda$ is an eigenvalue of $T$ with finite-dimensional eigenspace. Then the range of $\\lambda I-T$ is a proper subspace and the inhomogeneous equation has **either no solution or infinitely many**: once one solution $x_0$ exists, so do all of $x_0+\\ker(\\lambda I-T)$. Which $y$ are solvable is decided by an orthogonality condition: $y$ lies in $\\operatorname{ran}(\\lambda I-T)$ iff $f(y)=0$ for every $f\\in\\ker(\\lambda I-T^*)$, i.e. $y$ is orthogonal to every solution of the adjoint homogeneous equation. If $T$ is self-adjoint, the condition simply reads $y\\perp\\ker(\\lambda I-T)$.\n\nCompared with finite-dimensional linear algebra, this is the infinite-dimensional version of ``$A$ invertible means $Ax=y$ is uniquely solvable, while a singular $A$ gives either no solution or infinitely many.'' Compactness makes $\\lambda I-T$ behave like a matrix, and the spectrum contains nothing pathological. Equivalently, the theorem is a statement about spectra: **every nonzero spectral point of a compact operator is an eigenvalue**, and indeed for $\\lambda\\in\\sigma(T)$, $\\lambda\\ne0$, one has $\\dim\\ker(\\lambda I-T)=\\dim\\ker(\\lambda I-T^*)<\\infty$ with closed range (the Fredholm operator $\\lambda I-T$ has index zero). Finally, $\\lambda=0$ must be excluded: a compact operator on an infinite-dimensional space always has $0\\in\\sigma(T)$ (if $T$ were invertible, $I=T^{-1}T$ would be compact, forcing $\\dim X<\\infty$), yet $0$ may merely be continuous spectrum — for $\\operatorname{diag}(1/n)$ one has $0\\in\\sigma(T)\\setminus\\sigma_p(T)$, and at $\\lambda=0$ the alternative genuinely fails.",
+    "formulas": [
+      {
+        "latex": "T\\ \\text{紧},\\ \\lambda\\ne0:\\qquad \\forall y\\ \\exists!\\,x:\\ (\\lambda I-T)x=y\\quad\\text{或}\\quad \\exists x\\ne0:\\ (\\lambda I-T)x=0",
+        "note": "二择一的两个分支：要么对每个 $y$ 唯一可解（$\\lambda\\in\\rho(T)$），要么齐次方程有非零解（$\\lambda$ 是特征值）。",
+        "noteEn": "The two branches: either unique solvability for every $y$ ($\\lambda\\in\\rho(T)$), or the homogeneous equation has a nonzero solution ($\\lambda$ is an eigenvalue)."
+      },
+      {
+        "latex": "\\lambda\\in\\sigma(T),\\ \\lambda\\ne0\\ \\Longrightarrow\\ \\lambda\\in\\sigma_p(T)\\qquad(\\text{非零谱点都是特征值})",
+        "note": "紧算子谱论的版本：$\\lambda\\ne0$ 时 $\\lambda I-T$ 不可逆当且仅当它有非零核。$\\lambda=0$ 一般不适用。",
+        "noteEn": "The spectral version: for $\\lambda\\ne0$, $\\lambda I-T$ fails to be invertible iff it has nonzero kernel. The statement generally fails at $\\lambda=0$."
+      },
+      {
+        "latex": "y\\in\\operatorname{ran}(\\lambda I-T)\\iff f(y)=0\\quad\\forall f\\in\\ker(\\lambda I-T^{*})",
+        "note": "情形二的可解性判据：右端 $y$ 必须与伴随方程的每个解正交。$T$ 自伴时即 $y\\perp\\ker(\\lambda I-T)$。",
+        "noteEn": "Solvability criterion in the second alternative: the right-hand side $y$ must be orthogonal to every solution of the adjoint homogeneous equation; for self-adjoint $T$ this is $y\\perp\\ker(\\lambda I-T)$."
+      },
+      {
+        "latex": "\\ker(\\lambda I-T)=\\{0\\}\\ \\Longrightarrow\\ \\operatorname{ran}(\\lambda I-T)=X\\ \\text{且}\\ (\\lambda I-T)^{-1}\\in B(X)",
+        "note": "若齐次方程只有零解，则 $\\lambda I-T$ 满射且逆有界——这正是情形一，说明二择一确实是「非此即彼」。",
+        "noteEn": "If the homogeneous equation has only the zero solution, then $\\lambda I-T$ is surjective with bounded inverse — this is precisely the first alternative, so the dichotomy is indeed exhaustive."
+      },
+      {
+        "latex": "\\dim\\ker(\\lambda I-T)=\\dim\\ker(\\lambda I-T^{*})<\\infty,\\qquad \\operatorname{ran}(\\lambda I-T)\\ \\text{是闭子空间}",
+        "note": "对紧算子 $T$ 与 $\\lambda\\ne0$：核与余核维数有限且相等（指标为零），值域闭。",
+        "noteEn": "For compact $T$ and $\\lambda\\ne0$: kernel and cokernel are finite-dimensional of equal dimension (index zero), and the range is closed."
+      }
+    ],
+    "expression": {
+      "text": "T 紧、λ≠0：(λI−T)x=y 对每个 y 唯一可解，或 (λI−T)x=0 有非零解（此时无解或无穷多解；可解 ⟺ y⊥ker(λI−T*)）",
+      "symbol": "\\lambda\\in\\sigma(T)\\setminus\\{0\\}\\iff \\lambda\\in\\sigma_p(T)",
+      "note": "等价说法：紧算子的非零谱点全是特征值；$\\lambda=0$ 处定理失效。",
+      "noteEn": "Equivalently: every nonzero spectral point of a compact operator is an eigenvalue; the theorem fails at $\\lambda=0$."
+    },
+    "properties": [
+      "两个分支互斥且穷尽：要么 $\\lambda\\in\\rho(T)$（对每个 $y$ 唯一可解），要么 $\\lambda\\in\\sigma_p(T)$（非齐次方程无解或有无穷多解，解集是特解加有限维核）。",
+      "对紧算子 $T$ 与 $\\lambda\\ne0$：$\\lambda\\in\\sigma(T)\\iff\\lambda\\in\\sigma_p(T)$；非零谱点全是特征值，对应特征子空间有限维、值域闭。",
+      "可解性判据（正交条件）：$(\\lambda I-T)x=y$ 有解当且仅当 $y\\perp\\ker(\\lambda I-T^*)$；$T$ 自伴时即 $y\\perp\\ker(\\lambda I-T)$。",
+      "$\\dim\\ker(\\lambda I-T)=\\dim\\ker(\\lambda I-T^*)$（余核维数等于核维数，指标为零），这正是 $\\lambda I-T$ 作为弗雷德霍姆算子的性质。",
+      "$0$ 的地位特殊：无限维空间中紧算子必有 $0\\in\\sigma(T)$，而 $0$ 可能不是特征值（如 $\\operatorname{diag}(1/n)$），故定理必须假设 $\\lambda\\ne0$；非零特征值至多可数，且只能以 $0$ 为聚点。"
+    ],
+    "propertiesEn": [
+      "The two alternatives are mutually exclusive and exhaustive: either $\\lambda\\in\\rho(T)$ (unique solvability for every $y$), or $\\lambda\\in\\sigma_p(T)$ (no solution or infinitely many — a particular solution plus the finite-dimensional kernel).",
+      "For compact $T$ and $\\lambda\\ne0$: $\\lambda\\in\\sigma(T)$ iff $\\lambda\\in\\sigma_p(T)$; every nonzero spectral point is an eigenvalue, with finite-dimensional eigenspace and closed range.",
+      "Solvability criterion (orthogonality): $(\\lambda I-T)x=y$ has a solution iff $y\\perp\\ker(\\lambda I-T^*)$; when $T$ is self-adjoint this reads $y\\perp\\ker(\\lambda I-T)$.",
+      "$\\dim\\ker(\\lambda I-T)=\\dim\\ker(\\lambda I-T^*)$ — the cokernel has the same finite dimension as the kernel (index zero), the defining property of the Fredholm operator $\\lambda I-T$.",
+      "The point $0$ is special: a compact operator on an infinite-dimensional space always has $0\\in\\sigma(T)$, and $0$ may fail to be an eigenvalue (e.g. $\\operatorname{diag}(1/n)$), which is why the theorem assumes $\\lambda\\ne0$; the nonzero eigenvalues are at most countable and can accumulate only at $0$."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\ell^2$ 上取 $T=\\operatorname{diag}(1,\\tfrac12,\\tfrac13,\\dots)$，$\\lambda=\\frac1m$。讨论 $(\\lambda I-T)x=y$ 的解集结构，验证弗雷德霍姆二择一。",
+        "solution": "逐分量写出方程：$\\left(\\frac1m-\\frac1n\\right)x_n=y_n$。当 $n\\ne m$ 时系数非零，$x_n$ 由 $y_n$ 唯一确定；第 $m$ 个方程是 $0\\cdot x_m=y_m$。齐次方程（$y=0$）：要求 $x_n=0$（$n\\ne m$）、$x_m$ 任意，故\n$$\\ker\\left(\\frac1mI-T\\right)=\\operatorname{span}\\{e_m\\},$$\n$\\lambda=\\frac1m$ 是特征值，核空间一维——这正是二择一的情形二（$\\lambda$ 非零且谱点全是特征值）。非齐次方程有解当且仅当 $y_m=0$，即 $y\\perp e_m$，与伴随方程的解正交（$T$ 自伴，伴随方程就是原齐次方程）；此时解集为 $\\{x^*+ce_m:c\\in\\mathbb C\\}$，有无穷多个解；当 $y_m\\ne0$ 时无解。对照 $\\lambda=0$：此时 $T$ 单射但不满射，$0$ 不是特征值，二择一确实失效。"
+      },
+      {
+        "problem": "设 $k(t,s)$ 在 $[0,1]^2$ 上连续，$K$ 是 $L^2[0,1]$ 上的积分算子 $(Kx)(t)=\\int_0^1k(t,s)x(s)\\,ds$。说明第二类弗雷德霍姆积分方程 $x-Kx=y$ 的二择一结论。",
+        "solution": "连续核使 $K$ 紧（希尔伯特—施密特型积分算子），故方程 $x-Kx=y$ 即 $(I-K)x=y$ 的情形，二择一给出：要么对每个 $y\\in L^2[0,1]$ 存在唯一解，要么齐次方程 $x=Kx$ 有非平凡解——此时非平凡解的集合是有限维的（维数等于伴随算子 $K^*$ 的齐次解空间维数，$K^*$ 的核为 $k(s,t)$），并且 $y$ 可解当且仅当 $y$ 与 $f=K^*f$ 的每个解正交。若核对称 $k(t,s)=k(s,t)$，则 $K$ 自伴，可解条件简化为 $y\\perp\\ker(I-K)$。积分方程理论中「特征值」指的就是使齐次方程有非零解的那些参数。"
+      }
+    ],
+    "tags": [
+      "弗雷德霍姆二择一",
+      "紧算子",
+      "特征值",
+      "积分方程",
+      "谱论"
+    ],
+    "links": [
+      "compact-operators",
+      "spectrum",
+      "bounded-operators",
+      "dual-space",
+      "hahn-banach"
+    ]
+  }
+]

@@ -1,0 +1,843 @@
+[
+  {
+    "id": "multivariable-taylor",
+    "title": "多元泰勒公式",
+    "titleEn": "Taylor's Formula in Several Variables",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "多元泰勒公式用各阶偏导数组成的多项式在一点附近逼近多元函数，二阶项由 Hessian 矩阵决定，余项刻画逼近误差。",
+    "summaryEn": "Taylor's formula approximates a multivariable function near a point by a polynomial built from its partial derivatives; the second-order term is governed by the Hessian and the remainder controls the error.",
+    "definition": "一元泰勒公式用 $f(a)+f'(a)(x-a)+\\frac{f''(a)}{2!}(x-a)^{2}+\\cdots$ 这样的多项式在某点附近逼近函数。把这一思想搬到多元函数：设 $f(x,y)$ 在点 $(a,b)$ 的某邻域内有直到 $n+1$ 阶的连续偏导数，记 $h=x-a$、$k=y-b$，并用算子记号 $\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{m}f(a,b)$ 表示「先按二项式定理把算子展开，再逐项求偏导并在 $(a,b)$ 取值」（例如 $m=2$ 时它等于 $h^{2}f_{xx}+2hkf_{xy}+k^{2}f_{yy}$ 在 $(a,b)$ 处的值），就有\n$$f(a+h,b+k)=\\sum_{m=0}^{n}\\frac{1}{m!}\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{m}f(a,b)+R_n.$$\n这就是**二元函数的泰勒公式**，$R_n$ 称为余项；对三元及更多变量的函数，公式完全平行，只需把算子中的两项换成所有变量偏导项之和。\n\n最常用的是展开到二阶：\n$$f(a+h,b+k)=f(a,b)+hf_x(a,b)+kf_y(a,b)+\\frac{1}{2}\\left[h^{2}f_{xx}+2hkf_{xy}+k^{2}f_{yy}\\right](a,b)+R_2.$$\n其中一阶部分 $hf_x+kf_y$ 正是全微分，给出线性逼近；二阶部分可以写成矩阵形式 $\\frac{1}{2}\\mathbf{h}^{T}H(a,b)\\mathbf{h}$，这里 $\\mathbf{h}=(h,k)^{T}$，$H=\\begin{pmatrix}f_{xx}&f_{xy}\\\\ f_{xy}&f_{yy}\\end{pmatrix}$ 是 Hessian 矩阵（黑塞矩阵）。在驻点（$\\nabla f=\\mathbf{0}$）附近一次项消失，函数值的变化由二阶项主导——这正是多元极值判别法的来源。\n\n余项有两种常用形式。**拉格朗日余项**给出具体的表达式：当偏导数连续到 $n+1$ 阶时，存在 $\\theta\\in(0,1)$ 使\n$$R_n=\\frac{1}{(n+1)!}\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{n+1}f(a+\\theta h,\\,b+\\theta k);$$\n**佩亚诺余项**则只描述误差趋于零的速度：当 $f$ 在 $(a,b)$ 附近有直到 $n$ 阶的连续偏导数时，$R_n=o(\\rho^{n})$，其中 $\\rho=\\sqrt{h^{2}+k^{2}}\\to 0$。特别地，$n=1$ 时的泰勒公式 $f(a+h,b+k)=f(a,b)+hf_x+kf_y+o(\\rho)$ 就是多元函数可微的定义——泰勒公式把全微分与高阶逼近统一在同一框架里。",
+    "definitionEn": "Taylor's formula for one variable approximates a function near a point by a polynomial built from its derivatives. Lifting the idea to several variables: suppose $f(x,y)$ has continuous partial derivatives up to order $n+1$ in a neighbourhood of $(a,b)$. Write $h=x-a$, $k=y-b$ and use the operator notation $\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{m}f(a,b)$, which means 「expand the operator by the binomial theorem, differentiate term by term and evaluate at $(a,b)$」 (for $m=2$ this equals $h^{2}f_{xx}+2hkf_{xy}+k^{2}f_{yy}$ at $(a,b)$). Then\n$$f(a+h,b+k)=\\sum_{m=0}^{n}\\frac{1}{m!}\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{m}f(a,b)+R_n,$$\nthe **Taylor formula in two variables**, with remainder $R_n$. For functions of three or more variables the formula is completely parallel; only the two terms inside the operator are replaced by the sum over all variables.\n\nThe most useful case stops at second order:\n$$f(a+h,b+k)=f(a,b)+hf_x(a,b)+kf_y(a,b)+\\frac{1}{2}\\left[h^{2}f_{xx}+2hkf_{xy}+k^{2}f_{yy}\\right](a,b)+R_2.$$\nThe first-order part $hf_x+kf_y$ is exactly the total differential, i.e. the linear approximation; the second-order part can be written as $\\frac{1}{2}\\mathbf{h}^{T}H(a,b)\\mathbf{h}$ with $\\mathbf{h}=(h,k)^{T}$ and the Hessian $H=\\begin{pmatrix}f_{xx}&f_{xy}\\\\ f_{xy}&f_{yy}\\end{pmatrix}$. At a stationary point ($\\nabla f=\\mathbf{0}$) the first-order term vanishes and the change of the function is governed by the second-order term — the origin of the second-derivative test for extrema.\n\nTwo common forms of the remainder. The **Lagrange remainder** gives an explicit expression: if the partial derivatives up to order $n+1$ are continuous, then for some $\\theta\\in(0,1)$,\n$$R_n=\\frac{1}{(n+1)!}\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{n+1}f(a+\\theta h,\\,b+\\theta k);$$\nthe **Peano remainder** only records the rate at which the error vanishes: if $f$ has continuous partial derivatives up to order $n$ near $(a,b)$, then $R_n=o(\\rho^{n})$ with $\\rho=\\sqrt{h^{2}+k^{2}}\\to 0$. In particular, the case $n=1$, $f(a+h,b+k)=f(a,b)+hf_x+kf_y+o(\\rho)$, is precisely the definition of differentiability — Taylor's formula unifies the total differential and higher-order approximation.",
+    "formulas": [
+      {
+        "latex": "f(a+h,b+k)=\\sum_{m=0}^{n}\\frac{1}{m!}\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{m}f(a,b)+R_n",
+        "note": "二元函数在 $(a,b)$ 处的 $n$ 阶泰勒公式。算子记号把二项式展开与求导合并书写，展开后每一项都是若干阶偏导数乘 $h$、$k$ 的幂。",
+        "noteEn": "The order-$n$ Taylor formula at $(a,b)$; the operator notation packs the binomial pattern and the partial derivatives into one symbol."
+      },
+      {
+        "latex": "f(a+h,b+k)=f(a,b)+hf_x(a,b)+kf_y(a,b)+\\frac{1}{2}\\left[h^{2}f_{xx}+2hkf_{xy}+k^{2}f_{yy}\\right](a,b)+R_2",
+        "note": "最常用的二阶展开：一次项是全微分，二次项由 Hessian 矩阵决定；注意交叉项系数是 $2hk$，这是最容易写错的地方。",
+        "noteEn": "The second-order expansion: the linear part is the total differential, the quadratic part is the Hessian form; the mixed term carries the factor $2hk$."
+      },
+      {
+        "latex": "R_n=\\frac{1}{(n+1)!}\\left(h\\frac{\\partial}{\\partial x}+k\\frac{\\partial}{\\partial y}\\right)^{n+1}f(a+\\theta h,\\,b+\\theta k),\\quad 0<\\theta<1",
+        "note": "拉格朗日余项：给出误差的具体表达式，需要偏导数连续到 $n+1$ 阶；估计误差时常用 $|R_n|\\le\\frac{M_{n+1}}{(n+1)!}\\left(|h|+|k|\\right)^{n+1}$。",
+        "noteEn": "The Lagrange remainder gives an explicit error term; it requires continuous partials up to order $n+1$, and yields bounds such as $|R_n|\\le\\frac{M_{n+1}}{(n+1)!}(|h|+|k|)^{n+1}$."
+      },
+      {
+        "latex": "R_n=o\\left(\\rho^{\\,n}\\right),\\quad \\rho=\\sqrt{h^{2}+k^{2}}\\to 0",
+        "note": "佩亚诺余项：只说明余项趋于零的速度，条件放宽为有直到 $n$ 阶的连续偏导数；用于局部性质（如极值判别）时足够。",
+        "noteEn": "The Peano remainder only records the rate of vanishing; it requires continuous partials up to order $n$ and is enough for local questions such as classifying extrema."
+      },
+      {
+        "latex": "f(a+h,b+k)\\approx f(a,b)+hf_x(a,b)+kf_y(a,b)+\\frac{1}{2}\\mathbf{h}^{T}H(a,b)\\mathbf{h}",
+        "note": "二阶近似（矩阵形式），$\\mathbf{h}=(h,k)^{T}$，$H$ 为 Hessian 矩阵；用于近似计算、误差估计与极值分析。",
+        "noteEn": "The quadratic approximation in matrix form, with $\\mathbf{h}=(h,k)^{T}$ and $H$ the Hessian; used for approximations, error estimates and extrema analysis."
+      }
+    ],
+    "expression": {
+      "text": "f(a+h, b+k) ≈ f(a,b) + h·f_x + k·f_y + ½[h²·f_xx + 2hk·f_xy + k²·f_yy]",
+      "symbol": "\\left(h\\partial_x+k\\partial_y\\right)^{m}f(a,b)",
+      "note": "二阶展开中交叉项系数是 $2hk$；更高阶的项按二项式系数展开，每一项的阶数越高、对逼近的影响越小。",
+      "noteEn": "The mixed second-order term is multiplied by $2hk$; higher orders follow the binomial pattern and contribute less and less."
+    },
+    "properties": [
+      "拉格朗日余项需要直到 $n+1$ 阶的连续偏导数；佩亚诺余项 $R_n=o(\\rho^{n})$ 只需直到 $n$ 阶的连续偏导数，两种余项分别适合「定量误差估计」与「局部定性分析」。",
+      "一阶泰勒公式（带佩亚诺余项）就是可微的定义：函数增量与全微分之差是比 $\\rho=\\sqrt{h^{2}+k^{2}}$ 高阶的无穷小。",
+      "在驻点处一次项为零，函数的局部形状由二阶项二次型决定：正定取极小、负定取极大、不定为鞍点——这是多元极值 Hessian 判别法的原理。",
+      "当二阶混合偏导数连续时 $f_{xy}=f_{yx}$，二阶项才可以写成对称矩阵形式 $\\frac{1}{2}\\mathbf{h}^{T}H\\mathbf{h}$。",
+      "泰勒多项式按「$h$、$k$ 的齐次分组」组织：$m$ 阶项是 $O(\\rho^{m})$，余项给出用多项式逼近函数的误差阶，是近似计算的理论依据。"
+    ],
+    "propertiesEn": [
+      "The Lagrange remainder needs continuous partials up to order $n+1$; the Peano remainder $R_n=o(\\rho^{n})$ only needs continuous partials up to order $n$. They serve quantitative error estimates and local qualitative analysis respectively.",
+      "The first-order Taylor formula with Peano remainder is exactly the definition of differentiability: the increment differs from the total differential by an infinitesimal of order higher than $\\rho=\\sqrt{h^{2}+k^{2}}$.",
+      "At a stationary point the linear term vanishes and the local shape is decided by the quadratic form of second-order terms: positive definite gives a minimum, negative definite a maximum, indefinite a saddle — the basis of the Hessian test.",
+      "When the mixed second partials are continuous, $f_{xy}=f_{yx}$ and the quadratic part can be written with the symmetric Hessian matrix as $\\frac{1}{2}\\mathbf{h}^{T}H\\mathbf{h}$.",
+      "The Taylor polynomial is organised in homogeneous groups in $h$ and $k$: the order-$m$ term is $O(\\rho^{m})$, so the remainder controls how well the polynomial approximates the function."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + x*y + y^2",
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "levels": 9,
+      "title": "正定二次型 f(x,y)=x²+xy+y² 的等值线（驻点附近由二阶项决定）"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x,y)=e^{x}\\cos y$ 在点 $(0,0)$ 处带佩亚诺余项的二阶泰勒展开。",
+        "solution": "先求一阶与二阶偏导数：$f_x=e^{x}\\cos y$，$f_y=-e^{x}\\sin y$，$f_{xx}=e^{x}\\cos y$，$f_{xy}=-e^{x}\\sin y$，$f_{yy}=-e^{x}\\cos y$。在 $(0,0)$ 处取值：$f(0,0)=1$，$f_x=1$，$f_y=0$，$f_{xx}=1$，$f_{xy}=0$，$f_{yy}=-1$。代入二阶泰勒公式得\n$$f(x,y)=1+x+\\frac{1}{2}\\left(x^{2}-y^{2}\\right)+o\\left(x^{2}+y^{2}\\right).$$\n可以看到：$f$ 在原点附近近似等于 $1+x+\\frac{1}{2}x^{2}-\\frac{1}{2}y^{2}$，沿 $x$ 方向是「上升的抛物线」，沿 $y$ 方向是「下降的抛物线」，注意 $f_x(0,0)=1\\neq 0$，原点并不是驻点（该函数实际上没有驻点），不能称原点为鞍点；这只是二阶项的二次型 $x^{2}-y^{2}$ 为不定二次型、其几何形状像鞍面而已。"
+      },
+      {
+        "problem": "用二阶泰勒公式近似计算 $(1.02)^{2.01}$（取到二阶项）。",
+        "solution": "取 $f(x,y)=x^{y}$，展开点为 $(1,2)$，取 $h=0.02$、$k=0.01$。求偏导：$f_x=yx^{y-1}$，$f_y=x^{y}\\ln x$，$f_{xx}=y(y-1)x^{y-2}$，$f_{xy}=x^{y-1}+yx^{y-1}\\ln x$，$f_{yy}=x^{y}(\\ln x)^{2}$。在 $(1,2)$ 处：$f=1$，$f_x=2$，$f_y=0$，$f_{xx}=2$，$f_{xy}=1$，$f_{yy}=0$。于是\n$$(1.02)^{2.01}\\approx 1+2\\times 0.02+\\frac{1}{2}\\left(2\\times 0.02^{2}+2\\times 0.02\\times 0.01\\right)=1.0406.$$\n与真值约 $1.04061$ 相比，误差不到 $10^{-5}$，可见二阶泰勒公式在展开点 $(1,2)$ 附近的逼近精度很高。"
+      }
+    ],
+    "tags": [
+      "泰勒公式",
+      "多元函数",
+      "Hessian矩阵"
+    ],
+    "links": [
+      "taylor-formula",
+      "partial-derivative",
+      "higher-order-partial",
+      "total-differential",
+      "multivariable-extrema"
+    ]
+  },
+  {
+    "id": "multivariable-extrema",
+    "title": "多元函数的极值",
+    "titleEn": "Extrema of Functions of Several Variables",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "多元函数求极值先用偏导数为零找驻点，再用 Hessian 判别法（AC−B² 的符号）区分极小、极大与鞍点。",
+    "summaryEn": "To extremise a function of several variables, locate stationary points where the partial derivatives vanish, then classify them with the Hessian test based on the sign of AC−B².",
+    "definition": "设函数 $f(x,y)$ 在点 $P_0(x_0,y_0)$ 的某邻域内有定义。如果对该邻域内所有点 $(x,y)$ 都有 $f(x,y)\\le f(x_0,y_0)$（或都有 $f(x,y)\\ge f(x_0,y_0)$），就称 $f$ 在 $P_0$ 取得**极大值**（**极小值**），$P_0$ 称为极大值点（极小值点），统称极值点。极值是**局部**概念：只比较 $P_0$ 附近的值，与整个定义域上的最大值、最小值不同。\n\n**必要条件**：若 $f$ 在 $P_0$ 取得极值，且 $f$ 在 $P_0$ 的两个偏导数都存在，则必有\n$$f_x(x_0,y_0)=0,\\qquad f_y(x_0,y_0)=0,$$\n即 $\\nabla f(P_0)=\\mathbf{0}$，这样的点称为**驻点**。理由很直观：固定 $y=y_0$，一元函数 $f(x,y_0)$ 在 $x_0$ 处取极值，故 $f_x(P_0)=0$，同理 $f_y(P_0)=0$。但反过来不成立：驻点可能既不是极大值点也不是极小值点，例如 $f(x,y)=xy$ 在原点；极值也可能出现在偏导数不存在的点，例如 $f(x,y)=\\sqrt{x^2+y^2}$ 在原点取到极小值。因此求极值时，**驻点与偏导数不存在的点都要检查**。\n\n**充分条件（Hessian 判别法）**：设 $P_0(x_0,y_0)$ 是驻点，且 $f$ 在 $P_0$ 的某邻域内有连续的二阶偏导数。记\n$$A=f_{xx}(x_0,y_0),\\qquad B=f_{xy}(x_0,y_0),\\qquad C=f_{yy}(x_0,y_0),\\qquad D=AC-B^{2}.$$\n则：若 $D>0$，$P_0$ 是极值点——$A>0$（此时必有 $C>0$）时取极小值，$A<0$（此时必有 $C<0$）时取极大值；若 $D<0$，$P_0$ 不是极值点，称为**鞍点**；若 $D=0$，判别法失效，需要用泰勒公式展开或沿特殊方向讨论等办法另行判定。判别法的原理来自二阶泰勒公式：在驻点附近 $f(P)-f(P_0)\\approx\\frac{1}{2}\\left(Ah^{2}+2Bhk+Ck^{2}\\right)$（$h=x-x_0$，$k=y-y_0$），右端的二次型正定则函数值恒增、负定则恒减、不定则两个方向一增一减，分别对应极小、极大与鞍点；等价地，$H=\\begin{pmatrix}A&B\\\\ B&C\\end{pmatrix}$ 正定、负定或不定恰好对应这三种情形。",
+    "definitionEn": "Let $f(x,y)$ be defined in a neighbourhood of $P_0(x_0,y_0)$. If $f(x,y)\\le f(x_0,y_0)$ (respectively $f(x,y)\\ge f(x_0,y_0)$) for every point of that neighbourhood, then $f$ has a **local maximum** (**local minimum**) at $P_0$. Extrema are a **local** notion: only nearby values are compared, unlike the global maximum or minimum on the whole domain.\n\n**Necessary condition**: if $f$ has a local extremum at $P_0$ and both partial derivatives of $f$ exist at $P_0$, then\n$$f_x(x_0,y_0)=0,\\qquad f_y(x_0,y_0)=0,$$\ni.e. $\\nabla f(P_0)=\\mathbf{0}$; such a point is called a **stationary point**. The reason is simple: fixing $y=y_0$, the one-variable function $f(x,y_0)$ has an extremum at $x_0$, hence $f_x(P_0)=0$; similarly $f_y(P_0)=0$. The converse fails: a stationary point need not be an extremum (e.g. $f(x,y)=xy$ at the origin), and extrema can also occur where the partial derivatives do not exist (e.g. $f(x,y)=\\sqrt{x^2+y^2}$ at the origin). So **both stationary points and points where the partials fail to exist** must be examined.\n\n**Sufficient condition (Hessian test)**: let $P_0$ be a stationary point and suppose $f$ has continuous second-order partial derivatives near $P_0$. Set\n$$A=f_{xx}(P_0),\\qquad B=f_{xy}(P_0),\\qquad C=f_{yy}(P_0),\\qquad D=AC-B^{2}.$$\nIf $D>0$ then $P_0$ is an extremum: $A>0$ (which forces $C>0$) gives a local minimum, while $A<0$ (which forces $C<0$) gives a local maximum. If $D<0$ then $P_0$ is not an extremum; it is a **saddle point**. If $D=0$ the test is inconclusive and other arguments (Taylor expansion, special directions) are needed. The test comes from the second-order Taylor formula: near a stationary point $f(P)-f(P_0)\\approx\\frac{1}{2}(Ah^{2}+2Bhk+Ck^{2})$, and this quadratic form is positive definite, negative definite or indefinite — giving a minimum, a maximum or a saddle. Equivalently, the Hessian $H=\\begin{pmatrix}A&B\\\\ B&C\\end{pmatrix}$ is positive definite, negative definite or indefinite in the three cases.",
+    "formulas": [
+      {
+        "latex": "\\nabla f(x_0,y_0)=\\mathbf{0}\\quad\\Longleftrightarrow\\quad f_x(x_0,y_0)=0,\\ f_y(x_0,y_0)=0",
+        "note": "极值的必要条件：偏导数存在时，内点极值必为驻点；但驻点不一定是极值点，还要用充分条件判别。",
+        "noteEn": "Necessary condition: whenever the partials exist, an interior extremum must be a stationary point — but a stationary point need not be an extremum."
+      },
+      {
+        "latex": "A=f_{xx}(x_0,y_0),\\quad B=f_{xy}(x_0,y_0),\\quad C=f_{yy}(x_0,y_0),\\quad D=AC-B^{2}=\\det H",
+        "note": "判别法的三个基本量：$D$ 恰好是 Hessian 矩阵 $H$ 的行列式，这解释了为什么判别与二次型的正定性有关。",
+        "noteEn": "The three quantities of the test: $D$ is exactly the determinant of the Hessian $H$, which is why the test is about definiteness of a quadratic form."
+      },
+      {
+        "latex": "D>0\\ \\Rightarrow\\ \\begin{cases}A>0:\\ \\text{极小值}\\\\ A<0:\\ \\text{极大值}\\end{cases}",
+        "note": "当 $D=AC-B^{2}>0$ 时驻点是极值点：极小还是极大由 $A$ 的符号决定，此时 $A$、$C$ 必定同号。",
+        "noteEn": "If $D=AC-B^{2}>0$ the stationary point is an extremum: $A>0$ gives a minimum, $A<0$ a maximum; $A$ and $C$ necessarily share the same sign."
+      },
+      {
+        "latex": "D<0\\ \\Rightarrow\\ \\text{鞍点};\\qquad D=0\\ \\Rightarrow\\ \\text{判别法失效，需另行判定}",
+        "note": "$D<0$ 时驻点既非极大也非极小，是鞍点；$D=0$ 时判别法给不出结论，必须借助泰勒展开、沿特殊方向讨论或几何观察。",
+        "noteEn": "$D<0$ means a saddle point; $D=0$ means the test is inconclusive and other arguments are required."
+      },
+      {
+        "latex": "f(x_0+h,y_0+k)-f(x_0,y_0)\\approx\\frac{1}{2}\\left(Ah^{2}+2Bhk+Ck^{2}\\right)=\\frac{1}{2}\\mathbf{h}^{T}H\\mathbf{h}",
+        "note": "驻点附近的二阶泰勒近似（$\\mathbf{h}=(h,k)^{T}$）：二次型定号则取极值，不定号则为鞍点——判别法的原理。",
+        "noteEn": "The second-order Taylor approximation at a stationary point: a definite quadratic form gives an extremum, an indefinite one gives a saddle."
+      }
+    ],
+    "expression": {
+      "text": "AC − B² > 0 且 A > 0 ⟹ 极小值；AC − B² > 0 且 A < 0 ⟹ 极大值；AC − B² < 0 ⟹ 鞍点",
+      "symbol": "D=AC-B^{2}=\\det H",
+      "note": "$A$、$B$、$C$ 是驻点处的三个二阶偏导数；判别结果只针对该驻点，且要求二阶偏导数连续。",
+      "noteEn": "Here $A$, $B$, $C$ are the second-order partials at the stationary point; the conclusion concerns that point only and assumes continuity of the second partials."
+    },
+    "properties": [
+      "极值是局部概念：只要求在某点附近取得最大或最小；闭区域上连续函数的最大最小值还要在区域的边界以及偏导数不存在的点处寻找。",
+      "只要偏导数存在，内点极值点必是驻点（$\\nabla f=\\mathbf{0}$）；所以求极值时的候选点是驻点与偏导数不存在的点的全体。",
+      "$AC-B^{2}<0$ 时驻点是鞍点：沿某些方向函数值增大、沿另一些方向减小，$f(x,y)=xy$ 在原点就是典型例子。",
+      "$AC-B^{2}=0$ 时判别法失效：$f=x^{2}+y^{4}$ 与 $f=x^{2}-y^{4}$ 在原点都有 $A=2$、$B=0$、$C=0$，前者取极小值、后者为鞍点，必须另行判断。",
+      "判别法要求驻点附近二阶偏导数连续，原理是二阶泰勒公式：驻点处的增量由二次型 $\\frac{1}{2}\\left(Ah^{2}+2Bhk+Ck^{2}\\right)$ 主导，正定取极小、负定取极大、不定为鞍点。"
+    ],
+    "propertiesEn": [
+      "Extrema are local: only nearby values matter; the global maximum and minimum of a continuous function on a closed region must also be sought on the boundary and at points where partial derivatives fail to exist.",
+      "Whenever the partials exist, an interior extremum is stationary ($\\nabla f=\\mathbf{0}$); the candidates are therefore the stationary points together with the points where the partials do not exist.",
+      "When $AC-B^{2}<0$ the stationary point is a saddle: the function increases along some directions and decreases along others, as with $f(x,y)=xy$ at the origin.",
+      "When $AC-B^{2}=0$ the test is inconclusive: $f=x^{2}+y^{4}$ and $f=x^{2}-y^{4}$ both have $A=2$, $B=0$, $C=0$ at the origin, yet the first has a minimum and the second a saddle.",
+      "The test assumes continuous second-order partials near the stationary point; its basis is the second-order Taylor formula, where the quadratic form $\\frac{1}{2}(Ah^{2}+2Bhk+Ck^{2})$ dominates the increment."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "levels": 8,
+      "title": "f(x,y)=x²+y² 的等值线：原点为极小值点"
+    },
+    "examples": [
+      {
+        "problem": "求函数 $f(x,y)=x^{3}-y^{3}+3x^{2}+3y^{2}-9x$ 的极值。",
+        "solution": "第一步，解方程组 $f_x=0$、$f_y=0$：\n$$f_x=3x^{2}+6x-9=3(x+3)(x-1)=0\\ \\Rightarrow\\ x=-3\\ \\text{或}\\ x=1,$$\n$$f_y=-3y^{2}+6y=-3y(y-2)=0\\ \\Rightarrow\\ y=0\\ \\text{或}\\ y=2.$$\n得到四个驻点 $(1,0)$、$(1,2)$、$(-3,0)$、$(-3,2)$。\n第二步，求二阶偏导数：$A=f_{xx}=6x+6$，$B=f_{xy}=0$，$C=f_{yy}=-6y+6$，逐个判别：\n- 在 $(1,0)$：$A=12$，$B=0$，$C=6$，$AC-B^{2}=72>0$ 且 $A>0$，取极小值 $f(1,0)=1+3-9=-5$；\n- 在 $(1,2)$：$A=12$，$C=-6$，$AC-B^{2}=-72<0$，鞍点；\n- 在 $(-3,0)$：$A=-12$，$C=6$，$AC-B^{2}=-72<0$，鞍点；\n- 在 $(-3,2)$：$A=-12$，$C=-6$，$AC-B^{2}=72>0$ 且 $A<0$，取极大值 $f(-3,2)=-27-8+27+12+27=31$。\n所以极小值为 $-5$（在点 $(1,0)$ 处），极大值为 $31$（在点 $(-3,2)$ 处）。"
+      },
+      {
+        "problem": "判断 $f(x,y)=xy$ 在原点处是否取极值。",
+        "solution": "先求驻点：$f_x=y=0$，$f_y=x=0$，唯一驻点是 $(0,0)$。再算二阶偏导数：$A=f_{xx}=0$，$B=f_{xy}=1$，$C=f_{yy}=0$，于是 $AC-B^{2}=-1<0$，由判别法知原点是鞍点，不取极值。也可以直接验证：沿直线 $y=x$ 有 $f=x^{2}>0$，沿直线 $y=-x$ 有 $f=-x^{2}<0$，原点附近函数值有正有负，确实不是极值点。"
+      }
+    ],
+    "tags": [
+      "极值",
+      "驻点",
+      "鞍点",
+      "Hessian矩阵"
+    ],
+    "links": [
+      "partial-derivative",
+      "higher-order-partial",
+      "multivariable-taylor",
+      "gradient",
+      "monotonicity-extremum"
+    ]
+  },
+  {
+    "id": "lagrange-multiplier",
+    "title": "拉格朗日乘数法",
+    "titleEn": "Lagrange Multipliers",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "拉格朗日乘数法通过构造 L = f + λg，把求 f 在约束 g = 0 下的条件极值化为求 L 的驻点；它给出的是必要条件，解出的是候选点。",
+    "summaryEn": "Lagrange multipliers turn the constrained problem of extremising f subject to g = 0 into finding stationary points of L = f + λg; the condition is necessary and yields candidates.",
+    "definition": "许多问题的自变量并不能自由取值：求函数 $z=f(x,y)$ 在曲线 $g(x,y)=0$ 上的最大最小值，就是典型的**条件极值**（约束极值）问题。它的几何图像很简单：设 $P_0$ 是极值点，则在 $P_0$ 处目标函数的等值线与约束曲线相切——若两条曲线在交点处「穿过」而不相切，沿着约束曲线总还能走到函数值更大或更小的一侧。相切意味着两条曲线的法向量平行，即\n$$\\nabla f(P_0)=\\lambda\\,\\nabla g(P_0)$$\n对某个实数 $\\lambda$ 成立，$\\lambda$ 就称为**拉格朗日乘数**。\n\n**方法**：把约束与目标函数合成一个函数，即**拉格朗日函数**\n$$L(x,y,\\lambda)=f(x,y)+\\lambda g(x,y),$$\n再求 $L$ 的驻点：\n$$\\frac{\\partial L}{\\partial x}=f_x+\\lambda g_x=0,\\qquad \\frac{\\partial L}{\\partial y}=f_y+\\lambda g_y=0,\\qquad \\frac{\\partial L}{\\partial \\lambda}=g(x,y)=0.$$\n（把约束写成 $f-\\lambda g$ 或 $f+\\lambda g$ 都可以，只会让 $\\lambda$ 相差一个符号，不影响 $(x,y)$ 的解。）解这个三元方程组，得到所有**候选点**。\n\n必须强调：$\\nabla f=\\lambda\\nabla g$ 与 $g=0$ **只是必要条件**——满足它的点只说明两个梯度平行，并不自动是极值点。得到候选点后还要进一步判断：对于有界闭约束曲线（或曲面）上的连续函数，只需比较所有候选点（必要时加上端点）的函数值，最大者就是最大值、最小者就是最小值；几何上也可以观察等值线与约束曲线在候选点处是否相切。此外，方法要求约束在极值点附近光滑，即 $\\nabla g\\ne\\mathbf{0}$；若某点处 $\\nabla g=\\mathbf{0}$，必须把它单独拿出来检查。\n\n约束不止一个时，设 $g_1=0,\\ g_2=0,\\ \\dots,\\ g_m=0$，则引入多个乘数：$L=f+\\lambda_1g_1+\\cdots+\\lambda_mg_m$，令 $\\nabla f=\\lambda_1\\nabla g_1+\\cdots+\\lambda_m\\nabla g_m$ 并与所有约束方程联立求解。三元函数在曲面约束下的情形完全类似，只是梯度方程多一个分量。",
+    "definitionEn": "In many problems the variables cannot be chosen freely: maximising or minimising a function $z=f(x,y)$ on a curve $g(x,y)=0$ is the typical **constrained extremum** problem. Its geometry is simple: at an extremum $P_0$, the level curve of the objective function is tangent to the constraint curve — if the two curves crossed at the point instead, one could still move along the constraint towards larger or smaller values of $f$. Tangency means the normals are parallel, i.e.\n$$\\nabla f(P_0)=\\lambda\\,\\nabla g(P_0)$$\nfor some real number $\\lambda$, called the **Lagrange multiplier**.\n\nThe **method**: combine the constraint with the objective into the **Lagrange function**\n$$L(x,y,\\lambda)=f(x,y)+\\lambda g(x,y),$$\nand find its stationary points:\n$$\\frac{\\partial L}{\\partial x}=f_x+\\lambda g_x=0,\\qquad \\frac{\\partial L}{\\partial y}=f_y+\\lambda g_y=0,\\qquad \\frac{\\partial L}{\\partial \\lambda}=g(x,y)=0.$$\n(Writing $f-\\lambda g$ instead of $f+\\lambda g$ merely flips the sign of $\\lambda$ and does not change the solutions in $(x,y)$.) Solving this three-equation system gives all **candidates**.\n\nIt must be stressed that $\\nabla f=\\lambda\\nabla g$ together with $g=0$ is **only a necessary condition**: it says the two gradients are parallel, and does not by itself guarantee an extremum. After obtaining the candidates one must decide: for a continuous function on a bounded closed constraint curve (or surface), it suffices to compare the values at all candidates (plus endpoints if any) — the largest gives the maximum, the smallest the minimum. The method also requires the constraint to be smooth at the extremum, i.e. $\\nabla g\\ne\\mathbf{0}$; points where $\\nabla g=\\mathbf{0}$ must be examined separately.\n\nWith several constraints $g_1=0,\\ g_2=0,\\ \\dots,\\ g_m=0$, introduce one multiplier per constraint: $L=f+\\lambda_1g_1+\\cdots+\\lambda_mg_m$ and impose $\\nabla f=\\lambda_1\\nabla g_1+\\cdots+\\lambda_m\\nabla g_m$ together with all the constraint equations. For functions of three variables constrained to a surface the situation is completely analogous, with one extra component in the gradient equations.",
+    "formulas": [
+      {
+        "latex": "\\nabla f(x,y)=\\lambda\\,\\nabla g(x,y),\\qquad g(x,y)=0",
+        "note": "条件极值的必要条件：极值点处两个梯度平行，且点满足约束；得到的只是候选点（需要 $\\nabla g\\ne\\mathbf{0}$）。",
+        "noteEn": "Necessary condition for a constrained extremum: at an extremum the two gradients are parallel and the point satisfies the constraint; the result is only a candidate (assuming $\\nabla g\\ne\\mathbf{0}$)."
+      },
+      {
+        "latex": "L(x,y,\\lambda)=f(x,y)+\\lambda g(x,y)",
+        "note": "拉格朗日函数：把约束「并入」目标函数；把它写成 $f-\\lambda g$ 也可以，只改变 $\\lambda$ 的符号。",
+        "noteEn": "The Lagrange function fuses the constraint into the objective; writing $f-\\lambda g$ is equally valid and only flips the sign of $\\lambda$."
+      },
+      {
+        "latex": "\\begin{cases}f_x+\\lambda g_x=0\\\\ f_y+\\lambda g_y=0\\\\ g(x,y)=0\\end{cases}",
+        "note": "实际求解用的方程组：三个方程、三个未知数 $(x,y,\\lambda)$；消去 $\\lambda$ 后等价于 $f_xg_y-f_yg_x=0$（当 $g_x,g_y$ 不同时为零）。",
+        "noteEn": "The system actually solved: three equations in the three unknowns $(x,y,\\lambda)$; eliminating $\\lambda$ gives $f_xg_y-f_yg_x=0$ (when $g_x,g_y$ are not both zero)."
+      },
+      {
+        "latex": "L=f+\\sum_{i=1}^{m}\\lambda_i g_i,\\qquad \\nabla f=\\sum_{i=1}^{m}\\lambda_i\\nabla g_i",
+        "note": "多个约束的推广：每个约束配一个乘数，梯度方程相应地变成若干个向量方程。",
+        "noteEn": "Several constraints: one multiplier per constraint, and the gradient condition becomes a sum of vector equations."
+      },
+      {
+        "latex": "f\\ \\text{在约束}\\ g=0\\ \\text{下的极值}\\quad\\Longleftrightarrow\\quad \\text{求}\\ L=f+\\lambda g\\ \\text{的驻点}",
+        "note": "条件极值问题的标准提法与解法对应关系；注意左边是「必要条件」框架下的对应，候选点仍需验证或比较函数值。",
+        "noteEn": "The standard formulation of a constrained extremum and its solution route; the correspondence is within the necessary-condition framework, so candidates still need checking."
+      }
+    ],
+    "expression": {
+      "text": "∇f = λ∇g 且 g = 0",
+      "symbol": "L=f+\\lambda g",
+      "note": "解出的是候选点；判断极值还要比较候选点函数值或借助几何、实际意义。",
+      "noteEn": "What comes out are candidates; deciding whether they are extrema needs value comparisons or geometric and practical arguments."
+    },
+    "properties": [
+      "得到的是候选点而非最终答案：满足 $\\nabla f=\\lambda\\nabla g$ 与 $g=0$ 的点未必是极值点，必须进一步判断（比较函数值、几何观察或实际意义）。",
+      "几何本质：极值点处目标函数的等值线与约束曲线相切，法向量 $\\nabla f$ 与 $\\nabla g$ 平行；这是记忆与理解乘数法的关键图像。",
+      "使用前提：约束曲线（面）在极值点处光滑，即 $\\nabla g\\ne\\mathbf{0}$；$\\nabla g=\\mathbf{0}$ 的点必须单独检查，乘数法可能失效。",
+      "有界闭约束上的连续函数：只需比较全部候选点（含端点和不可导点）的函数值即可确定最大最小值，不必逐一判断每个候选点是不是极值点。",
+      "乘数 $\\lambda$ 还有「灵敏度」意义：把约束值作微小放松时，最优值的近似变化量由 $\\lambda$ 给出；$\\lambda$ 的具体符号取决于约束写成 $g=0$ 还是 $-g=0$。"
+    ],
+    "propertiesEn": [
+      "One obtains candidates rather than the final answer: a point satisfying $\\nabla f=\\lambda\\nabla g$ and $g=0$ need not be an extremum, so further verification is required.",
+      "Geometric essence: at an extremum the level curve of $f$ is tangent to the constraint curve, so the normals $\\nabla f$ and $\\nabla g$ are parallel — the key picture behind the method.",
+      "The method assumes the constraint is smooth at the extremum, i.e. $\\nabla g\\ne\\mathbf{0}$; points where $\\nabla g=\\mathbf{0}$ must be inspected separately and may defeat the method.",
+      "For a continuous function on a bounded closed constraint, comparing the values at all candidates (including endpoints and non-smooth points) gives the maximum and the minimum.",
+      "The multiplier $\\lambda$ also carries a sensitivity meaning: when the constraint value is relaxed slightly, the approximate change of the optimal value is given by $\\lambda$; its sign depends on whether the constraint is written as $g=0$ or $-g=0$."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "levels": 8,
+      "title": "f(x,y)=x²+y² 的等值线：条件极值点处等值线与约束曲线相切"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x,y)=xy$ 在约束 $x^{2}+y^{2}=1$ 下的最大值与最小值。",
+        "solution": "构造拉格朗日函数 $L=xy+\\lambda\\left(x^{2}+y^{2}-1\\right)$，令\n$$L_x=y+2\\lambda x=0,\\qquad L_y=x+2\\lambda y=0,\\qquad L_{\\lambda}=x^{2}+y^{2}-1=0.$$\n由前两式消元：$y=-2\\lambda x$ 代入第二式得 $x-4\\lambda^{2}x=0$，即 $x\\left(1-4\\lambda^{2}\\right)=0$。若 $x=0$，则 $y=-2\\lambda x=0$，与 $x^{2}+y^{2}=1$ 矛盾，所以 $\\lambda=\\pm\\frac{1}{2}$。\n当 $\\lambda=\\frac{1}{2}$ 时 $y=-x$，代入约束得 $x=\\pm\\frac{\\sqrt{2}}{2}$，此时 $f=xy=-\\frac{1}{2}$；\n当 $\\lambda=-\\frac{1}{2}$ 时 $y=x$，得 $x=\\pm\\frac{\\sqrt{2}}{2}$，此时 $f=xy=\\frac{1}{2}$。\n由于单位圆是有界闭曲线、$f$ 连续，只需比较候选点的函数值：最大值为 $\\frac{1}{2}$（在 $\\left(\\pm\\frac{\\sqrt{2}}{2},\\pm\\frac{\\sqrt{2}}{2}\\right)$ 处），最小值为 $-\\frac{1}{2}$（在 $\\left(\\pm\\frac{\\sqrt{2}}{2},\\mp\\frac{\\sqrt{2}}{2}\\right)$ 处）。"
+      },
+      {
+        "problem": "求 $f(x,y)=x^{2}+y^{2}$ 在直线 $x+y=1$ 上的最小值，并解释几何意义。",
+        "solution": "构造 $L=x^{2}+y^{2}+\\lambda(x+y-1)$，令 $L_x=2x+\\lambda=0$、$L_y=2y+\\lambda=0$，得 $x=y=-\\frac{\\lambda}{2}$；代入约束 $x+y=1$ 得 $x=y=\\frac{1}{2}$，此时 $f=\\frac{1}{2}$。\n几何意义：直线 $x+y=1$ 与等值线 $x^{2}+y^{2}=\\frac{1}{2}$ 恰好相切于点 $\\left(\\frac{1}{2},\\frac{1}{2}\\right)$，所以原点到直线 $x+y=1$ 的最短距离为 $\\sqrt{\\frac{1}{2}}=\\frac{\\sqrt{2}}{2}$，与点到直线的距离公式 $\\frac{|0+0-1|}{\\sqrt{2}}=\\frac{\\sqrt{2}}{2}$ 一致。"
+      }
+    ],
+    "tags": [
+      "条件极值",
+      "约束优化",
+      "拉格朗日函数"
+    ],
+    "links": [
+      "gradient",
+      "multivariable-extrema",
+      "partial-derivative",
+      "optimization",
+      "multivariable-function"
+    ]
+  },
+  {
+    "id": "double-integral",
+    "title": "二重积分",
+    "titleEn": "Double Integral",
+    "branch": "multivariable",
+    "level": 4,
+    "summary": "二重积分是二元函数在平面区域上的二重黎曼和极限，几何上表示曲顶柱体的体积，可化为累次积分（富比尼定理）计算。",
+    "summaryEn": "The double integral is the limit of Riemann sums of a two-variable function over a plane region; it measures the volume of a solid under a surface and is evaluated as an iterated integral via Fubini's theorem.",
+    "definition": "设 $f(x,y)$ 是有界闭区域 $D$ 上的有界函数。把 $D$ 任意分成 $n$ 个小区域 $\\Delta\\sigma_1,\\Delta\\sigma_2,\\dots,\\Delta\\sigma_n$（$\\Delta\\sigma_i$ 既表示第 $i$ 个小区域，也表示它的面积），在第 $i$ 个小区域上任取一点 $(\\xi_i,\\eta_i)$，作**二重黎曼和**\n$$\\sum_{i=1}^{n}f(\\xi_i,\\eta_i)\\,\\Delta\\sigma_i.$$\n令 $\\lambda$ 为所有小区域直径的最大值。如果当 $\\lambda\\to 0$ 时该和式的极限存在，并且与区域的分法、点 $(\\xi_i,\\eta_i)$ 的取法都无关，就称 $f$ 在 $D$ 上**可积**，并把该极限称为 $f$ 在 $D$ 上的**二重积分**，记作\n$$\\iint_D f(x,y)\\,d\\sigma=\\iint_D f(x,y)\\,dx\\,dy,$$\n其中 $d\\sigma=dx\\,dy$ 称为**面积元素**。有界闭区域上的连续函数一定可积；有界、且不连续点集「面积为零」的函数也可积。\n\n**几何意义**：当 $f(x,y)\\ge 0$ 时，二重积分等于以 $D$ 为底、以曲面 $z=f(x,y)$ 为顶的**曲顶柱体**的体积。把 $D$ 切成小块，每块的体积近似为「底面积 × 高」$f(\\xi_i,\\eta_i)\\Delta\\sigma_i$，求和再取极限就是体积。当 $f$ 取负值时，相应部分的贡献为负，此时积分给出各部分代数体积的代数和；特别地，$\\iint_D 1\\,d\\sigma$ 等于区域 $D$ 的面积。\n\n**计算：化为累次积分**。设 $D$ 是 $X$ 型区域\n$$D=\\{(x,y)\\mid a\\le x\\le b,\\ \\varphi_1(x)\\le y\\le\\varphi_2(x)\\},$$\n且 $f$ 在 $D$ 上连续，则由**富比尼定理**\n$$\\iint_D f(x,y)\\,d\\sigma=\\int_a^b\\left[\\int_{\\varphi_1(x)}^{\\varphi_2(x)}f(x,y)\\,dy\\right]dx,$$\n即先固定 $x$ 对 $y$ 积分（内层积分的结果一般是 $x$ 的函数），再对 $x$ 积分。类似地，$Y$ 型区域 $c\\le y\\le d,\\ \\psi_1(y)\\le x\\le\\psi_2(y)$ 可以先对 $x$ 后对 $y$ 积分。富比尼定理保证：矩形区域上的连续（更一般地，可积）函数，二重积分与两个累次积分相等，次序可以交换；对一般区域，只要它能写成上述标准形式（或分割成有限个这样的区域），也可以化为累次积分。选择积分次序的原则是「内层容易积出、外层上下限简单」。",
+    "definitionEn": "Let $f(x,y)$ be a bounded function on a bounded closed region $D$. Partition $D$ arbitrarily into $n$ small pieces $\\Delta\\sigma_1,\\dots,\\Delta\\sigma_n$ ($\\Delta\\sigma_i$ denotes both the piece and its area), pick a point $(\\xi_i,\\eta_i)$ in the $i$-th piece and form the **double Riemann sum**\n$$\\sum_{i=1}^{n}f(\\xi_i,\\eta_i)\\,\\Delta\\sigma_i.$$\nLet $\\lambda$ be the largest diameter among the pieces. If the limit as $\\lambda\\to 0$ exists and is independent of the partition and of the chosen points, then $f$ is **integrable** on $D$ and the limit is the **double integral**\n$$\\iint_D f(x,y)\\,d\\sigma=\\iint_D f(x,y)\\,dx\\,dy,$$\nwhere $d\\sigma=dx\\,dy$ is the **area element**. Every continuous function on a bounded closed region is integrable; so is a bounded function whose set of discontinuities has zero area.\n\n**Geometric meaning**: when $f(x,y)\\ge 0$, the double integral equals the volume of the solid that has $D$ as its base and the surface $z=f(x,y)$ as its top. Cutting $D$ into small pieces, each contributes approximately 「area × height」 $f(\\xi_i,\\eta_i)\\Delta\\sigma_i$, and the limit of the sum is the volume. Where $f<0$ the contribution is negative, so in general the integral is the algebraic sum of signed volumes; in particular $\\iint_D 1\\,d\\sigma$ is the area of $D$.\n\n**Evaluation: iterated integrals**. If $D$ is an $x$-simple region\n$$D=\\{(x,y)\\mid a\\le x\\le b,\\ \\varphi_1(x)\\le y\\le\\varphi_2(x)\\}$$\nand $f$ is continuous on $D$, then by **Fubini's theorem**\n$$\\iint_D f(x,y)\\,d\\sigma=\\int_a^b\\left[\\int_{\\varphi_1(x)}^{\\varphi_2(x)}f(x,y)\\,dy\\right]dx:$$\nfirst integrate in $y$ with $x$ fixed (the inner integral is generally a function of $x$), then integrate in $x$. Similarly, a $y$-simple region $c\\le y\\le d,\\ \\psi_1(y)\\le x\\le\\psi_2(y)$ allows integrating in $x$ first. Fubini's theorem guarantees that for a continuous (more generally, integrable) function on a rectangle the double integral equals both iterated integrals and the order may be swapped; for a general region, expressing it in one of the standard forms above (or splitting it into finitely many such pieces) reduces the integral to iterated ones. Choose the order that makes the inner integral easy and the outer limits simple.",
+    "formulas": [
+      {
+        "latex": "\\iint_D f(x,y)\\,d\\sigma=\\lim_{\\lambda\\to 0}\\sum_{i=1}^{n}f(\\xi_i,\\eta_i)\\,\\Delta\\sigma_i",
+        "note": "定义：二重积分是二重黎曼和的极限，要求极限与区域的分法、点的取法都无关。",
+        "noteEn": "Definition: the double integral is the limit of double Riemann sums, required to be independent of the partition and of the sample points."
+      },
+      {
+        "latex": "\\iint_D f(x,y)\\,d\\sigma=\\int_a^b dx\\int_{\\varphi_1(x)}^{\\varphi_2(x)}f(x,y)\\,dy",
+        "note": "$X$ 型区域（先下后上、沿 $y$ 方向穿越）的累次积分公式：先对 $y$ 后对 $x$ 积分。",
+        "noteEn": "Iterated integral for an $x$-simple region: integrate first in $y$, then in $x$."
+      },
+      {
+        "latex": "\\iint_D f(x,y)\\,d\\sigma=\\int_c^d dy\\int_{\\psi_1(y)}^{\\psi_2(y)}f(x,y)\\,dx",
+        "note": "$Y$ 型区域（先左后右、沿 $x$ 方向穿越）的累次积分公式：先对 $x$ 后对 $y$ 积分。",
+        "noteEn": "Iterated integral for a $y$-simple region: integrate first in $x$, then in $y$."
+      },
+      {
+        "latex": "S(D)=\\iint_D 1\\,d\\sigma=\\iint_D dx\\,dy",
+        "note": "面积公式：区域面积等于被积函数为 $1$ 的二重积分，即高度为 $1$ 的曲顶柱体体积。",
+        "noteEn": "Area formula: the area of a region is the double integral of the constant function $1$."
+      },
+      {
+        "latex": "\\iint_D f(x,y)\\,d\\sigma=f(\\xi,\\eta)\\,S(D)",
+        "note": "二重积分中值定理：$f$ 在连通的闭区域 $D$ 上连续时，存在 $D$ 内一点 $(\\xi,\\eta)$ 使积分等于函数值乘以面积。",
+        "noteEn": "Mean value theorem: if $f$ is continuous on a connected closed region $D$, some point $(\\xi,\\eta)$ in $D$ makes the integral equal to $f(\\xi,\\eta)$ times the area."
+      }
+    ],
+    "expression": {
+      "text": "∬_D f(x,y) dx dy",
+      "symbol": "\\iint_D f(x,y)\\,d\\sigma",
+      "note": "$d\\sigma$ 与 $dx\\,dy$ 是同一个面积元素的两种记法；计算前先画区域、选次序。",
+      "noteEn": "$d\\sigma$ and $dx\\,dy$ denote the same area element; sketch the region and choose the order before computing."
+    },
+    "properties": [
+      "线性性质：$\\iint_D\\left(\\alpha f+\\beta g\\right)d\\sigma=\\alpha\\iint_D f\\,d\\sigma+\\beta\\iint_D g\\,d\\sigma$，常数因子可以提出，和差可以逐项积分。",
+      "区域可加性：若 $D$ 被一条曲线分成 $D_1$、$D_2$ 两部分（内部不相交），则 $\\iint_D f\\,d\\sigma=\\iint_{D_1}f\\,d\\sigma+\\iint_{D_2}f\\,d\\sigma$。",
+      "保序性：若在 $D$ 上处处有 $f(x,y)\\le g(x,y)$，则 $\\iint_D f\\,d\\sigma\\le\\iint_D g\\,d\\sigma$；由此可得估值 $mS\\le\\iint_D f\\,d\\sigma\\le MS$（$m$、$M$ 分别为 $f$ 的下、上确界）。",
+      "对称性：若 $D$ 关于 $x$ 轴对称（$(x,y)\\in D\\Leftrightarrow(x,-y)\\in D$），且 $f$ 关于 $y$ 为奇函数（$f(x,-y)=-f(x,y)$），则 $\\iint_D f\\,d\\sigma=0$；若 $f$ 关于 $y$ 为偶函数（$f(x,-y)=f(x,y)$），则积分等于上半部分积分的两倍；关于 $y$ 轴对称时把 $x$ 换成 $-x$ 同样处理。",
+      "中值定理：若 $f$ 在连通的闭区域 $D$ 上连续，则存在 $(\\xi,\\eta)\\in D$ 使 $\\iint_D f\\,d\\sigma=f(\\xi,\\eta)\\,S(D)$，它把二重积分与平均值 $\\frac{1}{S(D)}\\iint_D f\\,d\\sigma$ 联系起来。"
+    ],
+    "propertiesEn": [
+      "Linearity: $\\iint_D(\\alpha f+\\beta g)\\,d\\sigma=\\alpha\\iint_D f\\,d\\sigma+\\beta\\iint_D g\\,d\\sigma$; constant factors come out and sums can be integrated term by term.",
+      "Additivity: if $D$ is split by a curve into $D_1$ and $D_2$ with disjoint interiors, then $\\iint_D f\\,d\\sigma=\\iint_{D_1}f\\,d\\sigma+\\iint_{D_2}f\\,d\\sigma$.",
+      "Monotonicity: if $f(x,y)\\le g(x,y)$ holds on $D$, then $\\iint_D f\\,d\\sigma\\le\\iint_D g\\,d\\sigma$; this yields the estimate $mS\\le\\iint_D f\\,d\\sigma\\le MS$ with $m$ and $M$ the bounds of $f$.",
+      "Symmetry: if $D$ is symmetric about the $x$-axis and $f$ is odd in $y$ ($f(x,-y)=-f(x,y)$), then $\\iint_D f\\,d\\sigma=0$; if $f$ is even in $y$, the integral is twice the integral over the upper half. Symmetry about the $y$-axis is handled with $x$ replaced by $-x$.",
+      "Mean value theorem: for $f$ continuous on a connected closed region $D$, there is $(\\xi,\\eta)\\in D$ with $\\iint_D f\\,d\\sigma=f(\\xi,\\eta)\\,S(D)$, linking the integral to the average value $\\frac{1}{S(D)}\\iint_D f\\,d\\sigma$."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.6,
+        2.6
+      ],
+      "yRange": [
+        -0.6,
+        1.6
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0.5
+          ],
+          "label": "D",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            -0.32
+          ],
+          "text": "2"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.32,
+            1.0
+          ],
+          "text": "1"
+        }
+      ],
+      "title": "二重积分的积分区域：矩形 D=[0,2]×[0,1]"
+    },
+    "examples": [
+      {
+        "problem": "计算 $\\iint_D (x+y)\\,d\\sigma$，其中 $D$ 是由直线 $y=x$、$x=1$ 与 $y=0$ 围成的三角形区域。",
+        "solution": "把 $D$ 写成 $X$ 型区域：$D=\\{(x,y)\\mid 0\\le x\\le 1,\\ 0\\le y\\le x\\}$。于是\n$$\\iint_D(x+y)\\,d\\sigma=\\int_0^1\\left[\\int_0^x(x+y)\\,dy\\right]dx=\\int_0^1\\left[xy+\\frac{y^{2}}{2}\\right]_0^x dx=\\int_0^1\\left(x^{2}+\\frac{x^{2}}{2}\\right)dx.$$\n所以 $\\iint_D(x+y)\\,d\\sigma=\\frac{3}{2}\\int_0^1x^{2}\\,dx=\\frac{3}{2}\\cdot\\frac{1}{3}=\\frac{1}{2}$。"
+      },
+      {
+        "problem": "计算 $\\iint_D (x+y+3)\\,d\\sigma$，其中 $D$ 是单位圆盘 $x^{2}+y^{2}\\le 1$。",
+        "solution": "$D$ 是单位圆盘，关于 $x$ 轴与 $y$ 轴都对称。被积函数中：$x$ 关于 $x$ 为奇函数（把 $x$ 换成 $-x$ 时为 $-x$），而 $D$ 关于 $y$ 轴对称，所以由对称性 $\\iint_D x\\,d\\sigma=0$；同理 $y$ 关于 $y$ 为奇函数，$D$ 关于 $x$ 轴对称，所以 $\\iint_D y\\,d\\sigma=0$。只剩下常数项：$\\iint_D 3\\,d\\sigma=3S(D)=3\\pi$。因此 $\\iint_D(x+y+3)\\,d\\sigma=3\\pi$。可见对称性能省去大量计算。"
+      }
+    ],
+    "tags": [
+      "二重积分",
+      "累次积分",
+      "黎曼和",
+      "曲顶柱体"
+    ],
+    "links": [
+      "integral",
+      "integral-volume",
+      "double-integral-polar",
+      "triple-integral",
+      "integral-area"
+    ]
+  },
+  {
+    "id": "double-integral-polar",
+    "title": "极坐标下的二重积分",
+    "titleEn": "Double Integrals in Polar Coordinates",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "极坐标下面积元素 dxdy = r dr dθ，二重积分化为先对 r 后对 θ 的累次积分；雅可比因子 r 绝对不能漏。",
+    "summaryEn": "In polar coordinates the area element is dxdy = r dr dθ, so a double integral becomes an iterated integral in r and θ; the Jacobian factor r must never be dropped.",
+    "definition": "当积分区域是圆、圆环、扇形等「圆状」区域，或被积函数含有 $x^{2}+y^{2}$ 时，改用极坐标往往能把复杂的直角坐标积分化为简单的累次积分。极坐标变换为\n$$x=r\\cos\\theta,\\qquad y=r\\sin\\theta\\qquad(r\\ge 0),$$\n其中 $r$ 是点到原点的距离，$\\theta$ 是极角。\n\n关键在于**面积元素的变化**。在极坐标网格中，半径为 $r$、宽为 $dr$、圆心角为 $d\\theta$ 的小块近似是一个边长为 $dr$ 与 $r\\,d\\theta$ 的矩形，因此\n$$d\\sigma\\approx r\\,dr\\,d\\theta.$$\n严格地说，由二重积分的换元公式，极坐标变换的雅可比行列式为\n$$\\frac{\\partial(x,y)}{\\partial(r,\\theta)}=\\begin{vmatrix}\\cos\\theta & -r\\sin\\theta\\\\ \\sin\\theta & r\\cos\\theta\\end{vmatrix}=r,$$\n于是 $dx\\,dy=r\\,dr\\,d\\theta$。**雅可比因子 $r$ 是极坐标积分里绝对不能漏的部分**：漏掉 $r$ 相当于用直角坐标小矩形的面积去代替极坐标小块的面积，计算结果必然出错。\n\n设区域 $D$ 可用极坐标表示为 $\\alpha\\le\\theta\\le\\beta$，$r_1(\\theta)\\le r\\le r_2(\\theta)$（这样的区域称为 $\\theta$ 型区域，例如圆心在原点的圆环），则\n$$\\iint_D f(x,y)\\,dx\\,dy=\\int_{\\alpha}^{\\beta}d\\theta\\int_{r_1(\\theta)}^{r_2(\\theta)}f(r\\cos\\theta,\\,r\\sin\\theta)\\,r\\,dr,$$\n即先对 $r$ 积分、再对 $\\theta$ 积分。特别地，圆域 $x^{2}+y^{2}\\le R^{2}$ 对应 $0\\le\\theta\\le 2\\pi$、$0\\le r\\le R$。使用时要注意 $\\theta$ 的范围恰好覆盖 $D$ 一次（不重不漏）；极点处 $r=0$ 极角无意义，但它对应的点集面积为零，不影响积分值。",
+    "definitionEn": "When the region is circular — a disc, an annulus, a sector or a piece of one — or when the integrand involves $x^{2}+y^{2}$, switching to polar coordinates often turns a difficult Cartesian integral into a simple iterated one. The polar transformation is\n$$x=r\\cos\\theta,\\qquad y=r\\sin\\theta\\qquad(r\\ge 0),$$\nwhere $r$ is the distance from the origin and $\\theta$ the polar angle.\n\nThe key point is the **change of the area element**. A small piece of the polar grid with radius $r$, width $dr$ and central angle $d\\theta$ is approximately a rectangle with side lengths $dr$ and $r\\,d\\theta$, hence\n$$d\\sigma\\approx r\\,dr\\,d\\theta.$$\nMore precisely, by the change-of-variables formula, the Jacobian determinant of the polar transformation is\n$$\\frac{\\partial(x,y)}{\\partial(r,\\theta)}=\\begin{vmatrix}\\cos\\theta & -r\\sin\\theta\\\\ \\sin\\theta & r\\cos\\theta\\end{vmatrix}=r,$$\nso $dx\\,dy=r\\,dr\\,d\\theta$. **The Jacobian factor $r$ can never be omitted**: dropping it amounts to replacing the true area of a polar patch by that of a Cartesian rectangle, and the answer will inevitably be wrong.\n\nIf $D$ is described in polar coordinates by $\\alpha\\le\\theta\\le\\beta$, $r_1(\\theta)\\le r\\le r_2(\\theta)$ (a $\\theta$-simple region, such as an annulus centred at the origin), then\n$$\\iint_D f(x,y)\\,dx\\,dy=\\int_{\\alpha}^{\\beta}d\\theta\\int_{r_1(\\theta)}^{r_2(\\theta)}f(r\\cos\\theta,\\,r\\sin\\theta)\\,r\\,dr,$$\nintegrating in $r$ first and then in $\\theta$. In particular the disc $x^{2}+y^{2}\\le R^{2}$ corresponds to $0\\le\\theta\\le 2\\pi$, $0\\le r\\le R$. Take care that the $\\theta$-interval covers $D$ exactly once; at the pole $r=0$ the angle is meaningless, but that set of points has zero area and does not affect the integral.",
+    "formulas": [
+      {
+        "latex": "x=r\\cos\\theta,\\qquad y=r\\sin\\theta\\qquad(r\\ge 0)",
+        "note": "极坐标与直角坐标的互换关系；$r\\ge 0$ 是到原点的距离，$\\theta$ 是极角。",
+        "noteEn": "The polar-to-Cartesian relations; $r\\ge 0$ is the distance from the origin and $\\theta$ the polar angle."
+      },
+      {
+        "latex": "dx\\,dy=r\\,dr\\,d\\theta",
+        "note": "极坐标的面积元素：因子 $r$ 来自雅可比行列式，是极坐标积分中最不能漏写的东西。",
+        "noteEn": "The polar area element; the factor $r$ comes from the Jacobian and is the single most commonly forgotten ingredient."
+      },
+      {
+        "latex": "\\frac{\\partial(x,y)}{\\partial(r,\\theta)}=\\begin{vmatrix}\\cos\\theta & -r\\sin\\theta\\\\ \\sin\\theta & r\\cos\\theta\\end{vmatrix}=r\\cos^{2}\\theta+r\\sin^{2}\\theta=r",
+        "note": "雅可比行列式等于 $r$，即面积的局部伸缩因子；它与极角 $\\theta$ 无关、只随 $r$ 增大。",
+        "noteEn": "The Jacobian equals $r$: the local area scaling factor, independent of $\\theta$ and growing with $r$."
+      },
+      {
+        "latex": "\\iint_D f(x,y)\\,dx\\,dy=\\int_{\\alpha}^{\\beta}d\\theta\\int_{r_1(\\theta)}^{r_2(\\theta)}f(r\\cos\\theta,r\\sin\\theta)\\,r\\,dr",
+        "note": "$\\theta$ 型区域上的累次积分：先对 $r$ 积分（别忘了 $r$），再对 $\\theta$ 积分。",
+        "noteEn": "Iterated integral over a $\\theta$-simple region: integrate in $r$ first (keeping the factor $r$), then in $\\theta$."
+      },
+      {
+        "latex": "\\iint_{x^{2}+y^{2}\\le R^{2}}f\\,dx\\,dy=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{R}f(r\\cos\\theta,r\\sin\\theta)\\,r\\,dr",
+        "note": "圆域上最常用的公式；若外边界由 $r=R(\\theta)$ 给出，只需把内层的上限换成 $R(\\theta)$。",
+        "noteEn": "The most used formula on a disc; if the boundary is $r=R(\\theta)$, simply replace the inner upper limit by $R(\\theta)$."
+      }
+    ],
+    "expression": {
+      "text": "∬_D f dxdy = ∫_α^β dθ ∫_{r₁(θ)}^{r₂(θ)} f(r cosθ, r sinθ)·r dr",
+      "symbol": "dx\\,dy=r\\,dr\\,d\\theta",
+      "note": "换到极坐标时，先写出 $r\\,dr\\,d\\theta$，再确定 $\\theta$ 与 $r$ 的范围；次序通常是先 $r$ 后 $\\theta$。",
+      "noteEn": "After switching to polar coordinates, write $r\\,dr\\,d\\theta$ first, then determine the ranges of $\\theta$ and $r$; the usual order is $r$ first."
+    },
+    "properties": [
+      "因子 $r$ 的几何意义：极坐标小块的面积约为 $r\\,dr\\,d\\theta$——同样大小的 $dr$、$d\\theta$，离原点越远对应的面积越大。",
+      "适用情形：区域为圆、圆环、扇形或其一部分，或被积函数含 $x^{2}+y^{2}$、$y/x$ 等组合时，极坐标通常明显更简单。",
+      "$\\theta$ 的范围必须不重不漏地覆盖区域：整圆取 $0\\le\\theta\\le 2\\pi$，上半圆取 $0\\le\\theta\\le\\pi$，右半圆取 $-\\frac{\\pi}{2}\\le\\theta\\le\\frac{\\pi}{2}$ 等。",
+      "用圆面积检验因子：$\\iint_{x^{2}+y^{2}\\le R^{2}}1\\,d\\sigma=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{R}r\\,dr=\\pi R^{2}$，与圆面积公式一致，说明因子 $r$ 不可缺。",
+      "极坐标换元是二重积分换元公式 $dx\\,dy=\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv$ 最重要的特例；三重积分的柱坐标、球坐标公式是同一原理的推广。"
+    ],
+    "propertiesEn": [
+      "Geometric meaning of the factor $r$: a polar patch has area about $r\\,dr\\,d\\theta$ — the same $dr$ and $d\\theta$ cover more area farther from the origin.",
+      "When to use it: circular regions (discs, annuli, sectors) or integrands containing $x^{2}+y^{2}$, $y/x$ and similar combinations.",
+      "The $\\theta$-interval must cover the region exactly once: $0\\le\\theta\\le 2\\pi$ for a full disc, $0\\le\\theta\\le\\pi$ for the upper half, $-\\frac{\\pi}{2}\\le\\theta\\le\\frac{\\pi}{2}$ for the right half, and so on.",
+      "Check the factor with a disc: $\\iint_{x^{2}+y^{2}\\le R^{2}}1\\,d\\sigma=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{R}r\\,dr=\\pi R^{2}$, matching the known area and confirming that $r$ is indispensable.",
+      "Polar coordinates are the most important special case of the general change-of-variables formula $dx\\,dy=\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv$; cylindrical and spherical coordinates generalise the same idea to triple integrals."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "levels": 8,
+      "title": "圆域上的积分：被积函数 x²+y² 的等值线（同心圆）"
+    },
+    "examples": [
+      {
+        "problem": "计算 $\\iint_D e^{x^{2}+y^{2}}\\,dx\\,dy$，其中 $D=\\{(x,y)\\mid x^{2}+y^{2}\\le 1\\}$。",
+        "solution": "被积函数与区域都只与 $r$ 有关，适合极坐标。令 $x=r\\cos\\theta$、$y=r\\sin\\theta$，$dx\\,dy=r\\,dr\\,d\\theta$，区域 $D$ 对应 $0\\le\\theta\\le 2\\pi$、$0\\le r\\le 1$：\n$$\\iint_D e^{x^{2}+y^{2}}\\,dx\\,dy=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{1}e^{r^{2}}\\,r\\,dr=2\\pi\\cdot\\left[\\frac{1}{2}e^{r^{2}}\\right]_0^1=\\pi(e-1).$$\n内层恰好凑微分：$e^{r^{2}}r\\,dr=\\frac{1}{2}\\,d\\left(e^{r^{2}}\\right)$，积分立刻完成——这正是极坐标的威力。"
+      },
+      {
+        "problem": "计算 $\\iint_D (x^{2}+y^{2})\\,d\\sigma$，其中 $D$ 是单位圆盘 $x^{2}+y^{2}\\le 1$；并说明漏掉因子 $r$ 会得到什么错误结果。",
+        "solution": "极坐标下 $x^{2}+y^{2}=r^{2}$，面积元素为 $r\\,dr\\,d\\theta$：\n$$\\iint_D (x^{2}+y^{2})\\,d\\sigma=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{1}r^{2}\\cdot r\\,dr=2\\pi\\cdot\\left[\\frac{r^{4}}{4}\\right]_0^1=\\frac{\\pi}{2}.$$\n若漏掉因子 $r$，就会算出 $2\\pi\\int_0^1 r^{2}\\,dr=\\frac{2\\pi}{3}$，与正确答案 $\\frac{\\pi}{2}$ 不符——说明面积元素中的 $r$ 是计算的必要组成部分。"
+      }
+    ],
+    "tags": [
+      "极坐标",
+      "二重积分",
+      "面积元素",
+      "雅可比"
+    ],
+    "links": [
+      "double-integral",
+      "jacobian",
+      "triple-integral",
+      "integral",
+      "integral-area"
+    ]
+  },
+  {
+    "id": "triple-integral",
+    "title": "三重积分",
+    "titleEn": "Triple Integral",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "三重积分是三元函数在空间区域上的黎曼和极限，可用投影法或截面法化为累次积分，柱坐标与球坐标是常用的简化工具。",
+    "summaryEn": "The triple integral is the limit of Riemann sums of a three-variable function over a solid region; it reduces to iterated integrals and simplifies in cylindrical or spherical coordinates.",
+    "definition": "三重积分的定义与二重积分完全平行。设 $f(x,y,z)$ 是空间有界闭区域 $\\Omega$ 上的有界函数，把 $\\Omega$ 任意分成 $n$ 个小块 $\\Delta v_1,\\dots,\\Delta v_n$（$\\Delta v_i$ 兼表体积），在每个小块上任取一点 $(\\xi_i,\\eta_i,\\zeta_i)$，作和 $\\sum_{i=1}^{n}f(\\xi_i,\\eta_i,\\zeta_i)\\,\\Delta v_i$。当各小块直径的最大值 $\\lambda\\to 0$ 时，若该极限存在且与分法、取点无关，就称 $f$ 在 $\\Omega$ 上可积，该极限称为**三重积分**：\n$$\\iiint_\\Omega f(x,y,z)\\,dV=\\lim_{\\lambda\\to 0}\\sum_{i=1}^{n}f(\\xi_i,\\eta_i,\\zeta_i)\\,\\Delta v_i.$$\n有界闭区域上的连续函数一定可积。当 $f\\equiv 1$ 时，三重积分等于 $\\Omega$ 的体积；若 $f$ 表示物体的体密度，则三重积分给出物体的质量。\n\n**计算方法一：投影法（先一后二）**。若 $\\Omega$ 可表示为\n$$\\Omega=\\{(x,y,z)\\mid (x,y)\\in D,\\ z_1(x,y)\\le z\\le z_2(x,y)\\},$$\n其中 $D$ 是 $\\Omega$ 在 $xy$ 平面上的投影，且沿 $z$ 方向每条直线与 $\\Omega$ 的交是一段区间，则\n$$\\iiint_\\Omega f\\,dV=\\iint_D\\left[\\int_{z_1(x,y)}^{z_2(x,y)}f(x,y,z)\\,dz\\right]dx\\,dy.$$\n**方法二：截面法（先二后一）**。若 $\\Omega=\\{(x,y,z)\\mid a\\le z\\le b,\\ (x,y)\\in D_z\\}$，其中 $D_z$ 是平面 $z=$ 常数截 $\\Omega$ 所得的截面，则\n$$\\iiint_\\Omega f\\,dV=\\int_a^b\\left[\\iint_{D_z}f(x,y,z)\\,dx\\,dy\\right]dz.$$\n区域投影清楚时用投影法，截面简单（如球体、锥体）时用截面法。\n\n**柱坐标与球坐标**。柱坐标\n$$x=r\\cos\\theta,\\qquad y=r\\sin\\theta,\\qquad z=z$$\n下，体积元素 $dV=r\\,dr\\,d\\theta\\,dz$。球坐标\n$$x=\\rho\\sin\\varphi\\cos\\theta,\\qquad y=\\rho\\sin\\varphi\\sin\\theta,\\qquad z=\\rho\\cos\\varphi$$\n（$\\rho\\ge 0$ 为点到原点的距离，$\\varphi\\in[0,\\pi]$ 为与 $z$ 轴正向的夹角，$\\theta\\in[0,2\\pi)$ 为极角）下，体积元素\n$$dV=\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta.$$\n选择原则：区域或被积函数含 $x^{2}+y^{2}$（绕 $z$ 轴旋转对称）时用柱坐标；含 $x^{2}+y^{2}+z^{2}$（球对称）时用球坐标。两个体积元素中的因子 $r$ 与 $\\rho^{2}\\sin\\varphi$ 都来自雅可比行列式，绝不能漏写。",
+    "definitionEn": "The definition of the triple integral runs parallel to that of the double integral. Let $f(x,y,z)$ be bounded on a bounded closed solid $\\Omega$. Partition $\\Omega$ into $n$ small pieces $\\Delta v_1,\\dots,\\Delta v_n$ ($\\Delta v_i$ also denoting volume), choose $(\\xi_i,\\eta_i,\\zeta_i)$ in each piece and form $\\sum_{i=1}^{n}f(\\xi_i,\\eta_i,\\zeta_i)\\,\\Delta v_i$. If the limit as the largest diameter $\\lambda\\to 0$ exists and is independent of the partition and the sample points, then $f$ is integrable on $\\Omega$ and the limit is the **triple integral**:\n$$\\iiint_\\Omega f(x,y,z)\\,dV=\\lim_{\\lambda\\to 0}\\sum_{i=1}^{n}f(\\xi_i,\\eta_i,\\zeta_i)\\,\\Delta v_i.$$\nEvery continuous function on a bounded closed solid is integrable. For $f\\equiv 1$ the integral is the volume of $\\Omega$; if $f$ is a volume density, the integral gives the mass.\n\n**Method 1: projection (one integral inside two)**. If\n$$\\Omega=\\{(x,y,z)\\mid (x,y)\\in D,\\ z_1(x,y)\\le z\\le z_2(x,y)\\},$$\nwhere $D$ is the projection of $\\Omega$ onto the $xy$-plane and each vertical line meets $\\Omega$ in a single interval, then\n$$\\iiint_\\Omega f\\,dV=\\iint_D\\left[\\int_{z_1(x,y)}^{z_2(x,y)}f(x,y,z)\\,dz\\right]dx\\,dy.$$\n**Method 2: slicing (two integrals inside one)**. If $\\Omega=\\{(x,y,z)\\mid a\\le z\\le b,\\ (x,y)\\in D_z\\}$, where $D_z$ is the cross-section at height $z$, then\n$$\\iiint_\\Omega f\\,dV=\\int_a^b\\left[\\iint_{D_z}f(x,y,z)\\,dx\\,dy\\right]dz.$$\nUse projection when the shadow is simple, slicing when the cross-sections are simple (as for spheres and cones).\n\n**Cylindrical and spherical coordinates**. In cylindrical coordinates\n$$x=r\\cos\\theta,\\qquad y=r\\sin\\theta,\\qquad z=z,$$\nthe volume element is $dV=r\\,dr\\,d\\theta\\,dz$. In spherical coordinates\n$$x=\\rho\\sin\\varphi\\cos\\theta,\\qquad y=\\rho\\sin\\varphi\\sin\\theta,\\qquad z=\\rho\\cos\\varphi$$\n($\\rho\\ge 0$ the distance to the origin, $\\varphi\\in[0,\\pi]$ the angle from the positive $z$-axis, $\\theta\\in[0,2\\pi)$ the polar angle) the volume element is\n$$dV=\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta.$$\nRule of thumb: for rotational symmetry about the $z$-axis ($x^{2}+y^{2}$ present) use cylindrical coordinates; for spherical symmetry ($x^{2}+y^{2}+z^{2}$ present) use spherical coordinates. The factors $r$ and $\\rho^{2}\\sin\\varphi$ both come from Jacobian determinants and must never be dropped.",
+    "formulas": [
+      {
+        "latex": "\\iiint_\\Omega f\\,dV=\\lim_{\\lambda\\to 0}\\sum_{i=1}^{n}f(\\xi_i,\\eta_i,\\zeta_i)\\,\\Delta v_i",
+        "note": "定义：三重积分是三重黎曼和的极限，要求极限与分法、取点无关。",
+        "noteEn": "Definition: the triple integral is the limit of triple Riemann sums, independent of the partition and the sample points."
+      },
+      {
+        "latex": "\\iiint_\\Omega f\\,dV=\\iint_D\\left[\\int_{z_1(x,y)}^{z_2(x,y)}f(x,y,z)\\,dz\\right]dx\\,dy",
+        "note": "投影法（先一后二）：先对 $z$ 积分（上下限是 $x,y$ 的函数），再在投影 $D$ 上作二重积分；截面法与之互为对照。",
+        "noteEn": "Projection method: integrate in $z$ first (limits depending on $x,y$), then evaluate a double integral over the shadow $D$; slicing is its counterpart."
+      },
+      {
+        "latex": "x=r\\cos\\theta,\\quad y=r\\sin\\theta,\\quad z=z,\\qquad dV=r\\,dr\\,d\\theta\\,dz",
+        "note": "柱坐标：适合绕 $z$ 轴旋转对称的区域或被积函数（含 $x^{2}+y^{2}$）；体积元素中的 $r$ 是雅可比因子。",
+        "noteEn": "Cylindrical coordinates suit regions or integrands with rotational symmetry about the $z$-axis; the factor $r$ is the Jacobian."
+      },
+      {
+        "latex": "x=\\rho\\sin\\varphi\\cos\\theta,\\quad y=\\rho\\sin\\varphi\\sin\\theta,\\quad z=\\rho\\cos\\varphi,\\qquad dV=\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta",
+        "note": "球坐标：适合球对称的区域或被积函数（含 $x^{2}+y^{2}+z^{2}$）；$\\varphi$ 从 $z$ 轴正向量起，体积元素中的 $\\rho^{2}\\sin\\varphi$ 不能漏。",
+        "noteEn": "Spherical coordinates suit spherical symmetry (with $x^{2}+y^{2}+z^{2}$); $\\varphi$ is measured from the positive $z$-axis, and $\\rho^{2}\\sin\\varphi$ must not be dropped."
+      },
+      {
+        "latex": "V(\\Omega)=\\iiint_\\Omega 1\\,dV",
+        "note": "体积公式：被积函数为 $1$ 时三重积分给出区域体积；被积函数为体密度时给出质量。",
+        "noteEn": "Volume formula: with integrand $1$ the triple integral gives the volume; with a volume density it gives the mass."
+      }
+    ],
+    "expression": {
+      "text": "∭_Ω f(x,y,z) dV",
+      "symbol": "\\iiint_\\Omega f\\,dV",
+      "note": "体积元素随坐标系变化：直角坐标 $dx\\,dy\\,dz$、柱坐标 $r\\,dr\\,d\\theta\\,dz$、球坐标 $\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$。",
+      "noteEn": "The volume element depends on the coordinate system: $dx\\,dy\\,dz$, $r\\,dr\\,d\\theta\\,dz$, $\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$."
+    },
+    "properties": [
+      "与二重积分平行的性质：线性、区域可加性、保序性与估值；$f$ 在连通的闭区域上连续时还有中值定理 $\\iiint_\\Omega f\\,dV=f(\\xi,\\eta,\\zeta)\\,V(\\Omega)$。",
+      "几何与物理意义：$f\\equiv 1$ 时得到体积；$f$ 为体密度时得到质量；电荷、转动惯量等物理量的累加也归结为同样的模型。",
+      "坐标选择原则：含 $x^{2}+y^{2}$ 用柱坐标，含 $x^{2}+y^{2}+z^{2}$ 用球坐标；雅可比因子 $r$ 与 $\\rho^{2}\\sin\\varphi$ 不能漏（如球体积 $\\frac{4}{3}\\pi R^{3}$ 的推导依赖 $\\rho^{2}\\sin\\varphi$）。",
+      "投影法与截面法（不同的累次积分次序）在可积条件下结果相同（富比尼定理），选择哪一种由区域形状与被积函数决定。",
+      "对称性：若 $\\Omega$ 关于 $xy$ 平面对称（$(x,y,z)\\in\\Omega\\Leftrightarrow(x,y,-z)\\in\\Omega$），且 $f$ 关于 $z$ 为奇函数（$f(x,y,-z)=-f(x,y,z)$），则 $\\iiint_\\Omega f\\,dV=0$；若 $f$ 关于 $z$ 为偶函数，则等于上半部分积分的两倍；关于其他坐标平面同理。"
+    ],
+    "propertiesEn": [
+      "Properties parallel to the double integral: linearity, additivity over regions, monotonicity and estimates; for continuous $f$ on a connected closed solid there is a mean value theorem $\\iiint_\\Omega f\\,dV=f(\\xi,\\eta,\\zeta)\\,V(\\Omega)$.",
+      "Geometric and physical meaning: $f\\equiv 1$ gives volume; a volume density gives mass; the accumulation of charge, moment of inertia and other physical quantities follows the same model.",
+      "Choice of coordinates: use cylindrical for $x^{2}+y^{2}$, spherical for $x^{2}+y^{2}+z^{2}$; the Jacobian factors $r$ and $\\rho^{2}\\sin\\varphi$ must not be dropped (the volume of a ball, $\\frac{4}{3}\\pi R^{3}$, relies on $\\rho^{2}\\sin\\varphi$).",
+      "Projection and slicing — different orders of iteration — agree whenever the integrals exist (Fubini's theorem); the choice is dictated by the shape of the region and the integrand.",
+      "Symmetry: if $\\Omega$ is symmetric about the $xy$-plane and $f$ is odd in $z$, then $\\iiint_\\Omega f\\,dV=0$; if $f$ is even in $z$, the integral is twice that over the upper half. The other coordinate planes work the same way."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.5,
+        2.1
+      ],
+      "yRange": [
+        -0.5,
+        1.9
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.7,
+              0.55
+            ],
+            [
+              1.7,
+              0.55
+            ],
+            [
+              1.7,
+              1.55
+            ],
+            [
+              0.7,
+              1.55
+            ]
+          ],
+          "fill": "rgba(179,136,255,0.10)",
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            0.7,
+            0.55
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            0
+          ],
+          "to": [
+            1.7,
+            0.55
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            1.7,
+            1.55
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            0.7,
+            1.55
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.85,
+            0.78
+          ],
+          "label": "Ω",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.5,
+            -0.22
+          ],
+          "text": "1"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.25,
+            0.5
+          ],
+          "text": "1"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.32,
+            0.42
+          ],
+          "text": "1"
+        }
+      ],
+      "title": "三重积分的积分区域：单位正方体 Ω（斜投影示意）"
+    },
+    "examples": [
+      {
+        "problem": "用球坐标推导半径为 $R$ 的球体的体积公式。",
+        "solution": "球体 $\\Omega$：$0\\le\\rho\\le R$，$0\\le\\varphi\\le\\pi$，$0\\le\\theta\\le 2\\pi$，体积元素 $dV=\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$。于是\n$$V=\\iiint_\\Omega 1\\,dV=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{\\pi}d\\varphi\\int_{0}^{R}\\rho^{2}\\sin\\varphi\\,d\\rho=2\\pi\\cdot\\left[-\\cos\\varphi\\right]_0^{\\pi}\\cdot\\left[\\frac{\\rho^{3}}{3}\\right]_0^{R}=2\\pi\\cdot 2\\cdot\\frac{R^{3}}{3}=\\frac{4}{3}\\pi R^{3}.$$\n三个积分恰好分离成三个一元积分，其中 $\\int_0^{\\pi}\\sin\\varphi\\,d\\varphi=2$ 来自球坐标的雅可比因子。"
+      },
+      {
+        "problem": "用柱坐标计算 $\\iiint_\\Omega (x^{2}+y^{2})\\,dV$，其中 $\\Omega$ 是圆柱体 $x^{2}+y^{2}\\le 1$，$0\\le z\\le 1$。",
+        "solution": "柱坐标下 $x^{2}+y^{2}=r^{2}$，$dV=r\\,dr\\,d\\theta\\,dz$，区域为 $0\\le\\theta\\le 2\\pi$、$0\\le r\\le 1$、$0\\le z\\le 1$：\n$$\\iiint_\\Omega (x^{2}+y^{2})\\,dV=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{1}r^{2}\\cdot r\\,dr\\int_{0}^{1}dz=2\\pi\\cdot\\frac{1}{4}\\cdot 1=\\frac{\\pi}{2}.$$\n若用直角坐标计算，则要面对 $\\iint_{x^{2}+y^{2}\\le 1}(x^{2}+y^{2})\\,dx\\,dy$ 的麻烦积分；柱坐标把一切化为简单的一元积分。"
+      }
+    ],
+    "tags": [
+      "三重积分",
+      "柱坐标",
+      "球坐标",
+      "体积元素"
+    ],
+    "links": [
+      "double-integral",
+      "jacobian",
+      "double-integral-polar",
+      "integral-volume",
+      "gauss-theorem"
+    ]
+  },
+  {
+    "id": "jacobian",
+    "title": "雅可比行列式",
+    "titleEn": "Jacobian Determinant",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "雅可比行列式刻画坐标变换的局部面积（体积）伸缩率；二重积分换元时 dxdy = |∂(x,y)/∂(u,v)| dudv，绝对值不能少。",
+    "summaryEn": "The Jacobian determinant measures the local area (volume) scaling of a coordinate transformation; in change of variables dxdy = |∂(x,y)/∂(u,v)| dudv, the absolute value is essential.",
+    "definition": "多元积分的换元需要一个新的「伸缩因子」。设坐标变换\n$$x=x(u,v),\\qquad y=y(u,v)$$\n把 $uv$ 平面上的区域 $D'$ 一一对应地映成 $xy$ 平面上的区域 $D$，且 $x,y$ 有连续偏导数。由四个偏导数组成的行列式\n$$J=\\frac{\\partial(x,y)}{\\partial(u,v)}=\\begin{vmatrix}x_u & x_v\\\\ y_u & y_v\\end{vmatrix}=x_uy_v-x_vy_u$$\n称为变换的**雅可比行列式**。它度量变换在一点附近的**面积伸缩率**：$uv$ 平面上边长为 $du$、$dv$ 的小矩形被映成 $xy$ 平面上近似的平行四边形，其面积约为 $|J|\\,du\\,dv$。\n\n**二重积分的换元公式**：当变换是 $D'$ 到 $D$ 的一一映射（内部）、偏导数连续、且雅可比在 $D'$ 上不为零（至多除去面积为零的例外集）时，\n$$\\iint_D f(x,y)\\,dx\\,dy=\\iint_{D'}f\\big(x(u,v),\\,y(u,v)\\big)\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv.$$\n注意这里取的是雅可比行列式的**绝对值**：面积元素 $dx\\,dy$ 与 $du\\,dv$ 都是非负的量，所以无论 $J$ 的符号如何，伸缩因子都是 $|J|$。这与一元换元公式 $\\int f(x)\\,dx=\\int f(\\varphi(t))\\left|\\varphi'(t)\\right|dt$ 中的绝对值完全一致——一维的 $|\\varphi'|$ 正是「一维雅可比」的绝对值。\n\n最重要的特例是极坐标变换 $x=r\\cos\\theta$、$y=r\\sin\\theta$，其雅可比行列式为 $r$，于是 $dx\\,dy=r\\,dr\\,d\\theta$；球坐标变换的雅可比绝对值为 $\\rho^{2}\\sin\\varphi$。三重积分的换元公式与二重完全平行：\n$$\\iiint_\\Omega f\\,dV=\\iiint_{\\Omega'}f\\left|\\frac{\\partial(x,y,z)}{\\partial(u,v,w)}\\right|du\\,dv\\,dw.$$\n当 $J\\ne 0$ 时，变换在一点附近局部可逆（反函数定理），这是换元公式与坐标变换能够成立的基础。",
+    "definitionEn": "Changing variables in a multiple integral needs a new 「scaling factor」. Let the transformation\n$$x=x(u,v),\\qquad y=y(u,v)$$\nmap a region $D'$ in the $uv$-plane one-to-one onto a region $D$ in the $xy$-plane, with $x,y$ having continuous partial derivatives. The determinant of the four partial derivatives,\n$$J=\\frac{\\partial(x,y)}{\\partial(u,v)}=\\begin{vmatrix}x_u & x_v\\\\ y_u & y_v\\end{vmatrix}=x_uy_v-x_vy_u,$$\nis the **Jacobian determinant** of the transformation. It measures the local **area scaling**: a small rectangle of sides $du,dv$ in the $uv$-plane is mapped to an approximately parallelogram-shaped region in the $xy$-plane whose area is about $|J|\\,du\\,dv$.\n\n**Change of variables for double integrals**: if the transformation is a one-to-one map of $D'$ onto $D$ (on the interiors), the partial derivatives are continuous and the Jacobian does not vanish on $D'$ (except possibly on a set of area zero), then\n$$\\iint_D f(x,y)\\,dx\\,dy=\\iint_{D'}f\\big(x(u,v),y(u,v)\\big)\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv.$$\nNote the **absolute value** of the Jacobian: the area elements $dx\\,dy$ and $du\\,dv$ are nonnegative, so the scaling factor is $|J|$ regardless of the sign of $J$. This matches the absolute value in the one-variable substitution $\\int f(x)\\,dx=\\int f(\\varphi(t))\\left|\\varphi'(t)\\right|dt$ — the factor $|\\varphi'|$ is precisely a one-dimensional Jacobian.\n\nThe most important special cases: polar coordinates $x=r\\cos\\theta,\\ y=r\\sin\\theta$ have Jacobian $r$, hence $dx\\,dy=r\\,dr\\,d\\theta$; spherical coordinates have Jacobian $\\rho^{2}\\sin\\varphi$. The change-of-variables formula for triple integrals is completely parallel:\n$$\\iiint_\\Omega f\\,dV=\\iiint_{\\Omega'}f\\left|\\frac{\\partial(x,y,z)}{\\partial(u,v,w)}\\right|du\\,dv\\,dw.$$\nWhen $J\\ne 0$ the transformation is locally invertible near the point (inverse function theorem), the foundation on which change of variables and coordinate transformations rest.",
+    "formulas": [
+      {
+        "latex": "J=\\frac{\\partial(x,y)}{\\partial(u,v)}=\\begin{vmatrix}x_u & x_v\\\\ y_u & y_v\\end{vmatrix}=x_uy_v-x_vy_u",
+        "note": "雅可比行列式的定义：把偏导数排成矩阵再取行列式；它随点变化，一般是 $(u,v)$ 的函数。",
+        "noteEn": "Definition of the Jacobian: arrange the partial derivatives in a matrix and take its determinant; it is generally a function of $(u,v)$."
+      },
+      {
+        "latex": "\\iint_D f(x,y)\\,dx\\,dy=\\iint_{D'}f\\big(x(u,v),y(u,v)\\big)\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv",
+        "note": "二重积分换元公式；必须取雅可比行列式的绝对值——面积伸缩因子是非负的。",
+        "noteEn": "The change-of-variables formula for double integrals; the absolute value of the Jacobian is required because the area scaling factor is nonnegative."
+      },
+      {
+        "latex": "dx\\,dy=\\left|\\frac{\\partial(x,y)}{\\partial(r,\\theta)}\\right|dr\\,d\\theta=r\\,dr\\,d\\theta",
+        "note": "极坐标是最常用的特例：雅可比为 $r$，这解释了极坐标面积元素中的因子 $r$。",
+        "noteEn": "Polar coordinates: the Jacobian is $r$, which explains the factor $r$ in the polar area element."
+      },
+      {
+        "latex": "\\left|\\frac{\\partial(x,y,z)}{\\partial(\\rho,\\varphi,\\theta)}\\right|=\\rho^{2}\\sin\\varphi",
+        "note": "球坐标的体积伸缩因子，于是 $dV=\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$；它是球体积公式推导的关键。",
+        "noteEn": "The volume scaling factor of spherical coordinates, giving $dV=\\rho^{2}\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$; it is the key to deriving the volume of a ball."
+      },
+      {
+        "latex": "\\int f(x)\\,dx=\\int f(\\varphi(t))\\left|\\varphi'(t)\\right|dt",
+        "note": "一元换元公式：$|\\varphi'|$ 是「一维雅可比」，与多元情形取绝对值的道理完全相同。",
+        "noteEn": "One-variable substitution: $|\\varphi'|$ is the one-dimensional Jacobian, and the absolute value plays exactly the same role."
+      }
+    ],
+    "expression": {
+      "text": "dxdy = |∂(x,y)/∂(u,v)| dudv",
+      "symbol": "\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|",
+      "note": "雅可比行列式取绝对值才是面积伸缩因子；行列式为零的点处变换退化，需要特别处理。",
+      "noteEn": "Only the absolute value of the Jacobian is the area scaling factor; where the determinant vanishes the transformation degenerates and needs special care."
+    },
+    "properties": [
+      "几何意义：$|J|$ 是局部的面积（体积）伸缩因子；$J$ 的符号反映定向（$J>0$ 保持定向，$J<0$ 反转定向），而面积因子一律取 $|J|$。",
+      "换元成立的条件：变换在（除面积为零的集合外）一一对应、偏导数连续、雅可比不为零；不满足时可把区域分割或另选变换。",
+      "反函数定理：$J(P)\\ne 0$ 时变换在 $P$ 附近局部可逆，且逆变换的雅可比行列式等于 $\\frac{1}{J(P)}$。",
+      "当 $f\\equiv 1$ 时换元公式给出面积（体积）关系 $S(D)=\\iint_{D'}|J|\\,du\\,dv$，可以直接用它计算椭圆等不规则区域的面积。",
+      "线性变换 $x=au+bv$、$y=cu+dv$ 的雅可比是常数 $ad-bc$：图形被整体伸缩，面积变为原来的 $|ad-bc|$ 倍，这是理解非线性变换局部伸缩的起点。"
+    ],
+    "propertiesEn": [
+      "Geometric meaning: $|J|$ is the local area (volume) scaling factor; the sign of $J$ records orientation ($J>0$ preserving, $J<0$ reversing) while the area factor always uses $|J|$.",
+      "Conditions: the map must be one-to-one (away from a set of area zero), the partials continuous and the Jacobian nonzero; otherwise split the region or change the transformation.",
+      "Inverse function theorem: if $J(P)\\ne 0$ the map is locally invertible near $P$, and the Jacobian of the inverse equals $\\frac{1}{J(P)}$.",
+      "For $f\\equiv 1$ the formula reads $S(D)=\\iint_{D'}|J|\\,du\\,dv$, which computes the area of ellipses and other regions directly.",
+      "A linear map $x=au+bv,\\ y=cu+dv$ has the constant Jacobian $ad-bc$: shapes are scaled uniformly, with areas multiplied by $|ad-bc|$ — the starting point for understanding nonlinear scaling."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "4*sqrt(x^2 + y^2)",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "levels": 8,
+      "title": "变换 x=u²−v², y=2uv 的雅可比大小 |J|=4√(x²+y²) 的等值线"
+    },
+    "examples": [
+      {
+        "problem": "用换元公式计算椭圆 $\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}\\le 1$（$a,b>0$）的面积。",
+        "solution": "作广义极坐标变换 $x=ar\\cos\\theta$，$y=br\\sin\\theta$，它把单位圆盘 $D'$：$0\\le r\\le 1$、$0\\le\\theta\\le 2\\pi$ 映成椭圆区域 $D$。求雅可比行列式：\n$$J=\\begin{vmatrix}a\\cos\\theta & -ar\\sin\\theta\\\\ b\\sin\\theta & br\\cos\\theta\\end{vmatrix}=abr\\cos^{2}\\theta+abr\\sin^{2}\\theta=abr.$$\n于是 $dx\\,dy=abr\\,dr\\,d\\theta$，面积\n$$S(D)=\\iint_{D}|J|\\,dr\\,d\\theta=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{1}abr\\,dr=2\\pi\\cdot ab\\cdot\\frac{1}{2}=\\pi ab,$$\n与椭圆面积公式一致（$a=b$ 时退化为圆面积 $\\pi a^{2}$）。"
+      },
+      {
+        "problem": "求变换 $x=u^{2}-v^{2}$、$y=2uv$ 的雅可比行列式，并把 $|J|$ 表示成 $x,y$ 的函数。",
+        "solution": "直接求偏导数：$x_u=2u$，$x_v=-2v$，$y_u=2v$，$y_v=2u$，所以\n$$J=\\begin{vmatrix}2u & -2v\\\\ 2v & 2u\\end{vmatrix}=4u^{2}+4v^{2}=4\\left(u^{2}+v^{2}\\right).$$\n又 $x^{2}+y^{2}=\\left(u^{2}-v^{2}\\right)^{2}+4u^{2}v^{2}=\\left(u^{2}+v^{2}\\right)^{2}$，故 $u^{2}+v^{2}=\\sqrt{x^{2}+y^{2}}$，于是\n$$|J|=4\\sqrt{x^{2}+y^{2}}.$$\n除原点外 $J>0$，变换处处保持定向；原点处 $J=0$，映射退化（把 $(0,0)$ 附近的区域「压扁」），这正是换元公式要求例外集面积为零的原因。"
+      }
+    ],
+    "tags": [
+      "雅可比行列式",
+      "换元",
+      "坐标变换",
+      "面积元素"
+    ],
+    "links": [
+      "double-integral-polar",
+      "double-integral",
+      "triple-integral",
+      "integration-substitution",
+      "partial-derivative"
+    ]
+  }
+]

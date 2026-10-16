@@ -1,0 +1,449 @@
+[
+  {
+    "id": "sets-operations",
+    "title": "集合的概念与运算",
+    "titleEn": "Sets: Concepts and Operations",
+    "branch": "set-logic",
+    "level": 2,
+    "summary": "把确定的对象聚成整体就是集合：元素与集合用 ∈ 连接，集合与集合用 ⊆ 连接，交、并、补是三种基本运算。",
+    "summaryEn": "A set is a collection of definite, distinct objects: membership uses ∈, inclusion uses ⊆, and intersection, union and complement are the three basic operations.",
+    "definition": "集合是描述范围的语言：把一些**确定的、互不相同**的对象看作一个整体，就得到一个集合，其中的对象叫这个集合的元素。集合中的元素有确定性（一个对象属不属于它，答案是明确的）、互异性（同一个元素不重复出现）和无序性（写元素的先后顺序不影响集合）三条特征。\n\n关系符号要分清层次：元素与集合之间只用 $a \\in A$（属于）或 $a \\notin A$（不属于）；集合与集合之间才谈包含，$A \\subseteq B$ 表示 A 中每个元素都属于 B，称 A 是 B 的子集；若 B 中还有元素不在 A 中，则称 A 是 B 的真子集，记作 $A \\subsetneq B$。空集 $\\varnothing$ 不含任何元素，规定它是任何集合的子集，并且是任何非空集合的真子集。\n\n描述法 $\\{x \\mid P(x)\\}$ 中，竖线前要写清代表元素、竖线后写它满足的条件：$\\{x \\mid x^{2}-2x-3=0\\}$ 是方程的解集，而 $\\{y \\mid y=x^{2}-2x-3\\}$ 是函数的值域，代表元素不同，集合的含义就完全不同。\n\n运算上，交集 $A \\cap B$ 由公共元素组成，并集 $A \\cup B$ 把两集合的元素合并（重复的只算一次），补集 $\\complement_{U}A$ 则必须相对全集 $U$ 定义，表示 $U$ 中不属于 A 的元素。集合语言是函数（定义域、值域）、不等式（解集）与概率的地基：把「范围」说成集合，条件与结论才能写得严谨清晰。",
+    "definitionEn": "A set is a collection of definite, distinct objects, and the objects it contains are its elements. Three features matter: determinacy (for any object it is clear whether it belongs to the set), distinctness (no element is repeated) and the irrelevance of order.\n\nMembership links an element to a set and is written $a \\in A$ or $a \\notin A$. Inclusion is a relation between two sets: $A \\subseteq B$ means every element of $A$ lies in $B$, so $A$ is a subset of $B$; if $B$ has an element outside $A$, then $A$ is a proper subset of $B$, written $A \\subsetneq B$. The empty set $\\varnothing$ has no elements; it is a subset of every set and a proper subset of every nonempty set.\n\nIn the description form $\\{x \\mid P(x)\\}$ the letter before the vertical bar tells you which objects are collected and the condition after the bar says which of them are kept: $\\{x \\mid x^{2}-2x-3=0\\}$ is the solution set of an equation, while $\\{y \\mid y=x^{2}-2x-3\\}$ is the range of a function — quite different sets.\n\nFor the operations, $A \\cap B$ collects the common elements, $A \\cup B$ collects all elements of the two sets with repetitions counted once, and the complement $\\complement_{U}A$ is always taken relative to a fixed universal set $U$, consisting of the elements of $U$ that are not in $A$. Set language underlies functions, inequalities and probability, so it pays to get the notation exactly right.",
+    "formulas": [
+      {
+        "latex": "a \\in A, \\quad a \\notin A",
+        "note": "元素与集合的关系：a 属于 A 记作 a ∈ A，不属于记作 a ∉ A。∈ 的两端一边是元素、一边是集合，不能写成 a ⊆ A。",
+        "noteEn": "Membership relates an element to a set: a ∈ A or a ∉ A. The symbol ∈ never joins two sets, so writing a ⊆ A is wrong."
+      },
+      {
+        "latex": "A \\subseteq B \\iff \\forall x,\\ (x \\in A \\Rightarrow x \\in B)",
+        "note": "子集的含义：A 中每一个元素都属于 B。若 B 中至少有一个元素不属于 A，则 A 是 B 的真子集，记作 A ⊊ B。",
+        "noteEn": "A is a subset of B when every element of A is an element of B; if B also has an element outside A, then A is a proper subset of B."
+      },
+      {
+        "latex": "A \\cap B = \\{x \\mid x \\in A \\text{ 且 } x \\in B\\}",
+        "note": "交集：由同时属于 A 和 B 的元素组成，也就是两个集合的公共部分。",
+        "noteEn": "Intersection: the set of elements that belong to both A and B, that is, their common part."
+      },
+      {
+        "latex": "A \\cup B = \\{x \\mid x \\in A \\text{ 或 } x \\in B\\}",
+        "note": "并集：把 A、B 的元素合并成一个集合，重复的元素只出现一次。",
+        "noteEn": "Union: all elements of A and B put into one set, with each element listed only once."
+      },
+      {
+        "latex": "\\complement_{U} A = \\{x \\mid x \\in U \\text{ 且 } x \\notin A\\}",
+        "note": "补集：先有全集 U，再取 U 中不属于 A 的元素；全集换了，同一集合的补集一般也变。",
+        "noteEn": "Complement: with the universal set U fixed, it collects the elements of U that are not in A; changing U changes the complement."
+      }
+    ],
+    "properties": [
+      "空集是任何集合的子集：∅ ⊆ A；并且空集是任何**非空**集合的真子集，即 A ≠ ∅ 时 ∅ ⊊ A。注意 ∅ ⊆ ∅ 成立，但 ∅ ⊊ ∅ 不成立。",
+      "若 A ⊆ B 且 B ⊆ A，则 A = B；判断两个集合相等要证明两个方向都包含，只比较元素个数是不够的（如 {1, 2} 与 {a, b} 元素一样多，却不相等）。",
+      "含 n 个元素的集合共有 2ⁿ 个子集、2ⁿ − 1 个真子集、2ⁿ − 2 个非空真子集（n ≥ 1）。",
+      "运算律：A ∩ A = A，A ∩ ∅ = ∅，A ∪ ∅ = A，A ∪ (∁_U A) = U，A ∩ (∁_U A) = ∅；交与并都满足交换律、结合律和分配律。",
+      "补集离不开全集：∁_U A 的元素必须先在 U 中，同一集合 A 相对不同全集 U 的补集一般不同；德摩根律 ∁_U(A ∩ B) = (∁_U A) ∪ (∁_U B) 与 ∁_U(A ∪ B) = (∁_U A) ∩ (∁_U B) 也都在同一个全集 U 下成立。"
+    ],
+    "propertiesEn": [
+      "The empty set is a subset of every set, ∅ ⊆ A, and a proper subset of every nonempty set: ∅ ⊊ A whenever A ≠ ∅. Note that ∅ ⊆ ∅ holds, but ∅ ⊊ ∅ does not.",
+      "If A ⊆ B and B ⊆ A, then A = B; proving equality requires both inclusions, and counting elements is not enough ({1, 2} and {a, b} have the same number of elements but are different sets).",
+      "A set with n elements has 2ⁿ subsets, 2ⁿ − 1 proper subsets and 2ⁿ − 2 nonempty proper subsets (n ≥ 1).",
+      "Laws of operations: A ∩ A = A, A ∩ ∅ = ∅, A ∪ ∅ = A, A ∪ ∁_U A = U and A ∩ ∁_U A = ∅; intersection and union are commutative, associative, and each distributes over the other.",
+      "A complement is always taken with respect to a fixed universal set U, and the same set A has different complements under different universal sets; De Morgan's laws ∁_U(A ∩ B) = ∁_U A ∪ ∁_U B and ∁_U(A ∪ B) = ∁_U A ∩ ∁_U B hold within one fixed U."
+    ],
+    "examples": [
+      {
+        "problem": "已知全集 U = {1, 2, 3, 4, 5}，A = {1, 2, 3}，B = {2, 3, 4}。求 A ∩ B、A ∪ B、∁_U(A ∩ B)，并问 A ∩ B 有多少个子集。",
+        "solution": "公共元素是 2、3，所以 $A \\cap B = \\{2, 3\\}$；把两个集合的元素合并、重复的只写一次，得 $A \\cup B = \\{1, 2, 3, 4\\}$；在全集 U 中挖掉 {2, 3}，得 $\\complement_{U}(A \\cap B) = \\{1, 4, 5\\}$。用德摩根律验算：$\\complement_{U}(A \\cap B) = (\\complement_{U}A) \\cup (\\complement_{U}B) = \\{4, 5\\} \\cup \\{1, 5\\} = \\{1, 4, 5\\}$，两边一致。$A \\cap B$ 含 2 个元素，共有 $2^{2} = 4$ 个子集，分别是 $\\varnothing$、{2}、{3}、{2, 3}。"
+      },
+      {
+        "problem": "已知集合 A = {x | −1 < x < 3}，B = {x | x ≥ a}，若 A ⊆ B，求实数 a 的取值范围。",
+        "solution": "把集合写成区间：$A = (-1, 3)$，$B = [a, +\\infty)$。A ⊆ B 表示 A 中每个数都满足 $x \\ge a$，即 a 不能比 A 中的任何元素大。因为 A 中的数可以无限接近 −1 但都大于 −1，故只需 $a \\le -1$：取 a = −1 时，对任意 x ∈ (−1, 3) 都有 x > −1 ≥ −1，即 x ≥ a 成立。若 a = −0.5，则 x = −0.9 ∈ A 但 −0.9 < −0.5，不满足 x ≥ a，反例说明不成立。所以 a 的取值范围是 $(-\\infty, -1]$。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [-4.5, 4.5],
+      "yRange": [-3, 3],
+      "elements": [
+        { "type": "circle", "cx": -1.2, "cy": 0, "r": 2, "color": "#4cc9f0", "fill": "rgba(76,201,240,0.10)" },
+        { "type": "circle", "cx": 1.2, "cy": 0, "r": 2, "color": "#ff6b9d", "fill": "rgba(255,107,157,0.10)" },
+        { "type": "label", "at": [-1.2, 2.45], "text": "A", "color": "#4cc9f0" },
+        { "type": "label", "at": [1.2, 2.45], "text": "B", "color": "#ff6b9d" },
+        { "type": "point", "at": [-3, 0], "label": "a", "color": "#ffd166" },
+        { "type": "point", "at": [3, 0], "label": "b", "color": "#06d6a0" },
+        { "type": "point", "at": [0, 0.9], "label": "c", "color": "#b388ff" },
+        { "type": "point", "at": [0, 2.9], "label": "d", "color": "#ff8fab" },
+        { "type": "label", "at": [0, -1.5], "text": "A ∩ B", "color": "#e8eaf6" }
+      ],
+      "title": "韦恩图：a ∈ A 且 a ∉ B，c ∈ A ∩ B，b ∈ B 且 b ∉ A，d ∉ A ∪ B"
+    },
+    "tags": ["集合", "元素", "子集", "交集", "并集", "补集", "韦恩图"],
+    "links": ["set-algebra", "real-numbers", "rational-numbers", "sufficient-necessary-condition", "universal-existential-quantifiers"]
+  },
+  {
+    "id": "sufficient-necessary-condition",
+    "title": "充分条件与必要条件",
+    "titleEn": "Sufficient and Necessary Conditions",
+    "branch": "set-logic",
+    "level": 2,
+    "summary": "若 p ⇒ q，则 p 是 q 的充分条件、q 是 p 的必要条件；小范围是大范围的充分条件，双向都成立时称充要条件。",
+    "summaryEn": "If p ⇒ q, then p is a sufficient condition for q and q is a necessary condition for p; the narrower condition is sufficient for the broader one, and when both directions hold we speak of a necessary and sufficient condition.",
+    "definition": "若由 p 成立能推出 q 成立，就记作 $p \\Rightarrow q$（读作 p 推出 q）。此时 p 成立足以保证 q 成立，所以称 **p 是 q 的充分条件**；反过来，q 成立是 p 成立不可缺少的一环，所以称 **q 是 p 的必要条件**。这是同一句话的两种说法，p、q 的位置绝不能互换。\n\n用集合看最不容易出错：设 p、q 的解集分别是 P、Q。若 $P \\subseteq Q$，则 P 中任取一个 x 都在 Q 中，也就是「小范围（P）⇒ 大范围（Q）」。所以**小范围是大范围的充分条件，大范围是小范围的必要条件**；若 $P = Q$，两个方向同时成立，就称 p 是 q 的充要条件，记作 $p \\Leftrightarrow q$。\n\n判断「p 是 q 的什么条件」的标准步骤：先分清谁是条件、谁是结论，再试着证明 $p \\Rightarrow q$，若推不动就举反例否定它；最后用同样的办法检验 $q \\Rightarrow p$。只验证一个方向时，结论只能是「充分不必要」或「必要不充分」，不能直接说充要。例如「x = 1」是「$x^{2} = 1$」的充分不必要条件：x = 1 一定有 $x^{2} = 1$，但 x = −1 时 $x^{2} = 1$ 却给不出 x = 1。",
+    "definitionEn": "Write $p \\Rightarrow q$ (p implies q) when q follows from p. Then p is called a **sufficient condition** for q, since assuming p is enough to guarantee q, and q is called a **necessary condition** for p, since q has to hold whenever p does. These are two ways of phrasing the same implication with the roles of p and q exchanged.\n\nSets make the direction easy to remember: let P and Q be the solution sets of p and q. If $P \\subseteq Q$, then every x taken from P lies in Q, so the smaller set P is a sufficient condition for the larger set Q, while Q is a necessary condition for P. When $P = Q$, both implications hold and p is a necessary and sufficient condition for q, written $p \\Leftrightarrow q$.\n\nTo decide what role p plays for q, fix first which statement is the condition and which is the conclusion; then try to prove $p \\Rightarrow q$, or disprove it with a counterexample, and finally test $q \\Rightarrow p$ in the same way. Checking only one direction tells you 'sufficient but not necessary' or 'necessary but not sufficient', never 'necessary and sufficient'. For instance x = 1 is sufficient but not necessary for $x^{2} = 1$: x = 1 forces $x^{2} = 1$, yet x = −1 also gives $x^{2} = 1$ without giving x = 1.",
+    "formulas": [
+      {
+        "latex": "p \\Rightarrow q",
+        "note": "有 p 必有 q。此时 p 是 q 的充分条件，同时 q 是 p 的必要条件——一句话两个结论，方向不能颠倒。",
+        "noteEn": "q follows from p. Then p is sufficient for q and q is necessary for p: one implication, two statements, and neither direction may be reversed."
+      },
+      {
+        "latex": "p \\Leftrightarrow q",
+        "note": "p 是 q 的充要条件，即 p ⇒ q 与 q ⇒ p 都成立，读作「p 当且仅当 q」。",
+        "noteEn": "p is a necessary and sufficient condition for q, meaning both p ⇒ q and q ⇒ p hold; read as 'p if and only if q'."
+      },
+      {
+        "latex": "P \\subseteq Q \\iff (p \\Rightarrow q)",
+        "note": "集合判据：条件 p 的解集 P 含于结论 q 的解集 Q，等价于 p 是 q 的充分条件（小范围推大范围）。",
+        "noteEn": "Set criterion: P ⊆ Q, where P and Q are the solution sets of p and q, is equivalent to p ⇒ q, that is, to p being sufficient for q."
+      },
+      {
+        "latex": "Q \\subseteq P \\iff (q \\Rightarrow p)",
+        "note": "反过来，结论的解集含于条件的解集，等价于 p 是 q 的必要条件（大范围是必要的那一方）。",
+        "noteEn": "Conversely, Q ⊆ P is equivalent to q ⇒ p, which says that p is a necessary condition for q."
+      },
+      {
+        "latex": "p \\Rightarrow q,\\ q \\nRightarrow p",
+        "note": "推得出单向、推不出反向时，p 是 q 的充分不必要条件，q 是 p 的必要不充分条件，要找 q 成立而 p 不成立的反例。",
+        "noteEn": "If p ⇒ q holds but q ⇒ p fails, then p is sufficient but not necessary for q, and q is necessary but not sufficient for p; a counterexample satisfies q but not p."
+      }
+    ],
+    "properties": [
+      "方向不可反：由 p ⇒ q 只能得到「p 是 q 的充分条件、q 是 p 的必要条件」。判断「p 是 q 的什么条件」，必须把 p 放在条件的位置、q 放在结论的位置来推。",
+      "范围判据：记 p、q 的解集为 P、Q，则 P ⊆ Q ⇔ p 是 q 的充分条件，Q ⊆ P ⇔ p 是 q 的必要条件，P = Q ⇔ 充要条件。不确定方向时就用「小范围推大范围」检验。",
+      "举反例是否定 p ⇒ q 的标准做法：只需给出一个满足 p 却不满足 q 的对象；若举的例子连 p 都不满足，这个反例无效。",
+      "充要条件必须双向证明：p ⇒ q 与 q ⇒ p 都要写出或说明理由。只证一个方向时，只能说充分或必要，并把另一方向的反例找出来。",
+      "两种说法可以互换：「p 是 q 的充分条件」等价于「q 是 p 的必要条件」；「p 的充要条件是 q」等价于「q 的充要条件是 p」，含义完全相同。"
+    ],
+    "propertiesEn": [
+      "The direction cannot be reversed: from p ⇒ q you may only conclude that p is sufficient for q and q is necessary for p. To answer 'what kind of condition is p for q', p must play the role of the condition and q the role of the conclusion.",
+      "Set criterion: with P and Q the solution sets of p and q, P ⊆ Q means p is sufficient for q, Q ⊆ P means p is necessary for q, and P = Q means the two are equivalent. When in doubt, test whether the smaller set implies the larger one.",
+      "A counterexample is the standard way to refute p ⇒ q: exhibit one object that satisfies p but not q. An example that fails to satisfy p proves nothing.",
+      "'Necessary and sufficient' requires both directions: you must prove p ⇒ q and q ⇒ p. Proving only one direction gives 'sufficient but not necessary' or 'necessary but not sufficient', and one should display the counterexample for the missing direction.",
+      "The two phrasings are interchangeable: 'p is a sufficient condition for q' says exactly the same as 'q is a necessary condition for p', and 'q is necessary and sufficient for p' says exactly the same as 'p is necessary and sufficient for q'."
+    ],
+    "examples": [
+      {
+        "problem": "判断下列各题中 p 是 q 的什么条件（充分不必要、必要不充分、充要、既不充分也不必要）：\n(1) p：x > 2，q：x > 1；\n(2) p：x = 1，q：$x^{2} = 1$；\n(3) p：三角形的三边相等，q：三角形的三个角相等。",
+        "solution": "(1) 解集分别是 $P = (2, +\\infty)$ 与 $Q = (1, +\\infty)$，$P \\subsetneq Q$，所以 p ⇒ q；但取 x = 1.5，它满足 q（1.5 > 1）而不满足 p（1.5 > 2 不成立），故 q ⇏ p。所以 p 是 q 的充分不必要条件（同时 q 是 p 的必要不充分条件）。\n(2) 解集 $P = \\{1\\}$，$Q = \\{-1, 1\\}$，$P \\subsetneq Q$，所以 p ⇒ q；但 x = −1 时 $x^{2} = 1$ 成立而 x = 1 不成立，故 q ⇏ p。所以 p 是 q 的充分不必要条件。\n(3) 由「三边相等」用边角关系可推出「三个角相等」（等边三角形是等角三角形），反过来「三个角相等」也推出「三边相等」（等角对等边），两个方向都成立，所以 p 是 q 的充要条件。"
+      },
+      {
+        "problem": "已知 p：$x^{2} - 3x + 2 \\le 0$，q：$x \\le a$。若 p 是 q 的充分条件，求实数 a 的取值范围。",
+        "solution": "先解 p：$(x - 1)(x - 2) \\le 0$，得 $1 \\le x \\le 2$，即 $P = [1, 2]$；q 的解集为 $Q = (-\\infty, a]$。p 是 q 的充分条件意味着 p ⇒ q，即 $P \\subseteq Q$：区间 [1, 2] 中每个数都要满足 $x \\le a$，只需 $a \\ge 2$。验证：a = 2 时，x = 2 满足 $2 \\le 2$，[1, 2] 中其余数也都不超过 2，成立；若 a = 1.9，则 x = 2 ∈ P 但 $2 > 1.9$，不满足 q，此时 p 不是 q 的充分条件。所以 a 的取值范围是 $[2, +\\infty)$。"
+      }
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [-1, 4],
+      "intervals": [
+        { "from": 0, "to": 3, "color": "#4cc9f0" },
+        { "from": 1, "to": 2, "color": "#ff6b9d" }
+      ],
+      "title": "解集 (1, 2) ⊂ 解集 (0, 3)：小范围 (1, 2) 是大范围 (0, 3) 的充分条件"
+    },
+    "tags": ["充分条件", "必要条件", "充要条件", "集合判据", "反例"],
+    "links": ["sets-operations", "universal-existential-quantifiers", "linear-inequality-junior", "quadratic-inequality"]
+  },
+  {
+    "id": "universal-existential-quantifiers",
+    "title": "全称量词与存在量词",
+    "titleEn": "Universal and Existential Quantifiers",
+    "branch": "set-logic",
+    "level": 2,
+    "summary": "∀ 表示「对任意一个」，∃ 表示「存在（至少一个）」；含这两类量词的命题，否定时要「换量词、否结论」。",
+    "summaryEn": "The universal quantifier ∀ means 'for every' and the existential quantifier ∃ means 'there exists at least one'; negating such statements requires swapping the quantifier and negating the conclusion.",
+    "definition": "全称量词与存在量词把日常说法压缩成符号：「所有的」「任意一个」记作 $\\forall$，「存在一个」「至少有一个」记作 $\\exists$。含全称量词的命题 $\\forall x \\in M,\\ p(x)$ 读作「对 M 中任意一个 x，p(x) 成立」，意思是 M 中每个元素都满足 p(x)；含存在量词的命题 $\\exists x \\in M,\\ p(x)$ 读作「存在 M 中的元素 x，使 p(x) 成立」，只要有（哪怕只有一个）元素满足就行。\n\n判断真假时两类命题的分工不同：全称命题要说它真，必须论证 M 中一切元素都满足；要说它假，只需举出一个反例。存在命题要说它真，举出一个实例即可；要说它假，必须说明 M 中没有任何元素满足，而这本身就是一个全称论断。\n\n否定只有一条规则：**换量词、否结论**。$\\neg(\\forall x \\in M,\\ p(x)) \\iff \\exists x \\in M,\\ \\neg p(x)$，$\\neg(\\exists x \\in M,\\ p(x)) \\iff \\forall x \\in M,\\ \\neg p(x)$：∀ 与 ∃ 互换，结论 p(x) 换成 ¬p(x)（不等号要变向、等于要变不等），而范围 $x \\in M$ 保持不动。\n\n有了量词，「恒成立」问题就是全称命题为真，「有解（存在性）」问题就是存在命题为真，它们的否定分别是「有反例」与「无解」。这正是含参数不等式讨论的出发点。",
+    "definitionEn": "Quantifiers turn everyday phrases into compact symbols: 'for every' becomes $\\forall$ and 'there exists at least one' becomes $\\exists$. A universal statement $\\forall x \\in M,\\ p(x)$ claims that every element of M satisfies p(x); an existential statement $\\exists x \\in M,\\ p(x)$ claims that at least one element of M satisfies p(x).\n\nTruth values are handled asymmetrically. A universal statement is true only if the property is justified for all elements of M, while a single counterexample makes it false. An existential statement is true as soon as one example is exhibited, while showing it false requires proving that no element of M works — itself a universal claim.\n\nNegation has one rule: swap the quantifier and negate the conclusion. $\\neg(\\forall x \\in M,\\ p(x)) \\iff \\exists x \\in M,\\ \\neg p(x)$ and $\\neg(\\exists x \\in M,\\ p(x)) \\iff \\forall x \\in M,\\ \\neg p(x)$. Note that the domain M stays untouched; inequalities must be flipped and equalities turned into inequalities.\n\nWith this language, 'the statement holds for all x' is a universal claim and 'the equation has a solution' is an existential one; their negations, 'there is a counterexample' and 'no solution exists', are the usual starting points for problems with a parameter.",
+    "formulas": [
+      {
+        "latex": "\\forall x \\in M,\\ p(x)",
+        "note": "全称量词命题，读作「对 M 中任意一个 x，p(x) 成立」，要求 M 中每个元素都满足 p(x)，例如「对任意实数 x，x² ≥ 0」。",
+        "noteEn": "A universal statement: for every x in M the property p(x) holds, as in 'for every real number x, x² ≥ 0'."
+      },
+      {
+        "latex": "\\exists x \\in M,\\ p(x)",
+        "note": "存在量词命题，读作「存在 M 中的 x，使 p(x) 成立」，只要 M 中有一个（或更多）满足的元素即可。",
+        "noteEn": "An existential statement: there is at least one x in M for which p(x) holds."
+      },
+      {
+        "latex": "\\neg(\\forall x \\in M,\\ p(x)) \\iff \\exists x \\in M,\\ \\neg p(x)",
+        "note": "全称命题的否定是存在命题：换量词（∀ 变 ∃）、否结论（p 变 ¬p），范围 M 不变。",
+        "noteEn": "The negation of a universal statement is an existential one: change ∀ into ∃ and negate the conclusion, leaving the domain M unchanged."
+      },
+      {
+        "latex": "\\neg(\\exists x \\in M,\\ p(x)) \\iff \\forall x \\in M,\\ \\neg p(x)",
+        "note": "存在命题的否定是全称命题：同样「换量词、否结论」，例如「∃x∈R，x²+1=0」的否定是「∀x∈R，x²+1≠0」。",
+        "noteEn": "The negation of an existential statement is a universal one, obtained again by swapping the quantifier and negating the conclusion."
+      },
+      {
+        "latex": "\\forall x \\in M,\\ p(x) \\iff M \\subseteq \\{x \\mid p(x)\\}",
+        "note": "恒成立的集合说法：M 中每个元素都满足 p，等价于 M 是解集 {x | p(x)} 的子集；对偶地，存在命题等价于 M 与解集的交非空。",
+        "noteEn": "A set-theoretic reading of 'holds for all': M is contained in the solution set {x | p(x)}; dually, the existential statement says M meets that solution set."
+      }
+    ],
+    "properties": [
+      "全称命题为真必须证明对 M 中一切元素都成立；为假只需一个反例。存在命题为真只需一个实例；为假必须证明 M 中没有任何元素满足。",
+      "否定两步走：① 换量词（∀ 与 ∃ 互换）；② 否结论（把 p(x) 换成 ¬p(x)，不等号变向、等于变不等）。两步缺一不可。",
+      "否定时条件（范围）不动：如「∀x > 0，x² > 0」的否定是「∃x > 0，x² ≤ 0」，而不是「∃x ≤ 0，x² ≤ 0」，后者连条件都改了，与原命题无关。",
+      "否定两次回到原命题：¬(¬p) ⇔ p，所以对含一个量词的命题连续做两次「换量词、否结论」就得到原命题本身。",
+      "量词顺序不能交换：∀x ∃y 与 ∃y ∀x 是不同强度的命题，后者更强（∃y ∀x p(x, y) 成立时 ∀x ∃y p(x, y) 必成立，反之不然）。例如「∀x ∈ R，∃y ∈ R，x + y = 0」为真，而「∃y ∈ R，∀x ∈ R，x + y = 0」为假。"
+    ],
+    "propertiesEn": [
+      "A universal statement is true only when it is justified for every element of M, and false as soon as one counterexample exists; an existential statement is true once one example is given, and false only when no element of M works.",
+      "Negation takes two steps: swap the quantifier (∀ ↔ ∃) and negate the conclusion (p(x) becomes ¬p(x), flipping inequalities). Both steps are required.",
+      "The domain is not part of the negation: 'for all x > 0, x² > 0' negates to 'there is x > 0 with x² ≤ 0', not to 'there is x ≤ 0 with x² ≤ 0'; changing the domain produces a different statement.",
+      "Negating twice returns the original statement: since ¬(¬p) ⇔ p, applying 'swap the quantifier and negate the conclusion' twice restores the original proposition.",
+      "The order of quantifiers cannot be exchanged: ∀x ∃y and ∃y ∀x have different strength, the second being stronger (∃y ∀x p(x, y) implies ∀x ∃y p(x, y), but not conversely). For example '∀x ∈ R, ∃y ∈ R, x + y = 0' is true, whereas '∃y ∈ R, ∀x ∈ R, x + y = 0' is false."
+    ],
+    "examples": [
+      {
+        "problem": "写出下列命题的否定，并判断原命题的真假：\n(1) $\\forall x \\in \\mathbb{R},\\ x^{2} \\ge 0$；\n(2) $\\exists x \\in \\mathbb{R},\\ x^{2} + 1 = 0$。",
+        "solution": "(1) 换量词 ∀ → ∃，把结论 $x^{2} \\ge 0$ 否成 $x^{2} < 0$，否定为「$\\exists x \\in \\mathbb{R},\\ x^{2} < 0$」。因为任意实数的平方都非负，原命题为真，所以它的否定是假命题。\n(2) 换量词 ∃ → ∀，把结论 $x^{2} + 1 = 0$ 否成 $x^{2} + 1 \\ne 0$，否定为「$\\forall x \\in \\mathbb{R},\\ x^{2} + 1 \\ne 0$」。对任意实数 x 有 $x^{2} \\ge 0$，故 $x^{2} + 1 \\ge 1 > 0$，原命题为假，所以它的否定是真命题。"
+      },
+      {
+        "problem": "若命题「$\\exists x \\in \\mathbb{R},\\ x^{2} + ax + 1 < 0$」是真命题，求实数 a 的取值范围。",
+        "solution": "配方得 $x^{2} + ax + 1 = (x + \\frac{a}{2})^{2} + 1 - \\frac{a^{2}}{4}$，当且仅当 $x = -\\frac{a}{2}$ 时取到最小值 $1 - \\frac{a^{2}}{4}$。存在 x 使函数值小于 0，等价于最小值小于 0：$1 - \\frac{a^{2}}{4} < 0$，即 $a^{2} > 4$，所以 $a < -2$ 或 $a > 2$。验证：取 a = 3、x = −1，得 $1 - 3 + 1 = -1 < 0$，符合要求；取 a = 2，则 $x^{2} + 2x + 1 = (x + 1)^{2} \\ge 0$ 恒成立，不存在使函数值小于 0 的 x，故 a = 2 不满足。注意等号处不能放松：若把结论改成 $x^{2} + ax + 1 \\le 0$ 有解，则对应 $a^{2} \\ge 4$。"
+      }
+    ],
+    "tags": ["全称量词", "存在量词", "命题的否定", "恒成立", "存在性"],
+    "links": ["sets-operations", "sufficient-necessary-condition", "function-concept", "monotonicity", "limit"]
+  },
+  {
+    "id": "basic-inequality",
+    "title": "基本不等式",
+    "titleEn": "The Basic Inequality (AM–GM)",
+    "branch": "algebra",
+    "level": 2,
+    "summary": "两个正数的算术平均数不小于几何平均数：(a+b)/2 ≥ √(ab)，当且仅当 a = b 时取等号，是求最值的常用工具。",
+    "summaryEn": "For two positive numbers the arithmetic mean is at least the geometric mean: (a + b)/2 ≥ √(ab), with equality if and only if a = b, which makes it a standard tool for optimisation.",
+    "definition": "基本不等式（也叫均值不等式）：对任意两个**正数** a、b，都有 $\\frac{a+b}{2} \\ge \\sqrt{ab}$，等价地 $a + b \\ge 2\\sqrt{ab}$，当且仅当 a = b 时取等号。它的本质是 $(\\sqrt{a} - \\sqrt{b})^{2} \\ge 0$ 展开后的结果，所以根基就是「平方非负」。\n\n用它求最值要记三句话——**一正、二定、三相等**：a、b 必须为正数（一正）；积或和必须是定值，否则不等式给不出最值（二定）；最后必须验证等号能够取到，即 a = b 与题目条件相容（三相等）。三者缺一，结论就可能出错。\n\n常见变形：a + b ≥ 2√(ab) 中，若积 ab = P 固定，则和有最小值 2√P；若和 a + b = S 固定，则积有最大值 S²/4。此外对 a > 0 有 $a + \\frac{1}{a} \\ge 2$（取 b = 1/a 即得），等号在 a = 1 时成立。\n\n一个必须区分的说法：$a^{2} + b^{2} \\ge 2ab$ 对**一切实数**成立，而 $a + b \\ge 2\\sqrt{ab}$ 要求 a、b > 0（因为根号下的 ab 必须非负且 a、b 为正）。两者条件不同，不能混写。",
+    "definitionEn": "The basic inequality, also called the AM–GM inequality, states that for any two **positive** numbers a and b, $\\frac{a+b}{2} \\ge \\sqrt{ab}$, equivalently $a + b \\ge 2\\sqrt{ab}$, with equality if and only if a = b. It is simply $(\\sqrt{a} - \\sqrt{b})^{2} \\ge 0$ expanded, so its root is the non-negativity of squares.\n\nUsing it to find extrema requires three checks: both numbers positive; the product or the sum fixed, so that one side of the inequality is constant; and the equality case a = b actually attainable under the given constraints. Ignoring any of the three can produce a wrong extremum.\n\nUseful consequences: if the product ab = P is fixed, the sum has minimum 2√P; if the sum a + b = S is fixed, the product has maximum S²/4. Also $a + \\frac{1}{a} \\ge 2$ for a > 0, with equality at a = 1.\n\nOne distinction is essential: $a^{2} + b^{2} \\ge 2ab$ holds for all real numbers, while $a + b \\ge 2\\sqrt{ab}$ needs a, b > 0; the two conditions are different and should never be merged.",
+    "formulas": [
+      {
+        "latex": "\\frac{a+b}{2} \\ge \\sqrt{ab}\\quad (a>0,\\ b>0)",
+        "note": "基本不等式：算术平均数不小于几何平均数，等号当且仅当 a = b 时成立；这是它的标准形式。",
+        "noteEn": "The basic inequality: the arithmetic mean is at least the geometric mean, with equality exactly when a = b."
+      },
+      {
+        "latex": "a+b \\ge 2\\sqrt{ab}\\quad (a>0,\\ b>0)",
+        "note": "最常用的变形：积为定值 P 时给出和的最小值 2√P；和为定值 S 时给出积的最大值 S²/4。",
+        "noteEn": "The most used form: a fixed product P yields a minimum sum 2√P, while a fixed sum S yields a maximum product S²/4."
+      },
+      {
+        "latex": "a^{2}+b^{2} \\ge 2ab\\quad (a,\\ b \\in \\mathbb{R})",
+        "note": "对一切实数成立（由 (a − b)² ≥ 0 得到），等号当且仅当 a = b。它的条件比 a + b ≥ 2√(ab) 宽得多，两者不能混写。",
+        "noteEn": "Valid for all real numbers since (a − b)² ≥ 0, with equality if and only if a = b. Its hypotheses are much weaker than those of a + b ≥ 2√(ab), so the two must not be confused."
+      },
+      {
+        "latex": "a + \\frac{1}{a} \\ge 2\\quad (a>0)",
+        "note": "取 b = 1/a 的特例，等号当且仅当 a = 1；处理「x 与 1/x 型」最值时的常用工具。",
+        "noteEn": "The special case b = 1/a, with equality at a = 1; it handles minima of expressions of the form x + 1/x."
+      },
+      {
+        "latex": "\\frac{2}{\\frac{1}{a}+\\frac{1}{b}} \\le \\sqrt{ab} \\le \\frac{a+b}{2} \\le \\sqrt{\\frac{a^{2}+b^{2}}{2}}\\quad (a>0,\\ b>0)",
+        "note": "四个平均数的链条：调和平均 ≤ 几何平均 ≤ 算术平均 ≤ 平方平均，四项相等当且仅当 a = b。",
+        "noteEn": "The chain of means: harmonic ≤ geometric ≤ arithmetic ≤ quadratic, with all four equal exactly when a = b."
+      }
+    ],
+    "properties": [
+      "一正：使用 a + b ≥ 2√(ab) 前必须确认 a、b 为正数；遇到负数先变形（如提取负号）再使用。对一切实数成立的版本是 a² + b² ≥ 2ab。",
+      "二定：求最值时和或积必须为定值——积固定为 P 时，a + b ≥ 2√P 给出和的最小值；和固定为 S 时，ab ≤ S²/4 给出积的最大值。",
+      "三相等：等号当且仅当 a = b 时成立，必须验证此时 a、b 仍在题目允许的范围内；等号取不到时不能直接下结论说取到最值，需要结合单调性等方法。",
+      "常用变形：对 a > 0 有 a + 1/a ≥ 2；对同号的 a、b 有 a/b + b/a ≥ 2；证明时由 (√a − √b)² ≥ 0 展开即可得 a + b ≥ 2√(ab)。",
+      "几何解释：以 a + b（a, b > 0）为直径作半圆，半径是 (a+b)/2，在直径上分点处的半弦长是 √(ab)，半弦不超过半径，当且仅当分点恰为圆心（即 a = b）时取等号。"
+    ],
+    "propertiesEn": [
+      "Positivity first: before applying a + b ≥ 2√(ab) you must know that a and b are positive; handle negative terms by factoring out signs. The version valid for all real numbers is a² + b² ≥ 2ab.",
+      "A fixed quantity is needed: a fixed product P gives a minimum sum 2√P, and a fixed sum S gives a maximum product S²/4; without such a constant the inequality alone gives no extremum.",
+      "Check equality: equality holds exactly when a = b, and one must verify that this value is admissible in the problem; if equality is unreachable, no extremum follows from the inequality and other tools such as monotonicity are needed.",
+      "Useful forms: a + 1/a ≥ 2 for a > 0, and a/b + b/a ≥ 2 for nonzero a, b of the same sign; both follow by expanding (√a − √b)² ≥ 0 in the positive case.",
+      "Geometric meaning: in a semicircle of diameter a + b (a, b > 0) the radius is (a+b)/2 and the half-chord at the dividing point is √(ab); the half-chord never exceeds the radius, with equality exactly when the dividing point is the centre, that is, a = b."
+    ],
+    "examples": [
+      {
+        "problem": "已知 x > 0，求 $y = x + \\frac{4}{x}$ 的最小值，并指出取得最小值时 x 的值。",
+        "solution": "因为 x > 0，所以 $\\frac{4}{x} > 0$，两项都为正（一正）；并且它们的积 $x \\cdot \\frac{4}{x} = 4$ 是定值（二定）。由基本不等式得\n$$y = x + \\frac{4}{x} \\ge 2\\sqrt{x \\cdot \\frac{4}{x}} = 2\\sqrt{4} = 4,$$\n等号当且仅当 $x = \\frac{4}{x}$，即 $x^{2} = 4$、$x = 2$（取正根）时成立，此时 x > 0 与 $\\frac{4}{x} > 0$ 都满足（三相等）。所以当 x = 2 时 y 取得最小值 4。验算：x = 2 时 $y = 2 + 2 = 4$；x = 1 时 $y = 1 + 4 = 5 > 4$，说明 4 确实是最小值。"
+      },
+      {
+        "problem": "已知 x > 1，求 $y = x + \\frac{1}{x-1}$ 的最小值。",
+        "solution": "注意 x 与 $\\frac{1}{x-1}$ 的积不是定值，不能直接对这两项用基本不等式。令 $t = x - 1 > 0$，则 x = t + 1，于是\n$$y = t + 1 + \\frac{1}{t} = \\left(t + \\frac{1}{t}\\right) + 1 \\ge 2\\sqrt{t \\cdot \\frac{1}{t}} + 1 = 2 + 1 = 3,$$\n等号当且仅当 $t = \\frac{1}{t}$，即 t = 1（t > 0）时成立，此时 x = t + 1 = 2，满足 x > 1。所以当 x = 2 时 y 取得最小值 3。验算：x = 2 时 $y = 2 + 1 = 3$；x = 3 时 $y = 3 + \\frac{1}{2} = 3.5 > 3$。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "x + 1/x", "color": "#4cc9f0", "label": "y = x + 1/x" },
+        { "expr": "x", "color": "#ffd166", "label": "y = x" },
+        { "expr": "1/x", "color": "#06d6a0", "label": "y = 1/x" }
+      ],
+      "tangents": [
+        { "expr": "x + 1/x", "at": 1, "color": "#ff6b9d", "label": "x = 1 处切线（水平）：y = 2" }
+      ],
+      "xRange": [0.15, 5],
+      "yRange": [0, 7],
+      "title": "y = x + 1/x（x > 0）在 x = 1 处取最小值 2，对应 a = b 时等号成立"
+    },
+    "tags": ["基本不等式", "均值不等式", "最值", "一正二定三相等"],
+    "links": ["inequality", "optimization", "monotonicity-extremum", "quadratic-radical", "quadratic-function"]
+  },
+  {
+    "id": "quadratic-inequality",
+    "title": "一元二次不等式及其解法",
+    "titleEn": "Quadratic Inequalities in One Variable",
+    "branch": "algebra",
+    "level": 2,
+    "summary": "一元二次不等式的解集就是抛物线在 x 轴上方（或下方）那部分对应的 x 范围：a > 0 时大于取两边、小于取中间，再按判别式分三种情形。",
+    "summaryEn": "The solution set of a quadratic inequality ax² + bx + c > 0 consists of the x-values where the parabola lies above the x-axis: for a > 0, 'greater takes the outside, less takes the inside', with three cases according to the discriminant.",
+    "definition": "形如 $ax^{2} + bx + c > 0$（或 ≥ 0、< 0、≤ 0，其中 $a \\ne 0$）的不等式叫一元二次不等式。求解就是找出使二次函数 $y = ax^{2} + bx + c$ 的值为正（或为负）的自变量取值范围。\n\n数形结合是主线：方程 $ax^{2} + bx + c = 0$ 的实根是抛物线与 x 轴交点的横坐标，图像在 x 轴上方的部分对应的 x 集合就是 $> 0$ 的解集。当 a > 0 时，两根之外函数值为正，两根之间函数值为负，这就是口诀「大于取两边、小于取中间」的来历。\n\n按判别式分三种情形（以下都设 a > 0）：$\\Delta > 0$ 时图像与 x 轴有两个交点，解集是两根的「两侧」或「中间」；$\\Delta = 0$ 时图像与 x 轴相切，$ax^{2} + bx + c \\ge 0$ 对一切实数成立且在 $x = -\\frac{b}{2a}$ 处取等号，所以 $> 0$ 的解集是「除 $x = -\\frac{b}{2a}$ 外的一切实数」；$\\Delta < 0$ 时图像整个在 x 轴上方，$ax^{2} + bx + c > 0$ 恒成立，解集为 $\\mathbb{R}$。\n\n操作建议：先看二次项系数的符号，a < 0 时在两边同乘 −1 化为正（不等号要变向）再套口诀；解集要用区间或集合精确书写，端点开闭按原不等式是否含等号决定，无解时写 $\\varnothing$。",
+    "definitionEn": "An inequality of the form $ax^{2} + bx + c > 0$ (or ≥ 0, < 0, ≤ 0, with $a \\ne 0$) is called a quadratic inequality in one variable. Solving it means finding the range of x for which the quadratic function $y = ax^{2} + bx + c$ is positive (or negative).\n\nA picture drives everything: the real roots of $ax^{2} + bx + c = 0$ are the x-intercepts of the parabola, and the part of the graph above the x-axis corresponds exactly to the solution set of $> 0$. When a > 0 the parabola is below the axis between the two roots and above it outside them, which is the rule 'greater takes the outside, less takes the inside'.\n\nThere are three cases (with a > 0). If $\\Delta > 0$ the graph meets the axis twice and the solution set is one of the two outer or inner parts. If $\\Delta = 0$ the graph is tangent to the axis, so $ax^{2} + bx + c \\ge 0$ holds for all real x with equality only at $x = -\\frac{b}{2a}$, and the solution set of $> 0$ is everything except that point. If $\\Delta < 0$ the graph lies entirely above the axis, so $ax^{2} + bx + c > 0$ holds for every real x.\n\nIn practice, check the sign of the leading coefficient first: for a < 0 multiply both sides by −1 (reversing the inequality) before applying the rule. Write solution sets precisely with intervals or sets, matching the open or closed endpoints to the original inequality, and use $\\varnothing$ for the empty solution set.",
+    "formulas": [
+      {
+        "latex": "ax^{2}+bx+c=0\\ (a\\ne 0), \\quad \\Delta=b^{2}-4ac",
+        "note": "先解对应的方程：Δ > 0 有两个不同实根，Δ = 0 有两个相等实根，Δ < 0 没有实根——这决定了解集的形状。",
+        "noteEn": "Solve the associated equation first: Δ > 0 gives two distinct real roots, Δ = 0 a repeated root and Δ < 0 no real root, which determines the shape of the solution set."
+      },
+      {
+        "latex": "\\Delta>0:\\ ax^{2}+bx+c>0\\ (a>0) \\iff x<x_{1}\\ \\text{或}\\ x>x_{2}",
+        "note": "大于取两边：$x_{1} < x_{2}$ 是方程的两根，两根之外函数值为正，解集为 (−∞, x₁) ∪ (x₂, +∞)。",
+        "noteEn": "Greater takes the outside: with x₁ < x₂ the two roots, the solution set is (−∞, x₁) ∪ (x₂, +∞)."
+      },
+      {
+        "latex": "\\Delta>0:\\ ax^{2}+bx+c<0\\ (a>0) \\iff x_{1}<x<x_{2}",
+        "note": "小于取中间：两根之间函数值为负，解集为 (x₁, x₂)；两根也要按大小排好。",
+        "noteEn": "Less takes the inside: the function is negative between the two roots, giving the solution set (x₁, x₂)."
+      },
+      {
+        "latex": "\\Delta=0:\\ ax^{2}+bx+c>0\\ (a>0) \\iff x\\ne -\\frac{b}{2a}",
+        "note": "图像与 x 轴相切，除切点横坐标 $-\\frac{b}{2a}$ 外函数值恒正；此时 ax² + bx + c < 0 无解。",
+        "noteEn": "The graph touches the axis: the function is positive except at x = −b/(2a), and ax² + bx + c < 0 has no solution."
+      },
+      {
+        "latex": "\\Delta<0:\\ ax^{2}+bx+c>0\\ (a>0) \\iff x\\in \\mathbb{R}",
+        "note": "抛物线全在 x 轴上方，不等式恒成立，解集为全体实数；此时 ax² + bx + c < 0 的解集是 ∅。",
+        "noteEn": "The parabola stays above the axis, so the inequality holds for every real x; in this case ax² + bx + c < 0 has the empty solution set."
+      }
+    ],
+    "properties": [
+      "求解三步：① 把二次项系数化为正（两边同乘负数时不等号变向）；② 求对应方程的根（因式分解或判别式）；③ 画抛物线草图，写出解集。",
+      "a > 0 时用「大于取两边、小于取中间」；a < 0 时不要直接套口诀，先化正或按开口向下的图像讨论，否则结论正好相反。",
+      "全称情形：a > 0 且 Δ < 0 时，ax² + bx + c > 0 对一切实数成立、解集为 R，而 ax² + bx + c < 0 无解；a > 0 且 Δ = 0 时，≥ 0 的解集是 R，≤ 0 的解集只含 $-\\frac{b}{2a}$ 一个元素，> 0 的解集是「除 $-\\frac{b}{2a}$ 外的一切实数」。",
+      "解集要精确：端点开闭由原不等式是否含等号决定，如 x² − 2x − 3 > 0 的解集是 (−∞, −1) ∪ (3, +∞)，而 x² − 2x − 3 ≥ 0 的是 (−∞, −1] ∪ [3, +∞)；无解时写 ∅，不要写成 {0}。",
+      "「三个二次」是一件事的三种视角：二次函数 y = ax² + bx + c 的图像、一元二次方程 ax² + bx + c = 0 的根、一元二次不等式 ax² + bx + c > 0 的解集，方程的根正是解集的分界点。"
+    ],
+    "propertiesEn": [
+      "Three steps: make the leading coefficient positive (reversing the inequality when multiplying by a negative number), solve the associated equation by factoring or with the discriminant, then sketch the parabola and read off the solution set.",
+      "For a > 0 use 'greater takes the outside, less takes the inside'; for a < 0 do not apply the rule directly — first multiply by −1 or discuss the downward-opening parabola, otherwise the answer comes out reversed.",
+      "Degenerate cases: if a > 0 and Δ < 0 then ax² + bx + c > 0 for all real x and ax² + bx + c < 0 has no solution; if a > 0 and Δ = 0 then the solution set of ≥ 0 is R, that of ≤ 0 is the single point −b/(2a), that of > 0 is everything except −b/(2a), and that of < 0 is empty.",
+      "Write the answer precisely: endpoints are open or closed according to whether the original inequality includes equality, so x² − 2x − 3 > 0 gives (−∞, −1) ∪ (3, +∞) while x² − 2x − 3 ≥ 0 gives (−∞, −1] ∪ [3, +∞); an empty solution set is written ∅, never {0}.",
+      "The 'three quadratics' are one idea in three guises: the graph of y = ax² + bx + c, the roots of ax² + bx + c = 0 and the solution set of ax² + bx + c > 0 — the roots are precisely the dividing points of the solution set."
+    ],
+    "examples": [
+      {
+        "problem": "解不等式 $-x^{2} + 2x + 3 \\ge 0$。",
+        "solution": "两边同乘 −1，不等号变向，化为 $x^{2} - 2x - 3 \\le 0$。左边因式分解得 $(x - 3)(x + 1) \\le 0$，对应方程的根为 $x_{1} = -1$、$x_{2} = 3$；二次项系数 1 > 0，开口向上，函数值 ≤ 0 的部分在两根之间（小于取中间），所以解集为 $\\{x \\mid -1 \\le x \\le 3\\}$，即 $[-1, 3]$。验算：x = 0 时 $-0 + 0 + 3 = 3 \\ge 0$ 成立，且 0 ∈ [−1, 3]；x = 4 时 $-16 + 8 + 3 = -5 < 0$，且 4 ∉ [−1, 3]，一致。"
+      },
+      {
+        "problem": "已知关于 x 的不等式 $x^{2} - 2x + m > 0$ 的解集为 R，求实数 m 的取值范围。",
+        "solution": "二次项系数 1 > 0，抛物线开口向上，解集为 R 等价于图像与 x 轴没有交点、恒在 x 轴上方，即判别式为负：$\\Delta = (-2)^{2} - 4m = 4 - 4m < 0$，解得 m > 1，即 $m \\in (1, +\\infty)$。验算：取 m = 2，得 $x^{2} - 2x + 2 = (x-1)^{2} + 1 > 0$ 对一切实数成立，符合要求；取 m = 1，得 $(x-1)^{2}$，当 x = 1 时等于 0，不满足对一切实数都大于 0，故 m = 1 不能取。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "x^2 - 2*x - 3", "color": "#4cc9f0", "label": "y = x² − 2x − 3" }
+      ],
+      "fills": [
+        { "expr": "x^2 - 2*x - 3", "from": -1, "to": 3, "base": 0, "color": "#b388ff", "label": "x ∈ (−1, 3) 时 y < 0（小于取中间）" }
+      ],
+      "xRange": [-3, 5],
+      "yRange": [-5, 6],
+      "title": "抛物线 y = x² − 2x − 3 与 x 轴交于 −1 和 3，两根之间函数值为负"
+    },
+    "tags": ["一元二次不等式", "判别式", "解集", "三个二次", "数形结合"],
+    "links": ["quadratic-function", "quadratic-equation-junior", "parabola", "basic-inequality", "function-zeros"]
+  },
+  {
+    "id": "function-models",
+    "title": "函数模型及其应用",
+    "titleEn": "Function Models and Applications",
+    "branch": "function",
+    "level": 3,
+    "summary": "用一次、二次、指数、对数等函数刻画实际问题：选模型、定参数、写定义域，并注意不同模型的增长速度差别（指数爆炸、对数平缓）。",
+    "summaryEn": "Real-world problems are modelled by linear, quadratic, exponential or logarithmic functions: choose a model, fit its parameters, state the domain, and mind the different growth rates (exponential explosion, logarithmic slowdown).",
+    "definition": "函数模型就是用函数关系描述实际问题的变化规律。基本流程是：审题（弄清变量、单位与取值范围）→ 选型（画散点图或分析变化特点，判断用哪类函数）→ 定参（把已知数据代入，求出参数）→ 写解析式并注明定义域 → 用图像与性质求最值或做预测，最后回到实际意义检验结果是否合理。\n\n常见模型各有对应场景：一次函数 $y = kx + b$（$k \\ne 0$）刻画均匀变化，每增加一个单位自变量，函数值增加 k，如匀速行驶、单价固定的费用；二次函数 $y = ax^{2} + bx + c$（$a \\ne 0$）用于面积、利润等最值问题；指数函数 $y = a \\cdot b^{x}$（$a \\ne 0$，$b > 0$，$b \\ne 1$）刻画增长率恒定的变化，如复利、细胞分裂、放射性衰减；对数函数 $y = \\log_{a}x$（$a > 0$，$a \\ne 1$）先快后慢，如学习曲线。\n\n增长速度是这部分的重点（以下都设 $x \\to +\\infty$、底数 a > 1、幂指数 n > 0）：指数函数增长最快，幂函数居中，对数函数最慢，这就是「指数爆炸」与「对数平缓」的含义。比较同类模型还要看参数：底数越大，指数增长越快。\n\n还要记住：定义域不只由解析式决定，而由实际意义决定——人数、件数取正整数，时间取 t ≥ 0，长度、面积取正数；写结论时要带上单位，并检查是否符合实际，例如人口、长度不出现负值。",
+    "definitionEn": "A function model describes how two real-world quantities are related. The workflow is: understand the problem and identify variables, units and admissible ranges; choose a type of function from the shape of the data or the pattern of change; fit the parameters using the given data; write the formula together with its domain; then use graphs and properties to find extrema or make predictions, and finally check the answer against reality.\n\nTypical models and their uses: the linear function $y = kx + b$ ($k \\ne 0$) describes constant increments, such as motion at constant speed; the quadratic $y = ax^{2} + bx + c$ ($a \\ne 0$) suits optimisation of areas or profits; the exponential $y = a \\cdot b^{x}$ ($a \\ne 0$, $b > 0$, $b \\ne 1$) describes a constant growth rate, as in compound interest, cell division or radioactive decay; the logarithm $y = \\log_{a}x$ ($a > 0$, $a \\ne 1$) grows quickly at first and then levels off, like a learning curve.\n\nGrowth rates are the key comparison (with $x \\to +\\infty$, base a > 1 and exponent n > 0): exponential growth is fastest, power growth comes next, and logarithmic growth is slowest — the meaning of 'exponential explosion' and of the flatness of logarithms. Among models of the same type the parameters matter too: a larger base makes exponential growth faster.\n\nThe domain comes from the situation, not only from the formula: counts are positive integers, time satisfies t ≥ 0, lengths and areas are positive. Always state units with the answer and check that the prediction is realistic, for instance that a population or a length never becomes negative.",
+    "formulas": [
+      {
+        "latex": "y = kx + b\\quad (k\\ne 0)",
+        "note": "一次函数模型：变化率恒为 k，函数值均匀变化，适用于匀速运动、等额增长等线性情形；定义域常由实际意义限定。",
+        "noteEn": "The linear model: the value changes at the constant rate k, suitable for uniform motion or constant increments, with the domain usually restricted by the context."
+      },
+      {
+        "latex": "y = ax^{2} + bx + c\\quad (a\\ne 0)",
+        "note": "二次函数模型：处理面积、利润等最值问题，最值在顶点处取得，但必须先确认顶点横坐标落在定义域内。",
+        "noteEn": "The quadratic model: used for maxima and minima such as area or profit; the extremum occurs at the vertex, provided that the vertex lies inside the domain."
+      },
+      {
+        "latex": "y = a \\cdot b^{x}\\quad (a\\ne 0,\\ b>0,\\ b\\ne 1)",
+        "note": "指数函数模型：自变量每增加 1，函数值乘以 b，增长率为 b − 1；b > 1 表示增长，0 < b < 1 表示衰减。",
+        "noteEn": "The exponential model: each unit increase of the input multiplies the value by b, so the growth rate is b − 1; b > 1 means growth and 0 < b < 1 means decay."
+      },
+      {
+        "latex": "y = \\log_{a}x\\quad (a>0,\\ a\\ne 1,\\ x>0)",
+        "note": "对数函数模型：初期增长较快，随后越来越平缓，适合描述增速递减的过程（如学习效果、容量受限的增长）。",
+        "noteEn": "The logarithmic model: it rises quickly at first and then flattens out, describing decreasing growth rates such as learning effects or growth limited by capacity."
+      },
+      {
+        "latex": "a^{x} \\gg x^{n} \\gg \\log_{a}x\\quad (x\\to+\\infty,\\ a>1,\\ n>0)",
+        "note": "增长速度的比较：x 充分大时指数增长 > 幂函数增长 > 对数增长；使用前必须确认底数 a > 1、幂指数 n > 0。",
+        "noteEn": "Comparison of growth: for large x, exponential growth beats power growth, which beats logarithmic growth; the statements require a > 1 and n > 0."
+      }
+    ],
+    "properties": [
+      "建模五步：审题找变量与单位 → 描点选型 → 代数据定参数 → 写出解析式并注明定义域 → 求解后回到实际检验，结果不合理要重新选型或调整定义域。",
+      "定义域由实际意义决定：人数、件数取正整数，时间取 t ≥ 0，长度与面积取正数；结论必须带单位并符合实际背景。",
+      "增长速度（当 x → +∞，底数 a > 1，幂指数 n > 0 时）：指数增长最快（指数爆炸），幂函数居中，对数函数最慢；比较的正是 x 充分大时的趋势。",
+      "线性与指数要分清含义：一次函数每个单位增量固定为 k；指数函数每个单位倍率为 b，增长率为 b − 1，两者的「增速」一词含义不同，不要混用。",
+      "用数据拟合出模型后必须检验：把已知点代入看误差是否可接受；若预测违背实际（出现负数量、超过资源上限等），说明模型不适用，可考虑分段函数或换用其它模型。"
+    ],
+    "propertiesEn": [
+      "Five steps of modelling: identify variables and units, choose a model from a plot or the pattern of change, fit the parameters from data, write the formula with its domain, then solve and check the answer against reality, revising the model if it fails.",
+      "The domain comes from the situation: counts are positive integers, time satisfies t ≥ 0, lengths and areas are positive; conclusions must carry units and make practical sense.",
+      "Growth rates (for x → +∞, base a > 1, exponent n > 0): exponential growth is fastest, power growth is intermediate and logarithmic growth is slowest; the comparison concerns the behaviour for large x.",
+      "Linear and exponential increments are different: a linear model adds the same amount k per unit step, while an exponential model multiplies by b per unit step, giving growth rate b − 1.",
+      "Any fitted model must be validated: substitute known data points and check the error; if predictions contradict reality (negative counts, values beyond a capacity), the model is unsuitable and one may need a piecewise or another model."
+    ],
+    "examples": [
+      {
+        "problem": "某林场现有木材蓄积量 10 万立方米，若年平均增长率为 10%，写出 t 年后蓄积量 y（万立方米）与年数 t 的函数关系，并估计约多少年后蓄积量超过 20 万立方米（参考数据：$1.1^{7} \\approx 1.949$，$1.1^{8} \\approx 2.144$）。",
+        "solution": "每过一年，蓄积量都在上一年的基础上乘以 1.1，这是增长率恒定的变化，应选指数函数模型：$y = 10 \\times 1.1^{t}$（t 为非负整数，单位：年；y 的单位：万立方米）。要求超过 20 万立方米，即 $10 \\times 1.1^{t} > 20$，也就是 $1.1^{t} > 2$。由 $1.1^{7} \\approx 1.949 < 2$、$1.1^{8} \\approx 2.144 > 2$ 可知 t ≥ 8，即约 8 年后蓄积量超过 20 万立方米。验算：t = 8 时 $y = 10 \\times 2.144 = 21.44 > 20$；t = 7 时 $y \\approx 19.49 < 20$，与结论一致。"
+      },
+      {
+        "problem": "用长 20 m 的篱笆靠一面足够长的墙围成一个矩形花园（靠墙的一边不需要篱笆），求花园面积的最大值。",
+        "solution": "设垂直于墙的两条边长均为 x m，则平行于墙的一边长为 (20 − 2x) m。由 x > 0 且 20 − 2x > 0，得定义域 0 < x < 10。面积\n$$S = x(20 - 2x) = -2x^{2} + 20x = -2(x - 5)^{2} + 50,$$\n这是二次函数模型，抛物线开口向下，当 x = 5 时取最大值，且 5 在定义域 (0, 10) 内。所以两条垂直于墙的边各 5 m、平行于墙的边 10 m 时，花园面积最大，最大值为 50 m²。验算：篱笆总长 5 + 5 + 10 = 20 m，与题设一致；面积 5 × 10 = 50 m²，而取 x = 4 时 S = 4 × 12 = 48 < 50，说明最大值确实是 50。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "x", "color": "#ffd166", "label": "y = x（一次）" },
+        { "expr": "x^2", "color": "#4cc9f0", "label": "y = x²（二次）" },
+        { "expr": "2^x", "color": "#ff6b9d", "label": "y = 2^x（指数）" }
+      ],
+      "xRange": [0, 6],
+      "yRange": [0, 40],
+      "title": "三种函数模型的增长比较：x > 4 后 2^x 超过 x²，指数增长后来居上"
+    },
+    "tags": ["函数模型", "增长速度", "指数爆炸", "最值应用", "定义域"],
+    "links": ["linear-function", "quadratic-function", "exponential-function", "logarithmic-function", "exponential-growth-decay", "power-function"]
+  }
+]

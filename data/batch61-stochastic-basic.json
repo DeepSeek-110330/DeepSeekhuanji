@@ -1,0 +1,631 @@
+[
+  {
+    "id": "stochastic-process",
+    "title": "随机过程",
+    "titleEn": "Stochastic Processes",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "给定概率空间与指标集 T，一族按 T 编号的随机变量 {X_t}；固定 t 它是随机变量，固定 ω 得到一条样本轨道。",
+    "summaryEn": "Given a probability space and an index set T, a family of random variables indexed by T; fixing t gives a random variable and fixing ω gives a sample path.",
+    "definition": "设 $(\\Omega,\\mathcal F,P)$ 是概率空间，$T$ 是一个指标集（通常叫时间集）。如果对每个 $t\\in T$ 都给定一个随机变量 $X_t:\\Omega\\to\\mathbb R$，就说 $\\{X_t\\}_{t\\in T}$ 是定义在这个概率空间上的一个**随机过程**。把它看成二元函数 $X(t,\\omega)$ 最清楚：**固定 $t$**，$\\omega\\mapsto X_t(\\omega)$ 是一个随机变量；**固定 $\\omega$**，$t\\mapsto X_t(\\omega)$ 是一条普通的实值函数，称为该过程的**样本轨道**（也叫实现、路径）。观测者拿到的数据永远是一条样本轨道——「一次实验的完整历史」。\n\n指标集 $T$ 决定过程的类型。$T=\\mathbb Z$ 或 $\\{1,2,3,\\dots\\}$ 时叫**离散参数过程**或**时间序列**（逐日股价、伯努利序列）；$T=[0,\\infty)$ 或 $\\mathbb R$ 时叫连续参数过程（布朗运动、泊松过程）；$T$ 还可以是多维的（随机场、随机偏微分方程的解）。$T$ 只是一个编号集合，不必真的是时间。\n\n随机过程与「一族互不相干的随机变量」的区别，在于不同时刻的 $X_t$ 之间由**有限维联合分布**绑定起来。按这套依赖结构可以把过程分成若干大类：独立增量过程（泊松、布朗运动）、马尔可夫过程、鞅、平稳过程、遍历过程、高斯过程；这些类别互相交叠——布朗运动既是高斯过程，又是马尔可夫过程、鞅，并且有独立增量。\n\n随机过程是概率论从静态随机变量走向动态模型的入口：有了它，才能谈随机微分方程、滤波、时间序列建模与统计推断。",
+    "definitionEn": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and $T$ an index set. If for every $t\\in T$ a random variable $X_t:\\Omega\\to\\mathbb R$ is given, then $\\{X_t\\}_{t\\in T}$ is a **stochastic process** on that probability space. The clearest picture is the two-variable function $X(t,\\omega)$: **fixing $t$** gives the random variable $\\omega\\mapsto X_t(\\omega)$, while **fixing $\\omega$** gives an ordinary real function $t\\mapsto X_t(\\omega)$, called a **sample path** (a realisation) of the process. Whatever data one collects is a single sample path, the complete history of one experiment.\n\nThe index set decides the flavour: $T=\\mathbb Z$ or $\\{1,2,\\dots\\}$ gives a discrete-parameter process or time series, $T=[0,\\infty)$ a continuous-parameter process (Brownian motion, the Poisson process), and a multi-dimensional $T$ a random field. $T$ is merely a labelling set and need not be time.\n\nWhat separates a process from a mere family of unrelated random variables is that the variables at different times are tied together by their **finite-dimensional joint distributions**. Processes are classified by that structure: independent increments, Markov, martingale, stationary, ergodic, Gaussian — and the classes overlap freely, since Brownian motion is Gaussian, Markov, a martingale, and has independent increments all at once.",
+    "formulas": [
+      {
+        "latex": "X_t(\\omega)=X(t,\\omega),\\qquad (t,\\omega)\\in T\\times\\Omega",
+        "note": "随机过程就是一个二元函数：$t$ 是编号（时间），$\\omega$ 是随机性的来源。所有概率陈述都是对 $\\omega$ 说的。",
+        "noteEn": "A process is one two-variable function: t indexes time and ω carries the randomness; every probabilistic statement is about ω."
+      },
+      {
+        "latex": "\\{\\omega\\in\\Omega:\\ X_t(\\omega)\\le a\\}\\in\\mathcal F,\\qquad \\forall t\\in T,\\ a\\in\\mathbb R",
+        "note": "每个固定时刻的 $X_t$ 必须是 $(\\Omega,\\mathcal F)$ 上的随机变量，即这些事件可测——否则「概率」无从谈起。",
+        "noteEn": "Each fixed-time variable X_t must be measurable on (Ω, F), otherwise statements about its probability are meaningless."
+      },
+      {
+        "latex": "t\\mapsto X_t(\\omega)\\quad (t\\in T),\\qquad \\omega\\ \\text{固定}",
+        "note": "样本轨道：固定 $\\omega$ 后得到的一条确定性函数。$T$ 离散时是一条数列，连续时是一条曲线。",
+        "noteEn": "A sample path: fixing ω leaves a deterministic function of t — a sequence when T is discrete, a curve when T is continuous."
+      },
+      {
+        "latex": "\\mathbb EX_t=m(t),\\qquad \\operatorname{Cov}(X_s,X_t)=K(s,t)",
+        "note": "均值函数与协方差函数，刻画过程的前两阶矩。它们不足以确定全部有限维分布。",
+        "noteEn": "Mean and covariance functions capture the first two moments; they do not determine all finite-dimensional distributions."
+      },
+      {
+        "latex": "X_t=\\cos(\\lambda t+\\Theta),\\qquad \\Theta\\sim U[0,2\\pi)",
+        "note": "随机相位过程：取定 $\\omega$ 就是把相位 $\\Theta$ 取成某个 $\\theta$，轨道恰好是余弦曲线 $\\cos(\\lambda t+\\theta)$，是「一条轨道」最直观的例子。",
+        "noteEn": "A random-phase process: fixing ω fixes the phase θ, and the path is exactly the cosine curve cos(λt+θ) — the most intuitive picture of a single sample path."
+      }
+    ],
+    "expression": {
+      "text": "{X_t}_{t∈T}，X_t : Ω → ℝ，T 为指标集",
+      "symbol": "X_t(ω)",
+      "note": "同一个记号要随时分清：写 X_t 时它是随机变量，写 X_t(ω) 时它已经是一个数。",
+      "noteEn": "Keep the two readings apart: X_t is a random variable, X_t(ω) is already a number."
+    },
+    "properties": [
+      "两重视角：固定 $t$ 得随机变量，固定 $\\omega$ 得样本轨道。分布、期望、协方差这些描述都是对 $\\omega$ 说的，轨道只是它的一次抽样。",
+      "指标集 $T$ 决定类型：离散 $\\Rightarrow$ 随机序列（时间序列），连续 $\\Rightarrow$ 连续参数过程，$T$ 多维 $\\Rightarrow$ 随机场；$T$ 不必是时间。",
+      "全过程的规律由有限维分布族决定（配合相容性与柯尔莫哥洛夫扩张定理）；只比较各时刻的一维分布会丢掉所有时间相关性。",
+      "按依赖结构分类：独立增量、马尔可夫、鞅、平稳、遍历、高斯等；同一过程可同时属于多类。",
+      "要讨论轨道的连续性、积分 $\\int_0^TX_t\\,\\mathrm dt$ 等，还需关于 $(t,\\omega)$ 的联合可测性（或可分性）；一般定义并不自动保证，而轨道连续的过程自然满足。"
+    ],
+    "propertiesEn": [
+      "Two readings: fixing t yields a random variable, fixing ω yields a sample path. Laws, means and covariances are all statements about ω, and a path is one draw from that law.",
+      "The index set decides the type: discrete T gives a random (time) series, continuous T a continuous-parameter process, multi-dimensional T a random field; T need not be time.",
+      "The whole law lives in the family of finite-dimensional distributions (subject to consistency, via Kolmogorov's extension theorem); comparing only one-dimensional marginals discards all temporal dependence.",
+      "Standard classes: independent increments, Markov, martingale, stationary, ergodic, Gaussian; one process may belong to several at once.",
+      "Path continuity or integrals like ∫X_t dt require joint measurability (or separability) in (t,ω), which the bare definition does not guarantee; processes with continuous paths satisfy it automatically."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.6*sin(2.1*x+0.3)+0.4*sin(5.7*x+1.1)+0.25*sin(11.3*x+2.2)",
+          "color": "#4cc9f0",
+          "label": "样本轨道 1（示意）"
+        },
+        {
+          "expr": "0.55*sin(1.7*x+1.9)+0.35*sin(4.3*x+0.5)+0.3*sin(9.1*x+2.8)",
+          "color": "#ff6b9d",
+          "label": "样本轨道 2（示意）"
+        },
+        {
+          "expr": "0.5*sin(2.6*x+2.4)+0.32*sin(6.9*x+0.8)+0.22*sin(13.1*x+1.6)",
+          "color": "#ffd166",
+          "label": "样本轨道 3（示意）"
+        }
+      ],
+      "xRange": [
+        0,
+        4
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "title": "随机过程的三条示意性样本轨道（正弦和近似，每条内频率互不成比例；并非真随机轨道）"
+    },
+    "examples": [
+      {
+        "problem": "设 $\\Theta\\sim U[0,2\\pi)$，$\\lambda>0$，定义 $X_t=\\cos(\\lambda t+\\Theta)$，$t\\ge0$。求均值函数 $m(t)$ 与协方差函数 $K(s,t)$，并描述样本轨道。",
+        "solution": "用和角公式 $\\cos(\\lambda t+\\Theta)=\\cos\\lambda t\\cos\\Theta-\\sin\\lambda t\\sin\\Theta$。由 $\\Theta$ 的均匀性，$\\mathbb E\\cos\\Theta=0$、$\\mathbb E\\sin\\Theta=0$、$\\mathbb E\\cos^2\\Theta=\\mathbb E\\sin^2\\Theta=\\frac12$、$\\mathbb E[\\sin\\Theta\\cos\\Theta]=0$，于是 $$m(t)=\\mathbb EX_t=0,$$ $$K(s,t)=\\mathbb E[X_sX_t]=\\tfrac12\\cos\\lambda s\\cos\\lambda t+\\tfrac12\\sin\\lambda s\\sin\\lambda t=\\tfrac12\\cos\\lambda(t-s).$$ 方差恒为 $K(t,t)=\\frac12$，协方差只依赖时间差。固定 $\\omega$ 就是把相位取成一个具体的 $\\theta$，此时样本轨道是 $t\\mapsto\\cos(\\lambda t+\\theta)$——一条振幅为 1 的余弦曲线，不同的 $\\omega$ 只差一个初相。"
+      },
+      {
+        "problem": "设 $\\varepsilon_1,\\varepsilon_2,\\dots$ 独立同分布 $N(0,1)$，令 $X_k=\\varepsilon_k$；另取单个 $Z\\sim N(0,1)$，令 $Y_k=Z$ 对一切 $k$ 成立。说明这两个过程的一维分布完全相同，但它们是不同的过程。",
+        "solution": "两个过程在任意固定时刻都服从 $N(0,1)$，所以一维边缘分布族一样。但协方差函数不同：$\\mathbb E[X_sX_t]=\\delta_{st}$（$s=t$ 时为 1，否则为 0），而 $\\mathbb E[Y_sY_t]=1$ 对一切 $s,t$ 成立。协方差不同说明有限维分布不同：$X$ 的样本轨道杂乱无章、相邻时刻毫无关系，$Y$ 的每一条轨道都是常数函数。结论：「过程」的信息藏在联合分布里，而不在各时刻的边缘分布里——这正是必须引入有限维分布族的原因。"
+      }
+    ],
+    "tags": [
+      "样本轨道",
+      "指标集",
+      "随机序列",
+      "独立增量",
+      "时间序列"
+    ],
+    "links": [
+      "finite-dimensional-distributions",
+      "gaussian-process",
+      "stationarity",
+      "white-noise-spectral",
+      "brownian-motion",
+      "poisson-process",
+      "random-variable"
+    ]
+  },
+  {
+    "id": "finite-dimensional-distributions",
+    "title": "有限维分布族与柯尔莫哥洛夫扩张定理",
+    "titleEn": "Finite-Dimensional Distributions and the Kolmogorov Extension Theorem",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "任意有限多个时刻的联合分布构成的分布族；它满足相容性（置换不变、投影一致），而柯尔莫哥洛夫扩张定理保证反过来相容的分布族必由某个随机过程实现。",
+    "summaryEn": "The family of joint laws of any finite set of times; it must be consistent (permutation-invariant and projection-consistent), and Kolmogorov's extension theorem guarantees that any consistent family is realised by an actual process.",
+    "definition": "随机过程是无穷维对象，「它的分布是什么」没法直接写出来；但只要取有限多个时刻，就得到普通的有限维分布。把所有这样的分布收集起来，就构成过程的**有限维分布族**：对任意 $n\\ge1$ 与任意 $t_1,\\dots,t_n\\in T$，令 $$\\mu_{t_1\\dots t_n}(B)=P\\big((X_{t_1},\\dots,X_{t_n})\\in B\\big),\\qquad B\\in\\mathcal B(\\mathbb R^n).$$ 它记录了过程在任意有限多个时刻上的全部概率信息，是「过程层面的分布」。\n\n反过来问：是不是随便指定一族有限维分布，就一定有过程来实现它？不行。这族分布必须自洽，即满足**相容性条件**：(i) **置换相容**——把时刻的次序重排，同时把分布的各坐标作同样的重排，结果不变；(ii) **投影相容（边缘一致）**——把 $n$ 维分布添上一个时刻变成 $n+1$ 维之后，对新增的坐标积分，必须回到原来的 $n$ 维分布。任何真实存在的随机过程都自动满足这两条，例如二元正态的边缘就是对应的协方差子矩阵给出的正态分布。\n\n**柯尔莫哥洛夫扩张定理**（Kolmogorov extension theorem，又称相容性定理）给出反方向的结论：设指标集 $T$ 任意，对每个有限子集给一个概率测度 $\\mu_{t_1\\dots t_n}$，每个都定义在**标准博雷尔空间**（例如 $\\mathbb R^n$，或波兰空间的博雷尔集类）上；若这族分布满足相容性，则**一定存在**概率空间 $(\\Omega,\\mathcal F,P)$ 和其上的随机过程 $\\{X_t\\}_{t\\in T}$，使它的有限维分布恰好是给定的这族 $\\mu$；并且在乘积 $\\sigma$-代数（由柱集生成）上，这样的概率测度还是唯一的。构造思路：把样本空间取成轨道空间 $\\mathbb R^T$，把 $X_t$ 取成坐标映射，先在柱集上用 $\\mu$ 定义一个有限可加集函数，用相容性保证自洽，最后借助 $\\mathbb R^n$ 上概率测度的紧性（内正则性）把它扩张成概率测度。\n\n定理的适用条件与局限要说清楚。指标集 $T$ 可以完全任意（可数、不可数都行），甚至不需要拓扑结构；代价是对分布所在的空间有要求——必须能用紧集从内部逼近测度（标准博雷尔空间正是为此），否则扩张这一步会失败。更关键的是：定理只保证有限维分布对得上，**完全不管样本轨道的正则性**。定理造出的过程轨道可以处处不连续。要得到连续轨道，必须补上增量矩条件（Kolmogorov–Chentsov 连续性准则：$\\mathbb E|X_t-X_s|^{\\alpha}\\le C|t-s|^{1+\\beta}$ 时可以改取一个有连续轨道的版本），或者干脆把过程直接建在 $C[0,\\infty)$ 上——布朗运动的严格构造就是这样完成的。",
+    "definitionEn": "A stochastic process is an infinite-dimensional object and one cannot write down its law directly; but choosing finitely many times produces an ordinary finite-dimensional distribution. Collecting all of them gives the **family of finite-dimensional distributions**: for every $n\\ge1$ and all $t_1,\\dots,t_n\\in T$, $$\\mu_{t_1\\dots t_n}(B)=P\\big((X_{t_1},\\dots,X_{t_n})\\in B\\big),\\qquad B\\in\\mathcal B(\\mathbb R^n).$$ This family carries the complete probabilistic content of the process on any finite set of times.\n\nCan one prescribe such a family arbitrarily? No: it must be self-consistent, i.e. satisfy the **consistency conditions**. (i) **Permutation consistency**: reordering the times while reordering the coordinates in the same way leaves the law unchanged. (ii) **Projection consistency**: adding one more time and then integrating out the new coordinate returns the previous $n$-dimensional law. Every genuinely existing process satisfies both automatically — the margins of a bivariate normal law are the normals given by the corresponding sub-matrices.\n\n**Kolmogorov's extension theorem** gives the converse. Let the index set $T$ be arbitrary, and for each finite subset let a probability measure $\\mu_{t_1\\dots t_n}$ be given, each defined on a **standard Borel space** (for instance $\\mathbb R^n$, or the Borel sets of a Polish space). If the family is consistent, then there exists a probability space $(\\Omega,\\mathcal F,P)$ and a process $\\{X_t\\}_{t\\in T}$ on it whose finite-dimensional distributions are exactly the given $\\mu$, and the measure is unique on the product $\\sigma$-algebra generated by cylinders. The construction takes the sample space to be the path space $\\mathbb R^T$, the variables $X_t$ to be coordinate maps, defines a finitely additive set function on cylinders, and extends it to a probability measure using tightness (inner regularity) of measures on $\\mathbb R^n$.\n\nThe hypotheses matter. The index set $T$ is arbitrary — countable or not, with no topology needed — but the spaces carrying the distributions must be standard Borel, precisely so that tightness is available; otherwise the extension step fails. More importantly, the theorem controls only the finite-dimensional distributions and **says nothing about the regularity of paths**: the process it produces may have nowhere continuous paths. Continuous paths require extra moment conditions (the Kolmogorov–Chentsov criterion: if $\\mathbb E|X_t-X_s|^{\\alpha}\\le C|t-s|^{1+\\beta}$ one may pass to a version with continuous paths), or one builds the process directly on $C[0,\\infty)$ — which is how Brownian motion is rigorously constructed.",
+    "formulas": [
+      {
+        "latex": "\\mu_{t_1\\dots t_n}(B_1\\times\\cdots\\times B_n)=P\\big(X_{t_1}\\in B_1,\\dots,X_{t_n}\\in B_n\\big)",
+        "note": "有限维分布的定义：任意 $n$ 个时刻的联合分布。给定过程后它们是被决定的，不能任选。",
+        "noteEn": "Definition of the finite-dimensional distributions: the joint law of n chosen times. Once the process is given they are determined, not free."
+      },
+      {
+        "latex": "\\mu_{t_{\\sigma(1)}\\dots t_{\\sigma(n)}}\\big(B_{\\sigma(1)}\\times\\cdots\\times B_{\\sigma(n)}\\big)=\\mu_{t_1\\dots t_n}(B_1\\times\\cdots\\times B_n)",
+        "note": "置换相容：$\\sigma$ 是任意排列。时刻换序时坐标必须同步换序，分布才不变。",
+        "noteEn": "Permutation consistency for any permutation σ: reordering the times must be accompanied by the same reordering of the coordinates."
+      },
+      {
+        "latex": "\\mu_{t_1\\dots t_n t_{n+1}\\dots t_{n+m}}\\big(B_1\\times\\cdots\\times B_n\\times\\mathbb R^m\\big)=\\mu_{t_1\\dots t_n}(B_1\\times\\cdots\\times B_n)",
+        "note": "投影相容（边缘一致）：多算几个时刻后再边缘化必须回到原分布。这条最关键，它保证各维边缘互不冲突。",
+        "noteEn": "Projection consistency: adding times and then marginalising must return the original law. This is the condition that keeps low-dimensional marginals from contradicting each other."
+      },
+      {
+        "latex": "\\{\\mu_{t_1\\dots t_n}\\}\\ \\text{相容}\\ \\Longrightarrow\\ \\exists\\,(\\Omega,\\mathcal F,P),\\ \\{X_t\\}_{t\\in T}:\\quad P\\big((X_{t_1},\\dots,X_{t_n})\\in B\\big)=\\mu_{t_1\\dots t_n}(B)",
+        "note": "柯尔莫哥洛夫扩张定理：在标准博雷尔空间上，相容性不仅是必要条件，也是充分条件。于是「先给分布、再造过程」成为标准做法。",
+        "noteEn": "Kolmogorov's extension theorem: on standard Borel spaces consistency is not merely necessary but sufficient, so prescribing laws first and building the process afterwards is a legitimate method."
+      },
+      {
+        "latex": "\\mu_{t_1\\dots t_n}=\\nu^{\\otimes n}\\ \\Longrightarrow\\ \\exists\\,X_1,X_2,\\dots\\ \\text{独立同分布},\\ X_k\\sim\\nu",
+        "note": "乘积测度自动满足两条相容性，于是「任给一个分布 $\\nu$，必存在 iid 序列」是扩张定理的直接推论。",
+        "noteEn": "Product measures are automatically consistent, so for any ν there is an iid sequence with law ν — a direct corollary of the extension theorem."
+      }
+    ],
+    "properties": [
+      "有限维分布族决定过程的一切有限维统计量（联合概率、矩、协方差函数），所以「两个过程同分布」通常就指它们的有限维分布族相同；只比较一维边缘会丢掉全部时间相关性。",
+      "相容性两条缺一不可：置换相容针对时刻换序，投影相容针对边缘化。它们都是存在性的必要条件，违反任一条就不存在这样的过程（例如规定一维分布是 $N(0,1)$，却让二维分布的边缘是 $N(0,2)$，立刻矛盾）。",
+      "扩张定理的适用范围：分布必须定义在标准博雷尔空间（$\\mathbb R^n$、波兰空间等）上，指标集 $T$ 则完全任意，不需要可数性或拓扑结构。证明依赖这些空间上概率测度的紧性（内正则性）。",
+      "定理只保证有限维分布，不保证轨道正则性：连续性、右连左极、单调性都需要额外条件（如 Kolmogorov–Chentsov 连续性准则），或改为在 $C(T)$ 上重新构造过程。",
+      "有限维分布族相同的过程互称同分布；它们每个固定时刻同分布、协方差结构相同，但不一定互为版本。例如 $X_t=Z$、$Y_t=-Z$（单个 $Z\\sim N(0,1)$）的有限维分布族完全相同，而 $P(X_t=Y_t)=P(Z=0)=0$ 对每个 $t$ 成立，二者处处不等。"
+    ],
+    "propertiesEn": [
+      "The family carries every finite-dimensional statistic — joint probabilities, moments, covariances — so processes are called identically distributed when their families coincide; comparing one-dimensional marginals alone discards all temporal dependence.",
+      "Neither consistency condition can be dropped: permutation invariance under reordering of times, and agreement under marginalisation. Both are necessary for existence; violate either and no process fits (an N(0,1) marginal combined with a bivariate law whose margin is N(0,2) is already contradictory).",
+      "Scope of the theorem: the measures must live on standard Borel spaces (ℝⁿ, Polish spaces, …), while the index set T is arbitrary — no countability or topology required. The proof uses tightness (inner regularity) of measures on such spaces.",
+      "The conclusion concerns the finite-dimensional laws only; path regularity — continuity, càdlàg behaviour, monotonicity — needs extra hypotheses (e.g. the Kolmogorov–Chentsov continuity criterion) or a reconstruction of the process on C(T).",
+      "Processes sharing a family are called identically distributed: the same marginals and covariance structure, yet not necessarily versions of one another. With a single Z ~ N(0,1), the processes X_t = Z and Y_t = −Z have identical families while P(X_t = Y_t) = P(Z = 0) = 0 for every t, so they never agree."
+    ],
+    "examples": [
+      {
+        "problem": "有人想构造指标集 $T=\\{t_1,t_2\\}$ 上的随机过程，并规定 $$\\mu_{t_1}=N(0,1),\\qquad \\mu_{t_2}=N(0,3),\\qquad \\mu_{t_1t_2}=N\\Big(\\mathbf 0,\\ \\begin{pmatrix}1&0.5\\\\0.5&2\\end{pmatrix}\\Big).$$ 问这样的随机过程是否存在。",
+        "solution": "计算二元正态的两条边缘。第一个坐标的边缘是 $N(0,\\Sigma_{11})=N(0,1)$，与 $\\mu_{t_1}$ 一致；第二个坐标的边缘是 $N(0,\\Sigma_{22})=N(0,2)$，而题设要求 $\\mu_{t_2}=N(0,3)$。投影相容性被破坏，所以不存在满足这些要求的随机过程。\n\n若把 $\\mu_{t_2}$ 改成 $N(0,2)$，相容性就成立：投影相容由上面两条边缘计算直接验证，置换相容因为二元正态分布关于坐标交换对称（$\\mu_{t_2t_1}=\\mu_{t_1t_2}$）。于是由柯尔莫哥洛夫扩张定理，存在概率空间与随机向量 $(X_{t_1},X_{t_2})\\sim N(\\mathbf 0,\\Sigma)$。\n\n要点：相容性不是走过场的形式检查，它直接决定哪些分布族在逻辑上可能存在。"
+      },
+      {
+        "problem": "设 $\\nu$ 是 $\\mathbb R$ 上任一概率分布（例如 $N(0,1)$）。用扩张定理证明：存在概率空间与独立同分布序列 $X_1,X_2,\\dots$ 使每个 $X_k\\sim\\nu$。",
+        "solution": "取 $T=\\{1,2,\\dots\\}$，对 $t_1<\\cdots<t_n$ 令 $\\mu_{t_1\\dots t_n}=\\nu^{\\otimes n}$（$n$ 重乘积测度）。先验证相容性。\n\n投影相容：$$\\nu^{\\otimes(n+m)}\\big(B_1\\times\\cdots\\times B_n\\times\\mathbb R^m\\big)=\\prod_{i=1}^{n}\\nu(B_i)\\cdot\\nu(\\mathbb R)^m=\\prod_{i=1}^{n}\\nu(B_i)=\\nu^{\\otimes n}(B_1\\times\\cdots\\times B_n).$$\n\n置换相容：乘积测度中各因子可以交换次序，所以对坐标的任意重排不变。\n\n此外 $\\nu^{\\otimes n}$ 定义在 $\\mathbb R^n$（标准博雷尔空间）上，故由扩张定理存在概率空间与过程 $\\{X_k\\}$，其有限维分布正是乘积测度——这正是「各时刻相互独立、每个 $X_k\\sim\\nu$」的定义。伯努利序列、高斯白噪声、独立抽样等常用对象的存在性都由此保证。"
+      }
+    ],
+    "tags": [
+      "相容性条件",
+      "扩张定理",
+      "标准博雷尔空间",
+      "乘积测度",
+      "轨道正则性"
+    ],
+    "links": [
+      "stochastic-process",
+      "gaussian-process",
+      "brownian-motion",
+      "random-vector",
+      "product-measure",
+      "measure-space",
+      "poisson-process"
+    ]
+  },
+  {
+    "id": "gaussian-process",
+    "title": "高斯过程",
+    "titleEn": "Gaussian Processes",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "任意有限维联合分布都是多元正态的随机过程；它由均值函数与协方差函数完全决定，且宽平稳与严平稳等价。",
+    "summaryEn": "A stochastic process all of whose finite-dimensional distributions are multivariate normal; it is determined by its mean and covariance functions, and weak and strict stationarity coincide for it.",
+    "definition": "若随机过程 $\\{X_t\\}_{t\\in T}$ 的**任意有限维分布都是多元正态分布**，就称它是**高斯过程**（正态过程）。这里「任意」两个字不能省：不是「每个 $X_t$ 服从一维正态」，而是「任意取 $n$ 个时刻，向量 $(X_{t_1},\\dots,X_{t_n})$ 服从（允许退化的）$n$ 元正态分布」。这一区别是本知识点最容易出错的地方，反例见下面性质与例题。\n\n等价的刻画：$X$ 是高斯过程，当且仅当对任意有限个实数 $a_1,\\dots,a_n$ 与任意时刻 $t_1,\\dots,t_n$，线性组合 $\\sum_i a_iX_{t_i}$ 服从一元正态分布（方差为 0 时理解为退化正态，即常数）。也就是说高斯性关于**线性运算封闭**：作线性组合不会产生新的分布类型。\n\n高斯过程只需要两个函数就能完全确定：均值函数 $m(t)=\\mathbb EX_t$ 与协方差函数 $K(s,t)=\\operatorname{Cov}(X_s,X_t)$。任给 $n$ 个时刻，$(X_{t_1},\\dots,X_{t_n})\\sim N(\\mathbf m_T,\\Sigma_T)$，其中 $\\mathbf m_T=(m(t_i))$、$\\Sigma_T=(K(t_i,t_j))$。反过来，任给一个均值函数 $m$ 与一个**对称半正定**的 $K$，都能构造出对应的唯一（在有限维分布意义下唯一）高斯过程：核验相容性时，多元正态的任意边缘仍是正态，相容性自动成立；真正需要确认的是 $\\Sigma_T$ 半正定，它保证每个 $N(\\mathbf m_T,\\Sigma_T)$ 都是合法的概率分布，于是可以调用柯尔莫哥洛夫扩张定理。这正是机器学习中「高斯过程回归」的全部数学基础：选定核函数 $K$ 就等于选定了整个模型。\n\n高斯性还与平稳性配合出一件好事：因为分布只依赖 $(m,K)$，对高斯过程而言**宽平稳与严平稳等价**。另外，联合正态分布下「不相关等价于独立」，所以高斯白噪声的各时刻实际上是相互独立的——这是高斯情形独有、一般白噪声不成立的升级。",
+    "definitionEn": "A stochastic process $\\{X_t\\}_{t\\in T}$ is called a **Gaussian process** if **every finite-dimensional distribution is multivariate normal**. The word every cannot be dropped: the requirement is not that each single $X_t$ be normal, but that for any $n$ and any times the vector $(X_{t_1},\\dots,X_{t_n})$ be multivariate normal (degenerate cases allowed). This subtlety is the standard trap of the subject; a counterexample is given below.\n\nAn equivalent characterisation: $X$ is Gaussian iff for every finite set of real numbers $a_1,\\dots,a_n$ and times $t_1,\\dots,t_n$ the linear combination $\\sum_i a_iX_{t_i}$ is (univariate) normal, with variance 0 understood as a degenerate normal law, i.e. a constant. Gaussianity is thus closed under linear operations.\n\nSuch a process is completely determined by two functions: the mean function $m(t)=\\mathbb EX_t$ and the covariance function $K(s,t)=\\operatorname{Cov}(X_s,X_t)$; for any $n$ times one has $(X_{t_1},\\dots,X_{t_n})\\sim N(\\mathbf m_T,\\Sigma_T)$ with $\\mathbf m_T=(m(t_i))$ and $\\Sigma_T=(K(t_i,t_j))$. Conversely, any mean function $m$ together with any **symmetric positive semi-definite** $K$ determines a Gaussian process, unique in law: Gaussian marginals of Gaussian laws are Gaussian, so consistency is automatic, and the real work is checking that $\\Sigma_T\\succeq0$ makes every $N(\\mathbf m_T,\\Sigma_T)$ a legitimate probability law, after which Kolmogorov's extension theorem applies. This is exactly the mathematical basis of Gaussian process regression: choosing the kernel $K$ chooses the whole model.\n\nGaussianity also interacts well with stationarity: since the law depends on $(m,K)$ only, for a Gaussian process **weak and strict stationarity are equivalent**. Finally, for jointly normal variables zero correlation means independence, so Gaussian white noise consists of mutually independent variables — an upgrade that fails for general white noise.",
+    "formulas": [
+      {
+        "latex": "(X_{t_1},\\dots,X_{t_n})^{\\mathsf T}\\sim\\mathcal N\\big(\\mathbf m_T,\\ \\Sigma_T\\big),\\qquad \\mathbf m_T=\\big(m(t_i)\\big)_{i\\le n},\\quad \\Sigma_T=\\big(K(t_i,t_j)\\big)_{i,j\\le n}",
+        "note": "定义式：任意有限维向量都是多元正态，其均值与协方差恰由 $m$ 与 $K$ 给出。",
+        "noteEn": "The definition at work: every finite-dimensional vector is multivariate normal with mean and covariance supplied by m and K."
+      },
+      {
+        "latex": "\\sum_{i=1}^{n}a_iX_{t_i}\\ \\text{服从一元正态}\\ \\ (\\forall\\,n,\\ a_i,\\ t_i)\\iff\\{X_t\\}\\ \\text{是高斯过程}",
+        "note": "等价刻画：高斯性等价于任意有限线性组合的正态性，也说明这类过程关于线性运算封闭。",
+        "noteEn": "Equivalent characterisation: Gaussianity is equivalent to normality of every finite linear combination, which also displays closure under linear operations."
+      },
+      {
+        "latex": "K(s,t)=K(t,s),\\qquad \\sum_{i,j=1}^{n}a_ia_jK(t_i,t_j)=\\operatorname{Var}\\Big(\\sum_{i=1}^{n}a_iX_{t_i}\\Big)\\ge0",
+        "note": "对称与半正定是协方差函数的充要条件；也解释了为什么 $K(s,t)=1-|s-t|$ 这类看似合理的函数未必能当协方差函数。",
+        "noteEn": "Symmetry and positive semi-definiteness are exactly the conditions for a covariance function; they also explain why natural-looking functions such as K(s,t) = 1 − |s−t| may fail."
+      },
+      {
+        "latex": "K(s,t)=\\sigma^2\\exp\\!\\Big(-\\frac{(s-t)^2}{2\\ell^2}\\Big)\\quad(\\text{平方指数核}),\\qquad K(s,t)=\\sigma^2e^{-\\theta|s-t|}\\quad(\\text{OU/指数核})",
+        "note": "两个最常用的核：前者轨道极其光滑（均方意义下无穷次可微），后者均方连续但不可微，轨道连续却处处不可微。",
+        "noteEn": "Two standard kernels: the squared-exponential kernel gives extremely smooth paths, while the exponential (OU) kernel is mean-square continuous but not differentiable, with continuous yet nowhere differentiable paths."
+      },
+      {
+        "latex": "X(t_*)\\mid\\mathbf X\\sim\\mathcal N\\Big(m_*+\\mathbf k_*^{\\mathsf T}\\Sigma^{-1}(\\mathbf X-\\mathbf m),\\ K_{**}-\\mathbf k_*^{\\mathsf T}\\Sigma^{-1}\\mathbf k_*\\Big)",
+        "note": "给定观测后的条件分布，即高斯过程回归的预测公式：均值作线性修正，方差被观测降低。",
+        "noteEn": "The conditional law given observations — the prediction formula of Gaussian process regression: the mean is updated linearly and the variance is reduced by the data."
+      }
+    ],
+    "properties": [
+      "**一维边缘正态不是高斯过程**：定义要求任意有限维联合正态（等价于任意有限线性组合正态）。反例：取 $Y\\sim N(0,1)$ 与独立的 $\\varepsilon=\\pm1$（各 $\\frac12$），令 $X_1=Y$、$X_2=\\varepsilon Y$，则每一维都是 $N(0,1)$、甚至不相关，但 $X_1+X_2=Y(1+\\varepsilon)$ 以概率 $\\frac12$ 等于 0（有原子），不是正态，故 $(X_1,X_2)$ 非二元正态。",
+      "有限维分布完全由 $(m,K)$ 决定；反过来任意 $m$ 与任意对称半正定的 $K$ 由扩张定理唯一确定一个高斯过程。「半正定」不能省：$K(s,t)=1-|s-t|$ 不是半正定的——取时刻 $0,1,2.5$ 与 $a=(1,0,1)$ 得 $2+2(1-2.5)=-1<0$。",
+      "线性运算封闭，且「不相关即独立」：独立高斯过程之和仍高斯（均值、协方差相加），有限线性组合、均方极限、均方积分与均方导数仍是高斯；联合正态下协方差为 0 就等价于独立，于是高斯白噪声的「不相关」自动升级为「独立」。",
+      "**对高斯过程，宽平稳等价于严平稳**：宽平稳给出 $m(t)\\equiv\\mu$ 与 $K(s,t)=R(t-s)$，于是每个有限维分布的均值向量与协方差矩阵在时间平移下不变，严平稳成立。一般过程只有「二阶矩有限的严平稳 $\\Rightarrow$ 宽平稳」这一个方向成立。",
+      "均方正则性由 $K$ 决定：$K$ 在 $(t,t)$ 处连续则过程在该点均方连续；$K$ 的二阶混合偏导存在且连续则均方可微。OU 核在 $s=t$ 处是尖的，故 OU 过程均方连续但不可微，轨道连续却处处不可微——核的光滑程度直接决定轨道的粗糙程度。"
+    ],
+    "propertiesEn": [
+      "**Normal marginals do not make a Gaussian process**: the definition demands joint normality of every finite-dimensional vector (equivalently, normality of every finite linear combination). Counterexample: take Y ~ N(0,1) and an independent sign ε = ±1 with probability 1/2 each, and set X_1 = Y, X_2 = εY. Both marginals are N(0,1) and they are even uncorrelated, yet X_1 + X_2 = Y(1+ε) equals 0 with probability 1/2, so it has an atom and is not normal; hence (X_1, X_2) is not bivariate normal.",
+      "The finite-dimensional distributions are determined by (m, K); conversely any m and any symmetric positive semi-definite K determine a unique Gaussian process by the extension theorem. Positive semi-definiteness is essential: K(s,t) = 1 − |s−t| fails it — times 0, 1, 2.5 with a = (1, 0, 1) give 2 + 2(1 − 2.5) = −1 < 0.",
+      "Closure under linear operations, and uncorrelated means independent: sums of independent Gaussian processes are Gaussian (means and covariances add), and finite linear combinations, mean-square limits, integrals and derivatives remain Gaussian; for jointly normal variables zero covariance is equivalent to independence, so Gaussian white noise is automatically independent.",
+      "**For Gaussian processes weak and strict stationarity are equivalent**: weak stationarity gives m(t) ≡ μ and K(s,t) = R(t−s), so the mean vector and covariance matrix of every finite-dimensional law are shift-invariant and strict stationarity follows. For general processes only the implication strict + finite second moments ⇒ weak holds.",
+      "Mean-square regularity is read off K: continuity of K at (t,t) gives mean-square continuity, and existence and continuity of the mixed second derivative gives mean-square differentiability. The OU kernel has a corner at s = t, so the OU process is mean-square continuous but not differentiable, with continuous yet nowhere differentiable paths — smoothness of the kernel controls roughness of the paths."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.2",
+          "color": "#ffd166",
+          "label": "均值函数 m(t) = 0.2"
+        },
+        {
+          "expr": "0.2+0.9*exp(-0.7*x)*sin(3.0*x+0.4)",
+          "color": "#4cc9f0",
+          "label": "样本轨道 1（示意）"
+        },
+        {
+          "expr": "0.2+0.8*exp(-0.5*x)*sin(2.2*x+2.0)",
+          "color": "#ff6b9d",
+          "label": "样本轨道 2（示意）"
+        },
+        {
+          "expr": "0.2-1.0*exp(-0.8*x)*sin(3.6*x+1.5)",
+          "color": "#06d6a0",
+          "label": "样本轨道 3（示意）"
+        }
+      ],
+      "xRange": [
+        0,
+        4
+      ],
+      "yRange": [
+        -1.3,
+        1.5
+      ],
+      "title": "高斯过程示意：均值线 m(t)=0.2 与三条样本轨道（由同一衰减振荡核生成；正弦乘指数衰减近似，非真随机轨道）"
+    },
+    "examples": [
+      {
+        "problem": "取 $Y\\sim N(0,1)$ 与独立的随机符号 $\\varepsilon$（$P(\\varepsilon=1)=P(\\varepsilon=-1)=\\frac12$），定义 $X_1=Y$、$X_2=\\varepsilon Y$。验证 $X_1,X_2$ 各自的分布都是 $N(0,1)$、且不相关，但 $(X_1,X_2)$ 不是二元正态——因此「每个 $X_t$ 正态」不能推出高斯过程。",
+        "solution": "边缘分布：由 $Y$ 关于原点对称，$\\varepsilon Y$ 与 $Y$ 同分布，故 $X_2\\sim N(0,1)$，$X_1\\sim N(0,1)$。\n\n相关性：$$\\operatorname{Cov}(X_1,X_2)=\\mathbb E[\\varepsilon Y^2]=\\mathbb E\\varepsilon\\cdot\\mathbb EY^2=0,$$ 而 $\\operatorname{Var}X_1=\\operatorname{Var}X_2=1$。\n\n联合分布：$X_1+X_2=Y(1+\\varepsilon)$。当 $\\varepsilon=-1$ 时它恒为 0，故 $P(X_1+X_2=0)=\\frac12>0$：和有一个原子，不可能服从正态分布。若 $(X_1,X_2)$ 是二元正态，则任意线性组合都正态，矛盾。\n\n附注：$X_2^2=X_1^2$ 恒成立，所以二者远不独立。这个例子同时说明「不相关 $\\Rightarrow$ 独立」只在联合正态时可逆。"
+      },
+      {
+        "problem": "验证 $K(s,t)=\\min(s,t)$（$s,t\\ge0$）是对称半正定的，从而可以作为协方差函数，并说明它给出的高斯过程的均值与方差。",
+        "solution": "对称性显然。对 $0\\le t_1<t_2<\\cdots<t_n$（记 $t_0=0$）与任意实数 $a_i$，利用恒等式 $$\\min(t_i,t_j)=\\sum_{k=1}^{n}(t_k-t_{k-1})\\,\\mathbf 1_{\\{i\\ge k\\}}\\mathbf 1_{\\{j\\ge k\\}}$$ 得到 $$\\sum_{i,j=1}^{n}a_ia_j\\min(t_i,t_j)=\\sum_{k=1}^{n}(t_k-t_{k-1})\\Big(\\sum_{i=k}^{n}a_i\\Big)^2\\ge0.$$ 所以 $K$ 半正定。取 $m\\equiv0$，由扩张定理得到的高斯过程满足 $\\operatorname{Cov}(X_s,X_t)=\\min(s,t)$、$\\operatorname{Var}X_t=t$——这正是标准布朗运动（作为高斯过程）的协方差结构；要得到连续轨道还需补上增量矩条件与连续性准则。\n\n顺带得到 $K$ 的两个直观性质：$K$ 在 $s=t$ 处有角点，故均方连续但不对 $t$ 可微；$K(s,t)$ 只依赖 $\\min(s,t)$ 也说明了「方差随时间增长而非平移不变」，故布朗运动不是（宽）平稳过程。"
+      }
+    ],
+    "tags": [
+      "多元正态",
+      "均值函数",
+      "协方差函数",
+      "半正定核",
+      "高斯过程回归"
+    ],
+    "links": [
+      "stochastic-process",
+      "finite-dimensional-distributions",
+      "brownian-motion",
+      "white-noise-spectral",
+      "stationarity",
+      "normal-distribution",
+      "random-vector"
+    ]
+  },
+  {
+    "id": "stationarity",
+    "title": "平稳过程与宽平稳",
+    "titleEn": "Stationary Processes",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "严平稳要求有限维联合分布对时间平移不变；宽平稳只要求均值为常数、自协方差只依赖滞后。二阶矩有限的严平稳必宽平稳，反之不然；对高斯过程两者等价。",
+    "summaryEn": "Strict stationarity demands that every finite-dimensional law be invariant under time shifts, while weak stationarity only requires a constant mean and an autocovariance depending on the lag alone; finite second moments make strict imply weak, the converse fails, and for Gaussian processes the two coincide.",
+    "definition": "**严平稳（strictly stationary）**：概率规律不随时间平移而改变。精确地说，对任意 $n\\ge1$、任意 $t_1<\\cdots<t_n$ 与任意平移量 $h$（要求 $t_i+h\\in T$），有 $$(X_{t_1+h},\\dots,X_{t_n+h})\\overset{d}{=}(X_{t_1},\\dots,X_{t_n}),$$ 即有限维分布族在时间平移下不变。这纯粹是分布层面的要求：严平稳既不要求也不保证矩存在——独立同分布的柯西序列是严平稳的，但它的均值不存在。\n\n**宽平稳（weakly stationary，又叫弱平稳、二阶平稳）**：只约束前两阶矩，要求 (i) $\\mathbb EX_t=\\mu$ 与 $t$ 无关；(ii) $\\operatorname{Cov}(X_s,X_t)$ 只依赖时间差 $t-s$，记作 $R(t-s)$，并假定 $\\operatorname{Var}X_t=R(0)<\\infty$。$R(k)$ 叫自协方差函数，$\\rho(k)=R(k)/R(0)$ 叫自相关函数。工程与统计里默认的「平稳」通常指宽平稳，因为谱分析、ARMA 建模、谱估计等几乎所有二阶矩方法都只需要这两条。\n\n两者的关系是本知识点最容易记反的地方。**二阶矩有限的严平稳一定是宽平稳**：一维分布平移不变给出均值为常数，二维联合分布平移不变给出协方差只依赖时间差。**反之不成立**，宽平稳只把一、二阶矩钉死，完全不控制高阶结构，也不控制边缘分布的形状（反例见性质与例题）。**但对高斯过程两者等价**：高斯过程的有限维分布完全由 $(m,K)$ 决定，宽平稳时 $m$ 恒为常数、$K(s,t)=R(t-s)$，于是每个有限维分布的均值向量与协方差矩阵在平移下不变，严平稳成立。\n\n自协方差函数 $R(k)$ 有三条基本性质，合起来是「宽平稳序列的自协方差」的完整刻画：$R$ 是**偶函数**（$R(-k)=R(k)$，因为 $X$ 与 $X$ 自身的相关没有方向）；有界（$|R(k)|\\le R(0)$，由柯西–施瓦茨不等式）；**半正定**（$\\sum_{i,j}a_ia_jR(k_i-k_j)\\ge0$，它等于 $\\operatorname{Var}\\big(\\sum_ia_iX_{k_i}\\big)$）。反过来，任给一个满足这三条的序列，都存在（由 Herglotz 定理得到谱测度，再用扩张定理构造）零均值宽平稳序列以它为自协方差——所以「先设计自协方差函数、再造过程」是完全合法的建模路线。",
+    "definitionEn": "**Strict stationarity** means that the probabilistic law does not change under time shifts: for every $n\\ge1$, all times $t_1<\\cdots<t_n$ and every shift $h$ (with $t_i+h\\in T$), $$(X_{t_1+h},\\dots,X_{t_n+h})\\overset{d}{=}(X_{t_1},\\dots,X_{t_n}),$$ i.e. the family of finite-dimensional distributions is shift-invariant. This is purely a statement about laws; moments need not exist — an iid Cauchy sequence is strictly stationary but has no mean.\n\n**Weak stationarity** (also called second-order stationarity) constrains only the first two moments: $\\mathbb EX_t=\\mu$ independent of $t$, and $\\operatorname{Cov}(X_s,X_t)$ depending on the time difference $t-s$ alone, written $R(t-s)$, with $\\operatorname{Var}X_t=R(0)<\\infty$. The function $R(k)$ is the autocovariance and $\\rho(k)=R(k)/R(0)$ the autocorrelation. In practice and in engineering, stationarity usually means weak stationarity, since spectral analysis, ARMA modelling and spectral estimation only need these two conditions.\n\nThe relation between them is the point most often misremembered. **Strict stationarity plus finite second moments implies weak stationarity**: shift-invariance of one-dimensional laws makes the mean constant, and shift-invariance of two-dimensional laws makes the covariance depend only on the lag. **The converse fails**: weak stationarity pins down only the first two moments and controls neither higher-order structure nor the shape of the marginals (see the counterexample below). **For Gaussian processes, however, the two are equivalent**: their finite-dimensional laws are determined by $(m,K)$, weak stationarity forces $m$ constant and $K(s,t)=R(t-s)$, so every mean vector and covariance matrix is shift-invariant.\n\nThe autocovariance $R(k)$ has three basic properties that together characterise the autocovariances of weakly stationary sequences: it is **even**, $R(-k)=R(k)$; it is bounded, $|R(k)|\\le R(0)$ by Cauchy–Schwarz; and it is **positive semi-definite**, $\\sum_{i,j}a_ia_jR(k_i-k_j)\\ge0$, being the variance of $\\sum_ia_iX_{k_i}$. Conversely, any sequence with these three properties is the autocovariance of some zero-mean weakly stationary sequence (use Herglotz's theorem to get a spectral measure and then the extension theorem). Designing the autocovariance first and building the process afterwards is therefore a legitimate modelling route.",
+    "formulas": [
+      {
+        "latex": "(X_{t_1+h},\\dots,X_{t_n+h})\\overset{d}{=}(X_{t_1},\\dots,X_{t_n}),\\qquad \\forall\\,n,\\ t_1<\\cdots<t_n,\\ h",
+        "note": "严平稳：有限维联合分布对时间平移不变。注意这比「每个 $X_t$ 同分布」强得多。",
+        "noteEn": "Strict stationarity: every finite-dimensional joint law is invariant under time shifts — much stronger than all marginals being equal."
+      },
+      {
+        "latex": "\\mathbb EX_t=\\mu,\\qquad \\operatorname{Cov}(X_s,X_t)=R(t-s),\\qquad \\operatorname{Var}X_t=R(0)<\\infty",
+        "note": "宽平稳：均值常数、自协方差只依赖滞后、二阶矩有限。这三条谱方法的全部前提。",
+        "noteEn": "Weak stationarity: constant mean, autocovariance depending only on the lag, finite second moments — the sole prerequisites of spectral methods."
+      },
+      {
+        "latex": "R(-k)=R(k),\\qquad |R(k)|\\le R(0),\\qquad \\rho(k)=\\frac{R(k)}{R(0)}\\in[-1,1]",
+        "note": "自协方差是偶函数且被 $R(0)$ 界住（柯西–施瓦茨：任意时刻与自身的相关最大）；归一化后得到自相关。",
+        "noteEn": "The autocovariance is even and dominated by R(0) by Cauchy–Schwarz; normalising gives the autocorrelation."
+      },
+      {
+        "latex": "\\sum_{i,j=1}^{n}a_ia_jR(k_i-k_j)=\\operatorname{Var}\\Big(\\sum_{i=1}^{n}a_iX_{k_i}\\Big)\\ge0",
+        "note": "半正定（非负定）性：它是「$R$ 真的来自某个平稳序列」的充要条件，也是 Herglotz 定理的入口。",
+        "noteEn": "Positive semi-definiteness: this is exactly what makes R come from a stationary sequence, and it is the entry point to Herglotz's theorem."
+      },
+      {
+        "latex": "\\text{严平稳}+\\mathbb EX_1^2<\\infty\\ \\Longrightarrow\\ \\text{宽平稳};\\qquad \\text{高斯过程：宽平稳}\\iff\\text{严平稳}",
+        "note": "包含关系只有这一个方向；高斯过程的特例是可以反向的唯一常见情形，务必区分清楚。",
+        "noteEn": "The implication runs in one direction only; Gaussian processes are the standard case where it reverses, and this exception must be stated explicitly."
+      }
+    ],
+    "properties": [
+      "严平稳的含义是「有限维分布平移不变」，不是「一维分布不随时间变」——后者只是必要条件。例如令 $X_{2k-1}=X_{2k}=\\varepsilon_k$（$\\varepsilon_k$ 独立同分布 $N(0,1)$），每个 $X_t$ 都是 $N(0,1)$，但 $(X_1,X_2)$ 完全相关而 $(X_2,X_3)$ 相互独立，故不是严平稳。",
+      "**包含关系**：严平稳 + 二阶矩有限 $\\Rightarrow$ 宽平稳；反之不成立。反例：取 $X_t$ 相互独立，奇数时刻服从 $N(0,1)$，偶数时刻服从同一「均值 0、方差 1」的三点分布：则 $\\mathbb EX_t\\equiv0$、$R(0)=1$、$R(k)=0\\ (k\\ne0)$，宽平稳成立；但 $(X_1,X_2)$ 与 $(X_2,X_3)$ 的联合分布不同，故非严平稳。",
+      "**高斯特例**：对高斯过程，宽平稳 $\\iff$ 严平稳。因为高斯过程的有限维分布由 $(m,K)$ 完全决定，宽平稳时 $m$ 是常数、$K(s,t)=R(t-s)$，任意有限维分布的参数都不随时间平移而变。",
+      "自协方差 $R(k)$ 的三条性质：偶函数 $R(-k)=R(k)$（相关没有方向）、$|R(k)|\\le R(0)$（柯西–施瓦茨，含 $R(0)\\ge|R(k)|$）、半正定 $\\sum_{i,j}a_ia_jR(k_i-k_j)\\ge0$。反过来满足这三条的序列必可实现为某宽平稳序列的自协方差（Herglotz 定理 + 扩张定理）。",
+      "宽平稳是谱方法与二阶统计的入场券：只需 $\\mu$ 与 $R$ 就能刻画二阶结构，$\\rho(k)$ 的衰减速度表示「记忆长度」——白噪声 $\\rho(k)=0$ 无记忆，AR(1) 的 $\\rho(k)=\\varphi^{|k|}$ 指数衰减，含不衰减周期成分时 $\\rho$ 不趋于 0，这正是下一节点遍历性讨论的起点。"
+    ],
+    "propertiesEn": [
+      "Strict stationarity means shift-invariance of the finite-dimensional laws, not merely that all marginals are the same — the latter is necessary only. Example: let X_{2k−1} = X_{2k} = ε_k with iid N(0,1) ε_k; every marginal is N(0,1), yet (X_1,X_2) is perfectly correlated while (X_2,X_3) is independent, so the sequence is not strictly stationary.",
+      "**The inclusion**: strict + finite second moments ⇒ weak, and not conversely. Counterexample: take the X_t independent, N(0,1) at odd times and, at even times, a three-point law with mean 0 and variance 1. Then E X_t ≡ 0, R(0) = 1 and R(k) = 0 for k ≠ 0, so the sequence is weakly stationary; but the joint laws of (X_1,X_2) and (X_2,X_3) differ, so it is not strictly stationary.",
+      "**The Gaussian case**: for a Gaussian process weak ⟺ strict stationarity, because the laws are determined by (m,K) and weak stationarity makes m constant and K(s,t) = R(t−s), leaving every finite-dimensional parameter set unchanged under shifts.",
+      "The autocovariance satisfies R(−k) = R(k) (correlation has no direction), |R(k)| ≤ R(0) by Cauchy–Schwarz, and positive semi-definiteness Σa_i a_j R(k_i−k_j) ≥ 0. Conversely any sequence with these properties is realised as the autocovariance of a weakly stationary sequence (Herglotz plus the extension theorem).",
+      "Weak stationarity is the entry ticket to spectral and second-order methods: μ and R capture the whole second-order structure, and the decay rate of ρ(k) measures the memory — white noise has ρ(k) = 0, AR(1) decays as φ^|k|, and a periodic component that never decays makes the Cesàro condition — and with it ergodicity, the topic of the next node — a genuinely delicate question."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1",
+          "color": "#ffd166",
+          "label": "均值 μ = 1（常数）"
+        },
+        {
+          "expr": "1+0.7*sin(0.9*x+0.4)+0.4*sin(2.3*x+1.7)",
+          "color": "#4cc9f0",
+          "label": "强相关轨道示意（R(k) 衰减慢）"
+        },
+        {
+          "expr": "1+0.6*sin(3.7*x+0.9)+0.42*sin(8.1*x+2.2)",
+          "color": "#ff6b9d",
+          "label": "弱相关轨道示意（R(k) 衰减快）"
+        }
+      ],
+      "xRange": [
+        0,
+        16
+      ],
+      "yRange": [
+        -0.3,
+        2.2
+      ],
+      "title": "宽平稳序列示意：均值恒为 μ=1，两条轨道的差别只在相关性强弱（正弦和近似，非真随机轨道）"
+    },
+    "examples": [
+      {
+        "problem": "设 $U,V$ 不相关，$\\mathbb EU=\\mathbb EV=0$，$\\operatorname{Var}U=\\operatorname{Var}V=\\sigma^2>0$，$\\lambda>0$ 固定。令 $X_t=a+U\\cos\\lambda t+V\\sin\\lambda t$。求均值函数与自协方差函数，并判断它是否宽平稳。",
+        "solution": "均值：$\\mathbb EX_t=a+\\cos\\lambda t\\,\\mathbb EU+\\sin\\lambda t\\,\\mathbb EV=a$，与 $t$ 无关。\n\n协方差：由 $U,V$ 不相关且均值为 0，交叉项消失，$$\\operatorname{Cov}(X_s,X_t)=\\sigma^2\\cos\\lambda s\\cos\\lambda t+\\sigma^2\\sin\\lambda s\\sin\\lambda t=\\sigma^2\\cos\\lambda(t-s).$$\n\n所以 $R(k)=\\sigma^2\\cos\\lambda k$ 只依赖滞后 $k$，方差 $R(0)=\\sigma^2<\\infty$，该序列是**宽平稳**的。注意 $R(k)=\\sigma^2\\cos\\lambda k$ 是有界振荡、不趋于 0——表示过程含有永不衰减的周期成分。此时 Cesàro 平均 $\\frac1n\\sum_{k=1}^{n}R(k)$ 仍然趋于 0（除非 $\\lambda$ 是 $2\\pi$ 的整数倍，那种情形 $X_t$ 实际上是含随机常数项的退化过程），所以时间平均照样均方收敛到 $a$；但 $R(k)\\not\\to0$ 说明「相关不衰减」，遍历性的讨论必须改为检查 Cesàro 条件，这正是下一个节点遍历定理的内容。\n\n最后核验半正定性：$\\sum_{i,j}a_ia_j\\cos\\lambda(k_i-k_j)=\\big|\\sum_j a_je^{\\mathrm i\\lambda k_j}\\big|^2\\ge0$，所以这确实可以当自协方差函数。"
+      },
+      {
+        "problem": "设 $X_1,X_2,\\dots$ 独立同分布，服从标准柯西分布（密度 $\\frac{1}{\\pi(1+x^2)}$）。证明该序列是严平稳但不是宽平稳。",
+        "solution": "严平稳：由于各 $X_t$ 相互独立且同分布，对任意 $n$ 与任意 $h$，两组随机向量 $(X_{t_1},\\dots,X_{t_n})$ 与 $(X_{t_1+h},\\dots,X_{t_n+h})$ 的联合分布都是同一个乘积测度 $\\nu^{\\otimes n}$（$\\nu$ 为柯西分布），故相同。因此序列严平稳。\n\n非宽平稳：柯西分布的尾部满足 $\\mathbb E|X_1|=\\frac{2}{\\pi}\\int_0^{\\infty}\\frac{x}{1+x^2}\\,\\mathrm dx=\\infty$，均值不存在（同理二阶矩也不存在）。宽平稳要求 $\\mathbb EX_t=\\mu$ 为有限常数并定义协方差，这些前提全部不成立。\n\n结论：严平稳是纯分布概念，比宽平稳「条件更普适」，但也因此更不好用——没有二阶矩就没有协方差、谱密度与均方收敛可谈。要得到宽平稳，必须补上 $\\mathbb EX_1^2<\\infty$。"
+      }
+    ],
+    "tags": [
+      "严平稳",
+      "宽平稳",
+      "自协方差函数",
+      "半正定",
+      "柯西序列"
+    ],
+    "links": [
+      "stochastic-process",
+      "white-noise-spectral",
+      "ergodic-theory",
+      "gaussian-process",
+      "covariance-correlation",
+      "stationary-distribution",
+      "law-of-large-numbers"
+    ]
+  },
+  {
+    "id": "white-noise-spectral",
+    "title": "白噪声与谱密度",
+    "titleEn": "White Noise and Spectral Density",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "白噪声是零均值、同方差、不同时刻不相关的序列，谱密度为常数；宽平稳序列的自协方差经傅里叶变换得到谱密度，一般情形由 Wiener–辛钦定理给出谱测度。",
+    "summaryEn": "White noise is a zero-mean, constant-variance sequence whose terms are uncorrelated across time, with a constant spectral density; the spectral density of a weakly stationary sequence is the Fourier transform of its autocovariance, the general case being the Wiener–Khinchin theorem.",
+    "definition": "**白噪声（white noise）**是最「没有结构」的平稳序列：$\\{\\varepsilon_t\\}$ 满足 $$\\mathbb E\\varepsilon_t=0,\\qquad \\operatorname{Var}\\varepsilon_t=\\sigma^2\\ (\\text{与}\\ t\\ \\text{无关}),\\qquad \\operatorname{Cov}(\\varepsilon_s,\\varepsilon_t)=0\\quad(s\\ne t).$$ 名字取自白光——能量在所有频率上均匀分布（谱密度是常数，见下）。请注意定义里只有一、二阶矩条件，**不要求各时刻独立**。若各时刻还相互独立（通常再要求同分布），才叫独立白噪声；而「不相关 $\\not\\Rightarrow$ 独立」这个一般事实在白噪声里天天出现（例题给了一个白噪声但相邻时刻不独立的构造）。唯一的例外是**高斯白噪声**：各时刻 iid $N(0,\\sigma^2)$，由于联合正态下不相关等价于独立，「不相关」自动升级为「独立」。\n\n**谱密度**：宽平稳序列的二阶结构可以用自协方差序列 $R(k)$ 描述（时域），也可以用它的傅里叶变换描述（频域）。若自协方差**绝对可和**，$\\sum_{k\\in\\mathbb Z}|R(k)|<\\infty$，则 $$f(\\lambda)=\\frac{1}{2\\pi}\\sum_{k\\in\\mathbb Z}R(k)e^{-\\mathrm ik\\lambda},\\qquad \\lambda\\in[-\\pi,\\pi]$$ 称为**谱密度**（功率谱密度）。此时 $f$ 连续、非负、偶函数，并且可以反演回去：$$R(k)=\\int_{-\\pi}^{\\pi}e^{\\mathrm ik\\lambda}f(\\lambda)\\,\\mathrm d\\lambda,\\qquad R(0)=\\operatorname{Var}X_t=\\int_{-\\pi}^{\\pi}f(\\lambda)\\,\\mathrm d\\lambda.$$ 直观上 $f(\\lambda)\\,\\mathrm d\\lambda$ 是频率落在 $[\\lambda,\\lambda+\\mathrm d\\lambda]$ 的方差贡献：$\\lambda=0$ 对应最慢的漂移，$\\lambda=\\pi$ 对应逐项正负交替的最快振荡。\n\n一般情形是 **Wiener–辛钦定理**：宽平稳序列的自协方差必是某个有界非负测度 $F$（**谱测度**）的傅里叶系数，$$R(k)=\\int_{-\\pi}^{\\pi}e^{\\mathrm ik\\lambda}\\,\\mathrm dF(\\lambda).$$ 当 $F$ 绝对连续时 $\\mathrm dF=f\\,\\mathrm d\\lambda$，这就是谱密度；当 $F$ 有原子时对应离散谱线——例如 $X_t=\\cos(\\lambda_0t+\\Theta)$ 的谱测度只在 $\\pm\\lambda_0$ 处有原子。所以「绝对可和」只是保证谱密度存在的额外便利条件，而不是平稳性的要求；绝对可和性丢失时仍有谱测度可谈。\n\n谱密度的用途是把「时域的相关结构」翻译成「频域的方差分布」，让线性滤波变成简单的乘法：若 $Y_t=\\sum_j\\psi_j\\varepsilon_{t-j}$ 是对白噪声的线性滤波，则 $f_Y(\\lambda)=f_\\varepsilon(\\lambda)\\big|\\sum_j\\psi_je^{-\\mathrm ij\\lambda}\\big|^2$，滤波器的频率响应被直接「印」在输出的谱上。白噪声的常数谱使任何滤波器的影响都能一眼读出——这正是谱估计、白噪声检验与最优滤波的出发点。",
+    "definitionEn": "**White noise** is the least structured stationary sequence: $\\{\\varepsilon_t\\}$ satisfies $$\\mathbb E\\varepsilon_t=0,\\qquad \\operatorname{Var}\\varepsilon_t=\\sigma^2\\ \\text{(independently of }t),\\qquad \\operatorname{Cov}(\\varepsilon_s,\\varepsilon_t)=0\\quad(s\\ne t).$$ The name comes from white light: the power is spread evenly over all frequencies, so its spectral density is constant. Note that only first and second moments are required — **independence of the terms is not demanded**. If the terms are moreover independent (usually also identically distributed), the sequence is called independent white noise; the general principle that uncorrelated does not imply independent is visible in white noise every day (an example below constructs white noise whose neighbouring terms are dependent). The exception is **Gaussian white noise**, where the terms are iid $N(0,\\sigma^2)$: for jointly normal variables uncorrelated means independent, so the upgrade is automatic.\n\nThe **spectral density** describes the same second-order structure in the frequency domain. If the autocovariance is absolutely summable, $\\sum_k|R(k)|<\\infty$, then $$f(\\lambda)=\\frac{1}{2\\pi}\\sum_{k\\in\\mathbb Z}R(k)e^{-\\mathrm ik\\lambda},\\qquad \\lambda\\in[-\\pi,\\pi]$$ is the spectral density; it is continuous, non-negative and even, and it inverts back: $R(k)=\\int_{-\\pi}^{\\pi}e^{\\mathrm ik\\lambda}f(\\lambda)\\,\\mathrm d\\lambda$, so $R(0)=\\operatorname{Var}X_t=\\int_{-\\pi}^{\\pi}f(\\lambda)\\,\\mathrm d\\lambda$. Intuitively $f(\\lambda)\\,\\mathrm d\\lambda$ is the share of the variance carried by frequencies near $\\lambda$, with $\\lambda=0$ the slowest fluctuations and $\\lambda=\\pi$ the fastest alternation.\n\nIn general the **Wiener–Khinchin theorem** states that the autocovariance of a weakly stationary sequence is always the Fourier coefficient of some bounded non-negative measure $F$, the **spectral measure**: $R(k)=\\int_{-\\pi}^{\\pi}e^{\\mathrm ik\\lambda}\\,\\mathrm dF(\\lambda)$. If $F$ is absolutely continuous then $\\mathrm dF=f\\,\\mathrm d\\lambda$ and the spectral density exists; atoms of $F$ correspond to discrete spectral lines, as for $X_t=\\cos(\\lambda_0t+\\Theta)$, whose spectral measure sits only at $\\pm\\lambda_0$. Absolute summability is thus a convenient extra hypothesis, not a requirement for stationarity.\n\nThe point of the spectral density is to turn correlation structure into a distribution of variance over frequencies, which makes linear filtering a simple multiplication: for $Y_t=\\sum_j\\psi_j\\varepsilon_{t-j}$ driven by white noise, $f_Y(\\lambda)=f_\\varepsilon(\\lambda)\\big|\\sum_j\\psi_je^{-\\mathrm ij\\lambda}\\big|^2$. The frequency response of the filter is imprinted on the output spectrum, and the flat spectrum of white noise makes this directly readable — the starting point of spectral estimation, white-noise testing and optimal filtering.",
+    "formulas": [
+      {
+        "latex": "\\mathbb E\\varepsilon_t=0,\\qquad \\operatorname{Var}\\varepsilon_t=\\sigma^2,\\qquad \\operatorname{Cov}(\\varepsilon_s,\\varepsilon_t)=\\sigma^2\\delta_{st}",
+        "note": "白噪声的定义：零均值、同方差、不同时刻不相关。$\\delta_{st}$ 表示 $s\\ne t$ 时为 0。注意这里没有要求独立。",
+        "noteEn": "Definition of white noise: zero mean, constant variance, uncorrelated at distinct times. Independence is not required here."
+      },
+      {
+        "latex": "f(\\lambda)=\\frac{1}{2\\pi}\\sum_{k\\in\\mathbb Z}R(k)e^{-\\mathrm ik\\lambda},\\qquad \\lambda\\in[-\\pi,\\pi]",
+        "note": "谱密度的定义：自协方差序列的傅里叶变换。存在的前提是 $\\sum_k|R(k)|<\\infty$（绝对可和），此时 $f$ 连续。",
+        "noteEn": "Definition of the spectral density: the Fourier transform of the autocovariance sequence; it exists and is continuous when Σ|R(k)| < ∞."
+      },
+      {
+        "latex": "R(k)=\\int_{-\\pi}^{\\pi}e^{\\mathrm ik\\lambda}f(\\lambda)\\,\\mathrm d\\lambda,\\qquad R(0)=\\operatorname{Var}X_t=\\int_{-\\pi}^{\\pi}f(\\lambda)\\,\\mathrm d\\lambda",
+        "note": "傅里叶反演：谱密度完全等价于自协方差；特别地谱密度下的总面积就是方差，这是「能量分配」说法的依据。",
+        "noteEn": "Fourier inversion: the spectral density is equivalent to the autocovariance, and the total area under it is the variance — the basis of the energy-allocation reading."
+      },
+      {
+        "latex": "R(k)=\\int_{-\\pi}^{\\pi}e^{\\mathrm ik\\lambda}\\,\\mathrm dF(\\lambda)\\qquad(F\\ \\text{有界非负测度})",
+        "note": "Wiener–辛钦定理：不需要绝对可和，一般宽平稳序列也有谱测度 $F$；$F$ 绝对连续时 $\\mathrm dF=f\\,\\mathrm d\\lambda$，$F$ 有原子时对应离散谱线。",
+        "noteEn": "Wiener–Khinchin: without absolute summability a weakly stationary sequence still has a spectral measure F; absolute continuity of F means a density, atoms mean discrete spectral lines."
+      },
+      {
+        "latex": "f_\\varepsilon(\\lambda)=\\frac{\\sigma^2}{2\\pi},\\qquad f_Y(\\lambda)=f_\\varepsilon(\\lambda)\\Big|\\sum_j\\psi_je^{-\\mathrm ij\\lambda}\\Big|^2\\quad(Y_t=\\sum_j\\psi_j\\varepsilon_{t-j})",
+        "note": "白噪声的谱密度是常数（这就是「白」），而线性滤波的谱密度等于输入谱乘以传递函数模的平方——频域的乘法法则。",
+        "noteEn": "White noise has a constant spectral density (hence white), and linear filtering multiplies the input spectrum by the squared modulus of the transfer function."
+      }
+    ],
+    "expression": {
+      "text": "f(λ) = σ²/(2π)  为白噪声的谱密度（λ ∈ [−π,π]）",
+      "symbol": "f(λ)",
+      "note": "常数谱密度 ⇔ 白噪声；非平坦的谱说明某些频率的方差贡献更大。",
+      "noteEn": "A constant spectral density is equivalent to white noise; a non-flat spectrum means some frequencies carry more variance."
+    },
+    "properties": [
+      "**白噪声只要求零均值、同方差、不同时刻不相关，不要求独立**：不相关 $\\not\\Rightarrow$ 独立。**零均值**、二阶矩有限的独立同分布序列一定是白噪声（均值非零的 iid 序列不是白噪声），反之不成立；只有高斯白噪声（联合正态）能把两者等同，因为联合正态下协方差为 0 即独立。",
+      "白噪声的自协方差为 $R(0)=\\sigma^2$、$R(k)=0\\ (k\\ne0)$，是最短记忆的平稳序列；它的谱密度是常数 $\\sigma^2/(2\\pi)$，这既解释了「白」字，也给出等价刻画：常数谱密度 $\\iff$ 白噪声。",
+      "谱密度的存在性：$\\sum_k|R(k)|<\\infty$（绝对可和）$\\Rightarrow$ $f$ 存在、连续、非负，此时 $f$ 就是 $R$ 的傅里叶级数。一般宽平稳序列只有谱测度 $F$（Wiener–辛钦），$F$ 的原子对应确定性周期成分（如 $\\cos(\\lambda_0t)$ 在 $\\pm\\lambda_0$ 处的谱线）。",
+      "谱密度是「方差在频率上的分配」：$\\int_{-\\pi}^{\\pi}f(\\lambda)\\,\\mathrm d\\lambda=R(0)=\\operatorname{Var}X_t$，$f$ 非负且为偶函数（实值序列的谱对称）。谱峰位置给出主频：AR(1) 的谱：$\\varphi>0$ 时在 $\\lambda=0$ 附近最高（低频占优），$\\varphi<0$ 时谱峰移到 $\\lambda=\\pi$（高频占优），MA(1) 取 $\\theta=1$ 时也低频占优、取 $\\theta=-1$ 时高频占优（差分滤掉低频）。",
+      "线性滤波把时域卷积化为频域乘法（$f_Y=f_\\varepsilon|H|^2$），白噪声因此是滤波分析里的「单位元」；同一法则用于谱估计的相合性论证与白噪声的混成检验。连续时间的类比要把话说清：布朗运动不是平稳过程，没有通常意义的谱密度，但它的增量是白噪声，$\\mathrm dB_t=\\varepsilon_t\\,\\mathrm dt$ 正是「白噪声是布朗运动的形式导数」的写法。"
+    ],
+    "propertiesEn": [
+      "**White noise requires only zero mean, constant variance and zero correlation across time — not independence**: uncorrelated does not imply independent. A **zero-mean** iid sequence with finite second moments is white noise (a nonzero-mean iid sequence is not), but the converse fails; only Gaussian white noise closes the gap, since zero covariance means independence for jointly normal variables.",
+      "Its autocovariance is R(0) = σ², R(k) = 0 for k ≠ 0, the shortest possible memory; its spectral density is the constant σ²/(2π), which explains the name and yields an equivalent characterisation: constant spectrum ⟺ white noise.",
+      "Existence: absolute summability Σ|R(k)| < ∞ gives a continuous, non-negative f, the Fourier series of R. In general a weakly stationary sequence has only a spectral measure F (Wiener–Khinchin), whose atoms correspond to deterministic periodic components such as cos(λ₀t) with spectral lines at ±λ₀.",
+      "The spectral density distributes the variance over frequencies: ∫f = R(0) = Var X_t, with f non-negative and even for real-valued sequences. Peaks locate the dominant frequencies: AR(1) peaks at λ = 0 for φ > 0 and at λ = π for φ < 0, while MA(1) with θ = 1 is likewise low-frequency and with θ = −1 high-frequency (differencing removes low frequencies).",
+      "Linear filtering turns convolution into multiplication (f_Y = f_ε|H|²), making white noise the unit element of filter analysis; the same rule underlies consistency of spectral estimators and portmanteau white-noise tests. In continuous time the analogy must be stated carefully: Brownian motion is not stationary and has no ordinary spectral density, but its increments are white noise, written dB_t = ε_t dt — white noise as the formal derivative of Brownian motion."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/(2*PI)",
+          "color": "#06d6a0",
+          "label": "白噪声：f(λ)=σ²/2π（常数）"
+        },
+        {
+          "expr": "1/(2*PI*(1.25-cos(x)))",
+          "color": "#4cc9f0",
+          "label": "AR(1), φ=0.5：低频占优"
+        },
+        {
+          "expr": "(1.64+1.6*cos(x))/(2*PI)",
+          "color": "#ff6b9d",
+          "label": "MA(1), θ=0.8：低频占优"
+        }
+      ],
+      "xRange": [
+        -3.15,
+        3.15
+      ],
+      "yRange": [
+        0,
+        0.72
+      ],
+      "title": "谱密度曲线（σ²=1，λ∈[−π,π]）：白噪声是水平常数谱，AR(1) 在 λ=0 有峰低估高频，MA(1) 在 λ=π 取最小"
+    },
+    "examples": [
+      {
+        "problem": "设 $\\{\\varepsilon_t\\}$ 为方差 $\\sigma^2$ 的白噪声（只假设不相关），令 $X_t=\\varepsilon_t+\\theta\\varepsilon_{t-1}$（MA(1) 模型）。求自协方差 $R(k)$ 与谱密度 $f(\\lambda)$，并说明谱的形状。",
+        "solution": "先算自协方差。由 $\\operatorname{Cov}(\\varepsilon_s,\\varepsilon_t)=\\sigma^2\\delta_{st}$：$$R(0)=\\operatorname{Var}(\\varepsilon_t+\\theta\\varepsilon_{t-1})=\\sigma^2(1+\\theta^2),$$ $$R(1)=R(-1)=\\theta\\sigma^2,\\qquad R(k)=0\\ (|k|\\ge2).$$ 于是绝对可和成立，谱密度为 $$f(\\lambda)=\\frac{1}{2\\pi}\\big[\\sigma^2(1+\\theta^2)+2\\theta\\sigma^2\\cos\\lambda\\big]=\\frac{\\sigma^2}{2\\pi}\\big(1+\\theta^2+2\\theta\\cos\\lambda\\big).$$\n\n核验：$\\int_{-\\pi}^{\\pi}f=\\frac{\\sigma^2}{2\\pi}(1+\\theta^2)\\cdot2\\pi=\\sigma^2(1+\\theta^2)=R(0)$ 与方差一致；又因 $|\\cos\\lambda|\\le1$，$1+\\theta^2+2\\theta\\cos\\lambda\\ge(1-|\\theta|)^2\\ge0$，故 $f\\ge0$。\n\n形状：$\\theta>0$ 时 $f$ 在 $\\lambda=0$ 最大（低频占优，序列平滑）；$\\theta<0$ 时 $f$ 在 $\\lambda=\\pi$ 最大（高频占优）；$\\theta=-1$ 时 $f(0)=0$，即差分 $X_t=\\varepsilon_t-\\varepsilon_{t-1}$ 完全滤掉了最低频成分。"
+      },
+      {
+        "problem": "设 $U\\sim U(0,1)$，$\\sigma>0$，令 $\\varepsilon_t=\\sqrt2\\,\\sigma\\cos(2\\pi tU)$，$t=1,2,\\dots$。验证 $\\{\\varepsilon_t\\}$ 是白噪声，但 $\\varepsilon_1$ 与 $\\varepsilon_2$ 不独立。",
+        "solution": "期望：$\\mathbb E\\varepsilon_t=\\sqrt2\\sigma\\int_0^1\\cos(2\\pi tu)\\,\\mathrm du=0$（整频率余弦在 $[0,1]$ 上积分为 0）。方差：$2\\sigma^2\\int_0^1\\cos^2(2\\pi tu)\\,\\mathrm du=\\sigma^2$。协方差：对正整数 $s\\ne t$，用积化和差得 $$\\operatorname{Cov}(\\varepsilon_s,\\varepsilon_t)=2\\sigma^2\\int_0^1\\cos(2\\pi su)\\cos(2\\pi tu)\\,\\mathrm du=\\sigma^2\\int_0^1\\big[\\cos 2\\pi(s-t)u+\\cos 2\\pi(s+t)u\\big]\\mathrm du=0,$$ 因为两个积分里的频率都是非零整数。所以 $\\{\\varepsilon_t\\}$ 满足白噪声的全部三条要求。\n\n但不独立：由倍角公式 $$\\varepsilon_2=\\sqrt2\\sigma\\cos(4\\pi U)=\\sqrt2\\sigma\\big(2\\cos^2(2\\pi U)-1\\big)=\\frac{\\sqrt2}{\\sigma}\\varepsilon_1^{2}-\\sqrt2\\sigma,$$ 即 $\\varepsilon_2$ 是 $\\varepsilon_1$ 的确定函数（所有 $\\varepsilon_t$ 都由同一个 $U$ 决定）。若二者独立，给定 $\\varepsilon_1$ 的取值后 $\\varepsilon_2$ 的分布不应改变；但这里它被完全确定为 $\\frac{\\sqrt2}{\\sigma}\\varepsilon_1^{2}-\\sqrt2\\sigma$，非常数。例如 $\\varepsilon_1=0$ 时 $\\varepsilon_2=-\\sqrt2\\sigma<0$ 必然成立，而 $P(\\varepsilon_2<0)=\\frac12$。\n\n结论：白噪声的定义只涉及二阶矩，「不相关」离「独立」很远；只有高斯白噪声（联合正态）才能把两者等同。"
+      }
+    ],
+    "tags": [
+      "白噪声",
+      "谱密度",
+      "Wiener-辛钦定理",
+      "谱测度",
+      "线性滤波"
+    ],
+    "links": [
+      "stationarity",
+      "stochastic-process",
+      "gaussian-process",
+      "fourier-transform",
+      "fourier-series",
+      "brownian-motion",
+      "covariance-correlation"
+    ]
+  },
+  {
+    "id": "ergodic-theory",
+    "title": "遍历定理与混合性",
+    "titleEn": "Ergodic Theorems and Mixing",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "遍历性就是不可约性（不变集的概率只能是 0 或 1）；Birkhoff 遍历定理说严平稳遍历序列的时间平均几乎必然收敛到空间平均。混合性更强：混合 ⇒ 遍历，反之不成立。",
+    "summaryEn": "Ergodicity is irreducibility — invariant sets have probability 0 or 1; Birkhoff's theorem says the time average of a strictly stationary ergodic sequence converges almost surely to the ensemble average. Mixing is stronger: mixing implies ergodic, and not conversely.",
+    "definition": "设 $(\\Omega,\\mathcal F,P)$ 是概率空间，$T:\\Omega\\to\\Omega$ 可测且**保测**：$P(T^{-1}A)=P(A)$ 对一切 $A\\in\\mathcal F$。集合 $A$ 若满足 $T^{-1}A=A$（相差一个零测集也算），称为**不变集**，全体不变集构成不变量 $\\sigma$-代数 $\\mathcal I$。若 $\\mathcal I$ 平凡——即每个不变集的概率只能是 0 或 1——就称 $T$ 是**遍历的（ergodic）**。直观说法：系统不能被拆成两个互不相通的正概率部分，「不可约」与「不可分解」是它的同义语。\n\n**混合性（mixing）**是更强的不可约性：若对任意 $A,B\\in\\mathcal F$，$$P(A\\cap T^{-n}B)\\xrightarrow[n\\to\\infty]{}P(A)P(B),$$ 就说 $T$ 是混合的。含义是：无论初始状态怎样分布，长时间演化后它与任何事件 $A$ 都渐近独立——系统「遗忘」了初始条件。混合的物理意味比遍历强得多：遍历只说长时间平均等于空间平均，混合说相依性本身趋于消失。\n\n遍历定理把上述抽象性质翻译成可计算的平均值。**Birkhoff 遍历定理**：设 $\\{X_k\\}_{k\\ge1}$ 是严平稳序列（对应保测变换 $T$）且 $\\mathbb E|X_1|<\\infty$，则时间平均 $$\\frac{1}{n}\\sum_{k=1}^{n}X_k\\xrightarrow[n\\to\\infty]{}\\mathbb E[X_1\\mid\\mathcal I]\\qquad\\text{几乎必然，且于 }L^1.$$ 当 $T$ 遍历时 $\\mathcal I$ 平凡，条件期望退化为常数 $\\mathbb EX_1$，这正是「时间平均等于空间平均」的严格陈述；不遍历时极限一般是随机变量 $\\mathbb E[X_1\\mid\\mathcal I]$，也可能退化为常数（如周期过程的时间平均仍收敛到 $\\mu$）。这是大数定律的推广：iid 序列对应的平移变换是遍历的，所以强大数定律只是 Birkhoff 定理的特例。\n\n**宽平稳与均方版本**（均值遍历定理、von Neumann）：只要求二阶矩有限，就有 $$\\mathbb E\\Big|\\frac1n\\sum_{k=1}^{n}X_k-\\mu\\Big|^2=\\frac{1}{n^2}\\sum_{|k|<n}(n-|k|)R(k),$$ 它趋于 0 当且仅当自协方差的 Cesàro 平均 $\\frac1n\\sum_{k=1}^{n}R(k)\\to0$（充分条件是 $R(k)\\to0$，即相关函数衰减）。此时时间平均于 $L^2$ 收敛到 $\\mu=\\mathbb EX_1$。这个版本只要二阶矩，不需要抽象的遍历性假设；对高斯过程两种描述完全一致。\n\n最后是两概念的关系，最容易记反：**混合 $\\Rightarrow$ 遍历，反之不成立**。证明只需一行——若 $A$ 是不变集，则 $P(A\\cap T^{-n}A)=P(A)$，混合性给出 $P(A)=P(A)^2$，故 $P(A)\\in\\{0,1\\}$。反例是**两点轮换（周期 2）系统**：$\\Omega=\\{0,1\\}$，$P(\\{0\\})=P(\\{1\\})=\\frac12$，$T$ 交换两点。其不变集只有 $\\emptyset$ 与 $\\Omega$，故遍历；但取 $A=B=\\{0\\}$，$P(A\\cap T^{-n}B)$ 在 0（$n$ 奇）与 $\\frac12$（$n$ 偶）之间跳动，不收敛到 $P(A)P(B)=\\frac14$，故非混合。更精细的刻画是：**遍历 $\\iff$ 在 Cesàro（时间平均）意义下混合**，即 $\\frac1n\\sum_{k=0}^{n-1}P(A\\cap T^{-k}B)\\to P(A)P(B)$；混合则要求逐项收敛，不允许周期振荡。",
+    "definitionEn": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and $T:\\Omega\\to\\Omega$ measurable and **measure preserving**: $P(T^{-1}A)=P(A)$ for all $A\\in\\mathcal F$. A set $A$ with $T^{-1}A=A$ (up to a null set) is **invariant**, and the invariant sets form the invariant $\\sigma$-algebra $\\mathcal I$. If $\\mathcal I$ is trivial — every invariant set has probability 0 or 1 — then $T$ is **ergodic**. Intuitively the system cannot be split into two interacting-free pieces of positive probability: irreducible and indecomposable are synonyms.\n\n**Mixing** is a stronger form of irreducibility: $T$ is mixing if for all $A,B\\in\\mathcal F$, $P(A\\cap T^{-n}B)\\to P(A)P(B)$ as $n\\to\\infty$. The meaning is that after a long time the evolved state is asymptotically independent of any event $A$ — the system forgets its initial condition. Mixing is much stronger than ergodicity: ergodicity equates long-run time averages with ensemble averages, mixing says the dependence itself dies out.\n\nThe ergodic theorems turn this abstract picture into computable averages. **Birkhoff's ergodic theorem**: for a strictly stationary sequence $\\{X_k\\}_{k\\ge1}$ with $\\mathbb E|X_1|<\\infty$, the time average converges, $$\\frac{1}{n}\\sum_{k=1}^{n}X_k\\to\\mathbb E[X_1\\mid\\mathcal I]\\qquad\\text{almost surely and in }L^1.$$ When $T$ is ergodic the invariant $\\sigma$-algebra is trivial, the conditional expectation becomes the constant $\\mathbb EX_1$, and this is the precise statement of time average = ensemble average; without ergodicity the limit is in general a genuine random variable $\\mathbb E[X_1\\mid\\mathcal I]$ (it may still degenerate to a constant). It generalises the law of large numbers: the shift on an iid sequence is ergodic, so the strong law is a special case.\n\nFor weakly stationary sequences there is a mean-square version (the mean ergodic theorem of von Neumann): with finite second moments, $$\\mathbb E\\Big|\\frac1n\\sum_{k=1}^{n}X_k-\\mu\\Big|^2=\\frac{1}{n^2}\\sum_{|k|<n}(n-|k|)R(k),$$ which tends to 0 exactly when the Cesàro means $\\frac1n\\sum_{k=1}^{n}R(k)$ tend to 0 (a sufficient condition being $R(k)\\to0$, that is, decay of correlations). The time average then converges to $\\mu=\\mathbb EX_1$ in $L^2$. This version needs only second moments and no abstract ergodicity assumption; for Gaussian processes the two descriptions agree.\n\nFinally the relation between the two notions, the point most often reversed: **mixing implies ergodic, and not conversely**. The proof is one line: if $A$ is invariant then $P(A\\cap T^{-n}A)=P(A)$, and mixing gives $P(A)=P(A)^2$, so $P(A)\\in\\{0,1\\}$. The counterexample is the **two-point rotation (period 2) system**: $\\Omega=\\{0,1\\}$ with $P(\\{0\\})=P(\\{1\\})=\\frac12$ and $T$ swapping the points. Its only invariant sets are $\\emptyset$ and $\\Omega$, so it is ergodic; yet for $A=B=\\{0\\}$ the quantity $P(A\\cap T^{-n}B)$ alternates between 0 (odd $n$) and $\\frac12$ (even $n$) and never approaches $P(A)P(B)=\\frac14$, so the system is not mixing. The finer statement is: **ergodic ⟺ mixing in the Cesàro (time-average) sense**, i.e. $\\frac1n\\sum_{k=0}^{n-1}P(A\\cap T^{-k}B)\\to P(A)P(B)$, whereas mixing demands termwise convergence and forbids periodic oscillation.",
+    "formulas": [
+      {
+        "latex": "P(T^{-1}A)=P(A),\\qquad \\forall A\\in\\mathcal F",
+        "note": "保测变换：一次时间推进不改变任何事件的概率，是「平稳动力系统」的定义。",
+        "noteEn": "Measure preservation: one step of the dynamics changes no probability — the definition of a stationary dynamical system."
+      },
+      {
+        "latex": "T^{-1}A=A\\ (\\text{a.s.})\\ \\Longrightarrow\\ P(A)\\in\\{0,1\\}",
+        "note": "遍历性：不变集的概率只能是 0 或 1，等价于不变量 $\\sigma$-代数平凡，即系统不可分解。",
+        "noteEn": "Ergodicity: invariant sets have probability 0 or 1, equivalently the invariant σ-algebra is trivial — the system is indecomposable."
+      },
+      {
+        "latex": "P(A\\cap T^{-n}B)\\xrightarrow[n\\to\\infty]{}P(A)P(B)",
+        "note": "混合性：长时间后与初始事件的相依性消失。它比遍历性强，混合推出遍历。",
+        "noteEn": "Mixing: after a long time the evolved set is asymptotically independent of the initial event; it is stronger than ergodicity, which it implies."
+      },
+      {
+        "latex": "\\frac1n\\sum_{k=1}^{n}X_k\\xrightarrow[n\\to\\infty]{}\\mathbb E[X_1\\mid\\mathcal I]\\ \\ \\text{a.s. 且 }L^1",
+        "note": "Birkhoff 遍历定理：极限是不变量 $\\sigma$-代数上的条件期望；$T$ 遍历时它退化为常数 $\\mathbb EX_1$，这就是「时间平均 = 空间平均」。",
+        "noteEn": "Birkhoff's ergodic theorem: the limit is the conditional expectation onto the invariant σ-algebra, reducing to the constant E X_1 exactly when T is ergodic."
+      },
+      {
+        "latex": "\\mathbb E\\Big|\\frac1n\\sum_{k=1}^{n}X_k-\\mu\\Big|^2=\\frac{1}{n^2}\\sum_{|k|<n}(n-|k|)R(k)\\ \\longrightarrow\\ 0\\iff \\frac1n\\sum_{k=1}^{n}R(k)\\to0",
+        "note": "均值遍历定理（宽平稳版）：只需二阶矩与自协方差的 Cesàro 衰减，即得时间平均的均方收敛；$R(k)\\to0$ 是常用的充分条件。",
+        "noteEn": "Mean ergodic theorem for weakly stationary sequences: finite second moments plus Cesàro decay of the autocovariance give mean-square convergence of the time average, with R(k) → 0 as a standard sufficient condition."
+      }
+    ],
+    "properties": [
+      "遍历有三张等价面孔：不变集平凡（概率只有 0/1）、不变量 $\\sigma$-代数平凡、时间平均等于空间平均（Birkhoff）。直观上系统是一个不可分割的整体。",
+      "**混合 $\\Rightarrow$ 遍历**：若 $A$ 不变则 $P(A\\cap T^{-n}A)=P(A)$，混合性给出 $P(A)=P(A)^2$，故 $P(A)\\in\\{0,1\\}$。**反之不成立**：两点轮换系统遍历但不混合（$P(A\\cap T^{-n}B)$ 在 0 与 $\\frac12$ 之间跳）。直观：混合要求遗忘初始状态、相关函数趋于 0，而周期运动永不遗忘，只在 Cesàro 平均后看起来收敛。",
+      "两个遍历定理的条件不同，不要混用：Birkhoff 要求严平稳 + 遍历 + $\\mathbb E|X_1|<\\infty$，结论是几乎必然与 $L^1$ 收敛（非遍历时极限为 $\\mathbb E[X_1\\mid\\mathcal I]$）；均值遍历定理只要求宽平稳 + 二阶矩 + Cesàro 条件 $\\frac1n\\sum R(k)\\to0$，结论只是 $L^2$ 收敛。两个收敛结论**都不需要**遍历性假设；遍历性保证的是极限恰为空间平均 μ（不只收敛到 $\\mathbb E[X_1\\mid\\mathcal I]$）。",
+      "时间平均不收敛到均值的机制是「不衰减的随机成分」：当 Cesàro 平均 $\\frac1n\\sum R(k)$ 不趋于 0 时，$\\mathbb E|\\bar X_n-\\mu|^2$ 趋于谱测度在频率 0 处的原子 $F(\\{0\\})=\\operatorname{Var}\\mathbb E[X_1\\mid\\mathcal I]$，极限是随机变量。还要注意均方收敛与遍历性不是一回事：取 $\\lambda=\\pi$，则 $X_t=\\cos(\\pi t+\\Theta)=(-1)^t\\cos\\Theta$ 是周期 2 的序列，$R(k)=\\frac12(-1)^k$ 的 Cesàro 平均仍趋于 0，于是时间平均照样收敛到 $\\mu=0$，可这个系统显然不是遍历的（周期运动的不变 $\\sigma$-代数并不平凡）。它的非遍历性表现为谱测度在 $\\pm\\lambda$ 处的原子，而不是频率 0 处的原子——频率 0 处的原子才对应「时间平均偏离均值」。",
+      "应用与判别：遍历/混合是「用时间平均代替空间平均」的合法性条件，也是统计物理、MCMC 收敛理论与大数定律的共同基础。马尔可夫链的例子最有代表性：不可约、正常返、非周期的链在平稳分布下既遍历又混合；周期链只遍历不混合，与两点轮换完全一致。"
+    ],
+    "propertiesEn": [
+      "Ergodicity has three equivalent faces: trivial invariant sets (probabilities only 0 or 1), a trivial invariant σ-algebra, and time average = ensemble average (Birkhoff). Intuitively the system is an indivisible whole.",
+      "**Mixing ⇒ ergodic**: if A is invariant then P(A ∩ T^{−n}A) = P(A) and mixing forces P(A) = P(A)², so P(A) ∈ {0,1}. **The converse fails**: the two-point rotation is ergodic yet not mixing (P(A ∩ T^{−n}B) alternates between 0 and 1/2). Intuitively mixing means the system forgets its initial state and correlations vanish, while a periodic motion never forgets — it only looks convergent after Cesàro averaging.",
+      "The two ergodic theorems have different hypotheses and must not be conflated: Birkhoff needs strict stationarity, ergodicity and E|X_1| < ∞ and yields almost sure and L¹ convergence (with limit E[X_1|I] without ergodicity); the mean ergodic theorem needs only weak stationarity, finite second moments and the Cesàro condition (1/n)ΣR(k) → 0, and yields L² convergence only. Neither convergence conclusion requires ergodicity; ergodicity only ensures the limit equals the spatial mean $\\mu$.",
+      "The mechanism preventing convergence to the mean is a non-decaying random component: when (1/n)ΣR(k) does not vanish, E|X̄_n − μ|² tends to the atom of the spectral measure at frequency 0, F({0}) = Var E[X_1|I], and the limit is a random variable. Note that mean-square convergence and ergodicity are different things: take λ = π, so that X_t = cos(πt + Θ) = (−1)^t cos Θ is a 2-periodic sequence with R(k) = ½(−1)^k, whose Cesàro mean still vanishes and whose time average consequently converges to μ = 0 — yet the system is plainly not ergodic, the invariant σ-algebra of a periodic motion being non-trivial. Its non-ergodicity shows up as atoms of the spectral measure at ±λ, not at frequency 0; only an atom at frequency 0 can push the time average away from the mean.",
+      "Applications and tests: ergodicity and mixing legitimise replacing ensemble averages by time averages and underlie statistical mechanics, the convergence theory of MCMC and the law of large numbers. Markov chains are the standard illustration: an irreducible, positive recurrent, aperiodic chain is both ergodic and mixing under its stationary distribution, whereas a periodic chain is ergodic but not mixing — exactly like the two-point rotation."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1",
+          "color": "#ffd166",
+          "label": "空间平均 μ = 1"
+        },
+        {
+          "expr": "1+0.7*sin(2.3*x+0.5)+0.45*sin(5.9*x+1.7)",
+          "color": "#4cc9f0",
+          "label": "示意性样本轨道（正弦和近似）"
+        },
+        {
+          "expr": "1+0.7*(cos(0.5)-cos(2.3*x+0.5))/(2.3*x)+0.45*(cos(1.7)-cos(5.9*x+1.7))/(5.9*x)",
+          "color": "#06d6a0",
+          "label": "累积时间平均 → 1"
+        }
+      ],
+      "xRange": [
+        0.3,
+        12
+      ],
+      "yRange": [
+        -0.4,
+        2.3
+      ],
+      "title": "遍历定理示意：样本轨道（蓝）的累积时间平均（绿）收敛到空间平均 μ=1；轨道为固定正弦和近似（非真随机轨道），累积平均按解析公式绘制"
+    },
+    "examples": [
+      {
+        "problem": "取 $\\Omega=\\{0,1\\}$，$P(\\{0\\})=P(\\{1\\})=\\frac12$，$T$ 交换两点。证明 $T$ 遍历但不混合，并求出观测量 $X_k=\\mathbf 1_{\\{\\text{第 }k\\text{ 步状态为 }0\\}}$ 的时间平均极限。",
+        "solution": "不变集：$T^{-1}\\emptyset=\\emptyset$、$T^{-1}\\Omega=\\Omega$，而 $T^{-1}\\{0\\}=\\{1\\}\\ne\\{0\\}$、$T^{-1}\\{1\\}=\\{0\\}\\ne\\{1\\}$。所以不变集只有 $\\emptyset$ 与 $\\Omega$，概率为 0 与 1，故 $T$ **遍历**。\n\n不混合：取 $A=B=\\{0\\}$。$n$ 为奇数时 $T^{-n}\\{0\\}=\\{1\\}$，于是 $P(A\\cap T^{-n}B)=P(\\emptyset)=0$；$n$ 为偶数时 $T^{-n}\\{0\\}=\\{0\\}$，于是 $P(A\\cap T^{-n}B)=P(\\{0\\})=\\frac12$。这个量在 0 与 $\\frac12$ 之间跳动，不收敛，更不收敛到 $P(A)P(B)=\\frac14$。故 $T$ **非混合**。\n\n时间平均：从初始状态出发轨道在两个状态间交替，故 $$\\frac1n\\sum_{k=1}^{n}X_k\\longrightarrow\\frac12=\\mathbb EX_1,$$ 与 Birkhoff 定理对遍历系统给出的结论一致。而它的 Cesàro 混合量 $\\frac1n\\sum_{k=0}^{n-1}P(A\\cap T^{-k}B)\\to\\frac14=P(A)P(B)$，恰好说明「遍历就是 Cesàro 意义下的混合」。"
+      },
+      {
+        "problem": "设 $X_t=\\varphi X_{t-1}+\\varepsilon_t$（AR(1)，$|\\varphi|<1$，$\\varepsilon_t$ 为方差 $\\sigma^2$ 的白噪声），已知 $R(k)=\\frac{\\sigma^2\\varphi^{|k|}}{1-\\varphi^2}$。验证均值遍历性并求时间平均的均方收敛速率。",
+        "solution": "先看 Cesàro 条件：$$\\frac1n\\sum_{k=1}^{n}R(k)=\\frac{\\sigma^2}{1-\\varphi^2}\\cdot\\frac1n\\sum_{k=1}^{n}\\varphi^{k}\\longrightarrow0,$$ 因为 $|\\varphi|<1$ 时 $\\sum_k\\varphi^k$ 收敛。故由均值遍历定理，$\\bar X_n=\\frac1n\\sum_{k=1}^{n}X_k$ 于 $L^2$ 收敛到 $\\mu=\\mathbb EX_1$（事实上 $\\mathbb E\\bar X_n=\\mu$，无偏）。\n\n均方误差：$$\\mathbb E|\\bar X_n-\\mu|^2=\\frac{1}{n^2}\\sum_{|k|<n}(n-|k|)R(k)=\\frac{\\sigma^2}{1-\\varphi^2}\\cdot\\frac{1}{n^2}\\Big[n+2\\sum_{k=1}^{n-1}(n-k)\\varphi^{k}\\Big].$$ 由 $\\sum_{k\\ge1}(n-k)\\varphi^k\\approx n\\frac{\\varphi}{1-\\varphi}-\\frac{\\varphi}{(1-\\varphi)^2}$（$n$ 大时）得 $$\\mathbb E|\\bar X_n-\\mu|^2\\approx\\frac{\\sigma^2}{n(1-\\varphi)^2}\\longrightarrow0.$$\n\n结论：收敛速率为 $1/n$；$\\varphi\\to1$（长记忆）时分母 $ (1-\\varphi)^2\\to0$，均方误差爆炸——相关性越强，用时间平均估计均值的效率越低。这与遍历定理的直观完全吻合。"
+      }
+    ],
+    "tags": [
+      "遍历性",
+      "Birkhoff 遍历定理",
+      "混合性",
+      "保测变换",
+      "均值遍历"
+    ],
+    "links": [
+      "stationarity",
+      "stochastic-process",
+      "law-of-large-numbers",
+      "stationary-distribution",
+      "markov-chain-classification",
+      "dynamical-systems"
+    ]
+  }
+]

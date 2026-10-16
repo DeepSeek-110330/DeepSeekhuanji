@@ -1,0 +1,532 @@
+[
+  {
+    "id": "sequence-concept",
+    "title": "数列的概念与表示",
+    "titleEn": "Sequences: Concepts and Representations",
+    "branch": "sequence",
+    "level": 2,
+    "summary": "按一定次序排列的一列数称为数列；通项公式把第 n 项写成下标的函数，前 n 项和与通项之间可以互相转化。",
+    "summaryEn": "A sequence is a list of numbers in a definite order; a general-term formula expresses the n-th term as a function of its index, and partial sums can be turned back into terms.",
+    "definition": "**数列**就是按一定次序排列的一列数，记作 $\\{a_n\\}$：$a_1$ 是第 1 项（首项），$a_n$ 是第 $n$ 项。次序很关键——同样的一堆数换个顺序排就是另一个数列。每一项都对应一个正整数下标，所以数列本质上是定义在正整数集（或其有限子集 $\\{1,2,\\dots,n\\}$）上的**函数**，它的图像是一串离散的点，而不是连续的曲线。\n\n描述数列最常用的方式是**通项公式** $a_n=f(n)$：把下标 $n$ 代进去就得到第 $n$ 项。通项公式不是每个数列都有，存在时也不唯一；有的数列只能靠**递推公式**（用前面若干项表示后面的项，如 $a_{n+1}=2a_n+1$，必须同时给出首项）或文字来描述。\n\n把前 $n$ 项加起来就得到**前 n 项和** $S_n=a_1+a_2+\\cdots+a_n$。由 $S_n$ 求 $a_n$ 时要用 $a_n=S_n-S_{n-1}$，但 $S_{n-1}$ 是把前 $n-1$ 项相加，所以这个式子只在 $n\\ge 2$ 时成立；$n=1$ 时必须单独由 $a_1=S_1$ 求出，再看它是否符合 $n\\ge 2$ 时得到的表达式——这是最容易出错的最后一步。",
+    "definitionEn": "A **sequence** is a list of numbers arranged in a definite order, written $\\{a_n\\}$: $a_1$ is the first term and $a_n$ is the $n$-th term. Order matters — the same numbers rearranged form a different sequence. Every term carries a positive-integer index, so a sequence is really a **function** on the positive integers (or on the finite set $\\{1,2,\\dots,n\\}$); its graph is a string of isolated points, not a continuous curve.\n\nThe usual description is a **general-term formula** $a_n=f(n)$: substituting the index $n$ gives the $n$-th term. Not every sequence has one, and when it does it need not be unique. Others are given by a **recurrence** (later terms in terms of earlier ones, such as $a_{n+1}=2a_n+1$, which must come with a first term) or by a description in words.\n\nAdding the first $n$ terms gives the **partial sum** $S_n=a_1+a_2+\\cdots+a_n$. To recover $a_n$ from $S_n$ use $a_n=S_n-S_{n-1}$, which is valid only for $n\\ge 2$ because $S_{n-1}$ sums $n-1$ terms. The case $n=1$ must be computed separately as $a_1=S_1$ and then compared with the formula obtained for $n\\ge 2$ — that final check is the step students most often skip.",
+    "formulas": [
+      {
+        "latex": "a_n=f(n),\\quad n\\in \\mathbb{N}^*",
+        "note": "通项公式：第 n 项是下标 n 的函数，写出它就确定了整个数列。",
+        "noteEn": "General-term formula: the n-th term is a function of the index n; writing it down determines the whole sequence."
+      },
+      {
+        "latex": "S_n=a_1+a_2+\\cdots+a_n",
+        "note": "前 n 项和的定义；把 $S_n$ 看成关于 n 的函数，它本身也构成一个数列。",
+        "noteEn": "Definition of the partial sum; regarded as a function of n, the sums $S_n$ form a sequence of their own."
+      },
+      {
+        "latex": "a_n=\\begin{cases}S_1, & n=1\\\\ S_n-S_{n-1}, & n\\ge 2\\end{cases}",
+        "note": "由前 n 项和求通项的分段公式；$n=1$ 必须单独算，并检验能否并入 $n\\ge 2$ 的表达式。",
+        "noteEn": "Piecewise formula recovering terms from partial sums; the case $n=1$ must be handled separately and then tested against the expression for $n\\ge 2$."
+      },
+      {
+        "latex": "a_{n+1}=f(a_n)",
+        "note": "递推公式的一般形式；必须与首项（或前几项）一起才能确定一个数列。",
+        "noteEn": "A general recurrence; it determines a sequence only together with the first term (or the first few terms)."
+      },
+      {
+        "latex": "a_n=\\frac{1+(-1)^{n+1}}{2}",
+        "note": "同一个数列的表示可以不唯一：$1,0,1,0,\\dots$ 可写成这个式子，也可写成分段形式。",
+        "noteEn": "A sequence can have several representations: $1,0,1,0,\\dots$ is given both by this formula and by a piecewise rule."
+      }
+    ],
+    "properties": [
+      "数列是定义在正整数集（或其有限子集 $\\{1,2,\\dots,n\\}$）上的函数，图像是离散的点列，第 $k$ 个点就是 $(k,a_k)$。",
+      "通项公式不一定存在，存在时也不唯一；同一个数列可以用通项、递推、分段函数或文字等不同方式表示。",
+      "由 $S_n$ 求 $a_n$ 必须分段：$a_1=S_1$，$n\\ge 2$ 时 $a_n=S_n-S_{n-1}$，最后要检验 $n=1$ 的情形能否并入。",
+      "递推公式必须配初始条件：只给出 $a_{n+1}$ 与 $a_n$ 的关系式，不同的首项会得到不同的数列。",
+      "按项的变化趋势，数列可分为递增、递减、常数列与摆动数列，例如 $a_n=(-1)^n$ 是摆动数列。"
+    ],
+    "propertiesEn": [
+      "A sequence is a function on the positive integers (or on the finite set $\\{1,2,\\dots,n\\}$); its graph is a set of isolated points, the k-th one being $(k,a_k)$.",
+      "A general-term formula need not exist, and need not be unique; the same sequence may be given by a formula, a recurrence, a piecewise rule, or in words.",
+      "Recovering $a_n$ from $S_n$ is piecewise: $a_1=S_1$ and $a_n=S_n-S_{n-1}$ for $n\\ge 2$; finally check whether the $n=1$ value fits the formula for $n\\ge 2$.",
+      "A recurrence must come with initial data: from the relation between $a_{n+1}$ and $a_n$ alone, different starting terms produce different sequences.",
+      "By the way terms change, sequences are classified as increasing, decreasing, constant, or oscillating; for instance $a_n=(-1)^n$ oscillates."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          5,
+          21
+        ]
+      ],
+      "xRange": [
+        0,
+        6
+      ],
+      "yRange": [
+        0,
+        24
+      ],
+      "pointColor": "#4cc9f0",
+      "pointSize": 5,
+      "title": "数列 aₙ = n² − n + 1 的点列"
+    },
+    "examples": [
+      {
+        "problem": "已知数列 $\\{a_n\\}$ 的前 $n$ 项和 $S_n=n^2+1$，求通项公式 $a_n$。",
+        "solution": "当 $n=1$ 时，$a_1=S_1=1^2+1=2$。\n\n当 $n\\ge 2$ 时，$a_n=S_n-S_{n-1}=(n^2+1)-[(n-1)^2+1]=n^2-(n-1)^2=2n-1$。\n\n检验：把 $n=1$ 代入 $2n-1$ 得 1，而 $a_1=2$，两者不相等，所以不能合并成一个式子，必须分段写：$a_n=\\begin{cases}2, & n=1\\\\ 2n-1, & n\\ge 2\\end{cases}$\n\n验算：$S_2=5$，而 $a_1+a_2=2+3=5$ ✔；$S_3=10$，而 $a_1+a_2+a_3=2+3+5=10$ ✔。"
+      },
+      {
+        "problem": "判断 380 是否为数列 $\\{a_n\\}$（$a_n=n^2+n$）中的项；若是，指出它是第几项。",
+        "solution": "设 $n^2+n=380$，即 $n^2+n-380=0$。\n\n判别式 $\\Delta=1^2-4\\times 1\\times(-380)=1521=39^2$，所以 $n=\\frac{-1\\pm 39}{2}$，得 $n=19$ 或 $n=-20$。\n\n下标 $n$ 必须是正整数，故舍去 $n=-20$，取 $n=19$；并且 $19^2+19=361+19=380$，验证成立。\n\n所以 380 是这个数列的第 19 项。"
+      }
+    ],
+    "tags": [
+      "数列",
+      "通项公式",
+      "前n项和",
+      "递推"
+    ],
+    "links": [
+      "sequence-limit",
+      "series",
+      "arithmetic-sequence",
+      "geometric-sequence",
+      "function-concept"
+    ]
+  },
+  {
+    "id": "arithmetic-sequence",
+    "title": "等差数列",
+    "titleEn": "Arithmetic Sequences",
+    "branch": "sequence",
+    "level": 2,
+    "summary": "从第 2 项起每一项与前一项的差都等于同一个常数 d 的数列叫等差数列；它的通项是一次函数，求和公式可以倒序相加推出。",
+    "summaryEn": "An arithmetic sequence has a constant difference d between consecutive terms; its terms grow linearly and its partial sums are quadratic in n.",
+    "definition": "**等差数列**是指：从第 2 项起，每一项与它前一项的差都等于同一个常数 $d$，即 $a_{n+1}-a_n=d$ 对一切正整数 $n$ 都成立。这个常数 $d$ 叫**公差**，它可以为正、为负，也可以为 0。首项 $a_1$ 与公差 $d$ 一旦给定，整个等差数列就确定了。\n\n由定义逐项展开：$a_2=a_1+d$，$a_3=a_1+2d$，……，一般地 $a_n=a_1+(n-1)d$，这就是**通项公式**。它说明 $d\\ne 0$ 时 $a_n$ 是 $n$ 的一次函数，于是点 $(n,a_n)$ 都落在同一条直线上，公差 $d$ 恰好是这条直线的斜率。\n\n把首末两项配对相加：$a_1+a_n=a_2+a_{n-1}=\\cdots$，由此得到前 $n$ 项和 $S_n=\\frac{n(a_1+a_n)}{2}$；再把 $a_n=a_1+(n-1)d$ 代入，又得到 $S_n=na_1+\\frac{n(n-1)}{2}d$。这两个式子是「公式法求和」的基础，也解释了为什么等差数列可以用倒序相加求前 n 项和。",
+    "definitionEn": "An **arithmetic sequence** is one in which the difference between every pair of consecutive terms is the same constant $d$, that is, $a_{n+1}-a_n=d$ for every positive integer $n$. The constant $d$ is the **common difference** and may be positive, negative, or zero. Once the first term $a_1$ and the difference $d$ are fixed, the whole sequence is determined.\n\nExpanding the definition gives $a_2=a_1+d$, $a_3=a_1+2d$, …, and in general $a_n=a_1+(n-1)d$, the **general term**. For $d\\ne 0$ it shows that $a_n$ is a linear function of $n$, so all points $(n,a_n)$ lie on one straight line whose slope is exactly $d$.\n\nPairing first and last terms gives $a_1+a_n=a_2+a_{n-1}=\\cdots$, hence the partial sum $S_n=\\frac{n(a_1+a_n)}{2}$; substituting $a_n=a_1+(n-1)d$ yields $S_n=na_1+\\frac{n(n-1)}{2}d$. These two formulas are the basis of the direct summation method and explain why an arithmetic sequence can be summed by adding it to its own reversal.",
+    "formulas": [
+      {
+        "latex": "a_{n+1}-a_n=d\\quad(d\\ \\text{为常数})",
+        "note": "等差数列的定义式，也是最基本的判定方法：相邻两项的差恒为同一个常数。",
+        "noteEn": "The defining relation and the most basic test: all consecutive differences equal the same constant."
+      },
+      {
+        "latex": "a_n=a_1+(n-1)d=a_m+(n-m)d",
+        "note": "通项公式；右边的形式用任意第 m 项表示，已知两项求公差时最方便。",
+        "noteEn": "General term; the second form uses any known m-th term and is handy when two terms are given."
+      },
+      {
+        "latex": "S_n=\\frac{n(a_1+a_n)}{2}=na_1+\\frac{n(n-1)}{2}d",
+        "note": "前 n 项和的两个等价形式：已知首项与公差用右边，已知首项与末项用左边。",
+        "noteEn": "Two equivalent forms of the partial sum: use the right one with $a_1$ and $d$, the left one with $a_1$ and $a_n$."
+      },
+      {
+        "latex": "2a_n=a_{n-1}+a_{n+1}\\quad(n\\ge 2)",
+        "note": "等差中项：连续三项成等差的充要条件是中间项等于两边的算术平均。",
+        "noteEn": "Arithmetic mean: three consecutive terms form an arithmetic progression exactly when the middle one is the average of its neighbours."
+      },
+      {
+        "latex": "m+n=p+q\\ \\Rightarrow\\ a_m+a_n=a_p+a_q",
+        "note": "下标性质，前提是数列为等差数列；特别地 $a_1+a_n=a_2+a_{n-1}=\\cdots$。",
+        "noteEn": "Index identity, valid for arithmetic sequences: equal index sums give equal term sums; in particular $a_1+a_n=a_2+a_{n-1}=\\cdots$."
+      }
+    ],
+    "properties": [
+      "公差 $d$ 可以取任意实数：$d>0$ 时数列递增，$d<0$ 时数列递减，$d=0$ 时是常数列。",
+      "通项 $a_n=a_1+(n-1)d$ 在 $d\\ne 0$ 时是 $n$ 的一次函数，点 $(n,a_n)$ 共线且斜率为 $d$，因此任意两项之差满足 $a_m-a_n=(m-n)d$。",
+      "下标性质 $m+n=p+q\\Rightarrow a_m+a_n=a_p+a_q$ 与中项式 $2a_n=a_{n-1}+a_{n+1}$（$n\\ge 2$）都只在等差数列中成立，它们依赖的是各项下标等距这一结构。",
+      "前 $n$ 项和 $S_n=\\frac{d}{2}n^2+\\left(a_1-\\frac{d}{2}\\right)n$，是无常数项的二次式；并且 $S_n,\\ S_{2n}-S_n,\\ S_{3n}-S_{2n},\\dots$ 仍成等差数列。",
+      "判定等差数列有三条常用路径：定义法（$a_{n+1}-a_n$ 为常数）、中项法（$2a_n=a_{n-1}+a_{n+1}$，$n\\ge 2$）、前 n 项和法（$S_n=An^2+Bn$）。"
+    ],
+    "propertiesEn": [
+      "The common difference may be any real number: the sequence increases when $d>0$, decreases when $d<0$, and is constant when $d=0$.",
+      "For $d\\ne 0$ the general term $a_n=a_1+(n-1)d$ is linear in $n$; the points $(n,a_n)$ are collinear with slope $d$, so $a_m-a_n=(m-n)d$ for any two terms.",
+      "The index identity $m+n=p+q\\Rightarrow a_m+a_n=a_p+a_q$ and the mean relation $2a_n=a_{n-1}+a_{n+1}$ ($n\\ge 2$) hold only for arithmetic sequences, since both rely on the equal spacing of the indices.",
+      "The partial sum $S_n=\\frac{d}{2}n^2+\\left(a_1-\\frac{d}{2}\\right)n$ is a quadratic expression with no constant term; moreover $S_n,\\ S_{2n}-S_n,\\ S_{3n}-S_{2n},\\dots$ again form an arithmetic sequence.",
+      "Three standard tests: the definition test ($a_{n+1}-a_n$ constant), the mean test ($2a_n=a_{n-1}+a_{n+1}$, $n\\ge 2$), and the partial-sum test ($S_n=An^2+Bn$)."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 2,
+          "intercept": -1,
+          "color": "#ffd166",
+          "label": "aₙ = 2n − 1"
+        }
+      ],
+      "xRange": [
+        0,
+        5.5
+      ],
+      "yRange": [
+        -1,
+        10.5
+      ],
+      "pointColor": "#4cc9f0",
+      "title": "等差数列 aₙ = 2n − 1 的点列与直线"
+    },
+    "examples": [
+      {
+        "problem": "等差数列 $\\{a_n\\}$ 中 $a_3=7$，$a_7=19$，求首项 $a_1$、公差 $d$、$a_{10}$ 与 $S_{10}$。",
+        "solution": "由 $a_n=a_m+(n-m)d$ 得 $a_7-a_3=(7-3)d$，即 $19-7=4d$，所以 $d=3$。\n\n再由 $a_1=a_3-2d=7-2\\times 3=1$，得 $a_{10}=a_1+9d=1+27=28$。\n\n$S_{10}=\\frac{10(a_1+a_{10})}{2}=5\\times(1+28)=145$。\n\n验算：$a_n=3n-2$，$a_3=7$ ✔，$a_7=19$ ✔，$a_{10}=28$ ✔；用另一个公式算 $S_{10}=10\\times 1+\\frac{10\\times 9}{2}\\times 3=10+135=145$ ✔。"
+      },
+      {
+        "problem": "在等差数列 $\\{a_n\\}$ 中 $a_1=20$，公差 $d=-3$，求前 $n$ 项和 $S_n$ 的最大值及取得最大值时的 $n$。",
+        "solution": "由通项 $a_n=20+(n-1)\\times(-3)=23-3n$。\n\n正数项越多，和越大，所以 $S_n$ 取最大值时 $n$ 应满足：$a_n\\ge 0$ 且 $a_{n+1}\\le 0$（若 $a_{n+1}=0$，则 $S_n=S_{n+1}$，两处同时取到最大值）。\n\n由 $23-3n\\ge 0$ 得 $n\\le 7.67$，故 $n\\le 7$；又 $a_8=23-24=-1<0$，说明从第 8 项起各项为负。\n\n所以当 $n=7$ 时 $S_n$ 最大。由 $a_7=23-21=2$，得 $S_7=\\frac{7(a_1+a_7)}{2}=\\frac{7\\times(20+2)}{2}=77$。\n\n验算：$S_7=7\\times 20+\\frac{7\\times 6}{2}\\times(-3)=140-63=77$ ✔。"
+      }
+    ],
+    "tags": [
+      "等差数列",
+      "通项公式",
+      "前n项和",
+      "公差"
+    ],
+    "links": [
+      "sequence-concept",
+      "geometric-sequence",
+      "sequence-summation",
+      "linear-function",
+      "sequence-limit"
+    ]
+  },
+  {
+    "id": "geometric-sequence",
+    "title": "等比数列",
+    "titleEn": "Geometric Sequences",
+    "branch": "sequence",
+    "level": 2,
+    "summary": "从第 2 项起每一项与前一项的比都等于同一个非零常数 q 的数列叫等比数列；它的通项含指数，求和要分 q=1 与 q≠1 讨论。",
+    "summaryEn": "A geometric sequence has a constant nonzero ratio q between consecutive terms; its terms grow exponentially and its sum formula splits into the cases q = 1 and q ≠ 1.",
+    "definition": "**等比数列**是指：从第 2 项起，每一项与它前一项的比都等于同一个常数 $q$（$q\\ne 0$），即 $\\frac{a_{n+1}}{a_n}=q$ 对一切正整数 $n$ 都成立。常数 $q$ 叫**公比**。因为分母是 $a_n$，定义本身就要求各项都不为 0，所以 $a_1\\ne 0$、$q\\ne 0$；首项 $a_1$ 与公比 $q$ 一起确定整个数列。\n\n逐项展开得 $a_2=a_1q$，$a_3=a_1q^2$，……，故**通项公式**为 $a_n=a_1q^{n-1}$，也可写成 $a_n=a_mq^{n-m}$。通项里含有指数 $q^{n-1}$，这就是等比数列「增长越来越快或衰减越来越慢」的原因，也把等比数列与指数函数联系了起来。\n\n求前 $n$ 项和必须分类：公比为 1 时每一项都等于 $a_1$，直接得 $S_n=na_1$；公比不为 1 时，把 $S_n$ 与 $qS_n$ 错位相减可得 $S_n=\\frac{a_1(1-q^n)}{1-q}$（也常写成 $S_n=\\frac{a_1-a_nq}{1-q}$）。当题目中公比用字母 $q$ 表示又没有说明 $q\\ne 1$ 时，一定要先讨论 $q=1$ 的情形——这是等比数列部分出现最多的错误。",
+    "definitionEn": "A **geometric sequence** is one in which the ratio of every term to the preceding term is the same nonzero constant $q$, that is, $\\frac{a_{n+1}}{a_n}=q$ for every positive integer $n$. The constant $q$ is the **common ratio**. Since the ratio has $a_n$ in its denominator, the definition forces every term to be nonzero, so $a_1\\ne 0$ and $q\\ne 0$; together with $a_1$, the ratio determines the whole sequence.\n\nExpanding the definition gives $a_2=a_1q$, $a_3=a_1q^2$, …, hence the **general term** $a_n=a_1q^{n-1}$, equivalently $a_n=a_mq^{n-m}$. The exponential factor $q^{n-1}$ explains why geometric sequences accelerate or decay and links them to exponential functions.\n\nSumming requires a case split: when the ratio is 1 every term equals $a_1$, so $S_n=na_1$; when $q\\ne 1$, subtracting the $q$-multiple of $S_n$ from $S_n$ gives $S_n=\\frac{a_1(1-q^n)}{1-q}$, often written $S_n=\\frac{a_1-a_nq}{1-q}$. When the ratio is a parameter $q$ with no stated restriction, the case $q=1$ must be discussed first — omitting it is the single most common error in this topic.",
+    "formulas": [
+      {
+        "latex": "\\frac{a_{n+1}}{a_n}=q\\quad(q\\ne 0,\\ a_n\\ne 0)",
+        "note": "等比数列的定义式；公比必须非零，且每一项都不能为 0。",
+        "noteEn": "The defining relation; the common ratio must be nonzero and no term may vanish."
+      },
+      {
+        "latex": "a_n=a_1q^{n-1}=a_mq^{n-m}",
+        "note": "通项公式；右式用已知的第 m 项表示，已知两项求公比时常用。",
+        "noteEn": "General term; the second form uses a known m-th term and is convenient for finding the ratio from two terms."
+      },
+      {
+        "latex": "S_n=\\begin{cases}na_1, & q=1\\\\ \\dfrac{a_1(1-q^n)}{1-q}=\\dfrac{a_1-a_nq}{1-q}, & q\\ne 1\\end{cases}",
+        "note": "前 n 项和必须分 q=1 与 q≠1 两类讨论；漏掉 q=1 是最常见的错误。",
+        "noteEn": "The partial sum must be split into the cases q = 1 and q ≠ 1; forgetting q = 1 is the classic mistake."
+      },
+      {
+        "latex": "G^2=ab",
+        "note": "等比中项：a、G、b 成等比数列时 G²=ab（要求 ab>0）；G 一般有 ±√(ab) 两个值，符号由题目条件确定。",
+        "noteEn": "Geometric mean: if a, G, b form a geometric progression then G² = ab (with ab > 0); G has two possible signs, fixed by the problem statement."
+      },
+      {
+        "latex": "m+n=p+q\\ \\Rightarrow\\ a_ma_n=a_pa_q",
+        "note": "下标性质，前提是等比数列且各项不为零；特别地 $a_1a_n=a_2a_{n-1}=\\cdots$，注意与等差数列的「和」的形式区分。",
+        "noteEn": "Index identity for geometric sequences with nonzero terms: equal index sums give equal term products; in particular $a_1a_n=a_2a_{n-1}=\\cdots$, in contrast with the additive version for arithmetic sequences."
+      }
+    ],
+    "properties": [
+      "定义要求 $q\\ne 0$ 且各项均不为零；若 $q=0$，从第 2 项起全是 0，比值无意义，所以它不是等比数列。",
+      "符号与增减：$q>0$ 时各项同号；$q<0$ 时正负交替，是摆动数列；$|q|>1$ 时 $|a_n|$ 递增，$0<|q|<1$ 时 $|a_n|$ 递减（数列本身的增减还要看 $a_1$ 的符号）。",
+      "求和公式必须分类讨论：$q=1$ 时 $S_n=na_1$，$q\\ne 1$ 时 $S_n=\\frac{a_1(1-q^n)}{1-q}$；公比含参数时不分类就会出错。",
+      "下标性质 $m+n=p+q\\Rightarrow a_ma_n=a_pa_q$ 与 $a_1a_n=a_2a_{n-1}=\\cdots$ 只在等比数列中成立，且要求各项不为零。",
+      "等比中项与等差中项不同：$a,G,b$ 成等比 $\\Leftrightarrow G^2=ab$（需 $ab>0$），$G$ 有两个可能值；而 $a,A,b$ 成等差时 $A=\\frac{a+b}{2}$ 唯一。"
+    ],
+    "propertiesEn": [
+      "The definition requires $q\\ne 0$ and all terms nonzero; if $q=0$ the sequence is eventually all zeros and the ratios are undefined, so it is not geometric.",
+      "Signs and growth: all terms share the same sign when $q>0$; they alternate in sign when $q<0$, giving an oscillating sequence; $|a_n|$ increases when $|q|>1$ and decreases when $0<|q|<1$ (monotonicity of the sequence itself also depends on the sign of $a_1$).",
+      "The summation formula must be split: $S_n=na_1$ for $q=1$ and $S_n=\\frac{a_1(1-q^n)}{1-q}$ for $q\\ne 1$; leaving out the case $q=1$ when the ratio is a parameter leads to errors.",
+      "The index identity $m+n=p+q\\Rightarrow a_ma_n=a_pa_q$, and likewise $a_1a_n=a_2a_{n-1}=\\cdots$, holds only for geometric sequences with nonzero terms.",
+      "The geometric mean differs from the arithmetic mean: $a,G,b$ in geometric progression $\\Leftrightarrow G^2=ab$ (requiring $ab>0$), with two possible values of $G$; whereas $a,A,b$ in arithmetic progression give the unique $A=\\frac{a+b}{2}$."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          16
+        ]
+      ],
+      "xRange": [
+        0,
+        5.5
+      ],
+      "yRange": [
+        0,
+        17
+      ],
+      "pointColor": "#ff6b9d",
+      "pointSize": 5,
+      "title": "等比数列 aₙ = 2^(n−1) 的点列"
+    },
+    "examples": [
+      {
+        "problem": "等比数列 $\\{a_n\\}$ 中 $a_2=6$，$a_5=48$，求公比 $q$、首项 $a_1$ 与前 6 项和 $S_6$。",
+        "solution": "由 $a_n=a_mq^{n-m}$ 得 $a_5=a_2q^3$，即 $48=6q^3$，$q^3=8$，所以 $q=2$。\n\n$a_1=\\frac{a_2}{q}=\\frac{6}{2}=3$，于是 $a_6=a_1q^5=3\\times 32=96$。\n\n因为 $q=2\\ne 1$，用 $S_n=\\frac{a_1(1-q^n)}{1-q}$：$S_6=\\frac{3\\times(1-2^6)}{1-2}=\\frac{3\\times(-63)}{-1}=189$。\n\n验算：数列前 6 项为 3, 6, 12, 24, 48, 96，逐项相加得 $3+6+12+24+48+96=189$ ✔。（若误用 $S_n=na_1$ 会得到 18，可见必须看清 $q$ 是否为 1。）"
+      },
+      {
+        "problem": "求数列 $1,\\ x,\\ x^2,\\ \\dots,\\ x^{n-1}$（$x\\ne 0$）的前 $n$ 项和 $S_n$。",
+        "solution": "这是首项为 1、公比为 $x$ 的等比数列，共 $n$ 项，通项 $a_k=x^{k-1}$。\n\n当 $x=1$ 时，每一项都等于 1，所以 $S_n=n$。\n\n当 $x\\ne 1$ 时，$S_n=\\frac{1\\times(1-x^n)}{1-x}=\\frac{1-x^n}{1-x}$。\n\n综上，$S_n=\\begin{cases}n, & x=1\\\\ \\dfrac{1-x^n}{1-x}, & x\\ne 1\\end{cases}$\n\n验算（取 $n=3$）：$x=\\frac12$ 时各项和为 $1+\\frac12+\\frac14=\\frac74$，而 $\\frac{1-(\\frac12)^3}{1-\\frac12}=\\frac{\\frac78}{\\frac12}=\\frac74$ ✔；$x=1$ 时三项之和 $1+1+1=3=n$ ✔；$x=-1$ 时 $1-1+1=1$，而 $\\frac{1-(-1)^3}{1-(-1)}=\\frac{2}{2}=1$ ✔。"
+      }
+    ],
+    "tags": [
+      "等比数列",
+      "公比",
+      "前n项和",
+      "分类讨论"
+    ],
+    "links": [
+      "sequence-concept",
+      "arithmetic-sequence",
+      "sequence-summation",
+      "exponential-function",
+      "sequence-limit"
+    ]
+  },
+  {
+    "id": "sequence-summation",
+    "title": "数列的求和方法",
+    "titleEn": "Summation Methods for Sequences",
+    "branch": "sequence",
+    "level": 3,
+    "summary": "数列求和除了直接用公式，还有倒序相加、错位相减、裂项相消、分组求和四类技巧，用之前必须先认清通项的结构。",
+    "summaryEn": "Beyond the standard formulas, four techniques cover most sums: adding a reversed copy, subtracting a shifted copy, telescoping by partial fractions, and splitting into groups.",
+    "definition": "求数列前 $n$ 项和，第一步永远是**看通项**：$a_n$ 是等差、等比，还是几类数列的和差？公式法（等差用 $S_n=\\frac{n(a_1+a_n)}{2}$，等比按 $q=1$ 与 $q\\ne 1$ 分类）能解决最简单的结构，结构复杂时再上技巧。\n\n**倒序相加**：把 $S_n$ 正写一遍、倒写一遍再相加。如果首末配对的两项之和为常数（等差数列就是这样），一次就能凑出 $n$ 组相等的和。**错位相减**：通项形如「等差 × 等比」$a_n=(\\alpha n+\\beta)q^{n-1}$ 时，写出 $S_n$ 与 $qS_n$ 两行，错开一位相减，中间部分变成一个等比数列，再套求和公式。\n\n**裂项相消**：把通项拆成相邻两项之差，如 $\\frac{1}{n(n+1)}=\\frac{1}{n}-\\frac{1}{n+1}$，相加时中间项成对消去，只剩首尾少数几项；要算清系数（如 $\\frac{1}{n(n+2)}$ 拆出的系数是 $\\frac12$）并核对剩下哪几项。**分组求和**：把通项拆成几个可独立求和的部分（如 $a_n=2n+3^n$），各自用公式求和后相加，注意每一组都按 $n$ 项计算。",
+    "definitionEn": "To sum the first $n$ terms the first step is always to **inspect the general term**: is $a_n$ arithmetic, geometric, or a sum of such pieces? The standard formulas (arithmetic: $S_n=\\frac{n(a_1+a_n)}{2}$; geometric: split into $q=1$ and $q\\ne 1$) handle the simplest structures, and the techniques below handle the rest.\n\n**Reversing and adding**: write $S_n$ forwards and backwards, then add. When pairs of first-and-last terms share a constant sum (as for arithmetic sequences), the sum collapses into $n$ equal pairs. **Subtracting a shifted copy**: when $a_n$ is \"arithmetic times geometric\", $a_n=(\\alpha n+\\beta)q^{n-1}$, write $S_n$ and $qS_n$, shift one row by one place and subtract; the middle becomes a geometric series ready for the standard formula.\n\n**Telescoping by partial fractions**: split each term into a difference of consecutive pieces, e.g. $\\frac{1}{n(n+1)}=\\frac{1}{n}-\\frac{1}{n+1}$; interior terms cancel in pairs, leaving only a few terms at the two ends — check the constant factor (for $\\frac{1}{n(n+2)}$ it is $\\frac12$) and which terms survive. **Splitting into groups**: break the general term into independent parts (say $a_n=2n+3^n$), sum each part with its own formula, and add; remember that every group still has $n$ terms.",
+    "formulas": [
+      {
+        "latex": "S_n=\\frac{n(a_1+a_n)}{2}=na_1+\\frac{n(n-1)}{2}d",
+        "note": "公式法（等差）：通项是等差数列时直接套用，倒序相加正是它的推导方式。",
+        "noteEn": "Direct formula for arithmetic sequences; reversing and adding is exactly how it is derived."
+      },
+      {
+        "latex": "S_n=\\begin{cases}na_1, & q=1\\\\ \\dfrac{a_1(1-q^n)}{1-q}, & q\\ne 1\\end{cases}",
+        "note": "公式法（等比）：务必先判断公比是否为 1，再选择用哪一个式子。",
+        "noteEn": "Direct formula for geometric sequences: check whether the ratio equals 1 before choosing a branch."
+      },
+      {
+        "latex": "2S_n=\\sum_{k=1}^{n}\\left(a_k+a_{n+1-k}\\right)",
+        "note": "倒序相加的核心式子：若能证明配对的和 $a_k+a_{n+1-k}=C$ 为常数，则 $S_n=\\frac{nC}{2}$。",
+        "noteEn": "The key identity of reversed addition: if the paired sums equal a constant $C$, then $S_n=\\frac{nC}{2}$."
+      },
+      {
+        "latex": "\\frac{1}{n(n+1)}=\\frac{1}{n}-\\frac{1}{n+1}",
+        "note": "裂项相消的最基本模型；求和时中间项成对消去，只剩第一项与最后一项。",
+        "noteEn": "The basic telescoping model; interior terms cancel in pairs, leaving the first and last terms."
+      },
+      {
+        "latex": "\\sum_{k=1}^{n}k\\cdot 2^k=(n-1)2^{n+1}+2",
+        "note": "错位相减的典型结果（等差 × 等比，公比 2）；结果中一般含有 $n$ 乘指数项。",
+        "noteEn": "A typical shifted-subtraction result (arithmetic times geometric, ratio 2); the answer generally contains $n$ times an exponential factor."
+      }
+    ],
+    "properties": [
+      "倒序相加的适用条件是「首末配对的和为常数」$a_k+a_{n+1-k}=C$；等差数列是典型例子，但凡是满足这一配对条件的数列都可以用。",
+      "错位相减适用于通项为「等差 × 等比」的求和，相减后中间是公比为 $q$ 的等比数列；若 $q=1$，通项退化为等差，应改用等差公式而不是机械错位。",
+      "裂项相消要先把通项拆成「相邻两项之差」并核对系数与剩余项：$\\frac{1}{n(n+2)}=\\frac{1}{2}\\left(\\frac{1}{n}-\\frac{1}{n+2}\\right)$，求和后剩下第 1、2 项与最后两项。",
+      "分组求和时每组都要按 $n$ 项计算（例如 $a_n=2n+3^n$ 中 $\\sum 3^k$ 是 $n$ 项等比求和），项数数错是最常见的失误。",
+      "不论用哪种技巧，结果都应代入 $n=1$ 检验：$S_1$ 必须等于 $a_1$；错位相减与裂项相消尤其容易在系数或首尾项上出错。"
+    ],
+    "propertiesEn": [
+      "Reversed addition requires a constant paired sum $a_k+a_{n+1-k}=C$; arithmetic sequences are the typical case, but any sequence with this pairing property works.",
+      "Shifted subtraction applies when the general term is \"arithmetic times geometric\"; after subtracting, the middle is a geometric series of ratio $q$. If $q=1$ the general term degenerates to an arithmetic one, so use the arithmetic formula instead.",
+      "Telescoping requires splitting each term into a difference of consecutive pieces and checking both the constant factor and the surviving terms: $\\frac{1}{n(n+2)}=\\frac{1}{2}\\left(\\frac{1}{n}-\\frac{1}{n+2}\\right)$ leaves the first two and the last two terms.",
+      "When splitting into groups, every group is still summed over $n$ terms (e.g. in $a_n=2n+3^n$ the part $\\sum 3^k$ is a geometric sum of $n$ terms); miscounting the number of terms is the usual slip.",
+      "Whatever the technique, substitute $n=1$ into the answer: $S_1$ must equal $a_1$; coefficient and end-term errors show up most often in shifted subtraction and telescoping."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          0.5
+        ],
+        [
+          2,
+          0.6667
+        ],
+        [
+          3,
+          0.75
+        ],
+        [
+          4,
+          0.8
+        ],
+        [
+          5,
+          0.8333
+        ],
+        [
+          6,
+          0.8571
+        ]
+      ],
+      "xRange": [
+        0,
+        7
+      ],
+      "yRange": [
+        0,
+        1
+      ],
+      "pointColor": "#06d6a0",
+      "pointSize": 5,
+      "title": "裂项相消例子中的部分和 Sₙ = n/(n+1)，逐项趋近于 1"
+    },
+    "examples": [
+      {
+        "problem": "求 $S_n=\\frac{1}{1\\times 2}+\\frac{1}{2\\times 3}+\\cdots+\\frac{1}{n(n+1)}$。",
+        "solution": "因为 $\\frac{1}{k(k+1)}=\\frac{1}{k}-\\frac{1}{k+1}$，所以\n\n$S_n=\\left(1-\\frac12\\right)+\\left(\\frac12-\\frac13\\right)+\\left(\\frac13-\\frac14\\right)+\\cdots+\\left(\\frac1n-\\frac{1}{n+1}\\right)$。\n\n中间的 $-\\frac12+\\frac12$、$-\\frac13+\\frac13$ 等成对消去，只剩下第一项 1 与最后一项 $-\\frac{1}{n+1}$，所以\n\n$S_n=1-\\frac{1}{n+1}=\\frac{n}{n+1}$。\n\n验算：$n=1$ 时 $S_1=\\frac12=a_1$ ✔；$n=2$ 时 $\\frac{2}{3}=\\frac12+\\frac16$ ✔。"
+      },
+      {
+        "problem": "求 $S_n=1\\times 2+2\\times 2^2+3\\times 2^3+\\cdots+n\\times 2^n$。",
+        "solution": "通项为 $a_k=k\\cdot 2^k$，是「等差 × 等比」，用错位相减。\n\n$S_n=1\\times 2+2\\times 2^2+3\\times 2^3+\\cdots+n\\times 2^n$，\n\n$2S_n=1\\times 2^2+2\\times 2^3+3\\times 2^4+\\cdots+(n-1)\\times 2^n+n\\times 2^{n+1}$。\n\n上下两式错开一位相减（第二行减第一行）：\n\n$S_n=n\\times 2^{n+1}-\\left(2+2^2+2^3+\\cdots+2^n\\right)$。\n\n其中 $2+2^2+\\cdots+2^n=\\frac{2(2^n-1)}{2-1}=2^{n+1}-2$，代入得\n\n$S_n=n\\,2^{n+1}-\\left(2^{n+1}-2\\right)=(n-1)2^{n+1}+2$。\n\n验算：$n=1$ 时 $(1-1)\\times 4+2=2=1\\times 2$ ✔；$n=2$ 时 $(2-1)\\times 8+2=10=2+8$ ✔；$n=3$ 时 $(3-1)\\times 16+2=34=2+8+24$ ✔。"
+      }
+    ],
+    "tags": [
+      "数列求和",
+      "错位相减",
+      "裂项相消",
+      "分组求和"
+    ],
+    "links": [
+      "arithmetic-sequence",
+      "geometric-sequence",
+      "series",
+      "mathematical-induction",
+      "sequence-concept"
+    ]
+  },
+  {
+    "id": "mathematical-induction",
+    "title": "数学归纳法",
+    "titleEn": "Mathematical Induction",
+    "branch": "sequence",
+    "level": 3,
+    "summary": "数学归纳法用「奠基 + 归纳递推」两步证明与正整数有关的命题；两步缺一不可，递推时必须真正用到归纳假设。",
+    "summaryEn": "Mathematical induction proves statements about positive integers in two steps — a base case and an inductive step; both are indispensable, and the inductive step must genuinely use the hypothesis.",
+    "definition": "**数学归纳法**是证明「对一切 $n\\ge n_0$ 的整数 $n$，命题 $P(n)$ 都成立」的标准方法，分两步：**奠基**，验证 $n=n_0$ 时 $P(n_0)$ 成立；**归纳递推**，假设 $n=k$（$k\\ge n_0$）时命题成立（这叫作归纳假设），并在此假设下证明 $n=k+1$ 时命题也成立。两步都完成了，才能断言命题对一切 $n\\ge n_0$ 都成立。\n\n为什么两步就够了？可以类比多米诺骨牌：第一块被推倒（奠基），而且任意一块倒下都会带倒下一块（递推），那么所有骨牌会依次倒下。严格的依据是正整数集的良序性：若结论在某处首次不成立，设最小的反例为 $n=m$，由奠基知 $m>n_0$，于是 $m-1\\ge n_0$ 处命题成立，再由递推即知 $m$ 处也成立，矛盾。\n\n使用时有三条纪律：一是两步缺一不可——只验证奠基无法覆盖一般情形，只做递推而没有起点同样不能下结论；二是递推步必须真正用到「$n=k$ 成立」这个假设，若全程没有用它，实际上只是又验证了一个孤立情形；三是起点 $n_0$ 由命题本身决定，可以是 0、1、2 或更大的数。另外，数学归纳法是**证明**工具，不能代替探索与猜想。",
+    "definitionEn": "**Mathematical induction** is the standard way to prove that a statement $P(n)$ holds for every integer $n\\ge n_0$. It has two steps: the **base case**, verifying $P(n_0)$; and the **inductive step**, assuming $P(k)$ for some $k\\ge n_0$ (the induction hypothesis) and using that assumption to prove $P(k+1)$. Only when both steps are complete may we conclude that $P(n)$ holds for all $n\\ge n_0$.\n\nWhy are two steps enough? Think of dominoes: the first tile falls (base case), and whenever one tile falls it knocks over the next (inductive step), so every tile falls in turn. Rigorously this rests on the well-ordering of the integers: if the claim failed somewhere, let $m$ be the smallest counterexample; the base case gives $m>n_0$, so the claim holds at $m-1\\ge n_0$, and the inductive step then makes it hold at $m$ — a contradiction.\n\nThree rules of discipline: first, neither step may be skipped — checking the base case alone says nothing about the general case, and an inductive step without a starting point proves nothing at all; second, the inductive step must genuinely use the hypothesis $P(k)$ — a derivation that never uses it has merely checked one more isolated case; third, the starting value $n_0$ is dictated by the statement and may be 0, 1, 2, or larger. Finally, induction is a tool of **proof**, not of discovery.",
+    "formulas": [
+      {
+        "latex": "P(n_0)\\ \\text{成立},\\quad P(k)\\Rightarrow P(k+1)\\ (k\\ge n_0)\\ \\Longrightarrow\\ P(n)\\ \\text{对一切}\\ n\\ge n_0\\ \\text{成立}",
+        "note": "数学归纳法的逻辑结构：奠基与递推各占一步，合起来才覆盖所有 n≥n₀ 的情形。",
+        "noteEn": "The logical structure of induction: one step for the base case, one for the inductive step; together they cover every $n\\ge n_0$."
+      },
+      {
+        "latex": "n=n_0:\\quad P(n_0)\\ \\text{成立}",
+        "note": "奠基步骤：验证起点。起点不一定是 1，由命题本身决定。",
+        "noteEn": "Base case: verify the starting value, which need not be 1 but is fixed by the statement."
+      },
+      {
+        "latex": "\\text{假设}\\ P(k)\\ (k\\ge n_0)\\ \\text{成立}\\ \\Longrightarrow\\ P(k+1)\\ \\text{成立}",
+        "note": "归纳递推步骤：必须把「n=k 成立」明确写出并真正用上，否则递推不成立。",
+        "noteEn": "Inductive step: state the hypothesis $P(k)$ explicitly and actually use it; otherwise the step is not valid."
+      },
+      {
+        "latex": "1+3+5+\\cdots+(2n-1)=n^2",
+        "note": "最常见的归纳法例题：递推时把新增项 $2k+1$ 加到假设式上，恰好凑成 $(k+1)^2$。",
+        "noteEn": "The classic first example: add the new term $2k+1$ to the hypothesis and it completes the square $(k+1)^2$."
+      },
+      {
+        "latex": "(1+x)^n\\ge 1+nx\\quad(x>-1,\\ n\\in\\mathbb{N}^*)",
+        "note": "伯努利不等式，用归纳法证明；条件 $x>-1$ 保证 $1+x>0$，才能在不等式两边同乘 $1+x$。",
+        "noteEn": "Bernoulli's inequality, proved by induction; the condition $x>-1$ keeps $1+x$ positive, which is what allows multiplying both sides by $1+x$."
+      }
+    ],
+    "properties": [
+      "两步缺一不可：只验证奠基无法覆盖一般情形，只做递推而没有起点也不能下结论。例如 $n^2+n+41$ 在 $n=1,2,\\dots,39$ 时都是质数，但 $n=40$ 时等于 $41^2$，不是质数。",
+      "递推步必须真正使用归纳假设：证明 $n=k+1$ 的情形时，应把「$P(k)$ 成立」明确写出来并加以利用，否则等于没有完成递推。",
+      "奠基的起点 $n_0$ 由命题决定，不一定是 1：如证明「$2^n>n^2$ 对 $n\\ge 5$ 成立」要在 $n=5$ 奠基，而「n 边形的内角和为 (n−2)·180°」要从 n=3 奠基。",
+      "由递推公式 $a_{n+1}=f(a_n)$ 求通项时，常先算出前几项、归纳出猜想，再用数学归纳法严格证明；归纳法把猜想变成定理，但猜不出结论时它无法代替探索。",
+      "第二数学归纳法（强归纳法）假设 $n_0\\le i\\le k$ 时命题都成立，再证明 $n=k+1$ 时成立，适合递推关系依赖前面多项的命题（如斐波那契型问题）。"
+    ],
+    "propertiesEn": [
+      "Neither step can be skipped: the base case alone says nothing about the general case, and an inductive step without a starting point proves nothing. For example, $n^2+n+41$ is prime for $n=1,2,\\dots,39$ but equals $41^2$ at $n=40$.",
+      "The inductive step must genuinely use the induction hypothesis: when proving the case $n=k+1$, write the assumption $P(k)$ down explicitly and use it, or the step is not completed.",
+      "The starting value $n_0$ is determined by the statement and need not be 1: proving $2^n>n^2$ for $n\\ge 5$ starts at $n=5$, while the angle-sum formula for an $n$-gon starts at $n=3$.",
+      "To find a general term from a recurrence $a_{n+1}=f(a_n)$, compute the first few terms, guess the pattern, then prove it rigorously by induction; induction turns the guess into a theorem but cannot replace the search for it.",
+      "Strong induction assumes the statement for all $n_0\\le i\\le k$ and then proves the case $n=k+1$; it is the natural tool when the recurrence refers back to several earlier terms (Fibonacci-type problems)."
+    ],
+    "examples": [
+      {
+        "problem": "用数学归纳法证明：对一切正整数 $n$，$1+3+5+\\cdots+(2n-1)=n^2$。",
+        "solution": "记这个命题为 $P(n)$。\n\n（1）奠基：当 $n=1$ 时，左边 $=1$，右边 $=1^2=1$，等式成立。\n\n（2）归纳递推：假设 $n=k$（$k\\ge 1$）时等式成立，即 $1+3+5+\\cdots+(2k-1)=k^2$。\n\n当 $n=k+1$ 时，左边比 $n=k$ 时多了最后一项 $2(k+1)-1=2k+1$，于是\n\n$1+3+\\cdots+(2k-1)+(2k+1)=k^2+(2k+1)=(k+1)^2$，\n\n右边正好是 $n=k+1$ 时的 $(k+1)^2$，所以 $n=k+1$ 时等式也成立。这里用到了归纳假设 $1+3+\\cdots+(2k-1)=k^2$，替换后再配方。\n\n（3）结论：由（1）（2）及数学归纳法原理，对一切正整数 $n$，$1+3+5+\\cdots+(2n-1)=n^2$。\n\n验算：$n=3$ 时左边 $=1+3+5=9=3^2$ ✔。"
+      },
+      {
+        "problem": "用数学归纳法证明：对一切 $n\\ge 5$（$n\\in\\mathbb{N}^*$），$2^n>n^2$。",
+        "solution": "记命题为 $P(n)$。\n\n（1）奠基：当 $n=5$ 时，$2^5=32>25=5^2$，成立。注意起点是 5 而不是 1：$n=2$ 时 $4=4$、$n=3$ 时 $8<9$、$n=4$ 时 $16=16$ 都不满足严格大于，所以归纳只能从 $n=5$ 起步。\n\n（2）归纳递推：假设 $n=k$（$k\\ge 5$）时 $2^k>k^2$ 成立。\n\n当 $n=k+1$ 时，$2^{k+1}=2\\times 2^k>2k^2$（这里用到了归纳假设，并在两边同乘正数 2）。\n\n又因为 $k\\ge 5$，有 $2k^2-(k+1)^2=k^2-2k-1=25-10-1=14>0$（取 $k=5$ 时最小），即 $2k^2>(k+1)^2$。\n\n所以 $2^{k+1}>2k^2>(k+1)^2$，即 $n=k+1$ 时命题成立。\n\n（3）结论：由（1）（2），对一切 $n\\ge 5$ 有 $2^n>n^2$。\n\n验算：$k=5$ 时 $2\\times 25=50>36=6^2$ ✔；$n=6$ 时 $64>36$ ✔。"
+      }
+    ],
+    "tags": [
+      "数学归纳法",
+      "归纳假设",
+      "命题证明",
+      "正整数"
+    ],
+    "links": [
+      "sequence-concept",
+      "arithmetic-sequence",
+      "geometric-sequence",
+      "basic-inequality",
+      "binomial-theorem"
+    ]
+  }
+]

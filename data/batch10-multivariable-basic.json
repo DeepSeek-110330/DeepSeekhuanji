@@ -1,0 +1,783 @@
+[
+  {
+    "id": "multivariable-function",
+    "title": "多元函数",
+    "titleEn": "Functions of Several Variables",
+    "branch": "multivariable",
+    "level": 4,
+    "summary": "把对应关系从一维推广到多个自变量：z=f(x,y) 把平面上的点映为数，图像是空间曲面，等值线是它的「地形图」。",
+    "summaryEn": "A rule that assigns a real number to each point of a planar region, written z=f(x,y); its graph is a surface and its level curves form its contour map.",
+    "definition": "设 $D$ 是平面上的一些点组成的集合。如果对 $D$ 中每一点 $(x,y)$，按照某个对应法则 $f$，都有唯一确定的实数 $z$ 与之对应，就称 $f$ 为定义在 $D$ 上的**二元函数**，记作\n\n$$z=f(x,y),\\qquad (x,y)\\in D$$\n\n其中 $D$ 叫做函数的**定义域**，所有函数值组成的集合叫做**值域**。用同样的方式可以定义三元函数 $u=f(x,y,z)$ 以及一般的 $n$ 元函数 $u=f(x_1,x_2,\\ldots,x_n)$。\n\n与一元函数相比，多元函数的定义域不再是一个区间，而是平面上的区域（矩形、圆盘、半平面等）。求定义域时要把所有限制条件同时列出，例如 $f(x,y)=\\sqrt{1-x^2-y^2}$ 要求 $1-x^2-y^2\\ge 0$，定义域是单位圆盘 $x^2+y^2\\le 1$。\n\n二元函数的图像是三维空间中的一张曲面 $z=f(x,y)$。画不出这张曲面时，就用**等值线**（等高线）来把握它的形状：方程 $f(x,y)=c$ 给出函数值等于常数 $c$ 的所有点组成的一条曲线，让 $c$ 取不同值，就得到一族曲线，就像地图上的等高线。多元函数是多元微积分的起点。",
+    "definitionEn": "Let $D$ be a set of points in the plane. If to every point $(x,y)\\in D$ a rule $f$ assigns a unique real number $z$, then $f$ is a **function of two variables** on $D$, written\n\n$$z=f(x,y),\\qquad (x,y)\\in D$$\n\nThe set $D$ is the **domain** and the set of all values of $f$ is the **range**. Functions of three or $n$ variables, $u=f(x_1,x_2,\\ldots,x_n)$, are defined in exactly the same way.\n\nUnlike the one-variable case, the domain of a two-variable function is usually a region in the plane (a rectangle, a disk, a half-plane, ...), and all restrictions must hold at the same time: for $f(x,y)=\\sqrt{1-x^2-y^2}$ we need $1-x^2-y^2\\ge 0$, so the domain is the unit disk $x^2+y^2\\le 1$.\n\nThe graph of $z=f(x,y)$ is a surface in three-dimensional space. Since it cannot be drawn on a flat page directly, we describe its shape by **level curves** (contour lines): the equation $f(x,y)=c$ is the curve along which the function equals the constant $c$, and letting $c$ vary gives a whole family of curves, just like contour lines on a topographic map. Multivariable functions are the starting point of multivariable calculus.",
+    "formulas": [
+      {
+        "latex": "z=f(x,y),\\qquad (x,y)\\in D",
+        "note": "二元函数的记号：$D$ 是定义域，$z$ 是因变量",
+        "noteEn": "Notation for a function of two variables; $D$ is the domain"
+      },
+      {
+        "latex": "u=f(x_1,x_2,\\ldots,x_n)",
+        "note": "n 元函数的一般记号；$n\\ge 3$ 时图像无法直接画出来",
+        "noteEn": "A function of $n$ variables; for $n\\ge 3$ the graph cannot be drawn directly"
+      },
+      {
+        "latex": "f(x,y)=c",
+        "note": "等值线方程：函数取同一个值 $c$ 的点连成的曲线",
+        "noteEn": "Level curve: the set of points where the function has the same value $c$"
+      },
+      {
+        "latex": "z=x^2+y^2",
+        "note": "典型例子：图像是旋转抛物面，等值线是同心圆 $x^2+y^2=c\\ (c>0)$",
+        "noteEn": "A model example: the graph is a paraboloid and the level curves are the circles $x^2+y^2=c\\ (c>0)$"
+      }
+    ],
+    "expression": {
+      "text": "z = f(x, y)，(x, y) ∈ D",
+      "symbol": "f(x, y)",
+      "note": "两个自变量各自取自定义域 D，每对 (x, y) 只对应唯一一个函数值。",
+      "noteEn": "Both variables range over the domain D; each pair (x, y) gives exactly one value."
+    },
+    "properties": [
+      "定义域是平面点集；求定义域要把根号、分母、对数等所有限制条件同时满足",
+      "图像是三维空间中的曲面；三元以上的函数无法直接作图，只能借助等值面与截线研究",
+      "等值线 $f(x,y)=c$：不同的 $c$ 给出不同曲线，同一族等值线互不相交",
+      "固定一个变量（如令 $y=y_0$），二元函数退化为关于 $x$ 的一元函数 $z=f(x,y_0)$——这是截线法与偏导数的出发点",
+      "多元函数的极限、连续、可微等概念比一元函数复杂得多，需要全新的工具"
+    ],
+    "propertiesEn": [
+      "The domain is a set of points in the plane; all restrictions (roots, denominators, logarithms, ...) must hold at once",
+      "The graph is a surface in space; for three or more variables only level surfaces and slices are available",
+      "Level curves $f(x,y)=c$: different values of $c$ give different curves, and curves of one family never cross",
+      "Fixing one variable (say $y=y_0$) reduces the function to a one-variable function $z=f(x,y_0)$—the starting point of slices and partial derivatives",
+      "Limits, continuity and differentiability are much subtler than in the one-variable case and require new tools"
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [-2.5, 2.5],
+      "yRange": [-2.5, 2.5],
+      "levels": 12,
+      "levelRange": [0, 12.5],
+      "title": "f(x,y) = x² + y² 的等值线（同心圆）"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x,y)=\\sqrt{1-x^2-y^2}+\\ln(x+y)$ 的定义域，并说明它的形状。",
+        "solution": "两个条件必须同时满足：\n\n(1) 根号内非负：$1-x^2-y^2\\ge 0$，即 $x^2+y^2\\le 1$，点在单位圆盘内；\n\n(2) 对数内为正：$x+y>0$，即 $y>-x$，点在直线 $y=-x$ 的上方。\n\n所以定义域是单位圆盘与上半平面 $y>-x$ 的交集——一个被直线切出来的半圆盘（含圆上满足 $y>-x$ 的弧，不含直线 $y=-x$ 上的点）。",
+        "problemEn": "Find the domain of $f(x,y)=\\sqrt{1-x^2-y^2}+\\ln(x+y)$ and describe its shape.",
+        "solutionEn": "Two conditions must hold at the same time: (1) $1-x^2-y^2\\ge 0$, i.e. $x^2+y^2\\le 1$ (inside the unit disk); (2) $x+y>0$, i.e. $y>-x$ (above the line $y=-x$). The domain is therefore a half-disk cut out of the unit disk by the line $y=-x$ (boundary on the line excluded)."
+      },
+      {
+        "problem": "说明 $f(x,y)=x^2+y^2$ 的等值线形状，并写出 $f=1$ 与 $f=4$ 两条等值线。",
+        "solution": "$f(x,y)=c$ 即 $x^2+y^2=c$：当 $c>0$ 时是半径为 $\\sqrt c$ 的圆；$c=0$ 时退化为原点一个点；$c<0$ 时没有点。因此 $f=1$ 是半径为 $1$ 的圆，$f=4$ 是半径为 $2$ 的圆——沿每一条等值线，函数值保持不变。",
+        "problemEn": "Describe the level curves of $f(x,y)=x^2+y^2$ and write down those for $f=1$ and $f=4$.",
+        "solutionEn": "$f(x,y)=c$ means $x^2+y^2=c$: for $c>0$ this is the circle of radius $\\sqrt c$, for $c=0$ just the origin, and for $c<0$ the empty set. Thus $f=1$ is the circle of radius $1$ and $f=4$ the circle of radius $2$; the function is constant along each level curve."
+      }
+    ],
+    "tags": ["多元函数", "二元函数", "等值线"],
+    "links": ["function-concept", "domain-range", "multivariable-limit", "partial-derivative"]
+  },
+  {
+    "id": "multivariable-limit",
+    "title": "多元函数的极限与连续",
+    "titleEn": "Limits and Continuity of Multivariable Functions",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "点以任意路径趋近时函数值都趋于同一个数，极限才存在；两条路径结果不同就足以断定极限不存在。",
+    "summaryEn": "The limit exists only when the point approaches from every possible path with the same value; two paths giving different values already kill the limit.",
+    "definition": "设二元函数 $f$ 在点 $P_0(x_0,y_0)$ 的某个去心邻域内有定义，$A$ 是常数。如果当点 $P(x,y)$ 以**任何方式**无限接近 $P_0$（但 $P\\neq P_0$）时，$f(x,y)$ 都无限接近 $A$，就称 $A$ 是 $f$ 在 $P_0$ 处的**极限**，记作\n\n$$\\lim_{(x,y)\\to(x_0,y_0)}f(x,y)=A$$\n\n用 $\\varepsilon$-$\\delta$ 语言说就是：对任意 $\\varepsilon>0$，存在 $\\delta>0$，当 $0<\\sqrt{(x-x_0)^2+(y-y_0)^2}<\\delta$ 时，有 $|f(x,y)-A|<\\varepsilon$。\n\n关键在于「任何方式」四个字：一元函数中 $x$ 只能从左右两侧趋近 $x_0$，而平面上点趋近 $P_0$ 的路径有无穷多条。于是有两条基本结论：极限存在，则沿**任意路径**趋近都得到同一个值 $A$；反过来，**只要沿两条不同路径得到不同的值（或沿某条路径极限不存在），就可以断定极限不存在**。判断极限是否存在时要注意一个陷阱：沿**所有直线**路径都得到同一个值仍然不够，还必须检查一般的曲线路径。\n\n比如 $f(x,y)=\\frac{xy}{x^2+y^2}$：沿直线 $y=mx$ 有 $f(x,mx)=\\frac{m}{1+m^2}$，结果随斜率 $m$ 变化——沿 $y=x$ 得到 $\\frac12$，沿 $x$ 轴得到 $0$，所以极限不存在。而 $g(x,y)=\\frac{x^2y}{x^2+y^2}$ 满足 $|g(x,y)|\\le |y|$，由夹逼准则知 $\\lim\\limits_{(x,y)\\to(0,0)}g(x,y)=0$。\n\n**连续性**：若 $\\lim\\limits_{(x,y)\\to(x_0,y_0)}f(x,y)=f(x_0,y_0)$，即极限存在且等于函数值，就称 $f$ 在 $P_0$ 处连续；若 $f$ 在区域 $D$ 内每一点都连续，就说它在 $D$ 上连续。一切多元初等函数在其定义区域内都是连续的，有界闭区域上的连续二元函数一定取得最大值与最小值。注意：对二元函数来说，两个偏导数都存在**不能**保证连续（见偏导数一节）。",
+    "definitionEn": "Let $f$ be defined on a punctured neighborhood of $P_0(x_0,y_0)$ and let $A$ be a constant. If $f(x,y)$ gets arbitrarily close to $A$ as the point $P(x,y)$ approaches $P_0$ in **any possible way** (with $P\\neq P_0$), then $A$ is the **limit** of $f$ at $P_0$:\n\n$$\\lim_{(x,y)\\to(x_0,y_0)}f(x,y)=A$$\n\nIn $\\varepsilon$-$\\delta$ language: for every $\\varepsilon>0$ there exists $\\delta>0$ such that $0<\\sqrt{(x-x_0)^2+(y-y_0)^2}<\\delta$ implies $|f(x,y)-A|<\\varepsilon$.\n\nThe phrase **any possible way** is the heart of the matter. In one variable, $x$ can only approach from the left or the right; in the plane there are infinitely many paths leading to $P_0$. Two basic facts follow: if the limit exists, then every path gives the same value $A$; and if two paths give different values (or one path has no limit), then the limit does not exist. One pitfall: getting the same value along **every straight line** is still not enough — curved paths must be checked as well.\n\nFor example, take $f(x,y)=\\frac{xy}{x^2+y^2}$. Along $y=mx$ we have $f(x,mx)=\\frac{m}{1+m^2}$, which depends on the slope: along $y=x$ the value is $\\frac12$, while along the $x$-axis it is $0$, so the limit at the origin does not exist. In contrast, $g(x,y)=\\frac{x^2y}{x^2+y^2}$ satisfies $|g(x,y)|\\le |y|$, so the squeeze theorem gives $\\lim\\limits_{(x,y)\\to(0,0)}g(x,y)=0$.\n\n**Continuity**: $f$ is continuous at $P_0$ if $\\lim\\limits_{(x,y)\\to(x_0,y_0)}f(x,y)=f(x_0,y_0)$ — the limit exists and equals the function value; $f$ is continuous on a region $D$ if it is continuous at every point of $D$. Elementary functions of several variables are continuous on their domains, and a continuous function on a closed bounded region attains both a maximum and a minimum. Beware: for a function of two variables, the existence of both partial derivatives does **not** imply continuity (see the node on partial derivatives).",
+    "formulas": [
+      {
+        "latex": "\\lim_{(x,y)\\to(x_0,y_0)}f(x,y)=A",
+        "note": "二元函数极限的记号：趋近方式必须是「任意路径」，而不是某一个方向",
+        "noteEn": "The limit of a two-variable function: the approach must be along every path, not just one direction"
+      },
+      {
+        "latex": "\\forall \\varepsilon>0,\\ \\exists \\delta>0:\\ 0<\\sqrt{(x-x_0)^2+(y-y_0)^2}<\\delta\\ \\Rightarrow\\ |f(x,y)-A|<\\varepsilon",
+        "note": "$\\varepsilon$-$\\delta$ 定义：用去心圆邻域统一刻画「任意路径」",
+        "noteEn": "The $\\varepsilon$-$\\delta$ definition: a punctured disk encodes 'every path' at once"
+      },
+      {
+        "latex": "f(x,mx)=\\frac{m}{1+m^2}",
+        "note": "对 $\\frac{xy}{x^2+y^2}$ 沿直线 $y=mx$ 趋近原点，结果随 $m$ 变化，故极限不存在",
+        "noteEn": "For $\\frac{xy}{x^2+y^2}$ along $y=mx$ the value depends on $m$, so the limit fails to exist"
+      },
+      {
+        "latex": "|g|=\\left|\\frac{x^2y}{x^2+y^2}\\right|\\le |y|",
+        "note": "夹逼准则：$g=\\frac{x^2y}{x^2+y^2}$ 在原点处的极限为 $0$",
+        "noteEn": "Squeeze theorem: $g=\\frac{x^2y}{x^2+y^2}$ tends to $0$ at the origin"
+      },
+      {
+        "latex": "\\lim_{(x,y)\\to(x_0,y_0)}f(x,y)=f(x_0,y_0)",
+        "note": "二元函数在一点连续的定义：极限存在且等于函数值",
+        "noteEn": "Continuity at a point: the limit exists and equals the function value"
+      }
+    ],
+    "expression": {
+      "text": "lim_{(x,y)→(x₀,y₀)} f(x,y) = A ⟺ 沿任意路径趋近都趋于 A",
+      "symbol": "lim_{(x,y)→(x₀,y₀)} f(x,y)",
+      "note": "两条路径结果不同，极限就不存在；只检验直线路径不够；连续要求极限值恰好等于函数值。",
+      "noteEn": "Two paths with different values kill the limit; straight lines alone are not enough; continuity requires the limit to equal the function value."
+    },
+    "properties": [
+      "极限存在的特征：沿任意路径（曲线、点列）趋近都得到同一个值",
+      "两条路径结果不同（或某条路径不存在）⇒ 极限不存在；所有直线路径相同仍不足为凭",
+      "连续 = 极限存在且等于函数值；多元初等函数在其定义区域内连续",
+      "有界闭区域上的连续函数一定取得最大值与最小值（多元最值定理）",
+      "偏导数存在只说明两个坐标方向上的性态，不能保证连续（参见偏导数一节）"
+    ],
+    "propertiesEn": [
+      "Characterisation of the limit: every possible path (curve or sequence) must lead to the same value",
+      "Two paths with different results (or one failing path) imply the limit does not exist; agreeing on all straight lines is not enough",
+      "Continuity means the limit exists and equals the function value; elementary functions are continuous on their domains",
+      "A continuous function on a closed bounded region attains its maximum and minimum",
+      "Partial derivatives only describe behaviour along the two coordinate directions and do not imply continuity"
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x*y/(x^2 + y^2)",
+      "xRange": [-2.5, 2.5],
+      "yRange": [-2.5, 2.5],
+      "levels": 12,
+      "levelRange": [-0.5, 0.5],
+      "title": "xy/(x²+y²) 的等值线：过原点的直线族"
+    },
+    "examples": [
+      {
+        "problem": "讨论 $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{xy}{x^2+y^2}$ 是否存在。",
+        "solution": "沿直线 $y=mx$（$m\\neq 0$）让 $x\\to 0$：\n\n$$f(x,mx)=\\frac{mx^2}{x^2+m^2x^2}=\\frac{m}{1+m^2}$$\n\n沿 $y=x$（即 $m=1$）得到 $\\frac12$；沿 $x$ 轴（即 $m=0$）得到 $0$。两条路径得到不同的值，所以极限不存在。（既然极限不存在，无论怎样补充 $f(0,0)$ 的值，函数在原点都不可能连续。）",
+        "problemEn": "Does $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{xy}{x^2+y^2}$ exist?",
+        "solutionEn": "Along $y=mx$ ($m\\neq 0$) with $x\\to 0$ we get $f(x,mx)=\\frac{m}{1+m^2}$. Along $y=x$ ($m=1$) the value is $\\frac12$, while along the $x$-axis it is $0$. Different paths give different values, so the limit does not exist; no value of $f(0,0)$ can make the function continuous there."
+      },
+      {
+        "problem": "判断 $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{xy^2}{x^2+y^4}$ 是否存在。",
+        "solution": "先沿直线 $y=mx$：$f(x,mx)=\\frac{m^2x^3}{x^2+m^4x^4}=\\frac{m^2x}{1+m^4x^2}\\to 0$，所有直线路径都给出 $0$。但沿抛物线 $x=y^2$：$f(y^2,y)=\\frac{y^4}{y^4+y^4}=\\frac12$，不趋于 $0$。两条路径结果不同，故极限不存在。这个例子说明：只检验直线路径是不够的。",
+        "problemEn": "Does $\\lim\\limits_{(x,y)\\to(0,0)}\\frac{xy^2}{x^2+y^4}$ exist?",
+        "solutionEn": "Along every straight line $y=mx$ we have $f(x,mx)=\\frac{m^2x}{1+m^4x^2}\\to 0$. But along the parabola $x=y^2$ we get $f(y^2,y)=\\frac{y^4}{y^4+y^4}=\\frac12\\neq 0$. Since two paths disagree, the limit does not exist — checking straight lines alone is not enough."
+      }
+    ],
+    "tags": ["多元极限", "连续性", "路径法"],
+    "links": ["limit", "continuity", "limit-laws", "multivariable-function", "partial-derivative"]
+  },
+  {
+    "id": "partial-derivative",
+    "title": "偏导数",
+    "titleEn": "Partial Derivatives",
+    "branch": "multivariable",
+    "level": 4,
+    "summary": "对一个变量求导、把其余变量当常数，得到沿坐标方向的变化率；几何上是截线的切线斜率。",
+    "summaryEn": "Differentiate with respect to one variable while the others are held constant; geometrically it is the slope of a slice curve.",
+    "definition": "设函数 $z=f(x,y)$ 在点 $(x_0,y_0)$ 的某邻域内有定义。把 $y$ 固定在 $y_0$，让 $x$ 在 $x_0$ 处取得增量 $\\Delta x$，如果极限\n\n$$\\lim_{\\Delta x\\to 0}\\frac{f(x_0+\\Delta x,\\ y_0)-f(x_0,y_0)}{\\Delta x}$$\n\n存在，就称它为 $f$ 在点 $(x_0,y_0)$ 处对 $x$ 的**偏导数**，记作 $f_x(x_0,y_0)$ 或 $\\left.\\frac{\\partial z}{\\partial x}\\right|_{(x_0,y_0)}$。类似地，把 $x$ 当作常数、让 $y$ 变化，可以定义对 $y$ 的偏导数 $f_y(x_0,y_0)=\\lim\\limits_{\\Delta y\\to 0}\\frac{f(x_0,\\ y_0+\\Delta y)-f(x_0,y_0)}{\\Delta y}$。\n\n几何意义：平面 $y=y_0$ 截曲面 $z=f(x,y)$ 得到一条截线 $z=f(x,y_0)$，它是关于 $x$ 的一元函数，而 $f_x(x_0,y_0)$ 就是这条截线在 $x=x_0$ 处的切线斜率；同理 $f_y(x_0,y_0)$ 是平面 $x=x_0$ 与曲面的截线在相应点处的切线斜率。\n\n计算方法：求 $\\frac{\\partial f}{\\partial x}$ 时把 $y$ 当作常数，直接使用一元函数的求导法则；求 $\\frac{\\partial f}{\\partial y}$ 时把 $x$ 当作常数。例如 $f(x,y)=x^2y$，则 $f_x=2xy$，$f_y=x^2$。偏导数 $f_x,f_y$ 一般仍是 $x,y$ 的函数，这与一元函数中「导函数」的地位相同。\n\n**重要提醒**：与一元函数「可导必连续」不同，二元函数在某点两个偏导数都存在，**不能**保证在该点连续，更不能保证可微。原因是偏导数只考察沿两条坐标轴方向的变化率，对其它方向的情况一无所知（见例题 2）。",
+    "definitionEn": "Let $z=f(x,y)$ be defined in a neighborhood of $(x_0,y_0)$. Keep $y$ fixed at $y_0$, give $x$ an increment $\\Delta x$, and consider the limit\n\n$$\\lim_{\\Delta x\\to 0}\\frac{f(x_0+\\Delta x,\\ y_0)-f(x_0,y_0)}{\\Delta x}$$\n\nIf it exists, it is called the **partial derivative** of $f$ with respect to $x$ at $(x_0,y_0)$, denoted $f_x(x_0,y_0)$. Similarly, keeping $x$ fixed, the partial derivative with respect to $y$ is $f_y(x_0,y_0)=\\lim\\limits_{\\Delta y\\to 0}\\frac{f(x_0,\\ y_0+\\Delta y)-f(x_0,y_0)}{\\Delta y}$.\n\nGeometrically, the plane $y=y_0$ cuts the surface $z=f(x,y)$ in the slice curve $z=f(x,y_0)$, a one-variable function; $f_x(x_0,y_0)$ is the slope of the tangent to this curve at $x=x_0$. Likewise $f_y(x_0,y_0)$ is the tangent slope of the slice $x=x_0$.\n\nTo compute $\\partial f/\\partial x$, treat $y$ as a constant and use the usual one-variable rules; to compute $\\partial f/\\partial y$, treat $x$ as a constant. For example, if $f(x,y)=x^2y$ then $f_x=2xy$ and $f_y=x^2$. The partial derivatives are themselves functions of $x$ and $y$, just like the derivative function in one variable.\n\n**Important warning**: unlike the one-variable rule 'differentiable implies continuous', a function of two variables can have both partial derivatives at a point and still fail to be continuous there — the partial derivatives only see the two coordinate directions. The standard counterexample is $f(x,y)=\\frac{xy}{x^2+y^2}$ with $f(0,0)=0$: both partial derivatives at the origin equal $0$, yet $f$ is not continuous at the origin. This is why multivariable calculus needs the stronger notion of differentiability.",
+    "formulas": [
+      {
+        "latex": "f_x(x_0,y_0)=\\lim_{\\Delta x\\to 0}\\frac{f(x_0+\\Delta x,\\ y_0)-f(x_0,y_0)}{\\Delta x}",
+        "note": "对 $x$ 的偏导数：把 $y$ 固定在 $y_0$，只让 $x$ 变化",
+        "noteEn": "Partial derivative in $x$: freeze $y$ at $y_0$ and let only $x$ vary"
+      },
+      {
+        "latex": "f_y(x_0,y_0)=\\lim_{\\Delta y\\to 0}\\frac{f(x_0,\\ y_0+\\Delta y)-f(x_0,y_0)}{\\Delta y}",
+        "note": "对 $y$ 的偏导数：把 $x$ 固定在 $x_0$，只让 $y$ 变化",
+        "noteEn": "Partial derivative in $y$: freeze $x$ at $x_0$ and let only $y$ vary"
+      },
+      {
+        "latex": "f_x(x_0,y_0)=\\left.\\frac{d}{dx}f(x,y_0)\\right|_{x=x_0}",
+        "note": "偏导数就是截线作为一元函数的导数：把另一个变量代入选定值后正常求导",
+        "noteEn": "A partial derivative is the ordinary derivative of a slice: substitute the frozen value and differentiate as usual"
+      },
+      {
+        "latex": "\\frac{\\partial}{\\partial x}(x^2y)=2xy,\\qquad \\frac{\\partial}{\\partial y}(x^2y)=x^2",
+        "note": "计算方法：求 $\\partial/\\partial x$ 时把 $y$ 视作常数，求 $\\partial/\\partial y$ 时把 $x$ 视作常数",
+        "noteEn": "Computing rule: treat $y$ as a constant for $\\partial/\\partial x$, and $x$ as a constant for $\\partial/\\partial y$"
+      },
+      {
+        "latex": "f_x,\\ f_y\\ \\text{exist}\\ \\nRightarrow\\ f\\ \\text{continuous}",
+        "note": "偏导数存在不蕴含连续——这是多元函数与一元函数的本质区别",
+        "noteEn": "Existence of partial derivatives does not imply continuity—a key contrast with one-variable calculus"
+      }
+    ],
+    "expression": {
+      "text": "f_x(x₀,y₀) = lim_{Δx→0} [f(x₀+Δx, y₀) − f(x₀, y₀)] / Δx",
+      "symbol": "∂z/∂x",
+      "note": "对一个变量求偏导时，把另一个变量看作常数；偏导数只反映坐标轴方向的变化率。",
+      "noteEn": "When differentiating in one variable, the other is treated as a constant; partial derivatives only see the coordinate directions."
+    },
+    "properties": [
+      "求 $f_x$ 时把 $y$ 当常数、求 $f_y$ 时把 $x$ 当常数，直接套用一元求导法则",
+      "几何意义：$f_x$ 是曲面被平面 $y=y_0$ 截得的曲线的切线斜率",
+      "偏导数本质上是一元函数 $f(x,y_0)$（或 $f(x_0,y)$）在相应点的导数",
+      "**偏导数存在不能保证连续或可微**：经典反例 $f=\\frac{xy}{x^2+y^2}$（原点补定义为 $0$）在原点两个偏导都为 $0$，但函数不连续",
+      "若函数在一点可微，则两个偏导数都存在，且全微分中的系数恰为 $A=f_x,\\ B=f_y$（见全微分）"
+    ],
+    "propertiesEn": [
+      "Treat $y$ as a constant for $f_x$ and $x$ as a constant for $f_y$, using the one-variable rules",
+      "Geometrically, $f_x$ is the slope of the tangent to the slice cut by the plane $y=y_0$",
+      "A partial derivative is the ordinary derivative of the one-variable function $f(x,y_0)$ (or $f(x_0,y)$)",
+      "**Existence of partial derivatives does not imply continuity or differentiability**: for $f=\\frac{xy}{x^2+y^2}$ (defined as $0$ at the origin) both partials vanish at the origin, yet $f$ is discontinuous there",
+      "If $f$ is differentiable at a point, then both partial derivatives exist and the coefficients in the total differential are $A=f_x,\\ B=f_y$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2",
+          "color": "#4cc9f0",
+          "label": "z = f(x, 1) = x²（固定 y=1）"
+        },
+        {
+          "expr": "2*x^2",
+          "color": "#ff8f5e",
+          "label": "z = f(x, 2) = 2x²（固定 y=2）"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "x^2",
+          "at": 1,
+          "color": "#ffd166",
+          "label": "f_x(1,1) = 2"
+        },
+        {
+          "expr": "2*x^2",
+          "at": 1,
+          "color": "#b388ff",
+          "label": "f_x(1,2) = 4"
+        }
+      ],
+      "xRange": [-2, 2.2],
+      "yRange": [-1, 9],
+      "title": "偏导数的几何意义：固定 y 后截线的切线斜率"
+    },
+    "examples": [
+      {
+        "problem": "设 $f(x,y)=x^2y$，求 $f_x$ 与 $f_y$，并求 $f_x(1,1)$、$f_x(1,2)$、$f_y(1,1)$。",
+        "solution": "求 $f_x$ 时把 $y$ 当常数：$f_x=2xy$；求 $f_y$ 时把 $x$ 当常数：$f_y=x^2$。于是 $f_x(1,1)=2$，$f_x(1,2)=4$，$f_y(1,1)=1$。同一个 $x$ 处、不同的 $y$ 截线上切线斜率不同，说明偏导数一般依赖于两个变量的取值。",
+        "problemEn": "For $f(x,y)=x^2y$ find $f_x$ and $f_y$, then evaluate $f_x(1,1)$, $f_x(1,2)$, $f_y(1,1)$.",
+        "solutionEn": "Treating $y$ as a constant gives $f_x=2xy$; treating $x$ as a constant gives $f_y=x^2$. Hence $f_x(1,1)=2$, $f_x(1,2)=4$, $f_y(1,1)=1$. The tangent slopes on different slices differ, showing that partial derivatives generally depend on both variables."
+      },
+      {
+        "problem": "设 $f(x,y)=\\frac{xy}{x^2+y^2}$（$(x,y)\\neq(0,0)$），补充定义 $f(0,0)=0$。用定义求 $f_x(0,0)$、$f_y(0,0)$，并判断 $f$ 在原点是否连续。",
+        "solution": "为了求 $f_x(0,0)$，沿 $x$ 轴取点：$f(\\Delta x,0)=0$，于是\n\n$$f_x(0,0)=\\lim_{\\Delta x\\to 0}\\frac{f(\\Delta x,0)-f(0,0)}{\\Delta x}=\\lim_{\\Delta x\\to 0}\\frac{0-0}{\\Delta x}=0$$\n\n同理 $f_y(0,0)=0$。但沿直线 $y=x$ 有 $f(x,x)=\\frac{x^2}{x^2+x^2}=\\frac12$，它在 $x\\to 0$ 时趋于 $\\frac12\\neq f(0,0)=0$，所以 $f$ 在原点不连续。两个偏导数都存在却不连续——这正是多元函数与一元函数「可导必连续」的本质区别。",
+        "problemEn": "Let $f(x,y)=\\frac{xy}{x^2+y^2}$ for $(x,y)\\neq(0,0)$ and set $f(0,0)=0$. Compute $f_x(0,0)$ and $f_y(0,0)$ from the definition and decide whether $f$ is continuous at the origin.",
+        "solutionEn": "Along the $x$-axis $f(\\Delta x,0)=0$, so $f_x(0,0)=\\lim_{\\Delta x\\to 0}\\frac{0-0}{\\Delta x}=0$, and similarly $f_y(0,0)=0$. But along $y=x$, $f(x,x)=\\frac12\\to\\frac12\\neq f(0,0)=0$, so $f$ is discontinuous at the origin. Both partial derivatives exist, yet the function is not continuous—a fundamental contrast with one-variable calculus."
+      }
+    ],
+    "tags": ["偏导数", "截线", "切线斜率"],
+    "links": ["derivative", "differentiation-rules", "higher-order-partial", "multivariable-limit", "total-differential"]
+  },
+  {
+    "id": "higher-order-partial",
+    "title": "高阶偏导数",
+    "titleEn": "Higher-Order Partial Derivatives",
+    "branch": "multivariable",
+    "level": 4,
+    "summary": "对偏导数再求偏导，得到二阶及更高阶偏导数；混合偏导数连续时与求导次序无关。",
+    "summaryEn": "Differentiating partial derivatives again gives second and higher order partials; mixed partials with continuous derivatives are independent of the order.",
+    "definition": "偏导数 $f_x$、$f_y$ 一般仍是 $x,y$ 的函数，可以对它们再求偏导数，得到**二阶偏导数**。二元函数共有四个二阶偏导数：\n\n$$f_{xx}=\\frac{\\partial}{\\partial x}\\!\\left(\\frac{\\partial f}{\\partial x}\\right)=\\frac{\\partial^2 f}{\\partial x^2},\\qquad f_{yy}=\\frac{\\partial^2 f}{\\partial y^2}$$\n\n$$f_{xy}=\\frac{\\partial}{\\partial y}\\!\\left(\\frac{\\partial f}{\\partial x}\\right)=\\frac{\\partial^2 f}{\\partial y\\,\\partial x},\\qquad f_{yx}=\\frac{\\partial}{\\partial x}\\!\\left(\\frac{\\partial f}{\\partial y}\\right)=\\frac{\\partial^2 f}{\\partial x\\,\\partial y}$$\n\n记号 $f_{xy}$ 表示**先对 $x$ 求偏导，再对 $y$ 求偏导**；$\\frac{\\partial^2 f}{\\partial y\\,\\partial x}$ 同理，分母中越靠右的变量越先被求导。$f_{xy}$ 与 $f_{yx}$ 称为**混合偏导数**。\n\n**克莱罗（Clairaut）定理**：若 $f_{xy}$ 与 $f_{yx}$ 在区域 $D$ 内连续，则在 $D$ 内恒有 $f_{xy}=f_{yx}$，即混合偏导数在连续的前提下与求导次序无关。注意条件不可省：两个混合偏导数都存在但未必相等。\n\n对二阶偏导数再求偏导，就得到三阶偏导数，例如 $f_{xxy}=(f_{xx})_y$，依此类推可以定义任意阶偏导数。高阶偏导数是多元泰勒公式的系数来源；多元极值判别要用二阶偏导数组成的黑塞矩阵；方程 $u_{xx}+u_{yy}=0$（拉普拉斯方程）也由二阶偏导数写成，满足它的函数（如 $u=x^2-y^2$）称为调和函数。",
+    "definitionEn": "The partial derivatives $f_x$ and $f_y$ are again functions of $x$ and $y$, so they can be differentiated once more, giving **second-order partial derivatives**. A function of two variables has four of them:\n\n$$f_{xx}=\\frac{\\partial}{\\partial x}\\!\\left(\\frac{\\partial f}{\\partial x}\\right)=\\frac{\\partial^2 f}{\\partial x^2},\\qquad f_{yy}=\\frac{\\partial^2 f}{\\partial y^2}$$\n\n$$f_{xy}=\\frac{\\partial}{\\partial y}\\!\\left(\\frac{\\partial f}{\\partial x}\\right)=\\frac{\\partial^2 f}{\\partial y\\,\\partial x},\\qquad f_{yx}=\\frac{\\partial}{\\partial x}\\!\\left(\\frac{\\partial f}{\\partial y}\\right)=\\frac{\\partial^2 f}{\\partial x\\,\\partial y}$$\n\nThe notation $f_{xy}$ means: differentiate with respect to $x$ first, then with respect to $y$. The two are called **mixed partial derivatives**.\n\n**Clairaut's theorem**: if $f_{xy}$ and $f_{yx}$ are continuous on a region $D$, then $f_{xy}=f_{yx}$ on $D$ — mixed partial derivatives commute whenever they are continuous. The hypothesis cannot be dropped: both mixed partials may exist and still differ.\n\nDifferentiating second-order partials again gives third-order partials such as $f_{xxy}=(f_{xx})_y$, and so on for any order. Higher-order partials are the coefficients of the multivariable Taylor formula and form the Hessian matrix used in the second-derivative test for extrema; the Laplace equation $u_{xx}+u_{yy}=0$ is written entirely in second-order partials, and its solutions (such as $u=x^2-y^2$) are called harmonic functions.",
+    "formulas": [
+      {
+        "latex": "f_{xx}=\\frac{\\partial^2 f}{\\partial x^2}",
+        "note": "二阶纯偏导数：对 $x$ 连续求两次偏导",
+        "noteEn": "Pure second-order partial: differentiate twice in $x$"
+      },
+      {
+        "latex": "f_{xy}=\\frac{\\partial^2 f}{\\partial y\\,\\partial x}",
+        "note": "混合偏导数：先对 $x$ 求偏导，再对 $y$ 求偏导",
+        "noteEn": "Mixed partial: first in $x$, then in $y$"
+      },
+      {
+        "latex": "f_{xy}=f_{yx}\\qquad(\\text{continuity assumed})",
+        "note": "克莱罗定理：两个混合偏导数连续时与求导次序无关",
+        "noteEn": "Clairaut's theorem: continuous mixed partials do not depend on the order"
+      },
+      {
+        "latex": "f_{xx}=6x+2y,\\qquad f_{xy}=f_{yx}=2x,\\qquad f_{yy}=6y",
+        "note": "对 $f=x^3+x^2y+y^3$ 求出的全部二阶偏导数",
+        "noteEn": "All second-order partials of $f=x^3+x^2y+y^3$"
+      },
+      {
+        "latex": "u_{xx}+u_{yy}=0",
+        "note": "拉普拉斯方程：二阶偏导数最重要的方程，解称为调和函数",
+        "noteEn": "Laplace equation: the most celebrated equation in second-order partials; its solutions are harmonic functions"
+      }
+    ],
+    "expression": {
+      "text": "f_xy = ∂/∂y (∂f/∂x)：先对 x 求偏导，再对 y 求偏导",
+      "symbol": "f_{xy}",
+      "note": "混合偏导数连续时 f_xy = f_yx，可以交换求导次序；求三阶时继续对二阶偏导求导即可。",
+      "noteEn": "When mixed partials are continuous $f_{xy}=f_{yx}$; third-order partials are obtained by differentiating the second-order ones."
+    },
+    "properties": [
+      "二元函数共有四个二阶偏导数：$f_{xx},\\ f_{xy},\\ f_{yx},\\ f_{yy}$",
+      "克莱罗定理：混合偏导数连续时与次序无关（$f_{xy}=f_{yx}$），条件不可省",
+      "二阶偏导数构成黑塞矩阵，是多元极值判别与多元泰勒公式的基础",
+      "拉普拉斯方程 $u_{xx}+u_{yy}=0$ 由二阶偏导数写成，其解称为调和函数",
+      "三阶及更高阶偏导数按同样方式定义，如 $f_{xxy}=(f_{xx})_y$"
+    ],
+    "propertiesEn": [
+      "A two-variable function has four second-order partials: $f_{xx},\\ f_{xy},\\ f_{yx},\\ f_{yy}$",
+      "Clairaut's theorem: continuous mixed partials commute ($f_{xy}=f_{yx}$); the continuity hypothesis cannot be dropped",
+      "Second-order partials form the Hessian matrix, the key to the second-derivative test and Taylor's formula",
+      "The Laplace equation $u_{xx}+u_{yy}=0$ is written in second-order partials; its solutions are harmonic functions",
+      "Third and higher order partials are defined in the same way, e.g. $f_{xxy}=(f_{xx})_y$"
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + 2*y^2",
+      "xRange": [-2.5, 2.5],
+      "yRange": [-2.5, 2.5],
+      "levels": 12,
+      "levelRange": [0, 18.75],
+      "title": "f(x,y) = x² + 2y² 的等值线（椭圆族）"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x,y)=x^3+x^2y+y^3$ 的全部二阶偏导数，并验证 $f_{xy}=f_{yx}$。",
+        "solution": "先求一阶偏导：$f_x=3x^2+2xy$，$f_y=x^2+3y^2$。再分别求二阶偏导：\n\n$$f_{xx}=6x+2y,\\qquad f_{xy}=\\frac{\\partial}{\\partial y}(3x^2+2xy)=2x$$\n\n$$f_{yx}=\\frac{\\partial}{\\partial x}(x^2+3y^2)=2x,\\qquad f_{yy}=6y$$\n\n可见 $f_{xy}=f_{yx}=2x$。由于它们都是多项式、处处连续，这正是克莱罗定理保证的情形。",
+        "problemEn": "Find all second-order partial derivatives of $f(x,y)=x^3+x^2y+y^3$ and verify $f_{xy}=f_{yx}$.",
+        "solutionEn": "First order: $f_x=3x^2+2xy$, $f_y=x^2+3y^2$. Then $f_{xx}=6x+2y$, $f_{xy}=2x$, $f_{yx}=2x$, $f_{yy}=6y$. Hence $f_{xy}=f_{yx}=2x$; both are polynomials, hence continuous, exactly the situation covered by Clairaut's theorem."
+      },
+      {
+        "problem": "验证 $u(x,y)=x^2-y^2$ 满足拉普拉斯方程 $u_{xx}+u_{yy}=0$。",
+        "solution": "$u_x=2x$，$u_y=-2y$；再求一次偏导：$u_{xx}=2$，$u_{yy}=-2$。所以 $u_{xx}+u_{yy}=2-2=0$，$u$ 是调和函数。",
+        "problemEn": "Verify that $u(x,y)=x^2-y^2$ satisfies the Laplace equation $u_{xx}+u_{yy}=0$.",
+        "solutionEn": "$u_x=2x$ and $u_y=-2y$, so $u_{xx}=2$ and $u_{yy}=-2$. Thus $u_{xx}+u_{yy}=2-2=0$: $u$ is harmonic."
+      }
+    ],
+    "tags": ["高阶偏导数", "混合偏导", "克莱罗定理"],
+    "links": ["partial-derivative", "higher-order-derivative", "multivariable-extrema", "multivariable-taylor"]
+  },
+  {
+    "id": "total-differential",
+    "title": "全微分",
+    "titleEn": "Total Differential",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "函数增量可表示为关于 Δx、Δy 的线性部分加上高阶无穷小；可微是多元函数光滑性的正确标准。",
+    "summaryEn": "The increment of the function splits into a linear part in Δx, Δy plus a higher-order infinitesimal; differentiability is the right notion of smoothness for several variables.",
+    "definition": "先回顾一元函数：$\\Delta y=f(x_0+\\Delta x)-f(x_0)=f'(x_0)\\Delta x+o(\\Delta x)$，其中的线性主部 $dy=f'(x_0)\\,dx$ 就是微分。把这个结构推广到二元函数：设 $z=f(x,y)$ 在点 $P_0(x_0,y_0)$ 的某邻域内有定义，记全增量 $\\Delta z=f(x_0+\\Delta x,y_0+\\Delta y)-f(x_0,y_0)$，$\\rho=\\sqrt{(\\Delta x)^2+(\\Delta y)^2}$。如果存在只与 $P_0$ 有关的常数 $A,B$，使得\n\n$$\\Delta z=A\\Delta x+B\\Delta y+o(\\rho)\\qquad(\\rho\\to 0)$$\n\n即 $\\lim\\limits_{\\rho\\to 0}\\frac{\\Delta z-(A\\Delta x+B\\Delta y)}{\\rho}=0$，则称 $f$ 在 $P_0$ 处**可微**，线性主部 $A\\Delta x+B\\Delta y$ 称为 $f$ 在 $P_0$ 处的**全微分**，记作 $dz$。\n\n可微时系数被唯一确定：在定义式中令 $\\Delta y=0$，得 $\\frac{f(x_0+\\Delta x,\\ y_0)-f(x_0,y_0)}{\\Delta x}=A+\\frac{o(|\\Delta x|)}{\\Delta x}\\to A$，所以 $A=f_x(x_0,y_0)$；同理 $B=f_y(x_0,y_0)$。于是\n\n$$dz=f_x(x_0,y_0)\\,dx+f_y(x_0,y_0)\\,dy$$\n\n也就是说：可微 ⇒ 两个偏导数存在，并且全微分完全由它们决定。\n\n几何意义：可微意味着曲面 $z=f(x,y)$ 在点 $(x_0,y_0)$ 附近可以用**切平面**\n\n$$z=f(x_0,y_0)+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$$\n\n近似，全微分 $dz$ 就是切平面上高度的增量。当 $\\Delta x,\\Delta y$ 很小时 $\\Delta z\\approx dz$，这正是近似计算与误差估计的依据。\n\n各条件之间的关系务必记清：若 $f_x,f_y$ 在 $P_0$ 的某邻域内连续，则 $f$ 在 $P_0$ 可微；可微则两个偏导数存在，且 $f$ 连续。反向都不成立：偏导数存在既推不出连续，也推不出可微；甚至「连续 + 偏导数存在」也不能保证可微（见例题 2）。判断可微通常先检查偏导数是否连续，连续则一定可微。",
+    "definitionEn": "Recall the one-variable case: $\\Delta y=f(x_0+\\Delta x)-f(x_0)=f'(x_0)\\Delta x+o(\\Delta x)$, whose linear part $dy=f'(x_0)\\,dx$ is the differential. Generalising: let $z=f(x,y)$ be defined in a neighborhood of $P_0(x_0,y_0)$, write $\\Delta z=f(x_0+\\Delta x,y_0+\\Delta y)-f(x_0,y_0)$ and $\\rho=\\sqrt{(\\Delta x)^2+(\\Delta y)^2}$. If there exist constants $A,B$ depending only on $P_0$ such that\n\n$$\\Delta z=A\\Delta x+B\\Delta y+o(\\rho)\\qquad(\\rho\\to 0),$$\n\ni.e. $\\lim\\limits_{\\rho\\to 0}\\frac{\\Delta z-(A\\Delta x+B\\Delta y)}{\\rho}=0$, then $f$ is **differentiable** at $P_0$, and the linear part $A\\Delta x+B\\Delta y$ is called the **total differential** of $f$ at $P_0$, written $dz$.\n\nWhen $f$ is differentiable the coefficients are forced: setting $\\Delta y=0$ in the definition gives $A=f_x(x_0,y_0)$, and similarly $B=f_y(x_0,y_0)$. Hence\n\n$$dz=f_x(x_0,y_0)\\,dx+f_y(x_0,y_0)\\,dy$$\n\nSo differentiability implies the existence of both partial derivatives and the total differential is completely determined by them.\n\nGeometrically, differentiability means the surface $z=f(x,y)$ can be approximated near $(x_0,y_0)$ by its **tangent plane** $z=f(x_0,y_0)+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$, and $dz$ is the height increment on that plane. When $\\Delta x,\\Delta y$ are small, $\\Delta z\\approx dz$ — the basis of approximation and error estimates.\n\nRemember the hierarchy of conditions: if $f_x,f_y$ are continuous near $P_0$ then $f$ is differentiable at $P_0$; differentiability implies that both partial derivatives exist and that $f$ is continuous. None of the converses holds: partial derivatives may exist without continuity or differentiability, and even continuity plus partial derivatives does not force differentiability (see Example 2).",
+    "formulas": [
+      {
+        "latex": "\\Delta z=A\\Delta x+B\\Delta y+o(\\rho),\\qquad \\rho=\\sqrt{(\\Delta x)^2+(\\Delta y)^2}",
+        "note": "全微分的定义式：增量 = 线性主部 + 高阶无穷小",
+        "noteEn": "Definition: increment equals a linear part plus a higher-order infinitesimal"
+      },
+      {
+        "latex": "dz=f_x\\,dx+f_y\\,dy",
+        "note": "全微分计算公式；可微时 $A=f_x,\\ B=f_y$ 被唯一确定",
+        "noteEn": "Formula for the total differential; when differentiable, $A=f_x$ and $B=f_y$ are forced"
+      },
+      {
+        "latex": "z=f(x_0,y_0)+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)",
+        "note": "切平面方程——全微分的几何解释",
+        "noteEn": "The tangent plane: the geometric meaning of the total differential"
+      },
+      {
+        "latex": "f_x,\\ f_y\\ \\text{continuous}\\ \\Rightarrow\\ f\\ \\text{differentiable}\\ \\Rightarrow\\ f\\ \\text{continuous}",
+        "note": "充分条件与必要条件的关系；反向均不成立",
+        "noteEn": "Sufficient condition and necessary consequences; no converse holds"
+      },
+      {
+        "latex": "f(x_0+\\Delta x,\\ y_0+\\Delta y)\\approx f(x_0,y_0)+f_x\\Delta x+f_y\\Delta y",
+        "note": "近似计算与误差估计公式（$\\Delta x,\\Delta y$ 充分小时）",
+        "noteEn": "Approximation and error estimate for small $\\Delta x,\\Delta y$"
+      }
+    ],
+    "expression": {
+      "text": "Δz = f_x·Δx + f_y·Δy + o(ρ)，ρ = √((Δx)² + (Δy)²)",
+      "symbol": "dz = f_x dx + f_y dy",
+      "note": "可微当且仅当增量能拆成这样的线性主部加高阶无穷小；可微蕴含偏导存在与连续。",
+      "noteEn": "Differentiability means the increment splits exactly this way; it implies both partial derivatives and continuity."
+    },
+    "properties": [
+      "可微 ⇒ 偏导数存在且 $A=f_x,\\ B=f_y$；可微 ⇒ 连续",
+      "偏导数在某邻域内连续是可微的常用充分条件；偏导数存在推不出可微",
+      "全微分是函数增量的线性主部，几何上对应切平面，用于近似计算与误差估计",
+      "可微时沿任意方向的方向导数都存在，且等于 $f_x\\cos\\alpha+f_y\\cos\\beta$",
+      "一元函数「可导 ⟺ 可微」，多元函数不再等价——偏导存在不蕴含可微"
+    ],
+    "propertiesEn": [
+      "Differentiable implies both partial derivatives exist with $A=f_x,\\ B=f_y$, and implies continuity",
+      "Continuity of the partial derivatives in a neighborhood is the standard sufficient condition; existence of partials is not enough",
+      "The total differential is the linear part of the increment; geometrically it is the tangent plane, used for approximation and error estimates",
+      "When differentiable, directional derivatives exist in every direction and equal $f_x\\cos\\alpha+f_y\\cos\\beta$",
+      "In one variable 'differentiable ⟺ has a differential'; in several variables this equivalence breaks down"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(x)",
+          "color": "#4cc9f0",
+          "label": "y = eˣ"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "exp(x)",
+          "at": 0,
+          "color": "#ff6b9d",
+          "label": "切线斜率 = 1"
+        }
+      ],
+      "xRange": [-1.2, 1.5],
+      "yRange": [-0.5, 4],
+      "title": "全微分的一元原型：eˣ 在 x = 0 处的切线"
+    },
+    "examples": [
+      {
+        "problem": "求 $z=x^2y$ 在点 $(1,2)$ 处的全微分，并据此近似计算 $1.02^2\\times 1.97$。",
+        "solution": "先求偏导：$f_x=2xy$，$f_y=x^2$。在点 $(1,2)$ 处 $f_x=4$，$f_y=1$，所以 $dz=4\\,dx+dy$。取 $\\Delta x=0.02$，$\\Delta y=-0.03$，则 $\\Delta z\\approx 4\\times 0.02+1\\times(-0.03)=0.08-0.03=0.05$。因为 $f(1,2)=2$，所以\n\n$$1.02^2\\times 1.97\\approx 2+0.05=2.05$$\n\n与精确值 $1.02^2\\times 1.97=2.049588$ 相比，误差仅约 $4\\times 10^{-4}$，说明全微分是很好的线性近似。",
+        "problemEn": "Find the total differential of $z=x^2y$ at $(1,2)$ and use it to approximate $1.02^2\\times 1.97$.",
+        "solutionEn": "$f_x=2xy$ and $f_y=x^2$, so at $(1,2)$ we get $f_x=4$, $f_y=1$ and $dz=4\\,dx+dy$. With $\\Delta x=0.02$, $\\Delta y=-0.03$: $\\Delta z\\approx 4(0.02)-0.03=0.05$. Since $f(1,2)=2$, the estimate is $2.05$, while the exact value is $1.02^2\\times 1.97=2.049588$ — an error of about $4\\times 10^{-4}$."
+      },
+      {
+        "problem": "设 $f(x,y)=\\frac{xy}{\\sqrt{x^2+y^2}}$（$(x,y)\\neq(0,0)$），补充定义 $f(0,0)=0$。判断 $f$ 在原点是否可微。",
+        "solution": "先求偏导：点 $(\\Delta x,0)$ 处 $f=0$，故 $f_x(0,0)=\\lim\\limits_{\\Delta x\\to 0}\\frac{0-0}{\\Delta x}=0$；同理 $f_y(0,0)=0$。如果可微，就应有 $\\Delta z-0\\cdot\\Delta x-0\\cdot\\Delta y=o(\\rho)$。取 $\\Delta x=\\Delta y=t$，则\n\n$$\\frac{\\Delta z}{\\rho}=\\frac{t^2/\\sqrt{2t^2}}{\\sqrt{2t^2}}=\\frac12\\neq 0$$\n\n沿这条路径比值恒为 $\\frac12$，不趋于 $0$，所以 $f$ 在原点**不可微**。还要注意：这个函数在原点其实是**连续**的（$|f|\\le\\frac{\\sqrt{x^2+y^2}}{2}\\to 0$），偏导数也存在——可见「连续 + 偏导数存在」仍不足以保证可微。",
+        "problemEn": "Let $f(x,y)=\\frac{xy}{\\sqrt{x^2+y^2}}$ for $(x,y)\\neq(0,0)$, $f(0,0)=0$. Is $f$ differentiable at the origin?",
+        "solutionEn": "$f_x(0,0)=0$ and $f_y(0,0)=0$ (both slices are identically $0$). If $f$ were differentiable, we would need $\\Delta z=o(\\rho)$. But along $\\Delta x=\\Delta y=t$ we get $\\frac{\\Delta z}{\\rho}=\\frac{t^2/\\sqrt{2t^2}}{\\sqrt{2t^2}}=\\frac12$, which does not tend to $0$. So $f$ is not differentiable at the origin. Note that $f$ is nonetheless continuous there ($|f|\\le \\frac{\\rho}{2}$) and both partials exist—continuity plus partial derivatives still does not imply differentiability."
+      }
+    ],
+    "tags": ["全微分", "可微", "切平面"],
+    "links": ["differential", "partial-derivative", "continuity", "multivariable-taylor", "directional-derivative"]
+  },
+  {
+    "id": "multivariable-chain-rule",
+    "title": "多元复合函数求导",
+    "titleEn": "Chain Rule for Multivariable Functions",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "复合函数的偏导数等于每条依赖路径上「外层偏导 × 内层偏导」之和，依赖关系决定项数。",
+    "summaryEn": "The derivative of a composition is the sum over all dependence paths of products of partial derivatives; the dependency diagram decides how many terms appear.",
+    "definition": "一元复合函数求导的链式法则 $\\frac{dy}{dx}=f'(u)\\,u'(x)$ 推广到多元函数时，第一步是理清**依赖关系**。设 $z=f(u,v)$，而 $u=u(x,y)$、$v=v(x,y)$，则 $z$ 通过 $u$ 和 $v$ 两条途径依赖 $x$，公式为\n\n$$\\frac{\\partial z}{\\partial x}=\\frac{\\partial z}{\\partial u}\\cdot\\frac{\\partial u}{\\partial x}+\\frac{\\partial z}{\\partial v}\\cdot\\frac{\\partial v}{\\partial x}$$\n\n对 $y$ 的偏导数完全类似，只要把每条路径上的因子换成对 $y$ 的偏导。\n\n记忆方法（树状图）：把 $z$ 画成树根，$u,v$ 画成中间节点，$x,y$ 画成树叶。从 $z$ 到 $x$ 有几条路径，公式就有几项；每条路径上各段偏导数相乘，再把各路径的结果相加——「分叉相加、链上相乘」。\n\n常见特例：\n\n(1) $z=f(u,v)$，$u=u(t)$，$v=v(t)$：$z$ 最终是一元函数，用**全导数**记号 $\\frac{dz}{dt}=\\frac{\\partial z}{\\partial u}\\frac{du}{dt}+\\frac{\\partial z}{\\partial v}\\frac{dv}{dt}$；\n\n(2) $z=f(u)$，$u=u(x,y)$：只有一条路径，$\\frac{\\partial z}{\\partial x}=f'(u)\\frac{\\partial u}{\\partial x}$；\n\n(3) $z=f(x,u(x,y))$：$x$ 既直接出现、又藏在 $u$ 里，两条路径都要算：$\\frac{\\partial z}{\\partial x}=\\frac{\\partial f}{\\partial x}+\\frac{\\partial f}{\\partial u}\\frac{\\partial u}{\\partial x}$。注意这里的 $\\frac{\\partial f}{\\partial x}$ 与 $\\frac{\\partial z}{\\partial x}$ 含义不同：前者只对 $f$ 的第一个变量求偏导。\n\n典型应用是极坐标变换：$x=r\\cos\\theta,\\ y=r\\sin\\theta$，若 $z=f(x,y)$，则 $\\frac{\\partial z}{\\partial r}=f_x\\cos\\theta+f_y\\sin\\theta$，$\\frac{\\partial z}{\\partial\\theta}=-f_x\\,r\\sin\\theta+f_y\\,r\\cos\\theta$。这两式把直角坐标与极坐标下的偏导数联系起来，也是方向导数公式的来历。",
+    "definitionEn": "The one-variable chain rule $\\frac{dy}{dx}=f'(u)\\,u'(x)$ generalises as follows. First identify the **dependence structure**: suppose $z=f(u,v)$ where $u=u(x,y)$ and $v=v(x,y)$. Then $z$ depends on $x$ through both $u$ and $v$, and\n\n$$\\frac{\\partial z}{\\partial x}=\\frac{\\partial z}{\\partial u}\\cdot\\frac{\\partial u}{\\partial x}+\\frac{\\partial z}{\\partial v}\\cdot\\frac{\\partial v}{\\partial x}$$\n\nThe formula for $\\partial z/\\partial y$ is identical with the inner factors replaced by $\\partial u/\\partial y$ and $\\partial v/\\partial y$.\n\nTree diagram mnemonic: draw $z$ as the root, $u,v$ as intermediate nodes and $x,y$ as leaves. The number of paths from $z$ to $x$ equals the number of terms; multiply the partial derivatives along each path and add the results.\n\nStandard special cases:\n\n(1) $z=f(u,v)$, $u=u(t)$, $v=v(t)$: $z$ is ultimately a one-variable function and one writes the **total derivative** $\\frac{dz}{dt}=\\frac{\\partial z}{\\partial u}\\frac{du}{dt}+\\frac{\\partial z}{\\partial v}\\frac{dv}{dt}$;\n\n(2) $z=f(u)$, $u=u(x,y)$: only one path, so $\\frac{\\partial z}{\\partial x}=f'(u)\\frac{\\partial u}{\\partial x}$;\n\n(3) $z=f(x,u(x,y))$: the variable $x$ appears both directly and inside $u$, so both paths count: $\\frac{\\partial z}{\\partial x}=\\frac{\\partial f}{\\partial x}+\\frac{\\partial f}{\\partial u}\\frac{\\partial u}{\\partial x}$; note that $\\frac{\\partial f}{\\partial x}$ here is not the same as $\\frac{\\partial z}{\\partial x}$.\n\nThe classic application is the polar coordinate change $x=r\\cos\\theta$, $y=r\\sin\\theta$: for $z=f(x,y)$ one gets $\\frac{\\partial z}{\\partial r}=f_x\\cos\\theta+f_y\\sin\\theta$ and $\\frac{\\partial z}{\\partial\\theta}=-f_x r\\sin\\theta+f_y r\\cos\\theta$, the origin of the directional derivative formula.",
+    "formulas": [
+      {
+        "latex": "\\frac{\\partial z}{\\partial x}=\\frac{\\partial z}{\\partial u}\\cdot\\frac{\\partial u}{\\partial x}+\\frac{\\partial z}{\\partial v}\\cdot\\frac{\\partial v}{\\partial x}",
+        "note": "主公式：$z=f(u,v)$，$u=u(x,y)$，$v=v(x,y)$ 时对 $x$ 的偏导数",
+        "noteEn": "Main formula for $z=f(u,v)$ with $u=u(x,y)$, $v=v(x,y)$"
+      },
+      {
+        "latex": "\\frac{\\partial z}{\\partial y}=\\frac{\\partial z}{\\partial u}\\cdot\\frac{\\partial u}{\\partial y}+\\frac{\\partial z}{\\partial v}\\cdot\\frac{\\partial v}{\\partial y}",
+        "note": "对 $y$ 的偏导数：把每条路径的因子换成对 $y$ 的偏导",
+        "noteEn": "The version for $y$: replace each inner factor accordingly"
+      },
+      {
+        "latex": "\\frac{dz}{dt}=\\frac{\\partial z}{\\partial u}\\frac{du}{dt}+\\frac{\\partial z}{\\partial v}\\frac{dv}{dt}",
+        "note": "中间变量都是单变量函数时使用全导数记号 $\\frac{dz}{dt}$",
+        "noteEn": "Total derivative when both intermediate variables are functions of a single variable $t$"
+      },
+      {
+        "latex": "\\frac{\\partial z}{\\partial x}=f'(u)\\,\\frac{\\partial u}{\\partial x}\\qquad (z=f(u),\\ u=u(x,y))",
+        "note": "只有一条依赖路径的特殊情形",
+        "noteEn": "The single-path special case $z=f(u)$, $u=u(x,y)$"
+      },
+      {
+        "latex": "\\frac{\\partial z}{\\partial r}=f_x\\cos\\theta+f_y\\sin\\theta,\\qquad \\frac{\\partial z}{\\partial\\theta}=-f_x\\,r\\sin\\theta+f_y\\,r\\cos\\theta",
+        "note": "极坐标变换 $x=r\\cos\\theta,\\ y=r\\sin\\theta$ 下的链式法则",
+        "noteEn": "The chain rule under the polar change $x=r\\cos\\theta$, $y=r\\sin\\theta$"
+      }
+    ],
+    "expression": {
+      "text": "z=f(u,v), u=u(x,y), v=v(x,y) ⇒ ∂z/∂x = ∂z/∂u·∂u/∂x + ∂z/∂v·∂v/∂x",
+      "symbol": "∂z/∂x",
+      "note": "先理清依赖关系：从 z 到 x 有几条路径就有几项，路径上相乘、分叉处相加。",
+      "noteEn": "First map the dependence; each path from $z$ to $x$ gives one term: multiply along a path, add across paths."
+    },
+    "properties": [
+      "先画依赖关系树：从 $z$ 到 $x$ 有几条路径，公式就有几项",
+      "每条路径上各段偏导数相乘，再把各路径的结果相加",
+      "中间变量都是单变量函数时改用全导数记号 $\\frac{dz}{dt}$",
+      "自变量既直接出现又在中间变量中出现时（如 $z=f(x,u(x,y))$），直接路径那一项不能漏",
+      "求二阶偏导数时，把一阶结果继续用链式法则求导，结果仍含 $u,v$，必要时再代回"
+    ],
+    "propertiesEn": [
+      "Draw the dependence tree first: one term per path from $z$ to $x$",
+      "Multiply the partial derivatives along each path, then add the contributions of all paths",
+      "Use the total derivative notation $\\frac{dz}{dt}$ when the intermediate variables depend on a single variable",
+      "When an independent variable appears both directly and through an intermediate variable (e.g. $z=f(x,u(x,y))$), the direct-path term must not be omitted",
+      "Second derivatives are obtained by applying the chain rule again to the first-order result, which still contains $u,v$"
+    ],
+    "examples": [
+      {
+        "problem": "设 $z=u^2+v^3$，$u=x^2y$，$v=xy^2$，求 $\\frac{\\partial z}{\\partial x}$ 与 $\\frac{\\partial z}{\\partial y}$。",
+        "solution": "依赖关系为 $z\\to u\\to x,y$ 与 $z\\to v\\to x,y$，两条路径都走。各段偏导：$\\frac{\\partial z}{\\partial u}=2u$，$\\frac{\\partial z}{\\partial v}=3v^2$，$\\frac{\\partial u}{\\partial x}=2xy$，$\\frac{\\partial u}{\\partial y}=x^2$，$\\frac{\\partial v}{\\partial x}=y^2$，$\\frac{\\partial v}{\\partial y}=2xy$。于是\n\n$$\\frac{\\partial z}{\\partial x}=2u\\cdot 2xy+3v^2\\cdot y^2=4x^3y^2+3x^2y^6$$\n\n$$\\frac{\\partial z}{\\partial y}=2u\\cdot x^2+3v^2\\cdot 2xy=2x^4y+6x^3y^5$$\n\n验证：直接代入得 $z=x^4y^2+x^3y^6$，再求偏导得到同样的结果。",
+        "problemEn": "Let $z=u^2+v^3$ with $u=x^2y$, $v=xy^2$. Find $\\frac{\\partial z}{\\partial x}$ and $\\frac{\\partial z}{\\partial y}$.",
+        "solutionEn": "Both paths are active. The pieces are $\\frac{\\partial z}{\\partial u}=2u$, $\\frac{\\partial z}{\\partial v}=3v^2$, $u_x=2xy$, $u_y=x^2$, $v_x=y^2$, $v_y=2xy$. Hence $\\frac{\\partial z}{\\partial x}=2u(2xy)+3v^2(y^2)=4x^3y^2+3x^2y^6$ and $\\frac{\\partial z}{\\partial y}=2u(x^2)+3v^2(2xy)=2x^4y+6x^3y^5$. Direct substitution gives $z=x^4y^2+x^3y^6$, and differentiating confirms the same answer."
+      },
+      {
+        "problem": "设 $z=f(x,y)$，$x=r\\cos\\theta$，$y=r\\sin\\theta$。用链式法则求 $\\frac{\\partial z}{\\partial r}$，并用 $f=x^2+y^2$ 检验结果。",
+        "solution": "由链式法则\n\n$$\\frac{\\partial z}{\\partial r}=f_x\\frac{\\partial x}{\\partial r}+f_y\\frac{\\partial y}{\\partial r}=f_x\\cos\\theta+f_y\\sin\\theta$$\n\n取 $f=x^2+y^2$：$f_x=2x,\\ f_y=2y$，右端 $=2x\\cos\\theta+2y\\sin\\theta=2r\\cos^2\\theta+2r\\sin^2\\theta=2r$，与直接代入 $z=r^2$ 求导的结果一致。",
+        "problemEn": "Let $z=f(x,y)$ with $x=r\\cos\\theta$, $y=r\\sin\\theta$. Use the chain rule to find $\\frac{\\partial z}{\\partial r}$ and check the answer for $f=x^2+y^2$.",
+        "solutionEn": "The chain rule gives $\\frac{\\partial z}{\\partial r}=f_x\\cos\\theta+f_y\\sin\\theta$. For $f=x^2+y^2$: $f_x=2x$, $f_y=2y$, so the right side equals $2x\\cos\\theta+2y\\sin\\theta=2r$, matching the direct computation $z=r^2$."
+      }
+    ],
+    "tags": ["链式法则", "复合函数", "偏导数"],
+    "links": ["chain-rule", "partial-derivative", "multivariable-implicit-differentiation", "directional-derivative"]
+  },
+  {
+    "id": "multivariable-implicit-differentiation",
+    "title": "多元隐函数求导",
+    "titleEn": "Implicit Differentiation for Multivariable Functions",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "由方程 F(x,y,z)=0 确定的隐函数 z=z(x,y)，其偏导数可用 ∂z/∂x = −F_x/F_z 直接计算。",
+    "summaryEn": "For z=z(x,y) defined implicitly by F(x,y,z)=0, the partial derivatives are given directly by ∂z/∂x = −F_x/F_z.",
+    "definition": "先看二维情形 $F(x,y)=0$：如果 $F(x,y)$ 在点 $(x_0,y_0)$ 的某邻域内偏导数连续，且 $F(x_0,y_0)=0$、$F_y(x_0,y_0)\\neq 0$，则方程在 $x_0$ 附近唯一确定一个可导函数 $y=y(x)$（**隐函数存在定理**），并且\n\n$$\\frac{dy}{dx}=-\\frac{F_x}{F_y}$$\n\n例如圆 $x^2+y^2=4$ 在点 $(\\sqrt2,\\sqrt2)$ 附近确定 $y=y(x)$，求出 $\\frac{dy}{dx}=-\\frac{2x}{2y}=-\\frac{x}{y}$，在该点处导数值为 $-1$。\n\n三维情形 $F(x,y,z)=0$：若 $F$ 的偏导数连续、$F_z\\neq 0$，则方程唯一确定可微函数 $z=z(x,y)$，并且\n\n$$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z},\\qquad \\frac{\\partial z}{\\partial y}=-\\frac{F_y}{F_z}$$\n\n条件 $F_z\\neq 0$ 不可省——它保证方程真的能局部「解出」$z$。\n\n公式的来源：把 $z=z(x,y)$ 代回方程得恒等式 $F(x,y,z(x,y))\\equiv 0$，两边对 $x$ 求偏导，由链式法则得 $F_x+F_z\\frac{\\partial z}{\\partial x}=0$，解出 $\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z}$；对 $y$ 完全类似。可见公式只是多元链式法则的一个应用，不必死记。\n\n为什么有用：很多方程根本解不出 $z$ 的显式表达式（如 $e^z+xy-z=0$），但只要 $F_z\\neq 0$，隐函数依然局部存在，偏导数依然能用公式算出。从几何看，$F(x,y,z)=0$ 是等值面，梯度 $(F_x,F_y,F_z)$ 是它的法向量，而 $z$ 对 $x,y$ 的变化率描述的正是这个曲面的倾斜方式。",
+    "definitionEn": "Start with the planar case $F(x,y)=0$: if $F$ has continuous partial derivatives near $(x_0,y_0)$, $F(x_0,y_0)=0$ and $F_y(x_0,y_0)\\neq 0$, then the equation defines a unique differentiable function $y=y(x)$ near $x_0$ (the **implicit function theorem**), and\n\n$$\\frac{dy}{dx}=-\\frac{F_x}{F_y}$$\n\nFor the circle $x^2+y^2=4$ we get $\\frac{dy}{dx}=-\\frac{2x}{2y}=-\\frac{x}{y}$, which equals $-1$ at the point $(\\sqrt2,\\sqrt2)$.\n\nIn three variables, $F(x,y,z)=0$: if the partials of $F$ are continuous and $F_z\\neq 0$, the equation defines a unique differentiable $z=z(x,y)$ with\n\n$$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z},\\qquad \\frac{\\partial z}{\\partial y}=-\\frac{F_y}{F_z}$$\n\nThe condition $F_z\\neq 0$ is essential—it guarantees that $z$ can be solved for locally.\n\nWhere the formulas come from: substituting $z=z(x,y)$ gives the identity $F(x,y,z(x,y))\\equiv 0$; differentiating in $x$ with the chain rule yields $F_x+F_z\\frac{\\partial z}{\\partial x}=0$, hence $\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z}$, and similarly for $y$. The formulas are just applications of the multivariable chain rule.\n\nWhy this matters: many equations cannot be solved explicitly for $z$ (for instance $e^z+xy-z=0$), yet as long as $F_z\\neq 0$ the implicit function still exists locally and its partial derivatives are computable. Geometrically, $F(x,y,z)=0$ is a level surface whose normal vector is the gradient $(F_x,F_y,F_z)$.",
+    "formulas": [
+      {
+        "latex": "\\frac{dy}{dx}=-\\frac{F_x}{F_y}\\qquad (F(x,y)=0,\\ F_y\\neq 0)",
+        "note": "二维隐函数求导公式",
+        "noteEn": "Implicit differentiation in the plane"
+      },
+      {
+        "latex": "\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z}\\qquad (F(x,y,z)=0,\\ F_z\\neq 0)",
+        "note": "三维隐函数对 $x$ 的偏导数；条件 $F_z\\neq 0$ 必须满足",
+        "noteEn": "The partial in $x$; the hypothesis $F_z\\neq 0$ is required"
+      },
+      {
+        "latex": "\\frac{\\partial z}{\\partial y}=-\\frac{F_y}{F_z}",
+        "note": "对 $y$ 的偏导数，结构与对 $x$ 的完全对称",
+        "noteEn": "The partial in $y$; the structure is symmetric"
+      },
+      {
+        "latex": "F_x+F_z\\,\\frac{\\partial z}{\\partial x}=0",
+        "note": "推导的关键一步：对恒等式 $F(x,y,z(x,y))=0$ 两边求导",
+        "noteEn": "The key derivation step: differentiate the identity $F(x,y,z(x,y))=0$"
+      },
+      {
+        "latex": "x^2+y^2+z^2=4\\ \\Rightarrow\\ \\frac{\\partial z}{\\partial x}=-\\frac{x}{z}",
+        "note": "球面例子：$F=x^2+y^2+z^2-4$，$F_x=2x$，$F_z=2z$",
+        "noteEn": "Sphere example: $F=x^2+y^2+z^2-4$, so $F_x=2x$, $F_z=2z$"
+      }
+    ],
+    "expression": {
+      "text": "F(x,y,z)=0 ⇒ ∂z/∂x = −F_x/F_z，∂z/∂y = −F_y/F_z (F_z≠0)",
+      "symbol": "−F_x/F_z",
+      "note": "不必解出 z 就能求偏导；公式来自把 z=z(x,y) 代回方程后用链式法则。",
+      "noteEn": "No need to solve for $z$; the formula comes from substituting $z=z(x,y)$ and applying the chain rule."
+    },
+    "properties": [
+      "使用前提：$F$ 有连续偏导数且 $F_z\\neq 0$（二维情形为 $F_y\\neq 0$），否则隐函数可能不存在或不唯一",
+      "不需要解出 $z$ 的显式表达式，结论只依赖 $F$ 的偏导数",
+      "公式来源于对恒等式 $F(x,y,z(x,y))=0$ 使用多元链式法则",
+      "三个公式结构对称：对哪个变量求偏导，分子就是 $F$ 对该变量的偏导，分母都是 $F_z$",
+      "求二阶偏导时把 $-F_x/F_z$ 再对 $x$ 求导，注意其中 $z$ 仍要按链式法则处理"
+    ],
+    "propertiesEn": [
+      "Hypotheses: $F$ has continuous partials and $F_z\\neq 0$ ($F_y\\neq 0$ in the planar case), otherwise the implicit function may fail to exist or be unique",
+      "No explicit formula for $z$ is needed; everything is computed from the partials of $F$",
+      "The formula follows from applying the multivariable chain rule to the identity $F(x,y,z(x,y))=0$",
+      "The three formulas are symmetric: the numerator is the partial of $F$ in the differentiating variable and the denominator is always $F_z$",
+      "For second-order partials, differentiate $-F_x/F_z$ again, remembering that $z$ still depends on $x$ and $y$"
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2 - 4",
+      "xRange": [-3, 3],
+      "yRange": [-3, 3],
+      "levels": 11,
+      "levelRange": [-4, 4],
+      "title": "隐函数 x²+y²−4=0 的等值线（含圆）"
+    },
+    "examples": [
+      {
+        "problem": "设方程 $x^2+y^2+z^2=4$ 确定 $z=z(x,y)$（取 $z>0$），求 $\\frac{\\partial z}{\\partial x}$、$\\frac{\\partial z}{\\partial y}$，并求在点 $(1,1,\\sqrt2)$ 处的值。",
+        "solution": "令 $F(x,y,z)=x^2+y^2+z^2-4$，则 $F_x=2x$，$F_y=2y$，$F_z=2z$。由公式\n\n$$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z}=-\\frac{2x}{2z}=-\\frac{x}{z},\\qquad \\frac{\\partial z}{\\partial y}=-\\frac{y}{z}$$\n\n在点 $(1,1,\\sqrt2)$ 处（验证：$1+1+2=4$，点在球面上）：$\\frac{\\partial z}{\\partial x}=\\frac{\\partial z}{\\partial y}=-\\frac{1}{\\sqrt2}=-\\frac{\\sqrt2}{2}$。",
+        "problemEn": "The equation $x^2+y^2+z^2=4$ defines $z=z(x,y)$ (with $z>0$). Find $\\frac{\\partial z}{\\partial x}$, $\\frac{\\partial z}{\\partial y}$ and evaluate them at $(1,1,\\sqrt2)$.",
+        "solutionEn": "Set $F=x^2+y^2+z^2-4$, so $F_x=2x$, $F_y=2y$, $F_z=2z$. The formulas give $\\frac{\\partial z}{\\partial x}=-\\frac{x}{z}$ and $\\frac{\\partial z}{\\partial y}=-\\frac{y}{z}$. At $(1,1,\\sqrt2)$ (which lies on the sphere) both equal $-\\frac{1}{\\sqrt2}=-\\frac{\\sqrt2}{2}$."
+      },
+      {
+        "problem": "圆 $x^2+y^2=4$ 确定隐函数 $y=y(x)$（$y>0$），求 $\\frac{dy}{dx}$，并求在点 $(\\sqrt2,\\sqrt2)$ 处的切线斜率。",
+        "solution": "令 $F(x,y)=x^2+y^2-4$，则 $F_x=2x$，$F_y=2y$，所以\n\n$$\\frac{dy}{dx}=-\\frac{F_x}{F_y}=-\\frac{2x}{2y}=-\\frac{x}{y}$$\n\n在 $(\\sqrt2,\\sqrt2)$ 处斜率为 $-1$。这与几何直观一致：该点处半径方向为 $(1,1)$，切线与之垂直，斜率恰为 $-1$。",
+        "problemEn": "The circle $x^2+y^2=4$ defines $y=y(x)$ (with $y>0$). Find $\\frac{dy}{dx}$ and the tangent slope at $(\\sqrt2,\\sqrt2)$.",
+        "solutionEn": "With $F=x^2+y^2-4$ we get $\\frac{dy}{dx}=-\\frac{2x}{2y}=-\\frac{x}{y}$, which at $(\\sqrt2,\\sqrt2)$ equals $-1$. This matches the geometry: the radial direction there is $(1,1)$ and the tangent is perpendicular to it."
+      }
+    ],
+    "tags": ["隐函数", "偏导数", "法向量"],
+    "links": ["implicit-differentiation", "partial-derivative", "multivariable-chain-rule", "gradient", "lagrange-multiplier"]
+  },
+  {
+    "id": "directional-derivative",
+    "title": "方向导数",
+    "titleEn": "Directional Derivative",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "函数沿指定单位方向的变化率；可微时等于偏导数用方向余弦加权求和，也等于梯度与该方向的内积。",
+    "summaryEn": "The rate of change of a function along a given unit direction; when differentiable it is the weighted sum of the partials and the dot product of the gradient with that direction.",
+    "definition": "设函数 $f(x,y)$ 在点 $P_0(x_0,y_0)$ 的某邻域内有定义，$\\mathbf{e}=(\\cos\\alpha,\\ \\cos\\beta)$ 是从 $P_0$ 出发的**单位方向向量**，其中 $\\alpha,\\beta$ 分别是该方向与 $x$ 轴、$y$ 轴正向的夹角，$\\cos\\alpha,\\cos\\beta$ 称为**方向余弦**，满足 $\\cos^2\\alpha+\\cos^2\\beta=1$。如果极限\n\n$$\\lim_{t\\to 0}\\frac{f(x_0+t\\cos\\alpha,\\ y_0+t\\cos\\beta)-f(x_0,y_0)}{t}$$\n\n存在，就称它为 $f$ 在点 $P_0$ 沿方向 $\\mathbf{e}$ 的**方向导数**，记作 $\\left.\\frac{\\partial f}{\\partial l}\\right|_{P_0}$。它的含义是：从 $P_0$ 沿该方向移动时，函数值关于移动距离的变化率。\n\n计算公式：若 $f$ 在 $P_0$ 可微，则方向导数存在，且\n\n$$\\frac{\\partial f}{\\partial l}=f_x\\cos\\alpha+f_y\\cos\\beta=\\nabla f\\cdot\\mathbf{e}$$\n\n即方向导数等于梯度 $\\nabla f=(f_x,f_y)$ 与单位方向向量的内积。\n\n与偏导数的关系：取 $\\mathbf{e}=(1,0)$ 得 $\\frac{\\partial f}{\\partial l}=f_x$，取 $\\mathbf{e}=(0,1)$ 得 $f_y$——偏导数只是两个特殊方向的方向导数。注意：定义与公式中的方向向量必须是**单位向量**；若给出的是普通向量 $\\mathbf{v}$，要先单位化为 $\\mathbf{e}=\\mathbf{v}/|\\mathbf{v}|$ 再代入。\n\n由 $\\frac{\\partial f}{\\partial l}=|\\nabla f|\\cos\\varphi$（$\\varphi$ 为梯度与方向的夹角）立刻得到：方向导数的取值范围是 $[-|\\nabla f|,\\ |\\nabla f|]$；沿梯度方向取最大值 $|\\nabla f|$，沿负梯度方向取最小值 $-|\\nabla f|$，沿与梯度垂直的方向等于 $0$（即沿等值线的切线方向）。函数不可微时方向导数可能不存在，上述公式也不一定成立。",
+    "definitionEn": "Let $f(x,y)$ be defined in a neighborhood of $P_0(x_0,y_0)$ and let $\\mathbf{e}=(\\cos\\alpha,\\ \\cos\\beta)$ be a **unit direction vector** from $P_0$, where $\\alpha,\\beta$ are the angles it makes with the positive $x$- and $y$-axes and $\\cos\\alpha,\\ \\cos\\beta$ are its direction cosines ($\\cos^2\\alpha+\\cos^2\\beta=1$). If the limit\n\n$$\\lim_{t\\to 0}\\frac{f(x_0+t\\cos\\alpha,\\ y_0+t\\cos\\beta)-f(x_0,y_0)}{t}$$\n\nexists, it is the **directional derivative** of $f$ at $P_0$ along $\\mathbf{e}$, written $\\partial f/\\partial l$. It measures the rate of change of $f$ per unit distance moved in that direction.\n\nComputation: if $f$ is differentiable at $P_0$, then\n\n$$\\frac{\\partial f}{\\partial l}=f_x\\cos\\alpha+f_y\\cos\\beta=\\nabla f\\cdot\\mathbf{e},$$\n\nthat is, the directional derivative is the dot product of the gradient with the unit direction.\n\nRelation to partial derivatives: with $\\mathbf{e}=(1,0)$ one recovers $f_x$, and with $\\mathbf{e}=(0,1)$ one recovers $f_y$—partial derivatives are special directional derivatives. The direction vector must be a **unit vector**: if a plain vector $\\mathbf{v}$ is given, normalise it first, $\\mathbf{e}=\\mathbf{v}/|\\mathbf{v}|$.\n\nSince $\\frac{\\partial f}{\\partial l}=|\\nabla f|\\cos\\varphi$ (where $\\varphi$ is the angle between the gradient and the direction), the directional derivative lies between $-|\\nabla f|$ and $|\\nabla f|$: it is maximal along the gradient, minimal along the opposite direction, and equals $0$ perpendicular to the gradient, i.e. along the tangent of the level curve. If $f$ is not differentiable the formula may fail.",
+    "formulas": [
+      {
+        "latex": "\\frac{\\partial f}{\\partial l}=\\lim_{t\\to 0}\\frac{f(x_0+t\\cos\\alpha,\\ y_0+t\\cos\\beta)-f(x_0,y_0)}{t}",
+        "note": "方向导数的定义：沿单位方向移动距离 $t$ 的变化率",
+        "noteEn": "Definition: rate of change per unit distance along the unit direction"
+      },
+      {
+        "latex": "\\frac{\\partial f}{\\partial l}=f_x\\cos\\alpha+f_y\\cos\\beta",
+        "note": "可微时的计算公式：偏导数乘方向余弦再相加",
+        "noteEn": "Computation when differentiable: partials weighted by direction cosines"
+      },
+      {
+        "latex": "\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\mathbf{e}=|\\nabla f|\\cos\\varphi",
+        "note": "方向导数 = 梯度与单位方向的内积；$\\varphi$ 是与梯度的夹角",
+        "noteEn": "The directional derivative is the dot product of the gradient with the unit direction"
+      },
+      {
+        "latex": "-|\\nabla f|\\le \\frac{\\partial f}{\\partial l}\\le |\\nabla f|",
+        "note": "取值范围：沿梯度方向最大，沿负梯度方向最小",
+        "noteEn": "Range: maximal along the gradient, minimal along its opposite"
+      },
+      {
+        "latex": "\\frac{\\partial f}{\\partial l}=f_x\\cos\\alpha+f_y\\cos\\beta+f_z\\cos\\gamma",
+        "note": "三元情形的方向导数公式（$\\cos\\alpha,\\cos\\beta,\\cos\\gamma$ 为方向余弦）",
+        "noteEn": "The three-variable version with direction cosines"
+      }
+    ],
+    "expression": {
+      "text": "∂f/∂l = f_x·cosα + f_y·cosβ，(cosα, cosβ) 为单位方向向量",
+      "symbol": "∂f/∂l",
+      "note": "方向向量必须先单位化；偏导数是沿坐标轴方向的特例；沿梯度方向方向导数最大。",
+      "noteEn": "The direction must be a unit vector; partials are the coordinate special cases; the maximum is along the gradient."
+    },
+    "properties": [
+      "方向向量必须单位化（用方向余弦表示），否则数值会被放大若干倍",
+      "偏导数是沿坐标轴正方向的方向导数——只是两个特例",
+      "可微时 $\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\mathbf{e}$，取值范围是 $[-|\\nabla f|,\\ |\\nabla f|]$",
+      "沿梯度方向方向导数最大，最大值为 $|\\nabla f|$；沿负梯度方向最小",
+      "沿等值线的切线方向（与梯度垂直）方向导数为 0；函数不可微时公式可能失效"
+    ],
+    "propertiesEn": [
+      "The direction vector must be normalised (direction cosines), otherwise the value is scaled",
+      "Partial derivatives are directional derivatives along the positive coordinate axes—two special cases",
+      "When differentiable, $\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\mathbf{e}$ with range $[-|\\nabla f|,\\ |\\nabla f|]$",
+      "The directional derivative is maximal along the gradient with value $|\\nabla f|$, and minimal in the opposite direction",
+      "It vanishes along the tangent to a level curve (perpendicular to the gradient); the formula may fail without differentiability"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "1",
+      "fy": "1",
+      "xRange": [-2, 2],
+      "yRange": [-2, 2],
+      "density": [16, 14],
+      "arrowScale": 0.85,
+      "marks": [
+        {
+          "at": [0, 0],
+          "label": "方向 l = (1,1)/√2"
+        }
+      ],
+      "title": "沿固定单位方向 l 的方向导数（常向量场）"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x,y)=x^2+y^2$ 在点 $P(1,1)$ 处沿方向 $\\mathbf{l}=(1,1)$ 的方向导数。",
+        "solution": "先单位化：$|\\mathbf{l}|=\\sqrt2$，单位方向为 $\\mathbf{e}=\\left(\\frac{1}{\\sqrt2},\\frac{1}{\\sqrt2}\\right)$，即 $\\cos\\alpha=\\cos\\beta=\\frac{1}{\\sqrt2}$。梯度 $\\nabla f=(2x,2y)$，在 $P$ 处为 $(2,2)$，所以\n\n$$\\frac{\\partial f}{\\partial l}=2\\cdot\\frac{1}{\\sqrt2}+2\\cdot\\frac{1}{\\sqrt2}=\\frac{4}{\\sqrt2}=2\\sqrt2$$\n\n（对照：沿 $x$ 轴或 $y$ 轴方向的方向导数都只有 $2$；沿 $45°$ 方向更大，符合后面梯度的结论。）",
+        "problemEn": "Find the directional derivative of $f(x,y)=x^2+y^2$ at $P(1,1)$ in the direction $\\mathbf{l}=(1,1)$.",
+        "solutionEn": "Normalise: $\\mathbf{e}=\\left(\\frac{1}{\\sqrt2},\\frac{1}{\\sqrt2}\\right)$. Since $\\nabla f=(2,2)$ at $P$, we get $\\frac{\\partial f}{\\partial l}=\\frac{2}{\\sqrt2}+\\frac{2}{\\sqrt2}=2\\sqrt2$. Along the coordinate axes the value is only $2$, so the $45°$ direction gives a larger rate—consistent with the gradient theory."
+      },
+      {
+        "problem": "对 $f(x,y)=x^2+y^2$ 在 $P(1,1)$ 处：求沿方向 $\\mathbf{v}=(3,4)$ 的方向导数；并求该点最大的方向导数及其对应的方向。",
+        "solution": "$\\mathbf{v}$ 不是单位向量，先单位化：$|\\mathbf{v}|=5$，$\\mathbf{e}=\\left(\\frac35,\\frac45\\right)$。于是\n\n$$\\frac{\\partial f}{\\partial l}=2\\cdot\\frac35+2\\cdot\\frac45=\\frac{14}{5}=2.8$$\n\n最大方向导数：$\\nabla f=(2,2)$，$|\\nabla f|=2\\sqrt2\\approx 2.83$，对应方向为 $\\frac{\\nabla f}{|\\nabla f|}=\\left(\\frac{1}{\\sqrt2},\\frac{1}{\\sqrt2}\\right)$。另外，沿与梯度垂直的方向 $\\left(\\frac{1}{\\sqrt2},-\\frac{1}{\\sqrt2}\\right)$ 方向导数为 $0$，它正是等值线 $x^2+y^2=2$ 在 $P$ 处的切线方向。",
+        "problemEn": "For $f(x,y)=x^2+y^2$ at $P(1,1)$: find the directional derivative in the direction $\\mathbf{v}=(3,4)$, and the maximal directional derivative with its direction.",
+        "solutionEn": "Normalising $\\mathbf{v}$ gives $\\mathbf{e}=\\left(\\frac35,\\frac45\\right)$, so $\\frac{\\partial f}{\\partial l}=\\frac65+\\frac85=\\frac{14}{5}=2.8$. The maximum is $|\\nabla f|=2\\sqrt2\\approx 2.83$, attained along $\\left(\\frac{1}{\\sqrt2},\\frac{1}{\\sqrt2}\\right)$. Perpendicular to the gradient, the value is $0$—that direction is the tangent to the level curve $x^2+y^2=2$ at $P$."
+      }
+    ],
+    "tags": ["方向导数", "方向余弦", "梯度"],
+    "links": ["gradient", "partial-derivative", "total-differential", "multivariable-chain-rule"]
+  },
+  {
+    "id": "gradient",
+    "title": "梯度",
+    "titleEn": "Gradient",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "由各偏导数组成的向量：指向函数增长最快的方向，模长为最大变化率，并垂直于等值线（面）。",
+    "summaryEn": "The vector of partial derivatives: it points in the direction of fastest increase, its length is the maximal rate, and it is perpendicular to level curves (surfaces).",
+    "definition": "设函数 $f(x,y)$ 在平面区域 $D$ 内具有连续偏导数，则称向量\n\n$$\\nabla f=\\operatorname{grad}f=\\left(\\frac{\\partial f}{\\partial x},\\ \\frac{\\partial f}{\\partial y}\\right)=(f_x,\\ f_y)$$\n\n为 $f$ 的**梯度**（$\\nabla$ 读作 nabla）。三元函数完全类似：$\\nabla f=(f_x,f_y,f_z)$。梯度把「各个方向的变化率」打包成一个向量。\n\n核心意义（三条，必须记牢）：\n\n(1) **方向**：$\\nabla f(P)$ 的方向是函数在 $P$ 处增长最快的方向；\n\n(2) **大小**：$|\\nabla f(P)|$ 是最大的方向导数（最大变化率）；\n\n(3) **位置关系**：$\\nabla f(P)$ 垂直于过 $P$ 的等值线 $f(x,y)=c$（三元时垂直于等值面 $f(x,y,z)=c$）。\n\n由此可知：沿等值线方向移动，函数值不变；沿梯度方向上升最快；沿负梯度方向 $-\\nabla f$ 下降最快（梯度下降法的基础）。\n\n与方向导数、全微分的关系：方向导数就是梯度与单位方向向量的内积 $\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\mathbf{e}=|\\nabla f|\\cos\\varphi$；可微时 $df=f_x\\,dx+f_y\\,dy=\\nabla f\\cdot(dx,dy)$，即全微分是梯度与位移向量的内积。求多元函数的极值时，驻点由 $\\nabla f=0$ 给出，这是极值点的必要条件；在物理中，力是势能的负梯度 $\\mathbf{F}=-\\nabla U$，等势面与力场方向处处垂直。",
+    "definitionEn": "Let $f(x,y)$ have continuous partial derivatives on a plane region $D$. The vector\n\n$$\\nabla f=\\operatorname{grad}f=\\left(\\frac{\\partial f}{\\partial x},\\ \\frac{\\partial f}{\\partial y}\\right)=(f_x,\\ f_y)$$\n\nis the **gradient** of $f$ ($\\nabla$ is read 'nabla'). In three variables, $\\nabla f=(f_x,f_y,f_z)$. The gradient packages all directional rates of change into a single vector.\n\nThree facts to remember:\n\n(1) **Direction**: $\\nabla f(P)$ points in the direction of fastest increase of $f$ at $P$;\n\n(2) **Magnitude**: $|\\nabla f(P)|$ is the maximal directional derivative (the maximal rate of change);\n\n(3) **Geometry**: $\\nabla f(P)$ is perpendicular to the level curve $f(x,y)=c$ through $P$ (or the level surface $f(x,y,z)=c$ in three variables).\n\nConsequences: moving along a level curve keeps $f$ constant; moving along the gradient increases $f$ fastest; moving along $-\\nabla f$ decreases it fastest (the basis of gradient descent).\n\nRelation to directional derivatives and the total differential: $\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\mathbf{e}=|\\nabla f|\\cos\\varphi$; when $f$ is differentiable, $df=f_x\\,dx+f_y\\,dy=\\nabla f\\cdot(dx,dy)$. Stationary points of optimisation satisfy $\\nabla f=0$ (a necessary condition for extrema), and in physics the force is minus the gradient of potential energy, $\\mathbf{F}=-\\nabla U$, with equipotential surfaces perpendicular to the field.",
+    "formulas": [
+      {
+        "latex": "\\nabla f=\\left(\\frac{\\partial f}{\\partial x},\\ \\frac{\\partial f}{\\partial y}\\right)=(f_x,\\ f_y)",
+        "note": "梯度的定义：各偏导数组成的向量",
+        "noteEn": "Definition: the vector collecting the partial derivatives"
+      },
+      {
+        "latex": "\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\mathbf{e}=|\\nabla f|\\cos\\varphi",
+        "note": "方向导数 = 梯度与单位方向向量的内积",
+        "noteEn": "Directional derivative as the dot product with the unit direction"
+      },
+      {
+        "latex": "\\max_{\\mathbf{e}}\\frac{\\partial f}{\\partial l}=|\\nabla f|,\\qquad \\mathbf{e}^*=\\frac{\\nabla f}{|\\nabla f|}",
+        "note": "最大方向导数为梯度的模，取到最大值的方向就是梯度方向",
+        "noteEn": "The maximal directional derivative equals $|\\nabla f|$, attained along the gradient"
+      },
+      {
+        "latex": "\\nabla f(P_0)\\cdot\\big((x,y,z)-(x_0,y_0,z_0)\\big)=0",
+        "note": "以梯度为法向量的切平面（对等值面 $f=c$）",
+        "noteEn": "The tangent plane of the level surface $f=c$, with the gradient as normal vector"
+      },
+      {
+        "latex": "\\nabla(af+bg)=a\\nabla f+b\\nabla g,\\qquad \\nabla(fg)=f\\nabla g+g\\nabla f",
+        "note": "梯度的线性与乘积法则",
+        "noteEn": "Linearity and the product rule for gradients"
+      }
+    ],
+    "expression": {
+      "text": "∇f = (f_x, f_y)；方向导数 = ∇f·e；最大方向导数 = |∇f|",
+      "symbol": "∇f",
+      "note": "指向增长最快的方向；垂直于等值线（面），是切线/切平面的法向量。",
+      "noteEn": "Points in the direction of fastest increase; perpendicular to level curves (surfaces), hence a normal vector."
+    },
+    "properties": [
+      "指向函数增长最快的方向，模 $|\\nabla f|$ 等于最大方向导数",
+      "垂直于等值线（二元）或等值面（三元），自然充当法向量，用于求切线与切平面",
+      "方向导数等于梯度与单位方向向量的内积；与梯度垂直的方向上方向导数为 0",
+      "驻点满足 $\\nabla f=0$，是极值点的必要条件（充分性还要看二阶偏导，见多元极值）",
+      "可微时 $df=\\nabla f\\cdot(dx,dy)$：全微分是梯度与位移向量的内积"
+    ],
+    "propertiesEn": [
+      "It points in the direction of fastest increase and has length $|\\nabla f|$, the maximal directional derivative",
+      "It is perpendicular to level curves (or level surfaces) and therefore serves as a normal vector",
+      "The directional derivative is the dot product of the gradient with the unit direction; it vanishes perpendicular to the gradient",
+      "Stationary points satisfy $\\nabla f=0$, a necessary condition for extrema (second-order partials decide the type)",
+      "When differentiable, $df=\\nabla f\\cdot(dx,dy)$: the total differential is the dot product of the gradient with the displacement"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "2*x",
+      "fy": "2*y",
+      "xRange": [-2, 2],
+      "yRange": [-2, 2],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        {
+          "at": [0, 0],
+          "label": "原点（∇f = 0）"
+        }
+      ],
+      "title": "f(x,y)=x²+y² 的梯度场（垂直于等值线）"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x,y)=x^2+y^2$ 在点 $P(1,1)$ 处的梯度、增长最快的方向与最大变化率，并说明梯度与等值线 $x^2+y^2=2$ 的关系。",
+        "solution": "$\\nabla f=(2x,2y)$，在 $P(1,1)$ 处 $\\nabla f=(2,2)$。增长最快的方向为 $\\frac{\\nabla f}{|\\nabla f|}=\\left(\\frac{1}{\\sqrt2},\\frac{1}{\\sqrt2}\\right)$，最大变化率 $|\\nabla f|=\\sqrt{2^2+2^2}=2\\sqrt2$。等值线 $x^2+y^2=2$ 在 $P$ 处的切线方向与半径 $(1,1)$ 垂直，即 $\\left(\\frac{1}{\\sqrt2},-\\frac{1}{\\sqrt2}\\right)$；验证内积：$(2,2)\\cdot(1,-1)=0$，所以梯度确实垂直于等值线。",
+        "problemEn": "For $f(x,y)=x^2+y^2$ at $P(1,1)$ find the gradient, the direction of fastest increase and the maximal rate, and explain the relation to the level curve $x^2+y^2=2$.",
+        "solutionEn": "$\\nabla f=(2x,2y)=(2,2)$ at $P$. The fastest increase is along $\\left(\\frac{1}{\\sqrt2},\\frac{1}{\\sqrt2}\\right)$ with rate $|\\nabla f|=2\\sqrt2$. The tangent to the level curve at $P$ is $\\left(\\frac{1}{\\sqrt2},-\\frac{1}{\\sqrt2}\\right)$, and $(2,2)\\cdot(1,-1)=0$ confirms that the gradient is perpendicular to the level curve."
+      },
+      {
+        "problem": "求 $f(x,y,z)=x^2+y^2+z^2$ 的梯度，并说明它与等值面（球面）$x^2+y^2+z^2=R^2$ 的关系。",
+        "solution": "$\\nabla f=(2x,2y,2z)=2(x,y,z)$。在球面上任一点 $P$ 处，$(x,y,z)$ 正是球面的外法线方向，因此 $\\nabla f$ 垂直于球面——这正是「梯度垂直于等值面」的一个实例。",
+        "problemEn": "Find the gradient of $f(x,y,z)=x^2+y^2+z^2$ and explain its relation to the level surface (sphere) $x^2+y^2+z^2=R^2$.",
+        "solutionEn": "$\\nabla f=(2x,2y,2z)=2(x,y,z)$. At any point of the sphere, $(x,y,z)$ is the outward normal direction, so the gradient is perpendicular to the level surface—an instance of the general rule."
+      }
+    ],
+    "tags": ["梯度", "方向导数", "等值线"],
+    "links": ["directional-derivative", "partial-derivative", "multivariable-extrema", "lagrange-multiplier", "divergence-curl"]
+  }
+]

@@ -1,0 +1,749 @@
+[
+  {
+    "id": "metric-space",
+    "title": "度量空间",
+    "titleEn": "Metric Spaces",
+    "branch": "functional-analysis",
+    "level": 4,
+    "summary": "给集合配上满足三条公理的「距离」，就得到度量空间；收敛、开集、闭集与连续性都在这里获得统一的表述。",
+    "summaryEn": "A set equipped with a distance obeying three axioms — the common language for convergence, open and closed sets, and continuity.",
+    "definition": "**度量空间**把「距离」这一概念从实数轴上抽象出来。设 $X$ 是非空集合，$d:X\\times X\\to[0,+\\infty)$ 是对每一对点都有定义的实值函数。若 $d$ 满足以下三条**距离公理**，就称它为 $X$ 上的**度量**（距离），并称 $(X,d)$ 为**度量空间**：\n（M1）**正定**：$d(x,y)\\ge 0$，且 $d(x,y)=0$ 当且仅当 $x=y$；\n（M2）**对称**：$d(x,y)=d(y,x)$；\n（M3）**三角不等式**：对任意 $x,y,z\\in X$，$d(x,z)\\le d(x,y)+d(y,z)$。\n三条公理中真正有分量的是三角不等式：它说「绕道 $y$ 再走向 $z$，不会比直接走更近」，一切距离估计（例如反向三角不等式 $|d(x,z)-d(y,z)|\\le d(x,y)$）都由它派生。\n\n有了距离就能谈「附近」与「趋近」。以 $x$ 为心、$r>0$ 为半径的**开球** $B(x,r)=\\{y\\in X: d(x,y)<r\\}$ 是最基本的邻域。如果集合 $U$ 中每个点 $x$ 都有一个完全落在 $U$ 内的开球（即存在 $r>0$ 使 $B(x,r)\\subset U$），就称 $U$ 是**开集**；开集对任意并、有限交封闭。**闭集**定义为补集是开集的集合；它也等价于「包含自己的全部**聚点**」（若 $x$ 的每个开球都含有 $A$ 中异于 $x$ 的点，则称 $x$ 为 $A$ 的聚点）。序列收敛就是 $d(x_n,x)\\to 0$。度量空间中极限若存在必唯一，且 $x$ 是 $A$ 的聚点当且仅当 $A$ 中有异于 $x$ 的点列收敛到 $x$。注意「闭」不等于「非开」：$\\mathbb{R}$ 中 $\\varnothing$ 与 $\\mathbb{R}$ 既开又闭，而 $[0,1)$ 两者都不是。\n\n两个度量空间之间的映射 $f:(X,d_X)\\to(Y,d_Y)$ 是否**连续**可以完全用开集刻画：$f$ 连续当且仅当**每个开集的原像是开集**，即对任意开集 $U\\subset Y$，原像 $f^{-1}(U)=\\{x\\in X: f(x)\\in U\\}$ 都是 $X$ 中的开集；这也等价于「每个闭集的原像是闭集」，以及序列刻画 $x_n\\to x\\ \\Rightarrow\\ f(x_n)\\to f(x)$。关键词是**原像**：连续性对像集没有相应的要求，例如 $f(x)=x^2$ 把开集 $(-1,1)$ 映成 $[0,1)$，后者既不开（也不闭）。用一句话说，连续就是「不撕裂邻近关系」。\n\n度量空间只需要「距离」这一件事，不需要线性结构，因此实数上的极限与连续原理（收敛、开闭、完备）可以被搬到任意集合上：函数空间、序列空间、图上的最短路、字符串之间的编辑距离都是度量空间。更重要的是，有了距离就能定义**柯西列**，从而可以谈「完备性」——这正是下一站压缩映射原理等一整套存在性定理的舞台。",
+    "definitionEn": "A **metric space** abstracts the notion of distance away from the real line. Let $X$ be a nonempty set and let $d:X\\times X\\to[0,+\\infty)$ be defined on every pair of points. If $d$ satisfies the three **distance axioms**, it is called a **metric** on $X$ and $(X,d)$ is a **metric space**:\n(M1) **Positive definite**: $d(x,y)\\ge 0$, and $d(x,y)=0$ exactly when $x=y$;\n(M2) **Symmetric**: $d(x,y)=d(y,x)$;\n(M3) **Triangle inequality**: $d(x,z)\\le d(x,y)+d(y,z)$ for all $x,y,z\\in X$.\nThe triangle inequality is the substantial axiom: going through $y$ is never shorter than going directly, and every distance estimate (for instance the reverse triangle inequality $|d(x,z)-d(y,z)|\\le d(x,y)$) follows from it.\n\nDistance lets us speak of \"nearby\" and \"approaching\". The **open ball** $B(x,r)=\\{y\\in X: d(x,y)<r\\}$ is the basic neighborhood. A set $U$ is **open** if every $x\\in U$ has some ball entirely inside $U$ (that is, $B(x,r)\\subset U$ for some $r>0$); open sets are closed under arbitrary unions and finite intersections. A **closed set** is one whose complement is open, equivalently one that contains all of its **limit points** ($x$ is a limit point of $A$ if every ball around $x$ contains a point of $A$ different from $x$). Convergence is $d(x_n,x)\\to 0$. In a metric space limits are unique when they exist, and $x$ is a limit point of $A$ iff some sequence of points of $A\\setminus\\{x\\}$ converges to $x$. Note that \"closed\" does not mean \"not open\": in $\\mathbb{R}$ both $\\varnothing$ and $\\mathbb{R}$ are open and closed, while $[0,1)$ is neither.\n\nContinuity of a map $f:(X,d_X)\\to(Y,d_Y)$ is characterized purely by open sets: $f$ is **continuous** iff **the preimage of every open set is open**, i.e. $f^{-1}(U)=\\{x\\in X: f(x)\\in U\\}$ is open in $X$ for every open $U\\subset Y$; equivalently, preimages of closed sets are closed, or sequentially, $x_n\\to x\\Rightarrow f(x_n)\\to f(x)$. The key word is **preimage**: no similar condition is imposed on images — $f(x)=x^2$ maps the open set $(-1,1)$ onto $[0,1)$, which is not open (nor closed). Continuity means, in one phrase, that nearness is not torn apart.\n\nA metric space needs only distance, not linear structure, so the real-line theory of limits and continuity (convergence, open and closed sets, completeness) carries over to arbitrary sets: function spaces, sequence spaces, shortest paths on graphs and edit distances between strings all fit. Above all, distance lets us define **Cauchy sequences**, hence completeness — the stage on which the contraction mapping principle and a whole family of existence theorems are played out.",
+    "formulas": [
+      {
+        "latex": "d(x,y)\\ge 0,\\qquad d(x,y)=0\\iff x=y",
+        "note": "正定性（第一条公理）：距离非负，且两点距离为零当且仅当两点重合。",
+        "noteEn": "Positive definiteness (axiom 1): distances are nonnegative, and vanish exactly for coincident points."
+      },
+      {
+        "latex": "d(x,y)=d(y,x)",
+        "note": "对称性（第二条公理）：从 $x$ 到 $y$ 与从 $y$ 到 $x$ 一样远。",
+        "noteEn": "Symmetry (axiom 2): the distance from $x$ to $y$ equals the distance from $y$ to $x$."
+      },
+      {
+        "latex": "d(x,z)\\le d(x,y)+d(y,z)",
+        "note": "三角不等式（第三条公理）：一切距离估计的源头，例如反向三角不等式 $|d(x,z)-d(y,z)|\\le d(x,y)$。",
+        "noteEn": "The triangle inequality (axiom 3), source of all distance estimates, e.g. the reverse triangle inequality $|d(x,z)-d(y,z)|\\le d(x,y)$."
+      },
+      {
+        "latex": "B(x,r)=\\{y\\in X:\\ d(x,y)<r\\},\\qquad x_n\\to x\\iff d(x_n,x)\\to 0",
+        "note": "开球是最基本的邻域；开集定义为「每个点都含有一个完全落入其中的开球」，收敛就是距离趋于零。",
+        "noteEn": "Open balls are the basic neighborhoods: a set is open when every point contains one, and convergence means the distance tends to zero."
+      },
+      {
+        "latex": "f\\ \\text{连续}\\iff f^{-1}(U)\\ \\text{是开集}\\ (\\forall\\,U\\subset Y\\ \\text{开})\\iff f^{-1}(F)\\ \\text{是闭集}\\ (\\forall\\,F\\subset Y\\ \\text{闭})",
+        "note": "连续性的拓扑刻画：条件是任意开集（闭集）的**原像**，不是像集；在度量空间中它等价于 $\\varepsilon$-$\\delta$ 语言与序列刻画。",
+        "noteEn": "The topological characterization of continuity: the condition is on preimages of arbitrary open (closed) sets, never on the images themselves; it is equivalent to the $\\varepsilon$-$\\delta$ and sequential formulations."
+      }
+    ],
+    "expression": {
+      "text": "(X, d)：集合 X 上每对点配一个距离 d(x, y)；开球 B(x, r) = {y : d(x, y) < r}",
+      "symbol": "d(x,y)",
+      "note": "三条公理（正定、对称、三角不等式）缺一不可；度量不必来自范数或内积，也不需要线性结构。",
+      "noteEn": "The three axioms — positivity, symmetry, triangle inequality — are all essential; a metric need not come from a norm or an inner product, and needs no linear structure."
+    },
+    "properties": [
+      "开球都是开集；任意多个开集的并、有限多个开集的交是开集；对偶地，任意多个闭集的交、有限多个闭集的并是闭集",
+      "单点集 $\\{x\\}$ 是闭集，任意两个不同点可用不相交的开球分开（Hausdorff 性质），因此收敛序列的极限唯一",
+      "距离函数本身连续：$|d(x,z)-d(y,z)|\\le d(x,y)$，所以求极限与取距离可以交换次序",
+      "度量的「有界化」$d'(x,y)=\\min\\{d(x,y),1\\}$ 与 $d$ 诱导相同的收敛与开集（同一个拓扑）：拓扑只看到小尺度上的邻域结构",
+      "子集继承度量成为度量子空间；同一集合上的不同度量可以诱导相同拓扑（如上例），也可以完全不同（离散度量与欧氏度量）"
+    ],
+    "propertiesEn": [
+      "Balls are open; arbitrary unions and finite intersections of open sets are open, and dually arbitrary intersections and finite unions of closed sets are closed",
+      "Every singleton $\\{x\\}$ is closed and distinct points are separated by disjoint balls (Hausdorff property), so limits of convergent sequences are unique",
+      "The metric itself is continuous: $|d(x,z)-d(y,z)|\\le d(x,y)$, so taking limits commutes with taking distances",
+      "The bounded metric $d'(x,y)=\\min\\{d(x,y),1\\}$ induces the same convergence and the same open sets as $d$: topology only sees the small-scale structure",
+      "A subset inherits the metric and becomes a subspace; different metrics on the same set may induce the same topology (as above) or completely different ones (discrete versus Euclidean)"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.1,
+        2.1
+      ],
+      "yRange": [
+        -1.16,
+        1.16
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              -1,
+              -1
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              -1,
+              1
+            ]
+          ],
+          "color": "#ff6b9d",
+          "fill": "rgba(255,107,157,0.07)"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 1,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              0,
+              -1
+            ]
+          ],
+          "color": "#ffd166",
+          "fill": "rgba(255,209,102,0.10)"
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.5,
+            0.85
+          ],
+          "text": "p = 1",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.48,
+            0.28
+          ],
+          "text": "p = 2",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.48,
+            1.04
+          ],
+          "text": "p = ∞",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "p 范数的单位球：p=1（菱形）、p=2（圆）、p=∞（正方形）"
+    },
+    "examples": [
+      {
+        "problem": "证明 $d(x,y)=\\dfrac{|x-y|}{1+|x-y|}$ 是 $\\mathbb{R}$ 上的一种度量。",
+        "solution": "$d(x,y)\\ge0$ 且 $d(x,y)=0\\iff x=y$ 由分子 $|x-y|=0$ 得到；对称性显然。只须验证三角不等式。记 $f(t)=\\dfrac{t}{1+t}$（$t\\ge0$），则 $f'(t)=\\dfrac{1}{(1+t)^2}>0$，故 $f$ 单调递增。对任意 $x,y,z$，由 $|x-z|\\le|x-y|+|y-z|$ 得 $d(x,z)=f(|x-z|)\\le f(|x-y|+|y-z|)$。下面说明 $f$ 是次可加的：记 $u=|x-y|,\\ v=|y-z|$，则\n\n$f(u+v)=\\dfrac{u+v}{1+u+v}$，而 $f(u)+f(v)=\\dfrac{u}{1+u}+\\dfrac{v}{1+v}=\\dfrac{u+v+2uv}{1+u+v+uv}$。\n\n去分母后要证 $(u+v)(1+u+v+uv)\\le(u+v+2uv)(1+u+v)$，即 $(u+v)uv\\le 2uv(1+u+v)$，只要 $uv\\ge0$ 就成立。于是 $d(x,z)\\le f(u+v)\\le f(u)+f(v)=d(x,y)+d(y,z)$，故 $d$ 是度量。这说明 $\\mathbb{R}$ 上的距离远不止 $|x-y|$ 一种。"
+      },
+      {
+        "problem": "在离散度量空间 $(X,d)$ 中（$x\\ne y$ 时 $d(x,y)=1$，$d(x,x)=0$），求出全部开球，并说明它诱导怎样的拓扑。",
+        "solution": "对任意 $x\\in X$：若 $0<r\\le1$，开球 $B(x,r)$ 中异于 $x$ 的点 $y$ 满足 $d(x,y)=1\\ge r$，都不在球内，故 $B(x,r)=\\{x\\}$；若 $r>1$，一切点都满足 $d(x,y)\\le1<r$，故 $B(x,r)=X$。\n\n于是每个单点集 $\\{x\\}=B(x,\\tfrac12)$ 都是开集，从而任意子集 $A=\\bigcup_{x\\in A}\\{x\\}$ 都是开集；又因为补集也是子集，所以每个子集既开又闭，拓扑是**离散拓扑**。\n\n这个小例子提醒我们：度量空间可以「离得很开」，开球未必包含连续统般多的点；收敛在离散度量下也不罕见——序列 $x_n=x$ 最终恒为常数时（且仅此时）才收敛到 $x$。"
+      }
+    ],
+    "tags": [
+      "度量空间",
+      "距离公理",
+      "开集与闭集",
+      "连续映射",
+      "聚点"
+    ],
+    "links": [
+      "normed-space",
+      "complete-metric-space",
+      "continuity",
+      "sequence-limit"
+    ]
+  },
+  {
+    "id": "complete-metric-space",
+    "title": "完备度量空间与压缩映射原理",
+    "titleEn": "Complete Metric Spaces and the Contraction Mapping Principle",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "每个柯西列都收敛的度量空间叫完备空间；在完备空间中，压缩映射必有唯一不动点，迭代以几何速度收敛——这就是巴拿赫不动点定理。",
+    "summaryEn": "A metric space in which every Cauchy sequence converges; in such a space every contraction has a unique fixed point, approached by iteration at geometric speed — the Banach fixed point theorem.",
+    "definition": "**柯西列**是「尾部整体互相靠拢」的序列：对每个 $\\varepsilon>0$，存在 $N$，使得 $m,n\\ge N$ 时 $d(x_m,x_n)<\\varepsilon$。收敛序列一定是柯西列（把两项都拉到极限附近即得），但柯西列不一定收敛——它可能想收敛到一个「洞」里。若 $(X,d)$ 中每个柯西列都收敛于 $X$ 内一点，就称 $(X,d)$ **完备**。最经典的反例是有理数集 $\\mathbb{Q}$ 配通常距离：$\\sqrt2$ 的十进制截断列 $1,\\ 1.4,\\ 1.41,\\ 1.414,\\dots$ 在 $\\mathbb{Q}$ 中是柯西列，极限 $\\sqrt2\\notin\\mathbb{Q}$，所以 $\\mathbb{Q}$ 不完备（同样的序列在 $\\mathbb{R}$ 中收敛，可见完备性依赖空间本身）。同类的例子：$x_0=1,\\ x_{n+1}=\\frac12\\left(x_n+\\frac{2}{x_n}\\right)$ 在 $\\mathbb{Q}$ 中柯西，却收敛到 $\\sqrt2$。\n\n**完备化定理**：任何度量空间 $(X,d)$ 都可以等距嵌入到一个完备度量空间 $(\\hat X,\\hat d)$ 中，并且可使 $X$ 在 $\\hat X$ 中稠密；这样的**完备化**在保持 $X$ 上距离的等距意义下唯一。$\\mathbb{R}$ 就是 $\\mathbb{Q}$ 的完备化，$\\ell^2$ 是有限支撑序列空间的完备化。因此完备性总可以「补齐」，代价是换一个更大的空间。\n\n**压缩映射原理**（巴拿赫不动点定理）：设 $(X,d)$ **完备**，$T:X\\to X$ 是**压缩映射**，即存在与 $x,y$ 都无关的常数 $q$，$0\\le q<1$，使得对一切 $x,y\\in X$ 有 $d(Tx,Ty)\\le q\\,d(x,y)$。则 $T$ 有**唯一**不动点 $x^{*}$，且对任意 $x_0\\in X$，迭代 $x_{n+1}=Tx_n$ 收敛到 $x^{*}$，并有误差估计\n$$d(x_n,x^{*})\\le\\frac{q^n}{1-q}\\,d(x_1,x_0),\\qquad x_1=Tx_0 .$$\n证明的骨架：对迭代列用三角不等式与几何级数得 $d(x_{n+k},x_n)\\le\\bigl(q^n+\\cdots+q^{n+k-1}\\bigr)d(x_1,x_0)$，故它是柯西列；**完备性**给出极限 $x^{*}$；由 $d(x^{*},Tx^{*})\\le d(x^{*},x_{n+1})+q\\,d(x_n,x^{*})\\to0$ 得 $Tx^{*}=x^{*}$；唯一性来自若 $x^{*},y^{*}$ 都是不动点，则 $d(x^{*},y^{*})\\le q\\,d(x^{*},y^{*})$，由 $q<1$ 只能 $d(x^{*},y^{*})=0$。\n\n三个条件缺一不可：空间**不完备**可能没有不动点（$T(x)=x/2$ 在 $(0,1]$ 上，$q=\\tfrac12$，但没有不动点）；**$q=1$** 即仅非扩张也可能没有（$T(x)=x+1$ 在 $\\mathbb{R}$ 上）；$T$ 必须把 $X$ **映入自身**。这个定理是分析中最重要的存在性工具：皮卡–林德勒夫定理用它证明微分方程解的存在唯一性，牛顿法、隐函数定理、分形迭代都以它为依据。",
+    "definitionEn": "A **Cauchy sequence** has its whole tail crowding together: for every $\\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\\varepsilon$ whenever $m,n\\ge N$. Every convergent sequence is Cauchy (pull both terms near the limit), but a Cauchy sequence need not converge — it may head towards a \"hole\". If every Cauchy sequence in $(X,d)$ converges to a point of $X$, the space is called **complete**. The classic counterexample is $\\mathbb{Q}$ with the usual distance: the decimal truncations of $\\sqrt2$, namely $1,\\ 1.4,\\ 1.41,\\ 1.414,\\dots$, form a Cauchy sequence in $\\mathbb{Q}$ whose limit $\\sqrt2\\notin\\mathbb{Q}$; hence $\\mathbb{Q}$ is not complete (the same sequence converges in $\\mathbb{R}$, showing completeness depends on the space). Similarly $x_0=1,\\ x_{n+1}=\\frac12\\left(x_n+\\frac{2}{x_n}\\right)$ is Cauchy in $\\mathbb{Q}$ but converges to $\\sqrt2$.\n\n**Completion theorem**: every metric space $(X,d)$ embeds isometrically into a complete metric space $(\\hat X,\\hat d)$, with $X$ dense in $\\hat X$; this **completion** is unique up to an isometry fixing $X$. The real line is the completion of $\\mathbb{Q}$, and $\\ell^2$ is the completion of the space of finitely supported sequences. Completeness can always be repaired at the cost of passing to a larger space.\n\n**Contraction mapping principle** (Banach fixed point theorem): let $(X,d)$ be **complete** and let $T:X\\to X$ be a **contraction**: there is a constant $q$ with $0\\le q<1$, independent of $x$ and $y$, such that $d(Tx,Ty)\\le q\\,d(x,y)$ for all $x,y\\in X$. Then $T$ has a **unique** fixed point $x^{*}$, and for every $x_0\\in X$ the iteration $x_{n+1}=Tx_n$ converges to $x^{*}$, with the error estimate\n$$d(x_n,x^{*})\\le\\frac{q^n}{1-q}\\,d(x_1,x_0),\\qquad x_1=Tx_0 .$$\nThe proof skeleton: the triangle inequality and a geometric series give $d(x_{n+k},x_n)\\le\\bigl(q^n+\\cdots+q^{n+k-1}\\bigr)d(x_1,x_0)$, so the iterates form a Cauchy sequence; **completeness** supplies the limit $x^{*}$; from $d(x^{*},Tx^{*})\\le d(x^{*},x_{n+1})+q\\,d(x_n,x^{*})\\to0$ we get $Tx^{*}=x^{*}$; uniqueness follows since two fixed points satisfy $d(x^{*},y^{*})\\le q\\,d(x^{*},y^{*})$, forcing $d(x^{*},y^{*})=0$ because $q<1$.\n\nNone of the three hypotheses can be dropped: an **incomplete** space may have no fixed point ($T(x)=x/2$ on $(0,1]$, $q=\\tfrac12$); **$q=1$**, mere non-expansiveness, may also fail ($T(x)=x+1$ on $\\mathbb{R}$); and $T$ must map $X$ **into itself**. The theorem is analysis' most important existence tool: the Picard–Lindelöf theorem uses it for existence and uniqueness of ODE solutions, and Newton's method, the inverse function theorem and fractal iteration all rest on it.",
+    "formulas": [
+      {
+        "latex": "\\forall\\varepsilon>0\\ \\exists N:\\ m,n\\ge N\\ \\Rightarrow\\ d(x_m,x_n)<\\varepsilon",
+        "note": "柯西列的定义：要求的是「尾部任意两项都靠近」，而不是「相邻两项靠近」（x_n = ln n 相邻差趋于 0 却不是柯西列）。",
+        "noteEn": "Definition of a Cauchy sequence: any two terms far out are close — not merely consecutive ones (x_n = ln n has consecutive gaps tending to 0 yet is not Cauchy)."
+      },
+      {
+        "latex": "(X,d)\\ \\text{完备}\\iff \\text{每个柯西列都收敛于}\\ X\\ \\text{中的点}",
+        "note": "完备性定义；收敛列必为柯西列，反之一般不然，正是 $\\mathbb{Q}$ 中 $\\sqrt2$ 的有理逼近列说明了这一点。",
+        "noteEn": "Definition of completeness; convergent sequences are automatically Cauchy but not conversely, as the rational approximations of $\\sqrt2$ show."
+      },
+      {
+        "latex": "d(Tx,Ty)\\le q\\,d(x,y),\\qquad 0\\le q<1,\\qquad Tx^{*}=x^{*}",
+        "note": "压缩映射原理的条件与结论：$q$ 必须与 $x,y$ 无关地小于 1，空间必须完备，映射必须映入自身；此时不动点存在且唯一。",
+        "noteEn": "The contraction mapping principle: $q$ must be uniformly smaller than 1, the space complete, and the map must send $X$ into itself; then the fixed point exists and is unique."
+      },
+      {
+        "latex": "d(x_n,x^{*})\\le\\frac{q^{n}}{1-q}\\,d(x_1,x_0),\\qquad x_n=T^{n}x_0",
+        "note": "迭代误差的先验估计，给出收敛速度：每迭代一次误差至少乘上 $q$；另一条实用的后验估计是 $d(x_n,x^{*})\\le\\frac{q}{1-q}d(x_n,x_{n-1})$，可直接当停机判据。",
+        "noteEn": "An a priori error bound giving the geometric rate: each step shrinks the error at least by the factor $q$; the practical a posteriori bound $d(x_n,x^{*})\\le\\frac{q}{1-q}d(x_n,x_{n-1})$ serves as a stopping criterion."
+      },
+      {
+        "latex": "d(x^{*},y^{*})\\le q\\,d(x^{*},y^{*})\\ \\Longrightarrow\\ d(x^{*},y^{*})=0",
+        "note": "唯一性证明：若两个不动点都存在，它们之间的距离不超过自己的 $q<1$ 倍，只能为零。",
+        "noteEn": "Proof of uniqueness: the distance between two fixed points is at most $q<1$ times itself, hence zero."
+      }
+    ],
+    "expression": {
+      "text": "T: X → X 满足 d(Tx, Ty) ≤ q·d(x, y)（0 ≤ q < 1）；迭代 x_{n+1} = T x_n 收敛到不动点 x*",
+      "symbol": "T x^{*} = x^{*}",
+      "note": "使用定理时逐项核对：① X 完备；② q 与 x, y 无关且 q < 1；③ T 把 X 映入自身（否则迭代可能跳出 X）。",
+      "noteEn": "Check all hypotheses: (1) X complete, (2) q independent of x, y and q < 1, (3) T maps X into itself, so that the iteration never leaves X."
+    },
+    "properties": [
+      "完备空间的闭子集（配子空间度量）完备；反过来，完备度量空间的完备子集必是闭集",
+      "收敛列必为柯西列；柯西列一定有界，且「尾部直径」趋于 0——柯西性是关于整个尾部的条件，比「相邻项靠近」强得多",
+      "完备性是度量性质而非拓扑性质：$\\mathbb{R}$ 与 $(0,1)$ 同胚，但 $(0,1)$ 不完备（$1/n$ 是柯西列而极限不在其中）；等距映射保持完备性",
+      "压缩映射原理的三个条件（完备性、$q<1$ 且一致、$T:X\\to X$）缺一不可：$T(x)=x/2$ 在 $(0,1]$ 上、$T(x)=x+1$ 在 $\\mathbb{R}$ 上都是反例",
+      "误差估计 $d(x_n,x^{*})\\le\\frac{q^n}{1-q}d(x_1,x_0)$ 把「解的存在性」变成可计算的算法：先估迭代次数，再迭代；实际收敛通常比上界快得多"
+    ],
+    "propertiesEn": [
+      "A closed subset of a complete space (with the subspace metric) is complete; conversely a complete subset of a metric space is closed",
+      "Convergent sequences are Cauchy; Cauchy sequences are bounded and have tails of vanishing diameter — Cauchyness constrains the whole tail, far stronger than consecutive terms being close",
+      "Completeness is a metric, not a topological, property: $\\mathbb{R}$ and $(0,1)$ are homeomorphic yet $(0,1)$ is incomplete ($1/n$ is Cauchy with limit outside); isometries preserve completeness",
+      "All three hypotheses of the contraction principle (completeness, a uniform $q<1$, and $T:X\\to X$) are indispensable: $T(x)=x/2$ on $(0,1]$ and $T(x)=x+1$ on $\\mathbb{R}$ are counterexamples",
+      "The bound $d(x_n,x^{*})\\le\\frac{q^n}{1-q}d(x_1,x_0)$ turns an existence statement into an algorithm: estimate the number of steps, then iterate; convergence in practice is usually much faster"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "y = x"
+        },
+        {
+          "expr": "cos(x)",
+          "color": "#4cc9f0",
+          "label": "y = cos x"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        1.5
+      ],
+      "yRange": [
+        -0.1,
+        1.15
+      ],
+      "title": "迭代 xₙ₊₁ = cos xₙ 收敛到不动点 x* ≈ 0.7391"
+    },
+    "examples": [
+      {
+        "problem": "用压缩映射原理证明 $T(x)=\\cos x$ 在 $[0,1]$ 上有唯一不动点，并估计从 $x_0=1$ 出发的迭代误差。",
+        "solution": "先验证压缩性与不变性。由中值定理，对 $x,y\\in[0,1]$ 存在 $\\xi$ 使 $|\\cos x-\\cos y|=|\\sin\\xi|\\,|x-y|\\le \\sin 1\\cdot|x-y|$，故 $q=\\sin 1\\approx 0.8415<1$；又 $T([0,1])=[\\cos 1,1]\\approx[0.5403,1]\\subset[0,1]$，不变性成立。区间 $[0,1]$ 是 $\\mathbb{R}$ 的闭子集，因而完备。由压缩映射原理，$T$ 在 $[0,1]$ 上有唯一不动点 $x^{*}$，且迭代从任何初值出发都收敛。\n\n取 $x_0=1$：$x_1=\\cos 1\\approx0.5403$，$d(x_1,x_0)\\approx0.4597$。先验估计给出 $d(x_{10},x^{*})\\le\\dfrac{q^{10}}{1-q}d(x_1,x_0)\\approx\\dfrac{0.8415^{10}}{0.1585}\\times0.4597\\approx0.516$，上界偏保守；实际误差 $d(x_{10},x^{*})\\approx5.15\\times10^{-3}$，迭代 20 次后实际误差约 $9.93\\times10^{-5}$。数值解 $x=\\cos x$ 得 $x^{*}\\approx0.7390851$，与 $T'(x^{*})=-\\sin x^{*}\\approx-0.6736$ 对照可知实际收敛比 $q=\\sin 1$ 还要快一点。"
+      },
+      {
+        "problem": "证明 $\\mathbb{Q}$（配通常距离）不完备：构造 $\\mathbb{Q}$ 中一个柯西列，使其在 $\\mathbb{Q}$ 内没有极限。",
+        "solution": "取迭代 $x_0=1$，$x_{n+1}=\\dfrac{1}{2}\\left(x_n+\\dfrac{2}{x_n}\\right)$，即 $T(x)=\\frac12(x+\\frac2x)$。由归纳法（有理数的四则运算封闭）$x_n\\in\\mathbb{Q}$ 恒成立。\n\n在 $[1,2]$ 上看：$T([1,2])=[\\sqrt2,\\tfrac32]\\subset[1,2]$（由均值不等式 $T(x)\\ge\\sqrt2$，且 $T$ 在端点取最大值 $\\tfrac32$）；又 $|T'(x)|=\\left|1-\\dfrac{2}{x^{2}}\\right|/2\\le\\dfrac12$（$x\\ge1$），故 $T$ 是 $q=\\tfrac12$ 的压缩。于是 $(x_n)$ 在 $\\mathbb{R}$ 中收敛到 $T$ 的不动点：解 $L=\\frac12(L+\\frac2L)$ 得 $L^2=2$，即 $L=\\sqrt2$。\n\n具体数值：$x_1=\\tfrac32$，$x_2=\\tfrac{17}{12}\\approx1.41667$，$x_3\\approx1.4142157$（误差 $\\approx2.1\\times10^{-6}$），$x_4$ 误差约 $1.6\\times10^{-12}$；先验估计 $d(x_n,\\sqrt2)\\le(\\tfrac12)^{n-1}\\cdot\\tfrac12$ 虽宽松（$n=4$ 时给 $0.0625$），但已足以说明柯西性。最后，$\\sqrt2\\notin\\mathbb{Q}$：若 $\\sqrt2=p/q$ 为最简分数，则 $p^2=2q^2$，故 $p$ 为偶数，写 $p=2r$ 得 $q^2=2r^2$，$q$ 也是偶数，与最简性矛盾。所以 $(x_n)$ 是 $\\mathbb{Q}$ 中的柯西列，却在 $\\mathbb{Q}$ 内没有极限——$\\mathbb{Q}$ 不完备（它的完备化正是 $\\mathbb{R}$）。"
+      }
+    ],
+    "tags": [
+      "完备性",
+      "柯西列",
+      "压缩映射原理",
+      "不动点",
+      "有理数不完备"
+    ],
+    "links": [
+      "metric-space",
+      "banach-space",
+      "ode-existence-uniqueness",
+      "newton-method"
+    ]
+  },
+  {
+    "id": "normed-space",
+    "title": "赋范线性空间",
+    "titleEn": "Normed Linear Spaces",
+    "branch": "functional-analysis",
+    "level": 4,
+    "summary": "带范数的线性空间：范数给出向量的「长度」，并诱导平移不变、齐次的度量；有限维时任意两个范数等价。",
+    "summaryEn": "A linear space equipped with a norm — a notion of length that induces a translation-invariant, homogeneous metric; in finite dimensions all norms are equivalent.",
+    "definition": "**赋范线性空间**是在线性空间上装了「长度」的结构。设 $X$ 是数域 $\\mathbb{K}$（$\\mathbb{R}$ 或 $\\mathbb{C}$）上的线性空间，若函数 $\\|\\cdot\\|:X\\to[0,+\\infty)$ 对任意 $x,y\\in X$ 与 $\\alpha\\in\\mathbb{K}$ 满足三条**范数公理**，就称它为 $X$ 上的**范数**，$(X,\\|\\cdot\\|)$ 为**赋范线性空间**：\n（N1）**正定**：$\\|x\\|\\ge0$，且 $\\|x\\|=0$ 当且仅当 $x=0$；\n（N2）**齐次**（绝对齐次）：$\\|\\alpha x\\|=|\\alpha|\\,\\|x\\|$；\n（N3）**三角不等式**：$\\|x+y\\|\\le\\|x\\|+\\|y\\|$。\n（N1）（N2）说范数是「长度」：只有零向量长度为零，数乘按比例伸缩长度。（N3）是「第三边不超过两边之和」的代数版本，是范数分析中最常用的一条；由它立得**反向三角不等式** $\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le\\|x-y\\|$，说明范数本身连续。\n\n范数诱导出度量 $d(x,y)=\\|x-y\\|$，它自动带有两条额外性质：**平移不变** $d(x+z,y+z)=d(x,y)$ 与**齐次性** $d(\\alpha x,\\alpha y)=|\\alpha|\\,d(x,y)$。因此赋范空间是「带线性结构的度量空间」：收敛 $x_n\\to x$ 就是 $\\|x_n-x\\|\\to0$，柯西列就是 $\\|x_m-x_n\\|\\to0$，并且 $\\|x_n\\|\\to\\|x\\|$。反过来，一个度量要来自范数，必须平移不变且齐次（此时 $\\|x\\|=d(x,0)$）——平移不变性正是线性结构与距离相容的标志。\n\n标准例子：$\\mathbb{R}^n$（或 $\\mathbb{C}^n$）上的 $p$-范数 $\\|x\\|_p=\\bigl(\\sum_{k=1}^n|x_k|^p\\bigr)^{1/p}$（$1\\le p<\\infty$）与 $\\|x\\|_\\infty=\\max_k|x_k|$；闭区间上的连续函数空间 $C[a,b]$ 配 sup 范数 $\\|f\\|_\\infty=\\sup_{t\\in[a,b]}|f(t)|$；序列空间 $\\ell^p$；函数空间 $L^p$（严格地说，$L^p$ 的元素是几乎处处相等的函数等价类，否则正定性会失败）。不同的范数在同一空间上给出不同的几何：$n=2$ 时单位球的形状随 $p$ 变化——$p=1$ 是菱形，$p=2$ 是圆，$p=\\infty$ 是正方形。\n\n本主题的第一个深刻事实是**有限维空间上所有范数等价**。称两范数 $\\|\\cdot\\|_a,\\|\\cdot\\|_b$ **等价**，是指存在正常数 $c_1,c_2$，对一切 $x$ 有\n$$c_1\\|x\\|_a\\le\\|x\\|_b\\le c_2\\|x\\|_a .$$\n等价的范数诱导同样的收敛、开集、有界集与柯西列，因此有限维空间只有一种「标准拓扑」；由此还可得**有限维赋范空间必完备**，从而都是巴拿赫空间。这两个结论在无限维都不再成立：$C[0,1]$ 上 sup 范数与积分范数 $\\|f\\|_1=\\int_0^1|f|$ 就不能互相控制——取在 $0$ 附近越来越窄的尖峰函数即知。",
+    "definitionEn": "A **normed linear space** equips a linear space with a notion of length. Let $X$ be a linear space over $\\mathbb{K}$ ($\\mathbb{R}$ or $\\mathbb{C}$). A function $\\|\\cdot\\|:X\\to[0,+\\infty)$ is a **norm**, and $(X,\\|\\cdot\\|)$ a **normed linear space**, if for all $x,y\\in X$ and $\\alpha\\in\\mathbb{K}$:\n(N1) **Positive definite**: $\\|x\\|\\ge0$, and $\\|x\\|=0$ iff $x=0$;\n(N2) **Absolutely homogeneous**: $\\|\\alpha x\\|=|\\alpha|\\,\\|x\\|$;\n(N3) **Triangle inequality**: $\\|x+y\\|\\le\\|x\\|+\\|y\\|$.\nAxioms (N1)–(N2) make the norm a genuine length: only the zero vector has length zero and scaling stretches it proportionally. (N3) is the algebraic form of \"a side is at most the sum of the other two\" and is the workhorse of normed-space analysis; it immediately yields the **reverse triangle inequality** $\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le\\|x-y\\|$, so the norm is continuous.\n\nA norm induces the metric $d(x,y)=\\|x-y\\|$, which automatically carries two extra properties: **translation invariance** $d(x+z,y+z)=d(x,y)$ and **homogeneity** $d(\\alpha x,\\alpha y)=|\\alpha|\\,d(x,y)$. Thus a normed space is a metric space with linear structure: $x_n\\to x$ means $\\|x_n-x\\|\\to0$, Cauchyness means $\\|x_m-x_n\\|\\to0$, and $\\|x_n\\|\\to\\|x\\|$. Conversely, a metric coming from a norm must be translation invariant and homogeneous (then $\\|x\\|=d(x,0)$) — translation invariance is precisely what makes the distance compatible with addition.\n\nStandard examples: the $p$-norms $\\|x\\|_p=\\bigl(\\sum_{k=1}^n|x_k|^p\\bigr)^{1/p}$ ($1\\le p<\\infty$) and $\\|x\\|_\\infty=\\max_k|x_k|$ on $\\mathbb{R}^n$ or $\\mathbb{C}^n$; the space $C[a,b]$ of continuous functions with the sup norm $\\|f\\|_\\infty=\\sup_{t\\in[a,b]}|f(t)|$; the sequence spaces $\\ell^p$; the function spaces $L^p$ (strictly speaking, elements of $L^p$ are equivalence classes of functions equal almost everywhere, otherwise positive definiteness fails). Different norms on one space produce different geometry: in the plane the unit ball is a diamond for $p=1$, a disc for $p=2$ and a square for $p=\\infty$.\n\nThe first deep fact is that **on a finite-dimensional space all norms are equivalent**. Two norms $\\|\\cdot\\|_a,\\|\\cdot\\|_b$ are **equivalent** when there are positive constants $c_1,c_2$ with\n$$c_1\\|x\\|_a\\le\\|x\\|_b\\le c_2\\|x\\|_a\\quad\\text{for all }x .$$\nEquivalent norms induce the same convergence, the same open sets, the same bounded sets and the same Cauchy sequences, so a finite-dimensional space has only one \"standard topology\"; consequently **every finite-dimensional normed space is complete**, hence a Banach space. Both conclusions fail in infinite dimensions: on $C[0,1]$ the sup norm and the integral norm $\\|f\\|_1=\\int_0^1|f|$ cannot bound each other — take spike functions ever narrower near $0$.",
+    "formulas": [
+      {
+        "latex": "\\|x\\|\\ge 0,\\qquad \\|x\\|=0\\iff x=0,\\qquad \\|\\alpha x\\|=|\\alpha|\\,\\|x\\|",
+        "note": "范数的正定性与齐次性：范数是「长度」，零向量长度为零，数乘按比例伸缩。",
+        "noteEn": "Positive definiteness and homogeneity of a norm: it behaves like a length, vanishing only at the zero vector and scaling proportionally."
+      },
+      {
+        "latex": "\\|x+y\\|\\le\\|x\\|+\\|y\\|,\\qquad \\bigl|\\,\\|x\\|-\\|y\\|\\,\\bigr|\\le\\|x-y\\|",
+        "note": "三角不等式及其推论（反向三角不等式）；后者说明范数关于范数收敛是连续函数。",
+        "noteEn": "The triangle inequality and its corollary (the reverse triangle inequality), the latter showing that the norm is continuous with respect to norm convergence."
+      },
+      {
+        "latex": "d(x,y)=\\|x-y\\|,\\qquad d(x+z,y+z)=d(x,y),\\qquad d(\\alpha x,\\alpha y)=|\\alpha|\\,d(x,y)",
+        "note": "范数诱导的度量保持平移不变与齐次性；反之，平移不变且齐次的度量必来自范数 $\\|x\\|=d(x,0)$。",
+        "noteEn": "The induced metric is translation invariant and homogeneous; conversely any such metric comes from the norm $\\|x\\|=d(x,0)$."
+      },
+      {
+        "latex": "c_1\\|x\\|_a\\le\\|x\\|_b\\le c_2\\|x\\|_a\\quad(\\forall x\\in X)",
+        "note": "范数等价：有限维空间上任意两个范数都等价（常数只与范数、维数有关），无限维一般不成立（$C[0,1]$ 的 sup 与 $L^1$ 范数）。",
+        "noteEn": "Equivalence of norms: in finite dimensions any two norms are equivalent (the constants depend only on the norms and the dimension); this fails in infinite dimensions (sup versus $L^1$ norm on $C[0,1]$)."
+      },
+      {
+        "latex": "\\|x\\|_p=\\Bigl(\\sum_{k=1}^{n}|x_k|^{p}\\Bigr)^{1/p}\\ (1\\le p<\\infty),\\qquad \\|x\\|_\\infty=\\max_{1\\le k\\le n}|x_k|",
+        "note": "$\\mathbb{R}^n$ 上的 $p$-范数与 sup 范数；$p=2$ 给出欧氏长度，$p=1$ 与 $p=\\infty$ 的公式见单位球图形。",
+        "noteEn": "The $p$-norms and the sup norm on $\\mathbb{R}^n$; $p=2$ gives Euclidean length, while $p=1$ and $p=\\infty$ are pictured by the unit balls in the figure."
+      }
+    ],
+    "expression": {
+      "text": "d(x, y) = ‖x − y‖；范数诱导的度量平移不变、齐次",
+      "symbol": "\\|x\\|",
+      "note": "三条范数公理：正定（‖x‖ = 0 ⇔ x = 0）、齐次（‖αx‖ = |α|‖x‖）、三角不等式；缺一不可。",
+      "noteEn": "The three norm axioms — positive definiteness ($\\|x\\|=0$ iff $x=0$), homogeneity ($\\|\\alpha x\\|=|\\alpha|\\|x\\|$) and the triangle inequality — are all needed."
+    },
+    "properties": [
+      "范数诱导的度量平移不变且齐次；反过来，平移不变且齐次的度量一定来自范数 $\\|x\\|=d(x,0)$——这保证线性运算（加法、数乘）本身是连续的",
+      "单位球 $B=\\{x:\\|x\\|\\le1\\}$ 是凸集且均衡（$x\\in B,\\ |\\alpha|\\le1\\Rightarrow\\alpha x\\in B$）；范数可由单位球用 Minkowski 泛函 $\\|x\\|=\\inf\\{\\lambda>0: x/\\lambda\\in B\\}$ 恢复",
+      "反向三角不等式 $\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le\\|x-y\\|$：范数是连续函数，$x_n\\to x$ 蕴含 $\\|x_n\\|\\to\\|x\\|$",
+      "【关键】有限维空间上任意两个范数等价：存在 $c_1,c_2>0$ 使 $c_1\\|x\\|_a\\le\\|x\\|_b\\le c_2\\|x\\|_a$，它们诱导相同的拓扑、收敛与柯西性；无限维不成立",
+      "【关键】有限维赋范空间必完备：取一组基把 $x$ 写成 $\\sum_kx_ke_k$，由任意两范数等价得坐标泛函连续，柯西列的每个坐标都是柯西数列而在 $\\mathbb{R}$ 中收敛，拼回极限即得完备性——因此有限维赋范空间总是巴拿赫空间"
+    ],
+    "propertiesEn": [
+      "The induced metric is translation invariant and homogeneous; conversely such a metric comes from the norm $\\|x\\|=d(x,0)$ — which makes addition and scalar multiplication continuous",
+      "The unit ball $B=\\{x:\\|x\\|\\le1\\}$ is convex and balanced ($x\\in B,\\ |\\alpha|\\le1\\Rightarrow\\alpha x\\in B$), and the norm can be recovered from it by the Minkowski functional $\\|x\\|=\\inf\\{\\lambda>0: x/\\lambda\\in B\\}$",
+      "Reverse triangle inequality: $\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le\\|x-y\\|$; the norm is continuous, and $x_n\\to x$ implies $\\|x_n\\|\\to\\|x\\|$",
+      "**Key**: on a finite-dimensional space any two norms are equivalent, $c_1\\|x\\|_a\\le\\|x\\|_b\\le c_2\\|x\\|_a$, inducing the same topology, convergence and Cauchy sequences; this fails in infinite dimensions",
+      "**Key**: every finite-dimensional normed space is complete — the Cauchy sequence converges coordinatewise and the limit stays inside — so finite-dimensional normed spaces are always Banach spaces"
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^n$ 上证明 $\\|x\\|_\\infty\\le\\|x\\|_2\\le\\|x\\|_1\\le\\sqrt{n}\\,\\|x\\|_2$，并由此说明这三个范数两两等价。",
+        "solution": "逐个证明三条不等式：\n\n① $\\|x\\|_\\infty\\le\\|x\\|_2$：取 $k$ 使 $|x_k|=\\max_i|x_i|$，则 $\\|x\\|_\\infty^2=x_k^2\\le\\sum_i x_i^2=\\|x\\|_2^2$。\n\n② $\\|x\\|_2\\le\\|x\\|_1$：$\\|x\\|_2^2=\\sum_i|x_i|^2\\le\\sum_i|x_i|^2+2\\sum_{i<j}|x_i||x_j|=\\bigl(\\sum_i|x_i|\\bigr)^2=\\|x\\|_1^2$。\n\n③ $\\|x\\|_1\\le\\sqrt n\\,\\|x\\|_2$：由柯西–施瓦茨不等式，$\\|x\\|_1=\\sum_i|x_i|\\cdot1\\le\\bigl(\\sum_i|x_i|^2\\bigr)^{1/2}\\bigl(\\sum_i1\\bigr)^{1/2}=\\sqrt n\\,\\|x\\|_2$。\n\n合并得 $\\frac{1}{\\sqrt n}\\|x\\|_1\\le\\|x\\|_2\\le\\|x\\|_1$ 与 $\\|x\\|_\\infty\\le\\|x\\|_2\\le\\sqrt n\\,\\|x\\|_\\infty$，所以任意两范数（包括 $\\|\\cdot\\|_1$ 与 $\\|\\cdot\\|_\\infty$）都互相控制，常数 $c_1,c_2$ 只与 $n$ 有关——这正是有限维范数等价的一例。"
+      },
+      {
+        "problem": "证明 $C[0,1]$ 上的 sup 范数 $\\|f\\|_\\infty=\\sup_t|f(t)|$ 与积分范数 $\\|f\\|_1=\\int_0^1|f(t)|\\,dt$ 不等价。",
+        "solution": "定义尖峰函数 $f_n(t)=\\max\\{0,\\ 1-nt\\}$（$t\\in[0,1]$）。它在 $t=0$ 处取最大值 $1$，宽度只有 $1/n$。\n\n计算两种范数：$\\|f_n\\|_\\infty=1$；$\\|f_n\\|_1=\\int_0^{1/n}(1-nt)\\,dt=\\dfrac{1}{2n}$。\n\n若两范数等价，则存在常数 $c_2>0$ 使对一切 $f$ 成立 $\\|f\\|_\\infty\\le c_2\\|f\\|_1$。代入 $f_n$ 得 $1\\le\\dfrac{c_2}{2n}$，即 $n\\le\\dfrac{c_2}{2}$ 必须对一切 $n$ 成立，矛盾。故两范数不等价。\n\n几何上，$f_n$ 的「长度」（sup）不变但「面积」（积分）趋于零——无限维空间中范数之间可以不互相控制，这正是有限维结论不能照搬的原因。"
+      }
+    ],
+    "tags": [
+      "赋范线性空间",
+      "范数公理",
+      "范数等价",
+      "有限维完备",
+      "单位球"
+    ],
+    "links": [
+      "metric-space",
+      "banach-space",
+      "inner-product-space",
+      "vector"
+    ]
+  },
+  {
+    "id": "banach-space",
+    "title": "巴拿赫空间",
+    "titleEn": "Banach Spaces",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "完备的赋范线性空间：柯西列总有极限，绝对收敛级数必收敛，迭代与一致收敛论证畅通无阻——泛函分析的主舞台。",
+    "summaryEn": "A complete normed linear space: Cauchy sequences always converge, absolutely convergent series do too, and iteration and uniform-convergence arguments work — the main stage of functional analysis.",
+    "definition": "**巴拿赫空间**就是完备的赋范线性空间：在范数诱导的度量下，每个柯西列都收敛于空间内的点。它是「赋范线性空间 + 完备性」的组合，而这个多出来的条件正是分析所依赖的：绝对收敛的级数收敛、逐次逼近的极限存在、一致收敛的极限仍留在空间里。可以把巴拿赫空间理解为「无限维的 $\\mathbb{R}^n$」——既有代数运算，又有对极限封闭的完整性，因此是泛函分析的主要工作场所。\n\n标准例子成串：有限维空间 $\\mathbb{R}^n,\\mathbb{C}^n$ 配任何范数都完备；闭区间上的连续函数空间 $C[a,b]$ 配 sup 范数 $\\|f\\|_\\infty=\\sup_{t\\in[a,b]}|f(t)|$（一致收敛的极限仍连续）；序列空间 $\\ell^p=\\{(x_k):\\sum_k|x_k|^p<\\infty\\}$（$1\\le p<\\infty$）与 $\\ell^\\infty$；函数空间 $L^p[a,b]$（$1\\le p\\le\\infty$，完备性由 Riesz–Fischer 定理保证）。相反的例子同样重要：只有有限多项非零的序列空间 $c_{00}$ 在 $p$ 范数下不完备（它的完备化是 $\\ell^p$）；多项式空间 $\\mathcal{P}[0,1]$ 配 sup 范数也不完备（$e^t$ 的 Taylor 部分和是柯西列，极限不是多项式）。\n\n**有限维赋范空间必完备**，因此每个有限维赋范空间都是巴拿赫空间。证明思路：取一组基 $e_1,\\dots,e_n$，把 $x$ 写成 $x=\\sum_k x_k e_k$；由范数等价性，坐标泛函 $x\\mapsto x_k$ 是连续的，于是柯西列的每个坐标都是柯西数列，在 $\\mathbb{R}$ 中各收敛，把极限向量拼回去即可。这也是「无限维分析明显更难」的根源之一：完备性不再是免费的，需要逐个空间验证。\n\n完备性让整套分析工具运转起来。**级数判别法**：赋范空间完备当且仅当每个**绝对收敛**的级数都收敛，即 $\\sum_n\\|x_n\\|<\\infty\\Rightarrow\\sum_n x_n$ 收敛。**算子空间**：$Y$ 完备时，有界线性算子空间 $B(X,Y)$ 配算子范数完备；$B(X)=B(X,X)$ 还是巴拿赫代数（$\\|ST\\|\\le\\|S\\|\\,\\|T\\|$）。**三大定理**：一致有界原理、开映射定理与闭图像定理都在巴拿赫空间上成立，而 Hahn–Banach 定理只依赖范数结构、不需要完备性。可见巴拿赫空间是既能做线性运算、又对极限封闭的「完美分析场所」。",
+    "definitionEn": "A **Banach space** is a complete normed linear space: under the metric induced by the norm, every Cauchy sequence converges to a point of the space. It is \"normed linear space plus completeness\", and the extra ingredient is exactly what analysis needs: absolutely convergent series converge, successive approximations have limits, and uniform limits remain inside the space. One may think of a Banach space as an infinite-dimensional $\\mathbb{R}^n$ — carrying both linear operations and closure under limits — which makes it the principal setting of functional analysis.\n\nExamples come in flocks: the finite-dimensional spaces $\\mathbb{R}^n,\\mathbb{C}^n$ with any norm; the space $C[a,b]$ of continuous functions with the sup norm $\\|f\\|_\\infty=\\sup_{t\\in[a,b]}|f(t)|$ (uniform limits of continuous functions stay continuous); the sequence spaces $\\ell^p=\\{(x_k):\\sum_k|x_k|^p<\\infty\\}$ for $1\\le p<\\infty$, and $\\ell^\\infty$; the function spaces $L^p[a,b]$ for $1\\le p\\le\\infty$, complete by the Riesz–Fischer theorem. Counterexamples matter just as much: the space $c_{00}$ of finitely supported sequences is incomplete in the $p$-norm (its completion is $\\ell^p$), and the polynomial space $\\mathcal{P}[0,1]$ is incomplete in the sup norm (the Taylor partial sums of $e^t$ form a Cauchy sequence whose limit is not a polynomial).\n\n**Every finite-dimensional normed space is complete**, hence every finite-dimensional normed space is a Banach space. Sketch: fix a basis $e_1,\\dots,e_n$ and write $x=\\sum_k x_k e_k$; by equivalence of norms the coordinate functionals $x\\mapsto x_k$ are continuous, so a Cauchy sequence has Cauchy coordinate sequences, each converging in $\\mathbb{R}$; assembling the limits gives the limit vector in the space. This is one reason infinite-dimensional analysis is genuinely harder: completeness is no longer free and must be verified space by space.\n\nCompleteness makes the whole toolbox run. **Series criterion**: a normed space is complete iff every **absolutely convergent** series converges, i.e. $\\sum_n\\|x_n\\|<\\infty\\Rightarrow\\sum_n x_n$ converges. **Operator spaces**: when $Y$ is complete, the space $B(X,Y)$ of bounded linear operators is complete in the operator norm, and $B(X)=B(X,X)$ is a Banach algebra ($\\|ST\\|\\le\\|S\\|\\,\\|T\\|$). **Three pillars**: the uniform boundedness principle, the open mapping theorem and the closed graph theorem all hold on Banach spaces, whereas the Hahn–Banach theorem needs only the normed structure, not completeness. A Banach space is thus the \"perfect analytic habitat\" — algebraically rich and closed under limits.",
+    "formulas": [
+      {
+        "latex": "\\|T\\|=\\sup_{x\\ne0}\\frac{\\|Tx\\|}{\\|x\\|}=\\sup_{\\|x\\|\\le1}\\|Tx\\|,\\qquad \\|Tx\\|\\le\\|T\\|\\,\\|x\\|",
+        "note": "有界线性算子的范数；当 $Y$ 完备时，$B(X,Y)$ 配此范数也是巴拿赫空间。",
+        "noteEn": "Norm of a bounded linear operator; when $Y$ is complete, $B(X,Y)$ is again a Banach space in this norm."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}\\|x_n\\|<\\infty\\ \\Longrightarrow\\ \\sum_{n=1}^{\\infty}x_n\\ \\text{收敛}",
+        "note": "巴拿赫空间的级数判别法：绝对收敛蕴含收敛；反过来，若赋范空间中每个绝对收敛级数都收敛，则该空间完备——这条性质刻画了完备性。",
+        "noteEn": "The series criterion for Banach spaces: absolute convergence implies convergence; conversely, if in a normed space every absolutely convergent series converges, the space is complete — the property characterizes completeness."
+      },
+      {
+        "latex": "\\Bigl\\|\\sum_{n=1}^{\\infty}x_n\\Bigr\\|\\le\\sum_{n=1}^{\\infty}\\|x_n\\|",
+        "note": "把三角不等式取极限（范数连续）；它是级数估计与 Weierstrass 判别法的基础。",
+        "noteEn": "The triangle inequality in the limit (the norm is continuous); it underlies series estimates and the Weierstrass test."
+      },
+      {
+        "latex": "\\|S\\circ T\\|\\le\\|S\\|\\,\\|T\\|",
+        "note": "算子乘法的范数不等式：$B(X)$ 是巴拿赫代数，收敛的算子级数（如 $e^{T}=\\sum T^k/k!$）全靠完备性。",
+        "noteEn": "Submultiplicativity of the operator norm: $B(X)$ is a Banach algebra, and operator series such as $e^{T}=\\sum T^k/k!$ rely on completeness."
+      },
+      {
+        "latex": "\\|f\\|_\\infty=\\sup_{t\\in[a,b]}|f(t)|\\ \\Rightarrow\\ C[a,b]\\ \\text{完备}",
+        "note": "sup 范数下的一致收敛极限定理：连续函数列若按 sup 范数柯西，则一致收敛，极限函数连续且仍属于 $C[a,b]$。",
+        "noteEn": "Under the sup norm, the uniform limit theorem: a Cauchy sequence of continuous functions converges uniformly, and the limit is again continuous, hence lies in $C[a,b]$."
+      }
+    ],
+    "expression": {
+      "text": "X 完备 ⇔ 每个柯西列在 X 内收敛 ⇔ 每个绝对收敛级数 Σx_n（Σ‖x_n‖ < ∞）收敛",
+      "symbol": "\\bigl(X,\\|\\cdot\\|\\bigr)",
+      "note": "巴拿赫空间 = 赋范线性空间 + 完备性；使用时注意区分「赋范」与「巴拿赫」，凡是用到极限交换的定理都要检查完备性。",
+      "noteEn": "Banach space = normed linear space + completeness; always check completeness before applying theorems that interchange limits."
+    },
+    "properties": [
+      "闭子空间、有限乘积与（对闭子空间取的）商空间仍是巴拿赫空间；巴拿赫空间的子空间本身完备当且仅当它是闭的——稠密真子空间一定不完备",
+      "绝对收敛级数收敛：$\\sum\\|x_n\\|<\\infty\\Rightarrow\\sum x_n$ 收敛且 $\\bigl\\|\\sum x_n\\bigr\\|\\le\\sum\\|x_n\\|$；反之这一性质成立当且仅当空间完备",
+      "有限维赋范空间总完备；无限维的典型例子有 $\\ell^p$、$L^p$（$1\\le p\\le\\infty$）与配 sup 范数的 $C[a,b]$，而不完备的例子有 $c_{00}$ 与 $\\mathcal{P}[0,1]$",
+      "有界线性算子空间 $B(X,Y)$ 在 $Y$ 完备时完备；$B(X)$ 还是巴拿赫代数：$\\|ST\\|\\le\\|S\\|\\,\\|T\\|$，算子级数与算子半群据此建立在完备性之上",
+      "完备性是度量性质：等距映射保持，同胚一般不保持。一致有界原理、开映射定理与闭图像定理都在巴拿赫空间上成立（完备性不可省），而 Hahn–Banach 定理不依赖完备性"
+    ],
+    "propertiesEn": [
+      "Closed subspaces, finite products and quotients by closed subspaces of Banach spaces are Banach; a subspace of a Banach space is complete iff it is closed — a dense proper subspace is never complete",
+      "Absolutely convergent series converge: $\\sum\\|x_n\\|<\\infty\\Rightarrow\\sum x_n$ converges with $\\bigl\\|\\sum x_n\\bigr\\|\\le\\sum\\|x_n\\|$; conversely this property holds iff the space is complete",
+      "All finite-dimensional normed spaces are complete; typical infinite-dimensional examples are $\\ell^p$, $L^p$ ($1\\le p\\le\\infty$) and $C[a,b]$ with the sup norm, while $c_{00}$ and $\\mathcal{P}[0,1]$ are incomplete",
+      "The space $B(X,Y)$ of bounded linear operators is complete whenever $Y$ is; $B(X)$ is a Banach algebra with $\\|ST\\|\\le\\|S\\|\\,\\|T\\|$, on which operator series and semigroups rest",
+      "Completeness is a metric property, preserved by isometries but not by general homeomorphisms. The uniform boundedness principle, open mapping theorem and closed graph theorem all require Banach spaces; the Hahn–Banach theorem does not"
+    ],
+    "examples": [
+      {
+        "problem": "证明多项式空间 $\\mathcal{P}[0,1]$ 配 sup 范数不完备。",
+        "solution": "考察 $p_n(t)=\\sum_{k=0}^{n}\\dfrac{t^k}{k!}$。对 $m>n$ 与一切 $t\\in[0,1]$，\n\n$|p_m(t)-p_n(t)|\\le\\sum_{k=n+1}^{m}\\dfrac{t^k}{k!}\\le\\sum_{k=n+1}^{m}\\dfrac{1}{k!}$，\n\n右端是收敛级数 $\\sum 1/k!=e$ 的尾巴，当 $n\\to\\infty$ 时趋于 $0$。故 $(p_n)$ 是 sup 范数下的柯西列。\n\n若存在多项式 $p\\in\\mathcal{P}[0,1]$ 使 $\\|p_n-p\\|_\\infty\\to0$，则 $p_n$ 在 $[0,1]$ 上一致收敛到 $p$，从而对每个 $t$ 有 $p(t)=\\lim p_n(t)=e^{t}$（这正是 $e^t$ 的 Taylor 级数）。于是 $p(t)=e^t$ 是多项式；但比较 Taylor 系数：若 $e^t=\\sum_{k\\le N}a_kt^k$ 是多项式，则对 $k>N$ 有 $1/k!=0$，矛盾。所以极限 $e^t\\notin\\mathcal{P}[0,1]$，柯西列在空间内没有极限，$\\mathcal{P}[0,1]$ 不完备。（它的完备化是 $C[0,1]$。）"
+      },
+      {
+        "problem": "证明：赋范空间 $X$ 完备当且仅当每个绝对收敛的级数都收敛，即 $\\sum\\|x_n\\|<\\infty$ 蕴含 $\\sum x_n$ 收敛。",
+        "solution": "（$\\Rightarrow$）设 $\\sum\\|x_n\\|<\\infty$，部分和 $S_n=x_1+\\cdots+x_n$。对 $m>n$，\n\n$\\|S_m-S_n\\|=\\bigl\\|\\sum_{k=n+1}^{m}x_k\\bigr\\|\\le\\sum_{k=n+1}^{m}\\|x_k\\|\\to0$（$n\\to\\infty$），\n\n因为实级数 $\\sum\\|x_k\\|$ 收敛，其尾巴趋于零。故 $(S_n)$ 柯西，由完备性收敛。同时取范数与极限（范数连续）：$\\bigl\\|\\sum_{n\\ge1}x_n\\bigr\\|=\\lim\\|S_n\\|\\le\\lim\\sum_{k\\le n}\\|x_k\\|=\\sum\\|x_n\\|$。\n\n（$\\Leftarrow$）设 $(x_n)$ 是柯西列。取子列 $n_1<n_2<\\cdots$ 使 $\\|x_{n_{k+1}}-x_{n_k}\\|\\le2^{-k}$（由柯西性可逐段挑选）。令 $y_k=x_{n_{k+1}}-x_{n_k}$，则 $\\sum_k\\|y_k\\|\\le\\sum_k2^{-k}=1<\\infty$，由假设 $\\sum_k y_k$ 收敛于某 $y$。但 $\\sum_{k<K}y_k=x_{n_K}-x_{n_1}$，故子列 $x_{n_K}\\to x_{n_1}+y=:x$。柯西列若有收敛子列则整列收敛到同一极限（对 $n$ 与足够大的 $n_K$ 同时使用柯西性），于是 $x_n\\to x$，$X$ 完备。"
+      }
+    ],
+    "tags": [
+      "巴拿赫空间",
+      "完备性",
+      "绝对收敛级数",
+      "ℓ^p",
+      "L^p"
+    ],
+    "links": [
+      "normed-space",
+      "complete-metric-space",
+      "lp-spaces",
+      "bounded-operators"
+    ]
+  },
+  {
+    "id": "inner-product-space",
+    "title": "内积空间与希尔伯特空间",
+    "titleEn": "Inner Product Spaces and Hilbert Spaces",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "带内积的线性空间：内积度量长度与夹角；内积范数满足平行四边形法则，完备的内积空间就是希尔伯特空间。",
+    "summaryEn": "A linear space with an inner product measuring lengths and angles; the induced norm obeys the parallelogram law, and a complete such space is a Hilbert space.",
+    "definition": "**内积空间**是在线性空间上装了「内积」的结构：每对向量 $x,y$ 对应一个标量 $\\langle x,y\\rangle$。本文采用**对第一变量线性**的约定；设 $X$ 是 $\\mathbb{K}$（$\\mathbb{R}$ 或 $\\mathbb{C}$）上的线性空间，内积满足三条性质：\n（I1）**对第一变量线性**：$\\langle\\alpha x+\\beta y,z\\rangle=\\alpha\\langle x,z\\rangle+\\beta\\langle y,z\\rangle$；\n（I2）**共轭对称**：$\\langle x,y\\rangle=\\overline{\\langle y,x\\rangle}$；\n（I3）**正定**：$\\langle x,x\\rangle\\ge0$，且 $\\langle x,x\\rangle=0$ 当且仅当 $x=0$。\n由（I1）（I2）推出内积对第二变量是**共轭线性**的：$\\langle x,\\alpha y+\\beta z\\rangle=\\overline{\\alpha}\\langle x,y\\rangle+\\overline{\\beta}\\langle x,z\\rangle$。（I2）在实空间里就是普通的对称性；（I3）保证 $\\|x\\|=\\sqrt{\\langle x,x\\rangle}$ 是真正的**内积范数**，从而内积空间自动成为赋范空间，可以谈收敛、柯西列与完备性。\n\n内积给出的范数满足一条漂亮的恒等式——**平行四边形法则** $\\|x+y\\|^{2}+\\|x-y\\|^{2}=2\\|x\\|^{2}+2\\|y\\|^{2}$（两条对角线的平方和等于四条边的平方和）。反过来，von Neumann–Jordan 定理指出：任何满足平行四边形法则的范数都来自某个内积，该内积由**极化恒等式**恢复，实情形为 $\\langle x,y\\rangle=\\frac14\\bigl(\\|x+y\\|^{2}-\\|x-y\\|^{2}\\bigr)$（复情形还需两项含 $i$ 的项）。于是平行四边形法则成为「范数是否来自内积」的判据：$\\mathbb{R}^2$ 上的 $\\|\\cdot\\|_1$ 与 $\\|\\cdot\\|_\\infty$、$C[0,1]$ 上的 sup 范数都不满足它，因此都不来自内积——这正是内积空间比赋范空间「特殊」的地方。\n\n内积带来三个基本工具。**柯西–施瓦茨不等式** $|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|$，等号当且仅当 $x,y$ 线性相关；它是三角不等式、相关系数与一切内积估计的源头。**勾股定理**：$x\\perp y$（即 $\\langle x,y\\rangle=0$）时 $\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$；对有限正交组有 $\\bigl\\|\\sum_k x_k\\bigr\\|^{2}=\\sum_k\\|x_k\\|^{2}$。**正交性**把投影、正交分解、最佳逼近这些欧氏几何概念带进无穷维分析，是傅里叶级数与最小二乘的统一背景。\n\n若内积空间在内积范数下**完备**，就称它为**希尔伯特空间**。标准例子：$\\mathbb{R}^{n}$ 配点积；$\\ell^{2}=\\{(x_k):\\sum_k|x_k|^{2}<\\infty\\}$ 配 $\\langle x,y\\rangle=\\sum_k x_k\\overline{y_k}$；$L^{2}[a,b]$ 配 $\\langle f,g\\rangle=\\int_a^b f(t)\\overline{g(t)}\\,dt$（完备性即 Riesz–Fischer 定理）。不完备的内积空间同样常见：只有有限项非零的序列空间 $c_{00}$（配 $\\ell^{2}$ 内积），以及 $C[a,b]$ 配 $\\int f\\bar g$ 的内积。希尔伯特空间是投影定理与正交基展开的舞台——泛函分析中最优美的结构都发生在它上面。",
+    "definitionEn": "An **inner product space** equips a linear space with an inner product: each pair of vectors $x,y$ is assigned a scalar $\\langle x,y\\rangle$. We use the convention of **linearity in the first variable**; on a linear space $X$ over $\\mathbb{K}$ ($\\mathbb{R}$ or $\\mathbb{C}$) the inner product satisfies:\n(I1) **Linearity in the first variable**: $\\langle\\alpha x+\\beta y,z\\rangle=\\alpha\\langle x,z\\rangle+\\beta\\langle y,z\\rangle$;\n(I2) **Conjugate symmetry**: $\\langle x,y\\rangle=\\overline{\\langle y,x\\rangle}$;\n(I3) **Positive definiteness**: $\\langle x,x\\rangle\\ge0$, and $\\langle x,x\\rangle=0$ iff $x=0$.\nProperties (I1)–(I2) make the inner product **conjugate linear in the second variable**: $\\langle x,\\alpha y+\\beta z\\rangle=\\overline{\\alpha}\\langle x,y\\rangle+\\overline{\\beta}\\langle x,z\\rangle$. In a real space (I2) is plain symmetry; (I3) makes $\\|x\\|=\\sqrt{\\langle x,x\\rangle}$ a genuine **inner-product norm**, so an inner product space is automatically a normed space and carries convergence, Cauchy sequences and completeness.\n\nThe norm coming from an inner product satisfies the elegant **parallelogram law** $\\|x+y\\|^{2}+\\|x-y\\|^{2}=2\\|x\\|^{2}+2\\|y\\|^{2}$ (the sum of the squares of the diagonals equals the sum of the squares of the four sides). Conversely, the von Neumann–Jordan theorem says that any norm satisfying the parallelogram law arises from an inner product, recovered by the **polarization identity**, in the real case $\\langle x,y\\rangle=\\frac14\\bigl(\\|x+y\\|^{2}-\\|x-y\\|^{2}\\bigr)$ (in the complex case two terms with $i$ are added). Hence the parallelogram law is the criterion for a norm to come from an inner product: the norms $\\|\\cdot\\|_1$ and $\\|\\cdot\\|_\\infty$ on $\\mathbb{R}^2$ and the sup norm on $C[0,1]$ all violate it and therefore come from no inner product — this is what makes inner product spaces special among normed spaces.\n\nThe inner product provides three basic tools. The **Cauchy–Schwarz inequality** $|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|$, with equality iff $x,y$ are linearly dependent, is the source of the triangle inequality, of correlation theory and of every inner product estimate. The **Pythagorean theorem**: if $x\\perp y$, i.e. $\\langle x,y\\rangle=0$, then $\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$; more generally $\\bigl\\|\\sum_k x_k\\bigr\\|^{2}=\\sum_k\\|x_k\\|^{2}$ for finite orthogonal families. **Orthogonality** transplants projection, orthogonal decomposition and best approximation from Euclidean geometry into infinite-dimensional analysis, the common background of Fourier series and least squares.\n\nIf an inner product space is **complete** in the inner-product norm, it is called a **Hilbert space**. Standard examples: $\\mathbb{R}^{n}$ with the dot product; $\\ell^{2}=\\{(x_k):\\sum_k|x_k|^{2}<\\infty\\}$ with $\\langle x,y\\rangle=\\sum_k x_k\\overline{y_k}$; and $L^{2}[a,b]$ with $\\langle f,g\\rangle=\\int_a^b f(t)\\overline{g(t)}\\,dt$, complete by the Riesz–Fischer theorem. Incomplete inner product spaces are just as common: $c_{00}$ (finitely supported sequences) with the $\\ell^{2}$ inner product, and $C[a,b]$ with $\\int f\\bar g$. Hilbert spaces are the stage for the projection theorem and orthogonal expansions — the most beautiful structures of functional analysis live there.",
+    "formulas": [
+      {
+        "latex": "\\langle\\alpha x+\\beta y,z\\rangle=\\alpha\\langle x,z\\rangle+\\beta\\langle y,z\\rangle,\\qquad \\langle x,y\\rangle=\\overline{\\langle y,x\\rangle},\\qquad \\langle x,x\\rangle\\ge0,\\ \\ \\langle x,x\\rangle=0\\iff x=0",
+        "note": "内积三性质：对第一变量线性、共轭对称、正定；由此内积对第二变量共轭线性。",
+        "noteEn": "The three inner product properties — linearity in the first variable, conjugate symmetry and positive definiteness — which make the second variable conjugate linear."
+      },
+      {
+        "latex": "\\|x\\|=\\sqrt{\\langle x,x\\rangle},\\qquad |\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|",
+        "note": "内积诱导范数；柯西–施瓦茨不等式，等号当且仅当 $x,y$ 线性相关。",
+        "noteEn": "The induced norm and the Cauchy–Schwarz inequality, with equality iff $x$ and $y$ are linearly dependent."
+      },
+      {
+        "latex": "\\|x+y\\|^{2}+\\|x-y\\|^{2}=2\\|x\\|^{2}+2\\|y\\|^{2}",
+        "note": "平行四边形法则：范数来自内积的必要条件，由 von Neumann–Jordan 定理它也是充分条件；不满足它的范数（如 $\\ell^p$，$p\\ne2$ 与 sup 范数）没有内积。",
+        "noteEn": "The parallelogram law: necessary for a norm to come from an inner product and, by the von Neumann–Jordan theorem, also sufficient; norms violating it (such as $\\ell^p$ with $p\\ne2$, or the sup norm) have no inner product."
+      },
+      {
+        "latex": "\\langle x,y\\rangle=\\tfrac14\\bigl(\\|x+y\\|^{2}-\\|x-y\\|^{2}\\bigr)\\quad(\\text{实空间})",
+        "note": "极化恒等式：由范数恢复内积（复空间还需含 $i$ 的两项）；它把「长度信息」翻译回「夹角信息」。",
+        "noteEn": "The polarization identity recovers the inner product from the norm (the complex case adds two terms with $i$), translating length data back into angle data."
+      },
+      {
+        "latex": "\\langle x,y\\rangle=\\sum_{k=1}^{\\infty}x_k\\overline{y_k}\\ \\ (\\ell^{2}),\\qquad \\langle f,g\\rangle=\\int_a^b f(t)\\overline{g(t)}\\,dt\\ \\ (L^{2})",
+        "note": "两个标准希尔伯特空间的内积；它们在范数下一次完备，分别是 Riesz–Fischer 定理在序列与函数情形的体现。",
+        "noteEn": "Inner products of the two standard Hilbert spaces, both complete by the Riesz–Fischer theorem, in its sequence and function forms."
+      }
+    ],
+    "expression": {
+      "text": "‖x‖ = √⟨x, x⟩；x ⊥ y ⇔ ⟨x, y⟩ = 0；⟨x, y⟩ 对第一变量线性、对第二变量共轭线性",
+      "symbol": "\\langle x,y\\rangle",
+      "note": "约定对第一变量线性、共轭对称 ⟨x, y⟩ = conj⟨y, x⟩；希尔伯特空间 = 完备的内积空间。",
+      "noteEn": "With linearity in the first variable and conjugate symmetry $\\langle x,y\\rangle=\\overline{\\langle y,x\\rangle}$; a Hilbert space is a complete inner product space."
+    },
+    "properties": [
+      "内积对第一变量线性、对第二变量共轭线性（复空间）；实空间里就是对称双线性，此时 $\\langle x,y\\rangle=\\langle y,x\\rangle$",
+      "柯西–施瓦茨不等式 $|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|$，等号当且仅当 $x,y$ 线性相关；它蕴含内积连续（$x_n\\to x,\\ y_n\\to y\\Rightarrow\\langle x_n,y_n\\rangle\\to\\langle x,y\\rangle$）",
+      "平行四边形法则是范数来自内积的充要条件（von Neumann–Jordan）；$\\ell^{p}$（$p\\ne2$）与 sup 范数都不满足，因此不来自任何内积",
+      "完备的内积空间称为希尔伯特空间：$\\ell^{2}$ 与 $L^{2}$ 完备（Riesz–Fischer），而 $c_{00}$ 与配 $L^{2}$ 内积的 $C[a,b]$ 不完备",
+      "勾股定理：$x\\perp y\\Rightarrow\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$；有限正交组满足 $\\bigl\\|\\sum_k x_k\\bigr\\|^{2}=\\sum_k\\|x_k\\|^{2}$，无穷正交级数则需完备性"
+    ],
+    "propertiesEn": [
+      "The inner product is linear in the first variable and conjugate linear in the second (in a complex space); over the reals it is symmetric bilinear, $\\langle x,y\\rangle=\\langle y,x\\rangle$",
+      "Cauchy–Schwarz: $|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\|$, with equality iff $x,y$ are linearly dependent; it implies continuity of the inner product ($x_n\\to x,\\ y_n\\to y\\Rightarrow\\langle x_n,y_n\\rangle\\to\\langle x,y\\rangle$)",
+      "The parallelogram law is necessary and sufficient for a norm to arise from an inner product (von Neumann–Jordan); $\\ell^{p}$ with $p\\ne2$ and the sup norm fail it and come from no inner product",
+      "A complete inner product space is a Hilbert space: $\\ell^{2}$ and $L^{2}$ are complete (Riesz–Fischer), while $c_{00}$ and $C[a,b]$ with the $L^{2}$ inner product are incomplete",
+      "Pythagoras: $x\\perp y\\Rightarrow\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$; finite orthogonal families satisfy $\\bigl\\|\\sum_k x_k\\bigr\\|^{2}=\\sum_k\\|x_k\\|^{2}$, while infinite orthogonal series need completeness"
+    ],
+    "examples": [
+      {
+        "problem": "验证 $\\mathbb{R}^{2}$ 上的范数 $\\|\\cdot\\|_1$ 与 $\\|\\cdot\\|_\\infty$ 都不满足平行四边形法则，从而不来自内积。",
+        "solution": "取 $x=(1,0)$，$y=(0,1)$。\n\n对 $\\|\\cdot\\|_1$：$x+y=(1,1)$，$x-y=(1,-1)$，故 $\\|x+y\\|_1^{2}+\\|x-y\\|_1^{2}=2^{2}+2^{2}=8$；而 $2\\|x\\|_1^{2}+2\\|y\\|_1^{2}=2+2=4$。$8\\ne4$，法则不成立。\n\n对 $\\|\\cdot\\|_\\infty$：$\\|x+y\\|_\\infty^{2}+\\|x-y\\|_\\infty^{2}=1^{2}+1^{2}=2$；而 $2\\|x\\|_\\infty^{2}+2\\|y\\|_\\infty^{2}=2+2=4$。$2\\ne4$，法则也不成立。\n\n由 von Neumann–Jordan 定理，这两个范数都不可能由任何内积诱导——直观上，它们的单位球（菱形与正方形）不是「椭圆形」的，而内积空间的单位球永远是椭球。"
+      },
+      {
+        "problem": "在希尔伯特空间中，已知 $\\|x\\|=3$、$\\|y\\|=4$、$\\|x+y\\|=6$，求 $\\langle x,y\\rangle$（实情形）与 $\\|x-y\\|$。",
+        "solution": "展开 $\\|x+y\\|^{2}=\\langle x+y,x+y\\rangle=\\|x\\|^{2}+2\\langle x,y\\rangle+\\|y\\|^{2}$：\n\n$36=9+2\\langle x,y\\rangle+16\\ \\Rightarrow\\ \\langle x,y\\rangle=\\dfrac{36-25}{2}=5.5$。\n\n再用 $\\|x-y\\|^{2}=\\|x\\|^{2}-2\\langle x,y\\rangle+\\|y\\|^{2}=9-11+16=14$，故 $\\|x-y\\|=\\sqrt{14}$。\n\n这也验证了平行四边形法则：$\\|x+y\\|^{2}+\\|x-y\\|^{2}=36+14=50=2\\times9+2\\times16$。附带检验柯西–施瓦茨：$|\\langle x,y\\rangle|\\le3\\times4=12$。注意在复空间中，$\\|x\\|,\\|y\\|,\\|x+y\\|$ 只能确定 $\\langle x,y\\rangle$ 的实部。"
+      }
+    ],
+    "tags": [
+      "内积空间",
+      "希尔伯特空间",
+      "柯西-施瓦茨",
+      "平行四边形法则",
+      "ℓ²"
+    ],
+    "links": [
+      "normed-space",
+      "orthogonality-projection",
+      "lp-spaces",
+      "fourier-series"
+    ]
+  },
+  {
+    "id": "orthogonality-projection",
+    "title": "正交性与投影定理",
+    "titleEn": "Orthogonality and the Projection Theorem",
+    "branch": "functional-analysis",
+    "level": 5,
+    "summary": "希尔伯特空间中闭子空间的正交分解定理：每个向量唯一地分解为子空间内分量与正交分量，前者是最近点——最佳逼近与傅里叶展开的几何基础。",
+    "summaryEn": "The orthogonal decomposition theorem in Hilbert space: every vector splits uniquely into a component in a closed subspace plus an orthogonal component, the former being the nearest point — the geometric basis of best approximation and Fourier expansion.",
+    "definition": "内积空间中两个向量 $x,y$ **正交**（记 $x\\perp y$）指 $\\langle x,y\\rangle=0$。对集合 $M\\subset H$，**正交补**定义为 $M^{\\perp}=\\{z\\in H:\\ \\langle z,m\\rangle=0\\ \\,\\forall m\\in M\\}$，即与 $M$ 中所有向量都垂直的向量之集。由于内积连续，$M^{\\perp}$ 自动是闭子空间；恒有 $M\\subseteq M^{\\perp\\perp}$，而且 $M^{\\perp\\perp}$ 正是 $\\operatorname{span}M$ 的闭包。\n\n**投影定理**：设 $H$ 是希尔伯特空间，$M\\subset H$ 是**闭子空间**，则每个 $x\\in H$ 都有唯一的正交分解\n$$x=y+z,\\qquad y\\in M,\\qquad z\\in M^{\\perp}.$$\n其中 $y=P_Mx$ 是 $M$ 中**距 $x$ 最近**的点（最佳逼近），且 $\\|x-y\\|=\\|z\\|=d(x,M)=\\inf_{m\\in M}\\|x-m\\|$。证明分两步。第一步解决存在性：设 $d=d(x,M)$，取 $m_k\\in M$ 使 $\\|x-m_k\\|\\to d$，对 $x-m_j$ 与 $x-m_k$ 用平行四边形法则可得 $\\|m_j-m_k\\|^{2}=2\\|x-m_j\\|^{2}+2\\|x-m_k\\|^{2}-4\\bigl\\|x-\\tfrac{m_j+m_k}{2}\\bigr\\|^{2}\\le2\\|x-m_j\\|^{2}+2\\|x-m_k\\|^{2}-4d^{2}\\to0$，故 $(m_k)$ 是柯西列；**完备性**给出极限 $y\\in H$，**闭性**保证 $y\\in M$，连续性给出 $\\|x-y\\|=d$。第二步验证正交：对任意 $m\\in M$ 与实数 $t$，由最小性得 $\\|x-y+tm\\|^{2}\\ge\\|x-y\\|^{2}$，展开得 $t^{2}\\|m\\|^{2}+2t\\operatorname{Re}\\langle x-y,m\\rangle\\ge0$ 对一切 $t$ 成立，故 $\\operatorname{Re}\\langle x-y,m\\rangle=0$；把 $m$ 换成 $im$（复情形）得虚部也为零，于是 $x-y\\perp M$。唯一性：若 $x=y_1+z_1=y_2+z_2$，则 $w=y_1-y_2=z_2-z_1$ 既属于 $M$ 又属于 $M^{\\perp}$，于是 $\\|w\\|^{2}=\\langle w,w\\rangle=0$，即 $y_1=y_2$、$z_1=z_2$，分解唯一。",
+    "definitionEn": "In an inner product space two vectors $x,y$ are **orthogonal** ($x\\perp y$) when $\\langle x,y\\rangle=0$. For a set $M\\subset H$ the **orthogonal complement** is $M^{\\perp}=\\{z\\in H:\\ \\langle z,m\\rangle=0\\ \\,\\forall m\\in M\\}$, the set of all vectors perpendicular to every element of $M$. By continuity of the inner product $M^{\\perp}$ is automatically a closed subspace; always $M\\subseteq M^{\\perp\\perp}$, and $M^{\\perp\\perp}$ is precisely the closure of $\\operatorname{span}M$.\n\n**Projection theorem**: let $H$ be a Hilbert space and $M\\subset H$ a **closed subspace**. Then every $x\\in H$ has a unique orthogonal decomposition\n$$x=y+z,\\qquad y\\in M,\\qquad z\\in M^{\\perp}.$$\nMoreover $y=P_Mx$ is the **nearest point** of $M$ to $x$ (best approximation), with $\\|x-y\\|=\\|z\\|=d(x,M)=\\inf_{m\\in M}\\|x-m\\|$. The proof has two steps. Existence: let $d=d(x,M)$ and choose $m_k\\in M$ with $\\|x-m_k\\|\\to d$; applying the parallelogram law to $x-m_j$ and $x-m_k$ gives $\\|m_j-m_k\\|^{2}=2\\|x-m_j\\|^{2}+2\\|x-m_k\\|^{2}-4\\bigl\\|x-\\tfrac{m_j+m_k}{2}\\bigr\\|^{2}\\le2\\|x-m_j\\|^{2}+2\\|x-m_k\\|^{2}-4d^{2}\\to0$, so $(m_k)$ is Cauchy; **completeness** supplies a limit $y\\in H$, **closedness** places it in $M$, and continuity gives $\\|x-y\\|=d$. Orthogonality: for every $m\\in M$ and real $t$, minimality gives $\\|x-y+tm\\|^{2}\\ge\\|x-y\\|^{2}$; expanding, $t^{2}\\|m\\|^{2}+2t\\operatorname{Re}\\langle x-y,m\\rangle\\ge0$ for all $t$, hence $\\operatorname{Re}\\langle x-y,m\\rangle=0$; replacing $m$ by $im$ (complex case) kills the imaginary part as well, so $x-y\\perp M$. Uniqueness: if $x=y_1+z_1=y_2+z_2$, then $y_1-y_2=z_2-z_1$ lies both in $M$ and in $M^{\\perp}$, and Pythagoras forces $0=\\|y_1-y_2\\|^{2}+\\|z_1-z_2\\|^{2}$, so both parts coincide.",
+    "formulas": [
+      {
+        "latex": "H=M\\oplus M^{\\perp}:\\qquad x=y+z,\\quad y\\in M,\\quad z\\in M^{\\perp}",
+        "note": "投影定理：$M$ 是希尔伯特空间 $H$ 的闭子空间时，全空间正交分解为 $M$ 与其正交补；分量唯一。",
+        "noteEn": "The projection theorem: when $M$ is a closed subspace of a Hilbert space $H$, the whole space decomposes orthogonally as $M\\oplus M^{\\perp}$, uniquely."
+      },
+      {
+        "latex": "\\|x-y\\|=\\inf_{m\\in M}\\|x-m\\|=d(x,M),\\qquad \\langle x-y,\\,m\\rangle=0\\ \\ (\\forall m\\in M)",
+        "note": "最佳逼近与正交性互相等价：$y$ 是最近点当且仅当残余 $x-y$ 与 $M$ 正交；满足此条件的 $y$ 唯一。",
+        "noteEn": "Best approximation and orthogonality are equivalent: $y$ is nearest iff the residual $x-y$ is orthogonal to $M$, and such a $y$ is unique."
+      },
+      {
+        "latex": "\\|x\\|^{2}=\\|y\\|^{2}+\\|z\\|^{2}",
+        "note": "勾股定理：正交分解中范数平方可加（一般地 $x\\perp y\\Rightarrow\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$）。",
+        "noteEn": "Pythagoras: along an orthogonal decomposition the squared norms add (generally $x\\perp y\\Rightarrow\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$)."
+      },
+      {
+        "latex": "M^{\\perp\\perp}=\\overline{\\operatorname{span}M},\\qquad M\\ \\text{是闭子空间}\\iff M=M^{\\perp\\perp}",
+        "note": "双正交补等于闭包；正交补 $M^{\\perp}$ 对任意 $M$ 都是闭子空间，且 $M^{\\perp}=(\\overline M)^{\\perp}$。",
+        "noteEn": "The double orthogonal complement is the closure of the span; $M^{\\perp}$ is closed for every $M$, and $M^{\\perp}=(\\overline M)^{\\perp}$."
+      },
+      {
+        "latex": "\\sum_k|\\langle x,e_k\\rangle|^{2}\\le\\|x\\|^{2}",
+        "note": "Bessel 不等式：$\\{e_k\\}$ 是标准正交系时，$x$ 在各个方向上的投影平方和不超过 $\\|x\\|^{2}$；等号成立当且仅当 $\\{e_k\\}$ 张成的闭子空间包含 $x$（Parseval 等式）。",
+        "noteEn": "Bessel's inequality: for an orthonormal system $\\{e_k\\}$ the squared projections of $x$ sum to at most $\\|x\\|^{2}$; equality holds (Parseval) iff $x$ lies in the closed span of $\\{e_k\\}$."
+      }
+    ],
+    "expression": {
+      "text": "∀x ∈ H：x = y + z，其中 y = P_M x ∈ M，z = x − y ∈ M⊥，且 ‖x − y‖ = d(x, M)",
+      "symbol": "P_M",
+      "note": "使用前提：H 是希尔伯特空间（完备）、M 是闭子空间；条件缺一投影就可能不存在（见正文反例）。",
+      "noteEn": "Requirements: $H$ a Hilbert space (complete) and $M$ closed; if either fails the projection may not exist (see the counterexamples in the text)."
+    },
+    "properties": [
+      "对任意 $M\\subset H$，正交补 $M^{\\perp}$ 都是闭子空间；$M\\subseteq M^{\\perp\\perp}$，且 $M^{\\perp\\perp}=\\overline{\\operatorname{span}M}$，$M^{\\perp}=(\\overline M)^{\\perp}$；$M$ 是闭**子空间**当且仅当 $M=M^{\\perp\\perp}$",
+      "投影定理的两个条件缺一不可：$M$ 不闭时最近点可能不存在（$\\ell^{2}$ 中 $M=c_{00}$、$x=(2^{-n})$ 的距离为 0 却无法达到）；$H$ 不完备时同样可能失败",
+      "最佳逼近与正交性互相等价：$y=P_Mx\\iff y\\in M$ 且 $x-y\\perp M$；此时 $y$ 是 $M$ 中唯一的最近点",
+      "投影算子 $P_M$ 线性、连续、幂等（$P_M^{2}=P_M$）、自伴（$\\langle P_Mx,y\\rangle=\\langle x,P_My\\rangle$），且 $\\|P_M\\|\\le1$（$M\\ne\\{0\\}$ 时 $\\|P_M\\|=1$）；$I-P_M$ 是到 $M^{\\perp}$ 的投影",
+      "勾股定理：$x\\perp y\\Rightarrow\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$；正交分解满足 $\\|x\\|^{2}=\\|P_Mx\\|^{2}+\\|x-P_Mx\\|^{2}$，标准正交系则给出 Bessel 不等式"
+    ],
+    "propertiesEn": [
+      "For every $M\\subset H$ the orthogonal complement $M^{\\perp}$ is a closed subspace; $M\\subseteq M^{\\perp\\perp}$ with $M^{\\perp\\perp}=\\overline{\\operatorname{span}M}$ and $M^{\\perp}=(\\overline M)^{\\perp}$; $M$ is is a closed **subspace** iff $M=M^{\\perp\\perp}$",
+      "Both hypotheses of the projection theorem matter: if $M$ is not closed a nearest point may fail to exist (in $\\ell^{2}$ take $M=c_{00}$ and $x=(2^{-n})$, at distance 0 yet unreachable); an incomplete $H$ may also fail",
+      "Best approximation and orthogonality are equivalent: $y=P_Mx$ iff $y\\in M$ and $x-y\\perp M$; then $y$ is the unique nearest point of $M$ to $x$",
+      "The projection $P_M$ is linear, continuous, idempotent ($P_M^{2}=P_M$), self-adjoint ($\\langle P_Mx,y\\rangle=\\langle x,P_My\\rangle$) with $\\|P_M\\|\\le1$ (indeed $\\|P_M\\|=1$ when $M\\ne\\{0\\}$); and $I-P_M$ projects onto $M^{\\perp}$",
+      "Pythagoras: $x\\perp y\\Rightarrow\\|x+y\\|^{2}=\\|x\\|^{2}+\\|y\\|^{2}$; orthogonality gives $\\|x\\|^{2}=\\|P_Mx\\|^{2}+\\|x-P_Mx\\|^{2}$, and orthonormal systems yield Bessel's inequality"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.0,
+        3.4
+      ],
+      "yRange": [
+        -0.5,
+        1.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.85,
+            -0.425
+          ],
+          "to": [
+            3.35,
+            1.675
+          ],
+          "color": "#b388ff",
+          "width": 1.5
+        },
+        {
+          "type": "label",
+          "at": [
+            3.02,
+            1.72
+          ],
+          "text": "M",
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1.44,
+            0.72
+          ],
+          "color": "#06d6a0",
+          "arrow": true,
+          "width": 2
+        },
+        {
+          "type": "label",
+          "at": [
+            1.98,
+            0.4
+          ],
+          "text": "y = P_M x",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.44,
+            0.72
+          ],
+          "to": [
+            1,
+            1.6
+          ],
+          "color": "#ff6b9d",
+          "arrow": true,
+          "width": 2
+        },
+        {
+          "type": "label",
+          "at": [
+            0.6,
+            1.17
+          ],
+          "text": "z = x − y",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            1.6
+          ],
+          "color": "#4cc9f0",
+          "arrow": true,
+          "width": 2.2
+        },
+        {
+          "type": "label",
+          "at": [
+            1.13,
+            1.72
+          ],
+          "text": "x",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1.44,
+              0.72
+            ],
+            [
+              1.583,
+              0.792
+            ],
+            [
+              1.511,
+              0.935
+            ],
+            [
+              1.368,
+              0.863
+            ]
+          ],
+          "color": "#ffd166",
+          "fill": "rgba(255,209,102,0.18)"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.14,
+            -0.17
+          ],
+          "text": "O",
+          "color": "rgba(220,228,250,0.95)"
+        }
+      ],
+      "title": "正交分解 x = y + z：y ∈ M 是离 x 最近的点，z ⊥ M"
+    },
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^{3}$ 中取 $M=\\operatorname{span}\\{(1,1,0)\\}$，$x=(2,0,2)$。求 $x$ 在 $M$ 上的投影与正交分量，并验证 $y$ 是最近点。",
+        "solution": "记 $u=(1,1,0)$。投影公式：$P_Mx=\\dfrac{\\langle x,u\\rangle}{\\|u\\|^{2}}u$。计算 $\\langle x,u\\rangle=2\\cdot1+0\\cdot1+2\\cdot0=2$，$\\|u\\|^{2}=2$，故\n\n$y=P_Mx=(1,1,0)$，正交分量 $z=x-y=(1,-1,2)$。\n\n验证正交性：$\\langle z,u\\rangle=1\\cdot1+(-1)\\cdot1+2\\cdot0=0$，故 $z\\perp M$；并且 $\\|x\\|^{2}=8=\\|y\\|^{2}+\\|z\\|^{2}=2+6$，勾股定理成立。距离 $d(x,M)=\\|z\\|=\\sqrt6$。\n\n最近性验证：$M$ 上任一点形如 $tu$，$f(t)=\\|x-tu\\|^{2}=(2-t)^{2}+t^{2}+4$，求导得 $f'(t)=-2(2-t)+2t=4t-4$，在 $t=1$ 处取最小值 $f(1)=6$，即 $y=(1,1,0)$ 是唯一的最近点。"
+      },
+      {
+        "problem": "设 $H$ 是希尔伯特空间，$M$ 是闭子空间，$x\\in H$。证明：$y=P_Mx$ 当且仅当 $y\\in M$ 且 $x-y\\perp M$。",
+        "solution": "（必要性）由投影定理，存在 $y\\in M$ 使 $\\|x-y\\|=d(x,M)$。对任意 $m\\in M$ 与实数 $t$，点 $y+tm$ 仍在 $M$ 中，故\n\n$\\|x-y\\|^{2}\\le\\|x-y-tm\\|^{2}=\\|x-y\\|^{2}-2t\\operatorname{Re}\\langle x-y,m\\rangle+t^{2}\\|m\\|^{2}$。\n\n右端作为 $t$ 的二次函数在 $t=0$ 取最小值，故一次项系数为零：$\\operatorname{Re}\\langle x-y,m\\rangle=0$。复情形把 $m$ 换成 $im$ 得 $\\operatorname{Im}\\langle x-y,m\\rangle=0$，于是 $\\langle x-y,m\\rangle=0$，即 $x-y\\perp M$。\n\n（充分性）设 $y\\in M$ 且 $x-y\\perp M$。对任意 $m\\in M$，向量 $y-m\\in M$，与 $x-y$ 正交，由勾股定理\n\n$\\|x-m\\|^{2}=\\|(x-y)+(y-m)\\|^{2}=\\|x-y\\|^{2}+\\|y-m\\|^{2}\\ge\\|x-y\\|^{2}$，\n\n等号当且仅当 $\\|y-m\\|=0$，即 $m=y$。故 $y$ 是 $M$ 中唯一距 $x$ 最近的点，也就是 $P_Mx$。这条「正交性 $\\Leftrightarrow$ 最近性」的等价性是投影与最佳逼近理论的基本工具。"
+      }
+    ],
+    "tags": [
+      "正交性",
+      "投影定理",
+      "最佳逼近",
+      "正交补",
+      "希尔伯特空间"
+    ],
+    "links": [
+      "inner-product-space",
+      "orthonormal-basis",
+      "fourier-series",
+      "least-squares-fitting"
+    ]
+  }
+]

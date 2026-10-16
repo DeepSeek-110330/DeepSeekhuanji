@@ -1,0 +1,655 @@
+[
+  {
+    "id": "laplace-transform",
+    "title": "拉普拉斯变换",
+    "titleEn": "Laplace Transform",
+    "branch": "complex",
+    "level": 5,
+    "summary": "用积分 F(s)=∫₀^∞ f(t)e^{−st}dt 把时间域的信号 f(t) 变成 s 域的像函数 F(s)，积分在某个右半平面 Re(s)>σ 内收敛；它是解初值问题与分析线性系统的核心工具。",
+    "summaryEn": "The integral F(s)=∫₀^∞ f(t)e^{−st}dt turns a time-domain signal f(t) into an image function F(s) on a right half-plane Re(s)>σ; it is a core tool for initial-value problems and linear systems.",
+    "definition": "设函数 $f(t)$ 在 $t\\ge0$ 上有定义。对复参数 $s$，称含参广义积分\n$$F(s)=\\mathcal{L}[f(t)]=\\int_{0}^{\\infty}f(t)e^{-st}\\,dt$$\n为 $f(t)$ 的**拉普拉斯变换**（简称拉氏变换），其中 $f(t)$ 称为**原函数**，$F(s)$ 称为**像函数**。因为 $|e^{-st}|=e^{-\\operatorname{Re}(s)\\,t}$，积分的敛散只由 $s$ 的实部决定：通常存在实数 $\\sigma$（称为**收敛横坐标**），使积分在右半平面 $\\operatorname{Re}(s)>\\sigma$ 内绝对收敛。例如由定义可直接算出 $\\mathcal{L}[1]=\\frac1s$，它的收敛域正是 $\\operatorname{Re}(s)>0$。\n\n为什么要这样定义？因子 $e^{-st}$ 在 $t\\to\\infty$ 时快速衰减，把很多自身并不衰减的信号「压」成可积的；$s$ 扮演复频率的角色，$F(s)$ 刻画了 $f(t)$ 中各种增长、衰减与振荡成分的分布。当收敛横坐标 $\\sigma<0$ 时，虚轴 $s=i\\omega$ 落在收敛域内，此时 $F(i\\omega)=\\int_0^{\\infty}f(t)e^{-i\\omega t}\\,dt$ 就是 $f$ 的傅里叶变换——两种积分变换由此衔接。\n\n基本变换对必须掌握：\n$$\\mathcal{L}[1]=\\frac1s,\\qquad \\mathcal{L}[t^{n}]=\\frac{n!}{s^{n+1}},\\qquad \\mathcal{L}[e^{at}]=\\frac{1}{s-a},$$\n$$\\mathcal{L}[\\sin\\omega t]=\\frac{\\omega}{s^{2}+\\omega^{2}},\\qquad \\mathcal{L}[\\cos\\omega t]=\\frac{s}{s^{2}+\\omega^{2}}.$$\n配合线性、位移、微分、积分、卷积等性质，就能处理大量实际问题，而无需每次回到积分定义。\n\n存在性方面：若 $f$ 在 $[0,+\\infty)$ 上分段连续且不超过指数增长，即存在常数 $M,\\sigma_0$ 使 $|f(t)|\\le Me^{\\sigma_0 t}$，则当 $\\operatorname{Re}(s)>\\sigma_0$ 时变换存在，$F(s)$ 在该收敛域内解析，并且当 $\\operatorname{Re}(s)\\to+\\infty$ 时 $F(s)\\to0$。最后这条性质正是初值定理 $f(0^{+})=\\lim_{s\\to\\infty}sF(s)$ 的来源。",
+    "definitionEn": "Let $f(t)$ be defined for $t\\ge0$. For a complex parameter $s$, the parametrized improper integral\n$$F(s)=\\mathcal{L}[f(t)]=\\int_{0}^{\\infty}f(t)e^{-st}\\,dt$$\nis called the **Laplace transform** of $f(t)$; $f(t)$ is the **original function** and $F(s)$ the **image function**. Since $|e^{-st}|=e^{-\\operatorname{Re}(s)\\,t}$, convergence depends only on the real part of $s$: there is usually a number $\\sigma$ (the **abscissa of convergence**) such that the integral converges absolutely on the right half-plane $\\operatorname{Re}(s)>\\sigma$. For instance the definition directly gives $\\mathcal{L}[1]=\\frac1s$ on $\\operatorname{Re}(s)>0$.\n\nWhy this definition? The factor $e^{-st}$ decays rapidly as $t\\to\\infty$, taming signals that do not decay on their own; $s$ plays the role of a complex frequency, and $F(s)$ records how growth, decay and oscillation are distributed in $f(t)$. When the abscissa of convergence satisfies $\\sigma<0$, the imaginary axis $s=i\\omega$ lies in the domain and $F(i\\omega)=\\int_0^{\\infty}f(t)e^{-i\\omega t}\\,dt$ is exactly the Fourier transform of $f$ — this is where the two integral transforms meet.\n\nThe basic pairs must be known by heart:\n$$\\mathcal{L}[1]=\\frac1s,\\qquad \\mathcal{L}[t^{n}]=\\frac{n!}{s^{n+1}},\\qquad \\mathcal{L}[e^{at}]=\\frac{1}{s-a},$$\n$$\\mathcal{L}[\\sin\\omega t]=\\frac{\\omega}{s^{2}+\\omega^{2}},\\qquad \\mathcal{L}[\\cos\\omega t]=\\frac{s}{s^{2}+\\omega^{2}}.$$\nTogether with linearity, shifting, differentiation, integration and convolution they handle a great many problems without returning to the integral each time.\n\nExistence: if $f$ is piecewise continuous on $[0,+\\infty)$ and of exponential order, that is $|f(t)|\\le Me^{\\sigma_0 t}$ for constants $M,\\sigma_0$, then the transform exists for $\\operatorname{Re}(s)>\\sigma_0$, $F(s)$ is analytic there, and $F(s)\\to0$ as $\\operatorname{Re}(s)\\to+\\infty$. This last fact is the source of the initial value theorem $f(0^{+})=\\lim_{s\\to\\infty}sF(s)$.",
+    "formulas": [
+      {
+        "latex": "F(s)=\\mathcal{L}[f(t)]=\\int_{0}^{\\infty}f(t)e^{-st}\\,dt,\\qquad \\operatorname{Re}(s)>\\sigma",
+        "note": "定义：积分只在右半平面 $\\operatorname{Re}(s)>\\sigma$ 内收敛，$\\sigma$ 称为收敛横坐标；使用公式前先确认 $s$ 所在的范围。",
+        "noteEn": "Definition: the integral converges only on the right half-plane $\\operatorname{Re}(s)>\\sigma$, where $\\sigma$ is the abscissa of convergence."
+      },
+      {
+        "latex": "\\mathcal{L}[1]=\\frac{1}{s},\\qquad \\mathcal{L}[t^{n}]=\\frac{n!}{s^{n+1}}\\quad(n=0,1,2,\\dots)",
+        "note": "幂函数的变换对：$n=0$ 给出 $\\mathcal{L}[1]=\\frac1s$；分部积分可得递推 $\\mathcal{L}[t^{n}]=\\frac{n}{s}\\mathcal{L}[t^{n-1}]$。",
+        "noteEn": "Powers: $n=0$ gives $\\mathcal{L}[1]=1/s$; integration by parts gives the recursion $\\mathcal{L}[t^{n}]=\\frac{n}{s}\\mathcal{L}[t^{n-1}]$."
+      },
+      {
+        "latex": "\\mathcal{L}[e^{at}]=\\frac{1}{s-a}\\qquad(\\operatorname{Re}(s)>\\operatorname{Re}(a))",
+        "note": "指数信号：极点位于 $s=a$；收敛域是 $\\operatorname{Re}(s)>\\operatorname{Re}(a)$。当 $a<0$ 时信号衰减，收敛域包含虚轴。",
+        "noteEn": "Exponentials: the pole sits at $s=a$ and the transform converges for $\\operatorname{Re}(s)>\\operatorname{Re}(a)$; a decaying exponential ($a<0$) has the imaginary axis inside its domain."
+      },
+      {
+        "latex": "\\mathcal{L}[\\sin\\omega t]=\\frac{\\omega}{s^{2}+\\omega^{2}},\\qquad \\mathcal{L}[\\cos\\omega t]=\\frac{s}{s^{2}+\\omega^{2}}",
+        "note": "正弦、余弦的变换对：极点是一对共轭纯虚根 $s=\\pm i\\omega$，对应等幅振荡，收敛域为 $\\operatorname{Re}(s)>0$。",
+        "noteEn": "Sine and cosine: the poles $s=\\pm i\\omega$ on the imaginary axis give undamped oscillation; the domain is $\\operatorname{Re}(s)>0$."
+      },
+      {
+        "latex": "\\mathcal{L}[\\alpha f(t)+\\beta g(t)]=\\alpha F(s)+\\beta G(s)",
+        "note": "线性性质：可以逐项变换再相加，收敛域取各收敛域的交集。",
+        "noteEn": "Linearity: transform term by term; the domain is the intersection of the individual domains."
+      }
+    ],
+    "expression": {
+      "text": "F(s) = L[f(t)] = ∫₀^∞ f(t)e^{−st} dt",
+      "symbol": "F(s)=\\mathcal{L}[f(t)]=\\int_{0}^{\\infty}f(t)e^{-st}\\,dt",
+      "note": "把时间域的函数 $f(t)$ 映射成复频率域的函数 $F(s)$，定义域是某条右半平面 $\\operatorname{Re}(s)>\\sigma$。",
+      "noteEn": "It maps a time-domain function $f(t)$ to a complex-frequency-domain function $F(s)$ on a right half-plane $\\operatorname{Re}(s)>\\sigma$."
+    },
+    "properties": [
+      "线性：$\\mathcal{L}[\\alpha f+\\beta g]=\\alpha F(s)+\\beta G(s)$，收敛域取两者之交。",
+      "收敛域只由实部决定：因 $|e^{-st}|=e^{-\\operatorname{Re}(s)t}$，使积分收敛的 $s$ 构成右半平面 $\\operatorname{Re}(s)>\\sigma$，$F(s)$ 在其内解析。",
+      "存在性：$f$ 分段连续且不超过指数增长 $|f(t)|\\le Me^{\\sigma_0t}$ 时变换存在，并且 $\\operatorname{Re}(s)\\to+\\infty$ 时 $F(s)\\to0$。",
+      "若 $\\sigma<0$，虚轴落在收敛域内，$F(i\\omega)$ 就是 $f(t)$ 的傅里叶变换，两种积分变换互相衔接。",
+      "常用变换对 $\\frac1s,\\ \\frac{n!}{s^{n+1}},\\ \\frac{1}{s-a},\\ \\frac{\\omega}{s^{2}+\\omega^{2}},\\ \\frac{s}{s^{2}+\\omega^{2}}$ 是所有计算的基础，应做到见式反应。"
+    ],
+    "propertiesEn": [
+      "Linearity: $\\mathcal{L}[\\alpha f+\\beta g]=\\alpha F(s)+\\beta G(s)$, with the intersection of the two domains.",
+      "The domain depends only on the real part: since $|e^{-st}|=e^{-\\operatorname{Re}(s)t}$, the admissible values of $s$ form the right half-plane $\\operatorname{Re}(s)>\\sigma$, where $F(s)$ is analytic.",
+      "Existence: for piecewise continuous $f$ of exponential order, $|f(t)|\\le Me^{\\sigma_0t}$, the transform exists and $F(s)\\to0$ as $\\operatorname{Re}(s)\\to+\\infty$.",
+      "If $\\sigma<0$ the imaginary axis lies in the domain and $F(i\\omega)$ is the Fourier transform of $f$ — the two integral transforms join here.",
+      "The basic pairs $\\frac1s,\\ \\frac{n!}{s^{n+1}},\\ \\frac{1}{s-a},\\ \\frac{\\omega}{s^{2}+\\omega^{2}},\\ \\frac{s}{s^{2}+\\omega^{2}}$ underlie every computation and should be recognized instantly."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1", "color": "#ffd166", "label": "信号 f(t) = 1" },
+        { "expr": "exp(-x)", "color": "#4cc9f0", "label": "e^{−t}（s = 1 的核）" },
+        { "expr": "exp(-2*x)", "color": "#b388ff", "label": "e^{−2t}（s = 2 的核）" }
+      ],
+      "fills": [
+        { "expr": "exp(-x)", "from": 0, "to": 5, "base": 0, "color": "#4cc9f0", "label": "面积 = ∫₀^∞ e^{−t}dt = F(1) = 1" }
+      ],
+      "xRange": [0, 5],
+      "yRange": [0, 1.4],
+      "title": "F(s) 是加权面积：f(t)=1、s=1 时阴影面积收敛到 F(1)=1"
+    },
+    "examples": [
+      {
+        "problem": "用定义求 $\\mathcal{L}[1]$，并指出它的收敛域。",
+        "solution": "按定义\n$$F(s)=\\int_{0}^{\\infty}e^{-st}\\,dt=\\lim_{R\\to\\infty}\\int_{0}^{R}e^{-st}\\,dt=\\lim_{R\\to\\infty}\\frac{1-e^{-sR}}{s}.$$\n当 $\\operatorname{Re}(s)>0$ 时 $|e^{-sR}|=e^{-\\operatorname{Re}(s)R}\\to0$，故 $F(s)=\\frac1s$；当 $\\operatorname{Re}(s)<0$ 时 $|e^{-sR}|\\to+\\infty$，积分发散；当 $\\operatorname{Re}(s)=0$ 且 $s\\neq0$ 时 $e^{-sR}$ 在单位圆上振荡，极限不存在。所以\n$$\\mathcal{L}[1]=\\frac1s,\\qquad \\operatorname{Re}(s)>0.$$"
+      },
+      {
+        "problem": "用分部积分计算 $\\mathcal{L}[t]$。",
+        "solution": "对有限上限积分分部积分：\n$$\\int_{0}^{R}t e^{-st}\\,dt=\\left[-\\frac{t e^{-st}}{s}\\right]_{0}^{R}+\\frac1s\\int_{0}^{R}e^{-st}\\,dt=-\\frac{R e^{-sR}}{s}+\\frac{1-e^{-sR}}{s^{2}}.$$\n当 $\\operatorname{Re}(s)>0$ 时 $R e^{-sR}\\to0$、$e^{-sR}\\to0$，故\n$$\\mathcal{L}[t]=\\frac{1}{s^{2}}\\qquad(\\operatorname{Re}(s)>0),$$\n与公式 $\\mathcal{L}[t^{n}]=\\frac{n!}{s^{n+1}}$ 中 $n=1$ 的情形一致。"
+      },
+      {
+        "problem": "用线性性质和基本变换对求 $f(t)=3+2e^{-t}$ 的拉普拉斯变换，并指出收敛域。",
+        "solution": "由线性性质逐项变换：\n$$\\mathcal{L}[3+2e^{-t}]=3\\mathcal{L}[1]+2\\mathcal{L}[e^{-t}]=\\frac{3}{s}+\\frac{2}{s+1}.$$\n第一项要求 $\\operatorname{Re}(s)>0$，第二项要求 $\\operatorname{Re}(s)>-1$，取交集得收敛域 $\\operatorname{Re}(s)>0$。"
+      }
+    ],
+    "tags": ["拉普拉斯变换", "积分变换", "收敛域"],
+    "links": ["laplace-transform-properties", "inverse-laplace-transform", "laplace-solve-ode", "improper-integral", "exponential-function"]
+  },
+  {
+    "id": "laplace-transform-properties",
+    "title": "拉普拉斯变换的性质",
+    "titleEn": "Properties of the Laplace Transform",
+    "branch": "complex",
+    "level": 5,
+    "summary": "线性、时移、频移、微分、积分、卷积等性质把时间域的运算翻译成 s 域的代数运算；初值定理与终值定理还能直接从 F(s) 读出初始值与长期趋势。",
+    "summaryEn": "Linearity, shifting, differentiation, integration and convolution translate time-domain operations into algebra in the s-domain, while the initial and final value theorems read the initial value and the long-term trend directly off F(s).",
+    "definition": "拉普拉斯变换真正的威力在于一整套**运算性质**：有了它们，就不必每次都回到积分定义，只要用基本变换对加性质，就能完成变换与逆变换。最基本的性质是**线性**：$\\mathcal{L}[\\alpha f+\\beta g]=\\alpha F(s)+\\beta G(s)$。\n\n**位移性质**。时移：把信号延迟 $\\tau$（在 $t<\\tau$ 时取零，用单位阶跃 $u(t-\\tau)$ 表示）满足\n$$\\mathcal{L}[f(t-\\tau)u(t-\\tau)]=e^{-s\\tau}F(s),$$\n多出的因子 $e^{-s\\tau}$ 就是纯延迟的签名。频移：$\\mathcal{L}[e^{at}f(t)]=F(s-a)$，在 $s$ 轴上把像函数整体平移 $a$ 个单位。\n\n**微分与积分性质**。$\\mathcal{L}[f'(t)]=sF(s)-f(0)$，$\\mathcal{L}[f''(t)]=s^{2}F(s)-sf(0)-f'(0)$，一般地\n$$\\mathcal{L}[f^{(n)}(t)]=s^{n}F(s)-s^{n-1}f(0)-\\cdots-f^{(n-1)}(0).$$\n每求一次导，就在 $s$ 域乘一次 $s$，代价是依次扣去 $t=0$ 处的初值——这正是拉普拉斯变换能把微分方程化成代数方程的原因。积分性质则是「除以 $s$」：$\\mathcal{L}\\left[\\int_0^t f(\\tau)\\,d\\tau\\right]=\\frac{F(s)}{s}$。\n\n**卷积与极限定理**。卷积 $(f*g)(t)=\\int_0^{t}f(\\tau)g(t-\\tau)\\,d\\tau$ 的变换等于两个像函数的乘积：$\\mathcal{L}[f*g]=F(s)G(s)$，这就是「时域卷积 = $s$ 域乘法」，是分析线性系统响应的基础。此外，初值定理 $f(0^{+})=\\lim_{s\\to\\infty}sF(s)$ 由 $F(s)$ 直接给出初始值；终值定理\n$$\\lim_{t\\to\\infty}f(t)=\\lim_{s\\to0}sF(s)$$\n则在 $sF(s)$ 的所有极点都位于左半平面 $\\operatorname{Re}(s)<0$、或在原点处只有一个一阶极点而其余极点在左半平面时成立，用于直接读出解的稳态值。",
+    "definitionEn": "The real power of the Laplace transform lies in its **operational rules**: with them one never returns to the defining integral, but combines a short table with the rules below. The most basic rule is **linearity**: $\\mathcal{L}[\\alpha f+\\beta g]=\\alpha F(s)+\\beta G(s)$.\n\n**Shifting.** Time shift: a signal delayed by $\\tau$ (zero before $t=\\tau$, written with the unit step $u(t-\\tau)$) satisfies\n$$\\mathcal{L}[f(t-\\tau)u(t-\\tau)]=e^{-s\\tau}F(s),$$\nwhere the extra factor $e^{-s\\tau}$ is the signature of a pure delay. Frequency shift: $\\mathcal{L}[e^{at}f(t)]=F(s-a)$ translates the image function along the $s$-axis by $a$.\n\n**Differentiation and integration.** $\\mathcal{L}[f'(t)]=sF(s)-f(0)$, $\\mathcal{L}[f''(t)]=s^{2}F(s)-sf(0)-f'(0)$, and in general\n$$\\mathcal{L}[f^{(n)}(t)]=s^{n}F(s)-s^{n-1}f(0)-\\cdots-f^{(n-1)}(0).$$\nEach derivative multiplies by $s$ in the $s$-domain at the cost of subtracting the initial values at $t=0$ — exactly why the Laplace transform turns differential equations into algebraic ones. Integration is division by $s$: $\\mathcal{L}\\left[\\int_0^t f(\\tau)\\,d\\tau\\right]=\\frac{F(s)}{s}$.\n\n**Convolution and the limit theorems.** The convolution $(f*g)(t)=\\int_0^{t}f(\\tau)g(t-\\tau)\\,d\\tau$ transforms into the product of the images: $\\mathcal{L}[f*g]=F(s)G(s)$ — the famous rule 「convolution in time = multiplication in $s$」, the basis of linear system analysis. Finally the initial value theorem $f(0^{+})=\\lim_{s\\to\\infty}sF(s)$ gives the initial value straight from $F(s)$, while the final value theorem\n$$\\lim_{t\\to\\infty}f(t)=\\lim_{s\\to0}sF(s)$$\nholds when all poles of $sF(s)$ lie in the left half-plane $\\operatorname{Re}(s)<0$, or when the only exception is a single simple pole at the origin with all other poles in the left half-plane; it yields the steady-state value directly.",
+    "formulas": [
+      {
+        "latex": "\\mathcal{L}[f'(t)]=sF(s)-f(0),\\qquad \\mathcal{L}[f''(t)]=s^{2}F(s)-sf(0)-f'(0)",
+        "note": "微分性质：每求一次导就在 $s$ 域乘一个 $s$，并依次扣去初值 $f(0),f'(0)$；这是把初值问题化为代数方程的关键。",
+        "noteEn": "Differentiation: each derivative multiplies by $s$ and subtracts the next initial value — the key to turning initial-value problems into algebra."
+      },
+      {
+        "latex": "\\mathcal{L}[f(t-\\tau)u(t-\\tau)]=e^{-s\\tau}F(s),\\qquad \\mathcal{L}[e^{at}f(t)]=F(s-a)",
+        "note": "时移与频移：延迟 $\\tau$ 乘上因子 $e^{-s\\tau}$；乘以 $e^{at}$ 相当于把像函数中的 $s$ 换成 $s-a$。",
+        "noteEn": "Time and frequency shift: delaying by $\\tau$ multiplies the image by $e^{-s\\tau}$; multiplying the signal by $e^{at}$ replaces $s$ by $s-a$ in the image."
+      },
+      {
+        "latex": "\\mathcal{L}\\left[\\int_{0}^{t}f(\\tau)\\,d\\tau\\right]=\\frac{F(s)}{s},\\qquad \\mathcal{L}[(f*g)(t)]=F(s)G(s)",
+        "note": "积分与卷积：对 $f$ 积分一次相当于除以 $s$；卷积 $(f*g)(t)=\\int_0^{t}f(\\tau)g(t-\\tau)\\,d\\tau$ 对应像函数的乘积。",
+        "noteEn": "Integration and convolution: integrating $f$ divides the image by $s$, and $(f*g)(t)=\\int_0^{t}f(\\tau)g(t-\\tau)\\,d\\tau$ corresponds to the product of the images."
+      },
+      {
+        "latex": "f(0^{+})=\\lim_{s\\to\\infty}sF(s)",
+        "note": "初值定理：由 $F(s)$ 直接读出 $f$ 在 $0^{+}$ 处的值；例如 $F(s)=\\frac{1}{s+1}$ 给出 $f(0^{+})=1$。",
+        "noteEn": "Initial value theorem: read off $f(0^{+})$ directly from $F(s)$; e.g. $F(s)=\\frac{1}{s+1}$ gives $f(0^{+})=1$."
+      },
+      {
+        "latex": "\\lim_{t\\to\\infty}f(t)=\\lim_{s\\to0}sF(s)",
+        "note": "终值定理：条件是 $sF(s)$ 的极点全部在左半平面，或除原点一个一阶极点外全部在左半平面；否则极限可能不存在（如 $f(t)=\\sin t$）。",
+        "noteEn": "Final value theorem: it requires all poles of $sF(s)$ to lie in the left half-plane, except possibly a single simple pole at the origin; otherwise the limit may fail to exist (e.g. $f(t)=\\sin t$)."
+      }
+    ],
+    "expression": {
+      "text": "L[f′] = sF(s) − f(0)",
+      "symbol": "\\mathcal{L}[f'(t)]=sF(s)-f(0)",
+      "note": "微分性质是所有性质的枢纽：求导变成乘 $s$、初值自动并入，由此才能用变换解微分方程。",
+      "noteEn": "The differentiation rule is the pivot of them all: deriving becomes multiplying by $s$ while initial values enter automatically, which is what makes the transform solve differential equations."
+    },
+    "properties": [
+      "线性：$\\mathcal{L}[\\alpha f+\\beta g]=\\alpha F+\\beta G$，可以逐项变形再组合。",
+      "微分性质：每求一次导乘一个 $s$，并依次扣去初值 $f(0),f'(0),\\dots$；解题时初值一步到位。",
+      "时移乘因子 $e^{-s\\tau}$，频移把 $s$ 换成 $s-a$；积分对应除以 $s$，卷积对应乘积 $F(s)G(s)$。",
+      "初值定理 $f(0^{+})=\\lim\\limits_{s\\to\\infty}sF(s)$ 无附加条件（只需 $f$ 分段连续、指数增长且极限存在）。",
+      "终值定理要求 $sF(s)$ 的极点在左半平面或仅在原点有一个一阶极点；条件不满足时结论可能出错，如 $f(t)=\\sin t$ 没有极限。"
+    ],
+    "propertiesEn": [
+      "Linearity: $\\mathcal{L}[\\alpha f+\\beta g]=\\alpha F+\\beta G$, transforming term by term.",
+      "Differentiation: each derivative multiplies by $s$ and subtracts the successive initial values $f(0),f'(0),\\dots$, so initial conditions enter at once.",
+      "Time shift multiplies by $e^{-s\\tau}$, frequency shift replaces $s$ by $s-a$; integration divides by $s$ and convolution becomes the product $F(s)G(s)$.",
+      "Initial value theorem: $f(0^{+})=\\lim\\limits_{s\\to\\infty}sF(s)$ needs no extra hypothesis beyond piecewise continuity, exponential order and existence of the limit.",
+      "Final value theorem requires the poles of $sF(s)$ to lie in the left half-plane, or only a simple pole at the origin; when the condition fails the conclusion can be wrong, as with $f(t)=\\sin t$, which has no limit."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "exp(-x)", "color": "#4cc9f0", "label": "e^{−t} ⇔ 1/(s+1)" },
+        { "expr": "exp(-2*x)", "color": "#ff6b9d", "label": "e^{−2t} ⇔ 1/(s+2)（频移）" }
+      ],
+      "xRange": [0, 5],
+      "yRange": [0, 1.1],
+      "title": "频移：e^{−t} 与 e^{−2t} 的像函数 1/(s+1)、1/(s+2) 只差一个 s 轴平移"
+    },
+    "examples": [
+      {
+        "problem": "用二阶导数的微分性质求 $\\mathcal{L}[\\sin\\omega t]$（$\\omega\\neq0$）。",
+        "solution": "设 $f(t)=\\sin\\omega t$，则 $f(0)=0$，$f'(t)=\\omega\\cos\\omega t$，$f'(0)=\\omega$，且 $f''(t)=-\\omega^{2}\\sin\\omega t=-\\omega^{2}f(t)$。两边取变换：\n$$\\mathcal{L}[f'']=s^{2}F(s)-sf(0)-f'(0)=s^{2}F(s)-\\omega,\\qquad \\mathcal{L}[-\\omega^{2}f]=-\\omega^{2}F(s).$$\n两者相等，得 $s^{2}F(s)-\\omega=-\\omega^{2}F(s)$，即 $(s^{2}+\\omega^{2})F(s)=\\omega$，所以\n$$\\mathcal{L}[\\sin\\omega t]=\\frac{\\omega}{s^{2}+\\omega^{2}}.$$"
+      },
+      {
+        "problem": "已知 $F(s)=\\frac{1}{s(s+2)}$，用终值定理求 $\\lim\\limits_{t\\to\\infty}f(t)$。",
+        "solution": "先检查条件：$sF(s)=\\frac{1}{s+2}$ 只有一个极点 $s=-2$，位于左半平面，终值定理可用。于是\n$$\\lim_{t\\to\\infty}f(t)=\\lim_{s\\to0}sF(s)=\\lim_{s\\to0}\\frac{1}{s+2}=\\frac12.$$\n验算：部分分式 $\\frac{1}{s(s+2)}=\\frac12\\left(\\frac1s-\\frac{1}{s+2}\\right)$，故 $f(t)=\\frac12(1-e^{-2t})\\to\\frac12$。再看一个反例：$F(s)=\\frac{1}{s^{2}+1}$ 时 $sF(s)$ 的极点在虚轴上，条件不满足，而 $f(t)=\\sin t$ 确实没有极限——终值定理的条件不可忽略。"
+      }
+    ],
+    "tags": ["拉普拉斯变换", "微分性质", "卷积", "初值定理"],
+    "links": ["laplace-transform", "inverse-laplace-transform", "laplace-solve-ode", "convolution", "derivative"]
+  },
+  {
+    "id": "inverse-laplace-transform",
+    "title": "拉普拉斯逆变换",
+    "titleEn": "Inverse Laplace Transform",
+    "branch": "complex",
+    "level": 5,
+    "summary": "由像函数 F(s) 反求原函数 f(t) 的运算；对有理函数用部分分式分解配合查表最方便，理论依据是布龙维奇反演积分与留数公式。",
+    "summaryEn": "The operation recovering the original function f(t) from its image F(s); for rational functions partial fractions plus a table do the job, backed by the Bromwich inversion integral and residue formulas.",
+    "definition": "给定像函数 $F(s)$，如果存在 $t\\ge0$ 上的函数 $f(t)$ 使 $\\mathcal{L}[f]=F$，就称 $f$ 为 $F$ 的**拉普拉斯逆变换**，记作\n$$f(t)=\\mathcal{L}^{-1}[F(s)].$$\n逆变换是唯一的：两个连续函数若有相同的像函数则恒等（勒奇定理）；更一般地，在「几乎处处相等」的意义下原函数唯一。所以只要通过任何方法算出一个原函数，它就是正确答案。\n\n理论公式是**布龙维奇反演积分**：\n$$f(t)=\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}F(s)e^{st}\\,ds,\\qquad c>\\sigma,$$\n即沿收敛域内一条竖直直线积分（$\\sigma$ 为收敛横坐标）。把它补成闭合围道并用留数定理，就得到实用形式：当 $F(s)$ 为真分式有理函数（分子次数低于分母）、只有有限个孤立奇点 $s_k$ 时，\n$$f(t)=\\sum_k\\operatorname{Res}\\left[e^{st}F(s),\\,s_k\\right],\\qquad t>0.$$\n\n具体计算时最常用的是**部分分式分解**：把有理像函数拆成 $\\frac{A}{(s-a)^{k}}$、$\\frac{Bs+C}{(s+a)^{2}+\\omega^{2}}$ 等基本项之和，再逐项查表：\n$$\\frac{A}{s-a}\\longleftrightarrow Ae^{at},\\qquad \\frac{1}{(s-a)^{n}}\\longleftrightarrow\\frac{t^{n-1}}{(n-1)!}e^{at},$$\n$$\\frac{\\omega}{(s+a)^{2}+\\omega^{2}}\\longleftrightarrow e^{-at}\\sin\\omega t,\\qquad \\frac{s+a}{(s+a)^{2}+\\omega^{2}}\\longleftrightarrow e^{-at}\\cos\\omega t.$$\n\n分解前先看清极点结构：单实极点给指数项，$k$ 重极点给多项式因子 $t^{k-1}$ 乘指数，一对共轭复极点配成平方和给衰减振荡。本课主要处理真分式；若分子次数不低于分母，先做多项式除法——商的多项式部分对应冲激函数及其导数，余下的真分式再按上述方法分解。",
+    "definitionEn": "Given an image function $F(s)$, a function $f(t)$ on $t\\ge0$ with $\\mathcal{L}[f]=F$ is called the **inverse Laplace transform** of $F$, written\n$$f(t)=\\mathcal{L}^{-1}[F(s)].$$\nIt is unique: two continuous functions sharing the same image are identical (Lerch's theorem), and in general the original function is unique up to equality almost everywhere. Any method that produces an original function therefore produces the right one.\n\nThe theoretical formula is the **Bromwich inversion integral**:\n$$f(t)=\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}F(s)e^{st}\\,ds,\\qquad c>\\sigma,$$\nan integral along a vertical line inside the domain of convergence ($\\sigma$ being the abscissa of convergence). Completing it into a closed contour and applying the residue theorem gives the practical form: for a proper rational $F(s)$ (numerator degree smaller than denominator degree) with finitely many isolated singularities $s_k$,\n$$f(t)=\\sum_k\\operatorname{Res}\\left[e^{st}F(s),\\,s_k\\right],\\qquad t>0.$$\n\nIn practice one uses **partial fractions**: split the rational image into terms such as $\\frac{A}{(s-a)^{k}}$ and $\\frac{Bs+C}{(s+a)^{2}+\\omega^{2}}$ and consult the table\n$$\\frac{A}{s-a}\\longleftrightarrow Ae^{at},\\qquad \\frac{1}{(s-a)^{n}}\\longleftrightarrow\\frac{t^{n-1}}{(n-1)!}e^{at},$$\n$$\\frac{\\omega}{(s+a)^{2}+\\omega^{2}}\\longleftrightarrow e^{-at}\\sin\\omega t,\\qquad \\frac{s+a}{(s+a)^{2}+\\omega^{2}}\\longleftrightarrow e^{-at}\\cos\\omega t.$$\n\nRead the pole structure first: a simple real pole gives an exponential, a pole of order $k$ gives $t^{k-1}$ times an exponential, and a conjugate pair combining into a sum of squares gives a damped oscillation. This course assumes a proper fraction; if the numerator degree is at least the denominator degree, divide first — the polynomial quotient corresponds to the impulse $\\delta$ and its derivatives, and the proper remainder is decomposed as above.",
+    "formulas": [
+      {
+        "latex": "f(t)=\\mathcal{L}^{-1}[F(s)]=\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}F(s)e^{st}\\,ds\\quad(c>\\sigma)",
+        "note": "布龙维奇反演积分：沿收敛域内的一条竖直线积分，是逆变换的理论定义；实际计算靠留数或查表。",
+        "noteEn": "The Bromwich inversion integral along a vertical line inside the domain of convergence — the theoretical definition; actual computations use residues or tables."
+      },
+      {
+        "latex": "F(s)=\\sum_k\\frac{A_k}{s-s_k}\\ \\Longrightarrow\\ f(t)=\\sum_kA_k e^{s_k t}",
+        "note": "部分分式：互异单极点把像函数拆成基本项，逐项对应指数函数 $A_ke^{s_kt}$，这是最常用的手法。",
+        "noteEn": "Partial fractions: with distinct simple poles, each elementary term corresponds to an exponential $A_ke^{s_kt}$ — the most common technique."
+      },
+      {
+        "latex": "\\frac{1}{(s-a)^{n}}\\ \\longleftrightarrow\\ \\frac{t^{n-1}}{(n-1)!}e^{at}",
+        "note": "重极点：$n$ 重极点除了指数因子 $e^{at}$，还会给出多项式因子（共振在 $s$ 域的体现）。",
+        "noteEn": "Repeated poles: a pole of order $n$ contributes $t^{n-1}/(n-1)!$ on top of $e^{at}$ — resonance seen in the $s$-domain."
+      },
+      {
+        "latex": "f(t)=\\sum_k\\operatorname{Res}\\left[e^{st}F(s),\\,s_k\\right]",
+        "note": "留数法：对真分式有理像函数，逐点计算 $e^{st}F(s)$ 在极点处的留数并相加，不必真正做复积分。",
+        "noteEn": "Residue method: for a proper rational image, sum the residues of $e^{st}F(s)$ at its poles instead of evaluating the complex integral."
+      },
+      {
+        "latex": "\\frac{\\omega}{(s+a)^{2}+\\omega^{2}}\\longleftrightarrow e^{-at}\\sin\\omega t,\\qquad \\frac{s+a}{(s+a)^{2}+\\omega^{2}}\\longleftrightarrow e^{-at}\\cos\\omega t",
+        "note": "共轭复极点：配成 (s+a)²+ω² 后给出衰减振荡；实部 a 控制衰减速度，虚部 ω 控制振荡频率。",
+        "noteEn": "Conjugate complex poles: completing the square gives damped oscillations — the real part $a$ sets the decay, the imaginary part $\\omega$ the frequency."
+      }
+    ],
+    "expression": {
+      "text": "f(t) = L⁻¹[F(s)]",
+      "symbol": "f(t)=\\mathcal{L}^{-1}[F(s)]",
+      "note": "逆变换就是「查表 + 部分分式」的过程：先分解极点，再逐项回到时间域。",
+      "noteEn": "Inversion is a matter of tables plus partial fractions: decompose the poles, then return term by term to the time domain."
+    },
+    "properties": [
+      "线性性：$\\mathcal{L}^{-1}[\\alpha F+\\beta G]=\\alpha f+\\beta g$，可以逐项求逆变换。",
+      "唯一性（勒奇定理）：连续函数由其像函数唯一确定，查表得到的结果就是正确答案。",
+      "部分分式分解：单极点 $\\frac{A}{s-a}$ 对应 $Ae^{at}$；$n$ 重极点 $\\frac{A}{(s-a)^{n}}$ 对应多项式因子 $\\frac{t^{n-1}}{(n-1)!}e^{at}$。",
+      "一对共轭复极点配成 $(s+a)^{2}+\\omega^{2}$ 后给出 $e^{-at}\\sin\\omega t$、$e^{-at}\\cos\\omega t$ 的组合，实部、虚部分别控制衰减与频率。",
+      "留数法 $f(t)=\\sum_k\\operatorname{Res}[e^{st}F(s),s_k]$ 对真分式有理像函数直接可用；分子次数不低于分母时先做多项式除法。"
+    ],
+    "propertiesEn": [
+      "Linearity: $\\mathcal{L}^{-1}[\\alpha F+\\beta G]=\\alpha f+\\beta g$, inverting term by term.",
+      "Uniqueness (Lerch's theorem): a continuous function is determined by its image, so a table lookup yields the correct answer.",
+      "Partial fractions: a simple pole $\\frac{A}{s-a}$ gives $Ae^{at}$; a pole $\\frac{A}{(s-a)^{n}}$ of order $n$ gives $\\frac{t^{n-1}}{(n-1)!}e^{at}$.",
+      "A conjugate pair completed to $(s+a)^{2}+\\omega^{2}$ yields combinations of $e^{-at}\\sin\\omega t$ and $e^{-at}\\cos\\omega t$, with $a$ controlling decay and $\\omega$ the frequency.",
+      "The residue formula $f(t)=\\sum_k\\operatorname{Res}[e^{st}F(s),s_k]$ applies to proper rational images; divide first if the numerator degree is too large."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1", "color": "#ffd166", "label": "1/s ⟶ 1" },
+        { "expr": "-exp(-x)", "color": "#ff6b9d", "label": "−1/(s+1) ⟶ −e^{−t}" },
+        { "expr": "1-exp(-x)", "color": "#4cc9f0", "label": "叠加：1 − e^{−t}" }
+      ],
+      "xRange": [0, 6],
+      "yRange": [-1.2, 1.4],
+      "title": "部分分式：1/(s(s+1)) = 1/s − 1/(s+1)，逐项逆变换后叠加得 f(t) = 1 − e^{−t}"
+    },
+    "examples": [
+      {
+        "problem": "求 $F(s)=\\frac{1}{s(s+1)}$ 的逆变换。",
+        "solution": "先做部分分式分解：\n$$\\frac{1}{s(s+1)}=\\frac{1}{s}-\\frac{1}{s+1}.$$\n查表 $\\frac1s\\longleftrightarrow1$、$\\frac{1}{s+1}\\longleftrightarrow e^{-t}$，由线性性\n$$f(t)=1-e^{-t}\\qquad(t\\ge0).$$\n用留数法验证：$e^{st}F(s)$ 在 $s=0$ 处的留数为 $e^{0}=1$，在 $s=-1$ 处的留数为 $\\frac{e^{-t}}{-1}=-e^{-t}$，两项相加恰为 $1-e^{-t}$。"
+      },
+      {
+        "problem": "求 $F(s)=\\frac{2s+5}{(s+1)^{2}+4}$ 的逆变换。",
+        "solution": "把分子配成含 $s+1$ 的组合：$2s+5=2(s+1)+3$，于是\n$$F(s)=2\\cdot\\frac{s+1}{(s+1)^{2}+2^{2}}+\\frac32\\cdot\\frac{2}{(s+1)^{2}+2^{2}}.$$\n用阻尼振荡的变换对（取 $a=1,\\ \\omega=2$）：\n$$\\frac{s+1}{(s+1)^{2}+4}\\longleftrightarrow e^{-t}\\cos2t,\\qquad \\frac{2}{(s+1)^{2}+4}\\longleftrightarrow e^{-t}\\sin2t,$$\n所以\n$$f(t)=2e^{-t}\\cos2t+\\frac32e^{-t}\\sin2t.$$"
+      }
+    ],
+    "tags": ["拉普拉斯逆变换", "部分分式", "留数法"],
+    "links": ["laplace-transform", "laplace-transform-properties", "laplace-solve-ode", "residue", "convolution"]
+  },
+  {
+    "id": "laplace-solve-ode",
+    "title": "用拉普拉斯变换解微分方程",
+    "titleEn": "Solving Differential Equations with the Laplace Transform",
+    "branch": "complex",
+    "level": 5,
+    "summary": "对常系数线性微分方程两边取变换，初值自动并入，微分方程化为关于 Y(s) 的代数方程；解出 Y(s) 再取逆变换即得解，流程紧凑且初值一步到位。",
+    "summaryEn": "Taking the transform on both sides of a linear constant-coefficient ODE folds in the initial values and turns calculus into an algebraic equation for Y(s); inverting Y(s) gives the solution in one clean sweep.",
+    "definition": "用拉普拉斯变换解初值问题的标准流程是「**变换 → 代数 → 逆变换**」：\n1. 对方程两边取拉普拉斯变换，用微分性质把 $y,y',y''$ 换成 $Y(s)$，初值 $y(0),y'(0),\\dots$ 自动带入；\n2. 得到关于 $Y(s)$ 的**代数方程**（不再含导数）；\n3. 解出 $Y(s)$；\n4. 对 $Y(s)$ 做部分分式分解并取逆变换，得到 $y(t)$。\n以二阶常系数方程 $y''+ay'+by=g(t)$ 为例，用三个微分性质得\n$$(s^{2}+as+b)Y(s)=G(s)+(s+a)y(0)+y'(0).$$\n\n上式把「初值的影响」与「输入的影响」分得清清楚楚：\n$$Y(s)=\\underbrace{\\frac{(s+a)y(0)+y'(0)}{s^{2}+as+b}}_{\\text{初值引起的自由响应}}+\\underbrace{\\frac{G(s)}{s^{2}+as+b}}_{\\text{输入引起的强迫响应}}.$$\n零初值时 $Y(s)=H(s)G(s)$，于是 $y(t)=(h*g)(t)$，其中\n$$H(s)=\\frac{1}{s^{2}+as+b}$$\n称为**传递函数**，$h(t)=\\mathcal{L}^{-1}[H(s)]$ 称为系统的**冲激响应**——这正是卷积定理 $\\mathcal{L}[f*g]=F\\cdot G$ 的直接应用。\n\n这个方法最漂亮之处是**初值一步到位**：不必先求通解、再联立方程组定常数，初值在第一步就进入代数方程；求得的部分分式系数自动满足一切初值条件，最后验算只是走个形式。它同样适用于高阶方程和线性方程组；非齐次项 $g(t)$ 可以是阶跃（用 $u(t-\\tau)$ 与因子 $e^{-s\\tau}$）、冲激等不连续输入，处理起来照样顺畅。\n\n解的特征也一目了然：$Y(s)$ 的每个极点 $s_k$ 贡献一个 $e^{s_k t}$ 型的项（重极点再接多项式因子），极点实部的符号决定该项增长还是衰减——这与常系数方程通过特征根判断解的形状完全一致。例如解 $y''+y=0,\\ y(0)=0,\\ y'(0)=1$ 时，取变换得 $s^{2}Y-1+Y=0$，即 $Y=\\frac{1}{s^{2}+1}$，逆变换立刻给出 $y=\\sin t$，全程只需求解一个代数方程。局限是：$g(t)$ 必须存在拉氏变换，且变系数方程一般不能这样处理。",
+    "definitionEn": "The standard route for an initial-value problem is 「**transform → algebra → invert**」:\n1. transform both sides, using the differentiation rules to replace $y,y',y''$ by $Y(s)$ while the initial values $y(0),y'(0),\\dots$ enter automatically;\n2. obtain an **algebraic** equation for $Y(s)$ (no derivatives left);\n3. solve for $Y(s)$;\n4. split $Y(s)$ into partial fractions, invert, and obtain $y(t)$.\nFor the second-order constant-coefficient equation $y''+ay'+by=g(t)$ the three differentiation rules give\n$$(s^{2}+as+b)Y(s)=G(s)+(s+a)y(0)+y'(0).$$\n\nThe equation cleanly separates the influence of the initial values from that of the input:\n$$Y(s)=\\underbrace{\\frac{(s+a)y(0)+y'(0)}{s^{2}+as+b}}_{\\text{free response from the initial state}}+\\underbrace{\\frac{G(s)}{s^{2}+as+b}}_{\\text{forced response from the input}}.$$\nWhen the initial values vanish, $Y(s)=H(s)G(s)$, so $y(t)=(h*g)(t)$ with\n$$H(s)=\\frac{1}{s^{2}+as+b}$$\nthe **transfer function** and $h(t)=\\mathcal{L}^{-1}[H(s)]$ the **impulse response** — a direct application of the convolution theorem $\\mathcal{L}[f*g]=F\\cdot G$.\n\nThe beauty of the method is that **initial values enter at once**: no general solution followed by an extra system for the constants; the coefficients obtained from partial fractions automatically satisfy every initial condition. The same procedure handles higher-order equations and linear systems, and inputs such as steps (via $u(t-\\tau)$ and the factor $e^{-s\\tau}$) or impulses. Moreover the poles of $Y(s)$ reveal the answer: each pole $s_k$ contributes a term of type $e^{s_k t}$ (with polynomial factors for repeated poles), and the signs of their real parts decide growth or decay — exactly as with characteristic roots. For instance, for $y''+y=0$, $y(0)=0$, $y'(0)=1$, the transform gives $s^{2}Y-1+Y=0$, so $Y=\\frac{1}{s^{2}+1}$ and immediately $y=\\sin t$: only one algebraic equation was solved. Limitations: $g(t)$ must have a transform, and variable-coefficient equations generally do not fit this scheme.",
+    "formulas": [
+      {
+        "latex": "\\mathcal{L}\\left[y^{(n)}(t)\\right]=s^{n}Y(s)-s^{n-1}y(0)-\\cdots-y^{(n-1)}(0)",
+        "note": "把 $n$ 阶导数整体换成代数式：乘 $s^{n}$ 并依次扣去初值，这一步是整个方法的第一环。",
+        "noteEn": "Replace the whole $n$-th derivative by an algebraic expression: multiply by $s^{n}$ and subtract the initial values in order — the first step of the method."
+      },
+      {
+        "latex": "(s^{2}+as+b)Y(s)=G(s)+(s+a)y(0)+y'(0)",
+        "note": "对 $y''+ay'+by=g(t)$ 取变换后的代数方程：左边只含 $Y(s)$，右边是输入与初值的组合。",
+        "noteEn": "The algebraic equation for $y''+ay'+by=g(t)$: the left side contains only $Y(s)$, the right side combines the input and the initial values."
+      },
+      {
+        "latex": "Y(s)=\\frac{G(s)}{s^{2}+as+b}+\\frac{(s+a)y(0)+y'(0)}{s^{2}+as+b}",
+        "note": "解出的 $Y(s)$ 分成强迫响应（输入引起）与自由响应（初值引起）两部分，分别逆变换后叠加。",
+        "noteEn": "$Y(s)$ splits into the forced response (from the input) and the free response (from the initial state), inverted separately and added."
+      },
+      {
+        "latex": "H(s)=\\frac{1}{s^{2}+as+b},\\qquad y(t)=(h*g)(t)\\quad(\\text{零初值})",
+        "note": "零初值时 $Y=HG$，由卷积定理 $y=h*g$：$H$ 是传递函数，$h$ 是冲激响应。",
+        "noteEn": "With zero initial values $Y=HG$, so by the convolution theorem $y=h*g$: $H$ is the transfer function and $h$ the impulse response."
+      },
+      {
+        "latex": "\\mathcal{L}^{-1}\\left[\\frac{1}{s^{2}+1}\\right]=\\sin t",
+        "note": "关键查表项：方程 $y''+y=0$ 配初值 $y(0)=0,\\ y'(0)=1$ 的解正是这条公式给出的 $\\sin t$。",
+        "noteEn": "A key table entry: the equation $y''+y=0$ with $y(0)=0,\\ y'(0)=1$ is solved precisely by this $\\sin t$."
+      }
+    ],
+    "expression": {
+      "text": "L{y″} = s²Y(s) − sy(0) − y′(0)",
+      "symbol": "\\mathcal{L}\\!\\left[y''(t)\\right]=s^{2}Y(s)-sy(0)-y'(0)",
+      "note": "微分方程 → 代数方程 → 解出 $Y(s)$ → 逆变换得 $y(t)$；初值在第一步就并入，不需要事后定常数。",
+      "noteEn": "ODE → algebraic equation → solve for $Y(s)$ → invert to $y(t)$; initial values enter in the first step, with no constants to determine afterwards."
+    },
+    "properties": [
+      "流程固定：两边取变换 → 解代数方程得 $Y(s)$ → 部分分式与逆变换；初值自动进入，不必最后再定常数。",
+      "线性方程的解可拆成自由响应（初值贡献）与强迫响应（输入贡献）；零初值时 $y=h*g$，$H$ 为传递函数。",
+      "非齐次项只需变换存在：阶跃、冲激、分段输入都能处理，延迟 $\\tau$ 只需乘因子 $e^{-s\\tau}$。",
+      "$Y(s)$ 的极点决定解的基本形状：实极点给指数 $e^{at}$，共轭极点给衰减振荡，$n$ 重极点给因子 $t^{n-1}e^{at}$；实部符号决定稳定性。",
+      "适用范围：常系数线性方程与线性方程组（及某些积分-微分方程）；变系数方程一般失效，$g(t)$ 必须存在拉氏变换。"
+    ],
+    "propertiesEn": [
+      "The procedure is fixed: transform both sides, solve the algebraic equation for $Y(s)$, then invert; initial values enter automatically with no constants to fix at the end.",
+      "The solution splits into the free response (from the initial state) and the forced response (from the input); with zero initial values $y=h*g$, where $H$ is the transfer function.",
+      "The input need only have a transform: steps, impulses and piecewise inputs are fine, and a delay $\\tau$ just multiplies the image by $e^{-s\\tau}$.",
+      "The poles of $Y(s)$ shape the solution: real poles give exponentials $e^{at}$, conjugate poles give damped oscillations, a pole of order $n$ brings a factor $t^{n-1}e^{at}$; the sign of the real part decides stability.",
+      "Scope: linear constant-coefficient equations and systems (plus some integro-differential equations); variable coefficients generally do not fit, and $g(t)$ must possess a transform."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)", "color": "#4cc9f0", "label": "y = sin x（y(0)=0, y′(0)=1）" },
+        { "expr": "cos(x)", "color": "#ff6b9d", "label": "y = cos x（y(0)=1, y′(0)=0）" }
+      ],
+      "xRange": [-6.3, 6.3],
+      "yRange": [-1.6, 1.6],
+      "title": "y″ + y = 0 的解由初值决定：y=sin x 与 y=cos x 是两组不同初值下的特解"
+    },
+    "examples": [
+      {
+        "problem": "用拉普拉斯变换解初值问题 $y''+y=0,\\ y(0)=0,\\ y'(0)=1$。",
+        "solution": "两边取变换，利用 $\\mathcal{L}[y'']=s^{2}Y(s)-sy(0)-y'(0)$：\n$$\\left[s^{2}Y(s)-0-1\\right]+Y(s)=0.$$\n这是关于 $Y(s)$ 的代数方程，解得\n$$Y(s)=\\frac{1}{s^{2}+1}.$$\n查表（或由 $\\sin$ 的变换对）得\n$$y(t)=\\mathcal{L}^{-1}\\left[\\frac{1}{s^{2}+1}\\right]=\\sin t.$$\n验算：$y''=-\\sin t=-y$，且 $y(0)=0$、$y'(0)=1$，方程与初值全部满足。"
+      },
+      {
+        "problem": "用拉普拉斯变换解初值问题 $y'-y=e^{t},\\ y(0)=0$。",
+        "solution": "由 $\\mathcal{L}[y']=sY(s)-y(0)=sY(s)$ 与 $\\mathcal{L}[e^{t}]=\\frac{1}{s-1}$，两边取变换得\n$$(s-1)Y(s)=\\frac{1}{s-1}\\ \\Longrightarrow\\ Y(s)=\\frac{1}{(s-1)^{2}}.$$\n$s=1$ 是二重极点，用查表项 $\\frac{1}{(s-a)^{2}}\\longleftrightarrow te^{at}$ 得\n$$y(t)=te^{t}.$$\n输入 $e^{t}$ 与方程的自然频率相同（共振），解比输入多出一个因子 $t$；验算：$y'-y=(e^{t}+te^{t})-te^{t}=e^{t}$，且 $y(0)=0$。"
+      }
+    ],
+    "tags": ["拉普拉斯变换", "初值问题", "常系数线性方程"],
+    "links": ["laplace-transform", "laplace-transform-properties", "inverse-laplace-transform", "constant-coefficient-homogeneous", "constant-coefficient-nonhomogeneous"]
+  },
+  {
+    "id": "ode-basic-concepts",
+    "title": "微分方程的基本概念",
+    "titleEn": "Basic Concepts of Differential Equations",
+    "branch": "ode",
+    "level": 3,
+    "summary": "含有未知函数及其导数的方程叫微分方程；最高阶导数的阶数就是方程的阶，n 阶方程的通解含 n 个任意常数，由初值条件或边界条件确定特解。",
+    "summaryEn": "An equation containing an unknown function and its derivatives is a differential equation; its order is the highest derivative present, an n-th order equation has an n-constant general solution, and initial or boundary conditions single out a particular solution.",
+    "definition": "凡含有未知函数及其导数（或微分）的方程，都称为**微分方程**。只含一元函数导数的微分方程叫**常微分方程**（ODE），例如\n$$\\frac{dy}{dx}=2x,\\qquad y''+y=0,\\qquad y'+xy=e^{x}.$$\n含有未知多元函数偏导数的则称为偏微分方程（PDE）。方程中出现的**最高阶导数的阶数**称为微分方程的**阶**：$y'=2x$ 是一阶，$y''+y=0$ 是二阶。使方程成为恒等式的函数 $y=y(x)$ 称为方程的**解**。\n\n解微分方程往往得到一大族解。含有 $n$ 个**独立任意常数**、且常数个数恰等于阶数的解族称为**通解**：$y'=2x$ 的通解是 $y=x^{2}+C$；$y''=0$ 的通解是 $y=C_1x+C_2$；$y''+y=0$ 的通解是 $y=C_1\\cos x+C_2\\sin x$。给任意常数取定值就得到**特解**。因此有一个基本对应关系：**n 阶方程的通解含 n 个独立任意常数**。求通解的过程常称为「积分」方程，因为最原始的方程 $y'=f(x)$ 的解正是 $f$ 的不定积分。\n\n为了挑出唯一确定的解，需要附加条件。如果在同一点 $x_0$ 给出函数值及若干阶导数值\n$$y(x_0)=y_0,\\quad y'(x_0)=y_0',\\quad\\dots,\\quad y^{(n-1)}(x_0)=y_0^{(n-1)},$$\n就构成**初值问题**（柯西问题），如 $y(0)=0,\\ y'(0)=1$。如果条件给在区间的两个端点 $x=a$ 与 $x=b$ 上，形如 $y(a)=\\alpha,\\ y(b)=\\beta$，则称为**边值问题**。这个区别很重要：常规条件下初值问题通常有唯一解，而边值问题可能无解，也可能有无穷多解。例如 $y''+y=0$ 配初值 $y(0)=0,\\ y'(0)=1$ 唯一确定 $y=\\sin x$；但配边值条件 $y(0)=0,\\ y(\\pi)=0$ 时，$y=C\\sin x$ 对任意常数 $C$ 都满足条件，解无穷多。\n\n几何上，一阶方程 $y'=f(x,y)$ 在每点 $(x,y)$ 处规定了积分曲线的切线斜率，把这一信息画成一片小线段就得到**方向场（斜率场）**，而解曲线（**积分曲线**）处处与方向场的线段相切。**存在唯一性定理**（皮卡-林德勒夫）给出直观保证：若 $f$ 与 $\\frac{\\partial f}{\\partial y}$ 在包含 $(x_0,y_0)$ 的矩形内连续，则初值问题在 $x_0$ 附近有且只有一条解曲线。这解释了为什么不同的积分曲线不会相交——它们正是方向场中被「一股股水流」分开的轨迹。",
+    "definitionEn": "Any equation containing an unknown function and its derivatives (or differentials) is called a **differential equation**. If only derivatives of a function of one variable appear, the equation is an **ordinary differential equation** (ODE), for example\n$$\\frac{dy}{dx}=2x,\\qquad y''+y=0,\\qquad y'+xy=e^{x}.$$\nEquations involving partial derivatives of a function of several variables are partial differential equations (PDEs). The **order** of a differential equation is the order of the highest derivative that occurs: $y'=2x$ is first order, $y''+y=0$ second order. A function $y=y(x)$ that turns the equation into an identity is a **solution**.\n\nSolving an ODE usually produces a whole family of solutions. A family containing $n$ **independent arbitrary constants** — exactly as many as the order — is a **general solution**: $y=x^{2}+C$ for $y'=2x$, $y=C_1x+C_2$ for $y''=0$, and $y=C_1\\cos x+C_2\\sin x$ for $y''+y=0$. Fixing the constants gives a **particular solution**. Hence the basic correspondence: **an n-th order equation has a general solution with n independent arbitrary constants**. Finding it is traditionally called 「integrating」 the equation, since the simplest case $y'=f(x)$ is solved by the antiderivative of $f$.\n\nExtra conditions single out one solution. Values of the function and its derivatives at a single point $x_0$,\n$$y(x_0)=y_0,\\quad y'(x_0)=y_0',\\quad\\dots,\\quad y^{(n-1)}(x_0)=y_0^{(n-1)},$$\nform an **initial value problem** (Cauchy problem), e.g. $y(0)=0,\\ y'(0)=1$. Conditions at the two endpoints $x=a$ and $x=b$, such as $y(a)=\\alpha,\\ y(b)=\\beta$, form a **boundary value problem**. The distinction matters: initial value problems normally have a unique solution, while boundary value problems may have none or infinitely many. For $y''+y=0$ with $y(0)=0,\\ y'(0)=1$ the solution $y=\\sin x$ is unique; with the boundary conditions $y(0)=0,\\ y(\\pi)=0$, however, $y=C\\sin x$ satisfies them for every constant $C$.\n\nGeometrically, the first-order equation $y'=f(x,y)$ prescribes the slope of the solution curve at each point $(x,y)$; drawing a short segment with that slope at many points produces the **direction field** (slope field), and solution curves (**integral curves**) are tangent to these segments everywhere. The **existence and uniqueness theorem** (Picard–Lindelöf) gives the intuitive guarantee: if $f$ and $\\frac{\\partial f}{\\partial y}$ are continuous on a rectangle containing $(x_0,y_0)$, then the initial value problem has exactly one solution curve near $x_0$. This explains why distinct integral curves never cross — they are the trajectories traced through the flow of the direction field.",
+    "formulas": [
+      {
+        "latex": "F(x,y,y',\\dots,y^{(n)})=0,\\qquad \\text{或}\\qquad y'=f(x,y)",
+        "note": "微分方程的一般形式；显式写出最高阶导数 $y^{(n)}$ 的形式最便于讨论与求解。",
+        "noteEn": "General form of a differential equation; solving explicitly for the highest derivative $y^{(n)}$ is usually most convenient."
+      },
+      {
+        "latex": "y=\\varphi(x,C_1,C_2,\\dots,C_n)",
+        "note": "n 阶方程的通解含 n 个独立任意常数；常数个数少于阶数时不能称为通解。",
+        "noteEn": "The general solution of an n-th order equation contains $n$ independent arbitrary constants; fewer constants means it is not a general solution."
+      },
+      {
+        "latex": "y'=2x\\ \\Rightarrow\\ y=x^{2}+C,\\qquad y''=0\\ \\Rightarrow\\ y=C_1x+C_2",
+        "note": "两个最基本的例子：每积分一次就出现一个任意常数，恰好验证「通解常数个数 = 方程阶数」。",
+        "noteEn": "Two basic examples: each integration produces one arbitrary constant, matching 「number of constants = order of the equation」."
+      },
+      {
+        "latex": "y(x_0)=y_0,\\ y'(x_0)=y_0',\\ \\dots\\quad(\\text{初值问题})",
+        "note": "初值条件给在同一点：用来从通解中确定全部常数，通常得到唯一特解。",
+        "noteEn": "Initial conditions at one point determine all the constants in the general solution, normally giving a unique particular solution."
+      },
+      {
+        "latex": "y(a)=\\alpha,\\ y(b)=\\beta\\quad(\\text{边值问题});\\qquad f,\\ \\frac{\\partial f}{\\partial y}\\ \\text{连续}\\ \\Longrightarrow\\ \\text{过}\\ (x_0,y_0)\\ \\text{的积分曲线局部唯一}",
+        "note": "边值条件给在两端点，可能有解、无解或无穷多解；后一条是存在唯一性定理的简洁表述（皮卡-林德勒夫）。",
+        "noteEn": "Boundary conditions sit at two endpoints and may yield none, one, or infinitely many solutions; the second statement is the concise form of the Picard–Lindelöf existence-uniqueness theorem."
+      }
+    ],
+    "expression": {
+      "text": "F(x, y, y′, y″, …, y⁽ⁿ⁾) = 0",
+      "symbol": "F(x,y,y',\\dots,y^{(n)})=0",
+      "note": "阶数等于最高阶导数的阶数；n 阶方程的通解含 n 个独立任意常数，由初值或边界条件确定特解。",
+      "noteEn": "The order equals that of the highest derivative; an n-th order ODE has an n-constant general solution, and initial or boundary conditions pick out a particular solution."
+    },
+    "properties": [
+      "阶数 = 方程中最高阶导数的阶数；通解中独立任意常数的个数恰好等于阶数。",
+      "初值问题通常有唯一解；边值问题可能无解或有无穷多解（如 $y''+y=0$ 配 $y(0)=y(\\pi)=0$ 解为 $y=C\\sin x$）。",
+      "解的图像称为积分曲线；一阶方程的方向场 $y'=f(x,y)$ 给出积分曲线的几何直观，积分曲线处处与方向场相切。",
+      "线性方程满足叠加原理（齐次解线性组合仍是解），非线性方程一般不满足；线性与非线性是解性质的分水岭。",
+      "存在唯一性（皮卡-林德勒夫）：$f$ 与 $\\frac{\\partial f}{\\partial y}$ 连续时过每点局部只有一条积分曲线，因此积分曲线互不相交。"
+    ],
+    "propertiesEn": [
+      "The order is that of the highest derivative, and the general solution contains exactly that many independent arbitrary constants.",
+      "Initial value problems normally have a unique solution, whereas boundary value problems may have none or infinitely many (e.g. $y''+y=0$ with $y(0)=y(\\pi)=0$ gives $y=C\\sin x$).",
+      "The graph of a solution is an integral curve; the direction field $y'=f(x,y)$ of a first-order equation visualizes them, with every integral curve tangent to the field.",
+      "Linear equations obey superposition (linear combinations of homogeneous solutions are solutions), nonlinear ones generally do not — a watershed for the behavior of solutions.",
+      "Picard–Lindelöf: if $f$ and $\\frac{\\partial f}{\\partial y}$ are continuous, exactly one integral curve passes through each point locally, so integral curves never cross."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "x + y",
+      "xRange": [-3, 3],
+      "yRange": [-3, 3],
+      "initial": [
+        { "x": 0, "y": 1, "color": "#ff6b9d", "label": "y(0)=1" },
+        { "x": 0, "y": -1, "color": "#06d6a0", "label": "y(0)=−1" }
+      ],
+      "title": "方向场 y′ = x + y 与过 (0,1)、(0,−1) 的两条积分曲线（互不相交）"
+    },
+    "examples": [
+      {
+        "problem": "指出微分方程 $y''+3y'-4y=e^{x}$ 的阶数，并说明它的通解中含有几个独立的任意常数。",
+        "solution": "方程中出现的最高阶导数是二阶导数 $y''$，所以它是**二阶**微分方程。n 阶方程的通解含 n 个独立任意常数，故通解形如 $y=\\varphi(x,C_1,C_2)$，共 2 个常数。实际上可以验证\n$$y=C_1e^{x}+C_2e^{-4x}+\\frac{x}{5}e^{x}$$\n就是它的通解（注意 $e^{x}$ 是齐次方程 $y''+3y'-4y=0$ 的解，因此特解中带因子 $x$）。"
+      },
+      {
+        "problem": "验证 $y=C_1\\cos x+C_2\\sin x$ 是方程 $y''+y=0$ 的通解，并求满足初值 $y(0)=0,\\ y'(0)=1$ 的特解。",
+        "solution": "求导得 $y'=-C_1\\sin x+C_2\\cos x$，$y''=-C_1\\cos x-C_2\\sin x=-y$，故对任意常数 $C_1,C_2$ 恒有 $y''+y=0$，即它是通解（含 2 个独立常数，与二阶方程相符）。代入初值：$y(0)=C_1=0$；$y'(0)=C_2=1$。所以特解为\n$$y=\\sin x.$$\n顺便看边界条件的差别：若把条件换成 $y(0)=0,\\ y(\\pi)=0$，则 $C_1=0$ 后第二个条件对任意 $C_2$ 都自动成立，边值问题有无穷多解 $y=C_2\\sin x$。"
+      }
+    ],
+    "tags": ["微分方程", "阶数", "通解", "初值问题"],
+    "links": ["derivative", "antiderivative", "ode-existence-uniqueness", "separable-ode", "first-order-linear-ode"]
+  },
+  {
+    "id": "separable-ode",
+    "title": "可分离变量方程",
+    "titleEn": "Separable Equations",
+    "branch": "ode",
+    "level": 4,
+    "summary": "右端能分解为「只含 x 的因子 × 只含 y 的因子」的一阶方程；把两个变量分到等号两侧分别积分即可求解，但除以 g(y) 时可能丢掉 g(y)=0 的常数解。",
+    "summaryEn": "A first-order equation whose right side factors into a function of x times a function of y; separate the variables, integrate both sides, and mind the constant solutions hidden in the zeros of g(y).",
+    "definition": "形如\n$$\\frac{dy}{dx}=f(x)g(y)$$\n的一阶微分方程称为**可分离变量方程**：右端能分解成一个只依赖 $x$ 的部分与一个只依赖 $y$ 的部分之积。求解时把含 $y$ 的部分与含 $x$ 的部分分别移到等号两侧：\n$$\\frac{dy}{g(y)}=f(x)\\,dx,$$\n两边积分得\n$$\\int\\frac{dy}{g(y)}=\\int f(x)\\,dx+C,$$\n再化简（必要时解出 $y$）即得通解。这是初等积分法中最基本的一招，几乎所有一阶可解方程的最后一步都会化归到它。\n\n有一个必须提防的细节：分离时用到了除法，前提是 $g(y)\\neq0$。如果 $g(c)=0$，那么常数函数 $y\\equiv c$ 本身就是方程的解，称为**平衡解**（常数解），它可能不包含在分离变量得到的解族里，必须单独检查并补充。例如 $y'=y$ 分离得 $y=Ce^{x}$，其中 $C=0$ 恰好补上了 $y\\equiv0$；而 $y'=1-y^{2}$ 的两个常数解 $y\\equiv1$ 与 $y\\equiv-1$ 就必须另外列出，它们对应 $g(y)=0$ 的零点。\n\n通解常常以**隐式**形式 $F(y)=G(x)+C$ 出现，未必能（也不必）解出 $y$ 的显式表达式。若给定初值 $y(x_0)=y_0$，把 $x=x_0,\\ y=y_0$ 代入隐式通解即可定出 $C$，得到满足初值的特解——这就是可分离方程初值问题的标准解法。\n\n许多经典模型都是可分离的：$y'=ky$ 给出指数增长与衰减（人口模型、放射性衰变），$y'=ky\\left(1-\\frac{y}{M}\\right)$ 给出逻辑斯蒂模型，牛顿冷却方程 $T'=-k(T-T_m)$ 也可以分离。用方向场观察时，$g(y)=0$ 的水平线上斜率处处为零（正是平衡解），其他积分曲线在相邻平衡解之间单调升降：或者趋向平衡解，或者离开它，几何图像十分直观。",
+    "definitionEn": "A first-order equation of the form\n$$\\frac{dy}{dx}=f(x)g(y)$$\nis called **separable**: its right side factors into a part depending only on $x$ and a part depending only on $y$. To solve it, move the $y$-part and the $x$-part to opposite sides,\n$$\\frac{dy}{g(y)}=f(x)\\,dx,$$\nand integrate:\n$$\\int\\frac{dy}{g(y)}=\\int f(x)\\,dx+C.$$\nSimplifying (and solving for $y$ when convenient) yields the general solution. This is the most basic of all elementary integration techniques, and the final step of almost every solvable first-order equation.\n\nOne detail demands care: the separation used division, so it requires $g(y)\\neq0$. If $g(c)=0$, the constant function $y\\equiv c$ is itself a solution, an **equilibrium solution**, which may not belong to the family obtained by separation and must be checked and added separately. For instance $y'=y$ separates to $y=Ce^{x}$, where the value $C=0$ recovers $y\\equiv0$; for $y'=1-y^{2}$ the constant solutions $y\\equiv1$ and $y\\equiv-1$ must instead be listed separately, coming from the zeros of $g$.\n\nThe general solution often appears implicitly as $F(y)=G(x)+C$, without (or without need of) an explicit formula for $y$. Given an initial value $y(x_0)=y_0$, substituting $x=x_0,\\ y=y_0$ determines $C$ and gives the particular solution — the standard treatment of initial value problems for separable equations.\n\nMany classical models are separable: $y'=ky$ yields exponential growth and decay (populations, radioactive decay), $y'=ky\\left(1-\\frac{y}{M}\\right)$ is the logistic model, and Newton's law of cooling $T'=-k(T-T_m)$ separates as well. In the slope field, the horizontal lines where $g(y)=0$ carry zero slope everywhere (the equilibrium solutions), and the other integral curves rise or fall monotonically between consecutive equilibria, either approaching them or departing: a very telling picture.",
+    "formulas": [
+      {
+        "latex": "\\frac{dy}{dx}=f(x)g(y)\\ \\Longrightarrow\\ \\int\\frac{dy}{g(y)}=\\int f(x)\\,dx+C\\quad(g(y)\\neq0)",
+        "note": "基本解法：把变量分离后两边分别积分；除法的前提是 $g(y)\\neq0$，否则需回到常数解的讨论。",
+        "noteEn": "The basic method: separate the variables and integrate both sides; the division assumes $g(y)\\neq0$, otherwise the constant solutions require separate treatment."
+      },
+      {
+        "latex": "g(c)=0\\ \\Longrightarrow\\ y\\equiv c\\ \\text{是方程的解（平衡解）}",
+        "note": "检查 $g$ 的零点：每个零点给出一个常数解，可能不在通解族中，要单独列出。",
+        "noteEn": "Check the zeros of $g$: each zero gives a constant solution that may be missing from the general family and must be listed separately."
+      },
+      {
+        "latex": "\\frac{dy}{dx}=ky\\ \\Longrightarrow\\ y=Ce^{kx}",
+        "note": "指数增长/衰减模型：$k>0$ 增长、$k<0$ 衰减；分离变量并积分即得，$C$ 由初值确定。",
+        "noteEn": "Exponential growth/decay: $k>0$ grows, $k<0$ decays; separation and integration give $y=Ce^{kx}$, with $C$ fixed by the initial value."
+      },
+      {
+        "latex": "\\frac{dy}{dx}=\\frac{x}{y}\\ \\Longrightarrow\\ y^{2}=x^{2}+C",
+        "note": "隐式解的例子：两边积分得 $\\frac{y^{2}}{2}=\\frac{x^{2}}{2}+C_1$；解曲线是双曲线族，$y=0$ 不是解（分母为零）。",
+        "noteEn": "An implicit solution: integrating gives $\\frac{y^{2}}{2}=\\frac{x^{2}}{2}+C_1$; the curves are hyperbolas and $y=0$ is not a solution (the denominator vanishes)."
+      },
+      {
+        "latex": "\\frac{dy}{dx}=y(1-y)\\ \\Longrightarrow\\ y=\\frac{1}{1+Ce^{-x}}",
+        "note": "逻辑斯蒂方程：通解如上，$C$ 由初值确定；另有平衡解 $y\\equiv0$ 与 $y\\equiv1$，它们分别是通解在 $x\\to-\\infty$ 与 $x\\to+\\infty$ 时的极限。",
+        "noteEn": "The logistic equation: the general solution is as shown, with $C$ fixed by the initial value; the extra equilibria $y\\equiv0$ and $y\\equiv1$ arise as limits of the family as $x\\to-\\infty$ and $x\\to+\\infty$."
+      }
+    ],
+    "expression": {
+      "text": "dy/dx = f(x)g(y)  ⇒  ∫ dy/g(y) = ∫ f(x)dx + C",
+      "symbol": "\\frac{dy}{dx}=f(x)g(y)\\ \\Longrightarrow\\ \\int\\frac{dy}{g(y)}=\\int f(x)\\,dx+C",
+      "note": "把变量分离到等号两侧后分别积分；分离前先确认 $g(y)=0$ 的常数解是否被丢掉。",
+      "noteEn": "Separate the variables onto the two sides and integrate; before dividing, check whether the constant solutions $g(y)=0$ are being discarded."
+    },
+    "properties": [
+      "适用条件：右端能写成 $f(x)g(y)$ 的乘积；步骤是「分离 → 两边积分 → 用初值定常数」。",
+      "除以 $g(y)$ 可能丢掉 $g(y)=0$ 对应的常数解（平衡解），必须单独检查、补充列出。",
+      "通解常以隐式形式 $F(y)=G(x)+C$ 出现；初值 $y(x_0)=y_0$ 代入即可唯一确定 $C$。",
+      "平衡解对应方向场中的水平线；其他解曲线在相邻平衡解之间单调升降，趋向或远离它们。",
+      "常见模型：指数增长/衰减 $y'=ky$、逻辑斯蒂 $y'=ky(1-y/M)$、牛顿冷却 $T'=-k(T-T_m)$ 都属于可分离类型。"
+    ],
+    "propertiesEn": [
+      "Applicability: the right side factors as $f(x)g(y)$; the procedure is 「separate → integrate → fix the constant with the initial value」.",
+      "Dividing by $g(y)$ may discard the constant solutions (equilibria) where $g(y)=0$; check and list them separately.",
+      "The general solution often comes implicitly as $F(y)=G(x)+C$; an initial value $y(x_0)=y_0$ determines $C$ uniquely.",
+      "Equilibrium solutions are horizontal lines of the slope field; other integral curves rise or fall monotonically between consecutive equilibria, approaching or leaving them.",
+      "Classical models: exponential growth/decay $y'=ky$, the logistic equation $y'=ky(1-y/M)$, and Newton's cooling law $T'=-k(T-T_m)$ are all separable."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "x*y",
+      "xRange": [-2, 3],
+      "yRange": [-2, 3],
+      "initial": [
+        { "x": 0, "y": 1, "color": "#4cc9f0", "label": "y(0)=1" },
+        { "x": 0, "y": -1, "color": "#ff6b9d", "label": "y(0)=−1" }
+      ],
+      "title": "斜率场 y′ = xy 与两条解曲线 y = ±e^{x²/2}（水平线 y≡0 是平衡解）"
+    },
+    "examples": [
+      {
+        "problem": "解初值问题 $\\frac{dy}{dx}=3x^{2}y,\\ y(0)=1$。",
+        "solution": "当 $y\\neq0$ 时分离变量并积分：\n$$\\frac{dy}{y}=3x^{2}\\,dx\\ \\Longrightarrow\\ \\ln|y|=x^{3}+C\\ \\Longrightarrow\\ y=De^{x^{3}}.$$\n代入 $y(0)=1$ 得 $D=1$，所以\n$$y=e^{x^{3}}.$$\n另外 $y\\equiv0$ 也是原方程的解（此时两边都为 0），但不满足初值 $y(0)=1$，故不取。这里常数解恰好对应通解族中 $D=0$ 的情形。"
+      },
+      {
+        "problem": "解逻辑斯蒂初值问题 $\\frac{dy}{dx}=y(1-y),\\ y(0)=\\frac12$。",
+        "solution": "分离变量，并用部分分式 $\\frac{1}{y(1-y)}=\\frac1y+\\frac{1}{1-y}$：\n$$\\left(\\frac1y+\\frac{1}{1-y}\\right)dy=dx\\ \\Longrightarrow\\ \\ln|y|-\\ln|1-y|=x+C,$$\n即 $\\frac{y}{1-y}=De^{x}$。代入 $y(0)=\\frac12$：$\\frac{1/2}{1/2}=1=D$，于是 $\\frac{y}{1-y}=e^{x}$，解得\n$$y=\\frac{e^{x}}{1+e^{x}}=\\frac{1}{1+e^{-x}}\\qquad(0<y<1).$$\n解从 $\\frac12$ 出发单调递增并以 $y=1$ 为极限；$y\\equiv0$ 与 $y\\equiv1$ 是两个平衡解，正是该解当 $x\\to-\\infty$ 与 $x\\to+\\infty$ 时的极限。"
+      }
+    ],
+    "tags": ["可分离变量", "一阶微分方程", "平衡解"],
+    "links": ["ode-basic-concepts", "homogeneous-ode", "first-order-linear-ode", "antiderivative", "exponential-growth-decay"]
+  },
+  {
+    "id": "homogeneous-ode",
+    "title": "齐次方程",
+    "titleEn": "Homogeneous Equations",
+    "branch": "ode",
+    "level": 4,
+    "summary": "右端只依赖比值 y/x 的一阶方程；用换元 u=y/x 把 dy/dx 化为 u+x·du/dx，从而得到关于 u 的可分离方程，积分后再回代。",
+    "summaryEn": "A first-order equation whose right side depends only on the ratio y/x; the substitution u=y/x converts it into a separable equation in u, after which one integrates and substitutes back.",
+    "definition": "若一阶方程\n$$\\frac{dy}{dx}=\\varphi\\!\\left(\\frac{y}{x}\\right)$$\n的右端可以整理成只依赖比值 $y/x$ 的函数，就称它是**齐次方程**。等价地说，右端 $f(x,y)$ 是**零次齐次函数**：对任意 $k\\neq0$ 有 $f(kx,ky)=f(x,y)$。例如\n$$\\frac{x+y}{x}=1+\\frac{y}{x},\\qquad \\frac{x^{2}+y^{2}}{xy}=\\frac{x}{y}+\\frac{y}{x}$$\n都只依赖 $y/x$；判断的办法是把分子、分母同除以 $x$ 的最高次幂。注意这里的「齐次」指右端函数的零次齐次性，与线性方程 $y'+P(x)y=0$ 所说的「齐次」是两个不同的概念，不要混淆。\n\n解法的关键是换元\n$$u=\\frac{y}{x},\\qquad\\text{即}\\qquad y=ux.$$\n由乘积求导法则，$\\frac{dy}{dx}=u+x\\frac{du}{dx}$。代入原方程得\n$$u+x\\frac{du}{dx}=\\varphi(u),\\qquad\\text{即}\\qquad x\\frac{du}{dx}=\\varphi(u)-u,$$\n再分离变量：\n$$\\frac{du}{\\varphi(u)-u}=\\frac{dx}{x}.$$\n右边积出 $\\ln|x|$，左边是只含 $u$ 的积分；对左边积分并把 $u=y/x$ 代回，即得原方程的通解。\n\n两种退化情形要留意。其一，若 $\\varphi(u)-u\\equiv0$，即 $\\varphi(u)=u$，方程退化为 $\\frac{dy}{dx}=\\frac{y}{x}$，解是过原点的直线族 $y=Cx$（连同零解 $y\\equiv0$）。其二，若某个常数 $u_0$ 满足 $\\varphi(u_0)=u_0$，则 $u\\equiv u_0$ 是 $u$ 方程的平衡解，对应直线 $y=u_0x$，也要作为原方程的解单独列出。\n\n几何上，齐次方程体现**自相似**结构：把平面以原点为中心伸缩（$(x,y)\\mapsto(kx,ky)$），方向场的斜率不变，因此积分曲线族在伸缩变换下保持形状。典型例子 $\\frac{dy}{dx}=1+\\frac{y}{x}$ 的解为 $y=x(\\ln|x|+C)$；由于右端在 $x=0$ 处无定义，解通常只在 $x>0$ 或 $x<0$ 的单一区间上讨论。",
+    "definitionEn": "A first-order equation\n$$\\frac{dy}{dx}=\\varphi\\!\\left(\\frac{y}{x}\\right)$$\nwhose right side can be written as a function of the ratio $y/x$ alone is called **homogeneous**. Equivalently, the right side $f(x,y)$ is **homogeneous of degree zero**: $f(kx,ky)=f(x,y)$ for every $k\\neq0$. For example\n$$\\frac{x+y}{x}=1+\\frac{y}{x},\\qquad \\frac{x^{2}+y^{2}}{xy}=\\frac{x}{y}+\\frac{y}{x}$$\ndepend only on $y/x$; the test is to divide numerator and denominator by the highest power of $x$. Note that 「homogeneous」 here refers to this degree-zero property of the right side, and is unrelated to the 「homogeneous」 used for the linear equation $y'+P(x)y=0$.\n\nThe key is the substitution\n$$u=\\frac{y}{x},\\qquad\\text{that is}\\qquad y=ux.$$\nThe product rule gives $\\frac{dy}{dx}=u+x\\frac{du}{dx}$. Substituting into the equation,\n$$u+x\\frac{du}{dx}=\\varphi(u),\\qquad\\text{so}\\qquad x\\frac{du}{dx}=\\varphi(u)-u,$$\nwhich separates as\n$$\\frac{du}{\\varphi(u)-u}=\\frac{dx}{x}.$$\nThe right side integrates to $\\ln|x|$ while the left is an integral in $u$ alone; integrating and substituting $u=y/x$ back gives the general solution of the original equation.\n\nTwo degenerate cases deserve attention. First, if $\\varphi(u)-u\\equiv0$, i.e. $\\varphi(u)=u$, the equation becomes $\\frac{dy}{dx}=\\frac{y}{x}$ with the family of straight lines $y=Cx$ through the origin as its solutions (together with $y\\equiv0$). Second, if a constant $u_0$ satisfies $\\varphi(u_0)=u_0$, then $u\\equiv u_0$ is an equilibrium solution of the $u$-equation, corresponding to the line $y=u_0x$, which must also be listed as a solution of the original equation.\n\nGeometrically a homogeneous equation is **self-similar**: scaling the plane about the origin, $(x,y)\\mapsto(kx,ky)$, leaves the slopes of the direction field unchanged, so the family of integral curves keeps its shape under scaling. The model example $\\frac{dy}{dx}=1+\\frac{y}{x}$ has solutions $y=x(\\ln|x|+C)$; since the right side is undefined at $x=0$, solutions are usually discussed on a single interval $x>0$ or $x<0$.",
+    "formulas": [
+      {
+        "latex": "\\frac{dy}{dx}=\\varphi\\!\\left(\\frac{y}{x}\\right)",
+        "note": "齐次方程的定义式：右端只依赖比值 $y/x$，等价于 $f(kx,ky)=f(x,y)$（零次齐次）。",
+        "noteEn": "Defining form: the right side depends only on the ratio $y/x$, equivalently $f(kx,ky)=f(x,y)$ (homogeneous of degree zero)."
+      },
+      {
+        "latex": "u=\\frac{y}{x}\\ \\Longrightarrow\\ \\frac{dy}{dx}=u+x\\frac{du}{dx}",
+        "note": "换元公式：由 $y=ux$ 求导而来；这一步把 $y$ 对 $x$ 的导数换成 $u$ 对 $x$ 的导数。",
+        "noteEn": "The substitution formula, obtained by differentiating $y=ux$; it replaces the derivative of $y$ by that of $u$."
+      },
+      {
+        "latex": "u+x\\frac{du}{dx}=\\varphi(u)\\ \\Longrightarrow\\ \\frac{du}{\\varphi(u)-u}=\\frac{dx}{x}",
+        "note": "代入后得到关于 $u$ 的可分离方程；右端积出 $\\ln|x|$，左端积分后回代 $u=y/x$。",
+        "noteEn": "The result is a separable equation for $u$; the right side integrates to $\\ln|x|$, and after integrating the left one substitutes $u=y/x$ back."
+      },
+      {
+        "latex": "M(tx,ty)=t^{k}M(x,y),\\ N(tx,ty)=t^{k}N(x,y)\\ \\Longrightarrow\\ \\frac{dy}{dx}=-\\frac{M(x,y)}{N(x,y)}\\ \\text{只依赖}\\ \\frac{y}{x}",
+        "note": "判别技巧：微分形式 $M\\,dx+N\\,dy=0$ 中 $M,N$ 若是同次齐次，则方程一定是齐次的。",
+        "noteEn": "A practical test: in the differential form $M\\,dx+N\\,dy=0$, if $M$ and $N$ are homogeneous of the same degree, the equation is homogeneous."
+      },
+      {
+        "latex": "\\frac{dy}{dx}=1+\\frac{y}{x}\\ \\Longrightarrow\\ y=x(\\ln|x|+C)",
+        "note": "代表例子：$u+\\frac{du}{dx}\\cdot x=1+u$ 给出 $x\\frac{du}{dx}=1$，积分得 $u=\\ln|x|+C$，回代即得通解。",
+        "noteEn": "Model example: $u+x\\frac{du}{dx}=1+u$ gives $x\\frac{du}{dx}=1$, so $u=\\ln|x|+C$ and substituting back yields the general solution."
+      }
+    ],
+    "expression": {
+      "text": "dy/dx = φ(y/x)，令 u = y/x ⇒ dy/dx = u + x·du/dx",
+      "symbol": "\\frac{dy}{dx}=\\varphi\\!\\left(\\frac{y}{x}\\right)",
+      "note": "判别：右端能整理成只含 $y/x$ 的形式；解法：换元 $u=y/x$ 化为可分离方程，最后回代 $y=ux$。",
+      "noteEn": "Recognition: the right side reduces to a function of $y/x$; solution: substitute $u=y/x$ to get a separable equation, then substitute back $y=ux$."
+    },
+    "properties": [
+      "判别方法：把右端整理成只含 $y/x$ 的形式（分子分母同除以 $x$ 的最高次幂），或验证 $f(kx,ky)=f(x,y)$。",
+      "换元 $u=y/x$ 后只要 $\\varphi(u)-u$ 不恒为零，方程必化为可分离方程，按「分离—积分—回代」求解。",
+      "若 $\\varphi(u_0)=u_0$，则对应直线解 $y=u_0x$；特别当 $\\varphi(u)\\equiv u$ 时通解就是过原点的直线族 $y=Cx$。",
+      "自相似性：方向场沿过原点的每条射线相同，积分曲线族在以原点为中心的伸缩下保持形状。",
+      "解通常只在 $x>0$ 或 $x<0$ 的单一区间上讨论；积分中会出现 $\\ln|x|$，回代 $y=ux$ 时注意符号与分支。"
+    ],
+    "propertiesEn": [
+      "Recognition: reduce the right side to a function of $y/x$ alone (divide by the highest power of $x$), or verify $f(kx,ky)=f(x,y)$.",
+      "After the substitution $u=y/x$ the equation becomes separable provided $\\varphi(u)-u$ is not identically zero; solve by 「separate — integrate — substitute back」.",
+      "If $\\varphi(u_0)=u_0$ there is a straight-line solution $y=u_0x$; in particular, when $\\varphi(u)\\equiv u$ the general solution is the pencil of lines $y=Cx$ through the origin.",
+      "Self-similarity: the direction field is the same along every ray from the origin, and the family of integral curves keeps its shape under scaling about the origin.",
+      "Solutions are usually discussed on a single interval $x>0$ or $x<0$; the integral produces $\\ln|x|$, and substituting back $y=ux$ requires care with signs and branches."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "1 + y/x",
+      "xRange": [-3, 3],
+      "yRange": [-3, 3],
+      "initial": [
+        { "x": 1, "y": 1, "color": "#ffd166", "label": "y(1)=1" },
+        { "x": 1, "y": -1, "color": "#b388ff", "label": "y(1)=−1" }
+      ],
+      "title": "斜率场 y′ = 1 + y/x 与过 (1,1)、(1,−1) 的两条积分曲线"
+    },
+    "examples": [
+      {
+        "problem": "解方程 $\\frac{dy}{dx}=1+\\frac{y}{x}$，并求满足 $y(1)=1$ 的特解。",
+        "solution": "右端只依赖 $y/x$，是齐次方程。令 $u=\\frac{y}{x}$（即 $y=ux$），则 $\\frac{dy}{dx}=u+x\\frac{du}{dx}$，代入得\n$$u+x\\frac{du}{dx}=1+u\\ \\Longrightarrow\\ x\\frac{du}{dx}=1\\ \\Longrightarrow\\ du=\\frac{dx}{x}.$$\n积分得 $u=\\ln|x|+C$，回代 $y=ux$：\n$$y=x(\\ln|x|+C).$$\n代入 $y(1)=1$：$1=1\\cdot(0+C)$，得 $C=1$，故特解为 $y=x(1+\\ln x)$（$x>0$）。验算：$y'=1+\\ln x+x\\cdot\\frac1x=2+\\ln x$，而 $1+\\frac{y}{x}=1+(1+\\ln x)=2+\\ln x$，两边一致。"
+      },
+      {
+        "problem": "解方程 $\\frac{dy}{dx}=\\frac{x^{2}+y^{2}}{xy}$。",
+        "solution": "右端 $=\\frac{x}{y}+\\frac{y}{x}$ 只依赖 $y/x$，是齐次方程。令 $u=\\frac{y}{x}$，则\n$$u+x\\frac{du}{dx}=\\frac1u+u\\ \\Longrightarrow\\ x\\frac{du}{dx}=\\frac1u\\ \\Longrightarrow\\ u\\,du=\\frac{dx}{x}.$$\n积分得 $\\frac{u^{2}}{2}=\\ln|x|+C$，即 $u^{2}=2\\ln|x|+C'$。回代 $u=y/x$：\n$$y^{2}=x^{2}\\left(2\\ln|x|+C'\\right).$$\n这是隐式通解；在右端非负处可解出两支 $y=\\pm\\,x\\sqrt{2\\ln|x|+C'}$。"
+      }
+    ],
+    "tags": ["齐次方程", "换元法", "一阶微分方程"],
+    "links": ["ode-basic-concepts", "separable-ode", "first-order-linear-ode", "bernoulli-equation", "exact-equation"]
+  },
+  {
+    "id": "first-order-linear-ode",
+    "title": "一阶线性微分方程",
+    "titleEn": "First-Order Linear Equations",
+    "branch": "ode",
+    "level": 4,
+    "summary": "形如 y′+P(x)y=Q(x) 的方程；乘以积分因子 μ=e^{∫P dx} 后左边化为 (μy)′，通解为 y=e^{−∫P dx}[∫Q e^{∫P dx}dx+C]。",
+    "summaryEn": "An equation of the form y′+P(x)y=Q(x); multiplying by the integrating factor μ=e^{∫P dx} turns the left side into (μy)′, and the general solution follows by one more integration.",
+    "definition": "形如\n$$y'+P(x)y=Q(x)$$\n的方程称为**一阶线性微分方程**：未知函数 $y$ 及其导数 $y'$ 都以一次方出现，系数 $P,Q$ 是 $x$ 的已知函数。若 $Q(x)\\equiv0$，称方程为**齐次线性方程**（右端为零），否则称为**非齐次线性方程**。使用前先把 $y'$ 的系数化为 1，例如 $xy'+y=x^{2}$ 应先改写成 $y'+\\frac1x y=x$（$x\\neq0$）。\n\n解法的核心是**积分因子**\n$$\\mu(x)=e^{\\int P(x)\\,dx}$$\n（积分常数可任取一个）。把 $\\mu$ 乘到方程两边：\n$$\\left(e^{\\int P\\,dx}y\\right)'=e^{\\int P\\,dx}\\left(y'+Py\\right)=Q(x)\\,e^{\\int P\\,dx},$$\n左边恰好成为一个整体导数。两边积分：\n$$e^{\\int P\\,dx}y=\\int Q(x)e^{\\int P\\,dx}\\,dx+C,$$\n于是\n$$y=e^{-\\int P\\,dx}\\left[\\int Q(x)e^{\\int P\\,dx}\\,dx+C\\right].$$\n这就是一阶线性方程的通解公式。实际计算时不必死记它，先算出 $\\mu$，再对 $(\\mu y)'=\\mu Q$ 两边积分即可。\n\n通解的结构值得记住：\n$$y=\\underbrace{Ce^{-\\int P\\,dx}}_{\\text{齐次方程的通解}}+\\underbrace{y_p}_{\\text{非齐次的一个特解}}.$$\n也就是说，任意两个解之差是齐次方程的解；由齐次解通过「常数变易」推出特解，正是上述公式的来源。在 $P,Q$ 都连续的区间上，一阶线性方程的解在整个区间上存在且唯一，不会出现别的解（没有奇解）。\n\n几何直观：斜率场 $y'=Q(x)-P(x)y$ 中，非齐次的特解 $y_p$ 像一根「骨架曲线」。当 $P(x)>0$ 在远端恒成立时，任意两解之差 $Ce^{-\\int P\\,dx}$ 衰减为 0，所有解曲线都向特解靠拢——因此长期行为由 $y_p$ 决定。一阶线性方程是最常见的可解方程：RC 电路的充放电、牛顿冷却、放射性衰变、混合溶液问题都归结为 $y'+Py=Q$ 的形式。",
+    "definitionEn": "An equation of the form\n$$y'+P(x)y=Q(x)$$\nis called a **first-order linear differential equation**: the unknown function $y$ and its derivative $y'$ appear to the first power, with coefficients $P,Q$ given functions of $x$. If $Q(x)\\equiv0$ the equation is **homogeneous** (vanishing right side), otherwise **nonhomogeneous**. Before anything else, normalize the coefficient of $y'$ to 1: for example $xy'+y=x^{2}$ should be rewritten as $y'+\\frac1x y=x$ for $x\\neq0$.\n\nThe core of the method is the **integrating factor**\n$$\\mu(x)=e^{\\int P(x)\\,dx}$$\n(any one antiderivative will do). Multiplying the equation by $\\mu$ gives\n$$\\left(e^{\\int P\\,dx}y\\right)'=e^{\\int P\\,dx}\\left(y'+Py\\right)=Q(x)\\,e^{\\int P\\,dx},$$\nso the left side becomes a single derivative. Integrating,\n$$e^{\\int P\\,dx}y=\\int Q(x)e^{\\int P\\,dx}\\,dx+C,$$\nand therefore\n$$y=e^{-\\int P\\,dx}\\left[\\int Q(x)e^{\\int P\\,dx}\\,dx+C\\right].$$\nThis is the general solution formula. In practice, compute $\\mu$ first and integrate $(\\mu y)'=\\mu Q$ instead of memorizing the formula.\n\nThe structure is worth remembering:\n$$y=\\underbrace{Ce^{-\\int P\\,dx}}_{\\text{general solution of the homogeneous equation}}+\\underbrace{y_p}_{\\text{one particular solution of the nonhomogeneous equation}}.$$\nAny two solutions differ by a solution of the homogeneous equation; deriving $y_p$ from the homogeneous solution by 「variation of constants」 is exactly where the formula comes from. On any interval where $P$ and $Q$ are continuous, the solution exists and is unique on the whole interval — no exceptional (singular) solutions occur.\n\nGeometric picture: in the slope field $y'=Q(x)-P(x)y$ the particular solution $y_p$ acts as a skeleton. If $P(x)>0$ far out, any difference of two solutions, $Ce^{-\\int P\\,dx}$, decays to 0, so all solution curves are drawn toward $y_p$; the long-term behavior is dictated by $y_p$. First-order linear equations are the most common solvable equations: charging circuits, Newton's cooling, radioactive decay and mixing problems all reduce to $y'+Py=Q$.",
+    "formulas": [
+      {
+        "latex": "y'+P(x)y=Q(x)",
+        "note": "标准形式：使用前必须把 $y'$ 的系数化为 1；$Q\\equiv0$ 时是齐次线性方程。",
+        "noteEn": "Standard form: normalize the coefficient of $y'$ first; when $Q\\equiv0$ the equation is homogeneous."
+      },
+      {
+        "latex": "\\mu(x)=e^{\\int P(x)\\,dx},\\qquad (\\mu y)'=\\mu Q",
+        "note": "积分因子：$\\mu$ 恒正，乘以方程是等价变形；左边合成整体导数后只需再积分一次。",
+        "noteEn": "Integrating factor: $\\mu$ is positive and multiplication is an equivalent transformation; the left side becomes one derivative and a single integration finishes the job."
+      },
+      {
+        "latex": "y=e^{-\\int P\\,dx}\\left[\\int Q\\,e^{\\int P\\,dx}\\,dx+C\\right]",
+        "note": "通解公式：外层的 $e^{-\\int P}$ 来自 $(\\mu y)$ 解出 $y$；括号内的常数 $C$ 由初值确定。",
+        "noteEn": "General solution: the outer factor $e^{-\\int P}$ comes from solving $(\\mu y)$ for $y$, and $C$ is fixed by the initial value."
+      },
+      {
+        "latex": "y=\\underbrace{Ce^{-\\int P\\,dx}}_{\\text{齐次通解}}+\\underbrace{y_p}_{\\text{特解}}",
+        "note": "通解结构：齐次通解加一个特解；任意两解之差满足齐次方程，这就是常数变易法的出发点。",
+        "noteEn": "Structure: homogeneous general solution plus one particular solution; the difference of any two solutions solves the homogeneous equation — the starting point of variation of constants."
+      },
+      {
+        "latex": "y'+y=x\\ \\Longrightarrow\\ y=x-1+Ce^{-x}",
+        "note": "标准例子：特解 $y_p=x-1$ 是「骨架」，$Ce^{-x}$ 衰减，$x\\to\\infty$ 时所有解都趋于直线 $y=x-1$。",
+        "noteEn": "Model example: the particular solution $y_p=x-1$ is the skeleton; $Ce^{-x}$ decays, so all solutions approach the line $y=x-1$ as $x\\to\\infty$."
+      }
+    ],
+    "expression": {
+      "text": "y′ + P(x)y = Q(x)",
+      "symbol": "y'+P(x)y=Q(x)",
+      "note": "标准形式 + 积分因子 $\\mu=e^{\\int P dx}$：(μy)′=μQ，积分一次得通解；初值唯一确定常数。",
+      "noteEn": "Standard form plus the integrating factor $\\mu=e^{\\int P dx}$: $(\\mu y)'=\\mu Q$; one integration gives the general solution, and the initial value fixes the constant."
+    },
+    "properties": [
+      "标准形式：必须先把 $y'$ 的系数化为 1，否则要相应改写 $P,Q$（或识别出恰当导数）。",
+      "积分因子 $\\mu=e^{\\int P\\,dx}$ 恒正，乘以方程是等价变形，不引入也不丢失任何解。",
+      "通解 = 齐次通解 + 一个非齐次特解；任意两个解之差是齐次方程的解，初值唯一确定 $C$。",
+      "在 $P,Q$ 连续的区间上解存在且唯一、可整体延拓，没有奇解——这与可分离方程可能出现丢解形成对比。",
+      "长期行为：当 $P>0$ 在远端恒成立时差项 $Ce^{-\\int P}$ 趋于 0，所有解曲线向特解 $y_p$ 靠拢，稳态由 $y_p$ 决定。"
+    ],
+    "propertiesEn": [
+      "Standard form: normalize the coefficient of $y'$ to 1 first, adjusting $P,Q$ accordingly (or recognize an exact derivative).",
+      "The integrating factor $\\mu=e^{\\int P\\,dx}$ is positive, so multiplication is an equivalent transformation that neither creates nor loses solutions.",
+      "General solution = homogeneous general solution + one particular solution; the difference of any two solutions is homogeneous, and the initial value determines $C$ uniquely.",
+      "Where $P$ and $Q$ are continuous the solution exists and is unique on the whole interval, with no singular solutions — in contrast with separable equations, where solutions can be lost.",
+      "Long-term behavior: if $P>0$ far out, the difference term $Ce^{-\\int P}$ decays to 0, all solution curves approach the particular solution $y_p$, and $y_p$ governs the steady state."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "x - y",
+      "xRange": [-3, 3],
+      "yRange": [-3, 3],
+      "initial": [
+        { "x": 0, "y": 0, "color": "#ff6b9d", "label": "y(0)=0" },
+        { "x": 0, "y": 2, "color": "#06d6a0", "label": "y(0)=2" }
+      ],
+      "title": "斜率场 y′ = x − y（即 y′+y=x）与两条解曲线：都趋于特解 y = x − 1"
+    },
+    "examples": [
+      {
+        "problem": "求方程 $y'+2xy=x$ 的通解。",
+        "solution": "这里 $P(x)=2x$，$Q(x)=x$。取积分因子\n$$\\mu(x)=e^{\\int 2x\\,dx}=e^{x^{2}},$$\n方程两边乘 $\\mu$ 得 $\\left(e^{x^{2}}y\\right)'=xe^{x^{2}}$。两边积分：\n$$e^{x^{2}}y=\\int xe^{x^{2}}dx=\\frac12e^{x^{2}}+C,$$\n所以通解为\n$$y=\\frac12+Ce^{-x^{2}}.$$\n通解由齐次解 $Ce^{-x^{2}}$ 与特解 $\\frac12$ 组成；当 $x\\to\\infty$ 时 $Ce^{-x^{2}}\\to0$，所有解都趋于 $\\frac12$。"
+      },
+      {
+        "problem": "解初值问题 $xy'+y=x^{2}\\ (x>0),\\ y(1)=2$。",
+        "solution": "化标准形（两边除以 $x$）：$y'+\\frac1x y=x$，积分因子 $\\mu=e^{\\int\\frac{dx}{x}}=x$。也可直接观察出 $xy'+y=(xy)'$，于是\n$$(xy)'=x^{2}\\ \\Longrightarrow\\ xy=\\frac{x^{3}}{3}+C\\ \\Longrightarrow\\ y=\\frac{x^{2}}{3}+\\frac{C}{x}.$$\n代入 $y(1)=2$：$2=\\frac13+C$，得 $C=\\frac53$，故\n$$y=\\frac{x^{2}}{3}+\\frac{5}{3x}.$$\n验算：$y'=\\frac{2x}{3}-\\frac{5}{3x^{2}}$，$xy'+y=\\frac{2x^{2}}{3}-\\frac{5}{3x}+\\frac{x^{2}}{3}+\\frac{5}{3x}=x^{2}$，方程成立。"
+      }
+    ],
+    "tags": ["一阶线性方程", "积分因子", "通解公式"],
+    "links": ["ode-basic-concepts", "separable-ode", "homogeneous-ode", "linear-ode-theory", "bernoulli-equation"]
+  }
+]

@@ -1,0 +1,779 @@
+[
+  {
+    "id": "figures-motion-elementary",
+    "title": "图形的运动",
+    "titleEn": "Motion of Figures",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "平移、旋转和轴对称，是图形在平面里「动起来」的三种方式：位置变了，形状和大小不变。",
+    "summaryEn": "Translation, rotation and axial symmetry are the three ways a figure moves in the plane: its position changes, while its shape and size stay the same.",
+    "definition": "长方形、正方形、圆这些图形，除了安安静静地「待」在那里，还能在平面上**动起来**。小学里最常见的三种运动是：**平移**、**旋转**和**轴对称**。它们有一个共同点：动过之后，图形的**形状和大小都不变**，改变的只是位置或方向。\n\n把图形沿着一条直线移动，叫做**平移**。说平移，必须说清两件事：往哪个**方向**移、一共移了多**远**（距离）。比如电梯载着人笔直地上升，就是在做平移；小汽车在笔直的马路上向前开 10 米，车身的图形也平移了 10 米。平移**只改变位置，不改变形状和大小**：平移前后两个图形一模一样，能完全重合；每个点都朝同一个方向移动同样远，所以对应点之间的连线互相平行、并且一样长。\n\n图形绕着一个点（或一条轴）转动，叫做**旋转**。说旋转，要说清三件事：绕哪个点转（**旋转中心**）、往哪个方向转（**顺时针**或**逆时针**）、转了多少度（**角度**）。例如「钟面上的一根指针绕中心顺时针旋转 90°」。旋转前后，图形的形状和大小也**不改变**，只是转了方向。\n\n如果一个图形沿着一条直线对折，直线两边的部分能**完全重合**，这个图形就是**轴对称图形**，这条直线叫做它的**对称轴**。常见图形的对称轴条数要记牢：长方形 **2 条**，正方形 **4 条**，等腰三角形 **1 条**，等边三角形 **3 条**，圆有**无数条**。",
+    "definitionEn": "Rectangles, squares and circles do not just sit still—they can **move** in the plane. The three movements met in primary school are **translation**, **rotation** and **axial symmetry**. They share one feature: after the movement the **shape and size of the figure do not change**; only its position or direction does.\n\nSliding a figure along a straight line is a **translation**. To describe one, you must say two things: in which **direction** it moves and how **far** it goes. A lift carrying people straight up is translating; a car driving 10 metres along a straight road translates the car's shape by 10 metres. A translation **changes only the position, never the shape or size**: the figure and its image fit exactly on top of each other, and the segments joining corresponding points are parallel and equal.\n\nTurning a figure about a point (or an axis) is a **rotation**. To describe one, say three things: about which point (the **centre of rotation**), in which direction (**clockwise** or **anticlockwise**), and through what **angle**—for example, 'a clock hand rotates 90° clockwise about the centre'. A rotation also leaves the shape and size unchanged; only the direction turns.\n\nIf a figure can be folded along a straight line so that the two parts **coincide exactly**, it is **axially symmetric**, and that line is called its **axis of symmetry**. Remember the numbers of axes: a rectangle has **2**, a square **4**, an isosceles triangle **1**, an equilateral triangle **3**, and a circle has **infinitely many**.",
+    "formulas": [
+      {
+        "latex": "\\text{平移：只改变位置，不改变形状和大小}",
+        "note": "平移由**方向**和**距离**决定；对应点之间的连线互相平行，并且一样长。",
+        "noteEn": "A translation is fixed by a **direction** and a **distance**; the segments joining corresponding points are parallel and equal."
+      },
+      {
+        "latex": "\\text{旋转：绕一个点转动（中心、方向、角度）}",
+        "note": "说清绕哪个点（旋转中心）、顺时针还是逆时针、转了多少度；旋转后形状和大小不变。",
+        "noteEn": "State the centre of rotation, the direction (clockwise or anticlockwise) and the angle; the shape and size stay the same."
+      },
+      {
+        "latex": "\\text{轴对称：沿一条直线对折，两边完全重合}",
+        "note": "对折后两边能完全重合的图形叫轴对称图形，折痕所在的直线叫对称轴。",
+        "noteEn": "A figure whose two halves coincide when folded along a line is axially symmetric; the crease is its axis of symmetry."
+      },
+      {
+        "latex": "\\text{对称轴条数：长方形 }2,\\ \\text{正方形 }4,\\ \\text{等腰三角形 }1,\\ \\text{等边三角形 }3,\\ \\text{圆无数条}",
+        "note": "这是常见考点，最好动手折一折、数一数，再记牢。",
+        "noteEn": "A classic test point: fold the shapes and count, then memorise the numbers."
+      }
+    ],
+    "properties": [
+      "平移只改变图形的位置，不改变形状和大小；说清方向和距离，平移就确定了。",
+      "旋转只改变图形的方向（位置也可能改变），形状和大小不变；描述旋转要说出中心、方向和角度。",
+      "轴对称图形沿对称轴对折后，两边能完全重合；对称轴两边的图形形状相同、大小相等。",
+      "长方形有 2 条对称轴，正方形有 4 条，等腰三角形有 1 条，等边三角形有 3 条，圆有无数条对称轴。",
+      "生活中的例子：电梯上下运行是平移，钟表指针的转动是旋转，蝴蝶的左右两只翅膀关于身体中线成轴对称。"
+    ],
+    "propertiesEn": [
+      "A translation changes only the position of a figure, not its shape or size; a direction and a distance determine it completely.",
+      "A rotation changes the direction (and possibly the position) of a figure but keeps its shape and size; describe it by centre, direction and angle.",
+      "Folding an axially symmetric figure along its axis makes the two halves coincide exactly; the two sides have the same shape and size.",
+      "A rectangle has 2 axes of symmetry, a square 4, an isosceles triangle 1, an equilateral triangle 3, and a circle infinitely many.",
+      "Everyday examples: a lift moving up and down is a translation, a clock hand turning is a rotation, and a butterfly's wings are axially symmetric about its centre line."
+    ],
+    "examples": [
+      {
+        "problem": "下面三种现象各属于哪种运动？① 电梯笔直地上升；② 钟表的指针转动；③ 蝴蝶的左右两只翅膀。",
+        "solution": "① 电梯沿直线向上移动，是**平移**：只改变位置，形状和大小不变，方向是「向上」，距离就是上升的高度。② 指针绕着中心转动，是**旋转**：旋转中心是表盘的中心，方向是顺时针。③ 蝴蝶的左右翅膀沿身体中间的那条线对折后能完全重合，是**轴对称**，这条线就是对称轴。"
+      },
+      {
+        "problem": "填一填常见图形的对称轴条数：长方形（ ）条，正方形（ ）条，等腰三角形（ ）条，等边三角形（ ）条，圆（ ）条。",
+        "solution": "长方形 **2 条**（两条对边中点连线所在的直线）；正方形 **4 条**（两条对边中点连线所在的直线，再加上两条对角线所在的直线）；等腰三角形 **1 条**（底边上的高所在的直线）；等边三角形 **3 条**（每条边的中点与对顶点的连线所在的直线）；圆有**无数条**（每条直径所在的直线都是它的对称轴）。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.6,
+        9.0
+      ],
+      "yRange": [
+        -0.4,
+        6.2
+      ],
+      "height": 300,
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1.2,
+              1.0
+            ],
+            [
+              3.6,
+              1.0
+            ],
+            [
+              1.6,
+              2.8
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              5.2,
+              3.2
+            ],
+            [
+              7.6,
+              3.2
+            ],
+            [
+              5.6,
+              5.0
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.0
+          ],
+          "to": [
+            5.2,
+            3.2
+          ],
+          "color": "#ffd166",
+          "width": 1.8,
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.6,
+            1.0
+          ],
+          "to": [
+            7.6,
+            3.2
+          ],
+          "dash": true,
+          "width": 1.2,
+          "color": "rgba(179,136,255,0.65)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.6,
+            2.8
+          ],
+          "to": [
+            5.6,
+            5.0
+          ],
+          "dash": true,
+          "width": 1.2,
+          "color": "rgba(179,136,255,0.65)"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.2,
+            1.0
+          ],
+          "label": "A",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.6,
+            1.0
+          ],
+          "label": "B",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.6,
+            2.8
+          ],
+          "label": "C",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.2,
+            3.2
+          ],
+          "label": "A′",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            7.6,
+            3.2
+          ],
+          "label": "B′",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.6,
+            5.0
+          ],
+          "label": "C′",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.07,
+            1.75
+          ],
+          "text": "原图形",
+          "color": "rgba(220,228,250,0.95)",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            6.4,
+            2.75
+          ],
+          "text": "平移后的图形",
+          "color": "#ff6b9d",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            3.35,
+            2.85
+          ],
+          "text": "平移",
+          "color": "#ffd166",
+          "size": 12
+        }
+      ],
+      "title": "平移：只改变位置，形状和大小不变"
+    },
+    "tags": [
+      "图形的运动",
+      "平移",
+      "旋转",
+      "轴对称",
+      "小学"
+    ],
+    "links": [
+      "axial-symmetry",
+      "central-symmetry-rotation",
+      "congruent-triangles"
+    ]
+  },
+  {
+    "id": "observing-objects",
+    "title": "观察物体",
+    "titleEn": "Observing Objects",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "从前面、上面、左面等不同方向观察同一个物体，看到的形状可能不同；只看一个方向，还不能确定物体是什么样。",
+    "summaryEn": "Looking at one object from the front, from above and from the left may give different shapes, and a single view cannot yet determine the object.",
+    "definition": "站在物体的前面看一看，走到它的上面看一看，再跑到它的侧面看一看，你看到的形状往往不一样。所以观察物体时，一定要先说清**从哪个方向看**，别人才能知道你说的是哪一种样子。\n\n小学里主要从三个方向观察：从**前面（正面）**看、从**上面**看、从**左面（侧面）**看。把每个方向看到的形状分别画下来，就得到「从三个方向看到的图形」。同一个物体，从不同方向看到的形状**可能不同**：一个长方体盒子，从前面看是一个长方形，从上面看是另一个长方形，从左面看又是大小不同的长方形。当然也可能**相同**：正方体从前面、上面、左面看，都是正方形。\n\n特别要注意：只根据**一个**方向看到的图形，**不能确定**物体的形状。比如从前面看到的是一个正方形，这个物体可能是正方体，也可能是一个「前面看是正方形、其实很薄」的方盒子，还可能是别的立体图形；只有结合从上面、从左面看到的图形，才能确定它到底长什么样。\n\n「搭积木」也要用这个本领：用同样的小正方体搭出符合要求的立体图形。可以**先照从上面看到的形状摆好「占地」的位置**，再**按从前面、左面看到的形状一层层往上加高**，就能搭出正确的图形。观察时眼睛要正对着物体看（视线与观察的那个面垂直），才不容易看错形状。",
+    "definitionEn": "Stand in front of an object, then above it, then to its side: the shapes you see are often different. That is why, when observing an object, you must say **from which direction** you are looking.\n\nIn primary school we observe from three directions: from the **front**, from **above** and from the **left**. Drawing the shape seen from each direction gives the 'three views'. The same object may look **different** from different directions—a cuboid is one rectangle from the front, another from above and a third from the left—or **the same**: a cube looks like a square from all three directions.\n\nOne important warning: the shape seen from **a single** direction **cannot determine** the object. A square seen from the front may come from a cube, from a very thin box whose front face is a square, or from other solids; only the views from above and from the left settle the question.\n\nBuilding with unit cubes uses the same skill: **place the cubes according to the view from above (the 'footprint'), then add layers according to the views from the front and from the left**. Keep your line of sight perpendicular to the face you are observing, so the shape is not distorted.",
+    "formulas": [
+      {
+        "latex": "\\text{观察方向：从前面（正面）、从上面、从左面（侧面）}",
+        "note": "从三个方向观察同一个物体；看到的形状常常不同，也可能相同（例如正方体）。",
+        "noteEn": "Observe one object from three directions; the shapes are often different, though they may coincide (as for a cube)."
+      },
+      {
+        "latex": "\\text{只看一个方向} \\Rightarrow \\text{不能确定物体的形状}",
+        "note": "例如从前面看是正方形，物体可能是正方体，也可能是很薄的长方体；要综合几个方向才能确定。",
+        "noteEn": "For instance a square seen from the front may come from a cube or from a thin cuboid; several views together are needed."
+      },
+      {
+        "latex": "\\text{从前面看：长}\\times\\text{高},\\quad \\text{从上面看：长}\\times\\text{宽},\\quad \\text{从左面看：宽}\\times\\text{高}",
+        "note": "以长方体为例：三个方向看到的长方形由不同的两条棱决定，所以大小通常不一样。",
+        "noteEn": "For a cuboid the three rectangles are fixed by different pairs of edges (length, width, height), so their sizes usually differ."
+      }
+    ],
+    "properties": [
+      "从前面（正面）、上面、左面三个方向观察同一个物体，看到的形状可能不同。",
+      "只根据一个方向看到的图形，不能确定物体的形状；要看多个方向（通常三个方向）才行。",
+      "不同方向看到的形状有时也会相同，例如正方体从前面、上面、左面看都是正方形。",
+      "用同样的小正方体搭图形：先照从上面看到的形状摆好位置，再按从前面、左面看到的样子确定每一处的高度。",
+      "观察时眼睛要正对物体，视线与要观察的那个面垂直，看到的形状才不会变形。"
+    ],
+    "propertiesEn": [
+      "Looking at the same object from the front, from above and from the left may give different shapes.",
+      "One direction alone cannot determine the shape of an object; several views (usually three) are needed.",
+      "The views sometimes coincide—a cube looks like a square from the front, from above and from the left.",
+      "When building with unit cubes: first place them according to the view from above, then fix the height of every position using the front and left views.",
+      "Keep your eyes straight in front of the object, with the line of sight perpendicular to the face, so the shape is not distorted."
+    ],
+    "examples": [
+      {
+        "problem": "一个长方体木块，长 6 厘米、宽 4 厘米、高 2 厘米。从前面、上面、左面看，各看到什么形状？（说清边长）",
+        "solution": "从前面看：长 6 厘米、高 2 厘米的长方形；从上面看：长 6 厘米、宽 4 厘米的长方形；从左面看：宽 4 厘米、高 2 厘米的长方形。三个方向看到的都是长方形，但大小不同，所以观察时一定要说清方向。"
+      },
+      {
+        "problem": "小丽从前面看一个物体，看到的是一个正方形。她说：「这个物体一定是正方体。」她说的对吗？为什么？",
+        "solution": "不对。从**一个**方向看到的图形**不能确定**物体的形状：从前面看是正方形，它可能是一个正方体，也可能是一个「前面是正方形、但很薄」的长方体盒子，还可能是别的立体图形。要多看几个方向——比如再从上面、从左面看——才能确定它到底是什么样子。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.5,
+        10.5
+      ],
+      "yRange": [
+        -0.2,
+        5.2
+      ],
+      "height": 300,
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.3,
+              2.6
+            ],
+            [
+              3.3,
+              2.6
+            ],
+            [
+              3.3,
+              4.6
+            ],
+            [
+              0.3,
+              4.6
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              4.4,
+              3.0
+            ],
+            [
+              7.4,
+              3.0
+            ],
+            [
+              7.4,
+              4.6
+            ],
+            [
+              4.4,
+              4.6
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              8.5,
+              2.6
+            ],
+            [
+              10.1,
+              2.6
+            ],
+            [
+              10.1,
+              4.6
+            ],
+            [
+              8.5,
+              4.6
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.12)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.8,
+            1.9
+          ],
+          "text": "从前面看",
+          "color": "#4cc9f0",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            5.9,
+            1.9
+          ],
+          "text": "从上面看",
+          "color": "#ff6b9d",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            9.3,
+            1.9
+          ],
+          "text": "从左面看",
+          "color": "#06d6a0",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            5.3,
+            0.5
+          ],
+          "text": "同一个长方体，从不同方向看到的形状可能不同",
+          "color": "rgba(220,228,250,0.95)",
+          "size": 11
+        }
+      ],
+      "title": "从三个方向观察同一个长方体"
+    },
+    "tags": [
+      "观察物体",
+      "从不同方向看",
+      "三视图",
+      "搭积木",
+      "小学"
+    ],
+    "links": [
+      "projection-view",
+      "solid-figures-elementary",
+      "solid-volume-elementary"
+    ]
+  },
+  {
+    "id": "statistics-charts",
+    "title": "统计图表",
+    "titleEn": "Statistical Charts",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "条形统计图看多少，折线统计图看变化，扇形统计图看关系——三种统计图各有各的本领。",
+    "summaryEn": "Bar charts show amounts, line charts show change, and pie charts show parts of a whole—each chart has its own job.",
+    "definition": "收集来的数据像一堆散乱的珠子，把它画成**统计图**就一眼看明白了。小学常用的统计图有三种：**条形统计图**、**折线统计图**和**扇形统计图**。其中**条形统计图**用直条的**长短**表示数量的多少：直条越长，数量越多。它最大的优点是能**清楚地看出数量的多少**，比较谁多谁少最方便。\n\n**折线统计图**把每个数据用一个点标出来，再用线段顺次连起来。它不但能看出数量的多少，还能**清楚地看出数量增减变化的趋势**：折线往上走，说明数量在增加；往下走，说明数量在减少。记录气温、身高等随时间变化的数据，用折线统计图最合适。\n\n**扇形统计图**把整个圆看成总数（100%），每一个扇形表示一部分。它能**清楚地反映出各部分数量与总数之间的关系**，也就是各部分占总数的百分之几；所有扇形的百分比加起来，正好是 100%。\n\n统计图还分**单式**和**复式**：只画一组数据的是单式统计图；把两组或几组数据画在一张图里的是复式统计图，便于比较。画统计图的一般步骤是：**收集数据 → 整理数据 → 制成统计表 → 画出统计图**；画好后别忘了写标题、标出数量和单位。",
+    "definitionEn": "Data collected look like scattered beads; once drawn as a **statistical chart** they are clear at a glance. Primary school uses three charts by shape: the **bar chart**, the **line chart** and the **pie chart**. A **bar chart** uses the **length** of the bars for amounts: the longer the bar, the larger the amount. Its great strength is showing **how much**—comparing amounts is easiest with bars.\n\nA **line chart** marks every value with a point and joins the points in order with segments. It shows not only how much, but also **the trend of increase and decrease**: a rising line means the amount is growing, a falling line means it is shrinking. For data that change over time, such as temperature or height, a line chart fits best.\n\nA **pie chart** takes the whole circle as the total (100%), each sector standing for one part. It shows **the relation between each part and the whole**—what percentage of the total each part takes; all sectors add up to exactly 100%.\n\nCharts also come in **single** and **multiple** forms: a single chart shows one set of data, while a multiple chart puts two or more sets into one picture for easy comparison. The usual steps: **collect the data, sort the data, make a table, draw the chart**—and do not forget the title, the numbers and the unit.",
+    "formulas": [
+      {
+        "latex": "\\text{条形统计图：直条的长短表示数量的多少}",
+        "note": "能清楚地看出数量的多少，最适合比较谁多谁少。",
+        "noteEn": "Shows amounts clearly; the best choice for comparing more and less."
+      },
+      {
+        "latex": "\\text{折线统计图：数量的多少} + \\text{增减变化的趋势}",
+        "note": "折线往上走就是增加、往下走就是减少；看变化趋势它最拿手。",
+        "noteEn": "A rising line means increase, a falling line means decrease; no chart shows a trend better."
+      },
+      {
+        "latex": "\\text{扇形统计图：各部分数量与总数之间的关系}",
+        "note": "整个圆表示总数 100%，每个扇形表示一部分占总数的百分之几。",
+        "noteEn": "The circle is the total 100%, and each sector is one part's share of the whole."
+      },
+      {
+        "latex": "\\text{每部分占总数的百分比} = \\dfrac{\\text{该部分的数量}}{\\text{总数}} \\times 100\\%",
+        "note": "所有部分的百分比相加正好等于 100%，可以用来检查扇形统计图画得对不对。",
+        "noteEn": "All the percentages add up to 100%, which checks whether a pie chart is drawn correctly."
+      }
+    ],
+    "properties": [
+      "条形统计图能清楚地看出数量的多少：直条越长，数量越多。",
+      "折线统计图不但能看出数量的多少，还能清楚地看出数量增减变化的趋势。",
+      "扇形统计图能清楚地反映出各部分数量与总数之间的关系；各部分的百分比之和是 100%。",
+      "只画一组数据的叫单式统计图，两组或多组数据画在一起的是复式统计图，便于比较。",
+      "画统计图的步骤：收集数据、整理数据、制成统计表、画出统计图。"
+    ],
+    "propertiesEn": [
+      "A bar chart shows amounts clearly: the longer the bar, the larger the amount.",
+      "A line chart shows not only the amounts but also the trend of increase and decrease.",
+      "A pie chart shows the relation between each part and the whole; the percentages add up to 100%.",
+      "A single chart shows one set of data; a multiple chart shows two or more sets together for easy comparison.",
+      "Steps for drawing a chart: collect the data, sort the data, make a table, draw the chart."
+    ],
+    "examples": [
+      {
+        "problem": "下面三种情况，各选用哪种统计图最合适？① 统计全班同学最喜欢的水果各有几人；② 记录某地一周每天的最高气温，想看出气温的升降变化；③ 统计全班同学各种血型的人数各占总人数的百分之几。",
+        "solution": "① 要比出各种水果人数的多少，用**条形统计图**；② 要看一周气温的增减变化趋势，用**折线统计图**；③ 要看各部分数量与总数之间的关系（百分比），用**扇形统计图**。"
+      },
+      {
+        "problem": "六（1）班共有 40 人，其中喜欢打篮球的有 16 人。在扇形统计图中，喜欢打篮球的人数对应的扇形占总数的百分之几？",
+        "solution": "各部分占总数的百分比 = 该部分的数量 ÷ 总数 × 100% = $16 \\div 40 \\times 100\\% = 0.4 \\times 100\\% = 40\\%$。所以喜欢打篮球的扇形占整个圆的 40%，其余部分合计占 60%，加起来正好 100%。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x + 2*abs(x - 2*floor(x/2) - 1)",
+          "color": "#4cc9f0",
+          "label": "一周气温（℃）"
+        }
+      ],
+      "xRange": [
+        0,
+        6
+      ],
+      "yRange": [
+        0,
+        9
+      ],
+      "title": "折线统计图：一周气温的增减变化"
+    },
+    "tags": [
+      "统计",
+      "条形统计图",
+      "折线统计图",
+      "扇形统计图",
+      "小学"
+    ],
+    "links": [
+      "data-collection",
+      "data-analysis",
+      "average-elementary",
+      "percentage-elementary"
+    ]
+  },
+  {
+    "id": "average-elementary",
+    "title": "平均数",
+    "titleEn": "The Average",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "平均数 = 总数量 ÷ 总份数；它代表一组数据的整体水平，但特别大或特别小的数会影响它。",
+    "summaryEn": "The average equals the total amount divided by the number of items; it stands for the overall level of a data set, though extreme values can affect it.",
+    "definition": "老师说「这次全班数学平均分是 85 分」，跳绳比赛要算「平均每人跳多少个」……这里的**平均数**，是代表一组数据**整体水平**的数：把所有的数据先**合起来**，再**平均分**给每一份，就得到平均数。\n\n求平均数一般有两种办法。一种是**移多补少**：把多的移一些给少的，直到每一份都一样多，这个一样多的数就是平均数；另一种是**计算法**：**平均数 = 总数量 ÷ 总份数**。例如 3、4、8、9 四个数的平均数 $=(3+4+8+9)\\div 4=24\\div 4=6$。\n\n平均数代表一组数据的整体水平，但它**不一定**等于其中某个数据（上面的 6 就不在 3、4、8、9 里），它总落在最小的数与最大的数之间。**平均数容易受极端值影响**：如果一个班里有一位同学个子特别高，全班的平均身高就会被这个「极端值」拉高，这时用平均数代表全班的水平就要小心一些。\n\n平均数在生活中用处很多：平均分、平均身高、平均速度。注意**平均速度 = 总路程 ÷ 总时间**，不能把几个速度直接相加再除以个数——要先算「一共走了多远」，再算「一共用了多少时间」。",
+    "definitionEn": "A teacher says, 'The class average in maths is 85.' A skipping contest asks, 'How many skips per person on average?' The **average** stands for the **overall level** of a data set: add the data together, then share the total equally among all the items.\n\nThere are two ways to find it. **'Move more to fill less'**: shift amounts from the larger values to the smaller ones until all are equal; that common value is the average. Or **compute**: **average = total amount ÷ number of items**. The average of 3, 4, 8 and 9 is $(3+4+8+9)\\div 4=24\\div 4=6$.\n\nThe average represents the overall level, but it **need not equal any of the data values** (6 is not among 3, 4, 8, 9); it always lies between the smallest and the largest value. An **extreme value strongly affects the average**: one very tall pupil pulls the average height up, so read such an average with care.\n\nAverages appear everywhere: average score, average height, average speed. Note that **average speed = total distance ÷ total time**; you cannot simply average the separate speeds—first find the whole distance, then the whole time.",
+    "formulas": [
+      {
+        "latex": "\\text{平均数} = \\text{总数量} \\div \\text{总份数}",
+        "note": "求平均数：先把一组数据全部加起来求出总数量，再除以数据的个数（总份数）。",
+        "noteEn": "To find an average, add all the data to get the total, then divide by how many items there are."
+      },
+      {
+        "latex": "(3+4+8+9) \\div 4 = 24 \\div 4 = 6",
+        "note": "3、4、8、9 的平均数是 6；6 并不在这四个数里，说明平均数不一定等于原来某个数据。",
+        "noteEn": "The average of 3, 4, 8, 9 is 6; 6 is not among them, so an average need not equal any original value."
+      },
+      {
+        "latex": "\\text{平均速度} = \\text{总路程} \\div \\text{总时间}",
+        "note": "例：上山每小时 2 千米、下山每小时 6 千米，往返的平均速度是 3 千米/时，而不是 4 千米/时。",
+        "noteEn": "Example: 2 km/h uphill and 6 km/h downhill give an average speed of 3 km/h, not 4 km/h."
+      },
+      {
+        "latex": "\\text{移多补少：把多的移一些给少的，使每份一样多}",
+        "note": "这是求平均数最直观的办法；移完以后每份一样多的那个数，就是平均数。",
+        "noteEn": "The most intuitive method: move from the bigger to the smaller until all are equal; that common value is the average."
+      }
+    ],
+    "properties": [
+      "平均数 = 总数量 ÷ 总份数；求平均数先求和，再除以数据的个数。",
+      "平均数代表一组数据的整体水平，它不一定等于其中任何一个数据。",
+      "平均数一定在最小的数据和最大的数据之间（可以与它们相等）。",
+      "平均数容易受极端值影响：个别特别大或特别小的数据会把平均数拉高或拉低。",
+      "平均速度 = 总路程 ÷ 总时间，不能把几个速度直接平均。"
+    ],
+    "propertiesEn": [
+      "Average = total amount ÷ number of items; add the data first, then divide by how many there are.",
+      "The average stands for the overall level of a data set and need not equal any single data value.",
+      "The average always lies between the smallest and the largest value (endpoints included).",
+      "The average is easily affected by extreme values: one very large or very small value pulls it up or down.",
+      "Average speed = total distance ÷ total time; the separate speeds cannot be averaged directly."
+    ],
+    "examples": [
+      {
+        "problem": "四（1）班第一小组同学一分钟跳绳的成绩是 132、145、128、135 个。这组成绩的平均数是多少？",
+        "solution": "总数量 $=132+145+128+135=540$（个），总份数是 4，所以平均数 $=540\\div 4=135$（个）。它表示这个小组一分钟跳绳的整体水平大约是 135 个。（135 恰好等于其中一个数据，但平均数并不一定等于某个数据。）"
+      },
+      {
+        "problem": "小明上山时每小时走 2 千米，沿原路下山时每小时走 6 千米。有人说「往返的平均速度就是 $(2+6)\\div 2=4$ 千米/时」，对吗？",
+        "solution": "不对。假设山路长 6 千米：上山用 $6\\div 2=3$（小时），下山用 $6\\div 6=1$（小时）；往返的总路程 $=6+6=12$（千米），总时间 $=3+1=4$（小时），所以平均速度 $=$ 总路程 $\\div$ 总时间 $=12\\div 4=3$（千米/时），不是 4 千米/时。"
+      }
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        10
+      ],
+      "points": [
+        {
+          "at": 3,
+          "label": "3",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 4,
+          "label": "4",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 8,
+          "label": "8",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 9,
+          "label": "9",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 6,
+          "label": "平均数 6",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "一组数据 3、4、8、9 与它们的平均数 6"
+    },
+    "tags": [
+      "统计",
+      "平均数",
+      "移多补少",
+      "平均速度",
+      "小学"
+    ],
+    "links": [
+      "statistics-charts",
+      "data-analysis",
+      "expectation-variance",
+      "multiplication-division"
+    ]
+  },
+  {
+    "id": "possibility-elementary",
+    "title": "可能性",
+    "titleEn": "Possibility",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "事情的发生有三种情况：一定、可能、不可能；数量越多，可能性越大，用分数还能把可能性的大小说清楚。",
+    "summaryEn": "Events are certain, possible or impossible; more items mean a greater chance, and fractions can describe how likely something is.",
+    "definition": "有些事情**一定**会发生，比如早晨太阳从东方升起；有些事情**不可能**发生，比如太阳从西方升起；还有些事情**可能**发生、也可能不发生，比如「明天会下雨吗」「随手一摸，摸出的是什么颜色的球」。\n\n判断一件事属于哪一种，要先看清**条件**：抛一枚普通的硬币，「正面朝上」和「反面朝上」都可能；掷一枚正常的骰子，「掷出 7 点」是不可能事件，「掷出 3 点」是可能事件。条件变了，结论也会跟着变。\n\n**可能性有大小**。袋子里红球多、白球少，闭上眼睛随便摸一个，摸到红球的**可能性大**，摸到白球的**可能性小**。一般地，**数量越多，可能性越大；数量越少，可能性越小**。\n\n可能性的大小还可以用**分数**表示：袋子里有 3 个红球和 1 个白球，一共 4 个球，每个球被摸到的机会一样，那么摸到红球的可能性是 $\\frac{3}{4}$，摸到白球的可能性是 $\\frac{1}{4}$。两个人做游戏要**公平**，就得让双方获胜的可能性相等；可能性不相等，游戏就不公平。",
+    "definitionEn": "Some things are **certain** to happen, like the Sun rising in the east in the morning; some are **impossible**, like the Sun rising in the west; and some **may or may not** happen, like 'Will it rain tomorrow?' or 'What colour ball will I draw?'\n\nTo decide which case an event belongs to, look at the **conditions**. With an ordinary coin, heads and tails are both possible, while 'throwing 7' is impossible; with a normal die, 'rolling a 7' is impossible and 'rolling a 3' is possible. Change the conditions, and the answer changes too.\n\n**Chances have sizes.** If a bag holds many red balls and few white ones, a blind draw is more likely to give red. In general, **more items mean a greater chance; fewer items mean a smaller chance**.\n\nA fraction can tell how big a chance is: with 3 red and 1 white ball, 4 balls in all, every ball equally likely to be drawn, the chance of drawing red is $\\frac{3}{4}$ and of drawing white is $\\frac{1}{4}$. For a game to be **fair**, both players must have equal chances; if the chances differ, the game is unfair.",
+    "formulas": [
+      {
+        "latex": "\\text{一定}\\text{、}\\text{可能}\\text{、}\\text{不可能}",
+        "note": "事情的发生有三种情况：一定（必然发生）、可能（也许发生、也许不发生）、不可能（绝不会发生）。",
+        "noteEn": "Three cases: certain (must happen), possible (may or may not happen) and impossible (never happens)."
+      },
+      {
+        "latex": "\\text{数量越多} \\Rightarrow \\text{可能性越大};\\qquad \\text{数量越少} \\Rightarrow \\text{可能性越小}",
+        "note": "摸球、转转盘、抽签都用这一条来判断可能性的大小。",
+        "noteEn": "Drawing balls, spinning a wheel or drawing lots—all judged by this rule."
+      },
+      {
+        "latex": "\\text{摸到红球的可能性} = \\dfrac{3}{3+1} = \\dfrac{3}{4}",
+        "note": "袋中 3 个红球、1 个白球，共 4 个球：摸到红球的可能性是 3/4，摸到白球的可能性是 1/4。",
+        "noteEn": "With 3 red and 1 white ball (4 in all): drawing red has chance 3/4, drawing white 1/4."
+      },
+      {
+        "latex": "\\text{游戏公平} \\iff \\text{双方获胜的可能性相等}",
+        "note": "可能性相等，游戏才公平；不相等就不公平，可能性大的那一方占便宜。",
+        "noteEn": "A game is fair exactly when both sides have an equal chance; unequal chances favour the side with the larger chance."
+      }
+    ],
+    "properties": [
+      "一件事的发生有三种情况：一定、可能、不可能。",
+      "数量越多，可能性越大；数量越少，可能性越小。",
+      "可能性的大小可以用分数表示：袋中 3 个红球、1 个白球时，摸到红球的可能性是 3/4，摸到白球的可能性是 1/4。",
+      "游戏规则公平的条件是各方获胜的可能性相等；可能性不相等，游戏就不公平。",
+      "「一定」和「不可能」是两种确定的情况；比较可能性大小，是就那些「可能发生、也可能不发生」的事情来说的。"
+    ],
+    "propertiesEn": [
+      "An event may be certain, possible or impossible.",
+      "The more items there are, the greater the chance; the fewer, the smaller.",
+      "A chance can be written as a fraction: with 3 red and 1 white ball, drawing red has chance 3/4 and white 1/4.",
+      "A game is fair exactly when all sides have an equal chance of winning; unequal chances make it unfair.",
+      "'Certain' and 'impossible' are settled outcomes; comparing chances applies to events that may or may not happen."
+    ],
+    "examples": [
+      {
+        "problem": "判断下面的说法对不对：① 明天可能下雨；② 太阳不可能从西边升起；③ 抛一枚普通硬币，一定正面朝上。",
+        "solution": "① 对。「明天可能下雨」表示明天下雨和不下雨都有可能，用「可能」描述。② 对。太阳从西边升起是绝不会发生的事情，用「不可能」描述。③ 不对。抛硬币时正面朝上只是**可能**发生，反面朝上也同样可能，两种结果的可能性相等，不能说「一定」。"
+      },
+      {
+        "problem": "袋子里有 3 个红球和 1 个白球（大小、形状和质地都一样），闭上眼睛任意摸出一个球。① 摸到红球的可能性大，还是摸到白球的可能性大？② 摸到红球、摸到白球的可能性各是几分之几？③ 用这个袋子做「摸到红球甲赢、摸到白球乙赢」的游戏，公平吗？",
+        "solution": "① 一共有 $3+1=4$ 个球，红球比白球多，所以摸到红球的**可能性大**。② 每个球被摸到的机会一样：摸到红球的可能性是 $\\frac{3}{4}$，摸到白球的可能性是 $\\frac{1}{4}$。③ 因为 $\\frac{3}{4}\\ne\\frac{1}{4}$，甲、乙获胜的可能性不相等，所以这个游戏**不公平**（甲赢的机会大）。"
+      }
+    ],
+    "tags": [
+      "统计",
+      "可能性",
+      "一定",
+      "可能",
+      "不可能",
+      "公平",
+      "小学"
+    ],
+    "links": [
+      "probability-basics",
+      "fractions-elementary",
+      "statistics-charts",
+      "data-analysis"
+    ]
+  },
+  {
+    "id": "chicken-rabbit",
+    "title": "鸡兔同笼",
+    "titleEn": "The Chicken-and-Rabbit Problem",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "鸡兔同笼问题：用「假设—比较—调整」的假设法，算出笼子里鸡和兔各有几只。",
+    "summaryEn": "The classic chicken-and-rabbit problem, solved by the 'assume, compare, adjust' method.",
+    "definition": "大约 1500 年前，我国数学名著《孙子算经》里有这样一道题：「今有雉兔同笼，上有三十五头，下有九十四足，问雉兔各几何？」意思是：笼子里有鸡和兔一共 35 只，从上面数有 35 个头，从下面数有 94 只脚，鸡和兔各有多少只？这就是有名的**鸡兔同笼**问题。\n\n解决它的巧妙办法叫**假设法**，口诀是「**先假设，再比较，后调整**」。假设 35 只**全是鸡**：每只鸡 2 只脚，一共 $35\\times 2=70$ 只脚；可实际有 94 只脚，比 70 多了 $94-70=24$ 只脚。为什么会少算？因为把一只兔当成鸡来算，就少算了 $4-2=2$ 只脚。少算的 24 只脚里有多少个 2，就有多少只兔：$24\\div 2=12$，所以兔有 12 只，鸡有 $35-12=23$ 只。验算：$23\\times 2+12\\times 4=46+48=94$（只脚），$23+12=35$（个头），完全符合。\n\n也可以假设 35 只**全是兔**：一共 $35\\times 4=140$ 只脚，比 94 多 $140-94=46$ 只；每把一只鸡当成兔就多算 2 只脚，所以鸡有 $46\\div 2=23$ 只，兔有 $35-23=12$ 只，答案一样。除了假设法，还可以用**列表法**（一个一个试，直到脚数对上）和**方程法**（设鸡有 $x$ 只，兔就有 $35-x$ 只，列方程 $2x+4(35-x)=94$），这些方法以后都会学到。\n\n鸡兔同笼问题的核心思想是**假设—比较—调整**：先大胆假设一个简单情况，和实际比一比，看看差多少；再想一想差的原因——每差 2 只脚，就说明有一只兔被当成了鸡；把差的数除以 2，就调整出了正确答案。生活中很多类似的问题（比如停车场里的自行车和汽车各有多少辆）都能用这个思路解决。",
+    "definitionEn": "About 1500 years ago the Chinese classic *Sunzi Suanjing* posed a famous puzzle: 'In one cage pheasants and rabbits, above 35 heads, below 94 feet—how many of each?' In modern words: chickens and rabbits together number 35, and their feet total 94; how many chickens and how many rabbits are there? This is the classic **chicken-and-rabbit problem**.\n\nThe clever method is **'assume, compare, adjust'**. Suppose all 35 animals are chickens: $35\\times 2=70$ feet, but there are 94, which is $94-70=24$ feet more. Why the shortage? Counting a rabbit as a chicken loses $4-2=2$ feet. The missing 24 feet contain as many 2's as there are rabbits: $24\\div 2=12$, so there are 12 rabbits and $35-12=23$ chickens. Check: $23\\times 2+12\\times 4=46+48=94$ feet and $23+12=35$ heads—everything fits.\n\nAssuming all 35 are rabbits works too: $35\\times 4=140$ feet, which is $140-94=46$ too many; each chicken counted as a rabbit adds 2 extra feet, so there are $46\\div 2=23$ chickens and $35-23=12$ rabbits—the same answer. A **table** (try values until the feet match) or an **equation** (let the chickens be $x$ and the rabbits $35-x$, then $2x+4(35-x)=94$) also work; those methods come later in school.\n\nThe core idea is **assume–compare–adjust**: guess a simple case, compare with the real data, see the gap, then remember that every 2 feet of gap means one rabbit mistaken for a chicken, and divide the gap by 2. Many everyday problems—for instance, how many bicycles and how many cars are in a car park—give way to the same idea.",
+    "formulas": [
+      {
+        "latex": "\\text{假设全是鸡：脚数} = 35 \\times 2 = 70",
+        "note": "假设 35 只全是鸡，每只鸡 2 只脚，先算出一个「假设的」脚数。",
+        "noteEn": "Assume all 35 are chickens, 2 feet each, and compute the 'pretend' total number of feet."
+      },
+      {
+        "latex": "\\text{兔} = (94 - 70) \\div (4 - 2) = 24 \\div 2 = 12",
+        "note": "实际脚数比假设多 24 只；每把一只兔当成鸡就少算 2 只脚，所以差的脚数 ÷ 2 就是兔的只数。",
+        "noteEn": "There are 24 feet more than assumed; each rabbit read as a chicken hides 2 feet, so the gap ÷ 2 gives the number of rabbits."
+      },
+      {
+        "latex": "\\text{鸡} = 35 - 12 = 23",
+        "note": "用总头数减去兔的只数，就得到鸡的只数。",
+        "noteEn": "Subtract the rabbits from the total number of heads to get the chickens."
+      },
+      {
+        "latex": "\\text{假设全是兔：鸡} = (35 \\times 4 - 94) \\div (4 - 2) = 46 \\div 2 = 23",
+        "note": "反过来假设全是兔，也能算出答案，可以用来互相检验。",
+        "noteEn": "Assuming all are rabbits gives the same answer and serves as a check."
+      },
+      {
+        "latex": "23 \\times 2 + 12 \\times 4 = 46 + 48 = 94",
+        "note": "把答案代回题目验算：脚数 94、头数 $23+12=35$，完全符合，答案正确。",
+        "noteEn": "Check by substitution: 94 feet and $23+12=35$ heads match the problem exactly."
+      }
+    ],
+    "properties": [
+      "鸡有 2 只脚，兔有 4 只脚，每只兔比每只鸡多 2 只脚——这是「调整」的关键。",
+      "假设全是鸡时：兔 =（总脚数 − 头数 × 2）÷ 2；假设全是兔时：鸡 =（头数 × 4 − 总脚数）÷ 2。",
+      "解题思路是「假设—比较—调整」：先假设、再比较差多少、最后按「每差 2 只脚对应一只兔」来调整。",
+      "算完要用头数和脚数两个条件各验算一次，答案才保险。",
+      "列表法、画图法、方程法都能解决鸡兔同笼问题；道理明白了，用哪种方法都可以。"
+    ],
+    "propertiesEn": [
+      "A chicken has 2 feet and a rabbit has 4, so every rabbit has 2 feet more than a chicken—the key to adjusting.",
+      "If all are assumed to be chickens: rabbits = (total feet − heads × 2) ÷ 2; if all are assumed to be rabbits: chickens = (heads × 4 − total feet) ÷ 2.",
+      "The method is assume–compare–adjust: suppose, compare the gap, then adjust using 'a gap of 2 feet means one rabbit'.",
+      "Always check the answer against both the number of heads and the number of feet.",
+      "Tables, pictures and equations all solve the problem; once you see why it works, any method is fine."
+    ],
+    "examples": [
+      {
+        "problem": "笼子里有鸡和兔共 35 只，一共有 94 只脚。鸡和兔各有多少只？",
+        "solution": "假设 35 只全是鸡：脚数 $=35\\times 2=70$（只），比 94 少 $94-70=24$（只）。把一只兔当成鸡会少算 $4-2=2$ 只脚，所以兔有 $24\\div 2=12$（只），鸡有 $35-12=23$（只）。验算：$23\\times 2+12\\times 4=46+48=94$（只脚），$23+12=35$（个头），符合题意。（假设全是兔也可以：$140-94=46$，$46\\div 2=23$ 只鸡，$35-23=12$ 只兔。）"
+      },
+      {
+        "problem": "停车场里停着自行车和汽车共 10 辆，每辆自行车有 2 个轮子，每辆汽车有 4 个轮子，一共 28 个轮子。自行车和汽车各有多少辆？",
+        "solution": "假设 10 辆全是自行车：轮子 $=10\\times 2=20$（个），比 28 少 $28-20=8$（个）。把一辆汽车当成自行车会少算 $4-2=2$ 个轮子，所以汽车有 $8\\div 2=4$（辆），自行车有 $10-4=6$（辆）。验算：$6\\times 2+4\\times 4=12+16=28$（个轮子），$6+4=10$（辆），符合题意。"
+      }
+    ],
+    "tags": [
+      "数学广角",
+      "鸡兔同笼",
+      "假设法",
+      "列表法",
+      "小学"
+    ],
+    "links": [
+      "letters-for-numbers",
+      "linear-equation-junior",
+      "linear-system-two-variables",
+      "multiplication-division"
+    ]
+  }
+]

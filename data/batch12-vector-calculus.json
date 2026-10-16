@@ -1,0 +1,654 @@
+[
+  {
+    "id": "line-integral",
+    "title": "曲线积分",
+    "titleEn": "Line Integrals",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "曲线积分把定积分沿区间的累加推广到曲线弧上：第一类对弧长、与方向无关，第二类对坐标、反向变号，是计算功与环流的基本工具。",
+    "summaryEn": "Line integrals extend definite integrals from an interval to a curve arc: the first kind integrates with respect to arc length and ignores orientation, while the second kind integrates coordinates and changes sign when the path is reversed.",
+    "definition": "定积分沿 $x$ 轴上的区间累加；把积分的路径换成平面上一条曲线弧 $L$，就得到**曲线积分**。最基本的是**第一类曲线积分（对弧长的曲线积分）**：设 $L$ 是光滑（或分段光滑）的曲线弧，函数 $f(x,y)$ 在 $L$ 上连续。把 $L$ 任意分成 $n$ 个小弧段，第 $i$ 段的弧长记作 $\\Delta s_i$，在其上任取一点 $(\\xi_i,\\eta_i)$，作和 $\\sum_{i=1}^{n}f(\\xi_i,\\eta_i)\\Delta s_i$。令各小弧段长度的最大值 $\\lambda\\to 0$，若和式的极限存在且与分法、取点都无关，就称它是 $f$ 在 $L$ 上的第一类曲线积分，记作 $\\int_L f(x,y)\\,ds$。若 $f$ 表示曲线形物体的线密度，这个积分就是物体的质量；特别地，当 $f\\equiv 1$ 时，$\\int_L ds$ 就是曲线 $L$ 的弧长。它只依赖曲线本身的形状，**与曲线的方向无关**。\n\n第二类曲线积分（对坐标的曲线积分）来自「变力沿曲线做功」：力 $\\boldsymbol{F}=(P,Q)$ 沿有向曲线 $L$ 所做的功就是 $\\int_L P\\,dx+Q\\,dy$，其中 $\\int_L P\\,dx=\\lim_{\\lambda\\to 0}\\sum P(\\xi_i,\\eta_i)\\Delta x_i$（$\\Delta x_i$ 为第 $i$ 段两端横坐标之差，可正可负）。把它写成参数形式计算最方便：若曲线由 $x=\\varphi(t)$、$y=\\psi(t)$ 给出（$t$ 从 $\\alpha$ 走到 $\\beta$，对应沿曲线从起点走到终点）且光滑，则 $dx=\\varphi'(t)\\,dt$、$dy=\\psi'(t)\\,dt$，于是\n$$\\int_L P\\,dx+Q\\,dy=\\int_\\alpha^\\beta\\Big[P(\\varphi(t),\\psi(t))\\,\\varphi'(t)+Q(\\varphi(t),\\psi(t))\\,\\psi'(t)\\Big]dt.$$\n相应地，第一类曲线积分用 $ds=\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt$ 化为定积分（下限取小参数、上限取大参数，因为 $ds>0$）。第二类曲线积分**与方向有关**：把 $L$ 反向记作 $L^-$，则 $\\int_{L^-}P\\,dx+Q\\,dy=-\\int_L P\\,dx+Q\\,dy$；而第一类积分换方向后不变。\n\n两类曲线积分由曲线在每点的**单位切向量** $(\\cos\\alpha,\\cos\\beta)$ 联系起来：\n$$\\int_L P\\,dx+Q\\,dy=\\int_L(P\\cos\\alpha+Q\\cos\\beta)\\,ds,$$\n这不过是 $dx=\\cos\\alpha\\,ds$、$dy=\\cos\\beta\\,ds$ 的代入：沿切向走一小段 $ds$，它在两个坐标轴上的投影分别是 $dx$ 与 $dy$。两类积分都满足线性与对路径的可加性；把定义平移到空间曲线，只需把 $ds$ 换成 $\\sqrt{x'^2+y'^2+z'^2}\\,dt$，结论完全类似。",
+    "definitionEn": "A definite integral accumulates a function along an interval of the $x$-axis; replacing the interval by a curve arc $L$ in the plane leads to the **line integral**. The basic notion is the **line integral of the first kind** (with respect to arc length). Let $L$ be a smooth (or piecewise smooth) arc and let $f(x,y)$ be continuous on it. Subdivide $L$ into $n$ small arcs of lengths $\\Delta s_i$, take a sample point $(\\xi_i,\\eta_i)$ in the $i$-th arc, and form the sum $\\sum_{i=1}^{n}f(\\xi_i,\\eta_i)\\Delta s_i$. If this sum tends to a limit as $\\lambda\\to 0$ (with $\\lambda$ the largest arc length) that does not depend on the subdivision or the sample points, the limit is the first-kind line integral $\\int_L f(x,y)\\,ds$. If $f$ is a linear density, the integral gives the mass of the curve; in particular, $\\int_L ds$ is the arc length of $L$. It depends only on the curve itself, **not on the direction of traversal**.\n\nThe **line integral of the second kind** (with respect to coordinates), written $\\int_L P\\,dx+Q\\,dy$, comes from the work done by a force along an oriented curve; for instance $\\int_L P\\,dx$ is the limit of $\\sum P(\\xi_i,\\eta_i)\\Delta x_i$, where the increments $\\Delta x_i$ are signed. A parametrization reduces everything to an ordinary definite integral: if $x=\\varphi(t)$, $y=\\psi(t)$, with $t$ running from $\\alpha$ (the starting point) to $\\beta$ (the end point), then $dx=\\varphi'(t)\\,dt$, $dy=\\psi'(t)\\,dt$, and\n$$\\int_L P\\,dx+Q\\,dy=\\int_\\alpha^\\beta\\Big[P(\\varphi(t),\\psi(t))\\,\\varphi'(t)+Q(\\varphi(t),\\psi(t))\\,\\psi'(t)\\Big]dt.$$\nFor the first kind one uses $ds=\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt$ (the lower limit is the smaller parameter value, since $ds>0$). Reversing the orientation changes the sign of the second-kind integral but leaves the first-kind integral unchanged.\n\nThe two kinds are linked by the **unit tangent vector** $(\\cos\\alpha,\\cos\\beta)$ of the oriented curve:\n$$\\int_L P\\,dx+Q\\,dy=\\int_L(P\\cos\\alpha+Q\\cos\\beta)\\,ds,$$\nwhich simply restates $dx=\\cos\\alpha\\,ds$ and $dy=\\cos\\beta\\,ds$. Both kinds are linear and additive over sub-arcs; the same definitions carry over to space curves with $ds=\\sqrt{x'^2+y'^2+z'^2}\\,dt$.",
+    "formulas": [
+      {
+        "latex": "\\int_L f(x,y)\\,ds=\\lim_{\\lambda\\to 0}\\sum_{i=1}^{n}f(\\xi_i,\\eta_i)\\,\\Delta s_i",
+        "note": "第一类曲线积分（对弧长）的定义式：$\\lambda$ 为各小弧段长度的最大值，极限与分法、取点均无关。",
+        "noteEn": "Definition of the first-kind line integral (with respect to arc length); $\\lambda$ is the largest arc length in the subdivision and the limit is independent of the subdivision and the sample points."
+      },
+      {
+        "latex": "ds=\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt,\\qquad \\int_L f\\,ds=\\int_{\\alpha}^{\\beta}f(\\varphi(t),\\psi(t))\\sqrt{\\varphi'^2+\\psi'^2}\\,dt",
+        "note": "用参数方程计算第一类曲线积分；积分下限小于上限，结果与曲线方向无关。",
+        "noteEn": "Computing a first-kind line integral from a parametrization; the lower limit is smaller than the upper one, and the result does not depend on the direction."
+      },
+      {
+        "latex": "\\int_L P\\,dx+Q\\,dy=\\int_{\\alpha}^{\\beta}\\Big[P(\\varphi(t),\\psi(t))\\,\\varphi'(t)+Q(\\varphi(t),\\psi(t))\\,\\psi'(t)\\Big]dt",
+        "note": "计算第二类曲线积分；参数 $t$ 从起点走到终点，方向由参数的走向决定。",
+        "noteEn": "Computing a second-kind line integral; the parameter $t$ runs from the starting point to the end point, so the direction is fixed by the parametrization."
+      },
+      {
+        "latex": "\\int_{L^-}P\\,dx+Q\\,dy=-\\int_{L}P\\,dx+Q\\,dy",
+        "note": "第二类曲线积分反向变号（$L^-$ 表示与 $L$ 方向相反的路径）；第一类积分则与方向无关。",
+        "noteEn": "A second-kind integral changes sign under reversal ($L^-$ is the path with opposite direction); a first-kind integral does not."
+      },
+      {
+        "latex": "\\int_L P\\,dx+Q\\,dy=\\int_L(P\\cos\\alpha+Q\\cos\\beta)\\,ds",
+        "note": "两类曲线积分的关系式；$(\\cos\\alpha,\\cos\\beta)$ 是沿 $L$ 方向的单位切向量。",
+        "noteEn": "Relation between the two kinds of line integral; $(\\cos\\alpha,\\cos\\beta)$ is the unit tangent vector pointing along $L$."
+      }
+    ],
+    "expression": {
+      "text": "∫_L f(x,y) ds（第一类，对弧长）；∫_L P dx + Q dy（第二类，对坐标）",
+      "symbol": "\\int_L f(x,y)\\,ds",
+      "note": "第一类按弧长累加、与方向无关；第二类按坐标累加、与方向有关，反向时变号。",
+      "noteEn": "The first kind accumulates arc length and ignores orientation; the second kind accumulates coordinates and changes sign under reversal."
+    },
+    "properties": [
+      "第一类曲线积分与曲线的方向无关；第二类曲线积分与方向有关，把路径反向时改变符号。",
+      "当 $f\\equiv 1$ 时，$\\int_L ds$ 等于曲线弧长；而 $\\int_L dx=x_B-x_A$、$\\int_L dy=y_B-y_A$，其中 $A$ 是起点、$B$ 是终点。",
+      "可加性：若 $L$ 分成两段 $L_1$、$L_2$，两类积分都满足 $\\int_L=\\int_{L_1}+\\int_{L_2}$。",
+      "线性性：$\\int_L(\\alpha f+\\beta g)\\,ds=\\alpha\\int_L f\\,ds+\\beta\\int_L g\\,ds$，第二类积分同样成立。",
+      "两类积分由切向量的方向余弦联系；$\\int_L P\\,dx+Q\\,dy$ 在物理上就是变力 $\\boldsymbol{F}=(P,Q)$ 沿 $L$ 所做的功，闭环情形下称为环流。"
+    ],
+    "propertiesEn": [
+      "A first-kind line integral is independent of the direction of the curve; a second-kind line integral depends on it and changes sign when the direction is reversed.",
+      "If $f\\equiv 1$, then $\\int_L ds$ is the arc length; also $\\int_L dx=x_B-x_A$ and $\\int_L dy=y_B-y_A$, where $A$ is the start and $B$ the end of the path.",
+      "Additivity: if $L$ is split into two arcs $L_1$ and $L_2$, both kinds satisfy $\\int_L=\\int_{L_1}+\\int_{L_2}$.",
+      "Linearity: $\\int_L(\\alpha f+\\beta g)\\,ds=\\alpha\\int_L f\\,ds+\\beta\\int_L g\\,ds$, and similarly for the second kind.",
+      "The two kinds are connected through the direction cosines of the tangent; physically $\\int_L P\\,dx+Q\\,dy$ is the work done by the force $\\boldsymbol{F}=(P,Q)$ along $L$, called circulation when $L$ is closed."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2",
+          "color": "#4cc9f0",
+          "label": "L：y = x²，0 ≤ x ≤ 1"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        1
+      ],
+      "title": "曲线积分：沿曲线弧 L（y=x²，从 (0,0) 到 (1,1)）"
+    },
+    "examples": [
+      {
+        "problem": "计算第一类曲线积分 $\\int_L x\\,ds$，其中 $L$ 是抛物线 $y=x^2$ 上从 $O(0,0)$ 到 $B(1,1)$ 的一段弧。",
+        "solution": "取 $x$ 为参数：$y=x^2$，$0\\le x\\le 1$，则\n$$ds=\\sqrt{1+(y')^2}\\,dx=\\sqrt{1+4x^2}\\,dx,$$\n于是\n$$\\int_L x\\,ds=\\int_0^1 x\\sqrt{1+4x^2}\\,dx=\\frac{1}{12}(1+4x^2)^{3/2}\\Big|_0^1=\\frac{5\\sqrt{5}-1}{12}.$$\n因为第一类曲线积分与方向无关，无论从 $O$ 走到 $B$ 还是从 $B$ 走到 $O$，结果都一样。"
+      },
+      {
+        "problem": "计算 $\\int_L x\\,dy-y\\,dx$，其中 $L$ 是抛物线 $y=x^2$ 上从 $O(0,0)$ 到 $B(1,1)$ 的一段弧；若改为从 $B$ 走到 $O$，结果是多少？",
+        "solution": "取参数 $x=t$，$y=t^2$，$t$ 从 $0$ 走到 $1$，则 $dx=dt$，$dy=2t\\,dt$，于是\n$$\\int_L x\\,dy-y\\,dx=\\int_0^1(t\\cdot 2t-t^2)\\,dt=\\int_0^1 t^2\\,dt=\\frac{1}{3}.$$\n若沿反向曲线 $L^-$ 从 $B$ 走到 $O$，参数 $t$ 从 $1$ 走到 $0$，积分值变号：\n$$\\int_{L^-}x\\,dy-y\\,dx=-\\frac{1}{3}.$$\n这正是第二类曲线积分与方向有关的体现。"
+      }
+    ],
+    "tags": [
+      "曲线积分",
+      "对弧长",
+      "对坐标",
+      "方向性"
+    ],
+    "links": [
+      "arc-length",
+      "integral-physics",
+      "parametric-derivative",
+      "gradient",
+      "green-theorem"
+    ]
+  },
+  {
+    "id": "green-theorem",
+    "title": "格林公式",
+    "titleEn": "Green's Theorem",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "格林公式把沿正向闭曲线 L 的第二类曲线积分，化为它围成区域 D 上 ∂Q/∂x−∂P/∂y 的二重积分。",
+    "summaryEn": "Green's theorem turns a line integral along a positively oriented closed plane curve L into the double integral of ∂Q/∂x−∂P/∂y over the region D it encloses.",
+    "definition": "格林公式把平面闭曲线上的积分与它围成的平面区域上的二重积分联系起来，是牛顿–莱布尼茨公式在二维的推广，也是斯托克斯公式在平面上的特殊情形。\n\n设 $D$ 是平面上的有界闭区域，其边界 $L$ 是一条**分段光滑的封闭曲线**，并且 $L$ 取**正向**——通常指逆时针方向，即沿 $L$ 前进时区域 $D$ 始终在左手边；又设 $P(x,y)$、$Q(x,y)$ 在 $D$ 上有**连续的一阶偏导数**。在这些条件下成立\n$$\\oint_L P\\,dx+Q\\,dy=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy.$$\n公式左端是平面向量场 $\\boldsymbol{F}=(P,Q)$ 沿边界 $L$ 的环流，右端被积函数正是该场旋度的 $z$ 分量：边界上的环流等于内部旋度的「总量」。\n\n使用格林公式时三个条件都要核对：$L$ 必须封闭且分段光滑；方向必须取正向，若取反向则等式右端要加负号；$P$、$Q$ 必须在 $D$ 上有连续一阶偏导数——如果区域内部有使偏导数失效的点（例如场中含 $1/(x^2+y^2)$ 一类奇点），就不能直接套用。当区域带有「洞」时（多连通区域），只需把每条边界都按「区域始终在左侧」定向（外边界逆时针、内边界顺时针），对全部边界求和，公式仍然成立。\n\n格林公式主要有三种用途：一是把难算的闭路积分化为二重积分，或反过来把二重积分化为闭路积分；二是求平面区域的面积，取不同的 $(P,Q)$ 可得\n$$A=\\oint_L x\\,dy=-\\oint_L y\\,dx=\\frac{1}{2}\\oint_L(x\\,dy-y\\,dx);$$\n三是判定曲线积分与路径无关：若在单连通区域上恒有 $\\frac{\\partial P}{\\partial y}=\\frac{\\partial Q}{\\partial x}$，则任何闭曲线上的积分都等于零，积分只与起点、终点有关，且 $P\\,dx+Q\\,dy$ 是某个函数 $u(x,y)$ 的全微分。",
+    "definitionEn": "Green's theorem relates an integral along a closed plane curve to a double integral over the plane region it encloses; it is the two-dimensional analogue of the Newton–Leibniz formula and a special case of Stokes' theorem.\n\nLet $D$ be a bounded closed region whose boundary $L$ is a **piecewise smooth closed curve**, taken in the **positive direction** — counterclockwise, so that the region $D$ stays on the left as one walks along $L$. Suppose $P(x,y)$ and $Q(x,y)$ have **continuous first-order partial derivatives** on $D$. Under these hypotheses,\n$$\\oint_L P\\,dx+Q\\,dy=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy.$$\nThe left side is the circulation of the plane field $\\boldsymbol{F}=(P,Q)$ along the boundary, and the integrand on the right is the $z$-component of its curl: circulation along the boundary equals the total curl inside.\n\nAll three hypotheses matter: $L$ must be closed and piecewise smooth; $L$ must be positively oriented (under the opposite orientation the right-hand side changes sign); and $P$, $Q$ must have continuous first partials on $D$ — a singular point inside $D$ (say, from a field containing $1/(x^2+y^2)$) prevents a direct application. For a region with holes (multiply connected), the formula still holds if every boundary component is oriented so that the region lies on the left (outer boundary counterclockwise, inner boundaries clockwise) and the integrals over all components are summed.\n\nThe theorem has three main uses: converting a hard closed-curve integral into a double integral, or conversely; computing areas of plane regions, since different choices of $(P,Q)$ give\n$$A=\\oint_L x\\,dy=-\\oint_L y\\,dx=\\frac{1}{2}\\oint_L(x\\,dy-y\\,dx);$$\nand testing path-independence — on a simply connected region, if $\\frac{\\partial P}{\\partial y}=\\frac{\\partial Q}{\\partial x}$ holds everywhere, then the integral over every closed curve vanishes, the value depends only on the endpoints, and $P\\,dx+Q\\,dy$ is the total differential of some function $u(x,y)$.",
+    "formulas": [
+      {
+        "latex": "\\oint_L P\\,dx+Q\\,dy=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy",
+        "note": "格林公式本体；条件：$L$ 是 $D$ 的分段光滑边界闭曲线并取正向（逆时针、区域在左侧），$P$、$Q$ 在 $D$ 上有连续一阶偏导数。",
+        "noteEn": "Green's theorem itself; hypotheses: $L$ is the piecewise smooth boundary of $D$ taken in the positive (counterclockwise) direction with $D$ on the left, and $P$, $Q$ have continuous first partials on $D$."
+      },
+      {
+        "latex": "\\oint_L\\boldsymbol{F}\\cdot d\\boldsymbol{r}=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dA,\\qquad \\boldsymbol{F}=(P,Q)",
+        "note": "环流形式：左端是场沿边界的环流量，右端是旋度分量在区域上的二重积分。",
+        "noteEn": "Circulation form: the left side is the circulation of the field along the boundary, and the right side is the double integral of the curl component over the region."
+      },
+      {
+        "latex": "A=\\oint_L x\\,dy=-\\oint_L y\\,dx=\\frac{1}{2}\\oint_L(x\\,dy-y\\,dx)",
+        "note": "用边界曲线求平面区域的面积（$L$ 取正向）；三个式子分别由格林公式取 $(P,Q)=(0,x)$、$(-y,0)$、$(-y/2,x/2)$ 得到。",
+        "noteEn": "Area of a plane region from its boundary (with $L$ positively oriented); the three formulas come from choosing $(P,Q)=(0,x)$, $(-y,0)$ and $(-y/2,x/2)$."
+      },
+      {
+        "latex": "\\frac{\\partial P}{\\partial y}=\\frac{\\partial Q}{\\partial x}\\ \\text{（单连通区域上恒成立）}\\iff \\oint_C P\\,dx+Q\\,dy=0",
+        "note": "路径无关判别：此时 $P\\,dx+Q\\,dy$ 是某个 $u(x,y)$ 的全微分，积分只依赖起点与终点。",
+        "noteEn": "Path-independence test: then $P\\,dx+Q\\,dy$ is the total differential of some $u(x,y)$, and the integral depends only on the endpoints."
+      }
+    ],
+    "expression": {
+      "text": "∮_L P dx + Q dy = ∬_D (∂Q/∂x − ∂P/∂y) dxdy",
+      "symbol": "\\oint_L P\\,dx+Q\\,dy",
+      "note": "前提：$L$ 是分段光滑的封闭曲线并取正向（逆时针、区域在左侧），$P$、$Q$ 在 $D$ 上有连续一阶偏导数；$L$ 反向时右端取负号。",
+      "noteEn": "Requires $L$ to be a piecewise smooth closed curve in the positive direction (counterclockwise with the region on the left) and $P$, $Q$ to have continuous first partials on $D$; reversing $L$ changes the sign."
+    },
+    "properties": [
+      "三个条件缺一不可：$L$ 封闭、分段光滑并取正向（逆时针，区域在左）；$P$、$Q$ 在 $D$ 上有连续一阶偏导数。",
+      "方向只影响符号：沿负向（顺时针）的积分等于右端二重积分取负号。",
+      "多连通区域（有「洞」）同样可用：把每条边界都按「区域在左」定向后求和，或用辅助线把区域化为单连通。",
+      "推论：在单连通区域上 $\\frac{\\partial P}{\\partial y}=\\frac{\\partial Q}{\\partial x}$ 恒成立时，闭路积分为零、积分与路径无关，$P\\,dx+Q\\,dy$ 是某个势函数的全微分。",
+      "格林公式是斯托克斯公式在平面上的特例（曲面取 $xy$ 平面内的区域、法向量取 $z$ 轴正向），也是牛顿–莱布尼茨公式的二维推广。"
+    ],
+    "propertiesEn": [
+      "All three hypotheses are needed: $L$ closed, piecewise smooth and positively oriented (counterclockwise with the region on the left), and $P$, $Q$ with continuous first partials on $D$.",
+      "Orientation affects only the sign: an integral along the negative (clockwise) direction equals the double integral on the right with a minus sign.",
+      "Multiply connected regions (with holes) also work: orient every boundary component so that the region lies on the left and add the integrals, or cut the region into a simply connected one with auxiliary segments.",
+      "Corollary: on a simply connected region, if $\\frac{\\partial P}{\\partial y}=\\frac{\\partial Q}{\\partial x}$ holds everywhere, every closed-curve integral vanishes, the integral is path independent, and $P\\,dx+Q\\,dy$ is the total differential of a potential function.",
+      "Green's theorem is the planar special case of Stokes' theorem (surface in the $xy$-plane with normal along the positive $z$-axis) and the two-dimensional analogue of the Newton–Leibniz formula."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "y",
+      "fy": "-x",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        {
+          "at": [
+            1.45,
+            0.4
+          ],
+          "label": "L：正向（逆时针）"
+        }
+      ],
+      "title": "格林公式：场 F=(y,−x) 与区域 D（L 取正向）"
+    },
+    "examples": [
+      {
+        "problem": "计算 $\\oint_L(x+y)\\,dx-(x-y)\\,dy$，其中 $L$ 是圆 $x^2+y^2=a^2$，方向取逆时针。",
+        "solution": "这里 $P=x+y$，$Q=-x+y$，且 $P$、$Q$ 在全平面有连续一阶偏导数。先算\n$$\\frac{\\partial Q}{\\partial x}=-1,\\qquad \\frac{\\partial P}{\\partial y}=1,$$\n由格林公式\n$$\\oint_L(x+y)\\,dx-(x-y)\\,dy=\\iint_D(-1-1)\\,dx\\,dy=-2\\iint_D dx\\,dy=-2\\pi a^2,$$\n其中 $D$ 是圆盘、面积为 $\\pi a^2$。若把 $L$ 改成顺时针方向，结果就变成 $2\\pi a^2$。"
+      },
+      {
+        "problem": "利用格林公式计算椭圆 $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$ 所围区域 $D$ 的面积 $A$。",
+        "solution": "取 $P=0$，$Q=x$，则 $\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}=1$。设 $L$ 为椭圆、方向取逆时针，由格林公式\n$$A=\\iint_D dx\\,dy=\\oint_L x\\,dy.$$\n把椭圆参数化：$x=a\\cos t$，$y=b\\sin t$，$t$ 从 $0$ 到 $2\\pi$，则 $dy=b\\cos t\\,dt$，于是\n$$A=\\int_0^{2\\pi}a\\cos t\\cdot b\\cos t\\,dt=ab\\int_0^{2\\pi}\\cos^2 t\\,dt=ab\\cdot\\pi=\\pi ab.$$"
+      }
+    ],
+    "tags": [
+      "格林公式",
+      "平面闭曲线",
+      "环流",
+      "二重积分"
+    ],
+    "links": [
+      "line-integral",
+      "double-integral",
+      "gradient",
+      "stokes-theorem",
+      "divergence-curl"
+    ]
+  },
+  {
+    "id": "surface-integral",
+    "title": "曲面积分",
+    "titleEn": "Surface Integrals",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "曲面积分沿曲面累加：第一类对面积、与所取侧无关；第二类对坐标、必须先指定侧，换侧变号，物理意义是通量。",
+    "summaryEn": "Surface integrals accumulate over a surface: the first kind integrates with respect to area and ignores the chosen side, while the second kind integrates coordinates, requires a chosen side, changes sign with it, and measures flux.",
+    "definition": "把积分区域从平面曲线换成空间中的一片曲面 $\\Sigma$，就得到**曲面积分**。第一类曲面积分（对面积的曲面积分）沿曲面上每一点累加函数值：设 $\\Sigma$ 是光滑（或分片光滑）曲面，$f(x,y,z)$ 在 $\\Sigma$ 上连续。把 $\\Sigma$ 任意分成 $n$ 小块，第 $i$ 块的面积记作 $\\Delta S_i$，任取点 $(\\xi_i,\\eta_i,\\zeta_i)$，作和 $\\sum f(\\xi_i,\\eta_i,\\zeta_i)\\Delta S_i$；令各小块直径的最大值 $\\lambda\\to 0$，若极限存在且与分法、取点无关，就记作\n$$\\iint_\\Sigma f(x,y,z)\\,dS.$$\n若 $f$ 是曲面片的面密度，它就是曲面片的质量；特别地，$\\iint_\\Sigma dS$ 等于曲面 $\\Sigma$ 的面积。第一类曲面积分只与曲面形状有关，**与曲面的侧无关**。\n\n计算第一类曲面积分常用**投影法**：若 $\\Sigma$ 由 $z=z(x,y)$ 给出，在 $xy$ 平面上的投影区域为 $D_{xy}$，则面积元素\n$$dS=\\sqrt{1+z_x^2+z_y^2}\\,dx\\,dy,$$\n于是 $\\iint_\\Sigma f\\,dS=\\iint_{D_{xy}}f(x,y,z(x,y))\\sqrt{1+z_x^2+z_y^2}\\,dx\\,dy$。若曲面用参数方程 $\\boldsymbol{r}(u,v)$ 给出，则 $dS=|\\boldsymbol{r}_u\\times\\boldsymbol{r}_v|\\,du\\,dv$。\n\n第二类曲面积分（对坐标的曲面积分）写成 $\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy$，来自「流体穿过曲面的流量」问题：速度场 $\\boldsymbol{v}=(P,Q,R)$ 单位时间穿过有向曲面 $\\Sigma$ 的流量就是它。对坐标的积分按「带符号投影」定义，例如 $\\iint_\\Sigma R\\,dx\\,dy=\\lim_{\\lambda\\to 0}\\sum R(\\xi_i,\\eta_i,\\zeta_i)(\\Delta S_i)_{xy}$，其中 $(\\Delta S_i)_{xy}$ 是小块在 $xy$ 平面上带符号的投影面积。因此使用第二类曲面积分前必须先给曲面**指定一侧**（选定法向量方向）：换一侧，积分值变号。\n\n两类曲面积分由曲面的**单位法向量** $\\boldsymbol{n}=(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)$ 联系：\n$$\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iint_\\Sigma(P\\cos\\alpha+Q\\cos\\beta+R\\cos\\gamma)\\,dS.$$\n当曲面能写成 $z=z(x,y)$ 且取上侧（法向量与 $z$ 轴正向成锐角）时，可整体化为投影区域上的二重积分\n$$\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iint_{D_{xy}}(-Pz_x-Qz_y+R)\\,dx\\,dy,$$\n取下侧时整体取负号；若曲面不能整体投影，则分片计算再相加。曲面积分是解决通量问题、进而引出高斯公式的基础。",
+    "definitionEn": "Replacing the domain of integration by a surface $\\Sigma$ in space leads to the **surface integral**. The first kind (with respect to surface area) accumulates a function over the points of the surface: let $\\Sigma$ be a smooth (or piecewise smooth) surface and let $f(x,y,z)$ be continuous on it. Subdivide $\\Sigma$ into $n$ small pieces of areas $\\Delta S_i$, pick a point $(\\xi_i,\\eta_i,\\zeta_i)$ in the $i$-th piece, and form $\\sum f(\\xi_i,\\eta_i,\\zeta_i)\\Delta S_i$. If the sum tends to a limit as $\\lambda\\to 0$ (with $\\lambda$ the largest diameter of the pieces), independent of the subdivision and the sample points, the limit is written\n$$\\iint_\\Sigma f(x,y,z)\\,dS.$$\nIf $f$ is a surface density, it gives the mass of the surface piece; in particular, $\\iint_\\Sigma dS$ is the area of $\\Sigma$. The first-kind integral depends only on the surface, **not on the chosen side**.\n\nThe standard computation uses **projection**: if $\\Sigma$ is given by $z=z(x,y)$ with projection region $D_{xy}$ in the $xy$-plane, then the area element is\n$$dS=\\sqrt{1+z_x^2+z_y^2}\\,dx\\,dy,$$\nso $\\iint_\\Sigma f\\,dS=\\iint_{D_{xy}}f(x,y,z(x,y))\\sqrt{1+z_x^2+z_y^2}\\,dx\\,dy$. For a parametric surface $\\boldsymbol{r}(u,v)$ one has $dS=|\\boldsymbol{r}_u\\times\\boldsymbol{r}_v|\\,du\\,dv$.\n\nThe second kind (with respect to coordinates) is written $\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy$ and comes from the flux of a fluid through a surface: the volume flowing per unit time through an oriented surface $\\Sigma$ with velocity field $\\boldsymbol{v}=(P,Q,R)$. Each term is defined through signed projections, e.g. $\\iint_\\Sigma R\\,dx\\,dy=\\lim_{\\lambda\\to 0}\\sum R(\\xi_i,\\eta_i,\\zeta_i)(\\Delta S_i)_{xy}$, where $(\\Delta S_i)_{xy}$ is the signed projection area of the small piece onto the $xy$-plane. Therefore one must first **choose a side** of the surface (a direction of the normal vector): choosing the other side flips the sign.\n\nThe two kinds are connected by the **unit normal vector** $\\boldsymbol{n}=(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)$:\n$$\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iint_\\Sigma(P\\cos\\alpha+Q\\cos\\beta+R\\cos\\gamma)\\,dS.$$\nIf the surface is a graph $z=z(x,y)$ taken on the upper side (normal making an acute angle with the positive $z$-axis), the whole integral becomes a double integral over the projection:\n$$\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iint_{D_{xy}}(-Pz_x-Qz_y+R)\\,dx\\,dy,$$\nwith an overall minus sign for the lower side; surfaces that are not graphs must be split into pieces. Surface integrals are the basis of flux problems and lead to Gauss's theorem.",
+    "formulas": [
+      {
+        "latex": "\\iint_\\Sigma f(x,y,z)\\,dS=\\lim_{\\lambda\\to 0}\\sum_{i=1}^{n}f(\\xi_i,\\eta_i,\\zeta_i)\\,\\Delta S_i",
+        "note": "第一类曲面积分（对面积）的定义式；$\\lambda$ 为各小块直径的最大值，积分与曲面的侧无关。",
+        "noteEn": "Definition of the first-kind surface integral (with respect to area); $\\lambda$ is the largest diameter of the pieces, and the value does not depend on the side."
+      },
+      {
+        "latex": "dS=\\sqrt{1+z_x^2+z_y^2}\\,dx\\,dy,\\qquad \\iint_\\Sigma f\\,dS=\\iint_{D_{xy}}f\\big(x,y,z(x,y)\\big)\\sqrt{1+z_x^2+z_y^2}\\,dx\\,dy",
+        "note": "当 $\\Sigma$ 由 $z=z(x,y)$ 给出时的投影计算法：面积元素 $dS$ 等于投影面积乘上倾斜因子。",
+        "noteEn": "Projection method when $\\Sigma$ is given by $z=z(x,y)$: the area element $dS$ is the projected area times the slant factor."
+      },
+      {
+        "latex": "\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iint_\\Sigma(P\\cos\\alpha+Q\\cos\\beta+R\\cos\\gamma)\\,dS",
+        "note": "两类曲面积分的关系式；$\\boldsymbol{n}=(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)$ 为所选侧的单位法向量。",
+        "noteEn": "Relation between the two kinds of surface integral; $\\boldsymbol{n}=(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)$ is the unit normal of the chosen side."
+      },
+      {
+        "latex": "\\iint_\\Sigma R\\,dx\\,dy=\\iint_{D_{xy}}R(x,y,z(x,y))\\,dx\\,dy\\ \\ \\text{（取上侧）}",
+        "note": "以 $dx\\,dy$ 项为例的投影计算法；取上侧时取正号，取下侧时取负号，曲面需分片时先分片再相加。",
+        "noteEn": "Projection computation for the $dx\\,dy$ term, for example; the sign is positive on the upper side and negative on the lower side, and non-graph surfaces are split into pieces."
+      },
+      {
+        "latex": "\\boldsymbol{\\Phi}=\\iint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS=\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy",
+        "note": "第二类曲面积分的物理意义是通量；$\\boldsymbol{F}=(P,Q,R)$，$\\boldsymbol{n}$ 是所选侧的单位法向量。",
+        "noteEn": "The physical meaning of the second-kind surface integral is flux; here $\\boldsymbol{F}=(P,Q,R)$ and $\\boldsymbol{n}$ is the unit normal of the chosen side."
+      }
+    ],
+    "expression": {
+      "text": "∬_Σ f dS（第一类，对面积）；∬_Σ P dydz + Q dzdx + R dxdy（第二类，对坐标）",
+      "symbol": "\\iint_\\Sigma f(x,y,z)\\,dS",
+      "note": "第一类与所取侧无关；第二类必须先指定侧，换侧变号，物理意义是通量。",
+      "noteEn": "The first kind ignores the side; the second kind requires a chosen side, changes sign with it, and measures flux."
+    },
+    "properties": [
+      "第一类曲面积分与曲面的侧无关；第二类曲面积分必须先指定侧（法向量方向），换侧时变号。",
+      "$\\iint_\\Sigma dS$ 等于曲面 $\\Sigma$ 的面积；若 $f$ 为面密度，$\\iint_\\Sigma f\\,dS$ 是曲面片的质量。",
+      "可加性：曲面分片后，两类曲面积分都等于各片积分之和。",
+      "两类积分由单位法向量的方向余弦联系；第二类曲面积分就是通量 $\\iint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS$，其中 $\\boldsymbol{F}=(P,Q,R)$。",
+      "投影法是计算的基本手段：把曲面投影到坐标平面化为二重积分；曲面不能整体写成 $z=z(x,y)$ 时需要分片处理。"
+    ],
+    "propertiesEn": [
+      "A first-kind surface integral does not depend on the chosen side; a second-kind one requires a chosen side (direction of the normal) and changes sign when the side is switched.",
+      "$\\iint_\\Sigma dS$ equals the area of $\\Sigma$; if $f$ is a surface density, $\\iint_\\Sigma f\\,dS$ is the mass of the surface piece.",
+      "Additivity: after splitting the surface into pieces, both kinds equal the sum of the integrals over the pieces.",
+      "The two kinds are connected by the direction cosines of the unit normal; the second kind is exactly the flux $\\iint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS$ with $\\boldsymbol{F}=(P,Q,R)$.",
+      "Projection is the basic computational tool: project the surface onto a coordinate plane to get a double integral; surfaces that are not graphs of $z=z(x,y)$ must be handled piece by piece."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -3.2,
+        3.2
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 1.6,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.10)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.15,
+              0.15
+            ],
+            [
+              0.75,
+              0.15
+            ],
+            [
+              0.75,
+              0.75
+            ],
+            [
+              0.15,
+              0.75
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.30)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.45,
+            0.45
+          ],
+          "color": "#ffd166",
+          "label": "dxdy"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.05,
+            -1.8
+          ],
+          "text": "投影区域 D_xy",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.85,
+            1.85
+          ],
+          "text": "dS = √(1+z_x²+z_y²) dxdy",
+          "size": 12
+        }
+      ],
+      "title": "曲面积分：曲面 Σ: z=z(x,y) 在 xy 平面上的投影区域 D_xy"
+    },
+    "examples": [
+      {
+        "problem": "计算第一类曲面积分 $\\iint_\\Sigma z\\,dS$，其中 $\\Sigma$ 是上半球面 $x^2+y^2+z^2=a^2$（$z\\ge 0$）。",
+        "solution": "把 $\\Sigma$ 写成 $z=\\sqrt{a^2-x^2-y^2}$，投影区域为圆盘 $D_{xy}:x^2+y^2\\le a^2$。此时\n$$z_x=-\\frac{x}{z},\\qquad z_y=-\\frac{y}{z},\\qquad \\sqrt{1+z_x^2+z_y^2}=\\sqrt{1+\\frac{x^2+y^2}{z^2}}=\\frac{a}{z},$$\n其中最后一步用了 $x^2+y^2+z^2=a^2$ 且 $z>0$。于是\n$$\\iint_\\Sigma z\\,dS=\\iint_{D_{xy}}z\\cdot\\frac{a}{z}\\,dx\\,dy=a\\iint_{D_{xy}}dx\\,dy=a\\cdot\\pi a^2=\\pi a^3.$$\n这个结果（$z\\,dS=a\\,dx\\,dy$）在球面相关的积分中经常用到。"
+      },
+      {
+        "problem": "计算第二类曲面积分 $\\iint_\\Sigma z\\,dx\\,dy$，其中 $\\Sigma$ 是上半球面 $x^2+y^2+z^2=a^2$（$z\\ge 0$），取上侧。",
+        "solution": "取上侧意味着投影时取正号。把 $\\Sigma$ 写成 $z=\\sqrt{a^2-x^2-y^2}$，投影区域 $D_{xy}:x^2+y^2\\le a^2$，则\n$$\\iint_\\Sigma z\\,dx\\,dy=\\iint_{D_{xy}}\\sqrt{a^2-x^2-y^2}\\,dx\\,dy.$$\n用极坐标：$x=r\\cos\\theta$，$y=r\\sin\\theta$（$0\\le r\\le a$，$0\\le\\theta\\le 2\\pi$），得\n$$\\iint_\\Sigma z\\,dx\\,dy=\\int_0^{2\\pi}d\\theta\\int_0^a\\sqrt{a^2-r^2}\\,r\\,dr=2\\pi\\cdot\\left[-\\frac{1}{3}(a^2-r^2)^{3/2}\\right]_0^a=\\frac{2}{3}\\pi a^3.$$\n如果对同一个上半球面改取下侧（法向量朝下），结果会变成 $-\\frac{2}{3}\\pi a^3$，可见第二类曲面积分与所取的侧有关。"
+      }
+    ],
+    "tags": [
+      "曲面积分",
+      "通量",
+      "投影法",
+      "曲面面积"
+    ],
+    "links": [
+      "double-integral",
+      "line-integral",
+      "gauss-theorem",
+      "stokes-theorem",
+      "vector"
+    ]
+  },
+  {
+    "id": "gauss-theorem",
+    "title": "高斯公式",
+    "titleEn": "Divergence Theorem (Gauss's Theorem)",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "高斯公式（散度定理）把闭曲面外侧的通量，化为所围区域上散度的三重积分。",
+    "summaryEn": "Gauss's theorem (the divergence theorem) equates the flux of a vector field through a closed surface with the triple integral of its divergence over the enclosed region.",
+    "definition": "高斯公式（散度定理）把闭曲面上的通量与它所围区域上的三重积分联系起来，是格林公式在空间中的推广。\n\n设 $\\Omega$ 是空间中由**分片光滑闭曲面** $\\Sigma$ 围成的有界闭区域，$\\Sigma$ 取**外侧**（法向量指向 $\\Omega$ 的外部）；设 $P$、$Q$、$R$ 在 $\\Omega$ 上有**连续的一阶偏导数**。在这些条件下成立\n$$\\oiint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV.$$\n公式把「穿过闭曲面 $\\Sigma$ 的通量」翻译成「区域内部散度的三重积分」，写成向量形式就是\n$$\\oiint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS=\\iiint_\\Omega\\operatorname{div}\\boldsymbol{F}\\,dV,\\qquad \\boldsymbol{F}=(P,Q,R).$$\n\n使用高斯公式时要注意三点：曲面必须封闭，否则可以补上一块辅助曲面拼成闭曲面，最后再减去补面上的通量；曲面必须取外侧，若取内侧则整体变号；$P$、$Q$、$R$ 在 $\\Omega$ 上要有连续一阶偏导数，与格林公式一样要警惕区域内部的奇点。\n\n高斯公式使「曲面积分」与「三重积分」可以互相转化：计算闭曲面上的通量时，化为三重积分往往更快；反过来也可以通过通量求体积——取 $\\boldsymbol{F}=(x,y,z)$ 得到\n$$V=\\frac{1}{3}\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy.$$\n另外，把区域不断收缩到一点，公式还给出散度的「通量密度」解释：$\\operatorname{div}\\boldsymbol{F}=\\lim_{\\Omega\\to M}\\frac{1}{V(\\Omega)}\\oiint_{\\partial\\Omega}\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS$，这正是「散度描述源汇强度」的准确含义。",
+    "definitionEn": "Gauss's theorem (the divergence theorem) relates the flux through a closed surface to a triple integral over the region it encloses, and generalizes Green's theorem to space.\n\nLet $\\Omega$ be a bounded closed region in space bounded by a **piecewise smooth closed surface** $\\Sigma$, taken on the **outer side** (normals pointing away from $\\Omega$), and let $P$, $Q$, $R$ have **continuous first-order partial derivatives** on $\\Omega$. Then\n$$\\oiint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV.$$\nThe formula translates the flux through the closed surface into the triple integral of the divergence inside; in vector form,\n$$\\oiint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS=\\iiint_\\Omega\\operatorname{div}\\boldsymbol{F}\\,dV,\\qquad \\boldsymbol{F}=(P,Q,R).$$\n\nThree points must be checked when applying it: the surface must be closed — otherwise add an auxiliary surface to close it and subtract the flux through the patch afterwards; the surface must be taken on the outer side, since the inner side flips the sign; and $P$, $Q$, $R$ must have continuous first partials on $\\Omega$, with the same caution about singular points inside as for Green's theorem.\n\nThe theorem lets one switch between a surface integral and a triple integral: computing a flux through a closed surface is usually easier as a triple integral, and conversely one can recover volume from flux; taking $\\boldsymbol{F}=(x,y,z)$ gives\n$$V=\\frac{1}{3}\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy.$$\nFinally, shrinking the region to a single point $M$ yields the flux-density interpretation of divergence, $\\operatorname{div}\\boldsymbol{F}=\\lim_{\\Omega\\to M}\\frac{1}{V(\\Omega)}\\oiint_{\\partial\\Omega}\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS$, which makes precise the statement that divergence measures the strength of sources and sinks.",
+    "formulas": [
+      {
+        "latex": "\\oiint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy=\\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV",
+        "note": "高斯公式本体；条件：$\\Sigma$ 是 $\\Omega$ 的分片光滑边界闭曲面、取外侧，$P$、$Q$、$R$ 在 $\\Omega$ 上有连续一阶偏导数。",
+        "noteEn": "Gauss's theorem itself; hypotheses: $\\Sigma$ is the piecewise smooth closed boundary of $\\Omega$ taken on the outer side, and $P$, $Q$, $R$ have continuous first partials on $\\Omega$."
+      },
+      {
+        "latex": "\\oiint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS=\\iiint_\\Omega\\operatorname{div}\\boldsymbol{F}\\,dV",
+        "note": "向量形式（散度定理）：闭曲面外侧的通量等于区域上散度的三重积分。",
+        "noteEn": "Vector form (divergence theorem): the outward flux through a closed surface equals the triple integral of the divergence over the region."
+      },
+      {
+        "latex": "V=\\frac{1}{3}\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy",
+        "note": "由通量求体积（$\\Sigma$ 取外侧）：取 $\\boldsymbol{F}=(x,y,z)$，此时 $\\operatorname{div}\\boldsymbol{F}=3$。",
+        "noteEn": "Volume from flux (with $\\Sigma$ on the outer side): take $\\boldsymbol{F}=(x,y,z)$, so that $\\operatorname{div}\\boldsymbol{F}=3$."
+      },
+      {
+        "latex": "\\operatorname{div}\\boldsymbol{F}(M)=\\lim_{\\Omega\\to M}\\frac{1}{V(\\Omega)}\\oiint_{\\partial\\Omega}\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS",
+        "note": "散度的通量密度定义：区域收缩到点 $M$ 时，单位体积的通量极限就是散度。",
+        "noteEn": "Flux-density definition of divergence: as the region shrinks to the point $M$, the flux per unit volume tends to the divergence."
+      }
+    ],
+    "expression": {
+      "text": "∬_Σ P dydz + Q dzdx + R dxdy = ∭_Ω (∂P/∂x + ∂Q/∂y + ∂R/∂z) dV",
+      "symbol": "\\oiint_\\Sigma\\boldsymbol{F}\\cdot\\boldsymbol{n}\\,dS",
+      "note": "条件：$\\Sigma$ 是封闭曲面并取外侧，$P$、$Q$、$R$ 在 $\\Omega$ 上有连续一阶偏导数；公式把通量化为三重积分。",
+      "noteEn": "Requires $\\Sigma$ to be a closed surface on the outer side with $P$, $Q$, $R$ having continuous first partials on $\\Omega$; the formula turns flux into a triple integral."
+    },
+    "properties": [
+      "三个条件缺一不可：$\\Sigma$ 封闭、取外侧；$P$、$Q$、$R$ 在 $\\Omega$ 上有连续一阶偏导数。",
+      "曲面不封闭时可以补一块辅助曲面拼成闭曲面，再减去补面上的通量。",
+      "取 $\\boldsymbol{F}=(x,y,z)$ 得到体积公式 $V=\\frac{1}{3}\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy$（$\\Sigma$ 取外侧）。",
+      "散度是通量密度：$\\operatorname{div}\\boldsymbol{F}>0$ 的点像「源」，$\\operatorname{div}\\boldsymbol{F}<0$ 的点像「汇」；$\\operatorname{div}\\boldsymbol{F}\\equiv 0$ 的场（如不可压缩流体的速度场）穿过任何闭曲面的通量为零。",
+      "高斯公式与格林公式、斯托克斯公式同属一类：区域内部的「导数」积分等于边界上的积分。"
+    ],
+    "propertiesEn": [
+      "All three hypotheses are needed: $\\Sigma$ closed and taken on the outer side, and $P$, $Q$, $R$ with continuous first partials on $\\Omega$.",
+      "If the surface is not closed, add an auxiliary patch to close it and subtract the flux through that patch.",
+      "With $\\boldsymbol{F}=(x,y,z)$ the theorem gives the volume formula $V=\\frac{1}{3}\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy$ (with $\\Sigma$ on the outer side).",
+      "Divergence is flux density: points with $\\operatorname{div}\\boldsymbol{F}>0$ behave like sources and points with $\\operatorname{div}\\boldsymbol{F}<0$ like sinks; fields with $\\operatorname{div}\\boldsymbol{F}\\equiv 0$ (such as the velocity field of an incompressible fluid) have zero flux through every closed surface.",
+      "Gauss's theorem, Green's theorem and Stokes' theorem belong to one family: the integral over the boundary equals the integral of a derivative over the interior."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "x",
+      "fy": "y",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "源：div F = 2"
+        }
+      ],
+      "title": "高斯公式：向外发散场 F=(x, y)（二维截影），div F = 2"
+    },
+    "examples": [
+      {
+        "problem": "计算 $\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy$，其中 $\\Sigma$ 是球面 $x^2+y^2+z^2=a^2$ 的外侧。",
+        "solution": "取 $\\boldsymbol{F}=(x,y,z)$，则\n$$\\operatorname{div}\\boldsymbol{F}=\\frac{\\partial x}{\\partial x}+\\frac{\\partial y}{\\partial y}+\\frac{\\partial z}{\\partial z}=1+1+1=3.$$\n$\\Sigma$ 是封闭球面且取了外侧，满足高斯公式的条件，于是\n$$\\oiint_\\Sigma x\\,dy\\,dz+y\\,dz\\,dx+z\\,dx\\,dy=\\iiint_\\Omega 3\\,dV=3\\cdot\\frac{4}{3}\\pi a^3=4\\pi a^3.$$\n若直接在球面上逐项计算，需要处理三个带根式的曲面积分，用高斯公式要省力得多。"
+      },
+      {
+        "problem": "计算 $\\oiint_\\Sigma x^2\\,dy\\,dz+y^2\\,dz\\,dx+z^2\\,dx\\,dy$，其中 $\\Sigma$ 是立方体 $0\\le x,y,z\\le a$ 表面的外侧。",
+        "solution": "取 $\\boldsymbol{F}=(x^2,y^2,z^2)$，则 $\\operatorname{div}\\boldsymbol{F}=2x+2y+2z$。由高斯公式\n$$\\oiint_\\Sigma x^2\\,dy\\,dz+y^2\\,dz\\,dx+z^2\\,dx\\,dy=\\iiint_\\Omega 2(x+y+z)\\,dV.$$\n利用对称性，\n$$\\iiint_\\Omega x\\,dV=\\iiint_\\Omega y\\,dV=\\iiint_\\Omega z\\,dV=\\int_0^a x\\,dx\\cdot a\\cdot a=\\frac{a^4}{2},$$\n所以\n$$\\iiint_\\Omega 2(x+y+z)\\,dV=2\\cdot 3\\cdot\\frac{a^4}{2}=3a^4.$$"
+      }
+    ],
+    "tags": [
+      "高斯公式",
+      "散度定理",
+      "通量",
+      "三重积分"
+    ],
+    "links": [
+      "surface-integral",
+      "triple-integral",
+      "green-theorem",
+      "divergence-curl",
+      "vector"
+    ]
+  },
+  {
+    "id": "stokes-theorem",
+    "title": "斯托克斯公式",
+    "titleEn": "Stokes' Theorem",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "斯托克斯公式把沿闭曲线 Γ 的环量，化为以 Γ 为边界的曲面 Σ 上旋度的通量（Γ 与 Σ 的法向量成右手系）。",
+    "summaryEn": "Stokes' theorem equates the circulation of a vector field along a closed space curve with the flux of its curl through any surface bounded by the curve, the orientations matching the right-hand rule.",
+    "definition": "斯托克斯公式把空间闭曲线上的积分与以它为边界的曲面上的积分联系起来，是格林公式在空间曲面上的推广。\n\n设 $\\Sigma$ 是分片光滑的**有向曲面**（指定了单位法向量 $\\boldsymbol{n}$ 的一侧），其边界 $\\Gamma$ 是分段光滑的闭曲线，且 $\\Gamma$ 取**正向**——正向与法向量 $\\boldsymbol{n}$ 构成**右手法则**：右手四指沿 $\\Gamma$ 的正向弯曲时，拇指所指的方向就是 $\\boldsymbol{n}$ 的方向。设 $P$、$Q$、$R$ 在包含 $\\Sigma$ 的空间区域内有一阶连续偏导数，则\n$$\\oint_\\Gamma P\\,dx+Q\\,dy+R\\,dz=\\iint_\\Sigma\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z}\\right)dy\\,dz+\\left(\\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x}\\right)dz\\,dx+\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy.$$\n\n右端三项都来自旋度 $\\operatorname{rot}\\boldsymbol{F}$ 的分量，写成向量形式很简洁：\n$$\\oint_\\Gamma\\boldsymbol{F}\\cdot d\\boldsymbol{r}=\\iint_\\Sigma(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}\\,dS,\\qquad \\boldsymbol{F}=(P,Q,R).$$\n左端是场沿 $\\Gamma$ 的**环量**，右端是旋度穿过曲面 $\\Sigma$ 的**通量**：所以斯托克斯公式常被概括为「环量等于旋度的通量」。\n\n坐标形式可以写成行列式便于记忆（见下方公式），注意配对规律：$dy\\,dz$ 项中的偏导下标是 $y$、$z$，作用在 $R$、$Q$ 上；$dz\\,dx$ 项对应 $z$、$x$；$dx\\,dy$ 项对应 $x$、$y$。\n\n公式的条件不能忽略：$\\Gamma$ 必须是 $\\Sigma$ 的边界；$\\Gamma$ 的方向必须与 $\\Sigma$ 的法向量成右手系，两者中任何一个反向都会使等式两端同时变号；$P$、$Q$、$R$ 要在 $\\Sigma$ 附近有连续一阶偏导数。而 $\\Sigma$ 本身可以换成任何以 $\\Gamma$ 为边界且方向匹配的曲面，积分值不变——这是斯托克斯公式最有用的灵活性。当 $\\Sigma$ 取 $xy$ 平面上的区域、$\\boldsymbol{n}$ 取 $z$ 轴正向时，斯托克斯公式就退化为格林公式。",
+    "definitionEn": "Stokes' theorem relates an integral along a closed space curve to an integral over a surface bounded by it, and generalizes Green's theorem to curved surfaces in space.\n\nLet $\\Sigma$ be a piecewise smooth **oriented surface** (one side of it is chosen, with unit normal vector $\\boldsymbol{n}$), whose boundary $\\Gamma$ is a piecewise smooth closed curve taken in the **positive direction** — positive means that $\\Gamma$ and $\\boldsymbol{n}$ satisfy the **right-hand rule**: if the fingers of the right hand curl along $\\Gamma$, the thumb points along $\\boldsymbol{n}$. Suppose $P$, $Q$, $R$ have continuous first-order partial derivatives in a region containing $\\Sigma$. Then\n$$\\oint_\\Gamma P\\,dx+Q\\,dy+R\\,dz=\\iint_\\Sigma\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z}\\right)dy\\,dz+\\left(\\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x}\\right)dz\\,dx+\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy.$$\n\nThe three terms on the right come from the components of the curl $\\operatorname{rot}\\boldsymbol{F}$, so the vector form is compact:\n$$\\oint_\\Gamma\\boldsymbol{F}\\cdot d\\boldsymbol{r}=\\iint_\\Sigma(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}\\,dS,\\qquad \\boldsymbol{F}=(P,Q,R).$$\nThe left side is the **circulation** of the field along $\\Gamma$, the right side the **flux** of the curl through $\\Sigma$: in one phrase, circulation equals the flux of the curl.\n\nThe coordinate form can be written as a determinant for easier memorization (see the formulas below). Note the pairing rule: the $dy\\,dz$ term involves derivatives with respect to $y$ and $z$ (acting on $R$ and $Q$), the $dz\\,dx$ term involves $z$ and $x$, and the $dx\\,dy$ term involves $x$ and $y$.\n\nThe hypotheses matter: $\\Gamma$ must be the boundary of $\\Sigma$; the direction of $\\Gamma$ must match $\\boldsymbol{n}$ by the right-hand rule, and reversing either one changes the sign of the whole identity; and $P$, $Q$, $R$ need continuous first partials near $\\Sigma$. On the other hand, $\\Sigma$ may be replaced by any oriented surface with the same boundary $\\Gamma$ and matching orientation, without changing the value — the most useful flexibility of the theorem. When $\\Sigma$ lies in the $xy$-plane with $\\boldsymbol{n}$ along the positive $z$-axis, Stokes' theorem reduces to Green's theorem.",
+    "formulas": [
+      {
+        "latex": "\\oint_\\Gamma P\\,dx+Q\\,dy+R\\,dz=\\iint_\\Sigma\\left[\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z}\\right)dy\\,dz+\\left(\\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x}\\right)dz\\,dx+\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy\\right]",
+        "note": "斯托克斯公式的坐标形式；条件：$\\Gamma$ 是 $\\Sigma$ 的边界、方向与 $\\Sigma$ 的法向量成右手系，$P$、$Q$、$R$ 有连续一阶偏导数。",
+        "noteEn": "Coordinate form of Stokes' theorem; hypotheses: $\\Gamma$ is the boundary of $\\Sigma$ with orientation matching the normal by the right-hand rule, and $P$, $Q$, $R$ have continuous first partials."
+      },
+      {
+        "latex": "\\oint_\\Gamma\\boldsymbol{F}\\cdot d\\boldsymbol{r}=\\iint_\\Sigma(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}\\,dS",
+        "note": "向量形式：沿闭曲线的环量等于旋度穿过曲面的通量。",
+        "noteEn": "Vector form: the circulation along the closed curve equals the flux of the curl through the surface."
+      },
+      {
+        "latex": "\\iint_\\Sigma\\begin{vmatrix}dy\\,dz & dz\\,dx & dx\\,dy\\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z}\\\\ P & Q & R\\end{vmatrix}",
+        "note": "行列式记忆法：按第一行展开，三项恰好是旋度三个分量与 $dy\\,dz$、$dz\\,dx$、$dx\\,dy$ 的配对。",
+        "noteEn": "Determinant mnemonic: expanding along the first row gives exactly the three components of the curl paired with $dy\\,dz$, $dz\\,dx$ and $dx\\,dy$."
+      },
+      {
+        "latex": "\\oint_L P\\,dx+Q\\,dy=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dA",
+        "note": "特例：当 $\\Sigma$ 是 $xy$ 平面内的区域、法向量取 $z$ 轴正向时，斯托克斯公式退化为格林公式。",
+        "noteEn": "Special case: when $\\Sigma$ lies in the $xy$-plane with normal along the positive $z$-axis, Stokes' theorem reduces to Green's theorem."
+      }
+    ],
+    "expression": {
+      "text": "∮_Γ P dx + Q dy + R dz = ∬_Σ (rot F)·n dS",
+      "symbol": "\\oint_\\Gamma\\boldsymbol{F}\\cdot d\\boldsymbol{r}",
+      "note": "条件：$\\Gamma$ 是 $\\Sigma$ 的边界，且 $\\Gamma$ 的正向与 $\\Sigma$ 的法向量成右手系；右端是旋度的通量。",
+      "noteEn": "Requires $\\Gamma$ to be the boundary of $\\Sigma$ with positive orientation matching the normal by the right-hand rule; the right side is the flux of the curl."
+    },
+    "properties": [
+      "条件：$\\Gamma$ 是 $\\Sigma$ 的分段光滑边界、方向与法向量成右手系；$P$、$Q$、$R$ 在 $\\Sigma$ 附近有连续一阶偏导数。",
+      "方向必须匹配：$\\Gamma$ 的方向与 $\\Sigma$ 的法向量中任何一个反向，等式两端就同时变号。",
+      "只要边界 $\\Gamma$ 与方向相同，曲面 $\\Sigma$ 可以任取（平面圆盘、半球面……），积分值不变。",
+      "当 $\\Sigma$ 是 $xy$ 平面上的区域时退化为格林公式；格林公式是斯托克斯公式的平面特例。",
+      "物理意义：环量等于旋度的通量；$\\operatorname{rot}\\boldsymbol{F}\\cdot\\boldsymbol{n}$ 是沿 $\\boldsymbol{n}$ 方向的环量面密度。"
+    ],
+    "propertiesEn": [
+      "Hypotheses: $\\Gamma$ is the piecewise smooth boundary of $\\Sigma$ with orientation matching the normal by the right-hand rule, and $P$, $Q$, $R$ have continuous first partials near $\\Sigma$.",
+      "The orientations must match: reversing either the direction of $\\Gamma$ or the normal of $\\Sigma$ changes the sign of both sides.",
+      "As long as the boundary $\\Gamma$ and its direction are fixed, the surface $\\Sigma$ may be chosen freely (a flat disk, a hemisphere, and so on) without changing the value.",
+      "When $\\Sigma$ is a region in the $xy$-plane the theorem reduces to Green's theorem; Green's theorem is the planar special case of Stokes' theorem.",
+      "Physical meaning: circulation equals the flux of the curl; $\\operatorname{rot}\\boldsymbol{F}\\cdot\\boldsymbol{n}$ is the circulation density in the direction $\\boldsymbol{n}$."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-y",
+      "fy": "x",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        {
+          "at": [
+            1.45,
+            0.4
+          ],
+          "label": "Γ：逆时针"
+        }
+      ],
+      "title": "斯托克斯公式：旋度场 F=(−y, x)，rot F = (0, 0, 2)"
+    },
+    "examples": [
+      {
+        "problem": "利用斯托克斯公式计算 $\\oint_\\Gamma z\\,dx+x\\,dy+y\\,dz$，其中 $\\Gamma$ 是平面 $z=0$ 上的圆 $x^2+y^2=a^2$，从 $z$ 轴正向看去取逆时针方向。",
+        "solution": "取 $\\Sigma$ 为圆盘 $x^2+y^2\\le a^2$、$z=0$，法向量取 $\\boldsymbol{n}=\\boldsymbol{k}=(0,0,1)$（上侧）。此时 $\\Gamma$ 的逆时针方向与 $\\boldsymbol{n}$ 恰成右手系。记 $\\boldsymbol{F}=(z,x,y)$，则\n$$\\operatorname{rot}\\boldsymbol{F}=\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z},\\ \\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x},\\ \\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)=(1-0,\\ 1-0,\\ 1-0)=(1,1,1).$$\n于是 $(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}=1$，由斯托克斯公式\n$$\\oint_\\Gamma z\\,dx+x\\,dy+y\\,dz=\\iint_\\Sigma 1\\,dS=\\pi a^2.$$\n直接沿圆周计算也可验证：$\\Gamma$ 上 $z=0$、$dz=0$，所以 $\\oint_\\Gamma x\\,dy=\\int_0^{2\\pi}a\\cos t\\cdot a\\cos t\\,dt=\\pi a^2$。"
+      },
+      {
+        "problem": "对同样的曲线 $\\Gamma$，改取 $\\Sigma$ 为上半球面 $x^2+y^2+z^2=a^2$（$z\\ge 0$，法向量朝外），再算一次 $\\oint_\\Gamma z\\,dx+x\\,dy+y\\,dz$，说明结果与所取曲面无关。",
+        "solution": "上半球面朝外的单位法向量为 $\\boldsymbol{n}=\\frac{1}{a}(x,y,z)$，旋度仍为 $\\operatorname{rot}\\boldsymbol{F}=(1,1,1)$，于是\n$$(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}=\\frac{x+y+z}{a}.$$\n由对称性 $\\iint_\\Sigma x\\,dS=\\iint_\\Sigma y\\,dS=0$，而由例「$\\iint_\\Sigma z\\,dS=\\pi a^3$」（见曲面积分一节的算法），得\n$$\\oint_\\Gamma z\\,dx+x\\,dy+y\\,dz=\\frac{1}{a}\\iint_\\Sigma(x+y+z)\\,dS=\\frac{1}{a}\\cdot\\pi a^3=\\pi a^2,$$\n与取平面圆盘时的结果一致。可见斯托克斯公式的积分只依赖边界 $\\Gamma$ 与方向，与曲面的具体选取无关。"
+      }
+    ],
+    "tags": [
+      "斯托克斯公式",
+      "环量",
+      "旋度",
+      "右手法则"
+    ],
+    "links": [
+      "line-integral",
+      "surface-integral",
+      "green-theorem",
+      "divergence-curl",
+      "vector"
+    ]
+  },
+  {
+    "id": "divergence-curl",
+    "title": "散度与旋度",
+    "titleEn": "Divergence and Curl",
+    "branch": "multivariable",
+    "level": 5,
+    "summary": "散度是标量、度量场的源汇强度（通量密度）；旋度是向量、度量场的旋转倾向（环量密度），两者由 rot(grad f)=0 与 div(rot F)=0 两条恒等式相连。",
+    "summaryEn": "Divergence is a scalar measuring the source strength (flux density) of a vector field, while curl is a vector measuring its tendency to rotate (circulation density); the identities rot(grad f)=0 and div(rot F)=0 tie them to gradients and conservative fields.",
+    "definition": "**散度**（记作 $\\operatorname{div}\\boldsymbol{F}$）与**旋度**（记作 $\\operatorname{rot}\\boldsymbol{F}$）是描述向量场局部性质的两种基本运算，也是高斯公式与斯托克斯公式背后的核心对象。\n\n设向量场 $\\boldsymbol{F}=(P,Q,R)$ 的各分量有连续的一阶偏导数。**散度**是一个**标量**：\n$$\\operatorname{div}\\boldsymbol{F}=\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}=\\nabla\\cdot\\boldsymbol{F}.$$\n它度量场在一点「向外发散」的程度：$\\operatorname{div}\\boldsymbol{F}>0$ 的点附近像有「源」在涌出，$\\operatorname{div}\\boldsymbol{F}<0$ 的点像有「汇」在吸收；$\\operatorname{div}\\boldsymbol{F}\\equiv 0$ 的场称为**无源场**（管形场），不可压缩流体的速度场就是一例。**旋度**是一个**向量**：\n$$\\operatorname{rot}\\boldsymbol{F}=\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z},\\ \\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x},\\ \\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)=\\nabla\\times\\boldsymbol{F}.$$\n它描述场在一点附近的旋转倾向：沿单位向量 $\\boldsymbol{n}$ 方向的环量面密度恰好是 $(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}$；$\\operatorname{rot}\\boldsymbol{F}\\equiv\\boldsymbol{0}$ 的场称为**无旋场**。对平面场 $\\boldsymbol{F}=(P,Q)$，旋度退化为 $\\left(0,0,\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)$，其中 $z$ 分量正是格林公式中的被积函数。\n\n散度与旋度之间有两条「自动成立」的恒等式（只要二阶混合偏导数连续）：\n$$\\operatorname{rot}(\\operatorname{grad} f)=\\boldsymbol{0},\\qquad \\operatorname{div}(\\operatorname{rot}\\boldsymbol{F})=0,$$\n即**梯度场无旋、旋度场无散**；另有自然的组合 $\\operatorname{div}(\\operatorname{grad} f)=\\Delta f$，其中 $\\Delta$ 是拉普拉斯算子。这些恒等式把梯度、散度、旋度串成一个整体，例如任何形如 $\\nabla\\times\\boldsymbol{F}$ 的场自动无散，这在通量计算与场的分解中反复用到。\n\n在**单连通区域**上（例如全平面、全空间，或没有「洞」的区域），若 $\\boldsymbol{F}$ 的分量有连续一阶偏导数，则下列条件互相等价：\n$$\\operatorname{rot}\\boldsymbol{F}=\\boldsymbol{0}\\iff\\boldsymbol{F}=\\operatorname{grad} u\\iff\\oint_\\Xi\\boldsymbol{F}\\cdot d\\boldsymbol{r}=0\\ \\text{（对任意闭曲线）}\\iff\\text{积分与路径无关}.$$\n满足这些条件的场称为**保守场**（有位势场），$u$ 称为势函数，此时 $P\\,dx+Q\\,dy+R\\,dz$ 是 $u$ 的全微分。「单连通」不能省略：经典的场 $\\boldsymbol{F}=\\left(\\frac{-y}{x^2+y^2},\\ \\frac{x}{x^2+y^2}\\right)$ 在挖去原点的平面上旋度处处为零，但绕原点一圈的环量为 $2\\pi$，并不为零。",
+    "definitionEn": "**Divergence** (written $\\operatorname{div}\\boldsymbol{F}$) and **curl** (written $\\operatorname{rot}\\boldsymbol{F}$) are the two basic operations describing the local behaviour of a vector field; they are the objects behind Gauss's theorem and Stokes' theorem.\n\nLet the components of the vector field $\\boldsymbol{F}=(P,Q,R)$ have continuous first-order partial derivatives. **Divergence** is a **scalar**:\n$$\\operatorname{div}\\boldsymbol{F}=\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}=\\nabla\\cdot\\boldsymbol{F}.$$\nIt measures how strongly the field diverges at a point: near a point with $\\operatorname{div}\\boldsymbol{F}>0$ the field behaves like a source, near one with $\\operatorname{div}\\boldsymbol{F}<0$ like a sink; fields with $\\operatorname{div}\\boldsymbol{F}\\equiv 0$ are called source-free (solenoidal), the velocity field of an incompressible fluid being a standard example. **Curl** is a **vector**:\n$$\\operatorname{rot}\\boldsymbol{F}=\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z},\\ \\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x},\\ \\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)=\\nabla\\times\\boldsymbol{F}.$$\nIt measures the tendency of the field to rotate: the circulation density in the direction of a unit vector $\\boldsymbol{n}$ is exactly $(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}$, and fields with $\\operatorname{rot}\\boldsymbol{F}\\equiv\\boldsymbol{0}$ are called irrotational. For a plane field $\\boldsymbol{F}=(P,Q)$ the curl reduces to $\\left(0,0,\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)$, whose $z$-component is precisely the integrand in Green's theorem.\n\nDivergence and curl satisfy two identities that hold automatically (given continuous second mixed partials):\n$$\\operatorname{rot}(\\operatorname{grad} f)=\\boldsymbol{0},\\qquad \\operatorname{div}(\\operatorname{rot}\\boldsymbol{F})=0,$$\nthat is, **gradient fields are irrotational and curl fields are source-free**; a further natural combination is $\\operatorname{div}(\\operatorname{grad} f)=\\Delta f$, where $\\Delta$ is the Laplace operator. These identities link gradient, divergence and curl into one structure; for instance any field of the form $\\nabla\\times\\boldsymbol{F}$ is automatically source-free, a fact used repeatedly in flux computations and in decompositions of vector fields.\n\nOn a **simply connected region** (the whole plane or space, or a region without holes), if the components of $\\boldsymbol{F}$ have continuous first partials, the following conditions are equivalent:\n$$\\operatorname{rot}\\boldsymbol{F}=\\boldsymbol{0}\\iff\\boldsymbol{F}=\\operatorname{grad} u\\iff\\oint_\\Xi\\boldsymbol{F}\\cdot d\\boldsymbol{r}=0\\ \\text{(for every closed curve)}\\iff\\text{the integral is path independent}.$$\nSuch a field is called **conservative** (a potential field), $u$ is a potential function, and $P\\,dx+Q\\,dy+R\\,dz$ is the total differential of $u$. The word simply connected cannot be dropped: the classical field $\\boldsymbol{F}=\\left(\\frac{-y}{x^2+y^2},\\ \\frac{x}{x^2+y^2}\\right)$ has zero curl everywhere on the punctured plane, yet its circulation around the origin equals $2\\pi$.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{div}\\boldsymbol{F}=\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}=\\nabla\\cdot\\boldsymbol{F}",
+        "note": "散度是**标量**：等于三个偏导数之和，物理意义是通量密度（源汇强度）。",
+        "noteEn": "Divergence is a **scalar**: the sum of the three partial derivatives, with the physical meaning of flux density (source strength)."
+      },
+      {
+        "latex": "\\operatorname{rot}\\boldsymbol{F}=\\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z},\\ \\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x},\\ \\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)=\\nabla\\times\\boldsymbol{F}",
+        "note": "旋度是**向量**：沿 $\\boldsymbol{n}$ 方向的环量面密度为 $(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}$。",
+        "noteEn": "Curl is a **vector**: the circulation density in the direction $\\boldsymbol{n}$ equals $(\\operatorname{rot}\\boldsymbol{F})\\cdot\\boldsymbol{n}$."
+      },
+      {
+        "latex": "\\operatorname{rot}(\\operatorname{grad} f)=\\boldsymbol{0},\\qquad \\operatorname{div}(\\operatorname{rot}\\boldsymbol{F})=0",
+        "note": "两条基本恒等式：梯度场一定无旋，旋度场一定无散（利用二阶混合偏导相等）。",
+        "noteEn": "The two basic identities: a gradient field is always irrotational, and a curl field is always source-free (using equality of mixed second partials)."
+      },
+      {
+        "latex": "\\operatorname{div}(\\operatorname{grad} f)=\\frac{\\partial^2 f}{\\partial x^2}+\\frac{\\partial^2 f}{\\partial y^2}+\\frac{\\partial^2 f}{\\partial z^2}=\\Delta f",
+        "note": "拉普拉斯算子是散度与梯度的复合；满足 $\\Delta f=0$ 的函数称为调和函数。",
+        "noteEn": "The Laplace operator is divergence applied to a gradient; functions with $\\Delta f=0$ are called harmonic."
+      },
+      {
+        "latex": "\\operatorname{rot}\\boldsymbol{F}=\\boldsymbol{0}\\iff\\boldsymbol{F}=\\operatorname{grad} u\\iff\\oint_\\Gamma\\boldsymbol{F}\\cdot d\\boldsymbol{r}=0",
+        "note": "保守场等价条件：要求在**单连通区域**上各分量有连续一阶偏导；$u$ 称为势函数。",
+        "noteEn": "Equivalent conditions for a conservative field: valid on a **simply connected region** with continuous first partials; $u$ is called a potential function."
+      }
+    ],
+    "expression": {
+      "text": "div F = ∂P/∂x + ∂Q/∂y + ∂R/∂z（标量）；rot F = (∂R/∂y − ∂Q/∂z, ∂P/∂z − ∂R/∂x, ∂Q/∂x − ∂P/∂y)（向量）",
+      "symbol": "\\operatorname{div}\\boldsymbol{F},\\qquad\\operatorname{rot}\\boldsymbol{F}",
+      "note": "散度描述源汇、是标量；旋度描述旋转、是向量；两者分别把高斯公式与斯托克斯公式的右端「局部化」。",
+      "noteEn": "Divergence describes sources and sinks and is a scalar; curl describes rotation and is a vector; they localize the right-hand sides of Gauss's and Stokes' theorems."
+    },
+    "properties": [
+      "散度是标量、旋度是向量：$\\operatorname{div}\\boldsymbol{F}=\\nabla\\cdot\\boldsymbol{F}$，$\\operatorname{rot}\\boldsymbol{F}=\\nabla\\times\\boldsymbol{F}$，分别度量通量密度与环量密度。",
+      "两条恒等式：$\\operatorname{rot}(\\operatorname{grad}f)=\\boldsymbol{0}$（梯度场无旋），$\\operatorname{div}(\\operatorname{rot}\\boldsymbol{F})=0$（旋度场无散）。",
+      "$\\operatorname{div}(\\operatorname{grad}f)=\\Delta f$：拉普拉斯算子是散度与梯度的复合，$\\Delta f=0$ 的函数称为调和函数。",
+      "保守场等价条件（单连通 + 连续可偏导）：$\\operatorname{rot}\\boldsymbol{F}=\\boldsymbol{0}$ ⟺ 存在势函数 $u$ 使 $\\boldsymbol{F}=\\operatorname{grad}u$ ⟺ 闭路积分为零 ⟺ 积分与路径无关。",
+      "平面场 $\\boldsymbol{F}=(P,Q)$ 的旋度只剩 $z$ 分量 $\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}$：格林公式就是它的「环流 = 旋度积分」版本，空间版本是斯托克斯公式。"
+    ],
+    "propertiesEn": [
+      "Divergence is a scalar and curl is a vector: $\\operatorname{div}\\boldsymbol{F}=\\nabla\\cdot\\boldsymbol{F}$ and $\\operatorname{rot}\\boldsymbol{F}=\\nabla\\times\\boldsymbol{F}$ measure flux density and circulation density respectively.",
+      "Two identities: $\\operatorname{rot}(\\operatorname{grad}f)=\\boldsymbol{0}$ (gradient fields are irrotational) and $\\operatorname{div}(\\operatorname{rot}\\boldsymbol{F})=0$ (curl fields are source-free).",
+      "$\\operatorname{div}(\\operatorname{grad}f)=\\Delta f$: the Laplace operator is divergence composed with gradient, and functions with $\\Delta f=0$ are harmonic.",
+      "Equivalent conditions for a conservative field (simply connected region with continuous first partials): $\\operatorname{rot}\\boldsymbol{F}=\\boldsymbol{0}$ iff there is a potential $u$ with $\\boldsymbol{F}=\\operatorname{grad}u$ iff the integral over every closed curve vanishes iff the integral is path independent.",
+      "For a plane field $\\boldsymbol{F}=(P,Q)$ the curl has only the $z$-component $\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}$: Green's theorem is its circulation-equals-curl form, with Stokes' theorem as the space version."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "x - y",
+      "fy": "x + y",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "contourExpr": "x^2 + y^2",
+      "title": "螺旋源场 F=(x−y, x+y)：div F = 2，rot F = (0, 0, 2)"
+    },
+    "examples": [
+      {
+        "problem": "已知 $\\boldsymbol{F}=(xy,\\ yz,\\ zx)$，求 $\\operatorname{div}\\boldsymbol{F}$ 与 $\\operatorname{rot}\\boldsymbol{F}$。",
+        "solution": "散度：\n$$\\operatorname{div}\\boldsymbol{F}=\\frac{\\partial(xy)}{\\partial x}+\\frac{\\partial(yz)}{\\partial y}+\\frac{\\partial(zx)}{\\partial z}=y+z+x.$$\n旋度：\n$$\\operatorname{rot}\\boldsymbol{F}=\\left(\\frac{\\partial(zx)}{\\partial y}-\\frac{\\partial(yz)}{\\partial z},\\ \\frac{\\partial(xy)}{\\partial z}-\\frac{\\partial(zx)}{\\partial x},\\ \\frac{\\partial(yz)}{\\partial x}-\\frac{\\partial(xy)}{\\partial y}\\right)=(0-y,\\ 0-z,\\ 0-x)=(-y,\\ -z,\\ -x).$$"
+      },
+      {
+        "problem": "判断 $\\boldsymbol{F}=(2xy+z,\\ x^2,\\ x)$ 是否为保守场；若是，求它的势函数 $u$。",
+        "solution": "先算旋度：\n$$\\operatorname{rot}\\boldsymbol{F}=\\left(\\frac{\\partial x}{\\partial y}-\\frac{\\partial x^2}{\\partial z},\\ \\frac{\\partial(2xy+z)}{\\partial z}-\\frac{\\partial x}{\\partial x},\\ \\frac{\\partial x^2}{\\partial x}-\\frac{\\partial(2xy+z)}{\\partial y}\\right)=(0-0,\\ 1-1,\\ 2x-2x)=\\boldsymbol{0}.$$\n全空间 $\\mathbf{R}^3$ 是单连通的，且各分量处处有连续偏导数，所以 $\\boldsymbol{F}$ 是保守场。由 $u_x=2xy+z$ 得 $u=x^2y+xz+\\varphi(y,z)$；再由 $u_y=x^2$ 得 $\\varphi_y=0$，由 $u_z=x$ 得 $\\varphi_z=0$，故\n$$u=x^2y+xz+C,$$\n可以验证 $\\operatorname{grad}(x^2y+xz)=(2xy+z,\\ x^2,\\ x)=\\boldsymbol{F}$。"
+      }
+    ],
+    "tags": [
+      "散度",
+      "旋度",
+      "保守场",
+      "向量恒等式"
+    ],
+    "links": [
+      "gradient",
+      "partial-derivative",
+      "directional-derivative",
+      "gauss-theorem",
+      "stokes-theorem"
+    ]
+  }
+]

@@ -1,0 +1,869 @@
+[
+  {
+    "id": "bernoulli-equation",
+    "title": "伯努利方程",
+    "titleEn": "Bernoulli Equations",
+    "branch": "ode",
+    "level": 4,
+    "summary": "形如 $y'+P(x)y=Q(x)y^{n}$（$n\\neq 0,1$）的一阶非线性方程，用代换 $u=y^{1-n}$ 化为线性方程求解。",
+    "summaryEn": "A first-order nonlinear equation $y'+P(x)y=Q(x)y^{n}$ ($n\\neq 0,1$); the substitution $u=y^{1-n}$ turns it into a linear equation.",
+    "definition": "**伯努利方程**是一类「几乎线性」的一阶非线性微分方程：左端是熟悉的线性项，右端多出一个 $y$ 的幂：\n\n$$y'+P(x)y=Q(x)y^{n}\\qquad(n\\neq 0,\\ 1).$$\n\n当 $n=0$ 时它本身就是线性方程，$n=1$ 时可以用变量分离求解，所以伯努利方程总以 $n\\neq 0,1$ 为前提。\n\n解法的核心思想是「换元消掉非线性」：令 $u=y^{1-n}$，求导得 $u'=(1-n)y^{-n}y'$。把原方程两边同乘 $(1-n)y^{-n}$，右端的 $y^{n}$ 恰好被消去，得到关于 $u$ 的**线性方程**\n\n$$u'+(1-n)P(x)u=(1-n)Q(x).$$\n\n用一阶线性方程的积分因子法解出 $u$ 后，再回代 $y=u^{\\frac{1}{1-n}}$，就得到原方程的解（注意 $y^{n}$ 作分母时会丢掉 $y\\equiv 0$ 这条解）。\n\n伯努利方程是少数能精确求解的非线性方程：生态学与传染病模型中的逻辑斯蒂方程 $y'=y(1-y)$ 就是 $n=2$ 的伯努利方程。它还示范了一个贯穿微分方程理论的策略——寻找合适的换元，把陌生的问题转化为已有办法解决的问题。",
+    "definitionEn": "A **Bernoulli equation** is a first-order nonlinear equation that is almost linear: the left side is linear while the right side carries an extra power of $y$:\n\n$$y'+P(x)y=Q(x)y^{n}\\qquad(n\\neq 0,\\ 1).$$\n\nFor $n=0$ it is already linear, and for $n=1$ it is separable, so the interesting Bernoulli case always assumes $n\\neq 0,1$.\n\nThe key idea is to remove the nonlinearity by substitution: set $u=y^{1-n}$, so that $u'=(1-n)y^{-n}y'$. Multiplying the equation by $(1-n)y^{-n}$ cancels $y^{n}$ on the right and leaves the **linear** equation\n\n$$u'+(1-n)P(x)u=(1-n)Q(x).$$\n\nSolving this by an integrating factor and substituting back $y=u^{\\frac{1}{1-n}}$ gives the solution of the original equation (if we divide by $y^{n}$ we must remember the lost solution $y\\equiv 0$).\n\nBernoulli equations are among the few nonlinear equations solvable in closed form; the logistic equation $y'=y(1-y)$ from ecology and epidemiology is the case $n=2$. They also illustrate a strategy that runs through the whole subject: find a substitution that turns an unfamiliar problem into one we already know how to solve.",
+    "formulas": [
+      {
+        "latex": "y'+P(x)y=Q(x)y^{n}\\qquad(n\\neq 0,\\,1)",
+        "note": "伯努利方程的标准形式，$P,Q$ 在讨论的区间上连续，$n$ 是常数。",
+        "noteEn": "Standard form of a Bernoulli equation; $P,Q$ are continuous on the interval considered and $n$ is a constant."
+      },
+      {
+        "latex": "u=y^{1-n},\\qquad u'=(1-n)y^{-n}y'",
+        "note": "关键代换及求导结果；指数是 $1-n$，不要写反。",
+        "noteEn": "The key substitution and its derivative; the exponent is $1-n$, not $n-1$."
+      },
+      {
+        "latex": "u'+(1-n)P(x)u=(1-n)Q(x)",
+        "note": "换元后得到的线性方程，再用积分因子 $\\mu=e^{\\int(1-n)P\\,dx}$ 求解。",
+        "noteEn": "The linear equation obtained after substitution; solve it with the integrating factor $\\mu=e^{\\int(1-n)P\\,dx}$."
+      },
+      {
+        "latex": "y^{1-n}=e^{-(1-n)\\int P\\,dx}\\left[C+(1-n)\\int Q\\,e^{(1-n)\\int P\\,dx}\\,dx\\right]",
+        "note": "通解公式（$y>0$ 时）；实际做题按上一条逐步推导更稳妥。",
+        "noteEn": "Closed-form general solution (for $y>0$); in practice it is safer to derive it step by step as above."
+      },
+      {
+        "latex": "y'=y-y^{2}\\ \\Longrightarrow\\ y=\\dfrac{1}{1+Ce^{-x}}",
+        "note": "$n=2$ 的特例——逻辑斯蒂方程及其通解，$y\\equiv 0$、$y\\equiv 1$ 是两个常数解。",
+        "noteEn": "The case $n=2$: the logistic equation and its general solution; $y\\equiv 0$ and $y\\equiv 1$ are constant solutions."
+      }
+    ],
+    "expression": {
+      "text": "y' + P(x)y = Q(x)y^n   (n ≠ 0, 1)",
+      "symbol": "u=y^{1-n}",
+      "note": "看到右端多出一个 $y$ 的幂就考虑伯努利代换；换元后别忘了两处系数都要乘 $(1-n)$。",
+      "noteEn": "An extra power of $y$ on the right signals a Bernoulli substitution; remember to multiply both coefficients by $(1-n)$."
+    },
+    "properties": [
+      "前提是 $n\\neq 0,1$：$n=0$ 时方程已是线性方程，$n=1$ 时可用变量分离求解。",
+      "当 $n>0$ 时 $y\\equiv 0$ 也是解——用 $y^{n}$ 作分母变形时会把它丢掉，最后答题要补上。",
+      "换元后的线性方程系数是 $(1-n)P(x)$ 与 $(1-n)Q(x)$，两处都要乘 $(1-n)$，漏乘是最常见的错误。",
+      "伯努利方程与线性方程、变量分离方程一起，构成一阶方程最基本的三类可解方程。",
+      "当 $n>1$ 时解可能在有限时间内「爆破」到无穷（例如 $y'=y^{2}$ 的解 $y=\\frac{1}{C-x}$），这与线性方程解的整体存在性形成鲜明对比。"
+    ],
+    "propertiesEn": [
+      "The case requires $n\\neq 0,1$: for $n=0$ the equation is already linear, and for $n=1$ it is separable.",
+      "If $n>0$, then $y\\equiv 0$ is also a solution; it is lost when dividing by $y^{n}$ and must be added back.",
+      "After substitution the linear equation has coefficients $(1-n)P(x)$ and $(1-n)Q(x)$; skipping the factor $(1-n)$ is the most common mistake.",
+      "Together with linear and separable equations, Bernoulli equations form one of the three basic solvable families of first-order equations.",
+      "For $n>1$ solutions can blow up to infinity in finite time (for example $y'=y^{2}$ has $y=\\frac{1}{C-x}$), in sharp contrast with the global existence enjoyed by linear equations."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "x*y - y^2",
+      "xRange": [
+        0.3,
+        3
+      ],
+      "yRange": [
+        -1,
+        3
+      ],
+      "initial": [
+        {
+          "x": 0.5,
+          "y": 2.6,
+          "color": "#ff6b9d",
+          "label": "y(0.5) = 2.6"
+        },
+        {
+          "x": 0.5,
+          "y": 1.2,
+          "color": "#4cc9f0",
+          "label": "y(0.5) = 1.2"
+        },
+        {
+          "x": 0.5,
+          "y": 0.4,
+          "color": "#06d6a0",
+          "label": "y(0.5) = 0.4"
+        }
+      ],
+      "title": "伯努利方程 y' = xy - y^2（n = 2）的斜率场与解曲线"
+    },
+    "examples": [
+      {
+        "problem": "求方程 $y'+\\dfrac{y}{x}=xy^{2}$（$x>0$）的通解。",
+        "solution": "这是 $n=2$ 的伯努利方程。当 $y\\neq 0$ 时令 $u=y^{1-2}=\\dfrac{1}{y}$，则 $u'=-\\dfrac{y'}{y^{2}}$。原方程两边除以 $y^{2}$ 得 $\\dfrac{y'}{y^{2}}+\\dfrac{1}{xy}=x$，代入 $u$ 即 $-u'+\\dfrac{u}{x}=x$，整理为线性方程\n\n$$u'-\\dfrac{u}{x}=-x.$$\n\n积分因子 $\\mu=e^{\\int(-\\frac{1}{x})dx}=\\dfrac{1}{x}$，于是 $\\left(\\dfrac{u}{x}\\right)'=-1$，积分得 $\\dfrac{u}{x}=-x+C$，即 $u=Cx-x^{2}$。回代 $y=\\dfrac{1}{u}$ 得通解\n\n$$y=\\dfrac{1}{Cx-x^{2}}.$$\n\n另外 $y\\equiv 0$ 也是方程的解（求解过程中被除掉了）。当 $Cx-x^{2}\\to 0$ 时解趋于无穷，可见 $n=2$ 时会出现有限时间爆破。"
+      },
+      {
+        "problem": "求初值问题 $y'=y-y^{2}$，$y(0)=\\dfrac{1}{3}$ 的解。",
+        "solution": "这是 $n=2$ 的伯努利方程（$P(x)=-1$，$Q(x)=-1$），也是逻辑斯蒂模型。令 $u=\\dfrac{1}{y}$，由公式得\n\n$$u'+(1-2)(-1)u=(1-2)(-1)\\ \\Longrightarrow\\ u'+u=1.$$\n\n解得 $u=1+Ce^{-x}$，即 $y=\\dfrac{1}{1+Ce^{-x}}$。代入初值 $\\dfrac{1}{1+C}=\\dfrac{1}{3}$，得 $C=2$，所以\n\n$$y=\\dfrac{1}{1+2e^{-x}}.$$\n\n检验：$y(0)=\\dfrac{1}{3}$，且 $x\\to+\\infty$ 时 $y\\to 1$，符合逻辑斯蒂模型趋于环境容量的预期。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "伯努利方程",
+      "换元法"
+    ],
+    "links": [
+      "first-order-linear-ode",
+      "separable-ode",
+      "ode-basic-concepts",
+      "exact-equation"
+    ]
+  },
+  {
+    "id": "exact-equation",
+    "title": "恰当方程与积分因子",
+    "titleEn": "Exact Equations and Integrating Factors",
+    "branch": "ode",
+    "level": 5,
+    "summary": "若 $M\\,dx+N\\,dy=0$ 在单连通区域内满足 $\\partial M/\\partial y=\\partial N/\\partial x$，左端就是势函数 $u$ 的全微分，通解为 $u(x,y)=C$；不满足时可乘积分因子补救。",
+    "summaryEn": "If $M\\,dx+N\\,dy=0$ satisfies $\\partial M/\\partial y=\\partial N/\\partial x$ on a simply connected region, its left side is the total differential of a potential $u$ and the general solution is $u(x,y)=C$; otherwise an integrating factor may help.",
+    "definition": "一阶方程常写成对称形式 $M(x,y)\\,dx+N(x,y)\\,dy=0$，把 $x$ 与 $y$ 平等看待。如果左端恰好是某个二元函数 $u(x,y)$ 的全微分，即\n\n$$du=M(x,y)\\,dx+N(x,y)\\,dy,$$\n\n就称它是**恰当方程**（全微分方程）。此时方程等价于 $du=0$，通解立刻可以写成隐式形式 $u(x,y)=C$，积分曲线就是势函数 $u$ 的等值线。\n\n如何判断？在**单连通区域**内，当 $M,N$ 有连续偏导数时，方程恰当当且仅当\n\n$$\\dfrac{\\partial M}{\\partial y}=\\dfrac{\\partial N}{\\partial x}.$$\n\n这时势函数可由积分求得：先由 $u_x=M$ 得 $u=\\int M\\,dx+\\varphi(y)$，再用 $u_y=N$ 解出 $\\varphi'(y)$，最后积分定出 $\\varphi$（任取一个原函数即可）。\n\n如果 $M_y\\neq N_x$，可以尝试乘一个非零函数 $\\mu(x,y)$，使 $\\mu M\\,dx+\\mu N\\,dy$ 成为恰当方程，这样的 $\\mu$ 称为**积分因子**。乘积分因子不改变方程的解（只可能额外引入 $\\mu=0$ 的曲线）。积分因子没有通用的求法，但若 $(M_y-N_x)/N$ 只与 $x$ 有关，则 $\\mu=e^{\\int f(x)dx}$，只与 $y$ 有关时有类似的公式；一阶线性方程的积分因子法正是这里的特例。",
+    "definitionEn": "A first-order equation is often written in the symmetric form $M(x,y)\\,dx+N(x,y)\\,dy=0$, treating $x$ and $y$ on equal footing. If the left side is exactly the total differential of some function $u(x,y)$, that is\n\n$$du=M(x,y)\\,dx+N(x,y)\\,dy,$$\n\nthe equation is called **exact**. It is then equivalent to $du=0$, so the general solution is immediately available in implicit form $u(x,y)=C$, and the solution curves are the level curves of the potential $u$.\n\nThe test: on a **simply connected region**, with $M,N$ having continuous partial derivatives, the equation is exact if and only if\n\n$$\\dfrac{\\partial M}{\\partial y}=\\dfrac{\\partial N}{\\partial x}.$$\n\nThe potential is then found by integration: from $u_x=M$ get $u=\\int M\\,dx+\\varphi(y)$, then use $u_y=N$ to determine $\\varphi'(y)$ and integrate.\n\nWhen $M_y\\neq N_x$ one may multiply by a nonzero function $\\mu(x,y)$ chosen so that $\\mu M\\,dx+\\mu N\\,dy$ becomes exact; such a $\\mu$ is called an **integrating factor**. Multiplying by it does not change the solutions (it can only add curves where $\\mu=0$). There is no universal recipe for integrating factors, but if $(M_y-N_x)/N$ depends on $x$ alone then $\\mu=e^{\\int f(x)dx}$, with a similar rule depending on $y$ alone. The integrating factor of a first-order linear equation is precisely a special case.",
+    "formulas": [
+      {
+        "latex": "M(x,y)\\,dx+N(x,y)\\,dy=0",
+        "note": "一阶微分方程的对称形式，$x,y$ 地位对等。",
+        "noteEn": "The symmetric form of a first-order equation, treating $x$ and $y$ symmetrically."
+      },
+      {
+        "latex": "\\dfrac{\\partial M}{\\partial y}=\\dfrac{\\partial N}{\\partial x}",
+        "note": "恰当性判别法（单连通区域内，$M,N$ 有连续偏导数）。",
+        "noteEn": "The exactness test (on a simply connected region, with $M,N$ continuously differentiable)."
+      },
+      {
+        "latex": "u=\\int M\\,dx+\\varphi(y),\\qquad \\varphi'(y)=N-\\dfrac{\\partial}{\\partial y}\\int M\\,dx",
+        "note": "求势函数的标准步骤：先对 $x$ 积分，再用 $u_y=N$ 定出 $\\varphi$。",
+        "noteEn": "Standard recipe for the potential: integrate in $x$ first, then use $u_y=N$ to find $\\varphi$."
+      },
+      {
+        "latex": "(\\mu M)_y=(\\mu N)_x",
+        "note": "积分因子 $\\mu$ 的定义式：乘上它以后方程变为恰当方程。",
+        "noteEn": "Defining equation for an integrating factor $\\mu$: after multiplication the equation becomes exact."
+      },
+      {
+        "latex": "\\mu(x)=e^{\\int\\frac{M_y-N_x}{N}dx},\\qquad \\mu(y)=e^{\\int\\frac{N_x-M_y}{M}dy}",
+        "note": "两种特殊情形，前提是相应的商只含单个变量。",
+        "noteEn": "Two special cases, valid when the corresponding quotient depends on a single variable."
+      }
+    ],
+    "expression": {
+      "text": "M(x, y) dx + N(x, y) dy = 0，恰当 ⟺ ∂M/∂y = ∂N/∂x",
+      "symbol": "u(x,y)=C",
+      "note": "通解写在势函数等值线的隐式形式里，通常不（也无法）把 $y$ 解出来。",
+      "noteEn": "The general solution is left implicit as a level curve of the potential; solving explicitly for $y$ is usually impossible."
+    },
+    "properties": [
+      "恰当性等价于向量场 $(M,N)$ 是保守场（无旋场），$u$ 就是它的势函数；「单连通」条件排除了绕洞积分不为零的障碍。",
+      "通解 $u(x,y)=C$ 是隐式的，积分曲线族恰是 $u$ 的等值线，曲线切向与向量 $(M,N)$ 处处正交。",
+      "积分因子不唯一：恰当方程可以看作 $\\mu\\equiv 1$ 的情形，若 $\\mu$ 是积分因子，则任何只含 $u$ 的因子 $g(u)\\mu$ 仍是积分因子。",
+      "一阶线性方程 $y'+P(x)y=Q(x)$ 写成 $(P(x)y-Q(x))dx+dy=0$ 后，$(M_y-N_x)/N=P(x)$，其积分因子 $e^{\\int P\\,dx}$ 正是解线性方程时用的那一个。",
+      "积分因子通常无法用初等函数表出，教材只系统讨论 $\\mu=\\mu(x)$ 与 $\\mu=\\mu(y)$ 两种特殊情形。"
+    ],
+    "propertiesEn": [
+      "Exactness means the vector field $(M,N)$ is conservative (irrotational) with potential $u$; the simply connected hypothesis rules out nonzero circulation around holes.",
+      "The general solution $u(x,y)=C$ is implicit; solution curves are precisely the level curves of $u$, and their tangent direction is everywhere perpendicular to $(M,N)$.",
+      "Integrating factors are not unique: an exact equation corresponds to $\\mu\\equiv 1$, and if $\\mu$ is an integrating factor then so is $g(u)\\mu$ for any function $g$ of $u$.",
+      "Written as $(P(x)y-Q(x))dx+dy=0$, a first-order linear equation has $(M_y-N_x)/N=P(x)$; its integrating factor $e^{\\int P\\,dx}$ is exactly the one used in the linear theory.",
+      "Integrating factors usually cannot be written in elementary form, so textbooks discuss systematically only the cases $\\mu=\\mu(x)$ and $\\mu=\\mu(y)$."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "levels": 10,
+      "title": "势函数 u = x² + y² 的等值线：积分曲线 u(x, y) = C"
+    },
+    "examples": [
+      {
+        "problem": "验证方程 $(3x^{2}+2xy)\\,dx+(x^{2}+4y^{3})\\,dy=0$ 是恰当方程，并求其通解。",
+        "solution": "记 $M=3x^{2}+2xy$，$N=x^{2}+4y^{3}$。计算偏导数\n\n$$\\dfrac{\\partial M}{\\partial y}=2x,\\qquad \\dfrac{\\partial N}{\\partial x}=2x.$$\n\n两者相等且区域是单连通的，所以方程是恰当方程，存在势函数 $u$ 使 $du=M\\,dx+N\\,dy$。\n\n由 $u_x=3x^{2}+2xy$ 对 $x$ 积分：$u=x^{3}+x^{2}y+\\varphi(y)$。再由 $u_y=x^{2}\\cdot 1+\\varphi'(y)=x^{2}+4y^{3}$ 得 $\\varphi'(y)=4y^{3}$，取 $\\varphi(y)=y^{4}$。\n\n所以通解为\n\n$$x^{3}+x^{2}y+y^{4}=C.$$"
+      },
+      {
+        "problem": "求解 $(3xy+y^{2})\\,dx+(x^{2}+xy)\\,dy=0$。",
+        "solution": "记 $M=3xy+y^{2}$，$N=x^{2}+xy$。先检查恰当性：$\\dfrac{\\partial M}{\\partial y}=3x+2y$，$\\dfrac{\\partial N}{\\partial x}=2x+y$，两者不等，方程不是恰当方程。\n\n尝试积分因子。计算\n\n$$\\dfrac{M_y-N_x}{N}=\\dfrac{(3x+2y)-(2x+y)}{x^{2}+xy}=\\dfrac{x+y}{x(x+y)}=\\dfrac{1}{x},$$\n\n只与 $x$ 有关，故取 $\\mu=e^{\\int\\frac{1}{x}dx}=x$。原方程乘 $x$ 得\n\n$$(3x^{2}y+xy^{2})\\,dx+(x^{3}+x^{2}y)\\,dy=0.$$\n\n再验证：$\\dfrac{\\partial}{\\partial y}(3x^{2}y+xy^{2})=3x^{2}+2xy=\\dfrac{\\partial}{\\partial x}(x^{3}+x^{2}y)$，确为恰当方程。\n\n取 $u=\\int(3x^{2}y+xy^{2})\\,dx=x^{3}y+\\dfrac{1}{2}x^{2}y^{2}+\\varphi(y)$，由 $u_y=x^{3}+x^{2}y+\\varphi'(y)=x^{3}+x^{2}y$ 得 $\\varphi'(y)=0$，取 $\\varphi=0$。\n\n于是通解为 $x^{3}y+\\dfrac{1}{2}x^{2}y^{2}=C$，也可写成 $x^{2}y(2x+y)=C$。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "全微分方程",
+      "积分因子"
+    ],
+    "links": [
+      "total-differential",
+      "gradient",
+      "partial-derivative",
+      "first-order-linear-ode",
+      "ode-basic-concepts"
+    ]
+  },
+  {
+    "id": "first-order-applications",
+    "title": "一阶微分方程的应用",
+    "titleEn": "Applications of First-Order Equations",
+    "branch": "ode",
+    "level": 4,
+    "summary": "用一阶方程刻画「变化率由当前状态决定」的实际问题：指数增长与衰减、牛顿冷却、混合问题与逻辑斯蒂增长。",
+    "summaryEn": "First-order equations model processes whose rate of change is determined by the current state: exponential growth and decay, Newton cooling, mixing problems and logistic growth.",
+    "definition": "许多实际问题的共同结构是：某个量 $y$ 的变化率可以写成它当前状态（有时还含时间）的函数，即\n\n$$\\dfrac{dy}{dt}=f(t,y).$$\n\n把这句话翻译成微分方程、再配上初始条件求解，就是应用题的基本流程。\n\n四类经典模型：① **指数增长与衰减**：变化率与当前量成正比，$\\dfrac{dy}{dt}=ky$，解为 $y=y_{0}e^{kt}$，$k>0$ 对应人口、细菌的增长，$k<0$ 描述放射性衰变与药物代谢；② **牛顿冷却**：物体的温度以与「环境温差」成正比的速度变化，$\\dfrac{dT}{dt}=-k(T-T_{m})$；③ **混合问题**：容器中溶质的变化率 = 流入速率 − 流出速率，对充分搅拌的盐水桶有 $\\dfrac{dS}{dt}=c_{\\text{in}}r_{\\text{in}}-\\dfrac{S}{V}r_{\\text{out}}$；④ **逻辑斯蒂增长**：资源有限时增长率受抑制，$\\dfrac{dP}{dt}=rP\\left(1-\\dfrac{P}{K}\\right)$。\n\n这些方程都是变量分离或线性方程，属于可解类型。解出之后还要回到实际情境检验：初值是否满足、长期趋势如何（趋于 $K$ 还是无限增长）、何时达到某个阈值。写方程前先核对单位与量纲，往往能提前发现建模错误。",
+    "definitionEn": "Many real problems share one structure: the rate of change of a quantity $y$ is determined by its current state (and possibly time), that is\n\n$$\\dfrac{dy}{dt}=f(t,y).$$\n\nTranslating that sentence into a differential equation and adding an initial condition is the basic workflow of modelling.\n\nFour classical models: ① **exponential growth and decay**: the rate is proportional to the current amount, $\\dfrac{dy}{dt}=ky$, with solution $y=y_{0}e^{kt}$; $k>0$ covers populations and bacteria, $k<0$ covers radioactive decay and drug clearance. ② **Newton cooling**: temperature changes at a rate proportional to the difference from the surroundings, $\\dfrac{dT}{dt}=-k(T-T_{m})$. ③ **Mixing problems**: the rate of change of solute equals inflow minus outflow; for a well-stirred tank, $\\dfrac{dS}{dt}=c_{\\text{in}}r_{\\text{in}}-\\dfrac{S}{V}r_{\\text{out}}$. ④ **Logistic growth**: limited resources suppress the growth rate, $\\dfrac{dP}{dt}=rP\\left(1-\\dfrac{P}{K}\\right)$.\n\nAll these are separable or linear and therefore solvable. After solving, one should return to the application: does the initial value fit, what is the long-term trend (approach $K$ or grow without bound), and when is a given threshold reached? Checking units before writing the equation often catches modelling mistakes early.",
+    "formulas": [
+      {
+        "latex": "\\dfrac{dy}{dt}=ky\\ \\Longrightarrow\\ y(t)=y_{0}e^{kt}",
+        "note": "指数增长（$k>0$）与指数衰减（$k<0$）模型。",
+        "noteEn": "Exponential growth ($k>0$) and decay ($k<0$)."
+      },
+      {
+        "latex": "y=y_{0}e^{-\\lambda t},\\qquad t_{1/2}=\\dfrac{\\ln 2}{\\lambda}",
+        "note": "放射性衰变与半衰期：半衰期只由衰减常数 $\\lambda$ 决定。",
+        "noteEn": "Radioactive decay and half-life: the half-life depends only on the decay constant $\\lambda$."
+      },
+      {
+        "latex": "\\dfrac{dT}{dt}=-k(T-T_{m})\\ \\Longrightarrow\\ T(t)=T_{m}+(T_{0}-T_{m})e^{-kt}",
+        "note": "牛顿冷却定律：温差按指数规律消失，温度最终趋于环境温度。",
+        "noteEn": "Newton's law of cooling: the temperature gap decays exponentially and the temperature tends to the ambient value."
+      },
+      {
+        "latex": "\\dfrac{dS}{dt}=c_{\\text{in}}r_{\\text{in}}-\\dfrac{S}{V}r_{\\text{out}}",
+        "note": "混合问题：流入 − 流出；流入流出速率相等时体积 $V$ 不变，方程为线性。",
+        "noteEn": "Mixing problem: inflow minus outflow; if the rates are equal, $V$ is constant and the equation is linear."
+      },
+      {
+        "latex": "\\dfrac{dP}{dt}=rP\\left(1-\\dfrac{P}{K}\\right)\\ \\Longrightarrow\\ P(t)=\\dfrac{K}{1+Ce^{-rt}}",
+        "note": "逻辑斯蒂增长：$P\\to K$（环境容量），在 $P=K/2$ 处增长最快。",
+        "noteEn": "Logistic growth: $P\\to K$ (the carrying capacity), with fastest growth at $P=K/2$."
+      }
+    ],
+    "expression": {
+      "text": "变化率 = 比例系数 × 当前状态（+ 修正项）",
+      "symbol": "\\dfrac{dy}{dt}=f(t,y)",
+      "note": "先用文字写出「谁的变化率等于什么」，再判断它属于增长、冷却、混合还是逻辑斯蒂模型。",
+      "noteEn": "First write, in words, what rate of change equals what; then identify the model type."
+    },
+    "properties": [
+      "指数模型的标志是「增长率与当前量成正比」，其解要么单调增、要么单调减，永远不变号。",
+      "半衰期、倍增时间与初始量无关：$t_{1/2}=\\ln 2/\\lambda$ 只由比例系数决定，这正是碳定年法可行的原因。",
+      "牛顿冷却中温差 $T-T_{m}$ 按指数衰减，物体最终趋于环境温度，且与环境温度的差距越大降温越快。",
+      "混合问题在流入速率等于流出速率时体积不变，方程关于溶质总量是一阶线性方程，解最终趋于平衡值 $c_{\\text{in}}V$。",
+      "逻辑斯蒂解从正初值出发单调趋近环境容量 $K$，曲线呈 S 形，$P=K/2$ 处增长最快；初值超过 $K$ 则单调下降到 $K$。"
+    ],
+    "propertiesEn": [
+      "The hallmark of an exponential model is a rate proportional to the current amount; its solutions are monotone and never change sign.",
+      "Half-lives and doubling times are independent of the initial amount: $t_{1/2}=\\ln 2/\\lambda$ depends only on the rate constant, which is why carbon dating works.",
+      "Under Newton cooling the gap $T-T_{m}$ decays exponentially; the body tends to ambient temperature, faster when the gap is larger.",
+      "When inflow and outflow rates are equal, the volume of a mixing tank stays constant, the equation for the solute is linear, and the solution approaches the equilibrium value $c_{\\text{in}}V$.",
+      "A logistic solution with positive initial value increases monotonically towards the carrying capacity $K$ along an S-shaped curve, growing fastest at $P=K/2$; an initial value above $K$ decreases monotonically towards $K$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2*exp(0.4*x)",
+          "color": "#ff6b9d",
+          "label": "y = 2e^(0.4x)（增长）"
+        },
+        {
+          "expr": "exp(-0.5*x)",
+          "color": "#4cc9f0",
+          "label": "y = e^(-0.5x)（衰减）"
+        }
+      ],
+      "xRange": [
+        -1,
+        6
+      ],
+      "yRange": [
+        -1,
+        12
+      ],
+      "title": "指数增长与指数衰减：dy/dt = ky"
+    },
+    "examples": [
+      {
+        "problem": "一杯 $90\\,{}^{\\circ}\\mathrm{C}$ 的水放在 $20\\,{}^{\\circ}\\mathrm{C}$ 的房间里，$10$ 分钟后水温降到 $60\\,{}^{\\circ}\\mathrm{C}$。若用牛顿冷却定律建模，水温降到 $30\\,{}^{\\circ}\\mathrm{C}$ 还需要多长时间？",
+        "solution": "设水温为 $T(t)$，环境温度 $T_{m}=20$，牛顿冷却方程为\n\n$$\\dfrac{dT}{dt}=-k(T-20).$$\n\n令 $\\theta=T-20$，则 $\\theta'=-k\\theta$，得 $\\theta=70e^{-kt}$（由 $T(0)=90$ 得 $\\theta(0)=70$），即 $T=20+70e^{-kt}$。\n\n代入 $T(10)=60$：$40=70e^{-10k}$，所以 $e^{-10k}=\\dfrac{4}{7}$，$k=\\dfrac{1}{10}\\ln\\dfrac{7}{4}\\approx 0.0560$。\n\n再令 $T=30$：$10=70e^{-kt}$，即 $e^{-kt}=\\dfrac{1}{7}$，$kt=\\ln 7$，故\n\n$$t=\\dfrac{\\ln 7}{\\frac{1}{10}\\ln\\frac{7}{4}}=\\dfrac{10\\ln 7}{\\ln 7-\\ln 4}\\approx 34.8\\ \\text{分钟}.$$\n\n即从第 $10$ 分钟起还需约 $24.8$ 分钟（从开始算起约 $34.8$ 分钟）水温降到 $30\\,{}^{\\circ}\\mathrm{C}$。"
+      },
+      {
+        "problem": "一容器内盛有 $1000\\ \\mathrm{L}$ 盐水，含盐 $20\\ \\mathrm{kg}$。以 $10\\ \\mathrm{L/min}$ 的速度注入含盐 $0.1\\ \\mathrm{kg/L}$ 的盐水，同时以相同速度排出充分搅拌的混合液。求任意时刻容器内的含盐量 $S(t)$，以及含盐量达到 $60\\ \\mathrm{kg}$ 所需的时间。",
+        "solution": "注入与排出速率相同，体积始终为 $1000\\ \\mathrm{L}$。由「变化率 = 流入 − 流出」：\n\n$$\\dfrac{dS}{dt}=0.1\\times 10-\\dfrac{S}{1000}\\times 10=1-\\dfrac{S}{100},\\qquad S(0)=20.$$\n\n这是一阶线性方程 $S'+\\dfrac{S}{100}=1$。积分因子 $e^{t/100}$，得 $\\left(Se^{t/100}\\right)'=e^{t/100}$，积分得\n\n$$S=100+Ce^{-t/100}.$$\n\n由 $S(0)=20$ 得 $C=-80$，所以\n\n$$S(t)=100-80e^{-t/100}\\ (\\mathrm{kg}).$$\n\n令 $S=60$：$60=100-80e^{-t/100}$，即 $e^{-t/100}=\\dfrac{1}{2}$，得 $t=100\\ln 2\\approx 69.3$ 分钟。含盐量最终趋于平衡值 $100\\ \\mathrm{kg}$。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "数学建模",
+      "指数增长",
+      "牛顿冷却"
+    ],
+    "links": [
+      "separable-ode",
+      "exponential-growth-decay",
+      "first-order-linear-ode",
+      "bernoulli-equation"
+    ]
+  },
+  {
+    "id": "reducible-ode",
+    "title": "可降阶的高阶方程",
+    "titleEn": "Higher-Order Equations Reducible in Order",
+    "branch": "ode",
+    "level": 4,
+    "summary": "三类可用代换降阶的二阶方程：$y''=f(x)$ 直接积分；$y''=f(x,y')$ 令 $p=y'$；$y''=f(y,y')$ 令 $p=y'$ 且 $y''=p\\,\\mathrm{d}p/\\mathrm{d}y$。",
+    "summaryEn": "Three types of second-order equations reducible to first-order problems: y''=f(x) by direct integration, y''=f(x,y') with p=y', and y''=f(y,y') with p=y' and y''=p dp/dy.",
+    "definition": "高阶方程一般不好解，但有三类二阶方程可以通过代换把阶数降下来，降阶后得到的往往就是已经会解的变量分离方程或线性方程。核心思想是：**方程里「缺少」哪个变量，就把另一个变量拉进来定义新未知函数**。\n\n**类型一** $y''=f(x)$：右端只含 $x$。连续积分两次即可，通解中自然出现 $C_{1}x+C_{2}$，例如 $y''=\\sin x$ 的解是 $y=-\\sin x+C_{1}x+C_{2}$。\n\n**类型二** $y''=f(x,y')$：方程不显含 $y$。令 $p=y'$，则 $y''=p'$，方程化为以 $p$ 为未知函数的一阶方程 $p'=f(x,p)$；解出 $p=P(x,C_{1})$ 后再积分一次得 $y$。\n\n**类型三** $y''=f(y,y')$：方程不显含 $x$。仍令 $p=y'$，但把 $p$ 看作 $y$ 的函数，由链式法则\n\n$$y''=\\dfrac{dp}{dx}=\\dfrac{dp}{dy}\\cdot\\dfrac{dy}{dx}=p\\dfrac{dp}{dy},$$\n\n于是方程化为 $p\\dfrac{dp}{dy}=f(y,p)$，也是关于 $p(y)$ 的一阶方程。\n\n每降一阶就出现一个新的任意常数，二阶方程的通解应含两个相互独立、不能再合并的常数。另外，用 $p$ 或 $y$ 作分母时，要单独检查 $p\\equiv 0$（即常数解）是否也是方程的解。",
+    "definitionEn": "Higher-order equations are generally hard, but three types of second-order equations can be reduced in order by a substitution, after which one usually faces a separable or linear equation. The guiding idea: whichever variable is missing from the equation is the one to trade for a new unknown function.\n\n**Type 1**, $y''=f(x)$: the right side involves $x$ only. Integrate twice and the general solution automatically contains $C_{1}x+C_{2}$; for instance $y''=\\sin x$ gives $y=-\\sin x+C_{1}x+C_{2}$.\n\n**Type 2**, $y''=f(x,y')$: the equation does not contain $y$. Put $p=y'$, so $y''=p'$, and the equation becomes a first-order equation $p'=f(x,p)$ for $p$; after solving $p=P(x,C_{1})$, integrate once more to obtain $y$.\n\n**Type 3**, $y''=f(y,y')$: the equation does not contain $x$. Again put $p=y'$, but now regard $p$ as a function of $y$. The chain rule gives\n\n$$y''=\\dfrac{dp}{dx}=\\dfrac{dp}{dy}\\cdot\\dfrac{dy}{dx}=p\\dfrac{dp}{dy},$$\n\nso the equation becomes $p\\dfrac{dp}{dy}=f(y,p)$, again first order but now in $p(y)$.\n\nEach reduction introduces a new arbitrary constant, and the general solution of a second-order equation should contain two independent constants that cannot be merged. Finally, whenever one divides by $p$ or by $y$, one must check separately whether $p\\equiv 0$ (constant solutions) also solves the equation.",
+    "formulas": [
+      {
+        "latex": "y''=f(x)\\ \\Longrightarrow\\ y=\\int\\left(\\int f(x)\\,dx\\right)dx+C_{1}x+C_{2}",
+        "note": "类型一：连续积分两次，几何上 $y$ 是 $f$ 的二重积分。",
+        "noteEn": "Type 1: integrate twice; geometrically $y$ is a double integral of $f$."
+      },
+      {
+        "latex": "y''=f(x,y'):\\quad p=y',\\quad p'=f(x,p)",
+        "note": "类型二：方程缺 $y$，令 $p=y'$ 后降为一阶方程。",
+        "noteEn": "Type 2: with $y$ missing, $p=y'$ lowers the order by one."
+      },
+      {
+        "latex": "y''=\\dfrac{dp}{dx}=\\dfrac{dp}{dy}\\cdot\\dfrac{dy}{dx}=p\\dfrac{dp}{dy}",
+        "note": "类型三的关键恒等式：把对 $x$ 的导数换成对 $y$ 的导数。",
+        "noteEn": "The key identity of type 3: convert the $x$-derivative into a $y$-derivative."
+      },
+      {
+        "latex": "y''=f(y,y'):\\quad p\\dfrac{dp}{dy}=f(y,p)",
+        "note": "类型三：方程缺 $x$，得到关于 $p(y)$ 的一阶方程。",
+        "noteEn": "Type 3: with $x$ missing, one gets a first-order equation for $p(y)$."
+      },
+      {
+        "latex": "y''=f(y'):\\quad \\dfrac{dp}{f(p)}=dx\\quad(f(p)\\neq 0)",
+        "note": "类型二的重要子情形：变量分离后直接积分。",
+        "noteEn": "An important sub-case of type 2: separate variables and integrate."
+      }
+    ],
+    "expression": {
+      "text": "y'' = f(x) ｜ y'' = f(x, y') ｜ y'' = f(y, y')",
+      "symbol": "p=y'",
+      "note": "缺 $y$ 用 $p'=y''$；缺 $x$ 用 $y''=p\\,\\mathrm{d}p/\\mathrm{d}y$；两个都不缺就不能这样降阶。",
+      "noteEn": "Missing $y$: use $p'=y''$. Missing $x$: use $y''=p\\,dp/dy$. If neither is missing, this reduction does not apply."
+    },
+    "properties": [
+      "识别口诀：方程里不出现 $y$，令 $p=y'$ 且 $p'=y''$；不出现 $x$，令 $p=y'$ 且 $y''=p\\dfrac{dp}{dy}$。",
+      "降阶要「分两步积分」：先解出 $p=y'$（得一个常数），再积分一次得到 $y$（得第二个常数）。",
+      "类型一 $y''=f(x)$ 的解曲线由 $f$ 唯一决定，只差一次函数的自由度，这正是两个积分常数的几何含义。",
+      "除以 $p$ 会丢掉 $p\\equiv 0$ 的解，除以 $y$ 会丢掉常数解：例如 $yy''=(y')^{2}$ 中 $y\\equiv C$ 也是解。",
+      "若方程同时显含 $y,y',y''$（如 $y''+y=0$），不能直接降阶，需要特征方程、级数或拉普拉斯变换等方法。"
+    ],
+    "propertiesEn": [
+      "Recognition rule: if $y$ is absent, put $p=y'$, $p'=y''$; if $x$ is absent, put $p=y'$ and $y''=p\\dfrac{dp}{dy}$.",
+      "Reduction takes two integrations: solve first for $p=y'$ (one constant), then integrate again for $y$ (a second constant).",
+      "For type 1 the solution curve is determined by $f$ up to an affine function, which is exactly the geometric meaning of the two integration constants.",
+      "Dividing by $p$ loses the solutions with $p\\equiv 0$, and dividing by $y$ loses constant solutions: in $yy''=(y')^{2}$, every $y\\equiv C$ is a solution.",
+      "If the equation contains $y,y',y''$ simultaneously (for example $y''+y=0$), this reduction does not apply and one needs the characteristic equation, power series or Laplace transforms."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "y = sin x（y'' = -sin x）"
+        },
+        {
+          "expr": "x^2",
+          "color": "#ff6b9d",
+          "label": "y = x^2（y'' = 2）"
+        }
+      ],
+      "xRange": [
+        -3.2,
+        3.2
+      ],
+      "yRange": [
+        -2,
+        11
+      ],
+      "title": "y'' = f(x) 型：sin x 与 x² 都是两次积分的产物"
+    },
+    "examples": [
+      {
+        "problem": "求 $y''=x+\\sin x$ 满足 $y(0)=0$，$y'(0)=0$ 的特解。",
+        "solution": "这是类型一，直接积分两次。第一次积分：\n\n$$y'=\\dfrac{x^{2}}{2}-\\cos x+C_{1}.$$\n\n代入 $y'(0)=0$：$0-1+C_{1}=0$，得 $C_{1}=1$，即 $y'=\\dfrac{x^{2}}{2}-\\cos x+1$。\n\n第二次积分：$y=\\dfrac{x^{3}}{6}-\\sin x+x+C_{2}$，代入 $y(0)=0$ 得 $C_{2}=0$。所以\n\n$$y=\\dfrac{x^{3}}{6}-\\sin x+x.$$\n\n检验：$y'=\\dfrac{x^{2}}{2}-\\cos x+1$，$y''=x+\\sin x$，且两个初值条件都满足。"
+      },
+      {
+        "problem": "求 $y''=\\dfrac{y'}{x}+x$（$x>0$）满足 $y(1)=1$，$y'(1)=0$ 的特解。",
+        "solution": "方程不显含 $y$，属类型二。令 $p=y'$，则 $p'=\\dfrac{p}{x}+x$，即线性方程 $p'-\\dfrac{p}{x}=x$。\n\n积分因子 $\\mu=e^{\\int(-\\frac{1}{x})dx}=\\dfrac{1}{x}$，故 $\\left(\\dfrac{p}{x}\\right)'=1$，积分得 $\\dfrac{p}{x}=x+C_{1}$，即 $p=x^{2}+C_{1}x$。\n\n由 $p(1)=0$ 得 $1+C_{1}=0$，$C_{1}=-1$，所以 $y'=x^{2}-x$。再积分：\n\n$$y=\\dfrac{x^{3}}{3}-\\dfrac{x^{2}}{2}+C_{2}.$$\n\n代入 $y(1)=1$：$\\dfrac{1}{3}-\\dfrac{1}{2}+C_{2}=1$，得 $C_{2}=\\dfrac{7}{6}$。因此\n\n$$y=\\dfrac{x^{3}}{3}-\\dfrac{x^{2}}{2}+\\dfrac{7}{6}.$$"
+      },
+      {
+        "problem": "求 $yy''=(y')^{2}$ 满足 $y(0)=1$，$y'(0)=2$ 的特解。",
+        "solution": "方程不显含 $x$，属类型三。令 $p=y'$，并视 $p$ 为 $y$ 的函数，则 $y''=p\\dfrac{dp}{dy}$，方程化为\n\n$$yp\\dfrac{dp}{dy}=p^{2}.$$\n\n当 $p\\neq 0$ 时两边除以 $yp$：$\\dfrac{dp}{dy}=\\dfrac{p}{y}$，分离变量得 $\\dfrac{dp}{p}=\\dfrac{dy}{y}$，积分得 $p=C_{1}y$。\n\n由 $y(0)=1$，$y'(0)=2$ 知在 $y=1$ 处 $p=2$，于是 $C_{1}=2$，即 $\\dfrac{dy}{dx}=2y$。解之得 $y=C_{2}e^{2x}$，再由 $y(0)=1$ 得 $C_{2}=1$，所以\n\n$$y=e^{2x}.$$\n\n另外 $y\\equiv C$（即 $p\\equiv 0$）也是原方程的一族解，求解时被除掉了。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "降阶",
+      "高阶方程"
+    ],
+    "links": [
+      "ode-basic-concepts",
+      "separable-ode",
+      "first-order-linear-ode",
+      "higher-order-derivative",
+      "integral"
+    ]
+  },
+  {
+    "id": "linear-ode-theory",
+    "title": "高阶线性方程解的结构",
+    "titleEn": "Structure of Solutions of Linear Differential Equations",
+    "branch": "ode",
+    "level": 5,
+    "summary": "二阶线性齐次方程的通解是两个线性无关解的线性组合（$W\\neq 0$ 判别）；非齐次方程的通解 = 齐次通解 + 一个特解。",
+    "summaryEn": "The general solution of a second-order linear homogeneous equation is a combination of two linearly independent solutions (detected by $W\\neq 0$); for a nonhomogeneous equation it is the homogeneous general solution plus one particular solution.",
+    "definition": "形如 $y''+P(x)y'+Q(x)y=f(x)$ 的方程称为**二阶线性方程**；$f(x)\\equiv 0$ 时为线性**齐次**方程，否则为线性**非齐次**方程。线性方程理论最漂亮的地方在于：无论系数多复杂，解集的结构都可以完整说清楚。\n\n齐次方程 $y''+P(x)y'+Q(x)y=0$ 的解满足**叠加原理**：若 $y_{1},y_{2}$ 是解，则任意常数组合 $C_{1}y_{1}+C_{2}y_{2}$ 仍是解。如果 $y_{1},y_{2}$ 线性无关（不存在不全为零的常数使 $k_{1}y_{1}+k_{2}y_{2}\\equiv 0$），它们的线性组合就给出了全部解。判别线性无关的便捷工具是**朗斯基行列式**\n\n$$W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}:$$\n\n$y_{1},y_{2}$ 线性无关当且仅当 $W(x)\\neq 0$。\n\n非齐次方程的解与它对应的齐次方程密不可分：若 $\\bar y$ 是一个特解，则 $y$ 是方程的解当且仅当 $y-\\bar y$ 是齐次方程的解，因此\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y\\ \\text{齐次通解}}+\\underbrace{\\bar y}_{y^{*}\\ \\text{一个特解}}.$$\n\n推论：非齐次方程任意两个解之差必是齐次解；两非齐次解只有当常数之和为 1 的线性组合才仍是解。\n\n对 $n$ 阶线性齐次方程，同一结论升维成立：恰有 $n$ 个线性无关解（基本解组），它们的任意线性组合就是通解。这背后是解的存在唯一性定理，也是「解集构成线性空间」这一线性代数观点在微分方程中的体现。",
+    "definitionEn": "An equation of the form $y''+P(x)y'+Q(x)y=f(x)$ is a **second-order linear equation**; it is **homogeneous** when $f(x)\\equiv 0$ and **nonhomogeneous** otherwise. The beauty of the linear theory is that, however complicated the coefficients, the structure of the solution set can be described completely.\n\nSolutions of the homogeneous equation $y''+P(x)y'+Q(x)y=0$ obey the **superposition principle**: if $y_{1},y_{2}$ solve it, so does any combination $C_{1}y_{1}+C_{2}y_{2}$. If $y_{1},y_{2}$ are linearly independent (no nontrivial constants satisfy $k_{1}y_{1}+k_{2}y_{2}\\equiv 0$), their combinations give all solutions. Linear independence is detected by the **Wronskian**\n\n$$W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}:$$\n\nthe two solutions are linearly independent exactly when $W(x)\\neq 0$.\n\nNonhomogeneous equations are tied to their homogeneous partners: if $\\bar y$ is one particular solution, then $y$ solves the equation if and only if $y-\\bar y$ solves the homogeneous equation, so\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y\\ \\text{homogeneous general solution}}+\\underbrace{\\bar y}_{y^{*}\\ \\text{one particular solution}}.$$\n\nConsequently, the difference of any two solutions of the nonhomogeneous equation is a homogeneous solution; a linear combination of two nonhomogeneous solutions is again a solution only when the coefficients sum to 1.\n\nFor an $n$-th order linear homogeneous equation the same statement holds in higher dimension: there are exactly $n$ linearly independent solutions (a fundamental system), and their combinations form the general solution. This rests on the existence–uniqueness theorem and expresses the linear-algebra viewpoint that the solution set is a linear space.",
+    "formulas": [
+      {
+        "latex": "y''+P(x)y'+Q(x)y=0\\ \\Longrightarrow\\ y=C_{1}y_{1}+C_{2}y_{2}\\quad(W\\neq 0)",
+        "note": "齐次方程通解：两个线性无关解的线性组合（叠加原理）。",
+        "noteEn": "General solution of the homogeneous equation: combinations of two linearly independent solutions."
+      },
+      {
+        "latex": "W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}",
+        "note": "朗斯基行列式，用来判别两个解是否线性无关。",
+        "noteEn": "The Wronskian, used to test linear independence."
+      },
+      {
+        "latex": "y_{1},y_{2}\\ \\text{线性无关}\\iff W(y_{1},y_{2})\\neq 0",
+        "note": "判别定理；在系数连续的区间上 $W$ 或恒不为零、或恒为零。",
+        "noteEn": "The criterion; on an interval of continuity of the coefficients, $W$ is either everywhere nonzero or identically zero."
+      },
+      {
+        "latex": "y=Y(x)+y^{*}(x)",
+        "note": "非齐次通解 = 对应齐次通解 + 一个特解。",
+        "noteEn": "General solution of the nonhomogeneous equation = homogeneous general solution + one particular solution."
+      },
+      {
+        "latex": "L[y_{1}]=f_{1},\\ L[y_{2}]=f_{2}\\ \\Longrightarrow\\ L[c_{1}y_{1}+c_{2}y_{2}]=c_{1}f_{1}+c_{2}f_{2}",
+        "note": "叠加原理（$L$ 为线性微分算子）：右端可拆项分别求特解再相加。",
+        "noteEn": "Superposition ($L$ a linear differential operator): a right-hand side that splits allows solving each piece separately and adding."
+      }
+    ],
+    "expression": {
+      "text": "y'' + P(x)y' + Q(x)y = f(x)",
+      "symbol": "y=C_{1}y_{1}+C_{2}y_{2}+y^{*}",
+      "note": "「先解齐次，再找一个特解，两者相加」是所有线性方程求解的总步骤。",
+      "noteEn": "Solve the homogeneous equation first, find one particular solution, then add: the universal plan for linear equations."
+    },
+    "properties": [
+      "齐次方程的全部解构成线性空间（二维），通解就是基本解组的线性组合。",
+      "刘维尔公式：$W(x)=W(x_{0})e^{-\\int_{x_{0}}^{x}P(t)\\,dt}$，说明 $W$ 不可能只在个别点为零——要么恒不为零，要么恒为零。",
+      "非齐次方程的两个解之差是齐次解，因此非齐次方程的解集是解空间平移一个特解得到的仿射集。",
+      "叠加原理对右端成立：$f=f_{1}+f_{2}$ 时，分别求 $f_{1},f_{2}$ 对应的特解，其和就是原方程的特解。",
+      "$n$ 阶线性齐次方程恰有 $n$ 个线性无关解；这与初值条件 $y(x_{0}),y'(x_{0}),\\dots,y^{(n-1)}(x_{0})$ 恰好 $n$ 个自由度相匹配。"
+    ],
+    "propertiesEn": [
+      "The solution set of the homogeneous equation is a two-dimensional linear space, and the general solution is a combination of a fundamental system.",
+      "Liouville's formula $W(x)=W(x_{0})e^{-\\int_{x_{0}}^{x}P(t)\\,dt}$ shows the Wronskian cannot vanish at isolated points only: it is either everywhere nonzero or identically zero.",
+      "The difference of two solutions of a nonhomogeneous equation is homogeneous, so its solution set is a translate (an affine set) of the solution space.",
+      "Superposition applies to the right-hand side: if $f=f_{1}+f_{2}$, particular solutions for $f_{1}$ and $f_{2}$ can be found separately and added.",
+      "An $n$-th order linear homogeneous equation has exactly $n$ linearly independent solutions, matching the $n$ degrees of freedom in the initial data $y(x_{0}),y'(x_{0}),\\dots,y^{(n-1)}(x_{0})$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "y1 = sin x"
+        },
+        {
+          "expr": "cos(x)",
+          "color": "#ff6b9d",
+          "label": "y2 = cos x"
+        },
+        {
+          "expr": "sin(x)+cos(x)",
+          "color": "#06d6a0",
+          "label": "y1 + y2 = sin x + cos x（通解的一支）"
+        }
+      ],
+      "xRange": [
+        -6.5,
+        6.5
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "title": "y'' + y = 0 的两个线性无关解与它们的组合"
+    },
+    "examples": [
+      {
+        "problem": "验证 $y_{1}=\\cos x$、$y_{2}=\\sin x$ 都是 $y''+y=0$ 的解，计算朗斯基行列式说明它们线性无关，并写出通解。",
+        "solution": "求导：$y_{1}''=-\\cos x=-y_{1}$，所以 $y_{1}''+y_{1}=0$；同理 $y_{2}''=-\\sin x=-y_{2}$，故两者都是解。\n\n计算朗斯基行列式：\n\n$$W=\\cos x\\cdot\\cos x-(-\\sin x)\\cdot\\sin x=\\cos^{2}x+\\sin^{2}x=1\\neq 0.$$\n\n所以 $y_{1},y_{2}$ 线性无关，通解为\n\n$$y=C_{1}\\cos x+C_{2}\\sin x.$$\n\n（附：由 $y(0)=0$，$y'(0)=1$ 可得 $C_{1}=0$，$C_{2}=1$，特解 $y=\\sin x$。）"
+      },
+      {
+        "problem": "验证 $y^{*}=-x$ 是 $y''-y=x$ 的一个特解，写出该方程的通解；并说明任意两个解之差满足什么方程。",
+        "solution": "代入 $y^{*}=-x$：$(y^{*})''-y^{*}=0-(-x)=x$，所以 $y^{*}=-x$ 确为特解。\n\n对应齐次方程 $y''-y=0$ 的特征方程 $r^{2}-1=0$ 给出 $r=\\pm 1$，齐次通解为 $Y=C_{1}e^{x}+C_{2}e^{-x}$。\n\n由解的结构定理，非齐次通解为\n\n$$y=C_{1}e^{x}+C_{2}e^{-x}-x.$$\n\n若 $y_{1},y_{2}$ 是任意两个解，则 $(y_{1}-y_{2})''-(y_{1}-y_{2})=x-x=0$，即两解之差满足齐次方程——这正是「非齐次通解 = 齐次通解 + 特解」的另一面。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "线性方程",
+      "朗斯基行列式",
+      "叠加原理"
+    ],
+    "links": [
+      "constant-coefficient-homogeneous",
+      "constant-coefficient-nonhomogeneous",
+      "reducible-ode",
+      "higher-order-derivative",
+      "ode-basic-concepts"
+    ]
+  },
+  {
+    "id": "constant-coefficient-homogeneous",
+    "title": "常系数齐次线性方程",
+    "titleEn": "Homogeneous Linear Equations with Constant Coefficients",
+    "branch": "ode",
+    "level": 4,
+    "summary": "方程 $ay''+by'+cy=0$ 的解由特征方程 $ar^{2}+br+c=0$ 的根决定：两实根给指数解，重根补 $xe^{rx}$，复根给带指数因子的三角函数。",
+    "summaryEn": "Solutions of ay''+by'+cy=0 follow the roots of ar²+br+c=0: distinct real roots give exponentials, a repeated root brings in xe^(rx), and complex roots give trigonometric solutions with an exponential factor.",
+    "definition": "形如 $ay''+by'+cy=0$（$a,b,c$ 为常数，$a\\neq 0$）的方程称为**常系数二阶线性齐次方程**。因为系数是常数，可以尝试指数型解 $y=e^{rx}$：代入得 $(ar^{2}+br+c)e^{rx}=0$，而 $e^{rx}\\neq 0$，于是必须有\n\n$$ar^{2}+br+c=0.$$\n\n这个二次方程称为**特征方程**，它的根称为**特征根**。求解微分方程的问题就此化为解一个二次方程的问题。\n\n按判别式 $\\Delta=b^{2}-4ac$ 分三种情形：\n\n**（1）$\\Delta>0$**：两个不同实根 $r_{1},r_{2}$，两个线性无关解 $e^{r_{1}x},e^{r_{2}x}$，通解 $y=C_{1}e^{r_{1}x}+C_{2}e^{r_{2}x}$；\n\n**（2）$\\Delta=0$**：二重根 $r$，只得到 $e^{rx}$ 一个解，第二个解用 $xe^{rx}$ 补上，通解 $y=(C_{1}+C_{2}x)e^{rx}$；\n\n**（3）$\\Delta<0$**：共轭复根 $r=\\alpha\\pm\\beta i$，把复值解 $e^{(\\alpha+\\beta i)x}$ 拆成实部与虚部，通解 $y=e^{\\alpha x}(C_{1}\\cos\\beta x+C_{2}\\sin\\beta x)$。\n\n三种情形的直观含义是「解的生长方式」：正实根指数增长，负实根指数衰减，复根的实部 $\\alpha$ 控制振幅趋势、虚部 $\\beta$ 控制振荡频率。给定初值 $y(x_{0})=y_{0},\\ y'(x_{0})=y_{0}'$，两个常数恰好能被唯一确定（因为 $W\\neq 0$）。",
+    "definitionEn": "An equation of the form $ay''+by'+cy=0$ with constant coefficients ($a\\neq 0$) is a **homogeneous linear equation with constant coefficients**. Since the coefficients are constant, it is natural to try an exponential solution $y=e^{rx}$: substituting gives $(ar^{2}+br+c)e^{rx}=0$, and since $e^{rx}\\neq 0$ we must have\n\n$$ar^{2}+br+c=0.$$\n\nThis quadratic is called the **characteristic equation**, and its roots are the **characteristic roots**. Solving the differential equation thus reduces to solving a quadratic.\n\nAccording to the discriminant $\\Delta=b^{2}-4ac$ there are three cases:\n\n**(1) $\\Delta>0$**: two distinct real roots $r_{1},r_{2}$, two independent solutions $e^{r_{1}x},e^{r_{2}x}$, general solution $y=C_{1}e^{r_{1}x}+C_{2}e^{r_{2}x}$;\n\n**(2) $\\Delta=0$**: a repeated root $r$; one solution is $e^{rx}$ and the second is $xe^{rx}$, giving $y=(C_{1}+C_{2}x)e^{rx}$;\n\n**(3) $\\Delta<0$**: complex conjugate roots $r=\\alpha\\pm\\beta i$; splitting the complex solution $e^{(\\alpha+\\beta i)x}$ into real and imaginary parts gives $y=e^{\\alpha x}(C_{1}\\cos\\beta x+C_{2}\\sin\\beta x)$.\n\nIntuitively, the characteristic roots describe how solutions grow: a positive real root means exponential growth, a negative one exponential decay, while for complex roots the real part $\\alpha$ controls the amplitude trend and the imaginary part $\\beta$ controls the frequency. Initial data $y(x_{0})=y_{0},\\ y'(x_{0})=y_{0}'$ determine the two constants uniquely, because the Wronskian of the fundamental system never vanishes.",
+    "formulas": [
+      {
+        "latex": "ay''+by'+cy=0\\qquad(a,b,c\\ \\text{为常数},\\ a\\neq 0)",
+        "note": "常系数二阶线性齐次方程的标准形式。",
+        "noteEn": "Standard form of a second-order homogeneous linear equation with constant coefficients."
+      },
+      {
+        "latex": "ar^{2}+br+c=0,\\qquad \\Delta=b^{2}-4ac",
+        "note": "特征方程与判别式；设 $y=e^{rx}$ 代入即可得到。",
+        "noteEn": "The characteristic equation and its discriminant, obtained by substituting $y=e^{rx}$."
+      },
+      {
+        "latex": "\\Delta>0:\\quad y=C_{1}e^{r_{1}x}+C_{2}e^{r_{2}x}",
+        "note": "两个不同实根情形：两个纯指数解的线性组合。",
+        "noteEn": "Two distinct real roots: combinations of two exponential solutions."
+      },
+      {
+        "latex": "\\Delta=0:\\quad y=(C_{1}+C_{2}x)e^{rx}",
+        "note": "二重根情形：第二个解 $xe^{rx}$ 由降阶法得到。",
+        "noteEn": "Repeated root: the second solution $xe^{rx}$ comes from reduction of order."
+      },
+      {
+        "latex": "\\Delta<0:\\quad y=e^{\\alpha x}\\left(C_{1}\\cos\\beta x+C_{2}\\sin\\beta x\\right),\\qquad r=\\alpha\\pm\\beta i",
+        "note": "共轭复根情形：指数振幅 × 振荡（实部控振幅、虚部控频率）。",
+        "noteEn": "Complex conjugate roots: oscillatory solutions with exponential amplitude; the real part controls the envelope and the imaginary part the frequency."
+      }
+    ],
+    "expression": {
+      "text": "ay'' + by' + cy = 0   ⟷   ar² + br + c = 0",
+      "symbol": "y=e^{rx}",
+      "note": "把微分方程问题翻译成二次方程问题：解出特征根，再按三种情形对号入座。",
+      "noteEn": "Translate the differential equation into a quadratic: find the roots, then read off the solution according to the three cases."
+    },
+    "properties": [
+      "特征根只由系数 $a,b,c$ 决定，与初值无关；同一方程的一切解都由这几个根生成。",
+      "两个不同实根情形的解至多有一个零点：$C_{1}e^{r_{1}x}+C_{2}e^{r_{2}x}=e^{r_{1}x}(C_{1}+C_{2}e^{(r_{2}-r_{1})x})$ 中括号内是单调函数。",
+      "重根情形必须乘 $x$：$xe^{rx}$ 正是把降阶法用在已知解 $e^{rx}$ 上得到的结果。",
+      "复根情形必振荡：$\\beta$ 决定角频率（周期 $2\\pi/\\beta$），$\\alpha<0$ 振荡衰减、$\\alpha>0$ 振幅增大、$\\alpha=0$ 为纯周期振荡。",
+      "解集是二维线性空间；给定 $y(x_{0}),y'(x_{0})$ 后通解中的两个常数被唯一确定，对应初值问题的存在唯一性。"
+    ],
+    "propertiesEn": [
+      "The characteristic roots depend only on $a,b,c$, never on the initial data; every solution is generated by these roots.",
+      "In the two-distinct-real-roots case a solution has at most one zero, since $C_{1}e^{r_{1}x}+C_{2}e^{r_{2}x}=e^{r_{1}x}(C_{1}+C_{2}e^{(r_{2}-r_{1})x})$ and the bracket is monotone.",
+      "In the repeated-root case the extra factor $x$ is mandatory: $xe^{rx}$ is exactly what reduction of order produces from the known solution $e^{rx}$.",
+      "Complex roots always mean oscillation: $\\beta$ fixes the frequency (period $2\\pi/\\beta$); $\\alpha<0$ damps the oscillation, $\\alpha>0$ amplifies it and $\\alpha=0$ gives a pure periodic oscillation.",
+      "The solution set is a two-dimensional linear space; initial data $y(x_{0}),y'(x_{0})$ determine the two constants uniquely, in agreement with the existence–uniqueness theorem."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(2*x)",
+          "color": "#4cc9f0",
+          "label": "e^(2x)（Δ>0，增长）"
+        },
+        {
+          "expr": "exp(-x)",
+          "color": "#06d6a0",
+          "label": "e^(-x)（Δ>0，衰减）"
+        },
+        {
+          "expr": "exp(-0.3*x)*cos(3*x)",
+          "color": "#ff6b9d",
+          "label": "e^(-0.3x)cos(3x)（Δ<0，振荡）"
+        }
+      ],
+      "xRange": [
+        -1,
+        1.2
+      ],
+      "yRange": [
+        -2,
+        12
+      ],
+      "title": "三种特征根情形的解曲线：增长、衰减与振荡"
+    },
+    "examples": [
+      {
+        "problem": "求 $y''-3y'+2y=0$ 的通解，并求满足 $y(0)=0$，$y'(0)=1$ 的特解。",
+        "solution": "特征方程 $r^{2}-3r+2=0$，即 $(r-1)(r-2)=0$，两根为 $r_{1}=1$，$r_{2}=2$（$\\Delta>0$）。所以通解为\n\n$$y=C_{1}e^{x}+C_{2}e^{2x}.$$\n\n求导得 $y'=C_{1}e^{x}+2C_{2}e^{2x}$。代入初值：\n\n$$\\begin{cases}C_{1}+C_{2}=0\\\\ C_{1}+2C_{2}=1\\end{cases}$$\n\n解得 $C_{2}=1$，$C_{1}=-1$，故特解为 $y=e^{2x}-e^{x}$。"
+      },
+      {
+        "problem": "求 $y''-4y'+4y=0$ 的通解。",
+        "solution": "特征方程 $r^{2}-4r+4=0$，即 $(r-2)^{2}=0$（$\\Delta=0$），得二重根 $r=2$。\n\n此时两个线性无关解是 $e^{2x}$ 与 $xe^{2x}$，通解为\n\n$$y=(C_{1}+C_{2}x)e^{2x}.$$\n\n检验：取 $y=xe^{2x}$，则 $y'=(1+2x)e^{2x}$，$y''=(4+4x)e^{2x}$，代入得 $(4+4x)e^{2x}-4(1+2x)e^{2x}+4xe^{2x}=0$，确为解。"
+      },
+      {
+        "problem": "求 $y''+4y'+13y=0$ 的通解。",
+        "solution": "特征方程 $r^{2}+4r+13=0$，判别式 $\\Delta=16-52=-36<0$，根为\n\n$$r=\\dfrac{-4\\pm\\sqrt{-36}}{2}=\\dfrac{-4\\pm 6i}{2}=-2\\pm 3i.$$\n\n即 $\\alpha=-2$，$\\beta=3$。由复根公式，通解为\n\n$$y=e^{-2x}\\left(C_{1}\\cos 3x+C_{2}\\sin 3x\\right).$$\n\n由于 $\\alpha=-2<0$，这是振幅按指数衰减的振荡解；若取初值 $y(0)=1,\\ y'(0)=0$，可解得 $C_{1}=1$，$C_{2}=\\dfrac{2}{3}$。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "特征方程",
+      "常系数"
+    ],
+    "links": [
+      "linear-ode-theory",
+      "constant-coefficient-nonhomogeneous",
+      "euler-equation",
+      "quadratic-function",
+      "complex-number"
+    ]
+  },
+  {
+    "id": "constant-coefficient-nonhomogeneous",
+    "title": "常系数非齐次线性方程",
+    "titleEn": "Nonhomogeneous Linear Equations with Constant Coefficients",
+    "branch": "ode",
+    "level": 5,
+    "summary": "通解 = 齐次通解 + 一个特解；自由项为 $P_m(x)e^{\\lambda x}$ 或含三角函数时，用待定系数法求特解，特征根重合时乘 $x^{k}$ 修正。",
+    "summaryEn": "The general solution is the homogeneous solution plus one particular solution; for right-hand sides P_m(x)e^(λx) or trigonometric terms, use undetermined coefficients, multiplying by x^k under resonance.",
+    "definition": "方程 $ay''+by'+cy=f(x)$（$f\\not\\equiv 0$）称为**常系数非齐次线性方程**。由线性方程解的结构定理，它的通解等于对应齐次方程的通解与任意一个特解之和：\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y}+\\underbrace{y^{*}}_{\\text{一个特解}}.$$\n\n因此求解只分两步：先用特征方程法解齐次方程，再找出一个特解。当自由项 $f(x)$ 是「多项式 × 指数函数」型 $f(x)=P_{m}(x)e^{\\lambda x}$（$P_{m}$ 是 $m$ 次多项式）时，可设**试解**\n\n$$y^{*}=x^{k}Q_{m}(x)e^{\\lambda x},$$\n\n其中 $Q_{m}$ 是待定的 $m$ 次多项式，$k$ 是 $\\lambda$ 作为特征根的重数（不是特征根取 0，是单根取 1，是二重根取 2）。为什么要乘 $x^{k}$？如果 $\\lambda$ 恰好是特征根，$e^{\\lambda x}$ 本身就是齐次解，直接代入会被微分算子消掉、系数无法确定，乘上足够的 $x$ 才能让试解与齐次解「错开」。\n\n当 $f(x)=e^{\\alpha x}\\left(A\\cos\\beta x+B\\sin\\beta x\\right)$ 时，试解取\n\n$$y^{*}=x^{k}e^{\\alpha x}\\left(a\\cos\\beta x+b\\sin\\beta x\\right),$$\n\n其中当 $\\alpha+\\beta i$ 是特征根时 $k=1$，否则 $k=0$（二次方程的非实根只可能是单根，所以 $k$ 不超过 1）。更一般地，$f(x)=e^{\\alpha x}\\left[P_{m}(x)\\cos\\beta x+Q_{n}(x)\\sin\\beta x\\right]$ 时，试解中的多项式取 $\\max\\{m,n\\}$ 次。\n\n把试解代回原方程，比较同类项系数，即可解出待定多项式——「待定系数法」因此得名。如果自由项是若干项之和，可先用叠加原理分别求特解再相加。",
+    "definitionEn": "An equation $ay''+by'+cy=f(x)$ with $f\\not\\equiv 0$ is a **nonhomogeneous linear equation with constant coefficients**. By the structure theorem for linear equations, its general solution is the general solution of the associated homogeneous equation plus one particular solution:\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y}+\\underbrace{y^{*}}_{\\text{one particular solution}}.$$\n\nSo the work has two steps: solve the homogeneous equation via its characteristic equation, then find a single particular solution. When the right-hand side is a polynomial times an exponential, $f(x)=P_{m}(x)e^{\\lambda x}$ with $P_{m}$ of degree $m$, try\n\n$$y^{*}=x^{k}Q_{m}(x)e^{\\lambda x},$$\n\nwhere $Q_{m}$ is an undetermined polynomial of degree $m$ and $k$ is the multiplicity of $\\lambda$ as a characteristic root (0 if it is not a root, 1 for a simple root, 2 for a double root). Why the factor $x^{k}$? If $\\lambda$ is a characteristic root, then $e^{\\lambda x}$ already solves the homogeneous equation, and substituting it into the operator annihilates it, leaving no way to match the coefficients; multiplying by enough powers of $x$ shifts the trial solution away from the homogeneous solutions.\n\nFor $f(x)=e^{\\alpha x}\\left(A\\cos\\beta x+B\\sin\\beta x\\right)$ one tries\n\n$$y^{*}=x^{k}e^{\\alpha x}\\left(a\\cos\\beta x+b\\sin\\beta x\\right),$$\n\nwhere $k=1$ if $\\alpha+\\beta i$ is a characteristic root and $k=0$ otherwise (nonreal roots of a quadratic are always simple, so $k$ never exceeds 1). More generally, for $f(x)=e^{\\alpha x}\\left[P_{m}(x)\\cos\\beta x+Q_{n}(x)\\sin\\beta x\\right]$, the polynomials in the trial solution have degree $\\max\\{m,n\\}$.\n\nSubstituting the trial solution back into the equation and matching coefficients determines the unknown polynomial, which is why the method is called *undetermined coefficients*. If the right-hand side is a sum of several terms, superposition lets one find particular solutions separately and add them.",
+    "formulas": [
+      {
+        "latex": "ay''+by'+cy=f(x)\\ \\Longrightarrow\\ y=Y(x)+y^{*}(x)",
+        "note": "解的结构：齐次通解 + 一个特解。",
+        "noteEn": "Structure: homogeneous general solution plus one particular solution."
+      },
+      {
+        "latex": "f(x)=P_{m}(x)e^{\\lambda x}\\ \\Longrightarrow\\ y^{*}=x^{k}Q_{m}(x)e^{\\lambda x}",
+        "note": "多项式 × 指数型自由项的试解；$k$ 为 $\\lambda$ 作特征根的重数。",
+        "noteEn": "Trial solution for a polynomial times exponential; $k$ is the multiplicity of $\\lambda$ as a characteristic root."
+      },
+      {
+        "latex": "f(x)=e^{\\alpha x}\\left(A\\cos\\beta x+B\\sin\\beta x\\right)\\ \\Longrightarrow\\ y^{*}=x^{k}e^{\\alpha x}\\left(a\\cos\\beta x+b\\sin\\beta x\\right)",
+        "note": "三角函数型自由项；$\\alpha+\\beta i$ 是特征根时 $k=1$，否则 $k=0$。",
+        "noteEn": "Trigonometric right-hand side; $k=1$ when $\\alpha+\\beta i$ is a characteristic root, otherwise $k=0$."
+      },
+      {
+        "latex": "f(x)=e^{\\alpha x}\\left[P_{m}(x)\\cos\\beta x+Q_{n}(x)\\sin\\beta x\\right]\\ \\Longrightarrow\\ y^{*}=x^{k}e^{\\alpha x}\\left[R_{l}(x)\\cos\\beta x+S_{l}(x)\\sin\\beta x\\right],\\ l=\\max\\{m,n\\}",
+        "note": "一般形式的试解：多项式取两端的较高次数，且正弦、余弦项都要设。",
+        "noteEn": "General trial solution: use the higher degree $\\max\\{m,n\\}$ and include both sine and cosine terms."
+      },
+      {
+        "latex": "k=\\begin{cases}0, & \\lambda\\ \\text{不是特征根}\\\\ 1, & \\lambda\\ \\text{是单特征根}\\\\ 2, & \\lambda\\ \\text{是二重特征根}\\end{cases}",
+        "note": "共振修正规则：特征根重合的重数决定乘 $x^{k}$ 的多少。",
+        "noteEn": "Resonance rule: the multiplicity of the characteristic root decides the power of $x$."
+      }
+    ],
+    "expression": {
+      "text": "通解 = 齐次通解 Y + 一个特解 y*",
+      "symbol": "y=x^{k}Q_{m}(x)e^{\\lambda x}",
+      "note": "试解形式由自由项 $f$ 的类型与特征根决定：同型、重根乘 $x^{k}$。",
+      "noteEn": "The trial solution mirrors the type of $f$, with an $x^{k}$ factor under resonance."
+    },
+    "properties": [
+      "通解结构：任意一个特解加上齐次通解都是原方程的解，这就是为什么只需找「一个」特解。",
+      "先解齐次（拿到特征根），再设特解；试解形式取决于 $f(x)$ 的类型与特征根是否重合，而不是取决于初值。",
+      "若 $\\lambda$（或 $\\alpha+\\beta i$）不是特征根，则 $k=0$，试解与 $f$ 同型；是特征根时乘 $x^{k}$，这一现象常称为共振。",
+      "多项式系数要配齐：$f$ 是 $m$ 次多项式，$Q_{m}$ 就要设出全部 $m+1$ 个系数，漏项会矛盾。",
+      "叠加原理：$f=f_{1}+f_{2}$ 时可分别求特解 $y_{1}^{*},y_{2}^{*}$，则 $y_{1}^{*}+y_{2}^{*}$ 是原方程的特解。"
+    ],
+    "propertiesEn": [
+      "Structure: any particular solution plus the homogeneous general solution solves the equation, which is why one particular solution suffices.",
+      "Solve the homogeneous equation first to obtain the characteristic roots, then set up the trial solution; its form depends on the type of $f$ and on resonance, not on initial data.",
+      "If $\\lambda$ (or $\\alpha+\\beta i$) is not a characteristic root then $k=0$ and the trial solution mirrors $f$; if it is a root one multiplies by $x^{k}$ — the phenomenon called resonance.",
+      "All polynomial coefficients must be included: if $f$ has degree $m$, the polynomial $Q_{m}$ needs all $m+1$ unknown coefficients, otherwise matching fails.",
+      "Superposition: for $f=f_{1}+f_{2}$, particular solutions $y_{1}^{*}+y_{2}^{*}$ for the separate pieces add up to a particular solution for $f$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "齐次解 Y = sin x"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "特解 y* = x"
+        },
+        {
+          "expr": "sin(x)+x",
+          "color": "#ff6b9d",
+          "label": "通解 y = Y + y*"
+        }
+      ],
+      "xRange": [
+        -6.5,
+        6.5
+      ],
+      "yRange": [
+        -7.5,
+        7.5
+      ],
+      "title": "y'' + y = x：齐次解 + 特解 = 通解"
+    },
+    "examples": [
+      {
+        "problem": "求 $y''-2y'-3y=3x+1$ 的通解。",
+        "solution": "第一步解齐次方程 $y''-2y'-3y=0$：特征方程 $r^{2}-2r-3=0$，即 $(r-3)(r+1)=0$，得 $r=3,-1$，齐次通解\n\n$$Y=C_{1}e^{3x}+C_{2}e^{-x}.$$\n\n第二步求特解。自由项 $f=3x+1=P_{1}(x)e^{0\\cdot x}$，$\\lambda=0$ 不是特征根，故 $k=0$，设 $y^{*}=ax+b$。代入：$y^{*''}=0$，$y^{*'}=a$，得\n\n$$0-2a-3(ax+b)=-3ax-2a-3b=3x+1.$$\n\n比较系数：$-3a=3$，故 $a=-1$；$-2a-3b=1$，即 $2-3b=1$，得 $b=\\dfrac{1}{3}$。所以 $y^{*}=-x+\\dfrac{1}{3}$，通解为\n\n$$y=C_{1}e^{3x}+C_{2}e^{-x}-x+\\dfrac{1}{3}.$$"
+      },
+      {
+        "problem": "求 $y''-y=e^{x}$ 的通解。",
+        "solution": "齐次方程 $y''-y=0$ 的特征方程 $r^{2}-1=0$ 给出 $r=\\pm 1$，故 $Y=C_{1}e^{x}+C_{2}e^{-x}$。\n\n自由项 $f=e^{x}$，$\\lambda=1$ 恰是特征方程的单根，共振，故 $k=1$，设 $y^{*}=axe^{x}$，则\n\n$$y^{*'}=a(x+1)e^{x},\\qquad y^{*''}=a(x+2)e^{x}.$$\n\n代入方程：$a(x+2)e^{x}-axe^{x}=2ae^{x}=e^{x}$，得 $a=\\dfrac{1}{2}$，于是 $y^{*}=\\dfrac{x}{2}e^{x}$。通解为\n\n$$y=C_{1}e^{x}+C_{2}e^{-x}+\\dfrac{x}{2}e^{x}.$$\n\n（若不乘 $x$ 而设 $y^{*}=ae^{x}$，代入左边得 $0$，无法等于 $e^{x}$，这正是需要 $k=1$ 修正的原因。）"
+      },
+      {
+        "problem": "求 $y''+y=2\\sin x$ 的通解。",
+        "solution": "齐次方程 $y''+y=0$ 的特征方程 $r^{2}+1=0$ 给出 $r=\\pm i$，故 $Y=C_{1}\\cos x+C_{2}\\sin x$。\n\n自由项 $2\\sin x$ 对应 $\\alpha=0$，$\\beta=1$，而 $\\alpha+\\beta i=i$ 是特征根，共振，故设\n\n$$y^{*}=x(a\\cos x+b\\sin x).$$\n\n求导：$y^{*'}=a\\cos x-ax\\sin x+b\\sin x+bx\\cos x$；再求导并合并得\n\n$$(y^{*})''+y^{*}=-2a\\sin x+2b\\cos x.$$\n\n（求导后 $x\\cos x$、$x\\sin x$ 项恰好抵消，只剩常数系数项，这正是共振时把「无法匹配」的部分暴露出来的原因。）\n\n令 $-2a\\sin x+2b\\cos x=2\\sin x$，比较系数得 $a=-1$，$b=0$。于是 $y^{*}=-x\\cos x$，通解为\n\n$$y=C_{1}\\cos x+C_{2}\\sin x-x\\cos x.$$"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "待定系数法",
+      "特解",
+      "特征方程"
+    ],
+    "links": [
+      "linear-ode-theory",
+      "constant-coefficient-homogeneous",
+      "first-order-linear-ode",
+      "laplace-solve-ode"
+    ]
+  },
+  {
+    "id": "euler-equation",
+    "title": "欧拉方程",
+    "titleEn": "Euler (Cauchy–Euler) Equations",
+    "branch": "ode",
+    "level": 5,
+    "summary": "形如 $ax^{2}y''+bxy'+cy=0$ 的方程，用 $x=e^{t}$ 或直接试解 $y=x^{r}$ 化为常系数问题；指标方程的根决定幂函数解的形式。",
+    "summaryEn": "Equations ax²y''+bxy'+cy=0 are reduced to constant-coefficient form by x=e^t or by the trial y=x^r; the roots of the indicial equation determine the power-function solutions.",
+    "definition": "**欧拉方程**（也叫柯西–欧拉方程）是系数与自变量幂次「配套」的线性方程：\n\n$$ax^{2}y''+bxy'+cy=0\\qquad(a\\neq 0,\\ x>0),$$\n\n$x^{2}$ 配 $y''$、$x$ 配 $y'$、常数配 $y$。做换元 $x=e^{t}$（即 $t=\\ln x$）时，由链式法则\n\n$$xy'=\\dfrac{dy}{dt},\\qquad x^{2}y''=\\dfrac{d^{2}y}{dt^{2}}-\\dfrac{dy}{dt},$$\n\n原方程就化为常系数方程 $a\\ddot y+(b-a)\\dot y+cy=0$（点表示对 $t$ 求导），用特征方程法解出后，把 $t$ 换回 $\\ln x$ 即可。\n\n也可以直接试解 $y=x^{r}$：代入得 $x^{r}\\left[ar(r-1)+br+c\\right]=0$，故非零解要求**指标方程**\n\n$$ar(r-1)+br+c=0.$$\n\n它与换元后常系数方程的特征方程是同一个二次方程——因为 $x=e^{t}$ 把幂函数 $x^{r}$ 变成了指数函数 $e^{rt}$。\n\n指标方程的根按三种情形给出解：两个不同实根 $r_{1}\\neq r_{2}$ 给 $C_{1}x^{r_{1}}+C_{2}x^{r_{2}}$；二重根 $r$ 时第二个解补上 $\\ln x$ 因子，通解 $x^{r}(C_{1}+C_{2}\\ln x)$；共轭复根 $\\alpha\\pm\\beta i$ 给 $x^{\\alpha}\\left[C_{1}\\cos(\\beta\\ln x)+C_{2}\\sin(\\beta\\ln x)\\right]$——这里的 $\\ln x$ 扮演了常系数情形中自变量 $x$ 的角色。由于换元要求 $x>0$，通常在 $x>0$ 上讨论；若问题定义在 $x<0$，作 $x=-e^{t}$ 换元（或把结果中的 $x$ 换成 $|x|$、$\\ln x$ 换成 $\\ln|x|$）。",
+    "definitionEn": "An **Euler equation** (also called a Cauchy–Euler equation) is a linear equation whose coefficients match the powers of the independent variable:\n\n$$ax^{2}y''+bxy'+cy=0\\qquad(a\\neq 0,\\ x>0),$$\n\nwith $x^{2}$ paired with $y''$, $x$ with $y'$, and a constant with $y$. The substitution $x=e^{t}$ (that is, $t=\\ln x$) gives, by the chain rule,\n\n$$xy'=\\dfrac{dy}{dt},\\qquad x^{2}y''=\\dfrac{d^{2}y}{dt^{2}}-\\dfrac{dy}{dt},$$\n\nso the equation becomes the constant-coefficient equation $a\\ddot y+(b-a)\\dot y+cy=0$ (dots are $t$-derivatives). Solve it by the characteristic equation and replace $t$ by $\\ln x$.\n\nEquivalently, one may try $y=x^{r}$ directly: substitution gives $x^{r}\\left[ar(r-1)+br+c\\right]=0$, so a nonzero solution requires the **indicial equation**\n\n$$ar(r-1)+br+c=0.$$\n\nThis is the same quadratic as the characteristic equation of the transformed equation, because $x=e^{t}$ turns the power $x^{r}$ into the exponential $e^{rt}$.\n\nThe roots of the indicial equation produce three cases: distinct real roots $r_{1}\\neq r_{2}$ give $C_{1}x^{r_{1}}+C_{2}x^{r_{2}}$; a double root $r$ requires a factor $\\ln x$ in the second solution, giving $x^{r}(C_{1}+C_{2}\\ln x)$; complex conjugate roots $\\alpha\\pm\\beta i$ give $x^{\\alpha}\\left[C_{1}\\cos(\\beta\\ln x)+C_{2}\\sin(\\beta\\ln x)\\right]$ — here $\\ln x$ plays the role that $x$ played in the constant-coefficient case. Since the substitution needs $x>0$, the equation is usually treated there; for $x<0$ use $x=-e^{t}$ (or replace $x$ by $|x|$ and $\\ln x$ by $\\ln|x|$).",
+    "formulas": [
+      {
+        "latex": "x=e^{t}:\\quad xy'=\\dot y,\\qquad x^{2}y''=\\ddot y-\\dot y\\ \\Longrightarrow\\ a\\ddot y+(b-a)\\dot y+cy=0",
+        "note": "换元公式：把欧拉方程化为常系数方程（点表示对 $t$ 求导）。",
+        "noteEn": "Substitution formulas: they turn the Euler equation into a constant-coefficient equation (dots are $t$-derivatives)."
+      },
+      {
+        "latex": "y=x^{r}:\\quad ar(r-1)+br+c=0",
+        "note": "指数（指标）方程：与换元后常系数方程的特征方程等价。",
+        "noteEn": "The indicial equation; equivalent to the characteristic equation of the transformed equation."
+      },
+      {
+        "latex": "r_{1}\\neq r_{2}:\\quad y=C_{1}x^{r_{1}}+C_{2}x^{r_{2}}",
+        "note": "两个不同实根：两个幂函数解。",
+        "noteEn": "Two distinct real roots: two power-function solutions."
+      },
+      {
+        "latex": "r_{1}=r_{2}=r:\\quad y=x^{r}\\left(C_{1}+C_{2}\\ln x\\right)",
+        "note": "二重根：第二个解是 $x^{r}\\ln x$，与常系数重根情形对应。",
+        "noteEn": "Double root: the second solution is $x^{r}\\ln x$, matching the constant-coefficient repeated-root case."
+      },
+      {
+        "latex": "r=\\alpha\\pm\\beta i:\\quad y=x^{\\alpha}\\left[C_{1}\\cos(\\beta\\ln x)+C_{2}\\sin(\\beta\\ln x)\\right]",
+        "note": "共轭复根：解在 $(0,+\\infty)$ 上振荡，频率随 $\\ln x$ 变化。",
+        "noteEn": "Complex conjugate roots: oscillations on $(0,+\\infty)$ whose frequency varies with $\\ln x$."
+      }
+    ],
+    "expression": {
+      "text": "ax²y'' + bxy' + cy = 0   (a ≠ 0, x > 0)",
+      "symbol": "y=x^{r}",
+      "note": "识别口诀：导数的阶数与系数的 $x$ 幂次相同；换元 $x=e^{t}$ 与试解 $y=x^{r}$ 两条路殊途同归。",
+      "noteEn": "Recognition rule: the power of $x$ in each coefficient equals the order of the derivative. The substitution $x=e^{t}$ and the trial $y=x^{r}$ are two routes to the same place."
+    },
+    "properties": [
+      "解都是幂函数 $x^{r}$ 型（重根时补 $\\ln x$ 因子），因此在 $x=0$ 附近常出现奇性，例如 $x^{-1}$ 或 $\\ln x$ 项。",
+      "指标方程与换元后常系数方程的特征方程是同一个二次方程，三种根情形与常系数情形一一对应。",
+      "复根情形 $x^{\\alpha}\\cos(\\beta\\ln x)$ 在 $(0,+\\infty)$ 上振荡：$x\\to 0^{+}$ 时振荡越来越快，$x\\to+\\infty$ 时越来越慢。",
+      "重根时第二个解 $x^{r}\\ln x$ 可由降阶法得到，也可对特征方程「求导」直接读出。",
+      "在 $x<0$ 上讨论时可作 $x=-e^{t}$ 换元，或把解中的 $x$ 换成 $|x|$、$\\ln x$ 换成 $\\ln|x|$。"
+    ],
+    "propertiesEn": [
+      "Solutions are powers $x^{r}$ (with a $\\ln x$ factor in the repeated case), so singular behaviour near $x=0$ is typical, for instance terms like $x^{-1}$ or $\\ln x$.",
+      "The indicial equation coincides with the characteristic equation after substitution, so the three root cases match the constant-coefficient ones one to one.",
+      "In the complex case $x^{\\alpha}\\cos(\\beta\\ln x)$ oscillates on $(0,+\\infty)$: the oscillations speed up as $x\\to 0^{+}$ and slow down as $x\\to+\\infty$.",
+      "For a double root the second solution $x^{r}\\ln x$ can be obtained by reduction of order, or read off by differentiating the indicial equation.",
+      "On $x<0$ one substitutes $x=-e^{t}$, or replaces $x$ by $|x|$ and $\\ln x$ by $\\ln|x|$ in the final answer."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2",
+          "color": "#4cc9f0",
+          "label": "y = x^2（r = 2）"
+        },
+        {
+          "expr": "x^(-1)",
+          "color": "#ff6b9d",
+          "label": "y = x^(-1)（r = -1）"
+        },
+        {
+          "expr": "sqrt(x)",
+          "color": "#06d6a0",
+          "label": "y = x^(1/2)（r = 1/2）"
+        }
+      ],
+      "xRange": [
+        0.2,
+        3
+      ],
+      "yRange": [
+        -1.5,
+        9.5
+      ],
+      "title": "欧拉方程的幂函数解 y = x^r（x > 0）"
+    },
+    "examples": [
+      {
+        "problem": "求 $x^{2}y''-2xy'+2y=0$（$x>0$）的通解。",
+        "solution": "设 $y=x^{r}$，则 $y'=rx^{r-1}$，$y''=r(r-1)x^{r-2}$。代入方程并消去 $x^{r}$：\n\n$$r(r-1)-2r+2=0\\ \\Longrightarrow\\ r^{2}-3r+2=0,$$\n\n即 $(r-1)(r-2)=0$，得 $r_{1}=1$，$r_{2}=2$。所以通解为\n\n$$y=C_{1}x+C_{2}x^{2}.$$\n\n用换元核对：令 $x=e^{t}$，$x^{2}y''=\\ddot y-\\dot y$，$xy'=\\dot y$，方程化为 $\\ddot y-3\\dot y+2y=0$，特征根 $1,2$，解 $y=C_{1}e^{t}+C_{2}e^{2t}=C_{1}x+C_{2}x^{2}$，完全一致。"
+      },
+      {
+        "problem": "求 $x^{2}y''-3xy'+4y=0$（$x>0$）的通解。",
+        "solution": "代入 $y=x^{r}$，指标方程为\n\n$$r(r-1)-3r+4=r^{2}-4r+4=(r-2)^{2}=0,$$\n\n得二重根 $r=2$。此时第二个线性无关解是 $x^{2}\\ln x$，故通解为\n\n$$y=x^{2}\\left(C_{1}+C_{2}\\ln x\\right).$$\n\n换元核对：$x=e^{t}$ 后方程为 $\\ddot y-4\\dot y+4y=0$，特征根为二重根 $2$，解 $(C_{1}+C_{2}t)e^{2t}=x^{2}(C_{1}+C_{2}\\ln x)$，两种方法一致。"
+      },
+      {
+        "problem": "求 $x^{2}y''+xy'+4y=0$（$x>0$）的通解。",
+        "solution": "代入 $y=x^{r}$，指标方程为\n\n$$r(r-1)+r+4=r^{2}+4=0,$$\n\n得共轭复根 $r=\\pm 2i$，即 $\\alpha=0$，$\\beta=2$。所以通解为\n\n$$y=C_{1}\\cos(2\\ln x)+C_{2}\\sin(2\\ln x).$$\n\n换元核对：$x=e^{t}$ 后方程为 $\\ddot y+4y=0$，通解 $C_{1}\\cos 2t+C_{2}\\sin 2t$，回代 $t=\\ln x$ 即得上式。"
+      }
+    ],
+    "tags": [
+      "微分方程",
+      "欧拉方程",
+      "幂函数解"
+    ],
+    "links": [
+      "constant-coefficient-homogeneous",
+      "linear-ode-theory",
+      "power-function",
+      "logarithm",
+      "ode-basic-concepts"
+    ]
+  }
+]

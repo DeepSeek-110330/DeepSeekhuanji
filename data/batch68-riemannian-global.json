@@ -1,0 +1,498 @@
+[
+  {
+    "id": "hopf-rinow",
+    "title": "霍普夫–里诺定理",
+    "titleEn": "The Hopf–Rinow Theorem",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "对连通的黎曼流形，「度量完备」「测地完备」「某点处 $\\exp_p$ 定义在整个切空间上」「有界闭子集紧」四个条件互相等价；任一成立时，任意两点间都存在一条最短的极小测地线。",
+    "summaryEn": "For a connected Riemannian manifold, four conditions are equivalent: metric completeness, geodesic completeness, exp_p being defined on all of T_pM at one point, and every closed bounded subset being compact; when they hold, any two points are joined by a shortest minimizing geodesic.",
+    "definition": "设 $(M,g)$ 是**连通**的 $n$ 维黎曼流形，$d$ 是由度量诱导的黎曼距离：$d(p,q)$ 等于连接 $p,q$ 的一切分段光滑曲线长度的下确界。**霍普夫–里诺定理**（Hopf–Rinow）断言下列四个条件**互相等价**：\n\n① $(M,d)$ 作为**度量空间**完备 —— 每个柯西列都收敛（极限点必须留在 $M$ 内）；\n② $M$ **测地完备** —— 每条极大测地线都能向两侧延伸，成为定义在全体 $t\\in\\mathbb R$ 上的测地线；\n③ 存在一点 $p$，使指数映射 $\\exp_p$ 定义在整个切空间 $T_pM$ 上（注意：只要有一个这样的 $p$，就等价于每个 $p$ 都如此）；\n④ $M$ 中每个**有界闭子集都是紧的**（等价说法：每个闭测地球 $\\overline B(p,r)$ 都紧）。\n\n并且，只要其中一个条件成立（于是全部成立），就有结论：**任意两点 $p,q$ 之间都存在极小测地线** $\\gamma$，满足 $L(\\gamma)=d(p,q)$ —— 它不只是「局部驻定」的曲线，而是真正最短的那条。定理只保证存在，不保证唯一：$S^2$ 上对径点之间就有无穷多条长度为 $\\pi$ 的极小测地线（各条大圆的半弧）。\n\n定理最深刻的一点是 ① $\\iff$ ②：「度量空间完备」（纯粹的分析条件）与「测地线可以无限延伸」（纯几何条件）竟然是同一件事。① $\\Rightarrow$ ② 不太难：若一条极大测地线在 $t=T$ 处将要中断，取 $t_k\\to T$，由 $d(\\gamma(t_j),\\gamma(t_k))\\le|t_j-t_k|$ 知 $\\gamma(t_k)$ 是柯西列，其极限点附近再用局部存在唯一性即可延拓。② $\\Rightarrow$ ① 才是定理的硬核，它通过「极小测地线的存在性」来完成。另外要注意，④ 中「有界闭 $\\Rightarrow$ 紧」绝非一般度量空间的性质：$\\ell^2$（平方可和序列空间）中的闭单位球就完备、有界而不紧；定理说明完备黎曼流形恰好是这种「真」度量空间（闭球紧）。\n\n完备性不能省。取 $M=\\mathbb R^2\\setminus\\{0\\}$ 配欧氏度量：$(1/k,0)$ 是收敛到被挖去原点的柯西列，故 $(M,d)$ 不完备；取 $p=(-1,0)$、$q=(1,0)$，任何连接它们的曲线都要绕开原点，长度严格大于 $2$，但绕半径为 $\\varepsilon$ 的半圆可以做到长度 $2(1-\\varepsilon)+\\pi\\varepsilon\\to 2$。于是 $d(p,q)=2$ 而没有任何曲线取到它，极小测地线不存在。这也与「$\\gamma(t)=(-1+t,0)$ 只能定义到 $t<1$」互为印证：$M$ 测地不完备。",
+    "definitionEn": "Let $(M,g)$ be a **connected** Riemannian manifold and let $d$ be the Riemannian distance, i.e. the infimum of lengths of piecewise smooth curves joining the two points. The **Hopf–Rinow theorem** states that the following four conditions are **equivalent**:\n\n① $(M,d)$ is **complete as a metric space** (every Cauchy sequence converges inside $M$);\n② $M$ is **geodesically complete** (every maximal geodesic extends to a geodesic defined for all $t\\in\\mathbb R$);\n③ there exists a point $p$ such that $\\exp_p$ is defined on all of $T_pM$ (by the theorem this holds at one point iff it holds at every point);\n④ every **closed bounded subset** of $M$ is compact (equivalently, every closed ball $\\overline B(p,r)$ is compact).\n\nIf any one holds (hence all hold), then **any two points $p,q$ are joined by a minimizing geodesic** $\\gamma$ with $L(\\gamma)=d(p,q)$ — a genuinely shortest curve. Existence is not uniqueness: on $S^2$ antipodal points are joined by infinitely many minimizing geodesics.\n\nThe deepest point is ① $\\iff$ ②: metric completeness (an analytic condition) is the same as extending geodesics forever (a geometric one). The implication ① $\\Rightarrow$ ② is comparatively easy, while ② $\\Rightarrow$ ① is the hard core, proved through the existence of minimizing geodesics. Note that ④ fails in general metric spaces: the closed unit ball of $\\ell^2$ is complete and bounded but not compact; complete Riemannian manifolds are exactly the metric spaces in which closed bounded sets are compact.\n\nCompleteness cannot be dropped: on $M=\\mathbb R^2\\setminus\\{0\\}$ the points $(1/k,0)$ form a Cauchy sequence without limit, and between $p=(-1,0)$ and $q=(1,0)$ there is no minimizing geodesic, since $d(p,q)=2$ but every connecting curve has length $>2$ (semicircles around the origin give lengths tending to $2$).",
+    "formulas": [
+      {
+        "latex": "d(p,q)=\\inf_{\\gamma}L(\\gamma)=\\inf\\left\\{\\int_{0}^{1}|\\gamma'(s)|\\,ds\\ :\\ \\gamma(0)=p,\\ \\gamma(1)=q\\right\\}",
+        "note": "黎曼距离的定义：连接两点的所有分段光滑曲线长度的下确界；霍普夫–里诺定理讨论的正是这个距离空间的完备性。",
+        "noteEn": "The Riemannian distance: the infimum of lengths over piecewise smooth curves joining the points; Hopf–Rinow is about completeness of this distance space."
+      },
+      {
+        "latex": "(M,d)\\ \\text{完备}\\iff M\\ \\text{测地完备}",
+        "note": "定理的核心等价：柯西列都收敛 ⟺ 每条测地线都能对全体 $t\\in\\mathbb R$ 延伸。「$\\Rightarrow$」较易，「$\\Leftarrow$」是硬核。",
+        "noteEn": "The core equivalence: every Cauchy sequence converges iff every geodesic extends to all $t\\in\\mathbb R$. The hard direction is the converse."
+      },
+      {
+        "latex": "\\exists\\,p\\in M:\\ \\exp_p\\ \\text{定义在整个}\\ T_pM\\ \\text{上}\\iff (M,d)\\ \\text{完备}",
+        "note": "只需存在一个点即可（由定理，此时对所有点都成立）。注意 $\\exp_p(v)$ 指以 $p$ 为起点、初速度 $v$ 的测地线在 $t=1$ 处的值，测地线若在 $t=1$ 前中断，$\\exp_p(v)$ 就无定义。",
+        "noteEn": "One point suffices (then it holds for all). Here exp_p(v) means the point at t = 1 of the geodesic with initial velocity v; if the geodesic dies before t = 1, exp_p(v) is undefined."
+      },
+      {
+        "latex": "\\text{闭且有界}\\Rightarrow\\text{紧}\\iff \\overline{B(p,r)}\\ \\text{紧}\\quad(\\forall p,\\ r>0)",
+        "note": "完备黎曼流形是「真」度量空间：闭球紧，因而距离函数在闭球上取到最值。一般完备度量空间没有此性质（$\\ell^2$ 的闭单位球）。",
+        "noteEn": "A complete Riemannian manifold is a proper metric space: closed balls are compact, so distance functions attain extrema there. General complete metric spaces fail this (closed unit ball of l²)."
+      },
+      {
+        "latex": "\\forall p,q\\in M\\ \\ \\exists\\,\\gamma\\ \\text{测地线}:\\quad L(\\gamma)=d(p,q)",
+        "note": "极小测地线的存在性：任取两点，总有最短的测地线把它们连起来（「最短」而非仅仅「局部最短」）；唯一性一般不成立。",
+        "noteEn": "Existence of minimizing geodesics: any two points are joined by a shortest geodesic (globally shortest, not just locally minimizing); uniqueness generally fails."
+      }
+    ],
+    "properties": [
+      "四个条件互相等价，且必须要求 $M$ 连通（否则不同分支间的距离为 $+\\infty$，$d$ 不再是取值有限的度量）。等价链中 ① $\\iff$ ② 是定理的核心，其中 ① $\\Rightarrow$ ② 相对容易、② $\\Rightarrow$ ① 才是硬核。",
+      "完备 $\\Rightarrow$ 任意两点间存在极小测地线，其长度恰为 $d(p,q)$；但「存在」不等于「唯一」：$S^2$ 上对径点（$q=-p$）之间有无穷多条极小测地线，非对径点时才唯一。反之，只要有一对点之间不存在极小测地线，$M$ 就不完备。",
+      "完备性不能省：$\\mathbb R^2\\setminus\\{0\\}$ 在欧氏度量下不完备，$(-1,0)$ 与 $(1,0)$ 之间不存在极小测地线——距离是 $2$，可任何曲线都严格长于 $2$，只有长度无限接近 $2$ 的曲线。",
+      "「有界闭 $\\Rightarrow$ 紧」是完备黎曼流形特有的性质，一般完备度量空间不成立：$\\ell^2$ 中的闭单位球有界完备却不紧（$e_n$ 没有收敛子列）。正因闭球紧，完备流形上的测地球体积有限、距离函数取到最值。",
+      "闭球紧并不控制体积增长的速度：曲率越大、球体积增长越慢（比较定理）。双曲平面的测地球面积按 $e^{r}$ 指数增长，欧氏平面按 $r^2$ 增长，单位球面在 $r=\\pi$ 处停止增长——见配图。霍普夫–里诺只是所有比较定理与割迹理论的地基。"
+    ],
+    "propertiesEn": [
+      "The four conditions are equivalent, and connectedness is required (otherwise distances between components are infinite and d is not a finite-valued metric). The core of the theorem is ① ⟺ ②; the direction ① ⇒ ② is comparatively easy while ② ⇒ ① is the hard part.",
+      "Completeness implies the existence of a minimizing geodesic of length exactly d(p,q) between any two points; existence does not mean uniqueness: on S² antipodal points are joined by infinitely many minimizing geodesics, while non-antipodal pairs have exactly one. Conversely, if some pair of points admits no minimizing geodesic, M is incomplete.",
+      "Completeness cannot be dropped: R²∖{0} with the Euclidean metric is incomplete, and there is no minimizing geodesic between (−1,0) and (1,0): the distance is 2 but every curve is strictly longer, with lengths approaching 2.",
+      "The implication closed+bounded ⇒ compact is special to complete Riemannian manifolds; it fails in general complete metric spaces, e.g. the closed unit ball of ℓ² is bounded and complete but not compact. Because closed balls are compact, geodesic balls have finite volume and distance functions attain extrema.",
+      "Compactness of closed balls does not control volume growth: larger curvature means slower volume growth (comparison theorems). In the hyperbolic plane the area of geodesic balls grows exponentially, in the Euclidean plane polynomially, and on the unit sphere it stops at r = π (see the figure). Hopf–Rinow is the foundation for all comparison and cut-locus theory."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "(exp(x)-exp(-x))/2",
+          "color": "#ff6b9d",
+          "label": "sinh r（K≡−1：指数增长）"
+        },
+        {
+          "expr": "x",
+          "color": "#4cc9f0",
+          "label": "r（K≡0：线性）"
+        },
+        {
+          "expr": "sin(x)",
+          "color": "#ffd166",
+          "label": "sin r（K≡1：r=π 后回落）"
+        }
+      ],
+      "xRange": [
+        0,
+        3.14
+      ],
+      "yRange": [
+        -0.8,
+        12.5
+      ],
+      "title": "测地球面积的增长率 d(Area)/dr ÷ 2π：sin r ≤ r ≤ sinh r —— 曲率越大增长越慢，球面在 r=π 处面积停止增长"
+    },
+    "examples": [
+      {
+        "problem": "证明 $\\mathbb R^2\\setminus\\{0\\}$（欧氏度量）不完备，并说明 $p=(-1,0)$、$q=(1,0)$ 之间不存在极小测地线。",
+        "solution": "取 $p_k=(1/k,0)$。当 $j,k\\to\\infty$ 时 $d(p_j,p_k)=|1/j-1/k|\\to 0$，故 $(p_k)$ 是柯西列，但它在 $M$ 中不收敛（极限 $(0,0)\\notin M$），所以 $(M,d)$ 不完备。再看 $p,q$：任何连接它们的曲线必须避开原点，其长度严格大于 $2$（长度等于 $2$ 时只能是过原点的直线段）；另一方面，沿半径 $\\varepsilon$ 的半圆弧绕行给出长度 $2(1-\\varepsilon)+\\pi\\varepsilon\\to 2$（$\\varepsilon\\to 0^{+}$）。因此 $d(p,q)=2$，但它不是任何曲线的长度——极小测地线不存在。"
+      },
+      {
+        "problem": "验证 $S^2$ 完备且任意两点间存在极小测地线，并说明「唯一性」可以不成立。",
+        "solution": "$S^2$ 紧致，紧度量空间必完备，故 $S^2$ 完备（也可直接验证：大圆是定义在所有 $t\\in\\mathbb R$ 上的闭测地线）。任取 $p,q$：若 $q\\neq -p$，则过这两点的大圆唯一，其劣弧给出唯一的极小测地线；若 $q=-p$，则每一条大圆都被 $p,q$ 分成两条半弧，每条半弧都是长度 $\\pi=d(p,q)$ 的极小测地线——共有无穷多条。这正说明霍普夫–里诺定理只断言存在性：$p$ 的割迹恰是对径点 $-p$。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "完备性",
+      "测地线",
+      "整体定理"
+    ],
+    "links": [
+      "riemannian-metric",
+      "geodesic",
+      "exponential-map",
+      "complete-metric-space",
+      "compactness",
+      "conjugate-points-cut-locus",
+      "cartan-hadamard",
+      "bishop-gromov"
+    ]
+  },
+  {
+    "id": "cartan-hadamard",
+    "title": "嘉当–哈达玛定理",
+    "titleEn": "The Cartan–Hadamard Theorem",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "单连通、完备、截面曲率 $K\\le 0$ 的 $n$ 维黎曼流形上，$\\exp_p:T_pM\\to M$ 是微分同胚，故 $M$ 微分同胚于 $\\mathbb R^n$；任意两点间恰有一条测地线，它自动极小，且 $M$ 可缩、$\\pi_i(M)=0\\ (i\\ge2)$。",
+    "summaryEn": "On a simply connected, complete Riemannian manifold with K ≤ 0 (a Hadamard manifold), exp_p: T_pM → M is a diffeomorphism, so M is diffeomorphic to R^n; any two points are joined by exactly one geodesic, which is automatically minimizing, and M is contractible with π_i(M) = 0 for i ≥ 2.",
+    "definition": "**嘉当–哈达玛定理**：设 $M$ 是 **单连通**、**完备**的 $n$ 维黎曼流形，且截面曲率 **$K\\le 0$**（这样的流形称为 Hadamard 流形）。则对任意 $p\\in M$，指数映射\n$$\\exp_p:T_pM\\longrightarrow M$$\n是**微分同胚**；于是 $M$ 微分同胚于 $\\mathbb R^n$（取定一组线性坐标，$T_pM\\cong\\mathbb R^n$）。曲面情形由 Hadamard 得到，Cartan 把它推广到高维。\n\n证明的想法：$K\\le 0$ 使 Jacobi 方程 $y''=-Ky\\ge 0$，沿测地线的 Jacobi 场没有零点，故沿任何测地线都没有共轭点，$\\exp_p$ 处处非临界、是局部微分同胚；由于 $M$ 完备，$\\exp_p$ 在「拉回度量」$\\exp_p^{*}g$ 下还满足 $d_M(\\exp_p v,\\exp_p w)\\ge|v-w|$，由此 $\\exp_p$ 成为覆叠映射；$M$ 单连通迫使它单射，从而整体微分同胚。三个条件缺一不可：**去掉单连通**——平坦柱面 $S^1\\times\\mathbb R$（$K\\equiv0$、完备）的 $\\exp_p$ 不是单射（沿 $S^1$ 方向绕圈）；**去掉完备**——平坦单位圆盘中 $K\\equiv0$ 且单连通，但 $\\exp_0$ 只定义在半径 $1$ 的开球上，连「定义在整个 $T_0M$ 上」都不成立；**去掉 $K\\le0$**——$S^n$（$K=1$）的 $\\exp_p$ 在割迹之后不再是单射，$S^n$ 当然也不同胚于 $\\mathbb R^n$。\n\n三个推论是同一件事的不同侧面：① **任意两点 $p,q$ 之间恰有一条测地线**（即 $v=\\exp_p^{-1}(q)$ 对应的那条），并且它**自动是极小测地线**：$d(p,q)=|\\exp_p^{-1}(q)|$。这与球面上对径点有无穷多条极小测地线形成鲜明对照——「唯一极小」是负曲率的整体效应。② $M$ **可缩**：$H(t,x)=\\exp_p\\bigl(t\\cdot\\exp_p^{-1}(x)\\bigr)$ 是 $M$ 收缩到 $p$ 的同伦。③ $\\exp_p$ 给出**整体测地坐标**，$M$ 与 $\\mathbb R^n$ 的拓扑完全一样，于是 $M$ 可缩，特别地 **$\\pi_i(M)=0\\ (i\\ge1)$**。（亏格 $\\ge2$ 的闭曲面 $K<0$ 但**不单连通**，不满足嘉当–哈达玛的假设；它对应的是一般完备 $K\\le0$ 流形，其 $\\pi_1$ 才是无限的。）。注意：$\\exp_p$ 一般**不是等距**，它只是微分同胚，度量在 $T_pM$ 上被拉回成一个弯曲的度量。",
+    "definitionEn": "**Cartan–Hadamard theorem**: let $M$ be a **simply connected, complete** Riemannian $n$-manifold with **sectional curvature $K\\le0$** (a Hadamard manifold). Then for every $p$, the exponential map $\\exp_p:T_pM\\to M$ is a **diffeomorphism**, hence $M$ is diffeomorphic to $\\mathbb R^n$. The surface case is due to Hadamard; Cartan extended it to higher dimensions.\n\nProof idea: $K\\le0$ gives $y''=-Ky\\ge0$ along Jacobi fields, so there are no conjugate points, $\\exp_p$ has no critical points and is a local diffeomorphism. Completeness yields the comparison $d_M(\\exp_p v,\\exp_p w)\\ge|v-w|$, making $\\exp_p$ a covering map; simple connectedness forces it to be injective, hence a global diffeomorphism. None of the three hypotheses is removable: dropping simple connectedness, the flat cylinder $S^1\\times\\mathbb R$ (complete, $K\\equiv0$) has a non-injective $\\exp_p$; dropping completeness, the flat unit disk has $\\exp_0$ defined only on a ball of radius $1$; dropping $K\\le0$, the sphere $S^n$ ($K=1$) is not even homeomorphic to $\\mathbb R^n$.\n\nConsequences: any two points are joined by exactly one geodesic, which is automatically minimizing, with $d(p,q)=|\\exp_p^{-1}(q)|$; $M$ is contractible via $H(t,x)=\\exp_p(t\\exp_p^{-1}(x))$; and $\\pi_i(M)=0$ for $i\\ge2$, while $\\pi_1(M)$ may be infinite (closed surfaces of genus ≥ 2). The map $\\exp_p$ is generally not an isometry, only a diffeomorphism.",
+    "formulas": [
+      {
+        "latex": "K\\le0,\\quad M\\ \\text{完备},\\quad M\\ \\text{单连通}\\ \\Longrightarrow\\ \\exp_p:T_pM\\to M\\ \\text{是微分同胚}",
+        "note": "定理的完整陈述：三个条件（单连通、完备、$K\\le0$）缺一不可，结论是 $\\exp_p$ 整体微分同胚，从而 $M$ 微分同胚于 $\\mathbb R^n$。",
+        "noteEn": "The full statement: all three hypotheses (simply connected, complete, K ≤ 0) are needed; the conclusion is that exp_p is a global diffeomorphism, so M is diffeomorphic to R^n."
+      },
+      {
+        "latex": "d(p,q)=|\\exp_p^{-1}(q)|,\\qquad \\text{连接 }p,q\\text{ 的测地线唯一且极小}",
+        "note": "「距离 = 切向量的长度」：Hadamard 流形上每条测地线段都自动极小，且任意两点间的测地线唯一——比一般完备流形的性质强得多（对比球面）。",
+        "noteEn": "Distance equals the norm of the tangent vector: in a Hadamard manifold every geodesic segment is automatically minimizing and the geodesic between two points is unique — much stronger than in a general complete manifold (compare the sphere)."
+      },
+      {
+        "latex": "y''=-K\\,y\\ge0\\ \\Longrightarrow\\ \\text{无共轭点}\\ \\Longrightarrow\\ \\exp_p\\ \\text{无临界点}",
+        "note": "Jacobi 方程是「测地线族分离程度」的方程；$K\\le0$ 时 $|J|$ 是凸函数，不会回到零，所以没有共轭点，$\\exp_p$ 是局部微分同胚。",
+        "noteEn": "The Jacobi equation controls the separation of geodesics; for K ≤ 0 the norm |J| is convex and never returns to zero, so there are no conjugate points and exp_p is a local diffeomorphism."
+      },
+      {
+        "latex": "g=dr^{2}+g_r(\\theta),\\qquad \\partial_r\\log\\sqrt{\\det g_r}\\ \\ge\\ \\frac{n-1}{r}",
+        "note": "整体测地极坐标（$r=|v|$，$\\theta=v/|v|$）：$g_r$ 是测地球的诱导度量；不等式来自与欧氏的 Jacobi 场比较，由它得体积下界 $V_p(r)\\ge\\omega_{n-1}r^{n}/n$（$\\omega_{n-1}$ 为单位球面面积）。",
+        "noteEn": "Global geodesic polar coordinates (r = |v|, θ = v/|v|): g_r is the induced metric on geodesic spheres; the inequality follows from comparison with Euclidean Jacobi fields and yields the volume lower bound V_p(r) ≥ ω_{n−1}r^n/n."
+      },
+      {
+        "latex": "H^{n}:\\ K\\equiv-1,\\quad \\operatorname{Ric}=-(n-1)g,\\quad H^{n}\\cong\\mathbb R^{n}\\ \\text{（微分同胚，非等距）}",
+        "note": "最典型的 Hadamard 流形：双曲空间 $H^n$ 单连通、完备、$K=-1$，故与 $\\mathbb R^n$ 微分同胚；但度量大不相同（球体积按 $e^{(n-1)r}$ 增长），所以 $\\exp_p$ 绝不是等距。",
+        "noteEn": "The model Hadamard manifold: hyperbolic space H^n is simply connected and complete with K = −1, hence diffeomorphic to R^n; but the metrics differ greatly (volumes grow like e^{(n−1)r}), so exp_p is far from being an isometry."
+      }
+    ],
+    "properties": [
+      "三个条件缺一不可：去掉单连通（平坦柱面 $S^1\\times\\mathbb R$，$\\exp_p$ 不单射）、去掉完备（平坦单位圆盘，$\\exp_0$ 甚至不能定义在整个 $T_0M$ 上）、去掉 $K\\le0$（球面 $S^n$，割迹之后 $\\exp_p$ 不再是单射）。",
+      "「唯一极小测地线」的「唯一」是本质结论：Hadamard 流形上 $d(p,q)=|\\exp_p^{-1}(q)|$，每条测地线段都极小；而一般完备流形可能有无穷多条极小测地线（球面对径点）或一条都没有（$\\mathbb R^2\\setminus\\{0\\}$）。",
+      "万有覆叠的解释：当 $M$ 不单连通时，对完备、$K\\le0$ 的 $M$，$\\exp_p:T_pM\\to M$ 仍是覆叠映射，所以 $M$ 的万有覆叠是 $\\mathbb R^n$，于是 $\\pi_i(M)=0\\ (i\\ge2)$，$\\pi_1(M)$ 是自由作用于 $\\mathbb R^n$ 的离散群（如亏格 $\\ge2$ 的曲面，$\\pi_1$ 无限）。",
+      "距离函数的凸性：Hadamard 流形上 $r(x)=d(p,x)$ 沿不经过 $p$ 的测地线是凸函数，等价地 $\\operatorname{Hess}r\\ge0$（测地球的第二基本形式半正定）。这是「负曲率使测地线相互发散」的解析表达，也是没有共轭点的几何本质。",
+      "微分同胚而非等距：$\\exp_p$ 把 $T_pM$ 的欧氏结构与 $M$ 的弯曲度量区分开——拓扑被完全确定（$M\\cong\\mathbb R^n$，可缩），几何却可以非常不同（体积指数增长、负曲率处处）。"
+    ],
+    "propertiesEn": [
+      "All three hypotheses matter: dropping simple connectedness (flat cylinder S¹×R, exp_p not injective), dropping completeness (flat unit disk, where exp_0 is not even defined on all of T_0M), dropping K ≤ 0 (the sphere S^n, where exp_p fails to be injective beyond the cut locus).",
+      "Uniqueness of the minimizing geodesic is an essential part of the conclusion: in a Hadamard manifold d(p,q) = |exp_p^{−1}(q)| and every geodesic segment is minimizing, in contrast with general complete manifolds, where a pair may have infinitely many minimizing geodesics (antipodal points on a sphere) or none (R²∖{0}).",
+      "Universal cover interpretation: for complete M with K ≤ 0, exp_p: T_pM → M is a covering map even without simple connectedness, so the universal cover of M is R^n; hence π_i(M) = 0 for i ≥ 2, and π_1(M) acts freely and discretely on R^n (e.g. closed surfaces of genus ≥ 2 with infinite π_1).",
+      "Convexity of the distance function: in a Hadamard manifold r(x) = d(p,x) is convex along geodesics not through p, equivalently Hess r ≥ 0 (the second fundamental form of geodesic spheres is positive semidefinite). This is the analytic expression of negative curvature making geodesics diverge.",
+      "Diffeomorphism, not isometry: exp_p identifies the topology (M ≅ R^n, contractible) while the geometry can be very different (exponential volume growth, negative curvature everywhere)."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -1.5,
+        1.5
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "density": [
+        26,
+        26
+      ],
+      "color": "#4cc9f0",
+      "title": "马鞍面（K<0 的直观模型）：两个主方向弯曲相反，测地线沿任何方向都相互发散，exp_p 没有共轭点"
+    },
+    "examples": [
+      {
+        "problem": "证明：Hadamard 流形上任意两点间的测地线唯一，且它自动是极小测地线。",
+        "solution": "由嘉当–哈达玛定理，$\\exp_p:T_pM\\to M$ 是双射，故对任意 $q$ 存在唯一 $v=\\exp_p^{-1}(q)\\in T_pM$。测地线 $\\gamma(t)=\\exp_p(tv)\\ (0\\le t\\le1)$ 连接 $p,q$，长度 $L=|v|$。唯一性：若另一条测地线 $\\tilde\\gamma$ 也从 $p$ 到 $q$，则 $\\exp_p(\\tilde\\gamma'(0))=q=\\exp_p(v)$，由 $\\exp_p$ 单射得 $\\tilde\\gamma'(0)=v$，故 $\\tilde\\gamma=\\gamma$。极小性：由负曲率比较对任意 $v,w$ 有 $d_M(\\exp_p v,\\exp_p w)\\ge|v-w|$，取 $w=0$ 得 $d(p,q)\\ge|v|=L$，结合 $L\\ge d(p,q)$ 得 $L=d(p,q)$，即 $\\gamma$ 最短。"
+      },
+      {
+        "problem": "用 Jacobi 场证明：$K\\le0$ 的流形上没有共轭点。",
+        "solution": "设 $J$ 是沿单位速度测地线 $\\gamma$ 的 Jacobi 场，$J(0)=0$，$J\\not\\equiv0$，令 $y=|J|$。在 $y>0$ 处由 $J''=-KJ$ 与 Cauchy–Schwarz 得\n$$y''=\\frac{|J'|^{2}-K y^{2}-\\langle J,J'\\rangle^{2}/y^{2}}{y}\\ \\ge\\ -Ky\\ \\ge\\ 0,$$\n故 $y$ 是凸函数，且 $y(0)=0$、右导数 $y'(0)=|J'(0)|>0$（若 $J'(0)=0$ 则 $J\\equiv0$，矛盾）。凸性给出 $y(t)\\ge y'(0)\\,t>0$（$t>0$），即 $J$ 永不消失，$\\exp_p$ 没有临界点。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "负曲率",
+      "指数映射",
+      "整体定理",
+      "拓扑"
+    ],
+    "links": [
+      "hopf-rinow",
+      "exponential-map",
+      "geodesic",
+      "jacobi-fields",
+      "conjugate-points-cut-locus",
+      "sectional-curvature",
+      "covering-space",
+      "fundamental-group",
+      "hyperbolic-geometry-poincare",
+      "space-forms"
+    ]
+  },
+  {
+    "id": "bonnet-myers",
+    "title": "邦内–迈尔斯定理",
+    "titleEn": "The Bonnet–Myers Theorem",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "完备的 $n$ 维黎曼流形若满足 Ricci 曲率下界 $\\operatorname{Ric}\\ge(n-1)k\\,g$（$k>0$），则必紧致、直径 $\\le\\pi/\\sqrt{k}$、基本群有限；等号成立当且仅当它是半径 $1/\\sqrt{k}$ 的球面。",
+    "summaryEn": "A complete Riemannian n-manifold with Ricci curvature Ric ≥ (n−1)k g, k > 0, must be compact with diameter ≤ π/√k and finite fundamental group; equality holds iff it is isometric to the round sphere of radius 1/√k.",
+    "definition": "**邦内–迈尔斯定理**（Bonnet–Myers，也常称 Myers 定理）：设 $(M,g)$ 是**完备**的 $n$ 维黎曼流形，若其 **Ricci 曲率**满足\n$$\\operatorname{Ric}\\ge(n-1)k\\,g,\\qquad k>0,$$\n即对每个单位切向量 $v$ 有 $\\operatorname{Ric}(v,v)\\ge(n-1)k$，则：① $M$ **紧致**；② $\\operatorname{diam}(M)\\le\\dfrac{\\pi}{\\sqrt{k}}$；③ 基本群 $\\pi_1(M)$ **有限**。定理中用的是 **Ricci 曲率**（比截面曲率弱得多），常数写成 $(n-1)k$ 是为了让常截面曲率 $k$ 的空间形式恰好取到等号：半径 $R$ 的球面满足 $\\operatorname{Ric}=(n-1)/R^2\\,g$、$\\operatorname{diam}=\\pi R$，取 $k=1/R^2$ 就得到 $\\pi/\\sqrt{k}=\\pi R$，两边一致。\n\n**$k>0$ 是严格必需的**。若只假设 $\\operatorname{Ric}\\ge0$，结论全部失效：$\\mathbb R^n$ 完备、$\\operatorname{Ric}\\equiv0$，却不紧且直径无穷；更微妙的 $S^n\\times\\mathbb R$ 沿 $S^n$ 方向有正曲率（$\\operatorname{Ric}=n-1$），沿 $\\mathbb R$ 方向却为 $0$，同样不紧。正的下界把「无穷远」彻底封死，这正是定理的威力；与之互补的是 Cheeger–Gromoll 分裂定理（$\\operatorname{Ric}\\ge0$ 且含直线 $\\Rightarrow M\\cong N\\times\\mathbb R$）。\n\n证明思路（第二变分）：完备性由霍普夫–里诺定理保证任意两点间存在极小测地线。设 $\\gamma$ 是长度 $L>\\pi/\\sqrt{k}$ 的极小测地线，用正交平行场 $E_1,\\dots,E_{n-1}$ 与变分场 $V_i(t)=\\sin(\\pi t/L)E_i(t)$（两端为 $0$）作第二变分，得到\n$$I(V)\\le(n-1)\\frac{L}{2}\\Bigl(\\frac{\\pi^{2}}{L^{2}}-k\\Bigr)<0,$$\n即存在长度更短的变分曲线，与极小性矛盾。于是任何两点距离 $\\le\\pi/\\sqrt{k}$，直径有上界；整个 $M$ 被紧的闭球 $\\overline B(p,\\pi/\\sqrt{k})$ 覆盖，故 $M$ 紧致。$\\pi_1$ 有限则用万有覆叠：拉回度量下 $\\widetilde M$ 仍完备、Ricci 下界相同，故 $\\widetilde M$ 也紧，覆叠层数 $=|\\pi_1(M)|$ 有限。历史：Bonnet 处理曲面情形，Myers（1941）证明高维情形，Ambrose（1956）给出基于第二变分的简化证明；等号情形的刚性（Cheng 1975）说：$\\operatorname{diam}(M)=\\pi/\\sqrt{k}$ 当且仅当 $M$ 等距于半径 $1/\\sqrt{k}$ 的球面。",
+    "definitionEn": "**Bonnet–Myers theorem** (also called Myers' theorem): let $(M,g)$ be a **complete** Riemannian $n$-manifold with **Ricci curvature** satisfying $\\operatorname{Ric}\\ge(n-1)k\\,g$ with $k>0$, i.e. $\\operatorname{Ric}(v,v)\\ge(n-1)k$ for every unit vector $v$. Then ① $M$ is **compact**; ② $\\operatorname{diam}(M)\\le\\pi/\\sqrt{k}$; ③ $\\pi_1(M)$ is **finite**. The hypothesis involves Ricci (much weaker than sectional curvature); the normalisation $(n-1)k$ makes round space forms attain equality: $S^n(R)$ has $\\operatorname{Ric}=(n-1)R^{-2}g$ and diameter $\\pi R$, and with $k=1/R^2$ one gets $\\pi/\\sqrt{k}=\\pi R$.\n\nStrict positivity is essential: $\\mathbb R^n$ is complete with $\\operatorname{Ric}\\equiv0$ yet non-compact with infinite diameter, and $S^n\\times\\mathbb R$ has Ricci ≥ 0 but is non-compact. A positive lower bound rules out infinity; the complementary picture is the Cheeger–Gromoll splitting theorem.\n\nProof sketch (second variation): completeness gives minimizing geodesics (Hopf–Rinow). If a minimizing geodesic had length $L>\\pi/\\sqrt{k}$, the variation fields $V_i(t)=\\sin(\\pi t/L)E_i(t)$ along parallel orthonormal fields give $I(V)\\le(n-1)\\frac L2(\\pi^2/L^2-k)<0$, contradicting minimality. Hence all distances are at most $\\pi/\\sqrt{k}$, so $M$ is covered by a compact closed ball. Finiteness of $\\pi_1$ follows by applying the theorem to the universal cover, which is again complete with the same Ricci bound, hence compact. Bonnet treated surfaces, Myers (1941) the general case, Ambrose (1956) gave a simplified proof via the second variation; Cheng (1975) proved the rigidity: equality in the diameter bound holds iff $M$ is isometric to the round sphere of radius $1/\\sqrt{k}$.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{Ric}\\ge(n-1)k\\,g,\\ k>0\\ \\Longrightarrow\\ M\\ \\text{紧},\\quad \\operatorname{diam}(M)\\le\\frac{\\pi}{\\sqrt{k}},\\quad \\pi_1(M)\\ \\text{有限}",
+        "note": "定理的三个结论一次写出：紧致、直径上界 $\\pi/\\sqrt{k}$、基本群有限。条件是 Ricci 曲率的下界，不是截面曲率。",
+        "noteEn": "The three conclusions at once: compactness, the diameter bound π/√k, and finiteness of π₁. The hypothesis is a lower bound on Ricci curvature, not on sectional curvature."
+      },
+      {
+        "latex": "\\operatorname{Ric}(v,v)\\ge(n-1)k\\qquad\\text{对一切单位向量 }v\\in TM",
+        "note": "张量不等式的展开形式：$(n-1)k$ 是每个方向的 Ricci 曲率下界；$n=1$ 时条件无意义，通常取 $n\\ge2$。",
+        "noteEn": "The pointwise form: (n−1)k bounds the Ricci curvature in every unit direction; the condition is vacuous for n = 1, so one takes n ≥ 2."
+      },
+      {
+        "latex": "\\operatorname{diam}\\bigl(S^{n}(R)\\bigr)=\\pi R,\\qquad \\operatorname{Ric}_{S^{n}(R)}=\\frac{n-1}{R^{2}}\\,g,\\qquad k=\\frac{1}{R^{2}}\\ \\Rightarrow\\ \\frac{\\pi}{\\sqrt{k}}=\\pi R\\ \\text{（等号）}",
+        "note": "球面同时验证了定理的常数与刚性：半径 $R$ 的球面 Ric 为 $(n-1)/R^2$，直径恰为 $\\pi R$，正好等于 $\\pi/\\sqrt{k}$。",
+        "noteEn": "The round sphere checks both the constant and the rigidity: Ric = (n−1)/R², diameter exactly πR, equal to π/√k with k = 1/R²."
+      },
+      {
+        "latex": "I(V)\\le(n-1)\\frac{L}{2}\\left(\\frac{\\pi^{2}}{L^{2}}-k\\right)<0\\qquad(L>\\pi/\\sqrt{k})",
+        "note": "第二变分的核心估计：取 $V_i=\\sin(\\pi t/L)E_i$（$E_i$ 为平行正交单位场），利用 $\\sum_i K(\\gamma',E_i)=\\operatorname{Ric}(\\gamma',\\gamma')\\ge(n-1)k$ 与 $\\int_0^L\\sin^2=\\int_0^L\\cos^2=L/2$；长度超过 $\\pi/\\sqrt{k}$ 的测地线必不极小。",
+        "noteEn": "The key second-variation estimate with V_i = sin(πt/L)E_i along parallel orthonormal fields, using Σ_i K(γ′,E_i) = Ric(γ′,γ′) ≥ (n−1)k and the integrals of sin² and cos²; a geodesic longer than π/√k cannot be minimizing."
+      },
+      {
+        "latex": "\\operatorname{diam}(M)=\\frac{\\pi}{\\sqrt{k}}\\iff M\\ \\text{等距于}\\,S^{n}\\!\\left(\\frac{1}{\\sqrt{k}}\\right)",
+        "note": "Cheng（1975）的等号刚性：达到直径上界的唯一可能是常截面曲率 $k$ 的球面。任何「不那么圆」的度量在保持 Ric 下界时会严格减小直径。",
+        "noteEn": "Cheng's (1975) equality case: the bound is attained only by the round sphere of radius 1/√k; any non-round metric with the same Ricci bound has strictly smaller diameter."
+      }
+    ],
+    "properties": [
+      "定理只用到 **Ricci 曲率**的下界（比截面曲率弱），所以适用范围很广；相应地它不控制单连通性，也不给出直径的精确值——例如实射影空间 $\\mathbb{RP}^n$（$\\operatorname{Ric}=(n-1)g$，$\\pi_1=\\mathbb Z_2$ 有限，直径 $\\pi/2$）就满足条件而非单连通。",
+      "$k>0$ 是严格必需的：$\\mathbb R^n$ 完备、$\\operatorname{Ric}\\equiv0$、直径无穷；$S^n\\times\\mathbb R$ 有 $\\operatorname{Ric}\\ge0$（某些方向为 $0$）却也不紧。因此只设 $\\operatorname{Ric}\\ge0$ 无法获得任何直径上界。",
+      "$\\pi_1(M)$ 有限的证明是「万有覆叠 + 完备性」的标准操作：覆叠映射是局部等距，拉回度量下 $\\widetilde M$ 完备且 Ricci 下界不变，故 $\\widetilde M$ 由定理紧致，有限层覆叠给出 $|\\pi_1(M)|<\\infty$。注意结论只是有限，不保证平凡。",
+      "等号刚性（Cheng 1975）：$\\operatorname{diam}(M)=\\pi/\\sqrt{k}$ 当且仅当 $M$ 等距于 $S^n(1/\\sqrt{k})$。同一曲率条件在谱上的对应刚性是 Obata 定理：Lichnerowicz 给出第一特征值下界 $\\lambda_1\\ge nk$，等号（$\\lambda_1=nk$）同样当且仅当 $M$ 是半径 $1/\\sqrt{k}$ 的球面。",
+      "在比较几何的版图中，它与 Rauch 比较、Bishop–Gromov 体积比较、嘉当–哈达玛定理并列：用曲率界控制直径、体积、基本群与拓扑；它也是各类「刚性/夹紧」结果（如球面定理系列）的出发点。"
+    ],
+    "propertiesEn": [
+      "The theorem only uses a lower bound on **Ricci curvature** (weaker than sectional curvature), hence its wide applicability; correspondingly it does not force simple connectedness — e.g. RP^n (Ric = (n−1)g, π₁ = Z₂ finite, diameter π/2) satisfies the hypothesis without being simply connected.",
+      "Strict positivity k > 0 is essential: R^n is complete with Ric ≡ 0 and infinite diameter, and S^n×R has Ric ≥ 0 yet is non-compact. Thus Ric ≥ 0 alone gives no diameter bound at all.",
+      "Finiteness of π₁ is the standard covering argument: the pullback metric on the universal cover is complete with the same Ricci bound, so the universal cover is compact by the theorem, and the covering has finitely many sheets.",
+      "Equality rigidity (Cheng 1975): diam(M) = π/√k iff M is isometric to S^n(1/√k). The spectral counterpart under the same curvature bound is Obata's theorem: Lichnerowicz gives λ₁ ≥ nk and equality holds iff M is the round sphere of radius 1/√k.",
+      "In comparison geometry it sits next to the Rauch comparison, Bishop–Gromov volume comparison and the Cartan–Hadamard theorem: curvature bounds control diameter, volume and fundamental group, and it is the starting point for rigidity and pinching (sphere theorem) results."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "PI/sqrt(x)",
+          "color": "#ff6b9d",
+          "label": "上界 π/√k（Sⁿ(1/√k) 取等号）"
+        }
+      ],
+      "xRange": [
+        0.15,
+        8
+      ],
+      "yRange": [
+        0,
+        9.5
+      ],
+      "title": "直径上界 π/√k 随 Ricci 下界 (n−1)k 中常数 k 的变化：k→0⁺ 时上界发散，与 Rⁿ（Ric=0、直径无穷）不矛盾"
+    },
+    "examples": [
+      {
+        "problem": "对 $S^n(R)$ 验证邦内–迈尔斯定理的常数一致性。取 $n=3$、$R=2$，写出 Ricci 曲率、直径与定理上界的数值。",
+        "solution": "球面满足 $\\operatorname{Ric}=\\frac{n-1}{R^{2}}g$，故 $\\lambda=\\frac{n-1}{R^{2}}=\\frac{2}{4}=0.5$（即 $\\operatorname{Ric}(v,v)=0.5$ 对每个单位向量 $v$）。直径 $\\operatorname{diam}=\\pi R=2\\pi\\approx6.2832$。取 $k=\\frac1{R^{2}}=0.25$，定理给出上界 $\\frac{\\pi}{\\sqrt{0.25}}=\\frac{\\pi}{0.5}=2\\pi$，与真实直径相等，等号成立；由 Cheng 刚性，等号情形只能是 $S^3(2)$，与假设自洽。"
+      },
+      {
+        "problem": "证明：若 $M$ 完备且 $\\operatorname{Ric}\\ge(n-1)k>0$，则 $\\pi_1(M)$ 有限。",
+        "solution": "设 $\\pi:\\widetilde M\\to M$ 为万有覆叠，配上拉回度量 $\\tilde g=\\pi^{*}g$。覆叠映射是局部等距，故 $\\widetilde M$ 完备（也可验证测地完备性：$\\widetilde M$ 的测地线是 $M$ 中测地线的提升）；又 $\\widetilde M$ 上的 Ricci 张量与 $M$ 相同，仍满足 $\\operatorname{Ric}\\ge(n-1)k$。由邦内–迈尔斯定理，$\\widetilde M$ 紧致。紧致底空间 $M$ 上的覆叠 $\\pi$ 的纤维是离散紧集，故有限：层数 $=|\\pi_1(M)|<\\infty$。例：$\\mathbb{RP}^n$（$n\\ge2$，$\\operatorname{Ric}=(n-1)g$）的 $\\pi_1=\\mathbb Z_2$ 正是有限而非平凡的实例。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "Ricci 曲率",
+      "直径",
+      "紧性",
+      "整体定理"
+    ],
+    "links": [
+      "hopf-rinow",
+      "ricci-scalar-curvature",
+      "sectional-curvature",
+      "riemannian-curvature-tensor",
+      "second-variation-index-form",
+      "covering-space",
+      "fundamental-group",
+      "compactness",
+      "space-forms",
+      "cartan-hadamard"
+    ]
+  },
+  {
+    "id": "einstein-manifold",
+    "title": "爱因斯坦流形与里奇流",
+    "titleEn": "Einstein Manifolds and the Ricci Flow",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "爱因斯坦流形满足 $\\operatorname{Ric}=\\lambda g$，$n\\ge3$ 的连通流形上 $\\lambda$ 自动为常数；里奇流 $\\partial_tg=-2\\operatorname{Ric}$ 是 Hamilton 引入的曲率演化方程，Perelman 用它连同手术证明了庞加莱猜想与几何化猜想。",
+    "summaryEn": "Einstein manifolds satisfy Ric = λg with λ automatically constant for connected n ≥ 3; the Ricci flow ∂g/∂t = −2Ric is Hamilton's curvature evolution equation, used by Perelman (with surgery) to prove the Poincaré and geometrization conjectures.",
+    "definition": "**爱因斯坦流形**是满足\n$$\\operatorname{Ric}=\\lambda g$$\n的黎曼流形：Ricci 张量处处是度量的函数倍。它对引力中的爱因斯坦方程（无物质情形）与 Kähler 几何都至关重要。$\\lambda$ 起初只假设是函数，但当 $n\\ge3$ 且 $M$ 连通时它**自动是常数**：把缩并的第二比安基恒等式 $\\nabla^{i}\\operatorname{Ric}_{ij}=\\frac12\\nabla_{j}R$ 与 $\\operatorname{Ric}=\\lambda g$ 比较，得 $\\nabla\\lambda=\\frac n2\\nabla\\lambda$，即 $\\left(1-\\frac n2\\right)\\nabla\\lambda=0$；$n\\ge3$ 时 $\\lambda$ 的梯度为零，故为常数（连通性也不能少：不同分支可取不同的 $\\lambda$ 值）。$n=2$ 时这一论证恰好失效，而事实上任何二维度量都满足 $\\operatorname{Ric}=Kg$、$\\lambda=K$ 可以为非常数。按 $\\lambda$ 的符号：**完备**的 $\\lambda>0$ 爱因斯坦流形由邦内–迈尔斯定理自动紧致、直径有限（完备性不能省：球面挖去一点仍有 $Ric=\\lambda g>0$，但既不紧也不完备）；$\\lambda=0$ 称 **Ricci 平坦**；$\\lambda<0$ 的负爱因斯坦流形可以紧也可以不紧。\n\n例：$\\lambda=0$ 的有 $\\mathbb R^n$、平坦环面 $T^n$、以及 **Calabi–Yau 流形**（如复二维的 K3 曲面：Yau 1978 证明 Calabi 猜想后，K3 上存在 Ricci 平坦而非平坦的 Kähler 度量）；$\\lambda>0$ 的有球面 $S^n$（$\\operatorname{Ric}=(n-1)/R^2\\,g$）与复射影空间 $\\mathbb{CP}^n$（Fubini–Study 度量，把全纯截面曲率归一化为 $4$ 时 $\\operatorname{Ric}=2(n+1)g$）；$\\lambda<0$ 的有双曲空间 $H^n$（$\\operatorname{Ric}=-(n-1)g$）与复双曲空间。要特别注意：**爱因斯坦 $\\neq$ 常截面曲率**——$\\mathbb{CP}^n$（复维 $n\\ge2$，实维 $\\ge4$）是爱因斯坦的，但截面曲率在 $[1,4]$ 中变化；只有 $\\mathbb{CP}^1=S^2$ 例外。在三维，爱因斯坦确实蕴含常截面曲率（三维中 Ric 决定整个曲率张量）；二维则是退化情形——任何二维度量都满足爱因斯坦条件，曲率却未必是常数。所以真正的新现象从四维开始。\n\n**里奇流**是 Hamilton（1982）引入的演化方程\n$$\\frac{\\partial g}{\\partial t}=-2\\operatorname{Ric}(g(t)),$$\n可以看作热方程的非线性版本：曲率像热量一样扩散，但方程高度非线性，且只对正向时间适定。系数 $-2$ 使数量曲率满足 $\\partial_tR=\\Delta R+2|\\operatorname{Ric}|^{2}$——扩散项加非负反应项，正是曲率可能有限时间爆破的来源。为保持体积不变，人们常研究**归一化里奇流** $\\partial_tg=-2\\operatorname{Ric}+\\frac2n\\bar rg$，其中 $\\bar r$ 是平均数量曲率。里奇流具有尺度对称性 $g(t)\\mapsto c\\,g(t/c)$，短时间存在唯一性由 Hamilton 用 Nash–Moser 隐函数定理证明（DeTurck 技巧给出更简单的证明）。两个最经典的模型解是球面（收缩解，$r(t)^2=r_0^2-2(n-1)t$）与 $\\mathbb R^2$ 上的雪茄孤立子（稳态解，数量曲率 $R=4/(1+r^2)$，见配图）。\n\n历史与成就：Hamilton 1982 年用里奇流证明「正 Ricci 曲率的三维闭流形微分同胚于球面空间形式」，并建立起奇点分析（neck pinch）与**手术**（把接近塌缩的细颈剪开、补上小圆帽后继续流动）的纲领；**Perelman（2002–2003）**引入 W-熵、非塌缩估计与规范化手术，解决了奇点分类与手术的严格性问题，从而证明了**庞加莱猜想**（每个单连通的闭三维流形同胚于 $S^3$）与 Thurston 的**几何化猜想**。里奇流的其他应用包括：Brendle–Schoen 的微分球面定理（严格 $1/4$ 夹紧的闭流形微分同胚于球面）、Kähler–Ricci 流（Cao 1985 用它给出 Calabi 猜想的新证明）、以及二维曲面的单值化。",
+    "definitionEn": "An **Einstein manifold** satisfies Ric = λg: the Ricci tensor is everywhere a function multiple of the metric. For connected M with n ≥ 3, λ is automatically a constant: comparing the contracted second Bianchi identity ∇^i Ric_ij = ½∇_j R with Ric = λg gives ∇λ = (n/2)∇λ, hence ∇λ = 0 when n ≠ 2 (connectedness is needed as well; for n = 2 the argument degenerates and indeed every surface metric satisfies Ric = Kg with λ = K typically non-constant). By sign: λ > 0 forces compactness and finite diameter by Bonnet–Myers; λ = 0 is Ricci flat; λ < 0 examples may be compact or not.\n\nExamples: λ = 0 — R^n, flat tori T^n, Calabi–Yau manifolds (K3 with Yau's Ricci-flat Kähler metric); λ > 0 — the round sphere S^n and complex projective space CP^n (Fubini–Study, Ric = 2(n+1)g when the holomorphic sectional curvature is normalised to 4); λ < 0 — hyperbolic space H^n and complex hyperbolic space. Crucially, **Einstein does not imply constant sectional curvature**: CP^n (complex dimension n ≥ 2, real dimension ≥ 4) is Einstein with sectional curvature varying in [1,4]. In dimension 3 Einstein does imply constant sectional curvature (Ric determines the curvature tensor there); dimension 2 is degenerate, since every surface metric is Einstein. Thus genuinely new phenomena start in dimension 4.\n\nThe **Ricci flow** ∂g/∂t = −2Ric(g(t)) (Hamilton 1982) is a nonlinear heat equation for the metric, well-posed only forward in time; the factor −2 makes the scalar curvature obey ∂_tR = ΔR + 2|Ric|², a diffusion with a non-negative reaction term, the source of finite-time blow-ups. The **normalised Ricci flow** ∂g/∂t = −2Ric + (2/n)r̄g preserves volume. The flow is scale invariant, and short-time existence and uniqueness were proved by Hamilton (Nash–Moser) with a simpler proof via DeTurck's trick. Model solutions include the shrinking round sphere, r(t)² = r₀² − 2(n−1)t, and the steady cigar soliton on R², whose scalar curvature is 4/(1+r²) (see figure).\n\nHistory: Hamilton (1982) proved that closed 3-manifolds of positive Ricci curvature are spherical space forms and developed singularity analysis (neck pinches) and the surgery programme; **Perelman (2002–2003)** introduced the W-entropy, non-collapsing and refined surgery, completing the proofs of the **Poincaré conjecture** and Thurston's **geometrization conjecture**. Further applications include the Brendle–Schoen differentiable sphere theorem, Kähler–Ricci flow (Cao 1985 reproving the Calabi conjecture) and uniformization of surfaces.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{Ric}=\\lambda g",
+        "note": "爱因斯坦流形的定义。$\\lambda$ 是 Einstein 常数；三个符号对应三类几何：正（球面型）、零（Ricci 平坦）、负（双曲型）。",
+        "noteEn": "The defining equation. λ is the Einstein constant; its sign distinguishes positive (sphere-like), zero (Ricci-flat) and negative (hyperbolic-like) geometries."
+      },
+      {
+        "latex": "\\nabla^{i}\\operatorname{Ric}_{ij}=\\tfrac{1}{2}\\nabla_{j}R\\ \\Longrightarrow\\ \\nabla\\lambda=\\tfrac{n}{2}\\nabla\\lambda\\ \\Longrightarrow\\ \\nabla\\lambda=0\\quad(n\\ge3,\\ M\\ \\text{连通})",
+        "note": "缩并的第二比安基恒等式推出 $n\\ge3$ 时 $\\lambda$ 必为常数；$n=2$ 时系数 $1-n/2$ 为零，论证失效（二维任何度量都满足 $\\operatorname{Ric}=Kg$）。",
+        "noteEn": "The contracted second Bianchi identity forces λ to be constant for n ≥ 3; for n = 2 the coefficient 1 − n/2 vanishes and every surface metric satisfies Ric = Kg."
+      },
+      {
+        "latex": "\\frac{\\partial g}{\\partial t}=-2\\operatorname{Ric}(g(t))",
+        "note": "里奇流（Hamilton 1982）。系数 $-2$ 不可漏：它决定球面演化 $r^2(t)=r_0^2-2(n-1)t$，也决定 $\\partial_tR=\\Delta R+2|\\operatorname{Ric}|^2$ 的符号。",
+        "noteEn": "The Ricci flow (Hamilton 1982). The factor −2 matters: it produces the sphere evolution r²(t) = r₀² − 2(n−1)t and the sign in ∂_tR = ΔR + 2|Ric|²."
+      },
+      {
+        "latex": "\\frac{\\partial g}{\\partial t}=-2\\operatorname{Ric}+\\frac{2}{n}\\bar{r}\\,g,\\qquad \\bar{r}=\\frac{\\int_{M}R\\,d\\mu}{\\int_{M}d\\mu}",
+        "note": "归一化里奇流：加入 $\\frac2n\\bar rg$ 保持体积不变（$\\bar r$ 为平均数量曲率），是研究收敛到爱因斯坦度量的标准工具。",
+        "noteEn": "The normalised Ricci flow: the extra term (2/n)r̄g keeps the volume constant and is the standard tool for convergence to Einstein metrics."
+      },
+      {
+        "latex": "\\frac{\\partial R}{\\partial t}=\\Delta R+2|\\operatorname{Ric}|^{2}",
+        "note": "数量曲率的演化（$\\Delta=\\operatorname{div}\\operatorname{grad}$）：扩散项 $\\Delta R$ 加上非负反应项 $2|\\operatorname{Ric}|^2$，说明曲率只能被「加热」——这就是有限时间奇点的来源，也是里奇流与热方程类比之处。",
+        "noteEn": "Scalar curvature evolution (Δ = div grad): diffusion plus the non-negative reaction term 2|Ric|², which can drive curvature to blow up in finite time — the origin of singularities and the analogy with the heat equation."
+      }
+    ],
+    "properties": [
+      "$n\\ge3$ 且连通 $\\Rightarrow$ Einstein 常数 $\\lambda$ 为常数（由缩并比安基恒等式）；$n=2$ 时结论失效，且是「最优」的：任何二维度量都满足 $\\operatorname{Ric}=Kg$（$\\lambda=K$ 可非常数，如椭球面的高斯曲率）。连通性也不可少，不同连通分支可以有各自的 $\\lambda$。",
+      "符号分类的几何后果：**若 $M$ 完备**，$\\lambda>0$ 时由邦内–迈尔斯定理知 $M$ 紧致、$\\operatorname{diam}\\le\\pi\\sqrt{(n-1)/\\lambda}$、$\\pi_1$ 有限；$\\lambda=0$ 的紧 Ricci 平坦流形（如平坦环面、K3）基本群可无限；$\\lambda<0$ 的紧 Kähler–Einstein 流形（如复双曲空间及其商）是负曲率几何的核心对象。",
+      "**Einstein $\\neq$ 常截面曲率**：三维时两者等价（Ric 决定整个曲率张量）；二维是退化情形，一切度量都满足 Einstein 条件，故不蕴含常曲率。而 $\\mathbb{CP}^n\\ (n\\ge2)$ 是爱因斯坦（$\\operatorname{Ric}=2(n+1)g$，全纯截面曲率归一化为 $4$）但截面曲率在 $[1,4]$ 之间变化；这是第一个标准的反例。",
+      "里奇流的方程结构与对称性：短时间存在唯一（Hamilton 用 Nash–Moser，DeTurck 技巧简化）；尺度不变性 $g(t)\\mapsto c\\,g(t/c)$；对正向时间适定、倒向严重不适定；解在有限时间可能因曲率爆破而中断，因而需要奇点分析（球面收缩是「圆点」奇点，一般三维流形出现 neck pinch 与手术）。",
+      "历史评价必须准确：佩雷尔曼（2002–2003）用带手术的里奇流证明了庞加莱猜想与 Thurston 几何化猜想；Hamilton（1982 起）建立了里奇流的基础理论、证明了正 Ricci 曲率情形并提出手术纲领，Perelman 引入 W-熵、非塌缩与严格化的手术完成了最后一步。其他应用：微分球面定理（Brendle–Schoen）、Kähler–Ricci 流与 Calabi 猜想（Cao 1985）、曲面的单值化。"
+    ],
+    "propertiesEn": [
+      "For connected M with n ≥ 3 the Einstein constant λ is automatically constant (contracted Bianchi identity); this fails for n = 2, and optimally so, since every surface metric satisfies Ric = Kg with λ = K possibly non-constant. Connectedness is also needed: different components may carry different λ.",
+      "Geometric consequences by sign: λ > 0 implies compactness, diameter ≤ π√((n−1)/λ) and finite π₁ by Bonnet–Myers; compact Ricci-flat (λ = 0) manifolds such as flat tori and K3 may have infinite fundamental group; λ < 0 compact Kähler–Einstein manifolds are central objects in negative curvature geometry.",
+      "**Einstein is not the same as constant sectional curvature**: they agree in dimension 3 (where Ric determines the curvature tensor), while in dimension 2 the Einstein condition is vacuous (every surface metric satisfies it); CP^n (n ≥ 2) is Einstein, Ric = 2(n+1)g for holomorphic sectional curvature 4, yet its sectional curvature varies in [1,4] — the standard counterexample.",
+      "Structure of the flow: short-time existence and uniqueness (Hamilton via Nash–Moser; DeTurck's trick), scale invariance g(t) ↦ c g(t/c), well-posedness forward in time only, and finite-time breakdown through curvature blow-up, requiring singularity analysis (round-point singularities for spheres, neck pinches and surgery in dimension 3).",
+      "Accurate historical attribution: Perelman (2002–2003) proved the Poincaré and geometrization conjectures by Ricci flow with surgery; Hamilton (from 1982) built the foundational theory, settled the positive-Ricci-curvature case and proposed the surgery programme, while Perelman's W-entropy, non-collapsing and rigorous surgery completed the proof. Other applications: the differentiable sphere theorem (Brendle–Schoen), Kähler–Ricci flow and the Calabi conjecture (Cao 1985), uniformization of surfaces."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "4/(1 + x^2 + y^2)",
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -3,
+        3
+      ],
+      "levels": 12,
+      "title": "里奇流的稳态孤立子：雪茄度量在 R² 上完备，数量曲率 R = 4/(1+r²)（原点峰值 4，远处趋于 0）—— ∂g/∂t = −2Ric 的经典稳态解"
+    },
+    "examples": [
+      {
+        "problem": "验证 $S^n(R)$ 是爱因斯坦流形，并求出裸里奇流 $\\partial_tg=-2\\operatorname{Ric}$ 下半径的演化与灭绝时间（取 $n=3$、$R_0=1$ 给出数值）。",
+        "solution": "$S^n(R)$ 上 $\\operatorname{Ric}=\\frac{n-1}{R^2}g$，故 $\\lambda=\\frac{n-1}{R^2}$。里奇流保持球对称，写 $g(t)=r(t)^2g_{S^n}$：$\\partial_tg=2r\\dot r\\,g_{S^n}=\\frac{2\\dot r}{r}g$，而 $-2\\operatorname{Ric}=-\\frac{2(n-1)}{r^2}g$，于是 $\\dot r=-\\frac{n-1}{r}$，即 $r(t)^2=r_0^2-2(n-1)t$。取 $n=3$、$r_0=1$：$r(t)^2=1-4t$，灭绝时间 $t_*=\\frac14$（此后曲率爆破）。这也说明球面是收缩孤立子，是三维里奇流最简单的一类奇点模型；一般的三维流形则需要手术处理 neck pinch。"
+      },
+      {
+        "problem": "核对 $\\mathbb{CP}^n$ 是爱因斯坦但（$n\\ge2$ 时）不是常截面曲率。以 $n=2$ 为例做数值检查。",
+        "solution": "取 Fubini–Study 度量使全纯截面曲率等于 $4$，则 $\\operatorname{Ric}=2(n+1)g$。对 $n=2$（实维 $4$）：$\\operatorname{Ric}=6g$。若它是常截面曲率 $c$ 的空间形式，则必须 $\\operatorname{Ric}=(4-1)cg=3cg$，即 $c=2$；但 $\\mathbb{CP}^2$ 的截面曲率对复直线（$J$-不变平面）取 $4$，对与复结构正交的实平面取 $1$，取不到恒定值（一般情形下截面曲率在 $[1,4]$ 中变化）。矛盾，故 $\\mathbb{CP}^2$ 爱因斯坦而非常截面曲率。注意 $n=1$ 时 $\\mathbb{CP}^1=S^2$：$2(n+1)=4$，$c=\\frac{4}{1}=4$，与半径 $1/2$ 的球面（$K=4$）一致：$\\mathbb{CP}^1$ 仍然恰好是常曲率的圆球面，而真正的反例要从实四维的 $\\mathbb{CP}^2$ 才开始。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "爱因斯坦流形",
+      "里奇流",
+      "庞加莱猜想",
+      "曲率演化"
+    ],
+    "links": [
+      "ricci-scalar-curvature",
+      "riemannian-curvature-tensor",
+      "sectional-curvature",
+      "riemannian-metric",
+      "space-forms",
+      "bonnet-myers",
+      "hopf-rinow",
+      "hodge-laplace-beltrami",
+      "uniformization-theorem",
+      "heat-equation"
+    ]
+  },
+  {
+    "id": "hodge-laplace-beltrami",
+    "title": "拉普拉斯–贝尔特拉米算子与霍奇理论",
+    "titleEn": "The Laplace–Beltrami Operator and Hodge Theory",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "黎曼流形上的拉普拉斯–贝尔特拉米算子 $\\Delta f=\\operatorname{div}\\operatorname{grad}f$ 用 $\\frac{1}{\\sqrt g}\\partial_i(\\sqrt g\\,g^{ij}\\partial_jf)$ 度量弯曲程度；霍奇理论断言紧致无边界流形上每个上同调类有唯一调和代表元，故 $H^k_{\\mathrm{dR}}\\cong\\ker\\Delta_k$。",
+    "summaryEn": "The Laplace–Beltrami operator Δf = div grad f is given in coordinates by (1/√g)∂_i(√g g^{ij}∂_j f); Hodge theory states that on a closed Riemannian manifold every de Rham class has a unique harmonic representative, so H^k_dR ≅ ker Δ_k.",
+    "definition": "**拉普拉斯–贝尔特拉米算子**把欧氏空间的拉普拉斯算子搬到任意黎曼流形上：\n$$\\Delta f=\\operatorname{div}(\\operatorname{grad}f)=\\frac{1}{\\sqrt{g}}\\partial_i\\bigl(\\sqrt{g}\\,g^{ij}\\partial_j f\\bigr),$$\n其中 $g=\\det(g_{ij})$，$g^{ij}$ 是逆度量，重复指标求和。$\\sqrt g$ 是体积元因子、$g^{ij}$ 负责把梯度从余切向量翻译成向量——两项缺一不可，这正是「度量影响分析」的入口。**符号约定必须声明**：本节点采用**分析约定** $\\Delta=\\operatorname{div}\\operatorname{grad}$，此时紧致无边界流形上的特征值为非正（$0,-\\lambda_1,\\dots$），球面调和函数满足 $\\Delta Y_{\\ell m}=-\\ell(\\ell+n-1)Y_{\\ell m}$；**几何文献常用相反约定** $\\Delta=-\\operatorname{div}\\operatorname{grad}$，特征值为非负的 $0=\\lambda_0<\\lambda_1\\le\\lambda_2\\le\\cdots$。下文讨论谱时统一用非负特征值 $\\lambda_j$（即几何约定下 $-\\Delta$ 的特征值），两种约定的公式只差一个符号。在 $\\mathbb R^n$ 上退化为标准拉普拉斯算子；在球面 $S^n$ 上就是球面拉普拉斯算子，其本征函数是**球面调和函数**，本征值 $\\ell(\\ell+n-1)$（$n=2$ 时即 $\\ell(\\ell+1)$，$\\mathbb R^3$ 中通常写法的 $-\\Delta$ 特征值）。\n\n**谱**：紧致（无边界）流形上 $\\Delta$ 是自伴椭圆算子，谱离散、重数有限：$0=\\lambda_0<\\lambda_1\\le\\lambda_2\\le\\cdots\\to\\infty$，特征函数构成 $L^2(M)$ 的完备正交基。$\\lambda_0=0$ 的特征空间是常函数；$\\lambda_1>0$ 等价于 $M$ **连通**（不连通时分几个分支就有几个线性无关的局部常函数）。特征值个数的增长由 **Weyl 渐近律**控制：$N(\\lambda)\\sim\\frac{\\omega_n\\operatorname{vol}(M)}{(2\\pi)^n}\\lambda^{n/2}$（$\\omega_n$ 为 $\\mathbb R^n$ 中单位球的体积），它说明特征值密度只依赖维数与总体积——「你能听到鼓的体积」，但一般听不出形状。\n\n**霍奇理论**：对微分形式定义**霍奇拉普拉斯算子** $\\Delta=d\\delta+\\delta d$，其中 $\\delta$ 是外微分的 $L^2$ 伴随（余微分）。由 $\\langle\\Delta\\omega,\\omega\\rangle=|d\\omega|^2+|\\delta\\omega|^2$（在紧致无边界流形上分部积分合法）得\n$$\\Delta\\omega=0\\iff d\\omega=0\\ \\text{且}\\ \\delta\\omega=0,$$\n即**调和形式**恰是「既闭又余闭」的形式。**霍奇分解定理**：在**紧致、无边界**（且定向）的黎曼流形上，$\\Omega^k(M)=\\operatorname{im}d\\oplus\\operatorname{im}\\delta\\oplus\\mathbb H^k(M)$（$L^2$ 正交分解，$\\mathbb H^k=\\ker\\Delta_k$），于是每个 de Rham 上同调类有**唯一**的调和代表元：\n$$H^k_{\\mathrm{dR}}(M)\\cong\\mathbb H^k(M),\\qquad b_k=\\dim\\mathbb H^k=\\dim H^k_{\\mathrm{dR}}(M).$$\n「无边界」不可省：带边流形要用绝对/相对边界条件，调和形式与边界值的搭配会变得微妙。霍奇理论把拓扑（贝蒂数）翻译成分析（椭圆方程解空间），是最经典的桥梁之一：$\\chi(M)=\\sum_k(-1)^kb_k$ 立即得到，Poincaré 对偶 $b_k=b_{n-k}$ 由霍奇星算子给出；**Bochner 技巧**则把曲率塞进分析：对 $1$-形式有 Weitzenböck 公式 $\\Delta\\omega=\\nabla^{*}\\nabla\\omega+\\operatorname{Ric}(\\omega)$，故 $\\operatorname{Ric}>0$ 时不存在非零调和 $1$-形式，$b_1=0$。",
+    "definitionEn": "The **Laplace–Beltrami operator** transports the Laplacian to any Riemannian manifold: Δf = div grad f = (1/√g)∂_i(√g g^{ij}∂_j f), where g = det(g_ij). Both √g (the volume factor) and g^{ij} are indispensable. **Sign convention**: here we use the analytic convention Δ = div grad, so eigenvalues on a closed manifold are non-positive (0, −λ₁, …) and spherical harmonics satisfy ΔY = −ℓ(ℓ+n−1)Y; geometric texts often use Δ = −div grad, giving non-negative eigenvalues 0 = λ₀ < λ₁ ≤ λ₂ ≤ ⋯. In this node the spectrum is always quoted as non-negative λ_j, i.e. eigenvalues of −Δ in the geometric convention.\n\n**Spectrum**: on a closed manifold Δ is self-adjoint elliptic, so the spectrum is discrete with finite multiplicities, 0 = λ₀ < λ₁ ≤ λ₂ ≤ ⋯ → ∞, and eigenfunctions form an orthonormal basis of L²(M). The eigenspace for 0 consists of constants, and λ₁ > 0 iff M is connected. The counting function obeys the **Weyl law** N(λ) ~ ω_n vol(M) λ^{n/2}/(2π)^n, with ω_n the volume of the unit ball in R^n. On S^n the eigenfunctions are spherical harmonics with eigenvalues ℓ(ℓ+n−1) (for n = 2, ℓ(ℓ+1)).\n\n**Hodge theory**: the Hodge Laplacian on forms is Δ = dδ + δd, δ the L²-adjoint of d. On a closed manifold integration by parts gives ⟨Δω,ω⟩ = |dω|² + |δω|², hence Δω = 0 iff dω = 0 and δω = 0. The **Hodge decomposition theorem** states that on a compact manifold without boundary, Ω^k = im d ⊕ im δ ⊕ ℍ^k is an L²-orthogonal decomposition, so every de Rham class has a unique harmonic representative: H^k_dR(M) ≅ ℍ^k(M) and b_k = dim ℍ^k. The no-boundary assumption cannot be dropped (boundary conditions are needed otherwise). Applications: χ(M) = Σ(−1)^k b_k, Poincaré duality via the Hodge star, and the **Bochner technique** — for 1-forms Δω = ∇*∇ω + Ric(ω), so Ric > 0 forces b₁ = 0.",
+    "formulas": [
+      {
+        "latex": "\\Delta f=\\operatorname{div}(\\operatorname{grad}f)=\\frac{1}{\\sqrt{g}}\\partial_i\\bigl(\\sqrt{g}\\,g^{ij}\\partial_j f\\bigr)",
+        "note": "拉普拉斯–贝尔特拉米算子（本节点约定 $\\Delta=\\operatorname{div}\\operatorname{grad}$）：体积因子 $\\sqrt g$ 与逆度量 $g^{ij}$ 都不可漏；括号内是「通量」$\\sqrt g\\,g^{ij}\\partial_jf$。",
+        "noteEn": "The Laplace–Beltrami operator (this node uses Δ = div grad): both the volume factor √g and the inverse metric g^{ij} matter; the bracket is the flux √g g^{ij}∂_j f."
+      },
+      {
+        "latex": "\\Delta=d\\delta+\\delta d,\\qquad \\Delta\\omega=0\\iff d\\omega=0\\ \\text{且}\\ \\delta\\omega=0",
+        "note": "霍奇拉普拉斯算子与调和形式的刻画：调和 $\\Leftrightarrow$ 闭且余闭。在函数上 $\\Delta=d\\delta$ 与 $\\operatorname{div}\\operatorname{grad}$ 相差一个符号（见符号约定说明）。",
+        "noteEn": "The Hodge Laplacian and the characterisation of harmonic forms: harmonic iff closed and coclosed. On functions Δ = dδ differs from div grad by a sign under our convention."
+      },
+      {
+        "latex": "\\Omega^{k}(M)=\\operatorname{im}d\\oplus\\operatorname{im}\\delta\\oplus\\mathbb H^{k}(M),\\qquad H^{k}_{\\mathrm{dR}}(M)\\cong\\mathbb H^{k}(M)",
+        "note": "霍奇分解定理（要求 $M$ 紧致、无边界）：每个上同调类有唯一调和代表元，$b_k=\\dim\\mathbb H^k$；带边界时需附加边界条件，条件不可省略。",
+        "noteEn": "The Hodge decomposition (requires M compact without boundary): every de Rham class has a unique harmonic representative, b_k = dim ℍ^k; with boundary one needs boundary conditions."
+      },
+      {
+        "latex": "\\Delta Y_{\\ell m}=-\\ell(\\ell+n-1)\\,Y_{\\ell m}\\quad\\text{（球面 }S^{n}\\text{，本节点约定）}",
+        "note": "球面调和函数：$S^n$ 上是次数 $\\ell$ 的调和多项式限制，本征值 $\\ell(\\ell+n-1)$；$n=2$ 给 $\\ell(\\ell+1)$（$\\ell=1$ 时本征函数为 $x,y,z$，重数 $2\\ell+1=3$）。",
+        "noteEn": "Spherical harmonics: restrictions of degree-ℓ harmonic polynomials to S^n with eigenvalue ℓ(ℓ+n−1); for n = 2 this is ℓ(ℓ+1) (ℓ = 1 gives x, y, z with multiplicity 3)."
+      },
+      {
+        "latex": "N(\\lambda)\\sim\\frac{\\omega_n\\operatorname{vol}(M)}{(2\\pi)^{n}}\\,\\lambda^{n/2}\\qquad(\\lambda\\to\\infty)",
+        "note": "Weyl 渐近律：特征值计数函数只依赖 $n$ 与体积（$\\omega_n$ 为 $\\mathbb R^n$ 中单位球体积）；例如平面上 $N(\\lambda)\\approx\\frac{\\operatorname{Area}}{4\\pi}\\lambda$。",
+        "noteEn": "Weyl's asymptotic law: the counting function depends only on n and the volume (ω_n = volume of the unit ball in R^n); in the plane, N(λ) ≈ Area·λ/(4π)."
+      }
+    ],
+    "properties": [
+      "符号约定是谱问题的第一道坎：本节点用 $\\Delta=\\operatorname{div}\\operatorname{grad}$（特征值非正），几何文献常用 $\\Delta=-\\operatorname{div}\\operatorname{grad}$（特征值非负）。两种约定只差符号，但与其他公式（如 Weitzenböck、里奇流中 $\\partial_tR=\\Delta R+2|\\operatorname{Ric}|^2$）联用时必须前后一致。",
+      "在 $\\mathbb R^n$ 上退化为标准拉普拉斯算子；在球面上是球面拉普拉斯算子，本征函数为球面调和函数、本征值 $\\ell(\\ell+n-1)$；在双曲空间 $H^n$ 上谱则完全不离散：$-\\Delta$ 的 $L^2$ 谱是连续谱 $[(n-1)^2/4,\\infty)$，且没有 $L^2$ 特征函数——几何决定谱的定性特征。",
+      "紧致无边界流形的谱是离散的：$0=\\lambda_0<\\lambda_1\\le\\lambda_2\\le\\cdots\\to\\infty$，重数有限，特征函数构成 $L^2$ 正交基；$\\lambda_1>0\\iff M$ 连通（不连通时每一分支贡献一个常数特征函数）。",
+      "霍奇分解要求 **紧致无边界**：$H^k_{\\mathrm{dR}}(M)\\cong\\mathbb H^k(M)$、$b_k=\\dim\\mathbb H^k$ 在此前提下成立；带边界流形上必须改用绝对/相对边界条件（切向或法向），结论形式随之改变。",
+      "应用：$\\chi(M)=\\sum_k(-1)^kb_k$（与 `euler-characteristic` 对照）；Poincaré 对偶 $b_k=b_{n-k}$ 由霍奇星算子给出；Bochner 技巧把曲率放入分析——由 $\\Delta\\omega=\\nabla^{*}\\nabla\\omega+\\operatorname{Ric}(\\omega)$ 得 $\\operatorname{Ric}>0\\Rightarrow b_1=0$（如球面），这是用曲率证明拓扑消失定理的最简范例。"
+    ],
+    "propertiesEn": [
+      "Sign conventions are the first hurdle in spectral geometry: this node uses Δ = div grad (non-positive eigenvalues), while geometric texts use Δ = −div grad (non-negative eigenvalues). The two differ by a sign, but consistency is essential when combined with other identities (Weitzenböck, or ∂_tR = ΔR + 2|Ric|² in Ricci flow).",
+      "On R^n it reduces to the ordinary Laplacian; on the sphere it is the spherical Laplacian with spherical harmonics as eigenfunctions and eigenvalues ℓ(ℓ+n−1); on hyperbolic space a continuous spectrum appears, with spectral-gap phenomena — geometry dictates the qualitative behaviour of the spectrum.",
+      "The spectrum of a closed manifold is discrete: 0 = λ₀ < λ₁ ≤ λ₂ ≤ ⋯ → ∞ with finite multiplicities and an orthonormal basis of L²; λ₁ > 0 iff M is connected (each component contributes a constant eigenfunction).",
+      "Hodge decomposition requires compactness without boundary: H^k_dR(M) ≅ ℍ^k(M) and b_k = dim ℍ^k hold then; on manifolds with boundary one must impose absolute or relative boundary conditions and the statement changes.",
+      "Applications: χ(M) = Σ(−1)^k b_k; Poincaré duality b_k = b_{n−k} via the Hodge star; and the Bochner technique — from Δω = ∇*∇ω + Ric(ω) one gets Ric > 0 ⇒ b₁ = 0, the simplest curvature proof of a vanishing theorem."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "sin(PI*x)*sin(PI*y)",
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        1
+      ],
+      "levels": 10,
+      "title": "单位正方形上 Dirichlet 拉普拉斯算子的第一特征函数 u = sin(πx)sin(πy)，特征值 λ₁₁ = 2π² ≈ 19.74（Δ = div grad 约定下为 −2π²）"
+    },
+    "examples": [
+      {
+        "problem": "在单位正方形 $[0,1]^2$ 上验证 $u=\\sin(m\\pi x)\\sin(k\\pi y)$ 是 Dirichlet 特征函数，写出特征值；取 $m=k=1$ 与配图核对，并用 Weyl 律估计 $\\lambda=2\\pi^{2}$ 附近的特征值个数。",
+        "solution": "$\\partial_x^{2}u=-(m\\pi)^{2}u$、$\\partial_y^{2}u=-(k\\pi)^{2}u$，而平坦度量的局部公式就是 $\\Delta=\\partial_x^{2}+\\partial_y^{2}$（本节点约定），故 $\\Delta u=-(m^{2}+k^{2})\\pi^{2}u$，非负重排后特征值 $\\lambda_{mk}=(m^{2}+k^{2})\\pi^{2}$。$m=k=1$ 给出第一特征值 $\\lambda_1=2\\pi^{2}\\approx19.74$，与配图一致。Weyl 律：$N(\\lambda)\\approx\\frac{\\operatorname{Area}}{4\\pi}\\lambda=\\frac{2\\pi^{2}}{4\\pi}=\\frac{\\pi}{2}\\approx1.57$，而实际 $\\lambda\\le2\\pi^{2}$ 的特征值只有 $\\lambda_{11}$ 一个——渐近律在小 $\\lambda$ 处只有量级意义，$\\lambda\\to\\infty$ 时才准确。"
+      },
+      {
+        "problem": "证明霍奇拉普拉斯算子下的调和形式恰好是「闭且余闭」的形式，并用 Bochner 技巧说明 $\\operatorname{Ric}>0$ 的紧流形满足 $b_1=0$。",
+        "solution": "在紧致无边界流形上分部积分得 $\\langle\\Delta\\omega,\\omega\\rangle=\\langle d\\omega,d\\omega\\rangle+\\langle\\delta\\omega,\\delta\\omega\\rangle=|d\\omega|^{2}+|\\delta\\omega|^{2}\\ge0$。若 $\\Delta\\omega=d\\delta\\omega+\\delta d\\omega=0$，则 $\\langle\\Delta\\omega,\\omega\\rangle=0$，故 $|d\\omega|^{2}=|\\delta\\omega|^{2}=0$，即 $d\\omega=0$ 且 $\\delta\\omega=0$；反之显然。Bochner：对 1-形式有 Weitzenböck 公式 $\\Delta\\omega=\\nabla^{*}\\nabla\\omega+\\operatorname{Ric}(\\omega)$，于是调和 $\\omega$ 满足 $0=\\langle\\Delta\\omega,\\omega\\rangle_{L^2}=\\int_M|\\nabla\\omega|^{2}\\,d\\mu+\\int_M\\operatorname{Ric}(\\omega,\\omega)\\,d\\mu\\ge0$；若 $\\operatorname{Ric}>0$ 且 $\\omega\\ne0$，则右端 $>0$（某项必为正），矛盾，故 $\\mathbb H^{1}=0$，由 $b_1=\\dim\\mathbb H^{1}$ 得 $b_1=0$。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "霍奇理论",
+      "谱几何",
+      "上同调",
+      "分析"
+    ],
+    "links": [
+      "de-rham-cohomology",
+      "laplace-equation",
+      "harmonic-function",
+      "differential-form",
+      "exterior-derivative",
+      "euler-characteristic",
+      "homology-group",
+      "riemannian-metric",
+      "spectral-theorem",
+      "generalized-stokes"
+    ]
+  }
+]

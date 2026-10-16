@@ -1,0 +1,723 @@
+[
+  {
+    "id": "separation-of-variables",
+    "title": "分离变量法",
+    "titleEn": "Separation of Variables",
+    "branch": "pde",
+    "level": 5,
+    "summary": "把乘积形式的试探解 u=X(x)T(t) 代入线性齐次偏微分方程，化为两个常微分方程；齐次边界条件定出特征值与特征函数，再叠加并用正交性匹配初值条件。",
+    "summaryEn": "Substitutes the product ansatz u=X(x)T(t) into a linear homogeneous PDE to obtain two ODEs; homogeneous boundary conditions fix the eigenvalues and eigenfunctions, and superposition plus orthogonality matches the initial data.",
+    "definition": "分离变量法是求解**有界区域**上**线性齐次**偏微分方程（配齐次边界条件）的基本方法。它把求解偏微分方程的问题化为求解若干常微分方程的问题，基本想法是假设解能写成「只含空间变量的函数」与「只含时间变量的函数」的乘积：\n$$u(x,t)=X(x)T(t).$$\n\n以长为 $L$ 的杆上的热传导方程 $u_t=a^2u_{xx}$ 为例，代入并整理后可把含 $x$ 的项与含 $t$ 的项分离到等号两侧；两侧恒等就要求它们同为常数，称为**分离常数**，记成 $-\\lambda$：\n$$\\frac{X''}{X}=\\frac{T'}{a^2T}=-\\lambda.$$\n于是问题化为一个关于 $X$ 的**特征值问题**和一个关于 $T$ 的常微分方程：$X''+\\lambda X=0$ 与 $T'+\\lambda a^2T=0$（波动方程对应 $T''+\\lambda a^2T=0$）。\n\n**关键一步**是把齐次边界条件转移到 $X$ 上：由 $u(0,t)=X(0)T(t)=0$（对一切 $t$ 成立，且 $T\\not\\equiv0$）得 $X(0)=0$，同理 $X(L)=0$。此时 $X''+\\lambda X=0$，$X(0)=X(L)=0$ 只有对离散的**特征值**才有非平凡解：\n$$\\lambda_n=\\left(\\frac{n\\pi}{L}\\right)^2,\\qquad X_n(x)=\\sin\\frac{n\\pi x}{L},\\qquad n=1,2,3,\\dots$$\n注意 $n$ 从 1 开始——$n=0$ 给出 $\\sin 0\\equiv0$，是零解，必须排除；而 $\\lambda_n$ 是 $(n\\pi/L)^2$ 而不是 $n\\pi/L$。\n\n最后把各模式叠加（线性齐次问题的解之和仍是解）：$u=\\sum_{n\\ge1}b_nX_n(x)T_n(t)$。代入初始条件 $u(x,0)=\\varphi(x)$，利用正弦系的正交性逐一「筛」出系数：\n$$b_n=\\frac{2}{L}\\int_0^L\\varphi(x)\\,\\sin\\frac{n\\pi x}{L}\\,dx.$$\n整个流程可以概括为：**设乘积解 → 分离变量 → 齐次边界条件定特征值问题 → 叠加 → 初值条件定系数**。",
+    "definitionEn": "Separation of variables is the standard device for solving **linear homogeneous** PDEs on a **bounded domain** with homogeneous boundary conditions. It trades a PDE for several ODEs by looking for solutions that factor into a purely spatial part and a purely temporal part:\n$$u(x,t)=X(x)T(t).$$\n\nFor the heat equation $u_t=a^2u_{xx}$ on a rod of length $L$, substitution and rearrangement place every $x$-dependent term on one side and every $t$-dependent term on the other; equality forces both sides to equal a constant, the **separation constant**, written $-\\lambda$:\n$$\\frac{X''}{X}=\\frac{T'}{a^2T}=-\\lambda.$$\nThe problem then splits into an **eigenvalue problem** for $X$ and an ODE for $T$: $X''+\\lambda X=0$ together with $T'+\\lambda a^2T=0$ (the wave equation gives $T''+\\lambda a^2T=0$).\n\n**The crucial step** transfers the homogeneous boundary conditions to $X$: from $u(0,t)=X(0)T(t)=0$ for all $t$ (with $T\\not\\equiv0$) we get $X(0)=0$, and likewise $X(L)=0$. The problem $X''+\\lambda X=0$, $X(0)=X(L)=0$ has nontrivial solutions only for the discrete **eigenvalues**\n$$\\lambda_n=\\left(\\frac{n\\pi}{L}\\right)^2,\\qquad X_n(x)=\\sin\\frac{n\\pi x}{L},\\qquad n=1,2,3,\\dots$$\nThe index starts at $n=1$ because $n=0$ gives the zero solution; note that $\\lambda_n$ is $(n\\pi/L)^2$, not $n\\pi/L$.\n\nFinally, superpose the modes (sums of solutions of a linear homogeneous problem are again solutions), $u=\\sum_{n\\ge1}b_nX_n(x)T_n(t)$, and impose $u(x,0)=\\varphi(x)$. Orthogonality of the sine system isolates the coefficients one by one:\n$$b_n=\\frac{2}{L}\\int_0^L\\varphi(x)\\,\\sin\\frac{n\\pi x}{L}\\,dx.$$\nIn short: **product ansatz → separate the variables → homogeneous boundary conditions give the eigenvalue problem → superpose → initial conditions fix the coefficients**.",
+    "formulas": [
+      {
+        "latex": "u(x,t)=X(x)T(t)",
+        "note": "乘积试探解：假设解可写成一个只含 $x$ 的函数与一个只含 $t$ 的函数之积。",
+        "noteEn": "The product ansatz: a solution that factors into a function of $x$ alone times a function of $t$ alone."
+      },
+      {
+        "latex": "X''+\\lambda X=0,\\qquad T'+\\lambda a^2T=0\\ (\\text{或 }T''+\\lambda a^2T=0)",
+        "note": "分离后得到的两个常微分方程（以热方程为例；波动方程时间方向为二阶）。",
+        "noteEn": "The two ODEs obtained after separation (shown for the heat equation; the wave equation has a second-order equation in $t$)."
+      },
+      {
+        "latex": "X''+\\lambda X=0,\\quad X(0)=X(L)=0\\ \\Longrightarrow\\ \\lambda_n=\\left(\\frac{n\\pi}{L}\\right)^2,\\quad X_n(x)=\\sin\\frac{n\\pi x}{L},\\quad n=1,2,3,\\dots",
+        "note": "齐次边界条件把分离常数限制为离散特征值；$n=0$ 只给出零解，故 $n$ 从 1 开始。",
+        "noteEn": "Homogeneous boundary conditions quantize the separation constant; $n=0$ gives only the zero solution, so the index starts at 1."
+      },
+      {
+        "latex": "u(x,t)=\\sum_{n=1}^{\\infty}b_n\\,\\sin\\frac{n\\pi x}{L}\\,e^{-(n\\pi a/L)^2t}",
+        "note": "热传导方程的分离变量解：每个模式以速率 $\\lambda_na^2=(n\\pi a/L)^2$ 指数衰减。",
+        "noteEn": "The separated solution of the heat equation: mode $n$ decays exponentially at rate $\\lambda_na^2=(n\\pi a/L)^2$."
+      },
+      {
+        "latex": "b_n=\\frac{2}{L}\\int_0^L\\varphi(x)\\,\\sin\\frac{n\\pi x}{L}\\,dx",
+        "note": "由初始条件 $u(x,0)=\\varphi(x)$ 与正弦系的正交性确定的展开系数。",
+        "noteEn": "The coefficient determined by the initial condition $u(x,0)=\\varphi(x)$ and the orthogonality of the sine system."
+      }
+    ],
+    "expression": {
+      "text": "u(x,t)=X(x)T(t)，再由 u(x,0)=φ(x) 定出各模式系数",
+      "symbol": "u=XT",
+      "note": "分离变量的核心操作：把「多变量」问题降维成一串「单变量」问题。",
+      "noteEn": "The core move: reduce a multi-variable problem to a chain of single-variable problems."
+    },
+    "properties": [
+      "适用条件是**线性齐次**方程加**齐次**边界条件；非齐次方程可用特征函数展开，非齐次边界要先通过代换化为齐次。",
+      "分离常数 $\\lambda$ 由边界条件决定：两端狄利克雷条件下只有 $\\lambda>0$ 有非平凡解，特征值 $\\lambda_n=(n\\pi/L)^2$ 按 $n^2$ 增长。",
+      "特征函数 $\\sin(n\\pi x/L)$ 在 $[0,L]$ 上两两正交且构成完备系，可以展开相当广泛的初值函数。",
+      "叠加原理成立：各乘积解的有限或（收敛的）无穷线性组合仍然满足方程与齐次边界条件。",
+      "长期形态由低阶模式主导：热传导中高阶模式先衰减、解趋于 0（或有源时趋于最低模式），波动中各模式保持能量、只振荡不衰减。"
+    ],
+    "propertiesEn": [
+      "It applies to **linear homogeneous** equations with **homogeneous** boundary conditions; nonhomogeneous equations are handled by eigenfunction expansion, and nonhomogeneous boundary data are first reduced to the homogeneous case.",
+      "The separation constant $\\lambda$ is fixed by the boundary conditions: with Dirichlet conditions at both ends only $\\lambda>0$ gives nontrivial solutions, and the eigenvalues $\\lambda_n=(n\\pi/L)^2$ grow like $n^2$.",
+      "The eigenfunctions $\\sin(n\\pi x/L)$ are pairwise orthogonal on $[0,L]$ and complete, so a wide class of initial data can be expanded in them.",
+      "Superposition holds: finite or (convergent) infinite linear combinations of the product solutions still satisfy the equation and the homogeneous boundary conditions.",
+      "Long-time behavior is dominated by low modes: in heat flow high modes decay first and the solution tends to $0$ (or to the lowest mode with forcing), while wave modes keep their energy and merely oscillate."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "X₁ = sin x（n=1，L=π）"
+        },
+        {
+          "expr": "sin(2*x)",
+          "color": "#ff6b9d",
+          "label": "X₂ = sin 2x（n=2）"
+        },
+        {
+          "expr": "sin(3*x)",
+          "color": "#06d6a0",
+          "label": "X₃ = sin 3x（n=3）"
+        }
+      ],
+      "xRange": [
+        0,
+        3.2
+      ],
+      "yRange": [
+        -1.2,
+        1.2
+      ],
+      "title": "特征函数 Xₙ(x)=sin(nπx/L)（L=π，n=1,2,3）：半波长的整数倍"
+    },
+    "examples": [
+      {
+        "problem": "用分离变量法求解热传导方程的初边值问题\n$$u_t=a^2u_{xx},\\quad 0<x<L,\\ t>0;\\qquad u(0,t)=u(L,t)=0;\\qquad u(x,0)=\\varphi(x).$$",
+        "solution": "设 $u=X(x)T(t)$，代入得 $X''+\\lambda X=0$ 与 $T'+\\lambda a^2T=0$。由齐次边界条件得特征值问题 $X''+\\lambda X=0$，$X(0)=X(L)=0$，其解为 $\\lambda_n=(n\\pi/L)^2$，$X_n(x)=\\sin\\frac{n\\pi x}{L}$，$n=1,2,3,\\dots$，于是 $T_n(t)=e^{-\\lambda_na^2t}=e^{-(n\\pi a/L)^2t}$，叠加得\n$$u(x,t)=\\sum_{n=1}^{\\infty}b_n\\sin\\frac{n\\pi x}{L}e^{-(n\\pi a/L)^2t}.$$\n再由 $u(x,0)=\\varphi(x)$ 与正交性 $\\int_0^L\\sin\\frac{n\\pi x}{L}\\sin\\frac{m\\pi x}{L}dx=\\frac{L}{2}\\delta_{mn}$ 得 $b_n=\\frac{2}{L}\\int_0^L\\varphi(x)\\sin\\frac{n\\pi x}{L}dx$。（若记 $L=1$，衰减因子就是 $e^{-n^2\\pi^2a^2t}$。）"
+      },
+      {
+        "problem": "求解 $u_t=u_{xx}$（$0<x<1$），$u(0,t)=u(1,t)=0$，$u(x,0)=x(1-x)$，写出级数解并指出长期衰减速率。",
+        "solution": "这里 $L=1,a=1$，$\\lambda_n=n^2\\pi^2$。系数为 $b_n=2\\int_0^1x(1-x)\\sin(n\\pi x)\\,dx$：$n$ 为偶数时积分为 0，$n$ 为奇数时 $b_n=\\frac{8}{n^3\\pi^3}$。于是\n$$u(x,t)=\\sum_{k=0}^{\\infty}\\frac{8}{(2k+1)^3\\pi^3}\\,\\sin\\big((2k+1)\\pi x\\big)\\,e^{-(2k+1)^2\\pi^2t}.$$\n当 $t\\to\\infty$，$u\\to0$，且衰减速率由最低模式 $n=1$ 决定，约为 $e^{-\\pi^2t}$。（把级数在 $t=0$ 处取前 20 项，即可看到它逼近抛物线 $x(1-x)$。）"
+      }
+    ],
+    "tags": [
+      "分离变量",
+      "特征值问题",
+      "乘积解",
+      "傅里叶正弦级数"
+    ],
+    "links": [
+      "heat-equation",
+      "wave-equation",
+      "sturm-liouville",
+      "fourier-method-pde",
+      "pde-basic-concepts"
+    ]
+  },
+  {
+    "id": "sturm-liouville",
+    "title": "施图姆-刘维尔问题",
+    "titleEn": "Sturm–Liouville Problems",
+    "branch": "pde",
+    "level": 5,
+    "summary": "把二阶线性方程写成自伴形式 (p y')'+[λρ−q]y=0 并配上分离边界条件：特征值实数、可数、趋于无穷，特征函数按权 ρ 正交且完备。",
+    "summaryEn": "Second-order linear equations written in self-adjoint form (p y')'+[λρ−q]y=0 with separated boundary conditions: eigenvalues are real, countable and unbounded, and the eigenfunctions are ρ-orthogonal and complete.",
+    "definition": "施图姆-刘维尔（Sturm–Liouville）问题是分离变量法背后的一般理论框架。把二阶线性方程写成**自伴形式**\n$$(p(x)y')'+[\\lambda\\rho(x)-q(x)]y=0,\\qquad a<x<b,$$\n再加上**分离型边界条件**（如 $y(a)=y(b)=0$，或一般的 $\\alpha y+\\beta y'=0$ 且两端各自成条件），就构成一个施图姆-刘维尔问题。这里 $p>0$ 是「刚度」系数，$\\rho>0$ 是权函数，$q$ 是位势。当 $p,\\rho,q$ 在有限区间上连续、$p>0$、$\\rho>0$ 时称为**正则**问题。\n\n为什么要把它单独拿出来？因为它把「特征值问题」从具体方程中抽象出来，并保证了一整套与对称矩阵完全平行的定理：特征值全是**实数**，可以从小到大排成一列 $\\lambda_1<\\lambda_2<\\lambda_3<\\cdots$ 而且**趋于无穷**；不同特征值的特征函数关于权 $\\rho$ **正交**：\n$$\\int_a^b\\rho(x)y_m(x)y_n(x)\\,dx=0\\qquad(m\\ne n);$$\n并且特征函数系在相应的函数空间中**完备**，任意（分段光滑的）函数都可以按它展开成广义傅里叶级数。正弦系 $\\sin(n\\pi x/L)$、余弦系、勒让德多项式、贝塞尔函数，都是它的特例。\n\n正交性的来源是**自伴性**（拉格朗日恒等式）：对两个特征函数成立\n$$\\left[p(y_m'y_n-y_my_n')\\right]'=(\\lambda_n-\\lambda_m)\\rho\\,y_my_n,$$\n两端积分后边界项被分离边界条件消去，于是 $(\\lambda_n-\\lambda_m)\\int\\rho y_my_n=0$。这套理论解释了为什么分离变量法总能把解写成级数：正交性负责逐一求出系数，完备性保证级数能表示一般的初值。",
+    "definitionEn": "The Sturm–Liouville (SL) problem is the general framework behind separation of variables. Writing a second-order linear equation in **self-adjoint form**\n$$(p(x)y')'+[\\lambda\\rho(x)-q(x)]y=0,\\qquad a<x<b,$$\nand adjoining **separated boundary conditions** (for instance $y(a)=y(b)=0$, or conditions of the form $\\alpha y+\\beta y'=0$ at each endpoint) gives an SL problem. Here $p>0$ plays the role of a stiffness coefficient, $\\rho>0$ is the weight, and $q$ is a potential. When $p,\\rho,q$ are continuous on a finite interval with $p>0,\\rho>0$ the problem is called **regular**.\n\nThe abstraction pays off because it carries an array of theorems exactly parallel to those for symmetric matrices: the eigenvalues are all **real** and can be arranged in an increasing sequence $\\lambda_1<\\lambda_2<\\lambda_3<\\cdots$ with $\\lambda_n\\to\\infty$; eigenfunctions belonging to different eigenvalues are **orthogonal with weight $\\rho$**:\n$$\\int_a^b\\rho(x)y_m(x)y_n(x)\\,dx=0\\qquad(m\\ne n);$$\nand the eigenfunction system is **complete**, so any (piecewise smooth) function expands in a generalized Fourier series. The sine system $\\sin(n\\pi x/L)$, cosines, Legendre polynomials and Bessel functions are all special cases.\n\nThe source of orthogonality is **self-adjointness** (Lagrange's identity): for two eigenfunctions\n$$\\left[p(y_m'y_n-y_my_n')\\right]'=(\\lambda_n-\\lambda_m)\\rho\\,y_my_n,$$\nand after integration the boundary terms vanish by the separated boundary conditions, giving $(\\lambda_n-\\lambda_m)\\int\\rho y_my_n=0$. This is precisely why separation of variables always produces series expansions: orthogonality computes the coefficients one at a time, and completeness represents the general initial data.",
+    "formulas": [
+      {
+        "latex": "(p(x)y')'+[\\lambda\\rho(x)-q(x)]y=0",
+        "note": "施图姆-刘维尔标准（自伴）形式；$p>0$、$\\rho>0$、$q$ 是已知函数，$\\lambda$ 是特征值参数。",
+        "noteEn": "The standard (self-adjoint) Sturm–Liouville form; $p>0$, $\\rho>0$ and $q$ are given functions and $\\lambda$ is the eigenvalue parameter."
+      },
+      {
+        "latex": "\\int_a^b\\rho(x)y_m(x)y_n(x)\\,dx=0\\qquad(m\\ne n)",
+        "note": "不同特征值的特征函数带权 $\\rho$ 正交；$m=n$ 时积分给出范数的平方。",
+        "noteEn": "Eigenfunctions of distinct eigenvalues are orthogonal with weight $\\rho$; for $m=n$ the integral gives the squared norm."
+      },
+      {
+        "latex": "\\lambda_1<\\lambda_2<\\lambda_3<\\cdots\\to\\infty",
+        "note": "特征值可数、单调增加、趋于无穷；正则问题（分离边界条件）的每个特征值都是单重的。",
+        "noteEn": "Eigenvalues are countable, increase monotonically and tend to infinity; for a regular problem with separated boundary conditions each eigenvalue is simple."
+      },
+      {
+        "latex": "f(x)\\sim\\sum_{n=1}^{\\infty}f_ny_n(x),\\qquad f_n=\\frac{\\langle f,y_n\\rangle_\\rho}{\\|y_n\\|_\\rho^2}",
+        "note": "完备性：任意（分段光滑）函数可按特征函数展开，系数由带权正交性给出。",
+        "noteEn": "Completeness: any piecewise smooth function expands in the eigenfunctions, with coefficients given by weighted orthogonality."
+      },
+      {
+        "latex": "\\lambda=\\frac{\\int_a^b\\left[p(x)\\,(y')^2+q(x)\\,y^2\\right]dx}{\\int_a^b\\rho(x)\\,y^2\\,dx}",
+        "note": "瑞利商：对满足边界条件的 $y$ 成立；当 $p>0,q\\ge0$ 时特征值非负，且最小值给出最小特征值 $\\lambda_1$。",
+        "noteEn": "The Rayleigh quotient, valid for any admissible $y$; if $p>0$, $q\\ge0$ it gives $\\lambda\\ge0$, and its minimum characterizes the smallest eigenvalue $\\lambda_1$."
+      }
+    ],
+    "expression": {
+      "text": "(p(x)y')'+[λρ(x)−q(x)]y=0，分离边界条件",
+      "symbol": "SL(y)=λρy",
+      "note": "把方程移项后，SL 算子在合适的函数空间中是自伴的，特征函数像「广义坐标轴」一样正交。",
+      "noteEn": "After rearranging, the SL operator is self-adjoint on a suitable function space; its eigenfunctions behave like orthogonal coordinate axes."
+    },
+    "properties": [
+      "特征值全为实数，可排成单调递增的可数列 $\\lambda_n\\to\\infty$；正则问题（分离边界条件）的每个特征值单重，周期边界条件则可能出现重根。",
+      "不同特征值的特征函数关于权 $\\rho$ 正交，重特征值的特征函数可以正交化，从而得到一组正交系。",
+      "自伴性（拉格朗日恒等式）是正交性的根源：$(p(y_m'y_n-y_my_n'))'=(\\lambda_n-\\lambda_m)\\rho y_my_n$，积分后边界项由边界条件消去。",
+      "特征函数系完备：任意分段光滑函数可按它展开成广义傅里叶级数，展开在平均意义下收敛（函数足够光滑时一致收敛）。",
+      "瑞利商把特征值写成变分形式并给出最小特征值的刻画，便于估计与比较特征值。"
+    ],
+    "propertiesEn": [
+      "All eigenvalues are real and form an increasing countable sequence $\\lambda_n\\to\\infty$; for a regular problem with separated boundary conditions each eigenvalue is simple, while periodic boundary conditions may produce repeated eigenvalues.",
+      "Eigenfunctions of distinct eigenvalues are orthogonal with weight $\\rho$, and repeated eigendirections can be orthogonalized to obtain an orthogonal system.",
+      "Self-adjointness (Lagrange's identity) is the source of orthogonality: $(p(y_m'y_n-y_my_n'))'=(\\lambda_n-\\lambda_m)\\rho y_my_n$, and the boundary terms vanish after integration by the boundary conditions.",
+      "The eigenfunction system is complete: any piecewise smooth function expands in a generalized Fourier series, converging in the mean (uniformly when the function is smooth enough).",
+      "The Rayleigh quotient recasts eigenvalues variationally and characterizes the smallest one, which makes eigenvalues easy to estimate and compare."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(PI*x)",
+          "color": "#4cc9f0",
+          "label": "X₁ = sin(πx)"
+        },
+        {
+          "expr": "sin(2*PI*x)",
+          "color": "#ff6b9d",
+          "label": "X₂ = sin(2πx)"
+        },
+        {
+          "expr": "sin(3*PI*x)",
+          "color": "#06d6a0",
+          "label": "X₃ = sin(3πx)"
+        }
+      ],
+      "xRange": [
+        0,
+        1.05
+      ],
+      "yRange": [
+        -1.2,
+        1.2
+      ],
+      "title": "正交特征函数系 sin(nπx)，n=1,2,3：不同频率的正弦彼此正交"
+    },
+    "examples": [
+      {
+        "problem": "验证 $y_n(x)=\\sin(n\\pi x)$（$n=1,2,3,\\dots$）是区间 $(0,1)$ 上 $-y''=\\lambda y$，$y(0)=y(1)=0$ 的特征函数，并直接计算正交积分。",
+        "solution": "此处 $p=1$，$\\rho=1$，$q=0$。因为 $y_n''=-n^2\\pi^2\\sin(n\\pi x)=-n^2\\pi^2y_n$，所以 $\\lambda_n=n^2\\pi^2$，且 $y_n(0)=y_n(1)=0$ 满足边界条件。正交性可直接积出：当 $m\\ne n$ 时\n$$\\int_0^1\\sin(m\\pi x)\\sin(n\\pi x)\\,dx=\\frac12\\int_0^1\\left[\\cos((m-n)\\pi x)-\\cos((m+n)\\pi x)\\right]dx=0,$$\n而 $\\int_0^1\\sin^2(n\\pi x)\\,dx=\\frac12$。这组正交特征函数正是热方程分离变量解中使用的基。"
+      },
+      {
+        "problem": "说明勒让德方程 $((1-x^2)y')'+n(n+1)y=0$ 在 $[-1,1]$ 上是施图姆-刘维尔问题，其特征函数为勒让德多项式 $P_n$。",
+        "solution": "与标准形式对照：$p(x)=1-x^2$，$q=0$，$\\rho=1$，$\\lambda=n(n+1)$。$p$ 在端点 $\\pm1$ 处为零，因此这是**奇异**施图姆-刘维尔问题；端点条件不是简单的 $y=0$，而是要求解在端点有界。求解结果恰为 $\\lambda_n=n(n+1)$，特征函数是次数为 $n$ 的勒让德多项式 $P_n(x)$，且满足带权（这里 $\\rho=1$）正交性 $\\int_{-1}^{1}P_m(x)P_n(x)\\,dx=0\\ (m\\ne n)$。正交性与完备性的结论在奇异情形依然成立——这正是 SL 理论可用于球坐标、圆柱坐标分离变量的原因。"
+      }
+    ],
+    "tags": [
+      "特征值问题",
+      "正交函数系",
+      "自伴算子",
+      "瑞利商"
+    ],
+    "links": [
+      "separation-of-variables",
+      "fourier-series",
+      "fourier-method-pde",
+      "harmonic-function",
+      "linear-ode-theory"
+    ]
+  },
+  {
+    "id": "fourier-method-pde",
+    "title": "傅里叶级数解法",
+    "titleEn": "Solution by Fourier Series",
+    "branch": "pde",
+    "level": 5,
+    "summary": "把定解问题的解按特征函数系展开，系数是时间的函数；热方程系数按 e^{−λₙa²t} 衰减，波动方程系数按 cos(a√λₙt)、sin(a√λₙt) 振荡。",
+    "summaryEn": "Expands the solution in the eigenfunction system with time-dependent coefficients: heat modes decay like e^{−λₙa²t}, while wave modes oscillate like cos(a√λₙt) and sin(a√λₙt).",
+    "definition": "傅里叶级数解法（特征函数展开法）是分离变量法的「系数版」：不直接猜解，而是把解按已知的正交特征函数系展开，把偏微分方程化为关于展开系数的一个个常微分方程。\n\n以波动方程 $u_{tt}=a^2u_{xx}$（$0<x<L$，两端固定 $u(0,t)=u(L,t)=0$）为例，设\n$$u(x,t)=\\sum_{n=1}^{\\infty}T_n(t)\\,\\sin\\frac{n\\pi x}{L}.$$\n代入方程后，用 $\\sin(n\\pi x/L)$ 的正交性把每一项「筛」出来，得到系数方程 $T_n''+\\lambda_na^2T_n=0$，其中 $\\lambda_n=(n\\pi/L)^2$。解之得\n$$T_n(t)=b_n\\cos\\frac{n\\pi at}{L}+c_n\\sin\\frac{n\\pi at}{L},$$\n每个模式以**角频率** $\\omega_n=a\\sqrt{\\lambda_n}=\\frac{n\\pi a}{L}$ 振荡。叠加即得波动方程的标准级数解\n$$u(x,t)=\\sum_{n=1}^{\\infty}\\left[b_n\\cos\\frac{n\\pi at}{L}+c_n\\sin\\frac{n\\pi at}{L}\\right]\\sin\\frac{n\\pi x}{L},$$\n初始位移 $\\varphi(x)=u(x,0)$ 定出 $b_n$，初始速度 $\\psi(x)=u_t(x,0)$ 定出 $c_n$。\n\n热传导方程 $u_t=a^2u_{xx}$ 的系数方程是一阶的：$T_n'+\\lambda_na^2T_n=0$，解为**指数衰减**\n$$T_n(t)=b_n\\,e^{-\\lambda_na^2t}=b_ne^{-(n\\pi a/L)^2t},$$\n高次模式衰减得越来越快，所以只要 $t>0$，级数就迅速变光滑——这正是扩散的**平滑效应**。对比之下，波动方程的模式只振荡、不衰减，信息以有限速度 $a$ 传播。\n\n非齐次方程与非齐次边界也用同一套展开：把源项按特征函数展开，系数方程变成带外力的常微分方程，用常数变易法求解即可。",
+    "definitionEn": "The Fourier-series method (eigenfunction expansion) is separation of variables in coefficient form: instead of guessing a product solution, expand the solution in a known orthogonal eigenfunction system and turn the PDE into ODEs for the expansion coefficients.\n\nTake the wave equation $u_{tt}=a^2u_{xx}$ on $0<x<L$ with fixed ends $u(0,t)=u(L,t)=0$, and write\n$$u(x,t)=\\sum_{n=1}^{\\infty}T_n(t)\\,\\sin\\frac{n\\pi x}{L}.$$\nSubstitution, followed by projection onto $\\sin(n\\pi x/L)$ using orthogonality, yields $T_n''+\\lambda_na^2T_n=0$ with $\\lambda_n=(n\\pi/L)^2$. Hence\n$$T_n(t)=b_n\\cos\\frac{n\\pi at}{L}+c_n\\sin\\frac{n\\pi at}{L},$$\neach mode oscillating at the **angular frequency** $\\omega_n=a\\sqrt{\\lambda_n}=\\frac{n\\pi a}{L}$. Superposition gives the standard wave series\n$$u(x,t)=\\sum_{n=1}^{\\infty}\\left[b_n\\cos\\frac{n\\pi at}{L}+c_n\\sin\\frac{n\\pi at}{L}\\right]\\sin\\frac{n\\pi x}{L},$$\nwhere the initial displacement $\\varphi(x)=u(x,0)$ fixes $b_n$ and the initial velocity $\\psi(x)=u_t(x,0)$ fixes $c_n$.\n\nFor the heat equation $u_t=a^2u_{xx}$ the coefficient equation is first order, $T_n'+\\lambda_na^2T_n=0$, with the **exponential decay**\n$$T_n(t)=b_n\\,e^{-\\lambda_na^2t}=b_ne^{-(n\\pi a/L)^2t}.$$\nHigh modes die out ever faster, so the series becomes smooth immediately for $t>0$ — the **smoothing effect** of diffusion. Wave modes, by contrast, oscillate without damping and transmit information at the finite speed $a$.\n\nNonhomogeneous equations and boundaries are handled by the same expansion: expand the source term in the eigenfunctions and solve the resulting forced ODEs by variation of parameters.",
+    "formulas": [
+      {
+        "latex": "u(x,t)=\\sum_{n=1}^{\\infty}T_n(t)\\,\\sin\\frac{n\\pi x}{L}",
+        "note": "把解按特征函数展开，$T_n(t)$ 是待定的时间系数。",
+        "noteEn": "Expand the solution in the eigenfunctions, leaving the time coefficients $T_n(t)$ to be found."
+      },
+      {
+        "latex": "T_n'+\\lambda_na^2T_n=0\\ \\Longrightarrow\\ T_n(t)=b_n\\,e^{-\\lambda_na^2t},\\qquad \\lambda_n=\\left(\\frac{n\\pi}{L}\\right)^2",
+        "note": "热方程：第 $n$ 个模式按 $e^{-\\lambda_na^2t}=e^{-(n\\pi a/L)^2t}$ 指数衰减，频率越高衰减越快。",
+        "noteEn": "Heat equation: mode $n$ decays exponentially like $e^{-\\lambda_na^2t}=e^{-(n\\pi a/L)^2t}$, the faster the higher the mode."
+      },
+      {
+        "latex": "u(x,t)=\\sum_{n=1}^{\\infty}\\left[b_n\\cos\\frac{n\\pi at}{L}+c_n\\sin\\frac{n\\pi at}{L}\\right]\\sin\\frac{n\\pi x}{L}",
+        "note": "波动方程级数解：每模式以角频率 $\\omega_n=\\frac{n\\pi a}{L}=a\\sqrt{\\lambda_n}$ 振荡（是 $n\\pi a/L$，不是 $n\\pi/L$）。",
+        "noteEn": "The wave-equation series: mode $n$ oscillates at angular frequency $\\omega_n=\\frac{n\\pi a}{L}=a\\sqrt{\\lambda_n}$ (that is $n\\pi a/L$, not $n\\pi/L$)."
+      },
+      {
+        "latex": "b_n=\\frac{2}{L}\\int_0^L\\varphi(x)\\sin\\frac{n\\pi x}{L}dx,\\qquad c_n=\\frac{2}{n\\pi a}\\int_0^L\\psi(x)\\sin\\frac{n\\pi x}{L}dx",
+        "note": "$b_n$ 由初始位移 $u(x,0)=\\varphi$ 定，$c_n$ 由初始速度 $u_t(x,0)=\\psi$ 定；$c_n$ 分母里的 $n\\pi a$ 就是角频率 $\\omega_n$。",
+        "noteEn": "$b_n$ comes from the initial displacement $u(x,0)=\\varphi$ and $c_n$ from the initial velocity $u_t(x,0)=\\psi$; the factor $n\\pi a$ in $c_n$ is exactly the angular frequency $\\omega_n$."
+      },
+      {
+        "latex": "T_n'+\\lambda_na^2T_n=F_n(t)",
+        "note": "非齐次方程 $u_t=a^2u_{xx}+F$：展开 $F=\\sum F_n(t)\\sin\\frac{n\\pi x}{L}$ 后，各系数满足一阶线性方程，用常数变易法求解。",
+        "noteEn": "For $u_t=a^2u_{xx}+F$, expanding $F=\\sum F_n(t)\\sin\\frac{n\\pi x}{L}$ leaves first-order linear equations for the coefficients, solved by variation of parameters."
+      }
+    ],
+    "expression": {
+      "text": "u(x,t)=Σ Tₙ(t) sin(nπx/L)",
+      "symbol": "Tₙ(t)",
+      "note": "以特征函数为「坐标轴」，偏微分方程变成每个坐标方向上独立的常微分方程。",
+      "noteEn": "With eigenfunctions as coordinate axes, the PDE becomes an independent ODE along each axis."
+    },
+    "properties": [
+      "本质是分离变量加正交投影：特征函数系必须完备正交，边界条件必须是齐次的（非齐次时先齐次化）。",
+      "热方程：所有模式指数衰减，速率 $\\lambda_na^2=(n\\pi a/L)^2$；高频误差被极快压制，$t>0$ 后解立即光滑。",
+      "波动方程：模式以 $\\omega_n=n\\pi a/L$ 振荡、能量不衰减；初值的光滑程度决定级数收敛速度，不光滑的初值产生传播的波前与吉布斯式振荡。",
+      "系数由初始条件与正交性唯一确定；初值分段光滑时级数逐点收敛，在相容条件（如 $\\varphi(0)=\\varphi(L)=0$）下可逐项求导。",
+      "非齐次项与边界条件同样用特征函数展开；当外力频率接近 $\\omega_n$ 时发生共振，解中出现带 $t$ 的项。"
+    ],
+    "propertiesEn": [
+      "It is separation of variables plus orthogonal projection: the eigenfunction system must be complete and orthogonal, and the boundary conditions homogeneous (nonhomogeneous ones are reduced first).",
+      "Heat equation: every mode decays exponentially at rate $\\lambda_na^2=(n\\pi a/L)^2$, with high frequencies suppressed extremely fast, so the solution is smooth immediately for $t>0$.",
+      "Wave equation: modes oscillate at $\\omega_n=n\\pi a/L$ with no damping; the smoothness of the data controls convergence, and nonsmooth data produce traveling wave fronts and Gibbs-type oscillations.",
+      "The coefficients are uniquely determined by the initial conditions and orthogonality; the series converges pointwise for piecewise smooth data and may be differentiated term by term under compatibility conditions such as $\\varphi(0)=\\varphi(L)=0$.",
+      "Nonhomogeneous terms and boundary data are expanded in the same eigenfunctions; when a forcing frequency approaches $\\omega_n$ resonance occurs and terms growing like $t$ appear."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "(4/PI)*sin(x)",
+          "color": "#4cc9f0",
+          "label": "1 项：4/π·sin x"
+        },
+        {
+          "expr": "(4/PI)*(sin(x)+sin(3*x)/3)",
+          "color": "#ff6b9d",
+          "label": "2 项：k=1,3"
+        },
+        {
+          "expr": "(4/PI)*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11+sin(13*x)/13)",
+          "color": "#06d6a0",
+          "label": "7 项：逼近方波"
+        }
+      ],
+      "xRange": [
+        0,
+        3.2
+      ],
+      "yRange": [
+        -0.3,
+        1.5
+      ],
+      "title": "方波 f(x)=1（0<x<π）的正弦级数部分和：(4/π)Σ sin(kx)/k，k 取奇数"
+    },
+    "examples": [
+      {
+        "problem": "求解热方程 $u_t=a^2u_{xx}$（$0<x<L$），$u(0,t)=u(L,t)=0$，$u(x,0)=A\\sin\\frac{3\\pi x}{L}$。",
+        "solution": "初始数据已经是第 3 个特征函数，故 $b_3=A$，其余 $b_n=0$，且 $\\lambda_3=(3\\pi/L)^2$。由热方程的衰减公式\n$$u(x,t)=A\\,e^{-(3\\pi a/L)^2t}\\,\\sin\\frac{3\\pi x}{L}.$$\n它只是一个随 $t$ 指数衰减的空间正弦波；衰减速率 $(3\\pi a/L)^2$ 比基模 $n=1$ 的 $(\\pi a/L)^2$ 快 9 倍——这正是「高频先被抹平」的定量体现。"
+      },
+      {
+        "problem": "求解波动方程 $u_{tt}=a^2u_{xx}$（$0<x<L$），$u(0,t)=u(L,t)=0$，$u(x,0)=\\sin\\frac{\\pi x}{L}$，$u_t(x,0)=\\sin\\frac{3\\pi x}{L}$。",
+        "solution": "由正交性，初始位移只含 $n=1$ 的模式，故 $b_1=1$，其余 $b_n=0$；初始速度只含 $n=3$ 的模式，其展开系数为 $\\psi_3=\\frac2L\\int_0^L\\sin^2\\frac{3\\pi x}{L}dx=1$，故\n$$c_3=\\frac{\\psi_3}{\\omega_3}=\\frac{L}{3\\pi a},\\qquad \\omega_3=\\frac{3\\pi a}{L}.$$\n于是\n$$u(x,t)=\\cos\\frac{\\pi at}{L}\\,\\sin\\frac{\\pi x}{L}+\\frac{L}{3\\pi a}\\,\\sin\\frac{3\\pi at}{L}\\,\\sin\\frac{3\\pi x}{L}.$$\n两个模式互不干扰，角频率分别是 $\\pi a/L$ 与 $3\\pi a/L$；初始位移生成果弦型振荡项，初始速度生成正弦型振荡项。"
+      }
+    ],
+    "tags": [
+      "特征函数展开",
+      "热传导方程",
+      "波动方程",
+      "角频率",
+      "正交性"
+    ],
+    "links": [
+      "fourier-series",
+      "separation-of-variables",
+      "heat-equation",
+      "wave-equation",
+      "sturm-liouville"
+    ]
+  },
+  {
+    "id": "green-function",
+    "title": "格林函数",
+    "titleEn": "Green's Functions",
+    "branch": "pde",
+    "level": 5,
+    "summary": "格林函数是算子 −Δ 在齐次边界条件下的点源响应 −ΔG(x,ξ)=δ(x−ξ)；解由叠加积分 u(x)=∫G(x,ξ)f(ξ)dξ 给出。",
+    "summaryEn": "The Green's function is the point-source response of the operator −Δ under homogeneous boundary conditions, −ΔG(x,ξ)=δ(x−ξ); the solution is the superposition integral u(x)=∫G(x,ξ)f(ξ)dξ.",
+    "definition": "格林函数是「点源响应」的数学表述，也是把微分方程反解成积分的最有力工具。对区域 $\\Omega$ 上的算子 $-\\Delta$ 和给定的齐次边界条件，格林函数 $G(x,\\xi)$ 定义为\n$$-\\Delta G(x,\\xi)=\\delta(x-\\xi),\\qquad x\\in\\Omega,$$\n且满足与问题相同的齐次边界条件（例如 $G(x,\\xi)=0$ 当 $x\\in\\partial\\Omega$）。$\\delta$ 是狄拉克函数，表示在 $\\xi$ 点放置一个单位点源；严格地说 $G$ 在 $x=\\xi$ 处导数有跳变，这个跳变正代表 $\\delta$。\n\n一旦求出 $G$，泊松方程 $-\\Delta u=f$（同样的齐次边界条件）的解就写成\n$$u(x)=\\int_\\Omega G(x,\\xi)\\,f(\\xi)\\,d\\xi,$$\n因为右端把 $f$ 看成无数点源的叠加，而 $G$ 是每个点源的响应——这是线性叠加原理的积分形式。\n\n一维模型最能看清结构。对 $-u''=f$，$u(0)=u(1)=0$，格林函数是两条直线上拼起来的分段线性函数：\n$$G(x,\\xi)=\\begin{cases}x(1-\\xi),&x\\le\\xi,\\\\ \\xi(1-x),&x>\\xi.\\end{cases}$$\n它在 $x=\\xi$ 处连续、取峰值 $\\xi(1-\\xi)$，两侧斜率分别是 $1-\\xi$ 与 $-\\xi$，跳变量 $(-\\xi)-(1-\\xi)=-1$，正好对应 $-G''=\\delta$。并且交换源点与观测点的位置结果不变：\n$$G(x,\\xi)=G(\\xi,x),$$\n这就是自伴算子的**对称性**。\n\n高维时先取基本解（二维 $\\frac{1}{2\\pi}\\ln\\frac1{|x-\\xi|}$、三维 $\\frac{1}{4\\pi|x-\\xi|}$），再叠加适当的调和修正以满足边界条件（如镜像法）。热方程与波动方程也有各自的格林函数（热核与推迟核），它们还依赖时间。",
+    "definitionEn": "The Green's function is the precise meaning of a point-source response, and the most powerful device for turning a differential equation into an integral. For the operator $-\\Delta$ on a domain $\\Omega$ with given homogeneous boundary conditions, the Green's function $G(x,\\xi)$ is defined by\n$$-\\Delta G(x,\\xi)=\\delta(x-\\xi),\\qquad x\\in\\Omega,$$\nwith the same homogeneous boundary conditions as the problem (for instance $G(x,\\xi)=0$ when $x\\in\\partial\\Omega$). Here $\\delta$ is the Dirac delta, representing a unit point source at $\\xi$; strictly speaking $G$ has a jump in its derivative at $x=\\xi$, and that jump encodes the delta.\n\nOnce $G$ is known, the solution of the Poisson problem $-\\Delta u=f$ (with the same homogeneous boundary conditions) is\n$$u(x)=\\int_\\Omega G(x,\\xi)\\,f(\\xi)\\,d\\xi,$$\nbecause the right-hand side superposes the responses to the continuously distributed sources $f$ — superposition in integral form.\n\nThe one-dimensional model shows the structure most clearly. For $-u''=f$ with $u(0)=u(1)=0$ the Green's function is piecewise linear:\n$$G(x,\\xi)=\\begin{cases}x(1-\\xi),&x\\le\\xi,\\\\ \\xi(1-x),&x>\\xi.\\end{cases}$$\nIt is continuous at $x=\\xi$ with peak $\\xi(1-\\xi)$, and its slopes on the two sides are $1-\\xi$ and $-\\xi$, so the jump is $-1$, exactly as required by $-G''=\\delta$. Moreover $G$ is **symmetric**:\n$$G(x,\\xi)=G(\\xi,x),$$\nswapping source and observation point changes nothing — a hallmark of self-adjoint operators.\n\nIn higher dimensions one starts from the fundamental solution (in 2D $\\frac{1}{2\\pi}\\ln\\frac1{|x-\\xi|}$, in 3D $\\frac{1}{4\\pi|x-\\xi|}$) and adds a harmonic correction to enforce the boundary conditions, as in the method of images. Heat and wave equations have time-dependent Green's functions as well, namely the heat kernel and the retarded (causal) kernel.",
+    "formulas": [
+      {
+        "latex": "-\\Delta G(x,\\xi)=\\delta(x-\\xi)",
+        "note": "格林函数的定义方程：单位点源，且满足与问题相同的齐次边界条件（如 $G=0$ 于边界）。",
+        "noteEn": "The defining equation: a unit point source, together with the same homogeneous boundary conditions as the problem (e.g. $G=0$ on the boundary)."
+      },
+      {
+        "latex": "u(x)=\\int_\\Omega G(x,\\xi)\\,f(\\xi)\\,d\\xi",
+        "note": "对 $-\\Delta u=f$，把 $f$ 看成连续分布的点源叠加，解就是各点源响应的叠加（边界条件自动满足）。",
+        "noteEn": "For $-\\Delta u=f$, viewing $f$ as a continuous superposition of point sources makes the solution the superposition of their responses; boundary conditions are automatic."
+      },
+      {
+        "latex": "G(x,\\xi)=\\begin{cases}x(1-\\xi), & x\\le\\xi,\\\\ \\xi(1-x), & x>\\xi\\end{cases}",
+        "note": "一维 $-u''=f$、$u(0)=u(1)=0$ 的格林函数；两条直线在 $x=\\xi$ 相交，峰值为 $\\xi(1-\\xi)$。",
+        "noteEn": "The Green's function for $-u''=f$ on $(0,1)$ with $u(0)=u(1)=0$: two straight lines meeting at $x=\\xi$ with peak $\\xi(1-\\xi)$."
+      },
+      {
+        "latex": "G(x,\\xi)=G(\\xi,x)",
+        "note": "对称性：交换源点与观测点结果不变，是算子自伴的直接推论（也是检验计算是否正确的快捷方式）。",
+        "noteEn": "Symmetry: swapping source and observation point changes nothing — an immediate consequence of self-adjointness and a quick check on any computation."
+      },
+      {
+        "latex": "G(x,\\xi)=\\sum_{n=1}^{\\infty}\\frac{2\\,\\sin(n\\pi x)\\,\\sin(n\\pi\\xi)}{n^2\\pi^2}",
+        "note": "同一格林函数的特征函数展开（把 $\\delta$ 按正交系展开得到）；分子中的 2 来自标准正交特征函数 $\\sqrt{2}\\sin(n\\pi x)$。",
+        "noteEn": "The eigenfunction expansion of the same Green's function (expanding $\\delta$ in the orthogonal system); the factor 2 comes from the orthonormal eigenfunctions $\\sqrt{2}\\sin(n\\pi x)$."
+      }
+    ],
+    "expression": {
+      "text": "−ΔG(x,ξ)=δ(x−ξ)，u(x)=∫G(x,ξ)f(ξ)dξ",
+      "symbol": "G(x,ξ)",
+      "note": "「先求点源响应，再叠加」：格林函数把求解偏微分方程变成求一次积分。",
+      "noteEn": "Find the point-source response first, then superimpose: the Green's function reduces solving a PDE to evaluating one integral."
+    },
+    "properties": [
+      "对称性 $G(x,\\xi)=G(\\xi,x)$ 对自伴算子成立；对 $-\\Delta$ 配狄利克雷边界条件还有正性 $G\\ge0$（最大值原理的推论）。",
+      "$G$ 在 $x=\\xi$ 处连续，但法向导数在 $x=\\xi$ 处跳变，跳变量正是 $\\delta$ 的强度：一维时 $G'(\\xi^+,\\xi)-G'(\\xi^-,\\xi)=-1$。",
+      "用格林函数解题时齐次边界条件自动满足：解由积分给出，且对右端项 $f$ 是线性泛函（叠加原理）。",
+      "特征函数展开与分段公式表示同一个 $G$：一般地 $G=\\sum \\frac{\\varphi_n(x)\\varphi_n(\\xi)}{\\lambda_n}$，$\\varphi_n$ 是标准正交特征函数。",
+      "含时间的问题有相应的格林函数：热方程是热核（高斯核），波动方程是推迟核，分别给出扩散与传播的显式积分表示。"
+    ],
+    "propertiesEn": [
+      "The symmetry $G(x,\\xi)=G(\\xi,x)$ holds for self-adjoint operators; for $-\\Delta$ with Dirichlet conditions there is also positivity, $G\\ge0$ (a consequence of the maximum principle).",
+      "$G$ is continuous at $x=\\xi$, but its normal derivative jumps there, and the jump is precisely the strength of the delta: in 1D, $G'(\\xi^+,\\xi)-G'(\\xi^-,\\xi)=-1$.",
+      "With the Green's function the homogeneous boundary conditions hold automatically: the solution is a single integral, linear in the data $f$ (superposition).",
+      "The eigenfunction expansion and the piecewise formula describe the same $G$: in general $G=\\sum \\frac{\\varphi_n(x)\\varphi_n(\\xi)}{\\lambda_n}$ with orthonormal eigenfunctions $\\varphi_n$.",
+      "Time-dependent problems have their own Green's functions: the heat kernel (Gaussian) for diffusion and the retarded kernel for wave propagation, giving explicit integral formulas."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "min(x,xi)*(1-max(x,xi))",
+          "params": {
+            "xi": 0.25
+          },
+          "color": "#4cc9f0",
+          "label": "G(x, 0.25)"
+        },
+        {
+          "expr": "min(x,xi)*(1-max(x,xi))",
+          "params": {
+            "xi": 0.45
+          },
+          "color": "#ff6b9d",
+          "label": "G(x, 0.45)"
+        },
+        {
+          "expr": "min(x,xi)*(1-max(x,xi))",
+          "params": {
+            "xi": 0.75
+          },
+          "color": "#06d6a0",
+          "label": "G(x, 0.75)"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        0.28
+      ],
+      "title": "一维格林函数 G(x,ξ)=min(x,ξ)·(1−max(x,ξ))：分段直线，峰在 x=ξ 处"
+    },
+    "examples": [
+      {
+        "problem": "用格林函数求解 $-u''=1$，$u(0)=u(1)=0$。",
+        "solution": "由叠加公式\n$$u(x)=\\int_0^1G(x,\\xi)\\,d\\xi=\\int_0^x\\xi(1-x)\\,d\\xi+\\int_x^1x(1-\\xi)\\,d\\xi=\\frac{(1-x)x^2}{2}+\\frac{x(1-x)^2}{2}=\\frac{x(1-x)}{2}.$$\n直接用常微分方程验证：$-u''=1$ 的通解是 $u=-\\frac{x^2}{2}+c_1x+c_2$，由 $u(0)=0$ 得 $c_2=0$，由 $u(1)=0$ 得 $c_1=\\frac12$，与积分结果一致。注意 $G(x,\\xi)$ 的对称性使得把 $x$ 与 $\\xi$ 互换得到的积分值完全相同。"
+      },
+      {
+        "problem": "用格林函数求 $-u''=x$，$u(0)=u(1)=0$ 的解。",
+        "solution": "把右端项 $f(\\xi)=\\xi$ 代入叠加积分：\n$$u(x)=\\int_0^x\\xi(1-x)\\,\\xi\\,d\\xi+\\int_x^1x(1-\\xi)\\,\\xi\\,d\\xi=\\frac{(1-x)x^3}{3}+x\\left[\\frac{1-x^2}{2}-\\frac{1-x^3}{3}\\right]=\\frac{x(1-x^2)}{6}.$$\n直接验证：$-u''=x$ 的通解为 $u=-\\frac{x^3}{6}+c_1x+c_2$，由边界条件同样得 $c_2=0$，$c_1=\\frac16$，即 $u=\\frac{x(1-x^2)}{6}$。"
+      }
+    ],
+    "tags": [
+      "点源",
+      "基本解",
+      "积分算子",
+      "狄拉克δ函数"
+    ],
+    "links": [
+      "laplace-equation",
+      "dirichlet-neumann",
+      "harmonic-function",
+      "heat-equation",
+      "wave-equation"
+    ]
+  },
+  {
+    "id": "dirichlet-neumann",
+    "title": "狄利克雷问题与诺伊曼问题",
+    "titleEn": "Dirichlet and Neumann Problems",
+    "branch": "pde",
+    "level": 5,
+    "summary": "椭圆方程的两类经典边界条件：狄利克雷给定边界值 u=g；诺伊曼给定法向导数 ∂u/∂n=g，且纯诺伊曼问题有相容性条件 ∫∂Ω g dS=0。",
+    "summaryEn": "The two classical boundary conditions for elliptic equations: Dirichlet prescribes the boundary values u=g; Neumann prescribes the normal derivative ∂u/∂n=g and requires the compatibility condition ∫∂Ω g dS=0 for the pure problem.",
+    "definition": "拉普拉斯方程 $\\Delta u=0$（或泊松方程 $-\\Delta u=f$）描述平衡态：稳态温度、静电场势、薄膜的平衡形状。方程本身有无穷多解，必须配上边界条件才能确定唯一解，最常用的两类条件是**狄利克雷**与**诺伊曼**条件。\n\n**狄利克雷问题**给定边界上的函数值：\n$$-\\Delta u=f\\ \\text{于}\\ \\Omega,\\qquad u=g\\ \\text{于}\\ \\partial\\Omega.$$\n物理图像是「把边界温度固定住，问内部达到平衡后的温度分布」。\n\n**诺伊曼问题**给定边界上的法向导数（即热流）：\n$$-\\Delta u=f\\ \\text{于}\\ \\Omega,\\qquad \\frac{\\partial u}{\\partial n}=g\\ \\text{于}\\ \\partial\\Omega.$$\n其中 $g\\equiv0$ 表示绝热边界。\n\n诺伊曼问题有一个最容易忘记的**相容性条件**。由格林公式\n$$\\int_\\Omega\\Delta u\\,dV=\\int_{\\partial\\Omega}\\frac{\\partial u}{\\partial n}\\,dS,$$\n若 $u$ 调和（$\\Delta u=0$），左端为 0，所以右端必须为 0：\n$$\\int_{\\partial\\Omega}g\\,dS=0.$$\n直观地说，平衡态下「流进」与「流出」的总热量必须相抵，否则内部温度会一直变化，不可能达到稳态。一般地，对 $-\\Delta u=f$ 与 $\\frac{\\partial u}{\\partial n}=g$，条件是 $\\int_\\Omega f\\,dV+\\int_{\\partial\\Omega}g\\,dS=0$。\n\n当相容性满足时，纯诺伊曼问题的解存在但不唯一：$u$ 与 $u+C$（任意常数）满足同样的方程与边界条件，只差一个整体的「水位」。狄利克雷问题没有这个问题——最大值原理保证它唯一。",
+    "definitionEn": "The Laplace equation $\\Delta u=0$ (or the Poisson equation $-\\Delta u=f$) describes equilibrium states: steady temperatures, electrostatic potentials, equilibrium shapes of a membrane. The equation alone has infinitely many solutions and needs boundary conditions; the two most common are the **Dirichlet** and **Neumann** conditions.\n\nThe **Dirichlet problem** prescribes the values on the boundary:\n$$-\\Delta u=f\\ \\text{in}\\ \\Omega,\\qquad u=g\\ \\text{on}\\ \\partial\\Omega.$$\nPhysically: fix the boundary temperature and ask for the equilibrium temperature inside.\n\nThe **Neumann problem** prescribes the normal derivative, i.e. the heat flux:\n$$-\\Delta u=f\\ \\text{in}\\ \\Omega,\\qquad \\frac{\\partial u}{\\partial n}=g\\ \\text{on}\\ \\partial\\Omega,$$\nwith $g\\equiv0$ meaning an insulated boundary.\n\nThe Neumann problem carries a **compatibility condition** that is easy to forget. By Green's formula,\n$$\\int_\\Omega\\Delta u\\,dV=\\int_{\\partial\\Omega}\\frac{\\partial u}{\\partial n}\\,dS;$$\nif $u$ is harmonic ($\\Delta u=0$) the left side is 0, so the right side must vanish:\n$$\\int_{\\partial\\Omega}g\\,dS=0.$$\nIntuitively, in equilibrium the total heat flowing in and out must balance, otherwise the temperature could never settle. In general, for $-\\Delta u=f$ with $\\frac{\\partial u}{\\partial n}=g$ the condition reads $\\int_\\Omega f\\,dV+\\int_{\\partial\\Omega}g\\,dS=0$.\n\nWhen compatibility holds, the pure Neumann problem has solutions, but they are not unique: $u$ and $u+C$ for any constant $C$ satisfy the same equation and boundary condition, differing only by an overall level. The Dirichlet problem has no such freedom — the maximum principle guarantees uniqueness.",
+    "formulas": [
+      {
+        "latex": "-\\Delta u=f\\ \\text{于}\\ \\Omega,\\qquad u=g\\ \\text{于}\\ \\partial\\Omega",
+        "note": "狄利克雷问题：泊松方程加边界上的函数值（如固定边界温度）。",
+        "noteEn": "Dirichlet problem: the Poisson equation with prescribed boundary values (e.g. fixed boundary temperature)."
+      },
+      {
+        "latex": "-\\Delta u=f\\ \\text{于}\\ \\Omega,\\qquad \\frac{\\partial u}{\\partial n}=g\\ \\text{于}\\ \\partial\\Omega",
+        "note": "诺伊曼问题：给定边界上的法向导数即热流；$g\\equiv0$ 表示绝热。",
+        "noteEn": "Neumann problem: the normal derivative (heat flux) is prescribed on the boundary; $g\\equiv0$ means insulated."
+      },
+      {
+        "latex": "\\int_\\Omega\\Delta u\\,dV=\\int_{\\partial\\Omega}\\frac{\\partial u}{\\partial n}\\,dS",
+        "note": "格林公式（散度定理的推论），相容性条件的来源。",
+        "noteEn": "Green's formula (a consequence of the divergence theorem), the source of the compatibility condition."
+      },
+      {
+        "latex": "\\int_{\\partial\\Omega}g\\,dS=0",
+        "note": "调和函数诺伊曼问题的必要条件（相容性）；对 $-\\Delta u=f$ 则为 $\\int_\\Omega f\\,dV+\\int_{\\partial\\Omega}g\\,dS=0$。",
+        "noteEn": "The compatibility condition for the Neumann problem for a harmonic function; for $-\\Delta u=f$ it becomes $\\int_\\Omega f\\,dV+\\int_{\\partial\\Omega}g\\,dS=0$."
+      },
+      {
+        "latex": "u\\ \\text{解}\\ \\Longrightarrow\\ u+C\\ \\text{也解}\\ (\\forall C\\in\\mathbb{R})",
+        "note": "纯诺伊曼问题的解不唯一：在相差常数的意义下唯一。",
+        "noteEn": "Solutions of the pure Neumann problem are not unique: they are unique only up to an additive constant."
+      }
+    ],
+    "expression": {
+      "text": "狄利克雷：u|∂Ω=g；诺伊曼：∂u/∂n|∂Ω=g",
+      "symbol": "u|∂Ω 或 ∂u/∂n|∂Ω",
+      "note": "区别只在于边界上给的是「值」还是「变化率」；后者需要相容性并失去唯一性（差常数）。",
+      "noteEn": "The only difference is whether the boundary data prescribe values or a rate of change; the latter needs compatibility and loses uniqueness (up to a constant)."
+    },
+    "properties": [
+      "狄利克雷问题在数据足够光滑时有唯一解，且连续依赖边界数据：最大值原理给出 $|u|\\le\\max_{\\partial\\Omega}|g|$。",
+      "纯诺伊曼问题的必要条件 $\\int_{\\partial\\Omega}g\\,dS=0$ 不满足时无解；满足时解集为 $u_0+C$。",
+      "混合边界（边界一部分给狄利克雷、一部分给诺伊曼）通常保证唯一性；只有纯诺伊曼问题才允许相差常数。",
+      "两类问题都可以借助格林函数求解：狄利克雷用满足 $G=0$ 的格林函数；诺伊曼用相应的对称核，但核本身也要在相差常数下理解。",
+      "解在内部光滑（椭圆方程的内部正则性），奇异只可能来自边界数据或区域的非光滑性。"
+    ],
+    "propertiesEn": [
+      "The Dirichlet problem has a unique solution for sufficiently smooth data and depends continuously on the boundary data: the maximum principle gives $|u|\\le\\max_{\\partial\\Omega}|g|$.",
+      "The pure Neumann problem has no solution unless $\\int_{\\partial\\Omega}g\\,dS=0$; when the condition holds, the solution set is $u_0+C$.",
+      "Mixed boundary conditions (Dirichlet on part of the boundary, Neumann on the rest) usually guarantee uniqueness; only the pure Neumann problem admits an additive constant.",
+      "Both problems can be solved via Green's functions: Dirichlet with a kernel satisfying $G=0$ on the boundary; Neumann with the analogous symmetric kernel, itself defined only up to a constant.",
+      "Solutions are smooth in the interior (interior regularity of elliptic equations); singularities can only originate from the boundary data or a nonsmooth boundary."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -2.2,
+        2.2
+      ],
+      "levels": 11,
+      "title": "调和函数 u=x²−y² 的等值线：边界上的数据决定内部的值（狄利克雷问题）"
+    },
+    "examples": [
+      {
+        "problem": "求解 $-u''=0$（$0<x<1$），$u(0)=0$，$u(1)=1$，并说明解的唯一性。",
+        "solution": "通解 $u=c_1x+c_2$；由 $u(0)=0$ 得 $c_2=0$，由 $u(1)=1$ 得 $c_1=1$，故 $u(x)=x$。若另有一个解 $v$，则 $w=u-v$ 满足 $w''=0$、$w(0)=w(1)=0$，其最大值与最小值都是 0（最大值原理），故 $w\\equiv0$，唯一性得证。这里 $u$ 的最大值 1 与最小值 0 都出现在端点边界上。"
+      },
+      {
+        "problem": "说明诺伊曼问题 $-u''=1$（$0<x<1$），$u'(0)=u'(1)=0$ 无解，并给出一个相容的修改。",
+        "solution": "若解存在，把方程在 $[0,1]$ 上积分：$\\int_0^1(-u'')\\,dx=-u'(1)+u'(0)=1$，即 $u'(1)-u'(0)=-1$，而边界条件要求 $u'(1)-u'(0)=0$，矛盾。用相容性条件检查：$\\int_0^1f\\,dx+\\left.\\frac{\\partial u}{\\partial n}\\right|_{x=0}+\\left.\\frac{\\partial u}{\\partial n}\\right|_{x=1}=1+\\big(-u'(0)\\big)+u'(1)=1\\ne0$，确实违反必要条件。若把右端条件改成 $u'(0)=0$、$u'(1)=-1$（左端热流 0、右端热流 $-1$），则相容性满足，解为 $u=-\\frac{x^2}{2}+d$（$d$ 任意，体现诺伊曼解整体相差常数）。"
+      }
+    ],
+    "tags": [
+      "边值问题",
+      "调和函数",
+      "相容性条件",
+      "泊松方程"
+    ],
+    "links": [
+      "laplace-equation",
+      "green-function",
+      "maximum-principle",
+      "harmonic-function",
+      "gauss-theorem"
+    ]
+  },
+  {
+    "id": "maximum-principle",
+    "title": "最大值原理",
+    "titleEn": "Maximum Principle",
+    "branch": "pde",
+    "level": 5,
+    "summary": "有界区域上的调和函数最大值与最小值都在边界取得（除非为常数）；由此立得比较原理、狄利克雷问题解的唯一性与稳定性。",
+    "summaryEn": "A harmonic function on a bounded domain attains its maximum and minimum on the boundary unless it is constant; hence comparison, uniqueness and stability for the Dirichlet problem.",
+    "definition": "最大值原理是调和函数最直观也最有用的性质：**有界区域上的调和函数没有内部极值**。精确地说，设 $u$ 在有界区域 $\\Omega$ 内调和（$\\Delta u=0$）、在闭区域 $\\bar\\Omega$ 上连续，则\n$$\\max_{\\bar\\Omega}u=\\max_{\\partial\\Omega}u,\\qquad \\min_{\\bar\\Omega}u=\\min_{\\partial\\Omega}u;$$\n并且除非 $u$ 是常数，最大值和最小值都**只能**在边界上取到（强的形式：内部一旦出现极大值，函数就恒为常数）。\n\n证明的直觉很清楚：在内部极值点处，沿每个方向的二阶导数都必须「向下弯」，于是 $\\Delta u\\le0$，与 $\\Delta u=0$ 冲突——除非函数在该处附近已经被压平成常数。严格的证明用扰动技巧：令 $v=u+\\varepsilon(x^2+y^2)$，则 $\\Delta v=4\\varepsilon>0$，不可能有内部极大值（否则与 $\\Delta v\\le0$ 矛盾），故 $v$ 的最大值在边界上；再令 $\\varepsilon\\to0$ 即得结论。\n\n由此立刻得到两个重要推论。其一是**比较原理**：若两个调和函数在边界上满足 $u\\le v$，则在内部也有 $u\\le v$。其二是**狄利克雷问题解唯一**：两个解之差调和且在边界上为 0，按最大值原理它不能有非零极值，只能恒等于 0。此外还有**稳定性**（连续依赖）：$|u|\\le\\max_{\\partial\\Omega}|g|$，边界数据的误差不会在内部被放大。\n\n热方程也有对应的**抛物型最大值原理**：解的最大值、最小值出现在初始时刻或空间边界上（合称抛物边界），不会在 $t>0$ 的内部凭空出现更大的极值——这正是扩散「抹平」极值的数学表述。",
+    "definitionEn": "The maximum principle is the most intuitive and most useful property of harmonic functions: **a harmonic function on a bounded domain has no interior extremum**. Precisely, let $u$ be harmonic in a bounded domain $\\Omega$ ($\\Delta u=0$) and continuous on the closure $\\bar\\Omega$; then\n$$\\max_{\\bar\\Omega}u=\\max_{\\partial\\Omega}u,\\qquad \\min_{\\bar\\Omega}u=\\min_{\\partial\\Omega}u,$$\nand unless $u$ is constant, both extrema occur **only** on the boundary (the strong form: an interior maximum forces $u$ to be constant).\n\nThe intuition is immediate: at an interior extremum the second derivatives in every direction bend downward, giving $\\Delta u\\le0$, contradicting $\\Delta u=0$ unless the function is locally flat. A rigorous proof perturbs: with $v=u+\\varepsilon(x^2+y^2)$ we have $\\Delta v=4\\varepsilon>0$, so $v$ cannot have an interior maximum (that would force $\\Delta v\\le0$); hence the maximum of $v$ lies on the boundary, and $\\varepsilon\\to0$ gives the claim.\n\nTwo important consequences follow at once. First, the **comparison principle**: if two harmonic functions satisfy $u\\le v$ on the boundary, then $u\\le v$ in the interior. Second, **uniqueness for the Dirichlet problem**: the difference of two solutions is harmonic and vanishes on the boundary, so by the maximum principle it can have no nonzero extremum and must vanish identically. There is also **stability** (continuous dependence): $|u|\\le\\max_{\\partial\\Omega}|g|$, so errors in boundary data are never amplified inside.\n\nThe heat equation has a **parabolic maximum principle** of the same flavour: its maximum and minimum occur on the parabolic boundary — the initial time or the spatial boundary — and no larger extremum can appear at $t>0$ in the interior. This is the mathematical statement that diffusion smooths extrema away.",
+    "formulas": [
+      {
+        "latex": "\\Delta u=0\\ \\text{于}\\ \\Omega\\ \\Longrightarrow\\ \\max_{\\bar\\Omega}u=\\max_{\\partial\\Omega}u,\\quad \\min_{\\bar\\Omega}u=\\min_{\\partial\\Omega}u",
+        "note": "弱最大值原理：调和函数的最值都在边界取得。",
+        "noteEn": "The weak maximum principle: a harmonic function attains its extrema on the boundary."
+      },
+      {
+        "latex": "x_0\\in\\Omega,\\ u(x_0)=\\max_{\\bar\\Omega}u\\ \\Longrightarrow\\ u\\equiv\\text{const}",
+        "note": "强最大值原理：非平凡调和函数不可能在内部取到极大值（极小值同理）。",
+        "noteEn": "The strong maximum principle: a nontrivial harmonic function cannot attain an interior maximum (nor an interior minimum)."
+      },
+      {
+        "latex": "\\Delta u\\ge0\\ \\text{于}\\ \\Omega\\ \\Longrightarrow\\ \\max_{\\bar\\Omega}u=\\max_{\\partial\\Omega}u",
+        "note": "下调和（次调和）函数版本；反之 $\\Delta u\\le0$ 时最小值在边界取得。",
+        "noteEn": "The subharmonic version: $\\Delta u\\ge0$ pushes the maximum to the boundary; dually $\\Delta u\\le0$ pushes the minimum there."
+      },
+      {
+        "latex": "u_t-a^2u_{xx}\\le0\\ \\Longrightarrow\\ \\max u\\ \\text{在抛物边界}\\ \\{t=0\\}\\cup\\{x=0\\}\\cup\\{x=L\\}\\ \\text{上取得}",
+        "note": "热方程（抛物型）的最大值原理：极值只出现在初始时刻或空间边界。",
+        "noteEn": "The parabolic maximum principle for the heat equation: extrema occur only at the initial time or on the spatial boundary."
+      },
+      {
+        "latex": "|u(x)|\\le\\max_{\\partial\\Omega}|g|",
+        "note": "稳定性估计：狄利克雷问题的解连续依赖边界数据 $g$，误差不被放大。",
+        "noteEn": "The stability estimate: the Dirichlet solution depends continuously on the boundary data $g$, and errors are not amplified."
+      }
+    ],
+    "expression": {
+      "text": "Δu=0 于 Ω ⟹ max/min 在 ∂Ω 上取得",
+      "symbol": "max_∂Ω / min_∂Ω",
+      "note": "「没有内部极值」是调和函数的标志性特征，图像像马鞍面而不是山峰或谷底。",
+      "noteEn": "No interior extrema is the signature of harmonic functions: their graphs look like saddles, not peaks or pits."
+    },
+    "properties": [
+      "对非平凡调和函数，内部处处没有局部极大也没有局部极小；等值线在鞍点附近呈双曲线状（如 $x^2-y^2$ 在原点）。",
+      "结论依赖区域有界且解连续到边界；无界区域或边界处不连续时结论可能失效。",
+      "比较原理：若 $\\Delta u=\\Delta v$ 于 $\\Omega$ 且 $u\\le v$ 于 $\\partial\\Omega$，则 $u\\le v$ 于 $\\Omega$。",
+      "唯一性：狄利克雷问题 $-\\Delta u=f$、$u|_{\\partial\\Omega}=g$ 至多一个解——两个解之差调和且边界为零，故恒为零。",
+      "抛物型版本：热方程解的最值出现在初始时刻或空间边界；反向热方程失去这一约束，因此不适定。"
+    ],
+    "propertiesEn": [
+      "A nontrivial harmonic function has no local maximum or minimum anywhere in the interior; its level curves look like hyperbolas near a saddle, as for $x^2-y^2$ at the origin.",
+      "The conclusion requires a bounded domain and continuity up to the boundary; unbounded domains or discontinuous boundary data can break it.",
+      "Comparison principle: if $\\Delta u=\\Delta v$ in $\\Omega$ and $u\\le v$ on $\\partial\\Omega$, then $u\\le v$ throughout $\\Omega$.",
+      "Uniqueness: the Dirichlet problem $-\\Delta u=f$, $u|_{\\partial\\Omega}=g$ has at most one solution — the difference of two solutions is harmonic and vanishes on the boundary, hence is identically zero.",
+      "Parabolic version: heat-equation extrema occur at the initial time or the spatial boundary; the backward heat equation loses this constraint and is ill-posed."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "levels": 11,
+      "title": "u=x²−y² 调和但内部无极值：等值线是双曲线，原点为鞍点，最值只能在边界"
+    },
+    "examples": [
+      {
+        "problem": "验证调和函数 $u=x^2-y^2$ 在单位圆盘 $x^2+y^2<1$ 内没有极值，并求它在闭圆盘上的最大值与最小值。",
+        "solution": "$\\Delta u=u_{xx}+u_{yy}=2-2=0$，故 $u$ 调和。内部驻点只有原点：$\\nabla u=(2x,-2y)=(0,0)\\Rightarrow(x,y)=(0,0)$，但沿 $x$ 轴 $u=x^2>0$、沿 $y$ 轴 $u=-y^2<0$，原点既不是极大也不是极小（鞍点）。在边界 $x=\\cos\\theta$，$y=\\sin\\theta$ 上，$u=\\cos^2\\theta-\\sin^2\\theta=\\cos2\\theta\\in[-1,1]$，最大值为 1（在 $(\\pm1,0)$），最小值 $-1$（在 $(0,\\pm1)$），二者都在边界上取得，与最大值原理一致。"
+      },
+      {
+        "problem": "用最大值原理证明狄利克雷问题 $-\\Delta u=f$，$u|_{\\partial\\Omega}=g$ 的解唯一；并说明边界数据的小误差不会被内部放大。",
+        "solution": "设 $u_1,u_2$ 是两个解，则 $w=u_1-u_2$ 满足 $\\Delta w=0$ 且 $w|_{\\partial\\Omega}=0$。由弱最大值原理，$\\max_{\\bar\\Omega}w=\\max_{\\partial\\Omega}w=0$；对 $-w$ 用同样的结论得 $\\max_{\\bar\\Omega}(-w)=0$，即 $\\min_{\\bar\\Omega}w=0$。于是 $0\\le w\\le0$，故 $w\\equiv0$，即 $u_1=u_2$。稳定性方面，把同一结论用于两个不同边界数据的解之差，得到 $|w(x)|\\le\\max_{\\partial\\Omega}|w|$：边界数据改变多少，内部解最多改变同样多。"
+      }
+    ],
+    "tags": [
+      "调和函数",
+      "边界极值",
+      "比较原理",
+      "唯一性"
+    ],
+    "links": [
+      "laplace-equation",
+      "harmonic-function",
+      "dirichlet-neumann",
+      "pde-well-posedness",
+      "multivariable-extrema"
+    ]
+  },
+  {
+    "id": "pde-well-posedness",
+    "title": "定解问题的适定性",
+    "titleEn": "Well-Posedness of Initial-Boundary Value Problems",
+    "branch": "pde",
+    "level": 5,
+    "summary": "阿达马意义下：解存在、唯一、且连续依赖初边值数据三者缺一不可；波动与热方程的定解问题适定，拉普拉斯方程的柯西问题不适定。",
+    "summaryEn": "In Hadamard's sense a problem is well posed when solutions exist, are unique and depend continuously on the data; wave and heat IBVPs are well posed, while the Cauchy problem for Laplace's equation is not.",
+    "definition": "一个定解问题称为**适定**的（阿达马，Hadamard），需要同时满足三个条件：**(1) 存在性**——至少有一个解；**(2) 唯一性**——解只有一个；**(3) 连续依赖（稳定性）**——初边值数据的小扰动只引起解的小扰动。第三个条件最容易被忽视，却对物理与数值计算至关重要：测量总有误差，如果微小的数据误差会被放大成巨大的解误差，数值求解就失去意义。不满足适定性的问题称为**不适定问题**。\n\n经典方程的初边值问题都是适定的。波动方程用**能量法**：能量\n$$E(t)=\\frac12\\int_0^L\\left(u_t^2+a^2u_x^2\\right)dx$$\n对时间守恒；两个解之差仍满足齐次方程与零初值，能量为零迫使差恒为零（唯一性），能量的守恒还给出稳定性估计。热传导方程用**最大值原理**：$|u|\\le\\max|\\varphi|$，初始误差随后只会衰减，不会被放大。椭圆方程的狄利克雷边值问题同样适定。\n\n反例同样经典。**拉普拉斯方程的柯西问题**——在半平面内求调和函数，同时给定 $u$ 与 $\\partial u/\\partial n$ 在直线上的值——是不适定的。阿达马构造了\n$$u_n(x,y)=\\frac{1}{n^2}\\sin(nx)\\,\\sinh(ny),$$\n它满足 $\\Delta u_n=0$，且在 $y=0$ 上给出 $u_n(x,0)=0$ 与 $\\frac{\\partial u_n}{\\partial y}(x,0)=\\frac{1}{n}\\sin(nx)$：当 $n\\to\\infty$ 时两个数据都一致趋于 0，可是在任意固定高度 $y_0>0$ 上 $u_n$ 的最大值 $\\frac{\\sinh(ny_0)}{n^2}$ 却指数增长——数据可以任意小，解却任意大，连续依赖被彻底破坏。另一个例子是**反向热传导方程** $u_t=-a^2u_{xx}$：原本衰减的因子 $e^{-\\lambda_na^2t}$ 变成增长因子 $e^{+\\lambda_na^2t}$，高频误差被指数放大，同样不适定。\n\n因此，适定性是「用方程描述现实、再做数值求解」的前提；对不适定问题必须引入额外信息或正则化（如吉洪诺夫正则化）才能稳定求解。",
+    "definitionEn": "A problem is called **well posed** (Hadamard) when three requirements are met simultaneously: **(1) existence** — at least one solution; **(2) uniqueness** — at most one solution; **(3) continuous dependence (stability)** — a small perturbation of the data causes only a small change of the solution. The third condition is the easiest to overlook and the most important in practice: data are always measured with error, and if a tiny data error is amplified into a huge solution error, numerical solution is meaningless. A problem failing these conditions is **ill posed**.\n\nThe classical initial-boundary value problems are well posed. For the wave equation one uses **energy**:\n$$E(t)=\\frac12\\int_0^L\\left(u_t^2+a^2u_x^2\\right)dx$$\nis conserved in time. The difference of two solutions still solves the homogeneous equation with zero initial data; zero energy forces the difference to vanish (uniqueness), and conservation supplies the stability estimate. For the heat equation the **maximum principle** gives $|u|\\le\\max|\\varphi|$: initial errors only decay. The Dirichlet problem for elliptic equations is well posed as well.\n\nCounterexamples are equally classical. The **Cauchy problem for Laplace's equation** — finding a harmonic function in a half-plane with both $u$ and $\\partial u/\\partial n$ prescribed on the line — is ill posed. Hadamard's construction\n$$u_n(x,y)=\\frac{1}{n^2}\\sin(nx)\\,\\sinh(ny)$$\nis harmonic, and on $y=0$ it gives $u_n(x,0)=0$ and $\\frac{\\partial u_n}{\\partial y}(x,0)=\\frac{1}{n}\\sin(nx)$: as $n\\to\\infty$ both data tend uniformly to zero, yet at any fixed height $y_0>0$ the maximum of $u_n$ is $\\frac{\\sinh(ny_0)}{n^2}$, which grows exponentially. Arbitrarily small data, arbitrarily large solutions — continuous dependence fails completely. Another example is the **backward heat equation** $u_t=-a^2u_{xx}$, where the decaying factors $e^{-\\lambda_na^2t}$ become growth factors $e^{+\\lambda_na^2t}$ and high-frequency errors blow up.\n\nWell-posedness is therefore the precondition for describing reality with an equation and then solving it numerically; ill-posed problems require extra information or regularization (for example Tikhonov regularization) to be solved stably.",
+    "formulas": [
+      {
+        "latex": "\\text{适定}=\\text{存在性}+\\text{唯一性}+\\text{连续依赖（稳定性）}",
+        "note": "阿达马意义下的三个条件，缺一不可；通常还要指定在哪个范数下连续依赖。",
+        "noteEn": "Hadamard's three conditions, all indispensable; one must also specify the norm in which continuity holds."
+      },
+      {
+        "latex": "E(t)=\\frac12\\int_0^L\\left(u_t^2+a^2u_x^2\\right)dx=E(0)",
+        "note": "波动方程的能量守恒；两个解之差能量为 0 即差恒为零（唯一性），能量估计同时给出连续依赖。",
+        "noteEn": "Energy conservation for the wave equation; zero energy for the difference of two solutions forces it to vanish (uniqueness), and energy estimates give continuous dependence."
+      },
+      {
+        "latex": "|u(x,t)|\\le\\max_x|\\varphi(x)|",
+        "note": "热方程由最大值原理得到的稳定性：初始误差沿时间不增，扩散只抹平不放大。",
+        "noteEn": "Stability for the heat equation from the maximum principle: initial errors never grow in time; diffusion smooths rather than amplifies."
+      },
+      {
+        "latex": "u_n(x,y)=\\frac{1}{n^2}\\sin(nx)\\,\\sinh(ny)",
+        "note": "阿达马例子：$\\Delta u_n=0$，在 $y=0$ 上数据 $u_n=0$、$\\partial_yu_n=\\frac1n\\sin(nx)\\to0$，但在 $y_0>0$ 上 $u_n$ 无界——拉普拉斯方程柯西问题不适定。",
+        "noteEn": "Hadamard's example: $\\Delta u_n=0$ with boundary data $u_n=0$, $\\partial_yu_n=\\frac1n\\sin(nx)\\to0$ on $y=0$, yet $u_n$ is unbounded at any height $y_0>0$ — the Cauchy problem for Laplace's equation is ill posed."
+      },
+      {
+        "latex": "T_n(t)=b_n\\,e^{+\\lambda_na^2t}\\quad(\\text{反向热方程})",
+        "note": "时间反向后指数由衰减变成爆炸式增长，高频误差被放大 $e^{\\lambda_na^2t}$ 倍，故反向热传导问题不适定。",
+        "noteEn": "Reversing time turns decay into exponential growth: high-frequency errors are amplified by $e^{\\lambda_na^2t}$, so the backward heat problem is ill posed."
+      }
+    ],
+    "expression": {
+      "text": "适定 = 存在 + 唯一 + 连续依赖（Hadamard）",
+      "symbol": "Hadamard 三条件",
+      "note": "适定性是方程「可解」之外的要求：还要求解对数据稳定，否则数值计算没有意义。",
+      "noteEn": "Well-posedness goes beyond solvability: the solution must depend stably on the data, otherwise numerical computation is meaningless."
+    },
+    "properties": [
+      "三个条件处于同一层次：只证明存在与唯一而不谈稳定性，不足以保证问题在物理或数值意义下可解。",
+      "适定性依赖函数空间与范数的选择：同一个方程在一个空间中适定，换一个范数可能不再适定。",
+      "波动方程：信息以有限速度 $a$ 传播、能量守恒；初值光滑时解可用级数或达朗贝尔公式表示，初值仅连续时用广义解理解。",
+      "热方程：正向问题极稳定，高频误差被 $e^{-\\lambda_na^2t}$ 指数压制；反向问题与各种逆问题普遍不适定，需要正则化与先验信息。",
+      "拉普拉斯方程：狄利克雷边值问题适定，而柯西问题（同时给定 $u$ 与 $\\partial u/\\partial n$）不适定——同一方程配不同数据会改变适定性。"
+    ],
+    "propertiesEn": [
+      "The three conditions are on the same footing: existence and uniqueness alone, without stability, do not make a problem solvable in any physical or numerical sense.",
+      "Well-posedness depends on the choice of function space and norm: an equation may be well posed in one space and ill posed in another.",
+      "Wave equation: information travels at the finite speed $a$ and energy is conserved; smooth data give series or d'Alembert solutions, while merely continuous data are handled by generalized solutions.",
+      "Heat equation: the forward problem is extremely stable, high-frequency errors being suppressed by $e^{-\\lambda_na^2t}$; the backward problem and inverse problems generally are ill posed and require regularization and prior information.",
+      "Laplace equation: the Dirichlet boundary value problem is well posed, while the Cauchy problem (prescribing both $u$ and $\\partial u/\\partial n$) is ill posed — the same equation with different data changes the well-posedness."
+    ],
+    "examples": [
+      {
+        "problem": "用能量法证明波动方程初边值问题 $u_{tt}=a^2u_{xx}$（$0<x<L$），$u(0,t)=u(L,t)=0$，$u(x,0)=\\varphi(x)$，$u_t(x,0)=\\psi(x)$ 的解唯一。",
+        "solution": "设 $u_1,u_2$ 是两个解，令 $w=u_1-u_2$。由线性性，$w$ 满足齐次方程 $w_{tt}=a^2w_{xx}$、齐次边界条件以及零初值 $w(x,0)=w_t(x,0)=0$。定义能量\n$$E(t)=\\frac12\\int_0^L\\left(w_t^2+a^2w_x^2\\right)dx.$$\n对 $t$ 求导并用方程与边界条件：\n$$\\frac{dE}{dt}=\\int_0^L\\left(w_tw_{tt}+a^2w_xw_{xt}\\right)dx=a^2\\int_0^L\\left(w_tw_{xx}+w_xw_{xt}\\right)dx=a^2\\big[w_xw_t\\big]_0^L=0.$$\n于是 $E(t)=E(0)=0$，故 $w_t\\equiv w_x\\equiv0$，$w$ 为常数；再由零初值得 $w\\equiv0$，即 $u_1=u_2$。能量守恒同时说明初值的小扰动保持能量意义下的小扰动，连续依赖成立。"
+      },
+      {
+        "problem": "验证阿达马例子 $u_n(x,y)=\\frac{1}{n^2}\\sin(nx)\\sinh(ny)$ 是调和函数，并说明它为什么表明拉普拉斯方程柯西问题不适定。",
+        "solution": "直接计算：\n$$(u_n)_{xx}=-\\frac{1}{n^2}\\,n^2\\sin(nx)\\sinh(ny)=-\\sin(nx)\\sinh(ny),\\qquad (u_n)_{yy}=\\frac{1}{n^2}\\,n^2\\sin(nx)\\sinh(ny)=\\sin(nx)\\sinh(ny),$$\n两者相加得 $\\Delta u_n=0$，故 $u_n$ 调和。在 $y=0$ 上：$u_n=0$，而 $\\frac{\\partial u_n}{\\partial y}=\\frac{1}{n}\\sin(nx)\\cosh(ny)$，在 $y=0$ 处等于 $\\frac1n\\sin(nx)$，其最大值为 $\\frac1n\\to0$。但当 $y_0>0$ 固定时，$\\sup_x|u_n(x,y_0)|=\\frac{\\sinh(ny_0)}{n^2}\\to\\infty$（因 $\\sinh(ny_0)\\sim e^{ny_0}/2$）。于是：柯西数据（$u$ 与法向导数）可以任意小，解却任意大——解不连续依赖数据，柯西问题不适定。"
+      }
+    ],
+    "tags": [
+      "阿达马",
+      "存在唯一性",
+      "稳定性",
+      "不适定问题"
+    ],
+    "links": [
+      "pde-basic-concepts",
+      "heat-equation",
+      "wave-equation",
+      "laplace-equation",
+      "maximum-principle"
+    ]
+  }
+]

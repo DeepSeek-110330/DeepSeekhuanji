@@ -1,0 +1,576 @@
+[
+  {
+    "id": "series",
+    "title": "无穷级数",
+    "titleEn": "Infinite Series",
+    "branch": "sequence",
+    "level": 4,
+    "summary": "把无穷多个数依次相加的表达式；当且仅当部分和数列收敛时级数收敛，其极限称为级数的和。",
+    "summaryEn": "An expression that adds infinitely many terms in order; the series converges exactly when its partial sums converge, and their limit is called the sum.",
+    "definition": "设 $\\{u_n\\}$ 是一个数列，把它的项依次用加号连接起来：\n$$u_1+u_2+\\cdots+u_n+\\cdots$$\n这样的表达式称为**无穷级数**（简称级数），记作 $\\sum_{n=1}^{\\infty}u_n$，其中 $u_n$ 称为级数的**通项**。无穷多个数无法直接相加，于是先考察前 $n$ 项的和，称为**部分和**：\n$$S_n=u_1+u_2+\\cdots+u_n.$$\n如果部分和数列 $\\{S_n\\}$ 收敛于某个常数 $S$，就称级数**收敛**，并把这个极限称为级数的**和**，记作 $\\sum_{n=1}^{\\infty}u_n=S$；如果 $\\{S_n\\}$ 发散，就称级数**发散**，此时级数没有和。可见级数敛散性的问题，本质上就是数列极限的问题——这正是整章理论的出发点。\n\n级数收敛的**必要条件**是通项趋于 0：若 $\\sum u_n=S$，则 $u_n=S_n-S_{n-1}\\to S-S=0$。因此只要通项不趋于 0，级数一定发散，这是最省力的第一道筛查；但这个条件并不充分——调和级数 $\\sum\\frac1n$ 的通项趋于 0，级数却发散。\n\n最基本、最常用的收敛级数是**几何级数（等比级数）** $\\sum_{n=0}^{\\infty}ar^n$：当 $|r|<1$ 时它收敛于 $\\frac{a}{1-r}$；当 $|r|\\ge1$ 且 $a\\neq0$ 时它发散。此外，收敛级数满足线性运算；其余项 $R_n=S-S_n=\\sum_{k=n+1}^{\\infty}u_k$ 称为级数的**余项**，必有 $R_n\\to0$，这是用部分和近似级数和时控制误差的依据。",
+    "definitionEn": "Given a sequence $\\{u_n\\}$, the expression formed by joining its terms with plus signs,\n$$u_1+u_2+\\cdots+u_n+\\cdots,$$\nis called an **infinite series**, written $\\sum_{n=1}^{\\infty}u_n$, and $u_n$ is its **general term**. Infinitely many numbers cannot be added directly, so one studies instead the **partial sums**\n$$S_n=u_1+u_2+\\cdots+u_n.$$\nIf the sequence $\\{S_n\\}$ converges to a number $S$, the series is said to **converge**, and $S$ is called its **sum**: $\\sum_{n=1}^{\\infty}u_n=S$. If $\\{S_n\\}$ diverges, the series **diverges** and no sum is assigned. Deciding convergence of a series is thus nothing but a sequence-limit problem — the starting point of the entire theory.\n\nA **necessary condition** for convergence is that the general term tends to 0: if $\\sum u_n=S$, then $u_n=S_n-S_{n-1}\\to S-S=0$. Hence a series whose general term does not tend to 0 must diverge, which is the cheapest first check. The condition is not sufficient: the harmonic series $\\sum 1/n$ has terms tending to 0 yet diverges.\n\nThe model convergent series is the **geometric series** $\\sum_{n=0}^{\\infty}ar^n$: it converges to $\\frac{a}{1-r}$ when $|r|<1$, and diverges when $|r|\\ge1$ (with $a\\neq0$). Convergent series also obey linearity, and the **remainder** $R_n=S-S_n=\\sum_{k=n+1}^{\\infty}u_k$ satisfies $R_n\\to0$ — the basis for error control when a sum is approximated by a partial sum.",
+    "formulas": [
+      {
+        "latex": "\\sum_{n=1}^{\\infty}u_n=S\\iff\\lim_{n\\to\\infty}S_n=S,\\qquad S_n=\\sum_{k=1}^{n}u_k",
+        "note": "级数收敛的定义：部分和数列有极限。级数的和就是这个极限，而不是「把无穷多项加完」的结果。",
+        "noteEn": "Definition of convergence: the partial sums have a limit, and that limit is the sum of the series."
+      },
+      {
+        "latex": "\\sum_{n=0}^{\\infty}ar^n=\\frac{a}{1-r}\\quad(|r|<1)",
+        "note": "几何级数求和公式；当 $|r|\\ge1$ 且 $a\\neq0$ 时发散：$r=1$ 时通项恒为 $a$，$r=-1$ 时部分和振荡。",
+        "noteEn": "The geometric sum; it diverges for $|r|\\ge1$ (with $a\\neq0$): constant terms when $r=1$, oscillating partial sums when $r=-1$."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}u_n\\ \\text{收敛}\\ \\Longrightarrow\\ \\lim_{n\\to\\infty}u_n=0",
+        "note": "收敛的必要条件。逆命题不成立：调和级数 $\\sum\\frac1n$ 的通项趋于 0 却发散，判敛散必须再用其他方法。",
+        "noteEn": "A necessary condition for convergence. Its converse fails: the harmonic series has terms tending to 0 yet diverges."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}\\frac{1}{n(n+1)}=1",
+        "note": "裂项（望远镜）级数的典型例子：$\\frac1{n(n+1)}=\\frac1n-\\frac1{n+1}$，部分和 $S_n=1-\\frac1{n+1}\\to1$。",
+        "noteEn": "The model telescoping series: splitting the general term collapses the partial sums to $1-\\frac1{n+1}$."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}(\\alpha u_n+\\beta v_n)=\\alpha\\sum_{n=1}^{\\infty}u_n+\\beta\\sum_{n=1}^{\\infty}v_n",
+        "note": "线性性质：两个收敛级数可逐项线性组合；若一个收敛、一个发散且两个系数均非零，则组合必发散。",
+        "noteEn": "Linearity: two convergent series combine term by term; if one converges and the other diverges with both coefficients nonzero, the combination diverges."
+      }
+    ],
+    "expression": {
+      "text": "∑(n=1…∞) uₙ = S",
+      "symbol": "\\sum_{n=1}^{\\infty}u_n",
+      "note": "级数的和由部分和数列的极限定义；求级数和就是先算 $S_n$，再取 $n\\to\\infty$ 的极限。",
+      "noteEn": "A series' sum is the limit of its partial sums: compute $S_n$ first, then let $n\\to\\infty$."
+    },
+    "properties": [
+      "级数收敛的充要条件是部分和数列 $\\{S_n\\}$ 收敛；发散级数没有和。",
+      "收敛的必要条件：通项 $u_n\\to0$；反之不成立，调和级数 $\\sum\\frac1n$ 是标准反例。",
+      "改变有限项不影响级数的敛散性，但收敛时会改变级数的和。",
+      "线性性质：两个收敛级数的线性组合收敛；一个收敛、一个发散（系数非零）时组合必发散。",
+      "收敛时余项 $R_n\\to0$，所以可以用部分和近似级数的和并控制误差。"
+    ],
+    "propertiesEn": [
+      "A series converges if and only if its partial sums converge; a divergent series has no sum.",
+      "Necessary condition: the general term tends to 0; the converse fails — the harmonic series is the standard counterexample.",
+      "Changing finitely many terms does not affect convergence, but it does change the sum when the series converges.",
+      "Linearity: a linear combination of two convergent series converges; if one converges and the other diverges with both coefficients nonzero, the combination diverges.",
+      "For a convergent series the remainder satisfies $R_n\\to0$, so partial sums approximate the sum with controllable error."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1 - 0.5^x", "color": "#4cc9f0", "label": "Sₙ = 1 − (1/2)ⁿ（部分和）" },
+        { "expr": "1", "color": "#ff6b9d", "label": "极限 S = 1" }
+      ],
+      "xRange": [1, 12],
+      "yRange": [0, 1.3],
+      "title": "等比级数 ∑(1/2)ⁿ 的部分和 Sₙ = 1 − (1/2)ⁿ 趋近于 1"
+    },
+    "examples": [
+      {
+        "problem": "判断级数 $\\sum_{n=0}^{\\infty}\\left(\\frac{2}{3}\\right)^n$ 是否收敛；若收敛，求它的和。",
+        "solution": "这是首项 $a=1$、公比 $r=\\frac23$ 的几何级数。因为 $|r|=\\frac23<1$，级数收敛，且\n$$\\sum_{n=0}^{\\infty}\\left(\\frac{2}{3}\\right)^n=\\frac{1}{1-\\frac23}=3.$$\n从部分和看也一样：$S_n=\\frac{1-\\left(\\frac23\\right)^{n+1}}{1-\\frac23}\\to3$。"
+      },
+      {
+        "problem": "判断级数 $\\sum_{n=1}^{\\infty}\\frac{n}{2n+1}$ 的敛散性。",
+        "solution": "先看通项：$\\lim_{n\\to\\infty}\\frac{n}{2n+1}=\\frac12\\neq0$。由收敛的必要条件（用其逆否命题），通项不趋于 0 的级数一定发散，所以该级数发散。注意这里根本不需要做别的计算——先检查通项是最省力的第一步。"
+      }
+    ],
+    "tags": ["无穷级数", "部分和", "等比级数", "收敛"],
+    "links": ["sequence-limit", "limit", "harmonic-series", "series-convergence-tests", "power-series"]
+  },
+  {
+    "id": "harmonic-series",
+    "title": "调和级数",
+    "titleEn": "Harmonic Series",
+    "branch": "sequence",
+    "level": 4,
+    "summary": "各项为 1/n 的级数：通项趋于 0 却发散，部分和以 ln n 的速度极其缓慢地增长到无穷。",
+    "summaryEn": "The series with terms 1/n: its general term tends to 0 yet it diverges, with partial sums growing to infinity like ln n.",
+    "definition": "各项为全体正整数倒数的级数\n$$\\sum_{n=1}^{\\infty}\\frac1n=1+\\frac12+\\frac13+\\cdots+\\frac1n+\\cdots$$\n称为**调和级数**，它的前 $n$ 项和 $H_n=1+\\frac12+\\cdots+\\frac1n$ 称为**调和数**。尽管通项 $\\frac1n\\to0$，调和级数却是**发散**的：部分和 $H_n$ 单调递增且无上界，趋向 $+\\infty$。它是「通项趋于 0 不能保证收敛」的标准反例。\n\n最经典的分组证明：把各项按 $1$ 项、$2$ 项、$4$ 项、……分组，\n$$H_{2^k}=1+\\frac12+\\left(\\frac13+\\frac14\\right)+\\left(\\frac15+\\cdots+\\frac18\\right)+\\cdots+\\left(\\frac1{2^{k-1}+1}+\\cdots+\\frac1{2^k}\\right).$$\n从 $\\frac12$ 起，第 $j$ 组含 $2^{j-1}$ 项、每项不小于该组最后一项 $\\frac1{2^j}$，故组和至少为 $2^{j-1}\\cdot\\frac1{2^j}=\\frac12$；这样的组共有 $k$ 个，于是\n$$H_{2^k}\\ge1+\\frac{k}{2},$$\n当 $k\\to\\infty$ 时右端趋于无穷，部分和无上界，级数发散。\n\n调和级数发散得极慢：可以证明 $\\ln(n+1)\\le H_n\\le1+\\ln n$，更精确地 $H_n=\\ln n+\\gamma+o(1)$，其中 $\\gamma\\approx0.5772$ 是欧拉-马歇罗尼常数。要让部分和超过 10，需要大约 $e^{10-\\gamma}\\approx12367$ 项。通项明明趋于 0，和却慢慢爬到无穷——调和级数是「必要条件不是充分条件」的著名见证。",
+    "definitionEn": "The series of reciprocals of the positive integers,\n$$\\sum_{n=1}^{\\infty}\\frac1n=1+\\frac12+\\frac13+\\cdots,$$\nis called the **harmonic series**, and its partial sums $H_n=1+\\frac12+\\cdots+\\frac1n$ are the **harmonic numbers**. Although the general term $\\frac1n\\to0$, the harmonic series **diverges**: the partial sums increase monotonically and are unbounded, tending to $+\\infty$. It is the standard example showing that a vanishing general term does not guarantee convergence.\n\nThe classic grouping proof: block the terms as $1$ term, $2$ terms, $4$ terms, and so on,\n$$H_{2^k}=1+\\frac12+\\left(\\frac13+\\frac14\\right)+\\left(\\frac15+\\cdots+\\frac18\\right)+\\cdots+\\left(\\frac1{2^{k-1}+1}+\\cdots+\\frac1{2^k}\\right).$$\nFrom $\\frac12$ onward, the $j$-th block contains $2^{j-1}$ terms, each at least as large as the block's last term $\\frac1{2^j}$, so each block sums to at least $\\frac12$; there are $k$ such blocks, hence\n$$H_{2^k}\\ge1+\\frac{k}{2}\\to+\\infty.$$\nThe partial sums are unbounded and the series diverges.\n\nThe divergence is extremely slow: one can prove $\\ln(n+1)\\le H_n\\le1+\\ln n$, and more precisely $H_n=\\ln n+\\gamma+o(1)$, where $\\gamma\\approx0.5772$ is the Euler–Mascheroni constant. Reaching a partial sum of 10 requires about $e^{10-\\gamma}\\approx12367$ terms. The terms tend to 0 while the sum creeps to infinity — the harmonic series is the famous witness that the necessary condition is not sufficient.",
+    "formulas": [
+      {
+        "latex": "H_n=\\sum_{k=1}^{n}\\frac1k,\\qquad \\sum_{n=1}^{\\infty}\\frac1n=+\\infty",
+        "note": "调和数与调和级数的定义：部分和 $H_n$ 单调递增且无上界，级数发散到 $+\\infty$。",
+        "noteEn": "Harmonic numbers and the harmonic series: the partial sums are increasing and unbounded, so the series diverges to $+\\infty$."
+      },
+      {
+        "latex": "H_{2^k}\\ \\ge\\ 1+\\frac{k}{2}",
+        "note": "分组法的结论：从 $\\frac12$ 起每组之和至少为 $\\frac12$，共有 $k$ 组；项数每翻一倍，和至少再添 $\\frac12$。",
+        "noteEn": "The grouping bound: from $\\frac12$ on, each block contributes at least $\\frac12$; every doubling of the number of terms adds at least $\\frac12$."
+      },
+      {
+        "latex": "\\ln(n+1)\\le H_n\\le 1+\\ln n",
+        "note": "用积分与矩形面积的比较得到，说明 $H_n$ 与 $\\ln n$ 同阶：这就是它「发散得几乎看不出来」的原因。",
+        "noteEn": "Obtained by comparing sums with integrals: $H_n$ grows like $\\ln n$, which is why the divergence is barely visible."
+      },
+      {
+        "latex": "H_n=\\ln n+\\gamma+o(1)",
+        "note": "欧拉-马歇罗尼常数 $\\gamma\\approx0.5772$：$H_n$ 只比 $\\ln n$ 多出一个常数。",
+        "noteEn": "With the Euler–Mascheroni constant $\\gamma\\approx0.5772$, the harmonic number exceeds $\\ln n$ by essentially a constant."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}\\frac{1}{n^p}\\ \\text{收敛}\\iff p>1",
+        "note": "推广的调和级数（$p$ 级数）判据：$p=1$ 是临界线，指数稍微大于 1 就收敛（如 $\\sum1/n^2$）。",
+        "noteEn": "The p-series criterion: $p=1$ is the borderline; raising the exponent even slightly (e.g. $\\sum1/n^2$) makes the series converge."
+      }
+    ],
+    "expression": {
+      "text": "Hₙ = 1 + 1/2 + ⋯ + 1/n  →  +∞",
+      "symbol": "H_n=\\sum_{k=1}^{n}\\frac{1}{k}",
+      "note": "通项 $\\frac1n$ 趋于 0，部分和却无上界——「通项趋于 0」只是收敛的必要条件。",
+      "noteEn": "The terms $1/n$ tend to 0 while the partial sums are unbounded: $u_n\\to0$ is necessary but not sufficient."
+    },
+    "properties": [
+      "通项 $\\frac1n\\to0$ 但 $H_n$ 无上界，级数发散——「必要条件不充分」的经典反例。",
+      "发散极慢：$H_{1000}\\approx7.49$，$H_{10^6}\\approx14.39$，增长与 $\\ln n$ 同阶。",
+      "部分和严格递增：$H_{n+1}=H_n+\\frac1{n+1}>H_n$，且最终超过任意给定的数。",
+      "删去或改变有限多项不影响发散；但把指数稍加到 $p>1$（如 $\\sum1/n^2$）就收敛，$p=1$ 是分界线。",
+      "分组估计 $H_{2^k}\\ge1+\\frac{k}{2}$：项数每翻一倍，和至少增加 $\\frac12$，由此可推出无上界。"
+    ],
+    "propertiesEn": [
+      "The terms $1/n\\to0$ yet $H_n$ is unbounded, so the series diverges — the classic example showing the necessary condition is not sufficient.",
+      "It diverges extremely slowly: $H_{1000}\\approx7.49$ and $H_{10^6}\\approx14.39$, growing like $\\ln n$.",
+      "The partial sums are strictly increasing, $H_{n+1}=H_n+\\frac1{n+1}$, and eventually exceed any prescribed number.",
+      "Deleting or changing finitely many terms preserves divergence; raising the exponent so that $p>1$ (e.g. $\\sum1/n^2$) makes it converge, with $p=1$ the borderline.",
+      "The grouping bound $H_{2^k}\\ge1+\\frac{k}{2}$ shows every doubling of the number of terms adds at least $\\frac12$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "ln(x)", "color": "#4cc9f0", "label": "y = ln x（与 Hₙ 同阶）" },
+        { "expr": "ln(x) + 1", "color": "#ff6b9d", "label": "y = 1 + ln x（上界）" },
+        { "expr": "ln(x) + 0.5772", "color": "#06d6a0", "label": "y = ln x + γ（Hₙ 的近似）" }
+      ],
+      "xRange": [1, 30],
+      "yRange": [0, 5],
+      "title": "调和级数部分和 Hₙ 与 ln n 同阶增长（Hₙ ≈ ln n + γ，用连续曲线示意）"
+    },
+    "examples": [
+      {
+        "problem": "用分组法证明调和级数 $\\sum_{n=1}^{\\infty}\\frac1n$ 发散。",
+        "solution": "把各项按 $1$ 项、$2$ 项、$4$ 项、……分组：\n$$H_{2^k}=1+\\frac12+\\left(\\frac13+\\frac14\\right)+\\left(\\frac15+\\cdots+\\frac18\\right)+\\cdots+\\left(\\frac1{2^{k-1}+1}+\\cdots+\\frac1{2^k}\\right).$$\n从 $\\frac12$ 起，第 $j$ 组含 $2^{j-1}$ 项，每项都不小于该组最后一项 $\\frac1{2^j}$，所以组和至少为 $2^{j-1}\\cdot\\frac1{2^j}=\\frac12$。这样的组共 $k$ 个，因此\n$$H_{2^k}\\ge1+\\underbrace{\\frac12+\\frac12+\\cdots+\\frac12}_{k\\ \\text{个}}=1+\\frac{k}{2}.$$\n令 $k\\to\\infty$，则 $H_{2^k}\\to+\\infty$，部分和无上界，故级数发散。"
+      },
+      {
+        "problem": "估计使调和级数的部分和 $H_n>10$ 所需的项数。",
+        "solution": "用近似公式 $H_n\\approx\\ln n+\\gamma$，令 $\\ln n+0.5772\\approx10$，得 $\\ln n\\approx9.4228$，$n\\approx e^{9.4228}\\approx12367$：前一万两千多项的和才刚刚超过 10。若用严格估计 $H_{2^k}\\ge1+\\frac{k}{2}$，取 $k=19$ 得 $H_{2^{19}}\\ge1+\\frac{19}{2}=10.5>10$，即 $2^{19}=524288$ 项一定够用。两种估计都说明调和级数发散得极为缓慢。"
+      }
+    ],
+    "tags": ["调和级数", "发散", "欧拉常数"],
+    "links": ["series", "series-convergence-tests", "sequence-limit", "improper-integral", "logarithmic-function"]
+  },
+  {
+    "id": "series-convergence-tests",
+    "title": "正项级数及其判别法",
+    "titleEn": "Convergence Tests for Positive Series",
+    "branch": "sequence",
+    "level": 5,
+    "summary": "正项级数收敛等价于部分和有上界；由此发展出比较、比值（达朗贝尔）与根值（柯西）等判别法，其中比值与根值在极限等于 1 时失效。",
+    "summaryEn": "A positive series converges exactly when its partial sums are bounded; from this principle come the comparison, ratio (d'Alembert) and root (Cauchy) tests, the latter two being inconclusive when the limit equals 1.",
+    "definition": "各项都非负的级数 $\\sum u_n$（$u_n\\ge0$）称为**正项级数**。它的部分和数列 $S_n$ 单调不减，由此得到一条非常干净的基本定理：**正项级数收敛的充要条件是部分和数列有上界**：\n$$\\sum_{n=1}^{\\infty}u_n\\ \\text{收敛}\\iff \\exists\\,M>0,\\ S_n\\le M\\ (\\forall n).$$\n也就是说，只要能证明 $S_n\\le M$ 就可以断定级数收敛，完全不需要求出和；以下的判别法都建立在这一原理之上。\n\n**比较判别法**：若从某一项起 $0\\le u_n\\le v_n$，则 $\\sum v_n$ 收敛可推出 $\\sum u_n$ 收敛，$\\sum u_n$ 发散可推出 $\\sum v_n$ 发散。实用的是它的极限形式：若 $\\lim\\limits_{n\\to\\infty}\\frac{u_n}{v_n}=l$，则当 $0<l<+\\infty$ 时两个级数同敛散；$l=0$ 时由 $\\sum v_n$ 收敛可得 $\\sum u_n$ 收敛；$l=+\\infty$ 时由 $\\sum v_n$ 发散可得 $\\sum u_n$ 发散。找对参照级数（几何级数或 $p$ 级数）是关键。\n\n**比值判别法（达朗贝尔）**：设 $\\lim\\limits_{n\\to\\infty}\\frac{u_{n+1}}{u_n}=\\rho$。若 $\\rho<1$，级数收敛；若 $\\rho>1$（含 $+\\infty$），级数发散（此时通项不趋于 0）；若 $\\rho=1$，判别法失效，必须改用其他方法。**根值判别法（柯西）**：设 $\\lim\\limits_{n\\to\\infty}\\sqrt[n]{u_n}=\\rho$，结论与比值判别法完全相同，同样在 $\\rho=1$ 时失效。含阶乘、连乘的项适合比值判别法，含 $n$ 次幂的项适合根值判别法。\n\n$p$ 级数 $\\sum\\frac1{n^p}$ 是整个理论的标尺：$p>1$ 时收敛，$p\\le1$ 时发散（$p=1$ 即调和级数）。它可以用**积分判别法**证明：若 $f$ 在 $[1,+\\infty)$ 上正、连续、单调递减且 $u_n=f(n)$，则 $\\sum f(n)$ 与 $\\int_1^{+\\infty}f(x)\\,dx$ 同敛散。",
+    "definitionEn": "A series with nonnegative terms, $\\sum u_n$ with $u_n\\ge0$, is called a **positive series**. Its partial sums $S_n$ are non-decreasing, which yields a very clean principle: **a positive series converges if and only if its partial sums are bounded above**:\n$$\\sum_{n=1}^{\\infty}u_n\\ \\text{converges}\\iff \\exists\\,M>0,\\ S_n\\le M\\ \\text{for all}\\ n.$$\nConvergence can therefore be decided without ever finding the sum, and every test below rests on this principle.\n\n**Comparison test**: if $0\\le u_n\\le v_n$ from some point on, then convergence of $\\sum v_n$ forces convergence of $\\sum u_n$, and divergence of $\\sum u_n$ forces divergence of $\\sum v_n$. The limit form is the practical one: if $\\lim\\limits_{n\\to\\infty}\\frac{u_n}{v_n}=l$, then $0<l<+\\infty$ means the series share the same behaviour; $l=0$ means convergence of $\\sum v_n$ implies convergence of $\\sum u_n$; and $l=+\\infty$ means divergence of $\\sum v_n$ implies divergence of $\\sum u_n$. Choosing the right reference series (a geometric or p-series) is the key step.\n\n**Ratio test (d'Alembert)**: if $\\lim\\limits_{n\\to\\infty}\\frac{u_{n+1}}{u_n}=\\rho$, the series converges for $\\rho<1$, diverges for $\\rho>1$ (the terms then fail to tend to 0), and the test is inconclusive for $\\rho=1$, so another method is required. **Root test (Cauchy)**: with $\\rho=\\lim\\limits_{n\\to\\infty}\\sqrt[n]{u_n}$ the conclusions are exactly the same, and $\\rho=1$ is again inconclusive. Factorials and products favour the ratio test; nth powers favour the root test.\n\nThe p-series $\\sum\\frac1{n^p}$ is the yardstick of the theory: it converges exactly when $p>1$ and diverges for $p\\le1$ (the case $p=1$ being the harmonic series). This follows from the **integral test**: if $f$ is positive, continuous and decreasing on $[1,+\\infty)$ with $u_n=f(n)$, then $\\sum f(n)$ and $\\int_1^{+\\infty}f(x)\\,dx$ converge or diverge together.",
+    "formulas": [
+      {
+        "latex": "\\sum_{n=1}^{\\infty}u_n\\ \\text{收敛}\\iff S_n=\\sum_{k=1}^{n}u_k\\ \\text{有上界}\\quad(u_n\\ge0)",
+        "note": "正项级数的基本定理：部分和单调不减，因此「收敛」与「有上界」等价——不必求和也能判定敛散性。",
+        "noteEn": "Fundamental principle: partial sums of a positive series are non-decreasing, so convergence is equivalent to being bounded above."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}\\frac1{n^p}\\ \\text{收敛}\\iff p>1",
+        "note": "$p$ 级数判据（由积分判别法证明）：$p>1$ 收敛，$p\\le1$ 发散；$p=1$ 即调和级数。",
+        "noteEn": "The p-series criterion (proved by the integral test): converges iff $p>1$; the case $p=1$ is the harmonic series."
+      },
+      {
+        "latex": "\\lim_{n\\to\\infty}\\frac{u_n}{v_n}=l\\ (0<l<+\\infty)\\ \\Longrightarrow\\ \\sum u_n\\ \\text{与}\\ \\sum v_n\\ \\text{同敛散}",
+        "note": "比较判别法的极限形式：通项与标准级数通项之比趋于正常数时，两级数同敛散。",
+        "noteEn": "Limit form of the comparison test: if the ratio of the terms tends to a positive finite number, the two series behave alike."
+      },
+      {
+        "latex": "\\lim_{n\\to\\infty}\\frac{u_{n+1}}{u_n}=\\rho:\\quad \\rho<1\\ \\text{收敛},\\qquad \\rho>1\\ \\text{发散},\\qquad \\rho=1\\ \\text{失效}",
+        "note": "比值判别法（达朗贝尔）：$\\rho>1$ 时通项不趋于 0，级数发散；$\\rho=1$ 时必须改用其他判别法。",
+        "noteEn": "Ratio test (d'Alembert): for $\\rho>1$ the terms do not tend to 0; for $\\rho=1$ the test gives no information."
+      },
+      {
+        "latex": "\\lim_{n\\to\\infty}\\sqrt[n]{u_n}=\\rho:\\quad \\rho<1\\ \\text{收敛},\\qquad \\rho>1\\ \\text{发散},\\qquad \\rho=1\\ \\text{失效}",
+        "note": "根值判别法（柯西）：结论与比值判别法相同，对含 $n$ 次幂的结构尤其方便；$\\rho=1$ 时同样失效。",
+        "noteEn": "Root test (Cauchy): same conclusions as the ratio test and especially handy for nth powers; again inconclusive at $\\rho=1$."
+      }
+    ],
+    "expression": {
+      "text": "ρ = lim uₙ₊₁/uₙ  或  ρ = lim ⁿ√uₙ",
+      "symbol": "\\rho=\\lim_{n\\to\\infty}\\frac{u_{n+1}}{u_n}",
+      "note": "两类判别法都只在 $\\rho\\neq1$ 时给出结论；一旦得到 $\\rho=1$，改用 $p$ 级数或比较判别法。",
+      "noteEn": "Both tests work only for $\\rho\\neq1$; when $\\rho=1$, switch to a p-series or the comparison test."
+    },
+    "properties": [
+      "正项级数收敛 $\\iff$ 部分和数列有上界；判敛散性不需要求出和。",
+      "比值与根值判别法：$\\rho<1$ 收敛，$\\rho>1$ 发散，$\\rho=1$ 失效，三句话缺一不可。",
+      "$\\rho=1$ 失效的典型例子：$\\sum\\frac1n$ 发散而 $\\sum\\frac1{n^2}$ 收敛，二者的比值、根值极限都等于 1。",
+      "比较判别法先看通项的主部，选取与它同阶的 $p$ 级数或几何级数作为参照。",
+      "判别式中的不等式只需从某一项起成立，因为改变有限项不影响敛散性。"
+    ],
+    "propertiesEn": [
+      "A positive series converges iff its partial sums are bounded above; no evaluation of the sum is needed.",
+      "Ratio and root tests: convergence for $\\rho<1$, divergence for $\\rho>1$, inconclusive for $\\rho=1$ — all three cases matter.",
+      "The case $\\rho=1$ is genuinely ambiguous: $\\sum1/n$ diverges while $\\sum1/n^2$ converges, yet both give ratio and root limits equal to 1.",
+      "For the comparison test, compare the dominant part of $u_n$ with a p-series or geometric series of the same order.",
+      "Inequalities in the tests only need to hold eventually, since finitely many terms do not affect convergence."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1/x", "color": "#4cc9f0", "label": "y = 1/x（∑1/n 发散）" },
+        { "expr": "1/x^2", "color": "#06d6a0", "label": "y = 1/x²（∑1/n² 收敛）" }
+      ],
+      "fills": [
+        { "expr": "1/x", "from": 1, "to": 5, "base": 0, "color": "#4cc9f0", "label": "∫₁⁵ 1/x dx = ln 5" },
+        { "expr": "1/x^2", "from": 1, "to": 5, "base": 0, "color": "#06d6a0", "label": "∫₁⁵ 1/x² dx（有界）" }
+      ],
+      "xRange": [1, 5],
+      "yRange": [0, 1.2],
+      "title": "积分判别法示意：∑1/n 与 ∫₁^∞(1/x)dx 同发散，而 ∑1/n² 收敛"
+    },
+    "examples": [
+      {
+        "problem": "判断级数 $\\sum_{n=1}^{\\infty}\\frac{n+1}{n^3+2}$ 的敛散性。",
+        "solution": "通项与 $\\frac1{n^2}$ 同阶。用比较判别法的极限形式，取 $v_n=\\frac1{n^2}$：\n$$\\lim_{n\\to\\infty}\\frac{u_n}{v_n}=\\lim_{n\\to\\infty}\\frac{n^2(n+1)}{n^3+2}=\\lim_{n\\to\\infty}\\frac{n^3+n^2}{n^3+2}=1\\in(0,+\\infty).$$\n而 $\\sum\\frac1{n^2}$ 是 $p=2>1$ 的 $p$ 级数，收敛，所以原级数收敛。"
+      },
+      {
+        "problem": "判断级数 $\\sum_{n=1}^{\\infty}\\frac{2^n}{n!}$ 的敛散性。",
+        "solution": "通项含阶乘与幂，用比值判别法：\n$$\\frac{u_{n+1}}{u_n}=\\frac{2^{n+1}}{(n+1)!}\\cdot\\frac{n!}{2^n}=\\frac{2}{n+1}\\to0<1,$$\n所以级数收敛（事实上它的和为 $e^2-1$）。"
+      },
+      {
+        "problem": "判断级数 $\\sum_{n=1}^{\\infty}\\left(\\frac{n}{2n+1}\\right)^n$ 的敛散性。",
+        "solution": "通项是 $n$ 次幂的形式，用根值判别法：\n$$\\sqrt[n]{u_n}=\\frac{n}{2n+1}\\to\\frac12<1,$$\n所以级数收敛。"
+      }
+    ],
+    "tags": ["正项级数", "判别法", "比值判别法", "p级数"],
+    "links": ["series", "harmonic-series", "limit-laws", "improper-integral"]
+  },
+  {
+    "id": "alternating-series",
+    "title": "交错级数与绝对收敛",
+    "titleEn": "Alternating Series and Absolute Convergence",
+    "branch": "sequence",
+    "level": 5,
+    "summary": "正负交替的级数：莱布尼茨判别法给出「单调递减且趋于 0 即收敛」的简洁判据；绝对收敛蕴含收敛，条件收敛则不然。",
+    "summaryEn": "Series with alternating signs: the Leibniz test converges them when the terms decrease monotonically to 0; absolute convergence implies convergence, conditional convergence does not.",
+    "definition": "各项正负交替出现的级数称为**交错级数**，标准形式是\n$$\\sum_{n=1}^{\\infty}(-1)^{n-1}u_n=u_1-u_2+u_3-u_4+\\cdots,\\qquad u_n>0.$$\n**莱布尼茨判别法**给出一个简单好用的收敛判据：若 (1) $u_n$ 单调递减（至少从某一项起 $u_n\\ge u_{n+1}$），(2) $\\lim\\limits_{n\\to\\infty}u_n=0$，则交错级数收敛，而且余项满足 $|R_n|=|S-S_n|\\le u_{n+1}$。两个条件缺一不可，特别是单调性不能去掉。莱布尼茨判别法还有一个诱人之处：误差估计极其方便——用前 $n$ 项近似级数的和，误差不超过被舍弃的第一项的绝对值。\n\n交错级数把「收敛」分成两个层次。如果 $\\sum|u_n|$ 收敛，就称 $\\sum u_n$ **绝对收敛**；如果 $\\sum u_n$ 收敛而 $\\sum|u_n|$ 发散，就称 $\\sum u_n$ **条件收敛**。**绝对收敛一定收敛**，因为取绝对值后本质上是正项级数，符号不再捣乱；反之不成立：$\\sum(-1)^{n-1}\\frac1n$ 收敛于 $\\ln2$，但绝对值级数 $\\sum\\frac1n$ 是发散的调和级数，所以它只是条件收敛。\n\n两类收敛的差别远不止定义：绝对收敛的级数可以任意改变求和次序、可以像有限和一样自由合并拆项，和都不变；而条件收敛的级数一旦重排，和可能变成任何指定的数（黎曼重排定理），所以对它做运算必须格外小心。",
+    "definitionEn": "A series whose terms alternate in sign is called an **alternating series**; the standard form is\n$$\\sum_{n=1}^{\\infty}(-1)^{n-1}u_n=u_1-u_2+u_3-u_4+\\cdots,\\qquad u_n>0.$$\nThe **Leibniz test** gives a simple and handy convergence criterion: if (i) $u_n$ is non-increasing (at least eventually, $u_n\\ge u_{n+1}$) and (ii) $\\lim\\limits_{n\\to\\infty}u_n=0$, then the series converges, and moreover $|R_n|=|S-S_n|\\le u_{n+1}$. Both hypotheses are essential — in particular monotonicity cannot be dropped — and the error bound is what makes alternating series so pleasant in computation: using the first $n$ terms, the error never exceeds the absolute value of the first omitted term.\n\nThis setting splits convergence into two levels. If $\\sum|u_n|$ converges, then $\\sum u_n$ is **absolutely convergent**; if $\\sum u_n$ converges but $\\sum|u_n|$ diverges, it is **conditionally convergent**. Absolute convergence implies convergence, since stripping the signs reduces the question to a positive series. The converse fails: $\\sum(-1)^{n-1}/n$ converges to $\\ln2$, while the series of absolute values $\\sum1/n$ diverges as the harmonic series — so it is only conditionally convergent.\n\nThe difference between the two notions is substantial: absolutely convergent series may be rearranged, split and regrouped freely without changing the sum, whereas by Riemann's rearrangement theorem a conditionally convergent series can be rearranged to produce any prescribed sum. Operations on conditionally convergent series must therefore be handled with great care.",
+    "formulas": [
+      {
+        "latex": "u_n\\ \\text{单调递减},\\quad \\lim_{n\\to\\infty}u_n=0\\ \\Longrightarrow\\ \\sum_{n=1}^{\\infty}(-1)^{n-1}u_n\\ \\text{收敛}",
+        "note": "莱布尼茨判别法：两个条件（通项绝对值单调递减、趋于 0）必须同时验证，满足即收敛。",
+        "noteEn": "The Leibniz test: verify that $u_n$ decreases monotonically to 0; both hypotheses together guarantee convergence."
+      },
+      {
+        "latex": "|R_n|=|S-S_n|\\le u_{n+1}",
+        "note": "余项估计：截断误差不超过被舍弃的第一项的绝对值，这是交错级数在实践中受欢迎的原因。",
+        "noteEn": "Remainder estimate: the truncation error is bounded by the first omitted term — the reason alternating series are so popular in practice."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n}=1-\\frac12+\\frac13-\\cdots=\\ln 2",
+        "note": "交错调和级数收敛于 $\\ln2$，但绝对值级数是调和级数（发散），因此是条件收敛的典型例子。",
+        "noteEn": "The alternating harmonic series converges to $\\ln2$, while its absolute-value series diverges: the model of conditional convergence."
+      },
+      {
+        "latex": "\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{2n+1}=1-\\frac13+\\frac15-\\cdots=\\frac{\\pi}{4}",
+        "note": "莱布尼茨级数：最古老的 $\\pi$ 级数之一；收敛较慢，但误差估计非常容易。",
+        "noteEn": "Leibniz's series for $\\pi$: one of the oldest, converging slowly but with an effortless error bound."
+      },
+      {
+        "latex": "\\sum_{n=1}^{\\infty}|u_n|\\ \\text{收敛}\\ \\Longrightarrow\\ \\sum_{n=1}^{\\infty}u_n\\ \\text{收敛}",
+        "note": "绝对收敛蕴含收敛（且 $\\left|\\sum u_n\\right|\\le\\sum|u_n|$）；逆命题不成立，条件收敛就是反例。",
+        "noteEn": "Absolute convergence implies convergence (with $\\left|\\sum u_n\\right|\\le\\sum|u_n|$); the converse fails, conditional convergence being the counterexample."
+      }
+    ],
+    "expression": {
+      "text": "u₁ − u₂ + u₃ − u₄ + ⋯,  uₙ>0 单调递减且 → 0",
+      "symbol": "\\sum_{n=1}^{\\infty}(-1)^{n-1}u_n",
+      "note": "莱布尼茨判别法：通项绝对值单调递减且趋于 0 即可判定收敛；误差不超过被舍弃的第一项。",
+      "noteEn": "Leibniz test: once $|u_n|$ decreases monotonically to 0 the series converges, with error bounded by the first omitted term."
+    },
+    "properties": [
+      "莱布尼茨判别法的两个条件（单调递减、趋于 0）必须同时验证；缺少单调性时结论可能不成立。",
+      "交错级数的部分和在极限两侧摆动：奇数项部分和递减、偶数项部分和递增，真正的和被夹在两者之间。",
+      "绝对收敛 $\\Rightarrow$ 收敛；反之不成立，$\\sum(-1)^{n-1}/n$ 条件收敛说明两个概念确实不同。",
+      "绝对收敛级数可任意重排、合并、拆项而不改变和；条件收敛级数重排后和会改变（黎曼重排定理）。",
+      "判断顺序建议：先「去符号」考查 $\\sum|u_n|$，绝对收敛最省事；若失败再用莱布尼茨判别法验证条件收敛。"
+    ],
+    "propertiesEn": [
+      "Both Leibniz hypotheses — monotone decrease and limit zero — must be verified; without monotonicity the conclusion can fail.",
+      "For a standard alternating series the odd partial sums decrease, the even ones increase, and the true sum is trapped between them.",
+      "Absolute convergence implies convergence, but not conversely: $\\sum(-1)^{n-1}/n$ is only conditionally convergent.",
+      "Absolutely convergent series may be rearranged, merged or split freely; conditionally convergent ones may not — a rearrangement can produce any prescribed sum (Riemann's theorem).",
+      "Strategy: first test $\\sum|u_n|$ for absolute convergence; if that fails, apply the Leibniz test to detect conditional convergence."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)/x", "color": "#4cc9f0", "label": "u(x) = sin x / x（振荡趋于 0）" },
+        { "expr": "1/x", "color": "#ff6b9d", "label": "y = 1/x（上包络）" },
+        { "expr": "-1/x", "color": "#06d6a0", "label": "y = −1/x（下包络）" }
+      ],
+      "xRange": [2, 30],
+      "yRange": [-0.6, 0.6],
+      "title": "交错级数通项振荡地趋于 0：以 sin x / x 示意，振幅被 ±1/x 包住"
+    },
+    "examples": [
+      {
+        "problem": "判断级数 $\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{\\sqrt{n}}$ 是否收敛；它是否绝对收敛？",
+        "solution": "记 $u_n=\\frac1{\\sqrt n}$，则 $u_n$ 单调递减且 $u_n\\to0$，由莱布尼茨判别法，交错级数收敛。再看绝对值级数 $\\sum\\frac1{\\sqrt n}=\\sum\\frac1{n^{1/2}}$，这是 $p=\\frac12\\le1$ 的 $p$ 级数，发散。因此原级数**条件收敛**。"
+      },
+      {
+        "problem": "用交错调和级数 $\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n}=\\ln2$ 作近似，要使误差不超过 $0.01$，至少需要取多少项？",
+        "solution": "由莱布尼茨余项估计，$|R_n|\\le u_{n+1}=\\frac1{n+1}$。要求 $\\frac1{n+1}\\le0.01$，即 $n+1\\ge100$，故 $n\\ge99$：取前 99 项即可保证误差不超过 $0.01$。"
+      }
+    ],
+    "tags": ["交错级数", "绝对收敛", "条件收敛", "莱布尼茨判别法"],
+    "links": ["series", "harmonic-series", "series-convergence-tests", "power-series", "logarithm"]
+  },
+  {
+    "id": "power-series",
+    "title": "幂级数",
+    "titleEn": "Power Series",
+    "branch": "sequence",
+    "level": 5,
+    "summary": "形如 ∑aₙ(x−x₀)ⁿ 的级数：在收敛半径内绝对收敛、可逐项求导积分，端点的敛散性必须单独讨论。",
+    "summaryEn": "Series of the form ∑aₙ(x−x₀)ⁿ: absolutely convergent inside the radius of convergence and differentiable term by term, with endpoints requiring separate discussion.",
+    "definition": "形如\n$$\\sum_{n=0}^{\\infty}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+\\cdots$$\n的级数称为**幂级数**，其中 $x$ 是变量，$a_n$ 是系数，$x_0$ 称为中心。幂级数是「函数的无穷次多项式」，它把级数从数推广到函数，是表示、计算和研究函数的重要工具。\n\n幂级数的收敛性由一条优美的定理刻画：必定存在 $R\\in[0,+\\infty]$（称为**收敛半径**），使得当 $|x-x_0|<R$ 时幂级数绝对收敛，当 $|x-x_0|>R$ 时发散；而在端点 $x=x_0\\pm R$ 处，敛散性必须**单独讨论**，收敛与发散两种情形都可能出现。全部收敛点构成以 $x_0$ 为中心的区间（$R=0$ 时退化为一点，$R=+\\infty$ 时为整个数轴）。收敛半径的常用求法是：若 $\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|$ 存在（或为 $+\\infty$），则\n$$R=\\frac{1}{\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|}=\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|;$$\n更一般地，柯西-阿达马公式 $R=\\frac1{\\limsup\\limits_{n\\to\\infty}\\sqrt[n]{|a_n|}}$ 总是成立。\n\n在收敛区间内部，幂级数的行为像多项式一样好：可以逐项求导、逐项积分，所得幂级数与原级数有相同的收敛半径，和函数在区间内无穷次可导。把几何级数 $\\sum\\limits_{n=0}^{\\infty}x^n=\\frac1{1-x}$（$|x|<1$）逐项求导，就得到 $\\sum\\limits_{n=1}^{\\infty}nx^{n-1}=\\frac1{(1-x)^2}$ 等一批常用展开。反过来，若函数能展开成幂级数，则系数可由逐次求导唯一确定：$a_n=\\frac{f^{(n)}(x_0)}{n!}$——这正是泰勒级数的来源。",
+    "definitionEn": "A series of the form\n$$\\sum_{n=0}^{\\infty}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+\\cdots,$$\nin the variable $x$ with coefficients $a_n$ and centre $x_0$, is called a **power series**. It is an 「infinitely long polynomial」 and extends series from numbers to functions.\n\nIts convergence is governed by a sharp dichotomy: there always exists $R\\in[0,+\\infty]$, the **radius of convergence**, such that the series converges absolutely for $|x-x_0|<R$ and diverges for $|x-x_0|>R$. At the endpoints $x=x_0\\pm R$ the behaviour must be **examined separately** — either endpoint may converge or diverge. The convergence set is therefore an interval centred at $x_0$ (a single point when $R=0$, the whole line when $R=+\\infty$). When $\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|$ exists (possibly $+\\infty$),\n$$R=\\frac{1}{\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|}=\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|;$$\nthe general Cauchy–Hadamard formula $R=1/\\limsup\\sqrt[n]{|a_n|}$ always applies.\n\nInside the interval a power series behaves like a polynomial: it may be differentiated and integrated term by term without changing the radius, and its sum function is infinitely differentiable. Differentiating the geometric series $\\sum x^n=1/(1-x)$ on $|x|<1$ produces $\\sum nx^{n-1}=1/(1-x)^2$ and many other useful expansions. Conversely, if a function can be represented by a power series, its coefficients are uniquely determined by the derivatives: $a_n=f^{(n)}(x_0)/n!$ — the seed of the Taylor series.",
+    "formulas": [
+      {
+        "latex": "\\sum_{n=0}^{\\infty}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+\\cdots",
+        "note": "幂级数的标准形式：中心为 $x_0$，系数为 $a_n$；当 $x_0=0$ 时化为 $\\sum a_nx^n$。",
+        "noteEn": "The standard form: centre $x_0$ and coefficients $a_n$; for $x_0=0$ it reduces to $\\sum a_nx^n$."
+      },
+      {
+        "latex": "R=\\frac{1}{\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|}=\\lim_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|",
+        "note": "收敛半径的比值公式（要求极限存在或为 $+\\infty$）；一般情形用柯西-阿达马公式 $R=\\frac1{\\limsup\\sqrt[n]{|a_n|}}$。",
+        "noteEn": "Ratio formula for the radius (assuming the limit exists); in general use Cauchy–Hadamard, $R=1/\\limsup\\sqrt[n]{|a_n|}$."
+      },
+      {
+        "latex": "|x-x_0|<R\\ \\Rightarrow\\ \\text{绝对收敛};\\qquad |x-x_0|>R\\ \\Rightarrow\\ \\text{发散}",
+        "note": "结构口诀：内部绝对收敛、外部发散、端点单独讨论——把 $x=x_0\\pm R$ 代回原级数逐一检验。",
+        "noteEn": "The structure in one line: absolute convergence inside, divergence outside, and endpoints tested one by one."
+      },
+      {
+        "latex": "\\frac{1}{1-x}=\\sum_{n=0}^{\\infty}x^n\\quad(-1<x<1)",
+        "note": "最基本的幂级数展开（几何级数）；两个端点 $x=\\pm1$ 都发散，收敛域为开区间。",
+        "noteEn": "The basic expansion (geometric series); both endpoints $x=\\pm1$ diverge, so the convergence interval is open."
+      },
+      {
+        "latex": "\\left(\\sum_{n=0}^{\\infty}a_nx^n\\right)'=\\sum_{n=1}^{\\infty}na_nx^{n-1}",
+        "note": "逐项求导：收敛半径不变，逐项积分同理。这是求幂级数和函数的主要手段。",
+        "noteEn": "Term-by-term differentiation preserves the radius, and so does term-by-term integration; this is the main tool for finding sum functions."
+      }
+    ],
+    "expression": {
+      "text": "∑ aₙ(x − x₀)ⁿ,  收敛半径 R = lim |aₙ / aₙ₊₁|",
+      "symbol": "\\sum_{n=0}^{\\infty}a_n(x-x_0)^n",
+      "note": "收敛域 = 以 $x_0$ 为中心的区间，开闭情形由两个端点的单独检验决定。",
+      "noteEn": "The convergence set is an interval centred at $x_0$; whether endpoints belong to it is decided by testing each separately."
+    },
+    "properties": [
+      "收敛域是以 $x_0$ 为中心的区间：可能开、闭或半开半闭；$R=0$ 时退化为一点，$R=+\\infty$ 时为整个数轴。端点必须代入原级数单独判断。",
+      "在 $|x-x_0|<R$ 内绝对收敛（在任意闭子区间上一致收敛）；在 $|x-x_0|>R$ 处发散。",
+      "在收敛区间内部可以逐项求导、逐项积分，收敛半径不变，和函数无穷次可导。",
+      "若函数能展开为幂级数，则系数唯一：$a_n=\\frac{f^{(n)}(x_0)}{n!}$——这是泰勒级数的出发点。",
+      "阿贝尔第二定理：若幂级数在端点 $x_0+R$（或 $x_0-R$）处收敛，则和函数在该端点单侧连续。"
+    ],
+    "propertiesEn": [
+      "The convergence set is an interval centred at $x_0$ — open, closed or half-open; it shrinks to a point when $R=0$ and covers the whole line when $R=+\\infty$. Endpoints must be tested by substitution.",
+      "Inside $|x-x_0|<R$ the series converges absolutely (uniformly on closed subintervals); outside it diverges.",
+      "Inside the interval the series may be differentiated and integrated term by term without changing the radius, and its sum is infinitely differentiable.",
+      "Coefficients of a power-series representation are unique: $a_n=f^{(n)}(x_0)/n!$ — the bridge to Taylor series.",
+      "Abel's second theorem: if the series converges at an endpoint $x_0\\pm R$, the sum function is one-sided continuous there."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1/(1-x)", "color": "#ff6b9d", "label": "y = 1/(1−x)" },
+        { "expr": "1+x+x^2+x^3+x^4+x^5", "color": "#4cc9f0", "label": "S₆(x) = 1+x+⋯+x⁵" },
+        { "expr": "1+x", "color": "#06d6a0", "label": "S₂(x) = 1+x" }
+      ],
+      "xRange": [-0.9, 0.9],
+      "yRange": [-1, 6],
+      "title": "几何级数的部分和 S_N(x) 在 |x|<1 内逐项逼近 1/(1−x)"
+    },
+    "examples": [
+      {
+        "problem": "求幂级数 $\\sum_{n=1}^{\\infty}\\frac{x^n}{n}$ 的收敛半径与收敛域。",
+        "solution": "系数 $a_n=\\frac1n$，由比值公式\n$$R=\\lim_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|=\\lim_{n\\to\\infty}\\frac{\\frac1n}{\\frac1{n+1}}=\\lim_{n\\to\\infty}\\frac{n+1}{n}=1.$$\n所以在 $(-1,1)$ 内绝对收敛，在 $|x|>1$ 处发散。再看端点：$x=1$ 时级数为调和级数 $\\sum\\frac1n$，发散；$x=-1$ 时为交错调和级数 $\\sum\\frac{(-1)^n}{n}$，由莱布尼茨判别法收敛。因此收敛域为 $[-1,1)$。"
+      },
+      {
+        "problem": "利用 $\\sum_{n=0}^{\\infty}x^n=\\frac1{1-x}$ 求 $\\sum_{n=1}^{\\infty}\\frac{n}{2^n}$ 的和。",
+        "solution": "对 $|x|<1$，由几何级数 $\\sum\\limits_{n=0}^{\\infty}x^n=\\frac1{1-x}$ 逐项求导得\n$$\\sum_{n=1}^{\\infty}nx^{n-1}=\\frac{1}{(1-x)^2}.$$\n两边同乘 $x$，得 $\\sum\\limits_{n=1}^{\\infty}nx^n=\\frac{x}{(1-x)^2}$。取 $x=\\frac12$：\n$$\\sum_{n=1}^{\\infty}\\frac{n}{2^n}=\\frac{\\frac12}{\\left(\\frac12\\right)^2}=2.$$"
+      }
+    ],
+    "tags": ["幂级数", "收敛半径", "收敛域", "逐项求导"],
+    "links": ["series", "series-convergence-tests", "alternating-series", "taylor-series"]
+  },
+  {
+    "id": "taylor-series",
+    "title": "泰勒级数",
+    "titleEn": "Taylor Series",
+    "branch": "sequence",
+    "level": 5,
+    "summary": "用函数在某点的各阶导数拼成的幂级数；只有余项趋于 0 时，级数才真正等于函数值。",
+    "summaryEn": "The power series built from a function's derivatives at a point; it equals the function only when the remainder tends to 0.",
+    "definition": "设函数 $f$ 在 $x_0$ 处有任意阶导数，由这些导数可以拼出一个幂级数\n$$\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n=f(x_0)+f'(x_0)(x-x_0)+\\frac{f''(x_0)}{2!}(x-x_0)^2+\\cdots,$$\n称为 $f$ 在 $x_0$ 处的**泰勒级数**；当 $x_0=0$ 时也称为**麦克劳林级数**。它的前 $n+1$ 项和就是泰勒多项式 $T_n(x)$；而有限项的泰勒公式 $f(x)=T_n(x)+R_n(x)$ 中的 $R_n(x)$ 称为**余项**，常用的拉格朗日余项为\n$$R_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}\\quad(\\xi\\ \\text{介于}\\ x_0\\ \\text{与}\\ x\\ \\text{之间}).$$\n\n关键点在于：**泰勒级数收敛并不意味着它等于原函数**。只有当余项 $R_n(x)\\to0$（$n\\to\\infty$）时，才有\n$$f(x)=\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n.$$\n经典的警示例子是 $f(x)=e^{-1/x^2}$（$x\\neq0$）并补充定义 $f(0)=0$：它在 $0$ 处各阶导数都等于 0，麦克劳林级数恒为 0，但 $f$ 在 $0$ 的任何邻域内都不恒为 0，级数与函数「貌合神离」。这提醒我们：必须先验证余项趋于 0，才能把函数写成级数。\n\n对常用初等函数，可以直接算出麦克劳林级数并证明余项趋于 0：$e^x$、$\\sin x$、$\\cos x$ 的级数对一切实数成立；$\\ln(1+x)$ 的级数在 $(-1,1]$ 上成立；$\\frac1{1-x}$ 的级数在 $|x|<1$ 上成立。泰勒级数是幂级数最重要的应用：它把函数变成无穷多项式，用于近似计算、求极限、估计误差，也是数值计算中函数值的来源。",
+    "definitionEn": "If a function $f$ has derivatives of every order at $x_0$, these derivatives generate a power series\n$$\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n=f(x_0)+f'(x_0)(x-x_0)+\\frac{f''(x_0)}{2!}(x-x_0)^2+\\cdots,$$\ncalled the **Taylor series** of $f$ at $x_0$; when $x_0=0$ it is also called the **Maclaurin series**. Its partial sums are the Taylor polynomials $T_n(x)$, and the finite identity $f(x)=T_n(x)+R_n(x)$ (Taylor's formula) involves the **remainder**, with the Lagrange form\n$$R_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}\\quad(\\xi\\ \\text{between}\\ x_0\\ \\text{and}\\ x).$$\n\nThe crucial subtlety: **convergence of the Taylor series does not guarantee that it sums to the original function**. The identity\n$$f(x)=\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$\nholds precisely when $R_n(x)\\to0$ as $n\\to\\infty$. The standard warning example is $f(x)=e^{-1/x^2}$ for $x\\neq0$ with $f(0)=0$: all its derivatives at 0 vanish, so the Maclaurin series is identically zero, yet $f$ is not zero in any neighbourhood of 0. One must therefore prove the remainder tends to 0 before writing the function as its series.\n\nFor familiar functions the expansions and remainders can be handled explicitly: the series of $e^x$, $\\sin x$ and $\\cos x$ hold for all real $x$; that of $\\ln(1+x)$ holds on $(-1,1]$; and that of $1/(1-x)$ on $(-1,1)$. Taylor series turn functions into infinite polynomials, powering approximation, limit computations, error estimates and numerical algorithms.",
+    "formulas": [
+      {
+        "latex": "f(x)=\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n",
+        "note": "泰勒级数的定义式（此处假设等式已由余项趋于 0 保证）；$x_0=0$ 时为麦克劳林级数。",
+        "noteEn": "Definition of the Taylor series (the equality requires the remainder to vanish); the case $x_0=0$ is the Maclaurin series."
+      },
+      {
+        "latex": "R_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}",
+        "note": "拉格朗日余项，$\\xi$ 介于 $x_0$ 与 $x$ 之间；用于证明展开式成立或估计截断误差。",
+        "noteEn": "Lagrange remainder, with $\\xi$ between $x_0$ and $x$; used to justify expansions or to bound truncation errors."
+      },
+      {
+        "latex": "e^x=\\sum_{n=0}^{\\infty}\\frac{x^n}{n!}=1+x+\\frac{x^2}{2!}+\\frac{x^3}{3!}+\\cdots",
+        "note": "指数函数的麦克劳林级数，对一切实数收敛；余项满足 $|R_n(x)|\\le e^{|x|}\\frac{|x|^{n+1}}{(n+1)!}\\to0$，等式成立。",
+        "noteEn": "The Maclaurin series of the exponential, valid for all real $x$ since the remainder tends to 0."
+      },
+      {
+        "latex": "\\sin x=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad \\cos x=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}",
+        "note": "正弦、余弦的展开，对一切实数收敛；交错结构使近似误差不超过被舍弃的第一项。",
+        "noteEn": "Expansions of sine and cosine, valid for all real $x$; their alternating structure bounds the error by the first omitted term."
+      },
+      {
+        "latex": "\\ln(1+x)=\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}x^n}{n}\\quad(-1<x\\le1)",
+        "note": "对数函数的展开：$x=1$ 时收敛于 $\\ln2$（交错调和级数），$x=-1$ 时发散（调和级数），端点必须单独检验。",
+        "noteEn": "The logarithmic expansion: at $x=1$ it converges to $\\ln2$ and at $x=-1$ it diverges, so endpoints need separate checks."
+      }
+    ],
+    "expression": {
+      "text": "f(x) = Σ f⁽ⁿ⁾(x₀)/n! · (x − x₀)ⁿ （需余项 → 0）",
+      "symbol": "\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n",
+      "note": "等式成立的前提是余项 $R_n(x)\\to0$；只知道泰勒级数收敛是不够的。",
+      "noteEn": "The identity requires the remainder to satisfy $R_n(x)\\to0$; convergence of the series alone is not enough."
+    },
+    "properties": [
+      "泰勒级数的系数由函数在 $x_0$ 处的各阶导数唯一确定：$a_n=\\frac{f^{(n)}(x_0)}{n!}$。",
+      "函数等于其泰勒级数的充要条件（在收敛区间内）是 $\\lim\\limits_{n\\to\\infty}R_n(x)=0$；只验证级数收敛是不够的。",
+      "反例：$f(x)=e^{-1/x^2}$（补充定义 $f(0)=0$）的各阶导数在 0 处均为 0，麦克劳林级数恒为 0，但在 0 的任何邻域内都不等于 $f$。",
+      "泰勒多项式 $T_n(x)$ 在 $x_0$ 附近是最佳 $n$ 次逼近：$x\\to x_0$ 时误差是比 $(x-x_0)^n$ 更高阶的无穷小。",
+      "已知展开式可以通过逐项求导、积分、代换得到新展开式，例如对 $\\frac1{1+x}=\\sum(-1)^nx^n$ 积分可得 $\\ln(1+x)$ 的级数。"
+    ],
+    "propertiesEn": [
+      "The coefficients are forced by the derivatives at $x_0$: $a_n=f^{(n)}(x_0)/n!$.",
+      "The function equals its Taylor series (where the series converges) precisely when $R_n(x)\\to0$; convergence alone is not sufficient.",
+      "Counterexample: for $f(x)=e^{-1/x^2}$ with $f(0)=0$, every derivative at 0 vanishes, so the Maclaurin series is identically 0 although $f$ itself is not.",
+      "The Taylor polynomial $T_n$ is the best local degree-$n$ approximation: $f(x)-T_n(x)$ is of higher order than $(x-x_0)^n$ as $x\\to x_0$.",
+      "Known expansions yield new ones by term-by-term differentiation, integration or substitution; integrating $1/(1+x)$ gives the series for $\\ln(1+x)$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)", "color": "#ff6b9d", "label": "y = sin x" },
+        { "expr": "x - x^3/6", "color": "#4cc9f0", "label": "T₃ = x − x³/6" },
+        { "expr": "x - x^3/6 + x^5/120", "color": "#06d6a0", "label": "T₅ = x − x³/6 + x⁵/120" },
+        { "expr": "x - x^3/6 + x^5/120 - x^7/5040", "color": "#ffd166", "label": "T₇ = x − x³/6 + x⁵/120 − x⁷/5040" }
+      ],
+      "xRange": [-6.5, 6.5],
+      "yRange": [-3.5, 3.5],
+      "title": "sin x 与它的 3、5、7 阶泰勒多项式：阶数越高，逼近区间越宽"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x)=e^x$ 的麦克劳林级数，并说明它对一切实数成立。",
+        "solution": "$f^{(n)}(x)=e^x$，所以 $f^{(n)}(0)=1$（$n=0,1,2,\\dots$），麦克劳林级数为\n$$1+x+\\frac{x^2}{2!}+\\frac{x^3}{3!}+\\cdots=\\sum_{n=0}^{\\infty}\\frac{x^n}{n!}.$$\n收敛半径 $R=\\lim\\limits_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|=\\lim\\limits_{n\\to\\infty}(n+1)=+\\infty$。再看余项：$|R_n(x)|=\\frac{e^{\\xi}}{(n+1)!}|x|^{n+1}\\le e^{|x|}\\frac{|x|^{n+1}}{(n+1)!}\\to0$，所以对每个实数 $x$ 都有 $e^x=\\sum\\limits_{n=0}^{\\infty}\\frac{x^n}{n!}$。"
+      },
+      {
+        "problem": "用三阶泰勒多项式近似 $\\sin 0.5$，并估计误差。",
+        "solution": "$\\sin x$ 的三阶泰勒多项式为 $T_3(x)=x-\\frac{x^3}{6}$，于是\n$$\\sin0.5\\approx0.5-\\frac{0.5^3}{6}=0.5-0.0208\\overline{3}\\approx0.479167.$$\n由于 $\\sin x$ 展开式中 4 阶项系数为 0，可取余项为第 5 阶项（拉格朗日余项或交错级数估计）：\n$$|R|\\le\\frac{0.5^5}{5!}=\\frac{1}{3840}\\approx2.6\\times10^{-4}.$$\n而 $\\sin0.5\\approx0.479426$，实际误差约 $2.6\\times10^{-4}$，与估计一致。"
+      }
+    ],
+    "tags": ["泰勒级数", "麦克劳林级数", "余项", "近似计算"],
+    "links": ["power-series", "taylor-formula", "derivative", "higher-order-derivative", "natural-constant-e"]
+  },
+  {
+    "id": "fourier-series",
+    "title": "傅里叶级数",
+    "titleEn": "Fourier Series",
+    "branch": "sequence",
+    "level": 5,
+    "summary": "把周期函数分解为正弦、余弦函数的叠加；系数由欧拉-傅里叶公式给出，收敛性由狄利克雷定理保证。",
+    "summaryEn": "Decomposes a periodic function into a superposition of sines and cosines, with coefficients given by the Euler–Fourier formulas and convergence guaranteed by Dirichlet's theorem.",
+    "definition": "傅里叶级数把一个**周期函数**分解成一系列正弦、余弦函数的叠加。设 $f$ 是以 $2\\pi$ 为周期的函数（或只在 $[-\\pi,\\pi]$ 上给定），把它的展开写成\n$$f(x)\\sim\\frac{a_0}{2}+\\sum_{n=1}^{\\infty}(a_n\\cos nx+b_n\\sin nx),$$\n右端称为 $f$ 的**傅里叶级数**，系数由**欧拉-傅里叶公式**给出：\n$$a_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx,\\qquad b_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx\\quad(n=0,1,2,\\dots).$$\n这些公式来自三角函数系的正交性：不同的 $\\cos nx$、$\\sin nx$ 的乘积在一个周期上的积分为 0，使每个频率的成分都能被「筛」出来。记号「$\\sim$」表示先形式地写出级数，它是否收敛、收敛到什么，需要下面的定理来保证。\n\n**狄利克雷收敛定理**：若 $f$ 在一个周期内分段单调（或分段光滑）且有至多有限个间断点，则它的傅里叶级数处处收敛；在连续点收敛于 $f(x)$，在间断点 $x$ 处收敛于左右极限的平均值 $\\frac{f(x^-)+f(x^+)}{2}$，在区间端点处则收敛于 $\\frac{f(-\\pi^+)+f(\\pi^-)}{2}$。因此即使 $f$ 有跳跃间断，它的傅里叶级数仍然很好地「复原」了函数，只是在跳跃处取中点。\n\n最经典的例子是方波 $f(x)=\\operatorname{sgn}(\\sin x)$（一个周期内取值 $\\pm1$），它的傅里叶级数为\n$$\\operatorname{sgn}(\\sin x)=\\frac4\\pi\\left(\\sin x+\\frac{\\sin 3x}{3}+\\frac{\\sin 5x}{5}+\\cdots\\right)=\\frac4\\pi\\sum_{k=1}^{\\infty}\\frac{\\sin(2k-1)x}{2k-1}.$$\n只取前几项就能看出方波的轮廓；在跳跃点附近，部分和会出现过冲，这就是著名的**吉布斯现象**。另一个奇迹：在上式中令 $x=\\frac\\pi2$，立刻得到莱布尼茨级数 $1-\\frac13+\\frac15-\\cdots=\\frac\\pi4$。",
+    "definitionEn": "A Fourier series decomposes a **periodic function** into a superposition of sines and cosines. For a $2\\pi$-periodic function $f$ (or one given on $[-\\pi,\\pi]$) one writes\n$$f(x)\\sim\\frac{a_0}{2}+\\sum_{n=1}^{\\infty}(a_n\\cos nx+b_n\\sin nx),$$\nand the coefficients are given by the **Euler–Fourier formulas**:\n$$a_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx,\\qquad b_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx\\quad(n=0,1,2,\\dots).$$\nThey arise from the orthogonality of the trigonometric system: products of distinct cosines and sines integrate to zero over one period, which isolates the content of each frequency. The symbol $\\sim$ signals a formal expansion; whether it converges, and to what, is settled by the next theorem.\n\n**Dirichlet's convergence theorem**: if $f$ is piecewise monotone (or piecewise smooth) on one period with at most finitely many discontinuities, then its Fourier series converges everywhere — to $f(x)$ at points of continuity, to the average of the one-sided limits $\\frac{f(x^-)+f(x^+)}{2}$ at a jump, and to $\\frac{f(-\\pi^+)+f(\\pi^-)}{2}$ at the interval endpoints. Thus even a jump function is faithfully reconstructed, the series simply taking the midpoint at each jump.\n\nThe classic example is the square wave $f(x)=\\operatorname{sgn}(\\sin x)$ (equal to $\\pm1$ over one period):\n$$\\operatorname{sgn}(\\sin x)=\\frac4\\pi\\left(\\sin x+\\frac{\\sin3x}{3}+\\frac{\\sin5x}{5}+\\cdots\\right)=\\frac4\\pi\\sum_{k=1}^{\\infty}\\frac{\\sin(2k-1)x}{2k-1}.$$\nA few partial sums already reveal the square shape, with the celebrated **Gibbs overshoot** near each jump. As another marvel, setting $x=\\frac\\pi2$ immediately yields Leibniz's series $1-\\frac13+\\frac15-\\cdots=\\frac\\pi4$.",
+    "formulas": [
+      {
+        "latex": "f(x)\\sim\\frac{a_0}{2}+\\sum_{n=1}^{\\infty}(a_n\\cos nx+b_n\\sin nx)",
+        "note": "傅里叶级数的形式；「$\\sim$」表示先形式展开，收敛性由狄利克雷定理保证。",
+        "noteEn": "The form of the Fourier series; the symbol $\\sim$ marks a formal expansion whose convergence is guaranteed by Dirichlet's theorem."
+      },
+      {
+        "latex": "a_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx,\\qquad b_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx",
+        "note": "欧拉-傅里叶公式（$n=0,1,2,\\dots$；常数项写成 $\\frac{a_0}{2}$ 是为了公式统一，$a_0=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\,dx$）。",
+        "noteEn": "Euler–Fourier formulas; the constant term is written $a_0/2$ for uniformity, with $a_0=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\,dx$."
+      },
+      {
+        "latex": "\\text{连续点：}S(x)=f(x);\\qquad \\text{间断点：}S(x)=\\frac{f(x^-)+f(x^+)}{2}",
+        "note": "狄利克雷收敛定理的结论：连续点收敛于函数值，跳跃点收敛于左右极限的平均值。",
+        "noteEn": "Dirichlet's theorem: the series sums to $f(x)$ at continuity points and to the average of the one-sided limits at a jump."
+      },
+      {
+        "latex": "\\operatorname{sgn}(\\sin x)=\\frac4\\pi\\sum_{k=1}^{\\infty}\\frac{\\sin(2k-1)x}{2k-1}",
+        "note": "方波的傅里叶级数：只含奇数倍频率的正弦项；部分和在跳跃点附近出现过冲（吉布斯现象）。",
+        "noteEn": "Fourier series of the square wave: odd harmonics only, with the Gibbs overshoot near each jump."
+      },
+      {
+        "latex": "1-\\frac13+\\frac15-\\frac17+\\cdots=\\frac{\\pi}{4}",
+        "note": "在方波展开中令 $x=\\frac\\pi2$ 得到，把傅里叶级数与交错级数联系起来。",
+        "noteEn": "Obtained by setting $x=\\frac\\pi2$ in the square-wave expansion, linking Fourier series with alternating series."
+      }
+    ],
+    "expression": {
+      "text": "f(x) ∼ a₀/2 + Σ(aₙcos nx + bₙsin nx)",
+      "symbol": "\\frac{a_0}{2}+\\sum_{n=1}^{\\infty}(a_n\\cos nx+b_n\\sin nx)",
+      "note": "系数由欧拉-傅里叶公式确定；收敛性由狄利克雷定理保证，间断点处收敛于左右极限的平均值。",
+      "noteEn": "Coefficients come from the Euler–Fourier formulas; Dirichlet's theorem guarantees convergence, with jumps summing to the average of the one-sided limits."
+    },
+    "properties": [
+      "奇函数的傅里叶级数只含正弦项（$a_n=0$），偶函数只含余弦项（$b_n=0$），可据此减少计算量。",
+      "三角函数系在 $[-\\pi,\\pi]$ 上两两正交，这是欧拉-傅里叶公式能把各频率成分「筛」出来的根本原因。",
+      "狄利克雷定理：分段单调、只有有限个间断点的周期函数，其傅里叶级数处处收敛，间断点处取左右极限的平均值。",
+      "跳跃点附近部分和出现过冲（吉布斯现象）：过冲幅度约为跳跃高度的 9%，增大项数只会使过冲变窄而不会消失。",
+      "帕塞瓦尔等式 $\\frac1\\pi\\int_{-\\pi}^{\\pi}f^2(x)\\,dx=\\frac{a_0^2}{2}+\\sum\\limits_{n=1}^{\\infty}(a_n^2+b_n^2)$：函数的总能量等于各频率分量的能量之和。"
+    ],
+    "propertiesEn": [
+      "An odd function has only sine terms ($a_n=0$); an even function has only cosine terms ($b_n=0$) — useful for cutting the computation in half.",
+      "The trigonometric system is orthogonal on $[-\\pi,\\pi]$, which is exactly why the Euler–Fourier formulas can isolate each frequency.",
+      "Dirichlet's theorem: a piecewise monotone periodic function with finitely many jumps has a convergent Fourier series, equal to the average of one-sided limits at each jump.",
+      "Near a jump the partial sums overshoot by about 9% of the jump height (Gibbs phenomenon); adding terms narrows the overshoot but never removes it.",
+      "Parseval's identity, $\\frac1\\pi\\int_{-\\pi}^{\\pi}f^2\\,dx=\\frac{a_0^2}{2}+\\sum(a_n^2+b_n^2)$, expresses conservation of energy across frequencies."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "(4/PI)*sin(x)", "color": "#4cc9f0", "label": "(4/π)·sin x（第 1 项）" },
+        { "expr": "(4/PI)*(sin(x)+sin(3*x)/3)", "color": "#06d6a0", "label": "前 2 项" },
+        { "expr": "(4/PI)*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11)", "color": "#ffd166", "label": "前 6 项（逼近方波）" }
+      ],
+      "xRange": [-6.5, 6.5],
+      "yRange": [-1.7, 1.7],
+      "title": "方波的傅里叶部分和逼近：sgn(sin x) ≈ (4/π)∑ sin((2k−1)x)/(2k−1)"
+    },
+    "examples": [
+      {
+        "problem": "求方波 $f(x)$ 的傅里叶级数：在 $(-\\pi,0)$ 上 $f(x)=-1$，在 $(0,\\pi)$ 上 $f(x)=1$，以 $2\\pi$ 为周期。",
+        "solution": "$f$ 是奇函数，所以余弦系数全为 0：$a_0=a_n=0$。计算正弦系数：\n$$b_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx=\\frac2\\pi\\int_0^{\\pi}\\sin nx\\,dx=\\frac2\\pi\\cdot\\frac{1-\\cos n\\pi}{n}=\\frac{2\\left(1-(-1)^n\\right)}{n\\pi}.$$\n当 $n$ 为偶数时 $b_n=0$；当 $n=2k-1$ 为奇数时 $b_n=\\frac{4}{(2k-1)\\pi}$。因此\n$$f(x)\\sim\\frac4\\pi\\left(\\sin x+\\frac{\\sin3x}{3}+\\frac{\\sin5x}{5}+\\cdots\\right).$$\n在间断点 $x=0,\\pm\\pi$ 处，级数收敛于 $\\frac{-1+1}{2}=0$（符合狄利克雷定理）。"
+      },
+      {
+        "problem": "利用上题的方波展开式导出 $1-\\frac13+\\frac15-\\frac17+\\cdots=\\frac\\pi4$。",
+        "solution": "在展开式 $\\frac4\\pi\\left(\\sin x+\\frac{\\sin3x}{3}+\\frac{\\sin5x}{5}+\\cdots\\right)$ 中取 $x=\\frac\\pi2$。此时 $f\\left(\\frac\\pi2\\right)=1$，而 $\\sin\\frac{(2k-1)\\pi}{2}=(-1)^{k-1}$，于是\n$$1=\\frac4\\pi\\left(1-\\frac13+\\frac15-\\frac17+\\cdots\\right),$$\n即 $1-\\frac13+\\frac15-\\frac17+\\cdots=\\frac\\pi4$。这正是著名的莱布尼茨级数。"
+      }
+    ],
+    "tags": ["傅里叶级数", "狄利克雷定理", "吉布斯现象", "方波"],
+    "links": ["series", "alternating-series", "integral", "periodicity", "sine-function"]
+  }
+]

@@ -1,0 +1,1348 @@
+[
+  {
+    "id": "derivative",
+    "title": "导数",
+    "titleEn": "Derivative",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "函数在某一点的瞬时变化率，几何上等于该点处切线的斜率。",
+    "summaryEn": "The instantaneous rate of change of a function at a point, geometrically the slope of the tangent line there.",
+    "definition": "设函数 $y=f(x)$ 在点 $x_0$ 的某个邻域内有定义。给自变量一个增量 $\\Delta x$（可正可负），函数相应的增量为 $\\Delta y=f(x_0+\\Delta x)-f(x_0)$。如果当 $\\Delta x\\to 0$ 时比值 $\\frac{\\Delta y}{\\Delta x}$ 的极限存在，就说函数 $f$ 在点 $x_0$ 处**可导**，并把这个极限称为 $f$ 在 $x_0$ 处的**导数**：\n\n$$f'(x_0)=\\lim_{\\Delta x\\to 0}\\frac{f(x_0+\\Delta x)-f(x_0)}{\\Delta x}$$\n\n导数还有一种等价的写法：$f'(x_0)=\\lim_{x\\to x_0}\\frac{f(x)-f(x_0)}{x-x_0}$。它刻画的是函数在 $x_0$ 处的**瞬时变化率**——先看平均变化率（割线斜率），再让两点的距离趋于零。\n\n几何上，$f'(x_0)$ 就是曲线 $y=f(x)$ 在点 $(x_0,f(x_0))$ 处切线的斜率，切线方程为 $y-f(x_0)=f'(x_0)(x-x_0)$；物理上，若 $s(t)$ 表示位移，则 $s'(t)$ 就是瞬时速度。导数是整个微积分学的起点。",
+    "definitionEn": "Let $y=f(x)$ be defined in a neighborhood of $x_0$. Give the independent variable an increment $\\Delta x$ (positive or negative); the corresponding increment of the function is $\\Delta y=f(x_0+\\Delta x)-f(x_0)$. If the limit of the ratio $\\frac{\\Delta y}{\\Delta x}$ as $\\Delta x\\to 0$ exists, then $f$ is **differentiable** at $x_0$, and this limit is called the **derivative** of $f$ at $x_0$:\n\n$$f'(x_0)=\\lim_{\\Delta x\\to 0}\\frac{f(x_0+\\Delta x)-f(x_0)}{\\Delta x}$$\n\nAn equivalent form is $f'(x_0)=\\lim_{x\\to x_0}\\frac{f(x)-f(x_0)}{x-x_0}$. It measures the **instantaneous rate of change** at $x_0$: first the average rate (slope of a secant), then let the two points come together.\n\nGeometrically, $f'(x_0)$ is the slope of the tangent to $y=f(x)$ at $(x_0,f(x_0))$, with tangent line $y-f(x_0)=f'(x_0)(x-x_0)$; physically, if $s(t)$ is position, then $s'(t)$ is instantaneous velocity. The derivative is the starting point of all of calculus.",
+    "formulas": [
+      {
+        "latex": "f'(x_0)=\\lim_{\\Delta x\\to 0}\\frac{f(x_0+\\Delta x)-f(x_0)}{\\Delta x}",
+        "note": "导数的定义：函数增量与自变量增量之比的极限",
+        "noteEn": "Definition: the limit of the difference quotient"
+      },
+      {
+        "latex": "f'(x_0)=\\lim_{x\\to x_0}\\frac{f(x)-f(x_0)}{x-x_0}",
+        "note": "导数定义的等价形式",
+        "noteEn": "Equivalent form of the definition"
+      },
+      {
+        "latex": "y-f(x_0)=f'(x_0)(x-x_0)",
+        "note": "曲线在点 $(x_0,f(x_0))$ 处的切线方程",
+        "noteEn": "Equation of the tangent at $(x_0,f(x_0))$"
+      },
+      {
+        "latex": "\\text{differentiable at } x_0\\ \\Rightarrow\\ \\text{continuous at } x_0",
+        "note": "可导一定连续，反之不成立",
+        "noteEn": "Differentiable implies continuous, but not conversely"
+      },
+      {
+        "latex": "f'(x_0)\\ \\text{exists}\\ \\Longleftrightarrow\\ f'_-(x_0)=f'_+(x_0)",
+        "note": "左导数与右导数存在且相等，是导数存在的充要条件",
+        "noteEn": "The derivative exists iff both one-sided derivatives exist and are equal"
+      }
+    ],
+    "expression": {
+      "text": "f′(x₀) = lim_{Δx→0} [f(x₀+Δx) − f(x₀)] / Δx",
+      "symbol": "f'(x_0)",
+      "note": "导数刻画函数在 x₀ 处的瞬时变化率，也等于该点切线的斜率。",
+      "noteEn": "The derivative is the instantaneous rate of change at x₀ and the slope of the tangent there."
+    },
+    "properties": [
+      "导数存在的充要条件是左导数与右导数都存在并且相等",
+      "可导一定连续，连续不一定可导——例如 $y=|x|$ 在 $x=0$ 处连续却不可导",
+      "几何意义：$f'(x_0)$ 是曲线在点 $(x_0,f(x_0))$ 处切线的斜率",
+      "物理意义：位移对时间的导数是速度，速度对时间的导数是加速度",
+      "导数的绝对值越大，函数在该点附近变化得越快"
+    ],
+    "propertiesEn": [
+      "The derivative exists iff both one-sided derivatives exist and are equal",
+      "Differentiable implies continuous, but not conversely—e.g. $y=|x|$ is continuous at $0$ yet not differentiable there",
+      "Geometrically, $f'(x_0)$ is the slope of the tangent at $(x_0,f(x_0))$",
+      "In physics, the derivative of position is velocity and the derivative of velocity is acceleration",
+      "The larger $|f'(x_0)|$ is, the faster the function changes near that point"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2",
+          "color": "#4cc9f0",
+          "label": "y = x²"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "x^2",
+          "at": 1,
+          "color": "#ff6b9d",
+          "label": "切线：斜率 = 2"
+        }
+      ],
+      "xRange": [
+        -2,
+        2.5
+      ],
+      "yRange": [
+        -1,
+        6.5
+      ],
+      "title": "导数的几何意义：y = x² 在 x = 1 处的切线"
+    },
+    "examples": [
+      {
+        "problem": "用导数的定义求函数 $f(x)=x^2$ 在 $x=1$ 处的导数。",
+        "solution": "按定义展开：$f(1+\\Delta x)=(1+\\Delta x)^2=1+2\\Delta x+(\\Delta x)^2$，所以\n\n$$f'(1)=\\lim_{\\Delta x\\to 0}\\frac{(1+\\Delta x)^2-1^2}{\\Delta x}=\\lim_{\\Delta x\\to 0}\\frac{2\\Delta x+(\\Delta x)^2}{\\Delta x}=\\lim_{\\Delta x\\to 0}(2+\\Delta x)=2$$\n\n即曲线 $y=x^2$ 在点 $(1,1)$ 处切线的斜率为 2。"
+      },
+      {
+        "problem": "判断函数 $f(x)=|x|$ 在 $x=0$ 处是否可导。",
+        "solution": "考察左右两侧的差商：当 $\\Delta x>0$ 时，$\\frac{f(0+\\Delta x)-f(0)}{\\Delta x}=\\frac{\\Delta x}{\\Delta x}=1$；当 $\\Delta x<0$ 时，该比值为 $\\frac{-\\Delta x}{\\Delta x}=-1$。左右极限不相等，所以极限 $\\lim_{\\Delta x\\to 0}\\frac{f(0+\\Delta x)-f(0)}{\\Delta x}$ 不存在，$f$ 在 $x=0$ 处不可导——虽然它在这一点是连续的。"
+      }
+    ],
+    "tags": [
+      "导数",
+      "切线",
+      "瞬时变化率"
+    ],
+    "links": [
+      "limit",
+      "continuity",
+      "differentiation-rules",
+      "differential",
+      "antiderivative"
+    ]
+  },
+  {
+    "id": "differentiation-rules",
+    "title": "求导法则",
+    "titleEn": "Differentiation Rules",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "用基本导数公式与和、差、积、商的运算法则计算函数的导数。",
+    "summaryEn": "Computing derivatives with the basic derivative formulas and the sum, product and quotient rules.",
+    "definition": "求导法则是一套把复杂函数的求导归结为简单函数的算法：先记住几个**基本初等函数的导数公式**，再用**四则运算法则**把它们拼装起来。常用的基本公式有：$(C)'=0$（常数的导数为零）、$(x^n)'=nx^{n-1}$、$(\\sin x)'=\\cos x$、$(\\cos x)'=-\\sin x$、$(e^x)'=e^x$、$(\\ln x)'=\\frac{1}{x}$。\n\n四则运算法则：和与差可以逐项求导，$[f(x)\\pm g(x)]'=f'(x)\\pm g'(x)$；常数因子可以提到外面，$[Cf(x)]'=Cf'(x)$；**乘积法则** $[f(x)g(x)]'=f'(x)g(x)+f(x)g'(x)$；**商的法则** $\\left[\\frac{f(x)}{g(x)}\\right]'=\\frac{f'(x)g(x)-f(x)g'(x)}{g^2(x)}$（要求 $g(x)\\neq 0$）。\n\n要注意：乘积的导数**不是**两个导数之积，商的导数分子里两项的顺序也不能颠倒。把基本公式与这些法则结合起来，再加上链式法则，原则上就能求出一切初等函数的导数。",
+    "definitionEn": "The differentiation rules are a toolkit that reduces the derivative of a complicated function to simple pieces: first learn the **basic derivative formulas** of elementary functions, then combine them with the **arithmetic rules**. Typical basic formulas: $(C)'=0$, $(x^n)'=nx^{n-1}$, $(\\sin x)'=\\cos x$, $(\\cos x)'=-\\sin x$, $(e^x)'=e^x$, and $(\\ln x)'=\\frac{1}{x}$.\n\nThe arithmetic rules: sums and differences differentiate term by term, $[f(x)\\pm g(x)]'=f'(x)\\pm g'(x)$; a constant factor comes out, $[Cf(x)]'=Cf'(x)$; the **product rule** is $[f(x)g(x)]'=f'(x)g(x)+f(x)g'(x)$; the **quotient rule** is $\\left[\\frac{f(x)}{g(x)}\\right]'=\\frac{f'(x)g(x)-f(x)g'(x)}{g^2(x)}$ for $g(x)\\neq 0$.\n\nWatch out: the derivative of a product is **not** the product of the derivatives, and the order of the two terms in the quotient rule matters. Combined with the chain rule, these rules differentiate every elementary function.",
+    "formulas": [
+      {
+        "latex": "(x^n)'=nx^{n-1}",
+        "note": "幂函数求导公式（在函数有定义的区间上成立）",
+        "noteEn": "Power rule, valid wherever the power is defined"
+      },
+      {
+        "latex": "(u\\pm v)'=u'\\pm v'",
+        "note": "和差法则：可以逐项求导",
+        "noteEn": "Sum and difference rule"
+      },
+      {
+        "latex": "(uv)'=u'v+uv'",
+        "note": "乘积法则：前导后不导，加上前不导后导",
+        "noteEn": "Product rule"
+      },
+      {
+        "latex": "\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^2}\\quad(v\\neq 0)",
+        "note": "商的法则：分子是 u′v − uv′，顺序不能颠倒",
+        "noteEn": "Quotient rule; the order of the two terms matters"
+      },
+      {
+        "latex": "(e^x)'=e^x,\\quad (\\ln x)'=\\frac{1}{x},\\quad (\\sin x)'=\\cos x,\\quad (\\cos x)'=-\\sin x",
+        "note": "几个必须熟记的基本导数公式",
+        "noteEn": "Basic formulas worth memorizing"
+      }
+    ],
+    "expression": {
+      "text": "(xⁿ)′ = nxⁿ⁻¹，(uv)′ = u′v + uv′，(u/v)′ = (u′v − uv′)/v²",
+      "symbol": "(uv)' = u'v + uv'",
+      "note": "先算基本公式，再用四则运算法则组合；乘积与商的求导不能「分别求导再相乘除」。",
+      "noteEn": "Use the basic formulas together with the arithmetic rules; products and quotients cannot be differentiated term by term."
+    },
+    "properties": [
+      "和与差可以逐项求导，常数因子可以提前：$(Cu)'=Cu'$，$(u\\pm v)'=u'\\pm v'$",
+      "乘积的导数不是 $u'v'$，必须用 $u'v+uv'$",
+      "商的导数分子为 $u'v-uv'$，两项顺序不能交换",
+      "$(x^n)'=nx^{n-1}$ 对整数、有理数乃至实数指数都成立（在函数有定义的区间上）",
+      "先化简再求导往往更省力，例如把 $\\frac{x^2+1}{x}$ 拆成 $x+\\frac{1}{x}$ 再求导"
+    ],
+    "propertiesEn": [
+      "Sums and differences differentiate term by term; a constant factor comes out: $(Cu)'=Cu'$",
+      "The derivative of a product is not $u'v'$; use $u'v+uv'$",
+      "The numerator of the quotient rule is $u'v-uv'$; the order cannot be swapped",
+      "$(x^n)'=nx^{n-1}$ holds for integer, rational and even real exponents (wherever the power is defined)",
+      "Simplifying first often helps: rewrite $\\frac{x^2+1}{x}$ as $x+\\frac{1}{x}$ before differentiating"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^3",
+          "color": "#4cc9f0",
+          "label": "y = x³"
+        },
+        {
+          "expr": "3*x^2",
+          "color": "#ff6b9d",
+          "label": "y′ = 3x²"
+        }
+      ],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -9,
+        13
+      ],
+      "title": "y = x³ 与它的导数曲线 y′ = 3x²"
+    },
+    "examples": [
+      {
+        "problem": "求函数 $f(x)=x^3+2\\sin x$ 的导数。",
+        "solution": "逐项求导：$(x^3)'=3x^2$，$(2\\sin x)'=2\\cos x$，所以 $f'(x)=3x^2+2\\cos x$。"
+      },
+      {
+        "problem": "求函数 $g(x)=x\\ln x$（$x>0$）的导数。",
+        "solution": "用乘积法则，取 $u=x$，$v=\\ln x$，则 $u'=1$，$v'=\\frac{1}{x}$，所以 $g'(x)=1\\cdot\\ln x+x\\cdot\\frac{1}{x}=\\ln x+1$。"
+      }
+    ],
+    "tags": [
+      "求导",
+      "运算法则",
+      "导数公式"
+    ],
+    "links": [
+      "derivative",
+      "chain-rule",
+      "higher-order-derivative",
+      "power-function",
+      "logarithmic-function"
+    ]
+  },
+  {
+    "id": "chain-rule",
+    "title": "链式法则",
+    "titleEn": "Chain Rule",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "复合函数的导数等于外层函数的导数乘以内层函数的导数。",
+    "summaryEn": "The derivative of a composite function is the outer derivative times the inner derivative.",
+    "definition": "如果 $y$ 是 $u$ 的函数 $y=f(u)$，而 $u$ 又是 $x$ 的函数 $u=g(x)$，那么 $y$ 通过中间变量 $u$ 复合成为 $x$ 的函数 $y=f(g(x))$，称为**复合函数**。链式法则指出：复合函数的导数等于**外层对中间变量的导数**乘上**内层对自变量的导数**：\n\n$$\\frac{dy}{dx}=\\frac{dy}{du}\\cdot\\frac{du}{dx},\\qquad \\bigl(f(g(x))\\bigr)'=f'(g(x))\\cdot g'(x)$$\n\n用一句话概括就是「先对整体（外层）求导，再乘上里面那一层的导数」。例如 $y=\\sin(x^2)$ 可以看成外层 $\\sin u$ 与内层 $u=x^2$ 的复合：外层导数是 $\\cos u$，内层导数是 $2x$，于是 $y'=\\cos(x^2)\\cdot 2x=2x\\cos(x^2)$。\n\n链式法则可以一层一层往下用：若 $y=f(u)$，$u=g(v)$，$v=h(x)$，则 $\\frac{dy}{dx}=f'(u)\\,g'(v)\\,h'(x)$。它是微积分中最常用的法则之一，隐函数求导、参数方程求导与换元积分法都建立在它之上。",
+    "definitionEn": "If $y$ depends on $u$ through $y=f(u)$ and $u$ depends on $x$ through $u=g(x)$, then $y$ is a **composite function** $y=f(g(x))$ of $x$. The chain rule says its derivative equals the derivative of the outer function with respect to the intermediate variable times the derivative of the inner function with respect to $x$:\n\n$$\\frac{dy}{dx}=\\frac{dy}{du}\\cdot\\frac{du}{dx},\\qquad \\bigl(f(g(x))\\bigr)'=f'(g(x))\\cdot g'(x)$$\n\nIn words: differentiate the outer layer, then multiply by the derivative of the inner layer. For example $y=\\sin(x^2)$ has outer part $\\sin u$ with $u=x^2$; the outer derivative is $\\cos u$ and the inner derivative is $2x$, so $y'=\\cos(x^2)\\cdot 2x=2x\\cos(x^2)$.\n\nThe rule iterates through any number of layers: if $y=f(u)$, $u=g(v)$, $v=h(x)$, then $\\frac{dy}{dx}=f'(u)g'(v)h'(x)$. It is the backbone of implicit differentiation, parametric differentiation and integration by substitution.",
+    "formulas": [
+      {
+        "latex": "\\frac{dy}{dx}=\\frac{dy}{du}\\cdot\\frac{du}{dx}",
+        "note": "链式法则：复合结构 y = f(u)，u = g(x)",
+        "noteEn": "Chain rule for the composite structure y = f(u), u = g(x)"
+      },
+      {
+        "latex": "\\bigl(f(g(x))\\bigr)'=f'(g(x))\\cdot g'(x)",
+        "note": "更常用的写法：外层导乘内层导",
+        "noteEn": "The usual form: outer derivative times inner derivative"
+      },
+      {
+        "latex": "\\frac{dy}{dx}=f'(u)\\,g'(v)\\,h'(x)\\quad(y=f(u),\\ u=g(v),\\ v=h(x))",
+        "note": "多层复合时逐层相乘",
+        "noteEn": "For several layers, multiply layer by layer"
+      },
+      {
+        "latex": "\\bigl(\\sin(x^2)\\bigr)'=\\cos(x^2)\\cdot 2x=2x\\cos(x^2)",
+        "note": "典型例子：先对 sin 求导，再乘内层 2x",
+        "noteEn": "Typical example: differentiate sin first, then multiply by the inner derivative 2x"
+      },
+      {
+        "latex": "\\bigl(f(ax+b)\\bigr)'=a\\,f'(ax+b)",
+        "note": "内层为线性函数 ax+b 时的简化形式",
+        "noteEn": "Simplification when the inner function is linear"
+      }
+    ],
+    "expression": {
+      "text": "dy/dx = (dy/du) · (du/dx)",
+      "symbol": "dy/dx = dy/du · du/dx",
+      "note": "先对外层求导，再乘以内层的导数；一层都不能漏乘。",
+      "noteEn": "Differentiate the outer layer, then multiply by the inner derivative; never skip a layer."
+    },
+    "properties": [
+      "由外向内逐层求导，每一层都不能漏乘它内层的导数",
+      "常见错误是漏掉内层导数，例如把 $(\\sin 2x)'$ 误写成 $\\cos 2x$（应为 $2\\cos 2x$）",
+      "可以连续使用，适用于任意多层复合",
+      "内层是线性函数 $ax+b$ 时，$[f(ax+b)]'=af'(ax+b)$",
+      "链式法则与隐函数求导、参数方程求导、换元积分法密切相关"
+    ],
+    "propertiesEn": [
+      "Work from the outside inward; never forget to multiply by the derivative of the inner layer",
+      "The classic mistake is dropping the inner derivative: $(\\sin 2x)'$ is $2\\cos 2x$, not $\\cos 2x$",
+      "It iterates, so it handles composites with any number of layers",
+      "When the inner function is linear: $[f(ax+b)]'=af'(ax+b)$",
+      "It underlies implicit differentiation, parametric differentiation and substitution in integration"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x^2)",
+          "color": "#4cc9f0",
+          "label": "y = sin(x²)"
+        },
+        {
+          "expr": "2*x*cos(x^2)",
+          "color": "#ff6b9d",
+          "label": "y′ = 2x·cos(x²)"
+        }
+      ],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -4,
+        4
+      ],
+      "title": "y = sin(x²) 及其导数曲线 y′ = 2x·cos(x²)"
+    },
+    "examples": [
+      {
+        "problem": "求 $y=\\sin(x^2)$ 的导数。",
+        "solution": "把函数看成 $y=\\sin u$ 与 $u=x^2$ 的复合。外层导数为 $\\frac{dy}{du}=\\cos u$，内层导数为 $\\frac{du}{dx}=2x$，由链式法则\n\n$$\\frac{dy}{dx}=\\cos u\\cdot 2x=2x\\cos(x^2)$$"
+      },
+      {
+        "problem": "求 $y=e^{2x+1}$ 与 $y=\\ln(\\sin x)$ 的导数。",
+        "solution": "$y=e^{2x+1}$ 中外层为 $e^u$、内层为 $u=2x+1$，所以 $y'=e^{2x+1}\\cdot 2=2e^{2x+1}$。$y=\\ln(\\sin x)$ 中外层为 $\\ln u$、内层为 $u=\\sin x$，所以 $y'=\\frac{1}{\\sin x}\\cdot\\cos x=\\cot x$。"
+      }
+    ],
+    "tags": [
+      "链式法则",
+      "复合函数",
+      "求导"
+    ],
+    "links": [
+      "derivative",
+      "differentiation-rules",
+      "composite-function",
+      "higher-order-derivative",
+      "implicit-differentiation"
+    ]
+  },
+  {
+    "id": "higher-order-derivative",
+    "title": "高阶导数",
+    "titleEn": "Higher-Order Derivatives",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "对导数再求导，得到二阶、三阶乃至 n 阶导数。",
+    "summaryEn": "Differentiating a derivative again yields second, third and in general n-th order derivatives.",
+    "definition": "如果函数 $y=f(x)$ 的导数 $f'(x)$ 仍然可导，那么 $f'(x)$ 的导数叫做 $f$ 的**二阶导数**，记作 $f''(x)$、$y''$ 或 $\\frac{d^2y}{dx^2}$。类似地，二阶导数的导数叫做**三阶导数** $f'''(x)$；一般地，$n-1$ 阶导数的导数叫做 **$n$ 阶导数**，记作 $f^{(n)}(x)$ 或 $\\frac{d^ny}{dx^n}$。\n\n以 $y=x^3$ 为例：$y'=3x^2$，$y''=6x$，$y'''=6$，再往后 $y^{(4)}=0$。求高阶导数就是反复使用求导法则：先算出低阶导数的表达式，再对它求导即可。\n\n二阶导数有明确的物理与几何含义：它是「变化率的变化率」。物理上，位移 $s(t)$ 的一阶导数是速度 $v=s'(t)$，二阶导数就是加速度 $a=s''(t)$；几何上，$f''(x)>0$ 表示曲线凹向上（下凸），$f''(x)<0$ 表示凹向下（上凸），因此二阶导数常用来判断曲线的凹凸性与极值点的类型。",
+    "definitionEn": "If the derivative $f'(x)$ of $y=f(x)$ is itself differentiable, its derivative is called the **second derivative** of $f$, written $f''(x)$, $y''$ or $\\frac{d^2y}{dx^2}$. Similarly one defines the third derivative $f'''(x)$, and in general the **$n$-th derivative** $f^{(n)}(x)$ or $\\frac{d^ny}{dx^n}$ as the derivative of the $(n-1)$-th derivative.\n\nFor $y=x^3$: $y'=3x^2$, $y''=6x$, $y'''=6$, and $y^{(4)}=0$. Computing higher-order derivatives simply means applying the differentiation rules repeatedly.\n\nThe second derivative is the rate of change of the rate of change. In physics, if $s(t)$ is position then $v=s'(t)$ is velocity and $a=s''(t)$ is acceleration; geometrically, $f''(x)>0$ means the curve is concave up and $f''(x)<0$ means concave down, so the second derivative detects concavity and classifies extrema.",
+    "formulas": [
+      {
+        "latex": "f''(x)=\\bigl(f'(x)\\bigr)',\\qquad \\frac{d^2y}{dx^2}=\\frac{d}{dx}\\left(\\frac{dy}{dx}\\right)",
+        "note": "二阶导数：对一阶导数再求导",
+        "noteEn": "Second derivative: differentiate the first derivative"
+      },
+      {
+        "latex": "f^{(n)}(x)=\\bigl(f^{(n-1)}(x)\\bigr)'",
+        "note": "n 阶导数逐次定义",
+        "noteEn": "The n-th derivative defined recursively"
+      },
+      {
+        "latex": "(x^n)^{(n)}=n!",
+        "note": "幂函数求 n 次导得到 n 的阶乘",
+        "noteEn": "The n-th derivative of xⁿ is n!"
+      },
+      {
+        "latex": "(e^x)^{(n)}=e^x,\\qquad (\\sin x)^{(n)}=\\sin\\left(x+\\frac{n\\pi}{2}\\right)",
+        "note": "常见函数的 n 阶导数规律",
+        "noteEn": "Typical n-th derivative patterns"
+      },
+      {
+        "latex": "f'(x_0)=0,\\ f''(x_0)<0\\ \\Rightarrow\\ \\text{local maximum}",
+        "note": "二阶导数可用来判断极值类型（小于 0 为极大，大于 0 为极小）",
+        "noteEn": "The second derivative classifies stationary points (negative: max, positive: min)"
+      }
+    ],
+    "expression": {
+      "text": "y″ = d²y/dx²，f⁽ⁿ⁾(x) = (f⁽ⁿ⁻¹⁾(x))′",
+      "symbol": "f''(x)",
+      "note": "二阶导数表示对 x 求导两次，不是一阶导数的平方。",
+      "noteEn": "The second derivative means differentiating twice—not squaring the first derivative."
+    },
+    "properties": [
+      "$\\frac{d^2y}{dx^2}$ 表示对 $x$ 求两次导，而不是 $\\frac{dy}{dx}$ 的平方",
+      "$f''(x)>0$ 时曲线凹向上（下凸），$f''(x)<0$ 时曲线凹向下（上凸）",
+      "若 $f'(x_0)=0$ 且 $f''(x_0)<0$，则 $x_0$ 是极大值点；$f''(x_0)>0$ 则为极小值点",
+      "物理意义：位移对时间的二阶导数是加速度",
+      "求 $n$ 阶导数通常先算前几阶、再归纳规律，例如 $(e^x)^{(n)}=e^x$"
+    ],
+    "propertiesEn": [
+      "$\\frac{d^2y}{dx^2}$ means differentiating twice, not the square of $\\frac{dy}{dx}$",
+      "$f''(x)>0$ means concave up; $f''(x)<0$ means concave down",
+      "If $f'(x_0)=0$ and $f''(x_0)<0$, then $x_0$ is a local maximum; if $f''(x_0)>0$, a local minimum",
+      "In physics, the second derivative of position is acceleration",
+      "To find the $n$-th derivative, compute the first few orders and look for a pattern, e.g. $(e^x)^{(n)}=e^x$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^3",
+          "color": "#4cc9f0",
+          "label": "y = x³"
+        },
+        {
+          "expr": "3*x^2",
+          "color": "#ff6b9d",
+          "label": "y′ = 3x²"
+        },
+        {
+          "expr": "6*x",
+          "color": "#ffd166",
+          "label": "y″ = 6x"
+        }
+      ],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -13,
+        13
+      ],
+      "title": "y = x³ 及其一阶、二阶导数"
+    },
+    "examples": [
+      {
+        "problem": "求 $y=x^3-2x$ 的各阶导数。",
+        "solution": "$y'=3x^2-2$，$y''=6x$，$y'''=6$，$y^{(4)}=0$。多项式求导若干次后必为零。"
+      },
+      {
+        "problem": "求 $y=e^{2x}$ 的 $n$ 阶导数。",
+        "solution": "$y'=2e^{2x}$，$y''=4e^{2x}$，$y'''=8e^{2x}$。规律是每求一次导就多乘一个 2，指数部分不变，因此 $y^{(n)}=2^n e^{2x}$。"
+      }
+    ],
+    "tags": [
+      "高阶导数",
+      "二阶导数",
+      "凹凸性"
+    ],
+    "links": [
+      "derivative",
+      "differentiation-rules",
+      "chain-rule",
+      "concavity-inflection",
+      "monotonicity-extremum"
+    ]
+  },
+  {
+    "id": "implicit-differentiation",
+    "title": "隐函数求导",
+    "titleEn": "Implicit Differentiation",
+    "branch": "calculus",
+    "level": 5,
+    "summary": "对方程 F(x,y)=0 两边同时对 x 求导来求 y′ 的方法。",
+    "summaryEn": "Finding y′ by differentiating both sides of F(x,y)=0 with respect to x.",
+    "definition": "有些函数关系并不写成 $y=f(x)$ 的显式形式，而是由方程 $F(x,y)=0$ 给出，例如圆的方程 $x^2+y^2=25$。这类由方程确定的函数叫做**隐函数**。隐函数求导的思路是：在方程中把 $y$ 看作 $x$ 的函数 $y=y(x)$，然后两边同时对 $x$ 求导。\n\n关键之处在于记住 **$y$ 是 $x$ 的函数**：只含 $x$ 的项按普通方法求导；含 $y$ 的项要用链式法则，**乘上 $y'$**。例如 $(y^2)'=2y\\,y'$，$(y^3)'=3y^2\\,y'$，$(\\sin y)'=\\cos y\\cdot y'$。\n\n以 $x^2+y^2=25$ 为例：两边对 $x$ 求导得 $2x+2y\\,y'=0$，解得 $y'=-\\frac{x}{y}$（$y\\neq 0$）。在圆上点 $(3,4)$ 处，$y'=-\\frac{3}{4}$，这正好是圆在该点处切线的斜率。整个过程中 $y$ 不必解出来，结果通常同时含 $x$ 与 $y$，代入点的坐标即可求出具体斜率。",
+    "definitionEn": "Some functional relations are not given explicitly as $y=f(x)$ but implicitly by an equation $F(x,y)=0$, such as the circle $x^2+y^2=25$. Such a relation defines an **implicit function**. The method: treat $y$ as a function $y=y(x)$ of $x$, then differentiate both sides of the equation with respect to $x$.\n\nThe key point is that **$y$ is a function of $x$**: terms containing only $x$ differentiate as usual, while every term involving $y$ picks up a factor $y'$ by the chain rule—for instance $(y^2)'=2y\\,y'$, $(y^3)'=3y^2y'$ and $(\\sin y)'=\\cos y\\cdot y'$.\n\nFor $x^2+y^2=25$: differentiating gives $2x+2y\\,y'=0$, hence $y'=-\\frac{x}{y}$ ($y\\neq 0$). At the point $(3,4)$ on the circle, $y'=-\\frac{3}{4}$—exactly the slope of the tangent there. Notice that $y$ never needs to be solved for explicitly; the result usually contains both $x$ and $y$, and substituting the point gives the concrete slope.",
+    "formulas": [
+      {
+        "latex": "\\frac{d}{dx}\\bigl[y^2\\bigr]=2y\\,y'",
+        "note": "对含 y 的项求导必须乘 y′（链式法则）",
+        "noteEn": "Differentiating a term in y contributes y′ (chain rule)"
+      },
+      {
+        "latex": "x^2+y^2=R^2\\ \\Rightarrow\\ 2x+2y\\,y'=0\\ \\Rightarrow\\ y'=-\\frac{x}{y}",
+        "note": "圆方程的求导过程（y ≠ 0）",
+        "noteEn": "Differentiating the circle equation (for y ≠ 0)"
+      },
+      {
+        "latex": "y'=-\\frac{F_x}{F_y}\\quad(F_y\\neq 0)",
+        "note": "一般隐函数 F(x,y)=0 的求导公式",
+        "noteEn": "General formula for F(x,y)=0 when F_y ≠ 0"
+      },
+      {
+        "latex": "x_0x+y_0y=R^2",
+        "note": "圆 $x^2+y^2=R^2$ 上点 $(x_0,y_0)$ 处的切线方程",
+        "noteEn": "Tangent to $x^2+y^2=R^2$ at $(x_0,y_0)$"
+      },
+      {
+        "latex": "(\\sin y)'=\\cos y\\cdot y',\\qquad (e^y)'=e^y\\,y'",
+        "note": "含 y 的常见函数求导示例",
+        "noteEn": "More examples of differentiating functions of y"
+      }
+    ],
+    "expression": {
+      "text": "F(x, y) = 0 两边对 x 求导，再解出 y′",
+      "symbol": "y' = -x/y",
+      "note": "把 y 看作 x 的函数，含 y 的项求导时乘 y′。",
+      "noteEn": "Treat y as a function of x; terms in y get an extra factor y′."
+    },
+    "properties": [
+      "求导时把 $y$ 看作 $x$ 的函数，所有含 $y$ 的项都要乘 $y'$",
+      "结果通常同时含 $x$ 与 $y$，把点的坐标代入即可得该点处的切线斜率",
+      "即使 $y$ 无法解出显式表达式（或解出来很复杂），只要隐函数存在且可导，仍可用此法求导",
+      "对圆 $x^2+y^2=R^2$ 上的点 $(x_0,y_0)$，切线为 $x_0x+y_0y=R^2$，比先解出 $y$ 再求导简便得多",
+      "隐函数求导本质上仍然是链式法则的应用"
+    ],
+    "propertiesEn": [
+      "Treat $y$ as a function of $x$; every term containing $y$ gets a factor $y'$",
+      "The answer usually contains both $x$ and $y$; substitute the point to obtain the tangent slope",
+      "It works even when $y$ cannot be (or is messy to) solve explicitly",
+      "For $x^2+y^2=R^2$ at $(x_0,y_0)$, the tangent is $x_0x+y_0y=R^2$—far simpler than solving for $y$ first",
+      "Implicit differentiation is the chain rule in disguise"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -10,
+        10
+      ],
+      "yRange": [
+        -5.6,
+        5.6
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            4
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            5.5
+          ],
+          "to": [
+            7,
+            1
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            4
+          ],
+          "label": "P(3,4)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "O"
+        },
+        {
+          "type": "label",
+          "at": [
+            -6.8,
+            -4.8
+          ],
+          "text": "y′ = −3/4"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.9,
+            0.55
+          ],
+          "text": "切线",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            -4.6,
+            5.0
+          ],
+          "text": "x² + y² = 25",
+          "color": "#4cc9f0"
+        }
+      ],
+      "title": "圆 x² + y² = 25 在 P(3,4) 处的切线：3x + 4y = 25"
+    },
+    "examples": [
+      {
+        "problem": "求圆 $x^2+y^2=25$ 在点 $P(3,4)$ 处的切线方程。",
+        "solution": "方程两边对 $x$ 求导（注意 $y$ 是 $x$ 的函数）：$2x+2y\\,y'=0$，得 $y'=-\\frac{x}{y}$。在 $P(3,4)$ 处 $y'=-\\frac{3}{4}$，切线方程为 $y-4=-\\frac{3}{4}(x-3)$，整理得 $3x+4y=25$。"
+      },
+      {
+        "problem": "已知曲线由方程 $e^y+xy=e$ 确定，求它在点 $(0,1)$ 处的切线方程。",
+        "solution": "两边对 $x$ 求导：$e^y\\,y'+y+xy'=0$。代入 $x=0$，$y=1$：$e\\,y'+1=0$，得 $y'=-\\frac{1}{e}$。切线方程为 $y-1=-\\frac{1}{e}x$，即 $y=1-\\frac{x}{e}$。"
+      }
+    ],
+    "tags": [
+      "隐函数",
+      "求导",
+      "切线"
+    ],
+    "links": [
+      "derivative",
+      "chain-rule",
+      "differentiation-rules",
+      "parametric-derivative",
+      "multivariable-implicit-differentiation"
+    ]
+  },
+  {
+    "id": "parametric-derivative",
+    "title": "参数方程求导",
+    "titleEn": "Derivative of Parametrically Defined Functions",
+    "branch": "calculus",
+    "level": 5,
+    "summary": "由参数方程确定的函数，用 dy/dx = (dy/dt)/(dx/dt) 求导。",
+    "summaryEn": "For a curve given parametrically, the derivative is dy/dx = (dy/dt)/(dx/dt).",
+    "definition": "曲线也可以借助一个辅助变量（参数）$t$ 来表示：$\\begin{cases} x=x(t)\\\\ y=y(t)\\end{cases}$。当 $x'(t)\\neq 0$ 时，$x$ 与 $t$ 之间有一一对应关系，从而 $y$ 也是 $x$ 的函数 $y=y(x)$，称为**由参数方程确定的函数**。\n\n求它关于 $x$ 的导数时，把 $y$ 看成通过中间变量 $t$ 依赖于 $x$，由链式法则得到\n\n$$\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}=\\frac{y'(t)}{x'(t)}$$\n\n也就是说：**分别对参数 $t$ 求出 $dy/dt$ 与 $dx/dt$，再相除**。这里要求 $x'(t)\\neq 0$；若 $x'(t)=0$ 而 $y'(t)\\neq 0$，曲线在该点有竖直切线（斜率为无穷大）。\n\n求二阶导数时要特别注意：$\\frac{dy}{dx}$ 仍然是一个关于 $t$ 的函数，必须再对 $t$ 求导并除以 $\\frac{dx}{dt}$：$\\frac{d^2y}{dx^2}=\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)\\big/\\frac{dx}{dt}$。参数方程特别适合表示圆周运动、摆线、行星轨道这类多值或封闭的曲线。",
+    "definitionEn": "A curve can also be described with the help of a parameter $t$: $\\begin{cases} x=x(t)\\\\ y=y(t)\\end{cases}$. When $x'(t)\\neq 0$, $x$ and $t$ correspond one-to-one, so $y$ becomes a function $y=y(x)$ of $x$—a function **defined parametrically**.\n\nTo differentiate with respect to $x$, view $y$ as depending on $x$ through the intermediate variable $t$; the chain rule gives\n\n$$\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}=\\frac{y'(t)}{x'(t)}$$\n\nIn other words: differentiate both coordinates with respect to $t$ and divide. This requires $x'(t)\\neq 0$; if $x'(t)=0$ while $y'(t)\\neq 0$, the curve has a vertical tangent there (infinite slope).\n\nThe second derivative needs extra care: $\\frac{dy}{dx}$ is still a function of $t$, so differentiate it with respect to $t$ and divide again by $\\frac{dx}{dt}$: $\\frac{d^2y}{dx^2}=\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)\\big/\\frac{dx}{dt}$. Parametric equations are ideal for circular motion, cycloids and planetary orbits.",
+    "formulas": [
+      {
+        "latex": "\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}=\\frac{y'(t)}{x'(t)}\\quad\\bigl(x'(t)\\neq 0\\bigr)",
+        "note": "参数方程求导公式：分别对 t 求导再相除",
+        "noteEn": "Parametric derivative: differentiate with respect to t and divide (x′(t) ≠ 0)"
+      },
+      {
+        "latex": "\\frac{d^2y}{dx^2}=\\frac{\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)}{\\frac{dx}{dt}}",
+        "note": "二阶导数：先对 t 求导，再除以 dx/dt",
+        "noteEn": "Second derivative: differentiate with respect to t, then divide by dx/dt"
+      },
+      {
+        "latex": "x=a\\cos t,\\ y=b\\sin t\\ \\Rightarrow\\ \\frac{dy}{dx}=-\\frac{b}{a}\\cot t",
+        "note": "椭圆的参数方程及其导数",
+        "noteEn": "Ellipse: parametric equations and their derivative"
+      },
+      {
+        "latex": "x=R\\cos t,\\ y=R\\sin t\\ \\Rightarrow\\ \\frac{dy}{dx}=-\\cot t",
+        "note": "圆的参数方程：切线垂直于半径",
+        "noteEn": "Circle: the tangent is perpendicular to the radius"
+      },
+      {
+        "latex": "x=r(t-\\sin t),\\ y=r(1-\\cos t)\\ \\Rightarrow\\ \\frac{dy}{dx}=\\frac{\\sin t}{1-\\cos t}",
+        "note": "摆线（旋轮线）的参数方程及其导数",
+        "noteEn": "Cycloid: parametric equations and their derivative"
+      }
+    ],
+    "expression": {
+      "text": "dy/dx = (dy/dt) / (dx/dt)，要求 dx/dt ≠ 0",
+      "symbol": "(dy/dt)/(dx/dt)",
+      "note": "先分别对参数 t 求导，再相除；分母 dx/dt 不能为零。",
+      "noteEn": "Differentiate both coordinates with respect to t, then divide; the denominator dx/dt must not vanish."
+    },
+    "properties": [
+      "$\\frac{dy}{dx}$ 的表达式仍然是 $t$ 的函数，代入 $t$ 的值即可得该点切线斜率",
+      "要求 $x'(t)\\neq 0$；若 $x'(t)=0$ 且 $y'(t)\\neq 0$，曲线在该点有竖直切线",
+      "求二阶导数时，先得到 $\\frac{dy}{dx}$ 关于 $t$ 的表达式，再对 $t$ 求导并除以 $x'(t)$",
+      "参数方程可以表示多值曲线（如整个圆、椭圆），这是显式函数 $y=f(x)$ 做不到的",
+      "摆线、圆周运动、行星轨道等实际曲线常用参数方程描述"
+    ],
+    "propertiesEn": [
+      "$\\frac{dy}{dx}$ is still a function of $t$; substitute $t$ to get the tangent slope at that point",
+      "One needs $x'(t)\\neq 0$; if $x'(t)=0$ but $y'(t)\\neq 0$, the curve has a vertical tangent",
+      "For the second derivative, first write $\\frac{dy}{dx}$ in terms of $t$, then differentiate with respect to $t$ and divide by $x'(t)$",
+      "Parametric equations represent multi-valued curves such as full circles and ellipses, which no explicit $y=f(x)$ can do",
+      "Cycloids, circular motion and planetary orbits are naturally described parametrically"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -7,
+        7
+      ],
+      "yRange": [
+        -3.9,
+        3.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              5,
+              0
+            ],
+            [
+              4.755,
+              0.927
+            ],
+            [
+              4.045,
+              1.763
+            ],
+            [
+              2.939,
+              2.427
+            ],
+            [
+              1.545,
+              2.853
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              -1.545,
+              2.853
+            ],
+            [
+              -2.939,
+              2.427
+            ],
+            [
+              -4.045,
+              1.763
+            ],
+            [
+              -4.755,
+              0.927
+            ],
+            [
+              -5,
+              0
+            ],
+            [
+              -4.755,
+              -0.927
+            ],
+            [
+              -4.045,
+              -1.763
+            ],
+            [
+              -2.939,
+              -2.427
+            ],
+            [
+              -1.545,
+              -2.853
+            ],
+            [
+              0,
+              -3
+            ],
+            [
+              1.545,
+              -2.853
+            ],
+            [
+              2.939,
+              -2.427
+            ],
+            [
+              4.045,
+              -1.763
+            ],
+            [
+              4.755,
+              -0.927
+            ]
+          ],
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.06)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3.5355,
+            2.1213
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            3.6426
+          ],
+          "to": [
+            6,
+            0.6426
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.5355,
+            2.1213
+          ],
+          "label": "P",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.6,
+            1.75
+          ],
+          "text": "t = π/4",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.1,
+            3.05
+          ],
+          "text": "切线",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "参数曲线：椭圆 x = 5cos t，y = 3sin t"
+    },
+    "examples": [
+      {
+        "problem": "已知椭圆由参数方程 $\\begin{cases} x=5\\cos t\\\\ y=3\\sin t\\end{cases}$ 给出，求 $\\frac{dy}{dx}$，并求 $t=\\frac{\\pi}{4}$ 处的切线斜率。",
+        "solution": "$\\frac{dx}{dt}=-5\\sin t$，$\\frac{dy}{dt}=3\\cos t$，所以 $\\frac{dy}{dx}=\\frac{3\\cos t}{-5\\sin t}=-\\frac{3}{5}\\cot t$。当 $t=\\frac{\\pi}{4}$ 时 $\\cot t=1$，切线斜率为 $-\\frac{3}{5}$，对应点为 $\\left(\\frac{5\\sqrt2}{2},\\frac{3\\sqrt2}{2}\\right)$。"
+      },
+      {
+        "problem": "摆线由 $\\begin{cases} x=t-\\sin t\\\\ y=1-\\cos t\\end{cases}$ 给出，求 $\\frac{dy}{dx}$，并求 $t=\\frac{\\pi}{2}$ 处的切线方程。",
+        "solution": "$\\frac{dx}{dt}=1-\\cos t$，$\\frac{dy}{dt}=\\sin t$，故 $\\frac{dy}{dx}=\\frac{\\sin t}{1-\\cos t}$。当 $t=\\frac{\\pi}{2}$ 时斜率为 $\\frac{1-0}{1-0}=1$，对应点为 $\\left(\\frac{\\pi}{2}-1,\\ 1\\right)$，切线方程为 $y-1=x-\\left(\\frac{\\pi}{2}-1\\right)$，即 $y=x-\\frac{\\pi}{2}+2$。"
+      }
+    ],
+    "tags": [
+      "参数方程",
+      "求导",
+      "曲线"
+    ],
+    "links": [
+      "derivative",
+      "chain-rule",
+      "implicit-differentiation",
+      "curvature",
+      "arc-length"
+    ]
+  },
+  {
+    "id": "differential",
+    "title": "微分",
+    "titleEn": "Differential",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "函数增量的线性主部 dy = f′(x)dx，用于近似计算。",
+    "summaryEn": "The linear main part of the increment, dy = f′(x)dx, used for approximations.",
+    "definition": "设函数 $y=f(x)$ 在点 $x$ 处可导。当自变量有增量 $\\Delta x$ 时，函数增量为 $\\Delta y=f(x+\\Delta x)-f(x)$。由导数的定义可以写成\n\n$$\\Delta y=f'(x)\\Delta x+o(\\Delta x)$$\n\n也就是说，$\\Delta y$ 被拆成两部分：一部分是 $\\Delta x$ 的线性项 $f'(x)\\Delta x$，另一部分是比 $\\Delta x$ 高阶的无穷小。这个线性主部就叫做函数在点 $x$ 处的**微分**，记作 $dy=f'(x)\\,\\Delta x$。\n\n习惯上把自变量的微分规定为它的增量，即 $dx=\\Delta x$，于是微分写作\n\n$$dy=f'(x)\\,dx$$\n\n在一元函数中，**可导与可微是等价的**：函数在某点可导，当且仅当它在该点可微，并且 $dy=f'(x)dx$。\n\n微分的几何意义是**切线上纵坐标的增量**：函数增量的主部，就是沿着切线走 $dx$ 所升高的高度。因此当 $|\\Delta x|$ 很小时有近似公式 $f(x_0+\\Delta x)\\approx f(x_0)+f'(x_0)\\Delta x$，这就是用切线代替曲线（线性近似），常用于近似计算与误差估计。",
+    "definitionEn": "Let $y=f(x)$ be differentiable at $x$. Giving the independent variable an increment $\\Delta x$ produces $\\Delta y=f(x+\\Delta x)-f(x)$. By the definition of the derivative,\n\n$$\\Delta y=f'(x)\\Delta x+o(\\Delta x)$$\n\nso the increment splits into a linear part $f'(x)\\Delta x$ plus a remainder of higher order in $\\Delta x$. That linear main part is the **differential** of $f$ at $x$: $dy=f'(x)\\,\\Delta x$.\n\nBy convention the differential of the independent variable equals its increment, $dx=\\Delta x$, so the differential is written\n\n$$dy=f'(x)\\,dx$$\n\nFor functions of one variable, **differentiability and having a derivative are equivalent**: $f$ is differentiable at a point exactly when $f'(x)$ exists there, with $dy=f'(x)dx$.\n\nGeometrically, $dy$ is the rise along the **tangent line**: the main part of $\\Delta y$ obtained by moving $dx$ along the tangent. Hence for small $|\\Delta x|$, $f(x_0+\\Delta x)\\approx f(x_0)+f'(x_0)\\Delta x$—linear approximation, the workhorse of approximate computation and error estimation.",
+    "formulas": [
+      {
+        "latex": "dy=f'(x)\\,dx",
+        "note": "微分的基本公式；dx 是自变量的微分",
+        "noteEn": "The basic formula; dx is the differential of the independent variable"
+      },
+      {
+        "latex": "\\Delta y=dy+o(\\Delta x)",
+        "note": "函数增量等于微分加上高阶无穷小",
+        "noteEn": "The increment equals the differential plus a higher-order infinitesimal"
+      },
+      {
+        "latex": "f(x_0+\\Delta x)\\approx f(x_0)+f'(x_0)\\Delta x",
+        "note": "线性近似公式（用切线代替曲线）",
+        "noteEn": "Linear approximation: replace the curve by its tangent"
+      },
+      {
+        "latex": "d\\bigl(x^2\\bigr)=2x\\,dx,\\quad d(\\sin x)=\\cos x\\,dx,\\quad d(\\ln x)=\\frac{1}{x}\\,dx",
+        "note": "常用函数的微分",
+        "noteEn": "Differentials of common functions"
+      },
+      {
+        "latex": "\\text{differentiable}\\ \\Longleftrightarrow\\ \\text{has a derivative}",
+        "note": "一元函数中可微与可导等价",
+        "noteEn": "In one variable, differentiable and having a derivative are equivalent"
+      }
+    ],
+    "expression": {
+      "text": "dy = f′(x) dx，Δy ≈ dy",
+      "symbol": "dy = f'(x)dx",
+      "note": "微分是函数增量的线性主部；当自变量增量很小时用它代替函数增量。",
+      "noteEn": "The differential is the linear main part of the increment; use it for small increments."
+    },
+    "properties": [
+      "一元函数中可导与可微等价，且 $dy=f'(x)dx$",
+      "$dy$ 是 $\\Delta y$ 的线性主部，误差 $\\Delta y-dy$ 是 $\\Delta x$ 的高阶无穷小",
+      "几何意义：$dy$ 是切线上纵坐标的增量，$\\Delta y$ 是曲线上纵坐标的增量",
+      "近似公式 $f(x_0+\\Delta x)\\approx f(x_0)+f'(x_0)\\Delta x$ 在 $|\\Delta x|$ 很小时精度很高",
+      "微分形式不变性：无论 $u$ 是自变量还是中间变量，都有 $dy=f'(u)\\,du$"
+    ],
+    "propertiesEn": [
+      "In one variable, differentiable is equivalent to having a derivative, with $dy=f'(x)dx$",
+      "$dy$ is the linear main part of $\\Delta y$; the error $\\Delta y-dy$ is $o(\\Delta x)$",
+      "Geometrically, $dy$ is the rise along the tangent while $\\Delta y$ is the rise along the curve",
+      "The approximation $f(x_0+\\Delta x)\\approx f(x_0)+f'(x_0)\\Delta x$ is very accurate for small $|\\Delta x|$",
+      "Form invariance: whether $u$ is an independent or intermediate variable, $dy=f'(u)du$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sqrt(x)",
+          "color": "#4cc9f0",
+          "label": "y = √x"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "sqrt(x)",
+          "at": 1,
+          "color": "#ff6b9d",
+          "label": "切线（线性近似）"
+        }
+      ],
+      "xRange": [
+        0.4,
+        2.6
+      ],
+      "yRange": [
+        0.1,
+        1.8
+      ],
+      "title": "微分与线性近似：√x 在 x = 1 附近的切线"
+    },
+    "examples": [
+      {
+        "problem": "求 $y=x^2$ 在 $x=1$ 处、$\\Delta x=0.01$ 时的微分 $dy$ 与函数增量 $\\Delta y$，并比较二者。",
+        "solution": "$dy=f'(1)\\Delta x=2\\times 1\\times 0.01=0.02$；而 $\\Delta y=1.01^2-1^2=0.0201$。可见 $\\Delta y\\approx dy$，且误差 $\\Delta y-dy=0.0001=(\\Delta x)^2$ 恰是 $\\Delta x$ 的高阶无穷小。"
+      },
+      {
+        "problem": "用微分近似计算 $\\sqrt{1.02}$。",
+        "solution": "取 $f(x)=\\sqrt{x}$，$x_0=1$，$\\Delta x=0.02$。$f'(x)=\\frac{1}{2\\sqrt{x}}$，故 $f'(1)=\\frac12$，于是 $\\sqrt{1.02}\\approx f(1)+f'(1)\\Delta x=1+\\frac12\\times 0.02=1.01$。真值 $\\sqrt{1.02}\\approx 1.00995$，误差极小。"
+      }
+    ],
+    "tags": [
+      "微分",
+      "线性近似",
+      "近似计算"
+    ],
+    "links": [
+      "derivative",
+      "differentiation-rules",
+      "chain-rule",
+      "total-differential",
+      "taylor-formula"
+    ]
+  },
+  {
+    "id": "mean-value-theorems",
+    "title": "微分中值定理",
+    "titleEn": "Mean Value Theorems",
+    "branch": "calculus",
+    "level": 5,
+    "summary": "罗尔、拉格朗日与柯西中值定理，用导数刻画函数的整体变化。",
+    "summaryEn": "Rolle's, Lagrange's and Cauchy's theorems, linking overall change to the derivative.",
+    "definition": "微分中值定理是一组「用导数刻画函数整体变化」的定理，最核心的是三个。\n\n**罗尔定理**：若 $f(x)$ 在闭区间 $[a,b]$ 上连续，在开区间 $(a,b)$ 内可导，且 $f(a)=f(b)$，则存在 $\\xi\\in(a,b)$，使 $f'(\\xi)=0$。\n\n**拉格朗日中值定理**：若 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，则存在 $\\xi\\in(a,b)$，使\n\n$$f(b)-f(a)=f'(\\xi)(b-a)$$\n\n它去掉了端点相等的限制，罗尔定理是它的特例（$f(a)=f(b)$ 时弦水平）。\n\n**柯西中值定理**：若 $f(x)$ 与 $g(x)$ 都在 $[a,b]$ 上连续、在 $(a,b)$ 内可导，且 $g'(x)\\neq 0$，则存在 $\\xi\\in(a,b)$，使 $\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(\\xi)}{g'(\\xi)}$。\n\n拉格朗日定理的几何意义是：曲线弧上至少有一点，其切线平行于连接端点的弦。它是用导数研究函数单调性、证明不等式与恒等式的理论基石。",
+    "definitionEn": "The mean value theorems describe the overall change of a function through its derivative. The three core ones:\n\n**Rolle's theorem**: if $f(x)$ is continuous on the closed interval $[a,b]$, differentiable on the open interval $(a,b)$, and $f(a)=f(b)$, then there exists $\\xi\\in(a,b)$ with $f'(\\xi)=0$.\n\n**Lagrange's mean value theorem**: if $f(x)$ is continuous on $[a,b]$ and differentiable on $(a,b)$, then there exists $\\xi\\in(a,b)$ with\n\n$$f(b)-f(a)=f'(\\xi)(b-a)$$\n\nIt drops the equal-endpoint restriction; Rolle's theorem is the special case $f(a)=f(b)$.\n\n**Cauchy's mean value theorem**: if $f(x)$ and $g(x)$ are both continuous on $[a,b]$ and differentiable on $(a,b)$ with $g'(x)\\neq 0$, then there exists $\\xi\\in(a,b)$ with $\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(\\xi)}{g'(\\xi)}$.\n\nGeometrically, Lagrange's theorem says some tangent is parallel to the chord joining the endpoints. It is the foundation for studying monotonicity with derivatives and for proving inequalities and identities.",
+    "formulas": [
+      {
+        "latex": "f(a)=f(b)\\ \\Rightarrow\\ \\exists\\,\\xi\\in(a,b),\\ f'(\\xi)=0",
+        "note": "罗尔定理：端点相等时存在水平切线（条件：闭区间连续、开区间可导）",
+        "noteEn": "Rolle: equal endpoints force a horizontal tangent (continuous on [a,b], differentiable on (a,b))"
+      },
+      {
+        "latex": "f(b)-f(a)=f'(\\xi)(b-a),\\quad \\xi\\in(a,b)",
+        "note": "拉格朗日中值定理：函数增量等于某点导数乘区间长度",
+        "noteEn": "Lagrange: the increment equals some derivative times the interval length"
+      },
+      {
+        "latex": "\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(\\xi)}{g'(\\xi)}\\quad\\bigl(g'(x)\\neq 0\\bigr)",
+        "note": "柯西中值定理：两个函数的增量之比等于某点导数之比",
+        "noteEn": "Cauchy: ratio of increments equals ratio of derivatives at some point"
+      },
+      {
+        "latex": "f'(x)=0\\ \\text{on an interval}\\ \\Rightarrow\\ f(x)\\equiv C",
+        "note": "拉格朗日定理的推论：导数为零则函数为常数",
+        "noteEn": "Corollary: zero derivative on an interval means a constant function"
+      }
+    ],
+    "expression": {
+      "text": "f(b) − f(a) = f′(ξ)(b − a)，ξ ∈ (a, b)",
+      "symbol": "(f(b)-f(a))/(b-a) = f'(ξ)",
+      "note": "弦的斜率等于区间内某点处的切线斜率；条件是闭区间连续、开区间可导。",
+      "noteEn": "The chord slope equals the tangent slope somewhere inside—given continuity on [a,b] and differentiability on (a,b)."
+    },
+    "properties": [
+      "条件必须写全：闭区间 $[a,b]$ 上连续、开区间 $(a,b)$ 内可导；柯西定理还要求 $g'(x)\\neq 0$",
+      "罗尔定理是拉格朗日中值定理在 $f(a)=f(b)$ 时的特例；拉格朗日又是柯西定理取 $g(x)=x$ 的特例",
+      "几何意义：曲线上存在一点，其切线平行于连接端点的弦（罗尔定理中这条弦是水平的）",
+      "推论：若区间内恒有 $f'(x)=0$，则 $f(x)$ 在该区间上为常数",
+      "中值定理是证明不等式、恒等式以及推导洛必达法则的核心工具"
+    ],
+    "propertiesEn": [
+      "All hypotheses matter: continuous on the closed interval and differentiable on the open interval; Cauchy's version also needs $g'(x)\\neq 0$",
+      "Rolle's theorem is the case $f(a)=f(b)$ of Lagrange's; Lagrange's is the case $g(x)=x$ of Cauchy's",
+      "Geometrically, some tangent is parallel to the chord joining the endpoints (horizontal in Rolle's case)",
+      "Corollary: if $f'(x)=0$ throughout an interval, then $f$ is constant there",
+      "The mean value theorems are the engine behind inequalities, identities and L'Hôpital's rule"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^3 - 3*x",
+          "color": "#4cc9f0",
+          "label": "y = f(x)"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "割线（斜率 = 1）"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "x^3 - 3*x",
+          "at": 1.1547,
+          "color": "#ff6b9d",
+          "label": "切线（斜率 = 1）"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        2.5
+      ],
+      "yRange": [
+        -4,
+        9
+      ],
+      "title": "拉格朗日中值定理：切线平行于割线"
+    },
+    "examples": [
+      {
+        "problem": "验证函数 $f(x)=x^3-3x$ 在区间 $[0,2]$ 上满足拉格朗日中值定理，并求出定理中的 $\\xi$。",
+        "solution": "$f(x)$ 是多项式，在 $[0,2]$ 上连续、在 $(0,2)$ 内可导，条件满足。$f(0)=0$，$f(2)=8-6=2$，弦的斜率为 $\\frac{2-0}{2-0}=1$。令 $f'(x)=3x^2-3=1$，得 $x^2=\\frac43$，取正根 $x=\\frac{2\\sqrt3}{3}\\in(0,2)$，即 $\\xi=\\frac{2\\sqrt3}{3}$。"
+      },
+      {
+        "problem": "证明：对任意实数 $a<b$，都有 $|\\sin b-\\sin a|\\le b-a$。",
+        "solution": "设 $f(x)=\\sin x$。它在 $[a,b]$ 上连续、在 $(a,b)$ 内可导，由拉格朗日中值定理，存在 $\\xi\\in(a,b)$ 使 $\\sin b-\\sin a=\\cos\\xi\\cdot(b-a)$。两边取绝对值，由 $|\\cos\\xi|\\le 1$ 得 $|\\sin b-\\sin a|=|\\cos\\xi|\\cdot(b-a)\\le b-a$。"
+      }
+    ],
+    "tags": [
+      "中值定理",
+      "拉格朗日",
+      "罗尔定理"
+    ],
+    "links": [
+      "derivative",
+      "continuity",
+      "monotonicity-extremum",
+      "lhopital",
+      "taylor-formula"
+    ]
+  },
+  {
+    "id": "curvature",
+    "title": "曲率",
+    "titleEn": "Curvature",
+    "branch": "calculus",
+    "level": 5,
+    "summary": "描述曲线弯曲程度的量：K = |y″| / (1+y′²)^{3/2}。",
+    "summaryEn": "Measuring how sharply a curve bends: K = |y″| / (1+y′²)^{3/2}.",
+    "definition": "曲率刻画曲线弯曲的剧烈程度。在光滑曲线上取一点 $M$，让邻近点 $M'$ 沿曲线趋近于 $M$：切线转过的角度为 $\\Delta\\alpha$，所经过的弧长为 $\\Delta s$，则定义点 $M$ 处的**曲率**为\n\n$$K=\\lim_{\\Delta s\\to 0}\\left|\\frac{\\Delta\\alpha}{\\Delta s}\\right|$$\n\n直观地说，曲率就是「切线方向对弧长的变化率」：走过同样长的弧，切线转得越快，曲线弯得越厉害。\n\n对于显式曲线 $y=f(x)$（$f$ 二阶可导），由弧微分与倾角的关系可得\n\n$$K=\\frac{|y''|}{(1+y'^2)^{3/2}}$$\n\n特别地，直线的曲率处处为 $0$；半径为 $R$ 的圆，曲率处处等于 $\\frac{1}{R}$——半径越小圆弯得越厉害，与直觉完全一致。\n\n曲率的倒数 $\\rho=\\frac{1}{K}$ 称为**曲率半径**。在该点凹侧的法线方向上，以到该点距离为 $\\rho$ 的点为圆心、$\\rho$ 为半径所作出的圆称为该点的**曲率圆**（也称**密切圆**）：它与曲线在该点有相同的切线和相同的曲率，是与曲线「最贴近」的圆。",
+    "definitionEn": "Curvature measures how sharply a curve bends. Take a point $M$ on a smooth curve and let a nearby point $M'$ approach $M$ along the curve; if the tangent turns by an angle $\\Delta\\alpha$ while the arc traveled is $\\Delta s$, the **curvature** at $M$ is defined as\n\n$$K=\\lim_{\\Delta s\\to 0}\\left|\\frac{\\Delta\\alpha}{\\Delta s}\\right|$$\n\nIntuitively, it is the rate at which the tangent direction turns per unit arc length: the faster the tangent turns, the more the curve bends.\n\nFor an explicit curve $y=f(x)$ with $f$ twice differentiable,\n\n$$K=\\frac{|y''|}{(1+y'^2)^{3/2}}$$\n\nIn particular, a straight line has curvature $0$ everywhere; a circle of radius $R$ has curvature $\\frac{1}{R}$ everywhere—smaller circles bend more, exactly as intuition suggests.\n\nThe reciprocal $\\rho=\\frac{1}{K}$ is the **radius of curvature**. The circle of radius $\\rho$ centered on the concave side along the normal is the **osculating circle**, sharing the same tangent and the same curvature as the curve at that point—the circle that best hugs the curve.",
+    "formulas": [
+      {
+        "latex": "K=\\lim_{\\Delta s\\to 0}\\left|\\frac{\\Delta\\alpha}{\\Delta s}\\right|",
+        "note": "曲率的定义：切线倾角对弧长的变化率",
+        "noteEn": "Definition: the rate of turning of the tangent per unit arc length"
+      },
+      {
+        "latex": "K=\\frac{|y''|}{(1+y'^2)^{3/2}}",
+        "note": "显式曲线 y = f(x) 的曲率公式",
+        "noteEn": "Curvature of an explicit curve y = f(x)"
+      },
+      {
+        "latex": "K=\\frac{|x'y''-y'x''|}{(x'^2+y'^2)^{3/2}}",
+        "note": "参数曲线 x = x(t)，y = y(t) 的曲率",
+        "noteEn": "Curvature of a parametric curve x = x(t), y = y(t)"
+      },
+      {
+        "latex": "K=\\frac{1}{R}",
+        "note": "半径为 R 的圆上每一点的曲率",
+        "noteEn": "A circle of radius R has curvature 1/R at every point"
+      },
+      {
+        "latex": "\\rho=\\frac{1}{K}",
+        "note": "曲率半径：密切圆的半径",
+        "noteEn": "Radius of curvature: the radius of the osculating circle"
+      }
+    ],
+    "expression": {
+      "text": "K = |y″| / (1 + y′²)^{3/2}，ρ = 1/K",
+      "symbol": "K = |y''|/(1+y'^2)^{3/2}",
+      "note": "曲率越大曲线弯得越厉害；直线曲率为 0，半径 R 的圆曲率为 1/R。",
+      "noteEn": "Larger curvature means sharper bending; a line has K = 0 and a circle of radius R has K = 1/R."
+    },
+    "properties": [
+      "直线的曲率恒为 $0$；半径为 $R$ 的圆曲率恒为 $\\frac{1}{R}$，与点的位置无关",
+      "在 $y'=0$（水平切线）处 $K=|y''|$，二阶导数直接给出曲率",
+      "曲率半径 $\\rho=\\frac{1}{K}$，密切圆在该点与曲线有相同的切线、相同的曲率",
+      "曲率是旋转不变的几何量：曲线旋转或平移后曲率不变，而 $y''$ 本身会随坐标系改变",
+      "工程中用曲率描述弯道、铁轨与光学镜面的弯曲程度；半径越小的地方曲率越大"
+    ],
+    "propertiesEn": [
+      "A line has curvature $0$; a circle of radius $R$ has curvature $1/R$ at every point",
+      "Where $y'=0$ (horizontal tangent), $K=|y''|$: the second derivative itself gives the curvature",
+      "The radius of curvature is $\\rho=1/K$; the osculating circle matches the curve's tangent and curvature there",
+      "Curvature is invariant under rotations and translations, unlike $y''$ itself",
+      "Engineers use curvature for roads, railway tracks and optical surfaces: smaller radius means larger curvature"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.52,
+        2.52
+      ],
+      "yRange": [
+        -1.1,
+        1.7
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -1.1,
+            0
+          ],
+          "to": [
+            1.1,
+            0
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -1.25,
+            1.5625
+          ],
+          "to": [
+            -1,
+            1
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -1,
+            1
+          ],
+          "to": [
+            -0.75,
+            0.5625
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.75,
+            0.5625
+          ],
+          "to": [
+            -0.5,
+            0.25
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.5,
+            0.25
+          ],
+          "to": [
+            -0.25,
+            0.0625
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.25,
+            0.0625
+          ],
+          "to": [
+            0,
+            0
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            0.25,
+            0.0625
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.25,
+            0.0625
+          ],
+          "to": [
+            0.5,
+            0.25
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.5,
+            0.25
+          ],
+          "to": [
+            0.75,
+            0.5625
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.75,
+            0.5625
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            1.25,
+            1.5625
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0.5,
+          "r": 0.5,
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.5
+          ],
+          "to": [
+            0,
+            0
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "color": "#ff6b9d",
+          "label": "P（切点）"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0.5
+          ],
+          "color": "#ffd166",
+          "label": "C"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.6,
+            -0.32
+          ],
+          "text": "ρ = 1/2",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.75,
+            1.15
+          ],
+          "text": "y = x²",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.42,
+            -0.28
+          ],
+          "text": "切线",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.25,
+            -0.75
+          ],
+          "text": "密切圆：K = 2",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "抛物线 y = x² 顶点处的密切圆（K = 2，ρ = 1/2）"
+    },
+    "examples": [
+      {
+        "problem": "求抛物线 $y=x^2$ 在顶点 $(0,0)$ 处的曲率、曲率半径与曲率圆。",
+        "solution": "$y'=2x$，$y''=2$。在 $x=0$ 处 $y'=0$，$y''=2$，所以 $K=\\frac{|y''|}{(1+y'^2)^{3/2}}=\\frac{2}{(1+0)^{3/2}}=2$，曲率半径 $\\rho=\\frac{1}{K}=\\frac12$。曲率圆的圆心在凹侧（上方）距顶点 $\\rho$ 处，即 $\\left(0,\\frac12\\right)$，方程为 $x^2+\\left(y-\\frac12\\right)^2=\\frac14$。"
+      },
+      {
+        "problem": "求半径为 $R$ 的圆上任一点处的曲率。",
+        "solution": "取参数方程 $x=R\\cos t$，$y=R\\sin t$。则 $x'=-R\\sin t$，$y'=R\\cos t$，$x''=-R\\cos t$，$y''=-R\\sin t$。代入参数式曲率公式：分子 $|x'y''-y'x''|=R^2(\\sin^2t+\\cos^2t)=R^2$，分母 $(x'^2+y'^2)^{3/2}=(R^2)^{3/2}=R^3$，故 $K=\\frac{R^2}{R^3}=\\frac{1}{R}$，与点 $t$ 无关。"
+      }
+    ],
+    "tags": [
+      "曲率",
+      "曲率半径",
+      "密切圆"
+    ],
+    "links": [
+      "derivative",
+      "higher-order-derivative",
+      "parametric-derivative",
+      "arc-length",
+      "concavity-inflection"
+    ]
+  }
+]

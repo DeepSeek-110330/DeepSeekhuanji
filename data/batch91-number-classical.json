@@ -1,0 +1,449 @@
+[
+  {
+    "id": "euler-totient-theorem",
+    "title": "欧拉函数与欧拉定理",
+    "titleEn": "Euler's Totient Function and Euler's Theorem",
+    "branch": "number",
+    "level": 4,
+    "summary": "欧拉函数 φ(n) 数出 1 到 n 中与 n 互素的整数个数；欧拉定理进一步断言：当 (a,m)=1 时 a^{φ(m)}≡1 (mod m)，它是模幂运算、RSA 与全部缩剩余理论的地基。",
+    "summaryEn": "Euler's totient φ(n) counts the integers in 1…n coprime to n; Euler's theorem adds that a^{φ(m)}≡1 (mod m) whenever gcd(a,m)=1 — the foundation of modular exponentiation, RSA and reduced residues.",
+    "definition": "设 $n$ 为正整数。**欧拉函数** $\\varphi(n)$（读作「phi」）定义为 $1,2,\\dots,n$ 中与 $n$ 互素的整数个数：与 12 互素的是 $1,5,7,11$，故 $\\varphi(12)=4$；与 10 互素的是 $1,3,7,9$，故 $\\varphi(10)=4$。按这个定义 $\\varphi(1)=1$（整数 1 与 1 互素），而这个约定让下面所有公式在 $n=1$ 处也自洽。\n\n计算 φ 的关键是它在素数幂上的取值：$1,\\dots,p^k$ 中与 $p^k$ 互素的补集恰是 $p$ 的倍数，共 $p^{k-1}$ 个，故 $\\varphi(p^k)=p^k-p^{k-1}$；特别地 $\\varphi(p)=p-1$。更一般地，φ 是**积性函数**：当 $\\gcd(m,n)=1$ 时 $\\varphi(mn)=\\varphi(m)\\varphi(n)$。互素条件不能省——$\\varphi(4)=2$，而 $\\varphi(2)\\varphi(2)=1$。把素数幂公式与积性合并即得 $\\varphi(n)=n\\prod_{p\\mid n}(1-1/p)$，例如 $\\varphi(100)=100\\cdot\\frac12\\cdot\\frac45=40$。\n\n**欧拉定理**：若 $\\gcd(a,m)=1$，则 $a^{\\varphi(m)}\\equiv 1\\pmod m$。证明用「置换论证」：设 $r_1,\\dots,r_{\\varphi(m)}$ 是模 $m$ 全部缩剩余类的一组代表元。因 $\\gcd(a,m)=1$，乘以 $a$ 仍把缩剩余映为缩剩余；又若 $ar_i\\equiv ar_j\\pmod m$，两边乘 $a$ 的逆元约去 $a$ 得 $r_i\\equiv r_j$，故 $ar_1,\\dots,ar_{\\varphi(m)}$ 恰是原集合的一个置换。于是 $\\prod_i(ar_i)\\equiv\\prod_i r_i\\pmod m$，即 $a^{\\varphi(m)}\\prod_i r_i\\equiv\\prod_i r_i\\pmod m$；乘积 $\\prod_i r_i$ 与 $m$ 互素、模 $m$ 可逆，两边约去即得定理。\n\n欧拉定理是费马小定理在任意模数上的推广，也是 RSA 解密正确性的理论基础；当 $m$ 为素数时它退化为 $a^{p-1}\\equiv 1\\pmod p$。",
+    "definitionEn": "For a positive integer $n$, **Euler's totient function** $\\varphi(n)$ counts how many of $1,2,\\dots,n$ are coprime to $n$: since $1,5,7,11$ are coprime to 12, $\\varphi(12)=4$, and $\\varphi(10)=4$ because $1,3,7,9$ are. By definition $\\varphi(1)=1$ (the integer 1 is coprime to 1), an agreement that keeps every formula below valid at $n=1$.\n\nThe engine is the value on prime powers: among $1,\\dots,p^k$ exactly the $p^{k-1}$ multiples of $p$ fail to be coprime to $p^k$, so $\\varphi(p^k)=p^k-p^{k-1}$; in particular $\\varphi(p)=p-1$. Moreover φ is **multiplicative**: $\\varphi(mn)=\\varphi(m)\\varphi(n)$ whenever $\\gcd(m,n)=1$. The coprimality hypothesis cannot be dropped: $\\varphi(4)=2$ while $\\varphi(2)\\varphi(2)=1$. Combining both facts yields $\\varphi(n)=n\\prod_{p\\mid n}(1-1/p)$, e.g. $\\varphi(100)=100\\cdot\\frac12\\cdot\\frac45=40$.\n\n**Euler's theorem**: if $\\gcd(a,m)=1$ then $a^{\\varphi(m)}\\equiv 1\\pmod m$. The proof is a permutation argument: let $r_1,\\dots,r_{\\varphi(m)}$ represent the reduced residue classes modulo $m$. Multiplication by the unit $a$ still maps reduced residues to reduced residues, and it is injective (cancel $a$ by its inverse), so $ar_1,\\dots,ar_{\\varphi(m)}$ is a permutation of the original list. Hence $\\prod_i(ar_i)\\equiv\\prod_i r_i\\pmod m$; the product $\\prod_i r_i$ is coprime to $m$ and invertible, and cancelling it gives the theorem.\n\nEuler's theorem generalises Fermat's little theorem to arbitrary moduli and underpins the correctness of RSA decryption; for a prime modulus $m=p$ it reduces to $a^{p-1}\\equiv 1\\pmod p$.",
+    "formulas": [
+      {
+        "latex": "\\varphi(n)=\\#\\{1\\le k\\le n:\\gcd(k,n)=1\\},\\qquad \\varphi(1)=1",
+        "note": "欧拉函数的定义：数出 1 到 $n$ 中与 $n$ 互素的整数个数；特别地 $\\varphi(1)=1$。",
+        "noteEn": "Definition: $\\varphi(n)$ counts the integers from 1 to $n$ coprime to $n$; in particular $\\varphi(1)=1$."
+      },
+      {
+        "latex": "\\varphi(p^{k})=p^{k}-p^{k-1}=p^{k-1}(p-1)\\qquad(p\\ \\text{为素数},\\ k\\ge 1)",
+        "note": "素数幂公式：$1$ 到 $p^k$ 中不互素的数恰是 $p$ 的倍数，共 $p^{k-1}$ 个。例 $\\varphi(8)=4$、$\\varphi(9)=6$。",
+        "noteEn": "Prime-power formula: the non-coprime numbers among $1,\\dots,p^k$ are exactly the $p^{k-1}$ multiples of $p$. E.g. $\\varphi(8)=4$, $\\varphi(9)=6$."
+      },
+      {
+        "latex": "\\gcd(m,n)=1\\ \\Longrightarrow\\ \\varphi(mn)=\\varphi(m)\\,\\varphi(n)",
+        "note": "积性：只在 $m,n$ 互素时成立（条件不可省：$\\varphi(4)=2\\neq\\varphi(2)\\varphi(2)=1$）。例 $\\varphi(360)=\\varphi(8)\\varphi(9)\\varphi(5)=4\\cdot 6\\cdot 4=96$。",
+        "noteEn": "Multiplicativity, valid only for coprime $m,n$ (the hypothesis is essential: $\\varphi(4)=2\\neq\\varphi(2)\\varphi(2)=1$). E.g. $\\varphi(360)=4\\cdot 6\\cdot 4=96$."
+      },
+      {
+        "latex": "\\varphi(n)=n\\prod_{p\\mid n}\\Bigl(1-\\frac{1}{p}\\Bigr)",
+        "note": "一般公式：乘积跑遍 $n$ 的所有不同素因子，每个只出现一次。例 $\\varphi(100)=100\\cdot\\frac12\\cdot\\frac45=40$。",
+        "noteEn": "The general formula: the product runs over the distinct prime divisors of $n$, each taken once. E.g. $\\varphi(100)=40$."
+      },
+      {
+        "latex": "\\gcd(a,m)=1\\ \\Longrightarrow\\ a^{\\varphi(m)}\\equiv 1\\pmod m",
+        "note": "欧拉定理。推论：当 $\\gcd(a,m)=1$ 且 $k\\ge 0$ 时指数可按模 $\\varphi(m)$ 化简，$a^k\\equiv a^{k\\bmod\\varphi(m)}\\pmod m$。",
+        "noteEn": "Euler's theorem. Consequence: if $\\gcd(a,m)=1$ and $k\\ge 0$, exponents may be reduced modulo $\\varphi(m)$, $a^k\\equiv a^{k\\bmod\\varphi(m)}\\pmod m$."
+      }
+    ],
+    "properties": [
+      "$\\varphi(1)=\\varphi(2)=1$；当 $n>2$ 时 $\\varphi(n)$ 恒为偶数——互素的 $k$ 与 $n-k$ 总是成对出现。",
+      "$p$ 为素数时 $\\varphi(p)=p-1$；对 $n>1$ 有 $\\varphi(n)\\le n-1$，等号成立当且仅当 $n$ 为素数。",
+      "分组恒等式 $n=\\sum_{d\\mid n}\\varphi(d)$：把 $1,\\dots,n$ 按 $\\gcd(k,n)$ 的值分组，满足 $\\gcd(k,n)=d$ 的 $k$ 恰有 $\\varphi(n/d)$ 个。",
+      "欧拉定理是费马小定理的推广：取 $m=p$（素数）即得 $a^{p-1}\\equiv 1\\pmod p$。",
+      "应用：RSA 中 $ed\\equiv 1\\pmod{\\varphi(N)}$，解密依赖欧拉定理（$\\gcd(m,N)>1$ 的少数情形可由中国剩余定理单独验证）。"
+    ],
+    "propertiesEn": [
+      "$\\varphi(1)=\\varphi(2)=1$; for $n>2$ the value $\\varphi(n)$ is always even, since coprime $k$ and $n-k$ come in pairs.",
+      "For a prime $p$, $\\varphi(p)=p-1$; for $n>1$ one has $\\varphi(n)\\le n-1$ with equality precisely when $n$ is prime.",
+      "The grouping identity $n=\\sum_{d\\mid n}\\varphi(d)$: grouping $1,\\dots,n$ by the value of $\\gcd(k,n)$, exactly $\\varphi(n/d)$ numbers satisfy $\\gcd(k,n)=d$.",
+      "Euler's theorem generalises Fermat's little theorem: taking $m=p$ prime recovers $a^{p-1}\\equiv 1\\pmod p$.",
+      "Application: in RSA the exponents satisfy $ed\\equiv 1\\pmod{\\varphi(N)}$ and decryption relies on Euler's theorem (the few cases $\\gcd(m,N)>1$ are handled separately via the Chinese remainder theorem)."
+    ],
+    "examples": [
+      {
+        "problem": "计算 $\\varphi(360)$，并用积性分解复核。",
+        "solution": "$360=2^3\\cdot 3^2\\cdot 5$。由 $\\varphi(n)=n\\prod_{p\\mid n}(1-1/p)$ 得 $\\varphi(360)=360\\cdot\\frac12\\cdot\\frac23\\cdot\\frac45=96$。再用积性分步复核：$\\varphi(8)=4$，$\\varphi(9)=6$，$\\varphi(5)=4$，$\\varphi(360)=\\varphi(8)\\varphi(9)\\varphi(5)=4\\cdot 6\\cdot 4=96$，两者一致。"
+      },
+      {
+        "problem": "用欧拉定理求 $7^{222}$ 除以 100 的余数。",
+        "solution": "$\\gcd(7,100)=1$ 且 $\\varphi(100)=40$；由 $222=40\\cdot 5+22$ 得 $7^{222}\\equiv 7^{22}\\pmod{100}$。又 $7^4=2401\\equiv 1\\pmod{100}$，故 $7^{22}=7^{4\\cdot 5+2}=(7^4)^5\\cdot 7^2\\equiv 1\\cdot 49=49\\pmod{100}$。所以余数为 49。"
+      }
+    ],
+    "tags": [
+      "数论",
+      "欧拉函数",
+      "同余",
+      "模幂",
+      "RSA"
+    ],
+    "links": [
+      "gcd-euclidean-algorithm",
+      "congruence-basics",
+      "chinese-remainder-theorem",
+      "fermat-little-theorem",
+      "arithmetic-functions",
+      "rsa-cryptography"
+    ]
+  },
+  {
+    "id": "fermat-little-theorem",
+    "title": "费马小定理",
+    "titleEn": "Fermat's Little Theorem",
+    "branch": "number",
+    "level": 4,
+    "summary": "若 p 为素数且 p∤a，则 a^{p−1}≡1 (mod p)，等价地 a^p≡a (mod p) 对一切整数成立；它是模幂计算的起点，但逆命题不成立——伪素数 341 与卡迈克尔数 561 就是反例。",
+    "summaryEn": "For a prime p not dividing a, a^{p−1}≡1 (mod p); equivalently a^p≡a (mod p) for every integer a. It is the starting point of modular exponentiation, but the converse fails — witness the pseudoprime 341 and the Carmichael number 561.",
+    "definition": "设 $p$ 为素数，$a$ 为整数。**费马小定理**：若 $p\\nmid a$，则 $a^{p-1}\\equiv 1\\pmod p$。因为 $p\\mid a$ 时 $a^p\\equiv a\\equiv 0\\pmod p$，两种情况可以合并为对**一切整数** $a$ 成立的等价形式 $a^p\\equiv a\\pmod p$。\n\n证明只需一行：$p$ 为素数时 $\\varphi(p)=p-1$，欧拉定理（条件 $\\gcd(a,p)=1$）直接给出。也可以仿照置换论证：$a,2a,\\dots,(p-1)a$ 模 $p$ 两两不同余且都不为 0，故是 $1,2,\\dots,p-1$ 的一个置换；比较两边乘积并约去 $(p-1)!$（与 $p$ 互素、模 $p$ 可逆）即得。\n\n必须强调：**逆命题不成立**。满足 $a^{n-1}\\equiv 1\\pmod n$ 的合数 $n$ 称为以 $a$ 为底的**费马伪素数**：$341=11\\cdot 31$ 是最小的以 2 为底的伪素数（$2^{340}\\equiv 1\\pmod{341}$，见例题）。更强的反例是**卡迈克尔数**：对一切与 $n$ 互素的 $a$ 都有 $a^{n-1}\\equiv 1\\pmod n$ 的合数，最小的几个是 $561=3\\cdot 11\\cdot 17$、$1105=5\\cdot 13\\cdot 17$、$1729=7\\cdot 13\\cdot 19$；它们有无穷多个（Alford–Granville–Pomerance，1994）。\n\n用途：配合**快速幂**把大指数模幂化简（指数按 $p-1$ 缩简）；也是费马素性检验的基础——若某个与 $n$ 互素的底 $a$ 给出 $a^{n-1}\\not\\equiv 1\\pmod n$，就能断定 $n$ 是合数，但检验通过**不能**断定 $n$ 是素数，实践中要配合米勒–拉宾等更强的检验。",
+    "definitionEn": "Let $p$ be prime and $a$ an integer. **Fermat's little theorem** states that if $p\\nmid a$ then $a^{p-1}\\equiv 1\\pmod p$. Since $p\\mid a$ gives $a^p\\equiv a\\equiv 0\\pmod p$, the two cases combine into the equivalent form $a^p\\equiv a\\pmod p$, valid for **every** integer $a$.\n\nA one-line proof: $\\varphi(p)=p-1$, so Euler's theorem (which needs $\\gcd(a,p)=1$) applies directly. Equivalently, $a,2a,\\dots,(p-1)a$ are pairwise incongruent and nonzero modulo $p$, hence form a permutation of $1,\\dots,p-1$; comparing products and cancelling the invertible $(p-1)!$ gives the result.\n\nEmphatically, the **converse fails**. A composite $n$ with $a^{n-1}\\equiv 1\\pmod n$ is a Fermat pseudoprime to base $a$; the smallest to base 2 is $341=11\\cdot 31$. Even stronger, a **Carmichael number** is a composite $n$ with $a^{n-1}\\equiv 1\\pmod n$ for every $a$ coprime to $n$; the smallest are $561=3\\cdot 11\\cdot 17$, $1105=5\\cdot 13\\cdot 17$ and $1729=7\\cdot 13\\cdot 19$, and there are infinitely many of them (Alford–Granville–Pomerance, 1994).\n\nUses: fast modular exponentiation with exponents reduced modulo $p-1$, and the Fermat primality test — a base $a$ with $a^{n-1}\\not\\equiv 1\\pmod n$ proves $n$ composite, but passing the test never proves primality; stronger tests such as Miller–Rabin are used in practice.",
+    "formulas": [
+      {
+        "latex": "p\\ \\text{为素数},\\ p\\nmid a\\ \\Longrightarrow\\ a^{\\,p-1}\\equiv 1\\pmod p",
+        "note": "费马小定理的原始形式：与素数 $p$ 互素的底数，其 $p-1$ 次幂自动同余于 1。",
+        "noteEn": "The original form: a number not divisible by the prime $p$, raised to the power $p-1$, is automatically 1 modulo $p$."
+      },
+      {
+        "latex": "a^{p}\\equiv a\\pmod p\\qquad(\\text{对一切整数 }a,\\ p\\ \\text{为素数})",
+        "note": "等价形式：不再要求 $p\\nmid a$；也常写作「$p$ 整除 $a^p-a$」。",
+        "noteEn": "Equivalent form, dropping the hypothesis $p\\nmid a$; often stated as: $p$ divides $a^p-a$ for every integer $a$."
+      },
+      {
+        "latex": "a^{k}\\equiv a^{\\,k\\bmod (p-1)}\\pmod p\\qquad(p\\nmid a,\\ k\\ge 0)",
+        "note": "指数化简规则：先算 $k\\bmod(p-1)$ 再做快速幂。例如求 $2^{1000}\\bmod 7$ 时用 $1000\\bmod 6=4$。",
+        "noteEn": "Exponent reduction: first compute $k\\bmod(p-1)$, then use fast exponentiation; e.g. $1000\\bmod 6=4$ when computing $2^{1000}\\bmod 7$."
+      },
+      {
+        "latex": "n\\ \\text{为卡迈克尔数}\\iff n\\ \\text{合数、无平方因子，且}\\ \\forall\\,p\\mid n:\\ (p-1)\\mid(n-1)",
+        "note": "Korselt 判别法——卡迈克尔数的完整刻画。以 $561$ 为例：$2,10,16$ 都整除 $560$；$1105$ 时 $4,12,16$ 都整除 $1104$。",
+        "noteEn": "Korselt's criterion — a complete characterisation of Carmichael numbers. For 561 the numbers 2, 10, 16 all divide 560; for 1105 the numbers 4, 12, 16 all divide 1104."
+      }
+    ],
+    "properties": [
+      "$p=2$ 时定理平凡：$p-1=1$，而奇数 $a$ 满足 $a\\equiv 1\\pmod 2$。",
+      "$341=11\\cdot 31$ 是最小的以 2 为底的费马伪素数：$2^{340}\\equiv 1\\pmod{341}$ 却为合数——「通过费马检验」不是素性的充分条件。",
+      "卡迈克尔数 $561$、$1105$、$1729$ 对一切互素底数都通过费马检验，且有无穷多个；它们都无平方因子，并对每个素因子 $p$ 满足 $(p-1)\\mid(n-1)$。",
+      "与欧拉定理的关系：这是 $m=p$ 的特例（$\\varphi(p)=p-1$）；合数模要改用 $a^{\\varphi(m)}\\equiv 1\\pmod m$。",
+      "算法意义：$a^{p-1}\\bmod p$ 用快速幂只需 $O(\\log p)$ 次模乘，是素性检验与 RSA 的基本运算。"
+    ],
+    "propertiesEn": [
+      "For $p=2$ the statement is trivial: $p-1=1$ and every odd $a$ satisfies $a\\equiv 1\\pmod 2$.",
+      "$341=11\\cdot 31$ is the smallest Fermat pseudoprime to base 2: $2^{340}\\equiv 1\\pmod{341}$ although 341 is composite — passing the Fermat test is not sufficient for primality.",
+      "The Carmichael numbers $561$, $1105$, $1729$ pass the Fermat test for every coprime base, and there are infinitely many of them; each is square-free and satisfies $(p-1)\\mid(n-1)$ for every prime $p\\mid n$.",
+      "Relation to Euler's theorem: this is the case $m=p$ since $\\varphi(p)=p-1$; for composite moduli use $a^{\\varphi(m)}\\equiv 1\\pmod m$ instead.",
+      "Algorithmically, computing $a^{p-1}\\bmod p$ costs only $O(\\log p)$ modular multiplications via fast exponentiation — basic machinery for primality testing and RSA."
+    ],
+    "examples": [
+      {
+        "problem": "求 $2^{1000}$ 除以 7 的余数。",
+        "solution": "7 为素数且 $7\\nmid 2$，由费马小定理 $2^6\\equiv 1\\pmod 7$。由 $1000=6\\cdot 166+4$ 得 $2^{1000}=(2^6)^{166}\\cdot 2^4\\equiv 1\\cdot 16\\equiv 2\\pmod 7$，余数为 2。（也可用更小的周期 $2^3=8\\equiv 1$：$1000=3\\cdot 333+1$，同样得到 2。）"
+      },
+      {
+        "problem": "验证 341 是以 2 为底的费马伪素数。",
+        "solution": "先看合性：$341=11\\cdot 31$。再算 $2^{10}=1024=3\\cdot 341+1$，故 $2^{10}\\equiv 1\\pmod{341}$。于是 $2^{340}=(2^{10})^{34}\\equiv 1^{34}=1\\pmod{341}$。合数却满足费马同余，故 341 是以 2 为底的费马伪素数，说明小定理的逆命题不成立。"
+      }
+    ],
+    "tags": [
+      "数论",
+      "费马小定理",
+      "伪素数",
+      "卡迈克尔数",
+      "模幂"
+    ],
+    "links": [
+      "euler-totient-theorem",
+      "congruence-basics",
+      "primes-fundamental-theorem",
+      "primitive-roots",
+      "rsa-cryptography"
+    ]
+  },
+  {
+    "id": "primitive-roots",
+    "title": "原根与指数",
+    "titleEn": "Primitive Roots and Indices",
+    "branch": "number",
+    "level": 5,
+    "summary": "使 a^d≡1 (mod m) 的最小正整数 d 称为 a 模 m 的阶，它必整除 φ(m)；阶恰等于 φ(m) 的元素叫原根，当且仅当 m=1,2,4,p^k,2p^k 时存在，它把模乘化为指数的加法（离散对数）。",
+    "summaryEn": "The least positive d with a^d≡1 (mod m) is the order of a mod m, which always divides φ(m); elements of order exactly φ(m) are primitive roots, existing precisely when m=1,2,4,p^k,2p^k, and they turn modular multiplication into addition of indices (discrete logarithms).",
+    "definition": "设 $\\gcd(a,m)=1$。使 $a^d\\equiv 1\\pmod m$ 成立的最小正整数 $d$ 称为 $a$ 模 $m$ 的**阶**，记作 $\\operatorname{ord}_m(a)$。例如 $2^1=2$，$2^2=4$，$2^3=8\\equiv 1\\pmod 7$，故 $\\operatorname{ord}_7(2)=3$。阶的等价刻画：$a^k\\equiv 1\\pmod m$ 当且仅当 $\\operatorname{ord}_m(a)\\mid k$。\n\n基本定理：**阶整除 $\\varphi(m)$**。证明：欧拉定理给出 $a^{\\varphi(m)}\\equiv 1$；作带余除法 $\\varphi(m)=qd+r$（$0\\le r<d$），则 $a^r\\equiv a^{\\varphi(m)}\\cdot(a^d)^{-q}\\equiv 1\\pmod m$，由 $d$ 的最小性得 $r=0$。\n\n若 $\\operatorname{ord}_m(a)=\\varphi(m)$，称 $a$ 为模 $m$ 的**原根**。原根存在时，它的幂 $a^0,a^1,\\dots,a^{\\varphi(m)-1}$ 两两不同余且遍历全体缩剩余类，即 $(\\mathbb{Z}/m\\mathbb{Z})^{\\times}$ 是循环群。原根的存在性有完整分类：$(\\mathbb{Z}/m\\mathbb{Z})^{\\times}$ 循环**当且仅当** $m=1,2,4,p^k,2p^k$（$p$ 为奇素数，$k\\ge 1$）。例如模 8 的缩剩余 $1,3,5,7$ 都满足 $a^2\\equiv 1$，无原根；模 18 则有原根 5 与 11。原根存在时个数恰为 $\\varphi(\\varphi(m))$。\n\n原根 $g$ 的价值在于**指数表**（离散对数）：每个缩剩余 $a$ 可唯一地写成 $a\\equiv g^e\\pmod m$，$e\\in\\{0,\\dots,\\varphi(m)-1\\}$，记 $e=\\operatorname{ind}_g(a)$。它把乘法翻译成模 $\\varphi(m)$ 的加法：$\\operatorname{ind}_g(ab)\\equiv\\operatorname{ind}_g(a)+\\operatorname{ind}_g(b)\\pmod{\\varphi(m)}$，正如对数把乘法化为加法。例如模 7 取原根 $g=3$，则 $\\operatorname{ind}_g(2)=2$、$\\operatorname{ind}_g(3)=1$，于是 $\\operatorname{ind}_g(6)=3$，确实 $3^3=27\\equiv 6\\pmod 7$。",
+    "definitionEn": "Let $\\gcd(a,m)=1$. The least positive $d$ with $a^d\\equiv 1\\pmod m$ is the **order** of $a$ modulo $m$, written $\\operatorname{ord}_m(a)$: for instance $2^3=8\\equiv 1\\pmod 7$ and no smaller power works, so $\\operatorname{ord}_7(2)=3$. Equivalently, $a^k\\equiv 1\\pmod m$ iff $\\operatorname{ord}_m(a)\\mid k$.\n\nFundamental fact: the **order divides $\\varphi(m)$**. Indeed Euler's theorem gives $a^{\\varphi(m)}\\equiv 1$; writing $\\varphi(m)=qd+r$ with $0\\le r<d$, we get $a^r\\equiv a^{\\varphi(m)}(a^d)^{-q}\\equiv 1\\pmod m$, and minimality of $d$ forces $r=0$.\n\nIf $\\operatorname{ord}_m(a)=\\varphi(m)$, then $a$ is a **primitive root** modulo $m$. Its powers $a^0,\\dots,a^{\\varphi(m)-1}$ are pairwise incongruent and run through all reduced residues, so $(\\mathbb{Z}/m\\mathbb{Z})^{\\times}$ is cyclic. Primitive roots exist precisely for $m=1,2,4,p^k,2p^k$ ($p$ an odd prime, $k\\ge 1$). For example every unit modulo 8 squares to 1, so there is no primitive root, while modulo 18 the primitive roots are 5 and 11. When they exist there are exactly $\\varphi(\\varphi(m))$ of them.\n\nA primitive root $g$ yields an **index table** (discrete logarithm): every unit $a$ is uniquely $a\\equiv g^e\\pmod m$ with $e\\in\\{0,\\dots,\\varphi(m)-1\\}$, written $e=\\operatorname{ind}_g(a)$, and $\\operatorname{ind}_g(ab)\\equiv\\operatorname{ind}_g(a)+\\operatorname{ind}_g(b)\\pmod{\\varphi(m)}$ — multiplication becomes addition, just as ordinary logarithms turn multiplication into addition.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{ord}_m(a)=d\\ \\Longrightarrow\\ \\left(a^{k}\\equiv 1\\pmod m\\iff d\\mid k\\right)",
+        "note": "阶的定义性刻画：$a^k\\equiv 1$ 的充要条件是 $k$ 为阶的倍数。",
+        "noteEn": "Characterisation of the order: $a^k\\equiv 1$ holds iff $k$ is a multiple of the order."
+      },
+      {
+        "latex": "\\operatorname{ord}_m(a)\\mid\\varphi(m)\\qquad(\\gcd(a,m)=1)",
+        "note": "阶整除 $\\varphi(m)$：欧拉定理加带余除法，余数只能为 0。",
+        "noteEn": "The order divides $\\varphi(m)$: combine Euler's theorem with division with remainder; the remainder must vanish."
+      },
+      {
+        "latex": "(\\mathbb{Z}/m\\mathbb{Z})^{\\times}\\ \\text{为循环群}\\iff m=1,2,4,p^{k},2p^{k}\\qquad(p\\ \\text{为奇素数},\\ k\\ge 1)",
+        "note": "原根存在性分类：$m$ 只能是 $1$、$2$、$4$、$p^k$、$2p^k$；反例 $m=8$、$m=12$ 都无原根。",
+        "noteEn": "Classification of existence: $m$ must be $1$, $2$, $4$, $p^k$ or $2p^k$; the cases $m=8$ and $m=12$ have no primitive roots."
+      },
+      {
+        "latex": "\\operatorname{ind}_g(ab)\\equiv\\operatorname{ind}_g(a)+\\operatorname{ind}_g(b)\\pmod{\\varphi(m)}",
+        "note": "指数（离散对数）的加法法则：以原根为底，乘法问题化为模 $\\varphi(m)$ 的加法问题。",
+        "noteEn": "Addition rule for indices (discrete logarithms): with a primitive-root base, multiplication becomes addition modulo $\\varphi(m)$."
+      },
+      {
+        "latex": "\\#\\{\\text{模 }m\\text{ 的原根}\\}=\\varphi(\\varphi(m))\\qquad(\\text{原根存在时})",
+        "note": "原根个数：存在时恰有 $\\varphi(\\varphi(m))$ 个；模 7 有 $\\varphi(6)=2$ 个（3 与 5），模 18 有 $\\varphi(6)=2$ 个（5 与 11）。",
+        "noteEn": "Number of primitive roots: when they exist there are exactly $\\varphi(\\varphi(m))$ of them; modulo 7 there are 2 (3 and 5), modulo 18 there are 2 (5 and 11)."
+      }
+    ],
+    "properties": [
+      "若 $\\operatorname{ord}_m(a)=d$，则 $a^0,\\dots,a^{d-1}$ 模 $m$ 两两不同余；更一般地 $\\operatorname{ord}_m(a^t)=d/\\gcd(d,t)$。",
+      "原根存在当且仅当 $m=1,2,4,p^k,2p^k$（$p$ 为奇素数）；模 8 的元素平方全为 1，模 12 的缩剩余群同构于 $C_2\\times C_2$，都无原根。",
+      "原根存在时个数为 $\\varphi(\\varphi(m))$：模 7 的原根是 3、5，模 18 的原根是 5、11。",
+      "对奇素数 $p$ 与 $p\\nmid a$：$a$ 是模 $p$ 的二次剩余当且仅当 $\\operatorname{ord}_p(a)\\mid\\frac{p-1}{2}$（因为 $a^{(p-1)/2}\\equiv 1$ 等价于阶整除 $(p-1)/2$）。",
+      "密码学意义：Diffie–Hellman、ElGamal 等体制的安全性依赖离散对数问题——已知 $g^e$ 反求 $e$ 在适当选取下是困难的。"
+    ],
+    "propertiesEn": [
+      "If $\\operatorname{ord}_m(a)=d$, the powers $a^0,\\dots,a^{d-1}$ are pairwise incongruent modulo $m$; more generally $\\operatorname{ord}_m(a^t)=d/\\gcd(d,t)$.",
+      "Primitive roots exist exactly for $m=1,2,4,p^k,2p^k$ ($p$ an odd prime); modulo 8 every unit squares to 1 and modulo 12 the unit group is $C_2\\times C_2$, so neither has a primitive root.",
+      "When they exist, the number of primitive roots is $\\varphi(\\varphi(m))$: modulo 7 they are 3 and 5, modulo 18 they are 5 and 11.",
+      "For an odd prime $p$ and $p\\nmid a$: $a$ is a quadratic residue modulo $p$ iff $\\operatorname{ord}_p(a)$ divides $(p-1)/2$ (since $a^{(p-1)/2}\\equiv 1$ means the order divides $(p-1)/2$).",
+      "Cryptographic significance: Diffie–Hellman, ElGamal and related schemes rest on the hardness of the discrete logarithm problem — recovering $e$ from $g^e$."
+    ],
+    "examples": [
+      {
+        "problem": "验证 3 是模 7 的原根，并写出 3 的幂表。",
+        "solution": "依次计算：$3^1\\equiv 3$，$3^2\\equiv 9\\equiv 2$，$3^3\\equiv 2\\cdot 3=6$，$3^4\\equiv 6\\cdot 3=18\\equiv 4$，$3^5\\equiv 4\\cdot 3=12\\equiv 5$，$3^6\\equiv 5\\cdot 3=15\\equiv 1\\pmod 7$。前五个幂都不等于 1，故 $\\operatorname{ord}_7(3)=6=\\varphi(7)$，3 是原根；幂表 $3,2,6,4,5,1$ 恰好遍历模 7 的全部非零剩余。另一原根 $5\\equiv 3^5\\pmod 7$，且 $\\operatorname{ord}_7(3^5)=6/\\gcd(6,5)=6$，仍是原根。"
+      },
+      {
+        "problem": "求模 18 的所有原根。",
+        "solution": "$18=2\\cdot 3^2$ 属于原根存在类型；$\\varphi(18)=6$，原根个数应为 $\\varphi(6)=2$。模 18 的缩剩余为 $1,5,7,11,13,17$。逐个验证：$5^2=25\\equiv 7$，$5^3\\equiv 7\\cdot 5=35\\equiv 17\\equiv -1$，故 $\\operatorname{ord}_{18}(5)=6$；$11^2=121\\equiv 13$，$11^3\\equiv 13\\cdot 11=143\\equiv 17\\equiv -1$，故 $\\operatorname{ord}_{18}(11)=6$；而 $7^2\\equiv 13$，$7^3\\equiv 13\\cdot 7=91\\equiv 1$，$\\operatorname{ord}_{18}(7)=3$；$13^2\\equiv 7$，$13^3\\equiv 1$，$\\operatorname{ord}_{18}(13)=3$；$17\\equiv -1$，$\\operatorname{ord}_{18}(17)=2$。所以原根恰为 5 与 11。"
+      }
+    ],
+    "tags": [
+      "数论",
+      "原根",
+      "阶",
+      "离散对数",
+      "循环群"
+    ],
+    "links": [
+      "euler-totient-theorem",
+      "fermat-little-theorem",
+      "congruence-basics",
+      "quadratic-residues",
+      "arithmetic-functions"
+    ]
+  },
+  {
+    "id": "quadratic-residues",
+    "title": "二次剩余与勒让德符号",
+    "titleEn": "Quadratic Residues and the Legendre Symbol",
+    "branch": "number",
+    "level": 5,
+    "summary": "模奇素数 p，若 p∤a 且 x²≡a (mod p) 有解，则称 a 为二次剩余；勒让德符号 (a/p) 把它编码为 1、−1、0，欧拉判别法 (a/p)≡a^{(p−1)/2} (mod p) 把「有没有解」化为一次模幂。",
+    "summaryEn": "For an odd prime p and an integer a with p∤a, a is a quadratic residue if x²≡a (mod p) is solvable; the Legendre symbol (a/p) encodes the answer as 1, −1 or 0, and Euler's criterion (a/p)≡a^{(p−1)/2} (mod p) turns solvability into a single modular power.",
+    "definition": "设 $p$ 为**奇素数**，$a$ 为整数。若 $p\\nmid a$ 且同余方程 $x^2\\equiv a\\pmod p$ 有解，称 $a$ 是模 $p$ 的**二次剩余**（quadratic residue，缩写 QR）；$p\\nmid a$ 且无解时称二次非剩余（QNR）。例如模 7：$1^2\\equiv 1$，$2^2\\equiv 4$，$3^2\\equiv 2$，再结合 $4^2\\equiv 2$、$5^2\\equiv 4$、$6^2\\equiv 1$，二次剩余集合恰为 $\\{1,2,4\\}$、非剩余为 $\\{3,5,6\\}$——各占一半。若 $a$ 是二次剩余，方程 $x^2\\equiv a\\pmod p$ 恰有 $x$ 与 $-x$ 两个解。\n\n**勒让德符号** $\\left(\\frac{a}{p}\\right)$ 把三种情形编码为一个数：$a$ 为二次剩余时取 1，二次非剩余时取 $-1$，$p\\mid a$ 时取 0。核心工具是**欧拉判别法**：$\\left(\\frac{a}{p}\\right)\\equiv a^{(p-1)/2}\\pmod p$。当 $p\\nmid a$ 时右端只能等于 $\\pm 1$（$p\\mid a$ 时右端为 $0$）——由费马小定理 $\\left(a^{(p-1)/2}\\right)^2=a^{p-1}\\equiv 1$，而在模素数下 $y^2\\equiv 1$ 只给出 $y\\equiv\\pm 1$（因为 $(y-1)(y+1)\\equiv 0$ 迫使 $p$ 整除其中一个因子）。\n\n用原根看最直观：取模 $p$ 的一个原根 $g$，写 $a\\equiv g^e$，则 $a^{(p-1)/2}\\equiv g^{e(p-1)/2}$ 等于 1 当且仅当 $e$ 为偶数，而二次剩余正是 $g$ 的偶次幂——这同时说明二次剩余的个数恰为 $(p-1)/2$。\n\n注意 $p=2$ 要单独排除：模 2 时 $0=0^2$、$1=1^2$ 都是平方，二次剩余理论没有内容，所以全程要求 $p$ 为奇素数。主要性质：完全积性 $\\left(\\frac{ab}{p}\\right)=\\left(\\frac{a}{p}\\right)\\left(\\frac{b}{p}\\right)$、符号只依赖 $a\\bmod p$，以及两条**补充律** $\\left(\\frac{-1}{p}\\right)=(-1)^{(p-1)/2}$ 与 $\\left(\\frac{2}{p}\\right)=(-1)^{(p^2-1)/8}$。",
+    "definitionEn": "Let $p$ be an **odd prime** and $a$ an integer with $p\\nmid a$. If $x^2\\equiv a\\pmod p$ is solvable, $a$ is a **quadratic residue** (QR) modulo $p$; otherwise it is a quadratic non-residue (QNR). Modulo 7 the squares of $1,2,3$ are $1,4,2$, so the quadratic residues are exactly $\\{1,2,4\\}$ and the non-residues $\\{3,5,6\\}$ — half of each. When $a$ is a quadratic residue, $x^2\\equiv a\\pmod p$ has exactly the two solutions $x$ and $-x$.\n\nThe **Legendre symbol** $\\left(\\frac{a}{p}\\right)$ encodes the three cases numerically: 1 for a residue, $-1$ for a non-residue and 0 when $p\\mid a$. Its workhorse is **Euler's criterion**, $\\left(\\frac{a}{p}\\right)\\equiv a^{(p-1)/2}\\pmod p$: when $p\\nmid a$ the right side can only be $\\pm 1$ (it is $0$ when $p\\mid a$), since squaring it gives $a^{p-1}\\equiv 1$ by Fermat and, modulo a prime, $y^2\\equiv 1$ forces $y\\equiv\\pm 1$ (as $(y-1)(y+1)\\equiv 0$ makes $p$ divide one factor).\n\nA primitive root makes this transparent: write $a\\equiv g^e$; then $a^{(p-1)/2}\\equiv g^{e(p-1)/2}$ equals 1 exactly when $e$ is even, and the quadratic residues are precisely the even powers of $g$ — which also shows there are exactly $(p-1)/2$ of them.\n\nThe prime 2 is excluded on purpose: modulo 2 both 0 and 1 are squares, so the notion is vacuous, and throughout $p$ is an odd prime. The main properties are complete multiplicativity $\\left(\\frac{ab}{p}\\right)=\\left(\\frac{a}{p}\\right)\\left(\\frac{b}{p}\\right)$, dependence only on $a\\bmod p$, and the two **supplementary laws** $\\left(\\frac{-1}{p}\\right)=(-1)^{(p-1)/2}$ and $\\left(\\frac{2}{p}\\right)=(-1)^{(p^2-1)/8}$.",
+    "formulas": [
+      {
+        "latex": "\\left(\\frac{a}{p}\\right)\\equiv a^{\\frac{p-1}{2}}\\pmod p\\qquad(p\\ \\text{为奇素数})",
+        "note": "欧拉判别法：勒让德符号等于指数幂——把「方程有没有解」变成一次模幂运算。",
+        "noteEn": "Euler's criterion: the Legendre symbol equals that power — solvability becomes a single modular exponentiation."
+      },
+      {
+        "latex": "\\left(\\frac{ab}{p}\\right)=\\left(\\frac{a}{p}\\right)\\left(\\frac{b}{p}\\right)",
+        "note": "完全积性：符号可按因式拆开；由此 $\\left(\\frac{a^2}{p}\\right)=1$（$p\\nmid a$），且 $a\\equiv b\\pmod p$ 时两个符号相等。",
+        "noteEn": "Complete multiplicativity: the symbol factors over products, so $\\left(\\frac{a^2}{p}\\right)=1$ for $p\\nmid a$, and only $a\\bmod p$ matters."
+      },
+      {
+        "latex": "\\left(\\frac{-1}{p}\\right)=(-1)^{\\frac{p-1}{2}}=\\begin{cases}1,&p\\equiv 1\\pmod 4\\\\ -1,&p\\equiv 3\\pmod 4\\end{cases}",
+        "note": "补充律之一：$-1$ 是二次剩余当且仅当 $p\\equiv 1\\pmod 4$。",
+        "noteEn": "First supplementary law: $-1$ is a quadratic residue iff $p\\equiv 1\\pmod 4$."
+      },
+      {
+        "latex": "\\left(\\frac{2}{p}\\right)=(-1)^{\\frac{p^{2}-1}{8}}=\\begin{cases}1,&p\\equiv\\pm 1\\pmod 8\\\\ -1,&p\\equiv\\pm 3\\pmod 8\\end{cases}",
+        "note": "补充律之二：指数 $(p^2-1)/8$ 是整数（奇数的平方模 8 余 1）；2 是二次剩余当且仅当 $p\\equiv\\pm 1\\pmod 8$。",
+        "noteEn": "Second supplementary law: the exponent $(p^2-1)/8$ is an integer since odd squares are $1\\bmod 8$; 2 is a residue iff $p\\equiv\\pm 1\\pmod 8$."
+      },
+      {
+        "latex": "\\#\\left\\{a \\bmod p:\\left(\\frac{a}{p}\\right)=1\\right\\}=\\frac{p-1}{2}",
+        "note": "二次剩余恰有 $(p-1)/2$ 个：$1^2,2^2,\\dots,\\left(\\frac{p-1}{2}\\right)^2$ 两两不同余并穷尽所有平方。",
+        "noteEn": "Exactly $(p-1)/2$ nonzero residues are squares: $1^2,\\dots,\\left((p-1)/2\\right)^2$ are pairwise incongruent and already give all of them."
+      }
+    ],
+    "properties": [
+      "符号只依赖 $a\\bmod p$：$a\\equiv b\\pmod p$ 时 $\\left(\\frac{a}{p}\\right)=\\left(\\frac{b}{p}\\right)$；$p\\mid a$ 时符号为 0。",
+      "欧拉判别法提供可计算的定义：$\\left(\\frac{a}{p}\\right)\\equiv a^{(p-1)/2}\\pmod p$。",
+      "补充律：$\\left(\\frac{-1}{p}\\right)=1$ 当且仅当 $p\\equiv 1\\pmod 4$；$\\left(\\frac{2}{p}\\right)=1$ 当且仅当 $p\\equiv\\pm 1\\pmod 8$。",
+      "恰有 $(p-1)/2$ 个二次剩余；当 $a$ 是二次剩余时，$x^2\\equiv a\\pmod p$ 恰有 $x$、$-x$ 两个解。",
+      "$p=2$ 时任何整数都是平方（$0=0^2$，$1=1^2$），故定义一律要求 $p$ 为奇素数。"
+    ],
+    "propertiesEn": [
+      "The symbol depends only on $a\\bmod p$: if $a\\equiv b\\pmod p$ then $\\left(\\frac{a}{p}\\right)=\\left(\\frac{b}{p}\\right)$; it is 0 exactly when $p\\mid a$.",
+      "Euler's criterion gives a computable definition: $\\left(\\frac{a}{p}\\right)\\equiv a^{(p-1)/2}\\pmod p$.",
+      "Supplementary laws: $\\left(\\frac{-1}{p}\\right)=1$ iff $p\\equiv 1\\pmod 4$, and $\\left(\\frac{2}{p}\\right)=1$ iff $p\\equiv\\pm 1\\pmod 8$.",
+      "There are exactly $(p-1)/2$ quadratic residues, and for a residue $a$ the congruence $x^2\\equiv a\\pmod p$ has exactly two solutions, $x$ and $-x$.",
+      "Modulo 2 every integer is a square ($0=0^2$, $1=1^2$), which is why the theory insists on odd primes."
+    ],
+    "examples": [
+      {
+        "problem": "判断 3 与 5 是否为模 7 的二次剩余。",
+        "solution": "数平方最快：$1^2\\equiv 1$，$2^2\\equiv 4$，$3^2\\equiv 2\\pmod 7$，由对称性 $4^2,5^2,6^2\\equiv 2,4,1$，故二次剩余集合为 $\\{1,2,4\\}$；3 与 5 都不在其中，是二次非剩余。用欧拉判别法复核：$3^3=27\\equiv 6\\equiv -1$，$5^3=125\\equiv 6\\equiv -1\\pmod 7$，故 $\\left(\\frac{3}{7}\\right)=\\left(\\frac{5}{7}\\right)=-1$，一致。"
+      },
+      {
+        "problem": "用补充律计算 $\\left(\\frac{-1}{7}\\right)$、$\\left(\\frac{2}{7}\\right)$，再用积性求 $\\left(\\frac{5}{7}\\right)$。",
+        "solution": "$\\left(\\frac{-1}{7}\\right)=(-1)^{(7-1)/2}=(-1)^3=-1$，与 $7\\equiv 3\\pmod 4$ 一致（$6\\equiv -1$ 不在平方集合 $\\{1,2,4\\}$ 中，印证）。$\\left(\\frac{2}{7}\\right)=(-1)^{(7^2-1)/8}=(-1)^{48/8}=(-1)^6=1$，与 $7\\equiv -1\\pmod 8$ 一致；确实 $3^2=9\\equiv 2\\pmod 7$。又 $5\\equiv -2\\pmod 7$，由完全积性 $\\left(\\frac{5}{7}\\right)=\\left(\\frac{-1}{7}\\right)\\left(\\frac{2}{7}\\right)=(-1)\\cdot 1=-1$，与直接验算 $5^3\\equiv -1\\pmod 7$ 相符。"
+      }
+    ],
+    "tags": [
+      "数论",
+      "二次剩余",
+      "勒让德符号",
+      "欧拉判别法",
+      "同余"
+    ],
+    "links": [
+      "quadratic-reciprocity",
+      "primitive-roots",
+      "fermat-little-theorem",
+      "congruence-basics",
+      "arithmetic-functions"
+    ]
+  },
+  {
+    "id": "quadratic-reciprocity",
+    "title": "二次互反律",
+    "titleEn": "The Law of Quadratic Reciprocity",
+    "branch": "number",
+    "level": 5,
+    "summary": "对两个不同的奇素数 p、q，有 (p/q)(q/p)=(−1)^{((p−1)/2)((q−1)/2)}——指数是两个半量之积；互反律把大模数的符号翻转成小模数，是计算勒让德符号的主引擎，Gauss 誉之为「黄金定理」。",
+    "summaryEn": "For distinct odd primes p and q, (p/q)(q/p)=(−1)^{((p−1)/2)((q−1)/2)} — the exponent is the product of the two half-integers. Reciprocity flips a symbol into a smaller modulus and drives every computation; Gauss called it the golden theorem.",
+    "definition": "**二次互反律**：设 $p\\neq q$ 为两个奇素数，则 $\\left(\\frac{p}{q}\\right)\\left(\\frac{q}{p}\\right)=(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}$。指数是两个「半量」$\\frac{p-1}{2}$ 与 $\\frac{q-1}{2}$ 的**乘积**（不是和），它总是整数，其奇偶决定符号。\n\n等价表述：当 $p\\equiv q\\equiv 3\\pmod 4$ 时，两个半量都是奇数、指数为奇，故 $\\left(\\frac{p}{q}\\right)=-\\left(\\frac{q}{p}\\right)$；只要 $p,q$ 中至少一个 $\\equiv 1\\pmod 4$，指数为偶，两个符号相等。\n\n用法是「翻转」。计算 $\\left(\\frac{a}{p}\\right)$ 时：先用完全积性与周期性把底数分解成 $(-1)^{\\varepsilon}\\cdot 2^{\\delta}\\cdot$（奇素因数之积），用补充律处理 $-1$ 与 $2$，再用互反律把每个奇素数底 $q$ 翻转成 $\\left(\\frac{q\\bmod p}{p}\\right)$——模数由 $q$ 变成更小的 $p$，如此递归，直到符号小到可以直接列举平方。整个流程有限且机械。\n\n历史：Gauss 于 1796 年 4 月 8 日首次证出此定理，称之为「黄金定理」（theorema aureum），一生中给出多种证明；至今已有两百多个证明。它也是二次域理论、代数数论与类域论（高次互反律）的生长点。",
+    "definitionEn": "**The law of quadratic reciprocity**: if $p\\neq q$ are odd primes, then $\\left(\\frac{p}{q}\\right)\\left(\\frac{q}{p}\\right)=(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}$. The exponent is the **product** of the two half-integers $\\frac{p-1}{2}$ and $\\frac{q-1}{2}$ (not their sum); it is always an integer, and its parity decides the sign.\n\nEquivalently: if $p\\equiv q\\equiv 3\\pmod 4$ both halves are odd, the exponent is odd, and $\\left(\\frac{p}{q}\\right)=-\\left(\\frac{q}{p}\\right)$; as soon as one of $p,q$ is $\\equiv 1\\pmod 4$ the exponent is even and the two symbols are equal.\n\nThe technique is to **flip**. To compute $\\left(\\frac{a}{p}\\right)$: factor the top into $(-1)^{\\varepsilon}\\cdot 2^{\\delta}\\cdot$(product of odd primes), handle $-1$ and $2$ by the supplementary laws, then flip each odd prime factor $q$ via $\\left(\\frac{q}{p}\\right)=\\pm\\left(\\frac{p}{q}\\right)$, i.e. work with $\\left(\\frac{q\\bmod p}{p}\\right)$ — the modulus strictly decreases and the recursion terminates.\n\nHistory: Gauss first proved the theorem on 8 April 1796 and called it the golden theorem (theorema aureum), publishing several proofs in his lifetime; more than two hundred are known today. It is the seed of quadratic-field theory, algebraic number theory and (higher) reciprocity in class field theory.",
+    "formulas": [
+      {
+        "latex": "\\left(\\frac{p}{q}\\right)\\left(\\frac{q}{p}\\right)=(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}\\qquad(p\\neq q\\ \\text{均为奇素数})",
+        "note": "互反律主式：指数为 $\\frac{p-1}{2}$ 与 $\\frac{q-1}{2}$ 之积，这是全式的命门。",
+        "noteEn": "The main law: the exponent is the product of $(p-1)/2$ and $(q-1)/2$ — the heart of the statement."
+      },
+      {
+        "latex": "\\left(\\frac{p}{q}\\right)=(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}\\left(\\frac{q\\bmod p}{p}\\right)",
+        "note": "计算形式：先把 $q$ 换成 $q\\bmod p$（符号只依赖模 $p$ 的类），别忘了互反带来的 $\\pm$ 符号。",
+        "noteEn": "Computational form: replace $q$ by $q\\bmod p$ (only the class mod $p$ matters), keeping the reciprocity sign."
+      },
+      {
+        "latex": "\\left(\\frac{p}{q}\\right)=\\begin{cases}-\\left(\\frac{q}{p}\\right),&p\\equiv q\\equiv 3\\pmod 4\\\\ \\left(\\frac{q}{p}\\right),&\\text{其余情形}\\end{cases}",
+        "note": "符号的判定：两素数都 $\\equiv 3\\pmod 4$ 时翻转带负号，否则不带。",
+        "noteEn": "Sign rule: the flip carries a minus sign exactly when both primes are $\\equiv 3\\pmod 4$, and no sign otherwise."
+      },
+      {
+        "latex": "\\left(\\frac{-1}{p}\\right)=(-1)^{\\frac{p-1}{2}},\\qquad \\left(\\frac{2}{p}\\right)=(-1)^{\\frac{p^{2}-1}{8}}",
+        "note": "两条补充律负责式中的 $-1$ 与 $2$；与互反律合用可机械计算任意 $\\left(\\frac{a}{p}\\right)$。",
+        "noteEn": "The supplementary laws handle the factors $-1$ and $2$; together with reciprocity they compute any $\\left(\\frac{a}{p}\\right)$ mechanically."
+      }
+    ],
+    "properties": [
+      "翻转是否变号只取决于 $p,q\\bmod 4$：都 $\\equiv 3\\pmod 4$ 时变号，其余同号。例：$3\\equiv 7\\equiv 3\\pmod 4$，故 $\\left(\\frac{3}{7}\\right)=-\\left(\\frac{7}{3}\\right)=-\\left(\\frac{1}{3}\\right)=-1$。",
+      "计算任意 $\\left(\\frac{a}{p}\\right)$ 的流程：化归 $a\\bmod p$ → 分离出 $-1$ 与 2 → 翻转 → 递归；模数严格变小，必然终止。",
+      "互反律只适用于**不同的奇素数** $p,q$；$p=q$ 时无从翻转，$p\\mid a$ 时符号为 0。",
+      "由它可判定二次剩余「有限可计算」；它还决定素域在二次域中的分裂方式，是代数数论的起点。",
+      "历史地位：Gauss 称之为「黄金定理」，其高次推广（Eisenstein、Hilbert 符号、Artin 互反律）是类域论的主线。"
+    ],
+    "propertiesEn": [
+      "Whether the flip changes the sign depends only on $p,q\\bmod 4$: it does exactly when both are $\\equiv 3\\pmod 4$. E.g. $3\\equiv 7\\equiv 3\\pmod 4$ gives $\\left(\\frac{3}{7}\\right)=-\\left(\\frac{7}{3}\\right)=-\\left(\\frac{1}{3}\\right)=-1$.",
+      "Computing any $\\left(\\frac{a}{p}\\right)$ follows one recipe: reduce $a\\bmod p$ → split off $-1$ and 2 → flip → recurse; the modulus strictly decreases, so the process terminates.",
+      "Reciprocity applies only to **distinct odd primes** $p,q$; for $p=q$ there is nothing to flip, and $p\\mid a$ gives the symbol 0.",
+      "It makes quadratic-residue questions finitely computable, and it dictates how primes split in quadratic fields — the starting point of algebraic number theory.",
+      "Historical standing: Gauss called it the golden theorem, and its higher reciprocity laws (Eisenstein, the Hilbert symbol, Artin's reciprocity law) became the backbone of class field theory."
+    ],
+    "examples": [
+      {
+        "problem": "计算 $\\left(\\frac{17}{59}\\right)$。",
+        "solution": "$17\\equiv 1\\pmod 4$，故指数 $\\frac{17-1}{2}\\cdot\\frac{59-1}{2}=8\\cdot 29=232$ 为偶数，$\\left(\\frac{17}{59}\\right)=\\left(\\frac{59}{17}\\right)$。由 $59\\bmod 17=8$ 得 $\\left(\\frac{59}{17}\\right)=\\left(\\frac{8}{17}\\right)=\\left(\\frac{2}{17}\\right)^3=\\left(\\frac{2}{17}\\right)$。补充律：$\\left(\\frac{2}{17}\\right)=(-1)^{(17^2-1)/8}=(-1)^{288/8}=(-1)^{36}=1$（也符合 $17\\equiv 1\\pmod 8$）。故 $\\left(\\frac{17}{59}\\right)=1$：17 是模 59 的二次剩余——事实上 $28^2=784=13\\cdot 59+17\\equiv 17\\pmod{59}$，即 $x\\equiv\\pm 28$ 就是解。"
+      },
+      {
+        "problem": "计算 $\\left(\\frac{7}{11}\\right)$，注意符号翻转。",
+        "solution": "$7\\equiv 11\\equiv 3\\pmod 4$，指数 $\\frac{7-1}{2}\\cdot\\frac{11-1}{2}=3\\cdot 5=15$ 为奇数，故 $\\left(\\frac{7}{11}\\right)=-\\left(\\frac{11}{7}\\right)$。由 $11\\bmod 7=4$ 得 $\\left(\\frac{11}{7}\\right)=\\left(\\frac{4}{7}\\right)=\\left(\\frac{2}{7}\\right)^2=1$（4 是完全平方，符号恒为 1）。所以 $\\left(\\frac{7}{11}\\right)=-1$。欧拉判别法复核：$7^2=49\\equiv 5$，$7^4\\equiv 5^2=25\\equiv 3$，$7^5\\equiv 3\\cdot 7=21\\equiv 10\\equiv -1\\pmod{11}$。"
+      }
+    ],
+    "tags": [
+      "数论",
+      "二次互反律",
+      "勒让德符号",
+      "黄金定理",
+      "类域论"
+    ],
+    "links": [
+      "quadratic-residues",
+      "primitive-roots",
+      "congruence-basics",
+      "algebraic-number-theory",
+      "analytic-number-theory"
+    ]
+  },
+  {
+    "id": "arithmetic-functions",
+    "title": "算术函数与莫比乌斯反演",
+    "titleEn": "Arithmetic Functions and Möbius Inversion",
+    "branch": "number",
+    "level": 5,
+    "summary": "算术函数把正整数映到数；积性刻画素因子结构，d(n)=∏(αᵢ+1) 与 σ(n)=∏(p^{α+1}−1)/(p−1) 是两条主公式；莫比乌斯函数 μ 及其反演把 f(n)=∑_{d|n}g(d) 与 g(n)=∑_{d|n}μ(d)f(n/d) 互逆。",
+    "summaryEn": "Arithmetic functions map positive integers to numbers; multiplicativity captures the prime-factor structure, with d(n)=∏(αᵢ+1) and σ(n)=∏(p^{α+1}−1)/(p−1) as the two main formulas; the Möbius function μ and its inversion turn f(n)=∑_{d|n}g(d) into g(n)=∑_{d|n}μ(d)f(n/d).",
+    "definition": "**算术函数**是定义在正整数上的函数，例如除数个数 $d(n)$、除数之和 $\\sigma(n)$、欧拉函数 $\\varphi(n)$ 与莫比乌斯函数 $\\mu(n)$。若对一切**互素**的 $m,n$ 都有 $f(mn)=f(m)f(n)$，称 $f$ 为**积性函数**；若对一切 $m,n$（不要求互素）都成立，称**完全积性**。非零积性函数必有 $f(1)=1$（由 $f(1)=f(1)^2$）。$\\varphi$、$d$、$\\sigma$、$\\mu$ 都积性但非完全积性，而 $n\\mapsto n^k$ 完全积性。积性把「算 $n$」归约到「算每个素数幂」，这是算术函数计算的统一套路。\n\n设 $n=p_1^{\\alpha_1}\\cdots p_k^{\\alpha_k}$。因子 $d\\mid n$ 在每个素因子上独立地取指数 $0,\\dots,\\alpha_i$，由乘法原理 $d(n)=\\prod(\\alpha_i+1)$；除数之和由等比数列求和给出 $\\sigma(n)=\\prod\\frac{p_i^{\\alpha_i+1}-1}{p_i-1}$。例 $28=2^2\\cdot 7$：$d(28)=3\\cdot 2=6$，$\\sigma(28)=\\frac{2^3-1}{2-1}\\cdot\\frac{7^2-1}{7-1}=7\\cdot 8=56=2\\cdot 28$。\n\n**莫比乌斯函数** $\\mu$：若 $n$ 含有平方因子（即存在素数 $p$ 使 $p^2\\mid n$），则 $\\mu(n)=0$；否则 $n$ 是 $k$ 个不同素数之积，$\\mu(n)=(-1)^k$；约定 $\\mu(1)=1$。核心恒等式 $\\sum_{d\\mid n}\\mu(d)=[n=1]$（$[\\cdot]$ 是克罗内克记号）：$n>1$ 时只有无平方因子的 $d$ 有贡献，若 $n$ 含 $k$ 个素因子，该和为 $\\sum_{j=0}^{k}\\binom{k}{j}(-1)^j=(1-1)^k=0$。\n\n**莫比乌斯反演**：$f(n)=\\sum_{d\\mid n}g(d)$ 等价于 $g(n)=\\sum_{d\\mid n}\\mu(d)f(n/d)$——它把「求和关系」倒过来解出 $g$。经典例子：把 $1,\\dots,n$ 按 $\\gcd(k,n)$ 分组得 $n=\\sum_{d\\mid n}\\varphi(d)$，反演立得 $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)\\cdot\\frac{n}{d}$，同时说明 $\\varphi$ 是积性函数。用 Dirichlet 卷积的语言，反演就是 $\\mu*1=\\varepsilon$ 这一对互逆元。",
+    "definitionEn": "An **arithmetic function** is defined on the positive integers, e.g. the divisor count $d(n)$, the divisor sum $\\sigma(n)$, Euler's totient $\\varphi(n)$ and the Möbius function $\\mu(n)$. If $f(mn)=f(m)f(n)$ holds for all **coprime** $m,n$, $f$ is **multiplicative**; if it holds for all $m,n$ (coprimality not required), $f$ is **completely multiplicative**. A nonzero multiplicative function must satisfy $f(1)=1$ (from $f(1)=f(1)^2$). The functions $\\varphi$, $d$, $\\sigma$, $\\mu$ are multiplicative but not completely so, whereas $n\\mapsto n^k$ is completely multiplicative. Multiplicativity reduces the computation of $f(n)$ to the prime powers — the universal pattern in this circle.\n\nWrite $n=p_1^{\\alpha_1}\\cdots p_k^{\\alpha_k}$. A divisor $d\\mid n$ chooses an exponent $0,\\dots,\\alpha_i$ independently at each prime, so by the multiplication principle $d(n)=\\prod(\\alpha_i+1)$; summing the divisors means multiplying the geometric sums $1+p+\\dots+p^{\\alpha_i}$, giving $\\sigma(n)=\\prod\\frac{p_i^{\\alpha_i+1}-1}{p_i-1}$. For example $28=2^2\\cdot 7$: $d(28)=3\\cdot 2=6$ and $\\sigma(28)=7\\cdot 8=56=2\\cdot 28$.\n\nThe **Möbius function** $\\mu$: if $n$ is divisible by a square of a prime, then $\\mu(n)=0$; otherwise $n$ is a product of $k$ distinct primes and $\\mu(n)=(-1)^k$; finally $\\mu(1)=1$. Its key identity is $\\sum_{d\\mid n}\\mu(d)=[n=1]$ (Kronecker delta): for $n>1$ only square-free divisors contribute, and with $k$ prime factors the sum is $\\sum_{j=0}^{k}\\binom{k}{j}(-1)^j=(1-1)^k=0$.\n\n**Möbius inversion**: $f(n)=\\sum_{d\\mid n}g(d)$ is equivalent to $g(n)=\\sum_{d\\mid n}\\mu(d)f(n/d)$ — it solves the divisor-sum relation for $g$. Classic example: grouping $1,\\dots,n$ by $\\gcd(k,n)$ gives $n=\\sum_{d\\mid n}\\varphi(d)$, and inversion yields $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)\\cdot\\frac{n}{d}$, which also shows $\\varphi$ is multiplicative. In Dirichlet-convolution language, inversion is the pair of inverse elements $\\mu*1=\\varepsilon$.",
+    "formulas": [
+      {
+        "latex": "n=\\prod_{i=1}^{k}p_i^{\\alpha_i}\\ \\Longrightarrow\\ d(n)=\\prod_{i=1}^{k}(\\alpha_i+1)",
+        "note": "除数个数公式：每个素因子的指数独立地取 $0,\\dots,\\alpha_i$，由乘法原理相乘。例 $d(12)=(2+1)(1+1)=6$。",
+        "noteEn": "Number-of-divisors formula: each exponent ranges independently over $0,\\dots,\\alpha_i$, and the counts multiply. E.g. $d(12)=(2+1)(1+1)=6$."
+      },
+      {
+        "latex": "n=\\prod_{i=1}^{k}p_i^{\\alpha_i}\\ \\Longrightarrow\\ \\sigma(n)=\\prod_{i=1}^{k}\\frac{p_i^{\\alpha_i+1}-1}{p_i-1}",
+        "note": "除数和公式：$1+p+\\dots+p^{\\alpha_i}=\\frac{p^{\\alpha_i+1}-1}{p-1}$ 再相乘。例 $\\sigma(28)=\\frac{2^3-1}{2-1}\\cdot\\frac{7^2-1}{7-1}=7\\cdot 8=56$。",
+        "noteEn": "Sum-of-divisors formula: multiply the geometric sums $1+p+\\dots+p^{\\alpha_i}=(p^{\\alpha_i+1}-1)/(p-1)$. E.g. $\\sigma(28)=7\\cdot 8=56$."
+      },
+      {
+        "latex": "\\mu(n)=\\begin{cases}0,&n\\ \\text{含平方因子}\\\\ (-1)^{k},&n=p_1p_2\\cdots p_k\\ \\text{为}\\ k\\ \\text{个不同素数之积}\\end{cases}",
+        "note": "$n$ 含平方因子（存在 $p^2\\mid n$）时 $\\mu(n)=0$，否则按不同素因子个数的奇偶取 $\\pm 1$；$\\mu(1)=1$。",
+        "noteEn": "$\\mu(n)=0$ whenever a prime square divides $n$; otherwise the sign is $(-1)^{\\#\\,\\text{distinct primes}}$, and $\\mu(1)=1$."
+      },
+      {
+        "latex": "\\sum_{d\\mid n}\\mu(d)=[n=1]\\qquad(\\text{克罗内克记号})",
+        "note": "当且仅当 $n=1$ 时和为 1，$n>1$ 时为 0；证明用二项式定理 $\\sum_{j=0}^{k}\\binom{k}{j}(-1)^j=(1-1)^k=0$。",
+        "noteEn": "The sum is 1 exactly when $n=1$, and 0 otherwise; the proof is the binomial sum $\\sum_{j=0}^{k}\\binom{k}{j}(-1)^j=(1-1)^k=0$."
+      },
+      {
+        "latex": "f(n)=\\sum_{d\\mid n}g(d)\\iff g(n)=\\sum_{d\\mid n}\\mu(d)\\,f\\!\\left(\\frac{n}{d}\\right)",
+        "note": "莫比乌斯反演：两个方向的写法别颠倒；右端也等价地写作 $\\sum_{d\\mid n}\\mu(n/d)\\,f(d)$。",
+        "noteEn": "Möbius inversion: keep the two directions straight; the right side equals $\\sum_{d\\mid n}\\mu(n/d)\\,f(d)$ as well."
+      }
+    ],
+    "properties": [
+      "积性与完全积性的区别：$\\varphi(4)=2\\neq\\varphi(2)\\varphi(2)=1$，$d(4)=3\\neq 2\\cdot 2$，故它们只是积性；幂函数 $n\\mapsto n^k$ 才完全积性。",
+      "由 $n=\\sum_{d\\mid n}\\varphi(d)$ 反演得 $\\varphi=\\mu*\\mathrm{id}$，即 $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)\\cdot\\frac{n}{d}$，这是 $\\varphi$ 的容斥表达式，也再次给出它的积性。",
+      "Dirichlet 卷积 $(f*g)(n)=\\sum_{d\\mid n}f(d)g(n/d)$ 以 $\\varepsilon=[n=1]$ 为恒等元，$\\mu$ 是常函数 1 的逆元（$\\mu*1=\\varepsilon$）；此外 $d=1*1$，$\\sigma=\\mathrm{id}*1$。",
+      "$d(n)$ 为奇数当且仅当 $n$ 是完全平方数（因为 $\\prod(\\alpha_i+1)$ 为奇数等价于所有 $\\alpha_i$ 为偶数）。",
+      "应用：完全数满足 $\\sigma(n)=2n$（如 6、28）；偶完全数都形如 $2^{p-1}(2^p-1)$，其中 $2^p-1$ 为梅森素数（欧几里得–欧拉）。"
+    ],
+    "propertiesEn": [
+      "Multiplicative versus completely multiplicative: $\\varphi(4)=2\\neq\\varphi(2)\\varphi(2)=1$ and $d(4)=3\\neq 2\\cdot 2$, so such functions are multiplicative only; the powers $n\\mapsto n^k$ are completely multiplicative.",
+      "Inverting $n=\\sum_{d\\mid n}\\varphi(d)$ gives $\\varphi=\\mu*\\mathrm{id}$, i.e. $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)\\frac{n}{d}$ — an inclusion–exclusion formula that also reveals multiplicativity.",
+      "Under the Dirichlet convolution $(f*g)(n)=\\sum_{d\\mid n}f(d)g(n/d)$ with identity $\\varepsilon=[n=1]$, $\\mu$ is the inverse of the constant function 1 ($\\mu*1=\\varepsilon$); moreover $d=1*1$ and $\\sigma=\\mathrm{id}*1$.",
+      "$d(n)$ is odd iff $n$ is a perfect square (since $\\prod(\\alpha_i+1)$ is odd iff every $\\alpha_i$ is even).",
+      "Application: perfect numbers satisfy $\\sigma(n)=2n$ (6, 28, …); every even perfect number has the form $2^{p-1}(2^p-1)$ with $2^p-1$ a Mersenne prime (Euclid–Euler)."
+    ],
+    "examples": [
+      {
+        "problem": "求 $d(28)$ 与 $\\sigma(28)$，并验证 28 是完全数。",
+        "solution": "$28=2^2\\cdot 7$。$d(28)=(2+1)(1+1)=6$，即约数为 $1,2,4,7,14,28$ 共 6 个；$\\sigma(28)=\\frac{2^3-1}{2-1}\\cdot\\frac{7^2-1}{7-1}=7\\cdot 8=56$。真因数和为 $56-28=28$，恰好等于自身，故 28 是完全数。"
+      },
+      {
+        "problem": "用莫比乌斯反演由 $\\sum_{d\\mid n}\\varphi(d)=n$ 推出 $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)\\cdot\\frac{n}{d}$，并计算 $\\varphi(12)$。",
+        "solution": "取 $f(n)=n$、$g(d)=\\varphi(d)$，即 $f(n)=\\sum_{d\\mid n}g(d)$。反演给出 $g(n)=\\sum_{d\\mid n}\\mu(d)f(n/d)$，即 $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)\\cdot\\frac{n}{d}$。$n=12$ 时 $d$ 遍历 $1,2,3,4,6,12$，对应 $\\mu(d)=1,-1,-1,0,1,0$，故 $\\varphi(12)=1\\cdot 12+(-1)\\cdot 6+(-1)\\cdot 4+0\\cdot 3+1\\cdot 2+0\\cdot 1=12-6-4+2=4$，与 $\\varphi(12)=12\\cdot\\frac12\\cdot\\frac23=4$ 一致。"
+      }
+    ],
+    "tags": [
+      "数论",
+      "积性函数",
+      "莫比乌斯反演",
+      "除数函数",
+      "完全数"
+    ],
+    "links": [
+      "divisibility-algorithm",
+      "gcd-euclidean-algorithm",
+      "primes-fundamental-theorem",
+      "euler-totient-theorem",
+      "analytic-number-theory"
+    ]
+  }
+]

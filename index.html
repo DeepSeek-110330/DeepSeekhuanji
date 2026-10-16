@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数学知识银河</title>
+  <link rel="stylesheet" href="css/style.css?v=18" />
+</head>
+<body>
+  <!-- 3D 画布：银河系本体 -->
+  <canvas id="galaxy"></canvas>
+
+  <!-- 顶部标题栏 -->
+  <header id="topbar">
+    <h1>数学知识银河</h1>
+    <p class="subtitle">点击任意光点，展开一个知识点</p>
+  </header>
+
+  <!-- 左下：知识分支筛选（可收放） -->
+  <aside id="legend" class="collapsed">
+    <div id="legend-body">
+      <div class="legend-inner">
+        <div class="legend-card">
+          <h2>知识分支</h2>
+          <ul id="legend-list"></ul>
+          <p class="hint">拖动旋转 · 滚轮缩放 · 点击星星</p>
+        </div>
+      </div>
+    </div>
+    <div id="legend-actions">
+      <button
+        id="legend-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="legend-body"
+      >
+        <span class="legend-toggle-icon">✦</span>
+        <span class="legend-toggle-label">知识分支</span>
+        <span class="legend-toggle-chevron">⌄</span>
+      </button>
+      <button id="roam-btn" type="button">
+        <span class="roam-icon">✧</span>
+        <span>随机漫游</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 底部提示 -->
+  <div id="loading">正在生成银河…</div>
+
+  <!-- 右侧：知识点详情面板 -->
+  <aside id="panel" class="hidden">
+    <button id="panel-close" aria-label="关闭">×</button>
+    <button id="panel-back" aria-label="返回上一个" style="display:none">←</button>
+    <button id="lang-toggle" aria-label="切换语言">EN</button>
+    <span id="panel-branch" class="badge"></span>
+    <span id="panel-level" class="level-chip"></span>
+    <h2 id="panel-title"></h2>
+    <p id="panel-summary" class="summary"></p>
+    <div id="panel-content" class="content"></div>
+    <div id="panel-links" class="links"></div>
+  </aside>
+
+  <!-- 搜索框 -->
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="搜索知识点…" autocomplete="off" />
+    <div id="search-results" class="hidden"></div>
+  </div>
+
+  <!-- 引入 KaTeX：渲染数学公式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- 引入 Three.js：3D 渲染 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script type="module" src="js/app.js?v=18"></script>
+</body>
+</html>

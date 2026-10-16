@@ -1,0 +1,885 @@
+[
+  {
+    "id": "rational-exponent",
+    "title": "指数与指数幂",
+    "titleEn": "Exponents and Rational Powers",
+    "branch": "function",
+    "level": 2,
+    "summary": "把指数的概念从整数扩充到分数与实数，用根式与分数指数幂互相转化。",
+    "summaryEn": "Extending exponents from integers to fractions and reals, converting freely between radicals and rational powers.",
+    "definition": "指数最初表示「几个相同的数相乘」，即 $a^n$ 是 $n$ 个 $a$ 相乘。为了让它对分数也说得通，我们规定**分数指数幂**：\n\n$$a^{\\frac{m}{n}} = \\sqrt[n]{a^m} \\quad (a>0,\\ m,n \\in \\mathbb{N}^+,\\ n>1)$$\n\n也就是说，**分母做根指数，分子做被开方数的指数**。这样 $a^{1/2}=\\sqrt{a}$、$a^{2/3}=\\sqrt[3]{a^2}$。\n\n为什么必须要求 $a>0$？因为当 $a$ 为负数时，偶次方根在实数范围内没有意义，例如 $(-8)^{1/2}$ 不是实数。规定了底数为正之后，指数幂就可以进一步扩充到**任意实数**指数，并且保留全部幂运算法则。\n\n这套记号是后续指数函数、对数乃至微积分的基石：只有把 $a^x$ 对一切实数 $x$ 都有定义，才谈得上画出连续的指数曲线。\n\n幂运算有两条「主干」：同底数相乘除、幂的幂；再配合积与商的幂，就构成了完整的指数律。",
+    "definitionEn": "An exponent originally means \"how many copies of the base are multiplied\", i.e. $a^n$ is the product of $n$ factors of $a$. To make sense of fractional exponents we define **rational powers**:\n\n$$a^{\\frac{m}{n}} = \\sqrt[n]{a^m} \\quad (a>0,\\ m,n \\in \\mathbb{N}^+,\\ n>1)$$\n\nThat is, **the denominator becomes the index of the radical and the numerator becomes the power of the radicand**, so $a^{1/2}=\\sqrt{a}$ and $a^{2/3}=\\sqrt[3]{a^2}$.\n\nWhy must $a>0$? Because when $a$ is negative, even roots are not real numbers: $(-8)^{1/2}$ is undefined over the reals. Once the base is restricted to positive numbers, powers extend smoothly to **arbitrary real exponents** while keeping all the power laws.\n\nThis notation is the foundation of exponential functions, logarithms and calculus: only when $a^x$ is defined for every real $x$ can we draw a continuous exponential curve.\n\nTwo \"trunk\" rules organise everything: multiplying/dividing like bases, and a power of a power. Together with powers of products and quotients they form the complete laws of exponents.",
+    "formulas": [
+      {
+        "latex": "a^{\\frac{m}{n}} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m",
+        "note": "分数指数幂与根式的互化：分母做根指数，分子做幂指数",
+        "noteEn": "Converting between rational powers and radicals: denominator is the radical index, numerator the power"
+      },
+      {
+        "latex": "a^m \\cdot a^n = a^{m+n}",
+        "note": "同底数幂相乘，指数相加；这是指数律的核心",
+        "noteEn": "Multiplying like bases adds exponents; the core of the exponent laws"
+      },
+      {
+        "latex": "\\frac{a^m}{a^n} = a^{m-n}",
+        "note": "同底数幂相除，指数相减",
+        "noteEn": "Dividing like bases subtracts exponents"
+      },
+      {
+        "latex": "(a^m)^n = a^{mn}",
+        "note": "幂的幂，指数相乘",
+        "noteEn": "A power of a power multiplies exponents"
+      },
+      {
+        "latex": "a^{-n} = \\frac{1}{a^n},\\quad a^{0}=1",
+        "note": "负指数与零指数：由「指数相减得零」自然导出",
+        "noteEn": "Negative and zero exponents, derived from subtracting equal exponents"
+      }
+    ],
+    "expression": {
+      "text": "a^(m/n) = ⁿ√(a^m)   (a>0)",
+      "symbol": "a^{m/n}",
+      "note": "底数 a 必须为正数；分母 n 是根指数，分子 m 是幂指数。",
+      "noteEn": "The base a must be positive; the denominator n is the radical index and the numerator m is the power."
+    },
+    "properties": [
+      "分数指数幂只在 $a>0$ 时对一切有理指数有定义，负数底数会破坏偶次根式的实数性",
+      "根式与分数指数幂可以互相转化：$\\sqrt[n]{a^m}=a^{m/n}$，根号内整体提出指数可写成乘法",
+      "所有的整数指数幂运算法则对分数指数幂、实数指数幂依然成立",
+      "$0$ 的正分数指数幂为 $0$，但 $0$ 的零指数幂与负指数幂无意义"
+    ],
+    "propertiesEn": [
+      "Rational powers are defined for every rational exponent only when $a>0$; negative bases break the realness of even roots",
+      "Radicals and rational powers convert both ways: $\\sqrt[n]{a^m}=a^{m/n}$, and an exponent inside a radical can be pulled out as a factor",
+      "All integer exponent laws continue to hold for rational and even real exponents",
+      "$0$ raised to a positive rational power is $0$, but $0^0$ and $0$ to a negative power are undefined"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x**(1/2)",
+          "color": "#4cc9f0",
+          "label": "y = x^(1/2) = √x"
+        },
+        {
+          "expr": "x**(1/3)",
+          "color": "#ffd166",
+          "label": "y = x^(1/3) = ∛x"
+        },
+        {
+          "expr": "x**(3/2)",
+          "color": "#ff6b9d",
+          "label": "y = x^(3/2)"
+        },
+        {
+          "expr": "x**(2/3)",
+          "color": "#5ee0a8",
+          "label": "y = x^(2/3)"
+        }
+      ],
+      "xRange": [
+        0,
+        8
+      ],
+      "yRange": [
+        -1,
+        12
+      ],
+      "title": "分数指数幂的图像（a>0）"
+    },
+    "examples": [
+      {
+        "problem": "化简并求值：$27^{\\frac{2}{3}} + 16^{-\\frac{1}{2}} - \\left(\\frac{1}{4}\\right)^{0}$。",
+        "solution": "$27^{\\frac{2}{3}} = (3^3)^{\\frac{2}{3}} = 3^{2} = 9$；$16^{-\\frac{1}{2}} = (\\sqrt{16})^{-1} = 4^{-1} = \\frac{1}{4}$；$\\left(\\frac{1}{4}\\right)^{0}=1$。所以原式 $= 9 + \\frac{1}{4} - 1 = \\frac{33}{4}$。注意底数都为正数，符合分数指数幂的定义条件。"
+      },
+      {
+        "problem": "用分数指数幂表示 $\\dfrac{\\sqrt{a}\\cdot\\sqrt[3]{a^2}}{a^{\\frac{1}{6}}}$（$a>0$）。",
+        "solution": "把每个根式化为分数指数幂：$\\sqrt{a}=a^{\\frac{1}{2}}$，$\\sqrt[3]{a^2}=a^{\\frac{2}{3}}$。分子为 $a^{\\frac{1}{2}+\\frac{2}{3}}=a^{\\frac{7}{6}}$，再除以 $a^{\\frac{1}{6}}$ 得 $a^{\\frac{7}{6}-\\frac{1}{6}}=a^{1}=a$。"
+      }
+    ],
+    "tags": [
+      "指数",
+      "根式",
+      "幂运算"
+    ],
+    "links": [
+      "exponential-function",
+      "power-function",
+      "logarithm"
+    ]
+  },
+  {
+    "id": "exponential-equation",
+    "title": "指数方程与不等式",
+    "titleEn": "Exponential Equations and Inequalities",
+    "branch": "function",
+    "level": 3,
+    "summary": "利用指数函数的单调性，把指数方程与不等式化归为普通方程与不等式。",
+    "summaryEn": "Using the monotonicity of exponentials to reduce exponential equations and inequalities to ordinary ones.",
+    "definition": "含有未知数在**指数位置**的方程叫**指数方程**，例如 $2^{x+1}=8$；含有未知数在指数位置的不等式叫**指数不等式**，例如 $3^{2x-1}>27$。\n\n解这类问题的核心工具是**单调性**。因为指数函数 $y=a^x$ 是一一函数，所以当底数相同时\n\n$$a^{f(x)}=a^{g(x)} \\iff f(x)=g(x)$$\n\n对一切实数都成立。对不等式，只需记住：$a>1$ 时不等号方向不变，$0<a<1$ 时不等号方向反转。这样指数问题就「降级」为一次、二次方程或不等式。\n\n遇到不同底数时，常用的技巧有：化同底（如 $4^x=2^{2x}$）、两边取对数、换元令 $t=a^x$（$t>0$）。换元时千万不要忘记 $t>0$ 这个隐含条件，它常常是筛掉增根的关键。\n\n很多实际问题，如复利、半衰期、人口模型，最终都归结为解一个指数方程，因此这套方法既是技巧也是应用入口。",
+    "definitionEn": "An **exponential equation** has the unknown in the exponent, e.g. $2^{x+1}=8$; an **exponential inequality** does too, e.g. $3^{2x-1}>27$.\n\nThe key tool is **monotonicity**. Since $y=a^x$ is one-to-one, for equal bases\n\n$$a^{f(x)}=a^{g(x)} \\iff f(x)=g(x)$$\n\nalways holds. For inequalities just remember: the inequality direction is preserved when $a>1$ and reversed when $0<a<1$. In this way exponential problems are reduced to linear or quadratic ones.\n\nWith different bases the standard tricks are: write everything over a common base (e.g. $4^x=2^{2x}$), take logarithms of both sides, or substitute $t=a^x$ with $t>0$. Never forget the hidden condition $t>0$ when substituting — it is what removes extraneous roots.\n\nReal problems such as compound interest, half-life and population models all end up as an exponential equation, so these methods are both technique and gateway to applications.",
+    "formulas": [
+      {
+        "latex": "a^{f(x)}=a^{g(x)} \\iff f(x)=g(x)\\quad (a>0,a\\neq 1)",
+        "note": "同底法：底数相同则指数相等，这是解指数方程的主线",
+        "noteEn": "Same-base method: equal bases force equal exponents"
+      },
+      {
+        "latex": "a>1:\\ a^{f(x)}>a^{g(x)} \\iff f(x)>g(x)",
+        "note": "底数大于 1 时不等号方向不变",
+        "noteEn": "For $a>1$ the inequality direction is preserved"
+      },
+      {
+        "latex": "0<a<1:\\ a^{f(x)}>a^{g(x)} \\iff f(x)<g(x)",
+        "note": "底数小于 1 时不等号方向反转，这是最常见的失分点",
+        "noteEn": "For $0<a<1$ the direction is reversed — the most common pitfall"
+      },
+      {
+        "latex": "a^{f(x)}=b \\iff f(x)=\\log_a b\\quad (b>0)",
+        "note": "不同底数时两边取对数的基本做法",
+        "noteEn": "Taking logarithms when the right side is not a power of $a$"
+      },
+      {
+        "latex": "A\\cdot a^{2x}+B\\cdot a^{x}+C=0,\\ t=a^x>0",
+        "note": "换元法：化为关于 $t$ 的二次方程，注意 $t>0$ 的取舍",
+        "noteEn": "Substitution: reduces to a quadratic in $t$ with the constraint $t>0$"
+      }
+    ],
+    "expression": {
+      "text": "a^f(x) = a^g(x)  ⟺  f(x) = g(x)",
+      "symbol": "a^{f(x)}=a^{g(x)}",
+      "note": "前提是底数相同且 a>0, a≠1；不同底数需先化同底。",
+      "noteEn": "Valid for a common base with $a>0,\\ a\\neq 1$; otherwise convert to a common base first."
+    },
+    "properties": [
+      "指数函数一一对应，所以同底指数相等必然推出指数相等，不会漏解也不会增解",
+      "解不等式时底数大小决定不等号是否变号：$a>1$ 不变，$0<a<1$ 反转",
+      "换元 $t=a^x$ 后必须附加 $t>0$，舍去非正根",
+      "底数不同时可两边取同底对数，充分利用对数与指数的互化",
+      "指数式恒为正，所以形如 $a^{f(x)}=b$ 当 $b\\le 0$ 时直接无解"
+    ],
+    "propertiesEn": [
+      "The exponential is one-to-one, so equal powers of a common base force equal exponents — no solutions lost or gained",
+      "The base decides whether the inequality sign flips: unchanged for $a>1$, reversed for $0<a<1$",
+      "After substituting $t=a^x$ we must keep $t>0$ and discard non-positive roots",
+      "For different bases, take logarithms of both sides, exploiting the exponential–logarithm equivalence",
+      "Exponentials are always positive, so $a^{f(x)}=b$ has no solution when $b\\le 0$"
+    ],
+    "examples": [
+      {
+        "problem": "解方程 $4^{x} - 5\\cdot 2^{x} + 4 = 0$。",
+        "solution": "由 $4^x=(2^x)^2$，令 $t=2^x>0$，方程变为 $t^2-5t+4=0$，解得 $t=1$ 或 $t=4$。由 $t=2^x=1$ 得 $x=0$；由 $2^x=4=2^2$ 得 $x=2$。两个解都满足 $t>0$，故解集为 $\\{0,2\\}$。"
+      },
+      {
+        "problem": "解不等式 $\\left(\\frac{1}{3}\\right)^{2x-1} > 27$。",
+        "solution": "化为同底：$\\left(\\frac{1}{3}\\right)^{2x-1} > 3^3 = \\left(\\frac{1}{3}\\right)^{-3}$。底数 $0<\\frac{1}{3}<1$，函数单调递减，故不等号反转：$2x-1<-3$，即 $x<-1$。解集为 $(-\\infty,-1)$。"
+      }
+    ],
+    "tags": [
+      "指数",
+      "方程",
+      "不等式",
+      "换元法"
+    ],
+    "links": [
+      "exponential-function",
+      "logarithmic-equation",
+      "change-of-base",
+      "exponential-growth-decay"
+    ]
+  },
+  {
+    "id": "logarithm",
+    "title": "对数",
+    "titleEn": "Logarithm",
+    "branch": "function",
+    "level": 3,
+    "summary": "对数是「已知底数与幂求指数」的逆运算，把乘法变成加法。",
+    "summaryEn": "The logarithm answers \"what exponent gives this power\", turning multiplication into addition.",
+    "definition": "如果 $a>0$、$a\\neq 1$，并且\n\n$$a^b=N$$\n\n那么就把指数 $b$ 叫做**以 $a$ 为底 $N$ 的对数**，记作\n\n$$b=\\log_a N$$\n\n其中 $a$ 叫底数，$N$ 叫真数。注意**真数必须为正**：$a^b$ 永远是正的，所以 $\\log_a N$ 只对 $N>0$ 有意义。\n\n对数的本质就是「把指数单独解出来」。正因为如此，指数运算里繁琐的乘法、除法、开方，在对数运算里变成了加法、减法、系数相乘——这就是历史上对数被称作「节省计算的天才发明」的原因，它让天文计算从数月缩短到数天。\n\n常用的两种特殊对数：以 $10$ 为底的**常用对数**记作 $\\lg N$，以自然常数 $e$ 为底的**自然对数**记作 $\\ln N$。在高等数学中，$\\ln$ 出现的频率远高于其他底数，因为它的导数形式最简洁。\n\n牢记两条看似平凡却极重要的恒等式（其中 $N>0$）：$\\log_a 1=0$ 和 $\\log_a a=1$，它们是所有对数计算的出发点。",
+    "definitionEn": "If $a>0$, $a\\neq 1$ and\n\n$$a^b=N$$\n\nthen the exponent $b$ is called the **logarithm of $N$ to base $a$**, written\n\n$$b=\\log_a N$$\n\nHere $a$ is the base and $N$ the argument. Note that **the argument must be positive**: $a^b$ is always positive, so $\\log_a N$ only makes sense for $N>0$.\n\nA logarithm simply \"solves the exponent out\". Consequently the cumbersome multiplications, divisions and roots of exponential work become additions, subtractions and scalar multiples — which is why logarithms were celebrated as a genius labour-saving invention that cut astronomical computations from months to days.\n\nTwo special bases are standard: the **common logarithm** base $10$, written $\\lg N$, and the **natural logarithm** base $e$, written $\\ln N$. In advanced mathematics $\\ln$ dominates all other bases because its derivative is the simplest.\n\nTwo identities look trivial but matter enormously (with $N>0$): $\\log_a 1=0$ and $\\log_a a=1$. All logarithm computations start from them.",
+    "formulas": [
+      {
+        "latex": "a^b=N \\iff b=\\log_a N\\quad (a>0,\\ a\\neq 1,\\ N>0)",
+        "note": "对数的定义：指数与对数的互化，是一切运算的起点",
+        "noteEn": "Definition: the exponential–logarithm conversion, starting point of everything"
+      },
+      {
+        "latex": "\\log_a(MN)=\\log_a M+\\log_a N",
+        "note": "积的对数等于对数的和（真数都为正）",
+        "noteEn": "The log of a product is the sum of logs (positive arguments)"
+      },
+      {
+        "latex": "\\log_a\\frac{M}{N}=\\log_a M-\\log_a N",
+        "note": "商的对数等于对数的差",
+        "noteEn": "The log of a quotient is the difference of logs"
+      },
+      {
+        "latex": "\\log_a M^n = n\\log_a M",
+        "note": "幂的对数：指数可以提到对数前面",
+        "noteEn": "The log of a power: exponents come out as coefficients"
+      },
+      {
+        "latex": "a^{\\log_a N}=N,\\quad \\log_a a^b=b",
+        "note": "两条互逆恒等式，说明指数与对数互为逆运算",
+        "noteEn": "Two inverse identities showing exponentials and logarithms undo each other"
+      }
+    ],
+    "expression": {
+      "text": "log_a(N) = b  ⟺  a^b = N   (a>0, a≠1, N>0)",
+      "symbol": "\\log_a N",
+      "note": "底数 a 正且不等于 1，真数 N 必须为正；lg 表示以 10 为底，ln 表示以 e 为底。",
+      "noteEn": "Base $a$ positive and not 1, argument $N$ positive; $\\lg$ is base 10 and $\\ln$ is base $e$."
+    },
+    "properties": [
+      "定义域限制：底数 $a>0$ 且 $a\\neq 1$，真数 $N>0$；这两条是解对数题的第一道关卡",
+      "$\\log_a 1=0$ 且 $\\log_a a=1$，因为 $a^0=1$、$a^1=a$",
+      "真数相等、底数相同时对数相等；反之对数相等也推出真数相等（一一对应）",
+      "对数的运算法则只对正的乘积因子成立，$\\log_a(M+N)\\neq \\log_a M+\\log_a N$",
+      "换底公式 $\\log_a N=\\frac{\\log_c N}{\\log_c a}$ 把任意底数统一到常用底数"
+    ],
+    "propertiesEn": [
+      "Domain conditions: base $a>0$, $a\\neq 1$ and argument $N>0$ — the first hurdle in every logarithm problem",
+      "$\\log_a 1=0$ and $\\log_a a=1$, since $a^0=1$ and $a^1=a$",
+      "Equal arguments with equal bases give equal logs, and conversely; the map is one-to-one",
+      "The laws apply to positive factors only: $\\log_a(M+N)\\neq \\log_a M+\\log_a N$",
+      "The change-of-base formula $\\log_a N=\\frac{\\log_c N}{\\log_c a}$ converts every base to a common one"
+    ],
+    "examples": [
+      {
+        "problem": "计算 $\\log_2 8 + \\lg 100 - \\ln e^3$。",
+        "solution": "$\\log_2 8=\\log_2 2^3=3$；$\\lg 100=\\lg 10^2=2$；$\\ln e^3=3$。所以原式 $=3+2-3=2$。"
+      },
+      {
+        "problem": "已知 $\\log_a 2=m$，$\\log_a 3=n$，用 $m,n$ 表示 $\\log_a 12$。",
+        "solution": "$12=2^2\\cdot 3$，由积与幂的对数法则：$\\log_a 12=\\log_a (2^2\\cdot 3)=2\\log_a 2+\\log_a 3=2m+n$。"
+      },
+      {
+        "problem": "求 $2^{\\log_2 5}+\\log_3 \\frac{1}{9}$ 的值。",
+        "solution": "$2^{\\log_2 5}=5$（互逆恒等式）；$\\log_3\\frac{1}{9}=\\log_3 3^{-2}=-2$。所以原式 $=5-2=3$。"
+      }
+    ],
+    "tags": [
+      "对数",
+      "运算律",
+      "互化"
+    ],
+    "links": [
+      "exponential-function",
+      "logarithmic-function",
+      "change-of-base",
+      "natural-constant-e"
+    ]
+  },
+  {
+    "id": "logarithmic-function",
+    "title": "对数函数",
+    "titleEn": "Logarithmic Function",
+    "branch": "function",
+    "level": 3,
+    "summary": "形如 log_a x 的函数，是指数函数的反函数，增长极其缓慢。",
+    "summaryEn": "A function of the form log_a x, the inverse of the exponential, growing extremely slowly.",
+    "definition": "设 $a>0$ 且 $a\\neq 1$，函数\n\n$$f(x)=\\log_a x,\\quad x\\in(0,+\\infty)$$\n\n称为**对数函数**。它的定义域是 $(0,+\\infty)$——真数必须为正；值域是全体实数 $\\mathbb{R}$，因为任何实数都能成为某个幂的指数。\n\n对数函数与指数函数 $y=a^x$ 互为**反函数**，所以它们的图像关于直线 $y=x$ 对称。指数函数的水平渐近线 $y=0$ 对应对数函数的竖直渐近线 $x=0$（即 $y$ 轴）；指数图像经过 $(0,1)$，对数图像就经过 $(1,0)$。\n\n单调性与指数函数一致：$a>1$ 时单调递增，$0<a<1$ 时单调递减。它的最大特点是**增长极其缓慢**：$\\log_2 x$ 从 1 增长到 20 需要 $x$ 达到一百万。这让它成为描述「跨越多个数量级」现象的理想工具——地震震级、声音分贝、酸碱 pH、算法复杂度都建立在它之上。",
+    "definitionEn": "For $a>0,\\ a\\neq 1$ the function\n\n$$f(x)=\\log_a x,\\quad x\\in(0,+\\infty)$$\n\nis the **logarithmic function**. Its domain is $(0,+\\infty)$ because the argument must be positive, and its range is all of $\\mathbb{R}$ since every real number can be an exponent.\n\nThe logarithmic function and the exponential $y=a^x$ are **inverse functions**, so their graphs are mirror images in the line $y=x$. The horizontal asymptote $y=0$ of the exponential becomes the vertical asymptote $x=0$ (the y-axis) of the logarithm, and the point $(0,1)$ becomes $(1,0)$.\n\nMonotonicity matches the exponential: increasing for $a>1$, decreasing for $0<a<1$. Its hallmark is **extremely slow growth**: $\\log_2 x$ needs $x$ to reach a million just to climb from 1 to 20. This makes it the natural tool for phenomena spanning many orders of magnitude — earthquake magnitudes, decibels, pH and algorithm complexity all rest on it.",
+    "formulas": [
+      {
+        "latex": "f(x)=\\log_a x,\\quad a>0,\\ a\\neq 1",
+        "note": "对数函数的定义式，定义域为正实数",
+        "noteEn": "Definition; the domain is the positive reals"
+      },
+      {
+        "latex": "y=\\log_a x \\iff x=a^y",
+        "note": "与指数函数互为反函数，是解题与作图的关键互化",
+        "noteEn": "Inverse relationship with the exponential, key for solving and graphing"
+      },
+      {
+        "latex": "f(1)=0,\\quad f(a)=1",
+        "note": "两个基准点，作图的锚点",
+        "noteEn": "Two anchor points for sketching"
+      },
+      {
+        "latex": "\\log_a(x_1x_2)=\\log_a x_1+\\log_a x_2\\ (x_1,x_2>0)",
+        "note": "乘积法则，把乘法化为加法",
+        "noteEn": "Product rule: multiplication becomes addition"
+      },
+      {
+        "latex": "\\lim_{x\\to 0^+}\\log_a x=-\\infty\\ (a>1)",
+        "note": "竖直渐近线：图像无限贴近 $y$ 轴向下",
+        "noteEn": "Vertical asymptote: the curve hugs the y-axis downward"
+      }
+    ],
+    "expression": {
+      "text": "f(x)=log_a(x)  (a>0, a≠1, x>0)",
+      "symbol": "\\log_a x",
+      "note": "定义域只有正实数；底数为 10 时写成 lg，底数为 e 时写成 ln。",
+      "noteEn": "Domain is the positive reals only; written $\\lg$ for base 10 and $\\ln$ for base $e$."
+    },
+    "properties": [
+      "定义域 $(0,+\\infty)$，值域 $\\mathbb{R}$，是与指数函数定义域值域互换的反函数",
+      "图像恒过 $(1,0)$ 与 $(a,1)$，并以 $y$ 轴（$x=0$）为竖直渐近线",
+      "$a>1$ 时单调递增，$0<a<1$ 时单调递减，因此是一一函数",
+      "图像与 $y=a^x$ 关于直线 $y=x$ 对称",
+      "在 $x>1$ 上增长极为缓慢：$x$ 每乘以底数 $a$，函数值只增加 1"
+    ],
+    "propertiesEn": [
+      "Domain $(0,+\\infty)$, range $\\mathbb{R}$: domain and range are swapped relative to the exponential",
+      "Always passes through $(1,0)$ and $(a,1)$, with the y-axis ($x=0$) as a vertical asymptote",
+      "Increasing when $a>1$, decreasing when $0<a<1$; hence one-to-one",
+      "Its graph is the reflection of $y=a^x$ in the line $y=x$",
+      "For $x>1$ it grows very slowly: multiplying $x$ by the base $a$ adds only 1 to the value"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "log(x)/log(2)",
+          "color": "#b388ff",
+          "label": "y = log₂x"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "y = x (对称轴)"
+        }
+      ],
+      "xRange": [
+        0,
+        8
+      ],
+      "yRange": [
+        -3,
+        4
+      ],
+      "title": "对数函数 y = log₂x"
+    },
+    "examples": [
+      {
+        "problem": "求函数 $f(x)=\\log_2(x-3)$ 的定义域。",
+        "solution": "真数必须为正，即 $x-3>0$，得 $x>3$。所以定义域为 $(3,+\\infty)$。求对数函数定义域的关键就是列出真数大于零的不等式。"
+      },
+      {
+        "problem": "比较 $\\log_2 3$ 与 $\\log_2 5$ 的大小，并解不等式 $\\log_2(2x-1)<1$。",
+        "solution": "底数 $2>1$，$y=\\log_2 x$ 递增，由 $3<5$ 得 $\\log_2 3<\\log_2 5$。对不等式：$\\log_2(2x-1)<1=\\log_2 2$，由递增性得 $0<2x-1<2$，解得 $\\frac{1}{2}<x<\\frac{3}{2}$，即解集为 $\\left(\\frac{1}{2},\\frac{3}{2}\\right)$。"
+      }
+    ],
+    "tags": [
+      "对数",
+      "初等函数",
+      "反函数"
+    ],
+    "links": [
+      "logarithm",
+      "exponential-function",
+      "natural-constant-e",
+      "logarithmic-equation",
+      "inverse-function",
+      "change-of-base"
+    ]
+  },
+  {
+    "id": "change-of-base",
+    "title": "换底公式",
+    "titleEn": "Change of Base Formula",
+    "branch": "function",
+    "level": 3,
+    "summary": "把任意底数的对数转换成另一个底数，是化同底与化简的万能工具。",
+    "summaryEn": "Converts a logarithm from one base to another, the universal tool for matching bases.",
+    "definition": "**换底公式**告诉我们：同一个数的对数，在不同底数下只差一个常数倍。设 $a>0,\\ c>0$，且 $a\\neq 1,\\ c\\neq 1$，$N>0$，则\n\n$$\\log_a N=\\frac{\\log_c N}{\\log_c a}$$\n\n它的意义非常直接：如果要把底数从 $a$ 换成 $c$，只需把原来对数除以「新底数 $c$ 的 $a$ 对数」。常取 $c=10$ 或 $c=e$，因为计算器只提供 $\\lg$ 与 $\\ln$。\n\n换底公式的证明也值得记住：设 $\\log_a N=x$，则 $a^x=N$，两边取以 $c$ 为底的对数得 $x\\log_c a=\\log_c N$，于是 $x=\\frac{\\log_c N}{\\log_c a}$。这个推导体现了「两边取对数」这一通用技巧。\n\n由换底公式还能得到两条极常用的推论：$\\log_a b=\\frac{1}{\\log_b a}$（底数与真数互换取倒数）和 $\\log_{a^m}b^n=\\frac{n}{m}\\log_a b$（底与真数的幂都提到前面）。它们让很多看似复杂的对数式瞬间化简。",
+    "definitionEn": "The **change-of-base formula** says that the logarithm of a number only differs by a constant factor between bases. For $a>0$, $c>0$, $a\\neq 1$, $c\\neq 1$ and $N>0$,\n\n$$\\log_a N=\\frac{\\log_c N}{\\log_c a}$$\n\nIts meaning is direct: to switch from base $a$ to base $c$, divide the original logarithm by the $a$-logarithm of the new base $c$. Usually $c=10$ or $c=e$ are chosen, since calculators only offer $\\lg$ and $\\ln$.\n\nThe proof is worth remembering: let $\\log_a N=x$, so $a^x=N$; taking logarithms to base $c$ gives $x\\log_c a=\\log_c N$, hence $x=\\frac{\\log_c N}{\\log_c a}$. This illustrates the universal trick of \"taking logarithms of both sides\".\n\nTwo corollaries follow and are used constantly: $\\log_a b=\\frac{1}{\\log_b a}$ (swapping base and argument inverts the log) and $\\log_{a^m}b^n=\\frac{n}{m}\\log_a b$ (powers of base and argument come to the front). Together they collapse many messy expressions instantly.",
+    "formulas": [
+      {
+        "latex": "\\log_a N=\\frac{\\log_c N}{\\log_c a}",
+        "note": "换底公式主形式，$c$ 可任取为正且不等于 1 的底数",
+        "noteEn": "Main form; $c$ is any positive base other than 1"
+      },
+      {
+        "latex": "\\log_a b=\\frac{1}{\\log_b a}",
+        "note": "底数与真数互换则取倒数，$\\log_2 5\\cdot\\log_5 2=1$",
+        "noteEn": "Swapping base and argument inverts the value, e.g. $\\log_2 5\\cdot\\log_5 2=1$"
+      },
+      {
+        "latex": "\\log_{a^m} b^n=\\frac{n}{m}\\log_a b",
+        "note": "底与真数都带幂时的统一化简公式",
+        "noteEn": "Handles powers in both base and argument"
+      },
+      {
+        "latex": "\\log_a b\\cdot\\log_b c=\\log_a c",
+        "note": "链式相乘，中间底数约掉，常用于串联化简",
+        "noteEn": "Chained product where the middle base cancels"
+      },
+      {
+        "latex": "\\log_a b=\\frac{\\ln b}{\\ln a}=\\frac{\\lg b}{\\lg a}",
+        "note": "工程与计算器中最常用的两种取底方式",
+        "noteEn": "The two most practical choices for numerical work"
+      }
+    ],
+    "expression": {
+      "text": "log_a(N) = log_c(N) / log_c(a)",
+      "symbol": "\\frac{\\log_c N}{\\log_c a}",
+      "note": "新底数 c 必须为正且不等于 1；常取 c=10 或 c=e。",
+      "noteEn": "The new base $c$ must be positive and not 1; usually $c=10$ or $c=e$."
+    },
+    "properties": [
+      "换底后函数值只改变一个常数因子 $\\frac{1}{\\log_c a}$，因此不同底的对数函数图像形状相同",
+      "取 $c=N$ 得 $\\log_a N=\\frac{1}{\\log_N a}$，是倒数关系的来源",
+      "链式法则 $\\log_a b\\cdot\\log_b c\\cdot\\log_c d=\\log_a d$，中间底数依次约掉",
+      "换底公式是函数 $\\log_a x$ 与 $\\log_c x$ 之间恒等式，对一切 $x>0$ 成立",
+      "当底数与真数互为倒数关系时，如 $\\log_2 3$ 与 $\\log_3 2$，其积恒为 1"
+    ],
+    "propertiesEn": [
+      "Changing base rescales values by the constant $\\frac{1}{\\log_c a}$, so all logarithmic graphs share the same shape",
+      "Taking $c=N$ gives $\\log_a N=\\frac{1}{\\log_N a}$, the source of the reciprocal rule",
+      "Chaining: $\\log_a b\\cdot\\log_b c\\cdot\\log_c d=\\log_a d$ with intermediate bases cancelling",
+      "It is an identity between the functions $\\log_a x$ and $\\log_c x$ valid for all $x>0$",
+      "For reciprocal base–argument pairs such as $\\log_2 3$ and $\\log_3 2$ the product is always 1"
+    ],
+    "examples": [
+      {
+        "problem": "计算 $\\log_3 5\\cdot\\log_5 9$。",
+        "solution": "把 $\\log_5 9$ 换底：$\\log_5 9=\\frac{\\log_3 9}{\\log_3 5}=\\frac{2}{\\log_3 5}$。于是原式 $=\\log_3 5\\cdot\\frac{2}{\\log_3 5}=2$。也可用链式法则直接看出中间底数约掉。"
+      },
+      {
+        "problem": "已知 $\\lg 2=a$，$\\lg 3=b$，用 $a,b$ 表示 $\\log_2 12$。",
+        "solution": "由换底公式 $\\log_2 12=\\frac{\\lg 12}{\\lg 2}$。而 $\\lg 12=\\lg(3\\cdot 4)=\\lg 3+2\\lg 2=b+2a$，$\\lg 2=a$，所以 $\\log_2 12=\\frac{b+2a}{a}=\\frac{b}{a}+2$。"
+      },
+      {
+        "problem": "化简 $\\log_{4} 8$。",
+        "solution": "用推论 $\\log_{a^m}b^n=\\frac{n}{m}\\log_a b$：$4=2^2$，$8=2^3$，所以 $\\log_4 8=\\frac{3}{2}\\log_2 2=\\frac{3}{2}$。也可直接换底：$\\frac{\\lg 8}{\\lg 4}=\\frac{3\\lg 2}{2\\lg 2}=\\frac{3}{2}$。"
+      }
+    ],
+    "tags": [
+      "对数",
+      "恒等变形",
+      "计算技巧"
+    ],
+    "links": [
+      "logarithm",
+      "logarithmic-function",
+      "logarithmic-equation",
+      "natural-constant-e"
+    ]
+  },
+  {
+    "id": "logarithmic-equation",
+    "title": "对数方程与不等式",
+    "titleEn": "Logarithmic Equations and Inequalities",
+    "branch": "function",
+    "level": 4,
+    "summary": "用对数的单调性与定义域限制求解含对数的方程和不等式，必须验根。",
+    "summaryEn": "Solving equations and inequalities involving logarithms via monotonicity and domain conditions, always checking roots.",
+    "definition": "含有未知数在**真数或底数位置**的方程叫**对数方程**，例如 $\\log_2(x+1)=3$；相应的不等式叫**对数不等式**。\n\n解对数问题的第一原则是**定义域优先**：由于 $\\log_a x$ 只对 $x>0$ 有定义，在动手变形之前必须先列出所有真数大于零（底数大于零且不等于 1）的条件。这一步不能省，因为对数运算的化简可能放大定义域，从而引入**增根**。\n\n第二原则是**利用单调性脱去对数号**。当两边底数相同时：若 $a>1$，则 $\\log_a f(x)=\\log_a g(x)\\Rightarrow f(x)=g(x)$，且不等式方向不变；若 $0<a<1$ 则不等式方向反转。脱去对数号后，把问题变成普通方程或不等式。\n\n常用的手法还有：把常数写成同底对数（如 $1=\\log_2 2$）、用对数运算法则合并、换元令 $t=\\log_a x$。所有解最终都要代回原方程检验，只有同时满足定义域要求的才是真解——这是对数方程最鲜明的特点。",
+    "definitionEn": "An equation with the unknown in the **argument or base of a logarithm** is a **logarithmic equation**, e.g. $\\log_2(x+1)=3$; the corresponding inequality is a **logarithmic inequality**.\n\nThe first principle is **domain first**: since $\\log_a x$ is defined only for $x>0$, before manipulating anything you must write down that every argument is positive (and every base positive and not 1). This is essential because simplifying logarithms can enlarge the domain and introduce **extraneous roots**.\n\nThe second principle is **using monotonicity to drop the logarithm**. With a common base, if $a>1$ then $\\log_a f(x)=\\log_a g(x)\\Rightarrow f(x)=g(x)$ and inequality directions are preserved; if $0<a<1$ the direction reverses. After dropping the logs the problem becomes ordinary.\n\nCommon techniques: rewrite constants as logs in the same base (e.g. $1=\\log_2 2$), merge logs with the laws of logarithms, or substitute $t=\\log_a x$. Every solution must finally be checked against the original equation — only those satisfying the domain conditions are genuine, a signature feature of logarithmic equations.",
+    "formulas": [
+      {
+        "latex": "\\log_a f(x)=\\log_a g(x) \\iff f(x)=g(x)>0",
+        "note": "同底去对数号，同时保证真数为正",
+        "noteEn": "Drop equal-base logs, keeping arguments positive"
+      },
+      {
+        "latex": "\\log_a f(x)=b \\iff f(x)=a^b",
+        "note": "化为指数式求解，注意 $f(x)=a^b>0$ 自动成立",
+        "noteEn": "Convert to exponential form; $f(x)=a^b>0$ holds automatically"
+      },
+      {
+        "latex": "a>1:\\ \\log_a f(x)>\\log_a g(x) \\iff f(x)>g(x)>0",
+        "note": "底数大于 1 时不等号方向不变",
+        "noteEn": "For $a>1$ the direction is unchanged"
+      },
+      {
+        "latex": "0<a<1:\\ \\log_a f(x)>\\log_a g(x) \\iff 0<f(x)<g(x)",
+        "note": "底数小于 1 时不等号反转，是高频易错点",
+        "noteEn": "For $0<a<1$ the direction reverses — a frequent pitfall"
+      },
+      {
+        "latex": "\\log_a f(x)+\\log_a g(x)=\\log_a(f(x)g(x))",
+        "note": "合并对数时要求 $f(x)>0$ 且 $g(x)>0$，比合并后定义域更严格",
+        "noteEn": "Merging requires $f(x)>0$ and $g(x)>0$, stricter than the merged domain"
+      }
+    ],
+    "expression": {
+      "text": "log_a(f(x)) = b  ⟹  f(x) = a^b,  且 f(x)>0",
+      "symbol": "\\log_a f(x)=b",
+      "note": "解题顺序：先定定义域，再脱对数号，最后验根。",
+      "noteEn": "Order of work: fix the domain, drop the log, then check the roots."
+    },
+    "properties": [
+      "定义域优先：所有真数必须大于 0，底数大于 0 且不等于 1，这是不可省略的一步",
+      "化简过程可能放大定义域而引入增根，因此解完必须代回原式检验",
+      "对数函数一一对应，同底同真数则相等，据此可以安全地脱去对数号",
+      "解不等式时底数决定方向：$a>1$ 不变号，$0<a<1$ 变号",
+      "换元 $t=\\log_a x$ 可以把较复杂对数方程化为二次方程，最后再回代 $x=a^t$"
+    ],
+    "propertiesEn": [
+      "Domain first: every argument positive, every base positive and not 1 — an indispensable step",
+      "Simplification can enlarge the domain and create extraneous roots, so all answers must be checked in the original equation",
+      "The logarithm is one-to-one, so equal bases and equal arguments let us remove the logarithms safely",
+      "In inequalities the base rules the direction: unchanged for $a>1$, reversed for $0<a<1$",
+      "Substituting $t=\\log_a x$ turns awkward logarithmic equations into quadratics, then back-substitute $x=a^t$"
+    ],
+    "examples": [
+      {
+        "problem": "解方程 $\\log_2(x+1)+\\log_2(x-1)=3$。",
+        "solution": "定义域要求 $x+1>0$ 且 $x-1>0$，即 $x>1$。合并左边：$\\log_2[(x+1)(x-1)]=3$，即 $\\log_2(x^2-1)=3$，所以 $x^2-1=2^3=8$，得 $x^2=9$，$x=\\pm 3$。检验：$x=-3$ 不满足 $x>1$，舍去；$x=3$ 满足。故原方程的解为 $x=3$。"
+      },
+      {
+        "problem": "解不等式 $\\log_{0.5}(2x-1)>\\log_{0.5}(x+3)$。",
+        "solution": "定义域要求 $2x-1>0$ 且 $x+3>0$，即 $x>\\frac{1}{2}$。底数 $0.5<1$，函数递减，故不等号反转：$2x-1<x+3$，即 $x<4$。与定义域求交得解集为 $\\left(\\frac{1}{2},4\\right)$。"
+      }
+    ],
+    "tags": [
+      "对数",
+      "方程",
+      "不等式",
+      "定义域"
+    ],
+    "links": [
+      "logarithmic-function",
+      "logarithm",
+      "exponential-equation",
+      "change-of-base"
+    ]
+  },
+  {
+    "id": "power-function",
+    "title": "幂函数",
+    "titleEn": "Power Function",
+    "branch": "function",
+    "level": 2,
+    "summary": "形如 y=x^α 的函数，底数是自变量、指数是常数，图像随指数 α 变化多样。",
+    "summaryEn": "A function of the form y=x^α with the variable as base and a constant exponent; its graph varies greatly with α.",
+    "definition": "**幂函数**是指形如\n\n$$y=x^{\\alpha}$$\n\n的函数，其中底数 $x$ 是自变量，指数 $\\alpha$ 是常数。注意它与指数函数的区别：指数函数是指数在变、底数固定，幂函数正好相反——**底数在变、指数固定**。\n\n幂函数的图像非常丰富，取决于 $\\alpha$ 的取值。所有幂函数在 $(0,+\\infty)$ 上都有定义，并且都经过点 $(1,1)$。它们大致可分为几类：$\\alpha$ 为正整数时（如 $x^2$、$x^3$）图像过原点；$\\alpha$ 为负整数时（如 $x^{-1}=\\frac{1}{x}$）在两支上分别单调，图像不过原点；$\\alpha$ 为分数时（如 $\\sqrt{x}=x^{1/2}$）定义域可能只限于非负实数。\n\n研究幂函数的关键思路是：先确定**定义域**（由 $\\alpha$ 的分母奇偶决定负数是否可取），再讨论**奇偶性**与**单调性**。这套流程也适用于研究更一般的函数，因此幂函数是训练函数研究方法的经典模型。",
+    "definitionEn": "A **power function** has the form\n\n$$y=x^{\\alpha}$$\n\nwhere the base $x$ is the variable and the exponent $\\alpha$ is a constant. Contrast this with the exponential function: there the exponent varies and the base is fixed, while here it is the reverse — **the base varies and the exponent is fixed**.\n\nPower functions have a rich family of graphs depending on $\\alpha$. All of them are defined on $(0,+\\infty)$ and all pass through $(1,1)$. They fall into rough groups: for positive integer $\\alpha$ (e.g. $x^2$, $x^3$) the graph passes through the origin; for negative integer $\\alpha$ (e.g. $x^{-1}=\\frac{1}{x}$) it is monotone on each branch and misses the origin; for fractional $\\alpha$ (e.g. $\\sqrt{x}=x^{1/2}$) the domain may be restricted to non-negative reals.\n\nThe standard approach is: determine the **domain** (whether negative $x$ is allowed depends on the parity of the denominator of $\\alpha$), then discuss **symmetry** and **monotonicity**. The same routine works for studying general functions, which is why power functions are the classic training ground for function analysis.",
+    "formulas": [
+      {
+        "latex": "y=x^{\\alpha}",
+        "note": "幂函数的一般形式，底数为自变量，指数为常数",
+        "noteEn": "General form: variable base, constant exponent"
+      },
+      {
+        "latex": "x^{2}=x\\cdot x,\\quad x^{3}=x\\cdot x\\cdot x",
+        "note": "整数指数幂的直观含义：连乘",
+        "noteEn": "Integer powers as repeated multiplication"
+      },
+      {
+        "latex": "x^{-1}=\\frac{1}{x},\\quad x^{1/2}=\\sqrt{x}",
+        "note": "负指数与分数指数的写法，揭示与反比例、根式的关系",
+        "noteEn": "Negative and fractional exponents linking to reciprocal and root functions"
+      },
+      {
+        "latex": "\\log_a (x^{\\alpha})=\\alpha\\log_a x",
+        "note": "幂与对数的桥梁，便于比较幂的大小",
+        "noteEn": "The bridge between powers and logarithms"
+      },
+      {
+        "latex": "\\frac{d}{dx}x^{\\alpha}=\\alpha x^{\\alpha-1}",
+        "note": "幂函数的求导公式，微积分中最重要的公式之一",
+        "noteEn": "The power rule, one of the most important derivative formulas"
+      }
+    ],
+    "expression": {
+      "text": "y = x^α",
+      "symbol": "x^{\\alpha}",
+      "note": "底数 x 是自变量、α 是常数；α 的取值决定定义域与图像形状。",
+      "noteEn": "The base $x$ is the variable and $\\alpha$ the constant; $\\alpha$ decides the domain and the shape."
+    },
+    "properties": [
+      "所有幂函数在 $(0,+\\infty)$ 上都有定义，且都经过点 $(1,1)$",
+      "$\\alpha>0$ 时在 $(0,+\\infty)$ 上单调递增，图像过原点（$\\alpha\\neq 0$）；$\\alpha<0$ 时单调递减，图像不过原点",
+      "$\\alpha$ 为整数时定义域为 $\\mathbb{R}$（奇）或含全部实数的偶函数形式；$\\alpha$ 为分数且分母为偶数时定义域限于 $x\\ge 0$",
+      "在 $(1,+\\infty)$ 上，$\\alpha$ 越大曲线越陡；在 $(0,1)$ 上则相反",
+      "$\\alpha$ 为偶数时为偶函数（关于 $y$ 轴对称），为奇数时为奇函数（关于原点对称）"
+    ],
+    "propertiesEn": [
+      "Every power function is defined on $(0,+\\infty)$ and passes through $(1,1)$",
+      "For $\\alpha>0$ it is increasing on $(0,+\\infty)$ and its graph passes through the origin; for $\\alpha<0$ it is decreasing and misses the origin",
+      "For integer $\\alpha$ the domain is $\\mathbb{R}$ (with parity deciding symmetry); for fractional $\\alpha$ with even denominator the domain is restricted to $x\\ge 0$",
+      "On $(1,+\\infty)$ a larger $\\alpha$ gives a steeper curve; on $(0,1)$ the opposite holds",
+      "Even $\\alpha$ gives an even function (symmetric about the y-axis), odd $\\alpha$ an odd function (symmetric about the origin)"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x**2",
+          "color": "#4cc9f0",
+          "label": "y = x²"
+        },
+        {
+          "expr": "x**3",
+          "color": "#ffd166",
+          "label": "y = x³"
+        },
+        {
+          "expr": "sqrt(x)",
+          "color": "#5ee0a8",
+          "label": "y = √x"
+        },
+        {
+          "expr": "1/x",
+          "color": "#ff6b9d",
+          "label": "y = 1/x"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -6,
+        6
+      ],
+      "title": "几个典型幂函数的图像"
+    },
+    "examples": [
+      {
+        "problem": "判断函数 $f(x)=x^{\\frac{2}{3}}$ 的定义域、奇偶性与单调性。",
+        "solution": "由于指数分母为 3（奇数），负数也能开三次方，所以定义域为 $\\mathbb{R}$，即 $f(x)=\\sqrt[3]{x^2}$。因为 $f(-x)=\\sqrt[3]{(-x)^2}=\\sqrt[3]{x^2}=f(x)$，故为偶函数。在 $[0,+\\infty)$ 上单调递增，在 $(-\\infty,0]$ 上单调递减。"
+      },
+      {
+        "problem": "比较 $1.5^{2}$、$1.5^{3}$ 与 $1.5^{0.5}$ 的大小。",
+        "solution": "它们都是幂函数 $y=x^{\\alpha}$ 在 $x=1.5$ 处的值。因为 $1.5>1$ 且三个指数满足 $0.5<2<3$，而在 $(1,+\\infty)$ 上指数越大函数值越大，所以 $1.5^{0.5}<1.5^{2}<1.5^{3}$。"
+      }
+    ],
+    "tags": [
+      "幂函数",
+      "初等函数",
+      "图像变换"
+    ],
+    "links": [
+      "rational-exponent",
+      "exponential-function",
+      "function-concept",
+      "derivative",
+      "rational-exponent",
+      "inverse-function"
+    ]
+  },
+  {
+    "id": "natural-constant-e",
+    "title": "自然常数 e 与自然对数",
+    "titleEn": "Euler's Number e and the Natural Logarithm",
+    "branch": "function",
+    "level": 4,
+    "summary": "由极限定义的无理数 e≈2.718，以它为底的对数 ln 在微积分中最简洁。",
+    "summaryEn": "The irrational number e≈2.718 defined by a limit; the logarithm ln to base e is the cleanest in calculus.",
+    "definition": "**自然常数** $e$ 是一个无理数，定义为\n\n$$e=\\lim_{n\\to\\infty}\\left(1+\\frac{1}{n}\\right)^n \\approx 2.718281828\\ldots$$\n\n它产生的背景是**连续复利**：本金按年利率 100% 分 $n$ 次计息，年末本息为 $\\left(1+\\frac{1}{n}\\right)^n$；当复利越来越频繁（$n\\to\\infty$）时，这个量趋于定值 $e$。所以 $e$ 是「增长到极致」的极限，也就是自然增长的底数。\n\n以 $e$ 为底的对数叫做**自然对数**，记作 $\\ln x=\\log_e x$。它在微积分中地位特殊，因为只有以 $e$ 为底的指数函数，其导数恰好等于自身：\n\n$$\\frac{d}{dx}e^x=e^x,\\qquad \\frac{d}{dx}\\ln x=\\frac{1}{x}$$\n\n这两个式子形式极为简洁，没有任何多余系数。正因为如此，数学家研究改变率、积累量、衰减过程时都首选 $e$，它被称为「自然的」底数。",
+    "definitionEn": "**Euler's number** $e$ is the irrational number defined by\n\n$$e=\\lim_{n\\to\\infty}\\left(1+\\frac{1}{n}\\right)^n \\approx 2.718281828\\ldots$$\n\nIt arose from **continuous compounding**: with an annual rate of 100% compounded $n$ times a year, the year-end amount is $\\left(1+\\frac{1}{n}\\right)^n$; as compounding becomes ever more frequent ($n\\to\\infty$) this tends to the fixed value $e$. So $e$ is the limit of maximal growth — the natural base of growth.\n\nThe logarithm to base $e$ is the **natural logarithm**, written $\\ln x=\\log_e x$. Its special place in calculus comes from the fact that only the base-$e$ exponential is its own derivative:\n\n$$\\frac{d}{dx}e^x=e^x,\\qquad \\frac{d}{dx}\\ln x=\\frac{1}{x}$$\n\nThese two formulas are remarkably clean, with no extra constants. That is why $e$ is the preferred base for rates of change, accumulation and decay — it is genuinely the \"natural\" base.",
+    "formulas": [
+      {
+        "latex": "e=\\lim_{n\\to\\infty}\\left(1+\\frac{1}{n}\\right)^n \\approx 2.71828",
+        "note": "e 的极限定义，源于连续复利",
+        "noteEn": "Limit definition of $e$ from continuous compounding"
+      },
+      {
+        "latex": "\\ln x=\\log_e x,\\quad \\ln e=1,\\ \\ln 1=0",
+        "note": "自然对数的定义与两个基准值",
+        "noteEn": "Definition of the natural logarithm and two base values"
+      },
+      {
+        "latex": "e^{\\ln x}=x\\ (x>0),\\quad \\ln e^{x}=x",
+        "note": "e 的指数与自然对数互为反函数",
+        "noteEn": "Exponential and logarithm to base $e$ are inverses"
+      },
+      {
+        "latex": "\\ln(xy)=\\ln x+\\ln y,\\quad \\ln\\frac{x}{y}=\\ln x-\\ln y",
+        "note": "对数运算法则在自然对数下的形式",
+        "noteEn": "The logarithm laws for the natural logarithm"
+      },
+      {
+        "latex": "\\lim_{x\\to 0}\\frac{\\ln(1+x)}{x}=1,\\quad \\lim_{x\\to 0}\\frac{e^x-1}{x}=1",
+        "note": "两个重要极限，是推导导数的关键",
+        "noteEn": "Two key limits used to derive the derivatives"
+      }
+    ],
+    "expression": {
+      "text": "e ≈ 2.71828...,  ln x = log_e(x)",
+      "symbol": "e^{x},\\ \\ln x",
+      "note": "$e$ 是无理数（约 2.718），$\\ln$ 表示以 $e$ 为底的自然对数。",
+      "noteEn": "$e$ is irrational (about 2.718) and $\\ln$ denotes the natural logarithm to base $e$."
+    },
+    "properties": [
+      "$e$ 是无理数，约等于 $2.718281828$，无法写成分数",
+      "$e^x$ 是唯一（除零函数外）导数为自身的函数，即 $(e^x)'=e^x$",
+      "$\\ln x$ 的导数为 $\\frac{1}{x}$，是分式函数积分的标准来源",
+      "$e^x$ 恒大于 0，定义域为 $\\mathbb{R}$、值域为 $(0,+\\infty)$；$\\ln x$ 定义域为 $(0,+\\infty)$、值域为 $\\mathbb{R}$",
+      "两者互为反函数，图像关于 $y=x$ 对称，且都过 $(0,1)$ 与 $(1,0)$"
+    ],
+    "propertiesEn": [
+      "$e$ is irrational, approximately $2.718281828$, and cannot be written as a fraction",
+      "$e^x$ is the only (non-trivial) function equal to its own derivative: $(e^x)'=e^x$",
+      "The derivative of $\\ln x$ is $\\frac{1}{x}$, the standard origin of integrals of reciprocals",
+      "$e^x>0$ always, with domain $\\mathbb{R}$ and range $(0,+\\infty)$; $\\ln x$ has domain $(0,+\\infty)$ and range $\\mathbb{R}$",
+      "They are inverse functions, mirror images in $y=x$, passing through $(0,1)$ and $(1,0)$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(x)",
+          "color": "#4cc9f0",
+          "label": "y = e^x"
+        },
+        {
+          "expr": "log(x)",
+          "color": "#ff6b9d",
+          "label": "y = ln x"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "y = x (对称轴)"
+        }
+      ],
+      "xRange": [
+        -3,
+        5
+      ],
+      "yRange": [
+        -3,
+        6
+      ],
+      "title": "y = e^x 与 y = ln x 互为反函数"
+    },
+    "examples": [
+      {
+        "problem": "计算 $\\ln e^{3} + e^{\\ln 5} - \\ln 1$。",
+        "solution": "$\\ln e^3=3$；由互逆恒等式 $e^{\\ln 5}=5$；$\\ln 1=0$。所以原式 $=3+5-0=8$。"
+      },
+      {
+        "problem": "用 $\\ln$ 表示 $\\log_2 10$，并估算其值。",
+        "solution": "由换底公式 $\\log_2 10=\\frac{\\ln 10}{\\ln 2}$。取 $\\ln 10\\approx 2.3026$、$\\ln 2\\approx 0.6931$，得 $\\log_2 10\\approx 3.32$。"
+      },
+      {
+        "problem": "求函数 $f(x)=\\ln(x-2)+\\sqrt{5-x}$ 的定义域。",
+        "solution": "对数要求 $x-2>0$ 即 $x>2$；根式要求 $5-x\\ge 0$ 即 $x\\le 5$。取交集得定义域为 $(2,5]$。"
+      }
+    ],
+    "tags": [
+      "自然常数",
+      "自然对数",
+      "极限",
+      "微积分"
+    ],
+    "links": [
+      "exponential-function",
+      "logarithmic-function",
+      "logarithm",
+      "exponential-growth-decay",
+      "limit",
+      "derivative",
+      "integral"
+    ]
+  },
+  {
+    "id": "exponential-growth-decay",
+    "title": "指数增长与衰减模型",
+    "titleEn": "Exponential Growth and Decay Models",
+    "branch": "function",
+    "level": 4,
+    "summary": "用 y=A·e^{kt} 或 y=A·a^{t} 刻画人口、复利、放射衰变等成倍变化的现象。",
+    "summaryEn": "Modelling doubling and halving phenomena such as populations, compound interest and radioactive decay with y=A·e^{kt}.",
+    "definition": "**指数增长**指一个量按固定**比例**（而不是固定数量）变化的现象。若初始量为 $A$，相对增长率为 $k$，经过时间 $t$ 后的量为\n\n$$N(t)=Ae^{kt}$$\n\n当 $k>0$ 时是增长，$k<0$ 时是衰减。在离散情形，常用等价形式 $N(t)=A\\cdot a^{t}$，其中 $a$ 是每个单位时间的倍数。\n\n这类模型的共同特征是：**增量与当前量成正比**，即\n\n$$\\frac{dN}{dt}=kN$$\n\n其解正是指数函数。这解释了为什么指数增长开始很慢、随后突然爆发，也解释了为什么衰减永远不会真的到零——它只是无限接近零。\n\n最常用的两个参数是**倍增时间** $T_d=\\frac{\\ln 2}{k}$（增长型）和**半衰期** $T_{1/2}=\\frac{\\ln 2}{|k|}$（衰减型），它们把抽象的 $k$ 换成直观的时间尺度。\n\n要注意区分幂增长（如 $t^2$）与指数增长：前者按固定倍数的时间延长，后者在同一时间内不断加速，长期来看指数一定碾压幂函数。",
+    "definitionEn": "**Exponential growth** describes a quantity that changes by a fixed **proportion** rather than a fixed amount. With initial value $A$ and relative rate $k$, the value after time $t$ is\n\n$$N(t)=Ae^{kt}$$\n\nwith $k>0$ for growth and $k<0$ for decay. In discrete settings the equivalent form $N(t)=A\\cdot a^{t}$ is common, where $a$ is the factor per unit time.\n\nThe signature of such models is that **the increment is proportional to the current value**:\n\n$$\\frac{dN}{dt}=kN$$\n\nwhose solution is exactly the exponential. This explains why exponential growth starts slowly and then explodes, and why decay never truly reaches zero — it only approaches it.\n\nThe two most useful parameters are the **doubling time** $T_d=\\frac{\\ln 2}{k}$ (growth) and the **half-life** $T_{1/2}=\\frac{\\ln 2}{|k|}$ (decay), which translate the abstract $k$ into an intuitive time scale.\n\nBe careful to distinguish power growth (e.g. $t^2$) from exponential growth: the former slows in relative terms, the latter keeps accelerating, and in the long run the exponential always overtakes any power.",
+    "formulas": [
+      {
+        "latex": "N(t)=A e^{kt}",
+        "note": "连续型指数模型，$A$ 为初始量，$k$ 为相对变化率",
+        "noteEn": "Continuous exponential model: $A$ initial amount, $k$ relative rate"
+      },
+      {
+        "latex": "N(t)=A\\cdot a^{t}=A(1+r)^{t}",
+        "note": "离散型模型，$a$ 为每期倍数，$r$ 为每期增长率",
+        "noteEn": "Discrete model: $a$ the per-period factor, $r$ the per-period rate"
+      },
+      {
+        "latex": "T_d=\\frac{\\ln 2}{k}",
+        "note": "倍增时间：增长到两倍所需时间（$k>0$）",
+        "noteEn": "Doubling time: time to double when $k>0$"
+      },
+      {
+        "latex": "T_{1/2}=\\frac{\\ln 2}{|k|}",
+        "note": "半衰期：衰减到一半所需时间（$k<0$）",
+        "noteEn": "Half-life: time to halve when $k<0$"
+      },
+      {
+        "latex": "\\frac{dN}{dt}=kN,\\quad N(0)=A",
+        "note": "微分方程形式：变化率与当前量成正比，其解为 $N=Ae^{kt}$",
+        "noteEn": "Differential form: rate proportional to current value, solved by $N=Ae^{kt}$"
+      }
+    ],
+    "expression": {
+      "text": "N(t) = A·e^(kt)   (k>0 增长，k<0 衰减)",
+      "symbol": "Ae^{kt}",
+      "note": "$A$ 是初始值，$k$ 是相对变化率，$t$ 是时间；$k$ 的符号决定增长或衰减。",
+      "noteEn": "$A$ is the initial value, $k$ the relative rate, $t$ time; the sign of $k$ decides growth or decay."
+    },
+    "properties": [
+      "变化率与当前量成正比：$\\frac{dN}{dt}=kN$，这是指数模型的判别标志",
+      "在任何相等的时间段内，量都乘以同一个倍数，因此相对增长率恒定",
+      "倍增时间与半衰期只依赖 $k$，与初始量 $A$ 无关",
+      "衰减型函数恒大于 0 但趋近于 0，永远不会在有限时间内等于 0",
+      "长期来看指数增长快于任何幂函数 $t^{\\alpha}$，即 $\\lim_{t\\to\\infty}\\frac{e^{kt}}{t^{\\alpha}}=+\\infty$"
+    ],
+    "propertiesEn": [
+      "The rate of change is proportional to the current value, $\\frac{dN}{dt}=kN$ — the defining test of an exponential model",
+      "Over any equal time intervals the quantity is multiplied by the same factor, so the relative growth rate is constant",
+      "Doubling time and half-life depend only on $k$, not on the initial amount $A$",
+      "A decaying quantity stays positive and only approaches 0; it never reaches 0 in finite time",
+      "In the long run exponential growth beats every power: $\\lim_{t\\to\\infty}\\frac{e^{kt}}{t^{\\alpha}}=+\\infty$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(0.5*x)",
+          "color": "#4cc9f0",
+          "label": "y = e^(0.5x) 增长"
+        },
+        {
+          "expr": "exp(-0.5*x)",
+          "color": "#ff6b9d",
+          "label": "y = e^(-0.5x) 衰减"
+        },
+        {
+          "expr": "1",
+          "color": "#ffd166",
+          "label": "y = 1 初始水平"
+        }
+      ],
+      "xRange": [
+        -1,
+        6
+      ],
+      "yRange": [
+        -0.5,
+        8
+      ],
+      "title": "指数增长与衰减曲线"
+    },
+    "examples": [
+      {
+        "problem": "某细菌培养的初始数量为 1000，每 3 小时数量翻倍。写出数量关于时间 $t$（小时）的函数，并求 12 小时后的数量。",
+        "solution": "每 3 小时翻倍，则 $N(t)=1000\\cdot 2^{t/3}$。当 $t=12$ 时，$N=1000\\cdot 2^{4}=1000\\cdot 16=16000$。若写成连续形式，由 $2=e^{k\\cdot 3}$ 得 $k=\\frac{\\ln 2}{3}$，即 $N(t)=1000e^{\\frac{\\ln 2}{3}t}$。"
+      },
+      {
+        "problem": "碳-14 的半衰期约为 5730 年。某化石中碳-14 的含量只剩原来的 40%，估算化石年龄。",
+        "solution": "由 $N(t)=Ae^{kt}$ 与半衰期 $\\frac{\\ln 2}{|k|}=5730$ 得 $k=-\\frac{\\ln 2}{5730}$。令 $\\frac{N}{A}=0.40$，则 $e^{kt}=0.40$，取自然对数得 $t=\\frac{\\ln 0.40}{k}=\\frac{-0.9163}{-\\ln 2/5730}\\approx 7577$ 年。"
+      }
+    ],
+    "tags": [
+      "指数",
+      "数学建模",
+      "增长",
+      "衰减",
+      "半衰期"
+    ],
+    "links": [
+      "exponential-function",
+      "natural-constant-e",
+      "exponential-equation",
+      "derivative",
+      "integral"
+    ]
+  }
+]

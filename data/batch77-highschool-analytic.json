@@ -1,0 +1,656 @@
+[
+  {
+    "id": "line-equation",
+    "title": "直线的方程",
+    "titleEn": "Equations of Lines",
+    "branch": "analytic",
+    "level": 2,
+    "summary": "用点斜式、斜截式、两点式与一般式刻画平面上的直线；一切从「斜率是否存在」开始分类。",
+    "summaryEn": "Point-slope, slope-intercept, two-point and general forms describe every line in the plane—and every problem starts by asking whether the slope exists.",
+    "definition": "在平面直角坐标系里，一条直线就是满足某个方程 $F(x,y)=0$ 的全体点构成的图形，这个方程就叫做直线的方程。用方程研究直线，是解析几何「用代数研究图形」的第一步。\n\n最灵活的形式是**点斜式**：已知直线过点 $(x_1,y_1)$、斜率为 $k$，方程为 $y-y_1=k(x-x_1)$。它要求斜率存在，而斜率由两点坐标之差给出：$k=\\frac{y_2-y_1}{x_2-x_1}$（$x_2\\neq x_1$）。当 $x_1=x_2$ 时这个式子没有意义，此时直线垂直于 x 轴，方程只能写成 $x=x_0$。竖直直线不能用点斜式、斜截式、两点式或截距式表示，必须单独讨论——这是直线问题里最经典的分类讨论点。\n\n从点斜式还能派生其它形式：让直线过 y 轴上的点 $(0,b)$，得到**斜截式** $y=kx+b$，其中 $b$ 叫作纵截距；由两点确定一条直线得到**两点式** $\\frac{y-y_1}{y_2-y_1}=\\frac{x-x_1}{x_2-x_1}$（要求 $x_1\\neq x_2$ 且 $y_1\\neq y_2$）；而**一般式** $Ax+By+C=0$（$A$、$B$ 不同时为 0）能表示所有直线，包括竖直直线，只是斜率和截距要自己推算。\n\n选用原则很简单：形式越特殊，附加条件越多。解题时先判断斜率是否存在，再挑选合适的形式；写出答案后把已知点代回去验算，能挡掉绝大多数低级错误。",
+    "definitionEn": "A line in the coordinate plane is exactly the set of points satisfying an equation $F(x,y)=0$, and that equation is called an equation of the line. Studying lines through equations is the first step of analytic geometry: replacing pictures with algebra.\n\nThe most flexible form is the **point-slope form**: the line through $(x_1,y_1)$ with slope $k$ is $y-y_1=k(x-x_1)$, where $k=\\frac{y_2-y_1}{x_2-x_1}$ for any two points on the line with $x_2\\neq x_1$. If two points share the same x-coordinate the slope does not exist; the line is vertical and its equation is simply $x=x_0$. Such a line can never be written in point-slope, slope-intercept, two-point or intercept form, so it must be treated as a separate case.\n\nMaking the line pass through $(0,b)$ turns the point-slope form into the **slope-intercept form** $y=kx+b$, where $b$ is the y-intercept. Two points determine a line, which gives the **two-point form** $\\frac{y-y_1}{y_2-y_1}=\\frac{x-x_1}{x_2-x_1}$ (valid when $x_1\\neq x_2$ and $y_1\\neq y_2$). Finally, the **general form** $Ax+By+C=0$ (with $A$, $B$ not both zero) covers every line, vertical ones included, at the price of having to read off the slope and intercept yourself.\n\nThe rule of thumb: the more special the form, the more conditions it carries. Decide first whether the slope exists, then choose a form, and finally plug the known points back in as a check.",
+    "formulas": [
+      {
+        "latex": "k=\\dfrac{y_2-y_1}{x_2-x_1}\\quad (x_2\\neq x_1)",
+        "note": "过两点 $(x_1,y_1)$、$(x_2,y_2)$ 的斜率公式；$x_1=x_2$ 时斜率不存在。",
+        "noteEn": "Slope through two points; it is undefined when the two x-coordinates coincide."
+      },
+      {
+        "latex": "y-y_1=k(x-x_1)",
+        "note": "点斜式：过点 $(x_1,y_1)$ 且斜率为 $k$，要求斜率存在。",
+        "noteEn": "Point-slope form: the line through $(x_1,y_1)$ with slope $k$ (the slope must exist)."
+      },
+      {
+        "latex": "y=kx+b",
+        "note": "斜截式：斜率 $k$、纵截距 $b$；不能表示竖直直线。",
+        "noteEn": "Slope-intercept form: slope $k$, y-intercept $b$; vertical lines are not covered."
+      },
+      {
+        "latex": "\\dfrac{y-y_1}{y_2-y_1}=\\dfrac{x-x_1}{x_2-x_1}",
+        "note": "两点式：要求 $x_1\\neq x_2$ 且 $y_1\\neq y_2$，否则直线是竖直的或水平的。",
+        "noteEn": "Two-point form: requires $x_1\\neq x_2$ and $y_1\\neq y_2$; otherwise the line is vertical or horizontal."
+      },
+      {
+        "latex": "Ax+By+C=0\\quad (A^2+B^2\\neq 0)",
+        "note": "一般式：涵盖所有直线；$B=0$ 时就是竖直直线 $x=-\\frac{C}{A}$。",
+        "noteEn": "General form: covers every line; when $B=0$ it is the vertical line $x=-C/A$."
+      }
+    ],
+    "properties": [
+      "任何直线都有倾斜角 $\\alpha\\in[0,\\pi)$，且 $k=\\tan\\alpha$；唯独 $\\alpha=\\frac{\\pi}{2}$ 的竖直直线没有斜率，所有以斜率为前提的公式都要为它单独讨论。",
+      "平行判定：两直线斜率都存在时，$k_1=k_2$ 且纵截距不同则平行（截距相同则重合）；两直线斜率都不存在时，竖直线 $x=c_1$ 与 $x=c_2$（$c_1\\neq c_2$）也平行；一边斜率存在、一边不存在时两直线必相交。",
+      "垂直判定：两直线斜率都存在时，$k_1k_2=-1$；一条竖直、另一条水平（$k=0$）时也垂直。用一般式更省事：$l_1\\perp l_2\\Leftrightarrow A_1A_2+B_1B_2=0$，而 $l_1$ 与 $l_2$ 平行或重合 $\\Leftrightarrow A_1B_2-A_2B_1=0$。",
+      "一般式 $Ax+By+C=0$ 中：$B\\neq 0$ 时斜率 $k=-\\frac{A}{B}$、纵截距 $b=-\\frac{C}{B}$；$B=0$ 时是竖直直线 $x=-\\frac{C}{A}$。",
+      "截距式 $\\frac{x}{a}+\\frac{y}{b}=1$（$a\\neq 0$、$b\\neq 0$）表示横截距为 $a$、纵截距为 $b$ 的直线，它与两条坐标轴围成的直角三角形面积为 $\\frac{1}{2}|ab|$，但不能表示过原点或与坐标轴平行的直线。"
+    ],
+    "propertiesEn": [
+      "Every line has an angle of inclination $\\alpha\\in[0,\\pi)$ with $k=\\tan\\alpha$; only the vertical line $\\alpha=\\frac{\\pi}{2}$ has no slope, so every slope-based formula needs a separate case for it.",
+      "Parallel test: when both slopes exist, $k_1=k_2$ with different y-intercepts means parallel (equal intercepts means coincident); when neither slope exists, two vertical lines $x=c_1$ and $x=c_2$ ($c_1\\neq c_2$) are parallel. If one slope exists and the other does not, the lines must intersect.",
+      "Perpendicular test: when both slopes exist, $k_1k_2=-1$; a vertical line is also perpendicular to a horizontal line ($k=0$). In general form it is cleaner: $l_1\\perp l_2\\Leftrightarrow A_1A_2+B_1B_2=0$, while $l_1$ parallel to or coincident with $l_2$ $\\Leftrightarrow A_1B_2-A_2B_1=0$.",
+      "In the general form $Ax+By+C=0$: if $B\\neq 0$ the slope is $-A/B$ and the y-intercept is $-C/B$; if $B=0$ the line is vertical, $x=-C/A$.",
+      "The intercept form $\\frac{x}{a}+\\frac{y}{b}=1$ ($a\\neq 0$, $b\\neq 0$) has x-intercept $a$ and y-intercept $b$; with the axes it bounds a right triangle of area $\\frac{1}{2}|ab|$, but it cannot represent lines through the origin or parallel to an axis."
+    ],
+    "examples": [
+      {
+        "problem": "求过点 $A(2,1)$ 且斜率为 $-3$ 的直线方程，并化为一般式。",
+        "solution": "斜率已知且不影响定义，直接用点斜式：$$y-1=-3(x-2).$$ 整理得 $y=-3x+7$，再化为一般式 $3x+y-7=0$。验算：把 $A(2,1)$ 代入得 $3\\times 2+1-7=0$，且由 $y=-3x+7$ 知斜率为 $-3$，结果正确。"
+      },
+      {
+        "problem": "求过点 $P(2,-1)$、$Q(2,5)$ 的直线方程。",
+        "solution": "两点横坐标相同（$x_1=x_2=2$），所以直线垂直于 x 轴，斜率 $k=\\frac{5-(-1)}{2-2}$ 不存在，不能使用点斜式、斜截式或两点式。这条直线的方程直接写为 $x=2$；它的一般式是 $x-2=0$，属于 $B=0$ 的特殊情形。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x + 1",
+          "color": "#4cc9f0",
+          "label": "y = x + 1"
+        },
+        {
+          "expr": "-2*x + 3",
+          "color": "#ff6b9d",
+          "label": "y = -2x + 3"
+        },
+        {
+          "expr": "3",
+          "color": "#ffd166",
+          "label": "y = 3"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -4,
+        6
+      ],
+      "title": "三条直线：y = x + 1、y = -2x + 3、y = 3"
+    },
+    "tags": [
+      "解析几何",
+      "直线",
+      "斜率",
+      "一般式"
+    ],
+    "links": [
+      "plane-coordinates",
+      "linear-function",
+      "intersecting-lines",
+      "circle-equation",
+      "line-circle-relation"
+    ]
+  },
+  {
+    "id": "circle-equation",
+    "title": "圆的方程",
+    "titleEn": "Equations of Circles",
+    "branch": "analytic",
+    "level": 2,
+    "summary": "圆心与半径写出的标准方程、展开后的一般方程，以及「一般方程什么时候才真的是圆」的判定条件。",
+    "summaryEn": "The standard form built from a center and a radius, its expanded general form, and the condition that decides when a general equation really is a circle.",
+    "definition": "圆是平面内到定点 $C(a,b)$ 的距离等于定长 $r$（$r>0$）的所有点组成的图形。把「到定点的距离等于定长」用两点间距离公式写出来：$\\sqrt{(x-a)^2+(y-b)^2}=r$，两边平方就得到圆的**标准方程**：\n$$(x-a)^2+(y-b)^2=r^2.$$\n圆心坐标 $(a,b)$ 与半径 $r$ 在方程里一目了然。\n\n把标准方程展开、整理成 $x^2+y^2+Dx+Ey+F=0$ 的样子，就得到圆的**一般方程**。反过来要小心：形如 $x^2+y^2+Dx+Ey+F=0$ 的方程不一定表示圆。对它配方：\n$$\\left(x+\\frac{D}{2}\\right)^2+\\left(y+\\frac{E}{2}\\right)^2=\\frac{D^2+E^2-4F}{4},$$\n只有当 $D^2+E^2-4F>0$ 时右边才是正数，方程表示一个圆，圆心为 $\\left(-\\frac{D}{2},-\\frac{E}{2}\\right)$、半径为 $\\frac{1}{2}\\sqrt{D^2+E^2-4F}$；若 $D^2+E^2-4F=0$，方程只表示一个点 $\\left(-\\frac{D}{2},-\\frac{E}{2}\\right)$；若小于 0，则没有任何点满足方程。用一般方程解题时，这个条件是必查项。\n\n求圆的方程有两条常用路线：已知圆心和半径（或能由几何条件先确定圆心、半径）时设**标准式**，参数少、几何意义清楚；已知圆上三点时设**一般式**，代入三点坐标解关于 $D$、$E$、$F$ 的三元一次方程组。无论哪条路线，最后都要确认半径为正。",
+    "definitionEn": "A circle is the set of points in the plane at distance exactly $r>0$ from a fixed point $C(a,b)$. Writing the distance condition with the coordinate distance formula, $\\sqrt{(x-a)^2+(y-b)^2}=r$, and squaring both sides gives the **standard equation**\n$$(x-a)^2+(y-b)^2=r^2,$$\nfrom which the center $(a,b)$ and radius $r$ can be read off immediately.\n\nExpanding the standard equation produces the **general equation** $x^2+y^2+Dx+Ey+F=0$. The converse needs care: not every equation of this shape is a circle. Completing squares gives\n$$\\left(x+\\frac{D}{2}\\right)^2+\\left(y+\\frac{E}{2}\\right)^2=\\frac{D^2+E^2-4F}{4},$$\nso a genuine circle appears exactly when $D^2+E^2-4F>0$, with center $\\left(-\\frac{D}{2},-\\frac{E}{2}\\right)$ and radius $\\frac{1}{2}\\sqrt{D^2+E^2-4F}$; if the expression equals 0 the equation describes only a single point, and if it is negative no point satisfies it.\n\nThere are two standard solving strategies: fit the standard form when the center and radius are known or easily found from geometry, and fit the general form when three points on the circle are given, solving for the three parameters $D$, $E$, $F$. Either way, make sure the radius ends up positive.",
+    "formulas": [
+      {
+        "latex": "\\left(x-a\\right)^2+\\left(y-b\\right)^2=r^2\\quad (r>0)",
+        "note": "标准方程：圆心 $(a,b)$、半径 $r$，参数几何意义直接可读。",
+        "noteEn": "Standard equation: center $(a,b)$, radius $r$; the parameters are read off directly."
+      },
+      {
+        "latex": "x^2+y^2+Dx+Ey+F=0",
+        "note": "一般方程；只有当 $D^2+E^2-4F>0$ 时才表示圆。",
+        "noteEn": "General equation; it represents a circle only when $D^2+E^2-4F>0$."
+      },
+      {
+        "latex": "\\left(x+\\dfrac{D}{2}\\right)^2+\\left(y+\\dfrac{E}{2}\\right)^2=\\dfrac{D^2+E^2-4F}{4}",
+        "note": "配方结果：右边为正表示圆，等于 0 是一个点，为负则无轨迹。",
+        "noteEn": "After completing squares: a positive right-hand side gives a circle, zero gives a single point, negative gives no graph."
+      },
+      {
+        "latex": "r=\\dfrac{1}{2}\\sqrt{D^2+E^2-4F}",
+        "note": "一般方程的半径公式（要求 $D^2+E^2-4F>0$）；圆心为 $\\left(-\\dfrac{D}{2},-\\dfrac{E}{2}\\right)$。",
+        "noteEn": "Radius from the general equation (valid when $D^2+E^2-4F>0$); the center is $\\left(-\\frac{D}{2},-\\frac{E}{2}\\right)$."
+      }
+    ],
+    "properties": [
+      "圆由三个独立条件确定：圆上不共线的三点，或圆心（两个数）加半径（一个数）；因此一般方程要待定三个系数 $D$、$E$、$F$。",
+      "一般方程的分类讨论：$D^2+E^2-4F>0$ 表示圆；$D^2+E^2-4F=0$ 只表示一个点 $\\left(-\\frac{D}{2},-\\frac{E}{2}\\right)$；$D^2+E^2-4F<0$ 不表示任何图形。",
+      "点与圆的位置关系：设点 $P(x_0,y_0)$ 到圆心的距离为 $d$，则 $d>r$ 在圆外、$d=r$ 在圆上、$d<r$ 在圆内；把坐标直接代入方程也能得到同样结论。",
+      "以 $A(x_1,y_1)$、$B(x_2,y_2)$ 为直径端点的圆的方程为 $(x-x_1)(x-x_2)+(y-y_1)(y-y_2)=0$，因为圆上点 $P$ 满足 $\\overrightarrow{PA}\\cdot\\overrightarrow{PB}=0$（直径所对的圆周角为直角）。"
+    ],
+    "propertiesEn": [
+      "A circle is determined by three independent conditions: three non-collinear points on it, or a center (two numbers) plus a radius (one number); hence the general form has three parameters $D$, $E$, $F$ to determine.",
+      "Classification of the general form: $D^2+E^2-4F>0$ gives a circle; $D^2+E^2-4F=0$ gives only the point $\\left(-\\frac{D}{2},-\\frac{E}{2}\\right)$; $D^2+E^2-4F<0$ gives no graph at all.",
+      "Position of a point: if its distance to the center is $d$, then $d>r$ means outside, $d=r$ on the circle and $d<r$ inside; substituting the coordinates into the equation gives the same answer.",
+      "The circle with diameter $AB$, where $A(x_1,y_1)$ and $B(x_2,y_2)$, has equation $(x-x_1)(x-x_2)+(y-y_1)(y-y_2)=0$, since every point $P$ on it satisfies $\\overrightarrow{PA}\\cdot\\overrightarrow{PB}=0$ (the angle in a semicircle is right)."
+    ],
+    "examples": [
+      {
+        "problem": "求过三点 $O(0,0)$、$A(1,1)$、$B(2,0)$ 的圆的方程。",
+        "solution": "设所求圆的方程为 $x^2+y^2+Dx+Ey+F=0$。代入三点坐标：由 $O(0,0)$ 得 $F=0$；由 $A(1,1)$ 得 $1+1+D+E=0$，即 $D+E=-2$；由 $B(2,0)$ 得 $4+2D=0$，即 $D=-2$，于是 $E=0$。所求方程为 $x^2+y^2-2x=0$，配方得 $(x-1)^2+y^2=1$，圆心 $(1,0)$、半径 $1$。验算：$D^2+E^2-4F=4+0-0=4>0$ 确为圆，且三点坐标都满足方程。"
+      },
+      {
+        "problem": "若方程 $x^2+y^2+2x-4y+m=0$ 表示圆，求实数 $m$ 的取值范围。",
+        "solution": "配方得 $(x+1)^2+(y-2)^2=5-m$。要表示圆，需要右边为正：$5-m>0$，即 $m<5$。当 $m<5$ 时圆心为 $(-1,2)$、半径为 $\\sqrt{5-m}$；当 $m=5$ 时方程只表示一个点 $(-1,2)$；当 $m>5$ 时无轨迹。用判别条件验证：$D^2+E^2-4F=4+16-4m=20-4m>0$，同样得到 $m<5$。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.5,
+        4.5
+      ],
+      "yRange": [
+        -4,
+        2.5
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "circle",
+          "cx": 1,
+          "cy": -1,
+          "r": 2,
+          "color": "#b388ff"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            -1
+          ],
+          "label": "C(1,-1)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            -1
+          ],
+          "to": [
+            3,
+            -1
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            2,
+            -0.6
+          ],
+          "text": "r = 2"
+        }
+      ],
+      "title": "圆 (x-1)² + (y+1)² = 4：圆心 C(1,-1)，半径 r = 2"
+    },
+    "tags": [
+      "解析几何",
+      "圆",
+      "标准方程",
+      "一般方程"
+    ],
+    "links": [
+      "line-equation",
+      "line-circle-relation",
+      "circle-junior",
+      "conic-comprehensive",
+      "ellipse"
+    ]
+  },
+  {
+    "id": "line-circle-relation",
+    "title": "直线与圆的位置关系",
+    "titleEn": "Positions of a Line Relative to a Circle",
+    "branch": "analytic",
+    "level": 3,
+    "summary": "用圆心到直线的距离（或联立后的判别式）判定相交、相切、相离，并处理切线、弦长两类典型问题。",
+    "summaryEn": "Judge intersection, tangency and separation by comparing the center-to-line distance with the radius (or by a discriminant), then handle tangent lines and chord lengths.",
+    "definition": "直线与圆的位置关系只有三种，用公共点的个数区分：**相交**（两个公共点）、**相切**（一个公共点）、**相离**（没有公共点）。判断方法有两种，彼此等价。\n\n**几何法**：设圆心到直线的距离为 $d$、圆的半径为 $r$。直线上的点到圆心的最短距离就是垂线段的长，所以 $d<r$ 时直线穿进圆内，有两个交点（相交）；$d=r$ 时直线恰好「擦」到圆，只有一个公共点（相切）；$d>r$ 时直线始终在圆外（相离）。几何法只需计算一个距离，是首选判定。\n\n**代数法**：联立直线与圆的方程，消去一个未知数，得到关于另一个未知数的一元二次方程。公共点个数等于方程实根的个数，因此判别式 $\\Delta>0$ 相交、$\\Delta=0$ 相切、$\\Delta<0$ 相离。代数法计算量大，但能顺带解出交点坐标。\n\n切线问题分两类：已知切点在圆上时，切线只有一条，且切线垂直于过切点的半径；已知点在圆外时，有两条切线，通常设切线斜率为 $k$、由「圆心到切线的距离等于半径」求 $k$，但必须先检查斜率不存在的竖直直线是不是也是切线——漏掉它是最典型的错误。弦长问题则由垂径定理解决：弦心距 $d$ 与半径 $r$ 构成直角三角形，弦长等于 $2\\sqrt{r^2-d^2}$。",
+    "definitionEn": "A line and a circle can meet in exactly three ways: two common points (a secant), one common point (a tangent), or none at all. Two equivalent tests tell them apart.\n\nThe **geometric test** compares the distance $d$ from the center to the line with the radius $r$. The shortest distance from a point of the line to the center is the perpendicular one, so $d<r$ means the line cuts through the circle at two points, $d=r$ means it just touches the circle, and $d>r$ means it misses the circle entirely. One distance computation settles everything, which is why this test comes first.\n\nThe **algebraic test** substitutes the line into the circle and eliminates one variable, leaving a quadratic in the other. The number of real roots equals the number of common points, so $\\Delta>0$, $\\Delta=0$ and $\\Delta<0$ correspond to secant, tangent and separate. It costs more computation but hands over the intersection points as a bonus.\n\nTangents come in two flavors. From a point on the circle there is exactly one tangent, perpendicular to the radius at the point. From a point outside the circle there are two tangents; the usual method sets the tangent slope $k$ and forces the center-to-line distance to equal $r$, but the vertical line through the given point must be checked separately, since it has no slope. For chords, the perpendicular from the center bisects the chord, giving the length formula $2\\sqrt{r^2-d^2}$, where $d$ is the distance from the center to the chord.",
+    "formulas": [
+      {
+        "latex": "d=\\dfrac{|Ax_0+By_0+C|}{\\sqrt{A^2+B^2}}",
+        "note": "点 $(x_0,y_0)$ 到直线 $Ax+By+C=0$ 的距离公式；判定位置关系时把圆心代入。",
+        "noteEn": "Distance from a point to the line $Ax+By+C=0$; plug in the circle's center for the position test."
+      },
+      {
+        "latex": "d<r\\ \\text{相交},\\qquad d=r\\ \\text{相切},\\qquad d>r\\ \\text{相离}",
+        "note": "几何判定法：比较圆心到直线的距离 $d$ 与半径 $r$。",
+        "noteEn": "Geometric test: compare the center-to-line distance $d$ with the radius $r$."
+      },
+      {
+        "latex": "\\Delta>0\\ \\text{相交},\\qquad \\Delta=0\\ \\text{相切},\\qquad \\Delta<0\\ \\text{相离}",
+        "note": "代数判定法：联立消元得一元二次方程（二次项系数不为 0）后看判别式。",
+        "noteEn": "Algebraic test: eliminate one variable and inspect the discriminant of the resulting quadratic."
+      },
+      {
+        "latex": "|AB|=2\\sqrt{r^2-d^2}",
+        "note": "弦长公式（垂径定理）：$d$ 为弦心距；$d=r$ 时弦长为 0，与相切衔接。",
+        "noteEn": "Chord length from the perpendicular-bisector relation; $d$ is the distance from the center to the chord, and $d=r$ gives length 0."
+      },
+      {
+        "latex": "x_0x+y_0y=r^2",
+        "note": "圆 $x^2+y^2=r^2$ 上点 $(x_0,y_0)$ 处的切线方程；更一般地，圆 $(x-a)^2+(y-b)^2=r^2$ 在其上点 $(x_0,y_0)$ 处的切线为 $(x_0-a)(x-a)+(y_0-b)(y-b)=r^2$。",
+        "noteEn": "Tangent to $x^2+y^2=r^2$ at a point $(x_0,y_0)$ on it; more generally the tangent to $(x-a)^2+(y-b)^2=r^2$ at $(x_0,y_0)$ is $(x_0-a)(x-a)+(y_0-b)(y-b)=r^2$."
+      }
+    ],
+    "properties": [
+      "两种判定等价：几何法只算圆心到直线的距离，代数法要解方程但能给出交点坐标；直线方程已知时优先用几何法。",
+      "过平面内一点作圆的切线：点在圆上有一条（且垂直于过切点的半径），点在圆外有两条；圆内点没有切线，因为过它的任何直线到圆心的距离都小于 $r$，不可能等于 $r$。",
+      "用斜率方法求切线时，竖直线要单独验证：设 $y-y_0=k(x-x_0)$ 会丢掉斜率不存在的情形。例如过 $P(1,2)$ 作圆 $x^2+y^2=1$ 的切线，$x=1$ 就是那条容易被漏掉的切线。",
+      "弦长性质：过圆心的弦是直径，最长，长为 $2r$；弦心距 $d$ 越大弦越短；公式 $|AB|=2\\sqrt{r^2-d^2}$ 对相交与相切统一成立。"
+    ],
+    "propertiesEn": [
+      "The two tests are equivalent: the geometric one needs a single distance, the algebraic one needs solving an equation but also produces the intersection points; prefer the geometric test when the line is known.",
+      "Tangents from a point: one tangent from a point on the circle (perpendicular to the radius there), two from a point outside; a point inside the circle has none, because every line through it has center distance less than $r$ and can never satisfy $d=r$.",
+      "When a slope-based method is used, check the vertical line separately: setting $y-y_0=k(x-x_0)$ loses the case where the slope does not exist. For instance, from $P(1,2)$ to the circle $x^2+y^2=1$, the line $x=1$ is exactly the tangent that is most often missed.",
+      "Chord facts: the longest chord is the diameter, of length $2r$; a larger distance $d$ from the center gives a shorter chord; the formula $|AB|=2\\sqrt{r^2-d^2}$ covers both secant and tangent cases uniformly."
+    ],
+    "examples": [
+      {
+        "problem": "判断直线 $3x+4y-10=0$ 与圆 $x^2+y^2=4$ 的位置关系；若是相切，求切点坐标。",
+        "solution": "圆心为 $O(0,0)$，半径 $r=2$。圆心到直线的距离 $$d=\\frac{|3\\times 0+4\\times 0-10|}{\\sqrt{3^2+4^2}}=\\frac{10}{5}=2.$$ 因为 $d=r=2$，所以直线与圆相切。切点是 $O$ 到直线的垂足，沿法向量 $(3,4)$ 方向取点 $\\frac{10}{3^2+4^2}(3,4)=\\left(\\frac{6}{5},\\frac{8}{5}\\right)$。验算：$\\left(\\frac{6}{5}\\right)^2+\\left(\\frac{8}{5}\\right)^2=\\frac{100}{25}=4$，且 $3\\times\\frac{6}{5}+4\\times\\frac{8}{5}=\\frac{50}{5}=10$，切点确在直线与圆上。"
+      },
+      {
+        "problem": "过点 $P(1,2)$ 作圆 $x^2+y^2=1$ 的切线，求切线方程。",
+        "solution": "先检查斜率不存在的情形：竖直直线 $x=1$ 到圆心 $(0,0)$ 的距离为 $1$，等于半径，所以 $x=1$ 是一条切线。再设斜率存在的切线为 $y-2=k(x-1)$，即 $kx-y+(2-k)=0$。由圆心到它的距离等于半径：$$\\frac{|2-k|}{\\sqrt{k^2+1}}=1,$$ 平方得 $(2-k)^2=k^2+1$，展开解得 $k=\\frac{3}{4}$。所以另一条切线为 $y-2=\\frac{3}{4}(x-1)$，即 $3x-4y+5=0$。两条切线是 $x=1$ 与 $3x-4y+5=0$。验算：$3x-4y+5=0$ 到原点的距离为 $\\frac{5}{5}=1$，且 $P(1,2)$ 满足 $3-8+5=0$。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -6.5,
+        6.5
+      ],
+      "yRange": [
+        -6.5,
+        6.5
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 5,
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -5,
+            3
+          ],
+          "to": [
+            5,
+            3
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            0,
+            3
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            4,
+            3
+          ],
+          "label": "A(4,3)"
+        },
+        {
+          "type": "point",
+          "at": [
+            -4,
+            3
+          ],
+          "label": "B(-4,3)"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.6,
+            4.2
+          ],
+          "text": "l: y = 3"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.35,
+            1.5
+          ],
+          "text": "d = 3"
+        }
+      ],
+      "title": "直线 y = 3 与圆 x² + y² = 25：交于 A(4,3)、B(-4,3)，弦长 8"
+    },
+    "tags": [
+      "解析几何",
+      "直线与圆",
+      "切线",
+      "弦长"
+    ],
+    "links": [
+      "line-equation",
+      "circle-equation",
+      "parabola",
+      "ellipse",
+      "conic-comprehensive"
+    ]
+  },
+  {
+    "id": "ellipse",
+    "title": "椭圆",
+    "titleEn": "Ellipse",
+    "branch": "analytic",
+    "level": 3,
+    "summary": "到两焦点距离之和为定值的点的轨迹；标准方程、a²=b²+c² 与离心率是三个必掌握的核心。",
+    "summaryEn": "The locus of points whose distances to two foci add up to a constant; the standard equation, the relation a²=b²+c² and the eccentricity are the core.",
+    "definition": "平面内到两个定点 $F_1$、$F_2$ 的距离之和等于常数 $2a$，并且这个常数大于两定点间距离 $2c$ 的点的轨迹叫作**椭圆**。两个定点 $F_1$、$F_2$ 叫作焦点，$2c$ 叫作焦距。条件 $2a>2c$ 不能省：若 $2a=2c$，轨迹退化成线段 $F_1F_2$；若 $2a<2c$，这样的点根本不存在。\n\n把两个焦点取在 x 轴上并关于原点对称，$F_1(-c,0)$、$F_2(c,0)$，则椭圆的标准方程为 $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$（$a>b>0$），其中 $b^2=a^2-c^2$，即 **$a^2=b^2+c^2$**。这是椭圆的「勾股关系」，$a$ 是斜边、也是三个量中最大的一个（长半轴）。请特别注意：双曲线里是 $c^2=a^2+b^2$、$c$ 最大，与椭圆方向相反，切勿混用。\n\n焦点位置看分母大小：$x^2$ 项的分母大，焦点就在 x 轴上；$y^2$ 项的分母大，焦点就在 y 轴上——口诀是「焦点跟着大分母走」。离心率 $e=\\frac{c}{a}=\\sqrt{1-\\frac{b^2}{a^2}}$，由 $0<c<a$ 得 $0<e<1$：$e$ 越接近 1 椭圆越「扁」，越接近 0 越接近圆，它精确刻画了椭圆的扁平程度。",
+    "definitionEn": "An ellipse is the set of points in the plane whose distances to two fixed points $F_1$ and $F_2$ add up to a constant $2a$ that is greater than the focal distance $|F_1F_2|=2c$. The two fixed points are the foci. The condition $2a>2c$ is essential: equality collapses the locus to the segment $F_1F_2$, and $2a<2c$ leaves no locus at all.\n\nWith the foci on the x-axis, $F_1(-c,0)$ and $F_2(c,0)$, the standard equation is $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$ with $a>b>0$, where $b^2=a^2-c^2$, that is, $a^2=b^2+c^2$. In this Pythagorean relation $a$ is the hypotenuse and the largest of the three quantities, namely the major semi-axis. For the hyperbola the relation flips to $c^2=a^2+b^2$ with $c$ largest, so keep the two apart.\n\nWhich axis carries the foci is decided by the larger denominator: if the $x^2$ term has the larger denominator the foci lie on the x-axis, and vice versa. The eccentricity $e=\\frac{c}{a}=\\sqrt{1-\\frac{b^2}{a^2}}$ satisfies $0<e<1$ and measures how flat the ellipse is: values near 1 give a very elongated ellipse, while values near 0 approach a circle.",
+    "formulas": [
+      {
+        "latex": "|PF_1|+|PF_2|=2a\\quad (2a>2c>0)",
+        "note": "椭圆的定义式：到两焦点距离之和为定值 $2a$，且必须大于焦距。",
+        "noteEn": "Definition: the sum of the distances to the two foci is the constant $2a$, which must exceed the focal distance."
+      },
+      {
+        "latex": "\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=1\\quad (a>b>0)",
+        "note": "焦点在 x 轴上的标准方程，焦点为 $(\\pm c,0)$，其中 $c^2=a^2-b^2$。",
+        "noteEn": "Standard equation with foci on the x-axis: $(\\pm c,0)$, where $c^2=a^2-b^2$."
+      },
+      {
+        "latex": "a^2=b^2+c^2",
+        "note": "椭圆中 $a$ 最大（长半轴是「斜边」）；与双曲线的 $c^2=a^2+b^2$ 方向相反，是本主题最常见混淆点，必须分清。",
+        "noteEn": "For an ellipse $a$ is the largest quantity; for a hyperbola it is $c$. The two Pythagorean relations are opposite, so distinguish them carefully."
+      },
+      {
+        "latex": "e=\\dfrac{c}{a}=\\sqrt{1-\\dfrac{b^2}{a^2}}\\in(0,1)",
+        "note": "离心率：刻画扁平程度，越接近 1 越扁。",
+        "noteEn": "Eccentricity: measures flatness; the closer to 1, the flatter the ellipse."
+      },
+      {
+        "latex": "\\dfrac{y^2}{a^2}+\\dfrac{x^2}{b^2}=1\\quad (a>b>0)",
+        "note": "焦点在 y 轴上的标准方程，焦点为 $(0,\\pm c)$；谁的分母大焦点就在谁的轴上。",
+        "noteEn": "Standard equation with foci on the y-axis: $(0,\\pm c)$; the focus axis is the one with the larger denominator."
+      }
+    ],
+    "properties": [
+      "对称性与范围：椭圆关于长轴所在直线、短轴所在直线以及中心都对称；$\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$ 中 $|x|\\le a$、$|y|\\le b$，曲线被夹在边长 $2a$、$2b$ 的矩形内。",
+      "焦点位置由分母大小决定：$x^2$ 下分母大则焦点在 x 轴，$y^2$ 下分母大则焦点在 y 轴；长轴长 $2a$、短轴长 $2b$、焦距 $2c$。",
+      "顶点：焦点在 x 轴时四个顶点为 $(\\pm a,0)$、$(0,\\pm b)$；长轴的两个端点离中心最远。",
+      "离心率 $e=\\frac{c}{a}\\in(0,1)$：$e$ 越大越扁、越接近 0 越接近圆；当 $a=b$ 时 $c=0$，轨迹是圆（此时不再是标准意义下的椭圆，可看作 $e=0$ 的极限）。",
+      "通径：过焦点且垂直于长轴的弦长为 $\\frac{2b^2}{a}$，它是过焦点的最短弦。"
+    ],
+    "propertiesEn": [
+      "Symmetry and range: an ellipse is symmetric about its two axes and about the center; for $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$ we have $|x|\\le a$ and $|y|\\le b$, so the curve lies inside a $2a\\times 2b$ rectangle.",
+      "The focus axis is the one with the larger denominator; the major axis has length $2a$, the minor axis $2b$, and the focal distance is $2c$.",
+      "Vertices: with foci on the x-axis the four vertices are $(\\pm a,0)$ and $(0,\\pm b)$; the ends of the major axis are farthest from the center.",
+      "Eccentricity $e=\\frac{c}{a}\\in(0,1)$: larger $e$ means flatter, values near 0 mean nearly circular; when $a=b$ we get $c=0$ and the locus is a circle (the limiting case $e=0$).",
+      "Latus rectum: the chord through a focus perpendicular to the major axis has length $\\frac{2b^2}{a}$, the shortest focal chord."
+    ],
+    "examples": [
+      {
+        "problem": "求椭圆 $\\frac{x^2}{25}+\\frac{y^2}{9}=1$ 的长轴长、短轴长、焦点坐标与离心率。",
+        "solution": "$a^2=25$、$b^2=9$，所以 $a=5$、$b=3$，长轴长 $2a=10$，短轴长 $2b=6$。由椭圆关系 $c^2=a^2-b^2=25-9=16$ 得 $c=4$。因为 $x^2$ 项的分母 25 更大，焦点在 x 轴上，为 $F_1(-4,0)$、$F_2(4,0)$。离心率 $e=\\frac{c}{a}=\\frac{4}{5}\\in(0,1)$。验算：$a^2=25$ 确实等于 $b^2+c^2=9+16$，满足椭圆的勾股关系。"
+      },
+      {
+        "problem": "已知 $F_1(-3,0)$、$F_2(3,0)$，动点 $P$ 满足 $|PF_1|+|PF_2|=10$，求点 $P$ 的轨迹方程。",
+        "solution": "由椭圆定义知轨迹是椭圆：$2a=10$，得 $a=5$；$2c=6$，得 $c=3$。因为 $2a=10>2c=6$，条件满足，轨迹存在。由椭圆关系 $b^2=a^2-c^2=25-9=16$，焦点在 x 轴上，所以轨迹方程为 $\\frac{x^2}{25}+\\frac{y^2}{16}=1$。"
+      }
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2/25 + y^2/9",
+      "xRange": [
+        -7,
+        7
+      ],
+      "yRange": [
+        -5,
+        5
+      ],
+      "levelRange": [
+        0,
+        2
+      ],
+      "levels": 1,
+      "title": "椭圆 x²/25 + y²/9 = 1（a = 5, b = 3, c = 4）"
+    },
+    "tags": [
+      "解析几何",
+      "圆锥曲线",
+      "椭圆",
+      "离心率"
+    ],
+    "links": [
+      "circle-equation",
+      "hyperbola",
+      "parabola",
+      "line-circle-relation",
+      "conic-comprehensive"
+    ]
+  },
+  {
+    "id": "hyperbola",
+    "title": "双曲线",
+    "titleEn": "Hyperbola",
+    "branch": "analytic",
+    "level": 3,
+    "summary": "到两焦点距离之差的绝对值为定值的点的轨迹；重点记住 c²=a²+b²（与椭圆相反）与两条渐近线。",
+    "summaryEn": "The locus where the absolute difference of focal distances is constant; the key points are c²=a²+b² (opposite to the ellipse) and the two asymptotes.",
+    "definition": "平面内到两个定点 $F_1$、$F_2$ 的距离之差的绝对值等于常数 $2a$，且 $0<2a<|F_1F_2|=2c$ 的点的轨迹叫作**双曲线**。$F_1$、$F_2$ 叫作焦点，$2c$ 叫作焦距。绝对值不能丢：去掉绝对值只剩靠近某一个焦点的一支；条件 $2a<2c$ 也不能省：$2a=2c$ 时轨迹是两条射线，$2a>2c$ 时这样的点不存在。\n\n焦点在 x 轴上时，标准方程为 $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$（$a>0$、$b>0$），其中 $b^2=c^2-a^2$，即 **$c^2=a^2+b^2$**。请特别注意：椭圆里是 $a^2=b^2+c^2$、$a$ 最大；双曲线里是 $c^2=a^2+b^2$、$c$ 最大（「斜边」从 $a$ 换成了 $c$）。这两个公式方向相反，是解析几何里最高频的混淆点，务必用「椭圆 a 最大、双曲线 c 最大」来记。\n\n双曲线有两支和两条渐近线。焦点在 x 轴时渐近线为 $y=\\pm\\frac{b}{a}x$，曲线无限接近它们但永不相交；把标准方程右边的 1 换成 0，就得到渐近线方程 $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=0$，这是不记忆公式也不易写错的办法。焦点位置看正项：哪一项带正号，焦点就在对应的坐标轴上；若标准方程为 $\\frac{y^2}{a^2}-\\frac{x^2}{b^2}=1$，焦点为 $(0,\\pm c)$，渐近线为 $y=\\pm\\frac{a}{b}x$。\n\n离心率 $e=\\frac{c}{a}=\\sqrt{1+\\frac{b^2}{a^2}}$。双曲线中 $c>a>0$，所以 $e>1$，且 $e$ 越大开口越开阔；等轴双曲线（$a=b$）的 $e=\\sqrt{2}$，两条渐近线 $y=\\pm x$ 互相垂直。",
+    "definitionEn": "A hyperbola is the set of points in the plane for which the absolute difference of the distances to two fixed points $F_1$ and $F_2$ equals a constant $2a$, with $0<2a<|F_1F_2|=2c$. The fixed points are the foci. Dropping the absolute value leaves only the branch nearer one focus; the condition $2a<2c$ is equally indispensable, since $2a=2c$ degenerates the locus into two rays and $2a>2c$ leaves no locus.\n\nWith the foci on the x-axis the standard equation is $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ ($a>0$, $b>0$), where $b^2=c^2-a^2$, that is, $c^2=a^2+b^2$. Note the contrast: for the ellipse the largest quantity is $a$, while for the hyperbola it is $c$—the hypotenuse switches from $a$ to $c$, and this is the most common mix-up in the whole topic.\n\nA hyperbola has two branches and two asymptotes. With the positive term in $x^2$ they are $y=\\pm\\frac{b}{a}x$: the curve approaches them without ever touching. Replacing the 1 on the right-hand side by 0 produces the asymptote equation instantly. The foci lie on the axis of the positive term; for the form $\\frac{y^2}{a^2}-\\frac{x^2}{b^2}=1$ the foci are $(0,\\pm c)$ and the asymptotes are $y=\\pm\\frac{a}{b}x$.\n\nThe eccentricity $e=\\frac{c}{a}=\\sqrt{1+\\frac{b^2}{a^2}}$ satisfies $e>1$ because $c>a>0$, and a larger $e$ means a wider opening. For the rectangular hyperbola ($a=b$) we get $e=\\sqrt{2}$ and the asymptotes $y=\\pm x$ are perpendicular.",
+    "formulas": [
+      {
+        "latex": "\\bigl|\\,|PF_1|-|PF_2|\\,\\bigr|=2a\\quad (0<2a<2c)",
+        "note": "双曲线的定义式：距离之差的绝对值为定值 $2a$，且小于焦距。",
+        "noteEn": "Definition: the absolute difference of the focal distances is the constant $2a$, which must be less than the focal distance."
+      },
+      {
+        "latex": "\\dfrac{x^2}{a^2}-\\dfrac{y^2}{b^2}=1\\quad (a>0,\\ b>0)",
+        "note": "焦点在 x 轴上的标准方程，焦点为 $(\\pm c,0)$，其中 $c^2=a^2+b^2$。",
+        "noteEn": "Standard equation with foci on the x-axis: $(\\pm c,0)$ with $c^2=a^2+b^2$."
+      },
+      {
+        "latex": "c^2=a^2+b^2",
+        "note": "双曲线中 $c$ 最大；与椭圆的 $a^2=b^2+c^2$（$a$ 最大）方向相反，切勿混用。",
+        "noteEn": "For a hyperbola $c$ is the largest quantity; this is the opposite of the ellipse's $a^2=b^2+c^2$."
+      },
+      {
+        "latex": "y=\\pm\\dfrac{b}{a}x",
+        "note": "焦点在 x 轴时的渐近线；焦点在 y 轴（$\\frac{y^2}{a^2}-\\frac{x^2}{b^2}=1$）时渐近线为 $y=\\pm\\frac{a}{b}x$，统一办法是把方程右边的 1 改成 0。",
+        "noteEn": "Asymptotes when the foci are on the x-axis; for the form with the positive term in $y^2$ they become $y=\\pm\\frac{a}{b}x$, or simply replace the 1 by 0."
+      },
+      {
+        "latex": "e=\\dfrac{c}{a}=\\sqrt{1+\\dfrac{b^2}{a^2}}>1",
+        "note": "离心率：双曲线中恒有 $e>1$，$e$ 越大开口越开阔。",
+        "noteEn": "Eccentricity: always greater than 1, and a larger value opens the branches wider."
+      }
+    ],
+    "properties": [
+      "对称性与范围：双曲线关于两条坐标轴对称、关于原点对称；$\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ 中 $|x|\\ge a$，曲线分左右两支无界延伸。",
+      "焦点看正项：标准方程里哪一项带正号，焦点就在对应的坐标轴上；$\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ 的焦点是 $(\\pm c,0)$。",
+      "渐近线：把标准方程右边的 1 改为 0 即得渐近线；焦点在 x 轴时为 $y=\\pm\\frac{b}{a}x$，焦点在 y 轴时为 $y=\\pm\\frac{a}{b}x$，写反是常见失分点。",
+      "实轴与虚轴：实轴长 $2a$，虚轴长 $2b$，顶点为 $(\\pm a,0)$；$c^2=a^2+b^2$ 保证 $c$ 最大，但 $a$ 与 $b$ 谁大都可以。",
+      "离心率 $e=\\frac{c}{a}>1$：$e$ 越大开口越开阔；等轴双曲线 $a=b$ 时 $e=\\sqrt{2}$，两条渐近线互相垂直。"
+    ],
+    "propertiesEn": [
+      "Symmetry and range: the hyperbola is symmetric about both coordinate axes and the origin; for $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ we have $|x|\\ge a$, and the two branches extend without bound.",
+      "The foci lie on the axis of the positive term: for $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ they are $(\\pm c,0)$.",
+      "Asymptotes: replace the 1 on the right-hand side by 0. They are $y=\\pm\\frac{b}{a}x$ when the foci are on the x-axis and $y=\\pm\\frac{a}{b}x$ when they are on the y-axis; swapping them is a common mistake.",
+      "Axes and vertices: the transverse axis has length $2a$ and the conjugate axis $2b$, with vertices $(\\pm a,0)$; the relation $c^2=a^2+b^2$ makes $c$ the largest quantity, while $a$ and $b$ may be compared either way.",
+      "Eccentricity $e=\\frac{c}{a}>1$: a larger $e$ means a wider opening; for the rectangular hyperbola $a=b$ gives $e=\\sqrt{2}$ with perpendicular asymptotes."
+    ],
+    "examples": [
+      {
+        "problem": "求双曲线 $\\frac{x^2}{16}-\\frac{y^2}{9}=1$ 的焦点坐标、渐近线方程与离心率。",
+        "solution": "$a^2=16$、$b^2=9$，所以 $a=4$、$b=3$。由双曲线关系 $c^2=a^2+b^2=16+9=25$ 得 $c=5$，焦点为 $F_1(-5,0)$、$F_2(5,0)$。正项是 $x^2$ 项，焦点在 x 轴上，渐近线为 $y=\\pm\\frac{3}{4}x$。离心率 $e=\\frac{c}{a}=\\frac{5}{4}>1$。验算：$c^2=25$ 等于 $a^2+b^2=16+9$，这里用的是双曲线关系（$c$ 最大），不要误用椭圆的 $a^2=b^2+c^2$。"
+      },
+      {
+        "problem": "求以椭圆 $\\frac{x^2}{25}+\\frac{y^2}{9}=1$ 的焦点为顶点、以它的顶点为焦点的双曲线方程。",
+        "solution": "在椭圆中 $a^2=25$、$b^2=9$，由椭圆关系 $c^2=a^2-b^2=16$ 得 $c=4$，所以椭圆的焦点为 $(\\pm 4,0)$、顶点为 $(\\pm 5,0)$。双曲线的顶点是 $(\\pm 4,0)$，故 $a=4$；双曲线的焦点是 $(\\pm 5,0)$，故 $c=5$。由双曲线关系 $b^2=c^2-a^2=25-16=9$，所以双曲线方程为 $\\frac{x^2}{16}-\\frac{y^2}{9}=1$。注意此题前后分别使用椭圆与双曲线两条方向相反的「勾股关系」。"
+      }
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2/16 - y^2/9",
+      "xRange": [
+        -9,
+        9
+      ],
+      "yRange": [
+        -7,
+        7
+      ],
+      "levelRange": [
+        0,
+        2
+      ],
+      "levels": 1,
+      "title": "双曲线 x²/16 - y²/9 = 1 的两支（a = 4, b = 3）"
+    },
+    "tags": [
+      "解析几何",
+      "圆锥曲线",
+      "双曲线",
+      "渐近线"
+    ],
+    "links": [
+      "ellipse",
+      "parabola",
+      "line-equation",
+      "conic-comprehensive",
+      "line-circle-relation"
+    ]
+  },
+  {
+    "id": "conic-comprehensive",
+    "title": "圆锥曲线的综合应用",
+    "titleEn": "Comprehensive Problems on Conic Sections",
+    "branch": "analytic",
+    "level": 4,
+    "summary": "直线与圆锥曲线联立的完整流程：先讨论二次项系数、再验判别式，然后用韦达定理处理弦长与中点弦。",
+    "summaryEn": "The full workflow for a line meeting a conic: discuss the leading coefficient, check the discriminant, then use Vieta's formulas for chords and midpoints.",
+    "definition": "圆锥曲线（椭圆、双曲线、抛物线）的综合题，主角是**直线与圆锥曲线的位置关系**，标准套路是「联立—消元—判别式—韦达定理」：把直线方程代入曲线方程，消去 $y$（或 $x$），得到关于 $x$（或 $y$）的一元二次方程，再用判别式 $\\Delta$ 与根与系数的关系处理交点个数、弦长、中点、面积等问题。\n\n第一步永远是先看二次项系数。如果它含有参数，必须单独讨论它等于 0 的情形：此时方程退化为一次方程，直线与曲线只有一个公共点，但这并不一定是「相切」——例如直线与双曲线的渐近线平行时，就恰好只交于一点；若退化后连一次项系数也为 0（直线恰好是渐近线本身），则方程无解，此时没有公共点。系数不为 0 时，再要求 $\\Delta>0$ 才能保证两个不同的交点。这一步跳过，整题的答案都会错。\n\n弦长用「设而不求」的方法：设交点 $A(x_1,y_1)$、$B(x_2,y_2)$，则 $|AB|=\\sqrt{1+k^2}\\,|x_1-x_2|$，而 $|x_1-x_2|$ 可以由韦达定理写成 $\\frac{\\sqrt{\\Delta}}{|A|}$（其中 $A$ 是二次项系数），不必解出具体的根。直线竖直（斜率不存在）时不能写成 $y=kx+m$，要改用 $|y_1-y_2|$ 处理。涉及弦的中点时用**点差法**：把两端点坐标分别代入曲线方程、两式相减，直接得到弦中点坐标与斜率的关系，比解方程组快得多。\n\n与焦点有关的问题优先用定义转化：椭圆上点满足 $|PF_1|+|PF_2|=2a$，双曲线同一支上的点满足距离之差的绝对值为 $2a$；把焦半径写成横坐标的一次式（如椭圆中 $|PF_1|=a+ex_0$、$|PF_2|=a-ex_0$），距离问题常常一步就能算出。综合题考的不是新知识，而是「先分类、再联立、善用韦达」的流程控制能力。",
+    "definitionEn": "In comprehensive problems about conic sections (ellipse, hyperbola, parabola), the central theme is how a line meets a conic, and the standard procedure is: substitute, eliminate, check the discriminant, then apply Vieta's formulas. Substituting the line into the curve leaves a quadratic in $x$ (or in $y$); its real roots count the intersections, and their sum and product drive chord lengths, midpoint conditions, perpendicularity and areas.\n\nThe first step is always to inspect the leading coefficient. If it contains a parameter, discuss the case where it vanishes: the equation becomes linear, there is a single common point, and the line need not be tangent—a line parallel to an asymptote of a hyperbola behaves exactly that way; if the linear coefficient also vanishes—the line is precisely an asymptote—the equation has no solution, so there is no common point at all. Only when the coefficient is nonzero does $\\Delta>0$ guarantee two distinct intersections. Skipping this step invalidates the entire solution.\n\nChord lengths are computed without solving for the roots: for $A(x_1,y_1)$ and $B(x_2,y_2)$, $|AB|=\\sqrt{1+k^2}\\,|x_1-x_2|$, and $|x_1-x_2|=\\sqrt{\\Delta}/|A|$ by Vieta's formulas. A vertical line has no slope, so it must be handled through $|y_1-y_2|$. When the midpoint of a chord is given, the difference-of-squares method subtracts the two curve equations and turns the data directly into the slope.\n\nFinally, focal questions are usually easiest after converting the focal distances into linear expressions in $x$ via the focal-radius formulas; the definition of the conic then does the heavy lifting. What these problems really test is process control: classify cases first, substitute carefully, and let Vieta's formulas finish the job.",
+    "formulas": [
+      {
+        "latex": "|AB|=\\sqrt{1+k^2}\\,|x_1-x_2|=\\sqrt{1+k^2}\\cdot\\dfrac{\\sqrt{\\Delta}}{|A|}",
+        "note": "弦长公式：直线 $y=kx+m$ 与曲线联立得 $Ax^2+Bx+C=0$（$A\\neq 0$、$\\Delta>0$）；斜率不存在时改用 $|y_1-y_2|$。",
+        "noteEn": "Chord length: substituting the line gives $Ax^2+Bx+C=0$ with $A\\neq 0$ and $\\Delta>0$; if the slope does not exist, use $|y_1-y_2|$ instead."
+      },
+      {
+        "latex": "k=-\\dfrac{b^2x_0}{a^2y_0}",
+        "note": "椭圆 $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$ 的中点弦（点差法）：弦中点为 $M(x_0,y_0)$（$y_0\\neq 0$），弦的斜率为 $k$。",
+        "noteEn": "Midpoint chord of the ellipse $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$ by the difference method: midpoint $M(x_0,y_0)$ with $y_0\\neq 0$, chord slope $k$."
+      },
+      {
+        "latex": "k=\\dfrac{b^2x_0}{a^2y_0}",
+        "note": "双曲线 $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ 的中点弦斜率（点差法）；注意符号与椭圆相反。",
+        "noteEn": "Midpoint chord slope for the hyperbola $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$; note the sign is opposite to the ellipse case."
+      },
+      {
+        "latex": "|PF_2|=a-ex_0",
+        "note": "椭圆（焦点在 x 轴）上点 $P(x_0,y_0)$ 到右焦点 $F_2(c,0)$ 的焦半径；到左焦点为 $a+ex_0$，两者之和恒为 $2a$。",
+        "noteEn": "Focal radius from $P(x_0,y_0)$ on an ellipse (foci on the x-axis) to the right focus; to the left focus it is $a+ex_0$, and the two sum to $2a$."
+      },
+      {
+        "latex": "|PF_2|=ex_0-a",
+        "note": "双曲线 $\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1$ 右支上点 $P(x_0,y_0)$（$x_0\\ge a$）到右焦点 $F_2(c,0)$ 的焦半径；到左焦点为 $ex_0+a$。",
+        "noteEn": "Focal radius from $P(x_0,y_0)$ on the right branch of the hyperbola ($x_0\\ge a$) to the right focus; to the left focus it is $ex_0+a$."
+      }
+    ],
+    "properties": [
+      "联立流程：先讨论二次项系数是否为 0，再验证 $\\Delta>0$，然后才用韦达定理；「只有一个公共点」可能是相切，也可能是直线与渐近线平行，要由方程的形状判断。",
+      "弦长：不必解出交点，直接用 $\\sqrt{1+k^2}\\cdot\\frac{\\sqrt{\\Delta}}{|A|}$ 计算；竖直线（斜率不存在）用 $|y_1-y_2|$。",
+      "中点弦与点差法：椭圆 $k=-\\frac{b^2x_0}{a^2y_0}$、双曲线 $k=\\frac{b^2x_0}{a^2y_0}$（$y_0\\neq 0$）；存在性要单独核验——椭圆要求中点在椭圆内部（$\\frac{x_0^2}{a^2}+\\frac{y_0^2}{b^2}<1$）；双曲线则要求 $\\frac{x_0^2}{a^2}-\\frac{y_0^2}{b^2}>1$（弦在同一支上）或 $<0$（弦连接两支），当 $0\\le\\frac{x_0^2}{a^2}-\\frac{y_0^2}{b^2}\\le 1$ 时不存在以该点为中点的弦。",
+      "焦点弦用定义：椭圆上点满足 $|PF_1|+|PF_2|=2a$，双曲线同一支上的点满足 $\\bigl|\\,|PF_1|-|PF_2|\\,\\bigr|=2a$，把距离问题转化为坐标计算。"
+    ],
+    "propertiesEn": [
+      "Workflow: discuss whether the leading coefficient can vanish, verify $\\Delta>0$, and only then use Vieta's formulas; a single common point can mean tangency or a line parallel to an asymptote, and the equation shape tells the two apart.",
+      "Chord length: compute $\\sqrt{1+k^2}\\cdot\\frac{\\sqrt{\\Delta}}{|A|}$ without finding the intersection points; for vertical lines use $|y_1-y_2|$.",
+      "Midpoint chords by the difference method: slope $-\\frac{b^2x_0}{a^2y_0}$ for the ellipse and $\\frac{b^2x_0}{a^2y_0}$ for the hyperbola ($y_0\\neq 0$). Existence must be checked separately: for an ellipse the midpoint must lie inside it ($\\frac{x_0^2}{a^2}+\\frac{y_0^2}{b^2}<1$); for a hyperbola one needs $\\frac{x_0^2}{a^2}-\\frac{y_0^2}{b^2}>1$ (chord on one branch) or $<0$ (chord joining the two branches), and when $0\\le\\frac{x_0^2}{a^2}-\\frac{y_0^2}{b^2}\\le 1$ no such chord exists.",
+      "Focal chords through the definition: points on an ellipse satisfy $|PF_1|+|PF_2|=2a$ and points on one branch of a hyperbola satisfy $\\bigl|\\,|PF_1|-|PF_2|\\,\\bigr|=2a$, turning distance questions into coordinate computations."
+    ],
+    "examples": [
+      {
+        "problem": "当实数 $m$ 取何值时，直线 $y=x+m$ 与椭圆 $\\frac{x^2}{4}+y^2=1$ 相交？",
+        "solution": "把 $y=x+m$ 代入椭圆方程：$$\\frac{x^2}{4}+(x+m)^2=1,$$ 整理得 $\\frac{5}{4}x^2+2mx+m^2-1=0$。二次项系数 $\\frac{5}{4}\\neq 0$，方程确实是二次方程。判别式 $$\\Delta=(2m)^2-4\\times\\frac{5}{4}(m^2-1)=4m^2-5m^2+5=5-m^2.$$ 相交要求 $\\Delta>0$，即 $m^2<5$，所以 $-\\sqrt{5}<m<\\sqrt{5}$。当 $m=\\pm\\sqrt{5}$ 时 $\\Delta=0$，相切；当 $|m|>\\sqrt{5}$ 时 $\\Delta<0$，相离。"
+      },
+      {
+        "problem": "椭圆 $\\frac{x^2}{16}+\\frac{y^2}{4}=1$ 的一条弦 $AB$ 的中点为 $M(2,1)$，求直线 $AB$ 的方程。",
+        "solution": "设 $A(x_1,y_1)$、$B(x_2,y_2)$，则 $x_1+x_2=4$、$y_1+y_2=2$。把两点坐标代入椭圆方程后相减（点差法）：$$\\frac{(x_1+x_2)(x_1-x_2)}{16}+\\frac{(y_1+y_2)(y_1-y_2)}{4}=0,$$ 代入中点数据得 $\\frac{4(x_1-x_2)}{16}+\\frac{2(y_1-y_2)}{4}=0$，即 $\\frac{x_1-x_2}{4}+\\frac{y_1-y_2}{2}=0$，所以弦的斜率 $$k=\\frac{y_1-y_2}{x_1-x_2}=-\\frac{1}{2}.$$ 用公式核对：$k=-\\frac{b^2x_0}{a^2y_0}=-\\frac{4\\times 2}{16\\times 1}=-\\frac{1}{2}$，一致。直线 $AB$ 的方程为 $y-1=-\\frac{1}{2}(x-2)$，即 $x+2y-4=0$。验算：把 $x=4-2y$ 代入椭圆得 $\\frac{(4-2y)^2}{16}+\\frac{y^2}{4}=1$，化简为 $\\frac{y^2}{2}-y=0$，解得 $y=0$ 或 $y=2$，对应交点 $(4,0)$、$(0,2)$，中点为 $(2,1)$，且两点都在椭圆上。"
+      }
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2/4 - y^2",
+      "xRange": [
+        -3.5,
+        3.5
+      ],
+      "yRange": [
+        -3,
+        3
+      ],
+      "levelRange": [
+        0,
+        2
+      ],
+      "levels": 1,
+      "title": "双曲线 x²/4 - y² = 1：联立直线消元求弦长的常用模型"
+    },
+    "tags": [
+      "解析几何",
+      "圆锥曲线",
+      "弦长",
+      "点差法"
+    ],
+    "links": [
+      "ellipse",
+      "hyperbola",
+      "parabola",
+      "line-equation",
+      "line-circle-relation"
+    ]
+  }
+]

@@ -1,0 +1,718 @@
+[
+  {
+    "id": "large-numbers",
+    "title": "大数与近似数",
+    "titleEn": "Large Numbers and Approximation",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "认识亿以内的数：数位顺序表（个级、万级、亿级）、改写成用「万」「亿」作单位的数，还有省略尾数求近似数——改写用「＝」，省略用「≈」。",
+    "summaryEn": "Meet numbers up to the hundred millions: the place-value table (ones, ten-thousands and hundred-millions groups), rewriting a number in units of 万 or 亿, and rounding a tail off to get an approximate number—rewriting uses '=', rounding uses '≈'.",
+    "definition": "数东西时一个一个地数太慢，人们就把 10 个一捆成「十」，10 个十是「一百」，10 个百是「一千」，10 个千是「一万」，10 个万是「十万」……**每相邻两个计数单位之间的进率都是 10**，这样多大的数都能写出来。像 $386000$、$12000000$ 这样比较大的数，我们就叫**大数**。\n\n把数字按位置排好，就有了**数位顺序表**：从右边起，个位、十位、百位、千位组成**个级**；再往左，万位、十万位、百万位、千万位组成**万级**；继续往左是亿位、十亿位……组成**亿级**。**每四位是一级**。同一个数字 3，放在个位上表示 3 个一，放在万位上就表示 3 个万——位置不同，表示的大小就不同。\n\n为了读写方便，我们常常把大数**改写**成用「万」或「亿」作单位的数：把**小数点向左移动 4 位**（即除以 10000）、换成「万」，或**小数点向左移动 8 位**（即除以 100000000）、换成「亿」（只有当末尾的 0 足够多时，才可以简说成\"去掉末尾 4 个（8 个）0\"）。例如 $380000 = 38\\text{万}$，$120000000 = 1.2\\text{亿}$。改写只是换了个说法，**数的大小一点儿也没变，所以用等号「＝」**。\n\n有时候不需要那么精确，只要一个大概的数，就把某一位后面的尾数**省略**掉，得到**近似数**；这时数的大小改变了，**要用约等号「≈」**。例如 $386000 = 38.6\\text{万}$（这是改写），而 $386000 \\approx 39\\text{万}$（这是省略万位后面的尾数）。一句话：**改写是「换衣服」，用「＝」；省略是「取近似」，用「≈」**。",
+    "definitionEn": "Counting one by one is slow, so people bundle 10 ones into a 'ten', 10 tens into a 'hundred', 10 hundreds into a 'thousand', 10 thousands into a 'ten-thousand (万)' and 10 ten-thousands into a 'hundred-thousand (十万)'. **Every two neighbouring counting units are related by a ratio of 10**, and so we can write numbers as large as we like. Big numbers such as $386000$ or $12000000$ are what we call **large numbers**.\n\nLining the digits up by position gives the **place-value table**: from the right come ones, tens, hundreds and thousands, which form the **ones group**; next come the ten-thousands, hundred-thousands, millions and ten-millions, forming the **ten-thousands group (万级)**; further left are the hundred-millions (亿位) and so on, forming the **hundred-millions group (亿级)**. **Every four places make one group.** A digit 3 in the ones place means 3 ones, but in the ten-thousands place it means 3 ten-thousands—the position decides its value.\n\nTo write and read such numbers easily we **rewrite** them in units of 万 (ten thousand) or 亿 (hundred million): shift the decimal point **4 places to the left** (divide by 10000) and write 万, or **8 places to the left** (divide by 100000000) and write 亿 (only when there are enough trailing zeros may one say \"drop the last 4 (or 8) zeros\"). For example $380000 = 38\\text{万}$ and $120000000 = 1.2\\text{亿}$. Rewriting only changes the wording, **the size of the number does not change at all, so we use the equals sign '='**.\n\nSometimes we do not need to be exact and only want a rough number; then we **omit** (round off) the tail behind a certain place and get an **approximate number**. This time the size does change, so **we use the approximate-equal sign '≈'**. For example $386000 = 38.6\\text{万}$ (rewriting) but $386000 \\approx 39\\text{万}$ (omitting the tail behind the ten-thousands place). In one sentence: **rewriting is 'changing clothes' and uses '=', while omitting is 'taking an approximation' and uses '≈'**.",
+    "formulas": [
+      {
+        "latex": "10 \\times 1000 = 10000, \\qquad 10 \\times 10000000 = 100000000",
+        "note": "满十进一：10 个一千是一万，10 个一千万是一亿，相邻两个计数单位间的进率都是 10。",
+        "noteEn": "Carry one for every ten: 10 thousands make one ten-thousand, 10 ten-millions make one hundred-million; every two neighbouring counting units have ratio 10."
+      },
+      {
+        "latex": "380000 = 38\\text{万}, \\qquad 120000000 = 1.2\\text{亿}",
+        "note": "改写用「＝」：只是换成用「万」「亿」作单位，数的大小不变。",
+        "noteEn": "Rewriting uses '=': only the unit changes (万 = ten thousand, 亿 = hundred million), the size stays the same."
+      },
+      {
+        "latex": "386000 = 38.6\\text{万}, \\qquad 386000 \\approx 39\\text{万}",
+        "note": "同一个数的两种处理：改写是精确的，用「＝」；省略万位后面的尾数得到近似数，用「≈」（千位上是 6，满 5 要进一）。",
+        "noteEn": "One number treated two ways: rewriting is exact and uses '='; omitting the tail behind the ten-thousands place gives an approximation and uses '≈' (the thousands digit is 6, so we round up)."
+      },
+      {
+        "latex": "1234567 \\approx 123\\text{万}",
+        "note": "精确到万位：看千位上的 4，$4 < 5$，把尾数直接舍去，所以约等于 123 万。",
+        "noteEn": "Accurate to the ten-thousands place: the thousands digit is 4, and $4 < 5$, so the tail is cut off and the value is about 123万."
+      },
+      {
+        "latex": "10000 = 10^{4}, \\qquad 100000000 = 10^{8}",
+        "note": "一万后面有 4 个 0，一亿后面有 8 个 0；记住 0 的个数，改写时就不会数错。",
+        "noteEn": "One ten-thousand has 4 zeros and one hundred-million has 8 zeros; remembering the number of zeros keeps you from making mistakes when rewriting."
+      }
+    ],
+    "expression": {
+      "text": "386000 = 38.6万（改写）；386000 ≈ 39万（省略万位后面的尾数）",
+      "symbol": "\\approx",
+      "note": "同一个数、两种记号：等号「＝」说明大小没变，约等号「≈」说明取的是近似数。",
+      "noteEn": "The same number written with two different signs: '=' means the size is unchanged, '≈' means the value is only approximate."
+    },
+    "properties": [
+      "数位顺序表从右往左依次是：个位、十位、百位、千位（个级），万位、十万位、百万位、千万位（万级），亿位……（亿级），每四位为一级。",
+      "每相邻两个计数单位之间的进率都是 10，也就是「满十进一」。",
+      "同一个数字在不同的数位上表示的大小不同，这就是位值的道理。",
+      "改写用「＝」，数的大小不变；省略尾数求近似数用「≈」，数的大小改变——这是二者最重要的区别。",
+      "省略尾数时看被省略部分的最高位：满 5 进一，不满 5 舍去（四舍五入）。"
+    ],
+    "propertiesEn": [
+      "From right to left the place-value table reads: ones, tens, hundreds, thousands (ones group); then ten-thousands, hundred-thousands, millions, ten-millions (ten-thousands group); then hundred-millions and beyond (hundred-millions group); every four places form one group.",
+      "Every two neighbouring counting units are related by a ratio of 10—carry one as soon as ten have piled up.",
+      "The same digit stands for different sizes in different places; this is the idea of place value.",
+      "Rewriting uses '=' and keeps the size unchanged, while omitting a tail to get an approximate number uses '≈' and changes the size—this is the key difference between the two.",
+      "When omitting a tail, look at the highest digit of the part being dropped: 5 or more rounds up, less than 5 is cut off (round half up)."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        9995,
+        10005
+      ],
+      "points": [
+        {
+          "at": 9999,
+          "label": "9999",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 10000,
+          "label": "1万",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 10001,
+          "label": "10001",
+          "color": "#06d6a0"
+        }
+      ],
+      "intervals": [
+        {
+          "from": 9999,
+          "to": 10001,
+          "color": "#ffd166"
+        }
+      ],
+      "title": "10000 附近：9999 是一万少 1，10001 是一万多 1"
+    },
+    "examples": [
+      {
+        "problem": "把 $3086000$ 改写成用「万」作单位的数，再省略万位后面的尾数求出近似数。",
+        "solution": "改写：把 $3086000$ 的小数点向左移动 4 位得 $308.6$，再写上「万」，即 $3086000 = 308.6\\text{万}$——这是**改写**，大小不变，所以用「＝」。\n\n省略万位后面的尾数：看被省略部分的最高位，也就是千位上的 $6$，$6 \\ge 5$，要向万位进一，$308.6\\text{万} \\approx 309\\text{万}$——这是**求近似数**，大小改变，所以用「≈」。"
+      },
+      {
+        "problem": "一个数由 5 个亿、3 个千万和 7 个万组成，这个数写作多少？再把它改写成用「万」作单位的数。",
+        "solution": "5 个亿是 $500000000$，3 个千万是 $30000000$，7 个万是 $70000$，合起来写作 $530070000$（读作五亿三千零七万）。\n\n改写成用「万」作单位的数：去掉末尾 4 个 0 换成「万」，$530070000 = 53007\\text{万}$，大小不变，所以用「＝」。"
+      }
+    ],
+    "tags": [
+      "大数",
+      "数位顺序表",
+      "万级",
+      "亿级",
+      "改写",
+      "近似数"
+    ],
+    "links": [
+      "whole-numbers",
+      "rounding-approximation",
+      "scientific-notation"
+    ]
+  },
+  {
+    "id": "rounding-approximation",
+    "title": "四舍五入与近似数",
+    "titleEn": "Rounding and Approximate Numbers",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "四舍五入法只有两步：看准要保留的数位，再看被省略部分的最高位——满 5 进一，不满 5 舍去。",
+    "summaryEn": "Rounding has just two steps: decide the place to keep, then look at the highest digit of the part being dropped—5 or more rounds up, less than 5 is cut off.",
+    "definition": "生活中常常不需要说得那么准：说「大约有 300 人」，说「身高大约 1.4 米」，这里的 300 和 1.4 都是**近似数**；与近似数相对、一点也不差的数，叫**准确数**。\n\n把一个数变成近似数，最常用的方法是**四舍五入法**，只有两步：**第一步**，看要保留到哪一位（比如要求精确到万位，就保留到万位）；**第二步**，看**被省略部分的最高位**上的数字——这个数字是 5 或者比 5 大，就向前一位**进一**，叫「五入」；比 5 小（也就是 0、1、2、3、4），就把尾数**直接舍去**，叫「四舍」。名字「四舍五入」就是这么来的：**4 和比 4 小的舍去，5 和比 5 大的进一**。特别提醒：只看这**一位**就够了，后面还有多少数字都不影响。\n\n比如把 $386000$ 精确到万位：被省略的尾数是 6000，它的最高位是千位上的 $6$，$6 \\ge 5$，向万位进一，得 $386000 \\approx 39\\text{万}$。再把 $0.37$ 精确到十分位：被省略部分的最高位是百分位上的 $7$，$7 \\ge 5$，向十分位进一，$0.37 \\approx 0.4$；如果换成 $0.34$，百分位是 $4$，$4 < 5$，舍去，$0.34 \\approx 0.3$。\n\n近似数究竟准到什么程度，用**精确度**来表示：「精确到万位」「精确到百分位」……说的就是保留到哪一位。要注意：$4$ 与 $4.0$ 作为近似数**不一样**，$4.0$ 表示精确到十分位，比 $4$ 更精确。",
+    "definitionEn": "In daily life we often do not need an exact number: 'about 300 people', 'about 1.4 metres tall'—here 300 and 1.4 are both **approximate numbers**. The exactly correct value is called the **exact number**.\n\nThe most common way to turn a number into an approximation is the **round-half-up method (四舍五入)**, and it has only two steps. **Step one**: decide which place to keep (if you must be accurate to the ten-thousands place, you keep the ten-thousands place). **Step two**: look at the digit in the **highest place of the part being dropped**—if it is 5 or larger, add one to the place before it ('five rounds up'); if it is smaller than 5 (that is 0, 1, 2, 3 or 4), drop the whole tail ('four is cut off'). That is where the name comes from: **4 and everything below is cut off, 5 and everything above rounds up**. Notice: only this **one** digit matters, no matter how many digits follow it.\n\nFor example, to make $386000$ accurate to the ten-thousands place, the dropped tail is 6000 whose highest digit is the 6 in the thousands place; since $6 \\ge 5$ we round up, giving $386000 \\approx 39\\text{万}$. To make $0.37$ accurate to the tenths place, the highest digit of the dropped part is the 7 in the hundredths place, so $0.37 \\approx 0.4$; but $0.34$ has a 4 in the hundredths place, and since $4 < 5$ we cut it off, $0.34 \\approx 0.3$.\n\nHow accurate an approximate number is, is described by its **precision**: 'accurate to the ten-thousands place', 'accurate to the hundredths place' and so on simply say which place is kept. Take care: as approximations, $4$ and $4.0$ are **not the same**—$4.0$ is accurate to the tenths place and is more precise than $4$.",
+    "formulas": [
+      {
+        "latex": "3.4 \\approx 3, \\qquad 3.5 \\approx 4, \\qquad 3.7 \\approx 4",
+        "note": "精确到个位：十分位是 4（不满 5）就舍去，十分位是 5 或 7（满 5）就进一。",
+        "noteEn": "Accurate to the ones place: a tenths digit of 4 (less than 5) is cut off, while 5 or 7 (5 or more) rounds up."
+      },
+      {
+        "latex": "386000 \\approx 390000, \\qquad 0.37 \\approx 0.4, \\qquad 0.34 \\approx 0.3",
+        "note": "分别精确到万位（尾数最高位是 6）、十分位（百分位是 7）、十分位（百分位是 4）。",
+        "noteEn": "Accurate to the ten-thousands place (highest dropped digit 6), to the tenths place (hundredths digit 7) and to the tenths place (hundredths digit 4)."
+      },
+      {
+        "latex": "0.5 \\approx 1, \\qquad 1.5 \\approx 2, \\qquad 2.5 \\approx 3",
+        "note": "恰好是 5 的时候也要进一，不能舍去——这就是「五入」。",
+        "noteEn": "When the digit is exactly 5 we still round up instead of cutting it off—that is the 'five rounds up' rule."
+      },
+      {
+        "latex": "39999 \\approx 40000",
+        "note": "连续进位的例子：尾数最高位是 9，向万位进一，39999 精确到万位约等于 40000。",
+        "noteEn": "An example of carrying all the way: the highest dropped digit is 9, so 39999 rounds to 40000 when accurate to the ten-thousands place."
+      }
+    ],
+    "expression": {
+      "text": "四舍：0、1、2、3、4 舍去；五入：5、6、7、8、9 进一",
+      "symbol": "\\approx",
+      "note": "四舍五入看的是被省略部分的最高位；两边用「≈」连接，表示大小已经改变。",
+      "noteEn": "Rounding looks only at the highest digit of the part being dropped; the two sides are joined by '≈' because the value has changed."
+    },
+    "properties": [
+      "四舍五入时只看被省略部分的最高位：满 5 进一，不满 5 舍去，与后面的数字无关。",
+      "精确到某一位，就看它后面一位上的数字来决定进还是舍，也就是保留到哪一位、看到哪一位。",
+      "近似数与准确数之间用「≈」连接，表示两边大小并不相等，只是大约相等。",
+      "连续进位时位数可能增多：$9999$ 精确到万位是 $10000$，从 4 位数变成了 5 位数。",
+      "作为近似数，$4.0$ 比 $4$ 精确：$4.0$ 表示精确到十分位，$4$ 只精确到个位。"
+    ],
+    "propertiesEn": [
+      "When rounding, only the highest digit of the dropped part matters: 5 or more rounds up, less than 5 is cut off, and the digits after it change nothing.",
+      "To be accurate to a certain place, look at the digit one place to its right to decide whether to round up or cut off.",
+      "An approximate number is joined to the exact value by '≈': the two sides are not equal, only approximately equal.",
+      "Carrying can add a digit: $9999$ accurate to the ten-thousands place is $10000$, changing from 4 digits to 5.",
+      "As approximations, $4.0$ is more precise than $4$: $4.0$ is accurate to the tenths place, while $4$ is only accurate to the ones place."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        3,
+        4
+      ],
+      "points": [
+        {
+          "at": 3.2,
+          "label": "3.2 ≈ 3",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 3.5,
+          "label": "3.5",
+          "color": "#ffd166"
+        },
+        {
+          "at": 3.7,
+          "label": "3.7 ≈ 4",
+          "color": "#ff6b9d"
+        }
+      ],
+      "intervals": [
+        {
+          "from": 3,
+          "to": 3.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 3.5,
+          "to": 4,
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "四舍五入到个位：3.7 在 3.5 的右边，满 5 进一，所以 3.7 ≈ 4"
+    },
+    "examples": [
+      {
+        "problem": "把 $8.457$ 分别精确到百分位和十分位，结果各是多少？",
+        "solution": "精确到百分位：看它后面一位（千分位）上的数字，是 $7$，$7 \\ge 5$，向百分位进一，$8.457 \\approx 8.46$。\n\n精确到十分位：看被省略部分的最高位，也就是百分位上的 $5$，$5 \\ge 5$，向十分位进一，$8.457 \\approx 8.5$。（直接看一位就够，不必先算 $8.46$。）"
+      },
+      {
+        "problem": "果园里摘了 $3967$ 个苹果，大约是多少个？（精确到百位）",
+        "solution": "精确到百位，就看它后面一位（十位）上的数字：十位是 $6$，$6 \\ge 5$，向百位进一，$3967 \\approx 4000$。\n\n答：大约有 $4000$ 个苹果。"
+      }
+    ],
+    "tags": [
+      "四舍五入",
+      "近似数",
+      "精确度",
+      "约等号"
+    ],
+    "links": [
+      "large-numbers",
+      "decimals-elementary",
+      "scientific-notation"
+    ]
+  },
+  {
+    "id": "decimals-elementary",
+    "title": "小数的意义与运算",
+    "titleEn": "Decimals: Meaning and Operations",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "把单位「1」平均分成 10 份、100 份、1000 份……其中的一份或几份就是小数；再学小数点的移动规律和小数四则运算。",
+    "summaryEn": "A decimal names one or several parts obtained by splitting the unit 1 into 10, 100 or 1000 equal parts; then come the movement of the decimal point and the four operations.",
+    "definition": "把一张纸、一条线段或一个蛋糕看作单位「1」，把它**平均分成 10 份**，其中的 1 份就是十分之一，写成小数是 $0.1$；平均分成 100 份，1 份是百分之一，写成 $0.01$；平均分成 1000 份，1 份是千分之一，写成 $0.001$。**把单位「1」平均分成 10 份、100 份、1000 份……其中的一份或几份，都可以用小数表示**。比如 $\\frac{7}{10} = 0.7$，$\\frac{3}{100} = 0.03$，$\\frac{25}{100} = 0.25$。所以小数其实就是分母是 10、100、1000……的分数换了一种写法。\n\n小数点左边的部分是**整数部分**，右边的部分是**小数部分**。小数部分从左往右数：第一位是**十分位**（表示几个 $0.1$）、第二位是**百分位**（表示几个 $0.01$）、第三位是**千分位**（表示几个 $0.001$）。$0.7$ 里有 7 个 $0.1$；$0.25$ 里有 2 个 $0.1$ 和 5 个 $0.01$。小数点后只有一位的小数叫一位小数，以此类推。\n\n小数有两条重要性质。第一，**在小数的末尾添上 0 或者去掉 0，小数的大小不变**，例如 $0.5 = 0.50 = 0.500$；注意是「末尾」——$0.05$ 与 $0.5$ 差得远，中间的 0 不能随便去掉。第二，**小数点向右移动一位，数就扩大到原来的 10 倍**；向右移动两位，扩大到 100 倍；**向左移动一位，就缩小到原来的 $\\frac{1}{10}$**。例如 $0.25 \\to 2.5 \\to 25$ 每次都扩大 10 倍，而 $0.25 \\to 0.025$ 是缩小到原来的十分之一。比较小数的大小时，先比整数部分，整数部分大的那个数就大；整数部分相同，再依次比十分位、百分位……\n\n运算要点：**加减法要把小数点对齐**（也就是相同数位对齐），再像整数一样加减；**乘法先按整数乘法算出积**，再看两个因数一共有几位小数，就从积的右边起数出几位点上小数点；**除法中除数是小数时，先把除数变成整数**（被除数同时扩大相同的倍数，商不变），算出来的**商的小数点要跟被除数的小数点对齐**。",
+    "definitionEn": "Take a sheet of paper, a segment or a cake as the unit 1 and cut it into **10 equal parts**: one part is one tenth, written as the decimal $0.1$; cut it into 100 equal parts and one part is one hundredth, $0.01$; cut it into 1000 equal parts and one part is one thousandth, $0.001$. **One or several parts obtained by splitting the unit 1 into 10, 100 or 1000 equal parts can all be written as a decimal.** For instance $\\frac{7}{10} = 0.7$, $\\frac{3}{100} = 0.03$ and $\\frac{25}{100} = 0.25$. A decimal is really just another way of writing a fraction whose denominator is 10, 100, 1000, …\n\nThe part left of the decimal point is the **integer part**, and the part right of it is the **decimal part**. Counting the decimal part from left to right: the first place is the **tenths** (how many $0.1$), the second is the **hundredths** (how many $0.01$) and the third is the **thousandths** (how many $0.001$). For example $0.7$ contains 7 tenths, and $0.25$ contains 2 tenths and 5 hundredths.\n\nDecimals have two important properties. First, **adding zeros at the end of a decimal or removing zeros at its end does not change its size**, e.g. $0.5 = 0.50 = 0.500$; note that it must be the *end*—$0.05$ and $0.5$ are very different, so zeros in the middle may not be removed. Second, **if the decimal point moves one place to the right, the number becomes 10 times as large**; two places to the right makes it 100 times as large; **one place to the left makes it $\\frac{1}{10}$ of the original**. For example $0.25 \\to 2.5 \\to 25$ multiplies by 10 each time, while $0.25 \\to 0.025$ divides by 10. To compare two decimals, first compare their integer parts; if these are equal, compare the tenths, then the hundredths, and so on.\n\nHow to calculate: **for addition and subtraction, line up the decimal points** (that is, line up equal places) and then work as with integers; **for multiplication, first multiply as if the factors were integers**, then count how many decimal places the two factors have altogether and put the decimal point that many places from the right of the product; **in division, when the divisor is a decimal, first turn the divisor into an integer** (multiply the dividend by the same power of ten, so the quotient does not change), and the **decimal point of the quotient stays aligned with that of the dividend**.",
+    "formulas": [
+      {
+        "latex": "\\frac{1}{10} = 0.1, \\qquad \\frac{1}{100} = 0.01, \\qquad \\frac{7}{10} = 0.7",
+        "note": "把单位「1」平均分成 10 份、100 份，其中一份就是 0.1、0.01；7 份就是 0.7。",
+        "noteEn": "Split the unit 1 into 10 or 100 equal parts: one part is 0.1 or 0.01, and 7 such parts give 0.7."
+      },
+      {
+        "latex": "0.25 \\times 10 = 2.5, \\qquad 0.25 \\div 10 = 0.025",
+        "note": "小数点向右移一位就乘 10（扩大到 10 倍），向左移一位就除以 10（缩小到 $\\frac{1}{10}$）。",
+        "noteEn": "Moving the decimal point one place right multiplies by 10, and one place left divides by 10 (that is, leaves $\\frac{1}{10}$ of the value)."
+      },
+      {
+        "latex": "0.7 + 0.5 = 1.2, \\qquad 1.2 - 0.35 = 0.85",
+        "note": "加减法先把小数点对齐（相同数位对齐），再按整数加减法计算。",
+        "noteEn": "For addition and subtraction, first align the decimal points (equal places) and then calculate as with integers."
+      },
+      {
+        "latex": "0.2 \\times 0.3 = 0.06",
+        "note": "先算 $2 \\times 3 = 6$；两个因数一共有 2 位小数，就从积的右边数出 2 位点上小数点，得 0.06。",
+        "noteEn": "First $2 \\times 3 = 6$; the two factors have $1 + 1 = 2$ decimal places altogether, so the product gets 2 decimal places: 0.06."
+      },
+      {
+        "latex": "1.2 \\div 0.4 = 12 \\div 4 = 3",
+        "note": "除数 0.4 要变成整数 4（乘 10），被除数 1.2 也同时乘 10 变成 12，商不变。",
+        "noteEn": "The divisor 0.4 is turned into the integer 4 (times 10), and the dividend 1.2 is multiplied by 10 as well, so the quotient is unchanged."
+      }
+    ],
+    "expression": {
+      "text": "0.1 = 1/10，0.01 = 1/100，0.001 = 1/1000",
+      "symbol": "\\frac{1}{10} = 0.1",
+      "note": "小数就是分母为 10、100、1000……的分数；小数部分按十分位、百分位、千分位排列。",
+      "noteEn": "A decimal is a fraction with denominator 10, 100, 1000 …; its decimal part is read as tenths, hundredths, thousandths."
+    },
+    "properties": [
+      "把单位「1」平均分成 10 份、100 份、1000 份……其中的一份或几份可以用小数表示，分母是 10、100、1000 的分数都能写成小数。",
+      "小数末尾添上 0 或去掉 0，小数的大小不变（$0.5 = 0.50$）；但小数点中间的 0 不能去掉（$0.05 \\ne 0.5$）。",
+      "小数点向右移动一位，数扩大到原来的 10 倍；向左移动一位，缩小到原来的 $\\frac{1}{10}$。",
+      "比较小数的大小：先比整数部分，整数部分相同再依次比十分位、百分位……",
+      "小数加减法要把小数点对齐，乘法先按整数算再点小数点，除法要先把除数变成整数。"
+    ],
+    "propertiesEn": [
+      "One or several parts of the unit 1 split into 10, 100 or 1000 equal parts can be written as a decimal; every fraction with denominator 10, 100 or 1000 has a decimal form.",
+      "Adding zeros at the end of a decimal or removing them does not change its size ($0.5 = 0.50$), but zeros in the middle may not be removed ($0.05 \\ne 0.5$).",
+      "Moving the decimal point one place right makes the number 10 times as large; moving it one place left leaves $\\frac{1}{10}$ of the number.",
+      "To compare decimals, compare the integer parts first; if they are equal, compare the tenths, then the hundredths, and so on.",
+      "For addition and subtraction align the decimal points; for multiplication multiply as integers and then place the decimal point; for division first turn the divisor into an integer."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        1
+      ],
+      "points": [
+        {
+          "at": 0.3,
+          "label": "0.3",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 0.7,
+          "label": "0.7",
+          "color": "#ffd166"
+        }
+      ],
+      "intervals": [
+        {
+          "from": 0,
+          "to": 0.1,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 0.1,
+          "to": 0.2,
+          "color": "#b388ff"
+        },
+        {
+          "from": 0.2,
+          "to": 0.3,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 0.3,
+          "to": 0.4,
+          "color": "#b388ff"
+        },
+        {
+          "from": 0.4,
+          "to": 0.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 0.5,
+          "to": 0.6,
+          "color": "#b388ff"
+        },
+        {
+          "from": 0.6,
+          "to": 0.7,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 0.7,
+          "to": 0.8,
+          "color": "#b388ff"
+        },
+        {
+          "from": 0.8,
+          "to": 0.9,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 0.9,
+          "to": 1,
+          "color": "#b388ff"
+        }
+      ],
+      "title": "0 到 1 平均分成 10 份：0.3 在第 3 份处，0.7 在第 7 份处"
+    },
+    "examples": [
+      {
+        "problem": "计算：(1) $3.6 + 1.45$；(2) $5 - 0.8$。",
+        "solution": "(1) 把小数点对齐（$3.6$ 写成 $3.60$，也就是相同数位对齐）：$3.60 + 1.45 = 5.05$。\n\n(2) 把 $5$ 看成 $5.0$：$5.0 - 0.8 = 4.2$（得数末尾的 0 要去掉）。"
+      },
+      {
+        "problem": "计算：(1) $0.4 \\times 0.25$；(2) $7.2 \\div 0.9$。",
+        "solution": "(1) 先按整数乘法算：$4 \\times 25 = 100$。两个因数一共有 $1 + 2 = 3$ 位小数，就从积的右边数出 3 位点上小数点，$100 \\to 0.100 = 0.1$。\n\n(2) 除数是小数，先把它变成整数：$7.2 \\div 0.9 = 72 \\div 9 = 8$（被除数和除数同时乘 10，商不变）。"
+      }
+    ],
+    "tags": [
+      "小数",
+      "十分位",
+      "百分位",
+      "小数点移动",
+      "小数的性质",
+      "小数四则运算"
+    ],
+    "links": [
+      "fractions-elementary",
+      "rounding-approximation",
+      "length-units",
+      "percentage-elementary"
+    ]
+  },
+  {
+    "id": "fractions-elementary",
+    "title": "分数的意义与运算",
+    "titleEn": "Fractions: Meaning and Operations",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "把单位「1」平均分成若干份，表示其中一份或几份的数叫分数；再学分数单位、约分通分和分数的四则运算。",
+    "summaryEn": "Split the unit 1 into equal parts and a fraction names one or several of them; then come fraction units, reducing, common denominators and the four operations on fractions.",
+    "definition": "把一个蛋糕、一张纸或一条线段看作单位「1」，把它**平均分成若干份**（每一份必须一样大），表示这样的一份或几份的数，就叫**分数**。$\\frac{3}{5}$ 表示把单位「1」平均分成 5 份、取其中的 3 份。下面的数叫**分母**（平均分成几份），上面的数叫**分子**（取了这样的几份）。把单位「1」平均分成几份、表示其中 1 份的数，叫**分数单位**：$\\frac{3}{5}$ 的分数单位是 $\\frac{1}{5}$，它里面有 3 个这样的分数单位，$\\frac{3}{5} = 3 \\times \\frac{1}{5}$。\n\n分子比分母小的分数叫**真分数**，真分数都小于 1（如 $\\frac{3}{5}$）；分子比分母大或者等于分母的分数叫**假分数**，假分数大于或等于 1（如 $\\frac{7}{5}$、$\\frac{5}{5}$）；由整数和真分数合起来写的数叫**带分数**（如 $2\\frac{1}{3}$，读作二又三分之一）。假分数与带分数可以互化：$\\frac{7}{3} = 7 \\div 3 = 2 \\cdots 1$，商 2 作整数部分、余数 1 作分子，得 $2\\frac{1}{3}$；反过来 $2\\frac{1}{3} = \\frac{2 \\times 3 + 1}{3} = \\frac{7}{3}$。分数和除法是好朋友：$a \\div b = \\frac{a}{b}$（$b \\ne 0$），分子相当于被除数，分母相当于除数。\n\n**分数的基本性质**：分数的分子和分母同时乘或同时除以相同的数（0 除外），分数的大小不变。用它可以把分数化简单：$\\frac{4}{6} = \\frac{4 \\div 2}{6 \\div 2} = \\frac{2}{3}$，这叫**约分**——分子、分母除以它们的最大公因数，约到分子分母只有公因数 1 为止，得到的叫**最简分数**；也可以把分母不同的分数化成同分母的分数：$\\frac{1}{2}$ 与 $\\frac{1}{3}$ 化成 $\\frac{3}{6}$ 与 $\\frac{2}{6}$，这叫**通分**，公分母一般取两个分母的最小公倍数。\n\n运算方法：加减法中，**同分母的分母不变、分子相加减**（$\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$），**异分母的先通分再加减**（$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$），结果能约分的要约成最简分数；乘法是**分子乘分子、分母乘分母**，能先约分的先约分（$\\frac{2}{3} \\times \\frac{3}{4} = \\frac{6}{12} = \\frac{1}{2}$）；除法要记住——**除以一个分数，等于乘这个分数的倒数**，也就是把除数的分子分母交换位置（$\\frac{1}{2} \\div \\frac{3}{4} = \\frac{1}{2} \\times \\frac{4}{3} = \\frac{4}{6} = \\frac{2}{3}$）。",
+    "definitionEn": "Take a cake, a sheet of paper or a segment as the unit 1 and **divide it into equal parts** (every part must be the same size); a number that names one or several of these parts is a **fraction**. $\\frac{3}{5}$ means splitting the unit 1 into 5 equal parts and taking 3 of them. The lower number is the **denominator** (into how many equal parts) and the upper number is the **numerator** (how many such parts are taken). The number that stands for a single part, when the unit 1 is split into a given number of equal parts, is called a **fraction unit**: the fraction unit of $\\frac{3}{5}$ is $\\frac{1}{5}$, and $\\frac{3}{5}$ contains 3 of them, $\\frac{3}{5} = 3 \\times \\frac{1}{5}$.\n\nA fraction whose numerator is smaller than its denominator is a **proper fraction**, and every proper fraction is less than 1 (e.g. $\\frac{3}{5}$); one whose numerator is larger than or equal to its denominator is an **improper fraction**, which is greater than or equal to 1 (e.g. $\\frac{7}{5}$, $\\frac{5}{5}$); a whole number written together with a proper fraction forms a **mixed number** (e.g. $2\\frac{1}{3}$). Improper fractions and mixed numbers can be converted: from $\\frac{7}{3} = 7 \\div 3 = 2$ remainder $1$ we get $2\\frac{1}{3}$ (quotient 2 as the whole part, remainder 1 as the numerator), and backwards $2\\frac{1}{3} = \\frac{2 \\times 3 + 1}{3} = \\frac{7}{3}$. Fractions and division are close friends: $a \\div b = \\frac{a}{b}$ ($b \\ne 0$), where the numerator plays the part of the dividend and the denominator that of the divisor.\n\nThe **basic property of fractions**: multiplying or dividing both the numerator and the denominator by the same number (not 0) does not change the value of the fraction. With it we can simplify: $\\frac{4}{6} = \\frac{4 \\div 2}{6 \\div 2} = \\frac{2}{3}$—this is called **reducing**, dividing both parts by their greatest common factor until only 1 is left as a common factor; the result is a **fraction in lowest terms**. We can also give fractions a common denominator: $\\frac{1}{2}$ and $\\frac{1}{3}$ become $\\frac{3}{6}$ and $\\frac{2}{6}$—this is called **finding a common denominator**, usually the least common multiple of the two denominators.\n\nHow to calculate: when adding or subtracting fractions with the **same denominator, keep the denominator and add or subtract the numerators** ($\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$); with **different denominators, first find a common denominator** ($\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$), and reduce the result if possible. Multiplication means **numerator times numerator and denominator times denominator**, reducing early when you can ($\\frac{2}{3} \\times \\frac{3}{4} = \\frac{6}{12} = \\frac{1}{2}$). For division remember: **dividing by a fraction is the same as multiplying by its reciprocal**, that is, turning the divisor upside down ($\\frac{1}{2} \\div \\frac{3}{4} = \\frac{1}{2} \\times \\frac{4}{3} = \\frac{4}{6} = \\frac{2}{3}$).",
+    "formulas": [
+      {
+        "latex": "\\frac{3}{5} = 3 \\times \\frac{1}{5}",
+        "note": "分母是几，分数单位就是几分之一：$\\frac{3}{5}$ 的分数单位是 $\\frac{1}{5}$，它里面有 3 个这样的单位。",
+        "noteEn": "The denominator tells you the fraction unit: the unit of $\\frac{3}{5}$ is $\\frac{1}{5}$, and it contains 3 such units."
+      },
+      {
+        "latex": "a \\div b = \\frac{a}{b} \\quad (b \\neq 0)",
+        "note": "分数与除法的关系：分子相当于被除数，分母相当于除数，所以分母不能为 0。",
+        "noteEn": "Fractions and division: the numerator acts as the dividend and the denominator as the divisor, so the denominator can never be 0."
+      },
+      {
+        "latex": "\\frac{a}{b} = \\frac{a \\times m}{b \\times m} = \\frac{a \\div m}{b \\div m} \\quad (m \\neq 0)",
+        "note": "分数的基本性质：分子分母同乘或同除以相同的数（0 除外），分数的大小不变；约分和通分都靠它。",
+        "noteEn": "The basic property of fractions: multiplying or dividing numerator and denominator by the same non-zero number leaves the value unchanged; reducing and finding common denominators both rely on it."
+      },
+      {
+        "latex": "\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}",
+        "note": "分数乘法：分子乘分子、分母乘分母；能先约分就先约分，算起来更简单。",
+        "noteEn": "Multiplying fractions: numerator times numerator and denominator times denominator; reduce first whenever possible."
+      },
+      {
+        "latex": "\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} \\quad (c \\neq 0)",
+        "note": "分数除法：除以一个分数，等于乘它的倒数（把除数的分子分母交换位置）。",
+        "noteEn": "Dividing fractions: dividing by a fraction is the same as multiplying by its reciprocal (turn the divisor upside down)."
+      }
+    ],
+    "expression": {
+      "text": "3/5：把单位「1」平均分成 5 份，取 3 份；分数单位是 1/5",
+      "symbol": "\\frac{a}{b} = a \\div b",
+      "note": "真分数小于 1，假分数大于或等于 1；分数与除法相通，约分、通分靠分数的基本性质。",
+      "noteEn": "Proper fractions are less than 1, improper fractions are at least 1; fractions equal divisions, and reducing or finding common denominators uses the basic property."
+    },
+    "properties": [
+      "把单位「1」平均分成若干份，表示其中一份或几份的数叫分数；分母表示平均分成的份数，分子表示取了这样的几份。",
+      "分子和分母同时乘或同时除以相同的数（0 除外），分数的大小不变——这是约分、通分的依据。",
+      "真分数都小于 1，假分数大于或等于 1；假分数与带分数可以互化（分子除以分母，商作整数部分、余数作分子）。",
+      "分数与除法相通：$a \\div b = \\frac{a}{b}$（$b \\ne 0$），分母是几，分数单位就是几分之一。",
+      "分数除法要「颠倒相乘」：除以一个分数等于乘它的倒数，$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$（$c \\ne 0$）。"
+    ],
+    "propertiesEn": [
+      "Splitting the unit 1 into equal parts, a fraction names one or several of them: the denominator counts the equal parts and the numerator counts the parts taken.",
+      "Multiplying or dividing numerator and denominator by the same non-zero number leaves the fraction unchanged—the basis of reducing and of finding common denominators.",
+      "Every proper fraction is less than 1, while improper fractions are at least 1; improper fractions and mixed numbers convert into each other (divide numerator by denominator: quotient as the whole part, remainder as the numerator).",
+      "Fractions and division agree: $a \\div b = \\frac{a}{b}$ ($b \\ne 0$), and the denominator tells you the fraction unit.",
+      "Dividing by a fraction means multiplying by its reciprocal: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$ ($c \\ne 0$)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1",
+          "color": "#4cc9f0",
+          "label": "y = 1"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "1",
+          "from": 0,
+          "to": 0.2,
+          "base": 0,
+          "color": "#ff6b9d"
+        },
+        {
+          "expr": "1",
+          "from": 0.2,
+          "to": 0.4,
+          "base": 0,
+          "color": "#ff6b9d",
+          "label": "2/5"
+        },
+        {
+          "expr": "1",
+          "from": 0.4,
+          "to": 0.6,
+          "base": 0,
+          "color": "#8d99ae"
+        },
+        {
+          "expr": "1",
+          "from": 0.6,
+          "to": 0.8,
+          "base": 0,
+          "color": "#8d99ae"
+        },
+        {
+          "expr": "1",
+          "from": 0.8,
+          "to": 1,
+          "base": 0,
+          "color": "#8d99ae"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        1.3
+      ],
+      "title": "面积模型：把单位「1」平均分成 5 份，涂色 2 份就是 2/5"
+    },
+    "examples": [
+      {
+        "problem": "计算：(1) $\\frac{5}{8} + \\frac{1}{8}$；(2) $\\frac{1}{2} + \\frac{1}{3}$。",
+        "solution": "(1) 同分母：分母不变、分子相加，$\\frac{5}{8} + \\frac{1}{8} = \\frac{6}{8} = \\frac{3}{4}$（结果要约成最简分数）。\n\n(2) 异分母：先通分，公分母取 2 和 3 的最小公倍数 6，$\\frac{1}{2} = \\frac{3}{6}$，$\\frac{1}{3} = \\frac{2}{6}$，所以 $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$。"
+      },
+      {
+        "problem": "计算：(1) $\\frac{2}{5} \\times \\frac{3}{4}$；(2) $\\frac{3}{4} \\div \\frac{2}{5}$；(3) 把 $\\frac{7}{3}$ 化成带分数。",
+        "solution": "(1) 分子乘分子、分母乘分母：$\\frac{2}{5} \\times \\frac{3}{4} = \\frac{6}{20} = \\frac{3}{10}$。\n\n(2) 除以 $\\frac{2}{5}$ 就是乘它的倒数 $\\frac{5}{2}$：$\\frac{3}{4} \\div \\frac{2}{5} = \\frac{3}{4} \\times \\frac{5}{2} = \\frac{15}{8} = 1\\frac{7}{8}$。\n\n(3) $7 \\div 3 = 2 \\cdots 1$，商 2 作整数部分、余数 1 作分子，得 $\\frac{7}{3} = 2\\frac{1}{3}$。"
+      }
+    ],
+    "tags": [
+      "分数",
+      "分数单位",
+      "真分数",
+      "假分数",
+      "带分数",
+      "约分",
+      "通分",
+      "倒数"
+    ],
+    "links": [
+      "decimals-elementary",
+      "factors-multiples",
+      "ratio-elementary",
+      "percentage-elementary"
+    ]
+  },
+  {
+    "id": "factors-multiples",
+    "title": "因数、倍数与质数",
+    "titleEn": "Factors, Multiples and Primes",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "在非零自然数里研究因数与倍数、2 和 3 和 5 的倍数特征、奇数与偶数、质数与合数，以及最大公因数和最小公倍数。",
+    "summaryEn": "Inside the non-zero natural numbers we study factors and multiples, the digit tests for 2, 3 and 5, odd and even numbers, primes and composites, and the greatest common factor with the least common multiple.",
+    "definition": "这一节的所有内容都在**非零自然数**（1、2、3、4、…）范围内讨论。如果 $a \\times b = c$，那么 $a$ 和 $b$ 都是 $c$ 的**因数**，$c$ 是 $a$ 和 $b$ 的**倍数**。例如 $3 \\times 4 = 12$，3 和 4 是 12 的因数，12 是 3 和 4 的倍数。注意：12 是 3 的倍数，3 是 12 的因数，因数和倍数总是成对出现、互相依存的。\n\n一个数的因数、倍数各有什么特点？**一个数的因数的个数是有限的**：最小的因数是 1，最大的因数是它本身（12 的因数有 1、2、3、4、6、12，一共 6 个）。**一个数的倍数的个数是无限的**：最小的倍数是它本身，**没有最大的倍数**（3 的倍数有 3、6、9、12、…永远写不完）。\n\n判断倍数有很快的方法：**2 的倍数，个位上是 0、2、4、6、8**；**5 的倍数，个位上是 0 或 5**；**3 的倍数，各位数字之和是 3 的倍数**（如 123，$1 + 2 + 3 = 6$，6 是 3 的倍数，所以 123 是 3 的倍数）。是 2 的倍数的数叫**偶数**，不是 2 的倍数的数叫**奇数**；特别注意：**0 也是偶数**。\n\n按因数的个数，可以把非零自然数分成三类：**只有 1 和它本身两个因数的数叫质数**（也叫素数），比如 2、3、5、7；**除了 1 和它本身以外还有别的因数的数叫合数**，比如 4、6、9。有两个特别要注意的地方：**1 只有 1 个因数，它既不是质数也不是合数**；**2 是唯一的偶质数**（所有比 2 大的偶数都是合数）。20 以内的质数有 2、3、5、7、11、13、17、19，一共 8 个。把一个合数写成几个质数相乘的形式，叫**分解质因数**，如 $12 = 2 \\times 2 \\times 3$。几个数公有的因数中最大的一个，叫它们的**最大公因数**；公有的倍数中最小的一个，叫它们的**最小公倍数**。",
+    "definitionEn": "Everything in this section takes place among the **non-zero natural numbers** (1, 2, 3, 4, …). If $a \\times b = c$, then $a$ and $b$ are both **factors** of $c$, and $c$ is a **multiple** of $a$ and of $b$. For example $3 \\times 4 = 12$: 3 and 4 are factors of 12, and 12 is a multiple of both 3 and 4. Note that 12 is a multiple of 3 while 3 is a factor of 12—factors and multiples always come in pairs and depend on each other.\n\nWhat are the special features of factors and multiples? **A number has only finitely many factors**: the smallest factor is 1 and the largest is the number itself (the factors of 12 are 1, 2, 3, 4, 6, 12, six in all). **A number has infinitely many multiples**: the smallest is the number itself and there is **no largest multiple** (the multiples of 3 are 3, 6, 9, 12, … and never end).\n\nThere are quick tests for multiples: **a multiple of 2 ends in 0, 2, 4, 6 or 8**; **a multiple of 5 ends in 0 or 5**; **a multiple of 3 has a digit sum that is a multiple of 3** (for 123, $1 + 2 + 3 = 6$, and 6 is a multiple of 3, so 123 is a multiple of 3). Numbers that are multiples of 2 are **even**, the others are **odd**; take special care: **0 is even too**.\n\nBy the number of their factors, the non-zero natural numbers fall into three classes: a number with **only the two factors 1 and itself is a prime number**, such as 2, 3, 5, 7; a number that **has further factors besides 1 and itself is a composite number**, such as 4, 6, 9. Two things need special attention: **1 has only one factor, so it is neither prime nor composite**; and **2 is the only even prime** (every even number larger than 2 is composite). The primes below 20 are 2, 3, 5, 7, 11, 13, 17 and 19—eight of them. Writing a composite number as a product of primes is called **prime factorisation**, e.g. $12 = 2 \\times 2 \\times 3$. The largest factor shared by several numbers is their **greatest common factor**; the smallest multiple they share is their **least common multiple**.",
+    "formulas": [
+      {
+        "latex": "a \\times b = c \\ \\Rightarrow \\ a, b \\text{ 是 } c \\text{ 的因数}, \\quad c \\text{ 是 } a, b \\text{ 的倍数}",
+        "note": "因数与倍数的定义：只在非零自然数范围内讨论，二者成对出现。",
+        "noteEn": "The definition of factors and multiples, discussed only among the non-zero natural numbers: the two notions always appear as a pair."
+      },
+      {
+        "latex": "12 = 1 \\times 12 = 2 \\times 6 = 3 \\times 4",
+        "note": "12 的因数有 1、2、3、4、6、12 共 6 个：最小是 1，最大是它本身；成对地找又快又不漏。",
+        "noteEn": "The factors of 12 are 1, 2, 3, 4, 6 and 12—six of them; the smallest is 1 and the largest is 12 itself. Searching in pairs is fast and leaves nothing out."
+      },
+      {
+        "latex": "12 = 2 \\times 2 \\times 3 = 2^{2} \\times 3",
+        "note": "分解质因数：把合数写成几个质数相乘的形式。",
+        "noteEn": "Prime factorisation: writing a composite number as a product of prime numbers."
+      },
+      {
+        "latex": "\\{2,\\ 3,\\ 5,\\ 7,\\ 11,\\ 13,\\ 17,\\ 19\\}",
+        "note": "20 以内的质数共 8 个；1 既不是质数也不是合数，2 是唯一的偶质数。",
+        "noteEn": "There are eight primes below 20; 1 is neither prime nor composite, and 2 is the only even prime."
+      },
+      {
+        "latex": "\\gcd(12, 18) = 6, \\qquad \\mathrm{lcm}(12, 18) = 36",
+        "note": "12 = 2×2×3，18 = 2×3×3，公有的质因数相乘得最大公因数 6，最小公倍数是 6×2×3 = 36。",
+        "noteEn": "With $12 = 2 \\times 2 \\times 3$ and $18 = 2 \\times 3 \\times 3$, the shared prime factors give the greatest common factor 6, and the least common multiple is $6 \\times 2 \\times 3 = 36$."
+      }
+    ],
+    "expression": {
+      "text": "12 的因数：1、2、3、4、6、12（有限个）；3 的倍数：3、6、9、12、…（无限个）",
+      "symbol": "a \\times b = c",
+      "note": "因数有限、倍数无限；1 既不是质数也不是合数，2 是唯一的偶质数。",
+      "noteEn": "A number has finitely many factors but infinitely many multiples; 1 is neither prime nor composite, and 2 is the only even prime."
+    },
+    "properties": [
+      "一个数的因数的个数是有限的：最小的因数是 1，最大的因数是它本身。",
+      "一个数的倍数的个数是无限的：最小的倍数是它本身，没有最大的倍数。",
+      "2 的倍数个位是 0、2、4、6、8；5 的倍数个位是 0 或 5；3 的倍数各位数字之和是 3 的倍数；0 是偶数。",
+      "只有 1 和它本身两个因数的数叫质数，此外还有别的因数的数叫合数；1 既不是质数也不是合数，2 是唯一的偶质数。",
+      "求最大公因数与最小公倍数可用列举法、分解质因数法或短除法；两个数的最大公因数乘最小公倍数等于这两个数的积。"
+    ],
+    "propertiesEn": [
+      "A number has finitely many factors: the smallest factor is 1 and the largest is the number itself.",
+      "A number has infinitely many multiples: the smallest multiple is the number itself and there is no largest one.",
+      "Multiples of 2 end in 0, 2, 4, 6 or 8; multiples of 5 end in 0 or 5; multiples of 3 have a digit sum divisible by 3; 0 is even.",
+      "A number with only the two factors 1 and itself is prime, and one with further factors is composite; 1 is neither prime nor composite, and 2 is the only even prime.",
+      "The greatest common factor and the least common multiple can be found by listing, by prime factorisation or by short division; for two numbers their product equals the product of the two numbers themselves."
+    ],
+    "examples": [
+      {
+        "problem": "写出 12 的所有因数，并判断 1、2、12 各是质数还是合数。",
+        "solution": "成对地找：$12 = 1 \\times 12 = 2 \\times 6 = 3 \\times 4$，所以 12 的因数是 1、2、3、4、6、12，一共 6 个；最小的因数是 1，最大的因数是 12 本身。\n\n判断：1 只有它自己一个因数，**既不是质数也不是合数**；2 只有 1 和 2 两个因数，是**质数**，而且是唯一的偶质数；12 除了 1 和 12 以外还有 2、3、4、6 这些因数，所以是**合数**。"
+      },
+      {
+        "problem": "求 12 和 18 的最大公因数和最小公倍数。",
+        "solution": "先分解质因数：$12 = 2 \\times 2 \\times 3$，$18 = 2 \\times 3 \\times 3$。\n\n两个数**公有的**质因数是 2 和 3，所以最大公因数是 $2 \\times 3 = 6$；最小公倍数等于最大公因数乘上各自剩下的质因数，$6 \\times 2 \\times 3 = 36$（也可以取各质因数的最高次幂：$2^{2} \\times 3^{2} = 36$）。\n\n检验：$6 \\times 36 = 216 = 12 \\times 18$，正好符合「最大公因数 × 最小公倍数 = 两数之积」。"
+      }
+    ],
+    "tags": [
+      "因数",
+      "倍数",
+      "质数",
+      "合数",
+      "奇数偶数",
+      "分解质因数",
+      "最大公因数",
+      "最小公倍数"
+    ],
+    "links": [
+      "fractions-elementary",
+      "multiplication-division",
+      "whole-numbers"
+    ]
+  },
+  {
+    "id": "letters-for-numbers",
+    "title": "用字母表示数与简易方程",
+    "titleEn": "Using Letters for Numbers and Simple Equations",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "用字母表示数（$a^2$ 表示 $a \\times a$，不是 $2a$！），认识方程与等式的性质，学会解方程、检验并列出方程解应用题。",
+    "summaryEn": "Letters can stand for numbers ($a^2$ means $a \\times a$, not $2a$!), and from equations and the properties of equality we learn to solve, check and set up simple equations for word problems.",
+    "definition": "数学里常用字母来表示数：$a$ 可以表示任意一个数，$x$ 常常表示还不知道的数（叫未知数）。**在含有字母的式子里，字母与字母相乘、字母与数字相乘时，乘号可以记作「·」或者省略不写**：$a \\times b$ 写成 $ab$ 或 $a \\cdot b$；$a \\times 3$ 写成 $3a$（数字一般写在字母前面）；$1 \\times a$ 就简写成 $a$。最容易出错的是平方：**$a^2$ 表示 $a \\times a$，不是 $2a$**！当 $a = 5$ 时，$a^2 = 5 \\times 5 = 25$，而 $2a = 5 + 5 = 10$，差得远呢。\n\n**含有未知数的等式叫方程**，比如 $x + 3 = 9$、$2x = 8$ 都是方程。判断时要满足两个条件：① 含有未知数，② 是等式，缺一不可（$x + 3$ 不是等式，$5 + 3 = 8$ 没有未知数，所以都不是方程）。使方程左右两边相等的未知数的值，叫方程的**解**；求方程解的过程，叫**解方程**。\n\n等式就像一架平衡的天平，有两条重要性质：**等式两边同时加上或减去同一个数，等式仍然成立**；**等式两边同时乘同一个数，或者同时除以同一个不为 0 的数，等式仍然成立**。例如由 $2x = 8$ 两边同时除以 2，得 $x = 4$；由 $x + 3 = 9$ 两边同时减去 3，得 $x = 6$。解方程，就是利用这两条性质把 $x$ 一步一步「单独留下」。\n\n解完方程一定要**检验**：把求出的解代回原方程，看左右两边是不是相等。列方程解应用题一般分四步：① 弄清题意，设未知数为 $x$；② 找出题目中的**等量关系**；③ 列方程并解方程；④ 检验并写出答语。例如「小明每天存 2 元，小刚已有 3 元、从同一天起每天存 1 元，多少天后两人存的钱一样多？」设 $x$ 天后一样多，等量关系是「小明的钱 = 小刚的钱」，即 $2x = x + 3$，解得 $x = 3$——这正是配图中两条直线交于 $(3, 6)$ 的意思。",
+    "definitionEn": "In mathematics letters are often used to stand for numbers: $a$ can stand for any number, and $x$ usually stands for a number we do not know yet (the unknown). **In an expression with letters, when a letter is multiplied by a letter or by a number, the multiplication sign may be written as '·' or left out altogether**: $a \\times b$ is written $ab$ or $a \\cdot b$; $a \\times 3$ is written $3a$ (the number usually goes first); and $1 \\times a$ is simply written $a$. The easiest mistake is with squares: **$a^2$ means $a \\times a$, not $2a$**! When $a = 5$, $a^2 = 5 \\times 5 = 25$ while $2a = 5 + 5 = 10$—very different.\n\n**An equation is an equality that contains an unknown**, for example $x + 3 = 9$ or $2x = 8$. Two conditions must both hold: (1) it contains an unknown, and (2) it is an equality—neither alone is enough ($x + 3$ is not an equality, and $5 + 3 = 8$ has no unknown, so neither is an equation). The value of the unknown that makes the two sides equal is the **solution** of the equation, and finding it is called **solving the equation**.\n\nAn equality is like a balanced pair of scales with two important properties: **adding the same number to both sides or subtracting the same number from both sides keeps the equality true**; **multiplying both sides by the same number, or dividing both sides by the same non-zero number, also keeps the equality true**. For example, dividing both sides of $2x = 8$ by 2 gives $x = 4$, and subtracting 3 from both sides of $x + 3 = 9$ gives $x = 6$. Solving an equation means using these two properties to leave $x$ standing alone step by step.\n\nAfter solving, always **check** the answer: put the solution back into the original equation and see whether the two sides are equal. Setting up an equation to solve a word problem usually has four steps: (1) understand the problem and call the unknown $x$; (2) find the **equality relation** hidden in the problem; (3) write the equation and solve it; (4) check the solution and write the answer. For instance, 'Ming saves 2 yuan a day; Gang already has 3 yuan and saves 1 yuan a day starting the same day—after how many days do they have the same amount?' Let the number of days be $x$; the equality relation is 'Ming's money = Gang's money', that is $2x = x + 3$, which gives $x = 3$—exactly the point $(3, 6)$ where the two lines cross in the figure.",
+    "formulas": [
+      {
+        "latex": "a \\times b = ab \\quad \\text{or} \\quad a \\cdot b, \\qquad 1 \\times a = a, \\qquad 3 \\times a = 3a",
+        "note": "字母与字母、字母与数字相乘，乘号可以记作「·」或省略不写；$1a$ 简写成 $a$，数字一般写在字母前面。",
+        "noteEn": "When letters are multiplied, the sign may be written as '·' or left out; $1a$ is written simply $a$, and the number usually comes before the letter."
+      },
+      {
+        "latex": "a^{2} = a \\times a, \\qquad 2a = a + a",
+        "note": "$a^2$ 表示两个 $a$ 相乘，$2a$ 表示两个 $a$ 相加；当 $a = 5$ 时 $a^2 = 25$，而 $2a = 10$，千万不要混。",
+        "noteEn": "$a^2$ means two copies of $a$ multiplied, while $2a$ means two copies of $a$ added; when $a = 5$, $a^2 = 25$ but $2a = 10$—never mix them up."
+      },
+      {
+        "latex": "a = b \\ \\Rightarrow \\ a + c = b + c, \\quad a - c = b - c, \\quad ac = bc, \\quad \\frac{a}{c} = \\frac{b}{c} \\ (c \\neq 0)",
+        "note": "等式的性质：两边同时加上、减去、乘同一个数，或同时除以一个不为 0 的数，等式仍然成立。",
+        "noteEn": "Properties of equality: adding, subtracting or multiplying the same number on both sides, or dividing by a non-zero number, keeps the equality true."
+      },
+      {
+        "latex": "x + 3 = 9 \\ \\Rightarrow \\ x = 9 - 3 = 6",
+        "note": "两边同时减去 3，$x$ 就单独留下了；这是解方程最基本的动作。",
+        "noteEn": "Subtracting 3 from both sides leaves $x$ alone—the most basic move in solving an equation."
+      },
+      {
+        "latex": "2x = 8 \\ \\Rightarrow \\ x = 8 \\div 2 = 4",
+        "note": "两边同时除以 2 得 $x = 4$；检验：把 $x = 4$ 代入原方程，$2 \\times 4 = 8$，左边 = 右边。",
+        "noteEn": "Dividing both sides by 2 gives $x = 4$; check: putting $x = 4$ back gives $2 \\times 4 = 8$, so the two sides match."
+      }
+    ],
+    "expression": {
+      "text": "a × b 写作 ab；1 × a 写作 a；a² = a × a（不是 2a）",
+      "symbol": "a^{2} \\ne 2a",
+      "note": "方程是含有未知数的等式；解方程靠等式的性质，解完要把解代回原方程检验。",
+      "noteEn": "An equation is an equality containing an unknown; solving uses the properties of equality, and the answer must be put back into the original equation to check."
+    },
+    "properties": [
+      "字母可以表示任意数；同一个字母在同一个式子里表示同一个数。",
+      "字母与字母、字母与数字相乘时，乘号可以记作「·」或省略不写，数字一般写在字母前面（$3a$）；$1a$ 简写成 $a$。",
+      "$a^2 = a \\times a$ 表示两个 $a$ 相乘，$2a = a + a$ 表示两个 $a$ 相加；$a = 5$ 时 $a^2 = 25$，而 $2a = 10$，二者一般不相等。",
+      "含有未知数的等式叫方程；方程一定是等式，等式不一定是方程。",
+      "等式两边同时加上、减去、乘或除以（除数不为 0）同一个数，等式仍然成立；解完方程要把解代回原方程检验。"
+    ],
+    "propertiesEn": [
+      "A letter may stand for any number, and the same letter in the same expression always stands for the same number.",
+      "When letters are multiplied, the multiplication sign may be written as '·' or omitted, and the number usually comes first ($3a$); $1a$ is written simply $a$.",
+      "$a^2 = a \\times a$ is two copies of $a$ multiplied, while $2a = a + a$ is two copies added; for $a = 5$, $a^2 = 25$ but $2a = 10$, so they are generally different.",
+      "An equation is an equality containing an unknown; every equation is an equality, but not every equality is an equation.",
+      "Adding, subtracting, multiplying or dividing (by a non-zero number) the same number on both sides keeps an equality true; after solving, put the answer back into the original equation to check it."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2*x",
+          "color": "#4cc9f0",
+          "label": "y = 2x"
+        },
+        {
+          "expr": "x + 3",
+          "color": "#ff6b9d",
+          "label": "y = x + 3"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "2*x",
+          "at": 3,
+          "color": "#4cc9f0",
+          "label": "交点 (3, 6)"
+        }
+      ],
+      "xRange": [
+        0,
+        6
+      ],
+      "yRange": [
+        0,
+        10
+      ],
+      "title": "y = 2x 与 y = x + 3 交于点 (3, 6)"
+    },
+    "examples": [
+      {
+        "problem": "当 $a = 3$ 时，分别求 $a^2$ 和 $2a$ 的值；它们相等吗？",
+        "solution": "$a^2 = a \\times a = 3 \\times 3 = 9$；$2a = 2 \\times a = 2 \\times 3 = 6$。\n\n因为 $9 \\ne 6$，所以 $a^2$ 与 $2a$ 一般不相等：$a^2$ 表示**两个 $a$ 相乘**，$2a$ 表示**两个 $a$ 相加**。"
+      },
+      {
+        "problem": "小明每天存 2 元；小刚已经有 3 元，从同一天开始每天再存 1 元。多少天后两人存的钱一样多？",
+        "solution": "设 $x$ 天后两人的钱一样多。小明有 $2x$ 元（每天 2 元，存 $x$ 天）；小刚有 $x + 3$ 元（已有的 3 元加上 $x$ 天存的 $x$ 元）。\n\n等量关系是「小明的钱 = 小刚的钱」，列方程：$2x = x + 3$。两边同时减去 $x$：$2x - x = x + 3 - x$，得 $x = 3$。\n\n检验：把 $x = 3$ 代回原方程，左边 $= 2 \\times 3 = 6$，右边 $= 3 + 3 = 6$，左边 = 右边，所以 $x = 3$ 是方程的解。\n\n答：3 天后两人的钱一样多，都是 6 元（配图中 $y = 2x$ 与 $y = x + 3$ 正好交于 $(3, 6)$）。"
+      }
+    ],
+    "tags": [
+      "用字母表示数",
+      "方程",
+      "等式性质",
+      "解方程",
+      "检验",
+      "列方程解应用题"
+    ],
+    "links": [
+      "algebraic-expression",
+      "linear-equation-junior",
+      "chicken-rabbit",
+      "function-concept"
+    ]
+  }
+]

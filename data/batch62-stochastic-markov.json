@@ -1,0 +1,1066 @@
+[
+  {
+    "id": "markov-chain",
+    "title": "马尔可夫链",
+    "titleEn": "Markov Chains",
+    "branch": "stochastic",
+    "level": 4,
+    "summary": "马尔可夫链是「未来只依赖现在」的随机过程：给定当前状态，过去与将来条件独立；它的全部一步信息装在一个每行和为 1 的转移矩阵里。",
+    "summaryEn": "A Markov chain is a random process whose future depends on the past only through the present; all of its one-step information is stored in a row-stochastic transition matrix.",
+    "definition": "设 $X_0, X_1, X_2, \\dots$ 是一列取值于**可数**状态空间 $S$ 的随机变量（如 $S = \\{1, 2, 3\\}$ 或 $S = \\{0, 1, 2, \\dots\\}$）。若对一切 $n \\ge 0$ 和一切状态 $i_0, \\dots, i_{n-1}, i, j$ 都有\n\n$$P(X_{n+1} = j \\mid X_n = i, X_{n-1} = i_{n-1}, \\dots, X_0 = i_0) = P(X_{n+1} = j \\mid X_n = i),$$\n\n就称 $\\{X_n\\}$ 是**马尔可夫链**，上式称为**马尔可夫性**（无后效性）：一旦知道「现在」$X_n = i$，「过去」$X_0, \\dots, X_{n-1}$ 就不再为「将来」$X_{n+1}$ 提供任何额外信息。若右端与 $n$ 无关，称链是**时齐的**，并记 $p_{ij} = P(X_{n+1} = j \\mid X_n = i)$；本库默认讨论时齐链。\n\n把所有 $p_{ij}$ 排成矩阵 $P = (p_{ij})_{i, j \\in S}$，称为**转移矩阵**（一步转移概率矩阵）。它是一个**行随机矩阵**：\n\n$$p_{ij} \\ge 0, \\qquad \\sum_{j \\in S} p_{ij} = 1 \\quad (\\forall i \\in S).$$\n\n本库统一约定用**行向量**：初始分布写成 $\\mu = (\\mu_i)$，即 $\\mu_i = P(X_0 = i) \\ge 0$、$\\sum_i \\mu_i = 1$，于是 $X_n$ 的分布是 $\\mu_n = \\mu P^n$。（有些教材改用列向量搭配列随机矩阵，公式左右转置，含义完全相同；本书一律用行向量左乘。）\n\n链的全部统计规律由 $(\\mu, P)$ 决定：给定初始分布与转移矩阵，任意有限维分布都能算出来，\n\n$$P(X_0 = i_0, X_1 = i_1, \\dots, X_n = i_n) = \\mu_{i_0} p_{i_0 i_1} p_{i_1 i_2} \\cdots p_{i_{n-1} i_n}.$$\n\n这正是马尔可夫链好用的原因：一条「一步规则」加上初值，就描述了整个过程。随机游走、赌徒破产、排队系统、网页排名（PageRank）与 MCMC 抽样都是马尔可夫链。",
+    "definitionEn": "Let $X_0, X_1, X_2, \\dots$ take values in a **countable** state space $S$ (say $S=\\{1,2,3\\}$ or $S=\\{0,1,2,\\dots\\}$). The process $\\{X_n\\}$ is a **Markov chain** if for all $n\\ge 0$ and all states $i_0,\\dots,i_{n-1},i,j$,\n\n$$P(X_{n+1} = j \\mid X_n = i, X_{n-1} = i_{n-1}, \\dots, X_0 = i_0) = P(X_{n+1} = j \\mid X_n = i).$$\n\nThis is the **Markov property** (absence of memory): once the present $X_n=i$ is known, the past $X_0,\\dots,X_{n-1}$ gives no further information about the future $X_{n+1}$. If the right-hand side does not depend on $n$, the chain is **time-homogeneous** and we write $p_{ij}=P(X_{n+1}=j\\mid X_n=i)$; everything here assumes time-homogeneity.\n\nArranging the numbers $p_{ij}$ into $P=(p_{ij})_{i,j\\in S}$ gives the **transition matrix**, which is **row-stochastic**:\n\n$$p_{ij}\\ge 0, \\qquad \\sum_{j\\in S} p_{ij} = 1 \\quad (\\forall i\\in S).$$\n\nThroughout this library we use **row vectors**: the initial distribution is a row vector $\\mu$ with $\\mu_i=P(X_0=i)$, and the law of $X_n$ is $\\mu_n=\\mu P^n$. (Some textbooks use column vectors and column-stochastic matrices; the formulas are then transposed but identical in meaning.)\n\nThe law of the chain is completely determined by $(\\mu,P)$: every finite-dimensional distribution is a product of one-step probabilities,\n\n$$P(X_0=i_0,\\dots,X_n=i_n)=\\mu_{i_0}p_{i_0i_1}\\cdots p_{i_{n-1}i_n}.$$\n\nRandom walks, gambler's ruin, queues, PageRank and MCMC are all Markov chains.",
+    "formulas": [
+      {
+        "latex": "P(X_{n+1} = j \\mid X_n = i, X_{n-1} = i_{n-1}, \\dots, X_0 = i_0) = P(X_{n+1} = j \\mid X_n = i)",
+        "note": "马尔可夫性（无后效性）：给定现在，将来与过去条件独立，只依赖当前状态。",
+        "noteEn": "The Markov property: given the present, the future is conditionally independent of the past."
+      },
+      {
+        "latex": "p_{ij} \\ge 0, \\qquad \\sum_{j \\in S} p_{ij} = 1",
+        "note": "转移矩阵是行随机矩阵：元素非负，且**每一行之和为 1**（本书用行约定）。",
+        "noteEn": "The transition matrix is row-stochastic: non-negative entries with **every row summing to 1**."
+      },
+      {
+        "latex": "\\text{时齐：} \\quad p_{ij} = P(X_{n+1} = j \\mid X_n = i) \\ \\text{与 } n \\text{ 无关}",
+        "note": "时齐性：一步转移规则不随时刻改变，因此 $p_{ij}$ 可以不带时间下标。",
+        "noteEn": "Time-homogeneity: the one-step rule does not change with time."
+      },
+      {
+        "latex": "P(X_0 = i_0, X_1 = i_1, \\dots, X_n = i_n) = \\mu_{i_0} p_{i_0 i_1} p_{i_1 i_2} \\cdots p_{i_{n-1} i_n}",
+        "note": "有限维分布：由马尔可夫性，轨道概率是一串一步概率的乘积。",
+        "noteEn": "Finite-dimensional distributions factor into a product of one-step probabilities."
+      },
+      {
+        "latex": "p^{(n)}_{ij} = (P^n)_{ij}, \\qquad \\mu_n = \\mu_0 P^n",
+        "note": "$n$ 步转移概率由矩阵幂给出，具体推导见查普曼–柯尔莫哥洛夫方程。",
+        "noteEn": "The $n$-step transition probability is the corresponding entry of the matrix power."
+      }
+    ],
+    "expression": {
+      "text": "p_{ij} = P(X_{n+1} = j | X_n = i)，行随机：Σ_j p_{ij} = 1",
+      "symbol": "p_{ij}",
+      "note": "一步转移概率；本库用行向量约定，分布演化写成 μ_n = μ_0 P^n。",
+      "noteEn": "One-step transition probability; with the row-vector convention the law evolves as μ_n = μ_0 P^n."
+    },
+    "properties": [
+      "马尔可夫性只要求「给定现在，将来与过去条件独立」，**并不要求各个 $X_n$ 相互独立**；恰恰相反，链的相邻状态通常是强相关的。",
+      "转移矩阵 $P$ 每行和为 1；两个行随机矩阵的乘积仍是行随机矩阵，所以每个 $P^n$ 都行随机，即 $\\sum_j p^{(n)}_{ij} = 1$ 对一切 $n$ 成立。",
+      "「时齐」指转移概率不依赖时刻 $n$；非时齐链要写成 $p_{ij}(n)$，本库的结论都默认时齐。",
+      "独立同分布序列是马尔可夫链（此时 $P$ 的每一行都相同）；反过来，只要某个状态满足 $p_{ii} = 1$，恒等于该状态的确定性序列也是马尔可夫链。",
+      "互通关系把状态空间划分成互不相交的**互通类**，只有一个类时称链**不可约**；同一类内所有状态的常返性与周期性完全一致（见状态分类与常返性）。"
+    ],
+    "propertiesEn": [
+      "The Markov property says the future is conditionally independent of the past given the present; it does **not** require the $X_n$ to be independent — neighbouring states are typically strongly dependent.",
+      "Every row of $P$ sums to 1, and a product of row-stochastic matrices is row-stochastic, so every $P^n$ is row-stochastic: $\\sum_j p^{(n)}_{ij}=1$ for all $n$.",
+      "Time-homogeneity means $p_{ij}$ does not depend on $n$; a non-homogeneous chain needs $p_{ij}(n)$.",
+      "An i.i.d. sequence is a Markov chain (all rows of $P$ coincide); conversely, whenever $p_{ii}=1$ for some state $i$, the deterministic sequence $X_n\\equiv i$ is a Markov chain.",
+      "Communication partitions the state space into disjoint **communicating classes**; a single class means the chain is **irreducible**, and recurrence and periodicity are class properties."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.5,
+        9.5
+      ],
+      "yRange": [
+        -2.5,
+        9.5
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": 4,
+          "cy": 6.6,
+          "r": 0.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "circle",
+          "cx": 0.8,
+          "cy": 1.4,
+          "r": 0.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "circle",
+          "cx": 7.2,
+          "cy": 1.4,
+          "r": 0.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "circle",
+          "cx": 4,
+          "cy": 8.51,
+          "r": 0.4,
+          "color": "#ffd166"
+        },
+        {
+          "type": "circle",
+          "cx": 0.12,
+          "cy": 0.05,
+          "r": 0.4,
+          "color": "#ffd166"
+        },
+        {
+          "type": "circle",
+          "cx": 7.88,
+          "cy": 0.05,
+          "r": 0.4,
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.6,
+            5.95
+          ],
+          "to": [
+            1.2,
+            2.05
+          ],
+          "arrow": true,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            6.8,
+            2.05
+          ],
+          "to": [
+            4.4,
+            5.95
+          ],
+          "arrow": true,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.35,
+            1.4
+          ],
+          "to": [
+            6.65,
+            1.4
+          ],
+          "arrow": true,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            4,
+            6.6
+          ],
+          "text": "1",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.8,
+            1.4
+          ],
+          "text": "2",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            7.2,
+            1.4
+          ],
+          "text": "3",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            4,
+            8.51
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.12,
+            0.05
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            7.88,
+            0.05
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.85,
+            4.15
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            6.15,
+            4.15
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.0,
+            1.85
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.0,
+            -2.0
+          ],
+          "text": "p₁₂ = p₂₃ = p₃₁ = 1/2；另 1/2 原地不动（自环）",
+          "color": "rgba(200,214,255,0.9)"
+        }
+      ],
+      "title": "三状态马尔可夫链的转移图"
+    },
+    "examples": [
+      {
+        "problem": "三状态链（下图）：$S = \\{1, 2, 3\\}$，$1 \\to 2$、$2 \\to 3$、$3 \\to 1$ 各以概率 $\\frac12$ 发生，剩下 $\\frac12$ 的概率原地不动，即\n$$P = \\begin{pmatrix} \\frac12 & \\frac12 & 0 \\\\ 0 & \\frac12 & \\frac12 \\\\ \\frac12 & 0 & \\frac12 \\end{pmatrix}.$$\n(a) 验证 $P$ 是行随机矩阵；(b) 求从状态 1 出发 3 步后到达状态 2 的概率 $p^{(3)}_{12}$；(c) 若 $X_0$ 在三个状态上均匀分布，求 $X_1$ 的分布。",
+        "solution": "(a) 三行之和分别为 $\\frac12 + \\frac12 + 0 = 1$、$0 + \\frac12 + \\frac12 = 1$、$\\frac12 + 0 + \\frac12 = 1$，元素都非负，故 $P$ 行随机。\n(b) 先算 $P^2$（由查普曼–柯尔莫哥洛夫方程，$(P^2)_{ij} = \\sum_k p_{ik}p_{kj}$）：\n$$(P^2)_{11} = \\tfrac12 \\cdot \\tfrac12 + \\tfrac12 \\cdot 0 + 0 \\cdot \\tfrac12 = \\tfrac14, \\quad (P^2)_{12} = \\tfrac12 \\cdot \\tfrac12 + \\tfrac12 \\cdot \\tfrac12 + 0 = \\tfrac12, \\quad (P^2)_{13} = 0 + \\tfrac12 \\cdot \\tfrac12 + 0 = \\tfrac14.$$\n再由 $P^3 = P^2 P$：$p^{(3)}_{12} = \\sum_k (P^2)_{1k} p_{k2} = \\frac14 \\cdot \\frac12 + \\frac12 \\cdot \\frac12 + \\frac14 \\cdot 0 = \\frac18 + \\frac14 = \\frac38$。\n也可直接枚举 3 步路径：$1 \\to 1 \\to 1 \\to 2$、$1 \\to 1 \\to 2 \\to 2$、$1 \\to 2 \\to 2 \\to 2$ 分别贡献 $\\frac18, \\frac18, \\frac18$，合计 $\\frac38$。\n(c) $\\mu = (\\frac13, \\frac13, \\frac13)$ 时 $\\mu P = \\mu$，因为 $P$ 的每一**列**之和也都等于 1（$P$ 是双随机矩阵），故 $X_1$ 仍均匀分布在 $\\{1,2,3\\}$ 上。"
+      },
+      {
+        "problem": "赌徒带着 $k$ 元开始下注，每局以概率 $p$ 赢 1 元、以概率 $q = 1 - p$ 输 1 元，资金达到 $N$ 元或 0 元就停止。说明资金过程 $\\{X_n\\}$ 是马尔可夫链，并写出转移矩阵。",
+        "solution": "取状态空间 $S = \\{0, 1, \\dots, N\\}$，$X_n$ 为第 $n$ 局结束时的资金。每局结果独立，所以给定 $X_n = i$（$1 \\le i \\le N-1$）后，$X_{n+1}$ 只能取 $i+1$（概率 $p$）或 $i-1$（概率 $q$），与 $n$ 及更早的历史无关——马氏性成立且时齐。两端是吸收态：$p_{00} = p_{NN} = 1$。转移矩阵是三对角的：$p_{i, i+1} = p$、$p_{i, i-1} = q$（$1 \\le i \\le N-1$），其余元素为 0，第 0 行为 $(1, 0, \\dots, 0)$，第 $N$ 行为 $(0, \\dots, 0, 1)$。这是典型的生灭链：$\\{0\\}$ 与 $\\{N\\}$ 是两个常返类（吸收态），中间状态全是瞬态。"
+      }
+    ],
+    "tags": [
+      "马尔可夫链",
+      "转移矩阵",
+      "无后效性",
+      "行随机矩阵",
+      "随机过程"
+    ],
+    "links": [
+      "chapman-kolmogorov",
+      "markov-chain-classification",
+      "stationary-distribution",
+      "birth-death-process",
+      "stochastic-process"
+    ]
+  },
+  {
+    "id": "chapman-kolmogorov",
+    "title": "查普曼–柯尔莫哥洛夫方程与转移矩阵",
+    "titleEn": "The Chapman–Kolmogorov Equations",
+    "branch": "stochastic",
+    "level": 4,
+    "summary": "多步转移概率由一步转移矩阵的幂给出，其关键是查普曼–柯尔莫哥洛夫方程 $P^{(m+n)} = P^{(m)}P^{(n)}$——按中间时刻所在状态求和。",
+    "summaryEn": "Multi-step transition probabilities are powers of the one-step matrix; the reason is the Chapman–Kolmogorov equation $P^{(m+n)}=P^{(m)}P^{(n)}$, which sums over the state at the intermediate time.",
+    "definition": "记 $n$ 步转移概率为 $p^{(n)}_{ij} = P(X_n = j \\mid X_0 = i)$，矩阵记为 $P^{(n)} = (p^{(n)}_{ij})$。**查普曼–柯尔莫哥洛夫方程**（简称 C-K 方程）把两段时间拼起来：\n\n$$P^{(m+n)} = P^{(m)} P^{(n)}, \\qquad \\text{即} \\qquad p^{(m+n)}_{ij} = \\sum_{k \\in S} p^{(m)}_{ik} \\, p^{(n)}_{kj}.$$\n\n**证明**只用两件工具：全概率公式与马尔可夫性。按「中间时刻 $m$ 落在哪个状态 $k$」分类：\n\n$$p^{(m+n)}_{ij} = \\sum_k P(X_{m+n} = j,\\ X_m = k \\mid X_0 = i) = \\sum_k P(X_m = k \\mid X_0 = i)\\, P(X_{m+n} = j \\mid X_m = k, X_0 = i).$$\n\n第二个因子由马尔可夫性只需知道 $X_m = k$，即 $P(X_{m+n} = j \\mid X_m = k) = P(X_n = j \\mid X_0 = k) = p^{(n)}_{kj}$（时齐性抹平了时间平移），代回即得 $\\sum_k p^{(m)}_{ik} p^{(n)}_{kj}$。注意右端对**中间状态 $k$ 求和**——这正是矩阵乘法的形状，所以 C-K 方程在矩阵层面就是 $P^{(m+n)} = P^{(m)}P^{(n)}$。\n\n取 $m = n = 1$ 得 $P^{(2)} = P^2$，逐次归纳得\n\n$$P^{(n)} = P^n \\quad (n \\ge 0), \\qquad P^{(0)} = I.$$\n\n于是初始分布为 $\\mu_0$ 时 $\\mu_n = \\mu_0 P^n$，且每个 $P^{(n)}$ 仍是行随机矩阵。C-K 方程是马尔可夫链理论的代数骨架：常返判据 $\\sum_n p^{(n)}_{ii}$、平稳分布、极限定理 $p^{(n)}_{ij} \\to \\pi_j$ 都从它出发。",
+    "definitionEn": "Write $p^{(n)}_{ij}=P(X_n=j\\mid X_0=i)$ for the $n$-step transition probability and $P^{(n)}=(p^{(n)}_{ij})$. The **Chapman–Kolmogorov equation** (C-K equation) splices two time intervals together:\n\n$$P^{(m+n)} = P^{(m)} P^{(n)}, \\qquad \\text{i.e.} \\qquad p^{(m+n)}_{ij} = \\sum_{k \\in S} p^{(m)}_{ik} \\, p^{(n)}_{kj}.$$\n\n**Proof.** Condition on the state $k$ occupied at the intermediate time $m$:\n\n$$p^{(m+n)}_{ij} = \\sum_k P(X_{m+n}=j,\\ X_m=k\\mid X_0=i) = \\sum_k P(X_m=k\\mid X_0=i)\\,P(X_{m+n}=j\\mid X_m=k,X_0=i).$$\n\nBy the Markov property the second factor only needs $X_m=k$, giving $P(X_{m+n}=j\\mid X_m=k)=P(X_n=j\\mid X_0=k)=p^{(n)}_{kj}$ by time-homogeneity. Hence $p^{(m+n)}_{ij}=\\sum_k p^{(m)}_{ik}p^{(n)}_{kj}$. Summing over the **intermediate state** is exactly matrix multiplication, so $P^{(m+n)}=P^{(m)}P^{(n)}$.\n\nTaking $m=n=1$ gives $P^{(2)}=P^2$ and induction gives\n\n$$P^{(n)} = P^n \\quad (n\\ge 0), \\qquad P^{(0)} = I.$$\n\nThus $\\mu_n=\\mu_0P^n$ and every $P^{(n)}$ is row-stochastic. The C-K equation is the algebraic backbone of the theory: recurrence criteria $\\sum_n p^{(n)}_{ii}$, stationary distributions and the limit theorem $p^{(n)}_{ij}\\to\\pi_j$ all follow from it.",
+    "formulas": [
+      {
+        "latex": "P^{(m+n)} = P^{(m)} P^{(n)}, \\qquad p^{(m+n)}_{ij} = \\sum_{k \\in S} p^{(m)}_{ik} \\, p^{(n)}_{kj}",
+        "note": "查普曼–柯尔莫哥洛夫方程：矩阵形式与元素形式，右端对中间状态 $k$ 求和。",
+        "noteEn": "The Chapman–Kolmogorov equation in matrix and entrywise form; the sum runs over the intermediate state."
+      },
+      {
+        "latex": "P^{(n)} = P^n, \\qquad P^{(0)} = I",
+        "note": "$n$ 步转移矩阵就是一步转移矩阵的 $n$ 次幂，是 C-K 方程的直接推论。",
+        "noteEn": "The $n$-step matrix is the $n$-th power of the one-step matrix."
+      },
+      {
+        "latex": "\\mu_n = \\mu_0 P^n, \\qquad P(X_n = j) = \\sum_i \\mu_i p^{(n)}_{ij}",
+        "note": "分布演化：初始分布（行向量）右乘 $P^n$。",
+        "noteEn": "Evolution of the law: the initial row vector is multiplied on the right by $P^n$."
+      },
+      {
+        "latex": "\\sum_{n=0}^{\\infty} p^{(n)}_{ii} = \\frac{1}{1 - f_{ii}}, \\qquad \\sum_{n=0}^{\\infty} p^{(n)}_{ij} = \\frac{f_{ij}}{1 - f_{jj}} \\ (i \\ne j)",
+        "note": "把访问次数按「第几次首次到达」分解，再用 C-K 方程即可得；左端发散还是收敛正是常返判据（$f_{jj} = 1$ 时右端为 $+\\infty$）。",
+        "noteEn": "Split visits by the index of the first hit and apply C-K; the divergence of the left side is exactly the recurrence criterion."
+      },
+      {
+        "latex": "P^{(n_1 + n_2 + \\dots + n_r)} = P^{(n_1)} P^{(n_2)} \\cdots P^{(n_r)}",
+        "note": "C-K 方程可以迭代到任意多个时段，本质是「时间可加性」。",
+        "noteEn": "The C-K equation iterates to any number of time intervals; it expresses additivity of time."
+      }
+    ],
+    "expression": {
+      "text": "P^{(m+n)} = P^{(m)} P^{(n)}，故 P^{(n)} = P^n",
+      "symbol": "P^{(n)}",
+      "note": "多步转移概率矩阵；C-K 方程说它构成一个矩阵半群（离散时间版）。",
+      "noteEn": "Multi-step transition matrix; the C-K equation makes it a matrix semigroup."
+    },
+    "properties": [
+      "C-K 方程只依赖两件事：按中间状态分类（全概率公式）与马尔可夫性（可以忘掉更早的历史）；时齐性再把 $p^{(n)}_{kj}$ 与具体时刻解耦。",
+      "由 $P^{(n)} = P^n$，算多步转移概率变成算矩阵幂；$P^n$ 仍是行随机矩阵，因此 $\\sum_j p^{(n)}_{ij} = 1$ 对一切 $n$ 成立。",
+      "C-K 方程与初始分布无关，是转移矩阵自身的性质；非时齐链要写成 $P^{(m, n)}$，此时 C-K 方程读作 $P^{(m, n)} = P^{(m, k)} P^{(k, n)}$（$m \\le k \\le n$）。",
+      "把访问次数按首次到达时刻分解，可得 $\\sum_{n \\ge 0} p^{(n)}_{ii} = \\frac{1}{1 - f_{ii}}$：级数收敛 $\\iff$ 瞬态，发散 $\\iff$ 常返，这是常返判据的来源。",
+      "连续时间版本是半群方程 $P(t + s) = P(t)P(s)$，由它取极限即得 Kolmogorov 前进/后退方程（见连续时间马尔可夫链）。"
+    ],
+    "propertiesEn": [
+      "The C-K equation uses only conditioning on the intermediate state (total probability) plus the Markov property; time-homogeneity decouples $p^{(n)}_{kj}$ from the actual time.",
+      "Since $P^{(n)}=P^n$, computing multi-step probabilities becomes matrix exponentiation; every $P^n$ is row-stochastic.",
+      "C-K is a property of the transition matrices alone; for non-homogeneous chains one writes $P^{(m,n)}=P^{(m,k)}P^{(k,n)}$.",
+      "Splitting visits at their first hitting time gives $\\sum_{n\\ge0}p^{(n)}_{ii}=\\frac{1}{1-f_{ii}}$, the source of the recurrence criterion.",
+      "The continuous-time analogue is the semigroup equation $P(t+s)=P(t)P(s)$, whose limit yields the Kolmogorov forward and backward equations."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/3 + (2/3)*(1/4)^x",
+          "color": "#4cc9f0",
+          "label": "p⁽ⁿ⁾₁₁ = 1/3 + (2/3)·(1/4)ⁿ → 1/3"
+        },
+        {
+          "expr": "(2/3)*(1 - (1/4)^x)",
+          "color": "#ff6b9d",
+          "label": "p⁽ⁿ⁾₁₂ = 2/3 − (2/3)·(1/4)ⁿ → 2/3"
+        },
+        {
+          "expr": "1/3",
+          "color": "#ffd166",
+          "label": "π₁ = 1/3"
+        },
+        {
+          "expr": "2/3",
+          "color": "#06d6a0",
+          "label": "π₂ = 2/3"
+        }
+      ],
+      "xRange": [
+        0,
+        12
+      ],
+      "yRange": [
+        0,
+        1.05
+      ],
+      "title": "两状态链的 n 步转移概率趋于平稳分布"
+    },
+    "examples": [
+      {
+        "problem": "取 $P = \\begin{pmatrix} \\frac12 & \\frac12 & 0 \\\\ 0 & \\frac12 & \\frac12 \\\\ \\frac12 & 0 & \\frac12 \\end{pmatrix}$。(a) 用 $P^{(2)} = P \\cdot P$ 算出 $P^{(2)}$；(b) 分别用 $P^{(3)} = P^{(2)}P$ 与 $P^{(3)} = PP^{(2)}$ 计算 $p^{(3)}_{12}$，验证 C-K 方程给出的两种算法一致。",
+        "solution": "(a) 逐元素按 C-K 方程 $p^{(2)}_{ij} = \\sum_k p_{ik} p_{kj}$ 计算（行乘列）：\n$$P^{(2)} = \\begin{pmatrix} \\frac14 & \\frac12 & \\frac14 \\\\ \\frac14 & \\frac14 & \\frac12 \\\\ \\frac12 & \\frac14 & \\frac14 \\end{pmatrix}.$$\n例如 $(P^2)_{12} = \\frac12 \\cdot \\frac12 + \\frac12 \\cdot \\frac12 + 0 \\cdot 0 = \\frac12$，$(P^2)_{11} = \\frac12 \\cdot \\frac12 + \\frac12 \\cdot 0 + 0 \\cdot \\frac12 = \\frac14$。\n(b) 先走 2 步再走 1 步：$p^{(3)}_{12} = \\sum_k (P^2)_{1k} p_{k2} = \\frac14 \\cdot \\frac12 + \\frac12 \\cdot \\frac12 + \\frac14 \\cdot 0 = \\frac38$。\n先走 1 步再走 2 步：$p^{(3)}_{12} = \\sum_k p_{1k} (P^2)_{k2} = \\frac12 \\cdot \\frac12 + \\frac12 \\cdot \\frac14 + 0 \\cdot \\frac14 = \\frac14 + \\frac18 = \\frac38$。\n两者相同，因为 $P^{(2)}P = PP^{(2)} = P^3$，这正是 C-K 方程 $P^{(m+n)} = P^{(m)}P^{(n)}$ 的内容。"
+      },
+      {
+        "problem": "两状态链 $P = \\begin{pmatrix} 1 - a & a \\\\ b & 1 - b \\end{pmatrix}$（$0 < a, b < 1$）：求 $p^{(n)}_{11}$ 的闭式，并说明它趋于平稳概率 $\\pi_1$。",
+        "solution": "$P$ 的特征值为 $\\lambda_1 = 1$（右特征向量 $(1, 1)^{\\mathsf T}$）与 $\\lambda_2 = 1 - a - b$（因 $0 < a + b < 2$，有 $|\\lambda_2| < 1$）。解 $\\pi = \\pi P$ 得 $\\pi_1 = \\frac{b}{a + b}$。把 $\\Pi$ 记为两行都是 $\\pi$ 的方阵，由 $P\\Pi = \\Pi P = \\Pi$ 与谱分解 $P = \\Pi + \\lambda_2 (I - \\Pi)$ 得\n$$P^n = \\Pi + \\lambda_2^n (I - \\Pi), \\qquad \\text{于是} \\qquad p^{(n)}_{11} = \\pi_1 + \\lambda_2^n (1 - \\pi_1) = \\frac{b}{a+b} + \\frac{a}{a+b}(1 - a - b)^n \\longrightarrow \\frac{b}{a+b} = \\pi_1.$$\n取 $a = \\frac12,\\ b = \\frac14$：$\\pi_1 = \\frac13$、$\\lambda_2 = \\frac14$，于是 $p^{(n)}_{11} = \\frac13 + \\frac23 \\left(\\frac14\\right)^n$，$p^{(n)}_{12} = 1 - p^{(n)}_{11} = \\frac23\\left(1 - \\left(\\frac14\\right)^n\\right)$，正是下图中的两条曲线。"
+      }
+    ],
+    "tags": [
+      "查普曼–柯尔莫哥洛夫",
+      "转移矩阵",
+      "矩阵幂",
+      "半群"
+    ],
+    "links": [
+      "markov-chain",
+      "markov-chain-classification",
+      "stationary-distribution",
+      "continuous-time-markov"
+    ]
+  },
+  {
+    "id": "markov-chain-classification",
+    "title": "状态分类与常返性",
+    "titleEn": "Classification of States and Recurrence",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "按「能否互相到达」把状态分成互通类；状态若从自身出发必返回（$f_{ii} = 1$）就是常返，否则是瞬态，常返再按平均返回时间有限与否分为正常返与零常返。",
+    "summaryEn": "States are grouped into communicating classes; a state is recurrent when it returns to itself with probability one and transient otherwise, and recurrence splits into positive and null according to whether the mean return time is finite.",
+    "definition": "设链时齐、状态空间 $S$ 可数。称 $i$ **可达** $j$，记 $i \\to j$，若存在 $n \\ge 0$ 使 $p^{(n)}_{ij} > 0$（约定 $p^{(0)}_{ij} = \\delta_{ij}$，故每个状态可达自身）。称 $i$ 与 $j$ **互通**，记 $i \\leftrightarrow j$，若 $i \\to j$ 且 $j \\to i$。互通是**等价关系**：自反（$n = 0$）、对称（定义本身对称）、传递——若 $i \\to j$ 用 $m$ 步、$j \\to k$ 用 $n$ 步，由查普曼–柯尔莫哥洛夫方程\n\n$$p^{(m+n)}_{ik} = \\sum_{l} p^{(m)}_{il} p^{(n)}_{lk} \\ge p^{(m)}_{ij} p^{(n)}_{jk} > 0,$$\n\n故 $i \\to k$。于是状态空间被**划分成互不相交的互通类**；只含一个类时称链**不可约**。\n\n**首次到达概率**：记\n\n$$f^{(n)}_{ij} = P(X_n = j,\\ X_k \\ne j \\ (1 \\le k < n) \\mid X_0 = i), \\qquad f_{ij} = \\sum_{n \\ge 1} f^{(n)}_{ij} \\le 1,$$\n\n前者是从 $i$ 出发在第 $n$ 步**首次**踩到 $j$ 的概率，后者是「迟早会到 $j$」的概率。取 $j = i$ 便得到状态分类：\n\n- **常返**（recurrent）：$f_{ii} = 1$。此时可证以概率 1 无穷多次返回 $i$；\n- **瞬态**（transient）：$f_{ii} < 1$，即用正概率一去不返。\n\n常返性有一个等价的级数判据：\n\n$$f_{ii} = 1 \\iff \\sum_{n \\ge 0} p^{(n)}_{ii} = \\infty, \\qquad \\text{且} \\qquad \\sum_{n \\ge 0} p^{(n)}_{ii} = \\frac{1}{1 - f_{ii}}.$$\n\n也就是说，常返状态被访问无穷多次（期望次数发散），瞬态状态的期望访问次数有限。\n\n常返还分两档，但**必须先有常返**（$f_{ii}=1$）才能分档：在 $f_{ii}=1$ 的前提下定义**平均返回时间** $\\mu_i = \\sum_{n \\ge 1} n f^{(n)}_{ii} \\in [1, \\infty]$（常返时 $\\mu_i \\ge 1$），则 $\\mu_i < \\infty$ 时称 $i$ **正常返**，$\\mu_i = \\infty$ 时称 $i$ **零常返**。注意瞬态状态（$f_{ii}<1$）不能套用这个定义——此时 $\\sum n f^{(n)}_{ii}$ 仍可能是**有限数**，据此判为「正常返」是错的。三种状态的直观：瞬态——迟早走掉且永不回来；零常返——一定回来，但平均要等无穷久；正常返——一定回来，且平均返回时间有限。\n\n**周期**：$d(i) = \\gcd\\{n \\ge 1 : p^{(n)}_{ii} > 0\\}$，$d(i) = 1$ 称 $i$ **非周期**。常返性、正常返性与周期都是**类性质**：同一互通类内所有状态完全一致，因此可以说「常返类」「瞬态类」「周期为 $d$ 的类」。不可约、非周期、正常返的链称为**遍历链**。",
+    "definitionEn": "Assume a time-homogeneous chain on a countable $S$. State $j$ is **reachable** from $i$, written $i\\to j$, if $p^{(n)}_{ij}>0$ for some $n\\ge0$ (with $p^{(0)}_{ij}=\\delta_{ij}$). States $i,j$ **communicate** ($i\\leftrightarrow j$) if each is reachable from the other. Communication is an **equivalence relation**: reflexive, symmetric, and transitive, since for $i\\to j$ in $m$ steps and $j\\to k$ in $n$ steps the Chapman–Kolmogorov equation gives\n\n$$p^{(m+n)}_{ik} = \\sum_{l} p^{(m)}_{il}p^{(n)}_{lk} \\ge p^{(m)}_{ij}p^{(n)}_{jk} > 0.$$\n\nHence the state space splits into disjoint **communicating classes**; one single class means the chain is **irreducible**.\n\n**First-passage probabilities**: with\n\n$$f^{(n)}_{ij} = P(X_n=j,\\ X_k\\ne j\\ (1\\le k<n)\\mid X_0=i), \\qquad f_{ij} = \\sum_{n\\ge1} f^{(n)}_{ij}\\le1,$$\n\nthe state is **recurrent** if $f_{ii}=1$ (returning infinitely often with probability one) and **transient** if $f_{ii}<1$. An equivalent series criterion is\n\n$$f_{ii}=1 \\iff \\sum_{n\\ge0} p^{(n)}_{ii} = \\infty, \\qquad \\sum_{n\\ge0} p^{(n)}_{ii} = \\frac{1}{1-f_{ii}}.$$\n\nRecurrence splits further. With the **mean return time** $\\mu_i=\\sum_{n\\ge1} n f^{(n)}_{ii}\\in(0,\\infty]$, the state is **positive recurrent** when $\\mu_i<\\infty$ and **null recurrent** when $\\mu_i=\\infty$. The **period** is $d(i)=\\gcd\\{n\\ge1:p^{(n)}_{ii}>0\\}$; $d(i)=1$ means **aperiodic**. Recurrence, positive recurrence and period are **class properties**. An irreducible, aperiodic, positive recurrent chain is called **ergodic**.",
+    "formulas": [
+      {
+        "latex": "i \\to j \\iff \\exists n \\ge 0:\\ p^{(n)}_{ij} > 0; \\qquad i \\leftrightarrow j \\iff i \\to j \\ \\text{且} \\ j \\to i",
+        "note": "可达与互通的定义；互通由传递性把状态空间划分成互通类。",
+        "noteEn": "Reachability and communication; transitivity yields a partition into classes."
+      },
+      {
+        "latex": "f^{(n)}_{ij} = P(X_n = j,\\ X_k \\ne j\\ (1 \\le k < n) \\mid X_0 = i), \\qquad f_{ij} = \\sum_{n \\ge 1} f^{(n)}_{ij} \\le 1",
+        "note": "首次到达概率：第 $n$ 步首次踩到 $j$ 的概率，以及对 $n$ 求和得到「迟早到达」的概率。",
+        "noteEn": "First-passage probabilities and the probability of ever hitting $j$."
+      },
+      {
+        "latex": "f_{ii} = 1 \\iff \\sum_{n=0}^{\\infty} p^{(n)}_{ii} = \\infty, \\qquad \\sum_{n=0}^{\\infty} p^{(n)}_{ii} = \\frac{1}{1 - f_{ii}}",
+        "note": "常返判据：$f_{ii} = 1$ 等价于 $i$ 被访问无穷多次；$f_{ii} < 1$ 时为瞬态，期望访问次数为 $\\frac{1}{1 - f_{ii}}$。",
+        "noteEn": "Recurrence criterion: $f_{ii}=1$ iff $i$ is visited infinitely often; if $f_{ii}<1$ the expected number of visits is $1/(1-f_{ii})$."
+      },
+      {
+        "latex": "\\mu_i = \\sum_{n \\ge 1} n\\, f^{(n)}_{ii}; \\qquad \\mu_i < \\infty \\Leftrightarrow \\text{正常返}, \\qquad \\mu_i = \\infty \\Leftrightarrow \\text{零常返}",
+        "note": "平均返回时间（可以为 $+\\infty$）：有限即正常返，无限即零常返；两者都要求 $f_{ii} = 1$。",
+        "noteEn": "Mean return time (possibly infinite): finite means positive recurrent, infinite means null recurrent."
+      },
+      {
+        "latex": "d(i) = \\gcd\\{n \\ge 1 : p^{(n)}_{ii} > 0\\}; \\qquad d(i) = 1 \\ \\text{非周期}; \\qquad \\text{不可约} + \\text{非周期} + \\text{正常返} = \\text{遍历}",
+        "note": "周期的定义与遍历链的构成条件；周期是类性质。",
+        "noteEn": "Period, aperiodicity, and the definition of an ergodic chain."
+      }
+    ],
+    "expression": {
+      "text": "f_{ii} = 1 ⇔ 常返；μ_i = Σ n f^(n)_{ii} < ∞ ⇔ 正常返",
+      "symbol": "f_{ij}",
+      "note": "首次到达概率是分类的工具：先看「是否一定回来」，再看「平均回来多快」。",
+      "noteEn": "First-passage probabilities classify states: first whether return is certain, then how fast it happens on average."
+    },
+    "properties": [
+      "互通是等价关系，因此状态空间被划分成互不相交的互通类；同一类内常返/瞬态、正常返/零常返、周期全部一致，所以这些性质可以冠在「类」上。",
+      "有限状态链一定含有常返状态（不可能全部瞬态）；有限链中一个互通类是常返类 $\\iff$ 它是**闭**的（从类内不能转移到类外）。因此有限不可约链必正常返，**零常返只能出现在无限状态空间**。",
+      "不可约时「存在平稳分布」$\\iff$ 「全部状态正常返」，此时 $\\pi_i = \\frac{1}{\\mu_i} > 0$；零常返与瞬态情形不存在平稳分布。",
+      "一维对称随机游走（$S = \\mathbb{Z}$，左右各 $\\frac12$）常返但零常返；带漂移 $p \\ne q$ 时是瞬态；有限连通图上的不可约随机游走必正常返。周期方面：二部图上随机游走周期为 2，加一个自环即非周期。",
+      "极限定理需要非周期：若不可约、正常返但周期 $d \\ge 2$，则 $p^{(n)}_{ij}$ 不收敛，只沿 $n = kd$ 收敛到 $d \\pi_j$；因此周期链「有平稳分布但没有极限分布」。"
+    ],
+    "propertiesEn": [
+      "Communication is an equivalence relation, so the state space splits into disjoint classes, and recurrence, positive/null recurrence and period are uniform inside a class.",
+      "A finite chain always has a recurrent state; in a finite chain a class is recurrent iff it is **closed**. Hence every finite irreducible chain is positive recurrent, and null recurrence can only occur on infinite state spaces.",
+      "For an irreducible chain, a stationary distribution exists iff all states are positive recurrent, with $\\pi_i=1/\\mu_i>0$; null recurrent and transient chains have none.",
+      "Symmetric simple random walk on $\\mathbb{Z}$ is null recurrent, a drifted walk is transient, and irreducible random walks on finite connected graphs are positive recurrent.",
+      "The limit theorem needs aperiodicity: if the chain is irreducible and positive recurrent but has period $d\\ge2$, then $p^{(n)}_{ij}$ does not converge, only $p^{(kd)}_{ij}\\to d\\pi_j$."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.8,
+        11.0
+      ],
+      "yRange": [
+        -2.6,
+        7.0
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": 0.6,
+          "cy": 5.2,
+          "r": 0.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "circle",
+          "cx": 3.6,
+          "cy": 5.2,
+          "r": 0.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "circle",
+          "cx": 8.4,
+          "cy": 5.2,
+          "r": 0.5,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "circle",
+          "cx": 8.4,
+          "cy": 1.6,
+          "r": 0.5,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "circle",
+          "cx": 3.6,
+          "cy": 1.6,
+          "r": 0.5,
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "circle",
+          "cx": 3.6,
+          "cy": 0.29,
+          "r": 0.4,
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.15,
+            5.4
+          ],
+          "to": [
+            3.05,
+            5.4
+          ],
+          "arrow": true,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.05,
+            5.0
+          ],
+          "to": [
+            1.15,
+            5.0
+          ],
+          "arrow": true,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.15,
+            5.35
+          ],
+          "to": [
+            7.85,
+            5.35
+          ],
+          "arrow": true,
+          "color": "#8ecae6"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.6,
+            4.55
+          ],
+          "to": [
+            3.6,
+            2.35
+          ],
+          "arrow": true,
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.2,
+            4.5
+          ],
+          "to": [
+            8.2,
+            2.3
+          ],
+          "arrow": true,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.6,
+            2.3
+          ],
+          "to": [
+            8.6,
+            4.5
+          ],
+          "arrow": true,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.6,
+            5.2
+          ],
+          "text": "1",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.6,
+            5.2
+          ],
+          "text": "2",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.4,
+            5.2
+          ],
+          "text": "3",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.4,
+            1.6
+          ],
+          "text": "4",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.6,
+            1.6
+          ],
+          "text": "5",
+          "color": "#ffffff"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.1,
+            5.68
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.1,
+            4.72
+          ],
+          "text": "1/5"
+        },
+        {
+          "type": "label",
+          "at": [
+            6.0,
+            5.62
+          ],
+          "text": "2/5"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.05,
+            3.45
+          ],
+          "text": "2/5"
+        },
+        {
+          "type": "label",
+          "at": [
+            7.72,
+            3.45
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            9.1,
+            3.45
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.6,
+            0.29
+          ],
+          "text": "1"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.9,
+            6.4
+          ],
+          "text": "瞬态类 {1, 2}",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.4,
+            6.4
+          ],
+          "text": "常返类 {3, 4}（闭）",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.6,
+            -0.9
+          ],
+          "text": "常返类 {5}（吸收）",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.1,
+            -2.0
+          ],
+          "text": "瞬态类迟早泄漏到闭常返类；闭类内互达",
+          "color": "rgba(200,214,255,0.9)"
+        }
+      ],
+      "title": "瞬态类泄漏到闭常返类"
+    },
+    "examples": [
+      {
+        "problem": "判断链 $P = \\begin{pmatrix} \\frac12 & \\frac12 & 0 \\\\ \\frac12 & 0 & \\frac12 \\\\ 0 & 0 & 1 \\end{pmatrix}$（状态 3 吸收）中各状态的类型。",
+        "solution": "状态 3 满足 $p_{33} = 1$，是吸收态：$f_{33} = 1$、$\\mu_3 = 1$，故 3 正常返，$\\{3\\}$ 是闭常返类。从 3 出发永远回不到 1、2，而 1、2 都能到达 3，所以互通类是 $\\{1, 2\\}$ 与 $\\{3\\}$。\n判断 $\\{1,2\\}$：它不闭（$p_{23} = \\frac12$ 会逃出去），故为瞬态类。也可以直接算首次返回概率：从 1 出发，$f_{11} = \\frac12 + \\frac12 f_{21}$（一步就返回的概率为 $\\frac12$，或先到 2 再从 2 想办法回 1）；而从 2 出发 $f_{21} = \\frac12$（$\\frac12$ 直接到 1，$\\frac12$ 被 3 吸收），于是 $f_{11} = \\frac12 + \\frac14 = \\frac34 < 1$，瞬态。同理 $f_{22} = \\frac12 f_{12}$，而 $f_{12}$ 满足 $f_{12} = \\frac12 + \\frac12 f_{12}$（$\\frac12$ 一步到 2，$\\frac12$ 在原地重来），得 $f_{12} = 1$，所以 $f_{22} = \\frac12 < 1$，也瞬态。结论：状态 1、2 瞬态，状态 3 正常返。"
+      },
+      {
+        "problem": "证明一维对称随机游走（$S = \\mathbb{Z}$，$p_{i, i+1} = p_{i, i-1} = \\frac12$）是零常返。",
+        "solution": "偶数步返回公式（$2n$ 步中必须恰好 $n$ 步向右）\n$$p^{(2n)}_{00} = \\binom{2n}{n} 4^{-n} = \\frac{(2n)!}{(n!)^2 4^n} \\sim \\frac{1}{\\sqrt{\\pi n}} \\quad (n \\to \\infty, \\ \\text{由斯特林公式}), \\qquad p^{(2n+1)}_{00} = 0.$$\n因为 $\\sum_n n^{-1/2} = \\infty$，所以 $\\sum_{n \\ge 0} p^{(n)}_{00} = \\infty$，由常返判据得 0 常返，从而（由互通性）所有状态常返。\n再看平均返回时间：设 $T$ 为首次返回 0 的时刻，$\\mu_0 = E(T) = \\sum_{n \\ge 0} P(T > n)$，而 $P(T > n)$ 与 $n^{-1/2}$ 同阶，于是 $\\mu_0 = \\infty$。故 0 是**零常返**：链一定回到原点，但平均要等无穷久。附带地 $d(0) = 2$，链还是周期的。"
+      }
+    ],
+    "tags": [
+      "常返",
+      "瞬态",
+      "正常返",
+      "零常返",
+      "周期",
+      "互通类"
+    ],
+    "links": [
+      "markov-chain",
+      "chapman-kolmogorov",
+      "stationary-distribution",
+      "birth-death-process"
+    ]
+  },
+  {
+    "id": "stationary-distribution",
+    "title": "平稳分布与极限定理",
+    "titleEn": "Stationary Distributions and Limit Theorems",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "平稳分布 π 满足 π = πP，是分布演化的不动点；不可约且正常返时它们存在且唯一，不可约、非周期、正常返时 n 步转移概率收敛到 π。",
+    "summaryEn": "A stationary distribution satisfies π = πP, a fixed point of the law's evolution; it exists and is unique exactly for irreducible positive recurrent chains, and for aperiodic ones the n-step probabilities converge to it.",
+    "definition": "行向量 $\\pi = (\\pi_i)_{i \\in S}$ 称为链的**平稳分布**（不变分布），若\n\n$$\\pi_i \\ge 0, \\qquad \\sum_i \\pi_i = 1, \\qquad \\pi = \\pi P \\quad \\left(\\text{即 } \\pi_j = \\sum_i \\pi_i p_{ij}\\right).$$\n\n$\\pi$ 是「分布的不动点」：若 $X_0 \\sim \\pi$，则 $X_1$ 的分布是 $\\pi P = \\pi$，归纳得 $X_n \\sim \\pi$ 对一切 $n$ 成立，过程在分布意义下平稳（样本轨道仍在随机跳动）。计算上 $\\pi = \\pi P$ 等价于 $(P^{\\mathsf T} - I)\\pi^{\\mathsf T} = 0$：$\\pi$ 是 $P^{\\mathsf T}$ 关于特征值 1 的特征向量，再归一化即可。\n\n**存在唯一性**：平稳分布存在且唯一 $\\iff$ 链**不可约且正常返**；此时 $\\pi_i = 1/\\mu_i > 0$（$\\mu_i$ 为平均返回时间）。特别地，**有限状态 + 不可约 $\\Rightarrow$ 正常返**，所以有限不可约链总有唯一平稳分布——这是最常用的判别。瞬态与零常返状态在平稳分布下的概率为 0；可约链的平稳分布一般不唯一，它由各闭常返类的平稳分布做凸组合而成。\n\n**极限定理**：若链不可约、非周期且正常返（即遍历链），则\n\n$$\\lim_{n \\to \\infty} p^{(n)}_{ij} = \\pi_j \\quad (\\forall i, j \\in S), \\qquad P^n \\to \\Pi \\ (\\Pi \\text{ 的每一行都是 } \\pi),$$\n\n极限与出发状态 $i$ 无关：链「忘记」初始条件。收敛速度由特征值决定：若 $P$ 可对角化，则 $|p^{(n)}_{ij} - \\pi_j| = O(|\\lambda_2|^n)$，$\\lambda_2$ 是模第二大的特征值（一般情形（Jordan 块）可能多出一个 $n$ 的多项式因子）。\n\n**周期链没有极限分布**。例如路径 $1 - 2 - 3$ 上的随机游走 $P = \\begin{pmatrix} 0 & 1 & 0 \\\\ \\frac12 & 0 & \\frac12 \\\\ 0 & 1 & 0 \\end{pmatrix}$：它不可约、正常返，唯一平稳分布是 $\\pi = (\\frac14, \\frac12, \\frac14)$，但周期 $d = 2$，$p^{(n)}_{11}$ 在奇数 $n$ 时等于 0、在偶数 $n$ 时恒等于 $\\frac12$，所以 $\\lim_n p^{(n)}_{11}$ 不存在（偶数子列收敛到 $d\\pi_1 = \\frac12 \\ne \\pi_1 = \\frac14$）。可见「有唯一平稳分布」与「$n$ 步概率收敛」是两件事，后者还需非周期。\n\n**细致平衡（可逆）**：若存在概率分布 $\\pi$ 使\n\n$$\\pi_i p_{ij} = \\pi_j p_{ji} \\qquad (\\forall i, j \\in S),$$\n\n就称链对 $\\pi$ 满足**细致平衡**（这时链在平稳状态下时间可逆）。对 $i$ 求和：$\\sum_i \\pi_i p_{ij} = \\sum_i \\pi_j p_{ji} = \\pi_j \\sum_i p_{ji} = \\pi_j$，所以**细致平衡 $\\Rightarrow$ $\\pi$ 是平稳分布**。**反之不成立**：$\\pi = \\pi P$ 并不意味着细致平衡。例如有向环链 $P = \\begin{pmatrix} \\frac12 & \\frac12 & 0 \\\\ 0 & \\frac12 & \\frac12 \\\\ \\frac12 & 0 & \\frac12 \\end{pmatrix}$ 是双随机矩阵，$\\pi = (\\frac13, \\frac13, \\frac13)$ 满足 $\\pi P = \\pi$，但 $\\pi_1 p_{12} = \\frac16 \\ne \\pi_2 p_{21} = 0$，细致平衡被破坏——平稳状态下仍有绕环的净概率流。生灭链只要**存在**平稳分布就满足细致平衡（即不可约且正常返的生灭链可逆；如 M/M/1 需 $\\rho<1$）——见生灭过程。",
+    "definitionEn": "A row vector $\\pi$ is a **stationary** (invariant) distribution if $\\pi_i\\ge0$, $\\sum_i\\pi_i=1$ and $\\pi=\\pi P$. It is a fixed point of the evolution of the law: if $X_0\\sim\\pi$ then $X_1\\sim\\pi P=\\pi$, and by induction $X_n\\sim\\pi$ for every $n$.\n\n**Existence and uniqueness.** A stationary distribution exists and is unique iff the chain is **irreducible and positive recurrent**, in which case $\\pi_i=1/\\mu_i>0$ where $\\mu_i$ is the mean return time. In particular **finite + irreducible $\\Rightarrow$ positive recurrent**, the most frequently used criterion. Transient and null recurrent states get probability 0; reducible chains typically have infinitely many stationary distributions, built by convex combinations of the ones attached to the closed recurrent classes.\n\n**Limit theorem.** For an irreducible, aperiodic, positive recurrent (ergodic) chain,\n\n$$\\lim_{n\\to\\infty} p^{(n)}_{ij} = \\pi_j \\quad (\\forall i,j\\in S), \\qquad P^n\\to\\Pi,$$\n\nindependent of the starting state. Convergence is governed by the second largest eigenvalue in modulus: $|p^{(n)}_{ij}-\\pi_j|=O(|\\lambda_2|^n)$ when $P$ is diagonalizable.\n\n**Periodic chains have no limiting distribution.** For the walk on the path $1-2-3$, $P=\\begin{pmatrix}0&1&0\\\\1/2&0&1/2\\\\0&1&0\\end{pmatrix}$, the chain is irreducible and positive recurrent with unique $\\pi=(\\frac14,\\frac12,\\frac14)$, but $d=2$ and $p^{(n)}_{11}$ equals 0 for odd $n$ and $\\frac12$ for even $n$: the limit does not exist. Having a unique stationary distribution is therefore not the same as having a limiting distribution.\n\n**Detailed balance (reversibility).** If $\\pi_i p_{ij}=\\pi_j p_{ji}$ for all $i,j$, the chain satisfies **detailed balance** with respect to $\\pi$ (it is time reversible in stationarity). Summing over $i$ gives $\\sum_i\\pi_i p_{ij}=\\sum_i\\pi_j p_{ji}=\\pi_j\\sum_i p_{ji}=\\pi_j$, so detailed balance **implies** $\\pi=\\pi P$. The converse **fails**: the directed cycle $P=\\begin{pmatrix}1/2&1/2&0\\\\0&1/2&1/2\\\\1/2&0&1/2\\end{pmatrix}$ is doubly stochastic, so $\\pi=(\\frac13,\\frac13,\\frac13)$ is stationary, yet $\\pi_1p_{12}=\\frac16\\ne\\pi_2p_{21}=0$: a net probability current circulates even in stationarity. A birth–death chain that admits a stationary distribution is always reversible (so it must be irreducible and positive recurrent, e.g. M/M/1 with $\\rho<1$).",
+    "formulas": [
+      {
+        "latex": "\\pi = \\pi P, \\qquad \\pi_j = \\sum_i \\pi_i p_{ij}, \\qquad \\pi_i \\ge 0, \\ \\sum_i \\pi_i = 1",
+        "note": "平稳分布的定义：行向量左乘 $P$ 不变（与 $P^{(n)} = P^n$ 的行约定一致）。",
+        "noteEn": "Definition of a stationary distribution: the row vector is invariant under left multiplication by $P$."
+      },
+      {
+        "latex": "X_0 \\sim \\pi \\ \\Longrightarrow \\ X_n \\sim \\pi \\ (\\forall n \\ge 0), \\qquad \\pi P^n = \\pi",
+        "note": "平稳性就是分布不随时间改变：过程在分布意义下处于稳态。",
+        "noteEn": "Stationarity: the law does not change in time, $\\pi P^n=\\pi$ for all $n$."
+      },
+      {
+        "latex": "\\lim_{n \\to \\infty} p^{(n)}_{ij} = \\pi_j \\quad (\\text{不可约} + \\text{非周期} + \\text{正常返})",
+        "note": "遍历定理（极限形式）：极限与出发点无关，链忘记初始状态；周期性会破坏收敛。",
+        "noteEn": "Ergodic limit theorem: the limit is independent of the starting state; periodicity destroys convergence."
+      },
+      {
+        "latex": "\\pi_i p_{ij} = \\pi_j p_{ji} \\ (\\forall i,j) \\ \\Longrightarrow \\ \\pi = \\pi P \\quad (\\text{反之不成立})",
+        "note": "细致平衡（可逆）比平稳更强：它意味着链在平衡态下沿每条边的概率流两向相等，反之不成立。",
+        "noteEn": "Detailed balance implies stationarity, but not conversely."
+      },
+      {
+        "latex": "\\frac{1}{n} \\sum_{k=0}^{n-1} \\mathbf{1}_{\\{X_k = j\\}} \\xrightarrow{\\ \\text{a.s.}\\ } \\pi_j, \\qquad \\pi_i = \\frac{1}{\\mu_i}",
+        "note": "遍历定理（时间平均）：几乎必然收敛，只需不可约 + 正常返，**不需要非周期**；这是 MCMC 用一条长轨道估计 $\\pi$ 的依据。",
+        "noteEn": "Ergodic theorem: time averages converge almost surely without aperiodicity, the basis of MCMC estimation of $\\pi$."
+      }
+    ],
+    "expression": {
+      "text": "π = πP，π ≥ 0，Σπᵢ = 1；不可约 + 正常返 ⇔ π 存在且唯一",
+      "symbol": "π = (π_i)_{i∈S}",
+      "note": "平稳分布是转移矩阵左特征向量；用 (Pᵀ − I)πᵀ = 0 求，再归一化。",
+      "noteEn": "The stationary distribution is a left eigenvector: solve $(P^{\\mathsf T}-I)\\pi^{\\mathsf T}=0$ and normalize."
+    },
+    "properties": [
+      "平稳分布存在且唯一 $\\iff$ 不可约且正常返；有限状态不可约链必然满足，此时每个分量 $\\pi_i > 0$。",
+      "遍历链（不可约 + 非周期 + 正常返）使 $p^{(n)}_{ij} \\to \\pi_j$，极限与 $i$ 无关；周期 $d \\ge 2$ 时 $p^{(n)}_{ij}$ 不收敛，只沿 $n = kd$ 收敛到 $d\\pi_j$。",
+      "细致平衡 $\\Rightarrow$ 平稳，但反之不成立：有向环链的平稳分布是均匀分布却不可逆。可逆是更强的要求，还带有时间反演的物理含义。",
+      "平稳分布只在正常返状态上取正值；瞬态与零常返状态 $\\pi_i = 0$。可约链的平稳分布集合是各闭常返类平稳分布的凸组合，通常不唯一。",
+      "时间平均等于空间平均：$\\frac1n\\sum_{k<n} \\mathbf{1}_{\\{X_k = j\\}} \\to \\pi_j$ 几乎必然成立，只需不可约 + 正常返，无需非周期。"
+    ],
+    "propertiesEn": [
+      "A stationary distribution exists and is unique iff the chain is irreducible and positive recurrent; every finite irreducible chain qualifies, with all $\\pi_i>0$.",
+      "For an ergodic chain $p^{(n)}_{ij}\\to\\pi_j$ independent of $i$; if the period is $d\\ge2$ there is no limit, only $p^{(kd)}_{ij}\\to d\\pi_j$.",
+      "Detailed balance implies stationarity but not conversely: the directed cycle has the uniform stationary distribution yet is not reversible.",
+      "A stationary distribution is positive exactly on positive recurrent states; transient and null recurrent states get $\\pi_i=0$, and reducible chains have a convex set of stationary distributions.",
+      "Time averages equal space averages: $\\frac1n\\sum_{k<n}\\mathbf{1}_{\\{X_k=j\\}}\\to\\pi_j$ almost surely, requiring only irreducibility and positive recurrence."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/3 + (2/3)*0.5^x*cos(x*PI/3)",
+          "color": "#4cc9f0",
+          "label": "μₙ(1) = 1/3 + (2/3)·(1/2)ⁿcos(nπ/3)"
+        },
+        {
+          "expr": "1/3 + (2/3)*0.5^x*cos((2-x)*PI/3)",
+          "color": "#ff6b9d",
+          "label": "μₙ(2) = 1/3 + (2/3)·(1/2)ⁿcos((2−n)π/3)"
+        },
+        {
+          "expr": "1/3 + (2/3)*0.5^x*cos((2+x)*PI/3)",
+          "color": "#06d6a0",
+          "label": "μₙ(3) = 1/3 + (2/3)·(1/2)ⁿcos((2+n)π/3)"
+        },
+        {
+          "expr": "1/3",
+          "color": "#ffd166",
+          "label": "平稳分布 π = 1/3"
+        }
+      ],
+      "xRange": [
+        0,
+        10
+      ],
+      "yRange": [
+        0,
+        1.05
+      ],
+      "title": "三状态链（P = ½I + ½C）：μ₀=(1,0,0) 的分布绕 π 振荡收敛到 (1/3,1/3,1/3)"
+    },
+    "examples": [
+      {
+        "problem": "对有向环链 $P = \\begin{pmatrix} \\frac12 & \\frac12 & 0 \\\\ 0 & \\frac12 & \\frac12 \\\\ \\frac12 & 0 & \\frac12 \\end{pmatrix}$：(a) 求平稳分布并验证 $\\pi P = \\pi$；(b) 检验它是否满足细致平衡。",
+        "solution": "(a) 解 $\\pi_j = \\sum_i \\pi_i p_{ij}$，即三个方程 $\\pi_1 = \\frac12 \\pi_1 + \\frac12 \\pi_3$、$\\pi_2 = \\frac12 \\pi_1 + \\frac12 \\pi_2$、$\\pi_3 = \\frac12 \\pi_2 + \\frac12 \\pi_3$（每一列之和为 1，$P$ 是双随机矩阵）。由第二式得 $\\pi_1 = \\pi_2$，由第一式得 $\\pi_1 = \\pi_3$，故 $\\pi$ 均匀，归一化得 $\\pi = (\\frac13, \\frac13, \\frac13)$。验算：$(\\pi P)_1 = \\frac13 \\cdot \\frac12 + \\frac13 \\cdot 0 + \\frac13 \\cdot \\frac12 = \\frac13$，同理另两个分量也为 $\\frac13$，所以 $\\pi P = \\pi$。\n(b) 检查 $\\pi_1 p_{12} = \\frac13 \\cdot \\frac12 = \\frac16$ 与 $\\pi_2 p_{21} = \\frac13 \\cdot 0 = 0$，两者不等，故细致平衡不成立。这说明平稳分布存在（且由有限不可约性唯一）并不意味着链可逆：在平稳状态下概率仍沿 $1 \\to 2 \\to 3 \\to 1$ 的方向净流动。"
+      },
+      {
+        "problem": "可约链 $P = \\begin{pmatrix} \\frac12 & \\frac12 & 0 \\\\ \\frac12 & \\frac12 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$：求其全部平稳分布，并说明为什么该链**没有与出发点无关的极限分布**（$\\lim_n p^{(n)}_{i3}$ 依赖出发点 $i$，且平稳分布不唯一）。",
+        "solution": "设 $\\pi = (\\pi_1, \\pi_2, \\pi_3)$ 满足 $\\pi P = \\pi$：第一、二式都化为 $\\pi_1 = \\pi_2$，第三式自动成立（$\\pi_3 = \\pi_3$）。于是对所有 $\\lambda \\in [0, 1]$，\n$$\\pi = \\left(\\frac{\\lambda}{2}, \\frac{\\lambda}{2}, 1 - \\lambda\\right)$$\n都是平稳分布：$\\{1, 2\\}$ 与 $\\{3\\}$ 是两个闭常返类，类内唯一平稳分布分别是 $(\\frac12, \\frac12)$ 与 $(1)$，二者的任意凸组合都是整体平稳分布，所以**不唯一**。\n再看极限行为：从状态 1 出发链永远留在 $\\{1, 2\\}$ 内，$p^{(n)}_{13} = 0$ 对一切 $n$，且 $\\{1,2\\}$ 上的链一步就混合，$p^{(n)}_{11} \\to \\frac12$；而从状态 3 出发则 $p^{(n)}_{33} = 1$ 对一切 $n$。同一个 $j$，不同初值的极限不同——这正是可约链「极限依赖初值、平稳分布不唯一」的表现。"
+      }
+    ],
+    "tags": [
+      "平稳分布",
+      "极限定理",
+      "遍历",
+      "细致平衡",
+      "可逆"
+    ],
+    "links": [
+      "markov-chain",
+      "chapman-kolmogorov",
+      "markov-chain-classification",
+      "birth-death-process",
+      "continuous-time-markov",
+      "ergodic-theory"
+    ]
+  },
+  {
+    "id": "birth-death-process",
+    "title": "生灭过程",
+    "titleEn": "Birth–Death Processes",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "生灭过程只允许相邻状态之间的转移，生率 λₙ 与灭率 μₙ 决定一切；平稳分布由细致平衡递归给出，M/M/1 情形是参数 ρ = λ/μ 的几何分布，且仅当 ρ < 1 存在。",
+    "summaryEn": "A birth–death process moves only between neighbouring states; its stationary distribution follows from a one-step detailed-balance recursion, and for M/M/1 it is geometric with ρ = λ/μ, existing iff ρ < 1.",
+    "definition": "**生灭过程**是最简单也最重要的一类马尔可夫链：状态空间取 $S = \\{0, 1, 2, \\dots\\}$（也可以是有限的 $\\{0, 1, \\dots, N\\}$），每个状态只与左右邻居发生联系。离散时间版本为\n\n$$p_{n, n+1} = \\lambda_n \\ (\\text{生}), \\qquad p_{n, n-1} = \\mu_n \\ (\\text{灭}), \\qquad p_{nn} = 1 - \\lambda_n - \\mu_n,$$\n\n其余元素为 0，并要求 $\\lambda_n, \\mu_n \\ge 0$、$\\lambda_n + \\mu_n \\le 1$（自环非负），以及 $\\mu_0 = 0$（状态 0 不能再往下灭）。连续时间版本只需 $\\lambda_n, \\mu_n \\ge 0$，它们变成**速率**：在状态 $n$ 的逗留时间服从指数分布 $\\mathrm{Exp}(\\lambda_n + \\mu_n)$，离开时以 $\\lambda_n/(\\lambda_n + \\mu_n)$ 生、以 $\\mu_n/(\\lambda_n + \\mu_n)$ 灭。排队论中的 M/M/1 队列（到达率为 $\\lambda$、服务率为 $\\mu$）就是常数生灭过程；种群数量、呼叫中心、传染病初期的模型也都属此类。\n\n**平稳分布：细致平衡一次搞定**。对生灭链写出细致平衡 $\\pi_n \\lambda_n = \\pi_{n+1} \\mu_{n+1}$，这是一个只联系相邻状态的递推，可以从 $\\pi_0$ 出发逐项解出\n\n$$\\pi_{n+1} = \\pi_n \\frac{\\lambda_n}{\\mu_{n+1}} \\quad \\Longrightarrow \\quad \\pi_n = \\pi_0 \\prod_{k=1}^{n} \\frac{\\lambda_{k-1}}{\\mu_k}.$$\n\n再归一化：平稳分布存在 $\\iff$ 下面的级数收敛，此时\n\n$$\\pi_0 = \\left(1 + \\sum_{n \\ge 1} \\prod_{k=1}^{n} \\frac{\\lambda_{k-1}}{\\mu_k}\\right)^{-1}.$$\n\n由于细致平衡方程在生灭链上总能这样逐项求解，**不可约生灭链存在平稳分布时，该分布一定满足细致平衡，即链是时间可逆的**（一般马尔可夫链没有这个性质：$\\pi = \\pi P$ 并不推出细致平衡）。当级数发散时链没有平稳分布：此时不可约生灭链是零常返（$\\rho = 1$ 型）或瞬态（漂向无穷）。\n\n**M/M/1**：取 $\\lambda_n \\equiv \\lambda$、$\\mu_n \\equiv \\mu$（$n \\ge 1$），则 $\\pi_n = \\pi_0 \\rho^n$，其中 $\\rho = \\lambda/\\mu$ 称为**利用率**（服务强度）。几何级数 $\\sum \\rho^n$ 收敛当且仅当 $\\rho < 1$，此时 $\\pi_0 = 1 - \\rho$，于是\n\n$$\\pi_n = (1 - \\rho)\\rho^n, \\quad n = 0, 1, 2, \\dots$$\n\n是**参数 $\\rho$ 的几何分布**。当 $\\rho \\ge 1$ 时**不存在平稳分布**：$\\rho = 1$ 时链零常返（队长来回游走，平均返回时间无穷），$\\rho > 1$ 时瞬态（队伍越排越长，趋于无穷）。这就是排队论中「服务能力必须强于到达强度，系统才会稳定」的数学表述。",
+    "definitionEn": "A **birth–death process** is the simplest and most important family of Markov chains: the state space is $S=\\{0,1,2,\\dots\\}$ (or a finite $\\{0,\\dots,N\\}$) and only neighbouring states are linked. In discrete time $p_{n,n+1}=\\lambda_n$ (birth), $p_{n,n-1}=\\mu_n$ (death), $p_{nn}=1-\\lambda_n-\\mu_n$, all other entries zero, with $\\lambda_n+\\mu_n\\le1$ and $\\mu_0=0$. In continuous time $\\lambda_n,\\mu_n\\ge0$ are **rates**: the holding time in state $n$ is $\\mathrm{Exp}(\\lambda_n+\\mu_n)$, and the process jumps up with probability $\\lambda_n/(\\lambda_n+\\mu_n)$ and down with $\\mu_n/(\\lambda_n+\\mu_n)$. The M/M/1 queue is the constant-rate case.\n\n**Stationary distribution from detailed balance.** Writing $\\pi_n\\lambda_n=\\pi_{n+1}\\mu_{n+1}$ gives a recursion linking neighbours,\n\n$$\\pi_n = \\pi_0 \\prod_{k=1}^{n}\\frac{\\lambda_{k-1}}{\\mu_k}, \\qquad \\pi_0=\\Big(1+\\sum_{n\\ge1}\\prod_{k=1}^{n}\\frac{\\lambda_{k-1}}{\\mu_k}\\Big)^{-1},$$\n\nand a stationary distribution exists iff that series converges. Because this recursion always solves detailed balance, **an irreducible birth–death chain with a stationary distribution is always reversible** (unlike general Markov chains, where $\\pi=\\pi P$ does not imply detailed balance).\n\n**M/M/1.** With $\\lambda_n\\equiv\\lambda$ and $\\mu_n\\equiv\\mu$ one gets $\\pi_n=\\pi_0\\rho^n$ with $\\rho=\\lambda/\\mu$; the geometric series converges iff $\\rho<1$, and then $\\pi_n=(1-\\rho)\\rho^n$, a **geometric distribution**. If $\\rho\\ge1$ no stationary distribution exists: the chain is null recurrent at $\\rho=1$ and transient for $\\rho>1$.",
+    "formulas": [
+      {
+        "latex": "p_{n, n+1} = \\lambda_n, \\qquad p_{n, n-1} = \\mu_n, \\qquad p_{nn} = 1 - \\lambda_n - \\mu_n",
+        "note": "生灭链的转移规则：只能上下移动一格，其余概率为零，$\\mu_0 = 0$。",
+        "noteEn": "The birth–death transition rule: only unit up/down moves, with $\\mu_0=0$."
+      },
+      {
+        "latex": "\\pi_n \\lambda_n = \\pi_{n+1} \\mu_{n+1} \\qquad (\\text{细致平衡})",
+        "note": "相邻状态间的概率流相等；生灭链的平稳分布总可以这样求得（可逆链）。",
+        "noteEn": "Equal probability flux between neighbours; this always determines the stationary distribution of a birth–death chain."
+      },
+      {
+        "latex": "\\pi_n = \\pi_0 \\prod_{k=1}^{n} \\frac{\\lambda_{k-1}}{\\mu_k}, \\qquad \\pi_0 = \\Big(1 + \\sum_{n \\ge 1} \\prod_{k=1}^{n} \\frac{\\lambda_{k-1}}{\\mu_k}\\Big)^{-1}",
+        "note": "一般生率灭率的平稳分布：从 $\\pi_0$ 逐项递推，再用归一化定出 $\\pi_0$；级数收敛是存在的充要条件。",
+        "noteEn": "Stationary distribution for general rates, with convergence of the series as the existence criterion."
+      },
+      {
+        "latex": "\\rho = \\frac{\\lambda}{\\mu} < 1 \\ \\Longrightarrow \\ \\pi_n = (1 - \\rho)\\rho^{n} \\quad (n \\ge 0)",
+        "note": "M/M/1（常数生率灭率）：平稳分布是参数 $\\rho$ 的几何分布，**仅当 $\\rho < 1$ 成立**；$\\rho \\ge 1$ 时无平稳分布。",
+        "noteEn": "M/M/1: the stationary distribution is geometric with parameter $\\rho$, existing **only when $\\rho<1$**."
+      },
+      {
+        "latex": "L = \\sum_{n \\ge 0} n\\, \\pi_n = \\frac{\\rho}{1 - \\rho} = \\frac{\\lambda}{\\mu - \\lambda} \\quad (\\rho < 1)",
+        "note": "M/M/1 的平均队长（几何分布的期望）；由 Little 公式 $L = \\lambda W$ 得平均逗留时间 $W = \\frac{1}{\\mu - \\lambda}$。",
+        "noteEn": "Mean queue length of M/M/1; Little's law gives the mean sojourn time $W=1/(\\mu-\\lambda)$."
+      }
+    ],
+    "expression": {
+      "text": "πₙ = π₀ Π_{k=1..n} (λ_{k−1}/μ_k)；M/M/1：πₙ = (1−ρ)ρⁿ，ρ = λ/μ < 1",
+      "symbol": "\\rho = \\lambda/\\mu",
+      "note": "利用率（服务强度）ρ；M/M/1 的平稳分布是几何分布，ρ ≥ 1 时不存在平稳分布。",
+      "noteEn": "The utilisation factor ρ; for M/M/1 the stationary distribution is geometric and exists only for ρ<1."
+    },
+    "properties": [
+      "生灭链的平稳分布（存在时）一定满足细致平衡，因此不可约生灭链时间可逆；一维结构使细致平衡方程组成为可以逐项的递推。",
+      "M/M/1：$\\pi_n = (1 - \\rho)\\rho^n$ 存在 $\\iff \\rho < 1$；$\\rho = 1$ 零常返、$\\rho > 1$ 瞬态。有限容量的 M/M/1/K（状态 $0, \\dots, K$，到 $K$ 后不再接收）对任意 $\\rho$ 都有平稳分布 $\\pi_n = \\frac{(1-\\rho)\\rho^n}{1 - \\rho^{K+1}}$（$\\rho \\ne 1$；$\\rho = 1$ 时为均匀分布 $\\frac{1}{K+1}$）。",
+      "只要所有 $\\lambda_n > 0$、$\\mu_n > 0$，生灭链就不可约；当平稳分布存在时链正常返、平稳分布唯一，并且 $\\pi_n = 1/m_n$（$m_n$ 是状态 $n$ 的平均返回时间）。",
+      "M/M/1 的平均队长 $L = \\frac{\\rho}{1 - \\rho}$，平均逗留时间 $W = \\frac{1}{\\mu - \\lambda}$；当 $\\rho \\to 1^-$ 时两者都爆炸，排队系统在临界负载附近极不稳定。",
+      "改变生率与灭率可以得到一整族模型：$\\lambda_n = \\lambda$、$\\mu_n = n\\mu$ 是 M/M/∞，其平稳分布是泊松分布（对一切 $\\rho$ 都存在）；$\\lambda_n = \\lambda$、$\\mu_n = \\min(n, s)\\mu$ 是 M/M/s；有限状态的 $\\{0, \\dots, N\\}$ 即 M/M/1/N。"
+    ],
+    "propertiesEn": [
+      "Whenever a stationary distribution of an irreducible birth–death chain exists, it satisfies detailed balance, so such chains are reversible.",
+      "For M/M/1, $\\pi_n=(1-\\rho)\\rho^n$ exists iff $\\rho<1$ ($\\rho=1$: null recurrent, $\\rho>1$: transient); the finite M/M/1/K chain has $\\pi_n=\\frac{(1-\\rho)\\rho^n}{1-\\rho^{K+1}}$ for every $\\rho\\ne1$.",
+      "If all $\\lambda_n,\\mu_n>0$ the chain is irreducible, and an existing stationary distribution is unique with $\\pi_n=1/m_n$.",
+      "For M/M/1 the mean queue length is $L=\\rho/(1-\\rho)$ and the mean sojourn time $W=1/(\\mu-\\lambda)$, both exploding as $\\rho\\to1^-$.",
+      "Other choices give M/M/∞ ($\\lambda_n=\\lambda$, $\\mu_n=n\\mu$, Poisson stationary law), M/M/s and the finite M/M/1/N systems."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "(1-0.5)*0.5^x",
+          "color": "#4cc9f0",
+          "label": "ρ = 0.5：πₙ = 0.5 · 0.5ⁿ"
+        },
+        {
+          "expr": "(1-0.8)*0.8^x",
+          "color": "#ff6b9d",
+          "label": "ρ = 0.8：πₙ = 0.2 · 0.8ⁿ"
+        }
+      ],
+      "xRange": [
+        0,
+        10
+      ],
+      "yRange": [
+        0,
+        0.6
+      ],
+      "title": "M/M/1 的平稳分布：πₙ = (1−ρ)ρⁿ 在整数 n 上的取值（几何分布）"
+    },
+    "examples": [
+      {
+        "problem": "M/M/1 队列：到达率 $\\lambda = 3$、服务率 $\\mu = 5$。(a) 求平稳分布 $\\pi_n$ 并验证归一化；(b) 验证它满足细致平衡；(c) 求平均队长与平均逗留时间。",
+        "solution": "(a) $\\rho = \\lambda/\\mu = 3/5 = 0.6 < 1$，故 $\\pi_n = (1 - 0.6) \\cdot 0.6^n = 0.4 \\cdot 0.6^n$。归一化：\n$$\\sum_{n \\ge 0} \\pi_n = 0.4 \\sum_{n \\ge 0} 0.6^n = 0.4 \\cdot \\frac{1}{1 - 0.6} = 0.4 \\cdot \\frac{1}{0.4} = 1.$$\n(b) 细致平衡：$\\pi_n \\lambda = 0.4 \\cdot 0.6^n \\cdot 3 = 1.2 \\cdot 0.6^n$，而 $\\pi_{n+1}\\mu = 0.4 \\cdot 0.6^{n+1} \\cdot 5 = 2 \\cdot 0.6^{n+1} = 1.2 \\cdot 0.6^n$，两者相等，故对一切 $n$ 成立。\n(c) 几何分布期望 $L = \\sum_{n \\ge 0} n \\pi_n = \\frac{\\rho}{1 - \\rho} = \\frac{0.6}{0.4} = 1.5$（平均 1.5 个顾客在系统中）；由 Little 公式 $W = L/\\lambda = 1.5/3 = 0.5$，与 $\\frac{1}{\\mu - \\lambda} = \\frac{1}{5-3} = 0.5$ 一致。"
+      },
+      {
+        "problem": "有限容量队列 M/M/1/K：状态 $0, 1, 2$（$K = 2$），$\\lambda = 2$、$\\mu = 3$。求所有平稳概率。",
+        "solution": "$\\rho = \\lambda/\\mu = 2/3$。有限状态时用递归 $\\pi_n = \\pi_0 \\rho^n$ 加上 $\\sum_{n=0}^{2} \\pi_n = 1$：\n$$\\pi_0 \\left(1 + \\frac23 + \\frac49\\right) = 1 \\quad \\Longrightarrow \\quad \\pi_0 \\cdot \\frac{19}{9} = 1 \\quad \\Longrightarrow \\quad \\pi_0 = \\frac{9}{19},$$\n于是 $\\pi_1 = \\frac23 \\cdot \\frac{9}{19} = \\frac{6}{19}$，$\\pi_2 = \\frac49 \\cdot \\frac{9}{19} = \\frac{4}{19}$，三者之和 $\\frac{19}{19} = 1$。与无限容量不同，这里即使 $\\rho > 1$ 平稳分布也存在（因为队列长度被容量限制），例如 $\\rho = 1$ 时三个状态各占 $\\frac13$。"
+      }
+    ],
+    "tags": [
+      "生灭过程",
+      "M/M/1",
+      "几何分布",
+      "排队论",
+      "细致平衡"
+    ],
+    "links": [
+      "markov-chain",
+      "stationary-distribution",
+      "markov-chain-classification",
+      "continuous-time-markov",
+      "poisson-process"
+    ]
+  },
+  {
+    "id": "continuous-time-markov",
+    "title": "连续时间马尔可夫链",
+    "titleEn": "Continuous-Time Markov Chains",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "连续时间马尔可夫链用转移速率矩阵 Q（生成元）代替一步转移矩阵：P(t) = e^{tQ}，满足半群方程 P(t+s) = P(t)P(s) 与 Kolmogorov 前进/后退方程，逗留时间服从指数分布。",
+    "summaryEn": "A continuous-time Markov chain replaces the one-step matrix by the generator Q, with P(t) = e^{tQ}, the semigroup law P(t+s) = P(t)P(s), the Kolmogorov forward/backward equations, and exponential holding times.",
+    "definition": "把时间参数换成连续变量 $t \\ge 0$：$\\{X_t\\}_{t \\ge 0}$ 取值于可数状态空间 $S$。若对一切 $s, t \\ge 0$ 与一切状态 $i, j$ 都有\n\n$$P(X_{t+s} = j \\mid X_s = i, \\ \\{X_u : u < s\\}) = P(X_{t+s} = j \\mid X_s = i) = p_{ij}(t),$$\n\n就称它是**连续时间马尔可夫链**（CTMC）；$p_{ij}(t)$ 与 $s$ 无关时称时齐（本库默认时齐）。矩阵 $P(t) = (p_{ij}(t))$ 满足 $P(0) = I$、每行和为 1，以及**半群方程**（连续时间的查普曼–柯尔莫哥洛夫方程）\n\n$$P(t + s) = P(t)P(s), \\qquad t, s \\ge 0.$$\n\n**生成元（$Q$ 矩阵）**：若下述极限存在，令\n\n$$q_{ij} = \\lim_{h \\to 0^+} \\frac{p_{ij}(h) - \\delta_{ij}}{h}, \\qquad \\text{等价地} \\quad p_{ij}(h) = q_{ij}h + o(h)\\ (i \\ne j), \\quad p_{ii}(h) = 1 + q_{ii}h + o(h).$$\n\n由 $p_{ij}(h) \\ge 0$ 与「每行和为 1」可得\n\n$$q_{ij} \\ge 0 \\ (i \\ne j), \\qquad q_{ii} = -\\sum_{j \\ne i} q_{ij} \\le 0, \\qquad \\sum_{j} q_{ij} = 0,$$\n\n即 $Q$ **每行之和为 0**（这样的矩阵称为**生成元**或 $Q$ 矩阵）。$q_{ij}$ 是 $i \\to j$ 的**转移速率**，$q_i := -q_{ii} = \\sum_{j \\ne i} q_{ij}$ 是离开 $i$ 的总速率。\n\n**逗留时间与嵌入链**：在状态 $i$ 的逗留时间服从指数分布 $\\mathrm{Exp}(q_i)$（在长度 $h$ 的小区间内离开 $i$ 的概率约为 $q_i h$）。由指数分布的**无记忆性**，剩余逗留时间与已经停留了多久无关——这正是连续时间马尔可夫性的微观来源。离开 $i$ 时，以概率 $q_{ij}/q_i$ 跳到 $j$（$j \\ne i$）。把这些跳跃的落脚状态记下来，得到一条离散马尔可夫链，称为**嵌入链**（跳跃链），其转移矩阵就是把 $Q$ 的非对角元素按行归一化（对角元置 0）。\n\n**$P(t)$ 与 $Q$ 的关系**：有限状态空间下\n\n$$P(t) = e^{tQ} = \\sum_{n \\ge 0} \\frac{(tQ)^n}{n!}, \\qquad \\frac{d}{dt}P(t) = P(t)Q \\ (\\text{前进方程}), \\qquad \\frac{d}{dt}P(t) = QP(t) \\ (\\text{后退方程}),$$\n\n两式都是把 $P(t + h) = P(t)P(h)$ 与 $P(h) = I + Qh + o(h)$ 相减、除以 $h$、再令 $h \\to 0^+$ 得到的。平稳分布满足 $\\pi Q = 0$ 且 $\\sum_i \\pi_i = 1$，此时 $\\pi P(t) = \\pi$ 对一切 $t$ 成立。若不可约且正常返，平稳分布唯一，而且因为连续时间链**没有周期问题**（$p_{ii}(t) > 0$ 对一切 $t > 0$），必然有 $p_{ij}(t) \\to \\pi_j$（$t \\to \\infty$）。若还满足细致平衡 $\\pi_i q_{ij} = \\pi_j q_{ji}$，链就是时间可逆的——生灭型 CTMC（例如 M/M/1）在**平稳分布存在时**（即不可约且正常返，如 $\\rho<1$）如此。",
+    "definitionEn": "Replace discrete time by a continuous parameter $t\\ge0$: a process $\\{X_t\\}_{t\\ge0}$ on a countable state space $S$ is a **continuous-time Markov chain** (CTMC) if\n\n$$P(X_{t+s}=j\\mid X_s=i,\\{X_u:u<s\\}) = P(X_{t+s}=j\\mid X_s=i) = p_{ij}(t)$$\n\nfor all $s,t\\ge0$. When $p_{ij}(t)$ does not depend on $s$ the chain is time-homogeneous. The matrices $P(t)$ satisfy $P(0)=I$, row sums 1, and the **semigroup (Chapman–Kolmogorov) equation** $P(t+s)=P(t)P(s)$.\n\n**The generator $Q$** is defined by $q_{ij}=\\lim_{h\\to0^+}(p_{ij}(h)-\\delta_{ij})/h$, equivalently $p_{ij}(h)=q_{ij}h+o(h)$ for $i\\ne j$ and $p_{ii}(h)=1+q_{ii}h+o(h)$. Since each row of $P(h)$ sums to 1,\n\n$$q_{ij}\\ge0\\ (i\\ne j), \\qquad q_{ii}=-\\sum_{j\\ne i}q_{ij}\\le0, \\qquad \\sum_j q_{ij}=0:$$\n\nevery row of $Q$ sums to 0. Here $q_{ij}$ is the transition **rate** from $i$ to $j$ and $q_i=-q_{ii}$ is the total rate of leaving $i$.\n\n**Holding times and the embedded chain.** The time spent in $i$ is exponential $\\mathrm{Exp}(q_i)$; by the memoryless property the residual holding time does not depend on how long the process has already waited — the microscopic source of the Markov property. On leaving $i$ the process jumps to $j$ with probability $q_{ij}/q_i$. Recording only the successive states gives the **embedded jump chain**, whose transition matrix is obtained by normalising the off-diagonal rows of $Q$.\n\n**Relation between $P(t)$ and $Q$.** On a finite state space $P(t)=e^{tQ}=\\sum_{n\\ge0}(tQ)^n/n!$ and\n\n$$P'(t)=P(t)Q \\ (\\text{forward}), \\qquad P'(t)=QP(t) \\ (\\text{backward}),$$\n\nobtained from $P(t+h)=P(t)P(h)$ and $P(h)=I+Qh+o(h)$. Stationary distributions solve $\\pi Q=0$, $\\sum_i\\pi_i=1$, and then $\\pi P(t)=\\pi$ for all $t$. An irreducible positive recurrent CTMC has a unique stationary distribution, and since continuous-time chains have no period ($p_{ii}(t)>0$ for every $t>0$) one always has $p_{ij}(t)\\to\\pi_j$ as $t\\to\\infty$. Detailed balance $\\pi_iq_{ij}=\\pi_jq_{ji}$ means reversibility, which holds for a birth–death CTMC such as M/M/1 whenever a stationary distribution exists (equivalently $\\rho<1$)",
+    "formulas": [
+      {
+        "latex": "P(t + s) = P(t) P(s), \\qquad P(0) = I",
+        "note": "半群方程（连续时间 C-K 方程）：先走 $t$ 再走 $s$ 等于一次走 $t + s$。",
+        "noteEn": "Semigroup (continuous-time C-K) equation for the transition matrices."
+      },
+      {
+        "latex": "q_{ij} \\ge 0 \\ (i \\ne j), \\qquad q_{ii} = -\\sum_{j \\ne i} q_{ij} \\le 0, \\qquad \\sum_j q_{ij} = 0",
+        "note": "生成元 $Q$ 的三条基本性质：非对角元非负、对角元非正、**每行之和为 0**。",
+        "noteEn": "Defining properties of the generator: non-negative off-diagonal, non-positive diagonal, and **rows summing to zero**."
+      },
+      {
+        "latex": "P(t) = e^{tQ} = \\sum_{n=0}^{\\infty} \\frac{(tQ)^n}{n!}",
+        "note": "转移概率矩阵是指数矩阵；有限状态空间下这个级数总是收敛。",
+        "noteEn": "The transition matrix is a matrix exponential, always convergent on a finite state space."
+      },
+      {
+        "latex": "P'(t) = P(t) Q \\quad (\\text{Kolmogorov 前进方程}), \\qquad P'(t) = Q P(t) \\quad (\\text{后退方程})",
+        "note": "前进方程按末态的流入写，后退方程按初态的流出写；等价于 $p'_{ij}(t) = \\sum_k p_{ik}(t)q_{kj} = \\sum_k q_{ik}p_{kj}(t)$。",
+        "noteEn": "Forward and backward equations: flow into the final state versus flow out of the initial state."
+      },
+      {
+        "latex": "\\pi Q = 0, \\qquad \\sum_i \\pi_i = 1, \\qquad \\pi P(t) = \\pi \\ (\\forall t \\ge 0)",
+        "note": "连续时间的平稳分布：$\\pi$ 是 $Q$ 的左零向量，同时也是所有 $P(t)$ 的不变分布。",
+        "noteEn": "Stationary distributions are the left null vectors of $Q$ and are invariant for every $P(t)$."
+      }
+    ],
+    "expression": {
+      "text": "Q 每行和为 0；P(t) = e^{tQ}；平稳分布 πQ = 0",
+      "symbol": "P(t) = e^{tQ}",
+      "note": "转移速率矩阵 $Q$（生成元）完全决定链：短期由 $P(h) \\approx I + Qh$ 控制，长期由 $\\pi Q = 0$ 控制。",
+      "noteEn": "The generator determines the chain: short time via $P(h)\\approx I+Qh$, long time via $\\pi Q=0$."
+    },
+    "properties": [
+      "$Q$ 的每行之和为 0（对角元等于同行非对角元之和的相反数），非对角元非负；对每个 $t \\ge 0$，$P(t) = e^{tQ}$ 都是行随机矩阵，$P(0) = I$。",
+      "在状态 $i$ 的逗留时间服从 $\\mathrm{Exp}(q_i)$，离开时以 $q_{ij}/q_i$ 跳到 $j$；嵌入链只保留「跳到哪个状态」，丢掉「什么时候跳」。",
+      "前进方程从末态 $j$ 的流入出发（$p'_{ij}(t) = \\sum_k p_{ik}(t) q_{kj}$），后退方程从初态 $i$ 的流出出发（$p'_{ij}(t) = \\sum_k q_{ik} p_{kj}(t)$）；有限状态时二者都适定，唯一解是 $P(t) = e^{tQ}$。",
+      "平稳分布是 $Q$ 的左零向量，也是所有 $P(t)$ 的平稳分布；不可约、正常返时唯一。连续时间链没有周期性（逗留时间可任意短），所以 $p_{ij}(t) \\to \\pi_j$ 不需要额外条件。",
+      "泊松过程是最简单的 CTMC：速率 $\\lambda$ 的纯生链 $q_{n, n+1} = \\lambda$、$q_{nn} = -\\lambda$，其 $p_{0n}(t) = e^{-\\lambda t}(\\lambda t)^n/n!$；生灭 CTMC（如 M/M/1）的生成元只有相邻非零元；在**平稳分布存在**时（不可约且正常返，如 M/M/1 的 $\\rho<1$）总是可逆的。"
+    ],
+    "propertiesEn": [
+      "Every row of $Q$ sums to 0, off-diagonal entries are non-negative, and each $P(t)=e^{tQ}$ is row-stochastic with $P(0)=I$.",
+      "Holding times are exponential $\\mathrm{Exp}(q_i)$ and jumps occur with probability $q_{ij}/q_i$; the embedded chain keeps only the sequence of states.",
+      "The forward equation tracks flow into the final state, the backward equation flow out of the initial state; both have the unique solution $P(t)=e^{tQ}$ on finite spaces.",
+      "Stationary distributions are the left null vectors of $Q$ and are stationary for every $P(t)$; irreducibility plus positive recurrence makes them unique, and no aperiodicity assumption is needed.",
+      "The Poisson process is the elementary example ($q_{n,n+1}=\\lambda$, $p_{0n}(t)=e^{-\\lambda t}(\\lambda t)^n/n!$), and birth–death CTMCs are always reversible **whenever a stationary distribution exists** (e.g. M/M/1 with $\\rho<1$)"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2/3 + (1/3)*exp(-3*x)",
+          "color": "#4cc9f0",
+          "label": "p₁₁(t) = 2/3 + (1/3)·e^(−3t) → 2/3"
+        },
+        {
+          "expr": "(1/3)*(1 - exp(-3*x))",
+          "color": "#ff6b9d",
+          "label": "p₁₂(t) = (1/3)(1 − e^(−3t)) → 1/3"
+        },
+        {
+          "expr": "1/3 + (2/3)*exp(-3*x)",
+          "color": "#06d6a0",
+          "label": "p₂₂(t) = 1/3 + (2/3)·e^(−3t) → 1/3"
+        }
+      ],
+      "xRange": [
+        0,
+        3
+      ],
+      "yRange": [
+        0,
+        1.05
+      ],
+      "title": "两状态连续时间链（λ=1, μ=2）：转移概率 P(t) 的演化"
+    },
+    "examples": [
+      {
+        "problem": "一台机器在「正常」与「故障」两个状态间切换：正常到故障的速率为 $\\lambda = 1$，故障修好的速率为 $\\mu = 2$，即 $Q = \\begin{pmatrix} -1 & 1 \\\\ 2 & -2 \\end{pmatrix}$。(a) 验证 $Q$ 是生成元；(b) 求平稳分布；(c) 求 $P(t)$ 并验证 $P'(t) = P(t)Q$。",
+        "solution": "(a) 非对角元 $1, 2 \\ge 0$，对角元 $-1 = -1 \\le 0$、$-2 = -2 \\le 0$，两行之和分别为 $-1 + 1 = 0$、$2 - 2 = 0$，故 $Q$ 是生成元。\n(b) 解 $\\pi Q = 0$，即 $-\\pi_1 + 2\\pi_2 = 0$、$\\pi_1 - 2\\pi_2 = 0$（同一方程），配合 $\\pi_1 + \\pi_2 = 1$ 得 $\\pi = (\\frac{2}{3}, \\frac{1}{3})$。物理意义：长期有 $\\frac23$ 的时间机器正常运转。\n(c) 两状态链的解为 $p_{11}(t) = \\frac{\\mu}{\\lambda + \\mu} + \\frac{\\lambda}{\\lambda + \\mu} e^{-(\\lambda + \\mu)t} = \\frac23 + \\frac13 e^{-3t}$，于是 $p_{12}(t) = 1 - p_{11}(t) = \\frac13(1 - e^{-3t})$，对称地 $p_{22}(t) = \\frac13 + \\frac23 e^{-3t}$，$p_{21}(t) = \\frac23(1 - e^{-3t})$（下图）。验证前进方程 $p'_{11}(t) = p_{11}(t) q_{11} + p_{12}(t) q_{21}$：左端 $= -e^{-3t}$，右端 $= -\\left(\\frac23 + \\frac13 e^{-3t}\\right) + 2 \\cdot \\frac13(1 - e^{-3t}) = -\\frac23 - \\frac13 e^{-3t} + \\frac23 - \\frac23 e^{-3t} = -e^{-3t}$，两边相等。"
+      },
+      {
+        "problem": "设 $Q = \\begin{pmatrix} -3 & 1 & 2 \\\\ 1 & -1 & 0 \\\\ 2 & 1 & -3 \\end{pmatrix}$。(a) 验证 $Q$ 是生成元；(b) 写出各状态的逗留时间分布与嵌入链；(c) 求平稳分布。",
+        "solution": "(a) 非对角元 $1, 2, 1, 0, 2, 1$ 都非负；行和：$-3 + 1 + 2 = 0$、$1 - 1 + 0 = 0$、$2 + 1 - 3 = 0$，所以每行之和为 0，$Q$ 是生成元。\n(b) 离开速率 $q_1 = 3$、$q_2 = 1$、$q_3 = 3$，故逗留时间分别为 $\\mathrm{Exp}(3)$、$\\mathrm{Exp}(1)$、$\\mathrm{Exp}(3)$。离开状态 1 时以 $\\frac13$ 去 2、$\\frac23$ 去 3；离开状态 2 时必去 1；离开状态 3 时以 $\\frac23$ 去 1、$\\frac13$ 去 2。嵌入链矩阵为 $\\tilde P = \\begin{pmatrix} 0 & \\frac13 & \\frac23 \\\\ 1 & 0 & 0 \\\\ \\frac23 & \\frac13 & 0 \\end{pmatrix}$。\n(c) 解 $\\pi Q = 0$：$\\pi_3$ 的方程给出 $2\\pi_1 = 3\\pi_3$，即 $\\pi_1 = \\frac32 \\pi_3$；$\\pi_2$ 的方程给出 $\\pi_2 = 3\\pi_1 - 2\\pi_3 = \\frac92 \\pi_3 - 2\\pi_3 = \\frac52 \\pi_3$；再由归一化 $\\frac32 + \\frac52 + 1 = 5$ 倍 $\\pi_3 = 1$，得 $\\pi_3 = \\frac15$，从而\n$$\\pi = \\left(\\frac{3}{10}, \\frac{1}{2}, \\frac{1}{5}\\right).$$\n验算第一个分量：$\\frac{3}{10}(-3) + \\frac12(1) + \\frac15(2) = -\\frac{9}{10} + \\frac{5}{10} + \\frac{4}{10} = 0$；第二个：$\\frac{3}{10} - \\frac12 + \\frac15 = \\frac{3 - 5 + 2}{10} = 0$；第三个：$\\frac{6}{10} + 0 - \\frac{3}{5} = 0$，故 $\\pi Q = 0$。"
+      }
+    ],
+    "tags": [
+      "连续时间马尔可夫链",
+      "生成元",
+      "Q 矩阵",
+      "指数分布",
+      "嵌入链",
+      "Kolmogorov 方程"
+    ],
+    "links": [
+      "markov-chain",
+      "chapman-kolmogorov",
+      "stationary-distribution",
+      "birth-death-process",
+      "poisson-process",
+      "brownian-motion"
+    ]
+  }
+]

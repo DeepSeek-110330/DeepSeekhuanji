@@ -1,0 +1,639 @@
+[
+  {
+    "id": "topological-space",
+    "title": "拓扑空间",
+    "titleEn": "Topological Spaces",
+    "branch": "topology",
+    "level": 4,
+    "summary": "在集合上指定一族满足「含空集与全集、任意并、有限交」的开集，就得到拓扑空间：连续性、收敛、紧致与连通自此只依赖这一族集合。",
+    "summaryEn": "A set together with a family of open sets closed under arbitrary unions and finite intersections — the arena in which continuity, convergence, compactness and connectedness live.",
+    "definition": "**拓扑空间**把「邻近」这一概念从距离中解放出来：只保留「哪些集合算开集」这一条信息。设 $X$ 是非空集合，$\\tau$ 是幂集 $\\mathcal{P}(X)$ 的一个子集族。若 $\\tau$ 满足三条**开集公理**，就称 $\\tau$ 是 $X$ 上的一个**拓扑**，称 $(X,\\tau)$ 是**拓扑空间**，而 $\\tau$ 的成员叫 $X$ 的**开集**：\n（O1）$\\varnothing\\in\\tau$ 且 $X\\in\\tau$；\n（O2）**任意**多个（有限、可数、甚至不可数无穷多个）$\\tau$ 中成员的并仍属于 $\\tau$；\n（O3）**有限**多个 $\\tau$ 中成员的交仍属于 $\\tau$。\n「任意并、有限交」这一不对称是真正的要点：无限交会出问题。例如 $\\mathbb{R}$ 的标准拓扑里每个 $(-\\tfrac1n,\\tfrac1n)$ 都是开集，可它们的无限交 $\\bigcap_{n\\ge1}(-\\tfrac1n,\\tfrac1n)=\\{0\\}$ 不是开集。只对有限交提要求，开集族既足以充当「邻域」，又足够宽松，使子空间、积、商等构造都能落地。\n\n有了开集就能谈**邻域**：$N\\subseteq X$ 称为点 $x$ 的**邻域**，若存在开集 $U$ 使 $x\\in U\\subseteq N$。请注意**邻域本身不必是开集**：$[0,2]$ 是 $1$ 在 $\\mathbb{R}$ 中的邻域，因为它含开集 $(0,2)\\ni1$；而 $\\{1\\}$ 不是 $1$ 的邻域（不含任何含 $1$ 的开集）。$x$ 的一切邻域构成 $x$ 的**邻域系** $\\mathcal{N}(x)$，邻域系能反过来重建拓扑：$U$ 开 $\\iff$ $U$ 是它每一点的邻域。\n\n最重要的例子来自**度量空间** $(X,d)$：若每个 $x\\in U$ 都有开球 $B(x,r)\\subseteq U$，就称 $U$ 为开集；这样得到的**度量拓扑**使 $\\mathbb{R}$ 上的通常拓扑成为特例（$\\mathbb{R}$ 的开集恰是能写成开区间之并的集合）。还有三个必须记住的极端例子：**离散拓扑** $\\tau=\\mathcal{P}(X)$，每个子集都开，最细；**平凡拓扑**（也叫**密着拓扑**）$\\tau=\\{\\varnothing,X\\}$，只有两个开集，最粗；**余有限拓扑** $\\tau=\\{\\varnothing\\}\\cup\\{U\\subseteq X: X\\setminus U\\ \\text{是有限集}\\}$。同一个集合上可以装彼此不同的拓扑，比较时用「更粗／更细」：$\\tau_1\\subseteq\\tau_2$ 就说 $\\tau_1$ 比 $\\tau_2$ **粗**。拓扑越细，开集越多、连续映射越少——这条直觉后面处处有用。",
+    "definitionEn": "A **topological space** frees the idea of being nearby from distance: all that is kept is *which sets count as open*. Let $X$ be a nonempty set and let $\\tau$ be a family of subsets of the power set $\\mathcal{P}(X)$. If $\\tau$ satisfies the three **open-set axioms** it is called a **topology** on $X$, the pair $(X,\\tau)$ is a **topological space**, and the members of $\\tau$ are the **open sets** of $X$:\n(O1) $\\varnothing\\in\\tau$ and $X\\in\\tau$;\n(O2) the union of **arbitrarily many** members of $\\tau$ (finitely many, countably many, even uncountably many) still belongs to $\\tau$;\n(O3) the intersection of **finitely many** members of $\\tau$ still belongs to $\\tau$.\nThe asymmetry *arbitrary unions, finite intersections* is the heart of the matter: infinite intersections misbehave. In the usual topology on $\\mathbb{R}$ every $(-\\tfrac1n,\\tfrac1n)$ is open, yet $\\bigcap_{n\\ge1}(-\\tfrac1n,\\tfrac1n)=\\{0\\}$ is not. Demanding only finite intersections keeps the open sets rich enough to serve as neighbourhoods and supple enough for all the standard constructions (subspaces, products, quotients).\n\nOpen sets yield **neighbourhoods**: $N\\subseteq X$ is a neighbourhood of $x$ if there is an open $U$ with $x\\in U\\subseteq N$. A neighbourhood need **not** be open: $[0,2]$ is a neighbourhood of $1$ in $\\mathbb{R}$ because it contains the open set $(0,2)\\ni1$, whereas $\\{1\\}$ is not. The collection of all neighbourhoods of $x$ is its **neighbourhood system** $\\mathcal{N}(x)$, and the topology can be recovered from it: $U$ is open iff it is a neighbourhood of each of its points.\n\nThe central example comes from a **metric space** $(X,d)$: call $U$ open if every $x\\in U$ admits a ball $B(x,r)\\subseteq U$; the resulting **metric topology** makes the usual topology of $\\mathbb{R}$ a special case (its open sets are exactly the unions of open intervals). Three extreme examples must be remembered: the **discrete topology** $\\tau=\\mathcal{P}(X)$, the finest; the **trivial (indiscrete) topology** $\\tau=\\{\\varnothing,X\\}$, the coarsest; and the **cofinite topology** $\\tau=\\{\\varnothing\\}\\cup\\{U\\subseteq X: X\\setminus U\\ \\text{is finite}\\}$. Distinct topologies may live on one set and are compared by inclusion: $\\tau_1\\subseteq\\tau_2$ means $\\tau_1$ is **coarser** than $\\tau_2$. The finer the topology, the more open sets and the fewer continuous maps — an intuition used throughout.",
+    "formulas": [
+      {
+        "latex": "\\varnothing\\in\\tau,\\qquad X\\in\\tau",
+        "note": "公理 O1：空集与全集都是开集（于是它们也既开又闭）。",
+        "noteEn": "Axiom O1: the empty set and the whole space are open (hence also closed)."
+      },
+      {
+        "latex": "U_i\\in\\tau\\ (i\\in I)\\ \\Longrightarrow\\ \\bigcup_{i\\in I}U_i\\in\\tau",
+        "note": "公理 O2：**任意**多个开集的并是开集；指标集 $I$ 可以是任意大的无限集。",
+        "noteEn": "Axiom O2: the union of **arbitrarily many** open sets is open; the index set $I$ may be infinite of any size."
+      },
+      {
+        "latex": "U_1,\\dots,U_n\\in\\tau\\ \\Longrightarrow\\ U_1\\cap\\cdots\\cap U_n\\in\\tau",
+        "note": "公理 O3：**有限**多个开集的交是开集；无限交一般不成立（$\\bigcap_{n}(-\\frac1n,\\frac1n)=\\{0\\}$）。",
+        "noteEn": "Axiom O3: the intersection of **finitely many** open sets is open; infinite intersections generally fail ($\\bigcap_n(-\\frac1n,\\frac1n)=\\{0\\}$)."
+      },
+      {
+        "latex": "N\\ \\text{是}\\ x\\ \\text{的邻域}\\iff \\exists\\,U\\in\\tau:\\ x\\in U\\subseteq N",
+        "note": "邻域的定义：只要含一个含 $x$ 的开集即可，邻域自身不必是开集。",
+        "noteEn": "Definition of a neighbourhood: it suffices to contain an open set containing $x$; the neighbourhood itself need not be open."
+      },
+      {
+        "latex": "U\\ \\text{开}\\iff \\forall x\\in U\\ \\exists\\,r>0:\\ B(x,r)\\subseteq U",
+        "note": "度量拓扑的定义；此时全体开球 $B(x,r)$ 成为该拓扑的一组基。",
+        "noteEn": "The metric topology: a set is open when every point has a ball inside it; the balls form a basis for this topology."
+      }
+    ],
+    "expression": {
+      "text": "(X, τ)：集合 X 配上一族满足 O1–O3 的开集 τ；开集就是 τ 的成员",
+      "symbol": "(X, τ)",
+      "note": "拓扑只记得「哪些集合开」，不记得距离；同一集合上可以有粗细不同的多个拓扑。",
+      "noteEn": "A topology records only which sets are open, not distances; one set may carry many topologies of different coarseness."
+    },
+    "properties": [
+      "开集族对任意并、有限交封闭；对偶地，闭集族对任意交、有限并封闭（两者方向正好互换）",
+      "由邻域系可完全重建拓扑：$U$ 开 $\\iff$ $U$ 是其中每一点的邻域",
+      "拓扑可按粗细比较：$\\tau_1\\subseteq\\tau_2$ 时 $\\tau_1$ 粗、$\\tau_2$ 细；$X$ 上全体拓扑在包含关系下构成完备格（任意多个拓扑之交仍是拓扑，并一般不是）",
+      "「含给定子族的最粗拓扑」总存在（取含该子族的一切拓扑之交），子空间与积拓扑由此而来；商拓扑是对偶的另一极——使商映射连续的**最细**拓扑",
+      "并非每个拓扑都来自度量：无限集上的余有限拓扑中任意两个非空开集都相交，不是 Hausdorff 的，因而不可度量化"
+    ],
+    "propertiesEn": [
+      "Open sets are closed under arbitrary unions and finite intersections; dually, closed sets are closed under arbitrary intersections and finite unions (the two directions are interchanged)",
+      "The topology is fully determined by the neighbourhood systems: $U$ is open iff $U$ is a neighbourhood of each of its points",
+      "Topologies are compared by inclusion: $\\tau_1\\subseteq\\tau_2$ makes $\\tau_1$ coarser and $\\tau_2$ finer; the topologies on $X$ form a complete lattice under inclusion (arbitrary intersections are topologies, unions in general are not)",
+      "The coarsest topology containing a given family always exists (intersect all topologies containing it); subspaces and products arise this way; the quotient topology is the opposite extreme — the **finest** topology making the quotient map continuous",
+      "Not every topology comes from a metric: in the cofinite topology on an infinite set any two nonempty open sets meet, so it is not Hausdorff and hence not metrisable"
+    ],
+    "examples": [
+      {
+        "problem": "设 $X$ 是无限集，$\\tau=\\{\\varnothing\\}\\cup\\{U\\subseteq X: X\\setminus U\\ \\text{有限}\\}$ 是余有限拓扑。验证 $\\tau$ 满足三条开集公理，并说明它不满足 Hausdorff 性质。",
+        "solution": "（O1）$\\varnothing\\in\\tau$；又 $X\\setminus X=\\varnothing$ 有限，故 $X\\in\\tau$。\n（O2）设 $U_i\\in\\tau$（$i\\in I$）。若所有 $U_i$ 都空，则并也空，属于 $\\tau$；否则取某个非空 $U_{i_0}$，于是 $X\\setminus\\bigcup_{i\\in I}U_i\\subseteq X\\setminus U_{i_0}$ 有限，故 $\\bigcup_{i\\in I}U_i\\in\\tau$。\n（O3）设 $U_1,\\dots,U_n\\in\\tau$。若某个 $U_j=\\varnothing$，交即 $\\varnothing\\in\\tau$；否则 $X\\setminus\\bigcap_{k=1}^{n}U_k=\\bigcup_{k=1}^{n}(X\\setminus U_k)$ 是有限多个有限集之并，仍有限，故 $\\bigcap_{k=1}^{n}U_k\\in\\tau$。\n最后取任意两个非空开集 $U,V$：$X\\setminus(U\\cap V)=(X\\setminus U)\\cup(X\\setminus V)$ 是有限集，而 $X$ 无限，故 $U\\cap V\\ne\\varnothing$。任意两个非空开集都相交，无法用不相交开集分离两点，所以不是 Hausdorff 空间。"
+      },
+      {
+        "problem": "在 $\\mathbb{R}$ 的标准拓扑中，举出无限多个开集使其交不是开集；再写出对偶的闭集例子。",
+        "solution": "取 $U_n=(-\\tfrac1n,\\tfrac1n)$（$n\\ge1$），每个 $U_n$ 都是开集，但 $\\bigcap_{n\\ge1}U_n=\\{0\\}$ 不是开集：$0$ 的任何邻域都含非零点。同理 $\\bigcap_{n\\ge1}(-\\tfrac1n,1+\\tfrac1n)=[0,1]$ 也不是开集。这说明公理 O3 里的「有限」不能改成「无限」。\n对偶地取闭集 $F_n=[\\tfrac1n,1]$，每个 $F_n$ 都闭，而 $\\bigcup_{n\\ge1}F_n=(0,1]$ 不是闭集：$0$ 是它的聚点但不属于它。"
+      }
+    ],
+    "tags": [
+      "拓扑空间",
+      "开集公理",
+      "邻域",
+      "度量拓扑",
+      "离散拓扑",
+      "余有限拓扑"
+    ],
+    "links": [
+      "metric-space",
+      "basis-subbasis",
+      "closed-sets-interior",
+      "continuity-homeomorphism",
+      "separation-axioms"
+    ]
+  },
+  {
+    "id": "basis-subbasis",
+    "title": "基与子基",
+    "titleEn": "Bases and Subbases",
+    "branch": "topology",
+    "level": 5,
+    "summary": "基是「用更少的集合生成全部开集」的工具：每个开集都是基元的并；子基更进一步，取有限交即得基。判定基的两条条件缺一不可。",
+    "summaryEn": "A basis generates every open set from a smaller family of unions; a subbasis is one step smaller still, its finite intersections forming a basis. Both basis conditions are indispensable.",
+    "definition": "**基**让我们用较少的集合生成全部开集。设 $(X,\\tau)$ 是拓扑空间，$\\mathcal{B}\\subseteq\\tau$。若每个开集都能写成 $\\mathcal{B}$ 中若干成员的并（空并约定为 $\\varnothing$），就称 $\\mathcal{B}$ 是 $\\tau$ 的**基**（拓扑基）。实际检验时用点式说法更方便：$U$ 是开集 $\\iff$ 对每个 $x\\in U$ 存在 $B\\in\\mathcal{B}$ 使 $x\\in B\\subseteq U$。由 $\\mathcal{B}$ 生成的拓扑是 $\\tau(\\mathcal{B})=\\{\\bigcup_{B\\in\\mathcal{B}'}B: \\mathcal{B}'\\subseteq\\mathcal{B}\\}$，它是**含 $\\mathcal{B}$ 的最粗（最小）拓扑**，也就是一切含 $\\mathcal{B}$ 的拓扑之交。\n\n**判定定理（两条都要）**：子族 $\\mathcal{B}\\subseteq\\mathcal{P}(X)$ 是 $X$ 上某个拓扑的基，当且仅当\n（B1）$\\mathcal{B}$ 覆盖 $X$，即 $\\bigcup_{B\\in\\mathcal{B}}B=X$；\n（B2）若 $B_1,B_2\\in\\mathcal{B}$ 且 $x\\in B_1\\cap B_2$，则存在 $B_3\\in\\mathcal{B}$ 使 $x\\in B_3\\subseteq B_1\\cap B_2$。\nB1 保证 $X$ 本身是基元之并（缺少它，生成的集族里没有 $X$，不是拓扑）；B2 保证两个基元之交也是基元之并，从而是开集（缺少它，交就可能不再开集）。等价地，在 B1 成立时，B2 可以叙述成一句漂亮的话：**任意两个基元之交是若干基元之并**。\n\n**子基**再往前走一步。若 $\\mathcal{S}\\subseteq\\mathcal{P}(X)$ 的所有**有限交**构成一个基，就称 $\\mathcal{S}$ 是拓扑的**子基**。约定 $0$ 个集合的交为 $X$，于是有限交族 $\\mathcal{B}_{\\mathcal{S}}$ 自动覆盖 $X$——条件 B1 自动成立；而 B2 也自动成立（两个有限交之交仍是有限交）。因此**任意子族 $\\mathcal{S}\\subseteq\\mathcal{P}(X)$ 都是某个拓扑的子基**，这个拓扑就是含 $\\mathcal{S}$ 的最粗拓扑，它的开集恰好是若干有限交之并。这让子基成为最省力的定义工具：想造一个拓扑，只需指定几个集合作子基，然后取它能生成的最粗拓扑。\n\n例子：$\\mathbb{R}$ 的标准拓扑可由子基 $\\{(-\\infty,a): a\\in\\mathbb{R}\\}\\cup\\{(b,+\\infty): b\\in\\mathbb{R}\\}$ 生成，因为当 $b<a$ 时两个成员的有限交 $(-\\infty,a)\\cap(b,+\\infty)=(b,a)$ 正是有界开区间（$b\\ge a$ 时交为 $\\varnothing$，也无妨）。积拓扑取 $\\{\\pi_i^{-1}(U_i)\\}$ 为子基，弱拓扑、Zariski 拓扑也都是这样定义的。还要记住基不唯一：$\\mathbb{R}$ 上全体开区间、全体有理端点开区间、全体有理心有理半径的开球都生成同一个标准拓扑——这正是第二可数性的雏形。",
+    "definitionEn": "A **basis** generates all open sets from a smaller family. Let $(X,\\tau)$ be a topological space and $\\mathcal{B}\\subseteq\\tau$. It is a **basis** for $\\tau$ if every open set is a union of members of $\\mathcal{B}$ (the empty union being $\\varnothing$). The practical pointwise test is: $U$ is open iff every $x\\in U$ lies in some $B\\in\\mathcal{B}$ with $B\\subseteq U$. The topology generated by $\\mathcal{B}$ is $\\tau(\\mathcal{B})=\\{\\bigcup_{B\\in\\mathcal{B}'}B:\\ \\mathcal{B}'\\subseteq\\mathcal{B}\\}$, the **coarsest (smallest) topology containing $\\mathcal{B}$**, i.e. the intersection of all topologies containing it.\n\n**Criterion (both conditions are required).** A family $\\mathcal{B}\\subseteq\\mathcal{P}(X)$ is a basis for some topology on $X$ iff\n(B1) $\\mathcal{B}$ covers $X$: $\\bigcup_{B\\in\\mathcal{B}}B=X$;\n(B2) whenever $B_1,B_2\\in\\mathcal{B}$ and $x\\in B_1\\cap B_2$, there is $B_3\\in\\mathcal{B}$ with $x\\in B_3\\subseteq B_1\\cap B_2$.\n(B1) makes $X$ itself a union of basis elements — without it the generated family lacks $X$ and is no topology; (B2) makes the intersection of two basis elements a union of basis elements, hence open. Equivalently, given (B1), condition (B2) says: the intersection of any two basis elements is a union of basis elements.\n\nA **subbasis** goes one step further. If the **finite intersections** of a family $\\mathcal{S}\\subseteq\\mathcal{P}(X)$ form a basis, $\\mathcal{S}$ is called a **subbasis**. By convention the empty intersection is $X$, so the family $\\mathcal{B}_{\\mathcal{S}}$ of finite intersections automatically covers $X$ (condition (B1) is free) and satisfies (B2) (the intersection of two finite intersections is again a finite intersection). Hence **every** family $\\mathcal{S}\\subseteq\\mathcal{P}(X)$ is a subbasis for some topology — the coarsest topology containing $\\mathcal{S}$, whose open sets are exactly the unions of finite intersections of members of $\\mathcal{S}$. This makes subbases the cheapest way to define a topology: specify a few sets and take the coarsest topology containing them.\n\nExamples: the usual topology of $\\mathbb{R}$ is generated by the subbasis $\\{(-\\infty,a):a\\in\\mathbb{R}\\}\\cup\\{(b,+\\infty):b\\in\\mathbb{R}\\}$, since for $b<a$ the intersection of one member of each part equals the bounded open interval $(b,a)$ (and for $b\\ge a$ it is empty, which is harmless). The product topology uses the sets $\\pi_i^{-1}(U_i)$ as a subbasis, and weak and Zariski topologies are defined the same way. Bases are far from unique: all open intervals, all open intervals with rational endpoints, and all balls with rational centre and radius generate the same topology on $\\mathbb{R}$ — the germ of second countability.",
+    "formulas": [
+      {
+        "latex": "U\\in\\tau\\iff \\forall x\\in U\\ \\exists\\,B\\in\\mathcal{B}:\\ x\\in B\\subseteq U",
+        "note": "基的点式判别法：只要每点的某邻域能「夹」在基元与开集之间即可。",
+        "noteEn": "The pointwise test for a basis: near each point some basis element must be squeezed between the point and the open set."
+      },
+      {
+        "latex": "\\tau(\\mathcal{B})=\\Bigl\\{\\bigcup_{B\\in\\mathcal{B}'}B:\\ \\mathcal{B}'\\subseteq\\mathcal{B}\\Bigr\\}",
+        "note": "由基生成的拓扑：所有基元之并的全体；空并给出 $\\varnothing$。",
+        "noteEn": "The topology generated by a basis: all unions of basis elements, the empty union giving $\\varnothing$."
+      },
+      {
+        "latex": "(B1)\\quad \\bigcup_{B\\in\\mathcal{B}}B=X",
+        "note": "第一条判定条件：基必须覆盖整个空间，否则生成的集族里没有 $X$。",
+        "noteEn": "First criterion: the basis must cover the whole space, otherwise $X$ itself is missing from the generated family."
+      },
+      {
+        "latex": "(B2)\\quad x\\in B_1\\cap B_2,\\ B_1,B_2\\in\\mathcal{B}\\ \\Longrightarrow\\ \\exists\\,B_3\\in\\mathcal{B}:\\ x\\in B_3\\subseteq B_1\\cap B_2",
+        "note": "第二条判定条件：两个基元之交中每点都含在一个含于该交的基元里（等价说法：两基元之交是若干基元之并）。",
+        "noteEn": "Second criterion: through each point of an intersection of two basis elements passes a basis element contained in that intersection (equivalently, the intersection is a union of basis elements)."
+      },
+      {
+        "latex": "\\mathcal{B}_{\\mathcal{S}}=\\Bigl\\{\\bigcap_{k=1}^{n}S_k:\\ n\\ge0,\\ S_k\\in\\mathcal{S}\\Bigr\\}",
+        "note": "子基的有限交族是基（$n=0$ 时约定交为 $X$）；它生成的就是含 $\\mathcal{S}$ 的**最粗**拓扑。",
+        "noteEn": "The finite intersections of a subbasis form a basis (the empty intersection is $X$), and they generate the **coarsest** topology containing $\\mathcal{S}$."
+      }
+    ],
+    "properties": [
+      "判定条件 B1、B2 缺一不可：$\\{\\{1,2\\},\\{2,3\\}\\}$ 满足 B1 而不满足 B2；$X=\\{1,2\\}$ 上的 $\\{\\{1\\}\\}$ 满足 B2 而不满足 B1",
+      "B2 的等价形式：任意两个基元之交可写成若干基元之并（在 B1 成立的前提下）",
+      "度量空间中开球全体是度量拓扑的基；验证 B2 时只需取 $r=\\min\\{r_1-d(x,x_1),\\ r_2-d(x,x_2)\\}>0$，则 $B(x,r)\\subseteq B(x_1,r_1)\\cap B(x_2,r_2)$",
+      "同一拓扑可以有成员不同而粗细相同的多种基；有可数基的拓扑称为第二可数，$\\mathbb{R}$ 的标准拓扑由「有理端点开区间」给出可数基",
+      "任意子族都是某拓扑的子基，它生成的是含该子族的最粗拓扑；判断映射连续时也只需对目标空间某个子基的成员验证原像是开集"
+    ],
+    "propertiesEn": [
+      "Both criteria matter: $\\{\\{1,2\\},\\{2,3\\}\\}$ satisfies (B1) but not (B2), while $\\{\\{1\\}\\}$ on $X=\\{1,2\\}$ satisfies (B2) but not (B1)",
+      "Equivalent form of (B2), given (B1): the intersection of any two basis elements is a union of basis elements",
+      "In a metric space the balls form a basis; to check (B2) take $r=\\min\\{r_1-d(x,x_1),\\ r_2-d(x,x_2)\\}>0$, so that $B(x,r)\\subseteq B(x_1,r_1)\\cap B(x_2,r_2)$",
+      "One topology has many different bases of the same coarseness; a topology with a countable basis is called second countable, and rational-ended open intervals give one for $\\mathbb{R}$",
+      "Every family is a subbasis for some topology, namely the coarsest one containing it; continuity of a map need only be checked on the preimages of the members of a subbasis of the target"
+    ],
+    "examples": [
+      {
+        "problem": "设 $X=\\mathbb{R}$，$\\mathcal{S}=\\{(-\\infty,a): a\\in\\mathbb{R}\\}\\cup\\{(b,+\\infty): b\\in\\mathbb{R}\\}$。证明 $\\mathcal{S}$ 生成的拓扑恰是 $\\mathbb{R}$ 上的标准拓扑。",
+        "solution": "记 $\\tau_{\\mathcal{S}}$ 为由 $\\mathcal{S}$ 生成的拓扑（含 $\\mathcal{S}$ 的最粗拓扑），$\\tau_{\\mathrm{std}}$ 为标准拓扑。\n（1）$\\tau_{\\mathcal{S}}\\subseteq\\tau_{\\mathrm{std}}$：每个 $(-\\infty,a)$ 与 $(b,+\\infty)$ 都是标准开集，故 $\\tau_{\\mathrm{std}}$ 是含 $\\mathcal{S}$ 的拓扑；而 $\\tau_{\\mathcal{S}}$ 是这类拓扑中最粗的，故它最小。\n（2）$\\tau_{\\mathrm{std}}\\subseteq\\tau_{\\mathcal{S}}$：任取 $U\\in\\tau_{\\mathrm{std}}$ 与 $x\\in U$，由标准拓扑的定义存在 $\\varepsilon>0$ 使 $(x-\\varepsilon,x+\\varepsilon)\\subseteq U$。而\n$(x-\\varepsilon,x+\\varepsilon)=(-\\infty,x+\\varepsilon)\\cap(x-\\varepsilon,+\\infty)$\n是两个子基成员的有限交，含 $x$ 且含于 $U$。于是 $U$ 是若干这样的有限交之并，属于 $\\tau_{\\mathcal{S}}$。\n两向包含合并得 $\\tau_{\\mathcal{S}}=\\tau_{\\mathrm{std}}$，即标准拓扑恰是能使所有射线都开的最粗拓扑。"
+      },
+      {
+        "problem": "（a）$X=\\{1,2,3\\}$，$\\mathcal{B}=\\{\\{1,2\\},\\{2,3\\}\\}$：说明 $\\mathcal{B}$ 不是任何拓扑的基。（b）$X=\\{1,2\\}$，$\\mathcal{B}=\\{\\{1\\}\\}$：说明由它生成的集族不是拓扑。",
+        "solution": "（a）B1 成立：$\\{1,2\\}\\cup\\{2,3\\}=X$。但 B2 失败：$2\\in\\{1,2\\}\\cap\\{2,3\\}=\\{2\\}$，而 $\\mathcal{B}$ 中含 $2$ 的成员只有 $\\{1,2\\}$ 与 $\\{2,3\\}$，都不含于 $\\{2\\}$，故找不到所需的 $B_3$。若 $\\mathcal{B}$ 真是某拓扑的基，则该拓扑中 $\\{1,2\\}\\cap\\{2,3\\}=\\{2\\}$ 必须是开集，但 $\\{2\\}$ 无法写成基元之并，矛盾。\n（b）只有一个成员，B2 自动成立（$\\{1\\}\\cap\\{1\\}=\\{1\\}\\supseteq\\{1\\}$）；但 B1 失败：$\\{1\\}\\ne X$。由它生成的集族是 $\\{\\varnothing,\\{1\\}\\}$，其中没有 $X=\\{1,2\\}$，不是拓扑。可见两条条件各有不可替代的作用。"
+      }
+    ],
+    "tags": [
+      "拓扑基",
+      "子基",
+      "生成的拓扑",
+      "判定条件",
+      "第二可数"
+    ],
+    "links": [
+      "topological-space",
+      "subspace-product-quotient",
+      "continuity-homeomorphism",
+      "metric-space"
+    ]
+  },
+  {
+    "id": "closed-sets-interior",
+    "title": "闭集、闭包与内部",
+    "titleEn": "Closed Sets, Closure and Interior",
+    "branch": "topology",
+    "level": 4,
+    "summary": "闭集就是补集为开集的集合，闭集族满足「任意交、有限并」；闭包是含 A 的最小闭集，内部是含于 A 的最大开集，边界把它们分开。",
+    "summaryEn": "Closed sets are the complements of open sets and satisfy arbitrary intersections and finite unions; the closure is the smallest closed set containing A, the interior the largest open set inside it, and the boundary separates them.",
+    "definition": "$A\\subseteq X$ 称为**闭集**，若它的补集 $X\\setminus A$ 是开集。**方向务必记准：闭 = 补开**。由此立刻得到与开集公理对偶的三条**闭集公理**：（C1）$\\varnothing$ 与 $X$ 都是闭集；（C2）**任意**多个闭集的交是闭集；（C3）**有限**多个闭集的并是闭集。请对比开集公理——开集是「任意并、有限交」，闭集是「任意交、有限并」，两个方向正好互换。「闭」不等于「非开」：$\\mathbb{R}$ 中 $[0,1)$ 既不开也不闭，而 $\\varnothing$ 与 $\\mathbb{R}$ 既开又闭（简称 clopen）。无限多个闭集的并可以不是闭集：$\\bigcup_{n\\ge1}[\\tfrac1n,1]=(0,1]$。\n\n含 $A$ 的最小闭集 $\\overline{A}=\\bigcap\\{F\\subseteq X: F\\ \\text{闭},\\ A\\subseteq F\\}$ 称为 $A$ 的**闭包**。它有两套常用的等价刻画：其一，$x\\in\\overline{A}$ $\\iff$ $x$ 的每个邻域与 $A$ 相交（只需每个开邻域与 $A$ 相交）；其二，$\\overline{A}=A\\cup A'$，其中 $A'$ 是 $A$ 的**导集**——$x\\in A'$ 时称 $x$ 为 $A$ 的**聚点**（极限点），意思是 $x$ 的**每个**邻域都与 $A\\setminus\\{x\\}$ 相交。聚点不必属于 $A$：$0$ 是 $(0,1)$ 的聚点；$A$ 中的点也未必是聚点：若存在邻域 $N$ 使 $N\\cap A=\\{x\\}$，则称 $x$ 是 $A$ 的**孤立点**（如 $\\mathbb{Z}\\subset\\mathbb{R}$ 的每个点）。于是有干净的等价链：$A$ 闭 $\\iff A'\\subseteq A\\iff A=\\overline{A}$。\n\n对偶地，$\\operatorname{int}A=\\bigcup\\{U\\in\\tau: U\\subseteq A\\}=X\\setminus\\overline{X\\setminus A}$ 称为 $A$ 的**内部**，即含于 $A$ 的最大开集，其成员叫**内点**（有邻域完全落在 $A$ 中）。$\\partial A=\\overline{A}\\cap\\overline{X\\setminus A}$ 称为 $A$ 的**边界**，它把整个空间切成互不相交的三块：$X=\\operatorname{int}A\\ \\sqcup\\ \\partial A\\ \\sqcup\\ \\operatorname{int}(X\\setminus A)$。若 $\\overline{A}=X$，称 $A$ **稠密**于 $X$（等价于 $A$ 与每个非空开集相交），例如 $\\mathbb{Q}$ 在 $\\mathbb{R}$ 中稠密；若 $\\operatorname{int}\\overline{A}=\\varnothing$，称 $A$ **无处稠密**（如 $\\mathbb{Z}$ 在 $\\mathbb{R}$ 中，虽然它无处稠密却仍有无穷多聚点，可见「无处稠密」与「没有聚点」是两回事）。可数多个无处稠密集之并叫**第一纲**集，不是第一纲的叫**第二纲**集。**Baire 纲定理**断言：完备度量空间（更一般地，局部紧 Hausdorff 空间）是第二纲的——「不能写成可数个无处稠密集之并」这一条，是许多存在性定理的支点。",
+    "definitionEn": "A set $A\\subseteq X$ is **closed** if its complement $X\\setminus A$ is open. **Remember the direction: closed means the complement is open.** This immediately gives the three **closed-set axioms**, dual to the open-set axioms: (C1) $\\varnothing$ and $X$ are closed; (C2) the intersection of **arbitrarily many** closed sets is closed; (C3) the union of **finitely many** closed sets is closed. Compare the open-set axioms — open sets allow arbitrary unions and finite intersections, closed sets allow arbitrary intersections and finite unions, the two directions being interchanged. Closed does not mean not open: in $\\mathbb{R}$ the set $[0,1)$ is neither open nor closed, while $\\varnothing$ and $\\mathbb{R}$ are both (they are called clopen). An infinite union of closed sets may fail to be closed: $\\bigcup_{n\\ge1}[\\tfrac1n,1]=(0,1]$.\n\nThe smallest closed set containing $A$, namely $\\overline{A}=\\bigcap\\{F\\subseteq X: F\\ \\text{closed},\\ A\\subseteq F\\}$, is the **closure** of $A$. Two equivalent descriptions are used constantly: first, $x\\in\\overline{A}$ iff every neighbourhood of $x$ meets $A$ (it suffices to test open neighbourhoods); second, $\\overline{A}=A\\cup A'$, where $A'$ is the **derived set**: $x\\in A'$ means $x$ is a **limit point** of $A$, i.e. every neighbourhood of $x$ meets $A\\setminus\\{x\\}$. A limit point need not belong to $A$ (as $0$ for $(0,1)$), and a point of $A$ need not be a limit point: if some neighbourhood $N$ satisfies $N\\cap A=\\{x\\}$, then $x$ is an **isolated point** of $A$ (every point of $\\mathbb{Z}\\subset\\mathbb{R}$ is one). Hence the clean chain $A$ closed $\\iff A'\\subseteq A\\iff A=\\overline{A}$.\n\nDually, $\\operatorname{int}A=\\bigcup\\{U\\in\\tau: U\\subseteq A\\}=X\\setminus\\overline{X\\setminus A}$ is the **interior** of $A$, the largest open set contained in $A$; its members are **interior points** (points having a neighbourhood inside $A$). The **boundary** is $\\partial A=\\overline{A}\\cap\\overline{X\\setminus A}$, and it cuts the space into three disjoint pieces: $X=\\operatorname{int}A\\ \\sqcup\\ \\partial A\\ \\sqcup\\ \\operatorname{int}(X\\setminus A)$. If $\\overline{A}=X$ we say $A$ is **dense** in $X$ (equivalently, $A$ meets every nonempty open set), as $\\mathbb{Q}$ is in $\\mathbb{R}$; if $\\operatorname{int}\\overline{A}=\\varnothing$ we call $A$ **nowhere dense** (like $\\mathbb{Z}$ in $\\mathbb{R}$: it has infinitely many limit points and yet is nowhere dense, so nowhere dense is not the same as having no limit points). A countable union of nowhere dense sets is of **first category**, and a set that is not of first category is of **second category**. The **Baire category theorem** states that complete metric spaces (more generally, locally compact Hausdorff spaces) are of second category — the fact that they cannot be written as a countable union of nowhere dense sets, a fulcrum for many existence theorems.",
+    "formulas": [
+      {
+        "latex": "A\\ \\text{闭}\\iff X\\setminus A\\in\\tau",
+        "note": "闭集的定义：补集是开集。这是全部闭集性质的源头。",
+        "noteEn": "Definition of a closed set: its complement is open. This is the source of every property of closed sets."
+      },
+      {
+        "latex": "\\overline{A}=\\bigcap\\{F: F\\ \\text{闭},\\ A\\subseteq F\\}=A\\cup A',\\qquad x\\in\\overline{A}\\iff \\forall N\\in\\mathcal{N}(x):\\ N\\cap A\\neq\\varnothing",
+        "note": "闭包：含 $A$ 的最小闭集，也等于 $A$ 并上它的聚点；点的判别用「每个邻域都与 $A$ 相交」。",
+        "noteEn": "The closure is the smallest closed set containing $A$, equivalently $A$ together with its limit points; membership is tested by every neighbourhood meeting $A$."
+      },
+      {
+        "latex": "\\operatorname{int}A=\\bigcup\\{U\\in\\tau:\\ U\\subseteq A\\}=X\\setminus\\overline{X\\setminus A},\\qquad \\operatorname{int}A\\subseteq A\\subseteq\\overline{A}",
+        "note": "内部：含于 $A$ 的最大开集，与闭包通过取补对偶（开与闭的对称在这里最清楚）。",
+        "noteEn": "The interior is the largest open set inside $A$ and is dual to the closure by complementation — the clearest expression of the open/closed symmetry."
+      },
+      {
+        "latex": "\\partial A=\\overline{A}\\cap\\overline{X\\setminus A},\\qquad X=\\operatorname{int}A\\;\\sqcup\\;\\partial A\\;\\sqcup\\;\\operatorname{int}(X\\setminus A)",
+        "note": "边界定义；空间被剖成三块互不相交的部分（内部、边界、外部）。",
+        "noteEn": "Definition of the boundary; the space splits into three disjoint parts (interior, boundary, exterior)."
+      },
+      {
+        "latex": "\\overline{A\\cup B}=\\overline{A}\\cup\\overline{B},\\qquad \\overline{A\\cap B}\\subseteq\\overline{A}\\cap\\overline{B}",
+        "note": "并的闭包恰等于闭包之并；但交只有单向包含，可能严格（取 $A=\\mathbb{Q}$、$B=\\mathbb{R}\\setminus\\mathbb{Q}$）。",
+        "noteEn": "The closure of a union equals the union of the closures, but for intersections only one inclusion holds and it may be strict (take $A=\\mathbb{Q}$, $B=\\mathbb{R}\\setminus\\mathbb{Q}$)."
+      }
+    ],
+    "properties": [
+      "闭包三律：$A\\subseteq\\overline{A}$、$\\overline{\\overline{A}}=\\overline{A}$、$\\overline{A\\cup B}=\\overline{A}\\cup\\overline{B}$；且 $A$ 闭 $\\iff A=\\overline{A}$。但 $\\overline{A\\cap B}\\subseteq\\overline{A}\\cap\\overline{B}$ 可能严格：$A=\\mathbb{Q}$、$B=\\mathbb{R}\\setminus\\mathbb{Q}$ 时 $\\overline{A}=\\overline{B}=\\mathbb{R}$，而 $\\overline{A\\cap B}=\\overline{\\varnothing}=\\varnothing$",
+      "内部与运算：$\\operatorname{int}(A\\cap B)=\\operatorname{int}A\\cap\\operatorname{int}B$，而 $\\operatorname{int}A\\cup\\operatorname{int}B\\subseteq\\operatorname{int}(A\\cup B)$ 可能严格（$A=(0,1)$、$B=(1,2)$ 时右边为 $(0,2)$）",
+      "$A$ 开 $\\iff A=\\operatorname{int}A$；$\\overline{A}$ 是含 $A$ 的最小闭集，$\\operatorname{int}A$ 是含于 $A$ 的最大开集；且 $\\overline{A}=\\operatorname{int}A\\sqcup\\partial A$",
+      "$\\partial A=\\overline{A}\\setminus\\operatorname{int}A=\\partial(X\\setminus A)$ 总是闭集；$\\partial A=\\varnothing\\iff A$ 既开又闭。一般地 $A$ 与 $X\\setminus A$ 的开闭组合会出现四种情形（如 $\\mathbb{R}$ 中 $(0,1)$、$[0,1]$、$[0,1)$、$\\mathbb{R}$）",
+      "稠密：$D$ 稠密于 $X\\iff\\overline{D}=X\\iff D$ 与每个非空开集相交；$\\mathbb{Q}$ 与 $\\mathbb{R}\\setminus\\mathbb{Q}$ 都在 $\\mathbb{R}$ 中稠密且内部都是空的。Baire 纲定理：完备度量空间与局部紧 Hausdorff 空间是第二纲的"
+    ],
+    "propertiesEn": [
+      "Closure laws: $A\\subseteq\\overline A$, $\\overline{\\overline A}=\\overline A$, $\\overline{A\\cup B}=\\overline A\\cup\\overline B$, and $A$ is closed iff $A=\\overline A$. However $\\overline{A\\cap B}\\subseteq\\overline A\\cap\\overline B$ may be strict: for $A=\\mathbb{Q}$, $B=\\mathbb{R}\\setminus\\mathbb{Q}$ one has $\\overline A=\\overline B=\\mathbb{R}$ while $\\overline{A\\cap B}=\\varnothing$",
+      "Interior and operations: $\\operatorname{int}(A\\cap B)=\\operatorname{int}A\\cap\\operatorname{int}B$, while $\\operatorname{int}A\\cup\\operatorname{int}B\\subseteq\\operatorname{int}(A\\cup B)$ may be strict ($A=(0,1)$, $B=(1,2)$ give $(0,2)$ on the right)",
+      "$A$ is open iff $A=\\operatorname{int}A$; $\\overline A$ is the smallest closed set containing $A$ and $\\operatorname{int}A$ the largest open set inside $A$; moreover $\\overline A=\\operatorname{int}A\\sqcup\\partial A$",
+      "$\\partial A=\\overline A\\setminus\\operatorname{int}A=\\partial(X\\setminus A)$ is always closed, and $\\partial A=\\varnothing$ iff $A$ is clopen. In general open/closed status comes in four combinations (e.g. $(0,1)$, $[0,1]$, $[0,1)$, $\\mathbb{R}$ in $\\mathbb{R}$)",
+      "Density: $D$ is dense in $X$ iff $\\overline D=X$ iff $D$ meets every nonempty open set; both $\\mathbb{Q}$ and $\\mathbb{R}\\setminus\\mathbb{Q}$ are dense in $\\mathbb{R}$ with empty interior. The Baire category theorem says complete metric spaces and locally compact Hausdorff spaces are of second category"
+    ],
+    "examples": [
+      {
+        "problem": "求 $A=\\mathbb{Q}\\cap[0,1]$ 在 $\\mathbb{R}$ 中的闭包、内部与边界。",
+        "solution": "**闭包**：任取 $x\\in[0,1]$ 与 $\\varepsilon>0$，由有理数在 $\\mathbb{R}$ 中稠密，$(x-\\varepsilon,x+\\varepsilon)$ 中含有理数 $q$；当 $x\\in[0,1]$ 时可取到 $q\\in[0,1]$（若取到的 $q$ 落在区间外，因区间与 $[0,1]$ 相交非空，仍可取其中之理数），故 $x\\in\\overline{A}$。又 $[0,1]$ 是闭集且 $A\\subseteq[0,1]$，所以 $\\overline{A}\\subseteq[0,1]$。于是 $\\overline{A}=[0,1]$。\n**内部**：任一非空开区间都含无理数，故不含于 $A$；而任何非空开集都含开区间，所以 $A$ 不含非空开集，$\\operatorname{int}A=\\varnothing$。\n**边界**：$\\overline{\\mathbb{R}\\setminus A}=\\mathbb{R}$（$\\mathbb{R}\\setminus A$ 也稠密），故 $\\partial A=\\overline{A}\\cap\\overline{\\mathbb{R}\\setminus A}=[0,1]\\cap\\mathbb{R}=[0,1]$。\n结论：$A$ 稠密于 $[0,1]$、内部为空、边界是整个 $[0,1]$，可见「稠密」与「内部大」毫无关系。"
+      },
+      {
+        "problem": "举例说明 $\\overline{A\\cap B}\\subsetneq\\overline{A}\\cap\\overline{B}$，即在 $\\mathbb{R}$ 中找出两个集合使包含号严格取到。",
+        "solution": "取 $A=\\mathbb{Q}$，$B=\\mathbb{R}\\setminus\\mathbb{Q}$。\n一方面 $\\overline{A}=\\mathbb{R}$（有理数稠密），$\\overline{B}=\\mathbb{R}$（无理数也稠密），故 $\\overline{A}\\cap\\overline{B}=\\mathbb{R}$。\n另一方面 $A\\cap B=\\varnothing$，其闭包是 $\\varnothing$。\n于是 $\\varnothing=\\overline{A\\cap B}\\subsetneq\\mathbb{R}=\\overline{A}\\cap\\overline{B}$，包含号严格。这说明「取闭包」只对**并**保持等式，对**交**只能得到单向包含。\n（对偶地，取内部时 $\\operatorname{int}(A\\cup B)$ 可能严格大于 $\\operatorname{int}A\\cup\\operatorname{int}B$：$A=(0,1)$、$B=(1,2)$ 时左边是 $(0,2)$，右边是 $(0,1)\\cup(1,2)$。）"
+      }
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        -1.2,
+        2.2
+      ],
+      "intervals": [
+        {
+          "from": 0,
+          "to": 1,
+          "color": "#4cc9f0"
+        }
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0 ∉ A",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 1,
+          "label": "1 ∉ A",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "A = (0,1)（蓝）与它的闭包 cl A = [0,1]：端点 0、1 不属于 A"
+    },
+    "tags": [
+      "闭集",
+      "闭包",
+      "内部",
+      "边界",
+      "聚点",
+      "稠密",
+      "Baire 纲"
+    ],
+    "links": [
+      "topological-space",
+      "continuity-homeomorphism",
+      "connectedness",
+      "compactness",
+      "real-numbers"
+    ]
+  },
+  {
+    "id": "continuity-homeomorphism",
+    "title": "连续映射与同胚",
+    "titleEn": "Continuous Maps and Homeomorphisms",
+    "branch": "topology",
+    "level": 5,
+    "summary": "连续即「开集的原像是开集」，把连续双射且逆也连续的双射叫同胚；同胚是拓扑学的「相同」，被它保持的性质叫拓扑性质。",
+    "summaryEn": "Continuity means preimages of open sets are open; a bijection whose inverse is also continuous is a homeomorphism, the topological notion of sameness, and properties preserved by it are topological.",
+    "definition": "$f:X\\to Y$ 称为**连续**，若每个开集的原像是开集：对任意 $U\\subseteq Y$ 开，$f^{-1}(U)=\\{x\\in X: f(x)\\in U\\}$ 都开。**关键词是「原像」**，连续性与「像是不是开集」毫无关系。等价刻画有四条常用路线：（i）任意闭集的原像是闭集；（ii）对任意 $A\\subseteq X$ 有 $f(\\overline{A})\\subseteq\\overline{f(A)}$；（iii）对任意 $B\\subseteq Y$ 有 $\\overline{f^{-1}(B)}\\subseteq f^{-1}(\\overline{B})$；（iv）逐点形式——$f$ 在 $x$ 处连续指 $f(x)$ 的每个邻域 $V$ 都含某个 $x$ 的邻域 $U$ 的像：$f(U)\\subseteq V$。\n\n第（ii）条最容易记错：它**只能**是 $f(\\overline{A})\\subseteq\\overline{f(A)}$，一般不是等式。$f(x)=\\dfrac{x}{1+|x|}$（连续，把 $\\mathbb{R}$ 压进 $(-1,1)$）与 $A=(0,+\\infty)$ 就给出严格包含：$f(\\overline{A})=[0,1)$，而 $\\overline{f(A)}=[0,1]$。直觉上，闭包会「补上极限点」，而连续映射可能把极限点送到像集之外的极限点上。\n\n连续与「把开集映成开集」是两件不同的事，两者互不推出：常值映射 $f:\\mathbb{R}\\to\\mathbb{R}$，$f(x)=0$ 连续，却把开集 $(0,1)$ 映成单点集 $\\{0\\}$，不是开集；反过来令 $X=\\{a,b\\}$ 带平凡拓扑、$Y=\\{a,b\\}$ 带离散拓扑，$f(x)=x$，则 $X$ 的开集只有 $\\varnothing,X$，像也开，故 $f$ 是开映射，但 $f^{-1}(\\{a\\})=\\{a\\}$ 在 $X$ 中不 open，故 $f$ 不连续。因此「开映射」是一条独立的要求，不可与连续混为一谈。\n\n若 $f:X\\to Y$ 是双射，且 $f$ 连续、$f^{-1}$ 也连续，就称 $f$ 是**同胚**（homeomorphism），记 $X\\cong Y$。等价地说：$f$ 连续双射且是开映射（或闭映射）。**仅连续双射不够**：经典例子是 $f(t)=(\\cos2\\pi t,\\sin2\\pi t)$，$f:[0,1)\\to S^1$ 是连续双射，但 $f^{-1}$ 在 $(1,0)$ 处不连续，故不同胚。不过加一个条件就够用了：**连续双射 + 定义域紧 + 目标空间 Hausdorff $\\Rightarrow$ 同胚**。\n\n同胚是集合之间的**等价关系**（自反、对称、传递），因此拓扑学只区分「同胚类」。被同胚保持的性质叫**拓扑性质**：紧致性、连通性、Hausdorff 性、可分性、第二可数性都是；有界性与完备性不是（$\\mathbb{R}\\cong(0,1)$，后者有界且不完备）。若 $f:X\\to Y$ 连续单射，且从 $X$ 到子空间 $f(X)$ 的对应是同胚，就称 $f$ 是**嵌入**（拓扑嵌入）——嵌入是「把 $X$ 原样放进 $Y$ 里」。",
+    "definitionEn": "A map $f:X\\to Y$ is **continuous** if the preimage of every open set is open: for every open $U\\subseteq Y$, the set $f^{-1}(U)=\\{x\\in X: f(x)\\in U\\}$ is open in $X$. **The key word is preimage**; continuity says nothing about images being open. Four equivalent formulations are in constant use: (i) preimages of closed sets are closed; (ii) $f(\\overline{A})\\subseteq\\overline{f(A)}$ for every $A\\subseteq X$; (iii) $\\overline{f^{-1}(B)}\\subseteq f^{-1}(\\overline{B})$ for every $B\\subseteq Y$; (iv) pointwise — $f$ is continuous at $x$ if every neighbourhood $V$ of $f(x)$ contains the image of some neighbourhood $U$ of $x$: $f(U)\\subseteq V$.\n\nFormulation (ii) is the one most often misquoted: it is **only** $f(\\overline{A})\\subseteq\\overline{f(A)}$, never equality in general. With $f(x)=\\dfrac{x}{1+|x|}$ (continuous, squeezing $\\mathbb{R}$ into $(-1,1)$) and $A=(0,+\\infty)$ the inclusion is strict: $f(\\overline{A})=[0,1)$ while $\\overline{f(A)}=[0,1]$. Intuitively, taking a closure adjoins limit points, and a continuous map may send a limit point to a limit point lying outside the image.\n\nContinuity and mapping open sets to open sets are different demands, and neither implies the other: the constant map $f:\\mathbb{R}\\to\\mathbb{R}$, $f(x)=0$, is continuous yet sends the open interval $(0,1)$ to the singleton $\\{0\\}$, not open; conversely let $X=\\{a,b\\}$ carry the trivial topology and $Y=\\{a,b\\}$ the discrete topology, with $f(x)=x$. The only open sets of $X$ are $\\varnothing$ and $X$, whose images are open, so $f$ is an open map, yet $f^{-1}(\\{a\\})=\\{a\\}$ is not open in $X$, so $f$ is not continuous. Being an open map is thus an independent requirement.\n\nIf $f:X\\to Y$ is a bijection with $f$ and $f^{-1}$ both continuous, $f$ is a **homeomorphism**, written $X\\cong Y$. Equivalently: $f$ is a continuous bijection which is an open map (or a closed map). **A continuous bijection alone is not enough**: the classic example is $f(t)=(\\cos2\\pi t,\\sin2\\pi t)$, a continuous bijection $[0,1)\\to S^1$ whose inverse is discontinuous at $(1,0)$, so it is not a homeomorphism. One extra hypothesis suffices: **continuous bijection + compact domain + Hausdorff target $\\Rightarrow$ homeomorphism**.\n\nHomeomorphism is an **equivalence relation** (reflexive, symmetric, transitive), so topology classifies spaces only up to homeomorphism. Properties preserved by it are called **topological**: compactness, connectedness, the Hausdorff property, separability, second countability. Boundedness and completeness are not ($\\mathbb{R}\\cong(0,1)$, the latter bounded and incomplete). If $f:X\\to Y$ is a continuous injection which is a homeomorphism onto the subspace $f(X)$, then $f$ is an **embedding** — the precise sense in which $X$ sits inside $Y$ unchanged.",
+    "formulas": [
+      {
+        "latex": "f\\ \\text{连续}\\iff \\forall\\,U\\subseteq Y\\ \\text{开}:\\ f^{-1}(U)\\subseteq X\\ \\text{开}",
+        "note": "连续性的定义：条件是**原像**是开集。像集没有类似要求。",
+        "noteEn": "Definition of continuity: the condition is on the **preimage** being open; there is no analogous requirement on images."
+      },
+      {
+        "latex": "f\\ \\text{连续}\\iff \\forall\\,F\\subseteq Y\\ \\text{闭}:\\ f^{-1}(F)\\ \\text{闭}\\iff \\forall\\,A\\subseteq X:\\ f(\\overline{A})\\subseteq\\overline{f(A)}",
+        "note": "闭集版本与闭包版本；最后一条只能取包含号，一般不能写成等号。",
+        "noteEn": "The closed-set and closure versions; the last one is only an inclusion, and equality generally fails."
+      },
+      {
+        "latex": "f\\ \\text{在}\\ x\\ \\text{连续}\\iff \\forall\\,V\\in\\mathcal{N}(f(x))\\ \\ \\exists\\,U\\in\\mathcal{N}(x):\\ f(U)\\subseteq V",
+        "note": "逐点（局部）刻画，是度量空间中 $\\varepsilon$-$\\delta$ 语言的直接推广。",
+        "noteEn": "The pointwise (local) description, the direct generalisation of the $\\varepsilon$-$\\delta$ language of metric spaces."
+      },
+      {
+        "latex": "f\\ \\text{同胚}\\iff f\\ \\text{连续双射且}\\ f^{-1}\\ \\text{连续}\\iff f\\ \\text{连续双射且为开映射}",
+        "note": "同胚的三个等价说法；注意「连续双射」本身不够。",
+        "noteEn": "Three equivalent descriptions of a homeomorphism; note that a continuous bijection alone does not suffice."
+      },
+      {
+        "latex": "f:X\\to Y\\ \\text{连续双射},\\ X\\ \\text{紧},\\ Y\\ \\text{Hausdorff}\\ \\Longrightarrow\\ f\\ \\text{是同胚}",
+        "note": "最常用的「免费升级」定理：紧性与 Hausdorff 性各出一半力，把连续双射变成同胚。",
+        "noteEn": "The most useful free upgrade: compactness plus Hausdorffness turn a continuous bijection into a homeomorphism."
+      }
+    ],
+    "properties": [
+      "连续映射的复合连续，恒等映射与常值映射连续；只需对目标空间某个子基（或基）的成员验证原像为开集，就足以判定连续",
+      "连续 $\\not\\Rightarrow$ 开映射（常值映射把开区间映成单点），开映射 $\\not\\Rightarrow$ 连续（平凡拓扑到离散拓扑的恒等映射）；「像集是开集」与连续性无关",
+      "同胚是等价关系：自反、对称、传递；被同胚保持的性质（紧致、连通、T₀–T₃、可分、第二可数）叫拓扑性质，有界性与完备性不是拓扑性质",
+      "**连续双射未必是同胚**：$t\\mapsto(\\cos2\\pi t,\\sin2\\pi t)$ 是 $[0,1)\\to S^1$ 的连续双射，但 $[0,1)$ 不紧而 $S^1$ 紧，逆映射不连续；补上「定义域紧、目标 Hausdorff」即可",
+      "嵌入是「连续单射且是同胚到像上」；连续单射未必是嵌入，而若定义域紧、目标 Hausdorff，则连续单射自动是嵌入"
+    ],
+    "propertiesEn": [
+      "Composites of continuous maps are continuous, identity and constant maps are continuous, and continuity may be tested on the preimages of the members of any basis (or subbasis) of the target",
+      "Continuous does not imply open (a constant map sends an open interval to a point), and open does not imply continuous (identity from the trivial to the discrete topology); whether images are open is irrelevant to continuity",
+      "Homeomorphism is an equivalence relation (reflexive, symmetric, transitive); properties it preserves (compactness, connectedness, T₀–T₃, separability, second countability) are called topological, while boundedness and completeness are not",
+      "**A continuous bijection need not be a homeomorphism**: $t\\mapsto(\\cos2\\pi t,\\sin2\\pi t)$ is a continuous bijection $[0,1)\\to S^1$, but $[0,1)$ is not compact while $S^1$ is, so the inverse is discontinuous; adding compact domain and Hausdorff target repairs this",
+      "An embedding is a continuous injection that is a homeomorphism onto its image; not every continuous injection is one, but with compact domain and Hausdorff target every continuous injection is an embedding"
+    ],
+    "examples": [
+      {
+        "problem": "证明 $f:[0,1)\\to S^1=\\{(x,y)\\in\\mathbb{R}^2: x^2+y^2=1\\}$，$f(t)=(\\cos2\\pi t,\\sin2\\pi t)$ 是连续双射，但不是同胚。",
+        "solution": "**连续**：两个分量函数是连续函数 $\\cos$、$\\sin$ 与 $t\\mapsto2\\pi t$ 的复合，故 $f$ 连续（积空间的映射连续当且仅当每个分量连续）。\n**双射**：每个单位向量 $(\\cos\\theta,\\sin\\theta)$ 对应唯一的参数 $t\\in[0,1)$（取 $\\theta\\bmod 2\\pi$ 后除以 $2\\pi$），故满射且单射。\n**不同胚**：$S^1$ 是 $\\mathbb{R}^2$ 中的有界闭集，故紧；而 $[0,1)$ 不紧——开覆盖 $\\{[0,1-\\tfrac1n): n\\ge2\\}$ 没有有限子覆盖。若 $f$ 是同胚，则 $f^{-1}$ 连续，紧空间的连续像是紧的，于是 $[0,1)=f^{-1}(S^1)$ 应紧，矛盾。\n（也可以直接看逆映射：$A=[\\tfrac12,1)$ 是 $[0,1)$ 中的开集，但 $f(A)$ 是包含 $(-1,0)$ 的下半圆弧段，而 $(-1,0)$ 在 $S^1$ 中的任何邻域都含圆弧外的点，故 $f(A)$ 不是开集，$f^{-1}$ 在 $1$ 处不连续。）"
+      },
+      {
+        "problem": "举例说明 $f(\\overline{A})\\subseteq\\overline{f(A)}$ 中的包含号可能严格，并说明反向包含（$\\overline{f(A)}\\subseteq f(\\overline{A})$）一般不成立。",
+        "solution": "取 $f(x)=\\dfrac{x}{1+|x|}$，它是 $\\mathbb{R}\\to\\mathbb{R}$ 的连续映射（把 $\\mathbb{R}$ 单调地压进 $(-1,1)$），取 $A=(0,+\\infty)$，则 $\\overline{A}=[0,+\\infty)$。\n算出 $f(\\overline{A})=[0,1)$：$f(0)=0$，而 $x\\to+\\infty$ 时 $f(x)\\to1$ 但 $1$ 取不到。另一方面 $f(A)=(0,1)$，其闭包 $\\overline{f(A)}=[0,1]$。于是\n$f(\\overline{A})=[0,1)\\subsetneq[0,1]=\\overline{f(A)}$。\n严格的原因：$\\overline{A}$ 中的「无穷远极限点」被 $f$ 送到 $1$，而 $1$ 只是像集的极限点、不在像中——这正好说明连续性只保证「闭包的像落在像的闭包里」，不保证反过来。反向包含确实不成立：上例中 $\\overline{f(A)}=[0,1]\\not\\subseteq[0,1)=f(\\overline{A})$。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -4.4,
+        4.4
+      ],
+      "yRange": [
+        -2.4,
+        2.4
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": -2.2,
+          "cy": 0,
+          "r": 1.2,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.08)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1.15,
+              -1.05
+            ],
+            [
+              3.25,
+              -1.05
+            ],
+            [
+              3.25,
+              1.05
+            ],
+            [
+              1.15,
+              1.05
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.08)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            -2.2,
+            0
+          ],
+          "color": "#8c9bc8",
+          "label": "圆心 O"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.2,
+            0
+          ],
+          "color": "#8c9bc8"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -2.2,
+            0
+          ],
+          "to": [
+            -1.3515,
+            0.8485
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            0
+          ],
+          "to": [
+            3.25,
+            1.05
+          ],
+          "color": "#ffd166",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            -1.3515,
+            0.8485
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.25,
+            1.05
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.6,
+            -0.15
+          ],
+          "to": [
+            0.6,
+            -0.15
+          ],
+          "color": "#b388ff",
+          "arrow": true
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            0.15
+          ],
+          "text": "同胚 f",
+          "color": "#b388ff"
+        },
+        {
+          "type": "label",
+          "at": [
+            -2.2,
+            1.5
+          ],
+          "text": "S¹：圆周"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            1.5
+          ],
+          "text": "∂Q：正方形边界"
+        }
+      ],
+      "title": "圆与正方形边界同胚：径向投影给出连续双射，且逆映射连续"
+    },
+    "tags": [
+      "连续映射",
+      "同胚",
+      "开映射",
+      "嵌入",
+      "拓扑性质"
+    ],
+    "links": [
+      "topological-space",
+      "closed-sets-interior",
+      "subspace-product-quotient",
+      "compactness",
+      "connectedness",
+      "homotopy"
+    ]
+  },
+  {
+    "id": "subspace-product-quotient",
+    "title": "子空间、积空间与商空间",
+    "titleEn": "Subspaces, Product and Quotient Spaces",
+    "branch": "topology",
+    "level": 5,
+    "summary": "从旧空间造新空间的三大手术：子空间取相对开集、积空间取「最粗」使投影连续的拓扑、商空间取「最细」使商映射连续的拓扑。",
+    "summaryEn": "Three ways to build new spaces: relative open sets for subspaces, the coarsest topology making projections continuous for products, the finest making the quotient map continuous for quotients.",
+    "definition": "**子空间拓扑**：设 $A\\subseteq X$。在 $A$ 上取**相对开集**族 $\\tau_A=\\{U\\cap A: U\\in\\tau\\}$，称 $(A,\\tau_A)$ 为 $X$ 的**子空间**。等价的说法是：$\\tau_A$ 是使包含映射 $i:A\\hookrightarrow X$ 连续的**最粗**拓扑。闭集同样「相对化」：$F\\subseteq A$ 在 $A$ 中闭 $\\iff$ 存在 $X$ 中的闭集 $G$ 使 $F=G\\cap A$。要牢记开闭性是**相对**的：$[0,1)$ 在 $\\mathbb{R}$ 中不是开集，但在 $[0,2)$ 中是开集，因为 $[0,1)=(-1,1)\\cap[0,2)$。\n\n**积拓扑**：在 $\\prod_{i\\in I}X_i$ 上，以所有 $\\pi_i^{-1}(U_i)$（$U_i\\subseteq X_i$ 开）为**子基**生成拓扑，其中 $\\pi_i$ 是第 $i$ 个投影。它是使**每个投影都连续的最粗拓扑**。有限积 $X\\times Y$ 的基就是 $\\{U\\times V\\}$；对无限积，基本开集只限制**有限**多个坐标：$\\prod_{i\\in F}U_i\\times\\prod_{i\\notin F}X_i$（$F$ 有限）。若改为让每个坐标都是任意开集的乘积（**箱拓扑**），得到的一般是严格更细的拓扑，只有有限积时两者一致。积拓扑里收敛就是**逐坐标收敛**，因为投影连续且「限制在有限多个坐标上」正是基本开集的全部内容。\n\n**商拓扑**：设 $q:X\\to Y$ 是满射。在 $Y$ 上取 $\\tau_Y=\\{V\\subseteq Y: q^{-1}(V)\\in\\tau_X\\}$，称为由 $q$ 决定的**商拓扑**，$(Y,\\tau_Y)$ 叫**商空间**，$q$ 叫**商映射**。注意**方向与前面相反**：子空间与积拓扑是「使映射连续的最粗拓扑」，商拓扑是「使 $q$ 连续的**最细**拓扑」。$\\tau_Y$ 的确是一个拓扑（原像运算与并、交交换），而且它恰好使 $q$ 连续，且是所有这类拓扑中最细的。直观上商空间是「把 $X$ 的某些子集粘成一点」：$[0,1]$ 把 $0$ 与 $1$ 粘起来得到圆周 $S^1$，$[0,1]^2$ 把对边按同一方向粘起来得到环面。\n\n商拓扑由**泛性质**刻画：若连续映射 $g:X\\to Z$ 在每个纤维 $q^{-1}(y)$ 上取常值，则它唯一地诱导出连续映射 $\\bar g:Y\\to Z$ 使 $g=\\bar g\\circ q$。商空间常出人意料：$q$ 未必是开映射或闭映射。例如把 $[0,1]$ 中的 $A=\\{0\\}\\cup\\{1/n:n\\ge1\\}$ 粘成一点，开区间 $(1/3,2/3)$ 的像的原像是 $((1/3,2/3)\\setminus A)\\cup A$，而 $0$ 不是它的内点（$0$ 的邻域里还有点如 $0.3$ 落在该集合外），故像不是开集；又如把 $\\mathbb{R}$ 中的 $(0,1)$ 粘成一点，闭集 $[\\tfrac12,2]$ 的像是 $\\{[A]\\}\\cup[1,2]$，它的原像 $(0,1)\\cup[1,2]=(0,2]$ 不闭，故像不是闭集。商空间也不继承 Hausdorff 性：在 $\\mathbb{R}/\\mathbb{Q}$（按 $x-y\\in\\mathbb{Q}$ 作商）中，$[\\sqrt2]$ 的每个开邻域的原像含 $\\sqrt2$ 的某邻域，其中必有有理数 $r$，于是 $[0]=[r]$ 落在该邻域里——每个邻域都含 $[0]$，故不是 Hausdorff 的。",
+    "definitionEn": "**Subspace topology.** For $A\\subseteq X$ take the **relative open sets** $\\tau_A=\\{U\\cap A: U\\in\\tau\\}$; $(A,\\tau_A)$ is the **subspace** on $A$. Equivalently, $\\tau_A$ is the **coarsest** topology making the inclusion $i:A\\hookrightarrow X$ continuous. Closedness relativises too: $F\\subseteq A$ is closed in $A$ iff $F=G\\cap A$ for some closed $G\\subseteq X$. Openness and closedness are **relative**: $[0,1)$ is not open in $\\mathbb{R}$ but is open in $[0,2)$, since $[0,1)=(-1,1)\\cap[0,2)$.\n\n**Product topology.** On $\\prod_{i\\in I}X_i$ take the topology generated by the **subbasis** of all $\\pi_i^{-1}(U_i)$ with $U_i\\subseteq X_i$ open, where $\\pi_i$ is the $i$-th projection. It is the **coarsest topology making every projection continuous**. For finite products $X\\times Y$ a basis is $\\{U\\times V\\}$; for infinite products a basic open set constrains only **finitely many** coordinates: $\\prod_{i\\in F}U_i\\times\\prod_{i\\notin F}X_i$ with $F$ finite. If instead every coordinate were allowed an arbitrary open factor (**box topology**) one gets in general a strictly finer topology; the two agree only for finite products. Convergence in the product is **coordinatewise**, because the projections are continuous and basic open sets restrict only finitely many coordinates.\n\n**Quotient topology.** Let $q:X\\to Y$ be a surjection. The **quotient topology** on $Y$ is $\\tau_Y=\\{V\\subseteq Y: q^{-1}(V)\\in\\tau_X\\}$, and $(Y,\\tau_Y)$ is a **quotient space** with **quotient map** $q$. Note that the **direction is reversed**: subspaces and products use the coarsest topology making maps continuous, while the quotient uses the **finest** topology making $q$ continuous. The family $\\tau_Y$ is indeed a topology (preimages commute with unions and intersections), it makes $q$ continuous, and it is the finest such topology. Intuitively, a quotient glues subsets of $X$ into single points: gluing $0$ to $1$ in $[0,1]$ gives the circle $S^1$, and gluing opposite sides of $[0,1]^2$ gives the torus.\n\nThe quotient topology is characterised by a **universal property**: if $g:X\\to Z$ is continuous and constant on every fibre $q^{-1}(y)$, then it induces a unique continuous $\\bar g:Y\\to Z$ with $g=\\bar g\\circ q$. Quotients often behave surprisingly: $q$ need not be open or closed. Gluing $A=\\{0\\}\\cup\\{1/n:n\\ge1\\}$ in $[0,1]$ to a point, the image of the open interval $(1/3,2/3)$ has preimage $((1/3,2/3)\\setminus A)\\cup A$, which fails to be a neighbourhood of $0$, so the image is not open. Gluing $(0,1)\\subset\\mathbb{R}$ to a point, the image of the closed set $[\\tfrac12,2]$ is $\\{[A]\\}\\cup[1,2]$, whose preimage $(0,1)\\cup[1,2]=(0,2]$ is not closed, so the image is not closed. Nor do quotients inherit the Hausdorff property: in $\\mathbb{R}/\\mathbb{Q}$ (quotient by $x-y\\in\\mathbb{Q}$) every open neighbourhood of $[\\sqrt2]$ has a preimage containing a neighbourhood of $\\sqrt2$, hence a rational $r$, so $[0]=[r]$ lies in that neighbourhood — every neighbourhood of $[\\sqrt2]$ meets every neighbourhood of $[0]$, and the space is not Hausdorff.",
+    "formulas": [
+      {
+        "latex": "\\tau_A=\\{U\\cap A:\\ U\\in\\tau\\}",
+        "note": "子空间拓扑：相对开集；它是使包含映射 $A\\hookrightarrow X$ 连续的最粗拓扑。",
+        "noteEn": "Subspace topology: the relative open sets, the coarsest topology making the inclusion $A\\hookrightarrow X$ continuous."
+      },
+      {
+        "latex": "\\mathcal{S}=\\{\\pi_i^{-1}(U_i):\\ i\\in I,\\ U_i\\in\\tau_i\\},\\qquad \\mathcal{B}=\\Bigl\\{\\textstyle\\prod_{i\\in F}U_i\\times\\prod_{i\\notin F}X_i:\\ F\\ \\text{有限},\\ U_i\\in\\tau_i\\Bigr\\}",
+        "note": "积拓扑：$\\mathcal{S}$ 是子基，$\\mathcal{B}$ 是基；基本开集只限制有限多个坐标。",
+        "noteEn": "Product topology: $\\mathcal{S}$ is a subbasis and $\\mathcal{B}$ a basis; basic open sets constrain only finitely many coordinates."
+      },
+      {
+        "latex": "\\tau_Y=\\{V\\subseteq Y:\\ q^{-1}(V)\\in\\tau_X\\}",
+        "note": "商拓扑：使 $q$ 连续的**最细**拓扑（与子空间、积拓扑的「最粗」方向相反）。",
+        "noteEn": "Quotient topology: the **finest** topology making $q$ continuous, opposite in direction to the coarsest choices for subspaces and products."
+      },
+      {
+        "latex": "x^{(n)}\\to x\\ \\text{于}\\ \\textstyle\\prod_{i\\in I}X_i\\iff \\forall i\\in I:\\ \\pi_i(x^{(n)})\\to\\pi_i(x)",
+        "note": "积空间中的收敛就是逐坐标收敛：投影连续给「$\\Rightarrow$」，基本开集的性质给「$\\Leftarrow$」。",
+        "noteEn": "Convergence in a product is coordinatewise: continuity of projections gives one direction, the nature of basic open sets the other."
+      },
+      {
+        "latex": "f:Z\\to\\textstyle\\prod_i X_i\\ \\text{连续}\\iff \\forall i:\\ \\pi_i\\circ f\\ \\text{连续};\\qquad g=\\bar g\\circ q\\ \\text{且}\\ g\\ \\text{在纤维上取常值},\\ \\bar g\\ \\text{连续}",
+        "note": "两条泛性质：映到积空间只需逐分量连续；穿过商空间只需在纤维上取常值。",
+        "noteEn": "Two universal properties: mapping into a product needs only componentwise continuity, and mapping through a quotient only constancy on fibres."
+      }
+    ],
+    "properties": [
+      "子空间拓扑是使包含映射连续的最粗拓扑；开闭性是相对的（$[0,1)$ 在 $\\mathbb{R}$ 中不开，在 $[0,2)$ 中开）",
+      "积拓扑是使所有投影连续的最粗拓扑；有限积的基是 $\\{U\\times V\\}$，无限积的基本开集只限制有限多坐标，箱拓扑一般严格更细",
+      "商拓扑是使 $q$ 连续的最细拓扑；$q$ 满且连续，但**未必是开映射或闭映射**，商空间也未必 Hausdorff（$\\mathbb{R}/\\mathbb{Q}$ 即反例）",
+      "泛性质：$f:Z\\to\\prod_iX_i$ 连续 $\\iff$ 每个 $\\pi_i\\circ f$ 连续；$g:X\\to Z$ 连续且在纤维上取常值 $\\iff$ 它诱导出连续的 $\\bar g:Y\\to Z$",
+      "继承性：子空间与任意积保持 $T_0$–$T_3$、连通性、Hausdorff 性；紧致性被任意积保持（Tychonoff 定理）；正规性（$T_4$）既不被子空间也不被积保持，商空间连 Hausdorff 性都可能丢掉"
+    ],
+    "propertiesEn": [
+      "The subspace topology is the coarsest making the inclusion continuous; openness and closedness are relative ($[0,1)$ is not open in $\\mathbb{R}$ but is open in $[0,2)$)",
+      "The product topology is the coarsest making all projections continuous; for finite products a basis is $\\{U\\times V\\}$, while basic open sets in infinite products restrict only finitely many coordinates and the box topology is in general strictly finer",
+      "The quotient topology is the finest making $q$ continuous; $q$ is surjective and continuous but **need not be open or closed**, and a quotient of a metric space need not be Hausdorff ($\\mathbb{R}/\\mathbb{Q}$ is the counterexample)",
+      "Universal properties: $f:Z\\to\\prod_iX_i$ is continuous iff every $\\pi_i\\circ f$ is; a continuous $g:X\\to Z$ constant on fibres iff it induces a continuous $\\bar g:Y\\to Z$",
+      "Heredity: subspaces and arbitrary products preserve $T_0$–$T_3$, connectedness and the Hausdorff property; compactness is preserved by arbitrary products (Tychonoff); normality ($T_4$) survives neither subspaces nor products, and quotients may even lose Hausdorffness"
+    ],
+    "examples": [
+      {
+        "problem": "证明积空间中序列收敛等价于逐坐标收敛；并说明箱拓扑与积拓扑确实不同：在 $\\mathbb{R}^{\\mathbb{N}}$ 中，$\\prod_{n\\ge1}(-\\tfrac1n,\\tfrac1n)$ 在箱拓扑下开，却在积拓扑下不开。",
+        "solution": "**（$\\Rightarrow$）**每个投影 $\\pi_i$ 连续，连续映射保持收敛，故 $x^{(n)}\\to x$ 蕴含 $\\pi_i(x^{(n)})\\to\\pi_i(x)$。\n**（$\\Leftarrow$）**设各坐标收敛。任取含 $x$ 的基本开集 $\\prod_{i\\in F}U_i\\times\\prod_{i\\notin F}X_i$（$F$ 有限）。对每个 $i\\in F$，由 $\\pi_i(x^{(n)})\\to\\pi_i(x)\\in U_i$ 存在 $N_i$ 使 $n\\ge N_i$ 时 $\\pi_i(x^{(n)})\\in U_i$。取 $N=\\max_{i\\in F}N_i$（有限个数的最大值），则 $n\\ge N$ 时 $x^{(n)}$ 落在该基本开集中。基本开集构成基，故 $x^{(n)}\\to x$。\n**箱拓扑的差别**：零序列 $\\mathbf 0$ 属于 $\\prod_n(-\\tfrac1n,\\tfrac1n)$，该集合在箱拓扑下是开集。但在积拓扑中它不含任何含 $\\mathbf 0$ 的基本开集：基本开集只限制有限多坐标，其余坐标是整条 $\\mathbb{R}$，因此被「放大」后不可能塞进逐坐标越来越窄的 $(-\\tfrac1n,\\tfrac1n)$ 里。故它不是积拓扑下的开集，两种拓扑不同。"
+      },
+      {
+        "problem": "证明商空间 $[0,1]/\\{0\\sim1\\}$（把 $0$ 与 $1$ 粘成一点）同胚于单位圆周 $S^1$。",
+        "solution": "记 $q:[0,1]\\to Y=[0,1]/\\{0\\sim1\\}$ 为商映射，并令 $f(t)=(\\cos2\\pi t,\\sin2\\pi t)$。\n（1）**诱导映射**：$f$ 连续，且 $f(0)=f(1)=(1,0)$，故 $f$ 在 $q$ 的每个纤维上取常值（纤维或是单点，或是 $\\{0,1\\}$）。由商拓扑的泛性质，$f$ 唯一诱导出连续映射 $\\bar f:Y\\to S^1$，$\\bar f([t])=f(t)$。\n（2）**双射**：$\\bar f$ 满射来自 $f$ 满射。若 $\\bar f([s])=\\bar f([t])$，则 $s-t\\in\\mathbb{Z}$；在 $[0,1]$ 中这只可能是 $s=t$ 或 $\\{s,t\\}=\\{0,1\\}$，两种情形都有 $[s]=[t]$，故单射。\n（3）**同胚**：$Y$ 是紧空间 $[0,1]$ 的连续像，故紧；$S^1$ 是 $\\mathbb{R}^2$ 中的有界闭集，故 Hausdorff。由「紧空间到 Hausdorff 空间的连续双射是同胚」，$\\bar f$ 是同胚，即 $[0,1]/\\{0\\sim1\\}\\cong S^1$。\n这一步正是「把区间两端粘起来得到圆」的严格说法；同一道理把正方形的对边粘起来就得到环面。"
+      }
+    ],
+    "tags": [
+      "子空间拓扑",
+      "积拓扑",
+      "商拓扑",
+      "箱拓扑",
+      "泛性质",
+      "粘合"
+    ],
+    "links": [
+      "topological-space",
+      "basis-subbasis",
+      "continuity-homeomorphism",
+      "compactness",
+      "connectedness",
+      "closed-sets-interior"
+    ]
+  },
+  {
+    "id": "separation-axioms",
+    "title": "分离公理（T₀–T₄）",
+    "titleEn": "Separation Axioms",
+    "branch": "topology",
+    "level": 5,
+    "summary": "用开集能多精细地分离点与闭集，把拓扑空间分层：T₀、T₁、T₂（Hausdorff）、T₃（正则）、T₄（正规），蕴含方向 T₄⇒T₃⇒T₂⇒T₁⇒T₀ 不可逆。",
+    "summaryEn": "How finely open sets separate points and closed sets stratifies spaces: T₀, T₁, T₂ (Hausdorff), T₃ (regular), T₄ (normal), with the irreversible chain T₄⇒T₃⇒T₂⇒T₁⇒T₀.",
+    "definition": "分离公理衡量「开集够不够多」，用它们把点与点、点与闭集分开。设 $(X,\\tau)$ 是拓扑空间：\n**T₀（Kolmogorov）**：任意两个不同点中，**至少有一个**存在不含另一点的开集：对 $x\\ne y$，或有开集含 $x$ 不含 $y$，或有开集含 $y$ 不含 $x$。\n**T₁（Fréchet）**：任意两个不同点**各自**都存在不含另一点的开集（两个方向都要，比 T₀ 强）。它等价于**单点集都是闭集**，也等价于每个有限子集是闭集。\n**T₂（Hausdorff）**：任意两个不同点存在**不相交**的开邻域：$x\\in U$、$y\\in V$、$U\\cap V=\\varnothing$。这是分析中「极限唯一」所依赖的性质。\n**T₃（正则）**：$T_1$ 加上——一个点与一个不含它的闭集可以用不相交的开集分离：对闭集 $F$ 与 $x\\notin F$，存在开集 $U\\ni x$、$V\\supseteq F$ 使 $U\\cap V=\\varnothing$。\n**T₄（正规）**：$T_1$ 加上——**两个不相交的闭集**可以用不相交的开集分离：$A,B$ 闭且 $A\\cap B=\\varnothing$，则存在开集 $U\\supseteq A$、$V\\supseteq B$ 使 $U\\cap V=\\varnothing$。\n\n**命名差异必须说明**：多数现代教材（含本书）把 $T_3$ 定义为「正则 **+** $T_1$」、$T_4$ 定义为「正规 **+** $T_1$」；而**正则（regular）与正规（normal）本身不含 $T_1$**，只是分离性条件。也有不少教材（尤其法国、俄国传统）把「正则」直接叫 $T_3$、「正规」直接叫 $T_4$，于是同一个符号在不同书上可能差一条 $T_1$。读到 $T_3$、$T_4$ 时务必先确认作者的约定。类似地，$T_{3\\frac12}$ 指完全正则 + $T_1$，即 Tychonoff 空间。\n\n**蕴含关系**（方向不能反）：$T_4\\Rightarrow T_3\\Rightarrow T_2\\Rightarrow T_1\\Rightarrow T_0$。理由都很短：$T_2\\Rightarrow T_1$ 因为不相交开邻域本身就互相不含对方；$T_1\\Rightarrow T_0$ 显然；$T_3\\Rightarrow T_2$ 因为 $T_1$ 使 $\\{y\\}$ 成为不含 $x$ 的闭集，再用点与闭集的分离即得；只要把「闭集」换成「单点闭集」，正规（$T_4$）也蕴含正则（$T_3$）。反过来都不成立，后文给出四组反例。\n\n最后是两条基石事实。其一，**度量空间都满足 $T_4$**：度量空间显然 $T_1$（单点集闭），而任取不交闭集 $A,B$，函数 $f(x)=\\dfrac{d(x,A)}{d(x,A)+d(x,B)}$ 连续（因 $A\\cap B=\\varnothing$ 且两者都闭，分母恒不为零），$U=f^{-1}((-\\infty,\\tfrac12))$ 与 $V=f^{-1}((\\tfrac12,+\\infty))$ 就是不交开集。其二，$T_2$ 等价于**对角线 $\\Delta=\\{(x,x)\\}\\subseteq X\\times X$ 是闭集**，这个刻画把分离性与积空间联系起来。此外，$T_4$ 有强有力的等价形式：**Urysohn 引理**说正规空间（$T_4$）中任给不交闭集，都存在连续函数 $f:X\\to[0,1]$ 使 $f|_A\\equiv0$、$f|_B\\equiv1$；由此导出 Tietze 扩展定理（闭集上的连续函数可连续延拓到全空间）。",
+    "definitionEn": "The separation axioms measure whether there are enough open sets, and stratify spaces by how well they separate points from points and points from closed sets. Let $(X,\\tau)$ be a topological space.\n**T₀ (Kolmogorov)**: for any two distinct points, **at least one** of them has an open set containing it and not the other: for $x\\ne y$, either some open set contains $x$ but not $y$, or one contains $y$ but not $x$.\n**T₁ (Fréchet)**: each of two distinct points has an open set not containing the other (both directions, hence stronger than T₀). It is equivalent to every singleton being closed, and to every finite set being closed.\n**T₂ (Hausdorff)**: distinct points have **disjoint** open neighbourhoods: $x\\in U$, $y\\in V$, $U\\cap V=\\varnothing$. This is what makes limits unique in analysis.\n**T₃ (regular)**: $T_1$ plus — a point and a closed set not containing it can be separated by disjoint open sets: if $F$ is closed and $x\\notin F$ there are open $U\\ni x$, $V\\supseteq F$ with $U\\cap V=\\varnothing$.\n**T₄ (normal)**: $T_1$ plus — two disjoint closed sets can be separated by disjoint open sets: if $A,B$ are closed and disjoint there are open $U\\supseteq A$, $V\\supseteq B$ with $U\\cap V=\\varnothing$.\n\n**A naming caution is essential**: most modern texts (this one included) define $T_3$ as regular **plus** $T_1$ and $T_4$ as normal **plus** $T_1$, while **regular and normal by themselves do not include $T_1$** — they are pure separation conditions. Many texts (especially in the French and Russian traditions) call regular spaces $T_3$ and normal spaces $T_4$ outright, so the same symbol can differ by one $T_1$ from book to book; always check the author's convention. Likewise $T_{3\\frac12}$ denotes completely regular plus $T_1$, i.e. Tychonoff spaces.\n\n**Implications** (the direction cannot be reversed): $T_4\\Rightarrow T_3\\Rightarrow T_2\\Rightarrow T_1\\Rightarrow T_0$. The proofs are short: $T_2\\Rightarrow T_1$ because disjoint neighbourhoods already exclude each other; $T_1\\Rightarrow T_0$ is immediate; $T_3\\Rightarrow T_2$ because $T_1$ makes $\\{y\\}$ a closed set not containing $x$, which point-versus-closed-set separation then separates; and normality implies regularity by replacing a closed set with a singleton closed set. None of the arrows reverses, and four counterexamples are given below.\n\nTwo foundational facts close the picture. First, **every metric space is $T_4$**: it is clearly $T_1$ (singletons are closed), and for disjoint closed $A,B$ the function $f(x)=\\dfrac{d(x,A)}{d(x,A)+d(x,B)}$ is continuous (its denominator never vanishes because $A$ and $B$ are disjoint and closed), so $U=f^{-1}((-\\infty,\\tfrac12))$ and $V=f^{-1}((\\tfrac12,+\\infty))$ are disjoint open sets. Second, $T_2$ is equivalent to the **diagonal $\\Delta=\\{(x,x)\\}\\subseteq X\\times X$ being closed**, a description linking separation to products. Moreover $T_4$ has a powerful equivalent form: the **Urysohn lemma** states that in a normal ($T_4$) space any two disjoint closed sets admit a continuous $f:X\\to[0,1]$ with $f|_A\\equiv0$ and $f|_B\\equiv1$, from which the Tietze extension theorem follows (continuous functions on a closed set extend to the whole space).",
+    "formulas": [
+      {
+        "latex": "T_0:\\quad \\forall x\\neq y,\\ \\exists\\,U\\ \\text{开}:\\ x\\in U,\\ y\\notin U\\ \\ \\text{或}\\ \\ y\\in U,\\ x\\notin U",
+        "note": "T₀（Kolmogorov）：只要「有一个方向」的开集就够了，方向可以随点对而变。",
+        "noteEn": "T₀ (Kolmogorov): one open set in one of the two directions suffices, the direction depending on the pair."
+      },
+      {
+        "latex": "T_1:\\quad \\forall x\\neq y,\\ \\exists\\,U\\ni x,\\ V\\ni y\\ \\text{开}:\\ y\\notin U,\\ x\\notin V\\iff \\{x\\}\\ \\text{闭}\\ (\\forall x)",
+        "note": "T₁：两个方向都要；等价于单点集是闭集（也等价于有限集闭）。",
+        "noteEn": "T₁ requires both directions; it is equivalent to singletons being closed (and hence finite sets being closed)."
+      },
+      {
+        "latex": "T_2:\\quad \\forall x\\neq y,\\ \\exists\\,U\\ni x,\\ V\\ni y\\ \\text{开}:\\ U\\cap V=\\varnothing",
+        "note": "T₂（Hausdorff）：用**不相交**开邻域分离两点；等价于 $X\\times X$ 中的对角线是闭集。",
+        "noteEn": "T₂ (Hausdorff): distinct points get **disjoint** open neighbourhoods; equivalently the diagonal is closed in $X\\times X$."
+      },
+      {
+        "latex": "T_3:\\quad x\\notin F,\\ F\\ \\text{闭}\\ \\Longrightarrow\\ \\exists\\,U\\ni x,\\ V\\supseteq F\\ \\text{开}:\\ U\\cap V=\\varnothing",
+        "note": "点与闭集的分离（正则 + $T_1$ 叫 $T_3$；「正则」单独使用时不含 $T_1$）。",
+        "noteEn": "Separation of a point from a closed set (regular plus $T_1$ is called $T_3$; regular alone omits $T_1$)."
+      },
+      {
+        "latex": "T_4:\\quad A\\cap B=\\varnothing,\\ A,B\\ \\text{闭}\\ \\Longrightarrow\\ \\exists\\,U\\supseteq A,\\ V\\supseteq B\\ \\text{开}:\\ U\\cap V=\\varnothing",
+        "note": "两个不交闭集的分离（正规 + $T_1$ 叫 $T_4$）；蕴含方向为 $T_4\\Rightarrow T_3\\Rightarrow T_2\\Rightarrow T_1\\Rightarrow T_0$，反向均不成立。",
+        "noteEn": "Separation of two disjoint closed sets (normal plus $T_1$ is called $T_4$); the implications are $T_4\\Rightarrow T_3\\Rightarrow T_2\\Rightarrow T_1\\Rightarrow T_0$, and none reverses."
+      }
+    ],
+    "properties": [
+      "蕴含链 $T_4\\Rightarrow T_3\\Rightarrow T_2\\Rightarrow T_1\\Rightarrow T_0$，**方向不能反**：Sierpiński 空间（$X=\\{0,1\\}$，开集 $\\varnothing,\\{1\\},X$）是 $T_0$ 而非 $T_1$；无限集上的余有限拓扑是 $T_1$ 而非 $T_2$；$\\mathbb{R}$ 的 K-拓扑（基元取全部标准开区间 $(a,b)$，再加 $(a,b)\\setminus K$，其中 $K=\\{1/n: n\\ge1\\}$）是 $T_2$ 而非 $T_3$；Sorgenfrey 平面（下限拓扑的平方）是 $T_3$ 而非 $T_4$",
+      "度量空间都是 $T_4$（因而是 $T_0$–$T_3$），且更强：度量空间是完美正规的。$T_4$ 的等价形式：Urysohn 引理（不交闭集可用连续函数分离）、Tietze 扩展定理",
+      "$T_1\\iff$ 单点集闭 $\\iff$ 有限集闭；$T_2\\iff$ 对角线 $\\Delta\\subseteq X\\times X$ 闭；$T_2$ 保证收敛序列的极限唯一",
+      "遗传性与乘积性：$T_0$–$T_3$ 被任意子空间与任意积保持；$T_4$ 两者都不保持（Sorgenfrey 平面 $=$ Sorgenfrey 直线 $\\times$ 直线，因子正规而积不正规；任意 Tychonoff 空间都可嵌入某个紧 Hausdorff 空间，而后者正规，故正规空间的子空间未必正规）",
+      "商空间可以把分离性降得很低：即使出发点可度量化，商空间也未必 $T_2$（$\\mathbb{R}/\\mathbb{Q}$ 中每个开邻域都含 $[0]$），这提醒我们分离公理不是「拓扑不变式」中被商运算保留的那一类"
+    ],
+    "propertiesEn": [
+      "The chain $T_4\\Rightarrow T_3\\Rightarrow T_2\\Rightarrow T_1\\Rightarrow T_0$ **cannot be reversed**: the Sierpiński space ($X=\\{0,1\\}$, open sets $\\varnothing,\\{1\\},X$) is $T_0$ but not $T_1$; the cofinite topology on an infinite set is $T_1$ but not $T_2$; the $K$-topology on $\\mathbb{R}$ (basis: all standard open intervals together with the sets $(a,b)\\setminus K$, where $K=\\{1/n:n\\ge1\\}$) is $T_2$ but not $T_3$; the Sorgenfrey plane (square of the lower limit topology) is $T_3$ but not $T_4$",
+      "Every metric space is $T_4$ (hence $T_0$–$T_3$), and in fact perfectly normal; equivalent forms of $T_4$ include the Urysohn lemma (disjoint closed sets separated by a continuous function) and the Tietze extension theorem",
+      "$T_1$ iff singletons are closed iff finite sets are closed; $T_2$ iff the diagonal $\\Delta\\subseteq X\\times X$ is closed; $T_2$ guarantees uniqueness of limits of convergent sequences",
+      "Heredity and products: $T_0$–$T_3$ pass to arbitrary subspaces and arbitrary products; $T_4$ survives neither (the Sorgenfrey plane is the square of a normal space yet is not normal; any Tychonoff space embeds in a compact Hausdorff, hence normal, space, so subspaces of normal spaces need not be normal)",
+      "Quotients can lower separation drastically: even a metrisable space may have a non-Hausdorff quotient (in $\\mathbb{R}/\\mathbb{Q}$ every open neighbourhood contains $[0]$), so separation axioms are not among the properties retained by quotient constructions"
+    ],
+    "examples": [
+      {
+        "problem": "证明 $T_1$ 等价于「每个单点集是闭集」，并由此说明 $T_1$ 空间中每个有限子集都是闭集。",
+        "solution": "**（$\\Rightarrow$）**设空间是 $T_1$，固定 $x\\in X$，要证 $\\{x\\}$ 闭，即证 $X\\setminus\\{x\\}$ 开。任取 $y\\in X\\setminus\\{x\\}$，由 $T_1$ 存在开集 $U_y\\ni y$ 使 $x\\notin U_y$，即 $U_y\\subseteq X\\setminus\\{x\\}$。于是\n$X\\setminus\\{x\\}=\\bigcup_{y\\ne x}U_y$\n是开集之并，故为开集，$\\{x\\}$ 闭。\n**（$\\Leftarrow$）**设每个单点集闭。对 $x\\ne y$，取 $U=X\\setminus\\{y\\}$，则 $U$ 开、含 $x$ 不含 $y$；取 $V=X\\setminus\\{x\\}$，则 $V$ 开、含 $y$ 不含 $x$。这正是 $T_1$。\n**有限集**：$\\{x_1,\\dots,x_n\\}=\\{x_1\\}\\cup\\cdots\\cup\\{x_n\\}$ 是有限多个闭集之并，按闭集公理（C3）仍闭。注意 $T_0$ 不能推出单点集闭：Sierpiński 空间（开集为 $\\varnothing,\\{1\\},X$）中 $\\{0\\}$ 闭而 $\\{1\\}$ 不闭。"
+      },
+      {
+        "problem": "证明无限集 $X$ 上的余有限拓扑是 $T_1$ 但不是 $T_2$，并说明它既不是 $T_3$ 也不是 $T_4$。",
+        "solution": "**$T_1$**：任取 $x\\in X$，$X\\setminus\\{x\\}$ 的补集是有限集 $\\{x\\}$，故 $X\\setminus\\{x\\}$ 是开集，于是 $\\{x\\}$ 是闭集。由上一题，$X$ 是 $T_1$。\n**不是 $T_2$**：任取两个非空开集 $U,V$，则 $X\\setminus U$ 与 $X\\setminus V$ 都有限，于是\n$X\\setminus(U\\cap V)=(X\\setminus U)\\cup(X\\setminus V)$\n是有限集。若 $U\\cap V=\\varnothing$，则 $X=X\\setminus\\varnothing=X\\setminus(U\\cap V)$ 将是有限集，与 $X$ 无限矛盾。故任意两个非空开集必相交，不存在分离两点的不交开邻域，不是 $T_2$。\n**不是 $T_3$、$T_4$**：由蕴含链 $T_4\\Rightarrow T_3\\Rightarrow T_2$，一个不是 $T_2$ 的空间自动既不是 $T_3$ 也不是 $T_4$（证明「蕴含」时的方向：这三条公理都蕴含 $T_2$）。\n可见「$T_1$」只保证单点能闭，一点也保证不了「开集足够多到能分点」；$T_1$ 与 $T_2$ 之间的落差，是分离公理里最值得警惕的一处。"
+      }
+    ],
+    "tags": [
+      "分离公理",
+      "Hausdorff",
+      "正则空间",
+      "正规空间",
+      "T₁空间",
+      "Urysohn 引理"
+    ],
+    "links": [
+      "topological-space",
+      "closed-sets-interior",
+      "metric-space",
+      "compactness",
+      "continuity-homeomorphism"
+    ]
+  }
+]

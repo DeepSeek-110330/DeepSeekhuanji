@@ -1,0 +1,512 @@
+[
+  {
+    "id": "counting-comparison",
+    "title": "数数与比较大小",
+    "titleEn": "Counting and Comparing Numbers",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "数数就是把东西一个一个数出来；比较大小就是看哪个多、哪个少，在数轴上越往右的数越大。",
+    "summaryEn": "Counting matches objects one by one with number words; comparing tells us which group is more, and on the number line numbers grow to the right.",
+    "definition": "**数数**就是数一数有几个：手点一个、嘴里数一个，1、2、3……最后数到几，就说明一共有几个。数数有两个小规矩：每个东西只能数一次（不重复），一个也不能漏（不遗漏）。最后数到的那个数，就是这群东西的总个数。\n\n**比较大小**就是比一比哪个多、哪个少。最直观的办法是看数轴：**数轴上右边的数总比左边的数大**。比如 7 在 5 的右边，所以 7 比 5 大。比较两个正整数时还有两条规则：**先比位数，位数多的数就大**（三位数一定比两位数大）；**位数相同，就从最高位比起**，最高位上的数大的那个数就大；最高位相同，再比下一位。\n\n表示比较结果的符号有三个：「>」是大于号，开口朝着大数、尖头朝着小数；「<」是小于号，尖头朝着小数、开口朝着大数；「=」是等号，表示两个数一样大。例如 7>5、5<7、4=4。0 是最小的自然数，任何自然数都大于或等于 0。",
+    "definitionEn": "**Counting** means finding out how many things there are: we point at one object and say one number at a time—1, 2, 3, ... The last number we reach is the total number of objects. Two rules keep counting honest: each object is counted exactly once (no repeats) and none is skipped (nothing left out).\n\n**Comparing** means deciding which group has more and which has less. The clearest way is the number line: **a number on the right is always larger than a number on the left**. For example 7 lies to the right of 5, so 7 is greater than 5. Two rules make comparing whole numbers easy: **a number with more digits is larger** (every three-digit number beats every two-digit number), and **if both numbers have the same number of digits, compare from the highest place**; the bigger digit there wins, and if those digits are equal we move to the next place.\n\nThree symbols record the result: '>' means 'is greater than', and it opens toward the larger number while its point faces the smaller one; '<' means 'is less than', with its point facing the smaller number; '=' means the two numbers are equal. For example 7>5, 5<7 and 4=4. Zero is the smallest natural number: every natural number is greater than or equal to 0.",
+    "formulas": [
+      {
+        "latex": "7 > 5, \\qquad 5 < 7, \\qquad 4 = 4",
+        "note": "大于号「>」开口朝着大数，小于号「<」尖头朝着小数，等号「=」表示两个数一样大。",
+        "noteEn": "The sign '>' opens toward the larger number, '<' points at the smaller one, and '=' means the two numbers are equal."
+      },
+      {
+        "latex": "\\text{数轴上：右边的数大于左边的数}",
+        "note": "数轴是最好的比较工具：数越大，它的位置越靠右；0 在最左边。",
+        "noteEn": "The number line is the best comparison tool: the larger a number is, the farther right it sits, with 0 at the left end."
+      },
+      {
+        "latex": "\\text{位数多} \\Rightarrow \\text{数大}; \\qquad \\text{位数相同，从最高位比起}",
+        "note": "比较整数大小的两条规则：先看位数，位数多的数大；位数相同就从最高位依次比较。",
+        "noteEn": "Two rules for comparing whole numbers: more digits means larger; with equal digits, compare place by place starting from the highest."
+      },
+      {
+        "latex": "0 \\le a \\quad (a \\text{ 是自然数})",
+        "note": "0 是最小的自然数，其余自然数都比它大。",
+        "noteEn": "Zero is the smallest natural number; every other natural number is larger."
+      }
+    ],
+    "properties": [
+      "数轴上右边的数总比左边的数大：0 在最左边，所以 0 比任何其他自然数都小。",
+      "比较大小先看位数：位数多的数大（四位数大于一切三位数）；位数相同就从最高位比起，最高位大的数就大，最高位相同再比下一位。",
+      "大于号「>」的开口总是朝着大数，像张开的大嘴巴吃掉大的那个数；小于号「<」的尖头朝着小数。",
+      "数数时每个东西正好数一次，不重复、不遗漏，最后一个数到的数就是总个数。",
+      "两个数比较有且只有三种结果：大于、小于或等于，例如 6 和 4 只可能是 6>4。"
+    ],
+    "propertiesEn": [
+      "On the number line, a number on the right is always larger: 0 sits at the left end, so it is smaller than every other natural number.",
+      "Compare digits first: more digits means larger (any four-digit number beats every three-digit number); with equal digits, compare from the highest place, and if those digits are equal move to the next place.",
+      "The sign '>' opens toward the larger number, like a hungry mouth eating the big one, while '<' points at the smaller number.",
+      "When counting, each object is counted exactly once, with no repeats and nothing skipped; the last number spoken is the total.",
+      "A comparison has exactly three possible outcomes: greater than, less than, or equal to—for instance 6 and 4 can only give 6>4."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        10
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 3,
+          "label": "3",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 5,
+          "label": "5",
+          "color": "#ffd166"
+        },
+        {
+          "at": 8,
+          "label": "8",
+          "color": "#06d6a0"
+        },
+        {
+          "at": 10,
+          "label": "10",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "数轴 0~10：越往右，数越大（10 > 8 > 5 > 3 > 0）"
+    },
+    "examples": [
+      {
+        "problem": "红盘子里有 6 个苹果，蓝盘子里有 4 个苹果，哪盘多？多几个？",
+        "solution": "6 和 4 比大小：在数轴上 6 在 4 的右边，所以 $6 > 4$，红盘子多。再算多几个：$6 - 4 = 2$（个），红盘子比蓝盘子多 2 个。"
+      },
+      {
+        "problem": "比较 342 和 298 的大小。",
+        "solution": "两个数都是三位数，位数相同，就从最高位（百位）比起：$3 > 2$，所以 $342 > 298$。（换成数轴也好记：342 在 298 的右边）"
+      }
+    ],
+    "tags": [
+      "数数",
+      "比大小",
+      "数轴"
+    ],
+    "links": [
+      "whole-numbers",
+      "addition-subtraction",
+      "large-numbers"
+    ]
+  },
+  {
+    "id": "whole-numbers",
+    "title": "整数的认识与数位",
+    "titleEn": "Whole Numbers and Place Value",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "整数用数字和数位写出来：从右边起是个位、十位、百位、千位……每相邻两个计数单位之间的进率都是 10。",
+    "summaryEn": "Whole numbers are written with digits and place value: from the right come the ones, tens, hundreds and thousands places, and every two neighbouring counting units differ by a factor of 10.",
+    "definition": "像 0、1、2、3、4……这样能用来数物体个数的数叫**自然数**；自然数都是**整数**（整数还包括以后要学的负整数）。一个数不管多大，都是用 0~9 这十个数字写出来的。\n\n写数时，每个数字站的位置叫**数位**。从右边起，第一位是**个位**，第二位是**十位**，第三位是**百位**，第四位是**千位**，第五位是**万位**……再往左还有十万位、百万位、千万位、亿位，把它们排成表就是**数位顺序表**，读数和写数都要对着它。**同一个数字站在不同的数位上，表示的值不同**：如 3257 中，3 在千位上表示 3 个千（3000），2 在百位上表示 2 个百（200），5 在十位上表示 5 个十（50），7 在个位上表示 7 个一（7）。\n\n数数用的「一、十、百、千、万……」叫做**计数单位**。数位与计数单位不是一回事：说「十位」是说数字站的**位置**，说「十」才是说**计数单位**。**十进制计数法**规定：**每相邻两个计数单位之间的进率都是 10**——10 个一是十，10 个十是一百，10 个百是一千，10 个千是一万。读数和写数都从最高位开始：写数时哪一位上一个单位也没有，就在那一位写 0 占位；读数时中间连续几个 0 只读一个「零」，末尾的 0 都不读，例如 3050 读作「三千零五十」。",
+    "definitionEn": "Numbers such as 0, 1, 2, 3, 4, ... that count objects are called **natural numbers**, and every natural number is a **whole number** (whole numbers also include the negative integers learned later). No matter how large a number is, we write it with just the ten digits 0 to 9.\n\nThe position each digit stands in is its **place value position**. From the right, the first place is the **ones**, then the **tens**, the **hundreds**, the **thousands**, the **ten-thousands**, and further left come the hundred-thousands, millions and more; listed in order they form the **place-value chart**, which we follow when reading and writing numbers. **The same digit means different values in different places**: in 3257 the 3 stands in the thousands place and means 3 thousands (3000), the 2 in the hundreds place means 2 hundreds (200), the 5 in the tens place means 5 tens (50), and the 7 in the ones place means 7 ones (7).\n\nOne, ten, hundred, thousand, ten-thousand, ... are called **counting units**. A place and a counting unit are different things: 'the tens place' names a position, while 'ten' names the unit itself. The **base-ten system** states: **each pair of neighbouring counting units has a rate of 10**—10 ones make a ten, 10 tens make a hundred, 10 hundreds make a thousand, and 10 thousands make a ten-thousand. We always read and write numbers starting from the highest place: if a place has no unit at all we write 0 there to hold the position; when reading, several zeros in the middle are read as a single 'zero' while zeros at the end are not read at all—for example 3050 is read as 'three thousand and fifty'.",
+    "formulas": [
+      {
+        "latex": "\\text{数位顺序（从右往左）：个、十、百、千、万、十万、百万、千万、亿}",
+        "note": "数位顺序表：写数和读数时，数字就站在这些位置上。",
+        "noteEn": "The place-value chart: these are the positions digits stand in when we write and read numbers."
+      },
+      {
+        "latex": "10\\text{ 个一是十},\\quad 10\\text{ 个十是一百},\\quad 10\\text{ 个百是一千},\\quad 10\\text{ 个千是一万}",
+        "note": "十进制计数法：每相邻两个计数单位之间的进率都是 10，也就是「满十进一」。",
+        "noteEn": "The base-ten system: each pair of neighbouring counting units has a rate of 10, so ten of one unit make one of the next."
+      },
+      {
+        "latex": "3257 = 3 \\times 1000 + 2 \\times 100 + 5 \\times 10 + 7 \\times 1",
+        "note": "把数按数位拆开：千位上的 3 表示 3000，百位上的 2 表示 200，十位上的 5 表示 50，个位上的 7 表示 7。",
+        "noteEn": "Splitting a number by place: the 3 in the thousands place is 3000, the 2 in the hundreds place is 200, the 5 in the tens place is 50, and the 7 in the ones place is 7."
+      },
+      {
+        "latex": "3\\text{（个位）}=3,\\qquad 3\\text{（十位）}=30,\\qquad 3\\text{（百位）}=300",
+        "note": "同一个数字 3 在不同的数位上，表示的值不同：个位是 3，十位是 30，百位是 300。",
+        "noteEn": "The same digit 3 means different values in different places: 3 in the ones place, 30 in the tens place, and 300 in the hundreds place."
+      }
+    ],
+    "properties": [
+      "数位是数字站的位置（个位、十位……），计数单位是数数的单位（一、十、百……），两者不同：说「十位」指位置，说「十」指计数单位。",
+      "十进制计数法：每相邻两个计数单位之间的进率都是 10，10 个一是十，10 个十是一百，10 个百是一千，满十就要向前一位进一。",
+      "同一个数字在不同数位上表示的值不同：3 在个位表示 3，在十位表示 30，在百位表示 300。",
+      "读数和写数都从最高位开始：写数时哪一位上一个单位也没有就写 0 占位；读数时中间连续几个 0 只读一个「零」，末尾的 0 不读。",
+      "0 是最小的自然数，表示一个也没有；一个数的最高位上不能是 0，例如 035 其实就是 35。"
+    ],
+    "propertiesEn": [
+      "A place is the position a digit stands in (ones, tens, ...), while a counting unit is a unit we count with (one, ten, hundred, ...): 'the tens place' names a position, but 'ten' names the unit.",
+      "Base-ten system: each pair of neighbouring counting units has a rate of 10—10 ones make a ten, 10 tens make a hundred, 10 hundreds make a thousand—so whenever we reach ten, we carry one into the next place.",
+      "The same digit means different values in different places: 3 means 3 in the ones place, 30 in the tens place, and 300 in the hundreds place.",
+      "We read and write numbers starting from the highest place: when a place has no unit we write 0 to hold it; when reading, several middle zeros are read as a single 'zero' and trailing zeros are not read.",
+      "0 is the smallest natural number and means 'none at all'; the highest place of a written number cannot be 0, for 035 is really just 35."
+    ],
+    "examples": [
+      {
+        "problem": "在 6403 中，数字 4 在哪一位上？它表示多少？",
+        "solution": "从右往左数：3 在个位，0 在十位，4 在百位，6 在千位。所以 4 在百位上，表示 4 个百，也就是 $4 \\times 100 = 400$。"
+      },
+      {
+        "problem": "一个数由 3 个千、5 个十和 2 个一组成，这个数写作多少？读作什么？",
+        "solution": "按数位摆好：千位是 3、百位没有就写 0、十位是 5、个位是 2，所以 $3 \\times 1000 + 5 \\times 10 + 2 = 3052$，写作 3052，读作「三千零五十二」。"
+      }
+    ],
+    "tags": [
+      "整数",
+      "数位",
+      "十进制"
+    ],
+    "links": [
+      "counting-comparison",
+      "large-numbers",
+      "rounding-approximation"
+    ]
+  },
+  {
+    "id": "addition-subtraction",
+    "title": "加法和减法",
+    "titleEn": "Addition and Subtraction",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "加法把两个数合并成一个数，减法从和里去掉一个加数求另一个加数；减法是加法的逆运算，算完要记得验算。",
+    "summaryEn": "Addition puts two numbers together into one, and subtraction takes one addend out of the sum to find the other; subtraction is the inverse operation of addition, and checking your work is easy.",
+    "definition": "**加法**就是把两个数**合并**成一个数的运算。盘子里有 3 个苹果，又放进 4 个苹果，现在一共几个？把 3 和 4 合并起来：3+4=7（个）。相加的两个数叫**加数**，得到的结果叫**和**。\n\n**减法**是已知两个数的**和**与其中一个**加数**，求另一个**加数**的运算，也可以说成「从总数里去掉一部分，求还剩多少」。例如 7−3=4：从 7 里去掉 3，还剩 4。减号前面的 7 叫**被减数**，后面的 3 叫**减数**，结果 4 叫**差**。**减法是加法的逆运算**——加法往「合」的方向走，减法往「分」的方向走。\n\n因为减法和加法有这样的关系，所以能互相验算：算完加法，用**和减去一个加数**看是不是另一个加数；算完减法，用**差加减数**看是不是被减数。还要记住 0 的特别之处：0 加任何数等于那个数，任何数减 0 还是它自己，两个相同的数相减得 0。",
+    "definitionEn": "**Addition** puts two numbers together into one. If there are 3 apples on a plate and 4 more are added, how many are there now? We combine 3 and 4: 3+4=7 apples. The numbers being added are called **addends** and the result is the **sum**.\n\n**Subtraction** is the operation that, given the **sum** of two numbers and one of its **addends**, finds the other addend. We can also say it takes a part away from the whole and asks what is left. For example 7−3=4: taking 3 away from 7 leaves 4. Here 7 is the **minuend**, 3 is the **subtrahend**, and the result 4 is the **difference**. **Subtraction is the inverse operation of addition**: addition joins numbers together, while subtraction separates them again.\n\nBecause addition and subtraction undo each other, each can check the other. After an addition, subtract one addend from the sum to see whether the other addend appears; after a subtraction, add the difference to the subtrahend to see whether the minuend appears. Remember the special role of 0: adding 0 to a number leaves it unchanged, subtracting 0 from a number leaves it unchanged, and subtracting a number from itself gives 0.",
+    "formulas": [
+      {
+        "latex": "\\text{加数} + \\text{加数} = \\text{和}",
+        "note": "加法的意义：把两个数合并成一个数。",
+        "noteEn": "What addition means: combining two numbers into one."
+      },
+      {
+        "latex": "\\text{被减数} - \\text{减数} = \\text{差}",
+        "note": "减法的意义：已知和与一个加数，求另一个加数。",
+        "noteEn": "What subtraction means: given the sum and one addend, find the other addend."
+      },
+      {
+        "latex": "\\text{和} - \\text{一个加数} = \\text{另一个加数}",
+        "note": "减法是加法的逆运算，这条式子也是加法的验算方法。",
+        "noteEn": "Subtraction is the inverse of addition; this identity is also how we check an addition."
+      },
+      {
+        "latex": "\\text{差} + \\text{减数} = \\text{被减数}",
+        "note": "用加法给减法验算：把差和减数加起来，应该等于被减数。",
+        "noteEn": "Checking a subtraction with addition: difference plus subtrahend should give the minuend."
+      },
+      {
+        "latex": "a + 0 = a, \\qquad a - 0 = a, \\qquad a - a = 0",
+        "note": "0 参与加减法的规则：加 0 不变，减 0 不变，自己减自己得 0。",
+        "noteEn": "Rules for 0 in addition and subtraction: adding 0 changes nothing, subtracting 0 changes nothing, and a number minus itself is 0."
+      }
+    ],
+    "properties": [
+      "加法与减法的关系：加数+加数=和，和−一个加数=另一个加数，所以减法是加法的逆运算。",
+      "验算方法：加法用减法验算（和−一个加数=另一个加数）；减法用加法验算（差+减数=被减数）。",
+      "0 的规则：0 加任何数等于那个数（a+0=a）；任何数减 0 得它自己（a−0=a）；两个相同的数相减得 0（a−a=0）。",
+      "在数轴上做加法就是从第一个数出发向右跳第二个数那么多格；做减法就向左跳。",
+      "两个加数交换位置，和不变：3+4=4+3（以后学运算定律时会用到）。"
+    ],
+    "propertiesEn": [
+      "The link between them: addend + addend = sum, and sum − one addend = the other addend, so subtraction is the inverse operation of addition.",
+      "Checking: a subtraction checks an addition (sum − one addend = the other addend), and an addition checks a subtraction (difference + subtrahend = minuend).",
+      "The rules of 0: 0 plus any number is that number (a+0=a); any number minus 0 is itself (a−0=a); and a number minus itself is 0 (a−a=0).",
+      "On the number line, adding means jumping to the right from the first number by the second, while subtracting means jumping to the left.",
+      "Swapping the two addends does not change the sum: 3+4=4+3 (we shall meet this again as a law of operation)."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        10
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "从 0 出发",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 3,
+          "label": "先跳 3 格到 3",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 7,
+          "label": "再跳 4 格到 7",
+          "color": "#ff6b9d"
+        }
+      ],
+      "intervals": [
+        {
+          "from": 0,
+          "to": 3,
+          "color": "#4cc9f0"
+        },
+        {
+          "from": 3,
+          "to": 7,
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "在数轴上算 3+4：向右跳 3 格，再向右跳 4 格，落到 7"
+    },
+    "examples": [
+      {
+        "problem": "用数轴计算 3+4，并用减法验算。",
+        "solution": "从 0 出发，向右跳 3 格到 3，再向右跳 4 格落到 7，所以 $3 + 4 = 7$。验算：$7 - 3 = 4$，和减一个加数等于另一个加数，算对了。"
+      },
+      {
+        "problem": "妈妈买了 23 个鸡蛋，用了 15 个，还剩多少个？",
+        "solution": "从总数 23 里去掉 15：$23 - 15 = 8$（个），还剩 8 个。验算：$8 + 15 = 23$（差+减数=被减数），算对了。"
+      }
+    ],
+    "tags": [
+      "加法",
+      "减法",
+      "验算",
+      "数轴"
+    ],
+    "links": [
+      "counting-comparison",
+      "multiplication-division",
+      "whole-numbers"
+    ]
+  },
+  {
+    "id": "multiplication-division",
+    "title": "乘法和除法",
+    "titleEn": "Multiplication and Division",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "乘法是求几个相同加数的和的简便运算，除法是乘法的逆运算；有余数时余数要比除数小，0 不能作除数。",
+    "summaryEn": "Multiplication is a short way to add equal numbers, division is its inverse operation, and in division with a remainder the remainder must be smaller than the divisor—and 0 can never be a divisor.",
+    "definition": "**乘法**是求**几个相同加数的和**的简便运算。3+3+3+3 是 4 个 3 相加，写起来太长，可以写成 3×4=12。相乘的两个数叫**因数**，得到的结果叫**积**。**乘法是加法的简便运算**，看到「每盘 3 个，4 盘」这种「几个几」的问题，就用乘法。\n\n**除法**是已知两个因数的积与其中一个因数，求另一个因数的运算，**除法是乘法的逆运算**。除法在生活中常有两种意思：①**平均分**：12 个苹果平均放进 4 个盘子，每盘几个？12÷4=3（个）；②**包含除**：12 个苹果，每 3 个装一袋，能装几袋？12÷3=4（袋），也就是看 12 里面有几个 3。\n\n分东西时有时分不完，就出现**余数**。例如 17÷5：17 里面最多有 3 个 5，还剩 2，写成 17÷5=3……2。这里**被除数 = 除数 × 商 + 余数**，而且**余数一定要小于除数**，否则还能再分。还要记住关于 0 的规则：任何数乘 0 都得 0；0 除以任何**非零**的数得 0；但**0 不能作除数**，例如 6÷0 是没有意义的，因为找不到一个数乘 0 能得到 6。",
+    "definitionEn": "**Multiplication** is a short way of adding equal numbers: it gives the sum of several equal addends. 3+3+3+3 is four 3s added together, which we write as 3×4=12. The two numbers multiplied are **factors** and the result is the **product**. **Multiplication is a shortcut for addition**: when a problem says '3 in each group and 4 groups', multiplication does the job at once.\n\n**Division** works the other way round: given the product of two factors and one of them, it finds the other factor, so **division is the inverse operation of multiplication**. Division has two everyday meanings: first, **sharing equally**—12 apples put equally onto 4 plates, how many on each plate? 12÷4=3; second, **measuring how many groups**—12 apples packed 3 to a bag, how many bags? 12÷3=4, that is, how many 3s are inside 12.\n\nSometimes things cannot be shared out exactly, and we get a **remainder**. For example, in 17÷5 the number 17 holds three 5s with 2 left over, written 17÷5=3 remainder 2. In every such division, **dividend = divisor × quotient + remainder**, and **the remainder must be smaller than the divisor**, or else another group could still be made. Remember the rules of 0: any number times 0 is 0; 0 divided by any non-zero number is 0; but **0 can never be a divisor**—for instance 6÷0 has no meaning, because no number times 0 can give 6.",
+    "formulas": [
+      {
+        "latex": "3 + 3 + 3 + 3 = 3 \\times 4 = 12",
+        "note": "乘法是加法的简便运算：4 个 3 相加，就是 3×4。",
+        "noteEn": "Multiplication shortens repeated addition: four 3s added together give 3×4."
+      },
+      {
+        "latex": "\\text{因数} \\times \\text{因数} = \\text{积}, \\qquad \\text{被除数} \\div \\text{除数} = \\text{商}",
+        "note": "乘法中各部分的名字是因数、积；除法中各部分的名字是被除数、除数、商。",
+        "noteEn": "In multiplication the parts are factors and product; in division they are dividend, divisor and quotient."
+      },
+      {
+        "latex": "\\text{商} \\times \\text{除数} = \\text{被除数}",
+        "note": "除法是乘法的逆运算，这条式子也是没有余数时除法的验算方法。",
+        "noteEn": "Division is the inverse of multiplication, and this identity checks a division that has no remainder."
+      },
+      {
+        "latex": "\\text{被除数} = \\text{除数} \\times \\text{商} + \\text{余数}, \\qquad \\text{余数} < \\text{除数}",
+        "note": "有余数的除法：如 17÷5=3……2，因为 5×3+2=17，并且 2<5。",
+        "noteEn": "Division with remainder: e.g. 17÷5=3 remainder 2, since 5×3+2=17 and 2<5."
+      },
+      {
+        "latex": "a \\times 0 = 0, \\qquad 0 \\div a = 0 \\ (a \\neq 0), \\qquad a \\div 0 \\text{ 没有意义}",
+        "note": "0 的规则：乘 0 得 0；0 除以非零数得 0；0 绝对不能作除数。",
+        "noteEn": "Rules of 0: times 0 gives 0; 0 divided by a non-zero number gives 0; and 0 must never be a divisor."
+      }
+    ],
+    "properties": [
+      "乘法是加法的简便运算：求几个相同加数的和，就用乘法（3+3+3+3 写成 3×4）。",
+      "除法是乘法的逆运算：已知积和一个因数，用除法求另一个因数；没有余数时商×除数=被除数。",
+      "有余数的除法中，被除数=除数×商+余数，并且余数一定小于除数，否则说明还能再分。",
+      "0 的规则：任何数乘 0 得 0；0 除以任何非零数得 0；0 不能作除数，a÷0 没有意义。",
+      "乘法口诀（九九表）能又快又准地算乘法，也能帮我们想除法：由 3×4=12 想到 12÷4=3、12÷3=4。"
+    ],
+    "propertiesEn": [
+      "Multiplication is a shortcut for addition: to add several equal numbers, multiply (3+3+3+3 becomes 3×4).",
+      "Division is the inverse operation of multiplication: given the product and one factor, division finds the other; with no remainder, quotient × divisor = dividend.",
+      "In division with a remainder, dividend = divisor × quotient + remainder, and the remainder is always smaller than the divisor—otherwise another group could still be made.",
+      "Rules of 0: any number times 0 is 0; 0 divided by a non-zero number is 0; and 0 can never be a divisor, so a÷0 has no meaning.",
+      "The multiplication table gives fast, accurate products and also answers divisions: from 3×4=12 we get 12÷4=3 and 12÷3=4."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "3*x",
+          "color": "#4cc9f0",
+          "label": "y = 3x（x 个 3 相加）"
+        }
+      ],
+      "xRange": [
+        0,
+        6
+      ],
+      "yRange": [
+        0,
+        20
+      ],
+      "title": "乘法是「几个几相加」：x 个 3 相加就是 y = 3x，如 x=4 时 y=12"
+    },
+    "examples": [
+      {
+        "problem": "每盘放 3 个苹果，4 盘一共多少个？",
+        "solution": "4 盘就是 4 个 3 相加：$3 + 3 + 3 + 3 = 12$。用乘法算更快：$3 \\times 4 = 12$（个）。验算：$12 \\div 4 = 3$（个），每盘正好 3 个，算对了。"
+      },
+      {
+        "problem": "17 个苹果，每 5 个装一袋，可以装几袋？还剩几个？",
+        "solution": "看 17 里面有几个 5：$17 \\div 5 = 3 \\cdots\\cdots 2$，所以可以装 3 袋，还剩 2 个。验算：$5 \\times 3 + 2 = 17$（被除数=除数×商+余数），而且 $2 < 5$（余数小于除数），算对了。"
+      }
+    ],
+    "tags": [
+      "乘法",
+      "除法",
+      "余数",
+      "口诀"
+    ],
+    "links": [
+      "addition-subtraction",
+      "factors-multiples",
+      "four-operations-order"
+    ]
+  },
+  {
+    "id": "four-operations-order",
+    "title": "四则运算与运算顺序",
+    "titleEn": "The Four Operations and Order of Operations",
+    "branch": "elementary-basics",
+    "level": 1,
+    "summary": "加、减、乘、除合称四则运算；先乘除后加减，有括号先算括号里面的（先小括号、再中括号），同级运算从左到右。",
+    "summaryEn": "Addition, subtraction, multiplication and division are the four operations; work out multiplication and division before addition and subtraction, do what is inside brackets first, and go left to right for operations of the same rank.",
+    "definition": "加法、减法、乘法、除法这四种运算，合起来叫**四则运算**。一个式子里如果同时出现好几种运算，不能随便从左往右算，要按大家约定好的**运算顺序**来算，不然同一个式子会算出不同的答案，那就乱套了。\n\n运算顺序的规则有三条：①只有加减法，或者只有乘除法，这些是**同级运算**，**从左到右**依次计算；②既有加减又有乘除，**先算乘除，再算加减**；③式子里有括号，就**先算括号里面的**：先算小括号（ ），再算中括号［ ］，最后算括号外面的。\n\n看一个例子：3+4×5 先算 4×5=20，再算 3+20=23；如果写成 (3+4)×5，就先算括号里的 3+4=7，再算 7×5=35。可见括号能改变运算顺序，也改变结果。算完后，可以再按顺序检查一遍，或者把结果代回原来的意思想一想合不合理。",
+    "definitionEn": "Addition, subtraction, multiplication and division together are called the **four operations**. When several of them appear in one expression we cannot simply work from left to right; we follow the agreed **order of operations**, otherwise the same expression would give different answers.\n\nThere are three rules: first, if an expression contains only additions and subtractions, or only multiplications and divisions, these are **operations of the same rank** and we work **from left to right**; second, if additions and subtractions are mixed with multiplications and divisions, **do the multiplication and division first, then the addition and subtraction**; third, if there are brackets, **work out what is inside them first**—round brackets ( ) first, then square brackets [ ], and the outside part last.\n\nFor example, in 3+4×5 we first do 4×5=20 and then 3+20=23; but (3+4)×5 first does the bracket, 3+4=7, and then 7×5=35. So brackets change both the order and the result. When you have finished, check the expression again in order, or see whether the answer makes sense in the original situation.",
+    "formulas": [
+      {
+        "latex": "a - b + c = (a - b) + c, \\qquad a \\div b \\times c = (a \\div b) \\times c",
+        "note": "同级运算从左到右：只有加减或只有乘除时，按出现顺序一步一步算。",
+        "noteEn": "Operations of the same rank go left to right: with only additions and subtractions, or only multiplications and divisions, work step by step in order."
+      },
+      {
+        "latex": "a + b \\times c = a + (b \\times c)",
+        "note": "先乘除，后加减：像 3+4×5 要先算 4×5=20，再算 3+20=23。",
+        "noteEn": "Multiplication and division come before addition and subtraction: in 3+4×5 we first do 4×5=20, then 3+20=23."
+      },
+      {
+        "latex": "a \\times [b + (c - d)]",
+        "note": "有括号先算括号里面的：先算小括号 (c−d)，再算中括号，最后算外面的乘法。",
+        "noteEn": "Brackets first: do the round bracket (c−d), then the square bracket, and only then the multiplication outside."
+      },
+      {
+        "latex": "3 + 4 \\times 5 = 23, \\qquad (3 + 4) \\times 5 = 35",
+        "note": "括号改变运算顺序，也改变结果：两个式子的答案 23 和 35 不一样。",
+        "noteEn": "Brackets change the order and the answer: the two expressions give 23 and 35, which are different."
+      }
+    ],
+    "properties": [
+      "只有加减法或只有乘除法时，从左到右依次计算，例如 20−8+5，先算 20−8=12，再算 12+5=17。",
+      "既有加减又有乘除时，先算乘除，后算加减，例如 3+4×5=23，不能先算 3+4。",
+      "有括号先算括号里面的：先小括号，再中括号；括号的作用就是改变原来的运算顺序。",
+      "括号的位置不同，结果常常不同：(3+4)×5=35，而 3+4×5=23。",
+      "算式里的 0 也要按顺序处理：0 不能作除数；加上 0 或减去 0 都不改变数的大小。"
+    ],
+    "propertiesEn": [
+      "With only additions and subtractions, or only multiplications and divisions, work left to right: in 20−8+5 do 20−8=12 first, then 12+5=17.",
+      "When both kinds are mixed, do multiplication and division before addition and subtraction: 3+4×5=23, never starting with 3+4.",
+      "Brackets come first—round brackets before square brackets; their whole purpose is to change the usual order.",
+      "Brackets in different places usually give different results: (3+4)×5=35, while 3+4×5=23.",
+      "Zero in a mixed expression also follows the order: 0 can never be a divisor, and adding or subtracting 0 does not change a number."
+    ],
+    "examples": [
+      {
+        "problem": "计算 6 + 2 × 5。",
+        "solution": "有乘有加，先算乘法：$2 \\times 5 = 10$；再算加法：$6 + 10 = 16$。所以 $6 + 2 \\times 5 = 16$。（如果先算 6+2 得到 40，就是没有遵守运算顺序）"
+      },
+      {
+        "problem": "计算 40 − (12 + 8) ÷ 4。",
+        "solution": "先算小括号：$12 + 8 = 20$；再算除法：$20 \\div 4 = 5$（有加减和除，先算除法）；最后算减法：$40 - 5 = 35$。所以 $40 - (12 + 8) \\div 4 = 35$。"
+      }
+    ],
+    "tags": [
+      "四则运算",
+      "运算顺序",
+      "括号"
+    ],
+    "links": [
+      "addition-subtraction",
+      "multiplication-division",
+      "operation-laws-elementary"
+    ]
+  },
+  {
+    "id": "operation-laws-elementary",
+    "title": "运算定律与简便计算",
+    "titleEn": "Laws of Operation and Mental Math",
+    "branch": "elementary-basics",
+    "level": 2,
+    "summary": "加法交换律、结合律，乘法交换律、结合律、分配律，以及减法、除法的性质，能让计算又快又对；特别注意只有乘法对加法有分配律。",
+    "summaryEn": "The commutative and associative laws, the distributive law, and the properties of subtraction and division let us compute quickly and correctly—and only multiplication distributes over addition.",
+    "definition": "在四则运算里，有些「调换位置」「重新分组」「先拆再合」的做法不会改变答案，这些规律叫**运算定律**。记住它们，很多计算就能用**简便算法**又快又对地完成。\n\n五条定律分别是：**加法交换律** a+b=b+a，**加法结合律** (a+b)+c=a+(b+c)，**乘法交换律** a×b=b×a，**乘法结合律** (a×b)×c=a×(b×c)，**乘法分配律** (a+b)×c=a×c+b×c。还有两条好用的性质：**减法的性质** a−b−c=a−(b+c)，连减可以一次减去两个数的和；**除法的性质** a÷b÷c=a÷(b×c)，连除可以一次除以两个数的积（这里 b、c 都不能为 0）。\n\n要特别小心一个最容易出错的地方：**只有乘法对加法有分配律，加法对乘法没有分配律**！(a+b)×c=a×c+b×c 是对的，但 a+b×c 不能改写成 (a+b)×c，例如 3+4×5=23，而 (3+4)×5=35，两个结果不一样。简便计算常用的办法有两种：一是**凑整**，如 25×4=100、125×8=1000；二是**提取公因数**，如 36×99+36=36×(99+1)=3600。",
+    "definitionEn": "Among the four operations there are patterns that let us swap positions, regroup, or split and rejoin numbers without changing the answer; these are the **laws of operation**. Knowing them turns many calculations into fast **mental math**.\n\nThe five laws are: the **commutative law of addition** a+b=b+a, the **associative law of addition** (a+b)+c=a+(b+c), the **commutative law of multiplication** a×b=b×a, the **associative law of multiplication** (a×b)×c=a×(b×c), and the **distributive law** (a+b)×c=a×c+b×c. Two more handy properties are the **property of subtraction** a−b−c=a−(b+c), where subtracting twice is the same as subtracting the sum, and the **property of division** a÷b÷c=a÷(b×c), where dividing twice is the same as dividing by the product (b and c must not be 0).\n\nWatch out for the most common mistake: **only multiplication distributes over addition—addition does not distribute over multiplication**! (a+b)×c=a×c+b×c is correct, but a+b×c may not be rewritten as (a+b)×c: for example 3+4×5=23 while (3+4)×5=35, and these are different. Two favourite tricks for easy computation are making round numbers, such as 25×4=100 and 125×8=1000, and taking out the common factor, such as 36×99+36=36×(99+1)=3600.",
+    "formulas": [
+      {
+        "latex": "a + b = b + a, \\qquad (a + b) + c = a + (b + c)",
+        "note": "加法交换律与加法结合律：加数交换位置、重新分组，和都不变。",
+        "noteEn": "Commutative and associative laws of addition: swapping or regrouping addends leaves the sum unchanged."
+      },
+      {
+        "latex": "a \\times b = b \\times a, \\qquad (a \\times b) \\times c = a \\times (b \\times c)",
+        "note": "乘法交换律与乘法结合律：因数交换位置、重新分组，积都不变。",
+        "noteEn": "Commutative and associative laws of multiplication: swapping or regrouping factors leaves the product unchanged."
+      },
+      {
+        "latex": "(a + b) \\times c = a \\times c + b \\times c",
+        "note": "乘法分配律：乘法可以「分」给括号里的每一项；提取公因数就用它。",
+        "noteEn": "The distributive law: multiplying by a sum multiplies each addend; we also use it backwards to take out a common factor."
+      },
+      {
+        "latex": "a - b - c = a - (b + c), \\qquad a \\div b \\div c = a \\div (b \\times c) \\ (b, c \\neq 0)",
+        "note": "减法性质与除法性质：连减可以减去两个数的和，连除可以除以两个数的积。",
+        "noteEn": "The properties of subtraction and division: subtracting twice equals subtracting the sum, and dividing twice equals dividing by the product."
+      },
+      {
+        "latex": "25 \\times 4 = 100, \\qquad 125 \\times 8 = 1000",
+        "note": "凑整的好搭档：看到 25 想 4，看到 125 想 8，先把它们配成整百、整千再算。",
+        "noteEn": "Round-number partners: with 25 look for 4, with 125 look for 8, and form hundreds or thousands first."
+      }
+    ],
+    "properties": [
+      "加法交换律、加法结合律都是加法的定律；乘法交换律、乘法结合律都是乘法的定律，不要混在一起记。",
+      "乘法分配律是乘法对加法的分配：(a+b)×c=a×c+b×c；**加法对乘法没有分配律**，a+b×c 不等于 (a+b)×c（如 3+4×5=23，而 (3+4)×5=35）。",
+      "减法性质：a−b−c=a−(b+c)，连减可以一次减去两个数的和；除法性质：a÷b÷c=a÷(b×c)，连除可以一次除以两个数的积（除数都不为 0）。",
+      "简便计算常用凑整：25×4=100、125×8=1000，先凑出整十、整百、整千，计算又快又不容易错。",
+      "使用运算定律只是改变计算顺序，结果不会变；正因为结果不变，定律也能用来验算。"
+    ],
+    "propertiesEn": [
+      "The commutative and associative laws of addition belong to addition, while the commutative and associative laws of multiplication belong to multiplication—keep them apart.",
+      "The distributive law is multiplication distributing over addition: (a+b)×c=a×c+b×c; **addition does not distribute over multiplication**, so a+b×c is not (a+b)×c (e.g. 3+4×5=23 but (3+4)×5=35).",
+      "Property of subtraction: a−b−c=a−(b+c), subtracting twice equals subtracting the sum; property of division: a÷b÷c=a÷(b×c), dividing twice equals dividing by the product (with non-zero divisors).",
+      "Round-number partners make computation easy: 25×4=100 and 125×8=1000; forming tens, hundreds or thousands first keeps the work quick and accurate.",
+      "Using a law only changes the order of computing, never the result; and because the result stays the same, the laws can also be used to check your answer."
+    ],
+    "examples": [
+      {
+        "problem": "用简便方法计算 25 × 7 × 4。",
+        "solution": "用乘法交换律和结合律，让 25 和 4 先乘：$25 \\times 7 \\times 4 = (25 \\times 4) \\times 7 = 100 \\times 7 = 700$。"
+      },
+      {
+        "problem": "用简便方法计算 36 × 99 + 36。",
+        "solution": "把后面的 36 看成 $36 \\times 1$，提取公因数 36：$36 \\times 99 + 36 \\times 1 = 36 \\times (99 + 1) = 36 \\times 100 = 3600$。这就是乘法分配律反过来用。"
+      }
+    ],
+    "tags": [
+      "运算定律",
+      "分配律",
+      "简便计算"
+    ],
+    "links": [
+      "four-operations-order",
+      "multiplication-division",
+      "addition-subtraction"
+    ]
+  }
+]

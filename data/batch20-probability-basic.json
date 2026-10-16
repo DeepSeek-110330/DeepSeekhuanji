@@ -1,0 +1,745 @@
+[
+  {
+    "id": "probability-basics",
+    "title": "概率的定义与性质",
+    "titleEn": "Probability: Definition and Properties",
+    "branch": "probability",
+    "level": 2,
+    "summary": "概率是对随机事件发生可能性大小的数量刻画：从非负性、规范性、可列可加性三条公理出发，可以推出补事件公式、加法公式、单调性等一系列常用性质。",
+    "summaryEn": "Probability quantifies how likely a random event is; from the axioms of nonnegativity, normalization and countable additivity follow the complement rule, the addition rule and monotonicity.",
+    "definition": "随机试验是指可以在相同条件下重复进行、结果不止一个且事先无法预知结果的试验。把它的一切可能结果组成的集合称为**样本空间**，记作 $\\Omega$；$\\Omega$ 的每个元素 $\\omega$ 称为**样本点**。随机试验中可能发生也可能不发生的事件是 $\\Omega$ 的某个子集，称为**随机事件**（简称事件）；$\\Omega$ 本身称为必然事件，$\\varnothing$ 称为不可能事件。事件 $A$ 发生，当且仅当试验的结果 $\\omega\\in A$。\n\n概率的公理化定义由柯尔莫哥洛夫于 1933 年给出：设 $P(\\cdot)$ 是定义在事件上的函数，若它满足\n$$P(A)\\ge0;\\qquad P(\\Omega)=1;\\qquad A_iA_j=\\varnothing\\ (i\\ne j)\\ \\Longrightarrow\\ P\\Bigl(\\bigcup_{i=1}^{\\infty}A_i\\Bigr)=\\sum_{i=1}^{\\infty}P(A_i),$$\n则称 $P(A)$ 为事件 $A$ 的**概率**。三条公理分别称为**非负性**、**规范性**与**可列可加性**，概率论的全部结论都可以由它们推出，从而不必依赖「等可能」「频率」等直观解释。\n\n最常用的模型是**古典概型**：若样本空间只含有限个样本点，且每个样本点等可能出现，则\n$$P(A)=\\frac{|A|}{|\\Omega|}=\\frac{\\text{有利于 }A\\text{ 的样本点数}}{\\text{样本点总数}}.$$\n掷骰子、摸球、抽签等问题都属于古典概型。注意有限性与等可能性缺一不可，否则不能直接套用这个公式。\n\n由公理可以直接推出若干常用性质：$P(\\varnothing)=0$；$P(A^{c})=1-P(A)$；对任意两事件有加法公式 $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$，当 $A\\cap B=\\varnothing$ 时退化为 $P(A\\cup B)=P(A)+P(B)$；若 $A\\subseteq B$，则 $P(A)\\le P(B)$。这些性质是概率计算中最基本的工具。",
+    "definitionEn": "A random experiment can be repeated under identical conditions, has more than one possible outcome, and its outcome cannot be predicted beforehand. The set of all possible outcomes is the **sample space** $\\Omega$, and each outcome $\\omega$ is a **sample point**. A **random event** is a subset of $\\Omega$; $\\Omega$ itself is the certain event and $\\varnothing$ the impossible event. Event $A$ occurs exactly when the outcome $\\omega$ lies in $A$.\n\nThe axiomatic definition of probability was given by Kolmogorov in 1933. A set function $P(\\cdot)$ on events is called a **probability** if\n$$P(A)\\ge0;\\qquad P(\\Omega)=1;\\qquad A_iA_j=\\varnothing\\ (i\\ne j)\\ \\Longrightarrow\\ P\\Bigl(\\bigcup_{i=1}^{\\infty}A_i\\Bigr)=\\sum_{i=1}^{\\infty}P(A_i).$$\nThe three axioms are **nonnegativity**, **normalization** and **countable additivity**; every conclusion of probability theory follows from them, so no appeal to intuition (such as equally likely outcomes) is needed.\n\nThe most common model is the **classical model**: if $\\Omega$ has finitely many, equally likely sample points, then\n$$P(A)=\\frac{|A|}{|\\Omega|}.$$\nDice, urn drawings and lotteries all fit this model; both finiteness and equal likelihood are essential.\n\nSeveral useful properties follow at once: $P(\\varnothing)=0$, $P(A^{c})=1-P(A)$, and the addition rule $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$, which reduces to $P(A)+P(B)$ when $A\\cap B=\\varnothing$. Also, $A\\subseteq B$ implies $P(A)\\le P(B)$.",
+    "formulas": [
+      {
+        "latex": "P(A)\\ge0,\\qquad P(\\Omega)=1,\\qquad A_iA_j=\\varnothing\\ (i\\ne j)\\ \\Longrightarrow\\ P\\Bigl(\\bigcup_{i=1}^{\\infty}A_i\\Bigr)=\\sum_{i=1}^{\\infty}P(A_i)",
+        "note": "概率的三条公理：非负性、规范性（必然事件的概率为 1）与可列可加性（两两互斥事件列的并的概率等于各概率之和）。一切概率性质都由它们推出。",
+        "noteEn": "The three axioms: nonnegativity, normalization and countable additivity for pairwise disjoint events; all further properties follow from them."
+      },
+      {
+        "latex": "P(\\varnothing)=0,\\qquad P(A^{c})=1-P(A)",
+        "note": "不可能事件的概率为 0；补事件公式说明 $P(A)$ 与 $P(A^{c})$ 只要算出一个即可，常用于「正难则反」。",
+        "noteEn": "The impossible event has probability 0; the complement rule lets one compute $P(A)$ from $P(A^{c})$ or vice versa."
+      },
+      {
+        "latex": "P(A\\cup B)=P(A)+P(B)-P(A\\cap B)",
+        "note": "加法公式（容斥）：一般情形要减去多算的交集；当 $A,B$ 互斥时 $P(A\\cap B)=0$，公式退化为 $P(A\\cup B)=P(A)+P(B)$。",
+        "noteEn": "The addition (inclusion–exclusion) rule; it reduces to $P(A)+P(B)$ when $A$ and $B$ are disjoint."
+      },
+      {
+        "latex": "P(A)=\\frac{|A|}{|\\Omega|}",
+        "note": "古典概型公式：要求样本空间有限且每个样本点等可能，概率等于有利于 $A$ 的样本点所占的比例。",
+        "noteEn": "The classical model: for a finite sample space of equally likely points, the probability is the proportion of points favorable to $A$."
+      },
+      {
+        "latex": "A\\subseteq B\\ \\Longrightarrow\\ P(B-A)=P(B)-P(A)\\ge0",
+        "note": "单调性：事件越大，概率越大；差事件 $B-A=B\\cap A^{c}$ 的概率等于两者概率之差。",
+        "noteEn": "Monotonicity: a larger event has larger probability, and $P(B-A)=P(B)-P(A)$ whenever $A\\subseteq B$."
+      }
+    ],
+    "expression": {
+      "text": "P(A) ∈ [0, 1]，P(Ω) = 1",
+      "symbol": "P(A)",
+      "note": "概率是事件的集函数：把每个事件映射为 0 与 1 之间的实数，数值越大表示事件越可能发生。",
+      "noteEn": "Probability maps each event to a number between 0 and 1; larger values mean more likely events."
+    },
+    "properties": [
+      "非负性与规范性：对任何事件 $A$ 有 $0\\le P(A)\\le1$，且 $P(\\Omega)=1$、$P(\\varnothing)=0$。",
+      "补事件公式：$P(A^{c})=1-P(A)$，因此 $P(A)$ 与 $P(A^{c})$ 只需算出一个。",
+      "加法公式：$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$；$A,B$ 互斥时简化为 $P(A)+P(B)$。",
+      "单调性：若 $A\\subseteq B$，则 $P(A)\\le P(B)$，且 $P(B-A)=P(B)-P(A)$。",
+      "可列可加性：两两互斥的事件 $A_1,A_2,\\dots$ 满足 $P\\bigl(\\bigcup_iA_i\\bigr)=\\sum_iP(A_i)$，有限个互斥事件同样成立。"
+    ],
+    "propertiesEn": [
+      "Nonnegativity and normalization: $0\\le P(A)\\le1$ for every event, with $P(\\Omega)=1$ and $P(\\varnothing)=0$.",
+      "Complement rule: $P(A^{c})=1-P(A)$, so only one of the two probabilities needs to be computed.",
+      "Addition rule: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$; for disjoint events it reduces to $P(A)+P(B)$.",
+      "Monotonicity: $A\\subseteq B$ implies $P(A)\\le P(B)$ and $P(B-A)=P(B)-P(A)$.",
+      "Countable additivity: pairwise disjoint events satisfy $P(\\bigcup_iA_i)=\\sum_iP(A_i)$; the same holds for finitely many disjoint events."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1",
+          "color": "#4cc9f0",
+          "label": "密度 y = 1，样本空间取为 [0, 1]"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "1",
+          "from": 0,
+          "to": 1,
+          "base": 0,
+          "color": "#4cc9f0",
+          "label": "P(Ω) = 曲线下面积 = 1"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        1.5
+      ],
+      "yRange": [
+        0,
+        1.4
+      ],
+      "title": "均匀分布面积示意：总概率为 1，事件 A 的概率就是对应区间的面积"
+    },
+    "examples": [
+      {
+        "problem": "掷一枚均匀的骰子，$\\Omega=\\{1,2,3,4,5,6\\}$。设 $A=\\{2,4,6\\}$（点数为偶数），$B=\\{1,2,3,4\\}$（点数不超过 4）。求 $P(A)$、$P(B)$ 与 $P(A\\cup B)$。",
+        "solution": "样本空间有 6 个等可能的样本点，属于古典概型。\n$$P(A)=\\frac{|A|}{|\\Omega|}=\\frac36=\\frac12,\\qquad P(B)=\\frac46=\\frac23.$$\n交集 $A\\cap B=\\{2,4\\}$，故 $P(A\\cap B)=\\frac26=\\frac13$。由加法公式\n$$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)=\\frac12+\\frac23-\\frac13=\\frac56.$$\n也可以直接数：$A\\cup B=\\{1,2,3,4,6\\}$ 共 5 个样本点，$P(A\\cup B)=\\frac56$，结果一致。"
+      },
+      {
+        "problem": "设 $P(A)=0.6$，$P(B)=0.4$，$P(A\\cap B)=0.2$。求 $P(A\\cup B)$ 与 $P(A^{c}\\cap B^{c})$。",
+        "solution": "由加法公式\n$$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)=0.6+0.4-0.2=0.8.$$\n再由对偶律 $A^{c}\\cap B^{c}=(A\\cup B)^{c}$ 与补事件公式\n$$P(A^{c}\\cap B^{c})=1-P(A\\cup B)=1-0.8=0.2.$$"
+      }
+    ],
+    "tags": [
+      "概率论",
+      "样本空间",
+      "公理化",
+      "古典概型",
+      "加法公式"
+    ],
+    "links": [
+      "conditional-probability-bayes",
+      "random-variable",
+      "discrete-distributions",
+      "continuous-distributions"
+    ]
+  },
+  {
+    "id": "conditional-probability-bayes",
+    "title": "条件概率与贝叶斯公式",
+    "titleEn": "Conditional Probability and Bayes' Theorem",
+    "branch": "probability",
+    "level": 3,
+    "summary": "条件概率把「已知 B 发生」的信息纳入计算；乘法公式、全概率公式与贝叶斯公式由此导出，解决由原因推结果、再由结果反推原因的问题。",
+    "summaryEn": "Conditional probability incorporates the information that B occurred; it yields the multiplication rule, the law of total probability and Bayes' theorem, which reverse the direction of conditioning.",
+    "definition": "设 $A,B$ 是两个事件且 $P(B)>0$，在事件 $B$ 已经发生的条件下，事件 $A$ 发生的**条件概率**定义为\n$$P(A|B)=\\frac{P(A\\cap B)}{P(B)}.$$\n直观上相当于把样本空间从 $\\Omega$ 缩小到 $B$：在新的样本空间里，$A$ 所占的比例就是 $P(A|B)$。固定 $B$ 之后，$P(\\cdot|B)$ 仍然满足概率的三条公理，所以概率的一切性质对条件概率照样成立。\n\n由定义立即得到**乘法公式**：当 $P(B)>0$ 时 $P(A\\cap B)=P(B)P(A|B)$；对称地也有 $P(A\\cap B)=P(A)P(B|A)$。对更多事件可以推广为链式法则\n$$P(A_1A_2\\cdots A_n)=P(A_1)P(A_2|A_1)P(A_3|A_1A_2)\\cdots P(A_n|A_1A_2\\cdots A_{n-1}).$$\n乘法公式是计算积事件概率的基本工具，抽签、不放回抽样等问题常直接用它。\n\n若事件组 $B_1,B_2,\\dots,B_n$ 两两互斥、$\\bigcup_{i=1}^{n}B_i=\\Omega$ 且 $P(B_i)>0$，则称它为**完备事件组**（$\\Omega$ 的一个划分）。此时对任意事件 $A$ 有**全概率公式**\n$$P(A)=\\sum_{i=1}^{n}P(B_i)P(A|B_i).$$\n它的思想是「按原因分解」：$A$ 发生总是伴随着某个 $B_i$ 发生，把各原因下 $A$ 的条件概率按原因的概率加权求和即可，$P(B_i)$ 起权重的作用。\n\n如果已知结果 $A$ 发生，想反过来判断它由哪个原因 $B_i$ 引起，就用**贝叶斯公式**\n$$P(B_i|A)=\\frac{P(B_i)P(A|B_i)}{P(A)}=\\frac{P(B_i)P(A|B_i)}{\\sum_{j=1}^{n}P(B_j)P(A|B_j)},\\qquad i=1,2,\\dots,n.$$\n这里 $P(B_i)$ 称为先验概率，$P(B_i|A)$ 称为后验概率，$P(A|B_i)$ 是似然。贝叶斯公式用观测数据 $A$ 更新对原因的认识，是统计推断、机器学习与医疗诊断中的核心工具。",
+    "definitionEn": "Let $A,B$ be events with $P(B)>0$. The **conditional probability** of $A$ given that $B$ has occurred is\n$$P(A|B)=\\frac{P(A\\cap B)}{P(B)}.$$\nIntuitively the sample space is shrunk from $\\Omega$ to $B$: $P(A|B)$ is the share of $A$ inside the new sample space $B$. For fixed $B$, the function $P(\\cdot|B)$ still satisfies the three axioms, so every property of probability carries over.\n\nThe definition immediately gives the **multiplication rule**: $P(A\\cap B)=P(B)P(A|B)=P(A)P(B|A)$ when the conditioning events have positive probability. For several events this extends to the chain rule\n$$P(A_1A_2\\cdots A_n)=P(A_1)P(A_2|A_1)P(A_3|A_1A_2)\\cdots P(A_n|A_1A_2\\cdots A_{n-1}).$$\nThe multiplication rule is the basic tool for probabilities of intersections, as in drawing without replacement.\n\nIf events $B_1,B_2,\\dots,B_n$ are pairwise disjoint, cover $\\Omega$ and satisfy $P(B_i)>0$, they form a **complete group** (a partition of $\\Omega$). Then for any event $A$ the **law of total probability** holds:\n$$P(A)=\\sum_{i=1}^{n}P(B_i)P(A|B_i).$$\nIt decomposes $A$ by causes: whenever $A$ happens some $B_i$ must have happened, so the conditional probabilities of $A$ are averaged with weights $P(B_i)$.\n\nIf the outcome $A$ is observed and one asks which cause $B_i$ produced it, one uses **Bayes' theorem**:\n$$P(B_i|A)=\\frac{P(B_i)P(A|B_i)}{P(A)}=\\frac{P(B_i)P(A|B_i)}{\\sum_{j=1}^{n}P(B_j)P(A|B_j)},\\qquad i=1,2,\\dots,n.$$\nHere $P(B_i)$ is the prior, $P(B_i|A)$ the posterior and $P(A|B_i)$ the likelihood. Bayes' theorem updates beliefs with data and is central to statistical inference, machine learning and medical diagnosis.",
+    "formulas": [
+      {
+        "latex": "P(A|B)=\\frac{P(A\\cap B)}{P(B)}\\qquad(P(B)>0)",
+        "note": "条件概率的定义：把样本空间压缩到 $B$ 之后 $A$ 所占的比例；固定 $B$ 后它满足概率的三条公理。",
+        "noteEn": "Definition of conditional probability: the share of $A$ after shrinking the sample space to $B$; for fixed $B$ it obeys the axioms."
+      },
+      {
+        "latex": "P(A\\cap B)=P(B)P(A|B)=P(A)P(B|A)",
+        "note": "乘法公式及其对称形式；求积事件概率时，哪个方向的条件概率容易算就用哪个。推广即链式法则。",
+        "noteEn": "The multiplication rule and its symmetric form; use whichever conditioning direction is easier. Its generalization is the chain rule."
+      },
+      {
+        "latex": "P(A)=\\sum_{i=1}^{n}P(B_i)P(A|B_i)",
+        "note": "全概率公式：$B_1,\\dots,B_n$ 为完备事件组时，按原因给 $A$ 的概率加权求和；$P(B_i)>0$。",
+        "noteEn": "Law of total probability: for a complete group $B_1,\\dots,B_n$ with $P(B_i)>0$, weight the conditional probabilities by the causes."
+      },
+      {
+        "latex": "P(B_i|A)=\\frac{P(B_i)P(A|B_i)}{\\sum_{j=1}^{n}P(B_j)P(A|B_j)}",
+        "note": "贝叶斯公式：分母就是全概率公式；由结果 $A$ 反推原因 $B_i$，先验 $P(B_i)$ 经似然 $P(A|B_i)$ 更新为后验 $P(B_i|A)$。",
+        "noteEn": "Bayes' theorem: the denominator is the law of total probability; the prior is updated by the likelihood into the posterior."
+      },
+      {
+        "latex": "P(A\\cap B)=P(A)P(B)\\ \\Longleftrightarrow\\ P(A|B)=P(A)\\ (P(B)>0)",
+        "note": "独立性判据：事件独立时条件概率等于无条件概率——$B$ 是否发生不提供关于 $A$ 的信息。",
+        "noteEn": "Independence criterion: for independent events the conditional probability equals the unconditional one — $B$ carries no information about $A$."
+      }
+    ],
+    "expression": {
+      "text": "P(Bᵢ|A) = P(Bᵢ)P(A|Bᵢ) / Σⱼ P(Bⱼ)P(A|Bⱼ)",
+      "symbol": "P(B_i|A)",
+      "note": "由果索因：先验乘似然再除以全概率；分母对所有原因求和，起归一化作用，使后验概率之和为 1。",
+      "noteEn": "From effect back to cause: prior times likelihood divided by the total probability, which normalizes the posterior."
+    },
+    "properties": [
+      "条件概率仍是概率：固定 $B$（$P(B)>0$）后 $P(\\cdot|B)$ 满足三条公理，故 $0\\le P(A|B)\\le1$、$P(\\Omega|B)=1$。",
+      "补事件公式：$P(A|B)+P(A^{c}|B)=1$；但 $P(A|B)$ 与 $P(B|A)$ 一般并不相等，二者由乘法公式联系。",
+      "乘法公式：$P(A\\cap B)=P(A)P(B|A)=P(B)P(A|B)$；$A,B$ 独立当且仅当 $P(A\\cap B)=P(A)P(B)$。",
+      "全概率公式把复杂事件按完备事件组分解，是计算 $P(A)$ 的常用手段，也是贝叶斯公式的分母。",
+      "贝叶斯公式中后验概率 $P(B_i|A)$ 之和为 1；先验小的原因即使似然不低，后验也可能很小。"
+    ],
+    "propertiesEn": [
+      "Conditional probability is a probability: for fixed $B$ with $P(B)>0$, $P(\\cdot|B)$ obeys the axioms, so $0\\le P(A|B)\\le1$ and $P(\\Omega|B)=1$.",
+      "Complement rule: $P(A|B)+P(A^{c}|B)=1$; in general $P(A|B)\\ne P(B|A)$, the two being linked by the multiplication rule.",
+      "Multiplication rule: $P(A\\cap B)=P(A)P(B|A)=P(B)P(A|B)$; $A$ and $B$ are independent exactly when $P(A\\cap B)=P(A)P(B)$.",
+      "The law of total probability decomposes a complicated event along a complete group; it also forms the denominator of Bayes' theorem.",
+      "Posterior probabilities $P(B_i|A)$ sum to 1; a cause with a small prior may stay improbable even with a decent likelihood."
+    ],
+    "examples": [
+      {
+        "problem": "某地区某种疾病的患病率为 0.1%。一种检测方法对患者的阳性检出率（灵敏度）为 0.99，对非患者的阴性率（特异度）为 0.98。若某人检测结果为阳性，求此人确实患病的概率。",
+        "solution": "记 $D$ 为「患病」，$A$ 为「检测阳性」。由题意 $P(D)=0.001$，$P(D^{c})=0.999$，$P(A|D)=0.99$，$P(A|D^{c})=0.02$。先用全概率公式\n$$P(A)=P(D)P(A|D)+P(D^{c})P(A|D^{c})=0.001\\times0.99+0.999\\times0.02=0.02097.$$\n再由贝叶斯公式\n$$P(D|A)=\\frac{P(D)P(A|D)}{P(A)}=\\frac{0.00099}{0.02097}\\approx0.0472.$$\n即阳性者真正患病的概率约为 $4.7\\%$。尽管灵敏度很高，由于人群中患病率极低（先验很小），绝大多数阳性来自非患者的误检——这正是「基础概率谬误」的典型例子。"
+      },
+      {
+        "problem": "某厂有甲、乙两条生产线：甲线生产 60% 的零件，次品率 2%；乙线生产 40% 的零件，次品率 3%。从产品中任取一件发现是次品，求它来自甲线的概率。",
+        "solution": "记 $B_1$、$B_2$ 分别为「甲线生产」「乙线生产」，$A$ 为「取到次品」。由全概率公式\n$$P(A)=0.6\\times0.02+0.4\\times0.03=0.012+0.012=0.024.$$\n再由贝叶斯公式\n$$P(B_1|A)=\\frac{P(B_1)P(A|B_1)}{P(A)}=\\frac{0.012}{0.024}=0.5.$$\n虽然甲线的次品率更低，但它生产的份额更大，所以在已知取到次品的条件下，来自两条线的概率恰好各半。"
+      }
+    ],
+    "tags": [
+      "条件概率",
+      "乘法公式",
+      "全概率公式",
+      "贝叶斯公式",
+      "先验与后验"
+    ],
+    "links": [
+      "probability-basics",
+      "random-variable",
+      "marginal-conditional-independence"
+    ]
+  },
+  {
+    "id": "random-variable",
+    "title": "随机变量与分布函数",
+    "titleEn": "Random Variables and Distribution Functions",
+    "branch": "probability",
+    "level": 3,
+    "summary": "随机变量是把样本点映射为实数的函数；分布函数 F(x)=P(X≤x) 完整描述它的概率规律，并具有单调不减、右连续、两端极限为 0 与 1 三条基本性质。",
+    "summaryEn": "A random variable is a real-valued function on the sample space; its distribution function F(x)=P(X≤x) describes it completely and is nondecreasing, right-continuous, with limits 0 and 1 at the two ends.",
+    "definition": "设随机试验的样本空间为 $\\Omega$。如果对每个样本点 $\\omega\\in\\Omega$ 都有唯一确定的实数 $X(\\omega)$ 与之对应，则称 $X=X(\\omega)$ 为**随机变量**。也就是说，随机变量是定义在样本空间上的实值函数，它把试验结果「翻译」成实数，从而可以用函数、导数、积分等分析工具研究随机现象。例如掷两枚骰子，令 $X$ 为两枚点数之和，则 $X$ 的取值为 $2,3,\\dots,12$；又如令 $X$ 为灯泡的寿命（小时）。\n\n描述随机变量统计规律最完整的工具是**分布函数**（累积分布函数）\n$$F(x)=P(X\\le x),\\qquad -\\infty<x<+\\infty.$$\n不论 $X$ 是离散型、连续型还是更一般的情形，$F$ 都存在，且唯一决定 $X$ 的概率规律：知道 $F(x)$，就等于知道 $X$ 落在任何区间内的概率。\n\n分布函数具有三条基本性质：（1）**单调不减**：当 $x_1<x_2$ 时 $F(x_1)\\le F(x_2)$；（2）**右连续**：$F(x+0)=F(x)$；（3）**极限性质**：$F(-\\infty)=\\lim\\limits_{x\\to-\\infty}F(x)=0$，$F(+\\infty)=\\lim\\limits_{x\\to+\\infty}F(x)=1$。反之，任何具备这三条性质的函数都可以作为某个随机变量的分布函数。\n\n由 $F$ 可以计算各种概率：$P(a<X\\le b)=F(b)-F(a)$；单点概率 $P(X=x)=F(x)-F(x-0)$，即 $F$ 在该点的跳跃高度。离散型随机变量的 $F$ 是阶梯函数，连续型的 $F$ 连续且在有密度的意义下几乎处处可微。分布函数的图像把「$X$ 落在 $x$ 左边」的概率画成一条由 0 升到 1 的曲线，是随机变量最直观的写照。",
+    "definitionEn": "Let the sample space of a random experiment be $\\Omega$. If every sample point $\\omega\\in\\Omega$ is assigned a unique real number $X(\\omega)$, then $X=X(\\omega)$ is called a **random variable**. Thus a random variable is a real-valued function on the sample space: it translates outcomes into numbers so that the tools of analysis (functions, derivatives, integrals) can be applied. For instance, rolling two dice and letting $X$ be the sum gives values $2,3,\\dots,12$.\n\nThe most complete description of a random variable is its **distribution function** (cumulative distribution function)\n$$F(x)=P(X\\le x),\\qquad -\\infty<x<+\\infty.$$\nWhether $X$ is discrete, continuous, or of a more general type, $F$ exists and determines the probability law uniquely: knowing $F$ means knowing the probability that $X$ falls in any interval.\n\nThe distribution function has three basic properties: (1) **nondecreasing**: $x_1<x_2$ implies $F(x_1)\\le F(x_2)$; (2) **right-continuous**: $F(x+0)=F(x)$; (3) **limits**: $F(-\\infty)=\\lim\\limits_{x\\to-\\infty}F(x)=0$ and $F(+\\infty)=\\lim\\limits_{x\\to+\\infty}F(x)=1$. Conversely, any function with these three properties is the distribution function of some random variable.\n\nProbabilities are recovered from $F$ via $P(a<X\\le b)=F(b)-F(a)$ and $P(X=x)=F(x)-F(x-0)$, the jump of $F$ at $x$. For a discrete variable $F$ is a step function; for a continuous one $F$ is continuous and differentiable wherever the density is continuous. The graph of $F$ — a curve rising from 0 to 1 — is the most intuitive picture of a random variable.",
+    "formulas": [
+      {
+        "latex": "F(x)=P(X\\le x),\\qquad -\\infty<x<+\\infty",
+        "note": "分布函数的定义：对每个实数 $x$，记录随机变量不超过 $x$ 的概率；它适用于一切类型的随机变量。",
+        "noteEn": "Definition of the distribution function: it records the probability that $X$ does not exceed $x$, for every real $x$."
+      },
+      {
+        "latex": "x_1<x_2\\ \\Longrightarrow\\ F(x_1)\\le F(x_2),\\qquad F(x+0)=F(x)",
+        "note": "单调不减与右连续：分布函数只能上升或持平，且在每点处从右侧连续。",
+        "noteEn": "Nondecreasing and right-continuous: the distribution function can only rise or stay flat, and is continuous from the right at every point."
+      },
+      {
+        "latex": "F(-\\infty)=0,\\qquad F(+\\infty)=1",
+        "note": "极限性质：$x\\to-\\infty$ 时 $F\\to0$，$x\\to+\\infty$ 时 $F\\to1$；连同前两条，这是分布函数的充要特征。",
+        "noteEn": "Limits: $F\\to0$ as $x\\to-\\infty$ and $F\\to1$ as $x\\to+\\infty$; together with the previous two properties this characterizes distribution functions."
+      },
+      {
+        "latex": "P(a<X\\le b)=F(b)-F(a)",
+        "note": "用分布函数计算区间概率；连续型情形开闭端点不影响结果，因为单点概率为 0。",
+        "noteEn": "Interval probabilities from the distribution function; for continuous variables open or closed endpoints do not matter since single points have probability 0."
+      },
+      {
+        "latex": "P(X=x)=F(x)-F(x-0)",
+        "note": "单点概率等于分布函数在该点的跳跃高度；若 $F$ 在 $x$ 连续，则 $P(X=x)=0$。",
+        "noteEn": "The probability of a single value is the jump of $F$ at that point; if $F$ is continuous at $x$, then $P(X=x)=0$."
+      }
+    ],
+    "expression": {
+      "text": "F(x) = P(X ≤ x)",
+      "symbol": "F(x)=P(X\\le x)",
+      "note": "分布函数把随机变量的全部概率信息浓缩成一条曲线；求分布函数是研究随机变量的第一步。",
+      "noteEn": "The distribution function condenses all probabilistic information into a single curve; finding it is the first step in studying a random variable."
+    },
+    "properties": [
+      "单调不减：$x_1<x_2$ 时 $F(x_1)\\le F(x_2)$，且对一切 $x$ 有 $0\\le F(x)\\le1$。",
+      "右连续：$F(x+0)=F(x)$；离散型随机变量的 $F$ 是阶梯函数，在 $x_k$ 处的跳跃高度恰为 $P(X=x_k)$。",
+      "两端极限：$F(-\\infty)=0$，$F(+\\infty)=1$；任何满足这三条性质（单调不减、右连续、两端极限）的函数都是某随机变量的分布函数。",
+      "区间概率：$P(a<X\\le b)=F(b)-F(a)$；连续型变量单点概率为 0，端点开闭不影响概率值。",
+      "单点概率：$P(X=x)=F(x)-F(x-0)$，即分布函数在该点的跳跃高度。"
+    ],
+    "propertiesEn": [
+      "Nondecreasing: $x_1<x_2$ implies $F(x_1)\\le F(x_2)$, and $0\\le F(x)\\le1$ for every $x$.",
+      "Right-continuous: $F(x+0)=F(x)$; for a discrete variable $F$ is a step function and its jump at $x_k$ equals $P(X=x_k)$.",
+      "Limits at both ends: $F(-\\infty)=0$ and $F(+\\infty)=1$; any function with the three properties is the distribution function of some random variable.",
+      "Interval probability: $P(a<X\\le b)=F(b)-F(a)$; for continuous variables single points have probability 0, so endpoints may be open or closed.",
+      "Point mass: $P(X=x)=F(x)-F(x-0)$, the jump of the distribution function at $x$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.5 + atan(x)/PI",
+          "color": "#4cc9f0",
+          "label": "F(x) 的典型形状（以 ½ + arctan x / π 为例）"
+        },
+        {
+          "expr": "1",
+          "color": "#ff6b9d",
+          "label": "F(+∞) = 1"
+        },
+        {
+          "expr": "0",
+          "color": "#ffd166",
+          "label": "F(−∞) = 0"
+        }
+      ],
+      "xRange": [
+        -8,
+        8
+      ],
+      "yRange": [
+        -0.2,
+        1.2
+      ],
+      "title": "分布函数示意：F(x)=P(X≤x) 单调不减、右连续，且 F(−∞)=0，F(+∞)=1"
+    },
+    "examples": [
+      {
+        "problem": "设离散型随机变量 $X$ 的分布律为 $P(X=0)=0.2$、$P(X=1)=0.5$、$P(X=2)=0.3$。写出 $X$ 的分布函数 $F(x)$，并求 $P(0.5<X\\le2)$ 与 $P(X=1)$。",
+        "solution": "把 $X$ 各取值处的概率逐段累加，得到阶梯函数\n$$F(x)=\\begin{cases}0,&x<0,\\\\0.2,&0\\le x<1,\\\\0.7,&1\\le x<2,\\\\1,&x\\ge2.\\end{cases}$$\n于是\n$$P(0.5<X\\le2)=F(2)-F(0.5)=1-0.2=0.8.$$\n单点概率由跳跃高度得到：$P(X=1)=F(1)-F(1-0)=0.7-0.2=0.5$，与给定的分布律一致。"
+      },
+      {
+        "problem": "设连续型随机变量 $X$ 的分布函数为 $F(x)=1-e^{-x}\\ (x\\ge0)$，且当 $x<0$ 时 $F(x)=0$。求 $P(1<X\\le2)$。",
+        "solution": "由区间概率公式\n$$P(1<X\\le2)=F(2)-F(1)=(1-e^{-2})-(1-e^{-1})=e^{-1}-e^{-2}\\approx0.2325.$$\n也可以先由 $F'(x)=e^{-x}\\ (x>0)$ 得到密度 $f(x)=e^{-x}$，再积分 $\\int_1^2e^{-x}\\,dx=e^{-1}-e^{-2}$，结果相同。"
+      }
+    ],
+    "tags": [
+      "随机变量",
+      "分布函数",
+      "单调不减",
+      "右连续",
+      "阶梯函数"
+    ],
+    "links": [
+      "probability-basics",
+      "conditional-probability-bayes",
+      "discrete-distributions",
+      "continuous-distributions",
+      "function-of-random-variables"
+    ]
+  },
+  {
+    "id": "discrete-distributions",
+    "title": "常见离散型分布",
+    "titleEn": "Common Discrete Distributions",
+    "branch": "probability",
+    "level": 4,
+    "summary": "取值为有限或可数无穷个的随机变量由分布律 pₖ 描述；二项分布、泊松分布与几何分布分别对应 n 重伯努利试验、稀有事件计数与首次成功的等待。",
+    "summaryEn": "Discrete random variables take finitely or countably many values and are described by a probability mass function; binomial, Poisson and geometric laws model repeated trials, rare-event counts and first-success waiting.",
+    "definition": "若随机变量 $X$ 的全部取值是有限个或可列个（如 $0,1,2,\\dots$），则称 $X$ 为**离散型随机变量**。它的概率规律由**分布律**（概率分布）$p_k=P(X=x_k)$（$k=1,2,\\dots$）给出，必须满足\n$$p_k\\ge0,\\qquad \\sum_k p_k=1.$$\n这两条也是判断一组数能否成为分布律的标准。此时分布函数是阶梯函数 $F(x)=\\sum_{x_k\\le x}p_k$，在每个取值点跳跃，跳跃高度就是相应概率。\n\n**二项分布**：在 $n$ 重伯努利试验（每次试验只有成功、失败两种结果，成功概率恒为 $p$，各次相互独立）中，成功的总次数 $X$ 服从二项分布 $B(n,p)$：\n$$P(X=k)=\\binom{n}{k}p^{k}(1-p)^{n-k},\\qquad k=0,1,\\dots,n.$$\n当 $n=1$ 时退化为两点分布（伯努利分布）。二项分布是「固定试验次数、计数成功次数」的模型，如射击命中次数、抽样中的次品数。\n\n**泊松分布**：若随机变量取非负整数值，且\n$$P(X=k)=\\frac{\\lambda^{k}e^{-\\lambda}}{k!},\\qquad k=0,1,2,\\dots,\\quad \\lambda>0,$$\n则称 $X$ 服从参数为 $\\lambda$ 的泊松分布，记作 $X\\sim P(\\lambda)$。它刻画单位时间（或单位面积、体积）内稀有事件发生的次数，如电话呼入数、放射性衰变粒子数、自然灾害次数。当 $n$ 很大、$p$ 很小且 $np\\approx\\lambda$ 时，二项分布可用泊松分布近似：$\\binom{n}{k}p^{k}(1-p)^{n-k}\\approx\\frac{\\lambda^{k}e^{-\\lambda}}{k!}$。\n\n**几何分布**：在独立重复试验中，记 $X$ 为「首次成功所需的试验次数」，则 $X$ 取 $1,2,3,\\dots$，且\n$$P(X=k)=(1-p)^{k-1}p,\\qquad k=1,2,\\dots$$\n这就是几何分布。**约定说明**：这里采用「首次成功所需试验次数」的约定，$k$ 从 1 开始；另一种常见约定是「首次成功前的失败次数」，即 $P(X=k)=(1-p)^{k}p$，$k$ 从 0 开始，两种约定相差 1，使用前必须明确。几何分布具有无记忆性：已知前 $m$ 次都失败，再等 $n$ 次才成功的分布与从头开始一样。",
+    "definitionEn": "A random variable $X$ is **discrete** if it takes finitely or countably many values (such as $0,1,2,\\dots$). Its probability law is given by the **probability mass function** $p_k=P(X=x_k)$, which must satisfy\n$$p_k\\ge0,\\qquad \\sum_k p_k=1.$$\nThese two conditions also decide whether a list of numbers can be a probability distribution. The distribution function is then the step function $F(x)=\\sum_{x_k\\le x}p_k$, jumping at each value by exactly the corresponding probability.\n\n**Binomial distribution**: in $n$ Bernoulli trials (two outcomes per trial, constant success probability $p$, independent trials), the total number of successes $X$ follows $B(n,p)$:\n$$P(X=k)=\\binom{n}{k}p^{k}(1-p)^{n-k},\\qquad k=0,1,\\dots,n.$$\nFor $n=1$ this is the two-point (Bernoulli) distribution. It models a fixed number of trials, for example hits in shooting or defective items in sampling.\n\n**Poisson distribution**: if $X$ takes nonnegative integer values and\n$$P(X=k)=\\frac{\\lambda^{k}e^{-\\lambda}}{k!},\\qquad k=0,1,2,\\dots,\\quad \\lambda>0,$$\nthen $X$ has the Poisson law with parameter $\\lambda$, written $X\\sim P(\\lambda)$. It counts rare events per unit time (or area, or volume): phone calls, radioactive decays, natural disasters. When $n$ is large, $p$ is small and $np\\approx\\lambda$, the binomial may be approximated by the Poisson law.\n\n**Geometric distribution**: in independent repeated trials, let $X$ be the number of trials needed to obtain the first success; then $X$ takes $1,2,3,\\dots$ with\n$$P(X=k)=(1-p)^{k-1}p,\\qquad k=1,2,\\dots$$\n**Convention**: here $X$ counts trials up to and including the first success, so $k$ starts at 1; another common convention counts the failures before the first success, $P(X=k)=(1-p)^{k}p$ with $k$ starting at 0, shifting the variable by 1, so the convention must be stated. The geometric law is memoryless: given $m$ failures, the additional wait has the same distribution as a fresh start.",
+    "formulas": [
+      {
+        "latex": "p_k\\ge0,\\qquad \\sum_{k}p_k=1,\\qquad F(x)=\\sum_{x_k\\le x}p_k",
+        "note": "分布律的两条基本要求（非负、总和为 1）与由分布律求分布函数的公式；不满足就不能成为分布律。",
+        "noteEn": "The two requirements for a probability mass function (nonnegative, sums to 1) and the formula for the distribution function."
+      },
+      {
+        "latex": "P(X=k)=\\binom{n}{k}p^{k}(1-p)^{n-k},\\qquad k=0,1,\\dots,n",
+        "note": "二项分布 $B(n,p)$：$n$ 次独立试验中恰好成功 $k$ 次的概率；$\\binom{n}{k}$ 选出哪 $k$ 次成功。",
+        "noteEn": "Binomial law: the probability of exactly $k$ successes in $n$ independent trials; the binomial coefficient chooses which trials succeed."
+      },
+      {
+        "latex": "P(X=k)=\\frac{\\lambda^{k}e^{-\\lambda}}{k!},\\qquad k=0,1,2,\\dots",
+        "note": "泊松分布 $P(\\lambda)$：单位时间内稀有事件发生 $k$ 次的概率；期望与方差都等于 $\\lambda$。",
+        "noteEn": "Poisson law: the probability of $k$ rare events per unit time; both mean and variance equal $\\lambda$."
+      },
+      {
+        "latex": "P(X=k)=(1-p)^{k-1}p\\qquad(k=1,2,\\dots)",
+        "note": "几何分布：约定 $X$ 为「首次成功所需的试验次数」，$k$ 从 1 开始；若改用「首次成功前的失败次数」约定则平移 1。",
+        "noteEn": "Geometric law: $X$ is the number of trials up to and including the first success, so $k$ starts at 1; the failure-count convention just shifts $X$ by 1."
+      },
+      {
+        "latex": "\\binom{n}{k}p^{k}(1-p)^{n-k}\\ \\approx\\ \\frac{\\lambda^{k}e^{-\\lambda}}{k!}\\qquad(n\\to\\infty,\\ np\\to\\lambda)",
+        "note": "泊松近似：试验次数很多、成功概率很小时，二项分布可用泊松分布计算，这正是泊松分布的来源。",
+        "noteEn": "Poisson approximation: for many trials and a small success probability, binomial probabilities may be replaced by Poisson ones."
+      }
+    ],
+    "expression": {
+      "text": "P(X=k) = C(n,k)pᵏ(1−p)ⁿ⁻ᵏ（二项分布）",
+      "symbol": "\\binom{n}{k}p^{k}(1-p)^{n-k}",
+      "note": "离散型分布的分布律必须非负且全概率之和为 1；二项、泊松、几何是最常用的三族。",
+      "noteEn": "A discrete probability mass function is nonnegative and sums to 1; binomial, Poisson and geometric are the three most used families."
+    },
+    "properties": [
+      "分布律两条要求：$p_k\\ge0$ 且 $\\sum_kp_k=1$；分布函数 $F$ 为非降阶梯函数，在 $x_k$ 处跳跃 $p_k$。",
+      "二项分布 $B(n,p)$：期望 $E(X)=np$，方差 $\\operatorname{Var}(X)=np(1-p)$；$n=1$ 即两点分布，$n$ 大时近似正态。",
+      "泊松分布 $P(\\lambda)$：期望与方差都等于 $\\lambda$；独立泊松变量之和仍服从泊松分布，参数相加。",
+      "几何分布（首次成功次数约定）：期望 $E(X)=\\frac1p$，方差 $\\operatorname{Var}(X)=\\frac{1-p}{p^{2}}$，且满足无记忆性 $P(X>m+n\\mid X>m)=P(X>n)$。",
+      "稀有事件近似：$n$ 大、$p$ 小且 $\\lambda=np$ 适中时，$B(n,p)$ 的概率可用 $P(\\lambda)$ 近似。"
+    ],
+    "propertiesEn": [
+      "A mass function needs $p_k\\ge0$ and $\\sum_kp_k=1$; the distribution function is a nondecreasing step function jumping by $p_k$ at $x_k$.",
+      "Binomial $B(n,p)$: mean $E(X)=np$ and variance $\\operatorname{Var}(X)=np(1-p)$; $n=1$ gives the two-point law, and for large $n$ it approaches the normal law.",
+      "Poisson $P(\\lambda)$: mean and variance both equal $\\lambda$; a sum of independent Poisson variables is again Poisson with added parameters.",
+      "Geometric law (trials-to-first-success convention): $E(X)=1/p$, $\\operatorname{Var}(X)=(1-p)/p^{2}$, and $P(X>m+n\\mid X>m)=P(X>n)$, the memoryless property.",
+      "Rare-event approximation: for large $n$, small $p$ and moderate $\\lambda=np$, binomial probabilities are well approximated by the Poisson law."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "15*x^2*(1-x)^4",
+          "color": "#4cc9f0",
+          "label": "P(X=2) = 15p²(1−p)⁴，n = 6"
+        },
+        {
+          "expr": "20*x^3*(1-x)^3",
+          "color": "#ff6b9d",
+          "label": "P(X=3) = 20p³(1−p)³，n = 6"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        0.45
+      ],
+      "title": "二项分布 B(6, p) 中概率 P(X=k) 随 p 变化的形状：两条曲线峰值分别在 p = 1/3 与 p = 1/2"
+    },
+    "examples": [
+      {
+        "problem": "某射手每次命中目标的概率为 0.8，各次射击相互独立，共射击 5 次。求恰好命中 2 次的概率，以及至少命中 1 次的概率。",
+        "solution": "命中次数 $X\\sim B(5,0.8)$。恰好命中 2 次：\n$$P(X=2)=\\binom{5}{2}(0.8)^{2}(0.2)^{3}=10\\times0.64\\times0.008=0.0512.$$\n至少命中 1 次用补事件更省力：\n$$P(X\\ge1)=1-P(X=0)=1-(0.2)^{5}=1-0.00032=0.99968.$$"
+      },
+      {
+        "problem": "某电话交换台每分钟接到的呼叫次数 $X\\sim P(3)$。求一分钟内没有呼叫的概率 $P(X=0)$ 与至少有一次呼叫的概率 $P(X\\ge1)$。",
+        "solution": "由泊松分布公式\n$$P(X=0)=\\frac{3^{0}e^{-3}}{0!}=e^{-3}\\approx0.0498.$$\n再由补事件公式\n$$P(X\\ge1)=1-P(X=0)=1-e^{-3}\\approx0.9502.$$"
+      }
+    ],
+    "tags": [
+      "离散型",
+      "分布律",
+      "二项分布",
+      "泊松分布",
+      "几何分布"
+    ],
+    "links": [
+      "random-variable",
+      "probability-basics",
+      "continuous-distributions",
+      "normal-distribution",
+      "expectation-variance"
+    ]
+  },
+  {
+    "id": "continuous-distributions",
+    "title": "常见连续型分布",
+    "titleEn": "Common Continuous Distributions",
+    "branch": "probability",
+    "level": 4,
+    "summary": "取值充满一个区间的连续型随机变量由概率密度 f(x) 描述，概率等于密度曲线下的面积；均匀分布与指数分布是最基本的两种连续型分布。",
+    "summaryEn": "A continuous random variable is described by a probability density f(x), with probabilities given by areas under the curve; the uniform and exponential laws are the two basic continuous families.",
+    "definition": "若存在非负可积函数 $f(x)$，使得随机变量 $X$ 的分布函数可以表示为\n$$F(x)=\\int_{-\\infty}^{x}f(t)\\,dt,\\qquad -\\infty<x<+\\infty,$$\n则称 $X$ 为**连续型随机变量**，$f$ 称为**概率密度函数**（简称密度）。密度必须满足 $f(x)\\ge0$ 且 $\\int_{-\\infty}^{+\\infty}f(x)\\,dx=1$；反过来，满足这两条的函数都可以作为某个连续型随机变量的密度。连续型随机变量单点概率为 0，所以\n$$P(a<X\\le b)=P(a\\le X<b)=F(b)-F(a)=\\int_a^b f(x)\\,dx.$$\n「概率等于面积、密度是高度」是理解连续型分布的关键。\n\n**均匀分布**：若 $X$ 在区间 $(a,b)$ 内等可能地取值，密度为\n$$f(x)=\\begin{cases}\\frac{1}{b-a},&a<x<b,\\\\0,&\\text{其他},\\end{cases}$$\n则称 $X$ 服从区间 $(a,b)$ 上的均匀分布，记作 $X\\sim U(a,b)$。此时概率与子区间长度成正比，例如 $(a,b)$ 的任一子区间 $[c,d]$ 上的概率为 $\\frac{d-c}{b-a}$；期望为区间中点 $\\frac{a+b}{2}$。\n\n**指数分布**：若 $X$ 的密度为\n$$f(x)=\\begin{cases}\\lambda e^{-\\lambda x},&x>0,\\\\0,&x\\le0,\\end{cases}\\qquad \\lambda>0,$$\n则称 $X$ 服从参数为 $\\lambda$ 的指数分布，记作 $X\\sim \\operatorname{Exp}(\\lambda)$。它的分布函数 $F(x)=1-e^{-\\lambda x}\\ (x>0)$，期望 $E(X)=\\frac{1}{\\lambda}$，方差 $\\operatorname{Var}(X)=\\frac{1}{\\lambda^{2}}$。指数分布是「等待时间」的模型：元件寿命、顾客到达间隔等。它还有无记忆性：\n$$P(X>s+t\\mid X>s)=P(X>t)\\qquad(s,t>0).$$\n\n密度与分布函数的关系：在 $f$ 的连续点处 $F'(x)=f(x)$。密度刻画的是单位长度上的概率，「密度是概率的密度」而不是概率本身，因此密度可以大于 1（例如 $U(0,\\tfrac12)$ 的密度恒为 2），但它在任何区间上的积分不超过 1。",
+    "definitionEn": "If there exists a nonnegative integrable function $f(x)$ such that the distribution function of $X$ can be written as\n$$F(x)=\\int_{-\\infty}^{x}f(t)\\,dt,\\qquad -\\infty<x<+\\infty,$$\nthen $X$ is a **continuous random variable** and $f$ is its **probability density function**. A density must satisfy $f(x)\\ge0$ and $\\int_{-\\infty}^{+\\infty}f(x)\\,dx=1$; conversely any such function is the density of some continuous variable. Single points have probability 0, so\n$$P(a<X\\le b)=P(a\\le X<b)=F(b)-F(a)=\\int_a^b f(x)\\,dx.$$\nProbability is area and density is height — the key to continuous distributions.\n\n**Uniform distribution**: if $X$ takes values in $(a,b)$ with constant density\n$$f(x)=\\frac{1}{b-a}\\quad(a<x<b),$$ then $X\\sim U(a,b)$; probabilities are proportional to interval lengths and the mean is the midpoint $(a+b)/2$.\n\n**Exponential distribution**: if\n$$f(x)=\\lambda e^{-\\lambda x}\\quad(x>0),\\qquad \\lambda>0,$$ then $X\\sim\\operatorname{Exp}(\\lambda)$, with $F(x)=1-e^{-\\lambda x}$ for $x>0$, mean $E(X)=1/\\lambda$ and variance $1/\\lambda^{2}$. It models waiting times — component lifetimes, inter-arrival times — and is memoryless:\n$$P(X>s+t\\mid X>s)=P(X>t)\\qquad(s,t>0).$$\n\nDensity and distribution function are linked by $F'(x)=f(x)$ wherever $f$ is continuous. The density measures probability per unit length, so it is not itself a probability and may exceed 1 (for instance $U(0,\\tfrac12)$ has density 2), while its integral over any interval never exceeds 1.",
+    "formulas": [
+      {
+        "latex": "f(x)\\ge0,\\qquad \\int_{-\\infty}^{+\\infty}f(x)\\,dx=1,\\qquad F(x)=\\int_{-\\infty}^{x}f(t)\\,dt",
+        "note": "密度的两条基本要求（非负、全积分等于 1）以及密度与分布函数的积分关系。",
+        "noteEn": "The two requirements for a density (nonnegative, integrates to 1) and its integral relation to the distribution function."
+      },
+      {
+        "latex": "P(a<X\\le b)=\\int_a^b f(x)\\,dx=F(b)-F(a)",
+        "note": "连续型随机变量的区间概率等于密度在区间上的积分，即曲线下的面积；端点开闭不影响结果。",
+        "noteEn": "For continuous variables, interval probability is the integral of the density — the area under the curve; endpoints do not matter."
+      },
+      {
+        "latex": "f(x)=\\frac{1}{b-a}\\ (a<x<b),\\qquad E(X)=\\frac{a+b}{2},\\qquad \\operatorname{Var}(X)=\\frac{(b-a)^{2}}{12}",
+        "note": "均匀分布 $U(a,b)$ 的密度、期望与方差；概率只与区间长度成正比。",
+        "noteEn": "Density, mean and variance of the uniform law $U(a,b)$; probability is proportional to interval length."
+      },
+      {
+        "latex": "f(x)=\\lambda e^{-\\lambda x}\\ (x>0),\\qquad F(x)=1-e^{-\\lambda x},\\qquad E(X)=\\frac{1}{\\lambda},\\qquad \\operatorname{Var}(X)=\\frac{1}{\\lambda^{2}}",
+        "note": "指数分布 $\\operatorname{Exp}(\\lambda)$ 的密度、分布函数、期望与方差；参数越大衰减越快、期望越小。",
+        "noteEn": "Density, distribution function, mean and variance of $\\operatorname{Exp}(\\lambda)$; a larger rate means faster decay and smaller mean."
+      },
+      {
+        "latex": "P(X>s+t\\mid X>s)=P(X>t)\\qquad(s,t>0)",
+        "note": "指数分布的无记忆性：已经等待了 $s$ 小时后，再等 $t$ 小时的概率分布与从头等待一样。",
+        "noteEn": "Memorylessness of the exponential law: after waiting $s$, the additional wait $t$ has the same distribution as a fresh wait."
+      }
+    ],
+    "expression": {
+      "text": "f(x) ≥ 0，∫f(x) dx = 1",
+      "symbol": "f(x)",
+      "note": "密度不是概率而是「概率的密度」：它在小区间上的积分才是概率，因此可以大于 1。",
+      "noteEn": "A density is not a probability but a probability per unit length; only its integral over an interval is a probability, so it may exceed 1."
+    },
+    "properties": [
+      "密度两条基本要求：$f(x)\\ge0$ 且 $\\int_{-\\infty}^{+\\infty}f(x)\\,dx=1$。",
+      "单点概率为 0：$P(X=x)=0$，因此区间端点的开闭不影响概率值。",
+      "概率等于面积：$P(a<X\\le b)=\\int_a^bf(x)\\,dx$；密度 $f(x)$ 本身可以大于 1，不是概率。",
+      "在 $f$ 的连续点处 $F'(x)=f(x)$；分布函数连续，其导数就是密度。",
+      "均匀分布的期望是区间中点；指数分布的期望为 $1/\\lambda$ 且具有无记忆性。"
+    ],
+    "propertiesEn": [
+      "A density satisfies $f(x)\\ge0$ and $\\int_{-\\infty}^{+\\infty}f(x)\\,dx=1$.",
+      "Single points have probability 0: $P(X=x)=0$, so open or closed endpoints do not change probabilities.",
+      "Probability is area: $P(a<X\\le b)=\\int_a^bf(x)\\,dx$; the density itself may exceed 1 and is not a probability.",
+      "Wherever $f$ is continuous, $F'(x)=f(x)$; the distribution function is continuous with the density as its derivative.",
+      "The uniform mean is the midpoint of the interval; the exponential mean is $1/\\lambda$ and the exponential law is memoryless."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2*exp(-2*x)",
+          "color": "#4cc9f0",
+          "label": "f(x) = 2e^(−2x)（λ = 2，x > 0）"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "2*exp(-2*x)",
+          "from": 0,
+          "to": 1,
+          "base": 0,
+          "color": "#4cc9f0",
+          "label": "P(X ≤ 1) = 1 − e^(−2) ≈ 0.865"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        4
+      ],
+      "yRange": [
+        0,
+        2.3
+      ],
+      "title": "指数分布 Exp(2) 的密度曲线：曲线下总面积为 1，阴影面积是 P(X≤1)"
+    },
+    "examples": [
+      {
+        "problem": "某路公交车每 10 分钟一班，乘客随机到站，到站时刻 $X\\sim U(0,10)$（单位：分钟）。求 $P(3<X\\le7)$ 与平均到站时刻 $E(X)$。",
+        "solution": "$U(0,10)$ 的密度为 $f(x)=\\frac{1}{10-0}=\\frac{1}{10}\\ (0<x<10)$。由「概率与长度成正比」或直接积分\n$$P(3<X\\le7)=\\int_3^7\\frac{1}{10}\\,dx=\\frac{7-3}{10}=0.4.$$\n均匀分布的期望是区间中点：$E(X)=\\frac{0+10}{2}=5$（分钟）。"
+      },
+      {
+        "problem": "某电子元件的寿命 $X$（小时）服从参数 $\\lambda=\\frac{1}{1000}$ 的指数分布。求元件寿命超过 1500 小时的概率，以及平均寿命。",
+        "solution": "由指数分布 $P(X>x)=e^{-\\lambda x}$，得\n$$P(X>1500)=e^{-\\frac{1500}{1000}}=e^{-1.5}\\approx0.2231.$$\n平均寿命即期望 $E(X)=\\frac{1}{\\lambda}=1000$（小时）。"
+      }
+    ],
+    "tags": [
+      "连续型",
+      "概率密度",
+      "均匀分布",
+      "指数分布",
+      "无记忆性"
+    ],
+    "links": [
+      "random-variable",
+      "discrete-distributions",
+      "normal-distribution",
+      "function-of-random-variables",
+      "integral"
+    ]
+  },
+  {
+    "id": "normal-distribution",
+    "title": "正态分布",
+    "titleEn": "Normal Distribution",
+    "branch": "probability",
+    "level": 4,
+    "summary": "以 μ 为对称中心、σ 为尺度参数的钟形分布，是理论与应用中最重要的一种连续型分布；任何正态变量都可标准化为 N(0,1)，并遵循 68–95–99.7 的 3σ 原则。",
+    "summaryEn": "The bell-shaped law with center μ and scale σ; any normal variable standardizes to N(0,1), and its probabilities obey the 68–95–99.7 three-sigma rule.",
+    "definition": "若随机变量 $X$ 的概率密度为\n$$f(x)=\\frac{1}{\\sigma\\sqrt{2\\pi}}e^{-\\frac{(x-\\mu)^{2}}{2\\sigma^{2}}},\\qquad -\\infty<x<+\\infty,$$\n其中 $\\mu$（常数）与 $\\sigma>0$ 是参数，则称 $X$ 服从参数为 $\\mu,\\sigma^{2}$ 的**正态分布**（高斯分布），记作 $X\\sim N(\\mu,\\sigma^{2})$。密度曲线关于直线 $x=\\mu$ 对称，在 $x=\\mu$ 处取得最大值 $\\frac{1}{\\sigma\\sqrt{2\\pi}}$；$\\sigma$ 越小曲线越「高瘦」，$\\sigma$ 越大曲线越「矮胖」，但曲线下方的总面积恒为 1。\n\n**标准化**：若 $X\\sim N(\\mu,\\sigma^{2})$，令\n$$Z=\\frac{X-\\mu}{\\sigma},$$\n则 $Z\\sim N(0,1)$，称 $Z$ 服从**标准正态分布**，其分布函数记作 $\\Phi(x)$。于是\n$$P(X\\le x)=\\Phi\\!\\left(\\frac{x-\\mu}{\\sigma}\\right),\\qquad P(a<X\\le b)=\\Phi\\!\\left(\\frac{b-\\mu}{\\sigma}\\right)-\\Phi\\!\\left(\\frac{a-\\mu}{\\sigma}\\right).$$\n任何正态概率都能化为 $\\Phi$ 的函数值，查标准正态分布表或由软件计算即可。\n\n$\\Phi$ 的基本性质：$\\Phi(0)=\\frac12$，$\\Phi(-x)=1-\\Phi(x)$，所以正态表通常只列出 $x\\ge0$ 的部分。常用数值：$\\Phi(1)\\approx0.8413$，$\\Phi(1.96)\\approx0.975$，$\\Phi(2.58)\\approx0.995$。\n\n**3σ 原则**：正态变量几乎总落在期望的 3 倍标准差范围内：\n$$P(\\mu-\\sigma<X\\le\\mu+\\sigma)\\approx0.6827,\\quad P(\\mu-2\\sigma<X\\le\\mu+2\\sigma)\\approx0.9545,\\quad P(\\mu-3\\sigma<X\\le\\mu+3\\sigma)\\approx0.9973.$$\n这就是「68–95–99.7 法则」，在质量控制、异常检测中广泛使用。正态分布如此常见，是因为中心极限定理：许多独立的微小随机因素之和近似服从正态分布。",
+    "definitionEn": "A random variable $X$ has the **normal distribution** (Gaussian distribution) with parameters $\\mu$ and $\\sigma^{2}>0$ if its density is\n$$f(x)=\\frac{1}{\\sigma\\sqrt{2\\pi}}e^{-\\frac{(x-\\mu)^{2}}{2\\sigma^{2}}},\\qquad -\\infty<x<+\\infty,$$\nwritten $X\\sim N(\\mu,\\sigma^{2})$. The curve is symmetric about $x=\\mu$, where it attains its maximum $\\frac{1}{\\sigma\\sqrt{2\\pi}}$; smaller $\\sigma$ gives a taller, narrower curve and larger $\\sigma$ a flatter, wider one, while the total area underneath always equals 1.\n\n**Standardization**: if $X\\sim N(\\mu,\\sigma^{2})$ and $Z=\\frac{X-\\mu}{\\sigma}$, then $Z\\sim N(0,1)$ has the **standard normal distribution** with distribution function $\\Phi$. Hence\n$$P(X\\le x)=\\Phi\\!\\left(\\frac{x-\\mu}{\\sigma}\\right),\\qquad P(a<X\\le b)=\\Phi\\!\\left(\\frac{b-\\mu}{\\sigma}\\right)-\\Phi\\!\\left(\\frac{a-\\mu}{\\sigma}\\right).$$\nEvery normal probability reduces to values of $\\Phi$, found in tables or computed by software.\n\nBasic values: $\\Phi(0)=\\frac12$ and $\\Phi(-x)=1-\\Phi(x)$, so tables usually list only $x\\ge0$; typical entries are $\\Phi(1)\\approx0.8413$, $\\Phi(1.96)\\approx0.975$ and $\\Phi(2.58)\\approx0.995$.\n\nThe **three-sigma rule**: a normal variable almost always lies within three standard deviations of its mean,\n$$P(\\mu-\\sigma<X\\le\\mu+\\sigma)\\approx0.6827,\\quad P(\\mu-2\\sigma<X\\le\\mu+2\\sigma)\\approx0.9545,\\quad P(\\mu-3\\sigma<X\\le\\mu+3\\sigma)\\approx0.9973,$$\nthe 68–95–99.7 rule used in quality control and anomaly detection. The ubiquity of the normal law comes from the central limit theorem: sums of many independent small random effects are approximately normal.",
+    "formulas": [
+      {
+        "latex": "f(x)=\\frac{1}{\\sigma\\sqrt{2\\pi}}e^{-\\frac{(x-\\mu)^{2}}{2\\sigma^{2}}}",
+        "note": "正态分布 $N(\\mu,\\sigma^{2})$ 的密度：关于 $x=\\mu$ 对称的钟形曲线，峰值 $\\frac{1}{\\sigma\\sqrt{2\\pi}}$，曲线下面积为 1。",
+        "noteEn": "Normal density: a bell-shaped curve symmetric about $x=\\mu$ with peak $\\frac{1}{\\sigma\\sqrt{2\\pi}}$ and unit area."
+      },
+      {
+        "latex": "Z=\\frac{X-\\mu}{\\sigma}\\sim N(0,1),\\qquad P(X\\le x)=\\Phi\\!\\left(\\frac{x-\\mu}{\\sigma}\\right)",
+        "note": "标准化：把任意正态变量平移、缩放到标准正态，任何正态概率都可用 $\\Phi$ 计算。",
+        "noteEn": "Standardization: shifting and scaling any normal variable gives $N(0,1)$, so every normal probability is a value of $\\Phi$."
+      },
+      {
+        "latex": "\\Phi(0)=\\frac12,\\qquad \\Phi(-x)=1-\\Phi(x)",
+        "note": "标准正态分布函数的对称性；查表时用它将负值化为正值。",
+        "noteEn": "Symmetry of the standard normal distribution function; it converts negative arguments into table-friendly positive ones."
+      },
+      {
+        "latex": "P(\\mu-\\sigma<X\\le\\mu+\\sigma)\\approx0.6827,\\quad P(\\mu-2\\sigma<X\\le\\mu+2\\sigma)\\approx0.9545,\\quad P(\\mu-3\\sigma<X\\le\\mu+3\\sigma)\\approx0.9973",
+        "note": "3σ 原则（68–95–99.7 法则）：正态变量几乎必然落在 $\\mu\\pm3\\sigma$ 内，常用于判断异常值。",
+        "noteEn": "The three-sigma (68–95–99.7) rule: normal variables lie within $\\mu\\pm3\\sigma$ almost surely, a common outlier check."
+      },
+      {
+        "latex": "X_i\\sim N(\\mu_i,\\sigma_i^{2})\\ \\text{相互独立}\\ \\Longrightarrow\\ \\sum_i a_iX_i\\sim N\\!\\left(\\sum_i a_i\\mu_i,\\ \\sum_i a_i^{2}\\sigma_i^{2}\\right)",
+        "note": "独立正态变量的线性组合仍服从正态分布——正态性在加法与数乘下保持不变。",
+        "noteEn": "Linear combinations of independent normal variables are again normal: the normal family is closed under addition and scaling."
+      }
+    ],
+    "expression": {
+      "text": "Z = (X − μ)/σ ~ N(0, 1)",
+      "symbol": "Z=\\frac{X-\\mu}{\\sigma}",
+      "note": "标准化是计算正态概率的通用手段：把问题化为标准正态分布的查表或求值。",
+      "noteEn": "Standardization is the universal device for normal probabilities: reduce the problem to evaluating $\\Phi$."
+    },
+    "properties": [
+      "密度关于 $x=\\mu$ 对称：$f(\\mu-x)=f(\\mu+x)$，故 $P(X\\le\\mu)=\\frac12$；峰值 $f(\\mu)=\\frac{1}{\\sigma\\sqrt{2\\pi}}$。",
+      "$\\mu$ 决定曲线位置，$\\sigma$ 决定离散程度：$\\sigma$ 越大曲线越平坦，越小越尖锐。",
+      "标准化：$Z=\\frac{X-\\mu}{\\sigma}\\sim N(0,1)$；任何正态概率都可化为 $\\Phi$ 的函数值。",
+      "3σ 原则：$P(\\mu-\\sigma<X\\le\\mu+\\sigma)\\approx68.27\\%$，$2\\sigma$ 约为 $95.45\\%$，$3\\sigma$ 约为 $99.73\\%$。",
+      "独立正态变量的线性组合仍服从正态分布；由中心极限定理，大量独立同分布变量之和近似正态。"
+    ],
+    "propertiesEn": [
+      "The density is symmetric about $x=\\mu$: $f(\\mu-x)=f(\\mu+x)$, so $P(X\\le\\mu)=\\frac12$, and its peak is $f(\\mu)=\\frac{1}{\\sigma\\sqrt{2\\pi}}$.",
+      "$\\mu$ fixes the location and $\\sigma$ the spread: a larger $\\sigma$ gives a flatter curve, a smaller one a sharper curve.",
+      "Standardization: $Z=\\frac{X-\\mu}{\\sigma}\\sim N(0,1)$; every normal probability becomes a value of $\\Phi$.",
+      "Three-sigma rule: $P(\\mu-\\sigma<X\\le\\mu+\\sigma)\\approx68.27\\%$, about $95.45\\%$ within $2\\sigma$ and $99.73\\%$ within $3\\sigma$.",
+      "Linear combinations of independent normal variables stay normal; by the central limit theorem, sums of many i.i.d. variables are approximately normal."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/sqrt(2*PI)*exp(-x^2/2)",
+          "color": "#4cc9f0",
+          "label": "N(0,1)：μ=0，σ=1"
+        },
+        {
+          "expr": "2/sqrt(2*PI)*exp(-2*x^2)",
+          "color": "#ff6b9d",
+          "label": "N(0,1/4)：μ=0，σ=0.5"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "1/sqrt(2*PI)*exp(-x^2/2)",
+          "from": -1,
+          "to": 1,
+          "base": 0,
+          "color": "#4cc9f0",
+          "label": "P(μ−σ<X≤μ+σ) ≈ 68.27%"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        0,
+        0.9
+      ],
+      "title": "正态密度曲线：σ 越小峰越高、越集中（蓝 σ=1，粉 σ=0.5），阴影面积约为 68.27%"
+    },
+    "examples": [
+      {
+        "problem": "设某次考试成绩 $X\\sim N(70,100)$（满分 100，单位：分）。求成绩落在 60 分到 85 分之间的概率 $P(60<X\\le85)$。",
+        "solution": "这里 $\\mu=70$，$\\sigma=\\sqrt{100}=10$。标准化后\n$$P(60<X\\le85)=\\Phi\\!\\left(\\frac{85-70}{10}\\right)-\\Phi\\!\\left(\\frac{60-70}{10}\\right)=\\Phi(1.5)-\\Phi(-1).$$\n由对称性 $\\Phi(-1)=1-\\Phi(1)$，查表 $\\Phi(1.5)\\approx0.9332$，$\\Phi(1)\\approx0.8413$，故\n$$P(60<X\\le85)\\approx0.9332-(1-0.8413)=0.7745.$$"
+      },
+      {
+        "problem": "设某地区成年男性的身高 $X\\sim N(170,36)$（单位：cm）。求身高超过 182 cm 的比例。",
+        "solution": "$\\mu=170$，$\\sigma=\\sqrt{36}=6$，标准化得\n$$P(X>182)=1-\\Phi\\!\\left(\\frac{182-170}{6}\\right)=1-\\Phi(2)\\approx1-0.9772=0.0228.$$\n即约有 $2.28\\%$ 的人身高超过 182 cm，这正是「超出均值 2 个标准差」的单侧概率（约 $2.3\\%$）。"
+      }
+    ],
+    "tags": [
+      "正态分布",
+      "标准正态",
+      "标准化",
+      "3σ原则",
+      "钟形曲线"
+    ],
+    "links": [
+      "continuous-distributions",
+      "random-variable",
+      "central-limit-theorem",
+      "statistics-sampling"
+    ]
+  },
+  {
+    "id": "function-of-random-variables",
+    "title": "随机变量函数的分布",
+    "titleEn": "Distributions of Functions of Random Variables",
+    "branch": "probability",
+    "level": 5,
+    "summary": "已知 X 的分布求 Y=g(X) 的分布：通用方法是分布函数法 F_Y(y)=P(g(X)≤y)；当 g 单调可导时可直接用反函数公式 f_Y(y)=f_X(g⁻¹(y))·|dg⁻¹(y)/dy|。",
+    "summaryEn": "Given the law of X, find that of Y=g(X): the general method uses the distribution function F_Y(y)=P(g(X)≤y); for monotone differentiable g the inverse-function formula f_Y(y)=f_X(g⁻¹(y))·|dg⁻¹(y)/dy| applies.",
+    "definition": "若 $X$ 是随机变量，$g$ 是实值函数，则 $Y=g(X)$ 也是随机变量，问题是由 $X$ 的分布求出 $Y$ 的分布。最基本的方法是**分布函数法**：先写出\n$$F_Y(y)=P(Y\\le y)=P(g(X)\\le y),$$\n把事件 $\\{g(X)\\le y\\}$ 转化为关于 $X$ 的区间（或若干区间之并），再用 $X$ 的分布函数表示；对连续型情形，最后对 $y$ 求导即得 $Y$ 的密度。这个方法对单调与非单调的 $g$ 都适用，是最保险的通法。\n\n若 $y=g(x)$ 严格单调且可导，反函数 $x=g^{-1}(y)$ 存在，则 $Y=g(X)$ 的密度为\n$$f_Y(y)=f_X\\bigl(g^{-1}(y)\\bigr)\\left|\\frac{dg^{-1}(y)}{dy}\\right|,$$\n等价地也可写成 $f_Y(y)=\\left.\\frac{f_X(x)}{|g'(x)|}\\right|_{x=g^{-1}(y)}$。式中的绝对值来自「长度缩放」：变量替换时小区间的长度按导数的比例伸缩，而这个因子正好补偿这种伸缩，使总概率保持不变。线性变换 $Y=aX+b\\ (a\\ne0)$ 是特例：\n$$f_Y(y)=\\frac{1}{|a|}f_X\\!\\left(\\frac{y-b}{a}\\right),$$\n即线性变换只改变位置与尺度，不改变分布的形状。\n\n若 $g$ 不单调（如 $Y=X^{2}$），就不能直接套反函数公式，应回到分布函数法：先把 $\\{g(X)\\le y\\}$ 分解为若干互斥事件之并，此时密度由各部分贡献叠加。一般地，若对给定 $y$，方程 $g(x)=y$ 有实根 $x_1,x_2,\\dots,x_n$，则\n$$f_Y(y)=\\sum_{i=1}^{n}\\frac{f_X(x_i)}{|g'(x_i)|}\\qquad(\\text{只对 }g'(x_i)\\ne0\\text{ 的根求和}).$$\n例如 $X\\sim N(0,1)$、$Y=X^{2}$ 时，方程 $x^{2}=y$ 有两根 $x=\\pm\\sqrt{y}$，两部分的贡献相加，得到自由度 1 的 $\\chi^{2}$ 分布密度。\n\n掌握变量变换的意义：把已知分布「搬运」到新的坐标轴上。卡方分布、$t$ 分布、$F$ 分布等抽样分布都是正态变量的函数；反过来，概率积分变换 $U=F_X(X)\\sim U(0,1)$ 说明任何连续分布都可以通过单调变换化为均匀分布。",
+    "definitionEn": "If $X$ is a random variable and $g$ a real function, then $Y=g(X)$ is again a random variable, and the task is to find the law of $Y$ from that of $X$. The general approach is the **distribution function method**: first write\n$$F_Y(y)=P(Y\\le y)=P(g(X)\\le y),$$\nturn the event $\\{g(X)\\le y\\}$ into one or several intervals for $X$, express it via the distribution function of $X$, and — in the continuous case — differentiate with respect to $y$ to obtain the density of $Y$. This always works, monotone or not.\n\nIf $y=g(x)$ is strictly monotone and differentiable with inverse $x=g^{-1}(y)$, then\n$$f_Y(y)=f_X\\bigl(g^{-1}(y)\\bigr)\\left|\\frac{dg^{-1}(y)}{dy}\\right|,$$\nequivalently $f_Y(y)=\\left.\\frac{f_X(x)}{|g'(x)|}\\right|_{x=g^{-1}(y)}$. The absolute value compensates the stretching of lengths under the change of variables, keeping total probability equal to 1. The linear case $Y=aX+b$ ($a\\ne0$) is a special case:\n$$f_Y(y)=\\frac{1}{|a|}f_X\\!\\left(\\frac{y-b}{a}\\right),$$\nso a linear transformation only shifts and rescales, it does not change the shape.\n\nIf $g$ is not monotone (say $Y=X^{2}$), return to the distribution function method and split $\\{g(X)\\le y\\}$ into disjoint pieces; the density is then a sum of contributions. In general, if for a given $y$ the equation $g(x)=y$ has roots $x_1,\\dots,x_n$, then\n$$f_Y(y)=\\sum_{i=1}^{n}\\frac{f_X(x_i)}{|g'(x_i)|}\\qquad(\\text{summed over roots with }g'(x_i)\\ne0).$$\nFor instance for $X\\sim N(0,1)$ and $Y=X^{2}$ the equation $x^{2}=y$ has the two roots $x=\\pm\\sqrt{y}$, and adding the two contributions yields the chi-square density with one degree of freedom.\n\nThe meaning of such transformations is transport of a known law to a new coordinate axis. The chi-square, $t$ and $F$ sampling distributions are all functions of normal variables; conversely the probability integral transform $U=F_X(X)\\sim U(0,1)$ shows that any continuous law can be turned into the uniform law by a monotone transformation.",
+    "formulas": [
+      {
+        "latex": "F_Y(y)=P(Y\\le y)=P(g(X)\\le y)",
+        "note": "分布函数法（通用方法）：先把事件 $\\{Y\\le y\\}$ 翻译成关于 $X$ 的事件，再用 $X$ 的分布函数表示。",
+        "noteEn": "The distribution function method: translate $\\{Y\\le y\\}$ into an event about $X$ and express it with the law of $X$."
+      },
+      {
+        "latex": "f_Y(y)=f_X\\bigl(g^{-1}(y)\\bigr)\\left|\\frac{dg^{-1}(y)}{dy}\\right|",
+        "note": "单调可导变换的密度公式：因子 $|dg^{-1}/dy|$ 补偿变量替换带来的长度伸缩，保证积分仍为 1。",
+        "noteEn": "Density formula for a monotone differentiable transformation: the factor $|dg^{-1}/dy|$ compensates length stretching so the total probability stays 1."
+      },
+      {
+        "latex": "f_Y(y)=\\left.\\frac{f_X(x)}{|g'(x)|}\\right|_{x=g^{-1}(y)}",
+        "note": "单调公式的等价写法：用 $X$ 的密度除以变换的导数斜率绝对值，再在反函数处取值。",
+        "noteEn": "Equivalent form of the monotone formula: the density of $X$ divided by $|g'|$ and evaluated at the inverse point."
+      },
+      {
+        "latex": "f_Y(y)=\\sum_{i=1}^{n}\\frac{f_X(x_i)}{|g'(x_i)|},\\qquad g(x_i)=y",
+        "note": "非单调变换：把方程 $g(x)=y$ 的每个根（$g'\\ne0$）的贡献相加；例如 $Y=X^{2}$ 有两个根。",
+        "noteEn": "Non-monotone case: add the contributions of all roots $x_i$ of $g(x)=y$ with $g'(x_i)\\ne0$; for $Y=X^{2}$ there are two roots."
+      },
+      {
+        "latex": "Y=aX+b\\ (a\\ne0)\\ \\Longrightarrow\\ f_Y(y)=\\frac{1}{|a|}f_X\\!\\left(\\frac{y-b}{a}\\right)",
+        "note": "线性变换的密度公式：平移不改变形状，缩放因子 $|a|$ 使密度积分保持为 1。",
+        "noteEn": "Linear transformation: shifting preserves the shape, and the factor $1/|a|$ keeps the density integrating to 1."
+      }
+    ],
+    "expression": {
+      "text": "Y = g(X) ⇒ f_Y(y) = f_X(g⁻¹(y))·|dg⁻¹(y)/dy|",
+      "symbol": "f_Y(y)=f_X\\bigl(g^{-1}(y)\\bigr)\\left|\\frac{dg^{-1}(y)}{dy}\\right|",
+      "note": "单调变换用反函数公式，非单调变换回到分布函数法并把各根的贡献相加。",
+      "noteEn": "Use the inverse formula for monotone transformations; for non-monotone ones return to the distribution function method and sum over roots."
+    },
+    "properties": [
+      "单调变换时分布函数可由反函数表示：$g$ 递增时 $F_Y(y)=F_X(g^{-1}(y))$，递减时 $F_Y(y)=P(X\\ge g^{-1}(y))=1-F_X(g^{-1}(y)-0)$；仅当 $X$ 为连续型时才简化为 $1-F_X(g^{-1}(y))$。",
+      "密度公式中的因子 $|dg^{-1}/dy|=1/|g'(x)|$ 保证变换后密度在 $(-\\infty,+\\infty)$ 上的积分仍为 1。",
+      "非单调变换要分区间讨论：每个根 $x_i$ 贡献 $\\frac{f_X(x_i)}{|g'(x_i)|}$，再把各贡献相加。",
+      "分布函数法对离散型、连续型及混合型随机变量都适用；离散型只需把 $X$ 的取值代入 $g$ 并合并相同取值的概率。",
+      "典型例子：$Y=X^{2}$ 把密度「折叠」到正半轴，在 $y\\to0^{+}$ 处密度常常发散；$X\\sim N(0,1)$ 时 $X^{2}\\sim\\chi^{2}(1)$。"
+    ],
+    "propertiesEn": [
+      "For monotone transformations the distribution function is given by the inverse: $F_Y(y)=F_X(g^{-1}(y))$ for increasing $g$ and $F_Y(y)=P(X\\ge g^{-1}(y))=1-F_X(g^{-1}(y)-0)$ for decreasing $g$ (which reduces to $1-F_X(g^{-1}(y))$ when $X$ is continuous).",
+      "The factor $|dg^{-1}/dy|=1/|g'(x)|$ keeps the transformed density integrating to 1 over the whole line.",
+      "For non-monotone $g$ one splits into intervals: each root $x_i$ contributes $f_X(x_i)/|g'(x_i)|$, and the contributions are added.",
+      "The distribution function method works for discrete, continuous and mixed variables; in the discrete case one simply maps the values through $g$ and merges equal values.",
+      "A model case: $Y=X^{2}$ folds the density onto the positive axis, often blowing up as $y\\to0^{+}$; for $X\\sim N(0,1)$ one gets $X^{2}\\sim\\chi^{2}(1)$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x/2)/sqrt(2*PI*x)",
+          "color": "#ff6b9d",
+          "label": "f_Y(y) = e^(−y/2)/√(2πy)，Y = X²（X ~ N(0,1)）"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "exp(-x/2)/sqrt(2*PI*x)",
+          "from": 0.05,
+          "to": 1,
+          "base": 0,
+          "color": "#ff6b9d",
+          "label": "P(Y≤1)=P(|X|≤1)≈0.6827"
+        }
+      ],
+      "xRange": [
+        0.05,
+        8
+      ],
+      "yRange": [
+        0,
+        1.8
+      ],
+      "title": "Y = X² 的密度：方程 x²=y 的两个根 ±√y 的贡献叠加，密度在 0 附近发散"
+    },
+    "examples": [
+      {
+        "problem": "设 $X\\sim U(0,1)$，求 $Y=-2\\ln X$ 的概率密度，并指出它服从什么分布。",
+        "solution": "用分布函数法。当 $y>0$ 时\n$$F_Y(y)=P(-2\\ln X\\le y)=P\\bigl(X\\ge e^{-y/2}\\bigr)=1-P\\bigl(X<e^{-y/2}\\bigr)=1-e^{-y/2},$$\n当 $y\\le0$ 时 $F_Y(y)=0$。对 $y$ 求导得\n$$f_Y(y)=\\frac12e^{-y/2}\\qquad(y>0),$$\n即 $Y\\sim\\operatorname{Exp}\\!\\left(\\frac12\\right)$，是指数分布，期望 $E(Y)=\\frac{1}{1/2}=2$。"
+      },
+      {
+        "problem": "设 $X\\sim N(0,1)$，$Y=X^{2}$。求 $Y$ 的概率密度 $f_Y(y)$，并计算 $P(Y\\le1)$。",
+        "solution": "当 $y>0$ 时，$\\{X^{2}\\le y\\}=\\{-\\sqrt{y}\\le X\\le\\sqrt{y}\\}$，故\n$$F_Y(y)=P(-\\sqrt{y}\\le X\\le\\sqrt{y})=\\Phi(\\sqrt{y})-\\Phi(-\\sqrt{y})=2\\Phi(\\sqrt{y})-1.$$\n求导得（$y>0$）\n$$f_Y(y)=2\\varphi(\\sqrt{y})\\cdot\\frac{1}{2\\sqrt{y}}=\\frac{\\varphi(\\sqrt{y})}{\\sqrt{y}}=\\frac{1}{\\sqrt{2\\pi y}}e^{-y/2},$$\n当 $y\\le0$ 时 $f_Y(y)=0$；这是自由度 1 的 $\\chi^{2}$ 分布密度。于是\n$$P(Y\\le1)=2\\Phi(1)-1\\approx2\\times0.8413-1=0.6827.$$"
+      }
+    ],
+    "tags": [
+      "随机变量函数",
+      "分布函数法",
+      "变量变换",
+      "反函数公式",
+      "卡方分布"
+    ],
+    "links": [
+      "random-variable",
+      "continuous-distributions",
+      "normal-distribution",
+      "derivative"
+    ]
+  }
+]

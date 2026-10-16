@@ -1,0 +1,424 @@
+[
+  {
+    "id": "limit",
+    "title": "极限",
+    "titleEn": "Limit of a Function",
+    "branch": "calculus",
+    "level": 3,
+    "summary": "描述当自变量趋近某点或趋于无穷时，函数值所趋近的确定常数。",
+    "summaryEn": "The value a function approaches as its input approaches a point or grows without bound.",
+    "definition": "函数极限描述的是：当自变量 $x$ 无限接近 $x_0$（但 $x \\neq x_0$）时，函数值 $f(x)$ 是否无限接近某个确定的常数 $A$。若如此，就称 $A$ 为 $f(x)$ 当 $x \\to x_0$ 时的**极限**，记作\n\n$$\\lim_{x \\to x_0} f(x) = A.$$\n\n这里有三个要点。第一，极限只关心 $x$ 趋近 $x_0$ 的**过程**，与 $f$ 在 $x_0$ 处是否有定义、取值为多少无关。第二，双侧极限存在，必须左极限与右极限都存在且相等，即 $\\lim_{x\\to x_0^-} f(x) = \\lim_{x\\to x_0^+} f(x) = A$。第三，若左右极限不相等，或某一侧极限不存在，则极限不存在。\n\n类似地可以定义自变量趋于无穷时的极限：当 $|x|$ 无限增大时 $f(x)$ 无限接近 $A$，记作 $\\lim_{x\\to\\infty} f(x) = A$，单侧情形还有 $x \\to +\\infty$ 与 $x \\to -\\infty$。极限是整个微积分的基石：导数、定积分与级数收敛都建立在极限之上。",
+    "definitionEn": "The limit of a function describes the value that $f(x)$ approaches as $x$ approaches $x_0$ (with $x \\neq x_0$), regardless of what happens at $x_0$ itself. If $f(x)$ gets arbitrarily close to a constant $A$, we write\n\n$$\\lim_{x \\to x_0} f(x) = A.$$\n\nThree points matter. First, the limit concerns only the process of approaching $x_0$, not whether $f$ is defined there. Second, the two-sided limit exists only when both one-sided limits exist and are equal: $\\lim_{x\\to x_0^-} f(x) = \\lim_{x\\to x_0^+} f(x) = A$. Third, if the one-sided limits differ, or one of them fails to exist, the limit does not exist.\n\nThe definition extends to $x \\to \\infty$ and to the one-sided versions $x\\to+\\infty$, $x\\to-\\infty$. Limits are the foundation of the whole subject: derivatives, definite integrals and series convergence are all defined through them.",
+    "formulas": [
+      { "latex": "\\lim_{x \\to x_0} f(x) = A", "note": "函数极限的定义式：$x$ 无限接近 $x_0$ 时 $f(x)$ 无限接近 $A$，与 $f(x_0)$ 的取值无关。", "noteEn": "Definition: as x approaches x0, f(x) approaches A, independent of the value f(x0)." },
+      { "latex": "\\lim_{x \\to x_0} f(x) = A \\iff \\lim_{x \\to x_0^-} f(x) = \\lim_{x \\to x_0^+} f(x) = A", "note": "极限存在的充要条件：左、右极限都存在且相等；只要左右极限不相等（或一侧不存在），极限就不存在。", "noteEn": "The two-sided limit exists iff both one-sided limits exist and are equal." },
+      { "latex": "\\lim_{x \\to \\infty} \\frac{1}{x} = 0", "note": "$x$ 无限增大时 $\\frac1x$ 无限接近 0，这是最简单的趋于无穷的极限。", "noteEn": "As x grows without bound, 1/x approaches 0." },
+      { "latex": "\\lim_{x \\to 1} \\frac{x^2-1}{x-1} = \\lim_{x \\to 1}(x+1) = 2", "note": "由 $x \\to 1$ 过程中 $x \\neq 1$，才能约去零因子 $x-1$；函数在 $x=1$ 无定义，但极限存在。", "noteEn": "Since x ≠ 1 during the approach, the factor x−1 cancels; the limit exists even though f(1) is undefined." },
+      { "latex": "\\lim_{x \\to 1^-} \\frac{1}{x-1} = -\\infty, \\quad \\lim_{x \\to 1^+} \\frac{1}{x-1} = +\\infty", "note": "左右极限一个为 $-\\infty$、一个为 $+\\infty$，所以 $\\lim_{x\\to1}\\frac{1}{x-1}$ 不存在。", "noteEn": "The one-sided limits differ, so the two-sided limit does not exist." }
+    ],
+    "expression": {
+      "text": "lim (x→x₀) f(x) = A",
+      "symbol": "\\lim_{x \\to x_0} f(x) = A",
+      "note": "极限存在要求左右极限都存在且相等；极限值与 $f(x_0)$ 的取值无关。",
+      "noteEn": "The limit requires equal one-sided limits and is independent of the value f(x0)."
+    },
+    "properties": [
+      "极限与函数在 $x_0$ 处的取值无关：$f$ 在 $x_0$ 处可以没有定义。",
+      "双侧极限存在的充要条件是左、右极限都存在且相等；左右极限不等则极限不存在。",
+      "唯一性：若极限存在，则极限值唯一。",
+      "局部有界性：若 $\\lim_{x\\to x_0}f(x)=A$，则存在 $x_0$ 的某去心邻域，在其中 $f(x)$ 有界。",
+      "局部保号性：若 $\\lim_{x\\to x_0}f(x)=A>0$，则在 $x_0$ 的某去心邻域内 $f(x)>0$。"
+    ],
+    "propertiesEn": [
+      "The limit is independent of the value of f at x0; f may even be undefined there.",
+      "A two-sided limit exists iff both one-sided limits exist and are equal; unequal one-sided limits mean no limit.",
+      "Uniqueness: if a limit exists, it is unique.",
+      "Local boundedness: if lim f(x) = A, then f is bounded on some deleted neighbourhood of x0.",
+      "Local sign preservation: if lim f(x) = A > 0, then f(x) > 0 on some deleted neighbourhood of x0."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)/x", "color": "#4cc9f0", "label": "y = sin x / x（x→0 时趋近 1）" },
+        { "expr": "(x^2-1)/(x-1)", "color": "#ff6b9d", "label": "y = (x²−1)/(x−1)（x→1 时趋近 2）" }
+      ],
+      "xRange": [-3, 3],
+      "yRange": [-2.5, 4.5],
+      "title": "函数极限的直观：x→0 时 sin x / x→1，x→1 时 (x²−1)/(x−1)→2"
+    },
+    "examples": [
+      { "problem": "用左右极限判断 $\\lim_{x\\to0}\\frac{|x|}{x}$ 是否存在。", "solution": "当 $x>0$ 时 $\\frac{|x|}{x}=\\frac{x}{x}=1$，故右极限 $\\lim_{x\\to0^+}\\frac{|x|}{x}=1$；当 $x<0$ 时 $\\frac{|x|}{x}=\\frac{-x}{x}=-1$，故左极限 $\\lim_{x\\to0^-}\\frac{|x|}{x}=-1$。左右极限不相等，因此该极限不存在。" },
+      { "problem": "求 $\\lim_{x\\to1}\\frac{x^2-1}{x-1}$。", "solution": "在 $x\\to1$ 的过程中 $x\\neq1$，可以约去零因子：$\\frac{x^2-1}{x-1}=\\frac{(x-1)(x+1)}{x-1}=x+1$，所以 $\\lim_{x\\to1}\\frac{x^2-1}{x-1}=\\lim_{x\\to1}(x+1)=2$。函数在 $x=1$ 处无定义，但极限存在，说明极限与函数值无关。" }
+    ],
+    "tags": ["极限", "左右极限", "微积分"],
+    "links": ["limit-laws", "continuity", "derivative", "infinitesimal", "sequence-limit"]
+  },
+  {
+    "id": "sequence-limit",
+    "title": "数列极限",
+    "titleEn": "Limit of a Sequence",
+    "branch": "calculus",
+    "level": 3,
+    "summary": "当项数 n 无限增大时，数列的项所无限接近的那个常数。",
+    "summaryEn": "The constant that the terms of a sequence approach as the index n grows without bound.",
+    "definition": "按一定顺序排列的一列数 $a_1, a_2, \\dots, a_n, \\dots$ 称为**数列**，记作 $\\{a_n\\}$。如果当项数 $n$ 无限增大时，$a_n$ 无限接近某个确定的常数 $A$，就称 $A$ 为数列 $\\{a_n\\}$ 的极限，也称数列**收敛**于 $A$，记作\n\n$$\\lim_{n\\to\\infty} a_n = A \\quad \\text{或} \\quad a_n \\to A\\ (n\\to\\infty).$$\n\n若这样的常数 $A$ 不存在，就称数列**发散**。注意 $n$ 只能取正整数并向 $+\\infty$ 单向增大，所以数列极限没有左右极限之分，这是它与函数极限的重要区别。\n\n严格的 $\\varepsilon$-$N$ 语言是：$\\lim_{n\\to\\infty}a_n=A$ 当且仅当对任意给定的 $\\varepsilon>0$，都存在正整数 $N$，使得当 $n>N$ 时恒有 $|a_n-A|<\\varepsilon$。它把「无限接近」变成了可以逐项检验的精确说法。数列极限是级数收敛与定积分（黎曼和）等概念的基础。",
+    "definitionEn": "A sequence is an ordered list of numbers $a_1, a_2, \\dots, a_n, \\dots$, written $\\{a_n\\}$. If, as the index $n$ grows without bound, the terms $a_n$ get arbitrarily close to a fixed number $A$, then $A$ is called the limit of the sequence, and the sequence **converges** to $A$:\n\n$$\\lim_{n\\to\\infty} a_n = A.$$\n\nIf no such $A$ exists, the sequence **diverges**. Since n only runs through the positive integers and increases in one direction, sequence limits have no one-sided versions — a key difference from function limits.\n\nThe precise $\\varepsilon$-$N$ definition: $\\lim_{n\\to\\infty}a_n=A$ means that for every $\\varepsilon>0$ there is a positive integer $N$ such that $|a_n-A|<\\varepsilon$ whenever $n>N$. This turns the intuitive idea of being arbitrarily close into a rigorous test. Sequence limits underlie series convergence and the Riemann integral.",
+    "formulas": [
+      { "latex": "\\lim_{n\\to\\infty} a_n = A", "note": "数列收敛的定义式：$n$ 无限增大时 $a_n$ 无限接近常数 $A$。", "noteEn": "Definition of convergence: the terms approach A as n grows." },
+      { "latex": "\\forall \\varepsilon > 0,\\ \\exists N \\in \\mathbb{N},\\ n > N \\Rightarrow |a_n - A| < \\varepsilon", "note": "$\\varepsilon$-$N$ 定义：无论要求多精确（$\\varepsilon$ 多小），都能从某一项之后一直满足精度要求。", "noteEn": "The epsilon-N definition of convergence." },
+      { "latex": "\\lim_{n\\to\\infty} \\frac{1}{n} = 0", "note": "最基本的例子：$\\frac1n$ 随 $n$ 增大被「压」向 0。", "noteEn": "The basic example: 1/n tends to 0." },
+      { "latex": "\\lim_{n\\to\\infty} \\left(1+\\frac{1}{n}\\right)^n = e", "note": "数列形式的第二个重要极限，也是定义自然常数 $e\\approx2.71828$ 的出发点。", "noteEn": "The sequence form of the second important limit, defining e." },
+      { "latex": "\\lim_{n\\to\\infty} q^n = 0 \\quad (|q| < 1)", "note": "等比型数列：$|q|<1$ 时趋于 0；$q=1$ 时恒为 1；$|q|>1$ 或 $q\\le-1$ 时发散。", "noteEn": "Geometric type: q^n → 0 iff |q| < 1; otherwise the sequence diverges (q = 1 is constant)." }
+    ],
+    "expression": {
+      "text": "lim (n→∞) aₙ = A",
+      "symbol": "\\lim_{n\\to\\infty} a_n = A",
+      "note": "$n$ 只向 $+\\infty$ 单向增大，所以数列极限没有左右极限之分。",
+      "noteEn": "The index n only grows in one direction, so sequence limits have no one-sided versions."
+    },
+    "properties": [
+      "若数列收敛，则它的极限唯一。",
+      "收敛数列一定有界；反之不成立，有界数列不一定收敛（如 $\\{(-1)^n\\}$）。",
+      "保号性：若 $\\lim_{n\\to\\infty}a_n=A>0$，则从某一项起 $a_n>0$。",
+      "单调有界准则：单调递增且有上界（或单调递减且有下界）的数列一定收敛。",
+      "与函数极限的关系：若 $\\lim_{x\\to+\\infty}f(x)=A$ 且 $a_n=f(n)$，则 $\\lim_{n\\to\\infty}a_n=A$；但反过来不成立。"
+    ],
+    "propertiesEn": [
+      "A convergent sequence has a unique limit.",
+      "Every convergent sequence is bounded; the converse fails, since bounded sequences may diverge (e.g. {(-1)^n}).",
+      "Sign preservation: if the limit is A > 0, then all sufficiently late terms are positive.",
+      "Monotone bounded criterion: a non-decreasing sequence bounded above (or non-increasing bounded below) converges.",
+      "If lim f(x) = A as x→+∞ and a_n = f(n), then the sequence converges to A; the converse does not hold."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1/x", "color": "#4cc9f0", "label": "aₙ = 1/n（n→∞ 时趋近 0）" },
+        { "expr": "1+1/x", "color": "#ff6b9d", "label": "aₙ = 1+1/n（n→∞ 时趋近 1）" }
+      ],
+      "xRange": [1, 12],
+      "yRange": [-0.5, 3],
+      "title": "数列极限的直观（用连续曲线示意）：1/n→0，1+1/n→1"
+    },
+    "examples": [
+      { "problem": "求 $\\lim_{n\\to\\infty}\\frac{2n+1}{n+3}$。", "solution": "分子分母同除以 $n$：$\\frac{2n+1}{n+3}=\\frac{2+\\frac1n}{1+\\frac3n}$。因为 $n\\to\\infty$ 时 $\\frac1n\\to0$、$\\frac3n\\to0$，由极限运算法则，分子趋于 $2+0=2$，分母趋于 $1+0=1$；分母极限不为 0，所以原式 $=\\frac{2}{1}=2$。" },
+      { "problem": "判断数列 $a_n=(-1)^n$ 是否收敛。", "solution": "奇数项 $a_{2k-1}=-1$，偶数项 $a_{2k}=1$。当 $n$ 无限增大时，项值在 $-1$ 与 $1$ 之间来回跳动，不能无限接近任何确定的常数，故数列发散。这也说明「有界数列不一定收敛」。" }
+    ],
+    "tags": ["数列", "极限", "收敛"],
+    "links": ["limit", "limit-laws", "series", "two-important-limits", "natural-constant-e"]
+  },
+  {
+    "id": "limit-laws",
+    "title": "极限的运算法则",
+    "titleEn": "Limit Laws",
+    "branch": "calculus",
+    "level": 3,
+    "summary": "在极限都存在且有限的前提下，求极限与四则运算可以交换次序。",
+    "summaryEn": "Limits commute with arithmetic operations, provided all the limits involved exist and are finite.",
+    "definition": "极限的运算法则告诉我们：在**各函数的极限都存在且为有限数**的前提下，求极限与加、减、乘、除可以交换次序。设在同一极限过程下（如 $x\\to x_0$）有 $\\lim f(x)=A$，$\\lim g(x)=B$，则\n\n$$\\lim[f(x)\\pm g(x)]=A\\pm B,\\qquad \\lim[f(x)g(x)]=AB,\\qquad \\lim\\frac{f(x)}{g(x)}=\\frac{A}{B}\\ (B\\neq0).$$\n\n使用法则时要注意前提。第一，参与运算的极限必须都存在且为有限数，否则不能拆开。第二，商的法则要求分母极限 $B\\neq0$；若 $B=0$ 而分子极限 $A\\neq0$，则商的极限为无穷大（即极限不存在）。第三，若出现 $\\frac00$、$\\frac{\\infty}{\\infty}$、$0\\cdot\\infty$ 等**未定式**，法则不能直接使用，需要先做恒等变形。\n\n常用的变形技巧有：约去零因子、分子分母同除以最高次幂、分子（分母）有理化等。例如求 $\\lim_{x\\to1}\\frac{x^2-1}{x-1}$ 时，分母极限为 0，不能直接用法则；但 $x\\to1$ 时 $x\\neq1$，约去零因子后得 $\\lim_{x\\to1}(x+1)=2$。对多项式与有理函数，若分母极限不为 0，则可以直接代入求值。",
+    "definitionEn": "The limit laws state that, provided all the individual limits exist and are finite, limits commute with addition, subtraction, multiplication and division. If, in one limiting process (say $x\\to x_0$), $\\lim f(x)=A$ and $\\lim g(x)=B$, then\n\n$$\\lim[f(x)\\pm g(x)]=A\\pm B,\\qquad \\lim[f(x)g(x)]=AB,\\qquad \\lim\\frac{f(x)}{g(x)}=\\frac{A}{B}\\ (B\\neq0).$$\n\nThe conditions matter. All participating limits must exist and be finite, otherwise the expression cannot be split. The quotient law requires a non-zero denominator limit; if the denominator tends to 0 while the numerator does not, the limit is infinite (it does not exist). When a $\\frac00$, $\\frac{\\infty}{\\infty}$ or $0\\cdot\\infty$ indeterminate form appears, the laws cannot be applied directly: simplify first by cancelling factors, dividing by the highest power, or rationalizing.\n\nFor polynomials and rational functions with a non-zero denominator limit, substitution works directly.",
+    "formulas": [
+      { "latex": "\\lim_{x\\to x_0}[f(x)\\pm g(x)] = \\lim_{x\\to x_0}f(x) \\pm \\lim_{x\\to x_0}g(x) = A\\pm B", "note": "加减法则；前提是两个极限都存在且为有限数，缺一不可。", "noteEn": "Sum and difference rule; both limits must exist and be finite." },
+      { "latex": "\\lim_{x\\to x_0}[f(x)g(x)] = AB", "note": "乘法法则；常数因子可以提出：$\\lim[c\\,f(x)]=c\\,A$。", "noteEn": "Product rule; a constant factor pulls out." },
+      { "latex": "\\lim_{x\\to x_0}\\frac{f(x)}{g(x)} = \\frac{A}{B},\\quad B\\neq0", "note": "除法法则要求分母极限不为 0；若 $B=0$ 而 $A\\neq0$，则商的极限为无穷大（不存在）。", "noteEn": "Quotient rule requires B ≠ 0; if B = 0 and A ≠ 0, the limit is infinite." },
+      { "latex": "\\lim_{x\\to x_0}[c\\,f(x)] = c\\,A,\\qquad \\lim_{x\\to x_0}[f(x)]^{n} = A^{n}\\quad(n\\in\\mathbb{N}^*)", "note": "常数倍与正整数次幂法则，同样建立在各极限存在且有限的前提下。", "noteEn": "Constant-multiple and positive-integer-power rules, under the same finiteness assumption." },
+      { "latex": "\\lim_{x\\to1}\\frac{x^2-1}{x-1} = \\lim_{x\\to1}(x+1) = 2", "note": "分母极限为 0 时不能直接用法则（$\\frac00$ 型未定式），先约去零因子 $x-1$ 再求。", "noteEn": "When the denominator limit is 0, simplify first (cancel the factor x−1) instead of applying the quotient law." }
+    ],
+    "expression": {
+      "text": "lim [f ± g] = lim f ± lim g（各极限存在且有限）",
+      "symbol": "\\lim_{x\\to x_0}(f\\pm g)=\\lim_{x\\to x_0}f\\pm\\lim_{x\\to x_0}g",
+      "note": "拆项的前提是右侧各极限都存在且为有限数；商法则还要求分母极限不为 0。",
+      "noteEn": "Splitting requires every limit on the right to exist and be finite; the quotient law also needs a non-zero denominator limit."
+    },
+    "properties": [
+      "所有法则的前提是参与运算的极限都存在且为有限数，缺少前提不能拆分。",
+      "商法则要求分母极限不为 0；分母极限为 0、分子极限非 0 时，商的极限为无穷大（不存在）。",
+      "出现 $\\frac00$ 等未定式时，先恒等变形（约分、同除以最高次幂、有理化）再用法则，不能直接断言结果为 0 或不存在。",
+      "多项式函数在任意点连续，因此 $\\lim_{x\\to x_0}P(x)=P(x_0)$，可直接代入求极限。"
+    ],
+    "propertiesEn": [
+      "Every law requires the participating limits to exist and be finite; without the hypotheses the expression cannot be split.",
+      "The quotient law needs a non-zero denominator limit; if the denominator tends to 0 while the numerator does not, the quotient diverges.",
+      "For indeterminate forms such as 0/0, simplify first (cancel, divide by the highest power, rationalize) before applying the laws.",
+      "Polynomials are continuous everywhere, so lim P(x) = P(x0): direct substitution is valid."
+    ],
+    "examples": [
+      { "problem": "求 $\\lim_{x\\to2}(3x^2-2x+1)$。", "solution": "多项式在 $x=2$ 处连续，可直接代入：$3\\times2^2-2\\times2+1=12-4+1=9$。也可逐项用法则：$3x^2\\to3\\times4=12$，$-2x\\to-4$，$1\\to1$，三部分相加得 9。" },
+      { "problem": "求 $\\lim_{x\\to\\infty}\\frac{3x^2-2x+1}{2x^2+x-5}$。", "solution": "这是 $\\frac{\\infty}{\\infty}$ 型未定式，不能直接用法则。分子分母同除以最高次幂 $x^2$：$\\frac{3x^2-2x+1}{2x^2+x-5}=\\frac{3-\\frac2x+\\frac1{x^2}}{2+\\frac1x-\\frac5{x^2}}$。当 $x\\to\\infty$ 时 $\\frac1x\\to0$、$\\frac1{x^2}\\to0$，分子趋于 3，分母趋于 $2\\neq0$，故原式 $=\\frac32$。" }
+    ],
+    "tags": ["极限", "运算法则", "未定式"],
+    "links": ["limit", "continuity", "lhopital", "sequence-limit", "infinitesimal"]
+  },
+  {
+    "id": "two-important-limits",
+    "title": "两个重要极限",
+    "titleEn": "Two Important Limits",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "sin x / x→1（x→0）与 (1+1/x)^x→e（x→∞），微积分中最常用的两个极限。",
+    "summaryEn": "The two most used limits in calculus: sin x / x → 1 as x → 0, and (1 + 1/x)^x → e as x → ∞.",
+    "definition": "微积分中最常用的两个极限称为**两个重要极限**。\n\n第一个是三角函数型：\n\n$$\\lim_{x\\to0}\\frac{\\sin x}{x}=1\\quad(\\text{角用弧度}).$$\n\n它说明「小角度的正弦约等于角本身」：$|x|$ 很小时 $\\sin x\\approx x$。使用它时自变量必须用**弧度**；只要分子是 $\\sin\\square$ 而方框 $\\square\\to0$，就有 $\\frac{\\sin\\square}{\\square}\\to1$。\n\n第二个是幂指型：\n\n$$\\lim_{x\\to\\infty}\\left(1+\\frac1x\\right)^x=e,\\qquad \\lim_{x\\to0}(1+x)^{\\frac1x}=e.$$\n\n两式本质相同（令 $t=\\frac1x$ 换元即可互相转化）。它是 $1^\\infty$ 型未定式的标准处理模式：底数趋于 1、指数趋于无穷时，把式子配凑成 $(1+\\frac{1}{\\square})^{\\square}$（$\\square\\to\\infty$）或 $(1+\\square)^{1/\\square}$（$\\square\\to0$）的形式。自然常数 $e\\approx2.71828$ 正是由这个极限定义的。",
+    "definitionEn": "The two most frequently used limits in calculus are called the **two important limits**.\n\nThe first is trigonometric:\n\n$$\\lim_{x\\to0}\\frac{\\sin x}{x}=1\\quad(\\text{angles in radians}).$$\n\nIt says that for a small angle, sine is approximately the angle itself: $\\sin x\\approx x$ for small $|x|$. The angle must be measured in **radians**; more generally, $\\frac{\\sin\\square}{\\square}\\to1$ whenever the box tends to 0.\n\nThe second involves a variable exponent:\n\n$$\\lim_{x\\to\\infty}\\left(1+\\frac1x\\right)^x=e,\\qquad \\lim_{x\\to0}(1+x)^{\\frac1x}=e.$$\n\nThe two forms are equivalent via the substitution $t=\\frac1x$. This limit is the standard tool for the $1^\\infty$ indeterminate form: when the base tends to 1 and the exponent to infinity, rewrite the expression in the shape $(1+\\frac{1}{\\square})^{\\square}$ with $\\square\\to\\infty$. The number $e\\approx2.71828$ is defined by precisely this limit.",
+    "formulas": [
+      { "latex": "\\lim_{x\\to0}\\frac{\\sin x}{x}=1", "note": "第一个重要极限；要求角 $x$ 采用弧度制，且 $x\\to0$。", "noteEn": "First important limit; x must be in radians and tends to 0." },
+      { "latex": "\\lim_{x\\to\\infty}\\left(1+\\frac1x\\right)^x=e", "note": "第二个重要极限：$1^\\infty$ 型未定式，结果为自然常数 $e\\approx2.71828$。", "noteEn": "Second important limit: a 1^∞ indeterminate form with value e." },
+      { "latex": "\\lim_{x\\to0}(1+x)^{\\frac1x}=e", "note": "第二个重要极限的等价形式，由换元 $x=\\frac1t$ 与上式互相转化。", "noteEn": "Equivalent form of the second limit, via x = 1/t." },
+      { "latex": "\\lim_{x\\to0}\\frac{\\sin\\square}{\\square}=1,\\quad \\square\\to0\\ (\\square\\neq0)", "note": "推广形式：方框只要是同一个趋于 0 的表达式即可，如 $\\lim_{x\\to0}\\frac{\\sin 3x}{3x}=1$。", "noteEn": "General form: the box may be any expression tending to 0, e.g. sin(3x)/(3x)." },
+      { "latex": "\\lim_{x\\to\\infty}\\left(1+\\frac{a}{x}\\right)^{bx}=e^{ab}", "note": "第二个重要极限的推广（$a$、$b$ 为与 $x$ 无关的常数）：如 $\\lim_{x\\to\\infty}\\left(1+\\frac2x\\right)^x=e^2$。", "noteEn": "Generalised form with constants a, b; e.g. (1 + 2/x)^x → e²." }
+    ],
+    "expression": {
+      "text": "lim (x→0) sin x / x = 1；lim (x→∞) (1+1/x)^x = e",
+      "symbol": "\\lim_{x\\to0}\\frac{\\sin x}{x}=1,\\quad \\lim_{x\\to\\infty}\\left(1+\\frac1x\\right)^x=e",
+      "note": "第一个是 $\\frac00$ 型未定式，第二个是 $1^\\infty$ 型未定式；$e$ 由第二个极限定义。",
+      "noteEn": "The first is a 0/0 form, the second a 1^∞ form; e is defined by the second limit."
+    },
+    "properties": [
+      "第一个重要极限中的角必须用弧度制；若用角度制，则 $\\lim_{x\\to0}\\frac{\\sin x^\\circ}{x}=\\frac{\\pi}{180}$。",
+      "两个极限分别是 $\\frac00$ 型与 $1^\\infty$ 型未定式：解题时先识别类型，再选对应公式。",
+      "由第一个极限可推出 $\\lim_{x\\to0}\\frac{\\tan x}{x}=1$ 与 $\\lim_{x\\to0}\\frac{1-\\cos x}{x^2}=\\frac12$（后者即 $1-\\cos x\\sim\\frac12x^2$）。",
+      "$1^\\infty$ 型通法：若 $u(x)\\to1$、$v(x)\\to\\infty$ 且 $\\lim v(u-1)$ 存在，则 $u^v\\to e^{\\lim v(u-1)}$。",
+      "第二个重要极限的数列形式 $\\lim_{n\\to\\infty}\\left(1+\\frac1n\\right)^n=e$ 与函数形式等价，是定义自然常数 $e$ 的出发点。"
+    ],
+    "propertiesEn": [
+      "The angle in the first limit must be in radians; in degrees the limit would be π/180.",
+      "The two limits are the 0/0 and the 1^∞ indeterminate forms; identify the type before choosing a formula.",
+      "The first limit implies tan x / x → 1 and (1 − cos x)/x² → 1/2 as x → 0.",
+      "General recipe for 1^∞: if u → 1 and v → ∞ with lim v(u − 1) finite, then u^v → e^(lim v(u − 1)).",
+      "The sequence form (1 + 1/n)^n → e is equivalent to the function form and defines the constant e."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)/x", "color": "#4cc9f0", "label": "y = sin x / x（x→0 时趋近 1）" },
+        { "expr": "pow(1+x, 1/x)", "color": "#ff6b9d", "label": "y = (1+x)^(1/x)（x→0 时趋近 e）" }
+      ],
+      "xRange": [-3, 3],
+      "yRange": [-1, 4],
+      "title": "两个重要极限：sin x / x→1，(1+x)^(1/x)→e（x→0）"
+    },
+    "examples": [
+      { "problem": "求 $\\lim_{x\\to0}\\frac{\\sin 3x}{x}$。", "solution": "配凑成第一个重要极限的形式：$\\frac{\\sin 3x}{x}=3\\cdot\\frac{\\sin 3x}{3x}$。令 $t=3x$，当 $x\\to0$ 时 $t\\to0$，于是 $\\frac{\\sin 3x}{3x}=\\frac{\\sin t}{t}\\to1$，所以原式 $=3\\times1=3$。" },
+      { "problem": "求 $\\lim_{x\\to\\infty}\\left(1+\\frac{2}{x}\\right)^{x}$。", "solution": "这是 $1^\\infty$ 型未定式。配凑：$\\left(1+\\frac2x\\right)^x=\\left[\\left(1+\\frac2x\\right)^{\\frac x2}\\right]^{2}$。令 $t=\\frac x2$，当 $x\\to\\infty$ 时 $t\\to\\infty$，括号内 $\\left(1+\\frac1t\\right)^t\\to e$，所以原式 $=e^{2}$。" }
+    ],
+    "tags": ["极限", "重要极限", "自然常数e"],
+    "links": ["limit", "sequence-limit", "natural-constant-e", "sine-function", "limit-laws"]
+  },
+  {
+    "id": "infinitesimal",
+    "title": "无穷小与无穷大",
+    "titleEn": "Infinitesimals and Infinity",
+    "branch": "calculus",
+    "level": 3,
+    "summary": "极限为 0 的变量是无穷小，绝对值无限增大的变量是无穷大，二者互为倒数。",
+    "summaryEn": "A quantity tending to 0 is an infinitesimal; one whose size grows without bound is infinite; the two are reciprocals.",
+    "definition": "在同一个极限过程中（例如 $x\\to x_0$、$x\\to\\infty$ 或 $n\\to\\infty$），以 $0$ 为极限的变量称为该过程下的**无穷小**。例如 $x\\to0$ 时 $x$、$x^2$、$\\sin x$ 都是无穷小；$x\\to\\infty$ 时 $\\frac1x$ 也是无穷小。要注意：无穷小是一个**以 0 为极限的变量**，而不是一个很小的固定数；唯一的无穷小常数是 $0$ 本身。\n\n若在同一极限过程中 $|f(x)|$ 无限增大，则称 $f(x)$ 为**无穷大**，记作 $\\lim f(x)=\\infty$（或 $+\\infty$、$-\\infty$）。这时极限严格说来并不存在，$\\infty$ 只是表示发散趋势的记号。无穷大与无穷小互为倒数：在 $f(x)\\neq0$ 的前提下，$f(x)$ 是无穷大当且仅当 $\\frac{1}{f(x)}$ 是无穷小。\n\n两个无穷小还可以比较「趋于 0 的快慢」。设 $\\alpha$、$\\beta$ 是**同一极限过程下**的无穷小，且 $\\beta\\neq0$，考察 $\\lim\\frac{\\alpha}{\\beta}$：若极限为 $0$，称 $\\alpha$ 是 $\\beta$ 的**高阶无穷小**，记作 $\\alpha=o(\\beta)$；若极限为非零常数 $c$，称二者**同阶**（当 $c=1$ 时称**等价无穷小**，记作 $\\alpha\\sim\\beta$）；若极限为 $\\infty$，则 $\\alpha$ 是 $\\beta$ 的低阶无穷小。",
+    "definitionEn": "Within one fixed limiting process (say $x\\to x_0$, $x\\to\\infty$ or $n\\to\\infty$), a quantity whose limit is $0$ is called an **infinitesimal** in that process. For example, as $x\\to0$, the quantities $x$, $x^2$, $\\sin x$ are all infinitesimals; as $x\\to\\infty$, $1/x$ is one. An infinitesimal is a variable tending to 0, not a tiny fixed number; the only constant infinitesimal is $0$ itself.\n\nIf $|f(x)|$ grows without bound in the same process, then $f$ is called **infinite**, written $\\lim f(x)=\\infty$ (or $\\pm\\infty$). Strictly speaking the limit does not exist; the symbol $\\infty$ only records the divergence. Infinities and infinitesimals are reciprocals: provided $f(x)\\neq0$, the function $f$ is infinite if and only if $1/f$ is infinitesimal.\n\nTwo infinitesimals can be compared by how fast they tend to 0. Let $\\alpha$ and $\\beta$ be infinitesimals in the same process with $\\beta\\neq0$, and consider $\\lim\\frac{\\alpha}{\\beta}$. If the limit is $0$, then $\\alpha$ is of **higher order** than $\\beta$, written $\\alpha=o(\\beta)$. If the limit is a non-zero constant $c$, the two are of the **same order**, and when $c=1$ they are **equivalent**, written $\\alpha\\sim\\beta$. If the limit is $\\infty$, then $\\alpha$ is of lower order than $\\beta$.",
+    "formulas": [
+      { "latex": "\\lim_{x\\to x_0} f(x) = 0", "note": "这正是 $f$ 为 $x\\to x_0$ 过程中无穷小的定义；离开极限过程谈无穷小没有意义。", "noteEn": "A quantity is an infinitesimal exactly when its limit in the given process is 0." },
+      { "latex": "\\lim \\frac{\\alpha}{\\beta} = 0 \\iff \\alpha = o(\\beta)", "note": "同一过程中 $\\alpha$、$\\beta$ 为无穷小且 $\\beta\\neq0$：$\\alpha$ 比 $\\beta$ 趋于 0 更快，是高阶无穷小。", "noteEn": "In one process, α = o(β) precisely when α/β → 0: α tends to 0 faster." },
+      { "latex": "\\lim \\frac{\\alpha}{\\beta} = 1 \\iff \\alpha \\sim \\beta", "note": "等价无穷小的定义；等价无穷小在乘除运算中可以互相替换。", "noteEn": "α ~ β iff α/β → 1; equivalent infinitesimals may replace each other in products and quotients." },
+      { "latex": "x \\sim \\sin x \\sim \\tan x,\\quad 1-\\cos x \\sim \\frac{x^2}{2},\\quad \\ln(1+x) \\sim x,\\quad e^{x}-1 \\sim x\\quad (x\\to0)", "note": "常用等价无穷小，必须注明是 $x\\to0$ 过程；如 $\\frac{\\sin 3x}{x}\\to3$ 就用了 $\\sin 3x\\sim3x$。", "noteEn": "Common equivalent infinitesimals, always in the process x → 0." },
+      { "latex": "\\lim_{x\\to\\infty} \\frac{1}{x} = 0,\\qquad \\lim_{x\\to0^+} \\frac{1}{x} = +\\infty", "note": "$\\frac1x$ 在 $x\\to\\infty$ 时是无穷小，在 $x\\to0^+$ 时是无穷大：无穷小与无穷大都必须绑定极限过程。", "noteEn": "1/x is infinitesimal as x→∞ but infinite as x→0⁺: the process must always be named." }
+    ],
+    "expression": {
+      "text": "f 是无穷小 ⟺ lim f = 0（同一极限过程）",
+      "symbol": "\\lim_{x\\to x_0} f(x) = 0",
+      "note": "「无穷小」必须指明极限过程：是 $x\\to0$ 时的无穷小，还是 $x\\to\\infty$ 时的无穷小。",
+      "noteEn": "Always name the process: an infinitesimal as x→0 differs from one as x→∞."
+    },
+    "properties": [
+      "无穷小是变量而不是固定的很小的数；唯一的无穷小常数是 $0$。",
+      "有限个无穷小的和、积仍是无穷小；有界函数与无穷小的乘积仍是无穷小（如 $x\\to0$ 时 $x\\sin\\frac1x\\to0$）。",
+      "$\\lim f(x)=A$ 的充要条件是 $f(x)=A+\\alpha(x)$，其中 $\\alpha$ 是同一过程下的无穷小。",
+      "无穷大与无穷小互为倒数（要求变量不为 0）；无穷大表示极限不存在，只是趋势记号。",
+      "无穷小的比较必须在同一极限过程下进行；等价无穷小可在乘除中替换，在加减中一般不能随意替换。"
+    ],
+    "propertiesEn": [
+      "An infinitesimal is a variable, not a tiny fixed number; the only constant infinitesimal is 0.",
+      "Sums and products of finitely many infinitesimals are infinitesimal; a bounded function times an infinitesimal is infinitesimal (e.g. x sin(1/x) → 0).",
+      "lim f(x) = A iff f(x) = A + α(x) with α infinitesimal in the same process.",
+      "Infinities and infinitesimals are reciprocals (when non-zero); ∞ is only a notation for divergence.",
+      "Comparison of infinitesimals requires one common process; equivalent infinitesimals may be substituted in products and quotients, but not casually in sums."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "x", "color": "#4cc9f0", "label": "y = x（一阶无穷小）" },
+        { "expr": "x^2", "color": "#ff6b9d", "label": "y = x^2（比 x 高阶）" },
+        { "expr": "x^3", "color": "#ffd166", "label": "y = x^3（更高阶）" }
+      ],
+      "xRange": [-1.5, 1.5],
+      "yRange": [-1.5, 1.5],
+      "title": "x→0 时 x、x²、x³ 趋于 0 的快慢：阶数越高，贴近 0 越快"
+    },
+    "examples": [
+      { "problem": "当 $x\\to0$ 时，比较无穷小 $1-\\cos x$ 与 $x^2$ 的阶。", "solution": "利用 $1-\\cos x=2\\sin^2\\frac x2$，得 $\\frac{1-\\cos x}{x^2}=\\frac{2\\sin^2\\frac x2}{x^2}=\\frac12\\left(\\frac{\\sin(x/2)}{x/2}\\right)^2$。当 $x\\to0$ 时 $\\frac x2\\to0$，由第一个重要极限 $\\frac{\\sin(x/2)}{x/2}\\to1$，所以上式趋于 $\\frac12$。极限为非零常数，故 $1-\\cos x$ 与 $x^2$ 同阶，且 $1-\\cos x\\sim\\frac{x^2}{2}$。" },
+      { "problem": "求 $\\lim_{x\\to0}x\\sin\\frac1x$。", "solution": "因为 $\\left|\\sin\\frac1x\\right|\\le1$，函数 $\\sin\\frac1x$ 有界；而 $x\\to0$ 时 $x$ 是无穷小。有界函数与无穷小的乘积仍是无穷小，所以 $\\lim_{x\\to0}x\\sin\\frac1x=0$。" },
+      { "problem": "求 $\\lim_{x\\to\\infty}\\frac{2x^2+1}{x^2-x}$。", "solution": "$x\\to\\infty$ 时 $\\frac1x$ 是无穷小、$\\frac1{x^2}$ 是更高阶的无穷小。分子分母同除以 $x^2$：$\\frac{2x^2+1}{x^2-x}=\\frac{2+\\frac1{x^2}}{1-\\frac1x}\\to\\frac{2+0}{1-0}=2$。" }
+    ],
+    "tags": ["无穷小", "无穷大", "无穷小比较"],
+    "links": ["limit", "limit-laws", "two-important-limits", "derivative", "continuity"]
+  },
+  {
+    "id": "continuity",
+    "title": "函数的连续性",
+    "titleEn": "Continuity of Functions",
+    "branch": "calculus",
+    "level": 3,
+    "summary": "函数在一点的极限等于该点的函数值，图像是一条没有断裂的曲线。",
+    "summaryEn": "A function is continuous where its limit equals its value, so its graph has no breaks.",
+    "definition": "设函数 $f$ 在点 $x_0$ 的某个邻域内有定义。如果\n\n$$\\lim_{x\\to x_0}f(x)=f(x_0),$$\n\n则称 $f$ 在点 $x_0$ 处**连续**，$x_0$ 叫作 $f$ 的连续点。这个等式同时要求三件事：① $f$ 在 $x_0$ 处有定义；② 极限 $\\lim_{x\\to x_0}f(x)$ 存在（即左、右极限存在且相等）；③ 极限值恰好等于函数值 $f(x_0)$。任何一条不满足，$f$ 在 $x_0$ 处就不连续。\n\n用增量可以写得更直观：设 $\\Delta x=x-x_0$，$\\Delta y=f(x_0+\\Delta x)-f(x_0)$，则 $f$ 在 $x_0$ 连续等价于 $\\lim_{\\Delta x\\to0}\\Delta y=0$，即「自变量变化很小时，函数值的变化也很小」，图像是一条没有断裂的曲线。\n\n若 $f$ 在区间 $I$ 上的每一点都连续，就说 $f$ 在 $I$ 上连续，$I$ 称为 $f$ 的连续区间。多项式、$e^x$、$\\ln x$（$x>0$）、$\\sin x$ 等初等函数在各自的定义区间内都是连续的。\n\n**连续与可导的关系（方向必须记清）**：可导 $\\Rightarrow$ 连续；连续不能推出可导。例如 $y=|x|$ 在 $x=0$ 处连续，却因图像出现尖角而不可导。所以连续是比可导更弱的条件，可导的函数一定连续。",
+    "definitionEn": "Let $f$ be defined on a neighbourhood of the point $x_0$. If\n\n$$\\lim_{x\\to x_0}f(x)=f(x_0),$$\n\nthen $f$ is **continuous** at $x_0$. The equation demands three things at once: (1) $f$ is defined at $x_0$; (2) the limit exists (both one-sided limits exist and are equal); (3) the limit equals the value $f(x_0)$. If any one of them fails, $f$ is discontinuous at $x_0$.\n\nIn increment form, with $\\Delta y=f(x_0+\\Delta x)-f(x_0)$, continuity is equivalent to $\\lim_{\\Delta x\\to0}\\Delta y=0$: a small change of the input produces a small change of the output, so the graph is unbroken.\n\nIf $f$ is continuous at every point of an interval $I$, it is continuous on $I$. Elementary functions — polynomials, $e^x$, $\\ln x$ (for $x>0$), $\\sin x$ — are continuous on their domains.\n\n**Continuity versus differentiability (note the direction):** differentiability implies continuity; continuity does NOT imply differentiability. The function $y=|x|$ is continuous at $x=0$ yet not differentiable there because of the corner. Continuity is thus the weaker condition, and every differentiable function is continuous.",
+    "formulas": [
+      { "latex": "\\lim_{x\\to x_0} f(x) = f(x_0)", "note": "连续的定义：极限值等于函数值（前提是 $f$ 在 $x_0$ 及其附近有定义）。", "noteEn": "Definition of continuity: the limit equals the value." },
+      { "latex": "\\lim_{x\\to x_0^-} f(x) = \\lim_{x\\to x_0^+} f(x) = f(x_0)", "note": "等价的三段相等形式：左极限 = 右极限 = 函数值，便于逐项检验。", "noteEn": "Equivalent form: left limit = right limit = function value." },
+      { "latex": "\\lim_{\\Delta x\\to0}\\Delta y = 0,\\quad \\Delta y = f(x_0+\\Delta x)-f(x_0)", "note": "增量形式：自变量的微小变化只引起函数值的微小变化。", "noteEn": "Increment form: small changes in input give small changes in output." },
+      { "latex": "\\lim_{x\\to x_0}\\frac{f(x)-f(x_0)}{x-x_0}\\ \\text{exists}\\ \\Rightarrow\\ \\lim_{x\\to x_0}f(x)=f(x_0)", "note": "可导必连续（方向不能反）；连续不能推出可导，如 $y=|x|$ 在 $x=0$ 处连续但不可导。", "noteEn": "Differentiable implies continuous; the converse fails (e.g. y = |x| at 0)." },
+      { "latex": "\\lim_{x\\to x_0} P(x) = P(x_0)", "note": "多项式处处连续；更一般地，初等函数在其定义区间内连续，求极限可直接代入。", "noteEn": "Polynomials (and elementary functions on their domains) are continuous, so substitution works." }
+    ],
+    "expression": {
+      "text": "f 在 x₀ 连续 ⟺ lim (x→x₀) f(x) = f(x₀)",
+      "symbol": "\\lim_{x\\to x_0}f(x)=f(x_0)",
+      "note": "三要素：有定义、极限存在、极限值等于函数值，缺一不可。",
+      "noteEn": "Three requirements: defined, limit exists, and the limit equals the value."
+    },
+    "properties": [
+      "连续的三个条件（有定义、极限存在、极限等于函数值）必须同时满足。",
+      "可导必连续，连续不一定可导：连续是更弱的条件，反例是 $y=|x|$ 在 $x=0$ 处。",
+      "连续函数的和、差、积、商（分母不为 0）仍连续；连续函数的复合仍连续。",
+      "初等函数在其定义区间内连续，因此求极限常常可以直接代入函数值。",
+      "若 $f$ 在 $x_0$ 处不连续，则 $x_0$ 是 $f$ 的间断点，可按左右极限的类型进一步分类。"
+    ],
+    "propertiesEn": [
+      "All three tests (defined, limit exists, limit equals value) must hold simultaneously.",
+      "Differentiable implies continuous, but continuous does not imply differentiable; y = |x| at 0 is the standard counterexample.",
+      "Sums, differences, products and quotients (non-zero denominator) of continuous functions are continuous; so are compositions.",
+      "Elementary functions are continuous on their domains, so limits can often be found by substitution.",
+      "If f is discontinuous at x0, the point is classified by the behaviour of its one-sided limits."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)", "color": "#4cc9f0", "label": "y = sin x（处处连续）" }
+      ],
+      "xRange": [-6.5, 6.5],
+      "yRange": [-1.6, 1.6],
+      "title": "连续函数的图像：一条连绵不断、没有断裂的曲线"
+    },
+    "examples": [
+      { "problem": "设 $f(x)=\\frac{x^2-1}{x-1}$（$x\\neq1$），并补充定义 $f(1)=a$。问 $a$ 取何值时 $f$ 在 $x=1$ 处连续？", "solution": "当 $x\\neq1$ 时 $f(x)=\\frac{(x-1)(x+1)}{x-1}=x+1$，所以 $\\lim_{x\\to1}f(x)=\\lim_{x\\to1}(x+1)=2$。又 $f(1)=a$。要使 $f$ 在 $x=1$ 处连续，必须 $\\lim_{x\\to1}f(x)=f(1)$，即 $a=2$。" },
+      { "problem": "判断 $f(x)=|x|$ 在 $x=0$ 处是否连续？是否可导？", "solution": "分别求极限：当 $x>0$ 时 $|x|=x$，右极限 $\\lim_{x\\to0^+}|x|=0$；当 $x<0$ 时 $|x|=-x$，左极限 $\\lim_{x\\to0^-}|x|=0$；且 $f(0)=0$。三者相等，故 $f$ 在 $x=0$ 处连续。再看可导性：左导数 $\\lim_{\\Delta x\\to0^-}\\frac{|0+\\Delta x|-|0|}{\\Delta x}=\\lim_{\\Delta x\\to0^-}\\frac{-\\Delta x}{\\Delta x}=-1$，右导数 $\\lim_{\\Delta x\\to0^+}\\frac{\\Delta x}{\\Delta x}=1$，左右导数不相等，故在 $x=0$ 处不可导。这说明连续不一定可导。" }
+    ],
+    "tags": ["连续性", "极限", "可导"],
+    "links": ["limit", "discontinuity-types", "continuity-theorems", "derivative", "limit-laws"]
+  },
+  {
+    "id": "discontinuity-types",
+    "title": "间断点及其分类",
+    "titleEn": "Classification of Discontinuities",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "不连续的点叫间断点，按左右极限分为第一类（可去、跳跃）与第二类（无穷、振荡）。",
+    "summaryEn": "Points of discontinuity are classified by their one-sided limits: removable or jump (type I), infinite or oscillatory (type II).",
+    "definition": "如果函数 $f$ 在点 $x_0$ 处不满足连续的条件——即 $f$ 在 $x_0$ 无定义、极限不存在、或极限存在但不等于函数值——就称 $x_0$ 为 $f$ 的**间断点**。分类只看一件事：左极限与右极限的情况。\n\n**第一类间断点**：左极限 $f(x_0^-)$ 与右极限 $f(x_0^+)$ 都存在（都是有限数）。其中：① 若 $f(x_0^-)=f(x_0^+)$，即极限存在，但 $f$ 在 $x_0$ 无定义或函数值不等于该极限，称为**可去间断点**——只要补充或修改 $x_0$ 处的定义就能使它连续，相当于曲线上的一个「洞」，例如 $\\frac{x^2-1}{x-1}$ 在 $x=1$ 处；② 若 $f(x_0^-)\\neq f(x_0^+)$，称为**跳跃间断点**，此时无论怎样修改 $x_0$ 处的函数值都无法使 $f$ 连续。\n\n**第二类间断点**：左、右极限中至少有一个不存在。常见的有两类：至少一侧极限为无穷大的**无穷间断点**（如 $\\frac1x$ 在 $x=0$ 处）；函数值无限次振荡、极限不存在的**振荡间断点**（如 $\\sin\\frac1x$ 在 $x=0$ 处）。\n\n判断间断点类型的一般步骤：先找出无定义的点与分段函数的分段点；再求该点处的左极限与右极限；最后按「都存在且相等—可去，都存在但不相等—跳跃，至少一侧不存在—第二类」进行分类。",
+    "definitionEn": "If $f$ fails the continuity condition at $x_0$ — that is, $f$ is undefined at $x_0$, or the limit does not exist, or the limit differs from the value — then $x_0$ is a **point of discontinuity**. The classification depends only on the one-sided limits.\n\n**Type I (first kind):** both one-sided limits $f(x_0^-)$ and $f(x_0^+)$ exist and are finite. If they are equal (so the limit exists) but $f$ is undefined at $x_0$ or $f(x_0)$ differs from the limit, $x_0$ is a **removable discontinuity** — filling or modifying the value makes the function continuous; the graph shows a hole, as with $\\frac{x^2-1}{x-1}$ at $x=1$. If the one-sided limits differ, $x_0$ is a **jump discontinuity**, and no change of the single value $f(x_0)$ can make the function continuous.\n\n**Type II (second kind):** at least one one-sided limit fails to exist. Typical cases: an **infinite discontinuity**, where at least one side tends to infinity (e.g. $\\frac1x$ at $x=0$), and an **oscillatory discontinuity**, where the values oscillate forever without a limit (e.g. $\\sin\\frac1x$ at $x=0$).\n\nGeneral procedure: locate undefined points and breakpoints, compute both one-sided limits, then classify as above.",
+    "formulas": [
+      { "latex": "\\lim_{x\\to1}\\frac{x^2-1}{x-1}=2", "note": "$f(x)=\\frac{x^2-1}{x-1}$ 在 $x=1$ 无定义，但极限存在为 2，故 $x=1$ 是可去间断点。", "noteEn": "The limit exists (2) but f(1) is undefined: a removable discontinuity." },
+      { "latex": "\\lim_{x\\to0^-}\\frac{|x|}{x}=-1,\\qquad \\lim_{x\\to0^+}\\frac{|x|}{x}=1", "note": "左右极限都存在但不相等，$x=0$ 是跳跃间断点。", "noteEn": "Both one-sided limits exist but differ: a jump discontinuity." },
+      { "latex": "\\lim_{x\\to0^+}\\frac1x=+\\infty,\\qquad \\lim_{x\\to0^-}\\frac1x=-\\infty", "note": "至少一侧极限不存在（为无穷大），$x=0$ 是第二类间断点，具体为无穷间断点。", "noteEn": "At least one side is infinite: a type II infinite discontinuity." },
+      { "latex": "\\lim_{x\\to0}\\sin\\frac1x\\ \\text{does not exist}", "note": "$x\\to0$ 时 $\\sin\\frac1x$ 的值在 $[-1,1]$ 内无限次振荡，极限不存在，$x=0$ 是振荡间断点。", "noteEn": "sin(1/x) oscillates forever near 0, so the limit does not exist: an oscillatory discontinuity." }
+    ],
+    "expression": {
+      "text": "第一类：可去 / 跳跃；第二类：无穷 / 振荡",
+      "symbol": "f(x_0^-),\\ f(x_0^+)",
+      "note": "分类依据是左右极限：都存在（有限）为第一类，至少一侧不存在为第二类。",
+      "noteEn": "Classification by one-sided limits: both finite means type I; otherwise type II."
+    },
+    "properties": [
+      "第一类间断点：左右极限都存在且有限；第二类间断点：至少一侧极限不存在。",
+      "可去间断点：极限存在，但函数在 $x_0$ 无定义，或函数值不等于极限值；补充或修改定义即可连续。",
+      "跳跃间断点：左右极限存在但不相等；只修改 $x_0$ 处的函数值无法使函数连续。",
+      "无穷间断点：至少一侧极限为无穷大（如 $\\frac1x$ 在 $x=0$）；振荡间断点：函数值无限次振荡使极限不存在（如 $\\sin\\frac1x$ 在 $x=0$）。",
+      "判断步骤：找无定义点与分段点 → 分别求左右极限 → 按「都存在且相等—可去，都存在但不相等—跳跃，至少一侧不存在—第二类」分类。"
+    ],
+    "propertiesEn": [
+      "Type I: both one-sided limits exist and are finite; type II: at least one side fails to exist.",
+      "Removable: the limit exists but f is undefined at x0 or its value differs; redefining f(x0) restores continuity.",
+      "Jump: both one-sided limits exist but differ; no change of the single value f(x0) can restore continuity.",
+      "Infinite: at least one side tends to infinity (e.g. 1/x at 0); oscillatory: values oscillate without a limit (e.g. sin(1/x) at 0).",
+      "Procedure: find undefined points and breakpoints, compute the two one-sided limits, then classify."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "(x^2-1)/(x-1)", "color": "#ff6b9d", "label": "y = (x²−1)/(x−1)：x=1 处留洞" },
+        { "expr": "x+1", "color": "#4cc9f0", "label": "y = x+1：补洞后连续" }
+      ],
+      "xRange": [-2.5, 3.5],
+      "yRange": [-1.5, 4.5],
+      "title": "可去间断点：y = (x²−1)/(x−1) 在 x=1 处无定义，补上 (1, 2) 即连续"
+    },
+    "examples": [
+      { "problem": "指出 $f(x)=\\frac{x^2-1}{x-1}$ 的间断点，说明它属于哪一类，并写出补洞后的连续函数。", "solution": "定义域为所有 $x\\neq1$ 的实数，候选间断点是 $x=1$。因为 $x\\to1$ 时 $x\\neq1$，约分得 $f(x)=x+1$，所以 $\\lim_{x\\to1}f(x)=2$，左右极限都存在且相等。但 $f$ 在 $x=1$ 无定义，故 $x=1$ 是可去间断点。补充定义 $f(1)=2$，即把函数改为 $f(x)=x+1$（$x\\in\\mathbb{R}$），它处处连续。" },
+      { "problem": "判断 $f(x)=\\frac{1}{x-2}$ 在 $x=2$ 处的间断点类型。", "solution": "当 $x\\to2^+$ 时 $x-2\\to0^+$，$f(x)\\to+\\infty$；当 $x\\to2^-$ 时 $x-2\\to0^-$，$f(x)\\to-\\infty$。左右极限都不是有限数，至少一侧极限不存在，故 $x=2$ 是第二类间断点，具体为无穷间断点。" },
+      { "problem": "判断 $f(x)=\\frac{|x|}{x}$ 在 $x=0$ 处的间断点类型。", "solution": "当 $x>0$ 时 $f(x)=1$，右极限为 $1$；当 $x<0$ 时 $f(x)=-1$，左极限为 $-1$。左右极限都存在但不相等，故 $x=0$ 是第一类间断点中的跳跃间断点。" }
+    ],
+    "tags": ["间断点", "连续性", "左右极限"],
+    "links": ["continuity", "limit", "continuity-theorems", "limit-laws", "infinitesimal"]
+  },
+  {
+    "id": "continuity-theorems",
+    "title": "闭区间上连续函数的性质",
+    "titleEn": "Properties of Continuous Functions on a Closed Interval",
+    "branch": "calculus",
+    "level": 4,
+    "summary": "闭区间上的连续函数必有界、有最值，并能取到最小值与最大值之间的一切值。",
+    "summaryEn": "A continuous function on a closed interval is bounded, attains its extrema, and takes every value in between.",
+    "definition": "设 $f$ 在**闭区间** $[a,b]$ 上**连续**，则 $f$ 具有以下重要性质（两个条件缺一不可：闭区间、连续）。\n\n**最值定理**：$f$ 在 $[a,b]$ 上一定能取到最大值与最小值，即存在 $x_1,x_2\\in[a,b]$，使得对任意 $x\\in[a,b]$ 都有 $f(x_1)\\le f(x)\\le f(x_2)$。更基本地，$f$ 在 $[a,b]$ 上还是**有界**的。\n\n**介值定理**：设 $m$、$M$ 分别是 $f$ 在 $[a,b]$ 上的最小值与最大值，则对任意满足 $m\\le\\mu\\le M$ 的数 $\\mu$，都存在 $\\xi\\in[a,b]$ 使 $f(\\xi)=\\mu$。直观地说：连续曲线从某条水平线的下方走到上方，途中必然与它相交。\n\n**零点定理**：若 $f(a)$ 与 $f(b)$ 异号，即 $f(a)\\cdot f(b)<0$，则至少存在一个 $\\xi\\in(a,b)$，使 $f(\\xi)=0$。它是介值定理在 $\\mu=0$ 时的特例，是判断方程有根以及二分法求近似根的理论根据。\n\n注意上述性质依赖「闭区间上连续」的假设。例如 $f(x)=\\frac1x$ 在 $(0,1]$ 上连续，但 $x\\to0^+$ 时无上界，没有最大值；$f(x)=x$ 在开区间 $(0,1)$ 内既取不到最大值 1 也取不到最小值 0。另外，零点定理只保证零点的**存在性**，不保证唯一；若再附加单调性，则零点唯一。",
+    "definitionEn": "Let $f$ be **continuous** on the **closed interval** $[a,b]$. Then the following hold (both hypotheses — closed interval and continuity — are indispensable).\n\n**Extreme value theorem:** $f$ attains a maximum and a minimum on $[a,b]$: there exist $x_1,x_2\\in[a,b]$ such that $f(x_1)\\le f(x)\\le f(x_2)$ for all $x\\in[a,b]$. More basically, $f$ is bounded on $[a,b]$.\n\n**Intermediate value theorem (IVT):** if $m$ and $M$ are the minimum and the maximum of $f$ on $[a,b]$, then for every $\\mu$ with $m\\le\\mu\\le M$ there exists $\\xi\\in[a,b]$ with $f(\\xi)=\\mu$. Intuitively: a continuous curve that goes from below a horizontal line to above it must cross that line.\n\n**Zero point theorem:** if $f(a)$ and $f(b)$ have opposite signs, i.e. $f(a)\\cdot f(b)<0$, then there is at least one $\\xi\\in(a,b)$ with $f(\\xi)=0$. It is the IVT with $\\mu=0$ and the basis for root tests and for the bisection method.\n\nAll statements rely on the hypotheses: on $(0,1]$ the function $1/x$ is continuous but unbounded, and on $(0,1)$ the function $x$ attains neither 1 nor 0. The zero point theorem guarantees existence only, not uniqueness; adding monotonicity gives a unique root.",
+    "formulas": [
+      { "latex": "\\exists\\,M>0:\\ |f(x)|\\le M,\\quad \\forall x\\in[a,b]", "note": "有界性定理：若 $f$ 在闭区间 $[a,b]$ 上连续，则 $f$ 在 $[a,b]$ 上有界。", "noteEn": "Boundedness: a function continuous on [a,b] is bounded there." },
+      { "latex": "\\exists\\,x_1,x_2\\in[a,b]:\\ f(x_1)\\le f(x)\\le f(x_2),\\quad \\forall x\\in[a,b]", "note": "最值定理：闭区间上的连续函数必能取到最小值 $f(x_1)$ 与最大值 $f(x_2)$。", "noteEn": "Extreme value theorem: the minimum and maximum are attained." },
+      { "latex": "m\\le\\mu\\le M\\ \\Rightarrow\\ \\exists\\,\\xi\\in[a,b]:\\ f(\\xi)=\\mu", "note": "介值定理：$m$、$M$ 为 $f$ 在 $[a,b]$ 上的最小值与最大值，任何中间值都能被取到。", "noteEn": "IVT: every value between the minimum and maximum is taken." },
+      { "latex": "f(a)\\cdot f(b)<0\\ \\Rightarrow\\ \\exists\\,\\xi\\in(a,b):\\ f(\\xi)=0", "note": "零点定理（介值定理的推论）：端点异号必有零点，常用于证明方程有根。", "noteEn": "Zero point theorem: opposite signs at the endpoints force a root inside." },
+      { "latex": "f([a,b])=[m,M]", "note": "连续函数把闭区间映成闭区间：值域恰为最小值到最大值之间的全部数。", "noteEn": "The image of [a,b] is exactly [m,M]: the range is a closed interval." }
+    ],
+    "expression": {
+      "text": "f 在 [a,b] 上连续 ⇒ 有界、有最值、可取到中间值",
+      "symbol": "f\\in C[a,b]",
+      "note": "条件必须是「闭区间」上「连续」；开区间或有间断点时结论可能不成立。",
+      "noteEn": "The hypotheses must be: continuous on a closed interval; otherwise the conclusions may fail."
+    },
+    "properties": [
+      "三条性质的前提都是「闭区间」上「连续」，条件不能减弱；开区间或有间断点时结论可能失效。",
+      "最值定理与有界性定理是闭区间连续函数特有的强性质（如 $\\frac1x$ 在 $(0,1]$ 上无上界）。",
+      "介值定理：连续曲线不会「跳过」任何中间值；零点定理是 $\\mu=0$ 时的特例。",
+      "零点定理只保证存在性，不保证唯一性；若 $f$ 在 $[a,b]$ 上还单调，则零点唯一。",
+      "零点定理是二分法求方程近似根的依据：不断对半缩小区间，可把根逼近到任意精度。"
+    ],
+    "propertiesEn": [
+      "All three results require continuity on a closed interval; weaken either hypothesis and they can fail.",
+      "The extreme value and boundedness theorems are special to closed intervals (1/x is unbounded on (0,1]).",
+      "The IVT says a continuous curve never skips an intermediate value; the zero point theorem is the case μ = 0.",
+      "The zero point theorem gives existence, not uniqueness; with monotonicity the root is unique.",
+      "It justifies the bisection method: halving the interval repeatedly approximates the root to any accuracy."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "x^3 - 3*x + 1", "color": "#4cc9f0", "label": "y = x³−3x+1" },
+        { "expr": "0", "color": "#ffd166", "label": "y = 0（目标高度 μ = 0）" }
+      ],
+      "xRange": [-2.5, 2.5],
+      "yRange": [-4, 4],
+      "title": "介值定理（零点定理）：f(0)=1>0，f(1)=−1<0，曲线在 (0,1) 内必然穿过 y=0"
+    },
+    "examples": [
+      { "problem": "证明方程 $x^3-3x+1=0$ 在区间 $(0,1)$ 内至少有一个实根。", "solution": "令 $f(x)=x^3-3x+1$。多项式在闭区间 $[0,1]$ 上连续。计算端点值：$f(0)=0-0+1=1>0$，$f(1)=1-3+1=-1<0$，即 $f(0)\\cdot f(1)<0$。由零点定理，存在 $\\xi\\in(0,1)$ 使 $f(\\xi)=0$，即方程在 $(0,1)$ 内至少有一个实根。" },
+      { "problem": "设 $f$ 在 $[0,2]$ 上连续，且 $f(0)=1$，$f(2)=5$，证明存在 $\\xi\\in[0,2]$ 使 $f(\\xi)=3$。", "solution": "由最值定理，$f$ 在 $[0,2]$ 上取到最小值 $m$ 与最大值 $M$，于是 $m\\le f(0)=1<3$ 且 $3<5=f(2)\\le M$，即 $m<3<M$。由介值定理，存在 $\\xi\\in[0,2]$ 使 $f(\\xi)=3$。" },
+      { "problem": "说明 $f(x)=\\frac1x$ 在 $(0,1]$ 上没有最大值，这与最值定理矛盾吗？", "solution": "不矛盾。当 $x\\to0^+$ 时 $\\frac1x\\to+\\infty$，函数值可以任意大，所以在 $(0,1]$ 上无上界，也就没有最大值（最小值在 $x=1$ 处取到，为 1）。最值定理要求函数在**闭区间**上连续，而 $(0,1]$ 不是闭区间，条件不满足，定理的结论自然不被保证。" }
+    ],
+    "tags": ["闭区间", "连续性", "零点定理"],
+    "links": ["continuity", "discontinuity-types", "function-zeros", "monotonicity-extremum", "limit"]
+  }
+]

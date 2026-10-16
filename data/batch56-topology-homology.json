@@ -1,0 +1,996 @@
+[
+  {
+    "id": "simplicial-complex",
+    "title": "单纯复形与三角剖分",
+    "titleEn": "Simplicial Complexes and Triangulation",
+    "branch": "topology",
+    "level": 5,
+    "summary": "由点、线段、三角形、四面体这些标准积木按两条严格规则粘成的有限组合结构；它把连续空间的拓扑问题翻译成有限组合计算，是单纯同调与组合拓扑的入口。",
+    "summaryEn": "A finite combinatorial structure glued from standard blocks — points, segments, triangles, tetrahedra — under two strict rules; it translates continuous topology into finite combinatorial computation and is the doorway to simplicial homology.",
+    "definition": "**单形**是最简单的几何积木：0 维是一个点，1 维是线段，2 维是三角形，3 维是四面体。一般地，取 $n+1$ 个**仿射无关**的点 $v_0,\\dots,v_n$（它们不落在同一个低维仿射平面上），其凸包 $\\sigma=[v_0,\\dots,v_n]$ 称为 **$n$ 维单形**，$\\dim\\sigma=n$；由一部分顶点张成的凸包叫 $\\sigma$ 的**面**，例如三角形 $[a,b,c]$ 的面是 $[a,b],[b,c],[c,a],[a],[b],[c]$ 以及它自己。\n\n**单纯复形**是一族单形 $\\mathcal K$，要求同时满足两条规则：① **面封闭**：若 $\\sigma\\in\\mathcal K$，则 $\\sigma$ 的每个面也属于 $\\mathcal K$（有三角形就必须带上它的三条棱与三个顶点）；② **交条件**：若 $\\sigma,\\tau\\in\\mathcal K$，则 $\\sigma\\cap\\tau$ 要么为空，要么是两者的**公共面**（即由公共顶点张成的那个面）。第二条把「两条棱只粘半条」「一个三角形贴在另一个三角形半条边上」这类粘法排除掉——它们不是剖分。复形中单形的最大维数叫 $\\mathcal K$ 的**维数**；只有有限多个单形时叫**有限复形**，记 $f_n$ 为 $n$ 维单形的个数（$f_0$ 顶点、$f_1$ 棱、$f_2$ 面）。\n\n把顶点放进某个 $\\mathbb R^N$ 的仿射无关位置、每个单形放成它的凸包，就得到 $\\mathcal K$ 的**几何实现** $|\\mathcal K|=\\bigcup_{\\sigma\\in\\mathcal K}|\\sigma|$；反过来，只记录「有哪些单形、谁包含谁」而不放入空间，就叫**抽象单纯复形**。若拓扑空间 $X$ 同胚于某个 $|\\mathcal K|$，就说 $\\mathcal K$ 是 $X$ 的一个**三角剖分**（剖分），$X$ 叫**可剖分空间**。剖分的全部威力在于：$X$ 的拓扑信息被压成一份**有限的组合清单**（单形清单加包含关系）。\n\n把这份清单翻译回拓扑，用的是**单纯映射**：$f:\\mathcal K\\to\\mathcal L$ 把顶点映到顶点，并且把每个单形映为 $\\mathcal L$ 的某个单形（维数允许下降——三角形的三个顶点可以映成一条棱甚至一个点）；按重心坐标线性延拓，就得到连续映射 $|f|:|\\mathcal K|\\to|\\mathcal L|$。于是组合与拓扑可以互译：复形之间的组合映射给出几何实现之间的连续映射，复合与恒等都被保持。Radó 定理进一步保证每个紧曲面都能三角剖分，所以这套有限语言足以装下曲面（闭曲面、带边曲面、黎曼面）——这正是「单纯同调」能够定义的前提。",
+    "definitionEn": "A **simplex** is the simplest geometric block: a point in dimension 0, a segment in dimension 1, a triangle in dimension 2, a tetrahedron in dimension 3. In general, take $n+1$ **affinely independent** points $v_0,\\dots,v_n$ (not lying in any lower-dimensional affine plane); their convex hull $\\sigma=[v_0,\\dots,v_n]$ is an **$n$-simplex** with $\\dim\\sigma=n$, and the convex hull of a subset of the vertices is a **face** of $\\sigma$; for the triangle $[a,b,c]$ the faces are $[a,b],[b,c],[c,a],[a],[b],[c]$ together with itself.\n\nA **simplicial complex** is a family $\\mathcal K$ of simplices satisfying two rules: (1) **closure under faces**: if $\\sigma\\in\\mathcal K$ then every face of $\\sigma$ lies in $\\mathcal K$; (2) the **intersection condition**: if $\\sigma,\\tau\\in\\mathcal K$ then $\\sigma\\cap\\tau$ is either empty or a **common face** of both (spanned by their common vertices). Rule (2) excludes gluing two edges along half an edge, or a triangle along half of another triangle's edge—those are not triangulations. The largest dimension occurring is the **dimension** of $\\mathcal K$; when there are finitely many simplices we call it a **finite complex** and write $f_n$ for the number of $n$-simplices ($f_0$ vertices, $f_1$ edges, $f_2$ faces).\n\nPlacing the vertices in affinely independent positions in some $\\mathbb R^N$ and taking convex hulls yields the **geometric realization** $|\\mathcal K|=\\bigcup_{\\sigma\\in\\mathcal K}|\\sigma|$; forgetting the ambient space and keeping only which simplices exist and which contain which gives an **abstract simplicial complex**. If a topological space $X$ is homeomorphic to some $|\\mathcal K|$, then $\\mathcal K$ is a **triangulation** of $X$ and $X$ is called **triangulable**. The power of a triangulation is that all topological information is compressed into a **finite combinatorial list**.\n\nTranslating the list back into topology uses **simplicial maps**: $f:\\mathcal K\\to\\mathcal L$ sends vertices to vertices and every simplex to some simplex of $\\mathcal L$ (dimension may drop—a triangle's three vertices may map to an edge or a point); extending linearly via barycentric coordinates gives a continuous map $|f|:|\\mathcal K|\\to|\\mathcal L|$. Compositions and identities are respected, so combinatorics and topology can be intertranslated. Radó's theorem guarantees every compact surface admits a triangulation, so this finite language covers surfaces (closed, with boundary, Riemann surfaces)—which is exactly what makes simplicial homology definable.",
+    "formulas": [
+      {
+        "latex": "\\sigma=[v_0,\\dots,v_n]=\\Bigl\\{\\sum_{i=0}^{n}t_iv_i\\ :\\ t_i\\ge 0,\\ \\sum_{i=0}^{n}t_i=1\\Bigr\\},\\qquad \\dim\\sigma=n",
+        "note": "n 维单形是 $n+1$ 个仿射无关点的凸包；顶点顺序此时只是记号（定向与边界算子才会用到顺序）。",
+        "noteEn": "An $n$-simplex is the convex hull of $n+1$ affinely independent points; the ordering of vertices is mere notation until orientations and boundary operators come in."
+      },
+      {
+        "latex": "\\sigma\\in\\mathcal K,\\ \\tau\\subseteq\\sigma\\ \\Longrightarrow\\ \\tau\\in\\mathcal K;\\qquad \\sigma,\\tau\\in\\mathcal K\\ \\Longrightarrow\\ \\sigma\\cap\\tau=\\varnothing\\ \\text{ 或为两者的公共面}",
+        "note": "两条公理：面封闭 + 交条件。两个三角形沿一条整棱粘合是复形，只沿半条棱粘合则不是。",
+        "noteEn": "The two axioms: closure under faces plus the intersection condition. Two triangles glued along a whole edge form a complex; glued along half an edge they do not."
+      },
+      {
+        "latex": "|\\mathcal K|=\\bigcup_{\\sigma\\in\\mathcal K}|\\sigma|,\\qquad X\\cong|\\mathcal K|",
+        "note": "几何实现与三角剖分：$X$ 同胚于某个复形的几何实现，就说该复形剖分了 $X$。",
+        "noteEn": "Geometric realization and triangulation: when $X$ is homeomorphic to $|\\mathcal K|$, the complex $\\mathcal K$ triangulates $X$."
+      },
+      {
+        "latex": "\\chi(\\mathcal K)=f_0-f_1+f_2-\\cdots=\\sum_{n\\ge0}(-1)^nf_n",
+        "note": "欧拉示性数直接由单形个数（$f$ 向量）算出，同一空间的不同剖分给同一结果。",
+        "noteEn": "The Euler characteristic is read off directly from the numbers of simplices and is independent of the chosen triangulation."
+      },
+      {
+        "latex": "\\Delta^2=\\bigl\\{[a,b,c],\\ [a,b],[b,c],[c,a],\\ [a],[b],[c]\\bigr\\}",
+        "note": "实心三角形的标准剖分：1 个 2-单形、3 个 1-单形、3 个 0-单形；删去 $[a,b,c]$ 剩下的就是它的边界复形。",
+        "noteEn": "The standard triangulation of the solid triangle: one 2-simplex, three 1-simplices, three 0-simplices; deleting $[a,b,c]$ leaves its boundary complex."
+      }
+    ],
+    "properties": [
+      "有限复形只有有限多个单形，全部信息是一份有限的组合清单；同调群、欧拉示性数等都能逐步算出，不需要度量、极限或光滑结构。",
+      "两条公理缺一不可：只要求面封闭、允许任意粘合的框架叫 $\\Delta$-复形（胞腔粘合）；若允许「粘半条棱」，连 $\\Delta$-复形都不是，因为交集不是任何单形的面。",
+      "抽象复形由单形集合与包含关系决定，其几何实现在同构意义下唯一；单纯映射诱导几何实现之间的连续映射，并且保持复合与恒等（构成函子）。",
+      "三角剖分不唯一：正方形可以先切一条对角线，也可以先细分再剖分；但由剖分算出的拓扑不变量（同调群、欧拉示性数）与剖分无关。",
+      "有限复形的几何实现是紧致且可度量的；Radó 定理指出每个紧曲面都能三角剖分，所以曲面的拓扑问题可以完全放进单纯复形框架。"
+    ],
+    "propertiesEn": [
+      "A finite complex has finitely many simplices, so all its information is a finite combinatorial list; homology groups and the Euler characteristic can be computed step by step, with no metric, limit or smooth structure needed.",
+      "Both axioms matter: requiring only closure under faces while allowing arbitrary gluing leads to $\\Delta$-complexes (cellular gluing); allowing gluing along half an edge yields not even a $\\Delta$-complex, since the intersection is not a face of either simplex.",
+      "An abstract complex is determined by its simplices and inclusions, and its geometric realization is unique up to isomorphism; simplicial maps induce continuous maps of realizations and preserve compositions and identities (a functor).",
+      "Triangulations are not unique: a square can be cut along one diagonal or subdivided further; yet the invariants computed from a triangulation (homology, Euler characteristic) do not depend on it.",
+      "The realization of a finite complex is compact and metrizable; Radó's theorem says every compact surface can be triangulated, so surface topology fits entirely into the simplicial framework."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.9,
+        3.9
+      ],
+      "yRange": [
+        -1.4,
+        3.9
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              1.5,
+              1.5
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.14)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              1.5,
+              1.5
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.14)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              3,
+              3
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1.5,
+              1.5
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.14)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1.5,
+              1.5
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.14)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "a",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            0
+          ],
+          "label": "b",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            3
+          ],
+          "label": "c",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            3
+          ],
+          "label": "d",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.5,
+            1.5
+          ],
+          "label": "o",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.95,
+            0.5
+          ],
+          "text": "T₁"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.5,
+            1.45
+          ],
+          "text": "T₂"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            2.5
+          ],
+          "text": "T₃"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.5,
+            1.45
+          ],
+          "text": "T₄"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            -0.75
+          ],
+          "text": "4 个三角形：V=5, E=8, F=4, χ=1",
+          "color": "#b388ff"
+        }
+      ],
+      "title": "把方块曲面剖分成 4 个三角形（面封闭 + 交条件都满足）"
+    },
+    "examples": [
+      {
+        "problem": "判断下列三种粘法是否构成单纯复形，并求第一种的 $f$ 向量与欧拉示性数：(i) 三角形 $[a,b,c]$ 与 $[b,c,d]$ 沿公共棱 $[b,c]$ 粘合，并取齐所有面；(ii) 两个三角形沿「半条棱」粘合（$[a,b,c]$ 的棱 $[a,c]$ 的中点粘到 $[c,d,e]$ 的棱 $[c,d]$ 的中点上）；(iii) 三角形 $[a,b,c]$ 与 $[c,d,e]$ 只在顶点 $c$ 相碰。",
+        "solution": "(i) **是复形**。面封闭已取齐；两个 2-单形的交是 $[b,c]$，恰好是由公共顶点 $b,c$ 张成的面，满足交条件。$f_0=4$（$a,b,c,d$），$f_1=5$（$[a,b],[b,c],[a,c],[b,d],[c,d]$，公共棱只算一次），$f_2=2$，故 $\\chi=4-5+2=1$，与「两张圆盘沿一段弧粘成一个圆盘」相符。\n(ii) **不是复形**。$[a,b,c]$ 与 $[c,d,e]$ 的交是「半条棱」，它既不空、也不是由公共顶点张成的单形（公共顶点只有 $c$，只能张成 $[c]$），违反交条件。要合法必须先把中点加为顶点，把两条棱各劈成两条棱。\n(iii) **是复形**。交集是单个顶点 $[c]$，它同时是两个三角形的面。$f_0=5$，$f_1=6$，$f_2=2$，$\\chi=5-6+2=1$，与「两张圆盘粘于一点得 $1+1-1=1$」一致。"
+      },
+      {
+        "problem": "设 $\\mathcal K$ 是正方形的三角剖分：$a(0,0),b(1,0),c(1,1),d(0,1)$，单形为 $[a,b,c],[a,c,d]$ 及全部面。目标复形 (A) $\\mathcal L=\\{[0],[1],[0,1]\\}$；(B) $\\mathcal L'=\\{[0],[1],[2],[0,1],[1,2]\\}$（只有两条棱，没有 $[0,2]$）。判断顶点映射 $f(a)=0,\\ f(b)=1,\\ f(c)=1,\\ f(d)=0$ 是否给出 $\\mathcal K\\to\\mathcal L$ 的单纯映射；再判断 $g(a)=0,\\ g(b)=1,\\ g(c)=2,\\ g(d)=2$ 是否给出 $\\mathcal K\\to\\mathcal L'$ 的单纯映射。",
+        "solution": "(A) **是单纯映射**。逐条检查单形：$f(\\{a,b,c\\})=\\{0,1\\}$，$\\mathcal L$ 含有 $[0,1]$；$f(\\{a,c,d\\})=\\{0,1\\}$，同样可以；1-单形与 0-单形的像显然也都是 $\\mathcal L$ 的成员（0-单形映为 0-单形）。几何实现 $|f|$ 把正方形压到线段上：两个三角形都被压成整条棱，维数从 2 降到 1——这是允许的。\n(B) **不是单纯映射**。$g(\\{a,b,c\\})=\\{0,1,2\\}$，要求 $\\mathcal L'$ 含有 2-单形 $[0,1,2]$，但 $\\mathcal L'$ 只含两条 1-单形，故条件不满足。要点：单纯映射要求「每个单形的**顶点集的像**必须在目标复形中张成一个单形」，$\\{0,1,2\\}$ 在 $\\mathcal L'$ 中不张成单形，所以 $g$ 不合格（尽管它仍能线性延拓成某个连续映射）。"
+      }
+    ],
+    "expression": {
+      "text": "𝒦 = {单形族}，满足面封闭与交条件；|𝒦| ≅ X 时 𝒦 是 X 的三角剖分",
+      "symbol": "𝒦",
+      "note": "复形的全部信息是一份有限组合清单：单形清单 + 包含关系；单纯映射 F: 𝒦→ℒ 送单形到单形。",
+      "noteEn": "A complex is exactly a finite combinatorial list: its simplices plus the inclusion relations; a simplicial map sends simplices to simplices."
+    },
+    "tags": [
+      "单纯复形",
+      "三角剖分",
+      "单形",
+      "单纯映射",
+      "组合拓扑"
+    ],
+    "links": [
+      "topological-space",
+      "continuity-homeomorphism",
+      "connectedness",
+      "homotopy",
+      "simplicial-homology"
+    ]
+  },
+  {
+    "id": "simplicial-homology",
+    "title": "单纯同调群",
+    "titleEn": "Simplicial Homology",
+    "branch": "topology",
+    "level": 5,
+    "summary": "把各维单形组织成链群、用边界算子 $\\partial$ 串成链复形；由 $\\partial\\circ\\partial=0$ 得 $B_n\\subseteq Z_n$，从而定义 $H_n=Z_n/B_n$——一套纯组合、解线性方程组就能算出的拓扑不变量。",
+    "summaryEn": "Organize simplices into chain groups and chain them into a chain complex via the boundary operator; since ∂∘∂ = 0 we have Bₙ ⊆ Zₙ and may set Hₙ = Zₙ/Bₙ — a purely combinatorial topological invariant computable by linear algebra.",
+    "definition": "设 $\\mathcal K$ 是单纯复形。**链群** $C_n(\\mathcal K)$ 是以全体 $n$ 维单形为基的自由阿贝尔群：$C_n=\\bigl\\{\\sum_i a_i\\sigma_i:\\ a_i\\in\\mathbb Z\\bigr\\}\\cong\\mathbb Z^{f_n}$。为了让边界算子带正负号，要先给单形**定向**：把顶点排成次序写成有序单形 $[v_0,\\dots,v_n]$，并约定交换相邻两个顶点变号，$[v_0,\\dots,v_i,v_{i+1},\\dots]=-[v_0,\\dots,v_{i+1},v_i,\\dots]$。系数也可以取某个域 $\\mathbb F$（$\\mathbb Q,\\mathbb R,\\mathbb F_2$ 等），这时 $C_n$ 是 $\\mathbb F$ 上的向量空间，理论更简单，但会丢掉**挠元**信息。\n\n**边界算子** $\\partial_n:C_n\\to C_{n-1}$ 在每个单形上定义为删去一个顶点、带交替符号：$\\partial_n[v_0,\\dots,v_n]=\\sum_{i=0}^{n}(-1)^i[v_0,\\dots,\\hat v_i,\\dots,v_n]$，再线性延拓。例如 $\\partial_1[a,b]=[b]-[a]$，$\\partial_2[a,b,c]=[b,c]-[a,c]+[a,b]$。它满足最关键的性质 **$\\partial\\circ\\partial=0$**（「边界的边界为零」）：三角形上直接验证，$\\partial_1\\partial_2[a,b,c]=([c]-[b])-([c]-[a])+([b]-[a])=0$；一般情形是因为展开 $\\partial\\partial\\sigma$ 后每个 $(n-2)$ 维面恰好出现两次、符号相反。于是 $\\{C_n,\\partial_n\\}$ 成为一个**链复形** $\\cdots\\to C_{n+1}\\xrightarrow{\\partial_{n+1}}C_n\\xrightarrow{\\partial_n}C_{n-1}\\to\\cdots$。\n\n有了 $\\partial^2=0$，就能定义两个子群：**闭链** $Z_n=\\ker\\partial_n=\\{n\\text{-链 }c:\\ \\partial_nc=0\\}$（自身没有边界的 $n$-链，如一整圈三角形的边），与**边界链** $B_n=\\operatorname{im}\\partial_{n+1}$（是某个 $(n+1)$-链的边界的 $n$-链）。由 $\\partial_n\\circ\\partial_{n+1}=0$，任何形如 $\\partial_{n+1}c$ 的链都被 $\\partial_n$ 杀死，故 **$B_n\\subseteq Z_n$**，于是可以作商，得到 **同调群** $H_n(\\mathcal K)=Z_n/B_n=\\ker\\partial_n\\big/\\operatorname{im}\\partial_{n+1}$。商群的顺序绝不能颠倒：分子是**闭链**（自身边界为零），分母是**边界链**（是更高维链的边界）；同调群的元素是闭链的等价类，而把「本身是边界的闭链」当作零——剩下的恰好是「绕洞不回缩」的部分，这就是 $n$ 维洞的代数化身。\n\n从链复形出发，$H_n$ 只是若干线性方程组的解空间之商，有限复形时是有限生成阿贝尔群：$H_n\\cong\\mathbb Z^{b_n}\\oplus\\mathbb Z_{t_1}\\oplus\\cdots$，其中 $b_n$ 是第 $n$ 个 **Betti 数**，$\\mathbb Z_{t_i}$ 是**挠元**（如 $\\mathrm{RP}^2$ 的 $\\mathbb Z_2$）。计算靠秩公式 $b_n=f_n-\\operatorname{rank}\\partial_n-\\operatorname{rank}\\partial_{n+1}$（矩阵秩或 Smith 标准形），所以整个拓扑问题变成有限线性代数。最重要的结论是：$H_n$ 不依赖顶点怎么放、选哪个剖分，它是**拓扑不变量**（更精确地说，是**同伦不变量**）。",
+    "definitionEn": "Let $\\mathcal K$ be a simplicial complex. The **chain group** $C_n(\\mathcal K)$ is the free abelian group on the $n$-simplices: $C_n=\\bigl\\{\\sum_i a_i\\sigma_i:\\ a_i\\in\\mathbb Z\\bigr\\}\\cong\\mathbb Z^{f_n}$. To give the boundary operator signs we **orient** simplices: order their vertices to write an oriented simplex $[v_0,\\dots,v_n]$, with the convention that swapping two adjacent vertices changes the sign, $[v_0,\\dots,v_i,v_{i+1},\\dots]=-[v_0,\\dots,v_{i+1},v_i,\\dots]$. Coefficients may also be taken in a field $\\mathbb F$ ($\\mathbb Q,\\mathbb R,\\mathbb F_2,\\dots$); then $C_n$ is a vector space and the theory is simpler, at the cost of losing **torsion** information.\n\nThe **boundary operator** $\\partial_n:C_n\\to C_{n-1}$ is defined on simplices by deleting one vertex at a time with alternating signs, $\\partial_n[v_0,\\dots,v_n]=\\sum_{i=0}^{n}(-1)^i[v_0,\\dots,\\hat v_i,\\dots,v_n]$, and extended linearly. For instance $\\partial_1[a,b]=[b]-[a]$ and $\\partial_2[a,b,c]=[b,c]-[a,c]+[a,b]$. Its crucial property is **$\\partial\\circ\\partial=0$** (\"the boundary of a boundary is zero\"): on a triangle, $\\partial_1\\partial_2[a,b,c]=([c]-[b])-([c]-[a])+([b]-[a])=0$, and in general each $(n-2)$-face appears twice with opposite signs. Thus $\\{C_n,\\partial_n\\}$ is a **chain complex** $\\cdots\\to C_{n+1}\\xrightarrow{\\partial_{n+1}}C_n\\xrightarrow{\\partial_n}C_{n-1}\\to\\cdots$.\n\nWith $\\partial^2=0$ we obtain two subgroups: the **cycles** $Z_n=\\ker\\partial_n$ (chains with no boundary of their own, such as one full tour around the edges of a triangle) and the **boundaries** $B_n=\\operatorname{im}\\partial_{n+1}$ (chains that bound some $(n+1)$-chain). Since $\\partial_n\\circ\\partial_{n+1}=0$, every $\\partial_{n+1}c$ is killed by $\\partial_n$, hence **$B_n\\subseteq Z_n$**, and we may form the quotient: the **homology group** $H_n(\\mathcal K)=Z_n/B_n=\\ker\\partial_n\\big/\\operatorname{im}\\partial_{n+1}$. The order can never be reversed: the numerator consists of **cycles** (zero boundary) and the denominator of **boundaries** (boundaries of higher chains). Elements of $H_n$ are classes of cycles, and cycles that already bound something are declared zero—what survives is precisely the part that wraps around holes, the algebraic incarnation of $n$-dimensional holes.\n\nFrom the chain complex, $H_n$ is merely a quotient of solution spaces of linear systems; for finite complexes it is finitely generated: $H_n\\cong\\mathbb Z^{b_n}\\oplus\\mathbb Z_{t_1}\\oplus\\cdots$, where $b_n$ is the $n$-th **Betti number** and the $\\mathbb Z_{t_i}$ are **torsion**. Computations use the rank formula $b_n=f_n-\\operatorname{rank}\\partial_n-\\operatorname{rank}\\partial_{n+1}$ (matrix ranks or Smith normal form), so topology becomes finite linear algebra. Above all, $H_n$ does not depend on how vertices are placed or which triangulation is chosen: it is a **topological invariant**—more precisely, a **homotopy invariant**.",
+    "formulas": [
+      {
+        "latex": "C_n(\\mathcal K)=\\Bigl\\{\\sum_i a_i\\sigma_i:\\ a_i\\in\\mathbb Z\\Bigr\\}\\cong\\mathbb Z^{f_n},\\qquad \\cdots\\to C_{n+1}\\xrightarrow{\\partial_{n+1}}C_n\\xrightarrow{\\partial_n}C_{n-1}\\to\\cdots",
+        "note": "链群由 $n$ 维单形自由生成，系数取 $\\mathbb Z$（或任意环、域）；它们与边界算子一起构成链复形。",
+        "noteEn": "The chain group is freely generated by the $n$-simplices, with coefficients in $\\mathbb Z$ (or any ring/field); together with $\\partial$ it forms a chain complex."
+      },
+      {
+        "latex": "\\partial_n[v_0,\\dots,v_n]=\\sum_{i=0}^{n}(-1)^i[v_0,\\dots,\\hat v_i,\\dots,v_n],\\qquad \\partial_1[a,b]=[b]-[a]",
+        "note": "边界算子：删顶点、符号交替（$\\hat v_i$ 表示删去 $v_i$）；这就是有向单形的「边界」。",
+        "noteEn": "The boundary operator deletes a vertex with alternating signs ($\\hat v_i$ means $v_i$ omitted); this is the boundary of an oriented simplex."
+      },
+      {
+        "latex": "\\partial_n\\circ\\partial_{n+1}=0\\qquad\\Longleftrightarrow\\qquad B_n=\\operatorname{im}\\partial_{n+1}\\subseteq\\ker\\partial_n=Z_n",
+        "note": "「边界的边界为零」：它保证边界链都是闭链，是能作商定义同调群的前提。",
+        "noteEn": "\"Boundary of a boundary is zero\": every boundary is a cycle, which is exactly what makes the quotient defining homology possible."
+      },
+      {
+        "latex": "H_n(\\mathcal K)=\\frac{Z_n}{B_n}=\\frac{\\ker\\partial_n}{\\operatorname{im}\\partial_{n+1}}=\\frac{\\text{闭链}}{\\text{边界链}}",
+        "note": "关键顺序：**闭链除以边界链**；写反了（边界除以闭链）毫无意义。",
+        "noteEn": "Key order: **cycles modulo boundaries**; reversing it (boundaries modulo cycles) is meaningless."
+      },
+      {
+        "latex": "b_n=\\operatorname{rank}H_n=f_n-\\operatorname{rank}\\partial_n-\\operatorname{rank}\\partial_{n+1}",
+        "note": "用秩公式算 Betti 数：分别解 $\\partial_nc=0$ 与求 $\\partial_{n+1}$ 的像，剩下的商就是同调（挠部分由 Smith 标准形的非平凡不变因子给出）。",
+        "noteEn": "The rank formula computes Betti numbers: solve $\\partial_nc=0$ and find the image of $\\partial_{n+1}$; torsion comes from the nontrivial invariant factors in Smith normal form."
+      }
+    ],
+    "properties": [
+      "同调群只依赖链复形（单形清单加边界矩阵）这份有限数据，因此是**组合可计算量**：不需要几何实现，也不需要顶点放在哪里。",
+      "$\\partial^2=0$ 是全部定义的支点：它保证 $B_n\\subseteq Z_n$，商群 $Z_n/B_n$ 才有意义；若 $\\partial^2\\neq0$，$B_n$ 一般不再是 $Z_n$ 的子群，同调群无从定义。",
+      "系数域的选择会影响结果：取域 $\\mathbb F$ 时 $H_n(\\mathcal K;\\mathbb F)$ 是向量空间且**看不到挠元**——$H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$，而 $H_1(\\mathrm{RP}^2;\\mathbb Q)=0$。",
+      "有限复形时 $H_n$ 有限生成，形如 $\\mathbb Z^{b_n}\\oplus(\\text{挠部分})$；$H_n=0$ 当 $n>\\dim\\mathcal K$，而且 $H_n$ 与剖分、与顶点标号无关。",
+      "单纯同调与连续拓扑一致：$H_n(\\mathcal K)\\cong H_n(|\\mathcal K|)$（与奇异同调同构），于是可以在有限的组合层面算拓扑不变量，并且 $\\chi(\\mathcal K)=\\sum_n(-1)^nb_n$。"
+    ],
+    "propertiesEn": [
+      "Homology depends only on the chain complex (the list of simplices plus the boundary matrices), hence it is **combinatorially computable**: no geometric realization is needed and the placement of vertices is irrelevant.",
+      "$\\partial^2=0$ is the linchpin: it guarantees $B_n\\subseteq Z_n$ so that $Z_n/B_n$ makes sense; without it $B_n$ is generally not a subgroup of $Z_n$ and homology cannot be defined.",
+      "The coefficient field matters: with coefficients in a field $\\mathbb F$, $H_n(\\mathcal K;\\mathbb F)$ is a vector space and **torsion becomes invisible**—$H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ whereas $H_1(\\mathrm{RP}^2;\\mathbb Q)=0$.",
+      "For a finite complex $H_n$ is finitely generated of the form $\\mathbb Z^{b_n}\\oplus(\\text{torsion})$, vanishes for $n>\\dim\\mathcal K$, and is independent of the triangulation and of the labelling of vertices.",
+      "Simplicial homology agrees with the topology of the realization: $H_n(\\mathcal K)\\cong H_n(|\\mathcal K|)$ (isomorphic to singular homology), so invariants can be computed at the finite combinatorial level, and $\\chi(\\mathcal K)=\\sum_n(-1)^nb_n$."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.1,
+        5.1
+      ],
+      "yRange": [
+        -1.6,
+        4.0
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            4,
+            0
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            4,
+            0
+          ],
+          "to": [
+            1.4,
+            3.2
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.4,
+            3.2
+          ],
+          "to": [
+            0,
+            0
+          ],
+          "color": "#06d6a0",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "a",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            4,
+            0
+          ],
+          "label": "b",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.4,
+            3.2
+          ],
+          "label": "c",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.85,
+            1.35
+          ],
+          "text": "∂c = 0",
+          "color": "#b388ff"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.9,
+            -0.9
+          ],
+          "text": "闭链 c = [a,b] + [b,c] + [c,a]",
+          "color": "#06d6a0"
+        }
+      ],
+      "title": "三角形边界是一个 1-闭链：∂([a,b]+[b,c]+[c,a]) = 0"
+    },
+    "examples": [
+      {
+        "problem": "计算三角形边界复形 $\\partial\\Delta^2$（顶点 $a,b,c$，棱 $[a,b],[b,c],[c,a]$，不含 2-单形）的 $H_0$ 与 $H_1$。",
+        "solution": "此时 $C_2=0$，$C_1=\\mathbb Z[a,b]\\oplus\\mathbb Z[b,c]\\oplus\\mathbb Z[c,a]$，$C_0=\\mathbb Z[a]\\oplus\\mathbb Z[b]\\oplus\\mathbb Z[c]$。\n$H_1=\\ker\\partial_1$：设 $c_1=x[a,b]+y[b,c]+z[c,a]$，则\n$\\partial_1c_1=x([b]-[a])+y([c]-[b])+z([a]-[c])=(z-x)[a]+(x-y)[b]+(y-z)[c]=0$，\n得 $x=y=z$，故 $\\ker\\partial_1=\\mathbb Z\\cdot\\bigl([a,b]+[b,c]+[c,a]\\bigr)\\cong\\mathbb Z$，于是 $H_1\\cong\\mathbb Z$。\n$H_0=C_0/\\operatorname{im}\\partial_1$：$\\operatorname{im}\\partial_1$ 中的链系数满足总和为零（因为 $\\partial_1$ 的每个像的三个系数之和为 0），故商群由 $[a]$ 生成、$\\cong\\mathbb Z$，即 $H_0\\cong\\mathbb Z$（复形连通）。结论 $H_0=\\mathbb Z$，$H_1=\\mathbb Z$，与 $|\\partial\\Delta^2|\\cong S^1$ 相符。"
+      },
+      {
+        "problem": "计算实心三角形 $\\Delta^2$（含 2-单形 $[a,b,c]$ 及其全部面）的 $H_0,H_1,H_2$，并与上题的边界复形对照。",
+        "solution": "$C_2=\\mathbb Z[abc]$，$C_1,C_0$ 与上题相同。边界矩阵：\n$\\partial_2[abc]=[b,c]-[a,c]+[a,b]=[a,b]+[b,c]+[c,a]$（末步用了 $[c,a]=-[a,c]$），\n它恰好等于上题中 $\\ker\\partial_1$ 的生成元，因此 $Z_1=\\operatorname{im}\\partial_2=B_1$，$H_1=Z_1/B_1=0$。\n$\\partial_2$ 是单射（$[abc]\\mapsto$ 非零链），故 $H_2=\\ker\\partial_2=0$；$H_0=\\mathbb Z$ 同上。结论：$\\Delta^2$ 只有 $H_0=\\mathbb Z$、其余为 0，与圆盘（可缩）相符。两个复形只差一个 2-单形，$H_1$ 就从 $\\mathbb Z$ 变成 $0$——「把洞填上」在同调上的表现正是这个。"
+      }
+    ],
+    "expression": {
+      "text": "Hₙ(𝒦) = Zₙ / Bₙ = ker ∂ₙ / im ∂ₙ₊₁   （闭链 / 边界链）",
+      "symbol": "Hₙ(𝒦)",
+      "note": "边界算子满足 ∂∘∂ = 0，故 Bₙ ⊆ Zₙ，商才有意义；元素是闭链的等价类。",
+      "noteEn": "The boundary operator satisfies ∂∘∂ = 0, hence Bₙ ⊆ Zₙ and the quotient makes sense; its elements are classes of cycles."
+    },
+    "tags": [
+      "单纯同调",
+      "链复形",
+      "边界算子",
+      "闭链",
+      "Betti 数"
+    ],
+    "links": [
+      "simplicial-complex",
+      "homology-group",
+      "fundamental-group",
+      "homotopy",
+      "euler-characteristic"
+    ]
+  },
+  {
+    "id": "homology-group",
+    "title": "同调群",
+    "titleEn": "Homology Groups",
+    "branch": "topology",
+    "level": 5,
+    "summary": "给每个空间配上「第 $n$ 维洞」的代数测量：$H_0$ 数连通分支、$H_1$ 数一维的环、$H_2$ 数二维空腔；它是同伦不变量，也是 $\\pi_1$ 的阿贝尔化（对道路连通空间），比同伦群好算得多。",
+    "summaryEn": "An algebraic measurement of the $n$-dimensional holes of a space: $H_0$ counts path components, $H_1$ counts one-dimensional loops, $H_2$ counts two-dimensional cavities; it is a homotopy invariant, the abelianization of $\\pi_1$, and far easier to compute than homotopy groups.",
+    "definition": "**同调群**是给每个空间 $X$ 与每个 $n\\ge0$ 配一个阿贝尔群 $H_n(X)$ 的构造（可用单纯同调、奇异同调、胞腔同调等模型定义，结果一致）。它有两条决定性性质：**同伦等价（因而同胚）的空间有同构的同调群**，而且 $H_n$ 通常能**纯代数地算出来**。直观上 $H_n$ 度量「$n$ 维的洞」：$H_0$ 说空间有多少块，$H_1$ 说有多少条绕不过去的环（圆周、环面的两条经线），$H_2$ 说有多少个被包起来的空腔（球面内部的空腔、环面内部的管子）。\n\n三条最常用的经验：① $H_0(X)\\cong\\mathbb Z^{c}$，$c$ 是**道路连通分支**的个数——每个分支贡献一个 $\\mathbb Z$；② $H_1(X)$ 的自由秩数出独立的「一维环」个数（环面 2、圆周 1、球面 0）；③ $H_n(X)=0$ 当 $n>\\dim X$。但同调不只是数数：$\\mathrm{RP}^2$ 的 $H_1=\\mathbb Z_2$ 是**挠元**，反映不可定向的「扭转」；它数不出洞的个数，却是真实的拓扑信息。\n\n**同调与基本群**：$H_1$ 是 $\\pi_1$ 的**阿贝尔化**（**要求 $X$ 道路连通**，基点任取），即 $H_1(X)\\cong\\pi_1(X,x_0)/[\\pi_1(X,x_0),\\pi_1(X,x_0)]$。直觉：在亏格 $\\ge2$ 的闭曲面上（或 $S^1\\vee S^1$ 上）「先绕 $m$ 圈再绕 $n$ 圈」与「先 $n$ 圈再 $m$ 圈」在 $\\pi_1$ 中不同，但同调把顺序抹平，只记住总圈数。所以同调是基本群的**弱化**（丢掉了非交换信息），换来的好处是：同调群是阿贝尔群、有结构定理、有计算工具（Mayer–Vietoris 长正合序列、对 $(X,A)$ 的长正合序列、切除定理）。例如克莱因瓶的 $\\pi_1$ 非交换、写起来要小心，而 $H_1$ 直接给出 $\\mathbb Z\\oplus\\mathbb Z_2$。\n\n计算时模型可以随便挑：有限单纯复形用 $\\partial$ 矩阵（Smith 标准形），胞腔复形用**胞腔链复形**（第 $n$ 个胞腔群是自由群，$\\partial$ 由粘合映射的度数给出），一般空间用奇异同调；只要模型同伦等价，答案必然相同。还有几条常用性质：**可加性** $H_n(X\\sqcup Y)\\cong H_n(X)\\oplus H_n(Y)$；对良对 $(X,A)$ 的长正合序列 $\\cdots\\to H_n(A)\\to H_n(X)\\to H_n(X,A)\\to H_{n-1}(A)\\to\\cdots$；$H_n$ 与系数环无关的部分是自由秩（Betti 数），而**挠元随系数变化**。",
+    "definitionEn": "**Homology** assigns to every space $X$ and every $n\\ge0$ an abelian group $H_n(X)$ (definable via simplicial, singular or cellular homology—all agree). Two properties are decisive: **homotopy equivalent spaces (hence homeomorphic spaces) have isomorphic homology**, and $H_n$ can usually be **computed purely algebraically**. Intuitively $H_n$ measures $n$-dimensional holes: $H_0$ counts the pieces of the space, $H_1$ counts independent loops (one for the circle, two for the torus), $H_2$ counts enclosed cavities (the inside of a sphere, the tube of a torus).\n\nThree rules of thumb: (1) $H_0(X)\\cong\\mathbb Z^{c}$ where $c$ is the number of **path components**—each component contributes one $\\mathbb Z$; (2) the free rank of $H_1(X)$ counts independent one-dimensional loops (2 for the torus, 1 for the circle, 0 for the sphere); (3) $H_n(X)=0$ for $n>\\dim X$. Homology is more than counting, though: $H_1(\\mathrm{RP}^2)=\\mathbb Z_2$ is **torsion**, encoding the twist of non-orientability; it counts no holes, yet it is genuine topological information.\n\n**Relation to the fundamental group**: $H_1$ is the **abelianization** of $\\pi_1$, i.e. $H_1(X)\\cong\\pi_1(X)/[\\pi_1(X),\\pi_1(X)]$. Intuitively, going $m$ times around one loop and then $n$ times around another differs from the reversed order inside $\\pi_1$, but homology flattens the order and remembers only total winding. So homology is a **weaker but tamer** invariant than the fundamental group: what is gained is that homology groups are abelian, obey a structure theorem, and come with computational tools (Mayer–Vietoris, the long exact sequence of a pair, excision). For the Klein bottle $\\pi_1$ is non-abelian and delicate, whereas $H_1$ is simply $\\mathbb Z\\oplus\\mathbb Z_2$.\n\nAny model may be used for computation: for a finite simplicial complex, the boundary matrices (Smith normal form); for a CW complex, the **cellular chain complex** (the $n$-th chain group is free and $\\partial$ is given by degrees of attaching maps); in general, singular homology. Homotopy equivalent models always give the same answer. Standard properties: **additivity** $H_n(X\\sqcup Y)\\cong H_n(X)\\oplus H_n(Y)$; the long exact sequence of a good pair, $\\cdots\\to H_n(A)\\to H_n(X)\\to H_n(X,A)\\to H_{n-1}(A)\\to\\cdots$; the free rank (Betti number) is coefficient-independent, while **torsion varies with the coefficient ring**.",
+    "formulas": [
+      {
+        "latex": "H_n(X)=\\frac{Z_n(X)}{B_n(X)}=\\frac{\\ker\\partial_n}{\\operatorname{im}\\partial_{n+1}}",
+        "note": "通用定义：闭链模边界链。任何模型（单纯、奇异、胞腔）算出的结果都同构。",
+        "noteEn": "The general definition: cycles modulo boundaries. Every model (simplicial, singular, cellular) yields isomorphic groups."
+      },
+      {
+        "latex": "H_0(X)\\cong\\mathbb Z^{\\,c},\\qquad c=\\#\\{\\text{道路连通分支}\\}",
+        "note": "$H_0$ 的自由秩正好是道路连通分支个数；空间连通时 $H_0=\\mathbb Z$。",
+        "noteEn": "The free rank of $H_0$ equals the number of path components; for a connected space $H_0=\\mathbb Z$."
+      },
+      {
+        "latex": "H_1(X)\\cong\\pi_1(X)\\big/\\,[\\pi_1(X),\\pi_1(X)]",
+        "note": "$H_1$ 是基本群的阿贝尔化：丢掉「顺序」信息，只保留总圈数。",
+        "noteEn": "$H_1$ is the abelianization of the fundamental group (for **path-connected** $X$, any base point): order information is discarded, total winding retained."
+      },
+      {
+        "latex": "H_i(S^n)=\\mathbb Z\\ (n\\ge1,\\ i=0,n),\\ \\text{其余为 }0;\\qquad \\bigl(H_0,H_1,H_2\\bigr)(T^2)=\\bigl(\\mathbb Z,\\mathbb Z^2,\\mathbb Z\\bigr)",
+        "note": "球面：只有一个连通分支、一个 $n$ 维空腔；环面：连通、两条独立的一维环、一个二维空腔。",
+        "noteEn": "Sphere: one component and one $n$-dimensional cavity; torus: connected, two independent loops, one two-dimensional cavity."
+      },
+      {
+        "latex": "H_0(\\mathrm{RP}^2)=\\mathbb Z,\\qquad H_1(\\mathrm{RP}^2)=\\mathbb Z_2,\\qquad H_2(\\mathrm{RP}^2)=0",
+        "note": "挠元的经典例子：$H_1$ 是 2 阶循环群，自由秩为 0，因此对欧拉示性数没有贡献（$\\chi=1-0+0=1$）。",
+        "noteEn": "The classical torsion example: $H_1$ is cyclic of order 2 with free rank 0, so it contributes nothing to the Euler characteristic ($\\chi=1-0+0=1$)."
+      }
+    ],
+    "properties": [
+      "同伦不变量：同伦等价的空间同调群同构（同胚自然同构）；且有可加性 $H_n(X\\sqcup Y)\\cong H_n(X)\\oplus H_n(Y)$，以及 $H_n=0$ 当 $n>\\dim X$。",
+      "$H_0(X)\\cong\\mathbb Z^{c}$（$c$ 为道路连通分支数），连通空间 $H_0=\\mathbb Z$；$H_0$ 永远是自由群，不含挠元。",
+      "$H_1\\cong\\pi_1/[\\pi_1,\\pi_1]$：$\\pi_1$ 交换时（如 $T^2$，$\\pi_1=\\mathbb Z^2$）两者一致；$\\pi_1$ 非交换（亏格 $\\ge2$ 曲面、克莱因瓶）时同调严格更小、更易算。$H_1$ 的洞解释是「绕不过去的独立环」，$H_2$ 度量二维空腔。",
+      "挠元只有整数系数下才看得见：$\\mathbb Q$ 或 $\\mathbb R$ 系数时 $H_n(X;\\mathbb F)$ 是向量空间、维数等于 Betti 数 $b_n$，并且 $\\chi=\\sum_n(-1)^nb_n$；例如 $H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ 而 $H_1(\\mathrm{RP}^2;\\mathbb Q)=0$。",
+      "四个必背例子：$S^1$：$(\\mathbb Z,\\mathbb Z)$；$S^n\\ (n\\ge1)$：$H_0=H_n=\\mathbb Z$、其余 $0$；$T^2$：$(\\mathbb Z,\\mathbb Z^2,\\mathbb Z)$；$\\mathrm{RP}^2$：$(\\mathbb Z,\\mathbb Z_2,0)$。用 $\\chi=\\sum(-1)^n\\operatorname{rank}H_n$ 校验 $\\mathrm{RP}^2$：$1-0+0=1=\\chi(\\mathrm{RP}^2)$。"
+    ],
+    "propertiesEn": [
+      "A homotopy invariant: homotopy equivalent spaces have isomorphic homology (homeomorphic spaces certainly do); it is additive, $H_n(X\\sqcup Y)\\cong H_n(X)\\oplus H_n(Y)$, and $H_n=0$ for $n>\\dim X$.",
+      "$H_0(X)\\cong\\mathbb Z^{c}$ with $c$ the number of path components, so $H_0=\\mathbb Z$ for connected spaces; $H_0$ is always free, with no torsion.",
+      "$H_1\\cong\\pi_1/[\\pi_1,\\pi_1]$: when $\\pi_1$ is abelian (e.g. $T^2$ with $\\pi_1=\\mathbb Z^2$) the two coincide; when $\\pi_1$ is non-abelian (surfaces of genus $\\ge2$, the Klein bottle) homology is strictly smaller and easier. $H_1$ counts independent loops, $H_2$ measures two-dimensional cavities.",
+      "Torsion is visible only with integer coefficients: over $\\mathbb Q$ or $\\mathbb R$, $H_n(X;\\mathbb F)$ is a vector space of dimension the Betti number $b_n$ and $\\chi=\\sum_n(-1)^nb_n$; for instance $H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ while $H_1(\\mathrm{RP}^2;\\mathbb Q)=0$.",
+      "Four examples to remember: $S^1$: $(\\mathbb Z,\\mathbb Z)$; $S^n\\ (n\\ge1)$: $H_0=H_n=\\mathbb Z$ and the rest $0$; $T^2$: $(\\mathbb Z,\\mathbb Z^2,\\mathbb Z)$; $\\mathrm{RP}^2$: $(\\mathbb Z,\\mathbb Z_2,0)$. Check via $\\chi=\\sum(-1)^n\\operatorname{rank}H_n$ for $\\mathrm{RP}^2$: $1-0+0=1=\\chi(\\mathrm{RP}^2)$."
+    ],
+    "examples": [
+      {
+        "problem": "用胞腔链复形计算环面 $T^2$ 的同调群。$T^2$ 有胞腔结构：1 个 0-胞腔 $v$、2 个 1-胞腔 $a,b$、1 个 2-胞腔 $f$（正方形对边粘合），$a,b$ 都是 $v$ 上的闭路，$f$ 的边界绕 $a$ 一圈、$b$ 一圈、$a$ 反向、$b$ 反向。",
+        "solution": "胞腔链复形为 $0\\to C_2=\\mathbb Z\\langle f\\rangle\\xrightarrow{\\partial_2}C_1=\\mathbb Z\\langle a,b\\rangle\\xrightarrow{\\partial_1}C_0=\\mathbb Z\\langle v\\rangle\\to0$。\n$\\partial_1a=v-v=0$，$\\partial_1b=0$；$\\partial_2f=a+b-a-b=0$。\n于是 $H_0=\\mathbb Z/\\operatorname{im}\\partial_1=\\mathbb Z$（连通，$c=1$ ✓）；$H_1=\\ker\\partial_1/\\operatorname{im}\\partial_2=\\mathbb Z^2/0=\\mathbb Z^2$（两条独立的环 $[a],[b]$）；$H_2=\\ker\\partial_2=\\mathbb Z$（整个环面的基本类），$n\\ge3$ 时 $H_n=0$。\n校验：$\\chi=1-2+1=0=\\chi(T^2)$ ✓；$\\pi_1(T^2)=\\mathbb Z^2$ 本来就交换，故 $H_1=\\pi_1$ 与「$H_1$ 是 $\\pi_1$ 的阿贝尔化」一致 ✓。"
+      },
+      {
+        "problem": "用胞腔链复形计算实射影平面 $\\mathrm{RP}^2$ 的同调群，并说明其 $H_1$ 的挠元为什么不影响欧拉示性数。$\\mathrm{RP}^2$ 的胞腔结构与粘合度数为：1 个 0-胞腔 $v$、1 个 1-胞腔 $a$（$v$ 上的环路）、1 个 2-胞腔 $e^2$ 沿 $a$ 走**两圈**贴上（粘合映射 $z\\mapsto z^2$，度数 2）。",
+        "solution": "胞腔链复形：$\\partial_1a=v-v=0$，$\\partial_2e^2=2a$，即\n$0\\to\\mathbb Z\\xrightarrow{\\ \\times2\\ }\\mathbb Z\\xrightarrow{\\ 0\\ }\\mathbb Z\\to0$。\n$H_0=\\mathbb Z/\\operatorname{im}\\partial_1=\\mathbb Z$ ✓（连通）；$H_1=\\ker\\partial_1/\\operatorname{im}\\partial_2=\\mathbb Z/2\\mathbb Z=\\mathbb Z_2$——**挠元**；$H_2=\\ker\\partial_2=0$（$\\times2$ 是单射，没有 2-闭链）。\n所以 $H_*=(\\mathbb Z,\\mathbb Z_2,0)$。欧拉示性数只用**自由秩**：$\\chi=\\operatorname{rank}H_0-\\operatorname{rank}H_1+\\operatorname{rank}H_2=1-0+0=1$，与 $\\chi(\\mathrm{RP}^2)=1$ 相符；$\\mathbb Z_2$ 的秩为 0，所以在 $\\chi$ 里完全看不见（这也说明 $\\chi$ 无法区分挠元）。另外 $\\pi_1(\\mathrm{RP}^2)=\\mathbb Z_2$ 已是阿贝尔群，故 $H_1=\\pi_1$ ✓。"
+      }
+    ],
+    "expression": {
+      "text": "H₀ ≅ ℤ^c（c 为道路连通分支数）；H₁ ≅ π₁ / [π₁, π₁]",
+      "symbol": "Hₙ(X)",
+      "note": "同调群是同伦不变量：H₀ 数分支、H₁ 数一维环、H₂ 数二维空腔，挠元只有整数系数才看得见。",
+      "noteEn": "Homology is a homotopy invariant: H₀ counts components, H₁ loops, H₂ cavities, and torsion is visible only with integer coefficients."
+    },
+    "tags": [
+      "同调群",
+      "Betti 数",
+      "挠元",
+      "阿贝尔化",
+      "拓扑不变量"
+    ],
+    "links": [
+      "simplicial-homology",
+      "simplicial-complex",
+      "fundamental-group",
+      "euler-characteristic",
+      "de-rham-cohomology"
+    ]
+  },
+  {
+    "id": "euler-characteristic",
+    "title": "欧拉示性数",
+    "titleEn": "Euler Characteristic",
+    "branch": "topology",
+    "level": 5,
+    "summary": "把各维单形个数带交错符号相加得到的数 $\\chi=V-E+F-\\cdots$：它是同伦不变量，等于 Betti 数的交错和，并且是闭曲面分类的数值标尺（$\\chi(S^2)=2$、$\\chi(T^2)=0$、$\\chi(\\mathrm{RP}^2)=1$）。",
+    "summaryEn": "The alternating sum of the numbers of simplices, $\\chi=V-E+F-\\cdots$: a homotopy invariant equal to the alternating sum of Betti numbers, and the numerical ruler of surface classification ($\\chi(S^2)=2$, $\\chi(T^2)=0$, $\\chi(\\mathrm{RP}^2)=1$).",
+    "definition": "**欧拉示性数**是最好用的拓扑不变量。若复形 $\\mathcal K$ 有 $f_n$ 个 $n$ 维单形（$f_0=V$ 顶点、$f_1=E$ 棱、$f_2=F$ 面……），定义 $\\chi(\\mathcal K)=\\sum_{n\\ge0}(-1)^nf_n=V-E+F-\\cdots$。对曲面只有三种单形，于是 $\\chi=V-E+F$。欧拉最早发现任何凸多面体都满足 $V-E+F=2$；这不是巧合——多面体的表面作为曲面就是球面，$V-E+F$ 正是 $\\chi(S^2)=2$。\n\n$\\chi$ 为什么与剖分无关？把它改用同调（Betti 数）写出来最清楚：$\\chi=\\sum_n(-1)^n\\operatorname{rank}H_n=\\sum_n(-1)^nb_n$（**Euler–Poincaré 公式**），右端只含各维同调群的自由秩。因此 $\\chi$ 是先天的**拓扑不变量**，更是**同伦不变量**：圆盘与点同伦，$\\chi=1$；实心圆环与圆周同伦，$\\chi=0$；任意两个三角剖分给出的 $\\chi$ 必然相同。注意挠元完全不参与：$\\mathrm{RP}^2$ 的 $H_1=\\mathbb Z_2$ 秩为 0，所以 $\\chi$ 对它「视而不见」。\n\n曲面上的数值表：$\\chi(S^2)=2$，环面 $\\chi(T^2)=0$，$\\chi(\\mathrm{RP}^2)=1$，克莱因瓶 $\\chi=0$，莫比乌斯带 $\\chi=0$。与亏格的关系：闭**可定向**曲面（球面加 $g$ 个柄）满足 $\\chi=2-2g$（球面 $g=0$ 给 2，环面 $g=1$ 给 0，双环面 $g=2$ 给 $-2$，总为偶数）；闭**不可定向**曲面（$k$ 个交叉帽，$\\mathrm{RP}^2$ 是 $k=1$）满足 $\\chi=2-k$（$\\mathrm{RP}^2$ 给 1，克莱因瓶 $k=2$ 给 0，可奇可偶）。要小心：$\\chi$ 单独不能定出曲面——环面与克莱因瓶 $\\chi$ 都是 0，却不同胚，必须补上可定向性（这正是曲面分类定理的判据）。\n\n$\\chi$ 的运算性质同样好用：连通和满足 $\\chi(M\\#N)=\\chi(M)+\\chi(N)-2$（各挖去一个开圆盘，$\\chi$ 各减 1）；乘积满足 $\\chi(X\\times Y)=\\chi(X)\\cdot\\chi(Y)$，于是环面 $T^2=S^1\\times S^1$ 立刻有 $\\chi=0\\cdot0=0$。最漂亮的一条是 **Gauss–Bonnet 定理** $\\int_MK\\,dA=2\\pi\\chi(M)$：左边的曲率积分是分析量、右边是组合量，两者恒等——$\\chi$ 同时站在组合、拓扑与几何三岔路口。",
+    "definitionEn": "The **Euler characteristic** is the friendliest topological invariant. If $\\mathcal K$ has $f_n$ simplices of dimension $n$ ($f_0=V$ vertices, $f_1=E$ edges, $f_2=F$ faces), set $\\chi(\\mathcal K)=\\sum_{n\\ge0}(-1)^nf_n=V-E+F-\\cdots$. For surfaces only three types occur, so $\\chi=V-E+F$. Euler discovered that every convex polyhedron satisfies $V-E+F=2$; this is no accident—the surface of such a polyhedron is a sphere and $V-E+F$ computes $\\chi(S^2)=2$.\n\nWhy is $\\chi$ independent of the triangulation? Rewriting it homologically makes it clear: $\\chi=\\sum_n(-1)^n\\operatorname{rank}H_n=\\sum_n(-1)^nb_n$ (the **Euler–Poincaré formula**), and the right-hand side involves only free ranks. Hence $\\chi$ is a genuine **topological invariant**, and in fact a **homotopy invariant**: the disk is homotopy equivalent to a point with $\\chi=1$, a solid annulus to a circle with $\\chi=0$, and any two triangulations of a space give the same value. Torsion plays no role: $H_1(\\mathrm{RP}^2)=\\mathbb Z_2$ has rank 0, so $\\chi$ cannot see it.\n\nValues for surfaces: $\\chi(S^2)=2$, $\\chi(T^2)=0$, $\\chi(\\mathrm{RP}^2)=1$, $\\chi(\\text{Klein bottle})=0$, $\\chi(\\text{Möbius band})=0$. Relation to genus: a closed **orientable** surface (sphere plus $g$ handles) has $\\chi=2-2g$ (sphere $g=0$ gives 2, torus $g=1$ gives 0, double torus $g=2$ gives $-2$; always even), while a closed **non-orientable** surface ($k$ crosscaps, with $\\mathrm{RP}^2$ the case $k=1$) has $\\chi=2-k$ ($\\mathrm{RP}^2$ gives 1, the Klein bottle $k=2$ gives 0; parity varies). Careful: $\\chi$ alone does not determine a surface—the torus and the Klein bottle both have $\\chi=0$ yet are not homeomorphic, so orientability must be added (this is exactly the criterion in the classification theorem).\n\n$\\chi$ also behaves well under operations: connected sums satisfy $\\chi(M\\#N)=\\chi(M)+\\chi(N)-2$ (two open disks are removed, each lowering $\\chi$ by 1), products satisfy $\\chi(X\\times Y)=\\chi(X)\\cdot\\chi(Y)$, giving $\\chi(T^2)=\\chi(S^1)^2=0$ instantly. Most beautiful is the **Gauss–Bonnet theorem** $\\int_MK\\,dA=2\\pi\\chi(M)$: the curvature integral on the left is analysis, the right-hand side is combinatorics, and they agree—$\\chi$ sits at the crossroads of combinatorics, topology and geometry.",
+    "formulas": [
+      {
+        "latex": "\\chi(\\mathcal K)=\\sum_{n\\ge0}(-1)^nf_n=f_0-f_1+f_2-\\cdots;\\qquad \\chi_{\\text{曲面}}=V-E+F",
+        "note": "定义：各维单形个数带交错符号求和；曲面上就是「顶点 − 棱 + 面」。",
+        "noteEn": "Definition: alternating sum of the numbers of simplices; on a surface it is vertices − edges + faces."
+      },
+      {
+        "latex": "\\chi=\\sum_{n\\ge0}(-1)^n\\operatorname{rank}H_n=\\sum_{n\\ge0}(-1)^nb_n",
+        "note": "Euler–Poincaré 公式：$\\chi$ 只由同调群的自由秩（Betti 数）决定，故与剖分无关、看不见挠元。",
+        "noteEn": "The Euler–Poincaré formula: $\\chi$ depends only on free ranks (Betti numbers), hence is triangulation-independent and blind to torsion."
+      },
+      {
+        "latex": "\\chi(S^2)=2,\\quad \\chi(T^2)=0,\\quad \\chi(\\mathrm{RP}^2)=1,\\quad \\chi(\\text{克莱因瓶})=0,\\quad \\chi(\\text{莫比乌斯带})=0",
+        "note": "曲面标准值；配合可定向性即可定出曲面的同胚类（环面与克莱因瓶同为 0，靠可定向性区分）。",
+        "noteEn": "Standard surface values; together with orientability they pin down the homeomorphism type (torus and Klein bottle share 0 and are told apart by orientability)."
+      },
+      {
+        "latex": "\\chi=2-2g\\ (\\text{闭可定向曲面，亏格 }g);\\qquad \\chi=2-k\\ (\\text{闭不可定向曲面，}k\\text{ 个交叉帽})",
+        "note": "亏格与交叉帽数：$\\mathrm{RP}^2$ 是 $k=1$ 给 $\\chi=1$；球面 $g=0$ 给 $\\chi=2$，逆用可解出 $g=(2-\\chi)/2$。",
+        "noteEn": "Genus versus crosscaps: $\\mathrm{RP}^2$ is $k=1$ giving $\\chi=1$; the sphere is $g=0$ giving $\\chi=2$; conversely $g=(2-\\chi)/2$."
+      },
+      {
+        "latex": "\\chi(M\\#N)=\\chi(M)+\\chi(N)-2,\\qquad \\chi(X\\times Y)=\\chi(X)\\chi(Y),\\qquad \\int_MK\\,dA=2\\pi\\chi(M)",
+        "note": "连通和、乘积与 Gauss–Bonnet：前两条把未知曲面化到已知曲面，第三条把曲率积分与组合量锁在一起。",
+        "noteEn": "Connected sum, products and Gauss–Bonnet: the first two reduce new surfaces to known ones, the third ties curvature integrals to a combinatorial quantity."
+      }
+    ],
+    "properties": [
+      "拓扑（更强：同伦）不变量：由 Euler–Poincaré 公式 $\\chi=\\sum(-1)^nb_n$ 知它与剖分无关，同伦等价的空间 $\\chi$ 相同；反过来 $\\chi$ 相同不代表同胚。",
+      "只看得见自由部分：$H_n$ 的挠元对 $\\chi$ 没有贡献。$\\mathrm{RP}^2$ 的 $H_1=\\mathbb Z_2$ 秩为 0，故 $\\chi(\\mathrm{RP}^2)=1-0+0=1$，与「用 $V-E+F$ 算出的 1」一致。",
+      "连通和与乘积：$\\chi(M\\#N)=\\chi(M)+\\chi(N)-2$，$\\chi(X\\times Y)=\\chi(X)\\chi(Y)$；由此 $\\chi(T^2)=\\chi(S^1)^2=0$、$\\chi(T^2\\#T^2)=-2$。",
+      "与曲面分类配合：闭可定向曲面的 $\\chi=2-2g$ 必为偶数，闭不可定向曲面的 $\\chi=2-k$ 可奇可偶；特别地闭曲面若 $\\chi=2$ 必为球面，若 $\\chi=1$ 必为 $\\mathrm{RP}^2$。",
+      "Gauss–Bonnet：$\\int_MK\\,dA=2\\pi\\chi(M)$。例如半径 $r$ 的球面 $K=1/r^2$、面积 $4\\pi r^2$，故 $\\int K\\,dA=4\\pi=2\\pi\\chi(S^2)$ ✓，说明 $\\chi$ 也是曲率的整体积分的组合化身。"
+    ],
+    "propertiesEn": [
+      "A topological (in fact homotopy) invariant: by the Euler–Poincaré formula $\\chi=\\sum(-1)^nb_n$ it does not depend on the triangulation, and homotopy equivalent spaces share $\\chi$; conversely, equal $\\chi$ does not imply homeomorphic.",
+      "It sees only the free part: torsion in $H_n$ contributes nothing. Since $H_1(\\mathrm{RP}^2)=\\mathbb Z_2$ has rank 0, $\\chi(\\mathrm{RP}^2)=1-0+0=1$, matching $V-E+F=1$.",
+      "Connected sums and products: $\\chi(M\\#N)=\\chi(M)+\\chi(N)-2$ and $\\chi(X\\times Y)=\\chi(X)\\chi(Y)$; hence $\\chi(T^2)=\\chi(S^1)^2=0$ and $\\chi(T^2\\#T^2)=-2$.",
+      "Combined with classification: a closed orientable surface has even $\\chi=2-2g$, a closed non-orientable one has $\\chi=2-k$ of any parity; in particular $\\chi=2$ forces the sphere and $\\chi=1$ forces $\\mathrm{RP}^2$.",
+      "Gauss–Bonnet: $\\int_MK\\,dA=2\\pi\\chi(M)$. For a sphere of radius $r$, $K=1/r^2$ and area $4\\pi r^2$, so $\\int K\\,dA=4\\pi=2\\pi\\chi(S^2)$, showing $\\chi$ is also the combinatorial face of total curvature."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -4.4,
+        4.4
+      ],
+      "yRange": [
+        -3.4,
+        3.6
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              -2.8,
+              -2.0
+            ],
+            [
+              2.8,
+              -2.0
+            ],
+            [
+              0.8,
+              2.4
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.10)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              -2.8,
+              -2.0
+            ],
+            [
+              2.8,
+              -2.0
+            ],
+            [
+              -0.6,
+              -0.4
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.14)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.8,
+              -2.0
+            ],
+            [
+              0.8,
+              2.4
+            ],
+            [
+              -0.6,
+              -0.4
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.14)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.8,
+              2.4
+            ],
+            [
+              -2.8,
+              -2.0
+            ],
+            [
+              -0.6,
+              -0.4
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.14)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            -2.8,
+            -2.0
+          ],
+          "label": "A",
+          "color": "#ff8f5e"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.8,
+            -2.0
+          ],
+          "label": "B",
+          "color": "#ff8f5e"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.8,
+            2.4
+          ],
+          "label": "C",
+          "color": "#ff8f5e"
+        },
+        {
+          "type": "point",
+          "at": [
+            -0.6,
+            -0.4
+          ],
+          "label": "D",
+          "color": "#ff8f5e"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            -2.9
+          ],
+          "text": "V=4, E=6, F=4 → χ = 4 − 6 + 4 = 2",
+          "color": "#b388ff"
+        }
+      ],
+      "title": "四面体表面：4 个顶点、6 条棱、4 个三角形面，χ = 2（球面）"
+    },
+    "examples": [
+      {
+        "problem": "对四面体的表面和立方体的表面分别计算 $\\chi=V-E+F$，并解释为什么结果相同；再用 Gauss–Bonnet 验证球面的结果。",
+        "solution": "四面体表面：$V=4$，$E=6$，$F=4$，$\\chi=4-6+4=2$。立方体表面：$V=8$，$E=12$，$F=6$，$\\chi=8-12+6=2$。两次都得 2 是因为两张表面都同胚于球面 $S^2$，而 $\\chi$ 是拓扑不变量（与具体剖分无关）——这正是欧拉公式 $V-E+F=2$ 对一切凸多面体成立的原因。\nGauss–Bonnet 验证：取半径 $r$ 的球面，$K=1/r^2$，$\\int_{S^2}K\\,dA=\\frac{1}{r^2}\\cdot4\\pi r^2=4\\pi=2\\pi\\cdot2=2\\pi\\chi(S^2)$ ✓。"
+      },
+      {
+        "problem": "某闭曲面的三角剖分有 $f=(f_0,f_1,f_2)=(7,21,14)$。(1) 求 $\\chi$；(2) 若它是可定向曲面，求亏格并说出曲面类型；(3) 若它是不可定向曲面，$k$ 是多少？(4) 再计算 $T^2\\#T^2$ 的 $\\chi$ 与亏格。",
+        "solution": "(1) $\\chi=7-21+14=0$。\n(2) 可定向：$2-2g=0\\Rightarrow g=1$，即环面 $T^2$——(7,21,14) 正是环面著名的 7 顶点最小三角剖分的 $f$ 向量。\n(3) 不可定向：$2-k=0\\Rightarrow k=2$，即克莱因瓶类型。可见**同一个 $f$ 向量（从而同一个 $\\chi$）可以对应两个不同胚的曲面**，只凭 $\\chi$ 无法区分，必须再判断可定向性。\n(4) $\\chi(T^2\\#T^2)=\\chi(T^2)+\\chi(T^2)-2=0+0-2=-2$；可定向曲面 $\\chi=2-2g\\Rightarrow g=(2-(-2))/2=2$，即亏格 2 的双环面。"
+      }
+    ],
+    "expression": {
+      "text": "χ = V − E + F − ⋯ = Σ (−1)ⁿ bₙ     （曲面：χ = V − E + F）",
+      "symbol": "χ",
+      "note": "组合定义与同调定义等价（Euler–Poincaré），同伦不变量；闭可定向曲面 χ = 2 − 2g，不可定向 χ = 2 − k。",
+      "noteEn": "The combinatorial and homological definitions agree (Euler–Poincaré) and give a homotopy invariant; χ = 2 − 2g orientable, χ = 2 − k non-orientable."
+    },
+    "tags": [
+      "欧拉示性数",
+      "Betti 数",
+      "亏格",
+      "Gauss–Bonnet",
+      "同伦不变量"
+    ],
+    "links": [
+      "simplicial-complex",
+      "homology-group",
+      "surface-classification",
+      "gauss-bonnet",
+      "simplicial-homology"
+    ]
+  },
+  {
+    "id": "surface-classification",
+    "title": "曲面的分类",
+    "titleEn": "Classification of Surfaces",
+    "branch": "topology",
+    "level": 5,
+    "summary": "闭曲面的同胚类只有三种：球面、$n$ 个环面的连通和、$m$ 个射影平面的连通和；判定两张闭曲面是否同胚，只需比较可定向性与欧拉示性数。",
+    "summaryEn": "Closed surfaces fall into exactly three homeomorphism types: the sphere, connected sums of $n$ tori, and connected sums of $m$ projective planes; two closed surfaces are homeomorphic iff they share orientability and Euler characteristic.",
+    "definition": "**曲面**是每点局部同胚于平面的空间（二维流形）；**闭曲面**指紧致、连通、无边界。人们早就发现曲面可以按「有几个柄、几个洞」分类，结论干净得惊人：**曲面分类定理**——每个闭曲面同胚于下列三类之一：\n① 球面 $S^2$；\n② $n$ 个环面的**连通和** $T^2\\#T^2\\#\\cdots\\#T^2$（$n\\ge1$）：可定向曲面，**亏格**为 $n$（球面加 $n$ 个「柄」，也叫 $n$ 柄曲面）；\n③ $m$ 个射影平面的连通和 $\\mathrm{RP}^2\\#\\cdots\\#\\mathrm{RP}^2$（$m\\ge1$）：不可定向曲面，$m$ 叫**交叉帽数**。\n三类互不同胚，而且每个闭曲面都落在且只落在一类里。\n\n**连通和** $M\\#N$ 的做法：在 $M$ 与 $N$ 中各挖掉一个开圆盘（各留下一条边界圆），再沿这两条边界圆粘起来。对闭曲面有 $\\chi(M\\#N)=\\chi(M)+\\chi(N)-2$，于是（环面参数）与（交叉帽参数）都能从 $\\chi$ 反解：可定向时 $g=\\dfrac{2-\\chi}{2}$，不可定向时 $k=2-\\chi$。判定定理因此变得极其简单：**两个闭曲面同胚 $\\Longleftrightarrow$ 可定向性相同且 $\\chi$ 相同**。例子：环面与克莱因瓶 $\\chi$ 都是 0，但前者可定向、后者不可定向，所以不同胚；$\\mathrm{RP}^2$ 与球面 $\\chi$ 分别为 1 与 2，也立刻区分开。\n\n**可定向性**指能在曲面上整体一致地选好「正面」，等价地：某个（因而一切）三角剖分上的三角形可以定向，使每条公共边在两侧三角形中方向相反；做不到的曲面叫不可定向，$\\mathrm{RP}^2$、克莱因瓶、莫比乌斯带是典型例子。几何上：可定向曲面用「加柄」描述（球面加 $g$ 个柄，$g=1$ 是环面，$g=2$ 是双环面），不可定向曲面用「交叉帽」描述（$\\mathrm{RP}^2$ 是 $k=1$，克莱因瓶 $k=2$）。还有一条反直觉的恒等式：$T^2\\#\\mathrm{RP}^2\\cong\\mathrm{RP}^2\\#\\mathrm{RP}^2\\#\\mathrm{RP}^2$（左端 $\\chi=0+1-2=-1$ 且不可定向，故 $k=3$）——连通和挤在一起时柄会被「吞掉」，所以它不像数字加法那样满足消去律。\n\n分类定理的证明走「三角剖分 + 组合化简」路线：**Radó 定理**保证每个紧曲面都能三角剖分，于是曲面化为有限复形；再把任意剖分通过一系列贴边、翻边、切开的操作化简成标准形（球面，或 $2n$ 边形的柄形式，或 $m$ 边形的交叉帽形式），标准化后按亏格与交叉帽数互不相同。同调与基本群随之给出：可定向的亏格 $g$ 曲面有 $H_0=\\mathbb Z$、$H_1\\cong\\mathbb Z^{2g}$、$H_2=\\mathbb Z$，而不可定向的 $N_k$ 有 $H_1\\cong\\mathbb Z^{k-1}\\oplus\\mathbb Z_2$——例如 $\\mathrm{RP}^2$（$k=1$）的 $H_1=\\mathbb Z_2$ 正是不可定向性留下的代数痕迹。（带边曲面多一个参数：紧连通带边曲面由可定向性、$\\chi$ 与边界分支数 $b$ 决定。）顺便一提，这种「一个维数一种完整分类」只在二维发生：维数 $\\ge4$ 的流形的同胚问题不可判定（Markov 定理），三维虽可判定但极其复杂。",
+    "definitionEn": "A **surface** is a space locally homeomorphic to the plane (a two-dimensional manifold); a **closed surface** is compact, connected and without boundary. Surfaces were long known to be classified by their number of handles or holes, and the conclusion is strikingly clean: the **classification theorem for surfaces**—every closed surface is homeomorphic to exactly one of:\n(1) the sphere $S^2$;\n(2) a **connected sum** of $n$ tori $T^2\\#\\cdots\\#T^2$ ($n\\ge1$): orientable, of **genus** $n$ (a sphere with $n$ handles);\n(3) a connected sum of $m$ projective planes $\\mathrm{RP}^2\\#\\cdots\\#\\mathrm{RP}^2$ ($m\\ge1$): non-orientable, with $m$ **crosscaps**.\n\nThe **connected sum** $M\\#N$ is formed by removing an open disk from each surface (leaving a boundary circle) and gluing along the two circles. For closed surfaces $\\chi(M\\#N)=\\chi(M)+\\chi(N)-2$, so the invariants can be read back: $g=\\dfrac{2-\\chi}{2}$ in the orientable case and $k=2-\\chi$ in the non-orientable case. Hence the criterion is simply: **two closed surfaces are homeomorphic $\\Longleftrightarrow$ they have the same orientability and the same $\\chi$**. For example the torus and the Klein bottle share $\\chi=0$ but differ in orientability, so they are not homeomorphic; $\\mathrm{RP}^2$ and the sphere are separated by $\\chi=1$ versus $2$.\n\n**Orientability** means one can choose a consistent \"front side\" globally; equivalently, the triangles of some (hence every) triangulation can be oriented so that each shared edge is traversed in opposite directions by the two adjacent triangles. Surfaces where this fails are non-orientable; $\\mathrm{RP}^2$, the Klein bottle and the Möbius band are the standard examples. Geometrically, orientable surfaces are described by adding handles (the sphere plus $g$ handles: $g=1$ is the torus, $g=2$ the double torus), non-orientable ones by crosscaps ($\\mathrm{RP}^2$ is $k=1$, the Klein bottle $k=2$). One counterintuitive identity: $T^2\\#\\mathrm{RP}^2\\cong\\mathrm{RP}^2\\#\\mathrm{RP}^2\\#\\mathrm{RP}^2$ (the left side has $\\chi=0+1-2=-1$ and is non-orientable, so $k=3$)—handles can be swallowed, so connected sum obeys no cancellation law.\n\nThe proof proceeds by \"triangulate, then simplify combinatorially\": **Radó's theorem** provides a triangulation of every compact surface, turning it into a finite complex; then gluing/flipping/splitting moves reduce any triangulation to a standard form (a sphere, a handlebody form on a $2n$-gon, or a crosscap form on an $m$-gon), and the standardized forms are distinguished by genus or crosscap number. Homology and the fundamental group follow: an orientable surface of genus $g$ has $H_0=\\mathbb Z$, $H_1\\cong\\mathbb Z^{2g}$ and $H_2=\\mathbb Z$, while the non-orientable $N_k$ has $H_1\\cong\\mathbb Z^{k-1}\\oplus\\mathbb Z_2$—for $\\mathrm{RP}^2$ ($k=1$) this is $\\mathbb Z_2$, the algebraic trace of non-orientability. (For surfaces with boundary one more parameter is needed: orientability, $\\chi$ and the number $b$ of boundary components determine the type.) Incidentally, such a complete classification exists only in dimension two: for manifolds of dimension $\\ge4$ the homeomorphism problem is undecidable (Markov's theorem), and dimension three, while decidable, is extremely intricate.",
+    "formulas": [
+      {
+        "latex": "M\\cong S^2\\quad\\text{或}\\quad M\\cong\\underbrace{T^2\\#\\cdots\\#T^2}_{n\\ \\text{个}}\\ (n\\ge1)\\quad\\text{或}\\quad M\\cong\\underbrace{\\mathrm{RP}^2\\#\\cdots\\#\\mathrm{RP}^2}_{m\\ \\text{个}}\\ (m\\ge1)",
+        "note": "曲面分类定理：每个闭曲面恰同胚于三类标准形之一（可定向亏格 $n$、不可定向交叉帽数 $m$、球面）。",
+        "noteEn": "The classification theorem: every closed surface is homeomorphic to exactly one of these standard models (orientable genus $n$, non-orientable with $m$ crosscaps, or the sphere)."
+      },
+      {
+        "latex": "M\\cong N\\quad\\Longleftrightarrow\\quad \\bigl(\\text{可定向性相同}\\bigr)\\ \\text{且}\\ \\chi(M)=\\chi(N)",
+        "note": "判定定理：闭曲面只由「可定向性 + 欧拉示性数」两个数据决定，其余（亏格、交叉帽数、基本群）都能算出来。",
+        "noteEn": "The criterion: two closed surfaces are homeomorphic iff orientability and Euler characteristic agree; genus, crosscap number and the fundamental group then follow."
+      },
+      {
+        "latex": "\\chi=2-2g\\ (\\text{可定向，亏格 }g);\\qquad \\chi=2-k\\ (\\text{不可定向，}k\\text{ 个交叉帽})",
+        "note": "两类标准形的参数与 $\\chi$ 一一对应：$g=\\frac{2-\\chi}{2}$，$k=2-\\chi$。",
+        "noteEn": "Parameters of the two standard families correspond bijectively to $\\chi$: $g=\\frac{2-\\chi}{2}$ and $k=2-\\chi$."
+      },
+      {
+        "latex": "\\chi(M\\#N)=\\chi(M)+\\chi(N)-2,\\qquad T^2\\#\\mathrm{RP}^2\\cong\\mathrm{RP}^2\\#\\mathrm{RP}^2\\#\\mathrm{RP}^2",
+        "note": "连通和的 $\\chi$ 公式，以及「柄会被吞掉」的恒等式（左端 $\\chi=-1$、不可定向，故 $k=3$），说明连通和不满足消去律。",
+        "noteEn": "The $\\chi$ formula for connected sums, plus the identity showing handles can be swallowed (left side has $\\chi=-1$ and is non-orientable, so $k=3$): connected sum admits no cancellation."
+      },
+      {
+        "latex": "\\bigl(H_0,H_1,H_2\\bigr)=\\bigl(\\mathbb Z,\\ \\mathbb Z^{2g},\\ \\mathbb Z\\bigr)\\ \\text{(可定向亏格 } g);\\qquad H_1(N_k)\\cong\\mathbb Z^{k-1}\\oplus\\mathbb Z_2",
+        "note": "标准形的同调：可定向曲面的 $n$ 维洞由 $2g$ 条环生成；不可定向曲面的 $H_1$ 带 $\\mathbb Z_2$ 挠元（$\\mathrm{RP}^2$ 的 $\\mathbb Z_2$ 是 $k=1$ 的特例）。",
+        "noteEn": "Homology of the standard models: $2g$ independent loops for the orientable surface, while non-orientable surfaces carry $\\mathbb Z_2$ torsion in $H_1$ (the $\\mathbb Z_2$ of $\\mathrm{RP}^2$ is the case $k=1$)."
+      }
+    ],
+    "properties": [
+      "判定极简：闭曲面同胚 $\\Longleftrightarrow$ 可定向性与 $\\chi$ 都相同。推论：$\\chi=2$ 只能是球面；$\\chi=1$ 只能是 $\\mathrm{RP}^2$；$\\chi=0$ 且可定向是环面、且不可定向是克莱因瓶。",
+      "连通和的性质：两个可定向曲面之连通和仍可定向，亏格相加 $g(M\\#N)=g(M)+g(N)$；只要有一个不可定向，结果就不可定向，但交叉帽数**不能简单相加**——真正可加的量是 $2g+k$（不可定向曲面取 $g=0$，可定向曲面取 $k=0$）：$T^2\\#\\mathrm{RP}^2$ 的交叉帽数是 $2\\cdot1+1=3$，不是 1。此外 $M\\#S^2\\cong M$，连通和结合，但**不满足消去律**（$T^2\\#\\mathrm{RP}^2\\cong\\mathrm{RP}^2\\#\\mathrm{RP}^2\\#\\mathrm{RP}^2$）。",
+      "基本群与同调：可定向亏格 $g\\ge1$ 曲面 $\\pi_1=\\langle a_1,b_1,\\dots,a_g,b_g\\mid[a_1,b_1]\\cdots[a_g,b_g]=1\\rangle$，故 $H_1=\\mathbb Z^{2g}$；不可定向 $N_k$ 有 $\\pi_1=\\langle a_1,\\dots,a_k\\mid a_1^2\\cdots a_k^2=1\\rangle$，阿贝尔化得 $H_1=\\mathbb Z^{k-1}\\oplus\\mathbb Z_2$。",
+      "可剖分性（Radó 定理）：每个紧曲面（可带边）都能三角剖分，因此分类问题可以完全用有限组合与线性代数处理；带边情形要把「可定向性、$\\chi$、边界分支数 $b$」三者一起看。",
+      "二维的独特性：只有曲面的同胚分类如此干净；维数 $\\ge4$ 的流形同胚问题不可判定（Markov 定理），$\\mathrm{RP}^2$ 与环面这种「数一数」的判定没有高维类比。"
+    ],
+    "propertiesEn": [
+      "Extremely simple criterion: two closed surfaces are homeomorphic $\\Longleftrightarrow$ orientability and $\\chi$ agree. Consequences: $\\chi=2$ forces the sphere, $\\chi=1$ forces $\\mathrm{RP}^2$, and $\\chi=0$ means torus when orientable and Klein bottle when not.",
+      "Connected sums: two orientable surfaces yield an orientable one with additive genus, $g(M\\#N)=g(M)+g(N)$; a single non-orientable summand makes the result non-orientable, but crosscap numbers do **not** simply add—the additive quantity is $2g+k$ (taking $g=0$ for non-orientable and $k=0$ for orientable surfaces): $T^2\\#\\mathrm{RP}^2$ has crosscap number $2\\cdot1+1=3$, not 1. Moreover $M\\#S^2\\cong M$, the operation is associative, but it admits **no cancellation** ($T^2\\#\\mathrm{RP}^2\\cong\\mathrm{RP}^2\\#\\mathrm{RP}^2\\#\\mathrm{RP}^2$).",
+      "Fundamental group and homology: the orientable surface of genus $g\\ge1$ has $\\pi_1=\\langle a_1,b_1,\\dots,a_g,b_g\\mid[a_1,b_1]\\cdots[a_g,b_g]=1\\rangle$, hence $H_1=\\mathbb Z^{2g}$; the non-orientable $N_k$ has $\\pi_1=\\langle a_1,\\dots,a_k\\mid a_1^2\\cdots a_k^2=1\\rangle$, whose abelianization is $H_1=\\mathbb Z^{k-1}\\oplus\\mathbb Z_2$.",
+      "Triangulability (Radó's theorem): every compact surface, boundary allowed, can be triangulated, so classification becomes finite combinatorics and linear algebra; in the boundary case the triple (orientability, $\\chi$, number of boundary components $b$) determines the type.",
+      "Two dimensions are special: only surfaces admit such a clean classification. For manifolds of dimension $\\ge4$ the homeomorphism problem is undecidable (Markov's theorem), so the counting criterion has no higher-dimensional analogue."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -5.4,
+        5.4
+      ],
+      "yRange": [
+        -2.9,
+        2.9
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": -3,
+          "cy": 0.3,
+          "r": 1.6,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.10)"
+        },
+        {
+          "type": "circle",
+          "cx": 3,
+          "cy": 0.3,
+          "r": 1.6,
+          "color": "#ff6b9d",
+          "fill": "rgba(255,107,157,0.10)"
+        },
+        {
+          "type": "circle",
+          "cx": 3,
+          "cy": 0.3,
+          "r": 0.55,
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            -3,
+            0.3
+          ],
+          "text": "S²",
+          "color": "#4cc9f0",
+          "size": 16
+        },
+        {
+          "type": "label",
+          "at": [
+            3,
+            0.3
+          ],
+          "text": "T²",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.05,
+            0.3
+          ],
+          "text": "#",
+          "color": "#ffd166",
+          "size": 20
+        },
+        {
+          "type": "label",
+          "at": [
+            -3,
+            -1.95
+          ],
+          "text": "球面：可定向，g = 0，χ = 2",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            3,
+            -1.95
+          ],
+          "text": "环面：可定向，g = 1，χ = 0",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            -2.55
+          ],
+          "text": "连通和让亏格相加，球面是「零元」",
+          "color": "#b388ff"
+        }
+      ],
+      "title": "分类定理的两类标准形：球面 S² 与环面 T²（均可定向）"
+    },
+    "examples": [
+      {
+        "problem": "判断 $T^2\\#\\mathrm{RP}^2$ 与 $T^2\\#T^2$ 的类型、可定向性与 $\\chi$，并说明它们是否同胚；再说明克莱因瓶是 $\\mathrm{RP}^2\\#\\mathrm{RP}^2$。",
+        "solution": "$T^2\\#\\mathrm{RP}^2$：$\\chi=0+1-2=-1$；因含不可定向的因子 $\\mathrm{RP}^2$，结果不可定向；由 $\\chi=2-k$ 得 $k=3$，即 $T^2\\#\\mathrm{RP}^2\\cong\\mathrm{RP}^2\\#\\mathrm{RP}^2\\#\\mathrm{RP}^2$。\n$T^2\\#T^2$：$\\chi=0+0-2=-2$；可定向（两个可定向曲面），由 $2-2g=-2$ 得 $g=2$，即双环面。\n两者 $\\chi$ 不同（$-1$ 与 $-2$），且可定向性也不同，故**不同胚**。\n克莱因瓶：$\\chi=0$ 且不可定向，于是 $2-k=0\\Rightarrow k=2$，即 $\\mathrm{RP}^2\\#\\mathrm{RP}^2$ ✓（与「克莱因瓶是两张 $\\mathrm{RP}^2$ 的连通和」这一标准事实一致）。"
+      },
+      {
+        "problem": "设闭曲面 $M$ 有一份三角剖分 $f=(6,15,10)$。求 $\\chi$，并尽可能判断 $M$ 是什么曲面。",
+        "solution": "$\\chi=6-15+10=1$。\n若 $M$ 可定向，则 $\\chi=2-2g$ 必须是偶数，但 $1$ 是奇数——**无解**，故 $M$ 不可定向。于是 $2-k=1\\Rightarrow k=1$，即 $M\\cong\\mathrm{RP}^2$。\n（补充：6 顶点、15 棱、10 面的三角剖分正是 $\\mathrm{RP}^2$ 的最小三角剖分——把二十面体的边界球面按对径点粘合，$12\\to6$ 个顶点、$30\\to15$ 条棱、$20\\to10$ 个面，就是它的来源。）"
+      }
+    ],
+    "expression": {
+      "text": "闭曲面 M ≅ S²，或 n T²（n≥1，可定向，亏格 n），或 m RP²（m≥1，不可定向）",
+      "symbol": "M ≅ S² / n·T² / m·RP²",
+      "note": "同胚判据：可定向性相同且 χ 相同；等价地 χ = 2 − 2g 或 χ = 2 − k。",
+      "noteEn": "Homeomorphism criterion: same orientability and same χ; equivalently χ = 2 − 2g or χ = 2 − k."
+    },
+    "tags": [
+      "曲面分类",
+      "连通和",
+      "可定向性",
+      "亏格",
+      "交叉帽"
+    ],
+    "links": [
+      "euler-characteristic",
+      "homology-group",
+      "continuity-homeomorphism",
+      "fundamental-group",
+      "gauss-bonnet"
+    ]
+  },
+  {
+    "id": "de-rham-cohomology",
+    "title": "德拉姆上同调",
+    "titleEn": "de Rham Cohomology",
+    "branch": "topology",
+    "level": 5,
+    "summary": "用微分形式定义的上同调 $H^n_{dR}(M)=\\{\\text{闭 }n\\text{-形式}\\}/\\{\\text{恰当 }n\\text{-形式}\\}$：由 $d^2=0$ 保证定义合法，德拉姆定理又断言它与奇异上同调 $H^n(M;\\mathbb R)$ 同构——拓扑量可以用分析手段算出来。",
+    "summaryEn": "Cohomology defined by differential forms, $H^n_{dR}(M)=\\{\\text{closed }n\\text{-forms}\\}/\\{\\text{exact }n\\text{-forms}\\}$: valid because $d^2=0$, and by de Rham's theorem isomorphic to singular cohomology $H^n(M;\\mathbb R)$ — analysis computing topology.",
+    "definition": "设 $M$ 是光滑流形，$\\Omega^n(M)$ 是 $n$-形式空间，外微分 $d:\\Omega^n(M)\\to\\Omega^{n+1}(M)$ 满足 $d^2=0$。若 $d\\omega=0$，称 $\\omega$ 为**闭形式**；若 $\\omega=d\\eta$（$\\eta\\in\\Omega^{n-1}$），称 $\\omega$ 为**恰当形式**。由 $d(d\\eta)=0$ 知**恰当必闭**，于是恰当 $n$-形式构成闭 $n$-形式的一个子空间，可以取商：$H^n_{dR}(M)=\\dfrac{Z^n}{B^n}=\\dfrac{\\{d\\omega=0\\}}{\\{\\omega=d\\eta\\}}$，称为 $M$ 的 **de Rham 上同调空间**（其实是实向量空间）。它的元素是闭形式的等价类 $[\\omega]$，$[\\omega]=[\\omega']$ 当且仅当 $\\omega-\\omega'=d\\eta$ 恰当。\n\n定义背后的想法非常朴素：**「处处局部都有原函数」的整体障碍就是拓扑**。在 $\\mathbb R^n$ 上，庞加莱引理说每个闭形式都恰当（$H^k_{dR}(\\mathbb R^n)=0$，$k>0$；任何可缩区域都如此），因为那里没有洞；洞的存在才让某些闭形式「闭而不恰当」。经典例子是圆周上的 $d\\theta$（在局部角坐标下 $d\\theta=\\frac{-y\\,dx+x\\,dy}{x^2+y^2}$）：它有 $d(d\\theta)=0$，但 $\\oint_{S^1}d\\theta=2\\pi\\neq0$，而恰当形式沿闭曲线的积分必为零，所以它不是任何整体单值函数的微分——原因是角 $\\theta$ 本身不是一个整体单值光滑函数（绕一圈要加 $2\\pi$），这正是「闭而不恰当」的几何原因。\n\n**德拉姆定理**（de Rham, 1931）：$H^n_{dR}(M)\\cong H^n(M;\\mathbb R)$，右端是**奇异上同调**（实系数），同构由积分给出：$[\\omega]\\mapsto\\bigl(\\sigma\\mapsto\\int_\\sigma\\omega\\bigr)$，把闭 $n$-形式变成从 $n$-链到实数的线性函数，恰当的对应零泛函。要看清方向：定理说的是与**上同调** $H^n$ 同构，不是与同调 $H_n$ 相等；把 $H^n$ 与 $H_n$ 联系起来的，是本节最后提到的系数取 $\\mathbb R$ 时的线性对偶。这条定理把「解方程 $d\\omega=0$ 与判断能否积出原函数」（分析）和「奇异上同调」（拓扑）完全等同，是微分几何与代数拓扑之间最重要的桥梁：拓扑不变量可以用解微分方程的方式算出来。\n\n记 $b_n=\\dim_{\\mathbb R}H^n_{dR}(M)$，称为**第 $n$ 个 Betti 数**。基本事实与例子：$H^0_{dR}(M)$ 由局部常值函数组成，故 $b_0$ 等于连通分支个数；可缩空间（$\\mathbb R^n$、星形区域）满足 $H^0=\\mathbb R$、$H^{k>0}=0$；$H^1_{dR}(S^1)\\cong\\mathbb R$，由 $[d\\theta]$ 生成；$S^n$ 上 $H^0=H^n=\\mathbb R$、其余为 0；环面 $T^2$ 上 $H^0=\\mathbb R,H^1=\\mathbb R^2,H^2=\\mathbb R$（由 $dx,dy$ 与 $dx\\wedge dy$ 代表）。欧拉示性数也随之上同调化：$\\chi(M)=\\sum_n(-1)^nb_n$，这是欧拉示性数的**同调表达式**；对亏格 $g$ 的闭可定向曲面，$b_0=b_2=1$、$b_1=2g$，于是 $\\chi=1-2g+1=2-2g$ 立刻得到。\n\n最后两点技术性但极重要。① **与同调的对偶**：在实系数下积分配对 $H^n_{dR}(M)\\times H_n(M;\\mathbb R)\\to\\mathbb R$ 非退化，故 $H^n_{dR}(M)\\cong\\operatorname{Hom}\\bigl(H_n(M;\\mathbb R),\\mathbb R\\bigr)=H_n(M;\\mathbb R)^*$，于是 $\\dim H^n_{dR}=b_n=\\operatorname{rank}H_n$：**de Rham 上同调只看得到同调群的自由部分，看不见挠元**——$H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ 但 $H^1_{dR}(\\mathrm{RP}^2)=0$（能把挠元杀掉的唯一实值线性泛函是零泛函）。② **环结构**：外积 $\\wedge$ 使 $H^*_{dR}(M)=\\bigoplus_nH^n_{dR}(M)$ 成为分次交换环，$[\\omega]\\wedge[\\eta]=[\\omega\\wedge\\eta]$ 定义良好（因为 $d$ 满足分次莱布尼茨律，闭形式的外积仍闭，恰当形式被吸收）。这比同调群携带更多信息：$T^2$ 的 $H^1=\\mathbb R^2$ 配上 $\\wedge:H^1\\times H^1\\to H^2$ 非零，$H^*(T^2)\\cong\\mathbb R[x,y]/(x^2,y^2)$，两个一维洞的乘积给出二维基本类——这是同调群本身看不到的结构。",
+    "definitionEn": "Let $M$ be a smooth manifold, $\\Omega^n(M)$ its space of $n$-forms and $d:\\Omega^n(M)\\to\\Omega^{n+1}(M)$ the exterior derivative with $d^2=0$. A form with $d\\omega=0$ is **closed**; one of the shape $\\omega=d\\eta$ is **exact**. Since $d(d\\eta)=0$, **exact implies closed**, so exact $n$-forms form a subspace of closed $n$-forms and we may take the quotient: $H^n_{dR}(M)=\\dfrac{Z^n}{B^n}=\\dfrac{\\{d\\omega=0\\}}{\\{\\omega=d\\eta\\}}$, the **de Rham cohomology** of $M$ (in fact a real vector space). Its elements are classes $[\\omega]$ of closed forms, with $[\\omega]=[\\omega']$ iff $\\omega-\\omega'=d\\eta$ is exact.\n\nThe idea is plain: **the obstruction to having a global primitive while having one locally is topology**. On $\\mathbb R^n$ the Poincaré lemma says every closed form is exact ($H^k_{dR}(\\mathbb R^n)=0$ for $k>0$, and more generally on any contractible domain) because there are no holes; holes are what make closed forms fail to be exact. The classic example is $d\\theta$ on the circle (locally $d\\theta=\\frac{-y\\,dx+x\\,dy}{x^2+y^2}$): it satisfies $d(d\\theta)=0$, yet $\\oint_{S^1}d\\theta=2\\pi\\neq0$, while an exact form always integrates to zero over a closed curve; so it is not the differential of any globally single-valued function—the angle $\\theta$ itself is not globally defined (going around adds $2\\pi$), which is exactly why the form is closed but not exact.\n\n**de Rham's theorem** (1931): $H^n_{dR}(M)\\cong H^n(M;\\mathbb R)$, the right side being **singular cohomology** with real coefficients; the isomorphism is given by integration, $[\\omega]\\mapsto\\bigl(\\sigma\\mapsto\\int_\\sigma\\omega\\bigr)$, turning a closed $n$-form into a linear functional on $n$-chains, with exact forms mapping to zero. Note the direction: the theorem compares de Rham cohomology with the **cohomology** $H^n$, not with homology $H_n$; homology and cohomology are related by the linear duality mentioned below. The theorem identifies analysis (solving $d\\omega=0$, deciding whether a primitive exists) with topology, making it the key bridge between differential geometry and algebraic topology: topological invariants can be computed by solving differential equations.\n\nWrite $b_n=\\dim_{\\mathbb R}H^n_{dR}(M)$, the **$n$-th Betti number**. Basic facts and examples: $H^0_{dR}(M)$ consists of locally constant functions, so $b_0$ is the number of connected components; for contractible spaces ($\\mathbb R^n$, star-shaped domains) $H^0=\\mathbb R$ and $H^{k>0}=0$; $H^1_{dR}(S^1)\\cong\\mathbb R$ generated by $[d\\theta]$; on $S^n$, $H^0=H^n=\\mathbb R$ and all others vanish; on the torus $T^2$, $H^0=\\mathbb R$, $H^1=\\mathbb R^2$, $H^2=\\mathbb R$ (represented by $dx,dy$ and $dx\\wedge dy$). The Euler characteristic becomes cohomological too: $\\chi(M)=\\sum_n(-1)^nb_n$; for a closed orientable surface of genus $g$, $b_0=b_2=1$ and $b_1=2g$, so $\\chi=1-2g+1=2-2g$ follows at once.\n\nTwo final, technical but crucial points. (1) **Duality with homology**: over $\\mathbb R$ the integration pairing $H^n_{dR}(M)\\times H_n(M;\\mathbb R)\\to\\mathbb R$ is non-degenerate, so $H^n_{dR}(M)\\cong\\operatorname{Hom}\\bigl(H_n(M;\\mathbb R),\\mathbb R\\bigr)=H_n(M;\\mathbb R)^*$ and $\\dim H^n_{dR}=b_n=\\operatorname{rank}H_n$: de Rham cohomology sees only the free part of homology, never torsion—$H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ while $H^1_{dR}(\\mathrm{RP}^2)=0$ (the only real linear functional killing torsion is zero). (2) **Ring structure**: the wedge product makes $H^*_{dR}(M)=\\bigoplus_nH^n_{dR}(M)$ a graded commutative ring with $[\\omega]\\wedge[\\eta]=[\\omega\\wedge\\eta]$, well defined because $d$ is a graded derivation. This carries more information than homology: on $T^2$, $H^1=\\mathbb R^2$ together with the nonzero product $\\wedge:H^1\\times H^1\\to H^2$ gives $H^*(T^2)\\cong\\mathbb R[x,y]/(x^2,y^2)$—the product of the two independent loops produces the fundamental class, something homology groups alone do not detect.",
+    "formulas": [
+      {
+        "latex": "Z^n=\\bigl\\{\\omega\\in\\Omega^n(M):d\\omega=0\\bigr\\},\\qquad B^n=\\bigl\\{d\\eta:\\eta\\in\\Omega^{n-1}(M)\\bigr\\},\\qquad H^n_{dR}(M)=\\frac{Z^n}{B^n}",
+        "note": "定义：闭形式除以恰当形式。由 $d^2=0$ 有 $B^n\\subseteq Z^n$，商才有意义；顺序不能颠倒。",
+        "noteEn": "Definition: closed forms modulo exact ones. Since $d^2=0$ we have $B^n\\subseteq Z^n$, which is what makes the quotient meaningful; the order cannot be reversed."
+      },
+      {
+        "latex": "H^n_{dR}(M)\\;\\cong\\;H^n(M;\\mathbb R),\\qquad [\\omega]\\ \\longmapsto\\ \\Bigl(\\sigma\\mapsto\\int_\\sigma\\omega\\Bigr)",
+        "note": "德拉姆定理：分析定义的 $H^n_{dR}$ 与拓扑定义的奇异上同调同构，同构由积分给出（注意是上同调 $H^n$，不是同调 $H_n$）。",
+        "noteEn": "de Rham's theorem: the analytically defined $H^n_{dR}$ is isomorphic to singular cohomology, via integration (note: cohomology $H^n$, not homology $H_n$)."
+      },
+      {
+        "latex": "\\omega=d\\theta\\ \\text{ 在 }S^1\\text{ 上}:\\quad d\\omega=0,\\quad \\oint_{S^1}\\omega=2\\pi\\neq0\\ \\Longrightarrow\\ \\omega\\ \\text{不恰当}",
+        "note": "闭而不恰当的经典例子：$H^1_{dR}(S^1)\\cong\\mathbb R$ 由 $[d\\theta]$ 生成；关键在 $\\theta$ 不是整体单值函数。",
+        "noteEn": "The classical closed but non-exact example: $H^1_{dR}(S^1)\\cong\\mathbb R$ is generated by $[d\\theta]$; the point is that $\\theta$ is not a globally single-valued function."
+      },
+      {
+        "latex": "b_n=\\dim_{\\mathbb R}H^n_{dR}(M),\\qquad \\chi(M)=\\sum_{n\\ge0}(-1)^nb_n",
+        "note": "Betti 数与欧拉示性数的同调表达式；亏格 $g$ 的闭可定向曲面 $b_0=b_2=1$、$b_1=2g$，故 $\\chi=2-2g$。",
+        "noteEn": "Betti numbers and the homological expression for the Euler characteristic; a closed orientable surface of genus $g$ has $b_0=b_2=1$, $b_1=2g$, hence $\\chi=2-2g$."
+      },
+      {
+        "latex": "H^n_{dR}(M)\\cong\\operatorname{Hom}\\bigl(H_n(M;\\mathbb R),\\mathbb R\\bigr)=H_n(M;\\mathbb R)^*,\\qquad \\dim H^n_{dR}=b_n=\\operatorname{rank}H_n",
+        "note": "系数取 $\\mathbb R$ 时上同调与同调互为线性对偶：只看到自由部分（$\\mathrm{RP}^2$ 的 $\\mathbb Z_2$ 在 $H^1_{dR}$ 中不可见）。",
+        "noteEn": "Over $\\mathbb R$, cohomology is the linear dual of homology, so only the free part is visible (the $\\mathbb Z_2$ of $\\mathrm{RP}^2$ is invisible in $H^1_{dR}$)."
+      }
+    ],
+    "properties": [
+      "定义合法性来自 $d^2=0$：它保证每个恰当形式都是闭的，因此 $B^n\\subseteq Z^n$，商 $Z^n/B^n$ 才有意义；$d$ 无需度规，只需光滑结构。",
+      "德拉姆定理 $H^n_{dR}(M)\\cong H^n(M;\\mathbb R)$（奇异上同调），同构由积分给出。因此 de Rham 上同调是光滑流形的**同伦不变量**（可缩流形的正次数上同调全为零）。",
+      "与同调的关系（实系数对偶）：$H^n_{dR}\\cong\\operatorname{Hom}(H_n;\\mathbb R)$，故 $\\dim H^n_{dR}=b_n=\\operatorname{rank}H_n$，**挠元不可见**（$H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ 但 $H^1_{dR}(\\mathrm{RP}^2)=0$）；紧致**无边界**（闭）的定向 $n$-流形有庞加莱对偶 $H^k_{dR}\\cong\\bigl(H^{n-k}_{dR}\\bigr)^*$，故 $b_k=b_{n-k}$。",
+      "函子性与积分：光滑映射 $f:M\\to N$ 诱导拉回 $f^*:H^k_{dR}(N)\\to H^k_{dR}(M)$（方向反转，保持 $\\wedge$ 与复合），并与积分相容 $\\int_\\sigma f^*\\omega=\\int_{f_*\\sigma}\\omega$；由此 $d$ 与 $\\int$ 使得广义斯托克斯定理 $\\int_Md\\omega=\\int_{\\partial M}\\omega$ 成为上同调层面的基本工具。",
+      "环结构：$\\wedge$ 使 $H^*_{dR}(M)$ 成为分次交换环（$\\alpha\\wedge\\beta=(-1)^{|\\alpha||\\beta|}\\beta\\wedge\\alpha$），比同调群多一层信息；$H^*(T^2)\\cong\\mathbb R[x,y]/(x^2,y^2)$ 中 $x\\wedge y\\neq0$，两个一维洞相乘给出二维基本类。"
+    ],
+    "propertiesEn": [
+      "The definition is legitimate thanks to $d^2=0$: every exact form is closed, so $B^n\\subseteq Z^n$ and the quotient $Z^n/B^n$ makes sense; $d$ requires no metric, only a smooth structure.",
+      "de Rham's theorem, $H^n_{dR}(M)\\cong H^n(M;\\mathbb R)$ (singular cohomology), with the isomorphism given by integration. Hence de Rham cohomology is a **homotopy invariant** of smooth manifolds (all positive-degree cohomology of a contractible manifold vanishes).",
+      "Relation to homology (real duality): $H^n_{dR}\\cong\\operatorname{Hom}(H_n;\\mathbb R)$, hence $\\dim H^n_{dR}=b_n=\\operatorname{rank}H_n$ and **torsion is invisible** ($H_1(\\mathrm{RP}^2;\\mathbb Z)=\\mathbb Z_2$ but $H^1_{dR}(\\mathrm{RP}^2)=0$); for a closed orientable $n$-manifold Poincaré duality gives $H^k_{dR}\\cong\\bigl(H^{n-k}_{dR}\\bigr)^*$, so $b_k=b_{n-k}$.",
+      "Functoriality and integration: a smooth map $f:M\\to N$ induces the pullback $f^*:H^k_{dR}(N)\\to H^k_{dR}(M)$ (reversing direction, preserving $\\wedge$ and compositions) and $\\int_\\sigma f^*\\omega=\\int_{f_*\\sigma}\\omega$; together with $d$ this turns the generalized Stokes theorem $\\int_Md\\omega=\\int_{\\partial M}\\omega$ into a basic cohomological tool.",
+      "Ring structure: $\\wedge$ makes $H^*_{dR}(M)$ a graded commutative ring ($\\alpha\\wedge\\beta=(-1)^{|\\alpha||\\beta|}\\beta\\wedge\\alpha$), carrying information beyond homology; $H^*(T^2)\\cong\\mathbb R[x,y]/(x^2,y^2)$ with $x\\wedge y\\neq0$, the product of two one-dimensional holes giving the fundamental class."
+    ],
+    "examples": [
+      {
+        "problem": "设 $S^1=\\mathbb R/2\\pi\\mathbb Z$，形式地写出圆上的 1-形式。证明 $H^1_{dR}(S^1)\\cong\\mathbb R$，并说明 $d\\theta$ 为什么是闭而不恰当的生成元。",
+        "solution": "用角坐标，圆上任意 1-形式可写成 $\\omega=f(\\theta)\\,d\\theta$，其中 $f$ 以 $2\\pi$ 为周期（否则在圆上不定义）。\n（1）**闭是自动的**：圆上 $\\Omega^2=0$，故 $d\\omega=f'(\\theta)d\\theta\\wedge d\\theta=0$，即 $Z^1=\\Omega^1(S^1)$。\n（2）**恰当 ⇔ 总积分为零**：若 $\\omega=dF=F'(\\theta)d\\theta$，其中 $F$ 必须是圆上的周期函数，则 $\\oint_{S^1}\\omega=\\int_0^{2\\pi}F'(\\theta)d\\theta=F(2\\pi)-F(0)=0$（微积分基本定理），所以恰当形式的积分必为 0。反之若 $\\int_0^{2\\pi}f(\\theta)d\\theta=0$，令 $F(\\theta)=\\int_0^{\\theta}f$，则 $F(2\\pi)=F(0)$，$F$ 可视为圆上的光滑函数，且 $dF=f\\,d\\theta=\\omega$，故 $\\omega$ 恰当。\n（3）**同构**：$\\omega\\mapsto\\oint_{S^1}\\omega=\\int_0^{2\\pi}f(\\theta)d\\theta$ 是满射（取 $f\\equiv c$ 得任意 $2\\pi c$），核恰为恰当形式，故 $H^1_{dR}(S^1)=\\Omega^1/\\{dF\\}\\cong\\mathbb R$，由 $[d\\theta]$（对应 $2\\pi\\neq0$）生成。特别地 $d\\theta$ 满足 $d(d\\theta)=0$ 却积分为 $2\\pi\\neq0$，因此**闭而不恰当**——根源是角 $\\theta$ 不是整体单值函数。"
+      },
+      {
+        "problem": "用 de Rham 上同调计算环面 $T^2$ 与实射影平面 $\\mathrm{RP}^2$ 的 Betti 数与欧拉示性数，并解释 $\\mathrm{RP}^2$ 的挠元为什么在 de Rham 理论中完全消失。",
+        "solution": "环面 $T^2=S^1\\times S^1$：取两个角坐标 $x,y$，则 $dx,dy$ 都是闭的（$d(dx)=0$）且不恰当（沿对应的圈积分 $2\\pi\\neq0$），$dx\\wedge dy$ 闭但不恰当（$\\iint_{T^2}dx\\wedge dy=(2\\pi)^2\\neq0$）。于是 $b_0=1$（连通）、$b_1=2$（基 $[dx],[dy]$）、$b_2=1$（基 $[dx\\wedge dy]$），更高为 0，故 $\\chi=1-2+1=0$，与 $\\chi(T^2)=2-2g$（$g=1$）一致 ✓。\n$\\mathrm{RP}^2$：$H^0_{dR}=\\mathbb R$（连通）；$H^1_{dR}=0$，因为 $H^1_{dR}\\cong\\operatorname{Hom}(H_1(\\mathrm{RP}^2;\\mathbb Z),\\mathbb R)=\\operatorname{Hom}(\\mathbb Z_2,\\mathbb R)=0$（$\\mathbb Z_2$ 中非零元素满足 $2x=0$，而 $\\mathbb R$ 的加法群没有 2 阶元素，故任何加法同态都把 $x$ 送到 0）；$H^2_{dR}=0$（$\\mathrm{RP}^2$ 不可定向、二维上没有非零闭 2-形式——紧不可定向曲面 $H^2_{dR}=0$）。于是 $b_0=1,b_1=0,b_2=0$，$\\chi=1-0+0=1=\\chi(\\mathrm{RP}^2)$ ✓。\n结论：de Rham 上同调只「看得见」同调群的自由部分（$H^1_{dR}\\cong H_1\\otimes\\mathbb R$ 的对偶），$\\mathbb Z_2$ 这类挠元被实数泛函一律抹平，所以完全消失。"
+      }
+    ],
+    "expression": {
+      "text": "Hⁿ_dR(M) = {闭 n-形式} / {恰当 n-形式} ≅ Hⁿ(M; ℝ)",
+      "symbol": "Hⁿ_dR(M)",
+      "note": "德拉姆定理：分析定义的上同调与奇异上同调同构（同构由积分给出）；维数即 Betti 数 bₙ。",
+      "noteEn": "de Rham's theorem: the analytically defined cohomology is isomorphic to singular cohomology via integration; its dimension is the Betti number bₙ."
+    },
+    "tags": [
+      "德拉姆上同调",
+      "闭形式",
+      "恰当形式",
+      "Betti 数",
+      "微分形式"
+    ],
+    "links": [
+      "exterior-derivative",
+      "differential-form",
+      "smooth-manifold",
+      "generalized-stokes",
+      "homology-group"
+    ]
+  }
+]

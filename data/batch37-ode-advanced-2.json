@@ -1,0 +1,426 @@
+[
+  {
+    "id": "lyapunov-second-method",
+    "title": "李雅普诺夫第二方法与李雅普诺夫函数",
+    "titleEn": "Lyapunov's Second Method and Lyapunov Functions",
+    "branch": "ode",
+    "level": 5,
+    "summary": "不求解方程，只找一个正定函数 V 并考察它沿轨线的导数 V̇ = ∇V·f 的符号，就能判定平衡点的稳定、渐近稳定与不稳定。",
+    "summaryEn": "Without solving the equation, find a positive definite function V and read the sign of its orbital derivative V̇ = ∇V·f to decide stability, asymptotic stability or instability of an equilibrium.",
+    "definition": "考虑自治系统 $x' = f(x)$，其中 $f$ 在原点附近局部李普希茨（保证解的存在唯一性），$x = 0$ 是平衡点，即 $f(0) = 0$；一般的平衡点可以通过平移坐标移到原点。李雅普诺夫第二方法（又称直接法）不去解方程，而是寻找一个「广义能量」函数 $V(x)$，用它的正定性以及它沿轨线的导数符号来判断稳定性。称 $V$ 在原点的一个邻域内**正定**，是指 $V$ 连续可微、$V(0) = 0$，且当 $0 < \\|x\\| < r$ 时 $V(x) > 0$；负定、半负定等说法与此类推。\n\n沿轨线的导数（轨道导数）由链式法则给出：\n\n$$\\dot V(x) = \\nabla V(x) \\cdot f(x) = \\frac{\\partial V}{\\partial x_1}f_1(x) + \\cdots + \\frac{\\partial V}{\\partial x_n}f_n(x).$$\n\n它只用到 $V$ 的梯度与方程右端 $f$ 本身，逐点代入就能算出，完全不需要解出 $x(t)$——这正是直接法最实用的地方。\n\n核心判据（三个结论与 $\\dot V$ 的符号严格对应）：若 $V$ 正定且 $\\dot V \\le 0$（**半负定**），则原点**稳定**；若除原点外 $\\dot V < 0$（**负定**），则原点**渐近稳定**；若 $V$ 正定而 $\\dot V > 0$（**正定**），则原点**不稳定**。直观图像很清楚：$V$ 的等值线是一圈圈包围原点的闭曲线，$\\dot V \\le 0$ 说明轨线只会从外层等值线穿向内层，初值足够近的轨线就被关在预先给定的小范围里，永远出不去；$\\dot V < 0$ 说明轨线被一层层等值线逼向原点；$\\dot V > 0$ 则把轨线不断往外推，无论初值多小都会有轨线离开给定的邻域。三个条件的结论不能互相替换——$\\dot V \\le 0$ 推不出渐近稳定：中心 $x' = y,\\ y' = -x$ 取 $V = x^2 + y^2$ 时 $\\dot V \\equiv 0$，轨线绕着闭轨转圈、始终不靠近原点，就是最好的例子。\n\n两个常用的加强版本。其一是全局化：若 $V$ 还**径向无界**（$\\|x\\| \\to \\infty$ 时 $V(x) \\to +\\infty$），且 $\\dot V < 0$ 处处成立，则原点是**全局渐近稳定**的，等值线把整个相空间都管住了。其二，当 $\\dot V$ 只是半负定时不要轻易放弃：LaSalle 不变性原理指出，只要集合 $\\{x : \\dot V(x) = 0\\}$ 中最大的不变子集就是原点，轨线仍然趋于原点（带阻尼的单摆用能量函数分析正是这种情形）。更一般的不稳定性判据（Chetaev 定理）只需要在某个扇形区域内 $V > 0$、$\\dot V > 0$ 就能推出不稳定。\n\n与线性化（第一方法）相比，第二方法不需求雅可比矩阵，也不受「特征值实部为零」的限制——非双曲平衡点恰好是它显身手的场合；它还能直接给出全局结论与吸引域估计。代价是：李雅普诺夫函数**不唯一**（乘以正常数、加上满足条件的项都还是），而且**没有通用的构造方法**：二次型、物理能量、首次积分、平方和分解是最常见的突破口。理论上（李雅普诺夫逆定理）渐近稳定的平衡点附近一定存在这样的 $V$，但把它找出来往往依靠经验与对问题的理解。",
+    "definitionEn": "Consider the autonomous system $x' = f(x)$, where $f$ is locally Lipschitz near the origin (so initial value problems have unique solutions) and $x = 0$ is an equilibrium, $f(0) = 0$; any equilibrium can be moved to the origin by a translation. Lyapunov's second method, also called the direct method, never solves the equation: it looks for a generalized energy function $V(x)$ and decides stability from the positivity of $V$ together with the sign of its derivative along trajectories. A continuously differentiable function $V$ is **positive definite** on a neighbourhood of the origin if $V(0) = 0$ and $V(x) > 0$ for $0 < \\|x\\| < r$; negative definite and semidefinite notions are analogous.\n\nThe derivative along trajectories (the orbital derivative) comes from the chain rule:\n\n$$\\dot V(x) = \\nabla V(x) \\cdot f(x) = \\frac{\\partial V}{\\partial x_1}f_1(x) + \\cdots + \\frac{\\partial V}{\\partial x_n}f_n(x).$$\n\nIt uses only the gradient of $V$ and the right-hand side $f$: it is computed pointwise, and the solution $x(t)$ is never needed.\n\nThe core criteria (the three conclusions match the sign of $\\dot V$ exactly): if $V$ is positive definite and $\\dot V \\le 0$ (**negative semidefinite**), the origin is **stable**; if $\\dot V < 0$ away from the origin (**negative definite**), the origin is **asymptotically stable**; if $V$ is positive definite and $\\dot V > 0$ (**positive definite**), the origin is **unstable**. The picture is simple: level sets of $V$ are closed curves enclosing the origin; $\\dot V \\le 0$ forces trajectories to cross levels only inward, so solutions starting close enough are trapped in any prescribed neighbourhood and can never escape; $\\dot V < 0$ drives them one level at a time towards the origin; $\\dot V > 0$ pushes them outward. The three conclusions cannot be exchanged: $\\dot V \\le 0$ does not imply asymptotic stability — for the centre $x' = y,\\ y' = -x$ with $V = x^2 + y^2$ one has $\\dot V \\equiv 0$, and the closed orbits never approach the origin.\n\nTwo standard strengthenings. First, globalization: if in addition $V$ is **radially unbounded** ($V(x) \\to +\\infty$ as $\\|x\\| \\to \\infty$) and $\\dot V < 0$ everywhere, the origin is **globally asymptotically stable**. Second, when $\\dot V$ is only negative semidefinite, do not give up: LaSalle's invariance principle says that if the largest invariant subset of $\\{x : \\dot V(x) = 0\\}$ is just the origin, trajectories still converge to it (the damped pendulum analysed with the energy function is the standard instance). For instability, Chetaev's theorem is the general tool; the simple test above (positive definite $V$ with positive definite $\\dot V$) is its easiest case.\n\nCompared with linearization (the first method), the direct method needs no Jacobian matrix and is not restricted to hyperbolic equilibria — non-hyperbolic cases are exactly where it shines — and it can produce global conclusions and estimates of the region of attraction. The price: the Lyapunov function is **not unique** (multiplying by a positive constant, or adding suitable terms, keeps it a Lyapunov function), and there is **no general constructive recipe**. Quadratic forms, physical energies, first integrals and sums of squares are the usual starting points; converse theorems guarantee that a Lyapunov function exists near any asymptotically stable equilibrium, but finding it remains an art.",
+    "formulas": [
+      {
+        "latex": "V(0) = 0, \\qquad V(x) > 0 \\quad (0 < \\|x\\| < r)",
+        "note": "正定性的定义：V 在平衡点取零、在去掉原点的邻域内严格为正。负定、半负定，以及针对 $\\dot V$ 的正定等说法同理。",
+        "noteEn": "Positive definiteness: $V$ vanishes at the equilibrium and is strictly positive on a punctured neighbourhood. Negative definite, semidefinite, and positive definite when applied to $\\dot V$, are defined analogously."
+      },
+      {
+        "latex": "\\dot V(x) = \\nabla V(x) \\cdot f(x) = \\sum_{i=1}^{n} \\frac{\\partial V}{\\partial x_i} f_i(x)",
+        "note": "沿轨线的导数（轨道导数）：链式法则加代入方程右端，逐点即可计算，无需解方程；沿任一解有 $\\frac{d}{dt}V(x(t)) = \\dot V(x(t))$。",
+        "noteEn": "The orbital derivative: chain rule plus the vector field, computed pointwise without solving the equation; along any solution it equals $\\frac{d}{dt}V(x(t))$."
+      },
+      {
+        "latex": "V > 0,\\ \\dot V \\le 0 \\Rightarrow \\text{稳定};\\qquad V > 0,\\ \\dot V < 0 \\Rightarrow \\text{渐近稳定};\\qquad V > 0,\\ \\dot V > 0 \\Rightarrow \\text{不稳定}",
+        "note": "三个充分条件与结论一一对应：$V$ 正定是前提，$\\dot V$ 半负定、负定、正定分别给出稳定、渐近稳定、不稳定。符号与结论不能互换。",
+        "noteEn": "The three sufficient conditions and their conclusions: positive definite $V$ is the hypothesis, and semidefinite, negative definite, positive definite $\\dot V$ give stability, asymptotic stability, instability respectively. The pairing cannot be permuted."
+      },
+      {
+        "latex": "\\|x\\| \\to \\infty \\Rightarrow V(x) \\to +\\infty, \\qquad \\dot V < 0 \\ (x \\neq 0) \\quad \\Longrightarrow \\quad \\text{全局渐近稳定}",
+        "note": "径向无界加 $\\dot V$ 负定：结论从局部升级为全局，轨线从任意初值出发都收敛到原点。",
+        "noteEn": "Radial unboundedness plus negative definite $\\dot V$ upgrades the conclusion from local to global: every solution converges to the origin."
+      },
+      {
+        "latex": "V(x) = x^{\\mathsf T} P x, \\qquad A^{\\mathsf T} P + P A = -Q \\ (P, Q \\ \\text{正定}) \\quad \\Longrightarrow \\quad \\dot V = -x^{\\mathsf T} Q x < 0",
+        "note": "线性系统 $x' = Ax$ 的二次型做法：只要李雅普诺夫方程对某个正定 $Q$ 有正定解 $P$，零解渐近稳定（等价于 $A$ 的特征值实部全为负）。",
+        "noteEn": "Quadratic Lyapunov functions for $x' = Ax$: if the Lyapunov equation has a positive definite solution $P$ for some positive definite $Q$, the origin is asymptotically stable (equivalently, all eigenvalues of $A$ have negative real part)."
+      }
+    ],
+    "expression": {
+      "text": "V 正定：V(0)=0，x≠0 时 V(x)>0；沿轨线求导 V̇ = ∇V·f，只看它的符号",
+      "symbol": "V(x) > 0, \\quad \\dot V = \\nabla V \\cdot f",
+      "note": "V̇ ≤ 0 稳定；V̇ < 0 渐近稳定；V̇ > 0 不稳定。李雅普诺夫函数不唯一，也没有通用构造方法。",
+      "noteEn": "V̇ ≤ 0 gives stability; V̇ < 0 asymptotic stability; V̇ > 0 instability. Lyapunov functions are not unique and there is no general construction method."
+    },
+    "properties": [
+      "正定性扮演「广义能量」：$V$ 只需在平衡点的某个邻域内正定，不必是欧氏距离；等值线 $V = c$ 是层层包围原点的闭曲线，为判断轨线的有界性提供了现成的「围栏」。",
+      "结论严格对应 $\\dot V$ 的符号：$\\dot V \\le 0$ 只能推出稳定，要得到渐近稳定必须 $\\dot V$ 负定，或者在半负定情形用 LaSalle 不变性原理排除轨线停在 $\\{ \\dot V = 0\\}$ 上的可能；$\\dot V > 0$ 则是不稳定。三者不能互换。",
+      "计算上是「代数」的：$\\dot V = \\nabla V \\cdot f$ 只用到 $V$ 的梯度与方程右端，逐点代入即得，整个过程不需要解的表达式——这是直接法区别于「先求解、再判断」的关键。",
+      "李雅普诺夫函数不唯一，也没有通用构造方法：同一平衡点可以用 $x^2 + y^2$、$\\frac{1}{2}(x^2+y^2)$ 或加上高阶项的函数；能量、首次积分、二次型与平方和分解是最常用的入手方式。",
+      "与线性化互补：线性化（第一方法）在双曲平衡点处一步到位，但特征值实部为零时失效；第二方法对非双曲情形同样有效，还能给出全局渐近稳定结论与吸引域估计。"
+    ],
+    "propertiesEn": [
+      "Positive definiteness plays the role of a generalized energy: $V$ only needs to be positive definite near the equilibrium, not a Euclidean distance; the level sets $V=c$ are closed curves enclosing the origin and serve as ready-made fences for boundedness.",
+      "The conclusions match the sign of $\\dot V$ exactly: $\\dot V \\le 0$ gives only stability; asymptotic stability needs negative definite $\\dot V$, or negative semidefinite $\\dot V$ together with LaSalle's invariance principle ruling out trajectories that come to rest where $\\dot V=0$; $\\dot V > 0$ gives instability. The three cannot be interchanged.",
+      "The computation is algebraic: $\\dot V = \\nabla V \\cdot f$ uses only the gradient of $V$ and the vector field, and needs no explicit solution — the essential advantage of the direct method over solving first and judging afterwards.",
+      "Lyapunov functions are not unique and there is no general construction: $x^2+y^2$, $\\frac{1}{2}(x^2+y^2)$, or functions with extra higher-order terms may all work; energies, first integrals, quadratic forms and sums of squares are the usual starting points.",
+      "The method complements linearization: linearization settles hyperbolic equilibria at once but fails when some eigenvalue has zero real part, while the second method also works for non-hyperbolic cases and can yield global conclusions and estimates of the region of attraction."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + y^2",
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "levels": 10,
+      "title": "李雅普诺夫函数 V = x² + y² 的等值线：闭曲线层层包围原点"
+    },
+    "examples": [
+      {
+        "problem": "用李雅普诺夫第二方法证明系统 $x' = y - x^3,\\ y' = -x - y^3$ 的原点是全局渐近稳定的。",
+        "solution": "取 $V(x,y) = \\frac{1}{2}(x^2 + y^2)$。显然 $V$ 正定且径向无界（$x^2 + y^2 \\to \\infty$）。沿轨线求导：\n$$\\dot V = x(y - x^3) + y(-x - y^3) = xy - x^4 - xy - y^4 = -(x^4 + y^4).$$\n去掉原点后 $\\dot V = -(x^4 + y^4) < 0$，即 $\\dot V$ 负定；由判据原点是渐近稳定的，径向无界再把结论升级为**全局渐近稳定**。\n顺便验证它是唯一的平衡点：由 $y = x^3$ 与 $x = -y^3$ 得 $x = -x^9$，即 $x(1 + x^8) = 0$，只有 $x = 0$，从而 $y = 0$。因此「全局渐近稳定」说的就是全相空间中唯一的这个平衡点吸引一切轨线。"
+      },
+      {
+        "problem": "用同一个函数 $V = x^2 + y^2$ 考察三个系统：(i) $x' = y,\\ y' = -x$；(ii) $x' = x,\\ y' = y$；(iii) $x' = y,\\ y' = -x - y$。分别能得到什么结论？为什么在 (iii) 中半负定的 $\\dot V$ 还能加强为渐近稳定？",
+        "solution": "(i) $\\dot V = 2xy + 2y(-x) = 0$：$\\dot V$ 恒为零（半负定的极端情形），只能推出原点**稳定**；轨线沿圆周运动，确实不趋于原点，稳定但非渐近稳定。\n(ii) $\\dot V = 2x \\cdot x + 2y \\cdot y = 2(x^2 + y^2) > 0$（$x, y$ 不同时为零）：$\\dot V$ 正定，按判据原点**不稳定**——事实上从任何非原点出发的轨线都按指数速度远离。\n(iii) $\\dot V = 2xy + 2y(-x - y) = -2y^2 \\le 0$：半负定只给出「稳定」。但注意 $\\dot V = 0$ 的集合是直线 $y = 0$（$x$ 轴），而在 $y = 0$ 上方程给出 $x' = y = 0$、$y' = -x$：只要 $x \\neq 0$，轨线立刻离开这条直线，所以 $\\{ \\dot V = 0\\}$ 中最大的不变子集只有原点。由 LaSalle 不变性原理，一切轨线趋于原点，原点其实是**渐近稳定**的（$V$ 又径向无界，事实还是全局渐近稳定）。这个例子说明：$\\dot V$ 半负定不等于结论一定止步于「稳定」，LaSalle 原理常常能把结论升级。"
+      }
+    ],
+    "tags": [
+      "李雅普诺夫函数",
+      "直接法",
+      "稳定性",
+      "能量方法",
+      "非双曲"
+    ],
+    "links": [
+      "stability",
+      "phase-plane",
+      "linear-ode-system",
+      "limit-cycles",
+      "jacobian"
+    ]
+  },
+  {
+    "id": "dynamical-systems",
+    "title": "动力系统初步：流、轨道与不变集",
+    "titleEn": "Introduction to Dynamical Systems: Flows, Orbits and Invariant Sets",
+    "branch": "ode",
+    "level": 5,
+    "summary": "把微分方程的解看成随时间演化的流 φ_t：由群性质、轨道与不变集、ω-极限集这套语言，统一刻画系统的长期行为与最终归宿。",
+    "summaryEn": "View solutions as a flow φ_t: the language of orbits, invariant sets and ω-limit sets captures where the dynamics ends up in the long run.",
+    "definition": "给定自治系统 $x' = f(x)$，其中 $f$ 在开集 $U \\subseteq \\mathbb{R}^n$ 上局部李普希茨，初值问题的解存在唯一。把「$t = 0$ 时从 $x_0$ 出发、$t$ 时刻到达的位置」记为 $\\varphi_t(x_0) = x(t; x_0)$，得到一族映射 $\\{\\varphi_t\\}$，称为系统的**流**。流满足两条基本性质：\n\n$$\\varphi_0 = \\mathrm{id}, \\qquad \\varphi_{t+s} = \\varphi_t \\circ \\varphi_s,$$\n\n即先演化 $s$ 再演化 $t$ 等于一次演化 $t+s$——这是解唯一性的直接推论，叫做单参数（半）**群性质**。解对初值连续依赖，所以每个 $\\varphi_t$ 都连续；当 $f$ 为 $C^1$ 且解对所有 $t \\in \\mathbb{R}$ 存在时，$\\varphi_t$ 还是 $U$ 上的微分同胚，逆映射是 $\\varphi_{-t}$。流是「几何化」的语言：不再只盯着一组解，而是盯住整个相空间如何被推动。\n\n固定 $x$，集合 $\\mathcal{O}(x) = \\{ \\varphi_t(x) : t \\in \\mathbb{R} \\}$ 称为过 $x$ 的**轨道**（$t \\ge 0$ 的部分叫正半轨），它记录运动的路线而不带时刻信息；流把相空间分割成互不相交的轨道。平衡点（$f(x) = 0$）是只含一个点的退化轨道；若存在 $T > 0$ 使 $\\varphi_T(x) = x$ 而 $x$ 不是平衡点，轨道就是一条闭曲线，对应周期解。集合 $S$ 称为**正不变集**，如果轨线进入后再也出不来：$\\varphi_t(S) \\subseteq S$ 对一切 $t \\ge 0$ 成立（若对一切 $t \\in \\mathbb{R}$ 成立，就简称不变集）。平衡点、周期轨、守恒量 $V$ 的水平集 $\\{V = c\\}$ 都是典型的不变集；闭的正不变集一旦有轨线进入，它就永远待在里面，是研究长期行为的标准「笼子」。\n\n轨线最终聚集到的点组成 **ω-极限集**：\n\n$$\\omega(x) = \\bigcap_{T \\ge 0} \\overline{\\bigcup_{t \\ge T} \\varphi_t(x)} = \\{ y : \\text{存在 } t_n \\to +\\infty,\\ \\varphi_{t_n}(x) \\to y \\}.$$\n\n无论轨线是否有界，$\\omega(x)$ 总是**闭的、不变的**：若 $y \\in \\omega(x)$，过 $y$ 的整条轨道都含于 $\\omega(x)$。当正半轨有界（被关在某个紧集中）时，$\\omega(x)$ **非空、紧、连通**：轨线最终被锁在一个越来越小的紧集中，它不可能分裂成两块互相分离的碎片，否则轨线必须反复穿过两块之间的间隔，而这些穿越点自身又会贡献属于 $\\omega(x)$ 的新极限点，矛盾。极限集把「$t \\to \\infty$ 时到底发生了什么」压缩成一个小集合。\n\n平面上还有额外的结构：由解的唯一性，两条轨线要么相同、要么不相交（平衡点是退化轨道），任何非平衡点处恰好经过一条轨线。配合庞加莱–本迪克松定理，有界轨线的 ω-极限集只能是一个平衡点、一条闭轨，或由平衡点与连接它们的轨线组成的连通集——平面自治系统的长期行为因此非常「规矩」，不可能出现混沌。要到三维及以上，才可能有奇怪吸引子这类复杂的极限集（例如 Lorenz 系统）。",
+    "definitionEn": "Let $x' = f(x)$ be an autonomous system with $f$ locally Lipschitz on an open set $U \\subseteq \\mathbb{R}^n$, so initial value problems have unique solutions. Write $\\varphi_t(x_0) = x(t; x_0)$ for the position at time $t$ of the solution starting at $x_0$; the family $\\{\\varphi_t\\}$ is the **flow** of the system. It satisfies\n\n$$\\varphi_0 = \\mathrm{id}, \\qquad \\varphi_{t+s} = \\varphi_t \\circ \\varphi_s,$$\n\nthe (semi)group property: evolving by $s$ and then by $t$ equals evolving once by $t+s$, an immediate consequence of uniqueness. Solutions depend continuously on initial data, so every $\\varphi_t$ is continuous; if $f$ is $C^1$ and solutions exist for all $t \\in \\mathbb{R}$, each $\\varphi_t$ is a diffeomorphism of $U$ with inverse $\\varphi_{-t}$. The flow is the geometric language of dynamics: instead of one solution, one watches how the whole phase space is pushed around.\n\nFor fixed $x$, the set $\\mathcal{O}(x) = \\{ \\varphi_t(x) : t \\in \\mathbb{R} \\}$ (its $t \\ge 0$ part is the positive semiorbit) is the **orbit** through $x$: it records the route, not the timing, and the flow partitions the phase space into disjoint orbits. An equilibrium ($f(x) = 0$) is a degenerate one-point orbit; if $\\varphi_T(x) = x$ for some $T > 0$ while $x$ is not an equilibrium, the orbit is a closed curve, corresponding to a periodic solution. A set $S$ is **positively invariant** if orbits can never leave it: $\\varphi_t(S) \\subseteq S$ for all $t \\ge 0$ (if this holds for all $t \\in \\mathbb{R}$, $S$ is simply invariant). Equilibria, periodic orbits and level sets $\\{V = c\\}$ of conserved quantities are the standard invariant sets; a closed positively invariant set, once entered, traps every orbit forever — the standard cage for long-time behaviour.\n\nThe points on which an orbit accumulates form the **ω-limit set**:\n\n$$\\omega(x) = \\bigcap_{T \\ge 0} \\overline{\\bigcup_{t \\ge T} \\varphi_t(x)} = \\{ y : \\exists\\, t_n \\to +\\infty,\\ \\varphi_{t_n}(x) \\to y \\}.$$\n\nWhatever the orbit, $\\omega(x)$ is always **closed and invariant**: if $y \\in \\omega(x)$, the whole orbit of $y$ lies in $\\omega(x)$. If the positive semiorbit is bounded (contained in a compact set), then $\\omega(x)$ is **nonempty, compact and connected**: the orbit is eventually locked into shrinking compact sets, and it cannot split into two separated pieces, because the orbit would then repeatedly cross the gap, and those crossing points would themselves contribute new limit points in $\\omega(x)$ — a contradiction. The limit set compresses everything that happens as $t \\to \\infty$ into a small set.\n\nIn the plane there is still more structure: by uniqueness two orbits are either identical or disjoint (equilibria being degenerate orbits), and exactly one orbit passes through every non-equilibrium point. Combined with the Poincaré–Bendixson theorem, the ω-limit set of a bounded orbit can only be an equilibrium, a closed orbit, or a connected union of equilibria joined by orbits — planar autonomous dynamics is far too rigid for chaos. Strange attractors need at least three dimensions (the Lorenz system being the classical example).",
+    "formulas": [
+      {
+        "latex": "\\varphi_0 = \\mathrm{id}, \\qquad \\varphi_{t+s} = \\varphi_t \\circ \\varphi_s, \\qquad \\varphi_t(x_0) = x(t; x_0)",
+        "note": "流的定义与（半）群性质：先走 $s$ 再走 $t$ 等于一次走 $t+s$。$f$ 为 $C^1$ 且解整体存在时，$\\varphi_t$ 是相空间上的微分同胚，逆映射为 $\\varphi_{-t}$。",
+        "noteEn": "Definition of the flow and the (semi)group property: $s$ then $t$ equals $t+s$ in one go. When $f$ is $C^1$ and solutions exist globally, each $\\varphi_t$ is a diffeomorphism with inverse $\\varphi_{-t}$."
+      },
+      {
+        "latex": "\\mathcal{O}(x) = \\{ \\varphi_t(x) : t \\in \\mathbb{R} \\}, \\qquad \\varphi_T(x) = x \\ (T > 0) \\ \\Longleftrightarrow\\ \\text{周期轨}",
+        "note": "轨道是运动的路线；平衡点是对一切 $t$ 都不动的单点轨道，非平衡点处 $\\varphi_T(x) = x$（$T > 0$）给出闭轨。",
+        "noteEn": "An orbit is the route of the motion; an equilibrium is a one-point orbit fixed for all $t$, while for a non-equilibrium point $\\varphi_T(x) = x$ with $T > 0$ gives a closed orbit."
+      },
+      {
+        "latex": "S \\ \\text{正不变} \\ \\Longleftrightarrow\\ \\varphi_t(S) \\subseteq S \\quad (\\forall t \\ge 0)",
+        "note": "正不变集：轨线只能进、不能出；对一切 $t \\in \\mathbb{R}$ 成立则称为不变集。闭的有界正不变集是研究长期行为的「笼子」，也是庞加莱–本迪克松定理的前提。",
+        "noteEn": "Positive invariance: orbits may enter but never leave. If it holds for all $t \\in \\mathbb{R}$, the set is simply invariant. Closed bounded positively invariant sets are the cages of long-time analysis and the hypothesis of the Poincaré–Bendixson theorem."
+      },
+      {
+        "latex": "\\omega(x) = \\bigcap_{T \\ge 0} \\overline{\\bigcup_{t \\ge T} \\varphi_t(x)} = \\{ y : \\exists\\, t_n \\to +\\infty,\\ \\varphi_{t_n}(x) \\to y \\}",
+        "note": "ω-极限集：轨线在 $t \\to \\infty$ 时聚集到的点组成的集合。它总是闭的、不变的：$\\varphi_t(\\omega(x)) = \\omega(x)$。",
+        "noteEn": "The ω-limit set collects the points the orbit accumulates on as $t \\to +\\infty$. It is always closed and invariant: $\\varphi_t(\\omega(x)) = \\omega(x)$."
+      },
+      {
+        "latex": "\\mathcal{O}^+(x)\\ \\text{有界} \\quad \\Longrightarrow \\quad \\omega(x)\\ \\text{非空、紧、连通}",
+        "note": "有界正半轨的极限集性质；平面上再细化为：ω-极限集只能是平衡点、闭轨，或由平衡点与连接轨线组成的连通集。",
+        "noteEn": "Limit-set property for bounded semiorbits; in the plane it sharpens to: the ω-limit set is an equilibrium, a closed orbit, or a connected union of equilibria joined by orbits."
+      }
+    ],
+    "expression": {
+      "text": "φ_t 是「t 时刻位置」映射族；轨道 O(x) = { φ_t(x) }；ω-极限集是轨线 t→∞ 时聚集到的集合",
+      "symbol": "\\varphi_{t+s} = \\varphi_t \\circ \\varphi_s",
+      "note": "ω-极限集总闭且不变；有界正半轨的 ω-极限集非空、紧、连通。平面自治系统的轨线除平衡点外互不相交。",
+      "noteEn": "ω-limit sets are always closed and invariant; for bounded orbits they are nonempty, compact and connected. Planar orbits never cross except at equilibria."
+    },
+    "properties": [
+      "群性质与轨道划分：$\\varphi_0 = \\mathrm{id}$，$\\varphi_{t+s} = \\varphi_t \\circ \\varphi_s$；由解的唯一性，两条轨道要么重合、要么不交，平面上的轨线（除平衡点外）互不相交。",
+      "不变集的层次：平衡点、周期轨、守恒量水平集、稳定与不稳定流形都是不变集；正不变集只要求向将来不逃出（$\\varphi_t(S) \\subseteq S$，$t \\ge 0$），闭的有界正不变集是分析长期行为的框架。",
+      "ω-极限集的性质：闭、不变，并且当正半轨有界时非空、紧、连通；它可能退化为一个平衡点（被吸引）、一条闭轨（周期振荡），也可能复杂得多（高维的奇怪吸引子）。",
+      "平面自治系统的限制：轨线不相交加上庞加莱–本迪克松定理，有界轨线的 ω-极限集只能是平衡点、闭轨或二者的连通并，不存在复杂的非周期回复运动，因此平面自治系统不可能混沌。",
+      "光滑性与连续依赖：$\\varphi_t(x)$ 关于 $(t, x)$ 联合连续；固定 $t$ 时 $\\varphi_t$ 可逆、把轨道映成轨道，这使得分析、几何与拓扑的工具都能用到动力系统上。"
+    ],
+    "propertiesEn": [
+      "Group property and orbit partition: $\\varphi_0 = \\mathrm{id}$ and $\\varphi_{t+s} = \\varphi_t \\circ \\varphi_s$; by uniqueness two orbits are either identical or disjoint, and planar trajectories never cross except at equilibria.",
+      "A hierarchy of invariant sets: equilibria, periodic orbits, level sets of conserved quantities, stable and unstable manifolds; positive invariance only demands $\\varphi_t(S) \\subseteq S$ for $t \\ge 0$, and a closed bounded positively invariant set is the framework for long-time analysis.",
+      "Properties of ω-limit sets: closed and invariant, and nonempty, compact and connected when the positive semiorbit is bounded; the set may degenerate to an equilibrium (attraction), a closed orbit (periodic oscillation), or be far more complicated (strange attractors in higher dimensions).",
+      "The planar restriction: no crossing of orbits together with the Poincaré–Bendixson theorem leaves only equilibria, closed orbits, or connected unions of equilibria for the ω-limit set of a bounded orbit; complicated non-periodic recurrence is impossible, so planar autonomous systems cannot be chaotic.",
+      "Smoothness and continuous dependence: $\\varphi_t(x)$ is jointly continuous in $(t, x)$; for fixed $t$ the map $\\varphi_t$ is invertible and maps orbits to orbits, so analytic, geometric and topological tools all apply to dynamical systems."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "y",
+      "fy": "-x",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "平衡点（中心）"
+        }
+      ],
+      "title": "中心相图 x' = y, y' = -x：每个圆形轨道都是不变集"
+    },
+    "examples": [
+      {
+        "problem": "验证线性系统 $x' = y,\\ y' = -x$ 的流满足群性质，并写出它的轨道。",
+        "solution": "解是旋转：$\\varphi_t(x_0, y_0) = \\begin{pmatrix} \\cos t & \\sin t \\\\ -\\sin t & \\cos t \\end{pmatrix} \\begin{pmatrix} x_0 \\\\ y_0 \\end{pmatrix}$，即把初值绕原点旋转角度 $t$。\n(i) 角度为 $0$ 的旋转不动任何点，所以 $\\varphi_0 = \\mathrm{id}$。\n(ii) 记 $R_t = \\begin{pmatrix} \\cos t & \\sin t \\\\ -\\sin t & \\cos t \\end{pmatrix}$，由和角公式（$\\cos(t+s) = \\cos t\\cos s - \\sin t\\sin s$，$\\sin(t+s) = \\sin t\\cos s + \\cos t\\sin s$）得 $R_t R_s = R_{t+s}$，于是\n$$\\varphi_t(\\varphi_s(x_0,y_0)) = R_t R_s \\begin{pmatrix} x_0 \\\\ y_0 \\end{pmatrix} = R_{t+s} \\begin{pmatrix} x_0 \\\\ y_0 \\end{pmatrix} = \\varphi_{t+s}(x_0,y_0),$$\n群性质得证。\n(iii) 由 $\\varphi_t$ 保持 $x^2 + y^2$ 不变，轨道就是圆周 $x^2 + y^2 = x_0^2 + y_0^2$；除原点这一个平衡点外，其余轨道都是周期为 $2\\pi$ 的闭轨。"
+      },
+      {
+        "problem": "计算三个系统的 ω-极限集，并核对「闭、不变、连通」三条性质：(i) $x' = y,\\ y' = -x$；(ii) $x' = -x,\\ y' = -2y$；(iii) 范德波尔系统 $x' = y,\\ y' = (1 - x^2)y - x$ 在 $x \\neq 0$ 时的 $\\omega(x)$。",
+        "solution": "(i) 轨道是圆周，$\\omega(x)$ 就是过 $x$ 的那条闭轨本身：闭且连通的周期轨，作为集合不变（$\\varphi_t(\\omega) = \\omega$）。\n(ii) 解为 $x = x_0 e^{-t}$，$y = y_0 e^{-2t}$，一切轨线都趋于原点，所以对每个初值 $\\omega(x) = \\{0\\}$：单点平衡点，闭且不变（连通性平凡）。\n(iii) 范德波尔系统的原点是唯一平衡点且不稳定；轨线被束缚在有界区域内，既不能停在平衡点，又由轨线不相交不能自交，最终只能缠向唯一的那条极限环：$\\omega(x) = \\Gamma$（极限环）对一切 $x \\neq 0$ 成立。\n三种极限集分别是闭轨、平衡点与闭轨，都是闭且连通的不变集——这正好是平面自治系统 ω-极限集的典型形态，与庞加莱–本迪克松定理的结论一致。"
+      }
+    ],
+    "tags": [
+      "动力系统",
+      "流",
+      "轨道",
+      "不变集",
+      "ω-极限集"
+    ],
+    "links": [
+      "phase-plane",
+      "stability",
+      "limit-cycles",
+      "bifurcation-chaos",
+      "ode-continuous-dependence"
+    ]
+  },
+  {
+    "id": "limit-cycles",
+    "title": "极限环与庞加莱-本迪克松定理",
+    "titleEn": "Limit Cycles and the Poincaré–Bendixson Theorem",
+    "branch": "ode",
+    "level": 5,
+    "summary": "孤立的闭轨称为极限环，代表与初值无关的自激振荡；庞加莱–本迪克松定理给出平面上闭轨的存在判据，Bendixson 判据则给出排除闭轨的方法。",
+    "summaryEn": "Isolated closed orbits are limit cycles — self-sustained oscillations independent of initial data; the Poincaré–Bendixson theorem gives an existence criterion and Bendixson's criterion a way to rule closed orbits out.",
+    "definition": "平面自治系统可能有周期解，其轨线是相平面上的闭曲线。但闭轨并不自动是**极限环**：极限环要求闭轨是**孤立的**——存在它的一个邻域，其中除它自己以外没有任何闭轨。中心 $x' = y,\\ y' = -x$ 的闭轨铺满整个相平面、彼此相邻，每条都不孤立，因此都不是极限环；而范德波尔（van der Pol）振子\n\n$$x'' + \\mu(x^2 - 1)x' + x = 0 \\qquad (\\mu > 0),$$\n\n写成方程组 $x' = y,\\ y' = \\mu(1 - x^2)y - x$ 后，除原点外的每一条轨线都缠向同一条闭轨，这条闭轨就是极限环。极限环对应物理上的**自激振荡**：振荡的振幅与周期由方程本身决定，与初始条件无关，这正是它比中心的连续闭轨族更「稳定」的地方。按相邻轨线的走向，极限环分为**稳定**（内、外两侧的轨线当 $t \\to +\\infty$ 都趋于它）、**不稳定**（两侧都远离，$t \\to -\\infty$ 时才趋于它）与**半稳定**（一侧吸引、另一侧排斥）。\n\n如何证明闭轨存在？平面上最有力的工具是庞加莱–本迪克松（Poincaré–Bendixson）定理：设 $x' = f(x,y),\\ y' = g(x,y)$ 是平面上的 $C^1$ 系统，$K \\subseteq \\mathbb{R}^2$ 是**非空有界闭集**（紧集）且**正不变**（$\\varphi_t(K) \\subseteq K$，$t \\ge 0$）；若 $K$ 内**没有平衡点**，则 $K$ 中至少存在一条闭轨。更精确地：$K$ 中任一轨线的 ω-极限集本身就是一条闭轨。直观图景是：轨线被关进一个没有平衡点的紧「笼子」，既不能停下、又受解的唯一性限制不能自交、也不能逃出去，只能永远在里面越绕越回归，极限集就被迫成为一条闭曲线。三个条件——**平面（二维自治）**、**紧性（有界闭且正不变）**、**无平衡点**——缺一不可：$x' = x,\\ y' = y$ 的轨线向外穿过任何圆环（$K$ 不正不变，无闭轨）；稳定结点附近的紧正不变圆盘含平衡点，轨线全被吸向它（无闭轨）；环面上的无理流则是二维曲面上的紧不变量，无平衡点却没有闭轨，说明「平面」这一条也不能换成别的曲面。另外，闭轨不是随随便便就能出现的：平面上任何闭轨所围区域内至少有一个平衡点（Poincaré 指标的推论），所以寻找极限环总是从寻找平衡点开始。\n\n那么如何证明闭轨**不存在**？Bendixson 判据：设 $D$ 是**单连通**区域，若散度\n\n$$\\frac{\\partial f}{\\partial x} + \\frac{\\partial g}{\\partial y}$$\n\n在 $D$ 内**不变号**（处处 $\\ge 0$ 或处处 $\\le 0$）且**不恒为零**，则 $D$ 内不存在闭轨。证明只需格林公式：闭轨 $\\Gamma$ 围成区域 $\\Omega$，沿轨线向量场与运动方向相切、通量为零，所以 $\\iint_{\\Omega} \\left( \\frac{\\partial f}{\\partial x} + \\frac{\\partial g}{\\partial y} \\right) dx\\, dy = 0$；而散度不变号、又在所围区域上不恒为零时（例如在 $D$ 内处处不为零，或零集不含任何非空开集），这个积分不可能为零，矛盾。判据只是充分条件，仅用于**否定**：范德波尔系统的散度是 $\\mu(1 - x^2)$，在 $|x| < 1$ 与 $|x| > 1$ 处符号相反，判据失效——而那里确实存在极限环。",
+    "definitionEn": "A planar autonomous system may have periodic solutions, whose trajectories are closed curves in the phase plane. Not every closed orbit is a **limit cycle**: a limit cycle must be **isolated** — it has a neighbourhood containing no other closed orbit. The closed orbits of the centre $x' = y,\\ y' = -x$ fill the entire phase plane and are as isolated as a crowd; none of them is a limit cycle, whereas for the van der Pol oscillator\n\n$$x'' + \\mu(x^2 - 1)x' + x = 0 \\qquad (\\mu > 0),$$\n\nwritten as $x' = y,\\ y' = \\mu(1 - x^2)y - x$, every orbit except the origin winds onto a single closed orbit — that closed orbit is a limit cycle. Limit cycles model **self-sustained oscillations**: amplitude and period are set by the equation itself, not by the initial data, which is exactly what makes them more stable than a continuum of centre orbits. According to the behaviour of nearby orbits a limit cycle is **stable** (orbits on both sides converge to it as $t \\to +\\infty$), **unstable** (both sides are repelled; they converge only as $t \\to -\\infty$), or **semistable** (attracting on one side, repelling on the other).\n\nThe main existence tool in the plane is the Poincaré–Bendixson theorem: let $x' = f(x,y),\\ y' = g(x,y)$ be $C^1$ and let $K \\subseteq \\mathbb{R}^2$ be a nonempty compact set that is **positively invariant** ($\\varphi_t(K) \\subseteq K$ for $t \\ge 0$). If $K$ contains **no equilibrium**, then $K$ contains at least one closed orbit; more precisely, for every orbit in $K$ the ω-limit set is itself a closed orbit. The intuition: the orbit is locked in a compact cage with no equilibrium, it cannot stop, cannot cross itself by uniqueness, and cannot escape — it must wind around and return, so the limit set is forced to be a closed curve. All three hypotheses — **plane (two-dimensional autonomous)**, **compactness (closed, bounded and positively invariant)** and **no equilibrium** — are indispensable: orbits of $x' = x,\\ y' = y$ cross every annulus (no positive invariance, no closed orbits); a compact positively invariant disk around a stable node contains an equilibrium and all orbits are sucked into it (no closed orbits); the irrational flow on a torus is a compact invariant set on a two-dimensional surface with no equilibrium and no closed orbit, so the word plane cannot be traded for an arbitrary surface. Closed orbits also never come for free: any closed orbit in the plane must enclose at least one equilibrium (a consequence of the Poincaré index), so the search for limit cycles starts with the search for equilibria.\n\nTo prove that closed orbits do **not** exist, Bendixson's criterion is the standard tool: let $D$ be a **simply connected** region and suppose the divergence\n\n$$\\frac{\\partial f}{\\partial x} + \\frac{\\partial g}{\\partial y}$$\n\nhas a constant sign in $D$ (everywhere $\\ge 0$ or everywhere $\\le 0$) and is not identically zero. Then $D$ contains no closed orbit. Green's theorem gives the proof: for a closed orbit $\\Gamma$ bounding a region $\\Omega$, the vector field is tangent to $\\Gamma$, so the normal flux vanishes and $\\iint_{\\Omega} \\left( \\frac{\\partial f}{\\partial x} + \\frac{\\partial g}{\\partial y} \\right) dx\\, dy = 0$; a divergence that does not change sign and is not identically zero on the enclosed region makes this integral impossible — contradiction. (Strictly speaking one needs the divergence not to vanish identically on the enclosed region; a frequent sufficient condition is that the divergence is nowhere zero in $D$, or that its zero set has empty interior.) The criterion is only sufficient: it rules orbits out. The divergence of the van der Pol system is $\\mu(1 - x^2)$, of opposite signs for $|x| < 1$ and $|x| > 1$, so the criterion is silent — and a limit cycle is indeed there.",
+    "formulas": [
+      {
+        "latex": "\\varphi_T(x) = x \\ (T > 0), \\qquad \\text{闭轨孤立（邻域内无其他闭轨）} \\ \\Longleftrightarrow\\ \\text{极限环}",
+        "note": "极限环 = 孤立的闭轨；中心的连续闭轨族不满足孤立性。稳定、不稳定、半稳定看两侧轨线的走向。",
+        "noteEn": "A limit cycle is an isolated closed orbit; the continuum of centre orbits fails isolation. Stable, unstable and semistable are distinguished by the behaviour of orbits on both sides."
+      },
+      {
+        "latex": "K \\text{ 非空紧、正不变},\\qquad (f, g) \\neq (0, 0) \\text{ 在 } K \\text{ 内} \\quad \\Longrightarrow \\quad K \\text{ 中含闭轨}",
+        "note": "庞加莱–本迪克松定理（平面自治系统）：三个条件缺一不可；结论还可以加强为「任一轨线的 ω-极限集是一条闭轨」。",
+        "noteEn": "The Poincaré–Bendixson theorem (planar autonomous systems): none of the three conditions can be dropped, and the conclusion sharpens to: the ω-limit set of any orbit is a closed orbit."
+      },
+      {
+        "latex": "\\omega(x) \\text{ 紧且不含平衡点} \\quad \\Longrightarrow \\quad \\omega(x) \\text{ 是一条闭轨}",
+        "note": "PB 定理的常用形式：只要轨线有界且极限集远离一切平衡点，就得到周期振荡。",
+        "noteEn": "The working form of Poincaré–Bendixson: a bounded orbit whose limit set stays away from all equilibria must settle onto a periodic oscillation."
+      },
+      {
+        "latex": "\\frac{\\partial f}{\\partial x} + \\frac{\\partial g}{\\partial y} \\ \\text{在单连通区域 } D \\text{ 内不变号且不恒为零} \\quad \\Longrightarrow \\quad D \\text{ 内无闭轨}",
+        "note": "Bendixson 判据（Dulac 判据中 $B \\equiv 1$ 的特例）。它是充分条件，只用来排除闭轨；散度变号时判据失效。",
+        "noteEn": "Bendixson's criterion (the case $B \\equiv 1$ of Dulac's criterion). It is only sufficient and is used to rule orbits out; it says nothing when the divergence changes sign."
+      },
+      {
+        "latex": "x'' + \\mu(x^2 - 1)x' + x = 0, \\ \\mu > 0 \\qquad \\Longleftrightarrow \\qquad x' = y,\\ y' = \\mu(1 - x^2)y - x \\ \\text{有唯一稳定极限环}",
+        "note": "范德波尔振子：极限环的经典例子（存在性用 PB 定理，唯一性与稳定性用 Liénard 型定理，如 Levinson–Smith 定理）。$\\mu = 0$ 时退化为线性中心，闭轨不孤立。",
+        "noteEn": "The van der Pol oscillator: the classical limit-cycle example (existence from Poincaré–Bendixson, uniqueness and stability from Liénard-type theorems such as Levinson–Smith). At $\\mu = 0$ it degenerates to a linear centre whose closed orbits are not isolated."
+      }
+    ],
+    "expression": {
+      "text": "极限环 = 孤立的闭轨；PB 定理：紧正不变且无平衡点的平面区域中必有闭轨",
+      "symbol": "K \\text{ 紧正不变},\\ (f, g) \\neq 0 \\text{ 在 } K \\Rightarrow \\exists \\text{ 闭轨}",
+      "note": "Bendixson 判据（单连通区域内散度不变号且不恒为零 ⇒ 无闭轨）给出反面结论；范德波尔振子是极限环的标准例子。",
+      "noteEn": "Bendixson's criterion (constant-sign divergence that is not identically zero on a simply connected region implies no closed orbits) gives the negative statement; van der Pol is the standard example of a limit cycle."
+    },
+    "properties": [
+      "极限环是孤立的闭轨：中心的闭轨铺满一片区域、彼此不孤立，都不是极限环；范德波尔振子在 $\\mu > 0$ 时恰有一条极限环，而且是吸引（稳定）的。",
+      "稳定性分类：稳定极限环两侧的轨线都以它为 ω-极限集；不稳定极限环两侧的轨线在 $t \\to +\\infty$ 时远离（时间反演后变为稳定环）；半稳定极限环一侧吸引、另一侧排斥——Hopf 分支中诞生的环正对应稳定与不稳定两种情形。",
+      "闭轨的必要条件：平面闭轨所围区域内至少含有一个平衡点（Poincaré 指标的推论）；与 PB 定理配合，一边排除、一边确认，是极限环分析的常用组合。",
+      "PB 定理的三个条件缺一不可：紧性与正不变性（$x' = x,\\ y' = y$ 的轨线穿过任意圆环）、无平衡点（稳定结点附近的紧不变区域内轨线全被吸向平衡点）、平面性（环面上的无理流：紧不变、无平衡点、却无闭轨）。",
+      "Bendixson 判据只用于否定：散度不变号且不恒为零 $\\Rightarrow$ 无闭轨；范德波尔系统的散度 $\\mu(1 - x^2)$ 变号，判据不适用，系统确实含极限环；而对 $x' = y,\\ y' = -x - y^3$，散度 $-3y^2 \\le 0$ 且只在直线 $y = 0$ 上为零，判据排除一切闭轨。"
+    ],
+    "propertiesEn": [
+      "Limit cycles are isolated closed orbits: the centre orbits fill an open region and are not isolated, so none of them qualifies; the van der Pol oscillator has exactly one limit cycle for each $\\mu > 0$, and it is attracting (stable).",
+      "Classification by stability: both sides of a stable limit cycle converge to it (it is their ω-limit set); both sides of an unstable limit cycle are repelled as $t \\to +\\infty$ (it becomes stable under time reversal); a semistable limit cycle attracts on one side and repels on the other, matching the stable and unstable cycles born in Hopf bifurcations.",
+      "A necessary condition: any closed orbit in the plane encloses at least one equilibrium (a consequence of the Poincaré index); combined with the Poincaré–Bendixson theorem this gives the standard rule-out-then-confirm strategy for limit cycles.",
+      "None of the three hypotheses of the Poincaré–Bendixson theorem can be dropped: compactness and positive invariance (orbits of $x' = x,\\ y' = y$ cross every annulus), absence of equilibria (near a stable node every orbit in a compact invariant region is sucked into the equilibrium), and planarity (the irrational flow on a torus is compact, invariant and equilibrium-free, yet has no closed orbit).",
+      "Bendixson's criterion only rules orbits out: constant-sign divergence that is not identically zero forbids closed orbits; the divergence $\\mu(1 - x^2)$ of van der Pol changes sign, so the criterion is silent and a limit cycle really exists, whereas for $x' = y,\\ y' = -x - y^3$ the divergence $-3y^2 \\le 0$ vanishes only on the line $y = 0$ and the criterion excludes all closed orbits."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "y",
+      "fy": "(1-x^2)*y - x",
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -3,
+        3
+      ],
+      "marks": [
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "平衡点（不稳定）"
+        }
+      ],
+      "title": "范德波尔振子 μ = 1：轨线被吸引到唯一的极限环"
+    },
+    "examples": [
+      {
+        "problem": "系统 $x' = -y + x(1 - x^2 - y^2),\\ y' = x + y(1 - x^2 - y^2)$。证明圆环 $A = \\{ (x, y) : \\frac{1}{4} \\le x^2 + y^2 \\le 4 \\}$ 是紧正不变集且不含平衡点，用庞加莱–本迪克松定理断言闭轨存在，并求出这条闭轨。",
+        "solution": "换极坐标 $x = r\\cos\\theta$，$y = r\\sin\\theta$，$r^2 = x^2 + y^2$。由 $r\\dot r = x\\dot x + y\\dot y$ 得\n$$x\\dot x + y\\dot y = x\\bigl( -y + x(1-r^2) \\bigr) + y\\bigl( x + y(1-r^2) \\bigr) = (x^2+y^2)(1-r^2) = r^2(1-r^2),$$\n故 $\\dot r = r(1 - r^2)$；类似地 $\\dot\\theta = (x\\dot y - y\\dot x)/r^2 = 1$，方程组解耦为 $\\dot r = r(1-r^2),\\ \\dot\\theta = 1$。\n(i) 正不变性：在 $r = \\frac{1}{2}$ 上 $\\dot r = \\frac{1}{2}\\left( 1 - \\frac{1}{4} \\right) = \\frac{3}{8} > 0$，轨线从内圈向外进入圆环；在 $r = 2$ 上 $\\dot r = 2(1 - 4) = -6 < 0$，轨线从外圈向内进入圆环。边界上轨线全部指向内部，所以 $A$ 正不变，而且 $A$ 是有界闭集（紧）。\n(ii) 无平衡点：$\\dot\\theta = 1$ 说明每一点都在转动；$\\dot r = 0$ 给出 $r = 0$（原点，不在 $A$ 内）或 $r = 1$（此处 $\\dot\\theta = 1 \\neq 0$，不是平衡点）。所以 $A$ 中确无平衡点。\n(iii) 由 PB 定理，$A$ 内存在闭轨。事实上 $r \\equiv 1$ 是不变圆周：在 $r = 1$ 上 $\\dot r = 0$，$\\theta$ 以角速度 $1$ 匀速增长，轨线是周期为 $2\\pi$ 的圆——这条闭轨就是 $r = 1$，而且 $r \\neq 0, 1$ 的一切轨线都趋于它，它是稳定极限环。"
+      },
+      {
+        "problem": "用 Bendixson 判据证明系统 $x' = y,\\ y' = -x - y^3$ 在全平面没有闭轨；再讨论同一个判据为什么不能对范德波尔系统下结论。",
+        "solution": "记 $f = y$，$g = -x - y^3$，散度为\n$$\\frac{\\partial f}{\\partial x} + \\frac{\\partial g}{\\partial y} = 0 + (-3y^2) = -3y^2 \\le 0$$\n在整个平面上不变号；它只在直线 $y = 0$ 上取零，零集不含任何开集（特别地不恒为零），满足判据条件。因此单连通区域（特别地全平面）内没有闭轨。从能量看也一致：$E = \\frac{1}{2}(x^2 + y^2)$ 满足 $\\dot E = xy + y(-x - y^3) = -y^4 \\le 0$，一切轨线趋于原点。\n对范德波尔系统 $x' = y,\\ y' = \\mu(1 - x^2)y - x$，散度为 $\\mu(1 - x^2)$：在 $|x| < 1$ 内为正、在 $|x| > 1$ 外为负，**变号**，不满足「不变号」，判据失效——它无法排除闭轨，而实际上 $\\mu > 0$ 时系统恰有一条稳定极限环（存在性由 PB 定理保证，唯一性由 Liénard 型定理给出）。数值实验也印证了这一点：取 $\\mu = 1$，从 $(0.1, 0)$ 与 $(3, 0)$ 出发数值积分，两条轨线耗散掉瞬态后都落在同一条闭轨上——穿过正半 $y$ 轴的截点同为 $y \\approx 2.17$，周期约 $6.66$，$x$ 的振幅约 $2.01$，与初值无关。"
+      }
+    ],
+    "tags": [
+      "极限环",
+      "庞加莱-本迪克松定理",
+      "周期轨",
+      "Bendixson 判据",
+      "范德波尔振子"
+    ],
+    "links": [
+      "dynamical-systems",
+      "phase-plane",
+      "stability",
+      "lyapunov-second-method",
+      "bifurcation-chaos"
+    ]
+  },
+  {
+    "id": "bifurcation-chaos",
+    "title": "分支与混沌初步",
+    "titleEn": "Bifurcation and Chaos: An Introduction",
+    "branch": "ode",
+    "level": 5,
+    "summary": "参数变化引起相图拓扑结构突变就是分支：鞍结、跨临界、叉式、Hopf 是四种基本类型；混沌是确定性系统中的敏感依赖，平面自治系统不会混沌。",
+    "summaryEn": "A bifurcation is a qualitative change of the phase portrait as a parameter varies — saddle-node, transcritical, pitchfork and Hopf are the basic types; chaos is sensitive dependence in a deterministic system, impossible in the planar autonomous case.",
+    "definition": "方程中带有参数 $\\mu$ 时，解的行为会随 $\\mu$ 变化。若 $\\mu$ 越过某个值 $\\mu_0$（**分支值**）时相图的定性结构发生改变——平衡点的个数或类型变了、极限环出生或消失了、稳定性交换了——就说系统在 $\\mu_0$ 处发生**分支**，$(\\mu_0, x_0)$ 称为分支点。一个关键事实是：局部（平衡点）分支只能发生在**非双曲**平衡点处，即雅可比矩阵具有实部为零的特征值的地方（一维时就是 $f_x = 0$）；双曲平衡点的类型对参数的小扰动保持不变。于是分支分析的第一步总是：找出非双曲平衡点。以一维系统 $x' = f(x, \\mu)$ 为模型，四种最常见（余维一）的类型如下。\n\n**鞍结分支**（切分支）：标准形 $x' = \\mu - x^2$。$\\mu < 0$ 时没有平衡点；$\\mu > 0$ 时出现一对平衡点 $x = \\pm\\sqrt{\\mu}$（一个稳定、一个不稳定）；$\\mu$ 减小到 $0$ 时，两点在 $x = 0$ 处相撞并同归于尽。成对平衡点的产生与消失是它的标志。**跨临界分支**：标准形 $x' = \\mu x - x^2 = x(\\mu - x)$，平衡点 $x = 0$ 与 $x = \\mu$ 对所有 $\\mu$ 都存在，在 $\\mu = 0$ 处交汇后**交换稳定性**（$\\mu < 0$ 时 $x = 0$ 稳定、$x = \\mu$ 不稳定，$\\mu > 0$ 时反过来）。它常见于带平凡平衡点的模型，如人口模型 $x' = x(\\mu - x)$。**叉式分支**：标准形 $x' = \\mu x - x^3$，系统关于 $x \\to -x$ 对称。$\\mu < 0$ 时唯一平衡点 $x = 0$ 且稳定；$\\mu$ 过零后原点失稳，同时对称地劈出一对稳定平衡点 $x = \\pm\\sqrt{\\mu}$，这叫**超临界**叉式分支（对称破缺）。若三次项反号，$x' = \\mu x + x^3$：一对**不稳定**平衡点 $\\pm\\sqrt{-\\mu}$ 先在 $\\mu < 0$ 时存在，随 $\\mu \\to 0^-$ 向原点收缩、碰撞后消失，同时原点由稳定变为不稳定，这叫**亚临界**叉式分支。\n\n**Hopf 分支**发生在平衡点与极限环之间，是最「动力系统」的一种：设 $x' = f(x, \\mu)$ 在 $\\mu_0$ 附近有平衡点，其雅可比矩阵有一对共轭特征值 $\\lambda(\\mu) = \\alpha(\\mu) \\pm i\\beta(\\mu)$ 在 $\\mu_0$ 处**恰好穿过虚轴**：$\\alpha(\\mu_0) = 0$，$\\beta(\\mu_0) \\neq 0$（一对纯虚特征值），且满足**横截条件** $\\alpha'(\\mu_0) \\neq 0$（以非零速度穿越）。此时平衡点附近出生或消失一族小极限环，环的振幅通常按 $\\sqrt{|\\mu - \\mu_0|}$ 增长：**超临界 Hopf** 是平衡点从稳定变不稳定、同时诞生一族稳定的小极限环（自激振荡从平衡态里「长出来」）；**亚临界 Hopf** 是一族不稳定的小极限环在临界处缩进平衡点并消失，使平衡点直接从稳定跳到不稳定。Hopf 分支把「静止」与「振荡」两种长期行为接了起来。\n\n继续增大参数，吸引子还可能进一步复杂化，出现**奇怪吸引子**与**混沌**。用 Devaney 的刻画，混沌系统同时具备三条性质：**对初值的敏感依赖**（任意接近的两个初值，轨线以指数速度分离，可用正的最大李雅普诺夫指数刻画：$|\\delta x(t)| \\sim |\\delta x(0)| e^{\\lambda t}$，$\\lambda > 0$）；**拓扑传递性**（任何小区域都会被轨线带到相空间各处）；**周期点稠密**（任何小区域里都有周期轨）。必须强调：**混沌不是随机**。方程是确定性的，没有任何随机项；初值误差被反复「拉伸 + 折叠」地放大，才造成实际上的不可预测，其几何产物——奇怪吸引子——往往具有分形结构。\n\n最后是一个关键的维度门槛。**平面自治系统不可能混沌**：由庞加莱–本迪克松定理，平面上有界轨线的极限集只能是平衡点、闭轨或二者的连通并，没有足够复杂的回复结构来支撑混沌。因此，连续时间的自治系统要出现混沌**至少需要三维**。经典例子是 Lorenz 系统：\n\n$$x' = \\sigma(y - x), \\qquad y' = x(\\rho - z) - y, \\qquad z' = xy - \\beta z,$$\n\n在标准参数 $\\sigma = 10,\\ \\rho = 28,\\ \\beta = 8/3$ 下，轨线被束缚在一个有界的蝴蝶形奇怪吸引子上：它完全确定，却对初值敏感（最大李雅普诺夫指数约为 $0.9 > 0$）。它与 Hopf 分支也有关联：参数 $\\rho$ 增大到约 $24.74$ 时，两个非平凡平衡点经由（亚临界）Hopf 分支失去稳定性——这是通往混沌之路上的一站。最后提醒一句：维度门槛是对「连续时间 + 自治」而言的，离散映射一维就能混沌，例如逻辑斯蒂映射 $x_{n+1} = r x_n(1 - x_n)$。",
+    "definitionEn": "When a parameter $\\mu$ appears in the equation, the behaviour of solutions changes with $\\mu$. If, as $\\mu$ passes a value $\\mu_0$ (a **bifurcation value**), the qualitative structure of the phase portrait changes — equilibria are created or destroyed, change type or exchange stability, limit cycles are born or die — the system **bifurcates** at $\\mu_0$, and $(\\mu_0, x_0)$ is a bifurcation point. One key fact: local (equilibrium) bifurcations can occur only at **non-hyperbolic** equilibria, that is, where the Jacobian has an eigenvalue with zero real part ($f_x = 0$ in one dimension); hyperbolic equilibria keep their type under small parameter perturbations. So bifurcation analysis always starts by locating non-hyperbolic equilibria. For a one-dimensional system $x' = f(x, \\mu)$ the four most common (codimension-one) types are as follows.\n\n**Saddle-node** (tangent) **bifurcation**: normal form $x' = \\mu - x^2$. For $\\mu < 0$ there is no equilibrium; for $\\mu > 0$ a pair $x = \\pm\\sqrt{\\mu}$ appears (one stable, one unstable); as $\\mu$ decreases to $0$ the two collide at $x = 0$ and annihilate. Creation and destruction of equilibrium pairs is its signature. **Transcritical bifurcation**: normal form $x' = \\mu x - x^2 = x(\\mu - x)$; the equilibria $x = 0$ and $x = \\mu$ exist for all $\\mu$ and **exchange stability** when they cross at $\\mu = 0$ (for $\\mu < 0$ the point $x = 0$ is stable and $x = \\mu$ unstable, and conversely for $\\mu > 0$). It is typical of models with a trivial equilibrium, such as $x' = x(\\mu - x)$. **Pitchfork bifurcation**: normal form $x' = \\mu x - x^3$, symmetric under $x \\to -x$. For $\\mu < 0$ the origin is the only equilibrium and is stable; once $\\mu$ turns positive the origin destabilizes and a symmetric pair of stable equilibria $x = \\pm\\sqrt{\\mu}$ branches off — the **supercritical** pitchfork (symmetry breaking). With the opposite cubic term, $x' = \\mu x + x^3$, a pair of **unstable** equilibria $\\pm\\sqrt{-\\mu}$ exists for $\\mu < 0$, shrinks onto the origin as $\\mu \\to 0^-$ and disappears, while the origin flips from stable to unstable — the **subcritical** pitchfork.\n\nThe **Hopf bifurcation** sits between equilibria and limit cycles: near $\\mu_0$ an equilibrium has a pair of complex conjugate eigenvalues $\\lambda(\\mu) = \\alpha(\\mu) \\pm i\\beta(\\mu)$ that **crosses the imaginary axis** at $\\mu_0$: $\\alpha(\\mu_0) = 0$, $\\beta(\\mu_0) \\neq 0$ (a purely imaginary pair) together with the **transversality condition** $\\alpha'(\\mu_0) \\neq 0$ (crossing with nonzero speed). A family of small limit cycles is then born or destroyed, with amplitude typically growing like $\\sqrt{|\\mu - \\mu_0|}$: in a **supercritical** Hopf bifurcation the equilibrium loses stability and a stable family of small limit cycles appears (self-sustained oscillation grows out of the steady state); in a **subcritical** one an unstable family of limit cycles shrinks into the equilibrium at the critical value and disappears, and the equilibrium jumps directly from stable to unstable. Hopf bifurcation joins the two long-time behaviours: rest and oscillation.\n\nAs parameters increase further, attractors can become more complicated and produce **strange attractors** and **chaos**. In Devaney's formulation a chaotic system has three properties at once: **sensitive dependence on initial conditions** (arbitrarily close initial data separate exponentially, quantified by a positive largest Lyapunov exponent, $|\\delta x(t)| \\sim |\\delta x(0)| e^{\\lambda t}$ with $\\lambda > 0$); **topological transitivity** (any small region is eventually carried anywhere in the phase space); and **dense periodic points** (every small region contains a periodic orbit). Crucially, **chaos is not randomness**: the equation is deterministic with no random term at all; initial errors are amplified by repeated stretching and folding, and the geometric product of that stretching and folding — the strange attractor — typically has a fractal structure.\n\nFinally, a key dimension threshold. **Planar autonomous systems cannot be chaotic**: by the Poincaré–Bendixson theorem the limit set of a bounded orbit is an equilibrium, a closed orbit, or a connected union of the two, leaving no room for the complicated recurrence that chaos requires. Hence an autonomous continuous-time system needs **at least three dimensions** to be chaotic. The classical example is the Lorenz system:\n\n$$x' = \\sigma(y - x), \\qquad y' = x(\\rho - z) - y, \\qquad z' = xy - \\beta z,$$\n\nwith the standard parameters $\\sigma = 10,\\ \\rho = 28,\\ \\beta = 8/3$, whose orbits are confined to a bounded butterfly-shaped strange attractor: fully deterministic, yet sensitive to initial data (largest Lyapunov exponent about $0.9 > 0$). Hopf bifurcation is part of the story: as $\\rho$ grows past about $24.74$ the two nontrivial equilibria lose stability in a (subcritical) Hopf bifurcation — one stop on the road to chaos. One last caveat: the threshold applies to continuous-time autonomous systems only; discrete maps can be chaotic in one dimension, the logistic map $x_{n+1} = r x_n(1 - x_n)$ being the standard example.",
+    "formulas": [
+      {
+        "latex": "x' = f(x, \\mu), \\qquad \\mu = \\mu_0 \\text{ 处平衡点个数、类型或相图拓扑突变} \\ \\Longleftrightarrow\\ \\text{分支}",
+        "note": "分支的定义。局部（平衡点）分支的必要条件：平衡点非双曲（$Df$ 有实部为零的特征值，一维时 $f_x = 0$），分析从找非双曲平衡点开始。",
+        "noteEn": "Definition of a bifurcation. A necessary condition for a local (equilibrium) bifurcation is a non-hyperbolic equilibrium ($Df$ has a zero-real-part eigenvalue; $f_x = 0$ in one dimension), so the analysis starts there."
+      },
+      {
+        "latex": "x' = \\mu - x^2 \\ (\\text{鞍结});\\qquad x' = \\mu x - x^2 \\ (\\text{跨临界});\\qquad x' = \\mu x - x^3 \\ (\\text{叉式})",
+        "note": "一维三种基本分支的标准形：鞍结 = 一对平衡点在 $\\mu = 0$ 相撞消失或产生；跨临界 = 两个平衡点穿越后交换稳定性；叉式 = 对称破缺，$\\mu > 0$ 时从原点劈出 $x = \\pm\\sqrt{\\mu}$ 一对稳定分支（超临界）。",
+        "noteEn": "The one-dimensional normal forms: saddle-node = an equilibrium pair collides and disappears (or is born) at $\\mu = 0$; transcritical = two equilibria cross and exchange stability; pitchfork = symmetry breaking, with a stable pair $x = \\pm\\sqrt{\\mu}$ branching off the origin for $\\mu > 0$ (supercritical)."
+      },
+      {
+        "latex": "\\lambda(\\mu) = \\alpha(\\mu) \\pm i\\beta(\\mu), \\qquad \\alpha(\\mu_0) = 0, \\quad \\beta(\\mu_0) \\neq 0, \\quad \\alpha'(\\mu_0) \\neq 0",
+        "note": "Hopf 分支的条件：一对纯虚特征值加横截穿越虚轴。超临界分支产生稳定极限环（振幅 $\\propto \\sqrt{|\\mu - \\mu_0|}$），亚临界分支产生不稳定极限环。",
+        "noteEn": "Hopf bifurcation conditions: a purely imaginary pair plus transversal crossing of the imaginary axis. The supercritical case produces a stable limit cycle (amplitude $\\propto \\sqrt{|\\mu - \\mu_0|}$); the subcritical case produces an unstable one."
+      },
+      {
+        "latex": "|\\delta x(t)| \\sim |\\delta x(0)|\\, e^{\\lambda t}, \\qquad \\lambda > 0 \\ \\Longleftrightarrow\\ \\text{敏感依赖}",
+        "note": "对初值的敏感依赖与正的李雅普诺夫指数：确定性系统中误差被指数放大的定量描述，是混沌的标志之一（Devaney 定义还要求拓扑传递与周期点稠密）。",
+        "noteEn": "Sensitive dependence and a positive Lyapunov exponent: the quantitative statement of exponentially amplified error in a deterministic system, one of the marks of chaos (Devaney also requires topological transitivity and dense periodic points)."
+      },
+      {
+        "latex": "x' = \\sigma(y - x),\\quad y' = x(\\rho - z) - y,\\quad z' = xy - \\beta z, \\qquad \\sigma = 10,\\ \\rho = 28,\\ \\beta = \\frac{8}{3}",
+        "note": "Lorenz 系统：标准参数下具有奇怪吸引子与敏感依赖，是三维自治连续系统混沌的经典例子（平面情形被庞加莱–本迪克松定理排除）。",
+        "noteEn": "The Lorenz system: with the standard parameters it has a strange attractor and sensitive dependence — the classical example of chaos in a three-dimensional autonomous continuous system (the planar case being excluded by Poincaré–Bendixson)."
+      }
+    ],
+    "expression": {
+      "text": "参数 μ 变化引起相图拓扑突变（鞍结、跨临界、叉式、Hopf）；混沌 = 确定性 + 敏感依赖（正 Lyapunov 指数）+ 拓扑传递 + 周期点稠密",
+      "symbol": "x' = f(x, \\mu)",
+      "note": "平面自治系统受 PB 定理限制不会混沌；自治连续系统的混沌至少需要三维（Lorenz 系统）。",
+      "noteEn": "Planar autonomous systems cannot be chaotic by the Poincaré–Bendixson theorem; autonomous continuous-time chaos needs at least three dimensions (Lorenz system)."
+    },
+    "properties": [
+      "分支 = 相图拓扑结构的定性改变（平衡点的个数、类型、稳定性，或闭轨的出现与消失）；局部（平衡点）分支只能发生在非双曲平衡点处，这是寻找分支值的必要条件。",
+      "鞍结分支：成对的平衡点在分支值处碰撞并消失（或反向产生），不需要任何对称性假设（跨临界分支同样不要求，只有叉式分支需要 $x\\to-x$ 对称性）；跨临界分支：两个平衡点始终存在，穿越后交换稳定性——典型模型 $x' = x(\\mu - x)$。",
+      "叉式分支要求 $x \\to -x$ 对称性：超临界（$\\mu x - x^3$）从稳定原点劈出一对稳定分支 $\\pm\\sqrt{\\mu}$；亚临界（$\\mu x + x^3$）一对不稳定平衡点先存在、再与原点碰撞消失，并使原点失稳。Hopf 分支连接平衡点与周期振荡：条件是一对纯虚特征值加横截条件，超临界出稳定极限环、亚临界出不稳定极限环。",
+      "混沌的三要素（Devaney）：敏感依赖（正的最大李雅普诺夫指数）、拓扑传递、周期点稠密；混沌**不是随机**，方程没有随机项，是拉伸折叠带来的确定性不可预测性，奇怪吸引子常有分形结构（Lorenz 的蝴蝶吸引子）。",
+      "维度门槛：平面自治系统受庞加莱–本迪克松定理限制不会混沌；自治连续系统的混沌至少出现在三维（Lorenz 系统；$\\rho \\approx 24.74$ 处非平凡平衡点经 Hopf 分支失稳是通往混沌之路上的关键事件）。离散映射不受此限，逻辑斯蒂映射一维即可混沌。"
+    ],
+    "propertiesEn": [
+      "A bifurcation is a qualitative change of the phase-portrait topology (number, type or stability of equilibria, birth or death of limit cycles); local (equilibrium) bifurcations occur only at non-hyperbolic equilibria — a necessary condition for finding bifurcation values.",
+      "Saddle-node bifurcation: an equilibrium pair collides and disappears (or is created) at the bifurcation value — requires no symmetry assumption (transcritical bifurcation needs none either; only the pitchfork requires $x\\to-x$ symmetry); transcritical bifurcation: the two equilibria exist throughout and exchange stability as they cross, the model case being $x' = x(\\mu - x)$.",
+      "Pitchfork bifurcation requires $x \\to -x$ symmetry: the supercritical form ($\\mu x - x^3$) splits a stable pair $\\pm\\sqrt{\\mu}$ off the stable origin, while the subcritical form ($\\mu x + x^3$) has an unstable pair that collides with the origin and disappears, leaving the origin unstable. Hopf bifurcation links equilibria to periodic oscillations: a purely imaginary pair plus transversality gives a stable limit cycle (supercritical) or an unstable one (subcritical).",
+      "The three ingredients of chaos (Devaney): sensitive dependence (positive largest Lyapunov exponent), topological transitivity, and dense periodic points; chaos is **not randomness** — there is no random term, only deterministic unpredictability produced by stretching and folding, and strange attractors (such as Lorenz's butterfly) are typically fractal.",
+      "Dimension threshold: planar autonomous systems cannot be chaotic by the Poincaré–Bendixson theorem; autonomous continuous-time chaos needs at least three dimensions (Lorenz system, where the nontrivial equilibria lose stability through a Hopf bifurcation at $\\rho \\approx 24.74$, a milestone on the route to chaos). Discrete maps are exempt: the logistic map is chaotic in one dimension."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^3",
+          "color": "#4cc9f0",
+          "label": "y = x³"
+        },
+        {
+          "expr": "2*x",
+          "color": "#ff6b9d",
+          "label": "y = 2x（a = 2）"
+        },
+        {
+          "expr": "0.5*x",
+          "color": "#06d6a0",
+          "label": "y = x/2（a = 0.5）"
+        },
+        {
+          "expr": "-x",
+          "color": "#ffd166",
+          "label": "y = −x（a = −1）"
+        }
+      ],
+      "xRange": [
+        -2.4,
+        2.4
+      ],
+      "yRange": [
+        -4.5,
+        4.5
+      ],
+      "title": "x' = ax − x³ 的平衡点：y = x³ 与 y = ax 的交点随 a 变化"
+    },
+    "examples": [
+      {
+        "problem": "对系统 $x' = \\mu x - x^3$ 做完整的分支分析：求所有平衡点及其稳定性，指出分支值，判断分支类型；并用李雅普诺夫函数 $V = x^2$ 验证原点在 $\\mu < 0$ 时稳定、在 $\\mu > 0$ 时不稳定。",
+        "solution": "平衡点由 $x(\\mu - x^2) = 0$ 给出：$x = 0$ 永远存在；当 $\\mu > 0$ 时还有 $x = \\pm\\sqrt{\\mu}$。\n稳定性用 $f'(x) = \\mu - 3x^2$ 判断：在 $x = 0$ 处 $f'(0) = \\mu$，所以 $\\mu < 0$ 时原点稳定、$\\mu > 0$ 时不稳定；在 $x = \\pm\\sqrt{\\mu}$ 处（$\\mu > 0$）$f' = \\mu - 3\\mu = -2\\mu < 0$，两个分支都稳定。$\\mu = 0$ 时 $f'(0) = 0$，平衡点非双曲，正是分支点。\n用 $V = x^2$ 复核（顺便展示李雅普诺夫第二方法）：\n$$\\dot V = 2x \\cdot (\\mu x - x^3) = 2x^2(\\mu - x^2).$$\n$\\mu < 0$ 时，在 $|x| < \\sqrt{-\\mu}$ 内 $\\mu - x^2 < 0$，于是 $\\dot V < 0$（除 $x = 0$），原点渐近稳定；$\\mu > 0$ 时，在 $0 < |x| < \\sqrt{\\mu}$ 内 $\\mu - x^2 > 0$，$\\dot V > 0$，原点不稳定。\n结论：这是 $\\mu = 0$ 处的**超临界叉式分支**——$\\mu < 0$ 时只有稳定的原点；$\\mu > 0$ 时原点失稳，同时对称地诞生一对稳定平衡点 $\\pm\\sqrt{\\mu}$，分支图呈「Y」形。"
+      },
+      {
+        "problem": "分析系统 $\\dot r = \\mu r - r^3$，$\\dot\\theta = 1$ 的分支：把它写成直角坐标并验证 Hopf 条件，确定分支类型、极限环的振幅与稳定性，并考察临界值 $\\mu = 0$。",
+        "solution": "由 $x = r\\cos\\theta$，$y = r\\sin\\theta$ 得直角坐标形式\n$$x' = \\dot r\\cos\\theta - r\\dot\\theta\\sin\\theta = (\\mu r - r^3)\\cos\\theta - r\\sin\\theta = \\mu x - y - x(x^2 + y^2),$$\n$$y' = \\dot r\\sin\\theta + r\\dot\\theta\\cos\\theta = \\mu y + x - y(x^2 + y^2).$$\n线性化：原点处雅可比矩阵为 $\\begin{pmatrix} \\mu & -1 \\\\ 1 & \\mu \\end{pmatrix}$，特征值 $\\lambda = \\mu \\pm i$。实部 $\\alpha(\\mu) = \\mu$，虚部 $\\beta = 1 \\neq 0$，且 $\\alpha'(\\mu) = 1 \\neq 0$——Hopf 分支的两个条件都满足，分支值为 $\\mu_0 = 0$。\n径向方程 $\\dot r = r(\\mu - r^2)$ 可以直接读出结论：$\\mu \\le 0$ 时对一切 $r > 0$ 有 $\\dot r < 0$（$\\mu = 0$ 时 $\\dot r = -r^3$ 仍为负），轨线都趋于原点，原点是渐近稳定的；$\\mu > 0$ 时原点失稳，而 $r = \\sqrt{\\mu}$ 是不变圆周：$r < \\sqrt{\\mu}$ 时 $\\dot r > 0$、$r > \\sqrt{\\mu}$ 时 $\\dot r < 0$，两侧轨线都趋于它。因此这是**超临界 Hopf 分支**：分支值之后出现一条稳定极限环，振幅 $r = \\sqrt{\\mu}$ 按 $\\sqrt{\\mu - \\mu_0}$ 的规律增长，周期恒为 $2\\pi$（角速度 $\\dot\\theta = 1$）。数值上取 $\\mu = 0.5$，从 $r = 0.05$ 与 $r = 3$ 出发积分，都收敛到半径 $\\sqrt{0.5} \\approx 0.707$ 的圆，与理论一致。"
+      }
+    ],
+    "tags": [
+      "分支",
+      "叉式分支",
+      "Hopf 分支",
+      "混沌",
+      "Lorenz 系统",
+      "奇怪吸引子"
+    ],
+    "links": [
+      "dynamical-systems",
+      "limit-cycles",
+      "stability",
+      "lyapunov-second-method",
+      "phase-plane"
+    ]
+  }
+]

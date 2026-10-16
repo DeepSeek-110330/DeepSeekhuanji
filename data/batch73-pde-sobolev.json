@@ -1,0 +1,503 @@
+[
+  {
+    "id": "sobolev-embedding",
+    "title": "索伯列夫嵌入定理",
+    "titleEn": "The Sobolev Embedding Theorem",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "一个指标 k − n/p 就决定 W^{k,p} 能换到哪个 L^q 或 Hölder 空间：指标为负得 L^q，为零是嵌不进 L^∞ 的临界情形，为正才有古典连续性。",
+    "summaryEn": "A single index k − n/p decides whether W^{k,p} lands in some L^q or in a Hölder space: negative gives L^q, zero is the critical case that misses L^∞, positive gives classical continuity.",
+    "definition": "设 $k\\ge1$ 是整数、$1\\le p<\\infty$，$W^{k,p}(\\mathbb R^n)$ 由一切 $k$ 阶**弱导数**都落在 $L^p$ 中的函数组成。嵌入定理回答的问题是：**$k$ 阶可积性能不能换成更「好」的性质？**答案靠一个数决定：\n$$\\frac1q=\\frac1p-\\frac{k}{n},\\qquad\\text{等价地}\\quad q=\\frac{np}{n-kp}.$$\n这是全篇最核心的式子，$k$ 在分子、$n$ 在分母，位置绝不能互换（写成 $\\frac1q=\\frac1p-\\frac nk$ 就错了）。它是量纲分析的产物：要求嵌入不等式 $\\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}$ 对所有伸缩 $u_\\lambda(x)=u(\\lambda x)$ 用同一个常数 $C$ 成立，两侧的伸缩指数必须相同，解出上式。$k=1$ 时 $q=p^*=\\frac{np}{n-p}$ 称为 $p$ 的**索伯列夫共轭指数**。\n\n**次临界（$1\\le p<n$ 且 $kp<n$）**：$W^{k,p}(\\mathbb R^n)\\subset L^q(\\mathbb R^n)$，$\\frac1q=\\frac1p-\\frac kn$，且嵌入**连续**：$\\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}$（$C$ 只依赖 $n,k,p$）。由于 $kp<n$ 时 $q>p$，结论可读成「用导数换取可积性」。例如 $n=3,k=1,p=2$：$\\frac1q=\\frac12-\\frac13=\\frac16$，即 $q=6$，故 $W^{1,2}(\\mathbb R^3)\\subset L^6(\\mathbb R^3)$；再由 $L^2$ 与 $L^6$ 的插值，$2\\le q\\le6$ 的 $L^q$ 也全部被包含。\n\n**临界（$kp=n$）**：上式算出 $\\frac1q=0$，形式上像 $q=\\infty$，**这里恰是最大的陷阱**。当 $p>1$ 时准确结论是\n$$W^{k,p}\\subset L^q\\quad(p\\le q<\\infty,\\ q\\ \\text{可任意大}),\\qquad W^{k,p}\\not\\subset L^\\infty,$$\n即嵌得进一切**有限**指数的 $L^q$，唯独嵌不进 $L^\\infty$；它的精确替代品是 $BMO$（$W^{k,p}\\subset BMO$，最典型的是 $W^{1,n}(\\mathbb R^n)\\subset BMO$，$n\\ge2$）。反例是 $u(x)=\\log\\log\\frac1{|x|}$（原点附近截断）：它在 $W^{1,n}(B)$ 中却无界。**「临界情形不能嵌入 $L^\\infty$」是必须记住的反直觉点。**唯一例外是 $p=1$（此时 $k=n$，最典型的是 $n=k=p=1$，即一维微积分里「导数可积 $\\Rightarrow$ 有界」）：$W^{n,1}(\\mathbb R^n)\\subset L^\\infty$。\n\n**超临界（$kp>n$）**：此时指标 $k-\\frac np>0$，换来的是**古典意义下的连续性**（Hölder 连续）：\n$$W^{k,p}\\subset C^{m,\\gamma},\\qquad m=\\Big\\lfloor k-\\frac np\\Big\\rfloor,\\quad \\gamma=k-\\frac np-m\\in(0,1),$$\n当 $k-\\frac np$ 为正整数时取 $m=k-\\frac np-1$、$\\gamma$ 为任意小于 $1$ 的指数。**只有 $kp>n$ 才有古典连续性**：二维 $n=2$ 时 $W^{1,p}\\subset L^\\infty$（$p>2$）靠的正是 $p>2=n$，而 $W^{1,2}$ 恰在临界线上，只能得到 $W^{1,2}\\subset L^q$（一切 $q<\\infty$）、$W^{1,2}\\not\\subset L^\\infty$。\n\n上面的结论写在 $\\mathbb R^n$ 上。换到区域 $\\Omega$ 必须给区域加条件：锥条件、一致 $C^1$ 边界或 Lipschitz 边界都可以（指数关系不变，常数变），**不能无条件地对任意 $\\Omega$ 断言嵌入成立**；无界区域还要额外处理——次临界的连续嵌入仍成立，但紧性（见「迹定理与紧嵌入」）会失效。这些嵌入是弱解理论的门槛：变分问题的直接方法、伽辽金极限、椭圆正则性的 Hölder 提升，都要先知道函数落在哪个空间里。",
+    "definitionEn": "Let $k\\ge1$ be an integer and $1\\le p<\\infty$; $W^{k,p}(\\mathbb R^n)$ consists of the functions whose weak derivatives of all orders up to $k$ lie in $L^p$. The embedding theorem answers the question: **can $k$-th order integrability be traded for a better property?** It can, and the target is governed by a single number:\n$$\\frac1q=\\frac1p-\\frac{k}{n},\\qquad\\text{equivalently}\\quad q=\\frac{np}{n-kp}.$$\nThis is the central formula: $k$ sits in the numerator and $n$ in the denominator, and the two positions can never be swapped. It comes from scaling: the inequality $\\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}$ must hold with one constant $C$ for all dilates $u_\\lambda(x)=u(\\lambda x)$, and matching the two scaling exponents gives exactly the relation above. For $k=1$ one writes $q=p^*=\\frac{np}{n-p}$, the **Sobolev conjugate exponent**.\n\n**Subcritical case ($1\\le p<n$, $kp<n$)**: $W^{k,p}(\\mathbb R^n)\\subset L^q(\\mathbb R^n)$ with the exponent above, and the embedding is **continuous**: $\\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}$, with $C$ depending only on $n,k,p$. Since $q>p$, this trades derivatives for integrability. For instance $n=3,k=1,p=2$ gives $\\frac1q=\\frac12-\\frac13=\\frac16$, so $q=6$ and $W^{1,2}(\\mathbb R^3)\\subset L^6(\\mathbb R^3)$; by interpolation between $L^2$ and $L^6$ all $2\\le q\\le6$ follow as well.\n\n**Critical case ($kp=n$)**: the formula gives $\\frac1q=0$, which looks like $q=\\infty$, and **this is the great trap**. For $p>1$ the correct statement is\n$$W^{k,p}\\subset L^q\\quad(p\\le q<\\infty,\\ q\\ \\text{arbitrarily large}),\\qquad W^{k,p}\\not\\subset L^\\infty,$$\nthat is, every finite exponent works but $L^\\infty$ does not; the sharp substitute is $BMO$ (typically $W^{1,n}(\\mathbb R^n)\\subset BMO$ for $n\\ge2$), and a counterexample is $u(x)=\\log\\log\\frac1{|x|}$ (truncated near the origin), which lies in $W^{1,n}(B)$ yet is unbounded. The only exception is $p=1$ (hence $k=n$; most notably $n=k=p=1$, the one-dimensional fact that integrable derivative implies boundedness): $W^{n,1}(\\mathbb R^n)\\subset L^\\infty$.\n\n**Supercritical case ($kp>n$)**: now $k-\\frac np>0$ and one gains **classical continuity** (Hölder continuity):\n$$W^{k,p}\\subset C^{m,\\gamma},\\qquad m=\\Big\\lfloor k-\\frac np\\Big\\rfloor,\\quad \\gamma=k-\\frac np-m\\in(0,1),$$\nwith $m=k-\\frac np-1$ and any $\\gamma<1$ when $k-\\frac np$ is a positive integer. So classical continuity requires $kp>n$: in two dimensions $W^{1,p}\\subset L^\\infty$ for $p>2$, whereas $W^{1,2}$ sits exactly on the critical line and only satisfies $W^{1,2}\\subset L^q$ for all $q<\\infty$ but not $L^\\infty$.\n\nThe statements above live on $\\mathbb R^n$. On a domain $\\Omega$ they require geometric hypotheses (cone condition, uniformly $C^1$ or Lipschitz boundary) — one must never assert them for an arbitrary $\\Omega$ — and unbounded domains need extra care: continuous embeddings below criticality survive, compactness does not. These embeddings are the gateway to weak solution theory (direct methods in the calculus of variations, Galerkin limits, Hölder upgrades in elliptic regularity).",
+    "formulas": [
+      {
+        "latex": "\\frac1q=\\frac1p-\\frac{k}{n},\\qquad 1\\le p<n,\\ kp<n",
+        "note": "临界指数：$k$ 阶弱导数的 $L^p$ 可积性换来的 $L^q$ 可积性。$k$ 在分子、$n$ 在分母，位置不能错；等价形式 $q=\\frac{np}{n-kp}$。",
+        "noteEn": "The critical exponent: the $L^q$ integrability obtained from $L^p$ integrability of the $k$-th weak derivatives. Here $k$ is in the numerator and $n$ in the denominator; equivalently $q=\\frac{np}{n-kp}$."
+      },
+      {
+        "latex": "W^{k,p}(\\mathbb R^n)\\subset L^q(\\mathbb R^n),\\qquad \\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}",
+        "note": "次临界情形的连续嵌入。常数 $C$ 只依赖 $n,k,p$；这个不等式对伸缩不变，正是指数关系 $\\frac1q=\\frac1p-\\frac kn$ 的来源。",
+        "noteEn": "The continuous embedding in the subcritical case. The constant $C$ depends only on $n,k,p$; the inequality is dilation-invariant, which is exactly why the exponent relation holds."
+      },
+      {
+        "latex": "kp=n:\\quad W^{k,p}\\subset L^q\\ (p\\le q<\\infty),\\qquad W^{k,p}\\not\\subset L^\\infty\\ (p>1),\\qquad W^{k,p}\\subset BMO",
+        "note": "临界情形：一切 $p\\le q<\\infty$ 都能嵌，$q=\\infty$ 不行；精确的替代空间是 $BMO$，反例 $\\log\\log\\frac1{|x|}$。唯一例外是 $p=1$（此时 $k=n$）：$W^{n,1}(\\mathbb R^n)\\subset L^\\infty$。",
+        "noteEn": "Critical case: every finite exponent $q$ works, $q=\\infty$ does not, and the sharp substitute is $BMO$, with $\\log\\log\\frac1{|x|}$ as a counterexample. The only exception is $p=1$ (then $k=n$), where $W^{n,1}(\\mathbb R^n)\\subset L^\\infty$."
+      },
+      {
+        "latex": "kp>n:\\quad W^{k,p}\\subset C^{m,\\gamma},\\qquad m=\\Big\\lfloor k-\\frac np\\Big\\rfloor,\\ \\ \\gamma=k-\\frac np-m",
+        "note": "超临界情形：只有 $kp>n$ 才有古典（Hölder）连续性。$k-\\frac np$ 为整数时取 $m=k-\\frac np-1$，$\\gamma$ 可取任意小于 $1$ 的值。",
+        "noteEn": "Supercritical case: classical (Hölder) continuity appears only when $kp>n$. If $k-\\frac np$ is a positive integer, take $m=k-\\frac np-1$ and any $\\gamma<1$."
+      },
+      {
+        "latex": "n=2:\\quad W^{1,p}\\subset L^\\infty\\ (p>2),\\qquad W^{1,2}\\subset L^q\\ (q<\\infty),\\qquad W^{1,2}\\not\\subset L^\\infty",
+        "note": "二维的特例：$W^{1,p}$（$p>2$）有连续性，而 $W^{1,2}$ 恰在临界线上，只有 $L^q$（$q<\\infty$）而没有 $L^\\infty$。",
+        "noteEn": "The two-dimensional special case: $W^{1,p}$ is continuous for $p>2$, while $W^{1,2}$ is exactly critical and gives every finite $L^q$ but not $L^\\infty$."
+      }
+    ],
+    "expression": {
+      "text": "W^{k,p}(R^n) ⊂ L^q(R^n)，1/q = 1/p − k/n；kp<n 次临界、kp=n 临界（q 任意有限可嵌，但不含 L^∞，p>1）、kp>n 超临界（Hölder 连续）",
+      "symbol": "1/q = 1/p - k/n",
+      "note": "k 在分子、n 在分母；临界时 1/q = 0 但 q = ∞ 并不成立（p > 1 时），精确替代是 BMO。",
+      "noteEn": "k in the numerator, n in the denominator; at criticality 1/q = 0 does not give q = ∞ when p > 1, and the sharp substitute is BMO."
+    },
+    "properties": [
+      "指数公式 $\\frac1q=\\frac1p-\\frac kn$ 只由 $n,k,p$ 决定，与区域形状无关；区域只影响嵌入常数 $C$ 与定理的前提是否成立。",
+      "嵌入是连续的，$\\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}$；临界指数 $p^*$ 最优：$q>p^*$ 时 $W^{1,p}\\not\\subset L^q$，用峰函数 $u(x)=|x|^{-\\alpha}\\varphi(x)$（$\\frac nq<\\alpha<\\frac np-1$）即可验证。",
+      "临界情形 $kp=n$（$p>1$）嵌不进 $L^\\infty$（反例 $\\log\\log\\frac1{|x|}$），但嵌进一切 $p\\le q<\\infty$ 的 $L^q$ 与 $BMO$；唯一例外是 $p=1$（$k=n$，最典型 $n=k=p=1$）时的 $W^{n,1}\\subset L^\\infty$。",
+      "古典连续性（Hölder 空间 $C^{m,\\gamma}$）只在 $kp>n$ 时出现，指标 $k-\\frac np$ 越大可得的光滑阶数越高；二维表现为 $W^{1,p}\\subset L^\\infty\\iff p>2$。",
+      "区域条件不可省：需要锥条件或 Lipschitz（一致 $C^1$）边界；无界区域上紧性失效。嵌入还能链式复合：$k-\\frac np\\ge m-\\frac nq$、$k\\ge m$、$q\\ge p$ 时 $W^{k,p}\\subset W^{m,q}$，嵌入定理只是 $m=0$ 的特例。"
+    ],
+    "propertiesEn": [
+      "The exponent relation $\\frac1q=\\frac1p-\\frac kn$ depends only on $n,k,p$, not on the shape of the domain; the domain affects only the constant $C$ and the hypotheses.",
+      "The embedding is continuous, $\\|u\\|_{L^q}\\le C\\|u\\|_{W^{k,p}}$, and the critical exponent $p^*$ is optimal: for $q>p^*$ the embedding fails, as the peak functions $u(x)=|x|^{-\\alpha}\\varphi(x)$ with $\\frac nq<\\alpha<\\frac np-1$ show.",
+      "In the critical case $kp=n$ (with $p>1$) the embedding into $L^\\infty$ fails (counterexample $\\log\\log\\frac1{|x|}$), but every finite $L^q$ and $BMO$ are attained; the only exception is $p=1$ (then $k=n$, typically $n=k=p=1$), where $W^{n,1}\\subset L^\\infty$.",
+      "Classical continuity (Hölder spaces $C^{m,\\gamma}$) appears only for $kp>n$, and a larger index $k-\\frac np$ yields higher smoothness; in 2D this reads $W^{1,p}\\subset L^\\infty$ iff $p>2$.",
+      "Geometric assumptions on the domain cannot be dropped (cone condition or Lipschitz, uniformly $C^1$ boundary), and compactness fails on unbounded domains. Embeddings also compose: $W^{k,p}\\subset W^{m,q}$ whenever $k-\\frac np\\ge m-\\frac nq$, $k\\ge m$ and $q\\ge p$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/x - 1/3",
+          "color": "#4cc9f0",
+          "label": "1/q = 1/p − 1/3（n=3, k=1）"
+        },
+        {
+          "expr": "1/x - 2/3",
+          "color": "#ff6b9d",
+          "label": "1/q = 1/p − 2/3（n=3, k=2）"
+        },
+        {
+          "expr": "0",
+          "color": "#ffd166",
+          "label": "临界线 1/q = 0（q = ∞）"
+        }
+      ],
+      "xRange": [
+        1,
+        3.2
+      ],
+      "yRange": [
+        -0.5,
+        1.0
+      ],
+      "title": "临界指数 1/q = 1/p − k/n（n = 3）：曲线与 1/q = 0 的交点 p = n/k 就是临界；轴上方（1/q > 0）得到 L^q 嵌入，轴下方（1/q < 0，即 kp > n）改由 Hölder 空间 C^{m,γ} 接管"
+    },
+    "examples": [
+      {
+        "problem": "设 $n=3$。分别取 $p=2,\\ p=3,\\ p=4$（$k=1$），判断 $W^{1,p}(\\mathbb R^3)$ 的嵌入结论。",
+        "solution": "统一用指标 $s=k-\\frac np=1-\\frac3p$ 与 $kp$ 比较。\n(i) $p=2$：$kp=2<3=n$，次临界。$\\frac1q=\\frac12-\\frac13=\\frac16$，故 $q=6$：$W^{1,2}(\\mathbb R^3)\\subset L^q$（$2\\le q\\le6$），且 $\\|u\\|_6\\le C\\|u\\|_{W^{1,2}}$。\n(ii) $p=3$：$kp=3=n$，临界。$\\frac1q=1-1=0$ 表面上给出 $q=\\infty$，但正确结论是 $W^{1,3}\\subset L^q$（一切 $3\\le q<\\infty$）而 $W^{1,3}\\not\\subset L^\\infty$：$u(x)=\\log\\log\\frac1{|x|}$（原点附近截断）满足 $\\int|\\nabla u|^3\\approx\\int_0^{1/2}\\frac{dr}{r\\,(\\log\\frac1r)^3}<\\infty$，却无界，所以它属于 $W^{1,3}$ 但不属于 $L^\\infty$。\n(iii) $p=4$：$kp=4>3$，超临界。$s=1-\\frac34=\\frac14>0$，于是 $m=\\lfloor\\frac14\\rfloor=0$、$\\gamma=\\frac14$，得 $W^{1,4}(\\mathbb R^3)\\subset C^{0,1/4}(\\mathbb R^3)$，具有 Hölder 连续性。"
+      },
+      {
+        "problem": "证明 $n=3$、$p=2$ 时临界指数 $p^*=6$ 不能再改进：给出 $u\\in W^{1,2}(\\mathbb R^3)$ 但 $u\\notin L^8(\\mathbb R^3)$ 的例子。",
+        "solution": "取 $\\varphi\\in C_c^\\infty(B(0,1))$，$\\varphi\\equiv1$ 于 $B(0,1/2)$，令 $u(x)=|x|^{-\\alpha}\\varphi(x)$，$\\alpha>0$。\n在三维中用体积元 $r^2dr$：\n$\\int_B|\\nabla u|^2\\approx\\int_0^{1/2}r^{-2\\alpha-2}r^2\\,dr=\\int_0^{1/2}r^{-2\\alpha}dr<\\infty\\iff\\alpha<\\frac12=\\frac np-1$；\n$\\int_B|u|^8\\approx\\int_0^{1/2}r^{-8\\alpha}r^2\\,dr=\\int_0^{1/2}r^{2-8\\alpha}dr<\\infty\\iff\\alpha<\\frac38=\\frac nq$。\n取 $\\frac38<\\alpha<\\frac12$（如 $\\alpha=0.45$），则 $u\\in W^{1,2}$ 而 $u\\notin L^8$，故 $W^{1,2}\\not\\subset L^8$。\n一般规律：$|x|^{-\\alpha}$ 属于 $W^{1,p}$ 要求 $\\alpha<\\frac np-1$，属于 $L^q$ 要求 $\\alpha<\\frac nq$，能取到这样的 $\\alpha$（即反例存在）当且仅当 $\\frac nq<\\frac np-1\\iff q>p^*=\\frac{np}{n-p}$——这正是 $p^*$ 最优的证明。"
+      }
+    ],
+    "tags": [
+      "索伯列夫嵌入",
+      "临界指数",
+      "Gagliardo–Nirenberg–Sobolev",
+      "Hölder 连续",
+      "BMO"
+    ],
+    "links": [
+      "weak-derivative-sobolev",
+      "lp-spaces",
+      "sobolev-trace-compactness",
+      "bmo-space",
+      "elliptic-regularity"
+    ]
+  },
+  {
+    "id": "sobolev-trace-compactness",
+    "title": "迹定理与紧嵌入（Rellich–Kondrachov）",
+    "titleEn": "Trace Theorem and Compact Embedding",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "边界值在索伯列夫空间里的精确含义：W^{1,p}(Ω) 的函数有迹，光滑度损失恰为 1/p，且迹为零等价于属于 W_0^{1,p}；有界区域上到 L^q（q < p*）的嵌入是紧的，把弱收敛升级为强收敛子列。",
+    "summaryEn": "The precise meaning of boundary values in Sobolev spaces: functions in W^{1,p}(Ω) have traces losing exactly 1/p of smoothness, zero trace is equivalent to membership in W_0^{1,p}, and on bounded domains the embedding into L^q with q < p* is compact, upgrading weak to strong convergence.",
+    "definition": "设 $\\Omega\\subset\\mathbb R^n$ 有界、$\\partial\\Omega$ 为 $C^1$（或 Lipschitz）边界，$1\\le p<\\infty$。$W^{1,p}(\\Omega)$ 中的元素只是等价类，在零测集 $\\partial\\Omega$ 上本无定义；**迹定理**说，只要边界够光滑，限制到边界这一步仍可实现为有界线性算子\n$$T:W^{1,p}(\\Omega)\\to W^{1-1/p,\\,p}(\\partial\\Omega),$$\n它是**有界线性满射**，$\\|Tu\\|_{W^{1-1/p,p}(\\partial\\Omega)}\\le C\\|u\\|_{W^{1,p}(\\Omega)}$，并且在 $C^1(\\bar\\Omega)$ 上与普通的边界限制 $u\\mapsto u|_{\\partial\\Omega}$ 一致。请注意光滑度的损失：**损失恰是 $\\frac1p$ 阶**（阶数从 $1$ 降到 $1-\\frac1p$）——这个 $\\frac1p$ 与维数 $n$ 无关，也是最容易写错的地方。$p=2$ 时它就是熟悉的 $T:H^1(\\Omega)\\to H^{1/2}(\\partial\\Omega)$；$p=1$ 时 $1-\\frac1p=0$，迹落在 $L^1(\\partial\\Omega)$。$k$ 阶情形同理：各阶法向导数的迹 $\\partial_\\nu^j u\\in W^{k-j-1/p,p}(\\partial\\Omega)$（$j=0,\\dots,k-1$），每一阶都同样损失 $\\frac1p$。\n\n迹算子的**核**给出「零边值」的精确含义：\n$$\\ker T=W_0^{1,p}(\\Omega),$$\n即 $Tu=0\\iff u\\in W_0^{1,p}(\\Omega)$（等价地，$u$ 是 $C_c^\\infty(\\Omega)$ 在 $W^{1,p}$ 范数下的极限）。所以 $W_0^{1,p}$ 不是人为造出来的空间，而是「在边界上确实取零值」这一条件的翻译；Dirichlet 问题弱形式以 $H_0^1$ 作试探与检验空间的依据正是这条等式。另一面，$T$ 满射到 $W^{1-1/p,p}(\\partial\\Omega)$，但并不映满 $L^p(\\partial\\Omega)$：能当 Dirichlet 边值的函数必须比 $L^p$ 光滑 $\\frac1p$ 阶。\n\n**Rellich–Kondrachov 紧嵌入**：仍设 $\\Omega$ 有界、边界 Lipschitz，$1\\le p<n$，则\n$$W^{1,p}(\\Omega)\\subset\\subset L^q(\\Omega),\\qquad 1\\le q<p^*=\\frac{np}{n-p}.$$\n紧嵌入 $\\subset\\subset$ 的含义是：$W^{1,p}$ 中任何有界序列都有在 $L^q$ 中**强收敛**的子列。这里 $q<p^*$ 必须是**严格**不等式：$q=p^*$ 处只有连续嵌入而没有紧性（峰函数序列 $u_m(x)=m^{(n-p)/p}\\varphi(mx)$ 的大小不衰减，取不出强收敛子列）。$p\\ge n$ 时 $W^{1,p}(\\Omega)\\subset\\subset L^q(\\Omega)$ 对一切 $1\\le q<\\infty$ 成立；特别地 $W_0^{1,p}(\\Omega)\\subset\\subset L^p(\\Omega)$。\n\n紧嵌入是弱解理论中最常用的「升级装置」：先由自反性从有界序列中取出弱收敛子列，再用紧嵌入把弱收敛升级成 $L^q$ 强收敛，从而让非线性项或能量泛函可以取极限（变分问题极小元的存在性、特征值问题的离散谱、演化方程的 Aubin–Lions 引理都依赖它）。紧性依赖区域的**有界性**：在 $\\mathbb R^n$ 上平移序列 $u_m(x)=u(x-me)$ 在 $W^{1,p}$ 中一致有界，却没有任何 $L^q$ 强收敛子列。「有界区域 + 边界光滑」这两个前提缺一不可。",
+    "definitionEn": "Let $\\Omega\\subset\\mathbb R^n$ be bounded with $C^1$ (or Lipschitz) boundary and $1\\le p<\\infty$. Elements of $W^{1,p}(\\Omega)$ are equivalence classes and are a priori undefined on the null set $\\partial\\Omega$; the **trace theorem** says that, provided the boundary is smooth enough, restriction to the boundary is still a bounded linear operator\n$$T:W^{1,p}(\\Omega)\\to W^{1-1/p,\\,p}(\\partial\\Omega),$$\nwhich is **bounded, linear and surjective**, with $\\|Tu\\|_{W^{1-1/p,p}(\\partial\\Omega)}\\le C\\|u\\|_{W^{1,p}(\\Omega)}$, and which agrees with the ordinary restriction on $C^1(\\bar\\Omega)$. Note the loss of smoothness: **exactly $\\frac1p$ of an order** (from $1$ down to $1-\\frac1p$) — this $\\frac1p$ is independent of the dimension $n$ and is the most common slip. For $p=2$ it reads $T:H^1(\\Omega)\\to H^{1/2}(\\partial\\Omega)$; for $p=1$, $1-\\frac1p=0$ and the trace lies in $L^1(\\partial\\Omega)$. In general the traces of the normal derivatives satisfy $\\partial_\\nu^j u\\in W^{k-j-1/p,p}(\\partial\\Omega)$ for $j=0,\\dots,k-1$, each losing the same $\\frac1p$.\n\nThe kernel of the trace operator captures the precise meaning of zero boundary values: $\\ker T=W_0^{1,p}(\\Omega)$, i.e. $Tu=0\\iff u\\in W_0^{1,p}(\\Omega)$ (equivalently, $u$ is the $W^{1,p}$-limit of $C_c^\\infty(\\Omega)$ functions). Thus $W_0^{1,p}$ is not an artificial space but the exact translation of 「vanishing on the boundary」, which is why weak formulations of Dirichlet problems use $H_0^1$ as trial and test space. Moreover $T$ maps onto $W^{1-1/p,p}(\\partial\\Omega)$ but not onto $L^p(\\partial\\Omega)$: admissible Dirichlet data must be $\\frac1p$ smoother than $L^p$.\n\n**The Rellich–Kondrachov compact embedding**: for $\\Omega$ bounded with Lipschitz boundary and $1\\le p<n$,\n$$W^{1,p}(\\Omega)\\subset\\subset L^q(\\Omega),\\qquad 1\\le q<p^*=\\frac{np}{n-p}.$$\nCompactness means that every bounded sequence in $W^{1,p}$ has a **strongly** convergent subsequence in $L^q$. The inequality $q<p^*$ must be **strict**: at $q=p^*$ the embedding is only continuous, never compact (the peak sequence $u_m(x)=m^{(n-p)/p}\\varphi(mx)$ does not shrink and admits no strongly convergent subsequence). For $p\\ge n$ one has $W^{1,p}(\\Omega)\\subset\\subset L^q(\\Omega)$ for every $1\\le q<\\infty$; in particular $W_0^{1,p}(\\Omega)\\subset\\subset L^p(\\Omega)$.\n\nCompactness is the standard upgrading device in weak solution theory: reflexivity yields a weakly convergent subsequence, and the compact embedding turns it into $L^q$ strong convergence, so that nonlinear terms and energy functionals can be passed to the limit (existence of minimizers, discrete spectra of eigenvalue problems, the Aubin–Lions lemma in evolution equations). It relies on the domain being **bounded**: on $\\mathbb R^n$ the translates $u_m(x)=u(x-me)$ are uniformly bounded in $W^{1,p}$ yet have no strongly convergent subsequence in $L^q$. Both hypotheses — bounded domain and smooth boundary — are indispensable.",
+    "formulas": [
+      {
+        "latex": "T:W^{1,p}(\\Omega)\\to W^{1-1/p,\\,p}(\\partial\\Omega)\\ \\text{有界线性满射},\\qquad \\|Tu\\|_{W^{1-1/p,p}(\\partial\\Omega)}\\le C\\|u\\|_{W^{1,p}(\\Omega)}",
+        "note": "迹定理：光滑度损失恰为 $\\frac1p$ 阶（阶数 $1-\\frac1p$），与 $n$ 无关；$p=2$ 时即 $H^1(\\Omega)\\to H^{1/2}(\\partial\\Omega)$。$k$ 阶时 $\\partial_\\nu^ju\\in W^{k-j-1/p,p}(\\partial\\Omega)$，$j=0,\\dots,k-1$。",
+        "noteEn": "Trace theorem: the loss is exactly $\\frac1p$ of an order (order $1-\\frac1p$), independent of $n$; for $p=2$ it is $H^1(\\Omega)\\to H^{1/2}(\\partial\\Omega)$. For order $k$, $\\partial_\\nu^ju\\in W^{k-j-1/p,p}(\\partial\\Omega)$, $j=0,\\dots,k-1$."
+      },
+      {
+        "latex": "\\ker T=W_0^{1,p}(\\Omega)\\qquad\\Longleftrightarrow\\qquad Tu=0\\iff u\\in W_0^{1,p}(\\Omega)",
+        "note": "「迹为零」与「属于 $W_0^{1,p}$」是同一件事——这就是零边值（Dirichlet 条件）的精确含义。",
+        "noteEn": "Having zero trace and belonging to $W_0^{1,p}$ are the same thing — this is the precise meaning of zero boundary values (the Dirichlet condition)."
+      },
+      {
+        "latex": "p=2:\\quad T:H^1(\\Omega)\\to H^{1/2}(\\partial\\Omega);\\qquad p=1:\\quad T:W^{1,1}(\\Omega)\\to L^1(\\partial\\Omega)",
+        "note": "两个常被引用的特例：$H^1$ 的边值是 $H^{1/2}$（损失 $\\frac12$ 阶）；$p=1$ 时损失 $1$ 阶刚好落在 $L^1(\\partial\\Omega)$。",
+        "noteEn": "Two frequently used special cases: boundary values of $H^1$ lie in $H^{1/2}$ (a loss of $\\frac12$), while for $p=1$ the loss of one full order lands exactly in $L^1(\\partial\\Omega)$."
+      },
+      {
+        "latex": "W^{1,p}(\\Omega)\\subset\\subset L^q(\\Omega),\\qquad 1\\le q<p^*=\\frac{np}{n-p}\\quad(1\\le p<n)",
+        "note": "Rellich–Kondrachov：紧嵌入要求 $q$ **严格**小于临界指数 $p^*$；$q=p^*$ 时只有连续嵌入，不紧。$p\\ge n$ 时对一切 $q<\\infty$ 紧。",
+        "noteEn": "Rellich–Kondrachov: compactness requires $q$ **strictly** below the critical exponent $p^*$; at $q=p^*$ the embedding is continuous but not compact. For $p\\ge n$ it is compact for every $q<\\infty$."
+      },
+      {
+        "latex": "u_m\\rightharpoonup u\\ \\text{in}\\ W^{1,p}\\ \\Longrightarrow\\ \\exists\\ \\text{子列}:\\ u_m\\to u\\ \\text{in}\\ L^q\\quad(q<p^*)",
+        "note": "使用形式：弱收敛序列在紧嵌入下自动含 $L^q$ 强收敛子列，这是变分问题取极限的标准一步。",
+        "noteEn": "The working form: a weakly convergent sequence automatically contains an $L^q$-strongly convergent subsequence, the standard step when passing to the limit in variational problems."
+      }
+    ],
+    "expression": {
+      "text": "T: W^{1,p}(Ω) → W^{1−1/p, p}(∂Ω) 有界线性满射，ker T = W_0^{1,p}(Ω)；有界 Ω 上 W^{1,p}(Ω) ⊂⊂ L^q(Ω)（q < p* = np/(n−p)）",
+      "symbol": "1 \\to 1-\\frac1p",
+      "note": "边界上损失恰好 1/p 阶（与 n 无关）；紧嵌入要求 q 严格小于 p*，取等号时只有连续嵌入。",
+      "noteEn": "The boundary loses exactly $1/p$ of an order, independently of $n$; compactness needs $q$ strictly below $p^*$, equality giving only continuity."
+    },
+    "properties": [
+      "迹的光滑度损失恰为 $\\frac1p$ 阶（阶数 $1-\\frac1p$），与维数 $n$ 无关；因此 Dirichlet 边值可取的空间是 $H^{1/2}(\\partial\\Omega)$ 而不是整个 $L^2(\\partial\\Omega)$。",
+      "$\\ker T=W_0^{1,p}(\\Omega)$：迹为零当且仅当函数属于 $W_0^{1,p}$——「零边值」的精确含义，也是弱形式取 $H_0^1$ 的依据。",
+      "紧嵌入要求 $q<p^*$ 严格成立：$q=p^*$ 处嵌入连续但不紧（峰函数序列给出反例）；$p\\ge n$ 时对一切有限 $q$ 紧，且 $W_0^{1,p}\\subset\\subset L^p$。",
+      "区域前提是有界 + Lipschitz（或 $C^1$）边界；无界区域上平移序列说明紧性失效，$\\mathbb R^n$ 上只有连续嵌入。",
+      "应用：变分问题极小元存在性、$\\Delta$ 的紧预解式与离散特征值谱、演化方程（Aubin–Lions）、非线性项的强收敛取极限。"
+    ],
+    "propertiesEn": [
+      "The trace loses exactly $\\frac1p$ of a derivative (order $1-\\frac1p$), independently of the dimension $n$; hence admissible Dirichlet data lie in $H^{1/2}(\\partial\\Omega)$, not in all of $L^2(\\partial\\Omega)$.",
+      "$\\ker T=W_0^{1,p}(\\Omega)$: vanishing trace is equivalent to membership in $W_0^{1,p}$, the precise meaning of zero boundary values and the reason weak formulations use $H_0^1$.",
+      "Compactness requires $q<p^*$ strictly: at $q=p^*$ the embedding is continuous but not compact (peak sequences are counterexamples); for $p\\ge n$ it is compact for every finite $q$, and $W_0^{1,p}\\subset\\subset L^p$.",
+      "The domain must be bounded with Lipschitz (or $C^1$) boundary; on unbounded domains translates destroy compactness and only continuous embeddings remain.",
+      "Applications: existence of minimizers in variational problems, the compact resolvent of $\\Delta$ with discrete spectrum, evolution equations via Aubin–Lions, and strong convergence for nonlinear terms."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "u₁ = sin x"
+        },
+        {
+          "expr": "sin(2*x)/2",
+          "color": "#ff6b9d",
+          "label": "u₂ = sin 2x / 2"
+        },
+        {
+          "expr": "sin(4*x)/4",
+          "color": "#06d6a0",
+          "label": "u₄ = sin 4x / 4"
+        }
+      ],
+      "xRange": [
+        0,
+        6.2832
+      ],
+      "yRange": [
+        -1.15,
+        1.15
+      ],
+      "title": "有界区域上的紧嵌入示意：u_m = sin(mx)/m 的 H¹ 范数一致有界（‖u_m‖ = √(π(1+1/m²)) ≤ √(2π)），振幅趋于 0，故必有在 L^q（q < p*）中强收敛的子列，极限为 0"
+    },
+    "examples": [
+      {
+        "problem": "设 $\\Omega\\subset\\mathbb R^3$ 有界、边界 Lipschitz，$p=2$。写出 $p^*$、紧嵌入允许的 $q$ 范围，以及 $H^1(\\Omega)$ 的迹空间；并说明 $q=p^*$ 处为什么没有紧性。",
+        "solution": "$p^*=\\frac{np}{n-p}=\\frac{3\\cdot2}{3-2}=6$，故 $1\\le q<6$ 时 $H^1(\\Omega)=W^{1,2}(\\Omega)\\subset\\subset L^q(\\Omega)$（$q<p^*$ 严格）。$q=6$ 处只有连续嵌入 $H^1\\subset L^6$：取峰函数 $u_m(x)=m^{1/2}\\varphi(mx)$（$\\varphi$ 为截断函数），则 $\\|u_m\\|_2=m^{-1}\\|\\varphi\\|_2\\to0$、$\\|\\nabla u_m\\|_2=\\|\\nabla\\varphi\\|_2$，所以 $\\|u_m\\|_{H^1}$ 一致有界；但 $\\|u_m-u_k\\|_{L^6}\\ge c>0$（$m\\ne k$，峰互不重叠），故不存在 $L^6$ 强收敛子列，紧性失效。迹空间为 $W^{1-1/2,2}(\\partial\\Omega)=H^{1/2}(\\partial\\Omega)$：损失 $\\frac1p=\\frac12$ 阶。"
+      },
+      {
+        "problem": "在单位球 $B=B(0,1)\\subset\\mathbb R^2$ 上取 $u(x)=1-|x|^2$ 与 $v(x)=x_1$。判断它们是否属于 $H_0^1(B)$，并说出 $u$ 满足的方程。",
+        "solution": "$u|_{\\partial B}=1-1=0$，故 $Tu=0$，由 $\\ker T=H_0^1(B)$ 得 $u\\in H_0^1(B)$（其实 $u\\in C^\\infty(\\bar B)$）。而 $v|_{\\partial B}=x_1\\not\\equiv0$，故 $Tv\\ne0$、$v\\notin H_0^1(B)$；不过 $Tv=x_1|_{\\partial B}\\in H^{1/2}(\\partial B)\\subset L^2(\\partial B)$，这正说明一般 $W^{1,p}$ 函数的迹只是 $L^p(\\partial\\Omega)$ 的一个光滑子空间（损失 $\\frac1p$ 阶）。另外 $\\Delta u=-4$，即 $-\\Delta u=4$ 为光滑常数，是椭圆正则性「光滑右端 $\\Rightarrow$ 光滑解」的例证。"
+      }
+    ],
+    "tags": [
+      "迹定理",
+      "紧嵌入",
+      "Rellich–Kondrachov",
+      "W_0^{1,p}",
+      "Aubin–Lions"
+    ],
+    "links": [
+      "weak-derivative-sobolev",
+      "sobolev-embedding",
+      "weak-convergence",
+      "spectrum",
+      "sturm-liouville",
+      "variational-direct-method"
+    ]
+  },
+  {
+    "id": "weak-solution-lax-milgram",
+    "title": "弱解与 Lax–Milgram 定理",
+    "titleEn": "Weak Solutions and the Lax–Milgram Theorem",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "把方程乘检验函数后分部积分，只含一阶导数的双线性形式就够——这就是弱解；有界且强制的双线性形式由 Lax–Milgram 保证存在唯一解，并有 ‖u‖ ≤ ‖f‖/α。",
+    "summaryEn": "Multiply the equation by a test function and integrate by parts: a bilinear form involving only first derivatives suffices — that is a weak solution; a bounded and coercive form yields existence and uniqueness via Lax–Milgram, with ‖u‖ ≤ ‖f‖/α.",
+    "definition": "考察 Dirichlet 问题 $-\\Delta u=f$（$\\Omega$ 内）、$u=0$（$\\partial\\Omega$ 上），先设 $f\\in L^2(\\Omega)$。若 $u$ 是古典解，取任意检验函数 $v\\in C_c^\\infty(\\Omega)$ 乘方程两端并分部积分（边界项因 $v$ 紧支而消失），得 $\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx=\\int_\\Omega fv\\,dx$。右端只出现 $u$ 的一阶导数，于是可以放弃「$u$ 二阶可导」的要求：**称 $u\\in H_0^1(\\Omega)$ 为弱解，如果**\n$$a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx=\\int_\\Omega fv\\,dx=\\langle f,v\\rangle\\qquad\\text{对一切 }v\\in H_0^1(\\Omega)\\text{ 成立}.$$\n双线性形式里只出现**一阶导数**——这正是「弱」字的含义：把求导的负担从解转移到检验函数上，只要求 $u$ 有一阶弱导数。两个方向要分清：**古典解必是弱解**（分部积分合法），**反之不必然**——弱解起初只有一阶导数，要成为古典解需先用椭圆正则性提升到 $H^2$，再由 Sobolev 嵌入得到连续可微（见「椭圆正则性与先验估计」）。弱解的另一个好处是右端可放宽：$f\\in H^{-1}(\\Omega)$（$H_0^1$ 上的连续线性泛函，包含全部 $L^2$）时弱形式仍有意义。\n\n**Lax–Milgram 定理**（存在唯一性的主力工具）：设 $H$ 是实希尔伯特空间，$a:H\\times H\\to\\mathbb R$ 是**双线性**形式，满足\n(i) **有界性**：$|a(u,v)|\\le M\\|u\\|\\|v\\|$ 对一切 $u,v\\in H$；\n(ii) **强制性（椭圆性）**：$a(u,u)\\ge\\alpha\\|u\\|^2$ 对一切 $u\\in H$，其中 $\\alpha>0$。\n则对每个 $f\\in H^*$ 存在**唯一**的 $u\\in H$ 使 $a(u,v)=\\langle f,v\\rangle$ 对一切 $v\\in H$ 成立，并且\n$$\\|u\\|\\le\\frac1\\alpha\\|f\\|_{H^*}.$$\n**两个条件都不能漏**：有界性保证 $v\\mapsto a(u,v)$ 是连续线性泛函；强制性 $\\alpha>0$（严格为正）保证唯一性与可解性。定理**不要求 $a$ 对称**，所以能处理对流项这样的非对称算子。\n\n对模型问题取 $H=H_0^1(\\Omega)$、$a(u,v)=\\int\\nabla u\\cdot\\nabla v\\,dx$：由 Cauchy–Schwarz，$|a(u,v)|\\le\\|\\nabla u\\|_2\\|\\nabla v\\|_2\\le\\|u\\|_{H^1}\\|v\\|_{H^1}$，故 $M=1$；由 Poincaré 不等式 $\\|u\\|_{L^2}\\le C_P\\|\\nabla u\\|_{L^2}$ 得 $\\|u\\|_{H^1}^2\\le(1+C_P^2)\\|\\nabla u\\|_2^2$，即 $a(u,u)=\\|\\nabla u\\|_2^2\\ge\\frac1{1+C_P^2}\\|u\\|_{H^1}^2$，故 $\\alpha=\\frac1{1+C_P^2}$（$\\Omega=(0,1)$ 时 $C_P=\\frac1\\pi$，$\\alpha=\\frac{\\pi^2}{\\pi^2+1}\\approx0.908$）。证明思想：用 Riesz 表示定理把 $a$ 翻译成算子 $A:H\\to H^*$，$\\langle Au,v\\rangle=a(u,v)$；强制性给出 $\\|Au\\|_{H^*}\\ge\\alpha\\|u\\|$，于是 $A$ 单射且值域闭，再由稠密性与 Hahn–Banach 得满射，$\\|A^{-1}\\|\\le\\frac1\\alpha$。\n\n**对称性决定能否「极小化」**：只有当 $a$ 对称（$a(u,v)=a(v,u)$）时，弱解才等价于能量泛函 $J(v)=\\frac12a(v,v)-\\langle f,v\\rangle$ 在 $H$ 上的极小元（且 $J$ 严格凸、极小元唯一）；$a$ 非对称时 $J$ 的驻点解的是**对称化形式** $a_s(u,v)=\\frac12\\big(a(u,v)+a(v,u)\\big)$ 对应的方程，一般与原方程不同。例如对流项：$a(u,v)=\\int(\\nabla u\\cdot\\nabla v+b\\cdot\\nabla u\\,v)$ 非对称，但只要强制（如 $\\operatorname{div}b\\le0$，因为在 $H_0^1$ 上 $\\int(b\\cdot\\nabla u)u\\,dx=-\\frac12\\int(\\operatorname{div}b)u^2dx$），Lax–Milgram 仍给出唯一弱解，而它不是 $J$ 的极小元。非齐次边值 $u|_{\\partial\\Omega}=g$ 的可行数据恰是 $g\\in H^{1/2}(\\partial\\Omega)$（迹定理）：取提升 $w\\in H^1(\\Omega)$ 使 $Tw=g$，令 $\\tilde u=u-w\\in H_0^1$，方程化为 $a(\\tilde u,v)=\\langle f,v\\rangle-a(w,v)$，又回到 Lax–Milgram 的适用范围。",
+    "definitionEn": "Consider the Dirichlet problem $-\\Delta u=f$ in $\\Omega$ with $u=0$ on $\\partial\\Omega$, first with $f\\in L^2(\\Omega)$. If $u$ is a classical solution, multiply the equation by any test function $v\\in C_c^\\infty(\\Omega)$ and integrate by parts (the boundary term vanishes since $v$ is compactly supported), obtaining $\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx=\\int_\\Omega fv\\,dx$. Only first derivatives of $u$ appear, so the requirement that $u$ be twice differentiable may be dropped: **a weak solution is a function $u\\in H_0^1(\\Omega)$ such that**\n$$a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx=\\int_\\Omega fv\\,dx=\\langle f,v\\rangle\\qquad\\text{for all }v\\in H_0^1(\\Omega).$$\nOnly **first derivatives** occur in the bilinear form — this is the meaning of the word weak: the burden of differentiation is shifted from the solution to the test function, and $u$ merely needs one weak derivative. Two implications must be kept apart: **every classical solution is a weak solution** (integration by parts is legitimate), **the converse fails in general** — a weak solution starts with only one derivative and must first be upgraded to $H^2$ by elliptic regularity and then to a continuous differentiable function via Sobolev embeddings. A further advantage is that the right-hand side may be relaxed to $f\\in H^{-1}(\\Omega)$, which contains all of $L^2$.\n\n**The Lax–Milgram theorem**: let $H$ be a real Hilbert space and let $a:H\\times H\\to\\mathbb R$ be a **bilinear** form that is\n(i) **bounded**: $|a(u,v)|\\le M\\|u\\|\\|v\\|$ for all $u,v\\in H$;\n(ii) **coercive (elliptic)**: $a(u,u)\\ge\\alpha\\|u\\|^2$ for all $u\\in H$ with a constant $\\alpha>0$.\nThen for every $f\\in H^*$ there is a **unique** $u\\in H$ with $a(u,v)=\\langle f,v\\rangle$ for all $v\\in H$, and\n$$\\|u\\|\\le\\frac1\\alpha\\|f\\|_{H^*}.$$\n**Neither hypothesis may be dropped**: boundedness makes $v\\mapsto a(u,v)$ a continuous functional, while coercivity with $\\alpha>0$ strictly positive gives uniqueness and solvability. Note that $a$ need **not** be symmetric, which is what makes convection-type operators accessible.\n\nFor the model problem take $H=H_0^1(\\Omega)$ and $a(u,v)=\\int\\nabla u\\cdot\\nabla v\\,dx$: Cauchy–Schwarz gives $|a(u,v)|\\le\\|\\nabla u\\|_2\\|\\nabla v\\|_2\\le\\|u\\|_{H^1}\\|v\\|_{H^1}$, so $M=1$; the Poincaré inequality $\\|u\\|_{L^2}\\le C_P\\|\\nabla u\\|_{L^2}$ gives $\\|u\\|_{H^1}^2\\le(1+C_P^2)\\|\\nabla u\\|_2^2$, hence $a(u,u)=\\|\\nabla u\\|_2^2\\ge\\frac1{1+C_P^2}\\|u\\|_{H^1}^2$ and $\\alpha=\\frac1{1+C_P^2}$ (for $\\Omega=(0,1)$, $C_P=\\frac1\\pi$ and $\\alpha=\\frac{\\pi^2}{\\pi^2+1}\\approx0.908$). The proof uses the Riesz representation theorem to convert $a$ into an operator $A:H\\to H^*$ with $\\langle Au,v\\rangle=a(u,v)$; coercivity gives $\\|Au\\|_{H^*}\\ge\\alpha\\|u\\|$, so $A$ is injective with closed range, and density together with Hahn–Banach makes it surjective with $\\|A^{-1}\\|\\le\\frac1\\alpha$.\n\n**Symmetry decides whether one can minimize**: only when $a$ is symmetric ($a(u,v)=a(v,u)$) is the weak solution equivalent to the minimizer of the energy functional $J(v)=\\frac12a(v,v)-\\langle f,v\\rangle$ on $H$ (and then $J$ is strictly convex, so the minimizer is unique). For a non-symmetric $a$, the stationary points of $J$ solve the equation belonging to the **symmetrized form** $a_s(u,v)=\\frac12(a(u,v)+a(v,u))$, which in general differs from the original equation. A convection term is the typical example: $a(u,v)=\\int(\\nabla u\\cdot\\nabla v+b\\cdot\\nabla u\\,v)$ is non-symmetric, yet coercivity (e.g. $\\operatorname{div}b\\le0$, since $\\int(b\\cdot\\nabla u)u\\,dx=-\\frac12\\int(\\operatorname{div}b)u^2dx$ on $H_0^1$) still yields a unique weak solution by Lax–Milgram, and that solution is not the minimizer of $J$. For non-homogeneous data $u|_{\\partial\\Omega}=g$, the admissible $g$ are exactly those in $H^{1/2}(\\partial\\Omega)$ (trace theorem): pick a lift $w\\in H^1(\\Omega)$ with $Tw=g$ and put $\\tilde u=u-w\\in H_0^1$, which turns the problem into $a(\\tilde u,v)=\\langle f,v\\rangle-a(w,v)$, again in the range of Lax–Milgram.",
+    "formulas": [
+      {
+        "latex": "a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx=\\int_\\Omega fv\\,dx=\\langle f,v\\rangle,\\qquad \\forall v\\in H_0^1(\\Omega)",
+        "note": "弱形式：双线性形式里只出现一阶导数，这正是「弱」的含义；$u$ 只需 $\\in H_0^1$，不需要二阶导数（也不需要二阶弱导数存在）。",
+        "noteEn": "The weak formulation: only first derivatives appear in the bilinear form — that is what weak means; $u\\in H_0^1$ suffices and no second derivatives are needed."
+      },
+      {
+        "latex": "-\\Delta u=f\\ \\text{in}\\ \\Omega,\\qquad u=0\\ \\text{on}\\ \\partial\\Omega,\\qquad u\\in H_0^1(\\Omega)",
+        "note": "模型问题。古典解 $\\Rightarrow$ 弱解（分部积分合法）；反之不必然——弱解要经椭圆正则性升级才成为古典解。",
+        "noteEn": "The model problem. Classical solution implies weak solution (integration by parts), but not conversely: a weak solution needs elliptic regularity before it becomes classical."
+      },
+      {
+        "latex": "|a(u,v)|\\le M\\|u\\|\\|v\\|,\\qquad a(u,u)\\ge\\alpha\\|u\\|^2\\quad(\\alpha>0)",
+        "note": "Lax–Milgram 的两个条件：有界 + 强制（椭圆性），缺一不可；强制要求 $\\alpha>0$ 严格为正，$\\alpha=0$ 或负时存在性可能失败。",
+        "noteEn": "The two hypotheses of Lax–Milgram: boundedness plus coercivity (ellipticity); neither is dispensable, and coercivity requires a strictly positive $\\alpha$."
+      },
+      {
+        "latex": "\\exists!\\,u\\in H:\\quad a(u,v)=\\langle f,v\\rangle\\ \\ \\forall v\\in H,\\qquad \\|u\\|\\le\\frac1\\alpha\\|f\\|_{H^*}",
+        "note": "结论：存在且唯一，并带稳定性估计；$f\\mapsto u$ 是有界线性映射，范数不超过 $\\frac1\\alpha$。这个估计正是伽辽金能量估计的来源。",
+        "noteEn": "Conclusion: existence, uniqueness and the stability estimate; the map $f\\mapsto u$ is linear and bounded with norm at most $\\frac1\\alpha$, the source of Galerkin energy estimates."
+      },
+      {
+        "latex": "a\\ \\text{对称}:\\quad u=\\arg\\min_{v\\in H}\\Big\\{\\tfrac12a(v,v)-\\langle f,v\\rangle\\Big\\}",
+        "note": "只有 $a$ 对称时，「弱解 $=$ 能量极小元」才成立；非对称时极小元解的是对称化形式 $a_s=\\frac12(a+a^{\\mathsf T})$ 的方程。",
+        "noteEn": "Only for symmetric $a$ does 「weak solution = minimizer of the energy」 hold; for non-symmetric $a$ the minimizer solves the symmetrized equation with $a_s=\\frac12(a+a^{\\mathsf T})$."
+      }
+    ],
+    "expression": {
+      "text": "−Δu = f（Ω 内），u = 0（∂Ω 上）⇔ 求 u ∈ H_0^1(Ω) 使 a(u,v) = ∫∇u·∇v = ∫fv 对一切 v ∈ H_0^1(Ω)；Lax–Milgram：双线性 + 有界 + 强制 ⇒ 唯一解，‖u‖ ≤ ‖f‖_{H*} / α",
+      "symbol": "a(u,v)=\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx",
+      "note": "形式中只含一阶导数；古典解必为弱解，反之需要正则性。对称时才等价于能量极小。",
+      "noteEn": "Only first derivatives appear; classical solutions are weak, the converse needs regularity, and minimization is equivalent only in the symmetric case."
+    },
+    "properties": [
+      "弱形式中只出现一阶导数，因此只要求 $u\\in H_0^1$；「弱」指对解的可微性要求弱，与「弱收敛」不是一回事。",
+      "古典解 $\\Rightarrow$ 弱解；反之需要椭圆正则性（$f$ 与系数、边界足够光滑）才能升级为古典解。右端还可放宽到 $f\\in H^{-1}$。",
+      "Lax–Milgram 的三要素是双线性、有界、强制（$\\alpha>0$）；缺少强制会失效——例如在 $H^1(\\Omega)$ 上取 $a(u,v)=\\int\\nabla u\\cdot\\nabla v$ 不强制（常数函数使 $a(u,u)=0$），对应纯 Neumann 问题必须另加零平均条件才可解。",
+      "只有 $a$ 对称时弱解才等价于能量泛函 $J$ 的极小元（$J$ 严格凸、极小元唯一）；非对称时极小元解的是对称化 $a_s$ 的方程，二者一般不同。",
+      "稳定性：$f\\mapsto u$ 线性且 $\\|u\\|\\le\\frac1\\alpha\\|f\\|_{H^*}$。证明用 Riesz 表示定理（$\\to$ 对偶空间）与闭值域/Hahn–Banach 论证；非齐次边值通过提升 $w$ 化为齐次问题。"
+    ],
+    "propertiesEn": [
+      "Only first derivatives appear in the weak form, so $u\\in H_0^1$ suffices; weak refers to the low differentiability demanded of the solution, not to weak convergence.",
+      "Classical solutions are weak solutions; the converse requires elliptic regularity (smooth enough $f$, coefficients and boundary). The right-hand side may also be taken in $H^{-1}$.",
+      "Lax–Milgram needs bilinearity, boundedness and coercivity with $\\alpha>0$; without coercivity it fails — for instance $a(u,v)=\\int\\nabla u\\cdot\\nabla v$ is not coercive on $H^1(\\Omega)$ (constants give $a(u,u)=0$), and the pure Neumann problem needs a zero-mean condition.",
+      "Only for symmetric $a$ is the weak solution equivalent to the minimizer of $J$ (strictly convex, unique minimizer); for non-symmetric $a$ the minimizer solves the symmetrized equation instead.",
+      "Stability: $f\\mapsto u$ is linear with $\\|u\\|\\le\\frac1\\alpha\\|f\\|_{H^*}$. The proof uses Riesz representation (dual space) together with closed range or Hahn–Banach arguments; non-homogeneous boundary data are reduced to the homogeneous case by a lift."
+    ],
+    "examples": [
+      {
+        "problem": "在 $(0,1)$ 上考虑 $-u''=f=1$，$u(0)=u(1)=0$。写出双线性形式 $a$，计算 Lax–Milgram 中的 $M$ 与 $\\alpha$，并核验 $\\|u\\|_{H^1}\\le\\frac1\\alpha\\|f\\|_{L^2}$。",
+        "solution": "取 $H=H_0^1(0,1)$、$a(u,v)=\\int_0^1u'v'\\,dx$。\n有界性：$|a(u,v)|\\le\\|u'\\|_2\\|v'\\|_2\\le\\|u\\|_{H^1}\\|v\\|_{H^1}$，故 $M=1$。\n强制性：$(0,1)$ 上 Poincaré 不等式的最佳常数为 $\\frac1\\pi$（来自 $-\\frac{d^2}{dx^2}$ 在 Dirichlet 条件下的第一特征值 $\\pi^2$）：$\\|u\\|_2\\le\\frac1\\pi\\|u'\\|_2$，于是 $\\|u\\|_{H^1}^2\\le\\big(1+\\frac1{\\pi^2}\\big)\\|u'\\|_2^2$，即 $a(u,u)=\\|u'\\|_2^2\\ge\\frac{\\pi^2}{\\pi^2+1}\\|u\\|_{H^1}^2$，$\\alpha=\\frac{\\pi^2}{\\pi^2+1}\\approx0.908$。\n精确解 $u=\\frac{x(1-x)}2$。验证弱形式：$\\int_0^1u'v'=\\int_0^1\\frac{1-2x}{2}v'=\\Big[\\frac{(1-2x)v}2\\Big]_0^1+\\int_0^1v=\\int_0^1v=\\int_0^1fv$（边界项因 $v(0)=v(1)=0$ 消失）。\n核验估计：$\\|f\\|_{L^2}=1$，$\\|u\\|_{H^1}^2=\\int_0^1\\frac{x^2(1-x)^2}4dx+\\int_0^1\\frac{(1-2x)^2}4dx=\\frac1{120}+\\frac1{12}=\\frac{11}{120}\\approx0.0917$，故 $\\|u\\|_{H^1}\\approx0.303\\le\\frac1\\alpha\\approx1.101$，与定理相容。"
+      },
+      {
+        "problem": "非对称例子：$a(u,v)=\\int_0^1\\big(u'v'+b\\,u'v\\big)dx$（$b\\neq0$）。验证有界性与强制性，说明 $a$ 非对称，并比较 $f=1$ 时弱解与能量泛函 $J(v)=\\frac12\\int_0^1(v')^2dx-\\int_0^1v\\,dx$ 的极小元。",
+        "solution": "有界性：$|a(u,v)|\\le\\|u'\\|_2\\|v'\\|_2+|b|\\|u'\\|_2\\|v\\|_2\\le(1+|b|)\\|u\\|_{H^1}\\|v\\|_{H^1}$，即 $M\\le1+|b|$。\n强制性：因 $u(0)=u(1)=0$，$\\int_0^1u'u\\,dx=\\frac12[u^2]_0^1=0$，故 $a(u,u)=\\|u'\\|_2^2\\ge\\frac{\\pi^2}{\\pi^2+1}\\|u\\|_{H^1}^2$，与上一题同一个 $\\alpha$。\n非对称性：$a(u,v)-a(v,u)=b\\int_0^1(u'v-v'u)dx=2b\\int_0^1u'v\\,dx$（分部积分 $\\int_0^1v'u=-\\int_0^1vu'$），一般非零。\n取 $f=1$、$b=1$：弱解满足 $-u''+u'=1$，$u(0)=u(1)=0$，解得 $u=x-\\frac{1-e^{x}}{1-e}$；而 $J$ 的极小元满足 $\\int u'v'=\\int fv$，即 $-u''=1$，解为 $u_0=\\frac{x(1-x)}2$。在 $x=\\frac12$ 处两者分别是 $0.1225$ 与 $0.125$，确实不同——非对称情形下「弱解 $=$ 能量极小元」不成立。"
+      }
+    ],
+    "tags": [
+      "弱解",
+      "Lax–Milgram",
+      "强制性（椭圆性）",
+      "Poincaré 不等式",
+      "能量泛函"
+    ],
+    "links": [
+      "weak-derivative-sobolev",
+      "hahn-banach",
+      "dual-space",
+      "elliptic-regularity",
+      "galerkin-energy-estimate",
+      "dirichlet-neumann"
+    ]
+  },
+  {
+    "id": "galerkin-energy-estimate",
+    "title": "伽辽金方法与能量估计",
+    "titleEn": "The Galerkin Method and Energy Estimates",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "在有限维子空间里求弱解，取 v = u_m 得到与维数无关的先验估计 ‖u_m‖ ≤ ‖f‖/α，再由弱紧性与稠密性在极限中恢复整个弱解；演化方程则配合能量恒等式与 Aubin–Lions 紧性。",
+    "summaryEn": "Solve the weak problem inside finite-dimensional subspaces; testing with v = u_m yields the dimension-free a priori bound ‖u_m‖ ≤ ‖f‖/α, and weak compactness plus density recovers the full weak solution — for evolution equations, energy identities and Aubin–Lions compactness take over.",
+    "definition": "把无穷维问题压到有限维来解：取一列有限维子空间 $V_m\\subset H_0^1(\\Omega)$，$\\dim V_m=m$，满足 $V_1\\subset V_2\\subset\\cdots$ 且 $\\bigcup_mV_m$ 在 $H_0^1(\\Omega)$ 中**稠密**（典型取法：前 $m$ 个特征函数张成的空间、分片多项式有限元空间、或越来越细的格点分片线性空间）。**伽辽金近似** $u_m\\in V_m$ 由离散方程\n$$a(u_m,v)=\\langle f,v\\rangle\\qquad\\forall v\\in V_m$$\n确定。取 $V_m$ 的一组基 $\\varphi_1,\\dots,\\varphi_m$、写 $u_m=\\sum_jc_j\\varphi_j$，就得到线性方程组 $A_mc=b$，其中 $(A_m)_{ij}=a(\\varphi_j,\\varphi_i)$、$b_i=\\langle f,\\varphi_i\\rangle$；由强制性，$\\xi^{\\mathsf T}A_m\\xi=a\\big(\\sum_j\\xi_j\\varphi_j,\\sum_j\\xi_j\\varphi_j\\big)\\ge\\alpha\\big\\|\\sum_j\\xi_j\\varphi_j\\big\\|^2>0$，故 $A_m$ 正定（**注意**：强制性只给出正定性；由 $(A_m)_{ij}=a(\\varphi_j,\\varphi_i)$，**只有当 $a$ 对称时** $A_m$ 才对称，此时为对称正定矩阵），离散问题**总**唯一可解。\n\n**先验估计（能量估计）**：在离散方程中取检验函数 $v=u_m$ 自己（自配对）：\n$$\\alpha\\|u_m\\|^2\\le a(u_m,u_m)=\\langle f,u_m\\rangle\\le\\|f\\|_{H^*}\\|u_m\\|\\ \\Longrightarrow\\ \\|u_m\\|\\le\\frac{\\|f\\|_{H^*}}{\\alpha}.$$\n右端与 $m$ 无关——这就是**先验估计**：还没解出 $u_m$，已经知道所有伽辽金近似有一致上界。「取 $v=u$ 自己」是整个能量方法的核心技巧，从线性椭圆问题到非线性演化方程都靠它启动。\n\n**极限过程（关键一步）**：由先验估计，$\\{u_m\\}$ 在 $H_0^1$ 中有界；希尔伯特空间自反，故由**弱紧性**（Banach–Alaoglu / Eberlein–Šmulian）存在子列 $u_m\\rightharpoonup u$。固定 $j$ 与 $v\\in V_j$：当 $m\\ge j$ 时 $V_j\\subset V_m$，所以 $a(u_m,v)=\\langle f,v\\rangle$。对固定的 $v$，映射 $w\\mapsto a(w,v)$ 是 $H_0^1$ 上的连续线性泛函，弱收敛给出 $a(u_m,v)\\to a(u,v)$，于是 $a(u,v)=\\langle f,v\\rangle$ 对一切 $v\\in\\bigcup_jV_j$ 成立；再由 $\\bigcup_jV_j$ 的**稠密性**与 $a$ 的有界性把等式推广到一切 $v\\in H_0^1(\\Omega)$。由 Lax–Milgram 的唯一性，$u$ 就是所求弱解。**这一步不能跳过**：先验估计只给出有界，从有界到「满足方程」必须经过取弱收敛子列 + 稠密性。若 $a$ 对称，还能升级为**强收敛**：$a(u_m-u,u_m-u)=a(u_m,u_m)-2a(u_m,u)+a(u,u)=\\langle f,u_m\\rangle-2a(u_m,u)+a(u,u)\\to\\langle f,u\\rangle-2a(u,u)+a(u,u)=0$，即 $u_m\\to u$ 在能量范数下成立。\n\n**演化方程**：以抛物型 $u_t-\\Delta u=f$、$u|_{\\partial\\Omega}=0$、$u(0)=u_0$ 为例，取 $u_m(t)=\\sum_kg_k(t)\\varphi_k$ 作伽辽金近似，空间离散后得常微分方程组（由 Picard–Lindelöf 定理局部可解）。取 $v=u_m(t)$ 得**能量恒等式**\n$$\\frac12\\frac{d}{dt}\\|u_m\\|^2+\\|\\nabla u_m\\|^2=\\langle f,u_m\\rangle,$$\n再用 Gronwall 不等式得到与 $m$ 无关的先验界；$f=0$ 时用 Poincaré 不等式 $\\|\\nabla u\\|^2\\ge\\lambda_1\\|u\\|^2$（$\\lambda_1$ 是 $-\\Delta$ 在 Dirichlet 条件下的第一特征值）得指数衰减 $\\|u(t)\\|\\le\\|u(0)\\|e^{-\\lambda_1t}$。双曲型（波动方程）对应能量守恒：$\\frac12\\frac d{dt}\\big(\\|u_t\\|^2+\\|\\nabla u\\|^2\\big)=0$。要通过非线性项或对时间取强收敛，需要 **Aubin–Lions 紧性引理**：若 $\\{u_m\\}$ 在 $L^p(0,T;W^{1,p}(\\Omega))$ 有界、$\\partial_tu_m$ 在 $L^p(0,T;W^{-1,p}(\\Omega))$ 有界，则存在在 $L^p(0,T;L^p(\\Omega))$ 中强收敛的子列。与数值方法的联系：取 $V_m$ 为分片多项式即有限元方法，$u_m$ 是可计算的近似解，$A_m$ 稀疏且正定，可用共轭梯度求解；误差估计需要 Céa 引理等额外工具。",
+    "definitionEn": "Compress an infinite-dimensional problem to finite dimensions: choose finite-dimensional subspaces $V_m\\subset H_0^1(\\Omega)$ with $\\dim V_m=m$, nested as $V_1\\subset V_2\\subset\\cdots$ and with $\\bigcup_mV_m$ **dense** in $H_0^1(\\Omega)$ (typical choices: the span of the first $m$ eigenfunctions, a finite element space of piecewise polynomials, or piecewise linears on increasingly fine grids). The **Galerkin approximation** $u_m\\in V_m$ is defined by\n$$a(u_m,v)=\\langle f,v\\rangle\\qquad\\forall v\\in V_m.$$\nWith a basis $\\varphi_1,\\dots,\\varphi_m$ and $u_m=\\sum_jc_j\\varphi_j$ this becomes the linear system $A_mc=b$, where $(A_m)_{ij}=a(\\varphi_j,\\varphi_i)$ and $b_i=\\langle f,\\varphi_i\\rangle$; coercivity gives $\\xi^{\\mathsf T}A_m\\xi=a(\\sum_j\\xi_j\\varphi_j,\\sum_j\\xi_j\\varphi_j)\\ge\\alpha\\|\\sum_j\\xi_j\\varphi_j\\|^2>0$, so $A_m$ is positive definite and the discrete problem is always uniquely solvable.\n\n**A priori (energy) estimate**: test the discrete equation with $v=u_m$ itself:\n$$\\alpha\\|u_m\\|^2\\le a(u_m,u_m)=\\langle f,u_m\\rangle\\le\\|f\\|_{H^*}\\|u_m\\|\\ \\Longrightarrow\\ \\|u_m\\|\\le\\frac{\\|f\\|_{H^*}}{\\alpha}.$$\nThe right-hand side is independent of $m$ — this is an **a priori estimate**: before solving anything one knows that all Galerkin approximations are uniformly bounded. Testing with $v=u$ itself is the core trick of the energy method, from linear elliptic problems to nonlinear evolution equations.\n\n**Passing to the limit (the key step)**: the estimate makes $\\{u_m\\}$ bounded in $H_0^1$; since a Hilbert space is reflexive, **weak compactness** (Banach–Alaoglu / Eberlein–Šmulian) yields a subsequence $u_m\\rightharpoonup u$. Fix $j$ and $v\\in V_j$: for $m\\ge j$ one has $V_j\\subset V_m$, hence $a(u_m,v)=\\langle f,v\\rangle$. For fixed $v$ the map $w\\mapsto a(w,v)$ is a continuous linear functional on $H_0^1$, so weak convergence gives $a(u_m,v)\\to a(u,v)$ and therefore $a(u,v)=\\langle f,v\\rangle$ for all $v\\in\\bigcup_jV_j$; **density** of the union together with boundedness of $a$ extends the identity to all $v\\in H_0^1(\\Omega)$. Uniqueness in Lax–Milgram identifies $u$ as the weak solution. This step cannot be skipped: the a priori estimate only gives boundedness, and getting from boundedness to solving the equation requires the weak limit and density. If $a$ is symmetric one even gets **strong convergence**, since $a(u_m-u,u_m-u)=a(u_m,u_m)-2a(u_m,u)+a(u,u)=\\langle f,u_m\\rangle-2a(u_m,u)+a(u,u)\\to0$.\n\n**Evolution equations**: for the parabolic problem $u_t-\\Delta u=f$ with $u|_{\\partial\\Omega}=0$ and $u(0)=u_0$, take $u_m(t)=\\sum_kg_k(t)\\varphi_k$; discretizing in space gives an ODE system (locally solvable by Picard–Lindelöf). Testing with $v=u_m(t)$ yields the **energy identity**\n$$\\frac12\\frac{d}{dt}\\|u_m\\|^2+\\|\\nabla u_m\\|^2=\\langle f,u_m\\rangle,$$\nand Gronwall's inequality gives bounds independent of $m$; when $f=0$, the Poincaré inequality $\\|\\nabla u\\|^2\\ge\\lambda_1\\|u\\|^2$ ($\\lambda_1$ the first Dirichlet eigenvalue of $-\\Delta$) gives exponential decay $\\|u(t)\\\\|\\le\\|u(0)\\|e^{-\\lambda_1t}$. For hyperbolic problems (the wave equation) the analogue is conservation of energy. To pass to the limit with nonlinear terms, or to obtain strong convergence in time, one uses the **Aubin–Lions compactness lemma**: if $\\{u_m\\}$ is bounded in $L^p(0,T;W^{1,p}(\\Omega))$ and $\\partial_tu_m$ is bounded in $L^p(0,T;W^{-1,p}(\\Omega))$, then a strongly convergent subsequence exists in $L^p(0,T;L^p(\\Omega))$. Connection with numerics: piecewise polynomial $V_m$ give the finite element method, $u_m$ is computable, $A_m$ is sparse positive definite and can be solved by conjugate gradients; error estimates require Céa's lemma and related tools.",
+    "formulas": [
+      {
+        "latex": "V_m\\subset H_0^1(\\Omega),\\quad \\dim V_m=m<\\infty,\\qquad a(u_m,v)=\\langle f,v\\rangle\\quad\\forall v\\in V_m",
+        "note": "伽辽金离散问题。取一组基后化为 $A_mc=b$，$A_m$ 正定（$\\xi^{\\mathsf T}A_m\\xi\\ge\\alpha\\|\\sum_j\\xi_j\\varphi_j\\|^2$），总唯一可解。",
+        "noteEn": "The Galerkin discrete problem. In a basis it becomes $A_mc=b$ with $A_m$ positive definite, hence always uniquely solvable."
+      },
+      {
+        "latex": "\\alpha\\|u_m\\|^2\\le a(u_m,u_m)=\\langle f,u_m\\rangle\\le\\|f\\|_{H^*}\\|u_m\\|\\ \\Longrightarrow\\ \\|u_m\\|\\le\\frac{\\|f\\|_{H^*}}{\\alpha}",
+        "note": "先验（能量）估计：取 $v=u_m$ 自己。上界与 $m$ 无关，是取极限的前提。",
+        "noteEn": "The a priori (energy) estimate obtained by testing with $v=u_m$; the bound is uniform in $m$ and is what allows the passage to the limit."
+      },
+      {
+        "latex": "u_m\\rightharpoonup u\\ (\\text{子列}),\\qquad a(u,v)=\\langle f,v\\rangle\\ \\ \\forall v\\in H_0^1(\\Omega)\\quad\\Big(\\bigcup_mV_m\\ \\text{在}\\ H_0^1\\ \\text{中稠密}\\Big)",
+        "note": "极限三步：弱紧性取子列、对固定 $v\\in V_j$（$m\\ge j$）用弱收敛的连续性取极限、由稠密性与 $a$ 的有界性推广到全空间。",
+        "noteEn": "Three steps: extract a weakly convergent subsequence, pass to the limit for fixed $v\\in V_j$ with $m\\ge j$, and extend to all $v$ by density and boundedness of $a$."
+      },
+      {
+        "latex": "\\frac12\\frac{d}{dt}\\|u_m\\|^2+\\|\\nabla u_m\\|^2=\\langle f,u_m\\rangle",
+        "note": "抛物型方程的伽辽金能量恒等式（取 $v=u_m(t)$）；配 Gronwall 不等式即得与 $m$ 无关的先验界。",
+        "noteEn": "The Galerkin energy identity for parabolic problems (testing with $v=u_m(t)$); together with Gronwall it gives $m$-independent bounds."
+      },
+      {
+        "latex": "f=0:\\quad \\|u(t)\\|\\le\\|u(0)\\|e^{-\\lambda_1t},\\qquad \\lambda_1=\\min_{v\\neq0}\\frac{\\|\\nabla v\\|^2}{\\|v\\|^2}",
+        "note": "指数衰减：$\\lambda_1$ 是 $-\\Delta$ 在 Dirichlet 条件下的第一特征值（Poincaré 常数 $=\\lambda_1^{-1/2}$），越大衰减越快。",
+        "noteEn": "Exponential decay: $\\lambda_1$ is the first Dirichlet eigenvalue of $-\\Delta$ (the Poincaré constant is $\\lambda_1^{-1/2}$); larger $\\lambda_1$ means faster decay."
+      }
+    ],
+    "expression": {
+      "text": "V_m ⊂ H_0^1 有限维且并集稠密，求 u_m ∈ V_m 使 a(u_m,v) = ⟨f,v⟩ ∀v ∈ V_m；取 v = u_m 得 α‖u_m‖² ≤ ⟨f,u_m⟩ ⇒ ‖u_m‖ ≤ ‖f‖_{H*}/α，再取弱极限 u_m ⇀ u",
+      "symbol": "\\|u_m\\|\\le\\|f\\|_{H^*}/\\alpha",
+      "note": "先验估计与 m 无关；极限过程要靠弱紧性与稠密性，不能跳过。",
+      "noteEn": "The a priori bound is uniform in $m$; the limit procedure needs weak compactness and density and cannot be skipped."
+    },
+    "properties": [
+      "离散问题总唯一可解：$A_m$ 正定；且满足伽辽金正交性 $a(u-u_m,v)=0$（$v\\in V_m$），$a$ 对称时 $u_m$ 就是 $u$ 在能量内积下到 $V_m$ 的正交投影（最佳逼近）。",
+      "先验估计 $\\|u_m\\|\\le\\|f\\|_{H^*}/\\alpha$ 与维数 $m$ 无关，只用到「取 $v=u_m$」与强制性；$f\\in H^{-1}$ 时同样成立。",
+      "极限过程不可跳过，且用了三件事：自反空间的弱紧性（取子列）、对固定 $v$ 用 $w\\mapsto a(w,v)$ 的连续性、以及 $\\bigcup_mV_m$ 在 $H_0^1$ 中稠密。",
+      "对称情形可升级为能量范数下的强收敛 $a(u_m-u,u_m-u)\\to0$；非对称时一般只有弱收敛。",
+      "演化方程：能量恒等式 + Gronwall 给先验界与指数衰减；空间/时间紧性靠 Aubin–Lions 引理。取分片多项式 $V_m$ 即有限元方法（离散矩阵是稀疏正定的；**$a$ 对称时**才是对称正定，可用共轭梯度，否则要用 GMRES 等非对称解法）。"
+    ],
+    "propertiesEn": [
+      "The discrete problem is always uniquely solvable ($A_m$ positive definite) and satisfies Galerkin orthogonality $a(u-u_m,v)=0$ for $v\\in V_m$; for symmetric $a$, $u_m$ is the orthogonal projection of $u$ onto $V_m$ in the energy inner product (best approximation).",
+      "The a priori bound $\\|u_m\\|\\le\\|f\\|_{H^*}/\\alpha$ is independent of $m$ and uses only the choice $v=u_m$ plus coercivity; it holds for $f\\in H^{-1}$ as well.",
+      "The limit procedure is indispensable and uses three ingredients: weak compactness in a reflexive space, continuity of $w\\mapsto a(w,v)$ for fixed $v$, and density of $\\bigcup_mV_m$ in $H_0^1$.",
+      "In the symmetric case one upgrades to strong convergence in the energy norm, $a(u_m-u,u_m-u)\\to0$; in the non-symmetric case only weak convergence is available in general.",
+      "Evolution equations: the energy identity with Gronwall yields a priori bounds and exponential decay, while compactness in space and time comes from the Aubin–Lions lemma. Piecewise polynomial $V_m$ give the finite element method (the discrete matrix is sparse and positive definite; it is symmetric positive definite — and thus amenable to conjugate gradients — exactly when $a$ is symmetric, otherwise use GMRES)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x)",
+          "color": "#4cc9f0",
+          "label": "λ₁ = 1：e^(−λ₁t)"
+        },
+        {
+          "expr": "exp(-4*x)",
+          "color": "#ff6b9d",
+          "label": "λ₁ = 4：衰减快 4 倍"
+        },
+        {
+          "expr": "exp(-0.25*x)",
+          "color": "#06d6a0",
+          "label": "λ₁ = 1/4：衰减慢 4 倍"
+        }
+      ],
+      "xRange": [
+        0,
+        4
+      ],
+      "yRange": [
+        0,
+        1.05
+      ],
+      "title": "能量估计给出的指数衰减 ‖u(t)‖ ≤ ‖u(0)‖e^(−λ₁t)（f = 0 的情形）：λ₁ 是 −Δ 在 Dirichlet 条件下的第一特征值，越大耗散越快"
+    },
+    "examples": [
+      {
+        "problem": "在 $(0,1)$ 上取 $-u''=f=1$、$u(0)=u(1)=0$，伽辽金空间 $V_m=\\operatorname{span}\\{\\sin(k\\pi x):1\\le k\\le m\\}$。求出 $u_m$ 的系数，并核验能量估计 $\\|u_m\\|_{H^1}\\le\\|f\\|_{L^2}/\\alpha$。",
+        "solution": "因为 $\\sin(k\\pi x)$ 是 $-d^2/dx^2$ 在 Dirichlet 条件下的特征函数，$a(\\sin k\\pi x,\\sin l\\pi x)=\\frac{k^2\\pi^2}2\\delta_{kl}$，而 $\\langle f,\\sin l\\pi x\\rangle=\\int_0^1\\sin(l\\pi x)dx=\\frac{2}{l\\pi}$（$l$ 为奇数，偶数时为 $0$）。于是 $c_l=\\frac{2/(l\\pi)}{l^2\\pi^2/2}=\\frac4{\\pi^3l^3}$（$l$ 奇），即 $u_m(x)=\\sum_{l\\ \\text{奇},\\,l\\le m}\\frac4{\\pi^3l^3}\\sin(l\\pi x)\\to\\frac{x(1-x)}2$（部分和取 $m=7$ 时在 $x=\\frac12$ 处约为 $0.1249$，精确值 $0.125$）。\n能量估计核验：$\\alpha=\\frac{\\pi^2}{\\pi^2+1}\\approx0.908$，$\\|f\\|_{L^2}=1$，故定理给出 $\\|u_m\\|_{H^1}\\le1.101$；直接计算 $\\|u_m\\|_{H^1}^2=\\sum_{l\\ \\text{奇}}\\frac{16}{\\pi^6l^6}\\big(\\frac12+\\frac{l^2\\pi^2}2\\big)\\le\\|u\\|_{H^1}^2=\\frac{11}{120}\\approx0.0917$，即 $\\|u_m\\|_{H^1}\\le0.303$，确实远小于先验界，估计相容。"
+      },
+      {
+        "problem": "热方程 $u_t=u_{xx}$（$(0,\\pi)$ 上）、$u(0,t)=u(\\pi,t)=0$、$u(x,0)=\\sin3x$。写出精确解，核验能量恒等式与指数衰减率 $\\lambda_1$。",
+        "solution": "分离变量得 $u(x,t)=e^{-9t}\\sin3x$，于是 $\\|u(t)\\|_2=e^{-9t}\\sqrt{\\pi/2}$，$u_t=-9e^{-9t}\\sin3x$、$u_{xx}=-9e^{-9t}\\sin3x$ 满足方程。\n能量恒等式核验：$\\frac12\\frac d{dt}\\|u\\|^2=-9e^{-18t}\\frac\\pi2$，$\\|\\nabla u\\|^2=\\int_0^\\pi9e^{-18t}\\cos^23x\\,dx=9e^{-18t}\\frac\\pi2$，两者之和为 $0=\\langle f,u\\rangle$（$f=0$），恒等式成立。\n衰减率：$(0,\\pi)$ 上 $-d^2/dx^2$ 的第一 Dirichlet 特征值是 $\\lambda_1=1$，能量估计给出 $\\|u(t)\\|\\le\\|u(0)\\|e^{-t}$；实际比值 $e^{-9t}\\le e^{-t}$（$t\\ge0$），界成立但不最优——初值恰是频率更高的第 3 个模态，衰减率是 $9\\lambda_1$。"
+      }
+    ],
+    "tags": [
+      "伽辽金方法",
+      "能量估计",
+      "先验估计",
+      "Aubin–Lions 引理",
+      "有限元"
+    ],
+    "links": [
+      "weak-solution-lax-milgram",
+      "weak-derivative-sobolev",
+      "weak-convergence",
+      "sturm-liouville",
+      "sobolev-trace-compactness",
+      "heat-regularity"
+    ]
+  },
+  {
+    "id": "elliptic-regularity",
+    "title": "椭圆正则性与先验估计",
+    "titleEn": "Elliptic Regularity and A Priori Estimates",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "弱解究竟有多光滑：f ∈ L² 时内部提升到 H²，f ∈ H^k 时提升到 H^{k+2}——椭圆算子恰好提升 2 阶；Weyl 引理保证分布意义下的调和函数自动光滑。",
+    "summaryEn": "How smooth a weak solution really is: f ∈ L² gives interior H², while f ∈ H^k gives H^{k+2} — elliptic operators raise smoothness by exactly two orders, and Weyl's lemma makes distributionally harmonic functions smooth automatically.",
+    "definition": "设 $u\\in H^1(\\Omega)$ 是 $-\\Delta u=f$ 的弱解。**内部 $H^2$ 估计**：若 $f\\in L^2(\\Omega)$，则\n$$u\\in H^2_{\\mathrm{loc}}(\\Omega),\\qquad \\|u\\|_{H^2(K)}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big)\\qquad(K\\Subset\\Omega),$$\n其中 $C$ 只依赖 $n$、$K$ 与 $\\Omega$。**右端必须同时出现 $f$ 与 $u$ 的低阶范数**，这是「先验估计」的典型形态：用已知数据与低阶量控制高阶量。只有 $f$、不许出现 $\\|u\\|_{L^2}$ 的估计一定不成立——$\\Delta u=0$ 只说明 $u$ 调和，而调和的 $u_\\lambda=\\lambda(x_1^2-x_2^2)$ 满足 $\\|D^2u_\\lambda\\|_{L^2(K)}=2\\sqrt2\\,|\\lambda|\\sqrt{|K|}$，随 $\\lambda\\to\\infty$ 无界。\n\n证明思路是**差商法**（Nirenberg）：在弱形式中取 $v=-D_k^{-h}\\big(D_k^hu\\cdot\\eta^2\\big)$（$\\eta$ 是截断函数，$D_k^hv=\\frac{v(x+he_k)-v(x)}h$），由一致椭圆性与 Cauchy–Schwarz 得 $\\|D_k^h\\nabla u\\|_{L^2(K)}\\le C\\big(\\|f\\|_2+\\|u\\|_2\\big)$ 且与 $h$ 无关；令 $h\\to0$（用弱紧性）即得 $\\nabla u\\in H^1_{\\mathrm{loc}}$，也就是 $u\\in H^2_{\\mathrm{loc}}$。也可用奇异积分理论（Calderón–Zygmund）直接得到 $H^2$ 估计。由此还有 **Weyl 引理**：若 $\\Delta u=0$ 在**分布意义**下成立（即 $\\int_\\Omega u\\Delta\\varphi\\,dx=0$ 对一切 $\\varphi\\in C_c^\\infty(\\Omega)$），则 $u$ 可以修正为 $C^\\infty$ 的调和函数——「弱解自动是古典解」的模范结论。\n\n**一般二阶椭圆算子** $Lu=-\\partial_j\\big(a^{ij}(x)\\partial_iu\\big)+b^i(x)\\partial_iu+c(x)u$：若系数 $a^{ij}$ **一致椭圆**，即\n$$a^{ij}(x)\\xi_i\\xi_j\\ge\\lambda|\\xi|^2\\qquad(\\lambda>0,\\ \\text{对一切 }\\xi\\in\\mathbb R^n),$$\n且系数足够光滑（如 $a^{ij}\\in C^{k+1}$），则\n$$f\\in H^k(\\Omega)\\ \\Longrightarrow\\ u\\in H^{k+2}_{\\mathrm{loc}}(\\Omega),\\qquad \\|u\\|_{H^{k+2}(K)}\\le C\\big(\\|f\\|_{H^k(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big).$$\n**光滑性恰好提升 2 阶**——根源是方程里含二阶导数：$-\\Delta u$ 与 $f$ 同阶，所以 $u$ 比 $f$ 光滑两级（不是任意阶，也不能只提升一阶）。低阶项 $b^i\\partial_iu+cu$ 只需较低的正则性。一维可以肉眼验证：$-u''=f\\in L^2(0,1)$ 立即给出 $u\\in H^2(0,1)$，恰好 2 阶。\n\n**边界正则性**与内部估计不同：整体估计需要 $\\partial\\Omega$ 足够光滑（如 $C^{k+2}$）并满足**相容性条件**，否则光滑数据也可能只得到较低的正则性。典型现象是角点奇性：平面上张角 $\\omega$ 的角点附近解形如 $u\\sim cr^{\\pi/\\omega}\\sin(\\pi\\theta/\\omega)$，其中 $|D^2u|\\sim r^{\\pi/\\omega-2}$，而 $\\int_0|D^2u|^2r\\,dr<\\infty\\iff\\omega<\\pi$。于是 $\\omega>\\pi$（例如 $\\omega=\\frac{3\\pi}2$，指数 $\\frac23$，$\\int_0r^{-5/3}dr=\\infty$）时，即使 $f$ 光滑也只能得到 $u\\notin H^2$。Hölder 空间版本即 **Schauder 估计**：系数 Hölder 连续时 $\\|u\\|_{C^{2,\\alpha}(K)}\\le C\\big(\\|f\\|_{C^{0,\\alpha}(\\Omega)}+\\|u\\|_{C^0(\\Omega)}\\big)$。最终图景是：右端、系数、边界都光滑时弱解就是古典解（两者重合）；配合 Sobolev 嵌入，低维（$n\\le3$）中 $f\\in L^2$ 的弱解已经连续。",
+    "definitionEn": "Let $u\\in H^1(\\Omega)$ be a weak solution of $-\\Delta u=f$. **Interior $H^2$ estimate**: if $f\\in L^2(\\Omega)$, then\n$$u\\in H^2_{\\mathrm{loc}}(\\Omega),\\qquad \\|u\\|_{H^2(K)}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big)\\qquad(K\\Subset\\Omega),$$\nwith $C$ depending only on $n$, $K$ and $\\Omega$. **The right-hand side must contain both $f$ and the lower-order norm of $u$** — the typical shape of an a priori estimate: known data plus a lower-order quantity control a higher-order quantity. An estimate containing only $f$, with no $\\|u\\|_{L^2}$, is simply false: $\\Delta u=0$ only says that $u$ is harmonic, and the harmonic function $u_\\lambda=\\lambda(x_1^2-x_2^2)$ has $\\|D^2u_\\lambda\\|_{L^2(K)}=2\\sqrt2\\,|\\lambda|\\sqrt{|K|}$, which is unbounded as $\\lambda\\to\\infty$.\n\nThe proof uses the **difference quotient method** (Nirenberg): test the weak formulation with $v=-D_k^{-h}(D_k^hu\\cdot\\eta^2)$ (with $\\eta$ a cut-off and $D_k^hv=\\frac{v(x+he_k)-v(x)}h$); uniform ellipticity and Cauchy–Schwarz give $\\|D_k^h\\nabla u\\|_{L^2(K)}\\le C(\\|f\\|_2+\\|u\\|_2)$ uniformly in $h$, and letting $h\\to0$ (using weak compactness) yields $\\nabla u\\in H^1_{\\mathrm{loc}}$, i.e. $u\\in H^2_{\\mathrm{loc}}$. Singular integral theory (Calderón–Zygmund) gives the same $H^2$ estimate directly. A first consequence is **Weyl's lemma**: if $\\Delta u=0$ holds in the **distributional** sense (that is, $\\int_\\Omega u\\Delta\\varphi\\,dx=0$ for every $\\varphi\\in C_c^\\infty(\\Omega)$), then $u$ can be modified on a null set so as to become a $C^\\infty$ harmonic function — the model statement that a weak solution is automatically classical.\n\n**General second-order elliptic operators** $Lu=-\\partial_j(a^{ij}(x)\\partial_iu)+b^i(x)\\partial_iu+c(x)u$: if the coefficients $a^{ij}$ are **uniformly elliptic**,\n$$a^{ij}(x)\\xi_i\\xi_j\\ge\\lambda|\\xi|^2\\qquad(\\lambda>0,\\ \\text{for all }\\xi\\in\\mathbb R^n),$$\nand smooth enough (e.g. $a^{ij}\\in C^{k+1}$), then\n$$f\\in H^k(\\Omega)\\ \\Longrightarrow\\ u\\in H^{k+2}_{\\mathrm{loc}}(\\Omega),\\qquad \\|u\\|_{H^{k+2}(K)}\\le C\\big(\\|f\\|_{H^k(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big).$$\n**Smoothness is raised by exactly two orders** — the reason being that the equation is of second order: $-\\Delta u$ has the same order as $f$, so $u$ is two orders smoother than $f$ (not any number of orders, and not just one). The lower-order terms $b^i\\partial_iu+cu$ require less regularity. In one dimension this is visible by hand: $-u''=f\\in L^2(0,1)$ immediately gives $u\\in H^2(0,1)$, exactly two orders.\n\n**Boundary regularity** differs from the interior theory: global estimates need a sufficiently smooth $\\partial\\Omega$ (e.g. $C^{k+2}$) together with **compatibility conditions**; otherwise even smooth data may only yield lower regularity. The typical phenomenon is a corner singularity: near a corner of opening angle $\\omega$ in the plane the solution behaves like $u\\sim cr^{\\pi/\\omega}\\sin(\\pi\\theta/\\omega)$, with $|D^2u|\\sim r^{\\pi/\\omega-2}$, and $\\int_0|D^2u|^2r\\,dr<\\infty$ iff $\\omega<\\pi$. Hence for $\\omega>\\pi$ (for example $\\omega=\\frac{3\\pi}2$, exponent $\\frac23$, $\\int_0r^{-5/3}dr=\\infty$) even smooth $f$ only gives $u\\notin H^2$. The Hölder-space version is the **Schauder estimate**: for Hölder continuous coefficients, $\\|u\\|_{C^{2,\\alpha}(K)}\\le C(\\|f\\|_{C^{0,\\alpha}(\\Omega)}+\\|u\\|_{C^0(\\Omega)})$. The final picture: when the data, the coefficients and the boundary are all smooth, a weak solution is a classical solution (the two notions coincide); combined with Sobolev embeddings, in low dimensions ($n\\le3$) a weak solution with $f\\in L^2$ is already continuous.",
+    "formulas": [
+      {
+        "latex": "-\\Delta u=f,\\ f\\in L^2(\\Omega)\\ \\Longrightarrow\\ u\\in H^2_{\\mathrm{loc}}(\\Omega),\\qquad \\|u\\|_{H^2(K)}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big),\\quad K\\Subset\\Omega",
+        "note": "内部 $H^2$ 估计。右端必须含低阶范数 $\\|u\\|_{L^2}$：只有 $\\|f\\|$ 的估计不成立（调和函数 $\\lambda(x_1^2-x_2^2)$ 就能违反它）。",
+        "noteEn": "The interior $H^2$ estimate. The lower-order norm $\\|u\\|_{L^2}$ is indispensable: an estimate with $\\|f\\|$ alone fails, as the harmonic functions $\\lambda(x_1^2-x_2^2)$ show."
+      },
+      {
+        "latex": "Lu=-\\partial_j\\big(a^{ij}\\partial_iu\\big)+b^i\\partial_iu+cu,\\qquad a^{ij}(x)\\xi_i\\xi_j\\ge\\lambda|\\xi|^2\\quad(\\lambda>0)",
+        "note": "一致椭圆性：$\\lambda>0$ 是 Lax–Milgram 强制性在变系数情形的推广，也是差商法/奇异积分法能运行的前提。",
+        "noteEn": "Uniform ellipticity: the strict positivity $\\lambda>0$ generalizes coercivity from Lax–Milgram to variable coefficients and is what makes the difference-quotient and singular-integral methods work."
+      },
+      {
+        "latex": "f\\in H^k(\\Omega)\\ \\Longrightarrow\\ u\\in H^{k+2}_{\\mathrm{loc}}(\\Omega),\\qquad \\|u\\|_{H^{k+2}(K)}\\le C\\big(\\|f\\|_{H^k(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big)",
+        "note": "光滑性提升恰好 2 阶，因为方程含二阶导数；这里也是「$k+2$」而不是任意阶或 $k+1$。",
+        "noteEn": "Smoothness rises by exactly two orders because the equation is of second order; hence $k+2$, not an arbitrary gain nor merely $k+1$."
+      },
+      {
+        "latex": "\\Delta u=0\\ \\text{in}\\ \\mathcal D'(\\Omega)\\ \\Longrightarrow\\ u\\in C^\\infty(\\Omega)\\ \\text{且}\\ \\Delta u=0\\ \\text{（古典意义）}",
+        "note": "Weyl 引理：分布意义下的调和函数自动光滑，弱解无需额外假设即成为古典解；反复使用 $H^2$ 提升与 Schauder 估计可得一切阶光滑性。",
+        "noteEn": "Weyl's lemma: a distributionally harmonic function is automatically smooth, so the weak solution becomes classical without extra hypotheses; iterating the two-order gain and Schauder estimates gives smoothness of all orders."
+      },
+      {
+        "latex": "\\|u\\|_{C^{2,\\alpha}(K)}\\le C\\big(\\|f\\|_{C^{0,\\alpha}(\\Omega)}+\\|u\\|_{C^0(\\Omega)}\\big)",
+        "note": "Schauder 估计：系数的 Hölder 连续性把 $L^2$ 理论升级为 Hölder（$C^{k+2,\\alpha}$）理论，同样必须保留低阶项 $\\|u\\|_{C^0}$。",
+        "noteEn": "The Schauder estimate: Hölder continuous coefficients upgrade the $L^2$ theory to the Hölder theory ($C^{k+2,\\alpha}$), again keeping the lower-order term $\\|u\\|_{C^0}$."
+      }
+    ],
+    "expression": {
+      "text": "f ∈ L²(Ω) ⇒ u ∈ H²_loc(Ω)，‖u‖_{H²(K)} ≤ C(‖f‖_{L²(Ω)} + ‖u‖_{L²(Ω)})；f ∈ H^k ⇒ u ∈ H^{k+2}_loc；Δu = 0（分布意义）⇒ u 光滑且古典调和",
+      "symbol": "f\\in H^k\\Rightarrow u\\in H^{k+2}_{\\mathrm{loc}}",
+      "note": "椭圆算子提升 2 阶（方程含二阶导数）；先验估计右端必须含低阶范数 ‖u‖，不能只有 f。",
+      "noteEn": "Elliptic operators raise smoothness by two orders (second-order equation); the estimate must contain the lower-order norm of u, not only f."
+    },
+    "properties": [
+      "提升恰好 2 阶：$f\\in H^k\\Rightarrow u\\in H^{k+2}_{\\mathrm{loc}}$。根源是方程含二阶导数（$-\\Delta u$ 与 $f$ 同阶），写成任意阶或只提升 1 阶都是错的。",
+      "先验估计的右端必须含低阶范数：$\\|u\\|_{H^2(K)}\\le C(\\|f\\|_2+\\|u\\|_2)$；只有 $f$ 的估计不成立，反例是满足 $\\Delta u=0$ 而 $\\|D^2u\\|$ 任意大的 $\\lambda(x_1^2-x_2^2)$。",
+      "Weyl 引理：分布意义下 $\\Delta u=0$ 蕴含 $u\\in C^\\infty$ 且古典调和——弱解自动升级为古典解的模板，配合迭代可得任意阶光滑。",
+      "一般算子需要 $a^{ij}$ 一致椭圆（$a^{ij}\\xi_i\\xi_j\\ge\\lambda|\\xi|^2$，$\\lambda>0$）与足够光滑的系数，低阶项要求较低；边界正则性还需要 $\\partial\\Omega$ 光滑与相容性条件（张角 $\\omega>\\pi$ 的角点处即使 $f$ 光滑也只得 $u\\notin H^2$）。",
+      "与 Sobolev 嵌入配合：$n\\le3$ 时 $H^2_{\\mathrm{loc}}\\subset C^0$，故 $f\\in L^2$ 的弱解已经连续；$f$ 与系数、边界都光滑时弱解与古典解重合。"
+    ],
+    "propertiesEn": [
+      "The gain is exactly two orders: $f\\in H^k$ implies $u\\in H^{k+2}_{\\mathrm{loc}}$. The reason is that the equation is of second order ($-\\Delta u$ has the same order as $f$); claiming an arbitrary gain, or only one order, is wrong.",
+      "The a priori estimate must keep a lower-order norm: $\\|u\\|_{H^2(K)}\\le C(\\|f\\|_2+\\|u\\|_2)$; an estimate with $f$ alone fails, the counterexample being $\\lambda(x_1^2-x_2^2)$ with $\\Delta u=0$ and arbitrarily large $\\|D^2u\\|$.",
+      "Weyl's lemma: $\\Delta u=0$ in the distributional sense implies $u\\in C^\\infty$ and classically harmonic — the template for upgrading weak solutions, and iteration gives smoothness of any order.",
+      "General operators need $a^{ij}$ uniformly elliptic ($a^{ij}\\xi_i\\xi_j\\ge\\lambda|\\xi|^2$, $\\lambda>0$) with smooth enough coefficients, lower-order terms being less demanding; boundary regularity additionally requires a smooth $\\partial\\Omega$ and compatibility conditions (at a corner of opening angle $\\omega>\\pi$ even smooth $f$ gives only $u\\notin H^2$).",
+      "Combined with Sobolev embeddings: for $n\\le3$, $H^2_{\\mathrm{loc}}\\subset C^0$, so a weak solution with $f\\in L^2$ is already continuous; when data, coefficients and boundary are all smooth, weak and classical solutions coincide."
+    ],
+    "examples": [
+      {
+        "problem": "说明为什么内部估计的右端必须含 $\\|u\\|_{L^2}$：在 $\\Omega=B(0,1)\\subset\\mathbb R^2$ 上取 $u_\\lambda(x)=\\lambda(x_1^2-x_2^2)$。",
+        "solution": "$\\Delta u_\\lambda=\\lambda(2-2)=0$，故 $f=-\\Delta u_\\lambda=0$；而 $\\partial_1^2u_\\lambda=2\\lambda$、$\\partial_2^2u_\\lambda=-2\\lambda$、$\\partial_1\\partial_2u_\\lambda=0$，于是对任意紧集 $K\\Subset\\Omega$，$\\|D^2u_\\lambda\\|_{L^2(K)}=2\\sqrt2\\,|\\lambda|\\sqrt{|K|}$，随 $\\lambda\\to\\infty$ 无界。因此形如 $\\|u\\|_{H^2(K)}\\le C\\|f\\|_{L^2(\\Omega)}$（不含 $\\|u\\|_{L^2}$）的估计不成立。而定理中的 $\\|u\\|_{H^2(K)}\\le C(\\|f\\|_2+\\|u\\|_2)$ 仍然自洽：$\\|u_\\lambda\\|_{L^2}=\\lambda\\|x_1^2-x_2^2\\|_{L^2}$ 同步增大，右端可以吸收左端。这正是「先验估计必须由数据与低阶范数共同控制高阶范数」的字面含义。"
+      },
+      {
+        "problem": "(a) 在一维核对「提升 2 阶」；(b) 用角点奇性说明整体 $H^2$ 正则性为什么需要边界条件。",
+        "solution": "(a) 设 $u''=f\\in L^2(0,1)$、$u(0)=u(1)=0$。由 $u'(x)=u'(0)+\\int_0^xf(t)\\,dt$ 得 $u'\\in H^1(0,1)$（因 $L^2\\subset L^1$，积分函数绝对连续且导数几乎处处为 $f$），故 $u\\in H^2(0,1)$：$f$ 的 0 阶提升到 $u$ 的 2 阶，恰好 2 阶，与一般定理 $f\\in H^k\\Rightarrow u\\in H^{k+2}$ 一致。取 $f=\\sin(\\pi x)$ 则 $u=-\\frac{\\sin(\\pi x)}{\\pi^2}$，直接验证 $\\|u''\\|_{L^2}=\\|f\\|_{L^2}$。\n(b) 平面上张角 $\\omega>\\pi$ 的角点附近 $u\\sim cr^{\\pi/\\omega}\\sin(\\pi\\theta/\\omega)$，$|D^2u|\\sim r^{\\pi/\\omega-2}$，而 $\\int_0|D^2u|^2r\\,dr<\\infty\\iff\\omega<\\pi$。取 $\\omega=\\frac{3\\pi}2$：指数为 $\\frac23$，被积函数 $r^{-5/3}$，$\\int_0r^{-5/3}dr=\\infty$，所以即使 $f$ 光滑也只能得到 $u\\notin H^2$。这说明整体 $H^2$ 正则性确实需要边界光滑（例如凸区域 $\\omega\\le\\pi$ 即可）。"
+      }
+    ],
+    "tags": [
+      "椭圆正则性",
+      "先验估计",
+      "Weyl 引理",
+      "Schauder 估计",
+      "H^2 估计"
+    ],
+    "links": [
+      "weak-solution-lax-milgram",
+      "weak-derivative-sobolev",
+      "sobolev-embedding",
+      "green-function",
+      "harnack-principle",
+      "galerkin-energy-estimate"
+    ]
+  }
+]

@@ -1,0 +1,665 @@
+[
+  {
+    "id": "determinant-definition",
+    "title": "行列式的定义",
+    "titleEn": "The Definition of Determinants",
+    "branch": "linear",
+    "level": 3,
+    "summary": "行列式是方阵算出的一个数：二阶就是两个向量张成的带符号面积，n 阶则由取遍所有排列、按逆序数配符号的乘积之和定义。",
+    "summaryEn": "A determinant is a single number computed from a square matrix: for order two it is the signed area spanned by two vectors, and in general it is a signed sum over all permutations.",
+    "definition": "行列式（determinant）是对**方阵**定义的一种运算：输入一个 $n \\times n$ 的数表，输出**一个数**，记作 $\\det A$ 或 $|A|$。二阶行列式的规则最简单：$\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc$，也就是「主对角线乘积减去副对角线乘积」。三阶行列式可以用类似的**对角线法则（萨吕斯法则）**：三条主对角线方向的乘积之和，减去三条副对角线方向的乘积之和。但要牢牢记住：**对角线法则只对二阶和三阶成立，四阶及以上必须改用行列式的性质或按行（列）展开定理**，否则一定算错。\n\n它为什么重要？因为行列式度量的正是线性变换对空间的作用。平面上由向量 $\\boldsymbol{u} = (u_1, u_2)$ 与 $\\boldsymbol{v} = (v_1, v_2)$ 张成的平行四边形，面积为 $\\left| \\det(\\boldsymbol{u}, \\boldsymbol{v}) \\right| = |u_1 v_2 - u_2 v_1|$：绝对值是面积，符号说明从 $\\boldsymbol{u}$ 到 $\\boldsymbol{v}$ 是逆时针（正）还是顺时针（负），等于 0 则表示两向量共线、平行四边形被压扁成一条线段。所以 $|A| \\neq 0$ 意味着线性变换没有把空间「压扁」，这正是矩阵可逆的判据。\n\n对一般的 $n$ 阶行列式，定义要用到**排列的逆序数**。$1, 2, \\dots, n$ 的一个排列 $j_1 j_2 \\cdots j_n$ 就是把这 $n$ 个数重排；逆序数 $\\tau(j_1 j_2 \\cdots j_n)$ 数的是「前面比后面大」的数对个数。于是 $n$ 阶行列式定义为 $$\\det A = \\sum_{j_1 j_2 \\cdots j_n} (-1)^{\\tau(j_1 j_2 \\cdots j_n)} a_{1j_1} a_{2j_2} \\cdots a_{nj_n},$$ 其中求和取遍全部 $n!$ 个排列，每一项从**不同行、不同列**各取一个元素相乘，符号 $(-1)^{\\tau}$ 由该排列的奇偶性决定（$\\tau$ 为偶数取正号，为奇数取负号）。\n\n这个定义解释了三件事：一，$n$ 阶行列式共有 $n!$ 项，四阶就有 24 项，所以手算必须靠性质化简，而不是硬套定义；二，每一项都「不同行不同列」，这正是初等变换与展开定理能够成立的根本原因；三，二阶、三阶的对角线法则只是定义在 $n \\le 3$ 时被整理成的口诀，$n \\ge 4$ 时对角线方向根本覆盖不了全部 $n!$ 个排列。",
+    "definitionEn": "A determinant is a number attached to a square matrix: it takes an $n \\times n$ array of numbers and returns a **single number**, written $\\det A$ or $|A|$. For order two the rule is $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc$. Third-order determinants can be evaluated by the **rule of Sarrus**, but **Sarrus' rule is valid only for orders two and three**; for order four and higher one must use the properties of determinants or cofactor expansion.\n\nThe number is important because it measures how a linear transformation acts on space. The parallelogram spanned by $\\boldsymbol{u} = (u_1,u_2)$ and $\\boldsymbol{v} = (v_1,v_2)$ has area $|u_1v_2 - u_2v_1|$: the determinant is the **signed** area, its sign recording orientation and its vanishing meaning that the two vectors are collinear. Thus $|A| \\neq 0$ says the transformation does not collapse space, which is exactly the invertibility condition.\n\nFor a general $n \\times n$ matrix the definition is a sum over permutations. The **inversion number** $\\tau(j_1j_2\\cdots j_n)$ of a permutation counts the pairs that appear out of their natural order, and $$\\det A = \\sum_{j_1 j_2 \\cdots j_n} (-1)^{\\tau(j_1 j_2 \\cdots j_n)} a_{1j_1} a_{2j_2} \\cdots a_{nj_n},$$ the sum running over all $n!$ permutations, each term taking one entry from every row and every column.\n\nSince there are $n!$ terms — already 24 of them at order four — the definition is used for theory and hand computation goes through properties and row operations. The diagonal rules for orders two and three are just this definition written out, and they do not extend to $n \\ge 4$.",
+    "formulas": [
+      {
+        "latex": "\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc",
+        "note": "二阶行列式：主对角线的乘积 ad 减去另一条对角线的乘积 bc。",
+        "noteEn": "Second order: the product ad on the main diagonal minus the product bc on the other diagonal."
+      },
+      {
+        "latex": "\\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix} = a_1 b_2 c_3 + a_2 b_3 c_1 + a_3 b_1 c_2 - a_3 b_2 c_1 - a_2 b_1 c_3 - a_1 b_3 c_2",
+        "note": "三阶行列式的对角线法则（萨吕斯法则）：三条主对角线方向的乘积之和减去三条副对角线方向的乘积之和；此法则对四阶及以上不成立。",
+        "noteEn": "Sarrus' rule for order three: three positive diagonal products minus three negative ones. It holds only for orders two and three."
+      },
+      {
+        "latex": "\\det A = \\sum_{j_1 j_2 \\cdots j_n} (-1)^{\\tau(j_1 j_2 \\cdots j_n)} a_{1j_1} a_{2j_2} \\cdots a_{nj_n}",
+        "note": "n 阶行列式的排列定义：对全部 n! 个排列求和，τ 为排列的逆序数，每项从不同行不同列各取一个元素。",
+        "noteEn": "Permutation definition: sum over all n! permutations, the sign being the parity of the inversion number; each product uses one entry from each row and each column."
+      },
+      {
+        "latex": "S = \\left| \\begin{vmatrix} u_1 & v_1 \\\\ u_2 & v_2 \\end{vmatrix} \\right| = |u_1 v_2 - u_2 v_1|",
+        "note": "几何意义：二阶行列式的绝对值等于两向量张成的平行四边形面积，符号表示定向。",
+        "noteEn": "Geometric meaning: the absolute value is the area of the parallelogram spanned by the two vectors, the sign encoding orientation."
+      },
+      {
+        "latex": "\\det(\\boldsymbol{u}, \\boldsymbol{v}) = 0 \\iff \\boldsymbol{u} \\text{ 与 } \\boldsymbol{v} \\text{ 共线}",
+        "note": "面积为 0 等价于两向量共线（线性相关）；n 阶情形的推广是 |A| = 0 等价于 A 的列向量线性相关。",
+        "noteEn": "Zero area means the vectors are collinear (linearly dependent); the general statement is that |A| = 0 iff the columns of A are linearly dependent."
+      }
+    ],
+    "expression": {
+      "text": "det A = |A|（A 为 n 阶方阵）",
+      "symbol": "\\det A",
+      "note": "行列式记作 det A 或 |A|，它的值是一个数",
+      "noteEn": "Written det A or |A|; its value is a single number"
+    },
+    "properties": [
+      "行列式的结果是一个**数**：n 阶行列式的值由方阵的元素完全确定，记作 det A 或 |A|；它不是一个矩阵，也不能与矩阵的加减运算混在一起。",
+      "二阶、三阶可以直接用对角线（萨吕斯）法则；**四阶及以上没有对角线法则**，必须用行列式的性质化简或按行（列）展开定理降阶。",
+      "排列定义给出「项数」的直觉：n 阶行列式共 n! 项，每项取不同行不同列的元素相乘，符号为 (−1)ᵗ，其中 τ 是列指标排列的逆序数（偶排列取正号，奇排列取负号）。",
+      "几何意义：二阶行列式的绝对值等于两向量张成的平行四边形面积，符号表示定向（逆时针为正）；行列式为 0 等价于两向量共线、面积塌缩。",
+      "判别作用：|A| ≠ 0 等价于 A 可逆，也等价于 A 的列（行）向量线性无关；|A| = 0 时 A 不可逆。"
+    ],
+    "propertiesEn": [
+      "A determinant is a **number**: it is completely determined by the entries of the square matrix and written det A or |A|; it is not a matrix and must not be mixed with matrix addition.",
+      "Orders two and three may be evaluated by the diagonal (Sarrus) rule; **there is no diagonal rule for order four or higher**, where the properties or cofactor expansion must be used.",
+      "The permutation definition explains the workload: an order-n determinant has n! terms, each using one entry per row and column, with sign (−1)ᵗ given by the inversion number of the column-index permutation.",
+      "Geometrically the absolute value of a second-order determinant is the area of the parallelogram spanned by the two vectors, the sign recording orientation; determinant zero means the vectors are collinear.",
+      "Criterion: |A| ≠ 0 iff A is invertible, equivalently iff the columns (rows) of A are linearly independent."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1,
+        5.5
+      ],
+      "yRange": [
+        -1,
+        3
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.15)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            0
+          ],
+          "color": "#ffd166",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            2
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "O"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            0
+          ],
+          "label": "(3,0)"
+        },
+        {
+          "type": "point",
+          "at": [
+            4,
+            2
+          ]
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            2
+          ],
+          "label": "(1,2)"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.6,
+            -0.45
+          ],
+          "text": "u = (3,0)"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.9,
+            1.1
+          ],
+          "text": "v = (1,2)"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.35,
+            0.95
+          ],
+          "text": "S = |ad - bc| = 6"
+        }
+      ],
+      "title": "两向量 (3,0)、(1,2) 张成的平行四边形：面积为 6"
+    },
+    "examples": [
+      {
+        "problem": "计算 $D = \\begin{vmatrix} 3 & 0 \\\\ 1 & 2 \\end{vmatrix}$，并说明它的几何意义。",
+        "solution": "由对角线法则，$D = 3 \\times 2 - 0 \\times 1 = 6$。几何上，把两行看成从原点出发的向量 $\\boldsymbol{u} = (3,0)$、$\\boldsymbol{v} = (1,2)$（行列式转置不变，向量作行或作列结论相同），它们张成的平行四边形顶点为 $(0,0)$、$(3,0)$、$(4,2)$、$(1,2)$：以 $|\\boldsymbol{u}| = 3$ 为底、以 $\\boldsymbol{v}$ 到 $x$ 轴的距离 2 为高，面积 $S = 3 \\times 2 = 6$，恰好等于 $|3 \\times 2 - 0 \\times 1| = 6$，且 $D > 0$ 表示从 $\\boldsymbol{u}$ 到 $\\boldsymbol{v}$ 为逆时针方向。若把 $\\boldsymbol{v}$ 换成它的反向量 $(-1,-2)$，则 $D = 3 \\times (-2) - 0 \\times (-1) = -6$，面积仍为 6，只是定向反了。"
+      },
+      {
+        "problem": "用排列定义（逆序数）计算 $D = \\begin{vmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{vmatrix}$。",
+        "solution": "三阶行列式共 $3! = 6$ 项，逐项检查：① 排列 $(1,2,3)$，$\\tau = 0$，项为 $a_{11}a_{22}a_{33} = 0 \\cdot 0 \\cdot 0 = 0$；② 排列 $(1,3,2)$，$\\tau = 1$（$3 > 2$），项为 $a_{11}a_{23}a_{32} = 0$；③ 排列 $(2,1,3)$，$\\tau = 1$（$2 > 1$），项为 $a_{12}a_{21}a_{33} = 1 \\cdot 0 \\cdot 0 = 0$；④ 排列 $(2,3,1)$，$\\tau = 2$（$2 > 1$，$3 > 1$），为偶排列取正号，项为 $a_{12}a_{23}a_{31} = 1 \\cdot 1 \\cdot 1 = 1$；⑤ 排列 $(3,1,2)$，$\\tau = 2$（$3 > 1$，$3 > 2$），项为 $a_{13}a_{21}a_{32} = 0$；⑥ 排列 $(3,2,1)$，$\\tau = 3$，项为 $a_{13}a_{22}a_{31} = 0$。因此 $D = 1$。用对角线法则检验：$0 + 1 \\cdot 1 \\cdot 1 + 0 - 0 - 0 - 0 = 1$，结果一致。可以看到，很多项会因为含有 0 元素而消失，这正是后面「挑含 0 多的行（列）展开」的依据。"
+      }
+    ],
+    "tags": [
+      "行列式",
+      "线性代数",
+      "几何意义",
+      "逆序数"
+    ],
+    "links": [
+      "determinant-properties",
+      "cofactor-expansion",
+      "matrix-operations",
+      "inverse-matrix",
+      "jacobian"
+    ]
+  },
+  {
+    "id": "determinant-properties",
+    "title": "行列式的性质",
+    "titleEn": "Properties of Determinants",
+    "branch": "linear",
+    "level": 4,
+    "summary": "转置不变、换行变号、某行乘 k 则行列式乘 k（整体 |kA| = kⁿ|A|）、倍加不变、乘积可拆——这些性质是把行列式化为三角形来计算的依据。",
+    "summaryEn": "Transposition leaves a determinant unchanged, swapping rows flips its sign, scaling a row scales it (so |kA| = kⁿ|A|), adding a multiple of one row to another changes nothing, and |AB| = |A||B|.",
+    "definition": "直接按定义计算 $n$ 阶行列式要处理 $n!$ 项，根本算不动；真正让行列式「可算」的是它的一组性质，而这些性质几乎都能用面积（体积）讲清楚：转置相当于把图形翻个面，面积不变；交换两行相当于改用了相反的定向，面积变号；把一行的 $k$ 倍加到另一行上，相当于做一次**剪切变换**——平行四边形被推斜了，但底和高都没变，所以面积不变。\n\n三条基本操作对行、对列都成立（因为 $|A^{\\mathrm{T}}| = |A|$，行与列的地位完全对称）：①**交换**两行（列），行列式**变号**；② 用非零数 $k$ 乘某一行（列）的每个元素，行列式**乘 $k$**；③ 把某一行（列）的任意倍数加到另一行（列）上，行列式**不变**。这三条恰好对应矩阵的三种初等行变换，也是用消元法计算行列式的全部依据。\n\n由这三条可以推出一串高频结论：两行（列）相同或成比例时行列式为 0（交换这两行后行列式既是 $D$ 又是 $-D$，只能为 0）；某一行（列）全为 0 时行列式也为 0；上（下）三角形行列式等于对角线元素之积。尤其要小心**倍乘的比例**：某一行乘 $k$ 只提出一个 $k$，而整个矩阵乘 $k$ 是**每一行**都乘了 $k$，所以对 $n$ 阶矩阵 $$|kA| = k^{n}|A|,$$ **不是** $k|A|$——这是线性代数里最高频的错误之一，务必写对。\n\n另一个高频误区是：**行列式对矩阵加法没有线性性**，一般地 $|A + B| \\neq |A| + |B|$；只有当两个行列式**仅有某一行（列）不同**时，才能按这一行（列）把和拆开。相比之下乘法非常规整：同阶方阵满足 $|AB| = |A|\\,|B|$，由此立刻得到 $|A^{k}| = |A|^{k}$、$|A^{-1}| = 1/|A|$、相似矩阵行列式相等，以及「$A$ 可逆 $\\iff |A| \\neq 0$」。",
+    "definitionEn": "Evaluating a determinant straight from the definition means handling $n!$ terms, so what actually makes determinants computable is a short list of **properties**, almost all of which are visible geometrically: transposing flips the figure over (area unchanged), swapping two rows reverses orientation (sign changed), and adding a multiple of one row to another is a **shear** — the parallelogram tilts but keeps the same base and height, so the area does not change.\n\nThe three operations work for rows and for columns alike, because $|A^{\\mathrm{T}}| = |A|$: (i) swapping two rows (columns) **changes the sign**; (ii) multiplying the entries of one row (column) by a nonzero $k$ **multiplies the determinant by $k$**; (iii) adding any multiple of one row (column) to another **leaves the determinant unchanged**. They mirror the three elementary row operations and form the basis of elimination methods for determinants.\n\nUseful consequences follow at once: a determinant with two identical or proportional rows (columns) equals 0, one with a zero row (column) equals 0, and a triangular determinant is the product of its diagonal entries. Mind the scaling rule: multiplying one row by $k$ pulls out a single $k$, but multiplying the whole $n \\times n$ matrix by $k$ scales **every** row, hence $$|kA| = k^{n}|A|,$$ **not** $k|A|$.\n\nEqually important: a determinant is **not** additive, since in general $|A + B| \\neq |A| + |B|$; a sum may be split only when the two determinants differ in a single row (column). Multiplication, by contrast, behaves perfectly: $|AB| = |A|\\,|B|$ for square matrices of the same order, giving $|A^{k}| = |A|^{k}$, $|A^{-1}| = 1/|A|$ for invertible $A$, equal determinants for similar matrices, and the criterion that $A$ is invertible iff $|A| \\neq 0$.",
+    "formulas": [
+      {
+        "latex": "|A^{\\mathrm{T}}| = |A|",
+        "note": "转置不变，因此凡是对行成立的性质对列同样成立（行与列地位完全对称）。",
+        "noteEn": "Transposition leaves the determinant unchanged, so every row property also holds for columns."
+      },
+      {
+        "latex": "|kA| = k^{n}|A| \\quad (A \\text{ 为 } n \\text{ 阶方阵})",
+        "note": "整个矩阵乘 k 相当于每一行都乘 k，一共提出 n 个 k；注意不是 k|A|（例如 3 阶时 |2A| = 8|A|）。",
+        "noteEn": "Scaling the whole n×n matrix by k scales each of the n rows, hence k to the power n; it is not k|A|."
+      },
+      {
+        "latex": "|AB| = |A|\\,|B|",
+        "note": "同阶方阵的乘法定理；推论：|Aᵏ| = |A|ᵏ，A 可逆时 |A⁻¹| = 1/|A|，相似矩阵行列式相等。",
+        "noteEn": "Multiplicativity for square matrices; consequently |Aᵏ| = |A|ᵏ, |A⁻¹| = 1/|A| for invertible A, and similar matrices have equal determinants."
+      },
+      {
+        "latex": "\\begin{vmatrix} a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\\\ c_1 & c_2 & c_3 \\end{vmatrix} = - \\begin{vmatrix} b_1 & b_2 & b_3 \\\\ a_1 & a_2 & a_3 \\\\ c_1 & c_2 & c_3 \\end{vmatrix}",
+        "note": "交换两行（或两列），行列式变号；由此外推：两行相同或成比例时行列式为 0。",
+        "noteEn": "Swapping two rows (or columns) changes the sign; hence a determinant with two identical or proportional rows is 0."
+      },
+      {
+        "latex": "\\begin{vmatrix} a_1 & a_2 & a_3 \\\\ b_1 + k a_1 & b_2 + k a_2 & b_3 + k a_3 \\\\ c_1 & c_2 & c_3 \\end{vmatrix} = \\begin{vmatrix} a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\\\ c_1 & c_2 & c_3 \\end{vmatrix}",
+        "note": "把第 1 行的 k 倍加到第 2 行上，行列式不变——这是剪切变换，也是化三角形行列式的核心手段。",
+        "noteEn": "Adding k times the first row to the second leaves the determinant unchanged — the shear move behind triangularisation."
+      }
+    ],
+    "properties": [
+      "转置不变：|Aᵀ| = |A|，所以关于行的每一条性质对列也成立；特别地，按行展开与按列展开的结果相同。",
+      "交换两行（列）行列式变号；由此可知两行（列）相同或成比例时行列式为 0，某一行（列）全为 0 时行列式也为 0。",
+      "倍乘与提因子：某一行（列）乘 k，行列式乘 k；对 n 阶方阵整体有 |kA| = kⁿ|A|（**不是 k|A|**），例如 3 阶时 |2A| = 8|A|。",
+      "倍加不变：把某一行（列）的 k 倍加到另一行（列）上，行列式不变；但只有「仅某一行（列）不同」的两个行列式才能按该行（列）拆开相加，一般地 |A + B| ≠ |A| + |B|（行列式对加法没有线性性）。",
+      "乘法定理：|AB| = |A||B|（同阶方阵）；由此 A 可逆 ⟺ |A| ≠ 0，此时 |A⁻¹| = 1/|A|，且 |Aᵏ| = |A|ᵏ。"
+    ],
+    "propertiesEn": [
+      "Transposition: |Aᵀ| = |A|; every property about rows therefore also holds for columns, and expansion along a row equals expansion along a column.",
+      "Swapping two rows (columns) changes the sign; hence two identical or proportional rows (columns) give determinant 0, and so does a zero row (column).",
+      "Scaling: multiplying one row (column) by k multiplies the determinant by k while for the whole n×n matrix |kA| = kⁿ|A|, **not** k|A| — for instance |2A| = 8|A| when n = 3.",
+      "Shear invariance: adding a multiple of one row (column) to another leaves the determinant unchanged; a determinant may be split only when a single row (column) differs, and in general |A + B| ≠ |A| + |B| — determinants are not additive.",
+      "Multiplicativity: |AB| = |A||B| for square matrices of the same order; consequently A is invertible iff |A| ≠ 0, with |A⁻¹| = 1/|A| and |Aᵏ| = |A|ᵏ."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.8,
+        3
+      ],
+      "yRange": [
+        -0.8,
+        2.2
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.15)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            1
+          ],
+          "label": "(1,1)"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.1,
+            1.5
+          ],
+          "text": "单位正方形：面积 1"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.15,
+            1.5
+          ],
+          "text": "剪切后：面积仍为 1"
+        }
+      ],
+      "title": "把一列的 1 倍加到另一列（剪切）：行列式不变"
+    },
+    "examples": [
+      {
+        "problem": "设 $A$、$B$ 都是 3 阶方阵，且 $|A| = 4$，$|B| = -2$，求 $|2A|$、$|-A|$、$|A^{\\mathrm{T}}B|$、$|A^{2}|$。",
+        "solution": "$A$ 是 3 阶矩阵，处理倍乘时必须用 $|kA| = k^{3}|A|$：$|2A| = 2^{3}|A| = 8 \\times 4 = 32$（不能写成 $2|A| = 8$）；$|-A| = (-1)^{3}|A| = -4$。由转置不变与乘法定理，$|A^{\\mathrm{T}}B| = |A^{\\mathrm{T}}| \\cdot |B| = |A| \\cdot |B| = 4 \\times (-2) = -8$；由 $|A^{2}| = |A|^{2}$ 得 $|A^{2}| = 4^{2} = 16$。"
+      },
+      {
+        "problem": "用行列式的性质计算 $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 5 & 8 \\\\ 3 & 7 & 10 \\end{vmatrix}$，并说明每一步的依据。",
+        "solution": "第一步用「某行的倍数加到另一行，行列式不变」：第 2 行减去第 1 行的 2 倍，得 $(0, 1, 2)$；第 3 行减去第 1 行的 3 倍，得 $(0, 1, 1)$。于是 $$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 2 \\\\ 0 & 1 & 1 \\end{vmatrix}.$$ 第二步再用第 3 行减第 2 行，得 $(0, 0, -1)$：$$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 2 \\\\ 0 & 0 & -1 \\end{vmatrix}.$$ 这是上三角形行列式，值等于对角线元素之积：$D = 1 \\times 1 \\times (-1) = -1$。用对角线法则验算原行列式：$(1 \\cdot 5 \\cdot 10 + 2 \\cdot 8 \\cdot 3 + 3 \\cdot 2 \\cdot 7) - (3 \\cdot 5 \\cdot 3 + 1 \\cdot 8 \\cdot 7 + 2 \\cdot 2 \\cdot 10) = (50 + 48 + 42) - (45 + 56 + 40) = 140 - 141 = -1$，结果一致。"
+      }
+    ],
+    "tags": [
+      "行列式",
+      "线性代数",
+      "初等变换",
+      "性质"
+    ],
+    "links": [
+      "determinant-definition",
+      "cofactor-expansion",
+      "determinant-calculation",
+      "elementary-matrices",
+      "inverse-matrix"
+    ]
+  },
+  {
+    "id": "cofactor-expansion",
+    "title": "代数余子式与展开定理",
+    "titleEn": "Algebraic Cofactors and Cofactor Expansion",
+    "branch": "linear",
+    "level": 4,
+    "summary": "余子式 Mᵢⱼ 是划去第 i 行第 j 列后的 n−1 阶行列式（不带符号），代数余子式 Aᵢⱼ = (−1)^{i+j}Mᵢⱼ；按任意一行或一列展开都等于 |A|，串行配对则得 0。",
+    "summaryEn": "The minor Mᵢⱼ is the (n−1)-order determinant left after deleting row i and column j (no sign), the cofactor is Aᵢⱼ = (−1)^{i+j}Mᵢⱼ, and expanding along any row or column gives |A| while mismatched pairings give 0.",
+    "definition": "展开定理（按行按列展开，也叫拉普拉斯展开）是把高阶行列式**降阶**的标准工具。先要分清两个概念：在 $n$ 阶行列式 $D = |A|$ 中，划掉元素 $a_{ij}$ 所在的第 $i$ 行与第 $j$ 列，剩余元素按原来的相对位置排成的 $(n-1)$ 阶行列式，叫做 $a_{ij}$ 的**余子式**，记作 $M_{ij}$，它**不带任何符号**；再乘上符号因子 $(-1)^{i+j}$，就得到**代数余子式** $$A_{ij} = (-1)^{i+j} M_{ij}.$$ 符号表是「棋盘格」：$\\begin{pmatrix} + & - & + & \\cdots \\\\ - & + & - & \\cdots \\\\ + & - & + & \\cdots \\\\ \\vdots & \\vdots & \\vdots & \\ddots \\end{pmatrix}$。把余子式与代数余子式混用，是这一章最常见、也最冤枉的失分点。\n\n展开定理的内容很简洁：$n$ 阶行列式等于它的**任意一行**的每个元素与自己的代数余子式乘积之和，$$D = a_{i1}A_{i1} + a_{i2}A_{i2} + \\cdots + a_{in}A_{in} = \\sum_{j=1}^{n} a_{ij}A_{ij};$$ 按**任意一列**展开同样成立：$D = \\sum_{i=1}^{n} a_{ij}A_{ij}$。以三阶按第一行展开为例，三项的符号依次是 $+$、$-$、$+$。\n\n最关键的是「任意」两个字：无论选哪一行、哪一列，展开结果都等于 $D$。所以实际计算时应挑**含 0 最多**的那一行（列）来展开，或者先用倍加变换把某一行（列）消到只剩一个非零元素，再一次展开就把 $n$ 阶降到 $n-1$ 阶。\n\n与展开定理配套的是**组合性质**：某一行元素与**同一行**的代数余子式配对求和等于 $D$；若与**另一行**的代数余子式配对，则求和等于 0，即 $\\sum_{j=1}^{n} a_{ij}A_{kj} = D$（当 $i = k$）、$\\sum_{j=1}^{n} a_{ij}A_{kj} = 0$（当 $i \\neq k$）。把它写成矩阵形式就是 $A A^{*} = |A| E$，其中 $A^{*} = (A_{ji})$ 是代数余子式组成的**伴随矩阵**；当 $|A| \\neq 0$ 时立刻得到逆矩阵公式 $A^{-1} = A^{*}/|A|$。",
+    "definitionEn": "Cofactor expansion (Laplace expansion along a row or a column) is the standard way to **lower the order** of a determinant. Two objects come first. In an $n \\times n$ determinant $D = |A|$, delete the row $i$ and the column $j$ containing $a_{ij}$; the determinant of the remaining $(n-1)$-order array is the **minor** $M_{ij}$, and it carries **no sign**. Multiplying by the sign factor gives the **cofactor** $$A_{ij} = (-1)^{i+j} M_{ij},$$ whose signs form a checkerboard $+,-,+,\\dots$. Confusing the minor with the cofactor is the classic error of this topic.\n\nThe theorem itself is short: $D$ equals the sum over **any** row of its entries times their own cofactors, $$D = \\sum_{j=1}^{n} a_{ij}A_{ij},$$ and the same identity holds for **any** column, $D = \\sum_{i=1}^{n} a_{ij}A_{ij}$.\n\nSince the choice is free, the practical strategy is to pick the row or column containing the most zeros — or to create zeros with row operations first — so that a single expansion reduces the order by one.\n\nA companion identity handles mismatched rows: an entry of row $i$ multiplied by the cofactor of the *same position* in row $k$ sums to $D$ when $i = k$ and to $0$ when $i \\neq k$. In matrix form this reads $A A^{*} = |A| E$, where the **adjugate** $A^{*} = (A_{ji})$ collects the cofactors; for $|A| \\neq 0$ it immediately yields $A^{-1} = A^{*}/|A|$.",
+    "formulas": [
+      {
+        "latex": "A_{ij} = (-1)^{i+j} M_{ij}, \\qquad i, j = 1, 2, \\dots, n",
+        "note": "代数余子式等于「符号因子乘余子式」；Mᵢⱼ 是划掉第 i 行第 j 列后的 n−1 阶行列式，本身不带符号。",
+        "noteEn": "The cofactor is the sign factor times the minor; Mᵢⱼ itself, the (n−1)-order determinant left after deleting row i and column j, carries no sign."
+      },
+      {
+        "latex": "D = \\sum_{j=1}^{n} a_{ij}A_{ij} = a_{i1}A_{i1} + a_{i2}A_{i2} + \\cdots + a_{in}A_{in}, \\qquad i = 1, 2, \\dots, n",
+        "note": "按第 i 行展开的展开定理，第 i 行可以任选，结果都等于 D。",
+        "noteEn": "Expansion along row i; the row may be chosen freely and always gives D."
+      },
+      {
+        "latex": "D = \\sum_{i=1}^{n} a_{ij}A_{ij} = a_{1j}A_{1j} + a_{2j}A_{2j} + \\cdots + a_{nj}A_{nj}, \\qquad j = 1, 2, \\dots, n",
+        "note": "按第 j 列展开的展开定理，与按行展开结果相同。",
+        "noteEn": "Expansion along column j; it agrees with expansion along any row."
+      },
+      {
+        "latex": "\\sum_{j=1}^{n} a_{ij}A_{kj} = \\begin{cases} D, & i = k \\\\ 0, & i \\neq k \\end{cases}",
+        "note": "组合性质：同一行元素配同一行的代数余子式得 D，串到另一行则得 0；写成矩阵就是 A·A* = |A|E。",
+        "noteEn": "Mismatched pairings: entries of row i times cofactors from the same position of row k give D when i = k and 0 otherwise; in matrix form A·A* = |A|E."
+      },
+      {
+        "latex": "\\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix} = a_1 \\begin{vmatrix} b_2 & c_2 \\\\ b_3 & c_3 \\end{vmatrix} - b_1 \\begin{vmatrix} a_2 & c_2 \\\\ a_3 & c_3 \\end{vmatrix} + c_1 \\begin{vmatrix} a_2 & b_2 \\\\ a_3 & b_3 \\end{vmatrix}",
+        "note": "三阶按第一行展开的显式写法：符号 + − + 交替，每项是一个元素乘它自己的二阶代数余子式。",
+        "noteEn": "Third order expanded along the first row: signs alternate + − +, each term being an entry times its own second-order cofactor."
+      }
+    ],
+    "properties": [
+      "余子式与代数余子式的关系是 Aᵢⱼ = (−1)^{i+j}Mᵢⱼ：Mᵢⱼ 是划去第 i 行第 j 列后的 n−1 阶行列式、**不带符号**，Aᵢⱼ 多一个符号因子，两者不可混用。",
+      "展开定理的「任意性」：按任意一行或任意一列展开都等于 D；因此应优先挑选含 0 最多的一行（列），或先用倍加变换制造 0 再展开。",
+      "组合性质的两个方向不能写反：同一行元素与其代数余子式配对求和得 D（Σⱼ aᵢⱼAᵢⱼ = D），某一行元素与另一行的代数余子式配对求和得 0（i ≠ k 时 Σⱼ aᵢⱼAₖⱼ = 0）；列的情形同理。",
+      "伴随矩阵与逆矩阵：把代数余子式按转置位置排成 A* = (Aⱼᵢ)，则 A·A* = A*·A = |A|E；当 |A| ≠ 0 时 A⁻¹ = A*/|A|。",
+      "展开定理是递推降阶的工具：一次展开把 n 阶行列式写成若干 n−1 阶行列式的和，可以继续展开；按选定的 k 行（列）展开的推广就是拉普拉斯定理，特别地分块三角矩阵有 |[[A, C], [0, B]]| = |A||B|。"
+    ],
+    "propertiesEn": [
+      "Minor versus cofactor: Aᵢⱼ = (−1)^{i+j}Mᵢⱼ; the minor is the (n−1)-order determinant left after deleting row i and column j and carries no sign, whereas the cofactor adds the sign factor — the two must not be confused.",
+      "Freedom of expansion: any row or any column gives the same value D, so choose the row (column) with the most zeros, or create zeros first by adding multiples of other rows.",
+      "The two directions of the pairing identity must not be swapped: entries of a row paired with their own cofactors sum to D (Σⱼ aᵢⱼAᵢⱼ = D), while pairing them with the cofactors of a different row gives 0 (Σⱼ aᵢⱼAₖⱼ = 0 for i ≠ k); the same holds for columns.",
+      "Adjugate and inverse: arranging the cofactors transposed, A* = (Aⱼᵢ), gives A·A* = A*·A = |A|E, hence A⁻¹ = A*/|A| when |A| ≠ 0.",
+      "Expansion is a recursion for lowering order: one expansion rewrites an order-n determinant as a sum of order-(n−1) determinants; expanding along k chosen rows (columns) generalises this to Laplace's theorem, and in particular a block-triangular matrix satisfies |[[A, C], [0, B]]| = |A||B|."
+    ],
+    "examples": [
+      {
+        "problem": "计算 $D = \\begin{vmatrix} 3 & 1 & 0 \\\\ -1 & 2 & 1 \\\\ 0 & 1 & 4 \\end{vmatrix}$，按第一行展开。",
+        "solution": "先写三个代数余子式：$A_{11} = (+1)\\begin{vmatrix} 2 & 1 \\\\ 1 & 4 \\end{vmatrix} = 8 - 1 = 7$；$A_{12} = (-1)\\begin{vmatrix} -1 & 1 \\\\ 0 & 4 \\end{vmatrix} = -(-4 - 0) = 4$（注意负号，这里最容易漏）；$A_{13} = (+1)\\begin{vmatrix} -1 & 2 \\\\ 0 & 1 \\end{vmatrix} = -1 - 0 = -1$。于是 $D = 3 \\times 7 + 1 \\times 4 + 0 \\times (-1) = 21 + 4 + 0 = 25$。用对角线法则验算：$(3 \\cdot 2 \\cdot 4 + 1 \\cdot 1 \\cdot 0 + 0 \\cdot (-1) \\cdot 1) - (0 \\cdot 2 \\cdot 0 + 3 \\cdot 1 \\cdot 1 + 1 \\cdot (-1) \\cdot 4) = 24 - (-1) = 25$，结果一致。"
+      },
+      {
+        "problem": "仍取上题的 $D = \\begin{vmatrix} 3 & 1 & 0 \\\\ -1 & 2 & 1 \\\\ 0 & 1 & 4 \\end{vmatrix}$，求 $A_{31} + A_{32} + A_{33}$，并顺便验证组合性质中「串行得 0」的一条。",
+        "solution": "直接按定义算三个代数余子式：$A_{31} = (+1)\\begin{vmatrix} 1 & 0 \\\\ 2 & 1 \\end{vmatrix} = 1$；$A_{32} = (-1)\\begin{vmatrix} 3 & 0 \\\\ -1 & 1 \\end{vmatrix} = -3$；$A_{33} = (+1)\\begin{vmatrix} 3 & 1 \\\\ -1 & 2 \\end{vmatrix} = 6 - (-1) = 7$，故 $A_{31} + A_{32} + A_{33} = 1 - 3 + 7 = 5$。更快的做法是「把系数看成 $(1,1,1)$」：把 $D$ 的第三行换成 $(1,1,1)$ 得到 $D' = \\begin{vmatrix} 3 & 1 & 0 \\\\ -1 & 2 & 1 \\\\ 1 & 1 & 1 \\end{vmatrix}$（换了这一行之后，第三行的代数余子式不变，因为它们只由其余两行决定），按第三行展开即 $D' = 1 \\cdot A_{31} + 1 \\cdot A_{32} + 1 \\cdot A_{33}$。用对角线法则算 $D'$：$(3 \\cdot 2 \\cdot 1 + 1 \\cdot 1 \\cdot 1 + 0) - (0 + 3 \\cdot 1 \\cdot 1 + 1 \\cdot (-1) \\cdot 1) = 7 - 2 = 5$，与上面的直接计算一致。再看串行配对：第一行元素配第三行的代数余子式，$a_{11}A_{31} + a_{12}A_{32} + a_{13}A_{33} = 3 \\times 1 + 1 \\times (-3) + 0 \\times 7 = 0$，正是组合性质中「i ≠ k 时求和为 0」的实例。"
+      }
+    ],
+    "tags": [
+      "行列式",
+      "线性代数",
+      "代数余子式",
+      "展开定理",
+      "伴随矩阵"
+    ],
+    "links": [
+      "determinant-definition",
+      "determinant-properties",
+      "determinant-calculation",
+      "inverse-matrix",
+      "cramer-rule"
+    ]
+  },
+  {
+    "id": "cramer-rule",
+    "title": "克拉默法则",
+    "titleEn": "Cramer's Rule",
+    "branch": "linear",
+    "level": 4,
+    "summary": "当方程个数等于未知数个数且系数行列式 D ≠ 0 时，方程组有唯一解 xⱼ = Dⱼ/D；齐次方程组有非零解当且仅当 D = 0。",
+    "summaryEn": "When a linear system has as many equations as unknowns and its coefficient determinant D is nonzero, the unique solution is xⱼ = Dⱼ/D; a homogeneous system has nonzero solutions exactly when D = 0.",
+    "definition": "克拉默法则（Cramer's rule）用行列式把线性方程组的解**直接写出来**。设 $n$ 个方程、$n$ 个未知数的线性方程组 $A\\boldsymbol{x} = \\boldsymbol{b}$，记**系数行列式** $D = |A|$；把 $D$ 的第 $j$ 列换成常数项 $b_1, b_2, \\dots, b_n$，其余各列原样不动，得到的行列式记为 $D_j$。若 $D \\neq 0$，则方程组有**唯一解** $$x_j = \\frac{D_j}{D}, \\qquad j = 1, 2, \\dots, n.$$ 推导只有一行：对 $A\\boldsymbol{x} = \\boldsymbol{b}$ 两边左乘伴随矩阵 $A^{*}$，用 $A^{*}A = |A|E$ 得 $D\\boldsymbol{x} = A^{*}\\boldsymbol{b}$，看第 $j$ 个分量就是 $D x_j = D_j$。\n\n使用时有两个**前置条件**，缺一不可：① 方程个数与未知数个数相等（系数矩阵是方阵）；② 系数行列式 $D \\neq 0$。当 $D = 0$ 时法则**失效**——但这绝不等于「方程组一定无解」：它可能无解，也可能有无穷多组解，必须另外判别（用秩或消元回代讨论）。例如 $\\begin{cases} x + y = 1 \\\\ 2x + 2y = 3 \\end{cases}$ 的 $D = 0$ 且无解，而 $\\begin{cases} x + y = 1 \\\\ 2x + 2y = 2 \\end{cases}$ 的 $D = 0$ 却有无穷多组解。\n\n对**齐次**线性方程组 $A\\boldsymbol{x} = \\boldsymbol{0}$（常数项全为 0），同一个法则给出一个极有用的判据：它有**非零解**当且仅当 $D = |A| = 0$。因为 $D \\neq 0$ 时公式给出的唯一解是零解 $x_1 = x_2 = \\cdots = x_n = 0$。\n\n几何上，二元情形中 $D$ 是由两条直线的法向量张成的带符号面积：$D \\neq 0$ 说明两直线不平行，必相交于唯一一点；$D = 0$ 则两直线平行（无解）或重合（无穷多解）。最后提醒一点：克拉默法则理论上非常漂亮——它把解写成系数的显式公式，便于讨论解对参数的依赖——但计算量随 $n$ 增长很快（要算 $n+1$ 个 $n$ 阶行列式），实际解方程组仍然首选高斯消元。",
+    "definitionEn": "Cramer's rule writes the solution of a linear system directly as a quotient of determinants. Let $A\\boldsymbol{x} = \\boldsymbol{b}$ be a system of $n$ equations in $n$ unknowns and let $D = |A|$ be the **coefficient determinant**. Replace the $j$-th column of $D$ by the constants $b_1, \\dots, b_n$, leaving every other column untouched, and call the result $D_j$. If $D \\neq 0$ the system has a **unique** solution $$x_j = \\frac{D_j}{D}, \\qquad j = 1, 2, \\dots, n.$$ The derivation is one line: multiply $A\\boldsymbol{x} = \\boldsymbol{b}$ on the left by the adjugate $A^{*}$ and use $A^{*}A = |A|E$ to get $D\\boldsymbol{x} = A^{*}\\boldsymbol{b}$, whose $j$-th entry reads $Dx_j = D_j$.\n\nTwo hypotheses are needed at once: the number of equations must equal the number of unknowns (so that the coefficient matrix is square), and the coefficient determinant must be nonzero. When $D = 0$ the rule simply **breaks down** — the system may have no solution or infinitely many, and must be analysed by rank or by elimination instead. For instance $x + y = 1$, $2x + 2y = 3$ has $D = 0$ and no solution, while $x + y = 1$, $2x + 2y = 2$ has $D = 0$ and infinitely many.\n\nFor a **homogeneous** system $A\\boldsymbol{x} = \\boldsymbol{0}$ the rule gives a sharp criterion: there is a **nonzero** solution if and only if $D = |A| = 0$, since $D \\neq 0$ forces the unique solution to be the zero one.\n\nGeometrically, with two unknowns, $D$ is the signed area spanned by the two normal vectors of the lines: $D \\neq 0$ means the lines are not parallel and meet in exactly one point, while $D = 0$ means they are parallel or coincide. Cramer's rule is elegant — it displays the solution explicitly and shows how it depends on the coefficients — but it costs $n+1$ determinants, so elimination remains the practical way to solve systems.",
+    "formulas": [
+      {
+        "latex": "D = \\begin{vmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & & \\vdots \\\\ a_{n1} & a_{n2} & \\cdots & a_{nn} \\end{vmatrix} \\neq 0",
+        "note": "系数行列式不为零是使用克拉默法则的前提（同时要求方程个数等于未知数个数）。",
+        "noteEn": "A nonzero coefficient determinant is the hypothesis of Cramer's rule, together with equally many equations as unknowns."
+      },
+      {
+        "latex": "x_j = \\frac{D_j}{D}, \\qquad j = 1, 2, \\dots, n",
+        "note": "唯一解公式：Dⱼ 是把 D 的第 j 列换成常数项 b₁,…,bₙ 后的行列式，其余各列保持原样。",
+        "noteEn": "The unique solution: Dⱼ is D with its j-th column replaced by the constants b₁,…,bₙ, every other column unchanged."
+      },
+      {
+        "latex": "x = \\frac{\\begin{vmatrix} c_1 & b_1 \\\\ c_2 & b_2 \\end{vmatrix}}{\\begin{vmatrix} a_1 & b_1 \\\\ a_2 & b_2 \\end{vmatrix}}, \\qquad y = \\frac{\\begin{vmatrix} a_1 & c_1 \\\\ a_2 & c_2 \\end{vmatrix}}{\\begin{vmatrix} a_1 & b_1 \\\\ a_2 & b_2 \\end{vmatrix}}",
+        "note": "二元情形的显式解：分母是系数行列式 D，分子分别把 x、y 的系数列换成常数项（这里方程组记为 a₁x + b₁y = c₁，a₂x + b₂y = c₂）。",
+        "noteEn": "The two-unknown case: the denominator is the coefficient determinant, and each numerator replaces the coefficients of that unknown by the constants."
+      },
+      {
+        "latex": "A\\boldsymbol{x} = \\boldsymbol{0} \\text{ 有非零解} \\iff D = |A| = 0",
+        "note": "齐次方程组的判据：D = 0 才有非零解；D ≠ 0 时只有零解。方向不能写反。",
+        "noteEn": "Criterion for homogeneous systems: nonzero solutions exist exactly when D = 0; if D ≠ 0 only the trivial solution exists."
+      },
+      {
+        "latex": "D \\boldsymbol{x} = A^{*} \\boldsymbol{b}, \\qquad D x_j = D_j \\quad (j = 1, \\dots, n)",
+        "note": "推导线：两边左乘伴随矩阵 A*，用 A*A = |A|E 即得 Dxⱼ = Dⱼ，这说明克拉默法则与逆矩阵公式是同一件事。",
+        "noteEn": "Derivation: multiplying by the adjugate A* and using A*A = |A|E gives Dxⱼ = Dⱼ, showing that Cramer's rule is the adjugate formula in disguise."
+      }
+    ],
+    "expression": {
+      "text": "x_j = D_j / D，j = 1, 2, …, n（要求 D ≠ 0）",
+      "symbol": "x_j=\\frac{D_j}{D}",
+      "note": "克拉默法则的解公式",
+      "noteEn": "The solution formula of Cramer's rule"
+    },
+    "properties": [
+      "两个前提必须同时满足：方程个数 = 未知数个数（系数矩阵为方阵），且系数行列式 D ≠ 0；此时方程组有唯一解 xⱼ = Dⱼ/D。",
+      "Dⱼ 的构造：只把 D 的第 j 列换成常数项 b₁,…,bₙ，其它未知数的系数列一律原样保留——换错列是常见错误。",
+      "D = 0 时克拉默法则失效：不能断言无解，可能无解也可能有无穷多组解（如 x + y = 1、2x + 2y = 3 无解；x + y = 1、2x + 2y = 2 有无穷多解），此时要用秩或消元法判别。",
+      "齐次方程组 Ax = 0 有非零解 ⟺ D = 0；等价地，D ≠ 0 时齐次方程组只有零解。蕴含方向不能反。",
+      "几何与实用：二元时 D 是两法向量张成的带符号面积，D ≠ 0 等价于两直线不平行、有唯一交点；理论上克拉默法则给出解的显式公式，但需要计算 n+1 个 n 阶行列式，实际求解仍以高斯消元为主。"
+    ],
+    "propertiesEn": [
+      "Two hypotheses at once: as many equations as unknowns (a square coefficient matrix) and a nonzero coefficient determinant D; under them the solution is unique and equals xⱼ = Dⱼ/D.",
+      "The construction of Dⱼ: only the j-th column is replaced by the constants b₁,…,bₙ, all other coefficient columns stay as they are — replacing the wrong column is a common slip.",
+      "If D = 0 the rule breaks down: one may not conclude that there is no solution, since the system can be inconsistent or have infinitely many solutions (x + y = 1, 2x + 2y = 3 versus x + y = 1, 2x + 2y = 2); ranks or elimination are then needed.",
+      "A homogeneous system Ax = 0 has a nonzero solution iff D = 0; equivalently, D ≠ 0 forces the trivial solution only. The direction of this equivalence must not be reversed.",
+      "Geometric and practical remarks: in two unknowns D is the signed area of the two normal vectors, so D ≠ 0 means the lines are not parallel and meet once; theoretically Cramer's rule displays the solution explicitly, but it costs n+1 determinants, so elimination is preferred in practice."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1,
+        4
+      ],
+      "yRange": [
+        -1,
+        4.5
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            3
+          ],
+          "to": [
+            3,
+            0
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2,
+            4
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            2
+          ],
+          "label": "(1,2)"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.15,
+            1.5
+          ],
+          "text": "x + y = 3"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.55,
+            3.6
+          ],
+          "text": "2x - y = 0"
+        }
+      ],
+      "title": "两直线交于 (1,2)：D = -3 ≠ 0 时方程组有唯一解"
+    },
+    "examples": [
+      {
+        "problem": "用克拉默法则解方程组 $\\begin{cases} x + y = 3 \\\\ 2x - y = 0 \\end{cases}$，并从几何上解释。",
+        "solution": "系数行列式 $D = \\begin{vmatrix} 1 & 1 \\\\ 2 & -1 \\end{vmatrix} = 1 \\times (-1) - 1 \\times 2 = -3 \\neq 0$，所以方程组有唯一解。把 x 的系数列换成常数项：$D_x = \\begin{vmatrix} 3 & 1 \\\\ 0 & -1 \\end{vmatrix} = 3 \\times (-1) - 1 \\times 0 = -3$，得 $x = D_x / D = (-3)/(-3) = 1$。把 y 的系数列换成常数项：$D_y = \\begin{vmatrix} 1 & 3 \\\\ 2 & 0 \\end{vmatrix} = 1 \\times 0 - 3 \\times 2 = -6$，得 $y = D_y / D = (-6)/(-3) = 2$。代回验证：$1 + 2 = 3$，$2 \\times 1 - 2 = 0$，都成立。几何上，两直线 $y = 3 - x$ 与 $y = 2x$ 交于唯一一点 $(1,2)$；$D = -3$ 是两条法向量 $(1,1)$、$(2,-1)$ 张成的带符号面积，它不为 0 正说明两直线不平行。"
+      },
+      {
+        "problem": "用克拉默法则解方程组 $\\begin{cases} x + y + z = 6 \\\\ 2x - y + z = 3 \\\\ x + 2y - z = 2 \\end{cases}$。",
+        "solution": "先算系数行列式，按第一行展开：$D = \\begin{vmatrix} 1 & 1 & 1 \\\\ 2 & -1 & 1 \\\\ 1 & 2 & -1 \\end{vmatrix} = 1 \\cdot \\begin{vmatrix} -1 & 1 \\\\ 2 & -1 \\end{vmatrix} - 1 \\cdot \\begin{vmatrix} 2 & 1 \\\\ 1 & -1 \\end{vmatrix} + 1 \\cdot \\begin{vmatrix} 2 & -1 \\\\ 1 & 2 \\end{vmatrix} = (1 - 2) - (-2 - 1) + (4 + 1) = -1 + 3 + 5 = 7 \\neq 0$，故有唯一解。再依次换列：$D_1 = \\begin{vmatrix} 6 & 1 & 1 \\\\ 3 & -1 & 1 \\\\ 2 & 2 & -1 \\end{vmatrix} = 6(1 - 2) - 1(-3 - 2) + 1(6 + 2) = -6 + 5 + 8 = 7$，得 $x = 7/7 = 1$；$D_2 = \\begin{vmatrix} 1 & 6 & 1 \\\\ 2 & 3 & 1 \\\\ 1 & 2 & -1 \\end{vmatrix} = 1(-3 - 2) - 6(-2 - 1) + 1(4 - 3) = -5 + 18 + 1 = 14$，得 $y = 14/7 = 2$；$D_3 = \\begin{vmatrix} 1 & 1 & 6 \\\\ 2 & -1 & 3 \\\\ 1 & 2 & 2 \\end{vmatrix} = 1(-2 - 6) - 1(4 - 3) + 6(4 + 1) = -8 - 1 + 30 = 21$，得 $z = 21/7 = 3$。所以 $(x, y, z) = (1, 2, 3)$。代回验证：$1 + 2 + 3 = 6$，$2 - 2 + 3 = 3$，$1 + 4 - 3 = 2$，全部成立。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "线性方程组",
+      "克拉默法则",
+      "行列式"
+    ],
+    "links": [
+      "determinant-definition",
+      "cofactor-expansion",
+      "inverse-matrix",
+      "linear-system-two-variables",
+      "direct-linear-solvers",
+      "matrix-rank"
+    ]
+  },
+  {
+    "id": "determinant-calculation",
+    "title": "行列式的计算技巧",
+    "titleEn": "Techniques for Computing Determinants",
+    "branch": "linear",
+    "level": 5,
+    "summary": "化三角形、制造零后展开、范德蒙德、爪形、三对角递推、加边——识别结构比硬算快得多；四阶及以上绝无对角线法则。",
+    "summaryEn": "Reduce to triangular form, create zeros before expanding, or use the Vandermonde, arrowhead, tridiagonal-recurrence and bordering tricks — spotting the structure beats brute force, and diagonal rules never apply beyond order three.",
+    "definition": "有了行列式的性质与展开定理，计算就变成「**先化简、再计算**」。通用打法有两种。一是**化三角形**：用倍加变换把主对角线一侧的元素全部消成 0，于是行列式等于对角线元素之积——注意交换两行要变号，整行提出公因子 $k$ 要把它记在行列式外面。二是**降阶展开**：先用倍加变换或提取公因子制造 0，再挑 0 最多的那一行（列）展开，把 $n$ 阶降到 $n-1$ 阶。\n\n很多题目带有特殊结构，认出来就能一步到位。**范德蒙德行列式**：各列成等比数列（第 $j$ 列依次是 $1, x_j, x_j^2, \\dots, x_j^{n-1}$，公比 $x_j$）、首行全是 1，值等于所有「下标大的减下标小的」因子之积，即 $$V_n = \\prod_{1 \\le i < j \\le n}(x_j - x_i),$$ 三阶时就是 $(x_2 - x_1)(x_3 - x_1)(x_3 - x_2)$；注意首行是零次幂行（全为 1），**不是** $x_1, x_2, \\dots, x_n$。**爪形（箭形）行列式**：只有第一行、第一列和主对角线非零，把第一行里的杂项消掉就化成了三角形。**三对角行列式**：按第一行（列）展开会把 $D_n$ 与 $D_{n-1}$、$D_{n-2}$ 联系起来，得到一个递推式，解出通项即可。**加边法（升阶法）**：给 $n$ 阶行列式补一行一列，凑成 $n+1$ 阶的已知公式型（最典型的是补出完整的范德蒙德行列式），再比较系数回读原行列式。\n\n最后再强调一次**对角线法则的适用范围**：它只对二阶和三阶成立。四阶行列式按「对角线方向」硬拼出来的 8 项根本不是行列式的值——正确的展开共有 $4! = 24$ 项。四阶及以上必须用性质化简、按行（列）展开，或者使用分块三角公式 $\\begin{vmatrix} A & C \\\\ 0 & B \\end{vmatrix} = |A||B|$。",
+    "definitionEn": "With the properties and the expansion theorem at hand, computing a determinant becomes a two-step routine: **simplify first, evaluate second**. The generic plan is either to reduce to triangular form using operations that leave the determinant unchanged, so that it equals the product of the diagonal entries, or to create zeros and then expand along the row or column with the most of them, lowering the order by one.\n\nMany determinants carry a recognisable structure. **Vandermonde determinants** have rows of successive powers and a first row of ones; their value is the product $$V_n = \\prod_{1 \\le i < j \\le n}(x_j - x_i)$$ of 「larger index minus smaller index」 factors. **Arrowhead (claw) determinants** have nonzeros only in the first row, the first column and the diagonal. **Tridiagonal determinants** satisfy a two-term recurrence linking $D_n$ to $D_{n-1}$ and $D_{n-2}$. **Bordering (raising the order)** adds one row and one column so that the enlarged determinant fits a known pattern — typically a complete Vandermonde — from which the original determinant is read off by comparing coefficients.\n\nOne warning is indispensable: the diagonal (Sarrus) rule holds only for orders two and three. The eight products one might write down for a fourth-order determinant are not its value; a fourth-order expansion contains $4! = 24$ terms. From order four on, use row and column operations, cofactor expansion, or the block-triangular identity $\\begin{vmatrix} A & C \\\\ 0 & B \\end{vmatrix} = |A||B|$.",
+    "formulas": [
+      {
+        "latex": "\\begin{vmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ 0 & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & & \\ddots & \\vdots \\\\ 0 & \\cdots & 0 & a_{nn} \\end{vmatrix} = a_{11} a_{22} \\cdots a_{nn}",
+        "note": "上（下）三角形行列式等于对角线元素之积；只用倍加变换化三角形时值不变，这是最通用的打法。",
+        "noteEn": "A triangular determinant equals the product of its diagonal entries; triangularisation by adding multiples of rows leaves the value unchanged."
+      },
+      {
+        "latex": "V_n = \\begin{vmatrix} 1 & 1 & \\cdots & 1 \\\\ x_1 & x_2 & \\cdots & x_n \\\\ x_1^2 & x_2^2 & \\cdots & x_n^2 \\\\ \\vdots & \\vdots & & \\vdots \\\\ x_1^{n-1} & x_2^{n-1} & \\cdots & x_n^{n-1} \\end{vmatrix} = \\prod_{1 \\le i < j \\le n}(x_j - x_i)",
+        "note": "范德蒙德行列式：首行是全 1（零次幂行），每个因子都是「大下标减小下标」；它不为 0 当且仅当 x₁,…,xₙ 两两不同。",
+        "noteEn": "Vandermonde determinant: the first row consists of ones and each factor is a later node minus an earlier one; it vanishes exactly when two nodes coincide."
+      },
+      {
+        "latex": "V_3 = \\begin{vmatrix} 1 & 1 & 1 \\\\ x_1 & x_2 & x_3 \\\\ x_1^2 & x_2^2 & x_3^2 \\end{vmatrix} = (x_2 - x_1)(x_3 - x_1)(x_3 - x_2)",
+        "note": "三阶范德蒙德的展开；例如取 2, 3, 5 时 V₃ = (3−2)(5−2)(5−3) = 6（用对角线法则验算也是 6）。",
+        "noteEn": "The third-order case; for the nodes 2, 3, 5 it gives (3−2)(5−2)(5−3) = 6, as direct evaluation confirms."
+      },
+      {
+        "latex": "\\begin{vmatrix} a_0 & b_1 & b_2 & \\cdots & b_n \\\\ c_1 & a_1 & 0 & \\cdots & 0 \\\\ c_2 & 0 & a_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ c_n & 0 & 0 & \\cdots & a_n \\end{vmatrix} = \\left( a_0 - \\sum_{i=1}^{n} \\frac{b_i c_i}{a_i} \\right) a_1 a_2 \\cdots a_n, \\quad a_1 a_2 \\cdots a_n \\neq 0",
+        "note": "爪形（箭形）行列式：把第 i 行乘 bᵢ/aᵢ 后从第 1 行减去，即可化为三角形；例如 a₀ = 1、b = c = (1,2,3)、a = (2,3,4) 时 D = −74。",
+        "noteEn": "Arrowhead determinant: subtract bᵢ/aᵢ times row i from row 1 to reach triangular form; with a₀ = 1, b = c = (1,2,3), a = (2,3,4) the value is −74."
+      },
+      {
+        "latex": "D_n = 2 D_{n-1} - D_{n-2}, \\qquad D_1 = 2, \\; D_2 = 3 \\;\\Longrightarrow\\; D_n = n + 1",
+        "note": "三对角行列式（主对角线全为 2、上下次对角线全为 1）的递推解法；前几项 D₁ = 2，D₂ = 3，D₃ = 4，D₄ = 5，归纳即得 Dₙ = n+1。",
+        "noteEn": "Recurrence for the tridiagonal determinant with 2 on the diagonal and 1 on the two off-diagonals; the values 2, 3, 4, 5 for n = 1, 2, 3, 4 give Dₙ = n+1 by induction."
+      }
+    ],
+    "properties": [
+      "化三角形是万能起点：只用「某行（列）的 k 倍加到另一行（列）」，值不变；化成三角形后取对角线乘积。中途交换两行要变号，整行提取公因子要记在行列式外面。",
+      "先制造 0 再展开：选含 0 最多的行（列）降阶；通常先用倍加变换把某一行（列）消到只剩一个非零元素，再一次展开就降到 n−1 阶。",
+      "识别结构比硬算重要：范德蒙德（首行全 1、各行成幂次）、爪形/箭形、三对角（递推）、分块三角（|[[A, C], [0, B]]| = |A||B|）、行（列）成比例（值为 0）。",
+      "加边法（升阶法）：给 n 阶行列式补一行一列升为 n+1 阶，让新行列式能套用已知公式（典型做法是补出完整的范德蒙德，再比较参数 t 的各次幂系数读出原行列式）；关键是保证新行列式与原行列式的关系明确。",
+      "红线提醒：四阶及以上**没有**对角线法则；n 阶行列式按定义展开共有 n! 项，手算时一律使用性质化简、按行（列）展开或分块三角公式。"
+    ],
+    "propertiesEn": [
+      "Triangularisation is the universal first move: adding a multiple of one row (column) to another leaves the value unchanged, so the determinant becomes the product of the diagonal entries; remember to flip the sign on each swap and to record any factor pulled out of a row.",
+      "Create zeros before expanding: expand along the row or column with the most zeros; typically one reduces a row (column) to a single nonzero entry and thereby drops the order by one.",
+      "Recognising structure beats brute force: Vandermonde, arrowhead (claw), tridiagonal (recurrence), block-triangular (|[[A, C], [0, B]]| = |A||B|), and proportional rows (value 0).",
+      "Bordering (raising the order): add one row and one column so that the enlarged determinant fits a known pattern — typically completing a Vandermonde and then comparing powers of a parameter t — provided the link back to the original determinant is kept explicit.",
+      "Red line: **there is no diagonal rule beyond order three**; an order-n determinant has n! terms, so hand computation always goes through properties, cofactor expansion or the block-triangular identity."
+    ],
+    "examples": [
+      {
+        "problem": "用化三角形的方法计算 $D = \\begin{vmatrix} 1 & 4 & 5 & 4 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & 1 & 3 & 1 \\\\ 0 & 0 & 2 & 4 \\end{vmatrix}$（四阶，注意没有对角线法则可用）。",
+        "solution": "用「某行的倍数加到另一行，行列式不变」逐步制造零：第 3 行减第 2 行，得 $(0, 0, 2, 1)$；此时行列式为 $\\begin{vmatrix} 1 & 4 & 5 & 4 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & 0 & 2 & 1 \\\\ 0 & 0 & 2 & 4 \\end{vmatrix}$。再让第 4 行减第 3 行，得 $(0, 0, 0, 3)$：$$D = \\begin{vmatrix} 1 & 4 & 5 & 4 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & 0 & 2 & 1 \\\\ 0 & 0 & 0 & 3 \\end{vmatrix}.$$ 这是上三角形行列式，$D = 1 \\times 1 \\times 2 \\times 3 = 6$。用按第一列展开独立验算：$D = 1 \\cdot \\begin{vmatrix} 1 & 1 & 0 \\\\ 1 & 3 & 1 \\\\ 0 & 2 & 4 \\end{vmatrix} = (3 \\times 4 - 1 \\times 2) - (1 \\times 4 - 1 \\times 0) + 0 = 10 - 4 = 6$，一致。四阶行列式共 4! = 24 项，若按对角线方向硬拼 8 项必然算错。"
+      },
+      {
+        "problem": "用加边法（升阶）计算 $D = \\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 8 & 27 \\end{vmatrix}$（各行是 1, 2, 3 的幂，但缺了平方那一行）。",
+        "solution": "把缺的平方行补上，并添加一个新的参数列 $t$，凑成 4 阶范德蒙德行列式：$$E(t) = \\begin{vmatrix} 1 & 1 & 1 & 1 \\\\ 1 & 2 & 3 & t \\\\ 1 & 4 & 9 & t^2 \\\\ 1 & 8 & 27 & t^3 \\end{vmatrix} = (2-1)(3-1)(t-1)(3-2)(t-2)(t-3) = 2(t-1)(t-2)(t-3) = 2t^3 - 12t^2 + 22t - 12.$$ 另一方面，把 $E(t)$ 按第 4 列展开：$E(t) = 1 \\cdot A_{14} + t \\cdot A_{24} + t^2 \\cdot A_{34} + t^3 \\cdot A_{44}$，其中 $t^2$ 的系数 $A_{34} = (-1)^{3+4} M_{34} = -M_{34}$，而 $M_{34}$ 恰好就是划掉第 3 行与第 4 列后剩下的 $D$。比较 $t^2$ 的系数：$-D = -12$，所以 $D = 12$。用对角线法则验算原行列式：$(1 \\cdot 2 \\cdot 27 + 1 \\cdot 3 \\cdot 1 + 1 \\cdot 1 \\cdot 8) - (1 \\cdot 2 \\cdot 1 + 1 \\cdot 3 \\cdot 8 + 1 \\cdot 1 \\cdot 27) = 65 - 53 = 12$，结果一致。（顺便：$E(t)$ 的常数项 $-12$ 也与 $A_{14} = -M_{14} = -12$ 吻合。）"
+      }
+    ],
+    "tags": [
+      "行列式",
+      "线性代数",
+      "计算技巧",
+      "范德蒙德",
+      "递推"
+    ],
+    "links": [
+      "determinant-definition",
+      "determinant-properties",
+      "cofactor-expansion",
+      "block-matrices",
+      "jacobian"
+    ]
+  }
+]

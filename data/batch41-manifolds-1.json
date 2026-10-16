@@ -1,0 +1,455 @@
+[
+  {
+    "id": "smooth-manifold",
+    "title": "光滑流形",
+    "titleEn": "Smooth Manifolds",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "每点附近都同胚于欧氏空间、局部坐标之间又光滑衔接的拓扑空间；有了它，微积分才能搬上弯曲的空间。",
+    "summaryEn": "A topological space that looks locally like Euclidean space with smooth transitions between local coordinate systems — the stage on which calculus is done on curved spaces.",
+    "definition": "**$n$ 维（拓扑）流形**是「局部像欧氏空间」的拓扑空间：每个点 $p$ 附近都有开集 $U$，使 $U$ 与 $\\mathbb{R}^n$ 的某个开集同胚。这样的同胚 $\\varphi: U \\to \\varphi(U) \\subset \\mathbb{R}^n$ 叫一张**图**（坐标卡），$U$ 上的坐标 $(x^1,\\dots,x^n) = \\varphi$ 叫**局部坐标**，覆盖整个 $M$ 的一族图 $\\{(U_\\alpha,\\varphi_\\alpha)\\}$ 叫**图册**。也就是说，$M$ 的每个点都能用 $n$ 个数局部地参数化。\n\n光有连续还不够：要在流形上求导，必须让两张图的重叠部分「光滑衔接」。设 $(U_\\alpha,\\varphi_\\alpha)$ 与 $(U_\\beta,\\varphi_\\beta)$ 是两张图且 $U_\\alpha \\cap U_\\beta \\neq \\varnothing$，**转换函数**（过渡映射）$\\varphi_\\beta \\circ \\varphi_\\alpha^{-1}: \\varphi_\\alpha(U_\\alpha \\cap U_\\beta) \\to \\varphi_\\beta(U_\\alpha \\cap U_\\beta)$ 是 $\\mathbb{R}^n$ 中两个开集之间的映射。若图册中每一对转换函数都是 $C^\\infty$ 的，就称之为**光滑图册**；带有光滑图册的拓扑流形就是**光滑流形**。只要求转换函数连续时得到较弱的概念——**拓扑流形**：光滑性是加在拓扑之上的额外结构，同一个拓扑流形可以承载不同的光滑结构（例如 Milnor 怪球）。通常把图册扩充为包含一切与它兼容的图的**极大图册**，并把「光滑结构」等同于一个极大光滑图册。\n\n约定：本库说的流形默认是 **Hausdorff 空间**且**第二可数**（有些教材用仿紧性代替第二可数性；两条拓扑假设合起来排除「双原点直线」（非 Hausdorff）与「长直线」（Hausdorff 但不第二可数）这样的病态例子，并保证单位分解、嵌入等分析工具可用）。\n\n为什么这样定义？因为凡是想在弯曲空间上做微积分，三件事缺一不可：局部能用 $n$ 个数参数化点（局部欧氏）；重叠区两套坐标的换算光滑，从而「$f \\circ \\varphi^{-1}$ 光滑」不因换图而改变——流形上的**光滑函数**就定义为对每张图 $f \\circ \\varphi^{-1}$ 都光滑的 $f: M \\to \\mathbb{R}$；整体拓扑不太病态，使流形具有仿紧性与 $C^\\infty$ 单位分解。于是整套微积分都能「逐图定义、靠转换函数证明与图无关」。\n\n基本例子：$\\mathbb{R}^n$ 本身（一张图）；**球面** $S^n \\subset \\mathbb{R}^{n+1}$（南北两张球极投影图，转换函数 $u \\mapsto u/|u|^2$）；**环面** $T^n = \\mathbb{R}^n/\\mathbb{Z}^n$（$n$ 个圆周的乘积，局部坐标取角度）；**实射影空间** $\\mathbb{RP}^n$（把过原点的直线各收成一点，用 $n+1$ 张仿射图覆盖）；**矩阵群** $GL(n,\\mathbb{R}) = \\{A \\in \\mathbb{R}^{n \\times n}: \\det A \\neq 0\\}$（$\\mathbb{R}^{n^2}$ 中的开集，一张图即可）。把「局部同胚于 $\\mathbb{R}^n$ 的开集」放宽为「局部同胚于上半空间 $\\mathbb{H}^n = \\{(x_1,\\dots,x_n): x_n \\ge 0\\}$ 的开集」，就得到**带边流形**；被映到超平面 $x_n = 0$ 的点组成**边界** $\\partial M$，它是 $(n-1)$ 维的无边流形（闭球 $\\overline{B^n}$ 的边界正是 $S^{n-1}$），而 $\\partial M = \\varnothing$ 时回到前面的（无边）流形。",
+    "definitionEn": "An **$n$-dimensional (topological) manifold** is a topological space that is locally Euclidean: every point $p$ has an open neighbourhood $U$ homeomorphic to an open subset of $\\mathbb{R}^n$. Such a homeomorphism $\\varphi: U \\to \\varphi(U) \\subset \\mathbb{R}^n$ is a **chart**, the coordinates $(x^1,\\dots,x^n) = \\varphi$ are **local coordinates**, and a family of charts covering $M$ is an **atlas**—so every point is locally parametrised by $n$ numbers.\n\nContinuity alone does not allow differentiation. If $(U_\\alpha,\\varphi_\\alpha)$ and $(U_\\beta,\\varphi_\\beta)$ overlap, the **transition map** $\\varphi_\\beta \\circ \\varphi_\\alpha^{-1}$ goes between open subsets of $\\mathbb{R}^n$. An atlas all of whose transition maps are $C^\\infty$ is a **smooth atlas**, and a topological manifold carrying one is a **smooth manifold**. Requiring only continuous transition maps gives the weaker notion of a **topological manifold**: smoothness is extra structure, and the same topological manifold may carry different smooth structures (Milnor's exotic spheres). One usually completes an atlas to the **maximal atlas** of all compatible charts and identifies a smooth structure with such a maximal atlas.\n\nConvention: here a manifold is assumed **Hausdorff and second-countable** (some texts replace second-countability by paracompactness). These hypotheses rule out pathologies such as the line with two origins (non-Hausdorff) and the long line (Hausdorff but not second-countable), and they guarantee partitions of unity and embedding theorems.\n\nThe definition packages exactly what calculus on a curved space needs: points are locally parametrised by $n$ numbers; transitions between coordinate systems are smooth, so that the smoothness of $f \\circ \\varphi^{-1}$ is chart-independent—this is how a **smooth function** $f: M \\to \\mathbb{R}$ is defined; and the topology is tame enough for paracompactness and smooth partitions of unity. Everything is then defined chart by chart and shown to be chart-independent through the transition maps.\n\nExamples: $\\mathbb{R}^n$ itself (one chart); the **sphere** $S^n \\subset \\mathbb{R}^{n+1}$ (two stereographic charts, transition $u \\mapsto u/|u|^2$); the **torus** $T^n = \\mathbb{R}^n/\\mathbb{Z}^n$ (a product of circles with angular coordinates); **real projective space** $\\mathbb{RP}^n$ (lines through the origin, covered by $n+1$ affine charts); and **matrix groups** such as $GL(n,\\mathbb{R}) = \\{A \\in \\mathbb{R}^{n \\times n}: \\det A \\neq 0\\}$, an open subset of $\\mathbb{R}^{n^2}$ and hence a manifold with a single chart. Allowing the local model $\\mathbb{H}^n = \\{(x_1,\\dots,x_n): x_n \\ge 0\\}$ instead of $\\mathbb{R}^n$ yields **manifolds with boundary**: points mapped to the hyperplane $x_n = 0$ form the **boundary** $\\partial M$, itself an $(n-1)$-dimensional manifold without boundary (the closed ball $\\overline{B^n}$ has $\\partial \\overline{B^n} = S^{n-1}$), while $\\partial M = \\varnothing$ recovers the boundaryless case.",
+    "formulas": [
+      {
+        "latex": "\\varphi_\\beta \\circ \\varphi_\\alpha^{-1} \\in C^\\infty\\bigl(\\varphi_\\alpha(U_\\alpha \\cap U_\\beta)\\bigr)\\qquad \\text{for every pair of overlapping charts}",
+        "note": "转换函数的光滑性是光滑流形定义的核心：它保证换图时导数、切向量、微分等概念不变，从而使流形上的微积分定义良定义。",
+        "noteEn": "Smoothness of the transition maps is the heart of the definition: it makes derivatives, tangent vectors and differentials chart-independent, so that calculus on the manifold is well defined."
+      },
+      {
+        "latex": "\\varphi: U \\xrightarrow{\\ \\cong\\ } \\varphi(U) \\subseteq \\mathbb{R}^n \\quad \\text{open}",
+        "note": "局部欧氏条件：每个点附近存在与 $\\mathbb{R}^n$ 开集同胚的图；$n$ 是流形的维数（与图的选择无关）。",
+        "noteEn": "The locally Euclidean condition: near every point there is a chart homeomorphic to an open set in $\\mathbb{R}^n$; $n$ is the dimension and does not depend on the chart."
+      },
+      {
+        "latex": "\\sigma_N(x) = \\frac{(x_1,\\dots,x_n)}{1 - x_{n+1}},\\qquad \\sigma_N^{-1}(u) = \\Bigl(\\frac{2u}{1+|u|^2},\\ \\frac{|u|^2-1}{1+|u|^2}\\Bigr)",
+        "note": "球面 $S^n$ 的球极投影图：从北极投影到赤道平面，逆映射给出局部坐标的显式表达（下面验证它落在球面上）。",
+        "noteEn": "A stereographic chart on $S^n$: projection from the north pole to the equatorial plane; the inverse gives explicit local coordinates (verified below to lie on the sphere)."
+      },
+      {
+        "latex": "\\sigma_S \\circ \\sigma_N^{-1}(u) = \\frac{u}{|u|^2}\\quad (u \\neq 0),\\qquad T^n = \\mathbb{R}^n/\\mathbb{Z}^n,\\qquad \\mathbb{RP}^n = S^n/(\\pm 1) = \\bigl(\\mathbb{R}^{n+1}\\setminus\\{0\\}\\bigr)\\big/\\sim,\\quad x \\sim \\lambda x\\ (\\lambda \\neq 0)",
+        "note": "两张球极投影图的转换函数（在重叠区 $\\mathbb{R}^n \\setminus \\{0\\}$ 上光滑）；环面与实射影空间的构造——射影空间即把球面的对径点粘合，也就是把过原点的直线各收成一点。",
+        "noteEn": "The transition map between the two stereographic charts (smooth on the overlap $\\mathbb{R}^n \\setminus \\{0\\}$), and the constructions of the torus and of real projective space as $S^n$ with antipodal points identified, i.e. lines through the origin collapsed to points."
+      },
+      {
+        "latex": "\\mathbb{H}^n = \\{(x_1,\\dots,x_n): x_n \\ge 0\\},\\qquad \\partial M = \\{p \\in M:\\ \\varphi(p) \\in \\partial\\mathbb{H}^n\\ \\text{for some (hence every) chart}\\ \\varphi\\},\\qquad \\dim \\partial M = n - 1",
+        "note": "带边流形的局部模型与边界：边界点的判定与图的选择无关，$\\partial M$ 本身是无边的 $(n-1)$ 维流形，$\\partial(\\partial M) = \\varnothing$。",
+        "noteEn": "The local model for manifolds with boundary: being a boundary point is chart-independent, $\\partial M$ is itself an $(n-1)$-manifold without boundary, and $\\partial(\\partial M) = \\varnothing$."
+      }
+    ],
+    "expression": {
+      "text": "M^n：每点局部同胚于 R^n 的开集；两张图重叠时转换函数光滑",
+      "symbol": "\\varphi_\\beta \\circ \\varphi_\\alpha^{-1} \\in C^\\infty",
+      "note": "记住三件事：局部欧氏、转换函数光滑、拓扑上 Hausdorff + 第二可数。",
+      "noteEn": "Three ingredients: locally Euclidean, smooth transition maps, and a Hausdorff, second-countable topology."
+    },
+    "properties": [
+      "局部欧氏性是拓扑条件，光滑性是图册附加的结构；同一个拓扑流形上可以存在不同的光滑结构（如 Milnor 怪球），四维甚至存在不能赋予任何光滑结构的拓扑流形",
+      "转换函数光滑保证「光滑性」与图的选择无关：$f \\circ \\varphi^{-1}$ 的光滑性在任意两张图中互相等价——这是流形上一切微积分概念良定义的基础",
+      "Hausdorff + 第二可数的流形是仿紧的，因而存在 $C^\\infty$ 单位分解；由此可以构造黎曼度规，并有 Whitney 嵌入定理（任何 $n$ 维光滑流形可嵌入 $\\mathbb{R}^{2n}$）",
+      "维数 $n$ 是局部不变量：同一点在不同图中的维数相同（Brouwer 区域不变性保证局部模型 $\\mathbb{R}^n$ 的 $n$ 唯一）",
+      "边界 $\\partial M$ 是 $(n-1)$ 维无边流形且 $\\partial(\\partial M) = \\varnothing$；边界点与内点在同胚下互换不了，例如闭球 $\\overline{B^n}$ 的边界是 $S^{n-1}$"
+    ],
+    "propertiesEn": [
+      "The locally Euclidean property is topological; smoothness is extra structure carried by an atlas. The same topological manifold may admit different smooth structures (Milnor's exotic spheres), and some topological 4-manifolds admit none at all",
+      "Smooth transition maps make smoothness chart-independent: the smoothness of $f \\circ \\varphi^{-1}$ in any one chart is equivalent to that in any other—the foundation for every well-defined notion of calculus on a manifold",
+      "A Hausdorff, second-countable manifold is paracompact, hence admits $C^\\infty$ partitions of unity; this yields Riemannian metrics and the Whitney embedding theorem (every smooth $n$-manifold embeds in $\\mathbb{R}^{2n}$)",
+      "The dimension $n$ is a local invariant: it is the same at every point in every chart (Brouwer's invariance of domain makes the $n$ of the local model unique)",
+      "The boundary $\\partial M$ is an $(n-1)$-manifold without boundary and $\\partial(\\partial M) = \\varnothing$; boundary and interior points cannot be interchanged by homeomorphisms—for instance $\\partial \\overline{B^n} = S^{n-1}$"
+    ],
+    "examples": [
+      {
+        "problem": "用球极投影为 $S^n$ 构造光滑图册：写出从北极、南极投影的两张图，验证它们覆盖球面，并计算转换函数。",
+        "solution": "定义 $\\sigma_N(x) = \\frac{(x_1,\\dots,x_n)}{1-x_{n+1}}$（定义在 $S^n \\setminus \\{N\\}$，$N=(0,\\dots,0,1)$）与 $\\sigma_S(x) = \\frac{(x_1,\\dots,x_n)}{1+x_{n+1}}$（定义在 $S^n \\setminus \\{S\\}$，$S=(0,\\dots,0,-1)$）。\n\n覆盖性：$S^n = (S^n \\setminus \\{N\\}) \\cup (S^n \\setminus \\{S\\})$，两张图覆盖整个球面。\n\n逆映射与同胚：$\\sigma_N^{-1}(u) = \\Bigl(\\frac{2u}{1+|u|^2},\\ \\frac{|u|^2-1}{1+|u|^2}\\Bigr)$。验证它落在球面上：$\\bigl|\\frac{2u}{1+|u|^2}\\bigr|^2 + \\bigl(\\frac{|u|^2-1}{1+|u|^2}\\bigr)^2 = \\frac{4|u|^2+(|u|^2-1)^2}{(1+|u|^2)^2} = \\frac{(|u|^2+1)^2}{(1+|u|^2)^2} = 1$；再代入即得 $\\sigma_N \\circ \\sigma_N^{-1} = \\mathrm{id}$。故 $\\sigma_N$ 是连续双射，且逆连续，也是同胚。\n\n转换函数：在重叠区 $S^n \\setminus \\{N,S\\}$ 上，\n$\\sigma_S \\circ \\sigma_N^{-1}(u) = \\frac{2u/(1+|u|^2)}{1+(|u|^2-1)/(1+|u|^2)} = \\frac{2u}{1+|u|^2+|u|^2-1} = \\frac{2u}{2|u|^2} = \\frac{u}{|u|^2}$，即 $u \\mapsto u/|u|^2$（$u \\neq 0$），它恰好等于自身的逆；$\\sigma_N \\circ \\sigma_S^{-1}$ 是同一映射。它的分量是有理函数、分母 $|u|^2 \\neq 0$，故光滑。\n\n所以 $\\{(S^n \\setminus \\{N\\}, \\sigma_N),\\ (S^n \\setminus \\{S\\}, \\sigma_S)\\}$ 是光滑图册，$S^n$ 是 $n$ 维光滑流形：这就是球面作为流形的最经典构造。"
+      },
+      {
+        "problem": "用仿射图构造 $\\mathbb{RP}^n$ 的图册，并以 $\\mathbb{RP}^2$ 为例验证转换函数光滑。",
+        "solution": "把 $\\mathbb{RP}^n$ 看成 $\\mathbb{R}^{n+1} \\setminus \\{0\\}$ 在等价关系 $x \\sim \\lambda x$（$\\lambda \\neq 0$）下的商，$[x]$ 记等价类（每条过原点的直线收成一点）。对 $i = 0,\\dots,n$ 令 $U_i = \\{[x]: x_i \\neq 0\\}$ 与 $\\varphi_i([x]) = \\bigl(\\frac{x_0}{x_i},\\dots,\\widehat{\\frac{x_i}{x_i}},\\dots,\\frac{x_n}{x_i}\\bigr)$（省略第 $i$ 个分量），即「用第 $i$ 个坐标归一化」。\n\n$\\varphi_i$ 是同胚：在 $U_i$ 上可取唯一代表元使 $x_i = 1$，于是 $\\varphi_i$ 的逆是连续地「读齐次坐标」的映射。$\\{U_i\\}_{i=0}^n$ 覆盖 $\\mathbb{RP}^n$。\n\n转换函数：设 $[x] \\in U_i \\cap U_j$，在 $\\varphi_i$ 坐标下点可写成 $(u_0 : \\cdots : u_i = 1 : \\cdots : u_n)$，其中第 $j$ 个分量 $u_j = x_j/x_i \\neq 0$。用 $x_j$ 归一化，得 $\\varphi_j \\circ \\varphi_i^{-1}$ 的分量为 $u_k/u_j$——分母非零的有理函数，故光滑。\n\n例（$\\mathbb{RP}^2$，$i=0$，$j=1$）：$\\varphi_0([x]) = (x_1/x_0,\\ x_2/x_0) = (u,v)$，于是 $\\varphi_1 \\circ \\varphi_0^{-1}(u,v) = \\bigl(\\frac{1}{u},\\ \\frac{v}{u}\\bigr)$，在重叠区 $u \\neq 0$ 上光滑。\n\n因此 $\\mathbb{RP}^n$ 是 $n$ 维光滑流形；它也可看作用对径点粘合球面 $\\mathbb{RP}^n = S^n/(\\pm 1)$，两种构造一致。"
+      }
+    ],
+    "tags": [
+      "流形",
+      "图册",
+      "转换函数",
+      "局部坐标",
+      "带边流形"
+    ],
+    "links": [
+      "regular-surface",
+      "tangent-space",
+      "manifold-vector-fields",
+      "metric-tensor"
+    ]
+  },
+  {
+    "id": "tangent-space",
+    "title": "切空间与切映射",
+    "titleEn": "Tangent Spaces and the Differential",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "流形在一点的线性化：切向量可以用过该点曲线的等价类定义，也可以定义为满足莱布尼茨法则的导子；光滑映射的切映射 $df_p$ 在坐标下就是雅可比矩阵。",
+    "summaryEn": "The linearization of a manifold at a point: tangent vectors as equivalence classes of curves or as derivations obeying Leibniz's rule, with the differential $df_p$ given by the Jacobian in coordinates.",
+    "definition": "流形一般不是线性空间，不能像 $\\mathbb{R}^n$ 那样直接写「$p + tv$」；但在一点 $p$ 附近的**一阶**（线性）结构仍然完整存在，这就是切空间 $T_pM$：它把「从 $p$ 出发的一切方向」装进一个 $n$ 维向量空间。定义切向量有两条常见而等价的路线。\n\n**（a）曲线的等价类。** 考虑过 $p$ 的光滑曲线 $\\gamma: (-\\varepsilon,\\varepsilon) \\to M$，$\\gamma(0) = p$。取一张含 $p$ 的图 $(U,\\varphi)$，规定 $\\gamma_1 \\sim \\gamma_2$ 当且仅当 $(\\varphi \\circ \\gamma_1)'(0) = (\\varphi \\circ \\gamma_2)'(0)$。由于转换函数光滑、由链式法则，这个判别与图的选择无关。把一个等价类 $[\\gamma]$ 称为 $p$ 处的**切向量**，全体切向量记作 $T_pM$；在图上 $[\\gamma] \\mapsto (\\varphi \\circ \\gamma)'(0)$ 是到 $\\mathbb{R}^n$ 的一一对应，用这个对应把 $\\mathbb{R}^n$ 的加法与数乘搬到 $T_pM$ 上，就使它成为 $n$ 维实向量空间（转换函数给出的坐标系变换是线性的，所以向量空间结构与图无关）。几何上 $[\\gamma]$ 就是曲线在 $p$ 的**速度向量**。\n\n**（b）导子。** 设 $C^\\infty(M)$ 是 $M$ 上全体光滑函数。$p$ 处的一个**导子**是线性映射 $v: C^\\infty(M) \\to \\mathbb{R}$，满足**莱布尼茨法则** $v(fg) = f(p)\\,v(g) + g(p)\\,v(f)$；全体导子按逐点加法与数乘构成向量空间 $\\mathrm{Der}_p(C^\\infty(M))$。两种定义通过 $[\\gamma] \\mapsto \\bigl(f \\mapsto (f \\circ \\gamma)'(0)\\bigr)$ 一一对应：乘积求导法则说明右边确实满足莱布尼茨法则，链式法则说明与图无关；反过来每个导子都能在任意坐标图里写成沿某方向的方向导数，因此这个对应是**线性同构**。以后说「切向量」，两种观点可以随意切换：曲线给几何直觉，导子便于代数计算。\n\n取图 $(U,\\varphi)$，记局部坐标函数 $x^i = u^i \\circ \\varphi$（$u^i$ 是 $\\mathbb{R}^n$ 的第 $i$ 个坐标）。基向量 $\\partial/\\partial x^i\\big|_p$ 定义为导子 $f \\mapsto \\frac{\\partial (f \\circ \\varphi^{-1})}{\\partial u^i}\\bigl(\\varphi(p)\\bigr)$。可以证明每个 $v \\in T_pM$ 唯一地写成 $v = \\sum_{i=1}^n v^i\\,\\frac{\\partial}{\\partial x^i}\\big|_p$，其中 $v^i = v(x^i)$；特别地 $\\dim T_pM = n = \\dim M$。\n\n设 $f: M \\to N$ 是光滑映射，则 $f$ 在 $p$ 处的**切映射**（也叫微分、推前）$df_p: T_pM \\to T_{f(p)}N$ 定义为：用曲线，$df_p[\\gamma] = [f \\circ \\gamma]$；用导子，$(df_p(v))(g) = v(g \\circ f)$，其中 $g \\in C^\\infty(N)$ 任意。$df_p$ 是线性的，与复合相容（链式法则）$d(g \\circ f)_p = dg_{f(p)} \\circ df_p$；取 $p$、$f(p)$ 附近的坐标 $x^i$、$y^j$，设 $f$ 的坐标表示为 $y^j = f^j(x)$，则 $df_p$ 在相应基下的矩阵恰为**雅可比矩阵** $\\bigl(\\partial f^j/\\partial x^i(p)\\bigr)$，即 $df_p\\bigl(\\partial/\\partial x^i\\bigr) = \\sum_j \\frac{\\partial f^j}{\\partial x^i}(p)\\,\\partial/\\partial y^j$。$f$ 是微分同胚时 $df_p$ 可逆，且 $(df_p)^{-1} = d(f^{-1})_{f(p)}$。",
+    "definitionEn": "A manifold is not a vector space, so one cannot write \"$p + tv$\" as in $\\mathbb{R}^n$; nevertheless the **first-order** (linear) structure near a point $p$ exists fully, and it is the tangent space $T_pM$: all directions emanating from $p$ collected into an $n$-dimensional vector space. There are two standard, equivalent definitions.\n\n**(a) Equivalence classes of curves.** Consider smooth curves $\\gamma: (-\\varepsilon,\\varepsilon) \\to M$ with $\\gamma(0) = p$. Fix a chart $(U,\\varphi)$ around $p$ and declare $\\gamma_1 \\sim \\gamma_2$ iff $(\\varphi \\circ \\gamma_1)'(0) = (\\varphi \\circ \\gamma_2)'(0)$. Because transition maps are smooth, the chain rule shows this is chart-independent. An equivalence class $[\\gamma]$ is a **tangent vector** at $p$, and the set of all of them is $T_pM$; via $[\\gamma] \\mapsto (\\varphi \\circ \\gamma)'(0)$ it corresponds bijectively to $\\mathbb{R}^n$, and transporting addition and scalar multiplication makes it an $n$-dimensional real vector space (the coordinate change is linear, so the structure does not depend on the chart). Geometrically, $[\\gamma]$ is the **velocity vector** of the curve at $p$.\n\n**(b) Derivations.** Let $C^\\infty(M)$ be the smooth functions on $M$. A **derivation** at $p$ is a linear map $v: C^\\infty(M) \\to \\mathbb{R}$ satisfying the **Leibniz rule** $v(fg) = f(p)\\,v(g) + g(p)\\,v(f)$; these form the vector space $\\mathrm{Der}_p(C^\\infty(M))$. The two notions correspond through $[\\gamma] \\mapsto \\bigl(f \\mapsto (f \\circ \\gamma)'(0)\\bigr)$: the product rule shows the right-hand side is a derivation, the chain rule shows chart-independence, and conversely every derivation is a directional derivative in any chart. The correspondence is a **linear isomorphism**, so one freely switches between the geometric picture (curves) and the algebraic one (derivations).\n\nFix a chart $(U,\\varphi)$ and write $x^i = u^i \\circ \\varphi$ for the coordinate functions. The basis vectors $\\partial/\\partial x^i\\big|_p$ are the derivations $f \\mapsto \\frac{\\partial (f \\circ \\varphi^{-1})}{\\partial u^i}\\bigl(\\varphi(p)\\bigr)$. Every $v \\in T_pM$ has the unique expansion $v = \\sum_{i=1}^n v^i\\,\\frac{\\partial}{\\partial x^i}\\big|_p$ with $v^i = v(x^i)$; in particular $\\dim T_pM = n = \\dim M$.\n\nFor a smooth map $f: M \\to N$, the **differential** (pushforward) $df_p: T_pM \\to T_{f(p)}N$ is defined by $df_p[\\gamma] = [f \\circ \\gamma]$ in terms of curves, or by $(df_p(v))(g) = v(g \\circ f)$ for $g \\in C^\\infty(N)$ in terms of derivations. It is linear and respects composition (chain rule): $d(g \\circ f)_p = dg_{f(p)} \\circ df_p$. In coordinates $x^i$ near $p$ and $y^j$ near $f(p)$, with $y^j = f^j(x)$, its matrix in the corresponding bases is exactly the **Jacobian matrix** $\\bigl(\\partial f^j/\\partial x^i(p)\\bigr)$. If $f$ is a diffeomorphism, $df_p$ is invertible with $(df_p)^{-1} = d(f^{-1})_{f(p)}$.",
+    "formulas": [
+      {
+        "latex": "\\gamma_1 \\sim \\gamma_2 \\iff (\\varphi \\circ \\gamma_1)'(0) = (\\varphi \\circ \\gamma_2)'(0),\\qquad T_pM = \\{[\\gamma]\\}",
+        "note": "曲线定义：两条过 $p$ 的曲线等价当且仅当在任一张图中它们的坐标表示在 $0$ 处有相同的导数；判别与图的选择无关。",
+        "noteEn": "The curve definition: two curves through $p$ are equivalent exactly when their coordinate expressions have the same derivative at $0$; the test is independent of the chart."
+      },
+      {
+        "latex": "v(fg) = f(p)\\,v(g) + g(p)\\,v(f)",
+        "note": "导子定义：切向量就是作用在光滑函数上、满足莱布尼茨法则的线性映射；$v(f)$ 只依赖 $f$ 在 $p$ 附近的值。",
+        "noteEn": "The derivation definition: a tangent vector is a linear functional on smooth functions satisfying the Leibniz rule; $v(f)$ depends only on $f$ near $p$."
+      },
+      {
+        "latex": "[\\gamma] \\longleftrightarrow \\bigl[f \\mapsto (f \\circ \\gamma)'(0)\\bigr],\\qquad T_pM \\cong \\mathrm{Der}_p(C^\\infty(M))",
+        "note": "两种定义的等价（且是线性同构）：曲线的等价类与导子一一对应，对应的显式公式就是沿曲线求方向导数。",
+        "noteEn": "Equivalence of the two definitions (a linear isomorphism): classes of curves correspond one-to-one with derivations, explicitly by differentiating functions along the curve."
+      },
+      {
+        "latex": "v = \\sum_{i=1}^{n} v^i \\frac{\\partial}{\\partial x^i}\\Big|_p,\\qquad v^i = v(x^i),\\qquad \\dim T_pM = n",
+        "note": "局部坐标下的标准写法：$\\{\\partial/\\partial x^i|_p\\}$ 是一组基，第 $i$ 个系数等于 $v$ 作用在第 $i$ 个坐标函数上；切空间维数等于流形维数。",
+        "noteEn": "The standard local form: the vectors $\\partial/\\partial x^i|_p$ form a basis, the $i$-th coefficient is $v$ applied to the $i$-th coordinate function, and $\\dim T_pM = \\dim M$."
+      },
+      {
+        "latex": "df_p\\Bigl(\\frac{\\partial}{\\partial x^i}\\Bigr) = \\sum_j \\frac{\\partial f^j}{\\partial x^i}(p)\\, \\frac{\\partial}{\\partial y^j},\\qquad d(g \\circ f)_p = dg_{f(p)} \\circ df_p",
+        "note": "切映射的矩阵就是雅可比矩阵；复合的切映射满足链式法则（矩阵相乘）。$f$ 为微分同胚时 $df_p$ 是线性同构。",
+        "noteEn": "The matrix of the differential is the Jacobian matrix, and composition of maps corresponds to multiplication of Jacobians (chain rule). If $f$ is a diffeomorphism, $df_p$ is a linear isomorphism."
+      }
+    ],
+    "expression": {
+      "text": "df_p : T_pM → T_{f(p)}N，坐标下矩阵为雅可比矩阵 (∂f^j/∂x^i)",
+      "symbol": "df_p",
+      "note": "切映射是 f 在 p 处的最佳线性逼近；它把曲线（速度向量）映成曲线（速度向量）。",
+      "noteEn": "The differential is the best linear approximation of f at p; it maps curves (velocity vectors) to curves (velocity vectors)."
+    },
+    "properties": [
+      "两种定义等价：$[\\gamma] \\mapsto \\bigl(f \\mapsto (f \\circ \\gamma)'(0)\\bigr)$ 是 $T_pM \\to \\mathrm{Der}_p(C^\\infty(M))$ 的线性同构；几何直觉（速度）与代数操作（求导）可以自由切换",
+      "$\\dim T_pM = \\dim M = n$；$T_pM$ 只依赖 $M$ 在 $p$ 附近的结构，$p$ 的任意开邻域在同一点的切空间与全流形相同",
+      "切向量是局部对象：$v(f)$ 只依赖 $f$ 在 $p$ 的某邻域内的值（用截断函数可证）",
+      "切映射 $df_p$ 线性、与复合相容（链式法则），$d(\\mathrm{id}_M)_p = \\mathrm{id}$；微分同胚的切映射是线性同构；反函数定理：$\\dim M = \\dim N$ 且 $df_p$ 处处可逆时 $f$ 是局部微分同胚",
+      "嵌入 $\\mathbb{R}^N$ 中的流形：$T_pM$ 由过 $p$ 的曲线速度向量组成；若 $M = F^{-1}(c)$ 是正则水平集，则 $T_pM = \\ker dF_p$，例如 $T_pS^n = \\{v \\in \\mathbb{R}^{n+1}: v \\cdot p = 0\\}$"
+    ],
+    "propertiesEn": [
+      "The two definitions agree: $[\\gamma] \\mapsto \\bigl(f \\mapsto (f \\circ \\gamma)'(0)\\bigr)$ is a linear isomorphism $T_pM \\to \\mathrm{Der}_p(C^\\infty(M))$, so geometric intuition (velocities) and algebra (differentiation) are interchangeable",
+      "$\\dim T_pM = \\dim M = n$; $T_pM$ depends only on the structure of $M$ near $p$, and any open neighbourhood of $p$ has the same tangent space at $p$",
+      "Tangent vectors are local objects: $v(f)$ depends only on the values of $f$ in a neighbourhood of $p$ (provable with cutoff functions)",
+      "The differential $df_p$ is linear and respects composition (chain rule), $d(\\mathrm{id}_M)_p = \\mathrm{id}$; diffeomorphisms have invertible differentials; conversely the inverse function theorem: if $\\dim M = \\dim N$ and $df_p$ is invertible everywhere, $f$ is a local diffeomorphism",
+      "For embedded manifolds: $T_pM$ consists of velocities of curves through $p$; if $M = F^{-1}(c)$ is a regular level set then $T_pM = \\ker dF_p$, e.g. $T_pS^n = \\{v \\in \\mathbb{R}^{n+1}: v \\cdot p = 0\\}$"
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "sin(PI*v/0.45)*cos(u)*max(0, sign(0.5 - v)) + 3.2*(1 - v)*cos(u)*max(0, sign(v - 0.5))",
+        "y": "sin(PI*v/0.45)*sin(u)*max(0, sign(0.5 - v)) + 3.2*(1 - v)*sin(u)*max(0, sign(v - 0.5))",
+        "z": "cos(PI*v/0.45)*max(0, sign(0.5 - v)) + max(0, sign(v - 0.5)) + sqrt(-max(0, (v - 0.45)*(0.55 - v)))"
+      },
+      "uRange": [
+        0,
+        6.2832
+      ],
+      "vRange": [
+        0,
+        1
+      ],
+      "density": [
+        40,
+        44
+      ],
+      "color": "#4cc9f0",
+      "title": "切空间 T_pM：球面 S² 与它在北极 p 处的切平面（平面只在 p 与球面相切）"
+    },
+    "examples": [
+      {
+        "problem": "设 $S^2 = \\{(x,y,z): x^2+y^2+z^2 = 1\\}$，$p = (0,0,1)$ 为北极，$\\gamma(t) = (\\sin t, 0, \\cos t)$。求 $T_pS^2$，并用球极投影图求 $[\\gamma]$ 在基 $\\{\\partial/\\partial u, \\partial/\\partial v\\}$ 下的坐标。",
+        "solution": "(i) 由正则水平集求切空间：$S^2 = F^{-1}(1)$，$F(x,y,z) = x^2+y^2+z^2$，$dF_p = (2x,2y,2z)\\big|_p = (0,0,2) \\neq 0$，故 $p$ 是正则点，$T_pS^2 = \\ker dF_p = \\{(v_1,v_2,v_3): 2v_3 = 0\\} = \\{v_3 = 0\\} = \\mathrm{span}\\{\\partial/\\partial x|_p,\\ \\partial/\\partial y|_p\\}$（把 $\\mathbb{R}^3$ 的坐标用作环境坐标）。等价地 $T_pS^2 = \\{v: v \\cdot p = 0\\} = p^{\\perp}$。\n\n(ii) 取南极球极投影图 $\\sigma_S(x,y,z) = \\bigl(\\frac{x}{1+z},\\ \\frac{y}{1+z}\\bigr)$，坐标记 $(u,v)$。曲线变为 $u(t) = \\frac{\\sin t}{1+\\cos t} = \\tan\\frac{t}{2}$，$v(t) = 0$，故 $(\\sigma_S \\circ \\gamma)'(0) = \\bigl(\\frac{1}{2}, 0\\bigr)$，即 $[\\gamma] = \\frac{1}{2}\\,\\frac{\\partial}{\\partial u}\\big|_p$。\n\n(iii) 一致性检查：$\\sigma_S^{-1}(u,v) = \\frac{(2u,\\ 2v,\\ 1-u^2-v^2)}{1+u^2+v^2}$，在 $p$（即 $(u,v) = (0,0)$）处 $d\\sigma_S^{-1}\\bigl(\\frac{\\partial}{\\partial u}\\bigr) = (2,0,0)$（对 $u$ 求偏导后在原点取值）。于是 $\\frac{1}{2}\\frac{\\partial}{\\partial u} \\mapsto (1,0,0)$，恰好等于 $\\gamma'(0)$；同时 $(1,0,0) \\cdot p = 0$，与 (i) 的 $v \\cdot p = 0$ 相符。"
+      },
+      {
+        "problem": "设 $f: \\mathbb{R}^2 \\to \\mathbb{R}^2$，$f(x,y) = (x^2-y^2,\\ 2xy)$。求 $f$ 在 $p = (1,1)$ 处的切映射 $df_p$ 的雅可比矩阵，计算 $df_p(1,0)$ 与 $df_p(0,1)$，并用链式法则验证曲线 $\\gamma(t) = (1+t,\\ 1)$ 的像的导数。",
+        "solution": "雅可比矩阵：$J_f(x,y) = \\begin{pmatrix} 2x & -2y \\\\ 2y & 2x \\end{pmatrix}$，在 $p=(1,1)$ 处 $M = \\begin{pmatrix} 2 & -2 \\\\ 2 & 2 \\end{pmatrix}$。故 $df_p(1,0) = (2,2)$，$df_p(0,1) = (-2,2)$。\n\n复数对照：把 $(x,y)$ 看成 $z = x+iy$，则 $f$ 就是 $z \\mapsto z^2$，而切映射就是「乘以 $f'(z) = 2z$」。在 $z = 1+i$ 处 $2z = 2+2i$：乘以 $1$ 得 $(2,2)$，乘以 $i$ 得 $(2+2i)i = -2+2i$，与上面一致。\n\n链式法则验证：$f(\\gamma(t)) = ((1+t)^2-1,\\ 2(1+t)) = (2t+t^2,\\ 2+2t)$，故 $\\frac{d}{dt}\\big|_{t=0} f(\\gamma(t)) = (2,2)$；而 $df_p(\\gamma'(0)) = df_p(1,0) = (2,2)$，两者相符——这正是 $d(f \\circ \\gamma)_0 = df_p \\circ d\\gamma_0$。"
+      }
+    ],
+    "tags": [
+      "切空间",
+      "切映射",
+      "导子",
+      "雅可比矩阵",
+      "推前"
+    ],
+    "links": [
+      "smooth-manifold",
+      "jacobian",
+      "directional-derivative",
+      "manifold-vector-fields"
+    ]
+  },
+  {
+    "id": "manifold-vector-fields",
+    "title": "流形上的向量场与流",
+    "titleEn": "Vector Fields and Flows on Manifolds",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "光滑地给流形每点指定一个切向量：向量场与 $C^\\infty(M)$ 上一阶导子一一对应，积分曲线由 ODE 存在唯一性定理生成局部流，紧流形上一切向量场都完备。",
+    "summaryEn": "Smoothly assigning a tangent vector to every point: vector fields correspond to derivations of $C^\\infty(M)$, their integral curves generate local flows by ODE existence and uniqueness, and every vector field on a compact manifold is complete.",
+    "definition": "**向量场**是把每点 $p$ 映到切空间里一个向量 $X_p \\in T_pM$ 的规则 $X: M \\to TM$，并要求它「光滑地依赖 $p$」。光滑性有两种等价说法：在一张张图里 $X$ 的系数是光滑函数；或者，$X$ 作为作用在函数上的算子把每个 $f \\in C^\\infty(M)$ 映到光滑函数 $X(f)$。**关键对应**：光滑向量场与 $C^\\infty(M)$ 上的**导子**（一阶微分算子）一一对应——$X$ 是实线性的，且满足莱布尼茨法则 $X(fg) = f\\,X(g) + g\\,X(f)$；反之，每个满足这两条的算子都来自唯一的向量场。于是在局部坐标下 $X = \\sum_i X^i(x)\\,\\frac{\\partial}{\\partial x^i}$，其中系数 $X^i$ 光滑，而 $X(f)$ 处处等于 $f$ 沿 $X$ 的逐点方向导数。可以说：**向量场 = 对函数求方向导数的一阶微分算子**。\n\n给定向量场 $X$，**积分曲线**是满足 $\\gamma'(t) = X(\\gamma(t))$ 的曲线；在局部坐标里这就是一阶常微分方程组 $\\dot x^i = X^i(x)$。由 **ODE 的局部存在唯一性定理**（Picard–Lindelöf），过每一点存在唯一一条极大积分曲线，并且在不同图里得到的局部解自动一致，可以整体拼接。把「从 $p$ 出发沿 $X$ 走 $t$ 时间」记为 $\\varphi_t(p)$，就得到**局部流**：$\\varphi_0(p) = p$ 且 $\\frac{d}{dt}\\varphi_t(p) = X(\\varphi_t(p))$。由唯一性还得到**半群性质** $\\varphi_{s+t} = \\varphi_s \\circ \\varphi_t$（两边都有定义时），以及每个 $\\varphi_t$ 是局部微分同胚（逆为 $\\varphi_{-t}$）。过不同点的极大积分曲线要么重合、要么像集不交；这正是「一个人不能同时走在两条轨道上」。\n\n若 $X$ 的流对**一切** $t \\in \\mathbb{R}$ 都有定义，就称 $X$ **完备**；此时 $\\varphi: \\mathbb{R} \\times M \\to M$ 光滑，$\\{\\varphi_t\\}_{t \\in \\mathbb{R}}$ 是 $M$ 的单参数微分同胚群。**紧流形上任何光滑向量场都完备**：紧性给出局部存在时间的一致下界，有限步拼接即可把流延拓到任意大的 $|t|$；而非紧流形上可以不完备——$\\mathbb{R}$ 上的 $X = x^2\\,\\partial/\\partial x$ 的积分曲线 $x(t) = \\frac{x_0}{1 - x_0 t}$（$x_0 > 0$）在 $t \\to 1/x_0$ 时发散。**奇点**（平衡点）是满足 $X(p) = 0$ 的点：此时常值曲线 $\\gamma(t) \\equiv p$ 是一条积分曲线，由唯一性它对一切 $t$ 成立——奇点恰是流的不动点。\n\n几何上，向量场是流形上的速度场，流是「随流体运动」的映射；研究向量场及其流的定性行为（奇点、周期轨道、稳定性）就是流形上的动力系统。全体光滑向量场记作 $\\mathfrak{X}(M)$，它既是 $C^\\infty(M)$-模，又在李括号 $[X,Y]$ 下构成无穷维李代数：$[X,Y] = 0$ 当且仅当两个流局部交换，这为李导数与对称性研究提供了语言。",
+    "definitionEn": "A **vector field** assigns to every point $p$ a tangent vector $X_p \\in T_pM$ via a rule $X: M \\to TM$ that depends smoothly on $p$. Smoothness has two equivalent formulations: the coefficients of $X$ are smooth in every chart; equivalently, $X$ acts on functions and sends each $f \\in C^\\infty(M)$ to a smooth function $X(f)$. **Key correspondence**: smooth vector fields are in one-to-one correspondence with **derivations** of $C^\\infty(M)$ (first-order differential operators)—$X$ is real-linear and satisfies the Leibniz rule $X(fg) = f\\,X(g) + g\\,X(f)$, and conversely every operator with these two properties comes from a unique vector field. In local coordinates $X = \\sum_i X^i(x)\\,\\frac{\\partial}{\\partial x^i}$ with smooth coefficients, and $X(f)$ is the pointwise directional derivative of $f$ along $X$.\n\nGiven $X$, an **integral curve** is a curve with $\\gamma'(t) = X(\\gamma(t))$; in local coordinates this is the first-order ODE system $\\dot x^i = X^i(x)$. The **local existence and uniqueness theorem for ODEs** (Picard–Lindelöf) yields, through each point, a unique maximal integral curve, and the local solutions obtained in different charts agree, so they glue globally. Writing $\\varphi_t(p)$ for \"starting at $p$ and following $X$ for time $t$\" gives the **local flow**: $\\varphi_0(p) = p$ and $\\frac{d}{dt}\\varphi_t(p) = X(\\varphi_t(p))$. Uniqueness also gives the **semigroup property** $\\varphi_{s+t} = \\varphi_s \\circ \\varphi_t$ (whenever both sides are defined), and each $\\varphi_t$ is a local diffeomorphism with inverse $\\varphi_{-t}$. Maximal integral curves through different points either coincide or have disjoint images.\n\nIf the flow of $X$ is defined for **all** $t \\in \\mathbb{R}$, the field is called **complete**; then $\\varphi: \\mathbb{R} \\times M \\to M$ is smooth and $\\{\\varphi_t\\}_{t \\in \\mathbb{R}}$ is a one-parameter group of diffeomorphisms of $M$. **Every smooth vector field on a compact manifold is complete**: compactness gives a uniform lower bound on the local existence time, and finitely many steps extend the flow to arbitrarily large $|t|$. On non-compact manifolds completeness can fail: for $X = x^2\\,\\partial/\\partial x$ on $\\mathbb{R}$ the integral curve $x(t) = \\frac{x_0}{1 - x_0 t}$ (for $x_0 > 0$) blows up as $t \\to 1/x_0$. A **singularity** (equilibrium) is a point with $X(p) = 0$: the constant curve $\\gamma(t) \\equiv p$ is then an integral curve, and by uniqueness it persists for all $t$—singularities are exactly the fixed points of the flow.\n\nGeometrically, a vector field is a velocity field on the manifold and its flow describes motion with the fluid; the qualitative study of vector fields and their flows (singularities, periodic orbits, stability) is dynamical systems on manifolds. The space $\\mathfrak{X}(M)$ of all smooth vector fields is a $C^\\infty(M)$-module and an infinite-dimensional Lie algebra under the Lie bracket $[X,Y]$: $[X,Y] = 0$ if and only if the two flows commute locally, which is the language of Lie derivatives and symmetry.",
+    "formulas": [
+      {
+        "latex": "X(fg) = f\\,X(g) + g\\,X(f)",
+        "note": "莱布尼茨法则：光滑向量场与 $C^\\infty(M)$ 上的导子（一阶微分算子）一一对应；$X(f)$ 是 $f$ 沿 $X$ 的方向导数。",
+        "noteEn": "Leibniz's rule: smooth vector fields correspond one-to-one with derivations (first-order differential operators) of $C^\\infty(M)$; $X(f)$ is the directional derivative of $f$ along $X$."
+      },
+      {
+        "latex": "X = \\sum_{i=1}^{n} X^i(x)\\,\\frac{\\partial}{\\partial x^i},\\qquad \\dot x^i = X^i(x(t))",
+        "note": "局部坐标下向量场的表达式与积分曲线的方程：光滑性就是系数 $X^i$ 光滑；积分曲线解一阶 ODE 组。",
+        "noteEn": "A vector field in local coordinates and the ODE for its integral curves: smoothness means smooth coefficients $X^i$; integral curves solve a first-order ODE system."
+      },
+      {
+        "latex": "\\frac{d}{dt}\\varphi_t(p) = X\\bigl(\\varphi_t(p)\\bigr),\\qquad \\varphi_0 = \\mathrm{id},\\qquad \\varphi_{s+t} = \\varphi_s \\circ \\varphi_t",
+        "note": "流的定义与三条基本性质：沿场的方向运动、零时刻不动、半群性质（两边有定义时）；局部存在唯一性来自 ODE 存在唯一性定理。",
+        "noteEn": "The definition of the flow and its basic properties: motion along the field, the identity at time zero, and the semigroup law (where both sides are defined); local existence and uniqueness come from the ODE theorem."
+      },
+      {
+        "latex": "X = -y\\,\\frac{\\partial}{\\partial x} + x\\,\\frac{\\partial}{\\partial y}:\\qquad \\varphi_t(x,y) = (x\\cos t - y\\sin t,\\ x\\sin t + y\\cos t)",
+        "note": "旋转场及其流：积分曲线是以原点为圆心的圆，流对一切 $t \\in \\mathbb{R}$ 有定义（完备）——即使 $\\mathbb{R}^2$ 非紧；原点是奇点。",
+        "noteEn": "The rotation field and its flow: integral curves are circles about the origin and the flow is defined for all $t \\in \\mathbb{R}$ (complete) even though $\\mathbb{R}^2$ is non-compact; the origin is a singularity."
+      },
+      {
+        "latex": "X = x^2\\,\\frac{\\partial}{\\partial x}\\ \\text{on}\\ \\mathbb{R}:\\qquad x(t) = \\frac{x_0}{1 - x_0 t}\\ \\to \\infty\\ \\ (t \\to 1/x_0)",
+        "note": "不完备的例子：该积分曲线在有限时间内爆破，无法延拓过 $t = 1/x_0$，故 $X$ 不完备——与「紧流形上必完备」形成对照。",
+        "noteEn": "A non-complete example: this integral curve blows up in finite time and cannot be extended past $t = 1/x_0$, so $X$ is incomplete—in contrast with completeness on compact manifolds."
+      }
+    ],
+    "expression": {
+      "text": "ẋ = X(x)：积分曲线的 ODE；φ_t 是由 X 生成的流（单参数局部变换群）",
+      "symbol": "(\\varphi_t)_{t \\in \\mathbb{R}}",
+      "note": "记住三条：导子对应、局部流由 ODE 唯一确定、紧流形上向量场完备。",
+      "noteEn": "Keep three facts: the derivation correspondence, local flows determined uniquely by ODEs, and completeness of every vector field on a compact manifold."
+    },
+    "properties": [
+      "光滑向量场 $\\leftrightarrow$ $C^\\infty(M)$ 上满足莱布尼茨法则的实线性算子（导子）一一对应；$X(f)$ 在 $p$ 的值只依赖 $f$ 在 $p$ 附近的值",
+      "局部流的存在唯一性来自 ODE 存在唯一性定理：过每点恰有一条极大积分曲线，不同极大积分曲线要么重合、要么像集不交",
+      "流性质：$\\varphi_0 = \\mathrm{id}$、$\\varphi_{s+t} = \\varphi_s \\circ \\varphi_t$、$\\varphi_t^{-1} = \\varphi_{-t}$；$t \\mapsto \\varphi_t(p)$ 是积分曲线；每个 $\\varphi_t$ 是局部微分同胚",
+      "**紧流形上任何光滑向量场都完备**（流定义在整个 $\\mathbb{R} \\times M$ 上）；非紧流形未必：$x^2\\,\\partial_x$ 在 $\\mathbb{R}$ 上不完备，而 $-y\\,\\partial_x + x\\,\\partial_y$ 在 $\\mathbb{R}^2$ 上完备",
+      "奇点：$X(p) = 0 \\iff \\varphi_t(p) = p$ 对一切 $t$ 成立；此外 $[X,Y] = 0$ 当且仅当两个向量场的流局部交换"
+    ],
+    "propertiesEn": [
+      "Smooth vector fields correspond one-to-one with real-linear derivations of $C^\\infty(M)$ satisfying the Leibniz rule; $X(f)$ at $p$ depends only on $f$ near $p$",
+      "Local existence and uniqueness of flows come from the ODE existence and uniqueness theorem: through each point passes exactly one maximal integral curve, and distinct maximal integral curves either coincide or have disjoint images",
+      "Flow properties: $\\varphi_0 = \\mathrm{id}$, $\\varphi_{s+t} = \\varphi_s \\circ \\varphi_t$, $\\varphi_t^{-1} = \\varphi_{-t}$; $t \\mapsto \\varphi_t(p)$ is an integral curve; each $\\varphi_t$ is a local diffeomorphism",
+      "**Every smooth vector field on a compact manifold is complete** (its flow is defined on all of $\\mathbb{R} \\times M$); on non-compact manifolds this can fail: $x^2\\,\\partial_x$ is incomplete on $\\mathbb{R}$, while $-y\\,\\partial_x + x\\,\\partial_y$ is complete on $\\mathbb{R}^2$",
+      "Singularities: $X(p) = 0 \\iff \\varphi_t(p) = p$ for all $t$; moreover $[X,Y] = 0$ if and only if the two flows commute locally"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-y",
+      "fy": "x",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "marks": [
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "唯一奇点 X(0) = 0"
+        }
+      ],
+      "title": "旋转场 X = (−y, x)：积分曲线是同心圆，流即旋转，对一切 t ∈ ℝ 有定义（完备）"
+    },
+    "examples": [
+      {
+        "problem": "求旋转向量场 $X = -y\\,\\frac{\\partial}{\\partial x} + x\\,\\frac{\\partial}{\\partial y}$ 在 $\\mathbb{R}^2$ 上的流 $\\varphi_t$，验证 $\\varphi_0 = \\mathrm{id}$、半群性质与 $\\frac{d}{dt}\\varphi_t = X(\\varphi_t)$，并说明它的积分曲线与完备性。",
+        "solution": "积分曲线满足 $\\dot x = -y$、$\\dot y = x$，即 $\\dot z = iz$（$z = x+iy$），解得\n$\\varphi_t(x,y) = (x\\cos t - y\\sin t,\\ x\\sin t + y\\cos t)$。\n\n验证：$\\varphi_0(x,y) = (x,y)$，即 $\\varphi_0 = \\mathrm{id}$；由三角加法公式，$\\varphi_s(\\varphi_t(x,y)) = \\varphi_{s+t}(x,y)$；又\n$\\frac{d}{dt}\\varphi_t(x,y) = (-x\\sin t - y\\cos t,\\ x\\cos t - y\\sin t)$，而 $X(\\varphi_t) = (-(x\\sin t + y\\cos t),\\ x\\cos t - y\\sin t)$，两者相等。\n\n几何：$|\\varphi_t(x,y)|^2 = x^2+y^2$ 保持不变，故积分曲线是以原点为中心的圆（除原点外），$X$ 处处与圆相切；原点处 $X(0) = 0$ 是唯一奇点，流把它固定。\n\n流对一切 $t \\in \\mathbb{R}$ 都有定义，因此 $X$ 完备——尽管 $\\mathbb{R}^2$ 不是紧流形；这印证了「紧 $\\Rightarrow$ 完备」但反之不必然。"
+      },
+      {
+        "problem": "说明 $X = x^2\\,\\frac{\\partial}{\\partial x}$ 在 $\\mathbb{R}$ 上不完备，并解释它与「紧流形上的向量场必完备」不矛盾。",
+        "solution": "积分曲线满足 $\\dot x = x^2$。分离变量：$\\int \\frac{dx}{x^2} = \\int dt$，得 $-\\frac{1}{x} = t - \\frac{1}{x_0}$，即\n$x(t) = \\frac{x_0}{1 - x_0 t}$（$x_0 \\neq 0$）。\n\n当 $x_0 > 0$ 时，$x(t) \\to +\\infty$ 当 $t \\to 1/x_0^{-}$：局部解在有限时间内离开任意紧集，无法延拓过 $t = 1/x_0$，因此流只能定义在 $t < 1/x_0$ 上，$X$ 不完备（当 $x_0 < 0$ 时对应 $t > 1/x_0$；$x_0 = 0$ 是奇点，流固定它）。\n\n这不与定理矛盾：定理的前提是**流形紧**，而 $\\mathbb{R}$ 非紧；在紧流形上，局部存在时间有一致下界，有限步拼接即可把流延拓到一切 $t \\in \\mathbb{R}$，故不可能出现这样的有限时间爆破。"
+      }
+    ],
+    "tags": [
+      "向量场",
+      "流",
+      "积分曲线",
+      "完备性",
+      "奇点"
+    ],
+    "links": [
+      "smooth-manifold",
+      "tangent-space",
+      "ode-existence-uniqueness",
+      "dynamical-systems",
+      "lie-derivative"
+    ]
+  },
+  {
+    "id": "differential-form",
+    "title": "微分形式",
+    "titleEn": "Differential Forms",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "每点给出一个反对称 $k$ 重线性函数的场：0-形式是函数，1-形式是余切向量场；外积满足分次交换律 $\\alpha \\wedge \\beta = (-1)^{|\\alpha||\\beta|} \\beta \\wedge \\alpha$，是格林、斯托克斯、高斯公式统一语言的载体。",
+    "summaryEn": "Fields assigning an alternating $k$-linear function to each point: 0-forms are functions, 1-forms are covector fields, and the wedge product is graded-commutative—the language that unifies Green, Stokes and Gauss theorems.",
+    "definition": "先看一点 $p$。**反对称 $k$ 重线性函数**指 $\\lambda: T_pM \\times \\cdots \\times T_pM \\to \\mathbb{R}$，它对每个变量都线性，而且交换任意两个变量时函数值变号。**$k$ 次微分形式** $\\omega$ 就是光滑地给每点 $p$ 指定一个这样的 $\\omega_p$（光滑性指在任意局部坐标下分量都是光滑函数）。全体 $k$-形式记作 $\\Omega^k(M)$。两个极端情形最重要：**0-形式就是光滑函数**（$\\Omega^0(M) = C^\\infty(M)$）；**1-形式就是余切向量场**——每点指定一个线性函数 $T_pM \\to \\mathbb{R}$，是切向量场的对偶对象，最基本的例子是坐标微分 $dx^i$（作用在切向量上就是读出第 $i$ 个坐标分量）。$k$ 重反对称函数构成的空间记作 $\\Lambda^k(T_pM)^*$（切空间的 $k$ 次外幂的对偶），它是向量空间，$\\dim \\Lambda^k(T_pM)^* = \\binom{n}{k}$；当 $k > n$ 时 $n$ 维空间里取不出 $k$ 个独立方向，只能得到零。\n\n**外积**把 $k$-形式 $\\alpha$ 与 $l$-形式 $\\beta$ 乘成 $(k+l)$-形式 $\\alpha \\wedge \\beta$：逐点先乘再交替化，满足双线性、结合律，并在函数乘法下分配。关键性质是**分次交换律**：$\\alpha \\wedge \\beta = (-1)^{kl}\\,\\beta \\wedge \\alpha$，其中 $k = |\\alpha|$、$l = |\\beta|$。特别地对坐标微分，$dx^i \\wedge dx^j = -dx^j \\wedge dx^i$，于是 $dx^i \\wedge dx^i = 0$——「同一个微分的二次方为零」。$n$ 个生成元 $dx^1,\\dots,dx^n$ 在外积下张成 $2^n$ 维的外代数，基元素为 $dx^{i_1} \\wedge \\cdots \\wedge dx^{i_k}$（$i_1 < \\cdots < i_k$）。也正因为反对称，一个 $k$-形式总可以只按**递增指标**展开：$\\omega = \\sum_{i_1 < \\cdots < i_k} a_{i_1\\cdots i_k}\\,dx^{i_1} \\wedge \\cdots \\wedge dx^{i_k}$，求和只对递增重指标进行，系数 $a_I$ 是任意的光滑函数（独立分量共 $\\binom{n}{k}$ 个）。\n\n光滑映射 $f: M \\to N$ 把 $N$ 上的形式**拉回**到 $M$：$(f^*\\omega)_p(v_1,\\dots,v_k) = \\omega_{f(p)}\\bigl(df_p v_1,\\dots,df_p v_k\\bigr)$，即用切映射把 $M$ 的方向「送过去」再喂给 $\\omega$。拉回与所有结构相容：$f^*(\\omega \\wedge \\eta) = f^*\\omega \\wedge f^*\\eta$，$f^*(d\\omega) = d(f^*\\omega)$，$(g \\circ f)^* = f^* \\circ g^*$。尤其注意：**拉回总是有定义，不需要 $f$ 可逆**（方向逆着 $f$）——这是微分形式比向量场好用的原因之一。\n\n**体积形式**是处处非零的 $n$-形式，例如 $\\mathbb{R}^n$ 上的 $dx^1 \\wedge \\cdots \\wedge dx^n$：把它作用在 $n$ 个向量上，得到的正是以这 $n$ 个向量为列的矩阵的行列式，这就是「有向体积」的代数化，也是换元积分中雅可比行列式出现的根源。连通 $n$ 维流形**可定向**当且仅当它上面存在处处非零的 $n$-形式。形式让积分脱离坐标：微分形式在流形上可积分，外积自动处理换序的符号，而外微分（下一词条）把经典积分定理统一成一句话。",
+    "definitionEn": "At a point $p$, an **alternating $k$-linear function** is a map $\\lambda: T_pM \\times \\cdots \\times T_pM \\to \\mathbb{R}$ that is linear in each variable and changes sign when two variables are interchanged. A **differential $k$-form** $\\omega$ assigns such an $\\omega_p$ to each point smoothly (its components in any local coordinates are smooth functions); the space of $k$-forms is written $\\Omega^k(M)$. Two extreme cases matter most: a **0-form is a smooth function** ($\\Omega^0(M) = C^\\infty(M)$), and a **1-form is a covector field**—a linear functional $T_pM \\to \\mathbb{R}$ at each point, dual to vector fields, the most basic example being the coordinate differentials $dx^i$ (evaluating them on a tangent vector reads off the $i$-th coordinate component). The alternating $k$-linear functions at $p$ form the space $\\Lambda^k(T_pM)^*$ with $\\dim \\Lambda^k(T_pM)^* = \\binom{n}{k}$; for $k > n$ there are no $k$ independent directions and the space is zero.\n\nThe **wedge product** multiplies a $k$-form $\\alpha$ by an $l$-form $\\beta$ into a $(k+l)$-form $\\alpha \\wedge \\beta$: pointwise multiply and alternate; it is bilinear, associative and distributes over sums and function multiplication. The crucial property is **graded commutativity**: $\\alpha \\wedge \\beta = (-1)^{kl}\\,\\beta \\wedge \\alpha$ with $k = |\\alpha|$, $l = |\\beta|$. In particular $dx^i \\wedge dx^j = -dx^j \\wedge dx^i$ and hence $dx^i \\wedge dx^i = 0$—the square of a differential vanishes. The generators $dx^1,\\dots,dx^n$ span the $2^n$-dimensional exterior algebra with basis elements $dx^{i_1} \\wedge \\cdots \\wedge dx^{i_k}$, $i_1 < \\cdots < i_k$. Because of antisymmetry every $k$-form can be written with **increasing multi-indices only**: $\\omega = \\sum_{i_1 < \\cdots < i_k} a_{i_1\\cdots i_k}\\,dx^{i_1} \\wedge \\cdots \\wedge dx^{i_k}$, with smooth coefficients $a_I$ (there are $\\binom{n}{k}$ independent components).\n\nA smooth map $f: M \\to N$ **pulls back** forms from $N$ to $M$: $(f^*\\omega)_p(v_1,\\dots,v_k) = \\omega_{f(p)}\\bigl(df_p v_1,\\dots,df_p v_k\\bigr)$, feeding directions from $M$ into $\\omega$ via the differential. Pullback is compatible with everything: $f^*(\\omega \\wedge \\eta) = f^*\\omega \\wedge f^*\\eta$, $f^*(d\\omega) = d(f^*\\omega)$, $(g \\circ f)^* = f^* \\circ g^*$. In particular pullback is always defined and **does not require $f$ to be invertible** (it goes against the direction of $f$)—one reason forms are more flexible than vector fields.\n\nA **volume form** is an everywhere-nonvanishing $n$-form, e.g. $dx^1 \\wedge \\cdots \\wedge dx^n$ on $\\mathbb{R}^n$: evaluated on $n$ vectors it returns the determinant of the matrix with those vectors as columns—the algebra of oriented volume—and it is the source of Jacobian determinants in change-of-variables formulas. A connected $n$-manifold is **orientable** if and only if it carries an everywhere-nonvanishing $n$-form. Forms make integration coordinate-free, the wedge product automatically handles the signs of reordering, and the exterior derivative (next entry) unifies the classical integral theorems into one statement.",
+    "formulas": [
+      {
+        "latex": "\\alpha \\wedge \\beta = (-1)^{kl}\\,\\beta \\wedge \\alpha,\\qquad dx^i \\wedge dx^j = -dx^j \\wedge dx^i,\\qquad dx^i \\wedge dx^i = 0",
+        "note": "外积的分次交换律（$k = |\\alpha|$，$l = |\\beta|$）与两个特例：坐标微分反交换，同一个微分的平方为零。",
+        "noteEn": "Graded commutativity of the wedge product ($k = |\\alpha|$, $l = |\\beta|$) and two special cases: coordinate differentials anticommute, and the square of any one of them vanishes."
+      },
+      {
+        "latex": "\\omega = \\sum_{i_1 < \\cdots < i_k} a_{i_1 \\cdots i_k}\\, dx^{i_1} \\wedge \\cdots \\wedge dx^{i_k}",
+        "note": "形式在局部坐标下的标准写法：求和只遍历递增重指标（因为反对称性）；系数 $a_I$ 为光滑函数，独立分量共 $\\binom{n}{k}$ 个。",
+        "noteEn": "The standard local expression of a form: the sum runs over increasing multi-indices only (by antisymmetry); the coefficients $a_I$ are smooth, giving $\\binom{n}{k}$ independent components."
+      },
+      {
+        "latex": "\\dim \\Lambda^k(T_pM)^* = \\binom{n}{k},\\qquad \\Lambda^0(T_pM)^* = \\mathbb{R},\\qquad \\Lambda^1(T_pM)^* = T_p^*M,\\qquad \\Lambda^k(T_pM)^* = \\{0\\}\\ (k > n)",
+        "note": "点态维数公式：0-形式是函数、1-形式是余切向量；$k > n$ 时没有非零 $k$-形式。",
+        "noteEn": "Pointwise dimensions: 0-forms are functions, 1-forms are covectors; there are no nonzero $k$-forms when $k > n$."
+      },
+      {
+        "latex": "(f^*\\omega)_p(v_1,\\dots,v_k) = \\omega_{f(p)}\\bigl(df_p v_1,\\dots,df_p v_k\\bigr)",
+        "note": "拉回的定义：用切映射把 $M$ 的切向量送进 $N$，再喂给 $\\omega$；它总存在，不要求 $f$ 可逆，并与外积、外微分交换。",
+        "noteEn": "Pullback: feed tangent vectors of $M$ into $\\omega$ through the differential. It always exists, needs no invertibility of $f$, and commutes with the wedge product and the exterior derivative."
+      },
+      {
+        "latex": "dx^1 \\wedge \\cdots \\wedge dx^n(v_1,\\dots,v_n) = \\det(v_1,\\dots,v_n)",
+        "note": "体积形式：作用在 $n$ 个向量上给出有向体积（行列式）；连通流形可定向 $\\iff$ 存在处处非零的 $n$-形式。",
+        "noteEn": "The volume form returns the oriented volume (a determinant) of $n$ vectors; a connected manifold is orientable if and only if a nowhere-vanishing $n$-form exists."
+      }
+    ],
+    "expression": {
+      "text": "ω = Σ_{i₁<…<i_k} a_{i₁…i_k} dx^{i₁} ∧ … ∧ dx^{i_k}（按递增指标书写）",
+      "symbol": "\\omega \\in \\Omega^k(M)",
+      "note": "k-形式是反对称 k 重线性函数的场；外积反对称、1-形式是余切向量场、0-形式是函数。",
+      "noteEn": "A k-form is a field of alternating k-linear functions; the wedge is graded-commutative, 1-forms are covector fields and 0-forms are functions."
+    },
+    "properties": [
+      "反对称性是核心：$dx^i \\wedge dx^i = 0$、$dx^i \\wedge dx^j = -dx^j \\wedge dx^i$；一般地 $\\alpha \\wedge \\beta = (-1)^{|\\alpha||\\beta|} \\beta \\wedge \\alpha$，两个 1-形式之间反交换，偶数阶之间交换",
+      "$k$-形式等价于全反对称的 $(0,k)$-型张量场（指标全反对称，如 $\\omega_{ij} = -\\omega_{ji}$）：这是把它接入张量分析语言的桥梁",
+      "拉回保结构：$f^*(\\omega \\wedge \\eta) = f^*\\omega \\wedge f^*\\eta$ 且 $f^*(d\\omega) = d(f^*\\omega)$；拉回不需要 $f$ 可逆，而向量场的推前只对微分同胚自然",
+      "分量个数：$n$ 维流形上 $k$-形式的独立点态分量有 $\\binom{n}{k}$ 个；$k > n$ 时只有零形式",
+      "定向与体积：连通 $n$ 维流形可定向 $\\iff$ 存在处处非零的 $n$-形式；$\\mathbb{R}^n$ 上 $dx^1 \\wedge \\cdots \\wedge dx^n$ 是标准体积形式，作用在正交基上取值为 $\\pm 1$"
+    ],
+    "propertiesEn": [
+      "Antisymmetry is the heart: $dx^i \\wedge dx^i = 0$, $dx^i \\wedge dx^j = -dx^j \\wedge dx^i$, and in general $\\alpha \\wedge \\beta = (-1)^{|\\alpha||\\beta|} \\beta \\wedge \\alpha$; two 1-forms anticommute, while forms of even degree commute",
+      "A $k$-form is the same thing as a totally antisymmetric $(0,k)$-tensor field (components antisymmetric in all indices, e.g. $\\omega_{ij} = -\\omega_{ji}$)—the bridge to index notation",
+      "Pullback preserves structure: $f^*(\\omega \\wedge \\eta) = f^*\\omega \\wedge f^*\\eta$ and $f^*(d\\omega) = d(f^*\\omega)$; pullback needs no invertibility of $f$, whereas pushing forward vector fields is natural only for diffeomorphisms",
+      "Component count: a $k$-form on an $n$-manifold has $\\binom{n}{k}$ independent pointwise components; for $k > n$ only the zero form exists",
+      "Orientation and volume: a connected $n$-manifold is orientable if and only if it has a nowhere-vanishing $n$-form; on $\\mathbb{R}^n$ the form $dx^1 \\wedge \\cdots \\wedge dx^n$ is the standard volume form, taking values $\\pm 1$ on orthonormal bases"
+    ],
+    "examples": [
+      {
+        "problem": "计算外积 $(dx + 2\\,dy) \\wedge (3\\,dx - dy)$，并验证分次交换律 $\\alpha \\wedge \\beta = (-1)^{|\\alpha||\\beta|}\\beta \\wedge \\alpha$ 的一个特例：$(dx \\wedge dy) \\wedge dz$ 与 $dz \\wedge (dx \\wedge dy)$ 的关系。",
+        "solution": "直接展开：$(dx+2dy) \\wedge (3dx-dy) = 3\\,dx \\wedge dx - dx \\wedge dy + 6\\,dy \\wedge dx - 2\\,dy \\wedge dy$。\n\n用两条规则：$dx \\wedge dx = dy \\wedge dy = 0$（同一个微分平方为零），$dy \\wedge dx = -dx \\wedge dy$（反交换）。于是结果为\n$0 - dx \\wedge dy - 6\\,dx \\wedge dy - 0 = -7\\,dx \\wedge dy$。\n\n交换因子核对：$(3dx-dy) \\wedge (dx+2dy) = 3\\,dx \\wedge dx + 6\\,dx \\wedge dy - dy \\wedge dx - 2\\,dy \\wedge dy = 7\\,dx \\wedge dy$，确实等于 $-\\bigl[(dx+2dy) \\wedge (3dx-dy)\\bigr]$，与 $\\alpha \\wedge \\beta = (-1)^{1 \\cdot 1}\\beta \\wedge \\alpha$ 一致。\n\n二阶与一阶的情形：$dz \\wedge (dx \\wedge dy)$，把 $dz$ 移到末尾要跨过 $dx$、$dy$ 两个因子（两次换序，符号 $(-1)^2 = +1$），得 $dz \\wedge (dx \\wedge dy) = dx \\wedge dy \\wedge dz = (dx \\wedge dy) \\wedge dz$，与 $(-1)^{2 \\cdot 1} = +1$ 相符。"
+      },
+      {
+        "problem": "设 $f(u,v) = (u\\cos v,\\ u\\sin v)$（极坐标参数化），用拉回计算 $f^*(dx \\wedge dy)$，并解释它为什么给出 $dx\\,dy = r\\,dr\\,d\\theta$。",
+        "solution": "先算 1-形式的拉回（把 $x = u\\cos v$、$y = u\\sin v$ 代入并取普通微分）：\n$f^*dx = d(u\\cos v) = \\cos v\\,du - u\\sin v\\,dv$，$f^*dy = d(u\\sin v) = \\sin v\\,du + u\\cos v\\,dv$。\n\n由 $f^*(\\omega \\wedge \\eta) = f^*\\omega \\wedge f^*\\eta$ 与 $du \\wedge du = dv \\wedge dv = 0$：\n$f^*(dx \\wedge dy) = (\\cos v\\,du - u\\sin v\\,dv) \\wedge (\\sin v\\,du + u\\cos v\\,dv)$\n$= u\\cos^2 v\\,du \\wedge dv - u\\sin^2 v\\,dv \\wedge du = u\\cos^2 v\\,du \\wedge dv + u\\sin^2 v\\,du \\wedge dv = u\\,du \\wedge dv$。\n\n（中间用 $dv \\wedge du = -du \\wedge dv$ 把第二项翻号。）把坐标写成习惯记号 $(u,v) = (r,\\theta)$，就是 $f^*(dx \\wedge dy) = r\\,dr \\wedge d\\theta$，即面积元 $dx\\,dy = r\\,dr\\,d\\theta$——雅可比行列式 $r$ 由拉回自动产生，无需求导矩阵再取行列式。"
+      }
+    ],
+    "tags": [
+      "微分形式",
+      "外积",
+      "拉回",
+      "体积形式",
+      "余切向量"
+    ],
+    "links": [
+      "tangent-space",
+      "exterior-derivative",
+      "double-integral-polar",
+      "green-theorem",
+      "manifold-integration"
+    ]
+  },
+  {
+    "id": "exterior-derivative",
+    "title": "外微分",
+    "titleEn": "The Exterior Derivative",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "把 $k$-形式映为 $(k+1)$-形式的唯一算子 $d$：线性、满足分次莱布尼茨律 $d(\\omega \\wedge \\eta) = d\\omega \\wedge \\eta + (-1)^{|\\omega|}\\omega \\wedge d\\eta$、$d^2 = 0$，对函数就是普通微分；闭形式与恰当形式的差别由流形拓扑决定。",
+    "summaryEn": "The unique operator d taking k-forms to (k+1)-forms: linear, satisfying the graded Leibniz rule and d² = 0, agreeing with the ordinary differential on functions; the gap between closed and exact forms reflects the topology of the manifold.",
+    "definition": "**外微分** $d$ 是形式上的「求导」算子，$d: \\Omega^k(M) \\to \\Omega^{k+1}(M)$。它由四条性质刻画，而且**满足这四条性质的算子存在且唯一**：\n（1）**线性**：$d(\\omega + \\eta) = d\\omega + d\\eta$，$d(c\\,\\omega) = c\\,d\\omega$（$c$ 为常数）；\n（2）**分次莱布尼茨法则**：$d(\\omega \\wedge \\eta) = d\\omega \\wedge \\eta + (-1)^{k}\\,\\omega \\wedge d\\eta$，其中 $k = |\\omega|$ 是 $\\omega$ 的次数——负号只由**左因子 $\\omega$** 的次数的奇偶决定，不能丢、不能乱放；\n（3）**$d^2 = 0$**：连续作用两次得零；\n（4）**对函数就是普通微分**：对 $f \\in C^\\infty(M)$ 与 $v \\in T_pM$，$df_p(v) = v(f)$，坐标下 $df = \\sum_i \\frac{\\partial f}{\\partial x^i}\\,dx^i$。\n性质（2）对 $f \\in C^\\infty(M)$ 的特例是 $d(f\\omega) = df \\wedge \\omega + f\\,d\\omega$，说明 $d$ 与乘积的关系像导数（会产生一项 $df \\wedge \\omega$），而**不是** $C^\\infty(M)$-线性算子。在局部坐标下 $d$ 的公式简单到可以当作定义：若 $\\omega = \\sum_I a_I\\,dx^I$（$dx^I = dx^{i_1} \\wedge \\cdots \\wedge dx^{i_k}$，按递增指标求和），则 $d\\omega = \\sum_I da_I \\wedge dx^I = \\sum_{I,j} \\frac{\\partial a_I}{\\partial x^j}\\,dx^j \\wedge dx^I$：把每个系数当普通函数求微分，再与对应的 $dx^I$ 外积、求和。由此立刻看出 $d^2 = 0$ 的本质：$d(da_I) = \\sum_{j,i} \\frac{\\partial^2 a_I}{\\partial x^j \\partial x^i}\\,dx^j \\wedge dx^i$ 中混合偏导 $\\frac{\\partial^2 a_I}{\\partial x^j \\partial x^i}$ 关于 $j,i$ 对称，而 $dx^j \\wedge dx^i$ 反对称，逐项抵消——这正是「混合偏导数可交换」。\n\n满足 $d\\omega = 0$ 的 $\\omega$ 叫**闭形式**，能写成 $\\omega = d\\eta$ 的叫**恰当形式**。由 $d^2 = 0$，**恰当一定闭**；反过来一般**不**成立——「闭而不恰当」的程度完全由流形的拓扑决定，记作 de Rham 上同调 $H^k_{dR}(M) = \\bigl\\{\\text{闭 } k \\text{-形式}\\bigr\\}\\big/\\bigl\\{\\text{恰当 } k \\text{-形式}\\bigr\\}$，它精确地刻画流形上有多少个「洞」。最经典的例子是穿孔平面 $\\mathbb{R}^2 \\setminus \\{0\\}$ 上的 $\\omega = \\frac{-y\\,dx + x\\,dy}{x^2+y^2}$：可以算出 $d\\omega = 0$，但它不是任何整体 $\\eta$ 的微分（沿单位圆周的积分 $\\oint \\omega = 2\\pi \\neq 0$，而恰当形式沿闭曲线的积分必为零）。**庞加莱引理**给出反向成立的充分条件：在 $\\mathbb{R}^n$ 的**星形区域**（更一般地，任何可缩区域）上，每个闭形式都恰当。注意条件与方向：可缩是「没有洞」的精确化，$\\mathbb{R}^2 \\setminus \\{0\\}$ 绕原点一圈不能收缩，正因如此才出现闭而不恰当的例子。\n\n外微分把经典向量分析一网打尽。在 $\\mathbb{R}^3$ 中（欧氏度规＋标准定向）：\n• 函数与梯度：由 $df(v) = \\langle \\nabla f, v \\rangle$，梯度就是 $f$ 的「外微分再配上内积」；\n• 向量场 $F = (F_1,F_2,F_3)$ 对应 1-形式 $F^{\\flat} = F_1\\,dx + F_2\\,dy + F_3\\,dz$，则 $dF^{\\flat}$ 的分量正是 $\\mathrm{curl}\\,F$：$dF^{\\flat} = (\\partial_y F_3 - \\partial_z F_2)\\,dy \\wedge dz + (\\partial_z F_1 - \\partial_x F_3)\\,dz \\wedge dx + (\\partial_x F_2 - \\partial_y F_1)\\,dx \\wedge dy$，用 Hodge 星号 $\\ast$ 转回 1-形式即 $\\ast\\,dF^{\\flat} = (\\mathrm{curl}\\,F)^{\\flat}$；\n• 向量场对应通量 2-形式 $\\ast F^{\\flat} = F_1\\,dy \\wedge dz + F_2\\,dz \\wedge dx + F_3\\,dx \\wedge dy$，则 $d(\\ast F^{\\flat}) = (\\mathrm{div}\\,F)\\,dx \\wedge dy \\wedge dz$。\n于是 $\\mathrm{curl} \\circ \\nabla = 0$ 与 $\\mathrm{div} \\circ \\mathrm{curl} = 0$ 只是 $d^2 = 0$ 的不同化身；格林公式、斯托克斯公式、高斯公式统一为广义斯托克斯定理 $\\int_M d\\omega = \\int_{\\partial M} \\omega$。注意这些「翻译」用到了度规与内积（把向量与 1-形式互换、定义 $\\ast$、把 $df$ 与 $\\nabla f$ 配对），而 $d$ 本身不需要任何度规，它只依赖光滑结构。",
+    "definitionEn": "The **exterior derivative** $d$ is the differentiation operator on forms, $d: \\Omega^k(M) \\to \\Omega^{k+1}(M)$. It is characterized by four properties, and **an operator satisfying them exists and is unique**:\n(1) **Linearity**: $d(\\omega + \\eta) = d\\omega + d\\eta$ and $d(c\\,\\omega) = c\\,d\\omega$ for constants $c$;\n(2) the **graded Leibniz rule**: $d(\\omega \\wedge \\eta) = d\\omega \\wedge \\eta + (-1)^{k}\\,\\omega \\wedge d\\eta$, where $k = |\\omega|$ is the degree of $\\omega$—the sign is determined by the **left factor** and must never be dropped or misplaced;\n(3) **$d^2 = 0$**;\n(4) **on functions it is the ordinary differential**: for $f \\in C^\\infty(M)$ and $v \\in T_pM$, $df_p(v) = v(f)$, i.e. $df = \\sum_i \\frac{\\partial f}{\\partial x^i}\\,dx^i$ in coordinates.\nThe special case $d(f\\omega) = df \\wedge \\omega + f\\,d\\omega$ shows that $d$ behaves like a derivative with respect to products and is **not** $C^\\infty(M)$-linear.\n\nIn local coordinates the formula can serve as a definition: for $\\omega = \\sum_I a_I\\,dx^I$ (increasing multi-indices), $d\\omega = \\sum_I da_I \\wedge dx^I = \\sum_{I,j} \\frac{\\partial a_I}{\\partial x^j}\\,dx^j \\wedge dx^I$: differentiate each coefficient and wedge with its $dx^I$. This also exposes the mechanism of $d^2 = 0$: $\\frac{\\partial^2 a_I}{\\partial x^j \\partial x^i}$ is symmetric in $j,i$ while $dx^j \\wedge dx^i$ is antisymmetric, so the terms cancel pairwise—equality of mixed partials.\n\nA form with $d\\omega = 0$ is **closed**, and one of the shape $\\omega = d\\eta$ is **exact**. Since $d^2 = 0$, **exact forms are always closed**; the converse generally **fails**—the obstruction is purely topological and is measured by de Rham cohomology $H^k_{dR}(M) = \\{\\text{closed } k\\text{-forms}\\}/\\{\\text{exact } k\\text{-forms}\\}$, which counts the \"holes\" of the manifold. The classic example is $\\omega = \\frac{-y\\,dx + x\\,dy}{x^2+y^2}$ on the punctured plane $\\mathbb{R}^2 \\setminus \\{0\\}$: it is closed, but not the differential of any globally defined $\\eta$, because its integral around the unit circle equals $2\\pi \\neq 0$, whereas an exact form integrates to zero around any closed curve. The **Poincaré lemma** gives the converse under a hypothesis: on any **star-shaped** (more generally, contractible) domain in $\\mathbb{R}^n$, every closed form is exact. Note both the direction and the condition: contractibility is the precise \"no holes\" requirement, and the punctured plane is not contractible.\n\nIn $\\mathbb{R}^3$ the exterior derivative subsumes classical vector calculus: the gradient corresponds to $df$ via $df(v) = \\langle \\nabla f, v \\rangle$; a vector field $F$ corresponds to the 1-form $F^{\\flat} = F_1 dx + F_2 dy + F_3 dz$, whose exterior derivative has exactly the components of $\\mathrm{curl}\\,F$, so that $\\ast\\,dF^{\\flat} = (\\mathrm{curl}\\,F)^{\\flat}$; and to the flux 2-form $\\ast F^{\\flat} = F_1\\,dy\\wedge dz + F_2\\,dz\\wedge dx + F_3\\,dx\\wedge dy$, whose derivative is $(\\mathrm{div}\\,F)\\,dx\\wedge dy\\wedge dz$. Thus $\\mathrm{curl}\\circ\\nabla = 0$ and $\\mathrm{div}\\circ\\mathrm{curl} = 0$ are incarnations of $d^2 = 0$, and Green's, Stokes' and Gauss' theorems become the generalized Stokes theorem $\\int_M d\\omega = \\int_{\\partial M} \\omega$. These dictionary entries use the metric and inner product (to identify vectors with 1-forms, to define $\\ast$, and to pair $df$ with $\\nabla f$); $d$ itself needs no metric—only the smooth structure.",
+    "formulas": [
+      {
+        "latex": "d(\\omega \\wedge \\eta) = d\\omega \\wedge \\eta + (-1)^{|\\omega|}\\,\\omega \\wedge d\\eta,\\qquad d^2 = 0",
+        "note": "分次莱布尼茨法则与 $d^2 = 0$：符号 $(-1)^{|\\omega|}$ 由左因子 $\\omega$ 的次数决定；这两条加上线性与「函数上为普通微分」唯一确定 $d$。",
+        "noteEn": "The graded Leibniz rule and $d^2 = 0$: the sign $(-1)^{|\\omega|}$ is fixed by the degree of the left factor; these two, together with linearity and agreement with $df$ on functions, determine $d$ uniquely."
+      },
+      {
+        "latex": "\\omega = \\sum_I a_I\\,dx^I\\ \\Longrightarrow\\ d\\omega = \\sum_I da_I \\wedge dx^I = \\sum_{I,j} \\frac{\\partial a_I}{\\partial x^j}\\,dx^j \\wedge dx^I",
+        "note": "局部坐标公式：系数逐个求普通微分再外积；$d^2 = 0$ 在此化为「混合偏导可交换（对称）与 $dx^j \\wedge dx^i$ 反对称相抵消」。",
+        "noteEn": "The local formula: differentiate each coefficient and wedge. Here $d^2 = 0$ becomes the cancellation between symmetric mixed partials and the antisymmetric $dx^j \\wedge dx^i$."
+      },
+      {
+        "latex": "\\omega = P\\,dx + Q\\,dy\\ \\Longrightarrow\\ d\\omega = \\Bigl(\\frac{\\partial Q}{\\partial x} - \\frac{\\partial P}{\\partial y}\\Bigr) dx \\wedge dy",
+        "note": "二维 1-形式的外微分：系数 $Q_x - P_y$ 恰好是旋度的 $z$ 分量，与格林公式 $\\oint_{\\partial D} (P\\,dx+Q\\,dy) = \\iint_D (Q_x - P_y)\\,dx\\,dy$ 的被积函数一致。",
+        "noteEn": "The exterior derivative of a planar 1-form: the coefficient $Q_x - P_y$ is exactly the $z$-component of the curl and is the integrand in Green's theorem."
+      },
+      {
+        "latex": "df \\ \\leftrightarrow\\ \\nabla f,\\qquad \\ast\\, d(F^{\\flat}) = (\\mathrm{curl}\\,F)^{\\flat},\\qquad d(\\ast F^{\\flat}) = (\\mathrm{div}\\,F)\\, dx \\wedge dy \\wedge dz",
+        "note": "与梯度、旋度、散度的对应：用度规把向量与 1-形式互换、用 Hodge 星号 $\\ast$ 在 1-形式与 2-形式间转换；$d$ 本身不需要度规。",
+        "noteEn": "Correspondence with gradient, curl and divergence: the metric identifies vectors with 1-forms and the Hodge star converts between 1- and 2-forms; $d$ itself needs no metric."
+      },
+      {
+        "latex": "\\oint_{\\partial D} \\bigl(P\\,dx + Q\\,dy\\bigr) = \\iint_D \\Bigl(\\frac{\\partial Q}{\\partial x} - \\frac{\\partial P}{\\partial y}\\Bigr) dx\\,dy,\\qquad \\int_M d\\omega = \\int_{\\partial M} \\omega",
+        "note": "格林公式（广义斯托克斯定理在平面上的特例）与一般形式：后者是流形上的「牛顿–莱布尼茨公式」，把闭形式与恰当形式、边界与内部连接起来。",
+        "noteEn": "Green's theorem (a planar case of generalized Stokes) and the general form: the latter is the fundamental theorem of calculus on manifolds, linking boundary and interior."
+      }
+    ],
+    "expression": {
+      "text": "d : Ω^k(M) → Ω^{k+1}(M)，且 d² = 0；分次莱布尼茨律的符号为 (−1)^{|ω|}",
+      "symbol": "d",
+      "note": "外微分由四条性质唯一确定：线性、分次莱布尼茨、d² = 0、函数上为普通微分。",
+      "noteEn": "The exterior derivative is determined by four properties: linearity, graded Leibniz, d² = 0, and the ordinary differential on functions."
+    },
+    "properties": [
+      "唯一性：满足四条性质（线性、分次莱布尼茨、$d^2 = 0$、函数上为普通微分）的外微分存在且唯一；坐标公式 $d\\omega = \\sum_I da_I \\wedge dx^I$ 自动满足它们",
+      "与拉回交换：$f^*(d\\omega) = d(f^*\\omega)$；但 $d$ 不是 $C^\\infty$-线性的，而有乘积律 $d(f\\omega) = df \\wedge \\omega + f\\,d\\omega$",
+      "恰当 $\\Rightarrow$ 闭（因为 $d^2 = 0$）；反之取决于拓扑。庞加莱引理：$\\mathbb{R}^n$ 或任何星形（可缩）区域上闭 $\\Rightarrow$ 恰当；$\\mathbb{R}^2 \\setminus \\{0\\}$ 上的 $\\frac{-y\\,dx+x\\,dy}{x^2+y^2}$ 闭而不恰当",
+      "二维：$d(P\\,dx+Q\\,dy) = (Q_x - P_y)\\,dx \\wedge dy$ 与旋度的 $z$ 分量一致；三维：$\\nabla$、$\\mathrm{curl}$、$\\mathrm{div}$ 是「函数 → 1-形式 → 2-形式 → 3-形式」链上 $d$ 与 $\\ast$ 的组合，$\\mathrm{curl} \\circ \\nabla = 0$、$\\mathrm{div} \\circ \\mathrm{curl} = 0$ 都是 $d^2 = 0$",
+      "广义斯托克斯定理 $\\int_M d\\omega = \\int_{\\partial M} \\omega$（$M$ 紧定向带边、$\\omega$ 为 $(n-1)$-形式）统一了格林、斯托克斯、高斯公式与微积分基本定理；Cartan 公式 $L_X = d\\,\\iota_X + \\iota_X\\,d$ 把 $d$ 与李导数、内乘联系起来"
+    ],
+    "propertiesEn": [
+      "Uniqueness: an exterior derivative satisfying the four properties (linearity, graded Leibniz, $d^2 = 0$, agreement with $df$ on functions) exists and is unique; the local formula $d\\omega = \\sum_I da_I \\wedge dx^I$ satisfies them automatically",
+      "It commutes with pullback: $f^*(d\\omega) = d(f^*\\omega)$; it is not $C^\\infty$-linear but obeys the product rule $d(f\\omega) = df \\wedge \\omega + f\\,d\\omega$",
+      "Exact $\\Rightarrow$ closed (since $d^2 = 0$); the converse depends on topology. Poincaré lemma: on $\\mathbb{R}^n$ or any star-shaped (contractible) domain, closed $\\Rightarrow$ exact; $\\frac{-y\\,dx+x\\,dy}{x^2+y^2}$ on $\\mathbb{R}^2 \\setminus \\{0\\}$ is closed but not exact",
+      "In dimension two $d(P\\,dx+Q\\,dy) = (Q_x - P_y)\\,dx \\wedge dy$ matches the $z$-component of the curl; in dimension three, $\\nabla$, $\\mathrm{curl}$ and $\\mathrm{div}$ arise from $d$ and $\\ast$ along the chain functions → 1-forms → 2-forms → 3-forms, and both $\\mathrm{curl} \\circ \\nabla = 0$ and $\\mathrm{div} \\circ \\mathrm{curl} = 0$ are $d^2 = 0$",
+      "The generalized Stokes theorem $\\int_M d\\omega = \\int_{\\partial M} \\omega$ (for compact oriented $M$ with boundary and an $(n-1)$-form $\\omega$) unifies Green, Stokes, Gauss and the fundamental theorem of calculus; the Cartan formula $L_X = d\\,\\iota_X + \\iota_X\\,d$ links $d$ to Lie derivatives and interior products"
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^3$ 中验证分次莱布尼茨法则：取 $\\omega = x\\,dy$（1 次）与 $\\eta = z\\,dx$（1 次），计算 $d(\\omega \\wedge \\eta)$ 与 $d\\omega \\wedge \\eta + (-1)^{|\\omega|}\\,\\omega \\wedge d\\eta$，并说明符号的必要性；再取 $|\\omega| = 2$ 的形式做一次对照。",
+        "solution": "左端：$\\omega \\wedge \\eta = x\\,dy \\wedge z\\,dx = xz\\,dy \\wedge dx = -xz\\,dx \\wedge dy$，于是\n$d(\\omega \\wedge \\eta) = -d(xz) \\wedge dx \\wedge dy = -(z\\,dx + x\\,dz) \\wedge dx \\wedge dy = -x\\,dz \\wedge dx \\wedge dy = -x\\,dx \\wedge dy \\wedge dz$，其中用了 $dx \\wedge dx = 0$ 与 $dz \\wedge dx \\wedge dy = dx \\wedge dy \\wedge dz$（两次换序）。\n\n右端：$d\\omega = dx \\wedge dy$，$d\\eta = dz \\wedge dx$，于是\n$d\\omega \\wedge \\eta = (dx \\wedge dy) \\wedge (z\\,dx) = z\\,dx \\wedge dy \\wedge dx = 0$（$dx$ 出现两次），\n$(-1)^{|\\omega|}\\,\\omega \\wedge d\\eta = (-1)^1 (x\\,dy) \\wedge (dz \\wedge dx) = -x\\,dy \\wedge dz \\wedge dx = -x\\,dx \\wedge dy \\wedge dz$。\n两端相等，都是 $-x\\,dx \\wedge dy \\wedge dz$。若把符号误写成 $+1$，右端将得到 $+x\\,dx \\wedge dy \\wedge dz$，与左端差一个负号——这就是 $(-1)^{|\\omega|}$ 的作用。\n\n$|\\omega| = 2$ 的对照：取 $\\theta = x^2\\,dy \\wedge dz$、$h = e^x$（0 次）。左端 $d(\\theta \\wedge h) = d(x^2e^x\\,dy \\wedge dz) = (2x+x^2)e^x\\,dx \\wedge dy \\wedge dz$；右端 $d\\theta \\wedge h + (-1)^2\\,\\theta \\wedge dh = 2xe^x\\,dx \\wedge dy \\wedge dz + x^2e^x\\,dy \\wedge dz \\wedge dx$，而 $dy \\wedge dz \\wedge dx = dx \\wedge dy \\wedge dz$，两项相加与左端一致——偶数次时符号为 $+1$，也确实应取 $+1$。"
+      },
+      {
+        "problem": "证明 $\\omega = \\frac{-y\\,dx + x\\,dy}{x^2+y^2}$ 在 $\\mathbb{R}^2 \\setminus \\{0\\}$ 上闭但不恰当，并说明这与庞加莱引理不矛盾。",
+        "solution": "闭：记 $r^2 = x^2+y^2$，$P = \\frac{-y}{r^2}$，$Q = \\frac{x}{r^2}$。计算偏导\n$\\frac{\\partial Q}{\\partial x} = \\frac{r^2 - x \\cdot 2x}{r^4} = \\frac{y^2 - x^2}{r^4}$，$\\frac{\\partial P}{\\partial y} = \\frac{-r^2 + y \\cdot 2y}{r^4} = \\frac{y^2 - x^2}{r^4}$，\n两者相等，故 $d\\omega = (Q_x - P_y)\\,dx \\wedge dy = 0$，即 $\\omega$ 闭。\n\n不恰当：若在整个 $\\mathbb{R}^2 \\setminus \\{0\\}$ 上 $\\omega = d\\eta$，取单位圆 $\\gamma(t) = (\\cos t, \\sin t)$，$t \\in [0, 2\\pi]$。沿圆有 $r^2 = 1$，$dx = -\\sin t\\,dt$，$dy = \\cos t\\,dt$，于是\n$\\oint_{\\gamma}\\omega = \\int_0^{2\\pi}\\bigl[(-\\sin t)(-\\sin t) + (\\cos t)(\\cos t)\\bigr]dt = \\int_0^{2\\pi} dt = 2\\pi$。\n但恰当形式沿闭曲线的积分必为零：$\\oint_{\\gamma} d\\eta = \\int_0^{2\\pi}\\frac{d}{dt}\\eta(\\gamma(t))\\,dt = \\eta(\\gamma(2\\pi)) - \\eta(\\gamma(0)) = 0$（链式法则＋微积分基本定理，不需要 $\\eta$ 有任何整体性假设，只要它定义在含 $\\gamma$ 的区域上）。矛盾，故 $\\omega$ 不恰当。\n\n与庞加莱引理不矛盾：$\\mathbb{R}^2 \\setminus \\{0\\}$ 不是星形、也不是可缩区域（绕原点一整圈无法缩成一点）。$\\omega$ 局部上等于 $d\\theta$（$\\theta$ 为极角），但极角不能在整个穿孔平面上定义为单值光滑函数，所以没有整体原函数；在 $\\mathbb{R}^2$（或任何星形区域）上引理保证闭形式必恰当。"
+      }
+    ],
+    "tags": [
+      "外微分",
+      "闭形式",
+      "恰当形式",
+      "de Rham 上同调",
+      "庞加莱引理"
+    ],
+    "links": [
+      "differential-form",
+      "green-theorem",
+      "stokes-theorem",
+      "generalized-stokes",
+      "divergence-curl"
+    ]
+  }
+]

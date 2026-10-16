@@ -1,0 +1,200 @@
+[
+  {
+    "id": "matrix-spectral-derivatives",
+    "title": "特征值与奇异值对矩阵的导数",
+    "titleEn": "Derivatives of Eigenvalues and Singular Values",
+    "branch": "linear",
+    "level": 5,
+    "summary": "单重特征值与单重正奇异值的一阶扰动公式及其分母布局梯度：对称情形 dλᵢ = vᵢᵀ(dA)vᵢ，一般矩阵用左右特征向量修正，奇异值 dσᵢ = uᵢᵀ(dA)vᵢ；重根与 σᵢ = 0 处要格外小心。",
+    "summaryEn": "First-order perturbation formulas and denominator-layout gradients for simple eigenvalues and singular values: dλᵢ = vᵢᵀ(dA)vᵢ for symmetric matrices, left and right eigenvectors in general, and dσᵢ = uᵢᵀ(dA)vᵢ for simple positive singular values.",
+    "definition": "本节点沿用全批统一约定（标量导数按**分母/梯度布局**）——$\\partial f/\\partial A$ 与 $A$ 同型，恒有 $df=\\mathrm{tr}\\big((\\partial f/\\partial A)^{\\top}dA\\big)$。文献里其他布局的公式需先对齐约定（标量公式常与本批互为转置）。\n\n特征值 $\\lambda_i(A)$、奇异值 $\\sigma_i(A)$ 作为矩阵元素的函数如何求导？在**单重**（simple，代数重数 1）特征值处，一阶变化只沿对应特征向量「采样」扰动矩阵：实对称（更一般地 Hermitian，把转置换成共轭转置）情形有 $d\\lambda_i=v_i^{\\top}(dA)\\,v_i$，其中 $v_i$ 是单位特征向量，$(dA)$ 被夹在 $v_i^{\\top}$ 与 $v_i$ 中间；一般非对称矩阵需要左特征向量 $w_i$（$w_i^{\\top}A=\\lambda_i w_i^{\\top}$）修正为 $d\\lambda_i=\\dfrac{w_i^{\\top}(dA)v_i}{w_i^{\\top}v_i}$。推导思路（对称情形）：对 $A(t)v(t)=\\lambda(t)v(t)$ 两边求导得 $\\dot Av+A\\dot v=\\dot\\lambda v+\\lambda\\dot v$，左乘 $v^{\\top}$，利用 $v^{\\top}A=\\lambda v^{\\top}$ 与规范化条件 $v^{\\top}\\dot v=0$，即得 $\\dot\\lambda=v^{\\top}\\dot Av$。\n\n奇异值照样简洁：对**单重正奇异值** $\\sigma_i$ 与单位左右奇异向量 $u_i,v_i$，有 $d\\sigma_i=u_i^{\\top}(dA)\\,v_i$（**不带绝对值**——$\\sigma_i>0$ 处函数光滑）。整体特例是把矩阵平方：$d\\|A\\|_F^2=2\\,\\mathrm{tr}(A^{\\top}dA)$，完全不需要奇异值分解。使用时务必核对前提：重特征值、重奇异值处一阶公式可能失效甚至分叉——$A(t)=\\mathrm{diag}(t,-t)$ 的最大特征值是 $|t|$，在 $t=0$ 处有折点；含 Jordan 块时特征值按 $t^{1/m}$ 的分数幂展开（$m$ 为块阶数）。奇异值恒非负，$\\sigma_i=0$ 且扰动使秩提升时 $\\sigma_i(t)$ 形如 $|ct|$，公式只给出单侧方向导数。",
+    "definitionEn": "This node follows the batch-wide convention: **denominator (gradient) layout for scalar derivatives** — $\\partial f/\\partial A$ has the same shape as $A$, and always $df=\\mathrm{tr}\\big((\\partial f/\\partial A)^{\\top}dA\\big)$. Sources that use a different layout state the same results transposed (scalar formulas especially), so align conventions before plugging in anything.\n\nHow does one differentiate eigenvalues $\\lambda_i(A)$ and singular values $\\sigma_i(A)$ with respect to the entries of $A$? At a **simple** eigenvalue (algebraic multiplicity one) the first-order change merely samples the perturbation along the corresponding eigenvector: for a real symmetric (more generally Hermitian) matrix, $d\\lambda_i=v_i^{\\top}(dA)\\,v_i$, where $v_i$ is a unit eigenvector and $(dA)$ is sandwiched between $v_i^{\\top}$ and $v_i$; a general non-symmetric matrix needs the left eigenvector $w_i$ ($w_i^{\\top}A=\\lambda_i w_i^{\\top}$) and the correction $d\\lambda_i=\\frac{w_i^{\\top}(dA)v_i}{w_i^{\\top}v_i}$. Derivation (symmetric case): differentiate $A(t)v(t)=\\lambda(t)v(t)$, multiply on the left by $v^{\\top}$, use $v^{\\top}A=\\lambda v^{\\top}$ and the normalization $v^{\\top}\\dot v=0$.\n\nSingular values are just as simple: for a **simple positive singular value** $\\sigma_i$ with unit singular vectors $u_i,v_i$, $d\\sigma_i=u_i^{\\top}(dA)\\,v_i$ (**no absolute value** — the function is smooth where $\\sigma_i>0$). A useful global special case is the squared Frobenius norm, $d\\|A\\|_F^2=2\\,\\mathrm{tr}(A^{\\top}dA)$, which needs no SVD at all. Always check the hypotheses: at repeated eigenvalues or singular values the first-order formula may fail or branch — the largest eigenvalue of $A(t)=\\mathrm{diag}(t,-t)$ is $|t|$, with a kink at $t=0$, and perturbations of a Jordan block expand eigenvalues in fractional powers $t^{1/m}$ ($m$ the block size). Singular values are always nonnegative, so when $\\sigma_i=0$ and the perturbation raises the rank, $\\sigma_i(t)$ behaves like $|ct|$ and the formula returns only a one-sided directional derivative.",
+    "formulas": [
+      {
+        "latex": "d\\lambda_i=v_i^{\\top}(dA)\\,v_i,\\qquad \\frac{\\partial\\lambda_i}{\\partial A}=v_i v_i^{\\top}",
+        "note": "实对称单重特征值（Hermitian 把转置换成共轭转置）：$v_i$ 为单位特征向量，$(dA)$ 夹在中间。梯度是秩一对称矩阵，对 $v_i\\to -v_i$ 不变。分母布局自检：$\\mathrm{tr}\\big((v_i v_i^{\\top})^{\\top}dA\\big)=v_i^{\\top}(dA)v_i=d\\lambda_i$。",
+        "noteEn": "Simple eigenvalue of a real symmetric matrix (Hermitian: replace transposes by conjugate transposes): $v_i$ is a unit eigenvector and $(dA)$ sits in the middle. The gradient is rank one and symmetric, and flipping $v_i\\to -v_i$ changes nothing. Denominator-layout check: $\\mathrm{tr}\\big((v_i v_i^{\\top})^{\\top}dA\\big)=v_i^{\\top}(dA)v_i=d\\lambda_i$."
+      },
+      {
+        "latex": "d\\lambda_i=\\frac{w_i^{\\top}(dA)\\,v_i}{w_i^{\\top}v_i},\\qquad \\frac{\\partial\\lambda_i}{\\partial A}=\\frac{w_i v_i^{\\top}}{w_i^{\\top}v_i}",
+        "note": "一般（非对称）矩阵：$v_i$ 是右特征向量（$Av_i=\\lambda_i v_i$），$w_i$ 是左特征向量（$w_i^{\\top}A=\\lambda_i w_i^{\\top}$）。单重性自动保证 $w_i^{\\top}v_i\\neq 0$，且公式对 $v_i$、$w_i$ 各自的伸缩不变。对称情形 $w_i=v_i$，退化为上一条公式。",
+        "noteEn": "General (non-symmetric) matrix: $v_i$ is a right eigenvector ($Av_i=\\lambda_i v_i$) and $w_i$ a left eigenvector ($w_i^{\\top}A=\\lambda_i w_i^{\\top}$). Simplicity guarantees $w_i^{\\top}v_i\\neq 0$, and the formula is invariant under separate rescalings of $v_i$ and $w_i$. In the symmetric case $w_i=v_i$ and it reduces to the previous formula."
+      },
+      {
+        "latex": "d\\sigma_i=u_i^{\\top}(dA)\\,v_i,\\qquad \\frac{\\partial\\sigma_i}{\\partial A}=u_i v_i^{\\top}",
+        "note": "单重正奇异值：$u_i$、$v_i$ 为单位左右奇异向量（$Av_i=\\sigma_i u_i$）。**式子里没有绝对值**，$\\sigma_i>0$ 处函数光滑。梯度秩一但一般非对称；由 $\\sigma_i(A)=\\sigma_i(A^{\\top})$ 可知转置后左右奇异向量互换。",
+        "noteEn": "For a simple positive singular value, $u_i$ and $v_i$ are unit left and right singular vectors ($Av_i=\\sigma_i u_i$). **There is no absolute value in the formula** — the function is smooth where $\\sigma_i>0$. The gradient is rank one but generally non-symmetric; the identity $\\sigma_i(A)=\\sigma_i(A^{\\top})$ interchanges left and right singular vectors under transposition."
+      },
+      {
+        "latex": "d\\|A\\|_F^2=2\\,\\mathrm{tr}(A^{\\top}dA),\\qquad \\frac{\\partial\\|A\\|_F^2}{\\partial A}=2A",
+        "note": "F 范数平方：直接展开 $d\\,\\mathrm{tr}(A^{\\top}A)$ 即可，完全不需要奇异值或奇异向量（它同时等于 $\\sum_i\\sigma_i^2$）。",
+        "noteEn": "The squared Frobenius norm: expand $d\\,\\mathrm{tr}(A^{\\top}A)$ directly; no singular values or vectors are involved (it also equals $\\sum_i\\sigma_i^2$)."
+      },
+      {
+        "latex": "f(A)=g(\\lambda_1,\\ldots,\\lambda_n)\\ \\Longrightarrow\\ \\frac{\\partial f}{\\partial A}=\\sum_{i=1}^{n}\\frac{\\partial g}{\\partial\\lambda_i}\\,v_i v_i^{\\top}=V\\,\\mathrm{diag}(\\nabla_\\lambda g)\\,V^{\\top}",
+        "note": "对称矩阵的谱函数组合规则（$V$ 的列为 $v_i$，是正交矩阵）：把每个 $\\lambda_i$ 的秩一梯度按 $\\partial g/\\partial\\lambda_i$ 加权。例：$g=\\sum_i\\lambda_i^2$ 给出 $2A$（与上一条一致）；$g=\\sum_i\\ln\\lambda_i$（$A$ 正定）给出 $A^{-1}$。适用于 $g$ 关于特征值对称、或谱在考虑范围内不交叉的情形。",
+        "noteEn": "Composition rule for spectral functions of a symmetric matrix (the columns of $V$ are the $v_i$; $V$ is orthogonal): weight the rank-one gradient of each $\\lambda_i$ by $\\partial g/\\partial\\lambda_i$. For example $g=\\sum_i\\lambda_i^2$ gives $2A$ (matching the previous formula), and $g=\\sum_i\\ln\\lambda_i$ for positive definite $A$ gives $A^{-1}$. It applies when $g$ is a symmetric function of the eigenvalues, or when the spectrum stays ordered without crossings."
+      }
+    ],
+    "properties": [
+      "前提是「单重 + 扰动可微」：重特征值处 $\\lambda_i(A)$ 一般不可微甚至分叉（$A(t)=\\mathrm{diag}(t,-t)$ 的最大特征值为 $|t|$；Jordan 块的扰动展开含 $t^{1/m}$）；奇异值恒非负，$\\sigma_i=0$ 且秩提升时 $\\sigma_i(t)$ 形如 $|ct|$，公式只能给单侧方向导数。",
+      "公式本质是方向导数：$\\frac{d}{dt}\\big|_{t=0}\\lambda_i(A+tB)=v_i^{\\top}Bv_i$（对称情形），对 $dA$ 线性；逐元素取 $dA=E_{jk}$ 就能组装出 $\\partial\\lambda_i/\\partial A$ 的每个分量。",
+      "对称情形的梯度 $v_i v_i^{\\top}$ 对称、半正定、秩一、迹为 1（即向 $v_i$ 的正交投影矩阵）；奇异值梯度 $u_i v_i^{\\top}$ 一般非对称，且 $u_i$ 与 $v_i$ 可以独立取反号。",
+      "单个 $\\lambda_i$ 不可微并不代表一切失效：关于特征值的对称函数（$\\det$、$\\mathrm{tr}$、$\\|A\\|_F^2$ 等）仍可对 $A$ 光滑求导，此时应使用谱函数组合规则，而不是硬套单个特征值的公式。"
+    ],
+    "propertiesEn": [
+      "The hypotheses are simple eigenvalue plus differentiable perturbation: at repeated eigenvalues $\\lambda_i(A)$ is generally non-differentiable or branches (the largest eigenvalue of $A(t)=\\mathrm{diag}(t,-t)$ is $|t|$; perturbations of a Jordan block expand in powers $t^{1/m}$). Singular values are always nonnegative, so when $\\sigma_i=0$ and the perturbation raises the rank, $\\sigma_i(t)$ behaves like $|ct|$ and the formula only gives a one-sided directional derivative.",
+      "The formulas are directional derivatives in disguise: $\\frac{d}{dt}\\big|_{t=0}\\lambda_i(A+tB)=v_i^{\\top}Bv_i$ in the symmetric case, linear in $dA$; testing $dA=E_{jk}$ entry by entry assembles every component of $\\partial\\lambda_i/\\partial A$.",
+      "In the symmetric case the gradient $v_i v_i^{\\top}$ is symmetric, positive semidefinite, rank one, with trace 1 (the orthogonal projector onto $v_i$); the singular-value gradient $u_i v_i^{\\top}$ is generally non-symmetric, and $u_i$ and $v_i$ may be flipped in sign independently.",
+      "Nondifferentiability of an individual $\\lambda_i$ does not break everything: symmetric functions of the eigenvalues ($\\det$, $\\mathrm{tr}$, $\\|A\\|_F^2$, and so on) may still be smooth in $A$, and then one should use the spectral composition rule instead of the single-eigenvalue formula."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$、$B=\\begin{pmatrix}1&2\\\\2&-1\\end{pmatrix}$，考虑 $A(t)=A+tB$。用公式求 $t=0$ 处的 $\\frac{d\\lambda_1}{dt}$、$\\frac{d\\lambda_2}{dt}$，并用有限差分（$t=10^{-3}$）验证。",
+        "solution": "$A$ 的特征值为 $\\lambda_1=3$、$\\lambda_2=1$，均为单重，对应单位特征向量 $v_1=(1,1)^{\\top}/\\sqrt2$、$v_2=(1,-1)^{\\top}/\\sqrt2$。由 $d\\lambda_i=v_i^{\\top}Bv_i$：$Bv_1=(3,1)^{\\top}/\\sqrt2$，得 $v_1^{\\top}Bv_1=\\frac{1+3}{2}=2$；$Bv_2=(-1,3)^{\\top}/\\sqrt2$，得 $v_2^{\\top}Bv_2=\\frac{-1-3}{2}=-2$。直接验算：$A(t)=\\begin{pmatrix}2+t&1+2t\\\\1+2t&2-t\\end{pmatrix}$，特征方程化为 $(2-\\lambda)^2=1+4t+5t^2$，即 $\\lambda=2\\pm\\sqrt{1+4t+5t^2}$，故 $\\frac{d\\lambda_1}{dt}\\big|_0=2$、$\\frac{d\\lambda_2}{dt}\\big|_0=-2$，与公式一致。有限差分（$t=10^{-3}$，$\\sqrt{1.004005}\\approx1.0020005$）：$\\frac{\\lambda_1(t)-3}{t}\\approx2.0005$，$\\frac{\\lambda_2(t)-1}{t}\\approx-2.0005$，误差 $O(t)$ 随 $t$ 减小而消失。"
+      },
+      {
+        "problem": "设 $A=\\mathrm{diag}(3,1)$、$B=\\begin{pmatrix}2&1\\\\1&3\\end{pmatrix}$，$A(t)=A+tB$。用奇异值公式求 $t=0$ 处的 $\\frac{d\\sigma_1}{dt}$、$\\frac{d\\sigma_2}{dt}$，并用有限差分（$t=10^{-3}$）验证。",
+        "solution": "$t=0$ 时 $A$ 的奇异值为 $\\sigma_1=3$、$\\sigma_2=1$，都单重且为正，左右奇异向量可取 $u_i=v_i=e_i$。由 $d\\sigma_i=u_i^{\\top}Bv_i$：$\\frac{d\\sigma_1}{dt}=B_{11}=2$，$\\frac{d\\sigma_2}{dt}=B_{22}=3$。直接验算：$M(t)=(A+tB)^{\\top}(A+tB)=\\begin{pmatrix}9+12t+5t^2&4t+5t^2\\\\4t+5t^2&1+6t+10t^2\\end{pmatrix}$，由 $\\mathrm{tr}\\,M=10+18t+15t^2$ 与 $\\det M=9+66t+151t^2$ 逐阶定出特征值 $\\lambda_1=9+12t+7t^2+O(t^3)$、$\\lambda_2=1+6t+8t^2+O(t^3)$，开方得 $\\sigma_1=3+2t+O(t^2)$、$\\sigma_2=1+3t+O(t^2)$，与公式吻合。有限差分：$t=10^{-3}$ 时 $\\frac{\\sigma_1(t)-3}{t}\\approx2.0005$、$\\frac{\\sigma_2(t)-1}{t}\\approx2.9995$。"
+      }
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "symmetric-matrix-diagonalization",
+      "matrix-factorization",
+      "matrix-gradient-identities"
+    ]
+  },
+  {
+    "id": "matrix-function-derivatives",
+    "title": "矩阵函数的导数",
+    "titleEn": "Derivatives of Matrix Functions",
+    "branch": "linear",
+    "level": 5,
+    "summary": "矩阵指数、对数、平方根与逆的求导：一般情形必须用 Fréchet 积分公式，只有 X 与 Ẋ 可交换时才退化为普通乘法。",
+    "summaryEn": "Differentiating the matrix exponential, logarithm, square root and inverse: the general case requires the Frechet integral formula, which collapses to ordinary multiplication only when X and its derivative commute.",
+    "definition": "本节点沿用全批统一约定（标量导数按**分母/梯度布局**），$\\partial f/\\partial X$ 与 $X$ 同型，恒有 $df=\\mathrm{tr}\\big((\\partial f/\\partial X)^{\\top}dX\\big)$；其他布局文献的公式需先对齐约定（标量公式常与本批互为转置）。\n\n矩阵函数 $f(X)$ 的求导比标量情形复杂，根源只有一条：$X$ 与 $\\dot X$（或扰动 $E$）一般**不交换**。对指数函数，最有用的一般公式是 $\\frac{d}{dt}e^{X(t)}=\\int_0^1 e^{sX}\\,\\dot X\\,e^{(1-s)X}\\,ds$——它对任意可微的 $X(t)$ 都成立，不需要任何交换性；只有当 $X$ 与 $\\dot X$ 可交换时，被积函数才与 $s$ 无关，积分退化为 $\\dot Xe^{X}=e^{X}\\dot X$。常见的误写 $de^{X}=e^{X}dX$ 只属于这一特例。这个积分同时也是 $e^{X}$ 的 Fréchet 导数 $L_{\\exp}(X,E)$：它关于 $E$ 线性，是 $e^{X+E}$ 对 $E$ 的最佳线性逼近，方向导数即 $\\frac{d}{dt}\\big|_{0}e^{X+tE}=L_{\\exp}(X,E)$。\n\n逆矩阵沿可逆路径的导数由 $XX^{-1}=I$ 两端求导直接得到：$\\frac{d}{dt}X^{-1}=-X^{-1}\\dot XX^{-1}$，与标量 $(1/x)'=-x'/x^2$ 及一般微分法则一致。对 logm 与 sqrtm，一般情形的 Fréchet 导数仍由 Daleckii-Krein 型积分给出，例如 $d\\log X=\\int_0^1(sX+(1-s)I)^{-1}(dX)(sX+(1-s)I)^{-1}ds$（要求谱落在定义域内）；只有当 $X$ 与 $dX$ 可交换时，才会简化为熟悉的 $d\\log X=X^{-1}dX$ 与 $d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$。判断任何简化能否成立的唯一标准永远是「$X$ 与 $dX$（或 $\\dot X$）是否交换」。",
+    "definitionEn": "This node follows the batch-wide convention: **denominator (gradient) layout for scalar derivatives**, so $\\partial f/\\partial X$ has the same shape as $X$ and always $df=\\mathrm{tr}\\big((\\partial f/\\partial X)^{\\top}dX\\big)$; formulas from sources using a different layout are stated transposed (scalar formulas especially), so align the convention first.\n\nDifferentiating a matrix function $f(X)$ is harder than the scalar case for exactly one reason: $X$ and $\\dot X$ (or a perturbation $E$) generally do **not commute**. For the exponential the general formula is $\\frac{d}{dt}e^{X(t)}=\\int_0^1 e^{sX}\\,\\dot X\\,e^{(1-s)X}\\,ds$, valid for every differentiable $X(t)$ with no commutativity assumption; only when $X$ commutes with $\\dot X$ does the integrand become independent of $s$ and the integral collapse to $\\dot Xe^{X}=e^{X}\\dot X$. The familiar shorthand $de^{X}=e^{X}dX$ is valid only in that special case. The same integral is the Frechet derivative $L_{\\exp}(X,E)$ of the exponential: it is linear in $E$ and is the best linear approximation to $e^{X+E}$, with directional derivative $\\frac{d}{dt}\\big|_{0}e^{X+tE}=L_{\\exp}(X,E)$.\n\nThe derivative of the inverse along an invertible path follows from differentiating $XX^{-1}=I$: $\\frac{d}{dt}X^{-1}=-X^{-1}\\dot XX^{-1}$, consistent with the scalar rule $(1/x)'=-x'/x^2$ and with the general differential rules. For logm and sqrtm, the general Frechet derivative is again given by a Daleckii-Krein type integral, for example $d\\log X=\\int_0^1(sX+(1-s)I)^{-1}(dX)(sX+(1-s)I)^{-1}ds$ (spectrum inside the domain); it simplifies to the familiar $d\\log X=X^{-1}dX$ and $d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$ only when $X$ and $dX$ commute. The only test for whether any simplification is legitimate is always: do $X$ and $dX$ (or $\\dot X$) commute?",
+    "formulas": [
+      {
+        "latex": "\\frac{d}{dt}e^{tA}=A\\,e^{tA}=e^{tA}A,\\qquad \\frac{d^k}{dt^k}e^{tA}=A^k e^{tA}",
+        "note": "单参数线性情形：$tA$ 与 $A$ 永远交换，两式同时成立；$e^{tA}$ 是线性 ODE $Y'=AY$、$Y(0)=I$ 的解，所以这也说明：生成元 $A$ 恰是解在 $t=0$ 处的导数。高阶导数只需把 $A$ 的幂乘在最左（或最右）。",
+        "noteEn": "Single-parameter linear case: $tA$ always commutes with $A$, so both orderings hold; $e^{tA}$ solves the linear ODE $Y'=AY$, $Y(0)=I$, so the generator $A$ is exactly the derivative of the solution at $t=0$. Higher derivatives just multiply more copies of $A$ on the left (or right)."
+      },
+      {
+        "latex": "\\frac{d}{dt}e^{X(t)}=\\int_0^1 e^{sX}\\,\\dot X\\,e^{(1-s)X}\\,ds",
+        "note": "一般公式：对任意可微矩阵 $X(t)$ 成立，**无需交换性**；被积函数在代换 $s\\to1-s$ 下形式不变（$\\int_0^1e^{sX}\\dot Xe^{(1-s)X}ds=\\int_0^1e^{(1-s)X}\\dot Xe^{sX}ds$）。$X$ 与 $\\dot X$ 可交换时化简为 $\\dot Xe^{X}$；不能用 $e^{X}\\dot X$ 顶替一般情形。",
+        "noteEn": "The general formula, valid for every differentiable matrix $X(t)$ with **no commutativity assumption**; the integrand is preserved in form by the substitution $s\\to1-s$ ($\\int_0^1e^{sX}\\dot Xe^{(1-s)X}ds=\\int_0^1e^{(1-s)X}\\dot Xe^{sX}ds$). It collapses to $\\dot Xe^{X}$ when $X$ and $\\dot X$ commute; one must not replace it by $e^{X}\\dot X$ in general."
+      },
+      {
+        "latex": "L_{\\exp}(X,E)=\\int_0^1 e^{sX}E\\,e^{(1-s)X}ds,\\qquad e^{X+E}=e^{X}+L_{\\exp}(X,E)+o(\\|E\\|)",
+        "note": "Fréchet 导数：$L_{\\exp}(X,E)$ 关于 $E$ 线性连续，是 $e^{X}$ 在 $X$ 处的最佳线性逼近，方向导数为 $\\frac{d}{dt}\\big|_{0}e^{X+tE}=L_{\\exp}(X,E)$。可交换时 $L_{\\exp}(X,E)=e^{X}E=Ee^{X}$。",
+        "noteEn": "Frechet derivative: $L_{\\exp}(X,E)$ is linear and continuous in $E$ and is the best linear approximation to $e^{X}$ at $X$, with directional derivative $\\frac{d}{dt}\\big|_{0}e^{X+tE}=L_{\\exp}(X,E)$. When $X$ and $E$ commute, $L_{\\exp}(X,E)=e^{X}E=Ee^{X}$."
+      },
+      {
+        "latex": "X\\dot X=\\dot X X\\ \\Longrightarrow\\ \\frac{d}{dt}e^{X(t)}=\\dot Xe^{X}=e^{X}\\dot X",
+        "note": "可交换特例：涵盖 $X(t)=tA$ 与 $X(t)=f(t)Y$（$f$ 为标量、$Y$ 固定）等常见路径，此时矩阵指数像标量公式一样工作。不满足交换时一律回到积分公式。",
+        "noteEn": "The commuting special case: it covers paths such as $X(t)=tA$ or $X(t)=f(t)Y$ with scalar $f$ and fixed $Y$, where the matrix exponential behaves like the scalar formula. Outside this case, always fall back to the integral formula."
+      },
+      {
+        "latex": "\\frac{d}{dt}X^{-1}=-X^{-1}\\dot X X^{-1}",
+        "note": "可逆路径的求逆导数（逐点恒等式，与微分形式 $d(X^{-1})=-X^{-1}(dX)X^{-1}$ 一致）；配合乘积法则可对整数幂归纳出 $d(X^k)=\\sum_{a+b=k-1}X^a(dX)X^b$。可交换情形另有 $d\\log X=X^{-1}dX$、$d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$。",
+        "noteEn": "Derivative of the inverse along an invertible path (a pointwise identity, matching the differential form $d(X^{-1})=-X^{-1}(dX)X^{-1}$); together with the product rule it gives $d(X^k)=\\sum_{a+b=k-1}X^a(dX)X^b$ for integer powers by induction. In the commuting case one also has $d\\log X=X^{-1}dX$ and $d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$."
+      }
+    ],
+    "properties": [
+      "$e^{tA}$ 满足线性 ODE $Y'=AY$、$Y(0)=I$；$A$ 与 $e^{tA}$ 恒交换（$e^{tA}$ 是 $A$ 的幂级数），因此左右两种写法一致，高阶导数只需累乘 $A$ 的幂。",
+      "交换性是唯一的「隐藏开关」：$X\\dot X=\\dot X X$ 时一切像标量微积分一样工作；否则积分公式中 $e^{sX}$ 与 $e^{(1-s)X}$ 的位置不能动。非交换时 $\\dot Xe^{X}$、$e^{X}\\dot X$ 都与真导数无关（见例题）。",
+      "迹与行列式例外地简单：对任意可微的 $X(t)$ 都有 $\\frac{d}{dt}\\mathrm{tr}\\,e^{X}=\\mathrm{tr}(e^{X}\\dot X)$（迹的循环性让积分坍缩）；与之配套的 Jacobi 公式在 $X$ 可逆时给出 $d\\det X=\\det(X)\\,\\mathrm{tr}(X^{-1}dX)$。",
+      "logm 与 sqrtm 的可微性依赖谱条件：log 要求谱在 $\\mathbb{C}\\setminus(-\\infty,0]$ 内（实对称情形即正定），平方根要求谱避开负实轴 $( -\\infty,0]$；可交换时 $d\\log X=X^{-1}dX$、$d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$，一般情形由 Daleckii-Krein 型积分（谱上的分差或围道积分）给出。"
+    ],
+    "propertiesEn": [
+      "$e^{tA}$ satisfies the linear ODE $Y'=AY$, $Y(0)=I$; $A$ commutes with $e^{tA}$ always (it is a power series in $A$), so both orderings agree and higher derivatives just accumulate powers of $A$.",
+      "Commutativity is the only hidden switch: when $X\\dot X=\\dot X X$ everything works like scalar calculus; otherwise the positions of $e^{sX}$ and $e^{(1-s)X}$ in the integral are immovable. When the matrices do not commute, both $\\dot Xe^{X}$ and $e^{X}\\dot X$ are unrelated to the true derivative (see the example).",
+      "The trace and the determinant are exceptional: for every differentiable $X(t)$, $\\frac{d}{dt}\\mathrm{tr}\\,e^{X}=\\mathrm{tr}(e^{X}\\dot X)$, because cyclicity of the trace collapses the integral; the companion Jacobi formula gives $d\\det X=\\det(X)\\,\\mathrm{tr}(X^{-1}dX)$ whenever $X$ is invertible.",
+      "Differentiability of logm and sqrtm depends on the spectrum: log needs it in $\\mathbb{C}\\setminus(-\\infty,0]$ (positive definite in the real symmetric case) and the square root needs it off the negative real axis; in the commuting case $d\\log X=X^{-1}dX$ and $d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$, while the general case is covered by Daleckii-Krein integrals (divided differences over the spectrum or a contour integral)."
+    ],
+    "examples": [
+      {
+        "problem": "设 $X(t)=\\begin{pmatrix}0&t\\\\1&0\\end{pmatrix}$。在 $t=1$ 处用数值积分与有限差分双重验证 $\\frac{d}{dt}e^{X}=\\int_0^1e^{sX}\\dot Xe^{(1-s)X}ds$，并说明为什么不能写成 $\\dot Xe^{X}$。",
+        "solution": "$t=1$ 时 $X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$、$\\dot X=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$；$X\\dot X=\\begin{pmatrix}0&0\\\\0&1\\end{pmatrix}$ 与 $\\dot X X=\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$ 不相等，所以不允许化简。精确解：$X(t)^2=tI$，把幂级数按奇偶项分组得 $e^{X(t)}=\\cosh\\sqrt t\\,I+\\frac{\\sinh\\sqrt t}{\\sqrt t}X(t)$；在 $t=1$ 处 $e^{X(1)}=\\cosh 1\\,I+\\sinh 1\\,X$，求导（第二项对 $t$ 也要用乘法法则）得 $\\frac{d}{dt}e^{X(t)}\\big|_1=\\frac{\\sinh 1}{2}I+\\frac{e^{-1}}{2}X(1)+\\sinh 1\\,\\dot X=\\begin{pmatrix}\\frac{\\sinh 1}{2}&\\frac{e}{2}\\\\[2pt]\\frac{e^{-1}}{2}&\\frac{\\sinh 1}{2}\\end{pmatrix}\\approx\\begin{pmatrix}0.5876&1.3591\\\\0.1839&0.5876\\end{pmatrix}$。积分侧：$e^{sX}=\\cosh s\\,I+\\sinh s\\,X$，逐项积分（或对每个分量做 Simpson 数值积分，$N=20000$ 时误差约 $10^{-15}$）得 $\\int_0^1e^{sX}\\dot Xe^{(1-s)X}ds=\\begin{pmatrix}\\frac{\\sinh 1}{2}&\\frac e2\\\\[2pt]\\frac{e^{-1}}{2}&\\frac{\\sinh 1}{2}\\end{pmatrix}$，与精确导数完全一致。有限差分：$t=1+10^{-3}$ 时 $\\big(e^{X(t)}-e^{X(1)}\\big)/10^{-3}\\approx\\begin{pmatrix}0.5876&1.3593\\\\0.1839&0.5876\\end{pmatrix}$，在 $O(t)$ 误差内吻合。对照：$\\dot Xe^{X}=\\begin{pmatrix}\\sinh 1&\\cosh 1\\\\0&0\\end{pmatrix}$、$e^{X}\\dot X=\\begin{pmatrix}0&\\cosh 1\\\\0&\\sinh 1\\end{pmatrix}$，都与真导数相差甚远。"
+      },
+      {
+        "problem": "（1）对 $X(t)=\\begin{pmatrix}1&t\\\\0&1\\end{pmatrix}$ 验证 $\\frac{d}{dt}X^{-1}=-X^{-1}\\dot XX^{-1}$；（2）取 $X(t)=(1+t)A$、$A=\\mathrm{diag}(2,3)$（$X$ 与 $\\dot X$ 可交换），验证 $d\\log X=X^{-1}dX$ 与 $d\\sqrt X=\\frac12(\\sqrt X)^{-1}dX$。",
+        "solution": "（1）$X^{-1}=\\begin{pmatrix}1&-t\\\\0&1\\end{pmatrix}$，左边 $\\frac{d}{dt}X^{-1}=\\begin{pmatrix}0&-1\\\\0&0\\end{pmatrix}$；右边 $X^{-1}\\dot X=\\begin{pmatrix}1&-t\\\\0&1\\end{pmatrix}\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$，再右乘 $X^{-1}$ 得 $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$，取负号即 $\\begin{pmatrix}0&-1\\\\0&0\\end{pmatrix}$，对所有 $t$ 精确成立（也可用中心差分验证，误差 $10^{-11}$ 量级）。（2）$\\dot X=A$ 与 $X=(1+t)A$ 显然交换；$X$ 的特征值是 $2(1+t)$、$3(1+t)$，故 $\\log X=\\log(1+t)\\,I+\\log A$、$\\sqrt X=\\sqrt{1+t}\\,\\sqrt A$。于是 $\\frac{d}{dt}\\log X=\\frac{1}{1+t}I$，而 $X^{-1}\\dot X=\\frac{1}{1+t}A^{-1}A=\\frac{1}{1+t}I$，一致；$\\frac{d}{dt}\\sqrt X=\\frac{1}{2\\sqrt{1+t}}\\sqrt A$，而 $\\frac12(\\sqrt X)^{-1}\\dot X=\\frac12\\frac{1}{\\sqrt{1+t}}A^{-1/2}A=\\frac{1}{2\\sqrt{1+t}}A^{1/2}$，也一致。"
+      }
+    ],
+    "links": [
+      "matrix-functions",
+      "matrix-exponential",
+      "matrix-differential-rules",
+      "matrix-powers-polynomials"
+    ]
+  },
+  {
+    "id": "matrix-calculus-chain-rule",
+    "title": "链式法则与反向传播的矩阵公式",
+    "titleEn": "The Chain Rule and Backpropagation in Matrix Form",
+    "branch": "linear",
+    "level": 5,
+    "summary": "以 dL = tr(Z̄ᵀdZ) 为统一起点，给出矩阵乘、转置、求逆、行列式、迹与逐元素函数的反向规则（分母布局），并说明它们与链式法则、广播求和的关系。",
+    "summaryEn": "Starting from dL = tr(Z̄ᵀ dZ), the reverse rules for matrix products, transposes, inverses, determinants, traces and elementwise functions in denominator layout, together with their relation to the chain rule and to broadcasting.",
+    "definition": "本节点沿用全批统一约定（标量导数按**分母/梯度布局**），$\\bar Z=\\partial L/\\partial Z$ 与 $Z$ 同型，恒有 $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$；文献里其他布局的公式需先对齐约定（标量公式常与本批互为转置）。\n\n链式法则的矩阵版本只有一台「发动机」：把 $dL$ 写成 $\\mathrm{tr}(\\bar Z^{\\top}dZ)$，再将 $dZ$ 用 $dX$ 线性表示后回代，凑出 $dL=\\mathrm{tr}(\\bar X^{\\top}dX)$，括号里的 $\\bar X$ 就是 $X$ 的梯度。这套「微分—回代—识别」流程正是反向传播（reverse-mode 自动微分）的数学形式：每层不必显式构造雅可比，只做向量-雅可比积（VJP）。基本规则（分母布局）：$Z=XY$ 时 $\\bar X=\\bar ZY^{\\top}$、$\\bar Y=X^{\\top}\\bar Z$；$Z=X^{\\top}$ 时 $\\bar X=\\bar Z^{\\top}$；$Z=X^{-1}$ 时 $\\bar X=-X^{-\\top}\\bar ZX^{-\\top}=-Z^{\\top}\\bar ZZ^{\\top}$；$z=\\det(X)$ 时 $\\bar X=\\det(X)X^{-\\top}$；$z=\\mathrm{tr}(AX)$ 时 $\\bar X=A^{\\top}$；$z=x^{\\top}Ax$ 时 $\\bar x=(A+A^{\\top})x$；逐元素 $z=\\sigma(x)$ 时 $\\bar x=\\bar z\\odot\\sigma'(x)$。对更复杂的中介量（伪逆、特征值、矩阵分解等）微分规则会更复杂，但「微分—回代—识别」的流程不变。\n\n与标量链式法则的关系：复合 $L\\leftarrow Z\\leftarrow X$ 时，反向模式把局部导数（转置后的雅可比）从输出端往输入端逐层乘回去，等价于 $\\frac{dL}{dx}=\\sum_i\\frac{dL}{dz_i}\\frac{dz_i}{dx}$ 的分层应用；用 vec 记法，若 $J=\\partial\\,\\mathrm{vec}(Z)/\\partial\\,\\mathrm{vec}(X)$（分子布局雅可比），则 $\\mathrm{vec}(\\bar X)=J^{\\top}\\mathrm{vec}(\\bar Z)$。矩阵情形独有的坑是顺序与转置：乘法反向要交换因子位置，广播与加法节点的反向是「按被广播的方向求和」。所有规则都可以用有限差分抽查，建议至少对乘法、求逆、行列式各验一次。",
+    "definitionEn": "This node follows the batch-wide convention: **denominator (gradient) layout for scalar derivatives**, so $\\bar Z=\\partial L/\\partial Z$ has the same shape as $Z$ and always $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$; results from sources using a different layout are stated transposed (scalar formulas especially), so align the convention first.\n\nThe matrix form of the chain rule has a single engine: write $dL$ as $\\mathrm{tr}(\\bar Z^{\\top}dZ)$, expand $dZ$ linearly in $dX$, and read off $dL=\\mathrm{tr}(\\bar X^{\\top}dX)$, whose bracket is the gradient $\\bar X$. This differentiate-substitute-identify pipeline is precisely the mathematical form of backpropagation (reverse-mode automatic differentiation): no layer ever builds a Jacobian explicitly; each one computes a vector-Jacobian product (VJP). The basic rules in denominator layout: for $Z=XY$, $\\bar X=\\bar ZY^{\\top}$ and $\\bar Y=X^{\\top}\\bar Z$; for $Z=X^{\\top}$, $\\bar X=\\bar Z^{\\top}$; for $Z=X^{-1}$, $\\bar X=-X^{-\\top}\\bar ZX^{-\\top}=-Z^{\\top}\\bar ZZ^{\\top}$; for $z=\\det(X)$, $\\bar X=\\det(X)X^{-\\top}$; for $z=\\mathrm{tr}(AX)$, $\\bar X=A^{\\top}$; for $z=x^{\\top}Ax$, $\\bar x=(A+A^{\\top})x$; and elementwise, for $z=\\sigma(x)$, $\\bar x=\\bar z\\odot\\sigma'(x)$. More complicated intermediates (pseudo-inverses, eigenvalues, matrix factorizations) need more complicated differential rules, but the differentiate-substitute-identify pipeline never changes.\n\nThe link to the scalar chain rule: along a composition $L\\leftarrow Z\\leftarrow X$, reverse mode multiplies the local derivative (a transposed Jacobian) back from the output towards the input, which is exactly a layered application of $\\frac{dL}{dx}=\\sum_i\\frac{dL}{dz_i}\\frac{dz_i}{dx}$; in vec notation, if $J=\\partial\\,\\mathrm{vec}(Z)/\\partial\\,\\mathrm{vec}(X)$ is the numerator-layout Jacobian, then $\\mathrm{vec}(\\bar X)=J^{\\top}\\mathrm{vec}(\\bar Z)$. What is genuinely new for matrices is order and transposition: a product must exchange the factor positions on the way back, and broadcasting or addition nodes reverse into a sum over the broadcast dimensions. Every rule can be spot-checked by finite differences; verify at least the product, the inverse and the determinant once.",
+    "formulas": [
+      {
+        "latex": "dL=\\mathrm{tr}(\\bar Z^{\\top}dZ),\\qquad \\text{回代 }dZ\\text{ 后由 }dL=\\mathrm{tr}(\\bar X^{\\top}dX)\\text{ 识别 }\\bar X",
+        "note": "反向传播的出发点：$\\bar Z$ 是上一层传回来的梯度（与 $Z$ 同型）；把 $dZ$ 展开成 $dX$ 的线性式，用迹的循环性 $\\mathrm{tr}(UV)=\\mathrm{tr}(VU)$ 把 $dX$ 归并到一处，其转置即 $\\bar X$。",
+        "noteEn": "The starting point of backpropagation: $\\bar Z$ is the gradient handed back by the previous layer (same shape as $Z$); expand $dZ$ linearly in $dX$ and use cyclicity of the trace, $\\mathrm{tr}(UV)=\\mathrm{tr}(VU)$, to collect all $dX$ in one place; the transpose of what multiplies it is $\\bar X$."
+      },
+      {
+        "latex": "Z=XY:\\ \\bar X=\\bar Z\\,Y^{\\top},\\qquad \\bar Y=X^{\\top}\\bar Z",
+        "note": "乘法反向必须保序：$\\bar X$ 里 $Y^{\\top}$ 在右侧，$\\bar Y$ 里 $X^{\\top}$ 在左侧。自检：把 $dZ=(dX)Y+X(dY)$ 代入 $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$ 即得两式（例题中做了有限差分核对）。",
+        "noteEn": "The reverse of a product must keep the order straight: $Y^{\\top}$ sits on the right in $\\bar X$ and $X^{\\top}$ sits on the left in $\\bar Y$. Self-check: substitute $dZ=(dX)Y+X(dY)$ into $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$ to get both rules (finite differences in the example)."
+      },
+      {
+        "latex": "Z=X^{\\top}:\\ \\bar X=\\bar Z^{\\top};\\qquad Z=X^{-1}:\\ \\bar X=-X^{-\\top}\\bar Z\\,X^{-\\top}=-Z^{\\top}\\bar Z\\,Z^{\\top}",
+        "note": "转置的反向只再翻转一次；求逆的反向来自 $d(X^{-1})=-X^{-1}(dX)X^{-1}$，两个等价写法分别在 $X$ 记号与 $Z$ 记号下使用。核对 $\\bar X$ 时记住分母布局要求 $\\mathrm{tr}(\\bar X^{\\top}dX)$ 与 $dL$ 相等。",
+        "noteEn": "Transposition reverses once more; the inverse rule follows from $d(X^{-1})=-X^{-1}(dX)X^{-1}$, and the two equivalent forms are used in $X$-notation and $Z$-notation respectively. When checking $\\bar X$, remember that denominator layout demands $\\mathrm{tr}(\\bar X^{\\top}dX)=dL$."
+      },
+      {
+        "latex": "z=\\det(X):\\ \\bar X=\\det(X)\\,X^{-\\top};\\qquad z=\\mathrm{tr}(AX):\\ \\bar X=A^{\\top};\\qquad z=x^{\\top}Ax:\\ \\bar x=(A+A^{\\top})x",
+        "note": "三条标量目标的梯度：行列式用 Jacobi 公式 $dz=\\det(X)\\mathrm{tr}(X^{-1}dX)$；迹规则来自 $dz=\\mathrm{tr}(AdX)$；二次型由 $dx^{\\top}Ax+x^{\\top}Adx=x^{\\top}(A+A^{\\top})dx$ 得来，$A$ 不对称时 $(A+A^{\\top})x$ 不能写成 $2Ax$。",
+        "noteEn": "Gradients of three scalar objectives: the determinant rule is Jacobi formula $dz=\\det(X)\\mathrm{tr}(X^{-1}dX)$; the trace rule follows from $dz=\\mathrm{tr}(AdX)$; the quadratic form comes from $dx^{\\top}Ax+x^{\\top}Adx=x^{\\top}(A+A^{\\top})dx$, and when $A$ is not symmetric $(A+A^{\\top})x$ must not be replaced by $2Ax$."
+      },
+      {
+        "latex": "z=\\sigma(x)\\ (\\text{逐元素}):\\ \\bar x=\\bar z\\odot\\sigma'(x)",
+        "note": "逐元素（Hadamard）函数的反向是梯度逐元素相乘：对 $z_i=\\sigma(x_i)$，迹退化成分量求和，$\\partial L/\\partial x_i=\\bar z_i\\sigma'(x_i)$。广播节点同理：前向把低维数组复制到高维，反向就按复制方向求和。",
+        "noteEn": "The reverse of an elementwise (Hadamard) function multiplies gradients componentwise: for $z_i=\\sigma(x_i)$ the trace collapses to a componentwise sum, $\\partial L/\\partial x_i=\\bar z_i\\sigma'(x_i)$. Broadcasting works the same way: the forward pass copies a lower-dimensional array, and the backward pass sums over the copied dimensions."
+      }
+    ],
+    "properties": [
+      "所有规则来自同一台机器：$dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$ 加上迹的循环性 $\\mathrm{tr}(UV)=\\mathrm{tr}(VU)$；除求逆与行列式两条（需要 $X$ 可逆）外，不要求 $X$ 方阵或可逆。",
+      "乘法反向极易写错顺序：$Z=XY$ 必须用 $\\bar X=\\bar ZY^{\\top}$、$\\bar Y=X^{\\top}\\bar Z$，而不是 $Y^{\\top}\\bar Z$ 或 $\\bar ZX^{\\top}$；常见错误来源是把分子布局的公式原样搬来（两种约定的公式互为转置）。出错时用 $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$ 重推，或对一两个分量做有限差分抽查。",
+      "行列式与对数行列式：由 Jacobi 公式可导出 $z=\\log\\det(X)$（$X$ 正定）时 $\\bar X=X^{-\\top}$；这也是高斯分布对数似然中 $\\log\\det$ 项梯度的标准来源。",
+      "广播与求和：加法节点的反向直接传递（梯度原样回传），广播节点的反向则按被广播的维度求和——例如 $z=x+b$ 且 $b$ 是行向量、被复制到每一行，则 $\\bar x=\\bar z$、$\\bar b_j=\\sum_i\\bar z_{ij}$。"
+    ],
+    "propertiesEn": [
+      "Every rule comes from the same machine: $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$ plus cyclicity of the trace, $\\mathrm{tr}(UV)=\\mathrm{tr}(VU)$; apart from the inverse and determinant rules (which need $X$ invertible), $X$ is not required to be square or invertible.",
+      "The reverse of a product is extremely easy to get wrong: for $Z=XY$ one must use $\\bar X=\\bar ZY^{\\top}$ and $\\bar Y=X^{\\top}\\bar Z$, not $Y^{\\top}\\bar Z$ or $\\bar ZX^{\\top}$; a common source of errors is copying a numerator-layout formula verbatim (the two conventions are transposes of each other). When in doubt, re-derive from $dL=\\mathrm{tr}(\\bar Z^{\\top}dZ)$ or finite-difference one or two entries.",
+      "Determinants and log-determinants: Jacobi formula yields $\\bar X=X^{-\\top}$ for $z=\\log\\det(X)$ with positive definite $X$; this is the standard source of the $\\log\\det$ gradient in Gaussian log-likelihoods.",
+      "Broadcasting and summing: addition nodes pass the gradient straight through, while broadcasting nodes reverse into a sum over the broadcast dimensions; for instance if $z=x+b$ with $b$ a row vector replicated along the rows, then $\\bar x=\\bar z$ and $\\bar b_j=\\sum_i\\bar z_{ij}$."
+    ],
+    "examples": [
+      {
+        "problem": "设 $X=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$、$Y=\\begin{pmatrix}1&0\\\\2&1\\end{pmatrix}$，$L=\\frac12\\|XY\\|_F^2$。用反向规则求 $\\bar X$、$\\bar Y$，并对 $(\\bar X)_{11}$、$(\\bar Y)_{21}$ 做有限差分核对。",
+        "solution": "$Z=XY=\\begin{pmatrix}5&2\\\\11&4\\end{pmatrix}$；由 $L=\\frac12\\mathrm{tr}(Z^{\\top}Z)$ 得 $dL=\\mathrm{tr}(Z^{\\top}dZ)$，故 $\\bar Z=Z$。于是 $\\bar X=\\bar ZY^{\\top}=\\begin{pmatrix}5&2\\\\11&4\\end{pmatrix}\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}=\\begin{pmatrix}5&12\\\\11&26\\end{pmatrix}$，$\\bar Y=X^{\\top}\\bar Z=\\begin{pmatrix}1&3\\\\2&4\\end{pmatrix}\\begin{pmatrix}5&2\\\\11&4\\end{pmatrix}=\\begin{pmatrix}38&14\\\\54&20\\end{pmatrix}$。有限差分（$h=10^{-3}$）：扰动 $X_{11}$ 时 $L$ 从 $83$ 变为 $83.0050005$，差分 $\\approx5.0005\\approx(\\bar X)_{11}=5$；扰动 $Y_{21}$ 时 $L$ 变为 $83.05401$，差分 $\\approx54.01\\approx(\\bar Y)_{21}=54$。两组误差均为 $O(h)$。"
+      },
+      {
+        "problem": "对 $X=\\begin{pmatrix}2&1\\\\0&3\\end{pmatrix}$：（1）$z=\\mathrm{tr}(X^{-1})$ 与（2）$z=\\det X$ 分别用规则求 $\\bar X$，并对 $\\bar X_{21}$ 做有限差分；（3）另取 $A=\\begin{pmatrix}1&2\\\\7&5\\end{pmatrix}$、$A_2=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$，对 $z=\\mathrm{tr}(AX)$、$z=x_q^{\\top}A_2x_q$（$x_q=(1,1)^{\\top}$）以及逐元素规则（$t$ 逐元素平方，$x=(3,-2)^{\\top}$、$\\bar z=(2,1)^{\\top}$）各抽查一个分量。",
+        "solution": "（1）取 $Z=X^{-1}$、$\\bar Z=I$，则 $\\bar X=-X^{-\\top}\\bar ZX^{-\\top}=-X^{-\\top}X^{-\\top}=\\begin{pmatrix}-0.25&0\\\\5/36&-1/9\\end{pmatrix}$；有限差分（$h=10^{-3}$，扰动 $X_{21}$）：$\\mathrm{tr}(X'^{-1})=\\frac{5}{6-h}$，差分 $=\\big(\\frac5{5.999}-\\frac56\\big)/10^{-3}\\approx0.13891\\approx5/36=\\bar X_{21}$。（2）$\\bar X=\\det(X)X^{-\\top}=6\\begin{pmatrix}0.5&0\\\\-1/6&1/3\\end{pmatrix}=\\begin{pmatrix}3&0\\\\-1&2\\end{pmatrix}$；扰动 $X_{21}$ 时 $\\det=6-h$，差分 $=-1=\\bar X_{21}$（精确），扰动 $X_{12}$ 的差分 $\\approx0=\\bar X_{12}$。（3）$z=\\mathrm{tr}(AX)$ 的 $\\bar X=A^{\\top}$，扰动 $X_{12}$ 的差分给出 $A_{21}=7$；$x_q^{\\top}A_2x_q$ 的 $\\bar x_q=(A_2+A_2^{\\top})x_q=(4,4)^{\\top}$，取 $x_q=(1,1+h)$ 时 $z=4+4h+h^2$，差分 $=4+h\\to4$；逐元素平方 $\\sigma(t)=t^2$ 给出 $\\sigma'(x)=(2x_1,2x_2)=(6,-4)$，$\\bar x=\\bar z\\odot\\sigma'(x)=(12,-4)$，取 $L=\\bar z^{\\top}\\sigma(x)=2x_1^2+x_2^2=22$，扰动 $x_1$ 得 $L=22.012002$，差分 $\\approx12.002\\approx12$。"
+      }
+    ],
+    "links": [
+      "chain-rule",
+      "matrix-differential-rules",
+      "matrix-gradient-identities",
+      "generalized-inverse"
+    ]
+  }
+]

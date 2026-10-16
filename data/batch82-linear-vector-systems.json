@@ -1,0 +1,719 @@
+[
+  {
+    "id": "linear-combination",
+    "title": "向量组的线性组合与线性表示",
+    "titleEn": "Linear Combinations and Linear Representation",
+    "branch": "linear",
+    "level": 3,
+    "summary": "把若干向量乘上数再相加，就得到它们的线性组合；β 能否由一组向量拼出来，完全等价于对应的线性方程组有没有解。",
+    "summaryEn": "Scaling vectors and adding them yields a linear combination; whether a vector β can be built from α₁,…,α_s is exactly the question of whether a certain linear system is consistent.",
+    "definition": "设 $\\alpha_1,\\dots,\\alpha_s$ 是一组同维数的向量（默认实向量），$k_1,\\dots,k_s$ 为任意实数。把向量「乘系数再相加」得到的向量\n$$k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s$$\n称为这组向量的一个**线性组合**，$k_1,\\dots,k_s$ 称为**组合系数**。特别地，如果某个向量 $\\beta$ 能写成\n$$\\beta=k_1\\alpha_1+\\cdots+k_s\\alpha_s,$$\n就说 **$\\beta$ 可以由 $\\alpha_1,\\dots,\\alpha_s$ 线性表示**（也说 $\\beta$ 是这组向量的线性组合）。\n判断能不能表示不需要任何技巧，直接解方程组：记 $A=(\\alpha_1,\\dots,\\alpha_s)$ 是以这些向量为列的矩阵，则「$\\beta$ 可由 $\\alpha_1,\\dots,\\alpha_s$ 线性表示」等价于「方程组 $A\\boldsymbol{x}=\\beta$ 有解」，而方程组有解又等价于系数矩阵与增广矩阵同秩：**$r(A)=r(A|\\beta)$**。增广矩阵 $(A|\\beta)$ 就是在 $A$ 右边添一列 $\\beta$；行化简后，如果最后一列不出现主元，就有解。\n线性表示是线性代数最基本的一句话：矩阵乘向量 $A\\boldsymbol{x}$ 就是把 $A$ 的列向量按 $\\boldsymbol{x}$ 的分量线性组合；两个向量组等价，就是它们能互相线性表示。线性相关、向量组的秩、基与坐标、方程组解的结构，全都在用「线性组合」这门语言讲话。",
+    "definitionEn": "Let $\\alpha_1,\\dots,\\alpha_s$ be vectors of the same dimension and $k_1,\\dots,k_s$ real numbers. The vector\n$$k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s$$\nis called a **linear combination** of the group, and the numbers $k_1,\\dots,k_s$ are its coefficients. In particular, a vector $\\beta$ is said to be **linearly representable** by $\\alpha_1,\\dots,\\alpha_s$ if\n$$\\beta=k_1\\alpha_1+\\cdots+k_s\\alpha_s$$\nfor some choice of coefficients.\nDeciding representability is nothing but solving a linear system. Let $A=(\\alpha_1,\\dots,\\alpha_s)$ be the matrix whose columns are the given vectors. Then $\\beta$ is representable exactly when $A\\boldsymbol{x}=\\beta$ is consistent, which happens exactly when the coefficient matrix and the augmented matrix have equal rank: **$r(A)=r(A|\\beta)$**. The augmented matrix is $A$ with $\\beta$ appended as an extra column; after row reduction, consistency means this last column carries no pivot.\nLinear representation is the basic grammar of linear algebra: the product $A\\boldsymbol{x}$ is precisely the linear combination of the columns of $A$ with weights given by $\\boldsymbol{x}$, two vector groups are equivalent when each is representable by the other, and linear dependence, rank, bases, coordinates and the structure of linear systems are all phrased in this language.",
+    "formulas": [
+      {
+        "latex": "k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s",
+        "note": "向量组 α₁,…,α_s 的一个线性组合，k₁,…,k_s 为组合系数；系数取不同的值一般会得到不同的组合（当 α₁,…,α_s 线性无关时，不同的系数必给出不同的向量）。",
+        "noteEn": "A linear combination of α₁,…,α_s with coefficients k₁,…,k_s; different coefficients give different combinations in general (if α₁,…,α_s are linearly independent, different coefficients always give different vectors)."
+      },
+      {
+        "latex": "\\beta=k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s",
+        "note": "β 可由该向量组线性表示的定义式：存在（不一定唯一）一组系数把 β 写成线性组合。",
+        "noteEn": "Definition of β being linearly representable: some (not necessarily unique) coefficients express β as a linear combination."
+      },
+      {
+        "latex": "x_1\\alpha_1+x_2\\alpha_2+\\cdots+x_s\\alpha_s=\\beta\\iff r(\\alpha_1,\\dots,\\alpha_s)=r(\\alpha_1,\\dots,\\alpha_s,\\beta)",
+        "note": "能表示 ⟺ 方程组 Ax=β 有解 ⟺ 系数矩阵与增广矩阵同秩；这是判断线性表示的通用方法。",
+        "noteEn": "Representability iff the system Ax=β is consistent iff the coefficient and augmented matrices have equal rank; this is the standard test."
+      },
+      {
+        "latex": "A\\boldsymbol{x}=x_1\\boldsymbol{a}_1+x_2\\boldsymbol{a}_2+\\cdots+x_n\\boldsymbol{a}_n",
+        "note": "矩阵乘向量的含义：Ax 就是把 A 的列向量 a₁,…,a_n 按 x 的分量线性组合。",
+        "noteEn": "The meaning of matrix–vector multiplication: Ax is the linear combination of the columns of A weighted by the entries of x."
+      }
+    ],
+    "properties": [
+      "零向量可由任何向量组线性表示：系数全取 0 即可（系数全为零的表示称为**平凡表示**）；对给定的 β，表示问题的实质是找出可能非零的一组系数。",
+      "向量组中每个向量都可由这组向量自身线性表示：α_j = 0·α₁+⋯+1·α_j+⋯+0·α_s。",
+      "线性表示具有传递性：若 γ 可由 β₁,…,β_t 线性表示，且每个 β_j 都可由 α₁,…,α_s 线性表示，则 γ 也可由 α₁,…,α_s 线性表示。",
+      "若 β 可由 α₁,…,α_s 线性表示，则添上 β 不会改变向量组的秩：r(α₁,…,α_s,β)=r(α₁,…,α_s)，即多余向量不带来新信息。",
+      "两个向量组互相可以线性表示时，称它们**等价**；若一组可由另一组表示，则被表示的那组秩不超过表示它的一组。**秩相等不能单独推出等价**，必须是「一组可由另一组表示 + 两者秩相等」才能断言等价。"
+    ],
+    "propertiesEn": [
+      "The zero vector is representable by any group of vectors: take all coefficients equal to 0 (the trivial representation). For a given β, the real task is to find a possibly nonzero set of coefficients.",
+      "Every vector of a group is representable by that group itself: α_j = 0·α₁+⋯+1·α_j+⋯+0·α_s.",
+      "Representation is transitive: if γ is representable by β₁,…,β_t and every β_j is representable by α₁,…,α_s, then γ is representable by α₁,…,α_s.",
+      "If β is representable by α₁,…,α_s, adjoining β adds no information: r(α₁,…,α_s,β)=r(α₁,…,α_s).",
+      "Two groups are **equivalent** when each is representable by the other; a group representable by another has rank no larger than that group. **Equal ranks alone do not imply equivalence**; one group must be actually representable by the other (then equal rank suffices)."
+    ],
+    "examples": [
+      {
+        "problem": "设 α₁=(1,2,3)ᵀ，α₂=(3,2,1)ᵀ，β=(4,4,4)ᵀ，判断 β 能否由 α₁,α₂ 线性表示；若可以，写出表示式。",
+        "solution": "设 $x\\alpha_1+y\\alpha_2=\\beta$，即方程组\n$$\\begin{cases}x+3y=4,\\\\ 2x+2y=4,\\\\ 3x+y=4.\\end{cases}$$\n对增广矩阵 $(A|\\beta)$ 行化简（第 2 行减第 1 行的 2 倍、第 3 行减第 1 行的 3 倍，再把第 2 行除以 −4）：\n$$(A|\\beta)=\\begin{pmatrix}1&3&4\\\\2&2&4\\\\3&1&4\\end{pmatrix}\\longrightarrow\\begin{pmatrix}1&3&4\\\\0&1&1\\\\0&0&0\\end{pmatrix}.$$\n由此 $y=1$，$x=4-3y=1$。因为 $r(A)=r(A|\\beta)=2$，方程组有解（且唯一），所以 **β=α₁+α₂**。验算：(1+3, 2+2, 3+1)=(4,4,4) ✓。"
+      },
+      {
+        "problem": "判断 β=(1,0,1)ᵀ 能否由 α₁=(1,1,0)ᵀ，α₂=(0,1,1)ᵀ 线性表示。",
+        "solution": "设 $x\\alpha_1+y\\alpha_2=\\beta$，按分量写就是\n$$x=1,\\qquad x+y=0,\\qquad y=1,$$\n前两式给出 $x=1$、$y=-1$，但第三式要求 $y=1$，矛盾，方程组无解。用秩检验：$\\alpha_1,\\alpha_2$ 不成比例，$r(A)=2$；而增广矩阵\n$$(A|\\beta)=\\begin{pmatrix}1&0&1\\\\1&1&0\\\\0&1&1\\end{pmatrix}$$\n的行列式为 $1\\cdot(1\\cdot1-0\\cdot1)+1\\cdot(1\\cdot1-1\\cdot0)=2\\ne0$，故 $r(A|\\beta)=3>r(A)$。于是 **β 不能由 α₁,α₂ 线性表示**。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "向量组",
+      "线性组合",
+      "线性表示"
+    ],
+    "links": [
+      "linear-dependence",
+      "vector-group-rank",
+      "vector-space-basis",
+      "matrix-rank",
+      "nonhomogeneous-solutions"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.5,
+        3.8
+      ],
+      "yRange": [
+        -1.8,
+        2.8
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              2,
+              -1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            2
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2,
+            -1
+          ],
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            1
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "O"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            1
+          ],
+          "label": "β=α₁+α₂"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.1,
+            2.2
+          ],
+          "text": "α₁"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            -1.35
+          ],
+          "text": "α₂"
+        }
+      ],
+      "title": "β 是 α₁、α₂ 的线性组合（β=α₁+α₂）"
+    }
+  },
+  {
+    "id": "linear-dependence",
+    "title": "线性相关与线性无关",
+    "titleEn": "Linear Dependence and Independence",
+    "branch": "linear",
+    "level": 4,
+    "summary": "一组向量里若有人「可有可无」（能由其余向量拼出来），就是线性相关；若每个都必不可少、唯有系数全零才能凑出零向量，就线性无关。",
+    "summaryEn": "A group is linearly dependent when some vector is redundant, expressible by the others; it is linearly independent when every vector is essential, so that only the all-zero coefficients produce the zero vector.",
+    "definition": "设 $\\alpha_1,\\dots,\\alpha_s$ 是一组向量（$s\\ge1$）。如果存在**不全为零**的数 $k_1,\\dots,k_s$，使得\n$$k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s=\\boldsymbol{0},$$\n就称这组向量**线性相关**；如果这样的数不存在，即要让上式成立必须 $k_1=\\cdots=k_s=0$，就称这组向量**线性无关**。「不全为零」四个字才是关键：无论什么向量组，系数全取 0 总能凑出零向量，相关的意思是还存在别的（非平凡的）凑法。\n直观上，线性相关等于「这组向量里有冗余」：$s\\ge2$ 时，$\\alpha_1,\\dots,\\alpha_s$ 线性相关当且仅当其中**至少有一个**向量能由其余向量线性表示——它是搭便车的那一个。线性无关则相反：每个向量都带来别人无法替代的方向，删掉谁都会损失信息。$\\mathbb{R}^2$ 里两个向量共线时相关、不共线时无关；$\\mathbb{R}^3$ 里三个向量共面时相关、不共面时无关。\n判断可以完全交给矩阵：把 $\\alpha_1,\\dots,\\alpha_s$ 按列排成 $A$，则\n$$\\alpha_1,\\dots,\\alpha_s\\ \\text{线性相关}\\iff r(A)<s\\iff A\\boldsymbol{x}=\\boldsymbol{0}\\ \\text{有非零解}.$$\n由此立刻得到一批常用结论：向量个数超过维数（$s>n$，$n$ 维空间）时必相关；含零向量的组必相关；单个向量则「非零无关、零向量相关」。",
+    "definitionEn": "For vectors $\\alpha_1,\\dots,\\alpha_s$ ($s\\ge1$), the group is **linearly dependent** if there exist numbers $k_1,\\dots,k_s$, not all zero, such that\n$$k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s=\\boldsymbol{0};$$\nit is **linearly independent** if no such numbers exist, i.e. the identity forces $k_1=\\cdots=k_s=0$. The phrase 「not all zero」 is essential: taking every coefficient equal to 0 always produces the zero vector, so dependence means there is a non-trivial way as well.\nIntuitively, dependence is redundancy: for $s\\ge2$ the group is dependent exactly when at least one vector can be represented by the remaining ones. An independent group is one in which every vector contributes an irreducible new direction. In $\\mathbb{R}^2$ two vectors are dependent precisely when they are collinear; in $\\mathbb{R}^3$ three vectors are dependent precisely when they are coplanar.\nThe test is again a matrix computation. Arranging the vectors as the columns of $A$, the group is dependent iff $r(A)<s$ iff $A\\boldsymbol{x}=\\boldsymbol{0}$ has a nonzero solution. Consequences: more than $n$ vectors in $\\mathbb{R}^n$ are always dependent; any group containing the zero vector is dependent; a single vector is independent exactly when it is nonzero.",
+    "formulas": [
+      {
+        "latex": "k_1\\alpha_1+k_2\\alpha_2+\\cdots+k_s\\alpha_s=\\boldsymbol{0}",
+        "note": "线性相关的定义式：存在**不全为零**的系数使线性组合等于零向量；「不全为零」这个条件不能丢。",
+        "noteEn": "Definition of dependence: the coefficients producing the zero vector are not all zero; this condition cannot be dropped."
+      },
+      {
+        "latex": "k_1\\alpha_1+\\cdots+k_s\\alpha_s=\\boldsymbol{0}\\ \\Longrightarrow\\ k_1=\\cdots=k_s=0",
+        "note": "线性无关的判定：零组合只能由全零系数产生，没有非平凡的凑零方式。",
+        "noteEn": "Independence test: the only combination giving the zero vector is the trivial one, so $k_1=\\cdots=k_s=0$."
+      },
+      {
+        "latex": "\\alpha_1,\\dots,\\alpha_s\\ \\text{线性相关}\\iff r(A)<s\\iff A\\boldsymbol{x}=\\boldsymbol{0}\\ \\text{有非零解}",
+        "note": "把向量按列排成 A 后的判定准则：秩小于向量个数就相关，等价于齐次方程组有非零解。",
+        "noteEn": "Column-matrix criterion: the group is dependent iff the rank is smaller than the number of vectors, iff the homogeneous system has a nonzero solution."
+      },
+      {
+        "latex": "s>n\\ \\Longrightarrow\\ \\alpha_1,\\dots,\\alpha_s\\ \\text{线性相关}\\quad(\\alpha_i\\in\\mathbb{R}^n)",
+        "note": "个数超过维数必相关；等价地说，ℝⁿ 中线性无关的向量至多含 n 个。",
+        "noteEn": "More vectors than the dimension forces dependence; equivalently, at most n linearly independent vectors fit in ℝⁿ."
+      }
+    ],
+    "properties": [
+      "单个向量：α 线性相关 ⟺ α=0；单个非零向量线性无关。",
+      "含零向量的向量组一定线性相关：给零向量配系数 1、其余配 0，就得到一个非平凡的零组合。",
+      "部分与整体：若某个部分组线性相关，则整个向量组线性相关；反之，整体线性无关时任何部分组都线性无关。**方向不能反**——整体相关推不出部分相关（例如 (1,0)ᵀ,(0,1)ᵀ,(1,1)ᵀ 整体相关，但任意两个都无关）。",
+      "s≥2 时，向量组线性相关 ⟺ 其中**至少有一个**向量可由其余向量线性表示；是「至少一个」，不是「每一个」。线性无关时，任何一个向量都不能由其余向量表示。",
+      "n 维空间中任意 n+1 个向量必线性相关；线性无关组的判定也可以看成：每个向量都在其余向量张成的方向之外。"
+    ],
+    "propertiesEn": [
+      "A single vector: α is dependent iff α=0; a single nonzero vector is linearly independent.",
+      "Any group containing the zero vector is linearly dependent: give 0 the coefficient 1 and all other vectors the coefficient 0, producing a nontrivial zero combination.",
+      "Part versus whole: a dependent sub-group makes the whole group dependent; conversely, every sub-group of an independent group is independent. **The direction cannot be reversed**: a dependent group need not contain a dependent sub-group — e.g. (1,0)ᵀ,(0,1)ᵀ,(1,1)ᵀ is dependent although every pair is independent.",
+      "For s≥2, the group is dependent iff **at least one** vector is representable by the remaining ones — at least one, not every one. In an independent group no vector is representable by the others.",
+      "Any n+1 vectors in an n-dimensional space are linearly dependent; a group is independent precisely when each vector lies outside the span of the others."
+    ],
+    "examples": [
+      {
+        "problem": "判断向量组 α₁=(1,1,1)ᵀ，α₂=(1,2,3)ᵀ，α₃=(1,3,5)ᵀ 是否线性相关；若相关，写出一个线性关系式。",
+        "solution": "设 $k_1\\alpha_1+k_2\\alpha_2+k_3\\alpha_3=\\boldsymbol{0}$，即\n$$\\begin{cases}k_1+k_2+k_3=0,\\\\ k_1+2k_2+3k_3=0,\\\\ k_1+3k_2+5k_3=0.\\end{cases}$$\n第 2 式减第 1 式、第 3 式减第 2 式都得到 $k_2+2k_3=0$，说明方程组有非零解：取 $k_3=1$，则 $k_2=-2$，$k_1=-k_2-k_3=1$。所以向量组**线性相关**，且\n$$\\alpha_1-2\\alpha_2+\\alpha_3=\\boldsymbol{0}.$$\n验算：(1,1,1)−2(1,2,3)+(1,3,5)=(0,0,0) ✓。（等价地，以三向量为列的行列式 $\\begin{vmatrix}1&1&1\\\\1&2&3\\\\1&3&5\\end{vmatrix}=0$。）"
+      },
+      {
+        "problem": "设 α₁=(1,1,1)ᵀ，α₂=(1,2,3)ᵀ，α₃=(1,4,t)ᵀ，讨论 t 取何值时 α₁,α₂,α₃ 线性相关；相关时求 α₃ 由 α₁,α₂ 的表示式。",
+        "solution": "三个向量构成 3 阶方阵 $A=(\\alpha_1,\\alpha_2,\\alpha_3)$，线性相关 ⟺ $\\det A=0$。按第一行展开：\n$$\\det A=\\begin{vmatrix}1&1&1\\\\1&2&4\\\\1&3&t\\end{vmatrix}=(2t-12)-(t-4)+(3-2)=t-7.$$\n所以 **t=7 时三向量线性相关，t≠7 时线性无关**。当 t=7 时 α₃=(1,4,7)ᵀ，设 $\\alpha_3=a\\alpha_1+b\\alpha_2$，由前两个分量得 $a+b=1$、$a+2b=4$，解得 $b=3$、$a=-2$；检验第三个分量：$-2+3\\times3=7$ ✓。因此\n$$\\alpha_3=-2\\alpha_1+3\\alpha_2\\quad(\\text{即}\\ 2\\alpha_1-3\\alpha_2+\\alpha_3=\\boldsymbol{0}).$$\n验算：−2(1,1,1)+3(1,2,3)=(1,4,7) ✓。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "线性相关",
+      "线性无关",
+      "向量组"
+    ],
+    "links": [
+      "linear-combination",
+      "vector-group-rank",
+      "vector-space-basis",
+      "matrix-rank",
+      "eigenvalue-eigenvector"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.6,
+        2.8
+      ],
+      "yRange": [
+        -0.6,
+        4.4
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            2
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2,
+            4
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2,
+            1
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            2
+          ],
+          "label": "α"
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            4
+          ],
+          "label": "β=2α"
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            1
+          ],
+          "label": "γ"
+        }
+      ],
+      "title": "α、β 共线（线性相关）；α、γ 不共线（线性无关）"
+    }
+  },
+  {
+    "id": "vector-group-rank",
+    "title": "向量组的秩与最大无关组",
+    "titleEn": "Rank of a Vector Group and Maximal Independent Subsets",
+    "branch": "linear",
+    "level": 4,
+    "summary": "最大无关组是向量组里「用最少的向量代表整组」的线性无关部分组，它含的向量个数就是秩；最大无关组可以换，但秩永远唯一。",
+    "summaryEn": "A maximal linearly independent subset is the smallest sub-group that still represents the whole group; its size is the rank. Maximal independent subsets may change, the rank never does.",
+    "definition": "设 $T$ 是一个向量组，$T$ 中有一部分向量 $\\alpha_1,\\dots,\\alpha_r$ 满足两条：① $\\alpha_1,\\dots,\\alpha_r$ 线性无关；② $T$ 中任意向量都能由 $\\alpha_1,\\dots,\\alpha_r$ 线性表示。这时称 $\\alpha_1,\\dots,\\alpha_r$ 是 $T$ 的一个**最大线性无关组**（简称**最大无关组**），数 $r$ 称为 $T$ 的**秩**，记作 $r(T)$。条件 ② 的意思是：没有谁被落下，整组都能由这几个向量拼出来。\n也可以换一种等价的说法：最大无关组就是 $T$ 中「加不进新向量」的线性无关部分组——从一个线性无关的部分组出发，只要它还不是最大无关组，就一定还能从 $T$ 中再挑一个向量添进来，并保持线性无关。\n一个不显然但极其重要的事实是：**最大无关组不唯一，秩却唯一**。任意两个最大无关组都线性无关、又能互相表示，于是含向量个数相同。最大无关组与原向量组等价（可以互相线性表示），所以用少量向量就能完整描述整组——「秩」正是向量组信息量的度量。矩阵的秩、行向量组的秩、列向量组的秩是同一件事：**矩阵的秩 = 行向量组的秩 = 列向量组的秩**。",
+    "definitionEn": "Let $T$ be a group of vectors, and suppose a sub-group $\\alpha_1,\\dots,\\alpha_r$ satisfies: (i) $\\alpha_1,\\dots,\\alpha_r$ are linearly independent; (ii) every vector in $T$ is representable by $\\alpha_1,\\dots,\\alpha_r$. Then $\\alpha_1,\\dots,\\alpha_r$ is called a **maximal linearly independent subset** of $T$, and the number $r$ is called the **rank** of $T$, written $r(T)$. Condition (ii) says that no vector is left behind: the whole group can be rebuilt from these few vectors.\nEquivalently, a maximal independent subset is an independent sub-group to which no further vector of $T$ can be added while keeping independence — starting from any independent sub-group, as long as it is not maximal one can always pick another vector of $T$ and stay independent.\nA fact that is not obvious but crucial: **maximal independent subsets are not unique, yet the rank is unique**. Any two maximal independent subsets are independent and representable by each other, hence contain the same number of vectors. A maximal independent subset is equivalent to the whole group (each represents the other), so a few vectors describe the whole group completely — the rank measures the information content of the group. For matrices, rank of the matrix = rank of its row group = rank of its column group: one and the same quantity.",
+    "formulas": [
+      {
+        "latex": "r(\\alpha_1,\\dots,\\alpha_s)=r(A),\\quad A=(\\alpha_1,\\dots,\\alpha_s)",
+        "note": "向量组的秩等于把它们按列排成的矩阵的秩，所以求秩就是做初等行变换。",
+        "noteEn": "The rank of a group equals the rank of the matrix formed by the vectors as columns; compute it by row reduction."
+      },
+      {
+        "latex": "\\{\\alpha_{i_1},\\dots,\\alpha_{i_r}\\}\\ \\text{是最大无关组}\\iff \\text{该部分组线性无关且}\\ r=r(\\alpha_1,\\dots,\\alpha_s)",
+        "note": "判定最大无关组：部分组本身无关，且向量个数正好等于全组的秩。",
+        "noteEn": "Criterion: a sub-group is maximal independent iff it is independent and its size equals the rank of the whole group."
+      },
+      {
+        "latex": "B\\ \\text{可由}\\ A\\ \\text{线性表示}\\implies r(B)\\le r(A)",
+        "note": "被表示的组秩不超过表示它的组——用更少的独立方向拼不出更多的独立方向。",
+        "noteEn": "A group representable by another has rank no larger: fewer independent directions cannot produce more."
+      },
+      {
+        "latex": "r(A)=r(B)\\ \\text{且}\\ B\\ \\text{可由}\\ A\\ \\text{线性表示}\\implies A\\ \\text{与}\\ B\\ \\text{等价}",
+        "note": "「一组能表示另一组」再加上秩相等，就能推出两组等价；单凭秩相等不能断定等价。",
+        "noteEn": "Representability plus equal rank forces equivalence; equal rank alone does not."
+      },
+      {
+        "latex": "r(\\alpha_1,\\dots,\\alpha_s)\\le s,\\qquad r(\\alpha_1,\\dots,\\alpha_s)=s\\iff \\alpha_1,\\dots,\\alpha_s\\ \\text{线性无关}",
+        "note": "秩不超过向量个数；取等号当且仅当这组向量线性无关，相关时秩严格小于个数。",
+        "noteEn": "The rank never exceeds the number of vectors, with equality exactly in the independent case."
+      }
+    ],
+    "properties": [
+      "向量组线性无关 ⟺ r=s（秩等于向量个数）；线性相关 ⟺ r<s。含零向量的向量组秩一定小于向量个数，因为零向量永远多余。",
+      "最大无关组不唯一：同一向量组的任意两个最大无关组含向量个数相同（都等于秩），并且互相等价。",
+      "矩阵的秩 = 行向量组的秩 = 列向量组的秩；所以「向量组的秩」与「矩阵的秩」可以互相翻译使用。",
+      "求最大无关组的方法：把向量按列排成矩阵，做初等行变换化为行最简形；主元所在列对应的**原**列向量就构成一个最大无关组，非主元列可由主元列线性表示（系数可直接从行最简形读出）。",
+      "若向量组的秩为 r，则其中任意 r 个线性无关的向量都构成最大无关组；秩也是这组向量「真正占有的方向数」，不超过所在空间的维数 n。"
+    ],
+    "propertiesEn": [
+      "The group is independent iff r=s (rank equals the number of vectors), and dependent iff r<s. A group containing the zero vector always has rank smaller than its size, since the zero vector is always redundant.",
+      "Maximal independent subsets are not unique: any two of them contain the same number of vectors (the rank) and are mutually equivalent.",
+      "Rank of a matrix = rank of its row group = rank of its column group; the two notions translate freely into each other.",
+      "Algorithm: arrange the vectors as the columns of a matrix and reduce to reduced row echelon form; the original columns at pivot positions form a maximal independent subset, and the other columns are linear combinations of them with coefficients read off from the reduced form.",
+      "If the rank of a group is r, then any r linearly independent vectors from the group form a maximal independent subset. The rank also counts the genuine directions occupied by the group and never exceeds the dimension n of the ambient space."
+    ],
+    "examples": [
+      {
+        "problem": "求向量组 α₁=(1,1,1)ᵀ，α₂=(1,2,3)ᵀ，α₃=(3,4,5)ᵀ 的秩，并写出所有的最大无关组。",
+        "solution": "注意 $\\alpha_3=2\\alpha_1+\\alpha_2$（验算：2(1,1,1)+(1,2,3)=(3,4,5) ✓），说明 α₃ 是多余的，向量组的秩不超过 2；而 α₁,α₂ 不成比例、线性无关，所以\n$$r(\\alpha_1,\\alpha_2,\\alpha_3)=2,$$\n$\\{\\alpha_1,\\alpha_2\\}$ 是一个最大无关组。又因为 α₃ 不是 α₁ 的倍数（也不是 α₂ 的倍数），$\\{\\alpha_1,\\alpha_3\\}$、$\\{\\alpha_2,\\alpha_3\\}$ 也都线性无关，所以**全部最大无关组为 {α₁,α₂}、{α₁,α₃}、{α₂,α₃}**：最大无关组不唯一，但秩 2 唯一。"
+      },
+      {
+        "problem": "设向量组 γ₁=(1,0,1)ᵀ，γ₂=(0,1,1)ᵀ，γ₃=(t,t,2)ᵀ，当 t 为何值时向量组的秩为 2？此时求一个最大无关组，并把其余向量用它线性表示。",
+        "solution": "三个向量构成方阵 $A=(\\gamma_1,\\gamma_2,\\gamma_3)$，秩为 2 ⟺ $\\det A=0$。计算\n$$\\det A=\\begin{vmatrix}1&0&t\\\\0&1&t\\\\1&1&2\\end{vmatrix}=(2-t)-t=2-2t,$$\n故秩为 2 当且仅当 **t=1**（此时 γ₁,γ₂ 不成比例，确实无关，秩正好是 2；t≠1 时三向量线性无关，秩为 3）。当 t=1 时，$\\gamma_3=(1,1,2)=\\gamma_1+\\gamma_2$，所以 $\\{\\gamma_1,\\gamma_2\\}$ 是一个最大无关组，$\\gamma_3=\\gamma_1+\\gamma_2$（$\\{\\gamma_1,\\gamma_3\\}$、$\\{\\gamma_2,\\gamma_3\\}$ 也都是最大无关组）。验算：γ₁+γ₂=(1,0,1)+(0,1,1)=(1,1,2)=γ₃ ✓。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "向量组的秩",
+      "最大无关组"
+    ],
+    "links": [
+      "linear-dependence",
+      "linear-combination",
+      "matrix-rank",
+      "vector-space-basis",
+      "rank-nullity"
+    ]
+  },
+  {
+    "id": "vector-space-basis",
+    "title": "向量空间 ℝⁿ：基、维数与坐标",
+    "titleEn": "Vector Spaces: Bases, Dimension and Coordinates",
+    "branch": "linear",
+    "level": 4,
+    "summary": "向量空间里选一组线性无关的「基准向量」（基），空间中每个向量都能唯一地写成它们的组合，组合系数就是坐标；换基后坐标一般会变，但维数不变。",
+    "summaryEn": "In a vector space one chooses a linearly independent set of reference vectors (a basis); every vector then has a unique expression as a combination of them, whose coefficients are its coordinates. The basis may change, the dimension never does.",
+    "definition": "设 $V$ 是 $\\mathbb{R}^n$ 的一个非空子集。如果 $V$ 对加法与数乘都封闭——$\\alpha,\\beta\\in V$ 时 $\\alpha+\\beta\\in V$，$\\alpha\\in V$ 且 $k\\in\\mathbb{R}$ 时 $k\\alpha\\in V$——就称 $V$ 是 $\\mathbb{R}^n$ 的一个**（实）向量空间**（也叫子空间）。$\\mathbb{R}^n$ 本身、过原点的直线与平面、齐次线性方程组的解集都是典型例子；不含原点的直线或平面不是子空间，因为零向量不在里面。只含零向量的空间 $\\{0\\}$ 规定维数为 0。\n设 $\\varepsilon_1,\\dots,\\varepsilon_r$ 是 $V$ 中的一组向量，如果 ① 它们线性无关；② $V$ 中每个向量都可由它们线性表示，就称 $\\varepsilon_1,\\dots,\\varepsilon_r$ 是 $V$ 的一组**基**；$r$ 称为 $V$ 的**维数**，记作 $\\dim V$。用上一节的话说：基就是 $V$（看作向量组）的最大无关组，维数就是秩。\n一旦选定基，$V$ 中每个向量 $\\alpha$ 都能写成\n$$\\alpha=x_1\\varepsilon_1+x_2\\varepsilon_2+\\cdots+x_r\\varepsilon_r,$$\n而且这组系数**由 $\\alpha$ 和基唯一确定**（基线性无关保证了表示唯一）。$(x_1,\\dots,x_r)^{\\mathrm T}$ 就叫做 $\\alpha$ 在基 $\\varepsilon_1,\\dots,\\varepsilon_r$ 下的**坐标**。例如在 $\\mathbb{R}^n$ 的标准基 $e_1=(1,0,\\dots,0)^{\\mathrm T},\\dots,e_n=(0,\\dots,0,1)^{\\mathrm T}$ 下，任何向量的坐标恰好是它自己的分量；但换一组基，同一个向量的坐标一般会不同。**向量本身与坐标要分清楚**：坐标是向量在某组基这面「镜子」里的像。",
+    "definitionEn": "Let $V$ be a nonempty subset of $\\mathbb{R}^n$. If $V$ is closed under addition and scalar multiplication — $\\alpha,\\beta\\in V$ implies $\\alpha+\\beta\\in V$, and $\\alpha\\in V$, $k\\in\\mathbb{R}$ implies $k\\alpha\\in V$ — then $V$ is called a **(real) vector space** (a subspace) of $\\mathbb{R}^n$. $\\mathbb{R}^n$ itself, lines and planes through the origin, and the solution set of a homogeneous linear system are the standard examples; a line or plane not passing through the origin is not a subspace, since it misses the zero vector. The space $\\{0\\}$ containing only the zero vector is assigned dimension 0.\nLet $\\varepsilon_1,\\dots,\\varepsilon_r$ be vectors in $V$. If (i) they are linearly independent and (ii) every vector of $V$ is representable by them, then they form a **basis** of $V$, and $r$ is called the **dimension** of $V$, written $\\dim V$. In the language of the previous section, a basis is exactly a maximal independent subset of $V$ regarded as a group of vectors, and the dimension is its rank.\nOnce a basis is fixed, every vector $\\alpha\\in V$ can be written as $\\alpha=x_1\\varepsilon_1+\\cdots+x_r\\varepsilon_r$, and the coefficients are **uniquely determined by $\\alpha$ and the basis** (independence forces uniqueness). The tuple $(x_1,\\dots,x_r)^{\\mathrm T}$ is called the **coordinate** of $\\alpha$ in that basis. In the standard basis $e_1,\\dots,e_n$ of $\\mathbb{R}^n$, the coordinates of a vector are simply its own entries; in another basis the same vector generally has different coordinates. **A vector and its coordinates must be distinguished**: coordinates are the image of the vector in the mirror held up by a chosen basis.",
+    "formulas": [
+      {
+        "latex": "\\mathbb{R}^n=\\operatorname{span}\\{e_1,e_2,\\dots,e_n\\},\\qquad \\dim\\mathbb{R}^n=n",
+        "note": "ℝⁿ 的标准基是 e₁,…,e_n：它们线性无关，且每个向量 (x₁,…,x_n)ᵀ 都等于 x₁e₁+⋯+x_ne_n。",
+        "noteEn": "The standard basis of ℝⁿ consists of e₁,…,e_n: independent, and (x₁,…,x_n)ᵀ = x₁e₁+⋯+x_ne_n."
+      },
+      {
+        "latex": "\\alpha=x_1\\varepsilon_1+x_2\\varepsilon_2+\\cdots+x_r\\varepsilon_r",
+        "note": "向量在给定基下的展开式；系数 (x₁,…,x_r)ᵀ 是 α 在该基下的坐标，并且唯一。",
+        "noteEn": "Expansion of a vector in a given basis; the coefficients are the coordinates of α and are unique."
+      },
+      {
+        "latex": "\\dim V=\\dim\\operatorname{span}\\{\\alpha_1,\\dots,\\alpha_s\\}=r(\\alpha_1,\\dots,\\alpha_s)",
+        "note": "由一组向量张成的空间，其维数等于这组向量的秩；它们的任一最大无关组就是该空间的一组基。",
+        "noteEn": "The dimension of a span equals the rank of the spanning vectors; any maximal independent subset of them is a basis."
+      },
+      {
+        "latex": "\\dim V=r\\ \\Longrightarrow\\ V\\ \\text{中任意}\\ r\\ \\text{个线性无关的向量都构成一组基}",
+        "note": "特别地，ℝⁿ 中任意 n 个线性无关的向量都是 ℝⁿ 的基；少于 n 个向量只能张成更小的子空间。",
+        "noteEn": "In particular, any n linearly independent vectors in ℝⁿ form a basis of ℝⁿ; fewer than n vectors span a proper subspace."
+      }
+    ],
+    "properties": [
+      "基不唯一、维数唯一：同一个向量空间可以有无穷多组基，但任意两组基含向量个数相同，都等于 dim V，并且互相等价。",
+      "ℝⁿ 中任意 n 个线性无关的向量都是 ℝⁿ 的一组基；多于 n 个向量必线性相关，不可能成为基。",
+      "给定一组基后，每个向量的坐标唯一；同一个向量在不同基下的坐标一般不同（坐标如何随基变化是换基问题）。",
+      "过原点的直线是一维子空间（基可取直线上任一非零向量），过原点的平面是二维子空间（基可取平面上任意两个不共线的向量）；不含原点的直线、平面不是子空间。",
+      "若 V=span{α₁,…,α_s}，则 α₁,…,α_s 中任一最大无关组都是 V 的基，dim V=r(α₁,…,α_s)；反过来，V 的任何一组基都能张成 V。"
+    ],
+    "propertiesEn": [
+      "Bases are not unique but the dimension is: a vector space has infinitely many bases, yet any two contain the same number of vectors, equal to dim V, and are mutually equivalent.",
+      "Any n linearly independent vectors in ℝⁿ form a basis of ℝⁿ; more than n vectors are always dependent and can never be a basis.",
+      "Relative to a fixed basis every vector has unique coordinates; the same vector generally has different coordinates in different bases (how coordinates change is the change-of-basis problem).",
+      "A line through the origin is a 1-dimensional subspace (take any nonzero vector on it as a basis), and a plane through the origin is 2-dimensional (take any two non-collinear vectors). Lines and planes not through the origin are not subspaces.",
+      "If V=span{α₁,…,α_s}, then any maximal independent subset of α₁,…,α_s is a basis of V and dim V=r(α₁,…,α_s); conversely any basis of V spans V."
+    ],
+    "examples": [
+      {
+        "problem": "验证 {(1,2)ᵀ,(2,5)ᵀ} 是 ℝ² 的一组基，并求 v=(4,9)ᵀ 在这组基下的坐标。",
+        "solution": "两向量不成比例：$\\begin{vmatrix}1&2\\\\2&5\\end{vmatrix}=5-4=1\\ne0$，故线性无关；而 $\\dim\\mathbb{R}^2=2$，ℝ² 中 2 个线性无关的向量自动构成一组基。设 $v=x(1,2)^{\\mathrm T}+y(2,5)^{\\mathrm T}$，即\n$$\\begin{cases}x+2y=4,\\\\ 2x+5y=9,\\end{cases}$$\n解得 $y=1$、$x=2$。验算：2(1,2)+(2,5)=(4,9) ✓。所以 v 在这组基下的**坐标为 (2,1)ᵀ**——注意它与 v 在标准基下的坐标 (4,9)ᵀ 不同，同一个向量换一组基坐标就变了。"
+      },
+      {
+        "problem": "设 V=span{α₁,α₂,α₃}，其中 α₁=(1,1,0)ᵀ，α₂=(0,1,1)ᵀ，α₃=(1,2,1)ᵀ，求 dim V 与 V 的一组基。",
+        "solution": "注意 $\\alpha_3=(1,2,1)^{\\mathrm T}=\\alpha_1+\\alpha_2$（验算：(1,1,0)+(0,1,1)=(1,2,1) ✓），所以 α₃ 可由 α₁,α₂ 线性表示，整组的秩不超过 2；而 α₁,α₂ 不成比例、线性无关，故 $r(\\alpha_1,\\alpha_2,\\alpha_3)=2$，于是\n$$\\dim V=r(\\alpha_1,\\alpha_2,\\alpha_3)=2,$$\n$\\{\\alpha_1,\\alpha_2\\}$ 是 V 的一组基（$\\{\\alpha_1,\\alpha_3\\}$、$\\{\\alpha_2,\\alpha_3\\}$ 也都是）。这正说明：基不唯一，维数唯一。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "向量空间",
+      "基",
+      "维数",
+      "坐标"
+    ],
+    "links": [
+      "vector-group-rank",
+      "linear-dependence",
+      "homogeneous-solutions",
+      "basis-change",
+      "linear-space-general"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.4,
+        3.1
+      ],
+      "yRange": [
+        -0.4,
+        2.1
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            0,
+            1
+          ],
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2,
+            1
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            2,
+            0
+          ],
+          "to": [
+            2,
+            1
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            2,
+            1
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0
+          ],
+          "label": "e₁"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            1
+          ],
+          "label": "e₂"
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            1
+          ],
+          "label": "(2,1)=2e₁+e₂"
+        }
+      ],
+      "title": "ℝ² 的标准基与坐标分解"
+    }
+  },
+  {
+    "id": "homogeneous-solutions",
+    "title": "齐次线性方程组与基础解系",
+    "titleEn": "Homogeneous Linear Systems and Fundamental Systems of Solutions",
+    "branch": "linear",
+    "level": 4,
+    "summary": "齐次方程组 Ax=0 的全部解构成解空间，维数为 n−r(A)；取解空间的一组基作基础解系，通解就是基础解系的任意线性组合。",
+    "summaryEn": "The solutions of a homogeneous system Ax=0 form a subspace of dimension n−r(A); choosing a basis of it (a fundamental system of solutions) turns the general solution into arbitrary linear combinations of that basis.",
+    "definition": "形如 $A\\boldsymbol{x}=\\boldsymbol{0}$（右边常数项全为零）的方程组称为**齐次线性方程组**，其中 $A$ 是 $m\\times n$ 矩阵，$\\boldsymbol{x}\\in\\mathbb{R}^n$。它永远有解：$\\boldsymbol{x}=\\boldsymbol{0}$ 总是解，称为**零解**；如果还有别的解，那些解称为**非零解**。有没有非零解只看秩：**有非零解 ⟺ r(A)<n**（$n$ 是未知数个数）；当 $r(A)=n$ 时只有零解。\n齐次方程组最漂亮的地方是解集的形状。若 $\\boldsymbol{x},\\boldsymbol{y}$ 都是 $A\\boldsymbol{x}=\\boldsymbol{0}$ 的解，则 $\\boldsymbol{x}+\\boldsymbol{y}$ 也是解、$k\\boldsymbol{x}$ 也是解（因为 $A(\\boldsymbol{x}+\\boldsymbol{y})=A\\boldsymbol{x}+A\\boldsymbol{y}=\\boldsymbol{0}$，$A(k\\boldsymbol{x})=kA\\boldsymbol{x}=\\boldsymbol{0}$）。也就是说**解集对加法与数乘封闭**，是 $\\mathbb{R}^n$ 的一个子空间，称为**解空间**，记作 $N(A)$。设 $r(A)=r$，则\n$$\\dim N(A)=n-r.$$\n直观地说：未知数有 $n$ 个，独立的方程只有 $r$ 条，剩下的 $n-r$ 个变量可以自由取值——维数正好是自由度的个数；行化简后，非主元列的个数（自由变量个数）就是这个 $n-r$。\n取解空间 $N(A)$ 的一组基 $\\eta_1,\\dots,\\eta_{n-r}$，称为方程组的一个**基础解系**：它们是 $n-r$ 个线性无关的解，且方程组的每一个解都能由它们线性表示。于是方程组的**通解**为\n$$\\boldsymbol{x}=k_1\\eta_1+\\cdots+k_{n-r}\\eta_{n-r},\\qquad k_1,\\dots,k_{n-r}\\in\\mathbb{R},$$\n其中 $k_i$ 是任意常数。基础解系不唯一（解空间的任何一组基都可以），但它含的向量个数 $n-r$ 是唯一确定的。",
+    "definitionEn": "A system of the form $A\\boldsymbol{x}=\\boldsymbol{0}$ (all constant terms zero) is a **homogeneous linear system**, where $A$ is an $m\\times n$ matrix and $\\boldsymbol{x}\\in\\mathbb{R}^n$. It is always consistent: $\\boldsymbol{x}=\\boldsymbol{0}$, the **zero solution**, always works; any other solution is called a **nonzero solution**. Whether nonzero solutions exist depends only on the rank: **there is a nonzero solution iff $r(A)<n$** ($n$ = number of unknowns); if $r(A)=n$ the zero solution is the only one.\nThe beauty of homogeneous systems lies in the shape of the solution set. If $\\boldsymbol{x},\\boldsymbol{y}$ solve $A\\boldsymbol{x}=\\boldsymbol{0}$, then so do $\\boldsymbol{x}+\\boldsymbol{y}$ and $k\\boldsymbol{x}$, since $A(\\boldsymbol{x}+\\boldsymbol{y})=A\\boldsymbol{x}+A\\boldsymbol{y}=\\boldsymbol{0}$ and $A(k\\boldsymbol{x})=kA\\boldsymbol{x}=\\boldsymbol{0}$. The solution set is thus **closed under addition and scalar multiplication**: a subspace of $\\mathbb{R}^n$, called the **solution space** (or null space) $N(A)$. If $r(A)=r$, then $\\dim N(A)=n-r$. Intuitively: there are $n$ unknowns but only $r$ independent equations, leaving $n-r$ free variables — precisely the number of degrees of freedom, and also the number of non-pivot columns after row reduction.\nChoosing a basis $\\eta_1,\\dots,\\eta_{n-r}$ of $N(A)$ gives a **fundamental system of solutions**: $n-r$ linearly independent solutions in terms of which every solution can be expressed. The **general solution** is then\n$$\\boldsymbol{x}=k_1\\eta_1+\\cdots+k_{n-r}\\eta_{n-r},\\qquad k_1,\\dots,k_{n-r}\\in\\mathbb{R},$$\nwith arbitrary constants $k_i$. A fundamental system is not unique — any basis of the solution space will do — but the number of vectors in it, $n-r$, is uniquely determined.",
+    "formulas": [
+      {
+        "latex": "A\\boldsymbol{x}=\\boldsymbol{0}\\ \\text{有非零解}\\iff r(A)<n",
+        "note": "n 是未知数个数；等价地，方程个数少于未知数个数（m<n）时必有非零解。",
+        "noteEn": "n is the number of unknowns; equivalently, fewer equations than unknowns (m<n) always forces a nonzero solution."
+      },
+      {
+        "latex": "\\dim N(A)=n-r(A)",
+        "note": "解空间（齐次方程组全部解的集合）的维数等于未知数个数减去系数矩阵的秩，即自由变量的个数。",
+        "noteEn": "The dimension of the solution space equals the number of unknowns minus the rank, i.e. the number of free variables."
+      },
+      {
+        "latex": "\\boldsymbol{x}=k_1\\eta_1+k_2\\eta_2+\\cdots+k_{n-r}\\eta_{n-r}",
+        "note": "齐次方程组的通解：基础解系 η₁,…,η_{n−r} 的任意线性组合，k_i 为任意常数。",
+        "noteEn": "General solution of the homogeneous system: arbitrary linear combinations of a fundamental system η₁,…,η_{n−r}, with arbitrary constants k_i."
+      },
+      {
+        "latex": "A\\boldsymbol{x}_1=\\boldsymbol{0},\\ A\\boldsymbol{x}_2=\\boldsymbol{0}\\ \\Longrightarrow\\ A(\\boldsymbol{x}_1+\\boldsymbol{x}_2)=\\boldsymbol{0},\\quad A(k\\boldsymbol{x}_1)=\\boldsymbol{0}",
+        "note": "解集对加法与数乘封闭——这正是它能成为向量空间、能谈「基」的原因。",
+        "noteEn": "The solution set is closed under addition and scalar multiplication — the reason it is a vector space admitting a basis."
+      }
+    ],
+    "properties": [
+      "齐次方程组必有零解；只有零解 ⟺ r(A)=n；有非零解（因而有无穷多解）⟺ r(A)<n。",
+      "方程个数少于未知数个数时（m<n）必有非零解，因为 r(A)≤m<n；此时解空间维数至少为 1。",
+      "解空间是 ℝⁿ 的子空间，dim N(A)=n−r(A)；基础解系恰含 n−r(A) 个向量——个数唯一，但基础解系本身不唯一（解空间的任何一组基都是基础解系）。",
+      "给定基础解系后，通解是其任意线性组合，系数为任意常数；反过来，每个解写成基础解系的组合时系数还是唯一的（因为基础解系线性无关）。",
+      "齐次方程组的任意两个解之差仍是解、任意有限个解之和仍是解、解的任意倍数仍是解；所有这些解合起来正好取遍解空间。"
+    ],
+    "propertiesEn": [
+      "A homogeneous system always has the zero solution; the zero solution is unique iff r(A)=n, and nonzero solutions (hence infinitely many) exist iff r(A)<n.",
+      "If there are fewer equations than unknowns (m<n) then nonzero solutions always exist, since r(A)≤m<n; the solution space then has dimension at least 1.",
+      "The solution space is a subspace of ℝⁿ with dim N(A)=n−r(A); a fundamental system contains exactly n−r(A) vectors — that number is unique although the fundamental system itself is not (any basis of the solution space qualifies).",
+      "Once a fundamental system is fixed, the general solution is an arbitrary linear combination of it; conversely the coefficients expressing a given solution are unique, because a fundamental system is linearly independent.",
+      "Differences, finite sums and scalar multiples of solutions are again solutions; taken together they fill the entire solution space."
+    ],
+    "examples": [
+      {
+        "problem": "求齐次方程组\n$$\\begin{cases}x_1+x_2+x_3+x_4=0,\\\\ x_1+2x_2+3x_3+4x_4=0\\end{cases}$$\n的基础解系与通解。",
+        "solution": "系数矩阵 $A=\\begin{pmatrix}1&1&1&1\\\\1&2&3&4\\end{pmatrix}$，第 2 行减第 1 行得 $\\begin{pmatrix}1&1&1&1\\\\0&1&2&3\\end{pmatrix}$，所以 $r(A)=2$，而 $n=4$，基础解系应含 $n-r=2$ 个向量。\n主变量取 x₁,x₂，自由变量取 x₃,x₄：由 $x_2+2x_3+3x_4=0$ 得 $x_2=-2x_3-3x_4$，代入第一式得 $x_1=-x_2-x_3-x_4=x_3+2x_4$。\n令 (x₃,x₄)=(1,0) 得 $\\eta_1=(1,-2,1,0)^{\\mathrm T}$；令 (x₃,x₄)=(0,1) 得 $\\eta_2=(2,-3,0,1)^{\\mathrm T}$。通解为\n$$\\boldsymbol{x}=k_1\\eta_1+k_2\\eta_2,\\qquad k_1,k_2\\in\\mathbb{R}.$$\n验算：Aη₁=(1−2+1+0, 1−4+3+0)ᵀ=(0,0)ᵀ ✓；Aη₂=(2−3+0+1, 2−6+0+4)ᵀ=(0,0)ᵀ ✓。"
+      },
+      {
+        "problem": "讨论 a 的取值，求齐次方程组\n$$\\begin{cases}x_1+x_2+x_3=0,\\\\ x_1+ax_2+ax_3=0\\end{cases}$$\n的通解。",
+        "solution": "无论 a 取何值，$r(A)\\le2<3=n$，所以必有非零解。两式相减得 $(a-1)(x_2+x_3)=0$。\n当 **a≠1** 时：$x_2+x_3=0$，即 $x_2=-x_3$，代回第一式得 $x_1=0$，于是解空间维数为 $3-2=1$，基础解系取 $\\eta=(0,-1,1)^{\\mathrm T}$，通解 $\\boldsymbol{x}=k(0,-1,1)^{\\mathrm T}$，$k\\in\\mathbb{R}$。\n当 **a=1** 时：两个方程完全相同（都是 $x_1+x_2+x_3=0$），$r(A)=1$，解空间维数为 $3-1=2$，取基础解系 $\\eta_1=(-1,1,0)^{\\mathrm T}$，$\\eta_2=(-1,0,1)^{\\mathrm T}$，通解 $\\boldsymbol{x}=k_1\\eta_1+k_2\\eta_2$，$k_1,k_2\\in\\mathbb{R}$。\n验算：a≠1 时 η=(0,−1,1)ᵀ 满足第一式 0+(−1)+1=0 ✓，第二式 0+a(−1)+a(1)=0 ✓；a=1 时 η₁=(−1,1,0)ᵀ：−1+1+0=0 ✓，η₂=(−1,0,1)ᵀ：−1+0+1=0 ✓。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "齐次线性方程组",
+      "基础解系",
+      "解空间"
+    ],
+    "links": [
+      "nonhomogeneous-solutions",
+      "matrix-rank",
+      "vector-space-basis",
+      "rank-nullity",
+      "elementary-matrices"
+    ]
+  },
+  {
+    "id": "nonhomogeneous-solutions",
+    "title": "非齐次线性方程组解的结构",
+    "titleEn": "Structure of Solutions of Nonhomogeneous Linear Systems",
+    "branch": "linear",
+    "level": 4,
+    "summary": "非齐次方程组 Ax=b 有解的充要条件是 r(A)=r(A|b)；有解时，通解 = 一个特解 + 导出组（齐次方程组）的通解。",
+    "summaryEn": "A nonhomogeneous system Ax=b is consistent exactly when r(A)=r(A|b); when consistent, its general solution is one particular solution plus the general solution of the associated homogeneous system.",
+    "definition": "常数项不全为零（$\\boldsymbol{b}\\ne\\boldsymbol{0}$）的方程组 $A\\boldsymbol{x}=\\boldsymbol{b}$ 称为**非齐次线性方程组**；把右边改成 0 得到的 $A\\boldsymbol{x}=\\boldsymbol{0}$ 称为它的**导出组**（对应齐次方程组）。判别有解没有新公式，还是看两个秩（$n$ 为未知数个数，$(A|\\boldsymbol{b})$ 为增广矩阵）：（1）$r(A)=r(A|\\boldsymbol{b})=n$ 时**唯一解**；（2）$r(A)=r(A|\\boldsymbol{b})<n$ 时**无穷多解**（解集含 $n-r$ 个自由参数）；（3）$r(A)<r(A|\\boldsymbol{b})$ 时**无解**。注意增广矩阵的秩最多比系数矩阵的秩大 1，所以无解时必定 $r(A|\\boldsymbol{b})=r(A)+1$。\n有解时，解集的形状非常规整。设 $\\boldsymbol{x}^*$ 是 $A\\boldsymbol{x}=\\boldsymbol{b}$ 的一个**特解**，$\\eta$ 是导出组 $A\\boldsymbol{x}=\\boldsymbol{0}$ 的任一解，那么\n$$A(\\boldsymbol{x}^*+\\eta)=A\\boldsymbol{x}^*+A\\eta=\\boldsymbol{b}+\\boldsymbol{0}=\\boldsymbol{b},$$\n所以 $\\boldsymbol{x}^*+\\eta$ 还是 $A\\boldsymbol{x}=\\boldsymbol{b}$ 的解；反过来，若 $\\boldsymbol{x}$ 是 $A\\boldsymbol{x}=\\boldsymbol{b}$ 的任一解，则 $A(\\boldsymbol{x}-\\boldsymbol{x}^*)=\\boldsymbol{b}-\\boldsymbol{b}=\\boldsymbol{0}$，即 $\\boldsymbol{x}-\\boldsymbol{x}^*$ 是导出组的解。两边一凑就得到结构定理：$\\boldsymbol{x}=\\boldsymbol{x}^*+\\eta$，其中 $\\eta$ 取遍导出组的全部解。写成通解就是\n$$\\boldsymbol{x}=\\boldsymbol{x}^*+k_1\\eta_1+\\cdots+k_{n-r}\\eta_{n-r},$$\n其中 $\\eta_1,\\dots,\\eta_{n-r}$ 是导出组的基础解系，$k_i$ 为任意常数。\n非齐次方程组的解集不再是向量空间（零向量不是它的解），它的形状是把导出组的解空间沿 $\\boldsymbol{x}^*$ 平移得到的集合 $\\boldsymbol{x}^*+N(A)$，称为仿射子空间。一个常用推论是：**任意两个特解之差必是导出组的解**——所以已知多个特解时，两两相减就能得到导出组的解，进而凑出基础解系。",
+    "definitionEn": "A system $A\\boldsymbol{x}=\\boldsymbol{b}$ with $\\boldsymbol{b}\\ne\\boldsymbol{0}$ is called a **nonhomogeneous linear system**; replacing the right-hand side by 0 gives the **associated homogeneous system** $A\\boldsymbol{x}=\\boldsymbol{0}$. Consistency is tested by ranks, with $n$ the number of unknowns and $(A|\\boldsymbol{b})$ the augmented matrix: (i) $r(A)=r(A|\\boldsymbol{b})=n$ gives a **unique solution**; (ii) $r(A)=r(A|\\boldsymbol{b})<n$ gives **infinitely many solutions** ($n-r$ free parameters); (iii) $r(A)<r(A|\\boldsymbol{b})$ means **no solution**. Appending one column raises the rank by at most 1, so in the inconsistent case necessarily $r(A|\\boldsymbol{b})=r(A)+1$.\nWhen the system is consistent, the solution set has a clean structure. Let $\\boldsymbol{x}^*$ be one **particular solution** and $\\eta$ any solution of the associated homogeneous system. Then $A(\\boldsymbol{x}^*+\\eta)=\\boldsymbol{b}+\\boldsymbol{0}=\\boldsymbol{b}$, so $\\boldsymbol{x}^*+\\eta$ is again a solution; conversely, for any solution $\\boldsymbol{x}$ we have $A(\\boldsymbol{x}-\\boldsymbol{x}^*)=\\boldsymbol{0}$, so $\\boldsymbol{x}-\\boldsymbol{x}^*$ solves the associated homogeneous system. This yields the structure theorem $\\boldsymbol{x}=\\boldsymbol{x}^*+\\eta$, with $\\eta$ running over all homogeneous solutions — the general solution is **one particular solution plus the general solution of the associated homogeneous system**: $\\boldsymbol{x}=\\boldsymbol{x}^*+k_1\\eta_1+\\cdots+k_{n-r}\\eta_{n-r}$, where $\\eta_1,\\dots,\\eta_{n-r}$ form a fundamental system of the associated homogeneous system and the $k_i$ are arbitrary.\nThe solution set itself is no longer a vector space (the zero vector is not a solution), but an affine set $\\boldsymbol{x}^*+N(A)$: the homogeneous solution space translated by $\\boldsymbol{x}^*$. A useful consequence: **the difference of any two particular solutions is a solution of the associated homogeneous system**, so several known particular solutions can be subtracted to build homogeneous solutions and hence a fundamental system.",
+    "formulas": [
+      {
+        "latex": "A\\boldsymbol{x}=\\boldsymbol{b}\\ \\text{有解}\\iff r(A)=r(A|\\boldsymbol{b})",
+        "note": "判别准则：系数矩阵与增广矩阵同秩就有解；无解时增广矩阵的秩恰好大 1。",
+        "noteEn": "Consistency test: the system is solvable iff the coefficient and augmented matrices have equal rank; in the inconsistent case the augmented rank is exactly one larger."
+      },
+      {
+        "latex": "r(A)=r(A|\\boldsymbol{b})=n\\Rightarrow\\text{唯一解};\\quad r(A)=r(A|\\boldsymbol{b})<n\\Rightarrow\\text{无穷多解};\\quad r(A)<r(A|\\boldsymbol{b})\\Rightarrow\\text{无解}",
+        "note": "三种情形（n 为未知数个数）：两秩相等且等于 n 唯一解；两秩相等且小于 n 无穷多解（含 n−r 个自由参数）；两秩不等无解。",
+        "noteEn": "The three cases (n = number of unknowns): equal ranks equal to n give a unique solution; equal ranks below n give infinitely many solutions with n−r free parameters; unequal ranks mean no solution."
+      },
+      {
+        "latex": "\\boldsymbol{x}=\\boldsymbol{x}^*+k_1\\eta_1+\\cdots+k_{n-r}\\eta_{n-r}",
+        "note": "通解 = 一个特解 x* + 导出组的通解；η_i 为导出组的基础解系，k_i 为任意常数。",
+        "noteEn": "General solution = one particular solution plus the general solution of the associated homogeneous system; η_i form a fundamental system, k_i are arbitrary constants."
+      },
+      {
+        "latex": "A\\boldsymbol{x}_1=\\boldsymbol{b},\\ A\\boldsymbol{x}_2=\\boldsymbol{b}\\ \\Longrightarrow\\ A(\\boldsymbol{x}_1-\\boldsymbol{x}_2)=\\boldsymbol{0}",
+        "note": "两个特解之差是对应齐次方程组的解——用多个特解构造齐次解、求通解的关键技巧。",
+        "noteEn": "The difference of two particular solutions solves the associated homogeneous system — the key trick for building homogeneous solutions from known particular solutions."
+      },
+      {
+        "latex": "\\{\\boldsymbol{x}:A\\boldsymbol{x}=\\boldsymbol{b}\\}=\\boldsymbol{x}^*+N(A)",
+        "note": "有解时解集是一次特解加上解空间：把 N(A) 沿 x* 整体平移，称为仿射子空间。",
+        "noteEn": "When consistent, the solution set is a particular solution plus the solution space: the null space N(A) translated by x*, an affine subspace."
+      }
+    ],
+    "properties": [
+      "增广矩阵只比系数矩阵多一列，所以 r(A)≤r(A|b)≤r(A)+1；无解时恰好 r(A|b)=r(A)+1，有解时两秩相等。",
+      "三种情形彼此不相容（记 r=r(A)）：r(A)=r(A|b)=n 唯一解；r(A)=r(A|b)=r<n 无穷多解，解集含 n−r 个自由参数；r(A)<r(A|b) 无解。",
+      "解集不是向量空间（b≠0 时零向量不是解），但形状是仿射子空间 x*+N(A)：一个特解加上导出组的解空间。",
+      "特解与齐次解可以自由组合：特解 + 导出组的任何解仍是解；两个解之差是导出组的解。已知基础解系 η₁,…,η_{n−r} 与一个特解 x*，就掌握了解集的全貌。",
+      "求通解三步：① 行化简增广矩阵，由两秩判断有解性与主元；② 解导出组得基础解系（令自由变量依次取 1 与 0 的标准取法）；③ 找一个特解（常令自由变量全取 0 解出主变量），相加即得通解。"
+    ],
+    "propertiesEn": [
+      "The augmented matrix has only one extra column, so r(A)≤r(A|b)≤r(A)+1; in the inconsistent case r(A|b)=r(A)+1 exactly, while consistency means equal ranks.",
+      "The three cases are mutually exclusive (write r=r(A)): r(A)=r(A|b)=n gives a unique solution; r(A)=r(A|b)=r<n gives infinitely many solutions with n−r free parameters; r(A)<r(A|b) means no solution.",
+      "The solution set is not a vector space (for b≠0 the zero vector is not a solution) but an affine set x*+N(A): one particular solution plus the homogeneous solution space.",
+      "Particular and homogeneous solutions combine freely: a particular solution plus any homogeneous solution is again a solution, and the difference of two solutions is homogeneous. Knowing a fundamental system η₁,…,η_{n−r} and one particular solution x* determines the whole solution set.",
+      "Recipe: (i) row-reduce the augmented matrix and read off consistency and pivots from the two ranks; (ii) solve the associated homogeneous system for a fundamental system (setting free variables to 1 and 0 in turn); (iii) find one particular solution (often by setting all free variables to 0), then add."
+    ],
+    "examples": [
+      {
+        "problem": "求解非齐次方程组\n$$\\begin{cases}x_1+x_2+x_3=1,\\\\ x_1+2x_2+3x_3=3,\\\\ 2x_1+3x_2+4x_3=4.\\end{cases}$$",
+        "solution": "增广矩阵为\n$$(A|\\boldsymbol{b})=\\begin{pmatrix}1&1&1&1\\\\1&2&3&3\\\\2&3&4&4\\end{pmatrix}\\longrightarrow\\begin{pmatrix}1&1&1&1\\\\0&1&2&2\\\\0&0&0&0\\end{pmatrix},$$\n其中第 3 行等于第 1 行加第 2 行（化为零行），$r(A)=r(A|\\boldsymbol{b})=2<3=n$，故有无穷多解，自由参数 1 个。\n由 $x_2+2x_3=2$ 得 $x_2=2-2x_3$，再由第一式得 $x_1=1-x_2-x_3=-1+x_3$。取 x₃=0 得特解 $\\boldsymbol{x}^*=(-1,2,0)^{\\mathrm T}$；导出组同解过程给出基础解系 $\\eta=(1,-2,1)^{\\mathrm T}$。通解为\n$$\\boldsymbol{x}=(-1,2,0)^{\\mathrm T}+k(1,-2,1)^{\\mathrm T},\\qquad k\\in\\mathbb{R}.$$\n验算：特解代入三式分别得 1、3、4 ✓；η 代入左端三式均为 0 ✓。"
+      },
+      {
+        "problem": "设 4 元非齐次线性方程组 Ax=b 满足 r(A)=r(A|b)=2，已知它的三个解\nx₁=(0,1,0,0)ᵀ，x₂=(1,-1,1,0)ᵀ，x₃=(2,-2,0,1)ᵀ，求 Ax=b 的通解。",
+        "solution": "两个解之差是导出组 Ax=0 的解，于是\n$$x_2-x_1=(1,-2,1,0)^{\\mathrm T},\\qquad x_3-x_1=(2,-3,0,1)^{\\mathrm T}$$\n都是齐次解。导出组的解空间维数为 $n-r=4-2=2$，而这两个向量线性无关（它们的第 3、4 个分量分别是 (1,0)、(0,1)，一眼可见无关），所以它们恰好构成导出组的基础解系。\n取特解 x₁，通解为\n$$\\boldsymbol{x}=(0,1,0,0)^{\\mathrm T}+k_1(1,-2,1,0)^{\\mathrm T}+k_2(2,-3,0,1)^{\\mathrm T},\\qquad k_1,k_2\\in\\mathbb{R}.$$\n说明：改用 x₂ 或 x₃ 作特解，写出的公式形式不同，但表示的解集完全相同——这正是「通解 = 特解 + 导出组通解」的含义。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "非齐次线性方程组",
+      "通解",
+      "特解",
+      "基础解系"
+    ],
+    "links": [
+      "homogeneous-solutions",
+      "matrix-rank",
+      "linear-combination",
+      "cramer-rule",
+      "inverse-matrix"
+    ]
+  }
+]

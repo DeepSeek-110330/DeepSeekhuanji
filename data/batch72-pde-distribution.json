@@ -1,0 +1,544 @@
+[
+  {
+    "id": "distribution-theory",
+    "title": "广义函数与分布",
+    "titleEn": "Distributions and Generalized Functions",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "分布是紧支光滑检验函数空间 $\\mathcal{D}(\\Omega)$ 上的连续线性泛函 $\\langle u,\\varphi\\rangle$；它把局部可积函数、测度以及 $\\delta$ 与它的各阶导数收进同一个空间，并使微分在任何对象上都无条件可做。",
+    "summaryEn": "A distribution is a continuous linear functional $\\langle u,\\varphi\\rangle$ on the space $\\mathcal{D}(\\Omega)$ of compactly supported smooth test functions; it gathers locally integrable functions, measures, and $\\delta$ with all its derivatives into one space in which differentiation is always possible.",
+    "definition": "**为什么要扩充函数.** 物理与方程中的许多对象无法用函数表示：点电荷的密度、瞬时冲量、$\\Delta u=f$ 中集中在一点的源。在 $\\mathbb{R}^n$ 上根本不存在函数 $f$ 使 $\\int f\\varphi=\\varphi(0)$ 对一切 $\\varphi$ 成立，所以「$\\delta(x)$ 在 $0$ 处等于无穷大」这类写法不可能成为定义。分布论的对策是**放弃逐点取值**：只规定 $u$ 与检验函数配对的结果 $\\langle u,\\varphi\\rangle$。\n\n**定义.** 设 $\\Omega\\subset\\mathbb{R}^n$ 是开集。**检验函数空间** $\\mathcal{D}(\\Omega)=C_c^\\infty(\\Omega)$ 由 $\\Omega$ 上具紧支集的无穷次可微函数组成，它的拓扑由半范数族\n$$p_{K,m}(\\varphi)=\\sup_{x\\in K}\\ \\sup_{|\\alpha|\\le m}\\bigl|\\partial^\\alpha\\varphi(x)\\bigr|\\qquad(K\\Subset\\Omega,\\ m=0,1,2,\\dots)$$\n描述：$\\varphi_j\\to\\varphi$ 是指存在一个紧集 $K\\Subset\\Omega$ 同时包含所有 $\\operatorname{supp}\\varphi_j$ 与 $\\operatorname{supp}\\varphi$，且在 $K$ 上一切阶导数都一致收敛。$\\mathcal{D}(\\Omega)$ 上的**连续线性泛函** $u:\\mathcal{D}(\\Omega)\\to\\mathbb{C}$ 称为一个**分布**，通常记\n$$\\langle u,\\varphi\\rangle=u(\\varphi),$$\n全体分布记为 $\\mathcal{D}'(\\Omega)$。连续性的含义是：只要 $\\varphi_j\\to\\varphi$ 如上，就有 $\\langle u,\\varphi_j\\rangle\\to\\langle u,\\varphi\\rangle$；等价的实用判据是存在常数 $C$、紧集 $K$ 与整数 $m$，使 $|\\langle u,\\varphi\\rangle|\\le C\\,p_{K,m}(\\varphi)$。\n\n**正则分布：函数即分布.** 每个**局部可积**函数 $f\\in L^1_{\\mathrm{loc}}(\\Omega)$（即对每个紧集 $K\\Subset\\Omega$ 有 $\\int_K|f|<\\infty$）通过\n$$\\langle f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx$$\n定义一个分布。这里必须是 $L^1_{\\mathrm{loc}}$ 而**不是** $L^1$：$f(x)=e^{x}$ 属于 $L^1_{\\mathrm{loc}}(\\mathbb{R})$ 但不属于 $L^1(\\mathbb{R})$，它照样是分布。这个对应是单射：若 $\\int f\\varphi=0$ 对一切 $\\varphi\\in\\mathcal{D}(\\Omega)$，则 $f=0$ a.e.（变分基本引理），所以可以把 $L^1_{\\mathrm{loc}}(\\Omega)$ 直接看作 $\\mathcal{D}'(\\Omega)$ 的子空间。\n\n**$\\delta$ 与收敛.** Dirac 分布由 $\\langle\\delta_a,\\varphi\\rangle=\\varphi(a)$ 定义（简写 $\\delta=\\delta_0$）。它是 Radon 测度，因而是分布，但**不是函数**——否则取 $\\psi_\\varepsilon$ 在 $a$ 附近集中且 $\\psi_\\varepsilon(a)=1$，会得到 $1=\\int f\\psi_\\varepsilon\\to0$ 的矛盾。在分布论中，「$\\delta$ 是函数」这一错误说法要避免；正确的含义永远是与检验函数配对。$\\mathcal{D}'$ 中的收敛按**弱-***意义：$u_k\\to u$ 当且仅当 $\\langle u_k,\\varphi\\rangle\\to\\langle u,\\varphi\\rangle$ 对**每个** $\\varphi\\in\\mathcal{D}(\\Omega)$ 成立。空间层级上 $\\mathcal{D}\\subset\\mathcal{S}\\subset\\mathcal{S}'\\subset\\mathcal{D}'$：检验函数的要求越多，对偶空间越大，缓增分布 $\\mathcal{S}'$ 只是其中可以做傅里叶变换的那一部分。",
+    "definitionEn": "**Why function spaces must be enlarged.** Many objects in physics and in PDE theory are not functions: the density of a point charge, an instantaneous impulse, the source concentrated at a single point in $\\Delta u=f$. On $\\mathbb{R}^n$ there is no function $f$ with $\\int f\\varphi=\\varphi(0)$ for all $\\varphi$, so a formula such as \"$\\delta(x)$ equals infinity at $0$\" can never serve as a definition. Distribution theory instead **gives up pointwise values**: it only prescribes the pairing $\\langle u,\\varphi\\rangle$ of $u$ with test functions.\n\n**Definition.** Let $\\Omega\\subset\\mathbb{R}^n$ be open. The **space of test functions** $\\mathcal{D}(\\Omega)=C_c^\\infty(\\Omega)$ consists of the infinitely differentiable functions on $\\Omega$ with compact support; its topology is described by the family of seminorms\n$$p_{K,m}(\\varphi)=\\sup_{x\\in K}\\ \\sup_{|\\alpha|\\le m}\\bigl|\\partial^\\alpha\\varphi(x)\\bigr|\\qquad(K\\Subset\\Omega,\\ m=0,1,2,\\dots),$$\nwhere $\\varphi_j\\to\\varphi$ means that a single compact set $K\\Subset\\Omega$ contains all the supports $\\operatorname{supp}\\varphi_j$ together with $\\operatorname{supp}\\varphi$, and that all derivatives converge uniformly on $K$. A **continuous linear functional** $u:\\mathcal{D}(\\Omega)\\to\\mathbb{C}$ is called a **distribution**, written\n$$\\langle u,\\varphi\\rangle=u(\\varphi),$$\nand the space of all distributions is denoted $\\mathcal{D}'(\\Omega)$. Continuity means $\\varphi_j\\to\\varphi\\Rightarrow\\langle u,\\varphi_j\\rangle\\to\\langle u,\\varphi\\rangle$; an equivalent practical criterion is $|\\langle u,\\varphi\\rangle|\\le C\\,p_{K,m}(\\varphi)$ for some constant $C$, compact set $K$ and integer $m$.\n\n**Regular distributions: functions are distributions.** Every **locally integrable** function $f\\in L^1_{\\mathrm{loc}}(\\Omega)$ (that is, $\\int_K|f|<\\infty$ for every compact $K\\Subset\\Omega$) defines a distribution through\n$$\\langle f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx.$$\nThe hypothesis is $L^1_{\\mathrm{loc}}$, **not** $L^1$: the function $f(x)=e^{x}$ lies in $L^1_{\\mathrm{loc}}(\\mathbb{R})$ but not in $L^1(\\mathbb{R})$, and it still defines a distribution. The correspondence is injective — if $\\int f\\varphi=0$ for all $\\varphi\\in\\mathcal{D}(\\Omega)$ then $f=0$ almost everywhere (the fundamental lemma of the calculus of variations) — so $L^1_{\\mathrm{loc}}(\\Omega)$ may be regarded as a subspace of $\\mathcal{D}'(\\Omega)$.\n\n**$\\delta$ and convergence.** The Dirac distribution is defined by $\\langle\\delta_a,\\varphi\\rangle=\\varphi(a)$ (abbreviated $\\delta=\\delta_0$). It is a Radon measure, hence a distribution, but it is **not a function**: otherwise, choosing $\\psi_\\varepsilon$ concentrated near $a$ with $\\psi_\\varepsilon(a)=1$, one would get the contradiction $1=\\int f\\psi_\\varepsilon\\to0$. Statements such as \"$\\delta$ is a function\" must be avoided; the correct meaning is always a pairing with test functions. Convergence in $\\mathcal{D}'$ is **weak-\\*** convergence: $u_k\\to u$ if and only if $\\langle u_k,\\varphi\\rangle\\to\\langle u,\\varphi\\rangle$ for **every** $\\varphi\\in\\mathcal{D}(\\Omega)$. As for the hierarchy of spaces, $\\mathcal{D}\\subset\\mathcal{S}\\subset\\mathcal{S}'\\subset\\mathcal{D}'$: the more one demands of test functions, the larger the dual space, and the tempered distributions $\\mathcal{S}'$ are precisely the part on which the Fourier transform is available.",
+    "formulas": [
+      {
+        "latex": "\\langle u,\\varphi\\rangle,\\qquad u\\in\\mathcal{D}'(\\Omega),\\ \\varphi\\in\\mathcal{D}(\\Omega)=C_c^{\\infty}(\\Omega)",
+        "note": "分布不写出「在 $x$ 处取什么值」，只写出它作用于检验函数 $\\varphi$ 的结果；检验函数是紧支集光滑函数。",
+        "noteEn": "A distribution has no pointwise values; it is described only by its pairing with a test function, and test functions are compactly supported smooth functions."
+      },
+      {
+        "latex": "\\langle f,\\varphi\\rangle=\\int_\\Omega f(x)\\varphi(x)\\,dx,\\qquad f\\in L^{1}_{\\mathrm{loc}}(\\Omega)",
+        "note": "正则分布：能这样表示分布的函数恰好是**局部可积**函数。条件是 $L^1_{\\mathrm{loc}}$ 而**不是** $L^1$，也不是 $L^\\infty$（例如 $e^{x}\\in L^1_{\\mathrm{loc}}(\\mathbb{R})\\setminus L^1(\\mathbb{R})$）。",
+        "noteEn": "Regular distributions: the functions that arise this way are exactly the locally integrable ones. The hypothesis is $L^1_{\\mathrm{loc}}$, not $L^1$ and not $L^\\infty$ (for instance $e^{x}\\in L^1_{\\mathrm{loc}}(\\mathbb{R})\\setminus L^1(\\mathbb{R})$)."
+      },
+      {
+        "latex": "\\langle\\delta_a,\\varphi\\rangle=\\varphi(a),\\qquad \\langle\\delta,\\varphi\\rangle=\\varphi(0)",
+        "note": "Dirac 分布（$\\delta$ 测度）的全部定义。它既是测度也是分布，但**不是函数**。",
+        "noteEn": "The complete definition of the Dirac distribution (the $\\delta$ measure). It is a measure and hence a distribution, but it is **not a function**."
+      },
+      {
+        "latex": "p_{K,m}(\\varphi)=\\sup_{x\\in K}\\ \\sup_{|\\alpha|\\le m}\\bigl|\\partial^{\\alpha}\\varphi(x)\\bigr|",
+        "note": "检验函数拓扑的半范数族（$K\\Subset\\Omega$，$m=0,1,2,\\dots$）；分布连续性的判据是 $|\\langle u,\\varphi\\rangle|\\le C\\,p_{K,m}(\\varphi)$。",
+        "noteEn": "The seminorms defining the topology of $\\mathcal{D}(\\Omega)$ ($K\\Subset\\Omega$, $m=0,1,2,\\dots$); continuity of a distribution is equivalent to $|\\langle u,\\varphi\\rangle|\\le C\\,p_{K,m}(\\varphi)$."
+      },
+      {
+        "latex": "u_k\\to u\\ \\text{ in }\\ \\mathcal{D}'(\\Omega)\\iff\\langle u_k,\\varphi\\rangle\\to\\langle u,\\varphi\\rangle\\quad\\forall\\varphi\\in\\mathcal{D}(\\Omega)",
+        "note": "分布中的收敛是**弱-***收敛：只要求配对值收敛，这比任何范数收敛都弱。",
+        "noteEn": "Convergence in $\\mathcal{D}'$ is **weak-\\*** convergence: only the pairings are required to converge, which is weaker than convergence in any norm."
+      }
+    ],
+    "properties": [
+      "正则嵌入 $L^1_{\\mathrm{loc}}(\\Omega)\\hookrightarrow\\mathcal{D}'(\\Omega)$ 是单射：若 $\\int f\\varphi=0$ 对一切 $\\varphi\\in\\mathcal{D}$，则 $f=0$ a.e.；所以局部可积函数可以放心看成分布，而 $L^1$、$L^\\infty$、连续函数都只是它的特殊情形。",
+      "$\\delta_a$ **不是函数**：不存在 $f\\in L^1_{\\mathrm{loc}}$ 使 $\\langle f,\\varphi\\rangle=\\varphi(a)$。「$\\delta(x)=+\\infty$、$\\int\\delta=1$」只是直觉记号，不是定义。",
+      "收敛是弱-* 收敛：$\\langle u_k,\\varphi\\rangle\\to\\langle u,\\varphi\\rangle$（一切 $\\varphi\\in\\mathcal{D}$）即 $u_k\\to u$；反之若一列分布的配对值对每个 $\\varphi$ 都收敛，则极限自动是分布（$\\mathcal{D}'$ 弱-* 序列完备）。",
+      "分布的**乘法一般没有定义**（$\\delta\\cdot\\delta$ 无意义），但分布与 $C^\\infty$ 函数的乘积总有定义：$\\langle fu,\\varphi\\rangle=\\langle u,f\\varphi\\rangle$，并满足 Leibniz 公式。",
+      "嵌套关系 $\\mathcal{D}\\subset\\mathcal{S}\\subset\\mathcal{S}'\\subset\\mathcal{D}'$（检验函数要求越多，对偶空间越大）；每个分布局部是**有限阶**的：$|\\langle u,\\varphi\\rangle|\\le C p_{K,m}(\\varphi)$，$\\delta$ 是 $0$ 阶（它是测度），$\\delta'$ 是 $1$ 阶。"
+    ],
+    "propertiesEn": [
+      "The regular embedding $L^1_{\\mathrm{loc}}(\\Omega)\\hookrightarrow\\mathcal{D}'(\\Omega)$ is injective: $\\int f\\varphi=0$ for all $\\varphi\\in\\mathcal{D}$ forces $f=0$ a.e. Thus locally integrable functions may safely be regarded as distributions; $L^1$, $L^\\infty$ and continuity are only special cases of the hypothesis.",
+      "$\\delta_a$ is **not a function**: there is no $f\\in L^1_{\\mathrm{loc}}$ with $\\langle f,\\varphi\\rangle=\\varphi(a)$. The slogan \"$\\delta(x)=+\\infty$ with $\\int\\delta=1$\" is intuition, not a definition.",
+      "Convergence is weak-*: $\\langle u_k,\\varphi\\rangle\\to\\langle u,\\varphi\\rangle$ for every $\\varphi\\in\\mathcal{D}$ means $u_k\\to u$; conversely, if the pairings of a sequence of distributions converge for every $\\varphi$, the limit is again a distribution ($\\mathcal{D}'$ is weak-* sequentially complete).",
+      "Multiplication of distributions is **in general undefined** ($\\delta\\cdot\\delta$ makes no sense), but a distribution can always be multiplied by a $C^\\infty$ function: $\\langle fu,\\varphi\\rangle=\\langle u,f\\varphi\\rangle$, and the Leibniz rule holds.",
+      "The nesting $\\mathcal{D}\\subset\\mathcal{S}\\subset\\mathcal{S}'\\subset\\mathcal{D}'$ holds (more demanding test functions give a larger dual), and every distribution is locally of **finite order**: $|\\langle u,\\varphi\\rangle|\\le C p_{K,m}(\\varphi)$; $\\delta$ has order $0$ (it is a measure) while $\\delta'$ has order $1$."
+    ],
+    "expression": {
+      "text": "u ∈ 𝒟′(Ω)，⟨u, φ⟩ = u(φ)，其中 φ ∈ 𝒟(Ω) = C_c^∞(Ω)；特别地 ⟨δ_a, φ⟩ = φ(a)",
+      "symbol": "⟨u, φ⟩",
+      "note": "分布 = 检验函数空间上的连续线性泛函；「局部可积函数、测度、δ 及其导数」都是分布。",
+      "noteEn": "A distribution is a continuous linear functional on the test-function space; locally integrable functions, measures, and $\\delta$ with its derivatives are all distributions."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-(x/eps)**2)/(eps*sqrt(PI))",
+          "params": {
+            "eps": 1
+          },
+          "color": "#4cc9f0",
+          "label": "ε = 1：δ_ε(x)"
+        },
+        {
+          "expr": "exp(-(x/eps)**2)/(eps*sqrt(PI))",
+          "params": {
+            "eps": 0.5
+          },
+          "color": "#ffd166",
+          "label": "ε = 0.5：δ_ε(x)"
+        },
+        {
+          "expr": "exp(-(x/eps)**2)/(eps*sqrt(PI))",
+          "params": {
+            "eps": 0.25
+          },
+          "color": "#ff6b9d",
+          "label": "ε = 0.25：越来越集中"
+        }
+      ],
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        0,
+        2.4
+      ],
+      "title": "近似恒等核 δ_ε(x) = e^{−(x/ε)²}/(ε√π)：ε 越小峰值越高、越窄，但 ∫δ_ε = 1 不变；ε→0 时 δ_ε → δ（在 𝒟′ 中）"
+    },
+    "examples": [
+      {
+        "problem": "证明 $\\delta_a$ 不是正则分布，即不存在 $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$ 使 $\\langle f,\\varphi\\rangle=\\varphi(a)$ 对一切 $\\varphi\\in\\mathcal{D}(\\mathbb{R}^n)$ 成立。",
+        "solution": "反证。取定 $\\psi\\in C_c^\\infty(\\mathbb{R}^n)$，$\\psi(0)=1$，$\\operatorname{supp}\\psi\\subset B(0,1)$，令 $\\psi_\\varepsilon(x)=\\psi\\bigl((x-a)/\\varepsilon\\bigr)$，则 $\\psi_\\varepsilon\\in\\mathcal{D}$ 且 $\\psi_\\varepsilon(a)=1$。若 $\\delta_a$ 由 $f\\in L^1_{\\mathrm{loc}}$ 给出，就有\n$$1=\\langle f,\\psi_\\varepsilon\\rangle=\\int_{\\mathbb{R}^n}f(x)\\psi_\\varepsilon(x)\\,dx,$$\n于是\n$$1\\le\\|\\psi\\|_\\infty\\int_{B(a,\\varepsilon)}|f(x)|\\,dx\\longrightarrow 0\\qquad(\\varepsilon\\to0^+),$$\n因为 $f$ 局部可积时 $\\int_{B(a,\\varepsilon)}|f|\\to0$。矛盾，故 $\\delta_a$ 不是函数。"
+      },
+      {
+        "problem": "取高斯核 $\\rho(x)=\\pi^{-n/2}e^{-|x|^2}$，$\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$。证明 $\\rho_\\varepsilon\\to\\delta$ 于 $\\mathcal{D}'(\\mathbb{R}^n)$，并解释为什么这并不说明「$\\delta$ 是函数」。",
+        "solution": "对任意 $\\varphi\\in\\mathcal{D}(\\mathbb{R}^n)$，作换元 $x=\\varepsilon y$：\n$$\\langle\\rho_\\varepsilon,\\varphi\\rangle=\\int_{\\mathbb{R}^n}\\varepsilon^{-n}\\rho\\Bigl(\\frac{x}{\\varepsilon}\\Bigr)\\varphi(x)\\,dx=\\int_{\\mathbb{R}^n}\\rho(y)\\varphi(\\varepsilon y)\\,dy.$$\n由 $|\\varphi(\\varepsilon y)-\\varphi(0)|\\le C\\varepsilon|y|$（中值定理）与 $\\int\\rho=1$，得\n$$\\bigl|\\langle\\rho_\\varepsilon,\\varphi\\rangle-\\varphi(0)\\bigr|\\le C\\varepsilon\\int_{\\mathbb{R}^n}\\rho(y)|y|\\,dy\\to0,$$\n故 $\\rho_\\varepsilon\\to\\delta$。**但收敛只在 $\\mathcal{D}'$ 中成立**：$\\rho_\\varepsilon$ 的 $L^1$ 范数恒为 $1$ 而峰值 $\\varepsilon^{-n}\\pi^{-n/2}\\to\\infty$，它们在任何函数空间中都不收敛到一个函数，极限 $\\delta$ 不是函数。这也正是「用光滑函数逼近分布」的标准工具（磨光）。"
+      }
+    ],
+    "tags": [
+      "分布",
+      "检验函数",
+      "Dirac δ",
+      "弱-*收敛",
+      "局部可积",
+      "泛函分析"
+    ],
+    "links": [
+      "dual-space",
+      "schwartz-space",
+      "distribution-derivative",
+      "weak-convergence",
+      "lp-spaces",
+      "lebesgue-integral"
+    ]
+  },
+  {
+    "id": "distribution-derivative",
+    "title": "分布的导数与乘法",
+    "titleEn": "Differentiation of Distributions",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "分布的导数由 $\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle$ 定义，负号是定义的核心；于是每个分布都有任意阶导数，$H'=\\delta$、$|x|'=\\operatorname{sgn}x$、$(\\operatorname{sgn})'=2\\delta$。",
+    "summaryEn": "The derivative of a distribution is defined by $\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle$, where the sign is part of the definition; hence every distribution has derivatives of all orders, with $H'=\\delta$, $|x|'=\\operatorname{sgn}x$ and $(\\operatorname{sgn})'=2\\delta$.",
+    "definition": "**定义.** 设 $u\\in\\mathcal{D}'(\\Omega)$。对多重指标 $\\alpha$，**分布导数** $\\partial^\\alpha u$ 由\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle,\\qquad\\varphi\\in\\mathcal{D}(\\Omega)$$\n定义。右端关于 $\\varphi$ 是连续线性的（$\\varphi\\mapsto\\partial^\\alpha\\varphi$ 是 $\\mathcal{D}(\\Omega)$ 到自身的连续线性映射），所以它确实又是一个分布。**这个负号是定义的一部分**：高阶情形符号为 $(-1)^{|\\alpha|}$（一阶为 $-$，二阶为 $+$，三阶为 $-$），它来自分部积分 $\\int u\\,\\partial\\varphi=-\\int(\\partial u)\\varphi$，其中检验函数使边界项消失。\n\n**最大的便利：微分永远可做.** 于是**每个分布都有任意阶导数**，不需要 $u$ 有任何光滑性甚至可微性：$L^1_{\\mathrm{loc}}$ 函数、测度、$\\delta$ 都可以任意求导，且 $\\partial^\\alpha:\\mathcal{D}'\\to\\mathcal{D}'$ 在此拓扑下连续、满足 $\\partial^\\alpha\\partial^\\beta=\\partial^{\\alpha+\\beta}$。反过来，光滑性可以「数」出来：若分布 $u$ 的所有一阶偏导数 $\\partial_j u$ 都是连续函数，则 $u$ 几乎处处等于某个 $C^1(\\Omega)$ 函数，且其经典导数正是这些 $\\partial_j u$。这是后续正则性理论的起点。\n\n**例.$\\,$** Heaviside 函数 $H(x)=\\mathbf{1}_{(0,\\infty)}(x)$ 的导数是 $\\delta$：\n$$\\langle H',\\varphi\\rangle=-\\int_0^\\infty\\varphi'(x)\\,dx=\\varphi(0)=\\langle\\delta,\\varphi\\rangle .$$\n同样地 $|x|'=\\operatorname{sgn}x$，而 $(\\operatorname{sgn})'=2\\delta$：**系数 $2$ 不能丢**，因为 $\\operatorname{sgn}$ 在 $0$ 处的跳跃高度是 $2$（$L^1_{\\mathrm{loc}}$ 函数在别处可导并不影响这套记号，分布导数常常不再是函数，$\\delta$ 就是由此产生的新对象）。\n\n**乘法与链式法则.** 两个一般分布的乘积没有定义：$\\delta\\cdot\\delta$ 无意义（靠形式积分或取极限都造不出来）。但分布与**光滑**函数的乘积总有定义，只需规定\n$$\\langle fu,\\varphi\\rangle=\\langle u,f\\varphi\\rangle\\qquad(f\\in C^\\infty(\\Omega)),$$\n此时 Leibniz 公式 $\\partial^\\alpha(fu)=\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}\\partial^{\\beta}f\\,\\partial^{\\alpha-\\beta}u$ 成立。**链式法则**对分布不能随意使用（$u^2$ 或 $F(u)$ 本身可能无定义），它成立的标准条件是「复合有意义」：若 $u$ 局部绝对连续（$u'\\in L^1_{\\mathrm{loc}}$）而 $F\\in C^1(\\mathbb{R})$，则 $(F\\circ u)'=F'(u)\\cdot u'$，两端都是 $L^1_{\\mathrm{loc}}$ 函数；若 $u\\in C^\\infty(\\Omega)$，这就是经典链式法则。对 $u=\\delta$ 之类的奇异分布，$F(u)$ 没有定义，链式法则无从谈起。",
+    "definitionEn": "**Definition.** Let $u\\in\\mathcal{D}'(\\Omega)$. For a multi-index $\\alpha$ the **distributional derivative** $\\partial^\\alpha u$ is defined by\n$$\\langle\\partial^\\alpha u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^\\alpha\\varphi\\rangle,\\qquad\\varphi\\in\\mathcal{D}(\\Omega).$$\nThe right-hand side is continuous and linear in $\\varphi$ (the map $\\varphi\\mapsto\\partial^\\alpha\\varphi$ is a continuous linear map of $\\mathcal{D}(\\Omega)$ into itself), so it is again a distribution. **The sign is part of the definition**: for higher orders it is $(-1)^{|\\alpha|}$ ($-$ at first order, $+$ at second, $-$ at third), coming from integration by parts $\\int u\\,\\partial\\varphi=-\\int(\\partial u)\\varphi$ in which the test function kills the boundary terms.\n\n**The great convenience: differentiation is always possible.** Every distribution therefore has derivatives of all orders, with no smoothness or even differentiability assumed of $u$: locally integrable functions, measures and $\\delta$ can all be differentiated freely, and $\\partial^\\alpha:\\mathcal{D}'\\to\\mathcal{D}'$ is continuous in this topology with $\\partial^\\alpha\\partial^\\beta=\\partial^{\\alpha+\\beta}$. Conversely, smoothness can be *counted*: if all first partial derivatives $\\partial_j u$ of a distribution are continuous functions, then $u$ agrees almost everywhere with a $C^1(\\Omega)$ function whose classical derivatives are these $\\partial_j u$. This is the starting point of regularity theory.\n\n**Example.** The Heaviside function $H(x)=\\mathbf{1}_{(0,\\infty)}(x)$ has derivative $\\delta$:\n$$\\langle H',\\varphi\\rangle=-\\int_0^\\infty\\varphi'(x)\\,dx=\\varphi(0)=\\langle\\delta,\\varphi\\rangle .$$\nIn the same way $|x|'=\\operatorname{sgn}x$ and $(\\operatorname{sgn})'=2\\delta$: **the coefficient $2$ must not be dropped**, because the jump of $\\operatorname{sgn}$ at $0$ has height $2$. Derivatives of locally integrable functions need not be functions again, and $\\delta$ is exactly the new object produced in this way.\n\n**Products and the chain rule.** The product of two general distributions is undefined: $\\delta\\cdot\\delta$ makes no sense. But a distribution can always be multiplied by a **smooth** function, simply by setting\n$$\\langle fu,\\varphi\\rangle=\\langle u,f\\varphi\\rangle\\qquad(f\\in C^\\infty(\\Omega)),$$\nand then the Leibniz rule $\\partial^\\alpha(fu)=\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}\\partial^{\\beta}f\\,\\partial^{\\alpha-\\beta}u$ holds. The **chain rule** cannot be used for distributions at will (expressions such as $F(u)$ may be undefined); it holds precisely when the composition makes sense: if $u$ is locally absolutely continuous ($u'\\in L^1_{\\mathrm{loc}}$) and $F\\in C^1(\\mathbb{R})$, then $(F\\circ u)'=F'(u)\\cdot u'$, both sides being locally integrable functions; if $u\\in C^\\infty(\\Omega)$ this is the classical chain rule. For a singular distribution such as $\\delta$ there is no $F(\\delta)$, so there is no chain rule.",
+    "formulas": [
+      {
+        "latex": "\\langle\\partial^{\\alpha}u,\\varphi\\rangle=(-1)^{|\\alpha|}\\langle u,\\partial^{\\alpha}\\varphi\\rangle,\\qquad\\varphi\\in\\mathcal{D}(\\Omega)",
+        "note": "分布导数的定义。符号 $(-1)^{|\\alpha|}$ **不能漏、不能改成 $+$**：它是定义的核心，来自分部积分。",
+        "noteEn": "The definition of the distributional derivative. The factor $(-1)^{|\\alpha|}$ may not be dropped or turned into $+$: it is the heart of the definition and comes from integration by parts."
+      },
+      {
+        "latex": "\\langle H',\\varphi\\rangle=-\\int_0^{\\infty}\\varphi'(x)\\,dx=\\varphi(0)=\\langle\\delta,\\varphi\\rangle\\quad\\Longrightarrow\\quad H'=\\delta",
+        "note": "Heaviside 阶梯 $H=\\mathbf{1}_{(0,\\infty)}$ 的导数是 $\\delta$：这是分布导数最经典的例子。",
+        "noteEn": "The derivative of the Heaviside step $H=\\mathbf{1}_{(0,\\infty)}$ is $\\delta$: the classic example of a distributional derivative."
+      },
+      {
+        "latex": "|x|'=\\operatorname{sgn}x,\\qquad \\bigl(\\operatorname{sgn}\\bigr)'=2\\delta,\\qquad \\bigl(\\operatorname{sgn}\\bigr)''=2\\delta'",
+        "note": "$|x|$ 与 $\\operatorname{sgn}$ 的分布导数；注意 $(\\operatorname{sgn})'=2\\delta$ 中的**系数 $2$**（$0$ 处跳跃高度为 $2$，不是 $1$）。",
+        "noteEn": "Distributional derivatives of $|x|$ and $\\operatorname{sgn}$; note the **coefficient $2$** in $(\\operatorname{sgn})'=2\\delta$ (the jump at $0$ has height $2$, not $1$)."
+      },
+      {
+        "latex": "\\langle fu,\\varphi\\rangle=\\langle u,f\\varphi\\rangle,\\qquad \\partial^{\\alpha}(fu)=\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}\\partial^{\\beta}f\\,\\partial^{\\alpha-\\beta}u\\qquad(f\\in C^{\\infty}(\\Omega))",
+        "note": "分布与光滑函数相乘总有定义，且 Leibniz 公式成立；两个一般分布相乘（$\\delta\\cdot\\delta$）没有定义。",
+        "noteEn": "A distribution may always be multiplied by a smooth function, and the Leibniz rule holds; the product of two general distributions such as $\\delta\\cdot\\delta$ is undefined."
+      },
+      {
+        "latex": "(F\\circ u)'=F'(u)\\,u'\\qquad\\bigl(u\\in AC_{\\mathrm{loc}},\\ F\\in C^{1}(\\mathbb{R})\\bigr)",
+        "note": "链式法则在分布意义下成立的条件：复合 $F\\circ u$ 本身要有意义（$u$ 是局部绝对连续函数）。$u$ 为一般分布时 $F\\circ u$ 无定义。",
+        "noteEn": "The chain rule in the distributional setting holds when the composition $F\\circ u$ itself is defined (i.e. $u$ is locally absolutely continuous); for a general distribution $F\\circ u$ is undefined."
+      }
+    ],
+    "properties": [
+      "**每个分布都有任意阶导数**，求导与线性运算交换且 $\\partial^\\alpha\\partial^\\beta=\\partial^{\\alpha+\\beta}$；分布导数可能不再是函数（$H$ 的导数是 $\\delta$），也可能「更粗糙」（$\\delta'$ 的阶比 $\\delta$ 高一阶）。",
+      "分段光滑函数的导数 = 各段经典导数 + 间断点处的跳跃项：若 $f$ 在 $x_0$ 处有跳跃 $j=f(x_0^+)-f(x_0^-)$，则 $f'$ 比经典导数多出 $j\\,\\delta_{x_0}$。$H'=\\delta$、$(\\operatorname{sgn})'=2\\delta$ 都是这一条的特例。",
+      "乘法一般不定义（$\\delta\\cdot\\delta$、$\\delta\\cdot H$ 都无意义），但与 $f\\in C^\\infty$ 的乘积有定义且满足 Leibniz 公式；由此 $f\\delta=f(0)\\delta$，特别地 $x\\delta=0$、$x\\delta'=-\\delta$。",
+      "若 $\\partial_j u=0$（$j=1,\\dots,n$）在连通区域 $\\Omega$ 上成立，则 $u$ 是常数（即 a.e. 等于某个常数）；若所有一阶偏导数都是连续函数，则 $u$（修改于零测集后）属于 $C^1(\\Omega)$。",
+      "与弱导数的关系：若 $u\\in L^1_{\\mathrm{loc}}$ 的分布导数 $\\partial^\\alpha u$ 恰好又是 $L^1_{\\mathrm{loc}}$ 函数，则它就是 $u$ 的弱导数；分布导数始终存在，弱导数却可能不存在（$H$ 就没有弱导数）。"
+    ],
+    "propertiesEn": [
+      "**Every distribution has derivatives of all orders**, differentiation commutes with linear operations and $\\partial^\\alpha\\partial^\\beta=\\partial^{\\alpha+\\beta}$; a distributional derivative need not be a function (the derivative of $H$ is $\\delta$) and may be rougher than the original ($\\delta'$ has one order more than $\\delta$).",
+      "For piecewise smooth functions the derivative equals the classical derivative plus jump terms: if $f$ jumps at $x_0$ by $j=f(x_0^+)-f(x_0^-)$, then $f'$ contains the extra term $j\\,\\delta_{x_0}$. The identities $H'=\\delta$ and $(\\operatorname{sgn})'=2\\delta$ are special cases.",
+      "Products are in general undefined ($\\delta\\cdot\\delta$ and $\\delta\\cdot H$ make no sense), but the product with $f\\in C^\\infty$ is defined and satisfies the Leibniz rule; consequently $f\\delta=f(0)\\delta$, and in particular $x\\delta=0$, $x\\delta'=-\\delta$.",
+      "If $\\partial_j u=0$ for $j=1,\\dots,n$ on a connected open set $\\Omega$, then $u$ is a constant (equal a.e. to a constant); if all first partial derivatives are continuous functions then $u$, after modification on a null set, is a $C^1(\\Omega)$ function.",
+      "Relation to weak derivatives: if the distributional derivative $\\partial^\\alpha u$ of $u\\in L^1_{\\mathrm{loc}}$ happens to be a locally integrable function, it is the weak derivative of $u$. Distributional derivatives always exist, weak derivatives need not ($H$ has none)."
+    ],
+    "expression": {
+      "text": "⟨∂^α u, φ⟩ = (−1)^|α| ⟨u, ∂^α φ⟩；H′ = δ，|x|′ = sgn x，(sgn)′ = 2δ",
+      "symbol": "⟨u′, φ⟩ = −⟨u, φ′⟩",
+      "note": "求导定义中带负号；对一切检验函数成立。sgn 的跳跃高度为 2，故系数是 2。",
+      "noteEn": "The definition carries the minus sign and holds for every test function; the jump of sgn has height 2, hence the coefficient 2."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.5*(1+sign(x))",
+          "color": "#4cc9f0",
+          "label": "H(x)：0.5(1+sgn x)"
+        },
+        {
+          "expr": "0.5*(1+tanh(6*x))",
+          "color": "#06d6a0",
+          "label": "斜坡近似：0.5(1+tanh 6x)"
+        },
+        {
+          "expr": "3*(1-tanh(6*x)*tanh(6*x))",
+          "color": "#ff6b9d",
+          "label": "斜坡的导数：3(1−tanh²6x) → δ"
+        }
+      ],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -0.25,
+        3.3
+      ],
+      "title": "Heaviside 阶梯 H 与它的「导数」：斜坡 0.5(1+tanh kx) 的导数 3(1−tanh²6x) 峰值 3、宽度 ∼1/6，k→∞ 时趋于 δ"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x)=|x|$ 的分布导数，再求 $g(x)=\\operatorname{sgn}x$ 的分布导数。",
+        "solution": "对任意 $\\varphi\\in\\mathcal{D}(\\mathbb{R})$，由定义与分部积分（$\\varphi$ 紧支，边界项消失）：\n$$\\langle|x|',\\varphi\\rangle=-\\int_{-\\infty}^{\\infty}|x|\\varphi'(x)\\,dx=-\\Bigl[\\int_{-\\infty}^{0}(-x)\\varphi'\\,dx+\\int_{0}^{\\infty}x\\varphi'\\,dx\\Bigr].$$\n两段分别分部积分：$\\int_{-\\infty}^{0}(-x)\\varphi'=\\int_{-\\infty}^{0}\\varphi$，$\\int_{0}^{\\infty}x\\varphi'=-\\int_{0}^{\\infty}\\varphi$。代入得\n$$\\langle|x|',\\varphi\\rangle=-\\int_{-\\infty}^{0}\\varphi+\\int_{0}^{\\infty}\\varphi=\\int_{-\\infty}^{\\infty}\\operatorname{sgn}(x)\\varphi(x)\\,dx,$$\n即 $|x|'=\\operatorname{sgn}x$。\n\n再对 $\\operatorname{sgn}$ 求导：\n$$\\langle(\\operatorname{sgn})',\\varphi\\rangle=-\\int_{-\\infty}^{\\infty}\\operatorname{sgn}(x)\\varphi'(x)\\,dx=-\\Bigl[\\int_{0}^{\\infty}\\varphi'-\\int_{-\\infty}^{0}\\varphi'\\Bigr]=-\\bigl[-\\varphi(0)-\\varphi(0)\\bigr]=2\\varphi(0).$$\n故 $(\\operatorname{sgn})'=2\\delta$，**系数 $2$ 来自跳跃高度 $2$**，再求一次导得 $(\\operatorname{sgn})''=2\\delta'$。"
+      },
+      {
+        "problem": "计算 $\\langle\\delta',\\varphi\\rangle$；并验证 $x\\delta=0$ 与 $x\\delta'=-\\delta$。",
+        "solution": "由定义 $\\langle\\delta',\\varphi\\rangle=-\\langle\\delta,\\varphi'\\rangle=-\\varphi'(0)$，即 $\\delta'$ 是「取负的一阶导数在 $0$ 的值」这一泛函。\n\n对 $x\\delta$：$\\langle x\\delta,\\varphi\\rangle=\\langle\\delta,x\\varphi\\rangle=(x\\varphi)(0)=0$，故 $x\\delta=0$。\n\n再用 Leibniz 公式 $(x\\delta)'=x'\\delta+x\\delta'=\\delta+x\\delta'$；另一方面直接计算\n$$\\langle(x\\delta)',\\varphi\\rangle=-\\langle x\\delta,\\varphi'\\rangle=-(x\\varphi')(0)=0,$$\n所以 $\\delta+x\\delta'=0$，即 $x\\delta'=-\\delta$。这两个恒等式说明：分布的乘法与求导可以像函数一样机械地进行，但结论只在与检验函数配对时才成立。"
+      }
+    ],
+    "tags": [
+      "分布导数",
+      "Heaviside 函数",
+      "Dirac δ",
+      "Leibniz 公式",
+      "链式法则"
+    ],
+    "links": [
+      "distribution-theory",
+      "weak-derivative-sobolev",
+      "absolutely-continuous",
+      "bounded-variation",
+      "fundamental-solution",
+      "distribution-convolution-fourier"
+    ]
+  },
+  {
+    "id": "distribution-convolution-fourier",
+    "title": "分布的卷积与傅里叶变换",
+    "titleEn": "Convolution and Fourier Transform of Distributions",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "分布与检验函数的卷积 $(u*\\varphi)(x)=\\langle u,\\varphi(x-\\cdot)\\rangle$ 是光滑函数（磨光），而缓增分布的傅里叶变换由 $\\langle\\hat u,\\varphi\\rangle=\\langle u,\\hat\\varphi\\rangle$ 定义，使 $\\mathcal{S}'\\to\\mathcal{S}'$ 成为同构，并有 $\\hat\\delta=1$、$\\hat1=\\delta$。",
+    "summaryEn": "The convolution of a distribution with a test function, $(u*\\varphi)(x)=\\langle u,\\varphi(x-\\cdot)\\rangle$, is a smooth function (mollification), while the Fourier transform of a tempered distribution is defined by $\\langle\\hat u,\\varphi\\rangle=\\langle u,\\hat\\varphi\\rangle$, making $\\mathcal{S}'\\to\\mathcal{S}'$ an isomorphism with $\\hat\\delta=1$ and $\\hat1=\\delta$.",
+    "definition": "**分布与检验函数的卷积.** 设 $u\\in\\mathcal{D}'(\\mathbb{R}^n)$、$\\varphi\\in\\mathcal{D}(\\mathbb{R}^n)$，定义\n$$(u*\\varphi)(x)=\\langle u,\\ \\varphi(x-\\cdot)\\rangle=\\bigl\\langle u_y,\\ \\varphi(x-y)\\bigr\\rangle .$$\n$u$ 作用在平移后的检验函数上，得到的是 $x$ 的函数，而且它是**光滑函数**：$u*\\varphi\\in C^\\infty(\\mathbb{R}^n)$，并且\n$$\\partial^\\alpha(u*\\varphi)=(\\partial^\\alpha u)*\\varphi=u*(\\partial^\\alpha\\varphi),$$\n**导数永远落在光滑的那一边**。这就是把分布「磨光」的基本机制；$u$ 紧支时还有 $u*\\varphi$ 紧支且 $\\operatorname{supp}(u*\\varphi)\\subset\\operatorname{supp}u+\\operatorname{supp}\\varphi$（Minkowski 和）。\n\n**什么时候卷积有定义.** 两个**一般**分布的卷积不一定有定义：需要至少一方具紧支集（或两者落在合适的空间里）才能配对，$1*1$ 这类表达式发散、没有意义。但 $\\delta$ 永远是卷积的单位元：$\\delta*u=u$（对一切分布），$\\delta'*u=\\partial u$。若 $u\\in\\mathcal{D}'$、$v\\in\\mathcal{E}'$（紧支分布），则 $u*v\\in\\mathcal{D}'$ 有定义，结合律、交换律在合理条件下成立。\n\n**磨光.** 取 $\\rho\\in\\mathcal{D}(\\mathbb{R}^n)$，$\\rho\\ge0$，$\\int\\rho=1$，令 $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$。则 $\\rho_\\varepsilon*u\\in C^\\infty$ 且\n$$\\rho_\\varepsilon*u\\to u\\qquad(\\varepsilon\\to0^+,\\ \\text{于}\\ \\mathcal{D}'(\\mathbb{R}^n)),$$\n这精确地说明了「每个分布都是光滑函数的弱-* 极限」，也是把局部问题化为光滑情形的标准工具。\n\n**缓增分布的傅里叶变换.** 直接用 $\\mathcal{D}$ 做变换不行（紧支函数的变换不再紧支），所以改用 Schwartz 空间 $\\mathcal{S}(\\mathbb{R}^n)$（一切导数都快速下降的光滑函数）及其对偶 $\\mathcal{S}'$（缓增分布）。傅里叶变换定义为\n$$\\langle\\hat u,\\varphi\\rangle=\\langle u,\\hat\\varphi\\rangle,\\qquad \\hat\\varphi(\\xi)=\\int_{\\mathbb{R}^n}\\varphi(x)\\,e^{-2\\pi i\\,x\\cdot\\xi}\\,dx,$$\n也就是把变换**转嫁**给检验函数：定义里**既没有共轭，也没有额外的符号**。因为 $\\varphi\\in\\mathcal{S}\\Rightarrow\\hat\\varphi\\in\\mathcal{S}$，这个定义合法，而且 $\\hat{\\ }: \\mathcal{S}'\\to\\mathcal{S}'$ 成为线性拓扑同构，逆变换是 $\\langle\\check u,\\varphi\\rangle=\\langle u,\\check\\varphi\\rangle$（$\\check\\varphi(x)=\\varphi(-x)$）。最基本的两个对偶是\n$$\\hat\\delta=1,\\qquad \\hat1=\\delta,$$\n它们由 $\\langle\\hat\\delta,\\varphi\\rangle=\\langle\\delta,\\hat\\varphi\\rangle=\\hat\\varphi(0)=\\int\\varphi$ 与傅里叶反演公式 $\\int\\hat\\varphi=\\varphi(0)$ 立得。频域里求导与卷积都变成代数运算：$\\widehat{\\partial^\\alpha u}=(2\\pi i\\xi)^\\alpha\\hat u$、$\\widehat{P(D)u}=P(2\\pi i\\xi)\\hat u$、$\\widehat{u*v}=\\hat u\\cdot\\hat v$（$u$ 紧支、$v$ 缓增）。本批统一采用频率变量 $\\xi$ 与 $e^{-2\\pi i x\\cdot\\xi}$ 的约定；若改用 $\\hat f(\\omega)=\\int f(t)e^{-i\\omega t}dt$，微分法则要相应写成 $(i\\omega)^\\alpha$。",
+    "definitionEn": "**Convolution of a distribution with a test function.** Let $u\\in\\mathcal{D}'(\\mathbb{R}^n)$ and $\\varphi\\in\\mathcal{D}(\\mathbb{R}^n)$ and set\n$$(u*\\varphi)(x)=\\langle u,\\ \\varphi(x-\\cdot)\\rangle=\\bigl\\langle u_y,\\ \\varphi(x-y)\\bigr\\rangle .$$\nApplying $u$ to translates of the test function produces a function of $x$, and it is a **smooth** function: $u*\\varphi\\in C^\\infty(\\mathbb{R}^n)$ with\n$$\\partial^\\alpha(u*\\varphi)=(\\partial^\\alpha u)*\\varphi=u*(\\partial^\\alpha\\varphi),$$\nso **the derivatives always fall on the smooth factor**. This is the basic mechanism for mollifying a distribution; if $u$ has compact support then so has $u*\\varphi$, and $\\operatorname{supp}(u*\\varphi)\\subset\\operatorname{supp}u+\\operatorname{supp}\\varphi$ (Minkowski sum).\n\n**When is a convolution defined?** The convolution of two **general** distributions need not be defined: at least one factor must have compact support (or the two must lie in suitable spaces) in order to pair them, and an expression such as $1*1$ diverges and is meaningless. But $\\delta$ is always the identity: $\\delta*u=u$ for every distribution, and $\\delta'*u=\\partial u$. If $u\\in\\mathcal{D}'$ and $v\\in\\mathcal{E}'$ (compactly supported), then $u*v\\in\\mathcal{D}'$ is defined and associativity and commutativity hold under the usual hypotheses.\n\n**Mollification.** Choose $\\rho\\in\\mathcal{D}(\\mathbb{R}^n)$ with $\\rho\\ge0$ and $\\int\\rho=1$, and put $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$. Then $\\rho_\\varepsilon*u\\in C^\\infty$ and\n$$\\rho_\\varepsilon*u\\to u\\qquad(\\varepsilon\\to0^+,\\ \\text{in}\\ \\mathcal{D}'(\\mathbb{R}^n)).$$\nThis makes precise the statement that every distribution is a weak-* limit of smooth functions, and it is the standard device for reducing local questions to the smooth case.\n\n**Fourier transform of tempered distributions.** The Fourier transform of a general distribution is not defined through $\\mathcal{D}$ (the transform of a compactly supported function is no longer compactly supported), so one uses the Schwartz space $\\mathcal{S}(\\mathbb{R}^n)$ (smooth functions all of whose derivatives decay rapidly) and its dual $\\mathcal{S}'$, the tempered distributions. The transform is defined by\n$$\\langle\\hat u,\\varphi\\rangle=\\langle u,\\hat\\varphi\\rangle,\\qquad \\hat\\varphi(\\xi)=\\int_{\\mathbb{R}^n}\\varphi(x)\\,e^{-2\\pi i\\,x\\cdot\\xi}\\,dx,$$\nthat is, the transform is **shifted onto the test function**: the definition contains **no conjugation and no extra signs**. Since $\\varphi\\in\\mathcal{S}\\Rightarrow\\hat\\varphi\\in\\mathcal{S}$, the definition is legitimate, and $\\hat{\\ }:\\mathcal{S}'\\to\\mathcal{S}'$ is a linear topological isomorphism whose inverse is $\\langle\\check u,\\varphi\\rangle=\\langle u,\\check\\varphi\\rangle$ with $\\check\\varphi(x)=\\varphi(-x)$. The two most basic dualities are\n$$\\hat\\delta=1,\\qquad \\hat1=\\delta,$$\nobtained from $\\langle\\hat\\delta,\\varphi\\rangle=\\langle\\delta,\\hat\\varphi\\rangle=\\hat\\varphi(0)=\\int\\varphi$ and Fourier inversion $\\int\\hat\\varphi=\\varphi(0)$. In the frequency domain, differentiation and convolution become algebra: $\\widehat{\\partial^\\alpha u}=(2\\pi i\\xi)^\\alpha\\hat u$, $\\widehat{P(D)u}=P(2\\pi i\\xi)\\hat u$ and $\\widehat{u*v}=\\hat u\\cdot\\hat v$ ($u$ compactly supported, $v$ tempered). Throughout this batch we use the frequency variable $\\xi$ with the kernel $e^{-2\\pi i x\\cdot\\xi}$; with the other convention $\\hat f(\\omega)=\\int f(t)e^{-i\\omega t}dt$ the differentiation rule reads $(i\\omega)^\\alpha$ instead.",
+    "formulas": [
+      {
+        "latex": "(u*\\varphi)(x)=\\langle u,\\ \\varphi(x-\\cdot)\\rangle,\\qquad u\\in\\mathcal{D}'(\\mathbb{R}^n),\\ \\varphi\\in\\mathcal{D}(\\mathbb{R}^n)",
+        "note": "分布在检验函数上的卷积：结果是 $C^\\infty$ 函数（不只是分布），因此这是「磨光」的入口。",
+        "noteEn": "Convolution of a distribution with a test function; the result is a $C^\\infty$ function (not merely a distribution), which is the gateway to mollification."
+      },
+      {
+        "latex": "\\partial^{\\alpha}(u*\\varphi)=(\\partial^{\\alpha}u)*\\varphi=u*(\\partial^{\\alpha}\\varphi),\\qquad \\delta*u=u,\\qquad \\delta'*u=\\partial u",
+        "note": "求导可以任意地移到光滑的一侧；$\\delta$ 是卷积单位元，$\\delta'$ 相当于求一阶导。",
+        "noteEn": "Derivatives may be moved onto the smooth factor; $\\delta$ is the identity for convolution and $\\delta'$ acts as first-order differentiation."
+      },
+      {
+        "latex": "\\rho_{\\varepsilon}(x)=\\varepsilon^{-n}\\rho\\Bigl(\\frac{x}{\\varepsilon}\\Bigr),\\qquad \\rho_{\\varepsilon}*u\\to u\\quad\\text{in }\\mathcal{D}'",
+        "note": "磨光：$\\rho_{\\varepsilon}*u$ 是光滑函数，且在 $\\mathcal{D}'$ 中收敛到 $u$（近似恒等核的标准用法）。",
+        "noteEn": "Mollification: $\\rho_{\\varepsilon}*u$ is smooth and converges to $u$ in $\\mathcal{D}'$ — the standard use of an approximate identity."
+      },
+      {
+        "latex": "\\langle\\hat u,\\varphi\\rangle=\\langle u,\\hat\\varphi\\rangle,\\qquad \\hat\\varphi(\\xi)=\\int_{\\mathbb{R}^n}\\varphi(x)e^{-2\\pi i\\,x\\cdot\\xi}\\,dx",
+        "note": "缓增分布傅里叶变换的定义：把变换转嫁给检验函数，$\\hat{\\ }$ 里面**不出现共轭、不出现负号**。",
+        "noteEn": "Definition of the Fourier transform of a tempered distribution: the transform is transferred to the test function, with **no conjugation and no sign** in the pairing."
+      },
+      {
+        "latex": "\\hat\\delta=1,\\qquad \\hat1=\\delta",
+        "note": "最基本的两个对偶：$\\delta$ 变换后是常数 $1$，常数 $1$ 变换后是 $\\delta$。",
+        "noteEn": "The two most basic dualities: $\\delta$ transforms to the constant $1$, and the constant $1$ transforms to $\\delta$."
+      },
+      {
+        "latex": "\\widehat{\\partial^{\\alpha}u}=(2\\pi i\\xi)^{\\alpha}\\hat u,\\qquad \\widehat{P(D)u}=P(2\\pi i\\xi)\\hat u,\\qquad \\widehat{u*v}=\\hat u\\cdot\\hat v",
+        "note": "在本批的 $e^{-2πiξx}$ 约定下，求导 = 乘 $(2\\pi i\\xi)^{\\alpha}$，多项式算子 $P(D)$ = 乘 $P(2\\pi i\\xi)$（用到 $D=\\partial$ 与 $\\xi$ 的约定）；卷积 = 相乘（$u$ 紧支、$v$ 缓增时）。",
+        "noteEn": "With the $e^{-2\\pi i\\xi x}$ convention used in this batch, differentiation becomes multiplication by $(2\\pi i\\xi)^{\\alpha}$ and a polynomial operator $P(D)$ becomes multiplication by $P(2\\pi i\\xi)$; convolution becomes multiplication (for $u$ compactly supported and $v$ tempered)."
+      }
+    ],
+    "properties": [
+      "两个**一般**分布的卷积不一定有定义：至少一方要具紧支集（或两者落在合适空间），否则配对发散（如 $1*1$）。但 $\\delta*u=u$ 对一切分布成立。",
+      "$u\\in\\mathcal{D}'$、$\\varphi\\in\\mathcal{D}$ 时 $u*\\varphi\\in C^\\infty$，且 $\\operatorname{supp}(u*\\varphi)\\subset\\operatorname{supp}u+\\operatorname{supp}\\varphi$（$u$ 紧支时）；用 $\\rho_\\varepsilon*u$ 就把任意分布局部替换为光滑函数。",
+      "傅里叶变换 $\\hat{\\ }:\\mathcal{S}'\\to\\mathcal{S}'$ 是线性拓扑同构，逆变换由 $\\check\\varphi(x)=\\varphi(-x)$ 给出；这条同构把求导、平移、卷积翻译成频域的乘法运算。",
+      "$\\delta$ 在频域中的角色：$\\hat\\delta=1$、$\\hat1=\\delta$、$\\delta$（卷积单位元）型恒等式 $\\delta*a=a$、$\\delta'*a=\\partial a$；于是常系数算子 $P(D)$ 在频域变成「乘 $P(2\\pi i\\xi)$」——这就是基本解等于乘子倒数的来源。",
+      "检验函数的选取决定了理论的范围：$\\mathcal{D}'$ 比 $\\mathcal{S}'$ 大得多（例如 $e^{x^2}\\in\\mathcal{D}'(\\mathbb{R})\\setminus\\mathcal{S}'(\\mathbb{R})$），而傅里叶变换只在 $\\mathcal{S}'$ 上干净地定义，所以「先问是不是缓增」是使用频域方法时的第一道检查。"
+    ],
+    "propertiesEn": [
+      "The convolution of two **general** distributions need not be defined: at least one factor must have compact support (or both must lie in suitable spaces), otherwise the pairing diverges ($1*1$). But $\\delta*u=u$ for every distribution.",
+      "For $u\\in\\mathcal{D}'$ and $\\varphi\\in\\mathcal{D}$ one has $u*\\varphi\\in C^\\infty$ and, when $u$ is compactly supported, $\\operatorname{supp}(u*\\varphi)\\subset\\operatorname{supp}u+\\operatorname{supp}\\varphi$; using $\\rho_\\varepsilon*u$ one replaces a distribution locally by smooth functions.",
+      "The Fourier transform $\\hat{\\ }:\\mathcal{S}'\\to\\mathcal{S}'$ is a linear topological isomorphism, its inverse being given by $\\check\\varphi(x)=\\varphi(-x)$; it turns differentiation, translation and convolution into multiplication in the frequency domain.",
+      "The role of $\\delta$: $\\hat\\delta=1$, $\\hat1=\\delta$, $\\delta*a=a$, $\\delta'*a=\\partial a$; a constant-coefficient operator $P(D)$ thereby becomes multiplication by $P(2\\pi i\\xi)$ — the origin of fundamental solutions as reciprocal multipliers.",
+      "The choice of test functions determines the reach of the theory: $\\mathcal{D}'$ is much larger than $\\mathcal{S}'$ (e.g. $e^{x^2}\\in\\mathcal{D}'(\\mathbb{R})\\setminus\\mathcal{S}'(\\mathbb{R})$), and the Fourier transform is well defined only on $\\mathcal{S}'$, so \"is it tempered?\" is the first question to ask before using frequency methods."
+    ],
+    "expression": {
+      "text": "⟨û, φ⟩ = ⟨u, φ̂⟩，φ̂(ξ) = ∫ φ(x)e^(−2πi x·ξ) dx；δ̂ = 1，1̂ = δ",
+      "symbol": "⟨û, φ⟩ = ⟨u, φ̂⟩",
+      "note": "定义中不出现共轭也不出现负号；本批统一用 e^(−2πiξx) 约定，故求导对应乘 (2πiξ)^α。",
+      "noteEn": "No conjugation and no sign appears in the definition; this batch uses the $e^{-2\\pi i\\xi x}$ convention, so differentiation corresponds to multiplication by $(2\\pi i\\xi)^\\alpha$."
+    },
+    "examples": [
+      {
+        "problem": "利用 $\\hat\\delta=1$ 与频域微分法则计算 $\\widehat{\\Delta\\delta}$（$n$ 维）与 $\\widehat{\\partial^{\\alpha}\\delta}$。",
+        "solution": "由 $\\widehat{\\partial_j u}=2\\pi i\\xi_j\\hat u$（本批 $e^{-2\\pi i x\\cdot\\xi}$ 约定），逐项作用得\n$$\\widehat{\\partial^{\\alpha}\\delta}=(2\\pi i\\xi)^{\\alpha}\\hat\\delta=(2\\pi i\\xi)^{\\alpha},$$\n特别地 $\\widehat{\\delta'}=2\\pi i\\xi$。对拉普拉斯算子，$\\Delta=\\sum_{j=1}^n\\partial_j^2$，故\n$$\\widehat{\\Delta\\delta}=\\sum_{j=1}^n(2\\pi i\\xi_j)^2\\cdot1=-4\\pi^2|\\xi|^2,$$\n即 $\\Delta\\delta$ 的像函数是多项式 $-4\\pi^2|\\xi|^2$。这说明 $\\delta$ 及其导数的傅里叶像都是多项式，而多项式乘子正是常系数算子。"
+      },
+      {
+        "problem": "用傅里叶变换求热方程的初值问题 $\\partial_tu-\\Delta u=0\\ (t>0)$，$u(\\cdot,0)=\\delta$（初值在分布意义下取值）。",
+        "solution": "对空间变量作傅里叶变换（把 $t$ 看成参数）：$\\widehat{\\Delta u}=-4\\pi^2|\\xi|^2\\hat u$，于是\n$$\\partial_t\\hat u(t,\\xi)=-4\\pi^2|\\xi|^2\\hat u(t,\\xi),\\qquad \\hat u(0,\\xi)=\\hat\\delta=1,$$\n解得 $\\hat u(t,\\xi)=e^{-4\\pi^2t|\\xi|^2}$。用高斯函数的变换公式（本批约定）\n$$\\widehat{\\,(4\\pi t)^{-n/2}e^{-|x|^2/4t}\\,}=e^{-4\\pi^2t|\\xi|^2},$$\n逆变换即得\n$$u(x,t)=(4\\pi t)^{-n/2}e^{-|x|^2/4t},$$\n正是热核（热算子的基本解）。整个过程只用到「$\\delta$ 的像 = 常数 $1$」与卷积/乘法互换，说明频域方法为什么对常系数方程特别有效。"
+      }
+    ],
+    "tags": [
+      "分布卷积",
+      "磨光",
+      "缓增分布",
+      "傅里叶变换",
+      "卷积定理",
+      "δ 的傅里叶变换"
+    ],
+    "links": [
+      "distribution-theory",
+      "distribution-derivative",
+      "fourier-transform",
+      "fourier-transform-properties",
+      "convolution",
+      "schwartz-space",
+      "fundamental-solution"
+    ]
+  },
+  {
+    "id": "fundamental-solution",
+    "title": "基本解",
+    "titleEn": "Fundamental Solutions",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "$P(D)E=\\delta$ 的解 $E$ 称为常系数算子 $P(D)$ 的基本解（右端是 $\\delta$，不是 $0$ 也不是 $1$）；有了它解方程就变成卷积 $u=E*f$，$\\delta$ 之外最著名的两个例子是 $1/((n-2)\\omega_{n-1}|x|^{n-2})$ 与热核。",
+    "summaryEn": "A solution $E$ of $P(D)E=\\delta$ is called a fundamental solution of the constant-coefficient operator $P(D)$ (the right-hand side is $\\delta$, not $0$ and not $1$); it turns solving into convolution $u=E*f$, the best-known examples being $1/((n-2)\\omega_{n-1}|x|^{n-2})$ and the heat kernel.",
+    "definition": "**定义.** 设 $P(D)=\\sum_{|\\alpha|\\le m}a_\\alpha\\partial^\\alpha$ 是常系数线性偏微分算子，$\\delta$ 是原点处的 Dirac 分布。若 $E\\in\\mathcal{D}'(\\mathbb{R}^n)$ 满足\n$$P(D)E=\\delta,$$\n就称 $E$ 是 $P(D)$ 的**一个基本解**。等号右端必须是 $\\delta$：$P(D)E=0$ 只是在说 $E$ 是齐次解（例如 $-\\Delta$ 的调和函数），而「解出 $\\delta$」才是点源响应，才能用卷积生成任意右端的解。\n\n**为什么有用：解方程 = 卷积.** 若 $f$ 与 $E$ 的卷积有定义（通常要求 $f$ 紧支，或 $f\\in\\mathcal{S}$ 而 $E$ 缓增），则\n$$P(D)u=f,\\qquad u=E*f$$\n就是一个解：利用 $\\partial^\\alpha(u*v)=(\\partial^\\alpha u)*v$ 与 $\\delta*f=f$，\n$$P(D)(E*f)=(P(D)E)*f=\\delta*f=f .$$\n这就是叠加原理的解析版本：把 $f$ 看成点源的叠加，响应就是同样的叠加。**存在性**由 Ehrenpreis–Malgrange 定理保证：任意非常数常系数算子 $P(D)$ 都有基本解（若把 $E$ 限制在缓增分布 $\\\\mathcal{S}'$ 中，存在性需要另外论证）。\n\n**三个经典例子（约定与符号都要看清楚）.**\n- **拉普拉斯算子.** 采用 $-\\Delta E=\\delta$ 的约定（下文「$-\\Delta$ 的基本解」都指这个）：$n\\ge3$ 时\n  $$E(x)=\\frac{1}{(n-2)\\omega_{n-1}\\,|x|^{n-2}}=\\frac{c_n}{|x|^{n-2}},\\qquad c_n=\\frac{1}{(n-2)\\omega_{n-1}},$$\n  其中 $\\omega_{n-1}=|S^{n-1}|=\\dfrac{2\\pi^{n/2}}{\\Gamma(n/2)}$ 是单位球面面积，$n=3$ 时就是 $\\dfrac{1}{4\\pi|x|}$；$n=2$ 时是**对数形式**\n  $$E(x)=-\\frac{1}{2\\pi}\\log|x| .$$\n  **二维的对数形式与高维的幂形式不能互换**，而且符号依赖约定：若把算子写成 $\\Delta$ 而非 $-\\Delta$（即用 $\\Delta E=\\delta$），则二维要写成 $+\\frac{1}{2\\pi}\\log|x|$、高维要添负号；两种写法必须整体一致，不能一条取正、一条取负。\n- **热算子 $\\partial_t-\\Delta$.** 取\n  $$E(x,t)=(4\\pi t)^{-n/2}e^{-|x|^2/4t}\\ (t>0),\\qquad E(x,t)=0\\ (t\\le0),$$\n  则 $(\\partial_t-\\Delta)E=\\delta(x)\\delta(t)$。指数里的 $4t$ 与前面的 $(4\\pi t)^{-n/2}$ **必须配套**：$E$ 既满足 $E_t=\\Delta E$（$t>0$），又满足 $\\int_{\\mathbb{R}^n}E\\,dx=1$（$t>0$），差一个因子就两者都破坏。\n- **波动算子 $\\partial_t^2-\\Delta$.** 取因果（retarded）基本解，即 $t<0$ 时取 $0$：$n=3$ 时它支在光锥面 $|x|=t$ 上，形如\n  $$E(x,t)=\\frac{\\delta(t-|x|)}{4\\pi|x|}\\qquad(n=3),$$\n  而 $n=2$ 时它支在光锥**内部** $|x|<t$ 上，$t>0$ 时 $E(x,t)=\\dfrac{1}{2\\pi\\sqrt{t^2-|x|^2}}$。也就是说：**奇数维 $n\\ge3$ 满足 Huygens 原理**（无尾波，信号只在波前上），**偶数维不满足**（波前之后留下尾波）。维数条件不能丢。\n\n**不唯一性与边界.** 基本解**不唯一**：若 $E$ 是基本解、$P(D)h=0$，则 $E+h$ 也是基本解，所以只能说「一个基本解」。想得到唯一性必须额外指定条件（初始条件、支集条件或边界条件）。与边界条件配套的基本解就是**格林函数**：例如 $-\\Delta_xG(x,\\xi)=\\delta(x-\\xi)$ 且 $G(x,\\xi)=0$ 当 $x\\in\\partial\\Omega$，则区域上 $-\\Delta u=f$、$u|_{\\partial\\Omega}=0$ 的解为 $u(x)=\\int_\\Omega G(x,\\xi)f(\\xi)\\,d\\xi$。",
+    "definitionEn": "**Definition.** Let $P(D)=\\sum_{|\\alpha|\\le m}a_\\alpha\\partial^\\alpha$ be a constant-coefficient linear partial differential operator and let $\\delta$ be the Dirac distribution at the origin. If $E\\in\\mathcal{D}'(\\mathbb{R}^n)$ satisfies\n$$P(D)E=\\delta,$$\nthen $E$ is called **a fundamental solution** of $P(D)$. The right-hand side must be $\\delta$: the equation $P(D)E=0$ merely says that $E$ is a homogeneous solution (for $-\\Delta$, a harmonic function), whereas solving for $\\delta$ is the point-source response from which arbitrary right-hand sides can be generated by convolution.\n\n**Why it helps: solving becomes convolution.** If the convolution of $f$ with $E$ is defined (typically $f$ compactly supported, or $f\\in\\mathcal{S}$ with $E$ tempered), then\n$$P(D)u=f,\\qquad u=E*f$$\nis a solution: by $\\partial^\\alpha(u*v)=(\\partial^\\alpha u)*v$ and $\\delta*f=f$,\n$$P(D)(E*f)=(P(D)E)*f=\\delta*f=f .$$\nThis is the analytic form of superposition: writing $f$ as a superposition of point sources, the response is the same superposition. **Existence** is guaranteed by the Ehrenpreis–Malgrange theorem: every constant-coefficient operator $P(D)$ that is not a constant has a fundamental solution (restricting $E$ to the tempered distributions $\\mathcal{S}'$ requires a separate argument).\n\n**Three classical examples (watch the conventions and signs).**\n- **The Laplacian.** Using the convention $-\\Delta E=\\delta$ (all references below to \"the fundamental solution of $-\\Delta$\" mean this): for $n\\ge3$\n  $$E(x)=\\frac{1}{(n-2)\\omega_{n-1}\\,|x|^{n-2}}=\\frac{c_n}{|x|^{n-2}},\\qquad c_n=\\frac{1}{(n-2)\\omega_{n-1}},$$\n  where $\\omega_{n-1}=|S^{n-1}|=\\dfrac{2\\pi^{n/2}}{\\Gamma(n/2)}$ is the area of the unit sphere, so that $n=3$ gives $\\dfrac{1}{4\\pi|x|}$; for $n=2$ one has the **logarithmic form**\n  $$E(x)=-\\frac{1}{2\\pi}\\log|x| .$$\n  The two-dimensional logarithmic form and the higher-dimensional power form may not be interchanged, and the sign depends on the convention: writing the operator as $\\Delta$ instead of $-\\Delta$ (i.e. $\\Delta E=\\delta$) forces $+\\frac{1}{2\\pi}\\log|x|$ in two dimensions and an extra minus sign in higher dimensions; the choice must be consistent throughout.\n- **The heat operator $\\partial_t-\\Delta$.** With\n  $$E(x,t)=(4\\pi t)^{-n/2}e^{-|x|^2/4t}\\ (t>0),\\qquad E(x,t)=0\\ (t\\le0),$$\n  one has $(\\partial_t-\\Delta)E=\\delta(x)\\delta(t)$. The $4t$ in the exponent and the factor $(4\\pi t)^{-n/2}$ **must match**: this $E$ satisfies both $E_t=\\Delta E$ for $t>0$ and $\\int_{\\mathbb{R}^n}E\\,dx=1$ for $t>0$, and changing one factor destroys both properties.\n- **The wave operator $\\partial_t^2-\\Delta$.** Take the causal (retarded) fundamental solution, i.e. zero for $t<0$: for $n=3$ it sits on the light cone $|x|=t$,\n  $$E(x,t)=\\frac{\\delta(t-|x|)}{4\\pi|x|}\\qquad(n=3),$$\n  whereas for $n=2$ it sits in the **interior** of the cone $|x|<t$, with $E(x,t)=\\dfrac{1}{2\\pi\\sqrt{t^2-|x|^2}}$ for $t>0$. In other words: **odd dimensions $n\\ge3$ satisfy Huygens' principle** (no tail, the signal lies on the wave front only), while **even dimensions do not** (a tail persists behind the front). The dimension condition is indispensable.\n\n**Non-uniqueness and boundary conditions.** A fundamental solution is **not unique**: if $E$ is one and $P(D)h=0$, then $E+h$ is another, so one speaks of \"a fundamental solution\". Uniqueness requires extra conditions (initial conditions, support conditions or boundary conditions). A fundamental solution tied to boundary conditions is precisely a **Green function**: if $-\\Delta_xG(x,\\xi)=\\delta(x-\\xi)$ and $G(x,\\xi)=0$ for $x\\in\\partial\\Omega$, then the solution of $-\\Delta u=f$ in $\\Omega$ with $u|_{\\partial\\Omega}=0$ is $u(x)=\\int_\\Omega G(x,\\xi)f(\\xi)\\,d\\xi$.",
+    "formulas": [
+      {
+        "latex": "P(D)E=\\delta,\\qquad P(D)=\\sum_{|\\alpha|\\le m}a_{\\alpha}\\partial^{\\alpha}",
+        "note": "基本解的定义：右端是 **$\\delta$**（点源），不是 $0$（那是齐次解）也不是 $1$。",
+        "noteEn": "The defining equation of a fundamental solution: the right-hand side is **$\\delta$** (a point source), not $0$ (a homogeneous solution) and not $1$."
+      },
+      {
+        "latex": "P(D)u=f\\ \\Longrightarrow\\ u=E*f,\\qquad P(D)(E*f)=(P(D)E)*f=\\delta*f=f",
+        "note": "有了基本解，解方程就是与 $E$ 做卷积（前提：卷积有定义，例如 $f$ 紧支）；解不唯一，通解要加上齐次解。",
+        "noteEn": "Given a fundamental solution, solving the equation is convolution with $E$ (provided the convolution is defined, e.g. $f$ compactly supported); the solution is not unique and homogeneous solutions may be added."
+      },
+      {
+        "latex": "-\\Delta E=\\delta:\\quad E(x)=\\frac{1}{(n-2)\\omega_{n-1}|x|^{n-2}}\\ (n\\ge3),\\qquad E(x)=-\\frac{1}{2\\pi}\\log|x|\\ (n=2)",
+        "note": "拉普拉斯算子的基本解。$\\omega_{n-1}=|S^{n-1}|$ 是单位球面面积（$n=3$ 时 $E=1/(4\\pi|x|)$）；**二维必须用对数形式**，不能套用 $|x|^{2-n}$ 的幂形式（那会退化成常数）。",
+        "noteEn": "Fundamental solution of the Laplacian. Here $\\omega_{n-1}=|S^{n-1}|$ is the area of the unit sphere ($n=3$ gives $E=1/(4\\pi|x|)$); the two-dimensional case **must** use the logarithm — the power form $|x|^{2-n}$ degenerates to a constant there."
+      },
+      {
+        "latex": "(\\partial_t-\\Delta)E=\\delta(x)\\delta(t),\\qquad E(x,t)=(4\\pi t)^{-n/2}e^{-|x|^2/4t}\\ (t>0),\\quad E=0\\ (t\\le0)",
+        "note": "热算子的基本解（热核）：指数里的 $4t$ 与前面的 $(4\\pi t)^{-n/2}$ 配套，才有 $E_t=\\Delta E$ 且 $\\int E=1$。",
+        "noteEn": "Fundamental solution of the heat operator (the heat kernel): the $4t$ in the exponent matches the factor $(4\\pi t)^{-n/2}$, which is exactly what gives $E_t=\\Delta E$ and $\\int E=1$."
+      },
+      {
+        "latex": "(\\partial_t^2-\\Delta)E=\\delta(x)\\delta(t):\\quad E=\\frac{\\delta(t-|x|)}{4\\pi|x|}\\ (n=3),\\qquad E=\\frac{1}{2\\pi\\sqrt{t^2-|x|^2}}\\ \\text{于}\\ |x|<t\\ (n=2)",
+        "note": "波动算子的因果基本解：$n=3$ 支在光锥**面**上，$n=2$ 支在光锥**内部**（尾波）。**奇数维 $n\\ge3$ 才有 Huygens 原理**，偶数维不成立。",
+        "noteEn": "Causal fundamental solution of the wave operator: for $n=3$ it sits on the light cone **surface**, for $n=2$ in the **interior** of the cone (a tail). **Huygens' principle holds only in odd dimensions $n\\ge3$**, never in even dimensions."
+      }
+    ],
+    "properties": [
+      "基本解**不唯一**：$E$ 是基本解、$P(D)h=0$ 时 $E+h$ 也是基本解（如 $-\\Delta$ 的情形可以加任意调和函数）。因此只能说「一个基本解」；要唯一就必须追加支集或初值/边值条件。",
+      "存在性：任何非常数的常系数算子 $P(D)$ 都有基本解（Ehrenpreis–Malgrange 定理）；但若额外要求 $E$ 属于 $\\mathcal{S}'$ 之类的具体空间，则存在性需要单独论证。",
+      "解方程：当 $f$ 与 $E$ 的卷积有定义时，$u=E*f$ 是 $P(D)u=f$ 的一个解，通解为 $E*f+(\\text{齐次解})$；这就是叠加原理，也是「点源响应 $\\Rightarrow$ 任意源响应」的来源。",
+      "正则性：若 $E$ 是局部可积函数（如 $-\\Delta$ 与热算子的情形）而 $f\\in C_c^\\infty$，则 $u=E*f\\in C^\\infty$——**右端光滑则解光滑**，这是椭圆正则性最朴素的版本（奇性只来自 $P(D)E=\\delta$ 的那一点）。",
+      "与格林函数的关系：格林函数是**带边界条件**的基本解（例如 $-\\Delta_xG(x,\\xi)=\\delta(x-\\xi)$、$G|_{\\partial\\Omega}=0$），区域上的解写成 $u(x)=\\int_\\Omega G(x,\\xi)f(\\xi)\\,d\\xi$；基本解是无边界（自由空间）的版本。"
+    ],
+    "propertiesEn": [
+      "A fundamental solution is **not unique**: if $E$ is one and $P(D)h=0$, then $E+h$ is another (for $-\\Delta$ one may add any harmonic function). One therefore speaks of \"a fundamental solution\"; uniqueness requires extra support or initial/boundary conditions.",
+      "Existence: every constant-coefficient operator $P(D)$ that is not constant possesses a fundamental solution (Ehrenpreis–Malgrange theorem); requiring $E$ to lie in a specific space such as $\\mathcal{S}'$ needs a separate argument.",
+      "Solving: whenever the convolution of $f$ with $E$ is defined, $u=E*f$ solves $P(D)u=f$, the general solution being $E*f$ plus homogeneous solutions. This is superposition, i.e. point-source response $\\Rightarrow$ response to an arbitrary source.",
+      "Regularity: if $E$ is a locally integrable function (as for $-\\Delta$ and the heat operator) and $f\\in C_c^\\infty$, then $u=E*f\\in C^\\infty$ — a smooth right-hand side gives a smooth solution, the most elementary instance of elliptic regularity (the singularity comes only from the point where $P(D)E=\\delta$).",
+      "Relation to Green functions: a Green function is a fundamental solution **with boundary conditions** ($-\\Delta_xG(x,\\xi)=\\delta(x-\\xi)$, $G|_{\\partial\\Omega}=0$), and the solution on $\\Omega$ is $u(x)=\\int_\\Omega G(x,\\xi)f(\\xi)\\,d\\xi$; the fundamental solution is the free-space version."
+    ],
+    "expression": {
+      "text": "P(D)E = δ（P(D) 为常系数算子）；−Δ 的情形见下方公式与说明，热算子情形 E = (4πt)^(−n/2) e^(−|x|²/4t)",
+      "symbol": "P(D)E = δ",
+      "note": "基本解是点源响应；$n\\ge3$ 用 $1/((n-2)\\omega_{n-1}|x|^{n-2})$，$n=2$ 必须用 $-(1/2\\pi)\\log|x|$。",
+      "noteEn": "A fundamental solution is the point-source response; for $n\\ge3$ it is $1/((n-2)\\omega_{n-1}|x|^{n-2})$, while $n=2$ requires $-(1/2\\pi)\\log|x|$."
+    },
+    "plot": {
+      "type": "contour",
+      "expr": "0.5*log(x^2+y^2+0.000001)",
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "levels": 14,
+      "title": "二维基本解 E = −(1/2π)log|x| 的等值线：以原点为中心的同心圆（等值线只依赖 |x|；原点附近取 ε² = 10⁻⁶ 正则化以便绘图）"
+    },
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^3$ 中验证 $E(x)=\\dfrac{1}{4\\pi|x|}$ 满足 $-\\Delta E=\\delta$，即它是 $\\Delta$ 的（符号相反意义下的）基本解。",
+        "solution": "只需证明 $\\langle E,\\Delta\\varphi\\rangle=-\\varphi(0)$ 对一切 $\\varphi\\in\\mathcal{D}(\\mathbb{R}^3)$ 成立，再取负号即得 $-\\Delta E=\\delta$。因为 $\\Delta(1/|x|)=0$ 在 $x\\ne0$ 处成立，对 $0<\\varepsilon<R$ 在以 $\\varepsilon$ 与 $R$ 为半径的球壳上用格林第二公式（取 $R$ 大到 $\\varphi$ 的支集之外）：\n$$\\int_{|x|>\\varepsilon}\\frac{1}{|x|}\\Delta\\varphi(x)\\,dx=\\oint_{|x|=\\varepsilon}\\Bigl[\\frac{1}{|x|}\\partial_\\nu\\varphi-\\varphi\\,\\partial_\\nu\\frac{1}{|x|}\\Bigr]dS,$$\n其中 $\\nu=-x/|x|$ 是球壳指向内部的外法向，故 $\\partial_\\nu(1/|x|)=-\\partial_r(r^{-1})=1/\\varepsilon^2$。于是球面积分为\n$$-\\frac{1}{\\varepsilon}\\oint_{|x|=\\varepsilon}\\partial_r\\varphi\\,dS-\\frac{1}{\\varepsilon^2}\\oint_{|x|=\\varepsilon}\\varphi\\,dS\\longrightarrow 0-4\\pi\\varphi(0)\\qquad(\\varepsilon\\to0^+),$$\n两项分别用 $\\oint\\partial_r\\varphi\\,dS=O(\\varepsilon^2)$ 与球面平均值趋向 $\\varphi(0)$ 估计。故 $\\langle E,\\Delta\\varphi\\rangle=-4\\pi\\varphi(0)/(4\\pi)=-\\varphi(0)$，即 $-\\Delta E=\\delta$，$E=1/(4\\pi|x|)$ 是基本解（对应的 $\\omega_2=4\\pi$、$n=3$ 与公式 $1/((n-2)\\omega_{n-1}|x|^{n-2})$ 一致）。"
+      },
+      {
+        "problem": "验证热核 $E(x,t)=(4\\pi t)^{-n/2}e^{-|x|^2/4t}$（$t>0$）满足 $\\partial_tE=\\Delta E$ 与 $\\int_{\\mathbb{R}^n}E\\,dx=1$，并由此说明它是 $\\partial_t-\\Delta$ 的基本解。",
+        "solution": "记 $r=|x|$，$E=A(t)e^{-r^2/4t}$，$A(t)=(4\\pi t)^{-n/2}$。先算时间导数：$A'(t)=-\\frac{n}{2t}A(t)$，且 $\\partial_t e^{-r^2/4t}=\\frac{r^2}{4t^2}e^{-r^2/4t}$，故\n$$\\partial_tE=E\\Bigl(-\\frac{n}{2t}+\\frac{r^2}{4t^2}\\Bigr).$$\n再算空间部分：$\\partial_rE=-\\frac{r}{2t}E$，$\\partial_r^2E=\\Bigl(-\\frac{1}{2t}+\\frac{r^2}{4t^2}\\Bigr)E$，于是\n$$\\Delta E=\\partial_r^2E+\\frac{n-1}{r}\\partial_rE=E\\Bigl(-\\frac{1}{2t}+\\frac{r^2}{4t^2}-\\frac{n-1}{2t}\\Bigr)=E\\Bigl(-\\frac{n}{2t}+\\frac{r^2}{4t^2}\\Bigr)=\\partial_tE .$$\n归一化：$\\int_{\\mathbb{R}^n}e^{-|x|^2/4t}dx=(4\\pi t)^{n/2}$，故 $\\int E=1$。当 $t\\to0^+$ 时 $E(\\cdot,t)$ 是集中在原点的近似恒等核（峰值 $(4\\pi t)^{-n/2}\\to\\infty$、宽度 $\\sim\\sqrt{t}$），在 $\\mathcal{D}'$ 中趋于 $\\delta$；把 $t\\le0$ 补为 $0$ 后，分布意义下 $(\\partial_t-\\Delta)E=\\delta(x)\\delta(t)$，即 $E$ 是热算子的基本解。"
+      }
+    ],
+    "tags": [
+      "基本解",
+      "点源响应",
+      "热核",
+      "拉普拉斯算子",
+      "Huygens 原理",
+      "格林函数"
+    ],
+    "links": [
+      "distribution-theory",
+      "distribution-convolution-fourier",
+      "green-function",
+      "laplace-equation",
+      "heat-equation",
+      "wave-equation",
+      "dirichlet-neumann"
+    ]
+  },
+  {
+    "id": "weak-derivative-sobolev",
+    "title": "弱导数与索伯列夫空间",
+    "titleEn": "Weak Derivatives and Sobolev Spaces",
+    "branch": "pde-advanced",
+    "level": 5,
+    "summary": "弱导数要求 $\\int u\\,\\partial^\\alpha\\varphi=(-1)^{|\\alpha|}\\int v\\varphi$ 对一切检验函数成立、且 $v$ 本身是 $L^1_{\\mathrm{loc}}$ 函数；把它与 $L^p$ 可积性结合就得到 $W^{k,p}$，其中 $W^{k,2}=H^k$ 是希尔伯特空间，$H_0^1$ 是 $C_c^\\infty$ 的闭包。",
+    "summaryEn": "A weak derivative requires $\\int u\\,\\partial^\\alpha\\varphi=(-1)^{|\\alpha|}\\int v\\varphi$ for every test function with $v$ itself locally integrable; adding $L^p$ integrability yields $W^{k,p}$, in which $W^{k,2}=H^k$ is a Hilbert space and $H_0^1$ is the closure of $C_c^\\infty$.",
+    "definition": "**弱导数.** 设 $u\\in L^1_{\\mathrm{loc}}(\\Omega)$（注意这里只是**局部**可积）。若存在 $v_\\alpha\\in L^1_{\\mathrm{loc}}(\\Omega)$ 使得\n$$\\int_\\Omega u\\,\\partial^\\alpha\\varphi\\,dx=(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\,\\varphi\\,dx\\qquad\\text{对一切 }\\varphi\\in\\mathcal{D}(\\Omega)$$\n成立，就说 $u$ 有 $\\alpha$ 阶**弱导数** $v_\\alpha$，记 $\\partial^\\alpha u=v_\\alpha$。三个要素缺一不可：等式右边带**负号 $(-1)^{|\\alpha|}$**（与分布导数完全一致，来自分部积分）；等式必须对**一切**检验函数成立；而且**导数的候选 $v_\\alpha$ 本身必须是 $L^1_{\\mathrm{loc}}$ 函数**——这一点最容易错。若分布的导数不是一个函数（例如 $H$ 的导数是 $\\delta$），那就说**弱导数不存在**。与分布导数的唯一区别就在这里：分布导数总存在，弱导数可能不存在。\n\n**唯一性、例子与一维刻画.** 弱导数若存在则**唯一（a.e.）**：两个候选之差 $(v-w)$ 与一切检验函数配对为零，由变分基本引理 $v=w$ a.e.。显然弱导数就是「恰好是 $L^1_{\\mathrm{loc}}$ 函数」的分布导数，所以 $u$ 的分布导数一经算出，只需检查它是不是函数即可。\n例：$|x|$ 在 $(-1,1)$ 上古典意义下在 $0$ 处不可导，却有弱导数 $\\operatorname{sgn}x$（它属于 $L^\\infty\\subset L^1_{\\mathrm{loc}}$）。反过来，Cantor 函数几乎处处可导且导数 $0$，但它的分布导数是奇异测度而不是函数，所以**没有**弱导数；$x^2\\sin(1/x^2)$ 处处可导，但导数不属于 $L^1_{\\mathrm{loc}}$，同样没有弱导数。\n一维还有干净的等价刻画：$u\\in L^1_{\\mathrm{loc}}(I)$ 有弱导数 $v\\in L^1_{\\mathrm{loc}}(I)$，**当且仅当** $u$ 可能修改于零测集后是**局部绝对连续**函数，此时 $v$ 就是它的经典导数（a.e.）。由此立刻看出 Heaviside 阶梯没有弱导数：它不可能 a.e. 等于连续函数。\n\n**索伯列夫空间.** 对整数 $k\\ge0$ 与 $1\\le p\\le\\infty$，令\n$$W^{k,p}(\\Omega)=\\bigl\\{u\\in L^p(\\Omega):\\ \\text{对一切 }|\\alpha|\\le k,\\ \\partial^\\alpha u\\ \\text{的弱导数存在且}\\in L^p(\\Omega)\\bigr\\},$$\n$$\\|u\\|_{W^{k,p}}=\\Bigl(\\sum_{|\\alpha|\\le k}\\|\\partial^\\alpha u\\|_{L^p}^{p}\\Bigr)^{1/p}\\ (p<\\infty),\\qquad \\|u\\|_{W^{k,\\infty}}=\\max_{|\\alpha|\\le k}\\|\\partial^\\alpha u\\|_{L^\\infty}.$$\n两点必须注意：$u$ **本身**要在 $L^p$（不是 $L^1_{\\mathrm{loc}}$）；范数对**每一个** $|\\alpha|\\le k$ 求和，而不是只对最高阶 $|\\alpha|=k$ 求和（否则 $u$ 与低阶导数的大小完全不受控制，$\\|\\cdot\\|$ 就不是范数）。$W^{k,p}$ 关于该范数完备，是**巴拿赫空间**（$1\\le p\\le\\infty$）；$p=2$ 时 $W^{k,2}=H^k$ 还是**希尔伯特空间**，特别地\n$$\\langle u,v\\rangle_{H^1}=\\int_\\Omega uv\\,dx+\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx ,$$\n**两项都要有**：只留梯度项无法区分常数，只留乘积项则丢掉全部导数信息。\n\n**零边值：$H_0^1$.** 零边值条件的正确刻画是**闭包**：\n$$H_0^1(\\Omega)=\\overline{C_c^\\infty(\\Omega)}^{\\ \\|\\cdot\\|_{H^1}},$$\n即紧支光滑函数在 $H^1$ 范数下的闭包。「边界上取零」这句话本身在 $H^1$ 中没有意义（$H^1$ 函数的边界值需要迹定理才说得清楚），而闭包是可操作的定义：$u$ 能被 $C_c^\\infty$ 函数用 $H^1$ 范数逼近。$H_0^1$ 是希尔伯特空间，$\\Omega$ 有界时 Poincaré 不等式使 $\\int_\\Omega|\\nabla u|^2$ 成为等价范数，拉普拉斯方程的弱解（$u\\in H_0^1$，$\\int\\nabla u\\cdot\\nabla v=\\int fv$ 对一切 $v\\in H_0^1$）正定义在它上面。此外当 $1\\le p<\\infty$ 时 $C^\\infty(\\Omega)\\cap W^{k,p}(\\Omega)$ 在 $W^{k,p}(\\Omega)$ 中稠密，在 $\\mathbb{R}^n$ 上则 $C_c^\\infty(\\mathbb{R}^n)$ 稠密。",
+    "definitionEn": "**Weak derivatives.** Let $u\\in L^1_{\\mathrm{loc}}(\\Omega)$ (only **local** integrability is assumed). If there exists $v_\\alpha\\in L^1_{\\mathrm{loc}}(\\Omega)$ such that\n$$\\int_\\Omega u\\,\\partial^\\alpha\\varphi\\,dx=(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\,\\varphi\\,dx\\qquad\\text{for all }\\varphi\\in\\mathcal{D}(\\Omega),$$\nthen $u$ has the **weak derivative** $v_\\alpha$ of order $\\alpha$, written $\\partial^\\alpha u=v_\\alpha$. Three ingredients are essential: the **sign $(-1)^{|\\alpha|}$** on the right (exactly as for distributional derivatives, coming from integration by parts); the identity must hold for **every** test function; and **the candidate $v_\\alpha$ must itself be a locally integrable function** — the point that is most often got wrong. If the distributional derivative fails to be a function (the derivative of $H$ is $\\delta$), then the weak derivative is said to **not exist**. This is the only difference from distributional differentiation: distributional derivatives always exist, weak derivatives need not.\n\n**Uniqueness, examples, and the one-dimensional description.** A weak derivative, when it exists, is **unique a.e.**: the difference $v-w$ of two candidates pairs to zero against every test function, so $v=w$ a.e. by the fundamental lemma. Weak derivatives are exactly those distributional derivatives that happen to be locally integrable functions, so once the distributional derivative is computed one only has to check whether it is a function.\nFor instance $|x|$, classically non-differentiable at $0$, has the weak derivative $\\operatorname{sgn}x$ on $(-1,1)$ (which lies in $L^\\infty\\subset L^1_{\\mathrm{loc}}$). Conversely the Cantor function is differentiable a.e. with derivative $0$, yet its distributional derivative is a singular measure rather than a function, so it has **no** weak derivative; $x^2\\sin(1/x^2)$ is differentiable everywhere but its derivative is not in $L^1_{\\mathrm{loc}}$, so again there is none.\nIn one dimension there is a clean characterisation: $u\\in L^1_{\\mathrm{loc}}(I)$ has a weak derivative $v\\in L^1_{\\mathrm{loc}}(I)$ **if and only if** $u$ can be modified on a null set so as to be **locally absolutely continuous**, and then $v$ is its classical derivative a.e. This immediately shows that the Heaviside step has no weak derivative: it cannot equal a continuous function a.e.\n\n**Sobolev spaces.** For an integer $k\\ge0$ and $1\\le p\\le\\infty$ set\n$$W^{k,p}(\\Omega)=\\bigl\\{u\\in L^p(\\Omega):\\ \\partial^\\alpha u\\ \\text{exists weakly and lies in } L^p(\\Omega)\\ \\text{for all } |\\alpha|\\le k\\bigr\\},$$\n$$\\|u\\|_{W^{k,p}}=\\Bigl(\\sum_{|\\alpha|\\le k}\\|\\partial^\\alpha u\\|_{L^p}^{p}\\Bigr)^{1/p}\\ (p<\\infty),\\qquad \\|u\\|_{W^{k,\\infty}}=\\max_{|\\alpha|\\le k}\\|\\partial^\\alpha u\\|_{L^\\infty}.$$\nTwo points matter: $u$ **itself** must lie in $L^p$ (not merely $L^1_{\\mathrm{loc}}$), and the sum runs over **every** $|\\alpha|\\le k$, not only over the top order $|\\alpha|=k$ (otherwise $u$ and the lower derivatives are uncontrolled and $\\|\\cdot\\|$ is not a norm). With this norm $W^{k,p}$ is complete, hence a **Banach space** ($1\\le p\\le\\infty$); for $p=2$, $W^{k,2}=H^k$ is even a **Hilbert space**, and in particular\n$$\\langle u,v\\rangle_{H^1}=\\int_\\Omega uv\\,dx+\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx ,$$\nwhere **both terms are needed**: the gradient term alone cannot distinguish constants, while the product term alone discards all derivative information.\n\n**Zero boundary values: $H_0^1$.** The correct description of zero boundary values is a **closure**:\n$$H_0^1(\\Omega)=\\overline{C_c^\\infty(\\Omega)}^{\\ \\|\\cdot\\|_{H^1}},$$\nthe closure of the compactly supported smooth functions in the $H^1$ norm. The phrase \"vanishes on the boundary\" has no meaning in $H^1$ by itself (boundary values of $H^1$ functions require a trace theorem), whereas the closure is an operational definition: $u$ can be approximated in $H^1$ by $C_c^\\infty$ functions. $H_0^1$ is a Hilbert space, and for bounded $\\Omega$ the Poincaré inequality makes $\\int_\\Omega|\\nabla u|^2$ an equivalent norm; weak solutions of the Laplacian ($u\\in H_0^1$ with $\\int\\nabla u\\cdot\\nabla v=\\int fv$ for all $v\\in H_0^1$) are defined there. Moreover, for $1\\le p<\\infty$ the space $C^\\infty(\\Omega)\\cap W^{k,p}(\\Omega)$ is dense in $W^{k,p}(\\Omega)$, and on $\\mathbb{R}^n$ the space $C_c^\\infty(\\mathbb{R}^n)$ is dense.",
+    "formulas": [
+      {
+        "latex": "\\int_\\Omega u\\,\\partial^{\\alpha}\\varphi\\,dx=(-1)^{|\\alpha|}\\int_\\Omega v_{\\alpha}\\,\\varphi\\,dx,\\qquad\\forall\\varphi\\in\\mathcal{D}(\\Omega)",
+        "note": "弱导数的定义：负号 $(-1)^{|\\alpha|}$ 与「对一切检验函数成立」缺一不可，并且 $v_\\alpha$ **必须也是 $L^1_{\\mathrm{loc}}$ 函数**。",
+        "noteEn": "The definition of the weak derivative: the sign $(-1)^{|\\alpha|}$ and the requirement that the identity hold for **every** test function are both essential, and $v_\\alpha$ **must itself be locally integrable**."
+      },
+      {
+        "latex": "f\\in L^1_{\\mathrm{loc}}(I)\\ \\text{有弱导数}\\ v\\in L^1_{\\mathrm{loc}}(I)\\iff f=\\tilde f\\ \\text{a.e.},\\ \\tilde f\\in AC_{\\mathrm{loc}}(I),\\ \\text{此时}\\ v=\\tilde f'",
+        "note": "一维的等价刻画（$I$ 为区间）：弱可导 $\\iff$ 几乎处处等于局部绝对连续函数。由此 $H$ 没有弱导数。",
+        "noteEn": "One-dimensional characterisation ($I$ an interval): weak differentiability is equivalent to being a.e. equal to a locally absolutely continuous function. Hence $H$ has no weak derivative."
+      },
+      {
+        "latex": "W^{k,p}(\\Omega)=\\bigl\\{u\\in L^{p}(\\Omega):\\ \\partial^{\\alpha}u\\in L^{p}(\\Omega)\\ \\text{（弱导数意义）},\\ \\forall\\,|\\alpha|\\le k\\bigr\\}",
+        "note": "定义里 $u$ 本身要在 $L^p$，且要求**所有** $|\\alpha|\\le k$ 阶弱导数都在 $L^p$ 中。",
+        "noteEn": "The definition requires $u$ itself to lie in $L^p$ and demands that **all** weak derivatives with $|\\alpha|\\le k$ lie in $L^p$."
+      },
+      {
+        "latex": "\\|u\\|_{W^{k,p}}=\\Bigl(\\sum_{|\\alpha|\\le k}\\|\\partial^{\\alpha}u\\|_{L^{p}}^{p}\\Bigr)^{1/p}",
+        "note": "范数对**每个** $|\\alpha|\\le k$ 求和（不只最高阶）；$W^{k,p}$ 由此成为巴拿赫空间，$W^{k,2}=H^k$ 是希尔伯特空间。",
+        "noteEn": "The norm sums over **every** $|\\alpha|\\le k$ (not only the top order); with it $W^{k,p}$ is a Banach space and $W^{k,2}=H^k$ is a Hilbert space."
+      },
+      {
+        "latex": "\\langle u,v\\rangle_{H^{1}}=\\int_\\Omega uv\\,dx+\\int_\\Omega\\nabla u\\cdot\\nabla v\\,dx",
+        "note": "$H^1=W^{1,2}$ 的内积：$u$ 与梯度**两项都要**（只留梯度项会漏掉常数阶信息）。",
+        "noteEn": "The inner product of $H^1=W^{1,2}$: both the function and its gradient terms are needed (the gradient term alone leaves constants invisible)."
+      },
+      {
+        "latex": "H_0^{1}(\\Omega)=\\overline{C_c^{\\infty}(\\Omega)}^{\\ \\|\\cdot\\|_{H^{1}}}",
+        "note": "零边值的正确刻画是闭包：$C_c^\\infty(\\Omega)$ 在 $H^1$ 范数下的闭包，而不是「边界上取零」的口头描述。",
+        "noteEn": "Zero boundary values are correctly described by a closure: the closure of $C_c^\\infty(\\Omega)$ in the $H^1$ norm, rather than by the informal phrase \"vanishing on the boundary\"."
+      }
+    ],
+    "properties": [
+      "弱导数若存在则**唯一**（a.e.）：两个候选之差与一切检验函数配对为零，由变分基本引理相等 a.e.。$u$ 的分布导数若恰好是 $L^1_{\\mathrm{loc}}$ 函数 $v$，则 $v$ 就是弱导数。",
+      "弱导数与古典导数互不包含：$|x|$ 在 $0$ 处古典不可导却有弱导数 $\\operatorname{sgn}x$；Cantor 函数 a.e. 可导（导数 $0$）却没有弱导数（分布导数是奇异测度）；$u$ 处处可导且 $u'\\in L^1_{\\mathrm{loc}}$ 时弱导数存在并等于 $u'$。",
+      "$H$ 在含 $0$ 的区间上**没有**弱导数：它的分布导数是 $\\delta$，而 $\\delta$ 不是 $L^1_{\\mathrm{loc}}$ 函数。判据「导数的结果必须是函数」是这一节最易错的地方。",
+      "$W^{k,p}$ 是巴拿赫空间（$1\\le p\\le\\infty$），$W^{k,2}=H^k$ 是希尔伯特空间，且嵌入 $W^{k,p}\\subset W^{j,p}$（$j\\le k$）连续；$1\\le p<\\infty$ 时 $C^\\infty(\\Omega)\\cap W^{k,p}$ 在 $W^{k,p}$ 中稠密（磨光 + 截断）。",
+      "$H_0^1(\\Omega)$ 是 $C_c^\\infty(\\Omega)$ 在 $H^1$ 范数下的闭包，因而是闭子空间；有界区域上 $H_0^1\\subsetneq H^1$（常数函数属于 $H^1$ 但不属于 $H_0^1$），Poincaré 不等式使 $\\int|\\nabla u|^2$ 与 $H^1$ 范数等价。"
+    ],
+    "propertiesEn": [
+      "A weak derivative, if it exists, is **unique** (a.e.): the difference of two candidates pairs to zero with every test function, hence vanishes a.e. by the fundamental lemma. If the distributional derivative of $u$ happens to be a locally integrable function $v$, then $v$ is the weak derivative.",
+      "Weak and classical derivatives do not contain one another: $|x|$ is classically non-differentiable at $0$ yet has the weak derivative $\\operatorname{sgn}x$; the Cantor function is differentiable a.e. (with derivative $0$) yet has no weak derivative, its distributional derivative being a singular measure; if $u$ is everywhere differentiable with $u'\\in L^1_{\\mathrm{loc}}$, the weak derivative exists and equals $u'$.",
+      "The Heaviside function $H$ has **no** weak derivative on any interval containing $0$: its distributional derivative is $\\delta$, which is not a locally integrable function. The test \"the result must be a function\" is the most frequent source of error in this topic.",
+      "$W^{k,p}$ is a Banach space ($1\\le p\\le\\infty$) and $W^{k,2}=H^k$ is a Hilbert space; the inclusions $W^{k,p}\\subset W^{j,p}$ ($j\\le k$) are continuous, and for $1\\le p<\\infty$ the space $C^\\infty(\\Omega)\\cap W^{k,p}$ is dense in $W^{k,p}$ (mollification plus cutoff).",
+      "$H_0^1(\\Omega)$ is the closure of $C_c^\\infty(\\Omega)$ in the $H^1$ norm and hence a closed subspace; on a bounded domain $H_0^1\\subsetneq H^1$ (constants lie in $H^1$ but not in $H_0^1$), and the Poincaré inequality makes $\\int|\\nabla u|^2$ equivalent to the $H^1$ norm."
+    ],
+    "expression": {
+      "text": "∫u ∂^α φ = (−1)^|α| ∫v φ（∀φ ∈ 𝒟）；W^{k,p} = {u ∈ L^p：一切 |α| ≤ k 的弱导数 ∈ L^p}",
+      "symbol": "∂^α u = v ∈ L¹_loc",
+      "note": "弱导数的候选必须是 $L^1_{\\mathrm{loc}}$ 函数；$H_0^1$ 是 $C_c^\\infty$ 在 $H^1$ 范数下的闭包。",
+      "noteEn": "The candidate for a weak derivative must be locally integrable; $H_0^1$ is the $H^1$-closure of $C_c^\\infty$."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "abs(x)",
+          "color": "#4cc9f0",
+          "label": "f(x) = |x|"
+        },
+        {
+          "expr": "sqrt(x*x+0.01)",
+          "color": "#ffd166",
+          "label": "光滑化 √(x²+0.01) → |x|"
+        },
+        {
+          "expr": "sign(x)",
+          "color": "#ff6b9d",
+          "label": "f′(x) = sgn x（弱导数）"
+        }
+      ],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -0.35,
+        2.3
+      ],
+      "title": "|x| 的弱导数：把 |x| 光滑化为 √(x²+ε²)（ε=0.1），其导数 x/√(x²+ε²) 在 ε→0 时趋于 sgn x"
+    },
+    "examples": [
+      {
+        "problem": "证明 $f(x)=|x|$ 在 $(-1,1)$ 上有弱导数 $\\operatorname{sgn}x$。",
+        "solution": "取 $\\varphi\\in\\mathcal{D}(-1,1)$（故 $\\varphi(\\pm1)=0$），把积分拆成两段分部积分：\n$$\\int_{-1}^{1}|x|\\varphi'(x)\\,dx=\\int_{-1}^{0}(-x)\\varphi'(x)\\,dx+\\int_{0}^{1}x\\varphi'(x)\\,dx .$$\n两段分别为\n$$\\int_{-1}^{0}(-x)\\varphi'=\\bigl[-x\\varphi\\bigr]_{-1}^{0}+\\int_{-1}^{0}\\varphi=-\\varphi(-1)+\\int_{-1}^{0}\\varphi=\\int_{-1}^{0}\\varphi=\\int_{-1}^{0}\\varphi,$$\n$$\\int_{0}^{1}x\\varphi'=\\bigl[x\\varphi\\bigr]_{0}^{1}-\\int_{0}^{1}\\varphi=\\bigl[x\\varphi\\bigr]_{0}^{1}-\\int_{0}^{1}\\varphi=\\varphi(1)-\\int_{0}^{1}\\varphi=-\\int_{0}^{1}\\varphi=-\\int_{0}^{1}\\varphi .$$\n（端点项因为 $\\varphi(\\pm1)=0$ 而消失，$[-x\\varphi]_{-1}^{0}$ 中 $\\varphi(-1)=0$。）相加得\n$$\\int_{-1}^{1}|x|\\varphi'=(-1)\\Bigl[\\int_{0}^{1}\\varphi-\\int_{-1}^{0}\\varphi\\Bigr]=-\\int_{-1}^{1}\\operatorname{sgn}(x)\\varphi(x)\\,dx,$$\n即 $\\int |x|\\varphi'=(-1)^{1}\\int(\\operatorname{sgn}x)\\varphi$ 对一切 $\\varphi$ 成立，故 $\\operatorname{sgn}x\\in L^\\infty\\subset L^1_{\\mathrm{loc}}$ 就是 $|x|$ 的弱导数。"
+      },
+      {
+        "problem": "证明 Heaviside 函数 $H=\\mathbf{1}_{(0,\\infty)}$（限制在 $(-1,1)$ 上）**没有**弱导数。",
+        "solution": "反证。设存在 $v\\in L^1_{\\mathrm{loc}}(-1,1)$ 使\n$$\\int_{-1}^{1}H(x)\\varphi'(x)\\,dx=-\\int_{-1}^{1}v(x)\\varphi(x)\\,dx\\qquad\\forall\\varphi\\in\\mathcal{D}(-1,1).$$\n左端等于 $\\int_{0}^{1}\\varphi'=\\varphi(1)-\\varphi(0)=-\\varphi(0)$（因 $\\operatorname{supp}\\varphi\\subset(-1,1)$，$\\varphi(1)=0$），故条件等价于\n$$\\int_{-1}^{1}v(x)\\varphi(x)\\,dx=\\varphi(0)\\qquad\\forall\\varphi\\in\\mathcal{D}(-1,1),$$\n也就是说 $v$ 必须「表示 $\\delta$」。取 $\\psi\\in C_c^\\infty(-1,1)$，$\\psi(0)=1$，$\\psi\\ge0$，令 $\\varphi_\\varepsilon(x)=\\psi(x/\\varepsilon)$，则 $\\varphi_\\varepsilon(0)=1$，而\n$$1=\\Bigl|\\int_{-1}^{1}v\\varphi_\\varepsilon\\Bigr|\\le\\|\\psi\\|_\\infty\\int_{|x|<\\varepsilon}|v(x)|\\,dx\\longrightarrow0\\qquad(\\varepsilon\\to0^+),$$\n因为局部可积函数在小测度集上的积分趋于零。矛盾，故这样的 $v$ 不存在：$H$ 在含 $0$ 的区间上没有弱导数（它的分布导数是 $\\delta$，而 $\\delta$ 不是 $L^1_{\\mathrm{loc}}$ 函数）。这也与一维刻画一致——$H$ 不可能 a.e. 等于局部绝对连续函数。"
+      }
+    ],
+    "tags": [
+      "弱导数",
+      "索伯列夫空间",
+      "H¹ 空间",
+      "H₀¹",
+      "绝对连续",
+      "变分方法"
+    ],
+    "links": [
+      "distribution-derivative",
+      "distribution-theory",
+      "lp-spaces",
+      "absolutely-continuous",
+      "lebesgue-differentiation",
+      "sobolev-embedding",
+      "weak-solution-lax-milgram"
+    ]
+  }
+]

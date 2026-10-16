@@ -1,0 +1,569 @@
+[
+  {
+    "id": "linear-space-general",
+    "title": "线性空间：定义与性质",
+    "titleEn": "Linear Spaces: Definition and Properties",
+    "branch": "linear",
+    "level": 5,
+    "summary": "在数域上装备加法与数乘、满足八条公理的集合；向量、矩阵、多项式、连续函数都是它的成员，是线性代数全部概念的共同舞台。",
+    "summaryEn": "A set with addition and scalar multiplication over a number field satisfying eight axioms — the common stage of linear algebra, with vectors, matrices, polynomials and continuous functions as members.",
+    "definition": "设 $F$ 是数域（本节点取 $F=\\mathbb{R}$ 或 $\\mathbb{C}$），$V$ 是非空集合。如果在 $V$ 上定义了两种运算——**加法**（任意 $\\alpha,\\beta\\in V$ 对应 $V$ 中的一个元素 $\\alpha+\\beta$）与**数乘**（任意 $k\\in F$、$\\alpha\\in V$ 对应 $V$ 中的一个元素 $k\\alpha$）——并且对任意 $\\alpha,\\beta,\\gamma\\in V$、$k,l\\in F$ 满足下面八条公理，就称 $V$ 为数域 $F$ 上的**线性空间**（也叫向量空间），$V$ 中的元素称为**向量**。\n\n八条公理分两组。**加法四条**：① 结合律 $(\\alpha+\\beta)+\\gamma=\\alpha+(\\beta+\\gamma)$；② 交换律 $\\alpha+\\beta=\\beta+\\alpha$；③ 存在零向量 $\\mathbf{0}$，使 $\\alpha+\\mathbf{0}=\\alpha$；④ 每个 $\\alpha$ 都有负向量 $-\\alpha$，使 $\\alpha+(-\\alpha)=\\mathbf{0}$。**数乘四条**：⑤ 数乘结合律 $k(l\\alpha)=(kl)\\alpha$；⑥ 单位元 $1\\alpha=\\alpha$；⑦ 分配律 $k(\\alpha+\\beta)=k\\alpha+k\\beta$；⑧ 分配律 $(k+l)\\alpha=k\\alpha+l\\alpha$。两种运算都必须「运算结果仍在 $V$ 中」（封闭性）——这是检验反例时的第一站。\n\n典型例子：$\\mathbb{R}^n$（数组空间）；次数不超过 $n$ 的实多项式全体 $P_n(\\mathbb{R})$（含零多项式）；$m\\times n$ 实矩阵全体 $M_{m\\times n}(\\mathbb{R})$；闭区间上的连续函数全体 $C[a,b]$。它们的加法与数乘都按「逐点」进行，八条公理逐条可见。反例：$V=\\{(x,y)\\in\\mathbb{R}^2: x\\ge 0\\}$ 按通常运算不是线性空间——取 $k=-1$，$(1,1)\\in V$ 但 $k(1,1)=(-1,-1)\\notin V$，对数乘不封闭。\n\n由公理可直接推出：零向量与负向量都唯一、$0\\alpha=\\mathbf{0}$、$k\\mathbf{0}=\\mathbf{0}$、$(-1)\\alpha=-\\alpha$（左边的 $0$ 是数零，右边是零向量，别混）。**子空间判定**：$V$ 的非空子集 $W$ 是子空间，当且仅当三条同时成立——① $W\\neq\\varnothing$（验证 $\\mathbf{0}\\in W$ 通常最省事）；② 对加法封闭：$\\alpha,\\beta\\in W\\Rightarrow\\alpha+\\beta\\in W$；③ 对数乘封闭：$\\alpha\\in W,\\ k\\in F\\Rightarrow k\\alpha\\in W$。三条缺一不可：第一象限非空、对加法也封闭，但对 $k=-1$ 不封闭；空集虽然使两条封闭性空真成立，却不是子空间（三条里第一条就不满足）。$\\{\\mathbf{0}\\}$ 与 $V$ 本身叫**平凡子空间**；子空间的交仍是子空间，而两个子空间的并一般不是子空间。",
+    "definitionEn": "Let $F$ be a number field ($F=\\mathbb{R}$ or $\\mathbb{C}$) and $V$ a nonempty set. If two operations are defined on $V$ — **addition**, turning any $\\alpha,\\beta\\in V$ into some $\\alpha+\\beta\\in V$, and **scalar multiplication**, turning $k\\in F$ and $\\alpha\\in V$ into some $k\\alpha\\in V$ — and the following eight axioms hold for all $\\alpha,\\beta,\\gamma\\in V$ and $k,l\\in F$, then $V$ is called a **linear space** (or vector space) over $F$, and its elements are called **vectors**.\n\nThe axioms form two groups. **Four for addition**: (1) associativity $(\\alpha+\\beta)+\\gamma=\\alpha+(\\beta+\\gamma)$; (2) commutativity $\\alpha+\\beta=\\beta+\\alpha$; (3) a zero vector $\\mathbf{0}$ with $\\alpha+\\mathbf{0}=\\alpha$; (4) a negative $-\\alpha$ for each $\\alpha$ with $\\alpha+(-\\alpha)=\\mathbf{0}$. **Four for scalar multiplication**: (5) $k(l\\alpha)=(kl)\\alpha$; (6) the unit law $1\\alpha=\\alpha$; (7) $k(\\alpha+\\beta)=k\\alpha+k\\beta$; (8) $(k+l)\\alpha=k\\alpha+l\\alpha$. Both operations must stay inside $V$ (closure) — the first thing to test in a counterexample.\n\nStandard examples: $\\mathbb{R}^n$; real polynomials of degree at most $n$, $P_n(\\mathbb{R})$ (including the zero polynomial); all real $m\\times n$ matrices $M_{m\\times n}(\\mathbb{R})$; all continuous functions $C[a,b]$ on a closed interval. Addition and scalar multiplication act pointwise, and the axioms are visible term by term. A counterexample: $V=\\{(x,y)\\in\\mathbb{R}^2: x\\ge 0\\}$ with the usual operations is not a linear space, since with $k=-1$ the vector $(1,1)\\in V$ gives $k(1,1)=(-1,-1)\\notin V$.\n\nImmediate consequences: the zero vector and each negative are unique, and $0\\alpha=\\mathbf{0}$, $k\\mathbf{0}=\\mathbf{0}$, $(-1)\\alpha=-\\alpha$ (keep the scalar $0$ and the zero vector $\\mathbf{0}$ apart). **Subspace test**: a nonempty subset $W\\subseteq V$ is a subspace iff all three conditions hold — (1) $W\\neq\\varnothing$ (showing $\\mathbf{0}\\in W$ is usually easiest); (2) closed under addition; (3) closed under scalar multiplication. None can be dropped: the first quadrant is nonempty and closed under addition but fails for $k=-1$, while the empty set vacuously satisfies both closure rules yet is not a subspace. $\\{\\mathbf{0}\\}$ and $V$ are the **trivial subspaces**; intersections of subspaces are subspaces, but a union of two subspaces generally is not.",
+    "formulas": [
+      {
+        "latex": "(\\alpha+\\beta)+\\gamma=\\alpha+(\\beta+\\gamma),\\qquad \\alpha+\\beta=\\beta+\\alpha",
+        "note": "加法结合律与交换律（公理①、②）。",
+        "noteEn": "Associativity and commutativity of addition (axioms 1 and 2)."
+      },
+      {
+        "latex": "\\alpha+\\mathbf{0}=\\alpha,\\qquad \\alpha+(-\\alpha)=\\mathbf{0}",
+        "note": "零向量与负向量（公理③、④）：两者都由 α 唯一确定。",
+        "noteEn": "Zero vector and negatives (axioms 3 and 4); each is uniquely determined by α."
+      },
+      {
+        "latex": "k(l\\alpha)=(kl)\\alpha,\\qquad 1\\,\\alpha=\\alpha",
+        "note": "数乘结合律与单位元（公理⑤、⑥）。",
+        "noteEn": "Associativity of scalar multiplication and the unit law (axioms 5 and 6)."
+      },
+      {
+        "latex": "k(\\alpha+\\beta)=k\\alpha+k\\beta,\\qquad (k+l)\\alpha=k\\alpha+l\\alpha",
+        "note": "两条分配律（公理⑦、⑧）：数乘对向量加法分配，数加法也对数乘分配。",
+        "noteEn": "The two distributive laws (axioms 7 and 8): scalars distribute over vector addition, and scalar addition distributes over scalar multiplication."
+      },
+      {
+        "latex": "0\\,\\alpha=\\mathbf{0},\\qquad (-1)\\alpha=-\\alpha,\\qquad k\\alpha=\\mathbf{0}\\ \\Longrightarrow\\ k=0\\ \\text{或}\\ \\alpha=\\mathbf{0}",
+        "note": "由公理推出的常用结论；最后一条用到数域中非零元可作除数。",
+        "noteEn": "Standard consequences of the axioms; the last one uses that nonzero scalars are invertible in a number field."
+      }
+    ],
+    "properties": [
+      "零向量与每个向量的负向量都唯一；0α = 0、(−1)α = −α 是公理的推论，不是追加假设。",
+      "kα = 0（零向量）当且仅当 k = 0 或 α = 0；这条结论用到数域里非零数可作除数，是「数域」而非一般环上的性质。",
+      "子空间的判定三条（非空、对加法封闭、对数乘封闭）缺一不可；一个非空却不含零向量的集合必违反某条封闭性（否则 0α = 0 会落入其中），对加法不封闭的反例常取 α + β 越出集合。",
+      "{0} 与 V 是每个线性空间的平凡子空间；子空间的交仍是子空间，两个子空间的并一般不是（除非一个包含另一个）。",
+      "线性组合、线性表出、线性相关、基与维数等概念只用八条公理推出，因此对数组、多项式、矩阵、函数空间同样适用——这正是公理化定义的价值。"
+    ],
+    "propertiesEn": [
+      "The zero vector and the negative of each vector are unique; 0α = 0 and (−1)α = −α are consequences of the axioms rather than extra assumptions.",
+      "kα = 0 (the zero vector) holds iff k = 0 or α = 0; this relies on dividing by a nonzero scalar, so it is a property of a number field rather than of a general ring.",
+      "The three subspace conditions — nonempty, closed under addition, closed under scalar multiplication — are all indispensable; a nonempty set missing the zero vector must violate some closure (otherwise 0α = 0 would land in it), and typical addition failures take α + β outside the set.",
+      "{0} and V are the trivial subspaces of every linear space; an intersection of subspaces is a subspace, whereas a union of two subspaces generally is not (unless one contains the other).",
+      "Linear combinations, span, independence, bases and dimension follow from the eight axioms alone, so they apply equally to arrays, polynomials, matrices and function spaces — the payoff of the axiomatic definition."
+    ],
+    "examples": [
+      {
+        "problem": "判断 $W=\\{(x,y,z)\\in\\mathbb{R}^3: x+2y-z=0\\}$ 是否为 $\\mathbb{R}^3$ 的子空间，并说明 $W$ 的几何形状。",
+        "solution": "按三条逐一检查。① 非空：代入原点得 $0+0-0=0$，所以 $(0,0,0)\\in W$。② 对加法封闭：设 $u=(x_1,y_1,z_1)$、$v=(x_2,y_2,z_2)\\in W$，则 $x_1+2y_1-z_1=0$、$x_2+2y_2-z_2=0$，于是 $u+v$ 的坐标满足 $(x_1+x_2)+2(y_1+y_2)-(z_1+z_2)=0+0=0$，故 $u+v\\in W$。③ 对数乘封闭：设 $k\\in\\mathbb{R}$，则 $(kx_1)+2(ky_1)-(kz_1)=k\\cdot 0=0$，故 $ku\\in W$。三条全过，$W$ 是子空间。事实上 $z=x+2y$，所以 $W=\\{(x,y,x+2y): x,y\\in\\mathbb{R}\\}=\\operatorname{span}\\{(1,0,1),(0,1,2)\\}$，是 $\\mathbb{R}^3$ 中过原点的一张平面，维数为 2。"
+      },
+      {
+        "problem": "在连续函数空间 $C[0,1]$ 中，判断 $W_1=\\{f: f(0)=0\\}$ 与 $W_2=\\{f: f(0)=1\\}$ 是否为子空间。",
+        "solution": "对 $W_1$：零函数满足 $f(0)=0$，非空；若 $f,g\\in W_1$，则 $(f+g)(0)=f(0)+g(0)=0$；若 $k\\in\\mathbb{R}$，则 $(kf)(0)=k\\cdot 0=0$。三条全过，$W_1$ 是子空间。对 $W_2$：取 $f,g\\in W_2$，则 $(f+g)(0)=1+1=2\\neq 1$，对加法不封闭；等价地，$0\\cdot f$ 是零函数而不在 $W_2$ 中，说明只要非空却不含零向量，就至少违反一条封闭性。$W_2$ 不是子空间——它是子空间 $W_1$ 的一个平移，属于「仿射集」而不是线性子空间。"
+      }
+    ],
+    "tags": [
+      "线性空间",
+      "子空间",
+      "公理",
+      "抽象向量空间"
+    ],
+    "links": [
+      "linear-combination",
+      "vector-space-basis",
+      "linear-transformation",
+      "inner-product-space",
+      "normed-space"
+    ]
+  },
+  {
+    "id": "basis-change",
+    "title": "基变换与坐标变换",
+    "titleEn": "Change of Basis and Coordinate Transformations",
+    "branch": "linear",
+    "level": 5,
+    "summary": "同一向量换一组基来读，坐标就换了；两组基之间由可逆的过渡矩阵联系，坐标遵守「旧坐标 = P × 新坐标」。",
+    "summaryEn": "Reading the same vector in a new basis changes its coordinates; the two bases are linked by an invertible transition matrix, and coordinates obey old = P times new.",
+    "definition": "设 $V$ 是数域上的 $n$ 维线性空间，$\\alpha_1,\\dots,\\alpha_n$ 与 $\\beta_1,\\dots,\\beta_n$ 是 $V$ 的两组基。每个 $\\beta_j$ 都能唯一地用 $\\alpha$ 组线性表出；把这些坐标按列排成矩阵 $P$，记作 $$(\\beta_1,\\dots,\\beta_n)=(\\alpha_1,\\dots,\\alpha_n)P,$$ 即 $P$ 的第 $j$ 列恰是 $\\beta_j$ 在旧基 $\\alpha$ 下的坐标。这个 $P$ 称为从旧基 $\\alpha$ 到新基 $\\beta$ 的**过渡矩阵**（换基矩阵）。\n\n本节点的约定（与库内其它节点保持一致）：$P$ 的列 = 新基向量在旧基下的坐标。由此得到核心公式「**旧坐标 = P × 新坐标**」：设 $\\xi$ 在旧基下的坐标为 $x$、在新基下的坐标为 $x'$，则 $x=Px'$，反向换算为 $x'=P^{-1}x$。这个方向极易写反——做题第一步先把 $(\\beta)=(\\alpha)P$ 写下来，再代坐标。\n\n$P$ 一定**可逆**。理由：若 $Pc=\\mathbf{0}$ 且 $c\\neq\\mathbf{0}$，则 $(\\beta)c=(\\alpha)Pc=\\mathbf{0}$，说明 $\\beta$ 组线性相关，与「$\\beta$ 是基」矛盾。反过来，若 $\\alpha$ 是基、$P$ 可逆，则由上式定义的 $\\beta$ 组也自动是基（一般结论：$n$ 个向量构成基，当且仅当它们关于某组基的坐标矩阵可逆）。于是从新基回到旧基的过渡矩阵是 $P^{-1}$：$$(\\alpha_1,\\dots,\\alpha_n)=(\\beta_1,\\dots,\\beta_n)P^{-1}.$$\n\n坐标公式的推导：把 $\\xi=(\\alpha_1,\\dots,\\alpha_n)x=(\\beta_1,\\dots,\\beta_n)x'$ 中的 $(\\beta)=(\\alpha)P$ 代入，得 $\\xi=(\\alpha_1,\\dots,\\alpha_n)(Px')$。由于 $\\alpha$ 组线性无关，表示系数唯一，比较即得 $x=Px'$。若再换一组基 $\\gamma$ 且 $(\\gamma)=(\\beta)Q$，则 $(\\gamma)=(\\alpha)PQ$——过渡矩阵可以接力相乘。特别地，$\\mathbb{R}^n$ 中把基向量按列排成矩阵 $A$（在标准基下），则从标准基到该基的过渡矩阵就是 $A$。",
+    "definitionEn": "Let $V$ be an $n$-dimensional linear space over a number field, with two bases $\\alpha_1,\\dots,\\alpha_n$ and $\\beta_1,\\dots,\\beta_n$. Each $\\beta_j$ is uniquely a linear combination of the $\\alpha$'s; arranging those coordinates as the $j$-th column of a matrix $P$ gives $$(\\beta_1,\\dots,\\beta_n)=(\\alpha_1,\\dots,\\alpha_n)P,$$ so column $j$ of $P$ holds the coordinates of $\\beta_j$ in the old basis. The matrix $P$ is called the **transition matrix** from the old basis $\\alpha$ to the new basis $\\beta$.\n\nThe convention of this node (consistent across the library): the columns of $P$ are the coordinates of the new basis vectors in the old basis. It yields the core rule **old coordinates = P × new coordinates**: if $\\xi$ has coordinates $x$ in the old basis and $x'$ in the new one, then $x=Px'$, and conversely $x'=P^{-1}x$. The direction is easily reversed by mistake — always write $(\\beta)=(\\alpha)P$ first, then substitute the coordinates.\n\n$P$ is always **invertible**. Indeed, if $Pc=\\mathbf{0}$ with $c\\neq\\mathbf{0}$, then $(\\beta)c=(\\alpha)Pc=\\mathbf{0}$, contradicting linear independence of the $\\beta$'s. Conversely, if $\\alpha$ is a basis and $P$ is invertible, the $\\beta$'s defined above form a basis too (in general, $n$ vectors form a basis iff their coordinate matrix with respect to some basis is invertible). Hence the transition matrix from the new basis back to the old one is $P^{-1}$.\n\nDerivation of the coordinate rule: substitute $(\\beta)=(\\alpha)P$ into $\\xi=(\\alpha_1,\\dots,\\alpha_n)x=(\\beta_1,\\dots,\\beta_n)x'$ to get $\\xi=(\\alpha_1,\\dots,\\alpha_n)(Px')$. Uniqueness of coordinates in the independent set $\\alpha$ gives $x=Px'$. For a further basis $\\gamma$ with $(\\gamma)=(\\beta)Q$, one has $(\\gamma)=(\\alpha)PQ$, so transition matrices compose by multiplication. In particular, in $\\mathbb{R}^n$, placing the basis vectors as the columns of a matrix $A$ (in the standard basis) makes $A$ the transition matrix from the standard basis.",
+    "formulas": [
+      {
+        "latex": "(\\beta_1,\\dots,\\beta_n)=(\\alpha_1,\\dots,\\alpha_n)P",
+        "note": "换基约定：P 的第 j 列是 βⱼ 在旧基 α 下的坐标。",
+        "noteEn": "Change-of-basis convention: column j of P gives the coordinates of β_j in the old basis α."
+      },
+      {
+        "latex": "x=Px',\\qquad x'=P^{-1}x",
+        "note": "坐标变换核心公式：旧坐标 = P × 新坐标；新坐标 = P⁻¹ × 旧坐标。",
+        "noteEn": "Core coordinate rule: old coordinates = P × new coordinates; new coordinates = P⁻¹ × old."
+      },
+      {
+        "latex": "x_i=\\sum_{j=1}^{n}p_{ij}\\,x'_j\\qquad(i=1,2,\\dots,n)",
+        "note": "分量形式：P 的第 i 行与新坐标列向量做内积，得到旧坐标的第 i 个分量。",
+        "noteEn": "Component form: row i of P dotted with the new coordinate vector gives the i-th old coordinate."
+      },
+      {
+        "latex": "(\\alpha_1,\\dots,\\alpha_n)=(\\beta_1,\\dots,\\beta_n)P^{-1}",
+        "note": "P 一定可逆；从新基回到旧基的过渡矩阵是 P⁻¹。",
+        "noteEn": "P is always invertible; the matrix P⁻¹ takes the new basis back to the old one."
+      },
+      {
+        "latex": "(\\gamma_1,\\dots,\\gamma_n)=(\\beta_1,\\dots,\\beta_n)Q\\quad\\Longrightarrow\\quad(\\gamma_1,\\dots,\\gamma_n)=(\\alpha_1,\\dots,\\alpha_n)PQ",
+        "note": "连续换基：过渡矩阵相乘，顺序与基的书写顺序一致（α→β→γ 对应 PQ）。",
+        "noteEn": "Successive changes compose: for α→β→γ the transition matrix is PQ, in the same order as the bases are written."
+      }
+    ],
+    "properties": [
+      "过渡矩阵一定可逆；反之，若 (β) = (α)P 而 P 不可逆，则 β 组线性相关，不能是基。",
+      "方向约定：「旧坐标 = P × 新坐标」，即 x = Px′、x′ = P⁻¹x；写反方向会让全部坐标出错。",
+      "复合律：α→β 用 P、β→γ 用 Q，则 α→γ 用 PQ；从新基回旧基用 P⁻¹。",
+      "ℝⁿ 中把新基向量按列排成矩阵 A，则 A 就是从标准基到新基的过渡矩阵，标准坐标 = A × 新坐标（可用它快速心算验证方向）。",
+      "换基只改变坐标、不改变向量本身；许多问题（对角化、二次型化简、正交化）本质上都是「选一组好基」。"
+    ],
+    "propertiesEn": [
+      "A transition matrix is always invertible; conversely, if (β) = (α)P with P singular, the β's are linearly dependent and cannot be a basis.",
+      "Direction of the convention: old coordinates = P × new coordinates, x = Px′ and x′ = P⁻¹x; reversing it corrupts every coordinate.",
+      "Composition: α→β uses P and β→γ uses Q, so α→γ uses PQ, while going back from a new basis to the old one uses P⁻¹.",
+      "In ℝⁿ, putting the new basis vectors as columns of a matrix A makes A the transition matrix from the standard basis, with standard coordinates = A × new coordinates (a quick way to double-check the direction).",
+      "A change of basis changes coordinates but never the vector itself; many problems (diagonalization, reducing quadratic forms, orthogonalization) are really about choosing a good basis."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^2$ 中取旧基 $\\alpha_1=(1,0)$、$\\alpha_2=(0,1)$（标准基），新基 $\\beta_1=(1,1)$、$\\beta_2=(1,-1)$。(1) 写出过渡矩阵 $P$；(2) 求向量 $\\xi=(3,1)$ 在新基下的坐标。",
+        "solution": "(1) 按约定，$P$ 的列是新基向量在标准基下的坐标，故 $P=\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$。(2) 由 $x=Px'$ 得 $x'=P^{-1}x$。$\\det P=1\\cdot(-1)-1\\cdot 1=-2$，$P^{-1}=\\dfrac{1}{-2}\\begin{pmatrix}-1&-1\\\\-1&1\\end{pmatrix}=\\dfrac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$。于是 $x'=\\dfrac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}3\\\\1\\end{pmatrix}=\\dfrac12\\begin{pmatrix}4\\\\2\\end{pmatrix}=\\begin{pmatrix}2\\\\1\\end{pmatrix}$。验算：$2\\beta_1+1\\beta_2=(2,2)+(1,-1)=(3,1)=\\xi$。"
+      },
+      {
+        "problem": "设两组基满足 $(\\beta)=(\\alpha)P$ 与 $(\\gamma)=(\\beta)Q$，其中 $P=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$，$Q=\\begin{pmatrix}2&0\\\\1&3\\end{pmatrix}$。已知 $\\xi$ 在 $\\alpha$ 下的坐标为 $x=(1,1)^{\\mathrm T}$，求 $\\xi$ 在 $\\gamma$ 下的坐标。",
+        "solution": "先求 $\\alpha\\to\\gamma$ 的过渡矩阵 $R=PQ=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}\\begin{pmatrix}2&0\\\\1&3\\end{pmatrix}=\\begin{pmatrix}3&3\\\\1&3\\end{pmatrix}$。由 $x=Rx_\\gamma$ 得 $x_\\gamma=R^{-1}x$。$\\det R=9-3=6$，$R^{-1}=\\dfrac16\\begin{pmatrix}3&-3\\\\-1&3\\end{pmatrix}$，故 $x_\\gamma=\\dfrac16\\begin{pmatrix}3-3\\\\-1+3\\end{pmatrix}=\\begin{pmatrix}0\\\\1/3\\end{pmatrix}$。分步验算：先去 β 系，$x_\\beta=P^{-1}x=\\begin{pmatrix}1&-1\\\\0&1\\end{pmatrix}\\begin{pmatrix}1\\\\1\\end{pmatrix}=\\begin{pmatrix}0\\\\1\\end{pmatrix}$，即 $\\xi=\\beta_2$；再由 $x_\\gamma=Q^{-1}x_\\beta$，$Q^{-1}=\\dfrac16\\begin{pmatrix}3&0\\\\-1&2\\end{pmatrix}$，得 $x_\\gamma=\\dfrac16\\begin{pmatrix}0\\\\2\\end{pmatrix}=\\begin{pmatrix}0\\\\1/3\\end{pmatrix}$，一致。最后核对：$\\xi=\\beta_2=\\alpha_1+\\alpha_2$，而 $\\gamma_2=3\\beta_2=3(\\alpha_1+\\alpha_2)$，所以 $\\dfrac13\\gamma_2=\\alpha_1+\\alpha_2=\\xi$。"
+      }
+    ],
+    "tags": [
+      "过渡矩阵",
+      "坐标变换",
+      "换基"
+    ],
+    "links": [
+      "vector-space-basis",
+      "linear-transformation",
+      "matrix-similarity-diagonalization",
+      "linear-dependence",
+      "orthonormal-basis"
+    ]
+  },
+  {
+    "id": "linear-transformation",
+    "title": "线性变换及其矩阵表示",
+    "titleEn": "Linear Transformations and Matrix Representation",
+    "branch": "linear",
+    "level": 5,
+    "summary": "保持加法与数乘的映射；取定基后每个线性变换恰好对应一个矩阵，换基时矩阵按 A′ = P⁻¹AP 相似变化。",
+    "summaryEn": "Maps preserving addition and scalar multiplication; once bases are fixed, each linear transformation is represented by exactly one matrix, which changes by similarity A′ = P⁻¹AP under a change of basis.",
+    "definition": "设 $V,W$ 是数域 $F$ 上的线性空间。映射 $T:V\\to W$ 如果对任意 $\\alpha,\\beta\\in V$ 和任意 $k,l\\in F$ 都满足 $$T(k\\alpha+l\\beta)=kT(\\alpha)+lT(\\beta),$$ 就称为从 $V$ 到 $W$ 的**线性变换**（线性映射）。这条定义等价于两条：**保加法** $T(\\alpha+\\beta)=T(\\alpha)+T(\\beta)$ 与**保数乘** $T(k\\alpha)=kT(\\alpha)$。取 $k=l=0$ 立即得到 $T(\\mathbf{0})=\\mathbf{0}$，所以「$T(0)=0$」是线性的必要条件，但不是充分条件。当 $W=V$ 时称 $T$ 为 $V$ 上的线性变换。\n\n典型例子：恒等变换 $I$、数乘变换 $T(\\alpha)=k\\alpha$、投影 $P(x,y,z)=(x,y,0)$、多项式空间上的求导算子 $D(p)=p'$、积分算子 $T(f)(x)=\\int_0^x f(t)\\,\\mathrm dt$、以及「左乘矩阵」$T(x)=Ax$。非线性反例：$T(x)=x+1$（连原点都不固定）、$T(x)=x^2$、$T(x)=\\lVert x\\rVert$。\n\n**矩阵表示**：设 $\\alpha_1,\\dots,\\alpha_n$ 是 $V$ 的基，$\\beta_1,\\dots,\\beta_m$ 是 $W$ 的基。把每个像 $T(\\alpha_j)$ 用 $\\beta$ 基表出：$T(\\alpha_j)=a_{1j}\\beta_1+\\cdots+a_{mj}\\beta_m$，以这些系数为第 $j$ 列排成 $m\\times n$ 矩阵 $A$，就得到 $T$ 在给定基下的矩阵。坐标公式：若 $\\xi=(\\alpha_1,\\dots,\\alpha_n)x$，则 $T(\\xi)=(\\beta_1,\\dots,\\beta_m)(Ax)$——**矩阵的第 j 列就是 T(αⱼ) 的坐标**，矩阵乘法一次性完成「变换 + 换坐标」。取定基后 $T\\mapsto A$ 是一一对应：复合对应矩阵乘法 $T_2T_1\\leftrightarrow A_2A_1$，可逆变换对应可逆矩阵。\n\n**换基下的变化**：设 $T$ 是 $V$ 上的线性变换，在旧基 $\\alpha$ 下矩阵为 $A$，在新基 $\\beta$ 下矩阵为 $A'$，且 $(\\beta)=(\\alpha)P$（约定同「基变换与坐标变换」节点：$P$ 的列是新基在旧基下的坐标）。则 $$A'=P^{-1}AP,$$ 即同一线性变换在不同基下的矩阵**相似**，$P$ 正是那个过渡矩阵。推导：旧基下坐标满足 $y=Ax$；由于 $x=Px'$、$y=Py'$，代入得 $Py'=APx'$，于是 $y'=P^{-1}APx'$。",
+    "definitionEn": "Let $V,W$ be linear spaces over a number field $F$. A map $T:V\\to W$ is called a **linear transformation** (linear map) if $$T(k\\alpha+l\\beta)=kT(\\alpha)+lT(\\beta)$$ for all $\\alpha,\\beta\\in V$ and all $k,l\\in F$. The definition is equivalent to two rules: $T(\\alpha+\\beta)=T(\\alpha)+T(\\beta)$ (preserving addition) and $T(k\\alpha)=kT(\\alpha)$ (preserving scalar multiplication). Taking $k=l=0$ gives $T(\\mathbf{0})=\\mathbf{0}$, so $T(0)=0$ is necessary for linearity but far from sufficient. If $W=V$, one says $T$ is a linear transformation on $V$.\n\nExamples: the identity $I$, scalar maps $T(\\alpha)=k\\alpha$, the projection $P(x,y,z)=(x,y,0)$, the derivative operator $D(p)=p'$ on polynomials, the integral operator $T(f)(x)=\\int_0^x f(t)\\,\\mathrm dt$, and left multiplication by a matrix $T(x)=Ax$. Non-linear counterexamples: $T(x)=x+1$ (it does not even fix the origin), $T(x)=x^2$, $T(x)=\\lVert x\\rVert$.\n\n**Matrix representation**: let $\\alpha_1,\\dots,\\alpha_n$ be a basis of $V$ and $\\beta_1,\\dots,\\beta_m$ a basis of $W$. Express each image, $T(\\alpha_j)=a_{1j}\\beta_1+\\cdots+a_{mj}\\beta_m$, and arrange the coefficients as the $j$-th column of an $m\\times n$ matrix $A$. Coordinate formula: if $\\xi=(\\alpha_1,\\dots,\\alpha_n)x$ then $T(\\xi)=(\\beta_1,\\dots,\\beta_m)(Ax)$ — **column j of A is the coordinate vector of $T(\\alpha_j)$**, and one matrix multiplication performs the transformation and the coordinate bookkeeping at once. With bases fixed, $T\\mapsto A$ is a bijection: composition corresponds to matrix multiplication $T_2T_1\\leftrightarrow A_2A_1$, and invertibility to invertible matrices.\n\n**Under a change of basis**: let $T$ be a linear transformation on $V$, with matrix $A$ in the old basis $\\alpha$ and $A'$ in the new basis $\\beta$, where $(\\beta)=(\\alpha)P$ (same convention as in the change-of-basis node: columns of $P$ are the new basis vectors in the old basis). Then $$A'=P^{-1}AP,$$ i.e. matrices of the same transformation in different bases are **similar**, with $P$ the transition matrix. Derivation: coordinates in the old basis satisfy $y=Ax$; since $x=Px'$ and $y=Py'$, substitution gives $Py'=APx'$, hence $y'=P^{-1}APx'$. For a map between two different spaces, changing the basis of $V$ by $P$ and that of $W$ by $Q$ gives $A'=Q^{-1}AP$ instead; the similarity formula above is the special case $V=W$ with the same transition matrix applied on both sides.",
+    "formulas": [
+      {
+        "latex": "T(k\\alpha+l\\beta)=kT(\\alpha)+lT(\\beta)",
+        "note": "线性变换的定义式；等价于保加法 + 保数乘。",
+        "noteEn": "The defining identity of a linear transformation; equivalent to preserving addition and scalar multiplication."
+      },
+      {
+        "latex": "T(\\alpha_j)=\\sum_{i=1}^{m}a_{ij}\\beta_i,\\qquad A=(a_{ij})_{m\\times n}",
+        "note": "矩阵表示：A 的第 j 列是 T(αⱼ) 在给定基下的坐标。",
+        "noteEn": "Matrix representation: column j of A is the coordinate vector of T(α_j) in the chosen bases."
+      },
+      {
+        "latex": "y=Ax\\qquad\\bigl(\\xi=(\\alpha)x\\ \\Longrightarrow\\ T(\\xi)=(\\beta)y\\bigr)",
+        "note": "坐标公式：用矩阵乘法计算线性变换的作用（先取坐标，再乘矩阵）。",
+        "noteEn": "Coordinate formula: matrix multiplication computes the action of T (take coordinates, then multiply)."
+      },
+      {
+        "latex": "(\\beta)=(\\alpha)P\\quad\\Longrightarrow\\quad A'=P^{-1}AP",
+        "note": "换基公式：同一变换在新基下的矩阵是 P⁻¹AP，P 为过渡矩阵（方向与「旧坐标 = P × 新坐标」一致）。",
+        "noteEn": "Change-of-basis formula: in a new basis the matrix becomes P⁻¹AP, with P the transition matrix (the same P as in old coordinates = P × new coordinates)."
+      },
+      {
+        "latex": "T_2T_1\\ \\leftrightarrow\\ A_2A_1,\\qquad T^{-1}\\ \\leftrightarrow\\ A^{-1}",
+        "note": "复合与逆的对应：复合顺序与矩阵乘法顺序一致（先作用的在右边）。",
+        "noteEn": "Composition and inverses: the order of composition matches matrix multiplication (the map applied first sits on the right)."
+      }
+    ],
+    "properties": [
+      "T 线性 ⟺ 保加法且保数乘；线性一定把零向量映为零向量，但 T(0) = 0 不代表线性（例如 T(x,y) = (x², y)，原点不动却不是线性映射）。",
+      "取定 V 与 W 的基后，线性变换与 m×n 矩阵一一对应；口诀「第 j 列 = T(αⱼ) 的坐标」是写出矩阵的快捷方式。",
+      "复合对应矩阵乘法：T₁: V→W 的矩阵为 A₁（基 α→β），T₂: W→U 的矩阵为 A₂（基 β→γ），则 T₂T₁ 的矩阵为 A₂A₁。",
+      "同空间换基：A′ = P⁻¹AP，P 是基变换的过渡矩阵；相似矩阵是同一变换的不同基版本，所以行列式、迹、秩、特征多项式都是相似不变量。",
+      "线性变换的核与像都是子空间；T 可逆 ⟺ 在任意给定基下其矩阵可逆，且此时 T⁻¹ 的矩阵为 A⁻¹。"
+    ],
+    "propertiesEn": [
+      "T is linear iff it preserves addition and scalar multiplication; linearity forces T(0) = 0, but T(0) = 0 does not imply linearity (e.g. T(x,y) = (x², y) fixes the origin yet is not linear).",
+      "With bases of V and W fixed, linear maps correspond one-to-one to m×n matrices; the motto column j = coordinates of T(α_j) is the fastest way to write the matrix down.",
+      "Composition corresponds to matrix multiplication: T₁: V→W with matrix A₁ (bases α→β) and T₂: W→U with matrix A₂ (bases β→γ) compose to T₂T₁ with matrix A₂A₁.",
+      "For transformations of one space, a change of basis gives A′ = P⁻¹AP with P the transition matrix; similar matrices are two views of the same transformation, so determinant, trace, rank and characteristic polynomial are similarity invariants.",
+      "The kernel and the image of a linear map are subspaces; T is invertible iff its matrix in any chosen bases is invertible, and then T⁻¹ has matrix A⁻¹."
+    ],
+    "examples": [
+      {
+        "problem": "设 $P_2(\\mathbb{R})$ 是次数不超过 2 的多项式空间（取基 $1,x,x^2$），$D(p)=p'$ 是求导算子。求 $D$ 在该基下的矩阵，并用矩阵乘法计算 $D$ 作用于 $p=3+2x-x^2$ 的结果。",
+        "solution": "$D(1)=0$、$D(x)=1$、$D(x^2)=2x$，按列排坐标得 $D$ 的矩阵 $A=\\begin{pmatrix}0&1&0\\\\0&0&2\\\\0&0&0\\end{pmatrix}$。$p$ 的坐标向量为 $x=(3,2,-1)^{\\mathrm T}$，逐行相乘得 $Ax=(0\\cdot 3+1\\cdot 2+0\\cdot(-1),\\ 0+0+2\\cdot(-1),\\ 0)^{\\mathrm T}=(2,-2,0)^{\\mathrm T}$，对应多项式 $2-2x$，与直接求导 $p'=2-2x$ 一致。另外 $A^3=O$：求导作用三次就是零算子，这是幂零变换的典型例子（与若尔当标准型相呼应）。"
+      },
+      {
+        "problem": "在 $\\mathbb{R}^2$ 中，$T$ 是逆时针旋转 $90^\\circ$，在标准基 $\\alpha_1=(1,0)$、$\\alpha_2=(0,1)$ 下矩阵为 $A=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$。取新基 $\\beta_1=(1,1)$、$\\beta_2=(1,-1)$，求 $T$ 在新基下的矩阵 $A'$。",
+        "solution": "过渡矩阵 $P=\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$（列 = 新基在标准基下的坐标），$P^{-1}=\\dfrac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$。由换基公式 $A'=P^{-1}AP$：先算 $AP=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=\\begin{pmatrix}-1&1\\\\1&1\\end{pmatrix}$，再算 $A'=\\dfrac12\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}-1&1\\\\1&1\\end{pmatrix}=\\dfrac12\\begin{pmatrix}0&2\\\\-2&0\\end{pmatrix}=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$。验算：$T(\\beta_1)=(-1,1)=0\\cdot\\beta_1-1\\cdot\\beta_2$，$T(\\beta_2)=(1,1)=1\\cdot\\beta_1+0\\cdot\\beta_2$，故矩阵两列分别为 $(0,-1)^{\\mathrm T}$ 与 $(1,0)^{\\mathrm T}$，与 $A'$ 一致。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.8,
+        1.8
+      ],
+      "yRange": [
+        -1.3,
+        1.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.15)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              -1,
+              1
+            ],
+            [
+              -1,
+              0
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.15)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            0
+          ],
+          "to": [
+            0,
+            1
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            -1,
+            0
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0
+          ],
+          "label": "(1,0)"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            1
+          ],
+          "label": "(0,1)"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.72,
+            0.4
+          ],
+          "text": "单位正方形"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.72,
+            0.35
+          ],
+          "text": "像 T(S)"
+        }
+      ],
+      "title": "逆时针旋转 90°：单位正方形 (1,0)→(0,1)"
+    },
+    "tags": [
+      "线性变换",
+      "矩阵表示",
+      "相似变换"
+    ],
+    "links": [
+      "basis-change",
+      "matrix-similarity-diagonalization",
+      "rank-nullity",
+      "vector-space-basis",
+      "matrix-operations"
+    ]
+  },
+  {
+    "id": "rank-nullity",
+    "title": "线性变换的核、像与维数定理",
+    "titleEn": "Kernel, Image and the Rank–Nullity Theorem",
+    "branch": "linear",
+    "level": 5,
+    "summary": "核是被压成零的向量集合，像是能取到的值域；维数定理 dim Ker T + dim Im T = dim V 把单射、满射与方程解集的自由度统一起来。",
+    "summaryEn": "The kernel collects the vectors crushed to zero and the image collects attainable values; the rank–nullity theorem dim Ker T + dim Im T = dim V unifies injectivity, surjectivity and degrees of freedom.",
+    "definition": "设 $T:V\\to W$ 是数域上的线性变换。称 $$\\ker T=\\{\\alpha\\in V: T(\\alpha)=\\mathbf{0}\\}$$ 为 $T$ 的**核**（零空间），称 $$\\operatorname{Im}T=\\{T(\\alpha):\\alpha\\in V\\}=T(V)$$ 为 $T$ 的**像**（值域）。$\\ker T$ 是 $V$ 的子空间，$\\operatorname{Im}T$ 是 $W$ 的子空间：核含零向量，且当 $\\alpha,\\beta\\in\\ker T$ 时 $T(k\\alpha+l\\beta)=kT(\\alpha)+lT(\\beta)=\\mathbf{0}$，仍落在核中；当 $u=T(\\alpha),v=T(\\beta)\\in\\operatorname{Im}T$ 时 $ku+lv=T(k\\alpha+l\\beta)$，仍落在像中。\n\n**维数定理**（秩零化度定理）：设 $V$ 是有限维线性空间，$T:V\\to W$ 是线性变换，则 $$\\dim\\ker T+\\dim\\operatorname{Im}T=\\dim V.$$ 其中 $\\dim\\operatorname{Im}T$ 称为 $T$ 的**秩**，$\\dim\\ker T$ 称为**零化度**。注意等号右边是**定义域 $V$ 的维数**，不是 $W$ 的维数——这是最容易记错的地方。矩阵版本：$m\\times n$ 矩阵 $A$ 满足 $\\operatorname{rank}(A)+\\operatorname{nullity}(A)=n$；把 $A$ 看成 $T:\\mathbb{R}^n\\to\\mathbb{R}^m$，$x\\mapsto Ax$，则 $\\operatorname{rank}(A)=\\dim\\operatorname{Im}T$，而齐次方程组 $Ax=0$ 的解空间正是 $\\ker T$，其维数为 $n-\\operatorname{rank}(A)$。\n\n**单射与满射**：$T$ 是单射 $\\iff\\ker T=\\{\\mathbf{0}\\}$（即 $Ax=0$ 只有零解）；$T$ 是满射 $\\iff\\operatorname{Im}T=W\\iff\\dim\\operatorname{Im}T=\\dim W$；当 $\\dim V=\\dim W<\\infty$ 时，「单射」「满射」「可逆（同构）」三者互相等价。直观理解：核度量被 $T$ 压成零的「信息量」，像度量 $T$ 能到达的范围，两者维数之和恒等于 $\\dim V$——压掉多少，到达的就少多少。\n\n**两个模型与不变子空间**：投影 $P(x,y,z)=(x,y,0)$ 的核是 $z$ 轴（1 维），像是 $xy$ 平面（2 维），$1+2=3$；求导 $D:P_n\\to P_n$ 的核是常数多项式（1 维），像是次数不超过 $n-1$ 的多项式（$n$ 维），$1+n=n+1$。若子空间 $W_0\\subseteq V$ 满足 $T(W_0)\\subseteq W_0$，就称 $W_0$ 为 $T$ 的**不变子空间**：$\\ker T$、$\\operatorname{Im}T$、以及后面要学的特征子空间都是典型例子。把 $W_0$ 的基扩充成 $V$ 的基，$T$ 的矩阵呈**分块上三角** $\\begin{pmatrix}B&C\\\\O&D\\end{pmatrix}$，左下角的零块 $O$ 正是 $T(W_0)\\subseteq W_0$ 的矩阵体现；反过来，矩阵若关于某组基呈这种形状，则前 $\\dim W_0$ 个基向量张成的子空间是不变子空间。",
+    "definitionEn": "Let $T:V\\to W$ be a linear transformation over a number field. The **kernel** (null space) and **image** (range) are $$\\ker T=\\{\\alpha\\in V: T(\\alpha)=\\mathbf{0}\\},\\qquad \\operatorname{Im}T=\\{T(\\alpha):\\alpha\\in V\\}=T(V).$$ The kernel is a subspace of $V$ and the image is a subspace of $W$: the kernel contains the zero vector and is closed under $k\\alpha+l\\beta$ (whose image is zero), while for $u=T(\\alpha)$ and $v=T(\\beta)$ the combination $ku+lv=T(k\\alpha+l\\beta)$ is again an image.\n\n**Rank–nullity theorem**: if $V$ is finite-dimensional and $T:V\\to W$ is linear, then $$\\dim\\ker T+\\dim\\operatorname{Im}T=\\dim V.$$ Here $\\dim\\operatorname{Im}T$ is the **rank** of $T$ and $\\dim\\ker T$ its **nullity**. Note that the right-hand side is the dimension of the **domain** $V$, not of $W$ — the most commonly misremembered point. Matrix form: an $m\\times n$ matrix $A$ satisfies $\\operatorname{rank}(A)+\\operatorname{nullity}(A)=n$; viewing $A$ as $T:\\mathbb{R}^n\\to\\mathbb{R}^m$, $x\\mapsto Ax$, the rank is $\\dim\\operatorname{Im}T$ and the solution space of $Ax=0$ is exactly $\\ker T$, of dimension $n-\\operatorname{rank}(A)$.\n\n**Injectivity and surjectivity**: $T$ is injective iff $\\ker T=\\{\\mathbf{0}\\}$ (i.e. $Ax=0$ has only the trivial solution); $T$ is surjective iff $\\operatorname{Im}T=W$ iff $\\dim\\operatorname{Im}T=\\dim W$; when $\\dim V=\\dim W<\\infty$, injective, surjective and invertible (isomorphism) are all equivalent. Intuitively, the kernel measures how much information is crushed to zero, the image measures how much of the target is reached, and the two dimensions always add up to $\\dim V$.\n\n**Two models and invariant subspaces**: the projection $P(x,y,z)=(x,y,0)$ has kernel the $z$-axis (dimension 1) and image the $xy$-plane (dimension 2), and $1+2=3$; the derivative $D:P_n\\to P_n$ has kernel the constant polynomials (dimension 1) and image the polynomials of degree at most $n-1$ (dimension $n$), and $1+n=n+1$. A subspace $W_0\\subseteq V$ with $T(W_0)\\subseteq W_0$ is called an **invariant subspace** of $T$; $\\ker T$, $\\operatorname{Im}T$ and eigenspaces are the standard examples. Extending a basis of $W_0$ to a basis of $V$ makes the matrix of $T$ **block upper triangular** $\\begin{pmatrix}B&C\\\\O&D\\end{pmatrix}$ (the entries below the first $\\dim W_0$ columns vanish); conversely, a matrix of that shape with respect to some basis exhibits the span of the first $\\dim W_0$ basis vectors as an invariant subspace.",
+    "formulas": [
+      {
+        "latex": "\\ker T=\\{\\alpha\\in V: T(\\alpha)=\\mathbf{0}\\},\\qquad \\operatorname{Im}T=\\{T(\\alpha):\\alpha\\in V\\}",
+        "note": "核与像的定义；核是 V 的子空间，像是 W 的子空间。",
+        "noteEn": "Definitions of kernel and image; the kernel is a subspace of V and the image a subspace of W."
+      },
+      {
+        "latex": "\\dim\\ker T+\\dim\\operatorname{Im}T=\\dim V",
+        "note": "维数定理（秩零化度定理）：右边恒为定义域 V 的维数，与 W 的维数无关。",
+        "noteEn": "The rank–nullity theorem: the right-hand side is always dim V, the dimension of the domain, independent of W."
+      },
+      {
+        "latex": "\\operatorname{rank}(A)+\\operatorname{nullity}(A)=n\\qquad(A\\ \\text{为}\\ m\\times n\\ \\text{矩阵})",
+        "note": "矩阵版本：rank 是像的维数，nullity 是 Ax = 0 解空间的维数，两数之和等于未知数个数 n。",
+        "noteEn": "Matrix version for an m×n matrix A: rank is the dimension of the image and nullity the dimension of the solution space of Ax = 0; the two add up to the number of unknowns n."
+      },
+      {
+        "latex": "T\\ \\text{单射}\\iff\\ker T=\\{\\mathbf{0}\\},\\qquad T\\ \\text{满射}\\iff\\dim\\operatorname{Im}T=\\dim W",
+        "note": "单射与满射判别；在 dim V = dim W 的有限维情形，单射、满射、可逆三者等价。",
+        "noteEn": "Tests for injectivity and surjectivity; for finite-dimensional V, W with dim V = dim W the three notions injective, surjective, invertible coincide."
+      },
+      {
+        "latex": "T(W_0)\\subseteq W_0\\quad\\Longrightarrow\\quad A\\ \\text{在适当基下为}\\ \\begin{pmatrix}B&C\\\\O&D\\end{pmatrix}",
+        "note": "不变子空间与分块上三角：取 W₀ 的基再扩充为 V 的基，前 dim W₀ 列的下方为零块；反之亦然。",
+        "noteEn": "Invariant subspaces and block upper triangular form: extend a basis of W₀ to a basis of V and the lower block below the first dim W₀ columns vanishes; the converse also holds."
+      }
+    ],
+    "properties": [
+      "ker T 与 Im T 都是子空间，分别落在定义域 V 与到达域 W 中。",
+      "维数定理：dim ker T + dim Im T = dim V；由此自动有 dim Im T ≤ min(dim V, dim W) 与 dim Im T = dim V − dim ker T。",
+      "T 单射 ⟺ ker T = {0}；T 满射 ⟺ dim Im T = dim W；有限维且 dim V = dim W 时，单射、满射、可逆三者互相等价。",
+      "对矩阵 A：rank(A) = dim Im T = 列空间的维数；Ax = 0 的解空间维数 = n − rank(A)；当 Ax = b 相容时，解集是「特解 + 齐次解空间」的仿射集。",
+      "不变子空间：T(W₀) ⊆ W₀；取 W₀ 的基扩充为全空间的基后矩阵为分块上三角，反之分块上三角矩阵对应一个不变子空间；特征子空间是不变子空间的最典型例子。"
+    ],
+    "propertiesEn": [
+      "ker T and Im T are subspaces, living in the domain V and the codomain W respectively.",
+      "Rank–nullity: dim ker T + dim Im T = dim V; hence dim Im T ≤ min(dim V, dim W) and dim Im T = dim V − dim ker T.",
+      "T is injective iff ker T = {0}; T is surjective iff dim Im T = dim W; for finite-dimensional spaces with dim V = dim W, injective, surjective and invertible are equivalent.",
+      "For a matrix A: rank(A) = dim Im T = dimension of the column space; the solution space of Ax = 0 has dimension n − rank(A); if Ax = b is consistent, its solution set is the affine set obtained by adding the solution space to any particular solution.",
+      "Invariant subspace: T(W₀) ⊆ W₀; extending a basis of W₀ to the whole space gives a block upper triangular matrix, and conversely such a block matrix exhibits an invariant subspace; eigenspaces are the archetypal examples."
+    ],
+    "examples": [
+      {
+        "problem": "设投影 $P:\\mathbb{R}^3\\to\\mathbb{R}^3$，$P(x,y,z)=(x,y,0)$。求 $\\ker P$、$\\operatorname{Im}P$ 及其维数，验证维数定理，并写出 $P$ 在标准基下的矩阵及其秩。",
+        "solution": "解方程 $P(x,y,z)=(0,0,0)$ 得 $x=y=0$、$z$ 任意，故 $\\ker P=\\{(0,0,z): z\\in\\mathbb{R}\\}=\\operatorname{span}\\{e_3\\}$，$\\dim\\ker P=1$。像由全体 $(x,y,0)$ 组成，即 $xy$ 平面，$\\operatorname{Im}P=\\operatorname{span}\\{e_1,e_2\\}$，$\\dim\\operatorname{Im}P=2$。于是 $\\dim\\ker P+\\dim\\operatorname{Im}P=1+2=3=\\dim\\mathbb{R}^3$，维数定理成立。$P$ 在标准基下的矩阵为 $A=\\operatorname{diag}(1,1,0)$，其秩 $\\operatorname{rank}(A)=2=\\dim\\operatorname{Im}P$。$P$ 既不是单射（$(0,0,1)\\mapsto\\mathbf{0}$，核非零）也不是满射（$z$ 方向的向量取不到）。"
+      },
+      {
+        "problem": "设 $A$ 是 $4\\times 5$ 矩阵，$\\operatorname{rank}(A)=3$。求齐次方程组 $Ax=0$ 解空间的维数；并说明 $Ax=b$ 是否有解能否由这些信息判定；若某个 $b$ 使方程组相容，解集是几维的？",
+        "solution": "把 $A$ 看成线性变换 $T:\\mathbb{R}^5\\to\\mathbb{R}^4$，$x\\mapsto Ax$，$Ax=0$ 的解空间就是 $\\ker T$。由维数定理，$\\dim\\ker T=5-\\dim\\operatorname{Im}T=5-\\operatorname{rank}(A)=5-3=2$，即解空间是 2 维的（通解含 2 个自由参数）。至于 $Ax=b$：满射要求 $\\dim\\operatorname{Im}T=\\dim\\mathbb{R}^4=4$，但 $\\dim\\operatorname{Im}T=\\operatorname{rank}(A)=3<4$，所以 $T$ 不满射，必存在使 $Ax=b$ 无解的 $b$——是否相容取决于 $b$ 是否落在 $A$ 的列空间中，无法仅凭秩判定。若某个 $b$ 使方程组相容，则解集为 $\\{x_0+\\xi: \\xi\\in\\ker T\\}$（特解加 2 维解空间），是 2 维仿射子空间，仍含 2 个自由参数。"
+      }
+    ],
+    "tags": [
+      "核",
+      "像",
+      "维数定理",
+      "秩零化度"
+    ],
+    "links": [
+      "matrix-rank",
+      "linear-transformation",
+      "homogeneous-solutions",
+      "nonhomogeneous-solutions",
+      "eigenvalue-eigenvector"
+    ]
+  },
+  {
+    "id": "jordan-form",
+    "title": "若尔当标准型初步",
+    "titleEn": "Jordan Normal Form: An Introduction",
+    "branch": "linear",
+    "level": 5,
+    "summary": "复数域上任何方阵都相似于若尔当标准型——由若尔当块拼成的准对角阵，是不可对角化矩阵的标准替代品。",
+    "summaryEn": "Over the complex numbers every square matrix is similar to a Jordan form, a block-diagonal array of Jordan blocks — the canonical substitute when a matrix cannot be diagonalized.",
+    "definition": "对角化失败的根源是特征向量不够用：例如 $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 只有一维特征子空间。若尔当标准型把「对角」放宽为「准对角」。$k$ 阶**若尔当块**定义为 $$J_k(\\lambda)=\\begin{pmatrix}\\lambda&1&&\\\\&\\lambda&\\ddots&\\\\&&\\ddots&1\\\\&&&\\lambda\\end{pmatrix}_{k\\times k},$$ 即主对角元全为 $\\lambda$、**上副对角线**（主对角线正上方紧邻的那条对角线，第 $i$ 行第 $i+1$ 列）全为 1、其余全为 0。**约定说明**：本库统一采用「1 放在上副对角线」的约定；有些教材把 1 放在下副对角线，两者互为转置，做任何具体计算时都不能混用。\n\n**若尔当标准型定理**：设 $A$ 是 $n$ 阶**复**矩阵，则存在可逆矩阵 $P$，使 $$P^{-1}AP=J=\\operatorname{diag}\\bigl(J_{k_1}(\\lambda_1),\\dots,J_{k_r}(\\lambda_r)\\bigr),\\qquad k_1+\\cdots+k_r=n,$$ 其中 $\\lambda_i$ 是 $A$ 的特征值（可以重复；同一特征值出现的次数等于它对应的若尔当块个数）。不计块的排列次序时 $J$ 由 $A$ 唯一确定。**存在性与域有关，表述必须严谨**：在复数域上，任意方阵都相似于若尔当标准型（复特征多项式总能完全分解）；在实数域上，只有当 $A$ 的特征值全为实数时才保证有实过渡矩阵的实若尔当形，否则要到复空间去求，或改用「实若尔当形」（复特征值用 2×2 的旋转—伸缩块代替）。\n\n**块的结构怎么数**：对特征值 $\\lambda$，$J$ 中 $\\lambda$ 的若尔当块个数等于几何重数 $$\\#\\{\\lambda\\ \\text{的若尔当块}\\}=n-r(\\lambda E-A)=\\dim\\ker(\\lambda E-A),$$ 各块阶数之和等于 $\\lambda$ 的代数重数（$|\\lambda E-A|=0$ 中 $\\lambda$ 的重数）；若尔当块的总数等于 $A$ 的线性无关特征向量的总数。于是 $A$ 可对角化 $\\iff$ 每个特征值的若尔当块全是一阶 $\\iff$ 对每个 $\\lambda$ 都有 $n-r(\\lambda E-A)$ 等于代数重数。特别地，$n$ 个互不相同的特征值一定保证可对角化；不可对角化时，用 $(\\lambda E-A)^2$ 等的秩还能进一步分出 2 阶及以上块的个数。\n\n**怎么用**：若尔当基由特征向量与广义特征向量链组成——对属于 $J_k(\\lambda)$ 的块，取向量链 $p_1,\\dots,p_k$ 满足 $(A-\\lambda E)p_1=\\mathbf{0}$、$(A-\\lambda E)p_{j+1}=p_j$（$j=1,\\dots,k-1$），把这些列排成 $P$ 就有 $P^{-1}AP=J$。若尔当型让矩阵幂与矩阵指数有显式公式（$A^m=PJ^mP^{-1}$、$\\mathrm e^{tA}=P\\,\\mathrm e^{tJ}P^{-1}$），是求解线性微分方程组 $\\frac{\\mathrm dx}{\\mathrm dt}=Ax$、分析幂零部分的标准工具。",
+    "definitionEn": "Diagonalization fails when there are too few eigenvectors: e.g. $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ has a one-dimensional eigenspace. The Jordan form relaxes diagonal to almost diagonal. The **Jordan block** of order $k$ is $$J_k(\\lambda)=\\begin{pmatrix}\\lambda&1&&\\\\&\\lambda&\\ddots&\\\\&&\\ddots&1\\\\&&&\\lambda\\end{pmatrix}_{k\\times k},$$ with $\\lambda$ on the main diagonal, 1's on the **superdiagonal** (the diagonal immediately above the main one, entry $(i,i+1)$) and 0's elsewhere. **Convention**: this library always puts the 1's on the superdiagonal; some textbooks use the subdiagonal instead, which is just the transpose — never mix the two in a computation.\n\n**Jordan normal form theorem**: for every $n\\times n$ **complex** matrix $A$ there is an invertible $P$ with $$P^{-1}AP=J=\\operatorname{diag}\\bigl(J_{k_1}(\\lambda_1),\\dots,J_{k_r}(\\lambda_r)\\bigr),\\qquad k_1+\\cdots+k_r=n,$$ where the $\\lambda_i$ are the eigenvalues of $A$ (possibly repeated; the number of occurrences of an eigenvalue equals the number of its Jordan blocks). The form $J$ is unique up to reordering the blocks. **Existence depends on the field, so the statement must be precise**: over $\\mathbb{C}$ every matrix has a Jordan form (the characteristic polynomial splits); over $\\mathbb{R}$ a real Jordan form with a real transition matrix is guaranteed only when all eigenvalues are real — otherwise one passes to the complexification or uses a real Jordan form whose complex eigenvalues appear as $2\\times2$ rotation-dilation blocks.\n\n**Counting the blocks**: for an eigenvalue $\\lambda$, the number of Jordan blocks of $\\lambda$ equals the geometric multiplicity $$\\#\\{\\text{Jordan blocks of}\\ \\lambda\\}=n-r(\\lambda E-A)=\\dim\\ker(\\lambda E-A),$$ and the sizes of those blocks sum to the algebraic multiplicity of $\\lambda$ (its multiplicity as a root of $|\\lambda E-A|=0$); the total number of Jordan blocks equals the number of linearly independent eigenvectors of $A$. Hence $A$ is diagonalizable iff every Jordan block has order 1 iff $n-r(\\lambda E-A)$ equals the algebraic multiplicity for each $\\lambda$. In particular, $n$ distinct eigenvalues always give diagonalizability; when $A$ is not diagonalizable, ranks of $(\\lambda E-A)^2$ and higher powers resolve the numbers of blocks of order 2 and above.\n\n**How it is used**: a Jordan basis consists of eigenvectors together with chains of generalized eigenvectors — for a block $J_k(\\lambda)$ take $p_1,\\dots,p_k$ with $(A-\\lambda E)p_1=\\mathbf{0}$ and $(A-\\lambda E)p_{j+1}=p_j$ for $j=1,\\dots,k-1$, and arrange them as the columns of $P$ to obtain $P^{-1}AP=J$. The Jordan form yields explicit formulas for powers and exponentials ($A^m=PJ^mP^{-1}$, $\\mathrm e^{tA}=P\\,\\mathrm e^{tJ}P^{-1}$), the standard tool for linear ODE systems $\\frac{\\mathrm dx}{\\mathrm dt}=Ax$ and for analyzing the nilpotent part.",
+    "formulas": [
+      {
+        "latex": "J_k(\\lambda)=\\begin{pmatrix}\\lambda&1&&\\\\&\\lambda&\\ddots&\\\\&&\\ddots&1\\\\&&&\\lambda\\end{pmatrix}_{k\\times k}",
+        "note": "k 阶若尔当块：对角元全为 λ，上副对角线全为 1（本库统一约定），其余为 0。",
+        "noteEn": "Jordan block of order k: λ on the diagonal and 1's on the superdiagonal (our library-wide convention), zeros elsewhere."
+      },
+      {
+        "latex": "P^{-1}AP=\\operatorname{diag}\\bigl(J_{k_1}(\\lambda_1),\\dots,J_{k_r}(\\lambda_r)\\bigr),\\qquad k_1+\\cdots+k_r=n",
+        "note": "复数域上任意 n 阶方阵都存在若尔当标准型；不计块的排列次序时唯一。",
+        "noteEn": "Every complex n×n matrix has a Jordan normal form, unique up to the order of the blocks."
+      },
+      {
+        "latex": "n-r(\\lambda E-A)=\\dim\\ker(\\lambda E-A)=\\lambda\\ \\text{的若尔当块个数}",
+        "note": "块数 = 几何重数；各块阶数之和 = 代数重数，块的总数 = 线性无关特征向量个数。",
+        "noteEn": "The number of Jordan blocks of λ equals its geometric multiplicity; the block sizes sum to the algebraic multiplicity, and the total number of blocks equals the number of linearly independent eigenvectors."
+      },
+      {
+        "latex": "A\\ \\text{可对角化}\\iff \\text{所有若尔当块均为}\\ 1\\ \\text{阶}",
+        "note": "可对角化的等价条件：每个特征值的几何重数 = 代数重数；此时 J 是对角阵。",
+        "noteEn": "Diagonalizable iff every Jordan block has order 1, i.e. geometric multiplicity equals algebraic multiplicity for each eigenvalue; then J is diagonal."
+      },
+      {
+        "latex": "J_k(\\lambda)=\\lambda E+N,\\quad N^k=O,\\qquad J_k(\\lambda)^m=\\sum_{i=0}^{k-1}\\binom{m}{i}\\lambda^{m-i}N^i",
+        "note": "块 = 对角部分 + 幂零部分：上副对角线全 1 的矩阵 N 满足 Nᵏ = O，因此对正整数 m，幂的展开只有前 k 项非零。",
+        "noteEn": "A block is diagonal plus nilpotent: the superdiagonal matrix N satisfies Nᵏ = 0, so for positive integers m the binomial expansion of the power has only the first k nonzero terms."
+      }
+    ],
+    "properties": [
+      "存在性与唯一性：复数域上任意方阵都相似于若尔当标准型，且不计块序时唯一；实数域上需要特征值全为实数才保证有实过渡矩阵的实若尔当形。",
+      "块数公式：λ 的若尔当块个数 = n − r(λE − A) = dim ker(λE − A)（几何重数）；各块阶数之和 = λ 的代数重数；块的总数 = 线性无关特征向量总数。",
+      "可对角化 ⟺ 所有若尔当块都是一阶 ⟺ 每个特征值的几何重数等于代数重数；n 个互异特征值必可对角化，此时 J 就是对角阵。",
+      "在复数域上两矩阵相似 ⟺ 它们的若尔当标准型相同（不计块序）；特征多项式、迹、行列式、秩都是相似不变量。",
+      "应用：Aᵐ = PJᵐP⁻¹、eᵗᴬ = PeᵗᴶP⁻¹；J 的幂与指数有显式公式（指数中出现 tⁱe^(λt) 型项），这是处理不可对角化情形（线性微分方程组、矩阵函数）的标准手段。"
+    ],
+    "propertiesEn": [
+      "Existence and uniqueness: every complex square matrix is similar to a Jordan form, unique up to the order of the blocks; over ℝ a real Jordan form (with real transition matrix) is guaranteed only when all eigenvalues are real.",
+      "Block count: the number of Jordan blocks of λ equals n − r(λE − A) = dim ker(λE − A), the geometric multiplicity; the block sizes sum to the algebraic multiplicity, and the total number of blocks equals the number of linearly independent eigenvectors.",
+      "Diagonalizable iff every Jordan block has order 1 iff geometric multiplicity equals algebraic multiplicity for every eigenvalue; n distinct eigenvalues always allow diagonalization, and then J is diagonal.",
+      "Over ℂ two matrices are similar iff their Jordan forms agree up to reordering of blocks; characteristic polynomial, trace, determinant and rank are similarity invariants.",
+      "Applications: Aᵐ = PJᵐP⁻¹ and eᵗᴬ = PeᵗᴶP⁻¹; powers and exponentials of J have explicit formulas (exponentials involve terms tⁱe^(λt)), the standard way to handle non-diagonalizable cases such as linear ODE systems and matrix functions."
+    ],
+    "examples": [
+      {
+        "problem": "求 $A=\\begin{pmatrix}3&-1\\\\1&1\\end{pmatrix}$ 的若尔当标准型 $J$，并求可逆矩阵 $P$ 使 $P^{-1}AP=J$。",
+        "solution": "特征多项式 $|\\lambda E-A|=(\\lambda-3)(\\lambda-1)-(-1)\\cdot 1=\\lambda^2-4\\lambda+4=(\\lambda-2)^2$，特征值为 $\\lambda=2$（二重）。$A-2E=\\begin{pmatrix}1&-1\\\\1&-1\\end{pmatrix}$，$r(A-2E)=1$，故 $\\lambda=2$ 的若尔当块个数为 $2-1=1$，只能是一个 2 阶块，$J=\\begin{pmatrix}2&1\\\\0&2\\end{pmatrix}$。求链：解 $(A-2E)p_1=\\mathbf{0}$ 取 $p_1=(1,1)^{\\mathrm T}$；再解 $(A-2E)p_2=p_1$，因 $(A-2E)(1,0)^{\\mathrm T}=(1,1)^{\\mathrm T}$，取 $p_2=(1,0)^{\\mathrm T}$。于是 $P=\\begin{pmatrix}1&1\\\\1&0\\end{pmatrix}$，$P^{-1}=\\begin{pmatrix}0&1\\\\1&-1\\end{pmatrix}$。验算：$AP=\\begin{pmatrix}2&3\\\\2&1\\end{pmatrix}$，$P^{-1}AP=\\begin{pmatrix}0&1\\\\1&-1\\end{pmatrix}\\begin{pmatrix}2&3\\\\2&1\\end{pmatrix}=\\begin{pmatrix}2&1\\\\0&2\\end{pmatrix}=J$。"
+      },
+      {
+        "problem": "求 $A=\\begin{pmatrix}3&1&-1\\\\-1&2&1\\\\0&1&2\\end{pmatrix}$ 的若尔当标准型，并用给出的 $P=\\begin{pmatrix}1&1&0\\\\0&1&1\\\\1&1&1\\end{pmatrix}$ 验证。",
+        "solution": "特征多项式 $|\\lambda E-A|=\\lambda^3-7\\lambda^2+16\\lambda-12=(\\lambda-2)^2(\\lambda-3)$。对 $\\lambda=2$：$A-2E=\\begin{pmatrix}1&1&-1\\\\-1&0&1\\\\0&1&0\\end{pmatrix}$，第三行 = 第一行 + 第二行，故 $r(A-2E)=2$，块数 $3-2=1$；对 $\\lambda=3$：$A-3E=\\begin{pmatrix}0&1&-1\\\\-1&-1&1\\\\0&1&-1\\end{pmatrix}$，第一、三行相同，$r(A-3E)=2$，块数 $3-2=1$。所以 $J=\\operatorname{diag}\\left(\\begin{pmatrix}2&1\\\\0&2\\end{pmatrix},\\,3\\right)=\\begin{pmatrix}2&1&0\\\\0&2&0\\\\0&0&3\\end{pmatrix}$。验证：记 $P=(p_1,p_2,p_3)$，逐列计算得 $Ap_1=(2,0,2)^{\\mathrm T}=2p_1$；$Ap_2=(3,2,3)^{\\mathrm T}=p_1+2p_2$；$Ap_3=(0,3,3)^{\\mathrm T}=3p_3$。三式合起来就是 $AP=PJ$，即 $P^{-1}AP=J$（也可直接算得 $AP=\\begin{pmatrix}2&3&0\\\\0&2&3\\\\2&3&3\\end{pmatrix}=PJ$）。"
+      }
+    ],
+    "tags": [
+      "若尔当块",
+      "若尔当标准型",
+      "幂零",
+      "相似标准形"
+    ],
+    "links": [
+      "matrix-similarity-diagonalization",
+      "eigenvalue-eigenvector",
+      "basis-change",
+      "linear-transformation",
+      "matrix-exponential"
+    ]
+  },
+  {
+    "id": "matrix-factorization",
+    "title": "矩阵的 QR 分解与奇异值分解初步",
+    "titleEn": "QR and Singular Value Decomposition: An Introduction",
+    "branch": "linear",
+    "level": 5,
+    "summary": "把矩阵拆成「正交 × 上三角」或「正交 × 对角 × 正交」；QR 由施密特正交化产生，SVD 用奇异值揭示矩阵真实的伸长率。",
+    "summaryEn": "Factoring a matrix as orthogonal × triangular or orthogonal × diagonal × orthogonal; QR comes from Gram–Schmidt, while SVD exposes the true stretching factors via singular values.",
+    "definition": "**QR 分解**：设 $A$ 是 $m\\times n$ 实矩阵且**列向量线性无关**（列满秩，此时必有 $n\\le m$），则存在唯一的分解 $$A=QR,$$ 其中 $Q$ 是 $m\\times n$ 矩阵，其列向量两两正交且长度为 1（$Q^{\\mathrm T}Q=E_n$，称为列正交标准矩阵）；$R$ 是 $n$ 阶上三角矩阵，且**对角元全为正**。存在性由 Gram–Schmidt 正交化给出：依次把 $A$ 的列 $a_1,\\dots,a_n$ 正交单位化得到 $q_1,\\dots,q_n$，则 $a_j=r_{1j}q_1+\\cdots+r_{jj}q_j$，其中 $r_{jj}$ 是 $a_j$ 减去它在 $q_1,\\dots,q_{j-1}$ 上投影后的长度；列线性无关保证 $r_{jj}>0$。把系数按列排成上三角阵就是 $R$。\n\n**约定与用途**：要求 $R$ 的对角元为正，分解才唯一；若允许对角元取负，可以逐列翻转符号得到别的 QR 分解。列不满秩时，带列主元的 QR 分解仍可进行，但 $R$ 会出现零对角元。QR 分解是数值计算的主力：解最小二乘问题 $\\min_x\\lVert Ax-b\\rVert$ 时，由 $A=QR$ 化为上三角方程组 $R\\hat x=Q^{\\mathrm T}b$，回代即可（比正规方程 $A^{\\mathrm T}Ax=A^{\\mathrm T}b$ 数值上更稳定）；它也是 QR 迭代求特征值与数值求解线性方程组的基础。\n\n**奇异值分解（SVD）**：设 $A$ 是任意 $m\\times n$ 实矩阵，则存在正交矩阵 $U$（$m$ 阶）与正交矩阵 $V$（$n$ 阶），使 $$A=U\\Sigma V^{\\mathrm T},$$ 其中 $\\Sigma$ 是与 $A$ 同型的矩阵，对角元 $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_{\\min(m,n)}\\ge 0$ 称为 $A$ 的**奇异值**（降序排列），其余元素为 0。奇异值与特征值的关系是核心：$\\sigma_i$ 的平方是 $A^{\\mathrm T}A$ 的特征值（按降序配对），即 $$\\sigma_i=\\sqrt{\\lambda_i(A^{\\mathrm T}A)};$$ $A^{\\mathrm T}A$ 对称半正定，特征值全部非负，开方不会出问题。非零奇异值的个数恰好等于 $\\operatorname{rank}(A)$：奇异值量化了矩阵在各正交方向上的「伸长率」。\n\n**两边对照与紧型**：$V$ 的列 $v_i$（右奇异向量）是 $A^{\\mathrm T}A$ 的单位特征向量，$U$ 的列 $u_i$（左奇异向量）是 $AA^{\\mathrm T}$ 的单位特征向量，且配对的它们满足 $Av_i=\\sigma_i u_i$。只保留非零奇异值就得到**紧（经济）型 SVD**：$A=\\sum_{i=1}^{r}\\sigma_i u_i v_i^{\\mathrm T}$，其中 $r=\\operatorname{rank}(A)$——把矩阵写成若干个秩 1 矩阵按重要性叠加。应用：截断 SVD 给出给定秩下的最佳低秩逼近（Eckart–Young 定理）、主成分分析、图像与数据压缩、伪逆与最小二乘。",
+    "definitionEn": "**QR factorization**: let $A$ be a real $m\\times n$ matrix with **linearly independent columns** (full column rank, so $n\\le m$). Then there is a unique factorization $$A=QR,$$ where $Q$ is $m\\times n$ with orthonormal columns ($Q^{\\mathrm T}Q=E_n$) and $R$ is an upper triangular $n\\times n$ matrix with **positive diagonal entries**. Existence comes from Gram–Schmidt: orthonormalizing the columns $a_1,\\dots,a_n$ in order gives $q_1,\\dots,q_n$ with $a_j=r_{1j}q_1+\\cdots+r_{jj}q_j$, where $r_{jj}$ is the length of $a_j$ after subtracting its projections onto $q_1,\\dots,q_{j-1}$; independent columns make $r_{jj}>0$. The coefficients, read column by column, form the upper triangular $R$.\n\n**Convention and uses**: positivity of the diagonal of $R$ is what makes the factorization unique; allowing negative diagonal entries lets one flip column signs to get other QR factorizations. If the columns are rank-deficient, a column-pivoted QR still exists but $R$ has zero diagonal entries. QR is a workhorse of numerical computation: the least-squares problem $\\min_x\\lVert Ax-b\\rVert$ becomes the upper triangular system $R\\hat x=Q^{\\mathrm T}b$, solved by back substitution (numerically more stable than the normal equations $A^{\\mathrm T}Ax=A^{\\mathrm T}b$); QR iteration for eigenvalues and numerical linear solvers also build on it.\n\n**Singular value decomposition (SVD)**: for every real $m\\times n$ matrix $A$ there are orthogonal matrices $U$ ($m\\times m$) and $V$ ($n\\times n$) with $$A=U\\Sigma V^{\\mathrm T},$$ where $\\Sigma$ has the same shape as $A$, with diagonal entries $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_{\\min(m,n)}\\ge 0$ called the **singular values** of $A$ (in decreasing order) and zeros elsewhere. The link to eigenvalues is the key: the singular values are the square roots of the eigenvalues of $A^{\\mathrm T}A$, paired in decreasing order, $$\\sigma_i=\\sqrt{\\lambda_i(A^{\\mathrm T}A)};$$ $A^{\\mathrm T}A$ is symmetric positive semidefinite, so its eigenvalues are nonnegative and the square roots are real. The number of nonzero singular values equals $\\operatorname{rank}(A)$: singular values quantify how much the matrix stretches along mutually orthogonal directions.\n\n**Pairing and the compact form**: the columns $v_i$ of $V$ (right singular vectors) are unit eigenvectors of $A^{\\mathrm T}A$, the columns $u_i$ of $U$ (left singular vectors) are unit eigenvectors of $AA^{\\mathrm T}$, and paired vectors satisfy $Av_i=\\sigma_i u_i$. Keeping only the nonzero singular values gives the **compact (economy) SVD** $A=\\sum_{i=1}^{r}\\sigma_i u_i v_i^{\\mathrm T}$ with $r=\\operatorname{rank}(A)$ — the matrix as a weighted sum of rank-one pieces. Applications: the truncated SVD is the best low-rank approximation of any given rank (Eckart–Young theorem), principal component analysis, image and data compression, and the pseudoinverse with least squares.",
+    "formulas": [
+      {
+        "latex": "A=QR,\\qquad Q^{\\mathrm T}Q=E_n,\\qquad R\\ \\text{上三角},\\ r_{ii}>0",
+        "note": "QR 分解：A 需列满秩；Q 列正交标准，R 上三角且对角元为正（唯一性约定）。",
+        "noteEn": "QR factorization: A must have full column rank; Q has orthonormal columns and R is upper triangular with positive diagonal (the uniqueness convention)."
+      },
+      {
+        "latex": "A=U\\Sigma V^{\\mathrm T},\\qquad U^{\\mathrm T}U=E_m,\\qquad V^{\\mathrm T}V=E_n",
+        "note": "SVD：U、V 都是正交矩阵，Σ 的对角元是非负且降序的奇异值，其余元素为 0。",
+        "noteEn": "SVD: U and V are orthogonal, and the diagonal of Σ holds the nonnegative singular values in decreasing order, with zeros elsewhere."
+      },
+      {
+        "latex": "\\sigma_i=\\sqrt{\\lambda_i(A^{\\mathrm T}A)}\\qquad\\bigl(i=1,\\dots,\\min(m,n)\\bigr)",
+        "note": "奇异值 = AᵀA 的特征值（降序）的平方根；AᵀA 对称半正定，故特征值非负。",
+        "noteEn": "Singular values are the square roots of the decreasing eigenvalues of AᵀA; AᵀA is positive semidefinite, so those eigenvalues are nonnegative."
+      },
+      {
+        "latex": "A=\\sum_{i=1}^{r}\\sigma_i\\,u_i v_i^{\\mathrm T},\\qquad r=\\operatorname{rank}(A)",
+        "note": "紧（经济）型 SVD：非零奇异值的个数就是矩阵的秩，矩阵拆成 r 个秩 1 外积之和。",
+        "noteEn": "Compact (economy) SVD: the number of nonzero singular values equals the rank, and the matrix becomes a sum of r rank-one outer products."
+      },
+      {
+        "latex": "R\\hat{x}=Q^{\\mathrm T}b",
+        "note": "用 QR 解最小二乘：列满秩时最小二乘解满足这个上三角方程组，回代即可（无需显式构造 AᵀA）。",
+        "noteEn": "Least squares via QR: with full column rank the least-squares solution solves this upper triangular system by back substitution, without forming AᵀA explicitly."
+      }
+    ],
+    "properties": [
+      "QR 的存在条件：A 列满秩（列向量线性无关）；此时对角元为正的 R 使分解唯一。列不满秩时 R 会出现零对角元，或改用带列主元的 QR 分解。",
+      "Q 的列正交标准（QᵀQ = E）；方阵情形 Q 是正交矩阵、|det Q| = 1，且 |det A| = ∏rᵢᵢ（R 的对角元乘积）。",
+      "SVD 对任意实矩阵都存在；U、V 正交，非零奇异值的个数 = rank(A)，奇异值按降序排列后由 A 唯一确定（相等的值可以互换次序）。",
+      "σ₁ = ‖A‖₂（谱范数），√(Σσᵢ²) = ‖A‖_F（Frobenius 范数）；A 与 Aᵀ 有相同的奇异值；AᵀA 与 AAᵀ 的非零特征值相同，都等于 σᵢ²。",
+      "Eckart–Young：截断 SVD 的 A_k = Σ_{i≤k} σᵢuᵢvᵢᵀ 是所有秩 ≤ k 的矩阵中在谱范数与 Frobenius 范数下距 A 最近的一个，误差分别为 σ_{k+1} 与 √(Σ_{i>k} σᵢ²)。"
+    ],
+    "propertiesEn": [
+      "QR exists when A has full column rank (linearly independent columns); positivity of the diagonal then makes the factorization unique. With rank-deficient columns, R develops zero diagonal entries, or one switches to column-pivoted QR.",
+      "The columns of Q are orthonormal (QᵀQ = E); for a square matrix Q is orthogonal with |det Q| = 1, and |det A| = ∏rᵢᵢ, the product of the diagonal entries of R.",
+      "SVD exists for every real matrix; U and V are orthogonal, the number of nonzero singular values equals rank(A), and the singular values are uniquely determined (up to ordering of equal values).",
+      "σ₁ = ‖A‖₂ (spectral norm) and √(Σσᵢ²) = ‖A‖_F (Frobenius norm); A and Aᵀ share the same singular values; AᵀA and AAᵀ have the same nonzero eigenvalues, all equal to σᵢ².",
+      "Eckart–Young: the truncated SVD A_k = Σ_{i≤k} σᵢuᵢvᵢᵀ is a best rank-k approximation of A in both the spectral and the Frobenius norm, with errors σ_{k+1} and √(Σ_{i>k} σᵢ²) respectively."
+    ],
+    "examples": [
+      {
+        "problem": "用 Gram–Schmidt 正交化求 $A=\\begin{pmatrix}1&1&0\\\\1&0&1\\\\0&1&1\\end{pmatrix}$ 的 QR 分解（要求 $R$ 的对角元为正）。",
+        "solution": "记三列 $a_1=(1,1,0)^{\\mathrm T}$、$a_2=(1,0,1)^{\\mathrm T}$、$a_3=(0,1,1)^{\\mathrm T}$。第一步：$|a_1|=\\sqrt 2$，$q_1=\\dfrac{1}{\\sqrt 2}(1,1,0)^{\\mathrm T}$。第二步：$a_2\\cdot q_1=\\dfrac{1}{\\sqrt 2}$，$a_2'=a_2-\\dfrac{1}{\\sqrt 2}q_1=\\left(\\dfrac12,-\\dfrac12,1\\right)^{\\mathrm T}$，$|a_2'|=\\dfrac{\\sqrt 6}{2}$，$q_2=\\dfrac{1}{\\sqrt 6}(1,-1,2)^{\\mathrm T}$。第三步：$a_3\\cdot q_1=\\dfrac{1}{\\sqrt 2}$，$a_3\\cdot q_2=\\dfrac{1}{\\sqrt 6}$，$a_3'=a_3-\\dfrac{1}{\\sqrt 2}q_1-\\dfrac{1}{\\sqrt 6}q_2=\\left(-\\dfrac23,\\dfrac23,\\dfrac23\\right)^{\\mathrm T}$，$|a_3'|=\\dfrac{2}{\\sqrt 3}$，$q_3=\\dfrac{1}{\\sqrt 3}(-1,1,1)^{\\mathrm T}$。于是 $Q=(q_1,q_2,q_3)$，$R=\\begin{pmatrix}\\sqrt 2&\\frac{\\sqrt 2}{2}&\\frac{\\sqrt 2}{2}\\\\0&\\frac{\\sqrt 6}{2}&\\frac{\\sqrt 6}{6}\\\\0&0&\\frac{2\\sqrt 3}{3}\\end{pmatrix}$，对角元全为正。验算：$Q^{\\mathrm T}Q=E_3$（六组内积逐一为 0 或 1）；再看乘积——第一列 $\\sqrt 2\\,q_1=(1,1,0)^{\\mathrm T}=a_1$，第二列 $\\frac{\\sqrt 2}{2}q_1+\\frac{\\sqrt 6}{2}q_2=\\frac12(1,1,0)+\\frac12(1,-1,2)=(1,0,1)^{\\mathrm T}=a_2$，第三列 $\\frac{\\sqrt 2}{2}q_1+\\frac{\\sqrt 6}{6}q_2+\\frac{2\\sqrt 3}{3}q_3=\\frac12(1,1,0)+\\frac16(1,-1,2)+\\frac23(-1,1,1)=(0,1,1)^{\\mathrm T}=a_3$，故 $QR=A$。"
+      },
+      {
+        "problem": "求 $A=\\begin{pmatrix}3&0\\\\4&5\\end{pmatrix}$ 的奇异值分解 $A=U\\Sigma V^{\\mathrm T}$。",
+        "solution": "先算 $A^{\\mathrm T}A=\\begin{pmatrix}3&4\\\\0&5\\end{pmatrix}\\begin{pmatrix}3&0\\\\4&5\\end{pmatrix}=\\begin{pmatrix}25&20\\\\20&25\\end{pmatrix}$，特征值 $\\lambda_1=45$、$\\lambda_2=5$，对应单位特征向量 $v_1=\\dfrac{1}{\\sqrt 2}(1,1)^{\\mathrm T}$、$v_2=\\dfrac{1}{\\sqrt 2}(1,-1)^{\\mathrm T}$。于是 $\\sigma_1=\\sqrt{45}=3\\sqrt 5$，$\\sigma_2=\\sqrt 5$，$\\Sigma=\\operatorname{diag}(3\\sqrt 5,\\sqrt 5)$。求左奇异向量：$Av_1=\\dfrac{1}{\\sqrt 2}(3,9)^{\\mathrm T}$，$u_1=\\dfrac{Av_1}{\\sigma_1}=\\dfrac{1}{\\sqrt{10}}(1,3)^{\\mathrm T}$；$Av_2=\\dfrac{1}{\\sqrt 2}(3,-1)^{\\mathrm T}$，$u_2=\\dfrac{Av_2}{\\sigma_2}=\\dfrac{1}{\\sqrt{10}}(3,-1)^{\\mathrm T}$。所以 $U=\\dfrac{1}{\\sqrt{10}}\\begin{pmatrix}1&3\\\\3&-1\\end{pmatrix}$，$V=\\dfrac{1}{\\sqrt 2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$。验算：$U^{\\mathrm T}U=V^{\\mathrm T}V=E_2$（两个矩阵都正交）；$Av_i=\\sigma_i u_i$ 逐一成立；$\\sigma_1\\sigma_2=3\\sqrt 5\\cdot\\sqrt 5=15=|\\det A|$；$\\sigma_1^2+\\sigma_2^2=45+5=50=3^2+0^2+4^2+5^2=\\lVert A\\rVert_F^2$；直接相乘 $U\\Sigma V^{\\mathrm T}=\\dfrac{1}{\\sqrt 2}\\begin{pmatrix}3&3\\\\9&-1\\end{pmatrix}\\cdot\\dfrac{1}{\\sqrt 2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}=\\begin{pmatrix}3&0\\\\4&5\\end{pmatrix}=A$。"
+      }
+    ],
+    "tags": [
+      "QR分解",
+      "SVD",
+      "奇异值",
+      "正交化"
+    ],
+    "links": [
+      "inner-product-orthogonality",
+      "orthonormal-basis",
+      "matrix-condition",
+      "least-squares-fitting",
+      "symmetric-matrix-diagonalization"
+    ]
+  }
+]

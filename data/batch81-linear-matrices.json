@@ -1,0 +1,677 @@
+[
+  {
+    "id": "matrix-operations",
+    "title": "矩阵的概念与运算",
+    "titleEn": "Matrices: Concepts and Operations",
+    "branch": "linear",
+    "level": 3,
+    "summary": "由数排成的矩形数表叫矩阵；加法与数乘按元素进行，乘法按「行乘列」进行，且乘法一般不交换、没有消去律。",
+    "summaryEn": "A matrix is a rectangular array of numbers; addition and scalar multiplication act entrywise while the product follows the row-by-column rule, and that product is generally neither commutative nor cancellative.",
+    "definition": "由 $m\\times n$ 个数排成的 $m$ 行 $n$ 列矩形数表叫 $m\\times n$ 矩阵，记作 $A=(a_{ij})$，其中 $a_{ij}$ 是第 $i$ 行第 $j$ 列的元素。行数与列数相等的矩阵叫方阵，只有一行的叫行矩阵、只有一列的叫列矩阵。两个矩阵相等，必须同型且对应位置的元素全部相等。矩阵不是数，它是一张「表」，这是理解它所有运算的前提。\n\n矩阵的加法与数乘按元素进行：$(A+B)_{ij}=a_{ij}+b_{ij}$、$(kA)_{ij}=k\\,a_{ij}$，都要求两个矩阵同型。乘法则完全不同：$A_{m\\times s}$ 与 $B_{s\\times n}$ 相乘要求 **前一个矩阵的列数等于后一个矩阵的行数**，乘积是 $m\\times n$ 矩阵，其第 $i$ 行第 $j$ 列元素为 $(AB)_{ij}=\\sum_{k=1}^{s}a_{ik}b_{kj}$，即 $A$ 的第 $i$ 行与 $B$ 的第 $j$ 列对应元素相乘后求和。\n\n乘法满足结合律与分配律，却**一般不满足交换律**，$AB\\ne BA$（有时两者连阶数都不同）；它还**没有消去律**，并存在「零因子」：$A\\ne O$、$B\\ne O$ 却可能 $AB=O$。根源在于矩阵乘法相当于压缩信息，不同的向量可能被映成同一个像，因此不能像数字那样约分。\n\n转置把行与列互换：$A^{\\mathrm{T}}$ 的第 $i$ 行第 $j$ 列元素是 $a_{ji}$。满足 $A^{\\mathrm{T}}=A$ 的矩阵叫对称矩阵，满足 $A^{\\mathrm{T}}=-A$ 的叫反对称矩阵（反对称矩阵的主对角线元素必为 0）。几种常见类型要认清：元素全为 0 的**零矩阵** $O$；主对角线全为 1、其余全为 0 的**单位矩阵** $E$（有些教材记作 $I$）；除主对角线外元素全为 0 的**对角矩阵**；主对角线一侧全为 0 的**上（下）三角矩阵**。矩阵是线性变换、线性方程组、二次型、图与网络的通用语言，掌握矩阵运算就等于拿到了线性代数的入场券。",
+    "definitionEn": "An m×n matrix is a rectangular array of m×n numbers: m rows and n columns, written A=(a_ij), where a_ij is the entry in row i and column j. A matrix with equally many rows and columns is square; a one-row matrix is called a row matrix and a one-column matrix a column matrix. Two matrices are equal only when they have the same size and all corresponding entries agree. A matrix is not a number but a table — that is the starting point for understanding every operation below.\n\nAddition and scalar multiplication are entrywise, (A+B)_ij=a_ij+b_ij and (kA)_ij=k a_ij, and require matrices of the same size. Multiplication is completely different: AB exists only when the number of columns of A equals the number of rows of B; then (AB)_ij is the dot product of row i of A with column j of B, i.e. the sum of a_ik b_kj over k. This row-by-column rule comes from composing linear maps and from eliminating unknowns in linear systems.\n\nThe product is associative and distributive, but generally not commutative: AB need not equal BA, and the two sides may even have different sizes. There is no cancellation law, and zero divisors exist: A≠O and B≠O can still satisfy AB=O. The reason is that matrix multiplication compresses information — different vectors may share the same image, so factors cannot be cancelled as if they were numbers.\n\nThe transpose A^T swaps rows and columns; A is symmetric if A^T=A and skew-symmetric if A^T=−A (a skew-symmetric matrix has zero diagonal). The common types are worth naming: the zero matrix O (all entries 0); the identity matrix E (ones on the main diagonal, zeros elsewhere; also written I); diagonal matrices (nonzero only on the main diagonal); and upper/lower triangular matrices (one side of the main diagonal all zero). Matrices are the common language of linear maps, linear systems, quadratic forms, graphs and networks, so mastering matrix operations is the entry ticket to linear algebra.",
+    "formulas": [
+      {
+        "latex": "(AB)_{ij}=\\sum_{k=1}^{s}a_{ik}b_{kj}",
+        "note": "矩阵乘法：A 的第 i 行与 B 的第 j 列对应元素相乘后求和；要求 A 的列数等于 B 的行数（m×s 乘 s×n 得 m×n）。",
+        "noteEn": "Matrix product: the (i,j) entry is the dot product of row i of A with column j of B. The product exists only when the number of columns of A equals the number of rows of B (m×s times s×n gives m×n)."
+      },
+      {
+        "latex": "(A+B)_{ij}=a_{ij}+b_{ij},\\qquad (kA)_{ij}=k\\,a_{ij}",
+        "note": "加法与数乘都按元素进行，前提是两个矩阵同型（否则不能相加）。",
+        "noteEn": "Addition and scalar multiplication are entrywise operations and require matrices of the same size."
+      },
+      {
+        "latex": "(AB)^{\\mathrm{T}}=B^{\\mathrm{T}}A^{\\mathrm{T}}",
+        "note": "转置「穿脱反转」：乘积的转置必须把顺序颠倒，写成 AᵀBᵀ 就错了。",
+        "noteEn": "Transposing a product reverses the order: (AB)^T=B^T A^T, not A^T B^T."
+      },
+      {
+        "latex": "|AB|=|A|\\,|B|,\\qquad |A^{\\mathrm{T}}|=|A|,\\qquad |kA|=k^{n}|A|",
+        "note": "方阵行列式可乘；n 阶方阵整体乘 k 时，行列式要乘 kⁿ 而不是 k，这是最常见的出错点。",
+        "noteEn": "For square matrices |AB|=|A||B| and |A^T|=|A|; scaling an n×n matrix by k multiplies its determinant by k^n, not by k."
+      },
+      {
+        "latex": "A^{\\mathrm{T}}=A\\ \\text{（对称矩阵）},\\qquad A^{\\mathrm{T}}=-A\\ \\text{（反对称矩阵）}",
+        "note": "对称与反对称矩阵的定义，两者只差一个负号，别写反。",
+        "noteEn": "Definitions of symmetric (A^T=A) and skew-symmetric (A^T=−A) matrices — they differ only by a sign."
+      }
+    ],
+    "properties": [
+      "加法与数乘按元素进行，要求同型；乘法是「行乘列」，要求前矩阵的列数等于后矩阵的行数：m×s 乘 s×n 得 m×n 矩阵。",
+      "乘法满足结合律 (AB)C=A(BC) 与分配律 A(B+C)=AB+AC，但一般不满足交换律：取 A=[[1,1],[0,1]]、B=[[1,0],[1,1]]，则 AB=[[2,1],[1,1]]，而 BA=[[1,1],[1,2]]，两者不相等。",
+      "没有消去律，且存在零因子：A=[[1,0],[0,0]]、B=[[0,0],[1,0]] 时 AB=O；再取 C=[[0,0],[2,0]] 又有 AC=O，于是 AB=AC 但 B≠C。",
+      "转置运算：(AB)ᵀ=BᵀAᵀ、(A+B)ᵀ=Aᵀ+Bᵀ、(kA)ᵀ=kAᵀ、(Aᵀ)ᵀ=A；对称矩阵满足 Aᵀ=A，反对称矩阵满足 Aᵀ=−A。",
+      "方阵的行列式可乘：|AB|=|A||B|、|Aᵀ|=|A|；但 |kA|=kⁿ|A|（n 为阶数），不是 k|A|。"
+    ],
+    "propertiesEn": [
+      "Addition and scalar multiplication are entrywise and need matrices of the same size; multiplication is row-by-column and needs the column count of the left factor to equal the row count of the right one (m×s times s×n gives m×n).",
+      "Multiplication is associative, (AB)C=A(BC), and distributive, A(B+C)=AB+AC, but generally not commutative: for A=[[1,1],[0,1]] and B=[[1,0],[1,1]] we get AB=[[2,1],[1,1]] while BA=[[1,1],[1,2]].",
+      "There is no cancellation law and there are zero divisors: A=[[1,0],[0,0]] and B=[[0,0],[1,0]] give AB=O, and with C=[[0,0],[2,0]] we get AB=AC=O even though B≠C.",
+      "Transposition rules: (AB)^T=B^T A^T, (A+B)^T=A^T+B^T, (kA)^T=k A^T, (A^T)^T=A; symmetric means A^T=A and skew-symmetric means A^T=−A.",
+      "Determinants of square matrices are multiplicative, |AB|=|A||B| and |A^T|=|A|, but |kA|=k^n|A| for an n×n matrix — not k|A|."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}$，$B=\\begin{pmatrix}1&-1\\\\1&2\\end{pmatrix}$。(1) 求 $AB$ 与 $BA$，说明矩阵乘法是否可交换；(2) 验证 $|AB|=|A|\\,|B|$。",
+        "solution": "（1）逐项按「行乘列」计算。AB 的第 1 行第 1 列 = 2×1+1×1 = 3，第 1 行第 2 列 = 2×(−1)+1×2 = 0，第 2 行第 1 列 = 0×1+1×1 = 1，第 2 行第 2 列 = 0×(−1)+1×2 = 2，所以 $AB=\\begin{pmatrix}3&0\\\\1&2\\end{pmatrix}$。\n\n同法计算 BA：第 1 行第 1 列 = 1×2+(−1)×0 = 2，第 1 行第 2 列 = 1×1+(−1)×1 = 0，第 2 行第 1 列 = 1×2+2×0 = 2，第 2 行第 2 列 = 1×1+2×1 = 3，所以 $BA=\\begin{pmatrix}2&0\\\\2&3\\end{pmatrix}$。由于 $AB\\ne BA$，矩阵乘法一般不满足交换律。\n\n（2）$|A|=2\\times1-1\\times0=2$，$|B|=1\\times2-(-1)\\times1=2+1=3$，故 $|A|\\,|B|=6$；而 $|AB|=3\\times2-0\\times1=6$，$|BA|=2\\times3-0\\times2=6$。可见 $AB$ 与 $BA$ 虽然不相等，行列式却都为 6，与 $|AB|=|A|\\,|B|$ 一致。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$。(1) 用数学归纳法证明 $A^{n}=\\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$（n 为正整数）；(2) 设 $B=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$，求 $|2B|$，并与 $|B|$ 比较。",
+        "solution": "（1）n=1 时 $A^{1}=A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$，结论成立。假设 $A^{k}=\\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}$，则 $A^{k+1}=A^{k}A=\\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}=\\begin{pmatrix}1&1+k\\\\0&1\\end{pmatrix}$，正是把 k 换成 k+1 的形式，故对一切正整数 n 有 $A^{n}=\\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$。\n\n（2）$|B|=1\\times4-2\\times3=-2$。由 $|kB|=k^{n}|B|$（此处阶数 n=2、k=2）得 $|2B|=2^{2}\\times(-2)=-8$。直接验算：$2B=\\begin{pmatrix}2&4\\\\6&8\\end{pmatrix}$，$|2B|=2\\times8-4\\times6=16-24=-8$，一致。若错用 $|kB|=k|B|$ 会得到 −4，是常见错误。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.6,
+        3.8
+      ],
+      "yRange": [
+        -0.6,
+        1.7
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.15)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            0
+          ],
+          "to": [
+            2,
+            0
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            1
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            3,
+            1
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "O"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0
+          ],
+          "label": "P1(1,0)"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            1
+          ],
+          "label": "P3(0,1)"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            1
+          ],
+          "label": "P2=Q3"
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            0
+          ],
+          "label": "Q1(2,0)"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            1
+          ],
+          "label": "Q2(3,1)"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.5,
+            0.5
+          ],
+          "text": "单位正方形"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.7,
+            0.45
+          ],
+          "text": "平行四边形"
+        }
+      ],
+      "title": "单位正方形经 A=[[2,1],[0,1]] 变为平行四边形 (0,0),(2,0),(3,1),(1,1)，面积 2=|A|"
+    },
+    "tags": [
+      "矩阵",
+      "矩阵乘法",
+      "转置",
+      "行列式"
+    ],
+    "links": [
+      "determinant-definition",
+      "inverse-matrix",
+      "elementary-matrices",
+      "matrix-rank",
+      "matrix-exponential"
+    ]
+  },
+  {
+    "id": "inverse-matrix",
+    "title": "逆矩阵",
+    "titleEn": "Inverse Matrices",
+    "branch": "linear",
+    "level": 4,
+    "summary": "与 A 相乘得单位阵的矩阵叫 A 的逆矩阵；方阵可逆当且仅当行列式不为零，逆矩阵唯一，可用伴随矩阵或初等行变换求出。",
+    "summaryEn": "The inverse of A is the matrix whose product with A is the identity; a square matrix is invertible exactly when its determinant is nonzero, the inverse is unique, and it can be computed by the adjugate formula or by row reduction.",
+    "definition": "设 $A$ 是 n 阶方阵，若存在 n 阶方阵 $B$ 使 $AB=BA=E$（$E$ 为单位阵），就称 $A$ 可逆，$B$ 称为 $A$ 的逆矩阵，记作 $A^{-1}$。逆矩阵是数的「倒数」的类比，但要求苛刻得多：任何非零实数都有倒数，方阵却未必可逆。\n\n判别只有一句话：**$A$ 可逆 $\\iff$ $|A|\\ne0$**，此时称 $A$ 非奇异；若 $|A|=0$，则 $A$ 不可逆，称奇异矩阵。求逆有两条常用路线：一是伴随矩阵公式 $A^{-1}=\\frac{1}{|A|}A^{*}$，其中 $A^{*}$ 是**代数余子式矩阵的转置**（转置这一步最容易漏）；二是初等行变换 $[A\\mid E]\\to[E\\mid A^{-1}]$，阶数较高时更实用。\n\n逆矩阵为什么重要？因为 $A$ 可逆时线性方程组 $Ax=b$ 有唯一解 $x=A^{-1}b$；而可逆的线性变换「可以原样倒回去」，$A^{-1}$ 正是这个逆变换。它还是许多公式与算法的部件（LU 分解、迭代法、最小二乘等）。不过实际计算中很少真的求 $A^{-1}$：用消元法直接解方程组更省算力，逆矩阵更多以理论工具的身份出场。",
+    "definitionEn": "Let A be an n×n matrix. If there is an n×n matrix B with AB=BA=E (the identity matrix), then A is called invertible and B its inverse, written A^(-1). The inverse is the analogue of a reciprocal, but existence is far more restrictive: every nonzero real number has a reciprocal, yet a square matrix need not be invertible.\n\nThe test is a single condition: A is invertible iff |A| ≠ 0, in which case A is called nonsingular; if |A| = 0 then A is singular and has no inverse. There are two standard routes to the inverse: the adjugate formula A^(-1) = A*/|A|, where A* is the transpose of the cofactor matrix (forgetting that transpose is the classic mistake), and the row-reduction algorithm [A|E] → [E|A^(-1)], which is more practical for larger matrices.\n\nWhy does the inverse matter? Because when A is invertible the system Ax=b has the unique solution x=A^(-1)b, and an invertible linear map can be run backwards — A^(-1) is exactly that inverse map. It also appears inside many algorithms and identities (LU factorization, iterative methods, least squares). In practice, however, one rarely forms A^(-1): solving the system by elimination is cheaper, so the inverse is mostly a theoretical tool.",
+    "formulas": [
+      {
+        "latex": "A^{-1}=\\frac{1}{|A|}\\,A^{*}\\qquad(|A|\\ne0)",
+        "note": "伴随矩阵公式：A* 是代数余子式矩阵的转置（A* 的第 i 行第 j 列元素是 A 的第 j 行第 i 列的代数余子式），转置这一步最容易漏写。",
+        "noteEn": "Adjugate formula: A* is the transpose of the cofactor matrix, i.e. the (i,j) entry of A* is the cofactor of the (j,i) entry of A; forgetting that transpose is the usual mistake."
+      },
+      {
+        "latex": "AA^{-1}=A^{-1}A=E",
+        "note": "逆矩阵的定义式：左乘、右乘都得到单位阵 E。",
+        "noteEn": "Definition of the inverse: multiplying on either side gives the identity E."
+      },
+      {
+        "latex": "\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}^{-1}=\\frac{1}{ad-bc}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}\\qquad(ad-bc\\ne0)",
+        "note": "二阶求逆公式：主对角线交换、副对角线变号，再除以行列式，最常用。",
+        "noteEn": "The 2×2 formula: swap the diagonal entries, negate the off-diagonal ones, and divide by the determinant."
+      },
+      {
+        "latex": "(AB)^{-1}=B^{-1}A^{-1}",
+        "note": "乘积的逆「穿脱反转」：顺序必须颠倒；可推广为 (A₁A₂…Aₛ)⁻¹=Aₛ⁻¹…A₂⁻¹A₁⁻¹。",
+        "noteEn": "The inverse of a product reverses the order: (AB)^(-1)=B^(-1)A^(-1), and likewise for longer products."
+      },
+      {
+        "latex": "(A^{\\mathrm{T}})^{-1}=(A^{-1})^{\\mathrm{T}},\\qquad (kA)^{-1}=\\frac{1}{k}\\,A^{-1}\\ (k\\ne0)",
+        "note": "转置与求逆可以交换次序；(kA)⁻¹=(1/k)A⁻¹（k≠0）；但 (A+B)⁻¹ 一般不等于 A⁻¹+B⁻¹。",
+        "noteEn": "Transpose and inverse commute, and (kA)^(-1)=(1/k)A^(-1) for k ≠ 0; by contrast (A+B)^(-1) is generally not A^(-1)+B^(-1)."
+      }
+    ],
+    "properties": [
+      "A 可逆 ⟺ |A|≠0（非奇异）；|A|=0 的方阵不可逆，称奇异矩阵。伴随矩阵恒满足 AA*=A*A=|A|E，两边除以 |A|≠0 即得 A⁻¹=A*/|A|。",
+      "逆矩阵唯一：若 AB=BA=E 且 AC=CA=E，则 B=C=A⁻¹。",
+      "乘积反转：(AB)⁻¹=B⁻¹A⁻¹（A、B 同阶且都可逆）；(Aᵀ)⁻¹=(A⁻¹)ᵀ；(kA)⁻¹=(1/k)A⁻¹（k≠0）。",
+      "(A+B)⁻¹ 一般不等于 A⁻¹+B⁻¹：取 A=diag(1,2)、B=diag(3,4)，则 (A+B)⁻¹=diag(1/4,1/6)，而 A⁻¹+B⁻¹=diag(4/3,3/4)，两者不相等。",
+      "|A⁻¹|=1/|A|；可逆矩阵满秩，r(A⁻¹)=r(A)=n；用初等行变换求逆只能做行变换：[A|E]→[E|A⁻¹]。"
+    ],
+    "propertiesEn": [
+      "A is invertible iff |A| ≠ 0 (nonsingular); a square matrix with |A| = 0 is singular. The adjugate always satisfies AA*=A*A=|A|E, so dividing by |A| ≠ 0 gives A^(-1)=A*/|A|.",
+      "The inverse is unique: if AB=BA=E and AC=CA=E then B=C=A^(-1).",
+      "Inverses reverse products: (AB)^(-1)=B^(-1)A^(-1) for invertible matrices of the same order; also (A^T)^(-1)=(A^(-1))^T and (kA)^(-1)=(1/k)A^(-1) for k ≠ 0.",
+      "(A+B)^(-1) is generally not A^(-1)+B^(-1): for A=diag(1,2) and B=diag(3,4) the left side is diag(1/4,1/6) while the right side is diag(4/3,3/4).",
+      "|A^(-1)| = 1/|A|; an invertible matrix has full rank, r(A^(-1)) = r(A) = n; and the algorithm [A|E] → [E|A^(-1)] uses row operations only."
+    ],
+    "examples": [
+      {
+        "problem": "求 $A=\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}$ 的逆矩阵，并验证 $AA^{-1}=E$。",
+        "solution": "$|A|=2\\times1-1\\times0=2\\ne0$，所以 $A$ 可逆。用二阶公式（主对角线交换、副对角线变号、再除以行列式）：$A^{-1}=\\frac{1}{2}\\begin{pmatrix}1&-1\\\\0&2\\end{pmatrix}=\\begin{pmatrix}1/2&-1/2\\\\0&1\\end{pmatrix}$。\n\n验证：$AA^{-1}=\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}\\begin{pmatrix}1/2&-1/2\\\\0&1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=E$（第 1 行第 1 列：2×1/2+1×0=1；第 1 行第 2 列：2×(−1/2)+1×1=0；第 2 行第 1 列：0×1/2+1×0=0，第 2 行第 2 列：0×(−1/2)+1×1=1）。另一侧 $A^{-1}A=\\begin{pmatrix}1/2&-1/2\\\\0&1\\end{pmatrix}\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=E$ 也成立。\n\n几何上，$A$ 把单位正方形拉成面积为 2 的平行四边形（见配图），而 $A^{-1}$ 恰好把这个平行四边形映回单位正方形，这就是「逆变换」的含义。"
+      },
+      {
+        "problem": "判断 $A=\\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}$ 是否可逆；若可逆，用伴随矩阵公式求 $A^{-1}$。",
+        "solution": "先算行列式（按第 1 行展开）：$|A|=2\\begin{vmatrix}2&1\\\\1&2\\end{vmatrix}-1\\begin{vmatrix}1&1\\\\1&2\\end{vmatrix}+1\\begin{vmatrix}1&2\\\\1&1\\end{vmatrix}=2\\times3-1\\times1+1\\times(-1)=4\\ne0$，故 $A$ 可逆。\n\n再算代数余子式：对角线上 $A_{11}=A_{22}=A_{33}=2\\times2-1\\times1=3$；非对角线上 $A_{12}=-(1\\times2-1\\times1)=-1$、$A_{13}=1\\times1-2\\times1=-1$、$A_{23}=-(2\\times1-1\\times1)=-1$，其余同理都是 $-1$。于是代数余子式矩阵为 $\\begin{pmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{pmatrix}$；它是对称矩阵，转置后不变，所以伴随矩阵 $A^{*}=\\begin{pmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{pmatrix}$。\n\n由 $A^{-1}=\\frac{1}{|A|}A^{*}$ 得 $A^{-1}=\\frac{1}{4}\\begin{pmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{pmatrix}$。验证：$AA^{-1}$ 的第 1 行第 1 列 $=\\frac{2\\times3+1\\times(-1)+1\\times(-1)}{4}=\\frac{4}{4}=1$，第 1 行第 2 列 $=\\frac{2\\times(-1)+1\\times3+1\\times(-1)}{4}=0$，其余位置同理，故 $AA^{-1}=E$。顺带核对 $|A^{*}|=|A|^{n-1}=4^{2}=16$：直接计算 $\\begin{vmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{vmatrix}=24-4-4=16$，一致。"
+      }
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.6,
+        3.6
+      ],
+      "yRange": [
+        -0.6,
+        1.7
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.15)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(179,136,255,0.15)",
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            2,
+            0
+          ],
+          "to": [
+            1,
+            0
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            3,
+            1
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            1
+          ],
+          "label": "Q2(3,1)"
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            0
+          ],
+          "label": "Q1(2,0)"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0
+          ],
+          "label": "P1(1,0) = A^-1(Q1)"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            1
+          ],
+          "label": "P2(1,1) = A^-1(Q2)"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.45,
+            0.3
+          ],
+          "text": "单位正方形"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            0.6
+          ],
+          "text": "平行四边形（A 的像）"
+        }
+      ],
+      "title": "逆矩阵 A^-1 把 A 的像（平行四边形）映回单位正方形"
+    },
+    "tags": [
+      "逆矩阵",
+      "伴随矩阵",
+      "可逆",
+      "非奇异"
+    ],
+    "links": [
+      "matrix-operations",
+      "determinant-definition",
+      "cofactor-expansion",
+      "elementary-matrices",
+      "direct-linear-solvers"
+    ]
+  },
+  {
+    "id": "elementary-matrices",
+    "title": "初等变换与初等矩阵",
+    "titleEn": "Elementary Transformations and Elementary Matrices",
+    "branch": "linear",
+    "level": 4,
+    "summary": "三类初等行（列）变换对应三类初等矩阵：左乘作行变换、右乘作列变换，是高斯消元与矩阵求逆的统一语言。",
+    "summaryEn": "The three elementary row (column) operations correspond to three types of elementary matrices: multiplying on the left performs row operations, on the right column operations — the common language of Gaussian elimination and matrix inversion.",
+    "definition": "对矩阵的三种操作称为初等行变换：① 交换两行；② 把某一行的所有元素乘非零常数 $k$；③ 把某一行的 $k$ 倍加到另一行上。把「行」换成「列」就是初等列变换，两者合称初等变换。高斯消元法的每一步，本质都是一次初等行变换。\n\n对单位矩阵 $E$ 做一次初等变换，得到的矩阵称为初等矩阵。核心结论只有一条，却极易记反：**用初等矩阵左乘 $A$，等于对 $A$ 做相应的行变换；右乘 $A$，等于对 $A$ 做相应的列变换**。例如把第 $j$ 行的 $k$ 倍加到第 $i$ 行，对应的初等矩阵 $E(i,j(k))$ 就是单位阵在第 $(i,j)$ 位置填入 $k$，用它左乘即可实现这一步。\n\n三类初等矩阵的行列式分别是 $-1$、$k$（$k\\ne0$）与 $1$，都不为零，所以初等矩阵都可逆，而且逆矩阵仍是同类型的初等矩阵：交换型自逆，倍乘型 $E(i(k))$ 的逆是 $E(i(1/k))$，倍加型 $E(i,j(k))$ 的逆是 $E(i,j(-k))$。\n\n由于可逆矩阵总能用初等行变换化为 $E$，就得到求逆的统一手续 $[A\\mid E]\\to[E\\mid A^{-1}]$：对增广矩阵**只做行变换**，左半变成 $E$ 时右半就是 $A^{-1}$；混入列变换会破坏左右两半的对应关系，结果就错了。初等变换不改变矩阵的秩，初等行变换保持行空间、初等列变换保持列空间，所以消元法既能求秩、求逆，也是解线性方程组的基础。",
+    "definitionEn": "There are three elementary row operations on a matrix: swap two rows; multiply a row by a nonzero constant k; add k times one row to another row. Replacing the word row by column gives the elementary column operations, and the two families together are the elementary operations. Every step of Gaussian elimination is an elementary row operation.\n\nApplying one elementary operation to the identity matrix E produces an elementary matrix. The central fact — easy to reverse by mistake — is this: multiplying A by an elementary matrix on the left performs the corresponding row operation on A, while multiplying on the right performs the corresponding column operation. For instance, adding k times row j to row i corresponds to the elementary matrix E(i,j(k)), the identity with k placed in position (i,j).\n\nThe determinants of the three types are −1, k (k ≠ 0) and 1, all nonzero, so every elementary matrix is invertible, and its inverse is again an elementary matrix of the same type: a swap is its own inverse, E(i(k))^(-1)=E(i(1/k)), and E(i,j(k))^(-1)=E(i,j(-k)).\n\nSince an invertible matrix can always be reduced to E by row operations, we obtain the standard inversion algorithm [A|E] → [E|A^(-1)]: apply row operations only to the augmented matrix; when the left half becomes E, the right half is A^(-1). Mixing in column operations destroys the correspondence and gives a wrong answer. Elementary operations preserve rank, row operations preserve the row space and column operations the column space, which is why elimination serves to find ranks and inverses and to solve linear systems.",
+    "formulas": [
+      {
+        "latex": "\\begin{pmatrix}1&0\\\\k&1\\end{pmatrix}\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}=\\begin{pmatrix}a&b\\\\c+ka&d+kb\\end{pmatrix}",
+        "note": "左乘初等矩阵 = 行变换：这里把第 1 行的 k 倍加到第 2 行，左乘后第 2 行变成 (c+ka, d+kb)。",
+        "noteEn": "Left multiplication by an elementary matrix performs a row operation: here k times row 1 is added to row 2, turning row 2 into (c+ka, d+kb)."
+      },
+      {
+        "latex": "\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}=\\begin{pmatrix}a&ak+b\\\\c&ck+d\\end{pmatrix}",
+        "note": "右乘初等矩阵 = 列变换：同一个矩阵若右乘，效果是把第 1 列的 k 倍加到第 2 列，各行本身不变。",
+        "noteEn": "Right multiplication performs a column operation: multiplying the same matrix on the right adds k times column 1 to column 2 and leaves the rows intact."
+      },
+      {
+        "latex": "[A\\mid E]\\ \\xrightarrow{\\ \\text{初等行变换}\\ }\\ [E\\mid A^{-1}]\\qquad(|A|\\ne0)",
+        "note": "求逆手续：对增广矩阵只做行变换，把左半化成单位阵，右半即为 A⁻¹；用列变换则不对。",
+        "noteEn": "Inversion algorithm: row-reduce the augmented matrix [A|E]; when the left half becomes E the right half is A^(-1). Column operations must not be used here."
+      },
+      {
+        "latex": "|E(i,j)|=-1,\\qquad |E(i(k))|=k,\\qquad |E(i,j(k))|=1",
+        "note": "交换型、倍乘型、倍加型初等矩阵的行列式（倍乘要求 k≠0）；三者都非零，故初等矩阵都可逆。",
+        "noteEn": "Determinants of the swap, scaling (k ≠ 0) and shear elementary matrices; all are nonzero, so every elementary matrix is invertible."
+      },
+      {
+        "latex": "E(i,j)^{-1}=E(i,j),\\qquad E(i(k))^{-1}=E(i(1/k)),\\qquad E(i,j(k))^{-1}=E(i,j(-k))",
+        "note": "初等矩阵的逆仍是同类型的初等矩阵：交换的逆是自己，倍乘取倒数，倍加把 k 换成 −k。",
+        "noteEn": "The inverse of an elementary matrix is elementary of the same type: a swap is self-inverse, scaling inverts to the reciprocal factor, and a shear replaces k by −k."
+      }
+    ],
+    "properties": [
+      "三类初等变换是：交换两行、某行乘非零常数 k、把某行的 k 倍加到另一行；对应的初等矩阵就是对单位阵 E 做一次同样变换得到的矩阵。",
+      "左乘初等矩阵 = 做同样的行变换，右乘初等矩阵 = 做同样的列变换（方向不能记反）；例如 [[1,0],[k,1]]A 把 A 第 1 行的 k 倍加到第 2 行。",
+      "初等矩阵都可逆且 |E|≠0，其逆仍是同类型的初等矩阵；有限个初等矩阵的乘积也可逆。",
+      "初等变换不改变矩阵的秩；初等行变换保持行空间、初等列变换保持列空间，行变换可把任意矩阵化为行阶梯形或行最简形。",
+      "n 阶方阵 A 可逆 ⟺ A 可表示为有限个初等矩阵的乘积 ⟺ A 与 E 行等价；求逆只能对 [A|E] 做初等行变换，混用列变换结果错误。",
+      "矩阵等价：同型矩阵 A、B 可经有限次初等变换互相转化 ⟺ r(A)=r(B)；两者于是有相同的等价标准形 diag(1,…,1,0,…,0)（前 r(A) 个对角元为 1）。"
+    ],
+    "propertiesEn": [
+      "The three elementary operations swap two rows, multiply a row by a nonzero constant k, and add k times one row to another; the associated elementary matrix is obtained by applying that operation once to the identity E.",
+      "Left multiplication by an elementary matrix performs the row operation, right multiplication the column operation — do not swap the two directions.",
+      "Every elementary matrix is invertible with |E| ≠ 0, its inverse is elementary of the same type, and any finite product of elementary matrices is invertible.",
+      "Elementary operations preserve rank; row operations preserve the row space and column operations the column space, and row operations reduce any matrix to row echelon or reduced row echelon form.",
+      "A square matrix A is invertible iff it is a product of finitely many elementary matrices iff A is row equivalent to E; in the algorithm [A|E] → [E|A^(-1)] only row operations may be used.",
+      "Matrix equivalence: two matrices of the same size can be transformed into each other by finitely many elementary operations iff they have equal rank; both then share the equivalence normal form diag(1,…,1,0,…,0) with r(A) leading ones on the diagonal."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&0&1\\\\2&1&0\\\\0&3&1\\end{pmatrix}$。(1) 写出「把第 2 行的 2 倍加到第 1 行」对应的 3 阶初等矩阵 $P$；(2) 计算 $PA$；(3) 写出 $P^{-1}$ 及它对应的行变换。",
+        "solution": "（1）把第 j=2 行的 k=2 倍加到第 i=1 行，对应的初等矩阵是 E(1,2(2))，即在 3 阶单位阵的第 (1,2) 位置填 2：$P=\\begin{pmatrix}1&2&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}$。\n\n（2）左乘 P 就是做这一步行变换：$PA=\\begin{pmatrix}1&2&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}\\begin{pmatrix}1&0&1\\\\2&1&0\\\\0&3&1\\end{pmatrix}=\\begin{pmatrix}1\\times1+2\\times2&1\\times0+2\\times1&1\\times1+2\\times0\\\\2&1&0\\\\0&3&1\\end{pmatrix}=\\begin{pmatrix}5&2&1\\\\2&1&0\\\\0&3&1\\end{pmatrix}$。可以看到第 1 行正是原来第 1 行加上第 2 行的 2 倍，而第 2、3 行不变。\n\n（3）倍加型初等矩阵的行列式为 1，其逆是同类型的初等矩阵 $P^{-1}=E(1,2(-2))=\\begin{pmatrix}1&-2&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}$，对应的行变换是「把第 2 行的 −2 倍加到第 1 行」。核对：$P^{-1}P=\\begin{pmatrix}1&-2&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}\\begin{pmatrix}1&2&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}=\\begin{pmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}=E$。"
+      },
+      {
+        "problem": "用初等行变换求 $A=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$ 的逆矩阵。",
+        "solution": "构造增广矩阵，只做行变换：$[A\\mid E]=\\begin{pmatrix}1&2&1&0\\\\3&4&0&1\\end{pmatrix}\\xrightarrow{r_2-3r_1}\\begin{pmatrix}1&2&1&0\\\\0&-2&-3&1\\end{pmatrix}\\xrightarrow{-\\frac12 r_2}\\begin{pmatrix}1&2&1&0\\\\0&1&3/2&-1/2\\end{pmatrix}\\xrightarrow{r_1-2r_2}\\begin{pmatrix}1&0&-2&1\\\\0&1&3/2&-1/2\\end{pmatrix}=[E\\mid A^{-1}]$。\n\n所以 $A^{-1}=\\begin{pmatrix}-2&1\\\\3/2&-1/2\\end{pmatrix}$。验证：$AA^{-1}=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}\\begin{pmatrix}-2&1\\\\3/2&-1/2\\end{pmatrix}=\\begin{pmatrix}-2+3&1-1\\\\-6+6&3-2\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=E$。\n\n用二阶公式核对：$|A|=1\\times4-2\\times3=-2$，$A^{-1}=\\frac{1}{-2}\\begin{pmatrix}4&-2\\\\-3&1\\end{pmatrix}=\\begin{pmatrix}-2&1\\\\3/2&-1/2\\end{pmatrix}$，结果一致。"
+      }
+    ],
+    "tags": [
+      "初等变换",
+      "初等矩阵",
+      "高斯消元",
+      "求逆"
+    ],
+    "links": [
+      "matrix-operations",
+      "inverse-matrix",
+      "matrix-rank",
+      "direct-linear-solvers",
+      "determinant-properties"
+    ]
+  },
+  {
+    "id": "matrix-rank",
+    "title": "矩阵的秩",
+    "titleEn": "The Rank of a Matrix",
+    "branch": "linear",
+    "level": 4,
+    "summary": "矩阵的秩是非零子式的最高阶数，等于行阶梯形中非零行的行数，衡量矩阵真正携带的独立信息量。",
+    "summaryEn": "The rank of a matrix is the highest order of a nonzero minor, equal to the number of nonzero rows in row echelon form; it measures how much independent information the matrix really carries.",
+    "definition": "在 m×n 矩阵 $A$ 中任取 k 行 k 列，交叉处的 $k^{2}$ 个元素按原次序组成的 k 阶行列式，称为 $A$ 的一个 k 阶子式。若存在不为零的 r 阶子式，而所有 r+1 阶子式（只要存在）全为零，就称 r 为矩阵 $A$ 的秩，记作 $r(A)$；零矩阵的秩规定为 0，且总有 $r(A)\\le\\min\\{m,n\\}$。\n\n秩还有一个更好用的刻画：把 $A$ 化为行阶梯形，**非零行的行数就是秩**；它也等于行向量组的秩（即行向量组的极大线性无关组所含向量的个数），还等于列向量组的秩——「行秩等于列秩」是线性代数中一个不平凡但极好用的结论。直观地说，秩度量矩阵中「真正独立的信息量」：秩越小，行（列）之间的重复与冗余越多。\n\n秩是判断「解是否唯一」的总开关：线性方程组 $Ax=b$ 有解当且仅当 $r(A)=r(A\\mid b)$（$A\\mid b$ 为增广矩阵），在 n 个未知量的情形，此时若 $r(A)=n$ 则解唯一，若 $r(A)<n$ 则有无穷多解；n 阶方阵可逆的充要条件正是它满秩，$r(A)=n$。求秩的实用手段就是初等行变换：化行阶梯形，数非零行。",
+    "definitionEn": "Choose any k rows and k columns of an m×n matrix A; the k×k determinant formed by the entries at their intersections, kept in the original order, is called a k-th order minor of A. If some r-th order minor is nonzero while every (r+1)-th order minor (whenever it exists) vanishes, then r is the rank of A, written r(A). The zero matrix has rank 0, and always r(A) ≤ min{m,n}.\n\nThere is a more practical characterization: reduce A to row echelon form; the number of nonzero rows is the rank. It is also the rank of the set of row vectors (the size of a maximal linearly independent subset) and equally the rank of the set of column vectors — the equality of row rank and column rank is a nontrivial but extremely useful theorem. Intuitively the rank measures how much independent information A carries: small rank means many redundant rows (and columns).\n\nThe rank is the master switch for uniqueness questions: the linear system Ax=b is consistent iff r(A)=r(A|b), where A|b is the augmented matrix; with n unknowns it then has a unique solution when r(A)=n and infinitely many solutions when r(A)<n. An n×n matrix is invertible exactly when it has full rank, r(A)=n. In practice, rank is computed by elementary row operations: reduce to row echelon form and count the nonzero rows.",
+    "formulas": [
+      {
+        "latex": "r(A)=\\max\\{\\,k\\mid A\\ \\text{存在非零的}\\ k\\ \\text{阶子式}\\,\\}",
+        "note": "秩的定义：非零子式的最高阶数；规定 r(O)=0，且 0≤r(A)≤min{m,n}。",
+        "noteEn": "Definition: the rank is the largest k for which a nonzero k-th order minor exists; the zero matrix has rank 0 and 0 ≤ r(A) ≤ min{m,n}."
+      },
+      {
+        "latex": "r(A)=r(A^{\\mathrm{T}})",
+        "note": "转置不改变秩：行秩等于列秩。",
+        "noteEn": "The rank is transpose invariant: row rank equals column rank."
+      },
+      {
+        "latex": "r(AB)\\le\\min\\{r(A),\\,r(B)\\}",
+        "note": "乘积的秩不超过任一因子的秩；若其中一个是可逆方阵，则等号成立（A 可逆时 r(AB)=r(B)）。",
+        "noteEn": "The rank of a product does not exceed the rank of either factor, with equality when one factor is invertible (if A is invertible, r(AB)=r(B))."
+      },
+      {
+        "latex": "r(A+B)\\le r(A)+r(B)",
+        "note": "和的秩不超过秩之和；等号一般不成立，例如 A=E₂、B=−E₂ 时左边为 0 而右边为 4。",
+        "noteEn": "The rank of a sum is at most the sum of the ranks, and equality can fail: for A=E and B=−E the left side is 0 while the right side equals 2n."
+      },
+      {
+        "latex": "A_{n\\times n}\\ \\text{可逆}\\iff |A|\\ne0\\iff r(A)=n",
+        "note": "n 阶方阵满秩当且仅当可逆，当且仅当行列式不为零。",
+        "noteEn": "An n×n matrix has full rank iff it is invertible iff its determinant is nonzero."
+      }
+    ],
+    "properties": [
+      "r(A) 是 A 中非零子式的最高阶数，也等于行阶梯形中非零行的行数，还等于行秩=列秩；且 0≤r(A)≤min{m,n}。",
+      "初等行变换与列变换都不改变秩；等价地，左乘或右乘可逆矩阵秩不变，即 r(PAQ)=r(A)（P、Q 可逆）。",
+      "转置不变：r(Aᵀ)=r(A)，所以行向量组与列向量组的极大线性无关组所含向量个数相同。",
+      "乘积与和：r(AB)≤min{r(A),r(B)}（A 可逆时 r(AB)=r(B)，B 可逆时 r(AB)=r(A)）；r(A+B)≤r(A)+r(B)，等号一般不成立（取 A=E₂、B=−E₂ 得 0≤4 但不等）。",
+      "秩决定可解性与可逆性：n 阶方阵满秩（r(A)=n）⟺ 可逆 ⟺ |A|≠0；Ax=b 有解 ⟺ r(A)=r(A|b)，当 r(A) 等于未知量个数时解唯一。"
+    ],
+    "propertiesEn": [
+      "r(A) is the highest order of a nonzero minor, the number of nonzero rows in row echelon form, and the common value of row rank and column rank; furthermore 0 ≤ r(A) ≤ min{m,n}.",
+      "Neither elementary row nor column operations change the rank; equivalently r(PAQ)=r(A) for invertible P and Q, so multiplying by an invertible matrix preserves rank.",
+      "Rank is transpose invariant, r(A^T)=r(A); hence the row vectors and the column vectors contain the same number of vectors in a maximal linearly independent set.",
+      "Products and sums: r(AB) ≤ min{r(A), r(B)}, with equality if one factor is invertible; and r(A+B) ≤ r(A)+r(B), where equality can fail (take A=E and B=−E).",
+      "Rank governs solvability and invertibility: an n×n matrix has full rank iff it is invertible iff |A| ≠ 0; Ax=b is consistent iff r(A)=r(A|b), and the solution is unique when r(A) equals the number of unknowns."
+    ],
+    "examples": [
+      {
+        "problem": "求 $A=\\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&1&1\\end{pmatrix}$ 的秩。",
+        "solution": "做初等行变换（不改变秩）：$\\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&1&1\\end{pmatrix}\\xrightarrow{r_2-2r_1}\\begin{pmatrix}1&2&3\\\\0&0&0\\\\1&1&1\\end{pmatrix}\\xrightarrow{r_3-r_1}\\begin{pmatrix}1&2&3\\\\0&0&0\\\\0&-1&-2\\end{pmatrix}$，交换第 2、3 行得行阶梯形 $\\begin{pmatrix}1&2&3\\\\0&-1&-2\\\\0&0&0\\end{pmatrix}$。非零行有 2 行，所以 $r(A)=2$。\n\n也可以直接观察：第 2 行 = 2×第 1 行，两者线性相关；而第 1 行 (1,2,3) 与第 3 行 (1,1,1) 不成比例，线性无关，故行向量组的秩为 2，即 $r(A)=2$。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&1&1\\\\1&a&1\\\\1&1&a\\end{pmatrix}$，讨论参数 a 取何值时 r(A)=3、r(A)=2、r(A)=1。",
+        "solution": "先算行列式（按第 1 行展开）：$|A|=1\\cdot(a^{2}-1)-1\\cdot(a-1)+1\\cdot(1-a)=a^{2}-2a+1=(a-1)^{2}$。\n\n当 $a\\ne1$ 时 $|A|=(a-1)^{2}\\ne0$，3 阶子式不全为零且矩阵是 3 阶的，故 $r(A)=3$（满秩，此时 A 可逆）。\n\n当 $a=1$ 时 $A$ 的所有元素都是 1，任何 2 阶子式都等于 0，而矩阵本身非零（1 阶子式不为零），故 $r(A)=1$。\n\n结论：$r(A)=3$ 当且仅当 $a\\ne1$；$r(A)=1$ 当且仅当 $a=1$；而 $r(A)=2$ 无论 a 取何值都不会发生——因为 $|A|=(a-1)^{2}$ 要么非零、要么整个矩阵退化为全 1 矩阵。"
+      }
+    ],
+    "tags": [
+      "秩",
+      "子式",
+      "行阶梯形",
+      "可逆"
+    ],
+    "links": [
+      "matrix-operations",
+      "inverse-matrix",
+      "elementary-matrices",
+      "direct-linear-solvers",
+      "matrix-condition"
+    ]
+  },
+  {
+    "id": "block-matrices",
+    "title": "分块矩阵",
+    "titleEn": "Block Matrices",
+    "branch": "linear",
+    "level": 5,
+    "summary": "用横竖线把大矩阵切成子块，就能像普通矩阵一样做加法、乘法与求逆，是处理大规模矩阵与推导结构公式的标准工具。",
+    "summaryEn": "Cutting a large matrix into smaller blocks lets you add, multiply and invert it much as if the blocks were scalars — the standard tool for large matrices and structural formulas.",
+    "definition": "用若干条横线与竖线把矩阵 $A$ 分成许多小矩阵，每个小矩阵称为 $A$ 的一个子块；连同子块的位置写成的大矩阵就叫分块矩阵。同一个矩阵可以有多种分法，选哪一种取决于用途（按行分块、按列分块、分成四块，等等）。\n\n分块之后，加法、数乘与乘法都可以「按块进行」：加法要求两个矩阵的分法完全相同，对应子块相加；数乘是每个子块都乘 $k$；乘法要求**前一个矩阵的列分法与后一个矩阵的行分法一致**，然后把子块当作元素做「行乘列」的乘积再求和。唯一的陷阱是：子块本身是矩阵，**相乘时顺序不能交换**，各乘积的阶数也必须匹配——这正是分块乘法与数字乘法最大的差别。\n\n分块的价值在于把大问题拆成小问题：分块对角矩阵的求逆与行列式可以逐块计算；分块三角矩阵的行列式等于两个对角块行列式之积；写成 [[A,B],[C,D]] 的四块形式后，还能推出 Schur 补、证明秩与可逆性的结论、设计并行算法。因此分块矩阵是矩阵分析中最常用的书写与推理工具。",
+    "definitionEn": "Drawing a few horizontal and vertical lines through a matrix A splits it into smaller submatrices called blocks; the large matrix written together with the positions of its blocks is a block matrix (or partitioned matrix). The same matrix admits many partitions — by rows, by columns, or into four blocks — and the useful choice depends on the purpose.\n\nOnce partitioned, addition, scalar multiplication and multiplication can all be done blockwise: addition requires identical partitions and adds corresponding blocks; scalar multiplication multiplies every block by k; multiplication requires the column partition of the left factor to match the row partition of the right factor, after which the blocks are multiplied and added exactly as if they were scalars. The one trap is that blocks are matrices: their order in each product cannot be changed and the sizes must match — the essential difference from arithmetic with numbers.\n\nThe value of blocking is that it turns one big problem into several small ones: inverses and determinants of block diagonal matrices are computed block by block, the determinant of a block triangular matrix is the product of the diagonal block determinants, and writing a matrix as [[A,B],[C,D]] leads to the Schur complement and to proofs about rank, invertibility and parallel algorithms. Block matrix notation is the everyday language of matrix analysis.",
+    "formulas": [
+      {
+        "latex": "\\begin{pmatrix}A_{11}&A_{12}\\\\A_{21}&A_{22}\\end{pmatrix}\\begin{pmatrix}B_{11}&B_{12}\\\\B_{21}&B_{22}\\end{pmatrix}=\\begin{pmatrix}A_{11}B_{11}+A_{12}B_{21}&A_{11}B_{12}+A_{12}B_{22}\\\\A_{21}B_{11}+A_{22}B_{21}&A_{21}B_{12}+A_{22}B_{22}\\end{pmatrix}",
+        "note": "分块乘法：规则与普通「行乘列」相同，但要求左矩阵的列分法与右矩阵的行分法一致，且每个乘积中子块的顺序不能交换。",
+        "noteEn": "Block multiplication follows the same row-by-column rule, provided the column partition of the left factor matches the row partition of the right one; within each product the order of blocks cannot be changed."
+      },
+      {
+        "latex": "\\begin{pmatrix}A&B\\\\C&D\\end{pmatrix}^{\\mathrm{T}}=\\begin{pmatrix}A^{\\mathrm{T}}&C^{\\mathrm{T}}\\\\B^{\\mathrm{T}}&D^{\\mathrm{T}}\\end{pmatrix}",
+        "note": "分块转置：子块的位置要转置，每个子块自身也要转置（少一步就错）。",
+        "noteEn": "Block transpose: swap the positions of the blocks and transpose each block as well — omitting the second step is wrong."
+      },
+      {
+        "latex": "\\begin{pmatrix}A_1&&\\\\&\\ddots&\\\\&&A_s\\end{pmatrix}^{-1}=\\begin{pmatrix}A_1^{-1}&&\\\\&\\ddots&\\\\&&A_s^{-1}\\end{pmatrix}",
+        "note": "分块对角矩阵求逆：每个对角块可逆时整体才可逆，逐块求逆即可。",
+        "noteEn": "Inverse of a block diagonal matrix: it exists exactly when every diagonal block is invertible, and then inverses are taken block by block."
+      },
+      {
+        "latex": "\\left|\\begin{pmatrix}A_1&&\\\\&\\ddots&\\\\&&A_s\\end{pmatrix}\\right|=\\prod_{i=1}^{s}|A_i|",
+        "note": "分块对角矩阵的行列式等于各对角块行列式之积；分块三角矩阵同理，|[[A,C],[O,B]]|=|A||B|。",
+        "noteEn": "The determinant of a block diagonal matrix is the product of the diagonal block determinants; the same holds for block triangular matrices: |[[A,C],[O,B]]|=|A||B|."
+      },
+      {
+        "latex": "\\begin{pmatrix}A&C\\\\O&B\\end{pmatrix}^{-1}=\\begin{pmatrix}A^{-1}&-A^{-1}CB^{-1}\\\\O&B^{-1}\\end{pmatrix}",
+        "note": "分块三角矩阵求逆（A、B 可逆）：右上块是 −A⁻¹CB⁻¹，顺序不能写成 −B⁻¹CA⁻¹。",
+        "noteEn": "Inverse of a block triangular matrix (A and B invertible): the upper right block is −A^(-1)CB^(-1); writing −B^(-1)CA^(-1) is wrong."
+      }
+    ],
+    "properties": [
+      "分块加法要求两个矩阵的分法完全相同，对应子块相加；数乘是每个子块都乘同一个常数 k。",
+      "分块乘法的前提是左矩阵的列分法与右矩阵的行分法一致；子块按矩阵相乘，顺序不能交换，各乘积的阶数必须匹配。",
+      "分块转置 = 子块位置转置 + 每个子块自身也转置；对称矩阵若按对称方式分块，则对角块是对称矩阵、非对角块互为转置。",
+      "分块对角矩阵（或分块三角矩阵）可逆 ⟺ 每个对角块可逆；此时 |diag(A₁,…,Aₛ)|=|A₁|…|Aₛ|，且 |[[A,C],[O,B]]|=|A||B|。",
+      "常用公式与陷阱：[[A,C],[O,B]]⁻¹=[[A⁻¹,−A⁻¹CB⁻¹],[O,B⁻¹]]；A 可逆时 |[[A,B],[C,D]]|=|A|·|D−CA⁻¹B|，其中 D−CA⁻¹B 叫 Schur 补。"
+    ],
+    "propertiesEn": [
+      "Block addition requires identical partitions and adds corresponding blocks; scalar multiplication multiplies every block by the same constant k.",
+      "Block multiplication requires the column partition of the left factor to match the row partition of the right factor; blocks are multiplied as matrices, so their order cannot be changed and the sizes must match.",
+      "Block transpose transposes both the layout of the blocks and each block itself; a symmetric matrix partitioned symmetrically has symmetric diagonal blocks and off-diagonal blocks that are transposes of one another.",
+      "A block diagonal (or block triangular) matrix is invertible iff every diagonal block is invertible; then |diag(A1,…,As)|=|A1|…|As| and |[[A,C],[O,B]]|=|A||B|.",
+      "Useful formulas and traps: [[A,C],[O,B]]^(-1)=[[A^(-1),−A^(-1)CB^(-1)],[O,B^(-1)]]; and if A is invertible then |[[A,B],[C,D]]| = |A|·|D−CA^(-1)B|, where D−CA^(-1)B is the Schur complement."
+    ],
+    "examples": [
+      {
+        "problem": "设 $M=\\begin{pmatrix}2&1&0&0\\\\0&1&0&0\\\\0&0&1&0\\\\0&0&2&3\\end{pmatrix}$，即 $M=\\operatorname{diag}(A_1,A_2)$，其中 $A_1=\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}$、$A_2=\\begin{pmatrix}1&0\\\\2&3\\end{pmatrix}$。求 $|M|$ 与 $M^{-1}$，并验证 $MM^{-1}=E_4$。",
+        "solution": "按分块对角矩阵处理：$|A_1|=2\\times1-1\\times0=2$，$|A_2|=1\\times3-0\\times2=3$，所以 $|M|=|A_1|\\,|A_2|=6$（直接按 $M$ 的对角元相乘也应得 6）。\n\n逐块求逆：$A_1^{-1}=\\frac{1}{2}\\begin{pmatrix}1&-1\\\\0&2\\end{pmatrix}=\\begin{pmatrix}1/2&-1/2\\\\0&1\\end{pmatrix}$，$A_2^{-1}=\\frac{1}{3}\\begin{pmatrix}3&0\\\\-2&1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\-2/3&1/3\\end{pmatrix}$。于是 $M^{-1}=\\begin{pmatrix}1/2&-1/2&0&0\\\\0&1&0&0\\\\0&0&1&0\\\\0&0&-2/3&1/3\\end{pmatrix}$。\n\n验证（分块乘法）：$MM^{-1}=\\begin{pmatrix}A_1A_1^{-1}&O\\\\O&A_2A_2^{-1}\\end{pmatrix}=\\begin{pmatrix}E_2&O\\\\O&E_2\\end{pmatrix}=E_4$。其中 $A_2A_2^{-1}=\\begin{pmatrix}1&0\\\\2&3\\end{pmatrix}\\begin{pmatrix}1&0\\\\-2/3&1/3\\end{pmatrix}=\\begin{pmatrix}1&0\\\\2-2&1\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$，$A_1A_1^{-1}=E_2$ 同理。"
+      },
+      {
+        "problem": "设 $M=\\begin{pmatrix}A&C\\\\O&B\\end{pmatrix}$，其中 $A=\\begin{pmatrix}2&0\\\\0&3\\end{pmatrix}$、$B=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$、$C=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$（均为 2 阶块）。求 $|M|$ 与 $M^{-1}$，并用 M 的三角性核对行列式。",
+        "solution": "分块上三角矩阵的行列式等于对角块行列式之积：$|A|=2\\times3=6$，$|B|=1\\times1=1$，故 $|M|=|A|\\,|B|=6$。把 M 写成 $M=\\begin{pmatrix}2&0&1&2\\\\0&3&3&4\\\\0&0&1&1\\\\0&0&0&1\\end{pmatrix}$，它本身就是上三角矩阵，对角元 2、3、1、1 之积也是 6，核对一致。\n\n由公式 $M^{-1}=\\begin{pmatrix}A^{-1}&-A^{-1}CB^{-1}\\\\O&B^{-1}\\end{pmatrix}$ 计算：$A^{-1}=\\begin{pmatrix}1/2&0\\\\0&1/3\\end{pmatrix}$，$B^{-1}=\\begin{pmatrix}1&-1\\\\0&1\\end{pmatrix}$；$A^{-1}C=\\begin{pmatrix}1/2&0\\\\0&1/3\\end{pmatrix}\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}=\\begin{pmatrix}1/2&1\\\\1&4/3\\end{pmatrix}$，再右乘 $B^{-1}$ 得 $A^{-1}CB^{-1}=\\begin{pmatrix}1/2&1\\\\1&4/3\\end{pmatrix}\\begin{pmatrix}1&-1\\\\0&1\\end{pmatrix}=\\begin{pmatrix}1/2&1/2\\\\1&1/3\\end{pmatrix}$。\n\n所以 $M^{-1}=\\begin{pmatrix}1/2&0&-1/2&-1/2\\\\0&1/3&-1&-1/3\\\\0&0&1&-1\\\\0&0&0&1\\end{pmatrix}$。核对：分块相乘时右上块为 $A(-A^{-1}CB^{-1})+CB^{-1}=-CB^{-1}+CB^{-1}=O$，左下块为 O，对角块为 $AA^{-1}=E_2$ 与 $BB^{-1}=E_2$，故 $MM^{-1}=E_4$。这里子块的相乘顺序不能交换，写成 $B^{-1}CA^{-1}$ 就会出错。"
+      }
+    ],
+    "tags": [
+      "分块矩阵",
+      "分块对角",
+      "Schur 补",
+      "行列式"
+    ],
+    "links": [
+      "matrix-operations",
+      "inverse-matrix",
+      "matrix-rank",
+      "determinant-properties",
+      "matrix-exponential"
+    ]
+  }
+]

@@ -1,0 +1,561 @@
+[
+  {
+    "id": "space-curve",
+    "title": "空间曲线与参数表示",
+    "titleEn": "Space Curves and Parametrization",
+    "branch": "differential-geometry",
+    "level": 4,
+    "summary": "用参数 t 描述空间中运动质点的轨迹：r(t) = (x(t), y(t), z(t))；处处满足 r′(t) ≠ 0 的曲线称为正则曲线。",
+    "summaryEn": "A moving point in space described by a parameter: r(t) = (x(t), y(t), z(t)); the curve is regular when r′(t) ≠ 0 everywhere.",
+    "definition": "空间曲线是区间 $I$ 到空间 $\\mathbb{R}^3$ 的映射\n\n$$r(t)=(x(t),\\,y(t),\\,z(t)),\\qquad t\\in I$$\n\n参数 $t$ 可以想象成时间，$r(t)$ 是质点运动的轨迹，$x(t),y(t),z(t)$ 是三个坐标随时间的变化。**参数表示**把一整条曲线装进三个一元函数里，于是曲线上的问题（切线、弧长、弯曲、扭转）都化归为一元微积分问题。\n\n如果各分量可微且速度向量处处非零\n\n$$r'(t)=(x'(t),\\,y'(t),\\,z'(t))\\neq 0\\qquad(\\forall t\\in I)$$\n\n就称曲线是**正则的**（也叫光滑的）。此时 $r'(t)$ 给出切线方向，单位化得到单位切向量 $T=r'/|r'|$。正则性是后续一切概念的前提：只有 $r'\\neq 0$，才能把参数换成弧长、才能谈论 Frenet 标架。\n\n最经典的例子是**圆柱螺线** $r(t)=(a\\cos t,\\,a\\sin t,\\,bt)$：它缠绕在半径为 $a$ 的圆柱面上，$b$ 控制每圈升高的快慢；由于 $|r'|=\\sqrt{a^{2}+b^{2}}$ 恒不为零，螺线处处正则。",
+    "definitionEn": "A space curve is a map from an interval $I$ into space $\\mathbb{R}^3$:\n\n$$r(t)=(x(t),\\,y(t),\\,z(t)),\\qquad t\\in I$$\n\nThe parameter $t$ can be imagined as time and $r(t)$ as the trajectory of a moving point, with $x(t),y(t),z(t)$ the coordinates changing with time. A **parametrization** packs the whole curve into three functions of one variable, so questions about the curve (tangents, arc length, bending, twisting) become single-variable calculus problems.\n\nIf the components are differentiable and the velocity never vanishes,\n\n$$r'(t)=(x'(t),\\,y'(t),\\,z'(t))\\neq 0\\qquad(\\forall t\\in I)$$\n\nthe curve is called **regular** (or smooth). Then $r'(t)$ gives the tangent direction, and normalizing it gives the unit tangent $T=r'/|r'|$. Regularity is the prerequisite for everything that follows: only when $r'\\neq 0$ can we reparametrize by arc length and talk about the Frenet frame.\n\nThe classic example is the **circular helix** $r(t)=(a\\cos t,\\,a\\sin t,\\,bt)$: it winds around a cylinder of radius $a$, while $b$ controls how fast it climbs. Since $|r'|=\\sqrt{a^{2}+b^{2}}$ never vanishes, the helix is regular everywhere.",
+    "formulas": [
+      {
+        "latex": "r(t)=(x(t),\\,y(t),\\,z(t)),\\qquad t\\in I",
+        "note": "空间曲线的参数表示：三个坐标都是参数 t 的一元函数",
+        "noteEn": "Parametrization of a space curve: all three coordinates are functions of the parameter t"
+      },
+      {
+        "latex": "r'(t)=(x'(t),\\,y'(t),\\,z'(t))\\neq 0",
+        "note": "正则曲线的条件：速度向量处处非零，切线存在且唯一",
+        "noteEn": "Regularity: the velocity vector never vanishes, so the tangent line exists and is unique"
+      },
+      {
+        "latex": "T(t)=\\frac{r'(t)}{|r'(t)|}",
+        "note": "单位切向量：指向前进方向",
+        "noteEn": "Unit tangent vector: it points in the direction of motion"
+      },
+      {
+        "latex": "r(t)=(a\\cos t,\\,a\\sin t,\\,bt),\\qquad |r'(t)|=\\sqrt{a^{2}+b^{2}}",
+        "note": "圆柱螺线及其速率：速率恒为常数，曲线处处正则",
+        "noteEn": "Circular helix and its speed: the speed is constant and the curve is regular everywhere"
+      }
+    ],
+    "expression": {
+      "text": "r(t) = (x(t), y(t), z(t))，t ∈ I",
+      "symbol": "r(t) = (x(t), y(t), z(t))",
+      "note": "把曲线看成质点运动的轨迹：t 是时间，r′(t) 是速度向量",
+      "noteEn": "View the curve as the trajectory of a point: t is time and r′(t) is the velocity vector"
+    },
+    "properties": [
+      "参数表示不唯一：$r(t)$ 与 $r(2t)$ 描出同一条曲线，只是速度不同；几何性质与参数选择无关",
+      "正则曲线每点都有唯一确定的非零切向量，因此可以谈论切线与光滑性",
+      "若在某点 $r'(t_0)=0$，该点称为奇点，切向量方向可能消失，曲线可能长出尖点",
+      "螺线的切向量与 z 轴始终夹定角，所以螺线是等倾曲线"
+    ],
+    "propertiesEn": [
+      "Parametrizations are not unique: $r(t)$ and $r(2t)$ trace the same curve at different speeds; geometric properties do not depend on the choice",
+      "At each point of a regular curve there is exactly one nonzero tangent direction, so tangent lines and smoothness make sense",
+      "If $r'(t_0)=0$ the point is called singular: the tangent direction may fail and the curve can develop a cusp",
+      "The tangent of a helix meets the z-axis at a constant angle, so helices are curves of constant slope"
+    ],
+    "plot": {
+      "type": "curve3d",
+      "x": "cos(t)",
+      "y": "sin(t)",
+      "z": "t/3",
+      "tRange": [
+        0,
+        12.566
+      ],
+      "color": "#4cc9f0",
+      "title": "圆柱螺线 r(t) = (cos t, sin t, t/3)"
+    },
+    "examples": [
+      {
+        "problem": "判断螺线 $r(t)=(\\cos t,\\,\\sin t,\\,\\frac{t}{3})$ 是否正则，并求 $t=\\pi$ 处的单位切向量。",
+        "solution": "$r'(t)=(-\\sin t,\\,\\cos t,\\,\\frac{1}{3})$，于是 $|r'(t)|=\\sqrt{\\sin^{2}t+\\cos^{2}t+\\frac{1}{9}}=\\frac{\\sqrt{10}}{3}\\neq 0$，故曲线处处正则。当 $t=\\pi$ 时 $r'(\\pi)=(0,\\,-1,\\,\\frac{1}{3})$，单位切向量为\n$$T=\\frac{3}{\\sqrt{10}}\\left(0,\\,-1,\\,\\frac{1}{3}\\right)=\\left(0,\\,-\\frac{3}{\\sqrt{10}},\\,\\frac{1}{\\sqrt{10}}\\right)$$"
+      },
+      {
+        "problem": "求 xy 平面内半径 $R$ 的圆的参数表示并验证正则性；再说明曲线 $r(t)=(t^{3},\\,t^{2},\\,0)$ 在 $t=0$ 处为什么不是正则点。",
+        "solution": "圆可取 $r(t)=(R\\cos t,\\,R\\sin t,\\,0)$，则 $r'(t)=(-R\\sin t,\\,R\\cos t,\\,0)$，$|r'|=R>0$，处处正则。对 $r(t)=(t^{3},\\,t^{2},\\,0)$ 有 $r'(t)=(3t^{2},\\,2t,\\,0)$，$r'(0)=(0,0,0)$，故 $t=0$ 是奇点——该点附近曲线出现尖点（cusp）。"
+      }
+    ],
+    "tags": [
+      "空间曲线",
+      "参数方程",
+      "正则曲线",
+      "螺线"
+    ],
+    "links": [
+      "parametric-derivative",
+      "curvature",
+      "arc-length-param",
+      "frenet-frame"
+    ]
+  },
+  {
+    "id": "arc-length-param",
+    "title": "弧长与弧长参数化",
+    "titleEn": "Arc Length and Arc-Length Parametrization",
+    "branch": "differential-geometry",
+    "level": 4,
+    "summary": "弧长 s(t) = ∫ₐᵗ |r′(τ)| dτ 是曲线的自然参数：用弧长作参数后速率恒为 1，即 |r′| ≡ 1。",
+    "summaryEn": "Arc length s(t) = ∫ₐᵗ |r′(τ)| dτ is the natural parameter: after reparametrizing by arc length the speed is always 1, |r′| ≡ 1.",
+    "definition": "曲线从起点走到当前点的实际长度就是**弧长**，它是速率 $|r'(t)|$ 对时间的积分：\n\n$$s(t)=\\int_{a}^{t}|r'(\\tau)|\\,d\\tau,\\qquad \\frac{ds}{dt}=|r'(t)|$$\n\n对正则曲线 $|r'|>0$，所以 $s(t)$ 严格递增，可以把 $t$ 反解成 $t(s)$ 并代回，得到以弧长作参数的曲线 $r(s)$，称为**弧长参数化**（自然参数化）。此时\n\n$$\\left|\\frac{dr}{ds}\\right|\\equiv 1$$\n\n质点以单位速率匀速前进：参数不再取决于你怎样开动曲线，而由两点之间沿曲线的真实距离决定。\n\n这是理论推导最干净的选择——曲率 $\\kappa=|r''(s)|$ 等众多公式只在弧长参数下写成最简形式；代价是一般曲线很难显式反解 $s(t)$（例如椭圆弧长涉及椭圆积分），所以计算问题常常保留一般参数 $t$，理论问题则先换到 $s$。",
+    "definitionEn": "The **arc length** is the length actually travelled from a fixed starting point; it is the integral of the speed:\n\n$$s(t)=\\int_{a}^{t}|r'(\\tau)|\\,d\\tau,\\qquad \\frac{ds}{dt}=|r'(t)|$$\n\nFor a regular curve $|r'|>0$, so $s(t)$ is strictly increasing and can be inverted to $t(s)$. Substituting back gives the curve parametrized by arc length, $r(s)$, called the **arc-length parametrization**. Then\n\n$$\\left|\\frac{dr}{ds}\\right|\\equiv 1$$\n\nthe point travels at unit speed: the parameter no longer depends on how you choose to drive along the curve, but is determined by the true distance between points measured along the curve.\n\nThis is the cleanest choice for theory—curvature $\\kappa=|r''(s)|$ and many other formulas take their simplest form in arc-length. The price is that inverting $s(t)$ explicitly is rarely possible (the arc length of an ellipse involves elliptic integrals), so computations usually keep a general parameter $t$, while theoretical work goes to $s$ first.",
+    "formulas": [
+      {
+        "latex": "s(t)=\\int_{a}^{t}|r'(\\tau)|\\,d\\tau",
+        "note": "弧长公式：把速率对时间积分",
+        "noteEn": "Arc length: integrate the speed over time"
+      },
+      {
+        "latex": "\\frac{ds}{dt}=|r'(t)|",
+        "note": "弧微分：弧长对参数的瞬时变化率等于速率",
+        "noteEn": "Arc element: the instantaneous rate of change of arc length equals the speed"
+      },
+      {
+        "latex": "\\left|\\frac{dr}{ds}\\right|\\equiv 1",
+        "note": "弧长参数化的标志：速率为 1",
+        "noteEn": "The signature of arc-length parametrization: unit speed"
+      },
+      {
+        "latex": "r(t)=(a\\cos t,\\,a\\sin t,\\,bt)\\ \\Rightarrow\\ s(t)=t\\sqrt{a^{2}+b^{2}}",
+        "note": "螺线速率恒为 √(a²+b²)，弧长是 t 的线性函数",
+        "noteEn": "A helix has constant speed √(a²+b²), so its arc length is linear in t"
+      },
+      {
+        "latex": "r(s)=\\left(a\\cos\\frac{s}{\\sqrt{a^{2}+b^{2}}},\\,a\\sin\\frac{s}{\\sqrt{a^{2}+b^{2}}},\\,\\frac{bs}{\\sqrt{a^{2}+b^{2}}}\\right)",
+        "note": "螺线以弧长为参数的表达式（由 t = s/√(a²+b²) 代入）",
+        "noteEn": "The helix in arc-length parametrization, obtained by substituting t = s/√(a²+b²)"
+      }
+    ],
+    "expression": {
+      "text": "s(t) = ∫ₐᵗ |r′(τ)| dτ，|dr/ds| ≡ 1",
+      "symbol": "s(t) = ∫ |r′(τ)| dτ",
+      "note": "弧长参数化把参数变成曲线上的实际距离，使速率恒为 1",
+      "noteEn": "Arc-length parametrization turns the parameter into true distance along the curve, making the speed constantly 1"
+    },
+    "properties": [
+      "对正则曲线 $\\frac{ds}{dt}=|r'(t)|>0$，所以 $s$ 严格单调，弧长参数总存在",
+      "弧长参数下 $|r'|\\equiv 1$，许多公式最简，例如 $T=r'(s)$、$\\kappa=|r''(s)|$",
+      "弧长是内蕴量：与刚体运动无关，也与原参数的选择无关",
+      "同一条曲线不同参数化给出相同的总弧长；固定起点与方向后弧长参数化是唯一的"
+    ],
+    "propertiesEn": [
+      "For a regular curve $\\frac{ds}{dt}=|r'(t)|>0$, so $s$ is strictly increasing and the arc-length parameter always exists",
+      "In arc-length parametrization $|r'|\\equiv 1$ and formulas become simplest, e.g. $T=r'(s)$ and $\\kappa=|r''(s)|$",
+      "Arc length is intrinsic: it is unchanged by rigid motions and by the choice of the original parameter",
+      "Different parametrizations of the same curve give the same total length; with a fixed starting point and direction the arc-length parametrization is unique"
+    ],
+    "plot": {
+      "type": "curve3d",
+      "x": "t",
+      "y": "sin(t)",
+      "z": "0",
+      "tRange": [
+        0,
+        12.566
+      ],
+      "color": "#06d6a0",
+      "title": "平面曲线 r(t) = (t, sin t, 0)：弧长由 ∫|r′| dt 累计"
+    },
+    "examples": [
+      {
+        "problem": "求螺线 $r(t)=(\\cos t,\\,\\sin t,\\,\\frac{t}{3})$ 从 $t=0$ 到 $t=2\\pi$ 的弧长，并写出它的弧长参数化。",
+        "solution": "$|r'|=\\frac{\\sqrt{10}}{3}$，故 $s(t)=\\frac{\\sqrt{10}}{3}t$，当 $t=2\\pi$ 时弧长为 $\\frac{2\\pi\\sqrt{10}}{3}$。反解 $t=\\frac{3s}{\\sqrt{10}}$，弧长参数化为\n$$r(s)=\\left(\\cos\\frac{3s}{\\sqrt{10}},\\,\\sin\\frac{3s}{\\sqrt{10}},\\,\\frac{s}{\\sqrt{10}}\\right)$$\n可直接验证 $\\left|\\frac{dr}{ds}\\right|=\\sqrt{\\frac{9}{10}(\\sin^{2}+\\cos^{2})+\\frac{1}{10}}=1$。"
+      },
+      {
+        "problem": "说明单位圆 $r(s)=(\\cos s,\\,\\sin s,\\,0)$ 的参数 $s$ 就是弧长，即圆的自然参数就是圆心角的弧度。",
+        "solution": "$r'(s)=(-\\sin s,\\,\\cos s,\\,0)$，$|r'(s)|=1$，所以 $s$ 是弧长参数；从 $0$ 到 $s$ 的弧长为 $\\int_{0}^{s}1\\,d\\sigma=s$，恰好等于圆心角的弧度值——这正是弧度制「用弧长度量角」的含义。"
+      }
+    ],
+    "tags": [
+      "弧长",
+      "自然参数",
+      "重参数化",
+      "螺线"
+    ],
+    "links": [
+      "arc-length",
+      "space-curve",
+      "curvature-torsion",
+      "frenet-formulas"
+    ]
+  },
+  {
+    "id": "frenet-frame",
+    "title": "Frenet 标架",
+    "titleEn": "The Frenet Frame",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "曲线上每点由单位切向量 T、主法向量 N、副法向量 B 组成的右手正交标架：T = r′/|r′|，N = T′/|T′|，B = T × N。",
+    "summaryEn": "At every point, the right-handed orthonormal frame T = r′/|r′|, N = T′/|T′|, B = T × N: tangent, principal normal, binormal.",
+    "definition": "设 $r(t)$ 是正则曲线且曲率不为零，在每一点构造三个单位向量：\n\n$$T=\\frac{r'}{|r'|},\\qquad N=\\frac{T'}{|T'|},\\qquad B=T\\times N$$\n\n分别称为**切向量**、**主法向量**（要求 $T'\\neq 0$，即曲率 $\\kappa>0$；它指向曲线弯曲的内侧）与**副法向量**。三者两两正交、都是单位向量，且构成**右手系**：\n\n$$T\\times N=B,\\qquad N\\times B=T,\\qquad B\\times T=N$$\n\n这就是 **Frenet 标架**：一套跟着点沿曲线移动的「随身坐标系」，曲线的全部局部几何都能用它描述。\n\n三个由标架张成的重要平面：**密切平面**由 $T,N$ 张成（曲线局部最贴近的平面，$B$ 是它的法向量）、**从切平面**由 $T,B$ 张成、**法平面**由 $N,B$ 张成。对平面曲线，密切平面就是曲线所在的平面；在 $\\kappa=0$ 的点（例如直线段上），$T'=0$，主法向量没有定义。",
+    "definitionEn": "Let $r(t)$ be a regular curve with nonzero curvature. At each point define three unit vectors:\n\n$$T=\\frac{r'}{|r'|},\\qquad N=\\frac{T'}{|T'|},\\qquad B=T\\times N$$\n\ncalled the **tangent**, the **principal normal** (defined when $T'\\neq 0$, i.e. $\\kappa>0$; it points to the inner side of the bending) and the **binormal**. The three are mutually orthogonal unit vectors forming a **right-handed** system:\n\n$$T\\times N=B,\\qquad N\\times B=T,\\qquad B\\times T=N$$\n\nThis is the **Frenet frame**: a moving coordinate system that travels with the point, in terms of which all the local geometry of the curve can be expressed.\n\nThree planes spanned by the frame are important: the **osculating plane** spanned by $T,N$ (the plane that hugs the curve locally, with normal $B$), the **rectifying plane** spanned by $T,B$, and the **normal plane** spanned by $N,B$. For a plane curve the osculating plane is the plane of the curve; at points where $\\kappa=0$ (e.g. on a straight segment) $T'=0$ and the principal normal is not defined.",
+    "formulas": [
+      {
+        "latex": "T=\\frac{r'(t)}{|r'(t)|}",
+        "note": "单位切向量：曲线的前进方向",
+        "noteEn": "Unit tangent vector: the direction of motion"
+      },
+      {
+        "latex": "N=\\frac{T'}{|T'|}",
+        "note": "主法向量：要求 T′ ≠ 0（曲率 κ > 0），指向曲线弯曲的内侧",
+        "noteEn": "Principal normal: needs T′ ≠ 0 (κ > 0) and points to the inner side of the bend"
+      },
+      {
+        "latex": "B=T\\times N",
+        "note": "副法向量：与前两者都垂直，使 (T, N, B) 成为右手系",
+        "noteEn": "Binormal: perpendicular to both, completing the right-handed frame"
+      },
+      {
+        "latex": "T\\times N=B,\\qquad N\\times B=T,\\qquad B\\times T=N",
+        "note": "右手系关系：T、N、B 是一组右手单位正交基",
+        "noteEn": "Right-handed relations: T, N, B form a right-handed orthonormal basis"
+      },
+      {
+        "latex": "T=\\frac{dr}{ds},\\qquad N=\\frac{1}{\\kappa}\\frac{dT}{ds},\\qquad B=T\\times N",
+        "note": "弧长参数下标架公式更简洁，此时 κ = |dT/ds| = |r″(s)|",
+        "noteEn": "In arc-length parametrization the frame formulas are cleaner, with κ = |dT/ds| = |r″(s)|"
+      }
+    ],
+    "expression": {
+      "text": "T = r′/|r′|，N = T′/|T′|，B = T × N",
+      "symbol": "(T, N, B)",
+      "note": "标架两两正交且为右手系：T × N = B，N × B = T，B × T = N",
+      "noteEn": "The frame is orthonormal and right-handed: T × N = B, N × B = T, B × T = N"
+    },
+    "properties": [
+      "T、N、B 两两正交、长度均为 1，且构成右手系；标架沿曲线移动时只做刚体转动",
+      "N 总指向曲线弯曲的一侧；B 是密切平面的单位法向量",
+      "标架与参数化无关：同一条带定向的曲线在任何参数下得到相同的 T、N、B",
+      "在 κ = 0 的点 T′ = 0，此时 N（以及 B）不能由公式确定，需要单独约定或跳开",
+      "平面曲线有常向量 B（垂直于曲线所在平面），于是 B′ = 0——这正是挠率为零的几何含义"
+    ],
+    "propertiesEn": [
+      "T, N and B are mutually orthogonal unit vectors forming a right-handed frame; as the point moves, the frame only rotates rigidly",
+      "N always points to the side towards which the curve bends; B is a unit normal of the osculating plane",
+      "The frame is independent of the parametrization: the same oriented curve gives the same T, N, B in any parametrization",
+      "Where κ = 0 one has T′ = 0, so N (and hence B) is not determined by the formulas",
+      "A plane curve has a constant binormal B (perpendicular to its plane), hence B′ = 0—the geometric meaning of zero torsion"
+    ],
+    "plot": {
+      "type": "curve3d",
+      "x": "cos(t)",
+      "y": "sin(t)",
+      "z": "t/3",
+      "tRange": [
+        0,
+        12.566
+      ],
+      "frames": [
+        {
+          "at": 4.19,
+          "scale": 0.7
+        }
+      ],
+      "color": "#b388ff",
+      "title": "螺线上的 Frenet 标架：T（粉）、N（绿）、B（黄）"
+    },
+    "examples": [
+      {
+        "problem": "求圆柱螺线 $r(t)=(a\\cos t,\\,a\\sin t,\\,bt)$（$a>0$）的 Frenet 标架。",
+        "solution": "$|r'|=\\sqrt{a^{2}+b^{2}}=:c$，$r'=(-a\\sin t,\\,a\\cos t,\\,b)$，故 $T=\\frac{1}{c}(-a\\sin t,\\,a\\cos t,\\,b)$。又 $r''=(-a\\cos t,\\,-a\\sin t,\\,0)$，$T'=\\frac{1}{c}(-a\\cos t,\\,-a\\sin t,\\,0)$，$|T'|=\\frac{a}{c}$，所以 $N=(-\\cos t,\\,-\\sin t,\\,0)$。最后\n$$B=T\\times N=\\frac{1}{c}(b\\sin t,\\,-b\\cos t,\\,a)$$\n可直接验证 $|B|=1$ 且 $B\\cdot T=B\\cdot N=0$。"
+      },
+      {
+        "problem": "求抛物线 $r(t)=(t,\\,t^{2},\\,0)$ 的 Frenet 标架，并说明副法向量是常向量。",
+        "solution": "$r'=(1,\\,2t,\\,0)$，$|r'|=\\sqrt{1+4t^{2}}$，$T=\\frac{(1,\\,2t,\\,0)}{\\sqrt{1+4t^{2}}}$。由\n$$T'=\\frac{(-4t,\\,2,\\,0)}{(1+4t^{2})^{3/2}},\\qquad |T'|=\\frac{2}{1+4t^{2}}$$\n得 $N=\\frac{(-2t,\\,1,\\,0)}{\\sqrt{1+4t^{2}}}$。于是 $B=T\\times N=(0,\\,0,\\,1)$ 是常向量——这是平面曲线的标志。"
+      }
+    ],
+    "tags": [
+      "Frenet 标架",
+      "切向量",
+      "主法向量",
+      "副法向量",
+      "密切平面"
+    ],
+    "links": [
+      "space-curve",
+      "curvature-torsion",
+      "frenet-formulas"
+    ]
+  },
+  {
+    "id": "curvature-torsion",
+    "title": "曲率与挠率",
+    "titleEn": "Curvature and Torsion",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "曲率 κ = |T′|/|r′| = |r′ × r″|/|r′|³ 度量弯曲的快慢；挠率 τ = (r′, r″, r‴)/|r′ × r″|² 度量扭出密切平面的快慢。",
+    "summaryEn": "Curvature κ = |T′|/|r′| = |r′ × r″|/|r′|³ measures how fast the curve bends; torsion τ = (r′, r″, r‴)/|r′ × r″|² measures how fast it twists out of the osculating plane.",
+    "definition": "有了 Frenet 标架，曲线的弯曲与扭转可以用两个标量函数完全刻画。\n\n**曲率** $\\kappa$ 是切线方向对弧长的转动速率：\n\n$$\\kappa=\\left|\\frac{dT}{ds}\\right|=\\frac{|T'|}{|r'|}\\ge 0$$\n\nκ 越大，曲线弯得越急；$\\kappa\\equiv 0$ 当且仅当曲线是直线段。一般参数下有紧凑公式 $\\kappa=\\frac{|r'\\times r''|}{|r'|^{3}}$。\n\n**挠率** $\\tau$ 是曲线扭出密切平面的速率，也就是副法向量的转动速率：$|\\tau|=\\left|\\frac{dB}{ds}\\right|$，符号由定向决定。它度量曲线离开平面的趋势：$\\tau\\equiv 0$ 当且仅当曲线落在一个固定平面内。计算公式为 $\\tau=\\frac{(r',\\,r'',\\,r''')}{|r'\\times r''|^{2}}$，分子是三个导数向量的**混合积** $(a,b,c)=a\\cdot(b\\times c)$。\n\n两个量合起来给出曲线的「弯曲档案」：圆柱螺线 $r=(a\\cos t,\\,a\\sin t,\\,bt)$ 的 $\\kappa=\\frac{a}{a^{2}+b^{2}}$、$\\tau=\\frac{b}{a^{2}+b^{2}}$ 都是常数——螺线是除直线与圆之外，唯一同时具有常曲率与常挠率的曲线。",
+    "definitionEn": "With the Frenet frame available, the bending and twisting of a curve are completely described by two scalar functions.\n\n**Curvature** $\\kappa$ is the rate at which the tangent direction turns per unit arc length:\n\n$$\\kappa=\\left|\\frac{dT}{ds}\\right|=\\frac{|T'|}{|r'|}\\ge 0$$\n\nThe larger κ is, the sharper the curve bends; $\\kappa\\equiv 0$ if and only if the curve is a straight segment. For a general parameter there is the compact formula $\\kappa=\\frac{|r'\\times r''|}{|r'|^{3}}$.\n\n**Torsion** $\\tau$ is the rate at which the curve twists out of its osculating plane, i.e. the turning rate of the binormal: $|\\tau|=\\left|\\frac{dB}{ds}\\right|$, with a sign that depends on the orientation. It measures the tendency of the curve to leave the plane: $\\tau\\equiv 0$ if and only if the curve lies in a fixed plane. The formula is $\\tau=\\frac{(r',\\,r'',\\,r''')}{|r'\\times r''|^{2}}$, where the numerator is the **scalar triple product** $(a,b,c)=a\\cdot(b\\times c)$.\n\nTogether the two functions form the bending profile of the curve: for the circular helix $r=(a\\cos t,\\,a\\sin t,\\,bt)$ one finds $\\kappa=\\frac{a}{a^{2}+b^{2}}$ and $\\tau=\\frac{b}{a^{2}+b^{2}}$, both constant—the helix is, besides lines and circles, essentially the only curve with constant curvature and constant torsion.",
+    "formulas": [
+      {
+        "latex": "\\kappa=\\frac{|T'|}{|r'|}=\\frac{|r'\\times r''|}{|r'|^{3}}",
+        "note": "曲率的定义与参数公式：切线方向对弧长的转动速率",
+        "noteEn": "Definition and parametric formula for curvature: the rate at which the tangent direction turns"
+      },
+      {
+        "latex": "\\kappa^{2}=\\frac{|r'|^{2}|r''|^{2}-(r'\\cdot r'')^{2}}{|r'|^{6}}",
+        "note": "等价形式，由拉格朗日恒等式 |a × b|² = |a|²|b|² − (a · b)² 得到",
+        "noteEn": "Equivalent form, from Lagrange's identity |a × b|² = |a|²|b|² − (a · b)²"
+      },
+      {
+        "latex": "\\tau=\\frac{(r',\\,r'',\\,r''')}{|r'\\times r''|^{2}}",
+        "note": "挠率公式：分子是混合积 (a, b, c) = a · (b × c)，分母是 |r′ × r″| 的平方",
+        "noteEn": "Torsion formula: the numerator is the scalar triple product (a, b, c) = a · (b × c), the denominator is |r′ × r″|²"
+      },
+      {
+        "latex": "\\kappa=|r''(s)|,\\qquad \\tau=-\\frac{dB}{ds}\\cdot N=\\frac{(r'(s),\\,r''(s),\\,r'''(s))}{|r''(s)|^{2}}",
+        "note": "弧长参数下的简洁形式：此时 |r′ × r″| = |r″| = κ，挠率也可读作副法向量的转动速率",
+        "noteEn": "Simplified forms in arc-length parametrization, where |r′ × r″| = |r″| = κ; torsion also reads as the turning rate of the binormal"
+      },
+      {
+        "latex": "\\kappa=\\frac{a}{a^{2}+b^{2}},\\qquad \\tau=\\frac{b}{a^{2}+b^{2}}",
+        "note": "圆柱螺线 r = (a cos t, a sin t, bt) 的曲率与挠率，均为常数",
+        "noteEn": "Curvature and torsion of the circular helix r = (a cos t, a sin t, bt): both are constants"
+      }
+    ],
+    "expression": {
+      "text": "κ = |r′ × r″|/|r′|³，τ = (r′, r″, r‴)/|r′ × r″|²",
+      "symbol": "κ = |r′×r″|/|r′|³,  τ = (r′,r″,r‴)/|r′×r″|²",
+      "note": "曲率非负，刻画转弯快慢；挠率可正可负，刻画扭出密切平面的快慢",
+      "noteEn": "Curvature is nonnegative and measures bending; torsion is signed and measures twisting out of the osculating plane"
+    },
+    "properties": [
+      "κ ≥ 0；κ = 0 当且仅当曲线是直线（片段）；其倒数 ρ = 1/κ 称为曲率半径",
+      "挠率的符号与空间手性有关：作镜像反射时 $\\kappa$ 不变而 $\\tau$ 变号；改变参数方向（$t\\to -t$，乃至任意重参数化）时 $\\kappa$ 与 $\\tau$ **都不变**，$|\\tau|$ 与定向无关。",
+      "平面曲线的挠率恒为 0；反之，κ > 0 且 τ ≡ 0 的曲线落在某个固定平面内",
+      "κ、τ 在刚体运动（平移 + 旋转）下不变，是曲线的局部不变量",
+      "螺线满足 κ² + τ² = 1/(a² + b²)，且比值 τ/κ = b/a 决定螺距"
+    ],
+    "propertiesEn": [
+      "κ ≥ 0; κ = 0 if and only if the curve is a straight segment; its reciprocal ρ = 1/κ is the radius of curvature",
+      "The sign of $\\tau$ is tied to spatial chirality: a mirror reflection keeps $\\kappa$ but flips $\\tau$, whereas reversing the parameter ($t\\to -t$, or any reparametrization) leaves both $\\kappa$ and $\\tau$ **unchanged**; $|\\tau|$ is orientation-independent.",
+      "A plane curve has τ ≡ 0; conversely, a curve with κ > 0 and τ ≡ 0 lies in a fixed plane",
+      "κ and τ are invariant under rigid motions (translations and rotations): local invariants of the curve",
+      "For a helix κ² + τ² = 1/(a² + b²) and the ratio τ/κ = b/a is determined by the pitch"
+    ],
+    "plot": {
+      "type": "curve3d",
+      "x": "cos(t)",
+      "y": "sin(t)",
+      "z": "t/3",
+      "tRange": [
+        0,
+        12.566
+      ],
+      "color": "#ff6b9d",
+      "title": "圆柱螺线：κ = a/(a²+b²) 与 τ = b/(a²+b²) 均为常数"
+    },
+    "examples": [
+      {
+        "problem": "求螺线 $r(t)=(a\\cos t,\\,a\\sin t,\\,bt)$ 的曲率与挠率，并用 $a=1,\\,b=\\frac{1}{3}$ 验证。",
+        "solution": "$r'=(-a\\sin t,\\,a\\cos t,\\,b)$，$r''=(-a\\cos t,\\,-a\\sin t,\\,0)$，$r'''=(a\\sin t,\\,-a\\cos t,\\,0)$，$|r'|=\\sqrt{a^{2}+b^{2}}=c$。计算得 $r'\\times r''=(ab\\sin t,\\,-ab\\cos t,\\,a^{2})$，故 $|r'\\times r''|=a\\sqrt{a^{2}+b^{2}}=ac$，于是\n$$\\kappa=\\frac{ac}{c^{3}}=\\frac{a}{a^{2}+b^{2}}$$\n又 $r''\\times r'''=(0,\\,0,\\,a^{2})$，混合积 $(r',r'',r''')=a^{2}b$，于是\n$$\\tau=\\frac{a^{2}b}{a^{2}c^{2}}=\\frac{b}{a^{2}+b^{2}}$$\n取 $a=1,\\,b=\\frac{1}{3}$：$\\kappa=\\frac{9}{10}$，$\\tau=\\frac{3}{10}$。"
+      },
+      {
+        "problem": "证明平面曲线的挠率恒为 0，并说明其几何意义。",
+        "solution": "设曲线完全落在 xy 平面内：$r(t)=(x(t),\\,y(t),\\,0)$，则 $r',r'',r'''$ 的 z 分量均为 0，三个向量共面，混合积 $(r',r'',r''')=0$，于是 $\\tau=\\frac{0}{|r'\\times r''|^{2}}=0$（在 $r'\\times r''\\neq 0$ 的点）。几何上：平面曲线的副法向量 $B\\equiv(0,\\,0,\\,1)$ 是常向量，$B'=0$，密切平面没有转动。"
+      }
+    ],
+    "tags": [
+      "曲率",
+      "挠率",
+      "混合积",
+      "平面曲线",
+      "螺线"
+    ],
+    "links": [
+      "curvature",
+      "frenet-frame",
+      "frenet-formulas",
+      "curve-fundamental-theorem"
+    ]
+  },
+  {
+    "id": "frenet-formulas",
+    "title": "Frenet–Serret 公式",
+    "titleEn": "The Frenet–Serret Formulas",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "描述标架随弧长转动的微分方程：T′ = κN，N′ = −κT + τB，B′ = −τN（一般参数下每项乘 v = |r′|）。",
+    "summaryEn": "The ODEs describing how the frame rotates along the curve: T′ = κN, N′ = −κT + τB, B′ = −τN (with v = |r′| multiplying each term for a general parameter).",
+    "definition": "Frenet 标架 $(T,N,B)$ 沿曲线移动，它的变化规律由 **Frenet–Serret 公式**（简称 Frenet 公式）给出。以弧长为参数时：\n\n$$T'=\\kappa N,\\qquad N'=-\\kappa T+\\tau B,\\qquad B'=-\\tau N$$\n\n（撇号表示对弧长 $s$ 求导。）注意第二式中 $T$ 前是**负号**、$B$ 前是**正号**——负号来自 $T\\cdot N=0$ 的求导，保证标架不散架；$\\tau$ 项则描述标架向副法向量方向倾斜。\n\n这三条公式把标架的运动写成关于 $s$ 的**线性常微分方程组**，系数矩阵反对称，因此解始终保持单位正交（标架只做刚体转动），并且转动完全由 $\\kappa$ 与 $\\tau$ 控制。它是整个曲线论的技术核心：由 $\\kappa$、$\\tau$ 与初始标架就能恢复整条曲线（见曲线论基本定理）。\n\n换回一般参数 $t$ 时，用链式法则 $\\frac{d}{dt}=\\frac{ds}{dt}\\frac{d}{ds}=v\\frac{d}{ds}$（$v=|r'|$），每一项都乘上速率 $v$。",
+    "definitionEn": "As the Frenet frame $(T,N,B)$ moves along the curve, its variation is governed by the **Frenet–Serret formulas**. In arc-length parametrization:\n\n$$T'=\\kappa N,\\qquad N'=-\\kappa T+\\tau B,\\qquad B'=-\\tau N$$\n\n(the prime denotes d/ds). In the second equation the sign in front of $T$ is **negative** and the sign in front of $B$ is **positive**—the negative sign comes from differentiating $T\\cdot N=0$ and keeps the frame orthogonal, while the $\\tau$-term tilts the frame towards the binormal.\n\nThese equations form a **linear system of ODEs** in $s$; the coefficient matrix is antisymmetric, so solutions always stay orthonormal (the frame only rotates rigidly), and the rotation is fully controlled by $\\kappa$ and $\\tau$. This is the technical heart of curve theory: from $\\kappa$, $\\tau$ and an initial frame the whole curve can be recovered (see the fundamental theorem of curve theory).\n\nReturning to a general parameter $t$, the chain rule $\\frac{d}{dt}=\\frac{ds}{dt}\\frac{d}{ds}=v\\frac{d}{ds}$ with $v=|r'|$ multiplies every term by the speed $v$.",
+    "formulas": [
+      {
+        "latex": "T'=\\kappa N",
+        "note": "Frenet 公式第一式（对弧长 s 求导）：切向量朝主法向量方向转动",
+        "noteEn": "First Frenet formula (derivative with respect to arc length s): the tangent turns towards the principal normal"
+      },
+      {
+        "latex": "N'=-\\kappa T+\\tau B",
+        "note": "第二式：T 前为负号（保证正交性），B 前为正号（由挠率控制的倾斜）",
+        "noteEn": "Second formula: negative sign in front of T (keeps orthogonality), positive sign in front of B (tilting controlled by torsion)"
+      },
+      {
+        "latex": "B'=-\\tau N",
+        "note": "第三式：副法向量朝 −N 方向转动，速率是 |τ|",
+        "noteEn": "Third formula: the binormal turns towards −N at rate |τ|"
+      },
+      {
+        "latex": "\\frac{dT}{dt}=\\kappa vN,\\qquad \\frac{dN}{dt}=-\\kappa vT+\\tau vB,\\qquad \\frac{dB}{dt}=-\\tau vN",
+        "note": "一般参数 t 的形式：v = |r′| = ds/dt，每项乘以速率",
+        "noteEn": "General parameter t: v = |r′| = ds/dt multiplies every term"
+      },
+      {
+        "latex": "\\begin{pmatrix} T' \\\\ N' \\\\ B' \\end{pmatrix}=\\begin{pmatrix} 0 & \\kappa & 0 \\\\ -\\kappa & 0 & \\tau \\\\ 0 & -\\tau & 0 \\end{pmatrix}\\begin{pmatrix} T \\\\ N \\\\ B \\end{pmatrix}",
+        "note": "矩阵形式：系数矩阵反对称，所以标架沿曲线始终保持单位正交（刚体转动）",
+        "noteEn": "Matrix form: the antisymmetric coefficient matrix keeps the frame orthonormal (rigid rotation) along the curve"
+      }
+    ],
+    "expression": {
+      "text": "T′ = κN，N′ = −κT + τB，B′ = −τN",
+      "symbol": "T′ = κN,  N′ = −κT + τB,  B′ = −τN",
+      "note": "对弧长求导的标准形式；一般参数下每项再乘 v = |r′|",
+      "noteEn": "Standard form with respect to arc length; for a general parameter multiply every term by v = |r′|"
+    },
+    "properties": [
+      "三种写法本质相同：弧长参数版、一般参数版（每项乘 v）与矩阵版",
+      "系数矩阵反对称 ⇔ 标架在运动中保持单位正交且右手性",
+      "N′ 中的 −κT 项保证 T · N 保持为 0；若误写成 +κT，标架立刻失去正交性",
+      "Darboux 向量 ω = τT + κB 把三条公式统一成 dT/ds = ω × T、dN/ds = ω × N、dB/ds = ω × B，且 |ω|² = κ² + τ²",
+      "Frenet 公式是关于标架的线性 ODE：κ、τ 与初始标架唯一决定曲线，是曲线论基本定理的证明基石"
+    ],
+    "propertiesEn": [
+      "The three forms are equivalent: arc-length version, general-parameter version (times v), and matrix version",
+      "An antisymmetric matrix means the frame stays orthonormal and right-handed along the curve",
+      "The −κT term in N′ keeps T · N = 0; writing +κT would immediately destroy orthogonality",
+      "The Darboux vector ω = τT + κB unifies the formulas: dT/ds = ω × T, dN/ds = ω × N, dB/ds = ω × B, with |ω|² = κ² + τ²",
+      "The Frenet formulas form a linear ODE for the frame; κ, τ and the initial frame determine the curve—the cornerstone of the fundamental theorem of curve theory"
+    ],
+    "plot": {
+      "type": "curve3d",
+      "x": "cos(t)",
+      "y": "sin(t)",
+      "z": "t/3",
+      "tRange": [
+        0,
+        12.566
+      ],
+      "frames": [
+        {
+          "at": 2.09,
+          "scale": 0.6
+        },
+        {
+          "at": 4.19,
+          "scale": 0.7
+        }
+      ],
+      "color": "#ffd166",
+      "title": "Frenet 标架在曲线上两点的位置：标架随弧长转动"
+    },
+    "examples": [
+      {
+        "problem": "对螺线 $r(t)=(a\\cos t,\\,a\\sin t,\\,bt)$ 验证一般参数下的第一式 $\\frac{dT}{dt}=\\kappa vN$。",
+        "solution": "已算得 $T=\\frac{1}{c}(-a\\sin t,\\,a\\cos t,\\,b)$（$c=\\sqrt{a^{2}+b^{2}}$），故 $\\frac{dT}{dt}=\\frac{1}{c}(-a\\cos t,\\,-a\\sin t,\\,0)$。又 $\\kappa=\\frac{a}{c^{2}}$，$v=c$，$N=(-\\cos t,\\,-\\sin t,\\,0)$，于是\n$$\\kappa vN=\\frac{a}{c^{2}}\\cdot c\\cdot(-\\cos t,\\,-\\sin t,\\,0)=\\frac{1}{c}(-a\\cos t,\\,-a\\sin t,\\,0)=\\frac{dT}{dt}$$\n第一式成立。"
+      },
+      {
+        "problem": "对单位圆 $r(s)=(\\cos s,\\,\\sin s,\\,0)$（弧长参数，κ = 1，τ = 0）逐条验证 Frenet–Serret 公式。",
+        "solution": "$T=r'=(-\\sin s,\\,\\cos s,\\,0)$，$T'=(-\\cos s,\\,-\\sin s,\\,0)=N$，故 $T'=\\kappa N$ 成立。又 $N=(-\\cos s,\\,-\\sin s,\\,0)$，$N'=(\\sin s,\\,-\\cos s,\\,0)=-T$，而 $-\\kappa T+\\tau B=-T+0=-T$，第二式成立。最后 $B=T\\times N=(0,\\,0,\\,1)$ 为常向量，$B'=0=-\\tau N$，第三式成立。"
+      }
+    ],
+    "tags": [
+      "Frenet–Serret",
+      "活动标架",
+      "微分方程组",
+      "Darboux 向量"
+    ],
+    "links": [
+      "frenet-frame",
+      "curvature-torsion",
+      "curve-fundamental-theorem"
+    ]
+  },
+  {
+    "id": "curve-fundamental-theorem",
+    "title": "曲线论基本定理",
+    "titleEn": "The Fundamental Theorem of Curve Theory",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "给定连续函数 κ(s) > 0 与 τ(s)，存在以它们为曲率与挠率的曲线，并且在刚体运动意义下唯一。",
+    "summaryEn": "Given continuous functions κ(s) > 0 and τ(s), there exists a curve with these curvature and torsion, unique up to a rigid motion.",
+    "definition": "曲率与挠率是空间曲线能提供的**全部**局部信息——反过来，它们也足以决定曲线的形状，这就是**曲线论基本定理**。\n\n设 $\\kappa(s)>0$ 与 $\\tau(s)$ 是区间 $I$ 上的连续函数，则存在一条以 $s$ 为弧长参数的正则曲线，其曲率、挠率恰好是 $\\kappa(s)$ 与 $\\tau(s)$；并且这样的曲线**在刚体运动意义下唯一**——任意两条这样的曲线 $r$ 与 $\\tilde r$ 之间只差一个平移加旋转：$\\tilde r=A r+b$，其中 $A$ 是保持定向的正交矩阵。\n\n唯一性的含义是：只要两组 $(\\kappa,\\tau)$ 相同，曲线的「形状」就完全相同，与它在空间中的摆放位置无关。\n\n证明的思路漂亮而直接：把 Frenet–Serret 公式看作关于标架 $(T,N,B)$ 的线性常微分方程组，给定初始标架后解存在且唯一（由 ODE 的存在唯一性定理）；再用 $r(s)=r_0+\\int_{0}^{s}T(\\sigma)\\,d\\sigma$ 定义曲线，逐条验证 $|r'|\\equiv 1$ 且曲率、挠率恰为给定的 $\\kappa$、$\\tau$。标架的正交性由 FS 矩阵的反对称性自动保持。",
+    "definitionEn": "Curvature and torsion contain **all** the local information a space curve can provide—and conversely they determine its shape. This is the **fundamental theorem of curve theory**.\n\nLet $\\kappa(s)>0$ and $\\tau(s)$ be continuous functions on an interval $I$. Then there exists a regular curve parametrized by arc length whose curvature and torsion are exactly $\\kappa(s)$ and $\\tau(s)$; moreover such a curve is **unique up to a rigid motion**—any two such curves $r$ and $\\tilde r$ differ by a translation plus a rotation: $\\tilde r=A r+b$, where $A$ is an orientation-preserving orthogonal matrix.\n\nUniqueness means: whenever two curves share the same $(\\kappa,\\tau)$, they have exactly the same shape, regardless of how they are placed in space.\n\nThe proof is short and beautiful: regard the Frenet–Serret formulas as a linear system of ODEs for the frame $(T,N,B)$. Given an initial frame, the solution exists and is unique (by the existence–uniqueness theorem for ODEs). Then define $r(s)=r_0+\\int_{0}^{s}T(\\sigma)\\,d\\sigma$ and check that $|r'|\\equiv 1$ and that the curvature and torsion are the prescribed $\\kappa$ and $\\tau$. The orthonormality of the frame is preserved automatically because the Frenet–Serret matrix is antisymmetric.",
+    "formulas": [
+      {
+        "latex": "\\kappa(s)>0,\\ \\tau(s)\\ \\text{连续}\\ \\Longrightarrow\\ \\exists\\, r(s),\\qquad \\tilde r(s)=A\\,r(s)+b,\\quad A\\ \\text{为保持定向的正交矩阵}",
+        "note": "定理的陈述：存在性 + 刚体运动意义下的唯一性",
+        "noteEn": "Statement of the theorem: existence plus uniqueness up to rigid motions"
+      },
+      {
+        "latex": "r(s)=r_0+\\int_{0}^{s}T(\\sigma)\\,d\\sigma",
+        "note": "重构曲线：把解出的切向量 T 积分，并自动以 s 为弧长参数",
+        "noteEn": "Reconstructing the curve: integrate the solved tangent T; s automatically becomes arc length"
+      },
+      {
+        "latex": "\\frac{dT}{ds}=\\kappa N,\\qquad \\frac{dN}{ds}=-\\kappa T+\\tau B,\\qquad \\frac{dB}{ds}=-\\tau N",
+        "note": "证明核心：把 Frenet–Serret 公式当成标架的线性 ODE 组来解",
+        "noteEn": "Core of the proof: solve the Frenet–Serret formulas as a linear ODE system for the frame"
+      },
+      {
+        "latex": "\\kappa\\equiv\\frac{1}{R},\\ \\tau\\equiv 0\\ \\Rightarrow\\ \\text{半径 } R \\text{ 的圆};\\qquad \\kappa,\\tau\\ \\text{为常数}\\ \\Rightarrow\\ \\text{圆柱螺线}",
+        "note": "典型特例：常曲率、常挠率对应的曲线",
+        "noteEn": "Typical special cases: constant curvature and torsion"
+      },
+      {
+        "latex": "a=\\frac{\\kappa}{\\kappa^{2}+\\tau^{2}},\\qquad b=\\frac{\\tau}{\\kappa^{2}+\\tau^{2}}",
+        "note": "由常数 κ、τ 反求螺线参数（r = (a cos t, a sin t, bt)）",
+        "noteEn": "Recovering helix parameters from constant κ and τ (r = (a cos t, a sin t, bt))"
+      }
+    ],
+    "expression": {
+      "text": "κ(s) > 0，τ(s) ⇒ 曲线唯一（相差刚体运动）",
+      "symbol": "(κ(s), τ(s)) ↦ 曲线形状",
+      "note": "曲率与挠率是空间曲线的完备不变量：形状完全由它们决定",
+      "noteEn": "Curvature and torsion are complete invariants: the shape is determined entirely by them"
+    },
+    "properties": [
+      "κ、τ 是空间曲线的完备不变量：曲线的全部局部几何由它们决定",
+      "刚体运动下唯一 ⇔ 两条曲线 κ、τ 相同当且仅当它们全等（形状相同）",
+      "平面曲线是 τ ≡ 0 的特例：这时只剩 κ(s)，平面曲线由 κ 唯一决定（至多相差平面内的刚体运动）",
+      "存在性把 Frenet–Serret 方程组当作线性 ODE 初值问题处理，标架的正交性由系数矩阵反对称自动保证",
+      "特例：κ ≡ 0 给出直线（不满足 κ > 0，需单独处理）；κ 与 τ 都为常数时曲线必为圆柱螺线"
+    ],
+    "propertiesEn": [
+      "κ and τ are complete invariants of a space curve: they determine all its local geometry",
+      "Uniqueness up to rigid motion: two curves have the same κ and τ if and only if they are congruent",
+      "Plane curves are the case τ ≡ 0: only κ(s) remains, and it determines the curve up to a rigid motion of the plane",
+      "Existence is proved by treating the Frenet–Serret system as a linear ODE problem; antisymmetry of the matrix keeps the frame orthonormal",
+      "Special cases: κ ≡ 0 gives a line (not covered by κ > 0); if both κ and τ are constant the curve is a circular helix"
+    ],
+    "plot": {
+      "type": "curve3d",
+      "x": "cos(t)",
+      "y": "sin(t)",
+      "z": "t/3",
+      "tRange": [
+        0,
+        12.566
+      ],
+      "color": "#4cc9f0",
+      "title": "螺线：κ、τ 恒定，形状被它们完全决定"
+    },
+    "examples": [
+      {
+        "problem": "设某曲线以弧长为参数，$\\kappa(s)=\\frac{1}{R}$（$R>0$）、$\\tau(s)\\equiv 0$，问曲线的形状是什么？",
+        "solution": "$\\tau\\equiv 0$ 说明是平面曲线；$\\kappa\\equiv\\frac{1}{R}$ 说明每点的曲率半径都是 $R$。由基本定理，形状唯一——可取 $r(s)=\\left(R\\cos\\frac{s}{R},\\,R\\sin\\frac{s}{R},\\,0\\right)$，直接计算得 $\\kappa=\\frac{1}{R}$、$\\tau=0$。故曲线与半径为 $R$ 的圆全等（至多相差一个刚体运动）。"
+      },
+      {
+        "problem": "已知某曲线的曲率与挠率恒为 $\\kappa\\equiv\\frac{9}{10}$、$\\tau\\equiv\\frac{3}{10}$，由基本定理确定曲线的形状。",
+        "solution": "常数 κ、τ 对应圆柱螺线 $r=(a\\cos t,\\,a\\sin t,\\,bt)$。由\n$$a=\\frac{\\kappa}{\\kappa^{2}+\\tau^{2}},\\qquad b=\\frac{\\tau}{\\kappa^{2}+\\tau^{2}}$$\n先算 $\\kappa^{2}+\\tau^{2}=\\frac{81}{100}+\\frac{9}{100}=\\frac{9}{10}$，得 $a=\\frac{9/10}{9/10}=1$、$b=\\frac{3/10}{9/10}=\\frac{1}{3}$。所以该曲线与 $r(t)=\\left(\\cos t,\\,\\sin t,\\,\\frac{t}{3}\\right)$ 全等。"
+      }
+    ],
+    "tags": [
+      "基本定理",
+      "不变量",
+      "刚体运动",
+      "唯一性"
+    ],
+    "links": [
+      "frenet-formulas",
+      "curvature-torsion",
+      "space-curve",
+      "ode-existence-uniqueness"
+    ]
+  }
+]

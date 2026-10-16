@@ -1,0 +1,592 @@
+[
+  {
+    "id": "inner-product-orthogonality",
+    "title": "向量的内积、正交性与施密特正交化",
+    "titleEn": "Inner Products, Orthogonality and Gram–Schmidt Orthogonalization",
+    "branch": "linear",
+    "level": 4,
+    "summary": "内积把长度和夹角搬到任意维数；正交是垂直的推广，施密特正交化能把任意线性无关组变成标准正交组。",
+    "summaryEn": "The inner product carries length and angle into any dimension; orthogonality generalizes perpendicularity, and Gram–Schmidt turns any independent set into an orthonormal one.",
+    "definition": "在 $\\mathbb{R}^n$ 中，两个列向量 $\\alpha=(a_1,\\dots,a_n)^T$ 与 $\\beta=(b_1,\\dots,b_n)^T$ 的**内积**定义为 $(\\alpha,\\beta)=\\alpha^T\\beta=a_1b_1+\\cdots+a_nb_n$。它把点积推广到任意维数：结果是一个数，而不是向量。由内积立刻得到**长度（范数）** $\\|\\alpha\\|=\\sqrt{(\\alpha,\\alpha)}$ 以及夹角 $\\cos\\theta=\\dfrac{(\\alpha,\\beta)}{\\|\\alpha\\|\\,\\|\\beta\\|}$。\n\n当 $(\\alpha,\\beta)=0$ 时，称 $\\alpha$ 与 $\\beta$ **正交**，记作 $\\alpha\\perp\\beta$。正交就是「垂直」在高维的推广——没有图可看，但「内积为零」这个定义完全够用。零向量与任何向量正交，不过正交向量组里约定向量都非零：**两两正交的非零向量组一定线性无关**，这让正交组比普通的线性无关组好用得多。\n\n给定线性无关组 $\\alpha_1,\\dots,\\alpha_m$，**施密特（Gram–Schmidt）正交化**的做法是逐个减掉它在前面所有方向上积累的投影：先取 $\\beta_1=\\alpha_1$，再取 $\\beta_2=\\alpha_2-\\dfrac{(\\alpha_2,\\beta_1)}{(\\beta_1,\\beta_1)}\\beta_1$，一般地 $\\beta_i=\\alpha_i-\\sum_{j=1}^{i-1}\\dfrac{(\\alpha_i,\\beta_j)}{(\\beta_j,\\beta_j)}\\beta_j$。注意分子是 $\\alpha_i$ 与 $\\beta_j$ 的内积，**分母是 $(\\beta_j,\\beta_j)$**，两者不能写反。最后把每个 $\\beta_i$ 单位化，$\\eta_i=\\beta_i/\\|\\beta_i\\|$，就得到**标准正交组**。\n\n如果 $\\eta_1,\\dots,\\eta_n$ 是 $\\mathbb{R}^n$ 的一组标准正交基，那么向量的坐标可以直接用内积读出：$x=(\\eta_1^Tx)\\eta_1+\\cdots+(\\eta_n^Tx)\\eta_n$。把标准正交基按列排成矩阵 $Q$，就得到正交矩阵（$Q^TQ=E$，因而 $Q^{-1}=Q^T$）。配备内积的 $n$ 维实向量空间称为**欧几里得空间（简称欧氏空间）**——这里就是 $\\mathbb{R}^n$；上面的长度、夹角、正交与标准正交基本来就是欧氏空间的语言。这套工具是后面实对称矩阵正交对角化、二次型化标准形的技术底座。",
+    "definitionEn": "In $\\mathbb{R}^n$, the **inner product** of two column vectors $\\alpha=(a_1,\\dots,a_n)^T$ and $\\beta=(b_1,\\dots,b_n)^T$ is $(\\alpha,\\beta)=\\alpha^T\\beta=a_1b_1+\\cdots+a_nb_n$. It generalizes the dot product to any dimension: the result is a scalar, not a vector. It immediately yields the **norm (length)** $\\|\\alpha\\|=\\sqrt{(\\alpha,\\alpha)}$ and the angle through $\\cos\\theta=\\dfrac{(\\alpha,\\beta)}{\\|\\alpha\\|\\,\\|\\beta\\|}$.\n\nWhen $(\\alpha,\\beta)=0$ we call $\\alpha$ and $\\beta$ **orthogonal**, written $\\alpha\\perp\\beta$. Orthogonality is perpendicularity in higher dimensions — there is nothing to draw, but the definition 'the inner product is zero' is exactly right. The zero vector is orthogonal to everything, yet vectors of an orthogonal set are required to be nonzero: **any set of pairwise orthogonal nonzero vectors is linearly independent**, which makes orthogonal sets far more convenient than merely independent ones.\n\nGiven a linearly independent set $\\alpha_1,\\dots,\\alpha_m$, **Gram–Schmidt orthogonalization** subtracts, step by step, the projection onto everything accumulated so far: start with $\\beta_1=\\alpha_1$, then $\\beta_2=\\alpha_2-\\dfrac{(\\alpha_2,\\beta_1)}{(\\beta_1,\\beta_1)}\\beta_1$, and in general $\\beta_i=\\alpha_i-\\sum_{j=1}^{i-1}\\dfrac{(\\alpha_i,\\beta_j)}{(\\beta_j,\\beta_j)}\\beta_j$. The numerator is the inner product of $\\alpha_i$ with $\\beta_j$, while **the denominator is $(\\beta_j,\\beta_j)$** — the two must never be swapped. Normalizing each $\\beta_i$ as $\\eta_i=\\beta_i/\\|\\beta_i\\|$ produces an **orthonormal set**.\n\nIf $\\eta_1,\\dots,\\eta_n$ is an orthonormal basis of $\\mathbb{R}^n$, the coordinates of a vector can be read off directly by inner products: $x=(\\eta_1^Tx)\\eta_1+\\cdots+(\\eta_n^Tx)\\eta_n$. Placing an orthonormal basis as the columns of a matrix $Q$ gives an orthogonal matrix ($Q^TQ=E$, hence $Q^{-1}=Q^T$). A real vector space of dimension $n$ equipped with an inner product is called a **Euclidean space**—here it is $\\mathbb{R}^n$; length, angle, orthogonality and orthonormal bases are precisely the language of Euclidean spaces. This machinery is the technical foundation for the orthogonal diagonalization of real symmetric matrices and for reducing quadratic forms to canonical form.",
+    "formulas": [
+      {
+        "latex": "(\\alpha,\\beta)=\\alpha^{T}\\beta=\\sum_{i=1}^{n}a_ib_i",
+        "note": "内积的定义：对应分量相乘再相加，结果是数。写成 αᵀβ 便于套用矩阵运算。",
+        "noteEn": "Definition of the inner product: multiply matching components and add; the result is a scalar. Writing it as αᵀβ lets matrix algebra do the work."
+      },
+      {
+        "latex": "\\|\\alpha\\|=\\sqrt{(\\alpha,\\alpha)}=\\sqrt{a_1^2+\\cdots+a_n^2}",
+        "note": "范数（长度）由内积诱导；模长为 1 的向量称为单位向量（标准向量）。",
+        "noteEn": "The norm (length) is induced by the inner product; a vector of norm 1 is called a unit vector."
+      },
+      {
+        "latex": "|(\\alpha,\\beta)|\\le\\|\\alpha\\|\\,\\|\\beta\\|",
+        "note": "柯西–施瓦茨不等式，等号成立当且仅当 α 与 β 线性相关；有了它，夹角才有定义。",
+        "noteEn": "The Cauchy–Schwarz inequality; equality holds exactly when α and β are linearly dependent. It is what makes the angle well defined."
+      },
+      {
+        "latex": "\\beta_1=\\alpha_1,\\qquad \\beta_2=\\alpha_2-\\frac{(\\alpha_2,\\beta_1)}{(\\beta_1,\\beta_1)}\\beta_1,\\qquad \\beta_i=\\alpha_i-\\sum_{j=1}^{i-1}\\frac{(\\alpha_i,\\beta_j)}{(\\beta_j,\\beta_j)}\\beta_j",
+        "note": "施密特正交化：分子是 αᵢ 与 βⱼ 的内积，分母是 (βⱼ,βⱼ)，写反是最常见的错误。",
+        "noteEn": "Gram–Schmidt: the numerator is the inner product of αᵢ with βⱼ, the denominator is (βⱼ,βⱼ); swapping them is the classic mistake."
+      },
+      {
+        "latex": "\\eta_i=\\frac{\\beta_i}{\\|\\beta_i\\|},\\qquad Q=(\\eta_1,\\dots,\\eta_n),\\qquad Q^{T}Q=E",
+        "note": "单位化得到标准正交组；按列排成 Q 就是正交矩阵，满足 QᵀQ=E。",
+        "noteEn": "Normalizing gives an orthonormal set; placing the vectors as columns gives an orthogonal matrix Q with QᵀQ=E."
+      }
+    ],
+    "properties": [
+      "内积是双线性的：对两个变量都满足加性与数乘，(α,β)=(β,α)，且 (kα,β)=k(α,β)。",
+      "(α,α)≥0，并且 (α,α)=0 当且仅当 α=0；因此只有非零向量才有正的长度、才能单位化。",
+      "正交就是内积为零；当 α⊥β 时勾股定理成立：‖α+β‖²=‖α‖²+‖β‖²。",
+      "两两正交的非零向量组一定线性无关；反过来，线性无关组未必正交，这正是需要施密特正交化的原因。",
+      "正交矩阵满足 AᵀA=E ⟺ A⁻¹=Aᵀ，其行列式为 ±1；正交变换保持内积、长度与夹角不变。"
+    ],
+    "propertiesEn": [
+      "The inner product is bilinear: additive and homogeneous in each variable, with (α,β)=(β,α) and (kα,β)=k(α,β).",
+      "(α,α)≥0, and (α,α)=0 exactly when α=0; hence only nonzero vectors have positive length and can be normalized.",
+      "Orthogonality means the inner product vanishes; when α⊥β the Pythagorean identity holds: ‖α+β‖²=‖α‖²+‖β‖².",
+      "A set of pairwise orthogonal nonzero vectors is always linearly independent; conversely, an independent set need not be orthogonal, which is exactly why Gram–Schmidt is needed.",
+      "An orthogonal matrix satisfies AᵀA=E ⟺ A⁻¹=Aᵀ and has determinant ±1; orthogonal transformations preserve inner products, lengths and angles."
+    ],
+    "examples": [
+      {
+        "problem": "把线性无关组 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(0,1,1)^T$，$\\alpha_3=(0,0,1)^T$ 用施密特正交化变成标准正交组。",
+        "solution": "第一步：$\\beta_1=\\alpha_1=(1,1,1)^T$，$(\\beta_1,\\beta_1)=3$。\n\n第二步：$(\\alpha_2,\\beta_1)=0\\cdot1+1\\cdot1+1\\cdot1=2$，故 $\\beta_2=\\alpha_2-\\dfrac{2}{3}\\beta_1=(-\\frac{2}{3},\\frac{1}{3},\\frac{1}{3})^T$。验算 $(\\beta_2,\\beta_1)=-\\frac{2}{3}+\\frac{1}{3}+\\frac{1}{3}=0$，正交成立。\n\n第三步：$(\\alpha_3,\\beta_1)=1$，$(\\alpha_3,\\beta_2)=\\frac{1}{3}$，$(\\beta_2,\\beta_2)=\\frac{4}{9}+\\frac{1}{9}+\\frac{1}{9}=\\frac{2}{3}$，故 $\\beta_3=\\alpha_3-\\dfrac{1}{3}\\beta_1-\\dfrac{1/3}{2/3}\\beta_2=(0,0,1)^T-\\frac{1}{3}(1,1,1)^T-\\frac{1}{2}(-\\frac{2}{3},\\frac{1}{3},\\frac{1}{3})^T=(0,-\\frac{1}{2},\\frac{1}{2})^T$。验算 $(\\beta_3,\\beta_1)=0-\\frac{1}{2}+\\frac{1}{2}=0$，$(\\beta_3,\\beta_2)=0-\\frac{1}{6}+\\frac{1}{6}=0$，都与前面的向量正交。\n\n单位化：$\\eta_1=\\frac{(1,1,1)^T}{\\sqrt{3}}$，$\\eta_2=\\frac{(-2,1,1)^T}{\\sqrt{6}}$，$\\eta_3=\\frac{(0,-1,1)^T}{\\sqrt{2}}$。三者两两正交且模长都为 1，确实是标准正交组。"
+      },
+      {
+        "problem": "求 $\\alpha=(1,1,0)^T$ 与 $\\beta=(1,0,1)^T$ 的夹角，以及 α 在 β 方向上的投影向量。",
+        "solution": "$(\\alpha,\\beta)=1\\cdot1+1\\cdot0+0\\cdot1=1$，$\\|\\alpha\\|=\\|\\beta\\|=\\sqrt{2}$，所以 $\\cos\\theta=\\dfrac{1}{\\sqrt{2}\\cdot\\sqrt{2}}=\\dfrac{1}{2}$，即夹角 $\\theta=\\dfrac{\\pi}{3}$。\n\n投影系数为 $\\dfrac{(\\alpha,\\beta)}{(\\beta,\\beta)}=\\dfrac{1}{2}$（**分母是被投影方向的 (β,β)**），故投影向量为 $\\dfrac{1}{2}\\beta=(\\frac{1}{2},0,\\frac{1}{2})^T$。\n\n验算：余量 $\\alpha-\\frac{1}{2}\\beta=(\\frac{1}{2},1,-\\frac{1}{2})^T$ 与 $\\beta$ 正交，$(\\frac{1}{2})\\cdot1+1\\cdot0+(-\\frac{1}{2})\\cdot1=0$，说明投影分解正确。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "内积",
+      "正交",
+      "施密特正交化",
+      "正交矩阵"
+    ],
+    "links": [
+      "linear-dependence",
+      "vector-space-basis",
+      "orthonormal-basis",
+      "inner-product-space",
+      "symmetric-matrix-diagonalization",
+      "quadratic-form-standard"
+    ]
+  },
+  {
+    "id": "eigenvalue-eigenvector",
+    "title": "特征值与特征向量",
+    "titleEn": "Eigenvalues and Eigenvectors",
+    "branch": "linear",
+    "level": 4,
+    "summary": "特征向量是被矩阵作用后方向不变的向量，特征值是它的伸缩倍数；特征方程 |λE−A|=0 把问题变成求多项式的根。",
+    "summaryEn": "An eigenvector keeps its direction under a matrix and its eigenvalue is the stretch factor; the characteristic equation |λE−A|=0 turns the search into finding roots of a polynomial.",
+    "definition": "设 $A$ 是 $n$ 阶方阵。若存在**非零**向量 $\\alpha$ 与数 $\\lambda$ 使 $A\\alpha=\\lambda\\alpha$，就称 $\\lambda$ 是 $A$ 的**特征值**，$\\alpha$ 是 $A$ 的属于 $\\lambda$ 的**特征向量**。$\\alpha\\neq 0$ 这个条件不能省：零向量对任何 $\\lambda$ 都满足等式，没有任何信息量。几何上看，特征向量是在 $A$ 作用下方向不变的向量，$\\lambda$ 是伸缩倍数（$\\lambda>0$ 保持指向并伸缩，$\\lambda<0$ 反向，$\\lambda=0$ 被压到原点）。\n\n把 $A\\alpha=\\lambda\\alpha$ 改写成 $(\\lambda E-A)\\alpha=0$：这是齐次线性方程组，它有非零解当且仅当系数矩阵不可逆，即 $|\\lambda E-A|=0$。左端是关于 $\\lambda$ 的 $n$ 次多项式，称为**特征多项式**，所以 $n$ 阶方阵在复数域内恰有 $n$ 个特征值（计代数重数）。注意 $|A-\\lambda E|$ 与 $|\\lambda E-A|$ 只相差符号 $(-1)^n$，根完全相同，本页统一使用 $|\\lambda E-A|$。\n\n对固定的 $\\lambda$，属于它的全部特征向量再加上零向量构成 $(\\lambda E-A)x=0$ 的解空间，称为 $\\lambda$ 的**特征子空间**；它的维数 $n-r(\\lambda E-A)$ 叫**几何重数**，而 $\\lambda$ 作为特征多项式根的重数叫**代数重数**，恒有几何重数 ≤ 代数重数。\n\n两条免费的校验：$n$ 个特征值之和等于 $\\operatorname{tr}(A)$，之积等于 $|A|$，算完特征值代回去查一查即可。还要小心：**属于不同特征值的特征向量之和一般不再是特征向量**，因为 $A(\\alpha+\\beta)=\\lambda_1\\alpha+\\lambda_2\\beta$ 一般提不出公共倍数；只有同一个特征值的特征向量的线性组合（非零时）仍是特征向量。特征值与特征向量是线性代数的「主轴」：对角化、二次型、微分方程组、主成分分析都从这里出发。",
+    "definitionEn": "Let $A$ be an $n\\times n$ matrix. If there is a **nonzero** vector $\\alpha$ and a number $\\lambda$ with $A\\alpha=\\lambda\\alpha$, then $\\lambda$ is an **eigenvalue** of $A$ and $\\alpha$ is an **eigenvector** belonging to $\\lambda$. The condition $\\alpha\\neq 0$ cannot be dropped: the zero vector satisfies the equation for every $\\lambda$ and carries no information. Geometrically, an eigenvector keeps its direction under $A$, while $\\lambda$ is the stretch factor ($\\lambda>0$ stretches, $\\lambda<0$ reverses, $\\lambda=0$ collapses it to the origin).\n\nRewriting $A\\alpha=\\lambda\\alpha$ as $(\\lambda E-A)\\alpha=0$ makes it a homogeneous system, which has a nonzero solution exactly when the coefficient matrix is singular, i.e. $|\\lambda E-A|=0$. The left side is a polynomial of degree $n$ in $\\lambda$, the **characteristic polynomial**, so an $n\\times n$ matrix has exactly $n$ eigenvalues over the complex numbers, counted with algebraic multiplicity. Note that $|A-\\lambda E|$ differs from $|\\lambda E-A|$ only by the factor $(-1)^n$, so the roots are identical; throughout this page we use $|\\lambda E-A|$.\n\nFor a fixed $\\lambda$, all eigenvectors belonging to it, together with the zero vector, form the solution space of $(\\lambda E-A)x=0$, called the **eigenspace** of $\\lambda$; its dimension $n-r(\\lambda E-A)$ is the **geometric multiplicity**, while the multiplicity of $\\lambda$ as a root of the characteristic polynomial is the **algebraic multiplicity**, and the geometric multiplicity never exceeds the algebraic one.\n\nTwo free sanity checks: the eigenvalues sum to $\\operatorname{tr}(A)$ and multiply to $|A|$, so plug your answers back in. Beware too that **the sum of eigenvectors belonging to different eigenvalues is usually not an eigenvector**, since $A(\\alpha+\\beta)=\\lambda_1\\alpha+\\lambda_2\\beta$ generally has no common factor; only a linear combination of eigenvectors of the *same* eigenvalue remains an eigenvector (when it is nonzero). Eigenpairs are the 'principal axes' of linear algebra: diagonalization, quadratic forms, linear ODE systems and principal component analysis all start here.",
+    "expression": {
+      "text": "Aα = λα  (α ≠ 0)",
+      "symbol": "Aα=λα",
+      "note": "先由特征方程 |λE−A| = 0 解出全部 λ，再解齐次方程组 (λE−A)x = 0 得特征向量。",
+      "noteEn": "First solve |λE−A| = 0 for all λ, then solve the homogeneous system (λE−A)x = 0 for the eigenvectors."
+    },
+    "formulas": [
+      {
+        "latex": "A\\alpha=\\lambda\\alpha,\\qquad \\alpha\\neq 0",
+        "note": "定义式。特征向量必须非零，特征值可以是实数也可以是复数。",
+        "noteEn": "The definition: an eigenvector must be nonzero, while an eigenvalue may be real or complex."
+      },
+      {
+        "latex": "|\\lambda E-A|=0",
+        "note": "特征方程：解它得到全部特征值（含重数）。等价写法 |A−λE|=0 只差一个符号，根完全一样。",
+        "noteEn": "The characteristic equation: solve it for all eigenvalues with multiplicities. The variant |A−λE|=0 differs only by a sign and has the same roots."
+      },
+      {
+        "latex": "\\lambda_1+\\lambda_2+\\cdots+\\lambda_n=\\operatorname{tr}(A),\\qquad \\lambda_1\\lambda_2\\cdots\\lambda_n=|A|",
+        "note": "迹与行列式两个不变量给出快速校验；特别地 |A|=0 当且仅当 0 是特征值。",
+        "noteEn": "Trace and determinant give quick checks; in particular |A|=0 holds exactly when 0 is an eigenvalue."
+      },
+      {
+        "latex": "(A-\\lambda E)x=0",
+        "note": "解这个齐次方程组得到属于 λ 的全部特征向量（再加零向量即特征子空间）；基础解系含 n−r(λE−A) 个向量，就是几何重数。",
+        "noteEn": "Solving this homogeneous system yields all eigenvectors for λ (plus the zero vector they form the eigenspace); a fundamental system has n−r(λE−A) vectors, the geometric multiplicity."
+      },
+      {
+        "latex": "A^{k}\\alpha=\\lambda^{k}\\alpha,\\qquad A^{-1}\\alpha=\\lambda^{-1}\\alpha",
+        "note": "同一个 α 也是幂矩阵与逆矩阵的特征向量：A^k 的特征值为 λ^k；当 A 可逆（即全部特征值均非零）时 A⁻¹ 的特征值为 1/λ。",
+        "noteEn": "The same α is an eigenvector of powers and inverses: λ^k for A^k, and 1/λ for A⁻¹ when A is invertible (equivalently, when all eigenvalues are nonzero)."
+      }
+    ],
+    "properties": [
+      "特征值与特征向量是矩阵固有的量：相似矩阵有相同的特征多项式与特征值，换基不会改变伸缩倍数。",
+      "n 阶矩阵在复数域内恰有 n 个特征值（计代数重数）；实矩阵的复特征值成共轭对出现。",
+      "属于不同特征值的特征向量线性无关；属于同一特征值的全部特征向量连同零向量构成特征子空间，其维数（几何重数）不大于该特征值的代数重数。",
+      "不同特征值的特征向量之和一般不是特征向量；只有同一特征值的特征向量的线性组合（非零时）仍是特征向量。",
+      "λ 是 A 的特征值 ⟺ |λE−A|=0 ⟺ 齐次方程组 (λE−A)x=0 有非零解 ⟺ r(λE−A)<n。"
+    ],
+    "propertiesEn": [
+      "Eigenvalues and eigenvectors are intrinsic to a matrix: similar matrices share the same characteristic polynomial and eigenvalues, since changing bases does not change stretch factors.",
+      "An n×n matrix has exactly n eigenvalues over the complex numbers, counted with algebraic multiplicity; a real matrix has its complex eigenvalues in conjugate pairs.",
+      "Eigenvectors for distinct eigenvalues are linearly independent; all eigenvectors for one eigenvalue λ, together with the zero vector, form the eigenspace of λ, whose dimension (the geometric multiplicity) never exceeds the algebraic multiplicity of λ.",
+      "The sum of eigenvectors for different eigenvalues is generally not an eigenvector; only linear combinations of eigenvectors for the same eigenvalue (when nonzero) remain eigenvectors.",
+      "λ is an eigenvalue of A ⟺ |λE−A|=0 ⟺ the system (λE−A)x=0 has a nonzero solution ⟺ r(λE−A)<n."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.6,
+        3.7
+      ],
+      "yRange": [
+        -1.5,
+        1.8
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2,
+            0
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            1
+          ],
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            -1
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "type": "label",
+          "at": [
+            0.5,
+            0.1
+          ],
+          "text": "α=(1,0)"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.05,
+            0.1
+          ],
+          "text": "Aα=(2,0)，同向 ×2"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.62,
+            1.08
+          ],
+          "text": "β=(1,1)"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.02,
+            1.05
+          ],
+          "text": "Aβ=(3,1)，方向改变"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.02,
+            -1.18
+          ],
+          "text": "γ=(1,-1) 与 Aγ=(1,-1)，λ=1 不动"
+        }
+      ],
+      "title": "A=[[2,1],[0,1]]：特征向量 (1,0)（λ=2）与 (1,−1)（λ=1）方向不变，一般向量 (1,1) 方向改变"
+    },
+    "examples": [
+      {
+        "problem": "求 $A=\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}$ 的全部特征值与特征向量，并说明 $A(1,0)^T$ 与 $A(1,1)^T$ 的几何效果。",
+        "solution": "特征方程：$|\\lambda E-A|=\\begin{vmatrix}\\lambda-2&-1\\\\0&\\lambda-1\\end{vmatrix}=(\\lambda-2)(\\lambda-1)=0$，得 $\\lambda_1=2$，$\\lambda_2=1$。\n\n校验：$\\operatorname{tr}(A)=3=2+1$ ✓；$|A|=2=2\\times1$ ✓。\n\n对 $\\lambda=2$：解 $(2E-A)x=0$，$2E-A=\\begin{pmatrix}0&-1\\\\0&1\\end{pmatrix}$，得 $x_2=0$，特征向量取 $\\alpha_1=(1,0)^T$。\n\n对 $\\lambda=1$：$E-A=\\begin{pmatrix}-1&-1\\\\0&0\\end{pmatrix}$，得 $x_1+x_2=0$，特征向量取 $\\alpha_2=(1,-1)^T$。\n\n几何效果：$A(1,0)^T=(2,0)^T$，方向不变、长度变成 2 倍（$\\lambda=2$）；$A(1,-1)^T=(1,-1)^T$，方向与长度都不变（$\\lambda=1$）；而 $A(1,1)^T=(3,1)^T$ 与 $(1,1)^T$ 不成比例、方向已改变，所以 $(1,1)^T$ 不是特征向量。"
+      },
+      {
+        "problem": "求 $A=\\begin{pmatrix}1&2&2\\\\2&1&2\\\\2&2&1\\end{pmatrix}$ 的全部特征值与特征向量，并验证特征值之和、之积与 $\\operatorname{tr}(A)$、$|A|$ 的关系。",
+        "solution": "注意到 $A=2J-E$（$J$ 为全 1 矩阵），也可直接算：$A(1,1,1)^T=(5,5,5)^T$，故 $\\lambda_1=5$，特征向量 $\\alpha_1=(1,1,1)^T$。\n\n特征多项式 $|\\lambda E-A|=(\\lambda-5)(\\lambda+1)^2=\\lambda^3-3\\lambda^2-9\\lambda-5$，所以特征值为 $5,-1,-1$（代数重数 2）。\n\n校验：$5+(-1)+(-1)=3=\\operatorname{tr}(A)$ ✓；$5\\times(-1)\\times(-1)=5=|A|$（按第一行展开：$1(1-4)-2(2-4)+2(4-2)=-3+4+4=5$）✓。\n\n对 $\\lambda=-1$：解 $(A+E)x=0$，$A+E=\\begin{pmatrix}2&2&2\\\\2&2&2\\\\2&2&2\\end{pmatrix}$，即 $x_1+x_2+x_3=0$，得两个线性无关的特征向量 $(1,-1,0)^T$ 与 $(1,0,-1)^T$。几何重数 2 = 代数重数 2，特征子空间是平面 $x_1+x_2+x_3=0$。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "特征值",
+      "特征向量",
+      "特征多项式",
+      "特征子空间"
+    ],
+    "links": [
+      "matrix-operations",
+      "determinant-definition",
+      "matrix-rank",
+      "homogeneous-solutions",
+      "matrix-similarity-diagonalization",
+      "symmetric-matrix-diagonalization"
+    ]
+  },
+  {
+    "id": "matrix-similarity-diagonalization",
+    "title": "矩阵的相似与可对角化",
+    "titleEn": "Similar Matrices and Diagonalizability",
+    "branch": "linear",
+    "level": 5,
+    "summary": "相似就是「同一个线性变换在不同基下的矩阵」；可对角化当且仅当存在 n 个线性无关的特征向量，也就是每个特征值的几何重数等于代数重数。",
+    "summaryEn": "Similarity means the same linear transformation written in different bases; a matrix is diagonalizable exactly when it has n linearly independent eigenvectors, i.e. when every geometric multiplicity equals the matching algebraic multiplicity.",
+    "definition": "设 $A,B$ 都是 $n$ 阶方阵。若存在可逆矩阵 $P$ 使 $P^{-1}AP=B$，就称 $A$ 与 $B$ **相似**，记作 $A\\sim B$。同一个线性变换在不同基下的矩阵恰好相似（$P$ 就是两组基之间的过渡矩阵），所以相似是「换个角度看同一个变换」。相似关系是等价关系：自反、对称、传递。\n\n相似矩阵共享一切与基无关的量：特征多项式、特征值（含重数）、行列式、迹、秩都相同。但**反过来不成立**：特征值相同不一定相似。例如 $E=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ 与 $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 的特征值都是 $1,1$，却不相似（否则 $A=PEP^{-1}=E$，矛盾）。\n\n若 $A$ 相似于对角矩阵，就称 $A$ **可对角化**。判据是：$A$ 有 $n$ 个线性无关的特征向量；等价地，$A$ 的每个特征值的几何重数都等于它的代数重数。此时 $A=P\\Lambda P^{-1}$，其中 $P$ 的**第 $i$ 列**是特征向量、$\\Lambda$ 的第 $i$ 个对角元是对应的特征值——**列的次序必须和特征值的次序一一对应**，写错位置是常见错误。\n\n还有一条漂亮的充分条件：$n$ 阶矩阵若有 $n$ 个互不相同的特征值，则必可对角化；但它不是必要条件——单位矩阵只有特征值 1，却已经是对角矩阵。可对角化的价值在于「降低幂次」：$A^k=P\\Lambda^kP^{-1}$，把矩阵乘法变成对角元的幂，这是线性递推、图论计数与马尔可夫链的常用手法。",
+    "definitionEn": "Let $A$ and $B$ be $n\\times n$ matrices. If $P^{-1}AP=B$ for some invertible $P$, then $A$ and $B$ are **similar**, written $A\\sim B$. Matrices of the same linear transformation with respect to two different bases are exactly similar ($P$ is the transition matrix between the bases), so similarity means 'the same transformation viewed from another angle'. Similarity is an equivalence relation: reflexive, symmetric and transitive.\n\nSimilar matrices share everything independent of the basis: the characteristic polynomial, the eigenvalues with multiplicities, the determinant, the trace and the rank. The converse fails: equal eigenvalues do not imply similarity. For instance $E=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ and $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ both have eigenvalues $1,1$, yet they are not similar, since otherwise $A=PEP^{-1}=E$, a contradiction.\n\nIf $A$ is similar to a diagonal matrix, it is called **diagonalizable**. The criterion: $A$ has $n$ linearly independent eigenvectors; equivalently, the geometric multiplicity of every eigenvalue equals its algebraic multiplicity. Then $A=P\\Lambda P^{-1}$, where the **i-th column** of $P$ is an eigenvector and the i-th diagonal entry of $\\Lambda$ is the matching eigenvalue — **the order of the columns must agree with the order of the eigenvalues**, and mismatching them is a classic mistake.\n\nThere is also a neat sufficient condition: an $n\\times n$ matrix with $n$ distinct eigenvalues is always diagonalizable; this is not necessary, since the identity matrix has only the eigenvalue 1 and is already diagonal. The payoff is reducing powers: $A^k=P\\Lambda^kP^{-1}$ turns matrix multiplication into powers of diagonal entries, a standard device in linear recurrences, graph counting and Markov chains.",
+    "formulas": [
+      {
+        "latex": "P^{-1}AP=B",
+        "note": "相似的定义：P 必须可逆；P 就是两组基之间的过渡矩阵，所以相似是同一个线性变换的两种写法。",
+        "noteEn": "Definition of similarity: P must be invertible, and it is the transition matrix between two bases, so similar matrices are two descriptions of one transformation."
+      },
+      {
+        "latex": "A=P\\Lambda P^{-1},\\qquad \\Lambda=\\operatorname{diag}(\\lambda_1,\\lambda_2,\\dots,\\lambda_n)",
+        "note": "可对角化的含义：P 的列依次是 Λ 对角元所对应的特征向量，次序必须对齐。",
+        "noteEn": "What diagonalizability means: the columns of P are the eigenvectors matching the diagonal entries of Λ in order."
+      },
+      {
+        "latex": "|\\lambda E-B|=|\\lambda E-A|",
+        "note": "相似矩阵的特征多项式相同（代入 B=P⁻¹AP 并用 |P⁻¹||P|=1），于是特征值、行列式、迹也全都相同。",
+        "noteEn": "Similar matrices have the same characteristic polynomial (substitute B=P⁻¹AP and use |P⁻¹||P|=1), hence the same eigenvalues, determinant and trace."
+      },
+      {
+        "latex": "A\\ \\text{可对角化}\\iff n-r(\\lambda_iE-A)=m_i\\quad(i=1,\\dots,s)",
+        "note": "重数判据：每个特征值的几何重数 n−r(λᵢE−A) 都必须等于它的代数重数 mᵢ。由于几何重数 ≤ 代数重数，只需检查特征向量是否「掉维」。",
+        "noteEn": "Multiplicity criterion: the geometric multiplicity n−r(λᵢE−A) must equal the algebraic multiplicity mᵢ for every eigenvalue. Since the geometric one never exceeds the algebraic one, one only checks for lost dimensions."
+      },
+      {
+        "latex": "A^{k}=P\\Lambda^{k}P^{-1}",
+        "note": "对角化最实用的功能：求高次幂时把矩阵乘法换成对角元的 k 次幂再夹上 P、P⁻¹。",
+        "noteEn": "The main use of diagonalization: for high powers, matrix multiplication is replaced by k-th powers of the diagonal entries, sandwiched by P and P⁻¹."
+      }
+    ],
+    "properties": [
+      "相似是等价关系（自反、对称、传递）；相似矩阵的特征多项式、特征值、行列式、迹、秩完全相同。",
+      "特征值相同（甚至特征多项式完全相同）不一定相似；相似是比「特征值相同」强得多的条件。",
+      "A 可对角化 ⟺ A 有 n 个线性无关的特征向量 ⟺ 每个特征值的几何重数等于代数重数。",
+      "n 个互异特征值是可对角化的充分条件，却不是必要条件（单位矩阵、数量矩阵都可对角化）。",
+      "若 A 可对角化，则 A^k 与 A 的多项式 f(A) 也可对角化，特征值为 λᵢ^k 与 f(λᵢ)；A 可逆时 A⁻¹ 也可对角化，特征值为 1/λᵢ。"
+    ],
+    "propertiesEn": [
+      "Similarity is an equivalence relation (reflexive, symmetric, transitive); similar matrices have identical characteristic polynomials, eigenvalues, determinants, traces and ranks.",
+      "Having the same eigenvalues — even the same characteristic polynomial — does not imply similarity; similarity is far stronger.",
+      "A is diagonalizable ⟺ A has n linearly independent eigenvectors ⟺ the geometric multiplicity of every eigenvalue equals its algebraic multiplicity.",
+      "Having n distinct eigenvalues is sufficient for diagonalizability but not necessary (the identity and scalar matrices are diagonalizable).",
+      "If A is diagonalizable, then so are A^k and every polynomial f(A), with eigenvalues λᵢ^k and f(λᵢ); and if A is invertible, so is A⁻¹, with eigenvalues 1/λᵢ."
+    ],
+    "examples": [
+      {
+        "problem": "把 $A=\\begin{pmatrix}3&-1\\\\-1&3\\end{pmatrix}$ 对角化，即求可逆矩阵 $P$ 使 $P^{-1}AP$ 为对角矩阵。",
+        "solution": "特征方程：$|\\lambda E-A|=(\\lambda-3)^2-1=\\lambda^2-6\\lambda+8=0$，得 $\\lambda_1=4$，$\\lambda_2=2$（校验：$4+2=6=\\operatorname{tr}(A)$ ✓，$4\\times2=8=|A|=9-1$ ✓）。\n\n$\\lambda=4$：$4E-A=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$，得 $x_1+x_2=0$，取 $p_1=(1,-1)^T$。\n\n$\\lambda=2$：$2E-A=\\begin{pmatrix}-1&1\\\\1&-1\\end{pmatrix}$，得 $x_1-x_2=0$，取 $p_2=(1,1)^T$。\n\n令 $P=(p_1,p_2)=\\begin{pmatrix}1&1\\\\-1&1\\end{pmatrix}$，$\\Lambda=\\operatorname{diag}(4,2)$，列与特征值次序一致。\n\n代回验算：$|P|=2$，$P^{-1}=\\frac{1}{2}\\begin{pmatrix}1&-1\\\\1&1\\end{pmatrix}$；$AP=\\begin{pmatrix}4&2\\\\-4&2\\end{pmatrix}$；$P^{-1}AP=\\frac{1}{2}\\begin{pmatrix}8&0\\\\0&4\\end{pmatrix}=\\operatorname{diag}(4,2)$ ✓。"
+      },
+      {
+        "problem": "说明 $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 不可对角化，并解释为什么「特征值相同」不等于「相似」。",
+        "solution": "特征方程 $|\\lambda E-A|=(\\lambda-1)^2=0$，唯一特征值 $\\lambda=1$（代数重数 2）。\n\n解 $(E-A)x=0$：$E-A=\\begin{pmatrix}0&-1\\\\0&0\\end{pmatrix}$，得 $x_2=0$，即特征子空间为 $\\{(x_1,0)^T\\}$，几何重数 1 < 代数重数 2，凑不齐 2 个线性无关的特征向量，所以 A 不可对角化。\n\n另一方面，若 A 与 $E=\\operatorname{diag}(1,1)$ 相似，则存在可逆 P 使 $A=PEP^{-1}=E$，与 $A\\neq E$ 矛盾。可见 E 与 A 的特征值都是 1,1（特征多项式相同），却不相似——相似要求「连 Jordan 结构都一样」；A 的 Jordan 形就是 A 自己。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "相似矩阵",
+      "可对角化",
+      "特征值",
+      "Jordan 标准形"
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "matrix-rank",
+      "inverse-matrix",
+      "basis-change",
+      "jordan-form",
+      "symmetric-matrix-diagonalization"
+    ]
+  },
+  {
+    "id": "symmetric-matrix-diagonalization",
+    "title": "实对称矩阵的对角化",
+    "titleEn": "Diagonalization of Real Symmetric Matrices",
+    "branch": "linear",
+    "level": 5,
+    "summary": "实对称矩阵一定能被正交矩阵对角化：特征值全为实数，不同特征值的特征向量自动正交，重特征值也恰好凑得齐特征向量。",
+    "summaryEn": "Every real symmetric matrix can be diagonalized by an orthogonal matrix: its eigenvalues are all real, eigenvectors for distinct eigenvalues are automatically orthogonal, and repeated eigenvalues still supply enough independent eigenvectors.",
+    "definition": "若 $A^T=A$，就称 $A$ 是**实对称矩阵**。它是最「乖」的一类矩阵：不仅一定可对角化，而且能用**正交矩阵**对角化——存在正交矩阵 $Q$（$Q^TQ=E$）使 $Q^{T}AQ=Q^{-1}AQ=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)$。由于 $Q^{-1}=Q^T$，这一个变换同时实现了「相似」与「合同」两种关系。\n\n三条硬性质。第一，特征值全为实数：设 $A\\alpha=\\lambda\\alpha$（在复数范围内），由对称性与内积的性质得 $\\lambda(\\alpha,\\alpha)=(A\\alpha,\\alpha)=(\\alpha,A\\alpha)=\\bar{\\lambda}(\\alpha,\\alpha)$，而 $(\\alpha,\\alpha)=|\\alpha|^2>0$，故 $\\lambda=\\bar{\\lambda}$。第二，属于不同特征值的特征向量**自动正交**：设 $A\\alpha=\\lambda\\alpha$，$A\\beta=\\mu\\beta$，$\\lambda\\neq\\mu$，由 $(A\\alpha,\\beta)=(\\alpha,A\\beta)$ 得 $\\lambda(\\alpha,\\beta)=\\mu(\\alpha,\\beta)$，于是 $(\\lambda-\\mu)(\\alpha,\\beta)=0$，只能 $(\\alpha,\\beta)=0$。\n\n第三，$k$ 重特征值恰有 $k$ 个线性无关的特征向量（几何重数 = 代数重数），所以永远凑得齐 $n$ 个。实际操作时：对单重特征值取一个特征向量；对重特征值解 $(\\lambda E-A)x=0$ 取基础解系，只需在这一个特征子空间内部做施密特正交化——不同特征值的向量之间已经正交，不必再管。\n\n正交对角化是「无坐标偏袒」的分解：$A=Q\\Lambda Q^{T}=\\sum_{i=1}^{n}\\lambda_iq_iq_i^{T}$（**谱分解**），其中 $q_i$ 是标准正交特征向量。几何上它说明实对称矩阵只是沿着一组互相垂直的主轴做伸缩；统计学中的协方差矩阵、力学中的惯量张量、以及二次型化标准形都依赖它。反过来，能被正交矩阵对角化的实矩阵必为对称矩阵（因为它等于 $Q\\Lambda Q^{T}$），所以这个性质是实对称矩阵的**特征刻画**。",
+    "definitionEn": "A real matrix with $A^T=A$ is called **symmetric**. Such matrices are the best behaved of all: not only are they always diagonalizable, they can be diagonalized by an **orthogonal** matrix — there is an orthogonal $Q$ ($Q^TQ=E$) with $Q^{T}AQ=Q^{-1}AQ=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)$. Since $Q^{-1}=Q^T$, this single transformation is simultaneously a similarity and a congruence.\n\nThree rigid facts. First, all eigenvalues are real: let $A\\alpha=\\lambda\\alpha$ with complex α; symmetry and the inner product give $\\lambda(\\alpha,\\alpha)=(A\\alpha,\\alpha)=(\\alpha,A\\alpha)=\\bar{\\lambda}(\\alpha,\\alpha)$, and since $(\\alpha,\\alpha)=|\\alpha|^2>0$ we get $\\lambda=\\bar{\\lambda}$. Second, eigenvectors for distinct eigenvalues are **automatically orthogonal**: from $A\\alpha=\\lambda\\alpha$, $A\\beta=\\mu\\beta$, $\\lambda\\neq\\mu$ and $(A\\alpha,\\beta)=(\\alpha,A\\beta)$ we get $\\lambda(\\alpha,\\beta)=\\mu(\\alpha,\\beta)$, hence $(\\lambda-\\mu)(\\alpha,\\beta)=0$ and therefore $(\\alpha,\\beta)=0$.\n\nThird, an eigenvalue of multiplicity $k$ has exactly $k$ linearly independent eigenvectors (geometric multiplicity = algebraic multiplicity), so $n$ eigenvectors are always available. In practice: take one eigenvector for each simple eigenvalue; for a repeated eigenvalue solve $(\\lambda E-A)x=0$, take a fundamental system, and apply Gram–Schmidt *inside that single eigenspace* — eigenvectors for different eigenvalues are already orthogonal and need no further work.\n\nOrthogonal diagonalization is the coordinate-free decomposition $A=Q\\Lambda Q^{T}=\\sum_{i=1}^{n}\\lambda_iq_iq_i^{T}$ (the **spectral decomposition**), where the $q_i$ are orthonormal eigenvectors. Geometrically, a real symmetric matrix merely stretches space along a set of mutually perpendicular principal axes; covariance matrices in statistics, inertia tensors in mechanics and the reduction of quadratic forms all rely on it. Conversely, a real matrix diagonalized by an orthogonal matrix must be symmetric (it equals $Q\\Lambda Q^{T}$), so this property characterizes symmetric matrices.",
+    "formulas": [
+      {
+        "latex": "A^{T}=A",
+        "note": "实对称矩阵的定义；由它可推出特征值全为实数、不同特征值的特征向量正交。",
+        "noteEn": "Definition of a real symmetric matrix; it implies that all eigenvalues are real and that eigenvectors for distinct eigenvalues are orthogonal."
+      },
+      {
+        "latex": "Q^{T}AQ=Q^{-1}AQ=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n),\\qquad Q^{T}Q=E",
+        "note": "正交对角化：Q 的列是一组标准正交特征向量，对角元按列序与特征值一一对应；这里的相似变换与合同变换是同一个 Q。",
+        "noteEn": "Orthogonal diagonalization: the columns of Q are orthonormal eigenvectors matching the diagonal entries in order; here similarity and congruence use the same Q."
+      },
+      {
+        "latex": "(A\\alpha,\\beta)=(\\alpha,A\\beta)",
+        "note": "对称性在内积下的表现（一般地 (Aα,β)=(α,Aᵀβ)）；用它两步就能证明不同特征值的特征向量正交。",
+        "noteEn": "How symmetry shows up in the inner product (in general (Aα,β)=(α,Aᵀβ)); it yields the orthogonality of eigenvectors for distinct eigenvalues in two lines."
+      },
+      {
+        "latex": "A=Q\\Lambda Q^{T}=\\sum_{i=1}^{n}\\lambda_iq_iq_i^{T}",
+        "note": "谱分解：A 沿 n 个互相垂直的主轴分别伸缩 λᵢ 再叠加，qᵢ 是标准正交特征向量。",
+        "noteEn": "Spectral decomposition: A stretches space by λᵢ along n mutually perpendicular principal axes, where the qᵢ are orthonormal eigenvectors."
+      },
+      {
+        "latex": "\\lambda_{\\min}\\le\\frac{x^{T}Ax}{x^{T}x}\\le\\lambda_{\\max}\\quad(x\\neq 0)",
+        "note": "瑞利商总介于最小与最大特征值之间，是二次型正定性、极值与特征值估计的桥梁。",
+        "noteEn": "The Rayleigh quotient always lies between the smallest and largest eigenvalues; it links quadratic forms, optimization and eigenvalue estimates."
+      }
+    ],
+    "properties": [
+      "实对称矩阵的特征值全部为实数，特征向量可以取实向量。",
+      "属于不同特征值的特征向量相互正交，不需要再做正交化。",
+      "k 重特征值恰有 k 个线性无关的特征向量（几何重数 = 代数重数），所以实对称矩阵必定可对角化。",
+      "存在正交矩阵 Q 使 QᵀAQ=Q⁻¹AQ=Λ；即实对称矩阵既可正交相似、也可正交合同于对角矩阵。",
+      "反过来，能正交对角化的实矩阵必为对称矩阵；对角化后对角元中正数的个数就是二次型的正惯性指数。"
+    ],
+    "propertiesEn": [
+      "All eigenvalues of a real symmetric matrix are real, and its eigenvectors can be chosen real.",
+      "Eigenvectors belonging to distinct eigenvalues are mutually orthogonal, so no further orthogonalization is needed.",
+      "An eigenvalue of multiplicity k has exactly k linearly independent eigenvectors (geometric multiplicity = algebraic multiplicity), so every real symmetric matrix is diagonalizable.",
+      "There exists an orthogonal Q with QᵀAQ=Q⁻¹AQ=Λ; that is, a real symmetric matrix is both orthogonally similar and orthogonally congruent to a diagonal matrix.",
+      "Conversely, any real matrix that can be orthogonally diagonalized must be symmetric; the number of positive diagonal entries is the positive inertia index of the associated quadratic form."
+    ],
+    "examples": [
+      {
+        "problem": "求正交矩阵 $Q$ 把 $A=\\begin{pmatrix}0&1&1\\\\1&0&1\\\\1&1&0\\end{pmatrix}$ 对角化。",
+        "solution": "由 $A(1,1,1)^T=(2,2,2)^T$ 得 $\\lambda_1=2$，对应 $q_1=(1,1,1)^T/\\sqrt{3}$。特征多项式为 $|\\lambda E-A|=\\lambda^3-3\\lambda-2=(\\lambda-2)(\\lambda+1)^2$，故另外两个特征值为 $\\lambda_2=\\lambda_3=-1$（与 $\\operatorname{tr}(A)=0$、$2-1-1=0$ 一致 ✓）。\n\n对 $\\lambda=-1$：解 $(A+E)x=0$，即 $x_1+x_2+x_3=0$。这与 $q_1$ 自动正交（各个分量之和为 0，故与 $(1,1,1)$ 的内积为 0）。取基础解系 $u_1=(1,-1,0)^T$，$u_2=(1,0,-1)^T$，在该子空间内正交化：$v_2=u_2-\\frac{(u_2,u_1)}{(u_1,u_1)}u_1=(1,0,-1)^T-\\frac{1}{2}(1,-1,0)^T=(\\frac{1}{2},\\frac{1}{2},-1)^T=\\frac{1}{2}(1,1,-2)^T$。\n\n单位化得 $q_2=(1,-1,0)^T/\\sqrt{2}$，$q_3=(1,1,-2)^T/\\sqrt{6}$。于是 $Q=(q_1,q_2,q_3)$ 为正交矩阵，且 $Q^TAQ=\\operatorname{diag}(2,-1,-1)$。\n\n验算：$q_2\\perp q_3$（内积 $1-1+0=0$ ✓），两者都与 $q_1$ 正交（分量和为 0 ✓）；$A(1,-1,0)^T=(-1,1,0)^T=-(1,-1,0)^T$ ✓，$A(1,1,-2)^T=(-1,-1,2)^T=-(1,1,-2)^T$ ✓。"
+      },
+      {
+        "problem": "证明：实对称矩阵 $A$ 的不同特征值对应的特征向量相互正交。",
+        "solution": "设 $A\\alpha=\\lambda\\alpha$，$A\\beta=\\mu\\beta$，其中 $\\alpha,\\beta\\neq 0$，$\\lambda\\neq\\mu$。\n\n由 $A^T=A$ 得 $(A\\alpha,\\beta)=(\\alpha,A^T\\beta)=(\\alpha,A\\beta)$。左端 $=(\\lambda\\alpha,\\beta)=\\lambda(\\alpha,\\beta)$，右端 $=(\\alpha,\\mu\\beta)=\\mu(\\alpha,\\beta)$。\n\n于是 $(\\lambda-\\mu)(\\alpha,\\beta)=0$。因为 $\\lambda\\neq\\mu$，只能 $(\\alpha,\\beta)=0$，即 $\\alpha\\perp\\beta$。\n\n这个证明恰恰用到了对称性 $A^T=A$：一般矩阵没有 $(A\\alpha,\\beta)=(\\alpha,A\\beta)$ 这一步，结论也就不成立。由此还可知道，不同特征值的特征子空间两两正交。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "实对称矩阵",
+      "正交对角化",
+      "谱分解",
+      "瑞利商"
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "matrix-similarity-diagonalization",
+      "inner-product-orthogonality",
+      "quadratic-form-standard",
+      "positive-definite-inertia",
+      "spectral-theorem"
+    ]
+  },
+  {
+    "id": "quadratic-form-standard",
+    "title": "二次型及其标准形",
+    "titleEn": "Quadratic Forms and Canonical Forms",
+    "branch": "linear",
+    "level": 5,
+    "summary": "二次型是只含二次项的 n 元齐次多项式 f=xᵀAx；化标准形（只含平方项）有正交变换法与配方法两条路，本质都是合同变换。",
+    "summaryEn": "A quadratic form is a homogeneous degree-two polynomial f=xᵀAx; reducing it to a canonical form with only squares can be done by an orthogonal transformation or by completing the square, and both are congruence transformations.",
+    "definition": "只含二次项的 $n$ 元多项式 $$f(x_1,\\dots,x_n)=\\sum_{i,j=1}^{n}a_{ij}x_ix_j$$ 称为**二次型**。把它写成矩阵形式 $f=x^{T}Ax$ 时，**约定 $A$ 取对称矩阵**：平方项 $x_i^2$ 的系数直接放在对角线 $a_{ii}$ 上，交叉项 $x_ix_j$（$i\\neq j$）的系数平分给 $a_{ij}$ 与 $a_{ji}$。这一步不能省：只有 $A$ 对称，二次型与矩阵才一一对应，特征值方法才可用。例如 $f=x_1^2+2x_1x_2+x_2^2$ 的矩阵是 $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$，而不是 $\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$。\n\n若二次型只含平方项 $d_1y_1^2+\\cdots+d_ny_n^2$，就称它为**标准形**。作可逆线性变换 $x=Cy$，则 $f=x^{T}Ax=y^{T}(C^{T}AC)y$，即 $A$ 变成 $C^{T}AC$。这种「两边夹一个可逆矩阵」的关系叫**合同**，记作 $A\\simeq C^{T}AC$。合同与相似（$P^{-1}AP$）是两种不同的关系：相似保持特征值，合同保持二次型的正负结构；而且只要 $A$ 对称，$C^{T}AC$ 自动对称（因为 $(C^{T}AC)^T=C^{T}A^{T}C=C^{T}AC$）。\n\n**正交变换法**：由实对称矩阵的谱定理，取正交矩阵 $Q$ 使 $Q^{T}AQ=\\Lambda=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)$，令 $x=Qy$ 便得 $f=\\lambda_1y_1^2+\\cdots+\\lambda_ny_n^2$。此时标准形的系数**恰好是 $A$ 的特征值**，而且变换是旋转或反射（保持长度），讨论几何形状最方便；代价是要解特征方程。\n\n**配方法（拉格朗日法）**：逐个变量把含它的项配成完全平方，再把剩下的变量集中处理。如果所有平方项系数都为 0（例如 $f=2x_1x_2$），先用可逆替换 $x_1=y_1+y_2$，$x_2=y_1-y_2$ 制造出平方项。关键要求是每一步替换都可逆——只要配方时除掉的系数非零、所用替换取三角形式或互逆形式，整体变换就可逆，二次型的秩不会改变。标准形一般不唯一，但由惯性定理，正、负平方项的个数（正、负惯性指数）是唯一确定的。",
+    "definitionEn": "A polynomial in $n$ variables containing only degree-two terms, $$f(x_1,\\dots,x_n)=\\sum_{i,j=1}^{n}a_{ij}x_ix_j$$ is called a **quadratic form**. When writing it as $f=x^{T}Ax$ we **require $A$ to be symmetric**: the coefficient of $x_i^2$ goes straight onto the diagonal entry $a_{ii}$, while the coefficient of a cross term $x_ix_j$ ($i\\neq j$) is split equally between $a_{ij}$ and $a_{ji}$. This step cannot be skipped — only with symmetric $A$ do forms and matrices correspond one-to-one and do eigenvalue methods apply. For example, $f=x_1^2+2x_1x_2+x_2^2$ has matrix $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$, never $\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$.\n\nIf a quadratic form contains only squares, $d_1y_1^2+\\cdots+d_ny_n^2$, it is called a **canonical form**. For an invertible linear change $x=Cy$ we get $f=x^{T}Ax=y^{T}(C^{T}AC)y$, i.e. $A$ is replaced by $C^{T}AC$. This sandwich relation is called **congruence**, written $A\\simeq C^{T}AC$. Congruence and similarity ($P^{-1}AP$) are different relations: similarity preserves eigenvalues, congruence preserves the sign structure of the form; moreover, $C^{T}AC$ is automatically symmetric whenever $A$ is, since $(C^{T}AC)^T=C^{T}A^{T}C=C^{T}AC$.\n\nThe **orthogonal transformation method**: by the spectral theorem for real symmetric matrices there is an orthogonal $Q$ with $Q^{T}AQ=\\Lambda=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)$; setting $x=Qy$ gives $f=\\lambda_1y_1^2+\\cdots+\\lambda_ny_n^2$. The coefficients of the canonical form are then **exactly the eigenvalues of $A$**, and the transformation is a rotation or reflection (length preserving), which is ideal for geometric questions; the price is solving a characteristic equation.\n\nThe **method of completing the square (Lagrange)**: eliminate one variable at a time by forming a perfect square, then treat the remaining variables. If every square coefficient is zero (say $f=2x_1x_2$), first create a square with the invertible substitution $x_1=y_1+y_2$, $x_2=y_1-y_2$. The essential point is that every substitution be invertible: as long as no division by zero occurs and the substitutions are triangular or mutually inverse, the composite change is invertible and the rank is preserved. Canonical forms are not unique, but by the law of inertia the numbers of positive and negative squares (the inertia indices) are uniquely determined.",
+    "formulas": [
+      {
+        "latex": "f(x_1,\\dots,x_n)=\\sum_{i,j=1}^{n}a_{ij}x_ix_j=x^{T}Ax,\\qquad A^{T}=A",
+        "note": "二次型的两种写法；写成矩阵形式时必须把 A 取成对称矩阵，否则矩阵与二次型不能一一对应。",
+        "noteEn": "The two ways to write a quadratic form; the matrix A must be taken symmetric, otherwise forms and matrices do not correspond one-to-one."
+      },
+      {
+        "latex": "a_{ij}=a_{ji}=\\frac{c_{ij}}{2}\\quad(i\\neq j),\\qquad a_{ii}=c_{ii}",
+        "note": "cᵢⱼ 表示 f 中 xᵢxⱼ 的系数：交叉项系数平分给 aᵢⱼ 与 aⱼᵢ（各一半），平方项系数直接放对角线——这一步最容易写错。",
+        "noteEn": "Here cᵢⱼ is the coefficient of xᵢxⱼ in f: a cross-term coefficient is split equally between aᵢⱼ and aⱼᵢ, while a square-term coefficient goes straight to the diagonal — the most error-prone step."
+      },
+      {
+        "latex": "x=Cy\\ \\Longrightarrow\\ f=x^{T}Ax=y^{T}(C^{T}AC)y",
+        "note": "可逆线性变换下二次型的矩阵按合同 CᵀAC 变化；C 可逆时二次型的秩不变。",
+        "noteEn": "Under an invertible linear change the matrix of the form transforms by the congruence CᵀAC; invertible C preserves the rank of the form."
+      },
+      {
+        "latex": "Q^{T}AQ=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)\\ \\Longrightarrow\\ f=\\lambda_1y_1^2+\\cdots+\\lambda_ny_n^2",
+        "note": "正交变换法：令 x=Qy，标准形的系数就是 A 的特征值，且变换保持长度（只是旋转或反射）。",
+        "noteEn": "The orthogonal method: with x=Qy the coefficients of the canonical form are the eigenvalues of A, and the transformation preserves length (it is a rotation or reflection)."
+      },
+      {
+        "latex": "f=x_1^2+2x_1x_2+2x_2^2=(x_1+x_2)^2+x_2^2",
+        "note": "配方法示意：先按 x₁ 配成完全平方，剩下的 x₂² 已是平方项；所用替换呈三角形式，因此可逆。",
+        "noteEn": "A sample completion of the square: complete the square in x₁ first, and the leftover x₂² is already a square; the substitution is triangular, hence invertible."
+      }
+    ],
+    "properties": [
+      "二次型与实对称矩阵一一对应：平方项系数进对角线，交叉项系数平分给对称的两个位置。",
+      "标准形只含平方项，一般不唯一；但正、负平方项的个数（正、负惯性指数）由惯性定理唯一确定。",
+      "对二次型作可逆线性变换就是作合同变换 CᵀAC：它保持秩、保持正负惯性指数，但不保持特征值。",
+      "正交变换法得到的标准形系数恰为特征值，变换保长度与内积；配方法无需解特征方程，但同样必须保证变换可逆。",
+      "合同（CᵀAC，C 可逆）与相似（P⁻¹AP）是两种不同的等价关系：相似保持特征值，合同保持正负惯性指数。"
+    ],
+    "propertiesEn": [
+      "Quadratic forms correspond one-to-one with real symmetric matrices: square coefficients go on the diagonal and cross coefficients are split equally between symmetric positions.",
+      "A canonical form contains only squares and is generally not unique, but the numbers of positive and negative squares (the inertia indices) are unique by the law of inertia.",
+      "An invertible linear change of variables for a form is a congruence CᵀAC: it preserves the rank and the inertia indices, but not the eigenvalues.",
+      "The orthogonal method produces coefficients equal to the eigenvalues and preserves lengths and inner products; completing the square avoids the characteristic equation but must also use invertible transformations.",
+      "Congruence (CᵀAC with invertible C) and similarity (P⁻¹AP) are different equivalence relations: similarity preserves eigenvalues, congruence preserves the inertia indices."
+    ],
+    "examples": [
+      {
+        "problem": "用正交变换把 $f(x_1,x_2,x_3)=2x_1^2+2x_2^2+2x_3^2+2x_1x_2+2x_1x_3+2x_2x_3$ 化为标准形。",
+        "solution": "先写对称矩阵：$A=\\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}=J+E$（$J$ 为全 1 矩阵）。$J$ 的特征值为 $3,0,0$，故 $A$ 的特征值为 $4,1,1$；校验：$4+1+1=6=\\operatorname{tr}(A)$ ✓，$4\\times1\\times1=4=|A|$ ✓。\n\n取标准正交特征向量：$\\lambda=4$ 对应 $q_1=(1,1,1)^T/\\sqrt{3}$；$\\lambda=1$ 对应 $x_1+x_2+x_3=0$ 的解空间，取 $q_2=(1,-1,0)^T/\\sqrt{2}$，$q_3=(1,1,-2)^T/\\sqrt{6}$（验算 $(q_2,q_3)=\\frac{1-1+0}{\\sqrt{12}}=0$ ✓，且两者都与 $q_1$ 正交 ✓）。\n\n令 $Q=(q_1,q_2,q_3)$，作正交变换 $x=Qy$，则 $f=4y_1^2+y_2^2+y_3^2$。\n\n验算：取 $x=(1,1,1)^T$，原式 $f=2\\times3+2\\times3=12$；此时 $y=Q^Tx=(\\sqrt{3},0,0)^T$，新式 $4\\times3=12$ ✓。（另一条路：把 $J+E$ 配方得 $f=(x_1+x_2+x_3)^2+x_1^2+x_2^2+x_3^2$，把 $x_1+x_2+x_3=\\sqrt{3}y_1$ 与 $\\|x\\|^2=\\|y\\|^2$ 代入同样得到上式。）"
+      },
+      {
+        "problem": "用配方法把 $f(x_1,x_2,x_3)=2x_1x_2+2x_1x_3-2x_2x_3$ 化为标准形，写出所用变换并验证可逆。",
+        "solution": "平方项系数全为 0，先作替换 $x_1=y_1+y_2$，$x_2=y_1-y_2$，$x_3=y_3$。代入：$x_1x_2=y_1^2-y_2^2$，$x_1x_3=(y_1+y_2)y_3$，$x_2x_3=(y_1-y_2)y_3$，于是\n$$f=2(y_1^2-y_2^2+y_1y_3+y_2y_3-y_1y_3+y_2y_3)=2y_1^2-2y_2^2+4y_2y_3.$$\n再对 $y_2$ 配方：$-2y_2^2+4y_2y_3=-2(y_2-y_3)^2+2y_3^2$，所以\n$$f=2y_1^2-2(y_2-y_3)^2+2y_3^2.$$\n令 $z_1=y_1$，$z_2=y_2-y_3$，$z_3=y_3$，得标准形 $f=2z_1^2-2z_2^2+2z_3^2$（正惯性指数 2，负惯性指数 1）。\n\n合并两条替换得 $x=Cz$，$C=\\begin{pmatrix}1&1&1\\\\1&-1&-1\\\\0&0&1\\end{pmatrix}$，$|C|=-2\\neq0$，故变换可逆。\n\n验算：取 $x=(1,1,0)^T$ 时原式 $f=2\\times1=2$；此时 $z_3=0$，$z_1+z_2=1$，$z_1-z_2=1$，即 $z=(1,0,0)^T$，新式 $2z_1^2=2$ ✓。顺带一提，用正交变换法解此例得特征值 $1,1,-2$，标准形为 $y_1^2+y_2^2-2y_3^2$：两式系数不同（标准形不唯一），但正负惯性指数都是 2 与 1，这正是惯性定理保证的。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "二次型",
+      "标准形",
+      "配方法",
+      "合同变换"
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "symmetric-matrix-diagonalization",
+      "positive-definite-inertia",
+      "matrix-similarity-diagonalization",
+      "matrix-rank"
+    ]
+  },
+  {
+    "id": "positive-definite-inertia",
+    "title": "正定二次型与惯性定理",
+    "titleEn": "Positive Definite Quadratic Forms and the Law of Inertia",
+    "branch": "linear",
+    "level": 5,
+    "summary": "正定就是二次型对一切非零向量都取正值；惯性定理说标准形虽然不唯一，正、负平方项的个数却由二次型本身唯一决定。",
+    "summaryEn": "Positive definiteness means the form takes positive values on every nonzero vector; the law of inertia says that although canonical forms vary, the counts of positive and negative squares are intrinsic.",
+    "definition": "设 $f(x)=x^{T}Ax$（$A$ 对称）。若对一切 $x\\neq 0$ 都有 $f(x)>0$，就称 $f$ 是**正定二次型**，$A$ 是**正定矩阵**，记作 $A>0$。这个定义要求「处处为正」，比「有最小值」强得多；它等价于 $A$ 的特征值全为正，也等价于 $A$ 与单位矩阵 $E$ 合同。\n\n只用特征值判定往往要解高次方程，于是有纯代数的**顺序主子式判别法**：$A$ 正定当且仅当 $A$ 的各阶顺序主子式全大于零：$$D_1=a_{11}>0,\\quad D_2=\\begin{vmatrix}a_{11}&a_{12}\\\\a_{21}&a_{22}\\end{vmatrix}>0,\\quad\\dots,\\quad D_n=|A|>0.$$ 注意两个细节：必须是**顺序**主子式（左上角的 $k$ 阶子式），而且不等式是严格大于 0 而不是「非负」；前者漏掉会误判一部分矩阵，后者会把半正定混进来。\n\n**惯性定理**：不论用什么可逆线性变换把二次型化成标准形，标准形里正平方项的个数 $p$ 与负平方项的个数 $q$ 都是唯一确定的，分别称为**正惯性指数**与**负惯性指数**；再作一次缩放 $y_i\\mapsto y_i/\\sqrt{|d_i|}$ 就得到**规范形** $z_1^2+\\cdots+z_p^2-z_{p+1}^2-\\cdots-z_r^2$，其中 $r=p+q=\\operatorname{rank}(A)$。也就是说，同一个二次型的所有标准形共享同一个「正负结构」：系数可以变，正负号的个数不能变。\n\n由此得到完整分类：正定（特征值全 >0，$p=n$）；负定（特征值全 <0，$q=n$，等价于奇数阶顺序主子式 <0 且偶数阶顺序主子式 >0）；半正定（特征值全 ≥0，当 $|A|=0$ 时只是半正定而非正定）；不定（正、负特征值都有）。可逆线性变换（合同变换）既保持正定性、也保持惯性指数，这正是配方法与正交变换法结论一致的原因。正定矩阵在优化（二阶充分条件要求 Hessian 正定）、最小二乘、数值分析（对称正定方程组）中都是核心对象。",
+    "definitionEn": "Let $f(x)=x^{T}Ax$ with $A$ symmetric. If $f(x)>0$ for every $x\\neq 0$, the form is **positive definite** and $A$ is a **positive definite matrix**, written $A>0$. This demands positivity everywhere, much stronger than merely having a minimum; it is equivalent to all eigenvalues of $A$ being positive, and to $A$ being congruent to the identity matrix $E$.\n\nTesting eigenvalues may require solving a high-degree equation, so there is a purely algebraic criterion using **leading principal minors**: $A$ is positive definite exactly when all its leading principal minors are positive: $$D_1=a_{11}>0,\\quad D_2=\\begin{vmatrix}a_{11}&a_{12}\\\\a_{21}&a_{22}\\end{vmatrix}>0,\\quad\\dots,\\quad D_n=|A|>0.$$ Two details matter: the minors must be the **leading** ones (top-left $k\\times k$), and the inequalities are strict, not '≥'; missing the first point misjudges some matrices, while using '≥' mixes in semidefinite forms.\n\nThe **law of inertia**: no matter which invertible linear change turns the form into a canonical form, the number $p$ of positive squares and the number $q$ of negative squares are uniquely determined; they are the **positive and negative inertia indices**. One further rescaling $y_i\\mapsto y_i/\\sqrt{|d_i|}$ produces the **normal form** $z_1^2+\\cdots+z_p^2-z_{p+1}^2-\\cdots-z_r^2$, where $r=p+q=\\operatorname{rank}(A)$. In other words all canonical forms of one quadratic form share the same sign structure: coefficients may change, but the numbers of plus and minus signs may not.\n\nThis yields the full classification: positive definite (all eigenvalues >0, $p=n$); negative definite (all <0, $q=n$, equivalently odd-order leading principal minors <0 and even-order ones >0); positive semidefinite (all eigenvalues ≥0; when $|A|=0$ it is semidefinite but not definite); and indefinite (eigenvalues of both signs). Invertible linear changes (congruences) preserve both definiteness and the inertia indices, which is exactly why completing the square and orthogonal transformations always give the same verdict. Positive definite matrices are central to optimization (the second-order condition requires a positive definite Hessian), to least squares, and to numerical analysis (symmetric positive definite linear systems).",
+    "formulas": [
+      {
+        "latex": "f(x)>0\\quad(\\forall x\\neq 0)\\iff \\lambda_i>0\\quad(i=1,\\dots,n)",
+        "note": "正定的特征值判据：全部特征值为正。反过来特征值有零或负值就不正定。",
+        "noteEn": "Eigenvalue criterion: positive definite ⟺ all eigenvalues are positive; a zero or negative eigenvalue rules it out."
+      },
+      {
+        "latex": "D_1>0,\\ D_2>0,\\ \\dots,\\ D_n>0",
+        "note": "顺序主子式判别法：Dₖ 是左上角 k 阶子式；全部严格大于 0 当且仅当正定。",
+        "noteEn": "Leading principal minor criterion: Dₖ is the top-left k×k minor; all strictly positive ⟺ positive definite."
+      },
+      {
+        "latex": "z_1^2+\\cdots+z_p^2-z_{p+1}^2-\\cdots-z_r^2,\\qquad r=p+q=\\operatorname{rank}(A)",
+        "note": "规范形：正惯性指数 p、负惯性指数 q 唯一，秩 r 等于两者之和。",
+        "noteEn": "The normal form: the positive index p and negative index q are unique, and the rank r equals their sum."
+      },
+      {
+        "latex": "A\\cong E\\iff A\\ \\text{正定}",
+        "note": "正定 ⟺ A 与单位矩阵 E 合同；相应地，半正定 ⟺ A 与 diag(1,…,1,0,…,0) 合同。",
+        "noteEn": "Positive definite ⟺ A is congruent to the identity E; likewise, positive semidefinite ⟺ A is congruent to diag(1,…,1,0,…,0)."
+      },
+      {
+        "latex": "A=C^{T}C,\\qquad C\\ \\text{可逆}",
+        "note": "正定的等价刻画：A 可分解为可逆矩阵的转置乘积（取 C 为 Cholesky 因子即可），此时 f=‖Cx‖²>0。",
+        "noteEn": "An equivalent description: A factors as CᵀC with invertible C (take the Cholesky factor); then f=‖Cx‖²>0."
+      }
+    ],
+    "properties": [
+      "正定 ⟺ 特征值全 >0 ⟺ 各阶顺序主子式全 >0 ⟺ 与单位矩阵合同 ⟺ 存在可逆矩阵 C 使 A=CᵀC。",
+      "可逆线性变换（合同变换）既保持二次型的正定性，也保持正、负惯性指数不变。",
+      "负定 ⟺ 特征值全 <0 ⟺ 奇数阶顺序主子式 <0 且偶数阶顺序主子式 >0；半正定 ⟺ 特征值全 ≥0，此时 |A|≥0，若 |A|=0 则只是半正定而非正定。",
+      "惯性定理：标准形不唯一，但正惯性指数 p 与负惯性指数 q 唯一，秩 r=p+q；两个二次型合同当且仅当它们的 p、q 相同（规范形相同）。",
+      "正定矩阵必可逆，且对角元 aᵢᵢ>0；不但各阶顺序主子式为正，它的所有主子式都大于 0。"
+    ],
+    "propertiesEn": [
+      "Positive definite ⟺ all eigenvalues >0 ⟺ all leading principal minors >0 ⟺ congruent to the identity ⟺ A=CᵀC for some invertible C.",
+      "Invertible linear changes (congruences) preserve positive definiteness and both inertia indices of a quadratic form.",
+      "Negative definite ⟺ all eigenvalues <0 ⟺ odd-order leading principal minors <0 and even-order ones >0; positive semidefinite ⟺ all eigenvalues ≥0, in which case |A|≥0, and |A|=0 means semidefinite but not definite.",
+      "Law of inertia: canonical forms are not unique, but the positive index p and the negative index q are; the rank is r=p+q, and two forms are congruent ⟺ they share the same p and q (equivalently the same normal form).",
+      "A positive definite matrix is invertible and has positive diagonal entries; moreover all of its principal minors (not just the leading ones) are positive."
+    ],
+    "examples": [
+      {
+        "problem": "判断 $f(x_1,x_2,x_3)=5x_1^2+x_2^2+5x_3^2+4x_1x_2-8x_1x_3-4x_2x_3$ 是否正定，并在正定时用配方法求出标准形。",
+        "solution": "先写对称矩阵（交叉项系数各分一半）：$A=\\begin{pmatrix}5&2&-4\\\\2&1&-2\\\\-4&-2&5\\end{pmatrix}$。\n\n顺序主子式：$D_1=5>0$；$D_2=5\\times1-2\\times2=1>0$；$D_3=|A|=5(1\\times5-(-2)(-2))-2(2\\times5-(-2)(-4))+(-4)(2\\times(-2)-1\\times(-4))=5(5-4)-2(10-8)+0=5-4=1>0$。\n\n三个顺序主子式全大于 0，故 $f$ 正定。\n\n配方法：$f=5\\left(x_1+\\frac{2}{5}x_2-\\frac{4}{5}x_3\\right)^2+\\frac{1}{5}(x_2-2x_3)^2+x_3^2$，三个系数 $5,\\frac{1}{5},1$ 全为正，与判别法结论一致（展开即可验证恒等）。所用替换 $y_1=x_1+\\frac{2}{5}x_2-\\frac{4}{5}x_3$，$y_2=x_2-2x_3$，$y_3=x_3$ 呈三角形式、对角元为 1，故变换可逆。"
+      },
+      {
+        "problem": "求 $t$ 的取值范围，使二次型 $f=t(x_1^2+x_2^2+x_3^2)+2x_1x_2+2x_1x_3-2x_2x_3$ 正定；并说明 $t$ 取其它值时它的正、负惯性指数。",
+        "solution": "矩阵 $A=tE+B$，其中 $B=\\begin{pmatrix}0&1&1\\\\1&0&-1\\\\1&-1&0\\end{pmatrix}$。$B$ 的特征值为 $1,1,-2$（$B(1,1,0)^T=(1,1,0)^T$，$B(1,0,1)^T=(1,0,1)^T$，再由 $\\operatorname{tr}(B)=0$ 得第三个特征值 $-2$），所以 $A$ 的特征值为 $t+1,t+1,t-2$。\n\n正定 ⟺ $t+1>0$ 且 $t-2>0$，即 $t>2$。\n\n用顺序主子式核对：$D_1=t>0$；$D_2=t^2-1>0$；$D_3=|A|=t^3-3t-2=(t+1)^2(t-2)>0$，同样得到 $t>2$ ✓。\n\n惯性指数：当 $1<t<2$ 时特征值为正、正、负，$p=2$、$q=1$；当 $-1<t<1$ 时为两个正、一个负（与 $1<t<2$ 情形相同），$p=2$、$q=1$；当 $t<-1$ 时三个特征值全为负，$p=0$、$q=3$（负定）；当 $t=2$ 时特征值为 $3,3,0$，$p=2$、$q=0$，此时 $f$ 半正定而非正定。"
+      }
+    ],
+    "tags": [
+      "线性代数",
+      "正定二次型",
+      "惯性定理",
+      "规范形",
+      "顺序主子式"
+    ],
+    "links": [
+      "quadratic-form-standard",
+      "symmetric-matrix-diagonalization",
+      "eigenvalue-eigenvector",
+      "matrix-rank",
+      "determinant-properties"
+    ]
+  }
+]

@@ -1,0 +1,473 @@
+[
+  {
+    "id": "poisson-process",
+    "title": "泊松过程",
+    "titleEn": "The Poisson Process",
+    "branch": "stochastic",
+    "level": 4,
+    "summary": "计数过程 N(t) 的独立平稳增量模型：N(t)~Poisson(λt)，到达间隔独立同分布指数，给定 N(t)=n 时到达时刻是 [0,t] 上均匀分布的次序统计量。",
+    "summaryEn": "The counting process with independent stationary increments: N(t)~Poisson(λt), i.i.d. exponential interarrival times, and uniform order statistics conditionally on N(t)=n.",
+    "definition": "设 λ>0。计数过程 $\\{N(t),\\,t\\ge0\\}$（N(t) 表示截至时刻 t 事件发生的总次数）称为强度为 λ 的**泊松过程**，如果：（1）$N(0)=0$；（2）**独立增量**：对任意 $0\\le t_1<t_2<\\cdots<t_n$，增量 $N(t_2)-N(t_1),\\dots,N(t_n)-N(t_{n-1})$ 相互独立；（3）**平稳增量**：$N(t+s)-N(t)$ 的分布与 t 无关，且 $N(t)\\sim\\mathrm{Poisson}(\\lambda t)$。\n\n由（3）立即得到 $N(t+s)-N(t)\\sim\\mathrm{Poisson}(\\lambda s)$。还有两条常被漏写的细节：泊松过程的轨道几乎必然是**右连续的阶梯函数**，并且每次跳跃的高度**恒等于 1**（一次只来一个事件，不会同时来两个）——这才是「跳跃式计数」的准确刻画。\n\n等价刻画有三条，任取其一都可作为定义：① 独立平稳增量 + 计数服从泊松分布（上面的定义）；② 到达间隔 $T_i=S_i-S_{i-1}$ **独立同分布且服从指数分布 Exp(λ)**；③ **稀疏性（稀有事件极限）**：把 $[0,t]$ 等分成 n 个长度为 $t/n$ 的小区间，每个小区间内事件发生的概率约为 $\\lambda t/n$、且至多发生一个事件，各小区间相互独立，则 $n\\to\\infty$ 时计数过程趋于泊松过程。\n\n记到达时刻 $0<S_1<S_2<\\cdots$（$S_0=0$），$S_n$ 是第 n 次事件的时刻。以下两条最关键：$S_n\\sim\\mathrm{Gamma}(n,\\lambda)$（形状 n、速率 λ 的伽马分布）；以及**条件分布**——给定 $N(t)=n$，这 n 个到达时刻的联合分布等于 $[0,t]$ 上 n 个**独立均匀分布** $U_1,\\dots,U_n\\sim\\mathrm{Unif}[0,t]$ 的次序统计量 $(U_{(1)},\\dots,U_{(n)})$。注意是**均匀分布**而不是指数分布，这是泊松过程最常见的记错之处。",
+    "definitionEn": "Let λ>0. A counting process $\\{N(t),\\,t\\ge0\\}$ (N(t) = number of events up to time t) is a **Poisson process** of intensity λ if: (1) $N(0)=0$; (2) **independent increments**: for $0\\le t_1<t_2<\\cdots<t_n$ the increments $N(t_2)-N(t_1),\\dots,N(t_n)-N(t_{n-1})$ are mutually independent; (3) **stationary increments**: the law of $N(t+s)-N(t)$ does not depend on t and $N(t)\\sim\\mathrm{Poisson}(\\lambda t)$.\n\nImmediately, $N(t+s)-N(t)\\sim\\mathrm{Poisson}(\\lambda s)$. Two often forgotten details: the sample paths are a.s. **right-continuous step functions**, and every jump has size **exactly 1**.\n\nThree equivalent characterizations, any of which may serve as the definition: ① independent stationary increments plus Poisson counts; ② the interarrival times $T_i=S_i-S_{i-1}$ are **i.i.d. Exp(λ)**; ③ **thinning / rare-event limit**: split $[0,t]$ into n intervals, in each of which at most one event occurs with probability $\\lambda t/n$, independently; as $n\\to\\infty$ the counting process converges to the Poisson process.\n\nWith arrival times $0<S_1<S_2<\\cdots$, we have $S_n\\sim\\mathrm{Gamma}(n,\\lambda)$ and, most importantly, conditionally on $N(t)=n$ the arrival times are distributed as the **order statistics of n i.i.d. uniform** variables on $[0,t]$ — uniform, not exponential.",
+    "formulas": [
+      {
+        "latex": "\\mathbb{P}(N(t)=n)=e^{-\\lambda t}\\frac{(\\lambda t)^{n}}{n!},\\qquad n=0,1,2,\\dots",
+        "note": "计数分布：N(t) 服从泊松分布，均值与方差都等于 λt（等散布）。",
+        "noteEn": "Poisson count law: mean and variance both equal λt."
+      },
+      {
+        "latex": "N(t+s)-N(t)\\sim\\mathrm{Poisson}(\\lambda s),\\qquad \\mathbb{E}[N(t)]=\\mathrm{Var}\\,N(t)=\\lambda t",
+        "note": "平稳增量：增量分布只依赖时间差 s，故均值、方差都按时间线性增长。",
+        "noteEn": "Stationary increments: the law depends only on s, so mean and variance grow linearly in time."
+      },
+      {
+        "latex": "T_i=S_i-S_{i-1}\\ \\text{i.i.d.}\\sim\\mathrm{Exp}(\\lambda),\\qquad S_n\\sim\\mathrm{Gamma}(n,\\lambda),\\quad f_{S_n}(t)=\\frac{\\lambda^{n}t^{n-1}e^{-\\lambda t}}{(n-1)!}",
+        "note": "到达间隔 i.i.d. 指数；第 n 个到达时刻 S_n 服从 Gamma(n,λ)（即 Erlang 分布）。",
+        "noteEn": "Interarrival times are i.i.d. exponential; the n-th arrival time is Gamma(n,λ)."
+      },
+      {
+        "latex": "\\{N(t)\\ge n\\}=\\{S_n\\le t\\}\\quad\\Longrightarrow\\quad \\mathbb{P}(N(t)\\ge n)=\\mathbb{P}(S_n\\le t)",
+        "note": "对偶关系：「到 t 时刻已发生至少 n 次」当且仅当「第 n 次发生在 t 之前」，两个过程互为逆。",
+        "noteEn": "Duality: at least n arrivals by time t iff the n-th arrival occurs before t."
+      },
+      {
+        "latex": "(S_1,\\dots,S_n)\\mid N(t)=n\\ \\overset{d}{=}\\ (U_{(1)},\\dots,U_{(n)}),\\qquad U_1,\\dots,U_n\\overset{\\text{i.i.d.}}{\\sim}\\mathrm{Unif}[0,t]",
+        "note": "条件分布：给定区间内有 n 个到达，它们如同在 [0,t] 上均匀撒点；故第 k 个到达的条件期望为 kt/(n+1)。",
+        "noteEn": "Conditionally on N(t)=n the arrivals are uniform order statistics; the k-th one has conditional mean kt/(n+1)."
+      }
+    ],
+    "expression": {
+      "text": "N(t) ~ Poisson(λt),   T_i i.i.d. ~ Exp(λ),   S_n ~ Gamma(n,λ)",
+      "symbol": "N(t), S_n",
+      "note": "「计数」和「到达时刻」两种描述完全等价，通过 {N(t) ≥ n} = {S_n ≤ t} 相互转换。",
+      "noteEn": "Counting and arrival-time descriptions are equivalent via the duality {N(t) ≥ n} = {S_n ≤ t}."
+    },
+    "properties": [
+      "均值与方差相等：E[N(t)] = Var N(t) = λt。这是泊松分布的特征性质，也说明相对涨落随 t 增大而按 1/√t 减小。",
+      "无记忆性与马尔可夫性：间隔服从指数分布 ⇒ 从任意时刻起，「还要等多久才有下一次事件」与过去无关。",
+      "叠加：两个相互独立的泊松过程之和仍是泊松过程，强度为 λ₁+λ₂；更一般地，独立泊松过程之和的强度相加。",
+      "稀疏化（thinning）：把每个到达以概率 p 独立地保留，被保留的到达构成强度 λp 的泊松过程，且与丢弃的到达过程相互独立。",
+      "给定 N(t)=n 时到达时刻是 [0,t] 上 i.i.d. 均匀分布的次序统计量：区间内越晚的到达越靠近 t，但位置本身是均匀的（不是指数分布）。"
+    ],
+    "propertiesEn": [
+      "Mean equals variance: E[N(t)] = Var N(t) = λt.",
+      "Memorylessness and the Markov property: exponential interarrival times make the future independent of the past.",
+      "Superposition: the sum of two independent Poisson processes is Poisson with intensity λ₁+λ₂.",
+      "Thinning: keeping each arrival independently with probability p gives a Poisson process of intensity λp, independent of the discarded one.",
+      "Conditionally on N(t)=n the arrival times are uniform order statistics on [0,t] — uniform, not exponential."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "floor(1.2*x)", "color": "#4cc9f0", "label": "N(t) 轨道" },
+        { "expr": "1.2*x", "color": "#ffd166", "label": "均值 λt" },
+        { "expr": "1.2*x+sqrt(1.2*x)", "color": "#06d6a0", "label": "+√(λt)" },
+        { "expr": "1.2*x-sqrt(1.2*x)", "color": "#ff6b9d", "label": "-√(λt)" }
+      ],
+      "xRange": [0, 10],
+      "yRange": [-0.5, 16],
+      "title": "泊松过程轨道（示意，λ=1.2）与均值 ± √(λt)"
+    },
+    "examples": [
+      {
+        "problem": "某呼叫中心的来电按强度 λ=3 次/分钟的泊松过程到达。(1) 求 10 分钟内来电数的均值与标准差；(2) 求两次来电间隔超过 1 分钟的概率；(3) 已知 10 分钟内来了 5 次来电，求第 2 次来电时刻的条件期望。",
+        "solution": "(1) $N(10)\\sim\\mathrm{Poisson}(30)$，故 $\\mathbb{E}N(10)=\\mathrm{Var}\\,N(10)=30$，标准差 $\\sqrt{30}\\approx5.48$。(2) 间隔 $T\\sim\\mathrm{Exp}(3)$，$\\mathbb{P}(T>1)=e^{-3}\\approx0.0498$。(3) 条件分布：给定 $N(10)=5$，5 个到达时刻是 $[0,10]$ 上均匀分布的次序统计量，故第 2 个的条件期望为 $\\frac{2\\cdot10}{5+1}=\\frac{10}{3}\\approx3.33$ 分钟。"
+      },
+      {
+        "problem": "设 λ=1。用对偶关系计算 $\\mathbb{P}(N(2)\\ge3)$，并与直接求和核对。",
+        "solution": "$\\{N(2)\\ge3\\}=\\{S_3\\le2\\}$，而 $S_3\\sim\\mathrm{Gamma}(3,1)$，密度 $f_{S_3}(t)=\\frac{t^{2}e^{-t}}{2}$。于是 $\\mathbb{P}(N(2)\\ge3)=\\int_0^{2}\\frac{t^{2}}{2}e^{-t}\\,dt=1-e^{-2}\\left(1+2+2\\right)=1-5e^{-2}\\approx0.3233$。直接求和：$N(2)\\sim\\mathrm{Poisson}(2)$，$\\mathbb{P}(N=0)+\\mathbb{P}(N=1)+\\mathbb{P}(N=2)=e^{-2}(1+2+2)=5e^{-2}$，故大于等于 3 的概率为 $1-5e^{-2}$，两者一致。"
+      }
+    ],
+    "tags": ["泊松过程", "计数过程", "独立增量", "指数分布", "稀有事件"],
+    "links": ["continuous-time-markov", "birth-death-process", "stochastic-process", "continuous-distributions", "expectation-variance"]
+  },
+  {
+    "id": "brownian-motion",
+    "title": "布朗运动",
+    "titleEn": "Brownian Motion",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "具有独立增量、增量服从 N(0,t−s)、轨道几乎必然连续的随机过程；等价于协方差为 min(s,t) 的高斯过程，是随机分析的基础。",
+    "summaryEn": "The process with independent increments, N(0,t−s) increments and a.s. continuous paths; equivalently the Gaussian process with covariance min(s,t).",
+    "definition": "标准布朗运动（维纳过程）$\\{W(t),\\,t\\ge0\\}$ 是满足下列四条的随机过程：（1）$W(0)=0$；（2）**独立增量**：对 $0\\le t_1<t_2<\\cdots<t_n$，增量 $W(t_2)-W(t_1),\\dots$ 相互独立；（3）对 $0\\le s<t$，$W(t)-W(s)\\sim N(0,\\,t-s)$，即增量分布只依赖时间差；（4）轨道 $t\\mapsto W(t)$ **几乎必然连续**。\n\n第（4）条是定义的一部分，既不自动成立也不平凡：它来自「随机游走按 1/√n 缩放后的连续极限」这一极限定理（Donsker 不变原理），不能由（1）—（3）推出。\n\n等价的高斯过程刻画：布朗运动是均值 0、协方差函数 $\\mathrm{Cov}(W(s),W(t))=\\min(s,t)$ 的高斯过程（配合 $W(0)=0$）。因此有限维分布全是零均值正态，且「不相关」与「独立」在高斯情形下等价。\n\n布朗运动还有三条重要的对称性：**自相似** $\\{W(ct)\\}\\overset{d}{=}\\{\\sqrt{c}\\,W(t)\\}$；**反射** $\\{-W(t)\\}$ 仍是布朗运动；**时间反演** $\\{tW(1/t)\\}$（t>0，取 W(0)=0 补值）也是布朗运动。它的轨道连续却处处不可微、二次变差恰等于 t，这正是伊藤积分与伊藤公式的出发点。",
+    "definitionEn": "A standard Brownian motion (Wiener process) $\\{W(t),t\\ge0\\}$ satisfies: (1) $W(0)=0$; (2) **independent increments**; (3) $W(t)-W(s)\\sim N(0,t-s)$ for $0\\le s<t$; (4) the paths are **almost surely continuous**. Condition (4) is part of the definition, is not automatic, and follows from the scaling limit of random walks (Donsker's invariance principle).\n\nEquivalently, W is the Gaussian process with mean 0 and covariance $\\mathrm{Cov}(W(s),W(t))=\\min(s,t)$ given $W(0)=0$; hence all finite-dimensional distributions are zero-mean Gaussian and uncorrelatedness implies independence. Brownian motion is self-similar ($\\{W(ct)\\}\\overset{d}{=}\\{\\sqrt{c}\\,W(t)\\}$), and both reflection $\\{-W(t)\\}$ and time inversion $\\{tW(1/t)\\}$ are again Brownian motions. Its paths are continuous but nowhere differentiable, with quadratic variation equal to t.",
+    "formulas": [
+      {
+        "latex": "W(t)-W(s)\\sim N(0,\\,t-s),\\qquad 0\\le s<t",
+        "note": "独立平稳的高斯增量：方差恰为时间差，故 Var W(t) = t（标准差按 √t 增长）。",
+        "noteEn": "Independent stationary Gaussian increments with variance equal to the time increment."
+      },
+      {
+        "latex": "\\mathrm{Cov}(W(s),W(t))=\\min(s,t),\\qquad \\mathrm{Var}\\,W(t)=t",
+        "note": "协方差结构：这是布朗运动的完整刻画，由此可写出一致性（Kolmogorov）与高斯过程理论下的全部结论。",
+        "noteEn": "Covariance structure: the complete characterization of the process."
+      },
+      {
+        "latex": "p_t(x)=\\frac{1}{\\sqrt{2\\pi t}}e^{-x^{2}/(2t)},\\qquad \\frac{\\partial p}{\\partial t}=\\frac{1}{2}\\frac{\\partial^{2}p}{\\partial x^{2}}",
+        "note": "转移密度（热核）满足热方程：布朗运动与热方程的解由 Feynman–Kac 型关系相连。",
+        "noteEn": "The transition density (heat kernel) solves the heat equation."
+      },
+      {
+        "latex": "\\{W(ct)\\}_{t\\ge0}\\overset{d}{=}\\{\\sqrt{c}\\,W(t)\\}_{t\\ge0},\\qquad \\{-W(t)\\}\\overset{d}{=}\\{tW(1/t)\\}_{t>0}\\overset{d}{=}\\{W(t)\\}",
+        "note": "自相似、反射、时间反演都是布朗运动：由这些对称性可推出首达时 T_a 与 a²T₁ 同分布。",
+        "noteEn": "Self-similarity, reflection and time inversion preserve the law of Brownian motion."
+      },
+      {
+        "latex": "W(t)=W(s)+\\bigl(W(t)-W(s)\\bigr),\\qquad W(t)-W(s)\\ \\perp\\!\\!\\perp\\ \\mathcal{F}_s",
+        "note": "增量的正交性（独立增量）是几乎所有布朗运动计算的起点，例如条件期望 E[W(t)|F_s]=W(s)。",
+        "noteEn": "The increment is independent of the past σ-field F_s — the starting point of almost every computation."
+      }
+    ],
+    "expression": {
+      "text": "W(t) ~ N(0,t),  Cov(W(s),W(t)) = min(s,t)",
+      "symbol": "W(t)",
+      "note": "标准布朗运动：高斯过程，协方差取两个时刻的较小者。",
+      "noteEn": "Standard Brownian motion: the Gaussian process with covariance min(s,t)."
+    },
+    "properties": [
+      "高斯性 + 独立增量：任意有限个时刻的联合分布都是零均值正态，协方差为 min(sᵢ,sⱼ)；因此不相关即独立。",
+      "轨道几乎必然连续，但几乎必然处处不可微、在任意区间上不是有界变差（详见「布朗运动的性质与路径结构」）。",
+      "二次变差 [W]_t = t：增量平方和收敛到时间长度，这是随机积分中 (dW)² = dt 的严格含义，也是伊藤等距的来源。",
+      "自相似性：W(t) 与 √t·W(1) 同分布，「把时间放缩 c 倍再缩小 √c 倍」与原来同分布；由此首达时 T_a 与 a²T₁ 同分布。",
+      "普适性与尺度极限：任意零均值、有限方差的 i.i.d. 增量之和（随机游走）经 1/√n 缩放后收敛到布朗运动（Donsker 不变原理）。"
+    ],
+    "propertiesEn": [
+      "Gaussian with independent increments: all finite-dimensional distributions are zero-mean Gaussian with covariance min(s,t).",
+      "Paths are a.s. continuous but a.s. nowhere differentiable and of infinite variation on every interval.",
+      "Quadratic variation [W]_t = t, which is the rigorous meaning of (dW)² = dt.",
+      "Self-similarity: W(t) equals √t·W(1) in law; hence T_a equals a²T₁ in law.",
+      "Universality: scaled random walks converge to Brownian motion (Donsker's invariance principle)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "0.869*sin(0.3927*x)+0.734*sin(1.1781*x)-0.573*sin(1.9635*x)+0.292*sin(2.7489*x)+0.027*sin(3.5343*x)-0.021*sin(4.3197*x)-0.062*sin(5.1051*x)-0.048*sin(5.8905*x)-0.156*sin(6.6759*x)-0.088*sin(7.4613*x)+0.11*sin(29.3*x)+0.07*sin(47.1*x)+0.05*sin(73*x)", "color": "#4cc9f0", "label": "轨道 1" },
+        { "expr": "0.445*sin(0.3927*x)-0.261*sin(1.1781*x)+0.245*sin(1.9635*x)-0.324*sin(2.7489*x)+0.442*sin(3.5343*x)-0.466*sin(4.3197*x)-0.107*sin(5.1051*x)-0.17*sin(5.8905*x)+0.137*sin(6.6759*x)+0.008*sin(7.4613*x)+0.13*sin(31.7*x)+0.08*sin(53.9*x)+0.06*sin(79.1*x)", "color": "#ff6b9d", "label": "轨道 2" },
+        { "expr": "sqrt(x)", "color": "#ffd166", "label": "+√t" },
+        { "expr": "-sqrt(x)", "color": "#b388ff", "label": "-√t" }
+      ],
+      "xRange": [0, 4],
+      "yRange": [-2.8, 2.8],
+      "title": "布朗运动样本轨道（正弦和近似示意）与 ±√t 尺度"
+    },
+    "examples": [
+      {
+        "problem": "设 {W(t)} 为标准布朗运动。求 Cov(W(2),W(5))、Var(W(5)−W(2))，并判断 W(5)−W(2) 与 W(2) 是否独立。",
+        "solution": "由协方差公式 $\\mathrm{Cov}(W(s),W(t))=\\min(s,t)$ 得 $\\mathrm{Cov}(W(2),W(5))=\\min(2,5)=2$。由独立增量，$\\mathrm{Var}(W(5)-W(2))=5-2=3$。又 $W(5)-W(2)$ 是增量，与过去 $\\mathcal{F}_2=\\sigma(W_u,u\\le2)$ 独立，故与 $W(2)$ 独立（高斯情形下也可由协方差为 0 得到，因为 $\\mathrm{Cov}(W(2),W(5)-W(2))=2-2=0$）。"
+      },
+      {
+        "problem": "求 P(W(4)>2) 与 P(W(1)>0)，并用自相似性说明 W(4) 与 2W(1) 同分布。",
+        "solution": "$W(4)\\sim N(0,4)$，故 $W(4)/2\\sim N(0,1)$，$\\mathbb{P}(W(4)>2)=\\mathbb{P}(Z>1)=1-\\Phi(1)\\approx0.1587$。由自相似性取 c=4：$\\{W(4t)\\}\\overset{d}{=}\\{2W(t)\\}$，即 $W(4)\\overset{d}{=}2W(1)$，同样得到方差 4。又 $W(1)$ 关于 0 对称，$\\mathbb{P}(W(1)>0)=\\frac12$。"
+      }
+    ],
+    "tags": ["布朗运动", "维纳过程", "独立增量", "高斯过程", "自相似"],
+    "links": ["stochastic-process", "gaussian-process", "white-noise-spectral", "normal-distribution", "central-limit-theorem"]
+  },
+  {
+    "id": "brownian-properties",
+    "title": "布朗运动的性质与路径结构",
+    "titleEn": "Properties and Path Structure of Brownian Motion",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "轨道连续却处处不可微：二次变差等于 t、一次变差无穷，振荡尺度由重对数律控制，零点集与水平集是测度零的不可数分形集。",
+    "summaryEn": "Continuous but nowhere differentiable paths: quadratic variation t, infinite first variation, oscillation governed by the law of the iterated logarithm, and fractal level sets.",
+    "definition": "布朗运动的定义只要求轨道连续，但由此推出的路径结构极其「病态」。与光滑曲线对比：光滑曲线有切线、弧长有限、二次变差为 0；布朗运动的轨道则\n\n• **连续但处处不可微**（Paley–Wiener–Zygmund）：对每个 t，差商的 $\\limsup$ 都是 $+\\infty$；\n• 在任意区间 $[a,b]$ 上**一次变差（全变差）为无穷**，因此不是有界变差函数，不能定义弧长参数化；\n• **二次变差恰好等于时间长度**：网格细化时 $\\sum(\\Delta W_i)^{2}\\to t$。\n\n这三条是随机分析的分水岭：因为一次变差无穷，$\\int H\\,dW$ 不能按通常的黎曼–斯蒂尔杰斯积分处理；而二次变差等于 t，提示应当用「二次」的方式定义积分——这就是伊藤积分与伊藤公式的起点（(dW)² = dt 的严格含义）。\n\n路径结构还有更精细的定量刻画：**重对数律**给出振荡的精确尺度 $|W(t)|\\approx\\sqrt{2t\\log\\log t}$；对任意 $\\alpha<1/2$，轨道几乎必然是局部 α-Hölder 连续的，而 α=1/2 不成立；零点集 $Z=\\{t:W(t)=0\\}$ 几乎必然是 Lebesgue 测度为 0 的不可数闭集、没有孤立点；局部极大值点的集合稠密但可数。\n\n一句话概括：布朗运动的轨道是「连续的随机分形」，其图像维数几乎必然是 3/2，它的复杂度正是随机积分理论要处理的对象。",
+    "definitionEn": "Brownian motion is only required to have continuous paths, yet the path structure is extremely irregular. In contrast with a smooth curve (tangent line, finite length, zero quadratic variation), a Brownian path is: a.s. continuous but **nowhere differentiable**; of **infinite first variation** on every interval, hence not of bounded variation; and of **quadratic variation exactly equal to time**, i.e. $\\sum(\\Delta W_i)^2\\to t$ as the mesh shrinks.\n\nThese facts mark the divide in stochastic analysis: infinite first variation rules out Riemann–Stieltjes integrals $\\int H\\,dW$, while quadratic variation t tells us to define the integral in the quadratic sense — the origin of the Itô integral and Itô formula. Finer descriptions include the law of the iterated logarithm ($|W(t)|\\approx\\sqrt{2t\\log\\log t}$), local α-Hölder continuity for every $\\alpha<1/2$ but not for $\\alpha=1/2$, and the zero set, which is a.s. uncountable, closed, perfect, of Lebesgue measure zero. The graph of a Brownian path a.s. has dimension 3/2.",
+    "formulas": [
+      {
+        "latex": "[W]_t=\\lim_{n\\to\\infty}\\sum_{i=1}^{2^{n}}\\left(W\\!\\left(\\frac{it}{2^{n}}\\right)-W\\!\\left(\\frac{(i-1)t}{2^{n}}\\right)\\right)^{2}=t\\quad(\\text{a.s.})",
+        "note": "二次变差等于 t：沿二进网格细化，增量平方和几乎必然收敛到 t（对任意网格趋于 0 的剖分则依概率收敛）。",
+        "noteEn": "Quadratic variation equals t: squared increments converge to t as the mesh shrinks."
+      },
+      {
+        "latex": "\\mathrm{TV}(W;[a,b])=\\sup_{\\Pi}\\sum_{i=1}^{n}\\left|W(t_i)-W(t_{i-1})\\right|=+\\infty\\quad(\\text{a.s.})",
+        "note": "一次变差（全变差）在任意非退化区间上几乎必然为无穷：轨道不是有界变差函数。",
+        "noteEn": "Total (first) variation is a.s. infinite on every non-degenerate interval."
+      },
+      {
+        "latex": "\\limsup_{h\\to0^{+}}\\frac{\\left|W(t+h)-W(t)\\right|}{h}=+\\infty\\quad\\text{for every }t",
+        "note": "处处不可微：在任何一点的差商上极限都是 +∞，故布朗运动的轨道没有切线。",
+        "noteEn": "Nowhere differentiability: the difference quotients have limsup +∞ at every point."
+      },
+      {
+        "latex": "\\limsup_{t\\to\\infty}\\frac{W(t)}{\\sqrt{2t\\log\\log t}}=1,\\qquad \\liminf_{t\\to\\infty}\\frac{W(t)}{\\sqrt{2t\\log\\log t}}=-1\\quad(\\text{a.s.})",
+        "note": "重对数律：振荡的精确尺度约为 √(2t log log t)，比 √t 大、比 t^α (α>1/2) 小。",
+        "noteEn": "Law of the iterated logarithm: the exact oscillation scale is about √(2t log log t)."
+      },
+      {
+        "latex": "W\\in C^{0,\\alpha}_{\\mathrm{loc}}\\ \\text{a.s.}\\ \\ \\text{for }\\alpha<\\tfrac12,\\qquad W\\notin C^{0,1/2}_{\\mathrm{loc}}\\ \\text{a.s.}",
+        "note": "Hölder 连续性：光滑程度恰好卡在指数 1/2 之下；等价地，轨道的分形维数为 3/2。",
+        "noteEn": "Hölder regularity up to, but not including, exponent 1/2; the graph has dimension 3/2."
+      }
+    ],
+    "properties": [
+      "连续与不可微并存：轨道几乎必然连续，却几乎必然处处不可微；更强的定量形式是局部重对数律 limsup_{h→0+} |W(t+h)−W(t)|/√(2h log log(1/h)) = 1，而 liminf_{h→0+} |W(t+h)−W(t)|/√h = 0。",
+      "二次变差 = t 与一次变差 = ∞ 是同一枚硬币的两面：由 ∑(ΔW)² ≤ max|ΔW|·∑|ΔW| 及轨道一致连续性，一次变差有限会迫使二次变差为 0，与 = t 矛盾。",
+      "振荡尺度：重对数律给出 limsup W(t)/√(2t log log t) = 1，因此布朗运动虽连续却「比任何 Lipschitz 曲线都粗」；局部版本在 t=0 附近同样成立。",
+      "水平的几何：零点集 Z = {t: W(t)=0} 几乎必然是无孤立点的不可数闭集、Lebesgue 测度为 0；对每个 a，水平集 {t: W(t)=a} 具有同样性质；局部极大值点的集合稠密但可数。",
+      "分形与分数维：轨道图像几乎必然为 Hausdorff 维数 3/2，零点集维数 1/2；这些维数由 Hölder 指数 1/2 与自相似性共同决定。"
+    ],
+    "propertiesEn": [
+      "Continuity and non-differentiability coexist: paths are a.s. continuous and a.s. nowhere differentiable.",
+      "Quadratic variation t and infinite first variation are two sides of one inequality: ∑(ΔW)² ≤ max|ΔW|·∑|ΔW| plus uniform continuity.",
+      "Oscillation scale: the law of the iterated logarithm, limsup W(t)/√(2t log log t) = 1.",
+      "Level sets: the zero set is a.s. closed, uncountable, perfect and of Lebesgue measure zero; local maxima are dense and countable.",
+      "Fractal dimension: the graph has Hausdorff dimension 3/2 a.s.; the zero set has dimension 1/2."
+    ],
+    "expression": {
+      "text": "[W]_t = t  (二次变差)，  TV(W;[a,b]) = +∞  (一次变差)",
+      "symbol": "[W]_t",
+      "note": "两条变差性质的对比：二次变差有限且等于 t，一次变差处处无穷。",
+      "noteEn": "Quadratic variation is finite and equals t, while first variation is infinite."
+    },
+    "examples": [
+      {
+        "problem": "把 [0,t] 等分成 n 份，ΔWᵢ = W(it/n) − W((i−1)t/n)。求 E[∑(ΔWᵢ)²] 与 Var[∑(ΔWᵢ)²]，说明 ∑(ΔWᵢ)² → t；并计算 E[∑|ΔWᵢ|] 说明一次变差发散。",
+        "solution": "各 ΔWᵢ ~ N(0, t/n) 且相互独立，故 E[(ΔWᵢ)²] = t/n，Var((ΔWᵢ)²) = 2(t/n)²（因为 Y ~ N(0,σ²) 时 E Y² = σ²、E Y⁴ = 3σ⁴）。于是 $\\mathbb{E}\\sum(\\Delta W_i)^{2}=n\\cdot\\frac{t}{n}=t$，$\\mathrm{Var}\\sum(\\Delta W_i)^{2}=2n\\left(\\frac{t}{n}\\right)^{2}=\\frac{2t^{2}}{n}\\to0$，故平方和 L² 收敛到 t（从而依概率收敛）。而 $\\mathbb{E}\\sum|\\Delta W_i|=n\\sqrt{\\frac{2t}{\\pi n}}=\\sqrt{\\frac{2nt}{\\pi}}\\to\\infty$，与一次变差无穷一致：增量虽小，但数量太多，绝对值之和发散。"
+      },
+      {
+        "problem": "用二次变差的结果证明布朗运动的轨道在任意区间上几乎必然不是有界变差函数。",
+        "solution": "设 $[a,b]$ 上的一次变差 $V<+\\infty$（有界变差）。取网格 $\\Pi$，记 $M=\\max_i|W(t_i)-W(t_{i-1})|$。则 $\\sum_i(\\Delta W_i)^{2}\\le M\\sum_i|\\Delta W_i|\\le M\\cdot V$。当网格最大步长趋于 0 时，轨道一致连续给出 $M\\to0$，故右端 $\\to0$；但沿二进网格细化有 $\\sum_i(\\Delta W_i)^{2}\\to b-a>0$（二次变差）。矛盾，所以 $V=+\\infty$ 几乎必然。这也解释了为什么 $\\int H\\,dW$ 不能按黎曼–斯蒂尔杰斯方式定义。"
+      }
+    ],
+    "tags": ["布朗运动", "路径性质", "二次变差", "处处不可微", "重对数律"],
+    "links": ["brownian-motion", "reflection-principle", "bounded-variation", "martingale", "gaussian-process"]
+  },
+  {
+    "id": "reflection-principle",
+    "title": "反射原理与首达时分布",
+    "titleEn": "The Reflection Principle and First Passage Times",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "把首次到达水平 a 之后的轨道沿 y=a 对称反射，得 P(max W ≥ a) = 2P(W_t ≥ a)；由此首达时 T_a 的密度为 Lévy 密度，E T_a = ∞。",
+    "summaryEn": "Reflecting the path after its first hit of level a gives P(max W ≥ a) = 2P(W_t ≥ a), hence the Lévy density of T_a and E T_a = ∞.",
+    "definition": "设 $\\{W(t)\\}$ 为标准布朗运动，$a>0$，**首达时** $T_a=\\inf\\{t\\ge0:\\ W(t)=a\\}$。由轨道连续性，$\\{T_a\\le t\\}=\\{\\max_{0\\le s\\le t}W(s)\\ge a\\}$，即「到时刻 t 已到达水平 a」与「[0,t] 上的最大值不低于 a」是同一事件。\n\n**反射原理**：在首次到达 a 之后把轨道沿水平线 $y=a$ 作对称反射。由布朗运动的强马尔可夫性与对称性，反射后的过程仍然是标准布朗运动，而且反射映射是「对合 + 保测度」的。于是：凡是「曾经到达 a」的轨道，若它时刻 t 的位置在 a 之上，反射后位置落在 a 之下；反之亦然。两类轨道一一对应，故「曾经到达 a」的概率是「$W(t)\\ge a$」的两倍：\n\n$$\\mathbb{P}\\!\\left(\\max_{0\\le s\\le t}W(s)\\ge a\\right)=2\\,\\mathbb{P}(W(t)\\ge a)=2\\left(1-\\Phi\\!\\left(\\frac{a}{\\sqrt{t}}\\right)\\right),\\quad a>0.$$\n\n两个要点都不能省：**「2 倍」因子**来自 a 之后那一次反射（反射把轨道折到另一侧，恰好把「曾经到达」与「终点在上方」逐条配对）；**条件 a>0** 是必须的（a<0 时要用对称处理：$\\mathbb{P}(\\min_{0\\le s\\le t}W(s)\\le a)=2\\mathbb{P}(W(t)\\le a)$）。\n\n令 $\\Phi$ 为标准正态分布函数。对 t 求导即得 T_a 的密度（Lévy 密度）：$f_{T_a}(t)=\\frac{a}{\\sqrt{2\\pi t^{3}}}e^{-a^{2}/(2t)}$。它有重尾 $\\mathbb{P}(T_a>t)\\sim a\\sqrt{2/(\\pi t)}$，所以 $\\mathbb{P}(T_a<\\infty)=1$（布朗运动最终一定到达 a）但 $\\mathbb{E}[T_a]=+\\infty$——「一定会到，但平均要等无穷久」。（配图中的曲线用初等近似 $2(1-\\Phi(z))\\approx\\frac{4\\varphi(z)}{z+\\sqrt{z^{2}+8/\\pi}}$ 计算，$z=a/\\sqrt{t}$，$\\varphi$ 为标准正态密度，误差不超过 6%，但保持了正确的高斯型尾部。）",
+    "definitionEn": "Let $\\{W(t)\\}$ be standard Brownian motion and $a>0$, with first passage time $T_a=\\inf\\{t\\ge0:W(t)=a\\}$. By path continuity $\\{T_a\\le t\\}=\\{\\max_{0\\le s\\le t}W(s)\\ge a\\}$.\n\n**Reflection principle**: reflect the path in the horizontal line $y=a$ after its first hit of a. By the strong Markov property and symmetry the reflected process is again standard Brownian motion and the reflection is an involutive, measure-preserving map. Paths that ever reach a and end below a are in one-to-one correspondence with those ending above a, giving the factor 2: $\\mathbb{P}(\\max_{0\\le s\\le t}W(s)\\ge a)=2\\,\\mathbb{P}(W(t)\\ge a)=2(1-\\Phi(a/\\sqrt t))$ for $a>0$. Both the factor 2 and the restriction $a>0$ are essential (for $a<0$ use $\\min$ and $-W$). Differentiating in t yields the Lévy density $f_{T_a}(t)=\\frac{a}{\\sqrt{2\\pi t^3}}e^{-a^2/(2t)}$. Its tail $\\mathbb{P}(T_a>t)\\sim a\\sqrt{2/(\\pi t)}$ shows $\\mathbb{P}(T_a<\\infty)=1$ while $\\mathbb{E}[T_a]=+\\infty$: the level is reached almost surely, but only after infinite expected time. (The figure uses the elementary approximation $2(1-\\Phi(z))\\approx 4\\varphi(z)/(z+\\sqrt{z^2+8/\\pi})$ with $z=a/\\sqrt t$, accurate to within 6% and with the correct Gaussian tail.)",
+    "formulas": [
+      {
+        "latex": "\\mathbb{P}\\!\\left(\\max_{0\\le s\\le t}W(s)\\ge a\\right)=2\\,\\mathbb{P}(W(t)\\ge a)=2\\left(1-\\Phi\\!\\left(\\frac{a}{\\sqrt{t}}\\right)\\right),\\qquad a>0",
+        "note": "反射原理：2 倍因子来自首次到达 a 之后的对称反射，a>0 是条件。",
+        "noteEn": "Reflection principle; the factor 2 comes from reflecting after the first hit of a, and a>0 is required."
+      },
+      {
+        "latex": "\\mathbb{P}(T_a\\le t)=\\mathbb{P}\\!\\left(\\max_{0\\le s\\le t}W(s)\\ge a\\right)=2\\,\\mathbb{P}(W(t)\\ge a),\\qquad T_a=\\inf\\{t:\\ W(t)=a\\}",
+        "note": "首达时与最大值的等价事件：这是「首达时分布」的全部来源。",
+        "noteEn": "The event {T_a ≤ t} equals {max ≥ a}, which identifies the law of the first passage time."
+      },
+      {
+        "latex": "f_{T_a}(t)=\\frac{a}{\\sqrt{2\\pi t^{3}}}\\,e^{-a^{2}/(2t)},\\qquad t>0",
+        "note": "Lévy 密度（稳定分布指数 α=1/2）：对 P(T_a ≤ t) 关于 t 求导得到。",
+        "noteEn": "The Lévy density, obtained by differentiating P(T_a ≤ t) in t."
+      },
+      {
+        "latex": "\\mathbb{P}(T_a<\\infty)=1,\\qquad \\mathbb{P}(T_a>t)\\sim \\frac{a\\sqrt{2}}{\\sqrt{\\pi t}}\\ (t\\to\\infty),\\qquad \\mathbb{E}[T_a]=\\int_0^{\\infty}t\\,f_{T_a}(t)\\,dt=+\\infty",
+        "note": "几乎必然有限但期望无穷：尾部按 t^(−1/2) 衰减太慢，t 乘上去仍不可积。",
+        "noteEn": "Almost surely finite but of infinite mean: the t^(−1/2) tail is not integrable against t."
+      },
+      {
+        "latex": "T_a\\overset{d}{=}a^{2}T_1,\\qquad \\mathbb{P}(\\min_{0\\le s\\le t}W(s)\\le b)=2\\,\\mathbb{P}(W(t)\\le b)\\ (b<0)",
+        "note": "尺度关系（自相似性）与负水平的下反射：到达更远水平所需时间按 a² 增长。",
+        "noteEn": "Scaling relation from self-similarity, plus the lower reflection for negative levels."
+      }
+    ],
+    "properties": [
+      "反射原理的证明关键是「强马尔可夫性 + 对称性」：首次到达 a 之后轨道「重新出发」，沿 y=a 反射得到的仍是布朗运动，于是两类事件一一对应，出现 2 倍。",
+      "尺度关系：T_a 的分布是稳定分布（指数 α=1/2，Lévy 分布），满足 T_a =d a²T₁，这与布朗运动的自相似性一致：到达更远的水平，耗时按 a² 增长。",
+      "P(T_a ≤ t) = 2(1−Φ(a/√t)) 关于 t 连续可微（t>0），故 T_a 没有原子、密度就是 f_{T_a}(t)=a/(√(2πt³))e^{−a²/(2t)}。",
+      "「有限但期望无穷」：P(T_a<∞)=1 由重对数律 limsup W(t)/√(2t log log t)=1 也可看出，而 E T_a=∞ 说明不能对无界停时随便用可选停时定理（见「停时与可选停时定理」）。",
+      "推广形式：带漂移的布朗运动 $X_t=\\mu t+W_t$ 用指数鞅/Girsanov 处理，首达时服从逆高斯分布；反射论证是连续局部鞅理论中的原型技巧。"
+    ],
+    "propertiesEn": [
+      "The proof uses the strong Markov property plus symmetry: after the first hit the path restarts, and reflecting in y=a pairs the two events.",
+      "T_a has a stable law of index α=1/2 (Lévy distribution) and satisfies T_a =d a²T₁.",
+      "P(T_a ≤ t) = 2(1−Φ(a/√t)) is continuously differentiable for t>0, so T_a has the density a/(√(2πt³))e^{−a²/(2t)}.",
+      "Almost surely finite but of infinite expectation — the reason optional stopping cannot be applied to the unbounded time T_a.",
+      "Extension: for Brownian motion with drift the first passage law is inverse Gaussian, obtained via the exponential martingale and Girsanov."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "4*exp(-0.5/x)/sqrt(2*PI)/(1/sqrt(x)+sqrt(1/x+8/PI))", "color": "#4cc9f0", "label": "a=1" },
+        { "expr": "4*exp(-0.125/x)/sqrt(2*PI)/(0.5/sqrt(x)+sqrt(0.25/x+8/PI))", "color": "#06d6a0", "label": "a=0.5" },
+        { "expr": "4*exp(-2/x)/sqrt(2*PI)/(2/sqrt(x)+sqrt(4/x+8/PI))", "color": "#ff6b9d", "label": "a=2" },
+        { "expr": "1", "color": "#ffd166", "label": "极限 1" }
+      ],
+      "xRange": [0.05, 6],
+      "yRange": [0, 1.08],
+      "title": "首达时分布 P(T_a≤t)=2(1−Φ(a/√t)) 的近似图像"
+    },
+    "examples": [
+      {
+        "problem": "设 W 为标准布朗运动。求 $\\mathbb{P}\\!\\left(\\max_{0\\le s\\le9}W(s)\\ge3\\right)$，并写成 T_3 的语言。",
+        "solution": "由反射原理，$\\mathbb{P}(\\max_{0\\le s\\le9}W_s\\ge3)=2\\mathbb{P}(W_9\\ge3)=2\\left(1-\\Phi\\!\\left(\\frac{3}{\\sqrt9}\\right)\\right)=2(1-\\Phi(1))\\approx2\\times0.1587=0.3173$。同一事件可写成 $\\{T_3\\le9\\}$，故 $\\mathbb{P}(T_3\\le9)\\approx0.317$——布朗运动在 9 个单位时间内至少一次触及水平 3 的概率约为三分之一。"
+      },
+      {
+        "problem": "求 $\\mathbb{P}(T_2\\le1)$（分别用正态分布与 Lévy 密度两种方式），并说明 $\\mathbb{E}[T_2]=+\\infty$。",
+        "solution": "方式一：$\\mathbb{P}(T_2\\le1)=2\\mathbb{P}(W_1\\ge2)=2(1-\\Phi(2))\\approx2\\times0.02275=0.0455$。方式二：代入密度 $f_{T_2}(t)=\\frac{2}{\\sqrt{2\\pi t^{3}}}e^{-2/t}$，数值积分 $\\int_0^{1}f_{T_2}(t)\\,dt\\approx0.0455$，两者一致。期望：由 $T_2\\overset{d}{=}4T_1$ 与尾部估计 $\\mathbb{P}(T_2>t)\\sim2\\sqrt{2/(\\pi t)}$，得 $\\mathbb{E}[T_2]=\\int_0^{\\infty}\\mathbb{P}(T_2>t)\\,dt=+\\infty$：虽然几乎必然在有限时间到达水平 2，平均耗时却是无穷。"
+      }
+    ],
+    "tags": ["反射原理", "首达时", "布朗运动", "Lévy 分布", "稳定分布"],
+    "links": ["brownian-motion", "brownian-properties", "martingale", "stopping-time", "normal-distribution"]
+  },
+  {
+    "id": "martingale",
+    "title": "鞅",
+    "titleEn": "Martingales",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "条件期望等于当前值的适应可积过程：即「公平赌博」。布朗运动、W_t²−t 与指数过程 e^{θW_t−θ²t/2} 都是鞅。",
+    "summaryEn": "Adapted integrable processes whose conditional expectation equals the present value — the mathematical model of a fair game.",
+    "definition": "设 $\\mathcal{F}_0\\subseteq\\mathcal{F}_1\\subseteq\\cdots$ 是概率空间 $(\\Omega,\\mathcal{F},\\mathbb{P})$ 上递增的 σ-代数族（信息流）。随机过程 $\\{X_n\\}$ 若满足：（i）**适应**：$X_n$ 关于 $\\mathcal{F}_n$ 可测；（ii）**可积**：$\\mathbb{E}|X_n|<+\\infty$ 对每个 n；（iii）$\\mathbb{E}[X_{n+1}\\mid\\mathcal{F}_n]=X_n$ 几乎必然，则称 $\\{X_n\\}$ 关于 $\\{\\mathcal{F}_n\\}$ 是**鞅**（martingale）。\n\n把等号换成不等号得到两种单边情形：$\\mathbb{E}[X_{n+1}\\mid\\mathcal{F}_n]\\ge X_n$ 称为**下鞅**（submartingale），$\\le$ 称为**上鞅**（supermartingale）。直觉：鞅是「公平赌博」——已知现在，未来的条件期望就等于现在；下鞅「期望不减」（有利），上鞅「期望不增」（不利）。中文名称容易记反，建议记为：**下鞅是「往上走」的那一侧（≥）**。\n\n连续时间的定义相同，但必须补上可测与正则条件：$\\{X_t\\}$ 关于右连续（或右连左极，càdlàg）的信息流 $\\{\\mathcal{F}_t\\}$ **适应**、每个 t 有 $\\mathbb{E}|X_t|<+\\infty$，且对 $s<t$ 有 $\\mathbb{E}[X_t\\mid\\mathcal{F}_s]=X_s$，且轨道几乎必然右连续。布朗运动 $W_t$ 关于其自然信息流 $\\mathcal{F}_t=\\sigma(W_s,s\\le t)$ 就是最基本的连续时间鞅。",
+    "definitionEn": "Let $\\mathcal{F}_0\\subseteq\\mathcal{F}_1\\subseteq\\cdots$ be an increasing family of σ-algebras (a filtration) on $(\\Omega,\\mathcal{F},\\mathbb{P})$. A process $\\{X_n\\}$ is a **martingale** if (i) it is **adapted** ($X_n$ is $\\mathcal{F}_n$-measurable), (ii) it is **integrable** ($\\mathbb{E}|X_n|<\\infty$), and (iii) $\\mathbb{E}[X_{n+1}\\mid\\mathcal{F}_n]=X_n$ a.s. Replacing equality by $\\ge$ gives a **submartingale** (expected value does not decrease) and by $\\le$ a **supermartingale**. Intuitively a martingale models a fair game: given the present, the conditional expectation of the future equals the present. In continuous time one additionally imposes adaptedness, integrability and a right-continuous (or càdlàg) version of the paths, plus $\\mathbb{E}[X_t\\mid\\mathcal{F}_s]=X_s$ for $s<t$; Brownian motion with its natural filtration is the basic example.",
+    "formulas": [
+      {
+        "latex": "\\mathbb{E}[X_{n+1}\\mid\\mathcal{F}_n]=X_n\\ (\\text{鞅}),\\qquad \\ge X_n\\ (\\text{下鞅}),\\qquad \\le X_n\\ (\\text{上鞅})",
+        "note": "三个定义只差不等号方向：下鞅用 ≥，上鞅用 ≤，鞅取等号——方向写反是最常见的错误。",
+        "noteEn": "The three definitions differ only in the inequality: submartingale ≥, supermartingale ≤, martingale =."
+      },
+      {
+        "latex": "\\mathbb{E}[W_t\\mid\\mathcal{F}_s]=W_s,\\qquad 0\\le s<t",
+        "note": "布朗运动是鞅：增量 W_t−W_s 与 F_s 独立且均值为 0。",
+        "noteEn": "Brownian motion is a martingale since its increments are independent of the past and have mean 0."
+      },
+      {
+        "latex": "\\mathbb{E}[W_t^{2}-t\\mid\\mathcal{F}_s]=W_s^{2}-s",
+        "note": "W_t²−t 是鞅（少了 −t 就不是）：E[W_t²|F_s] = W_s² + (t−s)。",
+        "noteEn": "W_t²−t is a martingale; without the −t, W_t² is merely a submartingale."
+      },
+      {
+        "latex": "\\mathbb{E}\\!\\left[e^{\\theta W_t-\\theta^{2}t/2}\\mid\\mathcal{F}_s\\right]=e^{\\theta W_s-\\theta^{2}s/2},\\qquad \\theta\\in\\mathbb{R}",
+        "note": "指数鞅：指数里的 −θ²t/2 与 θ 成对出现，符号写错就不是鞅了（可用来求带漂移布朗运动的首达时分布）。",
+        "noteEn": "Exponential martingale: the term −θ²t/2 must accompany θ; the sign matters."
+      },
+      {
+        "latex": "\\mathbb{E}[X_n]=\\mathbb{E}[X_0]\\ (\\text{鞅}),\\qquad X_n=X_0+M_n+A_n\\ (\\text{Doob 分解})",
+        "note": "鞅的期望恒定；Doob 分解把过程唯一地拆成鞅 + 可预测增量的下鞅部分（下一批节点展开）。",
+        "noteEn": "A martingale has constant expectation; the Doob decomposition splits a submartingale into a martingale plus a predictable part."
+      }
+    ],
+    "expression": {
+      "text": "E[X_{n+1} | F_n] = X_n   （鞅）",
+      "symbol": "E[X_{n+1}|F_n]=X_n",
+      "note": "「已知现在，未来的条件期望 = 现在」：公平赌博的数学定义。",
+      "noteEn": "Conditional expectation of the future given the present equals the present."
+    },
+    "properties": [
+      "期望恒定：若 X 是鞅则 E[X_n] = E[X_0] 对一切 n 成立；但反之不真（期望恒定不蕴含条件期望相等）。",
+      "Jensen 不等式：φ 凸且 X 是鞅时 φ(X_n) 是下鞅。例如 |X_n|、X_n² 都是下鞅，这就解释了为什么需要 W_t²−t 才是鞅。",
+      "停时截断不失鞅性：对任何停时 τ，{X_{n∧τ}} 关于 {F_n} 仍是鞅，且 E[X_{n∧τ}] = E[X_0]。这是可选停时定理的出发点（见「停时与可选停时定理」）。",
+      "独立可积增量的部分和是鞅：简单随机游走 S_n=ξ₁+⋯+ξ_n（E ξ_i = 0）是鞅；二项似然比 (q/p)^{S_n}、以及 W_t、W_t²−t、e^{θW_t−θ²t/2} 都是典型例子。",
+      "连续时间鞅必须补上适应 + 可积 + 右连续（或 càdlàg）版本，才能与停时、积分相容；否则条件期望的嵌套性质会失效。"
+    ],
+    "propertiesEn": [
+      "Constant expectation: E[X_n] = E[X_0] for all n, though the converse fails.",
+      "Jensen: if φ is convex and X is a martingale, φ(X) is a submartingale — e.g. |X_n| and X_n².",
+      "Stopping preserves the martingale property: X_{n∧τ} is a martingale for every stopping time τ.",
+      "Sums of independent integrable zero-mean increments are martingales; so are W_t, W_t²−t and e^{θW_t−θ²t/2}.",
+      "In continuous time one must add adaptedness, integrability and a right-continuous version of the paths."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1.1*sin(1.5*x)+0.6*sin(4.3*x+1.1)+0.35*sin(9.7*x+2.2)-0.8177+0.5*x", "color": "#06d6a0", "label": "下鞅 (≥)" },
+        { "expr": "1.1*sin(1.5*x)+0.6*sin(4.3*x+1.1)+0.35*sin(9.7*x+2.2)-0.8177", "color": "#4cc9f0", "label": "鞅 (=)" },
+        { "expr": "1.1*sin(1.5*x)+0.6*sin(4.3*x+1.1)+0.35*sin(9.7*x+2.2)-0.8177-0.5*x", "color": "#ff6b9d", "label": "上鞅 (≤)" }
+      ],
+      "xRange": [0, 6],
+      "yRange": [-4.5, 3.9],
+      "title": "鞅 / 下鞅 / 上鞅的样本轨道对比（示意）"
+    },
+    "examples": [
+      {
+        "problem": "设 W 为标准布朗运动，$\\mathcal{F}_s=\\sigma(W_u,u\\le s)$。验证 $M_t=W_t^{2}-t$ 是鞅，并说明 $W_t^{2}$ 本身不是鞅。",
+        "solution": "写 $W_t=W_s+(W_t-W_s)$，其中增量 $\\Delta=W_t-W_s$ 与 $\\mathcal{F}_s$ 独立，$\\mathbb{E}\\Delta=0$，$\\mathbb{E}\\Delta^{2}=t-s$。于是 $\\mathbb{E}[W_t^{2}\\mid\\mathcal{F}_s]=\\mathbb{E}[(W_s+\\Delta)^{2}\\mid\\mathcal{F}_s]=W_s^{2}+2W_s\\mathbb{E}[\\Delta]+\\mathbb{E}[\\Delta^{2}]=W_s^{2}+(t-s)$。因此 $\\mathbb{E}[M_t\\mid\\mathcal{F}_s]=W_s^{2}+(t-s)-t=W_s^{2}-s=M_s$，$M$ 是鞅。而 $\\mathbb{E}[W_t^{2}\\mid\\mathcal{F}_s]=W_s^{2}+(t-s)>W_s^{2}$，故 $W_t^{2}$ 只是下鞅（这也与 Jensen：平方是凸函数一致）。"
+      },
+      {
+        "problem": "设 ξ₁,ξ₂,… 独立同分布，P(ξ=1)=P(ξ=−1)=1/2，$S_n=\\xi_1+\\cdots+\\xi_n$。验证 {S_n} 是鞅，并验证指数型过程 $Z_n=e^{\\theta S_n}/(\\cosh\\theta)^{n}$ 也是鞅。",
+        "solution": "$\\mathbb{E}[S_{n+1}\\mid\\mathcal{F}_n]=S_n+\\mathbb{E}\\xi_{n+1}=S_n$，故 S 是鞅。又 $\\mathbb{E}[e^{\\theta\\xi}]=\\frac{e^{\\theta}+e^{-\\theta}}{2}=\\cosh\\theta$，且 ξ_{n+1} 与 F_n 独立，故 $\\mathbb{E}[e^{\\theta S_{n+1}}\\mid\\mathcal{F}_n]=e^{\\theta S_n}\\cosh\\theta$，两边同除 $(\\cosh\\theta)^{n+1}$ 得 $\\mathbb{E}[Z_{n+1}\\mid\\mathcal{F}_n]=Z_n$，所以 Z 是鞅（指数/似然比鞅，可用于大偏差与检验的期望计算）。"
+      }
+    ],
+    "tags": ["鞅", "条件期望", "公平赌博", "指数鞅", "Doob 分解"],
+    "links": ["stochastic-process", "stopping-time", "brownian-motion", "doob-decomposition", "martingale-convergence"]
+  },
+  {
+    "id": "stopping-time",
+    "title": "停时与可选停时定理",
+    "titleEn": "Stopping Times and the Optional Stopping Theorem",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "停时是不偷看未来即可判断「是否已经发生」的随机时刻（{τ ≤ n} ∈ F_n）；在附加条件下可选停时定理给出 E X_τ = E X_0，条件不可省。",
+    "summaryEn": "A stopping time can be detected without looking into the future ({τ ≤ n} ∈ F_n); under extra hypotheses the optional stopping theorem gives E X_τ = E X_0, and the hypotheses are essential.",
+    "definition": "设 $\\{\\mathcal{F}_n\\}$ 是信息流。随机时刻 $\\tau:\\Omega\\to\\{0,1,2,\\dots\\}\\cup\\{+\\infty\\}$ 称为**停时**，若对每个 n 都有 $\\{\\tau\\le n\\}\\in\\mathcal{F}_n$。定义必须用 $\\le n$：$\\{\\tau\\le n\\}$ 表示「到第 n 步为止是否已经发生」，这是当下可知的信息。常见错写是 $\\{\\tau=n\\}$；在离散时间下两者恰好等价（$\\{\\tau\\le n\\}=\\bigcup_{k\\le n}\\{\\tau=k\\}$，而 $\\{\\tau=k\\}\\in\\mathcal{F}_k\\subseteq\\mathcal{F}_n$），但**连续时间必须写 $\\{\\tau\\le t\\}\\in\\mathcal{F}_t$**，此时 $\\{\\tau=t\\}\\in\\mathcal{F}_t$ 要弱得多，不能替代。\n\n典型停时：常数时刻；首达时 $\\tau=\\inf\\{n:\\ S_n\\in B\\}$（B 可测）；两个停时的 $\\min$、$\\max$、以及（离散时的）求和。典型的**非**停时：「最后一次访问 B 的时刻」、需要看到全部未来才能确定的时刻。每个停时都配有信息 σ-代数 $\\mathcal{F}_\\tau=\\{A: A\\cap\\{\\tau\\le n\\}\\in\\mathcal{F}_n,\\ \\forall n\\}$，代表「停时之前可观测到的一切」。\n\n**可选停时定理（OST）**：设 X 是鞅、τ 是停时，则在**附加条件**下 $\\mathbb{E}[X_\\tau]=\\mathbb{E}[X_0]$。常用的充分条件有三种：（a）τ **有界**（存在常数 N 使 τ≤N）；（b）$\\{X_{n\\wedge\\tau}\\}$ **一致可积**；（c）$\\tau<+\\infty$ a.s. 且 $\\mathbb{E}|X_\\tau|<+\\infty$，并附带控制条件（例如存在 $Y\\in L^{1}$ 使 $|X_{n\\wedge\\tau}|\\le Y$；或有界增量 + $\\mathbb{E}\\tau<+\\infty$）。\n\n**这些条件不能省。** 标准反例：取 $T=\\inf\\{t:\\ W_t=1\\}$（布朗运动首次到达 1 的时刻）。$W_t$ 是鞅、T 是停时，但 $\\mathbb{E}[W_T]=1\\neq0=\\mathbb{E}[W_0]$：因为 T 不是有界停时，$\\{W_{t\\wedge T}\\}$ 也不一致可积。注意 $\\mathbb{E}[W_{t\\wedge T}]=0$ 对每个固定的 t 都成立（有界停时），不等号只在 $t\\to\\infty$ 取极限时出现。",
+    "definitionEn": "Given a filtration $\\{\\mathcal{F}_n\\}$, a random time $\\tau:\\Omega\\to\\{0,1,\\dots\\}\\cup\\{+\\infty\\}$ is a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal{F}_n$ for every n. The definition uses $\\le n$ (whether τ has already occurred is known now); writing $\\{\\tau=n\\}$ is a common slip — the two are equivalent in discrete time but in continuous time one needs the stronger $\\{\\tau\\le t\\}\\in\\mathcal{F}_t$. Typical examples: constant times, first hitting times, minima, maxima and (discrete) sums of stopping times; the last visit to a set is not a stopping time. Each τ carries the σ-algebra $\\mathcal{F}_\\tau$ of events observable up to τ.\n\n**Optional stopping theorem (OST)**: for a martingale X and a stopping time τ, $\\mathbb{E}[X_\\tau]=\\mathbb{E}[X_0]$ provided an extra hypothesis holds: τ bounded; or $\\{X_{n\\wedge\\tau}\\}$ uniformly integrable; or $\\tau<\\infty$ a.s. with $\\mathbb{E}|X_\\tau|<\\infty$ and a domination condition such as $|X_{n\\wedge\\tau}|\\le Y\\in L^1$. These hypotheses cannot be dropped: with $T=\\inf\\{t:W_t=1\\}$ we have $\\mathbb{E}[W_T]=1\\ne0=\\mathbb{E}[W_0]$, while $\\mathbb{E}[W_{t\\wedge T}]=0$ still holds for each fixed t (bounded stopping time) — the failure appears only in the limit $t\\to\\infty$.",
+    "formulas": [
+      {
+        "latex": "\\{\\tau\\le n\\}\\in\\mathcal{F}_n\\ \\ \\forall n\\qquad(\\text{连续时间}:\\ \\{\\tau\\le t\\}\\in\\mathcal{F}_t\\ \\forall t)",
+        "note": "停时的定义用 ≤n（不是 =n）：表示「是否已经停下」在当下即可判断。",
+        "noteEn": "Stopping-time definition with ≤ n: whether τ has occurred is known at time n."
+      },
+      {
+        "latex": "\\mathbb{E}[X_{n\\wedge\\tau}]=\\mathbb{E}[X_0]\\qquad(\\text{对任何停时 }\\tau\\text{ 成立})",
+        "note": "截断到有界时刻：因为 n∧τ 有界，这一步不需要任何附加条件。",
+        "noteEn": "Truncation at a bounded time always works, with no extra hypothesis."
+      },
+      {
+        "latex": "\\mathbb{E}[X_\\tau]=\\mathbb{E}[X_0]\\quad\\text{若 }\\tau\\le N,\\ \\text{或 }\\{X_{n\\wedge\\tau}\\}\\text{ 一致可积},\\ \\text{或 }\\mathbb{E}\\tau<+\\infty\\ \\text{且有界增量}",
+        "note": "可选停时定理：条件不可省，否则会得出 E[W_T]=1≠0 的荒谬结论。",
+        "noteEn": "Optional stopping theorem: one of the extra hypotheses is indispensable."
+      },
+      {
+        "latex": "\\mathbb{P}(\\tau_{b}<\\tau_{-a})=\\frac{a}{a+b},\\qquad \\mathbb{E}[\\tau_{-a}\\wedge\\tau_{b}]=a\\,b\\qquad(a,b>0,\\ \\text{对称随机游走})",
+        "note": "赌徒破产：边界取 −a 与 b，对 S_n 与 S_n²−n 用 OST（|S_{n∧τ}| ≤ max(a,b) 给出控制条件）即得首达概率与期望时长。",
+        "noteEn": "Gambler's ruin with boundaries −a and b, obtained by optional stopping applied to S_n and S_n²−n."
+      },
+      {
+        "latex": "T=\\inf\\{t:\\ W_t=1\\}:\\qquad \\mathbb{E}[W_T]=1\\neq0=\\mathbb{E}[W_0],\\qquad \\mathbb{E}[T]=+\\infty",
+        "note": "反例：T 无界、{W_{t∧T}} 不一致可积，故 OST 失效；这正说明附加条件是必需的。",
+        "noteEn": "Counterexample: T is unbounded and {W_{t∧T}} is not uniformly integrable, so OST fails."
+      }
+    ],
+    "expression": {
+      "text": "{τ ≤ n} ∈ F_n   （τ 为停时）",
+      "symbol": "{τ≤n}∈F_n",
+      "note": "停时：不偷看未来就能判断「是否已经发生」的随机时刻。",
+      "noteEn": "A stopping time is detectable without foresight."
+    },
+    "properties": [
+      "运算封闭性：τ、σ 是停时则 τ∧σ、τ∨σ、以及离散时间的 τ+σ 都是停时；而 τ−σ 一般不是停时（差值的取值需要同时掌握 τ 与 σ 的先后，超出当下已知的信息）。",
+      "截断始终安全：对任何停时 τ 与鞅 X，X_{n∧τ} 仍是鞅，且 E[X_{n∧τ}] = E[X_0]；OST 的全部困难都在于把 n∧τ 换成 τ 取极限。",
+      "三种常用充分条件：τ 有界；{X_{n∧τ}} 一致可积；τ<∞ a.s. + E|X_τ|<∞ + 控制条件（如 |X_{n∧τ}| ≤ Y ∈ L¹，或有界增量且 E τ<∞）。",
+      "反例不可绕过：W 在 T=inf{t: W_t=1} 处 E W_T = 1 ≠ 0；原因是 T 无界（E T = ∞）导致 {W_{t∧T}} 不一致可积，而不是「鞅性失效」。",
+      "应用模板：赌徒破产（用 S_n 与 S_n²−n 求首达概率与期望时长）、Wald 恒等式 E S_τ = μE τ、以及结合指数鞅求带漂移布朗运动的首达时分布。"
+    ],
+    "propertiesEn": [
+      "Closure: τ∧σ, τ∨σ and (in discrete time) τ+σ are stopping times, whereas τ−σ generally is not.",
+      "Truncation is always safe: X_{n∧τ} is a martingale and E[X_{n∧τ}] = E[X_0] for every stopping time.",
+      "Three sufficient conditions: bounded τ; uniform integrability of {X_{n∧τ}}; or τ<∞ a.s. with E|X_τ|<∞ and a domination condition.",
+      "The counterexample W at T=inf{t:W_t=1} shows E[W_T]=1≠0; the failure is due to unbounded T, not to a loss of the martingale property.",
+      "Applications: gambler's ruin, Wald's identity E S_τ = μE τ, and first passage times via the exponential martingale."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1/(1+x)", "color": "#4cc9f0", "label": "P(到达 b 先于 −1)" },
+        { "expr": "x", "color": "#06d6a0", "label": "E τ = b" }
+      ],
+      "xRange": [0.2, 4],
+      "yRange": [0, 4.2],
+      "title": "赌徒破产：首达概率与期望停时（下界 −a = −1，b = x）"
+    },
+    "examples": [
+      {
+        "problem": "设 S_n 是对称简单随机游走（S_0=0，步长 ±1 各 1/2），a>0、b>0，记 $\\sigma_{-a}=\\inf\\{n:\\ S_n=-a\\}$、$\\sigma_{b}=\\inf\\{n:\\ S_n=b\\}$，$\\tau=\\sigma_{-a}\\wedge\\sigma_{b}$。用可选停时定理求 $\\mathbb{P}(S_\\tau=b)$ 与 $\\mathbb{E}\\tau$。",
+        "solution": "S_n 是鞅，$S_n^{2}-n$ 也是鞅。τ 无界，但 $|S_{n\\wedge\\tau}|\\le\\max(a,b)$，被常数控制，满足 OST 的控制条件，故 $\\mathbb{E}[S_\\tau]=0$。设 p=P(S_τ=b)，则 $\\mathbb{E}[S_\\tau]=bp+(-a)(1-p)=0$，解得 $p=\\frac{a}{a+b}$（先到达 b 的概率等于 b 到下方边界的距离占比）。对 $S_n^{2}-n$ 用同一控制条件：$\\mathbb{E}[S_\\tau^{2}-\\tau]=0$，即 $\\mathbb{E}\\tau=\\mathbb{E}[S_\\tau^{2}]=b^{2}p+a^{2}(1-p)=\\frac{ab(a+b)}{a+b}=ab$。取 a=1、b=x 即得图中两条曲线 p=1/(1+b) 与 E τ = b。"
+      },
+      {
+        "problem": "设 W 为标准布朗运动，$T=\\inf\\{t:\\ W_t=1\\}$。说明 T 是停时，计算 $\\mathbb{E}[W_T]$，并解释为什么它不等于 $\\mathbb{E}[W_0]=0$。",
+        "solution": "$\\{T\\le t\\}$ 只依赖 $[0,t]$ 上的轨道（由连续性 $\\{T\\le t\\}=\\{\\max_{0\\le s\\le t}W_s\\ge1\\}$），故 T 是停时。由反射原理 T<∞ a.s.，且 $W_T=1$，故 $\\mathbb{E}[W_T]=1\\ne0=\\mathbb{E}[W_0]$。原因：T 不是有界停时，$\\mathbb{E}T=+\\infty$（T 服从 Lévy 分布），于是 $\\{W_{t\\wedge T}\\}$ 不一致可积、也不被可积随机变量控制，OST 的三个条件都不满足。对照：对每个固定的 t，$\\mathbb{E}[W_{t\\wedge T}]=0$ 恒成立；用 $W_t^{2}-t$ 还可算出 $\\mathbb{E}[t\\wedge T]=\\mathbb{E}[W_{t\\wedge T}^{2}]$，它随 t 单调趋于 +∞，与 $\\mathbb{E}T=\\infty$ 一致。"
+      }
+    ],
+    "tags": ["停时", "可选停时定理", "一致可积", "赌徒破产", "反例"],
+    "links": ["martingale", "reflection-principle", "brownian-motion", "doob-decomposition", "markov-chain"]
+  }
+]

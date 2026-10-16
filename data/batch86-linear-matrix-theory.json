@@ -1,0 +1,416 @@
+[
+  {
+    "id": "minimal-polynomial",
+    "title": "最小多项式",
+    "titleEn": "The Minimal Polynomial",
+    "branch": "linear",
+    "level": 5,
+    "summary": "使 A 零化的多项式中次数最低的首一多项式；它整除任何零化多项式，其根恰是 A 的全部特征值，并且无重根当且仅当 A 可对角化。",
+    "summaryEn": "The monic annihilating polynomial of least degree: it divides every annihilating polynomial, its roots are exactly the eigenvalues of A, and it has no repeated roots precisely when A is diagonalizable.",
+    "definition": "设 $A$ 是数域 $\\mathbb{K}$ 上的 $n$ 阶方阵。若非零多项式 $f(\\lambda)$ 满足 $f(A)=O$，就称 $f$ 为 $A$ 的**零化多项式**。由凯莱–哈密顿定理，特征多项式 $f_A(\\lambda)=|\\lambda E-A|$ 就是一个零化多项式，因此 $A$ 的零化多项式从不空缺。\n\n在 $A$ 的全部首一零化多项式中，次数最低的那个称为 $A$ 的**最小多项式**，记作 $m_A(\\lambda)$。存在性来自「次数是正整数、必有最小元」；唯一性来自：若 $m_1\\ne m_2$ 都是次数最低的首一零化多项式，则 $m_1-m_2$ 是次数更低（首项相消）的零化多项式，矛盾。\n\n最小多项式的重要之处在于**整除性**：任何零化多项式都被 $m(\\lambda)$ 整除，特别地 $m(\\lambda)\\mid f_A(\\lambda)$——方向不能反，是最小多项式整除特征多项式。它的根恰为 $A$ 的全部特征值且不计重数；相似矩阵有相同的最小多项式。最常用的判据是：$A$ 可对角化当且仅当 $m(\\lambda)$ 在复数域上无重根，即 $m(\\lambda)=(\\lambda-\\lambda_1)(\\lambda-\\lambda_2)\\cdots(\\lambda-\\lambda_s)$（$\\lambda_i$ 互异，恰为全部互异特征值）——这与「每个特征值的几何重数等于代数重数」是同一件事。",
+    "definitionEn": "Let $A$ be an $n\\times n$ matrix over a field $\\mathbb{K}$. A nonzero polynomial $f(\\lambda)$ with $f(A)=O$ is called an **annihilating polynomial** of $A$. By the Cayley–Hamilton theorem the characteristic polynomial $f_A(\\lambda)=|\\lambda E-A|$ is annihilating, so annihilating polynomials always exist: they are precisely the polynomials that vanish at $A$.\n\nAmong all monic annihilating polynomials of $A$, the one of least degree is called the **minimal polynomial**, written $m_A(\\lambda)$. Existence holds because degrees are positive integers; uniqueness holds because two distinct such polynomials $m_1,m_2$ would differ by $m_1-m_2$, an annihilating polynomial of strictly smaller degree (their leading terms cancel) — a contradiction.\n\nThe key feature is **divisibility**: the minimal polynomial divides every annihilating polynomial, and in particular $m(\\lambda)\\mid f_A(\\lambda)$ — the direction matters, it is $m$ that divides $f_A$. Its roots are exactly the eigenvalues of $A$, each counted once, and similar matrices share the same minimal polynomial. The standard criterion is: $A$ is diagonalizable if and only if $m(\\lambda)$ has no repeated roots over $\\mathbb{C}$, i.e. $m(\\lambda)=(\\lambda-\\lambda_1)\\cdots(\\lambda-\\lambda_s)$ with pairwise distinct $\\lambda_i$; equivalently, every eigenvalue has geometric multiplicity equal to its algebraic multiplicity.",
+    "formulas": [
+      {
+        "latex": "m_A(A)=O,\\qquad m_A(\\lambda)=\\lambda^{k}+c_{k-1}\\lambda^{k-1}+\\cdots+c_0\\quad(k\\ \\text{最小})",
+        "note": "最小多项式的定义：首一、零化、次数在所有零化多项式中最小（k 就是该最小次数）。",
+        "noteEn": "Defining properties of the minimal polynomial: it is monic, it annihilates A, and its degree k is the smallest possible."
+      },
+      {
+        "latex": "f(A)=O\\ \\Longrightarrow\\ m_A(\\lambda)\\mid f(\\lambda);\\qquad\\text{特别地}\\quad m_A(\\lambda)\\mid f_A(\\lambda)",
+        "note": "整除方向：最小多项式整除任何零化多项式，特别地整除特征多项式 f_A(λ)=|λE−A|。",
+        "noteEn": "Divisibility direction: the minimal polynomial divides every annihilating polynomial, in particular the characteristic polynomial."
+      },
+      {
+        "latex": "A\\sim B\\ \\Longrightarrow\\ m_A(\\lambda)=m_B(\\lambda)",
+        "note": "相似矩阵的最小多项式相同；反之不成立，例如 diag(2,2,5) 与 diag(2,5,5) 最小多项式相同却不相似。",
+        "noteEn": "Similar matrices have the same minimal polynomial; the converse fails — diag(2,2,5) and diag(2,5,5) share the minimal polynomial but are not similar."
+      },
+      {
+        "latex": "A\\ \\text{可对角化}\\iff m_A(\\lambda)=(\\lambda-\\lambda_1)(\\lambda-\\lambda_2)\\cdots(\\lambda-\\lambda_s),\\quad \\lambda_i\\ \\text{互异}",
+        "note": "可对角化判据：最小多项式无重根，分解为互异一次因式之积；等价于每个特征值的几何重数等于代数重数。两个方向都成立。",
+        "noteEn": "Diagonalizability criterion: the minimal polynomial has no repeated roots, i.e. it splits into distinct linear factors; equivalently, geometric multiplicities equal algebraic multiplicities. Both directions hold."
+      },
+      {
+        "latex": "m_{\\operatorname{diag}(A_1,\\dots,A_t)}(\\lambda)=\\operatorname{lcm}\\big(m_{A_1}(\\lambda),\\dots,m_{A_t}(\\lambda)\\big)",
+        "note": "分块对角阵的最小多项式等于各块最小多项式的最小公倍式，这是具体计算时的常用工具。",
+        "noteEn": "The minimal polynomial of a block diagonal matrix is the least common multiple of the blocks' minimal polynomials — the standard computational device."
+      }
+    ],
+    "properties": [
+      "存在唯一性：A 的最小多项式首一、零化且次数最低，存在且唯一。",
+      "整除性：m(λ) 整除任何零化多项式，特别地 m | f_A；m 与特征多项式在复数域上有完全相同的根（不计重数）。",
+      "相似不变性：相似矩阵有相同的最小多项式；分块对角阵的最小多项式等于各块最小多项式的最小公倍式。",
+      "可对角化判据：A 可对角化 ⟺ m(λ) 无重根 ⟺ 每个特征值的几何重数等于其代数重数。",
+      "根的重数：m(λ) 的根恰为 A 的全部特征值；特征值 λ₀ 在 m 中的重数等于以 λ₀ 为特征值的最大若尔当块的阶。"
+    ],
+    "propertiesEn": [
+      "Existence and uniqueness: the minimal polynomial is the unique monic annihilating polynomial of least degree.",
+      "Divisibility: m divides every annihilating polynomial, in particular m | f_A; m and f_A have exactly the same roots, without multiplicity.",
+      "Similarity invariance: similar matrices share the minimal polynomial; for a block diagonal matrix it is the lcm of the blocks' minimal polynomials.",
+      "Diagonalizability criterion: A is diagonalizable iff m has no repeated roots iff every geometric multiplicity equals the corresponding algebraic multiplicity.",
+      "Multiplicity of roots: the roots of m are exactly the eigenvalues of A; the multiplicity of λ0 in m equals the size of the largest Jordan block with eigenvalue λ0."
+    ],
+    "examples": [
+      {
+        "problem": "求下列矩阵的最小多项式，并判断是否可以对角化：(1) $J=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$；(2) $D=\\operatorname{diag}(2,2,5)$。",
+        "solution": "(1) 特征多项式 $f_J(\\lambda)=(\\lambda-1)^2$。一次多项式 $\\lambda-c$ 若零化 $J$ 就会迫使 $J=cE$，而 $J-E=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}\\ne O$，所以 $\\lambda-1$ 不是零化多项式；又 $(J-E)^2=O$，故 $m_J(\\lambda)=(\\lambda-1)^2$。它有重根，因此 $J$ 不可对角化。\n(2) 直接计算：$(D-2E)(D-5E)=\\operatorname{diag}(0,0,3)\\cdot\\operatorname{diag}(-3,-3,0)=O$，而 $D-2E\\ne O$、$D-5E\\ne O$；且任何一次多项式 $\\lambda-c$ 都不可能零化 $D$（否则 $D=cE$，与 2、2、5 不全相等矛盾）。故 $m_D(\\lambda)=(\\lambda-2)(\\lambda-5)$。它无重根，因此 $D$ 可对角化（它本身已是对角阵）。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1&0\\\\0&2&0\\\\0&0&5\\end{pmatrix}$。求 $m_A(\\lambda)$，并判断 $A$ 是否可对角化。",
+        "solution": "$A$ 是分块对角阵 $\\operatorname{diag}(A_1,A_2)$，其中 $A_1=\\begin{pmatrix}2&1\\\\0&2\\end{pmatrix}$，$A_2=(5)$。$A_1-2E\\ne O$ 而 $(A_1-2E)^2=O$，故 $m_{A_1}=(\\lambda-2)^2$；$m_{A_2}=\\lambda-5$。于是 $m_A(\\lambda)=\\operatorname{lcm}\\big((\\lambda-2)^2,\\lambda-5\\big)=(\\lambda-2)^2(\\lambda-5)$。\n数值核对：$(A-2E)(A-5E)=\\begin{pmatrix}0&-3&0\\\\0&0&0\\\\0&0&0\\end{pmatrix}\\ne O$，$(A-2E)^2=\\begin{pmatrix}0&0&0\\\\0&0&0\\\\0&0&9\\end{pmatrix}\\ne O$，而 $(A-2E)^2(A-5E)=O$。严格地：$m$ 必须整除 $f_A=(\\lambda-2)^2(\\lambda-5)$，而所有次数不超过 2 的首一因子 $\\lambda-2,\\ (\\lambda-2)^2,\\ \\lambda-5,\\ (\\lambda-2)(\\lambda-5)$ 都已经过验证不零化 $A$，所以最小次数为 3，$m_A=(\\lambda-2)^2(\\lambda-5)$。$m_A$ 有重根 2，故 $A$ 不可对角化。"
+      }
+    ],
+    "links": [
+      "matrix-powers-polynomials",
+      "eigenvalue-eigenvector",
+      "matrix-similarity-diagonalization",
+      "jordan-form",
+      "lambda-matrix"
+    ]
+  },
+  {
+    "id": "lambda-matrix",
+    "title": "λ-矩阵与初等因子",
+    "titleEn": "λ-Matrices and Elementary Divisors",
+    "branch": "linear",
+    "level": 5,
+    "summary": "元素为多项式的矩阵及其在初等变换下的标准形；行列式因子、不变因子与初等因子完整刻画复矩阵的相似类，并可直接读出若尔当标准型。",
+    "summaryEn": "Polynomial-entried matrices and their canonical form under elementary transformations; determinantal divisors, invariant factors and elementary divisors classify similarity of complex matrices and directly reveal the Jordan form.",
+    "definition": "元素为多项式的矩阵称为 **$\\lambda$-矩阵**（多项式矩阵），其中最基本的是方阵 $A$ 的**特征矩阵** $\\lambda E-A$。$\\lambda$-矩阵有三类**初等变换**：①交换两行（或两列）；②用非零常数乘某一行（或某一列）；③把某一行（或列）的 $\\varphi(\\lambda)$ 倍加到另一行（或列），其中 $\\varphi(\\lambda)$ 是任意多项式——第三条比数字矩阵的初等变换宽。能通过初等变换互相转化的 $\\lambda$-矩阵称为等价的。\n\n等价性有两个关键不变量。设 $A(\\lambda)$ 的秩为 $r$（在有理函数域上取的秩），把全部 $k$ 阶子式的首一最大公因式记为 $D_k(\\lambda)$，称为**行列式因子**（约定 $D_0=1$）；再令 $d_k(\\lambda)=D_k(\\lambda)/D_{k-1}(\\lambda)$，称为**不变因子**。每个 $d_k$ 都是首一多项式，且满足整除链 $d_1\\mid d_2\\mid\\cdots\\mid d_r$。每个 $\\lambda$-矩阵都等价于标准形 $\\operatorname{diag}(d_1,\\dots,d_r,0,\\dots,0)$，称为 **Smith 标准形**；两个 $\\lambda$-矩阵等价当且仅当有相同的行列式因子，当且仅当有相同的不变因子。\n\n把每个次数大于零的不变因子分解为首一不可约因式的方幂之积，所有出现的这些方幂（在复数域上即形如 $(\\lambda-\\lambda_0)^m$ 的式子）合称**初等因子**。核心定理：两个 $n$ 阶复矩阵 $A,B$ **相似**当且仅当特征矩阵 $\\lambda E-A$ 与 $\\lambda E-B$ 有完全相同的初等因子（等价地，相同的不变因子）。初等因子立刻给出若尔当标准型：每个初等因子 $(\\lambda-\\lambda_0)^m$ 恰好对应一个 **$m$ 阶若尔当块** $J_m(\\lambda_0)$（主对角线为 $\\lambda_0$，上副对角线为 1），若尔当形由此完全确定（不计块的排列次序）；并且 $m_A(\\lambda)=d_n(\\lambda)$、$|\\lambda E-A|=d_1d_2\\cdots d_n$。",
+    "definitionEn": "A matrix whose entries are polynomials is called a **$\\lambda$-matrix** (polynomial matrix); the most important example is the **characteristic matrix** $\\lambda E-A$ of a square matrix $A$. There are three kinds of **elementary transformations**: (i) interchange two rows (or columns); (ii) multiply a row (or column) by a nonzero constant; (iii) add a polynomial multiple $\\varphi(\\lambda)$ of one row (or column) to another — more general than for constant matrices. Two $\\lambda$-matrices related by elementary transformations are called equivalent.\n\nEquivalence has two key invariants. Let $r$ be the rank of $A(\\lambda)$ (over the field of rational functions), let $D_k(\\lambda)$ be the monic greatest common divisor of all $k\\times k$ minors — the **determinantal divisors** ($D_0=1$) — and set $d_k(\\lambda)=D_k(\\lambda)/D_{k-1}(\\lambda)$, the **invariant factors**. Each $d_k$ is monic and they form a divisibility chain $d_1\\mid d_2\\mid\\cdots\\mid d_r$. Every $\\lambda$-matrix is equivalent to the canonical form $\\operatorname{diag}(d_1,\\dots,d_r,0,\\dots,0)$, the **Smith normal form**; two $\\lambda$-matrices are equivalent iff they share the same determinantal divisors, iff they share the same invariant factors.\n\nFactoring each invariant factor of positive degree into powers of monic irreducibles yields the **elementary divisors** — over $\\mathbb{C}$ these are exactly the powers $(\\lambda-\\lambda_0)^m$. The central theorem: two $n\\times n$ complex matrices $A,B$ are **similar** if and only if their characteristic matrices $\\lambda E-A$ and $\\lambda E-B$ have the same elementary divisors (equivalently, the same invariant factors). Elementary divisors read off the Jordan form immediately: each $(\\lambda-\\lambda_0)^m$ corresponds to one **Jordan block of size $m$**, $J_m(\\lambda_0)$ (eigenvalue on the diagonal, 1's on the superdiagonal). This determines the Jordan form up to ordering, and gives $m_A(\\lambda)=d_n(\\lambda)$ as well as $|\\lambda E-A|=d_1d_2\\cdots d_n$.",
+    "formulas": [
+      {
+        "latex": "A(\\lambda)\\ \\sim\\ \\operatorname{diag}\\big(d_1(\\lambda),\\dots,d_r(\\lambda),0,\\dots,0\\big),\\qquad d_1\\mid d_2\\mid\\cdots\\mid d_r",
+        "note": "Smith 标准形：任意 λ-矩阵经初等变换化为对角形，r 为秩，对角元为不变因子并满足整除链；等价类由这组不变因子完全决定。",
+        "noteEn": "Smith normal form: elementary transformations turn any λ-matrix into this diagonal form, r being the rank; the diagonal entries are the invariant factors in a divisibility chain, and they determine the equivalence class."
+      },
+      {
+        "latex": "D_k(\\lambda)=\\text{全部}\\ k\\ \\text{阶子式的首一最大公因式},\\qquad d_k(\\lambda)=\\dfrac{D_k(\\lambda)}{D_{k-1}(\\lambda)}\\quad(D_0=1)",
+        "note": "行列式因子 D_k 与不变因子 d_k 的定义：d_k 是相邻行列式因子之商，方向是大的除以小的。",
+        "noteEn": "Determinantal divisors D_k and invariant factors d_k = D_k/D_{k-1}: each invariant factor is the quotient of consecutive determinantal divisors."
+      },
+      {
+        "latex": "A\\sim B\\quad\\Longleftrightarrow\\quad \\lambda E-A\\cong\\lambda E-B\\quad\\Longleftrightarrow\\quad \\text{两者有相同的初等因子（不变因子）}",
+        "note": "复矩阵相似的核心判定：相似 ⟺ 特征矩阵等价 ⟺ 初等因子组相同（也等价于不变因子组相同）。",
+        "noteEn": "The central similarity criterion: A and B are similar iff their characteristic matrices are equivalent iff they have the same elementary divisors (equivalently, the same invariant factors)."
+      },
+      {
+        "latex": "|\\lambda E-A|=d_1(\\lambda)\\,d_2(\\lambda)\\cdots d_n(\\lambda),\\qquad m_A(\\lambda)=d_n(\\lambda)",
+        "note": "取 k=n 时行列式因子 D_n 就是行列式；特征多项式等于全部不变因子之积，最小多项式等于最大不变因子 d_n。",
+        "noteEn": "For k=n the determinantal divisor D_n is the determinant; the characteristic polynomial is the product of all invariant factors and the minimal polynomial is the largest one d_n."
+      },
+      {
+        "latex": "(\\lambda-\\lambda_0)^m\\ \\longleftrightarrow\\ J_m(\\lambda_0)=\\begin{pmatrix}\\lambda_0&1&&\\\\&\\lambda_0&\\ddots&\\\\&&\\ddots&1\\\\&&&\\lambda_0\\end{pmatrix}",
+        "note": "每个 m 次初等因子对应一个 m 阶若尔当块（主对角 λ₀、上副对角线 1）；初等因子组与若尔当标准型一一对应（不计块排列）。",
+        "noteEn": "Each elementary divisor (λ−λ0)^m corresponds to one Jordan block of size m (λ0 on the diagonal, 1 on the superdiagonal); the elementary divisors determine the Jordan form up to ordering."
+      }
+    ],
+    "properties": [
+      "等价不变量：初等变换不改变秩、行列式因子与不变因子；两个 λ-矩阵等价 ⟺ 行列式因子相同 ⟺ 不变因子相同。",
+      "整除链与唯一性：d₁ | d₂ | … | dᵣ，每个 d_k 首一；Smith 标准形在等价意义下唯一。",
+      "特征矩阵的数值：λE−A 的行列式因子 D_n = |λE−A|（特征多项式），最大不变因子 d_n = m_A（最小多项式）；d₁ = … = d_{n−1} = 1 当且仅当 m_A = f_A（此时称 A 为非亏损矩阵）。",
+      "相似分类与重数解读：同阶复矩阵相似 ⟺ 初等因子完全相同；以 λ₀ 为特征值的若尔当块个数 = λ₀ 的几何重数，最大块长 = λ₀ 在 m_A 中的重数，各块长之和 = λ₀ 的代数重数。",
+      "可对角化判据：A 可对角化 ⟺ 全部初等因子都是一次式（所有若尔当块均为 1 阶）⟺ 每个特征值的几何重数等于代数重数。"
+    ],
+    "propertiesEn": [
+      "Invariants of equivalence: elementary transformations preserve rank, determinantal divisors and invariant factors; two λ-matrices are equivalent iff they have the same determinantal divisors iff the same invariant factors.",
+      "Divisibility chain and uniqueness: d₁ | d₂ | … | dᵣ, each d_k monic; the Smith normal form is unique up to equivalence.",
+      "Numerical values for a characteristic matrix: D_n = |λE−A| (the characteristic polynomial) and d_n = m_A (the minimal polynomial); d₁ = … = d_{n−1} = 1 iff m_A = f_A (A is then called non-derogatory).",
+      "Similarity classification and multiplicity reading: complex matrices of the same order are similar iff they have identical elementary divisors; the number of Jordan blocks for λ0 equals the geometric multiplicity of λ0, the largest block size is its multiplicity in m_A, and the block sizes sum to its algebraic multiplicity.",
+      "Diagonalizability: A is diagonalizable iff every elementary divisor is linear (all Jordan blocks 1×1) iff geometric multiplicities equal algebraic multiplicities."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&1&0\\\\0&1&0\\\\0&0&2\\end{pmatrix}$。求 $\\lambda E-A$ 的行列式因子与不变因子，写出初等因子与若尔当标准型。",
+        "solution": "记 $M(\\lambda)=\\lambda E-A=\\begin{pmatrix}\\lambda-1&-1&0\\\\0&\\lambda-1&0\\\\0&0&\\lambda-2\\end{pmatrix}$。\n① 一阶子式就是 $M$ 的全部元素，其中含非零常数 $-1$，故 $D_1(\\lambda)=1$。\n② 二阶子式取三个：$\\begin{vmatrix}\\lambda-1&-1\\\\0&\\lambda-1\\end{vmatrix}=(\\lambda-1)^2$，$\\begin{vmatrix}\\lambda-1&0\\\\0&\\lambda-2\\end{vmatrix}=(\\lambda-1)(\\lambda-2)$，$\\begin{vmatrix}-1&0\\\\0&\\lambda-2\\end{vmatrix}=-(\\lambda-2)$。由于 $(\\lambda-1)^2$ 与 $-(\\lambda-2)$ 互素，全部二阶子式的最大公因式为 1，即 $D_2(\\lambda)=1$。\n③ $D_3(\\lambda)=|M(\\lambda)|=(\\lambda-1)^2(\\lambda-2)$。\n于是不变因子 $d_1=D_1/D_0=1$，$d_2=D_2/D_1=1$，$d_3=D_3/D_2=(\\lambda-1)^2(\\lambda-2)$，整除链 $1\\mid1\\mid(\\lambda-1)^2(\\lambda-2)$ 成立。初等因子为 $(\\lambda-1)^2$ 与 $\\lambda-2$，对应若尔当块 $J_2(1)$ 与 $J_1(2)$，故若尔当标准型为 $\\operatorname{diag}(J_2(1),[2])=\\begin{pmatrix}1&1&0\\\\0&1&0\\\\0&0&2\\end{pmatrix}$，恰与原矩阵相同。\n数值复核：$m_A=d_3=(\\lambda-1)^2(\\lambda-2)$，而 $(A-E)^2(A-2E)=O$、$(A-E)(A-2E)=\\begin{pmatrix}0&-1&0\\\\0&0&0\\\\0&0&0\\end{pmatrix}\\ne O$，与读出的若尔当形一致。"
+      },
+      {
+        "problem": "设 4 阶复矩阵 $B$ 的初等因子为 $(\\lambda-1)^2$、$(\\lambda-1)$、$(\\lambda-2)$。写出 $B$ 的若尔当标准型，并求其最小多项式与特征多项式。",
+        "solution": "每个初等因子对应一个若尔当块：$(\\lambda-1)^2\\to J_2(1)$，$(\\lambda-1)\\to J_1(1)$，$(\\lambda-2)\\to J_1(2)$，故 $B\\sim\\operatorname{diag}\\big(J_2(1),[1],[2]\\big)=\\begin{pmatrix}1&1&0&0\\\\0&1&0&0\\\\0&0&1&0\\\\0&0&0&2\\end{pmatrix}$。\n特征多项式 $f_B(\\lambda)=(\\lambda-1)^2\\cdot(\\lambda-1)\\cdot(\\lambda-2)=(\\lambda-1)^3(\\lambda-2)$；最小多项式是各初等因子的最小公倍式 $m_B(\\lambda)=\\operatorname{lcm}\\big((\\lambda-1)^2,\\lambda-1,\\lambda-2\\big)=(\\lambda-1)^2(\\lambda-2)$（也等于最大不变因子 $d_4$）。\n数值验证：记右边矩阵为 $J$，则 $(J-E)^2(J-2E)=O$，而 $(J-E)(J-2E)\\ne O$。"
+      }
+    ],
+    "links": [
+      "jordan-form",
+      "minimal-polynomial",
+      "matrix-similarity-diagonalization",
+      "elementary-matrices",
+      "eigenvalue-eigenvector"
+    ]
+  },
+  {
+    "id": "normal-matrices",
+    "title": "正规矩阵与谱定理",
+    "titleEn": "Normal Matrices and the Spectral Theorem",
+    "branch": "linear",
+    "level": 5,
+    "summary": "满足 AᴴA=AAᴴ 的矩阵；它们恰好是能被酉矩阵对角化的矩阵，Hermitian、斜 Hermitian、酉矩阵都是其重要特例。",
+    "summaryEn": "Matrices satisfying AᴴA=AAᴴ; they are exactly the unitarily diagonalizable matrices, with Hermitian, skew-Hermitian and unitary matrices as the key special cases.",
+    "definition": "在 $\\mathbb{C}^n$ 上取内积 $(\\alpha,\\beta)=\\beta^{H}\\alpha=\\sum_{i}\\bar{\\beta}_i\\alpha_i$，其中 $A^{H}=\\bar{A}^{T}$ 是共轭转置；内积给出长度 $\\|\\alpha\\|=\\sqrt{(\\alpha,\\alpha)}$ 与正交性概念。由此定义三类重要矩阵：**Hermitian 矩阵** $A^{H}=A$、**斜 Hermitian 矩阵** $A^{H}=-A$、**酉矩阵** $U^{H}U=E$（即 $U^{-1}=U^{H}$）；它们分别是实对称阵、实反对称阵、正交阵在复数域上的推广。\n\n这三类矩阵有一个共同推广：满足 $A^{H}A=AA^{H}$ 的**正规矩阵**。Hermitian、斜 Hermitian、酉矩阵都是正规矩阵，且正规性在酉相似下保持。正规矩阵的核心结论是**谱定理**：$A$ 可以被酉矩阵对角化（存在酉阵 $U$ 使 $U^{H}AU$ 为对角阵）当且仅当 $A$ 是正规矩阵。\n\n两个方向都要会证。若 $A=U\\Lambda U^{H}$ 且 $U$ 酉、$\\Lambda$ 对角，则对角阵相乘可交换，$A^{H}A=U\\bar{\\Lambda}\\Lambda U^{H}=U\\Lambda\\bar{\\Lambda}U^{H}=AA^{H}$，故 $A$ 正规；反过来，由 Schur 三角化 $A=UTU^{H}$（$T$ 上三角），酉相似保持正规性，而上三角的正规矩阵必为对角阵，于是 $A$ 可酉对角化。谱定理的推论很实用：正规矩阵属于不同特征值的特征向量互相正交；特别地 Hermitian 矩阵特征值全为实数、斜 Hermitian 矩阵特征值全为纯虚数、酉矩阵特征值模长全为 1。",
+    "definitionEn": "On $\\mathbb{C}^n$ use the inner product $(\\alpha,\\beta)=\\beta^{H}\\alpha=\\sum_i\\bar{\\beta}_i\\alpha_i$, where $A^{H}=\\bar{A}^{T}$ is the conjugate transpose; it induces length $\\|\\alpha\\|=\\sqrt{(\\alpha,\\alpha)}$ and orthogonality. Three classes of matrices are singled out: **Hermitian** matrices $A^{H}=A$, **skew-Hermitian** matrices $A^{H}=-A$, and **unitary** matrices $U^{H}U=E$ (equivalently $U^{-1}=U^{H}$) — the complex analogues of real symmetric, skew-symmetric and orthogonal matrices.\n\nThese classes share one generalization: **normal matrices**, defined by $A^{H}A=AA^{H}$. Hermitian, skew-Hermitian and unitary matrices are all normal, and normality is preserved under unitary similarity. The central result is the **spectral theorem**: $A$ is unitarily diagonalizable (there is a unitary $U$ with $U^{H}AU$ diagonal) if and only if $A$ is normal.\n\nBoth directions matter. If $A=U\\Lambda U^{H}$ with $U$ unitary and $\\Lambda$ diagonal, then diagonal matrices commute, so $A^{H}A=U\\bar{\\Lambda}\\Lambda U^{H}=U\\Lambda\\bar{\\Lambda}U^{H}=AA^{H}$ and $A$ is normal. Conversely, Schur's triangularization gives $A=UTU^{H}$ with $T$ upper triangular; unitary similarity preserves normality, and an upper triangular normal matrix must be diagonal, so $A$ is unitarily diagonalizable. Useful corollaries: eigenvectors of a normal matrix belonging to distinct eigenvalues are orthogonal; Hermitian matrices have real eigenvalues, skew-Hermitian matrices purely imaginary eigenvalues, and unitary matrices eigenvalues of modulus 1.",
+    "formulas": [
+      {
+        "latex": "(\\alpha,\\beta)=\\beta^{H}\\alpha,\\qquad \\|\\alpha\\|^{2}=\\alpha^{H}\\alpha,\\qquad A^{H}=\\bar{A}^{T}",
+        "note": "复内积与共轭转置：内积对第一个变量线性、对第二个变量共轭线性。",
+        "noteEn": "Complex inner product and conjugate transpose; the inner product is linear in the first argument and conjugate-linear in the second."
+      },
+      {
+        "latex": "A^{H}A=AA^{H}\\quad\\Longleftrightarrow\\quad \\|Ax\\|=\\|A^{H}x\\|\\quad\\text{对一切}\\ x",
+        "note": "正规矩阵的定义及其范数等价刻画：等式对一切向量 x 成立，当且仅当 A 正规。",
+        "noteEn": "Definition of normality and its norm characterization: the equality holds for every vector x precisely when A is normal."
+      },
+      {
+        "latex": "U^{H}AU=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)\\ \\text{（某酉阵}\\ U\\text{）}\\quad\\Longleftrightarrow\\quad A^{H}A=AA^{H}",
+        "note": "谱定理：可酉对角化 ⟺ 正规。对角元就是特征值，U 的列构成标准正交特征向量组。",
+        "noteEn": "Spectral theorem: unitarily diagonalizable iff normal. The diagonal entries are the eigenvalues and the columns of U form an orthonormal eigenbasis."
+      },
+      {
+        "latex": "U^{H}AU=\\Lambda\\ \\Longrightarrow\\ A^{H}A=U\\bar{\\Lambda}\\Lambda U^{H}=U\\Lambda\\bar{\\Lambda}U^{H}=AA^{H}",
+        "note": "谱定理「易方向」的证明：酉对角化蕴含正规。注意这一步不能漏，定理是充要条件。",
+        "noteEn": "The easy direction of the spectral theorem: unitary diagonalizability implies normality — an implication that must not be omitted, since the theorem is an equivalence."
+      },
+      {
+        "latex": "A^{H}=A\\Rightarrow \\lambda\\in\\mathbb{R};\\qquad A^{H}=-A\\Rightarrow \\lambda\\in i\\mathbb{R};\\qquad U^{H}U=E\\Rightarrow |\\lambda|=1",
+        "note": "特例对照：Hermitian 谱全实、斜 Hermitian 谱全纯虚、酉矩阵谱在单位圆上（实对称、实反对称、正交阵是其实数版本）。",
+        "noteEn": "Spectra of the special classes: Hermitian (real), skew-Hermitian (purely imaginary), unitary (unit circle); real symmetric, skew-symmetric and orthogonal matrices are the real counterparts."
+      }
+    ],
+    "properties": [
+      "正规矩阵族：Hermitian、斜 Hermitian、酉矩阵都是正规矩阵，其实数版本（实对称、实反对称、正交阵）亦然；酉相似保持正规性。",
+      "谱定理：A 正规 ⟺ A 可酉对角化 ⟺ 存在由特征向量构成的标准正交基。可对角化本身不够：例如 [[1,1],[0,2]] 可对角化但不正规，不能被酉对角化。",
+      "Hermitian 特例：特征值全为实数；属于不同特征值的特征向量正交；把特征向量标准正交化即得酉阵 U 使 UᴴAU 为实对角阵。",
+      "酉矩阵特例：UᴴU = UUᴴ = E，保持内积与长度（(Ux,Uy)=(x,y)），特征值模全为 1，|det U| = 1。",
+      "实情形的差异：实对称阵可被正交矩阵对角化（谱全实）；一般实正规阵只能正交化为块对角形，非实特征值成共轭对出现，对应 2×2 旋转–伸缩块。"
+    ],
+    "propertiesEn": [
+      "The normal family: Hermitian, skew-Hermitian and unitary matrices are normal, as are their real counterparts (symmetric, skew-symmetric, orthogonal); unitary similarity preserves normality.",
+      "Spectral theorem: A is normal iff A is unitarily diagonalizable iff it has an orthonormal basis of eigenvectors. Mere diagonalizability is not enough — [[1,1],[0,2]] is diagonalizable but not normal, hence not unitarily diagonalizable.",
+      "Hermitian case: all eigenvalues are real; eigenvectors for distinct eigenvalues are orthogonal; normalizing them yields a unitary U with UᴴAU real diagonal.",
+      "Unitary case: UᴴU = UUᴴ = E, so inner products and lengths are preserved ((Ux,Uy)=(x,y)); all eigenvalues have modulus 1 and |det U| = 1.",
+      "Real versus complex: a real symmetric matrix is orthogonally diagonalizable (real spectrum); a general real normal matrix can only be brought by an orthogonal matrix to block diagonal form, nonreal conjugate eigenvalue pairs giving 2×2 rotation-scaling blocks."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1+i\\\\1-i&3\\end{pmatrix}$。验证 $A$ 是 Hermitian 矩阵，并求酉阵 $U$ 使 $U^{H}AU$ 为对角阵。",
+        "solution": "$A^{H}=\\begin{pmatrix}2&\\overline{1-i}\\\\\\overline{1+i}&3\\end{pmatrix}=\\begin{pmatrix}2&1+i\\\\1-i&3\\end{pmatrix}=A$，故 $A$ 是 Hermitian 矩阵。\n特征多项式 $\\det(\\lambda E-A)=(\\lambda-2)(\\lambda-3)-|1+i|^{2}=(\\lambda-2)(\\lambda-3)-2=\\lambda^{2}-5\\lambda+4$，特征值为 $\\lambda_1=4,\\ \\lambda_2=1$。\n$\\lambda=4$：$(A-4E)=\\begin{pmatrix}-2&1+i\\\\1-i&-1\\end{pmatrix}$，取特征向量 $v_1=(1+i,\\ 2)^{T}$。\n$\\lambda=1$：$(A-E)=\\begin{pmatrix}1&1+i\\\\1-i&2\\end{pmatrix}$，取特征向量 $v_2=(-1-i,\\ 1)^{T}$。\n正交性验证：$(v_1,v_2)=v_2^{H}v_1=\\overline{(-1-i)}(1+i)+2=(-1+i)(1+i)+2=-2+2=0$。长度：$\\|v_1\\|^{2}=6$，$\\|v_2\\|^{2}=3$。\n单位化 $u_1=v_1/\\sqrt{6}$，$u_2=v_2/\\sqrt{3}$，令 $U=(u_1\\ u_2)$，则 $U^{H}U=E$ 且 $U^{H}AU=\\operatorname{diag}(4,1)$。数值复核：$U^{H}AU=\\begin{pmatrix}4&0\\\\0&1\\end{pmatrix}$ 的偏差小于 $10^{-15}$。"
+      },
+      {
+        "problem": "判定 $B=\\begin{pmatrix}1&1\\\\0&2\\end{pmatrix}$ 是否可对角化、是否正规，并说明与谱定理的关系。",
+        "solution": "$B$ 的特征值为 1 与 2，互异，故 $B$ 可对角化。但 $B^{H}B=\\begin{pmatrix}1&1\\\\1&5\\end{pmatrix}$，$BB^{H}=\\begin{pmatrix}2&2\\\\2&4\\end{pmatrix}$，两者不相等，故 $B$ 不是正规矩阵。由谱定理，$B$ 不可能被酉矩阵对角化。这说明「可对角化」严格弱于「可酉对角化」，谱定理中正规性条件是本质的。"
+      }
+    ],
+    "links": [
+      "symmetric-matrix-diagonalization",
+      "spectral-theorem",
+      "inner-product-orthogonality",
+      "eigenvalue-variational",
+      "matrix-similarity-diagonalization"
+    ]
+  },
+  {
+    "id": "matrix-functions",
+    "title": "矩阵函数与矩阵指数",
+    "titleEn": "Matrix Functions and the Matrix Exponential",
+    "branch": "linear",
+    "level": 5,
+    "summary": "把标量函数（尤其是指数函数）搬上方阵的两条等价路线：幂级数与谱上插值；若尔当块上按导数展开是核心公式。",
+    "summaryEn": "Two equivalent routes for extending a scalar function (especially the exponential) to square matrices — power series and interpolation on the spectrum — with the derivative pattern on Jordan blocks as the key formula.",
+    "definition": "把标量函数 $f$ 作用到方阵 $A$ 上有两条等价路线。**幂级数路线**：若 $f(z)=\\sum_{k\\ge0}c_kz^{k}$ 的收敛半径大于 $A$ 的谱半径 $\\rho(A)$，则定义 $f(A)=\\sum_{k\\ge0}c_kA^{k}$（逐元素绝对收敛）；典型例子 $e^{A}=\\sum_{k\\ge0}A^{k}/k!$ 对一切复方阵都收敛。**谱上插值路线**：求次数小于 $\\deg m_A$ 的多项式 $p$，使在每个特征值 $\\lambda_i$ 处 $p$ 与 $f$ 的各阶导数（直到 $\\lambda_i$ 在最小多项式中的重数减 1 阶）完全相等，然后规定 $f(A)=p(A)$；由 Hermite 插值，这样的 $p$ 存在且唯一。两种定义在公共适用范围内给出同一个矩阵。\n\n两条常用计算路线：若 $A$ 可对角化，$A=P\\Lambda P^{-1}$，则 $f(A)=P\\operatorname{diag}\\big(f(\\lambda_1),\\dots,f(\\lambda_n)\\big)P^{-1}$；若含若尔当块 $J_m(\\lambda)$，则 $f(J_m(\\lambda))$ 是上三角矩阵，主对角线为 $f(\\lambda)$，第 $k$ 条上副对角线为 $f^{(k)}(\\lambda)/k!$（$k=1,\\dots,m-1$）——位置与阶乘都不能错。\n\n矩阵指数 $e^{tA}$ 给出 $x'=Ax$ 的基解矩阵（$t=1$ 时即最重要的矩阵函数 $e^{A}$）：$e^{A}$ 恒可逆、$\\det e^{A}=e^{\\operatorname{tr}A}$，当 $AB=BA$ 时满足指数律 $e^{A+B}=e^{A}e^{B}$。交换性条件在一般情形下不可省（$AB\\ne BA$ 时通常两边不等），但它并不是必要条件：确有 $AB\\ne BA$ 而 $e^{A+B}=e^{A}e^{B}$ 的特例。矩阵对数与平方根没有无条件的存在性，本节点只使用充分情形：当 $A$ 可对角化且特征值落在所选分支的定义域内时，$\\ln A=P\\ln(\\Lambda)P^{-1}$、$\\sqrt{A}=P\\sqrt{\\Lambda}P^{-1}$。",
+    "definitionEn": "There are two equivalent routes for applying a scalar function $f$ to a square matrix $A$. The **power series route**: if $f(z)=\\sum_{k\\ge0}c_kz^{k}$ has radius of convergence larger than the spectral radius $\\rho(A)$, define $f(A)=\\sum_{k\\ge0}c_kA^{k}$ (absolute entrywise convergence); the model case $e^{A}=\\sum_{k\\ge0}A^{k}/k!$ converges for every complex matrix. The **interpolation route**: find a polynomial $p$ of degree less than $\\deg m_A$ such that at each eigenvalue $\\lambda_i$ the values of $p$ and its derivatives agree with those of $f$ up to order (multiplicity of $\\lambda_i$ in the minimal polynomial minus 1), and set $f(A)=p(A)$; by Hermite interpolation such a $p$ exists and is unique. On the common domain the two definitions agree.\n\nTwo computational routes dominate. If $A$ is diagonalizable, $A=P\\Lambda P^{-1}$, then $f(A)=P\\operatorname{diag}\\big(f(\\lambda_1),\\dots,f(\\lambda_n)\\big)P^{-1}$. If $A$ contains a Jordan block $J_m(\\lambda)$, then $f(J_m(\\lambda))$ is upper triangular with $f(\\lambda)$ on the diagonal and $f^{(k)}(\\lambda)/k!$ along the $k$-th superdiagonal ($k=1,\\dots,m-1$) — the position and the factorial both matter.\n\nThe matrix exponential $e^{tA}$ gives the fundamental matrix of $x'=Ax$ ($t=1$ yields $e^{A}$, the most important matrix function): $e^{A}$ is always invertible, $\\det e^{A}=e^{\\operatorname{tr}A}$, and the law of exponents $e^{A+B}=e^{A}e^{B}$ holds whenever $AB=BA$. Commutativity cannot be dropped in general ($AB\\ne BA$ usually gives two different matrices), yet it is not necessary: there are examples with $AB\\ne BA$ and $e^{A+B}=e^{A}e^{B}$. Matrix logarithms and square roots have no unconditional existence; only sufficient cases are used here: if $A$ is diagonalizable with eigenvalues inside the chosen branch of the domain, then $\\ln A=P\\ln(\\Lambda)P^{-1}$ and $\\sqrt{A}=P\\sqrt{\\Lambda}P^{-1}$.",
+    "formulas": [
+      {
+        "latex": "f(A)=\\sum_{k=0}^{\\infty}c_kA^{k},\\qquad f(z)=\\sum_{k=0}^{\\infty}c_kz^{k}\\quad(\\text{收敛半径}>\\rho(A))",
+        "note": "幂级数路线：把标量幂级数中的 z 换成 A；收敛半径超过谱半径时绝对收敛。",
+        "noteEn": "Power series route: substitute A for z; convergence is absolute when the radius of convergence exceeds the spectral radius ρ(A)."
+      },
+      {
+        "latex": "f(A)=p(A),\\qquad p^{(j)}(\\lambda_i)=f^{(j)}(\\lambda_i)\\quad(0\\le j<m_i)",
+        "note": "谱上插值路线：m_i 是特征值 λ_i 在最小多项式中的重数；次数小于 deg m_A 时 p 由 Hermite 插值唯一确定。",
+        "noteEn": "Interpolation route: m_i is the multiplicity of λ_i in the minimal polynomial; for deg p < deg m_A the polynomial p is the unique Hermite interpolant."
+      },
+      {
+        "latex": "A=P\\Lambda P^{-1}\\ \\Longrightarrow\\ f(A)=P\\operatorname{diag}\\big(f(\\lambda_1),\\dots,f(\\lambda_n)\\big)P^{-1}",
+        "note": "可对角化时的公式：先对每个特征值算 f，拼成对角阵，再共轭回去。",
+        "noteEn": "Diagonalizable case: evaluate f at each eigenvalue, form the diagonal matrix, and conjugate back."
+      },
+      {
+        "latex": "f\\big(J_m(\\lambda)\\big)=\\begin{pmatrix}f(\\lambda)&f'(\\lambda)&\\frac{f''(\\lambda)}{2!}&\\cdots\\\\0&f(\\lambda)&f'(\\lambda)&\\ddots\\\\\\vdots&\\ddots&\\ddots&\\ddots\\\\0&\\cdots&0&f(\\lambda)\\end{pmatrix}",
+        "note": "若尔当块公式：主对角线 f(λ)，第 k 条上副对角线全为 f⁽ᵏ⁾(λ)/k!，导数阶数与位置一一对应。",
+        "noteEn": "Jordan block formula: f(λ) on the diagonal and f⁽ᵏ⁾(λ)/k! along the k-th superdiagonal — derivative order and position match exactly."
+      },
+      {
+        "latex": "e^{A}=\\sum_{k=0}^{\\infty}\\frac{A^{k}}{k!},\\qquad \\det e^{A}=e^{\\operatorname{tr}A},\\qquad AB=BA\\ \\Longrightarrow\\ e^{A+B}=e^{A}e^{B}",
+        "note": "矩阵指数公式包：级数定义、行列式恒等式、交换时的指数律（交换是充分条件，并非必要条件）。",
+        "noteEn": "The basic package for the matrix exponential: series definition, determinant identity, and the law of exponents when A and B commute (commutativity is sufficient, not necessary)."
+      }
+    ],
+    "properties": [
+      "基本事实：e^A 对一切复方阵收敛，恒可逆且 (e^A)⁻¹ = e^{−A}；e^O = E；det e^A = e^{tr A}（A 为实矩阵时行列式为正）；e^{tA} 是 x′ = Ax 的基解矩阵。",
+      "指数律与交换性：AB = BA 时 e^{A+B} = e^A e^B；一般 AB ≠ BA 时 e^{A+B} ≠ e^A e^B，例如 A=[[0,1],[0,0]]、B=[[0,0],[1,0]] 时 e^Ae^B = [[2,1],[1,1]] 而 e^{A+B} = [[cosh 1, sinh 1],[sinh 1, cosh 1]]。",
+      "交换性的充分条件：AB = BA ⟹ e^Ae^B = e^Be^A（充分，但**不必要**——指数映射不是单射：存在 AB ≠ BA 而 e^Ae^B = e^Be^A 的例子，如 A=diag(0,2πi)、B=[[0,1],[0,2πi]] 时 e^A=e^B=E）；它也不适用于求和公式——存在 AB ≠ BA 而 e^{A+B} = e^Ae^B 的特例（同例中三者指数同为 E），故「AB=BA」对求和公式同样只是充分条件。",
+      "一般性质：f(P⁻¹AP) = P⁻¹f(A)P；f(A) 由 f 在谱上的取值与各阶导数值唯一决定；f 在谱上解析时有谱映射 σ(f(A)) = f(σ(A))。",
+      "对数与平方根（充分情形）：A 可对角化且特征值在所选分支定义域内时 ln A = P ln(Λ) P⁻¹，且 e^{ln A} = A；平方根同理。一般矩阵的存在性取决于谱结构与分支选择，需单独讨论。"
+    ],
+    "propertiesEn": [
+      "Basic facts: e^A converges for every complex matrix, is always invertible with (e^A)⁻¹ = e^{−A}; e^O = E; det e^A = e^{tr A} (positive for real A); e^{tA} is the fundamental matrix of x′ = Ax.",
+      "Law of exponents and commutativity: if AB = BA then e^{A+B} = e^A e^B; for general non-commuting A, B one has e^{A+B} ≠ e^A e^B — e.g. for A=[[0,1],[0,0]] and B=[[0,0],[1,0]], e^Ae^B = [[2,1],[1,1]] while e^{A+B} = [[cosh 1, sinh 1],[sinh 1, cosh 1]].",
+      "Sufficient condition for commuting exponentials: AB = BA ⟹ e^Ae^B = e^Be^A (sufficient, but not necessary — the exponential map is not injective: there are pairs with AB ≠ BA but e^Ae^B = e^Be^A, e.g. A=diag(0,2πi), B=[[0,1],[0,2πi]] give e^A=e^B=E); it does not transfer to the sum formula either — there exist pairs with AB ≠ BA and e^{A+B} = e^Ae^B (in the same example all three exponentials equal E), so commutativity is only sufficient there as well.",
+      "General properties: f(P⁻¹AP) = P⁻¹f(A)P; f(A) is determined by the values and derivatives of f on the spectrum; when f is analytic on the spectrum, σ(f(A)) = f(σ(A)).",
+      "Logarithms and square roots (sufficient cases): if A is diagonalizable with eigenvalues inside the chosen branch of the domain, then ln A = P ln(Λ) P⁻¹ and e^{ln A} = A; similarly for square roots. Existence for general matrices depends on the Jordan structure and branch choices and needs separate discussion."
+    ],
+    "examples": [
+      {
+        "problem": "设 $J=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$。用若尔当块上的公式计算 $e^{J}$，并验证 $\\det e^{J}=e^{\\operatorname{tr}J}$。",
+        "solution": "$J=E+N$，其中 $N=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ 满足 $N^{2}=O$。按若尔当块公式（主对角线 $e^{\\lambda}$，上副对角线 $(e^{\\lambda})'=e^{\\lambda}$）：$e^{J}=\\begin{pmatrix}e&e\\\\0&e\\end{pmatrix}=e\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$。\n级数复核：$E$ 与 $N$ 交换，故 $e^{J}=e^{E+N}=e^{E}e^{N}=e(E+N)$，与公式一致；数值上 $e^{J}\\approx\\begin{pmatrix}2.7182818&2.7182818\\\\0&2.7182818\\end{pmatrix}$。\n$\\operatorname{tr}J=2$，$\\det e^{J}=e\\cdot e-0=e^{2}=e^{\\operatorname{tr}J}$，验证成立。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}0&1\\\\-2&-3\\end{pmatrix}$。用对角化方法计算 $e^{A}$，并验证 $\\det e^{A}=e^{\\operatorname{tr}A}$。",
+        "solution": "$f_A(\\lambda)=\\lambda^{2}+3\\lambda+2=(\\lambda+1)(\\lambda+2)$，特征值为 $-1$ 与 $-2$。取 $\\lambda=-1$ 的特征向量 $v_1=(1,-1)^{T}$，$\\lambda=-2$ 的特征向量 $v_2=(1,-2)^{T}$，则 $P=\\begin{pmatrix}1&1\\\\-1&-2\\end{pmatrix}$，$P^{-1}=\\begin{pmatrix}2&1\\\\-1&-1\\end{pmatrix}$。\n于是 $e^{A}=P\\operatorname{diag}(e^{-1},e^{-2})P^{-1}=\\begin{pmatrix}2e^{-1}-e^{-2}&e^{-1}-e^{-2}\\\\-2e^{-1}+2e^{-2}&-e^{-1}+2e^{-2}\\end{pmatrix}$，数值约为 $\\begin{pmatrix}0.6004236&0.2325442\\\\-0.4650883&-0.0972089\\end{pmatrix}$，与直接对 $A$ 做数值矩阵指数一致。\n$\\operatorname{tr}A=-3$，而 $\\det e^{A}=(2e^{-1}-e^{-2})(-e^{-1}+2e^{-2})-(e^{-1}-e^{-2})(-2e^{-1}+2e^{-2})=e^{-3}=e^{\\operatorname{tr}A}$，验证成立。"
+      }
+    ],
+    "links": [
+      "matrix-exponential",
+      "linear-ode-system",
+      "minimal-polynomial",
+      "jordan-form",
+      "matrix-powers-polynomials"
+    ]
+  },
+  {
+    "id": "generalized-inverse",
+    "title": "广义逆矩阵（Moore–Penrose）",
+    "titleEn": "Generalized Inverses (Moore–Penrose)",
+    "branch": "linear",
+    "level": 5,
+    "summary": "对任意矩阵（包括奇异矩阵与矩形矩阵）唯一定义的伪逆，由四条 Penrose 方程刻画；可由 SVD 计算，并给出最小二乘最小范数解。",
+    "summaryEn": "The unique pseudoinverse defined for every matrix, singular or rectangular, characterized by the four Penrose equations; computed via the SVD and yielding the least-squares minimum-norm solution.",
+    "definition": "普通逆矩阵只对可逆方阵存在（要求 $A$ 是方阵且 $|A|\\ne0$）；但应用中大量出现奇异方阵或矩形矩阵（$m\\times n$，$m\\ne n$），它们没有双边逆。**广义逆**的思路是只要求「部分逆」的性质，其中应用最广的是 **Moore–Penrose 广义逆** $A^{+}$：它是满足下述四条 Penrose 方程的 $n\\times m$ 矩阵。四条方程的解**存在且唯一**——奇异、矩形一律适用。\n\n四条方程的几何含义：后两条要求 $AA^{+}$ 与 $A^{+}A$ 都是 **Hermitian 矩阵**，与前面的投影条件合起来，它们实际上是**正交投影**；前两条保证 $A^{+}$ 在 $A$ 的行空间上与真逆的作用相同、在零空间上取零。计算方面最好用奇异值分解：若 $A=U\\Sigma V^{H}$，则 $A^{+}=V\\Sigma^{+}U^{H}$，只需把非零奇异值取倒数并转置形状。若 $A$ 可逆则 $A^{+}=A^{-1}$；满列秩时 $A^{+}=(A^{H}A)^{-1}A^{H}$（左逆）；满行秩时 $A^{+}=A^{H}(AA^{H})^{-1}$（右逆）——两个条件不能互混。\n\n最重要的应用是最小二乘：对任意 $b$，$x^{+}=A^{+}b$ 既是 $\\min\\|Ax-b\\|$ 的解，又是所有极小解中范数最小者；当 $A$ 秩亏、最小二乘解不唯一时这一点尤其关键，它把「解集」收敛为唯一向量。使用时务必注意：$(AB)^{+}$ 一般**不等于** $B^{+}A^{+}$（只有 $A$ 满列秩且 $B$ 满行秩等附加条件下反序律才成立），而 $(A^{+})^{+}=A$、$(A^{H})^{+}=(A^{+})^{H}$ 是无条件成立的。",
+    "definitionEn": "The ordinary inverse exists only for invertible square matrices ($A$ square with $|A|\\ne0$); yet applications abound with singular square matrices or rectangular ones ($m\\times n$, $m\\ne n$), which have no two-sided inverse. The idea of a **generalized inverse** is to require only a partial inverse. The most useful one is the **Moore–Penrose inverse** $A^{+}$: the $n\\times m$ matrix satisfying the four Penrose equations below. Such a matrix **exists and is unique** — singular or rectangular, no matter.\n\nThe four equations have a geometric reading: the last two demand that $AA^{+}$ and $A^{+}A$ be **Hermitian**, which together with the projection-type identities makes them **orthogonal projections**; the first two force $A^{+}$ to act like the true inverse on the row space of $A$ and to kill the null space. Computationally the singular value decomposition is ideal: if $A=U\\Sigma V^{H}$ then $A^{+}=V\\Sigma^{+}U^{H}$ — just invert the nonzero singular values and transpose the shape. If $A$ is invertible, $A^{+}=A^{-1}$; if $A$ has full column rank, $A^{+}=(A^{H}A)^{-1}A^{H}$ (left inverse); if $A$ has full row rank, $A^{+}=A^{H}(AA^{H})^{-1}$ (right inverse) — the two hypotheses must not be mixed up.\n\nThe most important application is least squares: for every $b$, the vector $x^{+}=A^{+}b$ minimizes $\\|Ax-b\\|$ and, among all minimizers, has the smallest norm; this matters especially when $A$ is rank-deficient and least-squares solutions are not unique, since it collapses the solution set into a single vector. Two warnings: $(AB)^{+}$ is generally **not** $B^{+}A^{+}$ (the reverse-order law needs extra hypotheses such as $A$ of full column rank and $B$ of full row rank), whereas $(A^{+})^{+}=A$ and $(A^{H})^{+}=(A^{+})^{H}$ hold unconditionally.",
+    "formulas": [
+      {
+        "latex": "AA^{+}A=A,\\qquad A^{+}AA^{+}=A^{+},\\qquad (AA^{+})^{H}=AA^{+},\\qquad (A^{+}A)^{H}=A^{+}A",
+        "note": "Penrose 四方程：满足它的 A⁺ 对任意矩阵存在且唯一，这是 Moore–Penrose 逆的定义。",
+        "noteEn": "The four Penrose equations; the matrix A⁺ satisfying them exists and is unique for every matrix — this is the definition of the Moore–Penrose inverse."
+      },
+      {
+        "latex": "A=U\\Sigma V^{H}\\ \\Longrightarrow\\ A^{+}=V\\Sigma^{+}U^{H},\\qquad \\Sigma^{+}=\\operatorname{diag}(\\sigma_1^{-1},\\dots,\\sigma_r^{-1},0,\\dots,0)",
+        "note": "由 SVD 计算：只把非零奇异值取倒数，Σ⁺ 的形状与 Σ 互为转置；r = rank(A)。",
+        "noteEn": "Computation via SVD: invert the nonzero singular values only; Σ⁺ has the transpose shape of Σ, and r = rank(A)."
+      },
+      {
+        "latex": "A\\ \\text{满列秩}:\\ A^{+}=(A^{H}A)^{-1}A^{H};\\qquad A\\ \\text{满行秩}:\\ A^{+}=A^{H}(AA^{H})^{-1}",
+        "note": "满秩情形的显式公式：满列秩用 AᴴA（左逆），满行秩用 AAᴴ（右逆），条件不能写反。",
+        "noteEn": "Explicit formulas in the full-rank cases: use AᴴA for full column rank (left inverse) and AAᴴ for full row rank (right inverse); do not swap them."
+      },
+      {
+        "latex": "x^{+}=A^{+}b\\quad\\text{极小化}\\ \\|Ax-b\\|,\\qquad\\text{且在全部极小解中}\\ \\|x\\|\\ \\text{最小}",
+        "note": "最小二乘最小范数解定理：对任意 b、任意矩阵 A 成立（含秩亏情形）；全部最小二乘解为 x⁺ + (E − A⁺A)y。",
+        "noteEn": "Least-squares minimum-norm solution: holds for every b and every A, including rank-deficient ones; all least-squares solutions are x⁺ + (E − A⁺A)y."
+      },
+      {
+        "latex": "(A^{+})^{+}=A,\\qquad (A^{H})^{+}=(A^{+})^{H},\\qquad (AB)^{+}\\ne B^{+}A^{+}\\quad\\text{（一般）}",
+        "note": "常用恒等式；反序律一般不成立，(AB)⁺ = B⁺A⁺ 仅在 A 满列秩且 B 满行秩等附加条件下成立。",
+        "noteEn": "Standard identities; the reverse-order law fails in general — (AB)⁺ = B⁺A⁺ requires extra hypotheses such as A of full column rank and B of full row rank."
+      }
+    ],
+    "properties": [
+      "存在唯一性：任意 m×n 复矩阵 A（奇异、矩形均可）都有唯一的 A⁺ 满足四条 Penrose 方程。",
+      "与普通逆的统一：A 可逆时 A⁺ = A⁻¹；满列秩时 A⁺A = E（左逆）；满行秩时 AA⁺ = E（右逆）；零矩阵的广义逆是相应形状的零矩阵。",
+      "投影解释：AA⁺ 是到列空间 range(A) 的正交投影，A⁺A 是到行空间 range(Aᴴ) 的正交投影，E − AA⁺ 是到 null(Aᴴ) 的正交投影。",
+      "最小二乘：x⁺ = A⁺b 是最小二乘最小范数解；全部最小二乘解为 x⁺ + (E − A⁺A)y（y 任意）；b ∈ range(A) 时 x⁺ 是方程 Ax = b 的精确解且范数最小，A 满列秩时精确解唯一。",
+      "恒等式与反序律：rank A⁺ = rank A、(A⁺)⁺ = A、(Aᴴ)⁺ = (A⁺)ᴴ 恒成立；而 (AB)⁺ ≠ B⁺A⁺ 一般成立不了（需要附加条件）。"
+    ],
+    "propertiesEn": [
+      "Existence and uniqueness: every m×n complex matrix A, singular or rectangular, has a unique A⁺ satisfying the four Penrose equations.",
+      "Unifying special cases: A⁺ = A⁻¹ for invertible A; A⁺A = E for full column rank (left inverse); AA⁺ = E for full row rank (right inverse); the pseudoinverse of a zero matrix is a zero matrix of the transposed shape.",
+      "Projection interpretation: AA⁺ is the orthogonal projection onto range(A), A⁺A the orthogonal projection onto range(Aᴴ), and E − AA⁺ the orthogonal projection onto null(Aᴴ).",
+      "Least squares: x⁺ = A⁺b is the least-squares minimum-norm solution; all least-squares solutions are x⁺ + (E − A⁺A)y for arbitrary y; if b ∈ range(A), then x⁺ is an exact solution of minimal norm, and the exact solution is unique when A has full column rank.",
+      "Identities and reverse-order law: rank A⁺ = rank A, (A⁺)⁺ = A and (Aᴴ)⁺ = (A⁺)ᴴ always hold; by contrast (AB)⁺ ≠ B⁺A⁺ in general (extra hypotheses are needed)."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&2&3\\\\2&4&6\\end{pmatrix}$。求 $A^{+}$，验证四条 Penrose 方程，并求 $b=(1,0)^{T}$ 时的最小二乘最小范数解。",
+        "solution": "$A$ 的两行成比例，$\\operatorname{rank}A=1$，可写成 $A=xy^{T}$，其中 $x=(1,2)^{T}$，$y=(1,2,3)^{T}$。秩 1 矩阵的 Moore–Penrose 逆公式为 $A^{+}=\\dfrac{yx^{T}}{\\|x\\|^{2}\\|y\\|^{2}}$，其中 $\\|x\\|^{2}=5$，$\\|y\\|^{2}=14$，于是 $A^{+}=\\dfrac{1}{70}\\begin{pmatrix}1&2\\\\2&4\\\\3&6\\end{pmatrix}$。\n验证四条件：$AA^{+}=\\dfrac{1}{5}\\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$ 为对称阵，故 $(AA^{+})^{H}=AA^{+}$，且 $AA^{+}A=A$；$A^{+}A=\\dfrac{1}{14}\\begin{pmatrix}1&2&3\\\\2&4&6\\\\3&6&9\\end{pmatrix}$ 为对称阵，故 $(A^{+}A)^{H}=A^{+}A$，且 $A^{+}AA^{+}=A^{+}$。数值复核四式误差均小于 $10^{-15}$。\n最小二乘最小范数解：$x^{+}=A^{+}b=\\dfrac{1}{70}(1,2,3)^{T}$。此时 $Ax^{+}=\\dfrac{1}{5}(1,2)^{T}$ 正是 $b$ 在 $A$ 的列空间（直线 span{(1,2)ᵀ}）上的正交投影，残差 $b-Ax^{+}=\\left(\\dfrac45,-\\dfrac25\\right)^{T}$，$\\|b-Ax^{+}\\|=2/\\sqrt{5}$；在满足 $x_1+2x_2+3x_3=1/5$ 的全部向量中 $x^{+}$ 的范数最小（沿 $y$ 方向、长度为 $1/(5\\|y\\|)$）。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&0\\\\0&2\\\\1&1\\end{pmatrix}$（满列秩）。用 $A^{+}=(A^{H}A)^{-1}A^{H}$ 求 $A^{+}$，并验证 $A^{+}A=E$。",
+        "solution": "$A^{T}A=\\begin{pmatrix}1&0&1\\\\0&2&1\\end{pmatrix}\\begin{pmatrix}1&0\\\\0&2\\\\1&1\\end{pmatrix}=\\begin{pmatrix}2&1\\\\1&5\\end{pmatrix}$，$\\det(A^{T}A)=9$，$(A^{T}A)^{-1}=\\dfrac{1}{9}\\begin{pmatrix}5&-1\\\\-1&2\\end{pmatrix}$。\n$A^{+}=\\dfrac{1}{9}\\begin{pmatrix}5&-1\\\\-1&2\\end{pmatrix}\\begin{pmatrix}1&0&1\\\\0&2&1\\end{pmatrix}=\\dfrac{1}{9}\\begin{pmatrix}5&-2&4\\\\-1&4&1\\end{pmatrix}$。\n验证：$A^{+}A=\\dfrac{1}{9}\\begin{pmatrix}5&-2&4\\\\-1&4&1\\end{pmatrix}\\begin{pmatrix}1&0\\\\0&2\\\\1&1\\end{pmatrix}=\\dfrac{1}{9}\\begin{pmatrix}9&0\\\\0&9\\end{pmatrix}=E$，即左逆成立；$AA^{+}=A(A^{T}A)^{-1}A^{T}$ 为对称幂等阵（到列空间的正交投影），四条 Penrose 方程经数值复核全部成立。"
+      }
+    ],
+    "links": [
+      "matrix-factorization",
+      "least-squares-fitting",
+      "inverse-matrix",
+      "matrix-rank",
+      "matrix-condition"
+    ]
+  },
+  {
+    "id": "eigenvalue-variational",
+    "title": "特征值的变分刻画",
+    "titleEn": "Variational Characterization of Eigenvalues",
+    "branch": "linear",
+    "level": 5,
+    "summary": "用瑞利商的极小极大刻画每一个特征值（Courant–Fischer 定理），并给出特征值对主子阵的交错不等式。",
+    "summaryEn": "Characterizing every eigenvalue as a min-max of the Rayleigh quotient (Courant–Fischer), together with the interlacing inequalities for principal submatrices.",
+    "definition": "设 $A$ 是 $n$ 阶 Hermitian 矩阵，特征值按升序排列 $\\lambda_1\\le\\lambda_2\\le\\cdots\\le\\lambda_n$。对任意非零向量 $x$，称 $R(x)=\\dfrac{x^{H}Ax}{x^{H}x}$ 为 **Rayleigh 商**。Hermitian 性保证 $R(x)$ 取实值，且 $R$ 只与 $x$ 的方向有关（$R(cx)=R(x)$，$c\\ne0$）。把 $x$ 按标准正交特征基展开 $x=\\sum_{i}c_iu_i$ 可见 $R(x)=\\sum_{i}\\lambda_i|c_i|^{2}\\big/\\sum_{i}|c_i|^{2}$，即 $R(x)$ 是特征值以 $|c_i|^{2}$ 为权的加权平均。\n\n由此立刻得到两侧夹逼：$\\lambda_{\\min}\\le R(x)\\le\\lambda_{\\max}$，且等号成立当且仅当 $x$ 是对应端点的特征向量。中间特征值不能用单个向量刻画，但可以用**子空间的极小极大**刻画——这就是 Courant–Fischer 定理：$\\lambda_k$ 等于「在所有 $k$ 维子空间 $S$ 上取 $\\max_{x\\in S}R(x)$，再对 $S$ 取 $\\min$」，也等于其对偶形式「在所有 $n-k+1$ 维子空间 $T$ 上取 $\\min$，再对 $T$ 取 $\\max$」。min 与 max 的先后顺序、子空间的维数方向，都不能写反。\n\n变分刻画把特征值问题变成优化问题：$\\lambda_{\\max}$ 是二次函数在单位球面上的最大值、$\\lambda_{\\min}$ 是最小值，而 $R$ 在单位球面上的驻点恰是特征向量。对主子阵还有**交错定理**：删除一行一列得到的 $n-1$ 阶主子阵 $B$ 的特征值 $\\mu_1\\le\\cdots\\le\\mu_{n-1}$ 被原矩阵特征值逐一夹逼：$\\lambda_k\\le\\mu_k\\le\\lambda_{k+1}$。这些结论是幂法、子空间迭代、Lanczos 等数值方法与特征值扰动分析的理论基础。",
+    "definitionEn": "Let $A$ be an $n\\times n$ Hermitian matrix with eigenvalues in increasing order $\\lambda_1\\le\\lambda_2\\le\\cdots\\le\\lambda_n$. For every nonzero vector $x$, the quantity $R(x)=\\dfrac{x^{H}Ax}{x^{H}x}$ is the **Rayleigh quotient**. Hermitian symmetry makes $R(x)$ real, and it depends only on the direction of $x$ ($R(cx)=R(x)$, $c\\ne0$). Expanding $x=\\sum_ic_iu_i$ in an orthonormal eigenbasis shows $R(x)=\\sum_i\\lambda_i|c_i|^{2}\\big/\\sum_i|c_i|^{2}$, a weighted average of the eigenvalues with weights $|c_i|^{2}$.\n\nTwo-sided bounds follow at once: $\\lambda_{\\min}\\le R(x)\\le\\lambda_{\\max}$, with equality iff $x$ is an eigenvector for the corresponding endpoint. Intermediate eigenvalues cannot be captured by a single vector, but they have a **subspace min-max** characterization — the Courant–Fischer theorem: $\\lambda_k$ equals the minimum over all $k$-dimensional subspaces $S$ of the maximum of $R$ on $S$, and equally the maximum over all $(n-k+1)$-dimensional subspaces $T$ of the minimum of $R$ on $T$. The order of min and max and the dimension of the subspaces must not be swapped.\n\nThis turns eigenvalue problems into optimization problems: $\\lambda_{\\max}$ is the maximum of the quadratic form on the unit sphere, $\\lambda_{\\min}$ the minimum, and the stationary points of $R$ on the unit sphere are exactly the eigenvectors. For principal submatrices there is moreover the **interlacing theorem**: the eigenvalues $\\mu_1\\le\\cdots\\le\\mu_{n-1}$ of the $(n-1)\\times(n-1)$ principal submatrix $B$ obtained by deleting one row and column interlace those of $A$: $\\lambda_k\\le\\mu_k\\le\\lambda_{k+1}$. These facts underlie power iteration, subspace iteration, Lanczos methods, and eigenvalue perturbation theory.",
+    "formulas": [
+      {
+        "latex": "R(x)=\\frac{x^{H}Ax}{x^{H}x}\\quad(x\\ne0),\\qquad A^{H}=A\\ \\Longrightarrow\\ R(x)\\in\\mathbb{R}",
+        "note": "Rayleigh 商的定义；Hermitian 情形取实值，且只依赖 x 的方向。",
+        "noteEn": "Definition of the Rayleigh quotient; it is real-valued for Hermitian A and depends only on the direction of x."
+      },
+      {
+        "latex": "\\lambda_{\\min}=\\min_{x\\ne0}R(x),\\qquad \\lambda_{\\max}=\\max_{x\\ne0}R(x)",
+        "note": "端点刻画：等号成立当且仅当 x 是对应端点的特征向量。",
+        "noteEn": "Endpoint characterization: equality holds iff x is an eigenvector for the corresponding endpoint eigenvalue."
+      },
+      {
+        "latex": "\\lambda_k=\\min_{\\dim S=k}\\ \\max_{0\\ne x\\in S}R(x)=\\max_{\\dim T=n-k+1}\\ \\min_{0\\ne x\\in T}R(x),\\qquad k=1,\\dots,n",
+        "note": "Courant–Fischer 极小极大原理（特征值升序）：min-max 与 max-min 形式等价，子空间维数与 min/max 次序都不能颠倒。",
+        "noteEn": "Courant–Fischer min-max principle (eigenvalues in increasing order): the min-max and max-min forms are equivalent, and neither the subspace dimensions nor the order of min/max may be swapped."
+      },
+      {
+        "latex": "\\lambda_k(A)\\le\\mu_k(B)\\le\\lambda_{k+1}(A),\\qquad k=1,\\dots,n-1",
+        "note": "Cauchy 交错定理：B 为 A 的 n−1 阶主子阵，μ 为其特征值；一般 m 阶主子阵满足 λ_k(A) ≤ μ_k(B) ≤ λ_{k+n−m}(A)。",
+        "noteEn": "Cauchy interlacing: B is an (n−1)×(n−1) principal submatrix with eigenvalues μ; for an m×m principal submatrix, λ_k(A) ≤ μ_k(B) ≤ λ_{k+n−m}(A)."
+      },
+      {
+        "latex": "x=\\sum_{i=1}^{n}c_iu_i\\ \\Longrightarrow\\ R(x)=\\frac{\\sum_{i=1}^{n}\\lambda_i|c_i|^{2}}{\\sum_{i=1}^{n}|c_i|^{2}}",
+        "note": "特征值加权平均表示（u_i 为标准正交特征基）：夹逼性质与驻点性质都由此推出。",
+        "noteEn": "Weighted-average representation using an orthonormal eigenbasis (u_i): both the bounding and stationary-point properties follow from it."
+      }
+    ],
+    "properties": [
+      "齐次性：R(cx) = R(x)（c ≠ 0），故只需在单位球面 ‖x‖ = 1 上考察。",
+      "端点刻画：λmin = min R，λmax = max R；等号成立当且仅当 x 为相应端点的特征向量。",
+      "驻点：Hermitian 情形在约束 ‖x‖ = 1 下，R 的驻点恰为 A 的特征向量，驻值即相应特征值；实对称阵的梯度为 ∇R(x) = 2(Ax − R(x)x)/(xᵀx)。",
+      "Courant–Fischer 与单调性推论：每个 λ_k 都有极小极大刻画；若 A ⪯ B（即 B − A 半正定），则 λ_k(A) ≤ λ_k(B)（Weyl 单调性）。",
+      "交错定理：n−1 阶主子阵的特征值被原矩阵特征值逐一夹逼（λ_k ≤ μ_k ≤ λ_{k+1}）；一般 m 阶主子阵满足 λ_k(A) ≤ μ_k(B) ≤ λ_{k+n−m}(A)。"
+    ],
+    "propertiesEn": [
+      "Homogeneity: R(cx) = R(x) for c ≠ 0, so one may work on the unit sphere ‖x‖ = 1.",
+      "Endpoint characterization: λmin = min R and λmax = max R; equality holds iff x is an eigenvector for the corresponding endpoint.",
+      "Stationary points: for Hermitian A and the constraint ‖x‖ = 1, the stationary points of R are exactly the eigenvectors, the stationary values being the eigenvalues; for real symmetric A, ∇R(x) = 2(Ax − R(x)x)/(xᵀx).",
+      "Courant–Fischer and monotonicity corollaries: every λ_k has a min-max characterization; if A ⪯ B (B − A positive semidefinite), then λ_k(A) ≤ λ_k(B) (Weyl monotonicity).",
+      "Interlacing: eigenvalues of an (n−1)×(n−1) principal submatrix interlace those of A (λ_k ≤ μ_k ≤ λ_{k+1}); for an m×m principal submatrix, λ_k(A) ≤ μ_k(B) ≤ λ_{k+n−m}(A)."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$。直接求特征值，并用 Courant–Fischer 定理验证。",
+        "solution": "$f_A(\\lambda)=\\begin{vmatrix}\\lambda-2&-1\\\\-1&\\lambda-2\\end{vmatrix}=(\\lambda-2)^2-1=(\\lambda-1)(\\lambda-3)$，故 $\\lambda_1=1$，$\\lambda_2=3$。\n变分侧：对单位向量 $x=(\\cos\\theta,\\sin\\theta)^{T}$，$R(x)=x^{T}Ax=2\\cos^{2}\\theta+2\\sin\\theta\\cos\\theta+2\\sin^{2}\\theta=2+\\sin 2\\theta$，其值域为 $[1,3]$：$\\min R=1$，$\\max R=3$，与两个特征值一致。\n按 Courant–Fischer 核对：当 $k=1$，一维子空间是过原点的直线，$R$ 在直线 $\\theta=-\\pi/4$（即 $\\lambda_1=1$ 的特征方向 $(1,-1)^{T}$）上恒等于 1，故 $\\min_{\\dim S=1}\\max_{x\\in S}R(x)=1=\\lambda_1$；当 $k=2$，全平面上 $\\max R=3=\\lambda_2$。对偶（max-min）形式：$\\dim T=2$ 时得 $1$，$\\dim T=1$ 时沿方向 $(1,1)^{T}$ 的直线取最大值 $3$，同样与 $\\lambda_1,\\lambda_2$ 相符。数值抽样复核：$10^{4}$ 个随机单位向量的 $R$ 值全部落在 $[1,3]$ 内，与端点之差小于 $10^{-6}$。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1&0\\\\1&2&1\\\\0&1&2\\end{pmatrix}$，$B$ 为删除 $A$ 的第一行第一列所得的主子阵。验证交错定理。",
+        "solution": "先算 $A$ 的特征多项式：$|\\lambda E-A|=(\\lambda-2)\\big[(\\lambda-2)^2-1\\big]-(\\lambda-2)=(\\lambda-2)\\big[(\\lambda-2)^2-2\\big]$，故 $\\lambda_1=2-\\sqrt{2}\\approx0.5858$，$\\lambda_2=2$，$\\lambda_3=2+\\sqrt{2}\\approx3.4142$。\n$B=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ 的特征值为 $\\mu_1=1$，$\\mu_2=3$。\n交错链 $\\lambda_1\\le\\mu_1\\le\\lambda_2\\le\\mu_2\\le\\lambda_3$ 即 $0.5858\\le1\\le2\\le3\\le3.4142$，逐项成立；用数值特征值程序复核，四个不等式中最小间隔为 $\\lambda_3-\\mu_2\\approx0.4142>0$（另一处 $\\mu_1-\\lambda_1$ 取到同样的值）。"
+      }
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "symmetric-matrix-diagonalization",
+      "quadratic-form-standard",
+      "positive-definite-inertia",
+      "normal-matrices"
+    ]
+  }
+]

@@ -1,0 +1,490 @@
+[
+  {
+    "id": "linear-ode-system",
+    "title": "线性微分方程组",
+    "titleEn": "Linear Systems of Differential Equations",
+    "branch": "ode",
+    "level": 5,
+    "summary": "形如 x' = Ax 的一阶线性方程组（A 为 n×n 常数矩阵），解集是 n 维线性空间，通解由基解矩阵统一表示。",
+    "summaryEn": "First-order linear systems x' = Ax with a constant n×n matrix A; their solutions form an n-dimensional space described by a fundamental matrix.",
+    "definition": "设 $A$ 是 $n \\times n$ 常数矩阵，$x = x(t)$ 是 $n$ 维列向量，方程组\n\n$$x' = A x$$\n\n称为**一阶线性微分方程组**（常系数、齐次）。按分量写开就是：每个未知函数的导数，都是所有未知函数的线性组合。反过来，任意一个 $n$ 阶线性常微分方程，都可以通过引入新变量 $x_1 = y,\\ x_2 = y',\\ \\dots,\\ x_n = y^{(n-1)}$ 化为这种一阶方程组，所以研究它就能统一处理全部线性问题。\n\n若 $x_1(t), \\dots, x_n(t)$ 是 $n$ 个线性无关的解，把它们按列拼成矩阵 $\\Phi(t)$，则 $\\Phi$ 满足\n\n$$\\Phi'(t) = A\\Phi(t), \\qquad \\det \\Phi(t) \\neq 0,$$\n\n称为**基解矩阵**（fundamental matrix）。线性方程组的全部解恰好构成一个 $n$ 维线性空间：只要取定一个基解矩阵，通解就能写成简洁的矩阵形式 $x = \\Phi(t)c$。\n\n**叠加原理**是这一切的根源：若 $x_1, x_2$ 都是解，则它们的任意线性组合仍是解。这与「非零解集是 $n$ 维空间」结合，就给出了通解的完整结构。",
+    "definitionEn": "Let $A$ be a constant $n\\times n$ matrix and $x=x(t)$ an $n$-dimensional column vector. The system\n\n$$x' = Ax$$\n\nis a **first-order linear system of differential equations** with constant coefficients. Componentwise, the derivative of every unknown is a linear combination of all the unknowns. Conversely, any linear ODE of order $n$ becomes such a first-order system by setting $x_1=y,\\ x_2=y',\\ \\dots,\\ x_n=y^{(n-1)}$.\n\nIf $x_1(t),\\dots,x_n(t)$ are linearly independent solutions, the matrix $\\Phi(t)$ with these solutions as columns satisfies\n\n$$\\Phi'(t)=A\\Phi(t),\\qquad \\det\\Phi(t)\\neq 0,$$\n\nand is called a **fundamental matrix**. The solution set is exactly an $n$-dimensional vector space, so the general solution has the compact form $x=\\Phi(t)c$ once one fundamental matrix is known.\n\nThe **superposition principle** is the reason: any linear combination of solutions is again a solution.",
+    "formulas": [
+      {
+        "latex": "x' = Ax,\\qquad A \\in \\mathbb{R}^{n\\times n}",
+        "note": "一阶线性齐次方程组的标准形式：系数矩阵 $A$ 是常数矩阵",
+        "noteEn": "Standard form of a first-order linear homogeneous system; the coefficient matrix $A$ is constant"
+      },
+      {
+        "latex": "\\Phi'(t) = A\\Phi(t), \\qquad \\det \\Phi(t) \\neq 0",
+        "note": "基解矩阵的两个条件：满足矩阵微分方程，且行列式处处不为零",
+        "noteEn": "The two conditions for a fundamental matrix: it solves the matrix ODE and its determinant is nowhere zero"
+      },
+      {
+        "latex": "x(t) = \\Phi(t)\\,c, \\qquad c = (c_1, \\dots, c_n)^{\\mathsf T}",
+        "note": "通解公式：任意常向量 $c$ 给出一个解，反过来每个解都可以这样表示",
+        "noteEn": "General solution: every constant vector $c$ gives a solution, and every solution arises this way"
+      },
+      {
+        "latex": "x = c_1 x_1(t) + c_2 x_2(t) + \\cdots + c_n x_n(t)",
+        "note": "叠加原理：n 个线性无关解的任意线性组合仍是解",
+        "noteEn": "Superposition: any linear combination of $n$ linearly independent solutions is again a solution"
+      },
+      {
+        "latex": "W(t) = \\det \\Phi(t) = W(0)\\, e^{t\\operatorname{tr} A}",
+        "note": "刘维尔公式（$A$ 为常数矩阵时）：Wronski 行列式要么恒为零，要么处处不为零",
+        "noteEn": "Liouville's formula for constant $A$: the Wronskian is either identically zero or nowhere zero"
+      }
+    ],
+    "expression": {
+      "text": "x' = A x，其中 A 为 n×n 常数矩阵，x 为 n 维列向量",
+      "symbol": "x'=Ax",
+      "note": "线性体现在：方程关于未知函数及其导数都是一次的，且不含常数项（齐次）。",
+      "noteEn": "Linearity means the equations are first degree in the unknowns and their derivatives, with no constant terms (homogeneous)."
+    },
+    "properties": [
+      "解集是 $n$ 维线性空间：取定一个基解矩阵 $\\Phi$，一切解恰好是 $x = \\Phi(t)c$，其中 $c$ 任意",
+      "叠加原理：两个解的和、一个解的常数倍仍是解，这是线性性的直接推论",
+      "Wronski 行列式 $W(t)=\\det\\Phi(t)$ 要么处处为零、要么处处不为零，由刘维尔公式 $W(t)=W(0)e^{t\\operatorname{tr}A}$ 保证",
+      "两个基解矩阵只相差一个常数可逆矩阵：若 $\\Phi_1, \\Phi_2$ 都是基解矩阵，则 $\\Phi_2 = \\Phi_1 C$，$C$ 为可逆常数矩阵",
+      "$n$ 阶线性方程 $y^{(n)} + \\cdots = 0$ 总可化为一阶线性方程组（令 $x_k = y^{(k-1)}$），因此本理论覆盖所有线性问题"
+    ],
+    "propertiesEn": [
+      "The solution set is an $n$-dimensional vector space: with one fundamental matrix $\\Phi$, every solution is $x=\\Phi(t)c$ for arbitrary $c$",
+      "Superposition principle: sums of solutions and scalar multiples of solutions are solutions",
+      "The Wronskian $W(t)=\\det\\Phi(t)$ is either identically zero or nowhere zero, guaranteed by Liouville's formula $W(t)=W(0)e^{t\\operatorname{tr}A}$",
+      "Any two fundamental matrices differ by a constant invertible matrix: $\\Phi_2=\\Phi_1 C$",
+      "Every $n$-th order linear ODE can be written as a first-order linear system via $x_k=y^{(k-1)}$"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-y",
+      "fy": "x",
+      "xRange": [-2, 2],
+      "yRange": [-2, 2],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        { "at": [0, 0], "label": "平衡点（中心）" }
+      ],
+      "title": "x' = Ax（A = [[0, -1], [1, 0]]）：轨线是绕原点的圆，中心"
+    },
+    "examples": [
+      {
+        "problem": "求方程组 $x' = \\begin{pmatrix} 1 & 1 \\\\ 0 & 2 \\end{pmatrix} x$ 的基解矩阵与通解。",
+        "solution": "记 $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 2 \\end{pmatrix}$。先求特征值：由 $(1-\\lambda)(2-\\lambda)=0$ 得 $\\lambda_1 = 1$，$\\lambda_2 = 2$。\n\n对 $\\lambda_1 = 1$：解 $(A-I)v = \\begin{pmatrix} 0 & 1 \\\\ 0 & 1 \\end{pmatrix}v = 0$，得特征向量 $v_1 = (1, 0)^{\\mathsf T}$，对应解 $x_1(t) = e^{t}(1, 0)^{\\mathsf T}$。\n\n对 $\\lambda_2 = 2$：解 $(A-2I)v = \\begin{pmatrix} -1 & 1 \\\\ 0 & 0 \\end{pmatrix}v = 0$，得特征向量 $v_2 = (1, 1)^{\\mathsf T}$，对应解 $x_2(t) = e^{2t}(1, 1)^{\\mathsf T}$。\n\n两个解线性无关，以它们为列得到基解矩阵 $\\Phi(t) = \\begin{pmatrix} e^{t} & e^{2t} \\\\ 0 & e^{2t} \\end{pmatrix}$，且 $\\det\\Phi(t) = e^{3t} \\neq 0$。通解为\n$$x(t) = c_1 e^{t}\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} + c_2 e^{2t}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}.$$"
+      },
+      {
+        "problem": "把二阶方程 $y'' + y = 0$ 化为一阶线性方程组，并写出通解。",
+        "solution": "令 $x_1 = y$，$x_2 = y'$，则 $x_1' = x_2$，$x_2' = y'' = -y = -x_1$，即\n$$x' = \\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix} x.$$\n特征值为 $\\pm i$，对应解为三角函数：$x_1 = c_1\\cos t + c_2\\sin t$，$x_2 = x_1' = -c_1\\sin t + c_2\\cos t$。验证：$x_2' = -c_1\\cos t - c_2\\sin t = -x_1$，满足方程。"
+      }
+    ],
+    "tags": ["线性方程组", "基解矩阵", "叠加原理"],
+    "links": ["matrix-exponential", "phase-plane", "linear-ode-theory", "constant-coefficient-homogeneous", "ode-basic-concepts"]
+  },
+  {
+    "id": "matrix-exponential",
+    "title": "矩阵指数与基解矩阵",
+    "titleEn": "Matrix Exponential and Fundamental Matrix",
+    "branch": "ode",
+    "level": 5,
+    "summary": "用 e^{At} = Σ (At)^k / k! 直接给出线性方程组 x' = Ax 的基解矩阵与初值问题的解。",
+    "summaryEn": "The matrix exponential e^{At} = Σ (At)^k/k! is a fundamental matrix and solves the initial value problem x' = Ax, x(0) = x₀.",
+    "definition": "把标量指数函数 $e^{at} = \\sum (at)^k/k!$ 的级数直接搬到矩阵上：对任意 $n \\times n$ 常数矩阵 $A$，定义\n\n$$e^{At} = I + At + \\frac{A^2t^2}{2!} + \\frac{A^3t^3}{3!} + \\cdots = \\sum_{k=0}^{\\infty} \\frac{(At)^k}{k!},$$\n\n称为**矩阵指数**。这个级数对任何矩阵 $A$ 与任何实数 $t$ 都绝对收敛，它把指数函数的大部分好性质都继承了下来，是研究线性方程组 $x' = Ax$ 的核心工具。\n\n对级数逐项求导得 $\\frac{d}{dt}e^{At} = A e^{At} = e^{At}A$，并且 $e^{A \\cdot 0} = I$。因此 $\\Phi(t) = e^{At}$ 同时满足基解矩阵的两个条件（$\\Phi' = A\\Phi$ 且 $\\det \\Phi \\neq 0$），本身就是一个基解矩阵；初值问题 $x' = Ax,\\ x(0) = x_0$ 的解就是\n\n$$x(t) = e^{At}x_0.$$\n\n计算时，若 $A$ 可对角化 $A = PDP^{-1}$（$D$ 为对角阵），则 $e^{At} = Pe^{Dt}P^{-1}$，其中 $e^{Dt}$ 只需把对角元换成 $e^{\\lambda_i t}$；若 $A$ 不能对角化，可借助若尔当标准形或用 $e^{At} = e^{\\lambda t}e^{(A-\\lambda I)t}$ 处理。",
+    "definitionEn": "Copy the scalar series $e^{at}=\\sum (at)^k/k!$ to matrices: for a constant $n\\times n$ matrix $A$,\n\n$$e^{At}=I+At+\\frac{A^2t^2}{2!}+\\frac{A^3t^3}{3!}+\\cdots=\\sum_{k=0}^{\\infty}\\frac{(At)^k}{k!},$$\n\nis the **matrix exponential**. The series converges absolutely for every matrix $A$ and every real $t$. Term-by-term differentiation gives $\\frac{d}{dt}e^{At}=Ae^{At}=e^{At}A$ and $e^{A\\cdot 0}=I$, so $\\Phi(t)=e^{At}$ meets both requirements of a fundamental matrix and the unique solution of $x'=Ax,\\ x(0)=x_0$ is\n\n$$x(t)=e^{At}x_0.$$\n\nIf $A=PDP^{-1}$ is diagonalizable, then $e^{At}=Pe^{Dt}P^{-1}$, with $e^{Dt}$ obtained by taking $e^{\\lambda_i t}$ on the diagonal; otherwise use the Jordan form or the identity $e^{At}=e^{\\lambda t}e^{(A-\\lambda I)t}$.",
+    "formulas": [
+      {
+        "latex": "e^{At} = \\sum_{k=0}^{\\infty} \\frac{(At)^k}{k!} = I + At + \\frac{A^2t^2}{2!} + \\frac{A^3t^3}{3!} + \\cdots",
+        "note": "矩阵指数的定义：把标量指数级数中的数换成矩阵",
+        "noteEn": "Definition: the scalar exponential series with scalars replaced by matrices"
+      },
+      {
+        "latex": "\\frac{d}{dt} e^{At} = A e^{At} = e^{At} A, \\qquad e^{A \\cdot 0} = I",
+        "note": "矩阵指数满足的矩阵微分方程与初始条件（$A$ 与 $e^{At}$ 可交换）",
+        "noteEn": "The matrix ODE and initial condition satisfied by $e^{At}$; $A$ commutes with its exponential"
+      },
+      {
+        "latex": "x(t) = e^{At} x_0",
+        "note": "初值问题 $x' = Ax,\\ x(0) = x_0$ 的解（由存在唯一性，它是唯一解）",
+        "noteEn": "Solution of the initial value problem $x'=Ax,\\ x(0)=x_0$, unique by the existence-uniqueness theorem"
+      },
+      {
+        "latex": "A = PDP^{-1} \\;\\Rightarrow\\; e^{At} = P e^{Dt} P^{-1}",
+        "note": "可对角化时的计算公式：对角阵的指数就是对对角元取指数",
+        "noteEn": "Computation when $A$ is diagonalizable: exponentiate the diagonal entries"
+      },
+      {
+        "latex": "\\det e^{At} = e^{t \\operatorname{tr} A}",
+        "note": "矩阵指数永远可逆，且行列式由迹决定（与刘维尔公式一致）",
+        "noteEn": "The matrix exponential is always invertible; its determinant is governed by the trace (Liouville's formula)"
+      }
+    ],
+    "expression": {
+      "text": "e^{At} = I + At + A²t²/2! + A³t³/3! + … = Σₖ (At)^k / k!",
+      "symbol": "e^{At}",
+      "note": "对任意 n×n 常数矩阵 A 与实数 t 都收敛；它是 x' = Ax 的一个基解矩阵。",
+      "noteEn": "Converges for every constant matrix A and every real t; it is a fundamental matrix for x' = Ax."
+    },
+    "properties": [
+      "初始值与可逆性：$e^{A \\cdot 0} = I$，且对一切 $t$ 有 $(e^{At})^{-1} = e^{-At}$，$\\det e^{At} = e^{t\\operatorname{tr}A} > 0$，矩阵指数总可逆",
+      "求导法则：$\\frac{d}{dt}e^{At} = A e^{At} = e^{At}A$，$A$ 与自己的指数总是可交换的",
+      "$AB = BA$ 时才有 $e^{A+B} = e^{A}e^{B}$；$AB \\neq BA$ 时该式一般不成立，这是与标量指数最大的区别",
+      "可对角化情形：$A = PDP^{-1} \\Rightarrow e^{At} = Pe^{Dt}P^{-1}$；$e^{At}$ 的特征值是 $e^{\\lambda_i t}$，特征向量与 $A$ 相同",
+      "$\\Phi(t) = e^{At}$ 是标准基解矩阵：任意基解矩阵都可写成 $e^{At}C$，初值问题的解为 $x(t) = e^{At}x_0$"
+    ],
+    "propertiesEn": [
+      "Initial value and invertibility: $e^{A\\cdot 0}=I$, $(e^{At})^{-1}=e^{-At}$, and $\\det e^{At}=e^{t\\operatorname{tr}A}>0$",
+      "Differentiation: $\\frac{d}{dt}e^{At}=Ae^{At}=e^{At}A$; $A$ always commutes with its exponential",
+      "$e^{A+B}=e^{A}e^{B}$ holds only when $AB=BA$; in general it fails, unlike the scalar case",
+      "Diagonalizable case: $A=PDP^{-1}$ gives $e^{At}=Pe^{Dt}P^{-1}$; the eigenvalues of $e^{At}$ are $e^{\\lambda_i t}$ with the same eigenvectors",
+      "$\\Phi(t)=e^{At}$ is the standard fundamental matrix; every other one is $e^{At}C$, and $x(t)=e^{At}x_0$ solves the initial value problem"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "2*x - y",
+      "fy": "x + 2*y",
+      "xRange": [-2, 2],
+      "yRange": [-2, 2],
+      "marks": [
+        { "at": [0, 0], "label": "平衡点：不稳定焦点" }
+      ],
+      "title": "A = [[2, -1], [1, 2]]（λ = 2 ± i）：解 x(t) = e^{At}x₀ 沿螺旋线向外发散"
+    },
+    "examples": [
+      {
+        "problem": "求 $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ 的矩阵指数 $e^{At}$，并用它解初值问题 $x' = Ax,\\ x(0) = (1, 2)^{\\mathsf T}$。",
+        "solution": "先算幂：$A^2 = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & 0 \\\\ 0 & 0 \\end{pmatrix} = 0$，所以 $k \\ge 2$ 时 $A^k = 0$（幂零矩阵），级数在第 2 项后自动截断：\n$$e^{At} = I + At = \\begin{pmatrix} 1 & t \\\\ 0 & 1 \\end{pmatrix}.$$\n于是\n$$x(t) = e^{At}\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 + 2t \\\\ 2 \\end{pmatrix}.$$\n验证：$x' = (2, 0)^{\\mathsf T}$，而 $Ax = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 1+2t \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$，且 $x(0) = (1, 2)^{\\mathsf T}$，均满足。"
+      },
+      {
+        "problem": "用对角化方法求 $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 2 \\end{pmatrix}$ 的矩阵指数 $e^{At}$。",
+        "solution": "特征值为 $\\lambda_1 = 1$，$\\lambda_2 = 2$，对应特征向量 $(1, 0)^{\\mathsf T}$ 与 $(1, 1)^{\\mathsf T}$，故\n$$P = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}, \\qquad D = \\begin{pmatrix} 1 & 0 \\\\ 0 & 2 \\end{pmatrix}, \\qquad P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}.$$\n由公式 $e^{At} = Pe^{Dt}P^{-1}$，其中 $e^{Dt} = \\begin{pmatrix} e^{t} & 0 \\\\ 0 & e^{2t} \\end{pmatrix}$，得\n$$e^{At} = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} e^{t} & 0 \\\\ 0 & e^{2t} \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} e^{t} & e^{2t} - e^{t} \\\\ 0 & e^{2t} \\end{pmatrix}.$$\n检验：$t = 0$ 时得单位矩阵；第一列 $e^{t}(1, 0)^{\\mathsf T}$ 与第二列也分别满足 $x' = Ax$。"
+      }
+    ],
+    "tags": ["矩阵指数", "基解矩阵", "初值问题"],
+    "links": ["linear-ode-system", "linear-ode-theory", "constant-coefficient-homogeneous", "stability", "laplace-solve-ode"]
+  },
+  {
+    "id": "phase-plane",
+    "title": "相平面与平衡点",
+    "titleEn": "Phase Plane and Equilibria",
+    "branch": "ode",
+    "level": 5,
+    "summary": "把平面自治系统的解画成相平面上的轨线，用平衡点处系数矩阵的特征值对系统做定性分类。",
+    "summaryEn": "Drawing solution curves of a planar autonomous system in the phase plane and classifying equilibria through eigenvalues.",
+    "definition": "对平面自治系统\n\n$$x' = f(x, y), \\qquad y' = g(x, y),$$\n\n以 $(x, y)$ 为坐标的平面称为**相平面**：每个点处放一个速度向量 $(f, g)$，整个平面成为一个方向场；从初始点出发的解 $(x(t), y(t))$ 描出的曲线称为**轨线**（轨道、相轨线）。轨线的形状与参数化无关，记录的是运动的「路线」而不是「时刻」。\n\n若点 $(x^*, y^*)$ 满足 $f(x^*, y^*) = 0$ 且 $g(x^*, y^*) = 0$，则该处速度为零，常值函数 $(x, y) \\equiv (x^*, y^*)$ 是解，称该点为**平衡点**（奇点）。由解的存在唯一性：轨线要么就是平衡点本身，要么永远不经过平衡点；不同轨线不相交。\n\n对线性系统 $x' = Ax$，平衡点类型完全由 $A$ 的特征值决定，而特征值是特征方程 $\\lambda^2 - (\\operatorname{tr}A)\\lambda + \\det A = 0$ 的根：两个不相等的实根时看符号（同号是结点，异号是鞍点）；共轭复根时看实部（负是稳定焦点、正是不稳定焦点、零是中心）；重根时得到结点。相平面上轨线的整体分布图案称为系统的**相图**，平衡点附近轨线的局部形态就是它的类型。",
+    "definitionEn": "For the planar autonomous system\n\n$$x'=f(x,y),\\qquad y'=g(x,y),$$\n\nthe $(x,y)$-plane is the **phase plane**: at each point sits the velocity vector $(f,g)$, so the plane becomes a direction field, and the curve traced by a solution $(x(t),y(t))$ is a **trajectory** (orbit). It records the route of the motion, not the timing.\n\nA point $(x^*,y^*)$ with $f(x^*,y^*)=0$ and $g(x^*,y^*)=0$ is an **equilibrium** (critical point): the constant functions $x\\equiv x^*$, $y\\equiv y^*$ solve the system. By existence and uniqueness every trajectory either is an equilibrium or never passes through one, and distinct trajectories never cross.\n\nFor a linear system $x'=Ax$ the type of the equilibrium is determined by the eigenvalues of $A$, i.e. the roots of $\\lambda^2-(\\operatorname{tr}A)\\lambda+\\det A=0$: real roots of the same sign give a node, roots of opposite signs a saddle; complex roots give a focus if their real part is nonzero, a center if it is zero; a repeated root gives a node as well. The overall pattern of trajectories near an equilibrium is its **phase portrait**.",
+    "formulas": [
+      {
+        "latex": "x' = f(x, y), \\qquad y' = g(x, y)",
+        "note": "平面自治系统：右端不显含 $t$，方向场不随时间改变",
+        "noteEn": "Planar autonomous system: the right side does not contain $t$, so the direction field is time-independent"
+      },
+      {
+        "latex": "f(x^*, y^*) = 0, \\qquad g(x^*, y^*) = 0",
+        "note": "平衡点（奇点）方程：速度向量为零的点",
+        "noteEn": "Equilibrium equations: points where the velocity vector vanishes"
+      },
+      {
+        "latex": "\\lambda^2 - (\\operatorname{tr} A)\\,\\lambda + \\det A = 0",
+        "note": "线性系统的特征方程，$\\lambda$ 即 $A$ 的特征值",
+        "noteEn": "Characteristic equation of the linear system; its roots are the eigenvalues of $A$"
+      },
+      {
+        "latex": "\\operatorname{tr} A = \\lambda_1 + \\lambda_2, \\qquad \\det A = \\lambda_1 \\lambda_2",
+        "note": "迹与行列式等于特征值之和与积：不用解方程就能判断符号组合",
+        "noteEn": "Trace and determinant equal the sum and product of the eigenvalues: quick sign tests without solving"
+      },
+      {
+        "latex": "\\Delta = (\\operatorname{tr} A)^2 - 4 \\det A",
+        "note": "判别式：$\\Delta>0$ 两实根（结点或鞍点），$\\Delta<0$ 共轭复根（焦点或中心），$\\Delta=0$ 重根（结点）",
+        "noteEn": "Discriminant: $\\Delta>0$ gives two real roots (node or saddle), $\\Delta<0$ complex roots (focus or center), $\\Delta=0$ a repeated root (node)"
+      }
+    ],
+    "expression": {
+      "text": "x' = f(x, y),  y' = g(x, y)；平衡点：f = g = 0",
+      "symbol": "(x', y') = (f, g)",
+      "note": "相平面上每点画一个方向向量，轨线处处与方向场相切。",
+      "noteEn": "Each point of the phase plane carries a direction vector; trajectories are everywhere tangent to the field."
+    },
+    "properties": [
+      "两实根 $\\lambda_1 \\neq \\lambda_2$：同号且都为负得稳定结点，同号且都为正得不稳定结点；异号（$\\det A = \\lambda_1\\lambda_2 < 0$）得鞍点，鞍点一定不稳定",
+      "共轭复根 $\\alpha \\pm \\beta i$（$\\beta \\neq 0$）：$\\alpha < 0$ 是稳定焦点（轨线螺旋卷入），$\\alpha > 0$ 是不稳定焦点（螺旋卷出），$\\alpha = 0$ 是中心（闭轨，稳定但非渐近稳定）",
+      "重根 $\\lambda$：若 $A = \\lambda I$，每个方向都是特征方向，轨线沿直线进出原点，称为真结点；若 $A \\neq \\lambda I$（只有一个特征方向），轨线只沿一个方向相切着趋近或远离，称为退化结点；$\\lambda < 0$ 时都渐近稳定",
+      "轨线不相交：由解的存在唯一性，过每个非平衡点恰有一条轨线；闭轨对应周期解",
+      "迹-行列式速判：$\\det A < 0$ 鞍点；$\\det A > 0$ 且 $\\operatorname{tr}A < 0$ 稳定（结点或焦点）；$\\det A > 0$ 且 $\\operatorname{tr}A > 0$ 不稳定；$\\operatorname{tr}A = 0$ 且 $\\det A > 0$ 为中心"
+    ],
+    "propertiesEn": [
+      "Two distinct real roots: both negative give a stable node, both positive an unstable node; opposite signs ($\\det A<0$) give a saddle, which is always unstable",
+      "Complex roots $\\alpha\\pm\\beta i$ with $\\beta\\neq 0$: $\\alpha<0$ gives a stable focus (spiralling in), $\\alpha>0$ an unstable focus (spiralling out), $\\alpha=0$ a center (closed orbits; stable but not asymptotically stable)",
+      "Repeated root $\\lambda$: if $A=\\lambda I$ every direction is an eigen-direction (proper node, straight-line orbits); if $A\\neq\\lambda I$ there is only one eigen-direction (degenerate node); both are asymptotically stable when $\\lambda<0$",
+      "Trajectories never cross: uniqueness gives exactly one trajectory through each non-equilibrium point; closed orbits correspond to periodic solutions",
+      "Trace-determinant test: $\\det A<0$ saddle; $\\det A>0$ with $\\operatorname{tr}A<0$ stable (node or focus); $\\det A>0$ with $\\operatorname{tr}A>0$ unstable; $\\operatorname{tr}A=0$ with $\\det A>0$ a center"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-x",
+      "fy": "-2*y",
+      "xRange": [-2, 2],
+      "yRange": [-2, 2],
+      "marks": [
+        { "at": [0, 0], "label": "平衡点：稳定结点" }
+      ],
+      "title": "x' = -x, y' = -2y 的相平面：轨线汇入稳定结点"
+    },
+    "examples": [
+      {
+        "problem": "判断系统 $x' = -x,\\ y' = -2y$ 的平衡点 $(0, 0)$ 的类型，并描述轨线的走向。",
+        "solution": "$A = \\begin{pmatrix} -1 & 0 \\\\ 0 & -2 \\end{pmatrix}$，特征值 $\\lambda_1 = -1$，$\\lambda_2 = -2$：两个不相等的负实根，所以 $(0,0)$ 是**稳定结点**。\n解为 $x = c_1 e^{-t}$，$y = c_2 e^{-2t}$。因为 $|\\lambda_2| > |\\lambda_1|$，$y$ 分量衰减得更快：当 $t \\to \\infty$ 时 $y/x \\sim (c_2/c_1)e^{-t} \\to 0$，所以轨线以 $x$ 轴（$\\lambda_1 = -1$ 对应的慢特征方向）为切线方向趋近原点；只有恰好落在坐标轴上的轨线才沿直线进出。"
+      },
+      {
+        "problem": "判断 $x' = x,\\ y' = -y$ 的平衡点类型，并指出稳定与不稳定方向。",
+        "solution": "特征值为 $\\lambda_1 = 1$，$\\lambda_2 = -1$，异号，所以 $(0,0)$ 是**鞍点**，一定不稳定。解为 $x = c_1 e^{t}$，$y = c_2 e^{-t}$。\n沿 $y$ 轴（$c_1 = 0$）的轨线趋于原点，是稳定方向（稳定流形）；沿 $x$ 轴（$c_2 = 0$）的轨线远离原点，是不稳定方向（不稳定流形）。其余轨线先被拉近 $y$ 轴，再沿 $x$ 轴甩出去，形成马鞍形图案——这正是「鞍点」名字的来源。"
+      }
+    ],
+    "tags": ["相平面", "平衡点", "定性分析"],
+    "links": ["linear-ode-system", "stability", "matrix-exponential", "ode-basic-concepts", "jacobian"]
+  },
+  {
+    "id": "stability",
+    "title": "稳定性理论",
+    "titleEn": "Stability Theory",
+    "branch": "ode",
+    "level": 5,
+    "summary": "李雅普诺夫意义下的稳定、渐近稳定与不稳定，以及用线性化（雅可比矩阵特征值）判定非线性系统平衡点的稳定性。",
+    "summaryEn": "Lyapunov stability — stable, asymptotically stable, unstable — and the linearization test via Jacobian eigenvalues.",
+    "definition": "设 $x^*$ 是系统 $x' = f(x)$ 的平衡点（$f(x^*) = 0$）。若对任意 $\\varepsilon > 0$ 都存在 $\\delta > 0$，只要初始点满足 $\\|x(0) - x^*\\| < \\delta$，就有对一切 $t \\ge 0$ 成立 $\\|x(t) - x^*\\| < \\varepsilon$，则称 $x^*$ 是**稳定的**（李雅普诺夫意义）。直观说：初值足够接近时，解永远不跑远——只要求「留在附近」，不要求「跑回来」。\n\n在稳定的基础上，若还存在 $\\delta > 0$，使 $\\|x(0) - x^*\\| < \\delta$ 时有 $x(t) \\to x^*$（$t \\to \\infty$），则称 $x^*$ **渐近稳定**。稳定但不渐近稳定是可能的：中心就是典型——轨线被限制在闭轨上绕圈，永远不靠近原点。若 $x^*$ 连稳定都不是，则称**不稳定**：初值随便偏一点，解也可能离开给定的范围。\n\n对非线性系统，最常用的手段是**线性化**：在平衡点处求雅可比矩阵 $J = Df(x^*)$，看它的特征值。若所有特征值的实部都不为零（这样的平衡点称为**双曲平衡点**），则非线性系统在该点的稳定性类型与线性化系统 $x' = Jx$ 完全相同：实部全为负 $\\Rightarrow$ 渐近稳定；只要有一个实部为正 $\\Rightarrow$ 不稳定。若出现实部为零的特征值（非双曲），线性化不能下结论，需要李雅普诺夫函数等进一步分析。",
+    "definitionEn": "Let $x^*$ be an equilibrium of $x'=f(x)$, i.e. $f(x^*)=0$. It is **stable** in the Lyapunov sense if for every $\\varepsilon>0$ there is $\\delta>0$ such that $\\|x(0)-x^*\\|<\\delta$ implies $\\|x(t)-x^*\\|<\\varepsilon$ for all $t\\ge 0$: solutions that start close enough stay close forever.\n\nIf in addition $x(t)\\to x^*$ as $t\\to\\infty$ whenever $\\|x(0)-x^*\\|<\\delta$, the equilibrium is **asymptotically stable**. Stability without asymptotic stability really occurs: near a center the trajectories are closed orbits that never approach the origin. If the equilibrium is not stable it is **unstable**: however small the perturbation, some solution leaves a given neighborhood.\n\nFor nonlinear systems one usually **linearizes**: compute the Jacobian $J=Df(x^*)$. If every eigenvalue of $J$ has nonzero real part (a **hyperbolic** equilibrium), the nonlinear system has exactly the same stability type as $x'=Jx$: all real parts negative means asymptotically stable; one positive real part means unstable. If some eigenvalue has zero real part (non-hyperbolic), linearization is inconclusive and further tools such as Lyapunov functions are needed.",
+    "formulas": [
+      {
+        "latex": "\\forall \\varepsilon > 0,\\ \\exists \\delta > 0:\\quad \\|x(0) - x^*\\| < \\delta \\;\\Rightarrow\\; \\|x(t) - x^*\\| < \\varepsilon,\\quad \\forall t \\ge 0",
+        "note": "稳定性的 ε–δ 定义：近处出发的解永远不离开给定范围",
+        "noteEn": "The ε–δ definition of stability: solutions starting nearby never leave a prescribed neighborhood"
+      },
+      {
+        "latex": "\\lim_{t \\to \\infty} x(t) = x^*",
+        "note": "渐近稳定 = 稳定 + 收敛：在稳定之上再要求解真的趋向平衡点",
+        "noteEn": "Asymptotic stability = stability plus convergence: solutions not only stay close but tend to the equilibrium"
+      },
+      {
+        "latex": "\\operatorname{Re} \\lambda_i < 0 \\quad (i = 1, \\dots, n)",
+        "note": "线性系统 $x' = Ax$ 零解渐近稳定的充要条件：所有特征值的实部都为负",
+        "noteEn": "Criterion for $x'=Ax$: the origin is asymptotically stable iff every eigenvalue has negative real part"
+      },
+      {
+        "latex": "J = Df(x^*), \\qquad \\operatorname{Re} \\lambda_i(J) \\neq 0 \\ \\ \\forall i",
+        "note": "双曲平衡点：此时非线性系统的稳定性与线性化系统一致；有实部为零的特征值则失效",
+        "noteEn": "Hyperbolic equilibrium: here the nonlinear stability matches the linearization; a zero real part invalidates the test"
+      },
+      {
+        "latex": "A^{\\mathsf T} P + P A = -Q",
+        "note": "李雅普诺夫方程：对任意正定 $Q$ 存在正定解 $P$，则 $x'=Ax$ 渐近稳定；$V(x)=x^{\\mathsf T}Px$ 沿轨线递减",
+        "noteEn": "Lyapunov equation: if some positive definite $P$ solves it for a positive definite $Q$, the system is asymptotically stable; $V(x)=x^{\\mathsf T}Px$ decreases along orbits"
+      }
+    ],
+    "expression": {
+      "text": "x* 稳定：∀ε>0, ∃δ>0, ‖x(0)−x*‖<δ ⇒ ‖x(t)−x*‖<ε (t≥0)",
+      "symbol": "∀ε∃δ: ‖x₀-x*‖<δ ⇒ ‖x(t)-x*‖<ε",
+      "note": "先有稳定，再加收敛才叫渐近稳定；两者不可混为一谈。",
+      "noteEn": "Stability plus convergence gives asymptotic stability; the two notions must not be confused."
+    },
+    "properties": [
+      "稳定 $\\neq$ 渐近稳定：中心（如 $x'=y,\\ y'=-x$）的解保持 $x^2+y^2$ 不变，有界但不趋于原点，是稳定而非渐近稳定的典型例子",
+      "二维线性系统速判：$\\operatorname{tr}A<0$ 且 $\\det A>0$ 时渐近稳定（稳定结点或稳定焦点）；$\\det A<0$ 或 $\\operatorname{tr}A>0$ 时不稳定；$\\operatorname{tr}A=0$ 且 $\\det A>0$ 时是中心，稳定但非渐近稳定",
+      "双曲平衡点（$\\operatorname{Re}\\lambda_i \\neq 0$ 全成立）可以用线性化直接定性：实部全负则渐近稳定，有一个实部为正则不稳定",
+      "非双曲情形（实部为零）线性化失效：可能是中心、也可能是稳定或不稳定的非线性平衡点，必须结合高阶项分析",
+      "李雅普诺夫第二方法：若存在正定函数 $V$ 使 $\\dot V \\le 0$ 沿轨线成立，则平衡点稳定；若除平衡点外 $\\dot V < 0$，则渐近稳定"
+    ],
+    "propertiesEn": [
+      "Stable is not the same as asymptotically stable: near a center (e.g. $x'=y,\\ y'=-x$) solutions keep $x^2+y^2$ constant — bounded but not converging; stable yet not asymptotically stable",
+      "Quick test in the plane: asymptotically stable when $\\operatorname{tr}A<0$ and $\\det A>0$; unstable when $\\det A<0$ or $\\operatorname{tr}A>0$; a center when $\\operatorname{tr}A=0$ and $\\det A>0$",
+      "At a hyperbolic equilibrium (all $\\operatorname{Re}\\lambda_i\\neq 0$) linearization decides the type: all real parts negative means asymptotically stable, one positive real part means unstable",
+      "Non-hyperbolic cases (zero real part) are inconclusive: the nonlinear equilibrium may be a center or stable/unstable; higher-order terms must be examined",
+      "Lyapunov's second method: a positive definite $V$ with $\\dot V\\le 0$ proves stability; with $\\dot V<0$ off the equilibrium, asymptotic stability"
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-x + y",
+      "fy": "-x - y",
+      "xRange": [-2, 2],
+      "yRange": [-2, 2],
+      "contourExpr": "x^2 + y^2",
+      "marks": [
+        { "at": [0, 0], "label": "平衡点：稳定焦点（渐近稳定）" }
+      ],
+      "title": "稳定焦点 x' = -x + y, y' = -x - y：轨线螺旋卷入原点，V = x² + y² 递减"
+    },
+    "examples": [
+      {
+        "problem": "讨论非线性系统 $x' = -x + y^2,\\ y' = -2y$ 的平衡点 $(0,0)$ 的稳定性。",
+        "solution": "先求雅可比矩阵：\n$$J(x,y) = \\begin{pmatrix} -1 & 2y \\\\ 0 & -2 \\end{pmatrix}, \\qquad J(0,0) = \\begin{pmatrix} -1 & 0 \\\\ 0 & -2 \\end{pmatrix}.$$\n特征值为 $-1$ 与 $-2$，实部都为负且都不为零，所以 $(0,0)$ 是双曲平衡点。由线性化定理，原非线性系统在 $(0,0)$ 处**渐近稳定**（类型与线性化一致：稳定结点）。注意这个结论是局部的——只保证初始点充分接近原点时解收敛。"
+      },
+      {
+        "problem": "系统 $x' = y,\\ y' = -x$ 的零解稳定吗？渐近稳定吗？",
+        "solution": "这是线性系统，$A = \\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$，特征值 $\\lambda = \\pm i$，实部为零，线性化不能直接给出结论，需要直接分析。\n沿轨线计算\n$$\\frac{d}{dt}(x^2 + y^2) = 2x x' + 2y y' = 2xy - 2xy = 0,$$\n所以 $x^2 + y^2 \\equiv$ 常数，轨线是以原点为中心的圆。初值在半径为 $\\delta$ 的圆内时，解永远落在该圆上：取 $\\delta = \\varepsilon$ 即知零解**稳定**。但解沿圆周运动，永远不趋近原点，所以**不是渐近稳定**。这说明中心是稳定的平衡点，却不是渐近稳定的——两个概念必须分清。"
+      }
+    ],
+    "tags": ["稳定性", "李雅普诺夫", "线性化"],
+    "links": ["phase-plane", "linear-ode-system", "jacobian", "matrix-exponential", "ode-basic-concepts"]
+  },
+  {
+    "id": "ode-power-series",
+    "title": "幂级数解法",
+    "titleEn": "Power Series Solutions of Differential Equations",
+    "branch": "ode",
+    "level": 5,
+    "summary": "在常点处把解写成幂级数 y = Σ aₙ(x−x₀)ⁿ，代入方程比较系数得到递推关系，逐项求出解。",
+    "summaryEn": "Writing the solution as a power series about an ordinary point and deriving a recurrence relation for the coefficients.",
+    "definition": "对二阶线性方程\n\n$$y'' + p(x)y' + q(x)y = 0,$$\n\n若 $p$、$q$ 在 $x_0$ 处都解析（可以在 $x_0$ 附近展成幂级数），就称 $x_0$ 是方程的**常点**。在常点附近，解可以写成幂级数\n\n$$y = \\sum_{n=0}^{\\infty} a_n (x - x_0)^n.$$\n\n把它代回方程，通过合并求和、移动指标，让两边都变成 $(x-x_0)^n$ 的形式，再比较同次幂的系数，就得到系数之间的**递推关系**。\n\n初值 $y(x_0) = a_0$、$y'(x_0) = a_1$ 直接给出前两个系数，递推关系则决定其余全部系数：由此得到两个线性无关的级数解，通解是它们的线性组合。求解中最常用的技巧，就是「把每一项都整理成同一个幂次为通项的形式，再令系数相等」。\n\n级数解在 $|x - x_0| < R$ 内收敛，其中 $R$ 至少等于从 $x_0$ 到 $p$、$q$ 的最近奇点的距离；若 $p$、$q$ 是整函数（如 Airy 方程 $y'' = xy$），解在全实轴上收敛。Bessel 方程、Legendre 方程这类不能用初等函数表示解的经典方程，正是靠幂级数（或广义幂级数）给出解的。",
+    "definitionEn": "Consider a second-order linear equation\n\n$$y''+p(x)y'+q(x)y=0.$$\n\nIf $p$ and $q$ are analytic at $x_0$ (expandable in powers of $x-x_0$), then $x_0$ is an **ordinary point**. Near it we seek a power series solution\n\n$$y=\\sum_{n=0}^{\\infty}a_n(x-x_0)^n.$$\n\nSubstituting into the equation, shifting indices so that both sides are written as powers of $(x-x_0)$, and matching coefficients of equal powers yields a **recurrence relation** for the coefficients.\n\nThe initial data $y(x_0)=a_0$, $y'(x_0)=a_1$ fix the first two coefficients; the recurrence determines all the rest, producing two linearly independent series solutions whose linear combinations give the general solution.\n\nThe series converges for $|x-x_0|<R$, where $R$ is at least the distance from $x_0$ to the nearest singularity of $p$, $q$; if $p$, $q$ are entire (as for the Airy equation $y''=xy$), the solutions converge on the whole real line. Classical equations such as Bessel's and Legendre's, whose solutions are not elementary functions, are solved exactly in this way.",
+    "formulas": [
+      {
+        "latex": "y = \\sum_{n=0}^{\\infty} a_n (x - x_0)^n",
+        "note": "常点 $x_0$ 处解的标准幂级数假设，$a_0 = y(x_0)$",
+        "noteEn": "The power-series ansatz at an ordinary point; $a_0=y(x_0)$"
+      },
+      {
+        "latex": "y' = \\sum_{n=1}^{\\infty} n a_n (x - x_0)^{n-1}, \\qquad y'' = \\sum_{n=2}^{\\infty} n(n-1) a_n (x - x_0)^{n-2}",
+        "note": "逐项求导：幂级数在收敛区间内部可以任意次求导",
+        "noteEn": "Term-by-term differentiation: a power series may be differentiated as often as needed inside its interval of convergence"
+      },
+      {
+        "latex": "(n+2)(n+1)\\,a_{n+2} = a_{n-1} \\quad (n \\ge 1), \\qquad a_2 = 0",
+        "note": "Airy 方程 $y'' = xy$ 的递推关系：代入并比较 $x^n$ 的系数得到",
+        "noteEn": "Recurrence for the Airy equation $y''=xy$, obtained by comparing coefficients of $x^n$"
+      },
+      {
+        "latex": "y = a_0\\left(1 + \\frac{x^3}{6} + \\frac{x^6}{180} + \\cdots\\right) + a_1\\left(x + \\frac{x^4}{12} + \\frac{x^7}{504} + \\cdots\\right)",
+        "note": "Airy 方程的两个线性无关幂级数解，$a_0$、$a_1$ 由初值决定",
+        "noteEn": "Two independent series solutions of the Airy equation; $a_0$, $a_1$ come from the initial data"
+      },
+      {
+        "latex": "a_0 = y(x_0), \\qquad a_1 = y'(x_0)",
+        "note": "初值与系数的关系：解的前两项直接由初值给出",
+        "noteEn": "Initial data as coefficients: the first two coefficients are exactly the initial values"
+      }
+    ],
+    "expression": {
+      "text": "y = Σₙ₌₀^∞ aₙ (x − x₀)ⁿ",
+      "symbol": "y=Σaₙ(x-x₀)ⁿ",
+      "note": "在常点附近假设解为幂级数，代入方程后逐项比较系数求递推关系。",
+      "noteEn": "Assume a power series near an ordinary point, substitute, and match coefficients to get a recurrence."
+    },
+    "properties": [
+      "常点处一定有幂级数解：$p$、$q$ 在 $x_0$ 解析时，方程有两个线性无关的幂级数解，收敛半径至少是 $x_0$ 到最近奇点的距离",
+      "递推关系逐项确定系数：由 $a_0$、$a_1$ 出发，每一步都由前面的系数唯一确定后一个系数",
+      "初值由前两个系数给出：$a_0 = y(x_0)$，$a_1 = y'(x_0)$，与二阶方程初值问题的存在唯一性吻合",
+      "多项式系数方程必可用此法：如 Airy 方程 $y'' = xy$（$p = 0$，$q = -x$ 处处解析），解在全实轴上收敛；Bessel、Legendre 方程也这样处理",
+      "奇点处需用广义幂级数（Frobenius 方法）：当 $x_0$ 是正则奇点时，改设 $y = x^r\\sum a_n x^n$，解可能含 $\\ln x$ 项"
+    ],
+    "propertiesEn": [
+      "Power series solutions always exist at an ordinary point: if $p$, $q$ are analytic at $x_0$, there are two independent series solutions with radius at least the distance to the nearest singularity",
+      "The recurrence fixes the coefficients one by one, starting from $a_0$ and $a_1$",
+      "Initial values become the first coefficients: $a_0=y(x_0)$, $a_1=y'(x_0)$, in line with the uniqueness theorem for the IVP",
+      "Equations with polynomial coefficients are always accessible: for $y''=xy$ (Airy) the solutions converge everywhere; Bessel and Legendre equations are handled in the same way",
+      "At singular points one uses generalized series (Frobenius): set $y=x^r\\sum a_nx^n$; logarithmic terms may appear"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1 + x^3/6 + x^6/180 + x^9/12960 + x^12/1710720 + x^15/359251200 + x^18/109930867200", "color": "#4cc9f0", "label": "y₁：y(0)=1, y′(0)=0（截断到 x¹⁸）" },
+        { "expr": "x + x^4/12 + x^7/504 + x^10/45360 + x^13/7076160 + x^16/1698278400", "color": "#ff6b9d", "label": "y₂：y(0)=0, y′(0)=1（截断到 x¹⁶）" }
+      ],
+      "xRange": [-3, 2.6],
+      "yRange": [-2, 9],
+      "title": "Airy 方程 y″ = xy 的两个幂级数解（截断近似）"
+    },
+    "examples": [
+      {
+        "problem": "用幂级数法求 Airy 方程 $y'' = xy$ 满足 $y(0) = 1$、$y'(0) = 0$ 的解的前几个非零项。",
+        "solution": "设 $y = \\sum_{n=0}^{\\infty} a_n x^n$，则 $y'' = \\sum_{n=2}^{\\infty} n(n-1)a_n x^{n-2}$，$xy = \\sum_{n=0}^{\\infty} a_n x^{n+1}$。把两边都写成 $x^m$ 的幂：\n$$\\sum_{m=0}^{\\infty} (m+2)(m+1)a_{m+2}x^m = \\sum_{m=1}^{\\infty} a_{m-1}x^m.$$\n比较系数：$m = 0$ 时 $2a_2 = 0$，即 $a_2 = 0$；$m \\ge 1$ 时 $(m+2)(m+1)a_{m+2} = a_{m-1}$。由 $a_0 = y(0) = 1$、$a_1 = y'(0) = 0$：\n$a_2 = 0$，$a_3 = a_0/6 = 1/6$，$a_4 = a_1/12 = 0$，$a_5 = a_2/20 = 0$，$a_6 = a_3/30 = 1/180$，$a_7 = a_4/42 = 0$，$a_8 = a_5/56 = 0$，$a_9 = a_6/72 = 1/12960$，……\n所以\n$$y = 1 + \\frac{x^3}{6} + \\frac{x^6}{180} + \\frac{x^9}{12960} + \\cdots$$（系数每三项出现一个非零值）。"
+      },
+      {
+        "problem": "用幂级数法解初值问题 $y' = y,\\ y(0) = 1$，并把结果求和。",
+        "solution": "设 $y = \\sum_{n=0}^{\\infty} a_n x^n$，则 $y' = \\sum_{n=1}^{\\infty} n a_n x^{n-1}$。两边都写成 $x^m$ 的幂：\n$$\\sum_{m=0}^{\\infty} (m+1)a_{m+1}x^m = \\sum_{m=0}^{\\infty} a_m x^m,$$\n比较系数得 $(m+1)a_{m+1} = a_m$，即递推关系 $a_{m+1} = \\dfrac{a_m}{m+1}$。由 $a_0 = y(0) = 1$：\n$$a_1 = 1, \\quad a_2 = \\frac{1}{2}, \\quad a_3 = \\frac{1}{6}, \\quad \\dots, \\quad a_n = \\frac{1}{n!}.$$\n于是 $y = \\sum_{n=0}^{\\infty} \\dfrac{x^n}{n!} = e^x$——幂级数解法把解直接「算」成了指数函数，也验证了 $y = e^x$ 的泰勒级数就是解法得到的解。"
+      }
+    ],
+    "tags": ["幂级数", "级数解", "递推关系"],
+    "links": ["power-series", "taylor-series", "linear-ode-theory", "ode-basic-concepts", "series-convergence-tests"]
+  },
+  {
+    "id": "ode-existence-uniqueness",
+    "title": "解的存在唯一性定理",
+    "titleEn": "Existence and Uniqueness Theorem",
+    "branch": "ode",
+    "level": 5,
+    "summary": "皮卡-林德勒夫定理：f 连续且关于 y 满足李普希茨条件时，初值问题在某个区间内存在唯一解，可由皮卡迭代逐步逼近。",
+    "summaryEn": "The Picard–Lindelöf theorem: continuity plus a Lipschitz condition in y guarantee a unique local solution, constructed by Picard iteration.",
+    "definition": "考虑一阶初值问题\n\n$$y' = f(x, y), \\qquad y(x_0) = y_0.$$\n\n**皮卡-林德勒夫定理**（存在唯一性定理）说：若 $f(x,y)$ 在矩形区域 $R = \\{(x,y): |x - x_0| \\le a,\\ |y - y_0| \\le b\\}$ 上连续，且关于 $y$ 满足**李普希茨条件**——存在常数 $L > 0$，使 $R$ 内任意两点都有\n\n$$|f(x, y_1) - f(x, y_2)| \\le L|y_1 - y_2|,$$\n\n那么存在 $h > 0$，使初值问题在区间 $|x - x_0| \\le h$ 上有且仅有一个解。\n\n「唯一」和「局部」是理解定理的关键。唯一性保证相平面上过每一点至多有一条积分曲线，这正是轨线不相交、相图能整体绘制的前提；局部性说明解未必能延伸到很远处——例如 $y' = y^2,\\ y(0) = 1$ 的解 $y = 1/(1-x)$ 在 $x = 1$ 处爆破，只能存在于 $(-\\infty, 1)$ 上。\n\n定理的证明是构造性的：把微分方程等价地改写成积分方程 $y(x) = y_0 + \\int_{x_0}^{x} f(t, y(t))\\,dt$，再从常函数 $y_0(x) \\equiv y_0$ 出发做**皮卡迭代**\n\n$$y_{n+1}(x) = y_0 + \\int_{x_0}^{x} f(t, y_n(t))\\,dt.$$\n\n可以证明这个函数列在 $|x - x_0| \\le h$ 上一致收敛，极限函数就是那个唯一解。\n\n实践中验证李普希茨条件常用一个更强的充分条件：若 $\\partial f/\\partial y$ 在 $R$ 上连续，则由中值定理 $f$ 自动满足李普希茨条件。条件失效时唯一性可能真的瓦解：$y' = \\sqrt{|y|},\\ y(0) = 0$ 在 $y = 0$ 处不满足此条件，过原点的解确实不止一个。",
+    "definitionEn": "Consider the initial value problem\n\n$$y'=f(x,y),\\qquad y(x_0)=y_0.$$\n\nThe **Picard–Lindelöf theorem** states: if $f(x,y)$ is continuous on the rectangle $R=\\{|x-x_0|\\le a,\\ |y-y_0|\\le b\\}$ and satisfies a **Lipschitz condition** in $y$ — there is $L>0$ with\n\n$$|f(x,y_1)-f(x,y_2)|\\le L|y_1-y_2|$$\n\nfor all points of $R$ — then there is $h>0$ such that the problem has exactly one solution on $|x-x_0|\\le h$.\n\nBoth words matter. Uniqueness means at most one integral curve passes through each point of the phase plane, which is what allows trajectories never to cross and phase portraits to be drawn. Localness means the solution need not extend far: $y'=y^2,\\ y(0)=1$ has the solution $y=1/(1-x)$, which blows up at $x=1$ and lives only on $(-\\infty,1)$.\n\nThe proof is constructive: rewrite the ODE as the integral equation $y(x)=y_0+\\int_{x_0}^{x}f(t,y(t))\\,dt$ and run **Picard iteration**\n\n$$y_{n+1}(x)=y_0+\\int_{x_0}^{x}f(t,y_n(t))\\,dt$$\n\nfrom $y_0(x)\\equiv y_0$. The sequence converges uniformly on $|x-x_0|\\le h$ and its limit is the unique solution.\n\nIn practice the Lipschitz condition is verified through a stronger sufficient condition: if $\\partial f/\\partial y$ is continuous on $R$, the mean value theorem makes $f$ Lipschitz. When the hypothesis fails uniqueness can genuinely break down: for $y'=\\sqrt{|y|},\\ y(0)=0$ the function is not Lipschitz at $y=0$, and indeed more than one solution passes through the origin.",
+    "formulas": [
+      {
+        "latex": "y' = f(x,y), \\qquad y(x_0) = y_0",
+        "note": "一阶初值问题：定理讨论的标准对象",
+        "noteEn": "The first-order initial value problem studied by the theorem"
+      },
+      {
+        "latex": "|f(x, y_1) - f(x, y_2)| \\le L\\,|y_1 - y_2|",
+        "note": "关于 $y$ 的李普希茨条件：保证方程不会对相邻初值过度「敏感」",
+        "noteEn": "Lipschitz condition in $y$: it prevents extreme sensitivity to nearby initial data"
+      },
+      {
+        "latex": "y_{n+1}(x) = y_0 + \\int_{x_0}^{x} f(t, y_n(t))\\,dt, \\qquad y_0(x) \\equiv y_0",
+        "note": "皮卡迭代序列：从常函数出发反复积分，一致收敛到唯一解",
+        "noteEn": "Picard iterates: repeated integration starting from the constant function; they converge uniformly to the unique solution"
+      },
+      {
+        "latex": "y(x) = y_0 + \\int_{x_0}^{x} f(t, y(t))\\,dt",
+        "note": "等价的积分方程：初值问题有解等价于它有连续解，这是迭代的出发点",
+        "noteEn": "The equivalent integral equation; the IVP is solvable exactly when this integral equation has a continuous solution"
+      },
+      {
+        "latex": "h = \\min\\left\\{ a, \\frac{b}{M} \\right\\}, \\qquad M = \\max_{(x,y)\\in R} |f(x,y)|",
+        "note": "存在区间的估计：解至少能在 $|x - x_0| \\le h$ 上存活",
+        "noteEn": "Estimate of the existence interval: the solution exists at least on $|x-x_0|\\le h$"
+      }
+    ],
+    "expression": {
+      "text": "y' = f(x, y), y(x₀) = y₀；f 连续 + 关于 y 李普希茨 ⇒ 局部存在唯一解",
+      "symbol": "y_{n+1} = y₀ + ∫_{x₀}^{x} f(t, yₙ(t)) dt",
+      "note": "皮卡迭代从常函数 y₀ 出发，逐次积分逼近唯一解。",
+      "noteEn": "Picard iteration starts from the constant y₀ and approaches the unique solution by repeated integration."
+    },
+    "properties": [
+      "两个条件各司其职：f 连续保证「存在」，关于 y 的李普希茨条件保证「唯一」；最常用的验证方式是 $\\partial f/\\partial y$ 连续",
+      "唯一性有两个重要推论：过每点至多一条积分曲线，轨线互不相交，相图才能成为「不交叉的曲线族」",
+      "定理是局部的：只保证在小矩形对应的区间上存在；解可能在有限处爆破，如 $y' = y^2,\\ y(0)=1$ 的解在 $x=1$ 处发散",
+      "皮卡迭代是构造性的：迭代序列 $y_n$ 一致收敛到解，同时给出逐次逼近的计算方法",
+      "定理可推广到方程组与高阶方程：写成一阶向量形式 $x' = f(t, x)$ 后结论不变；对线性系统 $x' = Ax$（$f$ 关于 $x$ 全局李普希茨），解在整条实轴上存在唯一"
+    ],
+    "propertiesEn": [
+      "The two hypotheses play different roles: continuity gives existence, the Lipschitz condition gives uniqueness; a convenient sufficient test is that $\\partial f/\\partial y$ is continuous",
+      "Uniqueness implies that at most one integral curve passes through each point, so trajectories never cross and the phase portrait is well defined",
+      "The theorem is local: the solution is guaranteed only on a small interval and may blow up, as $y'=y^2,\\ y(0)=1$ does at $x=1$",
+      "Picard iteration is constructive: the iterates converge uniformly to the solution and provide successive approximations",
+      "It extends to systems and higher-order equations via the vector form $x'=f(t,x)$; for linear systems $x'=Ax$ ($f$ is globally Lipschitz) solutions exist and are unique on the whole real line"
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "x + y",
+      "xRange": [-3, 3],
+      "yRange": [-3, 3],
+      "initial": [
+        { "x": 0, "y": 1, "color": "#ff6b9d", "label": "y(0) = 1" },
+        { "x": 0, "y": -1, "color": "#4cc9f0", "label": "y(0) = -1" },
+        { "x": -2, "y": 2, "color": "#ffd166", "label": "y(-2) = 2" }
+      ],
+      "title": "y' = x + y 的斜率场：过每一点的解曲线唯一，不同解曲线不相交"
+    },
+    "examples": [
+      {
+        "problem": "对初值问题 $y' = x + y^2,\\ y(0) = 1$，说明它在原点附近存在唯一解。",
+        "solution": "取包含 $(0,1)$ 的任意有界矩形 $R$。$f(x,y) = x + y^2$ 在 $R$ 上连续；并且\n$$\\frac{\\partial f}{\\partial y} = 2y$$\n在 $R$ 上连续，于是有界，设 $|2y| \\le L$。由中值定理，对 $R$ 内任意 $y_1, y_2$，\n$$|f(x,y_1) - f(x,y_2)| = |y_1^2 - y_2^2| = |y_1 + y_2|\\,|y_1 - y_2| \\le L|y_1 - y_2|,$$\n即 $f$ 关于 $y$ 满足李普希茨条件。由存在唯一性定理，该初值问题在 $x = 0$ 附近的一段区间上存在且唯一解。"
+      },
+      {
+        "problem": "说明 $y' = \\sqrt{|y|},\\ y(0) = 0$ 为什么会有多个解，并指出与定理中哪条假设有关。",
+        "solution": "函数 $f(y) = \\sqrt{|y|}$ 连续，但在 $y = 0$ 处不满足李普希茨条件：考察比值\n$$\\frac{|f(y) - f(0)|}{|y - 0|} = \\frac{\\sqrt{|y|}}{|y|} = \\frac{1}{\\sqrt{|y|}} \\to \\infty \\quad (y \\to 0),$$\n不存在使不等式对 $y = 0$ 附近所有点成立的常数 $L$。结果唯一性确实失效：$y \\equiv 0$ 是一个解；而 $y = x^2/4$（$x \\ge 0$）也是解，因为此时 $y' = x/2$，而 $\\sqrt{|y|} = \\sqrt{x^2/4} = x/2$，两者相等。把 $0$ 解与 $x^2/4$ 解在 $x = 0$ 处拼接，还能构造出无穷多个过原点的解。这条反例说明：定理中的李普希茨条件是保证唯一性的关键假设，不能省略。"
+      }
+    ],
+    "tags": ["存在唯一性", "皮卡迭代", "李普希茨条件"],
+    "links": ["ode-basic-concepts", "separable-ode", "first-order-linear-ode", "linear-ode-theory", "phase-plane"]
+  }
+]

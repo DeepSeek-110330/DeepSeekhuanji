@@ -1,0 +1,130 @@
+[
+  {
+    "id": "subspace-sum-direct",
+    "title": "子空间的和、交与直和",
+    "titleEn": "Sums, Intersections and Direct Sums of Subspaces",
+    "branch": "linear",
+    "level": 5,
+    "summary": "子空间可以求交、求和，维数公式把二者联系起来；当交只有零向量时和升级为直和，每个向量的分解唯一。",
+    "summaryEn": "Subspaces can be intersected and added, with their dimensions linked by the dimension formula; when the intersection is trivial the sum becomes direct and decompositions are unique.",
+    "definition": "设 $V_1,V_2$ 是线性空间 $V$ 的子空间。它们的**交** $V_1\\cap V_2$ 仍是子空间，而且必含零向量；但**并** $V_1\\cup V_2$ 一般不是子空间——在 $\\mathbb{R}^2$ 中，$x$ 轴与 $y$ 轴的并集里有 $(1,0)$ 也有 $(0,1)$，它们的和 $(1,1)$ 却不在其中。真正好用的一般构造是**和**：把两个子空间的向量各取一个相加，得到所有\n\n$$V_1+V_2=\\{\\boldsymbol{\\alpha}_1+\\boldsymbol{\\alpha}_2\\mid \\boldsymbol{\\alpha}_1\\in V_1,\\ \\boldsymbol{\\alpha}_2\\in V_2\\},$$\n\n它也是子空间，并且是**包含 $V_1\\cup V_2$ 的最小子空间**：任何同时包含 $V_1$、$V_2$ 的子空间都必须包含所有这些和。\n\n和与交由**维数公式**联系起来：$\\dim(V_1+V_2)=\\dim V_1+\\dim V_2-\\dim(V_1\\cap V_2)$，形式上就像容斥原理，两个子空间「重叠」的部分正是它们的交。当 $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$ 时，和称为**直和**，记作 $V_1\\oplus V_2$：此时维数恰好相加，且 $V_1+V_2$ 中每个向量的分解都唯一；反过来，只要零向量的分解唯一，就必有 $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$。\n\n最容易踩的坑是把两条子空间的结论套到三个以上。对 $s\\ge 3$ 个子空间，「两两交为零」**不蕴含**直和，正确条件是**每个子空间与其余子空间之和只交于零向量**：$V_i\\cap\\sum_{j\\ne i}V_j=\\{\\boldsymbol{0}\\}$。最小反例在 $\\mathbb{R}^2$ 里：取三条过原点的不同直线 $V_1,V_2,V_3$，两两交都是 $\\{\\boldsymbol{0}\\}$，但 $V_3\\subseteq V_1+V_2=\\mathbb{R}^2$，三者之和的维数只有 2，而不是 $1+1+1=3$；零向量也有非平凡分解：$(1,0)+(0,1)+(-1,-1)=\\boldsymbol{0}$。\n\n直和不是玩抽象：方阵 $A$ 可对角化，当且仅当全空间分解为特征子空间的直和 $V=E_{\\lambda_1}\\oplus\\cdots\\oplus E_{\\lambda_s}$；而当 $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$ 时，把 $V_1$ 与 $V_2$ 的基拼起来就得到 $V_1+V_2$ 的基，这是「补空间」与投影分解的起点。",
+    "definitionEn": "Let $V_1$ and $V_2$ be subspaces of a linear space $V$. Their **intersection** $V_1\\cap V_2$ is again a subspace and always contains the zero vector, whereas their **union** is in general *not* a subspace — in $\\mathbb{R}^2$ the union of the $x$-axis and the $y$-axis contains both $(1,0)$ and $(0,1)$ but not their sum $(1,1)$. The genuinely useful construction is the **sum**: take one vector from each subspace and add them, collecting every outcome,\n\n$$V_1+V_2=\\{\\boldsymbol{\\alpha}_1+\\boldsymbol{\\alpha}_2\\mid \\boldsymbol{\\alpha}_1\\in V_1,\\ \\boldsymbol{\\alpha}_2\\in V_2\\},$$\n\nwhich is again a subspace, and precisely the **smallest subspace containing $V_1\\cup V_2$**: any subspace containing both $V_1$ and $V_2$ must contain all such sums.\n\nSum and intersection are tied together by the **dimension formula** $\\dim(V_1+V_2)=\\dim V_1+\\dim V_2-\\dim(V_1\\cap V_2)$, an inclusion–exclusion identity in which the overlap of the two subspaces is exactly the intersection. When $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$ the sum is called **direct**, written $V_1\\oplus V_2$: the dimensions simply add up, and every vector of $V_1+V_2$ has a unique decomposition. Conversely, uniqueness of decompositions — even just for the zero vector — forces $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$.\n\nThe classical trap is extrapolating these two-subspace facts to three or more. For $s\\ge 3$ subspaces, pairwise trivial intersections do **not** imply a direct sum; the correct requirement is that **each subspace meets the sum of all the others trivially**: $V_i\\cap\\sum_{j\\ne i}V_j=\\{\\boldsymbol{0}\\}$. The smallest counterexample lies in $\\mathbb{R}^2$: take three distinct lines $V_1,V_2,V_3$ through the origin. Every pairwise intersection is $\\{\\boldsymbol{0}\\}$, yet $V_3\\subseteq V_1+V_2=\\mathbb{R}^2$, so the sum of the three has dimension $2$ instead of $1+1+1=3$; moreover the zero vector has a nontrivial decomposition such as $(1,0)+(0,1)+(-1,-1)=\\boldsymbol{0}$.\n\nDirect sums are no idle abstraction: a square matrix $A$ is diagonalizable exactly when the whole space decomposes into the direct sum of its eigenspaces, $V=E_{\\lambda_1}\\oplus\\cdots\\oplus E_{\\lambda_s}$; and when $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$, concatenating bases of $V_1$ and $V_2$ yields a basis of $V_1+V_2$ — the starting point for complementary subspaces and projections.",
+    "formulas": [
+      {
+        "latex": "V_1+V_2=\\{\\boldsymbol{\\alpha}_1+\\boldsymbol{\\alpha}_2\\mid \\boldsymbol{\\alpha}_1\\in V_1,\\ \\boldsymbol{\\alpha}_2\\in V_2\\}",
+        "note": "子空间之和的定义：每个向量分别取自两个子空间，全部这样的和构成包含两者（从而包含 $V_1\\cup V_2$）的最小子空间。",
+        "noteEn": "Definition of the sum of two subspaces: all sums $\\alpha_1+\\alpha_2$ with one vector drawn from each subspace form the smallest subspace containing both."
+      },
+      {
+        "latex": "\\dim(V_1+V_2)=\\dim V_1+\\dim V_2-\\dim(V_1\\cap V_2)",
+        "note": "维数公式：和的维数 = 两维数之和 − 交的维数，形状与容斥原理相同，是计算子空间维数最基本的工具。",
+        "noteEn": "Dimension formula: the dimension of the sum equals the sum of the dimensions minus the dimension of the intersection; the staple tool for dimension counting."
+      },
+      {
+        "latex": "V_1\\oplus V_2\\iff V_1\\cap V_2=\\{\\boldsymbol{0}\\}\\iff \\dim(V_1+V_2)=\\dim V_1+\\dim V_2",
+        "note": "直和的等价刻画：交为零向量、维数直接相加、分解唯一，三者彼此等价。",
+        "noteEn": "Equivalent characterizations of a direct sum: trivial intersection, additive dimensions, and unique decomposition are mutually equivalent."
+      },
+      {
+        "latex": "V=V_1\\oplus V_2\\iff \\forall \\boldsymbol{\\alpha}\\in V,\\ \\exists!\\ \\boldsymbol{\\alpha}_1\\in V_1,\\ \\boldsymbol{\\alpha}_2\\in V_2:\\ \\boldsymbol{\\alpha}=\\boldsymbol{\\alpha}_1+\\boldsymbol{\\alpha}_2",
+        "note": "直和的本质是唯一分解：$V$ 中每个向量都能且只能写成一个 $V_1$ 的向量加上一个 $V_2$ 的向量（$\\exists!$ 表示「存在且唯一」）。",
+        "noteEn": "The essence of a direct sum is unique decomposition: every vector of $V$ can be written in exactly one way as $\\alpha_1+\\alpha_2$ ($\\exists!$ means there exists exactly one)."
+      },
+      {
+        "latex": "V_1\\oplus V_2\\oplus\\cdots\\oplus V_s\\iff V_i\\cap\\Big(\\sum_{j\\neq i}V_j\\Big)=\\{\\boldsymbol{0}\\}\\quad (i=1,2,\\dots,s)",
+        "note": "三个及以上子空间直和的正确判据：每个子空间与「其余子空间之和」只交于零向量；只查两两交为零是不够的（定义中有三条直线的反例）。",
+        "noteEn": "Correct criterion for a direct sum of three or more subspaces: each one meets the sum of all the others trivially. Checking pairwise intersections alone is not enough (three lines give the standard counterexample)."
+      }
+    ],
+    "properties": [
+      "交与和都是子空间，但并一般不是：$\\mathbb{R}^2$ 中 $x$ 轴与 $y$ 轴的并集对加法不封闭（$(1,0)+(0,1)=(1,1)$ 不在其中）；而 $V_1+V_2$ 是包含 $V_1\\cup V_2$ 的最小子空间。",
+      "维数公式 $\\dim(V_1+V_2)=\\dim V_1+\\dim V_2-\\dim(V_1\\cap V_2)$ 是连接「和」与「交」的桥梁；维数能直接相加（不需要减）当且仅当 $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$，此时的和就是直和。",
+      "直和的等价刻画：$V_1\\cap V_2=\\{\\boldsymbol{0}\\}$ ⟺ 零向量分解唯一 ⟺ 每个向量的分解唯一 ⟺ $\\dim(V_1+V_2)=\\dim V_1+\\dim V_2$。",
+      "三个以上子空间的陷阱：「两两交为零」**不能**推出直和，正确条件是 $V_i\\cap\\sum_{j\\ne i}V_j=\\{\\boldsymbol{0}\\}$；$\\mathbb{R}^2$ 中三条不同过原点直线是反例（维数 $2\\ne 1+1+1$）。",
+      "应用：$A$ 可对角化 ⟺ 全空间分解为特征子空间的直和 $V=E_{\\lambda_1}\\oplus\\cdots\\oplus E_{\\lambda_s}$；$V_1\\cap V_2=\\{\\boldsymbol{0}\\}$ 时，$V_1$ 与 $V_2$ 的基直接拼成 $V_1+V_2$ 的基。"
+    ],
+    "propertiesEn": [
+      "Intersections and sums of subspaces are again subspaces, but a union in general is not: the union of the two coordinate axes in $\\mathbb{R}^2$ is not closed under addition, since $(1,0)+(0,1)=(1,1)$ lies outside it. The sum $V_1+V_2$ is the smallest subspace containing $V_1\\cup V_2$.",
+      "The dimension formula is the bridge between sum and intersection: the dimensions add without correction exactly when the intersection is trivial, and then the sum is direct.",
+      "A direct sum is characterized by any of: trivial intersection; unique decomposition of the zero vector; unique decomposition of every vector; additive dimensions.",
+      "For three or more subspaces, pairwise trivial intersections do **not** imply a direct sum; the right condition is that each $V_i$ meets the sum of all the others trivially. Three distinct lines through the origin in $\\mathbb{R}^2$ are a counterexample ($2\\ne 1+1+1$).",
+      "Applications: $A$ is diagonalizable iff the whole space is the direct sum of its eigenspaces; when the intersection is trivial, concatenating bases of the two subspaces gives a basis of their sum."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^3$ 中，$V_1=\\{(x,y,0)\\mid x,y\\in\\mathbb{R}\\}$ 是 $xOy$ 平面，$V_2=\\{(0,0,z)\\mid z\\in\\mathbb{R}\\}$ 是 $z$ 轴。判断 $V_1+V_2$ 是否为直和，并把 $(3,-1,5)$ 分解为两个子空间中向量之和。",
+        "solution": "先求交：若 $\\boldsymbol{\\alpha}=(x,y,z)\\in V_1\\cap V_2$，由 $\\boldsymbol{\\alpha}\\in V_1$ 得 $z=0$，由 $\\boldsymbol{\\alpha}\\in V_2$ 得 $x=y=0$，所以 $V_1\\cap V_2=\\{\\boldsymbol{0}\\}$。由维数公式 $\\dim(V_1+V_2)=2+1-0=3=\\dim\\mathbb{R}^3$，故 $V_1+V_2=\\mathbb{R}^3$；又因为交只有零向量，这是直和：$\\mathbb{R}^3=V_1\\oplus V_2$。分解：$(3,-1,5)=(3,-1,0)+(0,0,5)$，其中 $(3,-1,0)\\in V_1$、$(0,0,5)\\in V_2$，且由直和性质这个分解是唯一的。"
+      },
+      {
+        "problem": "取 $\\mathbb{R}^3$ 中两个不同的过原点平面：$V_1=\\{(x,y,z)\\mid z=0\\}$ 与 $V_2=\\{(x,y,z)\\mid x=0\\}$。求 $V_1\\cap V_2$、$V_1+V_2$ 的维数，并说明这个和不是直和。",
+        "solution": "$\\dim V_1=\\dim V_2=2$。交集 $V_1\\cap V_2=\\{(0,y,0)\\mid y\\in\\mathbb{R}\\}$ 是 $y$ 轴，维数为 $1$。由维数公式，$\\dim(V_1+V_2)=2+2-1=3$，所以 $V_1+V_2=\\mathbb{R}^3$（也可直接验证：任意 $(a,b,c)=(a,b,0)+(0,0,c)$，第一部分在 $V_1$、第二部分在 $V_2$）。由于 $V_1\\cap V_2$ 含有非零向量 $(0,1,0)$，和不是直和，零向量的分解不唯一：$(0,1,0)+(0,-1,0)=\\boldsymbol{0}$ 与 $\\boldsymbol{0}+\\boldsymbol{0}=\\boldsymbol{0}$，其中 $(0,1,0)\\in V_1$、$(0,-1,0)\\in V_2$。"
+      }
+    ],
+    "tags": ["线性代数", "子空间", "直和"],
+    "links": ["linear-space-general", "vector-space-basis", "rank-nullity", "matrix-similarity-diagonalization"]
+  },
+  {
+    "id": "matrix-powers-polynomials",
+    "title": "方阵的幂与方阵多项式",
+    "titleEn": "Powers and Polynomials of Square Matrices",
+    "branch": "linear",
+    "level": 4,
+    "summary": "方阵连乘得到幂、代入多项式得到方阵多项式；归纳、对角化、二项式展开是求幂的常用手段，凯莱–哈密顿定理让每个方阵都满足自己的特征方程。",
+    "summaryEn": "Square matrices can be raised to powers and substituted into polynomials; induction, diagonalization and the binomial expansion compute powers, while the Cayley–Hamilton theorem makes every matrix satisfy its own characteristic equation.",
+    "definition": "设 $A$ 是 $n$ 阶方阵。$A$ 的**幂**就是把 $A$ 连乘：$A^k=A\\cdot A\\cdots A$（$k$ 个），并规定 $A^0=E$（单位矩阵，不是数字 $0$ 或 $1$）。对同一个矩阵，指数法则照常成立：$A^kA^l=A^{k+l}$、$(A^k)^l=A^{kl}$；但两个**不同**矩阵的乘积一般没有这条性质：$(AB)^k\\ne A^kB^k$。反例：取 $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$、$B=\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$，则 $(AB)^2=\\begin{pmatrix}5&3\\\\3&2\\end{pmatrix}$，而 $A^2B^2=\\begin{pmatrix}5&2\\\\2&1\\end{pmatrix}$，两者不相等；而当 $AB=BA$ 时一定有 $(AB)^k=A^kB^k$。\n\n求 $A^k$ 有三条常用路线。**归纳法**：算出 $A^1,A^2$ 猜出 $A^k$，验证 $k=1$，再由 $k$ 推到 $k+1$。**对角化**：若 $A=P\\Lambda P^{-1}$，则 $A^k=P\\Lambda^kP^{-1}$，把矩阵乘法化为对角的标量幂（前提是 $A$ 可对角化）。**二项式展开**：把 $A$ 拆成两个**可交换**的矩阵之和，例如 $A=\\lambda E+N$（$N$ 幂零）或 $A=E+B$，再用 $(A+B)^m=\\sum_{i=0}^m\\binom{m}{i}A^iB^{m-i}$——注意它**只在 $AB=BA$ 时成立**，不能无条件套用。\n\n把 $A$ 代入普通多项式，就得到**方阵多项式** $f(A)=a_mA^m+\\cdots+a_1A+a_0E$。唯一的坑在常数项：**必须写成 $a_0E$**，把常数直接写成数字 $a_0$ 是典型错误（数不能与矩阵相加）。同一个 $A$ 的两个多项式永远可交换：$f(A)g(A)=g(A)f(A)$，因为 $A$ 的各次幂互相可交换。\n\n多项式与特征值配合得很好：若 $A\\boldsymbol{\\alpha}=\\lambda\\boldsymbol{\\alpha}$（$\\boldsymbol{\\alpha}\\ne\\boldsymbol{0}$），则 $f(A)\\boldsymbol{\\alpha}=f(\\lambda)\\boldsymbol{\\alpha}$，即 $f(\\lambda)$ 是 $f(A)$ 的特征值；特别地，$A^k$ 的特征值是 $\\lambda^k$。一个不需要可对角化的强工具是**凯莱–哈密顿定理**：设特征多项式 $f(\\lambda)=|\\lambda E-A|$，则 $f(A)=O$。它把矩阵恒等式变成多项式恒等式：可以用 $f(A)=O$ 降幂（把 $A^n$ 及更高次幂换成低次幂的组合），$A$ 可逆时还能解出 $A^{-1}$ 并证明它是 $A$ 的多项式。",
+    "definitionEn": "For a square matrix $A$, its **powers** are repeated products $A^k=A\\cdot A\\cdots A$ ($k$ factors), with the convention $A^0=E$ (the identity matrix, not the number $0$ or $1$). For a single matrix the index laws hold as for numbers: $A^kA^l=A^{k+l}$ and $(A^k)^l=A^{kl}$. Products of two *different* matrices, however, generally fail: $(AB)^k\\ne A^kB^k$. A counterexample: with $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ and $B=\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$, one has $(AB)^2=\\begin{pmatrix}5&3\\\\3&2\\end{pmatrix}$ while $A^2B^2=\\begin{pmatrix}5&2\\\\2&1\\end{pmatrix}$; once $AB=BA$, the identity $(AB)^k=A^kB^k$ does hold.\n\nThree standard routes to $A^k$. **Induction**: compute $A^1,A^2$, guess the pattern, check $k=1$, then step from $k$ to $k+1$. **Diagonalization**: if $A=P\\Lambda P^{-1}$, then $A^k=P\\Lambda^kP^{-1}$, reducing matrix multiplication to scalar powers of the eigenvalues (only when $A$ is diagonalizable). **Binomial expansion**: split $A$ into two **commuting** matrices, typically $A=\\lambda E+N$ with $N$ nilpotent or $A=E+B$, and expand $(A+B)^m=\\sum_{i=0}^m\\binom{m}{i}A^iB^{m-i}$ — which is valid **only when $AB=BA$** and must never be used unconditionally.\n\nSubstituting $A$ into an ordinary polynomial gives a **matrix polynomial** $f(A)=a_mA^m+\\cdots+a_1A+a_0E$. The one trap is the constant term: it **must carry the identity**, $a_0E$; writing a bare number $a_0$ is the classic mistake, since scalars cannot be added to matrices. Any two polynomials in the same matrix commute, $f(A)g(A)=g(A)f(A)$, because the powers of $A$ commute with one another.\n\nPolynomials mesh well with eigenvalues: if $A\\boldsymbol{\\alpha}=\\lambda\\boldsymbol{\\alpha}$ with $\\boldsymbol{\\alpha}\\ne\\boldsymbol{0}$, then $f(A)\\boldsymbol{\\alpha}=f(\\lambda)\\boldsymbol{\\alpha}$, so $f(\\lambda)$ is an eigenvalue of $f(A)$; in particular the eigenvalues of $A^k$ are the $k$-th powers $\\lambda^k$. A powerful tool that needs no diagonalizability is the **Cayley–Hamilton theorem**: for the characteristic polynomial $f(\\lambda)=|\\lambda E-A|$ one always has $f(A)=O$. It turns a matrix identity into a polynomial identity, so you can lower powers (rewriting $A^n$ and higher powers in terms of lower ones) and, when $A$ is invertible, solve for $A^{-1}$ as a polynomial in $A$.",
+    "formulas": [
+      {
+        "latex": "A^{k}A^{l}=A^{k+l},\\qquad (A^{k})^{l}=A^{kl},\\qquad A^{0}=E",
+        "note": "方阵幂的指数法则，前提是同一个矩阵相乘；特别注意约定 $A^0=E$（单位矩阵），不是数 0 或 1。",
+        "noteEn": "Index laws for powers of a single matrix; note the convention $A^0=E$, the identity matrix, not the scalar 0 or 1."
+      },
+      {
+        "latex": "AB=BA\\ \\Longrightarrow\\ (A+B)^{m}=\\sum_{i=0}^{m}\\binom{m}{i}A^{i}B^{m-i},\\qquad (AB)^{k}=A^{k}B^{k}",
+        "note": "只有当 $AB=BA$ 时，二项式展开与 $(AB)^k=A^kB^k$ 才成立；一般矩阵不满足，定义里有 $2\\times 2$ 的反例。",
+        "noteEn": "The binomial expansion and $(AB)^k=A^kB^k$ hold only when $AB=BA$; general matrices fail this, as the $2\\times 2$ counterexample in the definition shows."
+      },
+      {
+        "latex": "A=P\\Lambda P^{-1}\\ \\Longrightarrow\\ A^{k}=P\\Lambda^{k}P^{-1},\\qquad \\Lambda^{k}=\\operatorname{diag}(\\lambda_1^{k},\\dots,\\lambda_n^{k})",
+        "note": "可对角化矩阵求幂的公式：矩阵幂化为特征值的标量幂；不可对角化时要改用 Jordan 标准形或凯莱–哈密顿定理。",
+        "noteEn": "Power formula via diagonalization: matrix powers reduce to scalar powers of the eigenvalues; if $A$ is not diagonalizable, use the Jordan form or Cayley–Hamilton instead."
+      },
+      {
+        "latex": "f(A)=a_{m}A^{m}+a_{m-1}A^{m-1}+\\cdots+a_{1}A+a_{0}E,\\qquad f(A)g(A)=g(A)f(A)",
+        "note": "方阵多项式的定义：常数项写成 $a_0E$；同一个矩阵的两个多项式永远可交换。",
+        "noteEn": "Matrix polynomial: the constant term is $a_0E$, and any two polynomials in the same matrix commute."
+      },
+      {
+        "latex": "f(\\lambda)=|\\lambda E-A|\\ \\Longrightarrow\\ f(A)=O",
+        "note": "凯莱–哈密顿定理：任意方阵都满足自己的特征方程，不要求可对角化；用于降幂和把 $A^{-1}$ 表示为 $A$ 的多项式（$A$ 可逆时）。",
+        "noteEn": "Cayley–Hamilton: every square matrix satisfies its own characteristic equation, no diagonalizability required; used to lower powers and to express $A^{-1}$ as a polynomial in $A$ when $A$ is invertible."
+      }
+    ],
+    "properties": [
+      "**常数项必须乘 $E$**：$f(x)=x^2-3x+2$ 对应的方阵多项式是 $f(A)=A^2-3A+2E$，常数项写成数字 $2$ 是典型错误。",
+      "同一个 $A$ 的任意两个多项式可交换：$f(A)g(A)=g(A)f(A)$；但不同矩阵一般不可交换，$(AB)^k=A^kB^k$ 与 $(A+B)^m$ 的二项式展开都要求 $AB=BA$。",
+      "**特征值映射**：$A\\boldsymbol{\\alpha}=\\lambda\\boldsymbol{\\alpha}$（$\\boldsymbol{\\alpha}\\ne\\boldsymbol{0}$）蕴含 $f(A)\\boldsymbol{\\alpha}=f(\\lambda)\\boldsymbol{\\alpha}$；特别地 $A^k$ 的特征值是 $\\lambda^k$，而 $f(A)$ 的全部特征值恰为 $f(\\lambda_1),\\dots,f(\\lambda_n)$（$\\lambda_1,\\dots,\\lambda_n$ 是 $A$ 的全部特征值）。",
+      "**凯莱–哈密顿定理**：$f(\\lambda)=|\\lambda E-A|$ 时 $f(A)=O$，对任意方阵成立、不需要可对角化；它能把 $A^k$（$k\\ge n$）降为次数低于 $n$ 的多项式，$A$ 可逆时还能解出 $A^{-1}$ 是 $A$ 的多项式。",
+      "求 $A^k$ 的三条常用路线：数学归纳法、对角化 $A^k=P\\Lambda^kP^{-1}$、拆成可交换矩阵之和后二项式展开（常用 $A=\\lambda E+N$，$N$ 幂零使高次项消失）；用哪条取决于 $A$ 能否对角化。"
+    ],
+    "propertiesEn": [
+      "The constant term must carry the identity: $f(x)=x^2-3x+2$ corresponds to $f(A)=A^2-3A+2E$; writing a bare $2$ is the classic error.",
+      "Any two polynomials in the same matrix commute, while polynomials in different matrices generally do not; both $(AB)^k=A^kB^k$ and the binomial expansion of $(A+B)^m$ require $AB=BA$.",
+      "Eigenvalue mapping: $A\\alpha=\\lambda\\alpha$ with $\\alpha\\ne\\mathbf 0$ implies $f(A)\\alpha=f(\\lambda)\\alpha$; the eigenvalues of $A^k$ are $\\lambda^k$, and those of $f(A)$ are exactly $f(\\lambda_1),\\dots,f(\\lambda_n)$, where $\\lambda_1,\\dots,\\lambda_n$ are the eigenvalues of $A$.",
+      "Cayley–Hamilton: $f(A)=O$ for $f(\\lambda)=|\\lambda E-A|$, valid for every square matrix with no diagonalizability assumption; it lowers $A^k$ ($k\\ge n$) to degree below $n$ and expresses $A^{-1}$ as a polynomial in $A$ when $A$ is invertible.",
+      "Three standard routes to $A^k$: induction, diagonalization $A^k=P\\Lambda^kP^{-1}$, and splitting into commuting summands (often $A=\\lambda E+N$ with nilpotent $N$) followed by the binomial expansion; the choice depends on whether $A$ is diagonalizable."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$，分别用数学归纳法和二项式展开求 $A^n$（$n\\ge 1$），并验证 $n=1,2$ 的结果。",
+        "solution": "**归纳法**：$A^2=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$，猜测 $A^n=\\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$。$n=1$ 时就是 $A$，成立；设 $n=k$ 时成立，则 $A^{k+1}=A^kA=\\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}=\\begin{pmatrix}1&k+1\\\\0&1\\end{pmatrix}$，结论对 $n=k+1$ 也成立。故 $A^n=\\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$。\n\n**二项式法**：记 $N=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$，则 $A=E+N$，$N^2=O$，且 $E$ 与 $N$ 可交换，于是 $A^n=(E+N)^n=E+nN=\\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$（$N^2=O$ 使二项式展开只剩前两项）。\n\n**验证**：$n=1$ 给 $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}=A$；$n=2$ 给 $\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$，与直接计算 $A^2$ 一致。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&1\\\\-1&3\\end{pmatrix}$，求特征多项式，并利用凯莱–哈密顿定理导出 $A^n$ 的表达式（验证 $n=1,2,3$）。",
+        "solution": "特征多项式 $f(\\lambda)=|\\lambda E-A|=\\begin{vmatrix}\\lambda-1&-1\\\\1&\\lambda-3\\end{vmatrix}=(\\lambda-1)(\\lambda-3)+1=(\\lambda-2)^2$。由凯莱–哈密顿定理 $f(A)=O$，即 $A^2-4A+4E=O$，也就是 $(A-2E)^2=O$。记 $B=A-2E=\\begin{pmatrix}-1&1\\\\-1&1\\end{pmatrix}$，则 $A=2E+B$、$B^2=O$，且 $2E$ 与 $B$ 可交换，于是\n\n$$A^n=(2E+B)^n=2^nE+n2^{n-1}B=n2^{n-1}A+(1-n)2^nE.$$\n\n验证：$n=1$ 给 $A$；$n=2$ 给 $4A-4E=\\begin{pmatrix}0&4\\\\-4&8\\end{pmatrix}$，而直接计算 $A^2=\\begin{pmatrix}0&4\\\\-4&8\\end{pmatrix}$，一致；$n=3$ 给 $12A-16E=\\begin{pmatrix}-4&12\\\\-12&20\\end{pmatrix}$，而 $A^3=A\\cdot A^2=\\begin{pmatrix}-4&12\\\\-12&20\\end{pmatrix}$，也一致。注意 $A$ 的两个特征值都是 $2$ 且 $A\\ne 2E$，所以 $A$ 不可对角化，但凯莱–哈密顿定理照样适用。"
+      }
+    ],
+    "tags": ["线性代数", "矩阵幂", "凯莱–哈密顿定理"],
+    "links": ["matrix-operations", "eigenvalue-eigenvector", "matrix-similarity-diagonalization", "jordan-form", "matrix-exponential"]
+  }
+]

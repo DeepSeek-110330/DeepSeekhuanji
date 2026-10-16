@@ -1,0 +1,533 @@
+[
+  {
+    "id": "jacobi-fields",
+    "title": "雅可比场",
+    "titleEn": "Jacobi Fields",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "沿测地线满足雅可比方程 $J''+R(J,\\gamma')\\gamma'=0$ 的向量场；它恰好是测地线族的变分场，$J(0)=0$ 时由指数映射的微分给出，其零点就是共轭点。",
+    "summaryEn": "A vector field along a geodesic solving the Jacobi equation $J''+R(J,\\gamma')\\gamma'=0$; Jacobi fields are exactly the variation fields of families of geodesics, are given by the differential of the exponential map when $J(0)=0$, and their zeros are precisely the conjugate points.",
+    "definition": "设 $\\gamma\\colon[0,T]\\to M$ 是黎曼流形上的测地线，$J$ 是沿 $\\gamma$ 的光滑向量场，记 $J''=\\nabla_{\\gamma'}\\nabla_{\\gamma'}J$。若\n$$J''+R(J,\\gamma')\\gamma'=0,$$\n就称 $J$ 为沿 $\\gamma$ 的**雅可比场**。这里 $R$ 是曲率张量，本库统一采用约定\n$$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z,\\qquad K(X,Y)=\\frac{\\langle R(X,Y)Y,X\\rangle}{|X|^2|Y|^2-\\langle X,Y\\rangle^2}.$$\n在这个约定下，常截面曲率 $k$ 的空间形式满足 $R(X,Y)Z=k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr)$；例如单位球面 $S^n$（$K\\equiv1$）在 $J\\perp\\gamma'$、$|\\gamma'|=1$ 时满足 $R(J,\\gamma')\\gamma'=J$。**必须注意**：若改用相反的曲率约定（把 $R$ 换成 $-R$），雅可比方程要写成 $J''+R(\\gamma',J)\\gamma'=0$；本库不用那个写法。\n\n为什么它是「变分」的：取一族以 $s$ 为参数的测地线 $u(t,s)$，$u(t,0)=\\gamma(t)$，则变分向量场 $J(t)=\\partial_su(t,0)$ 一定满足雅可比方程；反过来，每个雅可比场都是某个测地线族的变分场。所以雅可比场刻画的正是「邻近测地线之间的距离如何随 $t$ 变化」，也就是测地线族的**聚焦与发散**。特别地，与 $\\gamma'$ 平行的 $J(t)=(a+bt)\\gamma'(t)$（来自重新参数化）对任何测地线都存在，它没有正零点（除 $J\\equiv0$），与共轭点无关。\n\n作为方程，$J''=-R(J,\\gamma')\\gamma'$ 是二阶线性常微分方程组：给定初值 $J(0)$ 与 $J'(0)$（各 $n$ 个分量）后解唯一，所以解空间是 **$2n$ 维线性空间**。欧氏空间中 $R\\equiv0$，解只能是线性的 $J(t)=a+tb$，没有正零点；单位球面上（单位速度、$J\\perp\\gamma'$）方程化为 $J''+J=0$，正交初值给出 $J(t)=\\sin t\\,E(t)$，其中 $E$ 是沿 $\\gamma$ 平行移动的单位向量——它在 $t=\\pi$ 处归零，正是「球面上测地线在对径点重新汇聚」的解析表现。\n\n与指数映射的联系是核心：取 $\\gamma(t)=\\exp_p(tv)$，$J(0)=0$ 的雅可比场由 $J'(0)=w$ 唯一决定，并且\n$$J(t)=(d\\exp_p)_{tv}(tw).$$\n于是「非零雅可比场在 $t_0>0$ 处为零」等价于「$(d\\exp_p)_{t_0v}$ 奇异」，这就是共轭点的定义方式（见「共轭点与割迹」）。",
+    "definitionEn": "Let $\\gamma\\colon[0,T]\\to M$ be a geodesic on a Riemannian manifold and let $J$ be a smooth vector field along $\\gamma$, with $J''=\\nabla_{\\gamma'}\\nabla_{\\gamma'}J$. If\n$$J''+R(J,\\gamma')\\gamma'=0,$$\nthen $J$ is called a **Jacobi field** along $\\gamma$. Here $R$ is the curvature tensor, and throughout this library we use the convention\n$$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z,\\qquad K(X,Y)=\\frac{\\langle R(X,Y)Y,X\\rangle}{|X|^2|Y|^2-\\langle X,Y\\rangle^2}.$$\nWith this convention a space form of constant sectional curvature $k$ satisfies $R(X,Y)Z=k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr)$; for the unit sphere $S^n$ ($K\\equiv1$) and $J\\perp\\gamma'$, $|\\gamma'|=1$, this reads $R(J,\\gamma')\\gamma'=J$. **Note**: with the opposite sign convention (replacing $R$ by $-R$) the Jacobi equation must be written $J''+R(\\gamma',J)\\gamma'=0$; this library never uses that form.\n\nWhy \"variation\": take a one-parameter family of geodesics $u(t,s)$ with $u(t,0)=\\gamma(t)$; then the variation field $J(t)=\\partial_su(t,0)$ always satisfies the Jacobi equation, and conversely every Jacobi field is the variation field of some family of geodesics. Thus Jacobi fields describe how the distance between neighbouring geodesics changes with $t$ — the **focusing and spreading** of geodesics. In particular the field parallel to $\\gamma'$, $J(t)=(a+bt)\\gamma'(t)$ (coming from reparametrization), always exists, has no positive zero unless $J\\equiv0$, and has nothing to do with conjugate points.\n\nAs an equation, $J''=-R(J,\\gamma')\\gamma'$ is a second order linear ODE system: the initial data $J(0)$ and $J'(0)$ ($n$ components each) determine the solution uniquely, so the solution space is a **$2n$-dimensional linear space**. In Euclidean space $R\\equiv0$ and every solution is linear, $J(t)=a+tb$, with no positive zero. On the unit sphere (unit speed, $J\\perp\\gamma'$) the equation becomes $J''+J=0$ and orthogonal initial data give $J(t)=\\sin t\\,E(t)$, where $E$ is a parallel unit vector field along $\\gamma$ — it vanishes at $t=\\pi$, the analytic picture of geodesics meeting again at the antipodal point.\n\nThe link with the exponential map is the heart of the matter: let $\\gamma(t)=\\exp_p(tv)$. A Jacobi field with $J(0)=0$ is determined by $J'(0)=w$, and\n$$J(t)=(d\\exp_p)_{tv}(tw).$$\nHence \"a non-zero Jacobi field vanishes at $t_0>0$\" is equivalent to \"$(d\\exp_p)_{t_0v}$ is singular\" — this is how conjugate points are defined (see Conjugate Points and the Cut Locus).",
+    "formulas": [
+      {
+        "latex": "\\nabla_{\\gamma'}\\nabla_{\\gamma'}J+R(J,\\gamma')\\gamma'=0",
+        "note": "雅可比方程，等价写法 $J''+R(J,\\gamma')\\gamma'=0$。所用约定：$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$（本库统一）；若采用相反的曲率约定，方程应写成 $J''+R(\\gamma',J)\\gamma'=0$。",
+        "noteEn": "The Jacobi equation, equivalently $J''+R(J,\\gamma')\\gamma'=0$. Convention used: $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$ (uniform in this library); with the opposite curvature convention one must write $J''+R(\\gamma',J)\\gamma'=0$."
+      },
+      {
+        "latex": "R(X,Y)Z=k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr)",
+        "note": "常截面曲率 $k$ 的空间形式（球面 $k>0$、欧氏 $k=0$、双曲 $k<0$）的曲率张量。由它得 $R(J,\\gamma')\\gamma'=kJ$（$J\\perp\\gamma'$、$|\\gamma'|=1$），雅可比方程化为 $J''+kJ=0$。",
+        "noteEn": "Curvature tensor of a space form with constant sectional curvature $k$ (sphere $k>0$, Euclidean $k=0$, hyperbolic $k<0$). It gives $R(J,\\gamma')\\gamma'=kJ$ for $J\\perp\\gamma'$, $|\\gamma'|=1$, so the Jacobi equation becomes $J''+kJ=0$."
+      },
+      {
+        "latex": "J(t)=\\frac{\\sin(\\sqrt{k}\\,t)}{\\sqrt{k}}E(t)\\ \\ (k>0),\\qquad J(t)=tE(t)\\ \\ (k=0)",
+        "note": "常曲率 $k$ 下 $J(0)=0$、$J'(0)=E(0)$ 的解（$E$ 沿 $\\gamma$ 平行移动、$|E|=1$、$E\\perp\\gamma'$）：$k>0$ 时在 $t=\\pi/\\sqrt{k}$ 首次归零（共轭点），$k=0$ 时永不归零。",
+        "noteEn": "Solution with $J(0)=0$, $J'(0)=E(0)$ on a space form of curvature $k$ ($E$ parallel along $\\gamma$, $|E|=1$, $E\\perp\\gamma'$): for $k>0$ it vanishes first at $t=\\pi/\\sqrt{k}$ (a conjugate point), for $k=0$ it never vanishes."
+      },
+      {
+        "latex": "J(t)=(d\\exp_p)_{tv}(tw),\\qquad \\gamma(t)=\\exp_p(tv)",
+        "note": "指数映射的微分给出的雅可比场（$J(0)=0$，$J'(0)=w$）。于是 $J(t_0)=0$（$J\\not\\equiv0$）等价于 $(d\\exp_p)_{t_0v}$ 奇异。",
+        "noteEn": "The Jacobi field produced by the differential of the exponential map ($J(0)=0$, $J'(0)=w$). Hence $J(t_0)=0$ with $J\\not\\equiv0$ is equivalent to $(d\\exp_p)_{t_0v}$ being singular."
+      },
+      {
+        "latex": "\\langle J(t),\\gamma'(t)\\rangle=\\langle J(0),\\gamma'(0)\\rangle+t\\,\\langle J'(0),\\gamma'(0)\\rangle",
+        "note": "由 $\\langle R(X,\\gamma')\\gamma',\\gamma'\\rangle=0$ 得：内积 $\\langle J,\\gamma'\\rangle$ 是 $t$ 的一次函数。因此「与 $\\gamma'$ 正交」在演化中保持，且 $J(0)=0$、$J(t_0)=0$ 的雅可比场必正交于 $\\gamma'$。",
+        "noteEn": "Since $\\langle R(X,\\gamma')\\gamma',\\gamma'\\rangle=0$, the inner product $\\langle J,\\gamma'\\rangle$ is affine in $t$. Hence orthogonality to $\\gamma'$ is preserved, and any Jacobi field with $J(0)=0$ and $J(t_0)=0$ must be orthogonal to $\\gamma'$."
+      }
+    ],
+    "properties": [
+      "解空间是 $2n$ 维线性空间：初值 $J(0)$ 与 $J'(0)$ 各有 $n$ 个自由度，二者共同唯一确定解；解在 $t$ 上光滑。",
+      "$\\langle J,\\gamma'\\rangle$ 是 $t$ 的一次函数，所以正交雅可比场（$J\\perp\\gamma'$）构成 $2n-2$ 维子空间；$J(0)=0$ 且 $J(t_0)=0$ 的雅可比场必然正交于 $\\gamma'$（切向部分只能取 $t\\gamma'(t)$，它在 $t>0$ 不为零），故共轭点与其重数完全由正交雅可比场决定。",
+      "雅可比场 $\\iff$ 测地线族的变分场：每个雅可比场都是某族测地线的变分场，反之亦然；这是它出现在变分学（第一、第二变分）中的原因。",
+      "例：欧氏空间 $R\\equiv0$，所有雅可比场是 $J(t)=a+tb$，没有正零点，故无共轭点；单位球面上正交雅可比场是 $J(t)=\\sin t\\,E(t)$，在 $t=m\\pi$（$m=1,2,\\dots$）处为零，故每个点在 $m\\pi$ 距离处都有共轭点。",
+      "局部线性化：$J(0)=0$ 时 $J(t)=tw+O(t^2)$，一阶项就是指数映射微分的「线性部分」，这正是 $J(t)=(d\\exp_p)_{tv}(tw)$ 的无穷小形式。",
+      "沿测地线的切向雅可比场 $J(t)=(a+bt)\\gamma'(t)$ 总存在（来自测地线的重新参数化），它与共轭点无关；把它误当作「聚焦」是常见的错误。"
+    ],
+    "propertiesEn": [
+      "The solution space is a $2n$-dimensional linear space: the initial data $J(0)$ and $J'(0)$ ($n$ degrees of freedom each) determine the solution uniquely, and every solution is smooth in $t$.",
+      "Since $\\langle J,\\gamma'\\rangle$ is affine in $t$, the orthogonal Jacobi fields ($J\\perp\\gamma'$) form a $(2n-2)$-dimensional subspace; a Jacobi field with $J(0)=0$ and $J(t_0)=0$ is automatically orthogonal to $\\gamma'$ (the tangential part can only be $t\\gamma'(t)$, which never vanishes for $t>0$), so conjugate points and their multiplicities are governed entirely by the orthogonal Jacobi fields.",
+      "Jacobi fields $\\iff$ variation fields of families of geodesics: every Jacobi field arises as the variation field of a family of geodesics and conversely; this is why they appear in the first and second variation formulae.",
+      "Examples: in Euclidean space $R\\equiv0$ every Jacobi field is linear, $J(t)=a+tb$, with no positive zero, so there are no conjugate points; on the unit sphere the orthogonal Jacobi fields are $J(t)=\\sin t\\,E(t)$, vanishing at $t=m\\pi$ ($m=1,2,\\dots$), so every point has conjugate points at all distances $m\\pi$.",
+      "Local linearization: for $J(0)=0$ one has $J(t)=tw+O(t^2)$, i.e. the first order term is exactly the linear part of the differential of the exponential map — the infinitesimal form of $J(t)=(d\\exp_p)_{tv}(tw)$.",
+      "The tangential Jacobi field $J(t)=(a+bt)\\gamma'(t)$ always exists (it comes from reparametrizing the geodesic) and is unrelated to conjugate points; mistaking it for focusing is a common error."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "K=1（单位球面）J=sin t，t=π 处归零"
+        },
+        {
+          "expr": "2*sin(x/2)",
+          "color": "#ff6b9d",
+          "label": "K=1/4（半径 2 球面）J=2sin(t/2)，t=2π 处归零"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "K=0（欧氏）J=t，永不归零"
+        }
+      ],
+      "xRange": [
+        0,
+        6.6
+      ],
+      "yRange": [
+        -1,
+        3.2
+      ],
+      "title": "雅可比场随 t 的变化：共轭点处 J=0"
+    },
+    "examples": [
+      {
+        "problem": "在 $\\mathbb R^n$ 中取测地线 $\\gamma(t)=p+tv$（$|v|=1$）。证明沿 $\\gamma$ 的每个雅可比场都有 $J(t)=a+tb$ 的形式，并说明 $\\mathbb R^n$ 没有共轭点。",
+        "solution": "欧氏空间上 $R\\equiv0$，雅可比方程退化为 $\\nabla_{\\gamma'}\\nabla_{\\gamma'}J=0$。沿 $\\gamma$ 的 $\\gamma'=v$ 是常向量场，故平行移动就是恒同映射，方程成为 $J''(t)=0$（普通二阶导数），解得 $J(t)=J(0)+tJ'(0)=a+tb$。\n\n若 $J\\not\\equiv0$ 而 $J(t_0)=0$（$t_0>0$），则 $a=-t_0b$，于是 $J(t)=(t_0-t)b$，它在 $t=t_0$ 之外不为零；但注意这样的 $J$ 并不满足 $J(0)=0$（除非 $b=0$，此时 $J\\equiv0$）。因此不存在 $J(0)=0$、$J\\not\\equiv0$ 而在 $t_0>0$ 处为零的雅可比场，即**没有共轭点**。\n\n用指数映射看也很直接：$\\exp_p(w)=p+w$，故 $d\\exp_p=\\mathrm{id}$ 处处非奇异，$(d\\exp_p)_{t_0v}$ 不可能奇异。"
+      },
+      {
+        "problem": "设 $M=S^2$ 是单位球面（$K\\equiv1$），$\\gamma$ 是单位速度大圆测地线，$E$ 是沿 $\\gamma$ 平行移动的单位向量且 $E\\perp\\gamma'$。验证 $J(t)=\\sin t\\,E(t)$ 是雅可比场，并求 $\\gamma(0)$ 沿 $\\gamma$ 的第一个共轭点及其重数（$S^n$ 情形）。",
+        "solution": "由空间形式公式 $R(X,Y)Z=\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y$，结合 $|\\gamma'|=1$、$\\langle J,\\gamma'\\rangle=0$：\n$$R(J,\\gamma')\\gamma'=\\langle\\gamma',\\gamma'\\rangle J-\\langle J,\\gamma'\\rangle\\gamma'=J=\\sin t\\,E(t).$$\n另一方面 $E$ 平行移动给出 $J''=\\nabla_{\\gamma'}\\nabla_{\\gamma'}(\\sin t\\,E)=-\\sin t\\,E=-J$。于是\n$$J''+R(J,\\gamma')\\gamma'=-J+J=0,$$\n故 $J$ 是雅可比场。零点：$J(t)=0\\iff\\sin t=0\\iff t\\in\\{0,\\pi,2\\pi,\\dots\\}$，所以第一个共轭点是 $\\gamma(\\pi)$（$p$ 的对径点），参数 $t_0=\\pi$。\n\n在 $S^n$ 中，正交于 $\\gamma'$ 的方向有 $n-1$ 个，每个方向都给出在 $t=\\pi$ 归零的雅可比场 $J=\\sin t\\,E(t)$，而切向场 $t\\gamma'(t)$ 在 $t>0$ 不为零，所以重数 $=n-1$。这与 $(d\\exp_p)_{\\pi v}$ 的核维数一致：指数映射在切空间半径 $\\pi$ 的球面上处处退化。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "测地线",
+      "变分",
+      "共轭点",
+      "曲率"
+    ],
+    "links": [
+      "riemannian-curvature-tensor",
+      "exponential-map",
+      "conjugate-points-cut-locus",
+      "second-variation-index-form",
+      "first-variation",
+      "geodesic",
+      "space-forms"
+    ]
+  },
+  {
+    "id": "conjugate-points-cut-locus",
+    "title": "共轭点与割迹",
+    "titleEn": "Conjugate Points and the Cut Locus",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "共轭点是非零雅可比场的零点、也是指数映射退化之处；割迹是从 $p$ 出发的测地线保持最短的最后一些点。割点总不晚于第一个共轭点，但两者可以完全不同：平环面无共轭点却有非空的割迹。",
+    "summaryEn": "Conjugate points are the zeros of non-zero Jacobi fields, equivalently the points where the exponential map is singular; the cut locus consists of the last points at which geodesics from $p$ are still minimizing. A cut point is never later than the first conjugate point, yet the two notions differ: a flat torus has no conjugate points but a non-empty cut locus.",
+    "definition": "**共轭点**：设 $\\gamma\\colon[0,T]\\to M$ 是测地线，$\\gamma(0)=p$。若存在沿 $\\gamma$ 的**非零**雅可比场 $J$ 与 $t_0>0$ 使 **$J(0)=0$ 且 $J(t_0)=0$**，就称 $\\gamma(t_0)$ 是 $p$ 沿 $\\gamma$ 的**共轭点**；满足 $J(0)=J(t_0)=0$ 的雅可比场空间的维数称为该共轭点的**重数**（$= \\dim\\ker(d\\exp_p)_{t_0v}$）。**$J(0)=0$ 不能漏**：不要求它时，对任意 $t_0$ 该空间恒为 $n$ 维，每个点都会变成共轭点。\n\n**等价刻画（本节核心）**：对 $v=\\gamma'(0)$，\n$$J(t_0)=0\\ (J\\not\\equiv0,\\ J(0)=0)\\iff (d\\exp_p)_{t_0v}\\ \\text{奇异}.$$\n理由是一一对应 $J(t)=(d\\exp_p)_{tv}(tw)$：$w\\ne0$ 给出非零雅可比场，而 $J(t_0)=0$ 恰好意味着 $w\\in\\ker(d\\exp_p)_{t_0v}$。于是「共轭点」= 「指数映射的临界点（的像）」，「重数」$=\\dim\\ker(d\\exp_p)_{t_0v}$，也等于使 $J(t_0)=0$ 的**正交**雅可比场空间的维数（切向部分只有 $t\\gamma'(t)$，在 $t>0$ 不为零）。\n\n**割迹**：最短性会在某个时刻失效。对从 $p$ 出发的单位速度测地线 $\\gamma$，令\n$$t_c(\\gamma)=\\sup\\{t>0:\\gamma|_{[0,t]}\\ \\text{是极小的（最短的）}\\},\\qquad \\operatorname{Cut}(p)=\\bigl\\{\\exp_p(t_c(v)v):v\\in T_pM,\\ |v|=1\\bigr\\},$$\n称 $\\gamma(t_c)$ 为 $\\gamma$ 的**割点**，全部割点之并 $\\operatorname{Cut}(p)$ 称为 $p$ 的**割迹**：它是「从 $p$ 出发的测地线第一次不再是捷径」的那些点的集合。\n\n**两者的关系**是本节要点。设 $t_{\\mathrm{conj}}$ 是第一个共轭点的参数（不存在记 $+\\infty$），则\n$$t_c(v)\\le t_{\\mathrm{conj}}(v).$$\n因为一旦出现共轭点，第二变分就能构造出更短的曲线（见「弧长第二变分与指标形式」），测地线失去极小性——所以**割点绝不晚于第一个共轭点**。反过来不成立：**平环面（以及柱面）上没有任何共轭点（曲率恒为 $0$），但每个点都有非空的割迹**，割点比共轭点「更早出现」（共轭点根本不存在）。因此共轭点与割点是两个不同的概念：前者刻画指数映射的退化，后者刻画最短性的失效。\n\n理想情形是球面：$S^n$ 中从 $p$ 出发的任何测地线在 $t=\\pi$ 到达对径点，这既是第一个共轭点（重数 $n-1$），又是割点，故 $\\operatorname{Cut}(p)=\\{-p\\}$。平环面 $\\mathbb R^2/\\mathbb Z^2$ 上 $\\operatorname{Cut}(p)$ 是两条闭测地线组成的「十字」；柱面 $S^1\\times\\mathbb R$ 上 $\\operatorname{Cut}(p)$ 是「对径」那条平行于母线的直线。当 $M$ 紧致时，对每个 $p$，$\\operatorname{Cut}(p)$ 非空且紧，并且\n$$M=\\exp_p\\bigl(\\{tv:|v|=1,\\ 0\\le t<t_c(v)\\}\\bigr)\\ \\sqcup\\ \\operatorname{Cut}(p)$$\n是不交并；在去掉 $p$ 与 $\\operatorname{Cut}(p)$ 之后，距离函数 $d(p,\\cdot)$ 光滑，且每点由唯一的极小测地线与 $p$ 相连。",
+    "definitionEn": "**Conjugate points.** Let $\\gamma\\colon[0,T]\\to M$ be a geodesic with $\\gamma(0)=p$. If there is a **non-zero** Jacobi field $J$ along $\\gamma$ and a time $t_0>0$ with $J(t_0)=0$, then $\\gamma(t_0)$ is called a **conjugate point** of $p$ along $\\gamma$; the dimension of the space of all Jacobi fields vanishing at $t_0$ is its **multiplicity**.\n\n**Equivalent description (the heart of this node).** With $v=\\gamma'(0)$,\n$$J(t_0)=0\\ (J\\not\\equiv0,\\ J(0)=0)\\iff (d\\exp_p)_{t_0v}\\ \\text{is singular}.$$\nThe reason is the bijection $J(t)=(d\\exp_p)_{tv}(tw)$: $w\\ne0$ gives a non-zero Jacobi field, and $J(t_0)=0$ means precisely that $w\\in\\ker(d\\exp_p)_{t_0v}$. Thus \"conjugate point\" = \"critical point of the exponential map (as a point)\", and \"multiplicity\" $=\\dim\\ker(d\\exp_p)_{t_0v}$, which also equals the dimension of the space of **orthogonal** Jacobi fields vanishing at $t_0$ (the tangential part can only be $t\\gamma'(t)$, non-zero for $t>0$).\n\n**Cut locus.** Minimality must fail at some time. For a unit speed geodesic $\\gamma$ from $p$ put\n$$t_c(\\gamma)=\\sup\\{t>0:\\gamma|_{[0,t]}\\ \\text{is minimizing}\\},\\qquad \\operatorname{Cut}(p)=\\bigl\\{\\exp_p(t_c(v)v):v\\in T_pM,\\ |v|=1\\bigr\\};$$\n$\\gamma(t_c)$ is the **cut point** of $\\gamma$ and the union $\\operatorname{Cut}(p)$ of all cut points is the **cut locus** of $p$: the set of points where a geodesic from $p$ stops being a shortest path.\n\n**The relation.** If $t_{\\mathrm{conj}}$ denotes the first conjugate point (or $+\\infty$ if there is none), then\n$$t_c(v)\\le t_{\\mathrm{conj}}(v).$$\nIndeed, as soon as a conjugate point appears the second variation produces shorter curves (see The Second Variation and the Index Form), so the geodesic is no longer minimizing: **a cut point never comes later than the first conjugate point**. The converse fails: **on a flat torus (and on a cylinder) there are no conjugate points at all (the curvature is $0$), yet every point has a non-empty cut locus**. Hence the two notions are genuinely different: conjugate points measure the degeneracy of the exponential map, cut points the loss of minimality.\n\nThe ideal case is the sphere: on $S^n$ every geodesic from $p$ reaches the antipodal point at $t=\\pi$, which is simultaneously the first conjugate point (multiplicity $n-1$) and the cut point, so $\\operatorname{Cut}(p)=\\{-p\\}$. On the flat torus $\\mathbb R^2/\\mathbb Z^2$ the cut locus is a \"cross\" made of two closed geodesics; on the cylinder $S^1\\times\\mathbb R$ it is the antipodal line parallel to the generators. If $M$ is compact, then $\\operatorname{Cut}(p)$ is non-empty and compact for every $p$, and\n$$M=\\exp_p\\bigl(\\{tv:|v|=1,\\ 0\\le t<t_c(v)\\}\\bigr)\\ \\sqcup\\ \\operatorname{Cut}(p)$$\nis a disjoint union; after removing $p$ and $\\operatorname{Cut}(p)$, the distance function $d(p,\\cdot)$ is smooth and every point is joined to $p$ by a unique minimizing geodesic.",
+    "formulas": [
+      {
+        "latex": "J(t_0)=0,\\ J\\not\\equiv0\\iff (d\\exp_p)_{t_0v}\\ \\text{奇异},\\qquad v=\\gamma'(0)",
+        "note": "共轭点的等价刻画（$J$ 沿 $\\gamma$ 的雅可比场）：雅可比场零点与指数映射退化完全等价；重数 $=\\dim\\ker(d\\exp_p)_{t_0v}$。",
+        "noteEn": "Equivalent descriptions of a conjugate point ($J$ a Jacobi field along $\\gamma$): zeros of Jacobi fields and degeneracy of the exponential map agree exactly; the multiplicity is $\\dim\\ker(d\\exp_p)_{t_0v}$."
+      },
+      {
+        "latex": "\\operatorname{Cut}(p)=\\bigl\\{\\exp_p\\bigl(t_c(v)\\,v\\bigr):v\\in T_pM,\\ |v|=1\\bigr\\}",
+        "note": "割迹的定义：$t_c(v)$ 是沿方向 $v$ 的测地线保持极小的最后时刻，$\\gamma_v(t_c(v))$ 称为割点。",
+        "noteEn": "Definition of the cut locus: $t_c(v)$ is the last time up to which the geodesic in direction $v$ is minimizing, and $\\gamma_v(t_c(v))$ is the corresponding cut point."
+      },
+      {
+        "latex": "t_c(v)\\le t_{\\mathrm{conj}}(v)",
+        "note": "割点不晚于第一个共轭点（$t_{\\mathrm{conj}}=+\\infty$ 表示该方向没有共轭点）；原因是共轭点一出现，第二变分就给出更短的曲线。",
+        "noteEn": "A cut point is never later than the first conjugate point ($t_{\\mathrm{conj}}=+\\infty$ means no conjugate point in that direction); once a conjugate point appears the second variation produces shorter curves."
+      },
+      {
+        "latex": "M=\\exp_p\\bigl(\\{tv:|v|=1,\\ 0\\le t<t_c(v)\\}\\bigr)\\ \\sqcup\\ \\operatorname{Cut}(p)",
+        "note": "不交分解：在割迹之外 $d(p,\\cdot)$ 光滑、极小测地线唯一。",
+        "noteEn": "A disjoint decomposition; away from the cut locus $d(p,\\cdot)$ is smooth and the minimizing geodesic is unique."
+      },
+      {
+        "latex": "S^n:\\ \\operatorname{Cut}(p)=\\{-p\\},\\qquad t_c=t_{\\mathrm{conj}}=\\pi,\\ \\text{重数}=n-1",
+        "note": "球面上所有方向的测地线在对径点重新汇聚，割点与第一个共轭点重合；详见例题。",
+        "noteEn": "On the sphere geodesics in all directions meet again at the antipodal point, so the cut point coincides with the first conjugate point; see the example."
+      }
+    ],
+    "properties": [
+      "共轭点 $\\iff$ $(d\\exp_p)$ 奇异；重数是 $\\ker(d\\exp_p)_{t_0v}$ 的维数，也等于使 **$J(0)=J(t_0)=0$** 的正交雅可比场空间的维数（**$J(0)=0$ 不能漏**：只要求 $J(t_0)=0$ 时该空间恒为 $n-1$ 维，与是否存在共轭点无关）。",
+      "割点总不晚于第一个共轭点；而且割点必属于下列两类之一：① 沿某条极小测地线的第一个共轭点；② 有两条（或更多）等长的极小测地线连接 $p$ 与该点。",
+      "两类例子：平环面与柱面（$K\\equiv0$）**没有**共轭点，但割迹非空；$\\mathbb R^n$ 既无共轭点、割迹也为空（$\\operatorname{Cut}(p)=\\varnothing$，所有测地线整体最短）。所以「无共轭点」并不意味着「处处最短」。",
+      "$M$ 紧致 $\\Rightarrow$ 对每个 $p$，$\\operatorname{Cut}(p)$ 非空、紧；$M\\setminus\\operatorname{Cut}(p)$ 与 $T_pM$ 中的开星形区域通过 $\\exp_p$ 微分同胚，$d(p,\\cdot)$ 在 $M\\setminus(\\{p\\}\\cup\\operatorname{Cut}(p))$ 上光滑，在割迹上一般不可微；割迹是零测集，故 $M$ 中几乎每点由唯一的极小测地线与 $p$ 相连。",
+      "沿一条测地线，共轭点是离散的、重数有限；由 Morse 指标定理（见「弧长第二变分与指标形式」）任何有限区间内的共轭点只有有限多个，其重数之和等于指标形式的指标。紧流形上共轭点可能整体不存在（平环面），但割迹必存在——这正是「割迹」比「共轭点」更基本的表现。"
+    ],
+    "propertiesEn": [
+      "Conjugate point $\\iff$ $(d\\exp_p)$ singular; the multiplicity is $\\dim\\ker(d\\exp_p)_{t_0v}$ and equals the dimension of the space of orthogonal Jacobi fields vanishing at $t_0$.",
+      "A cut point never comes later than the first conjugate point, and every cut point is of one of two types: (i) the first conjugate point along some minimizing geodesic; (ii) a point joined to $p$ by two or more minimizing geodesics of equal length.",
+      "Two contrasting examples: the flat torus and the cylinder ($K\\equiv0$) have **no** conjugate points but a non-empty cut locus; $\\mathbb R^n$ has neither conjugate points nor cut locus ($\\operatorname{Cut}(p)=\\varnothing$, all geodesics are globally minimizing). So \"no conjugate points\" does not mean \"minimizing everywhere\".",
+      "If $M$ is compact, then $\\operatorname{Cut}(p)$ is non-empty and compact for every $p$; $\\exp_p$ is a diffeomorphism from the open star-shaped domain onto $M\\setminus\\operatorname{Cut}(p)$, the function $d(p,\\cdot)$ is smooth on $M\\setminus(\\{p\\}\\cup\\operatorname{Cut}(p))$ and typically non-differentiable on the cut locus, which has measure zero — hence almost every point of $M$ is joined to $p$ by a unique minimizing geodesic.",
+      "Along a single geodesic the conjugate points are isolated and of finite multiplicity; by the Morse index theorem (see The Second Variation and the Index Form) a bounded interval contains only finitely many of them, and the sum of their multiplicities is the index of the index form. On a compact manifold conjugate points may fail to exist altogether (flat torus), while the cut locus always exists — the cut locus is the more fundamental object."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "PI - 2*atan(sqrt(x^2+y^2))",
+      "xRange": [
+        -5,
+        5
+      ],
+      "yRange": [
+        -5,
+        5
+      ],
+      "levels": 12,
+      "title": "从北极出发的距离函数等值线（球极投影：原点是对径点、即割迹；北极在无穷远处）"
+    },
+    "examples": [
+      {
+        "problem": "证明单位球面 $S^n$ 上任意点 $p$ 的割迹就是它的对径点：$\\operatorname{Cut}(p)=\\{-p\\}$。",
+        "solution": "沿任一单位速度测地线 $\\gamma$（大圆）取正交平行单位向量场 $E$，则 $J(t)=\\sin t\\,E(t)$ 是雅可比场且 $J(\\pi)=0$，故 $\\gamma(\\pi)=-p$ 是 $p$ 的共轭点，而且 $|\\gamma'|=1$ 时第一个共轭点就是 $t=\\pi$（重数 $n-1$）。\n\n由 $t_c\\le t_{\\mathrm{conj}}$ 得 $t_c\\le\\pi$。另一方面对 $0\\le t\\le\\pi$，$\\gamma|_{[0,t]}$ 确实极小：球面上的距离满足 $d(p,q)=\\arccos\\langle p,q\\rangle$，而沿大圆 $\\langle\\gamma(0),\\gamma(t)\\rangle=\\cos t$，故 $d(p,\\gamma(t))=\\arccos(\\cos t)=t$，即曲线长度等于两点距离，是极小测地线。于是 $t_c=\\pi$，割点就是 $\\gamma(\\pi)=-p$。\n\n由于每一方向的测地线都有 $\\gamma(\\pi)=-p$，$\\operatorname{Cut}(p)$ 只能是 $\\{-p\\}$——所有方向的测地线在同一个点重新聚焦，这正是「球面上共轭点与割点重合」的极端情形。\n\n配图给出了同一事实的解析图像：在从北极出发的球极投影下，到北极的距离为 $d=\\pi-2\\arctan\\rho$（$\\rho$ 为到原点的距离），等值线是同心圆，它们在原点（南极=对径点）退化为一点，而在无穷远（北极）附近愈加密集成对——割迹 $\\{-p\\}$ 正是等值线的退化点。"
+      },
+      {
+        "problem": "在平环面 $T^2=\\mathbb R^2/\\mathbb Z^2$（$K\\equiv0$）上证明：没有任何共轭点，但每个点的割迹非空，并描述 $\\operatorname{Cut}(p)$。",
+        "solution": "**没有共轭点**：万有覆盖 $\\pi\\colon\\mathbb R^2\\to T^2$ 是局部等距，$T^2$ 上沿测地线 $\\gamma$ 的雅可比场与沿提升 $\\tilde\\gamma$（直线）的雅可比场一一对应；$\\mathbb R^2$ 上 $R\\equiv0$，雅可比场为 $J(t)=a+tb$，不存在 $J(0)=0$、$J\\not\\equiv0$ 而在 $t_0>0$ 处为零的场。等价地：$\\exp_p$ 在 $T^2$ 上的提升是恒同映射，处处非奇异。\n\n**割迹非空**：任取 $p$ 与其平移 $p+(1,0)$（都投影到同一个点？不——取格点平移代表元）。从 $p$ 出发沿方向 $v=(1,0)$ 的测地线为 $\\gamma(t)=(t,0)$（模 $\\mathbb Z^2$）。在 $\\mathbb R^2$ 中，点 $(1/2,0)$ 到两个最近格点 $(0,0)$ 与 $(1,0)$ 的距离都是 $1/2$，所以在 $T^2$ 上有两条长度相同的最短测地线连接 $p$ 与 $\\gamma(1/2)$：一条沿 $+x$，一条沿 $-x$（因为 $(-1/2,0)$ 与 $(1/2,0)$ 在环面上是同一点）。因此 $t_c=\\frac12<\\infty$：$\\gamma(1/2)$ 是割点，而此时 $t_{\\mathrm{conj}}=+\\infty$（不存在共轭点），故割点严格早于共轭点。\n\n**割迹的形状**：一般地，平移 $t\\mapsto$「离原点最近的格点」发生平局的时刻即 $t_c$，也就是从原点到 Voronoi 胞腔（正方形 $[-1/2,1/2]^2$）边界沿方向 $v$ 的距离；割迹是这些边界点在环面上的像，即 {$x=\\frac12$} $\\cup$ {$y=\\frac12$}（模 $\\mathbb Z^2$）——两条闭测地线组成的「十字」，它非空、紧，与共轭点的缺失形成鲜明对照。柱面 $S^1\\times\\mathbb R$ 同理：$\\operatorname{Cut}(p)$ 是与 $p$ 对径的那条平行于母线的直线。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "共轭点",
+      "割迹",
+      "测地线",
+      "指数映射"
+    ],
+    "links": [
+      "jacobi-fields",
+      "exponential-map",
+      "second-variation-index-form",
+      "first-variation",
+      "hopf-rinow",
+      "cartan-hadamard",
+      "geodesic"
+    ]
+  },
+  {
+    "id": "second-variation-index-form",
+    "title": "弧长第二变分与指标形式",
+    "titleEn": "The Second Variation and the Index Form",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "测地线是长度与能量的临界点，其稳定性由第二变分决定：$I(V,V)=\\int(|\\nabla_{\\gamma'}V|^2-\\langle R(V,\\gamma')\\gamma',V\\rangle)\\,dt$。测地线局部极小 $\\iff I\\ge0$；开区间内出现共轭点 $\\Rightarrow$ 存在 $I(V,V)<0$ 的变分（充分条件）；Morse 指标定理指出 $I$ 的指标恰等于共轭点重数之和。",
+    "summaryEn": "A geodesic is a critical point of length and energy, and its stability is decided by the second variation $I(V,V)=\\int(|\\nabla_{\\gamma'}V|^2-\\langle R(V,\\gamma')\\gamma',V\\rangle)\\,dt$. Being a local minimum is equivalent to $I\\ge0$; a conjugate point inside the interval yields a variation with $I(V,V)<0$ (a sufficient condition), and the Morse index theorem identifies the index of $I$ with the total multiplicity of the conjugate points.",
+    "definition": "设 $\\gamma\\colon[a,b]\\to M$ 是测地线，$u\\colon[a,b]\\times(-\\varepsilon,\\varepsilon)\\to M$ 是**固定端点**的光滑变分（$u(a,s)=\\gamma(a)$、$u(b,s)=\\gamma(b)$），变分向量场 $V(t)=\\partial_su(t,0)$ 因此满足 $V(a)=V(b)=0$。测地线正是弧长泛函 $L$ 与能量泛函 $E$ 的临界点，$L'(0)=E'(0)=0$（第一变分）。判定它究竟是极小、极大还是鞍点，要看**第二变分**。\n\n**第二变分公式**：记 $V'=\\nabla_{\\gamma'}V$。则（$\\gamma$ 为单位速度，$V^\\perp$ 是 $V$ 垂直于 $\\gamma'$ 的分量）\n$$L''(0)=I(V^{\\perp},V^{\\perp}),\\qquad E''(0)=I(V,V)\\ \\text{（取 }E(\\gamma)=\\tfrac12\\int_a^b|\\gamma'|^2dt\\text{）},$$\n其中\n$$I(V,W)=\\int_a^b\\Bigl(\\langle V',W'\\rangle-\\langle R(V,\\gamma')\\gamma',W\\rangle\\Bigr)dt$$\n称为**指标形式**。能量若取成 $\\int|\\gamma'|^2dt$，则右端系数为 $2$；只要用同一个 $I$，弧长与能量在测地线上给出的是同一个二次形式，所以讨论极小性时不必区分。\n\n**符号是本节的要点**：二次项 $|V'|^2$ 取**正**号、曲率项取**负**号，前提是本库统一的约定 $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$。这个负号有明确的几何含义：**正曲率使邻近测地线聚焦、把它们的距离拉小，因此降低 $I$、使测地线更容易失去极小性**；负曲率则相反（让 $I$ 变大）。如果改用相反的曲率约定 $R'=-R$，那么曲率项要写成 $+\\langle R'(V,\\gamma')\\gamma',W\\rangle$——符号是约定的一部分，不能混用。此外，$I$ 的 Euler–Lagrange 方程正是雅可比方程 $V''+R(V,\\gamma')\\gamma'=0$：**雅可比场就是指标形式的核**。\n\n**极小性与共轭点**：$\\gamma$ 在固定端点的变分下局部极小 $\\iff I(V,V)\\ge0$ 对一切允许的 $V$ 成立（$I$ 正半定）。若开区间 $(a,b)$ 内存在共轭点 $\\gamma(t_0)$，则可构造 $V$（例如把沿 $[a,t_0]$ 的雅可比场在 $[t_0,b]$ 上取 $0$，再加一点微扰）使 $I(V,V)<0$，从而 $\\gamma$ 不可能是极小测地线——这就是「**共轭点 $\\Rightarrow$ 失去极小性**」的定理。要强调的是：这是**充分条件**。反过来只能得到「$\\gamma$ 极小 $\\Rightarrow$ $(a,b)$ 内没有共轭点」；「没有共轭点」并不保证极小（平环面上绕行多圈的测地线既无共轭点也不最短），因为上述判据只涉及 $\\gamma$ 附近的曲线，是**局部**结论。\n\n**Morse 指标定理**把「负方向的个数」与「共轭点」精确对上：指标形式 $I$ 是端点消失的分段光滑向量场空间上的对称双线性形式，它的**指标**（使 $I$ 负定的子空间的最大维数，是有限的）等于开区间内共轭点重数之和，\n$$\\operatorname{ind}(I)=\\sum_{a<t_0<b}\\operatorname{mult}(t_0),$$\n而 $I$ 的**零化空间**维数等于终点处的重数 $\\operatorname{mult}(b)$（当 $\\gamma(b)$ 是共轭点时），其中的元素正是两端都为零的雅可比场。",
+    "definitionEn": "Let $\\gamma\\colon[a,b]\\to M$ be a geodesic and $u\\colon[a,b]\\times(-\\varepsilon,\\varepsilon)\\to M$ a smooth variation with **fixed endpoints** ($u(a,s)=\\gamma(a)$, $u(b,s)=\\gamma(b)$), so the variation field $V(t)=\\partial_su(t,0)$ satisfies $V(a)=V(b)=0$. Geodesics are exactly the critical points of length $L$ and energy $E$, i.e. $L'(0)=E'(0)=0$ (first variation). Whether they are minima, maxima or saddle points is decided by the **second variation**.\n\n**Second variation formula.** Write $V'=\\nabla_{\\gamma'}V$ and let $V^{\\perp}$ be the component of $V$ perpendicular to $\\gamma'$. Then ($\\gamma$ of unit speed)\n$$L''(0)=I(V^{\\perp},V^{\\perp}),\\qquad E''(0)=I(V,V)\\ \\text{for }E(\\gamma)=\\tfrac12\\int_a^b|\\gamma'|^2dt,$$\nwhere\n$$I(V,W)=\\int_a^b\\Bigl(\\langle V',W'\\rangle-\\langle R(V,\\gamma')\\gamma',W\\rangle\\Bigr)dt$$\nis the **index form**. If the energy is normalized as $\\int|\\gamma'|^2dt$ the right hand side is multiplied by $2$; with one and the same $I$, length and energy give the same quadratic form along a geodesic, so minimality questions do not depend on the choice.\n\n**The signs are the crux.** The quadratic term $|V'|^2$ enters with a **plus** sign and the curvature term with a **minus** sign, under the convention $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$ used throughout this library. The minus sign has a clear geometric meaning: **positive curvature focuses nearby geodesics, pulls their distance down, hence lowers $I$ and makes it easier for the geodesic to lose minimality**; negative curvature does the opposite. With the opposite curvature convention $R'=-R$ the curvature term must be written $+\\langle R'(V,\\gamma')\\gamma',W\\rangle$ — signs belong to the convention and must never be mixed. Moreover the Euler–Lagrange equation of $I$ is exactly the Jacobi equation $V''+R(V,\\gamma')\\gamma'=0$: **Jacobi fields are the kernel of the index form**.\n\n**Minimality and conjugate points.** The geodesic $\\gamma$ is a local minimum among variations with fixed endpoints $\\iff I(V,V)\\ge0$ for all admissible $V$ (positive semidefinite). If there is a conjugate point $\\gamma(t_0)$ with $t_0$ in the open interval $(a,b)$, one can build a field $V$ (take a Jacobi field on $[a,t_0]$, extend by $0$ on $[t_0,b]$ and perturb slightly) with $I(V,V)<0$, so $\\gamma$ cannot be minimizing: this is the theorem \"**a conjugate point $\\Rightarrow$ loss of minimality**\". It is a **sufficient** condition: all one gets in the converse direction is \"$\\gamma$ minimizing $\\Rightarrow$ no conjugate point in $(a,b)$\", and \"no conjugate points\" does not by itself imply minimality (a geodesic on the flat torus winding several times has no conjugate point and is not shortest), because the criterion only tests curves near $\\gamma$ — a **local** statement.\n\n**Morse index theorem** matches the number of negative directions with the conjugate points exactly. The index form $I$ is a symmetric bilinear form on the space of piecewise smooth vector fields vanishing at the endpoints; its **index** (the largest dimension of a subspace on which $I$ is negative definite, which is finite) equals the sum of the multiplicities of the conjugate points in the open interval,\n$$\\operatorname{ind}(I)=\\sum_{a<t_0<b}\\operatorname{mult}(t_0),$$\nwhile the dimension of the **null space** of $I$ equals the multiplicity $\\operatorname{mult}(b)$ at the endpoint $\\gamma(b)$ (when it is a conjugate point), its elements being exactly the Jacobi fields vanishing at both $a$ and $b$.",
+    "formulas": [
+      {
+        "latex": "I(V,W)=\\int_a^b\\Bigl(\\langle V',W'\\rangle-\\langle R(V,\\gamma')\\gamma',W\\rangle\\Bigr)dt",
+        "note": "指标形式的定义：二次项取正号、曲率项取负号（本库约定 $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$）；正曲率降低 $I$。",
+        "noteEn": "Definition of the index form: the quadratic term enters with a plus sign and the curvature term with a minus sign (library convention $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$); positive curvature lowers $I$."
+      },
+      {
+        "latex": "L''(0)=I(V^{\\perp},V^{\\perp}),\\qquad E''(0)=I(V,V),\\quad E(\\gamma)=\\tfrac12\\int_a^b|\\gamma'|^2dt",
+        "note": "第二变分公式：弧长的第二变分只看见 $V$ 的正交分量；能量在 $\\frac12\\int|\\gamma'|^2$ 的归一化下对任意端点为零的 $V$ 成立（若取 $\\int|\\gamma'|^2$ 则系数为 2）。特别地，$V\\perp\\gamma'$ 时 $L''(0)=I(V,V)$。",
+        "noteEn": "Second variation: the second variation of length only sees the perpendicular part of $V$, and the energy with the normalization $\\frac12\\int|\\gamma'|^2$ gives $I(V,V)$ for every $V$ vanishing at the endpoints (with $\\int|\\gamma'|^2$ the factor is 2). In particular $L''(0)=I(V,V)$ whenever $V\\perp\\gamma'$."
+      },
+      {
+        "latex": "V''+R(V,\\gamma')\\gamma'=0",
+        "note": "指标形式的 Euler–Lagrange 方程，即雅可比方程：雅可比场是指标形式的核。等价地 $I(V,J)=-\\int_a^b\\langle V,J''+R(J,\\gamma')\\gamma'\\rangle\\,dt$（当 $V$ 在端点为零时），故 $J$ 是雅可比场时 $I(V,J)=0$。",
+        "noteEn": "The Euler–Lagrange equation of the index form, i.e. the Jacobi equation: Jacobi fields are the kernel of $I$. Equivalently $I(V,J)=-\\int_a^b\\langle V,J''+R(J,\\gamma')\\gamma'\\rangle\\,dt$ whenever $V$ vanishes at the endpoints, so $I(V,J)=0$ for a Jacobi field $J$."
+      },
+      {
+        "latex": "\\gamma\\ \\text{局部极小}\\iff I\\ge0\\iff\\operatorname{ind}(I)=0",
+        "note": "极小性判据：只对固定端点的邻近变分成立（局部结论）；若 $(a,b]$ 内都没有共轭点，则 $I$ 正定，极小性是严格的；若 $b$ 恰是第一个共轭点，则 $I\\ge0$ 但有非零的 $V$ 使 $I(V,V)=0$，极小性处于临界状态。",
+        "noteEn": "Minimality criterion, valid for variations with fixed endpoints near $\\gamma$ (a local statement). If there is no conjugate point in $(a,b]$, then $I$ is positive definite and minimality is strict; if $b$ is exactly the first conjugate point, then $I\\ge0$ with a non-zero $V$ satisfying $I(V,V)=0$, so minimality is critical."
+      },
+      {
+        "latex": "\\operatorname{ind}(I)=\\sum_{a<t_0<b}\\operatorname{mult}(t_0),\\qquad \\dim\\ker I=\\operatorname{mult}(b)",
+        "note": "Morse 指标定理：指标 = 开区间内共轭点重数之和；零化空间维数 = 终点重数。由此「负方向个数」与「共轭点」完全等同，也说明有限区间内共轭点只有有限多个。",
+        "noteEn": "Morse index theorem: the index equals the sum of the multiplicities of the conjugate points in the open interval, and the dimension of the null space equals the multiplicity at the endpoint. Thus \"number of negative directions\" and \"conjugate points\" agree exactly, and a bounded interval contains only finitely many conjugate points."
+      }
+    ],
+    "properties": [
+      "$I$ 是对称双线性形式。把 $V$ 分解为平行分量 $V^{\\top}=f\\gamma'$ 与正交分量 $V^{\\perp}$，则 $I(V,V)=\\int_a^b|f'|^2dt+I(V^{\\perp},V^{\\perp})$：平行分量只贡献正值，因此极小性的判定可以只考虑正交于 $\\gamma'$ 的向量场。",
+      "曲率项的几何方向：$K\\le0$ 时 $\\langle R(V,\\gamma')\\gamma',V\\rangle=K|V|^2\\le0$（$V\\perp\\gamma'$），于是 $I(V,V)\\ge\\int|V'|^2>0$，指标形式正定——这正是「非正曲率空间中没有共轭点、测地线都是局部极小」的核心（与 Cartan–Hadamard 定理一致）；$K>0$ 则使 $I$ 变小、聚焦加快。",
+      "极小性判据是局部的：$I\\ge0\\iff$ $\\gamma$ 不长于附近同端点曲线；整体最短性还要看割点（平环面上绕圈的测地线就是 $I\\ge0$ 却整体不最短的例子）。",
+      "共轭点 $\\Rightarrow$ 非极小，这条蕴含是**充分而非必要**的：$(a,b)$ 内有共轭点足以破坏极小性，但没有共轭点也可能不极小。",
+      "Morse 指标定理：$\\operatorname{ind}(I)=\\sum_{a<t_0<b}\\operatorname{mult}(t_0)$（有限），$\\dim\\ker I=\\operatorname{mult}(b)$；由此可数出有限区间内共轭点的个数与重数，并得到 $I$ 的 Morse 指标索引是「测地线有多少个独立的方向可以变短」的度量。",
+      "归一化提醒：能量取 $E=\\frac12\\int|\\gamma'|^2$ 时 $E''(0)=I(V,V)$；取 $E=\\int|\\gamma'|^2$ 时 $E''(0)=2I(V,V)$；弧长总是 $L''(0)=I(V^{\\perp},V^{\\perp})$。三者用的是同一个 $I$，所以「指标形式」与「Morse 指标」不受归一化影响。"
+    ],
+    "propertiesEn": [
+      "$I$ is a symmetric bilinear form. Splitting $V$ into its parallel part $V^{\\top}=f\\gamma'$ and perpendicular part $V^{\\perp}$ gives $I(V,V)=\\int_a^b|f'|^2dt+I(V^{\\perp},V^{\\perp})$: the parallel part contributes a positive term only, so minimality can be tested on fields orthogonal to $\\gamma'$ alone.",
+      "Geometric direction of the curvature term: for $K\\le0$ one has $\\langle R(V,\\gamma')\\gamma',V\\rangle=K|V|^2\\le0$ ($V\\perp\\gamma'$), hence $I(V,V)\\ge\\int|V'|^2>0$ and the index form is positive definite — the core reason why non-positive curvature spaces have no conjugate points and every geodesic is a local minimum (consistent with the Cartan–Hadamard theorem); $K>0$ lowers $I$ and speeds up focusing.",
+      "The criterion is local: $I\\ge0$ means $\\gamma$ is no longer than nearby curves with the same endpoints; global minimality is a question of cut points (a winding geodesic on the flat torus satisfies $I\\ge0$ yet is not globally shortest).",
+      "A conjugate point $\\Rightarrow$ not minimizing, and this implication is **sufficient but not necessary**: a conjugate point inside $(a,b)$ is enough to destroy minimality, whereas a geodesic without conjugate points may still fail to be minimizing.",
+      "Morse index theorem: $\\operatorname{ind}(I)=\\sum_{a<t_0<b}\\operatorname{mult}(t_0)$ (finite) and $\\dim\\ker I=\\operatorname{mult}(b)$; this counts the conjugate points and their multiplicities in a bounded interval, and identifies the Morse index of $I$ with the number of independent directions in which the geodesic can be shortened.",
+      "Normalization reminder: for $E=\\frac12\\int|\\gamma'|^2$ one has $E''(0)=I(V,V)$; for $E=\\int|\\gamma'|^2$ one has $E''(0)=2I(V,V)$; for length always $L''(0)=I(V^{\\perp},V^{\\perp})$. All three use the same $I$, so the index form and the Morse index do not depend on the normalization."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "cos(x)^2",
+          "color": "#4cc9f0",
+          "label": "K=0：|V'|²=cos²t（I>0）"
+        },
+        {
+          "expr": "cos(x)^2 - sin(x)^2",
+          "color": "#06d6a0",
+          "label": "K=1：cos²t−sin²t（I=0，临界）"
+        },
+        {
+          "expr": "cos(x)^2 - 4*sin(x)^2",
+          "color": "#ff6b9d",
+          "label": "K=4：cos²t−4sin²t（I<0，失去极小性）"
+        },
+        {
+          "expr": "cos(x)^2 + sin(x)^2",
+          "color": "#ffd166",
+          "label": "K=−1：cos²t+sin²t≡1（I>0）"
+        }
+      ],
+      "xRange": [
+        0,
+        3.1416
+      ],
+      "yRange": [
+        -3.6,
+        1.3
+      ],
+      "title": "指标形式被积函数 |V'|²−K|V|²（V=sin t，γ 单位速度，t∈[0,π]）"
+    },
+    "examples": [
+      {
+        "problem": "设 $M=S^n$ 是单位球面（$K\\equiv1$），$\\gamma\\colon[0,L]\\to M$ 是单位速度测地线，$E$ 是沿 $\\gamma$ 平行移动的单位向量且 $E\\perp\\gamma'$，取 $V(t)=\\sin\\frac{\\pi t}{L}E(t)$。计算 $I(V,V)$，并解释 $L>\\pi$ 时结果为何说明 $\\gamma$ 不可能是极小的。",
+        "solution": "$E$ 平行移动给出 $V'=\\frac{\\pi}{L}\\cos\\frac{\\pi t}{L}E$，于是\n$$|V'|^2=\\frac{\\pi^2}{L^2}\\cos^2\\frac{\\pi t}{L},\\qquad |V|^2=\\sin^2\\frac{\\pi t}{L}.$$\n单位球面上（$V\\perp\\gamma'$、$|\\gamma'|=1$）有 $R(V,\\gamma')\\gamma'=V$，故曲率项 $\\langle R(V,\\gamma')\\gamma',V\\rangle=|V|^2$。代入指标形式：\n$$I(V,V)=\\int_0^L\\Bigl(\\frac{\\pi^2}{L^2}\\cos^2\\frac{\\pi t}{L}-\\sin^2\\frac{\\pi t}{L}\\Bigr)dt=\\frac{\\pi^2}{L^2}\\cdot\\frac{L}{2}-\\frac{L}{2}=\\frac{\\pi^2-L^2}{2L}.$$\n（用了 $\\int_0^L\\cos^2\\frac{\\pi t}{L}dt=\\int_0^L\\sin^2\\frac{\\pi t}{L}dt=\\frac L2$。）因此：\n\n· $L<\\pi$：$L''(0)=I(V,V)>0$，与「共轭点之前测地线极小」一致；\n· $L=\\pi$：$I(V,V)=0$，此时 $V(t)=\\sin t\\,E(t)$ 正是沿 $\\gamma$ 的雅可比场，零点恰好落在端点 $b=\\pi$，指标形式退化，极小性处于临界状态；\n· $L>\\pi$：$I(V,V)=\\frac{\\pi^2-L^2}{2L}<0$，存在使第二变分为负的变分，所以 $\\gamma$ 不可能极小——这正是 $(a,b)$ 内（$t=\\pi$ 处）出现共轭点导致失去极小性的显式例子。"
+      },
+      {
+        "problem": "设 $\\gamma\\colon[a,b]\\to M$ 是单位速度测地线，$V$ 是分段光滑、端点为零且 $V\\perp\\gamma'$ 的向量场，$V\\not\\equiv0$。证明：若沿 $\\gamma$ 的截面曲率 $K\\le0$，则 $I(V,V)>0$；并由此说明 $K\\le0$ 时测地线上不存在共轭点。",
+        "solution": "对 $V\\perp\\gamma'$、$|\\gamma'|=1$ 有 $\\langle R(V,\\gamma')\\gamma',V\\rangle=K\\cdot|V|^2|\\gamma'|^2\\le0$，因此\n$$I(V,V)=\\int_a^b\\bigl(|V'|^2-\\langle R(V,\\gamma')\\gamma',V\\rangle\\bigr)dt\\ \\ge\\ \\int_a^b|V'|^2dt\\ >\\ 0,$$\n最后一式用了 $V(a)=0$ 且 $V\\not\\equiv0$（从而 $V'$ 不恒为零）：若 $\\int|V'|^2=0$ 则 $V$ 为常向量，由 $V(a)=0$ 得 $V\\equiv0$，矛盾。所以 $I$ 正定。\n\n若 $\\gamma(t_0)$（$a<t_0\\le b$）是共轭点，取非零雅可比场 $J$ 使 $J(a)=J(t_0)=0$，令 $V=J$ 在 $[a,t_0]$ 上、$V=0$ 在 $[t_0,b]$ 上，则 $V$ 分段光滑、端点为零、$V\\not\\equiv0$，且（$J$ 在 $[a,t_0]$ 上是雅可比场）\n$$I(V,V)=\\int_a^{t_0}\\bigl(|J'|^2-\\langle R(J,\\gamma')\\gamma',J\\rangle\\bigr)dt=I(J,J)_{[a,t_0]}=0,$$\n与正定性 $I(V,V)>0$ 矛盾。故 $K\\le0$ 时没有共轭点——这正是 Cartan–Hadamard 定理的第一步。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "变分",
+      "指标形式",
+      "Morse 指标定理",
+      "共轭点"
+    ],
+    "links": [
+      "jacobi-fields",
+      "first-variation",
+      "conjugate-points-cut-locus",
+      "rauch-comparison",
+      "cartan-hadamard",
+      "geodesic",
+      "exponential-map"
+    ]
+  },
+  {
+    "id": "rauch-comparison",
+    "title": "劳赫比较定理",
+    "titleEn": "The Rauch Comparison Theorem",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "等长测地线上，两端的正交雅可比场都从零点出发（$J(0)=\\tilde J(0)=0$）且初速度等长；此时若相应截面曲率更大（$K_M\\ge K_{\\tilde M}$）且比较侧无共轭点，则 $|J(t)|\\le|\\tilde J(t)|$ 且 $|J|/|\\tilde J|$ 单调不增：曲率越大，测地线聚焦越快、共轭点越早。它是 Bonnet–Myers、Cartan–Hadamard 与球面定理的基础。",
+    "summaryEn": "Along equidistant geodesics, if the relevant sectional curvatures are larger ($K_M\\ge K_{\\tilde M}$) and the comparison field has no zeros, then $|J(t)|\\le|\\tilde J(t)|$ and $|J|/|\\tilde J|$ is non-increasing: larger curvature focuses geodesics faster and brings conjugate points earlier. It underlies Bonnet–Myers, Cartan–Hadamard and the sphere theorem.",
+    "definition": "设 $\\gamma\\colon[0,T]\\to M$ 与 $\\tilde\\gamma\\colon[0,T]\\to\\tilde M$ 是**等长**的测地线（$|\\gamma'|=|\\tilde\\gamma'|$，不妨都取单位速度），$J,\\tilde J$ 分别是沿它们的光滑**正交**雅可比场（$J\\perp\\gamma'$、$\\tilde J\\perp\\tilde\\gamma'$），且**都从零点出发**、初始速度大小相同：\n$$J(0)=\\tilde J(0)=0,\\qquad |J'(0)|=|\\tilde J'(0)|,$$\n其中 $J'=\\nabla_{\\gamma'}J$。**$J(0)=\\tilde J(0)=0$ 是本质前提**：只写 $|J(0)|=|\\tilde J(0)|$（如都取 1）时 $J$ 自身会在 $(0,T]$ 内过零，而比值论证要求两端都不为零，定理就成了假命题——反例：$M=S^2(1/2)$（$K\\equiv4$）与 $\\tilde M=S^2$（$\\tilde K\\equiv1$），取 $J=\\cos(2t)E(t)$、$\\tilde J=\\cos t\\,\\tilde E(t)$，则 $|J(0)|=|\\tilde J(0)|=1$、$J'(0)=\\tilde J'(0)=0$、$K\\ge\\tilde K$、$\\tilde J$ 在 $(0,1.2]$ 上无零点，但 $t=1.2$ 处 $|J|=0.737>|\\tilde J|=0.362$。\n\n**Rauch 比较定理**：设相应的截面曲率逐点满足\n$$K\\bigl(\\mathrm{span}\\{\\gamma'(t),J(t)\\}\\bigr)\\ \\ge\\ \\tilde K\\bigl(\\mathrm{span}\\{\\tilde\\gamma'(t),\\tilde J(t)\\}\\bigr),\\qquad 0\\le t\\le T,$$\n并且 $\\tilde J$ 在 $(0,T]$ 上**没有零点**（等价地说：$\\tilde\\gamma$ 在 $(0,T]$ 上没有与 $\\tilde\\gamma(0)$ 共轭的点）。则\n$$|J(t)|\\le|\\tilde J(t)|,\\qquad 0\\le t\\le T,$$\n更强地，比值 $|J|/|\\tilde J|$ 单调不增。若 $K_M\\ge K_{\\tilde M}$ 处处成立，则曲率条件自动满足。\n\n**方向（最容易记反的地方）**：把不等式翻译成几何语言就是「**曲率越大 $\\Rightarrow$ 测地线聚焦越快 $\\Rightarrow$ $|J|$ 越小 $\\Rightarrow$ 第一个共轭点越早**」。所以 $K_M\\ge K_{\\tilde M}$ 一侧给出的是 $|J|\\le|\\tilde J|$（曲率大的那边长度更小），而不是相反。等号：若沿 $\\gamma$ 与 $\\tilde\\gamma$ 的相应曲率处处相等（例如两个常曲率相同的模型空间），则 $|J|\\equiv|\\tilde J|$，所以定理中的比较常数是最优的。几何直观：正曲率像凸透镜，把出发时平行的测地线很快会聚；曲率越大，会聚越急，离出发点的重聚会（共轭点）越近。\n\n**另一个方向**：把两个流形的角色对调，即若 $K_M\\le K_{\\tilde M}$ 且 $J$ 在 $(0,T]$ 上没有零点，则 $|J|\\ge|\\tilde J|$。取 $\\tilde M=\\mathbb R^n$（$K\\equiv0$）并取 $|J(0)|=0$、$|J'(0)|=1$，就有\n$$K_M\\le0\\ \\Longrightarrow\\ |J(t)|\\ge t,$$\n即非正曲率下测地线不会重新聚焦；换成指数映射的说法就是 $d\\exp_p$ 处处非奇异，这正是 Cartan–Hadamard 定理的第一步。\n\n**主要推论**：$K\\ge k>0$ 时把 $M$ 与常曲率 $k$ 的模型空间比较（模型 Jacobi 场 $\\frac{\\sin(\\sqrt kt)}{\\sqrt k}$ 在 $t=\\pi/\\sqrt k$ 首次归零），得到「每个方向在 $t=\\pi/\\sqrt k$ 之前出现共轭点」，即 $K\\ge1/R^2\\Rightarrow t_{\\mathrm{conj}}\\le\\pi R$。再由极小测地线的内部不能有共轭点，立刻得到 Bonnet–Myers 的直径界 $\\operatorname{diam}M\\le\\pi R$ 与紧致性。Rauch 定理还是球面定理（$\\frac14<K\\le1\\Rightarrow M$ 同胚于 $S^n$）、共轭点比较、以及把 $|J|$ 的界积分成体积界的体积比较类结论的关键工具。",
+    "definitionEn": "Let $\\gamma\\colon[0,T]\\to M$ and $\\tilde\\gamma\\colon[0,T]\\to\\tilde M$ be **equidistant** geodesics ($|\\gamma'|=|\\tilde\\gamma'|$; we may take unit speed), and let $J,\\tilde J$ be smooth **orthogonal** Jacobi fields along them ($J\\perp\\gamma'$, $\\tilde J\\perp\\tilde\\gamma'$) with the **same zero starting point** and equal initial speed:\n$$J(0)=\\tilde J(0)=0,\\qquad |J'(0)|=|\\tilde J'(0)|,$$\nwhere $J'=\\nabla_{\\gamma'}J$. **The hypothesis $J(0)=\\tilde J(0)=0$ is essential**: with only $|J(0)|=|\\tilde J(0)|$ (say both $1$) the field $J$ itself vanishes inside $(0,T]$, while the ratio argument needs both to be non-zero, and the theorem becomes false — counterexample: $M=S^2(1/2)$ ($K\\equiv4$), $\\tilde M=S^2$ ($\\tilde K\\equiv1$), $J=\\cos(2t)E(t)$, $\\tilde J=\\cos t\\,\\tilde E(t)$: then $|J(0)|=|\\tilde J(0)|=1$, $J'(0)=\\tilde J'(0)=0$, $K\\ge\\tilde K$, $\\tilde J$ has no zero on $(0,1.2]$, yet at $t=1.2$ we get $|J|=0.737>|\\tilde J|=0.362$. (An orthogonal Jacobi field automatically satisfies $\\langle J'(0),\\gamma'(0)\\rangle=0$, since $\\langle J,\\gamma'\\rangle$ is affine in $t$.)\n\n**Rauch comparison theorem.** Suppose the relevant sectional curvatures satisfy pointwise\n$$K\\bigl(\\mathrm{span}\\{\\gamma'(t),J(t)\\}\\bigr)\\ \\ge\\ \\tilde K\\bigl(\\mathrm{span}\\{\\tilde\\gamma'(t),\\tilde J(t)\\}\\bigr),\\qquad 0\\le t\\le T,$$\nand suppose $\\tilde J$ has **no zero** on $(0,T]$ (equivalently, $\\tilde\\gamma$ has no point conjugate to $\\tilde\\gamma(0)$ in $(0,T]$). Then\n$$|J(t)|\\le|\\tilde J(t)|,\\qquad 0\\le t\\le T,$$\nand moreover the ratio $|J|/|\\tilde J|$ is non-increasing. If $K_M\\ge K_{\\tilde M}$ holds everywhere, the curvature hypothesis is automatic.\n\n**Direction (the easiest thing to get wrong).** In geometric language the inequality says: **larger curvature $\\Rightarrow$ faster focusing $\\Rightarrow$ smaller $|J|$ $\\Rightarrow$ earlier first conjugate point**. Thus $K_M\\ge K_{\\tilde M}$ gives $|J|\\le|\\tilde J|$ (the larger-curvature side has the smaller field), not the reverse. Equality: if the relevant curvatures agree everywhere (for instance two model spaces of the same constant curvature), then $|J|\\equiv|\\tilde J|$, so the comparison constants are optimal. Intuition: positive curvature acts like a convex lens, making initially parallel geodesics converge; the larger the curvature, the faster they converge, and the closer the focus (conjugate point).\n\n**The other direction.** Exchanging the roles, if $K_M\\le K_{\\tilde M}$ and $J$ has no zero on $(0,T]$, then $|J|\\ge|\\tilde J|$. Taking $\\tilde M=\\mathbb R^n$ ($K\\equiv0$) with $|J(0)|=0$, $|J'(0)|=1$ gives\n$$K_M\\le0\\ \\Longrightarrow\\ |J(t)|\\ge t,$$\ni.e. under non-positive curvature geodesics never refocus; equivalently $d\\exp_p$ is everywhere non-singular, which is the first step of the Cartan–Hadamard theorem.\n\n**Main corollaries.** For $K\\ge k>0$, comparing with the model space of constant curvature $k$ (its Jacobi field $\\frac{\\sin(\\sqrt kt)}{\\sqrt k}$ vanishes first at $t=\\pi/\\sqrt k$) shows that a conjugate point appears before $t=\\pi/\\sqrt k$, i.e. $K\\ge1/R^2$ implies $t_{\\mathrm{conj}}\\le\\pi R$. Since a minimizing geodesic cannot contain a conjugate point in its interior, one immediately gets the Bonnet–Myers diameter bound $\\operatorname{diam}M\\le\\pi R$ and compactness. Rauch's theorem is also a key tool for the sphere theorem ($\\frac14<K\\le1\\Rightarrow M$ is homeomorphic to $S^n$), for conjugate point comparison, and for volume comparison statements obtained by integrating bounds on $|J|$.",
+    "formulas": [
+      {
+        "latex": "|J(t)|\\le|\\tilde J(t)|,\\qquad \\left(\\frac{|J|}{|\\tilde J|}\\right)'\\le0",
+        "note": "Rauch 比较定理的结论。前提：$\\gamma,\\tilde\\gamma$ 等长、$J,\\tilde J$ 正交、**两端都从零点出发** $J(0)=\\tilde J(0)=0$ 且 $|J'(0)|=|\\tilde J'(0)|$ 匹配，$K\\ge\\tilde K$，且 $\\tilde J$ 在 $(0,T]$ 上无零点。",
+        "noteEn": "The conclusion of Rauch's theorem. Hypotheses: equidistant geodesics, orthogonal Jacobi fields with matching data $|J(0)|=|\\tilde J(0)|$, $|J'(0)|=|\\tilde J'(0)|$, $K\\ge\\tilde K$, and $\\tilde J$ without zeros on $(0,T]$."
+      },
+      {
+        "latex": "K_M\\ge K_{\\tilde M}\\ \\Longrightarrow\\ |J|\\le|\\tilde J|\\ \\Longrightarrow\\ t_{\\mathrm{conj}}\\le\\tilde t_{\\mathrm{conj}}",
+        "note": "方向（务必核对）：曲率大 $\\Rightarrow$ 聚焦快 $\\Rightarrow$ $|J|$ 小 $\\Rightarrow$ 共轭点早。",
+        "noteEn": "The direction (always worth double-checking): larger curvature means faster focusing, hence smaller $|J|$ and an earlier conjugate point."
+      },
+      {
+        "latex": "\\bigl(\\log|J|\\bigr)'\\le\\bigl(\\log|\\tilde J|\\bigr)'",
+        "note": "与「比值不增」等价的对数导数形式（在 $J,\\tilde J$ 不为零处）。从 $\\varepsilon$ 到 $t$ 积分并令 $\\varepsilon\\to0$（此时 $|J(\\varepsilon)|/|\\tilde J(\\varepsilon)|\\to|J'(0)|/|\\tilde J'(0)|=1$，当 $J(0)=\\tilde J(0)=0$）即得 $|J|/|\\tilde J|$ 单调不增。",
+        "noteEn": "The equivalent logarithmic-derivative form of the monotonicity (where $J,\\tilde J$ do not vanish). Integrating from $\\varepsilon$ to $t$ and letting $\\varepsilon\\to0$ (then $|J(\\varepsilon)|/|\\tilde J(\\varepsilon)|\\to|J'(0)|/|\\tilde J'(0)|=1$ when $J(0)=\\tilde J(0)=0$) yields the monotonicity of $|J|/|\\tilde J|$."
+      },
+      {
+        "latex": "K\\ge k>0\\ \\Longrightarrow\\ t_{\\mathrm{conj}}\\le\\frac{\\pi}{\\sqrt{k}}\\qquad\\bigl(k=1/R^2\\ \\text{时即}\\ t_{\\mathrm{conj}}\\le\\pi R\\bigr)",
+        "note": "与常曲率 $k$ 的模型空间比较：模型 Jacobi 场 $\\sin(\\sqrt kt)/\\sqrt k$ 在 $t=\\pi/\\sqrt k$ 首次归零，比较不等式把一般的 $|J|$ 也压到零。",
+        "noteEn": "Comparison with the model space of constant curvature $k$: the model Jacobi field $\\sin(\\sqrt kt)/\\sqrt k$ vanishes first at $t=\\pi/\\sqrt k$, and the comparison inequality forces any $|J|$ to vanish as well."
+      },
+      {
+        "latex": "\\mathrm{sn}_k(t)=\\frac{\\sin(\\sqrt{k}\\,t)}{\\sqrt{k}}\\ (k>0),\\qquad t\\ (k=0),\\qquad \\frac{\\sinh(\\sqrt{-k}\\,t)}{\\sqrt{-k}}\\ (k<0)",
+        "note": "模型空间中 $J(0)=0$、$|J'(0)|=1$ 的正交雅可比场的长度 $|J_k(t)|=\\mathrm{sn}_k(t)$；比较定理就是拿一般的 $|J|$ 与它作比较（也是 Bishop–Gromov 中模型球体积的被积函数）。",
+        "noteEn": "Length $|J_k(t)|=\\mathrm{sn}_k(t)$ of the orthogonal Jacobi field with $J(0)=0$, $|J'(0)|=1$ in the model space; the comparison theorem compares a general $|J|$ with it (the same function integrates into the model ball volumes in Bishop–Gromov)."
+      }
+    ],
+    "properties": [
+      "不等式方向：$K$ 大 $\\Rightarrow$ $|J|$ 小、共轭点早，即 $K_M\\ge K_{\\tilde M}\\Rightarrow|J|\\le|\\tilde J|$。写成对数导数就是 $(\\log|J|)'\\le(\\log|\\tilde J|)'$（小曲率侧的增长更快）。",
+      "加强形式：比值 $|J|/|\\tilde J|$ 单调不增（不只是逐点不等式），这是证明共轭点比较与逐点界最方便的写法。",
+      "前提「$\\tilde J$ 在 $(0,T]$ 上无零点」不可去掉：越过共轭点之后测地线重新发散、$|J|$ 会再次变大，结论可能失效。各种比较定理都只保证「到第一个共轭点之前」。",
+      "等号与最优性：相应曲率处处相等时 $|J|\\equiv|\\tilde J|$；常曲率模型空间使等号成立，说明比较函数 $\\mathrm{sn}_k$ 不能再改进。",
+      "应用：$K\\ge k>0\\Rightarrow$ 第一个共轭点 $\\le\\pi/\\sqrt k\\Rightarrow$ Bonnet–Myers 的直径界与紧致性；另一方向 $K\\le0$ 与欧氏空间比较得 $|J|\\ge t$，推出 Cartan–Hadamard；此外还有球面定理（$\\frac14<K\\le1\\Rightarrow$ 同胚于 $S^n$）以及把 $|J|$ 的界积分成体积界、通向 Bishop–Gromov 体积比较。"
+    ],
+    "propertiesEn": [
+      "Direction of the inequality: larger $K$ means smaller $|J|$ and an earlier conjugate point, i.e. $K_M\\ge K_{\\tilde M}\\Rightarrow|J|\\le|\\tilde J|$; in logarithmic form $(\\log|J|)'\\le(\\log|\\tilde J|)'$ (the smaller-curvature side grows faster).",
+      "Strengthened form: the ratio $|J|/|\\tilde J|$ is non-increasing (not merely a pointwise inequality); this is the most convenient form for conjugate point comparison and pointwise bounds.",
+      "The hypothesis that $\\tilde J$ has no zero on $(0,T]$ cannot be dropped: past a conjugate point the geodesics refocus and $|J|$ starts growing again, so the conclusion may fail. This is why comparison theorems only assert things up to the first conjugate point.",
+      "Equality and optimality: when the relevant curvatures agree, $|J|\\equiv|\\tilde J|$; model spaces of constant curvature attain equality, so the comparison function $\\mathrm{sn}_k$ cannot be improved.",
+      "Applications: $K\\ge k>0$ gives first conjugate point $\\le\\pi/\\sqrt k$, hence the Bonnet–Myers diameter bound and compactness; the other direction $K\\le0$ compared with Euclidean space gives $|J|\\ge t$ and yields Cartan–Hadamard; further applications are the sphere theorem ($\\frac14<K\\le1\\Rightarrow$ homeomorphic to $S^n$) and integrating bounds on $|J|$ into volume bounds, the road to Bishop–Gromov."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(2*x)/2",
+          "color": "#ff6b9d",
+          "label": "K=4：|J|=sin2t/2，t=π/2 归零（聚焦快）"
+        },
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "K=1：|J|=sin t，t=π 归零"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "K=0：|J|=t，永不归零（上出画面）"
+        }
+      ],
+      "xRange": [
+        0,
+        3.4
+      ],
+      "yRange": [
+        -0.25,
+        1.25
+      ],
+      "title": "Rauch 比较：曲率大 ⇒ |J| 小、归零早（K=4 曲线在 K=1 曲线之下）"
+    },
+    "examples": [
+      {
+        "problem": "在单位球面 $S^2$（$K\\equiv1$）与常曲率 $4$ 的球面（半径 $1/2$）上各取单位速度测地线，正交雅可比场满足 $J(0)=\\tilde J(0)=0$、$|J'(0)|=|\\tilde J'(0)|=1$。写出 $J,\\tilde J$，验证 Rauch 比较的方向与共轭点的时间次序，并说明为什么超过某个时刻后比较结论不再适用。",
+        "solution": "常曲率 $k$ 下 $J_k(t)=\\frac{\\sin(\\sqrt kt)}{\\sqrt k}E(t)$，于是\n$$J(t)=\\sin t,\\qquad \\tilde J(t)=\\frac{\\sin2t}{2}=\\sin t\\cos t .$$\n两条测地线等长（都取单位速度），初值匹配。这里 $K=1<4=\\tilde K$，所以不能直接套 $K\\ge\\tilde K$，而应对调角色：由 $K_{\\tilde M}\\ge K_M$ 得到 $|\\tilde J|\\le|J|$，在 $(0,\\pi/2)$ 上确实有\n$$|\\tilde J(t)|=\\sin t\\cos t\\le\\sin t=|J(t)|,$$\n且比值 $|\\tilde J|/|J|=\\cos t$ 单调不增——完全符合 Rauch。共轭点：$t_{\\mathrm{conj}}=\\pi$（$K=1$）而 $\\tilde t_{\\mathrm{conj}}=\\pi/2$（$K=4$），曲率大的那侧共轭点更早，与「聚焦更快」一致；并且 $|\\tilde J|$ 在 $t=\\pi/2$ 归零后重新变大（$\\cos t<0$ 时 $|\\tilde J|$ 又上升），所以比较定理的前提「$\\tilde J$ 在 $(0,T]$ 上无零点」只能取 $T<\\pi/2$，超过这一点结论不再成立——这就是前提不可省的具体体现。"
+      },
+      {
+        "problem": "设 $M$ 完备、$K\\ge k>0$（例如 $k=1/R^2$）。用 Rauch 比较定理证明：$M$ 的每条测地线在长度 $\\pi/\\sqrt k$ 之前出现共轭点，从而 $\\operatorname{diam}M\\le\\pi/\\sqrt k$ 且 $M$ 紧致（Bonnet–Myers 的截面曲率版本）。",
+        "solution": "取 $\\tilde M$ 为常曲率 $k$ 的模型空间，$\\tilde J(t)=\\frac{\\sin(\\sqrt kt)}{\\sqrt k}E(t)$ 在 $t=\\pi/\\sqrt k$ 首次归零。设 $\\gamma$ 是 $M$ 中单位速度测地线，$\\{e_1,\\dots,e_{n-1}\\}$ 是 $v=\\gamma'(0)$ 的正交单位基，$J_i(t)=(d\\exp_p)_{tv}(te_i)$，则 $J_i(0)=0$、$J_i'(0)=e_i$，$|J_i'(0)|=1=|\\tilde J'(0)|$，初值匹配。\n\n对任意 $T<\\pi/\\sqrt k$，$\\tilde J$ 在 $(0,T]$ 上无零点，且 $K\\ge k$，由 Rauch 得\n$$|J_i(t)|\\le|\\tilde J(t)|=\\frac{\\sin(\\sqrt kt)}{\\sqrt k},\\qquad t\\le T .$$\n令 $T\\to\\pi/\\sqrt k$，右端趋于 $0$，由连续性得 $J_i(\\pi/\\sqrt k)=0$（$i=1,\\dots,n-1$）。于是 $\\gamma(\\pi/\\sqrt k)$ 是 $p=\\gamma(0)$ 的共轭点（重数至少 $n-1$，因为 $w\\mapsto J_w$ 是单射而 $n-1$ 个正交方向都给出了在 $t=\\pi/\\sqrt k$ 为零的非零雅可比场），即 $t_{\\mathrm{conj}}\\le\\pi/\\sqrt k$。\n\n再取极小测地线：极小测地线的开区间内不能含共轭点（否则存在 $I(V,V)<0$ 的变分，可找到更短的曲线），所以任意两点 $p,q$ 的距离 $\\le\\pi/\\sqrt k$，即 $\\operatorname{diam}M\\le\\pi/\\sqrt k<\\infty$。由 Hopf–Rinow（$M$ 完备）有界闭集 $M$ 紧致，Bonnet–Myers 定理得证。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "比较定理",
+      "雅可比场",
+      "共轭点",
+      "曲率"
+    ],
+    "links": [
+      "jacobi-fields",
+      "conjugate-points-cut-locus",
+      "second-variation-index-form",
+      "sectional-curvature",
+      "bonnet-myers",
+      "cartan-hadamard",
+      "space-forms",
+      "riemannian-curvature-tensor"
+    ]
+  },
+  {
+    "id": "bishop-gromov",
+    "title": "毕晓普–格罗莫夫体积比较定理",
+    "titleEn": "The Bishop–Gromov Volume Comparison Theorem",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "若 Ricci 曲率满足 $\\mathrm{Ric}\\ge(n-1)k$，则体积比 $V(B(p,r))/V_k(B_k(r))$ 关于 $r$ 单调不增（且 $\\le1$）：$\\mathrm{Ric}\\ge0$ 时 $V(B(p,r))\\le\\omega_nr^n$，$\\mathrm{Ric}\\ge(n-1)k>0$ 时给出直径界 $\\pi/\\sqrt k$ 与紧致性。",
+    "summaryEn": "If $\\mathrm{Ric}\\ge(n-1)k$, the volume ratio $V(B(p,r))/V_k(B_k(r))$ is non-increasing in $r$ (and $\\le1$): $\\mathrm{Ric}\\ge0$ gives $V(B(p,r))\\le\\omega_nr^n$, while $\\mathrm{Ric}\\ge(n-1)k>0$ yields the diameter bound $\\pi/\\sqrt k$ and compactness. The hypothesis is on Ricci curvature.",
+    "definition": "设 $M$ 是 $n$ 维完备黎曼流形，$B(p,r)=\\{q\\in M:d(p,q)<r\\}$，$V(p,r)=\\operatorname{Vol}(B(p,r))$。记 $V_k(r)$ 为**常截面曲率 $k$ 的 $n$ 维模型空间**中半径为 $r$ 的球的体积：\n$$V_k(r)=\\omega_{n-1}\\int_0^r\\mathrm{sn}_k(t)^{n-1}dt,\\qquad\n\\mathrm{sn}_k(t)=\\begin{cases}\\dfrac{\\sin(\\sqrt{k}\\,t)}{\\sqrt{k}},&k>0,\\\\[4pt] t,&k=0,\\\\[4pt] \\dfrac{\\sinh(\\sqrt{-k}\\,t)}{\\sqrt{-k}},&k<0.\\end{cases}$$\n这里 $\\omega_{n-1}$ 是单位球面 $S^{n-1}$ 的体积（面积），$\\omega_n$ 是 $\\mathbb R^n$ 中单位球的体积，二者满足 $n\\omega_n=\\omega_{n-1}$。$k>0$ 时模型空间的直径是 $\\pi/\\sqrt k$，我们约定 $r\\ge\\pi/\\sqrt k$ 时 $V_k(r)$ 取模型空间的总体积。\n\n**Bishop–Gromov 体积比较定理**：若 Ricci 曲率满足\n$$\\mathrm{Ric}(v,v)\\ge(n-1)k\\qquad\\text{对一切单位向量 }v\\ \\text{与一切点（记作 }\\mathrm{Ric}\\ge(n-1)k\\text{）},$$\n则比值\n$$\\theta(r)=\\frac{V(B(p,r))}{V_k(B_k(r))}$$\n关于（几乎）每个 $r>0$ 单调**不增**：$0<r\\le R\\Rightarrow\\theta(R)\\le\\theta(r)$。又因为小球体积有渐近展开 $V(B(p,r))=\\omega_nr^n\\bigl(1+O(r^2)\\bigr)$（首项与曲率无关），所以 $\\lim_{r\\to0^+}\\theta(r)=1$，从而对一切 $r$ 有 $\\theta(r)\\le1$，即\n$$V(B(p,r))\\le V_k(B_k(r)).$$\n注意条件用的是 **Ricci 曲率**（不是截面曲率），比 $K\\ge k$ 弱得多；结论是比值「不增」而不是「不降」，这也是最容易记反的一处。\n\n**证明思想（面积版本）**：先把体积写成面积积分 $V(p,r)=\\int_0^rA(p,t)\\,dt$，$A(p,t)=\\operatorname{Vol}(\\partial B(p,t))$ 是测地球面的面积。沿从 $p$ 出发的单位速度测地线 $\\gamma$，测地极坐标的 Jacobi 场给出：测地球面半径方向的对数导数 $S(t)=(\\log A(t))'$（即距离函数的 Laplacian $\\Delta r$、测地球面的平均曲率）满足 **Riccati 不等式**\n$$S'(t)+\\frac{S(t)^2}{n-1}+\\mathrm{Ric}(\\gamma'(t),\\gamma'(t))\\le0 .$$\n模型空间中对应的量是 $S_k(t)=(n-1)\\dfrac{\\mathrm{cn}_k(t)}{\\mathrm{sn}_k(t)}$（$k=0$ 时 $S_k(t)=(n-1)/t$），它使等号成立。由 $t\\to0^+$ 时 $S(t)\\sim(n-1)/t$（小球附近近似欧氏）与 $\\mathrm{Ric}\\ge(n-1)k$ 作 Sturm 比较，得到 $S(t)\\le S_k(t)$，即\n$$(\\log A(t))'\\le(\\log A_k(t))'\\ \\Longrightarrow\\ \\frac{A(p,t)}{A_k(t)}\\ \\text{单调不增}.$$\n最后把面积比的不增性对 $t$ 积分（配合 $A/A_k\\to1$）就得到体积比 $V/V_k$ 的单调不增。\n\n**主要推论**：① $\\mathrm{Ric}\\ge0$ 时 $V(B(p,r))\\le\\omega_nr^n$，即体积增长不快于欧氏空间；② $\\mathrm{Ric}\\ge(n-1)k>0$ 时对一切 $r$ 有 $V(B(p,r))\\le V_k(B_k(r))\\le V_k(\\text{模型空间总体积})<\\infty$，即**球体积一致有界、总体积不超过模型空间**；若已知直径 $L=\\operatorname{diam}M<\\infty$（例如 $M$ 紧致），则由 $d(p,q)=L$ 时 $B(p,L/2)$ 与 $B(q,L/2)$ 不相交以及比值的不增性，可推出 $\\operatorname{diam}M\\le\\pi/\\sqrt k$。加上 Myers 定理的紧致性结论（$\\mathrm{Ric}\\ge(n-1)k>0\\Rightarrow M$ 紧致，标准证明用二阶变分，见「劳赫比较定理」），便是完整的 Myers 定理——这就是它的「体积比较」视角：体积不可能超过模型空间，而模型空间的直径恰为 $\\pi/\\sqrt k$；③ 常曲率 $k$ 的模型空间中 $\\theta(r)\\equiv1$（等号可达），说明比较常数是最优的。",
+    "definitionEn": "Let $M$ be a complete $n$-dimensional Riemannian manifold, $B(p,r)=\\{q\\in M:d(p,q)<r\\}$ and $V(p,r)=\\operatorname{Vol}(B(p,r))$. Denote by $V_k(r)$ the volume of a ball of radius $r$ in the **model space of constant sectional curvature $k$**:\n$$V_k(r)=\\omega_{n-1}\\int_0^r\\mathrm{sn}_k(t)^{n-1}dt,\\qquad\n\\mathrm{sn}_k(t)=\\begin{cases}\\dfrac{\\sin(\\sqrt{k}\\,t)}{\\sqrt{k}},&k>0,\\\\[4pt] t,&k=0,\\\\[4pt] \\dfrac{\\sinh(\\sqrt{-k}\\,t)}{\\sqrt{-k}},&k<0.\\end{cases}$$\nHere $\\omega_{n-1}$ is the volume (area) of the unit sphere $S^{n-1}$ and $\\omega_n$ that of the unit ball in $\\mathbb R^n$, with $n\\omega_n=\\omega_{n-1}$. For $k>0$ the model space has diameter $\\pi/\\sqrt k$, and we agree that $V_k(r)$ equals the total volume of the model space for $r\\ge\\pi/\\sqrt k$.\n\n**Bishop–Gromov volume comparison theorem.** If the Ricci curvature satisfies\n$$\\mathrm{Ric}(v,v)\\ge(n-1)k\\qquad\\text{for every unit vector }v\\text{ at every point (written }\\mathrm{Ric}\\ge(n-1)k\\text{)},$$\nthen the ratio\n$$\\theta(r)=\\frac{V(B(p,r))}{V_k(B_k(r))}$$\nis non-**increasing** in (almost every) $r>0$: $0<r\\le R\\Rightarrow\\theta(R)\\le\\theta(r)$. Since the volume of small balls has the expansion $V(B(p,r))=\\omega_nr^n\\bigl(1+O(r^2)\\bigr)$ (the leading term is curvature-free), $\\lim_{r\\to0^+}\\theta(r)=1$, hence $\\theta(r)\\le1$ for all $r$:\n$$V(B(p,r))\\le V_k(B_k(r)).$$\nNote that the hypothesis is on the **Ricci curvature** (not on sectional curvature), much weaker than $K\\ge k$, and that the conclusion is monotone non-**increasing** — the single easiest thing to misremember.\n\n**Idea of proof (area version).** Write the volume as an integral of areas, $V(p,r)=\\int_0^rA(p,t)\\,dt$, where $A(p,t)=\\operatorname{Vol}(\\partial B(p,t))$. Along a unit speed geodesic $\\gamma$ from $p$, the geodesic polar Jacobi fields show that the logarithmic derivative of the area in the radial direction, $S(t)=(\\log A(t))'$ (also the Laplacian of the distance function, i.e. the mean curvature of the geodesic spheres), satisfies the **Riccati inequality**\n$$S'(t)+\\frac{S(t)^2}{n-1}+\\mathrm{Ric}(\\gamma'(t),\\gamma'(t))\\le0 .$$\nIn the model space the corresponding quantity is $S_k(t)=(n-1)\\dfrac{\\mathrm{cn}_k(t)}{\\mathrm{sn}_k(t)}$ (with $S_k(t)=(n-1)/t$ for $k=0$), for which equality holds. Using $S(t)\\sim(n-1)/t$ as $t\\to0^+$ (the metric is Euclidean to first order near $p$) and $\\mathrm{Ric}\\ge(n-1)k$, a Sturm comparison yields $S(t)\\le S_k(t)$, that is\n$$(\\log A(t))'\\le(\\log A_k(t))'\\ \\Longrightarrow\\ \\frac{A(p,t)}{A_k(t)}\\ \\text{is non-increasing}.$$\nIntegrating the monotonicity of the area ratio (together with $A/A_k\\to1$) gives the monotonicity of the volume ratio $V/V_k$.\n\n**Main corollaries.** (i) For $\\mathrm{Ric}\\ge0$, $V(B(p,r))\\le\\omega_nr^n$: volume grows no faster than in Euclidean space. (ii) For $\\mathrm{Ric}\\ge(n-1)k>0$ one has $V(B(p,r))\\le V_k(B_k(r))\\le V_k(\\text{total volume of the model})<\\infty$ for all $r$: **ball volumes are uniformly bounded and the total volume does not exceed that of the model**. If the diameter $L=\\operatorname{diam}M$ is known to be finite (for instance if $M$ is compact), the disjointness of $B(p,L/2)$ and $B(q,L/2)$ when $d(p,q)=L$, together with the monotonicity of the ratio, yields $\\operatorname{diam}M\\le\\pi/\\sqrt k$. Combined with the compactness part of Myers' theorem ($\\mathrm{Ric}\\ge(n-1)k>0\\Rightarrow M$ compact, usually proved by second variation — see The Rauch Comparison Theorem) this is the full Myers theorem, here seen from the volume comparison viewpoint: volume cannot exceed that of the model space, whose diameter is exactly $\\pi/\\sqrt k$. (iii) In the model space of constant curvature $k$ one has $\\theta(r)\\equiv1$ (equality is attained), so the comparison constants are optimal.",
+    "formulas": [
+      {
+        "latex": "\\frac{V(B(p,R))}{V_k(B_k(R))}\\le\\frac{V(B(p,r))}{V_k(B_k(r))},\\qquad 0<r\\le R",
+        "note": "体积比单调**不增**（不是不降）；前提是 $\\mathrm{Ric}\\ge(n-1)k$（Ricci 曲率下界）。",
+        "noteEn": "The volume ratio is non-**increasing** (not non-decreasing); the hypothesis is $\\mathrm{Ric}\\ge(n-1)k$, a lower bound on Ricci curvature."
+      },
+      {
+        "latex": "V_k(r)=\\omega_{n-1}\\int_0^r\\mathrm{sn}_k(t)^{n-1}\\,dt,\\qquad n\\omega_n=\\omega_{n-1}",
+        "note": "模型空间球体积；$\\mathrm{sn}_k$ 与 Rauch 比较定理中的比较函数相同（$k=0$ 时为 $t$，$k>0$ 时为 $\\sin(\\sqrt kt)/\\sqrt k$，$k<0$ 时为 $\\sinh(\\sqrt{-k}t)/\\sqrt{-k}$）。",
+        "noteEn": "Ball volume in the model space; $\\mathrm{sn}_k$ is the same comparison function as in the Rauch theorem ($t$ for $k=0$, $\\sin(\\sqrt kt)/\\sqrt k$ for $k>0$, $\\sinh(\\sqrt{-k}t)/\\sqrt{-k}$ for $k<0$)."
+      },
+      {
+        "latex": "\\mathrm{Ric}\\ge0\\ \\Longrightarrow\\ V(B(p,r))\\le\\omega_nr^n",
+        "note": "取 $k=0$：Ricci 非负时测地球体积不超过同半径的欧氏球体积，体积增长至多多项式。",
+        "noteEn": "Taking $k=0$: non-negative Ricci curvature bounds the volume of a ball by that of the Euclidean ball of the same radius; volume growth is at most polynomial."
+      },
+      {
+        "latex": "\\frac{A(\\partial B(p,r))}{A_k(\\partial B_k(r))}\\ \\text{单调不增},\\qquad k=0:\\ \\frac{A(\\partial B(p,r))}{n\\omega_nr^{n-1}}\\ \\text{单调不增}",
+        "note": "更基本的面积版本（$A_k(\\partial B_k(r))=\\omega_{n-1}\\mathrm{sn}_k(r)^{n-1}$）：体积版本由它对 $r$ 积分得到。",
+        "noteEn": "The more basic area version ($A_k(\\partial B_k(r))=\\omega_{n-1}\\mathrm{sn}_k(r)^{n-1}$); the volume version follows by integrating it in $r$."
+      },
+      {
+        "latex": "\\mathrm{Ric}\\ge(n-1)k>0\\ \\Longrightarrow\\ \\operatorname{diam}(M)\\le\\frac{\\pi}{\\sqrt{k}},\\quad M\\ \\text{紧致}",
+        "note": "Myers 型推论：体积比有界给出 $V(B(p,r))\\le V_k(\\text{模型空间总体积})<\\infty$；若直径 $L$ 有限，则 $B(p,L/2)$、$B(q,L/2)$ 不交，配合「模型空间中半径 $>$ 直径一半的球占一半以上体积」即得直径界（紧致性由 Myers 定理本身给出）。",
+        "noteEn": "The Myers-type corollary: the bounded ratio gives $V(B(p,r))\\le V_k(\\text{total volume of the model})<\\infty$; if the diameter $L$ is finite, then $B(p,L/2)$ and $B(q,L/2)$ are disjoint, and the fact that in the model space a ball of radius greater than half the diameter contains more than half the volume yields the diameter bound (compactness itself is Myers' theorem)."
+      }
+    ],
+    "properties": [
+      "条件是 Ricci 曲率下界 $\\mathrm{Ric}\\ge(n-1)k$（弱于截面曲率下界 $K\\ge k$）；结论是体积比（以及面积比）单调不增，容易记反。",
+      "$r\\to0^+$ 时比值 $\\to1$（小球体积渐近 $\\omega_nr^n$ 与曲率无关），故总有 $\\theta(r)\\le1$；常曲率 $k$ 的模型空间中 $\\theta\\equiv1$，等号可达，比较常数最优。",
+      "面积版本更基本：$A(p,r)/A_k(r)$ 单调不增（$k=0$ 时 $A(p,r)/(n\\omega_nr^{n-1})$ 不增），体积版本由积分得到；证明依赖测地极坐标、Riccati 不等式与 Sturm 比较。",
+      "推论 Myers：$\\mathrm{Ric}\\ge(n-1)k>0$ 时球体积一致有界（不超过模型空间总体积）；在直径有限的前提下，体积比较直接给出 $\\operatorname{diam}M\\le\\pi/\\sqrt k$，与 Myers 定理的紧致性结论合起来就是 Myers 定理；与 Cartan–Hadamard（非正曲率一侧不紧、体积增长更快）形成正负曲率的对照。",
+      "单调性说明「大球」受「小球」控制：$\\theta(R)\\le\\theta(r)$ 给出 $V(B(p,R))\\le\\theta(r)V_k(B_k(R))$；特别地 $\\mathrm{Ric}\\ge0$ 时 $V(p,R)/R^n$ 随 $R$ 不增，故体积增长至多与 $\\mathbb R^n$ 同阶（指数增长被排除）。"
+    ],
+    "propertiesEn": [
+      "The hypothesis is a lower bound on Ricci curvature, $\\mathrm{Ric}\\ge(n-1)k$ (weaker than $K\\ge k$); the conclusion is that the volume ratio (and the area ratio) is non-increasing — easily misremembered.",
+      "As $r\\to0^+$ the ratio tends to $1$ (small ball volumes are asymptotically $\\omega_nr^n$, independent of curvature), so $\\theta(r)\\le1$ always; in the model space of constant curvature $k$ one has $\\theta\\equiv1$, equality is attained and the comparison constants are optimal.",
+      "The area version is more basic: $A(p,r)/A_k(r)$ is non-increasing ($A(p,r)/(n\\omega_nr^{n-1})$ for $k=0$), and the volume version follows by integration; the proof uses geodesic polar coordinates, the Riccati inequality and a Sturm comparison.",
+      "Myers corollary: for $\\mathrm{Ric}\\ge(n-1)k>0$ ball volumes are uniformly bounded (by the total volume of the model space); assuming the diameter is finite, the volume comparison directly gives $\\operatorname{diam}M\\le\\pi/\\sqrt k$, which together with the compactness part of Myers' theorem is precisely Myers' theorem. This contrasts with Cartan–Hadamard (non-positive curvature: non-compact, faster volume growth).",
+      "Monotonicity says that small balls control large ones: $\\theta(R)\\le\\theta(r)$ gives $V(B(p,R))\\le\\theta(r)V_k(B_k(R))$; in particular for $\\mathrm{Ric}\\ge0$ the quotient $V(p,R)/R^n$ is non-increasing, so volume growth is at most of Euclidean order (exponential growth is excluded)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1",
+          "color": "#4cc9f0",
+          "label": "欧氏 ℝ³（Ric=0）：比值恒为 1"
+        },
+        {
+          "expr": "3*(2*x - sin(2*x))/(4*x^3)",
+          "color": "#06d6a0",
+          "label": "单位球面 S³（Ric=2≥0）：比值单调不增"
+        },
+        {
+          "expr": "3*(sinh(2*x) - 2*x)/(4*x^3)",
+          "color": "#ff6b9d",
+          "label": "双曲 H³（Ric=−2<0）：前提不满足，比值上升"
+        }
+      ],
+      "xRange": [
+        0.08,
+        2.0
+      ],
+      "yRange": [
+        0,
+        2.3
+      ],
+      "title": "体积比 V(B(p,r))/(ω₃r³)：Ric≥0 时不增，Ric<0 时上升"
+    },
+    "examples": [
+      {
+        "problem": "取 $n=3$、$M=S^3$ 单位球面（截面曲率 $1$，Ricci 曲率为 $2=(n-1)\\cdot1\\ge(n-1)\\cdot0$）。计算 $V(B(p,r))/(\\omega_3r^3)$，验证它 $\\le1$ 且随 $r$ 单调不增，并给出数值。",
+        "solution": "单位球面 $S^3$ 中半径 $r$ 的测地球体积为\n$$V_1(r)=\\omega_2\\int_0^r\\sin^2t\\,dt=4\\pi\\Bigl(\\frac r2-\\frac{\\sin2r}{4}\\Bigr)=\\pi(2r-\\sin2r),\\qquad \\omega_2=4\\pi .$$\n（检验：$r=\\pi$ 时 $V_1(\\pi)=2\\pi^2$，正是 $S^3$ 的总体积。）又 $\\omega_3=\\frac43\\pi$，故\n$$\\frac{V(B(p,r))}{\\omega_3r^3}=\\frac{3(2r-\\sin2r)}{4r^3}.$$\n展开 $\\sin2r=2r-\\frac{8r^3}{6}+O(r^5)$ 得比值 $=1-\\frac{r^2}{5}+O(r^4)$，故 $\\lim_{r\\to0^+}=1$。数值：\n\n| $r$ | 0.5 | 1.0 | 1.5 | 2.0 | $\\pi$ |\n|---|---|---|---|---|---|\n| 比值 | 0.951 | 0.818 | 0.635 | 0.446 | 0.152 |\n\n比值严格单调递减且始终 $\\le1$，与 Bishop–Gromov 取 $k=0$ 的结论（$V\\le\\omega_3r^3$，即 $\\mathrm{Ric}\\ge0$ 时的欧氏体积上界）一致，尽管 $S^3$ 的 Ricci 曲率是正的 $2$。若改与 $k=1$ 的模型空间（就是它自己）比较，则比值恒为 $1$，说明常曲率情形取到等号。"
+      },
+      {
+        "problem": "设 $M$ 是紧致（或直径有限 $L=\\operatorname{diam}M<\\infty$）的 $n$ 维完备黎曼流形，且 $\\mathrm{Ric}\\ge(n-1)k>0$。用 Bishop–Gromov 定理证明 $\\operatorname{diam}M\\le\\pi/\\sqrt k$。（紧致性本身是 Myers 定理的另一半结论，标准证明用二阶变分，见「劳赫比较定理」。）",
+        "solution": "由定理 $\\theta(r)\\le\\theta(0^+)=1$，故对一切 $r$ 有\n$$V(B(p,r))\\le V_k(B_k(r))\\le V_k^{\\text{tot}}<\\infty,$$\n其中 $V_k^{\\text{tot}}$ 是模型空间（直径 $\\pi/\\sqrt k$）的总体积。\n\n设 $d(p,q)=L=\\operatorname{diam}M$ 并**反设 $L>\\pi/\\sqrt k$**。由三角不等式，$B(p,L/2)$ 与 $B(q,L/2)$ 不相交：若 $x$ 属于两者，则 $L=d(p,q)\\le d(p,x)+d(x,q)<L$，矛盾。于是\n$$V(M)\\ \\ge\\ V(B(p,L/2))+V(B(q,L/2)).$$\n又 $\\theta$ 不增，故 $\\theta(L/2)\\ge\\theta(L)$，即\n$$V(B(p,L/2))\\ \\ge\\ \\frac{V(B(p,L))}{V_k(L)}\\,V_k(L/2)=\\frac{V(M)}{V_k^{\\text{tot}}}\\,V_k(B_k(L/2)),$$\n这里用了 $V(B(p,L))=V(M)$（$L$ 是直径）与 $V_k(L)=V_k^{\\text{tot}}$（反设 $L>\\pi/\\sqrt k$ 时模型球已充满整个模型空间）。对 $q$ 同理，代入得\n$$V(M)\\ \\ge\\ 2\\,\\frac{V(M)}{V_k^{\\text{tot}}}\\,V_k(B_k(L/2))\\quad\\Longrightarrow\\quad 1\\ \\ge\\ \\frac{2V_k(B_k(L/2))}{V_k^{\\text{tot}}}.$$\n但模型空间关于任一点对称，半径为「半个直径」的球恰好占一半体积，半径更大者占一半以上；由 $L>\\pi/\\sqrt k$ 得 $L/2>\\pi/(2\\sqrt k)$，右端 $>1$，矛盾。所以 $L\\le\\pi/\\sqrt k$。\n\n与 Rauch 比较的证法相比，这里只需要 Ricci 下界，适用范围更广（例如 $\\mathbb{CP}^n$ 这类正 Ricci 曲率而非正截面曲率的空间）；直径界 $\\pi/\\sqrt k$ 与 Rauch 路线得到的完全一致。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "体积比较",
+      "Ricci 曲率",
+      "Myers 定理",
+      "比较定理"
+    ],
+    "links": [
+      "ricci-scalar-curvature",
+      "sectional-curvature",
+      "rauch-comparison",
+      "bonnet-myers",
+      "cartan-hadamard",
+      "hopf-rinow",
+      "space-forms",
+      "riemannian-metric"
+    ]
+  }
+]

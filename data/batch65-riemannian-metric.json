@@ -1,0 +1,632 @@
+[
+  {
+    "id": "riemannian-metric",
+    "title": "黎曼度量",
+    "titleEn": "Riemannian Metrics",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "在每点切空间上光滑地指定一个内积：长度、夹角、体积由此内蕴地定义，并给出一个与原拓扑一致的黎曼距离。",
+    "summaryEn": "A smooth assignment of an inner product on each tangent space: it makes length, angle and volume intrinsic and yields a Riemannian distance inducing the original topology.",
+    "definition": "光滑流形只告诉你「怎么求导」，不告诉你「怎么量长度」。**黎曼度量**把后者补上：对每一点 $p\\in M$，在切空间 $T_pM$ 上指定一个**内积** $g_p(\\cdot,\\cdot)$（双线性、对称、正定），并要求它随 $p$ **光滑**变化——用坐标说，就是分量 $g_{ij}(p)=g_p(\\partial_i,\\partial_j)$ 都是光滑函数。等价的整体说法：$g$ 是 $M$ 上一个对称正定的光滑 $(0,2)$ 张量场，局部写成 $$g=g_{ij}\\,dx^i\\otimes dx^j,\\qquad g_{ij}=g(\\partial_i,\\partial_j),$$ 这里必须用对称积 $\\otimes$（写成 $dx^i\\wedge dx^j$ 就变成反对称的形式了），习惯上也记成线元 $ds^2=g_{ij}dx^idx^j$。配上度量的流形 $(M,g)$ 称为**黎曼流形**；度量是这门学科唯一的外部输入，测地线、距离、体积、曲率全都由它唯一决定。\\n\\n三个标准例子：欧氏空间上的 $\\delta_{ij}$；单位球面（$\\theta$ 为余纬、$\\varphi$ 为经度）上的 $$g=d\\theta^2+\\sin^2\\theta\\,d\\varphi^2;$$ 双曲上半平面 $\\{y>0\\}$ 上的 $$g=\\frac{dx^2+dy^2}{y^2}.$$ 后两者都不是 $\\mathbb{R}^2$ 上伪装的 $\\delta_{ij}$：球面上同样大小的 $d\\varphi$ 在高纬处短、在赤道处长；上半平面中同样大小的 $dx$ 在 $y$ 大处短、在 $y\\to0$ 处长。同一张坐标网配上不同度量就是不同的几何——「坐标」与「度量」是两件事。\\n\\n有了 $g$，几何量逐个出现。曲线 $\\gamma:[a,b]\\to M$ 的**长度**是 $$L(\\gamma)=\\int_a^b\\sqrt{g_{\\gamma(t)}\\bigl(\\gamma'(t),\\gamma'(t)\\bigr)}\\,dt=\\int_a^b\\sqrt{g_{ij}\\dot x^i\\dot x^j}\\,dt,$$ 根号里是内积（二次型），根号与平方两项都不能漏，结果与参数化无关。**黎曼距离**取所有连接两点的曲线长度的下确界：$$d(p,q)=\\inf\\{L(\\gamma):\\ \\gamma\\ \\text{分段光滑，连接}\\ p,q\\}.$$ 它是一个真正的**度量**：对称、$d(p,q)=0\\Leftrightarrow p=q$、三角不等式成立；并且（这句话并不平凡）**它诱导的度量拓扑与原流形拓扑一致**。证明靠局部比较：在紧坐标卡内 $g_{ij}$ 一致有界、矩阵一致正定，于是 $$\\frac{1}{C}|x-y|\\le d(x,y)\\le C|x-y|$$ 在局部成立；$d(p,q)=0\\Rightarrow p=q$、开球是开集、收敛等价，都由此得出。体积则要多一个因子：$$dV=\\sqrt{\\det(g_{ij})}\\,dx^1\\cdots dx^n,$$ 正定性保证 $\\det g>0$，换坐标时 $\\sqrt{\\det g}$ 的变化恰好被 Jacobi 行列式抵消，所以体积元是流形自身的东西。",
+    "definitionEn": "A smooth manifold tells you how to differentiate, not how to measure length. A **Riemannian metric** fills the gap: at every point $p\\in M$ it puts an **inner product** $g_p(\\cdot,\\cdot)$ on the tangent space $T_pM$ (bilinear, symmetric, positive definite) depending **smoothly** on $p$ — in coordinates, the components $g_{ij}(p)=g_p(\\partial_i,\\partial_j)$ are smooth functions. Equivalently, $g$ is a smooth symmetric positive definite $(0,2)$-tensor field, written locally as $g=g_{ij}dx^i\\otimes dx^j$ (the symmetric product, not the wedge product) or as the line element $ds^2=g_{ij}dx^idx^j$. The pair $(M,g)$ is a **Riemannian manifold**, and the metric is the only extra input: geodesics, distance, volume and curvature are all determined by it.\\n\\nThree standard examples: the Euclidean metric $\\delta_{ij}$; the unit sphere with colatitude $\\theta$ and longitude $\\varphi$, where $g=d\\theta^2+\\sin^2\\theta\\,d\\varphi^2$; and the upper half-plane $\\{y>0\\}$ with $g=(dx^2+dy^2)/y^2$. The last two are not $\\delta_{ij}$ in disguise: on the sphere a fixed $d\\varphi$ is short near the poles and long at the equator, while on the half-plane a fixed $dx$ is short for large $y$ and long as $y\\to0$. Coordinates and metric are two different things.\\n\\nThe metric generates the geometry. The **length** of $\\gamma:[a,b]\\to M$ is $L(\\gamma)=\\int_a^b\\sqrt{g_{\\gamma(t)}(\\gamma'(t),\\gamma'(t))}\\,dt=\\int_a^b\\sqrt{g_{ij}\\dot x^i\\dot x^j}\\,dt$ (square root of the quadratic form, independent of the parametrization), and the **Riemannian distance** is the infimum of lengths, $d(p,q)=\\inf\\{L(\\gamma):\\gamma\\ \\text{piecewise smooth from}\\ p\\ \\text{to}\\ q\\}$. This $d$ is a genuine metric — symmetric, with $d(p,q)=0\\Leftrightarrow p=q$ and the triangle inequality — and, less trivially, **the metric topology of $d$ is the original manifold topology**: the proof compares $d$ with the Euclidean distance on charts, where $g_{ij}$ is bounded above and below and positive definite, giving $C^{-1}|x-y|\\le d(x,y)\\le C|x-y|$ locally. Finally the volume element carries the factor $\\sqrt{\\det(g_{ij})}$, that is $dV=\\sqrt{\\det g}\\,dx^1\\cdots dx^n$; it is coordinate-invariant because the change of $\\sqrt{\\det g}$ cancels the Jacobian.",
+    "formulas": [
+      {
+        "latex": "g=g_{ij}\\,dx^{i}\\otimes dx^{j},\\qquad g_{ij}=g(\\partial_i,\\partial_j)=g_{ji},\\qquad g_{ij}v^{i}v^{j}>0\\ \\ (v\\neq0)",
+        "note": "黎曼度量的张量定义：对称正定，故矩阵 $(g_{ij})$ 处处可逆，逆度规 $g^{ij}$ 存在，用来升降指标。",
+        "noteEn": "The metric as a tensor field: symmetric and positive definite, hence invertible; the inverse $g^{ij}$ raises and lowers indices."
+      },
+      {
+        "latex": "\\delta_{ij},\\qquad d\\theta^{2}+\\sin^{2}\\theta\\,d\\varphi^{2},\\qquad \\frac{dx^{2}+dy^{2}}{y^{2}}\\ \\ (y>0)",
+        "note": "三个标准度量：欧氏度量、单位球面度量（$\\theta$ 余纬、$\\varphi$ 经度）、双曲上半平面度量。",
+        "noteEn": "The three model metrics: Euclidean, round unit sphere (colatitude $\\theta$, longitude $\\varphi$), hyperbolic upper half-plane."
+      },
+      {
+        "latex": "L(\\gamma)=\\int_a^b\\sqrt{g_{ij}\\dot x^{i}\\dot x^{j}}\\,dt,\\qquad E(\\gamma)=\\frac{1}{2}\\int_a^b g_{ij}\\dot x^{i}\\dot x^{j}\\,dt,\\qquad L^{2}\\le 2(b-a)E",
+        "note": "弧长与能量泛函：$L$ 与参数化无关，$E$ 没有根号、更好用；柯西–施瓦茨的等号当且仅当速率 $|\\gamma'|$ 为常数。",
+        "noteEn": "Length and energy: $L$ is parametrization-invariant, $E$ has no square root; the Cauchy–Schwarz equality holds exactly when the speed $|\\gamma'|$ is constant."
+      },
+      {
+        "latex": "d(p,q)=\\inf_{\\gamma}L(\\gamma),\\qquad d(p,q)\\le d(p,r)+d(r,q),\\qquad d(p,q)=0\\iff p=q",
+        "note": "黎曼距离：连接 $p,q$ 的所有分段光滑曲线长度的下确界；它诱导的度量拓扑与原流形拓扑一致。",
+        "noteEn": "The Riemannian distance: the infimum of lengths of curves joining $p$ to $q$; its metric topology agrees with the original topology of $M$."
+      },
+      {
+        "latex": "dV=\\sqrt{\\det(g_{ij})}\\,dx^{1}\\cdots dx^{n},\\qquad \\operatorname{vol}(U)=\\int_U\\sqrt{\\det g}\\,dx",
+        "note": "体积元：$\\sqrt{\\det g}$ 是坐标修正因子，不能漏；正定性保证它是实数，换坐标时不变。",
+        "noteEn": "Volume element: the correction factor $\\sqrt{\\det g}$ must not be dropped; positive definiteness makes it real, and it is invariant under changes of coordinates."
+      }
+    ],
+    "properties": [
+      "**存在性**：任何光滑流形都可以赋予黎曼度量（在每张图上取欧氏度量，用单位分解拼接），所以黎曼几何不是额外假设；同一流形上可以有无穷多个彼此不等距的度量，几何完全不同（同一个环面上可以有平坦度量与弯曲度量）。",
+      "**内蕴性**：一切由 $g$ 定义的量（弧长、夹角、体积、测地线、曲率）在等距变换 $f$（满足 $f^{*}g=g$ 的微分同胚）下不变，并且完全不需要把 $M$ 嵌入 $\\mathbb{R}^N$；曲面论的第一基本形式是这套观念的原型。",
+      "**距离与拓扑相容**：在每张图上成立 $\\frac{1}{C}|x-y|\\le d(x,y)\\le C|x-y|$，因此收敛、开集、完备性等概念与流形自身拓扑一致；$d$ 使 $M$ 成为度量空间，而完备性（Hopf–Rinow）等价于 $\\exp_p$ 定义在整个 $T_pM$ 上。",
+      "**体积的内蕴性**：$\\sqrt{\\det g}$ 在换坐标时与 Jacobi 行列式相消，所以体积是流形自身的量；球面 $\\int\\sqrt{\\det g}=4\\pi$，而双曲上半平面的体积 $\\int dx\\,dy/y^{2}$ 发散——黎曼流形不必有有限体积。",
+      "**度量的字母表**：$g$ 给出切向量的范数 $|v|=\\sqrt{g(v,v)}$、夹角余弦 $g(v,w)/(|v||w|)$ 以及切空间与余切空间之间的典范同构 $v\\mapsto g(v,\\cdot)$（无坐标的降指标），后面联络、测地线、曲率的公式全部由它写出。"
+    ],
+    "propertiesEn": [
+      "**Existence**: every smooth manifold carries a Riemannian metric (take the Euclidean metric in each chart and glue with a partition of unity), so the metric is a genuine extra structure rather than an assumption; a single manifold admits infinitely many non-isometric metrics with completely different geometry (a torus can be flat or curved).",
+      "**Intrinsic nature**: every quantity built from $g$ (length, angle, volume, geodesics, curvature) is invariant under isometries, i.e. diffeomorphisms with $f^{*}g=g$, and never needs an embedding of $M$ into $\\mathbb{R}^N$; the first fundamental form of surface theory is the prototype of this viewpoint.",
+      "**Distance versus topology**: on each chart one has $C^{-1}|x-y|\\le d(x,y)\\le C|x-y|$, so convergence, open sets and completeness agree with the manifold topology; $d$ makes $M$ a metric space, and metric completeness is equivalent (Hopf–Rinow) to $\\exp_p$ being defined on all of $T_pM$.",
+      "**Volume is intrinsic**: $\\sqrt{\\det g}$ cancels against the Jacobian under a change of coordinates; the sphere has $\\int\\sqrt{\\det g}=4\\pi$, whereas the hyperbolic upper half-plane has divergent volume $\\int dx\\,dy/y^{2}$, so a Riemannian manifold need not have finite volume.",
+      "**The alphabet of the metric**: $g$ gives the norm $|v|=\\sqrt{g(v,v)}$, the angle via $g(v,w)/(|v||w|)$ and the canonical isomorphism $v\\mapsto g(v,\\cdot)$ between tangent and cotangent space (raising and lowering indices without coordinates); all later formulas for connections, geodesics and curvature are written with it."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "sin(x)*cos(y)*0.6",
+      "xRange": [
+        -3.14,
+        3.14
+      ],
+      "yRange": [
+        -3.14,
+        3.14
+      ],
+      "density": [
+        28,
+        28
+      ],
+      "color": "#4cc9f0",
+      "title": "曲面上的黎曼度量：切平面上逐点给定的内积"
+    },
+    "examples": [
+      {
+        "problem": "用球面度量 $g=d\\theta^{2}+\\sin^{2}\\theta\\,d\\varphi^{2}$ 计算：(1) 纬线 $\\theta=\\theta_0$ 绕一周的长度；(2) 整个球面的面积。",
+        "solution": "$(g_{ij})=\\operatorname{diag}(1,\\sin^{2}\\theta)$，故 $\\det g=\\sin^{2}\\theta$，$\\sqrt{\\det g}=\\sin\\theta$（$0<\\theta<\\pi$）。\\n(1) 这条纬线上 $\\theta\\equiv\\theta_0$、$\\varphi$ 从 $0$ 到 $2\\pi$，所以 $$L=\\int_0^{2\\pi}\\sqrt{g_{\\varphi\\varphi}}\\,d\\varphi=\\int_0^{2\\pi}\\sin\\theta_0\\,d\\varphi=2\\pi\\sin\\theta_0.$$ 赤道（$\\theta_0=\\pi/2$）长 $2\\pi$，越靠近极点越短，说明「同样的 $d\\varphi$ 在不同纬线上对应不同长度」。\\n(2) $$\\operatorname{vol}=\\int_0^{2\\pi}\\!\\!\\int_0^{\\pi}\\sqrt{\\det g}\\,d\\theta\\,d\\varphi=\\int_0^{2\\pi}\\!\\!\\int_0^{\\pi}\\sin\\theta\\,d\\theta\\,d\\varphi=2\\pi\\cdot\\bigl[-\\cos\\theta\\bigr]_0^{\\pi}=4\\pi.$$"
+      },
+      {
+        "problem": "在上半平面度量 $g=(dx^{2}+dy^{2})/y^{2}$（$y>0$）下求 $(0,1)$ 到 $(0,e)$ 的黎曼距离，并解释为什么直线 $y=0$ 在双曲几何中位于「无穷远」。",
+        "solution": "取竖直曲线 $\\gamma(t)=(0,t)$，$t\\in[1,e]$：$$L(\\gamma)=\\int_1^e\\frac{dt}{t}=\\ln t\\Big|_1^e=1.$$ 对任意连接这两点的曲线，$ds^{2}=(dx^{2}+dy^{2})/y^{2}\\ge dy^{2}/y^{2}$，故 $L\\ge\\int|dy|/y\\ge\\bigl|\\ln e-\\ln1\\bigr|=1$，等号在 $x$ 为常数、$y$ 单调时取到，因此 $d=1$。\\n另一方面 $\\int_0^{y_0}dy/y=+\\infty$：沿竖直方向走到 $y=0$ 需要无穷大的长度，所以 $y=0$ 上的点与内部点的距离为无穷大。$y=0$ 不属于双曲平面，它是**无穷远边界**（这与球面度量的极点、庞加莱圆盘的边界是同一件事）。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "度量",
+      "内积",
+      "弧长",
+      "体积元"
+    ],
+    "links": [
+      "smooth-manifold",
+      "tangent-space",
+      "metric-tensor",
+      "inner-product-space",
+      "first-fundamental-form",
+      "hyperbolic-geometry-poincare",
+      "geodesic",
+      "levi-civita-connection"
+    ]
+  },
+  {
+    "id": "levi-civita-connection",
+    "title": "列维-奇维塔联络",
+    "titleEn": "The Levi-Civita Connection",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "由度量唯一确定的求导法则：既度量相容（∇g=0，平行移动保内积）又无挠（下指标对称），两条缺一不可。",
+    "summaryEn": "The unique differentiation law determined by the metric: compatible with it (∇g = 0, parallel transport preserves inner products) and torsion-free (symmetric lower indices); neither condition may be dropped.",
+    "definition": "平坦空间中比较不同点的向量是自然的，但在一般流形上 $T_pM$ 与 $T_qM$ 是彼此无关的向量空间，要想「求导」必须额外指定一套法则。**仿射联络** $\\nabla$ 就是这样的法则：它把光滑向量场 $X,Y$ 变成新的向量场 $\\nabla_XY$，对第一个变量是 $C^{\\infty}(M)$-线性的（$\\nabla_{fX+gY}Z=f\\nabla_XZ+g\\nabla_YZ$），对第二个变量满足莱布尼茨法则（$\\nabla_X(fY)=f\\nabla_XY+(Xf)Y$）。第二条说明 $\\nabla$ **不是张量**：$\\nabla_XY$ 在一点的值既依赖 $X$ 在该点的值，也依赖 $Y$ 在该点邻域内的变化。沿曲线的求导也由它给出：若 $V$ 是沿 $\\gamma$ 的向量场，则 $\\nabla_{\\gamma'}V$（也记 $\\frac{DV}{dt}$）就是把 $\\gamma'$ 当作求导方向的协变导数。\\n\\n黎曼流形上的联络有无穷多，但与度量相容的只有一个。**黎曼几何基本定理**：在 $(M,g)$ 上存在**唯一**的联络 $\\nabla$ 同时满足两个条件——\\n① **度量相容**：$\\nabla g=0$，等价地 $$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ),$$ 也等价于「平行移动保持内积与长度」；\\n② **无挠（对称）**：$\\nabla_XY-\\nabla_YX=[X,Y]$，用坐标写就是 $\\Gamma^{i}{}_{jk}=\\Gamma^{i}{}_{kj}$。\\n这个唯一的 $\\nabla$ 称为**列维-奇维塔联络**（黎曼联络）。此后出现的 $\\nabla$ 都指它。两个条件缺一不可：只留①，可以再叠加任意的「反对称」项；只留②，也可以破坏度量相容性（见例题）。\\n\\n唯一性的证明是一个漂亮的代数练习。若 $\\nabla$ 与 $\\tilde\\nabla$ 都满足①②，则 $D(X,Y)=\\nabla_XY-\\tilde\\nabla_XY$ 是张量（两条公理中的非张量项在相减时相消），② 给出 $D(X,Y)=D(Y,X)$，① 给出 $g(D(X,Y),Z)+g(Y,D(X,Z))=0$；把 $(X,Y,Z)$ 轮换三组相加整理，立刻得到 $2g(D(X,Y),Z)=0$ 对一切 $Z$ 成立，于是 $D\\equiv0$，即 $\\nabla=\\tilde\\nabla$。把同一套计算整理成「解出 $\\nabla$」的形式，就是 **Koszul 公式**：$$2g(\\nabla_XY,Z)=Xg(Y,Z)+Yg(Z,X)-Zg(X,Y)+g(Y,[Z,X])+g(Z,[X,Y])-g(X,[Y,Z]),$$ 右边只含 $g$ 与李括号，因此它一举给出**存在性**（这样定义出的 $\\nabla$ 自动满足①②）与**唯一性**。\\n\\n在坐标中取 $X=\\partial_j,\\ Y=\\partial_k,\\ Z=\\partial_l$（李括号全为零），Koszul 公式变成 $2g(\\nabla_{\\partial_j}\\partial_k,\\partial_l)=\\partial_jg_{kl}+\\partial_kg_{jl}-\\partial_lg_{jk}$，解出联络系数就是 **Christoffel 符号**：$$\\Gamma^{i}{}_{jk}=\\frac{1}{2}g^{il}\\bigl(\\partial_jg_{lk}+\\partial_kg_{lj}-\\partial_lg_{jk}\\bigr),$$ 括号里三项的符号是「正、正、负」，指标的位置不能挪动。它关于下指标对称（这正是无挠），但**不是张量**：换坐标时会多出一项与坐标变换二阶导数 $\\partial^{2}x/\\partial x'{}^j\\partial x'{}^k$ 有关的非齐次项。所以「在某点选坐标使全部 $\\Gamma$ 为零」（测地坐标／局部惯性系）做得到，但那只是该点一阶的现象；若在邻域中全为零，曲率就为零。有了 $\\nabla$，「直线」与「平移」都能内蕴地说：测地线是 $\\nabla_{\\gamma'}\\gamma'=0$ 的曲线（坐标形式 $\\ddot x^{i}+\\Gamma^{i}{}_{jk}\\dot x^{j}\\dot x^{k}=0$，与曲面上的测地曲率定义一致，但不再需要嵌入空间），沿曲线的平行移动与曲率 $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$ 也随之定义。",
+    "definitionEn": "In flat space vectors at different points can be compared naively, but on a general manifold $T_pM$ and $T_qM$ are unrelated vector spaces, so one must prescribe a differentiation rule. An **affine connection** $\\nabla$ is such a rule: it turns smooth vector fields $X,Y$ into a vector field $\\nabla_XY$, is $C^{\\infty}(M)$-linear in the first variable ($\\nabla_{fX+gY}Z=f\\nabla_XZ+g\\nabla_YZ$) and satisfies the Leibniz rule in the second ($\\nabla_X(fY)=f\\nabla_XY+(Xf)Y$). The second axiom shows that $\\nabla$ **is not a tensor**: $\\nabla_XY$ at a point depends both on $X$ at that point and on $Y$ nearby. It also differentiates vector fields along curves: for $V$ along $\\gamma$, $\\nabla_{\\gamma'}V$ (also written $\\frac{DV}{dt}$) is the covariant derivative in the direction $\\gamma'$.\\n\\nThere are infinitely many connections on a Riemannian manifold, but exactly one is compatible with the metric. The **fundamental theorem of Riemannian geometry**: there exists a **unique** connection $\\nabla$ on $(M,g)$ satisfying the two conditions\\n(i) **metric compatibility**, $\\nabla g=0$, equivalently $Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$, equivalently parallel transport preserves inner products and lengths;\\n(ii) **torsion-freeness** (symmetry), $\\nabla_XY-\\nabla_YX=[X,Y]$, i.e. $\\Gamma^{i}{}_{jk}=\\Gamma^{i}{}_{kj}$ in coordinates.\\nThis unique $\\nabla$ is the **Levi-Civita connection** (Riemannian connection), and from here on $\\nabla$ always means it. Both conditions are indispensable: keeping only (i) one may add an arbitrary antisymmetric term, and keeping only (ii) one can still destroy metric compatibility (see the examples).\\n\\nUniqueness is a neat algebraic exercise. If $\\nabla$ and $\\tilde\\nabla$ both satisfy (i) and (ii), then $D(X,Y)=\\nabla_XY-\\tilde\\nabla_XY$ is a tensor (the non-tensorial terms cancel), (ii) gives $D(X,Y)=D(Y,X)$ and (i) gives $g(D(X,Y),Z)+g(Y,D(X,Z))=0$; adding the three cyclic permutations yields $2g(D(X,Y),Z)=0$ for all $Z$, so $D\\equiv0$ and $\\nabla=\\tilde\\nabla$. Rewriting the same computation so that it *solves* for $\\nabla$ gives the **Koszul formula** $2g(\\nabla_XY,Z)=Xg(Y,Z)+Yg(Z,X)-Zg(X,Y)+g(Y,[Z,X])+g(Z,[X,Y])-g(X,[Y,Z])$, whose right-hand side involves only $g$ and Lie brackets; hence it proves both existence (the object so defined satisfies (i) and (ii)) and uniqueness.\\n\\nSetting $X=\\partial_j$, $Y=\\partial_k$, $Z=\\partial_l$ in coordinates (all Lie brackets vanish) turns the Koszul formula into $2g(\\nabla_{\\partial_j}\\partial_k,\\partial_l)=\\partial_jg_{kl}+\\partial_kg_{jl}-\\partial_lg_{jk}$, whose solution is the **Christoffel symbol** $\\Gamma^{i}{}_{jk}=\\frac{1}{2}g^{il}(\\partial_jg_{lk}+\\partial_kg_{lj}-\\partial_lg_{jk})$ — the signs of the three terms are plus, plus, minus, and the index positions matter. It is symmetric in the lower indices (that is torsion-freeness) but **not a tensor**: under a change of coordinates it acquires an inhomogeneous term involving the second derivatives $\\partial^{2}x/\\partial x'{}^j\\partial x'{}^k$. Consequently one can choose coordinates in which all $\\Gamma$'s vanish at a given point (geodesic coordinates, a local inertial frame), but only at that point to first order; vanishing on a neighbourhood forces zero curvature. Finally, $\\nabla$ makes straightness and translation intrinsic: geodesics are the curves with $\\nabla_{\\gamma'}\\gamma'=0$, in coordinates $\\ddot x^{i}+\\Gamma^{i}{}_{jk}\\dot x^{j}\\dot x^{k}=0$ (the same condition as vanishing geodesic curvature on a surface, now without any ambient space), and it also defines parallel transport along curves and the curvature $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$.",
+    "formulas": [
+      {
+        "latex": "\\nabla_{fX+gY}Z=f\\nabla_XZ+g\\nabla_YZ,\\qquad \\nabla_X(fY)=f\\,\\nabla_XY+(Xf)\\,Y",
+        "note": "仿射联络的两条公理：对第一个变量是函数线性的（所以它不是逐点的张量运算），对第二个变量是求导。",
+        "noteEn": "The two axioms of an affine connection: function-linear in the first slot (so it is not a pointwise tensor operation) and a derivation in the second."
+      },
+      {
+        "latex": "\\nabla g=0\\iff Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ),\\qquad \\nabla_XY-\\nabla_YX=[X,Y]\\iff\\Gamma^{i}{}_{jk}=\\Gamma^{i}{}_{kj}",
+        "note": "度量相容与无挠；两条合起来唯一确定列维-奇维塔联络（黎曼几何基本定理），缺一不可。",
+        "noteEn": "Metric compatibility and torsion-freeness; together they determine the Levi-Civita connection uniquely (the fundamental theorem), and neither can be dropped."
+      },
+      {
+        "latex": "2g(\\nabla_XY,Z)=Xg(Y,Z)+Yg(Z,X)-Zg(X,Y)+g(Y,[Z,X])+g(Z,[X,Y])-g(X,[Y,Z])",
+        "note": "Koszul 公式：右端只含度量和李括号，构造性地给出存在性，并逐点确定 ∇ 的取值。",
+        "noteEn": "The Koszul formula: the right-hand side uses only the metric and Lie brackets, giving existence constructively and determining $\\nabla$ pointwise."
+      },
+      {
+        "latex": "\\Gamma^{i}{}_{jk}=\\frac{1}{2}g^{il}\\left(\\partial_jg_{lk}+\\partial_kg_{lj}-\\partial_lg_{jk}\\right),\\qquad \\partial_kg_{ij}=\\Gamma^{l}{}_{ki}g_{lj}+\\Gamma^{l}{}_{kj}g_{il}",
+        "note": "Christoffel 符号（三项符号：正、正、负）；右边等式是 $\\nabla g=0$ 的坐标写法，两者等价。",
+        "noteEn": "The Christoffel symbol (signs: plus, plus, minus); the second identity is $\\nabla g=0$ in coordinates, an equivalent statement."
+      },
+      {
+        "latex": "\\ddot x^{i}+\\Gamma^{i}{}_{jk}\\dot x^{j}\\dot x^{k}=0,\\qquad \\nabla_{\\gamma'}V=\\left(\\dot V^{k}+\\Gamma^{k}{}_{ij}\\dot x^{i}V^{j}\\right)\\partial_k",
+        "note": "测地线方程（内蕴形式 $\\nabla_{\\gamma'}\\gamma'=0$ 的坐标写法）与沿曲线协变导数的坐标公式。",
+        "noteEn": "The geodesic equation (coordinates of $\\nabla_{\\gamma'}\\gamma'=0$) and the coordinate formula for the covariant derivative along a curve."
+      }
+    ],
+    "properties": [
+      "**存在且唯一**：同时满足度量相容与无挠的联络由 $g$ 唯一决定（Koszul／Christoffel 公式），并且它是等距不变量：等距变换 $f$ 把 $\\nabla^{g}$ 送到 $\\nabla^{h}$，即 $f_{*}\\nabla^{g}_{X}Y=\\nabla^{h}_{f_{*}X}f_{*}Y$。",
+      "**联络不是张量，但联络之差是张量**：$\\nabla-\\tilde\\nabla$ 是 $(1,2)$ 型张量，唯一性等价于说这个差张量必为零；也正因为公理中的非张量项对任何联络都相同，两条公理才有可能「筛选」出唯一的一个。",
+      "**度量相容的几何含义**：平行移动是等距同构（保内积、保长度、保夹角），反之任何度量相容的联络都让 $g$ 在平行移动下不变；等价地，协变导数与用 $g$ 升降指标可以交换次序。",
+      "**无挠的几何含义**：等价于下指标对称 $\\Gamma^{i}{}_{jk}=\\Gamma^{i}{}_{kj}$，也等价于「二阶协变导数对称」：对任何函数 $f$ 有 $\\nabla_i\\nabla_jf=\\nabla_j\\nabla_if$（这就是「对称」一名的来历）。",
+      "**局部惯性系**：任一点可取测地（法）坐标使 $g_{ij}(p)=\\delta_{ij}$、$\\Gamma^{i}{}_{jk}(p)=0$（因为 $\\Gamma$ 由 $\\partial g$ 组成而 $\\partial g(p)=0$）；但除非曲率为零，无法在整个邻域上同时做到——这正是 $\\Gamma$ 不是张量的直接后果。"
+    ],
+    "propertiesEn": [
+      "**Existence and uniqueness**: the connection that is both metric compatible and torsion-free is determined by $g$ alone (Koszul and Christoffel formulas), and it is an isometry invariant: an isometry $f$ carries $\\nabla^{g}$ to $\\nabla^{h}$, i.e. $f_{*}\\nabla^{g}_{X}Y=\\nabla^{h}_{f_{*}X}f_{*}Y$.",
+      "**A connection is not a tensor, but the difference of two connections is**: $\\nabla-\\tilde\\nabla$ is a $(1,2)$-tensor, so uniqueness says exactly that this difference tensor vanishes; the fact that the non-tensorial terms are the same for every connection is what allows the two axioms to single out one connection.",
+      "**Geometric meaning of metric compatibility**: parallel transport is a linear isometry (preserving inner products, lengths and angles), and conversely any metric-compatible connection leaves $g$ invariant under parallel transport; equivalently, covariant differentiation commutes with raising and lowering indices.",
+      "**Geometric meaning of torsion-freeness**: it is equivalent to symmetry of the lower indices, $\\Gamma^{i}{}_{jk}=\\Gamma^{i}{}_{kj}$, and also to symmetry of second covariant derivatives of functions, $\\nabla_i\\nabla_jf=\\nabla_j\\nabla_if$ — the origin of the name.",
+      "**Local inertial frames**: at any point one can choose geodesic (normal) coordinates with $g_{ij}(p)=\\delta_{ij}$ and $\\Gamma^{i}{}_{jk}(p)=0$, because $\\Gamma$ is built from $\\partial g$ and $\\partial g(p)=0$; unless the curvature vanishes this cannot hold on a whole neighbourhood, a direct consequence of $\\Gamma$ not being a tensor."
+    ],
+    "examples": [
+      {
+        "problem": "对单位球面度量 $g=d\\theta^{2}+\\sin^{2}\\theta\\,d\\varphi^{2}$，用 Christoffel 公式算出全部联络系数、验证对称性，并判断赤道与一般纬线哪些是测地线。",
+        "solution": "记 $(x^{1},x^{2})=(\\theta,\\varphi)$，$(g_{ij})=\\operatorname{diag}(1,\\sin^{2}\\theta)$，$(g^{ij})=\\operatorname{diag}(1,\\sin^{-2}\\theta)$，唯一的非零度规导数是 $\\partial_{\\theta}g_{\\varphi\\varphi}=2\\sin\\theta\\cos\\theta$。\\n$\\Gamma^{\\theta}{}_{\\varphi\\varphi}=\\frac{1}{2}g^{\\theta\\theta}(2\\partial_{\\varphi}g_{\\varphi\\theta}-\\partial_{\\theta}g_{\\varphi\\varphi})=\\frac{1}{2}\\cdot1\\cdot(-2\\sin\\theta\\cos\\theta)=-\\sin\\theta\\cos\\theta$；\\n$\\Gamma^{\\varphi}{}_{\\theta\\varphi}=\\Gamma^{\\varphi}{}_{\\varphi\\theta}=\\frac{1}{2}g^{\\varphi\\varphi}\\partial_{\\theta}g_{\\varphi\\varphi}=\\frac{1}{2\\sin^{2}\\theta}\\cdot2\\sin\\theta\\cos\\theta=\\cot\\theta$；其余全为 $0$。下指标对称自动成立。\\n测地线方程为 $\\ddot\\theta-\\sin\\theta\\cos\\theta\\,\\dot\\varphi^{2}=0$、$\\ddot\\varphi+2\\cot\\theta\\,\\dot\\theta\\dot\\varphi=0$。\\n赤道 $\\theta=\\pi/2$、$\\varphi=t$：$\\dot\\theta=\\ddot\\theta=0$，而 $\\sin(\\pi/2)\\cos(\\pi/2)=0$，两个方程都成立，故是测地线。\\n一般纬线 $\\theta=\\theta_0\\neq\\pi/2$、$\\varphi=t$：第一个方程左边为 $-\\sin\\theta_0\\cos\\theta_0\\neq0$，不成立，故不是测地线（它在球面上是「绕着极点转的小圆」，必须靠摩擦才能维持）。"
+      },
+      {
+        "problem": "说明两个条件缺一不可。(1) 在 $\\mathbb{R}^{3}$（欧氏度量）上令 $\\nabla_XY=D_XY+X\\times Y$，验证它度量相容但有挠；(2) 令 $\\nabla_XY=D_XY+\\langle X,Y\\rangle\\xi$（$\\xi\\neq0$ 为固定向量），验证它无挠但不度量相容。",
+        "solution": "(1) 因 $\\langle X\\times Y,Z\\rangle=\\det(X,Y,Z)$ 关于 $(Y,Z)$ 反对称，所以 $$\\langle X\\times Y,Z\\rangle+\\langle Y,X\\times Z\\rangle=\\det(X,Y,Z)+\\det(Y,X,Z)=0,$$ 即 $X\\langle Y,Z\\rangle=\\langle\\nabla_XY,Z\\rangle+\\langle Y,\\nabla_XZ\\rangle$，度量相容成立；但挠率 $T(X,Y)=\\nabla_XY-\\nabla_YX-[X,Y]=X\\times Y-Y\\times X=2X\\times Y\\neq0$（取 $X,Y$ 线性无关）。\\n(2) 挠率 $T(X,Y)=\\langle X,Y\\rangle\\xi-\\langle Y,X\\rangle\\xi=0$，无挠成立；而 $$(\\nabla_Xg)(Y,Z)=X\\langle Y,Z\\rangle-\\langle D_XY+\\langle X,Y\\rangle\\xi,Z\\rangle-\\langle Y,D_XZ+\\langle X,Z\\rangle\\xi\\rangle=-\\langle X,Y\\rangle\\langle\\xi,Z\\rangle-\\langle X,Z\\rangle\\langle Y,\\xi\\rangle,$$ 取 $Y=Z=\\xi$ 得 $-2\\langle X,\\xi\\rangle|\\xi|^2\\neq0$（当 $\\xi\\neq0$ 且 $X$ 不与 $\\xi$ 垂直），故不度量相容。可见「唯一性」确实同时用到了两条公理。"
+      }
+    ],
+    "tags": [
+      "联络",
+      "协变导数",
+      "Christoffel 符号",
+      "测地线",
+      "基本定理"
+    ],
+    "links": [
+      "metric-tensor",
+      "christoffel-symbols",
+      "riemannian-metric",
+      "geodesic",
+      "parallel-transport-holonomy",
+      "lie-derivative"
+    ]
+  },
+  {
+    "id": "parallel-transport-holonomy",
+    "title": "平行移动与和乐群",
+    "titleEn": "Parallel Transport and Holonomy",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "沿曲线协变导数为零的向量场给出切空间之间的线性等距同构；绕闭环平移一周所得变换构成的**和乐群**恰好测出曲率。",
+    "summaryEn": "Vector fields with vanishing covariant derivative along a curve give linear isometries between tangent spaces; the transformations obtained around closed loops form the holonomy group, which measures curvature.",
+    "definition": "在黎曼流形上「把向量原封不动地搬过去」有确切含义：沿曲线 $\\gamma$ 的向量场 $V$ 若满足 $$\\nabla_{\\gamma'}V=0,$$ 就称为**平行向量场**。用坐标写出它是 $\\dot V^{k}+\\Gamma^{k}{}_{ij}\\dot x^{i}V^{j}=0$：关于 $V$ 的一阶**线性**常微分方程组，因此给定初值 $V(t_0)$ 就有唯一解，并且可以延拓到整条曲线（线性方程组不会有奇点）。于是得到映射 $P_\\gamma:T_{\\gamma(a)}M\\to T_{\\gamma(b)}M$，把初值送到终值，称为沿 $\\gamma$ 的**平行移动**。\\n\\n$P_\\gamma$ 是线性同构，而且是**等距**同构：由度量相容性，$$\\frac{d}{dt}g(V,W)=g(\\nabla_{\\gamma'}V,W)+g(V,\\nabla_{\\gamma'}W)=0,$$ 所以内积、长度、夹角一律保持不变（这正是 $\\nabla g=0$ 的几何内容）。平行移动还有函子性质 $P_{\\gamma_2\\circ\\gamma_1}=P_{\\gamma_2}\\circ P_{\\gamma_1}$、$P_{\\gamma^{-1}}=P_{\\gamma}^{-1}$，并且只依赖曲线的像与走向，与重参数化、途中停留无关。特别地，测地线的切向量自己就是平行向量场（测地线方程 $\\nabla_{\\gamma'}\\gamma'=0$ 说的正是这件事），所以测地线在平行标架下就是「直线」。\\n\\n然而 $P_\\gamma$ 一般**依赖路径**：从 $p$ 到 $q$ 的两条不同曲线可以给出完全不同的结果。度量这种不可交换性的对象就是**和乐群**：固定基点 $p$，把所有以 $p$ 为基点的分段光滑闭环 $\\gamma$（$\\gamma(0)=\\gamma(1)=p$）的平行移动收集起来，$$\\mathrm{Hol}_p(M)=\\{P_\\gamma\\}\\subset O(T_pM),$$ 它是 $O(n)$ 的闭子群；若 $M$ 可定向，则 $\\mathrm{Hol}_p(M)\\subset SO(T_pM)$。把绕可缩闭环的部分记作 $\\mathrm{Hol}^{0}_p$，它是单位分支（正规子群）。**关键联系（Ambrose–Singer 定理）**：和乐群的李代数由曲率张量生成——准确地说，由 $\\tau_\\gamma^{-1}\\circ R(v,w)\\circ\\tau_\\gamma$（$\\tau_\\gamma$ 为沿任意曲线的平行移动）张成。因此\\n**曲率非零 ⟺ 平行移动依赖路径 ⟺ 限制和乐群非平凡**；\\n反过来曲率恒为零（平坦）⟺ 局部存在平行的正交标架 ⟺ $\\mathrm{Hol}^{0}_p$ 平凡。要注意区分「限制」与「整体」：平坦流形的限制和乐群平凡，但整体和乐群仍可能非平凡，那是拓扑效应——平坦的 Möbius 带上绕一圈，横截方向正好翻转，$\\mathrm{Hol}_p\\cong\\mathbb{Z}_2$。\\n\\n球面是最直观的例子。$S^{2}_R$ 是常曲率 $K=1/R^{2}$ 的曲面，沿一条简单闭曲线平行移动一周，向量在 $T_pM$ 中旋转的角度恰为曲线所围区域的**立体角**，也等于 $\\int_D K\\,dA=\\mathrm{area}(D)/R^{2}$（这正是 Gauss–Bonnet 定理的平行移动版本）。特别地，绕余纬 $\\theta_0$ 的纬线一周，旋转角为 $2\\pi(1-\\cos\\theta_0)$：$\\theta_0$ 很小时旋转趋于 $0$（局部几乎平坦），$\\theta_0=\\pi/2$（赤道）时为 $2\\pi$，与「恒等变换」相容。球面上的测地三角形（三个顶点用大圆连接）则给出旋转角 = 内角和 $-\\pi$ = 角盈，例如顶点为北极与赤道上经度差 $\\varphi$ 的两点时，旋转角正好是 $\\varphi$。",
+    "definitionEn": "On a Riemannian manifold, transporting a vector faithfully along a curve means requiring the field $V$ along $\\gamma$ to satisfy $\\nabla_{\\gamma'}V=0$; such a $V$ is called **parallel**. In coordinates the equation reads $\\dot V^{k}+\\Gamma^{k}{}_{ij}\\dot x^{i}V^{j}=0$, a first-order **linear** system of ODEs: given any initial vector $V(t_0)$ there is a unique solution, which extends to the whole curve. The resulting map $P_\\gamma:T_{\\gamma(a)}M\\to T_{\\gamma(b)}M$ is the **parallel transport** along $\\gamma$.\\n\\n$P_\\gamma$ is a linear isomorphism, and an **isometry**: metric compatibility gives $\\frac{d}{dt}g(V,W)=g(\\nabla_{\\gamma'}V,W)+g(V,\\nabla_{\\gamma'}W)=0$, so inner products, lengths and angles are all preserved — that is the geometric content of $\\nabla g=0$. Parallel transport is functorial, $P_{\\gamma_2\\circ\\gamma_1}=P_{\\gamma_2}\\circ P_{\\gamma_1}$ and $P_{\\gamma^{-1}}=P_{\\gamma}^{-1}$, and depends only on the image and direction of the curve, not on its parametrization. In particular the tangent field of a geodesic is parallel along it (this is exactly $\\nabla_{\\gamma'}\\gamma'=0$), so geodesics look like straight lines in a parallel frame.\\n\\nIn general, however, $P_\\gamma$ **depends on the path**: two curves from $p$ to $q$ may give different answers. The object measuring this non-commutativity is the **holonomy group**: fix a base point $p$ and collect the transports around all piecewise smooth loops based at $p$ ($\\gamma(0)=\\gamma(1)=p$), obtaining $\\mathrm{Hol}_p(M)=\\{P_\\gamma\\}\\subset O(T_pM)$, a closed subgroup of $O(n)$; if $M$ is orientable then $\\mathrm{Hol}_p(M)\\subset SO(T_pM)$. The part coming from contractible loops, $\\mathrm{Hol}^{0}_p$, is the identity component (a normal subgroup). **The key link (Ambrose–Singer theorem)**: the Lie algebra of the holonomy group is generated by the curvature tensor — precisely, it is spanned by $\\tau_\\gamma^{-1}\\circ R(v,w)\\circ\\tau_\\gamma$, where $\\tau_\\gamma$ denotes parallel transport along an arbitrary curve. Hence\\n**non-vanishing curvature ⟺ path-dependent parallel transport ⟺ non-trivial restricted holonomy**, and conversely zero curvature (flat) ⟺ existence of a locally parallel orthonormal frame ⟺ $\\mathrm{Hol}^{0}_p$ trivial. The restricted and the full holonomy group must be distinguished: a flat manifold has trivial restricted holonomy but may still have non-trivial holonomy of topological origin — on a flat Möbius band one trip around flips the transverse direction, so $\\mathrm{Hol}_p\\cong\\mathbb{Z}_2$.\\n\\nSpheres are the most visual example. On $S^{2}_R$ of constant curvature $K=1/R^{2}$, transporting a vector once around a simple closed curve rotates it in $T_pM$ by the **solid angle** enclosed by the curve, equal to $\\int_D K\\,dA=\\mathrm{area}(D)/R^{2}$ (the parallel-transport face of Gauss–Bonnet). In particular, a trip around the latitude circle of colatitude $\\theta_0$ rotates vectors by $2\\pi(1-\\cos\\theta_0)$: this tends to $0$ as $\\theta_0\\to0$ (locally almost flat) and equals $2\\pi$ for the equator $\\theta_0=\\pi/2$, which is consistent with the identity. For a geodesic triangle the rotation angle is the angle sum minus $\\pi$, the spherical excess; taking the north pole and two equatorial points of longitude difference $\\varphi$ gives exactly $\\varphi$.",
+    "formulas": [
+      {
+        "latex": "\\nabla_{\\gamma'}V=0\\iff \\dot V^{k}+\\Gamma^{k}{}_{ij}\\dot x^{i}V^{j}=0",
+        "note": "平行向量场的方程：一阶线性常微分方程组，给定初值向量有唯一解，可延拓到整条曲线。",
+        "noteEn": "The equation of a parallel field: a first-order linear system, so any initial vector determines a unique solution extending over the whole curve."
+      },
+      {
+        "latex": "\\frac{d}{dt}g(V,W)=g(\\nabla_{\\gamma'}V,W)+g(V,\\nabla_{\\gamma'}W)=0,\\qquad P_{\\gamma_2\\circ\\gamma_1}=P_{\\gamma_2}\\circ P_{\\gamma_1},\\quad P_{\\gamma^{-1}}=P_{\\gamma}^{-1}",
+        "note": "等距性与函子性：平行移动是切空间之间的线性等距同构，并对曲线复合、反向取逆都相容。",
+        "noteEn": "Isometry and functoriality: parallel transport is a linear isometry between tangent spaces, compatible with composition and reversal of curves."
+      },
+      {
+        "latex": "\\mathrm{Hol}_p(M)=\\{P_\\gamma:\\ \\gamma(0)=\\gamma(1)=p\\}\\subset O(T_pM),\\qquad M\\ \\text{可定向}\\Rightarrow \\mathrm{Hol}_p(M)\\subset SO(T_pM)",
+        "note": "和乐群：所有以 p 为基点的闭环的平行移动构成的群，是 $O(n)$ 的闭子群（可定向时落在 $SO(n)$ 里）。",
+        "noteEn": "The holonomy group: all transports around loops based at $p$, a closed subgroup of $O(n)$ (contained in $SO(n)$ when $M$ is orientable)."
+      },
+      {
+        "latex": "\\mathfrak{hol}_p=\\mathrm{span}\\bigl\\{\\tau_\\gamma^{-1}\\circ R(v,w)\\circ\\tau_\\gamma:\\ \\gamma(0)=p,\\ v,w\\in T_{\\gamma(1)}M\\bigr\\}",
+        "note": "Ambrose–Singer 定理：和乐群的李代数由曲率张量生成（$\\tau_\\gamma$ 为沿 $\\gamma$ 的平行移动）；故 $R\\equiv0\\Leftrightarrow$ 限制和乐群平凡。",
+        "noteEn": "Ambrose–Singer theorem: the Lie algebra of the holonomy group is spanned by curvature tensors transported around loops; hence $R\\equiv0\\Leftrightarrow$ trivial restricted holonomy."
+      },
+      {
+        "latex": "\\Delta\\theta=\\int_D K\\,dA=\\frac{\\mathrm{area}(D)}{R^{2}},\\qquad \\text{纬线}\\ \\theta_0:\\ \\Delta\\theta=2\\pi(1-\\cos\\theta_0)",
+        "note": "球面 $S^{2}_R$ 上的和乐角（向量绕简单闭曲线一周的旋转角）：等于所围区域的立体角，也等于面积除以 $R^{2}$。",
+        "noteEn": "Holonomy angle on $S^{2}_R$ (rotation of a vector after one loop): it equals the enclosed solid angle, i.e. the enclosed area divided by $R^{2}$."
+      }
+    ],
+    "properties": [
+      "$P_\\gamma$ 只依赖曲线的像与走向，与参数化快慢无关；复合与求逆相容，因此以 $p$ 为基点的闭环的平行移动构成群。",
+      "$\\mathrm{Hol}_p$ 是 $O(T_pM)$ 的闭子群（因而是紧李群）；$\\mathrm{Hol}^{0}_p$（可缩闭环）是单位分支，且存在自然的满同态 $\\pi_1(M,p)\\to\\mathrm{Hol}_p/\\mathrm{Hol}^{0}_p$，所以单连通时 $\\mathrm{Hol}_p=\\mathrm{Hol}^{0}_p$，和乐只反映曲率。",
+      "$R\\equiv0\\iff$ 局部存在平行正交标架 $\\iff\\mathrm{Hol}^{0}_p=\\{1\\}\\iff g$ 局部等距于欧氏度量（Riemann 平坦）；但整体和乐群在平坦流形上仍可能非平凡（平坦 Möbius 带的和乐是 $\\mathbb{Z}_2$），那是拓扑而非曲率造成的。",
+      "**无穷小版本**：绕以 $\\varepsilon X,\\varepsilon Y$ 为边的无穷小平行四边形一周，$$P_\\gamma v=v-\\varepsilon^{2}R(X,Y)v+O(\\varepsilon^{3}),$$ 即曲率是「平行移动不可交换」的无穷小度量，这也是 Ambrose–Singer 定理的直观来源。",
+      "和乐群是分类黎曼流形的核心不变量（Berger 分类）：不可约且非局部对称的空间，其限制和乐群只能落在 $SO(n),\\ U(n),\\ SU(n),\\ Sp(n),\\ Sp(n)\\cdot Sp(1),\\ G_2,\\ \\mathrm{Spin}(7)$ 之中；例如 $\\mathrm{Hol}\\subset U(n)$ 恰好刻画 Kähler 流形。"
+    ],
+    "propertiesEn": [
+      "$P_\\gamma$ depends only on the image and direction of the curve, not on how fast it is traversed; composition and reversal behave functorially, so transports around loops based at $p$ form a group.",
+      "$\\mathrm{Hol}_p$ is a closed subgroup of $O(T_pM)$, hence a compact Lie group; $\\mathrm{Hol}^{0}_p$ (contractible loops) is its identity component, and there is a natural surjection $\\pi_1(M,p)\\to\\mathrm{Hol}_p/\\mathrm{Hol}^{0}_p$, so for simply connected $M$ one has $\\mathrm{Hol}_p=\\mathrm{Hol}^{0}_p$ and holonomy reflects curvature only.",
+      "$R\\equiv0\\iff$ a locally parallel orthonormal frame exists $\\iff\\mathrm{Hol}^{0}_p=\\{1\\}\\iff g$ is locally isometric to the Euclidean metric (Riemann flat); the full holonomy may still be non-trivial on a flat manifold (a flat Möbius band has holonomy $\\mathbb{Z}_2$), which is a topological rather than a curvature effect.",
+      "**Infinitesimal version**: going around the small parallelogram with sides $\\varepsilon X,\\varepsilon Y$ gives $P_\\gamma v=v-\\varepsilon^{2}R(X,Y)v+O(\\varepsilon^{3})$, so curvature is the infinitesimal measure of the failure of parallel transports to commute — the intuition behind Ambrose–Singer.",
+      "The holonomy group is a central invariant in the classification of Riemannian manifolds (Berger): for an irreducible, non-locally-symmetric space the restricted holonomy must lie in one of $SO(n),\\ U(n),\\ SU(n),\\ Sp(n),\\ Sp(n)\\cdot Sp(1),\\ G_2,\\ \\mathrm{Spin}(7)$; for instance $\\mathrm{Hol}\\subset U(n)$ characterises Kähler manifolds."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.9,
+        2.9
+      ],
+      "yRange": [
+        -1.6,
+        1.6
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 1.2,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "arc",
+          "cx": -1.375,
+          "cy": 0,
+          "r": 1.825,
+          "start": 5.5655,
+          "end": 0.7177,
+          "color": "rgba(179,136,255,0.5)"
+        },
+        {
+          "type": "arc",
+          "cx": 1.375,
+          "cy": 0,
+          "r": 1.825,
+          "start": 2.4239,
+          "end": 3.8593,
+          "color": "rgba(179,136,255,0.5)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -1.2,
+            0
+          ],
+          "to": [
+            1.2,
+            0
+          ],
+          "color": "rgba(160,175,220,0.45)",
+          "dash": true
+        },
+        {
+          "type": "arc",
+          "cx": 0,
+          "cy": -0.2625,
+          "r": 0.8125,
+          "start": 0.3948,
+          "end": 2.7468,
+          "color": "#ffd166"
+        },
+        {
+          "type": "arc",
+          "cx": 0,
+          "cy": 0.3625,
+          "r": 0.8125,
+          "start": 3.5364,
+          "end": 5.8884,
+          "color": "#ffd166"
+        },
+        {
+          "type": "arc",
+          "cx": -0.75,
+          "cy": 0.05,
+          "r": 0.32,
+          "start": -1.2566,
+          "end": 0,
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.75,
+            0.05
+          ],
+          "to": [
+            -0.75,
+            0.37
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.75,
+            0.05
+          ],
+          "to": [
+            -0.4456,
+            0.1489
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            -0.75,
+            0.05
+          ],
+          "label": "p"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            0.78
+          ],
+          "text": "闭回路 γ"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            -1.45
+          ],
+          "text": "球面 S²（正面）"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.6,
+            0.5
+          ],
+          "text": "v"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.3,
+            0.22
+          ],
+          "text": "Pv"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            0.55
+          ],
+          "text": "绕行一周"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            0.2
+          ],
+          "text": "v ↦ Pv"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            -0.15
+          ],
+          "text": "旋转 72°"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            -0.5
+          ],
+          "text": "= 所围立体角"
+        }
+      ],
+      "title": "球面上平行移动一周：向量旋转所围立体角"
+    },
+    "examples": [
+      {
+        "problem": "在单位球面上，取测地三角形，顶点为北极 $N$ 与赤道上经度 $0$ 的点 $A$、经度 $\\varphi$ 的点 $B$（三条边都是大圆）。求沿该三角形平行移动一周的净旋转角，并核对 $\\Delta\\theta=\\mathrm{area}/R^{2}$。",
+        "solution": "沿测地线平行移动时「向量与切线的夹角保持不变」，逐边追踪（在每段大圆上维持与切线的定角）可得：出发时取 $v_0=$ 第一条边的切向量，绕行一周回到 $N$ 后，$v$ 恰好是第三条边切向量的反向，而两条子午线在 $N$ 处的切向夹角为 $\\varphi$，于是净旋转角 $=\\varphi$。\\n另一方面该三角形的三个内角为 $\\varphi$（北极处）、$\\pi/2$、$\\pi/2$，内角和 $=\\pi+\\varphi$，角盈 $=\\varphi$；又面积 $=\\varphi R^{2}$（$R=1$ 时 $=\\varphi$，恰好是经度区间所对应的「半个二角形」），故 $\\mathrm{area}/R^{2}=\\varphi$，与直接追踪一致。\\n取 $\\varphi=\\pi/2$：这正是八分之一球面（面积 $\\pi/2\\approx1.571$），旋转角 $\\pi/2=90^{\\circ}$。可见平行移动不仅依赖路径，而且差异正好被「所围面积 $\\times$ 曲率」量化。"
+      },
+      {
+        "problem": "在（平坦）Möbius 带 $M=\\mathbb{R}\\times[0,1]/(t,s)\\sim(t+1,1-s)$（配欧氏度量，曲率恒为 $0$）上，求基点 $p=(0,1/2)$ 处绕中心圆一周的平行移动，并解释这与 Ambrose–Singer 定理的关系。",
+        "solution": "带上的度量为 $dt^{2}+ds^{2}$，Christoffel 符号全为零，故平行移动就是「在 $(t,s)$ 坐标下保持分量不变、再做粘合」。取环路 $\\gamma(t)=(t,1/2)$，$t\\in[0,1]$，初向量 $\\partial_s$：分量保持不变地到达 $(1,1/2)$，但粘合 $(1,1/2)\\sim(0,1-1/2)=(0,1/2)$ 是把 $(t,s)\\mapsto(t+1,1-s)$，其微分为 $ds\\mapsto-ds$，于是 $P_\\gamma(\\partial_s)=-\\partial_s$，而 $P_\\gamma(\\partial_t)=\\partial_t$。所以 $P_\\gamma=\\mathrm{diag}(1,-1)$ 是反射，$\\mathrm{Hol}_p\\cong\\mathbb{Z}_2\\neq\\{1\\}$。\\n这说明定理中的「曲率非零 $\\Leftrightarrow$ 和乐非平凡」必须加「限制和乐群」：这里的环路不可缩（$\\pi_1(M)\\cong\\mathbb{Z}$ 由它生成），它对应的是和乐的拓扑部分；限制和乐群 $\\mathrm{Hol}^{0}_p$ 仍然平凡，与曲率为零完全一致。"
+      }
+    ],
+    "tags": [
+      "平行移动",
+      "和乐群",
+      "曲率",
+      "联络",
+      "Gauss–Bonnet"
+    ],
+    "links": [
+      "levi-civita-connection",
+      "riemannian-metric",
+      "geodesic",
+      "riemannian-curvature-tensor",
+      "gauss-bonnet",
+      "surface-isometry",
+      "fundamental-group"
+    ]
+  },
+  {
+    "id": "exponential-map",
+    "title": "指数映射与单射半径",
+    "titleEn": "The Exponential Map and Injectivity Radius",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "exp_p 把切空间的直线映为流形上过 p 的测地线，在 0 附近是局部微分同胚；单射半径是它保持单射的最大半径，等于到割迹的距离。",
+    "summaryEn": "exp_p maps straight lines in the tangent space to geodesics through p and is a local diffeomorphism near 0; the injectivity radius is the largest radius on which it stays injective and equals the distance to the cut locus.",
+    "definition": "测地线的存在唯一性使我们能「用切向量造曲线」：对 $v\\in T_pM$，记 $\\gamma_v$ 为满足 $\\gamma(0)=p$、$\\gamma'(0)=v$ 的极大测地线，定义 $$\\exp_p(v)=\\gamma_v(1)$$ （只要 $\\gamma_v$ 至少定义到 $t=1$）。由测地线的齐次性 $\\exp_p(tv)=\\gamma_v(t)$，也就是把 $T_pM$ 中的直线 $t\\mapsto tv$ 映为 $M$ 中从 $p$ 出发、初速度 $v$ 的测地线。几何图像是「把切空间展开到流形上」；以 $\\exp_p$ 为坐标卡的坐标叫**测地坐标（法坐标）**。若 $M$ 完备，则 $\\exp_p$ 在整个 $T_pM$ 上有定义，且 $M=\\exp_p(T_pM)$（Hopf–Rinow）：测地线能走到任何地方。\\n\\n局部性质很容易得到：由 $\\bigl(d\\exp_p\\bigr)_0(v)=\\frac{d}{dt}\\big|_0\\exp_p(tv)=\\gamma_v'(0)=v$ 知 $(d\\exp_p)_0=\\mathrm{id}$，于是反函数定理告诉我们 $\\exp_p$ 在 $0$ 的某个邻域上是到 $p$ 的邻域的**微分同胚**。用这个微分同胚当坐标，就有 $g_{ij}(0)=\\delta_{ij}$、$\\partial_kg_{ij}(0)=0$，从而 $\\Gamma^{i}{}_{jk}(0)=0$：在这点一阶看来流形就是欧氏的（局部惯性系）。必须强调这只是**一点**的性质：$\\Gamma$ 在邻域中一般不为零，它在邻域中为零才意味着平坦。\\n\\n这套结构的核心是 **Gauss 引理**：对 $v\\in T_pM$ 与 $w\\in T_v(T_pM)\\cong T_pM$，$$\\bigl\\langle (d\\exp_p)_v(v),\\,(d\\exp_p)_v(w)\\bigr\\rangle=\\langle v,w\\rangle_p.$$ 特别地取 $w=\\lambda v$ 得 $|(d\\exp_p)_v(v)|=|v|$，而且 $w\\perp v$ 时像也垂直。于是：**$\\exp_p$ 的径向测地线与测地球面 $\\{\\exp_p(w):|w|=r\\}$ 处处正交**，并且径向测地线是**极小**的——在 $\\exp_p$ 是微分同胚的范围内，径向测地线段的长度就等于 $|v|$，也就是 $d\\bigl(p,\\exp_pv\\bigr)=|v|$。这是「测地线局部极小」的标准证明，也是测地极坐标下度量能写成 $g=dr^{2}+g_{\\alpha\\beta}(r,\\theta)d\\theta^{\\alpha}d\\theta^{\\beta}$（无 $dr\\,d\\theta$ 交叉项）的原因。\\n\\n**单射半径**衡量 $\\exp_p$ 能保持单射的范围：$$\\mathrm{inj}(p)=\\sup\\{r>0:\\ \\exp_p\\ \\text{在}\\ B(0,r)\\subset T_pM\\ \\text{上单射}\\},\\qquad \\mathrm{inj}(M)=\\inf_{p}\\mathrm{inj}(p).$$ 当 $r<\\mathrm{inj}(p)$ 时 $\\exp_p:B(0,r)\\to B(p,r)$ 不仅是单射，而且是**微分同胚**（单射性会排除临界点），像恰是度量球 $B(p,r)=\\{q:d(p,q)<r\\}$：测地球与度量球一致。这里要分清「单射」与「微分同胚」：单射只要求两条不同的测地线不在球内相撞，微分同胚还要切映射处处可逆，条件更强；但在测地球这个情形下二者等价。更精细的关系是 $$\\mathrm{inj}(p)=d\\bigl(p,C(p)\\bigr),$$ 其中 $C(p)$ 是 $p$ 的**割迹**——径向测地线不再极小、或被另一条测地线追上的那些点的集合；而 $\\mathrm{inj}(p)$ 不超过到第一个**共轭点**的距离。球面 $S^{2}_R$ 是标准例子：$\\mathrm{inj}(p)=\\pi R$，$\\exp_p$ 在 $|v|=\\pi R$（对径点）处奇异，切映射秩降为 $n-1$。",
+    "definitionEn": "Existence and uniqueness of geodesics let us build curves from tangent vectors: for $v\\in T_pM$ let $\\gamma_v$ be the maximal geodesic with $\\gamma(0)=p$, $\\gamma'(0)=v$, and set $\\exp_p(v)=\\gamma_v(1)$ (whenever $\\gamma_v$ reaches $t=1$). By homogeneity of geodesics, $\\exp_p(tv)=\\gamma_v(t)$: the straight line $t\\mapsto tv$ in $T_pM$ is sent to the geodesic through $p$ with initial velocity $v$. The geodesic (normal) coordinates are the coordinates given by $\\exp_p$. If $M$ is complete then $\\exp_p$ is defined on all of $T_pM$ and $M=\\exp_p(T_pM)$ (Hopf–Rinow): geodesics reach every point.\\n\\nThe local behaviour is immediate: since $(d\\exp_p)_0(v)=\\frac{d}{dt}\\big|_0\\exp_p(tv)=\\gamma_v'(0)=v$, we have $(d\\exp_p)_0=\\mathrm{id}$, so by the inverse function theorem $\\exp_p$ is a **diffeomorphism** from a neighbourhood of $0$ onto a neighbourhood of $p$. In these coordinates $g_{ij}(0)=\\delta_{ij}$ and $\\partial_kg_{ij}(0)=0$, hence $\\Gamma^{i}{}_{jk}(0)=0$: to first order at that point the manifold looks Euclidean (a local inertial frame). This is a statement about **one point** only; $\\Gamma$ generally does not vanish nearby, and vanishing on a neighbourhood would mean flatness.\\n\\nThe heart of the structure is **Gauss's lemma**: for $v\\in T_pM$ and $w\\in T_v(T_pM)\\cong T_pM$, $\\langle (d\\exp_p)_v(v),(d\\exp_p)_v(w)\\rangle=\\langle v,w\\rangle_p$. Taking $w=\\lambda v$ gives $|(d\\exp_p)_v(v)|=|v|$, and $w\\perp v$ gives orthogonality of the images. Consequently the **radial geodesics of $\\exp_p$ are everywhere orthogonal to the geodesic spheres** $\\{\\exp_p(w):|w|=r\\}$, and radial geodesics are **minimising**: wherever $\\exp_p$ is a diffeomorphism, a radial segment has length $|v|$, i.e. $d(p,\\exp_pv)=|v|$. This is the standard proof that geodesics are locally minimising, and the reason the metric in geodesic polar coordinates has the form $g=dr^{2}+g_{\\alpha\\beta}(r,\\theta)d\\theta^{\\alpha}d\\theta^{\\beta}$ with no $dr\\,d\\theta$ cross terms.\\n\\nThe **injectivity radius** measures how far $\\exp_p$ stays injective: $\\mathrm{inj}(p)=\\sup\\{r>0:\\exp_p\\ \\text{is injective on}\\ B(0,r)\\subset T_pM\\}$, and $\\mathrm{inj}(M)=\\inf_p\\mathrm{inj}(p)$. For $r<\\mathrm{inj}(p)$, $\\exp_p:B(0,r)\\to B(p,r)$ is not merely injective but a **diffeomorphism** (injectivity rules out critical points), and its image is exactly the metric ball $B(p,r)=\\{q:d(p,q)<r\\}$: geodesic balls and metric balls agree. Here injectivity and being a diffeomorphism must be distinguished: injectivity only says that two distinct geodesics do not meet inside the ball, whereas being a diffeomorphism also requires the differential to be invertible everywhere — a stronger requirement, although for such balls the two are equivalent. More precisely, $\\mathrm{inj}(p)=d(p,C(p))$, where $C(p)$ is the **cut locus** of $p$, the set of points where radial geodesics stop being minimising or get caught by another geodesic; and $\\mathrm{inj}(p)$ does not exceed the distance to the first **conjugate point**. The sphere $S^{2}_R$ is the standard example: $\\mathrm{inj}(p)=\\pi R$, and $\\exp_p$ is singular at $|v|=\\pi R$ (the antipode), where its differential has rank $n-1$.",
+    "formulas": [
+      {
+        "latex": "\\exp_p(v)=\\gamma_v(1),\\qquad \\exp_p(tv)=\\gamma_v(t),\\qquad (d\\exp_p)_0=\\mathrm{id}_{T_pM}",
+        "note": "指数映射的定义与齐次性；在原点处的微分为恒等，故由反函数定理得到局部微分同胚。",
+        "noteEn": "Definition and homogeneity of the exponential map; its differential at $0$ is the identity, so the inverse function theorem gives a local diffeomorphism."
+      },
+      {
+        "latex": "\\bigl\\langle (d\\exp_p)_v(v),(d\\exp_p)_v(w)\\bigr\\rangle_{\\exp_p(v)}=\\langle v,w\\rangle_p",
+        "note": "Gauss 引理；推论是径向测地线与测地球面正交，且 $|(d\\exp_p)_v(v)|=|v|$（测地线局部极小）。",
+        "noteEn": "Gauss's lemma; the corollary is that radial geodesics are orthogonal to geodesic spheres and $|(d\\exp_p)_v(v)|=|v|$ (local minimality)."
+      },
+      {
+        "latex": "\\mathrm{inj}(p)=\\sup\\{r>0:\\ \\exp_p|_{B(0,r)}\\ \\text{单射}\\},\\qquad \\mathrm{inj}(p)=d\\bigl(p,C(p)\\bigr)\\le d\\bigl(p,\\text{第一共轭点}\\bigr)",
+        "note": "单射半径的定义及其与割迹、共轭点的关系；$r<\\mathrm{inj}(p)$ 时 $\\exp_p:B(0,r)\\to B(p,r)$ 是微分同胚。",
+        "noteEn": "Definition of the injectivity radius and its relation to the cut locus and conjugate points; for $r<\\mathrm{inj}(p)$ the map $\\exp_p:B(0,r)\\to B(p,r)$ is a diffeomorphism."
+      },
+      {
+        "latex": "g_{ij}(0)=\\delta_{ij},\\qquad \\partial_kg_{ij}(0)=0,\\qquad \\Gamma^{i}{}_{jk}(0)=0,\\qquad g=dr^{2}+g_{\\alpha\\beta}(r,\\theta)\\,d\\theta^{\\alpha}d\\theta^{\\beta}",
+        "note": "测地（法）坐标的性质：$p$ 点处度量是欧氏的、联络系数为零；极坐标下无 $dr\\,d\\theta$ 交叉项（Gauss 引理的直接推论）。",
+        "noteEn": "Properties of geodesic (normal) coordinates: Euclidean at $p$ with vanishing connection coefficients, and no $dr\\,d\\theta$ cross terms in polar form (a corollary of Gauss's lemma)."
+      },
+      {
+        "latex": "\\sqrt{\\det g}\\,(v)=1-\\frac{1}{6}\\operatorname{Ric}_{ij}v^{i}v^{j}+O\\bigl(|v|^{3}\\bigr)",
+        "note": "法坐标下体积密度的展开（Ric 为 Ricci 张量）：这是 Bishop–Gromov 体积比较的出发点；球面上取 $S^{2}_R$ 可验证：$R\\sin(r/R)=r\\bigl(1-r^{2}/(6R^{2})+\\cdots\\bigr)$。",
+        "noteEn": "Expansion of the volume density in normal coordinates (Ric is the Ricci tensor), the seed of Bishop–Gromov volume comparison; on $S^{2}_R$ it reads $R\\sin(r/R)=r(1-r^{2}/(6R^{2})+\\cdots)$."
+      }
+    ],
+    "properties": [
+      "$\\exp:TM\\to M$ 光滑，$\\exp_p$ 光滑依赖 $p$；$\\exp_p$ 在 $v$ 处奇异（切映射不可逆）当且仅当 $\\exp_p(v)$ 是 $p$ 的**共轭点**，共轭点的距离总不小于 $\\mathrm{inj}(p)$。",
+      "**测地球 = 度量球**：$r<\\mathrm{inj}(p)$ 时 $\\exp_p$ 把 $B(0,r)$ 微分同胚地映到 $B(p,r)=\\{q:d(p,q)<r\\}$；$\\exp_p$ 是单射当且仅当没有径向测地线在球内相撞，这解释了为什么单射半径与「最短测地线」是同一件事的两个侧面。",
+      "**完备性**：$\\exp_p$ 对某个（因而每个）点定义在整个 $T_pM$ 上 $\\iff$ $(M,d)$ 完备 $\\iff$ 有界闭集紧；此时任意两点都由一条极小测地线连接（Hopf–Rinow），且 $\\exp_p$ 满射。",
+      "**测地极坐标**：Gauss 引理给出 $g=dr^{2}+g_{\\alpha\\beta}(r,\\theta)d\\theta^{\\alpha}d\\theta^{\\beta}$，$r$ 就是到 $p$ 的黎曼距离；由此可推出径向测地线在 $r<\\mathrm{inj}(p)$ 内极小，反过来共轭点之外一般不再极小。",
+      "**例子与整体量**：$S^{2}_R$ 有 $\\mathrm{inj}=\\pi R$；平坦环面 $\\mathbb{R}^{2}/\\mathbb{Z}^{2}$ 每点 $\\mathrm{inj}=1/2$（等于最短闭测地线长度之半）；双曲空间 $\\mathrm{inj}=\\infty$（Cartan–Hadamard：$\\exp_p$ 是整体微分同胚）。紧流形的 $\\mathrm{inj}(M)=\\inf_p\\mathrm{inj}(p)>0$，这是紧性的一个非平凡推论。"
+    ],
+    "propertiesEn": [
+      "$\\exp:TM\\to M$ is smooth and $\\exp_p$ depends smoothly on $p$; $\\exp_p$ is singular at $v$ (non-invertible differential) exactly when $\\exp_p(v)$ is a **conjugate point** of $p$, and the distance to a conjugate point is never smaller than $\\mathrm{inj}(p)$.",
+      "**Geodesic balls are metric balls**: for $r<\\mathrm{inj}(p)$, $\\exp_p$ maps $B(0,r)$ diffeomorphically onto $B(p,r)=\\{q:d(p,q)<r\\}$; injectivity fails exactly when two radial geodesics collide inside the ball, which is why the injectivity radius and shortest geodesics describe the same phenomenon.",
+      "**Completeness**: $\\exp_p$ is defined on all of $T_pM$ for one (hence every) point $\\iff$ $(M,d)$ is complete $\\iff$ closed bounded sets are compact; then any two points are joined by a minimising geodesic (Hopf–Rinow) and $\\exp_p$ is surjective.",
+      "**Geodesic polar coordinates**: Gauss's lemma yields $g=dr^{2}+g_{\\alpha\\beta}(r,\\theta)d\\theta^{\\alpha}d\\theta^{\\beta}$ with $r$ the Riemannian distance to $p$; hence radial geodesics minimise for $r<\\mathrm{inj}(p)$, while beyond a conjugate point they generally do not.",
+      "**Examples and global quantities**: $S^{2}_R$ has $\\mathrm{inj}=\\pi R$; the flat torus $\\mathbb{R}^{2}/\\mathbb{Z}^{2}$ has $\\mathrm{inj}=1/2$ at every point (half the length of the shortest closed geodesic); hyperbolic space has $\\mathrm{inj}=\\infty$ (Cartan–Hadamard: $\\exp_p$ is a global diffeomorphism). For a compact manifold $\\mathrm{inj}(M)=\\inf_p\\mathrm{inj}(p)>0$, a non-trivial consequence of compactness."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "sqrt(x^2+y^2)",
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -3,
+        3
+      ],
+      "levels": 8,
+      "levelRange": [
+        0,
+        4.5
+      ],
+      "title": "测地极坐标中 r = √(x²+y²) 的等值线"
+    },
+    "examples": [
+      {
+        "problem": "在单位球面 $S^{2}$ 上取 $p=$ 北极，写出 $\\exp_p$ 的显式公式，证明它在 $|v|=\\pi$ 处奇异，并求出 $\\mathrm{inj}(p)$。",
+        "solution": "单位球面上从北极出发、初速度 $v$ 的测地线是 $\\gamma_v(t)=\\cos\\bigl(t|v|\\bigr)p+\\sin\\bigl(t|v|\\bigr)\\frac{v}{|v|}$（验证：$|\\gamma|=1$，$\\gamma(0)=p$，$\\gamma'(0)=v$，且加速度平行于位置向量，故是测地线），于是 $$\\exp_p(v)=\\cos|v|\\,p+\\sin|v|\\,\\frac{v}{|v|}.$$\\n当 $|v|=\\pi$ 时 $\\exp_p(v)=-p$ 对球面 $|v|=\\pi$ 上**所有** $v$ 都成立，显然不单射；又由 Gauss 引理 $|(d\\exp_p)_v(v)|=|v|=\\pi\\neq0$，而切于球面 $|v|=\\pi$ 的方向全被映到同一点，故 $d\\exp_p$ 在 $|v|=\\pi$ 处处秩为 $n-1=1$，奇异。\\n$|v|<\\pi$ 时单射：若 $\\exp_p(v)=\\exp_p(w)$，比较与 $p$ 的内积得 $\\cos|v|=\\cos|w|$，在 $(0,\\pi)$ 上单调故 $|v|=|w|$，再比较与 $v$ 垂直的部分得 $v=w$。所以 $\\mathrm{inj}(p)=\\pi$（半径 $R$ 的球面为 $\\pi R$），割迹就是单个点 $\\{-p\\}$。"
+      },
+      {
+        "problem": "求平坦环面 $\\mathbb{R}^{2}/\\mathbb{Z}^{2}$（商度量 $dx^{2}+dy^{2}$）上每点的单射半径，并说明为什么它与点无关。",
+        "solution": "在平坦环面上测地线就是直线在商映射 $\\pi:\\mathbb{R}^{2}\\to\\mathbb{R}^{2}/\\mathbb{Z}^{2}$ 下的像，于是 $\\exp_p(v)=p+v\\bmod\\mathbb{Z}^{2}$（把 $v$ 视为 $\\mathbb{R}^{2}$ 中的向量）。\\n$\\exp_p(v)=\\exp_p(w)\\iff v-w\\in\\mathbb{Z}^{2}$。若 $|v|<r,\\ |w|<r$ 且 $v\\neq w$，则 $v-w$ 是非零格向量，其欧氏长度至少为 $1$（最短非零格向量长度），而 $|v-w|\\le|v|+|w|<2r$；因此只要 $2r\\le1$，即 $r\\le1/2$，就不会有碰撞：$\\exp_p$ 在 $B(0,1/2)$ 上单射。\\n反之取 $r>1/2$，令 $v=\\bigl(\\tfrac12+\\epsilon,0\\bigr)$，$w=\\bigl(-\\tfrac12-\\epsilon,0\\bigr)$，则 $v-w=(1,0)\\in\\mathbb{Z}^{2}$ 但 $v\\neq w$，说明不单射。所以 $\\mathrm{inj}(p)=1/2$，与 $p$ 无关（平坦度量的平移不变性）；它也等于最短闭测地线长度 $1$ 的一半，割迹是基本域边界在环面上的像。"
+      }
+    ],
+    "tags": [
+      "指数映射",
+      "单射半径",
+      "测地线",
+      "Gauss 引理"
+    ],
+    "links": [
+      "geodesic",
+      "levi-civita-connection",
+      "first-variation",
+      "jacobi-fields",
+      "conjugate-points-cut-locus",
+      "hopf-rinow"
+    ]
+  },
+  {
+    "id": "first-variation",
+    "title": "弧长第一变分",
+    "titleEn": "First Variation of Arc Length",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "长度泛函沿变分族的一阶导数公式；固定端点时为 −∫⟨V, ∇_γ′γ′⟩dt，由此「测地线 = 临界点」「最短曲线必是测地线」，但反之不成立。",
+    "summaryEn": "The first derivative of the length functional along a variation: with fixed endpoints it equals −∫⟨V, ∇_{γ'}γ'⟩dt, giving \"geodesic = critical point\" and \"minimisers are geodesics\", while the converse fails.",
+    "definition": "把曲线看作泛函的自变量。给定曲线 $\\gamma:[a,b]\\to M$，一个**变分**是一族曲线 $\\gamma_s$（$|s|<\\varepsilon$，$\\gamma_0=\\gamma$），使 $(s,t)\\mapsto\\gamma_s(t)$ 光滑；若对所有 $s$ 都有 $\\gamma_s(a)=\\gamma(a)$、$\\gamma_s(b)=\\gamma(b)$，就称它是**固定端点**的变分。**变分场** $V(t)=\\frac{\\partial\\gamma_s}{\\partial s}\\big|_{s=0}\\in T_{\\gamma(t)}M$ 描述曲线「往哪儿动」，反过来任意光滑场 $V$（沿 $\\gamma$，端点处为零）都来自某个固定端点变分。第一变分就是 $s\\mapsto L(\\gamma_s)$ 在 $s=0$ 的导数：它衡量曲线微小变形时长度的一阶变化，用来找出「最可能最短」的曲线——长度泛函的临界点。\\n\\n推导只需要两件事：度量的相容性，以及协变导数在 $s$ 与 $t$ 两个方向上的可交换（由无挠性保证）。对**单位速率**的曲线 $|\\gamma'|=1$（长度与参数化无关，一般曲线先按弧长重参数化），得到**第一变分公式**：$$\\frac{d}{ds}\\Big|_{s=0}L(\\gamma_s)=-\\int_a^b g\\bigl(V,\\nabla_{\\gamma'}\\gamma'\\bigr)\\,dt;$$ 端点不固定时要加上边界项：$$\\frac{dL}{ds}\\Big|_{s=0}=-\\int_a^b g\\bigl(V,\\nabla_{\\gamma'}\\gamma'\\bigr)\\,dt+g\\bigl(V(b),\\gamma'(b)\\bigr)-g\\bigl(V(a),\\gamma'(a)\\bigr),$$ 边界项不能漏：它正是「曲线端点移动」带来的收益。**注意负号**：$\\nabla_{\\gamma'}\\gamma'$ 表示曲线向外「加速」的方向，而加速的方向恰恰是长度一阶减少的方向。能量泛函 $E=\\frac12\\int|\\gamma'|^{2}dt$ 有完全相同的公式，而且不需要单位速率假设（这就是变分问题中常用 $E$ 代替 $L$ 的原因）；对固定端点两者临界条件也相同。\\n\\n由此立刻得到几个结论。\\n**(i) 测地线恰是临界点**：曲线 $\\gamma$ 满足 $\\nabla_{\\gamma'}\\gamma'=0$ 当且仅当对一切固定端点的变分都有 $\\frac{dL}{ds}\\big|_{s=0}=0$。必要性显然；充分性取 $V=f\\,\\nabla_{\\gamma'}\\gamma'$（$f\\ge0$ 光滑、支集在内部），得 $\\int f\\bigl|\\nabla_{\\gamma'}\\gamma'\\bigr|^{2}dt=0$，故 $\\nabla_{\\gamma'}\\gamma'\\equiv0$。\\n**(ii) 最短曲线必是测地线**（这个蕴含方向不能反）：若 $\\gamma$ 是按弧长参数化的极小曲线，则对任何固定端点变分有 $L(\\gamma_s)\\ge L(\\gamma)$，故 $\\frac{dL}{ds}\\big|_{s=0}=0$，由 (i) 即得 $\\nabla_{\\gamma'}\\gamma'=0$。\\n**(iii) 逆命题不成立**：测地线只是临界点，未必极小。以单位球面为例，赤道上的测地线 $\\gamma(t)=(\\cos t,\\sin t,0)$，$t\\in[0,3\\pi/2]$ 的端点是 $(1,0,0)$ 与 $(0,-1,0)$，它们的最短连线只有 $\\pi/2$，而这条测地线长 $3\\pi/2$；真正极小的只是「走短弧」的那条。极小性只能在局部成立（在单射半径内由 Gauss 引理保证），一旦越过第一个共轭点（球面上是对径点），测地线就不再极小——这要靠第二变分（index form）来判断。",
+    "definitionEn": "Treat a curve as the variable of a functional. Given $\\gamma:[a,b]\\to M$, a **variation** is a family $\\gamma_s$ ($|s|<\\varepsilon$, $\\gamma_0=\\gamma$) with $(s,t)\\mapsto\\gamma_s(t)$ smooth; it is a **fixed-endpoint** variation if $\\gamma_s(a)=\\gamma(a)$ and $\\gamma_s(b)=\\gamma(b)$ for all $s$. The **variation field** $V(t)=\\frac{\\partial\\gamma_s}{\\partial s}\\big|_{s=0}\\in T_{\\gamma(t)}M$ says where the curve moves, and conversely every smooth field $V$ along $\\gamma$ vanishing at the endpoints arises from such a variation. The first variation is the derivative of $s\\mapsto L(\\gamma_s)$ at $s=0$: the first-order change of length under a small deformation, used to detect the critical points of the length functional.\\n\\nOnly two facts are needed: metric compatibility, and the symmetry of covariant differentiation in the $s$- and $t$-directions (guaranteed by torsion-freeness). For a curve parametrized by **unit speed**, $|\\gamma'|=1$ (length is parametrization-invariant, so reparametrize by arclength first), the **first variation formula** reads $\\frac{d}{ds}\\big|_{s=0}L(\\gamma_s)=-\\int_a^b g(V,\\nabla_{\\gamma'}\\gamma')\\,dt$; without fixed endpoints one must add the boundary terms, $\\frac{dL}{ds}\\big|_{s=0}=-\\int_a^b g(V,\\nabla_{\\gamma'}\\gamma')\\,dt+g(V(b),\\gamma'(b))-g(V(a),\\gamma'(a))$. The boundary terms may not be dropped: they are exactly the gain obtained by moving the endpoints. Mind the **minus sign**: $\\nabla_{\\gamma'}\\gamma'$ points in the direction in which the curve accelerates, and accelerating lowers the length to first order. The energy $E=\\frac12\\int|\\gamma'|^{2}dt$ obeys the same formula without any unit-speed hypothesis (the classical reason to work with $E$ instead of $L$), and for fixed endpoints the two have the same critical points.\\n\\nThree consequences follow at once.\\n(i) **Geodesics are exactly the critical points**: $\\nabla_{\\gamma'}\\gamma'=0$ holds if and only if $\\frac{dL}{ds}\\big|_{s=0}=0$ for every fixed-endpoint variation. Necessity is obvious; for sufficiency take $V=f\\,\\nabla_{\\gamma'}\\gamma'$ with a smooth $f\\ge0$ compactly supported in the interior and get $\\int f|\\nabla_{\\gamma'}\\gamma'|^{2}dt=0$, hence $\\nabla_{\\gamma'}\\gamma'\\equiv0$.\\n(ii) **A minimiser is a geodesic** (this implication cannot be reversed): if $\\gamma$ is a minimising curve parametrized by arclength, then $L(\\gamma_s)\\ge L(\\gamma)$ for every fixed-endpoint variation, so $\\frac{dL}{ds}\\big|_{s=0}=0$ and (i) applies.\\n(iii) **The converse fails**: a geodesic is only a critical point, not necessarily a shortest curve. On the unit sphere the geodesic $\\gamma(t)=(\\cos t,\\sin t,0)$ for $t\\in[0,3\\pi/2]$ joins $(1,0,0)$ to $(0,-1,0)$, whose shortest connection has length $\\pi/2$ only, whereas this geodesic has length $3\\pi/2$; only the short arc minimises. Minimality is local (inside the injectivity radius, by Gauss's lemma), and beyond the first conjugate point — the antipode on a sphere — geodesics cease to minimise, which is decided by the second variation (the index form).",
+    "formulas": [
+      {
+        "latex": "\\gamma_s\\ (\\gamma_0=\\gamma),\\quad \\gamma_s(a)=\\gamma(a),\\ \\gamma_s(b)=\\gamma(b);\\qquad V(t)=\\frac{\\partial\\gamma_s}{\\partial s}\\Big|_{s=0},\\quad V(a)=V(b)=0",
+        "note": "变分与变分场：固定端点意味着变分场在两端为零；反之任何这样的光滑场都由某个固定端点变分实现。",
+        "noteEn": "Variation and variation field: fixed endpoints mean $V$ vanishes at both ends, and conversely every such smooth field comes from a fixed-endpoint variation."
+      },
+      {
+        "latex": "\\frac{d}{ds}\\Big|_{s=0}L(\\gamma_s)=-\\int_a^b g\\bigl(V,\\nabla_{\\gamma'}\\gamma'\\bigr)\\,dt\\qquad(|\\gamma'|=1,\\ V(a)=V(b)=0)",
+        "note": "固定端点的第一变分公式：只通过「加速度」$\\nabla_{\\gamma'}\\gamma'$ 出现，负号不能丢；$\\gamma$ 需以单位速率参数化。",
+        "noteEn": "First variation formula for fixed endpoints: only the acceleration $\\nabla_{\\gamma'}\\gamma'$ appears and the minus sign is essential; $\\gamma$ must have unit speed."
+      },
+      {
+        "latex": "\\frac{dL}{ds}\\Big|_{s=0}=-\\int_a^b g\\bigl(V,\\nabla_{\\gamma'}\\gamma'\\bigr)\\,dt+g\\bigl(V(b),\\gamma'(b)\\bigr)-g\\bigl(V(a),\\gamma'(a)\\bigr)",
+        "note": "一般端点的完整公式：两个边界项必须保留，它们是横截条件（极小曲线与自由端点所在子流形正交）的来源。",
+        "noteEn": "Full formula with free endpoints: the two boundary terms are indispensable and give the transversality condition (a minimiser meets the free-endpoint submanifold orthogonally)."
+      },
+      {
+        "latex": "\\frac{dL}{ds}\\Big|_{s=0}=0\\ \\ \\text{对一切}\\ V\\ \\iff\\ \\nabla_{\\gamma'}\\gamma'=0\\ \\iff\\ \\ddot x^{i}+\\Gamma^{i}{}_{jk}\\dot x^{j}\\dot x^{k}=0",
+        "note": "临界点判据：测地线就是长度（与能量）泛函的临界点，这就是测地线方程的变分来源。",
+        "noteEn": "Critical-point criterion: geodesics are precisely the critical points of length (and energy) — the variational origin of the geodesic equation."
+      },
+      {
+        "latex": "E(\\gamma)=\\frac{1}{2}\\int_a^b|\\gamma'|^{2}\\,dt,\\qquad \\frac{dE}{ds}\\Big|_{s=0}=-\\int_a^b g\\bigl(V,\\nabla_{\\gamma'}\\gamma'\\bigr)\\,dt,\\qquad L(\\gamma)^{2}\\le2(b-a)E(\\gamma)",
+        "note": "能量泛函有同样的第一变分且不需要单位速率假设；柯西–施瓦茨的等号当且仅当 $|\\gamma'|$ 为常数（极小化 $E$ 时会自动如此）。",
+        "noteEn": "The energy has the same first variation and needs no unit-speed assumption; Cauchy–Schwarz is an equality exactly when $|\\gamma'|$ is constant (automatic for $E$-minimisers)."
+      }
+    ],
+    "properties": [
+      "第一变分只依赖**变分场** $V$：两个不同但变分场相同的变分有相同的一阶导数，于是变分问题被翻译成「对一切 $V$ 的积分等式」。由此得到**测地线 ⟺ 临界点**（对 $L$ 与 $E$ 都成立）：这既是测地线方程的变分来源，也与「直接解二阶 ODE」殊途同归。",
+      "**最短 ⟹ 测地线**（正确的蕴含方向）；**逆命题不成立**：测地线只保证一阶变分为零。球面上长度超过 $\\pi$ 的大圆弧、柱面上绕过多圈的螺旋线都不是极小曲线。",
+      "边界项的用处：端点可沿子流形 $N$ 自由滑动时，取 $V$ 切于 $N$，由 $\\frac{dL}{ds}\\big|_{s=0}=0$ 得 $g\\bigl(V,\\gamma'\\bigr)=0$ 对一切 $V\\in T_qN$ 成立，即**极小曲线必与 $N$ 正交**（横截条件）。",
+      "第一变分只给出必要条件；要判断测地线是否极小需看第二变分（index form）：在第一个共轭点之前测地线极小，之后不再极小，$\\mathrm{inj}(p)$ 正是这个临界位置。",
+      "两种泛函的比较：$L$ 与参数化无关但在 $\\gamma'=0$ 处不可导、第一变分要求单位速率；$E$ 没有根号、公式干净，且 $E$ 的临界点自动是常速测地线。"
+    ],
+    "propertiesEn": [
+      "The first variation depends only on the **variation field** $V$: two different variations with the same field have the same first derivative, which turns the problem into an integral identity for all $V$. This yields **geodesic ⟺ critical point** (for both $L$ and $E$), the variational origin of the geodesic equation — reached equally by solving the second-order ODE directly.",
+      "**Minimiser ⟹ geodesic** (the correct direction); **the converse is false**: a geodesic only guarantees vanishing first variation, and great-circle arcs longer than $\\pi$ on a sphere, or helices winding several times on a cylinder, are not minimising.",
+      "Use of the boundary terms: if an endpoint is free to move along a submanifold $N$, choosing $V$ tangent to $N$ in $\\frac{dL}{ds}\\big|_{s=0}=0$ gives $g(V,\\gamma')=0$ for all $V\\in T_qN$, i.e. a **minimiser meets $N$ orthogonally** (transversality).",
+      "The first variation gives only a necessary condition; minimality is decided by the second variation (index form): a geodesic minimises up to the first conjugate point and no longer afterwards, and $\\mathrm{inj}(p)$ marks exactly that threshold.",
+      "Comparing the two functionals: $L$ is parametrization-invariant but non-smooth where $\\gamma'=0$ and its formula requires unit speed, whereas $E$ has no square root, has clean formulas and its critical points are automatically constant-speed geodesics."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.9*sin(PI*x/3)",
+          "color": "#ff6b9d",
+          "label": "变分曲线 γ_s（振幅 0.9）"
+        },
+        {
+          "expr": "0.35*sin(PI*x/3)",
+          "color": "#4cc9f0",
+          "label": "变分曲线 γ_s（振幅 0.35）"
+        },
+        {
+          "expr": "0*x",
+          "color": "#ffd166",
+          "label": "基曲线 γ（端点 x = 0 与 x = 3 固定）"
+        }
+      ],
+      "xRange": [
+        0,
+        3
+      ],
+      "yRange": [
+        -1.2,
+        1.2
+      ],
+      "title": "固定端点的变分族：端点相同、长度不同"
+    },
+    "examples": [
+      {
+        "problem": "在单位球面上取纬线 $\\gamma(t)=\\bigl(\\sin\\theta_0\\cos t,\\ \\sin\\theta_0\\sin t,\\ \\cos\\theta_0\\bigr)$，$t\\in[0,2\\pi]$，考虑把整条纬线移到余纬 $\\theta_s=\\theta_0+s$ 的变分（$\\theta_s$ 与 $t$ 无关；端点其实随 $s$ 沿子午线移动，故要用**一般端点**公式，只是 $V\\perp\\gamma'$ 使两个边界项都为零）。用第一变分公式算 $\\frac{dE}{ds}\\big|_{s=0}$ 并与直接求导核对；再说明为什么 $\\theta_0=\\pi/2$ 与众不同。",
+        "solution": "变分场：$V=\\frac{\\partial\\gamma_s}{\\partial s}\\big|_{s=0}=$（余纬方向的单位切向量 $\\partial_\\theta$），它与切向量 $\\gamma'$ 正交。\\n纬线的测地曲率为 $\\cot\\theta_0$，方向指向（$\\partial_\\theta$ 的负方向），即 $\\nabla_{T}T=-\\cot\\theta_0\\,\\partial_\\theta$（$T$ 为单位切向）。因 $|\\gamma'|=\\sin\\theta_0$ 为常数，$\\nabla_{\\gamma'}\\gamma'=|\\gamma'|^{2}\\nabla_TT=-\\sin^2\\theta_0\\cot\\theta_0\\,\\partial_\\theta=-\\sin\\theta_0\\cos\\theta_0\\,\\partial_\\theta$。\\n代入公式（能量版本，无需单位速率）：$$\\frac{dE}{ds}\\Big|_{s=0}=-\\int_0^{2\\pi}\\bigl\\langle \\partial_\\theta,\\ -\\sin\\theta_0\\cos\\theta_0\\,\\partial_\\theta\\bigr\\rangle\\,dt=\\int_0^{2\\pi}\\sin\\theta_0\\cos\\theta_0\\,dt=2\\pi\\sin\\theta_0\\cos\\theta_0.$$\\n直接求导：$|\\gamma_s'|^{2}=\\sin^{2}\\theta_s$，故 $E(s)=\\frac12\\int_0^{2\\pi}\\sin^{2}\\theta_s\\,dt=\\pi\\sin^{2}\\theta_s$，$E'(0)=2\\pi\\sin\\theta_0\\cos\\theta_0$，两者一致。\\n长度方面 $L(s)=2\\pi\\sin\\theta_s$，直接求导得 $L'(0)=2\\pi\\cos\\theta_0$（这里 $|\\gamma'|=\\sin\\theta_0\\neq1$，长度公式不能照抄单位速率版本）。它只在 $\\theta_0=\\pi/2$ 时为零：赤道是测地线（第一变分为零），其余纬线都不是。"
+      },
+      {
+        "problem": "证明「连接两点的最短曲线必是测地线」，并用单位球面举出一个「测地线但不极小」的反例。",
+        "solution": "**证明**：设 $\\gamma:[a,b]\\to M$ 按弧长参数化（$|\\gamma'|=1$）且实现最短，即对任何同端点曲线 $\\sigma$ 都有 $L(\\gamma)\\le L(\\sigma)$。对任意固定端点变分 $\\gamma_s$，函数 $s\\mapsto L(\\gamma_s)$ 在 $s=0$ 取到最小值，故 $\\frac{dL}{ds}\\big|_{s=0}=0$。由第一变分公式，$-\\int_a^b g(V,\\nabla_{\\gamma'}\\gamma')\\,dt=0$ 对一切满足 $V(a)=V(b)=0$ 的光滑场 $V$ 成立。取 $V=f\\,\\nabla_{\\gamma'}\\gamma'$，其中 $f\\ge0$ 光滑、支集含于 $(a,b)$ 内部：$$0=-\\int_a^b f\\,\\bigl|\\nabla_{\\gamma'}\\gamma'\\bigr|^{2}\\,dt\\ \\Longrightarrow\\ \\nabla_{\\gamma'}\\gamma'\\equiv0,$$ 即 $\\gamma$ 是测地线。这正是「最短 $\\Rightarrow$ 临界」这一必要条件。\\n**反例**：单位球面上的测地线 $\\gamma(t)=(\\cos t,\\sin t,0)$，$t\\in[0,3\\pi/2]$，端点为 $P=(1,0,0)$ 与 $Q=(0,-1,0)$。$P,Q$ 是单位向量且夹角为 $\\pi/2$，故球面距离 $d(P,Q)=\\pi/2$，最短曲线是反方向的那段大圆弧（长度 $\\pi/2$）；而 $L(\\gamma)=3\\pi/2>\\pi/2$。所以该测地线不极小。另一个典型例子是柱面上的螺旋线：它处处是测地线，但绕的圈数越多越不可能是最短路径。"
+      }
+    ],
+    "tags": [
+      "变分法",
+      "测地线",
+      "弧长",
+      "极小曲线",
+      "临界点"
+    ],
+    "links": [
+      "geodesic",
+      "exponential-map",
+      "riemannian-metric",
+      "levi-civita-connection",
+      "second-variation-index-form",
+      "jacobi-fields",
+      "arc-length-param"
+    ]
+  }
+]

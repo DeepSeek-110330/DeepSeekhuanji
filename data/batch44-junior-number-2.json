@@ -1,0 +1,824 @@
+[
+  {
+    "id": "algebraic-identities",
+    "title": "整式的乘法与乘法公式",
+    "titleEn": "Multiplication of Polynomials and Algebraic Identities",
+    "branch": "elementary",
+    "level": 2,
+    "summary": "整式相乘的运算法则，以及平方差、完全平方等核心乘法公式——因式分解的「正过程」。",
+    "summaryEn": "The rules for multiplying polynomials and the core identities (difference of squares, perfect squares) — the forward direction of factorization.",
+    "definition": "**整式的乘法**就是把几个整式相乘、再合并同类项的过程。它的基础是**幂的运算律**：同底数幂相乘，底数不变、指数相加；幂的乘方，底数不变、指数相乘；积的乘方，等于每个因式分别乘方。特别规定 $a^0=1\\ (a\\neq 0)$（$0^0$ 没有意义），$a^{-n}=\\dfrac{1}{a^n}\\ (a\\neq 0)$。\n\n计算按照「单项式乘单项式 → 单项式乘多项式 → 多项式乘多项式」的顺序进行。多项式乘多项式时，用第一个多项式的**每一项**分别去乘第二个多项式的每一项（逐项相乘），再把所得的积相加、合并同类项，做到不重不漏。\n\n有些乘积出现得特别频繁，把它们记下来就成了**乘法公式**：**平方差公式** $(a+b)(a-b)=a^2-b^2$ 与**完全平方公式** $(a\\pm b)^2=a^2\\pm 2ab+b^2$。用公式可以跳过逐项展开；把公式**反过来用**，就是因式分解。",
+    "definitionEn": "**Multiplication of polynomials** means multiplying polynomials together and collecting like terms. It rests on the **laws of exponents**: when powers with the same base are multiplied, the base stays and the exponents add; a power raised to a power multiplies the exponents; a product raised to a power raises each factor separately. By convention $a^0=1\\ (a\\neq 0)$ ($0^0$ is undefined) and $a^{-n}=\\dfrac{1}{a^n}\\ (a\\neq 0)$.\n\nWork proceeds in stages: monomial times monomial, then monomial times polynomial, then polynomial times polynomial. To multiply two polynomials, multiply every term of the first by every term of the second, add the results and collect like terms, taking care not to miss any product.\n\nA few products occur so often that they are memorized as **algebraic identities**: the **difference of squares** $(a+b)(a-b)=a^2-b^2$ and the **perfect square identities** $(a\\pm b)^2=a^2\\pm 2ab+b^2$. They let you skip the term-by-term expansion, and reading them backwards gives factorization.",
+    "formulas": [
+      {
+        "latex": "a^m\\cdot a^n=a^{m+n},\\qquad (a^m)^n=a^{mn},\\qquad (ab)^n=a^n b^n",
+        "note": "幂的三条运算律：同底数幂相乘，底数不变、指数相加；幂的乘方，指数相乘；积的乘方，各因式分别乘方。另外规定 $a^0=1\\ (a\\neq 0)$、$a^{-n}=\\dfrac{1}{a^n}\\ (a\\neq 0)$，而 $0^0$ 没有意义。",
+        "noteEn": "The three laws of exponents, plus the conventions $a^0=1\\ (a\\neq 0)$ and $a^{-n}=1/a^n\\ (a\\neq 0)$; the power $0^0$ is undefined."
+      },
+      {
+        "latex": "(a+b)(a-b)=a^2-b^2",
+        "note": "平方差公式：两个数的和乘这两个数的差，等于它们的平方差。结构必须是「同样的两项、一加一减」。",
+        "noteEn": "Difference of squares: the sum of two numbers times their difference equals the difference of their squares; the two terms must be identical, with one plus and one minus."
+      },
+      {
+        "latex": "(a\\pm b)^2=a^2\\pm 2ab+b^2",
+        "note": "完全平方公式：首平方、尾平方，首尾两倍的积放中央；中间项 $2ab$ 的符号与括号内一致，漏掉它是最常见的错误。",
+        "noteEn": "Perfect square identities: square the first term, square the last, and put twice their product in the middle; the sign of $2ab$ matches the sign inside the bracket, and dropping it is the classic mistake."
+      },
+      {
+        "latex": "(x+a)(x+b)=x^2+(a+b)x+ab",
+        "note": "（拓展）一次项系数是两数之和，常数项是两数之积：$(x+2)(x+3)=x^2+5x+6$，这正是十字相乘法的依据。",
+        "noteEn": "(Extension) The x-coefficient is the sum and the constant term is the product of the two numbers: $(x+2)(x+3)=x^2+5x+6$. This is the basis of the cross method."
+      },
+      {
+        "latex": "(a\\pm b)^3=a^3\\pm 3a^2b+3ab^2\\pm b^3",
+        "note": "（拓展）立方公式：系数组为 1、3、3、1，符号随括号内的符号走。",
+        "noteEn": "(Extension) Cube identities: the coefficients are 1, 3, 3, 1, and the signs follow the sign inside the bracket."
+      }
+    ],
+    "expression": {
+      "text": "(a+b)(a-b)=a^2-b^2；(a+b)^2=a^2+2ab+b^2",
+      "symbol": "(a+b)^2",
+      "note": "乘法公式是特殊的多项式乘法：正用是展开，逆用是分解。",
+      "noteEn": "The identities are special polynomial products: use them forwards to expand and backwards to factor."
+    },
+    "properties": [
+      "多项式乘多项式必须逐项相乘：$m$ 项乘 $n$ 项，合并同类项之前一共得到 $mn$ 个积，不重不漏",
+      "平方差公式只适用于「同样的两项、一加一减」：$(a+b)(c-d)$ 不能套这个公式",
+      "完全平方的结果是三项，$a^2+b^2\\neq(a+b)^2$，漏掉中间的 $2ab$ 是最常见的错误",
+      "公式里的字母 $a$、$b$ 既可以代表数，也可以代表整式（如 $2x$、$3a-2b$），整体代入照样成立",
+      "把乘法公式逆用就得到因式分解的公式法：$a^2-b^2=(a+b)(a-b)$，$a^2\\pm 2ab+b^2=(a\\pm b)^2$"
+    ],
+    "propertiesEn": [
+      "Multiply term by term: $m$ terms times $n$ terms give $mn$ products before like terms are collected, with none missed or repeated",
+      "The difference-of-squares identity applies only to the same two terms with one plus and one minus; $(a+b)(c-d)$ does not fit it",
+      "A perfect square expands to three terms: $a^2+b^2\\neq(a+b)^2$, and forgetting the middle term $2ab$ is the classic mistake",
+      "The letters $a$ and $b$ may stand for numbers or for whole expressions such as $2x$ and $3a-2b$",
+      "Read backwards, the identities give the formula method of factorization: $a^2-b^2=(a+b)(a-b)$ and $a^2\\pm 2ab+b^2=(a\\pm b)^2$"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.2,
+        6.2
+      ],
+      "yRange": [
+        -1.2,
+        6.2
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.06)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.22)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.22)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.18)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "fill": "rgba(255,209,102,0.18)",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            1.5
+          ],
+          "text": "a²",
+          "color": "#ff6b9d",
+          "size": 14
+        },
+        {
+          "type": "label",
+          "at": [
+            4,
+            4
+          ],
+          "text": "b²",
+          "color": "#06d6a0",
+          "size": 14
+        },
+        {
+          "type": "label",
+          "at": [
+            4,
+            1.5
+          ],
+          "text": "ab",
+          "color": "#ffd166",
+          "size": 13
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            4
+          ],
+          "text": "ab",
+          "color": "#ffd166",
+          "size": 13
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            -0.45
+          ],
+          "text": "a"
+        },
+        {
+          "type": "label",
+          "at": [
+            4,
+            -0.45
+          ],
+          "text": "b"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.45,
+            1.5
+          ],
+          "text": "a"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.45,
+            4
+          ],
+          "text": "b"
+        }
+      ],
+      "title": "(a+b)² = a² + 2ab + b² 的正方形面积模型"
+    },
+    "examples": [
+      {
+        "problem": "计算：(1) $(2x+3)(2x-3)$；(2) $(3a-2b)^2$。",
+        "solution": "(1) 把 $2x$ 看成一个整体，用平方差公式：$(2x+3)(2x-3)=(2x)^2-3^2=4x^2-9$。\n\n(2) 用完全平方公式，注意中间项不能漏：$(3a-2b)^2=(3a)^2-2\\cdot(3a)\\cdot(2b)+(2b)^2=9a^2-12ab+4b^2$。\n\n检验（逐项展开）：$(3a-2b)(3a-2b)=9a^2-6ab-6ab+4b^2=9a^2-12ab+4b^2$，与公式结果一致。"
+      },
+      {
+        "problem": "计算 $(2x-1)(x+2)$，并用公式写出 $(x+2)(x+3)$ 的展开结果。",
+        "solution": "$(2x-1)(x+2)=2x\\cdot x+2x\\cdot 2-1\\cdot x-1\\cdot 2=2x^2+4x-x-2=2x^2+3x-2$（逐项相乘，再合并同类项）。\n\n$(x+2)(x+3)$ 套用 $(x+a)(x+b)=x^2+(a+b)x+ab$，这里 $a=2$、$b=3$：$x^2+(2+3)x+2\\times 3=x^2+5x+6$。"
+      }
+    ],
+    "tags": [
+      "整式乘法",
+      "乘法公式",
+      "平方差",
+      "完全平方"
+    ],
+    "links": [
+      "algebraic-expression",
+      "factorization",
+      "polynomial",
+      "rational-exponent"
+    ]
+  },
+  {
+    "id": "factorization",
+    "title": "因式分解",
+    "titleEn": "Factorization",
+    "branch": "elementary",
+    "level": 2,
+    "summary": "把多项式化成几个整式的积——整式乘法的逆变形，也是解方程、化简分式的基础工具。",
+    "summaryEn": "Rewriting a polynomial as a product of factors — the inverse of expansion and the key tool for solving equations and simplifying fractions.",
+    "definition": "**因式分解**（分解因式）是把一个多项式化成几个整式的**积**的形式，例如 $x^2-1=(x+1)(x-1)$。它与整式乘法互为**逆变形**：整式乘法把积展开成和，因式分解把和还原成积。\n\n常用方法有三种。**提公因式法**：$ma+mb+mc=m(a+b+c)$，公因式取各项系数的最大公因数与各项都含有的字母的最低次幂之积。**公式法**：逆用乘法公式，如平方差 $a^2-b^2=(a+b)(a-b)$、完全平方 $a^2\\pm 2ab+b^2=(a\\pm b)^2$。**十字相乘法**：$x^2+(p+q)x+pq=(x+p)(x+q)$，即找两个数，使它们的和等于一次项系数、积等于常数项。\n\n两个容易踩的坑：①分解必须进行到**每个因式都不能再分解为止**——先提公因式，再看括号里能不能继续用公式；②在实数范围内 $a^2+b^2$ **不能**分解，只有平方差 $a^2-b^2$ 能分解，两者只差一个符号，结论完全不同。",
+    "definitionEn": "**Factorization** means writing a polynomial as a **product** of factors, for example $x^2-1=(x+1)(x-1)$. It is the **inverse** of expansion: expansion turns a product into a sum, and factorization turns a sum back into a product.\n\nThree methods are used most. The **common-factor method**: $ma+mb+mc=m(a+b+c)$, taking the greatest common divisor of the coefficients together with the lowest power of every common letter. The **formula method**: use the identities backwards, such as $a^2-b^2=(a+b)(a-b)$ and $a^2\\pm 2ab+b^2=(a\\pm b)^2$. The **cross method**: $x^2+(p+q)x+pq=(x+p)(x+q)$ — find two numbers whose sum is the coefficient of $x$ and whose product is the constant term.\n\nTwo traps deserve care: (1) factor until **every factor is irreducible** — take out the common factor first, then check whether the bracket can be factored further; (2) over the real numbers $a^2+b^2$ **cannot** be factored while the difference $a^2-b^2$ can — one sign makes all the difference.",
+    "formulas": [
+      {
+        "latex": "ma+mb+mc=m(a+b+c)",
+        "note": "提公因式法：$m$ 是各项的公因式，提出来后括号里是其余各项的和。",
+        "noteEn": "Common-factor method: $m$ is the common factor of all terms; the bracket keeps the remaining sum."
+      },
+      {
+        "latex": "a^2-b^2=(a+b)(a-b)",
+        "note": "平方差公式（逆用）：两项、都能写成平方、且符号相反时使用。",
+        "noteEn": "Difference of squares read backwards: use it for two terms that are both perfect squares with opposite signs."
+      },
+      {
+        "latex": "a^2\\pm 2ab+b^2=(a\\pm b)^2",
+        "note": "完全平方公式（逆用）：三项、其中两项是平方、中间项等于两数乘积的 2 倍。",
+        "noteEn": "Perfect square identities read backwards: three terms, two of them squares, with the middle term twice the product."
+      },
+      {
+        "latex": "x^2+(p+q)x+pq=(x+p)(x+q)",
+        "note": "十字相乘法：找两个数 $p$ 与 $q$，使 $p+q$ 等于一次项系数、$pq$ 等于常数项。",
+        "noteEn": "Cross method: find $p$ and $q$ whose sum is the x-coefficient and whose product is the constant term."
+      },
+      {
+        "latex": "a^3\\pm b^3=(a\\pm b)(a^2\\mp ab+b^2)",
+        "note": "（拓展）立方和与立方差：符号规律是「前同后异」，第二个因式里是 $\\mp ab$，不要写成 $\\pm ab$。",
+        "noteEn": "(Extension) Sum and difference of cubes: signs are 'same in front, opposite behind', giving $\\mp ab$ in the second factor."
+      }
+    ],
+    "expression": {
+      "text": "x^2-1=(x+1)(x-1)；x^2-4x+3=(x-1)(x-3)",
+      "symbol": "(x+p)(x+q)",
+      "note": "十字相乘口诀：和找一次项系数，积找常数项。",
+      "noteEn": "Cross method: the sum gives the x-coefficient, the product gives the constant term."
+    },
+    "properties": [
+      "因式分解与整式乘法互逆：把分解结果乘开，能还原成原多项式，就说明分解正确",
+      "必须分解到每个因式都不能再分解为止：$2x^2-8=2(x^2-4)=2(x+2)(x-2)$，写成 $2(x^2-4)$ 还没分完",
+      "有公因式先提公因式；提完后括号里的项数与原多项式项数相同，不要漏项，也不要漏掉系数",
+      "在实数范围内 $a^2+b^2$ 不能分解，$a^2-b^2$ 才能分解——平方和与平方差只差一个符号，结论完全不同",
+      "分解的结果必须是整式的积：结果里出现分母含字母的式子，就不是因式分解"
+    ],
+    "propertiesEn": [
+      "Factorization and expansion are inverse operations: expanding the factors must recover the original polynomial",
+      "Factor until every factor is irreducible: $2x^2-8=2(x^2-4)=2(x+2)(x-2)$, while $2(x^2-4)$ is not finished",
+      "Take out the common factor first; the bracket must keep the same number of terms, and the numerical factor must not be lost",
+      "Over the real numbers $a^2+b^2$ cannot be factored while $a^2-b^2$ can — a sum and a difference of squares behave completely differently",
+      "The result must be a product of polynomials; an expression with a letter in a denominator is not a factorization"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2 - 1",
+          "color": "#4cc9f0",
+          "label": "y = x² - 1"
+        },
+        {
+          "expr": "(x - 1)*(x + 1)",
+          "color": "rgba(255,107,157,0.65)",
+          "label": "y = (x - 1)(x + 1)"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -3,
+        7
+      ],
+      "title": "两条曲线完全重合：因式分解不改变式子的值"
+    },
+    "examples": [
+      {
+        "problem": "分解因式：(1) $3x^2-12x$；(2) $a^2-6ab+9b^2$。",
+        "solution": "(1) 各项都有公因式 $3x$，提出来：$3x^2-12x=3x(x-4)$。\n\n(2) 这是完全平方式：$a^2-6ab+9b^2=a^2-2\\cdot a\\cdot(3b)+(3b)^2=(a-3b)^2$。\n\n检验：$(a-3b)^2=a^2-6ab+9b^2$，展开后与原式一致，分解正确。"
+      },
+      {
+        "problem": "分解因式：(1) $x^2-4x+3$；(2) $2x^2-8$（分解要彻底）。",
+        "solution": "(1) 找两个数，使它们的和是 $-4$、积是 $3$：取 $-1$ 和 $-3$，所以 $x^2-4x+3=(x-1)(x-3)$。\n\n检验：$(x-1)(x-3)=x^2-3x-x+3=x^2-4x+3$。\n\n(2) 先提公因式，再用平方差公式：$2x^2-8=2(x^2-4)=2(x+2)(x-2)$。$x^2-4$ 还可以继续分解，所以不能停在 $2(x^2-4)$。"
+      }
+    ],
+    "tags": [
+      "因式分解",
+      "提公因式",
+      "平方差",
+      "十字相乘"
+    ],
+    "links": [
+      "algebraic-identities",
+      "polynomial",
+      "quadratic-equation-junior",
+      "algebraic-fraction"
+    ]
+  },
+  {
+    "id": "algebraic-fraction",
+    "title": "分式",
+    "titleEn": "Algebraic Fractions",
+    "branch": "elementary",
+    "level": 2,
+    "summary": "分母中含字母的式子（形如 A/B 且 B≠0）——运算与分数相似，但每一步都要盯住「分母不为 0」。",
+    "summaryEn": "Expressions of the form A/B with a letter in the denominator — they work like fractions, but the denominator must never be zero.",
+    "definition": "如果 $A$、$B$ 表示两个整式，并且分母 $B$ 中含有字母，那么式子 $\\dfrac{A}{B}$ 叫做**分式**，其中 $A$ 是分子、$B$ 是分母。最先要记住的一条是：**分母不能为 0**——分母为 0 时分式没有意义，所以研究分式必须先写清字母的取值限制。\n\n分式有与分数完全类似的**基本性质**：分式的分子与分母同乘（或同除以）一个**不为 0** 的整式，分式的值不变。由此可以**约分**（约去分子与分母的公因式）和**通分**（把异分母化成同分母）。\n\n运算法则也照搬分数：同分母相加减，分母不变、分子相加减；异分母相加减，先通分；乘法是分子乘分子、分母乘分母；除法是乘除式的倒数。解**分式方程**时，去分母相当于两边同乘最简公分母，而这个整式可能为 0，可能产生**增根**，所以**解分式方程必须验根**。",
+    "definitionEn": "If $A$ and $B$ are polynomials and the denominator $B$ contains a letter, the expression $\\dfrac{A}{B}$ is called an **algebraic fraction**, with numerator $A$ and denominator $B$. The first rule to memorize is that **the denominator must not be zero**: when it is zero the fraction is undefined, so any work with a fraction begins by stating the allowed values of the letters.\n\nAlgebraic fractions satisfy the same **basic property** as ordinary fractions: multiplying (or dividing) numerator and denominator by the same **nonzero** expression leaves the value unchanged. This underlies **cancelling** (removing a common factor) and **finding a common denominator**.\n\nThe operations copy those of fractions: with the same denominator, keep it and add or subtract the numerators; with different denominators, make them the same first; multiply numerator by numerator and denominator by denominator; divide by multiplying by the reciprocal. When solving an **equation with fractions**, clearing denominators multiplies both sides by a common multiple that may be zero, so **every solution must be checked** and extraneous roots discarded.",
+    "formulas": [
+      {
+        "latex": "\\dfrac{A}{B}=\\dfrac{A\\cdot C}{B\\cdot C}\\qquad (C\\neq 0)",
+        "note": "分式的基本性质：分子分母同乘（或同除以）一个不为 0 的整式，分式的值不变，这是约分与通分的依据。",
+        "noteEn": "Basic property: multiplying or dividing numerator and denominator by the same nonzero expression leaves the fraction unchanged; this is what justifies cancelling and common denominators."
+      },
+      {
+        "latex": "\\dfrac{A}{C}\\pm\\dfrac{B}{C}=\\dfrac{A\\pm B}{C}",
+        "note": "同分母相加减：分母不变，分子相加减；算完后分子要合并同类项。",
+        "noteEn": "Same denominator: keep it and add or subtract the numerators, then collect like terms in the numerator."
+      },
+      {
+        "latex": "\\dfrac{A}{B}\\cdot\\dfrac{C}{D}=\\dfrac{AC}{BD},\\qquad \\dfrac{A}{B}\\div\\dfrac{C}{D}=\\dfrac{A}{B}\\cdot\\dfrac{D}{C}=\\dfrac{AD}{BC}",
+        "note": "分式的乘法：分子乘分子、分母乘分母；除法：把除式的分子分母颠倒后再相乘。",
+        "noteEn": "Multiplication: numerator times numerator over denominator times denominator. Division: multiply by the reciprocal of the divisor."
+      },
+      {
+        "latex": "\\dfrac{A}{B}\\pm\\dfrac{C}{D}=\\dfrac{AD\\pm BC}{BD}",
+        "note": "异分母相加减：先通分（化为最简公分母），再按同分母法则计算。",
+        "noteEn": "Different denominators: reduce to a common denominator first, then add or subtract as usual."
+      },
+      {
+        "latex": "\\dfrac{A}{B}=0\\ \\Longleftrightarrow\\ A=0\\ (B\\neq 0)",
+        "note": "分式的值为 0：分子为 0 且分母不为 0，两个条件缺一不可。",
+        "noteEn": "A fraction equals zero exactly when its numerator is zero and its denominator is not; both conditions are needed."
+      }
+    ],
+    "expression": {
+      "text": "A/B，其中 B 含有字母，且 B≠0",
+      "symbol": "\\dfrac{A}{B}\\quad (B\\neq 0)",
+      "note": "化简前先因式分解，再约去公因式；分母的限制条件要一直保留。",
+      "noteEn": "Factor first, then cancel the common factor, and keep the condition on the denominator throughout."
+    },
+    "properties": [
+      "分式有意义的条件是分母 $\\neq 0$；分式的值为 0 的条件是分子 $=0$ 且分母 $\\neq 0$，两者不能混淆",
+      "约分约去的是分子与分母的公因式，必须对分子、分母整体进行，不能只把某一项去掉",
+      "符号法则：分子、分母、分式本身三个符号中，同时改变两个，分式的值不变",
+      "运算结果要化成最简分式或整式（分子与分母没有公因式），含字母时别忘了标注条件",
+      "解分式方程必须验根：把根代入最简公分母，若公分母为 0 就是增根，必须舍去"
+    ],
+    "propertiesEn": [
+      "A fraction is defined only when the denominator is nonzero, and it equals zero only when the numerator is zero and the denominator is not zero at the same time",
+      "Cancelling removes a common factor of numerator and denominator as a whole, never a single term",
+      "Sign rule: among the signs of the numerator, the denominator and the fraction itself, changing two of them leaves the value unchanged",
+      "Results should be written in simplest form, with any condition on the letters kept",
+      "An equation with fractions must be checked: any root that makes the common denominator zero is extraneous and must be discarded"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/x",
+          "color": "#4cc9f0",
+          "label": "y = 1/x"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -4,
+        4
+      ],
+      "title": "y = 1/x：x ≠ 0，两条分支分别向坐标轴靠近"
+    },
+    "examples": [
+      {
+        "problem": "化简分式 $\\dfrac{x^2-1}{x^2+2x+1}$。",
+        "solution": "分子用平方差分解：$x^2-1=(x+1)(x-1)$；分母用完全平方分解：$x^2+2x+1=(x+1)^2$。\n\n所以原式 $=\\dfrac{(x+1)(x-1)}{(x+1)^2}=\\dfrac{x-1}{x+1}$，其中要求 $x\\neq -1$（保证分母不为 0）。\n\n取具体值验证：$x=2$ 时，左边 $=\\dfrac{3}{9}=\\dfrac13$，右边 $=\\dfrac13$，两者相等。"
+      },
+      {
+        "problem": "解分式方程 $\\dfrac{2}{x-1}=\\dfrac{3}{x}$。",
+        "solution": "最简公分母是 $x(x-1)$，两边同乘 $x(x-1)$ 去分母：$2x=3(x-1)$。\n\n去括号、移项：$2x=3x-3$，得 $x=3$。\n\n验根：$x=3$ 时 $x\\neq 0$、$x-1=2\\neq 0$，最简公分母不为 0，所以 $x=3$ 是原方程的根。\n\n提醒：解分式方程必须验根。例如 $\\dfrac{x}{x-2}=\\dfrac{2}{x-2}$ 去分母得 $x=2$，但 $x=2$ 使公分母为 0，是增根，原方程无解。"
+      }
+    ],
+    "tags": [
+      "分式",
+      "约分",
+      "通分",
+      "分式方程"
+    ],
+    "links": [
+      "factorization",
+      "algebraic-identities",
+      "rational-operations",
+      "inverse-variation-function"
+    ]
+  },
+  {
+    "id": "quadratic-radical",
+    "title": "二次根式",
+    "titleEn": "Quadratic Radicals",
+    "branch": "elementary",
+    "level": 2,
+    "summary": "形如 √a（a ≥ 0）的式子——被开方数必须非负，化简靠积、商的算术平方根，只有同类二次根式才能合并。",
+    "summaryEn": "Expressions of the form √a with a ≥ 0 — the radicand must be nonnegative, simplification uses the root of a product or quotient, and only like radicals can be combined.",
+    "definition": "形如 $\\sqrt{a}\\ (a\\geq 0)$ 的式子叫做**二次根式**，其中 $\\sqrt{\\ }$ 是二次根号，$a$ 是被开方数。第一件必须记牢的事：**被开方数非负**，即 $a\\geq 0$；当 $a<0$ 时 $\\sqrt{a}$ 在实数范围内没有意义。\n\n两条核心恒等式：$(\\sqrt{a})^2=a\\ (a\\geq 0)$，以及 $\\sqrt{a^2}=|a|$。第二条最容易错：算术平方根的结果一定非负，所以当 $a<0$ 时 $\\sqrt{a^2}=-a$ 而不是 $a$。例如 $\\sqrt{(-5)^2}=\\sqrt{25}=5=|-5|$，绝不能写成 $-5$。\n\n化简的依据是积与商的算术平方根：$\\sqrt{ab}=\\sqrt{a}\\cdot\\sqrt{b}\\ (a\\geq 0,\\ b\\geq 0)$，$\\sqrt{\\dfrac{a}{b}}=\\dfrac{\\sqrt{a}}{\\sqrt{b}}\\ (a\\geq 0,\\ b>0)$。化简的结果通常要求是**最简二次根式**：被开方数不含分母、不含能开得尽方的因数（式）；分母中有根号时要分母有理化。只有化成最简后被开方数相同的**同类二次根式**，才能像合并同类项一样相加减。",
+    "definitionEn": "An expression of the form $\\sqrt{a}\\ (a\\geq 0)$ is called a **quadratic radical**; the sign is the radical sign and $a$ is the radicand. The first rule to remember: **the radicand must be nonnegative**, that is $a\\geq 0$; for $a<0$ the expression $\\sqrt{a}$ has no meaning among the real numbers.\n\nTwo key identities: $(\\sqrt{a})^2=a\\ (a\\geq 0)$ and $\\sqrt{a^2}=|a|$. The second is the classic trap: a square root is never negative, so for $a<0$ one has $\\sqrt{a^2}=-a$, not $a$. For instance $\\sqrt{(-5)^2}=\\sqrt{25}=5=|-5|$, never $-5$.\n\nSimplification uses the root of a product or quotient: $\\sqrt{ab}=\\sqrt{a}\\cdot\\sqrt{b}\\ (a\\geq 0,\\ b\\geq 0)$ and $\\sqrt{\\dfrac{a}{b}}=\\dfrac{\\sqrt{a}}{\\sqrt{b}}\\ (a\\geq 0,\\ b>0)$. An answer is usually required in **simplest radical form**: the radicand contains no denominator and no factor that is a perfect square, and any radical in a denominator must be rationalized. Only like radicals — the same radicand after simplification — can be added or subtracted like like terms.",
+    "formulas": [
+      {
+        "latex": "(\\sqrt{a})^2=a\\qquad (a\\geq 0)",
+        "note": "先开方再平方，回到原来的数；这里要求 $a\\geq 0$，否则根式本身没有意义。",
+        "noteEn": "Taking the root and then squaring returns the original number; the condition $a\\geq 0$ is needed for the root to exist."
+      },
+      {
+        "latex": "\\sqrt{a^2}=|a|=\\begin{cases} a, & a\\geq 0 \\\\ -a, & a<0 \\end{cases}",
+        "note": "先平方再开方，结果是 $|a|$ 而不是 $a$：算术平方根一定非负，$a<0$ 时答案为 $-a$。",
+        "noteEn": "Squaring and then taking the root gives $|a|$, not $a$: a square root is never negative, so for $a<0$ the answer is $-a$."
+      },
+      {
+        "latex": "\\sqrt{ab}=\\sqrt{a}\\cdot\\sqrt{b}\\qquad (a\\geq 0,\\ b\\geq 0)",
+        "note": "积的算术平方根：积开方可以拆成各因数分别开方再相乘。",
+        "noteEn": "Root of a product: the root of a product splits into the product of the roots."
+      },
+      {
+        "latex": "\\sqrt{\\dfrac{a}{b}}=\\dfrac{\\sqrt{a}}{\\sqrt{b}}\\qquad (a\\geq 0,\\ b>0)",
+        "note": "商的算术平方根：商开方等于分子开方除以分母开方，分母必须为正。",
+        "noteEn": "Root of a quotient: the root of a quotient is the quotient of the roots; the denominator must be positive."
+      },
+      {
+        "latex": "c\\sqrt{a}+d\\sqrt{a}=(c+d)\\sqrt{a}\\qquad (a\\geq 0)",
+        "note": "同类二次根式才能合并，例如 $3\\sqrt{2}+2\\sqrt{2}=5\\sqrt{2}$；$\\sqrt{2}+\\sqrt{3}$ 不是同类，不能再合并。",
+        "noteEn": "Only like radicals combine, e.g. $3\\sqrt{2}+2\\sqrt{2}=5\\sqrt{2}$; $\\sqrt{2}+\\sqrt{3}$ stays unchanged."
+      }
+    ],
+    "expression": {
+      "text": "√a  (a ≥ 0)，例如 √12 = 2√3",
+      "symbol": "\\sqrt{a}\\quad (a\\geq 0)",
+      "note": "二次根号下不能有负数；化简结果要求最简。",
+      "noteEn": "A radical sign may not cover a negative number, and the answer should be in simplest radical form."
+    },
+    "properties": [
+      "二次根式有意义的条件是被开方数非负：$\\sqrt{a}$ 有意义 $\\Longleftrightarrow a\\geq 0$",
+      "$\\sqrt{a^2}=|a|$ 而不是 $a$：化简前先判断字母（或式子）的正负，再用绝对值的意义去符号",
+      "最简二次根式的要求：被开方数不含分母、不含能开得尽方的因数（式）；分母中有根号时要分母有理化",
+      "只有同类二次根式（化简后被开方数相同）才能合并：$3\\sqrt{2}+2\\sqrt{2}=5\\sqrt{2}$，而 $\\sqrt{2}+\\sqrt{3}$ 不能合并",
+      "二次根式的值一定非负：$\\sqrt{a}\\geq 0$；$(\\sqrt{a})^2$ 与 $\\sqrt{a^2}$ 是两条不同的恒等式，不要混用"
+    ],
+    "propertiesEn": [
+      "A radical is defined exactly when the radicand is nonnegative: $\\sqrt{a}$ makes sense if and only if $a\\geq 0$",
+      "$\\sqrt{a^2}=|a|$, not $a$: decide the sign of the expression first, then remove the absolute value",
+      "Simplest radical form means the radicand has no denominator and no perfect-square factor; a radical in a denominator must be rationalized",
+      "Only like radicals (same radicand after simplification) can be combined: $3\\sqrt{2}+2\\sqrt{2}=5\\sqrt{2}$, while $\\sqrt{2}+\\sqrt{3}$ cannot",
+      "A square root is never negative: $\\sqrt{a}\\geq 0$, and $(\\sqrt{a})^2$ and $\\sqrt{a^2}$ are two different identities"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sqrt(x)",
+          "color": "#4cc9f0",
+          "label": "y = √x"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        6
+      ],
+      "yRange": [
+        -0.5,
+        3
+      ],
+      "title": "y = √x：定义域 x ≥ 0，图像从原点出发并上升"
+    },
+    "examples": [
+      {
+        "problem": "化简与计算：(1) $\\sqrt{12}$；(2) $\\sqrt{18}+\\sqrt{8}$；(3) $\\sqrt{(-7)^2}$。",
+        "solution": "(1) $\\sqrt{12}=\\sqrt{4\\times 3}=\\sqrt{4}\\cdot\\sqrt{3}=2\\sqrt{3}$。\n\n(2) 先化成最简二次根式，再合并同类二次根式：$\\sqrt{18}=\\sqrt{9\\times 2}=3\\sqrt{2}$，$\\sqrt{8}=\\sqrt{4\\times 2}=2\\sqrt{2}$，所以 $\\sqrt{18}+\\sqrt{8}=3\\sqrt{2}+2\\sqrt{2}=5\\sqrt{2}$。\n\n(3) 用 $\\sqrt{a^2}=|a|$：$\\sqrt{(-7)^2}=|-7|=7$，不是 $-7$。"
+      },
+      {
+        "problem": "化简：(1) $\\dfrac{1}{\\sqrt{2}}$（分母有理化）；(2) $\\sqrt{(x-3)^2}$，其中 $x<3$。",
+        "solution": "(1) 分子分母同乘 $\\sqrt{2}$：$\\dfrac{1}{\\sqrt{2}}=\\dfrac{\\sqrt{2}}{\\sqrt{2}\\cdot\\sqrt{2}}=\\dfrac{\\sqrt{2}}{2}$。\n\n(2) $\\sqrt{(x-3)^2}=|x-3|$。因为 $x<3$，所以 $x-3<0$，$|x-3|=-(x-3)=3-x$。\n\n取 $x=1$ 验证：左边 $=\\sqrt{(1-3)^2}=\\sqrt{(-2)^2}=2$，右边 $=3-1=2$，一致。"
+      }
+    ],
+    "tags": [
+      "二次根式",
+      "算术平方根",
+      "分母有理化",
+      "同类二次根式"
+    ],
+    "links": [
+      "square-cube-root",
+      "real-numbers",
+      "quadratic-equation-junior",
+      "pythagorean"
+    ]
+  },
+  {
+    "id": "linear-equation-junior",
+    "title": "一元一次方程",
+    "titleEn": "Linear Equations in One Variable",
+    "branch": "algebra",
+    "level": 1,
+    "summary": "只含一个未知数、未知数次数都是 1 的方程，形如 ax+b=0（a≠0）——解的唯一关键是「移项变号」。",
+    "summaryEn": "An equation in one unknown of degree 1, of the form ax + b = 0 (a ≠ 0); the key step is transposing terms while changing their signs.",
+    "definition": "只含**一个**未知数，未知数的次数都是 **1**，并且等号两边都是整式的方程，叫做**一元一次方程**。它的一般形式是 $ax+b=0\\ (a\\neq 0)$，解为 $x=-\\dfrac{b}{a}$。因为 $a\\neq 0$，一元一次方程**有且只有一个解**。\n\n解方程的依据是**等式的基本性质**：等号两边同时加或减同一个数（式），等式仍然成立；同时乘或除以同一个不为 0 的数，等式仍然成立。解一元一次方程的一般步骤是：**去分母 → 去括号 → 移项 → 合并同类项 → 系数化为 1**。其中最容易出错的是**移项要变号**：把一项从等号一边移到另一边，它的符号必须改变。\n\n列方程解应用题的一般步骤：①审题，**设未知数**；②抓住关键语句**找等量关系**；③**列方程**；④**解方程**；⑤**检验**并作答。检验有两层含义：既要验算解是否满足方程，也要看它是否符合实际意义。",
+    "definitionEn": "An equation that contains **one** unknown, in which the unknown appears only to the **first** power and both sides are polynomials, is a **linear equation in one variable**. Its general form is $ax+b=0\\ (a\\neq 0)$ with solution $x=-\\dfrac{b}{a}$. Since $a\\neq 0$, such an equation has **exactly one solution**.\n\nSolving rests on the **basic properties of equality**: adding or subtracting the same number (or expression) on both sides keeps the equality, and so does multiplying or dividing both sides by the same nonzero number. The standard steps are: **clear denominators → remove brackets → transpose → collect like terms → divide by the coefficient**. The most common mistake is forgetting that **transposing a term changes its sign**.\n\nTo solve a word problem: read it and **choose the unknown**; **find the equal relation**; **set up the equation**; **solve it**; then **check**. Checking has two levels — verify that the value satisfies the equation, and verify that it fits the real situation.",
+    "formulas": [
+      {
+        "latex": "ax+b=0\\quad (a\\neq 0)\\ \\Longleftrightarrow\\ x=-\\dfrac{b}{a}",
+        "note": "一元一次方程的标准形式与解：$a\\neq 0$ 时方程有唯一解 $x=-\\dfrac{b}{a}$。",
+        "noteEn": "Standard form and solution: when $a\\neq 0$ there is exactly one solution, $x=-\\dfrac{b}{a}$."
+      },
+      {
+        "latex": "a+c=b\\ \\Longleftrightarrow\\ a=b-c",
+        "note": "移项法则：把等号一边的项移到另一边，符号要改变（依据是两边同加、同减同一个数）。",
+        "noteEn": "Transposition: moving a term to the other side changes its sign, because the same number is added or subtracted on both sides."
+      },
+      {
+        "latex": "a=b\\ \\Longleftrightarrow\\ a+c=b+c",
+        "note": "等式两边同时加（或减）同一个数，等式仍然成立。",
+        "noteEn": "Adding or subtracting the same number on both sides keeps the equality."
+      },
+      {
+        "latex": "a=b\\ \\Longrightarrow\\ ac=bc\\ (\\text{对任意 }c),\\qquad a=b\\ \\Longleftrightarrow\\ ac=bc\\ (c\\neq 0),\\qquad a=b\\ \\Longleftrightarrow\\ \\dfrac{a}{c}=\\dfrac{b}{c}\\ (c\\neq 0)",
+        "note": "等式两边同时乘同一个数，或同除以一个不为 0 的数，等式仍然成立；后者就是「系数化为 1」的依据。",
+        "noteEn": "Multiplying both sides by the same number, or dividing by the same nonzero number, keeps the equality; the latter is how the coefficient is reduced to 1."
+      }
+    ],
+    "expression": {
+      "text": "ax+b=0  (a≠0)   解：x = -b/a",
+      "symbol": "ax+b=0\\quad (a\\neq 0)",
+      "note": "一元一次方程有且只有一个解，解的检验就是把它代回原方程。",
+      "noteEn": "A linear equation in one variable has exactly one solution; check it by substituting back."
+    },
+    "properties": [
+      "一元一次方程（$a\\neq 0$ 时）有且只有一个解，这是它最鲜明的特点",
+      "移项必须变号：$3x+1=7$ 移项得 $3x=7-1=6$，$1$ 从左边到右边要变成 $-1$",
+      "去分母时等号两边的每一项都要乘最简公分母，不含分母的项不能漏乘；分子是多项式时，去分母后要补上括号",
+      "系数化为 1：两边同除以未知数的系数（系数是分数时乘它的倒数），如 $2x=6$ 得 $x=3$",
+      "方程的解必须代回原方程检验；应用题的解还要符合实际意义"
+    ],
+    "propertiesEn": [
+      "A linear equation in one variable ($a\\neq 0$) has exactly one solution",
+      "Transposing changes signs: $3x+1=7$ gives $3x=7-1=6$",
+      "When clearing denominators, multiply every term on both sides, and put brackets around polynomial numerators",
+      "Reducing the coefficient to 1 means dividing by the coefficient of the unknown (or multiplying by its reciprocal)",
+      "Always substitute the solution back into the original equation; for word problems check that the answer makes sense"
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        -5,
+        5
+      ],
+      "points": [
+        {
+          "at": -1,
+          "label": "x = -1",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "方程 (x+1)/2 - (x-2)/3 = 1 的解是数轴上的一个点：x = -1"
+    },
+    "examples": [
+      {
+        "problem": "解方程 $\\dfrac{x+1}{2}-\\dfrac{x-2}{3}=1$。",
+        "solution": "去分母：两边同乘 6，得 $3(x+1)-2(x-2)=6$。\n\n去括号：$3x+3-2x+4=6$。合并同类项：$x+7=6$。\n\n移项（要变号）：$x=6-7=-1$。\n\n检验：左边 $=\\dfrac{-1+1}{2}-\\dfrac{-1-2}{3}=0-(-1)=1=$ 右边，所以 $x=-1$ 是原方程的解。"
+      },
+      {
+        "problem": "列方程解应用题：一支笔比一本本子贵 2 元，买 3 支笔和 2 本本子共花 26 元，求每本本子的价格。",
+        "solution": "设每本本子 $x$ 元，则每支笔 $(x+2)$ 元。等量关系是「3 支笔的价钱 + 2 本本子的价钱 = 26 元」，列方程：$3(x+2)+2x=26$。\n\n去括号：$3x+6+2x=26$；合并同类项：$5x+6=26$；移项：$5x=20$；系数化为 1：$x=4$。\n\n检验：本子每本 4 元、笔每支 6 元，$3\\times 6+2\\times 4=18+8=26$，符合题意。答：每本本子 4 元。"
+      }
+    ],
+    "tags": [
+      "一元一次方程",
+      "移项",
+      "去分母",
+      "应用题"
+    ],
+    "links": [
+      "linear-system-two-variables",
+      "linear-inequality-junior",
+      "algebraic-expression",
+      "linear-function"
+    ]
+  },
+  {
+    "id": "linear-system-two-variables",
+    "title": "二元一次方程组",
+    "titleEn": "Systems of Linear Equations in Two Variables",
+    "branch": "algebra",
+    "level": 2,
+    "summary": "把两个二元一次方程联立起来——用代入或加减消元求解，解就是两条直线交点的坐标。",
+    "summaryEn": "Two linear equations in two unknowns taken together — solve them by substitution or elimination; the solution is the intersection point of two lines.",
+    "definition": "含有**两个**未知数，并且含未知数的项的次数都是 1 的整式方程叫做**二元一次方程**，例如 $x+y=5$。把两个二元一次方程联立起来，就组成**二元一次方程组**，例如 $\\begin{cases} x+y=5 \\\\ x-y=1 \\end{cases}$。能同时满足两个方程的**一对**未知数的值叫做这个方程组的**解**，通常写成 $\\begin{cases} x=3 \\\\ y=2 \\end{cases}$ 的形式。\n\n解方程组的基本思想是**消元**：把两个未知数化成一个未知数，转化为已经会解的一元一次方程。常用两种方法：**代入消元法**（把一个方程变形为 $y=\\cdots$，代入另一个方程）和**加减消元法**（两个方程相加或相减，消去系数相同或相反的未知数）。\n\n从图像上看，每个二元一次方程都对应一条直线，方程组的解就是**两条直线的交点坐标**：两条直线相交 ⇔ 方程组有唯一解；两条直线平行 ⇔ 无解；两条直线重合 ⇔ 有无穷多组解。所以二元一次方程组的解可能不存在，也可能不唯一。",
+    "definitionEn": "An equation in **two** unknowns in which every term containing an unknown has degree 1 is a **linear equation in two variables**, such as $x+y=5$. Joining two of them with a brace gives a **system of two linear equations in two variables**, such as $\\begin{cases} x+y=5 \\\\ x-y=1 \\end{cases}$. A **pair** of values that satisfies both equations at once is a **solution**, usually written as $\\begin{cases} x=3 \\\\ y=2 \\end{cases}$.\n\nThe guiding idea is **elimination**: reduce two unknowns to one and get a linear equation in one variable. Two methods are standard: **substitution** (rewrite one equation as $y=\\cdots$ and substitute it into the other) and **addition/subtraction** (add the equations when a pair of coefficients is opposite, or subtract them when the coefficients are equal, to remove one unknown).\n\nGeometrically each equation is a straight line, and the solution is the **intersection point** of the two lines: intersecting ⇔ exactly one solution; parallel ⇔ no solution; coincident ⇔ infinitely many solutions. So a system may have no solution or infinitely many, not only one.",
+    "formulas": [
+      {
+        "latex": "\\begin{cases} a_1x+b_1y=c_1 \\\\ a_2x+b_2y=c_2 \\end{cases}",
+        "note": "二元一次方程组的一般形式：两个方程用大括号联立，一对数值必须同时满足两个方程才是解。",
+        "noteEn": "General form: two equations joined by a brace; a pair of values is a solution only if it satisfies both equations."
+      },
+      {
+        "latex": "y=\\dfrac{c_1-a_1x}{b_1}\\qquad (b_1\\neq 0)",
+        "note": "代入消元：先把一个方程变形，用一个未知数表示另一个未知数，再代入另一个方程。",
+        "noteEn": "Substitution: rewrite one equation so that one unknown is expressed by the other, then substitute."
+      },
+      {
+        "latex": "\\begin{cases} x+y=5 \\\\ x-y=1 \\end{cases}\\ \\Longrightarrow\\ 2x=6\\ \\Longrightarrow\\ x=3,\\ y=2",
+        "note": "加减消元：$y$ 的系数是 $1$ 与 $-1$（互为相反数），两式相加就消去了 $y$；系数相同时则相减。",
+        "noteEn": "Addition/subtraction: the coefficients of $y$ are $1$ and $-1$, so adding the equations removes $y$; subtract when the coefficients are equal."
+      },
+      {
+        "latex": "\\text{相交}\\ \\Longleftrightarrow\\ \\text{唯一解},\\qquad \\text{平行}\\ \\Longleftrightarrow\\ \\text{无解},\\qquad \\text{重合}\\ \\Longleftrightarrow\\ \\text{无穷多解}",
+        "note": "解的几何意义：两条直线的位置关系决定解的个数，解就是交点的坐标。",
+        "noteEn": "Geometric meaning: the relative position of the two lines decides the number of solutions, and the solution is the intersection point."
+      }
+    ],
+    "expression": {
+      "text": "x+y=5 与 x-y=1 联立，解为 (x, y) = (3, 2)",
+      "symbol": "\\begin{cases} x+y=5 \\\\ x-y=1 \\end{cases}",
+      "note": "解就是两条直线的交点坐标；无解对应两条直线平行。",
+      "noteEn": "The solution is the intersection point of the two lines; no solution means the lines are parallel."
+    },
+    "properties": [
+      "方程组的解必须**同时**满足两个方程，检验时两个方程都要代入验算",
+      "消元是核心思想：把两个未知数化成一个，代入法与加减法只是消元的两条途径，选哪种看系数特点",
+      "图像意义：每个方程是一条直线——相交 ⇔ 唯一解，平行 ⇔ 无解，重合 ⇔ 无穷多解，所以解可能不存在，也可能不唯一",
+      "求出一个未知数后要回代求出另一个，答案写成 $\\begin{cases} x=\\cdots \\\\ y=\\cdots \\end{cases}$ 的形式",
+      "列方程组解应用题通常设两个未知数、找两个等量关系，比列一元一次方程更直接"
+    ],
+    "propertiesEn": [
+      "A solution of the system must satisfy **both** equations; check by substituting into each of them",
+      "Elimination is the central idea: reduce two unknowns to one; substitution and addition/subtraction are two routes to it",
+      "Each equation is a line: intersecting ⇔ unique solution, parallel ⇔ no solution, coincident ⇔ infinitely many solutions",
+      "After finding one unknown, substitute back to find the other, and present the answer as an ordered pair",
+      "For word problems, two unknowns and two relations usually make the modelling step more direct"
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2,
+        6
+      ],
+      "yRange": [
+        -3,
+        6
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            5
+          ],
+          "to": [
+            5,
+            0
+          ],
+          "color": "#4cc9f0",
+          "width": 2.2
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.5,
+            -1.5
+          ],
+          "to": [
+            5,
+            4
+          ],
+          "color": "#ff6b9d",
+          "width": 2.2
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            2
+          ],
+          "label": "交点 (3, 2)",
+          "color": "#ffd166",
+          "r": 5
+        },
+        {
+          "type": "label",
+          "at": [
+            4.35,
+            1.4
+          ],
+          "text": "x + y = 5",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.9,
+            1.7
+          ],
+          "text": "x - y = 1",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "方程组的解就是两条直线的交点：(3, 2)"
+    },
+    "examples": [
+      {
+        "problem": "用加减消元法解方程组 $\\begin{cases} x+y=5 \\\\ x-y=1 \\end{cases}$。",
+        "solution": "① + ②：$(x+y)+(x-y)=5+1$，即 $2x=6$，所以 $x=3$（两个方程中 $y$ 的系数是 $1$ 与 $-1$，相加正好消去 $y$）。\n\n把 $x=3$ 代入 ①：$3+y=5$，得 $y=2$。\n\n检验：$3+2=5$ ✓，$3-2=1$ ✓，两个方程都满足。所以解为 $\\begin{cases} x=3 \\\\ y=2 \\end{cases}$，它也是直线 $x+y=5$ 与 $x-y=1$ 的交点 $(3,2)$。"
+      },
+      {
+        "problem": "用代入消元法解方程组 $\\begin{cases} y=2x-1 \\\\ x+y=5 \\end{cases}$。",
+        "solution": "把 ① 代入 ②：$x+(2x-1)=5$，即 $3x-1=5$，解得 $x=2$。\n\n把 $x=2$ 代回 ①：$y=2\\times 2-1=3$。\n\n检验：$y=2x-1$：$3=2\\times 2-1$ ✓；$x+y=5$：$2+3=5$ ✓。所以解为 $\\begin{cases} x=2 \\\\ y=3 \\end{cases}$。"
+      }
+    ],
+    "tags": [
+      "二元一次方程组",
+      "消元",
+      "代入消元法",
+      "加减消元法"
+    ],
+    "links": [
+      "linear-equation-junior",
+      "linear-function",
+      "intersecting-lines",
+      "plane-coordinates"
+    ]
+  }
+]

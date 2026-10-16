@@ -1,0 +1,403 @@
+[
+  {
+    "id": "ode-maximal-interval",
+    "title": "解的最大存在区间与延拓",
+    "titleEn": "Maximal Interval of Existence and Continuation",
+    "branch": "ode",
+    "level": 5,
+    "summary": "皮卡定理只保证局部解；把解一段段延拓直到离开定义域，就得到最大存在区间。有限端点处解必定爆破，或趋于 $f$ 的定义域边界：y' = y²、y(0) = 1 的解在 t = 1 爆破。线性方程整体存在，非线性方程可能有限时间爆破。",
+    "summaryEn": "Picard's theorem guarantees only a local solution; continuing it until it leaves the domain gives the maximal interval of existence. A finite endpoint forces blow-up — the solution of y' = y², y(0) = 1 explodes at t = 1. Linear equations exist globally, nonlinear ones may not.",
+    "definition": "皮卡-林德勒夫定理只保证初值问题 $y' = f(t,y)$ 在初始时刻附近有一个局部解。自然的问题是：这个解究竟能走多远？答案是「能走多远走多远」：由唯一性，两个定义域相交的局部解在交集上完全重合，可以把它们一段段拼接（**延拓**）；只要解还没有从 $f$ 的定义域 $D$ 中掉出去，就可以继续。最终得到的那个不能再延拓的开区间 $(a,b)$ 称为解的**最大存在区间**。\n\n延拓为什么会停下？这就是**爆炸性替代**（blow-up alternative）：若右端点 $b < +\\infty$ 而解还能延拓，矛盾；所以当 $t \\to b^-$ 时，解必须离开 $D$ 的每个紧子集。具体只有两种可能：$|y(t)| \\to +\\infty$（解在有限时间**爆破**），或者 $(t, y(t))$ 趋向 $D$ 的边界、在那里 $f$ 失去定义（例如解撞上某条 $f$ 无定义的曲线）。解不会「平静地」停在定义域内部的有限值上。\n\n最经典的例子是 $y' = y^2,\\ y(0) = 1$。分离变量解得 $y = \\dfrac{1}{1-t}$：当 $t \\to 1^-$ 时 $y \\to +\\infty$，最大存在区间是 $(-\\infty, 1)$，解在有限时刻 $t = 1$ **爆破**。一般地，$y(0) = a > 0$ 给出 $y = \\dfrac{a}{1 - at}$，爆破时刻 $T_* = 1/a$——初值越小活得越久；$a \\to 0^+$ 时 $T_* \\to +\\infty$，与 $a = 0$ 时整体解 $y \\equiv 0$ 自然衔接。\n\n这个现象揭示了**线性与非线性方程的根本差别**：一阶线性方程 $y' = p(t)y + q(t)$ 只要 $p, q$ 在开区间 $(\\alpha, \\beta)$ 上连续，解就在整个 $(\\alpha, \\beta)$ 上存在且唯一——因为 $f = py + q$ 与 $f_y = p(t)$ 在任意有限子区间上有界，解不可能在有限时间里跑到无穷。非线性方程没有这种保证：$y' = y^2$ 在 $t = 1$ 爆破，$y' = 1 + y^2$（解 $y = \\tan t$）在 $t = \\pm\\pi/2$ 爆破。最大存在区间正是刻画「解什么时候失效」的量，也是数值求解时选择步长、判断解是否失控的依据。",
+    "definitionEn": "The Picard–Lindelöf theorem only guarantees a local solution of $y'=f(t,y)$ near the initial time. The natural question is: how far can the solution go? The answer is: as far as it can. By uniqueness, local solutions with overlapping domains agree on the overlap, so they can be glued together piece by piece — **continuation**. As long as the solution does not leave the domain $D$ of $f$, it can be continued; the largest open interval $(a,b)$ obtained this way is the **maximal interval of existence**.\n\nWhy should continuation stop at all? This is the **blow-up alternative**: if the right endpoint $b<+\\infty$ and the solution could still be continued, we would have a contradiction; hence as $t\\to b^-$ the solution must leave every compact subset of $D$. There are only two possibilities: $|y(t)|\\to+\\infty$ (finite-time **blow-up**), or $(t,y(t))$ tends to the boundary of $D$, where $f$ is no longer defined. The solution never simply stops at a finite interior value.\n\nThe classic example is $y'=y^2,\\ y(0)=1$. Separating variables gives $y=\\dfrac{1}{1-t}$, which tends to $+\\infty$ as $t\\to1^-$; the maximal interval is $(-\\infty,1)$ and the solution **blows up** at the finite time $t=1$. In general $y(0)=a>0$ yields $y=\\dfrac{a}{1-at}$ with blow-up time $T_*=1/a$: smaller initial data survive longer, and $T_*\\to+\\infty$ as $a\\to0^+$, connecting with the global solution $y\\equiv0$ at $a=0$.\n\nThese examples expose the fundamental **difference between linear and nonlinear equations**: a first-order linear equation $y'=p(t)y+q(t)$ with $p,q$ continuous on an interval $(\\alpha,\\beta)$ has its solution on the whole interval $(\\alpha,\\beta)$, because $f=py+q$ and $f_y=p(t)$ are bounded on every finite subinterval, so the solution cannot run to infinity in finite time. Nonlinear equations have no such guarantee: $y'=y^2$ blows up at $t=1$ and $y'=1+y^2$ (solution $y=\\tan t$) blows up at $t=\\pm\\pi/2$. The maximal interval of existence measures exactly when a solution fails, and it guides step-size choice and blow-up monitoring in numerical work.",
+    "formulas": [
+      {
+        "latex": "y \\in C^{1}\\bigl((a,b)\\bigr), \\qquad -\\infty \\le a < t_0 < b \\le +\\infty",
+        "note": "最大存在区间：解在开区间 $(a,b)$ 上有定义且不能向外再延拓；端点不属于定义域，可以有限也可以无穷。",
+        "noteEn": "The maximal interval of existence: the solution lives on the open interval $(a,b)$ and cannot be continued further; the endpoints may be finite or infinite."
+      },
+      {
+        "latex": "y' = y^2, \\quad y(0) = 1 \\ \\Longrightarrow\\ y(t) = \\frac{1}{1 - t}, \\qquad t \\in (-\\infty, 1)",
+        "note": "标准爆破例：$t \\to 1^-$ 时 $y \\to +\\infty$，最大存在区间为 $(-\\infty, 1)$。",
+        "noteEn": "The standard blow-up example: $y\\to+\\infty$ as $t\\to1^-$, so the maximal interval is $(-\\infty,1)$."
+      },
+      {
+        "latex": "|y(t)| \\to +\\infty \\quad \\text{或} \\quad \\bigl(t,\\, y(t)\\bigr) \\to \\partial D \\qquad (t \\to b^-)",
+        "note": "爆炸性替代：右端点有限时二者必居其一——解要么爆破，要么逃出 $f$ 的定义域 $D$。",
+        "noteEn": "The blow-up alternative: at a finite endpoint exactly one of the two happens — blow-up, or escape to the boundary of the domain $D$ of $f$."
+      },
+      {
+        "latex": "y' = p(t)y + q(t), \\quad p, q \\in C(\\alpha, \\beta) \\ \\Longrightarrow\\ \\text{解在 } (\\alpha, \\beta) \\text{ 上整体存在}",
+        "note": "线性方程没有有限时间爆破：$p$、$q$ 在紧子区间上的有界性排除了爆炸。",
+        "noteEn": "Linear equations have no finite-time blow-up: boundedness of $p$ and $q$ on compact subintervals rules it out."
+      },
+      {
+        "latex": "y(0) = a > 0 \\ \\Longrightarrow\\ y(t) = \\frac{a}{1 - at}, \\qquad T_{*} = \\frac{1}{a}",
+        "note": "$y'=y^2$ 的一般初值解与爆破时刻；$a \\to 0^+$ 时 $T_{*} \\to +\\infty$，与整体解 $y \\equiv 0$ 衔接。",
+        "noteEn": "General solution of $y'=y^2$ for $a>0$ and its blow-up time; $T_*\\to+\\infty$ as $a\\to0^+$, meeting the global solution $y\\equiv0$."
+      }
+    ],
+    "expression": {
+      "text": "y′ = y², y(0) = 1 ⇒ y = 1/(1−t)，最大存在区间 (−∞, 1)，t = 1 处爆破",
+      "symbol": "T_{*} = 1/a",
+      "note": "$y(0)=a>0$ 时爆破时刻 $T_*=1/a$；线性方程则在整个系数连续区间上整体存在。",
+      "noteEn": "For $y(0)=a>0$ the blow-up time is $T_*=1/a$; linear equations instead live on the whole interval where the coefficients are continuous."
+    },
+    "properties": [
+      "最大存在区间必定是开区间；线性方程的解在系数连续区间上整体存在，$f$ 与 $f_y$ 的有界性是关键。",
+      "爆炸性替代：端点有限时解必定爆破或趋于定义域边界，不会在定义域内部以有限值平静收尾。",
+      "延拓与拼接方式无关：由唯一性，两个定义域相交的局部解在交集上完全重合。",
+      "$y'=y^2$ 中爆破时刻 $T_{*} = 1/a$ 随初值连续变化但可趋于无穷；接近爆破时解对初值越来越敏感。",
+      "配合比较定理估计存在范围：被爆破的下解压住的解不能活得更久；被趋于无穷的上解压住则推不出爆破。"
+    ],
+    "propertiesEn": [
+      "The maximal interval of existence is always open; for a linear equation the solution exists on the whole interval where the coefficients are continuous — boundedness of $f$ and $f_y$ is the key.",
+      "Blow-up alternative: at a finite endpoint the solution must blow up or approach the boundary of the domain; it never stops quietly at a finite interior value.",
+      "Continuation does not depend on how the pieces are glued: by uniqueness, overlapping local solutions agree on the overlap.",
+      "For $y'=y^2$ the blow-up time $T_*=1/a$ depends continuously on the initial value but can be unbounded; sensitivity grows as blow-up is approached.",
+      "Together with the comparison theorem existence ranges can be estimated: a solution squeezed above a blowing-up lower solution cannot outlive it, whereas being below a blowing-up upper solution proves nothing."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "y^2",
+      "xRange": [
+        0,
+        1.6
+      ],
+      "yRange": [
+        -0.5,
+        6
+      ],
+      "initial": [
+        {
+          "x": 0,
+          "y": 1,
+          "color": "#ff6b9d",
+          "label": "y(0) = 1"
+        }
+      ],
+      "title": "y' = y² 的斜率场：解 y = 1/(1−x) 在 x = 1 处爆破，最大存在区间的右端点就是爆破时刻"
+    },
+    "examples": [
+      {
+        "problem": "求初值问题 $y' = y^2,\\ y(0) = 1$ 的最大存在区间，并说明解为什么不能延拓到 $t = 1$ 之外。",
+        "solution": "分离变量：$\\dfrac{dy}{y^2} = dt$，积分得 $-\\dfrac{1}{y} = t + C$，即 $y = -\\dfrac{1}{t + C}$。由 $y(0) = 1$ 得 $C = -1$，于是 $y = \\dfrac{1}{1 - t}$。当 $t \\to 1^-$ 时 $y \\to +\\infty$，解在有限时刻爆破。若假设解能延拓到某个 $t_1 > 1$，则由连续性 $y(t_1)$ 是有限数，但 $y(t) \\ge \\dfrac{1}{1-t}$ 对 $t \\in (t_1', 1)$ 成立（这里直接由解析表达式给出）会让 $y$ 在 $t \\to 1^-$ 时先发散，矛盾。所以最大存在区间为 $(-\\infty, 1)$，它由爆炸性替代强制终止于 $t = 1$。"
+      },
+      {
+        "problem": "解释为什么线性方程 $y' = -(\\sin t)\\,y + e^{-t}$ 的解在整条实轴上存在，并说明非线性方程为什么没有同样的保证。",
+        "solution": "这里 $p(t) = -\\sin t$、$q(t) = e^{-t}$ 都在 $\\mathbb{R}$ 上连续，因此解在整个 $\\mathbb{R}$ 上存在且唯一。直观估计：$|y'| \\le |y| + 1$，于是 $(|y|)' \\le |y'| \\le |y| + 1$，由 Gronwall 型估计 $|y(t)| \\le (|y(0)| + 1)e^{t} - 1$，在任意有限时间段内解保持有限，不会爆破。非线性方程 $y' = y^2$ 中 $f$ 关于 $y$ 是二次增长的：$\\partial f/\\partial y = 2y$ 随 $|y|$ 一起变大，解一旦增大就增长得更快，形成正反馈，终将在有限时间爆破。这就是「线性增长保证整体存在、超线性增长允许有限时间爆破」的对照。"
+      }
+    ],
+    "tags": [
+      "最大存在区间",
+      "延拓",
+      "爆破",
+      "爆炸性替代"
+    ],
+    "links": [
+      "ode-existence-uniqueness",
+      "ode-continuous-dependence",
+      "ode-comparison",
+      "separable-ode",
+      "first-order-linear-ode"
+    ]
+  },
+  {
+    "id": "ode-continuous-dependence",
+    "title": "解对初值与参数的连续依赖性和可微性",
+    "titleEn": "Continuous Dependence on Initial Conditions and Parameters",
+    "branch": "ode",
+    "level": 5,
+    "summary": "解对初值与参数的连续依赖性由 Gronwall 不等式给出指数型误差控制；可微性由第一变分方程刻画，是适定性、灵敏度分析与打靶法的基石。",
+    "summaryEn": "Continuous dependence on initial data and parameters is quantified by Gronwall's inequality as exponential error control; differentiability is governed by the first variation equation — the basis of well-posedness, sensitivity analysis and shooting methods.",
+    "definition": "存在唯一性回答「解有没有」，**连续依赖**回答「初值的小扰动会不会被放大」。设 $y(t; y_0)$ 是初值问题 $y' = f(t,y),\\ y(t_0) = y_0$ 的解。连续依赖是说：对任意有限时间 $T > t_0$ 和任意精度 $\\varepsilon > 0$，存在 $\\delta > 0$，只要 $|y_0 - z_0| < \\delta$，就有 $|y(t; y_0) - y(t; z_0)| < \\varepsilon$ 对一切 $t \\in [t_0, T]$ 一致成立。存在、唯一、连续依赖三条合起来称为问题在 Hadamard 意义下**适定**——不适定的问题在数值上不可靠，物理上也难以立足。\n\n证明连续依赖的核心工具是 **Gronwall 引理**：设 $u(t)$ 连续，$\\alpha \\ge 0$ 为常数、$\\beta(t) \\ge 0$，且\n$$u(t) \\le \\alpha + \\int_{t_0}^{t} \\beta(s)\\, u(s)\\, ds,$$\n则 $u(t) \\le \\alpha \\exp\\left(\\int_{t_0}^{t} \\beta(s)\\, ds\\right)$。**$\\beta(t) \\ge 0$ 是关键前提，不能省**（它保证比较方程的解单调、估计成立）；$\\alpha \\ge 0$ 只是常见陈述中的附加假设——在本节应用中由 $\\alpha = |y_0 - z_0| \\ge 0$ 自动满足，而引理的结论对任意实数 $\\alpha$ 都成立。把两解之差 $u = |y - z|$ 代入，由李普希茨条件得 $u(t) \\le |y_0 - z_0| + L\\int_{t_0}^{t} u(s)\\,ds$，Gronwall 立刻给出指数型估计 $|y(t) - z(t)| \\le |y_0 - z_0|\\, e^{L(t - t_0)}$：初值误差最多按速率 $L$ 指数放大。\n\n更强的结论是**可微性**。当 $f$ 关于 $y$ 连续可微时，解对初值也连续可微，偏导数 $v(t) = \\partial y/\\partial y_0$ 满足**第一变分方程**（线性化方程）\n$$v' = f_y(t, y(t))\\, v, \\qquad v(t_0) = 1.$$\n对 $n$ 维方程组，$\\partial y/\\partial y_0$ 是矩阵 $\\Phi(t)$，满足 $\\Phi' = f_y(t, y(t))\\,\\Phi,\\ \\Phi(t_0) = I$，称为**基本解矩阵**。解对参数 $\\lambda$ 的依赖同样可微：$w = \\partial y/\\partial \\lambda$ 满足非齐次变分方程\n$$w' = f_y(t, y(t))\\, w + f_\\lambda, \\qquad w(t_0) = 0.$$\n两个方程都说明：解对数据的响应由沿已知解 $y(t)$ 的线性化方程控制。\n\n这些结论的意义超出理论：变分方程给出灵敏度系数，是参数辨识、牛顿打靶法与最优控制的基础；指数因子 $e^{L(t-t_0)}$ 表明长时间区间上的初值问题本质上是病态的，也解释了混沌系统可预报时间有限这一现象。接近爆破时灵敏度还会发散：$y'=y^2,\\ y(0)=y_0$ 的 $\\partial y/\\partial y_0 = (1-y_0 t)^{-2}$ 在爆破前趋于无穷——连续依赖仍然成立，但它的数值意义随长时间急剧退化，量化这种退化正是灵敏度分析的任务。",
+    "definitionEn": "Existence and uniqueness answer whether a solution exists; **continuous dependence** answers whether small perturbations of the data get amplified. Let $y(t;y_0)$ solve $y'=f(t,y)$, $y(t_0)=y_0$. Continuous dependence means: for every finite time $T>t_0$ and every tolerance $\\varepsilon>0$ there is $\\delta>0$ such that $|y_0-z_0|<\\delta$ implies $|y(t;y_0)-y(t;z_0)|<\\varepsilon$ for all $t\\in[t_0,T]$ simultaneously. Existence, uniqueness and continuous dependence together make the problem **well posed** in Hadamard's sense — ill-posed problems are numerically unreliable and physically meaningless.\n\nThe key tool is **Gronwall's lemma**: if $u(t)$ is continuous, $\\alpha\\ge0$ is a constant, $\\beta(t)\\ge0$, and\n$$u(t)\\le\\alpha+\\int_{t_0}^{t}\\beta(s)u(s)\\,ds,$$\nthen $u(t)\\le\\alpha\\exp\\left(\\int_{t_0}^{t}\\beta(s)\\,ds\\right)$. **The hypotheses $\\alpha\\ge0$ and $\\beta\\ge0$ cannot be dropped** — they make the comparison equation meaningful. Substituting the difference $u=|y-z|$ of two solutions and using the Lipschitz condition gives $u(t)\\le|y_0-z_0|+L\\int_{t_0}^t u(s)\\,ds$, and Gronwall yields the exponential estimate $|y(t)-z(t)|\\le|y_0-z_0|e^{L(t-t_0)}$: initial errors can grow at most exponentially, with rate $L$.\n\nA stronger conclusion is **differentiability**. If $f$ is continuously differentiable in $y$, the solution is continuously differentiable in the initial value, and $v(t)=\\partial y/\\partial y_0$ satisfies the **first variation equation**\n$$v'=f_y(t,y(t))v,\\qquad v(t_0)=1.$$\nFor an $n$-dimensional system, $\\partial y/\\partial y_0$ is a matrix $\\Phi(t)$ with $\\Phi'=f_y(t,y(t))\\Phi$, $\\Phi(t_0)=I$, the **fundamental matrix**. Dependence on a parameter $\\lambda$ is differentiable as well, with $w=\\partial y/\\partial\\lambda$ solving the inhomogeneous equation\n$$w'=f_y(t,y(t))w+f_\\lambda,\\qquad w(t_0)=0.$$\nBoth equations say that the response of the solution to its data is governed by the linearization along the already known solution $y(t)$.\n\nThe consequences go far beyond theory: the variational equations supply sensitivity coefficients, the basis of parameter identification, Newton shooting and optimal control; the factor $e^{L(t-t_0)}$ shows that initial value problems over long time intervals are intrinsically ill conditioned and limits predictability in chaotic systems. Near blow-up, sensitivity diverges: for $y'=y^2,\\ y(0)=y_0$, $\\partial y/\\partial y_0=(1-y_0t)^{-2}\\to\\infty$. Continuous dependence still holds, but its numerical content degrades — quantifying exactly this degradation is what sensitivity analysis does.",
+    "formulas": [
+      {
+        "latex": "u(t) \\le \\alpha + \\int_{t_0}^{t} \\beta(s)\\, u(s)\\, ds \\ \\Longrightarrow\\ u(t) \\le \\alpha \\exp\\left(\\int_{t_0}^{t} \\beta(s)\\, ds\\right)",
+        "note": "Gronwall 引理：关键是 $\\beta(t) \\ge 0$ 与 $u$ 连续（$\\alpha \\ge 0$ 是常见附加假设，结论对任意实数 $\\alpha$ 成立）；结论是精确的指数型增长控制。",
+        "noteEn": "Gronwall's lemma: the hypotheses $\\alpha\\ge0$, $\\beta(t)\\ge0$ and continuity of $u$ are essential; the conclusion is an exact exponential growth control."
+      },
+      {
+        "latex": "|y(t) - z(t)| \\le |y_0 - z_0|\\, e^{L\\,(t - t_0)} \\qquad (t \\ge t_0)",
+        "note": "连续依赖的定量估计：误差最多按李普希茨常数 $L$ 指数放大，$L$ 越小、区间越短，解越稳定。",
+        "noteEn": "Quantitative continuous dependence: the error is amplified at most at exponential rate $L$, the Lipschitz constant."
+      },
+      {
+        "latex": "v' = f_y(t, y(t))\\, v, \\qquad v(t_0) = 1, \\qquad v = \\frac{\\partial y}{\\partial y_0}",
+        "note": "解对初值的第一变分方程；方程组情形为矩阵形式 $\\Phi' = f_y \\Phi,\\ \\Phi(t_0) = I$，$\\Phi$ 是基本解矩阵。",
+        "noteEn": "First variation equation with respect to the initial value; for systems it reads $\\Phi'=f_y\\Phi$, $\\Phi(t_0)=I$ (the fundamental matrix)."
+      },
+      {
+        "latex": "w' = f_y(t, y(t))\\, w + f_\\lambda, \\qquad w(t_0) = 0, \\qquad w = \\frac{\\partial y}{\\partial \\lambda}",
+        "note": "解对参数的可微性：非齐次变分方程，源项 $f_\\lambda$ 描述参数如何直接进入方程。",
+        "noteEn": "Differentiability with respect to a parameter: an inhomogeneous variational equation whose source term $f_\\lambda$ describes how the parameter enters the equation."
+      },
+      {
+        "latex": "y' = a(t)\\, y \\ \\Longrightarrow\\ \\frac{\\partial y}{\\partial y_0} = \\exp\\left(\\int_{t_0}^{t} a(s)\\, ds\\right)",
+        "note": "线性特例：灵敏度等于解除以初值；指数中累积速率的正负决定放大还是衰减。",
+        "noteEn": "Linear special case: the sensitivity is the solution divided by its initial value; the accumulated rate in the exponent decides amplification or decay."
+      }
+    ],
+    "expression": {
+      "text": "初值差 |y₀ − z₀| ⇒ 解差 ≤ |y₀ − z₀|·e^(L|t − t₀|)",
+      "symbol": "v' = f_y(t, y(t))\\,v, \\quad v(t_0) = 1",
+      "note": "连续依赖给出定量的指数估计；可微性由第一变分方程描述，灵敏度在爆破附近发散。",
+      "noteEn": "Continuous dependence gives a quantitative exponential estimate; differentiability is described by the first variation equation, and sensitivity diverges near blow-up."
+    },
+    "properties": [
+      "Gronwall 引理的前提 $\\alpha \\ge 0$、$\\beta(t) \\ge 0$ 必须逐条验证；应用中 $u$ 通常取两个解之差的绝对值，天然非负。",
+      "连续依赖的证明只需要李普希茨条件；$f$ 在紧集上连续可微（从而 $f_y$ 有界）是最常用的充分条件。",
+      "解对初值可微时 $v = \\partial y/\\partial y_0 \\not\\equiv 0$，解映射是局部微分同胚——打靶法的收敛性、参数辨识与分支分析都以此为依据。",
+      "对参数可微时多出 $f_\\lambda$ 源项：即使参数不改变初值，也会沿解曲线持续注入扰动，$w$ 一般不为零。",
+      "灵敏度在奇性附近发散：$y'=y^2$ 的 $\\partial y/\\partial y_0 = (1-y_0 t)^{-2}$ 在爆破前趋于无穷，长区间上的数值预报本质上不稳定。"
+    ],
+    "propertiesEn": [
+      "The hypotheses $\\alpha\\ge0$ and $\\beta(t)\\ge0$ of Gronwall's lemma must be checked; in applications $u$ is the absolute value of a difference of solutions and is automatically nonnegative.",
+      "Continuous dependence needs only the Lipschitz condition; continuous differentiability of $f$ on compact sets (hence boundedness of $f_y$) is the usual sufficient condition.",
+      "When the solution is differentiable in the initial value, $v=\\partial y/\\partial y_0\\not\\equiv0$ and the solution map is a local diffeomorphism — the basis of shooting, parameter identification and bifurcation analysis.",
+      "For parameters there is an extra source term $f_\\lambda$: even if the parameter does not enter through the initial data, it keeps injecting perturbations along the solution, so $w$ is generally nonzero.",
+      "Sensitivity diverges near singularities: for $y'=y^2$, $\\partial y/\\partial y_0=(1-y_0t)^{-2}\\to\\infty$ before blow-up, so long-time numerical prediction is intrinsically unstable."
+    ],
+    "examples": [
+      {
+        "problem": "设 $y' = a(t)y$、$z' = a(t)z$ 满足 $y(t_0) = y_0$、$z(t_0) = z_0$，且 $|a(t)| \\le L$。用 Gronwall 不等式证明 $|y(t) - z(t)| \\le |y_0 - z_0|\\, e^{L(t - t_0)}$（$t \\ge t_0$）。",
+        "solution": "令 $u(t) = |y(t) - z(t)|$。两式相减得 $\\dfrac{d}{dt}(y - z) = a(t)\\,(y - z)$，即差函数本身满足同一个线性方程。写成积分形式：\n$$y(t) - z(t) = (y_0 - z_0) + \\int_{t_0}^{t} a(s)\\,[y(s) - z(s)]\\, ds.$$\n取绝对值并用 $|a(s)| \\le L$：\n$$u(t) \\le |y_0 - z_0| + L\\int_{t_0}^{t} u(s)\\, ds.$$\n这正是 Gronwall 引理（$\\alpha = |y_0 - z_0| \\ge 0$，$\\beta = L \\ge 0$），于是 $u(t) \\le |y_0 - z_0|\\, e^{L(t - t_0)}$。事实上本例的解可显式写出：$y(t) = y_0 E(t)$、$z(t) = z_0 E(t)$，其中 $E(t) = \\exp\\left(\\int_{t_0}^{t} a(s)\\,ds\\right)$，所以 $u = |y_0 - z_0|\\,|E(t)|$，而 $|E(t)| \\le e^{L(t-t_0)}$，与 Gronwall 的结论一致。"
+      },
+      {
+        "problem": "对 $y' = y^2,\\ y(0) = y_0 > 0$，求灵敏度 $\\partial y/\\partial y_0$，并验证它满足第一变分方程；说明它与爆破时刻的关系。",
+        "solution": "解为 $y = \\dfrac{y_0}{1 - y_0 t}$。直接求偏导：\n$$\\frac{\\partial y}{\\partial y_0} = \\frac{(1 - y_0 t) + y_0 t}{(1 - y_0 t)^2} = \\frac{1}{(1 - y_0 t)^2}.$$\n第一变分方程给出 $v' = 2y\\, v = \\dfrac{2y_0}{1 - y_0 t}\\, v$，$v(0) = 1$，解得\n$$v(t) = \\exp\\left(\\int_0^t \\frac{2y_0}{1 - y_0 s}\\, ds\\right) = \\exp\\left(-2\\ln(1 - y_0 t)\\right) = \\frac{1}{(1 - y_0 t)^2},$$\n与直接求导一致。当 $t \\to 1/y_0^-$（爆破时刻）时 $v \\to +\\infty$：越接近爆破，解对初值越敏感，这正是数值上难以可靠预报爆破时刻的原因。"
+      }
+    ],
+    "tags": [
+      "连续依赖",
+      "Gronwall 不等式",
+      "变分方程",
+      "灵敏度"
+    ],
+    "links": [
+      "ode-existence-uniqueness",
+      "ode-maximal-interval",
+      "ode-comparison",
+      "linear-ode-theory",
+      "stability"
+    ]
+  },
+  {
+    "id": "ode-comparison",
+    "title": "比较定理与微分不等式",
+    "titleEn": "Comparison Theorems and Differential Inequalities",
+    "branch": "ode",
+    "level": 5,
+    "summary": "比较定理：斜率函数有序、初值有序，解就永远有序。微分不等式与上解/下解把无法求解的方程夹在可解方程之间，是估计爆破时间与证明存在性的基本工具。",
+    "summaryEn": "The comparison theorem: ordered slope functions and ordered initial data keep solutions ordered. Differential inequalities and sub/supersolutions squeeze an unsolvable equation between two solvable ones — the basic tool for existence proofs and blow-up estimates.",
+    "definition": "**比较定理**（比较原理）是微分方程最朴素而有用的工具之一。设标量初值问题 $y' = f(x,y),\\ y(x_0) = y_0$ 与 $z' = g(x,z),\\ z(x_0) = z_0$ 在 $[x_0, X]$ 上都有解，斜率函数处处满足 $f(x,y) \\le g(x,y)$，初值满足 $y_0 \\le z_0$，那么在两者的公共存在区间上有 $y(x) \\le z(x)$；若初值严格，即 $y_0 < z_0$，则严格地有 $y(x) < z(x)$。直观说：「起点低、斜率小，就永远追不上。」注意结论只在 $x \\ge x_0$ 的前进方向成立，向回走不等号可能反转。\n\n定理最有用的形式是**微分不等式**。若 $y$ 只满足不等式 $y' \\le g(x,y)$（不必求出解），而 $z$ 是 $z' = g(x,z),\\ z(x_0) = z_0 \\ge y(x_0)$ 的解，则 $y(x) \\le z(x)$：这时 $y$ 称为**下解**（subsolution，被解从上方压住）。对称地，$y' \\ge g(x,y)$ 时 $y$ 称为**上解**（supersolution），方程解从下方被它压住。边值问题有完全平行的定义（例如 $L[y] \\ge 0$ 且满足边界不等式），上下解方法把它们粘成单调迭代序列，是证明非线性问题存在性、估计解的范围的标准手段。\n\n证明思路简短而典型：设 $w = z - y$，在首次可能出现 $w < 0$ 的点 $x_1$ 处有 $w(x_1) = 0$、$w'(x_1) \\le 0$；但由 $f \\le g$ 与连续性，\n$$w'(x_1) = g(x_1, z(x_1)) - f(x_1, y(x_1)) = g(x_1, y(x_1)) - f(x_1, y(x_1)) \\ge 0,$$\n矛盾。严格初值情形下「首次相交」的矛盾更强，所以两条解曲线根本不可能相交。\n\n最后是最重要的特例：把解的不等式与线性方程比较，就得到 **Gronwall 不等式**——误差估计（从而解对初值的连续依赖）的核心工具。可以说，比较定理是「用可解方程控制不可解方程」这一思想的统一表述。",
+    "definitionEn": "The **comparison theorem** is one of the most elementary and useful tools for differential equations. Let the scalar initial value problems $y'=f(x,y),\\ y(x_0)=y_0$ and $z'=g(x,z),\\ z(x_0)=z_0$ have solutions on $[x_0,X]$, suppose $f(x,y)\\le g(x,y)$ holds everywhere and $y_0\\le z_0$. Then $y(x)\\le z(x)$ on the common interval of existence; if the initial inequality is strict, $y_0<z_0$, then $y(x)<z(x)$. Intuitively: starting lower and with a smaller slope, you can never overtake. The conclusion holds in the forward direction $x\\ge x_0$; going backwards the inequality may flip.\n\nThe most useful form is a **differential inequality**. If $y$ merely satisfies $y'\\le g(x,y)$, and $z$ solves $z'=g(x,z),\\ z(x_0)=z_0\\ge y(x_0)$, then $y\\le z$: here $z$ is a **supersolution**. Symmetrically, $y'\\ge g(x,y)$ gives a **subsolution**. Boundary value problems have the same notions ($L[y]\\ge0$ plus suitable boundary inequalities), and the sub/supersolution method glues them into monotone iteration schemes that prove existence and localize solutions.\n\nThe proof is short and typical: let $w=z-y$. At a first point $x_1$ where $w$ could become negative we would have $w(x_1)=0$ and $w'(x_1)\\le0$; but by continuity and $f\\le g$,\n$$w'(x_1)=g(x_1,z(x_1))-f(x_1,y(x_1))=g(x_1,y(x_1))-f(x_1,y(x_1))\\ge0,$$\na contradiction. With a strict initial inequality the argument is even stronger, so the two curves can never meet.\n\nFinally, the most important special case: comparing with a linear equation yields **Gronwall's inequality**, the core tool of error estimation and hence of continuous dependence on initial data. In a phrase, the comparison theorem is the unified statement of the principle 'control an unsolvable equation by a solvable one'.",
+    "formulas": [
+      {
+        "latex": "f(x,y) \\le g(x,y), \\quad y(x_0) \\le z(x_0) \\ \\Longrightarrow\\ y(x) \\le z(x), \\qquad x \\ge x_0",
+        "note": "比较定理基本形式：结论在两者的公共存在区间上成立，且只对前进方向 $x \\ge x_0$ 成立。",
+        "noteEn": "Basic comparison: the conclusion holds on the common interval of existence, in the forward direction $x\\ge x_0$."
+      },
+      {
+        "latex": "y(x_0) < z(x_0) \\ \\Longrightarrow\\ y(x) < z(x), \\qquad x > x_0",
+        "note": "初值严格小则解严格小：两条解曲线永远不会相交，也不会相切。",
+        "noteEn": "A strict initial inequality gives a strict inequality: the solution curves never meet."
+      },
+      {
+        "latex": "y' \\le g(x,y), \\quad z' = g(x,z), \\quad y(x_0) \\le z(x_0) \\ \\Longrightarrow\\ y(x) \\le z(x)",
+        "note": "微分不等式形式：$y' \\le g(x,y)$ 时 $y$ 是**下解**（subsolution）；反之 $y' \\ge g(x,y)$ 时 $y$ 是**上解**（supersolution）。",
+        "noteEn": "Differential-inequality form: $y'\\le g(x,y)$ makes $y$ a subsolution; conversely $y'\\ge g(x,y)$ makes $y$ a supersolution."
+      },
+      {
+        "latex": "u' \\le \\beta u + \\alpha \\ \\Longrightarrow\\ u(t) \\le u(t_0)\\,e^{\\beta (t - t_0)} + \\frac{\\alpha}{\\beta}\\left(e^{\\beta (t - t_0)} - 1\\right)",
+        "note": "与线性方程比较得到的 Gronwall 型显式估计，用于 $\\beta > 0$、$\\alpha \\ge 0$；前提是 $\\beta \\ge 0$。",
+        "noteEn": "Comparison with a linear equation: the explicit Gronwall-type bound, valid for $\\beta>0$ with $\\alpha\\ge0$ and $\\beta\\ge0$."
+      },
+      {
+        "latex": "y' \\ge 0 \\ \\Rightarrow\\ y \\ \\text{单调不减}; \\qquad y' \\le 0 \\ \\Rightarrow\\ y \\ \\text{单调不增}",
+        "note": "最简微分不等式：把导数与常数 $0$ 作比较，得到单调性结论。",
+        "noteEn": "The simplest differential inequalities: comparison with the constant $0$ gives monotonicity."
+      }
+    ],
+    "expression": {
+      "text": "f(x,y) ≤ g(x,y)，y(x₀) ≤ z(x₀) ⇒ y(x) ≤ z(x)（x ≥ x₀）",
+      "symbol": "y' \\le g(x,y) \\ \\Rightarrow\\ y \\le z",
+      "note": "上解与下解把不等式转化为解的夹逼范围；Gronwall 不等式是线性情形。",
+      "noteEn": "Sub- and supersolutions turn inequalities into two-sided bounds for solutions; Gronwall's inequality is the linear case."
+    },
+    "properties": [
+      "保序性：初值有序且斜率函数有序，解就永远有序；同一方程时退化为唯一性——解曲线永不相交。",
+      "严格性：初值严格不等时结论严格；只取 $\\le$ 时两解可能在某点重合（例如初值相同的两个解完全重合）。",
+      "方向敏感：结论只对 $x \\ge x_0$ 成立；向回比较需要交换时间方向，不等号相应翻转。",
+      "上解/下解是存在性工具：从下解出发的单调迭代构造出解，同时给出解的逐项上界与先验估计。",
+      "爆破估计：若 $y \\ge z$ 且 $z$ 在时刻 $T$ 爆破，则 $y$ 也不能延拓过 $T$；反过来 $y \\le z$ 而 $z$ 爆破，推不出 $y$ 爆破——方向不能弄反。"
+    ],
+    "propertiesEn": [
+      "Order preservation: ordered initial data and ordered slope functions keep the solutions ordered; for a single equation this reduces to uniqueness — solution curves never cross.",
+      "Strictness: a strict initial inequality gives strict inequality; with a non-strict one the graphs may touch (equal data give the same solution).",
+      "Direction matters: the conclusion holds for $x\\ge x_0$; comparing backwards in time reverses the inequality.",
+      "Sub- and supersolutions are existence tools: monotone iteration starting from a subsolution constructs a solution together with one-sided bounds and a priori estimates.",
+      "Blow-up estimates: if $y\\ge z$ and $z$ blows up at time $T$, then $y$ cannot be continued past $T$; the reverse order proves nothing — the direction must not be flipped."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "0.5*y",
+      "xRange": [
+        0,
+        4
+      ],
+      "yRange": [
+        0,
+        8
+      ],
+      "initial": [
+        {
+          "x": 0,
+          "y": 1,
+          "color": "#4cc9f0",
+          "label": "y(0) = 1"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "color": "#ff6b9d",
+          "label": "y(0) = 3"
+        }
+      ],
+      "title": "y' = 0.5y：初值有序则解始终有序，两条解曲线永不相交（比较原理的最简情形）"
+    },
+    "examples": [
+      {
+        "problem": "设 $Y$ 是 $Y' = Y^2 + Y,\\ Y(0) = 1$ 的解。用比较定理证明它的爆破时刻 $T_* \\le 1$，再求精确解验证。",
+        "solution": "当 $Y \\ge 0$ 时 $Y^2 + Y \\ge Y^2$。令 $z$ 是 $z' = z^2,\\ z(0) = 1$ 的解，即 $z(x) = \\dfrac{1}{1 - x}$。由比较定理，在两者共同存在的区间上 $Y(x) \\ge z(x)$。当 $x \\to 1^-$ 时 $z(x) \\to +\\infty$，于是 $Y(x) \\ge z(x)$ 迫使 $Y$ 在 $x \\to 1^-$ 时也不能保持有限：若 $Y$ 能在 $x \\ge 1$ 处有定义，则由连续性 $Y(1)$ 是有限数，与 $Y(x) \\ge z(x) \\to +\\infty$ 矛盾。所以 $Y$ 的爆破时刻满足 $T_* \\le 1$。\n\n精确求解验证：$\\dfrac{dY}{Y(Y+1)} = dx$，部分分式 $\\dfrac{1}{Y(Y+1)} = \\dfrac{1}{Y} - \\dfrac{1}{Y+1}$，积分得 $\\ln\\dfrac{Y}{Y+1} = x + C$。由 $Y(0) = 1$ 得 $C = \\ln\\dfrac{1}{2}$，于是 $\\dfrac{Y}{Y+1} = \\dfrac{e^{x}}{2}$，解出 $Y = \\dfrac{e^{x}}{2 - e^{x}}$。当 $e^{x} \\to 2$ 即 $x \\to \\ln 2 \\approx 0.693$ 时 $Y \\to +\\infty$，所以 $T_* = \\ln 2 < 1$，与比较定理给出的上界一致。"
+      },
+      {
+        "problem": "有人从比较定理得出推理：「若 $z$ 在 $x = 1$ 爆破而 $y \\le z$，则 $y$ 也必在 $x = 1$ 之前爆破。」请用 $y' = y^2 e^{-x},\\ y(0) = 1$ 与 $z' = z^2,\\ z(0) = 1$ 的对比说明这个推理错在哪里。",
+        "solution": "先核对假设：对 $x \\ge 0$，$y^2 e^{-x} \\le y^2$，且初值相同，所以比较定理给出 $y(x) \\le z(x) = \\dfrac{1}{1-x}$。但 $y$ 本身可积：$\\dfrac{dy}{y^2} = e^{-x}\\,dx$，积分得 $-\\dfrac{1}{y} = -e^{-x} + C$，由 $y(0) = 1$ 得 $C = 0$，即 $y = e^{x}$，在整个 $\\mathbb{R}$ 上存在。可见**上解爆破并不强制被控解爆破**：比较定理只给出单侧的界。要断言爆破，必须再找一个同样爆破的**下解**把解从下方夹住（如例题 1 所做的那样）。"
+      }
+    ],
+    "tags": [
+      "比较定理",
+      "微分不等式",
+      "上下解",
+      "爆破估计"
+    ],
+    "links": [
+      "ode-maximal-interval",
+      "ode-continuous-dependence",
+      "ode-existence-uniqueness",
+      "stability",
+      "maximum-principle"
+    ]
+  },
+  {
+    "id": "ode-boundary-value",
+    "title": "常微分方程的边值问题",
+    "titleEn": "Boundary Value Problems for Ordinary Differential Equations",
+    "branch": "ode",
+    "level": 5,
+    "summary": "条件加在区间两端的边值问题：解可能不存在、唯一存在或有无穷多个；特征值 λₙ = (nπ/L)² 刻画共振，格林函数与弗雷德霍姆二择一是求解与判定的核心工具。",
+    "summaryEn": "Boundary value problems place conditions at both ends of an interval: a solution may fail to exist, be unique, or form an infinite family. Eigenvalues λₙ=(nπ/L)² mark resonance; Green's functions and the Fredholm alternative are the main tools.",
+    "definition": "**边值问题**（boundary value problem, BVP）把定解条件分别加在区间两端，典型形式为 $y'' = f(x, y, y'),\\ y(a) = \\alpha,\\ y(b) = \\beta$。这与初值问题（在同一端给定 $y$ 与 $y'$）有本质区别：初值问题在 $f$ 光滑时局部总有唯一解，而边值问题可能**无解、有唯一解、或有无穷多解**——两端的条件可以彼此「不兼容」。\n\n最短的模型是**特征值问题** $y'' + \\lambda y = 0,\\ y(0) = y(L) = 0$。当 $\\lambda = \\lambda_n = (n\\pi/L)^2$（$n = 1, 2, \\dots$）时，$y_n = \\sin(n\\pi x/L)$ 及其任意常数倍都是解；对其它的 $\\lambda$ 只有零解。这些特殊的 $\\lambda$ 是**特征值**，$y_n$ 是**特征函数**——它们对应「两端被钉住的弦」允许的驻波频率。更一般的 Sturm–Liouville 问题 $(p y')' + (\\lambda w - q)y = 0$（配分离边界条件）保持同一套结论：特征值实、可数、单重、递增趋于 $+\\infty$；特征函数带权 $w$ 正交且完备，可以像傅里叶级数一样展开任意函数。\n\n非齐次边值问题的可解性由 **Fredholm 二择一** 控制。以 $y'' + \\lambda y = f(x)$、零边值条件为例：若 $\\lambda$ 不是特征值，则对任意 $f$ 都有唯一解；若 $\\lambda = \\lambda_n$，则问题可解当且仅当 $f$ 与对应特征函数**正交**，即 $\\int_0^L f(x)\\sin(n\\pi x/L)\\,dx = 0$，此时解有无穷多个，任意两个之差都是特征函数的倍数。这是「共振」的数学表达：强迫项若与系统的固有振型有非零投影，系统就无法被它驱动到平衡。\n\n存在唯一时，线性边值问题的解可以写成**格林函数**的积分：$y(x) = \\int_0^L G(x,\\xi)\\,f(\\xi)\\,d\\xi$，其中 $G$ 由 $-\\partial_x^2 G = \\delta(x - \\xi)$ 与齐次边值条件唯一确定，自伴情形下还对称：$G(x,\\xi) = G(\\xi,x)$。例如 $-y'' = f$、$y(0) = y(L) = 0$ 对应 $G(x,\\xi) = \\dfrac{\\min(x,\\xi)\\,\\bigl(L - \\max(x,\\xi)\\bigr)}{L}$。数值上常用**打靶法**：把未知的初始斜率 $s$ 当作参数求解初值问题，再用牛顿法调整 $s$ 使远端边界条件满足——收敛性依赖解对参数的可微性（变分方程）。非线性边值问题还可能有多解（分岔），需要用上下解或分支追踪来分析。",
+    "definitionEn": "A **boundary value problem** (BVP) places the conditions at the two ends of an interval: $y''=f(x,y,y')$, $y(a)=\\alpha$, $y(b)=\\beta$. This differs fundamentally from an initial value problem (where $y$ and $y'$ are given at one point): with a smooth $f$ an IVP always has a unique local solution, while a BVP may have **no solution, exactly one solution, or infinitely many** — the two endpoint conditions may be incompatible.\n\nThe shortest model is the **eigenvalue problem** $y''+\\lambda y=0$, $y(0)=y(L)=0$. When $\\lambda=\\lambda_n=(n\\pi/L)^2$ ($n=1,2,\\dots$), $y_n=\\sin(n\\pi x/L)$ and its multiples are solutions; for all other $\\lambda$ only the zero solution exists. These special $\\lambda$ are **eigenvalues** and the nonzero solutions **eigenfunctions** — the standing-wave frequencies of a string pinned at both ends. A general Sturm–Liouville problem $(py')'+(\\lambda w-q)y=0$ with separated boundary conditions obeys the same conclusions: eigenvalues real, countable, simple and increasing to infinity; eigenfunctions orthogonal with weight $w$ and complete, so any function expands in them like a Fourier series.\n\nSolvability of inhomogeneous problems is governed by the **Fredholm alternative**. For $y''+\\lambda y=f(x)$ with zero boundary conditions: if $\\lambda$ is not an eigenvalue there is a unique solution for every $f$; if $\\lambda=\\lambda_n$ the problem is solvable exactly when $f$ is **orthogonal** to the eigenfunction, $\\int_0^L f(x)\\sin(n\\pi x/L)\\,dx=0$, and then there are infinitely many solutions, any two differing by a multiple of the eigenfunction. This is resonance: an external force with a nonzero projection on a natural mode cannot be balanced.\n\nWhen the solution is unique, it can be packaged as a **Green's function** integral: $y(x)=\\int_0^L G(x,\\xi)f(\\xi)\\,d\\xi$, where $G$ is determined by $-\\partial_x^2G=\\delta(x-\\xi)$ together with the homogeneous boundary conditions and is symmetric, $G(x,\\xi)=G(\\xi,x)$, in the self-adjoint case; for $-y''=f$ with $y(0)=y(L)=0$, $G(x,\\xi)=\\min(x,\\xi)(L-\\max(x,\\xi))/L$. Numerically one often uses the **shooting method**: treat the unknown initial slope $s$ as a parameter, solve the IVP, and use Newton's method to enforce the far boundary condition — its convergence relies on differentiability with respect to the parameter (the variational equation). Nonlinear BVPs can have several solutions and require sub/supersolutions or bifurcation tracking.",
+    "formulas": [
+      {
+        "latex": "y'' + \\lambda y = 0, \\quad y(0) = y(L) = 0 \\ \\Longrightarrow\\ \\lambda_n = \\left(\\frac{n\\pi}{L}\\right)^{2}, \\quad y_n(x) = \\sin\\frac{n\\pi x}{L}, \\quad n = 1, 2, \\dots",
+        "note": "特征值问题的全部解：非平凡解只出现在 $\\lambda_n = (n\\pi/L)^2$，特征函数是半波长整数倍的正弦。",
+        "noteEn": "Complete solution of the eigenvalue problem: nontrivial solutions occur exactly at $\\lambda_n=(n\\pi/L)^2$, with eigenfunctions $\\sin(n\\pi x/L)$."
+      },
+      {
+        "latex": "y'' + \\lambda_n y = f, \\quad y(0) = y(L) = 0 \\ \\text{ 有解} \\iff \\int_0^L f(x)\\,\\sin\\frac{n\\pi x}{L}\\,dx = 0",
+        "note": "共振情形的可解性：右端必须与特征函数正交；条件满足时解有无穷多个（相差一个齐次解）。",
+        "noteEn": "Resonant solvability: the forcing must be orthogonal to the eigenfunction; when it is, there are infinitely many solutions (differing by a homogeneous solution)."
+      },
+      {
+        "latex": "L[y] = f: \\qquad \\ker L = \\{0\\} \\Rightarrow \\text{唯一解}; \\qquad \\ker L \\neq \\{0\\} \\Rightarrow y \\text{ 存在} \\iff f \\perp \\ker L^{*}",
+        "note": "Fredholm 二择一（自伴时 $L^{*} = L$）：齐次问题是否只有零解，决定非齐次问题的可解性与唯一性。",
+        "noteEn": "The Fredholm alternative (self-adjoint case $L^*=L$): whether the homogeneous problem has only the trivial solution decides solvability and uniqueness."
+      },
+      {
+        "latex": "y(x) = \\int_0^L G(x,\\xi)\\, f(\\xi)\\, d\\xi, \\qquad G(x,\\xi) = \\frac{\\min(x,\\xi)\\,\\bigl(L - \\max(x,\\xi)\\bigr)}{L}",
+        "note": "$-y'' = f$、零边值问题的格林函数解：点源响应的叠加；$G$ 对称、连续、分段线性。",
+        "noteEn": "Green's function representation for $-y''=f$ with zero boundary data: superposition of point sources; $G$ is symmetric, continuous and piecewise linear."
+      },
+      {
+        "latex": "\\int_0^L \\sin\\frac{m\\pi x}{L}\\,\\sin\\frac{n\\pi x}{L}\\,dx = 0 \\quad (m \\neq n), \\qquad \\int_0^L \\sin^{2}\\frac{n\\pi x}{L}\\,dx = \\frac{L}{2}",
+        "note": "特征函数正交性：展开系数与 Fredholm 正交条件都来自它；范数平方为 $L/2$。",
+        "noteEn": "Orthogonality of eigenfunctions: the source of both expansion coefficients and the Fredholm orthogonality condition; the squared norm is $L/2$."
+      }
+    ],
+    "expression": {
+      "text": "y'' + λy = 0, y(0) = y(L) = 0 ⇒ λₙ = (nπ/L)²，yₙ = sin(nπx/L)",
+      "symbol": "\\lambda_n = \\left(\\frac{n\\pi}{L}\\right)^{2}",
+      "note": "与初值问题不同，边值问题无解、唯一解、无穷多解都可能出现；判别标准是 $\\lambda$ 是否为特征值。",
+      "noteEn": "Unlike initial value problems, a BVP may have no solution, a unique solution, or infinitely many; the criterion is whether $\\lambda$ is an eigenvalue."
+    },
+    "properties": [
+      "三择一：给定 $f$ 的线性边值问题三种结局都可能——以 $y''+\\lambda y=f$ 为例，$\\lambda$ 非特征值时为唯一解，$\\lambda$ 为特征值时由 $f$ 是否与特征函数正交决定无解或无穷多解。",
+      "特征值结构：$\\lambda_n = (n\\pi/L)^2$ 可数、单重、递增趋于无穷；第 $n$ 个特征函数在 $(0,L)$ 内恰有 $n-1$ 个零点（振动定理）。",
+      "Sturm–Liouville 性质：一般正则问题的特征值实、可数、趋于无穷，特征函数带权 $w$ 正交且完备，可作广义傅里叶展开。",
+      "Fredholm 二择一：$\\lambda$ 非特征值 ⇒ 对一切 $f$ 唯一可解（可用格林函数写出）；$\\lambda$ 为特征值 ⇒ 需正交条件，满足时解为一族 $y_p + c\\,y_n$。",
+      "求解与数值：解析上可用格林函数或特征函数展开；打靶法把边值问题化为带参数的初值问题，牛顿迭代依赖解对参数的可微性；非线性问题可以有多解与分岔。"
+    ],
+    "propertiesEn": [
+      "Trichotomy: for a given $f$ all three outcomes are possible — for $y''+\\lambda y=f$, a non-eigenvalue $\\lambda$ gives a unique solution, while $\\lambda$ an eigenvalue leads to no solution or infinitely many depending on whether $f$ meets the orthogonality condition.",
+      "Eigenvalue structure: $\\lambda_n=(n\\pi/L)^2$ are countable, simple and increase to infinity; the $n$-th eigenfunction has exactly $n-1$ zeros in $(0,L)$ (oscillation theorem).",
+      "Sturm–Liouville theory: for a regular problem the eigenvalues are real, countable and unbounded, and the eigenfunctions are orthogonal with weight $w$ and complete, giving generalized Fourier expansions.",
+      "Fredholm alternative: a non-eigenvalue $\\lambda$ gives unique solvability for every $f$ (via Green's function); an eigenvalue $\\lambda$ requires the orthogonality condition, and then the solutions form the family $y_p+c\\,y_n$.",
+      "Methods: Green's functions and eigenfunction expansions solve linear BVPs analytically; shooting reduces a BVP to a parametrized IVP, Newton's iteration relying on differentiability in the parameter; nonlinear BVPs may have multiple solutions and bifurcations."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "sin x（λ = 1）"
+        },
+        {
+          "expr": "sin(2*x)",
+          "color": "#ff6b9d",
+          "label": "sin 2x（λ = 4）"
+        },
+        {
+          "expr": "sin(3*x)",
+          "color": "#ffd166",
+          "label": "sin 3x（λ = 9）"
+        }
+      ],
+      "xRange": [
+        0,
+        3.2
+      ],
+      "yRange": [
+        -1.2,
+        1.2
+      ],
+      "title": "y'' + λy = 0, y(0) = y(π) = 0 的前三个特征函数：sin x、sin 2x、sin 3x（特征值 λ = n²）"
+    },
+    "examples": [
+      {
+        "problem": "求特征值问题 $y'' + \\lambda y = 0,\\ y(0) = y(\\pi) = 0$ 的所有特征值与特征函数，并直接验证 $\\sin x$ 与 $\\sin 2x$ 正交。",
+        "solution": "按 $\\lambda$ 的符号讨论。$\\lambda = -\\mu^2 < 0$：通解为 $A e^{\\mu x} + B e^{-\\mu x}$，边值条件给出 $A + B = 0$ 与 $A e^{\\mu\\pi} + B e^{-\\mu\\pi} = 0$，解得 $A = B = 0$，只有零解。$\\lambda = 0$：通解为 $Ax + B$，边值条件同样迫使 $A = B = 0$。$\\lambda = \\omega^2 > 0$：通解为 $A\\sin\\omega x + B\\cos\\omega x$；$y(0) = 0$ 给 $B = 0$，$y(\\pi) = A\\sin(\\omega\\pi) = 0$，非平凡解要求 $\\sin(\\omega\\pi) = 0$，即 $\\omega = n \\in \\{1, 2, \\dots\\}$。所以特征值为 $\\lambda_n = n^2$，特征函数为 $y_n = \\sin nx$。\n\n正交性验证（积化和差）：\n$$\\int_0^{\\pi}\\sin x\\,\\sin 2x\\,dx = \\frac{1}{2}\\int_0^{\\pi}\\bigl[\\cos x - \\cos 3x\\bigr]dx = \\frac{1}{2}\\left[\\sin x - \\frac{\\sin 3x}{3}\\right]_0^{\\pi} = 0.$$"
+      },
+      {
+        "problem": "用 Fredholm 二择一判定下列边值问题的可解性并求解集：$(1)\\ y'' + y = \\sin x,\\ y(0) = y(\\pi) = 0$；$(2)\\ y'' + y = \\sin 2x,\\ y(0) = y(\\pi) = 0$。",
+        "solution": "这里 $\\lambda = 1 = \\lambda_1$ 是特征值，对应特征函数 $\\varphi_1 = \\sin x$。\n\n(1) 右端 $f = \\sin x$ 不满足正交条件：$\\int_0^{\\pi}\\sin x \\cdot \\sin x\\,dx = \\dfrac{\\pi}{2} \\neq 0$，所以**无解**。也可以直接验证：若解存在，用 $\\sin x$ 乘方程两端并在 $[0,\\pi]$ 上分部积分，利用零边值条件可得 $\\int_0^{\\pi}(y'' + y)\\sin x\\,dx = 0$，于是必须有 $\\int_0^{\\pi} f \\sin x\\,dx = 0$，与 $\\pi/2 \\neq 0$ 矛盾。\n\n(2) 右端 $f = \\sin 2x$ 与 $\\varphi_1$ 正交：$\\int_0^{\\pi}\\sin 2x\\,\\sin x\\,dx = 0$，所以**有无穷多解**。求特解：设 $y_p = C\\sin 2x$，代入得 $-4C\\sin 2x + C\\sin 2x = \\sin 2x$，故 $C = -\\dfrac{1}{3}$。通解为 $y = A\\sin x + B\\cos x - \\dfrac{1}{3}\\sin 2x$；由 $y(0) = 0$ 得 $B = 0$，而 $y(\\pi) = 0$ 自动满足。最终解集为 $y = A\\sin x - \\dfrac{1}{3}\\sin 2x$（$A$ 任意），即一维仿射空间 $y_p + \\operatorname{span}\\{\\sin x\\}$。"
+      }
+    ],
+    "tags": [
+      "边值问题",
+      "特征值",
+      "格林函数",
+      "Fredholm 二择一"
+    ],
+    "links": [
+      "sturm-liouville",
+      "green-function",
+      "fredholm-alternative",
+      "fourier-series",
+      "ode-existence-uniqueness"
+    ]
+  }
+]

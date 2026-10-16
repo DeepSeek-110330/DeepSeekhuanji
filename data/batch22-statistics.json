@@ -1,0 +1,713 @@
+[
+  {
+    "id": "statistics-sampling",
+    "title": "总体、样本与统计量",
+    "titleEn": "Population, Sample and Statistics",
+    "branch": "probability",
+    "level": 3,
+    "summary": "总体是研究对象的全体及其分布，简单随机样本是独立同分布地抽出的观测，统计量则是不含未知参数的样本函数——统计推断的一切都从这三个概念出发。",
+    "summaryEn": "The population is the whole collection of objects of study with its distribution, a simple random sample consists of i.i.d. observations, and a statistic is a sample function free of unknown parameters; all of statistical inference starts here.",
+    "definition": "把所有研究对象的全体称为**总体**，组成总体的每个对象称为**个体**。实际研究中更关心对象的某个数量指标 $X$（如灯泡寿命、植株高度），因此常说「总体 $X$」：它既是一切可能取值的集合，也带着自己的分布函数 $F(x)$。个体个数有限时称有限总体，否则称无限总体。抽样之前谁会被抽中是随机的，所以每次观测的结果都是随机变量。\n\n从总体中按机会均等的方式抽取 $n$ 个个体，得到 $X_1,\\dots,X_n$。若每个 $X_i$ 都与总体 $X$ 同分布，并且 $X_1,\\dots,X_n$ **相互独立**，就称它们是容量为 $n$ 的**简单随机样本**，简称样本。这两条要求合起来就是「独立同分布」，记作 $X_i\\;\\text{i.i.d.}\\sim F$。独立性保证各次观测互不影响，同分布保证每次观测都来自同一个总体——这正是对「随机抽取」的数学刻画。抽样后得到的一组具体数值 $x_1,\\dots,x_n$ 称为**样本观测值**。\n\n不含任何未知参数的样本函数称为**统计量**。例如 $X_1+\\cdots+X_n$、$\\bar X$、$\\max\\{X_i\\}$ 都是统计量；而 $\\frac{\\bar X-\\mu}{\\sigma/\\sqrt n}$ 在 $\\mu,\\sigma$ 未知时含有未知参数，它不是统计量。统计量抽样前是随机变量、抽样后是数。整个数理统计的基本思路可以概括为：用统计量（及其抽样分布）去推断总体的未知特征。",
+    "definitionEn": "The whole collection of all objects of study is called the **population**, and each object in it an **individual**. In practice one studies a numerical characteristic $X$ of the objects (lifetime, height, ...), so people speak of the population $X$: both the set of all possible values and its distribution function $F(x)$. A population is finite or infinite according to whether the number of individuals is finite. Before sampling it is random who will be drawn, hence every observation is a random variable.\n\nDrawing $n$ individuals from the population in an equal-chance way gives $X_1,\\dots,X_n$. If every $X_i$ has the same distribution as $X$ and $X_1,\\dots,X_n$ are **mutually independent**, they form a **simple random sample** of size $n$. The two requirements together are called independent and identically distributed (i.i.d.), written $X_i\\;\\text{i.i.d.}\\sim F$: independence says the observations do not influence each other, identical distribution says they all come from one population — the mathematical description of random drawing. The concrete numbers $x_1,\\dots,x_n$ obtained afterwards are the **sample observations**.\n\nA function of the sample that contains no unknown parameter is called a **statistic**. For instance $X_1+\\cdots+X_n$, $\\bar X$ and $\\max\\{X_i\\}$ are statistics, while $\\frac{\\bar X-\\mu}{\\sigma/\\sqrt n}$ is not a statistic when $\\mu,\\sigma$ are unknown. A statistic is a random variable before sampling and a number afterwards. The whole of statistics can be summarised as: use statistics, and their sampling distributions, to infer unknown features of the population.",
+    "formulas": [
+      {
+        "latex": "\\bar X=\\frac{1}{n}\\sum_{i=1}^{n}X_i",
+        "note": "样本均值：样本的重心，用来估计总体均值 μ。",
+        "noteEn": "Sample mean: the centre of gravity of the data, used to estimate the population mean μ."
+      },
+      {
+        "latex": "S^2=\\frac{1}{n-1}\\sum_{i=1}^{n}(X_i-\\bar X)^2",
+        "note": "【关键】样本方差的分母是 n−1 而不是 n，这样才有 E(S²)=σ²，是无偏估计；写成 n 就会系统性低估 σ²。",
+        "noteEn": "Key point: the sample variance divides by n−1, not by n, so that E(S²)=σ² and the estimator is unbiased; dividing by n would systematically underestimate σ²."
+      },
+      {
+        "latex": "E(S^2)=\\sigma^2",
+        "note": "无偏性：在独立同分布样本下，样本方差的期望恰好等于总体方差。",
+        "noteEn": "Unbiasedness: for an i.i.d. sample the expectation of the sample variance equals the population variance."
+      },
+      {
+        "latex": "X_1,\\dots,X_n\\ \\text{i.i.d.}\\sim F(x)",
+        "note": "简单随机样本的独立同分布假设，F 为总体分布函数。",
+        "noteEn": "The i.i.d. assumption of a simple random sample; F is the population distribution function."
+      },
+      {
+        "latex": "\\sum_{i=1}^{n}(X_i-\\bar X)^2=\\sum_{i=1}^{n}X_i^2-n\\bar X^2",
+        "note": "计算样本方差时的常用简化公式：先算平方和，再减去 nX̄²。",
+        "noteEn": "A handy identity for computing the sample variance: sum of squares minus n times the squared mean."
+      }
+    ],
+    "properties": [
+      "简单随机样本要求独立同分布：各次观测互不影响，且都来自同一个总体分布。",
+      "统计量只能由样本构成，不能含任何未知参数；含未知参数的样本函数不是统计量。",
+      "样本均值 X̄ 与样本方差 S² 是最常用的两个统计量，分别刻画数据的中心位置与离散程度。",
+      "由大数定律，样本矩（如 X̄）依概率收敛到相应的总体矩，这是矩估计的根据。",
+      "样本方差分母取 n−1 才无偏；若取 n，则 E=((n−1)/n)σ²<σ²，平均总偏低。"
+    ],
+    "propertiesEn": [
+      "A simple random sample must be i.i.d.: the observations do not influence one another and all come from the same population distribution.",
+      "A statistic may only involve the sample and must contain no unknown parameter; a sample function containing unknown parameters is not a statistic.",
+      "The sample mean X̄ and the sample variance S² are the two most used statistics, describing centre and spread of the data.",
+      "By the law of large numbers, sample moments such as X̄ converge in probability to the corresponding population moments, which justifies the method of moments.",
+      "Dividing by n−1 makes S² unbiased; dividing by n gives expectation ((n−1)/n)σ², an average underestimate of σ²."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "color": "#4cc9f0",
+          "label": "总体 N(0,1)"
+        },
+        {
+          "expr": "2*exp(-2*x^2)/sqrt(2*PI)",
+          "color": "#06d6a0",
+          "label": "X̄, n=4"
+        },
+        {
+          "expr": "4*exp(-8*x^2)/sqrt(2*PI)",
+          "color": "#ff6b9d",
+          "label": "X̄, n=16"
+        }
+      ],
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        0,
+        1.8
+      ],
+      "title": "样本均值的抽样分布：n 越大越集中"
+    },
+    "examples": [
+      {
+        "problem": "设总体 $X\\sim N(50,4^2)$，从中抽取容量 $n=16$ 的简单随机样本。求 $E(\\bar X)$、$D(\\bar X)$，并求 $P(\\bar X>52)$。",
+        "solution": "由独立同分布，$E(\\bar X)=\\mu=50$，$D(\\bar X)=\\dfrac{\\sigma^2}{n}=\\dfrac{16}{16}=1$，即 $\\bar X\\sim N(50,1)$。于是\n$$P(\\bar X>52)=1-\\Phi(2)\\approx 0.0228,$$\n其中 $\\Phi$ 为标准正态分布函数：样本均值超过 52 的概率约为 2.3%。"
+      },
+      {
+        "problem": "对样本观测值 $2,4,4,4,5,5,7,9$ 计算样本均值 $\\bar X$ 与样本方差 $S^2$。",
+        "solution": "$\\bar X=\\dfrac{2+4+4+4+5+5+7+9}{8}=\\dfrac{40}{8}=5$。用简化公式 $\\sum X_i^2=232$，得\n$$\\sum_{i=1}^{8}(X_i-\\bar X)^2=232-8\\times 5^2=32,$$\n所以 $S^2=\\dfrac{32}{8-1}=\\dfrac{32}{7}\\approx 4.571$，样本标准差 $S\\approx 2.138$。（注意分母是 $n-1=7$，不是 8。）"
+      }
+    ],
+    "tags": [
+      "统计",
+      "抽样",
+      "样本均值",
+      "样本方差"
+    ],
+    "links": [
+      "probability-basics",
+      "random-variable",
+      "expectation-variance",
+      "sampling-distributions",
+      "central-limit-theorem"
+    ]
+  },
+  {
+    "id": "sampling-distributions",
+    "title": "抽样分布与三大分布",
+    "titleEn": "Sampling Distributions",
+    "branch": "probability",
+    "level": 5,
+    "summary": "统计量的分布叫抽样分布；正态总体下样本均值与样本方差分别服从正态与 χ² 分布、二者独立，并由此生成 t 与 F 分布——它们是区间估计与假设检验的概率基础。",
+    "summaryEn": "The distribution of a statistic is a sampling distribution; for normal populations the sample mean and variance are normal and χ², are independent, and generate the t and F distributions — the basis of interval estimation and testing.",
+    "definition": "统计量的分布称为**抽样分布**。它一般依赖于总体分布与样本容量 $n$，是区间估计与假设检验的概率基础。正态总体下有三个由标准正态出发构造的分布最为重要，合称三大分布。\n\n**χ² 分布**：设 $Z_1,\\dots,Z_n$ 独立同服从 $N(0,1)$，则 $\\chi^2=Z_1^2+\\cdots+Z_n^2$ 服从自由度为 $n$ 的 χ² 分布，记作 $\\chi^2(n)$。它是 $n$ 个独立标准正态变量的平方和，取值非负、分布右偏，自由度就是平方项的个数。\n\n**t 分布**：设 $Z\\sim N(0,1)$，且 $\\chi^2(n)$ 与 $Z$ 独立，则 $t=\\dfrac{Z}{\\sqrt{\\chi^2(n)/n}}$ 服从自由度为 $n$ 的 t 分布，记作 $t(n)$。它相当于把正态变量用它自己的、带随机性的尺度去标准化：关于 0 对称，峰值更低、尾部更厚，$n\\to\\infty$ 时趋于 $N(0,1)$。\n\n**F 分布**：若 $\\chi^2(m)$ 与 $\\chi^2(n)$ 独立，则 $F=\\dfrac{\\chi^2(m)/m}{\\chi^2(n)/n}$ 服从分子自由度 $m$、分母自由度 $n$ 的 F 分布，记作 $F(m,n)$。凡是两个方差之比的问题，都由它来处理。\n\n**关键结论**：设 $X_1,\\dots,X_n$ 是来自正态总体 $N(\\mu,\\sigma^2)$ 的简单随机样本，则\n$$\\bar X\\sim N\\!\\left(\\mu,\\frac{\\sigma^2}{n}\\right),\\qquad \\frac{(n-1)S^2}{\\sigma^2}\\sim\\chi^2(n-1),$$\n并且 $\\bar X$ 与 $S^2$ **相互独立**。独立性是正态总体特有的奇迹；把前两条与独立性结合起来，立即得到 $t=\\dfrac{\\bar X-\\mu}{S/\\sqrt n}\\sim t(n-1)$——这正是 σ 未知时构造区间估计与检验的入口。",
+    "definitionEn": "The distribution of a statistic is called a **sampling distribution**. It generally depends on the population distribution and the sample size $n$, and it is the probabilistic foundation of interval estimation and hypothesis testing. For normal populations three distributions built from the standard normal matter most, collectively called the three great distributions.\n\n**χ² distribution**: if $Z_1,\\dots,Z_n$ are i.i.d. $N(0,1)$, then $\\chi^2=Z_1^2+\\cdots+Z_n^2$ has the χ² distribution with $n$ degrees of freedom, written $\\chi^2(n)$: a sum of $n$ squared independent standard normal variables, non-negative and right-skewed, one degree of freedom per square.\n\n**t distribution**: if $Z\\sim N(0,1)$ and $\\chi^2(n)$ is independent of $Z$, then $t=\\dfrac{Z}{\\sqrt{\\chi^2(n)/n}}$ follows the t distribution with $n$ degrees of freedom, $t(n)$. It standardises a normal variable with its own random scale: symmetric about 0, lower peak and heavier tails than $N(0,1)$, approaching normal as $n\\to\\infty$.\n\n**F distribution**: if $\\chi^2(m)$ and $\\chi^2(n)$ are independent, then $F=\\dfrac{\\chi^2(m)/m}{\\chi^2(n)/n}$ follows the F distribution with numerator degrees of freedom $m$ and denominator degrees of freedom $n$, written $F(m,n)$. It is the tool for ratios of two variances.\n\n**Key result**: let $X_1,\\dots,X_n$ be a simple random sample from $N(\\mu,\\sigma^2)$. Then $\\bar X\\sim N(\\mu,\\sigma^2/n)$, $\\dfrac{(n-1)S^2}{\\sigma^2}\\sim\\chi^2(n-1)$, and $\\bar X$ and $S^2$ are **independent** — a miracle special to the normal population. Combining these facts yields at once $t=\\dfrac{\\bar X-\\mu}{S/\\sqrt n}\\sim t(n-1)$, the gateway to inference about μ when σ is unknown.",
+    "formulas": [
+      {
+        "latex": "\\chi^2=Z_1^2+\\cdots+Z_n^2\\sim\\chi^2(n),\\qquad Z_i\\ \\text{i.i.d.}\\sim N(0,1)",
+        "note": "χ²(n) 的定义：n 个独立标准正态变量的平方和。",
+        "noteEn": "Definition of χ²(n): a sum of n squared independent standard normal variables."
+      },
+      {
+        "latex": "t=\\frac{Z}{\\sqrt{\\chi^2(n)/n}}\\sim t(n)",
+        "note": "t 分布的定义，其中 Z 与 χ²(n) 相互独立。",
+        "noteEn": "Definition of the t distribution, with Z and χ²(n) independent."
+      },
+      {
+        "latex": "F=\\frac{\\chi^2(m)/m}{\\chi^2(n)/n}\\sim F(m,n)",
+        "note": "F 分布的定义：两个独立 χ² 变量各自除以自由度后相比。",
+        "noteEn": "Definition of the F distribution: two independent χ² variables, each divided by its own degrees of freedom."
+      },
+      {
+        "latex": "\\bar X\\sim N\\!\\left(\\mu,\\frac{\\sigma^2}{n}\\right),\\qquad \\frac{(n-1)S^2}{\\sigma^2}\\sim\\chi^2(n-1)",
+        "note": "正态总体下的两个精确分布；且 X̄ 与 S² 相互独立。",
+        "noteEn": "The two exact distributions for a normal population; moreover X̄ and S² are independent."
+      },
+      {
+        "latex": "t=\\frac{\\bar X-\\mu}{S/\\sqrt n}\\sim t(n-1)",
+        "note": "单样本 t 统计量：用样本标准差 S 代替 σ 后服从 t(n−1)。",
+        "noteEn": "The one-sample t statistic: replacing σ by the sample standard deviation S gives a t(n−1) distribution."
+      }
+    ],
+    "properties": [
+      "χ²(n) 的期望为 n、方差为 2n，取值非负、分布右偏。",
+      "t(n) 关于 0 对称，峰比标准正态低、尾比标准正态厚；n≥30 后与 N(0,1) 已很接近。",
+      "F(m,n) 取正值且右偏；若 F~F(m,n)，则 1/F~F(n,m)。",
+      "X̄ 与 S² 相互独立是正态总体特有的结论，对非正态总体一般不成立。",
+      "(n−1)S²/σ²~χ²(n−1) 把样本方差与总体方差联系起来，是 σ² 区间估计与检验的基础。"
+    ],
+    "propertiesEn": [
+      "χ²(n) has mean n and variance 2n; it is non-negative and right-skewed.",
+      "t(n) is symmetric about 0 with a lower peak and heavier tails than N(0,1); for n≥30 it is already close to normal.",
+      "F(m,n) is positive and right-skewed; if F~F(m,n) then 1/F~F(n,m).",
+      "The independence of X̄ and S² is special to normal populations and generally fails for other populations.",
+      "(n−1)S²/σ²~χ²(n−1) links the sample variance to σ² and underlies interval estimation and testing for σ²."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sqrt(x)*exp(-x/2)/sqrt(2*PI)",
+          "color": "#ff8f5e",
+          "label": "χ²(3)"
+        },
+        {
+          "expr": "(2/(sqrt(3)*PI))*(1+x^2/3)^(-2)",
+          "color": "#ff6b9d",
+          "label": "t(3)"
+        },
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "color": "#4cc9f0",
+          "label": "N(0,1)"
+        }
+      ],
+      "xRange": [
+        -4,
+        14
+      ],
+      "yRange": [
+        0,
+        0.46
+      ],
+      "title": "χ²(3)、t(3) 与标准正态的密度对比"
+    },
+    "examples": [
+      {
+        "problem": "设 $X_1,\\dots,X_6$ 是来自正态总体 $N(\\mu,\\sigma^2)$ 的样本，求 $P(S^2>2\\sigma^2)$。",
+        "solution": "由 $(n-1)S^2/\\sigma^2\\sim\\chi^2(n-1)$ 得 $\\dfrac{5S^2}{\\sigma^2}\\sim\\chi^2(5)$。事件 $S^2>2\\sigma^2$ 等价于\n$$\\frac{5S^2}{\\sigma^2}>10,$$\n故 $P(S^2>2\\sigma^2)=P(\\chi^2(5)>10)\\approx 0.0752$，约为 7.5%。"
+      },
+      {
+        "problem": "设总体 $N(\\mu,\\sigma^2)$ 的样本容量 $n=10$，写出用于推断 μ 的 t 统计量，并求其双侧 0.05 临界值。",
+        "solution": "由 $\\dfrac{(n-1)S^2}{\\sigma^2}\\sim\\chi^2(9)$ 且与 $\\bar X$ 独立，得\n$$t=\\frac{\\bar X-\\mu}{S/\\sqrt{10}}\\sim t(9).$$\n双侧 0.05 临界值为 $t_{0.025}(9)\\approx 2.2622$，即 $P(|t|>2.2622)=0.05$：当 $|t|$ 超过约 2.262 时，在 5% 水平下拒绝 μ=μ₀。"
+      }
+    ],
+    "expression": {
+      "text": "X̄ ~ N(μ, σ²/n)，(n−1)S²/σ² ~ χ²(n−1)，t ~ t(n−1)",
+      "symbol": "t(n)",
+      "note": "三个核心抽样分布（正态总体）",
+      "noteEn": "The three core sampling distributions (normal population)"
+    },
+    "tags": [
+      "抽样分布",
+      "卡方分布",
+      "t分布",
+      "F分布"
+    ],
+    "links": [
+      "statistics-sampling",
+      "normal-distribution",
+      "expectation-variance",
+      "chi-square-anova",
+      "central-limit-theorem"
+    ]
+  },
+  {
+    "id": "point-estimation",
+    "title": "点估计：矩估计与极大似然",
+    "titleEn": "Point Estimation: Method of Moments and Maximum Likelihood",
+    "branch": "probability",
+    "level": 5,
+    "summary": "用一个统计量 θ̂ 去估计未知参数 θ：矩估计用样本矩代替总体矩，极大似然估计取使样本出现可能性最大的参数；无偏性、有效性与一致性是评价估计量的三条标准。",
+    "summaryEn": "Estimate an unknown parameter by a statistic: the method of moments equates sample and population moments, while maximum likelihood picks the parameter making the observed sample most likely; unbiasedness, efficiency and consistency judge the result.",
+    "definition": "用样本算出的一个统计量 $\\hat\\theta=\\hat\\theta(X_1,\\dots,X_n)$ 去估计总体的未知参数 $\\theta$，称为**点估计**：估计量代入观测值后得到估计值。常用的两条路线是矩估计与极大似然估计。\n\n**矩估计**：用样本矩代替总体矩。若总体的一阶矩 $E(X)$ 含有未知参数，就令 $\\bar X=E(X)$ 解出参数；一般地，有几个待估参数就列出几个矩方程（通常用前几阶原点矩），联立求解。矩估计直观、几乎总能算出显式解，但精度未必最好。\n\n**极大似然估计**：把样本的联合密度（离散情形为分布律）看成参数 $\\theta$ 的函数\n$$L(\\theta)=\\prod_{i=1}^n f(x_i;\\theta),$$\n称为似然函数。哪个 $\\theta$ 使「已经观测到这组样本」的可能性最大，就取哪个作为估计。由于 $\\ln$ 单调递增，$\\ln L$ 与 $L$ 在同一点取最大，而乘积取对数后化为求和、便于求导：写出对数似然 $\\ln L(\\theta)=\\sum_{i=1}^n\\ln f(x_i;\\theta)$，令\n$$\\frac{d\\ln L(\\theta)}{d\\theta}=0,$$\n解出 $\\hat\\theta$ 即为极大似然估计（必要时再验证确为最大值点）。\n\n评价估计量常用三条标准：**无偏性**，即 $E(\\hat\\theta)=\\theta$，长期平均不偏高也不偏低；**有效性**，两个无偏估计中方差更小者更有效；**一致性**，$n\\to\\infty$ 时 $\\hat\\theta$ 依概率收敛到 $\\theta$，数据越多估计越准。",
+    "definitionEn": "Estimating an unknown parameter $\\theta$ of the population by a statistic $\\hat\\theta=\\hat\\theta(X_1,\\dots,X_n)$ is called **point estimation**; substituting the observations gives a numerical estimate. Two routes dominate.\n\n**Method of moments**: replace population moments by sample moments. If the first moment $E(X)$ involves the unknown parameter, solve $\\bar X=E(X)$ for it; in general, as many moment equations (usually the first few origin moments) as there are parameters are written down and solved simultaneously. It is intuitive and almost always explicit, though not necessarily accurate.\n\n**Maximum likelihood**: view the joint density of the sample (probability mass in the discrete case) as a function of $\\theta$,\n$$L(\\theta)=\\prod_{i=1}^n f(x_i;\\theta),$$\nthe likelihood function, and take the value of $\\theta$ that makes the observed sample most likely. Since $\\ln$ is increasing, $\\ln L$ and $L$ are maximised at the same point, and the logarithm turns the product into a sum that is easy to differentiate: write the log-likelihood $\\ln L(\\theta)=\\sum_{i=1}^n\\ln f(x_i;\\theta)$ and solve the likelihood equation\n$$\\frac{d\\ln L(\\theta)}{d\\theta}=0$$\nfor $\\hat\\theta$ (checking that it is indeed a maximum if necessary).\n\nThree standard criteria judge an estimator: **unbiasedness**, $E(\\hat\\theta)=\\theta$, no systematic gain or loss on average; **efficiency**, among unbiased estimators the one with smaller variance; **consistency**, $\\hat\\theta$ converges in probability to $\\theta$ as $n\\to\\infty$, so more data means a better estimate.",
+    "formulas": [
+      {
+        "latex": "\\bar X=\\frac{1}{n}\\sum_{i=1}^{n}X_i\\ \\longleftrightarrow\\ E(X),\\qquad \\frac{1}{n}\\sum_{i=1}^{n}X_i^k\\ \\longleftrightarrow\\ E(X^k)",
+        "note": "矩估计：样本 k 阶原点矩代替总体 k 阶原点矩（左边为样本矩，右边为总体矩）。",
+        "noteEn": "Method of moments: the sample k-th origin moment replaces the population k-th origin moment."
+      },
+      {
+        "latex": "L(\\theta)=\\prod_{i=1}^{n}f(x_i;\\theta),\\qquad \\ln L(\\theta)=\\sum_{i=1}^{n}\\ln f(x_i;\\theta)",
+        "note": "似然函数与对数似然：乘积取对数后化为求和。",
+        "noteEn": "Likelihood and log-likelihood: taking logarithms turns the product into a sum."
+      },
+      {
+        "latex": "\\frac{d\\ln L(\\theta)}{d\\theta}=0\\ \\Longrightarrow\\ \\hat\\theta",
+        "note": "似然方程：求导、令零，解出极大似然估计。",
+        "noteEn": "The likelihood equation: differentiate, set to zero, and solve for the maximum likelihood estimate."
+      },
+      {
+        "latex": "E(\\hat\\theta)=\\theta",
+        "note": "无偏性：估计量的期望等于被估参数。",
+        "noteEn": "Unbiasedness: the expectation of the estimator equals the parameter."
+      },
+      {
+        "latex": "\\hat\\theta\\ \\xrightarrow{\\ P\\ }\\ \\theta\\quad(n\\to\\infty)",
+        "note": "一致性：样本量趋于无穷时估计量依概率收敛到真值。",
+        "noteEn": "Consistency: the estimator converges in probability to the true value as the sample grows."
+      }
+    ],
+    "properties": [
+      "矩估计计算简单、总能列出方程，但可能低效：如 U(0,θ) 的矩估计 2X̄ 就不如极大似然估计 max{Xᵢ}。",
+      "极大似然估计在正则条件下具有一致性、渐近正态性与渐近有效性；且若 θ̂ 是 θ 的 MLE，则 g(θ̂) 是 g(θ) 的 MLE（不变性）。",
+      "样本方差 S² 是 σ² 的无偏估计，但样本标准差 S 并不是 σ 的无偏估计。",
+      "无偏估计可能不唯一；在无偏估计中方差最小者称为最小方差无偏估计，方差达到下界者称为有效估计。",
+      "估计量是随机变量，随样本而变；对一个具体样本算出的是估计值，评价优劣要看估计量的分布。"
+    ],
+    "propertiesEn": [
+      "Moment estimation is simple and always yields equations, but can be inefficient: for U(0,θ) the moment estimator 2X̄ is worse than the MLE max{Xᵢ}.",
+      "Under regularity conditions the MLE is consistent, asymptotically normal and asymptotically efficient; moreover g(θ̂) is the MLE of g(θ) (invariance).",
+      "The sample variance S² is unbiased for σ², but the sample standard deviation S is not unbiased for σ.",
+      "Unbiased estimators need not be unique; the one with the smallest variance is the minimum-variance unbiased estimator.",
+      "An estimator is a random variable changing with the sample; one sample gives one estimate, and quality is judged from the estimator's distribution."
+    ],
+    "examples": [
+      {
+        "problem": "设总体 $X$ 的密度为 $f(x;\\lambda)=\\lambda e^{-\\lambda x}\\ (x>0)$，样本观测值为 $0.5,\\ 0.9,\\ 1.6,\\ 2.0,\\ 1.0$。求 λ 的矩估计与极大似然估计。",
+        "solution": "总体均值 $E(X)=\\dfrac{1}{\\lambda}$。**矩估计**：令 $\\frac{1}{\\lambda}=\\bar X$，得 $\\hat\\lambda=\\dfrac{1}{\\bar X}$。\n**极大似然**：$L(\\lambda)=\\lambda^5 e^{-\\lambda\\sum x_i}$，$\\ln L=5\\ln\\lambda-\\lambda\\sum x_i$，令\n$$\\frac{5}{\\lambda}-\\sum_{i=1}^{5}x_i=0\\ \\Longrightarrow\\ \\hat\\lambda=\\frac{5}{\\sum x_i}.$$\n两种方法给出同一结果。代入数据 $\\sum x_i=6.0$，$\\bar X=1.2$，得 $\\hat\\lambda=\\dfrac{5}{6}\\approx 0.833$。"
+      },
+      {
+        "problem": "设总体 $X\\sim U(0,\\theta)$，样本观测值为 $0.3,\\ 1.2,\\ 0.7,\\ 2.4,\\ 1.9$，分别求 θ 的矩估计与极大似然估计。",
+        "solution": "$E(X)=\\dfrac{\\theta}{2}$，矩估计为 $\\hat\\theta=2\\bar X=2\\times 1.3=2.6$。\n极大似然函数为 $L(\\theta)=\\theta^{-5}$（当 $\\theta\\ge\\max x_i$ 时），随 θ 增大而减小，故\n$$\\hat\\theta_{\\text{MLE}}=\\max_i\\{x_i\\}=2.4.$$\n两个估计值不同：矩估计只看均值，而 MLE 直接盯住「上界必须不小于样本最大值」这一点，通常更贴近 θ 的真实含义。"
+      }
+    ],
+    "expression": {
+      "text": "θ̂ = θ̂(X₁,…,Xₙ)（不含未知参数的样本函数）",
+      "symbol": "θ̂",
+      "note": "点估计量：随机变量；代入样本后得估计值",
+      "noteEn": "A point estimator is a statistic; a numerical estimate follows after substituting the sample"
+    },
+    "tags": [
+      "点估计",
+      "矩估计",
+      "极大似然",
+      "无偏性"
+    ],
+    "links": [
+      "statistics-sampling",
+      "expectation-variance",
+      "law-of-large-numbers",
+      "sampling-distributions",
+      "interval-estimation"
+    ]
+  },
+  {
+    "id": "interval-estimation",
+    "title": "区间估计与置信区间",
+    "titleEn": "Interval Estimation and Confidence Intervals",
+    "branch": "probability",
+    "level": 5,
+    "summary": "置信区间给出一个随机区间，使未知参数以概率 1−α 被覆盖：σ 已知时用 z 分位数，σ 未知时用 t 分位数，区间长度正比于 1/√n。",
+    "summaryEn": "A confidence interval is a random interval that covers the unknown parameter with probability 1−α: use z quantiles when σ is known, t quantiles when σ is unknown; the length is proportional to 1/√n.",
+    "definition": "点估计只给出一个数，却没有交代它离真值有多远。**区间估计**改为给出一个区间 $[\\hat\\theta_L,\\hat\\theta_U]$：反复抽样时，约有 $100(1-\\alpha)\\%$ 的区间能把未知参数 $\\theta$ 罩住；这样构造的区间称为置信水平为 $1-\\alpha$ 的**置信区间**，$\\alpha$ 通常取 0.05 或 0.01。\n\n构造一般用**枢轴量法**：找一个既含 $\\theta$ 又含样本、但分布与 $\\theta$ 无关的量（称枢轴量），例如当 σ 已知时 $Z=\\dfrac{\\bar X-\\mu}{\\sigma/\\sqrt n}\\sim N(0,1)$。在分布的两侧各留 $\\alpha/2$ 的尾巴，\n$$P\\left(-z_{\\alpha/2}\\le\\frac{\\bar X-\\mu}{\\sigma/\\sqrt n}\\le z_{\\alpha/2}\\right)=1-\\alpha,$$\n再把中间的 $\\mu$ 反解出来，就得到置信区间 $[\\bar X-z_{\\alpha/2}\\frac{\\sigma}{\\sqrt n},\\ \\bar X+z_{\\alpha/2}\\frac{\\sigma}{\\sqrt n}]$。\n\n关键抉择：σ 已知时用标准正态分位数 $z_{\\alpha/2}$；σ 未知时把 σ 换成样本标准差 $S$，分布也随之从 $N(0,1)$ 变成 $t(n-1)$，必须改用 $t_{\\alpha/2}(n-1)$。t 分位数比 z 分位数大一点，反映「σ 也要靠样本来估计」所付出的代价。区间宽度正比于 $\\dfrac{1}{\\sqrt n}$：样本量翻两番，区间才缩一半——精度是用样本量买来的。",
+    "definitionEn": "A point estimate gives one number but says nothing about how far it lies from the truth. **Interval estimation** instead produces an interval $[\\hat\\theta_L,\\hat\\theta_U]$; over repeated sampling about $100(1-\\alpha)\\%$ of such intervals cover the unknown parameter $\\theta$. The resulting interval is a **confidence interval** with confidence level $1-\\alpha$, with $\\alpha$ usually 0.05 or 0.01.\n\nThe standard construction uses a **pivotal quantity**: a function of $\\theta$ and the sample whose distribution does not depend on $\\theta$, for example $Z=\\dfrac{\\bar X-\\mu}{\\sigma/\\sqrt n}\\sim N(0,1)$ when σ is known. Leaving a tail of $\\alpha/2$ on each side gives\n$$P\\left(-z_{\\alpha/2}\\le\\frac{\\bar X-\\mu}{\\sigma/\\sqrt n}\\le z_{\\alpha/2}\\right)=1-\\alpha,$$\nand solving the inequalities for $\\mu$ yields the interval $[\\bar X-z_{\\alpha/2}\\frac{\\sigma}{\\sqrt n},\\ \\bar X+z_{\\alpha/2}\\frac{\\sigma}{\\sqrt n}]$.\n\nThe decisive choice: when σ is known use the normal quantile $z_{\\alpha/2}$; when σ is unknown replace it by the sample standard deviation $S$, which changes the distribution from $N(0,1)$ to $t(n-1)$, so $t_{\\alpha/2}(n-1)$ must be used. The t quantile is a little larger than the z quantile — the price of estimating σ as well. The width is proportional to $\\dfrac{1}{\\sqrt n}$: quadrupling the sample size only halves the interval; precision is bought with data.",
+    "formulas": [
+      {
+        "latex": "\\bar X\\pm z_{\\alpha/2}\\,\\frac{\\sigma}{\\sqrt n}",
+        "note": "σ 已知时 μ 的置信区间（z 分位数，标准正态法）。",
+        "noteEn": "Confidence interval for μ when σ is known (normal quantiles)."
+      },
+      {
+        "latex": "\\bar X\\pm t_{\\alpha/2}(n-1)\\,\\frac{S}{\\sqrt n}",
+        "note": "σ 未知时 μ 的置信区间（t 分位数，用样本标准差 S）。",
+        "noteEn": "Confidence interval for μ when σ is unknown (t quantiles, using the sample standard deviation S)."
+      },
+      {
+        "latex": "P\\!\\left(\\hat\\theta_L\\le\\theta\\le\\hat\\theta_U\\right)=1-\\alpha",
+        "note": "置信水平 1−α 的含义：反复抽样时约 100(1−α)% 的区间覆盖 θ。",
+        "noteEn": "Meaning of level 1−α: over repeated sampling about 100(1−α)% of the intervals cover θ."
+      },
+      {
+        "latex": "\\left[\\frac{(n-1)S^2}{\\chi^2_{\\alpha/2}(n-1)},\\ \\frac{(n-1)S^2}{\\chi^2_{1-\\alpha/2}(n-1)}\\right]",
+        "note": "方差 σ² 的置信区间，由 (n−1)S²/σ²~χ²(n−1) 反解得到。",
+        "noteEn": "Confidence interval for σ², obtained by inverting (n−1)S²/σ²~χ²(n−1)."
+      },
+      {
+        "latex": "\\hat p\\pm z_{\\alpha/2}\\sqrt{\\frac{\\hat p(1-\\hat p)}{n}}",
+        "note": "大样本下比例 p 的置信区间（p̂ 为样本比例）。",
+        "noteEn": "Large-sample confidence interval for a proportion p, with p̂ the sample proportion."
+      }
+    ],
+    "properties": [
+      "区间一旦算出，它要么包含 θ 要么不包含，不能再谈概率；1−α 描述的是构造方法的长期成功率。",
+      "同样的样本下，置信水平越高区间越宽：越可靠就越不精确。",
+      "σ 未知而用 S 代替时必须改用 t 分位数；n 较大时 t 与 z 分位数接近，可用 z 近似。",
+      "区间长度正比于 1/√n：n 增大 4 倍区间缩窄一半，也可由精度要求反推所需样本量。",
+      "与假设检验对偶：1−α 置信区间不包含 μ₀，等价于水平 α 的双侧检验拒绝 H₀: μ=μ₀。"
+    ],
+    "propertiesEn": [
+      "Once a concrete interval is computed it either covers θ or not; 1−α describes the long-run success rate of the method.",
+      "For the same sample, a higher confidence level gives a wider interval: reliability and precision trade off.",
+      "When σ is unknown and replaced by S one must use t quantiles; for large n they are close to z quantiles.",
+      "The length is proportional to 1/√n; quadrupling n halves the interval, and a target precision determines the required sample size.",
+      "Duality with testing: a 1−α interval excludes μ₀ exactly when the level-α two-sided test rejects H₀: μ=μ₀."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        8,
+        12
+      ],
+      "intervals": [
+        {
+          "from": 9.574,
+          "to": 10.426,
+          "color": "#4cc9f0"
+        }
+      ],
+      "points": [
+        {
+          "at": 10.0,
+          "label": "X̄=10.0",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "95% 置信区间与点估计"
+    },
+    "examples": [
+      {
+        "problem": "某药片有效成分含量 $X\\sim N(\\mu,\\sigma^2)$，σ 未知。抽取 $n=16$ 片测得 $\\bar x=10.0$ mg，$s=0.8$ mg，求 μ 的 95% 置信区间。",
+        "solution": "σ 未知，用 t 分位数：$t_{0.025}(15)=2.1314$，误差限为\n$$t_{0.025}(15)\\frac{s}{\\sqrt n}=2.1314\\times\\frac{0.8}{4}=0.4263,$$\n故 95% 置信区间为\n$$[10.0-0.4263,\\ 10.0+0.4263]=[9.574,\\ 10.426]\\ (\\text{mg}).$$"
+      },
+      {
+        "problem": "若由长期生产记录已知 $\\sigma=0.8$ mg，抽取 $n=25$ 片测得 $\\bar x=10.2$ mg，求 μ 的 95% 置信区间。",
+        "solution": "σ 已知，用 z 分位数：$z_{0.025}=1.9600$，误差限为\n$$z_{0.025}\\frac{\\sigma}{\\sqrt n}=1.9600\\times\\frac{0.8}{5}=0.3136,$$\n故 95% 置信区间为 $[10.2-0.3136,\\ 10.2+0.3136]=[9.886,\\ 10.514]$（mg）。对比上一题可见：n 更大、且 σ 已知不必估计，区间明显更窄。"
+      }
+    ],
+    "expression": {
+      "text": "[X̄ − t_{α/2}(n−1)·S/√n, X̄ + t_{α/2}(n−1)·S/√n]",
+      "symbol": "θ̂_L ≤ θ ≤ θ̂_U",
+      "note": "σ 未知时总体均值 μ 的双侧置信区间",
+      "noteEn": "Two-sided confidence interval for μ when σ is unknown"
+    },
+    "tags": [
+      "区间估计",
+      "置信区间",
+      "t分布"
+    ],
+    "links": [
+      "point-estimation",
+      "sampling-distributions",
+      "normal-distribution",
+      "hypothesis-testing"
+    ]
+  },
+  {
+    "id": "hypothesis-testing",
+    "title": "假设检验",
+    "titleEn": "Hypothesis Testing",
+    "branch": "probability",
+    "level": 5,
+    "summary": "先立原假设 H₀ 与备择假设 H₁，再用样本决定是否拒绝 H₀：第一类错误是「弃真」（概率 α），第二类错误是「取伪」；p 值是在 H₀ 下出现当前或更极端结果的概率。",
+    "summaryEn": "Set a null hypothesis H₀ against an alternative H₁, then let the sample decide about rejecting H₀: a type I error rejects a true H₀ (probability α), a type II error keeps a false H₀; the p-value is the probability, under H₀, of a result at least as extreme.",
+    "definition": "**假设检验**先对总体的分布或参数提出一个假设，再用样本判断这个假设是否与数据矛盾。通常把需要保护的、想否定的命题作为**原假设** $H_0$（如「新药无效」），把与之对立的命题作为**备择假设** $H_1$（如「新药有效」）；证据足够强就拒绝 $H_0$，否则只能说不拒绝 $H_0$。\n\n做判断可能犯两类错误：$H_0$ 实际为真却把它拒绝，叫**第一类错误**（弃真），概率记为 $\\alpha$；$H_0$ 实际为假却没有拒绝它，叫**第二类错误**（取伪），概率记为 $\\beta$。人们通常先限定 $\\alpha$ 不超过某个小值（如 0.05），再在这一类检验中寻找使 $\\beta$ 尽量小的方案。只控制第一类错误的检验称为**显著性检验**，$\\alpha$ 称为**显著性水平**。\n\n具体做法是选一个在 $H_0$ 下分布已知的**检验统计量**（如 z、t、χ²、F），把样本空间划分为**拒绝域** $W$ 与接受域：统计量落入 $W$ 就拒绝 $H_0$。等价地可以计算 **p 值**——在 $H_0$ 成立的前提下，出现「与当前样本同样极端或更极端」结果的概率：p 值越小，数据与 $H_0$ 越不相容，$p\\le\\alpha$ 时拒绝 $H_0$。注意 p 值不是「$H_0$ 为真的概率」，它是用样本算出的一个统计量。",
+    "definitionEn": "**Hypothesis testing** starts from a statement about the population distribution or its parameters and lets the sample decide whether that statement conflicts with the data. The claim to be protected and possibly rejected is the **null hypothesis** $H_0$ (for example, the new drug is ineffective); the opposite claim is the **alternative** $H_1$. If the evidence is strong enough, $H_0$ is rejected; otherwise one merely fails to reject it.\n\nTwo kinds of mistakes are possible: rejecting a true $H_0$ is a **type I error** (probability $\\alpha$), and failing to reject a false $H_0$ is a **type II error** (probability $\\beta$). Usually one first bounds $\\alpha$ by a small value such as 0.05 and then, among such tests, seeks one with small $\\beta$. A test controlling only the type I error is a **significance test**, and $\\alpha$ is the **significance level**.\n\nConcretely, choose a **test statistic** whose distribution under $H_0$ is known (z, t, χ², F), and split the sample space into a **rejection region** $W$ and an acceptance region: reject $H_0$ if the statistic falls in $W$. Equivalently, compute the **p-value** — the probability, assuming $H_0$ is true, of a result at least as extreme as the observed sample. The smaller the p-value, the less compatible the data are with $H_0$; reject when $p\\le\\alpha$. The p-value is computed from the sample and is not the probability that $H_0$ is true.",
+    "formulas": [
+      {
+        "latex": "H_0:\\ \\mu=\\mu_0,\\qquad H_1:\\ \\mu\\neq\\mu_0",
+        "note": "双侧检验的原假设与备择假设；单侧检验的 H₁ 改为 μ>μ₀ 或 μ<μ₀。",
+        "noteEn": "Null and alternative hypotheses of a two-sided test; for a one-sided test H₁ becomes μ>μ₀ or μ<μ₀."
+      },
+      {
+        "latex": "z=\\frac{\\bar X-\\mu_0}{\\sigma/\\sqrt n}\\sim N(0,1)\\quad(\\sigma\\ \\text{known})",
+        "note": "σ 已知时的检验统计量：z 统计量。",
+        "noteEn": "Test statistic when σ is known: the z statistic."
+      },
+      {
+        "latex": "t=\\frac{\\bar X-\\mu_0}{S/\\sqrt n}\\sim t(n-1)\\quad(\\sigma\\ \\text{unknown})",
+        "note": "σ 未知时的检验统计量：t 统计量。",
+        "noteEn": "Test statistic when σ is unknown: the t statistic."
+      },
+      {
+        "latex": "|z|>z_{\\alpha/2}\\ \\Longrightarrow\\ \\text{reject}\\ H_0",
+        "note": "双侧检验的拒绝域：统计量落入两尾时拒绝 H₀（α 平分到两侧）。",
+        "noteEn": "Rejection region of a two-sided test: reject H₀ when the statistic falls in either tail (α split equally)."
+      },
+      {
+        "latex": "p=2\\,\\bigl(1-\\Phi(|z_{\\text{obs}}|)\\bigr)",
+        "note": "双侧 z 检验的 p 值；一般地 p 值是在 H₀ 下出现当前或更极端结果的概率，p≤α 时拒绝 H₀。",
+        "noteEn": "p-value of a two-sided z test; in general the p-value is the probability under H₀ of a result at least as extreme, and one rejects when p≤α."
+      }
+    ],
+    "properties": [
+      "样本量固定时，第一类错误 α 与第二类错误 β 不能同时减小；要同时降低只能增大样本量。",
+      "不拒绝 H₀ 只说明证据不足，不等于 H₀ 为真；拒绝 H₀ 说明结果在统计上显著。",
+      "双侧检验把 α 平分到两尾；单侧检验把 α 全部放在一侧，取哪种由备择假设的方向决定。",
+      "检验与置信区间对偶：水平 1−α 的置信区间包含 μ₀，等价于双侧检验不拒绝 H₀: μ=μ₀。",
+      "p 值由样本算出、与预先选定的 α 无关，但通常仍与 α 比较来下结论；p 值越小，反对 H₀ 的证据越强。"
+    ],
+    "propertiesEn": [
+      "With a fixed sample size the type I error α and type II error β cannot both decrease; only a larger sample reduces both.",
+      "Failing to reject H₀ means insufficient evidence, not that H₀ is true; rejecting H₀ means the result is statistically significant.",
+      "A two-sided test splits α between the two tails; a one-sided test puts all of α on one side, chosen according to H₁.",
+      "Testing and confidence intervals are dual: the level-1−α interval contains μ₀ iff the two-sided test does not reject H₀: μ=μ₀.",
+      "The p-value is computed from the sample and is independent of a pre-chosen α, although it is usually compared with α; the smaller it is, the stronger the evidence against H₀."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "color": "#4cc9f0",
+          "label": "N(0,1) 密度"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "from": -3.6,
+          "to": -1.96,
+          "base": 0,
+          "color": "#ff6b9d",
+          "label": "拒绝域 α/2"
+        },
+        {
+          "expr": "exp(-x^2/2)/sqrt(2*PI)",
+          "from": 1.96,
+          "to": 3.6,
+          "base": 0,
+          "color": "#ff6b9d"
+        }
+      ],
+      "xRange": [
+        -3.6,
+        3.6
+      ],
+      "yRange": [
+        -0.02,
+        0.45
+      ],
+      "title": "双侧检验：两尾各 α/2 为拒绝域"
+    },
+    "examples": [
+      {
+        "problem": "某包装机标称每袋装 500 g。抽查 $n=16$ 袋（设装袋量服从正态分布），测得 $\\bar x=502.3$ g，$s=4.0$ g。取显著性水平 α=0.05，检验装袋量是否正常。",
+        "solution": "设 $H_0:\\mu=500$，$H_1:\\mu\\neq 500$。σ 未知，用 t 统计量：\n$$t=\\frac{\\bar x-\\mu_0}{s/\\sqrt n}=\\frac{502.3-500}{4.0/\\sqrt{16}}=\\frac{2.3}{1.0}=2.3.$$\n双侧临界值 $t_{0.025}(15)=2.1314$。因为 $|t|=2.3>2.1314$，落在拒绝域内，故拒绝 $H_0$，认为装袋量显著偏离 500 g。p 值 $=2P(t(15)>2.3)\\approx 0.0362<0.05$，结论一致。"
+      },
+      {
+        "problem": "同一台机器，若已知 $\\sigma=5$ g，抽查 $n=25$ 袋得 $\\bar x=501.4$ g。取 α=0.05，检验 $H_0:\\mu=500$。",
+        "solution": "σ 已知，用 z 统计量：\n$$z=\\frac{501.4-500}{5/\\sqrt{25}}=1.4.$$\n双侧临界值 $z_{0.025}=1.96$，因 $|z|=1.4<1.96$，不拒绝 $H_0$：这一次的偏差还在随机波动可以解释的范围内。p 值 $=2(1-\\Phi(1.4))\\approx 0.1615$，远大于 0.05。两个小题说明：同样的检验思路，样本量与噪声大小不同，结论可能完全不同。"
+      }
+    ],
+    "expression": {
+      "text": "|t| > t_{α/2}(n−1) 时拒绝 H₀",
+      "symbol": "t=(X̄−μ₀)/(S/√n)",
+      "note": "双侧 t 检验的拒绝规则（α 平分两尾）",
+      "noteEn": "Rejection rule of the two-sided t test (α split between the tails)"
+    },
+    "tags": [
+      "假设检验",
+      "显著性水平",
+      "p值",
+      "两类错误"
+    ],
+    "links": [
+      "interval-estimation",
+      "point-estimation",
+      "normal-distribution",
+      "sampling-distributions",
+      "chi-square-anova"
+    ]
+  },
+  {
+    "id": "chi-square-anova",
+    "title": "卡方检验与方差分析",
+    "titleEn": "Chi-Square Tests and Analysis of Variance",
+    "branch": "probability",
+    "level": 5,
+    "summary": "卡方检验比较观测频数与理论频数，自由度 k−1−r；方差分析把总平方和分解为 SST=SSA+SSE，用 F=(SSA/(k−1))/(SSE/(n−k)) 检验多组均值是否相等。",
+    "summaryEn": "The χ² test compares observed with expected frequencies (degrees of freedom k−1−r), while analysis of variance splits SST=SSA+SSE and uses F=(SSA/(k−1))/(SSE/(n−k)) to compare several group means.",
+    "definition": "**卡方检验**处理分类数据。以拟合优度检验为例：把数据分成 $k$ 类，第 $i$ 类实际出现 $O_i$ 次，按 $H_0$ 指定的分布算出理论频数 $E_i$，则统计量\n$$\\chi^2=\\sum_{i=1}^{k}\\frac{(O_i-E_i)^2}{E_i}$$\n在 $H_0$ 成立时近似服从 $\\chi^2(k-1-r)$，其中 $r$ 是用样本估计的参数个数——每估计一个参数就多消耗一个自由度。$O_i$ 与 $E_i$ 相差越大，$\\chi^2$ 越大，越倾向于拒绝 $H_0$。列联表的独立性检验完全类似，自由度换成 $(r-1)(c-1)$。\n\n**方差分析**（ANOVA）用来同时比较多个正态总体的均值。设 $k$ 组、共 $n$ 个观测，把总离差平方和分解为组间与组内两部分：\n$$SST=SSA+SSE,\\qquad n-1=(k-1)+(n-k),$$\n$SSA$ 度量各组均值之间的差异，$SSE$ 度量同组内部的随机波动。若各组均值相等，两者之比不应太大，于是构造\n$$F=\\frac{SSA/(k-1)}{SSE/(n-k)}\\sim F(k-1,\\ n-k),$$\n做单侧（右侧）检验：$F$ 超过临界值 $F_\\alpha(k-1,n-k)$ 就拒绝「各组均值全相等」。方差分析要求各组相互独立、来自正态总体且方差相同。",
+    "definitionEn": "The **χ² test** deals with categorical data. For a goodness-of-fit test, data fall into $k$ classes, class $i$ is observed $O_i$ times, and the expected frequency $E_i$ is computed from the distribution specified by $H_0$. Then\n$$\\chi^2=\\sum_{i=1}^{k}\\frac{(O_i-E_i)^2}{E_i}$$\nis approximately $\\chi^2(k-1-r)$ under $H_0$, where $r$ is the number of parameters estimated from the sample — each estimated parameter costs one degree of freedom. The larger the gaps between $O_i$ and $E_i$, the larger $\\chi^2$ and the stronger the evidence against $H_0$. Tests of independence in a contingency table work the same way with $(r-1)(c-1)$ degrees of freedom.\n\n**Analysis of variance** (ANOVA) compares several normal population means at once. With $k$ groups and $n$ observations in total, the total sum of squares splits into a between-group and a within-group part,\n$$SST=SSA+SSE,\\qquad n-1=(k-1)+(n-k),$$\nwhere $SSA$ measures differences among group means and $SSE$ the random variation inside groups. If all means were equal this ratio should not be large, so one forms\n$$F=\\frac{SSA/(k-1)}{SSE/(n-k)}\\sim F(k-1,\\ n-k)$$\nand applies a one-sided (right-tail) test: reject equal means when $F$ exceeds $F_\\alpha(k-1,n-k)$. ANOVA assumes independent groups, normal populations and equal variances.",
+    "formulas": [
+      {
+        "latex": "\\chi^2=\\sum_{i=1}^{k}\\frac{(O_i-E_i)^2}{E_i}",
+        "note": "拟合优度检验统计量：观测频数 Oᵢ 与理论频数 Eᵢ 的相对偏差平方和。",
+        "noteEn": "Goodness-of-fit statistic: the sum of squared relative deviations of observed from expected frequencies."
+      },
+      {
+        "latex": "df=k-1-r",
+        "note": "拟合优度检验的自由度；r 为用样本估计的参数个数，分布完全已知时 r=0。",
+        "noteEn": "Degrees of freedom of the goodness-of-fit test; r is the number of estimated parameters (r=0 if the distribution is fully specified)."
+      },
+      {
+        "latex": "SST=SSA+SSE,\\qquad n-1=(k-1)+(n-k)",
+        "note": "总平方和分解为组间平方和与组内平方和，自由度同步分解。",
+        "noteEn": "The total sum of squares splits into between-group and within-group parts, and so do the degrees of freedom."
+      },
+      {
+        "latex": "SSA=\\sum_{i=1}^{k}n_i(\\bar x_i-\\bar x)^2,\\qquad SSE=\\sum_{i=1}^{k}\\sum_{j=1}^{n_i}(x_{ij}-\\bar x_i)^2",
+        "note": "组间平方和与组内平方和的定义（nᵢ 为第 i 组样本量）。",
+        "noteEn": "Definitions of the between-group and within-group sums of squares (nᵢ is the size of group i)."
+      },
+      {
+        "latex": "F=\\frac{SSA/(k-1)}{SSE/(n-k)}\\sim F(k-1,\\ n-k)",
+        "note": "单因素方差分析的检验统计量，单侧（右侧）检验。",
+        "noteEn": "Test statistic of one-way ANOVA, used as a one-sided (right-tail) test."
+      }
+    ],
+    "properties": [
+      "拟合优度检验通常要求每类理论频数不小于 5，否则应合并类别或改用精确方法。",
+      "χ² 统计量非负，检验是单侧的：只看右侧尾部，偏差越大统计量越大。",
+      "方差分析显著只说明至少有一组均值与其它组不同，还需事后多重比较才能找出是哪一组。",
+      "两组均值比较时，方差分析等价于双侧 t 检验，且 F=t²。",
+      "方差分析要求各组独立、正态、等方差；条件不满足时结论可能失真。"
+    ],
+    "propertiesEn": [
+      "A goodness-of-fit test generally requires expected frequencies of at least about 5 per class; otherwise merge classes.",
+      "The χ² statistic is non-negative and the test is one-sided: only the right tail matters, larger deviations giving larger values.",
+      "A significant F only means at least one group mean differs; post-hoc multiple comparisons are needed to locate it.",
+      "For two groups ANOVA is equivalent to the two-sided t test, with F=t².",
+      "ANOVA assumes independent groups, normal populations and equal variances; violations can invalidate the conclusions."
+    ],
+    "examples": [
+      {
+        "problem": "掷一颗骰子 120 次，六个面出现的次数依次为 $20,18,22,15,25,20$。取 α=0.05，检验骰子是否均匀。",
+        "solution": "$H_0$：骰子均匀，即每面概率均为 $1/6$，理论频数 $E_i=20$。计算\n$$\\chi^2=\\frac{0^2+2^2+2^2+5^2+5^2+0^2}{20}=\\frac{58}{20}=2.9.$$\n分布完全指定，$df=6-1-0=5$，临界值 $\\chi^2_{0.05}(5)=11.07$。因为 $2.9<11.07$，不拒绝 $H_0$，没有理由认为骰子不均匀（p 值≈0.715）。"
+      },
+      {
+        "problem": "用三种饲料喂养 12 头猪（每组 4 头），增重（kg）为：甲 $4,5,6,5$；乙 $7,8,9,8$；丙 $6,7,8,7$。取 α=0.05 用单因素方差分析检验三种饲料效果是否相同。",
+        "solution": "总平均 $\\bar x=80/12=6.667$，组间与组内平方和：\n$$SSA=4\\left[(5-6.667)^2+(8-6.667)^2+(7-6.667)^2\\right]=18.667,$$\n$$SSE=2+2+2=6,\\qquad SST=SSA+SSE=24.667.$$\n自由度 $n-1=11=(k-1)+(n-k)=2+9$，于是\n$$F=\\frac{18.667/2}{6/9}=\\frac{9.333}{0.667}=14.0.$$\n临界值 $F_{0.05}(2,9)=4.256$，$14.0>4.256$，拒绝「三种饲料均值全相等」，认为至少有两种饲料的效果不同（p 值≈0.0017）。"
+      }
+    ],
+    "tags": [
+      "卡方检验",
+      "方差分析",
+      "拟合优度",
+      "F检验"
+    ],
+    "links": [
+      "hypothesis-testing",
+      "sampling-distributions",
+      "normal-distribution",
+      "regression-analysis",
+      "continuous-distributions"
+    ]
+  },
+  {
+    "id": "regression-analysis",
+    "title": "回归分析",
+    "titleEn": "Regression Analysis",
+    "branch": "probability",
+    "level": 4,
+    "summary": "一元线性回归用最小二乘拟合 ŷ=â+b̂x，其中 b̂=Sxy/Sxx、â=ȳ−b̂x̄；决定系数 R²=SSR/SST 度量直线对数据的拟合优度。",
+    "summaryEn": "Simple linear regression fits ŷ=â+b̂x by least squares with b̂=Sxy/Sxx and â=ȳ−b̂x̄; the coefficient of determination R²=SSR/SST measures how well the line fits.",
+    "definition": "研究两个变量的依赖关系时，把其中一个当作自变量 $x$、另一个当作因变量 $Y$。**一元线性回归**假设\n$$E(Y\\mid x)=a+bx,$$\n即平均而言 $Y$ 随 $x$ 线性变化，$a$、$b$ 是待估参数；斜率 $b$ 的含义是 $x$ 每增加 1 个单位，$Y$ 平均改变 $b$ 个单位。实际观测值一般不会严格落在直线上，还叠加着随机误差。\n\n**最小二乘**准则：选择 $\\hat a,\\hat b$ 使残差平方和 $\\sum(y_i-\\hat a-\\hat bx_i)^2$ 最小。对两个参数求偏导并令其为零，可得\n$$\\hat b=\\frac{S_{xy}}{S_{xx}}=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2},\\qquad \\hat a=\\bar y-\\hat b\\,\\bar x,$$\n称 $\\hat y=\\hat a+\\hat bx$ 为**经验回归直线**。第二式说明直线必过样本重心 $(\\bar x,\\bar y)$；第一式表明斜率等于 $x,y$ 的协变动与 $x$ 自身变动之比（要求 $S_{xx}>0$，即 $x$ 有变异）。\n\n拟合优度用**决定系数**\n$$R^2=\\frac{SSR}{SST}=\\frac{\\sum(\\hat y_i-\\bar y)^2}{\\sum(y_i-\\bar y)^2},$$\n它是回归平方和占总平方和的比例，满足 $0\\le R^2\\le 1$：点越贴近直线，$R^2$ 越接近 1。回归直线是否有统计意义，还要检验斜率 $H_0:b=0$，统计量 $t=\\hat b/S_{\\hat b}\\sim t(n-2)$，其中 $S_{\\hat b}=\\hat\\sigma/\\sqrt{S_{xx}}$，$\\hat\\sigma^2=SSE/(n-2)$。",
+    "definitionEn": "When studying how two variables depend on each other, call one the predictor $x$ and the other the response $Y$. **Simple linear regression** assumes\n$$E(Y\\mid x)=a+bx,$$\nso that on average $Y$ changes linearly with $x$; $a$ and $b$ are parameters, and the slope $b$ says by how much $Y$ changes on average when $x$ increases by one unit. Actual observations scatter around the line with random error.\n\nThe **least squares** principle chooses $\\hat a,\\hat b$ minimising the residual sum of squares $\\sum(y_i-\\hat a-\\hat bx_i)^2$. Setting the two partial derivatives to zero yields\n$$\\hat b=\\frac{S_{xy}}{S_{xx}}=\\frac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2},\\qquad \\hat a=\\bar y-\\hat b\\,\\bar x,$$\nand $\\hat y=\\hat a+\\hat bx$ is the **fitted regression line**. The second equation says the line always passes through the sample centroid $(\\bar x,\\bar y)$; the first says the slope is the joint variation of $x$ and $y$ divided by the variation of $x$ (so $S_{xx}>0$ requires variation in the predictor).\n\nGoodness of fit is measured by the **coefficient of determination**\n$$R^2=\\frac{SSR}{SST}=\\frac{\\sum(\\hat y_i-\\bar y)^2}{\\sum(y_i-\\bar y)^2},$$\nthe fraction of the total variation explained by the regression, with $0\\le R^2\\le 1$: the closer the points lie to the line, the closer $R^2$ is to 1. Whether the line is statistically meaningful is checked by testing $H_0:b=0$ with $t=\\hat b/S_{\\hat b}\\sim t(n-2)$, where $S_{\\hat b}=\\hat\\sigma/\\sqrt{S_{xx}}$ and $\\hat\\sigma^2=SSE/(n-2)$.",
+    "formulas": [
+      {
+        "latex": "\\hat b=\\frac{S_{xy}}{S_{xx}}=\\frac{\\sum_{i}(x_i-\\bar x)(y_i-\\bar y)}{\\sum_{i}(x_i-\\bar x)^2}",
+        "note": "最小二乘斜率：协变动 Sxy 除以自变量变动 Sxx。",
+        "noteEn": "Least-squares slope: the joint variation Sxy divided by the variation Sxx of the predictor."
+      },
+      {
+        "latex": "\\hat a=\\bar y-\\hat b\\,\\bar x",
+        "note": "截距公式；回归直线必过样本重心 (x̄, ȳ)。",
+        "noteEn": "The intercept formula; the fitted line always passes through the centroid (x̄, ȳ)."
+      },
+      {
+        "latex": "R^2=\\frac{SSR}{SST}=\\frac{\\sum(\\hat y_i-\\bar y)^2}{\\sum(y_i-\\bar y)^2}",
+        "note": "决定系数，取值 0≤R²≤1，越接近 1 线性拟合越好。",
+        "noteEn": "Coefficient of determination, 0≤R²≤1: the closer to 1, the better the linear fit."
+      },
+      {
+        "latex": "\\hat\\sigma^2=\\frac{SSE}{n-2}=\\frac{\\sum(y_i-\\hat y_i)^2}{n-2}",
+        "note": "残差方差的无偏估计；估计了两个参数 a、b，故分母为 n−2。",
+        "noteEn": "Unbiased estimate of the error variance; two parameters a and b were estimated, hence n−2."
+      },
+      {
+        "latex": "t=\\frac{\\hat b}{\\hat\\sigma/\\sqrt{S_{xx}}}\\sim t(n-2)",
+        "note": "斜率显著性检验：H₀: b=0，用 t(n−2) 分布。",
+        "noteEn": "Significance test of the slope: H₀: b=0, using the t(n−2) distribution."
+      }
+    ],
+    "properties": [
+      "最小二乘残差之和为零，回归直线必过样本重心 (x̄, ȳ)。",
+      "斜率与相关系数满足 b̂ = r·s_y/s_x，两者符号相同：回归方向与相关方向一致。",
+      "R² 大只说明线性拟合好，不代表因果关系；非线性关系也可能给出较大的 R²。",
+      "Sxx>0 要求 x 有变异；若所有 x 相同，回归直线不唯一、斜率无定义。",
+      "预测宜在观测过的 x 范围内内插，向数据范围之外外推风险很大。"
+    ],
+    "propertiesEn": [
+      "The least-squares residuals sum to zero and the fitted line always passes through the sample centroid (x̄, ȳ).",
+      "The slope and the correlation coefficient satisfy b̂ = r·s_y/s_x, so they share the same sign.",
+      "A large R² means a good linear fit, not causation; even a strongly nonlinear relation can give a large R².",
+      "Sxx>0 requires variation in x; if all x are equal the line is not unique and the slope is undefined.",
+      "Predictions are safe mainly inside the observed range of x; extrapolation is risky."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          2.1
+        ],
+        [
+          2,
+          3.2
+        ],
+        [
+          3,
+          3.6
+        ],
+        [
+          4,
+          4.7
+        ],
+        [
+          5,
+          5.5
+        ],
+        [
+          6,
+          6.8
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 0.9,
+          "intercept": 1.166667,
+          "color": "#ffd166",
+          "label": "ŷ = 1.1667 + 0.9x"
+        }
+      ],
+      "xRange": [
+        0.5,
+        6.5
+      ],
+      "yRange": [
+        1.5,
+        7.5
+      ],
+      "title": "散点与最小二乘回归直线"
+    },
+    "examples": [
+      {
+        "problem": "某产品投入 $x$（万元）与销售额 $y$（万元）的 6 组数据为 $(1,2.1),(2,3.2),(3,3.6),(4,4.7),(5,5.5),(6,6.8)$。求 y 对 x 的经验回归直线与决定系数 $R^2$。",
+        "solution": "$\\bar x=3.5$，$\\bar y=\\dfrac{25.9}{6}\\approx 4.3167$，$\\sum(x_i-\\bar x)^2=17.5$，$\\sum(x_i-\\bar x)(y_i-\\bar y)=15.75$，于是\n$$\\hat b=\\frac{15.75}{17.5}=0.9,\\qquad \\hat a=\\bar y-\\hat b\\bar x=4.3167-0.9\\times 3.5=1.1667,$$\n经验回归直线为 $\\hat y=1.1667+0.9x$（投入每增加 1 万元，销售额平均增加 0.9 万元）。回归平方和 $SSR=\\sum(\\hat y_i-\\bar y)^2=14.175$，总平方和 $SST=\\sum(y_i-\\bar y)^2\\approx 14.388$，故\n$$R^2=\\frac{SSR}{SST}=\\frac{14.175}{14.388}\\approx 0.985.$$\n约有 98.5% 的销售额变异可由投入的线性关系解释。"
+      }
+    ],
+    "expression": {
+      "text": "ŷ = 1.1667 + 0.9x",
+      "symbol": "ŷ = â + b̂x",
+      "note": "由 6 组数据算得的最小二乘回归直线",
+      "noteEn": "Least-squares regression line computed from the six data points"
+    },
+    "tags": [
+      "回归分析",
+      "最小二乘",
+      "决定系数",
+      "相关性"
+    ],
+    "links": [
+      "covariance-correlation",
+      "expectation-variance",
+      "hypothesis-testing",
+      "chi-square-anova",
+      "statistics-sampling"
+    ]
+  }
+]

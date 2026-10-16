@@ -1,0 +1,975 @@
+[
+  {
+    "id": "residue",
+    "title": "留数与留数定理",
+    "titleEn": "Residues and the Residue Theorem",
+    "branch": "complex",
+    "level": 5,
+    "summary": "留数是洛朗级数中 (z−z₀)⁻¹ 项的系数，也是围绕 z₀ 的简单闭曲线积分除以 2πi；留数定理把围道积分化为曲线内有限个孤立奇点留数之和。",
+    "summaryEn": "The residue is the coefficient of (z−z₀)⁻¹ in the Laurent series; the residue theorem reduces a contour integral to a finite sum of residues at the isolated singularities inside the contour.",
+    "definition": "留数是复变函数在孤立奇点处的一个**局部数据**。设 $f$ 在 $z_0$ 的某个去心邻域内解析，$C$ 是该邻域内围绕 $z_0$ 的任意一条简单闭曲线（取正向），定义\n\n$$\\operatorname{Res}[f,z_0]=\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz.$$\n\n这个定义是合理的：在 $C$ 与更小的圆之间的环形区域上 $f$ 解析，由柯西积分定理，积分值与 $C$ 的大小、形状无关——只要曲线始终围绕 $z_0$ 且不碰到别的奇点。\n\n留数还有等价而更本质的写法。在 $0<|z-z_0|<R$ 内，$f$ 可以展开为洛朗级数 $f(z)=\\sum\\limits_{n=-\\infty}^{\\infty}a_n(z-z_0)^n$；逐项积分时，由于 $\\oint_C(z-z_0)^n dz$ 只有当 $n=-1$ 时等于 $2\\pi i$、其余情形都是 $0$，于是得到\n\n$$\\operatorname{Res}[f,z_0]=a_{-1}.$$\n\n也就是说，留数就是洛朗级数中 $(z-z_0)^{-1}$ 这一项的系数——它是展开式中唯一在回路积分下「存活」下来的项。\n\n**留数定理**把这个局部量与整体积分联系起来：设 $f$ 在简单闭曲线 $C$ 及其内部除有限个孤立奇点 $z_1,\\dots,z_n$ 外处处解析，$C$ 取正向，则\n\n$$\\oint_C f(z)\\,dz=2\\pi i\\sum_{k=1}^{n}\\operatorname{Res}[f,z_k].$$\n\n它的价值在于「化整为零」：不必寻找原函数，也常常不必写出完整的洛朗级数，只要在每个奇点处做一次极限或求导，就能算出整条闭曲线上的积分。复变函数中一大批定积分（包括许多实积分）都由此变得可以计算。",
+    "definitionEn": "The residue is a **local datum** attached to an isolated singularity. Let $f$ be analytic in a punctured neighbourhood of $z_0$ and let $C$ be any positively oriented simple closed curve in that neighbourhood encircling $z_0$. One defines\n\n$$\\operatorname{Res}[f,z_0]=\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz.$$\n\nThe definition is consistent: $f$ is analytic on the annulus between $C$ and a smaller circle, so by Cauchy's integral theorem the value is independent of the size and shape of $C$, as long as $C$ keeps encircling $z_0$ and encloses no other singularity.\n\nThere is an equivalent, more intrinsic description. On the annulus $0<|z-z_0|<R$ the function has a Laurent expansion $f(z)=\\sum_{n=-\\infty}^{\\infty}a_n(z-z_0)^n$, and integrating term by term — where $\\oint_C(z-z_0)^n dz$ vanishes unless $n=-1$, giving $2\\pi i$ — yields\n\n$$\\operatorname{Res}[f,z_0]=a_{-1}.$$\n\nSo the residue is exactly the coefficient of $(z-z_0)^{-1}$ in the Laurent series: the only term that survives contour integration.\n\nThe **residue theorem** globalises this local quantity. If $f$ is analytic on and inside a positively oriented simple closed curve $C$ except for finitely many isolated singularities $z_1,\\dots,z_n$ inside, then\n\n$$\\oint_C f(z)\\,dz=2\\pi i\\sum_{k=1}^{n}\\operatorname{Res}[f,z_k].$$\n\nIts power is economy: no antiderivative is needed, and often not even a full Laurent expansion — one limit or one derivative at each singularity determines an integral along the whole closed curve. A large class of definite integrals, real ones included, becomes computable this way.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{Res}[f,z_0]=\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz",
+        "note": "留数的定义：$C$ 是围绕 $z_0$ 的简单闭曲线（正向），积分值与 $C$ 的选取无关。",
+        "noteEn": "Definition of a residue: $C$ is a positively oriented simple closed curve encircling $z_0$; the value does not depend on the choice of $C$."
+      },
+      {
+        "latex": "\\operatorname{Res}[f,z_0]=a_{-1}",
+        "note": "留数就是洛朗展开中 $(z-z_0)^{-1}$ 项的系数，这是最本质的刻画。",
+        "noteEn": "The residue is the coefficient $a_{-1}$ of $(z-z_0)^{-1}$ in the Laurent expansion — the intrinsic characterisation."
+      },
+      {
+        "latex": "\\oint_C f(z)\\,dz=2\\pi i\\sum_{k=1}^{n}\\operatorname{Res}[f,z_k]",
+        "note": "留数定理：$C$ 内只有有限个孤立奇点 $z_k$，$C$ 取正向，积分等于留数之和乘以 $2\\pi i$。",
+        "noteEn": "Residue theorem: with finitely many isolated singularities $z_k$ inside a positively oriented $C$, the integral is $2\\pi i$ times the sum of the residues."
+      },
+      {
+        "latex": "\\operatorname{Res}[f,\\infty]=-\\operatorname{Res}\\left[\\frac{1}{z^2}f\\!\\left(\\frac{1}{z}\\right),0\\right]",
+        "note": "无穷远点的留数；把所有奇点（含无穷远点）的留数加在一起等于 0（留数总和定理）。",
+        "noteEn": "The residue at infinity; the residues at all singularities, infinity included, add up to zero."
+      },
+      {
+        "latex": "\\oint_C (z-z_0)^n\\,dz=2\\pi i\\,\\delta_{n,-1}",
+        "note": "留数为 $a_{-1}$ 的根本原因：$n\\ne -1$ 的项积分为 0，只有 $(z-z_0)^{-1}$ 项有贡献。",
+        "noteEn": "Why the residue is $a_{-1}$: every power except $n=-1$ integrates to zero, so only $(z-z_0)^{-1}$ contributes."
+      }
+    ],
+    "expression": {
+      "text": "Res[f, z₀] = (1/2πi) ∮_C f(z) dz",
+      "symbol": "\\operatorname{Res}[f,z_0]=\\frac{1}{2\\pi i}\\oint_C f(z)\\,dz",
+      "note": "C 为围绕 z₀ 的简单闭曲线；留数等于洛朗系数 a₋₁，与 C 的大小形状无关。",
+      "noteEn": "C is a simple closed curve around z₀; the residue equals the Laurent coefficient a₋₁ and is independent of C."
+    },
+    "properties": [
+      "留数是局部量：只由 $f$ 在 $z_0$ 附近的行为决定，与曲线 $C$ 的大小和形状无关。",
+      "可去奇点的留数为 0；更一般地，若洛朗展开中不含 $(z-z_0)^{-1}$ 项，该点留数就是 0。",
+      "留数定理要求 $C$ 内只有有限个孤立奇点、且 $f$ 在 $C$ 上解析；被积函数在曲线内部处处解析时积分自动为 0（柯西积分定理是它的特例）。",
+      "留数总和定理：$\\sum_k \\operatorname{Res}[f,z_k]+\\operatorname{Res}[f,\\infty]=0$，常用来求无穷远点的留数或检验计算。",
+      "留数定理是辐角原理、儒歇定理以及用留数计算实积分的基础工具。"
+    ],
+    "propertiesEn": [
+      "The residue is local: it depends only on the behaviour of $f$ near $z_0$, not on the size or shape of the curve $C$.",
+      "A removable singularity has residue 0; more generally the residue vanishes whenever the Laurent expansion has no $(z-z_0)^{-1}$ term.",
+      "The theorem requires finitely many isolated singularities inside $C$ and analyticity of $f$ on $C$; if $f$ is analytic throughout the interior the integral is 0, so Cauchy's integral theorem is the special case.",
+      "Sum of residues: counting infinity as well, $\\sum_k \\operatorname{Res}[f,z_k]+\\operatorname{Res}[f,\\infty]=0$ — useful for computing residues at infinity or checking work.",
+      "The residue theorem underlies the argument principle, Rouché's theorem and the evaluation of real integrals by residues."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -3.6,
+        3.6
+      ],
+      "yRange": [
+        -2.7,
+        2.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              3,
+              0
+            ],
+            [
+              2.6,
+              1.1
+            ],
+            [
+              1.5,
+              1.9
+            ],
+            [
+              0,
+              2.2
+            ],
+            [
+              -1.5,
+              1.9
+            ],
+            [
+              -2.6,
+              1.1
+            ],
+            [
+              -3,
+              0
+            ],
+            [
+              -2.6,
+              -1.1
+            ],
+            [
+              -1.5,
+              -1.9
+            ],
+            [
+              0,
+              -2.2
+            ],
+            [
+              1.5,
+              -1.9
+            ],
+            [
+              2.6,
+              -1.1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.10)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0.8
+          ],
+          "label": "z₁",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.2,
+            -0.9
+          ],
+          "label": "z₂",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            -1.4,
+            0.3
+          ],
+          "label": "z₃",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.2,
+            2.5
+          ],
+          "text": "C：简单闭曲线（正向）"
+        }
+      ],
+      "title": "留数定理：∮_C f(z)dz = 2πi Σₖ Res[f, zₖ]"
+    },
+    "examples": [
+      {
+        "problem": "计算 $\\oint_{|z|=2}\\frac{e^z}{z(z-1)}\\,dz$。",
+        "solution": "被积函数在 $|z|<2$ 内只有两个孤立奇点 $z=0$ 与 $z=1$，且都是一阶极点，可用极限公式求留数：\n\n$$\\operatorname{Res}[f,0]=\\lim_{z\\to0}z\\cdot\\frac{e^z}{z(z-1)}=\\frac{e^0}{0-1}=-1,$$$$\\operatorname{Res}[f,1]=\\lim_{z\\to1}(z-1)\\cdot\\frac{e^z}{z(z-1)}=\\frac{e}{1}=e.$$两个奇点都在圆周内部，由留数定理\n\n$$\\oint_{|z|=2}\\frac{e^z}{z(z-1)}\\,dz=2\\pi i\\bigl(-1+e\\bigr)=2\\pi i(e-1).$$"
+      },
+      {
+        "problem": "若把上题的圆周缩小为 $|z|=\\frac12$，积分等于多少？",
+        "solution": "这时只有 $z=0$ 落在圆周内部（$z=1$ 在圆外，其留数不再计入）。由留数定理\n\n$$\\oint_{|z|=1/2}\\frac{e^z}{z(z-1)}\\,dz=2\\pi i\\cdot\\operatorname{Res}[f,0]=2\\pi i\\cdot(-1)=-2\\pi i.$$这正说明围道积分只「看见」曲线内部的奇点。"
+      }
+    ],
+    "tags": [
+      "留数",
+      "留数定理",
+      "洛朗级数",
+      "围道积分"
+    ],
+    "links": [
+      "laurent-series",
+      "isolated-singularities",
+      "cauchy-integral-theorem",
+      "cauchy-integral-formula",
+      "residue-computation"
+    ]
+  },
+  {
+    "id": "residue-computation",
+    "title": "留数的计算",
+    "titleEn": "Computation of Residues",
+    "branch": "complex",
+    "level": 5,
+    "summary": "不展开洛朗级数也能算留数：一阶极点用 lim(z−z₀)f(z) 或有理函数的 P(z₀)/Q′(z₀)，m 阶极点用 (m−1) 阶导数的极限公式，可去奇点为 0，无穷远点用带负号的变换公式。",
+    "summaryEn": "Residues without Laurent expansions: a simple pole uses lim(z−z₀)f(z) or P(z₀)/Q′(z₀) for rational functions, an m-th order pole uses a derivative limit, removable singularities give 0, and infinity has its own sign-carrying formula.",
+    "definition": "设 $z_0$ 是 $f$ 的一阶极点。把 $f$ 写成 $f(z)=\\frac{a_{-1}}{z-z_0}+a_0+a_1(z-z_0)+\\cdots$，两边乘 $(z-z_0)$ 再令 $z\\to z_0$，就得到最常用的公式\n\n$$\\operatorname{Res}[f,z_0]=\\lim_{z\\to z_0}(z-z_0)f(z).$$\n\n当 $f=\\frac{P}{Q}$ 是有理函数且 $P(z_0)\\ne0$、$Q(z_0)=0$、$Q'(z_0)\\ne0$ 时，$z_0$ 必是一阶极点，代入上式并利用 $Q(z_0)=0$ 可得更省力的版本\n\n$$\\operatorname{Res}\\left[\\frac{P}{Q},z_0\\right]=\\frac{P(z_0)}{Q'(z_0)}.$$\n\n若 $z_0$ 是 $f$ 的 $m$ 阶极点，则 $(z-z_0)^m f(z)$ 在 $z_0$ 处解析，比较洛朗系数可得求导公式\n\n$$\\operatorname{Res}[f,z_0]=\\frac{1}{(m-1)!}\\lim_{z\\to z_0}\\frac{d^{m-1}}{dz^{m-1}}\\left[(z-z_0)^m f(z)\\right].$$\n\n$m=1$ 时它退化为上面的极限公式（$0!=1$）。阶数越高，求导越麻烦，这时直接做洛朗展开往往更快。\n\n有两类奇点不必费力计算：**可去奇点**的留数为 $0$（洛朗展开没有负幂项，当然也没有 $(z-z_0)^{-1}$ 项）；本质奇点则只能靠展开取系数，例如 $e^{1/z}=1+\\frac1z+\\frac{1}{2!z^2}+\\cdots$ 在 $z=0$ 处的留数为 $1$。\n\n在扩充复平面上还定义**无穷远点的留数**：\n\n$$\\operatorname{Res}[f,\\infty]=-\\operatorname{Res}\\left[\\frac{1}{z^2}f\\!\\left(\\frac{1}{z}\\right),0\\right],$$\n\n负号的来源是要让「所有奇点（含无穷远点）的留数之和为 $0$」这条守恒律成立：它把扩充复平面上零散的计算拼成一幅完整的图景。",
+    "definitionEn": "Let $z_0$ be a simple pole of $f$. Writing $f(z)=\\frac{a_{-1}}{z-z_0}+a_0+a_1(z-z_0)+\\cdots$ and multiplying by $(z-z_0)$ before letting $z\\to z_0$ gives the standard formula\n\n$$\\operatorname{Res}[f,z_0]=\\lim_{z\\to z_0}(z-z_0)f(z).$$\n\nIf $f=\\frac{P}{Q}$ is rational with $P(z_0)\\ne0$, $Q(z_0)=0$ and $Q'(z_0)\\ne0$, then $z_0$ is a simple pole and the same limit simplifies to\n\n$$\\operatorname{Res}\\left[\\frac{P}{Q},z_0\\right]=\\frac{P(z_0)}{Q'(z_0)}.$$\n\nAn $m$-th order pole is handled by the derivative formula, obtained by comparing Laurent coefficients for the analytic function $(z-z_0)^m f(z)$:\n\n$$\\operatorname{Res}[f,z_0]=\\frac{1}{(m-1)!}\\lim_{z\\to z_0}\\frac{d^{m-1}}{dz^{m-1}}\\left[(z-z_0)^m f(z)\\right].$$\n\nFor $m=1$ it degenerates to the limit formula ($0!=1$). The higher the order, the costlier the differentiation — a Laurent expansion is then often faster.\n\nTwo cases are free: a **removable singularity** has residue $0$ (no negative powers, hence no $(z-z_0)^{-1}$ term), while an essential singularity must be expanded, e.g. $e^{1/z}=1+\\frac1z+\\frac{1}{2!z^2}+\\cdots$ has residue $1$ at $z=0$.\n\nOn the extended plane one also defines the **residue at infinity**,\n\n$$\\operatorname{Res}[f,\\infty]=-\\operatorname{Res}\\left[\\frac{1}{z^2}f\\!\\left(\\frac{1}{z}\\right),0\\right],$$\n\nthe sign being chosen so that the residues at all singularities, infinity included, sum to $0$.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{Res}[f,z_0]=\\lim_{z\\to z_0}(z-z_0)f(z)",
+        "note": "一阶极点的留数：乘 $(z-z_0)$ 后取极限。",
+        "noteEn": "Residue at a simple pole: multiply by $(z-z_0)$ and take the limit."
+      },
+      {
+        "latex": "\\operatorname{Res}\\left[\\frac{P}{Q},z_0\\right]=\\frac{P(z_0)}{Q'(z_0)}",
+        "note": "有理函数的一阶极点（$P(z_0)\\ne0$，$Q(z_0)=0$，$Q'(z_0)\\ne0$），直接代入，免去求极限。",
+        "noteEn": "A simple pole of a rational function ($P(z_0)\\ne0$, $Q(z_0)=0$, $Q'(z_0)\\ne0$): substitute directly, no limit needed."
+      },
+      {
+        "latex": "\\operatorname{Res}[f,z_0]=\\frac{1}{(m-1)!}\\lim_{z\\to z_0}\\frac{d^{m-1}}{dz^{m-1}}\\left[(z-z_0)^m f(z)\\right]",
+        "note": "$m$ 阶极点的留数：对 $(z-z_0)^m f(z)$ 求 $m-1$ 阶导数后取极限。",
+        "noteEn": "Residue at an $m$-th order pole: differentiate $(z-z_0)^m f(z)$ $m-1$ times, then take the limit."
+      },
+      {
+        "latex": "\\operatorname{Res}[f,z_0]=0\\quad(\\text{可去奇点})",
+        "note": "可去奇点的留数恒为 0，遇到它直接跳过。",
+        "noteEn": "A removable singularity always has residue 0 — skip it."
+      },
+      {
+        "latex": "\\operatorname{Res}[f,\\infty]=-\\operatorname{Res}\\left[\\frac{1}{z^2}f\\!\\left(\\frac{1}{z}\\right),0\\right]",
+        "note": "无穷远点的留数公式；负号保证所有留数（含 $\\infty$）之和为 0。",
+        "noteEn": "The residue at infinity; the minus sign makes all residues, infinity included, sum to zero."
+      }
+    ],
+    "expression": {
+      "text": "Res[f, z₀] = lim_{z→z₀} (z−z₀)f(z)（一阶极点）",
+      "symbol": "\\operatorname{Res}[f,z_0]=\\lim_{z\\to z_0}(z-z_0)f(z)",
+      "note": "一阶极点的标准公式；$m$ 阶极点改用 $\\frac{1}{(m-1)!}\\lim\\frac{d^{m-1}}{dz^{m-1}}[(z-z_0)^m f(z)]$。",
+      "noteEn": "The standard formula for a simple pole; for an $m$-th order pole use the $(m-1)$-st derivative limit instead."
+    },
+    "properties": [
+      "先判断奇点类型再选公式：可去奇点写 0；一阶极点用极限（有理函数可直接用 $P(z_0)/Q'(z_0)$）；$m$ 阶极点用求导公式。",
+      "求导公式里的阶数由「极点阶数 $m$」决定：$m=1$ 时是 0 阶导，即回到极限公式。",
+      "若洛朗展开已知，直接读 $(z-z_0)^{-1}$ 的系数最省事；本质奇点只有这一条路可走。",
+      "对 $f=\\frac{g(z)}{(z-z_0)^m}$（$g$ 在 $z_0$ 解析），留数等于 $g$ 在 $z_0$ 的泰勒展开中 $(z-z_0)^{m-1}$ 项的系数，这与求导公式等价。",
+      "无穷远点留数带负号：$\\operatorname{Res}[f,\\infty]=-\\operatorname{Res}[z^{-2}f(1/z),0]$；所有奇点留数之和（含 $\\infty$）为 0，可用来验算。"
+    ],
+    "propertiesEn": [
+      "Classify the singularity first: removable → 0; simple pole → the limit formula (or $P(z_0)/Q'(z_0)$ for rational functions); $m$-th order pole → the derivative formula.",
+      "The order of the derivative is fixed by the pole order: for $m=1$ it is the zeroth derivative, i.e. the plain limit formula.",
+      "If the Laurent expansion is available, just read off the coefficient of $(z-z_0)^{-1}$; for an essential singularity there is no alternative.",
+      "For $f=\\frac{g(z)}{(z-z_0)^m}$ with $g$ analytic, the residue is the coefficient of $(z-z_0)^{m-1}$ in the Taylor expansion of $g$ — equivalent to the derivative formula.",
+      "The residue at infinity carries a minus sign: $\\operatorname{Res}[f,\\infty]=-\\operatorname{Res}[z^{-2}f(1/z),0]$; the sum of all residues including infinity is 0, a useful check."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -1.9,
+        1.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "circle",
+          "cx": 0.6,
+          "cy": 0.2,
+          "r": 0.9,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.10)"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.6,
+            0.2
+          ],
+          "label": "z₀（极点）",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            -1.5,
+            -0.9
+          ],
+          "label": "其他奇点（不计入）",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.6,
+            1.6
+          ],
+          "text": "C: |z − z₀| = r"
+        }
+      ],
+      "title": "留数的计算：围绕 z₀ 的局部小圆 C"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(z)=\\frac{e^z}{z^2(z-1)}$ 在 $z=0$ 与 $z=1$ 处的留数，并计算 $\\oint_{|z|=2}f(z)\\,dz$。",
+        "solution": "$z=1$ 是一阶极点，用极限公式：\n\n$$\\operatorname{Res}[f,1]=\\lim_{z\\to1}(z-1)\\frac{e^z}{z^2(z-1)}=\\frac{e}{1^2}=e.$$\n\n$z=0$ 是二阶极点（分母含因子 $z^2$），用 $m=2$ 的求导公式：\n\n$$\\operatorname{Res}[f,0]=\\frac{1}{1!}\\lim_{z\\to0}\\frac{d}{dz}\\left[z^2\\cdot\\frac{e^z}{z^2(z-1)}\\right]=\\lim_{z\\to0}\\frac{d}{dz}\\frac{e^z}{z-1}.$$\n\n而 $\\frac{d}{dz}\\frac{e^z}{z-1}=\\frac{e^z(z-1)-e^z}{(z-1)^2}=\\frac{e^z(z-2)}{(z-1)^2}$，代入 $z=0$ 得 $-2$，故 $\\operatorname{Res}[f,0]=-2$。\n\n两个奇点都在 $|z|=2$ 内，由留数定理\n\n$$\\oint_{|z|=2}\\frac{e^z}{z^2(z-1)}\\,dz=2\\pi i\\bigl(e-2\\bigr).$$"
+      },
+      {
+        "problem": "求 $f(z)=\\frac{z}{z^2+1}$ 在无穷远点的留数，并用留数总和定理验证。",
+        "solution": "按公式先化简 $\\frac{1}{z^2}f\\!\\left(\\frac1z\\right)$：\n\n$$\\frac{1}{z^2}\\cdot\\frac{1/z}{1/z^2+1}=\\frac{1}{z(1+z^2)}.$$\n\n它在 $z=0$ 处是一阶极点，留数为 $\\lim_{z\\to0}z\\cdot\\frac{1}{z(1+z^2)}=1$，因此\n\n$$\\operatorname{Res}[f,\\infty]=-1.$$\n\n验证：$f=\\frac{z}{(z-i)(z+i)}$ 的两个有限奇点是 $\\pm i$，且\n\n$$\\operatorname{Res}[f,i]=\\frac{i}{2i}=\\frac12,\\qquad \\operatorname{Res}[f,-i]=\\frac{-i}{-2i}=\\frac12,$$\n\n有限留数之和为 $1$，加上 $\\operatorname{Res}[f,\\infty]=-1$ 恰好为 $0$，与留数总和定理一致。"
+      }
+    ],
+    "tags": [
+      "留数计算",
+      "极点",
+      "洛朗级数",
+      "无穷远点"
+    ],
+    "links": [
+      "residue",
+      "laurent-series",
+      "isolated-singularities",
+      "residue-real-integrals"
+    ]
+  },
+  {
+    "id": "residue-real-integrals",
+    "title": "用留数计算实积分",
+    "titleEn": "Evaluating Real Integrals by Residues",
+    "branch": "complex",
+    "level": 5,
+    "summary": "三类经典实积分——有理函数的无穷积分、含 e^{imx} 的振荡积分、三角有理式的整周期积分——都可以化为合适的围道积分，其值等于围道内留数之和乘以 2πi。",
+    "summaryEn": "Three classical families of real integrals — rational functions over the line, oscillatory integrals with e^{imx}, and trigonometric rational functions over a period — all reduce to contour integrals whose values are 2πi times the enclosed residues.",
+    "definition": "**第一类：有理函数的无穷积分。** 设 $P,Q$ 是多项式，$\\deg Q\\ge\\deg P+2$，且 $Q$ 没有实零点。取上半平面的大半圆围道 $C_R$（半径 $R$ 的半圆弧加上 $[-R,R]$ 这段实轴）。当 $R\\to\\infty$ 时被积函数在圆弧上的模是 $O(R^{-2})$，而弧长只有 $\\pi R$，圆弧上的积分趋于 $0$，于是\n\n$$\\int_{-\\infty}^{\\infty}\\frac{P(x)}{Q(x)}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[\\frac{P}{Q},z_k\\right].$$\n\n**第二类：带 $e^{imx}$ 的振荡积分（$m>0$）。** 把 $e^{imx}$ 换成 $e^{imz}$，仍取上半平面大半圆围道。由于 $|e^{imz}|=e^{-m\\operatorname{Im}z}\\le1$ 且沿圆弧指数衰减（Jordan 引理），圆弧上的积分仍趋于 $0$，所以\n\n$$\\int_{-\\infty}^{\\infty}f(x)e^{imx}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[f(z)e^{imz},z_k\\right].$$\n\n要算 $\\int f(x)\\cos mx\\,dx$ 或 $\\int f(x)\\sin mx\\,dx$，先算出上式再取实部或虚部即可；此时对 $f$ 的衰减要求可以放宽到 $\\deg Q\\ge\\deg P+1$。\n\n**第三类：三角有理式的整周期积分。** 对 $\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)\\,d\\theta$，令 $z=e^{i\\theta}$，则\n\n$$\\cos\\theta=\\frac{z+z^{-1}}{2},\\qquad \\sin\\theta=\\frac{z-z^{-1}}{2i},\\qquad d\\theta=\\frac{dz}{iz},$$\n\n并且 $\\theta$ 从 $0$ 增到 $2\\pi$ 时 $z$ 恰好沿单位圆 $|z|=1$ 正向转一圈，于是\n\n$$\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)\\,d\\theta=\\oint_{|z|=1}R\\!\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}=2\\pi i\\sum_{|z_k|<1}\\operatorname{Res}.$$\n\n三条公式都依赖「围道上的积分趋于 0」这一估计：次数条件、$Q$ 无实零点、$m>0$ 都是为它服务的。若 $Q$ 在实轴上有单零点，可让围道用小半圆从上方绕过该点，积分按柯西主值理解，此时主值等于 $2\\pi i\\sum_{\\operatorname{Im}>0}\\operatorname{Res}+\\pi i\\sum_{\\text{实轴单极点}}\\operatorname{Res}$。",
+    "definitionEn": "**Type 1: rational functions over the whole line.** Let $P,Q$ be polynomials with $\\deg Q\\ge\\deg P+2$ and $Q$ free of real zeros. Take the large semicircular contour $C_R$ in the upper half-plane (the arc plus the segment $[-R,R]$). As $R\\to\\infty$ the integrand on the arc is $O(R^{-2})$ while the arc has length $\\pi R$, so the arc contributes $0$ and\n\n$$\\int_{-\\infty}^{\\infty}\\frac{P(x)}{Q(x)}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[\\frac{P}{Q},z_k\\right].$$\n\n**Type 2: oscillatory integrals with $e^{imx}$ ($m>0$).** Replace $e^{imx}$ by $e^{imz}$ and use the same semicircle. Since $|e^{imz}|=e^{-m\\operatorname{Im}z}\\le1$ decays exponentially along the arc (Jordan's lemma), the arc still contributes nothing:\n\n$$\\int_{-\\infty}^{\\infty}f(x)e^{imx}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[f(z)e^{imz},z_k\\right].$$\n\nTo evaluate $\\int f(x)\\cos mx\\,dx$ or $\\int f(x)\\sin mx\\,dx$, compute the integral above and take real or imaginary parts; the decay requirement on $f$ relaxes to $\\deg Q\\ge\\deg P+1$.\n\n**Type 3: trigonometric rational functions.** For $\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)\\,d\\theta$ put $z=e^{i\\theta}$:\n\n$$\\cos\\theta=\\frac{z+z^{-1}}{2},\\qquad \\sin\\theta=\\frac{z-z^{-1}}{2i},\\qquad d\\theta=\\frac{dz}{iz},$$\n\nand as $\\theta$ runs from $0$ to $2\\pi$, $z$ traverses the unit circle $|z|=1$ once in the positive direction, so\n\n$$\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)\\,d\\theta=\\oint_{|z|=1}R\\!\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}=2\\pi i\\sum_{|z_k|<1}\\operatorname{Res}.$$\n\nAll three formulas rely on the estimate that the contour integral over the arc vanishes; the degree conditions, the absence of real zeros and the sign of $m$ serve exactly this purpose. If $Q$ has simple zeros on the real axis, indent the contour above them and interpret the integral as a Cauchy principal value.",
+    "formulas": [
+      {
+        "latex": "\\int_{-\\infty}^{\\infty}\\frac{P(x)}{Q(x)}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[\\frac{P}{Q},z_k\\right]",
+        "note": "第一类：要求 $\\deg Q\\ge\\deg P+2$ 且 $Q$ 无实零点；围道取上半平面大半圆。",
+        "noteEn": "Type 1: requires $\\deg Q\\ge\\deg P+2$ and no real zeros of $Q$; the contour is a large semicircle in the upper half-plane."
+      },
+      {
+        "latex": "\\int_{-\\infty}^{\\infty}f(x)e^{imx}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[f(z)e^{imz},z_k\\right]\\quad(m>0)",
+        "note": "第二类：$m>0$ 时 $e^{imz}$ 在上半平面指数衰减（Jordan 引理）；取实部或虚部即得 $\\cos mx$、$\\sin mx$ 型积分。",
+        "noteEn": "Type 2: for $m>0$, $e^{imz}$ decays exponentially in the upper half-plane (Jordan's lemma); real and imaginary parts give the $\\cos mx$ and $\\sin mx$ integrals."
+      },
+      {
+        "latex": "\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)\\,d\\theta=\\oint_{|z|=1}R\\!\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}",
+        "note": "第三类：令 $z=e^{i\\theta}$，$\\cos\\theta=\\frac{z+z^{-1}}{2}$，$\\sin\\theta=\\frac{z-z^{-1}}{2i}$，$d\\theta=\\frac{dz}{iz}$。",
+        "noteEn": "Type 3: substitute $z=e^{i\\theta}$, $\\cos\\theta=\\frac{z+z^{-1}}{2}$, $\\sin\\theta=\\frac{z-z^{-1}}{2i}$, $d\\theta=\\frac{dz}{iz}$."
+      },
+      {
+        "latex": "\\int_{-\\infty}^{\\infty}\\frac{e^{imx}}{1+x^2}\\,dx=\\pi e^{-m}\\quad(m>0)",
+        "note": "经典结果；取实部得 $\\int\\frac{\\cos mx}{1+x^2}dx=\\pi e^{-m}$。",
+        "noteEn": "A classic result; its real part gives $\\int\\frac{\\cos mx}{1+x^2}dx=\\pi e^{-m}$."
+      },
+      {
+        "latex": "\\int_0^{2\\pi}\\frac{d\\theta}{a+b\\cos\\theta}=\\frac{2\\pi}{\\sqrt{a^2-b^2}}\\quad(a>|b|)",
+        "note": "由第三类方法导出（$a>|b|$ 保证分母在单位圆上无零点，圆内恰有一个极点）。",
+        "noteEn": "Obtained by the Type 3 method ($a>|b|$ keeps the denominator non-zero on the unit circle; exactly one pole lies inside)."
+      }
+    ],
+    "expression": {
+      "text": "∫_{−∞}^{∞} P(x)/Q(x) dx = 2πi Σ_{Im z_k > 0} Res[P/Q, z_k]",
+      "symbol": "\\int_{-\\infty}^{\\infty}\\frac{P(x)}{Q(x)}\\,dx=2\\pi i\\sum_{\\operatorname{Im}z_k>0}\\operatorname{Res}\\left[\\frac{P}{Q},z_k\\right]",
+      "note": "围道取上半平面大半圆，只用上半平面的留数；三角有理式则化到单位圆内取留数。",
+      "noteEn": "With a large semicircular contour only upper half-plane residues enter; trigonometric rational functions reduce to residues inside the unit circle."
+    },
+    "properties": [
+      "第一类要求 $\\deg Q\\ge\\deg P+2$；第二类可放宽为 $\\deg Q\\ge\\deg P+1$，因为 $e^{imz}$ 在上半平面指数衰减（Jordan 引理）。",
+      "围道取在上半平面是因为 $m>0$ 时 $e^{imz}$ 在那里衰减；若 $m<0$ 应改取下半平面，并注意围道方向带来的符号。",
+      "三角有理式化归单位圆后只保留 $|z|<1$ 内的留数；若极点恰好落在单位圆上，原积分发散。",
+      "算 $\\cos mx$、$\\sin mx$ 型积分时，先算复指数 $e^{imx}$ 的积分再取实部或虚部，通常比直接处理三角函数简单。",
+      "实轴上有单极点时用小半圆绕开，得到柯西主值：$\\mathrm{PV}=2\\pi i\\sum_{\\operatorname{Im}>0}\\operatorname{Res}+\\pi i\\sum_{\\text{实轴单极点}}\\operatorname{Res}$（奇点从上方绕过）。"
+    ],
+    "propertiesEn": [
+      "Type 1 needs $\\deg Q\\ge\\deg P+2$; Type 2 relaxes this to $\\deg Q\\ge\\deg P+1$, because $e^{imz}$ decays exponentially in the upper half-plane (Jordan's lemma).",
+      "The contour is placed in the upper half-plane because $e^{imz}$ decays there when $m>0$; for $m<0$ one uses the lower half-plane and tracks the orientation sign.",
+      "After the unit-circle substitution only residues with $|z|<1$ survive; a pole on the unit circle signals a divergent integral.",
+      "For $\\cos mx$ and $\\sin mx$ integrals, first compute the complex-exponential integral and then take real or imaginary parts — usually simpler than handling the trigonometric factor directly.",
+      "With simple real poles one indents the contour and obtains the Cauchy principal value $\\mathrm{PV}=2\\pi i\\sum_{\\operatorname{Im}>0}\\operatorname{Res}+\\pi i\\sum_{\\text{simple real poles}}\\operatorname{Res}$ (indenting above each pole)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/(1+x^2)",
+          "color": "#4cc9f0",
+          "label": "y = 1/(1+x²)"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "1/(1+x^2)",
+          "from": -6,
+          "to": 6,
+          "base": 0,
+          "color": "#06d6a0",
+          "label": "面积 ≈ π"
+        }
+      ],
+      "xRange": [
+        -6,
+        6
+      ],
+      "yRange": [
+        -0.15,
+        1.15
+      ],
+      "title": "∫dx/(1+x²) 的留数算法：上半平面只有极点 z = i"
+    },
+    "examples": [
+      {
+        "problem": "用留数计算 (1) $\\int_{-\\infty}^{\\infty}\\frac{dx}{1+x^2}$；(2) $\\int_{-\\infty}^{\\infty}\\frac{\\cos(mx)}{1+x^2}\\,dx$（$m>0$）。",
+        "solution": "(1) 取 $f(z)=\\frac{1}{1+z^2}=\\frac{1}{(z-i)(z+i)}$。分子次数 0、分母次数 2，满足 $\\deg Q\\ge\\deg P+2$，且 $1+x^2$ 无实零点。上半平面内只有一个一阶极点 $z=i$：\n\n$$\\operatorname{Res}[f,i]=\\lim_{z\\to i}(z-i)\\frac{1}{(z-i)(z+i)}=\\frac{1}{2i}.$$\n\n于是 $\\int_{-\\infty}^{\\infty}\\frac{dx}{1+x^2}=2\\pi i\\cdot\\frac{1}{2i}=\\pi$。\n\n(2) 考虑 $g(z)=\\frac{e^{imz}}{1+z^2}$，取上半平面大半圆围道，圆弧上的积分趋于 0。上半平面内只有一阶极点 $z=i$：\n\n$$\\operatorname{Res}[g,i]=\\frac{e^{im\\cdot i}}{2i}=\\frac{e^{-m}}{2i}.$$\n\n因此 $\\int_{-\\infty}^{\\infty}\\frac{e^{imx}}{1+x^2}dx=2\\pi i\\cdot\\frac{e^{-m}}{2i}=\\pi e^{-m}$；取实部即得\n\n$$\\int_{-\\infty}^{\\infty}\\frac{\\cos(mx)}{1+x^2}\\,dx=\\pi e^{-m}.$$\n\n（虚部对应 $\\int\\frac{\\sin(mx)}{1+x^2}dx$，因被积函数是奇函数而为 0，与此一致。）"
+      },
+      {
+        "problem": "计算 $\\int_0^{2\\pi}\\frac{d\\theta}{2+\\cos\\theta}$。",
+        "solution": "令 $z=e^{i\\theta}$，则 $\\cos\\theta=\\frac{z+z^{-1}}{2}$，$d\\theta=\\frac{dz}{iz}$。\n\n$$2+\\cos\\theta=2+\\frac{z+z^{-1}}{2}=\\frac{z^2+4z+1}{2z},$$\n\n所以\n\n$$\\int_0^{2\\pi}\\frac{d\\theta}{2+\\cos\\theta}=\\oint_{|z|=1}\\frac{dz}{iz}\\cdot\\frac{2z}{z^2+4z+1}=\\frac{2}{i}\\oint_{|z|=1}\\frac{dz}{z^2+4z+1}.$$\n\n分母的零点是 $z=-2\\pm\\sqrt3$；只有 $z_0=-2+\\sqrt3$ 在单位圆内（$|z_0|\\approx0.268$）。它是一阶极点，留数为\n\n$$\\operatorname{Res}\\left[\\frac{1}{z^2+4z+1},z_0\\right]=\\frac{1}{2z_0+4}=\\frac{1}{2\\sqrt3}.$$\n\n于是原积分 $=\\frac{2}{i}\\cdot 2\\pi i\\cdot\\frac{1}{2\\sqrt3}=\\frac{2\\pi}{\\sqrt3}$。"
+      }
+    ],
+    "tags": [
+      "留数",
+      "实积分",
+      "围道积分",
+      "三角积分"
+    ],
+    "links": [
+      "residue",
+      "residue-computation",
+      "improper-integral",
+      "integral",
+      "cauchy-integral-formula"
+    ]
+  },
+  {
+    "id": "argument-principle",
+    "title": "辐角原理与儒歇定理",
+    "titleEn": "Argument Principle and Rouché's Theorem",
+    "branch": "complex",
+    "level": 5,
+    "summary": "辐角原理用 ∮_C f′(z)/f(z) dz = 2πi(N−P) 数出围道内零点与极点个数之差；儒歇定理则通过边界上 |g|<|f| 的「比大小」判断 f 与 f+g 的零点个数。",
+    "summaryEn": "The argument principle counts zeros minus poles inside a contour via ∮_C f′(z)/f(z) dz = 2πi(N−P); Rouché's theorem compares |g| with |f| on the boundary to show that f and f+g have the same number of zeros inside.",
+    "definition": "**辐角原理**回答一个计数问题：一条闭曲线内部有多少个零点、多少个极点？设 $f$ 在简单闭曲线 $C$ 及其内部除有限个极点外解析（$C$ 上没有零点也没有极点），$C$ 取正向，则\n\n$$\\frac{1}{2\\pi i}\\oint_C\\frac{f'(z)}{f(z)}\\,dz=N-P,$$\n\n其中 $N$ 是 $C$ 内零点的个数，$P$ 是极点的个数，都按**重数**计算（例如二重零点算 2 个）。\n\n道理来自留数：在 $m$ 重零点 $z_0$ 附近 $f(z)=(z-z_0)^m g(z)$ 且 $g(z_0)\\ne0$，于是 $\\frac{f'}{f}=\\frac{m}{z-z_0}+\\frac{g'}{g}$，它在 $z_0$ 的留数是 $m$；在 $k$ 阶极点附近 $f=\\frac{h(z)}{(z-z_0)^k}$，类似地 $\\frac{f'}{f}=-\\frac{k}{z-z_0}+\\frac{h'}{h}$，留数是 $-k$。把所有留数加起来用留数定理，就得到 $N-P$。左端也等于 $f$ 沿 $C$ 的辐角总变化除以 $2\\pi$，即像曲线 $f(C)$ 绕原点的圈数，「辐角原理」由此得名。\n\n**儒歇定理**把「数零点」变成「比大小」：设 $f,g$ 在 $C$ 及其内部解析且 $f$ 在 $C$ 上无零点，如果在 $C$ 上处处有\n\n$$|g(z)|<|f(z)|,$$\n\n那么 $f$ 与 $f+g$ 在 $C$ 内部有相同个数的零点（按重数计）。证明思路：令 $f_t=f+tg$（$0\\le t\\le1$）。由严格不等式，每个 $f_t$ 在 $C$ 上都没有零点，零点个数随 $t$ 连续变化，又只能取整数值，于是恒为常数，特别地 $f_0=f$ 与 $f_1=f+g$ 的零点个数相同。\n\n经典应用是**代数基本定理**：$n$ 次多项式 $z^n+a_{n-1}z^{n-1}+\\cdots+a_0$ 在复平面上恰好有 $n$ 个零点（按重数计）。取 $f(z)=z^n$、$g(z)=a_{n-1}z^{n-1}+\\cdots+a_0$，在半径 $R$ 足够大的圆周上 $|g|<|f|$，而 $z^n$ 在圆内以 $0$ 为 $n$ 重零点，故原多项式也有 $n$ 个零点。",
+    "definitionEn": "The **argument principle** answers a counting question: how many zeros and how many poles lie inside a closed curve? Let $f$ be analytic on and inside a positively oriented simple closed curve $C$ except for finitely many poles (with no zeros or poles on $C$ itself). Then\n\n$$\\frac{1}{2\\pi i}\\oint_C\\frac{f'(z)}{f(z)}\\,dz=N-P,$$\n\nwhere $N$ counts the zeros and $P$ the poles inside $C$, multiplicities included (a double zero counts twice).\n\nThe reason is a residue computation: near a zero of multiplicity $m$, $f=(z-z_0)^m g$ with $g(z_0)\\ne0$, so $\\frac{f'}{f}=\\frac{m}{z-z_0}+\\frac{g'}{g}$ has residue $m$ there; near a pole of order $k$, $f=\\frac{h}{(z-z_0)^k}$ and $\\frac{f'}{f}=-\\frac{k}{z-z_0}+\\frac{h'}{h}$ has residue $-k$. Summing all residues with the residue theorem yields $N-P$. Equivalently the left side equals $(2\\pi)^{-1}$ times the total change of $\\arg f$ along $C$, i.e. the winding number of the image curve $f(C)$ about the origin — whence the name.\n\n**Rouché's theorem** replaces counting by comparison: if $f,g$ are analytic on and inside $C$, $f$ has no zero on $C$, and everywhere on $C$\n\n$$|g(z)|<|f(z)|,$$\n\nthen $f$ and $f+g$ have the same number of zeros inside $C$ (with multiplicity). Proof idea: set $f_t=f+tg$ for $0\\le t\\le1$. The strict inequality keeps every $f_t$ zero-free on $C$, so the zero count varies continuously with $t$ while taking only integer values — hence it is constant, and $f_0=f$, $f_1=f+g$ agree.\n\nThe classical application is the **fundamental theorem of algebra**: a polynomial $z^n+a_{n-1}z^{n-1}+\\cdots+a_0$ has exactly $n$ zeros in the complex plane, counted with multiplicity. Take $f(z)=z^n$ and $g(z)=a_{n-1}z^{n-1}+\\cdots+a_0$; on a circle of sufficiently large radius $R$ one has $|g|<|f|$, and $z^n$ has the $n$-fold zero $0$ inside, so the polynomial has $n$ zeros as well.",
+    "formulas": [
+      {
+        "latex": "\\frac{1}{2\\pi i}\\oint_C\\frac{f'(z)}{f(z)}\\,dz=N-P",
+        "note": "辐角原理：$N$、$P$ 分别为 $C$ 内零点、极点的个数（按重数计），$f$ 在 $C$ 上无零点也无极点。",
+        "noteEn": "Argument principle: $N$ and $P$ count zeros and poles inside $C$ with multiplicity; $f$ has neither on $C$."
+      },
+      {
+        "latex": "\\frac{1}{2\\pi}\\Delta_C\\arg f(z)=N-P",
+        "note": "辐角形式：$f(z)$ 沿 $C$ 绕行一周时辐角的总变化除以 $2\\pi$，等于像曲线绕原点的圈数。",
+        "noteEn": "Angular form: the total change of $\\arg f$ along $C$, divided by $2\\pi$, is the winding number of the image curve about the origin."
+      },
+      {
+        "latex": "\\operatorname{Res}\\left[\\frac{f'}{f},z_0\\right]=m,\\qquad \\operatorname{Res}\\left[\\frac{f'}{f},p_0\\right]=-k",
+        "note": "$z_0$ 为 $m$ 重零点、$p_0$ 为 $k$ 阶极点时 $f'/f$ 的留数；这就是辐角原理的来源。",
+        "noteEn": "Residues of $f'/f$ at an $m$-fold zero and at a $k$-th order pole; this is the source of the argument principle."
+      },
+      {
+        "latex": "|g(z)|<|f(z)|\\ (z\\in C)\\ \\Longrightarrow\\ f\\ \\text{与}\\ f+g\\ \\text{在}\\ C\\ \\text{内零点个数相同}",
+        "note": "儒歇定理：严格不等式必须对整条 $C$ 成立，零点个数按重数计。",
+        "noteEn": "Rouché's theorem: the strict inequality must hold on the whole of $C$; zeros are counted with multiplicity."
+      },
+      {
+        "latex": "\\#\\{z\\in\\mathbb{C}:P(z)=0\\}=n,\\qquad P(z)=z^n+a_{n-1}z^{n-1}+\\cdots+a_0",
+        "note": "代数基本定理：$n$ 次多项式在 $\\mathbb C$ 上恰有 $n$ 个零点（按重数计），是儒歇定理的经典应用。",
+        "noteEn": "Fundamental theorem of algebra: a degree-$n$ polynomial has exactly $n$ complex zeros counted with multiplicity — a classical Rouché application."
+      }
+    ],
+    "expression": {
+      "text": "(1/2πi)∮_C f′(z)/f(z) dz = N − P（按重数计）",
+      "symbol": "\\frac{1}{2\\pi i}\\oint_C\\frac{f'(z)}{f(z)}\\,dz=N-P",
+      "note": "用积分器数零点与极点：$f'/f$ 在每个零点、极点处的留数分别是重数与负阶数。",
+      "noteEn": "Counting zeros and poles by an integral: the residues of $f'/f$ are the multiplicities (positive at zeros, negative at poles)."
+    },
+    "properties": [
+      "$N$、$P$ 都按重数计：二重零点贡献 2，三阶极点贡献 3。",
+      "$f'/f$ 在 $m$ 重零点处的留数是 $m$，在 $k$ 阶极点处的留数是 $-k$，这正是辐角原理的来源。",
+      "$C$ 上不能有 $f$ 的零点或极点，否则 $f'/f$ 在围道上有奇点；实际应用中可先用小弧绕开。",
+      "儒歇定理的严格不等式 $|g|<|f|$ 必须在整条 $C$ 上成立；结论是 $f$ 与 $f+g$ 在 $C$ 内零点个数相同（按重数计）。",
+      "典型用法：把一个多项式写成「主项 + 小项」，在合适圆周上比较大小即可数出零点；代数基本定理与零点定位都由此而来。"
+    ],
+    "propertiesEn": [
+      "$N$ and $P$ count with multiplicity: a double zero contributes 2 and a third-order pole contributes 3.",
+      "$f'/f$ has residue $m$ at an $m$-fold zero and residue $-k$ at a $k$-th order pole — the mechanism behind the argument principle.",
+      "$f$ must have neither zeros nor poles on $C$, otherwise $f'/f$ is singular on the contour; in practice one detours with small arcs.",
+      "The strict bound $|g|<|f|$ of Rouché's theorem must hold on all of $C$; the conclusion is that $f$ and $f+g$ have equally many zeros inside $C$, counted with multiplicity.",
+      "Typical use: split a polynomial into a dominant part plus a small part and compare sizes on a suitable circle — this yields the fundamental theorem of algebra and locates zeros."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -3.2,
+        3.2
+      ],
+      "yRange": [
+        -2.8,
+        2.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2,
+              0
+            ],
+            [
+              1.85,
+              0.77
+            ],
+            [
+              1.41,
+              1.41
+            ],
+            [
+              0.77,
+              1.85
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              -0.77,
+              1.85
+            ],
+            [
+              -1.41,
+              1.41
+            ],
+            [
+              -1.85,
+              0.77
+            ],
+            [
+              -2,
+              0
+            ],
+            [
+              -1.85,
+              -0.77
+            ],
+            [
+              -1.41,
+              -1.41
+            ],
+            [
+              -0.77,
+              -1.85
+            ],
+            [
+              0,
+              -2
+            ],
+            [
+              0.77,
+              -1.85
+            ],
+            [
+              1.41,
+              -1.41
+            ],
+            [
+              1.85,
+              -0.77
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.08)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            0.6
+          ],
+          "label": "零点 z₁",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            -1.3,
+            0.9
+          ],
+          "label": "零点 z₂",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            -0.5,
+            -1.2
+          ],
+          "label": "极点 p₁",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            2.5
+          ],
+          "text": "C: |z| = 2"
+        }
+      ],
+      "title": "辐角原理：∮_C f′(z)/f(z) dz = 2πi(N − P)"
+    },
+    "examples": [
+      {
+        "problem": "用儒歇定理证明 $z^5+3z+1$ 在 $|z|<1$ 内恰有一个零点。",
+        "solution": "取主项 $f(z)=3z$，小项 $g(z)=z^5+1$，则 $f+g=z^5+3z+1$。在 $|z|=1$ 上有\n\n$$|g(z)|=|z^5+1|\\le|z|^5+1=2<3=|3z|=|f(z)|.$$\n\n由儒歇定理，$z^5+3z+1$ 与 $f(z)=3z$ 在 $|z|<1$ 内零点个数相同；而 $3z$ 只有 $z=0$ 一个（一重）零点，故 $z^5+3z+1$ 在 $|z|<1$ 内恰有一个零点。"
+      },
+      {
+        "problem": "设 $f(z)=\\frac{z^2(z-1)}{z+3}$，计算 $\\oint_{|z|=2}\\frac{f'(z)}{f(z)}\\,dz$。",
+        "solution": "先数奇点：零点为 $z=0$（二重）与 $z=1$（一重），都在 $|z|<2$ 内，故 $N=2+1=3$；极点为 $z=-3$，在 $|z|=2$ 外，故 $P=0$。且 $|z|=2$ 上没有零点与极点。\n\n由辐角原理\n\n$$\\oint_{|z|=2}\\frac{f'(z)}{f(z)}\\,dz=2\\pi i\\,(N-P)=2\\pi i\\cdot 3=6\\pi i.$$\n\n（直接验证：$\\frac{f'}{f}=\\frac{2}{z}+\\frac{1}{z-1}-\\frac{1}{z+3}$，其中 $-3$ 在圆外，只有前两项贡献留数 $2+1=3$。）"
+      }
+    ],
+    "tags": [
+      "辐角原理",
+      "儒歇定理",
+      "零点计数",
+      "围道积分"
+    ],
+    "links": [
+      "residue",
+      "cauchy-integral-theorem",
+      "analytic-function",
+      "isolated-singularities",
+      "polynomial"
+    ]
+  },
+  {
+    "id": "convolution",
+    "title": "卷积",
+    "titleEn": "Convolution",
+    "branch": "complex",
+    "level": 4,
+    "summary": "卷积按「翻转—平移—相乘—积分」把两个函数合成一个新函数，满足交换律、结合律、分配律；它与傅里叶、拉普拉斯变换互相配合：时域卷积等于频域相乘。",
+    "summaryEn": "Convolution combines two functions by flip, shift, multiply and integrate; it is commutative, associative and distributive, and it exchanges with the Fourier and Laplace transforms — convolution in time becomes multiplication in frequency.",
+    "definition": "卷积是函数之间的一种「混合」运算。函数 $f$ 与 $g$ 的卷积定义为\n\n$$(f*g)(t)=\\int_{-\\infty}^{\\infty}f(\\tau)g(t-\\tau)\\,d\\tau.$$\n\n只要积分存在（例如 $f,g$ 都绝对可积，或一个有界、另一个有紧支撑），卷积就有意义；积分变量 $\\tau$ 是「哑变量」，结果只依赖于平移量 $t$。\n\n直观上，把 $g(t-\\tau)$ 看成 $g(\\tau)$ 关于纵轴翻转后再平移 $t$，卷积就是两条曲线重叠部分的「带符号面积」。例如两个宽度为 1 的单位矩形脉冲（方波）卷积得到一个三角形；宽度不同的两个矩形脉冲卷积得到梯形，支撑区间的长度等于两者宽度之和。也可以把卷积理解为以 $g$ 为核的**加权平均**：$f$ 被 $g$ 平滑，若 $g$ 是集中在一点附近的窄峰，则 $f*g$ 近似于 $f$ 的平移。\n\n卷积满足**交换律** $f*g=g*f$、**结合律** $(f*g)*h=f*(g*h)$、**分配律** $f*(g+h)=f*g+f*h$；在适当条件下求导可以落在任意一个因子上：$(f*g)'=f'*g=f*g'$。于是函数空间在卷积下成为一个交换结合代数。\n\n**卷积定理**是卷积在应用数学中无处不在的原因：对傅里叶变换\n\n$$\\mathcal{F}[f*g](\\omega)=F(\\omega)G(\\omega),$$\n\n时域的卷积对应频域的普通乘法（拉普拉斯变换也有同样的性质）。求解线性系统的输出 $y=h*x$（$h$ 是冲激响应）时，直接计算卷积往往很麻烦，而作变换后只需相乘或相除，再逆变换回去即可。",
+    "definitionEn": "Convolution is a way of blending two functions. The convolution of $f$ and $g$ is defined by\n\n$$(f*g)(t)=\\int_{-\\infty}^{\\infty}f(\\tau)g(t-\\tau)\\,d\\tau.$$\n\nWhenever the integral converges (for instance when both functions are absolutely integrable, or one is bounded and the other compactly supported) the convolution is well defined; the integration variable $\\tau$ is a dummy variable and only the shift $t$ matters.\n\nPicture $g(t-\\tau)$ as $g(\\tau)$ reflected in the vertical axis and then shifted by $t$: the convolution is the signed area of the overlap of the two graphs. Two unit rectangular pulses of width 1 convolve to a triangle, while pulses of different widths give a trapezoid whose support is the sum of the two widths. Equivalently, convolution is a weighted average of $f$ with kernel $g$: $f$ is smoothed by $g$, and when $g$ is a narrow peak the result is approximately a shift of $f$.\n\nConvolution is **commutative** ($f*g=g*f$), **associative** ($(f*g)*h=f*(g*h)$) and **distributive** ($f*(g+h)=f*g+f*h$); under suitable hypotheses differentiation can be put on either factor, $(f*g)'=f'*g=f*g'$. Function spaces therefore form a commutative algebra under convolution.\n\nThe **convolution theorem** explains the ubiquity of convolution in applied mathematics. For the Fourier transform,\n\n$$\\mathcal{F}[f*g](\\omega)=F(\\omega)G(\\omega),$$\n\nconvolution in time becomes ordinary multiplication in frequency (the Laplace transform obeys the same rule). To obtain the output $y=h*x$ of a linear system ($h$ the impulse response) one often transforms, multiplies or divides, and transforms back.",
+    "formulas": [
+      {
+        "latex": "(f*g)(t)=\\int_{-\\infty}^{\\infty}f(\\tau)g(t-\\tau)\\,d\\tau",
+        "note": "卷积的定义：翻转、平移、相乘、积分；$\\tau$ 是哑变量，结果只与平移量 $t$ 有关。",
+        "noteEn": "Definition: flip, shift, multiply, integrate; $\\tau$ is a dummy variable and only the shift $t$ survives."
+      },
+      {
+        "latex": "f*g=g*f,\\qquad (f*g)*h=f*(g*h),\\qquad f*(g+h)=f*g+f*h",
+        "note": "交换律、结合律、分配律；卷积因此是一种双线性、结合、交换的运算。",
+        "noteEn": "Commutative, associative and distributive laws; convolution is a bilinear, associative, commutative operation."
+      },
+      {
+        "latex": "\\mathcal{F}[f*g](\\omega)=F(\\omega)G(\\omega),\\qquad \\mathcal{L}[f*g](s)=F(s)G(s)",
+        "note": "卷积定理：时域卷积对应频域（或 $s$ 域）相乘，是信号处理与解微分方程的核心工具。",
+        "noteEn": "Convolution theorem: convolution in time becomes multiplication in frequency (or in the $s$-domain) — the key tool of signal processing."
+      },
+      {
+        "latex": "(f*g)'(t)=(f'*g)(t)=(f*g')(t)",
+        "note": "求导可以落在任意一个因子上（在适当可微与衰减条件下）。",
+        "noteEn": "Differentiation may be placed on either factor, under suitable differentiability and decay assumptions."
+      },
+      {
+        "latex": "(\\mathbf{1}_{[0,1]}*\\mathbf{1}_{[0,1]})(t)=\\max\\left(0,\\,1-|t-1|\\right)",
+        "note": "宽 1 的矩形脉冲自卷积得到三角形：支撑变宽为 2，形状变光滑。",
+        "noteEn": "A unit rectangular pulse convolved with itself gives a triangle: the support doubles in width and the shape becomes smoother."
+      }
+    ],
+    "expression": {
+      "text": "(f ∗ g)(t) = ∫_{−∞}^{∞} f(τ) g(t − τ) dτ",
+      "symbol": "(f*g)(t)=\\int_{-\\infty}^{\\infty}f(\\tau)g(t-\\tau)\\,d\\tau",
+      "note": "把 g 翻转后平移 t 再与 f 相乘积分；卷积与傅里叶变换满足 F[f∗g] = F[f]·F[g]。",
+      "noteEn": "Flip $g$, shift it by $t$, multiply by $f$ and integrate; convolution satisfies $\\mathcal{F}[f*g]=F\\cdot G$."
+    },
+    "properties": [
+      "交换律、结合律、分配律一应俱全，再配上线性的数乘，卷积是双线性运算。",
+      "支撑集相加：若 $f$ 的支撑在 $[a,b]$、$g$ 的支撑在 $[c,d]$，则 $f*g$ 的支撑在 $[a+c,b+d]$（宽度相加）。",
+      "平滑效果：与光滑核卷积使函数变光滑（矩形脉冲自卷积得连续的三角形）；与宽度趋于 0 的窄脉冲卷积近似于平移。",
+      "求导可分配到任一因子：$(f*g)'=f'*g=f*g'$，这条性质让卷积能直接代入微分方程。",
+      "卷积定理：$\\mathcal{F}[f*g]=F(\\omega)G(\\omega)$，把卷积化为乘法；反过来时域乘积对应频域卷积 $\\frac{1}{2\\pi}(F*G)$。"
+    ],
+    "propertiesEn": [
+      "Commutativity, associativity and distributivity hold, so together with bilinearity convolution turns suitable function spaces into a commutative algebra.",
+      "Supports add: if $f$ is supported on $[a,b]$ and $g$ on $[c,d]$, then $f*g$ is supported on $[a+c,b+d]$ — widths add.",
+      "Smoothing: convolving with a smooth kernel makes a function smoother (a rectangular pulse convolved with itself is a continuous triangle); convolving with a very narrow pulse is approximately a shift.",
+      "Differentiation can be moved to either factor: $(f*g)'=f'*g=f*g'$, which is what makes convolution usable in differential equations.",
+      "Convolution theorem: $\\mathcal{F}[f*g]=F(\\omega)G(\\omega)$ turns convolution into multiplication; dually, a product in time becomes $\\frac{1}{2\\pi}(F*G)$ in frequency."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "max(0, min(1, 100*x)) * max(0, min(1, 100*(1-x)))",
+          "color": "#4cc9f0",
+          "label": "f(t)：宽 1"
+        },
+        {
+          "expr": "max(0, min(1, 100*x)) * max(0, min(1, 100*(2-x)))",
+          "color": "#ff6b9d",
+          "label": "g(t)：宽 2"
+        },
+        {
+          "expr": "max(0, min(min(x, 3-x), 1))",
+          "color": "#ffd166",
+          "label": "(f∗g)(t)：梯形"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "max(0, min(1, 100*x)) * max(0, min(1, 100*(1-x)))",
+          "from": 0,
+          "to": 1,
+          "base": 0,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.18)"
+        },
+        {
+          "expr": "max(0, min(1, 100*x)) * max(0, min(1, 100*(2-x)))",
+          "from": 0,
+          "to": 2,
+          "base": 0,
+          "color": "#ff6b9d",
+          "fill": "rgba(255,107,157,0.15)"
+        },
+        {
+          "expr": "max(0, min(min(x, 3-x), 1))",
+          "from": 0,
+          "to": 3,
+          "base": 0,
+          "color": "#ffd166",
+          "fill": "rgba(255,209,102,0.15)"
+        }
+      ],
+      "xRange": [
+        -0.8,
+        3.8
+      ],
+      "yRange": [
+        -0.2,
+        1.45
+      ],
+      "title": "卷积：宽 1 与宽 2 的矩形脉冲卷积得到梯形（宽度 3）"
+    },
+    "examples": [
+      {
+        "problem": "设 $f(t)=1$（$0\\le t\\le1$）、其余为 0；$g(t)=1$（$0\\le t\\le2$）、其余为 0。求 $(f*g)(t)$。",
+        "solution": "由定义，$(f*g)(t)=\\int_0^1g(t-\\tau)\\,d\\tau$（$f(\\tau)=1$ 仅当 $\\tau\\in[0,1]$）。被积函数 $g(t-\\tau)$ 不为零当且仅当 $0\\le t-\\tau\\le2$，即 $t-2\\le\\tau\\le t$。取两者的交集：\n\n当 $t<0$ 或 $t>3$ 时交集为空，$(f*g)(t)=0$；当 $0\\le t\\le1$ 时交集为 $[0,t]$，长度 $t$；当 $1\\le t\\le2$ 时交集为 $[0,1]$，长度 $1$；当 $2\\le t\\le3$ 时交集为 $[t-2,1]$，长度 $3-t$。于是\n\n$$(f*g)(t)=\\begin{cases}t,&0\\le t\\le1,\\\\1,&1\\le t\\le2,\\\\3-t,&2\\le t\\le3,\\\\0,&\\text{其他}.\\end{cases}$$\n\n即「先升、再平、后降」的梯形：在 $t=1$ 处升到最大值 1，支撑区间为 $[0,3]$，长度恰好是两段脉冲宽度之和 $1+2=3$。"
+      },
+      {
+        "problem": "设 $p(t)=1$（$|t|\\le\\frac12$）、其余为 0，用卷积定理解释「两个矩形脉冲的卷积得到三角脉冲」，并求其傅里叶变换。",
+        "solution": "先算 $p*p$：\n\n$$(p*p)(t)=\\int_{-1/2}^{1/2}p(t-\\tau)\\,d\\tau,$$\n\n它是区间 $\\left[-\\frac12,\\frac12\\right]$ 与 $\\left[t-\\frac12,t+\\frac12\\right]$ 的重叠长度。当 $|t|\\le1$ 时该长度为 $1-|t|$，当 $|t|>1$ 时为 0，即底宽 2、高 1 的三角形。\n\n再求变换：$P(\\omega)=\\int_{-1/2}^{1/2}e^{-i\\omega t}\\,dt=\\frac{2\\sin(\\omega/2)}{\\omega}$，由卷积定理\n\n$$\\mathcal{F}[p*p](\\omega)=P(\\omega)^2=\\left(\\frac{2\\sin(\\omega/2)}{\\omega}\\right)^2=\\frac{4\\sin^2(\\omega/2)}{\\omega^2}.$$\n\n时域的「三角形」对应频域的「sinc 平方」，这正是照相机、通信系统中常用的平滑窗函数的频谱形状。"
+      }
+    ],
+    "tags": [
+      "卷积",
+      "卷积定理",
+      "信号处理",
+      "线性系统"
+    ],
+    "links": [
+      "fourier-transform",
+      "laplace-transform",
+      "integral",
+      "fourier-series"
+    ]
+  },
+  {
+    "id": "fourier-transform",
+    "title": "傅里叶变换",
+    "titleEn": "Fourier Transform",
+    "branch": "complex",
+    "level": 5,
+    "summary": "把非周期函数分解为连续频率的复指数叠加；采用 F(ω)=∫f(t)e^{−iωt}dt 与 f(t)=(1/2π)∫F(ω)e^{iωt}dω 的约定，矩形脉冲的频谱是 sinc 型函数，高斯的频谱仍是高斯。",
+    "summaryEn": "Decomposes a non-periodic function into a continuum of complex exponentials; under the convention F(ω)=∫f(t)e^{−iωt}dt with f(t)=(1/2π)∫F(ω)e^{iωt}dω, a rectangular pulse has a sinc-type spectrum and a Gaussian transforms to a Gaussian.",
+    "definition": "傅里叶变换把函数从「时域」搬到「频域」。本卡片采用如下**约定**（不同教材的常数因子不同，使用前务必统一）：\n\n$$F(\\omega)=\\int_{-\\infty}^{\\infty}f(t)e^{-i\\omega t}\\,dt,\\qquad f(t)=\\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty}F(\\omega)e^{i\\omega t}\\,d\\omega.$$\n\n$F(\\omega)$ 称为 $f$ 的**频谱**，$|F(\\omega)|$ 是幅频，$\\arg F(\\omega)$ 是相频。注意逆变换带着 $\\frac{1}{2\\pi}$ 因子，而正变换不带。\n\n它是傅里叶级数的连续版本：把周期为 $T$ 的函数展开为频率 $\\omega_n=n\\omega_0$（$\\omega_0=\\frac{2\\pi}{T}$）的复指数之和；当 $T\\to\\infty$，离散频率越来越密，级数求和自然地过渡为对 $\\omega$ 的积分，而系数化为频谱 $F(\\omega)$。所以非周期信号可以看成「周期无限长」的周期信号。\n\n只要 $f$ 绝对可积（$\\int|f(t)|dt<\\infty$）且分段光滑，变换积分绝对收敛，逆变换在 $f$ 的连续点处成立、在跳跃点给出左右极限的平均值（狄利克雷型条件）。频谱一般是复值的；实信号满足共轭对称 $F(-\\omega)=\\overline{F(\\omega)}$，于是 $|F|$ 是偶函数、相频是奇函数，画图时通常只画 $\\omega\\ge0$ 的部分。\n\n最简单的例子：宽 $T$、中心在原点的矩形脉冲，其频谱为 $\\frac{2\\sin(\\omega T/2)}{\\omega}$——中心峰值加上无穷多个零点（$\\omega=\\frac{2k\\pi}{T}$，$k\\ne0$）的振荡函数，即 sinc 型函数；而高斯函数的频谱仍是高斯函数。帕塞瓦尔等式 $\\int|f|^2dt=\\frac{1}{2\\pi}\\int|F|^2d\\omega$ 则说明变换前后「能量」守恒。",
+    "definitionEn": "The Fourier transform moves a function from the time domain to the frequency domain. This card uses the following **convention** (textbooks differ in the constant factors, so fix one convention first):\n\n$$F(\\omega)=\\int_{-\\infty}^{\\infty}f(t)e^{-i\\omega t}\\,dt,\\qquad f(t)=\\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty}F(\\omega)e^{i\\omega t}\\,d\\omega.$$\n\n$F(\\omega)$ is called the **spectrum** of $f$, with $|F(\\omega)|$ the amplitude spectrum and $\\arg F(\\omega)$ the phase spectrum. Note that the inverse transform carries the factor $\\frac{1}{2\\pi}$ while the forward transform does not.\n\nThe transform is the continuous version of a Fourier series: a $T$-periodic function is expanded in exponentials at the discrete frequencies $\\omega_n=n\\omega_0$ with $\\omega_0=\\frac{2\\pi}{T}$; letting $T\\to\\infty$ makes the frequencies denser and denser until the sum passes into an integral over $\\omega$, while the coefficients become the spectrum $F(\\omega)$. A non-periodic signal is thus a periodic signal of infinite period.\n\nIf $f$ is absolutely integrable ($\\int|f(t)|dt<\\infty$) and piecewise smooth, the transform converges absolutely, the inversion formula holds at points of continuity, and at a jump it returns the average of the one-sided limits (Dirichlet-type conditions). The spectrum is generally complex; for a real signal it is conjugate symmetric, $F(-\\omega)=\\overline{F(\\omega)}$, so $|F|$ is even and the phase is odd, and one usually plots only $\\omega\\ge0$.\n\nSimplest examples: a rectangular pulse of width $T$ centred at the origin has spectrum $\\frac{2\\sin(\\omega T/2)}{\\omega}$ — a central peak together with infinitely many zeros at $\\omega=\\frac{2k\\pi}{T}$ ($k\\ne0$), i.e. a sinc-type function; and a Gaussian transforms to a Gaussian. Parseval's identity $\\int|f|^2dt=\\frac{1}{2\\pi}\\int|F|^2d\\omega$ expresses conservation of energy.",
+    "formulas": [
+      {
+        "latex": "F(\\omega)=\\int_{-\\infty}^{\\infty}f(t)e^{-i\\omega t}\\,dt",
+        "note": "傅里叶变换（本卡片约定：正变换不带常数因子，核为 $e^{-i\\omega t}$）。",
+        "noteEn": "The forward transform (this card's convention: no constant factor, kernel $e^{-i\\omega t}$)."
+      },
+      {
+        "latex": "f(t)=\\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty}F(\\omega)e^{i\\omega t}\\,d\\omega",
+        "note": "逆变换：把各频率分量按频谱加权后叠加回时域，注意 $\\frac{1}{2\\pi}$ 因子。",
+        "noteEn": "Inverse transform: recombine the frequency components, with the factor $\\frac{1}{2\\pi}$."
+      },
+      {
+        "latex": "\\int_{-T/2}^{T/2}e^{-i\\omega t}\\,dt=\\frac{2\\sin(\\omega T/2)}{\\omega}\\ (\\omega\\ne0),\\qquad \\int_{-T/2}^{T/2}dt=T",
+        "note": "矩形脉冲的频谱是 sinc 型函数：中心峰值 $T$（即 $\\omega\\to0$ 的极限），零点等间距分布。",
+        "noteEn": "The spectrum of a rectangular pulse is a sinc-type function: central peak $T$ (the limit as $\\omega\\to0$) with equally spaced zeros."
+      },
+      {
+        "latex": "\\mathcal{F}\\left[e^{-at^2}\\right](\\omega)=\\sqrt{\\frac{\\pi}{a}}\\,e^{-\\omega^2/(4a)}\\quad(a>0)",
+        "note": "高斯函数的变换仍是高斯函数：最窄的高斯变换后最宽，二者互相制约。",
+        "noteEn": "A Gaussian transforms to a Gaussian: the narrower the original, the wider the transform."
+      },
+      {
+        "latex": "\\mathcal{F}\\left[e^{-a|t|}\\right](\\omega)=\\frac{2a}{a^2+\\omega^2}\\quad(a>0)",
+        "note": "双边指数函数的频谱是洛伦兹型；与矩形脉冲不同，它处处光滑、无振荡零点。",
+        "noteEn": "The two-sided exponential has a Lorentzian spectrum; unlike the rectangular pulse it is smooth with no oscillatory zeros."
+      }
+    ],
+    "expression": {
+      "text": "F(ω) = ∫_{−∞}^{∞} f(t) e^(−iωt) dt，f(t) = (1/2π)∫_{−∞}^{∞} F(ω) e^(iωt) dω",
+      "symbol": "F(\\omega)=\\int_{-\\infty}^{\\infty}f(t)e^{-i\\omega t}\\,dt",
+      "note": "正变换不带常数因子、逆变换带 1/(2π)，这是本卡片统一的约定。",
+      "noteEn": "No constant in the forward transform, a factor 1/(2π) in the inverse — the convention used throughout this card."
+    },
+    "properties": [
+      "约定必须统一：本卡片用 $e^{-i\\omega t}$ 与逆变换的 $\\frac{1}{2\\pi}$ 因子；若换成对称约定（正逆变换各乘 $1/\\sqrt{2\\pi}$），各条性质中的常数会随之改变。",
+      "频谱 $F(\\omega)$ 一般是复值函数；实信号满足共轭对称 $F(-\\omega)=\\overline{F(\\omega)}$，幅频为偶函数、相频为奇函数。",
+      "绝对可积且分段光滑的函数可以反演：连续点处复原为 $f(t)$，跳跃点处给出左右极限的平均值。",
+      "帕塞瓦尔等式 $\\int|f|^2dt=\\frac{1}{2\\pi}\\int|F|^2d\\omega$：变换保持能量，$\\frac{1}{2\\pi}$ 因子来自本卡片的约定。",
+      "卷积定理 $\\mathcal{F}[f*g]=F\\cdot G$ 把时域卷积化为频域乘法，是滤波器设计与求解微分方程的原理。"
+    ],
+    "propertiesEn": [
+      "Fix the convention: this card uses $e^{-i\\omega t}$ with the factor $\\frac{1}{2\\pi}$ in the inverse transform; the symmetric convention (both directions with $1/\\sqrt{2\\pi}$) changes the constants throughout.",
+      "The spectrum $F(\\omega)$ is generally complex; for a real signal $F(-\\omega)=\\overline{F(\\omega)}$, so the amplitude spectrum is even and the phase spectrum odd.",
+      "An absolutely integrable, piecewise smooth function can be recovered: $f(t)$ at continuity points, the average of one-sided limits at jumps.",
+      "Parseval's identity, $\\int|f|^2dt=\\frac{1}{2\\pi}\\int|F|^2d\\omega$, says energy is preserved — with the factor $\\frac{1}{2\\pi}$ of this convention.",
+      "The convolution theorem $\\mathcal{F}[f*g]=F\\cdot G$ turns time-domain convolution into frequency-domain multiplication, the basis of filter design and ODE solving."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2*sin(x)/x",
+          "color": "#4cc9f0",
+          "label": "F(ω) = 2 sin ω / ω"
+        }
+      ],
+      "xRange": [
+        -20,
+        20
+      ],
+      "yRange": [
+        -0.9,
+        2.3
+      ],
+      "title": "矩形脉冲（|t| ≤ 1）的频谱：F(ω) = 2 sin ω / ω（sinc 型）"
+    },
+    "examples": [
+      {
+        "problem": "求矩形脉冲 $p(t)=1$（$|t|\\le1$）、$p(t)=0$（$|t|>1$）的傅里叶变换，并求 $\\omega\\to0$ 时的极限。",
+        "solution": "按定义\n\n$$F(\\omega)=\\int_{-1}^{1}e^{-i\\omega t}\\,dt=\\left[\\frac{e^{-i\\omega t}}{-i\\omega}\\right]_{-1}^{1}=\\frac{e^{-i\\omega}-e^{i\\omega}}{-i\\omega}=\\frac{2\\sin\\omega}{\\omega}\\quad(\\omega\\ne0).$$\n\n当 $\\omega\\to0$ 时 $\\frac{2\\sin\\omega}{\\omega}\\to2$，而 $F(0)=\\int_{-1}^{1}dt=2$，两者一致；这正对应脉冲的面积。频谱在 $\\omega=k\\pi$（$k=\\pm1,\\pm2,\\dots$）处为零，取值在正负之间振荡衰减。"
+      },
+      {
+        "problem": "求 $f(t)=e^{-a|t|}$（$a>0$）的傅里叶变换。",
+        "solution": "把积分拆成两段并合并指数：\n\n$$F(\\omega)=\\int_{-\\infty}^{0}e^{at}e^{-i\\omega t}\\,dt+\\int_{0}^{\\infty}e^{-at}e^{-i\\omega t}\\,dt=\\int_{-\\infty}^{0}e^{(a-i\\omega)t}dt+\\int_{0}^{\\infty}e^{-(a+i\\omega)t}dt.$$\n\n两段积分都绝对收敛，直接计算：\n\n$$F(\\omega)=\\frac{1}{a-i\\omega}+\\frac{1}{a+i\\omega}=\\frac{(a+i\\omega)+(a-i\\omega)}{a^2+\\omega^2}=\\frac{2a}{a^2+\\omega^2}.$$\n\n这是洛伦兹型谱：峰值 $\\frac{2}{a}$ 在 $\\omega=0$，且当 $|\\omega|\\to\\infty$ 时按 $\\frac{1}{\\omega^2}$ 衰减（处处为正、无振荡零点）。"
+      }
+    ],
+    "tags": [
+      "傅里叶变换",
+      "频谱",
+      "sinc",
+      "积分变换"
+    ],
+    "links": [
+      "fourier-series",
+      "laplace-transform",
+      "fourier-transform-properties",
+      "convolution",
+      "integral"
+    ]
+  },
+  {
+    "id": "fourier-transform-properties",
+    "title": "傅里叶变换的性质",
+    "titleEn": "Properties of the Fourier Transform",
+    "branch": "complex",
+    "level": 5,
+    "summary": "线性、时移、频移、缩放、微分、卷积定理与帕塞瓦尔等式——这些性质把时域中的运算翻译成频域中的代数运算，是傅里叶方法解题的骨架。",
+    "summaryEn": "Linearity, time and frequency shifts, scaling, differentiation, the convolution theorem and Parseval's identity translate operations in the time domain into algebraic operations in frequency — the backbone of the Fourier method.",
+    "definition": "本卡片沿用约定 $F(\\omega)=\\int_{-\\infty}^{\\infty}f(t)e^{-i\\omega t}\\,dt$ 与 $f(t)=\\frac{1}{2\\pi}\\int F(\\omega)e^{i\\omega t}d\\omega$（记 $\\mathcal{F}[f]=F$、$\\mathcal{F}[g]=G$）。所有性质都依赖这个约定：换约定时，时移、微分公式中的因子会变号或挪位置。最基本的一条是**线性**：\n\n$$\\mathcal{F}[af+bg]=a\\mathcal{F}[f]+b\\mathcal{F}[g].$$\n\n它在下面每一条性质中都会被用到。\n\n**时移与频移。** 把信号延迟 $t_0$，频谱只是多乘一个相位因子，幅度保持不变：$\\mathcal{F}[f(t-t_0)]=e^{-i\\omega t_0}F(\\omega)$；反过来，用 $e^{i\\omega_0 t}$ 调制信号会把频谱整体右移：$\\mathcal{F}[e^{i\\omega_0t}f(t)]=F(\\omega-\\omega_0)$。两条公式互为「对偶」，是调幅通信与移相器的数学语言。**缩放**：$\\mathcal{F}[f(at)]=\\frac{1}{|a|}F\\!\\left(\\frac{\\omega}{a}\\right)$——时域压缩，频域展宽。\n\n**微分。** $\\mathcal{F}[f^{(n)}(t)]=(i\\omega)^nF(\\omega)$（要求边界项消失），时域求导变成频域乘以 $i\\omega$，这正是傅里叶方法能把常微分方程化为代数方程的根据；对偶地，时域乘以 $t$ 对应频域求导：$\\mathcal{F}[t\\,f(t)]=i\\frac{dF}{d\\omega}(\\omega)$。\n\n**卷积定理与帕塞瓦尔等式。** 时域卷积对应频域相乘：$\\mathcal{F}[f*g]=F(\\omega)G(\\omega)$；反过来时域相乘对应频域卷积：$\\mathcal{F}[f\\,g]=\\frac{1}{2\\pi}(F*G)(\\omega)$。帕塞瓦尔等式 $\\int|f|^2dt=\\frac{1}{2\\pi}\\int|F|^2d\\omega$ 说明变换保持能量，其中的 $\\frac{1}{2\\pi}$ 因子来自本卡片的约定。",
+    "definitionEn": "This card keeps the convention $F(\\omega)=\\int_{-\\infty}^{\\infty}f(t)e^{-i\\omega t}dt$ with $f(t)=\\frac{1}{2\\pi}\\int F(\\omega)e^{i\\omega t}d\\omega$ (write $\\mathcal{F}[f]=F$, $\\mathcal{F}[g]=G$). Every property depends on it: under another convention the factors in the shift and differentiation rules move or change sign. The most basic rule is **linearity**:\n\n$$\\mathcal{F}[af+bg]=a\\mathcal{F}[f]+b\\mathcal{F}[g].$$\n\nIt will be used in every property below.\n\n**Time and frequency shifts.** Delaying a signal by $t_0$ merely multiplies its spectrum by a phase factor and leaves the magnitude unchanged: $\\mathcal{F}[f(t-t_0)]=e^{-i\\omega t_0}F(\\omega)$. Conversely, modulating with $e^{i\\omega_0t}$ shifts the spectrum: $\\mathcal{F}[e^{i\\omega_0t}f(t)]=F(\\omega-\\omega_0)$. The two formulas are dual, and they are the language of amplitude modulation and phase shifters. **Scaling:** $\\mathcal{F}[f(at)]=\\frac{1}{|a|}F\\!\\left(\\frac{\\omega}{a}\\right)$ — compress in time, stretch in frequency.\n\n**Differentiation.** $\\mathcal{F}[f^{(n)}(t)]=(i\\omega)^nF(\\omega)$ (assuming the boundary terms vanish): differentiation in time becomes multiplication by $i\\omega$ in frequency, which is exactly why the Fourier method turns ODEs into algebraic equations. Dually, multiplication by $t$ becomes differentiation in frequency, $\\mathcal{F}[t\\,f(t)]=i\\frac{dF}{d\\omega}(\\omega)$.\n\n**Convolution theorem and Parseval's identity.** Convolution in time is multiplication in frequency: $\\mathcal{F}[f*g]=F(\\omega)G(\\omega)$. Dually, a product in time becomes convolution in frequency: $\\mathcal{F}[f\\,g]=\\frac{1}{2\\pi}(F*G)(\\omega)$. Parseval's identity $\\int|f|^2dt=\\frac{1}{2\\pi}\\int|F|^2d\\omega$ says energy is preserved, the factor $\\frac{1}{2\\pi}$ again coming from this card's convention.",
+    "formulas": [
+      {
+        "latex": "\\mathcal{F}[af+bg]=a\\mathcal{F}[f]+b\\mathcal{F}[g]",
+        "note": "线性：变换是线性算子，叠加原理成立。",
+        "noteEn": "Linearity: the transform is a linear operator, so superposition holds."
+      },
+      {
+        "latex": "\\mathcal{F}[f(t-t_0)]=e^{-i\\omega t_0}F(\\omega),\\qquad \\mathcal{F}\\left[e^{i\\omega_0t}f(t)\\right]=F(\\omega-\\omega_0),\\qquad \\mathcal{F}[f(at)]=\\frac{1}{|a|}F\\!\\left(\\frac{\\omega}{a}\\right)",
+        "note": "时移只改变相位；频移把频谱整体平移；缩放使时域压缩、频域展宽。",
+        "noteEn": "A time shift only changes the phase; a frequency shift translates the spectrum; scaling compresses one domain and stretches the other."
+      },
+      {
+        "latex": "\\mathcal{F}\\left[f^{(n)}(t)\\right]=(i\\omega)^nF(\\omega),\\qquad \\mathcal{F}[t\\,f(t)]=i\\frac{dF}{d\\omega}(\\omega)",
+        "note": "时域求导 $\\leftrightarrow$ 频域乘 $i\\omega$；时域乘 $t$ $\\leftrightarrow$ 频域求导。",
+        "noteEn": "Differentiation in time $\\leftrightarrow$ multiplication by $i\\omega$ in frequency; multiplication by $t$ in time $\\leftrightarrow$ differentiation in frequency."
+      },
+      {
+        "latex": "\\mathcal{F}[f*g]=F(\\omega)G(\\omega),\\qquad \\mathcal{F}[f\\,g]=\\frac{1}{2\\pi}(F*G)(\\omega)",
+        "note": "卷积定理及其对偶形式：时域卷积 $\\leftrightarrow$ 频域相乘，时域相乘 $\\leftrightarrow$ 频域卷积。",
+        "noteEn": "The convolution theorem and its dual: convolution in time $\\leftrightarrow$ multiplication in frequency, and vice versa up to $\\frac{1}{2\\pi}$."
+      },
+      {
+        "latex": "\\int_{-\\infty}^{\\infty}|f(t)|^2dt=\\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty}|F(\\omega)|^2d\\omega",
+        "note": "帕塞瓦尔等式：能量守恒，$|F(\\omega)|^2$ 称为能量谱密度。",
+        "noteEn": "Parseval's identity: conservation of energy, with $|F(\\omega)|^2$ the energy spectral density."
+      }
+    ],
+    "expression": {
+      "text": "F[f(t − t₀)] = e^(−iωt₀) F(ω)，F[e^(iω₀t) f(t)] = F(ω − ω₀)",
+      "symbol": "\\mathcal{F}[f(t-t_0)]=e^{-i\\omega t_0}F(\\omega)",
+      "note": "时移只改变相位（幅度谱不变）；频移把频谱整体平移，二者互为对偶。",
+      "noteEn": "A time shift changes only the phase (the amplitude spectrum is untouched); a frequency shift translates the spectrum — the two are dual."
+    },
+    "properties": [
+      "线性是一切性质的起点：变换把线性组合变成线性组合，因此可以把复杂信号拆成简单分量分别处理。",
+      "时移只改变相位（$|F|$ 不变），对应「延迟不改变各频率成分的强弱」；频移则整体平移频谱，对偶成立。",
+      "微分性质 $\\mathcal{F}[f^{(n)}]=(i\\omega)^nF$ 把常微分方程化为代数方程，是傅里叶方法的核心；对偶形式 $\\mathcal{F}[tf]=iF'(\\omega)$ 同样常用。",
+      "缩放性质 $\\mathcal{F}[f(at)]=\\frac{1}{|a|}F(\\omega/a)$：时域越集中，频域越展开，这是不确定性原理的雏形。",
+      "卷积定理与帕塞瓦尔等式：$\\mathcal{F}[f*g]=FG$、$\\int|f|^2=\\frac{1}{2\\pi}\\int|F|^2$；后者说明能量在变换前后守恒（注意约定中的 $\\frac{1}{2\\pi}$）。"
+    ],
+    "propertiesEn": [
+      "Linearity starts everything: a linear combination of signals transforms into the same combination of transforms, so complicated signals split into simple pieces.",
+      "A time shift changes only the phase ($|F|$ is unchanged) — delay does not alter how strong each frequency component is; a frequency shift translates the spectrum, dually.",
+      "The differentiation rule $\\mathcal{F}[f^{(n)}]=(i\\omega)^nF$ converts ODEs into algebraic equations, the heart of the Fourier method; its dual $\\mathcal{F}[tf]=iF'(\\omega)$ is equally useful.",
+      "Scaling, $\\mathcal{F}[f(at)]=\\frac{1}{|a|}F(\\omega/a)$: concentration in one domain means spreading in the other — the germ of the uncertainty principle.",
+      "Convolution theorem and Parseval: $\\mathcal{F}[f*g]=FG$ and $\\int|f|^2=\\frac{1}{2\\pi}\\int|F|^2$; energy is preserved (mind the $\\frac{1}{2\\pi}$ of this convention)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2)",
+          "color": "#4cc9f0",
+          "label": "f(t) = e^(−t²)"
+        },
+        {
+          "expr": "sqrt(PI)*exp(-x^2/4)",
+          "color": "#ff6b9d",
+          "label": "F(ω) = √π·e^(−ω²/4)"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -0.25,
+        2.0
+      ],
+      "title": "高斯函数的傅里叶变换仍是高斯：e^(−t²) ↔ √π e^(−ω²/4)"
+    },
+    "examples": [
+      {
+        "problem": "已知 $\\mathcal{F}\\left[e^{-t^2/2}\\right](\\omega)=\\sqrt{2\\pi}\\,e^{-\\omega^2/2}$，用频移性质求 $\\mathcal{F}\\left[e^{-t^2/2}\\cos 3t\\right](\\omega)$。",
+        "solution": "把余弦写成复指数：$\\cos 3t=\\frac{e^{3it}+e^{-3it}}{2}$，则 $e^{-t^2/2}\\cos 3t=\\frac12\\left(e^{3it}e^{-t^2/2}+e^{-3it}e^{-t^2/2}\\right)$。\n\n由线性与频移性质（$\\omega_0=\\pm3$）：\n\n$$\\mathcal{F}\\left[e^{-t^2/2}\\cos3t\\right](\\omega)=\\frac12\\left[\\sqrt{2\\pi}e^{-(\\omega-3)^2/2}+\\sqrt{2\\pi}e^{-(\\omega+3)^2/2}\\right].$$\n\n即单个高斯峰裂成了中心在 $\\omega=\\pm3$ 的两个高斯峰——这正是「调制使频谱搬移」的直观图像。"
+      },
+      {
+        "problem": "用帕塞瓦尔等式计算 $\\int_{-\\infty}^{\\infty}\\frac{\\sin^2t}{t^2}\\,dt$。",
+        "solution": "取 $f(t)=\\frac{\\sin t}{t}$。由矩形脉冲的频谱（对偶性）可得 $\\mathcal{F}[f](\\omega)=\\pi$（$|\\omega|<1$），$=0$（$|\\omega|>1$）：矩形脉冲 $p(t)=1$（$|t|\\le1$）的变换是 $\\frac{2\\sin\\omega}{\\omega}$，再由对偶关系 $\\mathcal F[F(t)]=2\\pi f(-\\omega)$ 即可得到该结果。\n\n由帕塞瓦尔等式\n\n$$\\int_{-\\infty}^{\\infty}\\frac{\\sin^2t}{t^2}\\,dt=\\int_{-\\infty}^{\\infty}|f(t)|^2dt=\\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty}|F(\\omega)|^2d\\omega=\\frac{1}{2\\pi}\\int_{-1}^{1}\\pi^2d\\omega=\\frac{1}{2\\pi}\\cdot2\\pi^2=\\pi.$$\n\n所以 $\\int_{-\\infty}^{\\infty}\\frac{\\sin^2t}{t^2}dt=\\pi$，这也是光学与信号处理中著名的积分。"
+      }
+    ],
+    "tags": [
+      "傅里叶变换",
+      "卷积定理",
+      "帕塞瓦尔",
+      "时移与频移"
+    ],
+    "links": [
+      "fourier-transform",
+      "convolution",
+      "laplace-transform-properties",
+      "integral",
+      "fourier-series"
+    ]
+  }
+]

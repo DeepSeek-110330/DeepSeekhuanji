@@ -1,0 +1,470 @@
+[
+  {
+    "id": "riemannian-curvature-tensor",
+    "title": "黎曼曲率张量",
+    "titleEn": "The Riemann Curvature Tensor",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "度量与联络的二阶信息：R(X,Y)Z = ∇_X∇_YZ − ∇_Y∇_XZ − ∇_{[X,Y]}Z 度量「二阶协变导数不可交换」的程度，而 R ≡ 0 恰好刻画局部平坦。",
+    "summaryEn": "The second-order invariant of the metric: R(X,Y)Z = ∇_X∇_YZ − ∇_Y∇_XZ − ∇_{[X,Y]}Z measures the failure of second covariant derivatives to commute, and R ≡ 0 characterises local flatness.",
+    "definition": "平坦空间里「先沿 $X$ 求导、再沿 $Y$ 求导」与反过来做结果相同；一般流形上这个次序不能交换。**黎曼曲率张量**就是这种不可交换性的度量。定义（本批一律采用这个约定）：$$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z,$$ 最后一项李括号项 $-\\nabla_{[X,Y]}Z$ **不能漏**：少了它，$R$ 在一点的取值会依赖 $Y$ 在邻域内的变化，那就不是张量。加上它以后 $R$ 对三个变元都是 $C^{\\infty}(M)$-线性的，是 $(1,3)$ 型张量场。等价的说法：记二阶协变导数 $\\nabla^2_{X,Y}Z=\\nabla_X\\nabla_YZ-\\nabla_{\\nabla_XY}Z$，则 $$R(X,Y)Z=\\nabla^2_{X,Y}Z-\\nabla^2_{Y,X}Z,$$ 即**曲率就是二阶协变导数的交换子**（差额恰好由 $\\nabla_{\\nabla_XY}Z-\\nabla_{\\nabla_YX}Z=\\nabla_{[X,Y]}Z$ 补上）。\n**指标约定（本批所有公式都按它写，请务必注意次序）**：把分量定义为 $R(\\partial_i,\\partial_j)\\partial_k=R^{l}{}_{ijk}\\partial_l$，即**前两个下指标是求导方向、第三个才是被求导的向量**，于是 $$R^{l}{}_{ijk}=\\partial_i\\Gamma^{l}{}_{jk}-\\partial_j\\Gamma^{l}{}_{ik}+\\Gamma^{l}{}_{im}\\Gamma^{m}{}_{jk}-\\Gamma^{l}{}_{jm}\\Gamma^{m}{}_{ik}.$$ 结构是「两个导数项 + 两个乘积项」，符号按 $i\\leftrightarrow j$ 配对成反对称——这正是 $R(X,Y)Z=-R(Y,X)Z$ 在分量上的样子。$\\Gamma$ 本身不是张量（换坐标会多出二阶导数项），而两个导数项的非张量部分与两个 $\\Gamma\\Gamma$ 项恰好抵消，所以 $R$ 是张量：曲率可以测量，联络不可以。用度规拉下上指标得**全协变形式** $$R_{ijkl}=g_{lm}R^{m}{}_{ijk}=\\langle R(\\partial_i,\\partial_j)\\partial_k,\\partial_l\\rangle.$$ 许多教材把被求导的向量写在**第一个**下指标（把 $\\langle dx^{l},R(\\partial_j,\\partial_k)\\partial_i\\rangle$ 记作 $R^{l}{}_{ijk}$），那时坐标公式与一切缩并式都要跟着轮换下指标——例如里奇张量，本文次序写作 $R_{jl}=R^{i}{}_{ijl}$，另一套次序写作 $R_{jl}=R^{i}{}_{jil}$。查文献、抄公式时这里最容易出错。\n几何意义有两个层次。定性地说，$R\\equiv0$ **当且仅当局部平坦**：$R$ 恒为零时每点附近存在坐标使 $g_{ij}=\\delta_{ij}$（等价地：存在局部平行的正交标架，平行移动与路径无关）。要注意「局部」二字：平坦环面 $\\mathbb{T}^{n}=\\mathbb{R}^{n}/\\mathbb{Z}^{n}$ 满足 $R\\equiv0$，但整体并不等距于欧氏空间。定量的版本是测地坐标展开：在 $p$ 点的测地（法）坐标 $x$ 下（基在 $p$ 点取单位正交）$$g_{ij}(x)=\\delta_{ij}-\\frac{1}{3}R_{mijn}(p)\\,x^{m}x^{n}+O(|x|^{3}),\\qquad R_{mijn}=\\langle R(\\partial_m,\\partial_i)\\partial_j,\\partial_n\\rangle.$$ 也就是说：$\\Gamma(p)=0$ 总能在一点做到（一阶信息可消去），而度量偏离欧氏的第一个非平凡项（二阶项）完全由曲率决定；$R(p)\\neq0$ 的邻域无论换什么坐标都消不掉。",
+    "definitionEn": "In flat space it does not matter whether one differentiates first in the direction $X$ and then in the direction $Y$ or the other way round; on a general manifold the two orders do not commute. The **Riemann curvature tensor** measures exactly this failure. Definition (the convention used throughout this batch): $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$, where the Lie bracket term must not be dropped: without it the value of $R$ at a point would depend on the behaviour of $Y$ nearby, so the expression would not be tensorial. With it, $R$ is $C^{\\infty}(M)$-linear in all three arguments, i.e. a $(1,3)$-tensor field. Equivalently, writing $\\nabla^2_{X,Y}Z=\\nabla_X\\nabla_YZ-\\nabla_{\\nabla_XY}Z$, one has $R(X,Y)Z=\\nabla^2_{X,Y}Z-\\nabla^2_{Y,X}Z$: the curvature is the commutator of second covariant derivatives (the difference $\\nabla_{\\nabla_XY}Z-\\nabla_{\\nabla_YX}Z=\\nabla_{[X,Y]}Z$ closes the gap).\n**Index convention (all formulas in this batch follow it).** We write $R(\\partial_i,\\partial_j)\\partial_k=R^{l}{}_{ijk}\\partial_l$, i.e. the first two lower indices are the differentiation directions and the third is the vector being differentiated, so that $R^{l}{}_{ijk}=\\partial_i\\Gamma^{l}{}_{jk}-\\partial_j\\Gamma^{l}{}_{ik}+\\Gamma^{l}{}_{im}\\Gamma^{m}{}_{jk}-\\Gamma^{l}{}_{jm}\\Gamma^{m}{}_{ik}$. The pattern is \"two derivative terms plus two product terms\", with signs paired so that the expression is antisymmetric in $i\\leftrightarrow j$ — the component form of $R(X,Y)Z=-R(Y,X)Z$. The Christoffel symbols are not a tensor (under a change of coordinates a term with second derivatives appears), but their non-tensorial parts cancel in $R$, so $R$ is a tensor: curvature is measurable, a connection is not. Lowering the index with the metric gives the fully covariant form $R_{ijkl}=g_{lm}R^{m}{}_{ijk}=\\langle R(\\partial_i,\\partial_j)\\partial_k,\\partial_l\\rangle$. Many textbooks put the differentiated vector in the **first** lower index (writing $\\langle dx^{l},R(\\partial_j,\\partial_k)\\partial_i\\rangle$ as $R^{l}{}_{ijk}$); then the coordinate formula and every contraction must be permuted accordingly — for instance the Ricci tensor reads $R_{jl}=R^{i}{}_{ijl}$ in our ordering and $R_{jl}=R^{i}{}_{jil}$ in the other. This is the most common source of sign errors when copying formulas from the literature.\nGeometrically, $R\\equiv0$ **if and only if the manifold is locally flat**: near every point there are coordinates with $g_{ij}=\\delta_{ij}$ (equivalently, a locally parallel orthonormal frame exists and parallel transport is path independent). The word \"locally\" matters: the flat torus $\\mathbb{T}^{n}=\\mathbb{R}^{n}/\\mathbb{Z}^{n}$ has $R\\equiv0$ but is not isometric to Euclidean space. Quantitatively, in geodesic (normal) coordinates $x$ at $p$, with an orthonormal basis at $p$, one has $g_{ij}(x)=\\delta_{ij}-\\frac{1}{3}R_{mijn}(p)x^{m}x^{n}+O(|x|^{3})$ with $R_{mijn}=\\langle R(\\partial_m,\\partial_i)\\partial_j,\\partial_n\\rangle$. Thus $\\Gamma(p)=0$ can always be arranged at a single point (first-order information can be removed), while the first non-trivial deviation of the metric from the Euclidean one — the quadratic term — is determined by the curvature; if $R(p)\\neq0$, no choice of coordinates can make the neighbourhood Euclidean.",
+    "formulas": [
+      {
+        "latex": "R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z=\\nabla^2_{X,Y}Z-\\nabla^2_{Y,X}Z",
+        "note": "定义（约定）：李括号项不能漏，否则不是张量；等价地，曲率是二阶协变导数的交换子。",
+        "noteEn": "The definition (our convention): the $[X,Y]$ term must not be dropped, otherwise the expression is not tensorial; equivalently, curvature is the commutator of second covariant derivatives."
+      },
+      {
+        "latex": "R^{l}{}_{ijk}=\\partial_i\\Gamma^{l}{}_{jk}-\\partial_j\\Gamma^{l}{}_{ik}+\\Gamma^{l}{}_{im}\\Gamma^{m}{}_{jk}-\\Gamma^{l}{}_{jm}\\Gamma^{m}{}_{ik}",
+        "note": "$R(\\partial_i,\\partial_j)\\partial_k=R^{l}{}_{ijk}\\partial_l$ 的坐标公式：两项导数 + 两项乘积，关于 $i\\leftrightarrow j$ 反对称；换另一套下指标次序的文献请重新核对。",
+        "noteEn": "Coordinate formula for $R(\\partial_i,\\partial_j)\\partial_k=R^{l}{}_{ijk}\\partial_l$: two derivative terms plus two product terms, antisymmetric in $i\\leftrightarrow j$; re-check it when using sources with the other index order."
+      },
+      {
+        "latex": "R_{ijkl}=g_{lm}R^{m}{}_{ijk}=\\langle R(\\partial_i,\\partial_j)\\partial_k,\\partial_l\\rangle,\\qquad R(X,Y)Z=-R(Y,X)Z",
+        "note": "全协变形式与最基本的反对称性 $R_{ijkl}=-R_{jikl}$；$R(X,X)Y=0$。",
+        "noteEn": "The fully covariant form and the basic antisymmetry $R_{ijkl}=-R_{jikl}$; in particular $R(X,X)Y=0$."
+      },
+      {
+        "latex": "g_{ij}(x)=\\delta_{ij}-\\tfrac{1}{3}R_{mijn}(p)\\,x^{m}x^{n}+O(|x|^{3})",
+        "note": "测地坐标下的展开：$p$ 点处可以取 $g=\\delta$、$\\Gamma=0$，而度量偏离欧氏的第一个非平凡项就是曲率（$R_{mijn}=\\langle R(\\partial_m,\\partial_i)\\partial_j,\\partial_n\\rangle$）。",
+        "noteEn": "Expansion in geodesic (normal) coordinates: at $p$ one may arrange $g=\\delta$ and $\\Gamma=0$, and the first non-trivial deviation of the metric from Euclidean is the curvature ($R_{mijn}=\\langle R(\\partial_m,\\partial_i)\\partial_j,\\partial_n\\rangle$)."
+      },
+      {
+        "latex": "R\\equiv0\\iff\\Gamma\\ \\text{可局部消去}\\iff g\\ \\text{局部等距于欧氏度量}\\iff\\ \\text{存在局部平行正交标架}",
+        "note": "局部平坦判据：四个条件等价；注意只是「局部」，平坦环面就是整体不等距于欧氏空间的例子。",
+        "noteEn": "Local flatness criterion: these four conditions are equivalent; note that it is only local — the flat torus is not globally isometric to Euclidean space."
+      }
+    ],
+    "properties": [
+      "**张量性与线性性**：$R$ 是 $(1,3)$ 型张量，对三个变元 $C^{\\infty}(M)$-线性；固定 $X,Y$ 时 $Z\\mapsto R(X,Y)Z$ 是切空间上的线性算子，而 $(X,Y)\\mapsto R(X,Y)$ 反对称（所以 $R(X,X)Y=0$）。$\\Gamma$ 不是张量而 $R$ 是张量，这就是「曲率是几何量、联络是坐标产物」的准确含义。",
+      "**局部而非整体的平坦性**：$R\\equiv0$ 只保证局部欧氏。整体上还可能有拓扑与和乐效应：平坦环面、平坦 Möbius 带都满足 $R\\equiv0$，但前者 $\\pi_1\\cong\\mathbb{Z}^{2}$、后者的和乐群是 $\\mathbb{Z}_2$。反过来，$R$ 只要在一点非零，就永远消不掉（$R$ 是张量，零是坐标无关的）。",
+      "**与平行移动的关系（几何意义）**：绕以 $\\varepsilon X,\\varepsilon Y$ 为边的无穷小平行四边形平行移动一周，向量变为 $$v-\\varepsilon^{2}R(X,Y)v+O(\\varepsilon^{3}),$$ 所以曲率是「平行移动不可交换」的无穷小度量；Ambrose–Singer 定理把这句直观升级为：限制和乐群的李代数由 $R$ 生成。",
+      "**与测地线的关系**：沿测地线 $\\gamma$ 的 Jacobi 场满足 $J''+R(J,\\gamma')\\gamma'=0$；在常曲率 $k$ 的空间里化为 $J''+kJ=0$——$k>0$ 时解振荡（测地线互相聚焦），$k\\leq0$ 时解单调增长（测地线永久发散）。曲率的符号就是测地线聚焦与发散的符号。",
+      "**对称性预告**：$R$ 绝不是任意的 $(1,3)$ 张量：它满足五条代数对称性与第二比安基恒等式（见 curvature-symmetries），独立分量只有 $\\frac{n^{2}(n^{2}-1)}{12}$ 个——$n=2,3,4$ 时分别是 $1,6,20$。"
+    ],
+    "propertiesEn": [
+      "**Tensoriality and linearity**: $R$ is a $(1,3)$-tensor, $C^{\\infty}(M)$-linear in all three arguments; for fixed $X,Y$ the map $Z\\mapsto R(X,Y)Z$ is a linear operator on the tangent space, while $(X,Y)\\mapsto R(X,Y)$ is antisymmetric (hence $R(X,X)Y=0$). Christoffel symbols are not tensors whereas $R$ is — the precise meaning of \"curvature is geometric, a connection is an artefact of coordinates\".",
+      "**Locally but not globally flat**: $R\\equiv0$ only guarantees a locally Euclidean metric. Globally there can be topological and holonomy effects: the flat torus and the flat Möbius band both satisfy $R\\equiv0$, yet the former has $\\pi_1\\cong\\mathbb{Z}^{2}$ and the latter has holonomy group $\\mathbb{Z}_2$. Conversely, if $R\\neq0$ at one point it can never be removed (being a tensor, its vanishing is coordinate independent).",
+      "**Relation to parallel transport**: going around the infinitesimal parallelogram with sides $\\varepsilon X,\\varepsilon Y$ sends a vector to $v-\\varepsilon^{2}R(X,Y)v+O(\\varepsilon^{3})$, so curvature is the infinitesimal measure of the failure of parallel transports to commute; the Ambrose–Singer theorem upgrades this picture: the Lie algebra of the restricted holonomy group is generated by $R$.",
+      "**Relation to geodesics**: a Jacobi field along a geodesic $\\gamma$ satisfies $J''+R(J,\\gamma')\\gamma'=0$, which in a space of constant curvature $k$ becomes $J''+kJ=0$: for $k>0$ solutions oscillate (geodesics refocus), for $k\\leq0$ they grow monotonically (geodesics diverge forever). The sign of the curvature is the sign of geodesic focusing.",
+      "**Preview of the symmetries**: $R$ is far from an arbitrary $(1,3)$-tensor: it satisfies five algebraic symmetries and the second Bianchi identity (see curvature-symmetries) and therefore has only $\\frac{n^{2}(n^{2}-1)}{12}$ independent components — namely $1,6,20$ for $n=2,3,4$."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -1.5,
+        1.5
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "density": [
+        28,
+        28
+      ],
+      "color": "#4cc9f0",
+      "title": "黎曼曲率张量度量二阶协变导数不可交换的程度：鞍点处 K<0、峰点处 K>0，一点的一阶信息看不出这种差别"
+    },
+    "examples": [
+      {
+        "problem": "对单位球面 $g=d\\theta^{2}+\\sin^{2}\\theta\\,d\\varphi^{2}$（记 $x^{1}=\\theta$、$x^{2}=\\varphi$）算出全部 Christoffel 符号与曲率张量分量，核对 $R^{1}{}_{122}=\\sin^{2}\\theta$（从而 $R^{1}{}_{212}=-\\sin^{2}\\theta$）与 $R^{2}{}_{121}=-1$，并说明 $R_{1221}$、$R_{1212}$ 的符号。",
+        "solution": "由 Christoffel 公式（注意 $\\partial_{\\theta}g_{\\varphi\\varphi}=2\\sin\\theta\\cos\\theta$）：$$\\Gamma^{1}{}_{22}=-\\sin\\theta\\cos\\theta,\\qquad \\Gamma^{2}{}_{12}=\\Gamma^{2}{}_{21}=\\cot\\theta,$$ 其余为零。代入 $R^{l}{}_{ijk}=\\partial_i\\Gamma^{l}{}_{jk}-\\partial_j\\Gamma^{l}{}_{ik}+\\Gamma^{l}{}_{im}\\Gamma^{m}{}_{jk}-\\Gamma^{l}{}_{jm}\\Gamma^{m}{}_{ik}$：\n$$R^{1}{}_{122}=\\partial_1\\Gamma^{1}{}_{22}-\\partial_2\\Gamma^{1}{}_{12}+\\Gamma^{1}{}_{1m}\\Gamma^{m}{}_{22}-\\Gamma^{1}{}_{2m}\\Gamma^{m}{}_{12}=(\\sin^{2}\\theta-\\cos^{2}\\theta)-0+0+\\cos^{2}\\theta=\\sin^{2}\\theta,$$\n$$R^{2}{}_{121}=\\partial_1\\Gamma^{2}{}_{21}-\\partial_2\\Gamma^{2}{}_{11}+\\Gamma^{2}{}_{1m}\\Gamma^{m}{}_{21}-\\Gamma^{2}{}_{2m}\\Gamma^{m}{}_{11}=-\\csc^{2}\\theta+\\cot^{2}\\theta=-1.$$\n再由反对称性 $R^{1}{}_{212}=-R^{1}{}_{122}$；这正对应 $R(\\partial_1,\\partial_2)\\partial_2=\\sin^{2}\\theta\\,\\partial_1$，与常曲率形状 $R(X,Y)Z=k(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y)$（$k=1$）一致。拉下指标（$R_{ijkl}=\\langle R(\\partial_i,\\partial_j)\\partial_k,\\partial_l\\rangle$）：$$R_{1221}=g_{11}R^{1}{}_{122}=\\sin^{2}\\theta,\\qquad R_{1212}=g_{22}R^{2}{}_{121}=-\\sin^{2}\\theta.$$ 截面曲率的分子是 $R_{1221}$ 而不是 $R_{1212}$：$$K(\\partial_1,\\partial_2)=\\frac{R_{1221}}{g_{11}g_{22}-g_{12}^{2}}=\\frac{\\sin^{2}\\theta}{\\sin^{2}\\theta}=1.$$（若换成把算子取反号的旧约定 $R\\to-R$，则所有分量变号，此时 $R_{1212}=+\\sin^{2}\\theta$，而截面曲率公式也要相应改成 $\\langle R(X,Y)X,Y\\rangle$ 型。两种约定不能混用。）"
+      },
+      {
+        "problem": "在平面上取极坐标度量 $g=dr^{2}+r^{2}d\\theta^{2}$，验证 $\\Gamma$ 不全为零但 $R\\equiv0$，并解释这说明什么。",
+        "solution": "Christoffel 符号：$\\Gamma^{1}{}_{22}=-r$、$\\Gamma^{2}{}_{12}=\\Gamma^{2}{}_{21}=\\frac{1}{r}$，其余为零——它们不为零，可见「$\\Gamma$ 是张量」是错的。但代入曲率公式：$$R^{1}{}_{122}=\\partial_1\\Gamma^{1}{}_{22}-\\partial_2\\Gamma^{1}{}_{12}+\\Gamma^{1}{}_{1m}\\Gamma^{m}{}_{22}-\\Gamma^{1}{}_{2m}\\Gamma^{m}{}_{12}=-1-0+0-(-r)\\cdot\\frac{1}{r}=0,$$ 类似地全部 $R^{l}{}_{ijk}=0$。也就是说：$\\Gamma$ 的大小是坐标假象，两个 $\\Gamma\\Gamma$ 项恰好抵消了导数项 $\\partial\\Gamma$ 的贡献；只有张量 $R$ 才是坐标无关的几何量。与上题对照：球面上 $R\\neq0$，无论用什么坐标都消不掉；平面上 $R\\equiv0$，在任何坐标里都是零。"
+      }
+    ],
+    "tags": [
+      "黎曼几何",
+      "曲率张量",
+      "协变导数",
+      "局部平坦",
+      "测地坐标"
+    ],
+    "links": [
+      "levi-civita-connection",
+      "christoffel-symbols",
+      "riemannian-metric",
+      "parallel-transport-holonomy",
+      "curvature-symmetries",
+      "ricci-scalar-curvature",
+      "sectional-curvature",
+      "geodesic"
+    ]
+  },
+  {
+    "id": "curvature-symmetries",
+    "title": "曲率张量的对称性与比安基恒等式",
+    "titleEn": "Curvature Symmetries and the Bianchi Identities",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "曲率张量受五条代数对称性与两条比安基恒等式（一条代数、一条微分）约束，这些恒等式把它压缩到 n²(n²−1)/12 个独立分量（n=2,3,4 时为 1,6,20），并给出里奇张量对称与爱因斯坦张量守恒的源头。",
+    "summaryEn": "The curvature tensor obeys five algebraic symmetries and two Bianchi identities (one algebraic, one differential); they cut it down to n²(n²−1)/12 independent components (1, 6, 20 for n = 2, 3, 4) and are the source of the symmetry of the Ricci tensor and of the conservation of the Einstein tensor.",
+    "definition": "曲率张量远不是任意的 $(1,3)$ 张量，它满足下面五条**代数对称性**（①② 不需要度规，③④⑤ 需要度规把指标拉下来）：\n① $R(X,Y)Z=-R(Y,X)Z$（对前两个变元反对称）；\n② **第一比安基恒等式** $R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0$；\n③ $\\langle R(X,Y)Z,W\\rangle=-\\langle R(X,Y)W,Z\\rangle$，即 $R_{ijkl}=-R_{ijlk}$（对后两个变元反对称）；\n④ $R_{ijkl}=R_{klij}$（两对指标可以交换）；\n⑤ $\\langle R(X,Y)Z,W\\rangle=\\langle R(Z,W)X,Y\\rangle$（④ 的无坐标写法）。\n请逐条对照本文约定 $R_{ijkl}=\\langle R(\\partial_i,\\partial_j)\\partial_k,\\partial_l\\rangle$：例如 ③ 说的是「把 $\\partial_k,\\partial_l$ 交换要变号」，写成分量就是 $R_{ijkl}=-R_{ijlk}$，而不是说 $R_{ijkl}=R_{ijlk}$。\n这五条里 ④ 不是独立的：把第一比安基沿 $(X,Y,Z)$、$(Y,Z,W)$、$(Z,W,X)$、$(W,X,Y)$ 四组变元各写一遍，再用 ①③ 把出现的项逐一化归成同一形式，相加即得 ④。换句话说，**①③ 加上第一比安基等价于说：曲率张量是 $\\Lambda^{2}T_pM$ 上的对称双线性型** $$b(X\\wedge Y,Z\\wedge W)=\\langle R(X,Y)Z,W\\rangle,\\qquad b(X\\wedge Y,Z\\wedge W)=b(Z\\wedge W,X\\wedge Y),$$ 这是理解曲率张量代数结构最省力的观点：截面曲率就是 $b$ 的二次型在**可分解** 2-向量 $X\\wedge Y$ 上的取值。它同时解释了为什么对称性总是成对出现（两个反对称对 + 一对可以互换的槽）。\n代数对称性把独立分量压到 $\\frac{n^{2}(n^{2}-1)}{12}$ 个（推导见性质），$n=2,3,4,5$ 时分别是 $1,6,20,50$；这解释了两件事：二维只有一个曲率函数（高斯曲率），三维恰好有 6 个分量（等于对称矩阵 $R_{ij}$ 的分量数，事实上三维里奇决定曲率）。\n还有一条**微分**恒等式，与上面五条代数恒等式不同层次：**第二比安基恒等式** $$(\\nabla_XR)(Y,Z)+(\\nabla_YR)(Z,X)+(\\nabla_ZR)(X,Y)=0,$$ 其中 $(\\nabla_XR)(Y,Z)$ 表示 $W\\mapsto(\\nabla_XR)(Y,Z)W=\\nabla_X(R(Y,Z)W)-R(\\nabla_XY,Z)W-R(Y,\\nabla_XZ)W-R(Y,Z)\\nabla_XW$。它不能由代数对称性推出（它是关于导数的约束，用外形式写就是协变外形式 $\\Omega$ 的比安基恒等式 $d^{\\nabla}\\Omega=0$）；把它缩并两次就得到爱因斯坦张量的守恒 $\\nabla^{i}G_{ij}=0$（见 ricci-scalar-curvature）。",
+    "definitionEn": "The curvature tensor is far from an arbitrary $(1,3)$-tensor. It satisfies the following five **algebraic symmetries** (①② need no metric, ③④⑤ do): ① $R(X,Y)Z=-R(Y,X)Z$; ② the **first Bianchi identity** $R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0$; ③ $\\langle R(X,Y)Z,W\\rangle=-\\langle R(X,Y)W,Z\\rangle$, i.e. $R_{ijkl}=-R_{ijlk}$; ④ $R_{ijkl}=R_{klij}$; ⑤ $\\langle R(X,Y)Z,W\\rangle=\\langle R(Z,W)X,Y\\rangle$, the coordinate-free form of ④. Read them against the convention $R_{ijkl}=\\langle R(\\partial_i,\\partial_j)\\partial_k,\\partial_l\\rangle$: for instance ③ says that swapping $\\partial_k,\\partial_l$ changes the sign, i.e. $R_{ijkl}=-R_{ijlk}$.\nSymmetry ④ is not independent: applying the first Bianchi identity to the four quadruples $(X,Y,Z)$, $(Y,Z,W)$, $(Z,W,X)$, $(W,X,Y)$ and reducing all terms with ①③ yields ④. Equivalently, **①③ together with the first Bianchi identity say that the curvature tensor is a symmetric bilinear form on $\\Lambda^{2}T_pM$**, $b(X\\wedge Y,Z\\wedge W)=\\langle R(X,Y)Z,W\\rangle$ with $b(X\\wedge Y,Z\\wedge W)=b(Z\\wedge W,X\\wedge Y)$; this is the most economical way to remember the algebra. The sectional curvature is the associated quadratic form evaluated on decomposable 2-vectors.\nThe algebraic symmetries cut the number of independent components down to $\\frac{n^{2}(n^{2}-1)}{12}$, namely $1,6,20,50$ for $n=2,3,4,5$. This explains why in dimension two there is only one curvature function (the Gaussian curvature) and why in dimension three there are exactly six components — as many as the components of the symmetric matrix $R_{ij}$, and indeed in dimension three the Ricci tensor determines the curvature.\nFinally there is a **differential** identity of a different nature, the **second Bianchi identity** $(\\nabla_XR)(Y,Z)+(\\nabla_YR)(Z,X)+(\\nabla_ZR)(X,Y)=0$, where $(\\nabla_XR)(Y,Z)W=\\nabla_X(R(Y,Z)W)-R(\\nabla_XY,Z)W-R(Y,\\nabla_XZ)W-R(Y,Z)\\nabla_XW$. It cannot be deduced from the algebraic symmetries — it constrains derivatives — and in the language of differential forms it is the Bianchi identity $d^{\\nabla}\\Omega=0$ for the curvature form. Contracting it twice gives the conservation law of the Einstein tensor, $\\nabla^{i}G_{ij}=0$ (see ricci-scalar-curvature).",
+    "formulas": [
+      {
+        "latex": "R_{ijkl}=-R_{jikl}=-R_{ijlk},\\qquad R(X,X)Y=0,\\qquad \\langle R(X,Y)Z,Z\\rangle=0",
+        "note": "①③ 两条反对称性及其直接推论；它们说明点态地 $R(X,Y)\\in\\mathfrak{so}(T_pM)$（反对称算子）。",
+        "noteEn": "The two antisymmetries ①③ and their immediate consequences; pointwise they say that $R(X,Y)$ lies in $\\mathfrak{so}(T_pM)$."
+      },
+      {
+        "latex": "R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0\\iff R_{ijkl}+R_{jkil}+R_{kijl}=0",
+        "note": "第一比安基恒等式（代数恒等式）：它是唯一把三个不同变元耦合起来的对称性，也是把曲率张量解释为 $\\Lambda^{2}$ 上对称双线性型的关键。",
+        "noteEn": "The first Bianchi identity (algebraic): it is the symmetry that couples three distinct arguments and the key to viewing the curvature tensor as a symmetric bilinear form on $\\Lambda^{2}$."
+      },
+      {
+        "latex": "\\langle R(X,Y)Z,W\\rangle=\\langle R(Z,W)X,Y\\rangle\\iff R_{ijkl}=R_{klij}",
+        "note": "④⑤ 是同一件事；它可由 ①③ 与第一比安基推出（把比安基写四遍相加），因此「五条对称性」实质上是三条。",
+        "noteEn": "④ and ⑤ are the same statement; it follows from ①③ and the first Bianchi identity (add the identity in four cyclic arrangements), so the \"five symmetries\" are really three."
+      },
+      {
+        "latex": "b(X\\wedge Y,Z\\wedge W)=\\langle R(X,Y)Z,W\\rangle,\\qquad \\#\\{\\text{独立分量}\\}=\\frac{n^{2}(n^{2}-1)}{12}:\\quad n=2,3,4\\mapsto 1,6,20",
+        "note": "曲率张量 = $\\Lambda^{2}T_pM$ 上的对称双线性型；分量计数：$m=\\binom{n}{2}$ 时 $\\frac{m(m+1)}{2}-\\binom{n}{4}=\\frac{n^{2}(n^{2}-1)}{12}$。",
+        "noteEn": "The curvature tensor as a symmetric bilinear form on $\\Lambda^{2}T_pM$; with $m=\\binom{n}{2}$ the count is $\\frac{m(m+1)}{2}-\\binom{n}{4}=\\frac{n^{2}(n^{2}-1)}{12}$."
+      },
+      {
+        "latex": "(\\nabla_XR)(Y,Z)+(\\nabla_YR)(Z,X)+(\\nabla_ZR)(X,Y)=0",
+        "note": "第二比安基恒等式：微分恒等式（不是代数恒等式），缩并两次给出 $\\nabla^{i}R_{ij}=\\frac{1}{2}\\partial_jS$ 与 $\\nabla^{i}G_{ij}=0$。",
+        "noteEn": "The second Bianchi identity: a differential (not algebraic) identity; contracting it twice yields $\\nabla^{i}R_{ij}=\\frac{1}{2}\\partial_jS$ and $\\nabla^{i}G_{ij}=0$."
+      }
+    ],
+    "properties": [
+      "**对称性的分工**：① 对**任何仿射联络**都成立（由定义中 $\\nabla_X\\nabla_Y-\\nabla_Y\\nabla_X$ 与 $-\\nabla_{[X,Y]}$ 两项直接相消，**不需要无挠**），②（第一比安基）是代数恒等式，**但要求联络无挠**（有挠时该循环和等于挠率的组合项），③④⑤ 用到度规与 $\\nabla g=0$，第二比安基则用到曲率的定义与联络的相容性（它是微分恒等式）。分清楚哪条用到了什么，就掌握了整张「曲率张量的记帐表」。",
+      "**由 ①③ 得到的零恒等式**：$R(X,X)Y=0$、$\\langle R(X,Y)Z,Z\\rangle=0$（$R(X,Y)$ 是反对称算子），以及一切把「反对称指标对」用对称的度规缩并的表达式恒为零：$g^{ij}R_{ijkl}=0$、$R^{i}{}_{jki}=0$。因此曲率的缩并里只有里奇张量是非平凡的。",
+      "**④ 可由 ①②③ 推出**：把第一比安基沿四组变元写四遍、用 ①③ 归并即得。等价地，$R$ 在 $\\Lambda^{2}T_pM$ 上定义了一个对称双线性型 $b$，截面曲率是 $b$ 的二次型在可分解 2-向量上的值——这把「曲率张量有几个分量」化归为一个纯线性代数问题（对称矩阵的维数）。$n=3$ 时两者完全等价（$\\Lambda^{2}\\mathbb{R}^{3}$ 仅 3 维，$\\binom{3}{2}=3$ 个槽的 $3\\times3$ 对称矩阵恰好 6 维），$n\\geq4$ 时比安基比 ④ 更强。",
+      "**分量计数**：①③④ 把分量等同于 $m\\times m$ 对称矩阵，$m=\\binom{n}{2}=\\frac{n(n-1)}{2}$，共 $\\frac{m(m+1)}{2}$ 个；第一比安基再削去 $\\binom{n}{4}$ 个独立约束（$n<4$ 时为 0，这就是二维、三维里「比安基自动成立」的原因），净得 $$\\frac{m(m+1)}{2}-\\binom{n}{4}=\\frac{n^{2}(n^{2}-1)}{12}.$$ 逐个数：$n=2\\to1$、$n=3\\to6$、$n=4\\to20$、$n=5\\to50$（三维的 6 与里奇张量的分量数相同 ⇒ 三维里奇决定曲率）。",
+      "**第二比安基的地位**：它是唯一的微分恒等式，因此与「$R$ 属于代数曲率张量空间」是两个层次的约束；缩并两次得到 $\\nabla^{i}G_{ij}=0$（爱因斯坦张量自动守恒，这是广义相对论把 $G_{ij}$ 放在场方程左端的原因），也等价于说曲率形式满足 $d^{\\nabla}\\Omega=0$。"
+    ],
+    "propertiesEn": [
+      "**Which symmetry uses what**: ① holds for **any** affine connection (torsion-freeness is not needed) (it holds for any affine connection), ② (first Bianchi) is an algebraic identity, ③④⑤ use the metric and $\\nabla g=0$, while the second Bianchi identity is differential (it uses the definition of curvature and compatibility). Keeping track of this bookkeeping is the whole story of the algebraic structure.",
+      "**Vanishing identities from ①③**: $R(X,X)Y=0$ and $\\langle R(X,Y)Z,Z\\rangle=0$ (so $R(X,Y)$ is an antisymmetric operator), and every contraction of an antisymmetric index pair with the symmetric metric vanishes: $g^{ij}R_{ijkl}=0$, $R^{i}{}_{jki}=0$. Hence Ricci is the only non-trivial contraction of the curvature.",
+      "**④ follows from ①②③**: write the first Bianchi identity in four cyclic arrangements and reduce everything with ①③. Equivalently, $R$ defines a symmetric bilinear form $b$ on $\\Lambda^{2}T_pM$ whose quadratic form on decomposable 2-vectors is the sectional curvature, reducing the component count to linear algebra. For $n=3$ the two statements are equivalent ($\\Lambda^{2}\\mathbb{R}^{3}$ is 3-dimensional and a $3\\times3$ symmetric matrix has 6 entries); for $n\\geq4$ the Bianchi identity is strictly stronger than ④.",
+      "**Component count**: ①③④ identify the components with a symmetric $m\\times m$ matrix, $m=\\binom{n}{2}$; the first Bianchi identity removes another $\\binom{n}{4}$ independent constraints ($0$ for $n<4$, which is why the identity is automatic in dimensions two and three), leaving $\\frac{m(m+1)}{2}-\\binom{n}{4}=\\frac{n^{2}(n^{2}-1)}{12}$, i.e. $1,6,20,50$ for $n=2,3,4,5$. In dimension three this number equals the number of components of Ricci, and indeed Ricci determines the curvature there.",
+      "**The role of the second Bianchi identity**: it is the only differential identity, hence a constraint of a different level than \"$R$ lies in the space of algebraic curvature tensors\"; contracting it twice gives $\\nabla^{i}G_{ij}=0$ (the Einstein tensor is automatically conserved, the reason it appears on the left-hand side of Einstein's equations) and it is equivalent to $d^{\\nabla}\\Omega=0$ for the curvature form."
+    ],
+    "examples": [
+      {
+        "problem": "只用对称性证明：(1) $R(X,X)Y=0$；(2) $\\langle R(X,Y)Z,Z\\rangle=0$；(3) $g^{ij}R_{ijkl}=0$ 与 $R^{i}{}_{jki}=0$。并由此说明「曲率的缩并只有里奇一个」。",
+        "solution": "(1) 由 ①：$R(X,X)Y=-R(X,X)Y$，故为零。\n(2) 由 ③：$\\langle R(X,Y)Z,Z\\rangle=-\\langle R(X,Y)Z,Z\\rangle$，故为零。两者合起来说明点态地 $R(X,Y)$ 是切空间上的**反对称线性算子**（属于 $\\mathfrak{so}(T_pM)$）——这正是和乐群落在 $O(n)$ 而不是任意 $GL(n)$ 里的代数原因。\n(3) $g^{ij}R_{ijkl}$：$g^{ij}$ 关于 $i,j$ 对称，而 ① 给出 $R_{ijkl}=-R_{jikl}$（关于 $i,j$ 反对称），对称 × 反对称收缩必为零。$R^{i}{}_{jki}=g^{ia}R_{jkia}$（升第一个指标）：由 ③ 有 $R_{jkia}=-R_{jkai}$，即 $R_{jkia}$ 关于 $i,a$ 反对称，再配上对称的 $g^{ia}$，同样是零。\n于是三种单缩并分别是 $R^{m}{}_{mjl}=R_{jl}$（里奇）、$R^{m}{}_{jml}=-R_{jl}$、$R^{m}{}_{jlm}=0$：曲率的「迹信息」全部装在里奇张量里。"
+      },
+      {
+        "problem": "用分量计数说明：为什么 $n=3$ 时里奇张量包含曲率张量的全部信息，而 $n\\geq4$ 时不然？并给出三维的恢复公式。",
+        "solution": "曲率张量有 $\\frac{n^{2}(n^{2}-1)}{12}$ 个独立分量，$n=3$ 时是 $6$，而三维的 $R_{ij}$ 是对称 $3\\times3$ 矩阵、分量数恰好也是 $6$，两边计数相等。更具体地，在正交标架 $\\{e_1,e_2,e_3\\}$ 中记 $K_{ij}=K(e_i,e_j)=R_{ijji}$，则 $$\\mathrm{Ric}_{ii}=K_{ij}+K_{ik},\\qquad S=2(K_{ij}+K_{ik}+K_{jk}),$$ 由此 $$K_{ij}=\\mathrm{Ric}_{ii}+\\mathrm{Ric}_{jj}-\\frac{S}{2},$$ 也就是说三维的截面曲率（从而是整个曲率张量）由 $\\mathrm{Ric}$ 与 $S$ 唯一确定。$n=4$ 时曲率有 $20$ 个分量而里奇只有 $10$ 个：多出来的 $10$ 个自由度是 Weyl 张量（共形曲率）那一部分，它描述「保形弯曲」而不是体积变化，所以 $n\\geq4$ 的曲率确实比里奇携带更多信息。"
+      }
+    ],
+    "tags": [
+      "曲率张量",
+      "比安基恒等式",
+      "对称性",
+      "独立分量",
+      "爱因斯坦张量"
+    ],
+    "links": [
+      "riemannian-curvature-tensor",
+      "ricci-scalar-curvature",
+      "sectional-curvature",
+      "space-forms",
+      "tensor-algebra",
+      "index-notation",
+      "levi-civita-connection"
+    ]
+  },
+  {
+    "id": "ricci-scalar-curvature",
+    "title": "里奇曲率与数量曲率",
+    "titleEn": "Ricci and Scalar Curvature",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "把曲率张量缩并一次得到里奇张量（它自动对称）、再缩并得到数量曲率；第二比安基又使爱因斯坦张量 G_{ij}=R_{ij}−½Sg_{ij} 自动守恒（∇^iG_{ij}=0），这两个量是曲率里「平均」与「体积」的信息。",
+    "summaryEn": "Contracting the curvature tensor once gives the Ricci tensor (automatically symmetric) and twice the scalar curvature; the second Bianchi identity makes the Einstein tensor G_{ij}=R_{ij}−½Sg_{ij} automatically divergence-free, ∇^iG_{ij}=0. These two carry the averaged, volume-theoretic part of the curvature.",
+    "definition": "曲率张量 $R$ 是 $(1,3)$ 张量，把它缩并一次就得到唯一非平凡的「迹」，即**里奇张量** $$\\mathrm{Ric}(X,Y)=\\mathrm{tr}\\!\\bigl(Z\\mapsto R(Z,X)Y\\bigr)$$ （迹用任何一组基计算都可以）。写成坐标：$R_{jl}=R^{i}{}_{ijl}$。\n**关于指标的提醒**：这里的次序与 riemannian-curvature-tensor 一节的约定 $R(\\partial_i,\\partial_j)\\partial_k=R^{l}{}_{ijk}\\partial_l$ 配套——缩并的是上标与**第一个**下指标（也就是 $R$ 的第一个变元），展开成 $R_{jl}=g^{ia}R_{ijla}$。若把被求导的向量写在第一个下指标（许多教材的 $R^{l}{}_{ijk}=\\langle dx^{l},R(\\partial_j,\\partial_k)\\partial_i\\rangle$），同一个张量就写成熟悉的 $R_{jl}=R^{i}{}_{jil}$。两种写法给出同一个张量，但下指标次序不同，混用会差一个符号（本文次序下 $R^{i}{}_{jil}=-R_{jl}$）。\n**里奇是对称张量**：由 ④（$R_{ijla}=R_{laij}$，交换两对指标）得 $$R_{jl}=g^{ia}R_{ijla}=g^{ia}R_{laij};$$ 把哑指标 $(i,a)$ 重新命名（$g^{ia}R_{laij}=g^{ia}R_{liaj}$），再用 ①③：$R_{liaj}=-R_{ilaj}$，而 $R_{ilaj}=-R_{ilja}$，两个负号相消给出 $R_{liaj}=R_{ilja}$，于是 $$R_{jl}=g^{ia}R_{ilja}=R_{lj}.$$ 所以里奇是一个**对称** $(0,2)$ 张量，$n$ 维时独立分量数是 $\\frac{n(n+1)}{2}$（对称矩阵的维数）。\n缩并第二次（用逆度规把里奇缩成函数）就得到**数量曲率** $$S=g^{ij}R_{ij}=\\mathrm{tr}_g\\mathrm{Ric}.$$ 对常截面曲率 $k$ 的空间形式有 $R_{ij}=(n-1)k\\,g_{ij}$、$S=n(n-1)k$：单位球面（$n=2$、$k=1$）给出 $\\mathrm{Ric}=g$、$S=2$；单位三维球面给出 $\\mathrm{Ric}=2g$、$S=6$；二维时 $S=2K$、$\\mathrm{Ric}=Kg$（$K$ 为高斯曲率）。\n里奇张量的几何含义是「体积」：$\\mathrm{Ric}(v,v)$ 控制沿 $v$ 方向的测地线束体积元的相对变化率 $\\theta$ 的演化（Riccati／Raychaudhuri 方程 $\\theta'=-\\mathrm{Ric}(v,v)-\\mathrm{tr}(A^{2})\\leq-\\mathrm{Ric}(v,v)$，其中 $A$ 是形变张量），因此 $\\mathrm{Ric}>0$ 意味着测地线平均而言互相靠拢——这是 Bonnet–Myers 定理（$\\mathrm{Ric}\\geq(n-1)k>0$ 蕴含有界直径 $\\pi/\\sqrt{k}$）的直观来源。数量曲率则是「所有截面曲率之和」：在正交标架下 $S=\\sum_{i\\neq j}K(e_i,e_j)=2\\sum_{i<j}K(e_i,e_j)$，所以在二维它就是 $2K$，在闭曲面上它的积分正是 Gauss–Bonnet 定理的被积函数。",
+    "definitionEn": "The curvature tensor is a $(1,3)$-tensor; contracting it once produces its only non-trivial trace, the **Ricci tensor** $\\mathrm{Ric}(X,Y)=\\mathrm{tr}(Z\\mapsto R(Z,X)Y)$, which in coordinates reads $R_{jl}=R^{i}{}_{ijl}$. \n**A warning about indices.** This goes with the convention $R(\\partial_i,\\partial_j)\\partial_k=R^{l}{}_{ijk}\\partial_l$ of the first node: the raised index is contracted with the **first** lower index (the first argument of $R$), i.e. $R_{jl}=g^{ia}R_{ijla}$. If one puts the differentiated vector in the first lower index (as many textbooks do, $R^{l}{}_{ijk}=\\langle dx^{l},R(\\partial_j,\\partial_k)\\partial_i\\rangle$), the very same tensor is written in the familiar form $R_{jl}=R^{i}{}_{jil}$. Both expressions give the same tensor, but mixing the two index orders changes signs (in our order $R^{i}{}_{jil}=-R_{jl}$).\n**Ricci is symmetric.** Using ④, $R_{ijla}=R_{laij}$, so $R_{jl}=g^{ia}R_{ijla}=g^{ia}R_{laij}$, and using ①③ ($R_{laji}=-R_{alji}=R_{alij}$) together with a renaming of the dummy indices one gets $R_{jl}=R_{lj}$. Hence Ricci is a symmetric $(0,2)$-tensor with $\\frac{n(n+1)}{2}$ components in dimension $n$.\nContracting once more with the inverse metric gives the **scalar curvature** $S=g^{ij}R_{ij}=\\mathrm{tr}_g\\mathrm{Ric}$. For a space of constant sectional curvature $k$ one has $R_{ij}=(n-1)k\\,g_{ij}$ and $S=n(n-1)k$: the unit sphere ($n=2$, $k=1$) gives $\\mathrm{Ric}=g$, $S=2$; the unit three-sphere gives $\\mathrm{Ric}=2g$, $S=6$; in dimension two $S=2K$ and $\\mathrm{Ric}=Kg$, with $K$ the Gaussian curvature.\nGeometrically, Ricci controls **volume**: $\\mathrm{Ric}(v,v)$ governs the evolution of the relative volume element $\\theta$ of a geodesic beam along $v$ (Riccati/Raychaudhuri: $\\theta'=-\\mathrm{Ric}(v,v)-\\mathrm{tr}(A^2)\\leq-\\mathrm{Ric}(v,v)$, $A$ being the shape operator), so $\\mathrm{Ric}>0$ means that geodesics on average converge — the intuition behind the Bonnet–Myers theorem ($\\mathrm{Ric}\\geq(n-1)k>0$ implies diameter $\\leq\\pi/\\sqrt{k}$). The scalar curvature is the sum of all sectional curvatures, $S=\\sum_{i\\neq j}K(e_i,e_j)=2\\sum_{i<j}K(e_i,e_j)$ in an orthonormal frame; it equals $2K$ in dimension two and its integral over a closed surface is the integrand of the Gauss–Bonnet theorem.",
+    "formulas": [
+      {
+        "latex": "\\mathrm{Ric}(X,Y)=\\mathrm{tr}\\!\\bigl(Z\\mapsto R(Z,X)Y\\bigr),\\qquad R_{jl}=R^{i}{}_{ijl}=g^{ia}R_{ijla}\\ \\ (\\text{本文次序};\\ \\text{另一套次序写作 }R_{jl}=R^{i}{}_{jil})",
+        "note": "里奇的定义：对第三个变元取迹；缩并上标与第一个下指标，务必与自己所声明的 $R^{l}{}_{ijk}$ 次序配套。",
+        "noteEn": "Definition of Ricci: trace over the third argument; the raised index is contracted with the first lower index — always keep it consistent with the declared ordering of $R^{l}{}_{ijk}$."
+      },
+      {
+        "latex": "R_{jl}=R_{lj}",
+        "note": "里奇张量对称：由 ④（交换两对指标）配合 ①③ 得出（见定义与例题）；它使 $R_{ij}$ 成为对称 $(0,2)$ 张量，$\\frac{n(n+1)}{2}$ 个分量。",
+        "noteEn": "Ricci is symmetric: it follows from ④ together with ①③ (see the definition and the examples), making $R_{ij}$ a symmetric $(0,2)$-tensor with $\\frac{n(n+1)}{2}$ components."
+      },
+      {
+        "latex": "S=g^{ij}R_{ij}=\\mathrm{tr}_g\\mathrm{Ric},\\qquad R_{ij}=(n-1)k\\,g_{ij},\\quad S=n(n-1)k\\ \\ (\\text{常截面曲率 }k)",
+        "note": "数量曲率与常曲率空间的结果；二维时 $S=2K$、$\\mathrm{Ric}=Kg$，单位球面 $S=2$。",
+        "noteEn": "Scalar curvature and the constant-curvature case; in dimension two $S=2K$ and $\\mathrm{Ric}=Kg$, and the unit sphere has $S=2$."
+      },
+      {
+        "latex": "G_{ij}=R_{ij}-\\frac{1}{2}S\\,g_{ij},\\qquad \\nabla^{i}R_{ij}=\\frac{1}{2}\\partial_jS,\\qquad \\nabla^{i}G_{ij}=0",
+        "note": "爱因斯坦张量与缩并的第二比安基：$G$ 自动守恒（$\\nabla g=0$ 用了一次）；这是广义相对论里 $G_{ij}$ 出现在场方程左端的原因。",
+        "noteEn": "The Einstein tensor and the contracted second Bianchi identity: $G$ is automatically divergence-free (using $\\nabla g=0$ once); this is why $G_{ij}$ sits on the left-hand side of Einstein's equations."
+      },
+      {
+        "latex": "\\mathrm{Ric}=\\lambda g\\ \\text{且}\\ n\\geq3\\ \\Longrightarrow\\ \\lambda=\\text{const}\\qquad(\\text{Schur 定理})",
+        "note": "Schur：$n\\geq3$ 时「逐点爱因斯坦」自动升级为（真的）爱因斯坦；二维曲面上 $R_{ij}=Kg_{ij}$ 而 $K$ 可以是任意函数，说明 $n\\geq3$ 不能省。",
+        "noteEn": "Schur: for $n\\geq3$ a pointwise Einstein condition upgrades automatically to a genuine one; on a surface $R_{ij}=Kg_{ij}$ with $K$ an arbitrary function, so $n\\geq3$ cannot be dropped."
+      }
+    ],
+    "properties": [
+      "**里奇是曲率唯一的非平凡缩并**：由 ①③，任何把反对称指标对与对称度规缩并的表达式恒为零（如 $g^{ij}R_{ijkl}=0$），三种单缩并只有 $R^{m}{}_{mjl}=R_{jl}$ 非平凡，另外两个是 $-R_{jl}$ 与 $0$；所以「曲率的迹信息」完整地装在里奇张量里。",
+      "**对称性与几何含义**：$\\mathrm{Ric}$ 是对称 $(0,2)$ 张量，且 $\\mathrm{Ric}(v,v)$（$v$ 单位）等于 $v$ 方向上所有截面曲率之和：$\\mathrm{Ric}(v,v)=\\sum_{i=2}^{n}K(v,e_i)$（$\\{v,e_2,\\dots,e_n\\}$ 正交标架）。因此 $\\mathrm{Ric}$ 是曲率里「与 $v$ 有关的平均」，而不是某一个平面上的精确值。",
+      "**与测地线体积（Raychaudhuri 方程）**：沿单位速度测地线的测地线束，其相对体积变化率 $\\theta$ 满足 $\\theta'=-\\mathrm{Ric}(\\gamma',\\gamma')-\\mathrm{tr}(A^{2})\\leq-\\mathrm{Ric}(\\gamma',\\gamma')$；$\\mathrm{Ric}(\\gamma',\\gamma')\\geq(n-1)k>0$ 迫使 $\\theta$ 在有限时间内趋于 $-\\infty$（测地线聚焦、共轭点出现），由此得到 Bonnet–Myers 的直径界 $\\pi/\\sqrt{k}$。",
+      "**数量曲率的解读**：$S=\\sum_{i\\neq j}K(e_i,e_j)=2\\sum_{i<j}K(e_i,e_j)$ 是「全曲率」的平均；二维时 $S=2K$，闭曲面上 $\\int_MS\\,dV=2\\int_MK\\,dA=4\\pi\\chi(M)$（Gauss–Bonnet）；$n\\geq3$ 时 $S$ 只是一个函数，它不再决定曲率（例如 $n=4$ 时还有 Weyl 部分）。",
+      "**爱因斯坦（Einstein）度量与 Schur 定理**：若 $\\mathrm{Ric}=\\lambda g$（$\\lambda$ 光滑函数），则 $S=n\\lambda$、$G_{ij}=(1-\\frac{n}{2})\\lambda g_{ij}$；由 $\\nabla^{i}G_{ij}=0$ 得 $\\partial_j\\lambda=\\frac{n}{2}\\partial_j\\lambda$，即 $(1-\\frac{n}{2})\\partial_j\\lambda=0$，于是 $n\\geq3$ 时 $\\lambda$ 必为常数（$n=2$ 时这条推理因因子 $n-2$ 为零而失效）。满足常 $\\lambda$ 的度量称为**爱因斯坦度量**，对应流形称为爱因斯坦流形。"
+    ],
+    "propertiesEn": [
+      "**Ricci is the only non-trivial contraction**: by ①③ every contraction of an antisymmetric index pair with the symmetric metric vanishes (e.g. $g^{ij}R_{ijkl}=0$); of the three possible single contractions only $R^{m}{}_{mjl}=R_{jl}$ is non-trivial, the others being $-R_{jl}$ and $0$. Hence all trace information of the curvature sits in Ricci.",
+      "**Symmetry and meaning**: $\\mathrm{Ric}$ is a symmetric $(0,2)$-tensor and $\\mathrm{Ric}(v,v)$ for a unit vector $v$ is the sum of the sectional curvatures of all 2-planes containing $v$: $\\mathrm{Ric}(v,v)=\\sum_{i=2}^{n}K(v,e_i)$ for an orthonormal frame $\\{v,e_2,\\dots,e_n\\}$. So Ricci is an average over the planes through $v$, not the exact value on one plane.",
+      "**Geodesic volume (Raychaudhuri equation)**: along a unit-speed geodesic the relative volume element $\\theta$ of a geodesic beam satisfies $\\theta'=-\\mathrm{Ric}(\\gamma',\\gamma')-\\mathrm{tr}(A^{2})\\leq-\\mathrm{Ric}(\\gamma',\\gamma')$; if $\\mathrm{Ric}(\\gamma',\\gamma')\\geq(n-1)k>0$ then $\\theta\\to-\\infty$ in finite time (geodesic focusing, conjugate points), which yields the Bonnet–Myers diameter bound $\\pi/\\sqrt{k}$.",
+      "**Reading the scalar curvature**: $S=\\sum_{i\\neq j}K(e_i,e_j)=2\\sum_{i<j}K(e_i,e_j)$ is the total curvature per point; in dimension two $S=2K$ and $\\int_MS\\,dV=2\\int_MK\\,dA=4\\pi\\chi(M)$ on a closed surface (Gauss–Bonnet). For $n\\geq3$ the scalar curvature is just a function and no longer determines the curvature (in dimension four the Weyl part remains).",
+      "**Einstein metrics and Schur's theorem**: if $\\mathrm{Ric}=\\lambda g$ with $\\lambda$ a smooth function, then $S=n\\lambda$ and $G_{ij}=(1-\\frac{n}{2})\\lambda g_{ij}$; from $\\nabla^{i}G_{ij}=0$ one gets $\\partial_j\\lambda=\\frac{n}{2}\\partial_j\\lambda$, i.e. $(1-\\frac{n}{2})\\partial_j\\lambda=0$, so for $n\\geq3$ the function $\\lambda$ is constant (the argument fails in dimension two because of the factor $n-2$). Metrics with constant $\\lambda$ are called **Einstein metrics**."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "1/(1 + x^2 + y^2)^2",
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "levels": 12,
+      "color": "#4cc9f0",
+      "title": "曲率是随点变化的函数：马鞍面 z=xy 的 |K|=1/(1+x²+y²)² 的等值线；二维时 Ric=Kg、S=2K，这就是里奇/数量曲率场（鞍点处 |K| 最大）"
+    },
+    "examples": [
+      {
+        "problem": "用单位球面 $g=d\\theta^{2}+\\sin^{2}\\theta\\,d\\varphi^{2}$ 的 Christoffel 符号（$\\Gamma^{1}{}_{22}=-\\sin\\theta\\cos\\theta$、$\\Gamma^{2}{}_{12}=\\cot\\theta$）算里奇张量与数量曲率，验证 $\\mathrm{Ric}=g$、$S=2$；并写出半径 $R$ 的球面的结果。",
+        "solution": "上一节已算得 $R^{1}{}_{122}=\\sin^{2}\\theta$（等价地 $R^{1}{}_{212}=-R^{1}{}_{122}=-\\sin^{2}\\theta$）、$R^{2}{}_{121}=-1$、$R^{2}{}_{211}=1$，以及 $R^{1}{}_{111}=R^{1}{}_{112}=R^{2}{}_{212}=R^{2}{}_{122}=R^{2}{}_{222}=0$。按 $R_{jl}=R^{i}{}_{ijl}$ 逐项缩并：\n$$R_{11}=R^{1}{}_{111}+R^{2}{}_{211}=0+1=1=g_{11},$$\n$$R_{12}=R^{1}{}_{112}+R^{2}{}_{212}=0+0=0=g_{12},$$\n$$R_{22}=R^{1}{}_{122}+R^{2}{}_{222}=\\sin^{2}\\theta+0=g_{22}.$$\n所以 $\\mathrm{Ric}=g$，即 $R_{ij}=1\\cdot g_{ij}=(n-1)K\\,g_{ij}$（$n=2$、$K=1$），与常曲率公式一致。数量曲率 $S=g^{11}R_{11}+g^{22}R_{22}=1+\\sin^{-2}\\theta\\cdot\\sin^{2}\\theta=2=2K$。\n半径 $R$ 的球面度量为 $R^{2}g$：在缩放 $g\\mapsto R^{2}g$ 下 $\\Gamma$ 与 $R^{l}{}_{ijk}$ 不变、$R_{ijkl}$ 乘 $R^{2}$，故 $K\\mapsto K/R^{2}$；于是 $R_{ij}=\\frac{1}{R^{2}}g_{ij}$、$S=\\frac{2}{R^{2}}$。一般地，常截面曲率 $k$ 的 $n$ 维空间形式满足 $R_{ij}=(n-1)k\\,g_{ij}$、$S=n(n-1)k$。"
+      },
+      {
+        "problem": "证明任意二维黎曼流形满足 $\\mathrm{Ric}=Kg$、$S=2K$、$G_{ij}\\equiv0$（$K$ 为高斯曲率），并说明 $\\nabla^{i}G_{ij}=0$ 在二维为何不提供新信息；最后用闭曲面上的 Gauss–Bonnet 定理算出 $\\int_MS\\,dV$。",
+        "solution": "二维时每点只有一个 2-平面，截面曲率只有一个值 $K$；由 ①③④ 可把全部曲率分量写成 $$R_{ijkl}=K\\,(g_{il}g_{jk}-g_{ik}g_{jl}).$$ 于是 $R_{2112}=K(g_{22}g_{11}-g_{21}g_{12})=K\\det(g)$，从而 $$R_{11}=g^{22}R_{2112}=K g^{22}\\det(g)=K g_{11},$$ 同理 $R_{22}=Kg_{22}$、$R_{12}=0$：即 $\\mathrm{Ric}=Kg$。取迹得 $S=g^{ij}R_{ij}=K(g^{11}g_{11}+g^{22}g_{22})=2K$，于是 $$G_{ij}=R_{ij}-\\frac{1}{2}Sg_{ij}=Kg_{ij}-Kg_{ij}=0.$$ 所以二维的 Einstein 张量恒为零，$\\nabla^{i}G_{ij}=0$ 退化成 $0=0$，没有新信息（这也是「二维没有引力自由度」的意思）。\n对闭曲面用 Gauss–Bonnet：$\\int_MK\\,dA=2\\pi\\chi(M)$，故 $$\\int_MS\\,dV=2\\int_MK\\,dA=4\\pi\\chi(M);$$ 球面 $\\chi=2$ 给出 $\\int S\\,dV=8\\pi$，与 $S=2$、面积 $4\\pi$ 一致；环面 $\\chi=0$ 给出总数量曲率为零。"
+      }
+    ],
+    "tags": [
+      "里奇张量",
+      "数量曲率",
+      "爱因斯坦张量",
+      "缩并",
+      "比安基恒等式"
+    ],
+    "links": [
+      "riemannian-curvature-tensor",
+      "curvature-symmetries",
+      "sectional-curvature",
+      "einstein-manifold",
+      "gauss-bonnet",
+      "metric-tensor",
+      "jacobi-fields",
+      "bonnet-myers"
+    ]
+  },
+  {
+    "id": "sectional-curvature",
+    "title": "截面曲率",
+    "titleEn": "Sectional Curvature",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "高斯曲率的高维推广：每个二维平面 σ 配上一个数 K(X,Y)=⟨R(X,Y)Y,X⟩/(|X|²|Y|²−⟨X,Y⟩²)（分母是 Gram 行列式）；K 与基的选取无关，并且（由对称性）反过来决定整个曲率张量。",
+    "summaryEn": "The higher-dimensional generalisation of the Gaussian curvature: every 2-plane σ carries a number K(X,Y)=⟨R(X,Y)Y,X⟩/(|X|²|Y|²−⟨X,Y⟩²) (a Gram determinant in the denominator); K is independent of the chosen basis and, by the symmetries, determines the whole curvature tensor.",
+    "definition": "高斯曲率只对曲面有定义，但它的**内蕴**含义可以推广到任意维：对每一点 $p$ 的每个二维子空间 $\\sigma\\subset T_pM$，取张成它的线性无关向量 $X,Y$，定义 $$K(\\sigma)=K(X,Y)=\\frac{\\langle R(X,Y)Y,X\\rangle}{|X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2}}.$$ 分母是 $(X,Y)$ 的 **Gram 行列式** $$\\det\\begin{pmatrix}\\langle X,X\\rangle&\\langle X,Y\\rangle\\\\ \\langle Y,X\\rangle&\\langle Y,Y\\rangle\\end{pmatrix},$$ 也就是 $X,Y$ 张成的平行四边形面积的平方；$X,Y$ 线性无关时分母为正，所以表达式有意义。\n**与基的选取无关**：若换成另一组基 $X'=aX+bY$、$Y'=cX+dY$，则由反对称性 $R(X',Y')=(ad-bc)R(X,Y)$（交叉项 $R(X,X)$、$R(Y,Y)$ 全为零），分子乘 $(ad-bc)^{2}$，而 Gram 行列式也乘 $(ad-bc)^{2}$，商不变。所以 $K$ 只依赖平面 $\\sigma$ 本身，是 Grassmann 流形 $G_2(T_pM)$ 上的函数——它不依赖两个向量的长度、夹角，也不依赖张成它的方式。\n二维时每点只有一个平面，$K$ 就是**高斯曲率**：$R_{ijkl}=K(g_{il}g_{jk}-g_{ik}g_{jl})$，这正是「Gauss 绝妙定理」在内蕴语言里的样子。标准数值：欧氏空间 $K\\equiv0$；半径 $R$ 的球面 $K=1/R^{2}$；（归一化）双曲空间 $K\\equiv-1$。\n$K$ 与曲率张量之间是**双向**的。一方面 $K$ 只看到 $R$ 的一小部分（每个平面一个数）；另一方面，由 ①③④ 可把 $R$ 看成 $\\Lambda^{2}T_pM$ 上的对称双线性型 $b(X\\wedge Y,Z\\wedge W)=\\langle R(X,Y)Z,W\\rangle$，而 $K(X,Y)=b(X\\wedge Y,X\\wedge Y)/|X\\wedge Y|^{2}$ 恰好是 $b$ 的二次型在**可分解** 2-向量上的取值；二次型的极化唯一确定 $b$，从而唯一确定 $R$。结论：**知道所有二维平面上的 $K$ 就等于知道整个曲率张量**。这也解释了为什么比较定理（Rauch、Bishop–Gromov 等）总是对 $K$ 提条件：$K$ 是曲率里「几何上可测量」的那部分。\n$K$ 的符号给出测地线聚焦与发散的判据。沿单位速度测地线 $\\gamma$ 的横向 Jacobi 场满足 $J''+K(\\gamma',J)\\,J$-型的方程（准确地说 $J''+R(J,\\gamma')\\gamma'=0$，$J\\perp\\gamma'$ 时与 $K$ 的乘积项对应）；由 Sturm 比较定理：若沿 $\\gamma$ 恒有 $K\\geq k>0$，则 $|J|$ 在长度 $\\pi/\\sqrt{k}$ 内必出现零点（测地线聚焦、共轭点）；若 $K\\leq0$，则 $|J|$ 是凸函数、永不出现零点（测地线永久发散）。",
+    "definitionEn": "The Gaussian curvature is defined only for surfaces, but its **intrinsic** meaning generalises to any dimension: for every 2-dimensional subspace $\\sigma\\subset T_pM$ pick spanning vectors $X,Y$ and set $K(\\sigma)=K(X,Y)=\\frac{\\langle R(X,Y)Y,X\\rangle}{|X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2}}$. The denominator is the **Gram determinant** of $(X,Y)$, i.e. the square of the area of the parallelogram they span; it is positive for linearly independent vectors, so the expression is well defined.\n**Independence of the basis**: replacing the basis by $X'=aX+bY$, $Y'=cX+dY$ gives $R(X',Y')=(ad-bc)R(X,Y)$ by antisymmetry (the cross terms $R(X,X)$, $R(Y,Y)$ vanish), so numerator and Gram determinant are both multiplied by $(ad-bc)^{2}$ and the quotient is unchanged. Hence $K$ depends only on the plane $\\sigma$: it is a function on the Grassmann manifold $G_2(T_pM)$, independent of the lengths and the angle of the chosen spanning vectors.\nIn dimension two there is only one plane at each point and $K$ is the **Gaussian curvature**: $R_{ijkl}=K(g_{il}g_{jk}-g_{ik}g_{jl})$, which is the intrinsic form of Gauss's Theorema Egregium. Standard values: Euclidean space has $K\\equiv0$; the sphere of radius $R$ has $K=1/R^{2}$; (normalised) hyperbolic space has $K\\equiv-1$.\nThe relation between $K$ and the curvature tensor goes both ways. On the one hand $K$ only sees one number per plane; on the other hand, by ①③④ the tensor $R$ is a symmetric bilinear form $b(X\\wedge Y,Z\\wedge W)=\\langle R(X,Y)Z,W\\rangle$ on $\\Lambda^{2}T_pM$, and $K(X,Y)=b(X\\wedge Y,X\\wedge Y)/|X\\wedge Y|^{2}$ is precisely the associated quadratic form evaluated on decomposable 2-vectors. Polarising a quadratic form recovers $b$, hence $R$: **knowing $K$ on all 2-planes is the same as knowing the whole curvature tensor**. This is why comparison theorems (Rauch, Bishop–Gromov, …) are always stated in terms of $K$: it is the geometrically measurable part of the curvature.\nThe sign of $K$ governs the focusing of geodesics. A transverse Jacobi field along a unit-speed geodesic satisfies $J''+R(J,\\gamma')\\gamma'=0$, whose scalar content is a comparison equation with $K(\\gamma',J)$; by the Sturm comparison theorem, if $K\\geq k>0$ along $\\gamma$ then $|J|$ must vanish within distance $\\pi/\\sqrt{k}$ (focusing, conjugate points), whereas $K\\leq0$ makes $|J|$ convex so that no zeros occur (geodesics diverge forever).",
+    "formulas": [
+      {
+        "latex": "K(X,Y)=\\frac{\\langle R(X,Y)Y,X\\rangle}{|X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2}},\\qquad |X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2}=\\det\\begin{pmatrix}\\langle X,X\\rangle&\\langle X,Y\\rangle\\\\ \\langle Y,X\\rangle&\\langle Y,Y\\rangle\\end{pmatrix}",
+        "note": "定义：分子是 $R$ 在平面上的「二次型」，分母是 Gram 行列式（平行四边形面积的平方），线性无关时为正。",
+        "noteEn": "Definition: the numerator is the quadratic form of $R$ on the plane, the denominator is the Gram determinant (the squared area of the parallelogram), positive for independent vectors."
+      },
+      {
+        "latex": "X'=aX+bY,\\quad Y'=cX+dY\\ \\Longrightarrow\\ K(X',Y')=K(X,Y)",
+        "note": "基无关性：分子分母同乘 $(ad-bc)^{2}$；所以 $K$ 是平面 $\\sigma$ 的函数，$K(\\sigma)$ 记法才合理。",
+        "noteEn": "Basis independence: numerator and denominator are both multiplied by $(ad-bc)^{2}$, so $K$ is a function of the plane $\\sigma$ alone."
+      },
+      {
+        "latex": "n=2:\\ R_{ijkl}=K(g_{il}g_{jk}-g_{ik}g_{jl});\\qquad \\text{常截面曲率 }k:\\ R_{ijkl}=k(g_{il}g_{jk}-g_{ik}g_{jl})",
+        "note": "二维时 $K$ 即高斯曲率；高维常曲率时整个张量只由一个数决定（见 space-forms）。",
+        "noteEn": "In dimension two $K$ is the Gaussian curvature; in higher dimensions constant sectional curvature means the whole tensor is determined by one number (see space-forms)."
+      },
+      {
+        "latex": "K(\\sigma)=\\frac{b(X\\wedge Y,X\\wedge Y)}{|X\\wedge Y|^{2}},\\qquad b(X\\wedge Y,Z\\wedge W)=\\langle R(X,Y)Z,W\\rangle",
+        "note": "$K$ 是 $\\Lambda^{2}T_pM$ 上对称双线性型 $b$ 的二次型取值；极化后还原 $b$，故 $K$ 决定全部曲率张量。",
+        "noteEn": "$K$ is the quadratic form of the symmetric bilinear form $b$ on $\\Lambda^{2}T_pM$; polarising recovers $b$, so $K$ determines the full curvature tensor."
+      },
+      {
+        "latex": "\\text{欧氏}:K=0;\\qquad S^{n}_R:K=\\frac{1}{R^{2}};\\qquad H^{n}:K=-1;\\qquad \\text{Schur}:\\ n\\geq3,\\ K\\ \\text{各向同性}\\Rightarrow K\\equiv\\text{const}",
+        "note": "三个模型的截面曲率，以及 Schur 定理（$n\\geq3$ 不可漏：$n=2$ 时每点只有一个平面，各向同性是空话）。",
+        "noteEn": "The sectional curvatures of the three model spaces, and Schur's theorem ($n\\geq3$ is essential: for $n=2$ there is only one plane at each point, so isotropy is vacuous)."
+      }
+    ],
+    "properties": [
+      "**只依赖平面**：$K(\\sigma)$ 与张成 $\\sigma$ 的向量无关（基无关性），也与它们的长度、夹角无关；它只用到 $R$ 的 $R_{1221}$ 型分量。$K$ 是 Grassmann 流形 $G_2(T_pM)$ 上的光滑函数，$n$ 维时它的定义域维数是 $2(n-2)$。",
+      "**符号与聚焦（Sturm 比较）**：$K\\geq k>0$ 时横向 Jacobi 场在 $\\pi/\\sqrt{k}$ 内必出现零点（共轭点，测地线聚焦）；$K\\leq0$ 时无共轭点、测地线永久发散（Cartan–Hadamard 情形的几何基础）。这是「曲率符号 = 测地线汇聚/发散」的严格版本。",
+      "**二维时等于高斯曲率**：$n=2$ 时 $K$ 就是高斯曲率，$R_{ijkl}=K(g_{il}g_{jk}-g_{ik}g_{jl})$；绝妙定理的内蕴内容正是「这个 $K$ 由度量唯一决定，不需要嵌入」。反过来，$n=2$ 时不同的 $K$ 函数给出真正不同的几何（椭球面、马鞍面、伪球面），说明二维的 $K$ 可以是任意光滑函数。",
+      "**各向同性 ⇒ 常曲率（Schur 定理，$n\\geq3$）**：若每点的 $K(\\sigma)$ 不依赖 $\\sigma$，则 $\\mathrm{Ric}=(n-1)Kg$、$S=n(n-1)K$，代入 $\\nabla^{i}R_{ij}=\\frac{1}{2}\\partial_jS$ 得 $(n-1)\\partial_jK=\\frac{n(n-1)}{2}\\partial_jK$，即 $(n-2)\\partial_jK=0$；$n\\geq3$ 时 $K$ 必为常数。$n=2$ 时因子 $n-2$ 为零，结论不成立（任意曲面的 $K$ 都可以变化）——这就是「$n\\geq3$ 不能漏」的原因。",
+      "**决定整个曲率**：由对称性，$R$ 是 $\\Lambda^{2}$ 上的对称双线性型，而 $K$ 是其二次型在可分解元素上的取值；二次型极化唯一还原双线性型，所以 $K$ 与 $R$ 携带同样的信息。特别地 $n=3$ 时里奇与 $K$ 互相决定（$K_{ij}=\\mathrm{Ric}_{ii}+\\mathrm{Ric}_{jj}-\\frac{S}{2}$）。"
+    ],
+    "propertiesEn": [
+      "**Depends only on the plane**: $K(\\sigma)$ is independent of the spanning vectors, their lengths and their angle; it only involves components of $R$ of the type $R_{1221}$. It is a smooth function on the Grassmann manifold $G_2(T_pM)$, whose dimension is $2(n-2)$.",
+      "**Sign and focusing (Sturm comparison)**: if $K\\geq k>0$, a transverse Jacobi field must have a zero within distance $\\pi/\\sqrt{k}$ (conjugate point, geodesic focusing); if $K\\leq0$, there are no conjugate points and geodesics diverge forever (the geometric basis of the Cartan–Hadamard situation). This is the rigorous version of \"sign of curvature = convergence/divergence of geodesics\".",
+      "**In dimension two it is the Gaussian curvature**: for $n=2$, $K$ is the Gaussian curvature and $R_{ijkl}=K(g_{il}g_{jk}-g_{ik}g_{jl})$; the intrinsic content of the Theorema Egregium is that this $K$ is determined by the metric alone, with no embedding needed. Conversely, in dimension two $K$ can be an arbitrary smooth function (ellipsoid, saddle, pseudosphere).",
+      "**Isotropy implies constant curvature (Schur, $n\\geq3$)**: if at each point $K(\\sigma)$ does not depend on $\\sigma$, then $\\mathrm{Ric}=(n-1)Kg$ and $S=n(n-1)K$; substituting into $\\nabla^{i}R_{ij}=\\frac{1}{2}\\partial_jS$ gives $(1-\\frac{n}{2})\\partial_jK=0$, so for $n\\geq3$ the function $K$ is constant. For $n=2$ the factor $n-2$ vanishes and the conclusion fails — the reason the hypothesis $n\\geq3$ cannot be dropped.",
+      "**It determines the whole curvature**: by the symmetries $R$ is a symmetric bilinear form on $\\Lambda^{2}T_pM$ and $K$ is its quadratic form on decomposable elements; polarisation recovers the bilinear form, so $K$ and $R$ carry exactly the same information. In particular, for $n=3$ Ricci and $K$ determine each other ($K_{ij}=\\mathrm{Ric}_{ii}+\\mathrm{Ric}_{jj}-\\frac{S}{2}$)."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "cos(x)*cos(y)",
+      "xRange": [
+        -3.2,
+        3.2
+      ],
+      "yRange": [
+        -3.2,
+        3.2
+      ],
+      "density": [
+        30,
+        30
+      ],
+      "color": "#b388ff",
+      "title": "截面曲率随点与平面变化：图面 z=cos x cos y 在峰顶（如原点）K>0、在鞍点附近 K<0，用 Hessian 行列式即可判断符号"
+    },
+    "examples": [
+      {
+        "problem": "用单位球面的 Christoffel 符号（$\\Gamma^{1}{}_{22}=-\\sin\\theta\\cos\\theta$、$\\Gamma^{2}{}_{12}=\\cot\\theta$，$x^{1}=\\theta,x^{2}=\\varphi$）实算截面曲率，验证 $K(\\partial_1,\\partial_2)=1$ 且与基无关；再用缩放论证求半径 $R$ 的球面的 $K$。",
+        "solution": "前面已算得 $R^{1}{}_{122}=\\sin^{2}\\theta$（等价地 $R^{1}{}_{212}=-R^{1}{}_{122}=-\\sin^{2}\\theta$）与 $R^{2}{}_{121}=-1$。于是 $$R_{1221}=\\langle R(\\partial_1,\\partial_2)\\partial_2,\\partial_1\\rangle=g_{11}R^{1}{}_{122}=\\sin^{2}\\theta,$$ $$|\\partial_1|^{2}|\\partial_2|^{2}-\\langle\\partial_1,\\partial_2\\rangle^{2}=1\\cdot\\sin^{2}\\theta-0=\\sin^{2}\\theta,$$ 故 $$K(\\partial_1,\\partial_2)=\\frac{R_{1221}}{\\sin^{2}\\theta}=1.$$ 基无关性可以显式验证：$X=a\\partial_1+b\\partial_2$、$Y=c\\partial_1+d\\partial_2$ 时 $R(X,Y)=(ad-bc)R(\\partial_1,\\partial_2)$（交叉项为零），Gram 行列式同时乘 $(ad-bc)^{2}$，商仍为 $1$。\n缩放论证：把度量换成 $R^{2}g$ 时，$g^{-1}$ 与 $\\partial g$ 的变化相互抵消，$\\Gamma$ 不变、$R^{l}{}_{ijk}$ 也不变，而 $R_{ijkl}$ 乘 $R^{2}$、Gram 行列式乘 $R^{4}$，所以 $K\\mapsto K/R^{2}$。单位球面 $K=1$，故半径 $R$ 的球面 $K=1/R^{2}$（等价地：$k=1/R^{2}$，特征长度 $1/\\sqrt{k}=R$）。"
+      },
+      {
+        "problem": "对函数图面 $z=f(x,y)$（诱导度量）证明 $K=\\dfrac{f_{xx}f_{yy}-f_{xy}^{2}}{(1+f_x^{2}+f_y^{2})^{2}}$；据此求马鞍面 $z=xy$ 的曲率，并判断 $z=\\cos x\\cos y$ 在峰顶与鞍点处的符号。",
+        "solution": "诱导度量为 $g_{ij}=\\delta_{ij}+f_if_j$（$f_1=f_x,\\ f_2=f_y$，于是 $g_{11}=1+f_x^{2}$、$g_{22}=1+f_y^{2}$、$g_{12}=f_xf_y$，$\\det g=1+|\\nabla f|^{2}$）。代入 Christoffel 公式与 $K=R_{1221}/\\det g$（截面曲率分子必须取 $R_{XYYX}$ 型分量；本约定下 $R_{1212}/\\det g=-K$，用它算球面会得 $-1$，与 $K=1$ 矛盾）计算，整理后得 $$K=\\frac{f_{xx}f_{yy}-f_{xy}^{2}}{(1+f_x^{2}+f_y^{2})^{2}},$$ 分子正是 $f$ 的 Hessian 行列式（凸点 $K>0$、鞍点 $K<0$）。\n对 $z=xy$：$f_{xx}=f_{yy}=0$、$f_{xy}=1$，故 $$K=\\frac{-1}{(1+x^{2}+y^{2})^{2}};$$ 原点处 $K=-1$、远处趋于 $0$——曲率集中在鞍点附近（这正是 `ricci-scalar-curvature` 一节配图所画的 $|K|$ 等值线）。\n对 $z=\\cos x\\cos y$：峰顶 $(0,0)$ 处 $f_{xx}=f_{yy}=-1$、$f_{xy}=0$，Hessian 行列式 $=1>0$，故 $K>0$；鞍点 $\\left(\\frac{\\pi}{2},\\frac{\\pi}{2}\\right)$ 处 $f_{xx}=f_{yy}=0$、$f_{xy}=1$，行列式 $=-1<0$，故 $K<0$。同一个曲面上 $K$ 变号，可见 $K$ 是逐点的函数、并不自动恒定（对比 Schur 定理需要 $n\\geq3$ 且各向同性）。"
+      }
+    ],
+    "tags": [
+      "截面曲率",
+      "高斯曲率",
+      "Schur 定理",
+      "共轭点",
+      "测地线聚焦"
+    ],
+    "links": [
+      "riemannian-curvature-tensor",
+      "curvature-symmetries",
+      "ricci-scalar-curvature",
+      "space-forms",
+      "gaussian-mean-curvature",
+      "theorema-egregium",
+      "jacobi-fields",
+      "rauch-comparison",
+      "bishop-gromov"
+    ]
+  },
+  {
+    "id": "space-forms",
+    "title": "空间形式与常曲率空间",
+    "titleEn": "Space Forms",
+    "branch": "riemannian",
+    "level": 5,
+    "summary": "常截面曲率 k 的黎曼流形：模型空间是半径 1/√k 的球面（k>0）、欧氏空间（k=0）、双曲空间（k<0）；单连通完备时等距于模型空间，一般情形是模型空间对离散等距群的商。",
+    "summaryEn": "Riemannian manifolds of constant sectional curvature k: the model spaces are the sphere of radius 1/√k (k>0), Euclidean space (k=0) and hyperbolic space (k<0); a complete simply connected one is isometric to its model, and in general it is a quotient of a model by a discrete isometry group.",
+    "definition": "**空间形式**就是截面曲率处处等于同一个常数 $k$ 的黎曼流形：$K(\\sigma)\\equiv k$。由曲率张量的对称性，「每点各向同性」这个假设会强制整个张量只有一种形状：$$R(X,Y)Z=k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr),\\qquad R_{ijkl}=k\\,(g_{il}g_{jk}-g_{ik}g_{jl}).$$ **负号的位置不能错**；最好的检验方式是代入截面曲率：$\\langle R(X,Y)Y,X\\rangle=k\\bigl(|X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2}\\bigr)$，分子恰好是 $k$ 乘 Gram 行列式，于是 $K(X,Y)=k$。反过来，若张量长这样，则每个平面上的 $K$ 都是 $k$，所以「$K$ 恒为常数」当且仅当「$R$ 取上述形状」。要注意 $k$ 的量纲是 ${1}/{\\text{长度}^{2}}$：$k>0$ 时它定出特征长度 $1/\\sqrt{k}$。\n三个模型空间：\n– $k>0$：半径 $\\rho=1/\\sqrt{k}$ 的球面 $S^{n}_{\\rho}$（标准单位球面度量乘 $\\rho^{2}$）；\n– $k=0$：欧氏空间 $\\mathbb{R}^{n}$；\n– $k<0$：双曲空间 $H^{n}(k)$，最常用的是归一化 $k=-1$ 的 $\\mathbb{H}^{n}$。\n它们在测地极坐标下有统一写法。记 $\\mathrm{sn}_k(r)$ 为 $$\\mathrm{sn}_k(r)=\\begin{cases}\\dfrac{\\sin(\\sqrt{k}\\,r)}{\\sqrt{k}},&k>0,\\\\ r,&k=0,\\\\ \\dfrac{\\sinh(\\sqrt{-k}\\,r)}{\\sqrt{-k}},&k<0,\\end{cases}$$ 则三个模型都可写成 $$g=dr^{2}+\\mathrm{sn}_k(r)^{2}\\,d\\Omega_{n-1}^{2},$$ 其中 $d\\Omega_{n-1}^{2}$ 是单位球面的标准度量、$r$ 是到极点（原点）的距离。例如单位球面（$k=1$）：$g=dr^{2}+\\sin^{2}r\\,d\\Omega^{2}$；$k=-1$ 的双曲空间：$g=dr^{2}+\\sinh^{2}r\\,d\\Omega^{2}$；$k=0$ 就是极坐标下的欧氏度量 $dr^{2}+r^{2}d\\Omega^{2}$。这个公式一眼读出几何：$k>0$ 时「球面半径」$\\mathrm{sn}_k(r)$ 先增后减（在 $r=\\pi/(2\\sqrt{k})$ 处达到最大值 $1/\\sqrt{k}$），测地线在 $r=\\pi/\\sqrt{k}$ 处重新汇聚（共轭点），因此球面是紧的、直径恰为 $\\pi/\\sqrt{k}$；$k\\leq0$ 时 $\\mathrm{sn}_k(r)$ 单调增长，测地线永久发散，空间非紧且体积无限。\n把三个模型完全确定下来的是**Killing–Hopf 分类定理**：单连通、完备、常截面曲率 $k$ 的 $n$ 维黎曼流形等距于上述对应的模型空间。去掉单连通性，一般的空间形式就是模型空间对离散等距群 $\\Gamma$ 的商 $\\widetilde{M}/\\Gamma$（$\\Gamma$ 作用自由且真不连续）：平坦环面 $\\mathbb{T}^{n}=\\mathbb{R}^{n}/\\mathbb{Z}^{n}$、实射影空间 $\\mathbb{RP}^{n}=S^{n}/\\{\\pm I\\}$ 都是这样得到的——曲率仍然处处是常数，但整体拓扑完全不同。所以「空间形式的曲率」是局部信息，而「等距于哪一个模型」是局部加整体（单连通）信息。最后，空间形式都是爱因斯坦流形：$R_{ij}=(n-1)k\\,g_{ij}$、$S=n(n-1)k$；反过来 $n=3$ 时 $\\mathrm{Ric}=\\lambda g$（$\\lambda$ 常）就足以推出常曲率（三维里奇决定曲率，$k=\\lambda/2$），而 $n\\geq4$ 时爱因斯坦条件只固定里奇部分，还需要 Weyl 张量为零才能得到空间形式。",
+    "definitionEn": "A **space form** is a Riemannian manifold whose sectional curvature is one and the same constant $k$ at every point and for every plane: $K(\\sigma)\\equiv k$. By the symmetries of the curvature tensor this pointwise isotropy forces a single shape: $R(X,Y)Z=k(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y)$ and $R_{ijkl}=k(g_{il}g_{jk}-g_{ik}g_{jl})$. The position of the minus sign matters; the best check is to substitute into the sectional curvature: $\\langle R(X,Y)Y,X\\rangle=k(|X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2})$ is exactly $k$ times a Gram determinant, so $K(X,Y)=k$. Conversely, if the tensor has this shape then every plane has $K=k$, so \"$K$ is constant\" is equivalent to \"$R$ has this shape\". Note that $k$ has dimension ${1}/{\\text{length}^{2}}$: for $k>0$ it defines the characteristic length $1/\\sqrt{k}$.\nThe three model spaces are: the sphere $S^{n}_{\\rho}$ of radius $\\rho=1/\\sqrt{k}$ for $k>0$; Euclidean space $\\mathbb{R}^{n}$ for $k=0$; hyperbolic space $H^{n}(k)$ for $k<0$, most often normalised to $k=-1$, written $\\mathbb{H}^{n}$. In geodesic polar coordinates they share the single formula $g=dr^{2}+\\mathrm{sn}_k(r)^{2}d\\Omega_{n-1}^{2}$, where $\\mathrm{sn}_k(r)=\\sin(\\sqrt{k}r)/\\sqrt{k}$ for $k>0$, $r$ for $k=0$, and $\\sinh(\\sqrt{-k}r)/\\sqrt{-k}$ for $k<0$. For the unit sphere ($k=1$) this is $dr^{2}+\\sin^{2}r\\,d\\Omega^{2}$, for $k=-1$ it is $dr^{2}+\\sinh^{2}r\\,d\\Omega^{2}$, and for $k=0$ it is the Euclidean metric in polar coordinates. The formula displays the geometry: for $k>0$ the \"sphere radius\" $\\mathrm{sn}_k(r)$ grows up to $1/\\sqrt{k}$ at $r=\\pi/(2\\sqrt{k})$ and then decreases, geodesics refocus at $r=\\pi/\\sqrt{k}$ (conjugate points), and the space is compact with diameter exactly $\\pi/\\sqrt{k}$; for $k\\leq0$ it grows monotonically, geodesics diverge, and the space is non-compact with infinite volume.\nThe classification is the **Killing–Hopf theorem**: a complete, simply connected Riemannian manifold of constant sectional curvature $k$ is isometric to the corresponding model space. Without simple connectivity, a general space form is a quotient $\\widetilde{M}/\\Gamma$ of a model by a discrete group $\\Gamma$ of isometries acting freely and properly discontinuously: the flat torus $\\mathbb{T}^{n}=\\mathbb{R}^{n}/\\mathbb{Z}^{n}$ and real projective space $\\mathbb{RP}^{n}=S^{n}/\\{\\pm I\\}$ arise this way — the curvature is still constant, but the global topology differs. Finally, every space form is an Einstein manifold: $R_{ij}=(n-1)k\\,g_{ij}$, $S=n(n-1)k$. Conversely, for $n=3$ the condition $\\mathrm{Ric}=\\lambda g$ with constant $\\lambda$ already forces constant curvature ($k=\\lambda/2$, since Ricci determines curvature in dimension three), whereas for $n\\geq4$ the Einstein condition only fixes the Ricci part and one also needs the Weyl tensor to vanish.",
+    "formulas": [
+      {
+        "latex": "K(\\sigma)\\equiv k\\iff R(X,Y)Z=k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr),\\qquad R_{ijkl}=k\\,(g_{il}g_{jk}-g_{ik}g_{jl})",
+        "note": "空间形式的定义与统一张量形状；负号位置不能错（对照 $\\langle R(X,Y)Y,X\\rangle>0$ 当 $k>0$）。",
+        "noteEn": "Definition of a space form and the resulting shape of the tensor; the position of the minus sign matters (so that $\\langle R(X,Y)Y,X\\rangle>0$ when $k>0$)."
+      },
+      {
+        "latex": "\\langle R(X,Y)Y,X\\rangle=k\\bigl(|X|^{2}|Y|^{2}-\\langle X,Y\\rangle^{2}\\bigr)\\ \\Longrightarrow\\ K(X,Y)=k",
+        "note": "最方便的验证：分子恰是 $k$ 乘 Gram 行列式，代入截面曲率定义立得 $K=k$。",
+        "noteEn": "The convenient verification: the numerator is $k$ times the Gram determinant, so the definition of sectional curvature immediately gives $K=k$."
+      },
+      {
+        "latex": "g=dr^{2}+\\mathrm{sn}_k(r)^{2}\\,d\\Omega_{n-1}^{2},\\qquad \\mathrm{sn}_k(r)=\\begin{cases}\\sin(\\sqrt{k}\\,r)/\\sqrt{k},&k>0,\\\\ r,&k=0,\\\\ \\sinh(\\sqrt{-k}\\,r)/\\sqrt{-k},&k<0\\end{cases}",
+        "note": "三个模型空间的统一测地极坐标形式；$r$ 为到极点的距离，$k>0$ 时共轭点出现在 $r=\\pi/\\sqrt{k}$、直径也为 $\\pi/\\sqrt{k}$。",
+        "noteEn": "Unified geodesic polar form of the three models; $r$ is the distance to the pole, and for $k>0$ conjugate points occur at $r=\\pi/\\sqrt{k}$, which is also the diameter."
+      },
+      {
+        "latex": "R_{ij}=(n-1)k\\,g_{ij},\\qquad S=n(n-1)k",
+        "note": "空间形式都是爱因斯坦流形；二维时 $R_{ij}=Kg_{ij}$、$S=2K$。",
+        "noteEn": "Every space form is an Einstein manifold; in dimension two $R_{ij}=Kg_{ij}$ and $S=2K$."
+      },
+      {
+        "latex": "k>0\\leftrightarrow S^{n}(1/\\sqrt{k}),\\qquad k=0\\leftrightarrow\\mathbb{R}^{n},\\qquad k<0\\leftrightarrow\\mathbb{H}^{n}",
+        "note": "三种模型；单连通完备的常曲率流形等距于模型（Killing–Hopf），一般情形是模型对离散等距群的商。",
+        "noteEn": "The three models; a complete simply connected manifold of constant curvature is isometric to its model (Killing–Hopf), and in general it is a quotient by a discrete isometry group."
+      }
+    ],
+    "properties": [
+      "**刚性与分类（Killing–Hopf）**：单连通 + 完备 + 常截面曲率 ⇒ 等距于模型空间（球面、欧氏空间或双曲空间）。一般空间形式是 $\\widetilde{M}/\\Gamma$（$\\Gamma$ 自由、真不连续作用）；二维时这条定理就是「单连通完备的常高斯曲率曲面只有球面、平面、双曲平面」。",
+      "**曲率决定整体几何**：$k>0$ 时 $S^{n}(1/\\sqrt{k})$ 紧致，直径 $=\\pi/\\sqrt{k}$，体积有限，任意测地线是周期 $2\\pi/\\sqrt{k}$ 的闭曲线，任意点对在距离 $\\pi/\\sqrt{k}$ 处有共轭点；$k=0$ 与 $k<0$ 时空间非紧、体积无限、无共轭点，$\\exp_p$ 是覆盖映射（Cartan–Hadamard 情形的来源）。",
+      "**爱因斯坦性质与 Schur 的反面**：$R_{ij}=(n-1)kg_{ij}$、$S=n(n-1)k$，所以空间形式都是爱因斯坦流形；反过来 $n=3$ 时 $\\mathrm{Ric}=\\lambda g$（$\\lambda$ 常）就迫使常曲率 $k=\\lambda/2$；$n\\geq4$ 时爱因斯坦条件不够（还需 Weyl 张量为零）。另外由 Schur 定理，$n\\geq3$ 时验算常曲率不必检验所有平面：只要每点的 $K$ 不依赖平面，$k$ 就自动与点无关。",
+      "**测地极坐标下的统一形式**：$g=dr^{2}+\\mathrm{sn}_k(r)^{2}d\\Omega_{n-1}^{2}$ 一步给出三个模型，也是比较定理的参照系：一般流形与模型的差别写成 $\\mathrm{sn}_k$ 的不等式（Rauch 比较定理），Bishop–Gromov 体积比较则比较 $\\mathrm{sn}_k(r)^{n-1}$ 与体积元。",
+      "**局部模型与嵌入**：$k<0$ 的曲面在 $\\mathbb{R}^{3}$ 中有局部模型（伪球面 $K\\equiv-1$，见配图），但完整的双曲平面 $\\mathbb{H}^{2}$ 不能光滑等距嵌入 $\\mathbb{R}^{3}$（Hilbert 定理），所以只能画一块；$k>0$ 的球面是 $\\mathbb{R}^{n+1}$ 中的球面像，而 $\\mathbb{RP}^{n}$ 这样的商则不能这样嵌入——抽象黎曼几何在这里显示出必要性。"
+    ],
+    "propertiesEn": [
+      "**Rigidity and classification (Killing–Hopf)**: complete + simply connected + constant sectional curvature implies isometric to the model space (sphere, Euclidean space or hyperbolic space). A general space form is $\\widetilde{M}/\\Gamma$ with $\\Gamma$ acting freely and properly discontinuously; in dimension two the theorem says that the complete simply connected surfaces of constant Gaussian curvature are exactly the sphere, the plane and the hyperbolic plane.",
+      "**Curvature determines the global geometry**: for $k>0$, $S^{n}(1/\\sqrt{k})$ is compact with diameter $\\pi/\\sqrt{k}$ and finite volume, every geodesic is closed with period $2\\pi/\\sqrt{k}$, and any two points have conjugate points at distance $\\pi/\\sqrt{k}$; for $k=0$ and $k<0$ the space is non-compact with infinite volume and no conjugate points, and $\\exp_p$ is a covering map (the source of the Cartan–Hadamard situation).",
+      "**Einstein property, converse of Schur**: $R_{ij}=(n-1)kg_{ij}$ and $S=n(n-1)k$, so space forms are Einstein manifolds; conversely for $n=3$ the condition $\\mathrm{Ric}=\\lambda g$ with constant $\\lambda$ forces constant curvature $k=\\lambda/2$, while for $n\\geq4$ the Einstein condition is not enough (the Weyl tensor must also vanish). By Schur's theorem, for $n\\geq3$ one need not check all planes to verify constant curvature: isotropy at every point already forces $k$ to be independent of the point.",
+      "**Unified geodesic polar form**: $g=dr^{2}+\\mathrm{sn}_k(r)^{2}d\\Omega_{n-1}^{2}$ produces the three models at once and serves as the reference for comparison theorems: the deviation of a general manifold from a model is expressed as inequalities on $\\mathrm{sn}_k$ (Rauch), while Bishop–Gromov volume comparison compares $\\mathrm{sn}_k(r)^{n-1}$ with the volume element.",
+      "**Local models and embeddings**: surfaces of constant negative curvature have local models in $\\mathbb{R}^{3}$ (the pseudosphere with $K\\equiv-1$, see the picture), but the complete hyperbolic plane $\\mathbb{H}^{2}$ cannot be isometrically embedded smoothly in $\\mathbb{R}^{3}$ (Hilbert's theorem), so only a piece can be drawn; the sphere is a sphere in $\\mathbb{R}^{n+1}$ and quotients such as $\\mathbb{RP}^{n}$ admit no such picture — a point where abstract Riemannian geometry becomes indispensable."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "cos(v)/cosh(u)",
+        "y": "sin(v)/cosh(u)",
+        "z": "u - tanh(u)"
+      },
+      "uRange": [
+        -2.8,
+        2.8
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        24,
+        30
+      ],
+      "color": "#06d6a0",
+      "title": "常截面曲率 k<0 的局部模型：伪球面（K≡−1）；完整的双曲平面不能光滑等距嵌入 R³（Hilbert 定理），所以只能画这样一块"
+    },
+    "examples": [
+      {
+        "problem": "证明：若 $K(X,Y)=k$ 对一切线性无关的 $X,Y$ 成立（$k$ 为常数），则 $R(X,Y)Z=k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr)$。",
+        "solution": "记 $F(X,W)=\\langle R(X,W)W,X\\rangle$，假设就是 $F(X,W)=k\\bigl(|X|^{2}|W|^{2}-\\langle X,W\\rangle^{2}\\bigr)$。把 $F(X,Y+Z)$ 按 $R(X,\\cdot)$ 的双线性性展开：$$F(X,Y+Z)=F(X,Y)+F(X,Z)+\\langle R(X,Y)Z,X\\rangle+\\langle R(X,Z)Y,X\\rangle.$$ 用 ⑤ 与 ①③ 处理最后一项：$$\\langle R(X,Z)Y,X\\rangle=\\langle R(Y,X)X,Z\\rangle=-\\langle R(X,Y)X,Z\\rangle=\\langle R(X,Y)Z,X\\rangle,$$ 于是 $$\\langle R(X,Y)Z,X\\rangle=\\tfrac{1}{2}\\bigl[F(X,Y+Z)-F(X,Y)-F(X,Z)\\bigr].$$ 把已知的 $F$ 代入右端（$|Y+Z|^{2}-|Y|^{2}-|Z|^{2}=2\\langle Y,Z\\rangle$、$\\langle X,Y+Z\\rangle^{2}-\\langle X,Y\\rangle^{2}-\\langle X,Z\\rangle^{2}=2\\langle X,Y\\rangle\\langle X,Z\\rangle$）：$$\\langle R(X,Y)Z,X\\rangle=\\tfrac{1}{2}k\\bigl[|X|^{2}\\cdot2\\langle Y,Z\\rangle-2\\langle X,Y\\rangle\\langle X,Z\\rangle\\bigr]=k\\bigl(|X|^{2}\\langle Y,Z\\rangle-\\langle X,Y\\rangle\\langle X,Z\\rangle\\bigr).$$ 右端恰是 $k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr)$ 与 $X$ 的内积，而且对一切 $X$ 成立，故 $R(X,Y)Z-k\\bigl(\\langle Y,Z\\rangle X-\\langle X,Z\\rangle Y\\bigr)=0$。反向的验证（把此形状代入截面曲率公式得 $K=k$）已在公式表中给出。"
+      },
+      {
+        "problem": "核对三种模型：(1) 用缩放论证求半径 $R$ 的球面的 $K$；(2) 验证伪球面 $(\\mathrm{sech}\\,u\\cos v,\\ \\mathrm{sech}\\,u\\sin v,\\ u-\\tanh u)$ 有 $K\\equiv-1$；(3) 说明平坦环面 $\\mathbb{T}^{2}$ 是 $k=0$ 的空间形式但不与 $\\mathbb{R}^{2}$ 等距。",
+        "solution": "(1) 半径 $R$ 的球面度量为 $g_R=R^{2}g_1$（$g_1$ 为单位球面度量）。在缩放 $g\\mapsto R^{2}g$ 下 $\\Gamma$ 不变（$g^{-1}$ 与 $\\partial g$ 的变化相消）、$R^{l}{}_{ijk}$ 也不变，而 $R_{ijkl}$ 乘 $R^{2}$、Gram 行列式乘 $R^{4}$，故 $K\\mapsto K/R^{2}$；单位球面 $K=1$，所以 $K=1/R^{2}$，即 $k=1/R^{2}$，特征长度 $1/\\sqrt{k}=R$。\n(2) 该参数化的诱导度量为 $ds^{2}=\\tanh^{2}u\\,du^{2}+\\mathrm{sech}^{2}u\\,dv^{2}$（$u$ 方向是子午线、$v$ 方向是旋转方向）。换到弧长参数 $s=\\ln\\cosh u$ 后 $ds=\\tanh u\\,du$，而 $\\mathrm{sech}^{2}u=e^{-2s}$，度量变成 $ds^{2}+e^{-2s}dv^{2}$；对旋转面度量 $ds^{2}+f(s)^{2}dv^{2}$ 有 $K=-f''/f$，取 $f=e^{-s}$ 得 $K=-1$。这就是 $k=-1$ 的局部模型（它在 $u=0$ 处退化，是一个不完全的曲面，但已经足够展示常负曲率）。\n(3) 环面 $\\mathbb{T}^{2}=\\mathbb{R}^{2}/\\mathbb{Z}^{2}$ 上取欧氏度量，局部与 $\\mathbb{R}^{2}$ 完全相同，故 $R\\equiv0$、$K\\equiv0$；但它紧致、$\\pi_1\\cong\\mathbb{Z}^{2}$，不可能等距于 $\\mathbb{R}^{2}$。这说明「局部平坦」与「等距于欧氏空间」是两件事，也说明空间形式的分类定理必须假设单连通（或改成「对离散等距群取商」的形式）。"
+      }
+    ],
+    "tags": [
+      "空间形式",
+      "常曲率",
+      "球面",
+      "双曲空间",
+      "分类定理"
+    ],
+    "links": [
+      "sectional-curvature",
+      "riemannian-curvature-tensor",
+      "ricci-scalar-curvature",
+      "curvature-symmetries",
+      "hyperbolic-geometry-poincare",
+      "cartan-hadamard",
+      "bonnet-myers",
+      "einstein-manifold"
+    ]
+  }
+]

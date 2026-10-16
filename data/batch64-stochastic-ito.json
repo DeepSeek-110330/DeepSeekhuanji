@@ -1,0 +1,572 @@
+[
+  {
+    "id": "doob-decomposition",
+    "title": "杜布分解与杜布不等式",
+    "titleEn": "Doob Decomposition and Doob's Inequalities",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "下鞅可唯一分解为「鞅 + 递增可预测过程」，杜布最大值不等式则用终值把下鞅的最大值控制在概率与 L^p 两种尺度下。",
+    "summaryEn": "Every submartingale splits uniquely into a martingale plus an increasing predictable process, and Doob's maximal inequalities control the running maximum by the terminal value in probability and in L^p.",
+    "definition": "**下鞅**（submartingale）是满足 $E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n$ 的适应可积过程 $\\{(X_n,\\mathcal F_n)\\}$：平均而言它不下降，但每条轨道仍可上下振荡。**杜布分解定理**把它拆成两份责任分明的部分\n\n$$X_n=M_n+A_n,\\qquad (M_n)\\ \\text{是鞅},\\qquad (A_n)\\ \\text{递增且可预测},\\qquad A_0=0 .$$\n\n所谓**可预测**（predictable），是指 $A_n$ 关于 $\\mathcal F_{n-1}$ 可测，即第 $n$ 期的值在第 $n-1$ 期末尾就已知；配合递增性 $A_n\\le A_{n+1}$，$A$ 就是一条一眼可见走向的系统性漂移。这两个条件缺一不可，而且满足它们的分解是**唯一**的：若 $X=M+A=M'+A'$，则 $D=A-A'=M'-M$ 既是鞅又可预测，由 $D_{n+1}=E[D_{n+1}\\mid\\mathcal F_n]=D_n$ 得 $D\\equiv 0$。若只要求 $A$ 适应、递增而不要求可预测，唯一性立刻失效。\n\n$A$ 称为 $X$ 的**补偿子**（compensator）：它把系统性上升从随机涨落里剥离出去，$M_n=X_n-A_n$ 才是真正无漂移的部分。$X$ 是鞅当且仅当 $A\\equiv0$；上鞅情形对偶地写成 $X_n=M_n-A_n$。\n\n**杜布最大值不等式**（Doob's maximal inequalities）控制下鞅的最大值。对**非负**下鞅与 $\\lambda>0$，\n\n$$P\\Big(\\max_{k\\le n}X_k\\ge\\lambda\\Big)\\le\\frac{E[X_n]}{\\lambda};$$\n\n对 $p>1$ 还有 $L^p$ 范数版本 $\\big\\|\\max_{k\\le n}X_k\\big\\|_p\\le\\frac{p}{p-1}\\|X_n\\|_p$，常数 $p/(p-1)$ 是最优的（$p=2$ 时就等于 $2$，$p\\downarrow1$ 时发散）。",
+    "definitionEn": "A **submartingale** is an adapted integrable process with $E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n$: on average it never decreases, although individual paths may oscillate. **Doob's decomposition theorem** splits it into two parts of clearly separated duties,\n\n$$X_n=M_n+A_n,\\qquad (M_n)\\ \\text{a martingale},\\qquad (A_n)\\ \\text{increasing and predictable},\\qquad A_0=0 .$$\n\nPredictable means $A_n$ is $\\mathcal F_{n-1}$-measurable, so its $n$-th value is already known at the end of period $n-1$. Both conditions (increasing, predictable) are needed, and the decomposition is **unique**: if $X=M+A=M'+A'$, then $D=A-A'=M'-M$ is a predictable martingale, and $D_{n+1}=E[D_{n+1}\\mid\\mathcal F_n]=D_n$ forces $D\\equiv0$. Dropping predictability destroys uniqueness at once.\n\n$A$ is called the **compensator** of $X$: it carries the systematic increase, while $M_n=X_n-A_n$ is drift-free. $X$ is a martingale iff $A\\equiv0$; a supermartingale has the dual form $X_n=M_n-A_n$.\n\n**Doob's maximal inequalities** control the running maximum. For a **nonnegative** submartingale and $\\lambda>0$,\n\n$$P\\Big(\\max_{k\\le n}X_k\\ge\\lambda\\Big)\\le\\frac{E[X_n]}{\\lambda},$$\n\nand for $p>1$, $\\big\\|\\max_{k\\le n}X_k\\big\\|_p\\le\\frac{p}{p-1}\\|X_n\\|_p$, with sharp constant (equal to $2$ when $p=2$).",
+    "formulas": [
+      {
+        "latex": "X_n = M_n + A_n,\\qquad A_0 = 0,\\quad A_n\\le A_{n+1},\\quad A_n\\in\\mathcal F_{n-1}",
+        "note": "杜布分解：下鞅 = 鞅 + 递增可预测过程。递增与可预测两个条件都要，才有存在性与唯一性。",
+        "noteEn": "Doob decomposition: submartingale = martingale + increasing predictable process. Both conditions are required for existence and uniqueness."
+      },
+      {
+        "latex": "A_n=\\sum_{k=1}^{n}E\\big[\\,X_k-X_{k-1}\\mid\\mathcal F_{k-1}\\,\\big]",
+        "note": "补偿子的显式公式：每项是条件平均增量（非负）；它也说明 $A_n$ 只用到 $k-1$ 期的信息，因而是可预测的。",
+        "noteEn": "Explicit compensator: each term is a conditional mean increment (nonnegative), and $A_n$ uses information only up to time $k-1$, hence is predictable."
+      },
+      {
+        "latex": "P\\Big(\\max_{k\\le n}X_k\\ge\\lambda\\Big)\\le\\frac{E[X_n]}{\\lambda}\\qquad (X\\ \\text{非负下鞅},\\ \\lambda>0)",
+        "note": "杜布最大值不等式（概率尺度）：条件「非负」不可省，且要求 $\\lambda>0$。",
+        "noteEn": "Doob's maximal inequality in probability: the nonnegativity of the submartingale cannot be dropped, and $\\lambda>0$."
+      },
+      {
+        "latex": "\\Big\\|\\max_{k\\le n}X_k\\Big\\|_p\\le\\frac{p}{p-1}\\,\\|X_n\\|_p,\\qquad p>1",
+        "note": "杜布 $L^p$ 最大值不等式：常数 $p/(p-1)$，$p=2$ 时恰为 $2$，且不能再小。",
+        "noteEn": "Doob's $L^p$ maximal inequality with the sharp constant $p/(p-1)$, equal to $2$ when $p=2$."
+      },
+      {
+        "latex": "X_n\\ \\text{是鞅}\\iff A_n\\equiv 0;\\qquad X_n\\ \\text{是上鞅}\\iff X_n=M_n-A_n",
+        "note": "两个极端：鞅的补偿子为零；上鞅写成减去一个递增可预测过程。",
+        "noteEn": "Two extremes: a martingale has zero compensator; a supermartingale is written as minus an increasing predictable process."
+      }
+    ],
+    "properties": [
+      "唯一性依赖可预测性：可预测性排除把无漂移的鞅混进 $A$ 的可能。若放弃它、只要求 $A$ 适应递增，唯一性确实会失效——取 $X_n=n$（递增适应）与 $A_n=n+\\frac12\\widetilde M_n$（$\\widetilde M$ 为对称 $\\pm1$ 随机游走）：$A$ 适应、递增、$A_0=0$，而 $X_n-A_n=-\\frac12\\widetilde M_n$ 是鞅，与规范补偿子 $A_n=n$ 不同。不过要注意**递增性本身已经很强**：从 $0$ 出发的递增鞅必恒为 $0$，所以「$A$ 取任意鞅」是举不出来的。",
+      "补偿子是条件增量的累加：$\\Delta A_n=E[X_n-X_{n-1}\\mid\\mathcal F_{n-1}]\\ge0$，于是 $E[A_n]=E[X_n-X_0]$——下鞅「平均上升」的全部都由 $A$ 承担。",
+      "「非负」不能省：对一般下鞅只有 $\\lambda P(\\max_{k\\le n}X_k\\ge\\lambda)\\le E[X_n\\mathbf 1_{\\{\\max_{k\\le n}X_k\\ge\\lambda\\}}]$。不过若 $X$ 是鞅，条件 Jensen 表明 $|X|$ 是非负下鞅，故 $P(\\max_{k\\le n}|X_k|\\ge\\lambda)\\le E|X_n|/\\lambda$ 仍然成立。",
+      "常数最优：$p/(p-1)$ 不能再小，$p=2$ 给因子 $2$；$p\\downarrow1$ 时它发散，正对应 $p=1$ 时同形式不等式的失效（需要 $L\\log L$ 之类的额外可积条件）。",
+      "用途：最大值不等式推出上穿不等式，再推出几乎必然收敛定理；$L^p$ 版本（$p>1$）还给出定量控制 $E\\big[\\sup_n|X_n|^p\\big]\\le\\big(\\frac{p}{p-1}\\big)^p\\sup_nE|X_n|^p$。"
+    ],
+    "propertiesEn": [
+      "Uniqueness relies on predictability, which prevents a drift-free martingale from being hidden in $A$. If only adaptedness and monotonicity are required, uniqueness does fail: take $X_n=n$ and $A_n=n+\\frac12\\widetilde M_n$ with $\\widetilde M$ a symmetric $\\pm1$ random walk. Then $A$ is adapted, increasing, $A_0=0$, and $X_n-A_n=-\\frac12\\widetilde M_n$ is a martingale, different from the canonical compensator $A_n=n$. Note that monotonicity is already powerful: an increasing martingale started at $0$ must vanish, so \"$A$ may be any martingale\" is impossible.",
+      "The compensator accumulates conditional increments: $\\Delta A_n=E[X_n-X_{n-1}\\mid\\mathcal F_{n-1}]\\ge0$, hence $E[A_n]=E[X_n-X_0]$; it carries the entire systematic increase of the submartingale.",
+      "Nonnegativity cannot be dropped: for a general submartingale one only has $\\lambda P(\\max_{k\\le n}X_k\\ge\\lambda)\\le E[X_n 1_{\\{\\max_{k\\le n}X_k\\ge\\lambda\\}}]$. For a martingale, however, conditional Jensen makes $|X|$ a nonnegative submartingale, so $P(\\max_{k\\le n}|X_k|\\ge\\lambda)\\le E|X_n|/\\lambda$ remains valid.",
+      "The constant is optimal: $p/(p-1)$ cannot be improved, equals $2$ at $p=2$, and blows up as $p\\downarrow1$, matching the failure of the same inequality at $p=1$ (logarithmic integrability such as $L\\log L$ is then needed).",
+      "Use: the maximal inequality yields the upcrossing inequality and then the almost sure convergence theorem; the $L^p$ version ($p>1$) gives quantitative bounds such as $E[\\sup_n|X_n|^p]\\le(\\frac{p}{p-1})^p\\sup_nE|X_n|^p$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.35*x",
+          "color": "#06d6a0",
+          "label": "A：递增可预测（示意）"
+        },
+        {
+          "expr": "0.9*sin(1.6*x)+0.35*sin(4.4*x)",
+          "color": "#ff6b9d",
+          "label": "M：鞅部分（正弦和示意）"
+        },
+        {
+          "expr": "0.9*sin(1.6*x)+0.35*sin(4.4*x)+0.35*x",
+          "color": "#4cc9f0",
+          "label": "X = M + A：下鞅"
+        }
+      ],
+      "xRange": [
+        0,
+        8
+      ],
+      "yRange": [
+        -1.8,
+        4
+      ],
+      "title": "杜布分解示意：X = M + A（正弦和轨迹只作示意，非真实随机路径）"
+    },
+    "examples": [
+      {
+        "problem": "设 $\\xi_1,\\xi_2,\\dots$ 独立同分布，$P(\\xi=1)=p$，$P(\\xi=-1)=1-p$，$S_n=\\xi_1+\\cdots+\\xi_n$，$m=E[\\xi]=2p-1$，$\\mathcal F_n=\\sigma(\\xi_1,\\dots,\\xi_n)$。证明中心化游走 $M_n=S_n-nm$ 是鞅，并对下鞅 $X_n=M_n^2$ 求杜布分解。",
+        "solution": "**先中心化**：$E[M_n\\mid\\mathcal F_{n-1}]=E[S_{n-1}+\\xi_n-nm\\mid\\mathcal F_{n-1}]=S_{n-1}+m-nm=S_{n-1}-(n-1)m=M_{n-1}$，故 $M_n$ 是鞅（也可直接看增量 $M_n-M_{n-1}=\\xi_n-m$，条件期望为 $0$）。\n\n**条件平均增量**：由于 $M_{n-1}$ 关于 $\\mathcal F_{n-1}$ 可测、$\\xi_n$ 与 $\\mathcal F_{n-1}$ 独立，\n\n$$E\\big[X_k-X_{k-1}\\mid\\mathcal F_{k-1}\\big]=E\\big[2M_{k-1}(\\xi_k-m)+(\\xi_k-m)^2\\mid\\mathcal F_{k-1}\\big]=0+E\\big[(\\xi_k-m)^2\\big]=1-m^2=4p(1-p)\\ \\ge 0 .$$\n\n于是补偿子是 $A_n=4p(1-p)\\,n$（常数过程，当然关于 $\\mathcal F_{n-1}$ 可测、递增、$A_0=0$），$M_n^2-4p(1-p)n$ 是鞅。特别地 $p=\\frac12$ 时 $m=0$、$A_n=n$，$X_n=S_n^2$，得到最常用的结论：**随机游走的平方要减掉 $n$ 才是鞅**。\n\n**一个提醒**：若不做中心化而直接看 $X_n=S_n^2$，当 $p\\neq\\frac12$ 且 $S_{n-1}$ 与 $m=2p-1$ **反号**、$|S_{n-1}|$ 充分大时\n\n$$E\\big[S_n^2\\mid\\mathcal F_{n-1}\\big]=S_{n-1}^2+2mS_{n-1}+1<S_{n-1}^2,$$\n\n$S_n^2$ 甚至连下鞅都不是。先把过程调成鞅（或去掉明显漂移）再作分解，是这类计算的常规操作。"
+      },
+      {
+        "problem": "设 $S_n$ 是简单对称随机游走。用杜布 $L^p$ 最大值不等式估计 $E\\big[\\max_{k\\le n}|S_k|\\big]$。",
+        "solution": "$(S_n)$ 是鞅，$|\\cdot|$ 是凸函数，由条件 Jensen 知 $|S_n|$ 是**非负**下鞅——这正是可以使用杜布最大不等式（而非一般下鞅形式）的原因。取 $p=2$，此时 $p/(p-1)=2$：\n\n$$\\Big\\|\\max_{k\\le n}|S_k|\\Big\\|_2\\le 2\\,\\big\\|S_n\\big\\|_2=2\\sqrt{n}.$$\n\n再由 Lyapunov 不等式 $\\|\\cdot\\|_1\\le\\|\\cdot\\|_2$ 得\n\n$$E\\Big[\\max_{k\\le n}|S_k|\\Big]\\le 2\\sqrt{n}.$$\n\n可见随机游走的最大值虽然随 $n$ 增长，但只以 $\\sqrt n$ 的速率增长，远慢于 $n$ 本身。"
+      }
+    ],
+    "tags": [
+      "随机分析",
+      "鞅",
+      "杜布不等式"
+    ],
+    "links": [
+      "martingale",
+      "martingale-convergence",
+      "stopping-time",
+      "brownian-motion",
+      "lp-spaces"
+    ]
+  },
+  {
+    "id": "martingale-convergence",
+    "title": "鞅收敛定理",
+    "titleEn": "Martingale Convergence Theorems",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "L¹ 有界的下鞅几乎必然收敛到可积极限，但一般不 L¹ 收敛；一致可积才是把 a.s. 收敛升级为 L¹ 收敛的精确条件。",
+    "summaryEn": "An L¹-bounded submartingale converges almost surely to an integrable limit, but not in L¹ in general; uniform integrability is exactly the extra condition upgrading almost sure convergence to L¹ convergence.",
+    "definition": "鞅最深刻的结构性结论是：只要它没有系统地跑向无穷，它就必须收敛。**鞅收敛定理**：若 $(X_n)$ 是下鞅且 **$L^1$ 有界**，即 $\\sup_nE|X_n|<\\infty$，则 $X_n$ 几乎必然（a.s.）收敛到一个可积极限 $X_\\infty\\in L^1$。\n\n证明的核心是**上穿不等式**（Doob upcrossing inequality）。记 $U_n^{a,b}$ 为轨道在时刻 $n$ 之前由 $a$ 以下穿到 $b$ 以上的次数，则 $(b-a)E[U_n^{a,b}]\\le E[(X_n-a)^+]$。$L^1$ 有界使右端一致有界，故 $EU_\\infty^{a,b}<\\infty$：几乎所有轨道的上穿次数有限，振荡被控制住；对全部有理数对 $a<b$ 取并集，得极限 $X_\\infty=\\lim X_n$ 存在（允许 $\\pm\\infty$）；最后 Fatou 引理 $E|X_\\infty|\\le\\liminf_nE|X_n|<\\infty$ 排除无穷值。\n\n但**几乎必然收敛一般不是 $L^1$ 收敛**：$L^1$ 有界只保证质量几乎处处留下，却允许它在概率极小的集合上跑到很远，于是 $\\lim_nE|X_n-X_\\infty|$ 可以严格大于零。经典反例是**双倍赌注**：公平赌博中每输一次就把赌注翻倍，赌徒几乎必然最终赢到 1 元，但期望收益恒为 0。\n\n把这一步补上的精确条件是**一致可积**（uniform integrability, UI）。对鞅（下鞅）：\n\n$$X_n\\to X_\\infty\\ \\text{在 }L^1\\text{ 中}\\iff (X_n)\\ \\text{一致可积}.$$\n\n也就是说「a.s. 收敛 + 一致可积 $\\iff$ $L^1$ 收敛」；由于一致可积本身已蕴含 $L^1$ 有界，「一致可积 + $L^1$ 有界 $\\iff$ $L^1$ 收敛」中的有界性是自动成立的。此后还有**闭鞅**表示 $X_n=E[X_\\infty\\mid\\mathcal F_n]$——没有 UI 时这个等式是错的。若再知道某个 $p>1$ 使 $\\sup_nE|X_n|^p<\\infty$，则 $L^p$ 有界自动给出 UI，$L^p$ 收敛成立，这是应用中最常用的充分条件。",
+    "definitionEn": "The deepest structural fact about martingales is that if they do not systematically escape to infinity, they must converge. **Martingale convergence theorem**: if $(X_n)$ is a submartingale that is **$L^1$-bounded**, i.e. $\\sup_nE|X_n|<\\infty$, then $X_n$ converges almost surely (a.s.) to an integrable limit $X_\\infty\\in L^1$.\n\nThe engine of the proof is **Doob's upcrossing inequality**. Let $U_n^{a,b}$ count the upcrossings of $[a,b]$ before time $n$; for a submartingale, $(b-a)E[U_n^{a,b}]\\le E[(X_n-a)^+]$. $L^1$-boundedness bounds the right side uniformly, so $EU_\\infty^{a,b}<\\infty$ for every rational $a<b$: almost every path oscillates only finitely often, the limit exists (possibly infinite), and Fatou's lemma $E|X_\\infty|\\le\\liminf_nE|X_n|<\\infty$ rules out infinite values.\n\nAlmost sure convergence, however, is **not** $L^1$ convergence in general: $L^1$-boundedness allows mass to escape to sets of tiny probability, so $\\lim_nE|X_n-X_\\infty|$ may stay strictly positive. The classical counterexample is the **doubling strategy**, which wins one unit almost surely yet keeps zero expected wealth.\n\nThe exact condition repairing this is **uniform integrability** (UI). For a martingale (submartingale),\n\n$$X_n\\to X_\\infty\\ \\text{in }L^1\\iff (X_n)\\ \\text{is uniformly integrable}.$$\n\nIn other words, a.s. convergence plus UI is equivalent to $L^1$ convergence; since UI already implies $L^1$-boundedness, the boundedness in the pair 「UI + $L^1$-bounded」 is automatic. Only then does the **closed martingale** identity $X_n=E[X_\\infty\\mid\\mathcal F_n]$ hold. If in addition $\\sup_nE|X_n|^p<\\infty$ for some $p>1$, $L^p$-boundedness provides UI for free and $L^p$ convergence follows — the most frequently used sufficient condition.",
+    "formulas": [
+      {
+        "latex": "(b-a)\\,E\\big[U_n^{a,b}\\big]\\le E\\big[(X_n-a)^+\\big]",
+        "note": "上穿不等式（Doob upcrossing）：把「振荡次数」控制在可积量之下，是整个收敛定理的证明核心。",
+        "noteEn": "Doob's upcrossing inequality controls the number of oscillations by an integrable quantity; it is the core of the convergence theorem."
+      },
+      {
+        "latex": "\\sup_n E|X_n|<\\infty\\ \\Longrightarrow\\ X_n\\to X_\\infty\\ \\text{a.s.},\\qquad X_\\infty\\in L^1",
+        "note": "鞅收敛定理主结论：$L^1$ 有界的下鞅几乎必然收敛到可积随机变量。",
+        "noteEn": "Main theorem: an $L^1$-bounded submartingale converges a.s. to an integrable limit."
+      },
+      {
+        "latex": "X_n\\xrightarrow{\\ L^1\\ }X_\\infty\\iff (X_n)\\ \\text{一致可积}",
+        "note": "升级为 $L^1$ 收敛的精确条件：一致可积（UI）。只有 $L^1$ 有界是不够的。",
+        "noteEn": "The exact condition upgrading a.s. convergence to $L^1$ convergence is uniform integrability; $L^1$-boundedness alone does not suffice."
+      },
+      {
+        "latex": "E|X_n-X_\\infty|\\to0\\quad\\Longrightarrow\\quad E[X_\\infty]=\\lim_{n\\to\\infty}E[X_n]",
+        "note": "$L^1$ 收敛时极限与期望可交换。缺 UI 时两边可以不等，且两个方向都会出现：指数鞅 $M_n=\\exp(\\lambda S_n-\\frac{\\lambda^2n}{2})$ 有 $M_n\\to0$ a.s. 却 $EM_n\\equiv1$（质量逃逸，$E[M_\\infty]=0<1$）；双倍赌注则相反，$E[W_\\infty]=1>\\lim EW_n=0$（靠极小概率上的巨大负值补偿）。",
+        "noteEn": "$L^1$ convergence lets expectation pass to the limit. Without UI the two sides can differ in either direction: the exponential martingale $M_n=\\exp(\\lambda S_n-\\frac{\\lambda^2n}{2})$ has $M_n\\to0$ a.s. while $EM_n\\equiv1$ (mass escaping, $E[M_\\infty]=0<1$), whereas the doubling strategy gives $E[W_\\infty]=1>\\lim EW_n=0$."
+      },
+      {
+        "latex": "(X_n)\\ \\text{一致可积}\\ \\Longrightarrow\\ X_n=E\\big[X_\\infty\\mid\\mathcal F_n\\big]",
+        "note": "闭鞅（closable martingale）表示：UI 保证鞅被它的 a.s. 极限「封闭」。",
+        "noteEn": "Closed martingale representation: UI makes the martingale closable by its a.s. limit."
+      }
+    ],
+    "properties": [
+      "$L^1$ 有界与一致可积是两件不同的事：前者只管平均规模，后者还禁止质量集中到概率越来越小的集合上；定理的前半段（a.s. 收敛）只需要前者。",
+      "一致可积的判定（两条件）：(a) $\\sup_nE|X_n|<\\infty$；(b) 对任意 $\\varepsilon>0$ 存在 $\\delta>0$，使 $P(A)<\\delta$ 时 $\\sup_nE[|X_n|\\mathbf 1_A]<\\varepsilon$（等度绝对连续）。",
+      "极限 $X_\\infty$ 关于尾 $\\sigma$-代数 $\\mathcal F_\\infty=\\sigma(\\bigcup_n\\mathcal F_n)$ 可测；当 $\\mathcal F_\\infty$ 平凡（0-1 律）时极限退化为常数。",
+      "$p>1$ 时 $\\sup_nE|X_n|^p<\\infty$ 是 UI 的充分条件，因此 $L^p$ 收敛自动成立（平方可积鞅是最常用的情形）；$p=1$ 没有这样的免费午餐。",
+      "反向鞅（Lévy 下向定理）：若 $\\mathcal F_n$ 递减且 $X_n=E[Z\\mid\\mathcal F_n]$、$Z\\in L^1$，则 $(X_n)$ 自动一致可积，a.s. 与 $L^1$ 收敛都成立——这正说明 UI 刻画的是「质量不逃逸」。"
+    ],
+    "propertiesEn": [
+      "$L^1$-boundedness and uniform integrability are genuinely different: the first controls average size, the second also forbids mass concentrating on sets of vanishing probability. Only the first is needed for a.s. convergence.",
+      "Criterion for uniform integrability: (a) $\\sup_nE|X_n|<\\infty$; (b) for every $\\varepsilon>0$ there is $\\delta>0$ such that $P(A)<\\delta$ implies $\\sup_nE[|X_n|1_A]<\\varepsilon$ (equi-absolute continuity).",
+      "The limit $X_\\infty$ is measurable with respect to the tail $\\sigma$-algebra $\\mathcal F_\\infty=\\sigma(\\bigcup_n\\mathcal F_n)$; when $\\mathcal F_\\infty$ is trivial (0-1 law) the limit degenerates to a constant.",
+      "For $p>1$, $\\sup_nE|X_n|^p<\\infty$ implies UI, hence $L^p$ convergence (square-integrable martingales are the common case); there is no such free lunch at $p=1$.",
+      "Backward martingales (Lévy's downward theorem): if $\\mathcal F_n$ decreases and $X_n=E[Z\\mid\\mathcal F_n]$ with $Z\\in L^1$, then $(X_n)$ is automatically uniformly integrable and converges both a.s. and in $L^1$."
+    ],
+    "examples": [
+      {
+        "problem": "**双倍赌注：$L^1$ 有界却不 $L^1$ 收敛。** 设 $\\xi_1,\\xi_2,\\dots$ 独立同分布，$P(\\xi_k=1)=P(\\xi_k=-1)=\\frac12$，$\\mathcal F_n=\\sigma(\\xi_1,\\dots,\\xi_n)$。赌徒第 $k$ 轮押 $2^{k-1}$ 元在 $\\xi_k=1$ 上，赢了就收手。记 $W_n$ 为第 $n$ 轮后的净收益，验证 $W_n$ 是鞅、几乎必然收敛，但不 $L^1$ 收敛，也不一致可积。",
+        "solution": "净收益只有两种可能：若前 $n$ 轮全输（概率 $2^{-n}$），累计亏损为 $1+2+\\cdots+2^{n-1}=2^n-1$，故 $W_n=1-2^n$；否则赌徒已赢过并收手，$W_n=1$。于是 $E[W_n]=(1-2^{-n})\\cdot1+2^{-n}(1-2^n)=0$。\n\n**鞅性**：给定 $\\mathcal F_n$，若已赢过则 $W_{n+1}=1=W_n$；若仍处「全输」状态，则下一次以概率 $\\frac12$ 赢、以概率 $\\frac12$ 继续输，故\n\n$$E[W_{n+1}\\mid\\mathcal F_n]=\\tfrac12\\cdot1+\\tfrac12(1-2^{n+1})=1-2^n=W_n .$$\n\n**几乎必然收敛**：$P(\\text{前 }n\\text{ 轮全输})=2^{-n}\\to0$，故 $W_n\\to1$ a.s.。\n\n**$L^1$ 有界**：$E|W_n|=(1-2^{-n})+2^{-n}(2^n-1)=2-2^{1-n}\\le2$，所以 $\\sup_nE|W_n|<\\infty$，定理保证的 a.s. 收敛确实成立。\n\n**不是 $L^1$ 收敛**：$E|W_n-1|=2^{-n}\\cdot2^n=1\\not\\to0$；于是 $(W_n)$ 不一致可积（UI 会迫使 $L^1$ 收敛），并且 $W_n\\neq E[W_\\infty\\mid\\mathcal F_n]=1$。这是「质量逃逸到概率为 $2^{-n}$ 的事件上」的典型图景。同型的例子还有指数鞅 $M_n=\\exp(\\lambda S_n-\\frac{\\lambda^2n}{2})$（$\\lambda\\neq0$）：恒有 $EM_n=1$，却 $M_n\\to0$ a.s.。"
+      },
+      {
+        "problem": "**闭鞅（一致可积的正例）**：设 $Z\\in L^1$，$X_n=E[Z\\mid\\mathcal F_n]$。证明 $(X_n)$ 一致可积，并求它的 $L^1$ 极限。",
+        "solution": "记 $A_n=\\{|X_n|>K\\}$，注意 $A_n\\in\\mathcal F_n$。由条件 Jensen，$|X_n|\\le E[|Z|\\mid\\mathcal F_n]$；又因 $A_n\\in\\mathcal F_n$ 有 $X_n\\mathbf 1_{A_n}=E[Z\\mathbf 1_{A_n}\\mid\\mathcal F_n]$，故\n\n$$E\\big[|X_n|\\mathbf 1_{A_n}\\big]\\le E\\big[|Z|\\mathbf 1_{A_n}\\big].$$\n\n给定 $\\varepsilon>0$，由 $|Z|\\,\\mathrm dP$ 的绝对连续性取 $\\delta>0$ 使 $P(A)<\\delta\\Rightarrow E[|Z|\\mathbf 1_A]<\\varepsilon$；再由 Markov 不等式 $P(A_n)\\le E|X_n|/K\\le E|Z|/K$，取 $K=E|Z|/\\delta$ 即得 $E[|X_n|\\mathbf 1_{\\{|X_n|>K\\}}]<\\varepsilon$ 对一切 $n$ 成立——这正是**一致可积**。\n\n**极限**：$\\sup_nE|X_n|\\le E|Z|<\\infty$，由鞅收敛定理得 $X_n\\to X_\\infty$ a.s.；已证 UI，故 $L^1$ 收敛。对任意 $m$ 及 $A\\in\\mathcal F_m$，当 $n\\ge m$ 时 $E[X_n\\mathbf 1_A]=E[Z\\mathbf 1_A]$，令 $n\\to\\infty$ 得 $E[X_\\infty\\mathbf 1_A]=E[Z\\mathbf 1_A]$；因 $\\bigcup_m\\mathcal F_m$ 生成 $\\mathcal F_\\infty$，故\n\n$$X_\\infty=E\\big[Z\\mid\\mathcal F_\\infty\\big]\\quad\\text{a.s.}$$\n\n这正是**Lévy 上向定理**。取 $Z=W_T\\in L^2$、$\\mathcal F_n=\\mathcal F_{t_n}$（$t_n\\uparrow T$）：$X_n=E[W_T\\mid\\mathcal F_{t_n}]=W_{t_n}$，它 $L^2$ 有界（$EW_{t_n}^2=t_n\\le T$）从而 UI，且由轨道连续性 $W_{t_n}\\to W_T$，a.s. 与 $L^2$ 收敛都成立。"
+      }
+    ],
+    "tags": [
+      "随机分析",
+      "鞅",
+      "收敛定理"
+    ],
+    "links": [
+      "martingale",
+      "doob-decomposition",
+      "stopping-time",
+      "convergence-ae",
+      "law-of-large-numbers"
+    ]
+  },
+  {
+    "id": "ito-integral",
+    "title": "伊藤积分",
+    "titleEn": "The Itô Integral",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "以简单可预测过程和伊藤等距为基础，把 ∫f dW 定义成 L² 极限；被积过程必须适应，否则等距与鞅性同时失效。",
+    "summaryEn": "Using simple predictable processes and the Itô isometry, ∫f dW is defined as an L² limit; the integrand must be adapted, otherwise both the isometry and the martingale property break down.",
+    "definition": "想对布朗运动定义 $\\int_0^Tf_s\\,\\mathrm dW_s$ 会立刻遇到困难：布朗运动的轨道几乎必然处处不可微、一阶变差无穷，黎曼–斯蒂尔杰斯积分根本不存在。伊藤的解法是「先在简单过程上显式定义，再用等距延拓」。\n\n**第一步（简单可预测过程）**：称 $f=\\sum_i\\xi_i\\mathbf 1_{(t_i,t_{i+1}]}$（$0=t_0<t_1<\\cdots<t_m=T$）为简单可预测过程，其中 $\\xi_i$ 关于**区间左端点**的 $\\sigma$-代数 $\\mathcal F_{t_i}$ 可测，并定义\n\n$$I(f)=\\sum_i\\xi_i\\big(W_{t_{i+1}}-W_{t_i}\\big).$$\n\n**第二步（等距延拓）**：由增量独立性可得**伊藤等距** $E|I(f)|^2=E\\int_0^Tf_s^2\\,\\mathrm ds$。对一般的适应过程 $f\\in L^2(\\Omega\\times[0,T])$（即 $E\\int_0^Tf_s^2\\,\\mathrm ds<\\infty$）取简单过程 $f^{(n)}\\to f$（$E\\int(f^{(n)}-f)^2\\to0$），等距给出\n\n$$E\\big|I(f^{(n)})-I(f^{(m)})\\big|^2=E\\int_0^T\\big(f^{(n)}_s-f^{(m)}_s\\big)^2\\mathrm ds\\to0,$$\n\n于是 $\\{I(f^{(n)})\\}$ 是 $L^2(\\Omega)$ 中的柯西列，把它的 $L^2$ 极限定义为 $I(f)=\\int_0^Tf\\,\\mathrm dW$。\n\n**为什么必须适应？** $\\xi_i$ 只允许依赖 $t_i$ 时刻及以前的信息（「不许偷看未来」），这正是等距证明中用到 $E[(\\Delta W_i)^2\\mid\\mathcal F_{t_i}]=\\Delta t_i$ 的地方。一旦允许被积过程预知未来，鞅性与等距会同时崩塌：把被积函数取成 $f_s\\equiv W_T$（对固定的样本点它是与 $s$ 无关的常数，故形式上有 $\\int_0^TW_T\\,\\mathrm dW_t=W_T(W_T-W_0)=W_T^2$），于是 $(\\int f\\,\\mathrm dW)^2=W_T^4$，$E(\\int f\\,\\mathrm dW)^2=E[W_T^4]=3T^2$，而等距右端 $E\\int_0^TW_T^2\\mathrm dt=T^2$——**对一切 $T>0$ 都不相等**，等距失效；同时 $E[\\int f\\,\\mathrm dW]=EW_T^2=T\\ne0$，鞅性也失效（第一处就破坏的是鞅性）。\n\n伊藤积分 $M_t=\\int_0^tf\\,\\mathrm dW$（当 $E\\int_0^Tf^2<\\infty$）是连续 $L^2$ 鞅，且 $[\\int_0^{\\cdot}f\\,\\mathrm dW]_t=\\int_0^tf_s^2\\,\\mathrm ds$。它与黎曼–斯蒂尔杰斯最刺眼的差别是\n\n$$\\int_0^TW_t\\,\\mathrm dW_t=\\frac{W_T^2-T}{2}\\ \\ \\text{而不是}\\ \\frac{W_T^2}{2}:$$\n\n左端点求和少算了 $\\frac12\\sum_i(\\Delta W_i)^2$，它的极限恰是二次变差 $\\frac12\\langle W\\rangle_T=\\frac T2$。",
+    "definitionEn": "Defining $\\int_0^Tf_s\\,\\mathrm dW_s$ against Brownian motion immediately runs into trouble: Brownian paths are a.s. nowhere differentiable and of infinite first variation, so the Riemann–Stieltjes integral does not exist. Itô's idea is to define the integral first for simple predictable processes, then extend by an isometry.\n\n**Step 1 (simple predictable processes)**: for $f=\\sum_i\\xi_i\\mathbf 1_{(t_i,t_{i+1}]}$ with $\\xi_i$ measurable with respect to the **left endpoint** $\\sigma$-algebra $\\mathcal F_{t_i}$, set $I(f)=\\sum_i\\xi_i(W_{t_{i+1}}-W_{t_i})$.\n\n**Step 2 (isometric extension)**: independence of increments gives the **Itô isometry** $E|I(f)|^2=E\\int_0^Tf_s^2\\mathrm ds$. For a general adapted $f\\in L^2(\\Omega\\times[0,T])$ take simple $f^{(n)}\\to f$; the isometry shows $\\{I(f^{(n)})\\}$ is Cauchy in $L^2(\\Omega)$, and $I(f)=\\int_0^Tf\\,\\mathrm dW$ is defined as its $L^2$ limit.\n\n**Why adaptedness?** Only information up to time $t_i$ may enter $\\xi_i$; this is exactly what makes $E[(\\Delta W_i)^2\\mid\\mathcal F_{t_i}]=\\Delta t_i$ valid in the isometry. Allowing the integrand to look into the future destroys both the isometry and the martingale property: with $f_s\\equiv W_T$, formally $\\int_0^TW_T\\,\\mathrm dW_t=W_T^2$, so $E(\\int f\\,\\mathrm dW)^2=T$ whereas the isometry predicts $T^2$ — they differ for **every** $T>0$, so the isometry fails; and $E[\\int f\\,\\mathrm dW]=EW_T^2=T\\ne0$ already breaks the martingale property..\n\nThe integral $M_t=\\int_0^tf\\,\\mathrm dW$ is a continuous $L^2$ martingale (when $E\\int_0^Tf^2<\\infty$) with quadratic variation $\\int_0^tf_s^2\\mathrm ds$, and the most striking difference from Riemann–Stieltjes theory is $\\int_0^TW_t\\,\\mathrm dW_t=\\frac{W_T^2-T}{2}$, not $\\frac{W_T^2}{2}$: left-endpoint sums omit $\\frac12\\sum_i(\\Delta W_i)^2$, whose limit is the quadratic variation $\\frac12\\langle W\\rangle_T=\\frac T2$.",
+    "formulas": [
+      {
+        "latex": "I(f)=\\sum_i\\xi_i\\big(W_{t_{i+1}}-W_{t_i}\\big),\\qquad \\xi_i\\in\\mathcal F_{t_i}",
+        "note": "第一步：简单可预测过程上的显式定义。$\\xi_i$ 关于左端点 $t_i$ 可测（适应、不偷看未来）。",
+        "noteEn": "Step 1: explicit definition on simple predictable processes; $\\xi_i$ is $\\mathcal F_{t_i}$-measurable (adapted, no peeking into the future)."
+      },
+      {
+        "latex": "E\\big|I(f)\\big|^2=E\\int_0^T f_s^2\\,\\mathrm ds",
+        "note": "伊藤等距：延拓到 $L^2(\\Omega\\times[0,T])$ 的根据，也是计算方差的主工具。",
+        "noteEn": "The Itô isometry: the basis for the $L^2$-extension and the main tool for computing variances."
+      },
+      {
+        "latex": "\\int_0^T W_t\\,\\mathrm dW_t=\\frac{W_T^2-T}{2}",
+        "note": "经典结果：注意是 $\\frac{W_T^2-T}{2}$，不是 $\\frac{W_T^2}{2}$；差出的 $-\\frac T2$ 来自二次变差 $\\langle W\\rangle_T=T$。",
+        "noteEn": "The classical computation: $\\frac{W_T^2-T}{2}$, not $\\frac{W_T^2}{2}$; the extra $-\\frac T2$ comes from $\\langle W\\rangle_T=T$."
+      },
+      {
+        "latex": "\\Big[\\int_0^{\\cdot}f\\,\\mathrm dW\\Big]_t=\\int_0^t f_s^2\\,\\mathrm ds,\\qquad \\Big\\langle\\int_0^{\\cdot}f\\,\\mathrm dW,\\ W\\Big\\rangle_t=\\int_0^t f_s\\,\\mathrm ds",
+        "note": "伊藤积分的二次变差，以及与布朗运动的协变差——计算乘积法则时要用到。",
+        "noteEn": "Quadratic variation of the Itô integral and its covariation with $W$; both are needed in product rules."
+      },
+      {
+        "latex": "E\\Big[\\int_s^t f\\,\\mathrm dW\\ \\Big|\\ \\mathcal F_s\\Big]=0\\qquad (s<t)",
+        "note": "鞅性（不可预知性）：积分增量对历史条件的期望为零，故 $M_t=\\int_0^tf\\,\\mathrm dW$ 是鞅。",
+        "noteEn": "Martingale property (unpredictability): the conditional mean of an increment vanishes, so $M_t=\\int_0^tf\\,\\mathrm dW$ is a martingale."
+      }
+    ],
+    "properties": [
+      "被积过程必须**适应**（简单过程情形下 $\\xi_i$ 关于左端点 $\\mathcal F_{t_i}$ 可测）：这是 $M_t=\\int_0^tf\\,\\mathrm dW$ 成为鞅和等距成立的前提；用「未来的 $W$」会把两者一起破坏。",
+      "等距与线性：$E\\big[\\int f\\,\\mathrm dW\\int g\\,\\mathrm dW\\big]=E\\int fg\\,\\mathrm ds$，并且 $I(af+bg)=aI(f)+bI(g)$；由此 $\\int_0^tf\\,\\mathrm dW$ 被唯一确定。",
+      "鞅性与不可预知性：$E[\\int_s^tf\\,\\mathrm dW\\mid\\mathcal F_s]=0$，即积分增量对历史「条件正交」；特别地当 $f$ 是确定性函数时，$\\int_s^tf\\,\\mathrm dW\\sim N(0,\\int_s^tf^2\\mathrm ds)$ 且与 $\\mathcal F_s$ 独立。",
+      "与黎曼–斯蒂尔杰斯的根本差别：极限依赖求和取点规则。对 $\\int_0^TW\\,\\mathrm dW$，左端点给 $\\frac{W_T^2-T}{2}$、中点（Stratonovich）给 $\\frac{W_T^2}{2}$、右端点给 $\\frac{W_T^2+T}{2}$，三者相差正是二次变差；有限变差积分器不会有这种歧义。",
+      "伊藤积分是连续的 $L^2$ 鞅；条件放宽后（$f$ 局部有界、路径连续）可对连续局部鞅积分器定义局部鞅积分，并可作局部化处理。"
+    ],
+    "propertiesEn": [
+      "The integrand must be **adapted** ($\\xi_i$ is $\\mathcal F_{t_i}$-measurable in the simple case): this is precisely what makes $M_t=\\int_0^tf\\,\\mathrm dW$ a martingale and the isometry valid; using 「future $W$」 destroys both.",
+      "Isometry and linearity: $E[\\int f\\,\\mathrm dW\\int g\\,\\mathrm dW]=E\\int fg\\,\\mathrm ds$ and $I(af+bg)=aI(f)+bI(g)$, which determines $\\int_0^tf\\,\\mathrm dW$ uniquely.",
+      "Martingale property and unpredictability: $E[\\int_s^tf\\,\\mathrm dW\\mid\\mathcal F_s]=0$ (conditional orthogonality); increments are genuinely independent of $\\mathcal F_s$ only when $f$ is deterministic, in which case $\\int_s^tf\\,\\mathrm dW\\sim N(0,\\int_s^tf^2\\mathrm ds)$.",
+      "The fundamental difference from Riemann–Stieltjes: the limit depends on where the summand is evaluated. For $\\int_0^TW\\,\\mathrm dW$, left endpoints give $\\frac{W_T^2-T}{2}$, midpoints (Stratonovich) give $\\frac{W_T^2}{2}$, right endpoints give $\\frac{W_T^2+T}{2}$; the differences are exactly the quadratic variation. No such ambiguity exists for finite-variation integrators.",
+      "The Itô integral is a continuous $L^2$ martingale; under relaxed assumptions ($f$ locally bounded with continuous paths) the construction extends to local martingale integrals via localization."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2*x+1",
+          "color": "#4cc9f0",
+          "label": "f(t) = 2t+1（被积函数）"
+        },
+        {
+          "expr": "sqrt(((2*x+1)^3-1)/6)*(0.6*sin(3.7*x)-0.45*sin(7.3*x)+0.35*sin(13.1*x)-0.28*sin(23.7*x)+0.2*sin(41.3*x))",
+          "color": "#ff6b9d",
+          "label": "I(t)=∫f dW（示意轨道）"
+        },
+        {
+          "expr": "sqrt(((2*x+1)^3-1)/6)",
+          "color": "#06d6a0",
+          "label": "±√(∫₀ᵗ f²ds)：标准差包络"
+        },
+        {
+          "expr": "-sqrt(((2*x+1)^3-1)/6)",
+          "color": "#06d6a0",
+          "label": ""
+        }
+      ],
+      "xRange": [
+        0,
+        1.4
+      ],
+      "yRange": [
+        -6,
+        6
+      ],
+      "title": "伊藤积分示意：被积函数 f(t)=2t+1 与积分过程 I(t)（正弦和近似，非真实随机轨道）"
+    },
+    "examples": [
+      {
+        "problem": "用简单过程的黎曼和极限推导 $\\int_0^TW_t\\,\\mathrm dW_t=\\dfrac{W_T^2-T}{2}$，并由此求它的期望与方差（再用伊藤等距核对）。",
+        "solution": "取分割 $0=t_0<t_1<\\cdots<t_m=T$。利用 $b^2-a^2=2a(b-a)+(b-a)^2$，令 $\\Delta W_i=W_{t_{i+1}}-W_{t_i}$：\n\n$$\\sum_iW_{t_i}\\Delta W_i=\\frac12\\sum_i\\big(W_{t_{i+1}}^2-W_{t_i}^2\\big)-\\frac12\\sum_i(\\Delta W_i)^2=\\frac12W_T^2-\\frac12\\sum_i(\\Delta W_i)^2 .$$\n\n布朗运动的二次变差满足 $\\sum_i(\\Delta W_i)^2\\to T$（在 $L^2$ 中：$E\\big|\\sum_i(\\Delta W_i)^2-T\\big|^2=\\sum_i2(\\Delta t_i)^2\\to0$），故当分割加细时\n\n$$\\int_0^TW_t\\,\\mathrm dW_t=\\lim\\sum_iW_{t_i}\\Delta W_i=\\frac{W_T^2-T}{2}.$$\n\n**期望**：$E\\big[\\frac{W_T^2-T}{2}\\big]=\\frac{T-T}{2}=0$。\n\n**方差**：$E\\big[\\big(\\frac{W_T^2-T}{2}\\big)^2\\big]=\\frac14\\big(EW_T^4-2TEW_T^2+T^2\\big)=\\frac14(3T^2-2T^2+T^2)=\\frac{T^2}{2}$。\n\n**用等距核对**：$E\\int_0^TW_t^2\\,\\mathrm dt=\\int_0^Tt\\,\\mathrm dt=\\frac{T^2}{2}$，与直接计算一致——伊藤等距的一个漂亮验证。注意如果误写成 $\\frac{W_T^2}{2}$，就会得到 $EW_T^2/2=T/2\\neq0$，与鞅性矛盾。"
+      },
+      {
+        "problem": "设 $T>0$。求 $\\int_0^Tt\\,\\mathrm dW_t$ 的分布，以及它与 $W_T$ 的协方差。",
+        "solution": "被积函数 $f(t)=t$ 是确定性的，故积分是高斯随机变量，均值为 $0$，方差由等距给出\n\n$$\\operatorname{Var}\\Big(\\int_0^Tt\\,\\mathrm dW_t\\Big)=E\\Big|\\int_0^Tt\\,\\mathrm dW_t\\Big|^2=\\int_0^Tt^2\\,\\mathrm dt=\\frac{T^3}{3},$$\n\n即 $\\int_0^Tt\\,\\mathrm dW_t\\sim N\\!\\big(0,\\frac{T^3}{3}\\big)$。\n\n**与 $W_T$ 的协方差**用协变差公式 $\\big\\langle\\int t\\,\\mathrm dW,\\,W\\big\\rangle_T=\\int_0^Tt\\,\\mathrm dt=\\frac{T^2}{2}$，两边取期望得\n\n$$\\operatorname{Cov}\\Big(\\int_0^Tt\\,\\mathrm dW_t,\\ W_T\\Big)=\\frac{T^2}{2}.$$\n\n也可以用分部积分表示 $\\int_0^Tt\\,\\mathrm dW_t=TW_T-\\int_0^TW_t\\,\\mathrm dt$（由 $\\mathrm d(tW_t)=t\\,\\mathrm dW_t+W_t\\,\\mathrm dt$ 得到），于是\n\n$$\\operatorname{Cov}=E\\Big[\\Big(TW_T-\\int_0^TW_t\\,\\mathrm dt\\Big)W_T\\Big]=T^2-\\int_0^Tt\\,\\mathrm dt=\\frac{T^2}{2},$$\n\n与用协变差算出的结果一致；又因二者联合高斯，协方差便完全刻画了它们的相关性。"
+      }
+    ],
+    "tags": [
+      "随机分析",
+      "伊藤积分",
+      "布朗运动"
+    ],
+    "links": [
+      "brownian-motion",
+      "martingale",
+      "ito-formula",
+      "stochastic-differential-equation",
+      "brownian-properties"
+    ]
+  },
+  {
+    "id": "ito-formula",
+    "title": "伊藤公式",
+    "titleEn": "Itô's Formula",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "随机分析的链式法则：由于布朗运动的二次变差是 t，泰勒展开的二阶项不能丢，df(W)=f′(W)dW+½f″(W)dt。",
+    "summaryEn": "The chain rule of stochastic analysis: because Brownian motion has quadratic variation t, the second-order Taylor term survives, df(W)=f′(W)dW+½f″(W)dt.",
+    "definition": "伊藤公式是随机分析中最常用的计算工具——链式法则在「二次变差不为零」的积分器上的修正版。对 $f\\in C^2$ 与布朗运动 $W$：\n\n$$f(W_t)=f(W_0)+\\int_0^tf'(W_s)\\,\\mathrm dW_s+\\frac12\\int_0^tf''(W_s)\\,\\mathrm ds,$$\n\n微分写法是 $df(W_t)=f'(W_t)\\,\\mathrm dW_t+\\frac12f''(W_t)\\,\\mathrm dt$。**二阶项 $\\frac12f''(W_t)\\,\\mathrm dt$ 绝不能省**：布朗运动增量的尺度是 $\\sqrt{\\mathrm dt}$，于是 $(\\mathrm dW)^2=\\mathrm dt$ 是「一阶量」，不能像经典微积分那样当高阶小量丢掉。\n\n**一般形式**：对连续半鞅 $X$ 与 $f\\in C^{1,2}$，\n\n$$df(t,X_t)=\\partial_tf\\,\\mathrm dt+\\partial_xf\\,\\mathrm dX_t+\\frac12\\partial_{xx}^2f\\,\\mathrm d\\langle X\\rangle_t,$$\n\n其中 $\\langle X\\rangle_t$ 是二次变差。直观推导就是泰勒展开到二阶：一阶项给 $\\partial_xf\\,\\mathrm dX_t$，二阶项 $\\frac12\\partial^2_{xx}f\\,(\\Delta X)^2$ 保留（因为 $(\\Delta X)^2\\to\\mathrm d\\langle X\\rangle_t$），更高阶项才趋于零。对布朗运动 $\\langle W\\rangle_t=t$；若 $X$ 是有限变差过程则 $\\langle X\\rangle\\equiv0$，公式退化为经典链式法则——普通微积分并没有「错」，它只是二次变差为零的特例。\n\n**乘积法则（二维伊藤公式）**：\n\n$$d(X_tY_t)=X_t\\,\\mathrm dY_t+Y_t\\,\\mathrm dX_t+\\mathrm d\\langle X,Y\\rangle_t,$$\n\n协变差项同样不能漏。取 $X=Y=W$ 得 $d(W_t^2)=2W_t\\,\\mathrm dW_t+\\mathrm dt$，这正是 $\\int_0^TW\\,\\mathrm dW=\\frac{W_T^2-T}{2}$ 的来源。由此还得到随机的分部积分公式\n\n$$\\int_0^Tf(W_s)\\,\\mathrm dW_s=f(W_T)W_T-\\int_0^TW_s\\,df(W_s)-\\int_0^Tf'(W_s)\\,\\mathrm ds,$$\n\n与经典 $\\int f\\,\\mathrm dg=fg-\\int g\\,\\mathrm df$ 相比多出最后一项，因为 $\\mathrm d\\langle W,f(W)\\rangle_t=f'(W_t)\\,\\mathrm dt$。\n\n伊藤公式是求伊藤积分、求解随机微分方程、构造鞅与推导 Black–Scholes 公式的主力工具：经典应用包括 $\\int_0^TW\\,\\mathrm dW=\\frac{W_T^2-T}{2}$、求解几何布朗运动得到 $X_t=X_0\\exp\\big((\\mu-\\frac{\\sigma^2}{2})t+\\sigma W_t\\big)$，以及 $de^{W_t}=e^{W_t}\\mathrm dW_t+\\frac12e^{W_t}\\mathrm dt$。",
+    "definitionEn": "Itô's formula is the most used computational tool of stochastic analysis: the chain rule corrected for an integrator with nonzero quadratic variation. For $f\\in C^2$ and Brownian motion $W$,\n\n$$f(W_t)=f(W_0)+\\int_0^tf'(W_s)\\,\\mathrm dW_s+\\frac12\\int_0^tf''(W_s)\\,\\mathrm ds,\\qquad df(W_t)=f'(W_t)\\,\\mathrm dW_t+\\frac12f''(W_t)\\,\\mathrm dt .$$\n\nThe **second-order term $\\frac12f''(W_t)\\mathrm dt$ must not be dropped**: Brownian increments are of size $\\sqrt{\\mathrm dt}$, so $(\\mathrm dW)^2=\\mathrm dt$ is a first-order quantity, not a negligible higher-order one.\n\n**General form**: for a continuous semimartingale $X$ and $f\\in C^{1,2}$,\n\n$$df(t,X_t)=\\partial_tf\\,\\mathrm dt+\\partial_xf\\,\\mathrm dX_t+\\frac12\\partial_{xx}^2f\\,\\mathrm d\\langle X\\rangle_t .$$\n\nIt follows from Taylor expansion up to second order, the term $\\frac12\\partial^2_{xx}f(\\Delta X)^2$ being kept because $(\\Delta X)^2\\to\\mathrm d\\langle X\\rangle_t$. For Brownian motion $\\langle W\\rangle_t=t$, while a finite-variation $X$ has $\\langle X\\rangle\\equiv0$ and the formula collapses to the classical chain rule.\n\n**Product rule (two-dimensional Itô formula)**:\n\n$$d(X_tY_t)=X_t\\,\\mathrm dY_t+Y_t\\,\\mathrm dX_t+\\mathrm d\\langle X,Y\\rangle_t,$$\n\nagain with the covariation term. With $X=Y=W$ this gives $d(W_t^2)=2W_t\\mathrm dW_t+\\mathrm dt$, the source of $\\int_0^TW\\,\\mathrm dW=\\frac{W_T^2-T}{2}$. Integration by parts follows:\n\n$$\\int_0^Tf(W_s)\\,\\mathrm dW_s=f(W_T)W_T-\\int_0^TW_s\\,df(W_s)-\\int_0^Tf'(W_s)\\,\\mathrm ds,$$\n\nwhich differs from $\\int f\\,\\mathrm dg=fg-\\int g\\,\\mathrm df$ by the last term, since $\\mathrm d\\langle W,f(W)\\rangle_t=f'(W_t)\\mathrm dt$.",
+    "formulas": [
+      {
+        "latex": "f(W_t)-f(W_0)=\\int_0^t f'(W_s)\\,\\mathrm dW_s+\\frac{1}{2}\\int_0^t f''(W_s)\\,\\mathrm ds",
+        "note": "伊藤公式的积分形式：链式法则 + 二次变差修正项。二阶项是它区别于经典微积分的标志。",
+        "noteEn": "The integral form of Itô's formula: chain rule plus the quadratic-variation correction; the second-order term is its hallmark."
+      },
+      {
+        "latex": "\\mathrm df(t,X_t)=\\partial_t f\\,\\mathrm dt+\\partial_x f\\,\\mathrm dX_t+\\frac{1}{2}\\partial_{xx}^2 f\\,\\mathrm d\\langle X\\rangle_t",
+        "note": "一般形式（$f\\in C^{1,2}$，$X$ 为连续半鞅）：三项分别来自时间、一阶与二阶泰勒展开。",
+        "noteEn": "General form for a continuous semimartingale $X$ and $f\\in C^{1,2}$: the three terms come from time, first and second order Taylor expansion."
+      },
+      {
+        "latex": "\\mathrm d(X_tY_t)=X_t\\,\\mathrm dY_t+Y_t\\,\\mathrm dX_t+\\mathrm d\\langle X,Y\\rangle_t",
+        "note": "乘积法则：协变差项不能漏。取 $X=Y=W$ 得 $\\mathrm d(W_t^2)=2W_t\\,\\mathrm dW_t+\\mathrm dt$。",
+        "noteEn": "Product rule: the covariation term is indispensable. With $X=Y=W$ it yields $\\mathrm d(W_t^2)=2W_t\\,\\mathrm dW_t+\\mathrm dt$."
+      },
+      {
+        "latex": "\\int_0^Tg(W_s)\\,\\mathrm dW_s=G(W_T)-G(W_0)-\\frac{1}{2}\\int_0^Tg'(W_s)\\,\\mathrm ds,\\qquad G'=g",
+        "note": "逆用伊藤公式（随机分部积分的常用形式）：把积分写成端点值减去二阶修正。",
+        "noteEn": "Itô's formula read backwards (the standard stochastic integration by parts): an integral equals endpoint values minus the second-order correction."
+      },
+      {
+        "latex": "\\int_0^TW_s\\,\\mathrm dW_s=\\frac{W_T^2-T}{2},\\qquad \\mathrm de^{W_t}=e^{W_t}\\,\\mathrm dW_t+\\frac{1}{2}e^{W_t}\\,\\mathrm dt",
+        "note": "两个最常用的具体结果：注意第一个不是 $\\frac{W_T^2}{2}$；第二个说明 $e^{W_t}$ 不是鞅（有漂移项）。",
+        "noteEn": "Two standard consequences: the first is not $\\frac{W_T^2}{2}$, and the second shows $e^{W_t}$ is not a martingale (it has a drift term)."
+      }
+    ],
+    "properties": [
+      "二阶项的来源是 $(\\mathrm dW)^2=\\mathrm dt$（一般地 $(\\mathrm dX)^2=\\mathrm d\\langle X\\rangle$）；$(\\mathrm dt)^2$ 与 $\\mathrm dt\\,\\mathrm dW$ 才是真正的高阶小量。二次变差为零的积分器上，公式退回经典链式法则。",
+      "乘积法则与 Itô 表：$\\mathrm d(XY)=X\\mathrm dY+Y\\mathrm dX+\\mathrm d\\langle X,Y\\rangle$；例如 $\\mathrm d(tW_t)=t\\,\\mathrm dW_t+W_t\\,\\mathrm dt$（$\\langle t,W\\rangle=0$）。多维情形用 $\\mathrm dW^i\\mathrm dW^j=\\delta_{ij}\\mathrm dt$、$\\mathrm dW\\,\\mathrm dt=0$、$\\mathrm dt\\,\\mathrm dt=0$。",
+      "随机分部积分：$\\int_0^Tf(W)\\,\\mathrm dW=f(W_T)W_T-\\int_0^TW\\,\\mathrm df(W)-\\int_0^Tf'(W)\\,\\mathrm ds$；比经典公式多出的最后一项来自 $\\mathrm d\\langle W,f(W)\\rangle_t=f'(W_t)\\,\\mathrm dt$。",
+      "一般性与局部化：对任意连续半鞅 $X$ 与 $C^{1,2}$ 函数，积分形式恒成立；若 $f$ 只在某区域内光滑（如 $\\log x$ 或 $1/x$），可用停时局部化到区域内，这是求解线性随机微分方程的标准步骤。",
+      "与随机微分方程的关系：伊藤公式把「解方程」变成「找坐标变换把方程化简单」——例如用 $\\log X$ 把几何布朗运动化成带漂移的布朗运动，也用它证明 $e^{\\sigma W_t-\\sigma^2t/2}$ 是鞅。"
+    ],
+    "propertiesEn": [
+      "The second-order term comes from $(\\mathrm dW)^2=\\mathrm dt$ (in general $(\\mathrm dX)^2=\\mathrm d\\langle X\\rangle$); only $(\\mathrm dt)^2$ and $\\mathrm dt\\,\\mathrm dW$ are genuinely of higher order. For an integrator with zero quadratic variation the formula reduces to the classical chain rule.",
+      "Product rule and Itô table: $\\mathrm d(XY)=X\\mathrm dY+Y\\mathrm dX+\\mathrm d\\langle X,Y\\rangle$, e.g. $\\mathrm d(tW_t)=t\\,\\mathrm dW_t+W_t\\,\\mathrm dt$ since $\\langle t,W\\rangle=0$. In several dimensions use $\\mathrm dW^i\\mathrm dW^j=\\delta_{ij}\\mathrm dt$, $\\mathrm dW\\,\\mathrm dt=0$, $\\mathrm dt\\,\\mathrm dt=0$.",
+      "Stochastic integration by parts: $\\int_0^Tf(W)\\,\\mathrm dW=f(W_T)W_T-\\int_0^TW\\,\\mathrm df(W)-\\int_0^Tf'(W)\\,\\mathrm ds$; the extra term compared with the classical formula comes from $\\mathrm d\\langle W,f(W)\\rangle_t=f'(W_t)\\,\\mathrm dt$.",
+      "Generality and localization: for any continuous semimartingale $X$ and any $C^{1,2}$ function the integral form always holds; if $f$ is smooth only on a region (as for $\\log x$ or $1/x$), one localizes with stopping times — the standard step when solving linear SDEs.",
+      "Relation to SDEs: Itô's formula turns 「solving an equation」 into 「finding coordinates that simplify it」, e.g. $\\log X$ converts geometric Brownian motion into Brownian motion with drift; it also proves that $e^{\\sigma W_t-\\sigma^2t/2}$ is a martingale."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.55*sin(2.7*x)-0.45*sin(5.9*x)+0.35*sin(12.1*x)-0.25*sin(23.3*x)+0.16*sin(45.7*x)",
+          "color": "#4cc9f0",
+          "label": "W_t：正弦和近似轨道（示意）"
+        },
+        {
+          "expr": "(0.55*sin(2.7*x)-0.45*sin(5.9*x)+0.35*sin(12.1*x)-0.25*sin(23.3*x)+0.16*sin(45.7*x))^2",
+          "color": "#ff6b9d",
+          "label": "W_t²"
+        },
+        {
+          "expr": "(0.55*sin(2.7*x)-0.45*sin(5.9*x)+0.35*sin(12.1*x)-0.25*sin(23.3*x)+0.16*sin(45.7*x))^2-x",
+          "color": "#06d6a0",
+          "label": "W_t² − t（理论上是鞅）"
+        }
+      ],
+      "xRange": [
+        0,
+        1.6
+      ],
+      "yRange": [
+        -2.6,
+        2.6
+      ],
+      "title": "伊藤公式示意：W_t、W_t² 与 W_t² − t（正弦和近似轨道，仅供示意）"
+    },
+    "examples": [
+      {
+        "problem": "取 $f(x)=\\frac{x^2}{2}$，用伊藤公式求 $\\int_0^tW_s\\,\\mathrm dW_s$，并说明它与「黎曼积分直觉」$\\frac{W_t^2}{2}$ 的差别来自哪里。",
+        "solution": "$f'(x)=x$，$f''(x)=1$，代入 $df(W_t)=f'(W_t)\\mathrm dW_t+\\frac12f''(W_t)\\mathrm dt$：\n\n$$\\mathrm d\\Big(\\frac{W_t^2}{2}\\Big)=W_t\\,\\mathrm dW_t+\\frac{1}{2}\\,\\mathrm dt .$$\n\n移项并积分得\n\n$$\\int_0^tW_s\\,\\mathrm dW_s=\\frac{W_t^2}{2}-\\frac{t}{2}=\\frac{W_t^2-t}{2}.$$\n\n**差别来自二次变差**：经典直觉把 $\\int W\\mathrm dW$ 当成 $\\frac12W^2$（因为 $\\mathrm d(W^2)=2W\\mathrm dW$），但在布朗运动上 $\\mathrm d(W^2)=2W\\mathrm dW+\\mathrm dt$，多出的 $\\mathrm dt$ 积分后正是 $-\\frac t2$ 的来源。等价地从取和看：$\\sum_iW_{t_i}\\Delta W_i=\\frac12W_t^2-\\frac12\\sum_i(\\Delta W_i)^2$，而 $\\sum_i(\\Delta W_i)^2\\to t$。附带地，$EW_t^2=t$ 说明 $E\\int_0^tW\\mathrm dW=0$，与伊藤积分的鞅性一致。"
+      },
+      {
+        "problem": "设 $X_t=\\exp\\big(\\sigma W_t-\\frac{\\sigma^2t}{2}\\big)$。用伊藤公式证明 $X$ 是鞅；再据此求解几何布朗运动 $dX_t=\\mu X_t\\,\\mathrm dt+\\sigma X_t\\,\\mathrm dW_t$。",
+        "solution": "取 $f(t,x)=e^{\\sigma x-\\sigma^2t/2}$，则 $\\partial_tf=-\\frac{\\sigma^2}{2}f$，$\\partial_xf=\\sigma f$，$\\partial^2_{xx}f=\\sigma^2f$。由一般形式的伊藤公式（$X=W$，$\\langle W\\rangle_t=t$）：\n\n$$\\mathrm dX_t=\\Big(-\\frac{\\sigma^2}{2}X_t\\Big)\\mathrm dt+\\sigma X_t\\,\\mathrm dW_t+\\frac{1}{2}\\sigma^2X_t\\,\\mathrm dt=\\sigma X_t\\,\\mathrm dW_t .$$\n\n漂移项刚好抵消，$X$ 是伊藤积分（无 $\\mathrm dt$ 项），从而是鞅；特别地 $E X_t=X_0=1$。**指数里的 $-\\frac{\\sigma^2t}{2}$ 不是装饰**：它和伊藤公式的 $\\frac12f''$ 项正好抵消，缺了它 $X$ 会出现漂移。\n\n**求解线性方程**：设 $dY_t=\\mu Y_t\\mathrm dt+\\sigma Y_t\\mathrm dW_t$，$Y_0>0$，令 $Z_t=\\log Y_t$（$Y$ 恒正，由 $Y_t=Y_0\\exp(\\cdots)$ 保证）。用 $f(x)=\\log x$（$f'=1/x$，$f''=-1/x^2$）：\n\n$$\\mathrm dZ_t=\\frac{1}{Y_t}\\mathrm dY_t-\\frac{1}{2Y_t^2}\\,\\mathrm d\\langle Y\\rangle_t=\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)\\mathrm dt+\\sigma\\,\\mathrm dW_t,$$\n\n于是 $Z_t=Z_0+(\\mu-\\frac{\\sigma^2}{2})t+\\sigma W_t$，即\n\n$$Y_t=Y_0\\exp\\Big[\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)t+\\sigma W_t\\Big].$$\n\n这与前面 $X$（$\\mu=0$）的结论一致；指数中的 $-\\frac{\\sigma^2}{2}$ 就是伊藤公式二阶项的痕迹。"
+      }
+    ],
+    "tags": [
+      "随机分析",
+      "伊藤公式",
+      "布朗运动"
+    ],
+    "links": [
+      "ito-integral",
+      "brownian-motion",
+      "stochastic-differential-equation",
+      "martingale",
+      "girsanov"
+    ]
+  },
+  {
+    "id": "stochastic-differential-equation",
+    "title": "随机微分方程",
+    "titleEn": "Stochastic Differential Equations",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "由布朗运动驱动的微分方程 dX=μdt+σdW：Lipschitz 与线性增长条件保证唯一强解，线性情形给出几何布朗运动与 OU 过程。",
+    "summaryEn": "Differential equations driven by Brownian motion, dX=μdt+σdW: Lipschitz and linear growth conditions give a unique strong solution; linear cases yield geometric Brownian motion and the OU process.",
+    "definition": "**随机微分方程**（SDE）是形如\n\n$$dX_t=\\mu(t,X_t)\\,\\mathrm dt+\\sigma(t,X_t)\\,\\mathrm dW_t,\\qquad X_0\\ \\text{给定}$$\n\n的方程，更严格地应写成积分方程\n\n$$X_t=X_0+\\int_0^t\\mu(s,X_s)\\,\\mathrm ds+\\int_0^t\\sigma(s,X_s)\\,\\mathrm dW_s .$$\n\n$\\mu$ 称漂移系数、$\\sigma$ 称扩散系数。因为布朗运动路径不可微，解不能按「逐路径求导」理解；上面的积分方程才是定义（其中一个积分是沿 $\\mathrm ds$ 的普通 Lebesgue 积分，另一个是伊藤积分）。\n\n**存在唯一性**：若 $\\mu,\\sigma$ 对 $x$ 满足 **Lipschitz 条件**且满足**线性增长条件**，即存在常数 $K$ 使\n\n$$|\\mu(t,x)-\\mu(t,y)|+|\\sigma(t,x)-\\sigma(t,y)|\\le K|x-y|,\\qquad |\\mu(t,x)|^2+|\\sigma(t,x)|^2\\le K^2(1+|x|^2),$$\n\n则对每个 $\\mathcal F_0$ 可测的初值 $X_0\\in L^2$，方程在 $[0,T]$ 上存在**唯一强解**。证明用 Picard 迭代：Lipschitz 保证迭代列收敛，线性增长保证解不逃到无穷（不爆炸）。两个条件都是充分条件，不是必要的。\n\n**两个最重要、能显式求解的模型**：\n\n1. **线性 SDE / 几何布朗运动**：$dX_t=\\mu X_t\\mathrm dt+\\sigma X_t\\mathrm dW_t$ 的解是\n$$X_t=X_0\\exp\\Big[\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)t+\\sigma W_t\\Big],$$\n指数里的 $-\\frac{\\sigma^2}{2}$ 来自伊藤公式的二阶项（对 $\\log X$ 用伊藤公式即可看出），它使得 $E X_t=X_0e^{\\mu t}$ 而典型（中位）增长率为 $\\mu-\\frac{\\sigma^2}{2}$。\n2. **Ornstein–Uhlenbeck 过程**：$dX_t=-\\theta X_t\\mathrm dt+\\sigma\\mathrm dW_t$（$\\theta>0$）表现出**均值回复**，解可写成 $X_t=X_0e^{-\\theta t}+\\sigma\\int_0^te^{-\\theta(t-s)}\\mathrm dW_s$，长期方差趋于 $\\frac{\\sigma^2}{2\\theta}$，故平稳分布为 $N(0,\\frac{\\sigma^2}{2\\theta})$。\n\n理论上还要区分**强解**（在事先给定的概率空间与布朗运动上求解）与**弱解**（允许同时选取概率空间和布朗运动），以及**路径唯一性**与**依分布唯一性**：路径唯一性可推出依分布唯一性（Yamada–Watanabe），而 Lipschitz 条件给出的是最强的结论——存在唯一强解。SDE 与偏微分方程由生成元 $\\mathcal L=\\mu(t,x)\\partial_x+\\frac12\\sigma^2(t,x)\\partial_{xx}^2$ 相连：对光滑 $f$，$df(X_t)=\\mathcal Lf\\,\\mathrm dt+\\sigma f'\\mathrm dW_t$，因此 $f(X_t)-\\int_0^t\\mathcal Lf(X_s)\\mathrm ds$ 是鞅（Dynkin 公式），这是 Feynman–Kac 与 Black–Scholes 方程的出发点。",
+    "definitionEn": "A **stochastic differential equation** (SDE) has the form\n\n$$dX_t=\\mu(t,X_t)\\,\\mathrm dt+\\sigma(t,X_t)\\,\\mathrm dW_t,\\qquad X_0\\ \\text{given},$$\n\nrigorously understood through its integral form $X_t=X_0+\\int_0^t\\mu(s,X_s)\\mathrm ds+\\int_0^t\\sigma(s,X_s)\\mathrm dW_s$. Here $\\mu$ is the drift and $\\sigma$ the diffusion coefficient. Since Brownian paths are not differentiable, the integral equation — one ordinary Lebesgue integral and one Itô integral — is the definition.\n\n**Existence and uniqueness**: if $\\mu,\\sigma$ are **Lipschitz** in $x$ and satisfy the **linear growth** bound\n\n$$|\\mu(t,x)-\\mu(t,y)|+|\\sigma(t,x)-\\sigma(t,y)|\\le K|x-y|,\\qquad |\\mu(t,x)|^2+|\\sigma(t,x)|^2\\le K^2(1+|x|^2),$$\n\nthen for every $\\mathcal F_0$-measurable initial value $X_0\\in L^2$ there is a **unique strong solution** on $[0,T]$. The proof is a Picard iteration: Lipschitz continuity makes it converge, linear growth prevents explosion. Both are sufficient, not necessary.\n\n**Two linear, explicitly solvable models**: geometric Brownian motion, $dX_t=\\mu X_t\\mathrm dt+\\sigma X_t\\mathrm dW_t$, has the solution\n\n$$X_t=X_0\\exp\\Big[\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)t+\\sigma W_t\\Big],$$\n\nwhere $-\\frac{\\sigma^2}{2}$ comes from the second-order term in Itô's formula; hence $E X_t=X_0e^{\\mu t}$ while the typical (median) growth rate is $\\mu-\\frac{\\sigma^2}{2}$. The Ornstein–Uhlenbeck process $dX_t=-\\theta X_t\\mathrm dt+\\sigma\\mathrm dW_t$ ($\\theta>0$) is mean-reverting, with $X_t=X_0e^{-\\theta t}+\\sigma\\int_0^te^{-\\theta(t-s)}\\mathrm dW_s$ and stationary law $N(0,\\sigma^2/(2\\theta))$.\n\nOne also distinguishes **strong** solutions (on a prescribed probability space and Brownian motion) from **weak** ones (where both may be chosen), and pathwise from distributional uniqueness; pathwise uniqueness implies uniqueness in law (Yamada–Watanabe), while the Lipschitz condition yields the strongest conclusion, a unique strong solution. SDEs link to PDEs through the generator $\\mathcal L=\\mu\\partial_x+\\frac12\\sigma^2\\partial_{xx}^2$, giving Dynkin's formula and the starting point of Feynman–Kac and Black–Scholes.",
+    "formulas": [
+      {
+        "latex": "dX_t=\\mu(t,X_t)\\,\\mathrm dt+\\sigma(t,X_t)\\,\\mathrm dW_t,\\qquad X_0\\ \\text{给定}",
+        "note": "SDE 的标准形式：$\\mu$ 是漂移、$\\sigma$ 是扩散；严格含义是它的积分形式。",
+        "noteEn": "The standard SDE: $\\mu$ is the drift, $\\sigma$ the diffusion; rigorously it means its integral form."
+      },
+      {
+        "latex": "|\\mu(t,x)-\\mu(t,y)|+|\\sigma(t,x)-\\sigma(t,y)|\\le K|x-y|,\\qquad |\\mu(t,x)|^2+|\\sigma(t,x)|^2\\le K^2(1+|x|^2)",
+        "note": "存在唯一强解的两个充分条件：Lipschitz 条件（保证 Picard 迭代收敛）+ 线性增长条件（保证解不爆炸）。",
+        "noteEn": "Two sufficient conditions for a unique strong solution: Lipschitz continuity (Picard iteration converges) and linear growth (no explosion)."
+      },
+      {
+        "latex": "dX_t=\\mu X_t\\,\\mathrm dt+\\sigma X_t\\,\\mathrm dW_t\\ \\Longrightarrow\\ X_t=X_0\\exp\\Big[\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)t+\\sigma W_t\\Big]",
+        "note": "线性 SDE 的解（几何布朗运动）：指数里的 $\\mu-\\frac{\\sigma^2}{2}$ 来自伊藤公式的二阶项，不能漏。",
+        "noteEn": "Solution of the linear SDE (geometric Brownian motion); the exponent $\\mu-\\frac{\\sigma^2}{2}$ comes from the second-order Itô term and must not be dropped."
+      },
+      {
+        "latex": "E[X_t]=X_0e^{\\mu t},\\qquad \\operatorname{Med}(X_t)=X_0e^{(\\mu-\\frac{\\sigma^2}{2})t},\\qquad \\operatorname{Var}(X_t)=X_0^2e^{2\\mu t}\\big(e^{\\sigma^2t}-1\\big)",
+        "note": "几何布朗运动的矩：期望增长率是 $\\mu$，而中位数与典型轨道按 $\\mu-\\frac{\\sigma^2}{2}$ 增长（对数正态的偏斜）。",
+        "noteEn": "Moments of geometric Brownian motion: the mean grows at rate $\\mu$, while the median (and the typical path) grows at rate $\\mu-\\frac{\\sigma^2}{2}$ — the lognormal skew."
+      },
+      {
+        "latex": "dX_t=-\\theta X_t\\,\\mathrm dt+\\sigma\\,\\mathrm dW_t\\ \\Longrightarrow\\ X_t=X_0e^{-\\theta t}+\\sigma\\int_0^t e^{-\\theta(t-s)}\\,\\mathrm dW_s",
+        "note": "Ornstein–Uhlenbeck：均值回复，平稳分布 $N(0,\\frac{\\sigma^2}{2\\theta})$，用伊藤等距可直接算方差。",
+        "noteEn": "Ornstein–Uhlenbeck: mean reversion with stationary law $N(0,\\frac{\\sigma^2}{2\\theta})$; the variance follows directly from the Itô isometry."
+      }
+    ],
+    "properties": [
+      "Lipschitz + 线性增长是**充分**条件：不满足时并非一定出问题——如 $\\mathrm dX_t=|X_t|^{\\alpha}\\mathrm dW_t$（$\\frac12\\le\\alpha<1$）有路径唯一解（Yamada–Watanabe）；而 $\\mathrm dX_t=X_t^2\\mathrm dt$ 会在有限时间爆炸。",
+      "解的两重唯一性：路径唯一性（几乎必然意义下同一条轨道）推出依分布唯一性（Yamada–Watanabe）；Lipschitz 情形则直接给出存在唯一强解，即解是由给定的 $W$ 和 $X_0$ 生成的。",
+      "马尔可夫性：$\\mu,\\sigma$ 不显含 $t$ 时解是时齐马尔可夫过程；转移概率与生成元 $\\mathcal L=\\mu\\partial_x+\\frac12\\sigma^2\\partial_{xx}^2$ 相联系，且 $f(X_t)-\\int_0^t\\mathcal Lf(X_s)\\mathrm ds$ 是鞅（Dynkin 公式）。",
+      "几何布朗运动：$X_t$ 对数正态，$E X_t=X_0e^{\\mu t}$、中位数 $X_0e^{(\\mu-\\frac{\\sigma^2}{2})t}$、方差 $X_0^2e^{2\\mu t}(e^{\\sigma^2t}-1)$；且 $e^{-\\mu t}X_t$ 是鞅。期望与中位数**之比**为 $e^{\\sigma^2t/2}$（等价地，两者的对数增长率相差 $\\frac{\\sigma^2t}{2}$）——这是对数正态右偏的体现（不是两个数值之差）。",
+      "Ornstein–Uhlenbeck：$E[X_t]=X_0e^{-\\theta t}\\to0$，$\\operatorname{Var}(X_t)=\\frac{\\sigma^2}{2\\theta}(1-e^{-2\\theta t})\\to\\frac{\\sigma^2}{2\\theta}$，故平稳分布为 $N(0,\\frac{\\sigma^2}{2\\theta})$；线性 SDE（$\\mu,\\sigma$ 关于 $x$ 仿射）都可用积分因子显式求解。"
+    ],
+    "propertiesEn": [
+      "Lipschitz plus linear growth is **sufficient**: when it fails things may still be fine — e.g. $\\mathrm dX_t=|X_t|^{\\alpha}\\mathrm dW_t$ with $\\frac12\\le\\alpha<1$ has a pathwise unique solution (Yamada–Watanabe); whereas $\\mathrm dX_t=X_t^2\\mathrm dt$ explodes in finite time.",
+      "Two levels of uniqueness: pathwise uniqueness (the same path almost surely) implies uniqueness in law (Yamada–Watanabe); the Lipschitz case even yields existence and uniqueness of a strong solution generated by the given $W$ and $X_0$.",
+      "Markov property: when $\\mu,\\sigma$ do not depend on $t$ the solution is a time-homogeneous Markov process; transition probabilities are governed by the generator $\\mathcal L=\\mu\\partial_x+\\frac12\\sigma^2\\partial_{xx}^2$, and $f(X_t)-\\int_0^t\\mathcal Lf(X_s)\\mathrm ds$ is a martingale (Dynkin's formula).",
+      "Geometric Brownian motion: $X_t$ is lognormal with $E X_t=X_0e^{\\mu t}$, median $X_0e^{(\\mu-\\frac{\\sigma^2}{2})t}$ and variance $X_0^2e^{2\\mu t}(e^{\\sigma^2t}-1)$; moreover $e^{-\\mu t}X_t$ is a martingale. The mean exceeds the median by the factor $e^{\\sigma^2t/2}$ (equivalently, their log-growth rates differ by $\\frac{\\sigma^2t}{2}$) — the lognormal skew.",
+      "Ornstein–Uhlenbeck: $E[X_t]=X_0e^{-\\theta t}\\to0$ and $\\operatorname{Var}(X_t)=\\frac{\\sigma^2}{2\\theta}(1-e^{-2\\theta t})\\to\\frac{\\sigma^2}{2\\theta}$, so the stationary law is $N(0,\\frac{\\sigma^2}{2\\theta})$; all linear SDEs (affine $\\mu,\\sigma$ in $x$) can be solved explicitly by an integrating factor."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "0.3*y",
+      "xRange": [
+        0,
+        3
+      ],
+      "yRange": [
+        0,
+        5
+      ],
+      "initial": [
+        {
+          "x": 0,
+          "y": 0.5,
+          "color": "#ff6b9d",
+          "label": "X0=0.5"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "color": "#4cc9f0",
+          "label": "X0=1"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "color": "#06d6a0",
+          "label": "X0=2"
+        }
+      ],
+      "title": "几何布朗运动的漂移场 y′=0.3y（示意：只画漂移项 μX dt，未含 σX dW 的随机涨落）"
+    },
+    "examples": [
+      {
+        "problem": "求解 $dX_t=\\mu X_t\\,\\mathrm dt+\\sigma X_t\\,\\mathrm dW_t$（$X_0=x>0$），并求 $E X_t$、$\\operatorname{Med}(X_t)$ 与 $\\operatorname{Var}(X_t)$。",
+        "solution": "令 $Z_t=\\log X_t$，用伊藤公式（$f(x)=\\log x$，$f'(x)=\\frac1x$，$f''(x)=-\\frac{1}{x^2}$，$\\langle X\\rangle_t$ 由线性 SDE 给出 $\\mathrm d\\langle X\\rangle_t=\\sigma^2X_t^2\\mathrm dt$）：\n\n$$\\mathrm dZ_t=\\frac{1}{X_t}\\mathrm dX_t-\\frac{1}{2X_t^2}\\,\\mathrm d\\langle X\\rangle_t=\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)\\mathrm dt+\\sigma\\,\\mathrm dW_t .$$\n\n积分得 $Z_t=\\log x+(\\mu-\\frac{\\sigma^2}{2})t+\\sigma W_t$，故\n\n$$X_t=x\\exp\\Big[\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)t+\\sigma W_t\\Big],$$\n\n其中 $W_t\\sim N(0,t)$，所以 $X_t$ 服从对数正态分布。\n\n**期望**：$E\\exp(\\sigma W_t)=\\exp(\\frac{\\sigma^2t}{2})$，故\n\n$$EX_t=x\\,e^{(\\mu-\\frac{\\sigma^2}{2})t}\\cdot e^{\\frac{\\sigma^2t}{2}}=x\\,e^{\\mu t}.$$\n\n**中位数**：$\\sigma W_t$ 的中位数为 $0$，故 $\\operatorname{Med}(X_t)=xe^{(\\mu-\\frac{\\sigma^2}{2})t}$——比期望低一个因子 $e^{\\frac{\\sigma^2t}{2}}$。\n\n**方差**：$E X_t^2=x^2e^{(2\\mu-\\sigma^2)t}Ee^{2\\sigma W_t}=x^2e^{2\\mu t+\\sigma^2t}$，故\n\n$$\\operatorname{Var}(X_t)=x^2e^{2\\mu t}\\big(e^{\\sigma^2t}-1\\big).$$\n\n（另一条思路：$e^{-\\mu t}X_t$ 是鞅，故 $EX_t=xe^{\\mu t}$。）"
+      },
+      {
+        "problem": "求解 Ornstein–Uhlenbeck 方程 $dX_t=-\\theta X_t\\,\\mathrm dt+\\sigma\\,\\mathrm dW_t$（$\\theta>0$，$X_0=x$），并求 $E X_t$、$\\operatorname{Var}(X_t)$ 与平稳分布。",
+        "solution": "用积分因子 $e^{\\theta t}$：由乘积法则（$\\theta t$ 是有限变差，故无协变差项）\n\n$$\\mathrm d\\big(e^{\\theta t}X_t\\big)=e^{\\theta t}\\big(\\mathrm dX_t+\\theta X_t\\,\\mathrm dt\\big)=\\sigma e^{\\theta t}\\,\\mathrm dW_t ,$$\n\n积分后得\n\n$$X_t=xe^{-\\theta t}+\\sigma\\int_0^t e^{-\\theta(t-s)}\\,\\mathrm dW_s .$$\n\n**均值**：伊藤积分的期望为零，故 $EX_t=xe^{-\\theta t}\\to0$：无论初值多大，长期平均都回到 $0$——这就是**均值回复**（回复水平为 $0$，即漂移 $-\\theta X$ 的零点）。\n\n**方差**：由伊藤等距（被积函数确定性）\n\n$$\\operatorname{Var}(X_t)=\\sigma^2\\int_0^t e^{-2\\theta(t-s)}\\,\\mathrm ds=\\frac{\\sigma^2}{2\\theta}\\big(1-e^{-2\\theta t}\\big)\\ \\longrightarrow\\ \\frac{\\sigma^2}{2\\theta}.$$\n\n**平稳分布**：$t\\to\\infty$ 时 $X_t$ 的均值趋于 $0$、方差趋于 $\\frac{\\sigma^2}{2\\theta}$；由于 $X_t$ 是高斯过程，极限分布为\n\n$$N\\Big(0,\\ \\frac{\\sigma^2}{2\\theta}\\Big),$$\n\n它满足平稳性（漂移把偏离拉回、扩散不断补充扰动，两者平衡）。"
+      }
+    ],
+    "tags": [
+      "随机分析",
+      "随机微分方程",
+      "金融数学"
+    ],
+    "links": [
+      "ito-formula",
+      "ito-integral",
+      "brownian-motion",
+      "girsanov",
+      "ode-existence-uniqueness",
+      "euler-methods"
+    ]
+  },
+  {
+    "id": "girsanov",
+    "title": "吉尔萨诺夫定理",
+    "titleEn": "Girsanov's Theorem",
+    "branch": "stochastic",
+    "level": 5,
+    "summary": "用指数鞅作密度换测度，就能给布朗运动加上（或去掉）漂移；本条目约定密度含 −∫θdW − ½∫θ²ds，结论是 W̃=W+∫θds 在 Q 下为布朗运动。",
+    "summaryEn": "Changing measure with an exponential-martingale density adds or removes drift from Brownian motion; here the density carries −∫θdW − ½∫θ²ds and the conclusion is that W̃=W+∫θds is a Q-Brownian motion.",
+    "definition": "布朗运动「是不是布朗运动」依赖于概率测度：换一个测度，它会显出漂移。**吉尔萨诺夫定理**（Girsanov's theorem）给出最常用的构造：用一个指数鞅当密度，把 $P$ 换成等价的 $Q$，$W$ 就会获得或失去一个漂移。\n\n**【本条目统一的符号约定】** 设 $\\theta=(\\theta_t)$ 是可料过程，定义\n\n$$Z_t=\\exp\\Big(-\\int_0^t\\theta_s\\,\\mathrm dW_s-\\frac12\\int_0^t\\theta_s^2\\,\\mathrm ds\\Big),\\qquad \\frac{\\mathrm dQ}{\\mathrm dP}\\Big|_{\\mathcal F_t}:=Z_t .$$\n\n若 $\\theta$ 满足 **Novikov 条件** $E_P\\big[\\exp\\big(\\frac12\\int_0^T\\theta_s^2\\mathrm ds\\big)\\big]<\\infty$，则 $(Z_t)$ 是 $P$ 下的一致可积鞅，特别地 $E_P[Z_T]=1$，于是 $Q$ 是 $\\mathcal F_T$ 上与 $P$ 等价的概率测度。结论是\n\n$$\\widetilde W_t=W_t+\\int_0^t\\theta_s\\,\\mathrm ds\\ \\ \\text{在 }Q\\ \\text{下是标准布朗运动}.$$\n\n**符号必须成对出现**：密度指数里写 $-\\int\\theta\\,\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds$ 时，结论必须是「$W$ 加上 $\\int\\theta\\,\\mathrm ds$」；若把密度写成 $\\exp\\big(+\\int\\theta\\,\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds\\big)$，结论就必须反过来写成 $\\widetilde W_t=W_t-\\int_0^t\\theta_s\\mathrm ds$。两套约定都常见，各自都正确，但同一套约定内部**定义里的符号与结论里的符号必须相反**，混用就会写出错误的命题。等价地，本约定下 $Z_t$ 的随机微分是 $\\mathrm dZ_t=-Z_t\\theta_t\\,\\mathrm dW_t$，而 $\\mathrm dW_t=\\mathrm d\\widetilde W_t-\\theta_t\\,\\mathrm dt$。\n\n**用途**：把带漂移的方程化成无漂移的布朗运动（取 $\\theta=\\mu/\\sigma$ 消掉 $dX=\\mu\\mathrm dt+\\sigma\\mathrm dW$ 的漂移）；构造**风险中性测度**——Black–Scholes 模型取 $\\theta=\\frac{\\mu-r}{\\sigma}$ 后，折现价格成为 $Q$ 鞅，期权价格就是 $Q$ 下的折现期望；在等价鞅测度、完备市场、重要性抽样与似然比方法里也是基础工具。Novikov 只是充分条件（例如 $\\theta$ 有界时自动满足，也可用更弱的 Kazamaki 型条件代替）：只要 $Z$ 是严格正的真鞅且 $E_P[Z_T]=1$，定理就成立。",
+    "definitionEn": "Whether a process is a Brownian motion depends on the probability measure: under another measure it exhibits drift. **Girsanov's theorem** provides the standard construction, using an exponential martingale as density to replace $P$ by an equivalent $Q$.\n\n**【Convention used throughout this entry】** For a predictable process $\\theta$, set\n\n$$Z_t=\\exp\\Big(-\\int_0^t\\theta_s\\,\\mathrm dW_s-\\frac12\\int_0^t\\theta_s^2\\,\\mathrm ds\\Big),\\qquad \\frac{\\mathrm dQ}{\\mathrm dP}\\Big|_{\\mathcal F_t}:=Z_t .$$\n\nIf $\\theta$ satisfies the **Novikov condition** $E_P[\\exp(\\frac12\\int_0^T\\theta_s^2\\mathrm ds)]<\\infty$, then $(Z_t)$ is a uniformly integrable $P$-martingale, in particular $E_P[Z_T]=1$, so $Q$ is a probability measure on $\\mathcal F_T$ equivalent to $P$, and\n\n$$\\widetilde W_t=W_t+\\int_0^t\\theta_s\\,\\mathrm ds\\ \\ \\text{is a standard }Q\\text{-Brownian motion}.$$\n\n**The signs must match**: when the density exponent carries $-\\int\\theta\\,\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds$, the conclusion must add $\\int\\theta\\,\\mathrm ds$ to $W$; with the opposite density $\\exp(+\\int\\theta\\,\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds)$ the conclusion must read $\\widetilde W_t=W_t-\\int_0^t\\theta_s\\mathrm ds$. Both conventions are common and correct, but within one convention the sign in the definition and the sign in the conclusion must be **opposite**, otherwise the statement is false. Equivalently, here $\\mathrm dZ_t=-Z_t\\theta_t\\,\\mathrm dW_t$ and $\\mathrm dW_t=\\mathrm d\\widetilde W_t-\\theta_t\\,\\mathrm dt$.\n\n**Uses**: removing drift (choose $\\theta=\\mu/\\sigma$ to strip the drift from $dX=\\mu\\mathrm dt+\\sigma\\mathrm dW$); constructing the **risk-neutral measure** — in the Black–Scholes model $\\theta=\\frac{\\mu-r}{\\sigma}$ makes the discounted price a $Q$-martingale, so option prices are discounted $Q$-expectations; and more generally equivalent martingale measures, complete markets, importance sampling and likelihood-ratio methods. Novikov is sufficient but not necessary (it holds automatically for bounded $\\theta$, and weaker Kazamaki-type conditions also work): the theorem holds as soon as $Z$ is a strictly positive true martingale with $E_P[Z_T]=1$.",
+    "formulas": [
+      {
+        "latex": "E_P\\Big[\\exp\\Big(\\frac{1}{2}\\int_0^T\\theta_s^2\\,\\mathrm ds\\Big)\\Big]<\\infty",
+        "note": "Novikov 条件：指数上是 $\\frac12$（不能写成 $1$ 或 $2$）；它保证密度过程 $Z$ 是一致可积鞅。",
+        "noteEn": "Novikov's condition: the exponent is $\\frac12$ (not $1$ or $2$); it makes the density process $Z$ a uniformly integrable martingale."
+      },
+      {
+        "latex": "Z_t=\\frac{\\mathrm dQ}{\\mathrm dP}\\Big|_{\\mathcal F_t}=\\exp\\Big(-\\int_0^t\\theta_s\\,\\mathrm dW_s-\\frac{1}{2}\\int_0^t\\theta_s^2\\,\\mathrm ds\\Big)",
+        "note": "本条目采用的密度过程：指数里是 $-\\int\\theta\\,\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds$，这样 $Z$ 才是 $P$ 鞅且 $E_P[Z_t]=1$。",
+        "noteEn": "The density process used here: the exponent is $-\\int\\theta\\,\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds$, which makes $Z$ a $P$-martingale with $E_P[Z_t]=1$."
+      },
+      {
+        "latex": "\\widetilde W_t=W_t+\\int_0^t\\theta_s\\,\\mathrm ds\\ \\text{在 }Q\\text{ 下是布朗运动}\\quad\\Longleftrightarrow\\quad \\mathrm dW_t=\\mathrm d\\widetilde W_t-\\theta_t\\,\\mathrm dt",
+        "note": "结论：漂移方向与密度指数中的符号相反（这里密度是 $-\\int\\theta\\mathrm dW$，故漂移是 $+\\int\\theta\\mathrm ds$）。",
+        "noteEn": "Conclusion: the drift has the opposite sign to the density exponent (here $-\\int\\theta\\mathrm dW$ in the density, hence $+\\int\\theta\\mathrm ds$ in the drift)."
+      },
+      {
+        "latex": "E_P[Z_T]=1,\\qquad \\mathrm dZ_t=-Z_t\\theta_t\\,\\mathrm dW_t,\\qquad \\frac{\\mathrm dP}{\\mathrm dQ}\\Big|_{\\mathcal F_t}=Z_t^{-1}=\\exp\\Big(\\int_0^t\\theta_s\\,\\mathrm d\\widetilde W_s-\\frac{1}{2}\\int_0^t\\theta_s^2\\,\\mathrm ds\\Big)",
+        "note": "密度是鞅、期望为 $1$、且 $Q\\sim P$；反向密度（$Q\\to P$）的符号同样相反。",
+        "noteEn": "The density is a martingale with expectation one and $Q\\sim P$; the reverse density (from $Q$ to $P$) again flips the sign."
+      },
+      {
+        "latex": "dX_t=\\mu\\,\\mathrm dt+\\sigma\\,\\mathrm dW_t\\ \\Longrightarrow\\ dX_t=(\\mu-\\sigma\\theta_t)\\,\\mathrm dt+\\sigma\\,\\mathrm d\\widetilde W_t",
+        "note": "漂移变换公式：$\\mu\\to\\mu-\\sigma\\theta$。取 $\\theta=\\mu/\\sigma$ 即把漂移完全消掉，这是解 SDE 与定价的标准第一步。",
+        "noteEn": "Drift transformation $\\mu\\to\\mu-\\sigma\\theta$; choosing $\\theta=\\mu/\\sigma$ removes the drift entirely — the standard first step in solving SDEs and in pricing."
+      }
+    ],
+    "properties": [
+      "等价性与期望换算：$Z_T>0$ 保证 $Q\\sim P$；对 $Y\\in L^1(Q)$ 有 $E_Q[Y]=E_P[Z_TY]$。$\\theta$ 有界（或为常数）时 Novikov 条件自动成立。",
+      "符号约定（务必与密度成对）：本条目统一为密度 $\\exp(-\\int\\theta\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds)$、结论 $\\widetilde W=W+\\int\\theta\\mathrm ds$；另一套常见约定是 $\\exp(\\int\\theta\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds)$ 配 $\\widetilde W=W-\\int\\theta\\mathrm ds$。两套都对，但不能混用。",
+      "被改变的只有漂移：二次变差是路径性质，与测度无关，$\\langle\\widetilde W\\rangle_t=\\langle W\\rangle_t=t$；因此 Girsanov 变换不改变波动率，只平移漂移。",
+      "Novikov 是充分非必要：更弱的 Kazamaki 型条件、或「$Z$ 是严格正的真鞅」都可代替它；在无穷时间区间上结论可能失效（$Z$ 可能只是严格局部鞅，$Q$ 甚至不是概率测度）。",
+      "应用：带漂移布朗运动消漂移（$\\theta=\\mu/\\sigma$）；Black–Scholes 风险中性测度（$\\theta=\\frac{\\mu-r}{\\sigma}$，折现价格成为 $Q$ 鞅）；等价鞅测度的唯一性等价于市场完备；重要性抽样中用 $Q$ 提高稀有事件的抽样效率。"
+    ],
+    "propertiesEn": [
+      "Equivalence and expectation transfer: $Z_T>0$ gives $Q\\sim P$, and $E_Q[Y]=E_P[Z_TY]$ for $Y\\in L^1(Q)$. For bounded (or constant) $\\theta$ the Novikov condition holds automatically.",
+      "Sign convention (must be paired with the density): here the density is $\\exp(-\\int\\theta\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds)$ with conclusion $\\widetilde W=W+\\int\\theta\\mathrm ds$; the equally common alternative is $\\exp(\\int\\theta\\mathrm dW-\\frac12\\int\\theta^2\\mathrm ds)$ with $\\widetilde W=W-\\int\\theta\\mathrm ds$. Both are correct; mixing them is not.",
+      "Only the drift changes: quadratic variation is a path property independent of the measure, so $\\langle\\widetilde W\\rangle_t=\\langle W\\rangle_t=t$; Girsanov shifts the drift and leaves the volatility untouched.",
+      "Novikov is sufficient but not necessary: weaker Kazamaki-type conditions, or simply 「$Z$ is a strictly positive true martingale」, will do; on an infinite time horizon the conclusion may fail ($Z$ may be only a strict local martingale).",
+      "Applications: removing drift from Brownian motion with drift ($\\theta=\\mu/\\sigma$); the Black–Scholes risk-neutral measure ($\\theta=\\frac{\\mu-r}{\\sigma}$, making discounted prices $Q$-martingales); uniqueness of the equivalent martingale measure as completeness of the market; importance sampling of rare events."
+    ],
+    "examples": [
+      {
+        "problem": "设 $dX_t=\\mu\\,\\mathrm dt+\\sigma\\,\\mathrm dW_t$（$\\mu,\\sigma$ 为常数，$\\sigma>0$）。取 $\\theta=\\mu/\\sigma$，验证 $E_P[Z_T]=1$，并说明在 $Q$ 下漂移被完全消掉。",
+        "solution": "此时 $\\theta$ 是常数，Novikov 条件显然成立（$E\\exp(\\frac12\\theta^2T)<\\infty$）。密度为\n\n$$Z_T=\\exp\\Big(-\\theta W_T-\\frac{\\theta^2T}{2}\\Big).$$\n\n由于 $W_T\\sim N(0,T)$，用矩母函数 $E_P[e^{-\\theta W_T}]=e^{\\theta^2T/2}$：\n\n$$E_P[Z_T]=e^{\\theta^2T/2}\\cdot e^{-\\theta^2T/2}=1,$$\n\n所以 $Q$ 确实是概率测度（这也是「指数里必须有 $-\\frac12\\int\\theta^2$」的原因：少了它 $E_P[Z_T]=e^{\\theta^2T/2}\\ne1$，$Q$ 就不是概率测度。本例 $\\theta$ 为常数，该期望是**有限值**，问题出在归一化而不是发散）。定理给出 $\\widetilde W_t=W_t+\\theta t$ 是 $Q$ 布朗运动，于是\n\n$$X_t=X_0+\\mu t+\\sigma W_t=X_0+\\sigma\\big(W_t+\\theta t\\big)=X_0+\\sigma\\widetilde W_t,$$\n\n漂移项 $\\mu t$ 被完全吸收进 $\\widetilde W$；因此 $E_Q[X_t]=X_0$、$\\operatorname{Var}_Q(X_t)=\\sigma^2t$，而在 $P$ 下 $E_P[X_t]=X_0+\\mu t$。"
+      },
+      {
+        "problem": "**Black–Scholes 的风险中性测度。** 设股价 $S_t=S_0\\exp\\big[(\\mu-\\frac{\\sigma^2}{2})t+\\sigma W_t\\big]$，无风险利率 $r$。取 $\\theta=\\frac{\\mu-r}{\\sigma}$，说明 $Q$ 下折现价格 $e^{-rt}S_t$ 是鞅，并给出欧式看涨期权价格公式。",
+        "solution": "在 $Q$ 下 $\\widetilde W_t=W_t+\\theta t$ 是布朗运动，把 $W_t=\\widetilde W_t-\\theta t$ 代入：\n\n$$S_t=S_0\\exp\\Big[\\Big(\\mu-\\frac{\\sigma^2}{2}\\Big)t+\\sigma\\widetilde W_t-\\sigma\\theta t\\Big]=S_0\\exp\\Big[\\Big(r-\\frac{\\sigma^2}{2}\\Big)t+\\sigma\\widetilde W_t\\Big],$$\n\n因为 $\\mu-\\sigma\\theta=r$。对 $e^{-rt}S_t$ 用伊藤公式（或直接看出它是 $e^{\\sigma\\widetilde W_t-\\sigma^2t/2}$ 的倍数）：\n\n$$\\mathrm d\\big(e^{-rt}S_t\\big)=e^{-rt}S_t\\,\\sigma\\,\\mathrm d\\widetilde W_t,$$\n\n右端是无漂移的伊藤积分，故 $e^{-rt}S_t$ 是 $Q$ 鞅——这正是「风险中性」的含义：在 $Q$ 下所有资产的预期收益率都是 $r$。由无套利定价 $C=E_Q\\big[e^{-rT}(S_T-K)^+\\big]$，并用对数正态积分算出\n\n$$C=S_0\\Phi(d_1)-Ke^{-rT}\\Phi(d_2),\\qquad d_1=\\frac{\\ln(S_0/K)+(r+\\frac{\\sigma^2}{2})T}{\\sigma\\sqrt T},\\quad d_2=d_1-\\sigma\\sqrt T .$$\n\n注意在原始测度 $P$ 下 $e^{-rt}S_t$ 漂移为 $\\mu-r\\neq0$，并不是鞅；换测度（而不是改变模型）才是这一步的关键。"
+      }
+    ],
+    "tags": [
+      "随机分析",
+      "测度变换",
+      "风险中性"
+    ],
+    "links": [
+      "brownian-motion",
+      "martingale",
+      "ito-formula",
+      "stochastic-differential-equation",
+      "brownian-properties"
+    ]
+  }
+]

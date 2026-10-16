@@ -1,0 +1,439 @@
+[
+  {
+    "id": "divisibility-algorithm",
+    "title": "整除性与带余除法",
+    "titleEn": "Divisibility and Division with Remainder",
+    "branch": "number",
+    "level": 2,
+    "summary": "带余除法把任意整数写成 a = bq + r（0 ≤ r < |b|），并由此定义整除及其基本性质。",
+    "summaryEn": "Division with remainder writes any integer as a = bq + r with 0 ≤ r < |b|, and the remainder becomes the test for divisibility.",
+    "definition": "给定整数 $a$ 与非零整数 $b$，总能做**带余除法**：存在**唯一**的一对整数 $q$（商）与 $r$（余数），使 $a = bq + r$ 且 $0 \\le r < |b|$。例如 7 除以 3：$7 = 3 \\times 2 + 1$，商 2 余 1；对负数也成立：$-47 = 5 \\times (-10) + 3$，商 $-10$、余 3。**余数永远非负，且严格小于除数的绝对值**——这是商与余数唯一性的来源，也是后面所有算法（辗转相除、同余）的起点。\n\n当余数 $r = 0$ 时，就说 **$a$ 被 $b$ 整除**，记作 $b \\mid a$，否则记 $b \\nmid a$。完整的定义是：存在整数 $k$ 使 $a = bk$。此时称 $b$ 是 $a$ 的因数（约数），$a$ 是 $b$ 的倍数。例如 $11 \\mid 143$，因为 $143 = 11 \\times 13$；而 $5 \\nmid 12$（$12 = 5 \\times 2 + 2$）。约定：$a \\mid 0$ 对一切 $a \\ne 0$ 成立（因为 $0 = a \\times 0$）；但 $0$ 不整除任何数——除数为零是无意义的。\n\n整除像整数世界的一种「排序」，有三条最常用的性质：**传递性**（$a \\mid b$ 且 $b \\mid c$，则 $a \\mid c$）；**对线性组合封闭**（$a \\mid b$ 且 $a \\mid c$，则对任意整数 $x, y$ 有 $a \\mid (bx + cy)$）；以及**互相整除非零时只差符号**（$a \\mid b$ 且 $b \\mid a$，则 $a = \\pm b$，注意不能漏掉 $a = -b$ 的情形）。这些性质加上带余除法，构成了因数、倍数、最大公因数与同余全部理论的底层工具。",
+    "definitionEn": "Given integers $a$ and $b \\ne 0$, **division with remainder** produces a unique pair of integers $q$ (the quotient) and $r$ (the remainder) with $a = bq + r$ and $0 \\le r < |b|$. For example $7 = 3 \\times 2 + 1$ and $-47 = 5 \\times (-10) + 3$. The remainder is **always non-negative and strictly smaller than |b|**, and this range is exactly what makes the quotient and remainder unique; it also powers every algorithm that follows.\n\nWhen the remainder is 0 we say that **b divides a** and write $b \\mid a$; otherwise $b \\nmid a$. Precisely, $b \\mid a$ means $a = bk$ for some integer $k$. Then b is a divisor (or factor) of a, and a is a multiple of b. For instance $11 \\mid 143$ since $143 = 11 \\times 13$, while $5 \\nmid 12$. Note the conventions: every $a \\ne 0$ divides 0 (as $0 = a \\times 0$), while 0 divides no number, division by zero being meaningless.\n\nDivisibility acts like an ordering on the integers. It is **transitive**: $a \\mid b$ and $b \\mid c$ together give $a \\mid c$. It is preserved by **integer linear combinations**: $a \\mid b$ and $a \\mid c$ give $a \\mid (bx + cy)$ for all integers x and y. Two integers dividing each other must be equal **up to sign**: $a \\mid b$ and $b \\mid a$ force $a = \\pm b$. Together with division with remainder, these rules are the toolkit behind factors, multiples, gcds and congruences.",
+    "formulas": [
+      {
+        "latex": "a = bq + r,\\qquad 0 \\le r < |b|",
+        "note": "带余除法（b ≠ 0）：商 q 与余数 r 存在且唯一，余数必须落在 [0, |b|) 内。",
+        "noteEn": "Division with remainder (b ≠ 0): the quotient q and remainder r are unique, with 0 ≤ r < |b|."
+      },
+      {
+        "latex": "a \\mid b \\iff \\exists\\, k \\in \\mathbb{Z}:\\ b = ak \\qquad (a \\ne 0)",
+        "note": "整除的定义：a 整除 b 当且仅当 b 是 a 的整数倍；记号的合法性要求 a ≠ 0。",
+        "noteEn": "Definition of divisibility: a divides b exactly when b is an integer multiple of a (a ≠ 0)."
+      },
+      {
+        "latex": "a \\mid b,\\quad b \\mid c \\implies a \\mid c",
+        "note": "传递性：整除关系像不等式一样可以接力，如 3 | 6、6 | 18 推出 3 | 18。",
+        "noteEn": "Transitivity: divisibility chains compose, e.g. 3 | 6 and 6 | 18 imply 3 | 18."
+      },
+      {
+        "latex": "a \\mid b,\\quad a \\mid c \\implies a \\mid (bx + cy)\\qquad (x, y \\in \\mathbb{Z})",
+        "note": "整除对整数线性组合封闭：两边可以任意配系数相加，这是最大公因数理论的基础。",
+        "noteEn": "Divisibility is preserved by integer linear combinations, a cornerstone of gcd theory."
+      },
+      {
+        "latex": "a \\mid b \\text{ 且 } b \\mid a \\implies a = \\pm b",
+        "note": "互相整除的两个非零整数只差一个符号——必须带 ±，漏掉即为错误。",
+        "noteEn": "Mutually dividing nonzero integers coincide up to sign; the ± must not be dropped."
+      }
+    ],
+    "properties": [
+      "对每个 a ≠ 0 都有 a | 0（0 是任何非零整数的倍数），而 0 不整除任何数；此外 1 与 −1 整除一切整数，任何非零整数都整除自己。",
+      "若 a | b 且 a | c，则对任意整数 x、y 有 a | (bx + cy)：整除在整数线性组合下保持。",
+      "若 a | b 且 b | a（两者非零），则 a = b 或 a = −b；特别地，两个正数互相整除只能相等。",
+      "若 a | b 且 b ≠ 0，则 |a| ≤ |b|：非零倍数不会比原数更小。",
+      "带余除法中商与余数唯一：若 a = bq + r = bq′ + r′ 且 0 ≤ r, r′ < |b|，则 q = q′、r = r′。"
+    ],
+    "propertiesEn": [
+      "Every a ≠ 0 divides 0, while 0 divides no integer; 1 and −1 divide every integer, and every nonzero integer divides itself.",
+      "If a | b and a | c, then a | (bx + cy) for all integers x and y: divisibility survives integer linear combinations.",
+      "If a | b and b | a (both nonzero), then a = b or a = −b; two positive integers dividing each other must be equal.",
+      "If a | b with b ≠ 0, then |a| ≤ |b|: a nonzero multiple is never smaller in absolute value.",
+      "Quotient and remainder are unique: a = bq + r = bq' + r' with 0 ≤ r, r' < |b| forces q = q' and r = r'."
+    ],
+    "examples": [
+      {
+        "problem": "求 −47 除以 5 的商与余数，再求 2026 除以 7 的商与余数。",
+        "solution": "带余除法要求余数满足 $0 \\le r < |除数|$，这唯一确定商与余数。对 −47 与 5：取 $q = -10$，则 $-47 = 5 \\times (-10) + 3$，余数 $r = 3$ 满足 $0 \\le 3 < 5$，故商为 −10、余数为 3。验算：$5 \\times (-10) + 3 = -50 + 3 = -47$ ✓。若图省事取 $q = -9$，会得到 $r = -2 < 0$，不合规定，所以商不能随意取。对 2026 与 7：$7 \\times 289 = 2023$，于是 $2026 = 7 \\times 289 + 3$，商 289、余 3（$0 \\le 3 < 7$）。验算：$7 \\times 289 + 3 = 2023 + 3 = 2026$ ✓。余数落在 [0, 7) 内是判别整除的统一标准：这里余数非 0，所以 $7 \\nmid 2026$。"
+      },
+      {
+        "problem": "设整数 a、b、c 满足 $a \\mid b$ 且 $a \\mid c$。证明 $a \\mid (7b + 5c)$。",
+        "solution": "由 $a \\mid b$，存在整数 m 使 $b = am$；由 $a \\mid c$，存在整数 n 使 $c = an$。于是 $7b + 5c = 7am + 5an = a(7m + 5n)$。因为 $7m + 5n$ 是整数，按整除的定义即得 $a \\mid (7b + 5c)$。∎"
+      }
+    ],
+    "links": [
+      "factors-multiples",
+      "gcd-euclidean-algorithm",
+      "primes-fundamental-theorem",
+      "congruence-basics"
+    ]
+  },
+  {
+    "id": "gcd-euclidean-algorithm",
+    "title": "最大公因数与辗转相除法",
+    "titleEn": "GCD and the Euclidean Algorithm",
+    "branch": "number",
+    "level": 3,
+    "summary": "辗转相除法用反复的带余除法高效求最大公因数，并通过裴蜀恒等式与整数线性组合相连。",
+    "summaryEn": "The Euclidean algorithm computes greatest common divisors by repeated division with remainder, tied to linear combinations through Bézout's identity.",
+    "definition": "几个整数公有的因数叫**公因数**，其中最大的正公因数叫**最大公因数**，记作 $\\gcd(a, b)$ 或 $(a, b)$。例如 24 与 36 的正公因数是 1, 2, 3, 4, 6, 12，故 $\\gcd(24, 36) = 12$。约定 $\\gcd(a, 0) = |a|$（$a \\ne 0$），让算法在余数出现 0 时自然收尾。\n\n大数的因数无法逐个列举，**辗转相除法（欧几里得算法）**给出高效办法：$\\gcd(a, b) = \\gcd(b, r)$，其中 $r$ 是 a 除以 b 的余数（$a = bq + r$）。道理是**两边的公因数完全相同**：若 d 同时整除 a、b，则 d 整除 $r = a - bq$；反之若 d 整除 b、r，则 d 整除 $a = bq + r$。反复使用这条等式，余数是非负整数且严格递减，必在有限步后变成 0——这就是**终止性**；**最后一个非零余数就是最大公因数**，这就是算法的**正确性**。例如 $\\gcd(1071, 462) = \\gcd(462, 147) = \\gcd(147, 21) = 21$。\n\n**裴蜀定理（Bézout 恒等式）**进一步指出：最大公因数一定能写成两个数的整系数组合，即存在整数 $x, y$ 使 $\\gcd(a, b) = ax + by$——**尤其注意 $x, y$ 允许为负数**，写成「正整数解」是错的。把辗转相除的每一步回代即可求出这对系数，这一流程称为**扩展欧几里得算法**。特例：$\\gcd(a, b) = 1$ 时（称 a、b **互素**），存在整数 x, y 使 $ax + by = 1$；反过来这条件也推出互素。互素并不要求两个数本身是素数——例如 8 与 9 就互素。",
+    "definitionEn": "A **common divisor** of several integers is a number dividing each of them; the largest positive one is the **greatest common divisor**, written $\\gcd(a,b)$ or $(a,b)$. For example the positive common divisors of 24 and 36 are 1, 2, 3, 4, 6, 12, so $\\gcd(24,36)=12$. The convention $\\gcd(a,0)=|a|$ (for $a \\ne 0$) lets the algorithm finish cleanly when a remainder becomes 0.\n\nListing divisors is hopeless for large numbers, and the **Euclidean algorithm** replaces it with $\\gcd(a,b)=\\gcd(b,r)$, where $r$ is the remainder of $a$ divided by $b$. The reason is that **the two pairs share exactly the same common divisors**: d divides a and b if and only if d divides b and $r = a - bq$ (both directions follow from the division equation). Iterating, the remainders are non-negative integers that strictly decrease, so they reach 0 in finitely many steps — this is **termination**. The **last nonzero remainder is the gcd** — the **correctness** of the algorithm. For instance $\\gcd(1071,462)=\\gcd(462,147)=\\gcd(147,21)=21$.\n\n**Bézout's identity** says the gcd can always be written as an integer combination: there exist integers x and y with $\\gcd(a,b) = ax + by$ — and **x, y may well be negative**; claiming positive solutions would be wrong. Substituting the divisions backwards (the **extended Euclidean algorithm**) produces them explicitly. In particular, $(a,b)=1$ (a and b are **coprime**) if and only if $ax+by=1$ is solvable in integers. Coprime numbers need not be prime: for instance 8 and 9 are coprime.",
+    "formulas": [
+      {
+        "latex": "\\gcd(a, b) = \\gcd(b,\\ a \\bmod b)",
+        "note": "欧几里得算法的核心递推；余数严格递减，反复迭代必在余数 0 处终止。",
+        "noteEn": "The core recursion of the Euclidean algorithm; strictly decreasing remainders terminate at 0."
+      },
+      {
+        "latex": "\\gcd(a, b) = ax + by,\\qquad x, y \\in \\mathbb{Z}",
+        "note": "裴蜀恒等式：gcd 总可以写成整系数组合，x、y 允许为负——不要写成正整数解。",
+        "noteEn": "Bézout's identity: the gcd is an integer combination; the coefficients may be negative."
+      },
+      {
+        "latex": "(a, b) = 1 \\iff \\exists\\, x, y \\in \\mathbb{Z}:\\ ax + by = 1",
+        "note": "互素的等价刻画：a、b 互素当且仅当 1 可表示为它们的整数组合，求逆元据此进行。",
+        "noteEn": "Coprimality is equivalent to 1 being an integer combination; modular inverses rely on this."
+      },
+      {
+        "latex": "\\gcd(a, b) \\cdot \\operatorname{lcm}(a, b) = |ab| \\qquad (ab \\ne 0)",
+        "note": "最大公因数与最小公倍数之积等于两数乘积的绝对值，要求 a、b 均非零。",
+        "noteEn": "For nonzero integers, gcd times lcm equals |ab|."
+      },
+      {
+        "latex": "1071 = 2 \\cdot 462 + 147,\\quad 462 = 3 \\cdot 147 + 21,\\quad 147 = 7 \\cdot 21 + 0 \\implies \\gcd(1071, 462) = 21",
+        "note": "辗转相除法实例：最后一个非零余数 21 就是最大公因数。",
+        "noteEn": "A worked run of the algorithm: the last nonzero remainder, 21, is the gcd."
+      }
+    ],
+    "properties": [
+      "gcd(a, b) 整除 a、b，而且 a、b 的任何公因数都整除 gcd(a, b)：它既是公因数中最大的，也是被所有公因数整除的那一个。",
+      "若 (a, b) = 1 且 a | bc，则 a | c：与 a 互素的因子可以从乘积中「消去」。",
+      "缩放律：对非零整数 k 有 gcd(ka, kb) = |k| · gcd(a, b)。",
+      "辗转相除法一定终止：余数构成严格递减的非负整数序列，不可能无限下降，有限步内到达 0。",
+      "gcd(a, b) 是集合 {ax + by : x, y ∈ ℤ} 中的最小正整数（a、b 不全为零），这解释了它为什么配得上「最大」公因数之名。"
+    ],
+    "propertiesEn": [
+      "The gcd divides a and b, and every common divisor of a and b divides the gcd: it is both the largest common divisor and the one divisible by all others.",
+      "If (a, b) = 1 and a | bc, then a | c: a factor coprime to a can be canceled from a product.",
+      "Scaling law: gcd(ka, kb) = |k| · gcd(a, b) for every nonzero integer k.",
+      "The Euclidean algorithm always terminates, since its remainders form a strictly decreasing sequence of non-negative integers.",
+      "The gcd is the smallest positive integer of the form ax + by (a, b not both zero), which explains why it deserves the name greatest."
+    ],
+    "examples": [
+      {
+        "problem": "用辗转相除法求 $\\gcd(1071, 462)$，并验证 1071 ÷ 21 与 462 ÷ 21 互素。",
+        "solution": "反复做带余除法：$1071 = 2 \\times 462 + 147$；$462 = 3 \\times 147 + 21$；$147 = 7 \\times 21 + 0$。最后一个非零余数是 21，故 $\\gcd(1071, 462) = 21$。验证：$1071 = 21 \\times 51$、$462 = 21 \\times 22$（$21 \\times 51 = 1071$ ✓，$21 \\times 22 = 462$ ✓），确实 21 同时整除两数。再看 $51 = 3 \\times 17$、$22 = 2 \\times 11$，两者没有公共素因数，$\\gcd(51, 22) = 1$ ✓——与 21 是最大公因数一致（若 51、22 还有公因数，21 就不是最大的了）。"
+      },
+      {
+        "problem": "用扩展欧几里得算法求整数 x、y，使 $\\gcd(240, 46) = 240x + 46y$。",
+        "solution": "先作辗转相除：$240 = 5 \\times 46 + 10$；$46 = 4 \\times 10 + 6$；$10 = 1 \\times 6 + 4$；$6 = 1 \\times 4 + 2$；$4 = 2 \\times 2 + 0$。所以 $\\gcd(240, 46) = 2$。回代：由 $2 = 6 - 4$ 与 $4 = 10 - 6$ 得 $2 = 2 \\times 6 - 10$；再由 $6 = 46 - 4 \\times 10$ 得 $2 = 2 \\times 46 - 9 \\times 10$；最后由 $10 = 240 - 5 \\times 46$ 得 $2 = 47 \\times 46 - 9 \\times 240$。取 $x = -9$、$y = 47$，验算：$-9 \\times 240 + 47 \\times 46 = -2160 + 2162 = 2$ ✓。注意 $x = -9$ 是负数——裴蜀系数可以为负，说「存在正整数解」是错误的。"
+      }
+    ],
+    "links": [
+      "divisibility-algorithm",
+      "factors-multiples",
+      "primes-fundamental-theorem",
+      "diophantine-equations",
+      "linear-congruence"
+    ]
+  },
+  {
+    "id": "primes-fundamental-theorem",
+    "title": "素数与算术基本定理",
+    "titleEn": "Primes and the Fundamental Theorem of Arithmetic",
+    "branch": "number",
+    "level": 3,
+    "summary": "素数是大于 1 且没有真因数的整数；每个大于 1 的整数都能唯一分解为素因数之积。",
+    "summaryEn": "Primes are integers greater than 1 without proper divisors, and every larger integer factors uniquely into primes.",
+    "definition": "大于 1 的整数 $n$，如果正因数只有 1 与 $n$ 自己，就叫**素数**（质数）；否则叫**合数**。例如 2, 3, 5, 7, 11, 13 是素数，$4 = 2 \\times 2$、$6 = 2 \\times 3$、$9 = 3 \\times 3$ 是合数。**1 不是素数**：素数必须大于 1——若把 1 也算作素数，$6 = 2 \\times 3 = 1 \\times 2 \\times 3 = 1 \\times 1 \\times 2 \\times 3 = \\cdots$ 会给出无穷多种写不完的分解，唯一性就无从谈起。2 是唯一的偶素数。\n\n**算术基本定理（唯一分解定理）**：每个大于 1 的整数都能分解为素数之积（**存在性**），而且不计因子的先后次序时分解方式唯一（**唯一性**）。把相同素数合并成幂并排序，就得到**标准分解式** $n = p_1^{\\alpha_1} p_2^{\\alpha_2} \\cdots p_k^{\\alpha_k}$，其中 $p_1 < p_2 < \\cdots < p_k$ 是不同素数。例如 $360 = 2^3 \\times 3^2 \\times 5$。两半缺一不可：存在性说明「一定能分解到底」，唯一性说明「分解结果与路径无关」。\n\n存在性的证明：不断取出 n 的大于 1 的最小因数，它必是素数（否则其真因数更小，矛盾），如此反复，因数越来越小，过程必然终止。唯一性的关键是**欧几里得引理**：若素数 $p$ 整除乘积 $ab$，则 $p$ 至少整除 $a$、$b$ 之一；把它反复用于比较两种分解，就能逐个消去素因子，证明重排后完全一致。算术基本定理让素因子成为整数的「原子」，研究约数个数、互素性、同余乃至密码学中的大数分解，都从这里出发。\n\n素数有多少个？**有无穷多个**——欧几里得的反证法是数学中最著名的证明之一（完整步骤见例题）。判断一个具体的数是不是素数，只需拿不超过 $\\sqrt{n}$ 的素数去试除：若 $n = ab$ 且 $a, b > \\sqrt{n}$，乘积就超过 n，矛盾；这一观察把判素的工作量从 n 次检验压缩到约 $\\sqrt{n}$ 次。",
+    "definitionEn": "An integer $n > 1$ whose only positive divisors are 1 and n is **prime**; otherwise it is **composite**. Thus 2, 3, 5, 7, 11, 13 are prime, while $4 = 2 \\times 2$ and $9 = 3 \\times 3$ are composite. **The number 1 is not prime**: if it were, $6 = 2 \\times 3 = 1 \\times 2 \\times 3 = 1 \\times 1 \\times 2 \\times 3$ would admit infinitely many different factorizations and uniqueness would be lost. Also, 2 is the only even prime.\n\nThe **Fundamental Theorem of Arithmetic**: every integer greater than 1 is a product of primes (**existence**), and the factorization is unique up to the order of the factors (**uniqueness**). Collecting equal primes into powers yields the **standard factorization** $n = p_1^{\\alpha_1} \\cdots p_k^{\\alpha_k}$ with distinct primes $p_1 < \\cdots < p_k$; for example $360 = 2^3 \\times 3^2 \\times 5$. Both halves matter: existence says one can always factor down to primes, uniqueness says the result does not depend on the route taken.\n\nExistence holds by repeatedly extracting the smallest divisor greater than 1, which must itself be prime. Uniqueness rests on **Euclid's lemma**: if a prime p divides a product ab, then p divides a or p divides b. Applying it repeatedly to two competing factorizations cancels prime after prime, showing they agree up to reordering. The theorem turns primes into the atoms of integer multiplication, and questions about divisors, coprimality, congruences and factoring all start here.\n\nHow many primes are there? **Infinitely many** — Euclid's proof by contradiction is one of the most famous arguments in mathematics (full details in the example). To test a single number n for primality, trial division by primes up to $\\sqrt n$ suffices: if $n = ab$ with both factors greater than $\\sqrt n$, the product would exceed n, reducing the work from n tests to roughly $\\sqrt n$ of them.",
+    "formulas": [
+      {
+        "latex": "n = p_1^{\\alpha_1} p_2^{\\alpha_2} \\cdots p_k^{\\alpha_k}\\qquad (p_1 < p_2 < \\cdots < p_k,\\ \\alpha_i \\ge 1)",
+        "note": "标准分解式：把 n 唯一地写成互异素数幂之积，是整数最常用的「身份证」。",
+        "noteEn": "The standard factorization writes n uniquely as a product of powers of distinct primes."
+      },
+      {
+        "latex": "p \\text{ 为素数} \\iff \\Bigl(p>1\\ \\text{且}\\ \\bigl(p \\mid ab \\implies p \\mid a \\text{ 或 } p \\mid b\\bigr)\\Bigr)",
+        "note": "欧几里得引理：素数整除乘积必整除某个因子——这是算术基本定理唯一性证明的核心工具；逆方向须限定 p>1（p=1 时条件恒成立却不是素数）。",
+        "noteEn": "Euclid's lemma: a prime dividing a product divides one of the factors; it drives uniqueness. The converse needs the restriction p>1 (p=1 satisfies the condition vacuously but is not prime)."
+      },
+      {
+        "latex": "n \\text{ 为合数} \\implies n \\text{ 有素因数 } p \\le \\sqrt{n}",
+        "note": "判素只需试除到 √n：否则两个因数都超过 √n，乘积就会超过 n。",
+        "noteEn": "A composite n has a prime factor ≤ √n, so trial division up to √n decides primality."
+      },
+      {
+        "latex": "p_1 p_2 \\cdots p_k + 1 \\text{ 的所有素因数都异于 } p_1, \\dots, p_k",
+        "note": "欧几里得构造：任何有限的素数表都能被这个数「顶出」一个新素数，故素数无穷多。",
+        "noteEn": "Euclid's construction defeats any finite list of primes, so infinitely many primes exist."
+      },
+      {
+        "latex": "\\tau(n) = (\\alpha_1 + 1)(\\alpha_2 + 1) \\cdots (\\alpha_k + 1),\\qquad \\tau(12) = 3 \\times 2 = 6",
+        "note": "由标准分解式读出的正约数个数公式：各指数加一后相乘。",
+        "noteEn": "The divisor-count formula read off from the standard factorization."
+      }
+    ],
+    "properties": [
+      "唯一性必须读作「不计因子次序」；把相同素数合并为幂并按大小排序后，每个整数的标准分解式唯一。",
+      "由 n = ∏ pᵢ^{αᵢ} 可读出全部正约数：恰为 ∏ pᵢ^{βᵢ}（0 ≤ βᵢ ≤ αᵢ），正约数个数为 ∏(αᵢ + 1)。例如 12 = 2² × 3 有 (2+1)(1+1) = 6 个正约数：1, 2, 3, 4, 6, 12。",
+      "欧几里得引理的推广：若素数 p 整除乘积 a₁a₂…aₘ，则 p 至少整除其中一个 aᵢ（对因子个数归纳）。",
+      "引理中的「素数」不能换成合数：6 整除 2 × 3，但 6 既不整除 2 也不整除 3——唯一性证明必须依赖素数。",
+      "素数有无穷多个；注意欧几里得构造的 N = p₁p₂…pₖ + 1 不一定是素数：2 × 3 × 5 × 7 × 11 × 13 + 1 = 30031 = 59 × 509。"
+    ],
+    "propertiesEn": [
+      "Uniqueness is meant up to the order of factors; after collecting repeated primes into powers and sorting them, every integer has exactly one standard factorization.",
+      "From n = ∏ p_i^{α_i} all positive divisors can be read off: they are the numbers ∏ p_i^{β_i} with 0 ≤ β_i ≤ α_i, so there are ∏(α_i + 1) of them; e.g. 12 = 2² × 3 has six divisors: 1, 2, 3, 4, 6, 12.",
+      "Generalized Euclid lemma: if a prime p divides a₁a₂⋯a_m, then p divides one of the a_i (induction on the number of factors).",
+      "Prime cannot be relaxed to composite in the lemma: 6 divides 2 × 3 yet divides neither factor — which is why uniqueness needs primes.",
+      "There are infinitely many primes; the constructed N = p₁⋯p_k + 1 need not be prime: 2 × 3 × 5 × 7 × 11 × 13 + 1 = 30031 = 59 × 509."
+    ],
+    "examples": [
+      {
+        "problem": "写出 360 的标准分解式与正约数个数，并判断 97 是不是素数。",
+        "solution": "逐次分解：$360 = 2 \\times 180 = 2^2 \\times 90 = 2^3 \\times 45$；$45 = 3 \\times 15 = 3^2 \\times 5$。所以 $360 = 2^3 \\times 3^2 \\times 5$。由约数个数公式 $\\tau(360) = (3+1)(2+1)(1+1) = 4 \\times 3 \\times 2 = 24$，即 360 有 24 个正约数。判断 97：$\\sqrt{97} \\approx 9.85$，只需试除素数 2, 3, 5, 7。97 是奇数（2 ∤ 97）；数字和 $9 + 7 = 16$ 不被 3 整除（3 ∤ 97）；末位不是 0 或 5（5 ∤ 97）；$97 = 7 \\times 13 + 6$，余数非 0（7 ∤ 97）。候选素因数全部失败，因此 97 是素数 ✓。"
+      },
+      {
+        "problem": "证明：素数有无穷多个。",
+        "solution": "用反证法。假设素数只有有限多个，把它们全部列出：$p_1, p_2, \\dots, p_k$（$k \\ge 1$）。构造 $N = p_1 p_2 \\cdots p_k + 1$。由于 $N > 1$，N 必有素因数 p。按假设，p 必是列表中的某个 $p_i$。但 $p_i$ 整除乘积 $p_1 \\cdots p_k$，而 N 比它多 1（N 除以 $p_i$ 余 1），所以 $p_i \\nmid N$，与 $p_i \\mid N$ 矛盾。假设不成立，故素数有无穷多个。∎ 补一句：证明只用到「N 有一个表外素因数」，并不需要 N 本身是素数——例如 $2 \\times 3 \\times 5 \\times 7 \\times 11 \\times 13 + 1 = 30031 = 59 \\times 509$ 就是合数。"
+      }
+    ],
+    "links": [
+      "factors-multiples",
+      "divisibility-algorithm",
+      "gcd-euclidean-algorithm",
+      "arithmetic-functions",
+      "zeta-function"
+    ]
+  },
+  {
+    "id": "congruence-basics",
+    "title": "同余及其运算",
+    "titleEn": "Congruences and Modular Arithmetic",
+    "branch": "number",
+    "level": 3,
+    "summary": "同余 a ≡ b (mod m) 即 m 整除 a − b；加减乘与乘方可整体搬进模运算，除法要当心。",
+    "summaryEn": "Congruence a ≡ b (mod m) means m divides a − b; sums, differences, products and powers descend to residues, while division needs care.",
+    "definition": "设 $m$ 是正整数。若 $m \\mid (a - b)$，就说 $a$ 与 $b$ **对模 $m$ 同余**，记作 $a \\equiv b \\pmod m$；不整除时记 $a \\not\\equiv b \\pmod m$。换句话说，$a \\equiv b$ 当且仅当 a、b 除以 m 的**余数相同**。例如 15 与 3 除以 12 都余 3，所以 $15 \\equiv 3 \\pmod{12}$；负数同样处理：$-1 \\equiv 11 \\pmod{12}$，因为 $-1 - 11 = -12$ 被 12 整除。\n\n同余是一个**等价关系**（自反、对称、传递），它把整数按余数分成堆，每一堆叫一个**同余类**（剩余类）。模 $m$ 下恰好有 m 个同余类 $[0], [1], \\dots, [m-1]$，每个整数属于且只属于其中一类，$0, 1, \\dots, m-1$ 构成一组**完全剩余系**。同余类之间可以自然地相加、相乘，这正是把无限多的整数折叠进有限 m 个格子的核心思想。\n\n同余的强大之处在于**运算可以整体搬入模世界**：若 $a \\equiv b$ 且 $c \\equiv d \\pmod m$，则 $a \\pm c \\equiv b \\pm d$，$ac \\equiv bd$，进而 $a^n \\equiv b^n \\pmod m$。于是算大指数不再需要硬乘：求 $3^{100}$ 除以 7 的余数，只要找到 $3^6 \\equiv 1 \\pmod 7$，把指数 100 拆成 $6 \\times 16 + 4$，立刻得到答案（见例题）。\n\n唯一的陷阱是**除法**：$ac \\equiv bc \\pmod m$ 一般不推出 $a \\equiv b \\pmod m$，只有 $c$ 与模 m **互素**时才可以直接约去；否则正确的结论是把模除以 $\\gcd(c, m)$。日常生活中同余无处不在：时钟走一圈就回到原位（模 12 或 24），奇偶性是模 2 的观点，身份证号与 ISBN 的最后一位则是取模校验码。",
+    "definitionEn": "Fix a positive integer m. We write $a \\equiv b \\pmod m$ and say a and b are **congruent modulo m** when $m \\mid (a-b)$; otherwise $a \\not\\equiv b$. Equivalently, a and b are congruent exactly when they leave the **same remainder** upon division by m. For instance $15 \\equiv 3 \\pmod{12}$, and negatives are covered too: $-1 \\equiv 11 \\pmod{12}$ since $-1 - 11 = -12$.\n\nCongruence is an **equivalence relation** — reflexive, symmetric, transitive — so it partitions the integers into **residue classes**. Modulo m there are exactly m classes, $[0], [1], \\dots, [m-1]$, and $0, 1, \\dots, m-1$ form a **complete residue system**. Residue classes can be added and multiplied, folding infinite integer arithmetic into m slots.\n\nThe power of congruence is that **operations descend to residues**: if $a \\equiv b$ and $c \\equiv d \\pmod m$, then $a \\pm c \\equiv b \\pm d$ and $ac \\equiv bd \\pmod m$, hence $a^n \\equiv b^n \\pmod m$. Huge powers become feasible: to find the remainder of $3^{100}$ modulo 7 it is enough to notice $3^6 \\equiv 1 \\pmod 7$ and split $100 = 6 \\times 16 + 4$ (see the example).\n\nThe one trap is **division**: $ac \\equiv bc \\pmod m$ does not imply $a \\equiv b \\pmod m$ in general; cancellation is valid only when c is **coprime** to m, and otherwise the honest conclusion is congruence modulo $m/\\gcd(c,m)$. Congruences are everywhere in daily life: clock arithmetic (mod 12 or 24), parity (mod 2), and the check digits of ID numbers and ISBNs, which are congruences in disguise.",
+    "formulas": [
+      {
+        "latex": "a \\equiv b \\pmod m \\iff m \\mid (a - b)",
+        "note": "同余的定义：a、b 之差被 m 整除；等价说法是两者除以 m 余数相同。",
+        "noteEn": "Definition: a ≡ b (mod m) iff m divides a − b, i.e. they share the same remainder."
+      },
+      {
+        "latex": "a \\equiv b,\\ c \\equiv d \\pmod m \\implies a \\pm c \\equiv b \\pm d,\\quad ac \\equiv bd \\pmod m",
+        "note": "加减乘与同余兼容：可以把整个算式搬进模运算。",
+        "noteEn": "Addition, subtraction and multiplication are compatible with congruence."
+      },
+      {
+        "latex": "a \\equiv b \\pmod m \\implies a^n \\equiv b^n \\pmod m \\qquad (n \\ge 1)",
+        "note": "乘方保持同余：大指数计算降幂的依据。",
+        "noteEn": "Powers preserve congruence, enabling exponent reduction for large exponents."
+      },
+      {
+        "latex": "ac \\equiv bc \\pmod m \\implies a \\equiv b \\pmod{\\dfrac{m}{(c, m)}}",
+        "note": "一般消去律：消去 c 之后模要除以 gcd(c, m)，这是最精确的结论。",
+        "noteEn": "The precise cancellation rule: the modulus shrinks to m/gcd(c, m)."
+      },
+      {
+        "latex": "(c, m) = 1 \\implies \\bigl(ac \\equiv bc \\pmod m \\iff a \\equiv b \\pmod m\\bigr)",
+        "note": "只有 c 与 m 互素时才能直接约去；不互素时约去会出错（见例题反例）。",
+        "noteEn": "Cancellation by c is legitimate only when c is coprime to m; otherwise it fails."
+      }
+    ],
+    "properties": [
+      "同余是等价关系：a ≡ a；a ≡ b 推出 b ≡ a；a ≡ b、b ≡ c 推出 a ≡ c（模 m 下）。",
+      "模 m 恰有 m 个同余类 [0], [1], …, [m−1]；每个整数同余于 0, 1, …, m−1 中唯一的数。",
+      "多项式同余：若 a ≡ b (mod m)，则对任意整系数多项式 P 有 P(a) ≡ P(b) (mod m)（由加减乘兼容逐项推出）。",
+      "模的约化：若 a ≡ b (mod m) 且正数 m′ 整除 m，则 a ≡ b (mod m′)。例如 x ≡ 7 (mod 12) 可推出 x ≡ 1 (mod 3)。",
+      "消去律的完整版本：ac ≡ bc (mod m) 当且仅当 a ≡ b (mod m/(c, m))；当 (c, m) = 1 时它退化为直接约去。"
+    ],
+    "propertiesEn": [
+      "Congruence is an equivalence relation: a ≡ a; a ≡ b implies b ≡ a; and a ≡ b, b ≡ c imply a ≡ c (all modulo m).",
+      "There are exactly m residue classes [0], [1], …, [m−1] modulo m, and every integer is congruent to exactly one of 0, 1, …, m−1.",
+      "Polynomials respect congruence: if a ≡ b (mod m), then P(a) ≡ P(b) (mod m) for every integer-coefficient polynomial P.",
+      "Reducing the modulus: if a ≡ b (mod m) and a positive m′ divides m, then a ≡ b (mod m′); e.g. x ≡ 7 (mod 12) implies x ≡ 1 (mod 3).",
+      "Full cancellation rule: ac ≡ bc (mod m) if and only if a ≡ b (mod m/(c, m)); when (c, m) = 1 it reduces to plain cancellation."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        30
+      ],
+      "points": [
+        {
+          "at": 3,
+          "label": "3",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 15,
+          "label": "15",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 27,
+          "label": "27",
+          "color": "#06d6a0"
+        }
+      ],
+      "title": "3 ≡ 15 ≡ 27 (mod 12)：相邻两数都相差 12"
+    },
+    "examples": [
+      {
+        "problem": "求 $3^{100}$ 除以 7 的余数。",
+        "solution": "先找 3 的幂模 7 的规律：$3^1 \\equiv 3$，$3^2 = 9 \\equiv 2$，$3^3 \\equiv 3 \\times 2 = 6$，$3^4 \\equiv 3 \\times 6 = 18 \\equiv 4$，$3^5 \\equiv 3 \\times 4 = 12 \\equiv 5$，$3^6 \\equiv 3 \\times 5 = 15 \\equiv 1 \\pmod 7$（也可直接算 $3^6 = 729 = 7 \\times 104 + 1$）。由乘方保持同余：$3^{100} = 3^{6 \\times 16 + 4} = (3^6)^{16} \\times 3^4 \\equiv 1^{16} \\times 4 = 4 \\pmod 7$。所以 $3^{100}$ 除以 7 余 4。核对：$100 = 6 \\times 16 + 4$ ✓，$3^4 = 81 = 7 \\times 11 + 4$ ✓。"
+      },
+      {
+        "problem": "判断说法「由 $2 \\times 3 \\equiv 2 \\times 0 \\pmod 6$ 约去 2，得到 $3 \\equiv 0 \\pmod 6$」是否正确；若不对，给出正确的消去结论。",
+        "solution": "前半步没错：$2 \\times 3 = 6$，$2 \\times 0 = 0$，$6 - 0 = 6$ 被 6 整除，确实 $2 \\times 3 \\equiv 2 \\times 0 \\pmod 6$。但约去 2 得到 $3 \\equiv 0 \\pmod 6$ 是**错误**的：$6 \\nmid (3 - 0)$，即 $6 \\nmid 3$。原因在于 $\\gcd(2, 6) = 2 \\ne 1$，c 与模 m 不互素，不能直接约。正确的消去公式是 $ac \\equiv bc \\pmod m \\Rightarrow a \\equiv b \\pmod{m/\\gcd(c, m)}$，这里就是 $3 \\equiv 0 \\pmod{6/2}$，即 $3 \\equiv 0 \\pmod 3$，验算：$3 - 0 = 3$ 被 3 整除 ✓。结论：**互素才能直接约，不互素时模要除以 gcd**。"
+      }
+    ],
+    "links": [
+      "divisibility-algorithm",
+      "linear-congruence",
+      "chinese-remainder-theorem",
+      "fermat-little-theorem",
+      "rsa-cryptography"
+    ]
+  },
+  {
+    "id": "linear-congruence",
+    "title": "一次同余方程",
+    "titleEn": "Linear Congruences",
+    "branch": "number",
+    "level": 3,
+    "summary": "一次同余方程 ax ≡ b (mod m) 当且仅当 gcd(a, m) 整除 b 时有解，且恰有 gcd(a, m) 个解。",
+    "summaryEn": "The linear congruence ax ≡ b (mod m) is solvable exactly when gcd(a, m) divides b, and then has exactly gcd(a, m) solutions.",
+    "definition": "形如 $ax \\equiv b \\pmod m$（$m > 0$）的方程叫**一次同余方程**，未知数 $x$ 取整数，解按**同余类**计。因为同余只认余数，若 $x_0$ 是一个解，则 $x_0 + km$（k 为任意整数）都是解，我们通常只报告 $0, 1, \\dots, m-1$ 中的解。求**逆元**的方程 $ax \\equiv 1 \\pmod m$ 是最重要的一类特例。\n\n记 $d = \\gcd(a, m)$。**方程有解当且仅当 $d \\mid b$**。必要性：若 $ax \\equiv b \\pmod m$，则 $m \\mid (ax - b)$，即存在整数 k 使 $b = ax - km$；因为 d 同时整除 a 与 m，d 整除右边，所以 $d \\mid b$。充分性由下面的约化步骤给出。这个充要条件与一次不定方程 $ax - my = b$ 的可解条件完全一致——两个问题本质上是一个。\n\n有解时解的个数**恰好是 d 个**（模 m 两两不同余，不多也不少）。求解分三步：第一步**约化**——令 $a' = a/d$、$b' = b/d$、$m' = m/d$，当 $d \\mid b$ 时原方程等价于 $a'x \\equiv b' \\pmod{m'}$，此时 $\\gcd(a', m') = 1$。第二步**求逆元**——用扩展欧几里得算法解 $a'u + m'v = 1$，则 $u \\equiv (a')^{-1} \\pmod{m'}$。第三步**补全**——$x \\equiv (a')^{-1} b' \\pmod{m'}$ 是模 m′ 下的唯一解，再取 $x_0, x_0 + m', x_0 + 2m', \\dots, x_0 + (d-1)m'$，就得到模 m 下全部 d 个解。\n\n这条流程把所有一次同余问题化归为「用带余除法求逆元」，与后续的费马小定理、欧拉定理、中国剩余定理和 RSA 一脉相承。换个角度看，$ax \\equiv b \\pmod m$ 等价于一次不定方程 $ax - my = b$：同余方程是丢番图方程「只看 x」的版本，两者的求解技巧互为镜像。",
+    "definitionEn": "An equation $ax \\equiv b \\pmod m$ (with $m > 0$) is called a **linear congruence**; the unknown x ranges over integers and solutions are counted modulo m. Since only residues matter, once $x_0$ solves it so does $x_0 + km$ for every integer k, and one usually lists the solutions among $0, 1, \\dots, m-1$. The special case $ax \\equiv 1 \\pmod m$ computes the **inverse** of a modulo m.\n\nLet $d = \\gcd(a,m)$. The equation is solvable **if and only if $d \\mid b$**. Necessity: from $ax \\equiv b \\pmod m$ we get $b = ax - km$ for some integer k, and d divides a and m, hence divides b. Sufficiency comes from the reduction below. This criterion is exactly the solvability condition of the linear Diophantine equation $ax - my = b$ — the two problems are one.\n\nWhen solvable there are **exactly d pairwise incongruent solutions modulo m**. The algorithm has three steps. Reduce: set $a' = a/d$, $b' = b/d$, $m' = m/d$; the equation becomes $a'x \\equiv b' \\pmod{m'}$ with $\\gcd(a',m')=1$. Invert: run the extended Euclidean algorithm on $a'u + m'v = 1$ to get $u \\equiv (a')^{-1} \\pmod{m'}$. Combine: $x \\equiv (a')^{-1}b' \\pmod{m'}$ is the unique solution modulo m', and adding $km'$ for $k = 0, \\dots, d-1$ lists all d solutions modulo m.\n\nEverything reduces to finding an inverse with the Euclidean algorithm; the same pattern recurs in Fermat's little theorem, Euler's theorem, the Chinese remainder theorem and RSA. Equivalently, $ax \\equiv b \\pmod m$ encodes the linear Diophantine equation $ax - my = b$: a linear congruence is its projection onto x, and the solution techniques mirror each other.",
+    "formulas": [
+      {
+        "latex": "ax \\equiv b \\pmod m \\text{ 有解} \\iff \\gcd(a, m) \\mid b",
+        "note": "有解判别（充要条件）：与不定方程 ax − my = b 的可解条件完全相同。",
+        "noteEn": "Solvability criterion, identical to that of the Diophantine equation ax − my = b."
+      },
+      {
+        "latex": "d = \\gcd(a, m) \\mid b \\implies \\text{恰有 } d \\text{ 个解模 } m \\text{ 两两不同余}",
+        "note": "解的个数：有解时不多不少，恰有 d 个同余类。",
+        "noteEn": "Exactly d pairwise incongruent solutions modulo m whenever d = gcd(a, m) divides b."
+      },
+      {
+        "latex": "a' x \\equiv b' \\pmod{m'},\\qquad a' = \\frac{a}{d},\\quad b' = \\frac{b}{d},\\quad m' = \\frac{m}{d}",
+        "note": "约化步骤：除以 d 后 a′ 与 m′ 互素，逆元存在，且当 d | b 时与原方程等价。",
+        "noteEn": "Reduction: after dividing by d, a′ is invertible modulo m′ and the equation is equivalent."
+      },
+      {
+        "latex": "x \\equiv (a')^{-1} b' \\pmod{m'},\\qquad x \\equiv x_0 + k \\cdot \\frac{m}{d} \\pmod m \\quad (k = 0, 1, \\dots, d-1)",
+        "note": "先求模 m′ 的唯一解 x₀，再以步长 m/d 补出全部 d 个解。",
+        "noteEn": "Solve uniquely modulo m′, then list all d solutions in steps of m/d."
+      },
+      {
+        "latex": "(a, m) = 1 \\implies x \\equiv a^{-1} b \\pmod m \\text{ 是唯一解}",
+        "note": "a 与 m 互素时最省事：任何 b 都恰有一个解；ax ≡ 1 唯一确定 a 的逆元。",
+        "noteEn": "When (a, m) = 1 every b has exactly one solution; ax ≡ 1 defines the unique inverse."
+      }
+    ],
+    "properties": [
+      "有解判别 d | b：d 不整除 b 时一个解都没有，如 6x ≡ 5 (mod 8)（gcd(6, 8) = 2 不整除 5）。左边永远是 d 的倍数，b 必须同样如此。",
+      "解的结构：有解时恰有 d 个模 m 两两不同余的解，它们是一个模 m′ = m/d 的解 x₀ 的 d 次平移：x₀, x₀ + m′, …, x₀ + (d − 1)m′。",
+      "与一次不定方程等价：ax ≡ b (mod m) 当且仅当存在整数 y 使 ax − my = b；两个问题的解一一对应，技巧互为镜像。",
+      "约化后逆元存在且唯一：d | b 时 a′ 与 m′ 互素，逆元可由扩展欧几里得算法（a′u + m′v = 1）显式求出。",
+      "齐次情形 ax ≡ 0 (mod m)：全部解为 x ≡ 0 (mod m/d)，即模 m 下的 d 个同余类——这是剩余类中「零因子」的具体样子。"
+    ],
+    "propertiesEn": [
+      "Solvability is decided by d | b: if d = gcd(a, m) does not divide b there is no solution (e.g. 6x ≡ 5 (mod 8)); the left side is always a multiple of d, so b must be one too.",
+      "Solution structure: when solvable there are exactly d pairwise incongruent solutions modulo m, obtained by shifting one solution x₀ of the reduced congruence in steps of m/d.",
+      "Equivalence with a Diophantine equation: ax ≡ b (mod m) holds iff ax − my = b for some integer y; the two viewpoints mirror each other.",
+      "After reduction a′ is coprime to m′, so its inverse exists uniquely and is computed explicitly by the extended Euclidean algorithm (a′u + m′v = 1).",
+      "Homogeneous case: ax ≡ 0 (mod m) has exactly the solutions x ≡ 0 (mod m/d) modulo m — zero divisors of the residue ring made concrete."
+    ],
+    "examples": [
+      {
+        "problem": "解一次同余方程 $8x \\equiv 12 \\pmod{20}$。",
+        "solution": "第一步，算判别式：$d = \\gcd(8, 20) = 4$。由于 $4 \\mid 12$，方程有解，且恰有 4 个模 20 两两不同余的解。第二步，约化：8、12、20 同除以 4，得 $2x \\equiv 3 \\pmod 5$，此时 $\\gcd(2, 5) = 1$。第三步，求逆元：$2 \\times 3 = 6 \\equiv 1 \\pmod 5$，故 $2^{-1} \\equiv 3 \\pmod 5$（也可由扩展欧几里得 $2 \\times 3 + 5 \\times (-1) = 1$ 得到）。于是 $x \\equiv 3 \\times 3 = 9 \\equiv 4 \\pmod 5$。第四步，补全：全部解为 $x \\equiv 4 + 5k$（k = 0, 1, 2, 3），即 $x \\equiv 4, 9, 14, 19 \\pmod{20}$。逐解验算：$8 \\times 4 = 32$，$32 - 12 = 20$ 被 20 整除 ✓；$8 \\times 9 = 72$，$72 - 12 = 60 = 3 \\times 20$ ✓；$8 \\times 14 = 112$，$112 - 12 = 100 = 5 \\times 20$ ✓；$8 \\times 19 = 152$，$152 - 12 = 140 = 7 \\times 20$ ✓。四个解全部通过。"
+      },
+      {
+        "problem": "判断 $6x \\equiv 5 \\pmod 8$ 是否有解，并说明理由。",
+        "solution": "计算 $d = \\gcd(6, 8) = 2$，而 $b = 5$ 不被 2 整除，判别条件 $d \\mid b$ 不满足，所以方程**无解**。也可以直接推理：若同余式成立，则存在整数 k 使 $6x = 5 + 8k$；左边 $6x$ 是偶数，右边 $5 + 8k$ 是奇数，矛盾。两种说法一致：左边永远是 2 的倍数，而要求的目标 5 是奇数，差值 $6x - 5$ 不可能被 8 整除。"
+      }
+    ],
+    "links": [
+      "congruence-basics",
+      "gcd-euclidean-algorithm",
+      "diophantine-equations",
+      "chinese-remainder-theorem"
+    ]
+  },
+  {
+    "id": "chinese-remainder-theorem",
+    "title": "中国剩余定理",
+    "titleEn": "The Chinese Remainder Theorem",
+    "branch": "number",
+    "level": 4,
+    "summary": "模两两互素时，同余方程组在模乘积意义下有唯一解，且可显式构造出这个解。",
+    "summaryEn": "With pairwise coprime moduli a system of congruences has a unique solution modulo the product, given by an explicit construction.",
+    "definition": "**中国剩余定理**（孙子定理）回答的是同余**方程组**的问题：给定 $x \\equiv a_1 \\pmod{m_1}$、$x \\equiv a_2 \\pmod{m_2}$、……、$x \\equiv a_k \\pmod{m_k}$，能否找到一个 x 同时满足全部式子？定理说：若模 $m_1, \\dots, m_k$ **两两互素**（任意两个的最大公因数为 1），则这样的 x 存在，并且所有解恰好是模 $M = m_1 m_2 \\cdots m_k$ 意义下的同一个同余类——**解存在且唯一（模 M）**。它最早见于中国《孙子算经》的「物不知数」问题，故称孙子定理，英文名 Chinese Remainder Theorem 即由此而来。\n\n定理的证明是**构造性**的，解可以显式写出：先记 $M_i = M / m_i$（其余所有模的乘积），再求 $M_i$ 在模 $m_i$ 下的**逆元** $t_i$，即 $M_i t_i \\equiv 1 \\pmod{m_i}$。逆元一定存在，因为 $M_i$ 与 $m_i$ 互素（这正是两两互素前提的用处），用扩展欧几里得算法即可求出。于是 $x \\equiv a_1 M_1 t_1 + a_2 M_2 t_2 + \\cdots + a_k M_k t_k \\pmod M$ 就是方程组的解。\n\n为什么这个和式对？把它代入第 i 个方程看：当 $j \\ne i$ 时，$M_j = M/m_j$ 里含有因子 $m_i$，所以 $M_j \\equiv 0 \\pmod{m_i}$，这些项全部消失；只剩第 i 项 $a_i M_i t_i \\equiv a_i \\times 1 = a_i \\pmod{m_i}$——正好是要满足的式子。每一项「在自己的模下扮演 $a_i$，在其他模下自动消失」，这是构造型证明的经典样张。\n\n唯一性的论证同样简短：若 x、x′ 都是解，则每个 $m_i$ 都整除 $x - x'$；模两两互素又保证乘积 $M$ 也整除 $x - x'$（互素的因数可以「合并」整除），故 $x \\equiv x' \\pmod M$。**两两互素是核心前提**：一旦缺失，存在性或唯一性都可能失败，例如 $x \\equiv 1 \\pmod 2$ 与 $x \\equiv 0 \\pmod 4$ 无解。非互素情形的完整理论超出本节点范围：对两个同余式而言，需要额外的一致性条件 $\\gcd(m_1, m_2) \\mid (a_1 - a_2)$。",
+    "definitionEn": "The **Chinese Remainder Theorem** (Sunzi's theorem) answers a question about **systems** of congruences: given $x \\equiv a_1 \\pmod{m_1}, \\dots, x \\equiv a_k \\pmod{m_k}$, is there one integer satisfying all of them? The theorem says: if the moduli $m_1, \\dots, m_k$ are **pairwise coprime** (every two of them have gcd 1), then a solution exists and is **unique modulo** $M = m_1 m_2 \\cdots m_k$ — that is, all solutions form a single residue class mod M. Its earliest appearance is the unknown-number problem in the Chinese classic Sunzi Suanjing, which gave the theorem its name.\n\nThe proof is **constructive**: let $M_i = M/m_i$, the product of all moduli except $m_i$, and let $t_i$ be the **inverse** of $M_i$ modulo $m_i$, i.e. $M_i t_i \\equiv 1 \\pmod{m_i}$. Such an inverse exists because $M_i$ is coprime to $m_i$ (this is where pairwise coprimality is used) and is computed by the extended Euclidean algorithm. Then $x \\equiv a_1 M_1 t_1 + \\cdots + a_k M_k t_k \\pmod M$ solves the system.\n\nWhy does the sum work? Reduce it modulo $m_i$. Every term with $j \\ne i$ vanishes, since $m_i$ divides $M_j$; only the i-th term remains, and it equals $a_i M_i t_i \\equiv a_i \\times 1 = a_i \\pmod{m_i}$ — exactly the i-th requirement. Each term handles its own congruence and disappears in all the others, the classic shape of a constructive proof.\n\nUniqueness is equally short: if x and x' both solve the system, every $m_i$ divides $x - x'$, and pairwise coprimality forces their product $M$ to divide $x - x'$ as well; hence $x \\equiv x' \\pmod M$. **Pairwise coprimality is essential**: without it existence or uniqueness may fail — for instance $x \\equiv 1 \\pmod 2$ and $x \\equiv 0 \\pmod 4$ has no solution. The full non-coprime theory lies beyond this node and requires a consistency condition (for two congruences, $\\gcd(m_1,m_2) \\mid (a_1 - a_2)$).",
+    "formulas": [
+      {
+        "latex": "x \\equiv a_i \\pmod{m_i}\\qquad (i = 1, 2, \\dots, k)",
+        "note": "同余方程组；模 m₁, …, mₖ 两两互素是本定理的前提，必须先验证。",
+        "noteEn": "The congruence system; pairwise coprime moduli are the hypothesis to verify first."
+      },
+      {
+        "latex": "M = m_1 m_2 \\cdots m_k,\\qquad M_i = \\frac{M}{m_i}",
+        "note": "M 是最终解的模；Mᵢ 是除 mᵢ 外其余模的乘积，它与 mᵢ 互素，因而在模 mᵢ 下可逆（是可逆元）。",
+        "noteEn": "M is the modulus of the final answer; M_i is the product of all the other moduli."
+      },
+      {
+        "latex": "t_i \\equiv M_i^{-1} \\pmod{m_i}",
+        "note": "逆元 tᵢ 由 (Mᵢ, mᵢ) = 1 保证存在，用扩展欧几里得算法求出。",
+        "noteEn": "The inverse t_i exists since M_i is coprime to m_i and is found by the extended Euclidean algorithm."
+      },
+      {
+        "latex": "x \\equiv a_1 M_1 t_1 + a_2 M_2 t_2 + \\cdots + a_k M_k t_k \\pmod M",
+        "note": "显式解公式：第 i 项在模 mᵢ 下化为 aᵢ，在其他模下化为 0。",
+        "noteEn": "The explicit solution: the i-th term equals a_i mod m_i and vanishes modulo all the others."
+      },
+      {
+        "latex": "m_1, \\dots, m_k \\text{ 两两互素},\\quad m_i \\mid n\\ (i = 1, \\dots, k) \\implies M \\mid n",
+        "note": "唯一性所用的合并引理：两两互素的模整除同一个数时，乘积也整除它。",
+        "noteEn": "The merging lemma behind uniqueness: pairwise coprime divisors of n combine to divide n."
+      }
+    ],
+    "properties": [
+      "核心前提是模两两互素：只要求任意两个的最大公因数为 1，模本身可以是合数（如 4、9、25 两两互素）。缺少这一条，存在性与唯一性都可能失败。",
+      "解的唯一性在模 M 意义下：任意两个解相差 M 的整数倍，全部解就是 x ≡ x₀ (mod M)。",
+      "构造解自动成立：由 Mᵢtᵢ ≡ 1 (mod mᵢ) 与 Mᵢ ≡ 0 (mod mⱼ)（j ≠ i），代入第 i 个方程恰好得到 aᵢ。",
+      "逐次合并法：两两互素时也可先解前两个方程、把结果合并成模 m₁m₂ 的一个同余式，再逐个与后续方程合并——手工计算更常用。",
+      "非互素情形超出本节点范围：两个同余式 x ≡ a₁ (mod m₁) 与 x ≡ a₂ (mod m₂) 有公共解当且仅当 gcd(m₁, m₂) | (a₁ − a₂)，此时解在模 lcm(m₁, m₂) 意义下唯一；例如 x ≡ 1 (mod 2) 与 x ≡ 0 (mod 4) 无解。"
+    ],
+    "propertiesEn": [
+      "The hypothesis is pairwise coprimality: every two moduli must have gcd 1; the moduli themselves may be composite (4, 9, 25 work). Without it, existence or uniqueness can fail.",
+      "Uniqueness holds modulo M: any two solutions differ by a multiple of M, so all solutions form the single class x ≡ x₀ (mod M).",
+      "The construction verifies itself: using M_i t_i ≡ 1 (mod m_i) and M_i ≡ 0 (mod m_j) for j ≠ i, substituting into the i-th congruence gives exactly a_i.",
+      "Merging method: with coprime moduli one can first solve two congruences, merge them into one modulo m₁m₂, then merge with the next — handier in practice.",
+      "The non-coprime case lies beyond this node: two congruences x ≡ a₁ (mod m₁), x ≡ a₂ (mod m₂) share a solution iff gcd(m₁, m₂) | (a₁ − a₂), unique modulo their lcm; e.g. x ≡ 1 (mod 2), x ≡ 0 (mod 4) has none."
+    ],
+    "examples": [
+      {
+        "problem": "解「物不知数」：$x \\equiv 2 \\pmod 3$，$x \\equiv 3 \\pmod 5$，$x \\equiv 2 \\pmod 7$。",
+        "solution": "模 3、5、7 两两互素（gcd(3, 5) = gcd(3, 7) = gcd(5, 7) = 1），故解在模 $M = 3 \\times 5 \\times 7 = 105$ 下唯一。逐个算逆元：$M_1 = M/3 = 35$，35 除以 3 余 2，由 $2 \\times 2 = 4 \\equiv 1 \\pmod 3$ 取 $t_1 = 2$；$M_2 = M/5 = 21$，$21 \\equiv 1 \\pmod 5$，取 $t_2 = 1$；$M_3 = M/7 = 15$，$15 \\equiv 1 \\pmod 7$，取 $t_3 = 1$。构造解：$x \\equiv 2 \\times 35 \\times 2 + 3 \\times 21 \\times 1 + 2 \\times 15 \\times 1 = 140 + 63 + 30 = 233 \\equiv 233 - 2 \\times 105 = 23 \\pmod{105}$。验算：$23 = 3 \\times 7 + 2$ ✓；$23 = 5 \\times 4 + 3$ ✓；$23 = 7 \\times 3 + 2$ ✓。全部解为 $x \\equiv 23 \\pmod{105}$（《孙子算经》的答案即 23）。"
+      },
+      {
+        "problem": "解方程组 $x \\equiv 1 \\pmod 5$，$x \\equiv 2 \\pmod 7$，$x \\equiv 3 \\pmod 9$。",
+        "solution": "5、7、9 两两互素（注意 9 不是素数，但仍与 5、7 互素），$M = 5 \\times 7 \\times 9 = 315$。逐个算逆元：$M_1 = 315/5 = 63$，$63 \\equiv 3 \\pmod 5$，由 $3 \\times 2 = 6 \\equiv 1 \\pmod 5$ 取 $t_1 = 2$；$M_2 = 315/7 = 45$，$45 \\equiv 3 \\pmod 7$，由 $3 \\times 5 = 15 \\equiv 1 \\pmod 7$ 取 $t_2 = 5$；$M_3 = 315/9 = 35$，$35 \\equiv 8 \\pmod 9$，由 $8 \\times 8 = 64 \\equiv 1 \\pmod 9$ 取 $t_3 = 8$。构造解：$x \\equiv 1 \\times 63 \\times 2 + 2 \\times 45 \\times 5 + 3 \\times 35 \\times 8 = 126 + 450 + 840 = 1416 \\equiv 1416 - 4 \\times 315 = 156 \\pmod{315}$。验算：$156 = 5 \\times 31 + 1$ ✓；$156 = 7 \\times 22 + 2$ ✓；$156 = 9 \\times 17 + 3$ ✓。全部解为 $x \\equiv 156 \\pmod{315}$。"
+      }
+    ],
+    "links": [
+      "congruence-basics",
+      "linear-congruence",
+      "gcd-euclidean-algorithm",
+      "diophantine-equations",
+      "rsa-cryptography"
+    ]
+  }
+]

@@ -1,0 +1,618 @@
+[
+  {
+    "id": "regular-surface",
+    "title": "正则曲面与参数表示",
+    "titleEn": "Regular Surfaces and Parametrization",
+    "branch": "differential-geometry",
+    "level": 4,
+    "summary": "用两个参数的光滑映射 r(u,v) 铺出一张曲面，并要求 r_u、r_v 处处线性无关（r_u × r_v ≠ 0）——这条正则性条件保证每点都有切平面，是微分几何一切计算的起点。",
+    "summaryEn": "A surface swept out by a smooth two-parameter map r(u,v) with r_u and r_v linearly independent everywhere (r_u × r_v ≠ 0) — the regularity condition guaranteeing a tangent plane at every point, and the starting point of every computation in differential geometry.",
+    "definition": "设 $D$ 是 $\\mathbb R^2$ 中的区域，$\\mathbf r:D\\to\\mathbb R^3$ 是光滑映射（各阶偏导数连续）：\n$$\\mathbf r(u,v)=\\bigl(x(u,v),\\ y(u,v),\\ z(u,v)\\bigr).$$\n把 $(u,v)$ 想成一张方格纸上的一对坐标，$u$ 曲线与 $v$ 曲线把 $D$ 划成小格子；$\\mathbf r$ 把这张纸弯曲、拉伸进三维空间，得到一张**参数曲面**。如果每一点的偏导向量 $\\mathbf r_u=\\partial\\mathbf r/\\partial u$ 与 $\\mathbf r_v=\\partial\\mathbf r/\\partial v$ **线性无关**，即\n$$\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0,$$\n就称这是曲面的一张**正则参数化**，相应的曲面称为**正则曲面**。等价地说，偏导构成的 Jacobi 矩阵 $\\begin{pmatrix}x_u&y_u&z_u\\\\x_v&y_v&z_v\\end{pmatrix}$ 的秩恒为 $2$。它保证两个切向量张成一个真正的二维平面，并且这个平面随点连续地变化——切平面、法向量、弧长、曲率才因此有了意义。（有些教材还要求 $\\mathbf r$ 是从 $D$ 到像集的同胚，即参数化不自我相交；但真正干活的条件就是光滑加上 $\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0$。）\n\n为什么必须排除 $\\mathbf r_u\\times\\mathbf r_v=\\mathbf 0$？看球面的经纬网 $\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$：在 $u=0$ 与 $u=\\pi$（南、北极）处两个偏导向量并成一条线，参数网被「捏」住了，曲面在那里没有唯一的切平面。所以正则性要逐点检验，一张曲面常常需要多块参数化拼起来覆盖（球面至少要两块，例如分别去掉北极与南极）。\n\n另一个必须牢记的事实：**参数化不唯一**。同一张平面可以写 $(u,v,0)$，也可以写 $(u+v,\\ u-v,\\ 0)$；同一张球面可以用经纬网，也可以用球极投影。不同参数化之间由**重参数变换** $(\\tilde u,\\tilde v)\\mapsto\\bigl(u(\\tilde u,\\tilde v),\\ v(\\tilde u,\\tilde v)\\bigr)$ 联系：只要 Jacobi 行列式 $\\partial(u,v)/\\partial(\\tilde u,\\tilde v)\\ne0$，正则性就保持不变（行列式为负时曲面被翻转了定向）。「换坐标而几何不变」正是微分几何区分「曲面自身的性质」与「坐标的产物」的基本手段。",
+    "definitionEn": "Let $D$ be a region in $\\mathbb R^2$ and let $\\mathbf r:D\\to\\mathbb R^3$ be a smooth map (all partial derivatives continuous):\n$$\\mathbf r(u,v)=\\bigl(x(u,v),\\ y(u,v),\\ z(u,v)\\bigr).$$\nThink of $(u,v)$ as coordinates on a sheet of graph paper whose $u$- and $v$-curves cut it into small cells; $\\mathbf r$ bends and stretches that sheet into space, producing a **parametrized surface**. If at every point the partial derivative vectors $\\mathbf r_u=\\partial\\mathbf r/\\partial u$ and $\\mathbf r_v=\\partial\\mathbf r/\\partial v$ are **linearly independent**, i.e.\n$$\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0,$$\nthen the parametrization is called **regular**, and so is the surface. Equivalently, the Jacobian matrix $\\begin{pmatrix}x_u&y_u&z_u\\\\x_v&y_v&z_v\\end{pmatrix}$ has rank $2$ everywhere. This guarantees that the two tangent vectors span a genuine two-dimensional plane which varies continuously — only then do the tangent plane, the normal vector, arc length and curvature make sense. (Some texts additionally require $\\mathbf r$ to be a homeomorphism onto its image, i.e. no self-intersections; but the working condition is smoothness together with $\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0$.)\n\nWhy exclude $\\mathbf r_u\\times\\mathbf r_v=\\mathbf 0$? Consider the latitude–longitude map of the sphere, $\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$: at $u=0$ and $u=\\pi$ (the poles) the two partial derivatives collapse onto one line, the grid pinches, and there is no unique tangent plane. Regularity is therefore checked point by point, and one often needs several parametrizations to cover a surface (the sphere needs at least two, for instance one omitting the north and one omitting the south pole).\n\nOne more fact to remember: **parametrizations are not unique**. The same plane can be written $(u,v,0)$ or $(u+v,\\ u-v,\\ 0)$; the same sphere can use latitude–longitude or stereographic projection. Different parametrizations are related by **reparametrizations** $(\\tilde u,\\tilde v)\\mapsto\\bigl(u(\\tilde u,\\tilde v),\\ v(\\tilde u,\\tilde v)\\bigr)$: as long as the Jacobian $\\partial(u,v)/\\partial(\\tilde u,\\tilde v)\\ne0$, regularity is preserved (a negative determinant merely reverses orientation). This invariance under change of coordinates is how differential geometry separates genuine properties of a surface from artefacts of the coordinates.",
+    "formulas": [
+      {
+        "latex": "\\mathbf r(u,v)=\\bigl(x(u,v),\\ y(u,v),\\ z(u,v)\\bigr),\\qquad \\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0",
+        "note": "正则曲面的两个条件：$\\mathbf r$ 光滑，且偏导向量 $\\mathbf r_u$、$\\mathbf r_v$ 处处线性无关。后者是「有切平面」的保证。",
+        "noteEn": "The two conditions for a regular surface: $\\mathbf r$ is smooth, and the partial derivatives $\\mathbf r_u$, $\\mathbf r_v$ are linearly independent everywhere. The second one guarantees a tangent plane."
+      },
+      {
+        "latex": "\\mathbf r(x,y)=\\bigl(x,\\ y,\\ f(x,y)\\bigr),\\qquad \\mathbf r_x\\times\\mathbf r_y=(-f_x,\\ -f_y,\\ 1)\\ne\\mathbf 0",
+        "note": "图像曲面是最容易构造的正则曲面：叉积的第三个分量恒为 $1$，只要 $f$ 光滑就永远正则。",
+        "noteEn": "A graph surface is the easiest regular surface: the third component of the cross product is identically $1$, so it is regular whenever $f$ is smooth."
+      },
+      {
+        "latex": "\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u),\\qquad |\\mathbf r_u\\times\\mathbf r_v|=R^2\\sin u",
+        "note": "半径 $R$ 的球面：$u\\in(0,\\pi)$ 是极角、$v\\in(0,2\\pi)$ 是方位角。$\\sin u>0$ 处正则，极点 $u=0,\\pi$ 处参数化退化，需要换用别的局部参数化。",
+        "noteEn": "The sphere of radius $R$: $u\\in(0,\\pi)$ is the polar angle and $v\\in(0,2\\pi)$ the azimuth. It is regular where $\\sin u>0$; at the poles $u=0,\\pi$ the map degenerates and another local parametrization is needed."
+      },
+      {
+        "latex": "\\mathbf r(u,v)=\\bigl(f(u)\\cos v,\\ f(u)\\sin v,\\ g(u)\\bigr),\\qquad |\\mathbf r_u\\times\\mathbf r_v|=|f(u)|\\sqrt{f'(u)^2+g'(u)^2}",
+        "note": "曲线 $(f(u),0,g(u))$ 绕 $z$ 轴旋转成的曲面：只要 $f(u)\\ne0$（曲线不在轴上）且 $(f',g')\\ne(0,0)$（曲线本身正则），曲面就正则。",
+        "noteEn": "The surface of revolution obtained by rotating $(f(u),0,g(u))$ about the $z$-axis: it is regular as soon as $f(u)\\ne0$ (the curve stays off the axis) and $(f',g')\\ne(0,0)$ (the curve is itself regular)."
+      },
+      {
+        "latex": "\\tilde{\\mathbf r}(\\tilde u,\\tilde v)=\\mathbf r\\bigl(u(\\tilde u,\\tilde v),\\ v(\\tilde u,\\tilde v)\\bigr),\\qquad \\frac{\\partial(u,v)}{\\partial(\\tilde u,\\tilde v)}\\ne0",
+        "note": "重参数变换：Jacobi 行列式非零时正则性保持、曲面不变；行列式为负则翻转定向。同一张曲面的不同参数化都通过它互相转化。",
+        "noteEn": "Reparametrization: a nonvanishing Jacobian preserves regularity and the surface; a negative determinant reverses orientation. All parametrizations of one surface are related this way."
+      }
+    ],
+    "expression": {
+      "text": "r: (u,v) ↦ (x(u,v), y(u,v), z(u,v)) 光滑，且 r_u × r_v ≠ 0 处处成立",
+      "symbol": "\\mathbf r:U\\subset\\mathbb R^2\\to\\mathbb R^3,\\qquad \\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0",
+      "note": "记号：$U$ 是参数区域，$\\mathbf r_u,\\mathbf r_v$ 是两个偏导向量；正则性要求它们处处线性无关。",
+      "noteEn": "Notation: $U$ is the parameter domain and $\\mathbf r_u,\\mathbf r_v$ the two partial derivatives, required to be linearly independent everywhere."
+    },
+    "properties": [
+      "正则性 $\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0$ 等价于偏导 Jacobi 矩阵秩为 $2$：两族参数曲线在每点横截，不出现尖点、捏点或方向重叠。",
+      "参数化不唯一：不同参数化由 Jacobi 行列式非零的重参数变换互相联系；长度、角度、面积等几何量不随参数化改变，而 $E,F,G$ 的具体表达式会变。",
+      "图像曲面 $\\mathbf r(x,y)=(x,y,f(x,y))$ 永远正则（$f$ 光滑即可），因为 $\\mathbf r_x\\times\\mathbf r_y=(-f_x,-f_y,1)$ 恒不为零；由隐函数定理，任何正则曲面局部都能写成图像。",
+      "闭曲面不能用单块**单射**坐标卡覆盖：球面至少需要两块坐标卡，环面作为坐标卡同样至少需要两块（紧致曲面都不与平面开集同胚）。但环面可以用一块**周期性**正则参数化（允许重叠、不要求单射）覆盖整个曲面：全周期上 $|\\mathbf r_u\\times\\mathbf r_v|=r(R+r\\cos u)>0$。",
+      "正则参数化给出连续的单位法向量 $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$，因此每块参数化都自带局部定向；能否取到整体连续的 $\\mathbf n$ 决定曲面是否可定向。"
+    ],
+    "propertiesEn": [
+      "Regularity $\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0$ is equivalent to the partial-derivative Jacobian having rank $2$: the two families of parameter curves cross transversally, with no cusps, pinches or collapsed directions.",
+      "Parametrizations are not unique: different ones are related by reparametrizations with nonvanishing Jacobian. Lengths, angles and areas do not change, whereas the actual expressions for $E,F,G$ do.",
+      "A graph surface $\\mathbf r(x,y)=(x,y,f(x,y))$ is always regular for smooth $f$, since $\\mathbf r_x\\times\\mathbf r_y=(-f_x,-f_y,1)$ never vanishes; by the implicit function theorem every regular surface is locally a graph.",
+      "A closed compact surface admits no single **injective** chart: the sphere needs at least two charts, and the torus needs at least two as well (no compact surface is homeomorphic to an open subset of the plane). The torus, however, can be covered by one **periodic** regular parametrization (overlapping allowed, injectivity not required): on the full periods $|\\mathbf r_u\times\\mathbf r_v|=r(R+r\\cos u)>0$.",
+      "A regular parametrization provides the continuous unit normal $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$, so every patch carries a local orientation; whether a globally continuous $\\mathbf n$ exists decides orientability of the surface."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "sin(u)*cos(v)",
+        "y": "sin(u)*sin(v)",
+        "z": "cos(u)"
+      },
+      "uRange": [
+        0,
+        3.1416
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        22,
+        30
+      ],
+      "color": "#4cc9f0",
+      "title": "单位球面的参数网 r(u,v)：u 为极角、v 为方位角，极点处参数网退化"
+    },
+    "examples": [
+      {
+        "problem": "证明螺旋面 $\\mathbf r(u,v)=\\bigl(u\\cos v,\\ u\\sin v,\\ cv\\bigr)$（常数 $c>0$，$(u,v)\\in\\mathbb R^2$）处处正则，并求出 $|\\mathbf r_u\\times\\mathbf r_v|$。",
+        "solution": "先求偏导向量：\n$$\\mathbf r_u=(\\cos v,\\ \\sin v,\\ 0),\\qquad \\mathbf r_v=(-u\\sin v,\\ u\\cos v,\\ c).$$\n再用行列式展开叉积：\n$$\\mathbf r_u\\times\\mathbf r_v=\\bigl(c\\sin v,\\ -c\\cos v,\\ u\\bigr).$$\n于是\n$$|\\mathbf r_u\\times\\mathbf r_v|=\\sqrt{c^2\\sin^2v+c^2\\cos^2v+u^2}=\\sqrt{c^2+u^2}>0\\qquad(c>0).$$\n叉积处处非零，故螺旋面处处正则。特别地，在旋转轴 $u=0$ 上 $|\\mathbf r_u\\times\\mathbf r_v|=c\\ne0$：尽管参数网在这里被「旋」得很密，两个切向量仍然张成非退化的平面。"
+      },
+      {
+        "problem": "为什么图像曲面 $z=f(x,y)$ 的参数化永远正则？用它给出球面在北极附近的一块正则参数化，说明经纬网在极点的退化只是参数化的问题。",
+        "solution": "取 $\\mathbf r(x,y)=\\bigl(x,\\ y,\\ f(x,y)\\bigr)$，则 $\\mathbf r_x=(1,0,f_x)$，$\\mathbf r_y=(0,1,f_y)$，叉积为\n$$\\mathbf r_x\\times\\mathbf r_y=(-f_x,\\ -f_y,\\ 1),$$\n第三个分量恒为 $1$，所以 $f$ 光滑时处处正则。球面 $x^2+y^2+z^2=R^2$ 的上半球 $z>0$ 可写成图像\n$$z=\\sqrt{R^2-x^2-y^2},\\qquad x^2+y^2<R^2,$$\n这给出包含北极 $(0,0,R)$ 的一片正则参数化；它与去掉北极的经纬网参数化一起覆盖整个球面。可见「极点不正则」是经纬网这个特殊参数化的现象，球面本身每点都有切平面。"
+      }
+    ],
+    "tags": [
+      "正则曲面",
+      "参数化",
+      "坐标卡",
+      "重参数化",
+      "切向量"
+    ],
+    "links": [
+      "tangent-plane",
+      "first-fundamental-form",
+      "surface-area",
+      "partial-derivative",
+      "curvilinear-coordinates"
+    ]
+  },
+  {
+    "id": "tangent-plane",
+    "title": "切平面与法向量",
+    "titleEn": "Tangent Plane and Normal Vector",
+    "branch": "differential-geometry",
+    "level": 4,
+    "summary": "曲面上过一点的所有曲线切向量拼成二维切平面，它由 r_u、r_v 张成；垂直于它的单位法向量 n = (r_u × r_v)/|r_u × r_v| 是刻画曲面取向与一切曲率计算的基本工具。",
+    "summaryEn": "The velocity vectors of all curves on a surface through a point span the two-dimensional tangent plane generated by r_u and r_v; the unit normal n = (r_u × r_v)/|r_u × r_v| perpendicular to it is the basic tool for orientation and for every curvature computation.",
+    "definition": "设正则曲面 $S$ 由 $\\mathbf r(u,v)$ 给出，$p=\\mathbf r(u_0,v_0)$。考察过 $p$ 的一切曲面曲线 $\\gamma(t)=\\mathbf r\\bigl(u(t),v(t)\\bigr)$，它们在 $p$ 处的速度向量是\n$$\\gamma'(0)=\\mathbf r_u\\,u'(0)+\\mathbf r_v\\,v'(0).$$\n也就是说，速度向量总是 $\\mathbf r_u,\\mathbf r_v$ 的线性组合，落在两者张成的平面里；反过来，任何组合 $a\\mathbf r_u+b\\mathbf r_v$ 都能由参数直线 $u=u_0+at,\\ v=v_0+bt$ 实现。由于正则性保证 $\\mathbf r_u,\\mathbf r_v$ 线性无关，这些向量正好填满一个二维平面，称为曲面在 $p$ 处的**切平面**，记作 $T_pS$：\n$$T_pS=\\operatorname{span}\\{\\mathbf r_u,\\mathbf r_v\\}.$$\n\n与切平面垂直的非零向量叫**法向量**。叉积同时垂直于 $\\mathbf r_u$ 与 $\\mathbf r_v$，于是可以统一取单位法向量\n$$\\mathbf n=\\frac{\\mathbf r_u\\times\\mathbf r_v}{|\\mathbf r_u\\times\\mathbf r_v|}.$$\n交换 $u,v$ 或改用翻转定向的重参数化会让 $\\mathbf n$ 变号——这正是「定向」的来源：曲面本身没有天生的正面反面，是参数化替我们选了一面。\n\n切平面有三种常见写法，做题时挑最省力的。点法式：$(X-p)\\cdot\\mathbf n=0$。图像曲面 $z=f(x,y)$：\n$$z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0),$$\n与多元微积分里的一阶泰勒展开完全一致。隐式曲面 $F(x,y,z)=0$（且 $\\nabla F(p)\\ne\\mathbf 0$）：$\\nabla F(p)\\cdot(X-p)=0$，因为对恒等式 $F(\\mathbf r(u,v))\\equiv0$ 求偏导立即得到 $\\nabla F\\perp\\mathbf r_u,\\mathbf r_v$，梯度自动给出法方向。\n\n切平面的几何意义是「一阶最佳逼近」：展开\n$$\\mathbf r(u_0+\\Delta u,\\ v_0+\\Delta v)=p+\\Delta u\\,\\mathbf r_u+\\Delta v\\,\\mathbf r_v+O(\\Delta^2),$$\n可见无穷小尺度下曲面与切平面重合，曲面对切平面的偏离从二阶项才开始——那正是第二基本形式的用武之地。",
+    "definitionEn": "Let a regular surface $S$ be given by $\\mathbf r(u,v)$ and let $p=\\mathbf r(u_0,v_0)$. Consider all surface curves through $p$, $\\gamma(t)=\\mathbf r\\bigl(u(t),v(t)\\bigr)$. Their velocity vectors at $p$ are\n$$\\gamma'(0)=\\mathbf r_u\\,u'(0)+\\mathbf r_v\\,v'(0),$$\nthat is, always linear combinations of $\\mathbf r_u$ and $\\mathbf r_v$; conversely every combination $a\\mathbf r_u+b\\mathbf r_v$ is realised by the straight parameter line $u=u_0+at,\\ v=v_0+bt$. Since regularity makes the two vectors linearly independent, these velocities fill exactly a two-dimensional plane, the **tangent plane** at $p$, written $T_pS$:\n$$T_pS=\\operatorname{span}\\{\\mathbf r_u,\\mathbf r_v\\}.$$\n\nA nonzero vector orthogonal to the tangent plane is a **normal vector**. The cross product is orthogonal to both $\\mathbf r_u$ and $\\mathbf r_v$, so we fix the unit normal once and for all as\n$$\\mathbf n=\\frac{\\mathbf r_u\\times\\mathbf r_v}{|\\mathbf r_u\\times\\mathbf r_v|}.$$\nSwapping $u,v$ or reparametrizing with negative determinant flips $\\mathbf n$: a surface has no preferred side, and the parametrization chooses one for us. This is the origin of the notion of orientation.\n\nThere are three standard ways to write the tangent plane, and one picks the cheapest. Point–normal form: $(X-p)\\cdot\\mathbf n=0$. For a graph $z=f(x,y)$:\n$$z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0),$$\nidentical to the first-order Taylor expansion from multivariable calculus. For a level surface $F(x,y,z)=0$ with $\\nabla F(p)\\ne\\mathbf 0$: $\\nabla F(p)\\cdot(X-p)=0$, because differentiating the identity $F(\\mathbf r(u,v))\\equiv0$ shows at once that $\\nabla F\\perp\\mathbf r_u,\\mathbf r_v$ — the gradient automatically gives the normal direction.\n\nThe geometric meaning is that of the best first-order approximation: expanding\n$$\\mathbf r(u_0+\\Delta u,\\ v_0+\\Delta v)=p+\\Delta u\\,\\mathbf r_u+\\Delta v\\,\\mathbf r_v+O(\\Delta^2),$$\nthe surface coincides with its tangent plane at infinitesimal scale, and the deviation from the tangent plane only begins at second order — exactly what the second fundamental form measures.",
+    "formulas": [
+      {
+        "latex": "T_pS=\\operatorname{span}\\{\\mathbf r_u,\\mathbf r_v\\}=\\bigl\\{\\mathbf r(u_0,v_0)+a\\,\\mathbf r_u+b\\,\\mathbf r_v:\\ a,b\\in\\mathbb R\\bigr\\}",
+        "note": "切平面就是两个偏导向量张成的二维平面；参数曲线 $v=\\text{const}$ 与 $u=\\text{const}$ 的速度给出它的天然基底。",
+        "noteEn": "The tangent plane is the two-dimensional plane spanned by the partial derivatives; the parameter curves $v=\\mathrm{const}$ and $u=\\mathrm{const}$ provide its natural basis."
+      },
+      {
+        "latex": "\\mathbf n=\\frac{\\mathbf r_u\\times\\mathbf r_v}{|\\mathbf r_u\\times\\mathbf r_v|},\\qquad \\mathbf n\\cdot\\mathbf r_u=\\mathbf n\\cdot\\mathbf r_v=0",
+        "note": "统一采用的单位法向量：取叉积方向。交换 $u,v$（或翻转定向的重参数化）会把它变成 $-\\mathbf n$。",
+        "noteEn": "The unit normal we adopt throughout: the direction of the cross product. Swapping $u,v$ (or an orientation-reversing reparametrization) replaces it by $-\\mathbf n$."
+      },
+      {
+        "latex": "\\bigl(X-\\mathbf r(u_0,v_0)\\bigr)\\cdot(\\mathbf r_u\\times\\mathbf r_v)=0",
+        "note": "切平面的点法式方程：$X=(x,y,z)$ 是平面上流动点的位置向量，$\\mathbf r_u\\times\\mathbf r_v$ 取当前点处的值。",
+        "noteEn": "Point–normal equation of the tangent plane: $X=(x,y,z)$ is the position vector of a variable point, and $\\mathbf r_u\\times\\mathbf r_v$ is evaluated at the point in question."
+      },
+      {
+        "latex": "z-z_0=f_x(x_0,y_0)\\,(x-x_0)+f_y(x_0,y_0)\\,(y-y_0)",
+        "note": "图像曲面 $z=f(x,y)$ 的切平面公式，与多元微积分的一阶泰勒展开一致；法向量方向是 $(-f_x,-f_y,1)$。",
+        "noteEn": "Tangent plane of a graph $z=f(x,y)$, identical with the first-order Taylor expansion of multivariable calculus; the normal direction is $(-f_x,-f_y,1)$."
+      },
+      {
+        "latex": "\\nabla F(p)\\cdot(X-p)=0,\\qquad \\mathbf n=\\frac{\\nabla F(p)}{|\\nabla F(p)|}",
+        "note": "隐式曲面 $F(x,y,z)=0$（要求 $\\nabla F(p)\\ne\\mathbf 0$）：梯度自动给出法方向，由 $F(\\mathbf r(u,v))\\equiv0$ 求导可证。",
+        "noteEn": "For a level surface $F(x,y,z)=0$ with $\\nabla F(p)\\ne\\mathbf 0$, the gradient automatically gives the normal direction, as follows by differentiating $F(\\mathbf r(u,v))\\equiv0$."
+      }
+    ],
+    "expression": {
+      "text": "切平面 T_pS = span{r_u, r_v}；单位法向量 n = (r_u × r_v)/|r_u × r_v|",
+      "symbol": "T_pS=\\operatorname{span}\\{\\mathbf r_u,\\mathbf r_v\\},\\qquad \\mathbf n=\\frac{\\mathbf r_u\\times\\mathbf r_v}{|\\mathbf r_u\\times\\mathbf r_v|}",
+      "note": "记号：$T_pS$ 是曲面在 $p$ 点的切平面；$\\mathbf n$ 是按叉积方向取定的单位法向量。",
+      "noteEn": "Notation: $T_pS$ is the tangent plane at $p$ and $\\mathbf n$ is the unit normal fixed by the cross-product direction."
+    },
+    "properties": [
+      "$T_pS$ 只依赖曲面与点 $p$，与参数化无关：换参数化只是把基底 $\\mathbf r_u,\\mathbf r_v$ 换成同一平面内的另一组基，单位法向量最多整体差一个符号。",
+      "正则性 $\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0$ 是切平面存在的充要条件：叉积为零时两个方向并成一条线，切平面退化成一条直线（尖点、捏点）。",
+      "切平面是一阶逼近：曲面在 $p$ 附近的点对切平面的法向偏离是 $O(\\Delta^2)$，任何不过 $p$ 的平面都做不到更贴；二阶偏离由第二基本形式度量。",
+      "单位法向量 $\\mathbf n(p)$ 随 $p$ 连续变化，给出曲面的局部定向；能取到整体连续单位法向量的曲面称为可定向曲面（莫比乌斯带不可定向）。",
+      "隐式曲面 $F=0$ 上 $\\nabla F(p)\\ne\\mathbf 0$ 是隐式版本的正则性条件，此时 $T_pS$ 就是等值面的切平面——参数式与隐式两种视角由此打通。"
+    ],
+    "propertiesEn": [
+      "The tangent plane $T_pS$ depends only on the surface and the point: reparametrizing merely replaces the basis $\\mathbf r_u,\\mathbf r_v$ by another basis of the same plane, and the unit normal changes at most by an overall sign.",
+      "Regularity $\\mathbf r_u\\times\\mathbf r_v\\ne\\mathbf 0$ is exactly what makes the tangent plane exist: a vanishing cross product means the two directions collapse onto one line and the tangent plane degenerates into a line (cusps, pinches).",
+      "The tangent plane is the first-order approximation: near $p$ the normal deviation of the surface from its tangent plane is $O(\\Delta^2)$, and no plane missing $p$ can do better; the second-order deviation is measured by the second fundamental form.",
+      "The unit normal $\\mathbf n(p)$ varies continuously with $p$ and provides a local orientation; a surface admitting a globally continuous unit normal is called orientable (the Möbius band is not).",
+      "On an implicit surface $F=0$ the condition $\\nabla F(p)\\ne\\mathbf 0$ is the implicit form of regularity, and $T_pS$ is the tangent plane of the level set — this bridges the parametric and implicit viewpoints."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -1.5,
+        1.5
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "density": [
+        26,
+        26
+      ],
+      "color": "#ff6b9d",
+      "title": "马鞍面 z = x² − y²：每点的切平面由 r_u、r_v 张成"
+    },
+    "examples": [
+      {
+        "problem": "求马鞍面 $z=x^2-y^2$ 在点 $P(1,1,0)$ 处的切平面方程与单位法向量。",
+        "solution": "用图像曲面公式：$f(x,y)=x^2-y^2$，$f_x=2x$，$f_y=-2y$，在 $(1,1)$ 处 $f_x=2$、$f_y=-2$。切平面为\n$$z-0=2(x-1)-2(y-1),\\qquad\\text{即}\\qquad z=2x-2y.$$\n把它写成点法式可顺便得到法向量：\n$$\\mathbf n=\\frac{(-f_x,\\ -f_y,\\ 1)}{\\sqrt{1+f_x^2+f_y^2}}=\\frac{(-2,\\ 2,\\ 1)}{3}.$$\n检验：$P$ 满足 $2\\cdot1-2\\cdot1=0$，切平面确实过 $P$；$(X-P)\\cdot\\mathbf n=0$ 展开后与上面的方程一致。"
+      },
+      {
+        "problem": "求球面 $x^2+y^2+z^2=R^2$ 在点 $p=(x_0,y_0,z_0)$ 处的切平面，并用参数式 $\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$ 验证法向量沿着 $p$ 的方向。",
+        "solution": "取 $F(x,y,z)=x^2+y^2+z^2-R^2$，则 $\\nabla F(p)=2(x_0,y_0,z_0)=2p\\ne\\mathbf 0$，切平面为\n$$x_0x+y_0y+z_0z=R^2$$\n（两边同除以 $R^2$ 就是单位法向量 $\\mathbf n=p/R$ 的点法式）。用参数式检验：\n$$\\mathbf r_u\\times\\mathbf r_v=R^2\\sin u\\,(\\sin u\\cos v,\\ \\sin u\\sin v,\\ \\cos u)=R\\sin u\\cdot p,$$\n与 $p$ 同向；归一化后正是外向单位法向量 $p/R$。这说明球面上任何一点的单位法向量都从球心指向该点。"
+      }
+    ],
+    "tags": [
+      "切平面",
+      "法向量",
+      "定向",
+      "一阶逼近",
+      "隐式曲面"
+    ],
+    "links": [
+      "regular-surface",
+      "tangent-space",
+      "first-fundamental-form",
+      "gradient",
+      "directional-derivative"
+    ]
+  },
+  {
+    "id": "first-fundamental-form",
+    "title": "第一基本形式",
+    "titleEn": "The First Fundamental Form",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "I = E du² + 2F dudv + G dv²，其中 E = r_u·r_u、F = r_u·r_v、G = r_v·r_v；它把曲面的内蕴几何——长度、夹角、面积——全部编码进一个二次型，等价于 ds²。",
+    "summaryEn": "The quadratic form I = E du² + 2F dudv + G dv², with E = r_u·r_u, F = r_u·r_v and G = r_v·r_v, encoding the intrinsic geometry of the surface — lengths, angles, area — in a single quadratic form; it is the same thing as ds².",
+    "definition": "设曲面有正则参数化 $\\mathbf r(u,v)$。参数平面上一个无穷小向量 $(du,dv)$ 被微分 $d\\mathbf r=\\mathbf r_u\\,du+\\mathbf r_v\\,dv$ 映到切空间里，它的长度平方为\n$$|d\\mathbf r|^2=(\\mathbf r_u\\,du+\\mathbf r_v\\,dv)\\cdot(\\mathbf r_u\\,du+\\mathbf r_v\\,dv)=E\\,du^2+2F\\,du\\,dv+G\\,dv^2,$$\n其中\n$$E=\\mathbf r_u\\cdot\\mathbf r_u,\\qquad F=\\mathbf r_u\\cdot\\mathbf r_v,\\qquad G=\\mathbf r_v\\cdot\\mathbf r_v.$$\n这个二次型 $\\mathrm I=E\\,du^2+2F\\,du\\,dv+G\\,dv^2$ 称为曲面的**第一基本形式**（也叫第一基本量或度量），常写成对称矩阵 $\\begin{pmatrix}E&F\\\\F&G\\end{pmatrix}$。注意 $dudv$ 与 $dvdu$ 给出的是同一个平方项，合并后 $F$ 的系数是 $2$，这个 $2$ 不能丢。矩阵是正定的：$E>0$ 且 $EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2>0$，所以对一切非零 $(du,dv)$ 都有 $\\mathrm I>0$。\n\n第一基本形式的用处是把曲面上一切「度量信息」浓缩成三个函数。曲线 $\\gamma(t)=\\mathbf r(u(t),v(t))$ 的弧长是 $\\int\\sqrt{Eu'^2+2Fu'v'+Gv'^2}\\,dt$；两条曲线方向的夹角用 $E,F,G$ 的内积公式计算；曲面面积元是 $\\sqrt{EG-F^2}\\,du\\,dv$。$E,F,G$ 一旦算出，这些量全部到手。\n\n关键在于**内蕴性**：由 $E,F,G$ 算出的一切（弧长、夹角、面积）只依赖曲面上的第一基本形式，与曲面怎样弯在三维空间里无关。这正是「生活在曲面里的小虫」所能测量到的全部几何。例如圆柱面（重参数化后）与平面可以取得完全相同的 $E,F,G$，两者的内蕴几何因此相同（见曲面等距）；而曲面在空间中的弯曲方式，则要靠第二基本形式来补充。",
+    "definitionEn": "Let a surface be given by a regular parametrization $\\mathbf r(u,v)$. An infinitesimal vector $(du,dv)$ in the parameter plane is sent by the differential $d\\mathbf r=\\mathbf r_u\\,du+\\mathbf r_v\\,dv$ into the tangent space, and its squared length is\n$$|d\\mathbf r|^2=(\\mathbf r_u\\,du+\\mathbf r_v\\,dv)\\cdot(\\mathbf r_u\\,du+\\mathbf r_v\\,dv)=E\\,du^2+2F\\,du\\,dv+G\\,dv^2,$$\nwhere\n$$E=\\mathbf r_u\\cdot\\mathbf r_u,\\qquad F=\\mathbf r_u\\cdot\\mathbf r_v,\\qquad G=\\mathbf r_v\\cdot\\mathbf r_v.$$\nThis quadratic form $\\mathrm I=E\\,du^2+2F\\,du\\,dv+G\\,dv^2$ is the **first fundamental form** of the surface (also called the metric), with matrix $\\begin{pmatrix}E&F\\\\F&G\\end{pmatrix}$. Note the combined coefficient $2F$ of $du\\,dv$: the two mixed terms are equal and add up, and the $2$ must not be dropped. The matrix is positive definite — $E>0$ and $EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2>0$ — hence $\\mathrm I>0$ for every nonzero $(du,dv)$.\n\nThe purpose of $\\mathrm I$ is to compress all metric information into three functions. The arc length of a curve $\\gamma(t)=\\mathbf r(u(t),v(t))$ is $\\int\\sqrt{Eu'^2+2Fu'v'+Gv'^2}\\,dt$; the angle between two directions is computed from $E,F,G$ as a scalar product; the area element of the surface is $\\sqrt{EG-F^2}\\,du\\,dv$. Once $E,F,G$ are known, all of these follow.\n\nThe key point is **intrinsicness**: everything computed from $E,F,G$ — length, angle, area — depends only on the first fundamental form, not on how the surface is bent in space. This is exactly the geometry an observer confined to the surface could measure. For instance, the cylinder (after a suitable reparametrization) and the plane have the same $E,F,G$ and hence the same intrinsic geometry (see surface isometry). How the surface bends in space is a separate matter, recorded by the second fundamental form.",
+    "formulas": [
+      {
+        "latex": "\\mathrm I=ds^2=E\\,du^2+2F\\,du\\,dv+G\\,dv^2",
+        "note": "第一基本形式：参数增量 $(du,dv)$ 对应的曲面位移长度平方。$dudv$ 与 $dvdu$ 两项相同，合并后系数是 $2$，不能只写 $F\\,dudv$。",
+        "noteEn": "The first fundamental form: the squared length of the surface displacement corresponding to $(du,dv)$. The terms $dudv$ and $dvdu$ coincide, so the combined coefficient is $2$; writing only $F\\,dudv$ would be wrong."
+      },
+      {
+        "latex": "E=\\mathbf r_u\\cdot\\mathbf r_u,\\qquad F=\\mathbf r_u\\cdot\\mathbf r_v,\\qquad G=\\mathbf r_v\\cdot\\mathbf r_v",
+        "note": "三个基本量：$E$、$G$ 是参数方向速度的平方，$F$ 度量参数网的斜交程度；$F=0$ 表示两族参数曲线正交。",
+        "noteEn": "The three fundamental quantities: $E$ and $G$ are the squared speeds of the parameter directions, while $F$ measures how slanted the parameter grid is; $F=0$ means the grid is orthogonal."
+      },
+      {
+        "latex": "L=\\int_a^b\\sqrt{E\\,u'^2+2F\\,u'v'+G\\,v'^2}\\;dt",
+        "note": "曲线 $\\gamma(t)=\\mathbf r(u(t),v(t))$ 的弧长：把 $\\mathrm I$ 沿曲线积分，是「用 $E,F,G$ 量长度」的标准例子。",
+        "noteEn": "Arc length of a curve $\\gamma(t)=\\mathbf r(u(t),v(t))$: integrate $\\mathrm I$ along the curve — the standard example of measuring length with $E,F,G$."
+      },
+      {
+        "latex": "EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2>0,\\qquad dA=\\sqrt{EG-F^2}\\;du\\,dv",
+        "note": "Lagrange 恒等式把面积元与叉积联系起来；正定性保证 $\\mathrm I$ 是真正的度量、面积元的根号内为正。",
+        "noteEn": "Lagrange's identity links the area element to the cross product; positive definiteness guarantees that $\\mathrm I$ is a genuine metric and that the square root in the area element is real."
+      },
+      {
+        "latex": "E=R^2,\\qquad F=0,\\qquad G=R^2\\sin^2u,\\qquad \\sqrt{EG-F^2}=R^2\\sin u",
+        "note": "半径 $R$ 的球面（极角 $u$、方位角 $v$）：参数网正交（$F=0$），$\\sqrt{EG-F^2}=R^2\\sin u$ 正是面积元因子。",
+        "noteEn": "The sphere of radius $R$ (polar angle $u$, azimuth $v$): the grid is orthogonal ($F=0$) and $\\sqrt{EG-F^2}=R^2\\sin u$ is precisely the area-element factor."
+      }
+    ],
+    "expression": {
+      "text": "I = E du² + 2F dudv + G dv²，其中 E = r_u·r_u、F = r_u·r_v、G = r_v·r_v",
+      "symbol": "\\mathrm I=E\\,du^2+2F\\,du\\,dv+G\\,dv^2",
+      "note": "第一基本形式也常写作 $ds^2$ 或度量矩阵 $(g_{ij})=\\begin{pmatrix}E&F\\\\F&G\\end{pmatrix}$。",
+      "noteEn": "The first fundamental form is also written $ds^2$, with metric matrix $(g_{ij})=\\begin{pmatrix}E&F\\\\F&G\\end{pmatrix}$."
+    },
+    "properties": [
+      "内蕴性：曲面上的弧长、夹角、区域面积都只由 $E,F,G$ 决定，与曲面在三维空间中如何放置无关——这是曲面内蕴几何的全部信息来源。",
+      "换参数化时 $E,F,G$ 按二次型的协变规律变化（$\\tilde G=J^{\\mathsf T}GJ$，$J$ 是重参数变换的 Jacobi 矩阵），但 $\\mathrm I$ 作为度量不变，由它算出的几何量也不变。",
+      "$F=0$ 表示参数曲线网正交（$\\mathbf r_u\\perp\\mathbf r_v$）：此时 $\\mathrm I=E\\,du^2+G\\,dv^2$、面积元为 $\\sqrt{EG}\\,du\\,dv$；球面、旋转面与平面极坐标都是常见的正交网。",
+      "系数矩阵正定：$E>0$ 且 $EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2>0$；$EG-F^2$ 恒正等价于参数化正则，它同时保证面积元是实数。",
+      "第一基本形式是微分 $d\\mathbf r$ 的长度平方，等价于把三维欧氏度量沿 $\\mathbf r$ 拉回到参数平面：$\\mathrm I=d\\mathbf r\\cdot d\\mathbf r$；它只含一阶导数，属于内蕴量。"
+    ],
+    "propertiesEn": [
+      "Intrinsicness: arc length, angle and area on the surface depend only on $E,F,G$, not on how the surface is placed in three-dimensional space — this is the entire source of intrinsic geometry.",
+      "Under reparametrization $E,F,G$ transform according to the covariant rule for quadratic forms ($\\tilde G=J^{\\mathsf T}GJ$ with $J$ the Jacobian of the reparametrization), but the metric $\\mathrm I$ is unchanged, and so is every quantity computed from it.",
+      "$F=0$ means the parameter grid is orthogonal ($\\mathbf r_u\\perp\\mathbf r_v$): then $\\mathrm I=E\\,du^2+G\\,dv^2$ and the area element is $\\sqrt{EG}\\,du\\,dv$; spheres, surfaces of revolution and polar coordinates in the plane are standard orthogonal grids.",
+      "The coefficient matrix is positive definite: $E>0$ and $EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2>0$; positivity of $EG-F^2$ is equivalent to regularity of the parametrization and guarantees a real area element.",
+      "The first fundamental form is the squared length of the differential $d\\mathbf r$, equivalently the pullback of the Euclidean metric to the parameter plane: $\\mathrm I=d\\mathbf r\\cdot d\\mathbf r$. It involves only first derivatives and is intrinsic."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "sin(u)*cos(v)",
+        "y": "sin(u)*sin(v)",
+        "z": "cos(u)"
+      },
+      "uRange": [
+        0,
+        3.1416
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        22,
+        30
+      ],
+      "color": "#06d6a0",
+      "title": "单位球面：E = 1、F = 0、G = sin²u，面积元 √(EG−F²) = sin u"
+    },
+    "examples": [
+      {
+        "problem": "对球面 $\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$ 直接计算 $E,F,G$，并写出面积元因子 $\\sqrt{EG-F^2}$。",
+        "solution": "先求偏导：\n$$\\mathbf r_u=R(\\cos u\\cos v,\\ \\cos u\\sin v,\\ -\\sin u),\\qquad \\mathbf r_v=R(-\\sin u\\sin v,\\ \\sin u\\cos v,\\ 0).$$\n于是\n$$E=\\mathbf r_u\\cdot\\mathbf r_u=R^2(\\cos^2u\\cos^2v+\\cos^2u\\sin^2v+\\sin^2u)=R^2,$$\n$$F=\\mathbf r_u\\cdot\\mathbf r_v=R^2(-\\cos u\\sin u\\cos v\\sin v+\\cos u\\sin u\\sin v\\cos v)=0,$$\n$$G=\\mathbf r_v\\cdot\\mathbf r_v=R^2(\\sin^2u\\sin^2v+\\sin^2u\\cos^2v)=R^2\\sin^2u.$$\n因此 $\\mathrm I=R^2\\,du^2+R^2\\sin^2u\\,dv^2$（球面的经纬参数网是正交网），面积元因子\n$$\\sqrt{EG-F^2}=\\sqrt{R^4\\sin^2u}=R^2\\sin u.$$"
+      },
+      {
+        "problem": "圆柱面 $\\mathbf r(u,v)=(R\\cos u,\\ R\\sin u,\\ v)$ 的第一基本形式是什么？把它重参数化后与平面比较，说明圆柱面可以无拉伸地摊平（局部等距）。",
+        "solution": "对 $\\mathbf r$ 直接计算：$\\mathbf r_u=(-R\\sin u,\\ R\\cos u,\\ 0)$，$\\mathbf r_v=(0,0,1)$，故\n$$E=R^2,\\qquad F=0,\\qquad G=1,\\qquad \\mathrm I=R^2\\,du^2+dv^2.$$\n做重参数化 $\\tilde u=Ru$、$\\tilde v=v$（即换用弧长参数），则\n$$\\tilde E=1,\\qquad \\tilde F=0,\\qquad \\tilde G=1,\\qquad \\mathrm I=d\\tilde u^2+d\\tilde v^2.$$\n而平面 $\\mathbf R(x,y)=(x,y,0)$ 的第一基本形式正是 $dx^2+dy^2$，两者形式完全相同。于是圆柱面（去掉一条母线后）与平面有相同的内蕴几何：长度与角度一一对应——这就是把圆柱剪开摊平不会有拉伸或压缩的依据（局部等距）。"
+      }
+    ],
+    "tags": [
+      "第一基本形式",
+      "内蕴几何",
+      "度量",
+      "弧长",
+      "正交参数网"
+    ],
+    "links": [
+      "regular-surface",
+      "surface-area",
+      "second-fundamental-form",
+      "surface-isometry",
+      "metric-tensor"
+    ]
+  },
+  {
+    "id": "surface-area",
+    "title": "曲面的面积",
+    "titleEn": "Area of a Surface",
+    "branch": "differential-geometry",
+    "level": 4,
+    "summary": "用参数网把曲面切成小片，每片近似为以 r_u du、r_v dv 为边的平行四边形，面积是 |r_u × r_v| dudv = √(EG−F²) dudv；累加取极限得 A = ∬_D √(EG−F²) dudv。",
+    "summaryEn": "The parameter grid cuts the surface into small pieces, each approximated by a parallelogram spanned by r_u du and r_v dv with area |r_u × r_v| dudv = √(EG−F²) dudv; summing and passing to the limit gives A = ∬_D √(EG−F²) dudv.",
+    "definition": "设正则曲面 $S$ 由 $\\mathbf r(u,v)$（$(u,v)\\in D$）参数化。把 $D$ 分成小矩形 $[u,u+du]\\times[v,v+dv]$，它们在 $\\mathbf r$ 下的像近似为一个**小平行四边形**，两条边是 $\\mathbf r_u\\,du$ 与 $\\mathbf r_v\\,dv$，其面积为\n$$|\\mathbf r_u\\,du\\times\\mathbf r_v\\,dv|=|\\mathbf r_u\\times\\mathbf r_v|\\,du\\,dv=\\sqrt{EG-F^2}\\;du\\,dv,$$\n这里用了 Lagrange 恒等式 $EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2$。把所有小片面积加起来取极限，就得到曲面的**面积**\n$$A=\\iint_D|\\mathbf r_u\\times\\mathbf r_v|\\,du\\,dv=\\iint_D\\sqrt{EG-F^2}\\;du\\,dv.$$\n两种写法各有用途：叉积形式方便直接计算，第一基本形式的形式则说明面积元 $dA=\\sqrt{EG-F^2}\\,du\\,dv$ 是内蕴的——只靠曲面上量距离也能得到面积，与曲面如何嵌入空间无关。\n\n当曲面是图像 $z=f(x,y)$ 时，$\\mathbf r=(x,y,f)$ 且 $\\mathbf r_x\\times\\mathbf r_y=(-f_x,-f_y,1)$，于是\n$$A=\\iint_D\\sqrt{1+f_x^2+f_y^2}\\;dx\\,dy,$$\n这正是多元微积分里熟悉的公式；$f_x=f_y=0$（平面）时退化为普通二重积分 $\\iint_D dx\\,dy$。\n\n如果一块参数化盖不住整个曲面，就把它切成若干块分别积分再相加：重参数化不改变面积，分块方式与坐标卡的选择都是自由的。需要留神的是，若参数化不单射（有重叠或自交），公式给出的是「计重数面积」；对无自交的单叶参数化或分块拼接，它才等于真正的几何面积。",
+    "definitionEn": "Let a regular surface $S$ be parametrized by $\\mathbf r(u,v)$ with $(u,v)\\in D$. Cut $D$ into small rectangles $[u,u+du]\\times[v,v+dv]$; their images are approximately **small parallelograms** with sides $\\mathbf r_u\\,du$ and $\\mathbf r_v\\,dv$, whose area is\n$$|\\mathbf r_u\\,du\\times\\mathbf r_v\\,dv|=|\\mathbf r_u\\times\\mathbf r_v|\\,du\\,dv=\\sqrt{EG-F^2}\\;du\\,dv,$$\nusing Lagrange's identity $EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2$. Adding the pieces and passing to the limit gives the **area**\n$$A=\\iint_D|\\mathbf r_u\\times\\mathbf r_v|\\,du\\,dv=\\iint_D\\sqrt{EG-F^2}\\;du\\,dv.$$\nThe two forms serve different purposes: the cross-product form is convenient for computation, while the $E,F,G$ form shows that the area element $dA=\\sqrt{EG-F^2}\\,du\\,dv$ is intrinsic — it can be obtained by measuring distances inside the surface, independently of how the surface sits in space.\n\nFor a graph $z=f(x,y)$ we have $\\mathbf r=(x,y,f)$ and $\\mathbf r_x\\times\\mathbf r_y=(-f_x,-f_y,1)$, hence\n$$A=\\iint_D\\sqrt{1+f_x^2+f_y^2}\\;dx\\,dy,$$\nthe familiar multivariable-calculus formula; for $f_x=f_y=0$ (a plane) it reduces to the ordinary double integral $\\iint_D dx\\,dy$.\n\nIf one parametrization cannot cover the whole surface, split the surface into pieces, integrate over each and add: reparametrization does not change the area, so the choice of charts is free. One caveat: if the parametrization is not injective (overlaps or self-intersections), the formula computes area counted with multiplicity; for a one-to-one parametrization or after gluing pieces, it equals the genuine geometric area.",
+    "formulas": [
+      {
+        "latex": "A=\\iint_D|\\mathbf r_u\\times\\mathbf r_v|\\;du\\,dv=\\iint_D\\sqrt{EG-F^2}\\;du\\,dv",
+        "note": "曲面面积公式：两种写法等价。叉积写法便于计算，$E,F,G$ 写法显示面积元的内蕴性。",
+        "noteEn": "The surface-area formula in two equivalent forms: the cross-product form is convenient for computation, the $E,F,G$ form reveals intrinsicness of the area element."
+      },
+      {
+        "latex": "dA=\\sqrt{EG-F^2}\\;du\\,dv,\\qquad EG-F^2=|\\mathbf r_u\\times\\mathbf r_v|^2",
+        "note": "面积元与 Lagrange 恒等式，注意根号内是 $EG-F^2$，不是 $EG+F^2$，也不是它的平方。",
+        "noteEn": "The area element together with Lagrange's identity; note that the radicand is $EG-F^2$, not $EG+F^2$, and not a square of it."
+      },
+      {
+        "latex": "A=\\iint_D\\sqrt{1+f_x^2+f_y^2}\\;dx\\,dy",
+        "note": "图像曲面 $z=f(x,y)$ 的面积公式；梯度越大，曲面相对平面被撑得越开。",
+        "noteEn": "Area of a graph surface $z=f(x,y)$; the larger the gradient, the more the surface is stretched relative to the plane."
+      },
+      {
+        "latex": "A_{\\text{球面}}=R^2\\int_0^{2\\pi}\\!\\!\\int_0^{\\pi}\\sin u\\;du\\,dv=4\\pi R^2",
+        "note": "球面面积：$\\sqrt{EG-F^2}=R^2\\sin u$，极点是零测集，不影响积分值。",
+        "noteEn": "Sphere area: $\\sqrt{EG-F^2}=R^2\\sin u$; the poles form a null set and do not affect the integral."
+      },
+      {
+        "latex": "A_{\\text{环面}}=\\int_0^{2\\pi}\\!\\!\\int_0^{2\\pi}r(R+r\\cos u)\\;du\\,dv=4\\pi^2Rr",
+        "note": "环面面积（$R>r>0$）：内圈贡献得少、外圈贡献得多，平均恰好抵消，面积等于 $2\\pi R\\cdot2\\pi r$。",
+        "noteEn": "Torus area ($R>r>0$): the inner part contributes less and the outer part more; the average cancels exactly, leaving $(2\\pi R)(2\\pi r)$."
+      }
+    ],
+    "expression": {
+      "text": "A = ∬_D |r_u × r_v| dudv = ∬_D √(EG − F²) dudv",
+      "symbol": "A=\\iint_D\\sqrt{EG-F^2}\\;du\\,dv",
+      "note": "面积元 $dA=\\sqrt{EG-F^2}\\,du\\,dv$；平面时 $E=G=1,F=0$，退化为 $du\\,dv$。",
+      "noteEn": "The area element is $dA=\\sqrt{EG-F^2}\\,du\\,dv$; for a plane $E=G=1$, $F=0$ and it reduces to $du\\,dv$."
+    },
+    "properties": [
+      "面积元 $\\sqrt{EG-F^2}\\,du\\,dv$ 是曲面自身的测度，与参数化选取无关：重参数化、分块计算、翻转定向都不改变面积。",
+      "由 Lagrange 恒等式 $\\sqrt{EG-F^2}=|\\mathbf r_u\\times\\mathbf r_v|$：用第一基本形式或叉积算面积完全等价。",
+      "平面是最简单情形 $A=\\iint_D du\\,dv$；图像曲面 $z=f(x,y)$ 增加因子 $\\sqrt{1+|\\nabla f|^2}$，梯度越大面积被撑得越开。",
+      "曲面的面积是曲面积分的测度：任何曲面积分 $\\iint_S g\\,dS$ 都先化成 $\\iint_D g(\\mathbf r(u,v))\\sqrt{EG-F^2}\\,du\\,dv$（见曲面积分）。",
+      "参数化不单射（自交或重叠）时，公式给出的是计重数面积；无自交的单叶参数化或分块拼接才能得到真正的几何面积。"
+    ],
+    "propertiesEn": [
+      "The area element $\\sqrt{EG-F^2}\\,du\\,dv$ is a measure belonging to the surface itself: reparametrization, cutting into pieces and reversing orientation all leave the area unchanged.",
+      "By Lagrange's identity $\\sqrt{EG-F^2}=|\\mathbf r_u\\times\\mathbf r_v|$: computing area via the first fundamental form or via the cross product is entirely equivalent.",
+      "A plane is the simplest case, $A=\\iint_D du\\,dv$; for a graph $z=f(x,y)$ a factor $\\sqrt{1+|\\nabla f|^2}$ appears — the larger the gradient, the more the surface is stretched.",
+      "Surface area is the measure behind surface integrals: every surface integral $\\iint_S g\\,dS$ is first turned into $\\iint_D g(\\mathbf r(u,v))\\sqrt{EG-F^2}\\,du\\,dv$ (see surface integral).",
+      "If the parametrization is not injective (overlaps or self-intersections), the formula gives area with multiplicity; a one-to-one parametrization or a glued decomposition yields the genuine geometric area."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "(2 + 0.7*cos(u))*cos(v)",
+        "y": "(2 + 0.7*cos(u))*sin(v)",
+        "z": "0.7*sin(u)"
+      },
+      "uRange": [
+        0,
+        6.2832
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        28,
+        36
+      ],
+      "color": "#ffd166",
+      "title": "环面 R=2、r=0.7：面积 = ∬√(EG−F²) dudv = 4π²Rr ≈ 55.3"
+    },
+    "examples": [
+      {
+        "problem": "用面积公式计算半径 $R$ 的球面面积。",
+        "solution": "球面 $\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$，$D=[0,\\pi]\\times[0,2\\pi]$，第一基本量已算出 $E=R^2$、$F=0$、$G=R^2\\sin^2u$，故 $\\sqrt{EG-F^2}=R^2\\sin u$。于是\n$$A=\\int_0^{2\\pi}\\!\\!\\int_0^{\\pi}R^2\\sin u\\;du\\,dv=2\\pi R^2\\Bigl[-\\cos u\\Bigr]_0^{\\pi}=2\\pi R^2\\cdot2=4\\pi R^2.$$\n这正是球的表面积公式。极点处参数化退化，但那只发生在 $u=0,\\pi$ 两条线上（二维积分的零测集），不影响积分值。"
+      },
+      {
+        "problem": "计算环面 $\\mathbf r(u,v)=\\bigl((R+r\\cos u)\\cos v,\\ (R+r\\cos u)\\sin v,\\ r\\sin u\\bigr)$（$R>r>0$）的面积。",
+        "solution": "先算叉积的模：\n$$\\mathbf r_u=(-r\\sin u\\cos v,\\ -r\\sin u\\sin v,\\ r\\cos u),$$\n$$\\mathbf r_v=\\bigl(-(R+r\\cos u)\\sin v,\\ (R+r\\cos u)\\cos v,\\ 0\\bigr),$$\n$$|\\mathbf r_u\\times\\mathbf r_v|=r(R+r\\cos u)>0$$\n（$R>r$ 保证 $R+r\\cos u\\ge R-r>0$，环面处处正则）。于是\n$$A=\\int_0^{2\\pi}\\!\\!\\int_0^{2\\pi}r(R+r\\cos u)\\;du\\,dv=2\\pi r\\int_0^{2\\pi}(R+r\\cos u)\\,du=2\\pi r\\,(2\\pi R+0)=4\\pi^2Rr.$$\n例如 $R=2$、$r=0.7$ 时 $A=4\\pi^2\\cdot1.4\\approx55.3$，正好对应图示环面的外圈多、内圈少但平均刚好抵消的几何图像。"
+      }
+    ],
+    "tags": [
+      "曲面面积",
+      "面积元",
+      "二重积分",
+      "Lagrange 恒等式",
+      "球面"
+    ],
+    "links": [
+      "first-fundamental-form",
+      "double-integral",
+      "surface-integral",
+      "jacobian",
+      "regular-surface"
+    ]
+  },
+  {
+    "id": "second-fundamental-form",
+    "title": "第二基本形式",
+    "titleEn": "The Second Fundamental Form",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "II = L du² + 2M dudv + N dv²，其中 L = r_uu·n、M = r_uv·n、N = r_vv·n；它描述曲面在空间中如何「离开」自己的切平面（外蕴弯曲），与第一基本形式一道给出法曲率与主曲率。",
+    "summaryEn": "The quadratic form II = L du² + 2M dudv + N dv² with L = r_uu·n, M = r_uv·n, N = r_vv·n; it describes how the surface leaves its tangent plane in space (extrinsic bending) and, together with the first fundamental form, yields normal and principal curvatures.",
+    "definition": "第一基本形式只管「沿曲面量距离」；要谈弯曲，还得看曲面怎样偏离切平面。设 $\\mathbf n$ 是单位法向量，**第二基本形式**定义为\n$$\\mathrm{II}=L\\,du^2+2M\\,du\\,dv+N\\,dv^2,\\qquad L=\\mathbf r_{uu}\\cdot\\mathbf n,\\quad M=\\mathbf r_{uv}\\cdot\\mathbf n,\\quad N=\\mathbf r_{vv}\\cdot\\mathbf n.$$\n注意 $L,M,N$ 是二阶导向量与单位法向量的内积，而不是与任意法向量的内积。\n\n为什么这样定义？把曲面在 $(u,v)$ 附近做 Taylor 展开：\n$$\\mathbf r(u+du,v+dv)=\\mathbf r(u,v)+\\bigl(\\mathbf r_u\\,du+\\mathbf r_v\\,dv\\bigr)+\\tfrac12\\bigl(\\mathbf r_{uu}\\,du^2+2\\mathbf r_{uv}\\,du\\,dv+\\mathbf r_{vv}\\,dv^2\\bigr)+\\cdots$$\n与 $\\mathbf n$ 作内积时，一次项因为 $\\mathbf n\\perp\\mathbf r_u,\\mathbf r_v$ 而消失，剩下\n$$\\bigl\\langle\\mathbf r(u+du,v+dv)-\\mathbf r(u,v),\\ \\mathbf n\\bigr\\rangle=\\tfrac12\\,\\mathrm{II}+O(\\Delta^3).$$\n也就是说，$\\tfrac12\\mathrm{II}$ 正是曲面在小步长 $(du,dv)$ 处沿法向「抬起」（或凹陷）的高度：**第二基本形式度量曲面离开切平面的二阶速度**。其中 $L$ 是 $u$ 方向的弯曲，$N$ 是 $v$ 方向的弯曲，$M$ 是参数方向的扭曲。\n\n与第一基本形式不同，$\\mathrm{II}$ 是**外蕴**的：它依赖曲面在三维空间中的嵌入方式，也依赖 $\\mathbf n$ 的取向。翻转法向量 $\\mathbf n\\to-\\mathbf n$ 会使 $\\mathrm{II}\\to-\\mathrm{II}$，而 $\\mathrm I$ 不变——所以凡涉及 $\\mathrm{II}$ 的量，都要先说清法向约定。本库统一取 $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$。\n\n三个标准例子建立直觉：平面 $\\mathrm{II}\\equiv0$，因为点根本不离开切平面；球面（标准参数化、外向 $\\mathbf n$）满足 $L=-R$、$M=0$、$N=-R\\sin^2u$，于是 $\\mathrm{II}=-\\tfrac1R\\mathrm I$，各方向弯曲相同（脐点）；柱面 $L=-R$、$M=N=0$，只在圆周方向弯曲。$\\mathrm{II}$ 与 $\\mathrm I$ 联手几乎供应了全部曲率概念：法曲率 $\\kappa_n=\\mathrm{II}/\\mathrm I$、主曲率、高斯曲率 $K=(LN-M^2)/(EG-F^2)$、平均曲率都从这对二次型出发。",
+    "definitionEn": "The first fundamental form only measures distances along the surface; to speak of bending one must see how the surface leaves its tangent plane. Let $\\mathbf n$ be the unit normal. The **second fundamental form** is defined by\n$$\\mathrm{II}=L\\,du^2+2M\\,du\\,dv+N\\,dv^2,\\qquad L=\\mathbf r_{uu}\\cdot\\mathbf n,\\quad M=\\mathbf r_{uv}\\cdot\\mathbf n,\\quad N=\\mathbf r_{vv}\\cdot\\mathbf n.$$\nNote that $L,M,N$ are scalar products of second derivatives with the **unit** normal, not with an arbitrary normal vector.\n\nWhy this definition? Expand the surface near $(u,v)$:\n$$\\mathbf r(u+du,v+dv)=\\mathbf r(u,v)+\\bigl(\\mathbf r_u\\,du+\\mathbf r_v\\,dv\\bigr)+\\tfrac12\\bigl(\\mathbf r_{uu}\\,du^2+2\\mathbf r_{uv}\\,du\\,dv+\\mathbf r_{vv}\\,dv^2\\bigr)+\\cdots$$\nDotting with $\\mathbf n$ kills the first-order term (since $\\mathbf n\\perp\\mathbf r_u,\\mathbf r_v$) and leaves\n$$\\bigl\\langle\\mathbf r(u+du,v+dv)-\\mathbf r(u,v),\\ \\mathbf n\\bigr\\rangle=\\tfrac12\\,\\mathrm{II}+O(\\Delta^3).$$\nThus $\\tfrac12\\mathrm{II}$ is the signed height by which the surface lifts off (or dips below) its tangent plane over the step $(du,dv)$: the second fundamental form measures the second-order speed at which the surface leaves the tangent plane. Here $L$ is the bending in the $u$-direction, $N$ in the $v$-direction, and $M$ the twist of the parameter directions.\n\nUnlike the first fundamental form, $\\mathrm{II}$ is **extrinsic**: it depends on how the surface is embedded in space and on the choice of $\\mathbf n$. Flipping $\\mathbf n\\to-\\mathbf n$ sends $\\mathrm{II}\\to-\\mathrm{II}$ while $\\mathrm I$ stays unchanged; hence every quantity built from $\\mathrm{II}$ requires a stated normal convention. Throughout this library we take $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$.\n\nThree standard examples build intuition. A plane has $\\mathrm{II}\\equiv0$: it never leaves its tangent plane. The sphere with its standard parametrization and outward $\\mathbf n$ has $L=-R$, $M=0$, $N=-R\\sin^2u$, so $\\mathrm{II}=-\\tfrac1R\\mathrm I$: equally curved in every direction (an umbilic surface). A cylinder has $L=-R$, $M=N=0$: it bends only in the circular direction. Together, $\\mathrm I$ and $\\mathrm{II}$ supply essentially every curvature notion: normal curvature $\\kappa_n=\\mathrm{II}/\\mathrm I$, principal curvatures, Gaussian curvature $K=(LN-M^2)/(EG-F^2)$ and mean curvature.",
+    "formulas": [
+      {
+        "latex": "\\mathrm{II}=L\\,du^2+2M\\,du\\,dv+N\\,dv^2",
+        "note": "第二基本形式：与第一基本形式同样是对称二次型，$dudv$ 的系数同样是 $2M$。",
+        "noteEn": "The second fundamental form is again a symmetric quadratic form, with the same coefficient $2M$ for $du\\,dv$."
+      },
+      {
+        "latex": "L=\\mathbf r_{uu}\\cdot\\mathbf n,\\qquad M=\\mathbf r_{uv}\\cdot\\mathbf n,\\qquad N=\\mathbf r_{vv}\\cdot\\mathbf n",
+        "note": "三个系数是二阶导向量与**单位**法向量的内积；若法向量不单位化，系数会多出 $|\\mathbf r_u\\times\\mathbf r_v|$ 因子。",
+        "noteEn": "The three coefficients are scalar products of second derivatives with the **unit** normal; without normalising the normal, an extra factor $|\\mathbf r_u\\times\\mathbf r_v|$ would appear."
+      },
+      {
+        "latex": "\\mathrm{II}=\\langle d^2\\mathbf r,\\ \\mathbf n\\rangle=-\\langle d\\mathbf r,\\ d\\mathbf n\\rangle",
+        "note": "两种等价定义：二阶微分的法向分量，或负的一阶微分与法向量微分的配对（Weingarten 形式）。",
+        "noteEn": "Two equivalent definitions: the normal component of the second differential, or minus the pairing of the first differential with the differential of the normal (the Weingarten form)."
+      },
+      {
+        "latex": "\\bigl\\langle\\mathbf r(u+du,v+dv)-\\mathbf r(u,v),\\ \\mathbf n\\bigr\\rangle=\\tfrac12\\mathrm{II}+O(\\Delta^3)",
+        "note": "几何意义：$\\tfrac12\\mathrm{II}$ 是曲面沿法向偏离切平面的高度，$L,M,N$ 就是这种偏离的二阶系数。",
+        "noteEn": "Geometric meaning: $\\tfrac12\\mathrm{II}$ is the signed normal height of the surface above its tangent plane, and $L,M,N$ are the second-order coefficients of this deviation."
+      },
+      {
+        "latex": "L=-R,\\qquad M=0,\\qquad N=-R\\sin^2u\\qquad(\\mathbf n\\ \\text{外向}),\\qquad \\mathrm{II}=-\\frac1R\\,\\mathrm I",
+        "note": "球面（半径 $R$，外向 $\\mathbf n$）：第二基本形式与第一基本形式成比例，比例系数 $-1/R$；取内向 $\\mathbf n$ 则整体变号。",
+        "noteEn": "The sphere of radius $R$ with outward $\\mathbf n$: the second fundamental form is proportional to the first, with factor $-1/R$; with the inward normal everything changes sign."
+      }
+    ],
+    "expression": {
+      "text": "II = L du² + 2M dudv + N dv²，其中 L = r_uu·n、M = r_uv·n、N = r_vv·n",
+      "symbol": "\\mathrm{II}=L\\,du^2+2M\\,du\\,dv+N\\,dv^2",
+      "note": "第二基本形式与第一基本形式配对使用；$L,M,N$ 是与单位法向量 $\\mathbf n$ 的内积，符号随 $\\mathbf n$ 的取向翻转。",
+      "noteEn": "The second fundamental form is used in tandem with the first; $L,M,N$ are scalar products with the unit normal $\\mathbf n$, and their signs flip with the orientation of $\\mathbf n$."
+    },
+    "properties": [
+      "外蕴性与符号：$\\mathrm{II}$ 依赖嵌入方式与 $\\mathbf n$ 的取向，$\\mathbf n\\to-\\mathbf n$ 时 $\\mathrm{II}\\to-\\mathrm{II}$；做题必须声明法向量约定，本库取 $\\mathbf n=\\mathbf r_u\\times\\mathbf r_v/|\\mathbf r_u\\times\\mathbf r_v|$。",
+      "$\\mathrm{II}\\equiv0$ 当且仅当曲面局部是平面：二阶近似为零，且连通曲面上 $L=M=N\\equiv0$ 蕴含曲面落在一个平面内。",
+      "球面上 $\\mathrm{II}$ 与 $\\mathrm I$ 成比例（外向 $\\mathbf n$ 时 $\\mathrm{II}=-\\tfrac1R\\mathrm I$）：每点各方向弯曲相同，这类点叫脐点；一般曲面只在孤立点处成比例。",
+      "$\\mathrm I$ 与 $\\mathrm{II}$ 都是对称二次型且 $\\mathrm I$ 正定，总可以选到主方向使 $F=M=0$，此时 $\\kappa_1=L/E$、$\\kappa_2=N/G$ 就是主曲率。",
+      "曲率公式：$\\kappa_n=\\mathrm{II}/\\mathrm I$，$K=\\dfrac{LN-M^2}{EG-F^2}$，$H=\\dfrac{EN-2FM+GL}{2(EG-F^2)}$；$K$ 与 $\\mathbf n$ 取向无关，$H$ 在 $\\mathbf n\\to-\\mathbf n$ 时变号。"
+    ],
+    "propertiesEn": [
+      "Extrinsic nature and signs: $\\mathrm{II}$ depends on the embedding and on the orientation of $\\mathbf n$, with $\\mathbf n\\to-\\mathbf n$ giving $\\mathrm{II}\\to-\\mathrm{II}$; every statement requires a normal convention, and we always take $\\mathbf n=\\mathbf r_u\\times\\mathbf r_v/|\\mathbf r_u\\times\\mathbf r_v|$.",
+      "$\\mathrm{II}\\equiv0$ holds exactly when the surface is locally a plane: the second-order approximation vanishes, and on a connected surface $L=M=N\\equiv0$ forces the surface to lie in a plane.",
+      "On a sphere $\\mathrm{II}$ is proportional to $\\mathrm I$ (for outward $\\mathbf n$, $\\mathrm{II}=-\\tfrac1R\\mathrm I$): every direction bends equally, a so-called umbilic point; a general surface is umbilic only at isolated points.",
+      "Both $\\mathrm I$ and $\\mathrm{II}$ are symmetric quadratic forms and $\\mathrm I$ is positive definite, so principal directions can be chosen with $F=M=0$; then $\\kappa_1=L/E$ and $\\kappa_2=N/G$ are the principal curvatures.",
+      "Curvature formulas: $\\kappa_n=\\mathrm{II}/\\mathrm I$, $K=\\dfrac{LN-M^2}{EG-F^2}$ and $H=\\dfrac{EN-2FM+GL}{2(EG-F^2)}$; $K$ is independent of the orientation of $\\mathbf n$ while $H$ changes sign under $\\mathbf n\\to-\\mathbf n$."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -1.5,
+        1.5
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "density": [
+        26,
+        26
+      ],
+      "color": "#b388ff",
+      "title": "马鞍面 z = x² − y²：L、M、N 度量它如何离开切平面（原点 L=2、N=−2）"
+    },
+    "examples": [
+      {
+        "problem": "写出图像曲面 $z=f(x,y)$ 的第二基本形式公式，并对马鞍面 $z=x^2-y^2$ 在原点处求出 $\\mathrm{II}$（取向上法向量 $\\mathbf n$）。",
+        "solution": "对 $\\mathbf r(x,y)=(x,y,f(x,y))$：$\\mathbf r_x=(1,0,f_x)$，$\\mathbf r_y=(0,1,f_y)$，二阶导只有 $z$ 分量非零：$\\mathbf r_{xx}=(0,0,f_{xx})$、$\\mathbf r_{xy}=(0,0,f_{xy})$、$\\mathbf r_{yy}=(0,0,f_{yy})$；向上单位法向量为 $\\mathbf n=(-f_x,-f_y,1)/\\sqrt{1+f_x^2+f_y^2}$。于是\n$$L=\\frac{f_{xx}}{\\sqrt{1+f_x^2+f_y^2}},\\qquad M=\\frac{f_{xy}}{\\sqrt{1+f_x^2+f_y^2}},\\qquad N=\\frac{f_{yy}}{\\sqrt{1+f_x^2+f_y^2}}.$$\n对 $f=x^2-y^2$：$f_{xx}=2$、$f_{xy}=0$、$f_{yy}=-2$，原点处 $f_x=f_y=0$，所以 $L=2$、$M=0$、$N=-2$，即\n$$\\mathrm{II}=2\\,dx^2-2\\,dy^2,\\qquad \\mathrm I=dx^2+dy^2\\quad(\\text{原点}).$$\n沿 $x$ 方向曲面朝 $\\mathbf n$ 弯曲（$L>0$），沿 $y$ 方向背离 $\\mathbf n$ 弯曲（$N<0$）——马鞍的形状被 $L$ 与 $N$ 的符号精确捕捉。"
+      },
+      {
+        "problem": "验证球面（半径 $R$，取外向法向量 $\\mathbf n$）满足 $L=-R$、$M=0$、$N=-R\\sin^2u$，从而 $\\mathrm{II}=-\\frac1R\\mathrm I$。",
+        "solution": "对 $\\mathbf r(u,v)=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$，外向单位法向量是 $\\mathbf n=(\\sin u\\cos v,\\ \\sin u\\sin v,\\ \\cos u)$。直接求二阶导：\n$$\\mathbf r_{uu}=-R(\\sin u\\cos v,\\ \\sin u\\sin v,\\ \\cos u)=-R\\,\\mathbf n\\ \\Longrightarrow\\ L=\\mathbf r_{uu}\\cdot\\mathbf n=-R,$$\n$$\\mathbf r_{uv}=R(-\\cos u\\sin v,\\ \\cos u\\cos v,\\ 0)\\ \\Longrightarrow\\ M=\\mathbf r_{uv}\\cdot\\mathbf n=0,$$\n$$\\mathbf r_{vv}=-R\\sin u\\,(\\cos v,\\ \\sin v,\\ 0)\\ \\Longrightarrow\\ N=\\mathbf r_{vv}\\cdot\\mathbf n=-R\\sin^2u.$$\n因此\n$$\\mathrm{II}=-R\\,du^2-R\\sin^2u\\,dv^2=-\\frac1R\\bigl(R^2du^2+R^2\\sin^2u\\,dv^2\\bigr)=-\\frac1R\\,\\mathrm I.$$\n$\\mathrm{II}$ 与 $\\mathrm I$ 处处成比例（比例系数 $-1/R$），比例系数为负、球面各方向弯曲相同，全是脐点；负号来自外向法向量的约定，若改取内向 $\\mathbf n$ 则整体变号。"
+      }
+    ],
+    "tags": [
+      "第二基本形式",
+      "外蕴曲率",
+      "脐点",
+      "主曲率",
+      "高斯曲率"
+    ],
+    "links": [
+      "first-fundamental-form",
+      "normal-curvature",
+      "tangent-plane",
+      "gaussian-mean-curvature",
+      "principal-curvature"
+    ]
+  },
+  {
+    "id": "normal-curvature",
+    "title": "法曲率",
+    "titleEn": "Normal Curvature",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "沿切方向 (du:dv) 的法曲率 κ_n = II/I = (L du² + 2M dudv + N dv²)/(E du² + 2F dudv + G dv²)，等于过该点切于此方向的曲线曲率在法向上的投影；球面各方向 κ_n = ±1/R，平面 κ_n ≡ 0。",
+    "summaryEn": "Along a tangent direction (du:dv) the normal curvature is κ_n = II/I = (L du² + 2M dudv + N dv²)/(E du² + 2F dudv + G dv²), the projection of a suitable curve's curvature onto the surface normal; on a sphere κ_n = ±1/R in every direction, while a plane has κ_n ≡ 0.",
+    "definition": "设曲面 $S$ 在 $p$ 点有单位法向量 $\\mathbf n$。取一个切方向，把它写成参数增量的比值 $du:dv$（对应的切向量是 $\\mathbf r_u\\,du+\\mathbf r_v\\,dv$）。过 $p$ 沿该方向的曲面曲线 $\\gamma$ 的曲率向量中，只有法向分量与曲面自身的弯曲有关。以单位速度参数化时，定义\n$$\\kappa_n=\\langle\\gamma''(0),\\ \\mathbf n\\rangle,$$\n称为曲面沿该方向的**法曲率**。一个漂亮的事实是：它只依赖点 $p$ 与方向 $du:dv$，与具体挑哪条曲线无关。把 $\\gamma(t)=\\mathbf r(u(t),v(t))$ 代入并求导：\n$$\\gamma''=\\mathbf r_u\\,u''+\\mathbf r_v\\,v''+\\mathbf r_{uu}\\,u'^2+2\\mathbf r_{uv}\\,u'v'+\\mathbf r_{vv}\\,v'^2,$$\n与 $\\mathbf n$ 内积时前两项消失（$\\mathbf n\\perp\\mathbf r_u,\\mathbf r_v$），剩下 $Lu'^2+2Mu'v'+Nv'^2=\\mathrm{II}$；而分母是速度的平方 $\\mathrm I$。于是得到核心公式\n$$\\kappa_n=\\frac{\\mathrm{II}}{\\mathrm I}=\\frac{L\\,du^2+2M\\,du\\,dv+N\\,dv^2}{E\\,du^2+2F\\,du\\,dv+G\\,dv^2}.$$\n分母恒正，所以 $\\kappa_n$ 是方向 $du:dv$ 的函数，符号与大小随方向变化。\n\n同一点上 $\\kappa_n$ 的最大值与最小值就是**主曲率** $\\kappa_1,\\kappa_2$（在 $\\mathrm I=1$ 的单位方向圆周上取到，对应方向即主方向），它们的乘积是高斯曲率、平均数是平均曲率。$\\kappa_n=0$ 的方向叫渐近方向：曲面沿它不向法向弯曲。\n\n**符号约定至关重要**：本库统一取 $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$。对球面的标准参数化 $\\mathbf r=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$，这个 $\\mathbf n$ 指向球外，此时任一方向的法曲率都是\n$$\\kappa_n\\equiv-\\frac1R;$$\n若改取内向的 $-\\mathbf n$，则 $\\kappa_n\\equiv+\\frac1R$。无论哪种约定，$|\\kappa_n|=1/R$ 恒定不变——球面上每个点都是脐点。对照之下，平面 $\\mathrm{II}\\equiv0$ 故 $\\kappa_n\\equiv0$；圆柱面沿母线方向 $\\kappa_n=0$、沿圆周方向 $\\kappa_n=\\pm1/R$，弯曲全部集中在圆周方向。\n\n最后是 Meusnier 定理，它解释「投影」二字：若曲线 $\\gamma$ 以单位速度过 $p$、切向为该方向，曲率为 $\\kappa$、单位主法向量为 $\\mathbf N$，则\n$$\\kappa_n=\\kappa\\cos\\theta,\\qquad \\theta=\\angle(\\mathbf N,\\ \\mathbf n).$$\n切于同一方向的全部曲线共享同一个 $\\kappa\\cos\\theta$：它们的曲率可以千差万别，但「有效作用于曲面弯曲」的分量完全相同。特别地取法截线（$\\theta=0$）时，曲线曲率恰好等于 $|\\kappa_n|$。",
+    "definitionEn": "Let $S$ have unit normal $\\mathbf n$ at $p$. Take a tangent direction, written as a ratio $du:dv$ of parameter increments (the tangent vector is $\\mathbf r_u\\,du+\\mathbf r_v\\,dv$). For a surface curve $\\gamma$ through $p$ with that velocity, only the normal component of its curvature vector is relevant to the bending of the surface. Parametrized by unit speed,\n$$\\kappa_n=\\langle\\gamma''(0),\\ \\mathbf n\\rangle$$\nis the **normal curvature** of the surface in that direction. A beautiful fact: $\\kappa_n$ depends only on $p$ and the direction $du:dv$, not on which curve through $p$ is chosen. Substituting $\\gamma(t)=\\mathbf r(u(t),v(t))$ and differentiating,\n$$\\gamma''=\\mathbf r_u\\,u''+\\mathbf r_v\\,v''+\\mathbf r_{uu}\\,u'^2+2\\mathbf r_{uv}\\,u'v'+\\mathbf r_{vv}\\,v'^2;$$\ndotting with $\\mathbf n$ removes the first two terms (since $\\mathbf n\\perp\\mathbf r_u,\\mathbf r_v$) and leaves $Lu'^2+2Mu'v'+Nv'^2=\\mathrm{II}$, while the denominator is the squared speed $\\mathrm I$. Hence the central formula\n$$\\kappa_n=\\frac{\\mathrm{II}}{\\mathrm I}=\\frac{L\\,du^2+2M\\,du\\,dv+N\\,dv^2}{E\\,du^2+2F\\,du\\,dv+G\\,dv^2}.$$\nThe denominator is always positive, so $\\kappa_n$ is a function of the direction $du:dv$, varying in sign and size.\n\nAt a fixed point the maximum and minimum of $\\kappa_n$ are the **principal curvatures** $\\kappa_1,\\kappa_2$ (attained on the circle $\\mathrm I=1$, in the principal directions); their product is the Gaussian curvature and their average the mean curvature. Directions with $\\kappa_n=0$ are called asymptotic: the surface does not bend normally along them.\n\n**The sign convention is essential.** We always take $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$. For the standard sphere parametrization $\\mathbf r=(R\\sin u\\cos v,\\ R\\sin u\\sin v,\\ R\\cos u)$, this $\\mathbf n$ points outward and every direction has\n$$\\kappa_n\\equiv-\\frac1R;$$\nwith the inward normal the value is $+\\frac1R$. Either way $|\\kappa_n|=1/R$ is constant: every point of a sphere is umbilic. By contrast a plane has $\\mathrm{II}\\equiv0$, hence $\\kappa_n\\equiv0$; on a cylinder $\\kappa_n=0$ along the rulings and $\\kappa_n=\\pm1/R$ in the circular direction, so all bending is concentrated there.\n\nFinally, Meusnier's theorem explains the word projection. If $\\gamma$ passes through $p$ with unit speed in the given direction, with curvature $\\kappa$ and unit principal normal $\\mathbf N$, then\n$$\\kappa_n=\\kappa\\cos\\theta,\\qquad \\theta=\\angle(\\mathbf N,\\ \\mathbf n).$$\nAll curves through $p$ tangent to the same direction share the same $\\kappa\\cos\\theta$: their curvatures may differ wildly, but the component that actually bends the surface is identical. In particular, for a normal section ($\\theta=0$) the curve's curvature equals $|\\kappa_n|$.",
+    "formulas": [
+      {
+        "latex": "\\kappa_n=\\frac{\\mathrm{II}}{\\mathrm I}=\\frac{L\\,du^2+2M\\,du\\,dv+N\\,dv^2}{E\\,du^2+2F\\,du\\,dv+G\\,dv^2}",
+        "note": "法曲率的核心公式：只依赖点与方向 $du:dv$，与具体曲线无关；分母 $\\mathrm I>0$ 恒成立。",
+        "noteEn": "The central formula: $\\kappa_n$ depends only on the point and the direction $du:dv$, not on the particular curve; the denominator $\\mathrm I>0$ always."
+      },
+      {
+        "latex": "\\kappa_n=\\langle\\gamma''(0),\\ \\mathbf n\\rangle\\quad(\\gamma\\ \\text{单位速度}),\\qquad \\kappa_n=\\kappa\\cos\\theta\\quad(\\text{Meusnier})",
+        "note": "定义与 Meusnier 定理：$\\kappa_n$ 是曲线曲率向量在法向的投影；$\\theta$ 是曲线主法向与 $\\mathbf n$ 的夹角。",
+        "noteEn": "Definition and Meusnier's theorem: $\\kappa_n$ is the projection of the curve's curvature vector onto the normal; $\\theta$ is the angle between the curve's principal normal and $\\mathbf n$."
+      },
+      {
+        "latex": "\\kappa_1=\\max_{\\mathrm I=1}\\kappa_n,\\qquad \\kappa_2=\\min_{\\mathrm I=1}\\kappa_n,\\qquad K=\\kappa_1\\kappa_2=\\frac{LN-M^2}{EG-F^2}",
+        "note": "主曲率是法曲率在单位方向圆上的极值；高斯曲率等于两主曲率之积，也与 $L,M,N$ 直接相连。",
+        "noteEn": "The principal curvatures are the extrema of $\\kappa_n$ on the unit direction circle; the Gaussian curvature is their product and is also expressed directly through $L,M,N$."
+      },
+      {
+        "latex": "\\kappa_n\\equiv-\\frac1R\\ \\ (\\mathbf n\\ \\text{外向}),\\qquad \\kappa_n\\equiv+\\frac1R\\ \\ (\\mathbf n\\ \\text{内向})",
+        "note": "半径 $R$ 的球面：任意方向的法曲率都是常数（脐点）；符号随法向量取向翻转，绝对值恒为 $1/R$。",
+        "noteEn": "The sphere of radius $R$: the normal curvature is constant in every direction (umbilic); the sign flips with the orientation of the normal while the absolute value stays $1/R$."
+      },
+      {
+        "latex": "L=M=N=0\\ \\Longrightarrow\\ \\kappa_n\\equiv0\\iff\\ \\text{曲面（局部）是平面}",
+        "note": "平面的法曲率恒为零；反向也成立：一个连通曲面上若各方向法曲率处处为零，它局部落在某个平面内。",
+        "noteEn": "A plane has $\\kappa_n\\equiv0$; conversely, if on a connected surface the normal curvature vanishes in every direction and at every point, the surface lies locally in a plane."
+      }
+    ],
+    "expression": {
+      "text": "κ_n = II / I = (L du² + 2M dudv + N dv²)/(E du² + 2F dudv + G dv²)",
+      "symbol": "\\kappa_n=\\frac{\\mathrm{II}}{\\mathrm I}",
+      "note": "法曲率是方向 $du:dv$ 的函数；本库取 $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$，球面上恒为 $-1/R$、平面上恒为 $0$。",
+      "noteEn": "The normal curvature is a function of the direction $du:dv$; with our convention $\\mathbf n=(\\mathbf r_u\\times\\mathbf r_v)/|\\mathbf r_u\\times\\mathbf r_v|$ it is $-1/R$ on a sphere and $0$ on a plane."
+    },
+    "properties": [
+      "方向依赖性：$\\kappa_n$ 只由比值 $du:dv$ 决定，与曲线选取无关；同一点不同方向可有不同值，符号也可能变化（马鞍面原点）。",
+      "Meusnier 定理：过 $p$ 切于同一方向的任意曲线都满足 $\\kappa\\cos\\theta=\\kappa_n$ 相同；法截线（$\\theta=0$）的曲率恰为 $|\\kappa_n|$，是一条最能代表曲面弯曲的曲线。",
+      "符号约定：$\\kappa_n$ 的正负随 $\\mathbf n$ 翻转，本库统一 $\\mathbf n=\\mathbf r_u\\times\\mathbf r_v/|\\mathbf r_u\\times\\mathbf r_v|$；球面外向时 $\\kappa_n=-1/R$，负号只是约定的产物，$|\\kappa_n|=1/R$ 与约定无关。",
+      "极值给主曲率：$\\kappa_1\\ge\\kappa_2$ 是 $\\kappa_n$ 在 $\\mathrm I=1$ 圆周上的最大、最小值；沿正交的主方向有欧拉公式 $\\kappa_n(\\theta)=\\kappa_1\\cos^2\\theta+\\kappa_2\\sin^2\\theta$。",
+      "两个极端：平面 $\\kappa_n\\equiv0$（处处平坦，$K=0$），球面 $\\kappa_n\\equiv\\pm1/R$（处处同样弯，$K=1/R^2$ 为正常数，恒正）。"
+    ],
+    "propertiesEn": [
+      "Direction dependence: $\\kappa_n$ is determined by the ratio $du:dv$ alone, independently of the curve; different directions at the same point can give different values and even different signs (the saddle at the origin).",
+      "Meusnier's theorem: every curve through $p$ tangent to the same direction satisfies $\\kappa\\cos\\theta=\\kappa_n$ with the same value; a normal section ($\\theta=0$) has curvature exactly $|\\kappa_n|$ and is the curve that best represents the bending of the surface.",
+      "Sign convention: the sign of $\\kappa_n$ flips with $\\mathbf n$, and we always take $\\mathbf n=\\mathbf r_u\\times\\mathbf r_v/|\\mathbf r_u\\times\\mathbf r_v|$; for a sphere with outward normal $\\kappa_n=-1/R$, a sign which is a product of the convention, while $|\\kappa_n|=1/R$ does not depend on it.",
+      "Extrema give the principal curvatures: $\\kappa_1\\ge\\kappa_2$ are the maximum and minimum of $\\kappa_n$ on the circle $\\mathrm I=1$; along orthogonal principal directions Euler's formula $\\kappa_n(\\theta)=\\kappa_1\\cos^2\\theta+\\kappa_2\\sin^2\\theta$ holds.",
+      "Two extremes: a plane has $\\kappa_n\\equiv0$ (flat everywhere, $K=0$), a sphere has $\\kappa_n\\equiv\\pm1/R$ (equally curved everywhere, with the positive constant $K=1/R^2$)."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "sin(u)*cos(v)",
+        "y": "sin(u)*sin(v)",
+        "z": "cos(u)"
+      },
+      "uRange": [
+        0,
+        3.1416
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        22,
+        30
+      ],
+      "color": "#ff8f5e",
+      "title": "球面：任意方向的法曲率都是常数 |κₙ| = 1/R（本库取外向 n 时 κₙ = −1/R）"
+    },
+    "examples": [
+      {
+        "problem": "在半径 $R$ 的球面上取纬圆 $u=u_0$，用 Meusnier 定理验证球面上的法曲率恒等于 $-1/R$（取外向单位法向量）。",
+        "solution": "纬圆是平面 $z=R\\cos u_0$ 上半径 $\\rho=R\\sin u_0$ 的圆，作为空间曲线其曲率 $\\kappa=1/\\rho=1/(R\\sin u_0)$，主法向量指向圆心：\n$$\\mathbf N=(-\\cos v,\\ -\\sin v,\\ 0),\\qquad \\mathbf n=(\\sin u_0\\cos v,\\ \\sin u_0\\sin v,\\ \\cos u_0).$$\n于是 $\\cos\\theta=\\mathbf N\\cdot\\mathbf n=-\\sin u_0$，由 Meusnier 定理\n$$\\kappa_n=\\kappa\\cos\\theta=\\frac{1}{R\\sin u_0}\\cdot(-\\sin u_0)=-\\frac1R.$$\n结果与 $u_0$ 无关：纬圆越靠近极点（$\\sin u_0$ 越小）曲线曲率 $\\kappa$ 越大，但它在法向上的投影始终是 $-1/R$——这正是「球面各方向法曲率相同」的直观解释。"
+      },
+      {
+        "problem": "马鞍面 $z=x^2-y^2$ 在原点处，求各方向的法曲率 $\\kappa_n$、主曲率与渐近方向（取向上法向量）。",
+        "solution": "原点处（由上一知识点的计算）$\\mathrm I=dx^2+dy^2$，$\\mathrm{II}=2\\,dx^2-2\\,dy^2$，所以\n$$\\kappa_n=\\frac{2\\,dx^2-2\\,dy^2}{dx^2+dy^2}.$$\n沿 $x$ 方向（$dy=0$）：$\\kappa_n=2$；沿 $y$ 方向（$dx=0$）：$\\kappa_n=-2$。因此主曲率为 $\\kappa_1=2$、$\\kappa_2=-2$（均在坐标方向上），高斯曲率 $K=\\kappa_1\\kappa_2=-4<0$，原点是不折不扣的鞍点。再令 $dx=\\pm\\,dy$ 得 $\\kappa_n=0$：两条对角线方向是渐近方向，曲面沿它们不向法向弯曲。"
+      }
+    ],
+    "tags": [
+      "法曲率",
+      "Meusnier 定理",
+      "主曲率",
+      "脐点",
+      "渐近方向"
+    ],
+    "links": [
+      "second-fundamental-form",
+      "first-fundamental-form",
+      "principal-curvature",
+      "curvature",
+      "frenet-formulas"
+    ]
+  }
+]

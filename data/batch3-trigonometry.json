@@ -1,0 +1,475 @@
+[
+  {
+    "id": "angle-radian",
+    "title": "任意角与弧度制",
+    "titleEn": "General Angles and Radian Measure",
+    "branch": "trigonometry",
+    "level": 2,
+    "summary": "把角从直角三角形里解放出来，用弧度而非角度来度量，是三角函数的起点。",
+    "summaryEn": "Freeing the angle from right triangles and measuring it in radians instead of degrees, the starting point of trigonometry.",
+    "definition": "**角**可以看成一条射线绕它的端点旋转形成的图形：旋转方向逆时针时角为正，顺时针时为负，这样角就可以取任意大小的实数，不再限于 $0^\\circ$ 到 $360^\\circ$。所有与角 $\\alpha$ 终边相同的角组成一个集合 $\\{\\beta \\mid \\beta = \\alpha + k\\cdot 360^\\circ,\\ k \\in \\mathbb{Z}\\}$。\n\n**弧度制**换了一种度量方式：长度等于半径的弧所对的圆心角叫做 $1$ 弧度的角，记作 $1\\,\\mathrm{rad}$。一个周角是 $360^\\circ$，而它的弧长是 $2\\pi r$，所以 $360^\\circ = 2\\pi$ 弧度，即 $180^\\circ = \\pi$ 弧度。\n\n弧度制的最大好处是把角与实数一一对应，使角成为真正可以当作自变量参与运算的量，从而使三角函数成为实数集上的函数，也是后面导数公式 $\\dfrac{d}{dx}\\sin x = \\cos x$ 成立的前提。\n\n扇形中的三个量 $l = |\\alpha| r$、$S = \\dfrac{1}{2} l r = \\dfrac{1}{2} |\\alpha| r^2$ 在弧度制下形式极其简洁，这也是弧度制被广泛使用的原因之一。",
+    "definitionEn": "An **angle** can be viewed as a ray rotating about its endpoint: counterclockwise rotation gives a positive angle, clockwise gives a negative one. In this way an angle can be any real number and is no longer limited to $0^\\circ$ to $360^\\circ$. All angles sharing the same terminal side with $\\alpha$ form the set $\\{\\beta \\mid \\beta = \\alpha + k\\cdot 360^\\circ,\\ k \\in \\mathbb{Z}\\}$.\n\n**Radian measure** is another way to measure an angle: the central angle subtended by an arc equal in length to the radius is called an angle of $1$ radian, written $1\\,\\mathrm{rad}$. A full turn is $360^\\circ$ and its arc length is $2\\pi r$, so $360^\\circ = 2\\pi$ radians, i.e. $180^\\circ = \\pi$ radians.\n\nThe great advantage of radians is that they put angles in one-to-one correspondence with real numbers, so an angle becomes a genuine independent variable. This is what makes the trigonometric functions functions on the reals, and it is exactly why the derivative formula $\\dfrac{d}{dx}\\sin x = \\cos x$ holds.\n\nFor a sector, the three quantities take their cleanest form in radians: $l = |\\alpha| r$ and $S = \\dfrac{1}{2} l r = \\dfrac{1}{2} |\\alpha| r^2$.",
+    "formulas": [
+      { "latex": "180^\\circ = \\pi\\ \\mathrm{rad}", "note": "角度与弧度的桥梁，其余换算都由此推出", "noteEn": "The bridge between degrees and radians; all conversions follow from it" },
+      { "latex": "1^\\circ = \\frac{\\pi}{180}\\ \\mathrm{rad}", "note": "度化弧：乘 $\\frac{\\pi}{180}$", "noteEn": "Degrees to radians: multiply by $\\frac{\\pi}{180}$" },
+      { "latex": "1\\ \\mathrm{rad} = \\left(\\frac{180}{\\pi}\\right)^\\circ \\approx 57.3^\\circ", "note": "弧化度：乘 $\\frac{180}{\\pi}$", "noteEn": "Radians to degrees: multiply by $\\frac{180}{\\pi}$" },
+      { "latex": "l = |\\alpha|\\, r,\\qquad S = \\frac{1}{2} l r = \\frac{1}{2}|\\alpha| r^2", "note": "扇形弧长与面积公式，仅在弧度制下如此简洁", "noteEn": "Arc length and sector area, this clean only in radians" },
+      { "latex": "\\{\\beta \\mid \\beta = \\alpha + 2k\\pi,\\ k \\in \\mathbb{Z}\\}", "note": "终边相同的角的集合（弧度制写法）", "noteEn": "The set of angles coterminal with $\\alpha$, in radians" }
+    ],
+    "expression": {
+      "text": "α(rad) = α(°) × π/180",
+      "symbol": "S = ½|α|r²",
+      "note": "用弧度作单位时通常不写单位符号，例如 sin 1 表示 sin(1 弧度)。",
+      "noteEn": "With radians the unit symbol is usually omitted, so sin 1 means sin of 1 radian."
+    },
+    "properties": [
+      "弧度是**无量纲**的实数：弧长与半径之比，所以角可以作为函数自变量直接参与代数运算",
+      "正角的终边逆时针旋转，负角顺时针旋转，零角的终边与始边重合",
+      "终边相同的角相差 $360^\\circ$（或 $2\\pi$）的整数倍",
+      "$1$ 弧度略小于 $60^\\circ$，因为 $\\frac{180}{\\pi} \\approx 57.2958$"
+    ],
+    "propertiesEn": [
+      "A radian is **dimensionless**: it is a ratio of arc length to radius, so angles can enter algebra directly as function arguments",
+      "A positive angle rotates counterclockwise, a negative one clockwise, and the zero angle has its terminal side on the initial side",
+      "Coterminal angles differ by an integer multiple of $360^\\circ$ (or $2\\pi$)",
+      "$1$ radian is slightly less than $60^\\circ$ because $\\frac{180}{\\pi} \\approx 57.2958$"
+    ],
+    "plot": { "type": "unitcircle", "angle": 1.0, "title": "单位圆中的角 θ" },
+    "examples": [
+      { "problem": "把 $150^\\circ$ 化为弧度，把 $\\dfrac{5\\pi}{4}$ 化为角度。", "solution": "$150^\\circ = 150 \\times \\frac{\\pi}{180} = \\frac{5\\pi}{6}$。又 $\\frac{5\\pi}{4} = \\frac{5\\pi}{4} \\times \\frac{180^\\circ}{\\pi} = 225^\\circ$。" },
+      { "problem": "已知扇形的半径为 $3$，圆心角为 $120^\\circ$，求它的弧长与面积。", "solution": "先化弧度：$120^\\circ = \\frac{120\\pi}{180} = \\frac{2\\pi}{3}$。弧长 $l = |\\alpha| r = \\frac{2\\pi}{3} \\times 3 = 2\\pi$；面积 $S = \\frac{1}{2}|\\alpha| r^2 = \\frac{1}{2} \\times \\frac{2\\pi}{3} \\times 9 = 3\\pi$。" }
+    ],
+    "tags": ["弧度", "角", "扇形", "基础"],
+    "links": ["unit-circle", "trigonometric-definition", "sine-function", "trig-properties"]
+  },
+  {
+    "id": "trigonometric-definition",
+    "title": "三角函数的定义",
+    "titleEn": "Definition of Trigonometric Functions",
+    "branch": "trigonometry",
+    "level": 3,
+    "summary": "用单位圆上点的坐标定义 sin、cos、tan，把直角三角形中的比值推广到任意角。",
+    "summaryEn": "Defining sin, cos and tan by the coordinates of a point on the unit circle, extending triangle ratios to any angle.",
+    "definition": "回忆初中：在直角三角形中，$\\sin A = \\dfrac{\\text{对边}}{\\text{斜边}}$，$\\cos A = \\dfrac{\\text{邻边}}{\\text{斜边}}$，$\\tan A = \\dfrac{\\text{对边}}{\\text{邻边}}$。但这样定义只能处理锐角，无法定义 $150^\\circ$ 或 $-\\dfrac{\\pi}{3}$ 的三角函数值。\n\n**单位圆定义法**解决了这个问题。在平面直角坐标系中作单位圆（半径为 $1$、圆心在原点），设角 $\\alpha$ 的终边与单位圆交于点 $P(x, y)$，规定\n\n$$\\sin\\alpha = y,\\qquad \\cos\\alpha = x,\\qquad \\tan\\alpha = \\frac{y}{x}\\ (x \\neq 0).$$\n\n换句话说，**余弦是横坐标，正弦是纵坐标**。因为点 $P$ 一定在单位圆上，所以 $x^2 + y^2 = 1$，立即得到 $\\sin^2\\alpha + \\cos^2\\alpha = 1$。\n\n当 $\\alpha$ 是锐角时，取点 $P$ 向 $x$ 轴作垂线得到的直角三角形正好说明：$y$ 是 $\\alpha$ 的对边（斜边为 $1$）、$x$ 是邻边，所以新定义与初中定义完全一致——新定义只是推广，并没有改变。",
+    "definitionEn": "In junior high we learned that in a right triangle, $\\sin A = \\dfrac{\\text{opposite}}{\\text{hypotenuse}}$, $\\cos A = \\dfrac{\\text{adjacent}}{\\text{hypotenuse}}$, $\\tan A = \\dfrac{\\text{opposite}}{\\text{adjacent}}$. But such a definition only handles acute angles; it cannot give a meaning to $\\sin 150^\\circ$ or $\\cos\\left(-\\dfrac{\\pi}{3}\\right)$.\n\nThe **unit-circle definition** fixes this. Draw the unit circle (centred at the origin, radius $1$) in the coordinate plane and let the terminal side of angle $\\alpha$ meet the circle at $P(x, y)$. Define\n\n$$\\sin\\alpha = y,\\qquad \\cos\\alpha = x,\\qquad \\tan\\alpha = \\frac{y}{x}\\ (x \\neq 0).$$\n\nIn words: **the cosine is the x-coordinate and the sine is the y-coordinate**. Since $P$ lies on the unit circle, $x^2 + y^2 = 1$ immediately, giving $\\sin^2\\alpha + \\cos^2\\alpha = 1$.\n\nWhen $\\alpha$ is acute, dropping a perpendicular from $P$ to the x-axis produces a right triangle in which $y$ is the side opposite $\\alpha$ (the hypotenuse being $1$) and $x$ is the adjacent side. So the new definition agrees exactly with the old one — it only generalises it.",
+    "formulas": [
+      { "latex": "\\sin\\alpha = \\frac{y}{r},\\quad \\cos\\alpha = \\frac{x}{r},\\quad \\tan\\alpha = \\frac{y}{x}", "note": "一般点 $P(x,y)$ 与原点距离 $r=\\sqrt{x^2+y^2}$ 时的定义；单位圆中 $r=1$", "noteEn": "General definition for a point $P(x,y)$ at distance $r=\\sqrt{x^2+y^2}$; on the unit circle $r=1$" },
+      { "latex": "\\sin\\alpha = y_0,\\quad \\cos\\alpha = x_0,\\quad \\tan\\alpha = \\frac{y_0}{x_0}", "note": "单位圆上的简洁形式，$P(x_0,y_0)$ 是终边与单位圆的交点", "noteEn": "The compact unit-circle form, with $P(x_0,y_0)$ the intersection point" },
+      { "latex": "\\sin^2\\alpha + \\cos^2\\alpha = 1", "note": "由 $x^2+y^2=1$ 直接得到，是最基本的恒等式", "noteEn": "Follows directly from $x^2+y^2=1$; the most basic identity" },
+      { "latex": "\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}\\ (\\cos\\alpha \\neq 0)", "note": "正切与正弦、余弦的关系", "noteEn": "Tangent in terms of sine and cosine" },
+      { "latex": "\\sec\\alpha = \\frac{1}{\\cos\\alpha},\\quad \\csc\\alpha = \\frac{1}{\\sin\\alpha},\\quad \\cot\\alpha = \\frac{\\cos\\alpha}{\\sin\\alpha}", "note": "三个余函数的定义，注意分母不能为零", "noteEn": "The reciprocal functions; note the denominators must be non-zero" }
+    ],
+    "expression": {
+      "text": "P(cos α, sin α)",
+      "symbol": "sin=纵坐标, cos=横坐标",
+      "note": "终边上取任意一点 $P(x,y)$ 都可以（$r>0$），结果与点的选取无关。",
+      "noteEn": "Any point $P(x,y)$ on the terminal side works ($r>0$) and the result does not depend on the choice."
+    },
+    "properties": [
+      "定义域：$\\sin$、$\\cos$ 为全体实数 $\\mathbb{R}$；$\\tan$ 要求 $\\alpha \\neq \\frac{\\pi}{2} + k\\pi$",
+      "值域：$\\sin\\alpha \\in [-1,1]$，$\\cos\\alpha \\in [-1,1]$，$\\tan\\alpha \\in \\mathbb{R}$",
+      "符号由终边所在象限决定，可用「一全正、二正弦、三正切、四余弦」记忆",
+      "各三角函数都能写成终边上任意一点的坐标之比，与所取点无关"
+    ],
+    "propertiesEn": [
+      "Domain: $\\sin$ and $\\cos$ are defined on all of $\\mathbb{R}$; $\\tan$ requires $\\alpha \\neq \\frac{\\pi}{2} + k\\pi$",
+      "Range: $\\sin\\alpha \\in [-1,1]$, $\\cos\\alpha \\in [-1,1]$, $\\tan\\alpha \\in \\mathbb{R}$",
+      "The sign depends on the quadrant of the terminal side (all positive in quadrant I, sine in II, tangent in III, cosine in IV)",
+      "Every trigonometric function equals a ratio of the coordinates of any point on the terminal side, independent of the point chosen"
+    ],
+    "plot": { "type": "unitcircle", "angle": 1.047, "title": "单位圆与 sin、cos 的投影" },
+    "examples": [
+      { "problem": "角 $\\alpha$ 的终边经过点 $P(-3, 4)$，求 $\\sin\\alpha$、$\\cos\\alpha$、$\\tan\\alpha$。", "solution": "$r = \\sqrt{(-3)^2+4^2} = 5$，所以 $\\sin\\alpha = \\frac{4}{5}$，$\\cos\\alpha = -\\frac{3}{5}$，$\\tan\\alpha = \\frac{4}{-3} = -\\frac{4}{3}$。" },
+      { "problem": "已知 $\\sin\\alpha = \\frac{3}{5}$ 且 $\\alpha$ 是第二象限角，求 $\\cos\\alpha$ 与 $\\tan\\alpha$。", "solution": "由 $\\sin^2\\alpha + \\cos^2\\alpha = 1$ 得 $\\cos^2\\alpha = 1 - \\frac{9}{25} = \\frac{16}{25}$。第二象限中余弦为负，故 $\\cos\\alpha = -\\frac{4}{5}$，$\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha} = -\\frac{3}{4}$。" }
+    ],
+    "tags": ["定义", "单位圆", "三角函数", "象限符号"],
+    "links": ["unit-circle", "angle-radian", "sine-function", "cosine-function", "fundamental-identities", "triangle"]
+  },
+  {
+    "id": "sine-function",
+    "title": "正弦函数",
+    "titleEn": "The Sine Function",
+    "branch": "trigonometry",
+    "level": 3,
+    "summary": "y = sin x，以 2π 为周期的波浪函数，值域为 [-1,1]。",
+    "summaryEn": "y = sin x, the wave function of period 2π with range [-1,1].",
+    "definition": "**正弦函数**定义为\n\n$$y = \\sin x \\quad (x \\in \\mathbb{R}),$$\n\n即对每个实数 $x$（弧度值），取单位圆上角 $x$ 所对应点的纵坐标。它的图像是一条光滑的波浪曲线，叫做**正弦曲线**（sinusoid）。\n\n正弦函数有两个标志性特征：一是**有界**，输出永远夹在 $-1$ 和 $1$ 之间；二是**周期**，每当自变量增加 $2\\pi$，图像就完整重复一次。由于 $\\sin(-x) = -\\sin x$，它是**奇函数**，图像关于原点中心对称。\n\n正弦曲线是描述一切振动与波动的基本模型：单摆、弹簧、交流电、声波、光波，在理想情形下都是正弦形的。物理学中写成 $A\\sin(\\omega t + \\varphi)$，其中 $A$ 是振幅、$\\omega$ 是角频率、$\\varphi$ 是初相。\n\n它还有一个漂亮的导数性质：$\\dfrac{d}{dx}\\sin x = \\cos x$，第二次求导就回到 $-\\sin x$，这正说明正弦是「振动方程」$y'' + y = 0$ 的解。",
+    "definitionEn": "The **sine function** is defined by\n\n$$y = \\sin x \\quad (x \\in \\mathbb{R}),$$\n\nmapping each real number $x$ (in radians) to the y-coordinate of the corresponding point on the unit circle. Its graph is a smooth wave called a **sine curve** (sinusoid).\n\nTwo features define it: it is **bounded**, never leaving $[-1,1]$; and it is **periodic**, the graph repeating itself completely whenever $x$ grows by $2\\pi$. Because $\\sin(-x) = -\\sin x$ it is an **odd function**, symmetric about the origin.\n\nThe sine curve is the basic model for every vibration and wave: pendulums, springs, alternating current, sound and light in the ideal case. In physics it appears as $A\\sin(\\omega t + \\varphi)$, where $A$ is the amplitude, $\\omega$ the angular frequency and $\\varphi$ the initial phase.\n\nIt also has a beautiful derivative property: $\\dfrac{d}{dx}\\sin x = \\cos x$, and differentiating twice returns $-\\sin x$, showing that the sine solves the oscillation equation $y'' + y = 0$.",
+    "formulas": [
+      { "latex": "y = \\sin x", "note": "正弦函数的基本形式，定义域 $\\mathbb{R}$，值域 $[-1,1]$", "noteEn": "The basic form; domain $\\mathbb{R}$, range $[-1,1]$" },
+      { "latex": "\\sin(x + 2k\\pi) = \\sin x,\\ k \\in \\mathbb{Z}", "note": "周期性：最小正周期是 $2\\pi$", "noteEn": "Periodicity: the least positive period is $2\\pi$" },
+      { "latex": "\\sin(-x) = -\\sin x", "note": "奇函数，图像关于原点对称", "noteEn": "Odd function: the graph is symmetric about the origin" },
+      { "latex": "y = A\\sin(\\omega x + \\varphi) + B", "note": "振幅 $|A|$、周期 $\\frac{2\\pi}{|\\omega|}$、相位 $\\varphi$、竖直平移 $B$", "noteEn": "Amplitude $|A|$, period $\\frac{2\\pi}{|\\omega|}$, phase $\\varphi$, vertical shift $B$" },
+      { "latex": "\\frac{d}{dx}\\sin x = \\cos x", "note": "导数关系，说明正弦的变化率是余弦", "noteEn": "Derivative: the rate of change of sine is cosine" }
+    ],
+    "expression": {
+      "text": "y = sin x",
+      "symbol": "sin x",
+      "note": "在单位圆上，sin x 就是终边与单位圆交点纵坐标随 x 的变化。",
+      "noteEn": "On the unit circle, sin x tracks the y-coordinate of the point as x varies."
+    },
+    "properties": [
+      "定义域 $\\mathbb{R}$，值域 $[-1,1]$，当 $x = \\frac{\\pi}{2} + 2k\\pi$ 时取最大值 $1$，当 $x = -\\frac{\\pi}{2} + 2k\\pi$ 时取最小值 $-1$",
+      "最小正周期 $T = 2\\pi$，即在每个长度为 $2\\pi$ 的区间上图像完全重复",
+      "奇函数：图像关于原点中心对称，且 $\\sin 0 = 0$",
+      "在 $\\left[-\\frac{\\pi}{2} + 2k\\pi,\\ \\frac{\\pi}{2} + 2k\\pi\\right]$ 上单调递增，在 $\\left[\\frac{\\pi}{2} + 2k\\pi,\\ \\frac{3\\pi}{2} + 2k\\pi\\right]$ 上单调递减",
+      "对称轴为 $x = \\frac{\\pi}{2} + k\\pi$，对称中心为 $(k\\pi, 0)$"
+    ],
+    "propertiesEn": [
+      "Domain $\\mathbb{R}$, range $[-1,1]$; maximum $1$ at $x = \\frac{\\pi}{2} + 2k\\pi$ and minimum $-1$ at $x = -\\frac{\\pi}{2} + 2k\\pi$",
+      "Least positive period $T = 2\\pi$, repeating exactly on every interval of length $2\\pi$",
+      "Odd function: symmetric about the origin, with $\\sin 0 = 0$",
+      "Increasing on $\\left[-\\frac{\\pi}{2} + 2k\\pi,\\ \\frac{\\pi}{2} + 2k\\pi\\right]$ and decreasing on $\\left[\\frac{\\pi}{2} + 2k\\pi,\\ \\frac{3\\pi}{2} + 2k\\pi\\right]$",
+      "Axes of symmetry $x = \\frac{\\pi}{2} + k\\pi$; centres of symmetry $(k\\pi, 0)$"
+    ],
+    "plot": { "type": "function", "functions": [{ "expr": "sin(x)", "color": "#4cc9f0", "label": "y = sin x" }], "xRange": [-7, 7], "yRange": [-1.5, 1.5], "title": "正弦函数 y = sin x" },
+    "examples": [
+      { "problem": "求函数 $y = 3\\sin\\left(2x - \\frac{\\pi}{3}\\right)$ 的振幅、周期和最大值。", "solution": "振幅为 $|A| = 3$；周期 $T = \\frac{2\\pi}{|\\omega|} = \\frac{2\\pi}{2} = \\pi$；当 $2x - \\frac{\\pi}{3} = \\frac{\\pi}{2} + 2k\\pi$，即 $x = \\frac{5\\pi}{12} + k\\pi$ 时取最大值 $3$。" },
+      { "problem": "比较 $\\sin\\frac{\\pi}{5}$ 与 $\\sin\\frac{2\\pi}{5}$ 的大小。", "solution": "两者都在区间 $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$ 内，而 $\\sin$ 在此区间单调递增，且 $\\frac{\\pi}{5} < \\frac{2\\pi}{5}$，所以 $\\sin\\frac{\\pi}{5} < \\sin\\frac{2\\pi}{5}$。" }
+    ],
+    "tags": ["正弦", "周期函数", "波浪", "奇函数"],
+    "links": ["unit-circle", "cosine-function", "tangent-function", "trig-transform", "trig-properties", "trigonometric-definition", "derivative", "integral"]
+  },
+  {
+    "id": "cosine-function",
+    "title": "余弦函数",
+    "titleEn": "The Cosine Function",
+    "branch": "trigonometry",
+    "level": 3,
+    "summary": "y = cos x，形状与正弦相同但向左平移了 π/2 的偶函数。",
+    "summaryEn": "y = cos x, the same wave as sine but shifted left by π/2 and even.",
+    "definition": "**余弦函数**定义为\n\n$$y = \\cos x \\quad (x \\in \\mathbb{R}),$$\n\n即单位圆上角 $x$ 所对应点的横坐标。它的图像叫做**余弦曲线**，形状与正弦曲线完全相同，只是整体向左平移了 $\\dfrac{\\pi}{2}$：\n\n$$\\cos x = \\sin\\left(x + \\frac{\\pi}{2}\\right).$$\n\n与正弦不同，余弦是**偶函数**：$\\cos(-x) = \\cos x$，图像关于 $y$ 轴对称（而正弦图像关于原点对称）。在 $x = 0$ 处余弦取到最大值 $1$，正弦则从 $0$ 出发上升。\n\n余弦在几何与物理中的角色同样核心。它是向量点积的组成部分（$\\vec a\\cdot\\vec b = |\\vec a||\\vec b|\\cos\\theta$），是傅里叶级数中与正弦配对的另一组基函数，也是描述简谐运动时常用的初相位选择。\n\n它的导数是 $\\dfrac{d}{dx}\\cos x = -\\sin x$——注意那个负号，这正是「余弦过峰值时斜率为零，随后向负方向变化」的体现。",
+    "definitionEn": "The **cosine function** is defined by\n\n$$y = \\cos x \\quad (x \\in \\mathbb{R}),$$\n\nsending $x$ to the x-coordinate of the corresponding point on the unit circle. Its graph, the **cosine curve**, has exactly the same shape as the sine curve but is shifted left by $\\dfrac{\\pi}{2}$:\n\n$$\\cos x = \\sin\\left(x + \\frac{\\pi}{2}\\right).$$\n\nUnlike the sine, the cosine is **even**: $\\cos(-x) = \\cos x$, so its graph is symmetric about the y-axis (while the sine graph is symmetric about the origin). The cosine attains its maximum $1$ at $x = 0$, whereas the sine starts at $0$ and rises.\n\nThe cosine plays an equally central role in geometry and physics. It appears in the dot product ($\\vec a\\cdot\\vec b = |\\vec a||\\vec b|\\cos\\theta$), it is the partner basis function of the sine in Fourier series, and it is often the natural choice of phase for simple harmonic motion.\n\nIts derivative is $\\dfrac{d}{dx}\\cos x = -\\sin x$ — note the minus sign, which reflects that at its peak the cosine has zero slope and then decreases.",
+    "formulas": [
+      { "latex": "y = \\cos x", "note": "余弦函数的基本形式，定义域 $\\mathbb{R}$，值域 $[-1,1]$", "noteEn": "The basic form; domain $\\mathbb{R}$, range $[-1,1]$" },
+      { "latex": "\\cos x = \\sin\\left(x + \\frac{\\pi}{2}\\right)", "note": "余弦曲线是正弦曲线左移 $\\frac{\\pi}{2}$", "noteEn": "The cosine curve is the sine curve shifted left by $\\frac{\\pi}{2}$" },
+      { "latex": "\\cos(x + 2k\\pi) = \\cos x,\\quad \\cos(-x) = \\cos x", "note": "周期性（周期 $2\\pi$）与偶函数性", "noteEn": "Periodicity (period $2\\pi$) and evenness" },
+      { "latex": "\\frac{d}{dx}\\cos x = -\\sin x", "note": "导数，负号是关键", "noteEn": "Derivative; the minus sign matters" },
+      { "latex": "\\vec a \\cdot \\vec b = |\\vec a||\\vec b|\\cos\\theta", "note": "向量点积中的余弦，几何应用", "noteEn": "Cosine in the dot product, a geometric application" }
+    ],
+    "expression": {
+      "text": "y = cos x",
+      "symbol": "cos x",
+      "note": "在单位圆上，cos x 是终边与单位圆交点的横坐标。",
+      "noteEn": "On the unit circle, cos x is the x-coordinate of the intersection point."
+    },
+    "properties": [
+      "定义域 $\\mathbb{R}$，值域 $[-1,1]$，当 $x = 2k\\pi$ 时取最大值 $1$，当 $x = \\pi + 2k\\pi$ 时取最小值 $-1$",
+      "最小正周期 $T = 2\\pi$，与正弦相同",
+      "偶函数：图像关于 $y$ 轴对称，满足 $\\cos(-x) = \\cos x$",
+      "在 $[(2k-1)\\pi,\\ 2k\\pi]$ 上单调递增，在 $[2k\\pi,\\ (2k+1)\\pi]$ 上单调递减",
+      "对称轴为 $x = k\\pi$，对称中心为 $\\left(\\frac{\\pi}{2} + k\\pi,\\ 0\\right)$"
+    ],
+    "propertiesEn": [
+      "Domain $\\mathbb{R}$, range $[-1,1]$; maximum $1$ at $x = 2k\\pi$ and minimum $-1$ at $x = \\pi + 2k\\pi$",
+      "Least positive period $T = 2\\pi$, the same as the sine",
+      "Even function: symmetric about the y-axis, with $\\cos(-x) = \\cos x$",
+      "Increasing on $[(2k-1)\\pi,\\ 2k\\pi]$ and decreasing on $[2k\\pi,\\ (2k+1)\\pi]$",
+      "Axes of symmetry $x = k\\pi$; centres of symmetry $\\left(\\frac{\\pi}{2} + k\\pi,\\ 0\\right)$"
+    ],
+    "plot": { "type": "function", "functions": [{ "expr": "cos(x)", "color": "#06d6a0", "label": "y = cos x" }], "xRange": [-7, 7], "yRange": [-1.5, 1.5], "title": "余弦函数 y = cos x" },
+    "examples": [
+      { "problem": "求函数 $y = 2\\cos\\left(\\frac{x}{2} + \\frac{\\pi}{6}\\right)$ 的周期与最小值。", "solution": "周期 $T = \\frac{2\\pi}{\\frac{1}{2}} = 4\\pi$。余弦的最小值为 $-1$，故 $y$ 的最小值为 $-2$，在 $\\frac{x}{2} + \\frac{\\pi}{6} = \\pi + 2k\\pi$，即 $x = \\frac{5\\pi}{3} + 4k\\pi$ 时取得。" },
+      { "problem": "利用偶函数性计算 $\\cos\\left(-\\frac{5\\pi}{6}\\right)$。", "solution": "$\\cos\\left(-\\frac{5\\pi}{6}\\right) = \\cos\\frac{5\\pi}{6} = -\\frac{\\sqrt{3}}{2}$。" }
+    ],
+    "tags": ["余弦", "周期函数", "偶函数", "点积"],
+    "links": ["unit-circle", "sine-function", "tangent-function", "trig-transform", "trig-properties", "trigonometric-definition", "derivative", "triangle"]
+  },
+  {
+    "id": "tangent-function",
+    "title": "正切函数",
+    "titleEn": "The Tangent Function",
+    "branch": "trigonometry",
+    "level": 3,
+    "summary": "y = tan x = sin x / cos x，周期为 π，有无穷多条竖直渐近线的奇函数。",
+    "summaryEn": "y = tan x = sin x / cos x, an odd function of period π with infinitely many vertical asymptotes.",
+    "definition": "**正切函数**定义为正弦与余弦之商：\n\n$$y = \\tan x = \\frac{\\sin x}{\\cos x},\\qquad x \\neq \\frac{\\pi}{2} + k\\pi,\\ k \\in \\mathbb{Z}.$$\n\n由于分母 $\\cos x$ 会让整个式子在这些点失效，凡是 $\\cos x = 0$ 的地方正切都没有定义，图像在那里出现**竖直渐近线**，函数值冲向正无穷或负无穷。因此正切函数的定义域是「去掉一些点」的实数集，而不是整个 $\\mathbb{R}$。\n\n正切的周期只有 $\\pi$（而不是 $2\\pi$），因为在区间长度 $\\pi$ 之内图像已完整重复一次：\n\n$$\\tan(x + \\pi) = \\tan x.$$\n\n它还是**奇函数**：$\\tan(-x) = -\\tan x$，图像关于原点中心对称。在每个区间 $\\left(-\\frac{\\pi}{2} + k\\pi,\\ \\frac{\\pi}{2} + k\\pi\\right)$ 上它严格单调递增，值域覆盖全部实数。\n\n几何上正切就是直线的**斜率**：单位圆上与角 $x$ 终边相同的直线斜率恰为 $\\tan x$，这也是「正切」这个名字的由来。",
+    "definitionEn": "The **tangent function** is defined as the quotient of sine and cosine:\n\n$$y = \\tan x = \\frac{\\sin x}{\\cos x},\\qquad x \\neq \\frac{\\pi}{2} + k\\pi,\\ k \\in \\mathbb{Z}.$$\n\nBecause the denominator $\\cos x$ vanishes at some points, the tangent is undefined wherever $\\cos x = 0$; the graph has a **vertical asymptote** there and the values shoot off to $+\\infty$ or $-\\infty$. Its domain is therefore the real line with those points removed, not all of $\\mathbb{R}$.\n\nThe tangent has period $\\pi$ only (not $2\\pi$), because the pattern already repeats within an interval of length $\\pi$:\n\n$$\\tan(x + \\pi) = \\tan x.$$\n\nIt is also an **odd function**, $\\tan(-x) = -\\tan x$, with a graph symmetric about the origin. On every interval $\\left(-\\frac{\\pi}{2} + k\\pi,\\ \\frac{\\pi}{2} + k\\pi\\right)$ it is strictly increasing, and its range covers every real number.\n\nGeometrically the tangent is a **slope**: the slope of the line along the terminal side of angle $x$ equals $\\tan x$, which is exactly where the name comes from.",
+    "formulas": [
+      { "latex": "y = \\tan x = \\frac{\\sin x}{\\cos x}", "note": "定义式，要求 $\\cos x \\neq 0$", "noteEn": "The definition, requiring $\\cos x \\neq 0$" },
+      { "latex": "\\tan(x + k\\pi) = \\tan x", "note": "最小正周期为 $\\pi$，是正弦余弦周期的一半", "noteEn": "Least positive period $\\pi$, half that of sine and cosine" },
+      { "latex": "\\tan(-x) = -\\tan x", "note": "奇函数，图像关于原点中心对称", "noteEn": "Odd function: symmetric about the origin" },
+      { "latex": "x = \\frac{\\pi}{2} + k\\pi", "note": "全部竖直渐近线，函数在此处无定义", "noteEn": "All vertical asymptotes; the function is undefined there" },
+      { "latex": "1 + \\tan^2 x = \\sec^2 x = \\frac{1}{\\cos^2 x}", "note": "正切与正割的平方关系，由 $\\sin^2+\\cos^2=1$ 除以 $\\cos^2$ 得到", "noteEn": "The Pythagorean relation for tangent and secant, from dividing $\\sin^2+\\cos^2=1$ by $\\cos^2$" }
+    ],
+    "expression": {
+      "text": "y = tan x  (x ≠ π/2 + kπ)",
+      "symbol": "tan x = sin x / cos x",
+      "note": "正切可以理解为角 $x$ 所对应直线的斜率。",
+      "noteEn": "The tangent can be read as the slope of the line at angle $x$."
+    },
+    "properties": [
+      "定义域 $\\{x \\mid x \\neq \\frac{\\pi}{2} + k\\pi,\\ k \\in \\mathbb{Z}\\}$，值域为全体实数 $\\mathbb{R}$",
+      "最小正周期 $T = \\pi$，比正弦余弦的周期短一半",
+      "奇函数，图像关于原点中心对称，且 $\\tan 0 = 0$",
+      "在每个开区间 $\\left(-\\frac{\\pi}{2} + k\\pi,\\ \\frac{\\pi}{2} + k\\pi\\right)$ 上单独单调递增，但在整个定义域上不是增函数",
+      "有无数条竖直渐近线 $x = \\frac{\\pi}{2} + k\\pi$，图像无最大值也无最小值",
+      "对称中心为 $\\left(\\frac{k\\pi}{2}, 0\\right)$"
+    ],
+    "propertiesEn": [
+      "Domain $\\{x \\mid x \\neq \\frac{\\pi}{2} + k\\pi,\\ k \\in \\mathbb{Z}\\}$ and range all of $\\mathbb{R}$",
+      "Least positive period $T = \\pi$, half of the sine and cosine period",
+      "Odd function, symmetric about the origin, with $\\tan 0 = 0$",
+      "Strictly increasing on each open interval $\\left(-\\frac{\\pi}{2} + k\\pi,\\ \\frac{\\pi}{2} + k\\pi\\right)$, but not increasing on its whole domain",
+      "Infinitely many vertical asymptotes $x = \\frac{\\pi}{2} + k\\pi$; the function has no maximum or minimum",
+      "Centres of symmetry at $\\left(\\frac{k\\pi}{2}, 0\\right)$"
+    ],
+    "plot": { "type": "function", "functions": [{ "expr": "tan(x)", "color": "#ff6b9d", "label": "y = tan x" }], "xRange": [-6.5, 6.5], "yRange": [-4, 4], "title": "正切函数 y = tan x" },
+    "examples": [
+      { "problem": "求函数 $y = \\tan\\left(2x - \\frac{\\pi}{4}\\right)$ 的定义域与周期。", "solution": "由 $2x - \\frac{\\pi}{4} \\neq \\frac{\\pi}{2} + k\\pi$ 得 $2x \\neq \\frac{3\\pi}{4} + k\\pi$，即 $x \\neq \\frac{3\\pi}{8} + \\frac{k\\pi}{2}$。正切函数的周期为 $\\pi$，内部整体除以系数 $2$，故 $y$ 的周期 $T = \\frac{\\pi}{2}$。" },
+      { "problem": "比较 $\\tan 1$ 与 $\\tan 2$ 的大小。", "solution": "$1$ 与 $2$ 落在不同的单调区间内：$1 \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ 但 $2 \\in \\left(\\frac{\\pi}{2}, \\frac{3\\pi}{2}\\right)$。此时 $\\tan 1 > 0$ 而 $\\tan 2 < 0$，所以 $\\tan 1 > \\tan 2$。" }
+    ],
+    "tags": ["正切", "渐近线", "奇函数", "斜率"],
+    "links": ["unit-circle", "sine-function", "cosine-function", "trig-properties", "trigonometric-definition", "trigonometric-identities", "derivative"]
+  },
+  {
+    "id": "trig-transform",
+    "title": "三角函数图像变换",
+    "titleEn": "Transformations of Trigonometric Graphs",
+    "branch": "trigonometry",
+    "level": 4,
+    "summary": "通过振幅 A、角频率 ω、相位 φ 和竖直平移 B，把基本波形拉伸压缩成任意正弦曲线。",
+    "summaryEn": "Reshaping the basic wave into any sinusoid through amplitude A, angular frequency ω, phase φ and vertical shift B.",
+    "definition": "一切正弦型的波形都可以写成\n\n$$y = A\\sin(\\omega x + \\varphi) + B \\quad (A \\neq 0,\\ \\omega > 0).$$\n\n它的图像可以由最基础的 $y = \\sin x$ 经过四种变换拼出来：**振幅变换**、**周期变换**、**相位变换**、**上下平移**。\n\n- $A$ 叫**振幅**，把图像纵向拉伸为原来的 $|A|$ 倍，值域变为 $[-|A|, |A|]$；$A<0$ 时还要上下翻转。\n- $\\omega$ 决定**周期** $T = \\dfrac{2\\pi}{\\omega}$：$\\omega > 1$ 图像横向压缩变密，$0 < \\omega < 1$ 则横向拉伸变疏。\n- $\\varphi$ 是**初相**，把图像水平平移 $\\left|\\dfrac{\\varphi}{\\omega}\\right|$：$\\varphi > 0$ 向左移，$\\varphi < 0$ 向右移。\n- $B$ 把整条曲线上下平移 $B$ 个单位，于是值域变成 $[B-|A|,\\ B+|A|]$。\n\n需要注意顺序：横向变换（$\\omega$）与水平平移（$\\varphi$）的先后会影响对平移量的理解，规范做法是先把 $\\omega x + \\varphi$ 提出写成 $\\omega\\left(x + \\dfrac{\\varphi}{\\omega}\\right)$，再按「先伸缩后平移」逐步操作。\n\n四个量都可以从图像上直接读出：最高点与最低点的平均值给出 $B$，高度一半给出 $|A|$，相邻两个零点的距离给出半个周期，最先上升到最高点的横坐标给出相位。",
+    "definitionEn": "Every sinusoidal wave can be written\n\n$$y = A\\sin(\\omega x + \\varphi) + B \\quad (A \\neq 0,\\ \\omega > 0).$$\n\nIts graph is built from the base curve $y = \\sin x$ by four transformations: **amplitude**, **period**, **phase** and **vertical shift**.\n\n- $A$ is the **amplitude**: it stretches the graph vertically by $|A|$, making the range $[-|A|, |A|]$; a negative $A$ also flips it vertically.\n- $\\omega$ fixes the **period** $T = \\dfrac{2\\pi}{\\omega}$: $\\omega > 1$ compresses the graph horizontally, $0 < \\omega < 1$ stretches it.\n- $\\varphi$ is the **initial phase**, shifting the graph horizontally by $\\left|\\dfrac{\\varphi}{\\omega}\\right|$: left for $\\varphi > 0$, right for $\\varphi < 0$.\n- $B$ moves the whole curve up or down by $B$, giving the range $[B-|A|,\\ B+|A|]$.\n\nThe order matters: horizontal scaling by $\\omega$ and the horizontal shift $\\varphi$ interact, so the standard trick is to rewrite $\\omega x + \\varphi$ as $\\omega\\left(x + \\dfrac{\\varphi}{\\omega}\\right)$ before applying the steps.\n\nAll four parameters can be read straight off a graph: the average of the highest and lowest values gives $B$, half the height gives $|A|$, the distance between two consecutive zeros gives half a period, and the first maximum fixes the phase.",
+    "formulas": [
+      { "latex": "y = A\\sin(\\omega x + \\varphi) + B", "note": "一般正弦型函数的四参数形式", "noteEn": "The four-parameter general sinusoidal form" },
+      { "latex": "T = \\frac{2\\pi}{\\omega}", "note": "周期由角频率决定，$\\omega$ 越大周期越短", "noteEn": "The period is set by the angular frequency; larger $\\omega$ means a shorter period" },
+      { "latex": "\\text{振幅} = |A|,\\qquad \\text{值域} = [B-|A|,\\ B+|A|]", "note": "振幅与值域，用于从图像反推参数", "noteEn": "Amplitude and range, used to recover the parameters from a graph" },
+      { "latex": "\\omega = \\frac{\\pi}{3}\\ \\Rightarrow\\ \\text{由 } y=\\sin x \\text{ 横向压缩为 } y=\\sin 3x", "note": "周期变换的用法：想得到周期 $T$，取 $\\omega = \\frac{2\\pi}{T}$", "noteEn": "Using a period transformation: to obtain a period $T$, take $\\omega = \\frac{2\\pi}{T}$" },
+      { "latex": "y = \\sin\\left(x + \\frac{\\pi}{2}\\right) = \\cos x", "note": "相位变换的典型例子：向左平移 $\\frac{\\pi}{2}$ 把正弦变成余弦", "noteEn": "A typical phase shift: translating left by $\\frac{\\pi}{2}$ turns the sine into the cosine" }
+    ],
+    "expression": {
+      "text": "y = A sin(ωx + φ) + B",
+      "symbol": "A sin(ωx + φ) + B",
+      "note": "从图像读参数的口诀：平均定 $B$，峰值差定 $A$，周期定 $\\omega$，起点定 $\\varphi$。",
+      "noteEn": "Reading parameters from a graph: average gives $B$, peak difference gives $A$, period gives $\\omega$, starting point gives $\\varphi$."
+    },
+    "properties": [
+      "定义域仍为 $\\mathbb{R}$，值域变为 $[B-|A|,\\ B+|A|]$，最大值为 $B+|A|$，最小值为 $B-|A|$",
+      "最小正周期 $T = \\frac{2\\pi}{\\omega}$，与 $A$、$\\varphi$、$B$ 都无关",
+      "图像可由 $y = \\sin x$ 作四种变换（伸缩、平移）得到，也可以直接「五点法」描点作图",
+      "横向平移量是 $\\frac{\\varphi}{\\omega}$ 而不是 $\\varphi$，这是最容易出错的地方",
+      "对称轴出现在取最值的横坐标处，由 $\\omega x + \\varphi = \\frac{\\pi}{2} + k\\pi$ 解出",
+      "$\\varphi > 0$ 时图像左移（相位超前），$\\varphi < 0$ 时图像右移（相位滞后）"
+    ],
+    "propertiesEn": [
+      "The domain is still $\\mathbb{R}$; the range becomes $[B-|A|,\\ B+|A|]$ with maximum $B+|A|$ and minimum $B-|A|$",
+      "Least positive period $T = \\frac{2\\pi}{\\omega}$, independent of $A$, $\\varphi$ and $B$",
+      "The graph comes from $y = \\sin x$ by four stretching and shifting operations, or directly by plotting five key points",
+      "The horizontal shift is $\\frac{\\varphi}{\\omega}$, not $\\varphi$ — the most common pitfall",
+      "Axes of symmetry occur at the extreme values, found from $\\omega x + \\varphi = \\frac{\\pi}{2} + k\\pi$",
+      "$\\varphi > 0$ shifts the graph left (phase lead), $\\varphi < 0$ shifts it right (phase lag)"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)", "color": "#4cc9f0", "label": "y = sin x" },
+        { "expr": "2*sin(x)", "color": "#ff6b9d", "label": "y = 2 sin x" },
+        { "expr": "sin(2*x)", "color": "#ffd166", "label": "y = sin 2x" }
+      ],
+      "xRange": [-7, 7],
+      "yRange": [-2.4, 2.4],
+      "title": "振幅变换与周期变换对比"
+    },
+    "examples": [
+      { "problem": "把 $y = \\sin x$ 的图像先横向压缩为原来的 $\\frac{1}{2}$，再向右平移 $\\frac{\\pi}{6}$，得到什么函数？", "solution": "横向压缩为 $\\frac{1}{2}$ 得到 $y = \\sin 2x$；再向右平移 $\\frac{\\pi}{6}$ 得 $y = \\sin 2\\left(x - \\frac{\\pi}{6}\\right) = \\sin\\left(2x - \\frac{\\pi}{3}\\right)$。注意平移量 $\\frac{\\pi}{6}$ 必须写在括号内乘上 $\\omega$。" },
+      { "problem": "某正弦曲线最高点为 $(2, 3)$，最低点为 $(6, -1)$，求它的解析式。", "solution": "最大值 $3$、最小值 $-1$，故 $B = \\frac{3+(-1)}{2} = 1$，$|A| = \\frac{3-(-1)}{2} = 2$。半个周期为 $6 - 2 = 4$，故 $T = 8$，$\\omega = \\frac{2\\pi}{8} = \\frac{\\pi}{4}$。取 $A = 2$，由 $x = 2$ 处取最大值得 $\\frac{\\pi}{4}\\times 2 + \\varphi = \\frac{\\pi}{2}$，即 $\\varphi = 0$。所以 $y = 2\\sin\\frac{\\pi x}{4} + 1$。" }
+    ],
+    "tags": ["图像变换", "振幅", "周期", "相位", "正弦型函数"],
+    "links": ["sine-function", "cosine-function", "trig-properties", "trigonometric-identities", "unit-circle"]
+  },
+  {
+    "id": "fundamental-identities",
+    "title": "同角三角函数关系",
+    "titleEn": "Fundamental Trigonometric Identities",
+    "branch": "trigonometry",
+    "level": 3,
+    "summary": "同一个角的 sin、cos、tan 之间的三条基本关系：平方关系、商数关系、倒数关系。",
+    "summaryEn": "The basic relations among sin, cos and tan of one angle: Pythagorean, quotient and reciprocal.",
+    "definition": "**同角三角函数关系**指的是同一个角 $\\alpha$ 的不同三角函数之间的恒等式。它们全部来自单位圆上 $x^2 + y^2 = 1$ 这一个事实，却足以把三个函数中的任意一个化归为另一个。\n\n最基本的是**平方关系**：\n\n$$\\sin^2\\alpha + \\cos^2\\alpha = 1.$$\n\n它在单位圆中就是勾股定理；两边同时除以 $\\cos^2\\alpha$ 得到 $1 + \\tan^2\\alpha = \\sec^2\\alpha$，除以 $\\sin^2\\alpha$ 得到 $1 + \\cot^2\\alpha = \\csc^2\\alpha$。\n\n其次是**商数关系**：\n\n$$\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha},\\qquad \\cot\\alpha = \\frac{\\cos\\alpha}{\\sin\\alpha}.$$\n\n以及**倒数关系** $\\sec\\alpha = \\dfrac{1}{\\cos\\alpha}$、$\\csc\\alpha = \\dfrac{1}{\\sin\\alpha}$、$\\cot\\alpha = \\dfrac{1}{\\tan\\alpha}$。\n\n这三组关系是「知一求二」的工具：只要知道一个角的某个三角函数值和它所在（或可能的）象限，就能求出其余全部函数值。做这类题时**先定象限判断符号，再用平方关系求绝对值**，是最稳妥的流程。",
+    "definitionEn": "The **fundamental identities** relate the different trigonometric functions of the same angle $\\alpha$. All of them come from the single fact $x^2 + y^2 = 1$ on the unit circle, yet they are enough to convert any one of the functions into another.\n\nThe most basic is the **Pythagorean relation**:\n\n$$\\sin^2\\alpha + \\cos^2\\alpha = 1.$$\n\nOn the unit circle this is just Pythagoras' theorem. Dividing both sides by $\\cos^2\\alpha$ gives $1 + \\tan^2\\alpha = \\sec^2\\alpha$, and dividing by $\\sin^2\\alpha$ gives $1 + \\cot^2\\alpha = \\csc^2\\alpha$.\n\nNext is the **quotient relation**:\n\n$$\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha},\\qquad \\cot\\alpha = \\frac{\\cos\\alpha}{\\sin\\alpha}.$$\n\nFinally the **reciprocal relations**: $\\sec\\alpha = \\dfrac{1}{\\cos\\alpha}$, $\\csc\\alpha = \\dfrac{1}{\\sin\\alpha}$ and $\\cot\\alpha = \\dfrac{1}{\\tan\\alpha}$.\n\nTogether these form a tool for finding all values from one: knowing a single trigonometric value of an angle and its quadrant, you can recover all the others. The reliable procedure is to **fix the quadrant to determine the signs, then use the Pythagorean relation for the magnitude**.",
+    "formulas": [
+      { "latex": "\\sin^2\\alpha + \\cos^2\\alpha = 1", "note": "平方关系，最核心的恒等式，由单位圆的 $x^2+y^2=1$ 得到", "noteEn": "The Pythagorean relation, the core identity, from $x^2+y^2=1$ on the unit circle" },
+      { "latex": "\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}", "note": "商数关系，把正切化为正弦与余弦之比", "noteEn": "Quotient relation: tangent as a ratio of sine to cosine" },
+      { "latex": "1 + \\tan^2\\alpha = \\sec^2\\alpha = \\frac{1}{\\cos^2\\alpha}", "note": "平方关系除以 $\\cos^2\\alpha$ 得到", "noteEn": "Pythagorean relation divided by $\\cos^2\\alpha$" },
+      { "latex": "1 + \\cot^2\\alpha = \\csc^2\\alpha = \\frac{1}{\\sin^2\\alpha}", "note": "平方关系除以 $\\sin^2\\alpha$ 得到", "noteEn": "Pythagorean relation divided by $\\sin^2\\alpha$" },
+      { "latex": "\\tan\\alpha\\cdot\\cot\\alpha = 1", "note": "倒数关系，$\\tan$ 与 $\\cot$ 互为倒数", "noteEn": "Reciprocal relation: $\\tan$ and $\\cot$ are reciprocals" }
+    ],
+    "expression": {
+      "text": "sin²α + cos²α = 1,  tan α = sin α / cos α",
+      "symbol": "知一求二",
+      "note": "这些关系对使式子有意义的一切角都成立，与角的大小、象限无关。",
+      "noteEn": "These hold for every angle where the expressions are defined, regardless of size or quadrant."
+    },
+    "properties": [
+      "对使两边都有意义的任意角都成立，是**恒等式**而不是方程，不需要「解」",
+      "$\\sin^2\\alpha$ 是 $(\\sin\\alpha)^2$ 的简写，不能写成 $\\sin\\alpha^2$",
+      "由平方关系可得 $\\sin^2\\alpha = 1 - \\cos^2\\alpha = (1-\\cos\\alpha)(1+\\cos\\alpha)$，常用于约分与化简",
+      "已知一个函数值求其余两个时，必须结合象限（或已知角范围）确定正负号，否则有两个答案",
+      "把 $\\sin\\alpha + \\cos\\alpha$ 记作 $t$，则 $\\sin\\alpha\\cos\\alpha = \\frac{t^2-1}{2}$，这是对称式的常用转换"
+    ],
+    "propertiesEn": [
+      "They hold for every angle where both sides are defined; they are **identities**, not equations to be solved",
+      "$\\sin^2\\alpha$ abbreviates $(\\sin\\alpha)^2$ and must not be written as $\\sin\\alpha^2$",
+      "From the Pythagorean relation, $\\sin^2\\alpha = 1 - \\cos^2\\alpha = (1-\\cos\\alpha)(1+\\cos\\alpha)$, handy for cancelling and simplifying",
+      "When recovering the other two values from one, the quadrant (or the range of the angle) must be used to fix the signs, otherwise there are two answers",
+      "Writing $t = \\sin\\alpha + \\cos\\alpha$ gives $\\sin\\alpha\\cos\\alpha = \\frac{t^2-1}{2}$, a standard symmetric substitution"
+    ],
+    "examples": [
+      { "problem": "已知 $\\tan\\alpha = 2$，且 $\\alpha$ 是第三象限角，求 $\\sin\\alpha$ 与 $\\cos\\alpha$。", "solution": "由 $\\frac{\\sin\\alpha}{\\cos\\alpha} = 2$ 得 $\\sin\\alpha = 2\\cos\\alpha$。代入平方关系：$4\\cos^2\\alpha + \\cos^2\\alpha = 1$，即 $\\cos^2\\alpha = \\frac{1}{5}$。第三象限中 $\\cos\\alpha < 0$，故 $\\cos\\alpha = -\\frac{\\sqrt{5}}{5}$，$\\sin\\alpha = -\\frac{2\\sqrt{5}}{5}$。" },
+      { "problem": "化简 $\\dfrac{\\sin\\alpha}{1-\\cos\\alpha} + \\dfrac{1-\\cos\\alpha}{\\sin\\alpha}$。", "solution": "通分得 $\\frac{\\sin^2\\alpha + (1-\\cos\\alpha)^2}{\\sin\\alpha(1-\\cos\\alpha)} = \\frac{\\sin^2\\alpha + 1 - 2\\cos\\alpha + \\cos^2\\alpha}{\\sin\\alpha(1-\\cos\\alpha)} = \\frac{2 - 2\\cos\\alpha}{\\sin\\alpha(1-\\cos\\alpha)} = \\frac{2(1-\\cos\\alpha)}{\\sin\\alpha(1-\\cos\\alpha)} = \\frac{2}{\\sin\\alpha}$。" }
+    ],
+    "tags": ["恒等式", "平方关系", "商数关系", "化简"],
+    "links": ["unit-circle", "trigonometric-definition", "sine-function", "cosine-function", "tangent-function", "reduction-formulas", "trigonometric-identities", "pythagorean"]
+  },
+  {
+    "id": "reduction-formulas",
+    "title": "诱导公式",
+    "titleEn": "Reduction Formulas",
+    "branch": "trigonometry",
+    "level": 3,
+    "summary": "把任意角的三角函数化到锐角，用几组公式统一处理 ±α、π±α、π/2±α 等情形。",
+    "summaryEn": "Reducing a trigonometric value of any angle to that of an acute angle, via the families ±α, π±α, π/2±α.",
+    "definition": "**诱导公式**（也叫归约公式）是一组把任意角的三角函数值转化为某个锐角三角函数值的公式。有了它们，只需记住 $0$ 到 $\\dfrac{\\pi}{2}$ 之间的函数值，就能算出任何角的函数值。\n\n它们可以按自变量分成四族：$-\\alpha$、$\\pi \\pm \\alpha$、$2\\pi - \\alpha$、以及最「别扭」的 $\\dfrac{\\pi}{2} \\pm \\alpha$ 和 $\\dfrac{3\\pi}{2} \\pm \\alpha$。前三族的函数名保持不变，第四族则会发生**名称互换**：正弦与余弦互换、正切与余切互换。\n\n统一记忆口诀是：\n\n> **奇变偶不变，符号看象限。**\n\n这里的「$\\frac{\\pi}{2}$ 的奇数倍还是偶数倍」决定函数名是否改变：$\\pi \\pm \\alpha$ 中的 $\\pi$ 是 $\\frac{\\pi}{2}$ 的 2 倍（偶），函数名不变；$\\frac{\\pi}{2}\\pm\\alpha$ 中系数是 1（奇），函数名要变。而「符号看象限」指的是：**把 $\\alpha$ 当成锐角**，判断原角落在哪个象限，该象限中原函数的正负就是结果的正负。\n\n本质上看，诱导公式就是单位圆的**对称性**：$-\\alpha$ 关于 $x$ 轴对称，$\\pi-\\alpha$ 关于 $y$ 轴对称，$\\pi+\\alpha$ 关于原点对称，$\\frac{\\pi}{2}-\\alpha$ 关于直线 $y=x$ 对称。",
+    "definitionEn": "The **reduction formulas** convert the trigonometric value of any angle into that of an acute angle. With them, memorising the values on $\\left[0, \\dfrac{\\pi}{2}\\right]$ is enough to evaluate any angle at all.\n\nThey fall into four families by argument: $-\\alpha$, $\\pi \\pm \\alpha$, $2\\pi - \\alpha$, and the trickier $\\dfrac{\\pi}{2} \\pm \\alpha$ and $\\dfrac{3\\pi}{2} \\pm \\alpha$. The first three keep the function name; the last family **swaps names**: sine with cosine, tangent with cotangent.\n\nThe standard mnemonic is:\n\n> **Odd changes, even keeps; the sign follows the quadrant.**\n\nWhether the coefficient of $\\frac{\\pi}{2}$ is odd or even decides whether the name changes: in $\\pi \\pm \\alpha$ the $\\pi$ is twice $\\frac{\\pi}{2}$ (even), so the name is preserved; in $\\frac{\\pi}{2}\\pm\\alpha$ the coefficient is 1 (odd), so the name changes. The sign is found by **pretending $\\alpha$ is acute** and asking which quadrant the original angle lies in — the sign of the original function there is the sign of the result.\n\nGeometrically these are just the **symmetries of the unit circle**: $-\\alpha$ reflects in the x-axis, $\\pi-\\alpha$ in the y-axis, $\\pi+\\alpha$ in the origin, and $\\frac{\\pi}{2}-\\alpha$ in the line $y=x$.",
+    "formulas": [
+      { "latex": "\\sin(-\\alpha) = -\\sin\\alpha,\\quad \\cos(-\\alpha) = \\cos\\alpha,\\quad \\tan(-\\alpha) = -\\tan\\alpha", "note": "关于 $x$ 轴对称，反映奇偶性", "noteEn": "Symmetry about the x-axis; this is parity" },
+      { "latex": "\\sin(\\pi - \\alpha) = \\sin\\alpha,\\quad \\cos(\\pi - \\alpha) = -\\cos\\alpha", "note": "$\\pi-\\alpha$ 族，函数名不变，只改符号", "noteEn": "The $\\pi-\\alpha$ family: names unchanged, only signs change" },
+      { "latex": "\\sin(\\pi + \\alpha) = -\\sin\\alpha,\\quad \\cos(\\pi + \\alpha) = -\\cos\\alpha,\\quad \\tan(\\pi+\\alpha) = \\tan\\alpha", "note": "关于原点对称，正切不变号", "noteEn": "Symmetry about the origin; the tangent keeps its sign" },
+      { "latex": "\\sin\\left(\\frac{\\pi}{2} - \\alpha\\right) = \\cos\\alpha,\\quad \\cos\\left(\\frac{\\pi}{2} - \\alpha\\right) = \\sin\\alpha", "note": "名称互换，最常见的互余关系", "noteEn": "Names swap; the usual complementary-angle relation" },
+      { "latex": "\\sin\\left(\\frac{\\pi}{2} + \\alpha\\right) = \\cos\\alpha,\\quad \\cos\\left(\\frac{\\pi}{2} + \\alpha\\right) = -\\sin\\alpha", "note": "名称互换且余弦变号", "noteEn": "Names swap and the cosine picks up a minus sign" },
+      { "latex": "\\sin(2\\pi - \\alpha) = -\\sin\\alpha,\\quad \\cos(2\\pi-\\alpha) = \\cos\\alpha", "note": "$2\\pi-\\alpha$ 与 $-\\alpha$ 结果相同，因为 $\\sin$、$\\cos$ 以 $2\\pi$ 为周期", "noteEn": "$2\\pi-\\alpha$ behaves like $-\\alpha$ since sine and cosine have period $2\\pi$" }
+    ],
+    "expression": {
+      "text": "sin(π ± α), sin(π/2 ± α)",
+      "symbol": "奇变偶不变，符号看象限",
+      "note": "先用周期性把角化到 $[0, 2\\pi)$，再用诱导公式化到锐角。",
+      "noteEn": "First reduce the angle into $[0, 2\\pi)$ by periodicity, then use the formulas to reach an acute angle."
+    },
+    "properties": [
+      "使用前先**去周期**：把角加上或减去 $2k\\pi$（正切为 $k\\pi$）使其落入 $[0, 2\\pi)$",
+      "「奇变偶不变」中的奇偶，指 $\\frac{\\pi}{2}$ 的系数是奇数还是偶数",
+      "「符号看象限」时**永远把 $\\alpha$ 当作锐角**来判断原角所在象限，不要代入具体数值",
+      "诱导公式的实质是单位圆的对称性，因此不需要死记，可以画图现场推出",
+      "$\\frac{\\pi}{2} - \\alpha$ 型公式其实就是互余关系 $\\sin\\theta = \\cos\\left(\\frac{\\pi}{2} - \\theta\\right)$"
+    ],
+    "propertiesEn": [
+      "Before use, **remove the period**: add or subtract $2k\\pi$ (or $k\\pi$ for tangent) so the angle lands in $[0, 2\\pi)$",
+      "In «odd changes, even keeps», odd/even refers to the coefficient of $\\frac{\\pi}{2}$",
+      "For «the sign follows the quadrant», always **treat $\\alpha$ as acute** to locate the original angle; never plug in its numeric value",
+      "The formulas are really just unit-circle symmetries, so they can be re-derived on the spot instead of memorised",
+      "The $\\frac{\\pi}{2} - \\alpha$ rule is simply complementarity: $\\sin\\theta = \\cos\\left(\\frac{\\pi}{2} - \\theta\\right)$"
+    ],
+    "examples": [
+      { "problem": "求 $\\sin\\dfrac{7\\pi}{6}$ 与 $\\cos\\dfrac{5\\pi}{4}$ 的值。", "solution": "$\\sin\\frac{7\\pi}{6} = \\sin\\left(\\pi + \\frac{\\pi}{6}\\right) = -\\sin\\frac{\\pi}{6} = -\\frac{1}{2}$；$\\cos\\frac{5\\pi}{4} = \\cos\\left(\\pi + \\frac{\\pi}{4}\\right) = -\\cos\\frac{\\pi}{4} = -\\frac{\\sqrt{2}}{2}$。" },
+      { "problem": "化简 $\\dfrac{\\sin(\\pi-\\alpha)\\cos(2\\pi-\\alpha)}{\\cos\\left(\\frac{\\pi}{2}+\\alpha\\right)\\sin(-\\alpha)}$。", "solution": "$\\sin(\\pi-\\alpha) = \\sin\\alpha$，$\\cos(2\\pi-\\alpha) = \\cos\\alpha$，$\\cos\\left(\\frac{\\pi}{2}+\\alpha\\right) = -\\sin\\alpha$，$\\sin(-\\alpha) = -\\sin\\alpha$。代入得 $\\frac{\\sin\\alpha\\cos\\alpha}{(-\\sin\\alpha)(-\\sin\\alpha)} = \\frac{\\cos\\alpha}{\\sin\\alpha} = \\cot\\alpha$。" }
+    ],
+    "tags": ["诱导公式", "化简", "象限符号", "对称性"],
+    "links": ["unit-circle", "trigonometric-definition", "fundamental-identities", "sine-function", "cosine-function", "trigonometric-identities"]
+  },
+  {
+    "id": "trigonometric-identities",
+    "title": "三角恒等变换",
+    "titleEn": "Trigonometric Identities and Transformations",
+    "branch": "trigonometry",
+    "level": 4,
+    "summary": "和差角、二倍角、半角与辅助角公式，把复杂三角式化为可计算的标准形式。",
+    "summaryEn": "Sum–difference, double-angle, half-angle and auxiliary-angle formulas that turn complicated expressions into standard computable forms.",
+    "definition": "**三角恒等变换**研究如何把一个三角函数式变形为另一个在数学上等价但形式更简单的式子。核心公式是**和差角公式**，其余大部分公式都由它推出。\n\n和差角公式说：正弦的加法里正弦与余弦「交叉」，余弦的加法里出现减号：\n\n$$\\sin(\\alpha \\pm \\beta) = \\sin\\alpha\\cos\\beta \\pm \\cos\\alpha\\sin\\beta,$$\n\n$$\\cos(\\alpha \\pm \\beta) = \\cos\\alpha\\cos\\beta \\mp \\sin\\alpha\\sin\\beta.$$\n\n正切的和角公式由它们相除得到，注意 $\\cos\\alpha\\cos\\beta \\neq 0$ 且分母不为零。\n\n令 $\\beta = \\alpha$ 就得到**二倍角公式**：$\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha$、$\\cos 2\\alpha = \\cos^2\\alpha - \\sin^2\\alpha = 1 - 2\\sin^2\\alpha = 2\\cos^2\\alpha - 1$。余弦的三种写法极其有用，因为它们能把二次式降次，是积分与解方程中的常用手段。\n\n把二倍角公式反用，得到**降幂公式** $\\sin^2\\alpha = \\dfrac{1-\\cos 2\\alpha}{2}$、$\\cos^2\\alpha = \\dfrac{1+\\cos 2\\alpha}{2}$；再把 $\\alpha$ 换成 $\\dfrac{\\alpha}{2}$ 就得到半角公式。\n\n最后是**辅助角公式**：把 $a\\sin x + b\\cos x$ 合并成一个正弦，其中 $\\sqrt{a^2+b^2}$ 是振幅，$\\varphi$ 满足 $\\tan\\varphi = \\dfrac{b}{a}$。这是求三角函数最值与周期的利器。",
+    "definitionEn": "**Trigonometric transformations** study how to rewrite a trigonometric expression into an equivalent but simpler form. The key formulas are the **sum and difference formulas**, from which most of the rest follow.\n\nIn the sum formulas the sine «crosses» sine with cosine, while the cosine formula carries a minus sign:\n\n$$\\sin(\\alpha \\pm \\beta) = \\sin\\alpha\\cos\\beta \\pm \\cos\\alpha\\sin\\beta,$$\n\n$$\\cos(\\alpha \\pm \\beta) = \\cos\\alpha\\cos\\beta \\mp \\sin\\alpha\\sin\\beta.$$\n\nThe tangent sum formula follows by dividing them, provided $\\cos\\alpha\\cos\\beta \\neq 0$ and the denominator is non-zero.\n\nSetting $\\beta = \\alpha$ gives the **double-angle formulas**: $\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha$ and $\\cos 2\\alpha = \\cos^2\\alpha - \\sin^2\\alpha = 1 - 2\\sin^2\\alpha = 2\\cos^2\\alpha - 1$. The three forms of the cosine are especially useful because they reduce a square to a linear term, a staple in integration and in solving equations.\n\nRunning the double-angle formulas backwards gives the **power-reduction formulas** $\\sin^2\\alpha = \\dfrac{1-\\cos 2\\alpha}{2}$ and $\\cos^2\\alpha = \\dfrac{1+\\cos 2\\alpha}{2}$; replacing $\\alpha$ by $\\dfrac{\\alpha}{2}$ then yields the half-angle formulas.\n\nFinally the **auxiliary-angle formula** merges $a\\sin x + b\\cos x$ into one sine, with amplitude $\\sqrt{a^2+b^2}$ and $\\tan\\varphi = \\dfrac{b}{a}$. It is the sharpest tool for finding extrema and periods of trigonometric expressions.",
+    "formulas": [
+      { "latex": "\\sin(\\alpha \\pm \\beta) = \\sin\\alpha\\cos\\beta \\pm \\cos\\alpha\\sin\\beta", "note": "正弦和差角公式，符号与括号内一致", "noteEn": "Sine sum–difference; the sign matches the one inside" },
+      { "latex": "\\cos(\\alpha \\pm \\beta) = \\cos\\alpha\\cos\\beta \\mp \\sin\\alpha\\sin\\beta", "note": "余弦和差角公式，注意符号相反", "noteEn": "Cosine sum–difference; note the sign flips" },
+      { "latex": "\\tan(\\alpha \\pm \\beta) = \\frac{\\tan\\alpha \\pm \\tan\\beta}{1 \\mp \\tan\\alpha\\tan\\beta}", "note": "正切和差角公式，由正弦余弦之商推出", "noteEn": "Tangent sum–difference, obtained as a quotient of the previous two" },
+      { "latex": "\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha,\\qquad \\cos 2\\alpha = \\cos^2\\alpha - \\sin^2\\alpha = 1 - 2\\sin^2\\alpha = 2\\cos^2\\alpha - 1", "note": "二倍角公式，余弦有三种等价形式", "noteEn": "Double-angle formulas; the cosine has three equivalent forms" },
+      { "latex": "\\sin^2\\alpha = \\frac{1-\\cos 2\\alpha}{2},\\qquad \\cos^2\\alpha = \\frac{1+\\cos 2\\alpha}{2}", "note": "降幂公式，把平方化为一次式", "noteEn": "Power-reduction formulas turning squares into linear terms" },
+      { "latex": "a\\sin x + b\\cos x = \\sqrt{a^2+b^2}\\,\\sin(x+\\varphi),\\quad \\tan\\varphi = \\frac{b}{a}", "note": "辅助角公式，用于求最值与周期", "noteEn": "Auxiliary-angle formula for extrema and periods" }
+    ],
+    "expression": {
+      "text": "a sin x + b cos x = √(a²+b²) sin(x+φ)",
+      "symbol": "sin2α = 2sinαcosα",
+      "note": "变换的方向通常是：化高次为低次、化多角为单角、化特殊为统一。",
+      "noteEn": "The usual goals: lower the degree, unify the angle, and merge into a single sinusoid."
+    },
+    "properties": [
+      "和差角、二倍角公式对使各式有意义的任意角都成立，属于恒等式",
+      "余弦的二倍角有三种等价写法，选哪一种取决于想把式子里的 $\\sin^2$、$\\cos^2$ 还是两者都消掉",
+      "降幂公式与二倍角公式互为逆用：前者把平方降为一次，后者把一次升为平方",
+      "辅助角公式把 $a\\sin x + b\\cos x$ 化为 $\\sqrt{a^2+b^2}\\sin(x+\\varphi)$，从而最大值 $\\sqrt{a^2+b^2}$、最小值 $-\\sqrt{a^2+b^2}$、周期 $2\\pi$",
+      "常用特殊值：$\\sin 15^\\circ = \\frac{\\sqrt{6}-\\sqrt{2}}{4}$，可由 $45^\\circ - 30^\\circ$ 的和差角公式得到",
+      "整体代换思想：把 $2x$、$x+\\frac{\\pi}{3}$ 看作一个整体 $u$，公式就能直接套用"
+    ],
+    "propertiesEn": [
+      "The sum–difference and double-angle formulas are identities, valid for every angle where the expressions are defined",
+      "The cosine double angle has three equivalent forms; choose the one that eliminates the square you want to remove",
+      "Power-reduction and double-angle formulas are inverses of one another: one lowers a square, the other raises a linear term",
+      "The auxiliary-angle formula turns $a\\sin x + b\\cos x$ into $\\sqrt{a^2+b^2}\\sin(x+\\varphi)$, giving maximum $\\sqrt{a^2+b^2}$, minimum $-\\sqrt{a^2+b^2}$ and period $2\\pi$",
+      "Useful special value: $\\sin 15^\\circ = \\frac{\\sqrt{6}-\\sqrt{2}}{4}$, obtained from $45^\\circ - 30^\\circ$",
+      "Substitute a whole block: treating $2x$ or $x+\\frac{\\pi}{3}$ as a single $u$ lets the formulas be applied directly"
+    ],
+    "examples": [
+      { "problem": "求 $\\sin 75^\\circ$ 的精确值。", "solution": "$\\sin 75^\\circ = \\sin(45^\\circ + 30^\\circ) = \\sin 45^\\circ\\cos 30^\\circ + \\cos 45^\\circ\\sin 30^\\circ = \\frac{\\sqrt{2}}{2}\\cdot\\frac{\\sqrt{3}}{2} + \\frac{\\sqrt{2}}{2}\\cdot\\frac{1}{2} = \\frac{\\sqrt{6}+\\sqrt{2}}{4}$。" },
+      { "problem": "已知 $\\sin\\alpha = \\frac{3}{5}$，$\\alpha \\in \\left(\\frac{\\pi}{2}, \\pi\\right)$，求 $\\sin 2\\alpha$ 与 $\\cos 2\\alpha$。", "solution": "由 $\\alpha$ 在第二象限得 $\\cos\\alpha = -\\sqrt{1-\\frac{9}{25}} = -\\frac{4}{5}$。于是 $\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha = 2\\times\\frac{3}{5}\\times\\left(-\\frac{4}{5}\\right) = -\\frac{24}{25}$；$\\cos 2\\alpha = 1 - 2\\sin^2\\alpha = 1 - \\frac{18}{25} = \\frac{7}{25}$。" },
+      { "problem": "求函数 $y = \\sin x + \\sqrt{3}\\cos x$ 的最大值与最小正周期。", "solution": "由辅助角公式，$y = \\sqrt{1+3}\\,\\sin\\left(x+\\frac{\\pi}{3}\\right) = 2\\sin\\left(x+\\frac{\\pi}{3}\\right)$，其中 $\\tan\\varphi = \\frac{\\sqrt{3}}{1}$ 取 $\\varphi = \\frac{\\pi}{3}$。故最大值为 $2$，最小值 $-2$，最小正周期 $T = 2\\pi$。" }
+    ],
+    "tags": ["恒等变换", "和差角", "二倍角", "辅助角", "降幂"],
+    "links": ["sine-function", "cosine-function", "tangent-function", "fundamental-identities", "reduction-formulas", "trig-properties", "trig-transform", "integral"]
+  },
+  {
+    "id": "trig-properties",
+    "title": "三角函数的性质",
+    "titleEn": "Properties of Trigonometric Functions",
+    "branch": "trigonometry",
+    "level": 4,
+    "summary": "系统梳理三角函数的周期性、奇偶性、单调区间、对称轴与对称中心。",
+    "summaryEn": "A systematic survey of periodicity, parity, monotonic intervals, axes and centres of symmetry.",
+    "definition": "**三角函数的性质**指的是正弦、余弦、正切函数在定义域上表现出的整体特征，主要包括周期性、奇偶性、单调性、对称性和最值。掌握这些性质，就能不画图而直接判断函数的走势。\n\n**周期性**是最本质的特征。若存在非零常数 $T$ 使 $f(x+T) = f(x)$ 对定义域内一切 $x$ 成立，则称 $f$ 为周期函数，$T$ 为它的周期，其中最小的正数叫**最小正周期**。$\\sin$ 与 $\\cos$ 的最小正周期都是 $2\\pi$，$\\tan$ 的是 $\\pi$。对复合函数 $y = A\\sin(\\omega x + \\varphi) + B$，最小正周期为 $\\dfrac{2\\pi}{|\\omega|}$。\n\n**奇偶性**上，$\\sin$ 是奇函数（关于原点对称），$\\cos$ 是偶函数（关于 $y$ 轴对称），$\\tan$ 也是奇函数。它们共同的一点是图像具有**平移对称性与反射对称性**：正弦图像关于直线 $x = \\frac{\\pi}{2} + k\\pi$ 轴对称，同时关于点 $(k\\pi, 0)$ 中心对称。\n\n**单调性**需要在同一个单调区间内讨论。特别注意：$\\tan$ 在每个小区间 $\\left(-\\frac{\\pi}{2}+k\\pi, \\frac{\\pi}{2}+k\\pi\\right)$ 上是增函数，但在整个定义域上**不是**增函数——这是最容易被忽视的陷阱。\n\n研究一般三角函数的流程通常是：先用恒等变换把它化为 $y = A\\sin(\\omega x+\\varphi)+B$ 的标准形，再由标准形读出周期、最值、单调区间和对称轴。",
+    "definitionEn": "The **properties of trigonometric functions** are the overall features that sine, cosine and tangent exhibit on their domains: periodicity, parity, monotonicity, symmetry and extrema. Knowing them lets you read the behaviour of a graph without drawing it.\n\n**Periodicity** is the essential feature. If a non-zero constant $T$ satisfies $f(x+T) = f(x)$ for all $x$, then $f$ is periodic and $T$ is a period; the smallest positive one is the **least positive period**. The sine and cosine both have least positive period $2\\pi$, the tangent $\\pi$. For a composite $y = A\\sin(\\omega x + \\varphi) + B$ the least positive period is $\\dfrac{2\\pi}{|\\omega|}$.\n\nAs for **parity**, $\\sin$ is odd (symmetric about the origin), $\\cos$ is even (symmetric about the y-axis) and $\\tan$ is also odd. What they share is **reflective and central symmetry**: the sine graph has axes of symmetry $x = \\frac{\\pi}{2} + k\\pi$ and centres of symmetry $(k\\pi, 0)$.\n\n**Monotonicity** must be discussed inside a single monotonic interval. In particular, $\\tan$ increases on each interval $\\left(-\\frac{\\pi}{2}+k\\pi, \\frac{\\pi}{2}+k\\pi\\right)$ but is **not** increasing on its entire domain — the most commonly missed trap.\n\nThe usual workflow for studying a general trigonometric function is: first reduce it to the standard form $y = A\\sin(\\omega x+\\varphi)+B$ by identities, then read off the period, the extrema, the monotonic intervals and the axes of symmetry.",
+    "formulas": [
+      { "latex": "\\sin(x+2\\pi) = \\sin x,\\quad \\cos(x+2\\pi) = \\cos x,\\quad \\tan(x+\\pi) = \\tan x", "note": "三个基本函数的周期：$2\\pi$、$2\\pi$、$\\pi$", "noteEn": "Periods of the three basic functions: $2\\pi$, $2\\pi$ and $\\pi$" },
+      { "latex": "T = \\frac{2\\pi}{|\\omega|}\\quad\\text{（对 } y = A\\sin(\\omega x+\\varphi) \\text{）}", "note": "复合正弦型函数的周期公式", "noteEn": "Period formula for the general sinusoid" },
+      { "latex": "y = \\sin x:\\ \\text{增区间}\\left[-\\frac{\\pi}{2}+2k\\pi,\\ \\frac{\\pi}{2}+2k\\pi\\right]", "note": "正弦的单调递增区间，其余由周期平移得到", "noteEn": "Sine's increasing intervals; the rest follow by shifting" },
+      { "latex": "\\text{对称轴}: x = \\frac{\\pi}{2}+k\\pi\\ (\\sin),\\quad x = k\\pi\\ (\\cos)", "note": "正弦与余弦的对称轴都在取最值处", "noteEn": "Symmetry axes of sine and cosine, both at extreme values" },
+      { "latex": "\\text{对称中心}: (k\\pi, 0)\\ (\\sin),\\quad \\left(\\frac{\\pi}{2}+k\\pi, 0\\right)\\ (\\cos),\\quad \\left(\\frac{k\\pi}{2}, 0\\right)\\ (\\tan)", "note": "三个基本函数的对称中心", "noteEn": "Centres of symmetry of the three basic functions" }
+    ],
+    "expression": {
+      "text": "y = A sin(ωx + φ) + B",
+      "symbol": "T = 2π/|ω|",
+      "note": "所有性质都可以从标准形 $y = A\\sin(\\omega x+\\varphi)+B$ 一次读出。",
+      "noteEn": "Every property can be read off the standard form $y = A\\sin(\\omega x+\\varphi)+B$ at once."
+    },
+    "properties": [
+      "定义域上 $\\sin$、$\\cos$ 的值域为 $[-1,1]$，$\\tan$ 的值域为 $\\mathbb{R}$",
+      "周期：$\\sin$、$\\cos$ 的最小正周期为 $2\\pi$，$\\tan$ 为 $\\pi$；复合形 $y=A\\sin(\\omega x+\\varphi)$ 的周期为 $\\frac{2\\pi}{|\\omega|}$",
+      "奇偶性：$\\sin$、$\\tan$ 为奇函数，$\\cos$ 为偶函数",
+      "单调性必须在同一个单调区间内讨论，$\\tan$ 在整个定义域上不是单调函数",
+      "对称性：正弦关于直线 $x=\\frac{\\pi}{2}+k\\pi$ 轴对称、关于点 $(k\\pi,0)$ 中心对称；余弦的对称轴为 $x=k\\pi$，正切的对称中心为 $\\left(\\frac{k\\pi}{2},0\\right)$",
+      "最值：$y = A\\sin(\\omega x+\\varphi)+B$ 的最大值为 $B+|A|$，最小值为 $B-|A|$"
+    ],
+    "propertiesEn": [
+      "Ranges: $\\sin$ and $\\cos$ take values in $[-1,1]$ while $\\tan$ covers all of $\\mathbb{R}$",
+      "Periods: $\\sin$ and $\\cos$ have least positive period $2\\pi$, $\\tan$ has $\\pi$; the composite $y=A\\sin(\\omega x+\\varphi)$ has period $\\frac{2\\pi}{|\\omega|}$",
+      "Parity: $\\sin$ and $\\tan$ are odd, $\\cos$ is even",
+      "Monotonicity must be discussed within one monotonic interval; $\\tan$ is not monotonic on its whole domain",
+      "Symmetry: sine has axes $x=\\frac{\\pi}{2}+k\\pi$ and centres $(k\\pi,0)$; cosine has axes $x=k\\pi$; tangent has centres $\\left(\\frac{k\\pi}{2},0\\right)$",
+      "Extrema: $y = A\\sin(\\omega x+\\varphi)+B$ has maximum $B+|A|$ and minimum $B-|A|$"
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "sin(x)", "color": "#4cc9f0", "label": "y = sin x" },
+        { "expr": "cos(x)", "color": "#06d6a0", "label": "y = cos x" }
+      ],
+      "xRange": [-7, 7],
+      "yRange": [-1.5, 1.5],
+      "title": "正弦与余弦的周期与对称性"
+    },
+    "examples": [
+      { "problem": "求函数 $y = 2\\sin\\left(\\frac{\\pi}{3} - 2x\\right)$ 的周期、单调递增区间。", "solution": "先化简为 $y = -2\\sin\\left(2x - \\frac{\\pi}{3}\\right)$（利用 $-\\alpha$ 的诱导公式），周期 $T = \\frac{2\\pi}{2} = \\pi$。$y$ 递增当且仅当 $\\sin\\left(2x-\\frac{\\pi}{3}\\right)$ 递减，即 $\\frac{\\pi}{2}+2k\\pi \\leq 2x-\\frac{\\pi}{3} \\leq \\frac{3\\pi}{2}+2k\\pi$，解得 $\\frac{5\\pi}{12}+k\\pi \\leq x \\leq \\frac{11\\pi}{12}+k\\pi$。" },
+      { "problem": "已知函数 $f(x) = \\sin(\\omega x)$（$\\omega > 0$）的最小正周期为 $\\frac{\\pi}{2}$，求 $\\omega$，并写出它的一条对称轴。", "solution": "由 $\\frac{2\\pi}{\\omega} = \\frac{\\pi}{2}$ 得 $\\omega = 4$，即 $f(x) = \\sin 4x$。对称轴由 $4x = \\frac{\\pi}{2}+k\\pi$ 得 $x = \\frac{\\pi}{8} + \\frac{k\\pi}{4}$，取 $k=0$ 得一条对称轴 $x = \\frac{\\pi}{8}$。" }
+    ],
+    "tags": ["周期", "单调性", "对称性", "奇偶性", "最值"],
+    "links": ["sine-function", "cosine-function", "tangent-function", "trig-transform", "trigonometric-identities", "unit-circle", "derivative"]
+  }
+]

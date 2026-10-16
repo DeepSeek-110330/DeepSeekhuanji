@@ -1,0 +1,473 @@
+[
+  {
+    "id": "numerical-error",
+    "title": "误差、有效数字与数值稳定性",
+    "titleEn": "Errors, Significant Digits and Numerical Stability",
+    "branch": "numerical",
+    "level": 3,
+    "summary": "数值计算的结果与真值总有偏差：用绝对误差与相对误差度量，用有效数字描述精度；误差分为截断（方法）误差与舍入误差，好算法应具备数值稳定性，不让初始误差被放大。",
+    "summaryEn": "Numerical results always deviate from the exact answer: absolute and relative errors measure the deviation while significant digits describe the accuracy; truncation (method) error and rounding error are the two sources, and a good algorithm is numerically stable, never amplifying the initial error.",
+    "definition": "数值计算处理的是实数，但计算机只能用有限位浮点数存储与运算，真值 $x$（或精确解）与近似值 $x^{*}$ 之间总有差距。最直接的度量是**绝对误差**\n$$e=x^{*}-x,$$\n它有量纲、受问题规模影响；更有可比性的是**相对误差**\n$$e_r=\\frac{e}{|x|}=\\frac{x^{*}-x}{|x|}\\qquad(x\\neq0),$$\n它无量纲，常写成百分数。例如用 $3.14$ 近似 $\\pi=3.14159265\\ldots$，绝对误差约 $-1.6\\times10^{-3}$，相对误差约 $-5.1\\times10^{-4}$（约 $-0.05\\%$）。\n\n**有效数字**把相对误差翻译成数位语言。设 $x^{*}$ 的首位非零数字为 $a_1$，则有两条互逆的判据。若 $x^{*}$ 有 $n$ 位有效数字，则必有\n$$|e_r|\\le\\frac{1}{2a_1}\\times10^{-(n-1)};$$\n反之，若相对误差满足更强的条件\n$$|e_r|\\le\\frac{1}{2(a_1+1)}\\times10^{-(n-1)},$$\n就可断言 $x^{*}$ 至少有 $n$ 位有效数字。两条判据的常数不同（前者用于「有 $n$ 位 $\\Rightarrow$ 误差小」，后者用于「误差小 $\\Rightarrow$ 有 $n$ 位」），不可混用。合起来看：有效数字越多，相对误差越小。例如 $x^{*}=1.414$ 近似 $\\sqrt2=1.41421356\\ldots$，相对误差约 $1.51\\times10^{-4}$；取 $a_1=1$，充分判据在 $n=4$ 时的右端为 $\\frac{1}{2\\cdot2}\\times10^{-3}=2.5\\times10^{-4}$，满足 $1.51\\times10^{-4}\\le2.5\\times10^{-4}$，故至少有 4 位有效数字。\n\n误差按来源分两类。**截断误差**（方法误差）源于用有限过程代替无穷过程：截断泰勒级数、把极限换成有限次运算、把微分方程离散化等；例如小 $x$ 时用 $1-x$ 近似 $e^{-x}$，由 $e^{-x}=1-x+\\frac{x^2}{2}-\\cdots$ 知截断误差约为 $\\frac{x^2}{2}$，它只取决于所选方法与自变量范围，与计算机无关。**舍入误差**则源于浮点数只有有限位：每次浮点运算都会引入约机器精度 $\\varepsilon\\approx2.2\\times10^{-16}$ 量级的相对误差；两个相近的数相减会发生**相消**，相对误差被急剧放大，这是舍入误差最危险的来源。\n\n算法好坏的准则是**数值稳定性**：计算过程中初始误差（数据误差与舍入误差）是否被放大。若初始扰动 $\\Delta x$ 引起的解扰动满足 $|\\Delta y|\\le C|\\Delta x|$（$C$ 与步长无关），算法是稳定的；若放大倍数随步长变小而无限增大，就不稳定——这时提高机器精度也救不回来。稳定性（算法）与条件数（问题）要分开看：稳定的算法不能把病态问题变好，但不稳定的算法会把良态问题算坏。图中 $y=1-x$ 与 $y=e^{-x}$ 在 $0$ 附近几乎重合、随 $x$ 增大迅速分开，正是截断误差按 $x^2$ 增长的直观写照。",
+    "definitionEn": "Numerical computation deals with real numbers, but a computer stores and manipulates only finitely many floating-point digits, so the true value $x$ (or exact solution) and an approximation $x^{*}$ always differ. The most direct measure is the **absolute error**\n$$e=x^{*}-x,$$\nwhich carries units and depends on scale; more comparable is the **relative error**\n$$e_r=\\frac{e}{|x|}=\\frac{x^{*}-x}{|x|}\\qquad(x\\neq0),$$\na dimensionless quantity often quoted as a percentage. For instance, approximating $\\pi=3.14159265\\ldots$ by $3.14$ gives an absolute error of about $-1.6\\times10^{-3}$ and a relative error of about $-5.1\\times10^{-4}$ (about $-0.05\\%$).\n\n**Significant digits** translate relative error into digits. If the leading nonzero digit of $x^{*}$ is $a_1$, there are two converse criteria. If $x^{*}$ has $n$ significant digits, then necessarily\n$$|e_r|\\le\\frac{1}{2a_1}\\times10^{-(n-1)};$$\nconversely, if the relative error satisfies the stronger bound\n$$|e_r|\\le\\frac{1}{2(a_1+1)}\\times10^{-(n-1)},$$\nthen $x^{*}$ has at least $n$ significant digits. The two constants differ (the first for \"digits $\\Rightarrow$ small error\", the second for \"small error $\\Rightarrow$ digits\") and must not be interchanged. Together they show that more significant digits means smaller relative error. For example, $x^{*}=1.414$ for $\\sqrt2=1.41421356\\ldots$ has relative error about $1.51\\times10^{-4}$; with $a_1=1$ the sufficient criterion at $n=4$ gives $\\frac{1}{2\\cdot2}\\times10^{-3}=2.5\\times10^{-4}$, and $1.51\\times10^{-4}\\le2.5\\times10^{-4}$, hence at least 4 significant digits.\n\nErrors split into two sources. **Truncation error** (method error) arises from replacing an infinite process by a finite one: truncating a Taylor series, replacing a limit by finitely many operations, discretizing a differential equation. Approximating $e^{-x}$ by $1-x$ for small $x$ leaves a truncation error of about $\\frac{x^2}{2}$, as $e^{-x}=1-x+\\frac{x^2}{2}-\\cdots$ shows; it depends only on the method and the range of the variable, not on the computer. **Rounding error** comes from finite word length: every floating-point operation introduces a relative error of about machine epsilon $\\varepsilon\\approx2.2\\times10^{-16}$, and subtracting nearby numbers (**cancellation**) can amplify the relative error dramatically — the most dangerous source of rounding error.\n\nAn algorithm is judged by **numerical stability**: whether initial errors (in the data and from rounding) are amplified during the computation. If a perturbation $\\Delta x$ produces a solution perturbation bounded by $|\\Delta y|\\le C|\\Delta x|$ with $C$ independent of the step size, the algorithm is stable; if the amplification grows without bound as the step size shrinks, it is unstable — no amount of extra precision will save it. Stability (the algorithm) and the condition number (the problem) are different layers: a stable algorithm cannot fix an ill-conditioned problem, but an unstable one can ruin a well-conditioned problem. In the figure, $y=1-x$ almost coincides with $y=e^{-x}$ near $0$ and separates rapidly as $x$ grows — a picture of truncation error growing like $x^2$.",
+    "formulas": [
+      {
+        "latex": "e=x^{*}-x,\\qquad e_r=\\frac{e}{|x|}=\\frac{x^{*}-x}{|x|}\\quad(x\\neq0)",
+        "note": "绝对误差与相对误差的定义；相对误差无量纲，更适合比较不同量级近似的精度。",
+        "noteEn": "Definitions of absolute and relative error; the relative error is dimensionless and better suited for comparing approximations of different magnitudes."
+      },
+      {
+        "latex": "|x^{*}\\ \\text{有 }n\\ \\text{位有效数字}\\ \\Longrightarrow\\ |e_r|\\le\\frac{1}{2a_1}\\times10^{-(n-1)};\\qquad |e_r|\\le\\frac{1}{2(a_1+1)}\\times10^{-(n-1)}\\ \\Longrightarrow\\ x^{*}\\ \\text{至少有 }n\\ \\text{位有效数字}",
+        "note": "$a_1$ 为 $x^{*}$ 的首位非零数字；两条判据互逆：常数 $\\frac{1}{2a_1}$ 用于「有 $n$ 位 $\\Rightarrow$ 误差小」，$\\frac{1}{2(a_1+1)}$ 用于「误差小 $\\Rightarrow$ 有 $n$ 位」，不可混用。",
+        "noteEn": "$a_1$ is the leading nonzero digit of $x^{*}$; this quantifies the link between significant digits and relative error."
+      },
+      {
+        "latex": "e^{-x}=1-x+\\frac{x^2}{2}-\\frac{x^3}{6}+\\cdots,\\qquad e^{-x}-(1-x)\\approx\\frac{x^2}{2}",
+        "note": "截断误差的典型例子：用一次多项式 $1-x$ 近似 $e^{-x}$，误差只由方法决定、随 $x^2$ 增长。",
+        "noteEn": "A typical truncation error: approximating $e^{-x}$ by the linear polynomial $1-x$; the error is method-determined and grows like $x^2$."
+      },
+      {
+        "latex": "fl(a\\,\\mathrm{op}\\,b)=(a\\,\\mathrm{op}\\,b)(1+\\delta),\\qquad|\\delta|\\le\\varepsilon\\approx2.2\\times10^{-16}",
+        "note": "IEEE 双精度浮点运算的舍入模型；相消（两个相近数相减）会把 $\\delta$ 的相对影响放大，是不稳定的常见来源。",
+        "noteEn": "Rounding model for IEEE double-precision arithmetic; cancellation (subtracting nearby numbers) amplifies the relative effect of $\\delta$ and is a common source of instability."
+      }
+    ],
+    "expression": {
+      "text": "e = x* − x，e_r = e/|x|",
+      "symbol": "e_r=\\frac{x^{*}-x}{|x|}",
+      "note": "相对误差与有效数字位数直接挂钩：位数越多，$|e_r|$ 越小。",
+      "noteEn": "Relative error is tied to the number of significant digits: more digits, smaller $|e_r|$."
+    },
+    "properties": [
+      "绝对误差有量纲、衡量同一量时直观；比较不同量级近似的精度必须用相对误差或有效数字。",
+      "有效数字与相对误差的关系：$x^{*}$ 有 $n$ 位有效数字必有 $|e_r|\\le\\frac{1}{2a_1}10^{-(n-1)}$；反之若 $|e_r|\\le\\frac{1}{2(a_1+1)}10^{-(n-1)}$ 则至少有 $n$ 位有效数字；例如 $3.1416$ 近似 $\\pi$ 的相对误差约 $2.3\\times10^{-6}$，至少有 5 位有效数字。",
+      "两类误差来源不同：截断误差由方法（保留阶数、离散步长）决定并按幂次减小；舍入误差由浮点精度决定，约 $\\varepsilon$ 量级，最坏情况下随运算次数累积。",
+      "相消是舍入误差放大的常见机制：相近数相减使结果的有效数字成批丢失；应改写公式避免相消（如把 $1-\\cos x$ 写成 $2\\sin^2\\frac{x}{2}$）。",
+      "数值稳定性指初始误差不被算法放大；它与条件数（问题本身的敏感度）是两个层次的概念，判断算法好坏必须同时考虑两者。"
+    ],
+    "propertiesEn": [
+      "Absolute error has units and is intuitive for a single quantity; comparing approximations of different magnitudes requires relative error or significant digits.",
+      "Significant digits versus relative error: $n$ significant digits imply $|e_r|\\le\\frac{1}{2a_1}10^{-(n-1)}$, while $|e_r|\\le\\frac{1}{2(a_1+1)}10^{-(n-1)}$ conversely guarantees at least $n$ significant digits; e.g. $3.1416$ for $\\pi$ has relative error about $2.3\\times10^{-6}$, i.e. at least 5 significant digits.",
+      "The two sources differ: truncation error is set by the method (number of terms kept, mesh size) and decreases like a power; rounding error is set by finite precision, is about $\\varepsilon$ per operation, and may accumulate over many operations.",
+      "Cancellation is a common amplifier of rounding error: subtracting nearby numbers destroys leading digits; rewrite formulas to avoid it (e.g. use $2\\sin^2\\frac{x}{2}$ for $1-\\cos x$).",
+      "Numerical stability means the initial error is not amplified by the algorithm; it is a different layer from the condition number (sensitivity of the problem itself), and both must be considered."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x)",
+          "color": "#4cc9f0",
+          "label": "y = e⁻ˣ"
+        },
+        {
+          "expr": "1 - x",
+          "color": "#ff6b9d",
+          "label": "y = 1 − x（一阶近似）"
+        }
+      ],
+      "xRange": [
+        -0.2,
+        1
+      ],
+      "yRange": [
+        0,
+        1.2
+      ],
+      "title": "用 1 − x 近似 e⁻ˣ：截断误差随 x 增大（误差 ≈ x²/2）"
+    },
+    "examples": [
+      {
+        "problem": "设真值 $x=\\pi=3.14159265\\ldots$，近似值 $x^{*}=3.1416$。求绝对误差与相对误差，并按判据说明 $x^{*}$ 至少有几位有效数字。",
+        "solution": "$e=x^{*}-x=3.1416-3.14159265\\ldots\\approx7.35\\times10^{-6}$；$e_r=\\frac{e}{|x|}\\approx\\frac{7.35\\times10^{-6}}{3.14159}\\approx2.34\\times10^{-6}$。$x^{*}$ 的首位非零数字 $a_1=3$，用充分判据 $|e_r|\\le\\frac{1}{2(a_1+1)}\\times10^{-(n-1)}$：$n=5$ 时右端为 $\\frac{1}{8}\\times10^{-4}=1.25\\times10^{-5}$，满足 $2.34\\times10^{-6}\\le1.25\\times10^{-5}$；$n=6$ 时右端为 $1.25\\times10^{-6}$，不满足。故 $x^{*}$ 至少有 5 位有效数字（$3.1416$ 恰好是 5 位有效数字的近似）。"
+      },
+      {
+        "problem": "用 $1-x$ 近似 $e^{-x}$，估计 $x=0.01$ 处的截断误差；再说明 $x$ 增大到 $1$ 时误差如何变化。",
+        "solution": "由展开式 $e^{-x}=1-x+\\frac{x^2}{2}-\\frac{x^3}{6}+\\cdots$，截断误差主项为 $\\frac{x^2}{2}$。$x=0.01$ 时约 $5\\times10^{-5}$，真实误差 $e^{-0.01}-0.99\\approx4.98\\times10^{-5}$，与估计吻合；相对误差同样约 $5\\times10^{-5}$。当 $x$ 增大到 $1$，误差按 $x^2$ 增长到约 $0.37$（$e^{-1}-0\\approx0.368$），相对误差约 $100\\%$——截断误差只由方法和自变量范围决定，与计算机精度无关。"
+      }
+    ],
+    "tags": [
+      "误差",
+      "有效数字",
+      "截断误差",
+      "舍入误差",
+      "数值稳定性"
+    ],
+    "links": [
+      "numerical-stability",
+      "matrix-condition",
+      "taylor-series",
+      "newton-method",
+      "numerical-integration"
+    ]
+  },
+  {
+    "id": "nonlinear-equations",
+    "title": "非线性方程求根：二分法与不动点迭代",
+    "titleEn": "Root Finding: Bisection and Fixed-Point Iteration",
+    "branch": "numerical",
+    "level": 4,
+    "summary": "求解 f(x)=0 的两类基本方法：二分法只需连续性与端点异号，误差每步减半、线性收敛；不动点迭代 x_{n+1}=φ(x_n) 在 |φ′|≤L<1 时收敛，L 越小越快。",
+    "summaryEn": "Two basic methods for f(x)=0: bisection needs only continuity and a sign change, halving the error each step (linear convergence); fixed-point iteration x_{n+1}=φ(x_n) converges when |φ′|≤L<1, faster for smaller L.",
+    "definition": "方程 $f(x)=0$ 的根（零点）通常无法用解析式表达，只能用迭代法逐步逼近。最基本的理论保证是**零点存在定理**：若 $f$ 在 $[a,b]$ 上连续且 $f(a)f(b)<0$（两端函数值异号），则 $(a,b)$ 内至少有一个根。**二分法**就建立在这一条件之上：每步取区间中点，判断根在哪一半，把含根区间长度减半。\n\n把初始区间记作 $[a_0,b_0]=[a,b]$，第 $n$ 次二分后仍含根的区间为 $[a_n,b_n]$，长度为 $\\frac{b-a}{2^n}$。把二分法产生的近似根按先后编号为 $x_1,x_2,\\dots$，其中 $x_n$ 是 $[a_{n-1},b_{n-1}]$ 的中点（$x_1$ 就是初始区间中点）。因为 $x^{*}$ 与 $x_n$ 都在 $[a_{n-1},b_{n-1}]$ 内、而 $x_n$ 是中点，所以\n$$|x_n-x^{*}|\\le\\frac{b_{n-1}-a_{n-1}}{2}=\\frac{b-a}{2^{n}}\\qquad(n=1,2,\\dots)$$\n这是**先验误差界**：不需要 $f$ 的任何光滑性，只要二分次数够多，精度就有保证。误差每步减半说明二分法**线性收敛**（收敛比为 $\\frac12$），代价是速度慢、且只利用了函数值的符号信息。\n\n**不动点迭代**把方程改写为等价形式 $x=\\varphi(x)$：根就是 $\\varphi$ 的不动点，迭代格式为 $x_{n+1}=\\varphi(x_n)$。例如 $x^3-x-1=0$ 可以改写成 $x=\\sqrt[3]{x+1}$（取 $\\varphi(x)=(x+1)^{1/3}$），也可以改写成 $x=x^3-1$ 或 $x=\\frac{1+x}{x^2}$ 等，不同改写的迭代效果可能天差地别。\n\n收敛的充分条件是**压缩映射**：若 $\\varphi$ 在 $[a,b]$ 上连续可微、把 $[a,b]$ 映入自身，且存在常数 $L<1$ 使 $|\\varphi'(x)|\\le L<1$ 对一切 $x\\in[a,b]$ 成立，则由中值定理 $|x_{n+1}-x^{*}|=|\\varphi(x_n)-\\varphi(x^{*})|\\le L|x_n-x^{*}|$，迭代对任意初值收敛，误差每步至少乘 $L$——仍是线性收敛，$L$ 越小越快；$L$ 接近 1 时收敛极慢。实用的误差估计为 $|x_n-x^{*}|\\le\\frac{L^n}{1-L}|x_1-x_0|$。",
+    "definitionEn": "Roots (zeros) of $f(x)=0$ usually cannot be written in closed form, so they are approximated iteratively. The basic guarantee is the **intermediate-value argument**: if $f$ is continuous on $[a,b]$ and $f(a)f(b)<0$ (opposite signs at the ends), then there is at least one root in $(a,b)$. **Bisection** rests on exactly this condition: take the midpoint, keep the half with the sign change, and halve the interval.\n\nWrite the initial interval as $[a_0,b_0]=[a,b]$; after $n$ halvings the surviving interval is $[a_n,b_n]$ of length $\\frac{b-a}{2^n}$. Number the approximations $x_1,x_2,\\dots$, where $x_n$ is the midpoint of $[a_{n-1},b_{n-1}]$ ($x_1$ is the midpoint of the initial interval). Since both $x^{*}$ and the midpoint $x_n$ lie in $[a_{n-1},b_{n-1}]$,\n$$|x_n-x^{*}|\\le\\frac{b_{n-1}-a_{n-1}}{2}=\\frac{b-a}{2^{n}}\\qquad(n=1,2,\\dots)$$\nan **a priori** bound: no smoothness of $f$ is needed, only enough halvings. Halving the error each step means bisection converges **linearly** with ratio $\\frac12$ — robust but slow, and it uses only the sign of $f$.\n\n**Fixed-point iteration** rewrites the equation as $x=\\varphi(x)$: the root becomes a fixed point of $\\varphi$, and the iteration is $x_{n+1}=\\varphi(x_n)$. For example $x^3-x-1=0$ becomes $x=\\sqrt[3]{x+1}$ (i.e. $\\varphi(x)=(x+1)^{1/3}$), or $x=x^3-1$, or $x=\\frac{1+x}{x^2}$ — different rewrites can behave completely differently.\n\nA sufficient condition for convergence is that $\\varphi$ is a **contraction**: continuously differentiable on $[a,b]$, mapping $[a,b]$ into itself, with $|\\varphi'(x)|\\le L<1$ for all $x\\in[a,b]$. The mean value theorem then gives $|x_{n+1}-x^{*}|=|\\varphi(x_n)-\\varphi(x^{*})|\\le L|x_n-x^{*}|$, so the iteration converges from every starting point and the error shrinks by at least the factor $L$ per step — still linear convergence, faster for smaller $L$; when $L$ is close to $1$ it crawls. A useful error estimate is $|x_n-x^{*}|\\le\\frac{L^n}{1-L}|x_1-x_0|$.",
+    "formulas": [
+      {
+        "latex": "f(a)f(b)<0,\\quad f\\in C[a,b]\\ \\Longrightarrow\\ \\exists\\,x^{*}\\in(a,b):\\ f(x^{*})=0",
+        "note": "零点存在定理（介值定理的直接推论）：二分法只要求连续与端点异号。",
+        "noteEn": "Existence of a zero (a direct consequence of the intermediate value theorem): bisection only needs continuity and a sign change."
+      },
+      {
+        "latex": "x_n=\\frac{a_{n-1}+b_{n-1}}{2},\\qquad |x_n-x^{*}|\\le\\frac{b-a}{2^{n}}\\quad(n=1,2,\\dots)",
+        "note": "二分法按 $x_1,x_2,\\dots$ 编号的误差界：区间每步减半，误差也每步至多减半——线性收敛。",
+        "noteEn": "The bisection error bound with iterates numbered $x_1,x_2,\\dots$: the interval and hence the error is halved each step — linear convergence."
+      },
+      {
+        "latex": "x_{n+1}=\\varphi(x_n),\\qquad x^{*}=\\varphi(x^{*})",
+        "note": "不动点迭代格式；把 $f(x)=0$ 改写成 $x=\\varphi(x)$ 有无穷多种方式，收敛性由 $\\varphi$ 决定。",
+        "noteEn": "The fixed-point iteration; rewriting $f(x)=0$ as $x=\\varphi(x)$ can be done in infinitely many ways, and $\\varphi$ decides convergence."
+      },
+      {
+        "latex": "|\\varphi'(x)|\\le L<1\\ \\Longrightarrow\\ |x_n-x^{*}|\\le L\\,|x_{n-1}-x^{*}|\\le\\frac{L^{n}}{1-L}|x_1-x_0|",
+        "note": "压缩映射条件下的收敛性与误差估计：条件充分但不必要；$L$ 越小收敛越快。",
+        "noteEn": "Contraction condition, convergence and error estimate: sufficient but not necessary; smaller $L$ means faster convergence."
+      },
+      {
+        "latex": "n\\ge\\log_2\\frac{b-a}{\\varepsilon}\\ \\Longrightarrow\\ \\frac{b-a}{2^{n}}\\le\\varepsilon",
+        "note": "二分次数的先验估计：给定精度 $\\varepsilon$，可直接算出需要多少步。",
+        "noteEn": "A priori choice of the number of bisections: given a tolerance $\\varepsilon$, the required number of steps follows directly."
+      }
+    ],
+    "expression": {
+      "text": "x_{n+1} = φ(x_n)，根满足 x* = φ(x*)",
+      "symbol": "x_{n+1}=\\varphi(x_n)",
+      "note": "不动点迭代的一般格式；二分法可看作只利用符号、不用 $\\varphi$ 的区间折半方法。",
+      "noteEn": "The general fixed-point iteration; bisection can be seen as interval halving that uses signs only, with no $\\varphi$."
+    },
+    "properties": [
+      "二分法的适用条件极弱（连续 + 端点异号），因此非常稳健；但收敛慢（误差每步减半），且当根是偶重根（端点同号）时失效。",
+      "二分误差界 $\\frac{b-a}{2^n}$ 是先验的：给定精度 $\\varepsilon$，由 $\\frac{b-a}{2^n}\\le\\varepsilon$ 可预先算出所需步数 $n\\ge\\log_2\\frac{b-a}{\\varepsilon}$。",
+      "不动点迭代收敛的充分条件是压缩条件 $|\\varphi'|\\le L<1$；满足时对区间内任意初值都收敛，误差每步缩小到至多 $L$ 倍。",
+      "改写方式决定成败：同一方程的不同 $\\varphi$ 可能一个收敛、另一个发散（$|\\varphi'|\\ge1$ 时一般发散）；$L$ 越小收敛越快。",
+      "若不动点满足 $|\\varphi'(x^{*})|<1$ 则局部收敛；$|\\varphi'(x^{*})|>1$ 时（除非初值恰好是根）迭代发散；$\\varphi'(x^{*})=0$ 时收敛更快（可达二阶）。"
+    ],
+    "propertiesEn": [
+      "Bisection needs almost nothing (continuity plus a sign change), hence it is very robust; but it converges slowly (error halved each step) and fails for even-multiplicity roots (no sign change).",
+      "The bound $\\frac{b-a}{2^n}$ is a priori: for a tolerance $\\varepsilon$, the number of steps $n\\ge\\log_2\\frac{b-a}{\\varepsilon}$ is known in advance.",
+      "Fixed-point iteration converges under the contraction condition $|\\varphi'|\\le L<1$; then it converges from any starting point in the interval, shrinking the error by at most the factor $L$ per step.",
+      "The rewrite decides everything: different $\\varphi$ for the same equation may converge or diverge ($|\\varphi'|\\ge1$ usually diverges); smaller $L$ means faster convergence.",
+      "If $|\\varphi'(x^{*})|<1$ the iteration converges locally; if $|\\varphi'(x^{*})|>1$ it diverges (unless the initial value is the root itself); if $\\varphi'(x^{*})=0$ convergence is faster (up to second order)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^3 - x - 1",
+          "color": "#4cc9f0",
+          "label": "f(x) = x³ − x − 1"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        2
+      ],
+      "yRange": [
+        -2,
+        3
+      ],
+      "title": "f(x) = x³ − x − 1：根约 1.3247，二分法在 [1,2] 上折半搜索"
+    },
+    "examples": [
+      {
+        "problem": "用二分法求方程 $f(x)=x^3-x-1=0$ 在 $[1,2]$ 内的根，要求误差不超过 $10^{-2}$，说明需要多少步，并给出前几步迭代。",
+        "solution": "$f(1)=-1<0$，$f(2)=5>0$，故 $[1,2]$ 内有根。误差界为 $|x_n-x^{*}|\\le\\frac{1}{2^n}$，需 $\\frac{1}{2^n}\\le10^{-2}$，即 $n\\ge\\log_2 100\\approx6.64$，故取 $n=7$ 步。前几步：$x_1=1.5$（$f=0.875>0$，保留 $[1,1.5]$）；$x_2=1.25$（$f\\approx-0.297$，保留 $[1.25,1.5]$）；$x_3=1.375$（$f\\approx0.225$）；$x_4=1.3125$（$f\\approx-0.052$）；$x_5=1.34375$（$f\\approx0.083$）；$x_6=1.328125$（$f\\approx0.015$）；$x_7=1.3203125$（$f\\approx-0.019$）。7 步后根被锁定在宽约 $\\frac{1}{2^7}\\approx0.0078$ 的区间内，实际误差约 $4.4\\times10^{-3}$，达到要求；根约 $1.32472$。"
+      },
+      {
+        "problem": "对方程 $x^3-x-1=0$ 取不动点迭代 $\\varphi(x)=\\sqrt[3]{x+1}$（即 $x=\\sqrt[3]{x+1}$），验证在 $[1,1.5]$ 上的收敛条件，并从 $x_0=1.5$ 迭代到 $|x_{n+1}-x_n|<10^{-3}$。",
+        "solution": "$\\varphi'(x)=\\frac{1}{3}(x+1)^{-2/3}$，在 $[1,1.5]$ 上最大值为 $\\varphi'(1)=\\frac{1}{3}\\cdot2^{-2/3}\\approx0.21<1$，满足压缩条件，迭代收敛。从 $x_0=1.5$ 出发：$x_1=\\sqrt[3]{2.5}\\approx1.35721$，$x_2\\approx1.33086$，$x_3\\approx1.32588$，$x_4\\approx1.32494$；$|x_4-x_3|\\approx9.4\\times10^{-4}<10^{-3}$，停止。真根 $x^{*}\\approx1.324718$，$x_4$ 的误差约 $2.2\\times10^{-4}$；相邻误差之比稳定在 $0.19$ 左右，与 $|\\varphi'(x^{*})|\\approx0.190$ 相符，验证了线性收敛且收敛比约为 $L$。"
+      }
+    ],
+    "tags": [
+      "非线性方程",
+      "二分法",
+      "不动点迭代",
+      "压缩映射",
+      "线性收敛"
+    ],
+    "links": [
+      "newton-method",
+      "numerical-error",
+      "continuity-theorems",
+      "function-zeros",
+      "mean-value-theorems"
+    ]
+  },
+  {
+    "id": "newton-method",
+    "title": "牛顿迭代法与割线法",
+    "titleEn": "Newton's Method and the Secant Method",
+    "branch": "numerical",
+    "level": 4,
+    "summary": "用切线代替曲线：牛顿法 x_{n+1}=x_n−f(x_n)/f′(x_n) 在单根处平方（二阶）收敛，重根处退化为线性收敛；割线法用差商代替导数，收敛阶约 1.618。",
+    "summaryEn": "Replace the curve by its tangent: Newton's method x_{n+1}=x_n−f(x_n)/f′(x_n) converges quadratically at a simple root and linearly at a multiple root; the secant method replaces the derivative by a difference quotient and has order about 1.618.",
+    "definition": "牛顿法把非线性方程「局部线性化」。在 $x_n$ 附近把 $f$ 近似为一阶泰勒多项式 $f(x)\\approx f(x_n)+f'(x_n)(x-x_n)$，令右端为零解出下一个近似点，得到迭代公式\n$$x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}\\qquad(f'(x_n)\\neq0).$$\n几何上，$y=f(x_n)+f'(x_n)(x-x_n)$ 是曲线在 $(x_n,f(x_n))$ 处的切线，$x_{n+1}$ 就是切线与 $x$ 轴的交点，因此牛顿法也叫**切线法**。\n\n收敛速度：若 $x^{*}$ 是**单根**（$f(x^{*})=0$ 且 $f'(x^{*})\\neq0$）、$f$ 二阶连续可微，则当初值 $x_0$ 足够接近 $x^{*}$ 时\n$$e_{n+1}=\\frac{f''(\\xi)}{2f'(x_n)}e_n^2,\\qquad \\lim_{n\\to\\infty}\\frac{e_{n+1}}{e_n^2}=\\frac{f''(x^{*})}{2f'(x^{*})}\\neq0\\ (\\text{一般情形}),$$\n即**平方（二阶）收敛**：误差每步约按平方缩小，正确数字的位数大致翻倍。收敛是**局部**的：初值不够好时可能发散，$f'(x_n)$ 接近 $0$ 时步长还会失控。\n\n重根情形退化：若 $x^{*}$ 是 $m$ 重根，$f(x)=(x-x^{*})^m g(x)$、$g(x^{*})\\neq0$（$m\\ge2$），则 $f'(x^{*})=0$，牛顿法只有**线性收敛**\n$$e_{n+1}\\approx\\Big(1-\\frac1m\\Big)e_n,$$\n例如 $m=2$ 时误差大约每步减半。想恢复高阶收敛，可用改型迭代 $x_{n+1}=x_n-m\\frac{f(x_n)}{f'(x_n)}$。\n\n**割线法**回避导数：用差商 $\\frac{f(x_n)-f(x_{n-1})}{x_n-x_{n-1}}$ 代替 $f'(x_n)$，得\n$$x_{n+1}=x_n-\\frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})},$$\n几何上取过 $(x_{n-1},f(x_{n-1}))$、$(x_n,f(x_n))$ 两点的**割线**，它与 $x$ 轴的交点即为 $x_{n+1}$。割线法需要两个初值 $x_0,x_1$，每步只计算一次新的函数值；在单根处收敛阶为 $p=\\frac{1+\\sqrt5}{2}\\approx1.618$（黄金比），称为**超线性收敛**——比线性快、比牛顿法略慢，但每步代价更低。",
+    "definitionEn": "Newton's method linearizes the equation locally. Near $x_n$, Taylor's formula gives $f(x)\\approx f(x_n)+f'(x_n)(x-x_n)$; setting the right-hand side to zero yields\n$$x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}\\qquad(f'(x_n)\\neq0).$$\nGeometrically $y=f(x_n)+f'(x_n)(x-x_n)$ is the tangent at $(x_n,f(x_n))$, and $x_{n+1}$ is where that tangent meets the $x$-axis — hence the name **tangent method**.\n\nConvergence: if $x^{*}$ is a **simple root** ($f(x^{*})=0$, $f'(x^{*})\\neq0$) and $f$ is twice continuously differentiable, then for $x_0$ sufficiently close to $x^{*}$,\n$$e_{n+1}=\\frac{f''(\\xi)}{2f'(x_n)}e_n^2,\\qquad \\lim_{n\\to\\infty}\\frac{e_{n+1}}{e_n^2}=\\frac{f''(x^{*})}{2f'(x^{*})}\\neq0\\ \\text{in general},$$\ni.e. **quadratic (second-order) convergence**: the error is squared each step and the number of correct digits roughly doubles. Convergence is **local**: a poor starting value may diverge, and when $f'(x_n)$ is near zero the step can explode.\n\nMultiple roots degrade the method: if $x^{*}$ is a root of multiplicity $m$, $f(x)=(x-x^{*})^m g(x)$ with $g(x^{*})\\neq0$, $m\\ge2$, then $f'(x^{*})=0$ and Newton's method converges only **linearly**:\n$$e_{n+1}\\approx\\Big(1-\\frac1m\\Big)e_n,$$\ne.g. the error is roughly halved each step when $m=2$. The modified iteration $x_{n+1}=x_n-m\\frac{f(x_n)}{f'(x_n)}$ restores quadratic convergence.\n\nThe **secant method** avoids derivatives: replace $f'(x_n)$ by the difference quotient $\\frac{f(x_n)-f(x_{n-1})}{x_n-x_{n-1}}$:\n$$x_{n+1}=x_n-\\frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})},$$\ngeometrically the **secant** through the two most recent points, intersected with the $x$-axis. It needs two starting values $x_0,x_1$ and only one new function evaluation per step; at a simple root its order is $p=\\frac{1+\\sqrt5}{2}\\approx1.618$ (the golden ratio), i.e. **superlinear** — slower than Newton's method per step in order, but cheaper per step because no derivative is needed.",
+    "formulas": [
+      {
+        "latex": "x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}",
+        "note": "牛顿迭代公式；由切线 $y=f(x_n)+f'(x_n)(x-x_n)$ 与 $x$ 轴的交点得到，要求 $f'(x_n)\\neq0$。",
+        "noteEn": "Newton's iteration; obtained from the intersection of the tangent $y=f(x_n)+f'(x_n)(x-x_n)$ with the $x$-axis, requiring $f'(x_n)\\neq0$."
+      },
+      {
+        "latex": "e_{n+1}=\\frac{f''(\\xi)}{2f'(x_n)}\\,e_n^{2},\\qquad \\lim_{n\\to\\infty}\\frac{e_{n+1}}{e_n^{2}}=\\frac{f''(x^{*})}{2f'(x^{*})}",
+        "note": "单根处的平方收敛：误差按平方规律下降，渐近常数为 $\\frac{f''(x^{*})}{2f'(x^{*})}$，正确位数大致每步翻倍。",
+        "noteEn": "Quadratic convergence at a simple root: the error is squared with asymptotic constant $\\frac{f''(x^{*})}{2f'(x^{*})}$, roughly doubling the correct digits each step."
+      },
+      {
+        "latex": "e_{n+1}\\approx\\Big(1-\\frac{1}{m}\\Big)e_n\\qquad(x^{*}\\ \\text{为 }m\\ \\text{重根})",
+        "note": "重根处牛顿法退化为线性收敛（$m=2$ 时误差约减半）；改型 $x_{n+1}=x_n-m\\frac{f(x_n)}{f'(x_n)}$ 可恢复二阶收敛。",
+        "noteEn": "At a root of multiplicity $m$ Newton's method degrades to linear convergence (error roughly halved for $m=2$); the modified step $x_{n+1}=x_n-m\\frac{f(x_n)}{f'(x_n)}$ restores second order."
+      },
+      {
+        "latex": "x_{n+1}=x_n-\\frac{f(x_n)(x_n-x_{n-1})}{f(x_n)-f(x_{n-1})}",
+        "note": "割线法：用差商代替导数，不需要计算 $f'$，但需要两个初值；几何上是割线与 $x$ 轴的交点。",
+        "noteEn": "The secant method: a difference quotient replaces the derivative, so no $f'$ is needed, but two starting values are required; geometrically it is the secant's intersection with the $x$-axis."
+      },
+      {
+        "latex": "\\lim_{n\\to\\infty}\\frac{|e_{n+1}|}{|e_n|^{p}}=C,\\qquad p=\\frac{1+\\sqrt5}{2}\\approx1.618",
+        "note": "割线法的收敛阶为黄金比（超线性）：比线性收敛快，略慢于牛顿法的二阶，但每步只增加一次函数求值。",
+        "noteEn": "The secant method has order equal to the golden ratio (superlinear): faster than linear, slightly slower than Newton's second order, but only one new function value per step."
+      }
+    ],
+    "expression": {
+      "text": "x_{n+1} = x_n − f(x_n)/f′(x_n)",
+      "symbol": "x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}",
+      "note": "记住「切线零点」的几何图像就能随时重写公式；割线法只是把切线斜率换成割线斜率。",
+      "noteEn": "Keep the picture of the tangent's zero in mind and the formula rewrites itself; the secant method merely swaps the tangent slope for a secant slope."
+    },
+    "properties": [
+      "几何意义：切线与 $x$ 轴的交点；等价于把 $f$ 在 $x_n$ 处线性化（一阶泰勒多项式）后求零点。",
+      "局部收敛且通常二阶收敛：要求 $f'(x_n)\\neq0$ 且初值足够接近单根；误差按平方缩小，正确数字位数约每步翻倍。",
+      "初值不好会失败：可能发散、进入循环（如 $f(x)=x^3-2x+2$ 从 $x_0=0$ 出发在 $0$ 与 $1$ 之间振荡），或在 $f'\\approx0$ 附近步长失控；实用中常与二分法混合以保证可靠。",
+      "重根处退化为线性收敛，误差比约为 $\\frac{m-1}{m}$（$m$ 为根的重数）：对 $(x-1)^2=0$ 从 $x_0=2$ 出发得到 $2,1.5,1.25,1.125,\\dots$，误差每步减半。",
+      "割线法不需要导数、每步只需一次新的函数求值，单根处收敛阶约 $1.618$（超线性）；但它同样局部收敛，且需要两个较好的初值。"
+    ],
+    "propertiesEn": [
+      "Geometry: the tangent's intersection with the $x$-axis; equivalently, zeroing the local linearization (first-order Taylor polynomial) of $f$ at $x_n$.",
+      "Locally convergent and usually quadratic: it requires $f'(x_n)\\neq0$ and a starting value close enough to a simple root; the error is squared and the correct digits roughly double each step.",
+      "A poor start fails: it may diverge, cycle (e.g. $f(x)=x^3-2x+2$ from $x_0=0$ oscillates between $0$ and $1$), or take a wild step when $f'\\approx0$; mixing with bisection makes it reliable.",
+      "At a multiple root convergence degrades to linear with ratio about $\\frac{m-1}{m}$ ($m$ the multiplicity): for $(x-1)^2=0$ from $x_0=2$ the iterates are $2,1.5,1.25,1.125,\\dots$, halving the error each step.",
+      "The secant method needs no derivative and only one new function value per step, with order about $1.618$ (superlinear) at a simple root; it is likewise local and needs two decent starting values."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2 - 2",
+          "color": "#4cc9f0",
+          "label": "f(x) = x² − 2"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "x^2 - 2",
+          "at": 1.5,
+          "color": "#ff6b9d",
+          "label": "x₀ = 1.5 处的切线，交 x 轴于 x₁ ≈ 1.4167"
+        }
+      ],
+      "xRange": [
+        0,
+        2.5
+      ],
+      "yRange": [
+        -1,
+        4
+      ],
+      "title": "牛顿法的几何意义：切线与 x 轴的交点给出下一个近似根"
+    },
+    "examples": [
+      {
+        "problem": "用牛顿法求 $\\sqrt2$（即解 $f(x)=x^2-2=0$），取 $x_0=1.5$。写出迭代公式、前三步结果，并验证平方收敛。",
+        "solution": "迭代公式为 $x_{n+1}=x_n-\\frac{x_n^2-2}{2x_n}=\\frac12\\big(x_n+\\frac{2}{x_n}\\big)$（即巴比伦算法）。$x_1=\\frac12(1.5+1.33333)\\approx1.416667$；$x_2\\approx1.414216$；$x_3\\approx1.4142136$。误差依次为 $e_0\\approx8.58\\times10^{-2}$、$e_1\\approx2.45\\times10^{-3}$、$e_2\\approx2.12\\times10^{-6}$、$e_3\\approx1.6\\times10^{-12}$；比值 $e_1/e_0^2\\approx0.333$、$e_2/e_1^2\\approx0.353$、$e_3/e_2^2\\approx0.354$，与理论极限 $\\frac{f''(x^{*})}{2f'(x^{*})}=\\frac{2}{2\\cdot2\\sqrt2}=\\frac{1}{2\\sqrt2}\\approx0.354$ 吻合，误差按平方规律下降，确认二阶收敛。"
+      },
+      {
+        "problem": "用割线法解 $x^2-2=0$（$\\sqrt2$），取 $x_0=1$、$x_1=1.5$，迭代几步并估计收敛阶；说明它和牛顿法的差别。",
+        "solution": "$x_2=1.5-\\frac{0.25\\times0.5}{0.25-(-1)}=1.4$；$x_3=1.4-\\frac{(-0.04)\\times(-0.1)}{-0.04-0.25}\\approx1.413793$；$x_4\\approx1.4142157$；$x_5\\approx1.41421356$（误差 $3.2\\times10^{-10}$）。误差序列为 $1.42\\times10^{-2}\\to4.20\\times10^{-4}\\to2.12\\times10^{-6}\\to3.2\\times10^{-10}$，用相邻误差估计收敛阶 $p\\approx\\frac{\\ln(e_{n+1}/e_n)}{\\ln(e_n/e_{n-1})}$ 得到约 $1.5\\sim1.7$（渐近估计），与理论值 $\\frac{1+\\sqrt5}{2}\\approx1.618$ 一致，属超线性收敛。割线法每步只用一次新的函数值、不需要导数，代价低；但它比牛顿法略慢，且需要两个较好的初值。"
+      }
+    ],
+    "tags": [
+      "牛顿迭代法",
+      "切线法",
+      "割线法",
+      "平方收敛",
+      "超线性收敛"
+    ],
+    "links": [
+      "nonlinear-equations",
+      "numerical-error",
+      "derivative",
+      "taylor-series",
+      "numerical-differentiation"
+    ]
+  },
+  {
+    "id": "direct-linear-solvers",
+    "title": "线性方程组的直接解法：高斯消元与 LU 分解",
+    "titleEn": "Direct Methods for Linear Systems: Gaussian Elimination and LU",
+    "branch": "numerical",
+    "level": 4,
+    "summary": "消元—回代是解线性方程组的基本直接法：高斯消元 O(n³)，列主元消去抑制误差放大；LU 分解把 A 拆成单位下三角×上三角，一次分解可服务多个右端项，对称正定时用 Cholesky 分解。",
+    "summaryEn": "Elimination plus back substitution is the basic direct method for linear systems: Gaussian elimination runs in O(n³), partial pivoting controls error growth, and the LU factorization splits A into a unit lower-triangular times an upper-triangular matrix, reused for many right-hand sides; symmetric positive definite matrices use Cholesky.",
+    "definition": "给定非奇异的 $n$ 阶线性方程组 $Ax=b$。**高斯消元法**分两大步：**前向消元**用第 $k$ 个方程消去其后各方程中的 $x_k$，把系数矩阵化为上三角；**回代**再从最后一个方程开始自下而上解出未知量。第 $k$ 步消元的公式为：对 $i>k$ 取乘数\n$$m_{ik}=\\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}},\\qquad a_{ij}^{(k+1)}=a_{ij}^{(k)}-m_{ik}a_{kj}^{(k)},\\qquad b_i^{(k+1)}=b_i^{(k)}-m_{ik}b_k^{(k)}.$$\n总计算量约为消元 $\\frac{n^3}{3}$ 次乘法加上回代 $\\frac{n^2}{2}$ 次，是一个 $O(n^3)$ 的算法。\n\n主元问题：若 $a_{kk}^{(k)}=0$ 消元无法进行；若 $a_{kk}^{(k)}$ 虽非零但很小，上面的公式会把误差放大 $\\frac{|a_{ik}|}{|a_{kk}|}$ 倍，数值上很危险。**列主元消去法**在每步先把第 $k$ 列中第 $k$ 行及以下绝对值最大的元素换到主元位置（交换两行），再做消元；这样所有乘数满足 $|m_{ik}|\\le1$，舍入误差的增长被控制在可接受范围。对任何非奇异矩阵，列主元消去法总能完成。\n\n**LU 分解**把消元过程本身记录下来：若消元不需要换行，则 $A=LU$，其中 $U$ 是消元得到的上三角矩阵，$L$ 是单位下三角矩阵（对角线为 $1$，下三角元素正是乘数 $m_{ik}$）——这就是 **Doolittle 分解**。求出 $L$、$U$ 后，解 $Ax=b$ 化为两步三角求解：先解 $Ly=b$（前代），再解 $Ux=y$（回代），各需 $O(n^2)$。同一个 $A$、多个右端项时，分解一次反复使用，效率极高。若消元需要换行，则得到 $PA=LU$（$P$ 为排列矩阵）。\n\n对称正定矩阵有更强的工具：**Cholesky 分解** $A=LL^{\\top}$，其中 $L$ 为下三角、对角线元素为正；运算量约 $\\frac{n^3}{6}$（只有 LU 的一半），而且不需要选主元也数值稳定。它适用的条件是 $A$ 对称且所有特征值为正（等价于所有顺序主子式为正）。例如最小二乘的正规方程 $A^{\\top}Ac=A^{\\top}b$，系数矩阵就是对称正定的，Cholesky 是标准解法。",
+    "definitionEn": "Given a nonsingular $n\\times n$ system $Ax=b$, **Gaussian elimination** works in two phases: **forward elimination** uses equation $k$ to eliminate $x_k$ from the equations below it, turning the coefficient matrix into an upper triangular one, and **back substitution** solves for the unknowns from the bottom up. At step $k$, for $i>k$, define the multiplier\n$$m_{ik}=\\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}},\\qquad a_{ij}^{(k+1)}=a_{ij}^{(k)}-m_{ik}a_{kj}^{(k)},\\qquad b_i^{(k+1)}=b_i^{(k)}-m_{ik}b_k^{(k)}.$$\nThe cost is about $\\frac{n^3}{3}$ multiplications for elimination plus $\\frac{n^2}{2}$ for back substitution — an $O(n^3)$ algorithm.\n\nPivoting: if $a_{kk}^{(k)}=0$ elimination stops; if it is merely tiny, the formulas amplify errors by the factor $|a_{ik}|/|a_{kk}|$, which is numerically dangerous. **Partial pivoting** selects at step $k$ the entry of largest absolute value in column $k$ at or below the diagonal, swaps its row with row $k$, and only then eliminates; all multipliers then satisfy $|m_{ik}|\\le1$ and error growth is kept in check. For any nonsingular matrix partial pivoting always completes.\n\n**LU factorization** records the elimination itself: if no row swaps are needed, $A=LU$, where $U$ is the resulting upper triangular matrix and $L$ is unit lower triangular (ones on the diagonal, the multipliers below it) — the **Doolittle factorization**. Once $L$ and $U$ are known, $Ax=b$ splits into the forward substitution $Ly=b$ and the back substitution $Ux=y$, each $O(n^2)$. For one matrix with many right-hand sides, factor once and reuse. With row exchanges one obtains $PA=LU$ with a permutation matrix $P$.\n\nSymmetric positive definite matrices enjoy a stronger tool: the **Cholesky factorization** $A=LL^{\\top}$ with $L$ lower triangular and positive diagonal, at about $\\frac{n^3}{6}$ operations (half of LU), provably stable without pivoting. It applies exactly when $A$ is symmetric with all eigenvalues positive (equivalently, all leading principal minors positive) — for instance to the normal equations $A^{\\top}Ac=A^{\\top}b$ of least squares.",
+    "formulas": [
+      {
+        "latex": "m_{ik}=\\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}},\\qquad a_{ij}^{(k+1)}=a_{ij}^{(k)}-m_{ik}a_{kj}^{(k)},\\qquad b_i^{(k+1)}=b_i^{(k)}-m_{ik}b_k^{(k)}",
+        "note": "前向消元的核心递推；$m_{ik}$ 称为乘数，消元结束后回代即可解出全部 $x_i$。",
+        "noteEn": "The core recursion of forward elimination; $m_{ik}$ is the multiplier, and back substitution then yields all $x_i$."
+      },
+      {
+        "latex": "x_i=\\frac{1}{u_{ii}}\\Big(b_i-\\sum_{j=i+1}^{n}u_{ij}x_j\\Big),\\qquad i=n,n-1,\\dots,1",
+        "note": "回代公式（$Ux=b'$，$b'$ 为消元后的右端项）：自下而上逐步求解，只需 $O(n^2)$ 次运算。",
+        "noteEn": "Back substitution ($Ux=b'$ with the transformed right-hand side): solve from the bottom up in $O(n^2)$ operations."
+      },
+      {
+        "latex": "A=LU,\\qquad L=\\begin{pmatrix}1&0&0\\\\ l_{21}&1&0\\\\ l_{31}&l_{32}&1\\end{pmatrix}\\ (n=3\\ \\text{示意}),\\qquad U\\ \\text{为上三角}",
+        "note": "Doolittle 分解：$L$ 为单位下三角（对角线全为 1，下三角元素为乘数），$U$ 为上三角；需要换行时写作 $PA=LU$。",
+        "noteEn": "Doolittle factorization: $L$ is unit lower triangular (ones on the diagonal, multipliers below), $U$ is upper triangular; with row swaps it becomes $PA=LU$."
+      },
+      {
+        "latex": "A=LL^{\\top},\\qquad l_{jj}=\\sqrt{a_{jj}-\\sum_{k=1}^{j-1}l_{jk}^{2}},\\qquad l_{ij}=\\frac{1}{l_{jj}}\\Big(a_{ij}-\\sum_{k=1}^{j-1}l_{ik}l_{jk}\\Big)\\ (i>j)",
+        "note": "对称正定矩阵的 Cholesky 分解：只存一个三角阵，运算量约为 LU 的一半，无需选主元。",
+        "noteEn": "Cholesky factorization for symmetric positive definite matrices: only one triangular factor is stored, the work is about half of LU, and no pivoting is needed."
+      },
+      {
+        "latex": "\\text{消元约}\\ \\frac{n^3}{3}\\ \\text{次乘法},\\qquad \\text{回代约}\\ \\frac{n^2}{2},\\qquad \\text{Cholesky 约}\\ \\frac{n^3}{6}",
+        "note": "计算量都是 $O(n^3)$；分解一次后，每个右端项只需 $O(n^2)$ 次三角求解。",
+        "noteEn": "All costs are $O(n^3)$; after one factorization each right-hand side costs only $O(n^2)$ triangular solves."
+      }
+    ],
+    "expression": {
+      "text": "A = L·U（L 单位下三角，U 上三角）；对称正定时 A = L·Lᵀ",
+      "symbol": "A=LU,\\qquad Ax=b\\ \\Rightarrow\\ Ly=b,\\ Ux=y",
+      "note": "高斯消元「先消元再回代」的过程被 LU 分解完整记录；换行即得 $PA=LU$。",
+      "noteEn": "The elimination-plus-back-substitution process is recorded by the LU factorization; with row swaps it becomes $PA=LU$."
+    },
+    "properties": [
+      "存在与唯一性：若 $A$ 的所有顺序主子式非零，则 Doolittle 分解（$L$ 单位下三角、$U$ 上三角）存在且唯一；一般非奇异矩阵借助列主元得到 $PA=LU$，理论上总能完成。",
+      "列主元消去法的乘数满足 $|m_{ik}|\\le1$，能抑制舍入误差放大；主元很小时不选主元会使误差被 $|a_{ik}/a_{kk}|$ 放大，这是直接法失稳的主要来源。",
+      "计算量：消元约 $\\frac{n^3}{3}$ 次乘法、回代约 $\\frac{n^2}{2}$ 次，整体 $O(n^3)$，远优于按定义展开的指数级方法。",
+      "一次分解、多次求解：保存 $L$、$U$ 后，每个新右端项只需两次三角求解（各 $O(n^2)$），适合多右端项与迭代改进。",
+      "对称正定矩阵用 Cholesky 分解 $A=LL^{\\top}$：运算量约 $\\frac{n^3}{6}$、无须选主元、数值稳定；但方程组本身病态（条件数大）时解对扰动敏感，这与算法选择无关。"
+    ],
+    "propertiesEn": [
+      "Existence and uniqueness: if all leading principal minors of $A$ are nonzero, the Doolittle factorization ($L$ unit lower triangular, $U$ upper triangular) exists and is unique; for a general nonsingular matrix partial pivoting gives $PA=LU$, which always completes.",
+      "Partial pivoting keeps all multipliers within $|m_{ik}|\\le1$, controlling rounding-error growth; a tiny pivot without row swaps amplifies errors by $|a_{ik}/a_{kk}|$, the main source of instability in direct methods.",
+      "Cost: about $\\frac{n^3}{3}$ multiplications for elimination and $\\frac{n^2}{2}$ for back substitution, i.e. $O(n^3)$ — far better than expanding by definition.",
+      "Factor once, solve many times: with $L$ and $U$ stored, each new right-hand side needs only two triangular solves ($O(n^2)$ each), ideal for many right-hand sides and iterative refinement.",
+      "For symmetric positive definite matrices the Cholesky factorization $A=LL^{\\top}$ costs about $\\frac{n^3}{6}$, needs no pivoting and is stable; but an ill-conditioned system remains sensitive to perturbations regardless of the algorithm."
+    ],
+    "examples": [
+      {
+        "problem": "用高斯消元法解方程组 $2x_1+x_2-x_3=8$，$-3x_1-x_2+2x_3=-11$，$-2x_1+x_2+2x_3=-3$，并写出系数矩阵的 Doolittle 分解。",
+        "solution": "增广矩阵为\n$$\\left(\\begin{array}{ccc|c}2&1&-1&8\\\\-3&-1&2&-11\\\\-2&1&2&-3\\end{array}\\right).$$\n第 1 步：$m_{21}=-\\frac32$、$m_{31}=-1$，消去第 2、3 行的 $x_1$，得 $(0,\\frac12,\\frac12\\,|\\,1)$、$(0,2,1\\,|\\,5)$；第 2 步：$m_{32}=4$，消去第 3 行的 $x_2$，得 $(0,0,-1\\,|\\,1)$。回代：$x_3=-1$，$x_2=\\frac{1-\\frac12\\cdot(-1)}{\\frac12}=3$，$x_1=\\frac{8-1\\cdot3-(-1)\\cdot(-1)}{2}=2$，所以 $x=(2,3,-1)^{\\top}$。Doolittle 分解为\n$$L=\\begin{pmatrix}1&0&0\\\\-\\frac32&1&0\\\\-1&4&1\\end{pmatrix},\\qquad U=\\begin{pmatrix}2&1&-1\\\\0&\\frac12&\\frac12\\\\0&0&-1\\end{pmatrix},$$\n直接验证 $LU=A$；对同一 $A$ 更换右端项时，只需再做一次前代与回代。"
+      },
+      {
+        "problem": "对对称正定矩阵 $A=\\begin{pmatrix}4&2\\\\2&3\\end{pmatrix}$ 求 Cholesky 分解，并用它解 $Ax=(6,5)^{\\top}$。",
+        "solution": "$l_{11}=\\sqrt4=2$；$l_{21}=\\frac{2}{2}=1$；$l_{22}=\\sqrt{3-1^2}=\\sqrt2$，所以 $A=LL^{\\top}$，$L=\\begin{pmatrix}2&0\\\\1&\\sqrt2\\end{pmatrix}$。前代 $Ly=b$：$y_1=3$，$y_2=\\frac{5-3}{\\sqrt2}=\\sqrt2$；回代 $L^{\\top}x=y$：$\\sqrt2\\,x_2=\\sqrt2$ 得 $x_2=1$，再由 $2x_1+x_2=3$ 得 $x_1=1$。故 $x=(1,1)^{\\top}$，验证：$4\\cdot1+2\\cdot1=6$，$2\\cdot1+3\\cdot1=5$。"
+      }
+    ],
+    "tags": [
+      "高斯消元",
+      "LU分解",
+      "列主元消去法",
+      "Cholesky分解"
+    ],
+    "links": [
+      "iterative-linear-solvers",
+      "matrix-condition",
+      "least-squares-fitting",
+      "interpolation"
+    ]
+  },
+  {
+    "id": "iterative-linear-solvers",
+    "title": "线性方程组的迭代解法",
+    "titleEn": "Iterative Methods for Linear Systems",
+    "branch": "numerical",
+    "level": 5,
+    "summary": "把 Ax=b 变成不动点迭代：雅可比逐点用旧值、高斯-赛德尔立即用新值；收敛的充要条件是迭代矩阵谱半径 ρ(B)<1，严格对角占优是充分条件而非必要条件，高斯-赛德尔通常更快但并非总是。",
+    "summaryEn": "Turn Ax=b into a fixed-point iteration: Jacobi uses only old values while Gauss-Seidel uses updated values immediately; convergence holds if and only if the iteration matrix has spectral radius ρ(B)<1, strict diagonal dominance is a sufficient but not necessary condition, and Gauss-Seidel is usually but not always faster.",
+    "definition": "直接法作用于大型稀疏系统时会因「填元」而破坏稀疏性，迭代法则从初始猜测出发逐步改进。把系数矩阵按对角、严格下三角、严格上三角分解：$A=D+L+U$（$D$ 为对角部分，$L$、$U$ 分别为严格下三角与严格上三角部分）。**雅可比迭代**每步只用上一步的旧值计算全部新值：\n$$x_i^{(k+1)}=\\frac{1}{a_{ii}}\\Big(b_i-\\sum_{j\\neq i}a_{ij}x_j^{(k)}\\Big),\\qquad i=1,\\dots,n,$$\n矩阵形式为 $x^{(k+1)}=B_Jx^{(k)}+D^{-1}b$，其中 $B_J=-D^{-1}(L+U)$ 称为雅可比迭代矩阵。\n\n**高斯-赛德尔迭代**只改一处：计算 $x_i^{(k+1)}$ 时，前面已经算出的新值 $x_j^{(k+1)}$（$j<i$）立即投入使用：\n$$x_i^{(k+1)}=\\frac{1}{a_{ii}}\\Big(b_i-\\sum_{j<i}a_{ij}x_j^{(k+1)}-\\sum_{j>i}a_{ij}x_j^{(k)}\\Big),$$\n矩阵形式为 $x^{(k+1)}=B_Gx^{(k)}+(D+L)^{-1}b$，$B_G=-(D+L)^{-1}U$。两者都收敛时，高斯-赛德尔通常只需要雅可比一半左右的迭代次数，代价是必须按分量顺序更新、不易并行。\n\n收敛性判据：两种方法都是定常迭代 $x^{(k+1)}=Bx^{(k)}+f$，对任意初始向量都收敛的**充要条件是迭代矩阵的谱半径 $\\rho(B)<1$**（$\\rho$ 为特征值模的最大值）；此时误差按 $\\rho(B)$ 的速率线性衰减：$\\|x^{(k)}-x^{*}\\|\\lesssim\\rho(B)^k\\|x^{(0)}-x^{*}\\|$。既然是充要条件，$\rho(B)$ 比任何充分条件都准确，只是计算特征值本身也有代价。\n\n实践中常用的**充分条件**是严格对角占优：若 $|a_{ii}|>\\sum_{j\\neq i}|a_{ij}|$（每个对角元的绝对值都严格大于同行其它元素绝对值之和）对每一行成立，则雅可比与高斯-赛德尔都收敛。务必记住它**只是充分条件、不是必要条件**：存在不严格对角占优却仍然收敛的矩阵，例如 $A=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ 有 $\\rho(B_J)=\\frac{1}{\\sqrt2}<1$。另外，对三对角（更一般地，正则排列）矩阵有 $\\rho(B_G)=\\rho(B_J)^2$，所以高斯-赛德尔通常把每步误差因子平方、快约一倍；但一般情形下它并非总是更快——存在雅可比收敛而高斯-赛德尔发散的系数矩阵，所以「高斯-赛德尔一定比雅可比快」的说法不成立。",
+    "definitionEn": "Direct methods lose sparsity on large systems, so iterative methods start from a guess and improve it. Split the matrix into diagonal, strictly lower and strictly upper parts: $A=D+L+U$. The **Jacobi iteration** uses only old values:\n$$x_i^{(k+1)}=\\frac{1}{a_{ii}}\\Big(b_i-\\sum_{j\\neq i}a_{ij}x_j^{(k)}\\Big),\\qquad i=1,\\dots,n,$$\nin matrix form $x^{(k+1)}=B_Jx^{(k)}+D^{-1}b$, with the Jacobi iteration matrix $B_J=-D^{-1}(L+U)$.\n\nThe **Gauss-Seidel iteration** changes one thing: when computing $x_i^{(k+1)}$, the values already updated, $x_j^{(k+1)}$ with $j<i$, are used immediately:\n$$x_i^{(k+1)}=\\frac{1}{a_{ii}}\\Big(b_i-\\sum_{j<i}a_{ij}x_j^{(k+1)}-\\sum_{j>i}a_{ij}x_j^{(k)}\\Big),$$\nin matrix form $x^{(k+1)}=B_Gx^{(k)}+(D+L)^{-1}b$, with $B_G=-(D+L)^{-1}U$. When both converge, Gauss-Seidel typically needs roughly half as many iterations as Jacobi, at the price of sequential updates that are harder to parallelize.\n\nConvergence: both are stationary iterations $x^{(k+1)}=Bx^{(k)}+f$, and they converge from every starting vector **if and only if the spectral radius of the iteration matrix satisfies $\\rho(B)<1$** ($\\rho$ = largest eigenvalue modulus). The error then decays linearly at rate $\\rho(B)$: $\\|x^{(k)}-x^{*}\\|\\lesssim\\rho(B)^k\\|x^{(0)}-x^{*}\\|$. Being an if-and-only-if criterion, $\\rho(B)$ is sharp — computing eigenvalues has its own cost, though.\n\nA convenient **sufficient** condition in practice is strict diagonal dominance: if $|a_{ii}|>\\sum_{j\\neq i}|a_{ij}|$ for every row, both Jacobi and Gauss-Seidel converge. Remember this is sufficient but **not necessary**: matrices failing it may still converge, e.g. $A=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ has $\\rho(B_J)=\\frac{1}{\\sqrt2}<1$. Moreover, for tridiagonal (more generally, consistently ordered) matrices $\\rho(B_G)=\\rho(B_J)^2$, so Gauss-Seidel typically squares the error factor and is about twice as fast; in general, however, it is not always faster — there are matrices where Jacobi converges while Gauss-Seidel diverges, so it is false that Gauss-Seidel is always faster than Jacobi.",
+    "formulas": [
+      {
+        "latex": "x_i^{(k+1)}=\\frac{1}{a_{ii}}\\Big(b_i-\\sum_{j\\neq i}a_{ij}x_j^{(k)}\\Big),\\qquad B_J=-D^{-1}(L+U)",
+        "note": "雅可比迭代及其迭代矩阵：每步只用旧值，各分量可以并行计算。",
+        "noteEn": "The Jacobi iteration and its matrix: only old values are used, so all components can be updated in parallel."
+      },
+      {
+        "latex": "x_i^{(k+1)}=\\frac{1}{a_{ii}}\\Big(b_i-\\sum_{j<i}a_{ij}x_j^{(k+1)}-\\sum_{j>i}a_{ij}x_j^{(k)}\\Big),\\qquad B_G=-(D+L)^{-1}U",
+        "note": "高斯-赛德尔迭代及其迭代矩阵：新值立即使用，通常收敛更快，但必须串行更新。",
+        "noteEn": "The Gauss-Seidel iteration and its matrix: updated values are used at once, usually converging faster but requiring sequential updates."
+      },
+      {
+        "latex": "x^{(k+1)}=Bx^{(k)}+f\\ \\text{对任意初值收敛}\\ \\Longleftrightarrow\\ \\rho(B)<1",
+        "note": "收敛的充要条件（谱半径判据）；误差衰减因子为 $\\rho(B)$，$\\|x^{(k)}-x^{*}\\|\\lesssim\\rho(B)^k\\|x^{(0)}-x^{*}\\|$。",
+        "noteEn": "The necessary and sufficient spectral radius criterion; the error decays with factor $\\rho(B)$, i.e. $\\|x^{(k)}-x^{*}\\|\\lesssim\\rho(B)^k\\|x^{(0)}-x^{*}\\|$."
+      },
+      {
+        "latex": "|a_{ii}|>\\sum_{j\\neq i}|a_{ij}|\\ (i=1,\\dots,n)\\ \\Longrightarrow\\ \\text{Jacobi 与 G-S 均收敛}",
+        "note": "严格对角占优是充分条件而非必要条件：不占优时收敛与否要用 $\\rho(B)$ 判断。",
+        "noteEn": "Strict diagonal dominance is sufficient but not necessary: without it, convergence must be decided by $\\rho(B)$."
+      },
+      {
+        "latex": "\\rho(B_G)=\\rho(B_J)^{2}\\qquad(\\text{三对角等正则排列情形})",
+        "note": "正则排列矩阵中高斯-赛德尔把每步误差因子平方，通常快约一倍；一般矩阵并无此保证（可能更慢甚至发散）。",
+        "noteEn": "For consistently ordered matrices Gauss-Seidel squares the error factor per step, typically twice as fast; general matrices offer no such guarantee (it can be slower, even divergent)."
+      }
+    ],
+    "expression": {
+      "text": "x^(k+1) = B x^(k) + f",
+      "symbol": "x^{(k+1)}=Bx^{(k)}+f,\\qquad \\rho(B)<1",
+      "note": "两种迭代是同一个框架，区别只在迭代矩阵 $B_J$、$B_G$；收敛与否完全由 $\\rho(B)$ 决定。",
+      "noteEn": "Both methods share one framework, differing only in the iteration matrix $B_J$ or $B_G$; convergence depends entirely on $\\rho(B)$."
+    },
+    "properties": [
+      "收敛的充要条件是迭代矩阵谱半径 $\\rho(B)<1$；误差长期按 $\\rho(B)^k$ 衰减，$\\rho(B)$ 越小越快。既然是充要条件，不能用严格对角占优来「判定不收敛」。",
+      "严格对角占优蕴含两种方法都收敛；但这是充分不必要条件——例如 $A=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ 不严格占优，而 $\\rho(B_J)=\\frac{1}{\\sqrt2}\\approx0.707<1$ 仍然收敛。",
+      "高斯-赛德尔通常比雅可比快：三对角（正则排列）矩阵满足 $\\rho(B_G)=\\rho(B_J)^2$，误差因子被平方；但对一般矩阵并不保证——存在雅可比收敛而高斯-赛德尔发散的例子。",
+      "实现与并行性：雅可比每步各分量互不依赖，适合向量化/并行计算；高斯-赛德尔必须按分量顺序更新，但通常迭代次数更少。",
+      "迭代法保持矩阵稀疏性、每步只需 $O(\\mathrm{nnz})$ 量级的运算，适合大型稀疏系统；引入松弛因子的 SOR 方法可进一步加速（正则排列矩阵的最优因子为 $\\omega=\\frac{2}{1+\\sqrt{1-\\rho(B_J)^2}}$）。"
+    ],
+    "propertiesEn": [
+      "Convergence holds if and only if $\\rho(B)<1$; the error decays like $\\rho(B)^k$, faster for smaller $\\rho(B)$. Since this is an equivalence, strict diagonal dominance cannot be used to certify divergence.",
+      "Strict diagonal dominance implies convergence of both methods, but it is only sufficient: e.g. $A=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ is not strictly dominant yet $\\rho(B_J)=\\frac{1}{\\sqrt2}\\approx0.707<1$, so Jacobi converges.",
+      "Gauss-Seidel is usually faster than Jacobi: for tridiagonal (consistently ordered) matrices $\\rho(B_G)=\\rho(B_J)^2$; in general it is not guaranteed — there are matrices where Jacobi converges while Gauss-Seidel diverges.",
+      "Implementation and parallelism: Jacobi updates are independent and vectorize/parallelize easily; Gauss-Seidel must update sequentially but usually needs fewer iterations.",
+      "Iterative methods preserve sparsity and cost $O(\\mathrm{nnz})$ per sweep, ideal for large sparse systems; SOR adds a relaxation factor for further speed-up (optimal $\\omega=\\frac{2}{1+\\sqrt{1-\\rho(B_J)^2}}$ for consistently ordered matrices)."
+    ],
+    "examples": [
+      {
+        "problem": "用雅可比与高斯-赛德尔迭代解方程组 $2x_1+x_2=5$，$x_1+3x_2=6$，从 $x^{(0)}=(0,0)$ 出发比较前两步的误差。",
+        "solution": "精确解为 $x^{*}=(1.8,1.4)$。雅可比：$x^{(1)}=(2.5,2)$（误差 $\\infty$-范数 $0.7$）；$x^{(2)}=(1.5,1.1667)$（误差 $0.3$）；$x^{(3)}=(1.9167,1.5)$（误差约 $0.1167$）。误差比在 $0.39\\sim0.43$ 之间振荡、平均约 $0.41$，与 $\\rho(B_J)=\\frac{1}{\\sqrt6}\\approx0.408$ 相符。高斯-赛德尔：$x^{(1)}=(2.5,1.1667)$（误差 $0.7$）；$x^{(2)}=(1.9167,1.3611)$（误差 $0.1167$）；$x^{(3)}=(1.8194,1.3935)$（误差 $0.0194$）；误差每步恰好乘 $\\frac16$，与 $\\rho(B_G)=\\frac16\\approx0.1667$ 相符。相同步数下高斯-赛德尔的误差已比雅可比小一个量级，验证了它通常收敛更快。"
+      },
+      {
+        "problem": "验证 $A=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ 不是严格对角占优，但雅可比迭代仍然收敛。",
+        "solution": "第二行 $|a_{22}|=1$ 不严格大于 $|a_{21}|=1$，故不满足严格对角占优。此时 $D=\\mathrm{diag}(2,1)$，$B_J=-D^{-1}(L+U)=\\begin{pmatrix}0&-\\frac12\\\\-1&0\\end{pmatrix}$，特征值为 $\\pm\\frac{1}{\\sqrt2}$，$\\rho(B_J)=\\frac{1}{\\sqrt2}\\approx0.707<1$，由充要条件知雅可比收敛（同理 $B_G=\\begin{pmatrix}0&-\\frac12\\\\0&\\frac12\\end{pmatrix}$ 的谱半径为 $\\frac12<1$，高斯-赛德尔也收敛）。这说明严格对角占优只是充分条件：不满足时应当用谱半径来判断。"
+      }
+    ],
+    "tags": [
+      "雅可比迭代",
+      "高斯-赛德尔迭代",
+      "谱半径",
+      "严格对角占优"
+    ],
+    "links": [
+      "direct-linear-solvers",
+      "matrix-condition",
+      "numerical-stability",
+      "numerical-error"
+    ]
+  }
+]

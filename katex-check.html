@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+</head><body><pre id="out">running</pre>
+<script>
+const STR=["summary","summaryEn","definition","definitionEn"];
+fetch("data/knowledge.json", {cache:"no-cache"}).then(r=>r.json()).then(k=>{
+  const errs=[], warns=[]; let count=0;
+  const render=(tex,ctx)=>{
+    if(!tex||!tex.trim())return; count++;
+    try{ katex.renderToString(tex,{throwOnError:true,strict:"warn",trust:false}); }
+    catch(e){ errs.push(ctx+" :: "+tex.slice(0,120)+" :: "+e.message.slice(0,100)); }
+  };
+  const scanInline=(s,ctx)=>{
+    if(typeof s!=="string")return;
+    const re=/\$\$([\s\S]+?)\$\$|\$([^$]+?)\$/g; let m;
+    while((m=re.exec(s))) render(m[1]||m[2], ctx);
+  };
+  for(const n of k.nodes){
+    STR.forEach(f=>scanInline(n[f],n.id+"."+f));
+    for(const a of (n.properties||[])) scanInline(a,n.id+".prop");
+    for(const a of (n.propertiesEn||[])) scanInline(a,n.id+".propEn");
+    for(const f of (n.formulas||[])){ render(f.latex,n.id+".formula"); scanInline(f.note,n.id+".note"); scanInline(f.noteEn,n.id+".noteEn"); }
+    for(const e of (n.examples||[])){
+      scanInline(e.problem,n.id+".exQ"); scanInline(e.solution,n.id+".exA");
+      scanInline(e.problemEn,n.id+".exQEn"); scanInline(e.solutionEn,n.id+".exAEn");
+    }
+  }
+  document.getElementById("out").textContent = "SCANNED="+count+"\nERRORS="+errs.length+"\n"+errs.slice(0,25).join("\n")+"\nOK";
+}).catch(e=>{document.getElementById("out").textContent="FETCH_FAIL "+e;});
+</script></body></html>

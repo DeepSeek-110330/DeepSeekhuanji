@@ -1,0 +1,1144 @@
+[
+  {
+    "id": "parallelogram",
+    "title": "平行四边形",
+    "titleEn": "Parallelograms",
+    "branch": "plane-geometry",
+    "level": 2,
+    "summary": "两组对边分别平行的四边形；对边相等、对角相等、对角线互相平分，是中心对称图形。",
+    "summaryEn": "A quadrilateral whose two pairs of opposite sides are parallel; opposite sides and angles are equal and the diagonals bisect each other.",
+    "definition": "两组对边分别平行的四边形叫做**平行四边形**。如图，AB∥CD 且 AD∥BC，四边形 ABCD 就是平行四边形，记作 ▱ABCD（四个顶点要按顺序写）。伸缩门、篱笆和地砖的接缝里都藏着平行四边形。\n\n学习平行四边形，最重要的是分清**性质**和**判定**：性质是「已知它是平行四边形，能推出什么」；判定是「满足什么条件，才能断定它是平行四边形」。做题时先看题目给的是哪一类条件，再选对应的理由，推理方向千万不能弄反。\n\n平行四边形还是**中心对称图形**：把它绕两条对角线的交点 O 旋转 180°，图形与自身完全重合，所以 O 就是它的对称中心。",
+    "definitionEn": "A quadrilateral whose two pairs of opposite sides are parallel is called a **parallelogram**. If AB∥CD and AD∥BC, then quadrilateral ABCD is a parallelogram, written ▱ABCD (the vertices are listed in order). Retractable gates, fences and tiled floors are full of parallelograms.\n\nThe key to learning parallelograms is telling **properties** from **criteria**: a property says that if the figure is a parallelogram, then something must be true; a criterion says that if some condition holds, then the figure must be a parallelogram. Always check which direction a problem gives before choosing a reason.\n\nA parallelogram is also a **centrally symmetric** figure: rotating it by 180° about the intersection O of its diagonals leaves it unchanged, so O is its centre of symmetry.",
+    "formulas": [
+      {
+        "latex": "AB=CD,\\quad AD=BC",
+        "note": "性质：平行四边形的对边相等（两组对边既平行又相等）。",
+        "noteEn": "Property: opposite sides of a parallelogram are equal (both pairs are parallel and equal)."
+      },
+      {
+        "latex": "\\angle A=\\angle C,\\quad \\angle B=\\angle D",
+        "note": "性质：对角相等；任意相邻两角互补，如 ∠A + ∠B = 180°。",
+        "noteEn": "Property: opposite angles are equal, and any two adjacent angles are supplementary."
+      },
+      {
+        "latex": "AO=CO,\\quad BO=DO",
+        "note": "性质：对角线互相平分，交点 O 同时是对称中心。",
+        "noteEn": "Property: the diagonals bisect each other; their intersection O is also the centre of symmetry."
+      },
+      {
+        "latex": "S_{\\square ABCD}=ah",
+        "note": "面积公式：底 a 乘这条底边上的高 h（注意高要与底垂直）。",
+        "noteEn": "Area formula: base a times the height h on that base."
+      },
+      {
+        "latex": "S_{\\square ABCD}=2S_{\\triangle ABC}",
+        "note": "一条对角线把平行四边形分成两个全等三角形，所以面积是一个三角形面积的两倍。",
+        "noteEn": "A diagonal splits the parallelogram into two congruent triangles, so its area is twice the area of one of them."
+      }
+    ],
+    "properties": [
+      "性质①对边：两组对边分别平行且相等——平行来自定义，相等是性质。",
+      "性质②对角：对角相等；任意相邻两角互补（和是 180°）。",
+      "性质③对角线：两条对角线互相平分，交点 O 是对称中心，平行四边形是中心对称图形。",
+      "判定①：两组对边分别平行，或两组对边分别相等，或一组对边平行且相等——满足其一就是平行四边形。",
+      "判定②：两组对角分别相等的四边形是平行四边形；对角线互相平分的四边形也是平行四边形。"
+    ],
+    "propertiesEn": [
+      "Property 1 (sides): both pairs of opposite sides are parallel (definition) and equal (property).",
+      "Property 2 (angles): opposite angles are equal, and any two adjacent angles add up to 180°.",
+      "Property 3 (diagonals): the diagonals bisect each other, and their intersection O is the centre of symmetry — a parallelogram is centrally symmetric.",
+      "Criterion 1: if both pairs of opposite sides are respectively parallel, or respectively equal, or if one pair of opposite sides is both parallel and equal, then it is a parallelogram.",
+      "Criterion 2: if both pairs of opposite angles are equal, or if the diagonals bisect each other, then it is a parallelogram."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.9,
+        6.6
+      ],
+      "yRange": [
+        -1.7,
+        3.9
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              4.4,
+              0
+            ],
+            [
+              5.6,
+              2.8
+            ],
+            [
+              1.2,
+              2.8
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            5.6,
+            2.8
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.4,
+            0
+          ],
+          "to": [
+            1.2,
+            2.8
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            4.4,
+            0
+          ],
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.6,
+            2.8
+          ],
+          "label": "C"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.2,
+            2.8
+          ],
+          "label": "D"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.8,
+            1.4
+          ],
+          "label": "O"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.35,
+            3.3
+          ],
+          "text": "AB∥CD，AD∥BC"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.8,
+            -0.85
+          ],
+          "text": "OA = OC，OB = OD（对角线互相平分）"
+        }
+      ],
+      "title": "平行四边形与它的两条对角线"
+    },
+    "examples": [
+      {
+        "problem": "在 ▱ABCD 中，∠A = 65°，求其余三个内角的度数。",
+        "solution": "由性质「对角相等」得 $\\angle C = \\angle A = 65^{\\circ}$；由「邻角互补」得 $\\angle B = 180^{\\circ} - 65^{\\circ} = 115^{\\circ}$，再得 $\\angle D = \\angle B = 115^{\\circ}$。所以其余三个角分别是 65°、115°、115°。"
+      },
+      {
+        "problem": "四边形 ABCD 中，AB∥CD 且 AB = CD，判断四边形 ABCD 的形状并说明理由。",
+        "solution": "连接 AC。因为 AB∥CD，所以 $\\angle BAC = \\angle DCA$（两直线平行，内错角相等）；又 AB = CD，AC = CA，所以 $\\triangle ABC \\cong \\triangle CDA$（SAS），从而 $\\angle ACB = \\angle CAD$，得 AD∥BC。两组对边分别平行，所以 ABCD 是平行四边形——这正是判定「一组对边平行且相等的四边形是平行四边形」。"
+      }
+    ],
+    "tags": [
+      "初中几何",
+      "四边形",
+      "parallelogram",
+      "中心对称"
+    ],
+    "links": [
+      "congruent-triangles",
+      "central-symmetry-rotation",
+      "rectangle-rhombus-square",
+      "triangle"
+    ]
+  },
+  {
+    "id": "rectangle-rhombus-square",
+    "title": "矩形、菱形与正方形",
+    "titleEn": "Rectangles, Rhombuses and Squares",
+    "branch": "plane-geometry",
+    "level": 2,
+    "summary": "三种特殊的平行四边形：矩形四个角是直角、菱形四条边相等、正方形既是矩形又是菱形。",
+    "summaryEn": "Three special parallelograms: a rectangle has four right angles, a rhombus has four equal sides, and a square is both.",
+    "definition": "矩形、菱形、正方形都是**特殊的平行四边形**：它们先具备平行四边形的全部性质，再各自多满足一个「特殊条件」，可以说是平行四边形家族里的三兄弟。\n\n**矩形**是有一个角是直角的平行四边形；**菱形**是有一组邻边相等的平行四边形；**正方形**是既有一组邻边相等、又有一个角是直角的平行四边形——它既是矩形又是菱形。三者的关系是：正方形 ⊂ 矩形 ∩ 菱形。\n\n要注意「性质」和「判定」的区别：矩形的对角线相等是**性质**（已知是矩形 → 对角线相等）；而「对角线相等的平行四边形是矩形」是**判定**（由条件 → 矩形）。判定时一定要先说清「在平行四边形中」，否则结论可能不成立。",
+    "definitionEn": "Rectangles, rhombuses and squares are all **special parallelograms**: each keeps every property of a parallelogram and adds one special condition of its own.\n\nA **rectangle** is a parallelogram with one right angle. A **rhombus** is a parallelogram with a pair of adjacent equal sides. A **square** is a parallelogram that has both a pair of adjacent equal sides and one right angle, so it is a rectangle and a rhombus at the same time; in symbols, square ⊂ rectangle ∩ rhombus.\n\nKeep **properties** and **criteria** apart: 'the diagonals of a rectangle are equal' is a property (rectangle ⇒ equal diagonals), while 'a parallelogram with equal diagonals is a rectangle' is a criterion (condition ⇒ rectangle). A criterion must always start from a parallelogram, otherwise the conclusion may fail.",
+    "formulas": [
+      {
+        "latex": "S=ab",
+        "note": "矩形的面积 = 长 a × 宽 b。",
+        "noteEn": "Area of a rectangle: length times width."
+      },
+      {
+        "latex": "S=\\dfrac{1}{2}d_{1}d_{2}",
+        "note": "菱形的面积 = 两条对角线乘积的一半（是「乘积的一半」，不是乘积！）。因为菱形对角线互相垂直，把菱形分成四个直角三角形。",
+        "noteEn": "Area of a rhombus: half the product of its two diagonals (half the product — not the product!). Its perpendicular diagonals cut the rhombus into four right triangles."
+      },
+      {
+        "latex": "S=a^{2}=\\dfrac{1}{2}d^{2}",
+        "note": "正方形面积 = 边长 a 的平方；用对角线 d 算就是对角线平方的一半。",
+        "noteEn": "Area of a square: side squared; in terms of the diagonal d it equals d²/2."
+      },
+      {
+        "latex": "AC=BD",
+        "note": "矩形的性质：对角线相等且互相平分。反过来，「对角线相等的平行四边形是矩形」才是判定。",
+        "noteEn": "Property of a rectangle: the diagonals are equal and bisect each other. Conversely, 'a parallelogram with equal diagonals is a rectangle' is the criterion."
+      },
+      {
+        "latex": "AC\\perp BD",
+        "note": "菱形的性质：两条对角线互相垂直，并且每条对角线平分一组对角。",
+        "noteEn": "Property of a rhombus: the diagonals are perpendicular, and each diagonal bisects a pair of opposite angles."
+      }
+    ],
+    "properties": [
+      "矩形性质：四个角都是直角；对角线相等且互相平分。",
+      "菱形性质：四条边都相等；对角线互相垂直，并且每条对角线平分一组对角。",
+      "正方形性质：四边相等、四角都是直角；对角线相等且互相垂直平分——它同时具有矩形和菱形的全部性质。",
+      "矩形判定：有三个角是直角的四边形是矩形；对角线相等的**平行四边形**是矩形；有一个角是直角的平行四边形是矩形。",
+      "菱形判定：四边相等的四边形是菱形；对角线互相垂直的**平行四边形**是菱形；有一组邻边相等的平行四边形是菱形。"
+    ],
+    "propertiesEn": [
+      "Rectangle: all four angles are right angles; the diagonals are equal and bisect each other.",
+      "Rhombus: all four sides are equal; the diagonals are perpendicular, and each bisects a pair of opposite angles.",
+      "Square: four equal sides and four right angles; the diagonals are equal, perpendicular and bisect each other — it inherits every property of both the rectangle and the rhombus.",
+      "Rectangle criteria: a quadrilateral with three right angles is a rectangle; a parallelogram with equal diagonals is a rectangle; a parallelogram with one right angle is a rectangle.",
+      "Rhombus criteria: a quadrilateral with four equal sides is a rhombus; a parallelogram with perpendicular diagonals is a rhombus; a parallelogram with a pair of adjacent equal sides is a rhombus."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.7,
+        10.8
+      ],
+      "yRange": [
+        -1.8,
+        4.3
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0.5
+            ],
+            [
+              3,
+              0.5
+            ],
+            [
+              3,
+              2.5
+            ],
+            [
+              0,
+              2.5
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0.5
+          ],
+          "to": [
+            3,
+            2.5
+          ],
+          "color": "#ffd166",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            3,
+            0.5
+          ],
+          "to": [
+            0,
+            2.5
+          ],
+          "color": "#ffd166",
+          "width": 1.5
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              4.1,
+              1.5
+            ],
+            [
+              5.5,
+              3.5
+            ],
+            [
+              6.9,
+              1.5
+            ],
+            [
+              5.5,
+              -0.5
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.1,
+            1.5
+          ],
+          "to": [
+            6.9,
+            1.5
+          ],
+          "color": "#ffd166",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            5.5,
+            -0.5
+          ],
+          "to": [
+            5.5,
+            3.5
+          ],
+          "color": "#ffd166",
+          "width": 1.5
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              8,
+              0.5
+            ],
+            [
+              10,
+              0.5
+            ],
+            [
+              10,
+              2.5
+            ],
+            [
+              8,
+              2.5
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.12)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            8,
+            0.5
+          ],
+          "to": [
+            10,
+            2.5
+          ],
+          "color": "#ffd166",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            10,
+            0.5
+          ],
+          "to": [
+            8,
+            2.5
+          ],
+          "color": "#ffd166",
+          "width": 1.5
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            -0.45
+          ],
+          "text": "矩形：四个直角，对角线相等"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.5,
+            -1.25
+          ],
+          "text": "菱形：四边相等，对角线垂直"
+        },
+        {
+          "type": "label",
+          "at": [
+            9,
+            -0.45
+          ],
+          "text": "正方形：两者兼具"
+        }
+      ],
+      "title": "平行四边形家族：矩形、菱形与正方形"
+    },
+    "examples": [
+      {
+        "problem": "菱形的两条对角线长分别为 6 和 8，求它的面积和边长。",
+        "solution": "由面积公式得 $S = \\dfrac{1}{2} \\times 6 \\times 8 = 24$。菱形的对角线互相垂直平分，把菱形分成四个全等的直角三角形，两条直角边分别是 $6 \\div 2 = 3$ 和 $8 \\div 2 = 4$，所以边长 $= \\sqrt{3^{2} + 4^{2}} = 5$。"
+      },
+      {
+        "problem": "判断对错并说明理由：对角线相等的四边形是矩形。",
+        "solution": "错误。对角线相等只能说明两条对角线一样长，并不能保证四边形是矩形（例如等腰梯形的两条对角线也相等）。正确的说法是「对角线相等的**平行四边形**是矩形」——用这条判定之前，必须先确认它是平行四边形。"
+      }
+    ],
+    "tags": [
+      "初中几何",
+      "四边形",
+      "矩形",
+      "菱形",
+      "正方形"
+    ],
+    "links": [
+      "parallelogram",
+      "pythagorean",
+      "congruent-triangles",
+      "triangle-area"
+    ]
+  },
+  {
+    "id": "circle-junior",
+    "title": "圆",
+    "titleEn": "Circles",
+    "branch": "plane-geometry",
+    "level": 3,
+    "summary": "到定点距离等于定长的点的集合；垂径定理、圆周角定理、切线、弧长与扇形面积是核心内容。",
+    "summaryEn": "The set of all points at a fixed distance from a fixed point; key results include the perpendicular-diameter theorem, the inscribed angle theorem, tangents, and arc and sector formulas.",
+    "definition": "平面上，到定点 O 的距离等于定长 R 的所有点组成的图形叫做**圆**，记作 ⊙O。O 是**圆心**，R 是**半径**；连接圆上任意两点的线段叫做**弦**，经过圆心的弦叫做**直径**——直径是圆中最长的弦，长度 d = 2R。圆上两点之间的部分叫做**弧**：大于半圆的叫优弧，小于半圆的叫劣弧，等于半圆的叫半圆。\n\n顶点在圆心的角叫**圆心角**；顶点在圆上、两边都与圆相交的角叫**圆周角**。圆的对称性非常好：任意一条直径所在直线都是它的对称轴，圆心是它的对称中心。\n\n圆这一章的核心定理有四组：**垂径定理**、**圆心角—弧—弦的关系**、**圆周角定理**、**切线的判定与性质**。其中「半圆（或直径）所对的圆周角是直角，90° 的圆周角所对的弦是直径」是最常用的一条，一定要记牢。",
+    "definitionEn": "In a plane, the set of all points whose distance from a fixed point O equals a fixed length R is a **circle** with centre O and radius R, written ⊙O. A segment joining two points on the circle is a **chord**; a chord through the centre is a **diameter** — the longest chord, with length d = 2R. A part of the circle between two points is an **arc**: a major arc is larger than a semicircle, a minor arc is smaller, and a semicircle is exactly half.\n\nAn angle with its vertex at the centre is a **central angle**; an angle whose vertex lies on the circle and whose sides both meet the circle is an **inscribed angle**. A circle is beautifully symmetric: every line through the centre is an axis of symmetry, and the centre itself is the centre of symmetry.\n\nFour groups of results form the core of the junior circle chapter: the perpendicular-diameter theorem, the relation among equal central angles, arcs and chords, the inscribed angle theorem, and the criteria and properties of tangents. The most frequently used fact is: an angle in a semicircle is a right angle, and conversely a right angle subtends a diameter.",
+    "formulas": [
+      {
+        "latex": "l=\\dfrac{n\\pi R}{180}",
+        "note": "弧长公式：n 是这段弧所对圆心角的**度数**（不是弧度），R 是半径。",
+        "noteEn": "Arc length: n is the degree measure of the central angle (not radians), and R is the radius."
+      },
+      {
+        "latex": "S=\\dfrac{n\\pi R^{2}}{360}=\\dfrac{1}{2}lR",
+        "note": "扇形面积公式：n 是圆心角度数，l 是弧长。两个写法结果相同，考试也常考它们的互相推导。",
+        "noteEn": "Area of a sector: n is the central angle in degrees and l is the arc length. The two forms agree, and deriving one from the other is a common exam task."
+      },
+      {
+        "latex": "\\angle ACB=\\dfrac{1}{2}\\angle AOB",
+        "note": "圆周角定理：一条弧 AB 所对的圆周角 ∠ACB 等于它所对圆心角 ∠AOB 的一半。",
+        "noteEn": "Inscribed angle theorem: the inscribed angle ∠ACB subtending arc AB is half the central angle ∠AOB subtending the same arc."
+      },
+      {
+        "latex": "S_{\\text{侧}}=\\pi R l,\\quad S_{\\text{全}}=\\pi R l+\\pi R^{2}",
+        "note": "圆锥：侧面展开图是扇形，侧面积 = πRl（l 是母线长，不是底面半径），全面积再加上底圆面积 πR²。",
+        "noteEn": "Cone: the lateral surface unfolds to a sector, with lateral area πRl (l is the slant height, not the base radius); the total surface adds the base πR²."
+      },
+      {
+        "latex": "\\angle A+\\angle C=180^{\\circ}",
+        "note": "圆内接四边形对角互补：对角之和为 180°。",
+        "noteEn": "In a cyclic quadrilateral, opposite angles are supplementary: their sum is 180°."
+      }
+    ],
+    "properties": [
+      "垂径定理：垂直于弦的直径平分这条弦，并且平分弦所对的两条弧；推论：平分弦（不是直径）的直径垂直于弦。",
+      "在同圆或等圆中，相等的圆心角所对的弧相等、所对的弦相等；反过来，相等的弧或弦所对的圆心角也相等。",
+      "圆周角定理的推论：同弧或等弧所对的圆周角相等；半圆（或直径）所对的圆周角是直角（90°），反过来，90° 的圆周角所对的弦是直径。",
+      "切线的判定与性质：经过半径的外端并且垂直于这条半径的直线是圆的切线；圆的切线垂直于过切点的半径。切线长定理：从圆外一点引圆的两条切线，切线长相等，且该点与圆心的连线平分两条切线的夹角。",
+      "三角形的内切圆圆心（内心）是三条角平分线的交点；外接圆圆心（外心）是三边垂直平分线的交点。"
+    ],
+    "propertiesEn": [
+      "Perpendicular-diameter theorem: a diameter perpendicular to a chord bisects the chord and the two arcs it cuts; conversely, a diameter bisecting a chord (that is not a diameter) is perpendicular to it.",
+      "In the same circle or in equal circles, equal central angles subtend equal arcs and equal chords; conversely, equal arcs or chords subtend equal central angles.",
+      "Consequences of the inscribed angle theorem: angles in the same segment (subtending the same or equal arcs) are equal; an angle in a semicircle is a right angle, and conversely a right angle subtends a diameter.",
+      "Tangent criteria and properties: a line through an endpoint of a radius and perpendicular to that radius is a tangent; a tangent is perpendicular to the radius at the point of contact. Tangent length theorem: from an external point the two tangent segments are equal, and the line to the centre bisects the angle between them.",
+      "Incentre and circumcentre of a triangle: the incentre (centre of the inscribed circle) is the meeting point of the three angle bisectors; the circumcentre (centre of the circumscribed circle) is the meeting point of the perpendicular bisectors of the three sides."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -5.7,
+        5.7
+      ],
+      "yRange": [
+        -3.3,
+        3.0
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 2.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "arc",
+          "cx": 0,
+          "cy": 0,
+          "r": 2.5,
+          "start": 3.665,
+          "end": 5.76,
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            0,
+            2.5
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            -2.165,
+            -1.25
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            2.165,
+            -1.25
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -2.165,
+            -1.25
+          ],
+          "to": [
+            2.165,
+            -1.25
+          ],
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            2.5
+          ],
+          "to": [
+            -2.165,
+            -1.25
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            2.5
+          ],
+          "to": [
+            2.165,
+            -1.25
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "O"
+        },
+        {
+          "type": "point",
+          "at": [
+            -2.165,
+            -1.25
+          ],
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.165,
+            -1.25
+          ],
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            2.5
+          ],
+          "label": "C"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.6,
+            1.35
+          ],
+          "text": "半径 R"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            -1.75
+          ],
+          "text": "弦 AB"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            -0.6
+          ],
+          "text": "∠AOB"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.45,
+            1.9
+          ],
+          "text": "∠ACB"
+        },
+        {
+          "type": "label",
+          "at": [
+            0,
+            -2.95
+          ],
+          "text": "圆周角 ∠ACB = 圆心角 ∠AOB 的一半"
+        }
+      ],
+      "title": "圆：半径、弦与圆周角"
+    },
+    "examples": [
+      {
+        "problem": "在 ⊙O 中，半径 R = 6，一段弧所对的圆心角 n = 60°，求这段弧的弧长 l 和它所在扇形的面积 S。",
+        "solution": "弧长 $l = \\dfrac{n\\pi R}{180} = \\dfrac{60 \\times \\pi \\times 6}{180} = 2\\pi$。扇形面积 $S = \\dfrac{n\\pi R^{2}}{360} = \\dfrac{60 \\times \\pi \\times 36}{360} = 6\\pi$；也可用另一个公式检验：$S = \\dfrac{1}{2}lR = \\dfrac{1}{2} \\times 2\\pi \\times 6 = 6\\pi$，结果一致。"
+      },
+      {
+        "problem": "AB 是 ⊙O 的直径，点 C 在圆上，∠BAC = 35°，求 ∠ACB 和 ∠ABC 的度数。",
+        "solution": "因为 AB 是直径，半圆所对的圆周角是直角，所以 $\\angle ACB = 90^{\\circ}$。在 △ABC 中，由三角形内角和得 $\\angle ABC = 180^{\\circ} - 90^{\\circ} - 35^{\\circ} = 55^{\\circ}$。"
+      }
+    ],
+    "tags": [
+      "初中几何",
+      "圆",
+      "圆周角",
+      "切线",
+      "扇形"
+    ],
+    "links": [
+      "triangle",
+      "pythagorean",
+      "congruent-triangles",
+      "similarity"
+    ]
+  },
+  {
+    "id": "similarity",
+    "title": "相似三角形",
+    "titleEn": "Similar Triangles",
+    "branch": "plane-geometry",
+    "level": 3,
+    "summary": "对应角相等、对应边成比例的三角形；判定有 AA、SAS、SSS，周长比等于相似比、面积比等于相似比的平方。",
+    "summaryEn": "Triangles with equal corresponding angles and proportional corresponding sides; AA, SAS and SSS criteria; perimeter ratio equals the similarity ratio while area ratio equals its square.",
+    "definition": "对应角相等、对应边成比例的两个三角形叫做**相似三角形**，记作 △ABC ∽ △A′B′C′。对应边的比叫做**相似比** k。全等三角形其实是相似比 k = 1 的特殊情形，所以相似是比全等更「宽松」的关系。\n\n判定相似有三条路：**AA**（两角分别相等，最常用）、**SAS**（两边成比例且**夹角**相等）、**SSS**（三边成比例）。注意：两边成比例但相等的角不是夹角的「SSA」**不能**判定相似！另外，平行于三角形一边的直线和其他两边（或它们的延长线）相交，所构成的三角形与原三角形相似，这是最常用的基本模型。\n\n相似三角形的性质要背准两条比值：**周长比等于相似比**，而**面积比等于相似比的平方**。面积比是「平方比」这一点最容易错：相似比为 1:3 时，面积比是 1:9，不是 1:3。",
+    "definitionEn": "Two triangles are **similar** if their corresponding angles are equal and their corresponding sides are proportional, written △ABC ∽ △A′B′C′. The ratio of corresponding sides is the **similarity ratio** k. Congruent triangles are the special case k = 1, so similarity is a looser relation than congruence.\n\nThere are three criteria: **AA** (two pairs of equal angles, the most used), **SAS** (two pairs of proportional sides with the included angle equal) and **SSS** (three pairs of proportional sides). There is no SSA criterion! Also, a line parallel to one side of a triangle that meets the other two sides (or their extensions) cuts off a triangle similar to the original one — the basic model behind countless problems.\n\nRemember the two ratio facts: the ratio of perimeters equals the similarity ratio, while the ratio of areas equals the **square** of the similarity ratio. If k = 1:3 the areas are in the ratio 1:9, not 1:3.",
+    "formulas": [
+      {
+        "latex": "\\dfrac{AB}{A'B'}=\\dfrac{BC}{B'C'}=\\dfrac{CA}{C'A'}=k",
+        "note": "相似三角形对应边成比例，比值 k 就是相似比。",
+        "noteEn": "Corresponding sides of similar triangles are proportional; the common ratio k is the similarity ratio."
+      },
+      {
+        "latex": "\\dfrac{C_{1}}{C_{2}}=k",
+        "note": "周长比等于相似比（不是相似比的平方）。",
+        "noteEn": "The ratio of perimeters equals the similarity ratio (not its square)."
+      },
+      {
+        "latex": "\\dfrac{S_{1}}{S_{2}}=k^{2}",
+        "note": "面积比等于相似比的平方（最容易错的一条）。",
+        "noteEn": "The ratio of areas equals the square of the similarity ratio (the most common mistake)."
+      },
+      {
+        "latex": "\\dfrac{h_{1}}{h_{2}}=\\dfrac{m_{1}}{m_{2}}=\\dfrac{t_{1}}{t_{2}}=k",
+        "note": "对应高、对应中线、对应角平分线的比都等于相似比 k。",
+        "noteEn": "Corresponding heights, medians and angle bisectors are all in the ratio k."
+      },
+      {
+        "latex": "\\dfrac{AP}{AB}=\\dfrac{\\sqrt{5}-1}{2}\\approx 0.618",
+        "note": "黄金分割：点 P 把线段 AB 分成两段，较长段与全段之比约为 0.618。",
+        "noteEn": "Golden ratio: the point P divides AB so that the longer part to the whole is about 0.618."
+      }
+    ],
+    "properties": [
+      "判定 AA：两角分别相等的两个三角形相似；平行于三角形一边的直线截其他两边（或延长线），所构成的三角形与原三角形相似。",
+      "判定 SAS：两边成比例且夹角相等；判定 SSS：三边成比例。没有 SSA 判定。",
+      "性质：对应角相等、对应边成比例；对应高、对应中线、对应角平分线的比都等于相似比。",
+      "性质：周长比 = 相似比；面积比 = 相似比的平方（是 k² 倍）。",
+      "位似：位似图形是特殊的相似图形，对应点的连线都经过位似中心，对应边互相平行（或共线），相似比就是位似比。"
+    ],
+    "propertiesEn": [
+      "Criterion AA: two pairs of equal angles imply similar triangles; a line parallel to one side cuts off a triangle similar to the original one.",
+      "Criterion SAS: two pairs of proportional sides with equal included angles; criterion SSS: three pairs of proportional sides. There is no SSA criterion.",
+      "Property: corresponding angles are equal and corresponding sides are proportional; corresponding heights, medians and angle bisectors are all in the ratio of similarity.",
+      "Property: perimeter ratio = similarity ratio; area ratio = (similarity ratio)².",
+      "Homothety: homothetic figures are special similar figures — lines joining corresponding points pass through the homothety centre, corresponding sides are parallel (or collinear), and the similarity ratio is the homothety ratio."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.9,
+        11.6
+      ],
+      "yRange": [
+        -1.7,
+        5.8
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              0,
+              4.5
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              7.4,
+              0
+            ],
+            [
+              10.4,
+              0
+            ],
+            [
+              7.4,
+              2.25
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            6,
+            0
+          ],
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            4.5
+          ],
+          "label": "C"
+        },
+        {
+          "type": "point",
+          "at": [
+            7.4,
+            0
+          ],
+          "label": "A′"
+        },
+        {
+          "type": "point",
+          "at": [
+            10.4,
+            0
+          ],
+          "label": "B′"
+        },
+        {
+          "type": "point",
+          "at": [
+            7.4,
+            2.25
+          ],
+          "label": "C′"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.8,
+            5.1
+          ],
+          "text": "△ABC ∽ △A′B′C′"
+        },
+        {
+          "type": "label",
+          "at": [
+            8.95,
+            3.05
+          ],
+          "text": "相似比 k = 2 : 1"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.0,
+            -0.85
+          ],
+          "text": "周长比 = k，面积比 = k²"
+        }
+      ],
+      "title": "两个相似三角形（一大一小）"
+    },
+    "examples": [
+      {
+        "problem": "△ABC ∽ △DEF，相似比 AB : DE = 2 : 3。若 △ABC 的周长是 10、面积是 6，求 △DEF 的周长和面积。",
+        "solution": "周长比等于相似比 2 : 3，所以 △DEF 的周长 $= 10 \\div 2 \\times 3 = 15$。面积比等于相似比的平方，即 $2^{2} : 3^{2} = 4 : 9$，所以 △DEF 的面积 $= 6 \\times 9 \\div 4 = 13.5$。"
+      },
+      {
+        "problem": "如图，DE∥BC，D 在 AB 上，E 在 AC 上，求证 △ADE ∽ △ABC。",
+        "solution": "因为 DE∥BC，所以 $\\angle ADE = \\angle ABC$，$\\angle AED = \\angle ACB$（两直线平行，同位角相等）。两角分别相等，所以 △ADE ∽ △ABC（AA）。注意对应关系是 A 对应 A、D 对应 B、E 对应 C，因此还有 $\\dfrac{AD}{AB} = \\dfrac{AE}{AC} = \\dfrac{DE}{BC}$。"
+      }
+    ],
+    "tags": [
+      "初中几何",
+      "相似",
+      "位似",
+      "黄金分割"
+    ],
+    "links": [
+      "congruent-triangles",
+      "triangle",
+      "pythagorean",
+      "acute-trigonometry"
+    ]
+  },
+  {
+    "id": "projection-view",
+    "title": "投影与视图",
+    "titleEn": "Projections and Views",
+    "branch": "plane-geometry",
+    "level": 2,
+    "summary": "平行投影与中心投影；三视图从正面、左面、上面看几何体，遵循「长对正、高平齐、宽相等」。",
+    "summaryEn": "Parallel and central projections; the three views (front, left, top) of a solid satisfy length alignment, height alignment and width equality.",
+    "definition": "用光线照射物体，在平面（地面或屏幕）上留下的影子就是**投影**。光线互相平行时（如太阳光）叫**平行投影**；光线从同一点发出时（如灯光）叫**中心投影**。平行投影中，同一时刻物高与影长成比例——这其实就是相似三角形的应用。\n\n从正面、左面、上面三个方向分别观察同一个几何体，把看到的平面图形画下来，就得到**三视图**：**主视图**（从正面看）、**左视图**（从左面看）、**俯视图**（从上面看）。画三视图必须遵守口诀「**长对正、高平齐、宽相等**」：主视图与俯视图的长要对正，主视图与左视图的高要平齐，左视图与俯视图的宽要相等。\n\n常见几何体的三视图要能背出来：圆柱（竖放）的主视图、左视图是矩形，俯视图是圆；圆锥的主视图、左视图是等腰三角形，俯视图是带圆心的圆；球的三视图都是圆；正方体的三视图都是正方形。由三视图还原几何体时，先看俯视图确定底面的形状，再结合主视图、左视图确定高度和层次，最后用「长对正、高平齐、宽相等」核对。",
+    "definitionEn": "When light falls on an object, the shadow it leaves on a plane (the ground or a screen) is a **projection**. If the rays are parallel (sunlight) it is a **parallel projection**; if they come from a single point (a lamp) it is a **central projection**. Under parallel projection, at the same moment the heights of objects are proportional to the lengths of their shadows — an application of similar triangles.\n\nLooking at one solid from the front, from the left and from above, and drawing each flat shape you see, gives the **three views**: the front view, the left view and the top view. When drawing them, follow the rule: front and top share the same length, front and left share the same height, and left and top share the same width.\n\nKnow the three views of common solids by heart: an upright cylinder gives rectangle, rectangle, circle; a cone gives isosceles triangle, isosceles triangle, circle with its centre marked; a sphere gives circle, circle, circle; a cube gives square, square, square. To rebuild a solid from its three views, read the base shape from the top view first, then the height and the layers from the front and left views, and finally check everything with the alignment rule.",
+    "formulas": [
+      {
+        "latex": "\\dfrac{h_{1}}{h_{2}}=\\dfrac{s_{1}}{s_{2}}",
+        "note": "平行投影（如太阳光）：同一时刻物高与影长成比例——杆越高，影子越长。",
+        "noteEn": "Parallel projection (sunlight): at the same moment object heights are proportional to shadow lengths."
+      },
+      {
+        "latex": "l_{\\mathrm{front}}=l_{\\mathrm{top}}",
+        "note": "长对正：主视图与俯视图左右方向的长度相等。",
+        "noteEn": "Length alignment: the front view and the top view have equal lengths (left-right direction)."
+      },
+      {
+        "latex": "h_{\\mathrm{front}}=h_{\\mathrm{left}}",
+        "note": "高平齐：主视图与左视图竖直方向的高度相等。",
+        "noteEn": "Height alignment: the front view and the left view have equal heights (vertical direction)."
+      },
+      {
+        "latex": "w_{\\mathrm{left}}=w_{\\mathrm{top}}",
+        "note": "宽相等：左视图与俯视图前后方向的宽度相等。",
+        "noteEn": "Width equality: the left view and the top view have equal widths (front-back direction)."
+      },
+      {
+        "latex": "V=abc",
+        "note": "由三视图还原出长方体后，长 a、宽 b、高 c 可直接从视图中读出，体积 V = abc。",
+        "noteEn": "After recovering a cuboid from its three views, its length a, width b and height c are read directly from the views, giving V = abc."
+      }
+    ],
+    "properties": [
+      "平行投影：光线平行（太阳光），同一时刻物高与影长成比例；计算时物体与影子构成的两个三角形相似。",
+      "中心投影：光线从一点发出（灯光），影子的大小随物体与光源的距离变化，离光源越近影子越大。",
+      "三视图的对应关系：长对正、高平齐、宽相等——画图与还原几何体都靠它检验。",
+      "常见几何体的三视图：圆柱（竖放）为矩形、矩形、圆；圆锥为等腰三角形、等腰三角形、带圆心的圆；球为圆、圆、圆；正方体为正方形、正方形、正方形。",
+      "由三视图还原几何体：先由俯视图确定底面形状，再由主视图、左视图确定高度和层数，最后核对三条对应关系。"
+    ],
+    "propertiesEn": [
+      "Parallel projection: rays are parallel (sunlight) and object heights are proportional to shadow lengths at the same moment; the object and its shadow form similar triangles.",
+      "Central projection: rays come from one point (a lamp); the shadow changes with the distance between the object and the light — closer to the light, larger the shadow.",
+      "Alignment of the three views: front and top share a length, front and left share a height, left and top share a width — the check for both drawing and reconstruction.",
+      "Three views of common solids: upright cylinder — rectangle, rectangle, circle; cone — isosceles triangle, isosceles triangle, circle with its centre marked; sphere — circle, circle, circle; cube — square, square, square.",
+      "Rebuilding a solid from its three views: read the base shape from the top view, the height and layers from the front and left views, then verify with the alignment relations."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1,
+        7.2
+      ],
+      "yRange": [
+        -1.9,
+        6
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.14)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              4.5,
+              3
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              4.5,
+              5
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.14)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1.5
+            ],
+            [
+              0,
+              1.5
+            ]
+          ],
+          "fill": "rgba(6,214,160,0.14)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            0,
+            5
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "width": 1,
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3,
+            0
+          ],
+          "to": [
+            3,
+            5
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "width": 1,
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            5
+          ],
+          "to": [
+            6,
+            5
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "width": 1,
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            3
+          ],
+          "to": [
+            6,
+            3
+          ],
+          "color": "rgba(160,175,220,0.55)",
+          "width": 1,
+          "dash": true
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            5.55
+          ],
+          "text": "主视图"
+        },
+        {
+          "type": "label",
+          "at": [
+            5.25,
+            5.55
+          ],
+          "text": "左视图"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.5,
+            -0.55
+          ],
+          "text": "俯视图"
+        },
+        {
+          "type": "label",
+          "at": [
+            3,
+            -1.35
+          ],
+          "text": "长对正 · 高平齐 · 宽相等"
+        }
+      ],
+      "title": "长方体的三视图（长对正、高平齐、宽相等）"
+    },
+    "examples": [
+      {
+        "problem": "某几何体的三视图分别是：主视图是长 4、高 3 的矩形，左视图是长 2、高 3 的矩形，俯视图是长 4、宽 2 的矩形。求这个几何体的体积。",
+        "solution": "三个视图都是矩形，原几何体是长方体。由俯视图得长 4、宽 2，由主视图得高 3，所以 $V = 4 \\times 2 \\times 3 = 24$。检验：主视图的长 = 俯视图的长 = 4（长对正），主视图的高 = 左视图的高 = 3（高平齐），左视图的宽 = 俯视图的宽 = 2（宽相等）。"
+      },
+      {
+        "problem": "同一时刻，身高 1.6 m 的小明在地面上的影长是 2 m，旁边旗杆的影长是 10 m，求旗杆的高度。",
+        "solution": "平行投影下，同一时刻物高与影长成比例。设旗杆高为 h m，则 $\\dfrac{h}{10} = \\dfrac{1.6}{2}$，解得 $h = 8$。所以旗杆高 8 m。"
+      }
+    ],
+    "tags": [
+      "初中几何",
+      "投影",
+      "三视图",
+      "立体图形"
+    ],
+    "links": [
+      "similarity",
+      "circle-junior",
+      "plane-coordinates"
+    ]
+  }
+]

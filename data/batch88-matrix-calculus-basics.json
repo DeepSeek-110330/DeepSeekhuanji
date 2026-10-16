@@ -1,0 +1,304 @@
+[
+  {
+    "id": "matrix-derivative-basics",
+    "title": "矩阵微分：布局约定与基本定义",
+    "titleEn": "Matrix Calculus: Layout Conventions and Basic Definitions",
+    "branch": "linear",
+    "level": 5,
+    "summary": "用「混合布局」（标量导数按分母/梯度约定、向量对向量按标准雅可比）固定标量对向量、向量对向量、标量对矩阵三种导数的形状，并用全微分与迹把它们统一成同一套识别方法。",
+    "summaryEn": "Fix the shapes of scalar-by-vector, vector-by-vector and scalar-by-matrix derivatives under the denominator layout, and unify them through the differential and the trace.",
+    "definition": "多元微积分里已经会算梯度、雅可比与全微分，但那套语言只覆盖「标量对标量、标量对向量、向量对向量」的情形。一旦自变量本身是矩阵 $X\\in\\mathbb{R}^{m\\times n}$，第一件事不是算，而是**约定形状**——同一个函数在不同文献里可以写成形状完全不同的「导数」。本库全部矩阵微分内容统一采用**混合布局（mixed layout）**：**标量**对向量、标量对矩阵的导数按「分母布局」（谁的变元在分母上，导数的形状就跟着谁走）；**向量对向量**的导数取标准的 $m\\times n$ **雅可比矩阵**（行=输出维数；这一支在文献里也称雅可比布局/分子布局）。\n\n三种基本情形。**(i) 标量对向量**：$f:\\mathbb{R}^{n}\\to\\mathbb{R}$ 时 $\\partial f/\\partial x$ 与 $x$ **同型**（$n\\times1$ 列向量），第 $j$ 个分量是 $\\partial f/\\partial x_{j}$，于是 $df=(\\partial f/\\partial x)^{\\top}dx$。**(ii) 向量对向量**：$y\\in\\mathbb{R}^{m}$、$x\\in\\mathbb{R}^{n}$ 时 $\\partial y/\\partial x$ 是 $m\\times n$ 的**雅可比矩阵**，第 $(i,j)$ 元为 $\\partial y_{i}/\\partial x_{j}$，于是 $dy=(\\partial y/\\partial x)\\,dx$；它的第 $i$ 行恰好是 $\\nabla y_{i}$ 的转置。**(iii) 标量对矩阵**：$f:\\mathbb{R}^{m\\times n}\\to\\mathbb{R}$ 时 $\\partial f/\\partial X$ 与 $X$ **同型**（$m\\times n$），第 $(i,j)$ 元为 $\\partial f/\\partial X_{ij}$，于是\n\n$$df=\\sum_{i,j}\\frac{\\partial f}{\\partial X_{ij}}\\,dX_{ij}=\\operatorname{tr}\\!\\left(\\left(\\frac{\\partial f}{\\partial X}\\right)^{\\!\\top}dX\\right).$$\n\n最后这条恒等式是矩阵微分最常用的**识别工具**：把 $df$ 整理成 $\\operatorname{tr}(G^{\\top}dX)$ 的形状，则 $G$ 就是 $\\partial f/\\partial X$，因为 $\\operatorname{tr}(G^{\\top}dX)=\\sum_{i,j}G_{ij}\\,dX_{ij}$。这一个小技巧把「矩阵求导」变成「展开微分 + 凑迹」，几乎不用背公式表。\n\n**布局警告**：不少文献（如 Wikipedia 的引言部分）默认**分子布局（numerator layout）**，把标量对向量的导数写成行向量——与本站的标量约定互为转置；向量对向量的公式则要先看清对方的雅可比是 $m\\times n$ 还是 $n\\times m$。另注：常用手册《Matrix Cookbook》的**标量**导数条目与本站同形，可直接照用，其向量对向量、矩阵对矩阵条目则需逐条核对取向。引用现成公式之前，先确认它用的是哪套约定，再决定要不要转置。本库的一切矩阵微分结论都按上面的**混合布局**书写。",
+    "definitionEn": "Multivariable calculus already gives us gradients, Jacobians and total differentials, but that language only covers scalar and vector arguments. As soon as the variable itself is a matrix $X\\in\\mathbb{R}^{m\\times n}$, the first question is not how to compute, but **how to fix shapes**: the same function is written with completely different “derivative” shapes in different references. All matrix calculus in this library uses a **mixed layout**: the derivative of a **scalar** with respect to a vector or a matrix follows the **denominator layout** (its shape follows the denominator), whereas the derivative of a vector with respect to a vector is the standard $m\\times n$ **Jacobian** (rows indexed by the output; also called the Jacobian formulation, or the numerator layout in some sources).\n\nThree basic cases. **(i) Scalar by vector**: for $f:\\mathbb{R}^{n}\\to\\mathbb{R}$, the derivative $\\partial f/\\partial x$ has the **same shape as x** (an $n\\times1$ column vector), with $j$-th entry $\\partial f/\\partial x_{j}$, so $df=(\\partial f/\\partial x)^{\\top}dx$. **(ii) Vector by vector**: for $y\\in\\mathbb{R}^{m}$ and $x\\in\\mathbb{R}^{n}$, $\\partial y/\\partial x$ is the $m\\times n$ **Jacobian** with $(i,j)$ entry $\\partial y_{i}/\\partial x_{j}$, so $dy=(\\partial y/\\partial x)\\,dx$; its $i$-th row is the transpose of $\\nabla y_{i}$. **(iii) Scalar by matrix**: for $f:\\mathbb{R}^{m\\times n}\\to\\mathbb{R}$, $\\partial f/\\partial X$ has the **same shape as X**, with $(i,j)$ entry $\\partial f/\\partial X_{ij}$, so\n\n$$df=\\sum_{i,j}\\frac{\\partial f}{\\partial X_{ij}}\\,dX_{ij}=\\operatorname{tr}\\!\\left(\\left(\\frac{\\partial f}{\\partial X}\\right)^{\\!\\top}dX\\right).$$\n\nThe last identity is the standard **recognition tool**: rearrange $df$ into the form $\\operatorname{tr}(G^{\\top}dX)$ and read off $G=\\partial f/\\partial X$, because $\\operatorname{tr}(G^{\\top}dX)=\\sum_{i,j}G_{ij}\\,dX_{ij}$. This single trick turns matrix differentiation into “expand the differential, match the trace” and makes long tables of formulas unnecessary.\n\n**A warning on layout**: many sources (e.g. Wikipedia's introductory sections) default to the **numerator layout**, writing scalar-by-vector derivatives as row vectors — the transpose of our scalar convention; and for vector-by-vector formulas one must first check whether their Jacobian is $m\\times n$ or $n\\times m$. Note also that the widely used *Matrix Cookbook* matches our **scalar** derivatives directly, while its vector-by-vector and matrix-by-matrix entries should be checked case by case. Before using a published formula, check which convention it follows and transpose if necessary. Everything in this library is written in the **mixed layout** above.",
+    "formulas": [
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial f}{\\partial x}&\\in\\mathbb{R}^{n},\\qquad \\left(\\frac{\\partial f}{\\partial x}\\right)_{j}=\\frac{\\partial f}{\\partial x_{j}}\\\\[2pt]df&=\\left(\\frac{\\partial f}{\\partial x}\\right)^{\\top}dx\\end{aligned}",
+        "note": "标量对向量：梯度与 x 同型（n 维列向量），全微分就是它与 dx 的内积。",
+        "noteEn": "Scalar by vector: the gradient has the same shape as x (an n-vector), and the differential is its inner product with dx."
+      },
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial y}{\\partial x}&\\in\\mathbb{R}^{m\\times n},\\qquad \\left(\\frac{\\partial y}{\\partial x}\\right)_{ij}=\\frac{\\partial y_{i}}{\\partial x_{j}}\\\\[2pt]dy&=\\frac{\\partial y}{\\partial x}\\,dx\\end{aligned}",
+        "note": "向量对向量：得到 m×n 的雅可比矩阵；第 i 行是 ∇yᵢ 的转置，dy 就是矩阵乘向量。",
+        "noteEn": "Vector by vector: the m×n Jacobian; its i-th row is the transpose of ∇yᵢ, and dy is a matrix-vector product."
+      },
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial f}{\\partial X}&\\in\\mathbb{R}^{m\\times n}\\\\[2pt]df&=\\operatorname{tr}\\!\\left(\\left(\\frac{\\partial f}{\\partial X}\\right)^{\\!\\top}dX\\right)=\\sum_{i,j}\\frac{\\partial f}{\\partial X_{ij}}\\,dX_{ij}\\end{aligned}",
+        "note": "标量对矩阵：与 X 同型；把 df 凑成 tr(GᵀdX) 时 G 就是 ∂f/∂X（因为 tr(GᵀdX)=Σ Gᵢⱼ dXᵢⱼ）。",
+        "noteEn": "Scalar by matrix: same shape as X; once df is written as tr(Gᵀ dX), the matrix G is ∂f/∂X, because tr(Gᵀ dX) = Σ Gᵢⱼ dXᵢⱼ."
+      },
+      {
+        "latex": "f(x+dx)=f(x)+\\left(\\frac{\\partial f}{\\partial x}\\right)^{\\top}dx+o(\\|dx\\|)",
+        "note": "一阶近似就是全微分的重写；误差是高阶小量，这也给出用有限差分检验梯度的办法。",
+        "noteEn": "The first-order approximation is just the total differential rewritten; the error is of higher order, which yields the finite-difference check of a gradient."
+      },
+      {
+        "latex": "\\left(\\frac{\\partial f}{\\partial x}\\right)_{\\text{分子布局}}=\\left(\\frac{\\partial f}{\\partial x}\\right)_{\\text{分母布局}}^{\\top}",
+        "note": "分子布局与分母布局的结果互为转置（标量对向量时前者是行向量）；套公式前先核对约定。",
+        "noteEn": "The two layouts give transposes of each other (the numerator layout yields a row vector in the scalar-by-vector case); check the convention before using a formula."
+      }
+    ],
+    "properties": [
+      "形状法则：标量对向量的导数与自变量同型（列向量），向量对向量的导数是 m×n 雅可比矩阵，标量对矩阵的导数与矩阵同型；形状对不上，一定是布局搞错或漏了转置。",
+      "识别工具：把全微分整理成 tr(GᵀdX) 后，G 就是 ∂f/∂X——这一步只用到 tr(GᵀdX) = Σᵢⱼ Gᵢⱼ dXᵢⱼ。",
+      "雅可比矩阵的第 i 行是 ∇yᵢ 的转置，所以向量对向量的导数可以看成「把每个分量的梯度按行摞起来」。",
+      "一阶近似 $f(x+dx)\\approx f(x)+(\\nabla f)^{\\top}dx$ 与全微分 $df=(\\nabla f)^{\\top}dx$ 是同一件事的两种写法，误差为 $o(\\|dx\\|)$；它同时给出用有限差分检验梯度的办法。",
+      "约定警告：本库标量导数按**分母（梯度）布局**；不少文献默认**分子布局**（标量对向量的导数为行向量），两者互为转置；向量对向量的雅可比还需另行核对取向。搬运公式前先确认约定。"
+    ],
+    "propertiesEn": [
+      "Shape rule: the derivative of a scalar with respect to a vector has the same shape as the vector (a column), a vector-by-vector derivative is an m×n Jacobian, and a scalar-by-matrix derivative has the same shape as the matrix; a shape mismatch always means a wrong layout or a missing transpose.",
+      "Recognition tool: once the differential is written as tr(Gᵀ dX), the matrix G is exactly ∂f/∂X, using only tr(Gᵀ dX) = Σᵢⱼ Gᵢⱼ dXᵢⱼ.",
+      "The i-th row of ∂y/∂x is the transpose of ∇yᵢ, so a vector-by-vector derivative is simply the gradients of the components stacked as rows.",
+      "The first-order approximation $f(x+dx)\\approx f(x)+(\\nabla f)^{\\top}dx$ and the total differential $df=(\\nabla f)^{\\top}dx$ are two ways of writing the same statement, with error $o(\\|dx\\|)$; it also supplies the finite-difference test of a gradient.",
+      "Convention warning: this library uses the denominator (gradient) layout for scalar derivatives, while many sources default to the numerator layout (scalar-by-vector derivatives as row vectors) — the two are transposes of each other; Jacobians of vector-by-vector derivatives need a separate orientation check. Always verify the convention before importing a formula."
+    ],
+    "examples": [
+      {
+        "problem": "设 $x=(x_1,\\dots,x_n)^{\\top}$，$A\\in\\mathbb{R}^{m\\times n}$。求 $\\partial(x^{\\top}x)/\\partial x$ 与 $\\partial(Ax)/\\partial x$，并核对形状。",
+        "solution": "**第一问**：$f(x)=x^{\\top}x$，展开微分 $df=(dx)^{\\top}x+x^{\\top}dx=2x^{\\top}dx=(2x)^{\\top}dx$，故 $\\partial(x^{\\top}x)/\\partial x=2x$，与 $x$ 同型（$n\\times1$）✓。数值核对：取 $x=(1,2,3)^{\\top}$，则 $f=1+4+9=14$；令 $x+te_1=(1+t,2,3)^{\\top}$，得 $f=14+2t+t^2$，一次项系数 $2$ 恰等于 $(2x)_1$ ✓。\n\n**第二问**：$g(x)=Ax$ 的第 $i$ 个分量为 $g_i=\\sum_j A_{ij}x_j$，故 $\\partial g_i/\\partial x_j=A_{ij}$，即 $\\partial(Ax)/\\partial x=A$，形状 $m\\times n$，与 $A$ 一致 ✓。数值核对：取 $A=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$、$x=(1,1)^{\\top}$，则 $Ax=(3,7)^{\\top}$；再令 $x+te_2=(1,1+t)^{\\top}$，得 $Ax=(3,7)^{\\top}+t(2,4)^{\\top}$，导向量 $(2,4)^{\\top}$ 正是 $A$ 的第二列 ✓。"
+      },
+      {
+        "problem": "用一阶近似检验 $f(x)=x^{\\top}x$ 在 $x=(1,2)^{\\top}$ 附近的表现。",
+        "solution": "由上一题 $\\nabla f=2x=(2,4)^{\\top}$。取 $dx=(0.01,0.02)^{\\top}$：公式给出 $f\\approx 5+(2,4)^{\\top}\\cdot(0.01,0.02)=5+0.1=5.1$；精确值 $(1.01)^2+(2.02)^2=1.0201+4.0804=5.1005$，误差 $0.0005$ 恰好等于 $\\|dx\\|^2=0.01^2+0.02^2=0.0005$，是高阶小量 ✓。"
+      }
+    ],
+    "tags": [
+      "矩阵微分",
+      "布局约定",
+      "雅可比",
+      "全微分"
+    ],
+    "links": [
+      "gradient",
+      "jacobian",
+      "total-differential",
+      "matrix-differential-rules"
+    ]
+  },
+  {
+    "id": "matrix-differential-rules",
+    "title": "矩阵微分的运算法则",
+    "titleEn": "Rules of Matrix Differential Calculus",
+    "branch": "linear",
+    "level": 5,
+    "summary": "把求导变成对恒等式两边取微分：线性、转置、乘积、逆、迹、行列式与 Hadamard 乘积的微分法则，以及「先内后外」的链式流程。",
+    "summaryEn": "Differentiate identities instead of entries: rules for linearity, transpose, products, inverses, trace, determinant and the Hadamard product, plus the inner-first chain workflow.",
+    "definition": "有了形状约定，还要一台**运算引擎**。矩阵微分的做法不是每次从头算偏导，而是对恒等式两边同时取**微分** $d$：把每个矩阵看成单参数族 $X(t)=X_0+tB$ 在 $t=0$ 处的方向导数，$d$ 就是「沿任意方向 $B$ 求导」的线性算子。$d$ 对加法、数乘、转置、迹都很友好，但遇到矩阵乘法时**顺序不能交换**——这是全部易错点的根源（本节法则作用于**微分 $d$** 本身，与布局约定无关；但搬运其他文献的导数/梯度公式时仍需先核对布局约定）。\n\n基本法则：$d(X+Y)=dX+dY$、$d(kX)=k\\,dX$、$d(X^{\\top})=(dX)^{\\top}$；乘积法则 $d(XY)=(dX)Y+X(dY)$（两个因子的左右位置固定）；逆的微分 $d(X^{-1})=-X^{-1}(dX)X^{-1}$（负号加三个因子把 $dX$ 夹在中间，要求 $X$ 可逆）；Hadamard 乘积 $d(X\\odot Y)=(dX)\\odot Y+X\\odot(dY)$ 逐元素成立。标量导数沿用全批统一约定（**分母/梯度布局**）：$\\partial f/\\partial X$ 与 $X$ 同型，$df=\\operatorname{tr}((\\partial f/\\partial X)^{\\top}dX)$。\n\n标量函数最常用的两条：$d(\\operatorname{tr}X)=\\operatorname{tr}(dX)$ 与 $d(\\det X)=\\operatorname{tr}(\\operatorname{adj}(X)\\,dX)$（一般式，$X$ 是任意方阵）；当 $X$ 可逆时 $\\operatorname{adj}(X)=\\det(X)X^{-1}$，于是 $d(\\det X)=\\det(X)\\operatorname{tr}(X^{-1}dX)$。\n\n合成函数不必背新法则，用**先内后外**的链式流程：设 $Y=Y(X)$、$f=f(Y)$，先求内层微分 $dY$，再代入外层 $df=\\operatorname{tr}\\big((\\partial f/\\partial Y)^{\\top}dY\\big)$，最后把结果整理成 $\\operatorname{tr}(G^{\\top}dX)$，$G$ 即 $\\partial f/\\partial X$。用向量化记号等价地有 $\\partial f/\\partial\\operatorname{vec}(X)=\\big(\\partial\\operatorname{vec}(Y)/\\partial\\operatorname{vec}(X)\\big)^{\\top}\\partial f/\\partial\\operatorname{vec}(Y)$，两条路径给出的答案相同。",
+    "definitionEn": "Once shapes are settled, we need an **engine**. Matrix calculus does not recompute partial derivatives from scratch; instead it differentiates identities directly. Think of a matrix as the one-parameter family $X(t)=X_0+tB$ and of $d$ as the directional derivative at $t=0$: a linear operator that differentiates along an arbitrary direction $B$. It behaves well with addition, scalar multiplication, transposition and the trace, but with matrix products **the order can never be swapped** — that is the root of almost every mistake (the rules below act on the **differential** $d$ itself and are independent of any layout convention; when importing derivative or gradient formulas from other sources, check their layout first).\n\nBasic rules: $d(X+Y)=dX+dY$, $d(kX)=k\\,dX$ and $d(X^{\\top})=(dX)^{\\top}$; the product rule $d(XY)=(dX)Y+X(dY)$ (the two factors keep their positions); the inverse rule $d(X^{-1})=-X^{-1}(dX)X^{-1}$ (a minus sign, with $dX$ sandwiched between three factors, valid for invertible $X$); and the elementwise Hadamard rule $d(X\\odot Y)=(dX)\\odot Y+X\\odot(dY)$. Scalar derivatives keep the batch-wide convention (the **denominator/gradient layout**): $\\partial f/\\partial X$ has the same shape as $X$ and $df=\\operatorname{tr}((\\partial f/\\partial X)^{\\top}dX)$.\n\nTwo rules carry most of the workload for scalar functions: $d(\\operatorname{tr}X)=\\operatorname{tr}(dX)$ and $d(\\det X)=\\operatorname{tr}(\\operatorname{adj}(X)\\,dX)$, which holds for every square matrix; when $X$ is invertible, $\\operatorname{adj}(X)=\\det(X)X^{-1}$ gives $d(\\det X)=\\det(X)\\operatorname{tr}(X^{-1}dX)$.\n\nComposite functions need no new rule if you work **inner first**: for $Y=Y(X)$ and $f=f(Y)$, compute the inner differential $dY$, substitute it into the outer differential $df=\\operatorname{tr}\\big((\\partial f/\\partial Y)^{\\top}dY\\big)$, and rearrange the result into $\\operatorname{tr}(G^{\\top}dX)$; then $G=\\partial f/\\partial X$. In vectorized notation this is $\\partial f/\\partial\\operatorname{vec}(X)=\\big(\\partial\\operatorname{vec}(Y)/\\partial\\operatorname{vec}(X)\\big)^{\\top}\\partial f/\\partial\\operatorname{vec}(Y)$, and both routes agree.",
+    "formulas": [
+      {
+        "latex": "\\begin{aligned}d(X+Y)&=dX+dY,\\qquad d(kX)=k\\,dX\\\\[2pt]d(X^{\\top})&=(dX)^{\\top}\\end{aligned}",
+        "note": "线性与转置：d 逐项作用在加法、数乘与转置上，是后面所有法则的基础。",
+        "noteEn": "Linearity and transpose: d acts termwise on sums, scalar multiples and transposes; everything else builds on this."
+      },
+      {
+        "latex": "d(XY)=(dX)\\,Y+X\\,(dY)",
+        "note": "乘积法则：两个因子的左右顺序不能交换——矩阵乘法不满足交换律。",
+        "noteEn": "Product rule: the two factors keep their left-right positions, since matrix multiplication does not commute."
+      },
+      {
+        "latex": "d(X^{-1})=-X^{-1}(dX)X^{-1}\\qquad (X\\ \\text{可逆})",
+        "note": "逆的微分：负号与三因子顺序都要记牢，由 XX⁻¹=I 两边微分得到。",
+        "noteEn": "Inverse rule: remember both the minus sign and the order of the three factors; it follows by differentiating XX⁻¹=I."
+      },
+      {
+        "latex": "\\begin{aligned}d(\\operatorname{tr}X)&=\\operatorname{tr}(dX),\\qquad d(\\operatorname{tr}(AX))=\\operatorname{tr}(A\\,dX)\\\\[2pt]d(\\det X)&=\\operatorname{tr}(\\operatorname{adj}(X)\\,dX)=\\det(X)\\operatorname{tr}(X^{-1}dX)\\end{aligned}",
+        "note": "迹与行列式：一般式对任意方阵成立，含 X⁻¹ 的版本只对可逆矩阵成立。",
+        "noteEn": "Trace and determinant: the general form holds for every square matrix, while the form containing X⁻¹ requires X to be invertible."
+      },
+      {
+        "latex": "d(X\\odot Y)=(dX)\\odot Y+X\\odot(dY)",
+        "note": "Hadamard（逐元素）乘积：逐元素看就是普通的标量乘积法则。",
+        "noteEn": "Hadamard (elementwise) product: entry by entry it is just the usual scalar product rule."
+      }
+    ],
+    "properties": [
+      "顺序法则：矩阵乘法不交换，$d(XY)$ 的两项位置固定，$d(X^{-1})$ 必须是 $-X^{-1}(dX)X^{-1}$——写成 $-X^{-2}dX$ 或 $-(dX)X^{-2}$ 都是错的（形状虽然相同，数值/顺序不对）：必须三个因子夹着 $dX$。",
+      "线性与兼容：$d$ 与加法、数乘、转置、迹都可交换，所以任何由乘法与逆搭出的表达式都能逐层微分。",
+      "行列式：一般式 $d(\\det X)=\\operatorname{tr}(\\operatorname{adj}(X)\\,dX)$ 对任意方阵成立；只有写成 $\\det(X)\\operatorname{tr}(X^{-1}dX)$ 时才需要 $X$ 可逆。",
+      "链式法则：稳妥的用法是「先内后外」——先算内层 $dY$，再代入外层 $df$，最后凑成 $\\operatorname{tr}(G^{\\top}dX)$ 读出梯度；这避免了不同教材对矩阵链式法则的表述分歧。",
+      "检验习惯：任何新推出的 $dF$ 都可以用有限差分核对——比较 $(F(X+tB)-F(X))/t$ 与公式给出的方向导数，$t$ 足够小时两者应吻合。"
+    ],
+    "propertiesEn": [
+      "Order rule: matrix products do not commute. The two terms of $d(XY)$ keep their positions, and $d(X^{-1})$ must be written as $-X^{-1}(dX)X^{-1}$; forms such as $-X^{-2}dX$ are wrong (the shapes can coincide, but the order and the values are off): $dX$ has to sit between three factors.",
+      "Linearity: d commutes with addition, scalar multiplication, transposition and the trace, so every expression built from products and inverses can be differentiated layer by layer.",
+      "Determinant: the general rule $d(\\det X)=\\operatorname{tr}(\\operatorname{adj}(X)\\,dX)$ holds for every square matrix; only the version $\\det(X)\\operatorname{tr}(X^{-1}dX)$ requires $X$ to be invertible.",
+      "Chain rule: work “inner first” — compute the inner differential dY, substitute it into the outer df, then match $\\operatorname{tr}(G^{\\top}dX)$ to read off the gradient; this avoids the notational disputes found across textbooks.",
+      "Testing habit: any new differential dF can be checked by finite differences — compare $(F(X+tB)-F(X))/t$ with the directional derivative predicted by the formula; for small t the two must agree."
+    ],
+    "examples": [
+      {
+        "problem": "设 $X$ 为 $2\\times2$ 可逆矩阵。用法则推导 $d(\\operatorname{tr}(X^{-1}))$，即求 $\\partial\\operatorname{tr}(X^{-1})/\\partial X$，并在 $X=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ 处用有限差分核对。",
+        "solution": "**推导**：$d(\\operatorname{tr}(X^{-1}))=\\operatorname{tr}(d(X^{-1}))=\\operatorname{tr}(-X^{-1}(dX)X^{-1})=-\\operatorname{tr}(X^{-1}X^{-1}\\,dX)$（用了迹的轮换），对照 $df=\\operatorname{tr}(G^{\\top}dX)$ 得 $\\partial\\operatorname{tr}(X^{-1})/\\partial X=-X^{-\\top}X^{-\\top}$。\n\n**数值核对**：$X^{-1}=\\begin{pmatrix}1&-1\\\\-1&2\\end{pmatrix}$（可验证 $XX^{-1}=I$），$X^{-1}X^{-1}=\\begin{pmatrix}2&-3\\\\-3&5\\end{pmatrix}$，故 $G=\\begin{pmatrix}-2&3\\\\3&-5\\end{pmatrix}$。\n\n**有限差分**（把 $X$ 的第 $(i,j)$ 元加 $t$ 后对 $t$ 求导）：\n· 第 $(1,1)$ 元：$\\operatorname{tr}(X(t)^{-1})=\\dfrac{3+t}{1+t}$，在 $t=0$ 处导数为 $-2=G_{11}$ ✓\n· 第 $(1,2)$ 元：$\\operatorname{tr}(X(t)^{-1})=\\dfrac{3}{1-t}$，导数为 $3=G_{12}$ ✓\n· 第 $(2,2)$ 元：$\\operatorname{tr}(X(t)^{-1})=\\dfrac{3+t}{1+2t}$，导数为 $-5=G_{22}$ ✓（$G$ 对称，第 $(2,1)$ 元同为 $3$）"
+      },
+      {
+        "problem": "验证逆的微分公式：取 $X=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$、方向 $B=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$，比较 $d(X^{-1})$ 与公式 $-X^{-1}B\\,X^{-1}$。",
+        "solution": "沿 $B$ 的矩阵族为 $X(t)=\\begin{pmatrix}2&1+t\\\\1&1\\end{pmatrix}$，其行列式 $\\det X(t)=1-t$，故 $X(t)^{-1}=\\dfrac{1}{1-t}\\begin{pmatrix}1&-(1+t)\\\\-1&2\\end{pmatrix}$。在 $t=0$ 处逐项求导得 $\\begin{pmatrix}1&-2\\\\-1&2\\end{pmatrix}$。\n\n另一方面 $X^{-1}B=\\begin{pmatrix}0&1\\\\0&-1\\end{pmatrix}$，$(X^{-1}B)X^{-1}=\\begin{pmatrix}-1&2\\\\1&-2\\end{pmatrix}$，取负得 $\\begin{pmatrix}1&-2\\\\-1&2\\end{pmatrix}$，与直接求导完全一致 ✓。"
+      }
+    ],
+    "tags": [
+      "矩阵微分",
+      "乘积法则",
+      "逆矩阵",
+      "行列式",
+      "链式法则"
+    ],
+    "links": [
+      "matrix-derivative-basics",
+      "matrix-gradient-identities",
+      "inverse-matrix",
+      "determinant-properties",
+      "matrix-operations"
+    ]
+  },
+  {
+    "id": "matrix-gradient-identities",
+    "title": "常用矩阵梯度公式（迹技巧）",
+    "titleEn": "Common Matrix Gradient Identities",
+    "branch": "linear",
+    "level": 5,
+    "summary": "分母布局下的标准梯度表：线性型、二次型、迹型、行列式型与逆型公式，以及「展开微分—轮换凑迹—读出梯度」的三步法。",
+    "summaryEn": "The standard gradient table under the denominator layout — linear, quadratic, trace, determinant and inverse forms — plus the expand-cycle-read trace method.",
+    "definition": "有了运算法则，真正的计算任务就是：把 $f$ 的微分整理成 $\\operatorname{tr}(G^{\\top}dX)$（向量情形是 $(\\nabla f)^{\\top}dx$），再读出 $G$。几乎所有公式都能现推，但常用的一批值得记牢。本库统一用**分母布局**：$\\partial f/\\partial x$ 与 $x$ 同型、$\\partial f/\\partial X$ 与 $X$ 同型，恒有\n\n$$df=(\\partial f/\\partial x)^{\\top}dx=\\operatorname{tr}\\!\\left((\\partial f/\\partial X)^{\\top}dX\\right).$$\n\n**凑迹三步法**：第一步，展开 $df$（乘积法则、逆的微分、行列式与迹的法则）；第二步，用迹的轮换 $\\operatorname{tr}(PQ)=\\operatorname{tr}(QP)$（多因子时 $\\operatorname{tr}(PQR)=\\operatorname{tr}(RPQ)$）把 $dX$ 挪到迹的**末尾**；第三步，把系数写成「某个矩阵的转置」并对照 $\\operatorname{tr}(G^{\\top}dX)$ 读出 $G$。目标形永远是 $\\operatorname{tr}(\\text{系数矩阵}\\cdot dX)$，读梯度时别忘了转置这一层。\n\n两个最容易踩的坑。其一，**对称化**：$\\partial(x^{\\top}Ax)/\\partial x=(A+A^{\\top})x$ 对一般 $A$ 成立，只有当 $A=A^{\\top}$ 时才等于 $2Ax$；迹二次型 $\\partial\\operatorname{tr}(X^{\\top}AX)/\\partial X=(A+A^{\\top})X$ 同理。其二，**可逆条件**：$\\partial\\det(X)/\\partial X$ 与 $\\partial\\ln\\det(X)/\\partial X$ 的简洁形式都要求 $X$ 可逆，而且都是**无约束**（全矩阵空间）版本——把 $X$ 限制在对称矩阵上会改变切空间，公式不能再照搬。文献中的同类结果若按其他布局给出，需先核对约定（标量公式常与本库互为转置）。",
+    "definitionEn": "With the rules in hand, the actual task is to rearrange the differential of $f$ into the form $\\operatorname{tr}(G^{\\top}dX)$ — or $(\\nabla f)^{\\top}dx$ in the vector case — and read off $G$. Every identity can be re-derived in a line or two, but the standard list is worth memorizing. This library uses the **denominator layout** throughout: $\\partial f/\\partial x$ matches the shape of $x$ and $\\partial f/\\partial X$ matches the shape of $X$, so that\n\n$$df=(\\partial f/\\partial x)^{\\top}dx=\\operatorname{tr}\\!\\left((\\partial f/\\partial X)^{\\top}dX\\right).$$\n\n**The three-step trace method**: expand $df$ (product rule, inverse rule, determinant and trace rules); use the cyclic property $\\operatorname{tr}(PQ)=\\operatorname{tr}(QP)$ — and $\\operatorname{tr}(PQR)=\\operatorname{tr}(RPQ)$ for several factors — to move $dX$ to the **end** of the trace; then interpret the coefficient as a transpose and match $\\operatorname{tr}(G^{\\top}dX)$ to read off $G$. The target form is always $\\operatorname{tr}(\\text{coefficient matrix}\\cdot dX)$, and the transpose must not be dropped when reading the gradient.\n\nTwo classic traps. First, **symmetrization**: $\\partial(x^{\\top}Ax)/\\partial x=(A+A^{\\top})x$ for general $A$, reducing to $2Ax$ only when $A$ is symmetric; the same holds for $\\partial\\operatorname{tr}(X^{\\top}AX)/\\partial X=(A+A^{\\top})X$. Second, **invertibility**: the compact forms of $\\partial\\det(X)/\\partial X$ and $\\partial\\ln\\det(X)/\\partial X$ require $X$ to be invertible, and both are **unconstrained** (full matrix space) versions — restricting $X$ to symmetric matrices changes the tangent space, so they cannot be copied over. Comparable results in the literature may use a different layout; check the convention before importing them (scalar formulas are often transposes of ours).",
+    "formulas": [
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial(a^{\\top}x)}{\\partial x}&=a,\\qquad \\frac{\\partial(Ax)}{\\partial x}=A\\\\[2pt]\\frac{\\partial\\|x\\|^{2}}{\\partial x}&=2x\\end{aligned}",
+        "note": "线性型与范数：aᵀx 的梯度是 a，线性映射 Ax 的雅可比是 A，‖x‖² 的梯度是 2x（a 与 2x 都与 x 同型；A 是 m×n 的雅可比矩阵，一般与 x 不同型）。",
+        "noteEn": "Linear forms and norms: the gradient of aᵀx is a, the Jacobian of Ax is A, and the gradient of ‖x‖² is 2x (a and 2x share the shape of x; A is an m×n Jacobian and generally has a different shape)."
+      },
+      {
+        "latex": "\\frac{\\partial(x^{\\top}Ax)}{\\partial x}=(A+A^{\\top})x\\qquad (A=A^{\\top}\\ \\text{时}=2Ax)",
+        "note": "二次型：一般 A 必须先对称化；只有 A 对称时才简写成 2Ax——这是最常见的出错点。",
+        "noteEn": "Quadratic form: for general A the answer must be symmetrized; only symmetric A allows the shorthand 2Ax — the most common source of errors."
+      },
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial\\operatorname{tr}(AX)}{\\partial X}&=A^{\\top},\\qquad \\frac{\\partial\\operatorname{tr}(AX^{\\top})}{\\partial X}=A\\\\[2pt]\\frac{\\partial\\operatorname{tr}(X)}{\\partial X}&=I\\end{aligned}",
+        "note": "迹的线性型：系数矩阵要转置；tr(X) 的梯度是单位阵（有些文献记作 E）。",
+        "noteEn": "Linear trace forms: the coefficient matrix gets transposed; the gradient of tr(X) is the identity matrix (some texts write E for it)."
+      },
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial\\operatorname{tr}(X^{\\top}AX)}{\\partial X}&=(A+A^{\\top})X\\\\[2pt]\\frac{\\partial(a^{\\top}Xb)}{\\partial X}&=ab^{\\top}\\end{aligned}",
+        "note": "迹二次型与双线性型：前者得到对称化后的 (A+Aᵀ)X；后者是列乘行的外积 abᵀ。",
+        "noteEn": "Trace-quadratic and bilinear forms: the first gives the symmetrized (A+Aᵀ)X, the second gives the outer product abᵀ."
+      },
+      {
+        "latex": "\\begin{aligned}\\frac{\\partial\\det(X)}{\\partial X}&=\\det(X)X^{-\\top},\\qquad \\frac{\\partial\\ln\\det(X)}{\\partial X}=X^{-\\top}\\\\[2pt]\\frac{\\partial\\operatorname{tr}(X^{-1}A)}{\\partial X}&=-X^{-\\top}A^{\\top}X^{-\\top}\\end{aligned}",
+        "note": "行列式与逆（X 可逆）：前两条是无约束情形的公式；最后一条由逆的微分法则直接得到。",
+        "noteEn": "Determinant and inverse (X invertible): the first two are the unconstrained versions, and the last one follows directly from the inverse rule."
+      }
+    ],
+    "properties": [
+      "上表全部分式在分母布局下成立，且都能用 $df=(\\partial f/\\partial x)^{\\top}dx$ 或 $df=\\operatorname{tr}((\\partial f/\\partial X)^{\\top}dX)$ 在一两步内验证。",
+      "对称化是二次型公式的灵魂：一般写法是 $(A+A^{\\top})x$ 与 $(A+A^{\\top})X$，只有 $A$ 对称时才退化为 $2Ax$、$2AX$。",
+      "迹的轮换 $\\operatorname{tr}(PQR)=\\operatorname{tr}(RPQ)$ 是推导主力：它把 $dX$ 挪到迹的末尾，从而直接读出梯度。",
+      "$\\partial\\det(X)/\\partial X=\\det(X)X^{-\\top}$ 与 $\\partial\\ln\\det(X)/\\partial X=X^{-\\top}$ 要求 $X$ 可逆，且是无约束版本；把 $X$ 限制在对称矩阵上时切空间改变，不能照搬。",
+      "数值检验：任取 $X$ 与方向 $B$，比较 $(f(X+tB)-f(X))/t$ 与 $\\operatorname{tr}(G^{\\top}B)$，$t$ 足够小时两者吻合。"
+    ],
+    "propertiesEn": [
+      "Every identity above holds in the denominator layout, and each can be verified in one or two lines from $df=(\\partial f/\\partial x)^{\\top}dx$ or $df=\\operatorname{tr}((\\partial f/\\partial X)^{\\top}dX)$.",
+      "Symmetrization is the heart of the quadratic-form formulas: the general answers are $(A+A^{\\top})x$ and $(A+A^{\\top})X$, collapsing to $2Ax$ and $2AX$ only for symmetric A.",
+      "The cyclic property $\\operatorname{tr}(PQR)=\\operatorname{tr}(RPQ)$ is the workhorse: it moves dX to the end of the trace so the gradient can be read off directly.",
+      "The formulas $\\partial\\det(X)/\\partial X=\\det(X)X^{-\\top}$ and $\\partial\\ln\\det(X)/\\partial X=X^{-\\top}$ require X to be invertible and are unconstrained versions; restricting X to symmetric matrices changes the tangent space, so they cannot be copied over.",
+      "Numerical check: for any X and direction B, compare $(f(X+tB)-f(X))/t$ with $\\operatorname{tr}(G^{\\top}B)$; for small t the two agree."
+    ],
+    "examples": [
+      {
+        "problem": "推导 $\\partial\\operatorname{tr}(X^{\\top}AX)/\\partial X$，并用有限差分在 $A=\\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$、$X=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 处核对。",
+        "solution": "**推导**：$d\\operatorname{tr}(X^{\\top}AX)=\\operatorname{tr}((dX)^{\\top}AX)+\\operatorname{tr}(X^{\\top}A\\,dX)=\\operatorname{tr}((AX)^{\\top}dX)+\\operatorname{tr}(X^{\\top}A\\,dX)=\\operatorname{tr}(X^{\\top}(A^{\\top}+A)dX)=\\operatorname{tr}\\big(((A+A^{\\top})X)^{\\top}dX\\big)$，故梯度 $G=(A+A^{\\top})X$（这里用到了 $\\operatorname{tr}((dX)^{\\top}AX)=\\operatorname{tr}((AX)^{\\top}dX)$）。\n\n**数值**：$A+A^{\\top}=\\begin{pmatrix}2&2\\\\2&6\\end{pmatrix}$，$G=(A+A^{\\top})X=\\begin{pmatrix}2&4\\\\2&8\\end{pmatrix}$，且 $\\operatorname{tr}(X^{\\top}AX)=7$。\n\n**有限差分**（把 $X$ 的第 $(i,j)$ 元加 $t$，读一次项系数）：$(1,1)$ 元得 $7+2t+t^2$，$(1,2)$ 元得 $7+4t+t^2$，$(2,1)$ 元得 $7+2t+3t^2$，$(2,2)$ 元得 $7+8t+3t^2$，对应 $2,4,2,8$，与 $G$ 完全一致 ✓。"
+      },
+      {
+        "problem": "用凑迹法推导 $\\partial(a^{\\top}Xb)/\\partial X$ 与 $\\partial\\operatorname{tr}(AX)/\\partial X$，并对前者取 $a=(1,2)^{\\top}$、$b=(3,1)^{\\top}$、$X=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 做有限差分核对。",
+        "solution": "**外积公式**：$d(a^{\\top}Xb)=a^{\\top}(dX)b=\\operatorname{tr}(a^{\\top}(dX)b)=\\operatorname{tr}(ba^{\\top}dX)=\\operatorname{tr}\\big((ab^{\\top})^{\\top}dX\\big)$，故 $\\partial(a^{\\top}Xb)/\\partial X=ab^{\\top}$。\n\n**迹公式**：$d\\operatorname{tr}(AX)=\\operatorname{tr}(A\\,dX)$，对照 $\\operatorname{tr}(G^{\\top}dX)$ 得 $G=A^{\\top}$。\n\n**数值核对**：$ab^{\\top}=\\begin{pmatrix}3&1\\\\6&2\\end{pmatrix}$，$f(X)=a^{\\top}Xb=6$；分别把四个元素加 $t$，得 $f=6+3t$、$6+t$、$6+6t$、$6+2t$，一次项系数 $3,1,6,2$ 正是 $ab^{\\top}$ 的四个元素 ✓。"
+      }
+    ],
+    "tags": [
+      "矩阵梯度",
+      "迹技巧",
+      "二次型",
+      "行列式求导"
+    ],
+    "links": [
+      "matrix-derivative-basics",
+      "matrix-differential-rules",
+      "gradient",
+      "inverse-matrix",
+      "determinant-properties"
+    ]
+  },
+  {
+    "id": "matrix-calculus-optimization",
+    "title": "矩阵微分与最优化",
+    "titleEn": "Matrix Calculus and Optimization",
+    "branch": "linear",
+    "level": 5,
+    "summary": "用矩阵微分整块地写出一阶与二阶最优性条件、二次型极值公式和最小二乘的正规方程，并厘清正定与半正定的细微差别。",
+    "summaryEn": "First- and second-order optimality conditions, quadratic-form minimizers and the least-squares normal equations in matrix form, with the subtlety of positive semidefiniteness spelled out.",
+    "definition": "矩阵微分的第一个大应用是最优化：写出 $\\nabla f=0$ 求驻点，再看二阶条件。与多元微积分相比，「增量」在求导技术上：以前逐个算偏导，现在用 $d$ 与迹整块地算梯度与 Hessian。标量导数沿用全批统一约定（**分母/梯度布局**）：$\\nabla f=\\partial f/\\partial x$ 与 $x$ 同型（文献中常按分子布局写成行向量，与本库互为转置，套公式前先核对约定）。\n\n**一阶条件**：$f$ 可微时，局部极值点 $x^{*}$ 必须满足 $\\nabla f(x^{*})=0$。**二阶条件**：Hessian $H(x)=\\partial^{2}f/\\partial x\\,\\partial x^{\\top}$ 的第 $(i,j)$ 元是 $\\partial^{2}f/\\partial x_i\\partial x_j$，在二阶偏导连续时**对称**。于是：$H(x^{*})$ 正定 $\\Rightarrow$ $x^{*}$ 是严格局部极小点；$H(x^{*})$ 负定 $\\Rightarrow$ 严格局部极大点；$H(x^{*})$ 不定（特征值有正有负）$\\Rightarrow$ 鞍点。注意正定给出的是**充分不必要**条件：$H$ 半正定甚至 $H=0$ 时也可能是严格极小，例如 $f(x)=x^4$ 在 $x=0$ 处 $H=0$，但 $0$ 依然是严格极小点——这种情形要靠更高阶项判定。\n\n最常用的两个模型。**无约束二次型**：$f(x)=x^{\\top}Ax-b^{\\top}x$（取 $A=A^{\\top}$）满足 $\\nabla f=2Ax-b$、$H=2A$；当 $A$ 正定时有唯一极小点 $x^{*}=\\frac{1}{2}A^{-1}b$。**最小二乘**：$f(x)=\\|Ax-b\\|^{2}$ 有 $\\nabla f=2A^{\\top}(Ax-b)$，令梯度为零即得**正规方程** $A^{\\top}Ax=A^{\\top}b$；$A$ 列满秩时 $x^{*}=(A^{\\top}A)^{-1}A^{\\top}b$，秩亏时解不唯一，用广义逆取最小范数解 $A^{+}b$。\n\n两个方向的一句话延拓：数值上用**梯度下降** $x\\leftarrow x-\\eta\\nabla f(x)$ 迭代；带约束时用**拉格朗日乘数法**把约束的梯度并入一阶条件。",
+    "definitionEn": "The first big application of matrix calculus is optimization: solve $\\nabla f=0$ for stationary points and then apply second-order conditions. Compared with multivariable calculus the upgrade is technical — instead of computing partial derivatives one by one, the differential and the trace deliver the gradient and the Hessian in one block. Scalar derivatives keep the batch-wide **denominator (gradient) layout**, so $\\nabla f=\\partial f/\\partial x$ has the shape of $x$ (much of the literature writes the gradient as a row vector, the transpose of ours; check the convention before plugging in a formula).\n\n**First-order condition**: if $f$ is differentiable, a local extremum $x^{*}$ must satisfy $\\nabla f(x^{*})=0$. **Second-order conditions**: the Hessian $H(x)=\\partial^{2}f/\\partial x\\,\\partial x^{\\top}$ has $(i,j)$ entry $\\partial^{2}f/\\partial x_i\\partial x_j$ and is **symmetric** whenever the second partials are continuous. Hence: $H(x^{*})$ positive definite $\\Rightarrow$ strict local minimum; $H(x^{*})$ negative definite $\\Rightarrow$ strict local maximum; $H(x^{*})$ indefinite (eigenvalues of both signs) $\\Rightarrow$ saddle point. Positive definiteness is **sufficient, not necessary**: a positive semidefinite Hessian — even $H=0$ — may still give a strict minimum, as $f(x)=x^4$ does at $x=0$, where the decision needs higher-order terms.\n\nTwo workhorse models. **Unconstrained quadratic form**: $f(x)=x^{\\top}Ax-b^{\\top}x$ with $A=A^{\\top}$ has $\\nabla f=2Ax-b$ and $H=2A$; if $A$ is positive definite the unique minimizer is $x^{*}=\\frac{1}{2}A^{-1}b$. **Least squares**: $f(x)=\\|Ax-b\\|^{2}$ has $\\nabla f=2A^{\\top}(Ax-b)$, and setting it to zero gives the **normal equations** $A^{\\top}Ax=A^{\\top}b$; when $A$ has full column rank, $x^{*}=(A^{\\top}A)^{-1}A^{\\top}b$, while in the rank-deficient case the solutions form a set and the pseudoinverse selects the least-norm one, $A^{+}b$.\n\nTwo one-line extensions: numerically, **gradient descent** iterates $x\\leftarrow x-\\eta\\nabla f(x)$; with constraints, the **method of Lagrange multipliers** folds the constraint gradients into the first-order condition.",
+    "formulas": [
+      {
+        "latex": "\\nabla f(x^{*})=0,\\qquad H(x)=\\frac{\\partial^{2}f}{\\partial x\\,\\partial x^{\\top}},\\qquad H=H^{\\top}",
+        "note": "一阶必要条件与 Hessian 的定义；分母布局下 H 的第 (i,j) 元是 ∂²f/∂xᵢ∂xⱼ。",
+        "noteEn": "The first-order necessary condition and the definition of the Hessian; in the denominator layout its (i,j) entry is ∂²f/∂xᵢ∂xⱼ."
+      },
+      {
+        "latex": "H(x^{*})\\succ0\\Rightarrow\\text{严格极小},\\qquad H(x^{*})\\prec0\\Rightarrow\\text{严格极大},\\qquad H\\ \\text{不定}\\Rightarrow\\text{鞍点}",
+        "note": "正定只是严格极小的充分条件，不是必要条件；H 半正定也可能给出严格极小（如 x⁴）。",
+        "noteEn": "Positive definiteness is only sufficient for a strict minimum, never necessary; a positive semidefinite Hessian may also give a strict minimum (e.g. x⁴)."
+      },
+      {
+        "latex": "\\begin{aligned}f(x)&=x^{\\top}Ax-b^{\\top}x\\quad(A=A^{\\top})\\\\[2pt]\\nabla f&=2Ax-b,\\qquad H=2A,\\qquad A\\succ0\\ \\Rightarrow\\ x^{*}=\\tfrac{1}{2}A^{-1}b\\end{aligned}",
+        "note": "二次型的完整解：梯度、Hessian 与正定时的唯一极小点都是整块公式。",
+        "noteEn": "The complete quadratic-form solution: gradient, Hessian and, for positive definite A, the unique minimizer — all in closed form."
+      },
+      {
+        "latex": "\\begin{aligned}f(x)&=\\|Ax-b\\|^{2}\\\\[2pt]\\nabla f&=2A^{\\top}(Ax-b),\\qquad A^{\\top}Ax=A^{\\top}b\\end{aligned}",
+        "note": "最小二乘：梯度里的 2 与 Aᵀ 位置都不能错；令梯度为零即得正规方程。",
+        "noteEn": "Least squares: neither the factor 2 nor the position of Aᵀ in the gradient may be misplaced; setting it to zero yields the normal equations."
+      },
+      {
+        "latex": "x_{k+1}=x_{k}-\\eta\\,\\nabla f(x_{k})",
+        "note": "梯度下降：沿负梯度方向走一步，步长 η 需要适当选取。",
+        "noteEn": "Gradient descent: one step along the negative gradient, with the step size η chosen appropriately."
+      }
+    ],
+    "properties": [
+      "Hessian 对称（二阶偏导连续时混合偏导可交换），所以二阶条件只看 $H$ 的特征值符号；沿单位特征向量 $v$ 的方向，$f$ 的局部曲率恰为 $v^{\\top}Hv=\\lambda$。",
+      "正定 $\\Rightarrow$ 严格极小是**充分不必要**；$H$ 半正定也可能给出严格极小（$f(x)=x^4$ 在 $0$ 处 $H=0$），需要更高阶项才能判定。",
+      "二次型求导前先对称化：$\\nabla(x^{\\top}Ax)=(A+A^{\\top})x$；本节的二次型公式默认 $A=A^{\\top}$，此时才写成 $2Ax$。",
+      "最小二乘的几何：最优残差 $r=b-Ax^{*}$ 与 $A$ 的列空间正交（$A^{\\top}r=0$），$Ax^{*}$ 就是 $b$ 在列空间上的正交投影；$A$ 列满秩时解唯一，秩亏时用广义逆取最小范数解。",
+      "迭代法（梯度下降）只用到一阶信息：步长过大会发散，收敛慢时可用牛顿法方向 $-H^{-1}\\nabla f$ 加速（代价是计算并求逆 $H$）。"
+    ],
+    "propertiesEn": [
+      "The Hessian is symmetric (mixed partials commute when the second derivatives are continuous), so the second-order test depends only on the signs of its eigenvalues; along a unit eigenvector v the local curvature of f equals $v^{\\top}Hv=\\lambda$.",
+      "Positive definiteness is sufficient but not necessary for a strict minimum; a positive semidefinite Hessian may also give a strict minimum ($f(x)=x^4$ at 0, where H = 0), and higher-order terms are then needed.",
+      "Symmetrize before differentiating a quadratic form: $\\nabla(x^{\\top}Ax)=(A+A^{\\top})x$; the formulas here assume $A=A^{\\top}$, in which case $2Ax$ is correct.",
+      "Least squares has a geometric meaning: the optimal residual $r=b-Ax^{*}$ is orthogonal to the column space of A ($A^{\\top}r=0$), so $Ax^{*}$ is the orthogonal projection of b; the solution is unique for full column rank, and the pseudoinverse selects the least-norm solution in the rank-deficient case.",
+      "Gradient descent uses only first-order information: too large a step diverges, and slow convergence can be accelerated by the Newton direction $-H^{-1}\\nabla f$, at the cost of forming and inverting H."
+    ],
+    "examples": [
+      {
+        "problem": "取 $A=\\begin{pmatrix}1&1\\\\1&2\\\\1&3\\end{pmatrix}$、$b=(3,1,5)^{\\top}$，最小化 $f(x)=\\|Ax-b\\|^{2}$：写出 $\\nabla f$ 与正规方程，解出 $x^{*}$ 并验证它确实最优。",
+        "solution": "**梯度**：展开得 $f(x)=x^{\\top}A^{\\top}Ax-2b^{\\top}Ax+b^{\\top}b$，由二次型公式 $\\nabla f=2A^{\\top}Ax-2A^{\\top}b=2A^{\\top}(Ax-b)$。\n\n**正规方程**：$A^{\\top}A=\\begin{pmatrix}3&6\\\\6&14\\end{pmatrix}$，$A^{\\top}b=(9,20)^{\\top}$，即 $\\begin{cases}3x_1+6x_2=9\\\\6x_1+14x_2=20\\end{cases}$；$\\det(A^{\\top}A)=6$，解得 $x^{*}=(1,1)^{\\top}$（代回两个方程都成立 ✓）。\n\n**验证最优性**：$Ax^{*}=(2,3,4)^{\\top}$，残差 $r=b-Ax^{*}=(1,-2,1)^{\\top}$，而 $A^{\\top}r=(0,0)^{\\top}$，即残差与 $A$ 的两列都正交，于是 $\\nabla f(x^{*})=0$ ✓。此时 $f(x^{*})=1+4+1=6$；对比 $x=(0,0)^{\\top}$ 时 $f=35$、$x=(2,1)^{\\top}$ 时 $f=0+9+0=9$，都更大 ✓。"
+      },
+      {
+        "problem": "设 $f(x)=x^{\\top}Ax-b^{\\top}x$，其中 $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$、$b=(6,6)^{\\top}$。求驻点并判断类型。",
+        "solution": "$\\nabla f=2Ax-b=(4x_1+2x_2-6,\\;2x_1+4x_2-6)^{\\top}$，令 $\\nabla f=0$ 得 $x^{*}=(1,1)^{\\top}$。Hessian $H=2A=\\begin{pmatrix}4&2\\\\2&4\\end{pmatrix}$ 的顺序主子式为 $4>0$ 与 $16-4=12>0$，故 $A$ 正定（$H$ 的特征值为 $2,6$），$x^{*}$ 是严格极小点。函数值 $f(x^{*})=x^{*\\top}Ax^{*}-b^{\\top}x^{*}=6-12=-6$。"
+      }
+    ],
+    "tags": [
+      "最优化",
+      "正规方程",
+      "最小二乘",
+      "二阶条件",
+      "梯度下降"
+    ],
+    "links": [
+      "least-squares-fitting",
+      "generalized-inverse",
+      "matrix-factorization",
+      "positive-definite-inertia",
+      "lagrange-multiplier",
+      "matrix-gradient-identities"
+    ]
+  }
+]

@@ -1,0 +1,682 @@
+[
+  {
+    "id": "pde-basic-concepts",
+    "title": "偏微分方程的基本概念",
+    "titleEn": "Basic Concepts of Partial Differential Equations",
+    "branch": "pde",
+    "level": 4,
+    "summary": "含有未知多元函数及其偏导数的方程；分清方程的阶、线性性与齐次性，理解「通解含任意函数」与「定解条件」的含义。",
+    "summaryEn": "Equations involving an unknown function of several variables and its partial derivatives; the ideas of order, linearity, homogeneity, arbitrary functions in general solutions, and initial/boundary data.",
+    "definition": "**偏微分方程**（partial differential equation，简称 PDE）是含有未知多元函数及其偏导数的方程。例如 $u_t=a^{2}u_{xx}$ 中的未知函数 $u(x,t)$ 依赖两个自变量，方程里同时出现对 $t$ 与对 $x$ 的导数——这正是它区别于常微分方程（ODE）的地方：ODE 的未知函数只依赖一个自变量。弦振动、温度扩散、静电场等大量物理问题都由 PDE 描述。\n\n**阶**：方程中出现的最高阶偏导数的阶数就是方程的阶。$u_x+u_y=0$ 是一阶方程，$u_t=a^{2}u_{xx}$ 与 $u_{xx}+u_{yy}=0$ 都是二阶方程。**线性性**按未知函数及其导数出现的方式划分：未知函数与各阶偏导数都以一次方出现、系数只依赖自变量的是**线性**方程；最高阶偏导线性出现、系数只依赖自变量而低阶项可以非线性依赖 $u$ 的是**半线性**方程；最高阶偏导线性出现、但系数还依赖 $u$ 与低阶导数的是**拟线性**方程；最高阶偏导本身非线性的是**完全非线性**方程。右端为零（$L[u]=0$）时称方程**齐次**，右端非零（$L[u]=f$）时称**非齐次**。\n\nPDE 的通解里含**任意函数**，而不是像 ODE 那样只含任意常数。例如 $u_{xy}=0$ 的通解是 $u=f(x)+g(y)$，其中 $f,g$ 是任意二次可微函数。要从通解中挑出确定的解，必须补充**定解条件**：对时间变量的**初始条件**（如 $u(x,0)=\\varphi(x)$、$u_t(x,0)=\\psi(x)$）与对空间区域边界 $\\partial\\Omega$ 的**边界条件**。\n\n边界条件主要有三类：**Dirichlet 条件**直接给出边界上的函数值；**Neumann 条件**给出边界上的法向导数；**Robin 条件**给出法向导数与函数值的线性组合。初始条件与边界条件给得恰当，问题才是**适定**的（解存在、唯一、且连续依赖给定数据），这是应用中最关心的性质。",
+    "definitionEn": "The **partial differential equation** (PDE) is an equation involving an unknown function of several variables and its partial derivatives. In $u_t=a^{2}u_{xx}$ the unknown $u(x,t)$ depends on two independent variables, and derivatives with respect to both appear — this is what distinguishes PDEs from ODEs, whose unknown depends on a single variable. Vibrating strings, heat diffusion and electrostatic fields are all modelled by PDEs.\n\n**Order**: the order of the highest partial derivative appearing in the equation. So $u_x+u_y=0$ is first order, while $u_t=a^{2}u_{xx}$ and $u_{xx}+u_{yy}=0$ are second order. **Linearity** is classified by how the unknown and its derivatives enter: a **linear** equation has $u$ and all its derivatives to the first power with coefficients depending only on the independent variables; a **semilinear** equation is linear in the highest derivatives with coefficients depending only on the independent variables, while lower-order terms may depend nonlinearly on $u$; a **quasilinear** equation is linear in the highest derivatives but their coefficients may depend on $u$ and lower derivatives; a **fully nonlinear** equation is nonlinear in the highest derivatives. If the right-hand side is zero ($L[u]=0$) the equation is **homogeneous**; otherwise it is **nonhomogeneous**.\n\nThe general solution of a PDE contains **arbitrary functions**, not merely arbitrary constants as in the ODE case. For instance $u_{xy}=0$ has the general solution $u=f(x)+g(y)$ with arbitrary twice differentiable $f$ and $g$. To single out one solution one has to add **conditions**: an **initial condition** in the time variable (e.g. $u(x,0)=\\varphi(x)$, $u_t(x,0)=\\psi(x)$) and **boundary conditions** on the boundary $\\partial\\Omega$ of the spatial region.\n\nThere are three standard boundary conditions: a **Dirichlet condition** prescribes the values of $u$ on the boundary; a **Neumann condition** prescribes the normal derivative; a **Robin condition** prescribes a linear combination of the normal derivative and the values of $u$. When the data are assigned appropriately the problem is **well posed** (existence, uniqueness and continuous dependence on the data), which is what applications require.",
+    "formulas": [
+      {
+        "latex": "F\\left(x_1,\\dots,x_n,\\ u,\\ u_{x_1},\\dots,u_{x_n},\\ u_{x_1x_1},\\dots\\right)=0",
+        "note": "偏微分方程的一般形式：未知函数 $u$ 与它的各阶偏导数满足的等式。",
+        "noteEn": "General form of a PDE: an identity satisfied by the unknown function $u$ and its partial derivatives."
+      },
+      {
+        "latex": "\\operatorname{ord}\\left(u_t=a^{2}u_{xx}\\right)=2,\\qquad \\operatorname{ord}\\left(u_x+u_y=0\\right)=1",
+        "note": "方程的阶＝最高阶偏导数的阶数；与方程里出现多少个自变量、多少个导数项无关。",
+        "noteEn": "The order equals the order of the highest partial derivative, regardless of how many independent variables or derivative terms appear."
+      },
+      {
+        "latex": "\\mathcal{L}[u]=A\\,u_{xx}+2B\\,u_{xy}+C\\,u_{yy}+D\\,u_x+E\\,u_y+F\\,u=f(x,y)",
+        "note": "二阶线性方程的标准写法；$f\\equiv 0$ 时齐次，$f\\not\\equiv 0$ 时非齐次。交叉项系数习惯写成 $2B$，这样下一节的判别式 $\\Delta=B^{2}-AC$ 才取到对称形式。",
+        "noteEn": "Standard form of a second-order linear equation: homogeneous when $f\\equiv 0$, nonhomogeneous otherwise. Writing the cross term as $2B$ makes the discriminant $\\Delta=B^{2}-AC$ symmetric."
+      },
+      {
+        "latex": "u_{xy}=0\\quad\\Longrightarrow\\quad u(x,y)=f(x)+g(y)",
+        "note": "通解含任意函数：$u_{xy}=0$ 的通解由两个任意函数相加而成，任意常数只是它的特例。",
+        "noteEn": "Arbitrary functions in general solutions: $u_{xy}=0$ is solved by a sum of two arbitrary functions, and arbitrary constants are only a special case."
+      },
+      {
+        "latex": "u\\big|_{\\partial\\Omega}=g_1,\\qquad \\frac{\\partial u}{\\partial n}\\Big|_{\\partial\\Omega}=g_2,\\qquad \\left(\\frac{\\partial u}{\\partial n}+\\sigma u\\right)\\Big|_{\\partial\\Omega}=g_3",
+        "note": "三类边界条件：Dirichlet（给边界上的函数值）、Neumann（给法向导数）、Robin（给法向导数与函数值的线性组合，$\\sigma$ 为常数），$g_1,g_2,g_3$ 是已知数据；初始条件则形如 $u(x,0)=\\varphi(x)$。",
+        "noteEn": "Three boundary conditions: Dirichlet (values of $u$ on the boundary), Neumann (normal derivative) and Robin (a linear combination with a constant $\\sigma$); $g_1,g_2,g_3$ are given data. An initial condition has the form $u(x,0)=\\varphi(x)$."
+      }
+    ],
+    "properties": [
+      "**阶与线性性**：$u_x+u_y=0$ 一阶线性，$u_t=a^{2}u_{xx}$ 二阶线性，$x\\,u_{xx}=u_y$ 二阶线性但系数依赖自变量——阶只看最高阶偏导，线性看 $u$ 与其各阶导数是否一次出现。",
+      "**叠加原理**：线性齐次方程任意解的线性组合仍是解；非齐次方程的通解＝一个特解＋对应齐次方程的通解。",
+      "**通解含任意函数**：如 $u_{xy}=0$ 的通解 $u=f(x)+g(y)$；只有补充足够的定解条件，通解中的任意函数才能被确定。",
+      "**非线性方程的例子**：$u_t+u\\,u_x=0$ 拟线性，$u_{xx}+u_{yy}=u^{3}$ 半线性，$u_{xx}u_{yy}-u_{xy}^{2}=0$ 完全非线性。",
+      "**适定性**（Hadamard）：定解条件＝初始条件＋边界条件；条件不足解不唯一，条件过多一般无解，适定即存在、唯一、稳定。"
+    ],
+    "propertiesEn": [
+      "**Order and linearity**: $u_x+u_y=0$ is first-order linear, $u_t=a^{2}u_{xx}$ is second-order linear, and $x\\,u_{xx}=u_y$ is second-order linear with variable coefficients — order looks at the highest derivative, linearity at whether $u$ and its derivatives appear to the first power.",
+      "**Superposition**: any linear combination of solutions of a linear homogeneous equation is again a solution; for a nonhomogeneous equation the general solution is one particular solution plus the general solution of the associated homogeneous equation.",
+      "**Arbitrary functions**: the general solution of $u_{xy}=0$ is $u=f(x)+g(y)$; the arbitrary functions are pinned down only after enough conditions are imposed.",
+      "**Nonlinear examples**: $u_t+u\\,u_x=0$ is quasilinear, $u_{xx}+u_{yy}=u^{3}$ is semilinear, and $u_{xx}u_{yy}-u_{xy}^{2}=0$ is fully nonlinear.",
+      "**Well posedness** (Hadamard): conditions consist of initial data plus boundary data; too few conditions leave the solution undetermined and too many usually make the problem unsolvable. Well posed means existence, uniqueness and stability."
+    ],
+    "examples": [
+      {
+        "problem": "指出方程 $u_t+u\\,u_x=0$ 与 $u_{xx}+u_{yy}=0$ 的阶、齐次性，并判断它们属于线性、半线性、拟线性还是完全非线性。",
+        "solution": "$u_t+u\\,u_x=0$：最高阶偏导是一阶，故为一阶方程；右端为 $0$，是齐次方程；$u\\,u_x$ 让方程非线性，但最高阶偏导 $u_t,u_x$ 仍一次出现且只在系数中依赖 $u$，所以是拟线性方程（无粘 Burgers 方程）。$u_{xx}+u_{yy}=0$：二阶、齐次、线性方程，也就是拉普拉斯方程。"
+      },
+      {
+        "problem": "证明 $u_{xy}=0$ 的通解为 $u=f(x)+g(y)$，并解释为什么这里出现的是任意函数而不是任意常数。",
+        "solution": "正向验证：若 $u=f(x)+g(y)$，则 $u_x=f'(x)$，再对 $y$ 求导得 $u_{xy}=0$，满足方程。反过来，若 $u_{xy}=0$，先对 $y$ 积分得 $u_x=h(x)$——对 $y$ 积分时「常数」可以依赖 $x$；再对 $x$ 积分得 $u=f(x)+g(y)$，其中 $g(y)$ 是第二次积分带出的、可以依赖 $y$ 的任意函数。偏微分方程每做一次不定积分，积分常数就可能升级为任意函数，这正是 PDE 通解的结构。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "PDE",
+      "定解条件",
+      "适定性"
+    ],
+    "links": [
+      "partial-derivative",
+      "ode-basic-concepts",
+      "classification-pde",
+      "wave-equation"
+    ]
+  },
+  {
+    "id": "first-order-pde",
+    "title": "一阶偏微分方程与特征线法",
+    "titleEn": "First-Order PDEs and the Method of Characteristics",
+    "branch": "pde",
+    "level": 5,
+    "summary": "形如 $a\\,u_x+b\\,u_y=c$ 的一阶方程；沿特征方程 $\\frac{dx}{a}=\\frac{dy}{b}=\\frac{du}{c}$ 确定的特征线，把偏微分方程化为常微分方程求解。",
+    "summaryEn": "First-order equations $a\\,u_x+b\\,u_y=c$; along the characteristics given by $\\frac{dx}{a}=\\frac{dy}{b}=\\frac{du}{c}$ the PDE reduces to an ODE.",
+    "definition": "**一阶偏微分方程**只含未知函数的一阶偏导数，最常见的形式是拟线性的 $a(x,y)\\,u_x+b(x,y)\\,u_y=c(x,y,u)$；当 $a,b,c$ 只依赖 $x,y$ 时它成为线性方程。传输方程 $u_t+c\\,u_x=0$ 是最基本的模型：任意波形都以速度 $c$ 沿 $x$ 轴整体平移。\n\n**特征线法的想法**：在解曲面 $u=u(x,y)$ 上找一条参数曲线 $(x(s),y(s))$，让全导数把两个偏导「打包」起来：$\\frac{du}{ds}=u_x\\frac{dx}{ds}+u_y\\frac{dy}{ds}$。若选取 $\\frac{dx}{ds}=a$、$\\frac{dy}{ds}=b$，右端恰好就是 $a\\,u_x+b\\,u_y$，于是 PDE 沿这条曲线退化为 ODE $\\frac{du}{ds}=c$。\n\n把两个比例合并得到**特征方程** $\\frac{dx}{a}=\\frac{dy}{b}=\\frac{du}{c}$：前两项给出平面上的曲线族（特征线），它们由 $dy/dx=b/a$ 决定；第三项决定解沿特征线的变化。因此求解分两步：先解出特征线 $x(s),y(s)$，再沿特征线积分 $du/ds=c$。\n\n齐次方程 $a\\,u_x+b\\,u_y=0$ 的解沿每条特征线为常数，通解是特征线「首次积分」的任意函数 $u=F(\\Phi(x,y))$，其中 $\\Phi(x,y)=\\mathrm{const}$ 就是特征线方程。拟线性方程的特征线依赖解本身，可能相交：相交处解的梯度爆破、经典解失效，需要引入广义解（激波），这是守恒律理论的开端。",
+    "definitionEn": "A **first-order PDE** contains only first partial derivatives of the unknown; the most common form is the quasilinear one $a(x,y)\\,u_x+b(x,y)\\,u_y=c(x,y,u)$, which becomes linear when $a,b,c$ depend on $x,y$ only. The transport equation $u_t+c\\,u_x=0$ is the basic model: any profile translates along the $x$-axis with speed $c$.\n\n**The idea of the method of characteristics**: on the solution surface $u=u(x,y)$ choose a parameter curve $(x(s),y(s))$ so that the chain rule bundles the two partial derivatives: $\\frac{du}{ds}=u_x\\frac{dx}{ds}+u_y\\frac{dy}{ds}$. If we choose $\\frac{dx}{ds}=a$ and $\\frac{dy}{ds}=b$, the right-hand side is exactly $a\\,u_x+b\\,u_y$, so the PDE collapses to the ODE $\\frac{du}{ds}=c$ along that curve.\n\nMerging the two ratios gives the **characteristic equations** $\\frac{dx}{a}=\\frac{dy}{b}=\\frac{du}{c}$: the first two determine a family of curves in the plane through $dy/dx=b/a$, and the third gives how $u$ varies along them. Solving therefore proceeds in two steps: find the characteristic curves $x(s),y(s)$, then integrate $du/ds=c$ along them.\n\nFor the homogeneous equation $a\\,u_x+b\\,u_y=0$ the solution is constant along each characteristic, and the general solution is an arbitrary function of the characteristic first integral, $u=F(\\Phi(x,y))$ with $\\Phi(x,y)=\\mathrm{const}$ defining the characteristics. For quasilinear equations the characteristics depend on the solution itself and may cross: the gradient blows up, the classical solution breaks down, and one needs weak solutions (shock waves) — the starting point of conservation-law theory.",
+    "formulas": [
+      {
+        "latex": "a(x,y)\\,u_x+b(x,y)\\,u_y=c(x,y,u)",
+        "note": "一阶（拟）线性偏微分方程的标准形式（$a^2+b^2\\neq 0$）；$c\\equiv 0$ 时是齐次线性方程。",
+        "noteEn": "Standard form of a first-order (quasilinear) PDE with $a^2+b^2\\neq 0$; when $c\\equiv 0$ it is homogeneous and linear."
+      },
+      {
+        "latex": "\\frac{dx}{a}=\\frac{dy}{b}=\\frac{du}{c}",
+        "note": "特征方程（特征线方程组）：前一项 $dx/a=dy/b$ 定义平面上的特征线，后一项给出 $u$ 沿特征线的变化。",
+        "noteEn": "The characteristic equations: $dx/a=dy/b$ defines the characteristic curves in the plane, while the third ratio describes how $u$ varies along them."
+      },
+      {
+        "latex": "\\frac{dx}{ds}=a,\\qquad \\frac{dy}{ds}=b,\\qquad \\frac{du}{ds}=c",
+        "note": "参数化形式：沿特征线 $(x(s),y(s))$，$u$ 满足常微分方程 $du/ds=c$。",
+        "noteEn": "Parametrised form: along a characteristic $(x(s),y(s))$, the unknown satisfies the ODE $du/ds=c$."
+      },
+      {
+        "latex": "\\frac{dy}{dx}=\\frac{b}{a}\\quad\\Longrightarrow\\quad \\Phi(x,y)=\\mathrm{const}",
+        "note": "特征线的斜率与首次积分 $\\Phi$；对 $a\\,u_x+b\\,u_y=0$，沿特征线 $du=0$，故 $u$ 在每条特征线上是常数。",
+        "noteEn": "Slope of the characteristics and the first integral $\\Phi$; for $a\\,u_x+b\\,u_y=0$ we have $du=0$ along characteristics, so $u$ is constant on each of them."
+      },
+      {
+        "latex": "a\\,u_x+b\\,u_y=0\\quad\\Longrightarrow\\quad u=F\\big(\\Phi(x,y)\\big)",
+        "note": "齐次线性方程的通解：任意函数 $F$ 作用在特征线首次积分上。例：$u_x+u_y=0$ 的通解是 $u=F(y-x)$。",
+        "noteEn": "General solution of the homogeneous linear equation: an arbitrary function $F$ of the characteristic first integral. For example $u_x+u_y=0$ has $u=F(y-x)$."
+      }
+    ],
+    "expression": {
+      "text": "a(x,y) u_x + b(x,y) u_y = c(x,y,u)",
+      "symbol": "a u_x + b u_y = c",
+      "note": "一阶（拟）线性偏微分方程；沿特征方程确定的方向，PDE 退化为常微分方程。",
+      "noteEn": "First-order (quasilinear) PDE; along the directions fixed by the characteristic equations it reduces to an ODE."
+    },
+    "properties": [
+      "特征线是 $\\dfrac{dy}{dx}=\\dfrac{b}{a}$ 的积分曲线；在 $a,b$ 不同时为零的地方它们互不相交，把定义域铺成单参数曲线族。",
+      "沿每条特征线 PDE 退化成 ODE，所以「先解特征线、再沿特征线积分」是通用流程。",
+      "$a\\,u_x+b\\,u_y=0$ 的解沿特征线为常数，通解为 $u=F(\\Phi(x,y))$，任意函数 $F$ 由初始或边界数据确定。",
+      "初始数据给定在与特征线横截的曲线上时，解在局部唯一存在（隐函数定理）；数据给在特征线上则可能无解或不唯一。",
+      "拟线性方程的特征线可以相交并形成激波（如 $u_t+u\\,u_x=0$），越过相交时刻经典解失效，需要用弱解描述。"
+    ],
+    "propertiesEn": [
+      "Characteristics are the integral curves of $\\dfrac{dy}{dx}=\\dfrac{b}{a}$; where $a$ and $b$ do not both vanish they do not cross, foliating the domain by a one-parameter family of curves.",
+      "Along each characteristic the PDE becomes an ODE, so the standard recipe is: solve for the characteristics first, then integrate along them.",
+      "Solutions of $a\\,u_x+b\\,u_y=0$ are constant along characteristics and have the form $u=F(\\Phi(x,y))$, with the arbitrary function $F$ fixed by initial or boundary data.",
+      "If the initial data are prescribed on a curve transversal to the characteristics, a unique local solution exists (implicit function theorem); data on a characteristic may give no solution or infinitely many.",
+      "For quasilinear equations characteristics can cross and form shock waves (e.g. $u_t+u\\,u_x=0$); beyond the crossing time the classical solution fails and a weak solution is needed."
+    ],
+    "plot": {
+      "type": "slopefield",
+      "expr": "y/x",
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -3,
+        3
+      ],
+      "initial": [
+        {
+          "x": 1,
+          "y": 0.6,
+          "color": "#4cc9f0",
+          "label": "y(1) = 0.6"
+        },
+        {
+          "x": 1,
+          "y": -1,
+          "color": "#ff6b9d",
+          "label": "y(1) = -1"
+        },
+        {
+          "x": 1,
+          "y": 1.6,
+          "color": "#06d6a0",
+          "label": "y(1) = 1.6"
+        }
+      ],
+      "title": "特征方程 dy/dx = y/x 的斜率场：特征线是过原点的直线 y = Cx"
+    },
+    "examples": [
+      {
+        "problem": "用特征线法解初值问题 $u_x+2u_y=0$，$u(x,0)=\\sin x$。",
+        "solution": "特征方程为 $\\dfrac{dx}{1}=\\dfrac{dy}{2}=\\dfrac{du}{0}$：由 $dx/1=dy/2$ 得 $y-2x=\\mathrm{const}$，由 $du=0$ 得 $u$ 沿特征线为常数，故通解为 $u=f(y-2x)$。代入 $u(x,0)=f(-2x)=\\sin x$，令 $z=-2x$ 得 $f(z)=\\sin\\left(-\\dfrac{z}{2}\\right)$，于是\\n\\n$$u(x,y)=\\sin\\left(x-\\frac{y}{2}\\right).$$\\n\\n检验：$u_x=\\cos\\left(x-\\frac{y}{2}\\right)$，$u_y=-\\frac{1}{2}\\cos\\left(x-\\frac{y}{2}\\right)$，所以 $u_x+2u_y=0$ 恒成立，且 $u(x,0)=\\sin x$。"
+      },
+      {
+        "problem": "解 $u_x+u_y=2$，$u(x,0)=x^{2}$。",
+        "solution": "特征方程为 $dx/1=dy/1=du/2$，特征线是 $y-x=\\mathrm{const}$。参数化取 $x=s+x_0$，$y=s$，$u=2s+u_0$。在 $y=0$ 处 $s=0$、$x_0=x$，由初值得 $u_0=x^{2}$，于是\\n\\n$$u(x,y)=2y+(x-y)^{2}.$$\\n\\n检验：$u_x=2(x-y)$，$u_y=2-2(x-y)$，相加得 $u_x+u_y=2$；并且 $u(x,0)=x^{2}$，符合初值条件。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "特征线法",
+      "一阶方程",
+      "传输方程"
+    ],
+    "links": [
+      "pde-basic-concepts",
+      "multivariable-chain-rule",
+      "first-order-linear-ode",
+      "ode-basic-concepts"
+    ]
+  },
+  {
+    "id": "classification-pde",
+    "title": "二阶线性偏微分方程的分类",
+    "titleEn": "Classification of Second-Order Linear PDEs",
+    "branch": "pde",
+    "level": 5,
+    "summary": "对 $A\\,u_{xx}+2B\\,u_{xy}+C\\,u_{yy}+\\cdots=0$，用判别式 $\\Delta=B^{2}-AC$ 把方程分为双曲、抛物、椭圆三类（交叉项系数是 $2B$，判别式不是 $B^{2}-4AC$）。",
+    "summaryEn": "Second-order linear PDEs are sorted into hyperbolic, parabolic and elliptic types by the discriminant $\\Delta=B^{2}-AC$; the cross term carries coefficient $2B$, so the discriminant is not $B^{2}-4AC$.",
+    "definition": "二阶线性偏微分方程 $A\\,u_{xx}+2B\\,u_{xy}+C\\,u_{yy}+D\\,u_x+E\\,u_y+F\\,u=G$ 的「性格」主要由二阶项决定。把交叉项系数写成 $2B$（即 $B$ 是交叉项系数的一半）之后，**判别式**定义为 $\\Delta=B^{2}-AC$。\n\n$\\Delta>0$ 时称**双曲型**（hyperbolic），$\\Delta=0$ 时称**抛物型**（parabolic），$\\Delta<0$ 时称**椭圆型**（elliptic）。务必使用 $\\Delta=B^{2}-AC$，**不是**一元二次方程那样的 $B^{2}-4AC$：交叉项携带的系数是 $2B$，二次型 $(A,B,C)$ 的判别式本应是 $(2B)^{2}-4AC=4(B^{2}-AC)$，除以 $4$ 之后才得到标准形式 $B^{2}-AC$。\n\n几何意义藏在特征线方程里：把特征线写成 $y=y(x)$，它满足 $A(y')^{2}-2B\\,y'+C=0$。这个方程有两个实根、一个重根还是无实根，对应的恰好是 $\\Delta>0$、$\\Delta=0$、$\\Delta<0$。所以双曲型有两族实特征线，抛物型只有一族（重根），椭圆型没有实特征线，其特征线是复的。\n\n类型决定了定解条件怎么提：双曲型（波动方程）可以提 Cauchy 问题，扰动以有限速度沿特征线传播；抛物型（热方程）提初始条件加边界条件，具有无限传播速度与平滑效应；椭圆型（拉普拉斯方程）只提边界条件。在可逆的自变量变换下类型不变，并且可以化为相应的标准型。系数依赖自变量时类型还能逐点变化，形成混合型方程（如 $y\\,u_{xx}+u_{yy}=0$）。",
+    "definitionEn": "The character of a second-order linear PDE $A\\,u_{xx}+2B\\,u_{xy}+C\\,u_{yy}+D\\,u_x+E\\,u_y+F\\,u=G$ is governed by its second-order terms. Once the cross term is written with coefficient $2B$ (so $B$ is half the cross coefficient), the **discriminant** is defined as $\\Delta=B^{2}-AC$.\n\nThe equation is **hyperbolic** when $\\Delta>0$, **parabolic** when $\\Delta=0$ and **elliptic** when $\\Delta<0$. One must use $\\Delta=B^{2}-AC$, **not** the quadratic-formula expression $B^{2}-4AC$: the cross term carries the factor $2B$, so the discriminant of the quadratic form $(A,B,C)$ is $(2B)^{2}-4AC=4(B^{2}-AC)$, and dividing by $4$ yields the standard discriminant $B^{2}-AC$.\n\nThe geometric meaning lies in the characteristic equation: writing a characteristic as $y=y(x)$, it satisfies $A(y')^{2}-2B\\,y'+C=0$. Whether this equation has two real roots, a double root, or no real root corresponds precisely to $\\Delta>0$, $\\Delta=0$ and $\\Delta<0$. Hence hyperbolic equations have two families of real characteristics, parabolic ones a single family (double root), and elliptic ones no real characteristics at all.\n\nThe type dictates how data should be prescribed: for hyperbolic equations (wave equation) one poses a Cauchy problem and disturbances travel along characteristics with finite speed; for parabolic equations (heat equation) one imposes initial data plus boundary data, with infinite propagation speed and a smoothing effect; for elliptic equations (Laplace equation) only boundary data are prescribed. The type is invariant under invertible changes of the independent variables, and each type can be reduced to a canonical form. When the coefficients depend on the variables the type may change from point to point, producing mixed-type equations such as $y\\,u_{xx}+u_{yy}=0$.",
+    "formulas": [
+      {
+        "latex": "A\\,u_{xx}+2B\\,u_{xy}+C\\,u_{yy}+D\\,u_x+E\\,u_y+F\\,u=G(x,y)",
+        "note": "二阶线性方程的一般形式；$A,B,C$ 是二阶项系数，交叉项写成 $2B$，判别式里的 $B$ 就是它。",
+        "noteEn": "General second-order linear equation; $A,B,C$ are the second-order coefficients, the cross term is written $2B$, and the $B$ in the discriminant is exactly this half-coefficient."
+      },
+      {
+        "latex": "\\Delta=B^{2}-A\\,C",
+        "note": "判别式。不是 $B^{2}-4AC$：因为交叉项系数为 $2B$，对应二次型的判别式是 $(2B)^{2}-4AC=4\\Delta$，标准判别式取除以 $4$ 之后的结果。",
+        "noteEn": "The discriminant. It is not $B^{2}-4AC$: since the cross coefficient is $2B$, the quadratic form has discriminant $(2B)^{2}-4AC=4\\Delta$, and dividing by $4$ gives the standard form."
+      },
+      {
+        "latex": "\\Delta>0:\\ \\text{hyperbolic};\\qquad \\Delta=0:\\ \\text{parabolic};\\qquad \\Delta<0:\\ \\text{elliptic}",
+        "note": "三种类型：$\\Delta>0$ 双曲型（如波动方程），$\\Delta=0$ 抛物型（如热方程），$\\Delta<0$ 椭圆型（如拉普拉斯方程）。",
+        "noteEn": "The three types: hyperbolic for $\\Delta>0$ (wave equation), parabolic for $\\Delta=0$ (heat equation) and elliptic for $\\Delta<0$ (Laplace equation)."
+      },
+      {
+        "latex": "A\\left(\\frac{dy}{dx}\\right)^{2}-2B\\,\\frac{dy}{dx}+C=0",
+        "note": "特征线方程，判别式为 $4\\Delta$；实根的个数＝实特征线族的个数：两个实根对应双曲，重根对应抛物，无实根对应椭圆。",
+        "noteEn": "The characteristic equation, whose own discriminant is $4\\Delta$; the number of real roots equals the number of real characteristic families: two roots for hyperbolic, a double root for parabolic, none for elliptic."
+      },
+      {
+        "latex": "u_{tt}=a^{2}u_{xx}:\\ \\Delta=a^{2}>0;\\qquad u_{t}=a^{2}u_{xx}:\\ \\Delta=0;\\qquad u_{xx}+u_{yy}=0:\\ \\Delta=-1<0",
+        "note": "三个典型方程：波动方程 $A=1,B=0,C=-a^{2}$，双曲型；热方程没有 $u_{tt}$ 项，$A=0$，故 $\\Delta=0$，抛物型；拉普拉斯方程 $A=C=1,B=0$，椭圆型。",
+        "noteEn": "Three model equations: the wave equation has $A=1,B=0,C=-a^{2}$ and is hyperbolic; the heat equation has no $u_{tt}$ term, so $A=0$ and $\\Delta=0$, parabolic; Laplace's equation has $A=C=1,B=0$ and is elliptic."
+      }
+    ],
+    "properties": [
+      "类型只由二阶项系数 $A,B,C$ 决定，低阶项 $D\\,u_x+E\\,u_y+F\\,u$ 与右端 $G$ 都不影响分类。",
+      "类型在可逆自变量变换下不变（判别式的符号是不变量），且可化为标准型：双曲 $u_{\\xi\\eta}+\\cdots=0$（或 $u_{\\xi\\xi}-u_{\\eta\\eta}+\\cdots=0$），抛物 $u_{\\xi\\xi}+\\cdots=0$，椭圆 $u_{\\xi\\xi}+u_{\\eta\\eta}+\\cdots=0$。",
+      "实特征线族数由类型决定：双曲型两族、抛物型一族、椭圆型没有实特征线。",
+      "类型决定定解条件的提法：双曲型提 Cauchy 问题（两个初始条件），抛物型提初始条件＋边界条件，椭圆型只提边界条件。",
+      "系数可变时类型可以逐点变化：$y\\,u_{xx}+u_{yy}=0$ 在 $y<0$ 为双曲、$y=0$ 为抛物、$y>0$ 为椭圆，是混合型方程。"
+    ],
+    "propertiesEn": [
+      "The type depends only on the second-order coefficients $A,B,C$; the lower-order terms $D\\,u_x+E\\,u_y+F\\,u$ and the right-hand side $G$ do not affect it.",
+      "The type is invariant under invertible changes of the independent variables (the sign of the discriminant is an invariant), and each type admits a canonical form: hyperbolic $u_{\\xi\\eta}+\\cdots=0$ (or $u_{\\xi\\xi}-u_{\\eta\\eta}+\\cdots=0$), parabolic $u_{\\xi\\xi}+\\cdots=0$, elliptic $u_{\\xi\\xi}+u_{\\eta\\eta}+\\cdots=0$.",
+      "The number of real characteristic families is determined by the type: two for hyperbolic, one for parabolic, none for elliptic.",
+      "The type determines how data are prescribed: a Cauchy problem (two initial conditions) for hyperbolic equations, initial plus boundary data for parabolic equations, and boundary data only for elliptic equations.",
+      "When coefficients vary, the type can change from point to point: $y\\,u_{xx}+u_{yy}=0$ is hyperbolic for $y<0$, parabolic on $y=0$ and elliptic for $y>0$ — a mixed-type equation."
+    ],
+    "examples": [
+      {
+        "problem": "判断二阶方程 $u_{xx}+4u_{xy}+2u_{yy}+u=0$ 的类型。",
+        "solution": "交叉项系数是 $4$，故 $B=\\dfrac{4}{2}=2$；又 $A=1$，$C=2$，判别式\\n\\n$$\\Delta=B^{2}-AC=2^{2}-1\\cdot 2=2>0,$$\\n\\n所以方程是**双曲型**。常见错误是把判别式写成 $B^{2}-4AC$：若仍取 $B=2$，会得到 $2^{2}-4\\cdot 1\\cdot 2=-4<0$，把双曲型误判成椭圆型；另一种错误是忘了交叉项系数要除以 $2$。再次强调：交叉项系数是 $2B$，判别式是 $B^{2}-AC$。"
+      },
+      {
+        "problem": "判断方程 $y\\,u_{xx}+u_{yy}=0$ 在哪些区域是双曲型、抛物型、椭圆型，并写出 $y<0$ 时的特征线方程。",
+        "solution": "这里 $A=y$，$B=0$，$C=1$，故 $\\Delta=B^{2}-AC=-y$。于是 $y<0$ 时 $\\Delta>0$，双曲型；$y=0$ 时 $\\Delta=0$，抛物型；$y>0$ 时 $\\Delta<0$，椭圆型——类型随点变化，是**混合型**方程（Tricomi 型）。特征线方程 $A(y')^{2}-2B\\,y'+C=0$ 即 $y(y')^{2}+1=0$，仅当 $y<0$ 时有实解 $y'=\\pm\\dfrac{1}{\\sqrt{-y}}$，与双曲区域一致。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "方程分类",
+      "判别式",
+      "双曲抛物椭圆"
+    ],
+    "links": [
+      "pde-basic-concepts",
+      "wave-equation",
+      "heat-equation",
+      "laplace-equation",
+      "separation-of-variables"
+    ]
+  },
+  {
+    "id": "wave-equation",
+    "title": "波动方程",
+    "titleEn": "Wave Equation",
+    "branch": "pde",
+    "level": 5,
+    "summary": "一维波动方程 $u_{tt}=a^{2}u_{xx}$，$a>0$ 是波速；解是右行波与左行波的叠加，具有有限传播速度、能量守恒与时间可逆性。",
+    "summaryEn": "The one-dimensional wave equation $u_{tt}=a^{2}u_{xx}$ with wave speed $a>0$; its solutions superpose left- and right-moving waves and enjoy finite propagation speed, energy conservation and time reversibility.",
+    "definition": "**波动方程**描述振动与波的传播：理想的弦、杆、声场和电磁场在小振幅近似下都归结为一维形式 $\\dfrac{\\partial^{2}u}{\\partial t^{2}}=a^{2}\\dfrac{\\partial^{2}u}{\\partial x^{2}}$，其中常数 $a>0$ 是**波速**（量纲为长度/时间），$a^{2}$ 由介质性质决定，例如弦上 $a^{2}=T/\\rho$（张力除以线密度）。\n\n方程可以因式分解：$\\left(\\partial_t-a\\partial_x\\right)\\left(\\partial_t+a\\partial_x\\right)u=0$。要让方程成立，只需让任一因子把 $u$ 变成零，因此形如 $u=F(x-at)$ 与 $u=G(x+at)$ 的函数都是解：前者是保持形状、以速度 $a$ 向右平移的**右行波**，后者是向左传播的**左行波**，一般解是二者的叠加。\n\n给波动方程配定解条件有两种典型方式：全直线上的 **Cauchy 问题** $u(x,0)=\\varphi(x)$、$u_t(x,0)=\\psi(x)$，其显式解就是达朗贝尔公式（下一个知识点）；有限弦上的**初边值问题**则用分离变量与 Fourier 级数展开，得到驻波（振动模态）的叠加。\n\n波动方程是**双曲型**方程的代表，两个重要特性是：**有限传播速度**——扰动以不超过 $a$ 的速度向外传播，某时刻某点只受有限区间内初值的影响；**能量守恒与时间可逆**——无阻尼时弦的动能与势能之和保持不变，且把 $t$ 换成 $-t$ 仍是解。这两点与热方程形成鲜明对照。",
+    "definitionEn": "The **wave equation** describes vibrations and wave propagation: an ideal string, a rod, sound and electromagnetic fields all reduce, in the small-amplitude approximation, to the one-dimensional form $\\dfrac{\\partial^{2}u}{\\partial t^{2}}=a^{2}\\dfrac{\\partial^{2}u}{\\partial x^{2}}$, where the constant $a>0$ is the **wave speed** (length per time) and $a^{2}$ is fixed by the medium, for instance $a^{2}=T/\\rho$ for a string (tension over linear density).\n\nThe equation factors as $\\left(\\partial_t-a\\partial_x\\right)\\left(\\partial_t+a\\partial_x\\right)u=0$. It holds whenever either factor annihilates $u$, so any function of the form $u=F(x-at)$ or $u=G(x+at)$ is a solution: the first is a **right-moving wave** that travels to increasing $x$ with speed $a$ without changing shape, the second a **left-moving wave**, and the general solution superposes the two.\n\nTwo ways of adding data are typical. On the whole line one poses the **Cauchy problem** $u(x,0)=\\varphi(x)$, $u_t(x,0)=\\psi(x)$, whose explicit solution is d'Alembert's formula. On a finite string one solves an initial-boundary value problem by separation of variables and Fourier series, obtaining superpositions of standing waves (normal modes).\n\nThe wave equation is the prototype **hyperbolic** equation and has two hallmark features: **finite propagation speed** — a disturbance travels at most at speed $a$, so the solution at a point depends only on data in a finite interval; and **energy conservation with time reversibility** — without damping the sum of kinetic and potential energy is constant, and replacing $t$ by $-t$ keeps a solution a solution. Both contrast sharply with the heat equation.",
+    "formulas": [
+      {
+        "latex": "\\frac{\\partial^{2}u}{\\partial t^{2}}=a^{2}\\frac{\\partial^{2}u}{\\partial x^{2}}",
+        "note": "一维波动方程。$a>0$ 是波速；弦振动中 $a^{2}=T/\\rho$（张力除以线密度）。",
+        "noteEn": "The one-dimensional wave equation. $a>0$ is the wave speed; for a string $a^{2}=T/\\rho$ (tension over linear density)."
+      },
+      {
+        "latex": "\\left(\\frac{\\partial}{\\partial t}-a\\frac{\\partial}{\\partial x}\\right)\\left(\\frac{\\partial}{\\partial t}+a\\frac{\\partial}{\\partial x}\\right)u=0",
+        "note": "算子因式分解：两个一阶算子分别对应沿 $x-at=\\mathrm{const}$ 与 $x+at=\\mathrm{const}$ 两个方向的导数。",
+        "noteEn": "Operator factorisation: the two first-order factors act as directional derivatives along $x-at=\\mathrm{const}$ and $x+at=\\mathrm{const}$."
+      },
+      {
+        "latex": "u(x,t)=F(x-at)+G(x+at)",
+        "note": "通解：右行波与左行波之和，$F,G$ 任意二次可微。每一项波形不变，只作整体平移。",
+        "noteEn": "General solution: the sum of a right-moving and a left-moving wave, with arbitrary twice differentiable $F,G$. Each keeps its shape and simply translates."
+      },
+      {
+        "latex": "x-at=\\mathrm{const},\\qquad x+at=\\mathrm{const}",
+        "note": "两族特征线；扰动沿它们传播，这也是双曲型方程的两族实特征线。",
+        "noteEn": "The two characteristic families along which disturbances travel; they are exactly the two real characteristic families of a hyperbolic equation."
+      },
+      {
+        "latex": "E(t)=\\frac{1}{2}\\int_{-\\infty}^{\\infty}\\left(u_t^{2}+a^{2}u_x^{2}\\right)dx=\\mathrm{const}",
+        "note": "能量守恒（无源、无阻尼、无穷远处衰减）：动能（含 $u_t^{2}$）与势能（含 $u_x^{2}$）之和与 $t$ 无关。",
+        "noteEn": "Energy conservation (no sources, no damping, decaying at infinity): the sum of kinetic energy (with $u_t^{2}$) and potential energy (with $u_x^{2}$) is independent of $t$."
+      }
+    ],
+    "expression": {
+      "text": "u_tt = a^2 u_xx（a > 0 为波速）",
+      "symbol": "u_{tt} = a^{2} u_{xx}",
+      "note": "一维波动方程；解是右行波 F(x−at) 与左行波 G(x+at) 的叠加。",
+      "noteEn": "The one-dimensional wave equation; solutions superpose a right-moving wave F(x−at) and a left-moving wave G(x+at)."
+    },
+    "properties": [
+      "有限传播速度：$u(x,t)$ 只依赖 $\\varphi(x\\pm at)$ 与区间 $[x-at,\\,x+at]$ 上的 $\\psi$，该区间之外的初值不影响这个点。",
+      "叠加原理：任意多个行波解之和仍是解；两个反向行波叠加可以产生驻波，如 $\\sin(x+t)+\\sin(x-t)=2\\sin x\\cos t$。",
+      "时间可逆：$u(x,t)$ 是解则 $u(x,-t)$ 也是解（时间方向只出现二阶导数），与热方程的时间不可逆形成对比。",
+      "初值的光滑性决定解的光滑性：$\\varphi\\in C^{2}$、$\\psi\\in C^{1}$ 时得到经典解；数据不光滑时解只能按广义意义理解，间断沿特征线传播。",
+      "特征线 $x\\pm at=\\mathrm{const}$ 是信息的传播路径；按分类它满足 $\\Delta=a^{2}>0$，是标准的双曲型方程。"
+    ],
+    "propertiesEn": [
+      "Finite propagation speed: $u(x,t)$ depends only on $\\varphi(x\\pm at)$ and on $\\psi$ over the interval $[x-at,\\,x+at]$; data outside this interval do not affect the point.",
+      "Superposition: any sum of travelling-wave solutions is again a solution; two counter-propagating waves can produce a standing wave, e.g. $\\sin(x+t)+\\sin(x-t)=2\\sin x\\cos t$.",
+      "Time reversibility: if $u(x,t)$ is a solution then so is $u(x,-t)$ (only second time derivatives appear), in contrast to the irreversibility of the heat equation.",
+      "Smoothness of the data governs smoothness of the solution: $\\varphi\\in C^{2}$ and $\\psi\\in C^{1}$ give a classical solution; for rougher data the solution is understood in a generalised sense, with discontinuities travelling along characteristics.",
+      "The lines $x\\pm at=\\mathrm{const}$ are the paths along which information travels; in the classification scheme the equation has $\\Delta=a^{2}>0$ and is the standard hyperbolic example."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(x)",
+          "color": "#4cc9f0",
+          "label": "t = 0：u = sin x"
+        },
+        {
+          "expr": "sin(x-1)",
+          "color": "#ff6b9d",
+          "label": "t = 1：波形右移 a"
+        },
+        {
+          "expr": "sin(x-2)",
+          "color": "#ffd166",
+          "label": "t = 2：波形右移 2a"
+        }
+      ],
+      "xRange": [
+        -1,
+        8
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "title": "行波：波形 sin x 以速度 a 向右平移（取 a = 1，三个时刻的快照）"
+    },
+    "examples": [
+      {
+        "problem": "验证 $u(x,t)=\\sin(x-at)$ 满足波动方程 $u_{tt}=a^{2}u_{xx}$，并说明它的传播方向。",
+        "solution": "求导：$u_x=\\cos(x-at)$，$u_{xx}=-\\sin(x-at)$；$u_t=-a\\cos(x-at)$，$u_{tt}=-a^{2}\\sin(x-at)$。于是 $u_{tt}=-a^{2}\\sin(x-at)=a^{2}u_{xx}$，满足方程。波形是 $\\sin$，随 $t$ 增大整体向 $x$ 正方向平移、速度为 $a$，故它是形如 $F(x-at)$ 的右行波。"
+      },
+      {
+        "problem": "求解 Cauchy 问题 $u_{tt}=u_{xx}$（$a=1$），$u(x,0)=\\sin x$，$u_t(x,0)=\\cos x$。",
+        "solution": "用达朗贝尔公式（$a=1$）：\\n\\n$$u(x,t)=\\frac{1}{2}\\left[\\sin(x+t)+\\sin(x-t)\\right]+\\frac{1}{2}\\int_{x-t}^{x+t}\\cos s\\,ds.$$\\n\\n由和差化积 $\\sin(x+t)+\\sin(x-t)=2\\sin x\\cos t$，而第二项等于 $\\frac{1}{2}\\left[\\sin(x+t)-\\sin(x-t)\\right]=\\cos x\\sin t$，所以\\n\\n$$u(x,t)=\\sin x\\cos t+\\cos x\\sin t=\\sin(x+t).$$\\n\\n检验：$u(x,0)=\\sin x$，$u_t(x,0)=\\cos x$，且 $u_{tt}=-\\sin(x+t)=u_{xx}$——解是一个单个的右行波，正好与两个行波叠加成驻波再还原一致。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "波动方程",
+      "双曲型",
+      "波速"
+    ],
+    "links": [
+      "dalembert-formula",
+      "classification-pde",
+      "separation-of-variables",
+      "fourier-series",
+      "pde-well-posedness"
+    ]
+  },
+  {
+    "id": "dalembert-formula",
+    "title": "达朗贝尔公式",
+    "titleEn": "d'Alembert's Formula",
+    "branch": "pde",
+    "level": 5,
+    "summary": "一维波动方程 Cauchy 问题的显式解：$u=\\frac{1}{2}\\left[\\varphi(x+at)+\\varphi(x-at)\\right]+\\frac{1}{2a}\\int_{x-at}^{x+at}\\psi(s)\\,ds$。",
+    "summaryEn": "The explicit solution of the Cauchy problem for the 1D wave equation: half the initial displacement at the two characteristic points plus the integral of the initial velocity over $[x-at,x+at]$ divided by $2a$.",
+    "definition": "**达朗贝尔公式**（d'Alembert's formula，1747）给出一维波动方程 Cauchy 问题的显式解：对 $u_{tt}=a^{2}u_{xx}$（$-\\infty<x<\\infty$，$t>0$）与初值 $u(x,0)=\\varphi(x)$、$u_t(x,0)=\\psi(x)$，有\\n\\n$$u(x,t)=\\frac{1}{2}\\left[\\varphi(x+at)+\\varphi(x-at)\\right]+\\frac{1}{2a}\\int_{x-at}^{x+at}\\psi(s)\\,ds.$$\\n\\n它由通解 $F(x-at)+G(x+at)$ 代入两个初值条件解出 $F$ 与 $G$ 得到。\n\n逐项理解：第一项 $\\frac{1}{2}\\varphi(x-at)+\\frac{1}{2}\\varphi(x+at)$ 把初始位移分成两个**半高**的行波，分别以速度 $a$ 向右、向左传播——这正是系数 $\\frac{1}{2}$ 的来源；第二项把初始速度 $\\psi$ 在区间 $[x-at,\\,x+at]$ 上积分再除以 $2a$，区间长度恰为 $2at$，代表初始速度对位移的累积贡献。要牢记三处细节：两个 $\\frac{1}{2}$、分子里的 $1/(2a)$、以及积分上下限 $x-at$ 与 $x+at$。\n\n把公式在 $t=0$ 处检查：第一项给出 $\\frac{1}{2}[\\varphi(x)+\\varphi(x)]=\\varphi(x)$，第二项积分为零，初始位移条件成立；对 $t$ 求导（积分用莱布尼茨公式）后再令 $t=0$，正负号相消后剩下 $\\psi(x)$，初始速度条件也自动满足。\n\n公式还直接读出因果结构：$(x,t)$ 处的解只依赖 $\\varphi$ 在两点 $x\\pm at$ 的值与 $\\psi$ 在区间 $[x-at,\\,x+at]$ 上的值，这就是**依赖区间**；区间外的初值变化不影响 $u(x,t)$，体现有限传播速度。半直线或有限区间上的问题可以通过奇偶延拓化为全直线问题。",
+    "definitionEn": "**d'Alembert's formula** (1747) gives the explicit solution of the Cauchy problem for the one-dimensional wave equation: for $u_{tt}=a^{2}u_{xx}$ ($-\\infty<x<\\infty$, $t>0$) with data $u(x,0)=\\varphi(x)$ and $u_t(x,0)=\\psi(x)$,\\n\\n$$u(x,t)=\\frac{1}{2}\\left[\\varphi(x+at)+\\varphi(x-at)\\right]+\\frac{1}{2a}\\int_{x-at}^{x+at}\\psi(s)\\,ds.$$\\n\\nIt is obtained by substituting the general solution $F(x-at)+G(x+at)$ into the two initial conditions and solving for $F$ and $G$.\n\nReading it term by term: the first term $\\frac{1}{2}\\varphi(x-at)+\\frac{1}{2}\\varphi(x+at)$ splits the initial displacement into two **half-height** travelling waves moving right and left with speed $a$ — this is where the factor $\\frac{1}{2}$ comes from. The second term integrates the initial velocity $\\psi$ over $[x-at,\\,x+at]$ and divides by $2a$; the interval has length $2at$ and accounts for the accumulated contribution of the initial velocity. Three details must be memorised: the two factors $\\frac{1}{2}$, the factor $1/(2a)$, and the limits $x-at$ and $x+at$.\n\nChecking at $t=0$: the first term gives $\\frac{1}{2}[\\varphi(x)+\\varphi(x)]=\\varphi(x)$ while the integral vanishes, so the initial displacement is reproduced; differentiating with respect to $t$ (Leibniz rule for the integral) and then setting $t=0$ leaves $\\psi(x)$, so the initial velocity condition holds as well.\n\nThe formula also displays the causal structure directly: the solution at $(x,t)$ depends only on the values of $\\varphi$ at the two points $x\\pm at$ and on $\\psi$ over $[x-at,\\,x+at]$ — the **interval of dependence**. Data outside this interval cannot influence $u(x,t)$, which is finite propagation speed. Problems on a half-line or a finite interval can be reduced to the whole-line problem by odd or even extension.",
+    "formulas": [
+      {
+        "latex": "u(x,t)=\\frac{1}{2}\\big[\\varphi(x+at)+\\varphi(x-at)\\big]+\\frac{1}{2a}\\int_{x-at}^{x+at}\\psi(s)\\,ds",
+        "note": "达朗贝尔公式。第一项来自初始位移，第二项来自初始速度；注意两个 $\\frac{1}{2}$、因子 $\\frac{1}{2a}$、积分区间 $[x-at,\\,x+at]$（长度 $2at$）。",
+        "noteEn": "d'Alembert's formula: the first term comes from the initial displacement, the second from the initial velocity. Mind the two factors $\\frac{1}{2}$, the factor $\\frac{1}{2a}$ and the interval $[x-at,\\,x+at]$ of length $2at$."
+      },
+      {
+        "latex": "u(x,0)=\\frac{1}{2}\\big[\\varphi(x)+\\varphi(x)\\big]+0=\\varphi(x)",
+        "note": "第一个初值条件的验证：$t=0$ 时积分退化为零，两端点合并为 $\\varphi(x)$。",
+        "noteEn": "Verification of the first initial condition: at $t=0$ the integral degenerates to zero and the two endpoints merge into $\\varphi(x)$."
+      },
+      {
+        "latex": "u_t(x,t)=\\frac{a}{2}\\big[\\varphi'(x+at)-\\varphi'(x-at)\\big]+\\frac{1}{2}\\big[\\psi(x+at)+\\psi(x-at)\\big]",
+        "note": "对 $t$ 求导（莱布尼茨公式）。特别地 $u_t(x,0)=\\frac{1}{2}[\\psi(x)+\\psi(x)]=\\psi(x)$，与第二个初值条件一致。",
+        "noteEn": "Differentiation in $t$ (Leibniz rule). In particular $u_t(x,0)=\\frac{1}{2}[\\psi(x)+\\psi(x)]=\\psi(x)$, matching the second initial condition."
+      },
+      {
+        "latex": "\\psi=0:\\qquad u(x,t)=\\frac{1}{2}\\varphi(x-at)+\\frac{1}{2}\\varphi(x+at)",
+        "note": "初始速度为零时，初始波形分裂成两个半高峰值的行波，方向相反、速度都是 $a$，每个只携带一半幅度。",
+        "noteEn": "When the initial velocity vanishes, the initial profile splits into two half-height travelling waves moving in opposite directions with speed $a$, each carrying half the amplitude."
+      },
+      {
+        "latex": "\\left[\\,x-at,\\ x+at\\,\\right],\\qquad t=\\frac{|x-x_0|}{a}",
+        "note": "依赖区间 $[x-at,\\,x+at]$；从 $x_0$ 出发的信号在时刻 $t=|x-x_0|/a$ 到达 $x$，这与「波速为 $a$」完全一致。",
+        "noteEn": "The interval of dependence $[x-at,\\,x+at]$; a signal starting at $x_0$ reaches $x$ at time $t=|x-x_0|/a$, exactly as expected for wave speed $a$."
+      }
+    ],
+    "properties": [
+      "公式只涉及 $\\varphi$ 的两点值与 $\\psi$ 的区间积分，直接体现双曲型方程的有限传播速度与依赖区间。",
+      "$\\psi=0$ 时解是两个半高行波 $\\frac{1}{2}\\varphi(x\\mp at)$ 之和；单个脉冲会一分为二、反向传播，各带一半幅度。",
+      "只要 $\\varphi$ 有二阶连续导数、$\\psi$ 有一阶连续导数，公式就给出唯一的经典解；数据更弱时公式仍可作为广义解的定义。",
+      "半直线或有限区间上的问题可用奇延拓（Dirichlet 边界 $u=0$）或偶延拓（Neumann 边界 $u_x=0$）化成全直线问题，边界的反射等价于一个镜像波。",
+      "因果性与可逆性：$t$ 时刻的解只由过去光锥内的数据决定；方程对时间只有二阶导数，$t\\to -t$ 后公式仍然成立。"
+    ],
+    "propertiesEn": [
+      "The formula involves only two point values of $\\varphi$ and an integral of $\\psi$ over an interval, making finite propagation speed and the interval of dependence explicit.",
+      "When $\\psi=0$ the solution is the sum of two half-height travelling waves $\\frac{1}{2}\\varphi(x\\mp at)$; a single pulse splits into two opposite-moving pulses, each carrying half the amplitude.",
+      "As soon as $\\varphi\\in C^{2}$ and $\\psi\\in C^{1}$, the formula gives the unique classical solution; for weaker data it still defines a generalised solution.",
+      "Problems on a half-line or a finite interval are reduced to the whole-line problem by odd extension (Dirichlet boundary $u=0$) or even extension (Neumann boundary $u_x=0$); a boundary reflection acts like a mirror wave.",
+      "Causality and reversibility: the solution at time $t$ is determined by data inside the past light cone, and because only a second time derivative occurs, the formula remains valid under $t\\to -t$."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2)",
+          "color": "#8b9dff",
+          "label": "初始脉冲 φ(x)（t=0）"
+        },
+        {
+          "expr": "0.5*exp(-(x-2)^2)",
+          "color": "#4cc9f0",
+          "label": "右行波 ½φ(x−at)，t=2"
+        },
+        {
+          "expr": "0.5*exp(-(x+2)^2)",
+          "color": "#ff6b9d",
+          "label": "左行波 ½φ(x+at)，t=2"
+        }
+      ],
+      "xRange": [
+        -6,
+        6
+      ],
+      "yRange": [
+        -0.05,
+        1.15
+      ],
+      "title": "达朗贝尔公式：初始脉冲 φ(x)=e^(−x²) 分裂为左右两个半高行波（a=1, t=2）"
+    },
+    "examples": [
+      {
+        "problem": "用达朗贝尔公式求解 $u_{tt}=u_{xx}$（$a=1$），$u(x,0)=0$，$u_t(x,0)=\\cos x$。",
+        "solution": "$\\varphi=0$，第一项为零；第二项为\\n\\n$$u(x,t)=\\frac{1}{2}\\int_{x-t}^{x+t}\\cos s\\,ds=\\frac{1}{2}\\left[\\sin(x+t)-\\sin(x-t)\\right]=\\cos x\\sin t.$$\\n\\n检验：$u(x,0)=0$，$u_t(x,0)=\\cos x$，且 $u_{tt}=-\\cos x\\sin t=u_{xx}$，全部吻合。"
+      },
+      {
+        "problem": "设 $a=1$，$u(x,0)=e^{-x^{2}}$，$u_t(x,0)=0$。写出 $u(x,t)$，并描述 $t=2$ 时图像的形状。",
+        "solution": "由公式（$\\psi=0$）：\\n\\n$$u(x,t)=\\frac{1}{2}e^{-(x-t)^{2}}+\\frac{1}{2}e^{-(x+t)^{2}}.$$\\n\\n$t=2$ 时，两个半高峰值的高斯脉冲分别以 $x=2$ 与 $x=-2$ 为中心，随 $t$ 增大以速度 $1$ 继续向两侧分开；每个脉冲高度是原来的一半、形状不变，两个中心之间的距离为 $2at=4$。这就是「一个脉冲分裂成两个半高行波」的直观图像。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "达朗贝尔公式",
+      "波动方程",
+      "行波"
+    ],
+    "links": [
+      "wave-equation",
+      "classification-pde",
+      "pde-well-posedness",
+      "fourier-transform"
+    ]
+  },
+  {
+    "id": "heat-equation",
+    "title": "热传导方程",
+    "titleEn": "Heat Equation",
+    "branch": "pde",
+    "level": 5,
+    "summary": "热传导（扩散）方程 $u_t=a^{2}u_{xx}$；基本解是高斯形的热核 $\\Phi=\\frac{1}{2a\\sqrt{\\pi t}}e^{-x^{2}/(4a^{2}t)}$，解具有无限传播速度与立即变光滑的性质。",
+    "summaryEn": "The heat (diffusion) equation $u_t=a^{2}u_{xx}$; its fundamental solution is the Gaussian heat kernel $\\Phi=\\frac{1}{2a\\sqrt{\\pi t}}e^{-x^{2}/(4a^{2}t)}$, and solutions propagate at infinite speed and become instantly smooth.",
+    "definition": "**热传导方程**（也称扩散方程）$\\dfrac{\\partial u}{\\partial t}=a^{2}\\dfrac{\\partial^{2}u}{\\partial x^{2}}$ 描述温度或浓度随时间的演化，$a^{2}>0$ 是热扩散系数（由导热系数、密度与比热决定）。它对时间只含一阶导数、对空间含二阶导数，所以初始条件只需给出 $t=0$ 时的分布，边界条件给出区间两端的约束。\n\n物理直觉全在空间曲率里：$u_{xx}>0$ 处分布是凹向上的，该点温度低于邻近平均，热量流入使其升高；$u_{xx}<0$ 处相反。于是任何不均匀都会被逐渐抹平，这就是扩散的本质，也是方程属于抛物型的直观来源。\n\n最基本的一步是求**基本解**：初值取 $\\delta(x)$ 时解为**热核**\\n\\n$$\\Phi(x,t)=\\frac{1}{2a\\sqrt{\\pi t}}\\exp\\left(-\\frac{x^{2}}{4a^{2}t}\\right),\\qquad t>0,$$\\n\\n它是宽度随 $\\sqrt{t}$ 变大、峰值按 $1/\\sqrt{t}$ 变低的高斯；任意初值 $\\varphi$ 的 Cauchy 解是 $\\Phi$ 与 $\\varphi$ 的卷积。\n\n热方程有两个「反直觉」但重要的性质：**无限传播速度**——初值是原点处的正脉冲时，任意小的 $t>0$ 后解对所有 $x$ 都是正的（远处只是极小），扰动的影响没有有限传播速度；**立即变光滑**——只要初值可积，$t>0$ 后解关于 $x$ 就无限次可微。此外时间不可逆，反向问题是严重不适定的。",
+    "definitionEn": "The **heat equation** (also called the diffusion equation) $\\dfrac{\\partial u}{\\partial t}=a^{2}\\dfrac{\\partial^{2}u}{\\partial x^{2}}$ describes the evolution of temperature or concentration, where $a^{2}>0$ is the thermal diffusivity (determined by conductivity, density and specific heat). It contains a first time derivative and a second space derivative, so an initial condition gives the distribution at $t=0$ and boundary conditions constrain the two ends of the interval.\n\nThe physical intuition lies in the spatial curvature: where $u_{xx}>0$ the profile is concave up, the point is cooler than its neighbours, and heat flows in to warm it; where $u_{xx}<0$ the opposite happens. Every nonuniformity is gradually smoothed out — the essence of diffusion and the intuitive reason why the equation is parabolic.\n\nThe basic building block is the **fundamental solution**: starting from the initial datum $\\delta(x)$ one obtains the **heat kernel**\\n\\n$$\\Phi(x,t)=\\frac{1}{2a\\sqrt{\\pi t}}\\exp\\left(-\\frac{x^{2}}{4a^{2}t}\\right),\\qquad t>0,$$\\n\\na Gaussian whose width grows like $\\sqrt{t}$ while its peak decays like $1/\\sqrt{t}$. For arbitrary initial data $\\varphi$ the Cauchy solution is the convolution of $\\Phi$ with $\\varphi$.\n\nTwo properties of the heat equation are counter-intuitive yet essential: **infinite propagation speed** — from a positive pulse at the origin the solution is positive everywhere for every $t>0$, however small (exponentially tiny far away), so disturbances have no finite speed; and **instant smoothing** — as soon as the initial datum is integrable, the solution is infinitely differentiable in $x$ for $t>0$. The equation is also irreversible in time, and the backward problem is severely ill posed.",
+    "formulas": [
+      {
+        "latex": "\\frac{\\partial u}{\\partial t}=a^{2}\\frac{\\partial^{2}u}{\\partial x^{2}}",
+        "note": "一维热传导（扩散）方程，$a^{2}>0$ 是热扩散系数；常取标准形 $a^{2}=1$。",
+        "noteEn": "The one-dimensional heat (diffusion) equation, with thermal diffusivity $a^{2}>0$; the normalised form $a^{2}=1$ is common."
+      },
+      {
+        "latex": "\\Phi(x,t)=\\frac{1}{2a\\sqrt{\\pi t}}\\exp\\left(-\\frac{x^{2}}{4a^{2}t}\\right),\\qquad t>0",
+        "note": "热核（基本解）。分母是 $2a\\sqrt{\\pi t}$，指数内的分母是 $4a^{2}t$——这两处最容易写错。",
+        "noteEn": "The heat kernel (fundamental solution). The prefactor is $1/(2a\\sqrt{\\pi t})$ and the exponent has denominator $4a^{2}t$ — the two spots where mistakes are most common."
+      },
+      {
+        "latex": "\\int_{-\\infty}^{\\infty}\\Phi(x,t)\\,dx=1,\\qquad \\lim_{t\\to 0^{+}}\\Phi(x,t)=\\delta(x)",
+        "note": "热核是概率密度：总积分为 $1$（总热量守恒），$t\\to 0^{+}$ 时在弱意义下收敛到 $\\delta$ 函数。",
+        "noteEn": "The heat kernel is a probability density: its integral is $1$ (conservation of total heat) and it converges weakly to $\\delta(x)$ as $t\\to 0^{+}$."
+      },
+      {
+        "latex": "u(x,t)=\\int_{-\\infty}^{\\infty}\\Phi(x-y,t)\\,\\varphi(y)\\,dy",
+        "note": "任意初值 $u(x,0)=\\varphi(x)$ 的 Cauchy 解＝热核与初值的卷积；每一步都在做「高斯加权平均」，所以解立即变光滑。",
+        "noteEn": "The Cauchy solution with initial data $u(x,0)=\\varphi(x)$ is the convolution of the heat kernel with $\\varphi$; each application is a Gaussian-weighted average, which is why the solution is instantly smooth."
+      },
+      {
+        "latex": "E(t)=\\frac{1}{2}\\int_{-\\infty}^{\\infty}u^{2}\\,dx,\\qquad \\frac{dE}{dt}=-a^{2}\\int_{-\\infty}^{\\infty}u_x^{2}\\,dx\\le 0",
+        "note": "能量耗散：方程乘 $u$ 后分部积分（边界项消失）即得；能量单调不增，解最终趋于常数。",
+        "noteEn": "Energy dissipation: multiply the equation by $u$ and integrate by parts (boundary terms vanish); the energy is nonincreasing and the solution eventually decays to a constant."
+      }
+    ],
+    "expression": {
+      "text": "u_t = a^2 u_xx（t > 0，a^2 为热扩散系数）",
+      "symbol": "u_t = a^2 u_xx",
+      "note": "一维热传导方程；基本解是高斯形的热核，解随时间变矮变宽。",
+      "noteEn": "The one-dimensional heat equation; its fundamental solution is the Gaussian heat kernel, and solutions flatten and spread as time grows."
+    },
+    "properties": [
+      "无限传播速度：初值非负且不恒为零时，任意 $t>0$ 后的解对一切 $x$ 都大于零（热核为正）——与波动方程的有限传播速度形成鲜明对比。",
+      "平滑效应（正则化）：$t>0$ 后解关于 $x$ 无限次可微甚至实解析，初值的粗糙性被立刻抹平。",
+      "最大值原理：无源时内部不会出现新的最高或最低温度，极值由初值与边界控制，这也给出解的稳定性估计。",
+      "时间不可逆：方程对时间只有一阶导数，反向问题把高频扰动指数放大，严重不适定，是熵增方向的数学体现。",
+      "抛物型方程（判别式 $\\Delta=B^{2}-AC=0$）；适定的提法是初始条件＋两端边界条件，两者缺一不可。"
+    ],
+    "propertiesEn": [
+      "Infinite propagation speed: starting from nonnegative data that are not identically zero, the solution is positive everywhere for every $t>0$ (the heat kernel is positive), in sharp contrast with the finite speed of the wave equation.",
+      "Smoothing (regularisation): for $t>0$ the solution is infinitely differentiable in $x$, indeed real analytic; roughness of the initial datum is wiped out immediately.",
+      "Maximum principle: with no sources no new maximum or minimum can appear in the interior; extremes are controlled by the initial and boundary data, which also yields stability estimates.",
+      "Irreversibility in time: only a first time derivative appears, and the backward problem amplifies high-frequency perturbations exponentially — severely ill posed, reflecting the direction of increasing entropy.",
+      "A parabolic equation (discriminant $\\Delta=B^{2}-AC=0$); the well-posed formulation needs an initial condition plus boundary conditions at both ends, none of which can be dropped."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/(2*sqrt(PI*0.1))*exp(-x^2/(4*0.1))",
+          "color": "#4cc9f0",
+          "label": "t = 0.1（尖而高）"
+        },
+        {
+          "expr": "1/(2*sqrt(PI*0.5))*exp(-x^2/(4*0.5))",
+          "color": "#ff6b9d",
+          "label": "t = 0.5"
+        },
+        {
+          "expr": "1/(2*sqrt(PI*2))*exp(-x^2/(4*2))",
+          "color": "#ffd166",
+          "label": "t = 2（矮而宽）"
+        }
+      ],
+      "xRange": [
+        -6,
+        6
+      ],
+      "yRange": [
+        0,
+        1
+      ],
+      "title": "热核 Φ(x,t)：随 t 增大峰值按 1/√t 降低、宽度按 √t 增大（a=1）"
+    },
+    "examples": [
+      {
+        "problem": "验证热核 $\\Phi(x,t)=\\frac{1}{2a\\sqrt{\\pi t}}e^{-x^{2}/(4a^{2}t)}$（$t>0$）满足热方程 $\\Phi_t=a^{2}\\Phi_{xx}$。",
+        "solution": "取对数得 $\\ln\\Phi=-\\frac{x^{2}}{4a^{2}t}-\\ln\\left(2a\\sqrt{\\pi}\\right)-\\frac{1}{2}\\ln t$，逐项求导：\\n\\n$$\\Phi_t=\\Phi\\left(\\frac{x^{2}}{4a^{2}t^{2}}-\\frac{1}{2t}\\right),\\qquad \\Phi_x=\\Phi\\cdot\\left(-\\frac{x}{2a^{2}t}\\right).$$\\n\\n再求一次空间导数得 $\\Phi_{xx}=\\Phi\\left(\\frac{x^{2}}{4a^{4}t^{2}}-\\frac{1}{2a^{2}t}\\right)$，于是\\n\\n$$a^{2}\\Phi_{xx}=\\Phi\\left(\\frac{x^{2}}{4a^{2}t^{2}}-\\frac{1}{2t}\\right)=\\Phi_t,$$\\n\\n所以热核在 $t>0$ 上满足热方程。（$t=0$ 处热核无定义，只能作为 $\\delta$ 函数的极限来理解。）"
+      },
+      {
+        "problem": "证明 $\\int_{-\\infty}^{\\infty}\\Phi(x,t)\\,dx=1$，并说明 $t$ 增大时热核的峰值与宽度如何变化。",
+        "solution": "作代换 $x=2a\\sqrt{t}\\,z$，则 $dx=2a\\sqrt{t}\\,dz$，指数化为 $-z^{2}$：\\n\\n$$\\int_{-\\infty}^{\\infty}\\Phi\\,dx=\\frac{1}{2a\\sqrt{\\pi t}}\\cdot 2a\\sqrt{t}\\int_{-\\infty}^{\\infty}e^{-z^{2}}dz=\\frac{1}{\\sqrt{\\pi}}\\cdot\\sqrt{\\pi}=1.$$\\n\\n峰值 $\\Phi(0,t)=\\frac{1}{2a\\sqrt{\\pi t}}$ 按 $t^{-1/2}$ 下降，而分布的标准差为 $\\sqrt{2}\\,a\\sqrt{t}$，按 $\\sqrt{t}$ 增长：热核随时间变矮、变宽，但总面积（总热量）恒为 $1$。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "热传导方程",
+      "扩散",
+      "热核"
+    ],
+    "links": [
+      "fourier-series",
+      "separation-of-variables",
+      "wave-equation",
+      "maximum-principle",
+      "classification-pde"
+    ]
+  },
+  {
+    "id": "laplace-equation",
+    "title": "拉普拉斯方程",
+    "titleEn": "Laplace's Equation",
+    "branch": "pde",
+    "level": 5,
+    "summary": "$\\Delta u=u_{xx}+u_{yy}=0$；解是调和函数，方程属于椭圆型，是只带边界条件的边值问题（没有初始条件），描述稳态现象。",
+    "summaryEn": "Laplace's equation $\\Delta u=u_{xx}+u_{yy}=0$; its solutions are harmonic functions, the equation is elliptic, and it is a pure boundary value problem with no initial conditions, modelling steady states.",
+    "definition": "**拉普拉斯方程**是 $\\Delta u=\\dfrac{\\partial^{2}u}{\\partial x^{2}}+\\dfrac{\\partial^{2}u}{\\partial y^{2}}=0$（$n$ 维时 $\\Delta u=\\sum_{i=1}^{n}u_{x_ix_i}=0$），满足它的函数称为**调和函数**。它描述不随时间变化的**稳态**：热传导的平衡温度、无电荷区域的静电位、不可压无旋流的速度势都满足它。\n\n从热方程可以看它的来历：稳态意味着 $\\partial u/\\partial t=0$，于是 $u_t=a^{2}u_{xx}$ 退化为 $u_{xx}=0$；在二维或更高维空间中就变成 $\\Delta u=0$。方程不含时间导数，所以**只有边界条件、没有初始条件**：给定边界数据求内部值，统称边值问题，按边界条件的类型分为 Dirichlet、Neumann、Robin 三种。\n\n按二阶方程的分类它属于**椭圆型**（$A=C=1$，$B=0$，判别式 $-1<0$）。椭圆型方程的解在区域内部非常光滑（实解析），并且满足两个漂亮的性质：**最大值原理**——非常数解不能在内部取得最大值或最小值，极值只能出现在边界；**均值性质**——一点处的值等于以该点为心的圆周或圆盘上的平均值。这两个性质是唯一性与稳定性证明的基本工具。\n\n它的基本解 $\\Gamma=\\dfrac{1}{2\\pi}\\ln r$ 在除原点外处处调和，是构造**格林函数**、求解边值问题的出发点；但它在原点奇异、无界，所以不能充当含原点区域 Dirichlet 问题的解——这也从侧面说明：有界调和函数完全由边界值决定。",
+    "definitionEn": "**Laplace's equation** is $\\Delta u=\\dfrac{\\partial^{2}u}{\\partial x^{2}}+\\dfrac{\\partial^{2}u}{\\partial y^{2}}=0$ (in $n$ dimensions, $\\Delta u=\\sum_{i=1}^{n}u_{x_ix_i}=0$); its solutions are called **harmonic functions**. It describes **steady states** that do not change in time: equilibrium temperatures, electrostatic potentials in charge-free regions and velocity potentials of irrotational incompressible flow all satisfy it.\n\nIts origin is visible in the heat equation: a steady state means $\\partial u/\\partial t=0$, so $u_t=a^{2}u_{xx}$ degenerates to $u_{xx}=0$, which in two or more dimensions becomes $\\Delta u=0$. Since no time derivative occurs there are **only boundary conditions and no initial conditions**: prescribing boundary data and asking for the interior values is a boundary value problem, split into Dirichlet, Neumann and Robin types according to the boundary condition used.\n\nIn the classification of second-order equations it is **elliptic** ($A=C=1$, $B=0$, discriminant $-1<0$). Elliptic solutions are extremely smooth inside the domain (real analytic) and enjoy two elegant properties: the **maximum principle** — a nonconstant solution cannot attain an interior maximum or minimum, so extremes occur on the boundary; and the **mean value property** — the value at a point equals the average over any circle or disk centred there. These two properties are the basic tools for uniqueness and stability proofs.\n\nLaplace's fundamental solution $\\Gamma=\\dfrac{1}{2\\pi}\\ln r$ is harmonic everywhere except the origin and serves as the starting point for constructing **Green's functions** for boundary value problems; but it is singular and unbounded at the origin, so it cannot solve the Dirichlet problem on a domain containing the origin — further evidence that a bounded harmonic function is completely determined by its boundary values.",
+    "formulas": [
+      {
+        "latex": "\\Delta u=\\frac{\\partial^{2}u}{\\partial x^{2}}+\\frac{\\partial^{2}u}{\\partial y^{2}}=0",
+        "note": "二维拉普拉斯方程；满足它的函数称为调和函数。高维修成 $\\Delta u=\\sum_{i}u_{x_ix_i}=0$。",
+        "noteEn": "Laplace's equation in two dimensions; solutions are harmonic functions. In higher dimensions the sum runs over all $u_{x_ix_i}$."
+      },
+      {
+        "latex": "\\Delta u=\\frac{1}{r}\\frac{\\partial}{\\partial r}\\left(r\\frac{\\partial u}{\\partial r}\\right)+\\frac{1}{r^{2}}\\frac{\\partial^{2}u}{\\partial\\theta^{2}}=0",
+        "note": "极坐标形式；圆域、扇形域、环形域上的边值问题用它最方便，也是分离变量法的起点。",
+        "noteEn": "The polar form; it is the natural tool on disks, sectors and annuli and the starting point of separation of variables."
+      },
+      {
+        "latex": "\\Gamma(x,y)=\\frac{1}{2\\pi}\\ln r,\\qquad r=\\sqrt{x^{2}+y^{2}}",
+        "note": "二维基本解：$r>0$ 时调和。以它为核并结合边界条件可以构造 Green 函数。",
+        "noteEn": "The two-dimensional fundamental solution, harmonic for $r>0$; used as a kernel together with boundary data to construct Green's functions."
+      },
+      {
+        "latex": "u(\\mathbf{x}_0)=\\frac{1}{2\\pi r}\\oint_{\\partial B(\\mathbf{x}_0,r)}u\\,ds=\\frac{1}{\\pi r^{2}}\\iint_{B(\\mathbf{x}_0,r)}u\\,dA",
+        "note": "均值性质：调和函数在一点的值等于围绕它的圆周上的平均值，也等于对应圆盘上的平均值（两式等价）。",
+        "noteEn": "Mean value property: the value at a point equals both the average over any circle around it and the average over the enclosed disk, the two statements being equivalent."
+      },
+      {
+        "latex": "\\begin{cases}\\Delta u=0, & \\mathbf{x}\\in\\Omega,\\\\ u\\big|_{\\partial\\Omega}=g, & \\mathbf{x}\\in\\partial\\Omega\\end{cases}",
+        "note": "Dirichlet 边值问题：内部求调和函数、边界上取给定数据 $g$。$g$ 连续时解唯一且稳定；Neumann 问题给 $\\partial u/\\partial n$，Robin 给 $\\partial u/\\partial n+\\sigma u$。",
+        "noteEn": "The Dirichlet boundary value problem: find a harmonic function inside $\\Omega$ taking the prescribed values $g$ on the boundary. The solution is unique and stable for continuous $g$; the Neumann problem prescribes $\\partial u/\\partial n$ and the Robin problem $\\partial u/\\partial n+\\sigma u$."
+      }
+    ],
+    "expression": {
+      "text": "Δu = u_xx + u_yy = 0",
+      "symbol": "Δu = 0",
+      "note": "稳态（不含时间）的椭圆型方程，解是调和函数，只需边界条件。",
+      "noteEn": "A steady-state elliptic equation with no time variable; its solutions are harmonic functions fixed by boundary data alone."
+    },
+    "properties": [
+      "解是调和函数：在区域内部无限次可微、实解析；奇异只可能出现在区域边界或被挖掉的点（如基本解的原点）。",
+      "最大值原理：非常数调和函数在区域内部不能取得最大值或最小值，极值必在边界取到；对 Dirichlet 问题立即推出解的唯一性。",
+      "均值性质：$u(\\mathbf{x}_0)$ 等于以 $\\mathbf{x}_0$ 为心的圆周或圆盘上的平均值，由它可以推出最大值原理。",
+      "椭圆型方程的提法：只给边界条件（无初始条件）；Neumann 问题有解的必要条件是 $\\oint_{\\partial\\Omega}\\frac{\\partial u}{\\partial n}\\,ds=0$，且解只确定到相差一个常数。",
+      "稳定性：由最大值原理有 $\\sup_{\\Omega}|u|\\le\\sup_{\\partial\\Omega}|g|$，边界数据的微小改变只引起解的微小改变，边值问题是适定的。"
+    ],
+    "propertiesEn": [
+      "Solutions are harmonic: infinitely differentiable and real analytic inside the domain; singularities can only occur on the boundary or at removed points such as the origin in the fundamental solution.",
+      "Maximum principle: a nonconstant harmonic function has no interior maximum or minimum, so extremes occur on the boundary; uniqueness for the Dirichlet problem follows immediately.",
+      "Mean value property: $u(\\mathbf{x}_0)$ equals the average of $u$ over any circle or disk centred at $\\mathbf{x}_0$, and this implies the maximum principle.",
+      "Formulation for an elliptic equation: boundary data only, no initial conditions; the Neumann problem requires the compatibility condition $\\oint_{\\partial\\Omega}\\frac{\\partial u}{\\partial n}\\,ds=0$ and determines $u$ only up to an additive constant.",
+      "Stability: the maximum principle gives $\\sup_{\\Omega}|u|\\le\\sup_{\\partial\\Omega}|g|$, so small changes in the boundary data produce small changes in the solution — the boundary value problem is well posed."
+    ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "levels": 12,
+      "title": "u = x² − y² 的等值线：鞍面形状，却是 Δu = 0 的调和函数"
+    },
+    "examples": [
+      {
+        "problem": "验证 $u(x,y)=x^{2}-y^{2}$ 是调和函数，并给出它在单位圆边界上的值。",
+        "solution": "求二阶偏导：$u_{xx}=2$，$u_{yy}=-2$，因此 $\\Delta u=2+(-2)=0$，$u$ 调和。在单位圆上 $x=\\cos\\theta$、$y=\\sin\\theta$，边界值为\\n\\n$$u(1,\\theta)=\\cos^{2}\\theta-\\sin^{2}\\theta=\\cos 2\\theta.$$\\n\\n所以它恰好是 Dirichlet 问题 $\\Delta u=0$（$r<1$）、$u(1,\\theta)=\\cos 2\\theta$ 的解，用极坐标写就是 $u=r^{2}\\cos 2\\theta$。"
+      },
+      {
+        "problem": "验证 $u(x,y)=\\ln r$（$r>0$）是调和函数；它能作为单位圆盘（含原点）上的 Dirichlet 边值问题的解吗？",
+        "solution": "用极坐标形式：$u=\\ln r$ 只依赖 $r$，逐项计算得 $\\dfrac{1}{r}\\dfrac{\\partial}{\\partial r}\\left(r\\cdot\\dfrac{1}{r}\\right)=\\dfrac{1}{r}\\cdot 0=0$，角度方向导数为零，所以 $r>0$ 时 $\\Delta u=0$，$u$ 在除原点外处处调和。但它在原点奇异（$r\\to 0$ 时 $u\\to-\\infty$），不是圆盘内部处处有定义的函数，因此不能充当含原点区域的 Dirichlet 问题的解：边界数据 $g(\\theta)=u(1,\\theta)=0$，由唯一性解应是 $u\\equiv 0$。$\\ln r$ 的真正身份是二维基本解，用于构造 Green 函数。"
+      }
+    ],
+    "tags": [
+      "偏微分方程",
+      "拉普拉斯方程",
+      "调和函数",
+      "边值问题"
+    ],
+    "links": [
+      "harmonic-function",
+      "dirichlet-neumann",
+      "maximum-principle",
+      "separation-of-variables",
+      "green-function"
+    ]
+  }
+]

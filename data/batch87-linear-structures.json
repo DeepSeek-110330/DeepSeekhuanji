@@ -1,0 +1,451 @@
+[
+  {
+    "id": "sylvester-lyapunov",
+    "title": "矩阵方程：Sylvester 与 Lyapunov（含 Kronecker 积）",
+    "titleEn": "Matrix Equations: Sylvester and Lyapunov",
+    "branch": "linear",
+    "level": 5,
+    "summary": "Kronecker 积与 vec 拉直把矩阵方程化为普通线性方程组，给出 AX+XB=C 与 Lyapunov 方程的可解判据与解的积分表示。",
+    "summaryEn": "Kronecker products and the vec operator reduce matrix equations to ordinary linear systems, yielding solvability criteria and an integral representation for the Lyapunov equation.",
+    "definition": "把两个矩阵「拼」成一个大矩阵的标准方式是 **Kronecker 积**：设 $A=(a_{ij})$ 是 $m\\times n$ 矩阵、$B$ 是 $p\\times q$ 矩阵，则 $A\\otimes B=(a_{ij}B)$，即把 $A$ 的第 $(i,j)$ 个元素换成整个 $B$ 的数乘块。于是 $A\\otimes B$ 的尺寸是 $mp\\times nq$——两个方向的尺寸都相乘。它满足与矩阵乘法相容的混合积公式 $(A\\otimes B)(C\\otimes D)=(AC)\\otimes(BD)$（在 $AC$ 与 $BD$ 都有意义时），但它本身不交换：$A\\otimes B$ 与 $B\\otimes A$ 一般不相同，彼此只差一个置换相似。\n\n**vec 算子**把矩阵按列拉直成列向量：$\\operatorname{vec}(X)$ 就是把 $X$ 的各列自上而下排成一列。它与 Kronecker 积的配合给出恒等式 $\\operatorname{vec}(AXB)=(B^{\\mathsf T}\\otimes A)\\operatorname{vec}(X)$：$B$ 在乘积的右边，转置之后跑到左侧，顺序不能反。利用这个恒等式，形如 $AX+XB=C$ 的 **Sylvester 方程**（$A$ 为 $m\\times m$、$B$ 为 $n\\times n$、$X$ 与 $C$ 为 $m\\times n$）就等价于一个 $mn$ 阶的普通线性方程组，其可解性完全由系数矩阵的可逆性决定。\n\n**Sylvester 方程的可解性判据**：对任意右端项 $C$ 都存在唯一解，当且仅当 $A$ 与 $-B$ 没有公共特征值，等价地说 $\\lambda_i(A)+\\mu_j(B)\\ne 0$ 对一切 $i,j$ 成立。原因是线性算子 $X\\mapsto AX+XB$ 的谱恰恰由这些两两之和 $\\lambda_i+\\mu_j$ 组成（见公式中的 $A\\otimes I+I\\otimes B$）。注意判据的量化方式是「对任意 $C$ 都成立」：某个特定的 $C$ 恰有解，并不需要这个条件。\n\n**Lyapunov 方程**是 Sylvester 方程最常用的特例。本文统一采用约定 $A^{\\mathsf H}X+XA=Q$（$A$ 为 $n\\times n$）。它唯一可解当且仅当 $\\lambda_i+\\bar\\lambda_j\\ne 0$ 对一切 $i,j$ 成立；当 $A$ 稳定（所有特征值的实部都小于 0）时该条件自动满足，对任意 $Q$ 都有唯一解，并可写成积分 $X=-\\int_0^\\infty e^{A^{\\mathsf H}t}Qe^{At}\\,dt$。文献里也常把方程写成 $A^{\\mathsf H}X+XA+Q=0$，此时同一个积分不带负号——引用公式之前务必看清方程中 $Q$ 的符号，这是最容易混淆的一处约定。",
+    "definitionEn": "The standard way to combine two matrices into a larger one is the **Kronecker product**: if $A=(a_{ij})$ is $m\\times n$ and $B$ is $p\\times q$, then $A\\otimes B=(a_{ij}B)$ is the block matrix obtained by replacing each entry $a_{ij}$ of $A$ with the scaled block $a_{ij}B$. Its size is $mp\\times nq$: both dimensions multiply. It obeys the mixed-product rule $(A\\otimes B)(C\\otimes D)=(AC)\\otimes(BD)$ whenever the products $AC$ and $BD$ are defined, but it is not commutative: $A\\otimes B$ and $B\\otimes A$ usually differ and are related only by a permutation similarity.\n\nThe **vec operator** stacks a matrix into a single column, column by column. Combined with the Kronecker product it gives the identity $\\operatorname{vec}(AXB)=(B^{\\mathsf T}\\otimes A)\\operatorname{vec}(X)$: the right factor $B$ is transposed and moved to the left, and the order cannot be reversed. With this identity the **Sylvester equation** $AX+XB=C$ ($A$ of size $m\\times m$, $B$ of size $n\\times n$, $X$ and $C$ of size $m\\times n$) becomes an ordinary linear system of order $mn$, whose solvability is governed entirely by the invertibility of its coefficient matrix.\n\n**Solvability criterion.** The Sylvester equation has a unique solution for every right-hand side $C$ if and only if $A$ and $-B$ share no eigenvalue, equivalently $\\lambda_i(A)+\\mu_j(B)\\ne 0$ for all $i,j$. The reason is that the spectrum of the linear operator $X\\mapsto AX+XB$ consists precisely of these pairwise sums $\\lambda_i+\\mu_j$ (the eigenvalues of $A\\otimes I+I\\otimes B$). Note the quantifier: the criterion guarantees a solution for every $C$; a particular $C$ may well be solvable without it.\n\nThe **Lyapunov equation** is the most important special case. Throughout we fix the convention $A^{\\mathsf H}X+XA=Q$ with $A$ of size $n\\times n$. It is uniquely solvable if and only if $\\lambda_i+\\bar\\lambda_j\\ne 0$ for all $i,j$; when $A$ is stable (every eigenvalue has negative real part) this holds automatically, and the unique solution admits the integral representation $X=-\\int_0^\\infty e^{A^{\\mathsf H}t}Qe^{At}\\,dt$. The equation is also commonly written $A^{\\mathsf H}X+XA+Q=0$, in which case the same integral carries no minus sign. Always check the sign of $Q$ in the equation before quoting a solution formula; this is the most error-prone convention in the subject.",
+    "formulas": [
+      {
+        "latex": "A\\otimes B=\\begin{pmatrix} a_{11}B & \\cdots & a_{1n}B \\\\ \\vdots & \\ddots & \\vdots \\\\ a_{m1}B & \\cdots & a_{mn}B\\end{pmatrix}",
+        "note": "Kronecker 积的分块定义：$A$ 为 $m\\times n$、$B$ 为 $p\\times q$ 时，$A\\otimes B$ 是 $mp\\times nq$ 矩阵，逐块看就是「用 $A$ 的每个元素缩放整个 $B$」。",
+        "noteEn": "Block definition of the Kronecker product: for $A$ of size $m\\times n$ and $B$ of size $p\\times q$, the result $A\\otimes B$ has size $mp\\times nq$, each block being $B$ scaled by an entry of $A$."
+      },
+      {
+        "latex": "(A\\otimes B)(C\\otimes D)=(AC)\\otimes(BD),\\qquad (A\\otimes B)^{-1}=A^{-1}\\otimes B^{-1},\\qquad (A\\otimes B)^{\\mathsf T}=A^{\\mathsf T}\\otimes B^{\\mathsf T}",
+        "note": "混合积公式（要求 $AC$ 与 $BD$ 都有意义）、逆与转置都逐因子处理；另有 $\\operatorname{tr}(A\\otimes B)=\\operatorname{tr}(A)\\operatorname{tr}(B)$。注意 $A\\otimes B\\ne B\\otimes A$，它们只是置换相似。",
+        "noteEn": "Mixed-product rule (valid when $AC$ and $BD$ make sense), with inverses and transposes taken factorwise; also $\\operatorname{tr}(A\\otimes B)=\\operatorname{tr}(A)\\operatorname{tr}(B)$. Beware that $A\\otimes B\\ne B\\otimes A$ in general; the two are only permutation-similar."
+      },
+      {
+        "latex": "\\det(A\\otimes B)=(\\det A)^{q}(\\det B)^{p}\\quad (A\\in M_p,\\ B\\in M_q),\\qquad \\sigma(A\\otimes B)=\\{\\lambda_i\\mu_j\\},\\qquad \\sigma(A\\otimes I+I\\otimes B)=\\{\\lambda_i+\\mu_j\\}",
+        "note": "行列式的指数最容易记反：$A$ 是 $p\\times p$，所以 $B$ 的指数是 $p$（即 $\\det(A\\otimes B)=\\det(B\\otimes A)$）。特征值成对相乘；而 $A\\otimes I+I\\otimes B$ 的特征值是成对相加，这正是 Sylvester 方程可解判据的来源。",
+        "noteEn": "The exponents are the classic trap: since $A$ is $p\\times p$, the exponent attached to $\\det B$ is $p$ (equivalently $\\det(A\\otimes B)=\\det(B\\otimes A)$). Eigenvalues multiply in pairs, while those of $A\\otimes I+I\\otimes B$ add in pairs — the source of the Sylvester solvability criterion."
+      },
+      {
+        "latex": "\\operatorname{vec}(AXB)=(B^{\\mathsf T}\\otimes A)\\operatorname{vec}(X),\\qquad AX+XB=C\\ \\Longleftrightarrow\\ (I_n\\otimes A+B^{\\mathsf T}\\otimes I_m)\\operatorname{vec}(X)=\\operatorname{vec}(C)",
+        "note": "vec 按列拉直；$B$ 要转置后放到左边，转置与顺序都不能动。$X\\mapsto AX+XB$ 因此化归为 $mn$ 阶系数矩阵 $I_n\\otimes A+B^{\\mathsf T}\\otimes I_m$ 的可逆性问题。",
+        "noteEn": "The vec operator flattens column by column, and $B$ must be transposed and placed on the left — neither the transpose nor the order may be changed. This turns $X\\mapsto AX+XB$ into the invertibility question for the $mn\\times mn$ matrix $I_n\\otimes A+B^{\\mathsf T}\\otimes I_m$."
+      },
+      {
+        "latex": "A^{\\mathsf H}X+XA=Q:\\quad \\text{唯一解}\\iff \\lambda_i+\\bar\\lambda_j\\ne 0\\ \\ \\forall i,j;\\qquad A\\ \\text{稳定}\\ \\Longrightarrow\\ X=-\\int_0^\\infty e^{A^{\\mathsf H}t}Qe^{At}\\,dt",
+        "note": "本文采用的 Lyapunov 约定。$A$ 稳定时对任意 $Q$ 唯一可解（实部全负保证两两之和实部为负，不会为 0），解的积分表示中带负号；若方程写成 $A^{\\mathsf H}X+XA+Q=0$，该积分不带负号。",
+        "noteEn": "Our Lyapunov convention. If $A$ is stable there is a unique solution for every $Q$ (negative real parts make every pairwise sum have negative real part, hence nonzero), and the integral carries a minus sign; for the equivalent form $A^{\\mathsf H}X+XA+Q=0$ the same integral has no minus sign."
+      }
+    ],
+    "properties": [
+      "Kronecker 积不交换，但 $A\\otimes B$ 与 $B\\otimes A$ 只差一个置换相似，因此行列式与特征值（含重数）完全相同：$\\sigma(A\\otimes B)=\\sigma(B\\otimes A)=\\{\\lambda_i\\mu_j\\}$。",
+      "Sylvester 方程 $AX+XB=C$ 对每个 $C$ 有唯一解 $\\iff$ $A$ 与 $-B$ 无公共特征值 $\\iff$ $\\lambda_i(A)+\\mu_j(B)\\ne 0$ $\\iff$ 算子 $X\\mapsto AX+XB$ 可逆；此时 $\\operatorname{vec}(X)=(I_n\\otimes A+B^{\\mathsf T}\\otimes I_m)^{-1}\\operatorname{vec}(C)$。",
+      "Lyapunov 定理：$A$ 稳定 $\\iff$ 对任意 $Q\\succ0$，方程 $A^{\\mathsf H}X+XA+Q=0$ 有唯一正定解，且该解为 $X=\\int_0^\\infty e^{A^{\\mathsf H}t}Qe^{At}\\,dt$。按本文约定 $A^{\\mathsf H}X+XA=Q$ 则写作 $Q\\prec0$ 时 $X\\succ0$。",
+      "$Q$ Hermite 时解 $X$ 也 Hermite：对 $A^{\\mathsf H}X+XA=Q$ 取共轭转置得 $A^{\\mathsf H}X^{\\mathsf H}+X^{\\mathsf H}A=Q$，由唯一性 $X^{\\mathsf H}=X$。解还是 $Q$ 的线性函数，可解时 $Q\\mapsto X$ 是线性同构。",
+      "两个易错点：行列式公式的指数（$A$ 为 $p\\times p$、$B$ 为 $q\\times q$ 时 $\\det(A\\otimes B)=(\\det A)^{q}(\\det B)^{p}$）与 vec 公式的顺序（是 $B^{\\mathsf T}\\otimes A$ 而不是 $A\\otimes B^{\\mathsf T}$）；对 $A\\otimes I+I\\otimes B$ 求特征值时必须确认 $A$、$B$ 的尺寸。"
+    ],
+    "propertiesEn": [
+      "The Kronecker product is not commutative, but $A\\otimes B$ and $B\\otimes A$ differ only by a permutation similarity, so they have the same determinant and the same eigenvalues with multiplicities: $\\sigma(A\\otimes B)=\\sigma(B\\otimes A)=\\{\\lambda_i\\mu_j\\}$.",
+      "The Sylvester equation $AX+XB=C$ has a unique solution for every $C$ $\\iff$ $A$ and $-B$ have no common eigenvalue $\\iff$ $\\lambda_i(A)+\\mu_j(B)\\ne 0$ $\\iff$ the operator $X\\mapsto AX+XB$ is invertible; then $\\operatorname{vec}(X)=(I_n\\otimes A+B^{\\mathsf T}\\otimes I_m)^{-1}\\operatorname{vec}(C)$.",
+      "Lyapunov's theorem: $A$ is stable $\\iff$ for every $Q\\succ0$ the equation $A^{\\mathsf H}X+XA+Q=0$ has a unique positive definite solution, namely $X=\\int_0^\\infty e^{A^{\\mathsf H}t}Qe^{At}\\,dt$. In our convention $A^{\\mathsf H}X+XA=Q$ the same statement reads: $Q\\prec0$ implies $X\\succ0$.",
+      "If $Q$ is Hermitian then so is the solution $X$: taking conjugate transposes in $A^{\\mathsf H}X+XA=Q$ gives $A^{\\mathsf H}X^{\\mathsf H}+X^{\\mathsf H}A=Q$, and uniqueness forces $X^{\\mathsf H}=X$. The solution is also a linear function of $Q$, so $Q\\mapsto X$ is a linear isomorphism whenever the equation is uniquely solvable.",
+      "Two perennial slips: the exponents in the determinant formula ($\\det(A\\otimes B)=(\\det A)^{q}(\\det B)^{p}$ for $A$ of size $p\\times p$ and $B$ of size $q\\times q$) and the order in the vec identity (it is $B^{\\mathsf T}\\otimes A$, not $A\\otimes B^{\\mathsf T}$); when computing eigenvalues of $A\\otimes I+I\\otimes B$, always double-check the sizes."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}1&0\\\\0&2\\end{pmatrix}$、$B=\\begin{pmatrix}3&1\\\\0&4\\end{pmatrix}$、$C=I_2$。解 Sylvester 方程 $AX+XB=C$ 并代回验证。",
+        "solution": "先看可解性：$A$ 的特征值为 $1,2$，$B$ 的特征值为 $3,4$，于是 $-B$ 的特征值为 $-3,-4$，与 $A$ 没有公共特征值，故唯一解存在。\n设 $X=\\begin{pmatrix}x_{11}&x_{12}\\\\x_{21}&x_{22}\\end{pmatrix}$，直接展开：$AX=\\begin{pmatrix}x_{11}&x_{12}\\\\2x_{21}&2x_{22}\\end{pmatrix}$，$XB=\\begin{pmatrix}3x_{11}&x_{11}+4x_{12}\\\\3x_{21}&x_{21}+4x_{22}\\end{pmatrix}$，相加得 $AX+XB=\\begin{pmatrix}4x_{11}&x_{11}+5x_{12}\\\\5x_{21}&x_{21}+6x_{22}\\end{pmatrix}$。\n令其等于 $I_2$，逐元素解：$4x_{11}=1\\Rightarrow x_{11}=\\tfrac14$；$x_{11}+5x_{12}=0\\Rightarrow x_{12}=-\\tfrac{1}{20}$；$5x_{21}=0\\Rightarrow x_{21}=0$；$x_{21}+6x_{22}=1\\Rightarrow x_{22}=\\tfrac16$。\n所以 $X=\\begin{pmatrix}\\tfrac14&-\\tfrac{1}{20}\\\\0&\\tfrac16\\end{pmatrix}$。\n代回：$AX=\\begin{pmatrix}\\tfrac14&-\\tfrac{1}{20}\\\\0&\\tfrac13\\end{pmatrix}$，$XB=\\begin{pmatrix}\\tfrac34&\\tfrac14-\\tfrac15\\\\0&\\tfrac23\\end{pmatrix}=\\begin{pmatrix}\\tfrac34&\\tfrac{1}{20}\\\\0&\\tfrac23\\end{pmatrix}$，两者相加 $=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=I_2$ ✓。\nKronecker 形式核对：$A$ 与 $B$ 的特征值两两之和为 $1+3=4$、$1+4=5$、$2+3=5$、$2+4=6$，均非零，故 $I_2\\otimes A+B^{\\mathsf T}\\otimes I_2$ 的行列式为 $4\\cdot5\\cdot5\\cdot6=600\\ne0$，与唯一可解一致。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}-1&0\\\\0&-2\\end{pmatrix}$，按约定 $A^{\\mathsf H}X+XA=Q$ 取 $Q=-I_2$，求解并验证；用积分表示核对，并判明 $X$ 的正定性。",
+        "solution": "$A$ 是实对称矩阵，特征值 $-1,-2$ 的实部都为负，故 $A$ 稳定，唯一解存在。设 $X=\\begin{pmatrix}x_{11}&x_{12}\\\\x_{21}&x_{22}\\end{pmatrix}$。由于 $A^{\\mathsf H}=A=\\operatorname{diag}(-1,-2)$，有 $A^{\\mathsf H}X=\\begin{pmatrix}-x_{11}&-x_{12}\\\\-2x_{21}&-2x_{22}\\end{pmatrix}$，$XA=\\begin{pmatrix}-x_{11}&-2x_{12}\\\\-x_{21}&-2x_{22}\\end{pmatrix}$，相加得 $\\begin{pmatrix}-2x_{11}&-3x_{12}\\\\-3x_{21}&-4x_{22}\\end{pmatrix}$。\n令其等于 $Q=-I_2$：$-2x_{11}=-1\\Rightarrow x_{11}=\\tfrac12$；$-4x_{22}=-1\\Rightarrow x_{22}=\\tfrac14$；$-3x_{12}=0$、$-3x_{21}=0\\Rightarrow x_{12}=x_{21}=0$。于是 $X=\\operatorname{diag}(\\tfrac12,\\tfrac14)\\succ0$ 正定（与 $Q=-I_2\\prec0$、$A$ 稳定时解正定的结论一致）。\n积分核对：按约定 $X=-\\int_0^\\infty e^{A^{\\mathsf H}t}Qe^{At}\\,dt=\\int_0^\\infty e^{A^{\\mathsf H}t}(-Q)e^{At}\\,dt=\\int_0^\\infty e^{2At}\\,dt=\\operatorname{diag}\\left(\\int_0^\\infty e^{-2t}\\,dt,\\ \\int_0^\\infty e^{-4t}\\,dt\\right)=\\operatorname{diag}(\\tfrac12,\\tfrac14)$ ✓（用了 $e^{At}=\\operatorname{diag}(e^{-t},e^{-2t})$）。\n代回验证：$A^{\\mathsf H}X+XA=\\operatorname{diag}(-\\tfrac12,-\\tfrac12)+\\operatorname{diag}(-\\tfrac12,-\\tfrac12)=\\operatorname{diag}(-1,-1)=-I_2=Q$ ✓。"
+      }
+    ],
+    "tags": [
+      "Kronecker 积",
+      "Sylvester 方程",
+      "Lyapunov 方程",
+      "vec 拉直"
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "matrix-exponential",
+      "lyapunov-second-method",
+      "stability",
+      "block-matrices"
+    ]
+  },
+  {
+    "id": "nonnegative-matrices",
+    "title": "非负矩阵与 Perron–Frobenius 定理",
+    "titleEn": "Nonnegative Matrices and Perron–Frobenius",
+    "branch": "linear",
+    "level": 5,
+    "summary": "非负矩阵的谱半径必是特征值并配有非负特征向量；不可约与本原情形给出唯一性与模长严格不等式。",
+    "summaryEn": "For a nonnegative matrix the spectral radius is always an eigenvalue with a nonnegative eigenvector; irreducibility and primitivity sharpen uniqueness and turn the modulus bound into a strict inequality.",
+    "definition": "**非负矩阵**指每个元素都 $\\ge 0$ 的实矩阵，记作 $A\\ge 0$；若每个元素都严格大于 0 则记作 $A>0$。对实方阵定义**谱半径** $\\rho(A)=\\max_i|\\lambda_i|$，即所有特征值模长的最大值。非负矩阵的特殊之处在于：它的谱半径总是被特征值取到，而且取到的方式可以逐元素验证——这就是 Perron–Frobenius 定理的内容。\n\n**Perron–Frobenius 定理（基础形式）**：若 $A\\ge0$ 且 $A\\ne0$，则 $\\rho(A)$ 是 $A$ 的特征值，并且存在非零的非负向量 $x\\ge0$ 使 $Ax=\\rho(A)x$。若 $A$ 还是**不可约**的（例如 $A>0$，或对应的有向图强连通），结论加强为：$\\rho(A)>0$，特征向量可取成严格正向量 $x>0$，且在不计正倍数下唯一，$\\rho(A)$ 作为特征值是单重的。若 $A$ 还是**本原**的（存在 $k\\ge1$ 使 $A^k>0$），则更强：$\\rho(A)$ 是唯一模长为 $\\rho(A)$ 的特征值，其余特征值全部满足 $|\\lambda|<\\rho(A)$。\n\n这一定理把抽象的谱信息变成了可以逐元素检验的事实，因此出现在 Markov 链（行随机矩阵必有特征值 1）、投入产出模型、数值迭代与 PageRank 里。要注意方向：对**行随机**矩阵（每行和为 1），全 1 向量是**右**特征向量；对**列随机**矩阵，全 1 向量是**左**特征向量，两者对应不同的对象，混用是最常见的错误。\n\n必须强调，「$\\rho(A)$ 必是特征值」是**非负矩阵独有的性质**，不能向一般实矩阵推广：例如平面旋转 $90^\\circ$ 的矩阵特征值为 $\\pm i$，$\\rho=1$ 却不是特征值。一般矩阵永远只有 $|\\lambda|\\le\\rho(A)$，等号能否取到完全取决于结构。",
+    "definitionEn": "A **nonnegative matrix** is a real matrix all of whose entries are $\\ge 0$, written $A\\ge 0$; if every entry is strictly positive we write $A>0$. The **spectral radius** of a square matrix is $\\rho(A)=\\max_i|\\lambda_i|$, the largest modulus of an eigenvalue. What makes nonnegative matrices special is that their spectral radius is always attained by an eigenvalue, and the attaining eigenvector can be taken entrywise nonnegative — the content of the Perron–Frobenius theorem.\n\n**Perron–Frobenius (basic form).** If $A\\ge0$ and $A\\ne0$, then $\\rho(A)$ is an eigenvalue of $A$ and there is a nonzero nonnegative vector $x\\ge0$ with $Ax=\\rho(A)x$. If moreover $A$ is **irreducible** (for instance $A>0$, or the associated directed graph is strongly connected), the conclusion sharpens: $\\rho(A)>0$, the eigenvector can be taken strictly positive, it is unique up to a positive multiple, and $\\rho(A)$ is a simple eigenvalue. If $A$ is in addition **primitive** (some power $A^k$ is strictly positive), then $\\rho(A)$ is the only eigenvalue of modulus $\\rho(A)$, all others satisfying $|\\lambda|<\\rho(A)$.\n\nThe theorem converts abstract spectral information into entrywise verifiable facts, which is why it appears in Markov chains (a row-stochastic matrix always has eigenvalue $1$), input–output economics, numerical iteration and PageRank. Beware of the direction: for a **row-stochastic** matrix (rows summing to $1$) the all-ones vector is a **right** eigenvector; for a **column-stochastic** matrix the all-ones vector is a **left** eigenvector. The two directions refer to different objects, and mixing them is the most common slip.\n\nOne must stress that 「$\\rho(A)$ is an eigenvalue」 is a property **special to nonnegative matrices** and does not extend to general real matrices: the $90^\\circ$ rotation has eigenvalues $\\pm i$, yet $\\rho=1$ is not an eigenvalue. For a general matrix one only knows $|\\lambda|\\le\\rho(A)$, and whether equality is attained depends entirely on the structure.",
+    "formulas": [
+      {
+        "latex": "A\\ge 0,\\ A\\ne 0\\ \\Longrightarrow\\ \\rho(A)\\ \\text{是 }A\\text{ 的特征值},\\qquad \\exists\\, x\\ge 0,\\ x\\ne 0:\\ Ax=\\rho(A)x",
+        "note": "Perron–Frobenius 最基础的形式：非负矩阵的谱半径一定是特征值，且总有非负特征向量（允许有零分量）。这是「非负」才有的结论。",
+        "noteEn": "The most basic form of Perron–Frobenius: the spectral radius of a nonnegative matrix is an eigenvalue, and a nonnegative eigenvector (zeros allowed) always exists. This conclusion is special to nonnegativity."
+      },
+      {
+        "latex": "A\\ge0\\ \\text{不可约}\\ \\Longrightarrow\\ \\rho(A)>0,\\qquad Ax=\\rho(A)x\\ \\text{有严格正解 } x>0,\\ \\text{且解在不计正倍数下唯一},\\ \\rho(A)\\ \\text{是单特征值}",
+        "note": "不可约情形：Perron 向量严格为正且唯一（不计正倍数），$\\rho(A)$ 的代数重数为 1。可约矩阵没有这些保证（单位矩阵 $I$ 的 $\\rho=1$ 重数就是 $n$）。",
+        "noteEn": "The irreducible case: the Perron vector is strictly positive and unique up to a positive multiple, and $\\rho(A)$ has algebraic multiplicity one. Reducible matrices offer no such guarantees — the identity matrix has $\\rho=1$ with multiplicity $n$."
+      },
+      {
+        "latex": "A\\boldsymbol{1}=\\boldsymbol{1}\\ (\\text{行和}=1)\\ \\Longrightarrow\\ \\rho(A)=1,\\qquad \\boldsymbol{1}^{\\mathsf T}A=\\boldsymbol{1}^{\\mathsf T}\\ (\\text{列和}=1)",
+        "note": "行随机矩阵：全 1 向量是右特征向量，$A\\boldsymbol{1}=\\boldsymbol{1}$；列随机矩阵：全 1 向量是左特征向量。方向别混——它决定了平稳分布是行向量还是列向量。",
+        "noteEn": "Row-stochastic: the all-ones vector is a right eigenvector, $A\\boldsymbol{1}=\\boldsymbol{1}$; column-stochastic: it is a left eigenvector. Do not swap the two — the direction determines whether the stationary distribution is stored as a row or a column."
+      },
+      {
+        "latex": "\\exists\\, k\\ge1:\\ A^k>0\\ \\Longrightarrow\\ \\rho(A)\\ \\text{是唯一满足 } |\\lambda|=\\rho(A)\\ \\text{的特征值},\\qquad \\lambda\\ne\\rho(A)\\Rightarrow |\\lambda|<\\rho(A)",
+        "note": "本原矩阵的加强结论（「唯一模长最大」）。本原性是充分条件而非必要：不可约但非本原时，模长等于 $\\rho$ 的特征值可以按单位根成组出现，例如置换矩阵。",
+        "noteEn": "The sharpened primitive case: a unique dominant eigenvalue. Primitivity is sufficient but not necessary; an irreducible but imprimitive matrix may have several eigenvalues of modulus $\\rho$ placed at roots of unity, as permutation matrices do."
+      },
+      {
+        "latex": "\\rho(A)=\\max_{x>0}\\ \\min_i\\frac{(Ax)_i}{x_i}=\\min_{x>0}\\ \\max_i\\frac{(Ax)_i}{x_i}\\qquad (A\\ge0\\ \\text{不可约})",
+        "note": "Collatz–Wielandt 公式：给谱半径一个可计算的变分刻画，任意正向量 $x$ 的「最大比值」都是 $\\rho$ 的上界，「最小比值」都是下界，也是幂法估计 $\\rho$ 的基础。",
+        "noteEn": "The Collatz–Wielandt formula: a computable variational characterization of $\\rho$. For any positive $x$, the maximal ratio bounds $\\rho$ above and the minimal ratio bounds it below; this underlies power-iteration estimation of $\\rho$."
+      }
+    ],
+    "properties": [
+      "对任意实方阵都有 $|\\lambda|\\le\\rho(A)$；但「$\\rho(A)$ 是特征值」只对非负矩阵保证——平面旋转 $90^\\circ$ 的矩阵特征值为 $\\pm i$，$\\rho=1$ 不是特征值。不要把这条结论推广到一般矩阵。",
+      "不可约非负矩阵：$\\rho>0$ 是单特征值，Perron 向量严格正且在不计正倍数下唯一；可约非负矩阵可以没有正特征向量，$\\rho$ 的重数可以大于 1（如 $I$）。",
+      "行随机的非负矩阵满足 $A\\boldsymbol{1}=\\boldsymbol{1}$，故 $\\rho=1$ 是特征值；不可约时平稳分布唯一，它就是列侧的左特征向量（$\\pi^{\\mathsf T}A=\\pi^{\\mathsf T}$，链接 markov-chain 与 stationary-distribution）。行和 1 给右特征向量、列和 1 给左特征向量，两个方向不能互换。",
+      "单调性：$0\\le B\\le A$（逐元素）蕴含 $\\rho(B)\\le\\rho(A)$，即矩阵元素变大，谱半径不会变小。",
+      "极限与秩一收敛：$A\\ge0$ 时 $A^k\\to0$ 当且仅当 $\\rho(A)<1$；若 $A$ 本原，则 $\\rho^{-k}A^k$ 收敛到秩一矩阵 $xy^{\\mathsf T}$，其中 $Ax=\\rho x$、$y^{\\mathsf T}A=\\rho y^{\\mathsf T}$、$y^{\\mathsf T}x=1$——这是幂法与 PageRank 收敛性的依据。"
+    ],
+    "propertiesEn": [
+      "Every real square matrix satisfies $|\\lambda|\\le\\rho(A)$, but the statement 「$\\rho(A)$ is an eigenvalue」 is guaranteed only for nonnegative matrices: the $90^\\circ$ rotation has eigenvalues $\\pm i$ and $\\rho=1$ is not one of them. Do not generalize this to arbitrary matrices.",
+      "For an irreducible nonnegative matrix: $\\rho>0$ is a simple eigenvalue and the Perron vector is strictly positive and unique up to a positive multiple. For a reducible nonnegative matrix there may be no positive eigenvector, and $\\rho$ can have multiplicity greater than one (take $I$).",
+      "A row-stochastic nonnegative matrix satisfies $A\\boldsymbol{1}=\\boldsymbol{1}$, so $\\rho=1$ is an eigenvalue; when it is irreducible the stationary distribution is unique and equals the left eigenvector on the column side ($\\pi^{\\mathsf T}A=\\pi^{\\mathsf T}$, see markov-chain and stationary-distribution). Row sums give the right eigenvector, column sums the left one; the two cannot be interchanged.",
+      "Monotonicity: $0\\le B\\le A$ entrywise implies $\\rho(B)\\le\\rho(A)$; enlarging entries never decreases the spectral radius.",
+      "Limits and rank-one convergence: for $A\\ge0$, $A^k\\to0$ if and only if $\\rho(A)<1$; if $A$ is primitive then $\\rho^{-k}A^k$ converges to the rank-one matrix $xy^{\\mathsf T}$, where $Ax=\\rho x$, $y^{\\mathsf T}A=\\rho y^{\\mathsf T}$ and $y^{\\mathsf T}x=1$ — the basis for the convergence of the power method and PageRank."
+    ],
+    "examples": [
+      {
+        "problem": "设 $A=\\begin{pmatrix}0&2\\\\3&1\\end{pmatrix}$。验证谱半径 $\\rho(A)$ 是 $A$ 的特征值，求一个非负特征向量，并把另一个特征值的模长与 $\\rho$ 比较。",
+        "solution": "特征多项式：$\\det(A-\\lambda I)=\\lambda^2-\\lambda-6=(\\lambda-3)(\\lambda+2)$，特征值为 $3$ 与 $-2$，故 $\\rho(A)=3$，它确实是特征值（Perron–Frobenius）✓。\n求特征向量：$A-3I=\\begin{pmatrix}-3&2\\\\3&-2\\end{pmatrix}$，方程 $-3x_1+2x_2=0$，取 $x=(2,3)^{\\mathsf T}\\ge0$。代回验证：$A\\begin{pmatrix}2\\\\3\\end{pmatrix}=\\begin{pmatrix}0\\cdot2+2\\cdot3\\\\3\\cdot2+1\\cdot3\\end{pmatrix}=\\begin{pmatrix}6\\\\9\\end{pmatrix}=3\\begin{pmatrix}2\\\\3\\end{pmatrix}$ ✓。\n另一特征值 $-2$ 的模长为 $2\\le3=\\rho(A)$ ✓，符合 $|\\lambda|\\le\\rho$；并且 $A>0$ 从而本原，$\\rho$ 是唯一模长最大的特征值，$|-2|=2<3$ 与此一致。"
+      },
+      {
+        "problem": "设 $A=\\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}=I+J$（$J$ 为三阶全 1 矩阵）。求 $\\rho(A)$ 并给出非负特征向量；说明 $A/4$ 是行随机矩阵，其平稳分布是什么。",
+        "solution": "因 $J^2=3J$，$J$ 的特征值为 $3,0,0$（$3$ 对应向量 $(1,1,1)^{\\mathsf T}$），而 $A=I+J$ 与 $J$ 可交换、同时对角化，故 $A$ 的特征值为 $1+3=4$ 与 $1+0=1$（二重），$\\rho(A)=4$ 是特征值 ✓。直接验证：$A\\begin{pmatrix}1\\\\1\\\\1\\end{pmatrix}=\\begin{pmatrix}2+1+1\\\\1+2+1\\\\1+1+2\\end{pmatrix}=\\begin{pmatrix}4\\\\4\\\\4\\end{pmatrix}=4\\begin{pmatrix}1\\\\1\\\\1\\end{pmatrix}$ ✓，故 $(1,1,1)^{\\mathsf T}$ 是严格正特征向量；由于 $A>0$ 不可约，它在不计正倍数下唯一。\n$A$ 每行和为 4，故 $A/4$ 每行和为 1，是行随机矩阵，其特征值为 $1,\\tfrac14,\\tfrac14$，$\\rho(A/4)=1$。由 $\\pi^{\\mathsf T}(A/4)=\\pi^{\\mathsf T}$（列侧左特征向量）解得均匀平稳分布 $\\pi=(\\tfrac13,\\tfrac13,\\tfrac13)$——行随机矩阵的方向是 $A\\boldsymbol{1}=\\boldsymbol{1}$，平稳分布则解左特征方程，两者方向不同。又因 $A$ 本原，除 $4$ 之外的特征值模长 $1$ 严格小于 $4$，与定理的加强结论一致。"
+      }
+    ],
+    "tags": [
+      "非负矩阵",
+      "Perron–Frobenius",
+      "谱半径",
+      "Markov 链"
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "markov-chain",
+      "stationary-distribution",
+      "matrix-powers-polynomials"
+    ]
+  },
+  {
+    "id": "quotient-space",
+    "title": "商空间与第一同构定理",
+    "titleEn": "Quotient Spaces and the First Isomorphism Theorem",
+    "branch": "linear",
+    "level": 5,
+    "summary": "把子空间方向整体压成一点：陪集、良定义运算、维数公式与 V/ker T ≅ Im T，并把线性方程组的解结构纳入其中。",
+    "summaryEn": "Collapsing a subspace to a point: cosets, well-defined operations, the dimension formula, and $V/\\ker T\\cong\\operatorname{Im}T$, with the solution structure of linear systems as a corollary.",
+    "definition": "设 $V$ 是域 $K$ 上的线性空间，$W\\le V$ 是一个子空间。对每个向量 $\\alpha\\in V$，集合 $\\alpha+W=\\{\\alpha+w:\\ w\\in W\\}$ 称为一个**陪集**，几何上就是「过 $\\alpha$ 且平行于 $W$」的仿射平层。全体陪集组成的集合记作 $V/W$，称为 $V$ 关于 $W$ 的**商空间**。直观上，商空间就是把 $W$ 方向的信息整体「压扁成一个点」之后得到的空间，这正好与子空间的方向形成互补。\n\n要在 $V/W$ 上定义加法与数乘：$(\\alpha+W)+(\\beta+W)=(\\alpha+\\beta)+W$，$k(\\alpha+W)=k\\alpha+W$。这里最关键的一步是**良定义性**——陪集有多个代表元，必须验证换用 $\\alpha'=\\alpha+w_1$、$\\beta'=\\beta+w_2$ 后结果不变：$(\\alpha'+W)+(\\beta'+W)=(\\alpha+w_1+\\beta+w_2)+W=(\\alpha+\\beta)+W$，因为 $w_1+w_2\\in W$；同理 $k\\alpha'=k\\alpha+kw_1$，而 $kw_1\\in W$。验证完毕，$V/W$ 才真正成为一个线性空间。这一步不能省，它是商空间理论全部的技术难点所在。\n\n两个陪集何时相等有简单的判别法：$\\alpha+W=\\beta+W\\iff\\alpha-\\beta\\in W$。由此得维数公式 $\\dim(V/W)=\\dim V-\\dim W$（有限维情形）：陪集的自由度恰好由 $W$ 之外的方向提供。**自然投影** $\\pi:V\\to V/W$、$\\pi(\\alpha)=\\alpha+W$ 是满射线性映射，且 $\\ker\\pi=W$——商空间是「恰好抹掉 $W$」的典范构造。\n\n**第一同构定理**：对任意线性映射 $T:V\\to Y$ 都有 $V/\\ker T\\cong\\operatorname{Im}T$，同构由 $\\bar\\alpha\\mapsto T(\\alpha)$ 给出（良定义性同样来自 $\\ker T$ 的定义）。它把线性方程组的结构说得很清楚：映射 $x\\mapsto Ax$ 诱导 $K^n/\\ker A\\cong\\operatorname{Im}A$，而 $Ax=b$ 的解集是 $\\ker A$ 的一个陪集（一个特解加上全部齐次解）——这正是「特解 + 齐次解」背后的空间结构。",
+    "definitionEn": "Let $V$ be a vector space over a field $K$ and $W\\le V$ a subspace. For each vector $\\alpha\\in V$ the set $\\alpha+W=\\{\\alpha+w:\\ w\\in W\\}$ is called a **coset**, geometrically the affine layer through $\\alpha$ parallel to $W$. The set of all cosets, denoted $V/W$, is the **quotient space** of $V$ by $W$. Intuitively it is obtained by collapsing the whole direction $W$ to a single point, complementing the information carried by the subspace itself.\n\nOne defines addition and scalar multiplication on $V/W$ by $(\\alpha+W)+(\\beta+W)=(\\alpha+\\beta)+W$ and $k(\\alpha+W)=k\\alpha+W$. The critical step is **well-definedness**: cosets have many representatives, so one must check that replacing $\\alpha$ by $\\alpha'=\\alpha+w_1$ and $\\beta$ by $\\beta'=\\beta+w_2$ changes nothing. Indeed $(\\alpha'+W)+(\\beta'+W)=(\\alpha+w_1+\\beta+w_2)+W=(\\alpha+\\beta)+W$ because $w_1+w_2\\in W$, and likewise $k\\alpha'=k\\alpha+kw_1$ with $kw_1\\in W$. Only after this verification is $V/W$ genuinely a vector space; the step is not a formality but the technical heart of the whole theory.\n\nEquality of cosets has a simple test: $\\alpha+W=\\beta+W\\iff\\alpha-\\beta\\in W$. From it one obtains the dimension formula $\\dim(V/W)=\\dim V-\\dim W$ in finite dimension: the degrees of freedom of a coset come exactly from the directions outside $W$. The **natural projection** $\\pi:V\\to V/W$, $\\pi(\\alpha)=\\alpha+W$, is linear and surjective with $\\ker\\pi=W$; the quotient is the canonical way of killing exactly $W$.\n\n**First isomorphism theorem.** For every linear map $T:V\\to Y$ one has $V/\\ker T\\cong\\operatorname{Im}T$, the isomorphism being $\\bar\\alpha\\mapsto T(\\alpha)$. This clarifies the structure of linear systems: the map $x\\mapsto Ax$ induces $K^n/\\ker A\\cong\\operatorname{Im}A$, while the solution set of $Ax=b$ is a coset of $\\ker A$ — one particular solution plus all homogeneous solutions, the space structure behind the familiar recipe.",
+    "formulas": [
+      {
+        "latex": "\\alpha+W=\\beta+W\\iff \\alpha-\\beta\\in W",
+        "note": "陪集相等的判别法：两个代表元之差属于 $W$ 就是同一个陪集。它把「集合相等」化归为「差向量属于子空间」。",
+        "noteEn": "The coset equality test: two representatives give the same coset exactly when their difference lies in $W$, reducing set equality to membership of a difference vector."
+      },
+      {
+        "latex": "(\\alpha+W)+(\\beta+W)=(\\alpha+\\beta)+W,\\qquad k(\\alpha+W)=k\\alpha+W",
+        "note": "商空间的加法与数乘定义；必须验证它们与代表元的选取无关（良定义性），验证过程正是「$w_1+w_2\\in W$、$kw_1\\in W$」。",
+        "noteEn": "The definitions of addition and scalar multiplication on the quotient; both must be shown independent of the chosen representatives, the verification being precisely $w_1+w_2\\in W$ and $kw_1\\in W$."
+      },
+      {
+        "latex": "\\dim(V/W)=\\dim V-\\dim W",
+        "note": "有限维商空间的维数公式：维数「被减掉」的部分正来自 $W$；若 $V=W\\oplus U$，则投影 $U\\to V/W$ 是同构，商空间与补空间同维且同构。",
+        "noteEn": "Dimension formula in finite dimension: the quotient loses exactly the dimensions of $W$. If $V=W\\oplus U$, the projection $U\\to V/W$ is an isomorphism, so the quotient is modeled on a complement."
+      },
+      {
+        "latex": "\\pi:V\\to V/W,\\quad \\pi(\\alpha)=\\alpha+W;\\qquad \\pi\\ \\text{线性、满射},\\quad \\ker\\pi=W",
+        "note": "自然投影把每个向量送到它所在的陪集：它是满的线性映射，核恰好是 $W$，因此 $V/W$ 是「把 $W$ 压成 0」的普遍构造。",
+        "noteEn": "The natural projection sends each vector to its coset: it is linear and surjective with kernel exactly $W$, so $V/W$ is the universal construction that crushes $W$ to zero."
+      },
+      {
+        "latex": "V/\\ker T\\cong \\operatorname{Im}T,\\qquad \\bar\\alpha\\mapsto T(\\alpha)\\quad (\\text{第一同构定理})",
+        "note": "第一同构定理：把定义域按核「约掉」后与像同构。取维数立刻得到秩-零化度定理 $\\dim V=\\dim\\ker T+\\dim\\operatorname{Im}T$。",
+        "noteEn": "The first isomorphism theorem: dividing the domain by the kernel yields the image. Taking dimensions gives rank–nullity, $\\dim V=\\dim\\ker T+\\dim\\operatorname{Im}T$."
+      }
+    ],
+    "properties": [
+      "良定义性必须显式验证：陪集的加法与数乘都要检查「换代表元结果不变」。这不是形式主义——一旦 $W$ 不是子空间，这样定义的运算立刻失效。",
+      "维数公式 $\\dim(V/W)=\\dim V-\\dim W$；若 $V=W\\oplus U$，则 $u\\mapsto u+W$ 给出 $U\\cong V/W$，商空间可以具体地理解为「补空间」。",
+      "自然投影的普适性质：任何满足 $T(W)=0$ 的线性映射 $T:V\\to Y$ 都能唯一地分解为 $T=\\bar T\\circ\\pi$（其中 $\\bar T:V/W\\to Y$ 线性）。这说清了商空间是「把 $W$ 压成 0」的最一般线性方式。",
+      "第一同构定理的两要点：映射 $\\bar\\alpha\\mapsto T\\alpha$ 良定义（$\\alpha-\\beta\\in\\ker T\\Rightarrow T\\alpha=T\\beta$）且是线性同构；取维数立得秩-零化度定理 $\\dim V=\\dim\\ker T+\\dim\\operatorname{Im}T$。",
+      "与线性方程组呼应：$Ax=b$ 的解集若非空，就是一个陪集 $x_0+\\ker A$，不同的解正好相差一个齐次解；商空间把「掉进核的自由度」与「像」分开，$K^n/\\ker A\\cong\\operatorname{Im}A$。"
+    ],
+    "propertiesEn": [
+      "Well-definedness must be verified explicitly: for both addition and scalar multiplication one checks that the result does not depend on the representatives. This is no formality — if $W$ is not a subspace the operations break down immediately.",
+      "Dimension formula $\\dim(V/W)=\\dim V-\\dim W$; if $V=W\\oplus U$, then $u\\mapsto u+W$ is an isomorphism $U\\cong V/W$, so the quotient can be modeled concretely on a complement.",
+      "Universal property of the projection: every linear map $T:V\\to Y$ with $T(W)=0$ factors uniquely as $T=\\bar T\\circ\\pi$ with $\\bar T:V/W\\to Y$ linear. This says that the quotient is the most general linear way of crushing $W$ to zero.",
+      "Two essential points of the first isomorphism theorem: the map $\\bar\\alpha\\mapsto T\\alpha$ is well defined ($\\alpha-\\beta\\in\\ker T$ implies $T\\alpha=T\\beta$) and is a linear isomorphism; counting dimensions gives rank–nullity, $\\dim V=\\dim\\ker T+\\dim\\operatorname{Im}T$.",
+      "Link with linear systems: when nonempty, the solution set of $Ax=b$ is the coset $x_0+\\ker A$, and two solutions differ by a homogeneous solution; the quotient separates the degrees of freedom swallowed by the kernel from the image, giving $K^n/\\ker A\\cong\\operatorname{Im}A$."
+    ],
+    "examples": [
+      {
+        "problem": "在 $V=\\mathbb{R}^2$ 中取 $W=\\{(t,t):\\ t\\in\\mathbb{R}\\}$（过原点的直线）。验证 $(2,0)+W=(3,1)+W$ 但 $(0,1)+W\\ne(2,0)+W$；再验证数乘与代表元无关，并求 $\\dim(\\mathbb{R}^2/W)$ 与一组基。",
+        "solution": "陪集相等当且仅当差向量属于 $W$。$(2,0)-(3,1)=(-1,-1)\\in W$（两分量相等）✓，故 $(2,0)+W=(3,1)+W$；而 $(0,1)-(2,0)=(-2,1)\\notin W$（$-2\\ne1$），故两者是不同陪集 ✓。\n数乘验证：按定义 $2\\big((2,0)+W\\big)=(4,0)+W$；换用代表元 $(3,1)$，因 $(3,1)-(2,0)=(1,1)\\in W$ 是同一陪集，$2\\big((3,1)+W\\big)=(6,2)+W$，而 $(6,2)-(4,0)=(2,2)=2(1,1)\\in W$，确实落在同一陪集 ✓，良定义成立。\n维数与基：$\\dim(\\mathbb{R}^2/W)=2-1=1$。取基 $(0,1)+W$：对任意 $(a,b)$ 有 $(a,b)-(b-a)(0,1)=(a,a)=a(1,1)\\in W$，故 $(a,b)+W=(b-a)\\big[(0,1)+W\\big]$ ✓，一维且坐标函数就是 $b-a$。"
+      },
+      {
+        "problem": "设 $T:\\mathbb{R}^3\\to\\mathbb{R}^2$，$T(x,y,z)=(x-y,\\ y-z)$。求 $\\ker T$ 与 $\\operatorname{Im}T$，并用第一同构定理说明 $\\mathbb{R}^3/\\ker T\\cong\\mathbb{R}^2$。",
+        "solution": "核：$T(x,y,z)=0$ 即 $x=y$ 且 $y=z$，故 $\\ker T=\\{(t,t,t):t\\in\\mathbb{R}\\}=\\operatorname{span}\\{(1,1,1)\\}$，$\\dim\\ker T=1$。\n像：对任意 $(u,v)\\in\\mathbb{R}^2$，取 $(x,y,z)=(u,0,-v)$，则 $T(u,0,-v)=(u-0,\\ 0-(-v))=(u,v)$，故 $T$ 是满射，$\\operatorname{Im}T=\\mathbb{R}^2$，$\\dim\\operatorname{Im}T=2$。\n由第一同构定理 $\\mathbb{R}^3/\\ker T\\cong\\operatorname{Im}T=\\mathbb{R}^2$，同构为 $\\overline{(x,y,z)}\\mapsto(x-y,\\ y-z)$；维数核对 $3-1=2$ ✓，与秩-零化度定理一致。直观上：模去对角线方向后，每个陪集由两个差值 $(x-y,\\ y-z)$ 唯一刻画。"
+      }
+    ],
+    "tags": [
+      "商空间",
+      "陪集",
+      "第一同构定理",
+      "良定义"
+    ],
+    "links": [
+      "linear-space-general",
+      "linear-transformation",
+      "rank-nullity",
+      "homogeneous-solutions",
+      "nonhomogeneous-solutions"
+    ]
+  },
+  {
+    "id": "tensor-product",
+    "title": "张量积与多重线性代数",
+    "titleEn": "Tensor Products and Multilinear Algebra",
+    "branch": "linear",
+    "level": 5,
+    "summary": "把双线性变成线性的代数构造：泛性质、维数相乘、纯张量与非纯张量，以及 R^m⊗R^n ≅ M_{m×n}。",
+    "summaryEn": "The algebraic construction that linearizes bilinearity: the universal property, multiplicative dimensions, pure versus non-pure tensors, and $\\mathbb{R}^m\\otimes\\mathbb{R}^n\\cong M_{m\\times n}$.",
+    "definition": "**先划清范围**：本节讲的是代数里的**张量积** $V\\otimes W$——把两个线性空间「合并」成一个新线性空间的纯代数构造。物理与工程里常说的「张量」通常指随坐标变换的**张量场**（在每一点处放一个多重线性量），两者名字相同但层次不同；张量积是那些张量场的代数底层，也是抽象指标记号能够运转的原因。\n\n构造的要点是把「双线性」编码成一个新的乘法 $\\otimes$。形式上，$V\\otimes W$ 由所有形式符号 $\\alpha\\otimes\\beta$ 张成，再按双线性规则作商；四条规则是 $(k\\alpha)\\otimes\\beta=\\alpha\\otimes(k\\beta)=k(\\alpha\\otimes\\beta)$、$(\\alpha_1+\\alpha_2)\\otimes\\beta=\\alpha_1\\otimes\\beta+\\alpha_2\\otimes\\beta$ 以及它对第二变量的对称版本 $\\alpha\\otimes(\\beta_1+\\beta_2)=\\alpha\\otimes\\beta_1+\\alpha\\otimes\\beta_2$。也就是说，$\\otimes$ 对两个变量分别线性，除此之外不假设任何关系：$\\alpha\\otimes\\beta$ 与 $\\beta\\otimes\\alpha$ 一般不等；$\\alpha\\otimes\\beta=0$ 当且仅当 $\\alpha=0$ 或 $\\beta=0$（这一点与一般环上的模张量积不同——那里两个非零因子的积也可能为 0）。\n\n**泛性质**是张量积的灵魂：对任何双线性映射 $B:V\\times W\\to U$，存在唯一的线性映射 $\\tilde B:V\\otimes W\\to U$ 使 $B(\\alpha,\\beta)=\\tilde B(\\alpha\\otimes\\beta)$ 对一切 $\\alpha,\\beta$ 成立。换句话说，「$V\\times W$ 上的双线性映射」与「$V\\otimes W$ 上的线性映射」一一对应。张量积的全部威力就在于此：把双线性问题升级为线性问题，而线性问题我们已有完整的工具。泛性质在同构意义下唯一确定 $V\\otimes W$，因此可以放心把它当作具体空间使用。\n\n有限维时它非常好算：$\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$，若 $\\{e_i\\}$、$\\{f_j\\}$ 分别是 $V$、$W$ 的基，则 $\\{e_i\\otimes f_j\\}$ 是 $V\\otimes W$ 的基，一般元素唯一地写成 $\\sum_{i,j}c_{ij}\\,e_i\\otimes f_j$。能写成单个 $\\alpha\\otimes\\beta$ 的元素称为**纯张量**；纯张量的系数矩阵 $(c_{ij})$ 秩为 1，而 $\\dim V,\\dim W\\ge2$ 时一定存在非纯张量（例如 $e_1\\otimes e_2+e_2\\otimes e_1$）。最贴切的例子是 $\\mathbb{R}^m\\otimes\\mathbb{R}^n\\cong M_{m\\times n}(\\mathbb{R})$：张量就是矩阵，纯张量就是秩一矩阵。",
+    "definitionEn": "**Scope first.** Here we discuss the algebraic **tensor product** $V\\otimes W$, the purely algebraic construction that merges two vector spaces into a new one. What physicists and engineers call a tensor is usually a **tensor field** — a multilinear quantity attached to each point of a manifold — a different layer of the same name; the tensor product is the algebraic foundation underneath those fields and the reason abstract index notation works.\n\nThe construction encodes bilinearity into a new product $\\otimes$. Formally $V\\otimes W$ is spanned by symbols $\\alpha\\otimes\\beta$ subject to the bilinearity relations: $(k\\alpha)\\otimes\\beta=\\alpha\\otimes(k\\beta)=k(\\alpha\\otimes\\beta)$, $(\\alpha_1+\\alpha_2)\\otimes\\beta=\\alpha_1\\otimes\\beta+\\alpha_2\\otimes\\beta$, and symmetrically $\\alpha\\otimes(\\beta_1+\\beta_2)=\\alpha\\otimes\\beta_1+\\alpha\\otimes\\beta_2$. Thus $\\otimes$ is linear in each variable separately and nothing more: $\\alpha\\otimes\\beta$ need not equal $\\beta\\otimes\\alpha$, and $\\alpha\\otimes\\beta=0$ exactly when one of the factors is $0$ (a contrast with tensor products of modules over rings, where both factors may be nonzero).\n\nThe **universal property** is the heart of the matter: for every bilinear map $B:V\\times W\\to U$ there is a unique linear map $\\tilde B:V\\otimes W\\to U$ with $B(\\alpha,\\beta)=\\tilde B(\\alpha\\otimes\\beta)$ for all $\\alpha,\\beta$. In other words, bilinear maps on $V\\times W$ correspond one-to-one to linear maps on $V\\otimes W$. This is where the power of the tensor product lies: it upgrades bilinear problems to linear ones, for which the toolbox is complete. The universal property determines $V\\otimes W$ up to isomorphism, so it may safely be treated as a concrete space.\n\nIn finite dimension everything is computable: $\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$, and if $\\{e_i\\}$ and $\\{f_j\\}$ are bases of $V$ and $W$, then $\\{e_i\\otimes f_j\\}$ is a basis of $V\\otimes W$, every element being uniquely $\\sum_{i,j}c_{ij}\\,e_i\\otimes f_j$. Elements of the form $\\alpha\\otimes\\beta$ are called **pure tensors**; a pure tensor has a coefficient matrix $(c_{ij})$ of rank one, and non-pure tensors exist as soon as $\\dim V,\\dim W\\ge2$ (for example $e_1\\otimes e_2+e_2\\otimes e_1$). The sharpest example is $\\mathbb{R}^m\\otimes\\mathbb{R}^n\\cong M_{m\\times n}(\\mathbb{R})$: tensors are matrices and pure tensors are rank-one matrices.",
+    "formulas": [
+      {
+        "latex": "(k\\alpha)\\otimes\\beta=\\alpha\\otimes(k\\beta)=k(\\alpha\\otimes\\beta)",
+        "note": "标量可以自由穿过 $\\otimes$：无论缩放出现在左边还是右边，结果都是同一个标量与张量的乘积。",
+        "noteEn": "Scalars pass freely through $\\otimes$: scaling on either side yields the same scalar multiple of the tensor."
+      },
+      {
+        "latex": "(\\alpha_1+\\alpha_2)\\otimes\\beta=\\alpha_1\\otimes\\beta+\\alpha_2\\otimes\\beta,\\qquad \\alpha\\otimes(\\beta_1+\\beta_2)=\\alpha\\otimes\\beta_1+\\alpha\\otimes\\beta_2",
+        "note": "分配律（加法的双线性）：$\\otimes$ 对两个变量分别线性，这两条加上标量规则就是张量积的全部「运算规则」。",
+        "noteEn": "Distributivity: $\\otimes$ is linear in each variable separately; these two rules together with the scalar rule are the complete set of manipulation rules for tensor products."
+      },
+      {
+        "latex": "\\dim(V\\otimes W)=\\dim V\\cdot\\dim W,\\qquad \\{e_i\\otimes f_j\\}_{i,j}\\ \\text{是基（}e_i,f_j\\text{ 分别为基）}",
+        "note": "维数相乘是张量积最常用的定量结论：4 维的 $\\mathbb{R}^2\\otimes\\mathbb{R}^2$ 由 4 个基张量 $e_i\\otimes e_j$ 张开。",
+        "noteEn": "Dimensions multiply: this is the most-used quantitative fact about tensor products. The 4-dimensional space $\\mathbb{R}^2\\otimes\\mathbb{R}^2$ is spanned by the four basis tensors $e_i\\otimes e_j$."
+      },
+      {
+        "latex": "B:V\\times W\\to U\\ \\text{双线性}\\iff \\exists!\\ \\tilde B:V\\otimes W\\to U\\ \\text{线性},\\quad \\tilde B(\\alpha\\otimes\\beta)=B(\\alpha,\\beta)",
+        "note": "泛性质：任何一个双线性映射都唯一地「提」为 $V\\otimes W$ 上的线性映射。它同时给出张量积的同构唯一性，是理论的主力工具。",
+        "noteEn": "The universal property: every bilinear map lifts uniquely to a linear map on $V\\otimes W$. It also forces uniqueness of the tensor product up to isomorphism and is the main working tool of the theory."
+      },
+      {
+        "latex": "\\mathbb{R}^m\\otimes\\mathbb{R}^n\\cong M_{m\\times n}(\\mathbb{R}),\\qquad e_i\\otimes f_j\\mapsto E_{ij},\\qquad \\alpha\\otimes\\beta\\mapsto \\alpha\\beta^{\\mathsf T}",
+        "note": "张量即矩阵：基张量对应矩阵单位 $E_{ij}$，而纯张量 $\\alpha\\otimes\\beta$ 对应外积矩阵 $\\alpha\\beta^{\\mathsf T}$（列乘行），秩为 1。",
+        "noteEn": "Tensors are matrices: basis tensors correspond to matrix units $E_{ij}$, and a pure tensor $\\alpha\\otimes\\beta$ corresponds to the outer product $\\alpha\\beta^{\\mathsf T}$ (column times row), which has rank one."
+      }
+    ],
+    "properties": [
+      "泛性质决定一切：任何「双线性」的陈述都能唯一地翻译成从 $V\\otimes W$ 出发的线性映射；这也是张量积在同构意义下唯一、可以在构造细节上「忘记」商空间的理由。",
+      "维数相乘：$\\dim(V\\otimes W)=\\dim V\\dim W$，基是 $e_i\\otimes f_j$；固定基后张量的坐标 $c_{ij}$ 拼成 $m\\times n$ 矩阵，张量运算逐项变成矩阵运算。",
+      "纯张量与一般张量：$\\alpha\\otimes\\beta$ 的系数矩阵是外积 $\\alpha\\beta^{\\mathsf T}$，秩为 1；$\\dim V,\\dim W\\ge2$ 时存在非纯张量，例如 $e_1\\otimes e_2+e_2\\otimes e_1$（系数矩阵 $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ 秩为 2）。「张量 = 两个向量的乘积」是常见误解——纯张量只是全体张量中的一个低维子集。",
+      "对称张量与反对称张量：$\\operatorname{Sym}^2V$ 由 $\\alpha\\otimes\\beta+\\beta\\otimes\\alpha$ 张成、$\\Lambda^2V$ 由 $\\alpha\\otimes\\beta-\\beta\\otimes\\alpha$ 张成；当域的特征不等于 2 时 $V\\otimes V=\\operatorname{Sym}^2V\\oplus\\Lambda^2V$，维数分别为 $\\frac{n(n+1)}{2}$ 与 $\\frac{n(n-1)}{2}$，且反对称一边满足 $\\alpha\\wedge\\alpha=0$（外代数的起点）。",
+      "对偶张量：有限维时 $V^*\\otimes W\\cong\\operatorname{Hom}(V,W)$，对应 $f\\otimes\\beta\\mapsto(\\alpha\\mapsto f(\\alpha)\\beta)$；线性映射因此可以「写成张量」，这也是抽象指标记号与坐标无关张量演算的来源。"
+    ],
+    "propertiesEn": [
+      "The universal property governs everything: any bilinear statement translates uniquely into a linear map out of $V\\otimes W$, which is why the tensor product is unique up to isomorphism and why the quotient construction can be forgotten in practice.",
+      "Dimensions multiply: $\\dim(V\\otimes W)=\\dim V\\dim W$ with basis $e_i\\otimes f_j$; once bases are fixed, the coordinates $c_{ij}$ assemble into an $m\\times n$ matrix and tensor operations become entrywise matrix operations.",
+      "Pure versus general tensors: $\\alpha\\otimes\\beta$ has coefficient matrix the outer product $\\alpha\\beta^{\\mathsf T}$, of rank one; non-pure tensors exist whenever $\\dim V,\\dim W\\ge2$, e.g. $e_1\\otimes e_2+e_2\\otimes e_1$, whose coefficient matrix $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ has rank two. Saying that 「a tensor is a product of two vectors」 is a common misconception — pure tensors form only a low-dimensional subset.",
+      "Symmetric and alternating tensors: $\\operatorname{Sym}^2V$ is spanned by $\\alpha\\otimes\\beta+\\beta\\otimes\\alpha$ and $\\Lambda^2V$ by $\\alpha\\otimes\\beta-\\beta\\otimes\\alpha$; over a field of characteristic not 2, $V\\otimes V=\\operatorname{Sym}^2V\\oplus\\Lambda^2V$ with dimensions $\\frac{n(n+1)}{2}$ and $\\frac{n(n-1)}{2}$, and the alternating side satisfies $\\alpha\\wedge\\alpha=0$ — the starting point of exterior algebra.",
+      "Dual tensors: in finite dimension $V^*\\otimes W\\cong\\operatorname{Hom}(V,W)$ via $f\\otimes\\beta\\mapsto(\\alpha\\mapsto f(\\alpha)\\beta)$, so linear maps can be written as tensors; this is the origin of abstract index notation and coordinate-free tensor calculus."
+    ],
+    "examples": [
+      {
+        "problem": "写出 $\\mathbb{R}^2\\otimes\\mathbb{R}^2$ 的一组基元素，并把 $(1,2)\\otimes(3,-1)$ 展开成基的线性组合，指出它的系数矩阵与秩。",
+        "solution": "取 $\\mathbb{R}^2$ 的标准基 $e_1=(1,0)$、$e_2=(0,1)$，则基元素为 $e_1\\otimes e_1$、$e_1\\otimes e_2$、$e_2\\otimes e_1$、$e_2\\otimes e_2$，共 $2\\times2=4$ 个，与 $\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$ 一致。\n展开：$(1,2)\\otimes(3,-1)=(e_1+2e_2)\\otimes(3e_1-e_2)$，用双线性规则逐项相乘：\n$=3\\,e_1\\otimes e_1-e_1\\otimes e_2+6\\,e_2\\otimes e_1-2\\,e_2\\otimes e_2$。\n系数矩阵为 $\\begin{pmatrix}3&-1\\\\6&-2\\end{pmatrix}$：第 $(i,j)$ 个元素就是 $e_i\\otimes e_j$ 的系数。行列式 $3\\cdot(-2)-(-1)\\cdot6=0$，故秩为 1（两行成比例、比例为 2），与「纯张量的系数矩阵秩为 1」一致：它确实是纯张量 $(1,2)\\otimes(3,-1)$。"
+      },
+      {
+        "problem": "证明 $e_1\\otimes e_2+e_2\\otimes e_1\\in\\mathbb{R}^2\\otimes\\mathbb{R}^2$ 不是纯张量。",
+        "solution": "反设它是纯张量，即存在实数 $a,b,c,d$ 使 $e_1\\otimes e_2+e_2\\otimes e_1=(a e_1+b e_2)\\otimes(c e_1+d e_2)$。\n用双线性规则展开右边：$(a e_1+b e_2)\\otimes(c e_1+d e_2)=ac\\,e_1\\otimes e_1+ad\\,e_1\\otimes e_2+bc\\,e_2\\otimes e_1+bd\\,e_2\\otimes e_2$。\n左边关于基 $\\{e_1\\otimes e_1,\\ e_1\\otimes e_2,\\ e_2\\otimes e_1,\\ e_2\\otimes e_2\\}$ 的系数为 $(0,1,1,0)$，而基张量线性无关，故比较系数得 $ac=0$、$ad=1$、$bc=1$、$bd=0$。\n由 $ad=1$ 知 $a\\ne0$ 且 $d\\ne0$；由 $bc=1$ 知 $b\\ne0$ 且 $c\\ne0$。但 $ac=0$ 要求 $a=0$ 或 $c=0$，与上一步矛盾。因此不存在这样的 $a,b,c,d$，该元素不是纯张量。∎\n（几何解释：它的系数矩阵 $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ 秩为 2，而纯张量的系数矩阵秩不超过 1。）"
+      }
+    ],
+    "tags": [
+      "张量积",
+      "多重线性",
+      "泛性质",
+      "对称张量"
+    ],
+    "links": [
+      "tensor-introduction",
+      "tensor-algebra",
+      "index-notation",
+      "matrix-operations",
+      "linear-transformation"
+    ]
+  },
+  {
+    "id": "matrix-groups",
+    "title": "矩阵群初步",
+    "titleEn": "Matrix Groups: An Introduction",
+    "branch": "linear",
+    "level": 5,
+    "summary": "GL、SL、O、SO、U、SU 的定义与几何意义：正交群保长度，det 正负区分旋转与反射，相似与合同是两个不同的作用。",
+    "summaryEn": "The classical groups GL, SL, O, SO, U, SU: orthogonal matrices preserve lengths, the sign of the determinant separates rotations from reflections, and similarity differs from congruence.",
+    "definition": "**矩阵群**就是由矩阵组成、在矩阵乘法下构成群的集合：包含单位矩阵，对乘法封闭，每个元素都可逆且逆元仍在集合中。最基本的例子是**一般线性群** $GL(n,K)=\\{A\\in M_n(K):\\ \\det A\\ne0\\}$——它把「可逆」这件事本身组织成一个群。矩阵群是线性代数与几何、物理的接口：旋转、反射、幺正演化等对称性都可以写成矩阵群中的元素。\n\n在同一条主线上还有一串经典群：**特殊线性群** $SL(n)=\\{A:\\det A=1\\}$、**正交群** $O(n)=\\{A: A^{\\mathsf T}A=E\\}$、**特殊正交群** $SO(n)=\\{A\\in O(n): \\det A=1\\}$、**酉群** $U(n)=\\{A: A^{\\mathsf H}A=E\\}$ 与**特殊酉群** $SU(n)=\\{A\\in U(n): \\det A=1\\}$。包含关系是 $SO(n)\\subset O(n)\\subset GL(n)$ 与 $SU(n)\\subset U(n)\\subset GL(n)$，而 $SL(n)=\\{A\\in GL(n):\\det A=1\\}$ 与 $O(n)$ 只在「行列式为 1」这一条约束上相交。\n\n几何意义：正交矩阵满足 $A^{\\mathsf T}A=E$，所以保内积与长度（$\\langle Ax,Ay\\rangle=\\langle x,y\\rangle$、$\\|Ax\\|=\\|x\\|$），是空间中的刚体运动（不含平移）。两边取行列式得 $(\\det A)^2=1$，即 $\\det A=\\pm1$：$\\det A=1$ 的是**旋转**（$SO(n)$ 就是旋转群），$\\det A=-1$ 的含**反射**。二维情形 $SO(2)$ 可以完全参数化，写成 $R(\\theta)=\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}$，它与复数乘法和角度加法直接对应。\n\n最后一个必须澄清的点是**群作用**：同一个矩阵在不同情境下要受两种不同的变换。**相似** $A\\mapsto P^{-1}AP$ 描述「换基之后线性映射的新矩阵」，保持特征值、迹、行列式与若尔当标准形；**合同** $A\\mapsto P^{\\mathsf T}AP$ 描述「换基之后二次型的新矩阵」，保持对称性、秩与惯性指数。两者的不变量完全不同，绝不能混用。",
+    "definitionEn": "A **matrix group** is a set of matrices forming a group under matrix multiplication: it contains the identity, is closed under multiplication, and every element is invertible with its inverse again in the set. The basic example is the **general linear group** $GL(n,K)=\\{A\\in M_n(K):\\ \\det A\\ne0\\}$, which turns invertibility itself into a group. Matrix groups are the interface between linear algebra and geometry or physics: rotations, reflections and unitary evolutions are all elements of such groups.\n\nAlong the same theme runs a series of classical groups: the **special linear group** $SL(n)=\\{A:\\det A=1\\}$, the **orthogonal group** $O(n)=\\{A: A^{\\mathsf T}A=E\\}$, the **special orthogonal group** $SO(n)=\\{A\\in O(n): \\det A=1\\}$, the **unitary group** $U(n)=\\{A: A^{\\mathsf H}A=E\\}$ and the **special unitary group** $SU(n)=\\{A\\in U(n): \\det A=1\\}$. The inclusions are $SO(n)\\subset O(n)\\subset GL(n)$ and $SU(n)\\subset U(n)\\subset GL(n)$, while $SL(n)$ meets $O(n)$ exactly in the condition $\\det A=1$.\n\nGeometrically, an orthogonal matrix satisfies $A^{\\mathsf T}A=E$ and therefore preserves inner products and lengths ($\\langle Ax,Ay\\rangle=\\langle x,y\\rangle$, $\\|Ax\\|=\\|x\\|$): it is a rigid motion fixing the origin, with no translation. Taking determinants gives $(\\det A)^2=1$, so $\\det A=\\pm1$: determinant $+1$ means a **rotation** (indeed $SO(n)$ is the rotation group), determinant $-1$ involves a **reflection**. In dimension two, $SO(2)$ admits a complete parametrization $R(\\theta)=\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}$, directly linked to complex multiplication and the addition of angles.\n\nA final point that must be kept straight is the **group action**: the same matrix undergoes two quite different transformations depending on the context. **Similarity** $A\\mapsto P^{-1}AP$ describes the matrix of a linear map after a change of basis and preserves eigenvalues, trace, determinant and Jordan form. **Congruence** $A\\mapsto P^{\\mathsf T}AP$ describes the matrix of a quadratic form after a change of basis and preserves symmetry, rank and inertia indices. Their invariants are entirely different and the two must never be confused.",
+    "formulas": [
+      {
+        "latex": "GL(n,\\mathbb{R})=\\{A\\in M_n(\\mathbb{R}):\\ \\det A\\ne 0\\},\\qquad SL(n,\\mathbb{R})=\\{A:\\ \\det A=1\\}=\\ker(\\det)",
+        "note": "一般线性群与特殊线性群：$GL(n)$ 是可逆矩阵的集合，$SL(n)$ 是其中行列式为 1 的部分，它正是行列式同态的核，因而是正规子群。",
+        "noteEn": "General and special linear groups: $GL(n)$ consists of invertible matrices, while $SL(n)$ is the determinant-one part, exactly the kernel of the determinant homomorphism and hence a normal subgroup."
+      },
+      {
+        "latex": "O(n)=\\{A:\\ A^{\\mathsf T}A=E\\},\\qquad A\\in O(n)\\ \\Longrightarrow\\ \\det A=\\pm1,\\qquad SO(n)=\\{A\\in O(n):\\ \\det A=1\\}",
+        "note": "正交群由保内积的矩阵组成；取行列式得 $\\det A=\\pm1$。$SO(n)$ 挑出其中行列式为 1 的旋转，$\\det=-1$ 的元素含反射。",
+        "noteEn": "The orthogonal group consists of the inner-product preserving matrices; taking determinants gives $\\det A=\\pm1$. The subgroup $SO(n)$ singles out the rotations, while elements with $\\det=-1$ contain reflections."
+      },
+      {
+        "latex": "R(\\theta)=\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\ \\sin\\theta&\\cos\\theta\\end{pmatrix}\\in SO(2),\\qquad R(\\theta)\\begin{pmatrix}1\\\\0\\end{pmatrix}=\\begin{pmatrix}\\cos\\theta\\\\ \\sin\\theta\\end{pmatrix}",
+        "note": "$SO(2)$ 的完整参数化：$R(\\theta)$ 把 $(1,0)$ 送到 $(\\cos\\theta,\\sin\\theta)$，即逆时针旋转 $\\theta$（$\\theta=\\frac{\\pi}{2}$ 时得到 $(0,1)$）。",
+        "noteEn": "The complete parametrization of $SO(2)$: $R(\\theta)$ sends $(1,0)$ to $(\\cos\\theta,\\sin\\theta)$, a counterclockwise rotation by $\\theta$ (for $\\theta=\\frac{\\pi}{2}$ this is $(0,1)$)."
+      },
+      {
+        "latex": "U(n)=\\{A:\\ A^{\\mathsf H}A=E\\},\\qquad SU(n)=\\{A\\in U(n):\\ \\det A=1\\}",
+        "note": "酉群与特殊酉群：复数域上把转置换成共轭转置，$A^{\\mathsf H}A=E$ 保证保复内积；$SU(2)$ 是量子力学自旋与 $SO(3)$ 之间的桥梁。",
+        "noteEn": "Unitary and special unitary groups: over the complex numbers the transpose is replaced by the conjugate transpose, and $A^{\\mathsf H}A=E$ ensures preservation of the Hermitian inner product; $SU(2)$ bridges $SO(3)$ and spin in quantum mechanics."
+      },
+      {
+        "latex": "A\\mapsto P^{-1}AP\\quad(\\text{相似变换}),\\qquad A\\mapsto P^{\\mathsf T}AP\\quad(\\text{合同变换})",
+        "note": "两个完全不同的群作用：相似作用于「线性映射的矩阵」，保持特征值与若尔当标准形；合同作用于「二次型的矩阵」，保持秩与惯性指数（复 Hermite 型把 $P^{\\mathsf T}$ 换成 $P^{\\mathsf H}$）。",
+        "noteEn": "Two genuinely different group actions: similarity acts on matrices of linear maps and preserves eigenvalues and Jordan form; congruence acts on matrices of quadratic forms and preserves rank and inertia (for complex Hermitian forms replace $P^{\\mathsf T}$ by $P^{\\mathsf H}$)."
+      }
+    ],
+    "properties": [
+      "$SL(n)=\\ker(\\det)$ 是 $GL(n)$ 的正规子群；$SO(n)=O(n)\\cap SL(n)$ 在 $O(n)$ 中指数为 2——$O(n)$ 分成 $\\det=+1$ 与 $\\det=-1$ 两个连通分支，只有前者含单位矩阵。",
+      "正交矩阵的几何：$\\langle Ax,Ay\\rangle=\\langle x,y\\rangle$、$\\|Ax\\|=\\|x\\|$、$|\\det A|=1$（保夹角、保长度、保体积）；正交矩阵的行向量与列向量分别构成标准正交基。",
+      "$\\det=+1$ 是旋转、$\\det=-1$ 含反射：$O(2)$ 中 $\\det=-1$ 的变换恰是关于某条过原点直线的反射；$O(3)$ 中 $\\det=-1$ 的变换是旋转与镜面反射的复合（例如中心对称 $-E$）。",
+      "相似与合同是两个不同的作用：相似保持特征值、迹、行列式、若尔当标准形（线性映射的结构不变量）；合同保持对称性、秩与惯性指数（二次型的不变量），但不保持特征值。混用会得到错误的不变量结论。",
+      "$SO(2)$ 是交换群且 $R(\\theta)R(\\varphi)=R(\\theta+\\varphi)$，与复数单位圆群 $U(1)$ 同构（$R(\\theta)\\leftrightarrow e^{i\\theta}$）；而 $SO(3)$ 不交换。矩阵群由此把几何对称性代数化。"
+    ],
+    "propertiesEn": [
+      "$SL(n)=\\ker(\\det)$ is a normal subgroup of $GL(n)$; moreover $SO(n)=O(n)\\cap SL(n)$ has index 2 in $O(n)$ — the group $O(n)$ splits into the two connected pieces $\\det=+1$ and $\\det=-1$, only the first of which contains the identity.",
+      "Geometry of orthogonal matrices: $\\langle Ax,Ay\\rangle=\\langle x,y\\rangle$, $\\|Ax\\|=\\|x\\|$ and $|\\det A|=1$ (angles, lengths and volumes are preserved); the rows and the columns of an orthogonal matrix are orthonormal bases.",
+      "Determinant $+1$ means rotation, determinant $-1$ involves reflection: in $O(2)$ an element of determinant $-1$ is exactly a reflection in a line through the origin; in $O(3)$ it is a rotation composed with a mirror reflection (for instance the central symmetry $-E$).",
+      "Similarity and congruence are different actions: similarity preserves eigenvalues, trace, determinant and Jordan form (the structure of a linear map), whereas congruence preserves symmetry, rank and inertia indices (the invariants of a quadratic form) but not eigenvalues. Mixing them up produces false invariant claims.",
+      "$SO(2)$ is abelian with $R(\\theta)R(\\varphi)=R(\\theta+\\varphi)$ and is isomorphic to the unit circle group $U(1)$ via $R(\\theta)\\leftrightarrow e^{i\\theta}$, while $SO(3)$ is not abelian. Matrix groups thus algebraize geometric symmetry."
+    ],
+    "examples": [
+      {
+        "problem": "验证 $R(\\theta)=\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\ \\sin\\theta&\\cos\\theta\\end{pmatrix}$ 属于 $SO(2)$，说明它是旋转（写出 $(1,0)$ 的像），并验证它保长度。",
+        "solution": "正交性：$R(\\theta)^{\\mathsf T}R(\\theta)=\\begin{pmatrix}\\cos\\theta&\\sin\\theta\\\\-\\sin\\theta&\\cos\\theta\\end{pmatrix}\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\ \\sin\\theta&\\cos\\theta\\end{pmatrix}=\\begin{pmatrix}\\cos^2\\theta+\\sin^2\\theta&-\\cos\\theta\\sin\\theta+\\sin\\theta\\cos\\theta\\\\-\\sin\\theta\\cos\\theta+\\cos\\theta\\sin\\theta&\\sin^2\\theta+\\cos^2\\theta\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ ✓，故 $R(\\theta)\\in O(2)$；又 $\\det R(\\theta)=\\cos^2\\theta+\\sin^2\\theta=1$ ✓，故 $R(\\theta)\\in SO(2)$。\n旋转方向：$R(\\theta)\\begin{pmatrix}1\\\\0\\end{pmatrix}=\\begin{pmatrix}\\cos\\theta\\\\ \\sin\\theta\\end{pmatrix}$。当 $\\theta=\\tfrac{\\pi}{2}$ 时像为 $(0,1)$，正是逆时针转 $90^\\circ$，说明 $R(\\theta)$ 是逆时针旋转 $\\theta$ ✓。\n保长度：对任意 $v=(x,y)$，$\\|R(\\theta)v\\|^2=(Rv)^{\\mathsf T}(Rv)=v^{\\mathsf T}R^{\\mathsf T}Rv=v^{\\mathsf T}v=x^2+y^2=\\|v\\|^2$ ✓。数值例：$v=(1,1)$、$\\theta=\\tfrac{\\pi}{4}$ 时 $R v=(\\cos45^\\circ-\\sin45^\\circ,\\ \\sin45^\\circ+\\cos45^\\circ)=(0,\\sqrt2)$，模方 $0+2=2=\\|v\\|^2$ ✓。"
+      },
+      {
+        "problem": "给出 $O(2)$ 中一个行列式为 $-1$ 的例子 $S$，验证 $S^{\\mathsf T}S=E$ 与 $\\det S=-1$，并求它的不动点集。",
+        "solution": "取 $S=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$（关于 $x$ 轴对称）。$S^{\\mathsf T}=S$，且 $S^2=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}=E$，故 $S^{\\mathsf T}S=E$ ✓，$S\\in O(2)$；$\\det S=1\\cdot(-1)-0\\cdot0=-1$ ✓，所以 $S$ 不是旋转（$S\\notin SO(2)$），而是反射。\n不动点：$S(x,y)=(x,-y)=(x,y)$ 要求 $y=0$，故不动点集是 $x$ 轴 $\\{(t,0):t\\in\\mathbb{R}\\}$，正是关于 $x$ 轴的反射 ✓。\n保长度验证：$\\|S(x,y)\\|^2=x^2+(-y)^2=x^2+y^2$ ✓；特征值为 $1$ 与 $-1$，与 $\\operatorname{tr}S=0$、$\\det S=-1$ 一致。另一例是 $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$（关于直线 $y=x$ 的反射），行列式同样为 $-1$。"
+      }
+    ],
+    "tags": [
+      "矩阵群",
+      "正交群",
+      "酉群",
+      "群作用"
+    ],
+    "links": [
+      "inverse-matrix",
+      "determinant-properties",
+      "inner-product-orthogonality",
+      "matrix-similarity-diagonalization",
+      "quadratic-form-standard"
+    ]
+  },
+  {
+    "id": "dual-bilinear",
+    "title": "对偶空间与双线性型",
+    "titleEn": "Dual Spaces and Bilinear Forms",
+    "branch": "linear",
+    "level": 5,
+    "summary": "线性函数、对偶基与零化子，自然嵌入 V→V**，以及双线性型与二次型之间的极化恒等式和 x^T A y 表示。",
+    "summaryEn": "Linear functionals, dual bases and annihilators, the natural embedding $V\\to V^{**}$, and the polarization identity linking bilinear forms to quadratic forms via $x^{\\mathsf T}Ay$.",
+    "definition": "设 $V$ 是域 $K$ 上的线性空间。从 $V$ 到 $K$ 的线性映射 $f:V\\to K$ 称为**线性函数**（线性泛函），全体线性函数在逐点加法与数乘下构成线性空间 $V^*=\\mathcal{L}(V,K)$，称为 $V$ 的**对偶空间**。若 $e_1,\\dots,e_n$ 是 $V$ 的基，则由 $\\varepsilon_i(e_j)=\\delta_{ij}$ 唯一确定的 $\\varepsilon_1,\\dots,\\varepsilon_n$ 构成 $V^*$ 的基（**对偶基**），于是有限维时 $\\dim V^*=\\dim V$。\n\n虽然维数相同，$V$ 与 $V^*$ 之间却**没有自然的同构**——每一个同构都依赖基的选取。相比之下，$V$ 到**双对偶** $V^{**}$ 有一个天然嵌入 $\\iota(\\alpha)(f)=f(\\alpha)$：它不依赖任何基，而且总是单射；当且仅当 $V$ 有限维时 $\\iota$ 才是满射、从而是同构。这个「有限维」条件不能省：无限维空间里 $\\iota(V)$ 只是 $V^{**}$ 的真子集。\n\n对子集 $S\\subseteq V$ 定义**零化子** $S^\\circ=\\{f\\in V^*: f(s)=0,\\ \\forall s\\in S\\}$，它是 $V^*$ 的子空间，有限维时满足 $\\dim S+\\dim S^\\circ=\\dim V$。零化子是用线性函数描述子空间的方式：线性方程组 $Ax=0$ 的解空间正是行向量空间（作为 $K^n$ 上的线性函数全体中的子空间）的零化子——列向量语言说「$x$ 与每一行正交」，对偶空间语言说「$x$ 落在零化子里」，两者是同一件事。\n\n**双线性型**是双变量版本：$B:V\\times V\\to K$ 对每个变量分别线性。对称（$B(\\alpha,\\beta)=B(\\beta,\\alpha)$）与反对称（$B(\\alpha,\\beta)=-B(\\beta,\\alpha)$）是最重要的两类。对称双线性型与**二次型** $Q(\\alpha)=B(\\alpha,\\alpha)$ 一一对应：在特征不等于 2 的域上，$B$ 可以由 $Q$ 经极化恒等式 $B(\\alpha,\\beta)=\\frac12\\big(Q(\\alpha+\\beta)-Q(\\alpha)-Q(\\beta)\\big)$ 恢复。取定基后 $B(x,y)=x^{\\mathsf T}Ay$，而 $B$ 对称当且仅当矩阵 $A$ 对称——这条通道把双线性型的理论与二次型标准形、惯性指数完全对接起来。",
+    "definitionEn": "Let $V$ be a vector space over a field $K$. A linear map $f:V\\to K$ is called a **linear functional**, and the set of all of them, with pointwise addition and scalar multiplication, is a vector space $V^*=\\mathcal{L}(V,K)$, the **dual space** of $V$. If $e_1,\\dots,e_n$ is a basis of $V$, the functionals $\\varepsilon_1,\\dots,\\varepsilon_n$ uniquely determined by $\\varepsilon_i(e_j)=\\delta_{ij}$ form a basis of $V^*$ (the **dual basis**), so in finite dimension $\\dim V^*=\\dim V$.\n\nAlthough the dimensions agree, there is **no natural isomorphism** between $V$ and $V^*$: every isomorphism depends on a choice of basis. By contrast, $V$ has a canonical embedding into the **double dual** $V^{**}$, namely $\\iota(\\alpha)(f)=f(\\alpha)$. It uses no basis and is always injective; it is surjective, hence an isomorphism, exactly when $V$ is finite dimensional. This finiteness hypothesis cannot be dropped: in infinite dimension $\\iota(V)$ is a proper subset of $V^{**}$.\n\nFor a subset $S\\subseteq V$ define the **annihilator** $S^\\circ=\\{f\\in V^*: f(s)=0\\ \\text{for all } s\\in S\\}$, a subspace of $V^*$ that in finite dimension satisfies $\\dim S+\\dim S^\\circ=\\dim V$. The annihilator is the way to describe subspaces through functionals: the solution space of $Ax=0$ is exactly the annihilator of the row space (viewed as a subspace of the linear functionals on $K^n$). The column-vector language says 「$x$ is orthogonal to every row」; the dual language says 「$x$ lies in the annihilator」 — the same statement in two dialects.\n\nA **bilinear form** is the two-variable counterpart: a map $B:V\\times V\\to K$ linear in each variable separately. Symmetric forms ($B(\\alpha,\\beta)=B(\\beta,\\alpha)$) and antisymmetric forms ($B(\\alpha,\\beta)=-B(\\beta,\\alpha)$) are the fundamental classes. A symmetric bilinear form and the **quadratic form** $Q(\\alpha)=B(\\alpha,\\alpha)$ determine each other: over a field of characteristic not 2, $B$ is recovered from $Q$ by the polarization identity $B(\\alpha,\\beta)=\\frac12\\big(Q(\\alpha+\\beta)-Q(\\alpha)-Q(\\beta)\\big)$. Once a basis is fixed, $B(x,y)=x^{\\mathsf T}Ay$, and $B$ is symmetric if and only if $A$ is symmetric — the bridge connecting bilinear forms to the standard form of a quadratic form and to inertia indices.",
+    "formulas": [
+      {
+        "latex": "V^*=\\mathcal{L}(V,K),\\qquad \\varepsilon_i(e_j)=\\delta_{ij},\\qquad \\dim V^*=\\dim V",
+        "note": "对偶空间与对偶基：$\\varepsilon_i$ 由它在基上的取值 $\\delta_{ij}$ 唯一确定；有限维时对偶空间的维数与原来的空间相同。",
+        "noteEn": "Dual space and dual basis: each $\\varepsilon_i$ is uniquely determined by its values $\\delta_{ij}$ on a basis, and in finite dimension the dual has the same dimension as the original space."
+      },
+      {
+        "latex": "\\iota:V\\to V^{**},\\quad \\iota(\\alpha)(f)=f(\\alpha);\\qquad \\iota\\ \\text{总是单射},\\ \\text{且仅当 } \\dim V<\\infty\\ \\text{时为同构}",
+        "note": "自然嵌入：不依赖任何基。单射对任意维数都成立；「满射」需要有限维这个条件，无限维时 $\\iota(V)$ 只是真子集。",
+        "noteEn": "The natural embedding uses no basis. Injectivity always holds; surjectivity requires finite dimension, for in infinite dimension $\\iota(V)$ is a proper subset."
+      },
+      {
+        "latex": "S^{\\circ}=\\{f\\in V^*:\\ f(s)=0\\ \\forall s\\in S\\},\\qquad \\dim S+\\dim S^{\\circ}=\\dim V",
+        "note": "零化子及其维数公式（有限维）：$S$ 越大零化子越小。线性方程组 $Ax=0$ 的解空间正是行向量空间的零化子（链接 homogeneous-solutions）。",
+        "noteEn": "Annihilator and its dimension formula in finite dimension: the larger $S$ is, the smaller $S^\\circ$. The solution space of $Ax=0$ is precisely the annihilator of the row space (see homogeneous-solutions)."
+      },
+      {
+        "latex": "B(\\alpha,\\beta)=\\tfrac12\\big(Q(\\alpha+\\beta)-Q(\\alpha)-Q(\\beta)\\big),\\qquad Q(\\alpha)=B(\\alpha,\\alpha)",
+        "note": "极化恒等式（域的特征不等于 2）：对称双线性型与二次型互相唯一决定。对一般双线性型，右边只给出对称部分 $\\frac12\\big(B(\\alpha,\\beta)+B(\\beta,\\alpha)\\big)$（链接 quadratic-form-standard）。",
+        "noteEn": "Polarization identity (characteristic not 2): a symmetric bilinear form and its quadratic form determine each other. For a general bilinear form the right-hand side returns only the symmetric part $\\frac12(B(\\alpha,\\beta)+B(\\beta,\\alpha))$ (see quadratic-form-standard)."
+      },
+      {
+        "latex": "B(x,y)=x^{\\mathsf T}Ay,\\qquad A=(B(e_i,e_j)),\\qquad B\\ \\text{对称}\\iff A^{\\mathsf T}=A",
+        "note": "双线性型的矩阵表示：$A$ 由基上的取值唯一确定；对称性在矩阵上就是 $A$ 对称。换基 $P$ 时 $A\\mapsto P^{\\mathsf T}AP$（合同），故只有秩与惯性指数是内在不变量（链接 positive-definite-inertia）。",
+        "noteEn": "Matrix representation of a bilinear form: $A$ is determined by the values on the basis, and symmetry of the form is symmetry of $A$. Under a change of basis $P$ one has $A\\mapsto P^{\\mathsf T}AP$ (congruence), so only rank and inertia indices are intrinsic (see positive-definite-inertia)."
+      }
+    ],
+    "properties": [
+      "对偶基 $\\varepsilon_i$ 由 $\\varepsilon_i(e_j)=\\delta_{ij}$ 唯一确定；有限维时 $V\\cong V^*$，但任何同构都依赖基的选取，而 $\\iota:V\\to V^{**}$ 是自然的。$\\iota$ 为同构的充要条件是 $\\dim V<\\infty$——无限维时它只是单射，这条条件必须写明。",
+      "零化子的维数公式 $\\dim S+\\dim S^{\\circ}=\\dim V$；并且恒有 $(S^{\\circ})^{\\circ}\\supseteq\\iota(S)\\subseteq V^{**}$，有限维时 $(S^{\\circ})^{\\circ}=\\iota(S)$（即 $S$ 本身）。它把子空间与「约束方程」对偶起来：子空间越大，零化子越小。",
+      "线性方程组语言：$Ax=0$ 的解空间等于行空间的零化子（在自然等同 $V^{**}\\cong V$ 之下），取维数立刻得到 $\\operatorname{rank}A+\\dim\\ker A=n$。对偶语言与「与每一行正交」的列向量语言是同一件事的两种说法。",
+      "对称双线性型与二次型一一对应（域的特征不等于 2）：$Q(\\alpha)=B(\\alpha,\\alpha)$，极化恒等式反向恢复 $B$。对一般双线性型，极化只恢复对称部分 $\\frac12\\big(B(\\alpha,\\beta)+B(\\beta,\\alpha)\\big)$；反对称型满足 $B(\\alpha,\\alpha)=0$（特征不等于 2 时与反对称等价），此时 $Q\\equiv0$，二次型完全丢失反对称部分的信息。",
+      "矩阵表示：$B(x,y)=x^{\\mathsf T}Ay$ 中的 $A=(B(e_i,e_j))$ 唯一；$B$ 对称 $\\iff A$ 对称；换基 $P$ 时 $A\\mapsto P^{\\mathsf T}AP$，因此秩与惯性指数（正负惯性指数、符号差）是 $B$ 的内在不变量——这正是二次型标准形理论的内容。"
+    ],
+    "propertiesEn": [
+      "The dual basis $\\varepsilon_i$ is uniquely determined by $\\varepsilon_i(e_j)=\\delta_{ij}$; in finite dimension $V\\cong V^*$, but every isomorphism depends on a basis, whereas $\\iota:V\\to V^{**}$ is canonical. It is an isomorphism if and only if $\\dim V<\\infty$ — in infinite dimension it is only injective, and this hypothesis must be stated.",
+      "Annihilator dimension formula $\\dim S+\\dim S^{\\circ}=\\dim V$, and always $(S^{\\circ})^{\\circ}\\supseteq\\iota(S)\\subseteq V^{**}$, with equality $(S^{\\circ})^{\\circ}=\\iota(S)$ (that is, $S$ itself) in finite dimension. It pairs subspaces with the constraints that cut them out: the larger the subspace, the smaller its annihilator.",
+      "Linear systems: the solution space of $Ax=0$ equals the annihilator of the row space (under the natural identification $V^{**}\\cong V$), and counting dimensions immediately gives $\\operatorname{rank}A+\\dim\\ker A=n$. The dual phrasing and the column-vector phrasing 「orthogonal to every row」 say the same thing.",
+      "Symmetric bilinear forms correspond one-to-one with quadratic forms when the characteristic is not 2: $Q(\\alpha)=B(\\alpha,\\alpha)$ and polarization recovers $B$. For a general bilinear form polarization recovers only the symmetric part $\\frac12(B(\\alpha,\\beta)+B(\\beta,\\alpha))$; an antisymmetric form satisfies $B(\\alpha,\\alpha)=0$ (equivalent to antisymmetry when the characteristic is not 2), and then $Q\\equiv0$, so the quadratic form retains no information about the antisymmetric part.",
+      "Matrix representation: the matrix $A=(B(e_i,e_j))$ in $B(x,y)=x^{\\mathsf T}Ay$ is unique; $B$ is symmetric $\\iff$ $A$ is symmetric; under a change of basis $P$ one has $A\\mapsto P^{\\mathsf T}AP$, so rank and inertia indices (the numbers of positive and negative squares, and their difference) are the intrinsic invariants of $B$ — exactly the content of the standard form theory of quadratic forms."
+    ],
+    "examples": [
+      {
+        "problem": "在 $\\mathbb{R}^2$ 上定义 $B(x,y)=x_1y_1+2x_1y_2+3x_2y_2$（$x=(x_1,x_2)$、$y=(y_1,y_2)$）。判断 $B$ 是否对称、写出其矩阵 $A$，并用极化恒等式在 $x=(1,2)$、$y=(3,-1)$ 处回代验证。",
+        "solution": "写矩阵：$A=\\begin{pmatrix}B(e_1,e_1)&B(e_1,e_2)\\\\B(e_2,e_1)&B(e_2,e_2)\\end{pmatrix}=\\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$。\n判断对称性：$B(y,x)=y_1x_1+2y_1x_2+3y_2x_2=x_1y_1+2x_2y_1+3x_2y_2$。取 $x=(1,2)$、$y=(3,-1)$：$B(x,y)=1\\cdot3+2\\cdot1\\cdot(-1)+3\\cdot2\\cdot(-1)=3-2-6=-5$；$B(y,x)=3\\cdot1+2\\cdot3\\cdot2+3\\cdot(-1)\\cdot2=3+12-6=9$。$-5\\ne9$，故 $B$ 不对称 ✓（矩阵也不对称：$A_{12}=2\\ne0=A_{21}$）。\n对称部分：$B_s(x,y)=\\tfrac12\\big(B(x,y)+B(y,x)\\big)=x_1y_1+x_1y_2+x_2y_1+3x_2y_2$，矩阵 $\\tfrac12(A+A^{\\mathsf T})=\\begin{pmatrix}1&1\\\\1&3\\end{pmatrix}$ ✓。\n二次型：$Q(x)=B(x,x)=x_1^2+(2+0)x_1x_2+3x_2^2=x_1^2+2x_1x_2+3x_2^2$。\n极化恒等式回代：$Q(x)=1+2\\cdot1\\cdot2+3\\cdot4=17$；$Q(y)=9+2\\cdot3\\cdot(-1)+3\\cdot1=6$；$Q(x+y)=Q(4,1)=16+2\\cdot4\\cdot1+3=27$。于是 $\\tfrac12\\big(Q(x+y)-Q(x)-Q(y)\\big)=\\tfrac12(27-17-6)=2$，而 $B_s(x,y)=\\tfrac12(-5+9)=2$ ✓，两者一致；注意极化给出的是对称部分 $B_s$，而不是原来的 $B$（$B(x,y)=-5\\ne2$）。"
+      },
+      {
+        "problem": "在 $V=\\mathbb{R}^2$ 中取基 $e_1=(1,1)$、$e_2=(1,0)$，求对偶基 $\\varepsilon_1,\\varepsilon_2$（写成坐标 $x,y$ 的函数），再求 $S=\\operatorname{span}\\{(1,1)\\}$ 的零化子，并核对维数公式。",
+        "solution": "设 $\\varepsilon_1(x,y)=ax+by$。由 $\\varepsilon_1(e_1)=a+b=1$、$\\varepsilon_1(e_2)=a=0$ 得 $b=1$，故 $\\varepsilon_1(x,y)=y$。\n设 $\\varepsilon_2(x,y)=cx+dy$。由 $\\varepsilon_2(e_1)=c+d=0$、$\\varepsilon_2(e_2)=c=1$ 得 $d=-1$，故 $\\varepsilon_2(x,y)=x-y$。\n验证：$\\varepsilon_1(1,1)=1$、$\\varepsilon_1(1,0)=0$、$\\varepsilon_2(1,1)=0$、$\\varepsilon_2(1,0)=1$，恰好是 $\\delta_{ij}$ ✓。\n零化子：$S=\\operatorname{span}\\{e_1\\}=\\operatorname{span}\\{(1,1)\\}$，对 $f=a\\varepsilon_1+b\\varepsilon_2$ 有 $f(e_1)=a\\varepsilon_1(e_1)+b\\varepsilon_2(e_1)=a$，故 $S^{\\circ}=\\{f:\\ a=0\\}=\\operatorname{span}\\{\\varepsilon_2\\}=\\operatorname{span}\\{x-y\\}$，$\\dim S^{\\circ}=1$。\n核对：$\\dim S+\\dim S^{\\circ}=1+1=2=\\dim V$ ✓。几何上 $\\varepsilon_2=x-y$ 正是「过 $(1,1)$ 的直线」的线性方程 $x-y=0$ 所对应的线性函数。"
+      }
+    ],
+    "tags": [
+      "对偶空间",
+      "零化子",
+      "双线性型",
+      "极化恒等式"
+    ],
+    "links": [
+      "dual-space",
+      "homogeneous-solutions",
+      "quadratic-form-standard",
+      "positive-definite-inertia",
+      "inner-product-orthogonality"
+    ]
+  }
+]

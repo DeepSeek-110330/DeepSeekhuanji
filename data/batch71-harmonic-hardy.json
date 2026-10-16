@@ -1,0 +1,614 @@
+[
+  {
+    "id": "calderon-zygmund-decomposition",
+    "title": "考尔德伦–齐格蒙德分解",
+    "titleEn": "The Calderón–Zygmund Decomposition",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "给定 f ∈ L¹(ℝⁿ) 与 λ > 0，把 f 拆成好部分 g（满足 ‖g‖_∞ ≤ 2ⁿλ）与坏部分 b（互不相交的二进方体上的平均零块之和），并保证坏集总测度 Σ|Q_k| ≤ ‖f‖₁/λ；它是奇异积分 L¹ → 弱 L¹ 有界性的核心工具。",
+    "summaryEn": "Given f ∈ L¹(ℝⁿ) and λ > 0, one splits f into a good part g with ‖g‖_∞ ≤ 2ⁿλ and a bad part b, a sum of mean-zero pieces supported on pairwise disjoint dyadic cubes, with the crucial bound Σ|Q_k| ≤ ‖f‖₁/λ; this is the engine behind the weak (1,1) boundedness of singular integrals.",
+    "definition": "设 $f\\in L^1(\\mathbb{R}^n)$、$\\lambda>0$。先在 $\\mathbb{R}^n$ 上取定**二进方体**网格 $Q=\\prod_{i=1}^n[2^{-k}m_i,2^{-k}(m_i+1))$（$k\\in\\mathbb{Z}$、$m_i\\in\\mathbb{Z}$）：把每个二进方体的 $n$ 条棱各对半分，就得到 $2^n$ 个子方体，因此子方体与它的**母方体** $\\tilde Q$ 满足 $|\\tilde Q|=2^n|Q|$。记 $|f|_Q=\\frac1{|Q|}\\int_Q|f|\\,dx$ 为 $|f|$ 在 $Q$ 上的平均。\n\n**选择规则（停止时间）**：考虑所有满足 $|f|_Q>\\lambda$ 的二进方体，取其中的**极大元** $\\{Q_k\\}$，即要求 $$|f|_{Q_k}>\\lambda,\\qquad |f|_{\\tilde Q_k}\\le\\lambda .$$ 极大元一定存在：一方面 $|f|_Q\\le\\|f\\|_1|Q|^{-1}\\to0$（$|Q|\\to\\infty$），所以没有任意大的坏方体；另一方面在 $|f|$ 取大值的点附近，充分小的二进方体上的平均必 $>\\lambda$（二进形式的勒贝格微分定理）。二进方体的嵌套性质保证这些极大元**两两不交**。\n\n有了 $\\{Q_k\\}$ 就定义分解 $f=g+b$：在 $E=\\bigcup_kQ_k$ 之外取 $g=f$，在每个 $Q_k$ 上取 $g=f_{Q_k}:=\\frac1{|Q_k|}\\int_{Q_k}f$；再令 $b_k=(f-f_{Q_k})\\mathbf 1_{Q_k}$、$b=\\sum_kb_k=f-g$。于是 $g\\in L^\\infty$ 是**好部分**，$b\\in L^1$ 是**坏部分**——一列互不相交的方体上「平均为零」的块之和。四条基本性质是：① **好部分一致有界**：$\\|g\\|_\\infty\\le2^n\\lambda$；② **消失矩**：$\\operatorname{supp}b_k\\subset Q_k$ 且 $\\int_{Q_k}b_k\\,dx=0$；③ **坏集总测度小**：$\\sum_k|Q_k|\\le\\frac1\\lambda\\|f\\|_1$；④ 每个 $Q_k$ 是「自身平均 $>\\lambda$、母方体平均 $\\le\\lambda$」的**极大二进方体**。\n\n常数 $2^n$ 的来源必须说清：由母方体的条件与体积比 $|\\tilde Q_k|=2^n|Q_k|$，有 $|f_{Q_k}|\\le\\frac1{|Q_k|}\\int_{Q_k}|f|\\le\\frac{|\\tilde Q_k|}{|Q_k|}\\cdot\\frac1{|\\tilde Q_k|}\\int_{\\tilde Q_k}|f|\\le2^n\\lambda$；而在 $E$ 之外，由极大性与二进勒贝格微分定理得 $|f|\\le\\lambda$ a.e.，故 $\\|g\\|_\\infty\\le2^n\\lambda$。**若改用「每次只把最长一条棱对半分」的二分规则，则 $|\\tilde Q|=2|Q|$，常数变成 $2$**；$n=1$ 时两种规则一致——这就是不同教材分别写 $\\|g\\|_\\infty\\le2\\lambda$ 与 $\\|g\\|_\\infty\\le2^n\\lambda$ 的原因。另外还有一致估计 $\\|g\\|_1\\le\\|f\\|_1$、$\\|b\\|_1\\le2\\|f\\|_1$。\n\n它为什么是核心工具：把 $f$ 拆成「有界的好部分 + 支在小方体上、平均为零的坏部分」以后，好部分交给 $L^2$（或 $L^p$）有界性处理，坏部分交给核的**消失性/正则性**处理（每个 $b_k$ 的消失矩恰好与核在球面上平均为零相配），由此得到奇异积分算子的 $(1,1)$ 弱型估计，再用 Marcinkiewicz 插值得到全部 $L^p\\ (1<p<\\infty)$ 有界性。同一台机器还给出 John–Nirenberg 不等式与 $H^1$ 的原子分解，所以它是本分支最核心的技术之一。",
+    "definitionEn": "Let $f\\in L^1(\\mathbb{R}^n)$ and $\\lambda>0$. Fix the **dyadic cubes** $Q=\\prod_{i=1}^n[2^{-k}m_i,2^{-k}(m_i+1))$ ($k\\in\\mathbb{Z}$, $m_i\\in\\mathbb{Z}$): bisecting all $n$ edges of a dyadic cube produces $2^n$ children, so a cube and its **parent** $\\tilde Q$ satisfy $|\\tilde Q|=2^n|Q|$. Write $|f|_Q=\\frac1{|Q|}\\int_Q|f|\\,dx$ for the average of $|f|$ over $Q$.\n\n**Selection rule (stopping time).** Consider all dyadic cubes with $|f|_Q>\\lambda$ and take the **maximal** ones $\\{Q_k\\}$, i.e. $$|f|_{Q_k}>\\lambda,\\qquad |f|_{\\tilde Q_k}\\le\\lambda .$$ Maximal elements exist: on one hand $|f|_Q\\le\\|f\\|_1|Q|^{-1}\\to0$ as $|Q|\\to\\infty$, so there are no arbitrarily large bad cubes; on the other hand, near a point where $|f|$ is large, small enough dyadic cubes have average $>\\lambda$ (the dyadic Lebesgue differentiation theorem). Nesting of dyadic cubes makes these maximal elements **pairwise disjoint**.\n\nWith $\\{Q_k\\}$ at hand, set $g=f$ off $E=\\bigcup_kQ_k$ and $g=f_{Q_k}:=\\frac1{|Q_k|}\\int_{Q_k}f$ on each $Q_k$; then put $b_k=(f-f_{Q_k})\\mathbf 1_{Q_k}$ and $b=\\sum_kb_k=f-g$. Thus $f=g+b$ with $g\\in L^\\infty$ the **good part** and $b\\in L^1$ the **bad part**, a sum of mean-zero pieces on pairwise disjoint cubes. Four basic properties: ① $\\|g\\|_\\infty\\le2^n\\lambda$; ② $\\operatorname{supp}b_k\\subset Q_k$ and $\\int_{Q_k}b_k\\,dx=0$ (vanishing moment); ③ $\\sum_k|Q_k|\\le\\frac1\\lambda\\|f\\|_1$ (small bad set); ④ each $Q_k$ is a **maximal dyadic cube** whose own average exceeds $\\lambda$ while its parent's does not.\n\nThe origin of the constant $2^n$: since the parent's average is $\\le\\lambda$ and $|\\tilde Q_k|=2^n|Q_k|$, $$|f_{Q_k}|\\le\\frac1{|Q_k|}\\int_{Q_k}|f|\\le\\frac{|\\tilde Q_k|}{|Q_k|}\\cdot\\frac1{|\\tilde Q_k|}\\int_{\\tilde Q_k}|f|\\le2^n\\lambda,$$ while off $E$ maximality plus the dyadic differentiation theorem give $|f|\\le\\lambda$ a.e.; hence $\\|g\\|_\\infty\\le2^n\\lambda$. **If instead one bisects only the longest edge at each step, then $|\\tilde Q|=2|Q|$ and the constant becomes $2$**; for $n=1$ the two rules agree — this is why textbooks state either $\\|g\\|_\\infty\\le2\\lambda$ or $\\|g\\|_\\infty\\le2^n\\lambda$. One also has the uniform $L^1$ bounds $\\|g\\|_1\\le\\|f\\|_1$ and $\\|b\\|_1\\le2\\|f\\|_1$.\n\nWhy it is the central tool: once $f$ is split into a bounded good part plus mean-zero pieces on small cubes, the good part is handled by $L^2$ (or $L^p$) boundedness and the bad part by the **cancellation/regularity** of the kernel (the vanishing moments of $b_k$ match the vanishing spherical means of $K$). This yields the weak $(1,1)$ bound for singular integrals and, by Marcinkiewicz interpolation, $L^p$ boundedness for all $1<p<\\infty$. The same machine proves the John–Nirenberg inequality and the atomic decomposition of $H^1$.",
+    "formulas": [
+      {
+        "latex": "f=g+b,\\qquad b=\\sum_k b_k,\\qquad b_k=(f-f_{Q_k})\\mathbf 1_{Q_k}",
+        "note": "分解的定义：好部分 g 是 f 在坏方体上换成平均值的修正，坏部分 b 是全部平均零块之和，且 f=g+b 处处成立。",
+        "noteEn": "The decomposition: the good part replaces f by its averages on the bad cubes, the bad part is the sum of all mean-zero pieces, and f=g+b holds pointwise."
+      },
+      {
+        "latex": "|f|_{Q_k}>\\lambda,\\qquad |f|_{\\tilde Q_k}\\le\\lambda",
+        "note": "选择规则：Q_k 是平均大于 λ 的极大二进方体，其母方体平均不超过 λ；这就固定了常数 2ⁿ 与不交性。",
+        "noteEn": "Selection rule: Q_k is a maximal dyadic cube with average > λ whose parent has average ≤ λ; this fixes the constant 2ⁿ and the disjointness."
+      },
+      {
+        "latex": "\\|g\\|_\\infty\\le2^n\\lambda,\\qquad 2^n=\\frac{|\\tilde Q_k|}{|Q_k|}",
+        "note": "好部分一致有界；常数 2ⁿ 来自母方体与子方体的体积比（每条棱对半分），换用「只二分最长棱」的规则常数为 2。",
+        "noteEn": "Uniform bound for the good part; the constant 2ⁿ is the volume ratio parent/child (all edges bisected); bisecting only the longest edge gives the constant 2."
+      },
+      {
+        "latex": "\\int_{Q_k}b_k\\,dx=0,\\qquad \\operatorname{supp}b_k\\subset Q_k,\\qquad Q_k\\ \\text{两两不交}",
+        "note": "坏块的消失矩、支集与不交性；这正是让奇异积分核的消失性（球面平均为零）发挥作用的地方。",
+        "noteEn": "Vanishing moment, support and disjointness of the bad pieces; this is exactly what lets the vanishing spherical mean of the kernel be used."
+      },
+      {
+        "latex": "\\sum_k|Q_k|\\le\\frac1\\lambda\\|f\\|_{L^1}",
+        "note": "关键不等式：坏集总测度被封在 ‖f‖₁/λ 内。证明只用 λ|Q_k|<∫_{Q_k}|f| 与 Q_k 两两不交：λΣ|Q_k|<∫_{∪Q_k}|f|≤‖f‖₁。",
+        "noteEn": "The key inequality: the total measure of the bad set is at most ‖f‖₁/λ, proved from λ|Q_k|<∫_{Q_k}|f| and disjointness: λΣ|Q_k|<∫_{∪Q_k}|f|≤‖f‖₁."
+      }
+    ],
+    "expression": {
+      "text": "f = g + b,   g = f·1_{E^c} + Σ_k f_{Q_k}·1_{Q_k},   b = Σ_k (f − f_{Q_k})·1_{Q_k}",
+      "symbol": "f=g+b",
+      "note": "好部分 g ∈ L^∞ 且 ‖g‖_∞ ≤ 2ⁿλ；坏部分 b 的每一块支在 Q_k 上且平均为零，坏集总测度 ≤ ‖f‖₁/λ。",
+      "noteEn": "Good part g ∈ L^∞ with ‖g‖_∞ ≤ 2ⁿλ; each piece of b is supported on Q_k with mean zero, and the bad set has measure ≤ ‖f‖₁/λ."
+    },
+    "properties": [
+      "常数 2ⁿ 的来源是二进方体的体积比 |Q̃|/|Q| = 2ⁿ（每条棱对半分）；若改用「只二分最长棱」的规则，常数为 2，一维时两种规则一致。",
+      "坏集总测度 Σ|Q_k| ≤ ‖f‖₁/λ 是分解中「坏的部分小」的定量表达，推导只需 λ|Q_k| < ∫_{Q_k}|f| 与 Q_k 两两不交。",
+      "消失矩 ∫_{Q_k}b_k = 0 使 b_k 与核的正则性条件配套：在远处把 K(x−y) 与 K(x−c_k) 相减时自带抵消，是 (1,1) 弱型估计的核心机制。",
+      "两部分的质量对 λ 一致：‖g‖₁ ≤ ‖f‖₁、‖b‖₁ ≤ 2‖f‖₁；而 λ ↓ 0 时坏集测度上界 ‖f‖₁/λ 发散，坏集确实变大（同一 f 的实例见例题）。",
+      "用途：奇异算子的 (1,1) 弱型估计与 Marcinkiewicz 插值、John–Nirenberg 不等式、H¹ 的原子分解；把二进方体换成一般方体或球时需要 Whitney 型覆盖与额外论证。"
+    ],
+    "propertiesEn": [
+      "The constant 2ⁿ comes from the volume ratio |Q̃|/|Q| = 2ⁿ (all edges bisected); bisecting only the longest edge gives the constant 2, and in one dimension the two rules coincide.",
+      "The bound Σ|Q_k| ≤ ‖f‖₁/λ quantifies how small the bad set is; it follows just from λ|Q_k| < ∫_{Q_k}|f| and the disjointness of the Q_k.",
+      "The vanishing moment ∫_{Q_k}b_k = 0 matches the regularity condition on the kernel: subtracting K(x−c_k) from K(x−y) on the far field produces the cancellation that drives the weak (1,1) estimate.",
+      "Both parts have L¹ mass uniformly bounded in λ: ‖g‖₁ ≤ ‖f‖₁, ‖b‖₁ ≤ 2‖f‖₁; as λ ↓ 0 the measure bound ‖f‖₁/λ blows up and the bad set really does grow.",
+      "Uses: weak (1,1) estimates and Marcinkiewicz interpolation for singular integrals, the John–Nirenberg inequality, the atomic decomposition of H¹; replacing dyadic cubes by general cubes or balls requires Whitney-type coverings and extra work."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "4*min(1,max(0,sign(x)*sign(1-x))) - 2*min(1,max(0,sign(x-1)*sign(2-x))) + 5*min(1,max(0,sign(x-4)*sign(5-x))) - min(1,max(0,sign(x-5)*sign(6-x)))",
+          "color": "#4cc9f0",
+          "label": "f（待分解的函数）"
+        },
+        {
+          "expr": "min(1,max(0,sign(x)*sign(2-x))) + 2*min(1,max(0,sign(x-4)*sign(6-x)))",
+          "color": "#ffd166",
+          "label": "g（好部分：在坏方体上取平均）"
+        },
+        {
+          "expr": "3*min(1,max(0,sign(x)*sign(1-x))) - 3*min(1,max(0,sign(x-1)*sign(2-x))) + 3*min(1,max(0,sign(x-4)*sign(5-x))) - 3*min(1,max(0,sign(x-5)*sign(6-x)))",
+          "color": "#ff6b9d",
+          "label": "b（坏部分：每块平均为零）"
+        },
+        {
+          "expr": "2",
+          "color": "#9be8ff",
+          "label": "λ = 2（阈值）"
+        }
+      ],
+      "xRange": [
+        -1,
+        7
+      ],
+      "yRange": [
+        -3.5,
+        5.5
+      ],
+      "title": "CZ 分解 f = g + b：Q₁=[0,2], Q₂=[4,6], λ=2"
+    },
+    "examples": [
+      {
+        "problem": "在 ℝ 上取 $f=4\\cdot\\mathbf 1_{(0,1)}-2\\cdot\\mathbf 1_{(1,2)}+5\\cdot\\mathbf 1_{(4,5)}-\\mathbf 1_{(5,6)}$（$\\|f\\|_1=12$）与 $\\lambda=2$，求它的 Calderón–Zygmund 分解并验证各条估计。",
+        "solution": "算各二进区间的 $|f|$ 平均：$[0,1]\\to4$，$[1,2]\\to2$，$[0,2]\\to3$，$[4,5]\\to5$，$[5,6]\\to1$，$[4,6]\\to3$，$[0,4]\\to1.5$，$[4,8]\\to1.5$，$[0,8]\\to1.5$，$[0,16]\\to0.75$，更长的区间更小。平均 $>2$ 的只有 $[0,1],[0,2],[4,5],[4,6]$（$[1,2]$ 的平均恰为 $2=\\lambda$，$[5,6]$ 的平均为 $1<\\lambda$，都不满足严格不等式 $>\\lambda$），其中**极大**的是 $Q_1=[0,2]$ 与 $Q_2=[4,6]$（母方体 $[0,4]$、$[4,8]$ 的平均都等于 $1.5\\le2$），两块不交。算得 $f_{Q_1}=1$、$f_{Q_2}=2$，于是 $$g=\\mathbf 1_{[0,2]}+2\\cdot\\mathbf 1_{[4,6]},\\qquad b=3\\mathbf 1_{(0,1)}-3\\mathbf 1_{(1,2)}+3\\mathbf 1_{(4,5)}-3\\mathbf 1_{(5,6)} .$$ 验证：$\\int_{Q_1}b=3-3=0$、$\\int_{Q_2}b=3-3=0$（消失矩）；$\\|g\\|_\\infty=2\\le2\\lambda=4$（一维 $2^n=2$）；$\\sum_k|Q_k|=2+2=4\\le\\|f\\|_1/\\lambda=6$；坏集外 $f\\equiv0\\le\\lambda$。数值检验：$f-g-b$ 只在两个跳点 $x=1,5$ 处非零（零测集不影响 $L^1$ 意义），等式在 a.e. 意义下成立；离散求和给出 $\\int b=0$。"
+      },
+      {
+        "problem": "同一个 $f$ 改取 $\\lambda=1/2$，坏集如何变化？再验证 $\\sum_k|Q_k|\\le\\|f\\|_1/\\lambda$。",
+        "solution": "阈值降到 $1/2$ 后，$[0,4],[4,8],[0,8]$ 的平均 $1.5$ 也超标，$[0,16]$ 的平均 $0.75$ 同样超标，而它的母方体 $[0,32]$ 平均为 $0.375\\le0.5$，故唯一的极大坏方体是 $Q=[0,16]$。于是 $\\sum_k|Q_k|=16\\le\\|f\\|_1/\\lambda=12/(1/2)=24$ 仍然成立。可见 $\\lambda$ 越小坏集越大，但总测度始终被 $\\|f\\|_1/\\lambda$ 封住——这正是分解中「总测度估计」的含义。"
+      }
+    ],
+    "tags": [
+      "二进方体",
+      "停止时间",
+      "奇异积分",
+      "端点估计"
+    ],
+    "links": [
+      "singular-integral-operators",
+      "hardy-space-h1",
+      "bmo-space",
+      "lp-spaces",
+      "lebesgue-integral",
+      "hardy-littlewood-maximal"
+    ]
+  },
+  {
+    "id": "singular-integral-operators",
+    "title": "奇异积分算子",
+    "titleEn": "Singular Integral Operators",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "核 K 是 −n 次齐次、球面平均为零且有 Hörmander 型光滑性的算子 Tf = p.v.∫K(x−y)f(y)dy；Calderón–Zygmund 定理给出 L^p(1<p<∞) 有界与 (1,1) 弱型，而两个端点失效，须由 H¹ → L¹ 与 L^∞ → BMO 补上。",
+    "summaryEn": "A singular integral operator is Tf = p.v.∫K(x−y)f(y)dy with a kernel K that is homogeneous of degree −n, has vanishing spherical means, and satisfies a Hörmander-type smoothness condition; the Calderón–Zygmund theorem gives L^p boundedness for 1<p<∞ and weak (1,1), while the two endpoints fail and must be repaired by H¹ → L¹ and L^∞ → BMO.",
+    "definition": "设核 $K\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n\\setminus\\{0\\})$。**奇异积分算子**由**主值**（principal value）定义：$$Tf(x)=\\mathrm{p.v.}\\!\\int_{\\mathbb{R}^n}K(x-y)f(y)\\,dy=\\lim_{\\varepsilon\\to0^+}\\int_{|x-y|>\\varepsilon}K(x-y)f(y)\\,dy .$$ 之所以必须「挖洞取极限」而不能当作普通 Lebesgue 积分，是因为核在原点附近的奇性使 $\\int|K|=\\infty$：$K$ 不可积，但它的**消失性**（平均为零）让挖洞积分有极限。\n\n经典理论要求 $K$ 满足三条：① **尺度与尺寸条件**：$|K(x)|\\le A|x|^{-n}$，且 $K$ 是 **$-n$ 次齐次**的，即 $K(\\lambda x)=\\lambda^{-n}K(x)$（$\\lambda>0$）。次数是 $-n$ 而非 $0$，这一尺度恰好与 $d\\xi$ 的尺度匹配，使奇异积分成为「临界」算子（对比分数次积分 $I_\\alpha f=c_\\alpha\\int|x-y|^{\\alpha-n}f(y)dy$，其核是 $-(n-\\alpha)$ 次齐次，$\\alpha=n$ 就是奇异的端点）。② **消失性**：$\\int_{a<|x|<b}K(x)\\,dx=0$ 对一切 $0<a<b$ 成立；对常见形式 $K(x)=\\Omega(x)/|x|^n$（$\\Omega$ 零次齐次）它等价于**球面平均为零** $\\int_{S^{n-1}}\\Omega(\\theta)\\,d\\sigma(\\theta)=0$。这条不能省：若球面平均非零（例如 $K(x)=|x|^{-n}$），则 $\\int_{\\varepsilon<|x|<1}K\\,dx\\sim c\\log\\frac1\\varepsilon\\to\\infty$，主值根本不存在。③ **光滑性**，最弱的标准形式是 **Hörmander 条件** $$\\sup_{y\\ne0}\\int_{|x|\\ge2|y|}|K(x-y)-K(x)|\\,dx\\le C,$$ 它比梯度条件 $|\\nabla K(x)|\\le C|x|^{-n-1}$ 更弱（后者用中值定理即可推出前者）。①+③ 的含义是「核在远离对角线处几乎不变」，这正是把算子当作「几乎对角」处理的技术基础。\n\n**Calderón–Zygmund 定理**：若 $T$ 由满足 ①③ 的核给出、核还满足消失性 ②，且 $T$ 在 $L^2$ 上有界（对卷积型，$\\widehat K\\in L^\\infty$ 时由 Plancherel 直接得到；一般非卷积型用 David–Journé 的 $T(1)$ 定理判定），则 $T$ 在 $L^p$ 上对一切 $1<p<\\infty$ 有界，并且是**弱 $(1,1)$ 型**：$|\\{x:|Tf(x)|>\\alpha\\}|\\le\\frac{C}{\\alpha}\\|f\\|_1$。证明的引擎正是 Calderón–Zygmund 分解：好部分用 $L^2$ 界，坏部分的消失矩与不交性使远场估计 $\\sum_k\\int_{\\text{远场}}|Tb_k|\\lesssim\\sum_k\\|b_k\\|_1\\lesssim\\|f\\|_1$ 成功。\n\n**端点必须记清**：$T$ 一般**不在 $L^1$ 上强有界**，也**不把 $L^\\infty$ 映到 $L^\\infty$**；在 $L^1$ 一侧只有弱 $(1,1)$ 型估计，在 $L^\\infty$ 一侧 $Tf$ 可能**无界**（如 $H\\mathbf 1_{[0,1]}(x)=\\frac1\\pi\\log|x/(x-1)|$）；但由 $T:L^\\infty\\to\\mathrm{BMO}$ 与 $\\mathrm{BMO}\\subset L^p_{\\mathrm{loc}}$ 可知**局部可积性并不丧失**。补上端点的正确陈述由 Fefferman–Stein 对偶给出：$T:H^1\\to L^1$ 有界、$T:L^\\infty\\to\\mathrm{BMO}$ 有界，其中 $(H^1)^*\\cong\\mathrm{BMO}$。这就是「$H^1$ 与 BMO 把端点补上」的意思：把 $L^1$ 换成更小的 $H^1$、把 $L^\\infty$ 换成更大的 BMO（模去常数），奇异积分理论在两端重新完整。三个标准例子：**Hilbert 变换** $Hf=\\frac1\\pi\\mathrm{p.v.}\\!\\int\\frac{f(y)}{x-y}dy$（$n=1$，核 $1/(\\pi x)$，乘子 $-i\\operatorname{sgn}\\xi$，故 $\\|Hf\\|_2=\\|f\\|_2$）；**Riesz 变换** $R_jf(x)=c_n\\mathrm{p.v.}\\!\\int\\frac{x_j-y_j}{|x-y|^{n+1}}f(y)\\,dy$，$c_n=\\Gamma\\bigl(\\frac{n+1}2\\bigr)/\\pi^{(n+1)/2}$（核 $c_nx_j/|x|^{n+1}$，乘子 $-i\\xi_j/|\\xi|$，满足 $\\sum_{j=1}^nR_j^2=-I$）；以及**Cauchy 积分算子** $\\frac1{2\\pi i}\\mathrm{p.v.}\\!\\int_\\Gamma\\frac{f(\\zeta)}{\\zeta-z}d\\zeta$（沿 Lipschitz 曲线 $\\Gamma$，核 $1/(\\zeta-z)$ 只满足依赖曲线的双变量条件）——后者推动了 Calderón（1977）与 Coifman–McIntosh–Meyer（1982）关于非卷积型 CZ 算子与 $T(b)$ 定理的工作。",
+    "definitionEn": "Let $K\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n\\setminus\\{0\\})$. A **singular integral operator** is defined by the **principal value** $$Tf(x)=\\mathrm{p.v.}\\!\\int_{\\mathbb{R}^n}K(x-y)f(y)\\,dy=\\lim_{\\varepsilon\\to0^+}\\int_{|x-y|>\\varepsilon}K(x-y)f(y)\\,dy .$$ One must cut out holes and pass to the limit rather than use a plain Lebesgue integral because $\\int|K|=\\infty$: the kernel is not integrable, yet its **cancellation** (zero mean) makes the truncated integrals converge.\n\nThe classical theory requires three conditions: ① **size and scaling**: $|K(x)|\\le A|x|^{-n}$ and $K(\\lambda x)=\\lambda^{-n}K(x)$ for $\\lambda>0$; the homogeneity degree is $-n$, not $0$, and this scale matches that of $d\\xi$, making singular integrals **critical** (compare the fractional integral $I_\\alpha f=c_\\alpha\\int|x-y|^{\\alpha-n}f(y)dy$, whose kernel is homogeneous of degree $-(n-\\alpha)$, the singular endpoint being $\\alpha=n$). ② **vanishing means**: $\\int_{a<|x|<b}K(x)\\,dx=0$ for all $0<a<b$; for the standard form $K(x)=\\Omega(x)/|x|^n$ with $\\Omega$ homogeneous of degree zero this says the **spherical mean of $\\Omega$ vanishes**. It cannot be dropped: with nonzero spherical mean (e.g. $K(x)=|x|^{-n}$) one has $\\int_{\\varepsilon<|x|<1}K\\,dx\\sim c\\log\\frac1\\varepsilon\\to\\infty$ and the principal value does not exist. ③ **smoothness**, in the weakest standard form the **Hörmander condition** above, implied by the stronger gradient bound. Together ① and ③ say the kernel hardly changes far from the diagonal, which is what makes the operator «almost diagonal».\n\n**Calderón–Zygmund theorem.** If $T$ has a kernel satisfying ①③ and ②, and $T$ is bounded on $L^2$ (for convolution type, $\\widehat K\\in L^\\infty$ via Plancherel; in the general case the David–Journé$T(1)$ theorem), then $T$ is bounded on $L^p$ for all $1<p<\\infty$ and is of **weak type $(1,1)$**: $|\\{x:|Tf(x)|>\\alpha\\}|\\le C\\alpha^{-1}\\|f\\|_1$. The engine of the proof is the Calderón–Zygmund decomposition: the good part is handled by the $L^2$ bound, while the vanishing moments of the bad pieces make the far-field estimate work.\n\n**Endpoints fail.** In general $T$ is not bounded on $L^1$ and does not map $L^\\infty$ to $L^\\infty$; on the $L^1$ side only a weak $(1,1)$ bound holds, and on the $L^\\infty$ side $Tf$ can be unbounded (e.g. $H\\mathbf 1_{[0,1]}$), but $Tf\\in\\mathrm{BMO}\\subset L^p_{\\mathrm{loc}}$ so local integrability is never lost. The right endpoint statements are $T:H^1\\to L^1$ and $T:L^\\infty\\to\\mathrm{BMO}$, with $(H^1)^*\\cong\\mathrm{BMO}$: replacing $L^1$ by the smaller $H^1$ and $L^\\infty$ by the larger BMO (modulo constants) makes the theory complete again. Standard examples: the **Hilbert transform** $Hf=\\frac1\\pi\\mathrm{p.v.}\\!\\int\\frac{f(y)}{x-y}dy$ (kernel $1/(\\pi x)$, multiplier $-i\\operatorname{sgn}\\xi$, hence an $L^2$ isometry), the **Riesz transforms** $R_jf(x)=c_n\\mathrm{p.v.}\\!\\int\\frac{x_j-y_j}{|x-y|^{n+1}}f(y)\\,dy$ with $c_n=\\Gamma\\bigl(\\frac{n+1}2\\bigr)/\\pi^{(n+1)/2}$ (multiplier $-i\\xi_j/|\\xi|$, and $\\sum_jR_j^2=-I$), and the **Cauchy integral operator** along Lipschitz curves, which motivated the general non-convolution theory of Calderón and Coifman–McIntosh–Meyer.",
+    "formulas": [
+      {
+        "latex": "Tf(x)=\\mathrm{p.v.}\\!\\int_{\\mathbb{R}^n}K(x-y)f(y)\\,dy=\\lim_{\\varepsilon\\to0^+}\\int_{|x-y|>\\varepsilon}K(x-y)f(y)\\,dy",
+        "note": "主值定义：核不可积，用挖洞积分取极限；极限的存在性依赖核的消失性条件。",
+        "noteEn": "The principal value: the kernel is not integrable, so one cuts out a hole and lets ε→0; existence of the limit relies on the vanishing-mean condition."
+      },
+      {
+        "latex": "|K(x)|\\le A|x|^{-n},\\qquad K(\\lambda x)=\\lambda^{-n}K(x)\\quad(\\lambda>0)",
+        "note": "尺寸与齐次性：次数是 −n 而非 0，与 dξ 的尺度匹配，因此奇异积分是临界算子。",
+        "noteEn": "Size and scaling: the degree is −n, not 0; it matches the scale of dξ, making singular integrals critical."
+      },
+      {
+        "latex": "\\int_{a<|x|<b}K(x)\\,dx=0,\\qquad \\sup_{y\\ne0}\\int_{|x|\\ge2|y|}|K(x-y)-K(x)|\\,dx\\le C",
+        "note": "消失性 + 光滑性：任一环带积分为零（对 K=Ω/|x|ⁿ 等价于 Ω 的球面平均为零，删去它主值会 log 发散）；Hörmander 条件是最弱的标准光滑性，梯度条件 |∇K(x)| ≤ C|x|^{−n−1} 可推出它。",
+        "noteEn": "Vanishing means plus smoothness: the integral over any annulus vanishes (for K=Ω/|x|ⁿ this is the zero spherical mean of Ω, without which the principal value diverges logarithmically), and the Hörmander condition is the weakest standard smoothness assumption, implied by |∇K(x)| ≤ C|x|^{−n−1}."
+      },
+      {
+        "latex": "\\|Tf\\|_{L^p}\\le C_p\\|f\\|_{L^p}\\ (1<p<\\infty),\\quad |\\{x:|Tf(x)|>\\alpha\\}|\\le\\frac{C}{\\alpha}\\|f\\|_{L^1}",
+        "note": "Calderón–Zygmund 定理：L² 有界 + 核的三个条件 ⟹ L^p 有界（1<p<∞）与弱 (1,1) 型；弱型估计的证明用 CZ 分解，$L^1$ 上并无强有界。",
+        "noteEn": "The Calderón–Zygmund theorem: L² boundedness plus the kernel conditions give L^p boundedness (1<p<∞) and weak (1,1); the weak estimate is proved via the CZ decomposition, and there is no strong L¹ bound."
+      },
+      {
+        "latex": "T:\\ H^1\\to L^1,\\qquad T:\\ L^\\infty\\to\\mathrm{BMO},\\qquad (H^1)^*\\cong\\mathrm{BMO}",
+        "note": "端点的正确替代：T 一般不在 L¹ 上强有界、也不在 L^∞ 上有界，把 L¹ 换成 H¹、把 L^∞ 换成 BMO（模去常数）后端点由 Fefferman–Stein 对偶补上。",
+        "noteEn": "The correct endpoint substitutes: T is in general neither bounded on L¹ nor on L^∞; replacing L¹ by H¹ and L^∞ by BMO (modulo constants) repairs both endpoints via Fefferman–Stein duality."
+      }
+    ],
+    "expression": {
+      "text": "Tf(x) = p.v. ∫ K(x−y) f(y) dy,   K 为 −n 次齐次、球面平均为零、满足 Hörmander 条件",
+      "symbol": "T = p.v. K∗",
+      "note": "核的三个条件保证 T 在 1<p<∞ 有界且弱 (1,1)；端点由 H¹ → L¹ 与 L^∞ → BMO 补上。",
+      "noteEn": "The three kernel conditions give L^p boundedness for 1<p<∞ and weak (1,1); endpoints are supplied by H¹ → L¹ and L^∞ → BMO."
+    },
+    "properties": [
+      "尺度条件是 −n 次齐次（不是 0 次）：它与 dξ 和 Lebesgue 测度的尺度相匹配，使奇异积分处于「临界」位置，也正是核奇性不可积却仍能定义主值的分界。",
+      "消失性 ∫_{a<|x|<b}K = 0 等价于 Ω 的球面平均为零；去掉它（例如 K = |x|^{-n}）主值积分会按 log(1/ε) 发散，算子根本定义不出来。",
+      "Hörmander 条件弱于梯度条件：由 |∇K(x)| ≤ C|x|^{−n−1} 与中值定理可得 ∫_{|x|≥2|y|}|K(x−y)−K(x)|dx ≲ |y|∫_{|x|≥2|y|}|x|^{−n−1}dx ≲ 1。",
+      "L² 是整套理论的「锚点」：卷积型由 K̂ ∈ L^∞ 与 Plancherel 得到，非卷积型由 T(1) 定理判定；一旦有了 L² 界与核条件，CZ 机器就给出全部 L^p 与弱 (1,1) 型。",
+      "端点失效是本节点的重点：T 一般不在 L¹ 上强有界、也不在 L^∞ 上有界（Hilbert 变换取 f = 1_{[0,1]} 即可看到），且 L^p 算子常数在 p→1 与 p→∞ 时爆破；端点由 T: H¹ → L¹ 与 T: L^∞ → BMO 补上。"
+    ],
+    "propertiesEn": [
+      "The scaling condition is homogeneity of degree −n, not 0: it matches the scales of dξ and of Lebesgue measure, placing singular integrals at the critical point where the kernel is non-integrable yet the principal value still exists.",
+      "The vanishing condition ∫_{a<|x|<b}K = 0 is the vanishing of the spherical mean of Ω; without it (e.g. K = |x|^{-n}) the principal value diverges like log(1/ε) and the operator is not even defined.",
+      "The Hörmander condition is weaker than the gradient condition: |∇K(x)| ≤ C|x|^{−n−1} plus the mean value theorem gives the Hörmander bound through |y|∫_{|x|≥2|y|}|x|^{−n−1}dx ≲ 1.",
+      "L² is the anchor of the theory: the convolution case comes from K̂ ∈ L^∞ and Plancherel, the general case from the T(1) theorem; once L² boundedness and the kernel conditions are available, the CZ machinery yields all L^p bounds and the weak (1,1) estimate.",
+      "The endpoints genuinely fail: T is not bounded on L¹ nor on L^∞ (the Hilbert transform of 1_{[0,1]} shows both), and the L^p constants blow up as p→1 or p→∞; the endpoints are repaired by T: H¹ → L¹ and T: L^∞ → BMO."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x/(x^2+0.01)",
+          "color": "#4cc9f0",
+          "label": "K_ε(x)=x/(x²+ε²)，ε=0.1：1/x 的正则化"
+        },
+        {
+          "expr": "x/(x^2+0.64)",
+          "color": "#ff6b9d",
+          "label": "ε=0.8：更宽的软化核"
+        }
+      ],
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -5.5,
+        5.5
+      ],
+      "title": "主值核 1/x 的截断（软化）：ε→0 时 K_ε → p.v.(1/x)"
+    },
+    "examples": [
+      {
+        "problem": "取 Hilbert 变换 $Hf=\\frac1\\pi\\mathrm{p.v.}\\!\\int\\frac{f(y)}{x-y}dy$ 与 $f=\\mathbf 1_{[0,1]}$，说明 $H$ 在 $L^1$ 与 $L^\\infty$ 两个端点都失效。",
+        "solution": "直接算主值：$\\int_0^1\\frac{dy}{x-y}=\\bigl[-\\log|x-y|\\bigr]_{y=0}^{1}=\\log\\bigl|\\frac{x}{x-1}\\bigr|$，故 $$Hf(x)=\\frac1\\pi\\log\\Bigl|\\frac{x}{x-1}\\Bigr| .$$ 当 $|x|\\to\\infty$ 时 $Hf(x)=\\frac1\\pi\\log\\bigl|1+\\frac1{x-1}\\bigr|\\sim\\frac1{\\pi x}$，因此 $Hf\\notin L^1(\\mathbb{R})$——$\\|Hf\\|_1$ 发散说明 $H$ 在 $L^1$ 不有界；当 $x\\to0^+$ 时 $Hf(x)\\sim\\frac1\\pi\\log x\\to-\\infty$，$Hf$ 甚至不是有界函数，故 $H$ 也不把 $L^\\infty$ 映到 $L^\\infty$。而按理论 $Hf$ 应当是 BMO 函数、并且 $f\\notin H^1$（因为 $\\int f=1\\ne0$），与 $H:H^1\\to L^1$ 的端点定理完全一致。"
+      },
+      {
+        "problem": "验证 Riesz 变换的乘子与恒等式，并检查其核确实满足消失性条件。",
+        "solution": "Riesz 卷积核 $K_j(x)=c_nx_j/|x|^{n+1}$ 的 Fourier 变换给出乘子 $\\widehat{R_jf}(\\xi)=-i\\frac{\\xi_j}{|\\xi|}\\hat f(\\xi)$，于是对 $f\\in L^2$：$$\\|R_jf\\|_2^2=\\Bigl\\|\\frac{\\xi_j}{|\\xi|}\\hat f\\Bigr\\|_2^2\\le\\|f\\|_2^2,\\qquad \\sum_{j=1}^n\\widehat{R_j^2f}(\\xi)=\\sum_j\\Bigl(-i\\frac{\\xi_j}{|\\xi|}\\Bigr)^2\\hat f(\\xi)=-\\hat f(\\xi),$$ 即 $R_j$ 在 $L^2$ 上压缩而 $\\sum_jR_j^2=-I$；再由 Calderón–Zygmund 定理得 $\\|R_jf\\|_p\\le C_p\\|f\\|_p$（$1<p<\\infty$）。消失性可以直接验证：核在任一环带 $\\{a<|x|<b\\}$ 上的积分为零（反对称性 $K_j(-x)=-K_j(x)$ 使积分相消），数值上取 $\\varepsilon=10^{-6}$、$R=10^3$，对 $n=2$ 的 $x_1/|x|^3$ 与 $n=3$ 的 $x_1/|x|^4$ 分别得到 $\\approx-3\\times10^{-15}$ 与 $\\approx-5\\times10^{-13}$，即机器精度意义上的 $0$，确证球面平均为零；Hilbert 核在同一对称环带上的积分 $\\int_{\\varepsilon<|x|<R}\\frac{dx}{x}=0$ 则严格为零（奇函数在对称区间上积分）。"
+      }
+    ],
+    "tags": [
+      "主值",
+      "Hörmander 条件",
+      "Riesz 变换",
+      "弱 (1,1) 型"
+    ],
+    "links": [
+      "calderon-zygmund-decomposition",
+      "hardy-space-h1",
+      "bmo-space",
+      "conjugate-function-hilbert",
+      "fourier-transform",
+      "hardy-littlewood-maximal"
+    ]
+  },
+  {
+    "id": "hardy-space-h1",
+    "title": "哈代空间 H¹",
+    "titleEn": "The Hardy Space H¹",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "实变 H¹ = {f ∈ L¹ : sup_{t>0}|φ_t ∗ f| ∈ L¹} 是 L¹ 中「所有尺度平均一致可积」的函数类，等价于「f 与它所有的 Riesz 变换都属于 L¹」；它严格小于 L¹（平均值为零），有 (1,∞) 型原子分解，并对偶于 BMO。",
+    "summaryEn": "The real-variable Hardy space H¹ = {f ∈ L¹ : sup_{t>0}|φ_t ∗ f| ∈ L¹} consists of L¹ functions whose local averages are uniformly integrable at every scale; equivalently f and all of its Riesz transforms lie in L¹. It is strictly smaller than L¹ (its functions have mean zero), admits an atomic decomposition with (1,∞) atoms, and is dual to BMO.",
+    "definition": "取定 Schwartz 函数 $\\varphi$ 且 $\\int_{\\mathbb{R}^n}\\varphi\\ne0$（例如 $\\varphi(x)=e^{-|x|^2}$ 或 Poisson 核），记 $\\varphi_t(x)=t^{-n}\\varphi(x/t)$（$t>0$）与**极大函数** $$M_\\varphi f(x)=\\sup_{t>0}|(\\varphi_t*f)(x)| .$$ **实变 Hardy 空间**定义为 $$H^1(\\mathbb{R}^n)=\\{f\\in L^1(\\mathbb{R}^n):\\ M_\\varphi f\\in L^1(\\mathbb{R}^n)\\},\\qquad \\|f\\|_{H^1}=\\|M_\\varphi f\\|_{L^1}.$$ 换用不同的允许 $\\varphi$（Schwartz、均值非零），或直接对所有这类 $\\varphi$ 取上确界（grand maximal function），得到的范数彼此等价，所以 $H^1$ 只依赖 $\\mathbb{R}^n$。直观上：$L^1$ 只控制 $f$ 自身的大小，而 $H^1$ 还要求 $f$ 在**每个尺度**上的局部平均都一致可积——它把 $1/x$ 那种「逐点可积、平均不可控」的函数排除在外。\n\n由定义立即得到 $H^1\\subset L^1$（$t\\to0^+$ 时 $|(\\varphi_t*f)(x)|$ 趋近 $|f(x)|\\cdot\\bigl|\\int\\varphi\\bigr|$ 型量，故 $\\|f\\|_1\\lesssim\\|f\\|_{H^1}$），但包含是**严格**的：$H^1$ 中的函数**平均值为零**，$\\int f\\,dx=0$。取 $\\varphi(0)\\ne0$（如 Poisson 核或 Gauss 核）时，在尺度 $t=|x|$ 下有 $t^n(\\varphi_t*f)(tz)\\to(\\int f)\\varphi(z)$，故 $M_\\varphi f(x)\\gtrsim|x|^{-n}|\\varphi(x/|x|)|$，若 $\\int f\\ne0$ 则 $M_\\varphi f$ 在 $t\\to\\infty$ 时不趋于 $0$，不可能可积（严格化只需与检验函数 $\\psi$（$\\int\\psi=1$）配对并令 $t\\to\\infty$）。因此 $\\mathbf 1_{[0,1]}\\in L^1(\\mathbb{R})\\setminus H^1(\\mathbb{R})$，即 $H^1\\subsetneq L^1$。\n\n**Riesz 变换刻画**（Stein）：对 $f\\in L^1(\\mathbb{R}^n)$，$$f\\in H^1\\iff R_jf\\in L^1(\\mathbb{R}^n)\\ \\text{对}\\ \\textbf{所有}\\ j=1,\\dots,n,\\qquad \\|f\\|_{H^1}\\asymp\\|f\\|_1+\\sum_{j=1}^n\\|R_jf\\|_1 .$$ 关键是「**所有 $j$**」：任何一个方向缺失都不行（$n=1$ 时唯一的 Riesz 变换就是 Hilbert 变换，此时 $H^1(\\mathbb{R})=\\{f\\in L^1:Hf\\in L^1\\}$）。这条刻画把「极大函数可积」这个分析条件翻译成「$f$ 在一切方向上的共轭函数都可积」，是 $H^1$ 与奇异积分理论之间的桥。\n\n**原子分解**：称 $a$ 为一个 $(1,\\infty)$ 型**原子**，若 $\\operatorname{supp}a\\subset Q$（某方体）、$\\|a\\|_\\infty\\le1/|Q|$ 且 $\\int a\\,dx=0$。则 $$f\\in H^1\\iff f=\\sum_k\\lambda_ka_k\\ \\text{（在}\\ H^1\\ \\text{中收敛）},\\quad \\sum_k|\\lambda_k|<\\infty,$$ 并且 $\\|f\\|_{H^1}\\asymp\\inf\\sum_k|\\lambda_k|$（下确界取遍一切这样的表示）。原子分解把 $H^1$ 的估计「局部化 + 抵消化」：只需在单个方体上验证常数与消失矩。\n\n**与复分析 $H^p$ 的关系**（只作对比）：在上半平面 $\\mathbb{C}_+$（或单位圆盘）上有全纯 Hardy 空间 $H^p=\\{F\\ \\text{全纯}:\\ \\sup_{t>0}\\|F(\\cdot+it)\\|_{L^p}<\\infty\\}$，它由「解析性」即边界值频谱单边来定义，$p=1$ 时同样满足平均值为零。$n=1$ 时，$L^1$ 中频谱支于 $[0,\\infty)$ 的函数（解析信号）的全体恰好构成 $H^1(\\mathbb{R})$ 的一个**真**子空间，这解释了「复分析 $H^1$ 与实变 $H^1$ 相容但不相同」；实变定义的优势是不依赖全纯性、在任意维数都可用。最后，$H^1$ 的地位在于它是 $L^1$ 在奇异积分理论中的正确替代（$T:H^1\\to L^1$ 有界），而它的对偶恰是 BMO：$(H^1)^*\\cong\\mathrm{BMO}$（Fefferman–Stein），配对 $\\langle f,g\\rangle=\\int fg$ 的绝对收敛性由原子的消失矩保证（$|\\int ag|\\le\\|a\\|_\\infty\\int_Q|g-g_Q|\\le\\|g\\|_{\\mathrm{BMO}}$）。",
+    "definitionEn": "Fix a Schwartz function $\\varphi$ with $\\int_{\\mathbb{R}^n}\\varphi\\ne0$ (say $\\varphi(x)=e^{-|x|^2}$ or the Poisson kernel), set $\\varphi_t(x)=t^{-n}\\varphi(x/t)$, and let $$M_\\varphi f(x)=\\sup_{t>0}|(\\varphi_t*f)(x)| .$$ The **real-variable Hardy space** is $$H^1(\\mathbb{R}^n)=\\{f\\in L^1(\\mathbb{R}^n):\\ M_\\varphi f\\in L^1(\\mathbb{R}^n)\\},\\qquad \\|f\\|_{H^1}=\\|M_\\varphi f\\|_{L^1}.$$ Using a different admissible $\\varphi$ (Schwartz, nonzero mean) or taking the supremum over all of them (the grand maximal function) yields equivalent norms, so $H^1$ depends only on $\\mathbb{R}^n$. Intuitively, $L^1$ controls only the size of $f$, whereas $H^1$ also requires the local averages of $f$ to be uniformly integrable at **every scale**.\n\nImmediately $H^1\\subset L^1$ (as $t\\to0^+$, $|(\\varphi_t*f)(x)|$ approaches $|f(x)|\\cdot|\\int\\varphi|$-type quantities, so $\\|f\\|_1\\lesssim\\|f\\|_{H^1}$), and the inclusion is **strict**: every $f\\in H^1$ has **mean zero**, $\\int f\\,dx=0$. Take $\\varphi(0)\\ne0$ (e.g. the Poisson or Gaussian kernel); at the scale $t=|x|$ one has $t^n(\\varphi_t*f)(tz)\\to(\\int f)\\varphi(z)$, hence $M_\\varphi f(x)\\gtrsim|x|^{-n}|\\varphi(x/|x|)|$ uniformly on compact sets, so if $\\int f\\ne0$ then $M_\\varphi f$ does not tend to $0$ and cannot be integrable (pair with a test function of integral one to make this rigorous). Hence $\\mathbf 1_{[0,1]}\\in L^1(\\mathbb{R})\\setminus H^1(\\mathbb{R})$ and $H^1\\subsetneq L^1$.\n\n**Characterization by Riesz transforms** (Stein): for $f\\in L^1(\\mathbb{R}^n)$, $$f\\in H^1\\iff R_jf\\in L^1(\\mathbb{R}^n)\\ \\text{for}\\ \\textbf{all}\\ j=1,\\dots,n,\\qquad \\|f\\|_{H^1}\\asymp\\|f\\|_1+\\sum_{j=1}^n\\|R_jf\\|_1 .$$ The phrase «all $j$» is essential; omitting a single direction fails (for $n=1$ the only Riesz transform is the Hilbert transform and $H^1(\\mathbb{R})=\\{f\\in L^1:Hf\\in L^1\\}$).\n\n**Atomic decomposition.** Call $a$ a $(1,\\infty)$ **atom** if $\\operatorname{supp}a\\subset Q$ for some cube $Q$, $\\|a\\|_\\infty\\le1/|Q|$ and $\\int a\\,dx=0$. Then $f\\in H^1$ iff $f=\\sum_k\\lambda_ka_k$ converges in $H^1$ with $\\sum_k|\\lambda_k|<\\infty$, and $\\|f\\|_{H^1}\\asymp\\inf\\sum_k|\\lambda_k|$ over all such representations.\n\n**Comparison with the complex-variable $H^p$.** On the upper half-plane (or the disc), $H^p=\\{F\\ \\text{holomorphic}:\\sup_{t>0}\\|F(\\cdot+it)\\|_{L^p}<\\infty\\}$ is defined by analyticity, i.e. a one-sided boundary spectrum, and for $p=1$ the mean is again zero. For $n=1$ the $L^1$ functions whose spectrum lies in $[0,\\infty)$ form a proper subspace of $H^1(\\mathbb{R})$, so the complex and real definitions are compatible but not identical; the real-variable definition works in every dimension without holomorphy. Finally, $H^1$ is the correct substitute for $L^1$ in the theory of singular integrals ($T:H^1\\to L^1$), and its dual is BMO: $(H^1)^*\\cong\\mathrm{BMO}$ (Fefferman–Stein), the pairing $\\langle f,g\\rangle=\\int fg$ being absolutely convergent thanks to the vanishing moments of atoms.",
+    "formulas": [
+      {
+        "latex": "M_\\varphi f(x)=\\sup_{t>0}|(\\varphi_t*f)(x)|,\\qquad H^1=\\{f\\in L^1:M_\\varphi f\\in L^1\\},\\qquad \\|f\\|_{H^1}=\\|M_\\varphi f\\|_{L^1}",
+        "note": "实变定义：用 Schwartz 函数 φ（∫φ≠0）的极大函数定义 H¹；换 φ 或换成 grand maximal function 得到等价范数。",
+        "noteEn": "Real-variable definition via the maximal function of a Schwartz φ with ∫φ≠0; other admissible φ, or the grand maximal function, give equivalent norms."
+      },
+      {
+        "latex": "f\\in H^1\\ \\Longrightarrow\\ \\int_{\\mathbb{R}^n}f\\,dx=0,\\qquad H^1\\subsetneq L^1",
+        "note": "H¹ 中函数平均值为零（t→∞ 时极大函数不衰减），故 H¹ 是 L¹ 的真子空间；1_{[0,1]} 就不在 H¹ 中。",
+        "noteEn": "H¹ functions have mean zero (the maximal function fails to decay as t→∞), so H¹ is a proper subspace of L¹; for instance 1_{[0,1]} is not in H¹."
+      },
+      {
+        "latex": "f\\in H^1\\iff R_jf\\in L^1\\ \\ (j=1,\\dots,n),\\qquad \\|f\\|_{H^1}\\asymp\\|f\\|_1+\\sum_{j=1}^n\\|R_jf\\|_1",
+        "note": "Riesz 变换刻画：必须「所有 j」；n=1 时即 f 与 Hilbert 变换同时属于 L¹。",
+        "noteEn": "The Riesz transform characterization: «all j» is required; for n=1 it says f and its Hilbert transform both lie in L¹."
+      },
+      {
+        "latex": "f=\\sum_k\\lambda_ka_k,\\quad \\operatorname{supp}a_k\\subset Q_k,\\ \\|a_k\\|_\\infty\\le\\frac1{|Q_k|},\\ \\int a_k=0,\\quad \\|f\\|_{H^1}\\asymp\\inf\\sum_k|\\lambda_k|",
+        "note": "原子分解：H¹ 恰由 (1,∞) 型原子生成，范数等于系数绝对和的下确界；这把估计局部化到单个方体。",
+        "noteEn": "Atomic decomposition: H¹ is generated by (1,∞) atoms, the norm being the infimum of Σ|λ_k|; this localizes estimates to single cubes."
+      },
+      {
+        "latex": "(H^1)^*\\cong\\mathrm{BMO},\\qquad \\Bigl|\\int_{\\mathbb{R}^n}fg\\Bigr|\\le C\\|f\\|_{H^1}\\|g\\|_{\\mathrm{BMO}}",
+        "note": "Fefferman–Stein 对偶：配对在单个原子上由消失矩估计（|∫ag| ≤ ‖a‖_∞∫_Q|g−g_Q| ≤ ‖g‖_BMO），因而不需要绝对可积性。",
+        "noteEn": "Fefferman–Stein duality: on an atom the pairing is estimated by the vanishing moment, |∫ag| ≤ ‖a‖_∞∫_Q|g−g_Q| ≤ ‖g‖_BMO, so no absolute integrability is needed."
+      }
+    ],
+    "expression": {
+      "text": "H¹(ℝⁿ) = { f ∈ L¹ : M_φ f ∈ L¹ },   ‖f‖_{H¹} ≈ ‖f‖₁ + Σ_j ‖R_j f‖₁ ≈ inf Σ|λ_k|",
+      "symbol": "H^1=\\{f\\in L^1:M_\\varphi f\\in L^1\\}",
+      "note": "三种范数等价：极大函数定义、Riesz 变换刻画、原子分解（系数绝对和）。",
+      "noteEn": "Three equivalent norms: maximal-function definition, Riesz transform characterization, atomic decomposition (absolute coefficient sum)."
+    },
+    "properties": [
+      "三种定义（固定允许 φ 的极大函数、grand maximal function、原子分解）给出等价范数；H¹ 按此范数是 Banach 空间，有限个原子的线性组合在其中稠密；但这些范数彼此只等价而不相等，具体常数依 φ 与维数而定。",
+      "平均值为零是 H¹ 的必要条件，故 H¹ ⊊ L¹；反例 1_{[0,1]} ∈ L¹∖H¹ 的两个论证（均值为 1、Hf ∉ L¹）互相印证。",
+      "Riesz 变换刻画是核心：f ∈ H¹ ⟺ f 与所有 R_j f（j = 1,…,n）都属于 L¹，且 ‖f‖_{H¹} ≍ ‖f‖₁ + Σ_j‖R_j f‖₁；少一个方向都不成立。",
+      "原子分解：H¹ 由 (1,∞) 型原子生成，‖f‖_{H¹} ≍ inf Σ|λ_k|；因此有限个原子的线性组合在 H¹ 中稠密，而每个 H¹ 估计只需验证常数界与消失矩。",
+      "对偶 (H¹)* ≅ BMO（方向不可反）；由此 H¹ 不可分也不自反（VMO 是 BMO 的可分闭子空间，VMO* ≅ H¹），并且奇异积分算子在端点满足 T: H¹ → L¹。"
+    ],
+    "propertiesEn": [
+      "The three definitions (maximal function for a fixed admissible φ, grand maximal function, atomic decomposition) give equivalent norms and H¹ is a Banach space.",
+      "Mean zero is necessary, so H¹ is strictly contained in L¹; the example 1_{[0,1]} ∈ L¹∖H¹ is confirmed both by ∫f = 1 ≠ 0 and by Hf ∉ L¹.",
+      "The Riesz transform characterization is central: f ∈ H¹ iff f and all R_j f (j = 1,…,n) lie in L¹, with ‖f‖_{H¹} ≍ ‖f‖₁ + Σ_j‖R_j f‖₁; a single missing direction breaks it.",
+      "Atomic decomposition: H¹ is generated by (1,∞) atoms with ‖f‖_{H¹} ≍ inf Σ|λ_k|; hence finite linear combinations of atoms are dense, and every H¹ estimate reduces to a size bound plus a vanishing moment.",
+      "Duality (H¹)* ≅ BMO (the direction cannot be reversed); consequently H¹ is neither separable nor reflexive (VMO is a separable closed subspace of BMO with VMO* ≅ H¹), and singular integrals satisfy T: H¹ → L¹."
+    ],
+    "examples": [
+      {
+        "problem": "证明 $f=\\mathbf 1_{[0,1]}\\in L^1(\\mathbb{R})$ 不属于 $H^1(\\mathbb{R})$，并指出它违背了 $H^1$ 的哪条必然性质。",
+        "solution": "两条独立论证。其一：$H^1$ 中函数必满足 $\\int f=0$，而 $\\int\\mathbf 1_{[0,1]}=1\\ne0$，故 $f\\notin H^1$。其二（用 Riesz 变换刻画）：$Hf(x)=\\frac1\\pi\\log\\bigl|\\frac{x}{x-1}\\bigr|$，当 $|x|\\to\\infty$ 时 $Hf(x)\\sim\\frac1{\\pi x}\\notin L^1(\\mathbb{R})$，且 $x\\to0^+$ 时 $Hf(x)\\sim\\frac1\\pi\\log x$ 无界，所以 $Hf\\notin L^1$，从 Riesz 变换刻画也得到 $f\\notin H^1$。两处结论一致，正说明「平均值为零」与「Riesz 变换可积」是同一个现象的两个侧面。"
+      },
+      {
+        "problem": "验证 $a=\\mathbf 1_{[0,1/2]}-\\mathbf 1_{[1/2,1]}$ 是 $(1,\\infty)$ 型原子，给出 $\\|a\\|_{H^1}$ 的上界，并验证 $Ha\\in L^1(\\mathbb{R})$。",
+        "solution": "取 $Q=[0,1]$：$\\operatorname{supp}a\\subset Q$，$\\|a\\|_\\infty=1=\\frac1{|Q|}$，$\\int a=\\frac12-\\frac12=0$，故 $a$ 是 $(1,\\infty)$ 型原子。由原子分解（单个原子、系数 $\\lambda=1$）得 $\\|a\\|_{H^1}\\le1$（精确值只差一个只依赖维数的常数）。再算 $$Ha(x)=\\frac1\\pi\\mathrm{p.v.}\\!\\int\\frac{a(y)}{x-y}dy=\\frac1\\pi\\Bigl[\\log\\Bigl|\\frac{x}{x-\\frac12}\\Bigr|-\\log\\Bigl|\\frac{x-\\frac12}{x-1}\\Bigr|\\Bigr]=\\frac1\\pi\\log\\Bigl|\\frac{x(x-1)}{(x-\\frac12)^2}\\Bigr| .$$ 在 $x=0,\\frac12,1$ 的邻域 $|Ha(x)|\\sim\\frac1\\pi\\log\\frac1{|x-c|}$（对数奇性，可积）；当 $|x|\\to\\infty$ 时 $\\frac{x(x-1)}{(x-1/2)^2}=1-\\frac1{4x^2}+O(x^{-3})$，故 $Ha(x)\\sim-\\frac1{4\\pi x^2}$（平方衰减，可积）。于是 $Ha\\in L^1(\\mathbb{R})$（精确值 $\\int_{\\mathbb{R}}|Ha|=\\frac4\\pi\\log(1+\\sqrt2)\\approx1.12$；数值积分在 $[-L,L]$ 上随 $L$ 增大收敛到该值），与 $a\\in H^1$ 相容。"
+      }
+    ],
+    "tags": [
+      "原子分解",
+      "Riesz 变换",
+      "极大函数",
+      "端点空间"
+    ],
+    "links": [
+      "bmo-space",
+      "singular-integral-operators",
+      "calderon-zygmund-decomposition",
+      "lp-spaces",
+      "hardy-littlewood-maximal",
+      "conjugate-function-hilbert"
+    ]
+  },
+  {
+    "id": "bmo-space",
+    "title": "BMO 空间与 John–Nirenberg 不等式",
+    "titleEn": "BMO and the John–Nirenberg Inequality",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "BMO 由 ‖f‖_{BMO} = sup_Q (1/|Q|)∫_Q|f − f_Q|dx < ∞ 定义（与自身平均的偏差，不是与 0 的偏差）；John–Nirenberg 不等式给出指数型偏差衰减，从而 BMO ⊂ L^p_loc (1≤p<∞)，而 (H¹)* ≅ BMO 补全了奇异积分的端点。",
+    "summaryEn": "BMO consists of functions with finite mean oscillation, ‖f‖_{BMO} = sup_Q (1/|Q|)∫_Q|f − f_Q|dx (the deviation from their own average, not from zero); the John–Nirenberg inequality gives exponential decay of the deviation, hence BMO ⊂ L^p_loc for 1 ≤ p < ∞, and (H¹)* ≅ BMO supplies the endpoint of singular integral theory.",
+    "definition": "**振荡**就是 BMO 的全部内容。对 $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$，记 $f_Q=\\frac1{|Q|}\\int_Qf\\,dx$ 为 $f$ 在方体 $Q$ 上的**平均值**，定义 $$\\|f\\|_{\\mathrm{BMO}}=\\sup_Q\\frac1{|Q|}\\int_Q|f-f_Q|\\,dx\\in[0,\\infty],$$ 并称 $\\|f\\|_{\\mathrm{BMO}}<\\infty$ 的 $f$ 属于 **BMO**（bounded mean oscillation，有界平均振荡）。务必看清：减掉的是 $f$ **自己在 $Q$ 上的平均值** $f_Q$，度量的是「与自身平均的偏差」，**不是与 $0$ 的偏差**——这是最常见的误解。正因为如此，$\\|f\\|_{\\mathrm{BMO}}$ 完全不看 $f$ 的整体大小：$f$ 与 $f+c$ 有相同的范数，且 $\\|f\\|_{\\mathrm{BMO}}=0\\iff f$ 几乎处处是常数。等价地，也可把中心移到「最佳常数」：$\\|f\\|'_{\\mathrm{BMO}}=\\sup_Q\\inf_c\\frac1{|Q|}\\int_Q|f-c|$，两条范数相差不超过 2 倍（取 $c=f_Q$ 得 $\\|f\\|'\\le\\|f\\|$，反向用三角不等式）。因此真正成为赋范空间的是**商空间** $\\mathrm{BMO}/\\mathbb{C}$（模去常数），它是完备的 Banach 空间。\n\n包含关系：$L^\\infty\\subset\\mathrm{BMO}$（**真包含**），因为 $\\|f\\|_{\\mathrm{BMO}}\\le2\\|f\\|_\\infty$；反向不成立，典型例子是 $\\log|x|\\in\\mathrm{BMO}\\setminus L^\\infty$（一维时 $\\|\\log|x|\\|_{\\mathrm{BMO}}\\approx0.93$，见例题）——「局部振荡受控、整体允许缓慢增长」。**常见误区澄清**：有界的振荡函数（如 $\\sin x$、$\\sin(x^2)$）一定属于 BMO（$L^\\infty\\subset\\mathrm{BMO}$ 的直接推论），所以「振荡」本身绝不违反 BMO；真正不在 BMO 的是像 $|x|$ 那样**线性增长**的函数（在 $[-R,R]$ 上平均振荡恰为 $R/4\\to\\infty$）。另外 BMO 对乘法不封闭：$\\log|x|\\in\\mathrm{BMO}$ 而 $\\log^2|x|\\notin\\mathrm{BMO}$。\n\n**John–Nirenberg 不等式**是 BMO 的定量心脏：若 $f\\in\\mathrm{BMO}$，则对每个方体 $Q$ 和每个 $\\lambda>0$，$$|\\{x\\in Q:|f(x)-f_Q|>\\lambda\\}|\\le C|Q|\\,e^{-c\\lambda/\\|f\\|_{\\mathrm{BMO}}},$$ 其中 $C,c>0$ 只依赖维数 $n$。注意指数里是 $\\lambda/\\|f\\|_{\\mathrm{BMO}}$（范数越大衰减越慢），**不是** $\\lambda\\|f\\|_{\\mathrm{BMO}}$。等价的「指数可积性」形式是：存在只依赖 $n$ 的 $c>0$、$C<\\infty$ 使 $$\\frac1{|Q|}\\int_Qe^{c|f-f_Q|/\\|f\\|_{\\mathrm{BMO}}}\\,dx\\le C .$$ 由指数型分布立刻推出：BMO 函数属于一切 $L^p_{\\mathrm{loc}}$（$1\\le p<\\infty$），更精确地 $\\|f-f_Q\\|_{L^p(Q)}\\lesssim p\\|f\\|_{\\mathrm{BMO}}|Q|^{1/p}$；但 $p=\\infty$ 不行（$\\log|x|$ 就无界）。证明的标准路线正是 Calderón–Zygmund 分解：在「偏差大于 $\\lambda$」的集合上反复分解，每次损失一个固定比例，迭代后得到几何（指数）衰减。\n\n**Fefferman–Stein 对偶定理**是本节点的核心：$(H^1)^*\\cong\\mathrm{BMO}$，即 $g\\in\\mathrm{BMO}$ 恰好给出 $H^1$ 上的连续线性泛函 $f\\mapsto\\int fg$（配对在原子上的绝对收敛性由消失矩保证：$|\\int ag|\\le\\|a\\|_\\infty\\int_Q|g-g_Q|\\le\\|g\\|_{\\mathrm{BMO}}$），反之亦然。**方向不能反**：不是 $\\mathrm{BMO}^*\\cong H^1$；正确的反向陈述是 $\\mathrm{VMO}^*\\cong H^1$，其中 VMO（消失平均振荡）是 BMO 的闭子空间、本身可分。另一个必记的对比：**BMO 不是 $L^\\infty$ 的对偶**——$L^\\infty$ 的对偶是有限可加测度空间 $ba(\\mathbb{R}^n)$；BMO 本身也不可分、不自反。有了对偶，奇异积分的端点就闭合了：$T:L^\\infty\\to\\mathrm{BMO}$ 有界，与 $T:H^1\\to L^1$ 互为对偶。另外用 sharp 极大函数 $f^\\#(x)=\\sup_{Q\\ni x}\\frac1{|Q|}\\int_Q|f-f_Q|$ 可把范数写成 $\\|f\\|_{\\mathrm{BMO}}=\\|f^\\#\\|_\\infty$，而 Fefferman–Stein 的 $\\|f\\|_{L^p}\\asymp\\|f^\\#\\|_{L^p}$（$1<p<\\infty$，$f\\in L^p$）使 BMO 成为通往 $L^p$ 理论的桥。",
+    "definitionEn": "**Oscillation** is the whole content of BMO. For $f\\in L^1_{\\mathrm{loc}}(\\mathbb{R}^n)$ write $f_Q=\\frac1{|Q|}\\int_Qf\\,dx$ for the **mean of $f$ over the cube $Q$** and define $$\\|f\\|_{\\mathrm{BMO}}=\\sup_Q\\frac1{|Q|}\\int_Q|f-f_Q|\\,dx\\in[0,\\infty],$$ saying that $f$ belongs to **BMO** (bounded mean oscillation) when this is finite. Note carefully: one subtracts $f$'s **own mean** $f_Q$, measuring the deviation from its own average, **not** the deviation from $0$ — the most common misunderstanding. Consequently $\\|f\\|_{\\mathrm{BMO}}$ ignores the overall size of $f$: $f$ and $f+c$ have the same seminorm, and $\\|f\\|_{\\mathrm{BMO}}=0$ iff $f$ is constant a.e. Equivalently one may centre at the optimal constant, $\\|f\\|'_{\\mathrm{BMO}}=\\sup_Q\\inf_c\\frac1{|Q|}\\int_Q|f-c|$, a quantity within a factor 2 of the previous one. Hence the genuine normed space is the **quotient** $\\mathrm{BMO}/\\mathbb{C}$ (modulo constants), which is a Banach space.\n\nInclusions: $L^\\infty\\subset\\mathrm{BMO}$ is **strict**, since $\\|f\\|_{\\mathrm{BMO}}\\le2\\|f\\|_\\infty$; the converse fails, the model example being $\\log|x|\\in\\mathrm{BMO}\\setminus L^\\infty$ (in one dimension $\\|\\log|x|\\|_{\\mathrm{BMO}}\\approx0.93$, see the example): local oscillation under control while the function grows slowly. **A clarification**: bounded oscillating functions such as $\\sin x$ or $\\sin(x^2)$ always belong to BMO (an immediate consequence of $L^\\infty\\subset\\mathrm{BMO}$), so oscillation alone never violates BMO; what fails is **linear growth** such as $|x|$, whose mean oscillation on $[-R,R]$ is exactly $R/4\\to\\infty$. BMO is also not closed under multiplication: $\\log|x|\\in\\mathrm{BMO}$ but $\\log^2|x|\\notin\\mathrm{BMO}$.\n\nThe **John–Nirenberg inequality** is the quantitative heart of BMO: if $f\\in\\mathrm{BMO}$, then for every cube $Q$ and every $\\lambda>0$, $$|\\{x\\in Q:|f(x)-f_Q|>\\lambda\\}|\\le C|Q|\\,e^{-c\\lambda/\\|f\\|_{\\mathrm{BMO}}},$$ with $C,c>0$ depending only on $n$. The exponent is $\\lambda/\\|f\\|_{\\mathrm{BMO}}$ (larger norm, slower decay), **not** $\\lambda\\|f\\|_{\\mathrm{BMO}}$. Equivalently, $f$ is exponentially integrable: $(1/|Q|)\\int_Qe^{c|f-f_Q|/\\|f\\|_{\\mathrm{BMO}}}\\le C$ with constants depending only on $n$. Consequences: BMO functions lie in $L^p_{\\mathrm{loc}}$ for every $1\\le p<\\infty$, more precisely $\\|f-f_Q\\|_{L^p(Q)}\\lesssim p\\|f\\|_{\\mathrm{BMO}}|Q|^{1/p}$; but $p=\\infty$ is impossible ($\\log|x|$ is unbounded). The standard proof proceeds by iterating the Calderón–Zygmund decomposition on the set where the deviation exceeds $\\lambda$, each step losing a fixed proportion, which produces the geometric (exponential) decay.\n\nThe **Fefferman–Stein duality theorem** is the centrepiece: $(H^1)^*\\cong\\mathrm{BMO}$, i.e. $g\\in\\mathrm{BMO}$ yields exactly the continuous linear functionals $f\\mapsto\\int fg$ on $H^1$ (absolute convergence of the pairing on atoms follows from the vanishing moment: $|\\int ag|\\le\\|a\\|_\\infty\\int_Q|g-g_Q|\\le\\|g\\|_{\\mathrm{BMO}}$), and conversely. **The direction cannot be reversed**: it is not true that $\\mathrm{BMO}^*\\cong H^1$; the correct reverse statement is $\\mathrm{VMO}^*\\cong H^1$, where VMO (vanishing mean oscillation) is a separable closed subspace of BMO. Another must-remember contrast: **BMO is not the dual of $L^\\infty$** — the dual of $L^\\infty$ is the space of finitely additive measures $ba(\\mathbb{R}^n)$ — and BMO is neither separable nor reflexive. With this duality the endpoints of singular integral theory close up: $T:L^\\infty\\to\\mathrm{BMO}$ is bounded, dual to $T:H^1\\to L^1$. Finally, with the sharp maximal function $f^\\#(x)=\\sup_{Q\\ni x}\\frac1{|Q|}\\int_Q|f-f_Q|$ one has $\\|f\\|_{\\mathrm{BMO}}=\\|f^\\#\\|_\\infty$, and Fefferman–Stein's $\\|f\\|_{L^p}\\asymp\\|f^\\#\\|_{L^p}$ ($1<p<\\infty$, $f\\in L^p$) makes BMO a bridge to $L^p$ theory.",
+    "formulas": [
+      {
+        "latex": "\\|f\\|_{\\mathrm{BMO}}=\\sup_Q\\frac1{|Q|}\\int_Q|f-f_Q|\\,dx,\\qquad f_Q=\\frac1{|Q|}\\int_Qf\\,dx",
+        "note": "定义：与「自身在 Q 上的平均」的偏差，而不是与 0 的偏差；这是 BMO 最容易被误解的一点。",
+        "noteEn": "Definition: the deviation from the function's own mean on Q, not from 0 — the most commonly misunderstood point."
+      },
+      {
+        "latex": "\\|f\\|_{\\mathrm{BMO}}\\le2\\|f\\|_\\infty,\\qquad \\|f\\|_{\\mathrm{BMO}}=0\\iff f\\ \\text{a.e. 为常数}",
+        "note": "L^∞ ⊂ BMO（真包含）；常数函数范数为 0，故 BMO 实为商空间 BMO/ℂ。",
+        "noteEn": "L^∞ ⊂ BMO (strictly); constants have zero seminorm, so BMO is really the quotient BMO/ℂ."
+      },
+      {
+        "latex": "|\\{x\\in Q:|f-f_Q|>\\lambda\\}|\\le C|Q|e^{-c\\lambda/\\|f\\|_{\\mathrm{BMO}}}",
+        "note": "John–Nirenberg 不等式：偏差分布指数衰减，指数里是 λ/‖f‖_BMO（不是 λ·‖f‖_BMO）；C、c 只依赖维数。",
+        "noteEn": "The John–Nirenberg inequality: exponential decay of the deviation, with exponent λ/‖f‖_BMO (not λ·‖f‖_BMO); C and c depend only on the dimension."
+      },
+      {
+        "latex": "\\frac1{|Q|}\\int_Qe^{c|f-f_Q|/\\|f\\|_{\\mathrm{BMO}}}\\,dx\\le C",
+        "note": "指数可积性的等价形式：由此 BMO ⊂ L^p_loc（1≤p<∞），但 p=∞ 不行。",
+        "noteEn": "Equivalent exponential-integrability form: it yields BMO ⊂ L^p_loc for 1≤p<∞, but p=∞ fails."
+      },
+      {
+        "latex": "(H^1)^*\\cong\\mathrm{BMO},\\qquad \\mathrm{VMO}^*\\cong H^1",
+        "note": "Fefferman–Stein 对偶（方向不可反）：BMO 是 H¹ 的对偶；BMO 的对偶不是 H¹，而是 VMO 的对偶为 H¹。",
+        "noteEn": "Fefferman–Stein duality (direction not reversible): BMO is the dual of H¹; the dual of BMO is not H¹, rather VMO has dual H¹."
+      }
+    ],
+    "expression": {
+      "text": "‖f‖_{BMO} = sup_Q (1/|Q|) ∫_Q |f − f_Q| dx,   f_Q = (1/|Q|)∫_Q f",
+      "symbol": "\\|f\\|_{\\mathrm{BMO}}=\\sup_Q\\frac1{|Q|}\\int_Q|f-f_Q|",
+      "note": "度量「平均振荡」；常数不改变范数，商去常数后是 Banach 空间，对偶 (H¹)* ≅ BMO。",
+      "noteEn": "Measures the mean oscillation; constants do not change it, the quotient by constants is a Banach space, and (H¹)* ≅ BMO."
+    },
+    "properties": [
+      "‖·‖_{BMO} 是半范：常数函数范数为 0，因此真正的空间是商空间 BMO/ℂ，它是 Banach 空间；等价范数 sup_Q inf_c avg|f−c| 与之相差不超过 2 倍。",
+      "L^∞ ⊊ BMO：‖f‖_{BMO} ≤ 2‖f‖_∞；log|x| ∈ BMO∖L^∞（一维数值上 ‖log|x|‖_{BMO} ≈ 0.93）；有界振荡（sin 等）必在 BMO 中；|x| 因线性增长不在 BMO 中。",
+      "BMO 是 L^∞-模：f ∈ L^∞、g ∈ BMO 时 ‖fg‖_{BMO} ≤ 2‖f‖_∞‖g‖_{BMO}；但对乘法不封闭：log|x| ∈ BMO，log²|x| ∉ BMO（在 [0,R] 上振荡按 (4/e)ln R → ∞ 增长）。",
+      "John–Nirenberg ⟹ 局部指数可积 ⟹ f ∈ L^p_loc（1 ≤ p < ∞），但一般不属于 L^∞；等价刻画 f^# ∈ L^∞ 且 ‖f^#‖_∞ = ‖f‖_{BMO}，并有 Fefferman–Stein 的 ‖f‖_{L^p} ≍ ‖f^#‖_{L^p}（1 < p < ∞）。",
+      "(H¹)* ≅ BMO（方向不可反）；BMO 不是 L^∞ 的对偶（那是有有限可加测度空间 ba），不可分也不自反；VMO 是其可分闭子空间且 VMO* ≅ H¹；端点补偿 T: L^∞ → BMO。"
+    ],
+    "propertiesEn": [
+      "‖·‖_{BMO} is a seminorm vanishing on constants, so the genuine space is the quotient BMO/ℂ, which is a Banach space; the equivalent norm sup_Q inf_c avg|f−c| differs from it by at most a factor 2.",
+      "L^∞ ⊊ BMO with ‖f‖_{BMO} ≤ 2‖f‖_∞; log|x| ∈ BMO∖L^∞ (numerically ‖log|x|‖_{BMO} ≈ 0.93 in one dimension); bounded oscillations such as sin x are always in BMO, whereas |x| is excluded by its linear growth.",
+      "BMO is a module over L^∞: ‖fg‖_{BMO} ≤ 2‖f‖_∞‖g‖_{BMO}; but it is not closed under multiplication, since log|x| ∈ BMO while log²|x| ∉ BMO (its oscillation on [0,R] grows like (4/e)ln R).",
+      "John–Nirenberg gives local exponential integrability, hence f ∈ L^p_loc for 1 ≤ p < ∞, but generally f ∉ L^∞; equivalently f^# ∈ L^∞ with ‖f^#‖_∞ = ‖f‖_{BMO}, and Fefferman–Stein gives ‖f‖_{L^p} ≍ ‖f^#‖_{L^p} for 1 < p < ∞.",
+      "(H¹)* ≅ BMO (irreversible direction); BMO is not the dual of L^∞ (that is the space of finitely additive measures), and it is neither separable nor reflexive; VMO is a separable closed subspace with VMO* ≅ H¹, and the endpoint is T: L^∞ → BMO."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "log(abs(x)+0.05)",
+          "color": "#4cc9f0",
+          "label": "f(x)=log(|x|+0.05)≈log|x| ∈ BMO"
+        },
+        {
+          "expr": "log(abs(x)+0.05)+2",
+          "color": "#ffd166",
+          "label": "f+2：加常数不改变 BMO 范数"
+        },
+        {
+          "expr": "0.35*abs(x)",
+          "color": "#ff6b9d",
+          "label": "0.35|x|：线性增长，不在 BMO 中"
+        }
+      ],
+      "xRange": [
+        -6,
+        6
+      ],
+      "yRange": [
+        -4.5,
+        4.5
+      ],
+      "title": "BMO 只控制振荡：log|x| 可以（增长缓慢），|x| 不可以"
+    },
+    "examples": [
+      {
+        "problem": "计算 $f(x)=\\log|x|$ 在对称区间 $[-R,R]$ 上的平均振荡（结果恰为 $2/e$），并说明为什么 $\\|\\log|x|\\|_{\\mathrm{BMO}}$ 有限。",
+        "solution": "由 $\\int_0^R\\log x\\,dx=R\\log R-R$ 得 $f_{[-R,R]}=\\frac1{2R}\\int_{-R}^{R}\\log|x|dx=\\log R-1$，于是 $$\\frac1{2R}\\int_{-R}^{R}\\bigl|\\log|x|-(\\log R-1)\\bigr|dx=\\frac1R\\int_0^R\\Bigl|\\log\\frac xR+1\\Bigr|dx=\\int_0^1|\\log u+1|\\,du=\\frac2e\\approx0.7358 .$$ 对任意区间，振荡只依赖「区间与 $0$ 的相对位置」（缩放不变），数值扫描区间族 $[-a,b]$（$a,b>0$）得到的整体上确界为 $\\approx0.9306$，在长宽比 $b/a\\approx7.28$ 的不对称区间上取到；而对单侧区间 $[0,R]$ 与对称区间 $[-R,R]$ 它恰好是 $2/e$。因此 $\\|\\log|x|\\|_{\\mathrm{BMO}}\\approx0.93<\\infty$，即 $\\log|x|\\in\\mathrm{BMO}$，同时它无界，说明 $L^\\infty\\subsetneq\\mathrm{BMO}$。"
+      },
+      {
+        "problem": "把 John–Nirenberg 不等式用在 $Q=[0,1]$、$f(x)=\\log x$ 上，精确算出偏差分布并验证其指数衰减形式。",
+        "solution": "先算平均：$f_Q=\\int_0^1\\log x\\,dx=-1$。对 $\\lambda\\ge0$，$$|\\log x+1|>\\lambda\\iff \\log x<-1-\\lambda\\iff x<e^{-1-\\lambda},$$ 所以 $$\\bigl|\\{x\\in[0,1]:|f(x)-f_Q|>\\lambda\\}\\bigr|=e^{-1-\\lambda}=e^{-1}\\cdot e^{-\\lambda}.$$ 这恰好是 $C e^{-c\\lambda}$ 形式（$C=e^{-1}$，速率 $c=1$），而由于 $\\|\\log|x|\\|_{\\mathrm{BMO}}\\approx0.93$，指数可写成 $\\lambda=\\lambda/1\\approx1.075\\,\\lambda/\\|f\\|_{\\mathrm{BMO}}$，与 John–Nirenberg 的 $e^{-c\\lambda/\\|f\\|_{\\mathrm{BMO}}}$ 完全相容（$c\\approx1.075$）。数值拟合 $-\\log|\\{\\cdot\\}|=\\lambda+1$ 得到斜率 $1.000$、截距 $1.000$，误差在 $10^{-12}$ 以内，说明本例的指数衰减是精确的。"
+      }
+    ],
+    "tags": [
+      "平均振荡",
+      "John–Nirenberg 不等式",
+      "H¹ 对偶",
+      "端点空间"
+    ],
+    "links": [
+      "hardy-space-h1",
+      "singular-integral-operators",
+      "lp-spaces",
+      "dual-space",
+      "calderon-zygmund-decomposition"
+    ]
+  },
+  {
+    "id": "littlewood-paley-theory",
+    "title": "李特尔伍德–佩利理论",
+    "titleEn": "Littlewood–Paley Theory",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "用二进单位分解把频域切成环带 |ξ| ~ 2^j，得到二进块算子 Δ_j；Littlewood–Paley 定理给出平方函数等价范数 ‖f‖_{L^p} ≈ ‖(Σ_j|Δ_j f|²)^{1/2}‖_{L^p}（1<p<∞，p=1、∞ 失效），并支撑 Bernstein 不等式与 Besov 空间。",
+    "summaryEn": "A dyadic partition of unity cuts the frequency space into annuli |ξ| ~ 2^j, producing the dyadic blocks Δ_j; the Littlewood–Paley theorem gives the square-function equivalence ‖f‖_{L^p} ≈ ‖(Σ_j|Δ_j f|²)^{1/2}‖_{L^p} for 1<p<∞ (it fails at p=1 and p=∞) and underlies the Bernstein inequalities and Besov spaces.",
+    "definition": "Littlewood–Paley 理论的做法是「按频率大小把函数切成一片片」。取径向的 $\\Phi\\in C_c^\\infty(\\mathbb{R}^n)$ 支撑在环带 $\\{1/2\\le|\\xi|\\le2\\}$ 并满足**二进单位分解** $$\\sum_{j\\in\\mathbb{Z}}\\Phi(2^{-j}\\xi)=1\\qquad(\\xi\\ne0),$$ （把 $\\xi\\ne0$ 的频域用 $2^j$ 缩放后的环带覆盖，再取单位分解即可；在 $\\xi=0$ 处不要求，约定和为 $0$。）于是频域被切成**二进环带** $\\{2^{j-1}\\lesssim|\\xi|\\lesssim2^{j+1}\\}$：第 $j$ 片的半径是 $2^j$、**宽度与半径成正比**（每个倍频程一片），这是多尺度分析最标准的频域剖分。相应地定义**二进块算子** $$\\Delta_jf=\\bigl(\\Phi(2^{-j}\\xi)\\hat f(\\xi)\\bigr)^\\vee=\\Phi_j*f,\\qquad \\Phi_j(x)=2^{jn}\\Phi(2^jx).$$ 由于频支几乎不交（$|j-k|\\ge2$ 时 $\\Delta_j\\Delta_k=0$），各片之间几乎正交——这正是 LP 理论能「看清尺度」的原因。\n\n为了让构造更具体，也可以取非紧支但光滑的显式函数 $\\Phi(t)=\\frac{3t^2}{(1+t^2)(4+t^2)}$：它由 $\\theta(t)=\\frac1{1+t^2}$ 的差 $\\Phi(t)=\\theta(t/2)-\\theta(t)$ 得到，求和自动望远镜化，于是 $\\sum_{j\\in\\mathbb{Z}}\\Phi(2^{-j}\\xi)=1$（$\\xi\\ne0$）严格成立（本节点配图用的就是这一组环带）。\n\n**Littlewood–Paley 定理**：对 $1<p<\\infty$，$$\\|f\\|_{L^p}\\asymp\\Bigl\\|\\Bigl(\\sum_{j\\in\\mathbb{Z}}|\\Delta_jf|^2\\Bigr)^{1/2}\\Bigr\\|_{L^p},$$ 常数只依赖 $n,p,\\Phi$；右边称为（LP）**平方函数** $g(f)$。$p=2$ 的情形就是 Plancherel：$\\|g(f)\\|_2^2=(2\\pi)^{-n}\\int(\\sum_j\\Phi(2^{-j}\\xi)^2)|\\hat f|^2d\\xi$，而 $\\sum_j\\Phi(2^{-j}\\xi)^2$ 被两个只依赖 $\\Phi$ 的正常数夹住（每点只有有限多个 $j$ 有贡献），故范数等价；$p\\ne2$ 则靠**向量值奇异积分理论**（把 $g$ 看成取值于 $\\ell^2$ 的奇异积分算子，配合 Marcinkiewicz–Zygmund/Khintchine 型工具）完成——这也是奇异积分 $L^p$ 理论之外的第二条路。\n\n**$p=1$ 与 $p=\\infty$ 不成立**：$f=\\mathbf 1_{[0,1]}\\in L^1$ 时 $g(f)(x)\\approx c|x|^{-n}$（$|x|\\to\\infty$），故 $g(f)\\notin L^1$；$f\\equiv1$ 时 $g(f)\\equiv0$，反向不等式也失效。端点处正确的替代与奇异积分同型：$f\\in H^1\\Rightarrow g(f)\\in L^1$，$f\\in L^\\infty\\Rightarrow g(f)\\in\\mathrm{BMO}$。\n\n**Bernstein 不等式**刻画带限函数的导数：若 $\\hat f$ 支在环带 $\\{2^{j-1}\\le|\\xi|\\le2^{j+1}\\}$（或更一般地支在球 $|\\xi|\\lesssim2^j$）内，则对 $1\\le p\\le\\infty$ 与多重指标 $\\alpha$，$\\|\\partial^\\alpha f\\|_{L^p}\\le C^{|\\alpha|+1}2^{j|\\alpha|}\\|f\\|_{L^p}$；在环带情形还有反向不等式 $\\|f\\|_{L^p}\\lesssim2^{-j|\\alpha|}\\|\\partial^\\alpha f\\|_{L^p}$。含义只有一句：**求导一阶 = 乘上频率 $2^j$**（整个环带的频率量级就是 $2^j$），这也解释了为什么 $H^s$ 范数可以用 $2^{js}$ 加权。\n\n**应用**：定义 **Besov 空间** $B^s_{p,q}=\\{f:\\|f\\|_{B^s_{p,q}}=\\|(2^{js}\\|\\Delta_jf\\|_{L^p})_j\\|_{\\ell^q}<\\infty\\}$ 与 Triebel–Lizorkin 空间；把 Sobolev 范数写成 $\\|f\\|_{H^s}\\asymp\\|(\\sum_j2^{2js}|\\Delta_jf|^2)^{1/2}\\|_{L^2}$；在 PDE 中提供频率分块估计（色散方程的 Strichartz/局部光滑、非线性方程的 dyadic 求和）；在调和分析中则给出 CZ 算子 $L^p$ 有界性的另一条证明路线。\n\n最后注意：本节点的配图把横轴当作频率 $\\xi$，画出四条二进环带 $\\Phi(\\xi/2^j)$（$j=0,1,2,3$）；由于 $\\sum_j\\Phi(\\xi/2^j)\\equiv1$，这些「山形」频带在每点处恰好把总高度 1 分给有限的几个 $j$。",
+    "definitionEn": "Littlewood–Paley theory cuts a function into pieces according to frequency. Choose a radial $\\Phi\\in C_c^\\infty(\\mathbb{R}^n)$ supported in the annulus $\\{1/2\\le|\\xi|\\le2\\}$ with the **dyadic partition of unity** $\\sum_{j\\in\\mathbb{Z}}\\Phi(2^{-j}\\xi)=1$ for $\\xi\\ne0$ (cover the nonzero frequencies by $2^j$-scaled annuli and take a partition of unity; nothing is required at $\\xi=0$, where the sum is declared to be $0$). The frequency space is thus cut into **dyadic annuli** $\\{2^{j-1}\\lesssim|\\xi|\\lesssim2^{j+1}\\}$: the $j$-th piece has radius $2^j$ and width comparable to its radius (one piece per octave). The corresponding **dyadic blocks** are $$\\Delta_jf=\\bigl(\\Phi(2^{-j}\\xi)\\hat f(\\xi)\\bigr)^\\vee=\\Phi_j*f,\\qquad \\Phi_j(x)=2^{jn}\\Phi(2^jx).$$ Since the frequency supports are essentially disjoint ($\\Delta_j\\Delta_k=0$ for $|j-k|\\ge2$), the blocks are almost orthogonal, which is what makes the theory scale-sensitive.\n\nA concrete smooth (non-compactly supported) choice is $\\Phi(t)=\\frac{3t^2}{(1+t^2)(4+t^2)}=\\theta(t/2)-\\theta(t)$ with $\\theta(t)=1/(1+t^2)$; the sum telescopes and $\\sum_j\\Phi(2^{-j}\\xi)=1$ holds exactly for $\\xi\\ne0$ (used in the plot of this entry).\n\n**Littlewood–Paley theorem.** For $1<p<\\infty$, $$\\|f\\|_{L^p}\\asymp\\Bigl\\|\\Bigl(\\sum_{j\\in\\mathbb{Z}}|\\Delta_jf|^2\\Bigr)^{1/2}\\Bigr\\|_{L^p},$$ with constants depending only on $n,p,\\Phi$; the right-hand side is the **square function** $g(f)$. The case $p=2$ is Plancherel: $\\|g(f)\\|_2^2=(2\\pi)^{-n}\\int(\\sum_j\\Phi(2^{-j}\\xi)^2)|\\hat f|^2d\\xi$ and $\\sum_j\\Phi(2^{-j}\\xi)^2$ is bounded above and below by constants depending only on $\\Phi$, since only finitely many $j$ contribute at each point. For $p\\ne2$ one uses **vector-valued singular integral theory** (viewing $g$ as an $\\ell^2$-valued singular integral, together with Marcinkiewicz–Zygmund/Khintchine tools), which is the second route to the $L^p$ theory of singular integrals.\n\n**The endpoints $p=1$ and $p=\\infty$ fail.** For $f=\\mathbf 1_{[0,1]}\\in L^1$ one has $g(f)(x)\\approx c|x|^{-n}$ as $|x|\\to\\infty$, so $g(f)\\notin L^1$; for $f\\equiv1$ one has $g(f)\\equiv0$, so the reverse inequality fails too. The correct endpoint substitutes are again those of singular integral theory: $f\\in H^1\\Rightarrow g(f)\\in L^1$ and $f\\in L^\\infty\\Rightarrow g(f)\\in\\mathrm{BMO}$.\n\n**Bernstein's inequality** describes derivatives of band-limited functions: if $\\hat f$ is supported in the annulus $\\{2^{j-1}\\le|\\xi|\\le2^{j+1}\\}$ (more generally in a ball $|\\xi|\\lesssim2^j$), then for $1\\le p\\le\\infty$ and any multiindex $\\alpha$, $\\|\\partial^\\alpha f\\|_{L^p}\\le C^{|\\alpha|+1}2^{j|\\alpha|}\\|f\\|_{L^p}$, while on an annulus the reverse inequality also holds. The message: **one derivative costs a factor $2^j$ in frequency**, which is why $H^s$ norms are weighted by $2^{js}$.\n\n**Applications.** Besov spaces $B^s_{p,q}$, Triebel–Lizorkin spaces, the square-function description of Sobolev norms, frequency-localised estimates in PDE (Strichartz and local smoothing for dispersive equations, dyadic summation for nonlinear problems), and an alternative proof of $L^p$ boundedness for Calderón–Zygmund operators.",
+    "formulas": [
+      {
+        "latex": "\\sum_{j\\in\\mathbb{Z}}\\Phi(2^{-j}\\xi)=1\\ (\\xi\\ne0),\\qquad \\Delta_jf=\\Phi_j*f,\\quad \\Phi_j(x)=2^{jn}\\Phi(2^jx)",
+        "note": "二进单位分解与二进块算子：第 j 片对应频带 |ξ| ~ 2^j，宽度与半径成正比；|j−k| ≥ 2 时 Δ_jΔ_k = 0。",
+        "noteEn": "Dyadic partition and dyadic blocks: piece j corresponds to the frequency band |ξ| ~ 2^j whose width is proportional to its radius; Δ_jΔ_k = 0 for |j−k| ≥ 2."
+      },
+      {
+        "latex": "\\|f\\|_{L^p}\\asymp\\Bigl\\|\\Bigl(\\sum_{j\\in\\mathbb{Z}}|\\Delta_jf|^2\\Bigr)^{1/2}\\Bigr\\|_{L^p},\\qquad 1<p<\\infty",
+        "note": "Littlewood–Paley 定理（平方函数等价范数）：核心结论；p=1 与 p=∞ 不成立。",
+        "noteEn": "The Littlewood–Paley theorem (square-function equivalence): the central result; it fails for p=1 and p=∞."
+      },
+      {
+        "latex": "\\|g(f)\\|_{L^2}^2=(2\\pi)^{-n}\\int_{\\mathbb{R}^n}\\Bigl(\\sum_{j\\in\\mathbb{Z}}\\Phi(2^{-j}\\xi)^2\\Bigr)|\\hat f(\\xi)|^2\\,d\\xi\\asymp\\|f\\|_2^2",
+        "note": "p=2 的精确形式（Plancherel + 每点只有有限多个 j 贡献），这是整条理论里唯一「免费」的指数。",
+        "noteEn": "The exact p=2 identity (Plancherel plus finitely many contributing j at each point); it is the only «free» exponent in the theory."
+      },
+      {
+        "latex": "\\operatorname{supp}\\hat f\\subset\\{2^{j-1}\\le|\\xi|\\le2^{j+1}\\}\\ \\Longrightarrow\\ \\|\\partial^\\alpha f\\|_{L^p}\\le C^{|\\alpha|+1}2^{j|\\alpha|}\\|f\\|_{L^p}",
+        "note": "Bernstein 不等式：求导一阶 = 频率乘 2^j；环带上还有反向不等式 ‖f‖_p ≲ 2^{−j|α|}‖∂^α f‖_p。",
+        "noteEn": "Bernstein's inequality: one derivative costs the frequency factor 2^j; on an annulus the reverse inequality ‖f‖_p ≲ 2^{−j|α|}‖∂^α f‖_p also holds."
+      },
+      {
+        "latex": "\\|f\\|_{B^s_{p,q}}=\\Bigl\\|\\bigl(2^{js}\\|\\Delta_jf\\|_{L^p}\\bigr)_{j\\in\\mathbb{Z}}\\Bigr\\|_{\\ell^q}",
+        "note": "Besov 空间：用二进块算子与 2^{js} 加权定义，说明 LP 分解是整族函数空间（含 Sobolev、Triebel–Lizorkin）的共同语言。",
+        "noteEn": "Besov spaces: defined via dyadic blocks with the 2^{js} weight, showing that the LP decomposition is the common language of a whole family of function spaces (including Sobolev and Triebel–Lizorkin)."
+      }
+    ],
+    "expression": {
+      "text": "f = Σ_j Δ_j f,   Δ_j = Φ(2^{−j}D),   ‖f‖_{L^p} ≈ ‖(Σ_j |Δ_j f|²)^{1/2}‖_{L^p}  (1<p<∞)",
+      "symbol": "\\Delta_j=\\Phi(2^{-j}D)",
+      "note": "频带 |ξ| ~ 2^j 的二进分解；平方函数等价范数只在 1<p<∞ 成立，端点为 H¹ → L¹ 与 L^∞ → BMO。",
+      "noteEn": "Dyadic decomposition with frequency band |ξ| ~ 2^j; the square-function equivalence holds only for 1<p<∞, with endpoints H¹ → L¹ and L^∞ → BMO."
+    },
+    "properties": [
+      "频带是二进环带 |ξ| ~ 2^j，宽度与半径成正比；不同 j 的频支几乎不交，故 Δ_j 之间几乎正交（|j−k| ≥ 2 时 Δ_jΔ_k = 0），这是「按尺度分解」的技术基础。",
+      "L² 是全理论唯一「免费」的指数（Plancherel 直接给出等价范数）；1<p<∞ 靠向量值奇异积分理论；p=1 与 p=∞ 失效，端点正确版本是 g: H¹ → L¹ 与 g: L^∞ → BMO。",
+      "Bernstein 不等式：频支在环带/球上时导数一阶对应频率乘 2^j；上界对球成立，环带上还有下界，故环带上 ‖∂^α f‖_p ≈ 2^{j|α|}‖f‖_p。",
+      "应用面极广：Besov/Triebel–Lizorkin 空间的定义、Sobolev 范数的平方函数刻画、PDE 的频率分块与 Strichartz/局部光滑、CZ 算子 L^p 有界性的第二条证明路线。",
+      "二进分解与 Calderón 再生公式、小波（多尺度分析）同源：在适当意义下 Σ_j Δ_j = Id；与 H¹、BMO 的端点理论配对使用，构成现代调和分析的基本语言。"
+    ],
+    "propertiesEn": [
+      "The bands are dyadic annuli |ξ| ~ 2^j with width proportional to radius; the frequency supports are essentially disjoint and Δ_jΔ_k = 0 for |j−k| ≥ 2, which is the technical basis of scale-by-scale analysis.",
+      "L² is the only «free» exponent (Plancherel gives the equivalence directly); 1<p<∞ uses vector-valued singular integral theory; p=1 and p=∞ fail, with endpoint substitutes g: H¹ → L¹ and g: L^∞ → BMO.",
+      "Bernstein's inequality: for frequency-supported functions one derivative corresponds to the factor 2^j; the upper bound holds for balls, while on annuli the lower bound also holds, giving ‖∂^α f‖_p ≈ 2^{j|α|}‖f‖_p.",
+      "Wide applicability: definitions of Besov and Triebel–Lizorkin spaces, square-function descriptions of Sobolev norms, frequency-localised estimates in PDE (Strichartz, local smoothing), and a second proof of L^p boundedness for CZ operators.",
+      "The dyadic decomposition shares its origin with the Calderón reproducing formula and wavelets (multiscale analysis): in a suitable sense Σ_j Δ_j = Id, and it pairs with the endpoint theory of H¹ and BMO as the basic language of modern harmonic analysis."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "3*x^2/((1+x^2)*(4+x^2))",
+          "color": "#4cc9f0",
+          "label": "j=0：Φ(ξ)，峰在 √2"
+        },
+        {
+          "expr": "12*x^2/((4+x^2)*(16+x^2))",
+          "color": "#ffd166",
+          "label": "j=1：Φ(ξ/2)，峰在 2√2"
+        },
+        {
+          "expr": "48*x^2/((16+x^2)*(64+x^2))",
+          "color": "#ff6b9d",
+          "label": "j=2：Φ(ξ/4)，峰在 4√2"
+        },
+        {
+          "expr": "192*x^2/((64+x^2)*(256+x^2))",
+          "color": "#b388ff",
+          "label": "j=3：Φ(ξ/8)，峰在 8√2"
+        }
+      ],
+      "xRange": [
+        -20,
+        20
+      ],
+      "yRange": [
+        0,
+        0.4
+      ],
+      "title": "频域的二进分解：Σ_j Φ(ξ/2^j) ≡ 1（ξ≠0），每条环带 |ξ| ~ 2^j"
+    },
+    "examples": [
+      {
+        "problem": "对 $\\Phi(t)=\\frac{3t^2}{(1+t^2)(4+t^2)}$ 验证二进单位分解 $\\sum_{j\\in\\mathbb{Z}}\\Phi(2^{-j}\\xi)=1$（$\\xi\\ne0$）。",
+        "solution": "令 $\\theta(t)=\\frac1{1+t^2}$，则 $$\\Phi(t)=\\theta\\bigl(\\tfrac t2\\bigr)-\\theta(t)=\\frac1{1+\\frac{t^2}4}-\\frac1{1+t^2}=\\frac{3t^2}{(1+t^2)(4+t^2)} .$$ 于是对 $J<K$，$$\\sum_{j=J}^{K}\\Phi(2^{-j}\\xi)=\\theta(2^{-K-1}\\xi)-\\theta(2^{-J}\\xi)\\xrightarrow[K\\to\\infty]{J\\to-\\infty}\\theta(0)-0=1\\qquad(\\xi\\ne0),$$ 求和望远镜化是严格恒等式。数值上取 $j=-45,\\dots,45$，对 $\\xi=0.01,\\ 1,\\ \\sqrt2,\\ 3,\\ 10^4,\\ 10^{-6}$ 计算部分和均为 $1.000000000000$（误差 $<10^{-15}$）。另外 $\\Phi$ 的峰在 $t=\\sqrt2$（$\\Phi(\\sqrt2)=1/3$），把 $\\xi$ 缩放到 $2^j$ 就得到「第 j 片峰位 $\\approx1.414\\cdot2^j$、宽度 $\\propto$ 峰值位置」，正是频带 $|\\xi|\\sim2^j$ 的二进环带。"
+      },
+      {
+        "problem": "数值验证 Bernstein 不等式：先取 $f_j(x)=\\cos(2^jx)$ 算 $\\|f_j'\\|_2/\\|f_j\\|_2$（等号情形），再对频率 $|k|\\le R$ 的三角多项式验证上界。",
+        "solution": "若 $f=\\cos(Nx)$，则 $f'=-N\\sin(Nx)$，在 $[0,2\\pi]$ 上两函数振幅相同，于是 $\\|f'\\|_2/\\|f\\|_2=N$。数值上 $j=0,\\dots,5$ 分别得到 $1,2,4,8,16,32=2^j$，正好是 Bernstein 的等号情形（频谱集中在频率 $2^j$）。再取频率 $|k|\\le16$ 的随机三角多项式并沿其精确导数的 Fourier 级数计算，得 $\\|f'\\|_2/\\|f\\|_2\\approx12.2\\le16$，符合 $\\|\\partial^\\alpha f\\|_p\\le C^{|\\alpha|+1}2^{j|\\alpha|}\\|f\\|_p$ 的量级；作为对照，无带限的 $f(x)=e^{-x^2}$ 有 $\\|f'\\|_2/\\|f\\|_2=1$（与任何「频率尺度」无关），可见 Bernstein 的关键前提是频支有界。"
+      }
+    ],
+    "tags": [
+      "二进分解",
+      "平方函数",
+      "Bernstein 不等式",
+      "Besov 空间"
+    ],
+    "links": [
+      "fourier-transform",
+      "schwartz-space",
+      "singular-integral-operators",
+      "lp-spaces",
+      "wavelet-transform",
+      "sobolev-embedding"
+    ]
+  },
+  {
+    "id": "fourier-restriction",
+    "title": "傅里叶限制问题",
+    "titleEn": "The Fourier Restriction Problem",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "问限制算子 R: f ↦ f̂|_{S^{n−1}} 何时从 L^p(ℝⁿ) 有界映到 L^q(S^{n−1})；Stein–Tomas 定理证明 p ≤ 2(n+1)/(n+3) 的范围，而「p < 2n/(n+1) 且 q ≤ (n−1)p'/(n+1) 时成立」至今（n≥3）仍只是猜想。",
+    "summaryEn": "The problem asks when the restriction operator R: f ↦ f̂|_{S^{n−1}} is bounded from L^p(ℝⁿ) to L^q(S^{n−1}); the Stein–Tomas theorem proves the range p ≤ 2(n+1)/(n+3), while the statement that the same holds for all p < 2n/(n+1) with q ≤ (n−1)p'/(n+1) remains a conjecture for n ≥ 3.",
+    "definition": "设 $S=S^{n-1}\\subset\\mathbb{R}^n$（$n\\ge2$）是单位球面，$d\\sigma$ 是它的面测度。对 $f\\in\\mathcal{S}(\\mathbb{R}^n)$，$\\hat f$ 连续，**限制算子** $Rf=\\hat f\\bigr|_{S^{n-1}}$ 总有意义；问题是要它**有界**，即是否成立 $$R_{S^{n-1}}(p\\to q):\\qquad \\|\\hat f\\|_{L^q(S^{n-1},d\\sigma)}\\le C\\|f\\|_{L^p(\\mathbb{R}^n)}\\qquad\\forall f\\in\\mathcal{S}(\\mathbb{R}^n).$$ 一旦成立，$R$ 就按连续性延拓为 $L^p(\\mathbb{R}^n)\\to L^q(S^{n-1})$ 的有界算子：$L^p$ 函数的 Fourier 变换本来只在 a.e. 意义下确定，却能「钉」在测度为零的球面上——这是 Fourier 变换超出 Hausdorff–Young 尺度规律之外的结构性现象。$p=1$ 的情形平凡（$\\|\\hat f\\|_\\infty\\le\\|f\\|_1$，即 $R(1\\to\\infty)$）；$p=2$ 则完全失效（Plancherel 说 $L^2$ 函数的 $\\hat f$ 可以是任意 $L^2$ 函数，对零测集没有可定义的逐点取值）。所以有趣的范围是 $1<p<2$。\n\n与它等价的是**延拓形式**（由对偶得到）：$R(p\\to q)$ 成立当且仅当 $$\\|(gd\\sigma)^\\vee\\|_{L^{p'}(\\mathbb{R}^n)}\\lesssim\\|g\\|_{L^{q'}(S^{n-1})},$$ 即把球面上的函数 $g$ 通过 $e^{ix\\cdot\\xi}$「延拓」回 $\\mathbb{R}^n$ 是 $L^{q'}(d\\sigma)\\to L^{p'}(\\mathbb{R}^n)$ 有界的。因此限制问题又称**限制–延拓问题**；把 $S^{n-1}$ 换成抛物面或任何具有非零曲率的紧超曲面，估计是等价的（局部化 + 有限覆盖），而抛物面版本正是色散方程的研究对象。\n\n**必要条件**来自极简单的例子。取球面上半径 $\\delta$ 的**帽**（cap），其上的 $\\hat f$ 的 Fourier 逆变换集中在帽的对偶「管」上（尺寸 $\\delta^{-1}\\times\\cdots\\times\\delta^{-1}\\times\\delta^{-2}$，体积 $\\delta^{-(n+1)}$），量级为 $\\delta^{n-1}$；比较 $\\|f\\|_p\\sim\\delta^{(n-1)/p}$ 并令 $\\delta\\to0$，得 $$q\\ge\\frac{n+1}{n-1}p'\\ \\ (\\text{延拓形式})\\iff q\\le\\frac{n-1}{n+1}p'\\ \\ (\\text{限制形式}).$$ 另一条必要条件是 $p'\\ge\\frac{2n}{n-1}$，等价地 $p\\le\\frac{2n}{n+1}$。两条合起来给出**猜想**的完整范围：$p<\\frac{2n}{n+1}$ 且 $q\\le\\frac{n-1}{n+1}p'$。\n\n**已经证明的定理（与猜想严格区分）**：\\n（i）**Stein–Tomas 定理（1975）**：$R_{S^{n-1}}(p\\to q)$ 对 $$1\\le p\\le\\frac{2(n+1)}{n+3},\\qquad q\\le\\frac{n-1}{n+1}p'$$ 成立；等价形式是延拓算子从 $L^2(d\\sigma)$ 到 $L^q(\\mathbb{R}^n)$ 有界（$q\\ge\\frac{2(n+1)}{n-1}$）。其证明的关键是振荡积分/驻相法的经典估计 $|\\widehat{d\\sigma}(x)|\\lesssim\\langle x\\rangle^{-(n-1)/2}$ 与 $L^2$ 对偶方法（$\\|\\hat f\\|^2_{L^2(d\\sigma)}=\\langle f,f*\\widehat{d\\sigma}\\rangle$，再用 Young 或 Hardy–Littlewood–Sobolev 不等式）。注意 $\\frac{2(n+1)}{n+3}<\\frac{2n}{n+1}$：两个指数之间的整个区域是几十年来悬而未决的核心。\\n（ii）$n=2$ 是**定理**：二维限制猜想已由 Zygmund（1974）证明（Fefferman–Stein 的振荡积分方法也可处理），此时 $p'\\ge4$、$q\\le p'/3$ 的完整范围都成立。\\n（iii）$n=3$ 的抛物面有大量**部分结果（定理）**：Stein–Tomas 给出 $q\\ge4$，Bourgain–Guth 的（多）线性（broad–narrow）方法给出 $q>3+5/17\\approx3.294$，Guth 的多项式分解给出 $q>3.25$，Wang 的方法进一步给出 $q>3+3/13\\approx3.231$（后续还有改进），Guth 的多项式分解方法给出 $q>3.25$，后续还有改进；但完整范围仍未证明。\\n（iv）**限制猜想**（Stein，公开问题）：$R_{S^{n-1}}(p\\to q)$ 成立当且仅当 $p'>\\frac{2n}{n-1}$（端点除外）且 $q\\le\\frac{n-1}{n+1}p'$。$n\\ge3$ 时**未证明**——任何新近出现的「已证明」宣称都必须经过独立检验方可采用，本条目一律按经典猜想表述。\n\n**与其它问题的联系**。限制猜想蕴含（同维数的）**Kakeya 猜想**（每个方向都包含单位线段的集合必有满 Hausdorff 维数），反向的蕴含未知；Kakeya 猜想在 $\\mathbb{R}^3$ 已由 Wang–Zahl（2025）证明，但那是另一个问题，不自动给出限制猜想。与限制问题相关但**不同**的猜想还有波方程的**局部光滑猜想**、Bochner–Riesz 乘子猜想等。**应用**方面最重要的是 **Strichartz 估计**：把 Stein–Tomas 定理用在抛物面（$n+1$ 维空间中的超曲面）上，得到 Schrödinger 方程的临界估计 $\\|e^{it\\Delta}\\varphi\\|_{L^{2(n+2)/n}(\\mathbb{R}^n\\times\\mathbb{R})}\\lesssim\\|\\varphi\\|_{L^2}$，它是色散型非线性 PDE（NLS、KdV 等）局部适定性的基石。\n\n**方法线索**：$L^2$ + 驻相法（Stein–Tomas，Bessel 函数渐近）；平面情形的振荡积分方法（Fefferman–Stein）；高维的现代工具包括 Tao–Vargas 与 Tao 的**双线性/多线性方法**、Guth 的**多项式分解**、Bourgain–Demeter 的**解耦理论**（decoupling）。核心困难始终与「管状集合如何交叠」的几何有关——这也是它与 Kakeya 猜想内在相连的原因。",
+    "definitionEn": "Let $S=S^{n-1}\\subset\\mathbb{R}^n$ ($n\\ge2$) be the unit sphere with surface measure $d\\sigma$. For $f\\in\\mathcal{S}(\\mathbb{R}^n)$ the Fourier transform $\\hat f$ is continuous, so the **restriction operator** $Rf=\\hat f|_{S^{n-1}}$ is always defined; the question is whether it is **bounded**, i.e. whether $$R_{S^{n-1}}(p\\to q):\\qquad \\|\\hat f\\|_{L^q(S^{n-1},d\\sigma)}\\le C\\|f\\|_{L^p(\\mathbb{R}^n)}\\qquad\\forall f\\in\\mathcal{S}(\\mathbb{R}^n).$$ If so, $R$ extends by continuity to a bounded operator $L^p(\\mathbb{R}^n)\\to L^q(S^{n-1})$: the Fourier transform of an $L^p$ function is only defined a.e., yet it can be «pinned down» on a measure-zero sphere, a structural phenomenon beyond the Hausdorff–Young scaling law. The case $p=1$ is trivial ($\\|\\hat f\\|_\\infty\\le\\|f\\|_1$, i.e. $R(1\\to\\infty)$), while $p=2$ fails completely (by Plancherel $\\hat f$ can be an arbitrary $L^2$ function, which has no pointwise meaning on a null set). Thus the interesting range is $1<p<2$.\n\nEquivalently (by duality) one considers the **extension form**: $R(p\\to q)$ holds iff $\\|(gd\\sigma)^\\vee\\|_{L^{p'}(\\mathbb{R}^n)}\\lesssim\\|g\\|_{L^{q'}(S^{n-1})}$, i.e. extension from the sphere back to $\\mathbb{R}^n$ via $e^{ix\\cdot\\xi}$ is bounded from $L^{q'}(d\\sigma)$ to $L^{p'}(\\mathbb{R}^n)$. Hence the name restriction–extension problem; replacing $S^{n-1}$ by the paraboloid or any compact hypersurface with nonvanishing curvature gives an equivalent problem (localisation plus a finite cover), and the paraboloid version is exactly the setting of dispersive equations.\n\n**Necessary conditions** come from simple examples. Take a **cap** of radius $\\delta$ on the sphere; the inverse Fourier transform of a bump on the cap is concentrated on the dual «tube» of dimensions $\\delta^{-1}\\times\\cdots\\times\\delta^{-1}\\times\\delta^{-2}$ (volume $\\delta^{-(n+1)}$) with size $\\delta^{n-1}$; comparing with $\\|f\\|_p\\sim\\delta^{(n-1)/p}$ and letting $\\delta\\to0$ gives $q\\ge\\frac{n+1}{n-1}p'$ in the extension form, equivalently $q\\le\\frac{n-1}{n+1}p'$ in the restriction form. A second necessary condition is $p'\\ge\\frac{2n}{n-1}$, i.e. $p\\le\\frac{2n}{n+1}$. Together they determine the conjectured range $p<\\frac{2n}{n+1}$, $q\\le\\frac{n-1}{n+1}p'$.\n\n**What is a theorem.** (i) The **Stein–Tomas theorem (1975)**: $R_{S^{n-1}}(p\\to q)$ holds for $1\\le p\\le\\frac{2(n+1)}{n+3}$ and $q\\le\\frac{n-1}{n+1}p'$, equivalently the extension operator is bounded from $L^2(d\\sigma)$ to $L^q(\\mathbb{R}^n)$ for $q\\ge\\frac{2(n+1)}{n-1}$. The proof rests on the oscillatory-integral/stationary-phase bound $|\\widehat{d\\sigma}(x)|\\lesssim\\langle x\\rangle^{-(n-1)/2}$ and an $L^2$ duality argument. Note $\\frac{2(n+1)}{n+3}<\\frac{2n}{n+1}$: the gap between them is the long-standing core issue. (ii) For $n=2$ the full conjecture is a **theorem** (Zygmund, 1974). (iii) For $n=3$ many partial results are known (Stein–Tomas $q\\ge4$, Bourgain–Guth $q>3+5/17\\approx3.294$; Guth's polynomial method $q>3.25$; Wang's method $q>3+3/13\\approx3.231$, Guth's polynomial method $q>3.25$, with later improvements). (iv) The **restriction conjecture** (Stein): $R(p\\to q)$ holds iff $p'>\\frac{2n}{n-1}$ (endpoint excluded) and $q\\le\\frac{n-1}{n+1}p'$; for $n\\ge3$ this is **unproved**, and any recent claim of a proof must pass independent verification before it may be quoted as a theorem.\n\n**Connections and applications.** The restriction conjecture implies the (same-dimensional) **Kakeya conjecture**, the converse implication being unknown; the Kakeya conjecture in $\\mathbb{R}^3$ was proved by Wang–Zahl (2025), but that is a different statement and does not give the restriction conjecture. Related but distinct conjectures include the **local smoothing conjecture** for the wave equation and the Bochner–Riesz multiplier problem. The most important application is to **Strichartz estimates**: applying Stein–Tomas to the paraboloid (a hypersurface in $\\mathbb{R}^{n+1}$) yields the critical Schrödinger estimate $\\|e^{it\\Delta}\\varphi\\|_{L^{2(n+2)/n}(\\mathbb{R}^n\\times\\mathbb{R})}\\lesssim\\|\\varphi\\|_{L^2}$, the foundation of local well-posedness for nonlinear dispersive PDE. Methodologically one uses $L^2$ plus stationary phase (Stein–Tomas), oscillatory-integral methods (Fefferman–Stein) in the plane, and in higher dimensions bilinear/multilinear methods (Tao–Vargas, Tao), polynomial partitioning (Guth) and decoupling (Bourgain–Demeter); the difficulty is always the geometry of how tubes overlap, which is why Kakeya is built in.",
+    "formulas": [
+      {
+        "latex": "\\|\\hat f\\|_{L^q(S^{n-1},d\\sigma)}\\le C\\|f\\|_{L^p(\\mathbb{R}^n)}\\qquad (R_{S^{n-1}}(p\\to q))",
+        "note": "限制估计的定义；成立时 R 按连续性延拓为 L^p(ℝⁿ) → L^q(S^{n−1}) 的有界算子（L^p 函数的 f̂ 本只在 a.e. 意义下定义）。",
+        "noteEn": "The restriction estimate; when true, R extends continuously to a bounded operator L^p(ℝⁿ) → L^q(S^{n−1}) even though f̂ for an L^p function is only defined a.e."
+      },
+      {
+        "latex": "R(p\\to q)\\iff \\|(gd\\sigma)^\\vee\\|_{L^{p'}(\\mathbb{R}^n)}\\lesssim\\|g\\|_{L^{q'}(S^{n-1})}",
+        "note": "对偶的延拓形式：把球面测度 g 的延拓算子从 L^{q'}(dσ) 映到 L^{p'}(ℝⁿ)；抛物面版本正是色散方程（Strichartz）的来源。",
+        "noteEn": "The dual extension form: the extension operator applied to g dσ maps L^{q'}(dσ) to L^{p'}(ℝⁿ); the paraboloid version is the source of Strichartz estimates for dispersive equations."
+      },
+      {
+        "latex": "q\\le\\frac{n-1}{n+1}p'\\ (\\text{Knapp 帽}),\\qquad p'\\ge\\frac{2n}{n-1}\\ (\\Leftrightarrow p\\le\\frac{2n}{n+1})",
+        "note": "两条必要条件（由帽例与实际聚焦例得到）：猜想断言它们也是充分的，但 n≥3 时这一点未证明。",
+        "noteEn": "Two necessary conditions (from the Knapp cap and the focusing example); the conjecture asserts they are also sufficient, which is unproved for n≥3."
+      },
+      {
+        "latex": "1\\le p\\le\\frac{2(n+1)}{n+3},\\qquad q\\le\\frac{n-1}{n+1}p'\\qquad(\\text{Stein–Tomas 定理})",
+        "note": "已证明的定理（1975）：与 L²(dσ) → L^q(ℝⁿ)（q ≥ 2(n+1)/(n−1)）对偶；在 p 端点是 sharp（Knapp 例达到 q = 2 端点）。",
+        "noteEn": "The proved theorem (1975), dual to L²(dσ) → L^q(ℝⁿ) for q ≥ 2(n+1)/(n−1); it is sharp at the endpoint p, where the Knapp example reaches q = 2."
+      },
+      {
+        "latex": "R(p\\to q)\\ \\text{对}\\ p'>\\frac{2n}{n-1},\\ q\\le\\frac{n-1}{n+1}p'\\ \\text{成立}\\quad(\\textbf{猜想，}n\\ge3\\text{ 未证明})",
+        "note": "Stein 限制猜想：二维（n=2）已是定理（Zygmund 1974），n≥3 仍是公开问题；与 Kakeya 猜想相联系（限制猜想蕴含同维 Kakeya 猜想）。",
+        "noteEn": "Stein's restriction conjecture: settled in two dimensions (Zygmund 1974) but still open for n≥3; it is linked to the Kakeya conjecture, which it implies in the same dimension."
+      }
+    ],
+    "expression": {
+      "text": "R : f ↦ f̂|_{S^{n−1}},   ‖f̂‖_{L^q(S^{n−1})} ≤ C‖f‖_{L^p(ℝⁿ)},   ‖F(dσ)(x)‖ ≲ ⟨x⟩^{−(n−1)/2}",
+      "symbol": "R f=\\hat f|_{S^{n-1}}",
+      "note": "问题：哪些 (p,q) 使限制有界；驻相法给出的 |F(dσ)(x)| ≲ ⟨x⟩^{−(n−1)/2} 是 Stein–Tomas 定理（p ≤ 2(n+1)/(n+3)）的关键输入。",
+      "noteEn": "Which (p,q) make restriction bounded; the stationary-phase bound on the Fourier transform of dσ is the key input to the Stein–Tomas theorem (p ≤ 2(n+1)/(n+3))."
+    },
+    "properties": [
+      "p=1 平凡（q=∞）、p=2 完全失效（Plancherel：L² 函数的 f̂ 对零测集没有逐点取值），有趣范围是 1<p<2——现象是「Fourier 变换可以限制到零测集」。",
+      "把 S^{n−1} 换成抛物面或任何有非零曲率的紧超曲面，问题等价（局部化 + 有限覆盖）；抛物面版本直接对应 Schrödinger 方程与 Strichartz 估计。",
+      "必要条件：q ≤ (n−1)p'/(n+1)（Knapp 帽）与 p' ≥ 2n/(n−1)（聚焦例）；猜想断言这两条也充分，n≥3 未证明。",
+      "已知最好的通用定理是 Stein–Tomas（p ≤ 2(n+1)/(n+3)，q ≤ (n−1)p'/(n+1)），其证明依赖 |F(dσ)(x)| ≲ ⟨x⟩^{−(n−1)/2} 与 L² 对偶；n=2 的完整猜想是定理（Zygmund 1974）。",
+      "联系与应用：Stein–Tomas ⟹ Strichartz（色散方程）；限制猜想 ⟹ Kakeya 猜想（反向未知）；与局部光滑、Bochner–Riesz、解耦理论、多项式分解、双线性方法等交织。"
+    ],
+    "propertiesEn": [
+      "p=1 is trivial (q=∞) and p=2 fails completely (by Plancherel, f̂ of an L² function has no pointwise values on a null set); the interesting range is 1<p<2, where the Fourier transform really can be restricted to a null set.",
+      "Replacing S^{n−1} by the paraboloid or by any compact hypersurface of nonvanishing curvature gives an equivalent problem (localisation plus a finite cover); the paraboloid version corresponds directly to the Schrödinger equation and Strichartz estimates.",
+      "Necessary conditions: q ≤ (n−1)p'/(n+1) (Knapp cap) and p' ≥ 2n/(n−1) (focusing example); the conjecture asserts that they are also sufficient, which is open for n≥3.",
+      "The best general theorem is Stein–Tomas (p ≤ 2(n+1)/(n+3), q ≤ (n−1)p'/(n+1)), proved via the stationary-phase bound on F(dσ) and L² duality; in two dimensions the full conjecture is a theorem (Zygmund 1974).",
+      "Connections and applications: Stein–Tomas gives Strichartz estimates for dispersive equations; the restriction conjecture implies the Kakeya conjecture (the converse is unknown); it intertwines with local smoothing, Bochner–Riesz, decoupling, polynomial partitioning and bilinear methods."
+    ],
+    "examples": [
+      {
+        "problem": "用 Knapp 帽算出 $n=2$ 时的必要条件，并验证 Stein–Tomas 的端点在 Knapp 线上。",
+        "solution": "取 $n=2$：半径 $\\delta$ 的帽的对偶管尺寸为 $\\delta^{-1}\\times\\delta^{-2}$，体积 $\\delta^{-3}$，帽上量级 $\\delta^{1}$（$\\delta^{n-1}$）。于是 $\\|Ef\\|_q\\gtrsim\\delta\\cdot\\delta^{-3/q}$，而 $\\|f\\|_{L^p(d\\sigma)}=\\delta^{1/p}$，要求对一切 $\\delta\\to0$ 有 $\\delta^{1-3/q}\\lesssim\\delta^{1/p}$，即 $1-\\frac3q\\ge\\frac1p$，整理得 $q\\ge3p'=\\frac{n+1}{n-1}p'$（**延拓形式**）；对偶回到限制形式即 $q\\le\\frac{p'}3=\\frac{n-1}{n+1}p'$——这正是猜想中那条必要条件的边界线。检验 Stein–Tomas 端点：$p=\\frac{2(n+1)}{n+3}=\\frac65$ 时 $p'=6$，Knapp 线给出 $q\\le\\frac63=2$，与定理中的 $q\\le2$ 完全一致（$q=2$ 来自 $L^2(d\\sigma)$ 的延拓估计 $q\\ge\\frac{2(n+1)}{n-1}=6$ 的对偶），说明 Stein–Tomas 在 $p$ 端点是 sharp 的。"
+      },
+      {
+        "problem": "说明为什么 $p=2$ 时限制不可能成立，而 $p=1$ 时为什么成立；并解释「必要条件」为何不能直接当成定理。",
+        "solution": "（1）$p=2$：由 Plancherel，$f\\mapsto\\hat f$ 是 $L^2(\\mathbb{R}^n)$ 到自身的等距同构，正确的反例是**量级型集中反例**：取 $\\hat f$ 为球心位于 $S^{n-1}$ 上、半径为 $\\delta$ 的球的特征函数，则 $\\|f\\|_2\\approx\\delta^{n/2}$ 而 $\\|\\hat f\\|_{L^q(S)}\\approx\\delta^{(n-1)/q}$，比值 $\\approx\\delta^{(n-1)/q-n/2}$；取 $q\\ge2$ 时 $\\to\\infty$，故限制估计必失效。（注意：不能由「$L^2$ 函数只在 a.e. 意义下定义」直接推出估计失效——同一理由会错误地否定 $p<\\frac{2n}{n+1}$ 时已经证明的限制定理，那些定理正是靠连续性延拓定义的。）（2）$p=1$：对一切 $\\xi$ 有 $|\\hat f(\\xi)|\\le\\int|f|=\\|f\\|_1$，于是 $\\|\\hat f\\|_{L^\\infty(S^{n-1})}\\le\\|f\\|_1$，即 $R(1\\to\\infty)$ 成立（这是「零曲率」不需要的平凡端点）。（3）帽例与聚焦例只给出必要条件：它们说明 $p$、$q$ 超出相应范围时估计必失效，但不能说明范围内的估计成立——把『必要条件』升级为『充分条件』正是限制猜想的内容，$n\\ge3$ 时至今未证明。"
+      }
+    ],
+    "tags": [
+      "限制猜想",
+      "Stein–Tomas 定理",
+      "Strichartz 估计",
+      "Kakeya 猜想"
+    ],
+    "links": [
+      "fourier-transform",
+      "schwartz-space",
+      "interpolation-theorems",
+      "littlewood-paley-theory",
+      "fractional-integral-hls",
+      "sobolev-embedding"
+    ]
+  }
+]

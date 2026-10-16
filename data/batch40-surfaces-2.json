@@ -1,0 +1,575 @@
+[
+  {
+    "id": "gaussian-mean-curvature",
+    "title": "高斯曲率与平均曲率",
+    "titleEn": "Gaussian and Mean Curvature",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "温加滕映射（形状算子）W=−dn 的两个特征值 κ₁、κ₂ 刻画出曲面在两个主方向的弯曲：K=κ₁κ₂ 是内蕴的高斯曲率，H=(κ₁+κ₂)/2 是外蕴的平均曲率。",
+    "summaryEn": "The two eigenvalues κ₁, κ₂ of the Weingarten map (shape operator) W = −dn describe how a surface bends: K = κ₁κ₂ is the intrinsic Gaussian curvature and H = (κ₁+κ₂)/2 the extrinsic mean curvature.",
+    "definition": "设 $\\Sigma$ 是 $\\mathbb{R}^3$ 中的正则曲面，$n$ 是单位法向量场。在每点 $p$ 处，温加滕映射（形状算子）$W_p=-dn_p$ 把切向量 $X$ 映为 $-dn_p(X)$，它是切平面 $T_p\\Sigma$ 上的**自伴**线性算子，所以有两个实特征值 $\\kappa_1,\\kappa_2$，称为**主曲率**，对应的特征方向称为主方向。\n\n把第一、第二基本形式的系数分别记作 $E,F,G$ 与 $L,M,N$。解特征方程 $\\det(\\mathrm{II}-\\kappa\\,\\mathrm{I})=0$，即\n$$(EG-F^2)\\kappa^2-(EN-2FM+GL)\\kappa+(LN-M^2)=0,$$\n两根就是主曲率。由此得到**高斯曲率**与**平均曲率**\n$$K=\\kappa_1\\kappa_2=\\det W=\\frac{LN-M^2}{EG-F^2},\\qquad H=\\frac{\\kappa_1+\\kappa_2}{2}=\\frac{1}{2}\\mathrm{tr}\\,W=\\frac{EN-2FM+GL}{2(EG-F^2)}.$$\n\n直观上，$K$ 是两个主方向弯曲程度之积，$H$ 是它们的平均。$K$ 是**内蕴**量（只依赖曲面的度量，见高斯绝妙定理），$H$ 是**外蕴**量（随曲面在空间中的摆放方式而变）。两者合起来完全决定主曲率：$\\kappa_{1,2}=H\\pm\\sqrt{H^2-K}$。\n\n按 $K$ 的符号，曲面上的点分为三类：$K>0$ 的椭圆点（如球面）、$K<0$ 的双曲点（如马鞍面）、$K=0$ 的抛物点（如柱面）。取外法向时，半径 $R$ 的球面 $K=1/R^2$、$H=-1/R$（改取内法向则 $H=+1/R$，$K$ 不变）；平面 $K=H=0$；圆柱面 $K=0$ 但 $H=\\pm 1/(2R)\\neq 0$。",
+    "definitionEn": "Let $\\Sigma\\subset\\mathbb{R}^3$ be a regular surface with unit normal field $n$. At each point $p$ the Weingarten map (shape operator) $W_p=-dn_p$ sends a tangent vector $X$ to $-dn_p(X)$; it is a **self-adjoint** linear map of the tangent plane $T_p\\Sigma$, hence has two real eigenvalues $\\kappa_1,\\kappa_2$, the **principal curvatures**, whose eigenvectors are the principal directions.\n\nWriting the coefficients of the first and second fundamental forms as $E,F,G$ and $L,M,N$, the principal curvatures solve $\\det(\\mathrm{II}-\\kappa\\,\\mathrm{I})=0$, that is\n$$(EG-F^2)\\kappa^2-(EN-2FM+GL)\\kappa+(LN-M^2)=0.$$\nThis defines the **Gaussian curvature** and the **mean curvature**\n$$K=\\kappa_1\\kappa_2=\\det W=\\frac{LN-M^2}{EG-F^2},\\qquad H=\\frac{\\kappa_1+\\kappa_2}{2}=\\frac{1}{2}\\mathrm{tr}\\,W=\\frac{EN-2FM+GL}{2(EG-F^2)}.$$\n\nIntuitively $K$ is the product and $H$ the average of the bending in the two principal directions. $K$ is **intrinsic** (it depends only on the metric, see the Theorema Egregium) while $H$ is **extrinsic** (it changes with the way the surface sits in space). Together they determine the principal curvatures: $\\kappa_{1,2}=H\\pm\\sqrt{H^2-K}$.\n\nBy the sign of $K$, points are called elliptic ($K>0$, e.g. a sphere), hyperbolic ($K<0$, e.g. a saddle) or parabolic ($K=0$, e.g. a cylinder). With the outward normal a sphere of radius $R$ has $K=1/R^2$ and $H=-1/R$ (the inward normal gives $H=+1/R$ while $K$ stays the same); the plane has $K=H=0$; the circular cylinder has $K=0$ but $H=\\pm 1/(2R)\\neq 0$.",
+    "formulas": [
+      {
+        "latex": "K=\\kappa_1\\kappa_2=\\frac{LN-M^2}{EG-F^2}",
+        "note": "高斯曲率：两个主曲率之积，等于第二基本形式行列式与第一基本形式行列式之比；分子是 LN−M²，分母是 EG−F²。",
+        "noteEn": "Gaussian curvature: the product of the principal curvatures, the ratio of the determinants of the second and first fundamental forms (numerator LN−M², denominator EG−F²)."
+      },
+      {
+        "latex": "H=\\frac{\\kappa_1+\\kappa_2}{2}=\\frac{EN-2FM+GL}{2(EG-F^2)}",
+        "note": "平均曲率：两个主曲率的算术平均；注意中间交叉项是 −2FM。",
+        "noteEn": "Mean curvature: the average of the principal curvatures; note the cross term −2FM."
+      },
+      {
+        "latex": "(EG-F^2)\\kappa^2-(EN-2FM+GL)\\kappa+(LN-M^2)=0",
+        "note": "由 det(II−κI)=0 得到的特征方程，两根即主曲率 κ₁、κ₂。",
+        "noteEn": "The characteristic equation det(II − κI) = 0; its two roots are the principal curvatures κ₁ and κ₂."
+      },
+      {
+        "latex": "K=\\frac{1}{R^2},\\qquad H=\\pm\\frac{1}{R}",
+        "note": "半径 R 的球面：K 与法向的取法无关；H 取外法向为 −1/R，取内法向为 +1/R。",
+        "noteEn": "Sphere of radius R: K is independent of the orientation; H equals −1/R for the outward normal and +1/R for the inward one."
+      },
+      {
+        "latex": "K_{\\text{torus}}=\\frac{\\cos u}{a\\,(c+a\\cos u)}",
+        "note": "大半径 c、管半径 a 的环面（c>a>0）：外侧 cos u>0 处 K>0，内侧 cos u<0 处 K<0，上下两个圆 cos u=0 处 K=0。",
+        "noteEn": "Torus with large radius c and tube radius a (c>a>0): K>0 on the outer side (cos u>0), K<0 on the inner side (cos u<0), and K=0 on the top and bottom circles (cos u=0)."
+      }
+    ],
+    "properties": [
+      "K 与法向的取法无关：换法向时 κ₁、κ₂ 同时变号，K=κ₁κ₂ 保持不变；而 H 变号，所以谈 H 时必须先说明法向约定。",
+      "平面 K=H=0；圆柱面 K=0 但 H=±1/(2R)≠0 —— 所以 K=0 并不等于「就是平面」。",
+      "可展曲面（平面、柱面、锥面）都能剪开摊平，它们处处 K≡0；K≡0 是可展曲面的特征。",
+      "按 K 的符号：K>0 的点是椭圆点（球面）、K<0 的点是双曲点（马鞍面）、K=0 的点是抛物点（柱面）。",
+      "K 与 H 完全决定主曲率：κ₁,₂=H±√(H²−K)（由 (κ₁−κ₂)²/4=H²−K≥0 保证有实根）；H≡0 的曲面称为极小曲面，肥皂膜就是它的实例。"
+    ],
+    "propertiesEn": [
+      "K does not depend on the choice of normal: reversing the normal flips the signs of κ₁, κ₂ but leaves K = κ₁κ₂ unchanged, while H changes sign, so the sign of H is a matter of convention.",
+      "The plane has K = H = 0; a circular cylinder has K = 0 but H = ±1/(2R) ≠ 0, so K = 0 does not mean the surface is flat.",
+      "Developable surfaces (plane, cylinder, cone) can be unrolled without stretching and satisfy K ≡ 0.",
+      "By the sign of K: elliptic points (K > 0, sphere), hyperbolic points (K < 0, saddle), parabolic points (K = 0, cylinder).",
+      "K and H determine the principal curvatures: κ₁,₂ = H ± √(H²−K), since H² − K = (κ₁−κ₂)²/4 ≥ 0; surfaces with H ≡ 0 are minimal (soap films)."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "(1 + 0.35*cos(u))*cos(v)",
+        "y": "(1 + 0.35*cos(u))*sin(v)",
+        "z": "0.35*sin(u)"
+      },
+      "uRange": [
+        0,
+        6.2832
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        24,
+        48
+      ],
+      "color": "#4cc9f0",
+      "title": "环面：外侧 K>0、内侧 K<0、上下两圆 K=0"
+    },
+    "examples": [
+      {
+        "problem": "用参数化 $r(u,v)=R(\\sin u\\cos v,\\ \\sin u\\sin v,\\ \\cos u)$（$0<u<\\pi$）计算半径 R 的球面的 K 与 H（取外法向）。",
+        "solution": "计算得 $E=R^2,\\ F=0,\\ G=R^2\\sin^2 u$，$L=-R,\\ M=0,\\ N=-R\\sin^2 u$。于是 $$K=\\frac{LN-M^2}{EG-F^2}=\\frac{R^2\\sin^2 u}{R^4\\sin^2 u}=\\frac{1}{R^2},\\qquad H=\\frac{EN-2FM+GL}{2(EG-F^2)}=\\frac{-R^3\\sin^2 u-R^3\\sin^2 u}{2R^4\\sin^2 u}=-\\frac{1}{R}.$$ 若改取内法向，则 $H=+1/R$，而 $K$ 仍为 $1/R^2$。"
+      },
+      {
+        "problem": "环面 $r(u,v)=((c+a\\cos u)\\cos v,\\ (c+a\\cos u)\\sin v,\\ a\\sin u)$，其中 $c>a>0$。求 K 并判断它在环面各处的符号。",
+        "solution": "计算得 $E=a^2,\\ F=0,\\ G=(c+a\\cos u)^2$，$L=+a,\\ M=0,\\ N=+(c+a\\cos u)\\cos u$，故 $$K=\\frac{LN-M^2}{EG-F^2}=\\frac{\\cos u}{a(c+a\\cos u)}.$$ 分母恒为正，于是：$u=0$（外侧）$K=\\frac{1}{a(c+a)}>0$；$u=\\pi$（内侧）$K=-\\frac{1}{a(c-a)}<0$；$u=\\frac{\\pi}{2},\\frac{3\\pi}{2}$（上下两个圆）$K=0$。正负曲率的总积分恰好为 0，与环面的 $\\chi=0$ 一致（见高斯–博内定理）。"
+      }
+    ],
+    "tags": [
+      "微分几何",
+      "曲面",
+      "曲率"
+    ],
+    "links": [
+      "principal-curvature",
+      "second-fundamental-form",
+      "theorema-egregium",
+      "minimal-surface",
+      "gauss-bonnet"
+    ]
+  },
+  {
+    "id": "principal-curvature",
+    "title": "主曲率与主方向",
+    "titleEn": "Principal Curvatures and Principal Directions",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "形状算子的特征值 κ₁、κ₂（主曲率）与特征方向（主方向）把曲面每点的弯曲分解为两个互相垂直方向的纯弯曲：它们是法曲率的最大值与最小值。",
+    "summaryEn": "The eigenvalues κ₁, κ₂ of the shape operator (principal curvatures) and its eigenvectors (principal directions) split the bending at each point into two perpendicular pure bendings: they are the maximum and minimum of the normal curvature.",
+    "definition": "在曲面 $\\Sigma$ 的点 $p$ 处，形状算子 $W=-dn_p$ 是切平面上的**自伴算子**，因此可以正交对角化：存在一组正交的单位切向量 $e_1,e_2$（**主方向**），使 $We_i=\\kappa_i e_i$。把特征值排序为 $\\kappa_1\\ge\\kappa_2$，它们就是**主曲率**。\n\n主曲率也可以看作第二基本形式相对第一基本形式的广义特征值：$\\mathrm{II}(v,\\cdot)=\\kappa\\,\\mathrm{I}(v,\\cdot)$，等价于 $\\det(\\mathrm{II}-\\kappa\\,\\mathrm{I})=0$，即\n$$(EG-F^2)\\kappa^2-(EN-2FM+GL)\\kappa+(LN-M^2)=0.$$\n\n几何意义：固定 $p$，让过 $p$ 的平面沿所有切方向去截曲面，所得法曲率的最大值与最小值就是 $\\kappa_1$ 与 $\\kappa_2$，取到极值的方向正是主方向。任意方向（从第一主方向量起的角 $\\theta$）的法曲率由**欧拉定理**给出：$\\kappa_n(\\theta)=\\kappa_1\\cos^2\\theta+\\kappa_2\\sin^2\\theta$。另外，沿主方向 $v$ 有罗德里格斯公式 $dn_p(v)=-\\kappa v$。\n\n若 $\\kappa_1=\\kappa_2$，称 $p$ 为**脐点**：此时每个切方向都是主方向，曲面在 $p$ 附近如同球面。球面和平面处处是脐点。",
+    "definitionEn": "At a point $p$ of a surface $\\Sigma$ the shape operator $W=-dn_p$ is a **self-adjoint** map of the tangent plane, so it can be orthogonally diagonalized: there is an orthonormal basis $e_1,e_2$ of **principal directions** with $We_i=\\kappa_i e_i$. Ordered as $\\kappa_1\\ge\\kappa_2$, the eigenvalues are the **principal curvatures**.\n\nThey can also be seen as the generalized eigenvalues of the second fundamental form with respect to the first: $\\mathrm{II}(v,\\cdot)=\\kappa\\,\\mathrm{I}(v,\\cdot)$, equivalently $\\det(\\mathrm{II}-\\kappa\\,\\mathrm{I})=0$, that is\n$$(EG-F^2)\\kappa^2-(EN-2FM+GL)\\kappa+(LN-M^2)=0.$$\n\nGeometrically, fix $p$ and cut the surface by planes through $p$ in every tangent direction; the maximum and minimum of the resulting normal curvature are $\\kappa_1$ and $\\kappa_2$, attained exactly in the principal directions. In a direction making angle $\\theta$ with the first principal direction, **Euler's theorem** gives $\\kappa_n(\\theta)=\\kappa_1\\cos^2\\theta+\\kappa_2\\sin^2\\theta$, and along a principal direction $v$ one has the Rodrigues formula $dn_p(v)=-\\kappa v$.\n\nIf $\\kappa_1=\\kappa_2$, the point $p$ is called **umbilic**: every tangent direction is then principal and the surface looks like a sphere near $p$. Spheres and planes consist entirely of umbilic points.",
+    "formulas": [
+      {
+        "latex": "(EG-F^2)\\kappa^2-(EN-2FM+GL)\\kappa+(LN-M^2)=0",
+        "note": "主曲率的特征方程（即 det(II−κI)=0）：两根为 κ₁、κ₂。",
+        "noteEn": "Characteristic equation for the principal curvatures, det(II − κI) = 0; its roots are κ₁ and κ₂."
+      },
+      {
+        "latex": "\\kappa_{1,2}=H\\pm\\sqrt{H^2-K}",
+        "note": "由高斯曲率 K 与平均曲率 H 反解主曲率：κ₁ 取加号、κ₂ 取减号。",
+        "noteEn": "Recovering the principal curvatures from K and H: κ₁ takes the plus sign, κ₂ the minus sign."
+      },
+      {
+        "latex": "\\kappa_n(\\theta)=\\kappa_1\\cos^2\\theta+\\kappa_2\\sin^2\\theta",
+        "note": "欧拉定理：法曲率随方向变化，κ₁、κ₂ 恰好是它的最大值与最小值。",
+        "noteEn": "Euler's theorem: the normal curvature as a function of direction, with κ₁ and κ₂ as its maximum and minimum."
+      },
+      {
+        "latex": "dn_p(v)=-\\kappa\\,v",
+        "note": "罗德里格斯公式：沿主方向 v 有 dn(v)=−κv，即 W(v)=κv，这正是特征值方程。",
+        "noteEn": "Rodrigues' formula: along a principal direction dn(v) = −κv, i.e. W(v) = κv, the eigenvalue equation itself."
+      },
+      {
+        "latex": "\\mathrm{II}(v,v)=\\kappa_1x_1^2+\\kappa_2x_2^2,\\qquad v=x_1e_1+x_2e_2",
+        "note": "在主方向的单位正交基下，第一、第二基本形式同时对角化。",
+        "noteEn": "In the orthonormal basis of principal directions the first and second fundamental forms are simultaneously diagonal."
+      }
+    ],
+    "properties": [
+      "主曲率与参数化无关；把法向整体反号时 κ₁、κ₂ 同时变号（K 不变，而 H 变号）。",
+      "κ₁≠κ₂ 时两个主方向必正交；κ₁=κ₂ 的点（脐点）每个方向都是主方向。",
+      "κ₁、κ₂ 是法曲率在所有切方向上的最大值与最小值（欧拉定理的直接推论）。",
+      "K<0 的点（双曲点）两主曲率异号：沿一个主方向向上弯、沿另一个主方向向下弯，呈马鞍形；K>0 时两主曲率同号。",
+      "极小曲面（H=0）上处处 κ₂=−κ₁；球面上处处 κ₁=κ₂=±1/R —— 这是脐点的两个极端例子。"
+    ],
+    "propertiesEn": [
+      "The principal curvatures do not depend on the parametrization; reversing the normal flips both signs (K is unchanged, H changes sign).",
+      "If κ₁ ≠ κ₂ the two principal directions are orthogonal; if κ₁ = κ₂ (an umbilic point) every tangent direction is principal.",
+      "κ₁ and κ₂ are the maximum and minimum of the normal curvature over all tangent directions (an immediate consequence of Euler's theorem).",
+      "At a hyperbolic point with K < 0 the principal curvatures have opposite signs: the surface bends up along one principal direction and down along the other, like a saddle; for K > 0 they share the same sign.",
+      "On a minimal surface (H = 0) one has κ₂ = −κ₁ everywhere; on a sphere κ₁ = κ₂ = ±1/R everywhere — the two extreme umbilic examples."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "x^2 - y^2",
+      "xRange": [
+        -1.5,
+        1.5
+      ],
+      "yRange": [
+        -1.5,
+        1.5
+      ],
+      "density": [
+        28,
+        28
+      ],
+      "color": "#ff6b9d",
+      "title": "马鞍面：原点处 κ₁=2、κ₂=−2，两主方向为 x、y 方向"
+    },
+    "examples": [
+      {
+        "problem": "求马鞍面 $z=x^2-y^2$ 在原点处的主曲率与主方向。",
+        "solution": "在原点处 $f_x=f_y=0$，故 $E=G=1,\\ F=0$；对函数图像 $z=f(x,y)$ 有 $L=f_{xx}=2,\\ M=f_{xy}=0,\\ N=f_{yy}=-2$。特征方程化为 $\\kappa^2-(L+N)\\kappa+(LN-M^2)=\\kappa^2-4=0$，两根为 $\\kappa_1=2,\\ \\kappa_2=-2$，主方向是 $x$ 轴与 $y$ 轴方向。附带得到 $K=\\kappa_1\\kappa_2=-4<0$，原点是双曲点。"
+      },
+      {
+        "problem": "半径 $R$ 的球面上每点的主曲率是多少？主方向是什么？",
+        "solution": "球面处处是脐点。取外法向计算得 $\\kappa_1=\\kappa_2=-1/R$；换内法向则 $\\kappa_1=\\kappa_2=+1/R$。因为两主曲率相等，任何一组正交切方向都可取作主方向，法曲率与方向无关。由此 $K=1/R^2$、$H=-1/R$（外法向）。"
+      }
+    ],
+    "tags": [
+      "微分几何",
+      "曲面",
+      "曲率",
+      "主曲率"
+    ],
+    "links": [
+      "gaussian-mean-curvature",
+      "second-fundamental-form",
+      "normal-curvature",
+      "gauss-map",
+      "minimal-surface"
+    ]
+  },
+  {
+    "id": "gauss-map",
+    "title": "高斯映射",
+    "titleEn": "The Gauss Map",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "高斯映射把曲面上每一点映成它的单位法向量的终点，得到单位球面上的点；它的微分就是差一个符号的形状算子，其行列式恰为高斯曲率。",
+    "summaryEn": "The Gauss map sends each point of a surface to the tip of its unit normal, a point of the unit sphere; its differential is the shape operator up to sign, and its Jacobian determinant is exactly the Gaussian curvature.",
+    "definition": "设 $\\Sigma\\subset\\mathbb{R}^3$ 是定向正则曲面，$n(p)$ 是单位法向量。**高斯映射**定义为 $n:\\Sigma\\to S^2,\\quad p\\mapsto n(p)$ —— 把每点的法向量平移到原点，其终点落在单位球面 $S^2$ 上。它是一张光滑映射，并且 $dn_p:T_p\\Sigma\\to T_{n(p)}S^2$ 与形状算子只差一个符号：$dn_p=-W_p$，特征值为 $-\\kappa_1,-\\kappa_2$。\n\n**关键事实**：高斯曲率就是高斯映射的雅可比行列式，也就是面积元被高斯映射拉伸的倍数（带符号）：\n$$K=\\det(dn_p)=\\frac{(n_u\\times n_v)\\cdot n}{|r_u\\times r_v|}.$$\n因为 $n_u,n_v$ 都垂直于 $n$，向量 $n_u\\times n_v$ 与 $n$ 平行，所以这个三重积没有歧义。逐点成立的等式是 $n_u\\times n_v=K\\,(r_u\\times r_v)$，取模得 $|n_u\\times n_v|=|K|\\,|r_u\\times r_v|$，即 $d\\sigma=|K|\\,dA$。\n\n直观上，$K$ 度量「法向量变化得多快」：$K\\equiv 0$ 时法向量只沿一条曲线变化（柱面映为一条大圆、平面映为一点）；$|K|$ 越大，法向量在球面上铺开得越快。",
+    "definitionEn": "Let $\\Sigma\\subset\\mathbb{R}^3$ be an oriented regular surface with unit normal $n(p)$. The **Gauss map** is $n:\\Sigma\\to S^2,\\quad p\\mapsto n(p)$: translate the normal at each point to the origin; its tip lies on the unit sphere $S^2$. It is a smooth map whose differential $dn_p:T_p\\Sigma\\to T_{n(p)}S^2$ differs from the shape operator only by sign, $dn_p=-W_p$, with eigenvalues $-\\kappa_1,-\\kappa_2$.\n\n**Key fact**: the Gaussian curvature is the Jacobian determinant of the Gauss map, i.e. the (signed) factor by which it stretches area elements:\n$$K=\\det(dn_p)=\\frac{(n_u\\times n_v)\\cdot n}{|r_u\\times r_v|}.$$\nSince $n_u,n_v\\perp n$, the vector $n_u\\times n_v$ is parallel to $n$ and the triple product is unambiguous. Pointwise one has $n_u\\times n_v=K\\,(r_u\\times r_v)$, so $|n_u\\times n_v|=|K|\\,|r_u\\times r_v|$, that is $d\\sigma=|K|\\,dA$.\n\nIntuitively, $K$ measures how fast the normal direction changes: if $K\\equiv 0$ the normal varies only along a curve (a cylinder maps to a great circle, a plane to a point); the larger $|K|$ is, the faster the normals spread over the sphere.",
+    "formulas": [
+      {
+        "latex": "n:\\Sigma\\to S^2,\\qquad p\\mapsto n(p)",
+        "note": "高斯映射：把曲面的单位法向量平移到原点，终点画在单位球面上。",
+        "noteEn": "The Gauss map: translate the unit normal to the origin and record its tip on the unit sphere."
+      },
+      {
+        "latex": "K=\\frac{(n_u\\times n_v)\\cdot n}{|r_u\\times r_v|}",
+        "note": "高斯曲率＝高斯映射的雅可比行列式，即面积伸缩率（带符号）。",
+        "noteEn": "Gaussian curvature equals the Jacobian determinant of the Gauss map, a signed area stretching factor."
+      },
+      {
+        "latex": "n_u\\times n_v=K\\,(r_u\\times r_v)",
+        "note": "逐点成立：高斯映射把曲面面积元按比例 K 映到球面上。",
+        "noteEn": "Pointwise identity: the Gauss map scales the surface area element by the factor K."
+      },
+      {
+        "latex": "d\\sigma=|K|\\,dA",
+        "note": "面积元的变换关系：dA 被映为球面上的 dσ；K>0 保定向，K<0 反定向。",
+        "noteEn": "Transformation of area elements: dA is mapped to dσ on the sphere; K>0 preserves orientation, K<0 reverses it."
+      },
+      {
+        "latex": "\\mathrm{Area}\\,(n(\\Sigma))=\\iint_{\\Sigma}|K|\\,dA",
+        "note": "高斯映射像的球面面积（按覆盖重数计）等于 |K| 的积分；严格凸闭曲面（K>0）的高斯映射恰好铺满整个单位球面一次。",
+        "noteEn": "The spherical area of the image (counted with multiplicity) equals the integral of |K|; for a strictly convex closed surface the Gauss map covers the whole unit sphere exactly once."
+      }
+    ],
+    "properties": [
+      "det(dn_p)=K、tr(dn_p)=−2H：高斯映射的微分同时包含 K 与 H 的全部信息。",
+      "K≡0 的曲面（平面、柱面、锥面）高斯映射的像退化为曲线甚至一点：圆柱面映为球面上的一条大圆，平面映为一点。",
+      "K>0 处高斯映射保定向、局部一对一；K<0 处反定向。",
+      "在**非平坦点**（$dn_p\\neq 0$）处，$|\\kappa_1|=|\\kappa_2|$（脐点或极小点）当且仅当高斯映射在 $p$ 处共形（保角）；平坦点处 $dn_p=0$，须除外。球面处处脐点且非平坦，高斯映射是最标准的相似（保角）映射。",
+      "闭曲面上高斯映射的映射度等于 χ(Σ)/2：球面为 1，环面为 0 —— 这是高斯–博内定理的映射视角。"
+    ],
+    "propertiesEn": [
+      "det(dn_p) = K and tr(dn_p) = −2H: the differential of the Gauss map encodes both K and H.",
+      "If K ≡ 0 (plane, cylinder, cone) the image of the Gauss map degenerates to a curve or a point: a cylinder maps onto a great circle, a plane onto a single point.",
+      "Where K > 0 the Gauss map preserves orientation and is locally one-to-one; where K < 0 it reverses orientation.",
+      "At a **non-flat** point ($dn_p\\neq 0$), $|\\kappa_1|=|\\kappa_2|$ (umbilic or minimal) is exactly when the Gauss map is conformal at $p$; flat points ($dn_p=0$) must be excluded. On a sphere every point is umbilic and non-flat, and the Gauss map is a similarity.",
+      "For a closed surface the degree of the Gauss map equals χ(Σ)/2: 1 for the sphere and 0 for the torus — the map-theoretic view of Gauss–Bonnet."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "sin(u)*cos(v)",
+        "y": "sin(u)*sin(v)",
+        "z": "cos(u)"
+      },
+      "uRange": [
+        0,
+        3.1416
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        24,
+        36
+      ],
+      "color": "#b388ff",
+      "title": "高斯映射 n: S → S²：把单位法向量的终点画在单位球面上"
+    },
+    "examples": [
+      {
+        "problem": "用高斯映射计算半径 R、中心在原点的球面的高斯曲率。",
+        "solution": "球面的外法向量场为 $n(p)=p/R$，于是 $dn_p=\\frac{1}{R}\\mathrm{id}$，$K=\\det(dn_p)=\\frac{1}{R^2}$。这也说明球面的高斯映射是相似（保角）映射，与球面处处是脐点的事实一致。"
+      },
+      {
+        "problem": "计算圆柱面 $r(u,v)=(R\\cos u,\\ R\\sin u,\\ v)$ 的高斯映射与高斯曲率。",
+        "solution": "取外法向 $n=(\\cos u,\\ \\sin u,\\ 0)$。于是 $n_u=(-\\sin u,\\ \\cos u,\\ 0)$、$n_v=(0,0,0)$，得 $n_u\\times n_v=0$，从而 $K=\\frac{(n_u\\times n_v)\\cdot n}{|r_u\\times r_v|}=0$。几何上，高斯映射的像是球面上的赤道大圆（一条曲线），面积为零，这正对应 $K\\equiv 0$。"
+      }
+    ],
+    "tags": [
+      "微分几何",
+      "曲面",
+      "高斯映射"
+    ],
+    "links": [
+      "gaussian-mean-curvature",
+      "principal-curvature",
+      "theorema-egregium",
+      "normal-curvature",
+      "gauss-bonnet"
+    ]
+  },
+  {
+    "id": "theorema-egregium",
+    "title": "高斯绝妙定理",
+    "titleEn": "Theorema Egregium",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "高斯绝妙定理：高斯曲率 K 只由第一基本形式（度量 E、F、G 及其导数）决定，与第二基本形式无关 —— 所以 K 是内蕴量，等距变换保持 K。",
+    "summaryEn": "The Theorema Egregium: the Gaussian curvature K depends only on the first fundamental form (the metric E, F, G and their derivatives), not on the second fundamental form, so K is intrinsic and preserved by isometries.",
+    "definition": "1827 年，高斯证明了一个被他称为「绝妙」（egregium）的定理：虽然 $K=\\frac{LN-M^2}{EG-F^2}$ 的表达式里出现了第二基本形式，但利用 $r_{uu},r_{uv},r_{vv}$ 之间的相容性关系（Gauss 方程），可以把 $LN-M^2$ 完全用 $E,F,G$ 及其导数表示出来。因此：\n\n**高斯曲率只依赖曲面的第一基本形式（度量），是内蕴量。**\n\n在正交参数化（$F=0$）下公式最简洁：\n$$K=-\\frac{1}{2\\sqrt{EG}}\\left[\\frac{\\partial}{\\partial u}\\left(\\frac{G_u}{\\sqrt{EG}}\\right)+\\frac{\\partial}{\\partial v}\\left(\\frac{E_v}{\\sqrt{EG}}\\right)\\right],$$\n右边只有 $E$、$G$ 及其导数，与 $L,M,N$ 完全无关。\n\n最重要的推论是：**等距变换保持高斯曲率**。把一张纸卷成圆柱（不拉伸、不撕破）是等距变换，纸面与圆柱面都满足 $K\\equiv 0$；而球面的 $K=1/R^2>0$，所以球面不可能在保持长度的前提下摊平 —— 任何平面地图都必然有失真，这正是「地图不可能无失真」的数学本质。",
+    "definitionEn": "In 1827 Gauss proved a theorem he named the Theorema Egregium (remarkable theorem): although $K=\\frac{LN-M^2}{EG-F^2}$ visibly contains the second fundamental form, the compatibility relations among $r_{uu},r_{uv},r_{vv}$ (the Gauss equations) allow $LN-M^2$ to be rewritten entirely in terms of $E,F,G$ and their derivatives. Hence:\n\n**The Gaussian curvature depends only on the first fundamental form (the metric) — it is intrinsic.**\n\nIn an orthogonal parametrization ($F=0$) the formula is particularly simple:\n$$K=-\\frac{1}{2\\sqrt{EG}}\\left[\\frac{\\partial}{\\partial u}\\left(\\frac{G_u}{\\sqrt{EG}}\\right)+\\frac{\\partial}{\\partial v}\\left(\\frac{E_v}{\\sqrt{EG}}\\right)\\right],$$\nthe right-hand side involves only $E$, $G$ and their derivatives, never $L,M,N$.\n\nThe most important consequence: **isometries preserve the Gaussian curvature.** Rolling a sheet of paper into a cylinder (without stretching or tearing) is an isometry, and both the sheet and the cylinder satisfy $K\\equiv 0$; a sphere has $K=1/R^2>0$ and can therefore never be flattened while preserving lengths. Perfect flat maps are impossible — this is the mathematical essence of cartographic distortion.",
+    "formulas": [
+      {
+        "latex": "K=-\\frac{1}{2\\sqrt{EG}}\\left[\\frac{\\partial}{\\partial u}\\left(\\frac{G_u}{\\sqrt{EG}}\\right)+\\frac{\\partial}{\\partial v}\\left(\\frac{E_v}{\\sqrt{EG}}\\right)\\right]",
+        "note": "F=0 时的内蕴公式：K 只用 E、G 及其一、二阶导数表出 —— 绝妙定理最直白的形式。",
+        "noteEn": "The intrinsic formula for F = 0: K is expressed solely through E, G and their derivatives, the clearest form of the Theorema Egregium."
+      },
+      {
+        "latex": "ds^2=\\lambda^2(dx^2+dy^2)\\;\\Longrightarrow\\;K=-\\frac{\\Delta\\ln\\lambda}{\\lambda^2}",
+        "note": "等温（共形）坐标下的内蕴公式，Δ 为平面拉普拉斯算子；例如球极投影取 λ=2/(1+x²+y²) 即得 K≡1（单位球面）。",
+        "noteEn": "The intrinsic formula in isothermal (conformal) coordinates, Δ being the planar Laplacian; for the stereographic sphere λ = 2/(1+x²+y²) gives K ≡ 1."
+      },
+      {
+        "latex": "K_{\\text{plane}}\\equiv K_{\\text{cylinder}}\\equiv K_{\\text{cone}}\\equiv 0",
+        "note": "可展曲面（平面、柱面、锥面）与平面局部等距，K 恒为 0。",
+        "noteEn": "Developable surfaces (plane, cylinder, cone) are locally isometric to the plane and satisfy K ≡ 0."
+      },
+      {
+        "latex": "K_{\\text{sphere}}=\\frac{1}{R^2}\\neq 0",
+        "note": "球面的高斯曲率恒为正，所以球面与任何平面区域都不等距（不能无失真展平）。",
+        "noteEn": "The sphere has constant positive Gaussian curvature, so it is not isometric to any planar region and cannot be flattened without distortion."
+      },
+      {
+        "latex": "K=-\\frac{\\varphi''(u)}{\\varphi(u)}",
+        "note": "旋转面的内蕴公式（母线按弧长参数化，φ(u) 为到旋转轴的距离）：K 只依赖度量分量 φ，与母线在空间中的具体形状无关 —— 绝妙定理的又一实例。",
+        "noteEn": "Intrinsic formula for a surface of revolution (profile parametrized by arc length, φ(u) the distance to the axis): K depends only on the metric component φ, another instance of the Theorema Egregium."
+      }
+    ],
+    "properties": [
+      "K 是内蕴量：白纸卷成圆柱面，K 处处仍为 0；任何不拉伸的变形都不改变 K。",
+      "平均曲率 H 和主曲率不是内蕴量：平面与圆柱面有相同的 K≡0，但 H 分别是 0 与 ±1/(2R)。",
+      "等距变换保持高斯曲率；反过来，仅 K 相同一般不能保证等距 —— 只有 K 为常数时（Minding 定理）两曲面才局部等距。",
+      "推论：球面不可能等距展平到平面（K=1/R²≠0），地图投影必然失真：长度、角度、面积无法同时保持。",
+      "定理把内蕴几何从嵌入方式中分离出来，成为黎曼几何的起点：黎曼后来把「只依赖度量的曲率」推广到任意维流形。"
+    ],
+    "propertiesEn": [
+      "K is intrinsic: rolling a flat sheet into a cylinder leaves K ≡ 0; bending without stretching never changes K.",
+      "The mean curvature H and the principal curvatures are not intrinsic: a plane and a cylinder share K ≡ 0 but have H = 0 and H = ±1/(2R).",
+      "Isometries preserve K; conversely, equal K alone does not imply an isometry in general — only for constant K does Minding's theorem give local isometry.",
+      "Consequence: a sphere (K = 1/R² ≠ 0) cannot be flattened isometrically, so every flat map distorts something — lengths, angles and areas cannot all be preserved.",
+      "The theorem separates intrinsic geometry from the embedding and marks the birth of Riemannian geometry: Riemann extended curvature depending only on the metric to arbitrary dimensions."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "sin(u)*cos(v)",
+        "y": "sin(u)*sin(v)",
+        "z": "cos(u)"
+      },
+      "uRange": [
+        0,
+        3.1416
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        24,
+        36
+      ],
+      "color": "#ffd166",
+      "title": "球面 K≡1/R²>0 不能等距摊平；柱面 K≡0 则可展"
+    },
+    "examples": [
+      {
+        "problem": "证明圆柱面与平面局部等距，并用绝妙定理推出圆柱面的高斯曲率。",
+        "solution": "把平面参数化为 $(u,v,0)$，其度量为 $E=1,F=0,G=1$。圆柱面取参数化 $r(u,v)=(R\\cos\\frac{u}{R},\\ R\\sin\\frac{u}{R},\\ v)$，则 $r_u=(-\\sin\\frac{u}{R},\\ \\cos\\frac{u}{R},\\ 0)$、$r_v=(0,0,1)$，同样 $E=1,F=0,G=1$。两者度量完全相同，所以是局部等距；平面的 $K\\equiv 0$，由绝妙定理圆柱面也 $K\\equiv 0$（直接计算同样验证这一点）。"
+      },
+      {
+        "problem": "为什么球面不能无失真地摊平成地图？",
+        "solution": "球面的高斯曲率 $K=1/R^2>0$，而平面上 $K\\equiv 0$。若存在保持长度的平面地图，则这个映射是等距变换，必将保持 K，矛盾。因此任何地图投影都必须在长度、角度、面积之间有所取舍（例如墨卡托投影保角，却严重扭曲面积）。"
+      }
+    ],
+    "tags": [
+      "微分几何",
+      "高斯曲率",
+      "内蕴几何"
+    ],
+    "links": [
+      "gaussian-mean-curvature",
+      "gauss-map",
+      "surface-isometry",
+      "metric-tensor",
+      "gauss-bonnet"
+    ]
+  },
+  {
+    "id": "geodesic",
+    "title": "测地线",
+    "titleEn": "Geodesics",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "测地线是曲面上「尽量直」的曲线：测地曲率 κ_g=0，曲率向量平行于曲面法向；它也是局部最短线 —— 球面上是大圆，柱面上是螺旋线。",
+    "summaryEn": "A geodesic is the straightest curve on a surface: its geodesic curvature vanishes and its curvature vector is parallel to the surface normal; it is locally shortest — great circles on a sphere, helices on a cylinder.",
+    "definition": "设 $\\gamma$ 是曲面 $\\Sigma$ 上的曲线，$\\kappa$ 是它的空间曲率，$N$ 是单位主法向量。把曲率向量 $\\kappa N$ 分解为沿曲面法向 $n$ 的分量与切向分量，切向分量的大小称为**测地曲率** $\\kappa_g$。若沿整条曲线 $\\kappa_g\\equiv 0$，即曲率向量处处平行于曲面法向（在曲面上没有「拐弯」），就称 $\\gamma$ 为**测地线**。\n\n内蕴的说法：沿曲线对切向量求协变导数（把普通导数投影到切平面上），若 $\\nabla_{\\gamma'}\\gamma'=0$，即切向量沿自身平行移动，则 $\\gamma$ 是测地线；此时速率 $|\\gamma'|$ 为常数。\n\n测地线是平面「直线」在曲面上的推广：它是长度泛函 $L(\\gamma)=\\int|\\gamma'|\\,dt$ 的临界点，因而在每点的附近实现两点间的最短路径（**局部**最短）。但整体上不一定最短：球面上的大圆是测地线，沿着它绕行半圈以上就不是最短路径了。",
+    "definitionEn": "Let $\\gamma$ be a curve on a surface $\\Sigma$, with space curvature $\\kappa$ and unit principal normal $N$. Decompose the curvature vector $\\kappa N$ into a part parallel to the surface normal $n$ and a tangential part; the length of the tangential part is the **geodesic curvature** $\\kappa_g$. If $\\kappa_g\\equiv 0$ along the whole curve — the curvature vector is everywhere parallel to the surface normal, so the curve never turns inside the surface — then $\\gamma$ is called a **geodesic**.\n\nIntrinsically: take the covariant derivative of the tangent vector along the curve (project the ordinary derivative onto the tangent plane); if $\\nabla_{\\gamma'}\\gamma'=0$, i.e. the tangent vector is parallel-transported along itself, then $\\gamma$ is a geodesic, and its speed $|\\gamma'|$ is constant.\n\nGeodesics are the surface analogue of straight lines: they are the critical points of the length functional $L(\\gamma)=\\int|\\gamma'|\\,dt$, hence **locally** shortest near every point. Globally they need not be shortest: a great circle on a sphere is a geodesic, but going more than halfway around it is no longer a shortest path.",
+    "formulas": [
+      {
+        "latex": "\\kappa_g=0\\iff\\kappa\\,N\\parallel n",
+        "note": "几何定义：曲率向量没有切向分量，曲线在曲面上「不转弯」。",
+        "noteEn": "Geometric definition: the curvature vector has no tangential component; the curve does not turn within the surface."
+      },
+      {
+        "latex": "\\nabla_{\\gamma'}\\gamma'=0",
+        "note": "内蕴定义：切向量沿自身平行移动；等价于速率 |γ'| 为常数。",
+        "noteEn": "Intrinsic definition: the tangent vector is parallel-transported along itself; equivalently the speed is constant."
+      },
+      {
+        "latex": "u''+\\Gamma^1_{11}(u')^2+2\\Gamma^1_{12}u'v'+\\Gamma^1_{22}(v')^2=0,\\qquad v''+\\Gamma^2_{11}(u')^2+2\\Gamma^2_{12}u'v'+\\Gamma^2_{22}(v')^2=0",
+        "note": "测地线方程：Christoffel 符号 Γ 只由第一基本形式决定，所以测地线是内蕴概念。",
+        "noteEn": "The geodesic equations: the Christoffel symbols Γ come only from the first fundamental form, so geodesics are intrinsic."
+      },
+      {
+        "latex": "\\rho\\sin\\varphi=\\mathrm{const}",
+        "note": "旋转面上测地线的克莱罗关系：ρ 为到旋转轴的距离，φ 为曲线与经线的夹角。",
+        "noteEn": "Clairaut's relation for geodesics on a surface of revolution: ρ is the distance to the axis and φ the angle to the meridian."
+      },
+      {
+        "latex": "\\delta\\!\\int_a^b|\\gamma'(t)|\\,dt=0\\iff\\kappa_g\\equiv 0",
+        "note": "变分刻画：测地线恰是长度泛函的临界曲线（弧长的一阶变分为零）。",
+        "noteEn": "Variational characterization: geodesics are exactly the critical curves of the length functional (vanishing first variation of arc length)."
+      }
+    ],
+    "properties": [
+      "测地曲率 κ_g 是内蕴量，等距变换把测地线映为测地线。",
+      "局部最短性：测地线是长度泛函的临界点，在足够短的弧段上实现最短；整体不一定最短（球面大圆绕圈、柱面螺旋线绕圈）。",
+      "存在唯一性：过点 p 与每个非零切向量 v∈T_pΣ 恰有一条极大测地线以 p 为起点、以 v 为初速度（测地线方程是二阶常微分方程组）。",
+      "球面上的测地线恰为大圆（过球心的平面与球面的交线）；圆柱面上的测地线是螺旋线，特别地包含母线（竖直直线）与水平圆。",
+      "测地线是「内蕴直线」：可展曲面展开成平面后，测地线恰好变成直线段；圆柱面上的螺旋线展开后就是一条直线。"
+    ],
+    "propertiesEn": [
+      "The geodesic curvature κ_g is intrinsic, so isometries map geodesics to geodesics.",
+      "Local minimality: geodesics are critical points of the length functional and realize shortest paths on sufficiently short arcs; globally they need not be shortest (going around a great circle or a helix).",
+      "Existence and uniqueness: through every point p and every nonzero tangent vector v ∈ T_pΣ there is exactly one maximal geodesic starting at p with initial velocity v (the geodesic equations are a second-order ODE system).",
+      "The geodesics on a sphere are exactly the great circles (intersections with planes through the centre); on a cylinder they are the helices, including the rulings (vertical lines) and the horizontal circles.",
+      "Geodesics are the intrinsic straight lines: on a developable surface they become line segments after unrolling; a helix on a cylinder unrolls to a straight line."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "cos(u)",
+        "y": "sin(u)",
+        "z": "v"
+      },
+      "uRange": [
+        0,
+        6.2832
+      ],
+      "vRange": [
+        -1.5,
+        1.5
+      ],
+      "density": [
+        40,
+        12
+      ],
+      "color": "#06d6a0",
+      "title": "圆柱面：螺旋线（含母线）是测地线"
+    },
+    "examples": [
+      {
+        "problem": "证明赤道大圆 $\\gamma(t)=R(\\cos t,\\ \\sin t,\\ 0)$ 是球面的测地线。",
+        "solution": "$\\gamma$ 的加速度 $\\gamma''(t)=-R(\\cos t,\\ \\sin t,\\ 0)$ 指向球心，而球面在该点的单位法向为 $n=(\\cos t,\\ \\sin t,\\ 0)$，即 $\\gamma''=-R\\,n$。于是曲率向量 $\\kappa N$ 平行于法向，切向分量为零，$\\kappa_g=0$，$\\gamma$ 是测地线。由球面的旋转对称性，任何过球心的大圆都是测地线；反过来也可证明球面上只有大圆满足 $\\kappa_g=0$。"
+      },
+      {
+        "problem": "验证圆柱面 $(R\\cos u,\\ R\\sin u,\\ v)$ 上的螺旋线 $\\gamma(t)=(R\\cos(at),\\ R\\sin(at),\\ bt)$ 是测地线。",
+        "solution": "$\\gamma''(t)=-Ra^2(\\cos(at),\\ \\sin(at),\\ 0)$ 沿圆柱面的径向，而圆柱面法向正是径向 $n=(\\cos(at),\\ \\sin(at),\\ 0)$，故 $\\kappa_g=0$，是测地线。更一般地，圆柱面的第一基本形式 $E=R^2,\\ F=0,\\ G=1$ 为常数，所有 Christoffel 符号为零，测地线方程退化为 $u''=0,\\ v''=0$，解为 $u=at+c_1,\\ v=bt+c_2$ —— 正是螺旋线全体（$b=0$ 得水平圆，$a=0$ 得母线）。"
+      }
+    ],
+    "tags": [
+      "微分几何",
+      "曲面",
+      "测地线"
+    ],
+    "links": [
+      "christoffel-symbols",
+      "first-fundamental-form",
+      "surface-isometry",
+      "gauss-bonnet",
+      "theorema-egregium"
+    ]
+  },
+  {
+    "id": "gauss-bonnet",
+    "title": "高斯–博内定理",
+    "titleEn": "The Gauss–Bonnet Theorem",
+    "branch": "differential-geometry",
+    "level": 5,
+    "summary": "区域内部的曲率积分 ∬K dA 加上边界测地曲率积分 ∮κ_g ds 等于 2π 乘欧拉示性数；闭曲面的总曲率是纯拓扑不变量（球面 4π、环面 0）。",
+    "summaryEn": "The Gauss–Bonnet theorem: the total curvature ∬K dA of a region plus the geodesic curvature integral ∮κ_g ds along its boundary equals 2π times the Euler characteristic; the total curvature of a closed surface is a topological invariant (4π for the sphere, 0 for the torus).",
+    "definition": "设 $R$ 是曲面 $\\Sigma$ 上由有限条（分段）光滑曲线围成的区域，$\\chi(R)$ 为其欧拉示性数。**高斯–博内定理**断言\n$$\\oint_{\\partial R}\\kappa_g\\,ds+\\iint_R K\\,dA=2\\pi\\,\\chi(R),$$\n其中 $\\kappa_g$ 是边界曲线的测地曲率。对没有边界的**闭曲面**，边界项消失，只剩\n$$\\iint_{\\Sigma}K\\,dA=2\\pi\\,\\chi(\\Sigma).$$\n球面 $\\chi=2$，总曲率恒等于 $4\\pi$；环面 $\\chi=0$，总曲率为 $0$（外侧的正曲率与内侧的负曲率恰好抵消）；亏格为 $g$ 的可定向闭曲面有 $\\chi=2-2g$。\n\n定理的深刻之处在于：$K\\,dA$ 由度量决定（绝妙定理），而整个积分只依赖拓扑。无论怎样把球面捏扁拉长，它的总曲率始终是 $4\\pi$ —— 这是局部几何与整体拓扑之间最经典的一座桥梁，也解释了为什么「处处 $K>0$ 的闭曲面」只能是球面：那会迫使 $\\chi>0$。",
+    "definitionEn": "Let $R$ be a region of a surface $\\Sigma$ bounded by finitely many (piecewise) smooth curves, with Euler characteristic $\\chi(R)$. The **Gauss–Bonnet theorem** states\n$$\\oint_{\\partial R}\\kappa_g\\,ds+\\iint_R K\\,dA=2\\pi\\,\\chi(R),$$\nwhere $\\kappa_g$ is the geodesic curvature of the boundary. For a **closed surface** (empty boundary) the boundary term vanishes and\n$$\\iint_{\\Sigma}K\\,dA=2\\pi\\,\\chi(\\Sigma).$$\nThe sphere has $\\chi=2$, so its total curvature is always $4\\pi$; the torus has $\\chi=0$, so its total curvature is $0$ (positive curvature on the outside cancels negative curvature on the inside); an orientable closed surface of genus $g$ has $\\chi=2-2g$.\n\nThe depth of the theorem: $K\\,dA$ is determined by the metric (Theorema Egregium), yet the integral depends only on topology. No matter how a sphere is squashed or stretched, its total curvature stays $4\\pi$. This is the classic bridge between local geometry and global topology, and it explains why a closed surface with $K>0$ everywhere must be a sphere: that forces $\\chi>0$.",
+    "formulas": [
+      {
+        "latex": "\\oint_{\\partial R}\\kappa_g\\,ds+\\iint_R K\\,dA=2\\pi\\,\\chi(R)",
+        "note": "高斯–博内定理（光滑边界）：区域内的曲率总量由边界的测地曲率补足为 2πχ(R)。",
+        "noteEn": "Gauss–Bonnet with smooth boundary: the total curvature inside is completed by the boundary geodesic curvature to 2πχ(R)."
+      },
+      {
+        "latex": "\\iint_{\\Sigma}K\\,dA=2\\pi\\,\\chi(\\Sigma)",
+        "note": "闭曲面情形：总曲率只由拓扑决定，与曲面的具体形状无关。",
+        "noteEn": "The closed case: total curvature depends only on topology, not on the shape."
+      },
+      {
+        "latex": "\\chi=2-2g",
+        "note": "亏格 g 的可定向闭曲面的欧拉示性数：球面 g=0 ⇒ χ=2；环面 g=1 ⇒ χ=0；双环面 g=2 ⇒ χ=−2。",
+        "noteEn": "Euler characteristic of an orientable closed surface of genus g: sphere g=0 ⇒ χ=2; torus g=1 ⇒ χ=0; double torus g=2 ⇒ χ=−2."
+      },
+      {
+        "latex": "\\alpha+\\beta+\\gamma=\\pi+\\iint_T K\\,dA",
+        "note": "测地三角形的内角和比 π 多出内部总曲率（球面 K=1/R² 时多出 面积/R²）。",
+        "noteEn": "For a geodesic triangle the angle sum exceeds π by the total curvature inside (on a sphere with K=1/R², by area/R²)."
+      },
+      {
+        "latex": "\\iint_{\\text{球面}}K\\,dA=4\\pi,\\qquad \\iint_{\\text{环面}}K\\,dA=0",
+        "note": "两个基本例子：单位球面 K≡1 与面积 4π 给出 4π=2π·2；环面的曲率积分中 cos u 的部分恰好抵消，对应 χ=0。",
+        "noteEn": "Two basic examples: the unit sphere (K ≡ 1, area 4π) gives 4π = 2π·2; on the torus the cos u part of the curvature integrates to zero, matching χ=0."
+      }
+    ],
+    "properties": [
+      "总曲率 ∬K dA 是拓扑不变量：与曲面的具体形状和嵌入方式无关（球面无论怎么变形，总曲率仍是 4π）。",
+      "带边界的区域必须计入边界项 ∮κ_g ds；若边界本身是测地线（κ_g≡0），则 ∬K dA 仍等于 2πχ。",
+      "它是绝妙定理的全局伴侣：K dA 局部只依赖度量，全局却等于拓扑量；高维推广是陈省身 1944 年的陈–高斯–博内定理。",
+      "若闭曲面处处 K>0，则 ∬K dA>0，故 χ>0，只能是球面（χ=2）：所以环面（χ=0）上 K 必有正有负或恒为零 —— 环面外侧 K>0、内侧 K<0 正是这一拓扑约束的体现。",
+      "测地三角形的内角之和等于 π 加上内部总曲率：平面上回到 π，球面上大于 π，双曲面上小于 π —— 曲率可以用「三角形内角和」来测量。"
+    ],
+    "propertiesEn": [
+      "The total curvature ∬K dA is a topological invariant: it does not depend on the shape or embedding (a sphere always has total curvature 4π).",
+      "A region with boundary requires the boundary term ∮κ_g ds; if the boundary is itself geodesic (κ_g ≡ 0), then ∬K dA = 2πχ still holds.",
+      "It is the global companion of the Theorema Egregium: K dA is locally metric, globally topological; the higher-dimensional generalization is Chern's Chern–Gauss–Bonnet theorem (1944).",
+      "If a closed surface has K > 0 everywhere, then ∬K dA > 0, so χ > 0 and the surface must be a sphere (χ = 2); on a torus (χ = 0) the curvature must change sign or vanish — exactly the case on the outside (K > 0) and inside (K < 0) of a torus.",
+      "For a geodesic triangle the angle sum equals π plus the enclosed total curvature: back to π in the plane, greater than π on a sphere, less than π on a hyperbolic surface — curvature can be measured by triangles."
+    ],
+    "plot": {
+      "type": "surface3d",
+      "surf": {
+        "x": "(1 + 0.4*cos(u))*cos(v)",
+        "y": "(1 + 0.4*cos(u))*sin(v)",
+        "z": "0.4*sin(u)"
+      },
+      "uRange": [
+        0,
+        6.2832
+      ],
+      "vRange": [
+        0,
+        6.2832
+      ],
+      "density": [
+        24,
+        48
+      ],
+      "color": "#f72585",
+      "title": "环面 χ=0：外侧 K>0 与内侧 K<0 恰好抵消，∬K dA=0"
+    },
+    "examples": [
+      {
+        "problem": "验证单位球面的总曲率等于 4π，并解释欧拉示性数。",
+        "solution": "单位球面上 $K\\equiv 1$，面积 $4\\pi$，所以 $\\iint K\\,dA=4\\pi$。由高斯–博内定理 $2\\pi\\chi=4\\pi$，得 $\\chi=2$，正是球面的欧拉示性数。对半径 $R$ 的球面同样成立：$K=1/R^2$、面积 $4\\pi R^2$，乘积仍为 $4\\pi$。"
+      },
+      {
+        "problem": "验证环面的总曲率为 0。",
+        "solution": "环面 $K=\\frac{\\cos u}{a(c+a\\cos u)}$、面积元 $dA=a(c+a\\cos u)\\,du\\,dv$，于是 $$\\iint K\\,dA=\\int_0^{2\\pi}\\!\\!\\int_0^{2\\pi}\\cos u\\,du\\,dv=0.$$ 这与 $\\chi=0$、$2\\pi\\chi=0$ 相符：外侧（$\\cos u>0$）的正曲率与内侧（$\\cos u<0$）的负曲率恰好抵消。"
+      }
+    ],
+    "tags": [
+      "微分几何",
+      "拓扑",
+      "曲率"
+    ],
+    "links": [
+      "gaussian-mean-curvature",
+      "geodesic",
+      "theorema-egregium",
+      "gauss-map",
+      "surface-integral"
+    ]
+  }
+]

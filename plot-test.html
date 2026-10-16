@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>绘图引擎测试</title>
+  <style>
+    body { background: #05060f; color: #e8ecff; font-family: sans-serif; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .plot-wrap { border: 1px solid rgba(120,140,255,0.25); border-radius: 12px; overflow: hidden; }
+    h3 { font-size: 13px; color: #8b93b8; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <h1>绘图引擎测试</h1>
+  <div class="grid" id="grid"></div>
+  <script type="module">
+    import { renderPlot } from "./js/plot.js?v=18";
+    const tests = [
+      { name: "函数图像：sin / cos", plot: { type: "function", functions: [
+        { expr: "sin(x)", color: "#4cc9f0", label: "y = sin x" },
+        { expr: "cos(x)", color: "#ff6b9d", label: "y = cos x" }],
+        xRange: [-7, 7], yRange: [-1.5, 1.5], title: "三角函数图像" } },
+      { name: "函数图像：抛物线", plot: { type: "function", functions: [
+        { expr: "x**2 - 2*x - 3", color: "#06d6a0", label: "y = x² - 2x - 3" }],
+        xRange: [-3, 5], yRange: [-5, 8], title: "二次函数" } },
+      { name: "单位圆", plot: { type: "unitcircle", angle: Math.PI/3, title: "单位圆与三角函数" } },
+      { name: "数轴", plot: { type: "numberline", range: [-5, 5], points: [
+        { at: 2, label: "√2≈1.41", color: "#ffd166" }, { at: -3, label: "-3" }],
+        title: "数轴" } },
+      { name: "几何：直角三角形", plot: { type: "geometry", xRange: [-1, 5], yRange: [-1, 4],
+        elements: [
+          { type: "axes" },
+          { type: "polygon", points: [[0,0],[4,0],[0,3]], fill: "rgba(76,201,240,0.12)", color: "#4cc9f0" },
+          { type: "point", at: [0,0], label: "A" }, { type: "point", at: [4,0], label: "B" },
+          { type: "point", at: [0,3], label: "C" },
+          { type: "segment", from: [0,0], to: [4,0], color: "#ffd166" },
+          { type: "label", at: [2, -0.5], text: "b = 4" },
+          { type: "label", at: [-0.6, 1.5], text: "c = 3" }
+        ], title: "勾股定理" } },
+      { name: "函数图像：双曲线", plot: { type: "function", functions: [
+        { expr: "1/x", color: "#b388ff", label: "y = 1/x" }],
+        xRange: [-5, 5], yRange: [-5, 5], title: "反比例函数" } },
+      { name: "定积分：面积填充", plot: { type: "function", functions: [
+        { expr: "x^2", color: "#06d6a0", label: "y = x²" }],
+        fills: [{ expr: "x^2", from: 0, to: 2, color: "#06d6a0", label: "∫₀² x²dx" }],
+        xRange: [-1, 3], yRange: [-1, 5], title: "定积分的几何意义" } },
+      { name: "导数：切线", plot: { type: "function", functions: [
+        { expr: "x^2", color: "#4cc9f0", label: "y = x²" }],
+        tangents: [{ expr: "x^2", at: 1, color: "#ff6b9d", label: "切线斜率 = 2" }],
+        xRange: [-2, 3], yRange: [-1, 6], title: "导数的几何意义" } },
+      { name: "等高线图", plot: { type: "contour", expr: "x^2 + y^2",
+        xRange: [-2.5, 2.5], yRange: [-2.5, 2.5], levels: 10, title: "f(x,y) = x² + y² 的等值线" } },
+      { name: "向量场（梯度场）", plot: { type: "vectorfield",
+        fx: "-x", fy: "-y", xRange: [-2, 2], yRange: [-2, 2],
+        marks: [{ at: [0, 0], label: "原点" }], title: "梯度场 F = (-x, -y)" } },
+      { name: "共形映射 w = z²", plot: { type: "conformal",
+        re: "x^2 - y^2", im: "2*x*y", zRange: [-1.4, 1.4], density: 9,
+        title: "w = z² 把直角网格映成两族正交曲线" } },
+      { name: "共形映射 w = e^z", plot: { type: "conformal",
+        re: "exp(x)*cos(y)", im: "exp(x)*sin(y)", zRange: [-1.2, 1.2], density: 8,
+        title: "w = e^z 把竖直带映成扇形" } },
+      { name: "斜率场 y' = x + y", plot: { type: "slopefield",
+        expr: "x + y", xRange: [-3, 3], yRange: [-3, 3],
+        initial: [{ x: 0, y: 1, color: "#ff6b9d", label: "y(0)=1" }, { x: 0, y: -2, color: "#4cc9f0", label: "y(0)=-2" }],
+        title: "斜率场与解曲线" } },
+      { name: "数值积分：梯形法", plot: { type: "quadrature", expr: "x^2", from: 0, to: 2, n: 4, method: "trapezoid", color: "#06d6a0", title: "梯形公式逼近 ∫₀²x²dx" } },
+      { name: "数值积分：辛普森法", plot: { type: "quadrature", expr: "sin(x)", from: 0, to: 3.1416, n: 4, method: "simpson", color: "#ff6b9d", curveColor: "#4cc9f0", title: "辛普森公式逼近 ∫₀^π sin x dx" } },
+      { name: "3D 曲线：圆柱螺线 + Frenet 标架", plot: { type: "curve3d",
+        x: "cos(t)", y: "sin(t)", z: "t/3", tRange: [0, 12.566], color: "#4cc9f0",
+        frames: [{ at: 4.19, scale: 0.75 }], title: "圆柱螺线与 Frenet 标架 (T 切向, N 主法向, B 副法向)" } },
+      { name: "3D 曲面：双曲抛物面", plot: { type: "surface3d",
+        expr: "x^2 - y^2", xRange: [-1.5, 1.5], yRange: [-1.5, 1.5], density: [24, 24],
+        color: "#4cc9f0", azimuth: 0.7, elevation: 0.45, title: "马鞍面 z = x² − y²（高斯曲率恒为负）" } },
+      { name: "3D 曲面：球面（参数式）", plot: { type: "surface3d",
+        surf: { x: "sin(u)*cos(v)", y: "sin(u)*sin(v)", z: "cos(u)" },
+        uRange: [0, 3.1416], vRange: [0, 6.2832], density: [20, 28],
+        color: "#ff6b9d", title: "单位球面（参数曲面）" } },
+      { name: "3D 曲面：环面", plot: { type: "surface3d",
+        surf: { x: "(1+0.35*cos(u))*cos(v)", y: "(1+0.35*cos(u))*sin(v)", z: "0.35*sin(u)" },
+        uRange: [0, 6.2832], vRange: [0, 6.2832], density: [18, 30],
+        color: "#06d6a0", title: "环面（高斯曲率有正有负）" } },
+      { name: "斜率场 y' = y(1-y)", plot: { type: "slopefield",
+        expr: "y*(1-y)", xRange: [-1, 4], yRange: [-0.6, 2.2],
+        initial: [{ x: 0, y: 0.2, color: "#06d6a0", label: "y(0)=0.2" }, { x: 0, y: 1.6, color: "#ffd166", label: "y(0)=1.6" }],
+        title: "逻辑斯蒂方程" } }
+    ];
+    const grid = document.getElementById("grid");
+    tests.forEach(t => {
+      const div = document.createElement("div");
+      const h = document.createElement("h3");
+      h.textContent = t.name;
+      const wrap = document.createElement("div");
+      wrap.className = "plot-wrap";
+      div.appendChild(h); div.appendChild(wrap); grid.appendChild(div);
+      renderPlot(t.plot, wrap);
+    });
+    document.title = "绘图引擎测试 - 完成";
+  </script>
+</body>
+</html>

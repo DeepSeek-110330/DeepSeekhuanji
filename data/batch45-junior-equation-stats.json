@@ -1,0 +1,770 @@
+[
+  {
+    "id": "linear-inequality-junior",
+    "title": "一元一次不等式与不等式组",
+    "titleEn": "Linear Inequalities in One Variable and Their Systems",
+    "branch": "algebra",
+    "level": 2,
+    "summary": "含一个未知数、次数为 1 的不等式：两边加（减）同一数方向不变，乘（除）负数必须改变方向；不等式组的解集是各解集的公共部分，可在数轴上用实心点、空心圈表示。",
+    "summaryEn": "An inequality with one unknown of degree 1: adding or subtracting keeps the direction, while multiplying or dividing by a negative number reverses it; a system's solution set is the common part of the individual ones, shown on a number line with solid dots and open circles.",
+    "definition": "除了「相等」，生活中还经常要比较「不等」。用不等号（>、<、≥、≤）表示大小关系的式子叫做**不等式**；只含有一个未知数、未知数的次数是 1、并且两边都是整式的不等式叫做**一元一次不等式**，例如 $3x-5>1$。能使不等式成立的未知数的值叫做不等式的**解**，所有解组成的集合叫做**解集**，求不等式解集的过程叫做**解不等式**。\n\n不等式有三条基本性质。性质 1：不等式两边同时加（或减）同一个数或同一个整式，不等号方向**不变**，例如 $3<5$ 两边加 2 得 $5<7$。性质 2：两边同时乘（或除以）同一个**正数**，方向不变。性质 3：两边同时乘（或除以）同一个**负数**，不等号方向**必须改变**，例如 $3<5$ 两边乘 $-1$ 得 $-3>-5$。性质 3 是解不等式最容易出错的地方；去分母时也要先看清两边乘的是正数还是负数。\n\n解一元一次不等式的步骤和解一元一次方程很像：去分母、去括号、移项、合并同类项、系数化为 1，但**移项要变号**，而且最后一步如果两边除以负数，不等号方向要改变。一般地，对于 $ax+b>0\\ (a\\neq0)$：当 $a>0$ 时解集为 $x>-\\dfrac{b}{a}$；当 $a<0$ 时解集为 $x<-\\dfrac{b}{a}$。\n\n把几个一元一次不等式合在一起，就组成**一元一次不等式组**，它的解集是各个不等式解集的**公共部分**（交集）。解集可以用数轴直观表示：**实心圆点表示包含端点**（≥ 或 ≤），**空心圆圈表示不包含端点**（> 或 <），再按不等号方向画出对应的部分。",
+    "definitionEn": "Besides equality, quantities are often compared by size. A relation that uses the signs >, <, ≥ or ≤ is called an **inequality**; an inequality with exactly one unknown of degree 1 whose two sides are polynomials is called a **linear inequality in one variable**, for example $3x-5>1$. A value of the unknown that makes the inequality true is a **solution**, the set of all solutions is the **solution set**, and finding it is called **solving the inequality**.\n\nAn inequality has three basic properties. Property 1: adding (or subtracting) the same number or expression on both sides keeps the direction **unchanged** — from $3<5$ adding 2 gives $5<7$. Property 2: multiplying (or dividing) both sides by the same **positive** number keeps the direction unchanged. Property 3: multiplying (or dividing) both sides by the same **negative** number **reverses** the direction — from $3<5$ multiplying by $-1$ gives $-3>-5$. Property 3 is the classic trap of this topic, and when clearing denominators you must first check whether the multiplier is positive or negative.\n\nSolving a linear inequality follows the same steps as solving a linear equation: clear denominators, remove brackets, move (transpose) terms, collect like terms and divide by the coefficient. But **transposing a term changes its sign**, and if the last step divides by a negative number the inequality sign must be reversed. For $ax+b>0\\ (a\\neq0)$: if $a>0$ the solution set is $x>-\\dfrac{b}{a}$, while if $a<0$ it is $x<-\\dfrac{b}{a}$.\n\nSeveral linear inequalities taken together form a **system of linear inequalities in one variable**; its solution set is the **common part (intersection)** of the individual solution sets. Solutions are shown on a number line: a **solid dot marks an included endpoint** (≥ or ≤) and an **open circle marks an excluded endpoint** (> or <), with the shaded part pointing in the direction of the sign.",
+    "formulas": [
+      {
+        "latex": "a>b\\ \\Longrightarrow\\ a+c>b+c,\\qquad a-c>b-c",
+        "note": "性质 1：两边加（减）同一个数或整式，不等号方向不变。解不等式时「移项要变号」正是这条性质的应用。",
+        "noteEn": "Property 1: adding or subtracting the same number or expression on both sides keeps the direction; 'transposing a term changes its sign' is just this rule."
+      },
+      {
+        "latex": "a>b,\\ c>0\\ \\Longrightarrow\\ ac>bc,\\qquad \\dfrac{a}{c}>\\dfrac{b}{c}",
+        "note": "性质 2：两边乘（除）同一个正数，不等号方向不变。",
+        "noteEn": "Property 2: multiplying or dividing both sides by the same positive number keeps the direction."
+      },
+      {
+        "latex": "a>b,\\ c<0\\ \\Longrightarrow\\ ac<bc,\\qquad \\dfrac{a}{c}<\\dfrac{b}{c}",
+        "note": "性质 3：两边乘（除）同一个负数，不等号方向必须改变，如 $2<3$ 两边乘 $-1$ 得 $-2>-3$。这是初中最易错的一点。",
+        "noteEn": "Property 3: multiplying or dividing both sides by the same negative number reverses the direction, e.g. $2<3$ becomes $-2>-3$ after multiplying by $-1$. This is the most common mistake."
+      },
+      {
+        "latex": "ax+b>0\\ (a\\neq0):\\quad x>-\\dfrac{b}{a}\\ (a>0),\\qquad x<-\\dfrac{b}{a}\\ (a<0)",
+        "note": "一元一次不等式 ax+b>0 的解集按 a 的正负讨论：a<0 时最后要除以负数，所以方向改变，解集是 x<−b/a。",
+        "noteEn": "For $ax+b>0$ the answer depends on the sign of $a$: dividing by a negative $a$ reverses the sign, so the solution set is $x<-b/a$ when $a<0$."
+      },
+      {
+        "latex": "\\begin{cases}x>a\\\\x\\le b\\end{cases}\\ \\Longrightarrow\\ a<x\\le b\\ (a<b)",
+        "note": "不等式组的解集是各解集的公共部分。口诀：同大取大、同小取小、大小小大中间找、大大小小无解了。",
+        "noteEn": "The solution set of a system is the common part of the individual sets; if the two parts do not overlap there is no solution."
+      }
+    ],
+    "expression": {
+      "text": "ax + b > 0（a ≠ 0）",
+      "symbol": "ax+b>0",
+      "note": "一元一次不等式的一般形式；a=0 时不是一元一次不等式。",
+      "noteEn": "General form of a linear inequality in one variable; it is not linear if a = 0."
+    },
+    "properties": [
+      "不等式两边加（减）同一个数或整式，不等号方向不变；「移项」本质上是两边同时加（减），所以移项必须变号。",
+      "不等式两边乘（除）同一个正数，方向不变；乘（除）同一个负数，方向必须改变。",
+      "在数轴上表示解集：实心圆点表示包含端点（≥、≤），空心圆圈表示不包含端点（>、<）。",
+      "不等式组的解集是各个不等式解集的公共部分（交集）；没有公共部分时，不等式组无解。",
+      "去分母时要先判断两边乘的是正数还是负数：乘正数方向不变，乘负数方向改变。"
+    ],
+    "propertiesEn": [
+      "Adding or subtracting the same number or expression on both sides keeps the direction; 'transposing' is exactly such an operation, so a term changes sign when it moves across.",
+      "Multiplying or dividing both sides by a positive number keeps the direction; by a negative number it must be reversed.",
+      "On a number line a solid dot marks an included endpoint (≥, ≤) and an open circle marks an excluded one (> , <).",
+      "The solution set of a system is the common part (intersection) of the individual solution sets; if they do not overlap the system has no solution.",
+      "Before clearing denominators, check the sign of the multiplier: direction unchanged for a positive number, reversed for a negative one."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        5
+      ],
+      "intervals": [
+        {
+          "from": 2,
+          "to": 3,
+          "color": "#4cc9f0"
+        }
+      ],
+      "points": [
+        {
+          "at": 2,
+          "label": "2（空心）",
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 3,
+          "label": "3（实心）",
+          "color": "#06d6a0"
+        }
+      ],
+      "title": "2 < x ≤ 3：端点 2 画空心圈（不含），端点 3 画实心点（含）"
+    },
+    "examples": [
+      {
+        "problem": "解不等式 $5x-2<2(x+5)$。",
+        "solution": "去括号：$5x-2<2x+10$；\n移项（注意变号）：$5x-2x<10+2$；\n合并同类项：$3x<12$；\n两边同除以 3（正数，方向不变）：$x<4$。\n\n检验：取 $x=0$，左边 $=5\\times0-2=-2$，右边 $=2\\times(0+5)=10$，$-2<10$ 成立；取 $x=4.1$，左边 $=18.5$，右边 $=18.2$，不成立，说明解集 $x<4$ 正确。"
+      },
+      {
+        "problem": "解不等式组 $\\begin{cases}2x-1>3,\\\\ 5-2x\\ge-1,\\end{cases}$ 并把解集在数轴上表示出来。",
+        "solution": "解第一个不等式：$2x>4$，得 $x>2$。\n解第二个不等式：$-2x\\ge-6$，两边同除以 $-2$（负数，方向改变），得 $x\\le3$。\n取公共部分：$2<x\\le3$。\n在数轴上：2 处画空心圆圈（不含 2），3 处画实心圆点（含 3），画出 2 与 3 之间的部分。\n\n检验：$x=3$ 时，$2\\times3-1=5>3$，$5-2\\times3=-1\\ge-1$，两个不等式都成立。"
+      }
+    ],
+    "tags": [
+      "不等式",
+      "一元一次不等式",
+      "不等式组",
+      "解集",
+      "数轴"
+    ],
+    "links": [
+      "inequality",
+      "linear-equation-junior",
+      "linear-system-two-variables",
+      "quadratic-equation-junior"
+    ]
+  },
+  {
+    "id": "quadratic-equation-junior",
+    "title": "一元二次方程",
+    "titleEn": "Quadratic Equations",
+    "branch": "algebra",
+    "level": 2,
+    "summary": "只含一个未知数、最高次数为 2 的整式方程，一般形式 ax²+bx+c=0（a≠0）；可用直接开平方、配方、公式、因式分解求解，判别式 Δ=b²−4ac 决定实数根的情况。",
+    "summaryEn": "A polynomial equation of degree 2 in one unknown, written as ax²+bx+c=0 (a≠0); it can be solved by square roots, completing the square, the quadratic formula or factoring, while Δ=b²−4ac decides the real roots.",
+    "definition": "只含有一个未知数，并且未知数的最高次数是 2 的整式方程叫做**一元二次方程**。它的一般形式是 $ax^2+bx+c=0\\ (a\\neq0)$，其中 $a$ 叫二次项系数，$b$ 叫一次项系数，$c$ 叫常数项。判断一个方程是不是一元二次方程，要先把右边化为 0、整理成一般形式，再看二次项系数是否不为 0。\n\n解一元二次方程的基本思路是**降次**：把二次方程转化成两个一次方程。常用方法有四种：**直接开平方法**（形如 $(x-m)^2=n$ 且 $n\\ge0$）、**配方法**、**公式法**、**因式分解法**。配方法的要点是：把常数项移到右边，两边同时加上一次项系数一半的平方，把左边配成完全平方。\n\n公式法是最通用的方法。先算判别式 $\\Delta=b^2-4ac$，当 $\\Delta\\ge0$ 时，方程的根为 $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$。当 $\\Delta>0$ 时方程有**两个不相等的实数根**；当 $\\Delta=0$ 时有**两个相等的实数根**；当 $\\Delta<0$ 时方程**没有实数根**——注意在初中范围内要说「没有实数根」，不要说成「无解」。用公式时别写错：分母是 $2a$，根号里是 $b^2-4ac$。\n\n如果一元二次方程 $ax^2+bx+c=0$ 的两根是 $x_1$、$x_2$，那么 $x_1+x_2=-\\dfrac{b}{a}$，$x_1x_2=\\dfrac{c}{a}$，这就是**根与系数的关系**（韦达定理）。例如 $x^2-2x-3=0$ 的两根是 3 和 $-1$，它们的和 $3+(-1)=2=-\\dfrac{-2}{1}$，积 $3\\times(-1)=-3=\\dfrac{-3}{1}$，与公式完全一致。用它可以在不解方程的情况下求两根的和与积，也可以检验解是否正确。",
+    "definitionEn": "An equation that contains exactly one unknown, whose highest power is 2, and whose two sides are polynomials, is called a **quadratic equation in one unknown**. Its general form is $ax^2+bx+c=0\\ (a\\neq0)$, where $a$ is the quadratic coefficient, $b$ the linear coefficient and $c$ the constant term. To judge whether an equation is quadratic, first move everything to one side, write it in general form, and check that the quadratic coefficient is not zero.\n\nThe guiding idea is to **lower the degree**: turn one quadratic equation into two linear ones. Four standard methods are the **square-root method** (for $(x-m)^2=n$ with $n\\ge0$), **completing the square**, the **quadratic formula** and **factoring**. To complete the square, move the constant term to the right and add the square of half the linear coefficient to both sides, so that the left side becomes a perfect square.\n\nThe quadratic formula works in every case. First compute the discriminant $\\Delta=b^2-4ac$. If $\\Delta\\ge0$, the roots are $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. If $\\Delta>0$ there are **two distinct real roots**, if $\\Delta=0$ **two equal real roots**, and if $\\Delta<0$ the equation has **no real roots** — do not call this 'no solution'. Watch the details: the denominator is $2a$, and $b^2-4ac$ lies under the square root.\n\nIf the roots of $ax^2+bx+c=0$ are $x_1$ and $x_2$, then $x_1+x_2=-\\dfrac{b}{a}$ and $x_1x_2=\\dfrac{c}{a}$ — the **relation between roots and coefficients** (Vieta's formulas). For $x^2-2x-3=0$ the roots 3 and $-1$ satisfy $3+(-1)=2=-\\dfrac{-2}{1}$ and $3\\times(-1)=-3=\\dfrac{-3}{1}$, exactly as the formulas predict. They give the sum and product without solving the equation and are useful for checking answers.",
+    "formulas": [
+      {
+        "latex": "ax^2+bx+c=0\\quad(a\\neq0)",
+        "note": "一元二次方程的一般形式：a 是二次项系数（a≠0），b 是一次项系数，c 是常数项。",
+        "noteEn": "The general form; a is the quadratic coefficient (a ≠ 0), b the linear coefficient and c the constant term."
+      },
+      {
+        "latex": "x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}",
+        "note": "求根公式（当 Δ=b²−4ac ≥ 0 时使用）。注意分母是 2a，根号内是 b²−4ac，且要先把方程整理成一般形式。",
+        "noteEn": "The quadratic formula, used when Δ = b²−4ac ≥ 0. The denominator is 2a and b²−4ac lies under the square root; arrange the equation into general form first."
+      },
+      {
+        "latex": "\\Delta=b^2-4ac:\\quad \\Delta>0\\ \\text{两个不相等实数根};\\quad \\Delta=0\\ \\text{两个相等实数根};\\quad \\Delta<0\\ \\text{没有实数根}",
+        "note": "判别式决定实数根的情况；Δ<0 时不能写成「无解」，而是「没有实数根」。",
+        "noteEn": "The discriminant decides the real roots; when Δ<0 we say the equation has no real roots, not that it has no solution."
+      },
+      {
+        "latex": "x_1+x_2=-\\dfrac{b}{a},\\qquad x_1x_2=\\dfrac{c}{a}",
+        "note": "韦达定理（根与系数的关系）：两根之和是 −b/a，两根之积是 c/a，两个符号都要写对。",
+        "noteEn": "Vieta's formulas: the sum of the roots is −b/a and the product is c/a — mind both signs."
+      },
+      {
+        "latex": "x^2+px+q=0\\ \\Longrightarrow\\ \\left(x+\\dfrac{p}{2}\\right)^2=\\dfrac{p^2}{4}-q",
+        "note": "配方法：两边同时加上一次项系数一半的平方，把左边配成完全平方，再开平方降次。",
+        "noteEn": "Completing the square: add the square of half the linear coefficient to both sides, then take square roots to lower the degree."
+      }
+    ],
+    "expression": {
+      "text": "ax² + bx + c = 0（a ≠ 0）",
+      "symbol": "ax^2+bx+c=0",
+      "note": "一元二次方程的一般形式，a、b、c 分别是二次项系数、一次项系数、常数项。",
+      "noteEn": "General form of a quadratic equation; a, b and c are the quadratic, linear and constant coefficients."
+    },
+    "properties": [
+      "判断一元二次方程要先整理成一般形式 ax²+bx+c=0，并确认二次项系数 a≠0。",
+      "判别式 Δ=b²−4ac 决定根的情况：Δ>0 两个不相等实数根；Δ=0 两个相等实数根；Δ<0 没有实数根。",
+      "韦达定理（有实数根时）：x₁+x₂=−b/a，x₁x₂=c/a；可用来检验解，或求 x₁²+x₂²=(x₁+x₂)²−2x₁x₂ 这类式子的值。",
+      "因式分解法依据「两个因式的积为 0，则至少有一个因式为 0」；使用前必须让方程的一边为 0。",
+      "实际问题中求出的根要检验是否符合题意（长度、人数等必须为正，还要满足其他限制）。"
+    ],
+    "propertiesEn": [
+      "Arrange the equation into general form ax²+bx+c=0 first and make sure the quadratic coefficient a ≠ 0.",
+      "The discriminant Δ=b²−4ac decides the roots: Δ>0 two distinct real roots, Δ=0 two equal real roots, Δ<0 no real roots.",
+      "Vieta's formulas (when real roots exist): x₁+x₂=−b/a and x₁x₂=c/a; they verify answers and give values such as x₁²+x₂²=(x₁+x₂)²−2x₁x₂.",
+      "Factoring relies on the fact that a product is zero only when a factor is zero; the equation must have 0 on one side.",
+      "In applications every root must be checked against the situation (lengths and counts must be positive, etc.)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2-2*x-3",
+          "color": "#4cc9f0",
+          "label": "y = x² − 2x − 3"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "x^2-2*x-3",
+          "at": 1,
+          "color": "#ffd166",
+          "label": "顶点 (1, −4)"
+        },
+        {
+          "expr": "0",
+          "at": -1,
+          "color": "#06d6a0",
+          "label": "与 x 轴交点 x = −1"
+        },
+        {
+          "expr": "0",
+          "at": 3,
+          "color": "#06d6a0",
+          "label": "与 x 轴交点 x = 3"
+        }
+      ],
+      "xRange": [
+        -2,
+        4
+      ],
+      "yRange": [
+        -5,
+        6
+      ],
+      "title": "y = x² − 2x − 3 与 x 轴交于 (−1, 0)、(3, 0)，顶点 (1, −4)"
+    },
+    "examples": [
+      {
+        "problem": "解方程 $x^2-2x-3=0$，并用根与系数的关系检验。",
+        "solution": "因式分解：$x^2-2x-3=(x-3)(x+1)$，于是 $(x-3)(x+1)=0$，得 $x_1=3$，$x_2=-1$。\n\n代入检验：$3^2-2\\times3-3=9-6-3=0$；$(-1)^2-2\\times(-1)-3=1+2-3=0$，两根都正确。\n\n韦达定理检验：$x_1+x_2=3+(-1)=2=-\\dfrac{-2}{1}$，$x_1x_2=3\\times(-1)=-3=\\dfrac{-3}{1}$，与公式一致。\n\n（公式法同样可行：$\\Delta=(-2)^2-4\\times1\\times(-3)=16>0$，$x=\\dfrac{2\\pm\\sqrt{16}}{2}=\\dfrac{2\\pm4}{2}$，即 $x_1=3$，$x_2=-1$。）"
+      },
+      {
+        "problem": "用公式法解方程 $x^2-4x+1=0$。",
+        "solution": "这里 $a=1$，$b=-4$，$c=1$，先算判别式：\n$\\Delta=(-4)^2-4\\times1\\times1=16-4=12>0$，所以方程有两个不相等的实数根。\n\n代入求根公式：\n$x=\\dfrac{-(-4)\\pm\\sqrt{12}}{2\\times1}=\\dfrac{4\\pm2\\sqrt3}{2}=2\\pm\\sqrt3$。\n\n即 $x_1=2+\\sqrt3\\approx3.73$，$x_2=2-\\sqrt3\\approx0.27$。\n\n检验：$x_1+x_2=4=-\\dfrac{-4}{1}$，$x_1x_2=(2+\\sqrt3)(2-\\sqrt3)=4-3=1=\\dfrac{1}{1}$，与韦达定理一致。"
+      }
+    ],
+    "tags": [
+      "一元二次方程",
+      "求根公式",
+      "判别式",
+      "韦达定理",
+      "因式分解"
+    ],
+    "links": [
+      "quadratic-function",
+      "parabola",
+      "function-zeros",
+      "inequality",
+      "linear-equation-junior"
+    ]
+  },
+  {
+    "id": "inverse-variation-function",
+    "title": "反比例函数",
+    "titleEn": "Inverse Variation Function",
+    "branch": "function",
+    "level": 2,
+    "summary": "形如 y=k/x（k≠0）的函数：图像是双曲线，两支关于原点对称、与坐标轴永不相交；k>0 时在第一、三象限，k<0 时在第二、四象限，矩形面积恒等于 |k|。",
+    "summaryEn": "A function of the form y=k/x (k≠0): its graph is a hyperbola whose two branches are centrally symmetric about the origin and never meet the axes; k>0 puts them in quadrants I and III, k<0 in II and IV, and the rectangle area equals |k|.",
+    "definition": "我们已经学过一次函数、二次函数，它们中两个变量的乘积不是定值。如果两个变量的乘积是一个不为 0 的常数，就得到另一种重要的函数：形如 $y=\\dfrac{k}{x}$（$k$ 是常数，$k\\neq0$）的函数叫做**反比例函数**，$k$ 叫做**比例系数**。也可以写成 $xy=k$ 或 $y=kx^{-1}$ 的形式。因为分母不能为 0，所以自变量 $x\\neq0$；又因为 $k\\neq0$，函数值 $y$ 也不可能等于 0。\n\n反比例函数的图像叫做**双曲线**，它由**两支**曲线组成，两支关于**原点**成中心对称。当 $k>0$ 时，两支分别在第一、三象限；当 $k<0$ 时，两支分别在第二、四象限。双曲线的两支与坐标轴无限接近，但**永远不相交**（两条坐标轴是它的渐近线）。\n\n讨论增减性时必须说「**在每一支上**」：当 $k>0$ 时，在每一支上 $y$ 随 $x$ 的增大而减小；当 $k<0$ 时，在每一支上 $y$ 随 $x$ 的增大而增大。**不能把两支合起来比较大小**，这是最常见的错误。例如 $y=\\dfrac{1}{x}$ 中，$x=-1$ 时 $y=-1$，$x=1$ 时 $y=1$，虽然从 $-1$ 到 $1$ 函数值「变大了」，但这两个点根本不在同一支上，这种比较没有意义。\n\n比例系数 $k$ 还有明确的几何意义：过双曲线上任意一点 $P$ 分别向 $x$ 轴、$y$ 轴作垂线，与两条坐标轴围成的矩形面积等于 $|k|$（因为 $|xy|=|k|$）。利用 $xy=k$，可以快速判断一个点是否在图像上，也可以由一个点的坐标求出 $k$、确定函数解析式。",
+    "definitionEn": "We have met linear and quadratic functions, where the product of the two variables is not constant. When the product of the two variables is a nonzero constant, we obtain another important function: one of the form $y=\\dfrac{k}{x}$ (k a constant, $k\\neq0$) is called an **inverse variation function**, and k is the **proportionality constant**. It can also be written as $xy=k$ or $y=kx^{-1}$. Since the denominator cannot be zero, $x\\neq0$; and since $k\\neq0$, the value $y$ is never 0 either.\n\nThe graph is a **hyperbola** consisting of **two branches** that are centrally symmetric about the **origin**. If $k>0$ the two branches lie in the first and third quadrants; if $k<0$ they lie in the second and fourth quadrants. The branches come arbitrarily close to the coordinate axes but **never meet them** (the axes are asymptotes).\n\nWhen discussing increase and decrease you must say '**on each branch**': for $k>0$, y decreases as x increases on each branch; for $k<0$, y increases as x increases on each branch. **Never compare values from different branches.** For $y=\\dfrac{1}{x}$, x = −1 gives y = −1 while x = 1 gives y = 1; the function value seems to 'grow', but the two points lie on different branches, so the comparison is meaningless.\n\nThe constant k also has a geometric meaning: if P is any point on the hyperbola and perpendiculars are drawn from P to both axes, the rectangle formed with the axes has area $|k|$, because $|xy|=|k|$. The relation $xy=k$ quickly tells whether a point lies on the graph, and one point on the graph determines k and hence the whole function.",
+    "formulas": [
+      {
+        "latex": "y=\\dfrac{k}{x}\\quad(k\\neq0)",
+        "note": "反比例函数的定义，也常写成 xy=k；自变量 x≠0，函数值 y≠0。",
+        "noteEn": "The definition, equivalently xy = k; the variable x ≠ 0 and the value y ≠ 0."
+      },
+      {
+        "latex": "k>0:\\ 0<x_1<x_2\\ \\Longrightarrow\\ y_1>y_2",
+        "note": "k>0 时，在每一支上 y 随 x 的增大而减小（x<0 的那一支也同样）。",
+        "noteEn": "For k > 0, y decreases as x increases on each branch (the branch with x < 0 behaves the same way)."
+      },
+      {
+        "latex": "k<0:\\ 0<x_1<x_2\\ \\Longrightarrow\\ y_1<y_2",
+        "note": "k<0 时，在每一支上 y 随 x 的增大而增大。",
+        "noteEn": "For k < 0, y increases as x increases on each branch."
+      },
+      {
+        "latex": "S=|xy|=|k|",
+        "note": "k 的几何意义：图像上任一点向两坐标轴作垂线，所围矩形的面积等于 |k|。",
+        "noteEn": "Geometric meaning of k: for any point on the graph, the rectangle formed with the axes by the two perpendiculars has area |k|."
+      }
+    ],
+    "expression": {
+      "text": "y = k/x（k ≠ 0）",
+      "symbol": "y=k/x",
+      "note": "反比例函数的表达式，k 是比例系数，k 的正负决定图像所在的象限。",
+      "noteEn": "Inverse variation: k is the proportionality constant, and its sign fixes the quadrants containing the branches."
+    },
+    "properties": [
+      "反比例函数 y=k/x 中 k≠0，自变量 x≠0，函数值 y≠0；图像与两条坐标轴永不相交。",
+      "图像是双曲线，由两支组成：k>0 时两支在第一、三象限；k<0 时两支在第二、四象限；两支关于原点成中心对称。",
+      "在每一支上：k>0 时 y 随 x 的增大而减小；k<0 时 y 随 x 的增大而增大。不能跨两支比较大小。",
+      "k 的几何意义：图像上任一点向两坐标轴作垂线，所围矩形的面积等于 |k|。",
+      "判断点是否在图像上，只需看横、纵坐标的乘积是否等于 k；反之，由一对坐标相乘即可求出 k、确定解析式。"
+    ],
+    "propertiesEn": [
+      "For y=k/x we have k≠0, x≠0 and y≠0; the graph never meets the coordinate axes.",
+      "The graph is a hyperbola with two branches: in quadrants I and III when k>0, in quadrants II and IV when k<0; the branches are centrally symmetric about the origin.",
+      "On each branch: y decreases as x increases when k>0, and increases when k<0. Values from different branches must not be compared.",
+      "Geometric meaning of k: the rectangle formed by perpendiculars from any point of the graph to both axes has area |k|.",
+      "A point lies on the graph exactly when the product of its coordinates equals k; conversely one point determines k and the formula."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/x",
+          "color": "#4cc9f0",
+          "label": "y = 1/x（k > 0，第一、三象限）"
+        },
+        {
+          "expr": "-1/x",
+          "color": "#ff6b9d",
+          "label": "y = −1/x（k < 0，第二、四象限）"
+        }
+      ],
+      "xRange": [
+        -5,
+        5
+      ],
+      "yRange": [
+        -5,
+        5
+      ],
+      "title": "反比例函数的两支双曲线：关于原点对称，与坐标轴永不相交"
+    },
+    "examples": [
+      {
+        "problem": "已知一个反比例函数的图像经过点 $(2,\\ 3)$。(1) 求这个函数的解析式；(2) 判断点 $(-1,\\ -6)$ 是否在它的图像上；(3) 当 $x>0$ 时，y 随 x 怎样变化？",
+        "solution": "(1) 设 $y=\\dfrac{k}{x}$。图像经过点 $(2,\\ 3)$，代入得 $k=xy=2\\times3=6$，所以解析式为 $y=\\dfrac{6}{x}$。\n\n(2) $(-1)\\times(-6)=6=k$，横、纵坐标的乘积等于 k，所以点 $(-1,\\ -6)$ 在图像上。\n\n(3) k=6>0，点在 x>0 的一支（第一象限）上，所以在这一支上 y 随 x 的增大而减小。"
+      },
+      {
+        "problem": "反比例函数 $y=\\dfrac{k}{x}$ 的图像上有一点 P，过 P 分别向两条坐标轴作垂线，与坐标轴围成的矩形面积为 6，且图像的两支在第二、四象限。求 k 的值和函数解析式。",
+        "solution": "由 k 的几何意义，矩形面积等于 $|k|$，所以 $|k|=6$，即 $k=6$ 或 $k=-6$。\n\n图像的两支在第二、四象限，说明 $k<0$，所以 $k=-6$，解析式为 $y=-\\dfrac{6}{x}$。\n\n检验：取点 $(-2,\\ 3)$，$(-2)\\times3=-6=k$，点在图像上；过它向两坐标轴作垂线，矩形面积为 $|-2|\\times3=6$，符合要求。"
+      }
+    ],
+    "tags": [
+      "反比例函数",
+      "双曲线",
+      "比例系数",
+      "单调性",
+      "中心对称"
+    ],
+    "links": [
+      "power-function",
+      "linear-function",
+      "function-concept",
+      "monotonicity"
+    ]
+  },
+  {
+    "id": "acute-trigonometry",
+    "title": "锐角三角函数",
+    "titleEn": "Trigonometric Ratios of Acute Angles",
+    "branch": "trigonometry",
+    "level": 2,
+    "summary": "直角三角形中锐角的对边、邻边与斜边之比：正弦、余弦、正切；角一定则比值一定，特殊角的值与同角关系、互余关系是解题基础。",
+    "summaryEn": "Ratios among the opposite side, adjacent side and hypotenuse of an acute angle in a right triangle: sine, cosine and tangent; once the angle is fixed the ratios are fixed, and the special values together with the same-angle and complementary-angle relations are the tools for solving right triangles.",
+    "definition": "在直角三角形中，边和角之间有确定的对应关系。设 Rt△ABC 中 $\\angle C=90^\\circ$，并记 $\\angle A$ 的对边为 $a$（即 BC）、邻边为 $b$（即 AC）、斜边为 $c$（即 AB）。当锐角 A 的大小确定后，不管三角形画得多大，三个比值 $\\dfrac{a}{c}$、$\\dfrac{b}{c}$、$\\dfrac{a}{b}$ 都保持不变，这是因为相似三角形的对应边成比例。正因为比值只与角的大小有关，我们才能给它们起名字：\n\n$$\\sin A=\\frac{\\angle A\\ \\text{的对边}}{\\text{斜边}}=\\frac{a}{c},$$\n$$\\cos A=\\frac{\\angle A\\ \\text{的邻边}}{\\text{斜边}}=\\frac{b}{c},$$\n$$\\tan A=\\frac{\\angle A\\ \\text{的对边}}{\\angle A\\ \\text{的邻边}}=\\frac{a}{b}.$$\n\n它们分别叫做 $\\angle A$ 的**正弦**、**余弦**、**正切**，统称为锐角 A 的**锐角三角函数**。注意「对边」「邻边」都是相对于所研究的角说的，换了角就要换边。由勾股定理可知斜边最长，所以 $0<\\sin A<1$，$0<\\cos A<1$，而 $\\tan A>0$。\n\n特殊角的三角函数值必须记牢：$\\sin30^\\circ=\\dfrac12$，$\\cos30^\\circ=\\dfrac{\\sqrt3}{2}$，$\\tan30^\\circ=\\dfrac{\\sqrt3}{3}$；$\\sin45^\\circ=\\cos45^\\circ=\\dfrac{\\sqrt2}{2}$，$\\tan45^\\circ=1$（此时直角三角形是等腰直角三角形）；$\\sin60^\\circ=\\dfrac{\\sqrt3}{2}$，$\\cos60^\\circ=\\dfrac12$，$\\tan60^\\circ=\\sqrt3$。可以抓住规律记忆：30°、45°、60° 的正弦值依次是 $\\dfrac{\\sqrt1}{2}$、$\\dfrac{\\sqrt2}{2}$、$\\dfrac{\\sqrt3}{2}$；30° 与 60° 的正弦、余弦值恰好互换。\n\n同一锐角还有两个常用关系：$\\sin^2A+\\cos^2A=1$（由勾股定理 $a^2+b^2=c^2$ 两边除以 $c^2$ 得到），$\\tan A=\\dfrac{\\sin A}{\\cos A}$。此外，如果 $\\angle A+\\angle B=90^\\circ$，那么 $\\sin A=\\cos B$，即 $\\sin A=\\cos(90^\\circ-A)$。已知直角三角形的两条边，或已知一条边和一个锐角，就可以求出其余的边和角，这叫做**解直角三角形**。",
+    "definitionEn": "In a right triangle the sides and angles are linked by fixed ratios. Let Rt△ABC have $\\angle C=90^\\circ$, and denote by $a$ (that is BC) the side opposite $\\angle A$, by $b$ (that is AC) the side adjacent to $\\angle A$, and by $c$ (that is AB) the hypotenuse. Once the acute angle A is fixed, the three ratios $\\dfrac{a}{c}$, $\\dfrac{b}{c}$ and $\\dfrac{a}{b}$ stay the same no matter how large the triangle is drawn, because corresponding sides of similar triangles are proportional. Since the ratios depend only on the angle, they deserve names:\n\n$$\\sin A=\\frac{\\text{side opposite }\\angle A}{\\text{hypotenuse}}=\\frac{a}{c},$$\n$$\\cos A=\\frac{\\text{side adjacent to }\\angle A}{\\text{hypotenuse}}=\\frac{b}{c},$$\n$$\\tan A=\\frac{\\text{side opposite }\\angle A}{\\text{side adjacent to }\\angle A}=\\frac{a}{b}.$$\n\nThey are the **sine**, **cosine** and **tangent** of $\\angle A$, collectively the **trigonometric ratios of the acute angle A**. Note that 'opposite' and 'adjacent' are always understood with respect to the chosen angle. Because the hypotenuse is the longest side, $0<\\sin A<1$, $0<\\cos A<1$, while $\\tan A>0$.\n\nThe special values must be memorized: $\\sin30^\\circ=\\dfrac12$, $\\cos30^\\circ=\\dfrac{\\sqrt3}{2}$, $\\tan30^\\circ=\\dfrac{\\sqrt3}{3}$; $\\sin45^\\circ=\\cos45^\\circ=\\dfrac{\\sqrt2}{2}$, $\\tan45^\\circ=1$ (the triangle is then isosceles right-angled); $\\sin60^\\circ=\\dfrac{\\sqrt3}{2}$, $\\cos60^\\circ=\\dfrac12$, $\\tan60^\\circ=\\sqrt3$. A useful pattern: the sines of 30°, 45°, 60° can be written as $\\dfrac{\\sqrt1}{2}$, $\\dfrac{\\sqrt2}{2}$, $\\dfrac{\\sqrt3}{2}$, and the sine and cosine of 30° and 60° simply swap.\n\nTwo identities hold for every acute angle: $\\sin^2A+\\cos^2A=1$ (divide $a^2+b^2=c^2$ by $c^2$) and $\\tan A=\\dfrac{\\sin A}{\\cos A}$. Also, if $\\angle A+\\angle B=90^\\circ$ then $\\sin A=\\cos B$, i.e. $\\sin A=\\cos(90^\\circ-A)$. Knowing two sides, or one side and one acute angle, of a right triangle, we can find all remaining sides and angles — this is called **solving a right triangle**.",
+    "formulas": [
+      {
+        "latex": "\\sin A=\\dfrac{\\angle A\\ \\text{的对边}}{\\text{斜边}}=\\dfrac{a}{c}",
+        "note": "正弦 = 对边 ÷ 斜边；对边、邻边是相对于所研究的锐角 A 而言的。",
+        "noteEn": "Sine = opposite side ÷ hypotenuse; 'opposite' and 'adjacent' are understood with respect to the chosen acute angle A."
+      },
+      {
+        "latex": "\\cos A=\\dfrac{\\angle A\\ \\text{的邻边}}{\\text{斜边}}=\\dfrac{b}{c}",
+        "note": "余弦 = 邻边 ÷ 斜边。",
+        "noteEn": "Cosine = adjacent side ÷ hypotenuse."
+      },
+      {
+        "latex": "\\tan A=\\dfrac{\\angle A\\ \\text{的对边}}{\\angle A\\ \\text{的邻边}}=\\dfrac{a}{b}=\\dfrac{\\sin A}{\\cos A}",
+        "note": "正切 = 对边 ÷ 邻边，也等于正弦与余弦的比。",
+        "noteEn": "Tangent = opposite ÷ adjacent, which also equals sin A / cos A."
+      },
+      {
+        "latex": "\\sin30^\\circ=\\dfrac12,\\ \\cos30^\\circ=\\dfrac{\\sqrt3}{2},\\ \\tan30^\\circ=\\dfrac{\\sqrt3}{3};\\quad \\sin45^\\circ=\\cos45^\\circ=\\dfrac{\\sqrt2}{2},\\ \\tan45^\\circ=1;\\quad \\sin60^\\circ=\\dfrac{\\sqrt3}{2},\\ \\cos60^\\circ=\\dfrac12,\\ \\tan60^\\circ=\\sqrt3",
+        "note": "三个特殊角的三角函数值：30°、45°、60° 的正弦值依次是 √1/2、√2/2、√3/2；30° 与 60° 的正弦、余弦值互换。",
+        "noteEn": "The special values for 30°, 45°, 60°: their sines are √1/2, √2/2, √3/2, and sine and cosine interchange between 30° and 60°."
+      },
+      {
+        "latex": "\\sin^2 A+\\cos^2 A=1,\\qquad \\tan A=\\dfrac{\\sin A}{\\cos A}",
+        "note": "同角关系：由勾股定理 a²+b²=c² 两边除以 c² 得到，常用来求值、化简和检验。",
+        "noteEn": "Same-angle relations (divide a²+b²=c² by c²); useful for evaluating, simplifying and checking."
+      }
+    ],
+    "expression": {
+      "text": "sin A = a/c，cos A = b/c，tan A = a/b",
+      "symbol": "sin A = a/c",
+      "note": "直角三角形中锐角 A 的三种三角函数值，a、b、c 分别是 ∠A 的对边、邻边与斜边。",
+      "noteEn": "The three ratios of the acute angle A; a, b and c are the opposite side, adjacent side and hypotenuse of ∠A."
+    },
+    "properties": [
+      "角一定，三个比值就确定，与三角形的大小无关（相似三角形对应边成比例）。",
+      "取值范围：0<sin A<1，0<cos A<1，tan A>0（锐角情形）。",
+      "同角关系：sin²A+cos²A=1，tan A=sin A/cos A。",
+      "互余关系：若 ∠A+∠B=90°，则 sin A=cos B，即 sin A=cos(90°−A)；同样有 cos A=sin(90°−A)。",
+      "解直角三角形：已知两条边（可用勾股定理），或已知一边和一锐角，就能求出其余的边和角。"
+    ],
+    "propertiesEn": [
+      "Once the angle is fixed the three ratios are fixed, independent of the size of the triangle (similar triangles have proportional sides).",
+      "Ranges for an acute angle: 0<sin A<1, 0<cos A<1 and tan A>0.",
+      "Same-angle relations: sin²A+cos²A=1 and tan A=sin A/cos A.",
+      "Complementary angles: if ∠A+∠B=90° then sin A=cos B, i.e. sin A=cos(90°−A), and likewise cos A=sin(90°−A).",
+      "Solving a right triangle: two sides (with the Pythagorean theorem), or one side plus one acute angle, determine all the rest."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1,
+        6.5
+      ],
+      "yRange": [
+        -1.2,
+        3.8
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              3.2,
+              2.4
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.10)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            5,
+            0
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3.2,
+            2.4
+          ],
+          "color": "#b388ff"
+        },
+        {
+          "type": "segment",
+          "from": [
+            5,
+            0
+          ],
+          "to": [
+            3.2,
+            2.4
+          ],
+          "color": "#06d6a0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.72,
+              2.04
+            ],
+            [
+              3.08,
+              1.56
+            ],
+            [
+              3.56,
+              1.92
+            ]
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "arc",
+          "cx": 0,
+          "cy": 0,
+          "r": 1,
+          "start": 0,
+          "end": 0.6435,
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ],
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            5,
+            0
+          ],
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.2,
+            2.4
+          ],
+          "label": "C"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.5,
+            -0.55
+          ],
+          "text": "斜边 c = 5",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.85,
+            1.75
+          ],
+          "text": "邻边 b = 4",
+          "color": "#b388ff"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.9,
+            1.95
+          ],
+          "text": "对边 a = 3",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.45,
+            0.42
+          ],
+          "text": "∠A",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.95,
+            2.95
+          ],
+          "text": "∠C = 90°",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "Rt△ABC（∠C = 90°）：sinA = a/c，cosA = b/c，tanA = a/b"
+    },
+    "examples": [
+      {
+        "problem": "在 Rt△ABC 中，$\\angle C=90^\\circ$，$a=BC=3$，$b=AC=4$。(1) 求斜边 c；(2) 求 sin A、cos A、tan A；(3) 求 sin B，并说明它与 cos A 的关系。",
+        "solution": "(1) 由勾股定理：$c=\\sqrt{a^2+b^2}=\\sqrt{3^2+4^2}=\\sqrt{25}=5$。\n\n(2) ∠A 的对边 a=3，邻边 b=4，斜边 c=5，所以\n$\\sin A=\\dfrac{a}{c}=\\dfrac35=0.6$，$\\cos A=\\dfrac{b}{c}=\\dfrac45=0.8$，$\\tan A=\\dfrac{a}{b}=\\dfrac34=0.75$。\n\n(3) ∠B 的对边是 b=4，斜边仍是 c=5，所以 $\\sin B=\\dfrac{b}{c}=\\dfrac45=\\cos A$。这与互余关系一致：$\\angle A+\\angle B=90^\\circ$，$\\sin B=\\cos(90^\\circ-B)=\\cos A$。\n\n验证同角关系：$\\sin^2A+\\cos^2A=\\left(\\dfrac35\\right)^2+\\left(\\dfrac45\\right)^2=\\dfrac{9}{25}+\\dfrac{16}{25}=1$。"
+      },
+      {
+        "problem": "在 Rt△ABC 中，$\\angle C=90^\\circ$，$\\angle A=30^\\circ$，斜边 $c=10$，解这个直角三角形（求 ∠B、a、b）。",
+        "solution": "$\\angle B=90^\\circ-\\angle A=90^\\circ-30^\\circ=60^\\circ$。\n\n$a=c\\cdot\\sin A=10\\times\\sin30^\\circ=10\\times\\dfrac12=5$。\n\n$b=c\\cdot\\cos A=10\\times\\cos30^\\circ=10\\times\\dfrac{\\sqrt3}{2}=5\\sqrt3\\approx8.66$。\n\n检验（勾股定理）：$a^2+b^2=5^2+(5\\sqrt3)^2=25+75=100=10^2=c^2$，结果正确。"
+      }
+    ],
+    "tags": [
+      "锐角三角函数",
+      "正弦",
+      "余弦",
+      "正切",
+      "解直角三角形"
+    ],
+    "links": [
+      "trigonometric-definition",
+      "sine-function",
+      "cosine-function",
+      "tangent-function",
+      "pythagorean",
+      "similarity"
+    ]
+  },
+  {
+    "id": "data-collection",
+    "title": "数据的收集、整理与描述",
+    "titleEn": "Collecting, Organizing and Describing Data",
+    "branch": "probability",
+    "level": 1,
+    "summary": "收集数据要分清全面调查与抽样调查，理解总体、个体、样本与样本容量；整理时统计频数与频率（频率之和为 1），再用合适的统计图描述数据。",
+    "summaryEn": "Collecting data requires telling a census from a sample survey and understanding population, individual, sample and sample size; data are then organized by frequency and relative frequency (which add up to 1) and described with suitable charts.",
+    "definition": "要研究一个问题，先要收集数据。收集数据有两种基本方式。**全面调查（普查）**：对考察对象中的**每一个**个体都进行调查，例如为了了解全班同学的身高，就对全班每位同学逐一测量；普查的结果准确，但工作量大。**抽样调查**：只从考察对象中抽取**一部分**个体进行调查，再用这部分的结果去估计整体，例如要了解一批灯泡的寿命，只能抽测一部分（测试是破坏性的，灯泡测完就坏了）。当总体数量很大，或者调查带有破坏性时，就必须用抽样调查。\n\n进行抽样调查要弄清几个概念：所要考察的对象的**全体**叫做**总体**；组成总体的**每一个**考察对象叫做**个体**；从总体中抽取的那部分个体叫做总体的一个**样本**；样本中个体的数目叫做**样本容量**（样本容量只是一个数，不带单位）。抽取样本时，必须保证每个个体被抽到的机会均等、样本有代表性，样本容量也要适当：太小误差大，太大又费时费力。例如「了解某校 1200 名学生的视力情况，随机抽取 200 名学生」，这里总体是 1200 名学生的视力情况，样本容量是 200。\n\n收集到的数据还要**整理**和**描述**。整理时常常把数据分组，统计每一组中数据的个数，这个个数叫做这一组的**频数**；频数与数据总数的比叫做这一组的**频率**，所有组的频率之和等于 1。整理结果可以列成频数分布表，画成**频数分布直方图**。描述数据还可以用条形图（比较各类别数量的多少）、扇形图（显示各部分占总数的百分比，各扇形圆心角之和为 360°）、折线图（显示数据的变化趋势）。不同的统计图各有各的用处，要根据想表达的信息来选择。",
+    "definitionEn": "To study a question we must first collect data, and there are two basic ways. A **complete survey (census)** examines **every** individual of the objects being studied, for example measuring the height of every student in a class; the result is exact but the work is heavy. A **sample survey** examines only **a part** of the objects and uses the result to estimate the whole, for example testing the lifetime of a batch of light bulbs — the test destroys the bulbs. When the population is huge or the survey is destructive, a sample survey is necessary.\n\nA sample survey uses several ideas. The whole collection of objects to be studied is the **population**; each object in it is an **individual**; the part drawn from the population is a **sample**; and the number of individuals in the sample is the **sample size**, which is a pure number without units. The sample must be drawn so that every individual has an equal chance of being chosen, it must be representative, and its size must be reasonable: too small and the error is large, too large and it wastes time and effort. For example, to study the eyesight of the 1200 students of a school, 200 students are chosen at random: the population is the eyesight of all 1200 students and the sample size is 200.\n\nCollected data still need to be **organized** and **described**. Data are often divided into groups, and the number of values in a group is its **frequency**; the ratio of a frequency to the total number of values is the **relative frequency**, and all relative frequencies add up to 1. The results can be put into a frequency table or drawn as a **frequency histogram**. Other useful charts are the bar chart (comparing amounts of different categories), the pie chart (showing percentages; the central angles of all sectors add up to 360°) and the line chart (showing a trend). Different charts serve different purposes — choose according to the message you want to convey.",
+    "formulas": [
+      {
+        "latex": "f=\\dfrac{m}{n}",
+        "note": "频率 = 频数 ÷ 总数：m 是这一组的频数，n 是数据总数；每一组的频率都在 0 与 1 之间。",
+        "noteEn": "Relative frequency = frequency ÷ total: m is the frequency of a group and n the total number of values; every relative frequency lies between 0 and 1."
+      },
+      {
+        "latex": "m_1+m_2+\\cdots+m_k=n,\\qquad f_1+f_2+\\cdots+f_k=1",
+        "note": "各组的频数之和等于数据总数，各组的频率之和等于 1；这两个关系常用来求缺失的一组数据。",
+        "noteEn": "The frequencies add up to the total and the relative frequencies add up to 1; these identities help to find a missing entry."
+      },
+      {
+        "latex": "360^\\circ\\times f",
+        "note": "扇形统计图中，某类数据对应的扇形圆心角 = 360° × 该类频率。",
+        "noteEn": "In a pie chart the central angle of a sector equals 360° times the relative frequency of its category."
+      },
+      {
+        "latex": "\\dfrac{m}{n}\\approx\\dfrac{M}{N}\\ \\Longrightarrow\\ M\\approx N\\cdot\\dfrac{m}{n}",
+        "note": "用样本估计总体：样本容量为 n、其中具有某特征的有 m 个，则总体 N 个对象中具有该特征的约有 N·m/n 个。",
+        "noteEn": "Estimating a population from a sample: if m of n sampled objects have a feature, about N·m/n of the N objects in the population have it."
+      }
+    ],
+    "properties": [
+      "全面调查适用于范围小、容易操作、要求结果准确的情形；抽样调查适用于总体很大、调查耗时或带破坏性的情形。",
+      "总体是考察对象的全体，个体是其中每一个考察对象，样本是抽取的那部分个体；样本容量是样本中个体的数目，不带单位。",
+      "抽样必须随机、有代表性，样本容量要适当；样本容量太小会使估计误差偏大。",
+      "频率 = 频数 ÷ 总数，各组的频数之和等于总数，各组的频率之和等于 1。",
+      "描述数据要选合适的统计图：条形图比较数量多少，扇形图看百分比，折线图看变化趋势，频数分布直方图看数据分布。"
+    ],
+    "propertiesEn": [
+      "A census fits a small, easily accessible group that needs exact results; a sample survey fits a huge population or a costly or destructive investigation.",
+      "The population is the whole collection being studied, an individual is one member of it, and a sample is the part drawn out; the sample size is the number of individuals in the sample, without units.",
+      "Sampling must be random and representative, and the sample size must be reasonable; too small a sample makes the estimate unreliable.",
+      "Relative frequency = frequency ÷ total; the frequencies add up to the total and the relative frequencies add up to 1.",
+      "Choose the right chart: bar charts compare amounts, pie charts show percentages, line charts show trends, and frequency histograms show the distribution."
+    ],
+    "examples": [
+      {
+        "problem": "为了解某市 8000 名初中生的睡眠时间，有关部门从中随机抽取 500 名学生进行调查。请指出这个调查中的总体、个体、样本和样本容量，并说明为什么采用抽样调查。",
+        "solution": "总体：该市 8000 名初中生的睡眠时间；\n个体：每名初中生的睡眠时间；\n样本：抽取的 500 名学生的睡眠时间；\n样本容量：500（只是一个数，不带单位）。\n\n采用抽样调查的原因：总体包含 8000 名学生，逐个调查工作量太大、耗时太长；只要样本是随机抽取的、有代表性，就可以用样本的情况去估计总体的睡眠时间。"
+      },
+      {
+        "problem": "某班 50 名学生调查上学方式：步行 15 人，骑车 20 人，乘车 15 人。(1) 求各组的频率，并验证频率之和为 1；(2) 求扇形统计图中「骑车」所对应扇形的圆心角度数。",
+        "solution": "(1) 步行：$\\dfrac{15}{50}=0.3$；骑车：$\\dfrac{20}{50}=0.4$；乘车：$\\dfrac{15}{50}=0.3$。\n验证：$15+20+15=50$，$0.3+0.4+0.3=1$，频率之和为 1。\n\n(2) 「骑车」的频率为 0.4，对应扇形圆心角为\n$360^\\circ\\times0.4=144^\\circ$。"
+      }
+    ],
+    "tags": [
+      "统计调查",
+      "抽样调查",
+      "频数",
+      "频率",
+      "频数分布直方图"
+    ],
+    "links": [
+      "statistics-sampling",
+      "probability-basics",
+      "data-analysis"
+    ]
+  },
+  {
+    "id": "data-analysis",
+    "title": "数据的分析",
+    "titleEn": "Analysis of Data",
+    "branch": "probability",
+    "level": 2,
+    "summary": "用平均数（含加权平均数）、中位数、众数刻画数据的集中趋势，用方差描述数据的波动大小，并根据实际需要选择合适的统计量。",
+    "summaryEn": "The mean (including the weighted mean), median and mode describe the central tendency of data, while the variance measures how widely the data scatter; suitable statistics are chosen according to the question.",
+    "definition": "收集到一组数据后，我们关心两件事：它「整体水平如何」，以及它「波动大不大」。前者用平均数、中位数、众数等表示**集中趋势**的量来描述，后者用方差、极差等表示**离散程度**的量来描述。\n\n**平均数**最常用：把所有的数据加起来，再除以数据的个数。当某些数据重复出现时，用每个数据乘它出现的次数（叫做**权**）再求和、除以次数之和，得到的就是**加权平均数**。平均数的优点是充分利用了每个数据的信息，缺点是容易受极端值的影响：比如 5 个人的收入中有一个特别大，平均数就会被拉高。\n\n**中位数**是把数据按从小到大（或从大到小）排序后位置居中的数：数据个数是奇数时，取最中间的一个；数据个数是**偶数时，取中间两个数的平均数**。中位数只看位置，不受极端值影响。**众数**是一组数据中出现次数最多的数据：它可能只有一个，也可能有多个；当所有数据出现的次数都相同时，可以说这组数据没有众数。众数常用来表示「最普遍」的水平。\n\n**方差**衡量数据的波动（离散）程度：把每个数据与平均数的差平方，再求这些平方的平均数，就得到方差 $s^2$。方差越大，说明数据偏离平均数越多、波动越大、越不稳定；方差越小，说明数据越集中、越稳定。比较两组数据的稳定性时，通常先看平均数是否接近，再比较方差。此外，**极差** = 最大值 − 最小值，它计算简单，但只用到两个数据，不能全面反映数据的波动情况。",
+    "definitionEn": "After a set of data is collected we ask two questions: what is its general level, and how widely does it scatter? The first is described by measures of **central tendency** — the mean, the median and the mode; the second by measures of **dispersion** such as the variance and the range.\n\nThe **mean** is the most common measure: add all the values and divide by how many there are. When values repeat, multiply each value by its frequency (called its **weight**), add the products and divide by the total weight; this is the **weighted mean**. The mean uses every value, but it is sensitive to extreme values: if one income among five is extremely large, the mean is pulled up.\n\nThe **median** is the middle value after the data are arranged in increasing (or decreasing) order: with an odd number of values take the middle one; with an **even number take the mean of the two middle values**. It depends only on position, so extreme values do not affect it. The **mode** is the value that occurs most often: there may be one mode or several, and if every value occurs equally often we can say the data have no mode. The mode is often used for the 'most common' level.\n\nThe **variance** measures how widely the data scatter: square the deviation of every value from the mean, then average these squares to obtain $s^2$. A larger variance means the values deviate further from the mean and the data are less stable; a small variance means the data are concentrated and steady. To compare the stability of two sets, first check that their means are close, then compare their variances. The **range**, largest minus smallest, is easy to compute but uses only two values and cannot describe the spread fully.",
+    "formulas": [
+      {
+        "latex": "\\bar{x}=\\dfrac{1}{n}(x_1+x_2+\\cdots+x_n)",
+        "note": "算术平均数：所有数据之和除以数据的个数 n。",
+        "noteEn": "The arithmetic mean: the sum of all values divided by the number n of values."
+      },
+      {
+        "latex": "\\bar{x}=\\dfrac{x_1f_1+x_2f_2+\\cdots+x_kf_k}{f_1+f_2+\\cdots+f_k}",
+        "note": "加权平均数：f_i 是数据 x_i 出现的次数（权），分母是权之和。",
+        "noteEn": "The weighted mean: f_i is the frequency (weight) of the value x_i and the denominator is the total weight."
+      },
+      {
+        "latex": "s^2=\\dfrac{1}{n}\\left[(x_1-\\bar{x})^2+(x_2-\\bar{x})^2+\\cdots+(x_n-\\bar{x})^2\\right]",
+        "note": "方差：每个数据与平均数的差的平方的平均数，分母是 n；方差越大，数据波动越大。",
+        "noteEn": "Variance: the mean of the squared deviations from the mean, with denominator n; a larger variance means wilder fluctuations."
+      },
+      {
+        "latex": "\\text{极差}=\\max\\{x_i\\}-\\min\\{x_i\\}",
+        "note": "极差 = 最大值 − 最小值，计算简单，但只用到两个数据，不能全面反映波动。",
+        "noteEn": "Range = largest − smallest; it is easy to compute but uses only two values, so it does not describe the spread fully."
+      }
+    ],
+    "properties": [
+      "平均数用到所有数据，易受极端值影响；中位数只与位置有关，众数是出现次数最多的数据，它们都不易受极端值影响。",
+      "中位数的求法：排序后，奇数个数据取最中间的一个；偶数个数据取中间两个数的平均数。",
+      "众数可以有多个，也可能没有（当所有数据出现的次数相同时）。",
+      "方差越大，数据的波动越大、越不稳定；比较两组数据的稳定性时可以比较方差（要求两组数据的平均水平相近）。",
+      "一组数据每个数都加 a，平均数也加 a，方差不变；每个数都乘 k（k≠0），平均数乘 k，方差乘 k²。"
+    ],
+    "propertiesEn": [
+      "The mean uses every value and is sensitive to extremes; the median depends only on position and the mode is the most frequent value — neither is easily disturbed by extreme values.",
+      "Median: after sorting, take the middle value for an odd number of data, and the mean of the two middle values for an even number.",
+      "There may be one mode, several modes, or no mode at all (when every value occurs equally often).",
+      "A larger variance means the data fluctuate more and are less stable; to compare the stability of two sets, compare their variances (their means should be close).",
+      "Adding a to every value adds a to the mean but leaves the variance unchanged; multiplying every value by k (k≠0) multiplies the mean by k and the variance by k²."
+    ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        10
+      ],
+      "intervals": [
+        {
+          "from": 5,
+          "to": 7,
+          "color": "#b388ff"
+        }
+      ],
+      "points": [
+        {
+          "at": 2,
+          "label": "2",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 3,
+          "label": "3",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 5,
+          "label": "5",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 7,
+          "label": "7",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 8,
+          "label": "8",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 9,
+          "label": "9",
+          "color": "#8d99ae"
+        },
+        {
+          "at": 6,
+          "label": "中位数 6",
+          "color": "#ffd166"
+        }
+      ],
+      "title": "中位数 = (5+7)/2 = 6（偶数个数据取中间两个的平均数）"
+    },
+    "examples": [
+      {
+        "problem": "求数据 2, 3, 5, 7, 8, 9 的平均数、中位数、众数和方差。",
+        "solution": "平均数：$\\bar{x}=\\dfrac{2+3+5+7+8+9}{6}=\\dfrac{34}{6}=\\dfrac{17}{3}\\approx5.67$。\n\n中位数：数据已按从小到大排列，共有 6 个（偶数个），取中间两个数 5 和 7 的平均数：$\\dfrac{5+7}{2}=6$。\n\n众数：每个数据都只出现一次，出现次数相同，所以这组数据没有众数。\n\n方差：$\\bar{x}=\\dfrac{17}{3}$，各数据与平均数的差为 $-\\dfrac{11}{3}$、$-\\dfrac{8}{3}$、$-\\dfrac{2}{3}$、$\\dfrac{4}{3}$、$\\dfrac{7}{3}$、$\\dfrac{10}{3}$，于是\n$s^2=\\dfrac{1}{6}\\left[\\left(-\\dfrac{11}{3}\\right)^2+\\left(-\\dfrac{8}{3}\\right)^2+\\left(-\\dfrac{2}{3}\\right)^2+\\left(\\dfrac{4}{3}\\right)^2+\\left(\\dfrac{7}{3}\\right)^2+\\left(\\dfrac{10}{3}\\right)^2\\right]=\\dfrac{1}{6}\\times\\dfrac{354}{9}=\\dfrac{59}{9}\\approx6.56$。"
+      },
+      {
+        "problem": "甲、乙两名同学各进行 4 次射击测试（满分 10 环），成绩如下：甲：8, 9, 10, 9；乙：10, 8, 10, 8。谁的成绩更稳定？",
+        "solution": "甲的平均数：$\\bar{x}_{\\text{甲}}=\\dfrac{8+9+10+9}{4}=9$，\n$s_{\\text{甲}}^{2}=\\dfrac{(8-9)^2+(9-9)^2+(10-9)^2+(9-9)^2}{4}=\\dfrac{1+0+1+0}{4}=0.5$。\n\n乙的平均数：$\\bar{x}_{\\text{乙}}=\\dfrac{10+8+10+8}{4}=9$，\n$s_{\\text{乙}}^{2}=\\dfrac{(10-9)^2+(8-9)^2+(10-9)^2+(8-9)^2}{4}=\\dfrac{1+1+1+1}{4}=1$。\n\n两人成绩的平均数相同（都是 9 环），而 $0.5<1$，甲的方差较小，说明甲的成绩波动更小、发挥更稳定。"
+      }
+    ],
+    "tags": [
+      "平均数",
+      "中位数",
+      "众数",
+      "方差",
+      "统计量"
+    ],
+    "links": [
+      "expectation-variance",
+      "data-collection",
+      "statistics-sampling",
+      "probability-basics"
+    ]
+  }
+]

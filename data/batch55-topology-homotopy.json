@@ -1,0 +1,2369 @@
+[
+  {
+    "id": "homotopy",
+    "title": "同伦与同伦等价",
+    "titleEn": "Homotopy and Homotopy Equivalence",
+    "branch": "topology",
+    "level": 5,
+    "summary": "同伦是「连续形变」的严格说法：两个连续映射能由一族连续映射彼此过渡就叫同伦；由此得到的同伦等价比同胚更宽松，却恰好是基本群、同调群这类代数不变量所尊重的等价关系。",
+    "summaryEn": "Homotopy is the rigorous form of “continuous deformation”: two continuous maps are homotopic if a continuous family of maps joins them. The resulting homotopy equivalence is coarser than homeomorphism, yet it is exactly the relation respected by algebraic invariants such as the fundamental group.",
+    "definition": "设 $X,Y$ 是拓扑空间，$f,g:X\\to Y$ 连续。若存在**连续**映射 $H:X\\times[0,1]\\to Y$，使\n$$H(x,0)=f(x),\\qquad H(x,1)=g(x)\\qquad(\\forall x\\in X),$$\n就称 $f$ 与 $g$ **同伦**，记作 $f\\simeq g$，$H$ 称为从 $f$ 到 $g$ 的一个**同伦**。三个要点不能含糊：$H$ 必须**整体连续**（只让每个 $H(\\cdot,t)$ 连续是不够的）；$X\\times[0,1]$ 上取的是乘积拓扑；把 $t\\in[0,1]$ 想成时间，$H$ 就是一段录像，$t=0$ 那一帧是 $f$，$t=1$ 那一帧是 $g$。直观地说，$f$ 能「连续地形变」成 $g$。最简单的例子：$Y$ 是 $\\mathbb{R}^n$ 中的凸集时任意两个连续映射都同伦，只要沿直线走——$H(x,t)=(1-t)f(x)+t\\,g(x)$，右端始终落在凸集 $Y$ 里。\n\n**相对同伦**：若给定 $A\\subseteq X$，并要求形变过程中 $A$ 上一点不动，即 $H(a,t)=f(a)=g(a)$ 对一切 $a\\in A$、$t\\in[0,1]$ 成立（这已蕴含 $f|_A=g|_A$），就说 $f$ 与 $g$ **相对于 $A$ 同伦**，记作 $f\\simeq g\\ \\text{rel}\\ A$。最重要的特例是**道路同伦**：取 $X=[0,1]$、$A=\\{0,1\\}$，两条端点相同的道路 $\\alpha,\\beta$ 同伦 rel $\\{0,1\\}$，意味着整个形变过程中两个端点都钉死不动。基本群的元素正是按这种「相对端点」的道路同伦来分类的：闭路只在同伦 rel 端点之下才视为同一个元素。\n\n同伦是连续映射之间的**等价关系**：① 自反：$H(x,t)=f(x)$；② 对称：$H$ 把 $f$ 变到 $g$，则 $H'(x,t)=H(x,1-t)$ 把 $g$ 变到 $f$；③ 传递：若 $H$ 把 $f$ 变到 $g$、$K$ 把 $g$ 变到 $h$，把两段录像按时间拼起来\n$$\\widetilde H(x,t)=\\begin{cases}H(x,2t),&0\\le t\\le \\tfrac12,\\\\ K(x,2t-1),&\\tfrac12\\le t\\le 1,\\end{cases}$$\n在 $t=\\tfrac12$ 处两段都等于 $g$，由粘贴引理 $\\widetilde H$ 连续，于是 $f\\simeq h$。\n\n**同伦等价**：若存在连续映射 $f:X\\to Y$ 与 $g:Y\\to X$，使\n$$g\\circ f\\simeq \\mathrm{id}_X,\\qquad f\\circ g\\simeq \\mathrm{id}_Y,$$\n就称 $f$ 是**同伦等价**，$g$ 是它的一个同伦逆，$X$ 与 $Y$ **同伦等价**，记 $X\\simeq Y$。注意这里是「**同伦于**恒等映射」，**不是**「等于恒等映射」——这是最容易记错的一处，也正是同伦等价与同胚的分水岭：同胚时可以直接取 $g=f^{-1}$ 使两个复合严格等于恒等，所以**同胚 ⟹ 同伦等价**；反过来不成立，例如 $\\mathbb{R}^n$ 与单点空间 $\\{*\\}$ 同伦等价（$H(x,t)=(1-t)x$ 把 $\\mathrm{id}_{\\mathbb{R}^n}$ 连续缩成常值映射），但两者不同胚。在同伦等价下保持不变的性质叫**同伦不变量**：基本群、同调群、道路连通分支的个数、可缩性都是；紧性、有界性、单点性等则不是（$\\mathbb{R}^n\\simeq\\{*\\}$，而 $\\mathbb{R}^n$ 不紧、单点空间紧）。把等价关系放宽到同伦，是代数拓扑的起点：算不变量时可以把空间换成同伦等价的简单模型。",
+    "definitionEn": "Let $X,Y$ be topological spaces and $f,g:X\\to Y$ continuous. If there is a **continuous** map $H:X\\times[0,1]\\to Y$ with\n$$H(x,0)=f(x),\\qquad H(x,1)=g(x)\\qquad(\\forall x\\in X),$$\nthen $f$ and $g$ are **homotopic**, written $f\\simeq g$, and $H$ is a **homotopy** from $f$ to $g$. Three points matter: $H$ must be continuous on the whole product (continuity of each $H(\\cdot,t)$ alone is not enough); $X\\times[0,1]$ carries the product topology; and with $t$ viewed as time, $H$ is a film whose frame at $t=0$ is $f$ and at $t=1$ is $g$. If $Y$ is a convex subset of $\\mathbb{R}^n$, any two continuous maps are homotopic by the straight-line homotopy $H(x,t)=(1-t)f(x)+t\\,g(x)$.\n\n**Relative homotopy:** given $A\\subseteq X$, if in addition $H(a,t)=f(a)=g(a)$ for all $a\\in A,\\ t\\in[0,1]$ (which forces $f|_A=g|_A$), one writes $f\\simeq g\\ \\text{rel}\\ A$. The key case is **path homotopy**: $X=[0,1]$, $A=\\{0,1\\}$, so the two endpoints stay fixed throughout the deformation. Elements of the fundamental group are exactly path-homotopy classes of loops relative to the endpoints.\n\nHomotopy is an **equivalence relation** on continuous maps: reflexive ($H(x,t)=f(x)$), symmetric ($H'(x,t)=H(x,1-t)$), and transitive (concatenate the two movies at $t=\\tfrac12$; the pasting lemma gives continuity since both pieces equal $g$ there).\n\n**Homotopy equivalence:** if there are continuous $f:X\\to Y$ and $g:Y\\to X$ with\n$$g\\circ f\\simeq \\mathrm{id}_X,\\qquad f\\circ g\\simeq \\mathrm{id}_Y,$$\nthen $f$ is a **homotopy equivalence**, $g$ is a homotopy inverse, and $X\\simeq Y$ are **homotopy equivalent**. The composites are homotopic to the identities, not equal to them — that is exactly the difference from a homeomorphism: if $f$ is a homeomorphism one may take $g=f^{-1}$ and get strict equalities, so homeomorphism implies homotopy equivalence; the converse fails ($\\mathbb{R}^n\\simeq\\{*\\}$ via $H(x,t)=(1-t)x$, yet they are not homeomorphic). Properties unchanged under homotopy equivalence are **homotopy invariants**: the fundamental group, homology groups, the number of path components, contractibility. Compactness, boundedness and being a single point are not ($\\mathbb{R}^n\\simeq\\{*\\}$). Relaxing equivalence to homotopy is the starting point of algebraic topology: one may replace a space by a simpler homotopy-equivalent model before computing invariants.",
+    "formulas": [
+      {
+        "latex": "H:X\\times[0,1]\\to Y\\ \\text{连续},\\qquad H(x,0)=f(x),\\quad H(x,1)=g(x)",
+        "note": "同伦的定义。$H$ 整体连续这一条不能省：它保证整段形变是一块连续的「录像」，而不是逐帧摆好的互不相干的映射。",
+        "noteEn": "Definition of a homotopy. Continuity of $H$ on the whole product is essential: it makes the deformation one continuous film rather than unrelated frames."
+      },
+      {
+        "latex": "f\\simeq g\\ \\text{rel}\\ A:\\qquad H(a,t)=f(a)=g(a)\\quad(\\forall a\\in A,\\ t\\in[0,1])",
+        "note": "相对同伦：$A$ 上的点全程钉住不动。取 $A=\\{0,1\\}$ 就是道路同伦（端点固定），基本群用它来分类闭路。",
+        "noteEn": "Relative homotopy: points of $A$ stay fixed throughout. With $A=\\{0,1\\}$ this is path homotopy (endpoints fixed), the relation used to define the fundamental group."
+      },
+      {
+        "latex": "H(x,t)=(1-t)f(x)+t\\,g(x)",
+        "note": "直线同伦：当目标空间 $Y$ 是 $\\mathbb{R}^n$ 中的凸集（更一般地，若 $Y$ 关于某点 $y_0$ 星形，则先用经 $y_0$ 的直线同伦把每个映射收缩到常值映射）时可用。注意直线同伦 $H=(1-t)f+t\\,g$ 本身只要求凸性。",
+        "noteEn": "The straight-line homotopy, available when the target $Y$ is convex in $\\mathbb{R}^n$. If $Y$ is star-shaped about $y_0$, first contract each map to a constant map along lines through $y_0$. (The straight-line homotopy itself requires convexity.)"
+      },
+      {
+        "latex": "g\\circ f\\simeq \\mathrm{id}_X,\\qquad f\\circ g\\simeq \\mathrm{id}_Y",
+        "note": "同伦等价的定义：两个复合只是**同伦于**恒等映射（用 $\\simeq$），一般并不等于恒等映射（$=$）；写错这一个符号就把同伦等价误当成了同胚。",
+        "noteEn": "Homotopy equivalence: the two composites are only homotopic ($\\simeq$) to the identities, not equal to them ($=$). Confusing the two symbols turns homotopy equivalence into homeomorphism."
+      },
+      {
+        "latex": "\\mathrm{id}_X\\simeq c_{x_0}\\quad\\Longleftrightarrow\\quad X\\ \\text{可缩}",
+        "note": "可缩空间：恒等映射同伦于某个常值映射 $c_{x_0}$，等价地说 $X\\simeq\\{*\\}$。$\\mathbb{R}^n$、任何凸集、任何星形域都可缩。",
+        "noteEn": "Contractible space: the identity is homotopic to a constant map, equivalently $X\\simeq\\{*\\}$. Euclidean spaces, convex sets and star-shaped domains are contractible."
+      }
+    ],
+    "properties": [
+      "同伦是连续映射之间的等价关系：自反（$H(x,t)=f(x)$）、对称（$H(x,1-t)$）、传递（按 $t=\\tfrac12$ 把两段同伦拼接，粘贴引理保证连续），因此可以谈「映射的同伦类」。",
+      "同伦与复合相容：$f\\simeq f'$（$X\\to Y$）且 $g\\simeq g'$（$Y\\to Z$）⟹ $g\\circ f\\simeq g'\\circ f'$。于是「同伦等价」本身也是空间之间的等价关系（自反、对称、传递）。",
+      "同胚 ⟹ 同伦等价，反之不成立：$\\mathbb{R}^n\\simeq\\{*\\}$、$[0,1]\\simeq\\{*\\}$、莫比乌斯带 $\\simeq S^1$（沿中圈形变收缩），这些对都同伦等价而不同胚。同伦等价保持道路连通分支个数、$\\pi_1$、同调群、可缩性，但不保持紧性、有界性、基数。",
+      "可缩空间：$X$ 可缩 $\\iff \\mathrm{id}_X\\simeq$ 常值映射 $\\iff X\\simeq\\{*\\}$。$\\mathbb{R}^n$、任何凸集与星形域可缩；但挖去原点的平面 $\\mathbb{R}^2\\setminus\\{0\\}$（同伦等价于 $S^1$）不可缩，$S^n\\ (n\\ge1)$ 也不可缩。",
+      "相对同伦严格强于自由同伦：若 $H$ 只把 $f$ 变到 $g$ 而不管基点（$H(x_0,t)$ 可以离开 $y_0$），一般推不出 $f_*=g_*$，两者只差一个由基点轨迹诱导的内自同构（共轭）；要保证 $f_*=g_*$ 必须要求 $f\\simeq g\\ \\text{rel}\\ \\{x_0\\}$（或 $\\pi_1(Y,y_0)$ 交换）。"
+    ],
+    "propertiesEn": [
+      "Homotopy is an equivalence relation on continuous maps: reflexive ($H(x,t)=f(x)$), symmetric ($H(x,1-t)$) and transitive (paste the two homotopies at $t=\\tfrac12$; the pasting lemma gives continuity). Hence one can speak of homotopy classes of maps.",
+      "Homotopy is compatible with composition: $f\\simeq f'$ and $g\\simeq g'$ imply $g\\circ f\\simeq g'\\circ f'$. Consequently homotopy equivalence is itself an equivalence relation on spaces (reflexive, symmetric, transitive).",
+      "Homeomorphism implies homotopy equivalence, but not conversely: $\\mathbb{R}^n\\simeq\\{*\\}$, $[0,1]\\simeq\\{*\\}$, and the Möbius band is homotopy equivalent to $S^1$ (collapse onto the core circle), yet none of these pairs is homeomorphic. Homotopy equivalence preserves the number of path components, $\\pi_1$, homology and contractibility, but not compactness, boundedness or cardinality.",
+      "Contractible spaces: $X$ is contractible iff $\\mathrm{id}_X$ is homotopic to a constant map iff $X\\simeq\\{*\\}$. Euclidean spaces, convex sets and star-shaped domains are contractible; the punctured plane $\\mathbb{R}^2\\setminus\\{0\\}$ (homotopy equivalent to $S^1$) is not, and neither is $S^n$ for $n\\ge1$.",
+      "Relative homotopy is strictly stronger than free homotopy: if $H$ merely deforms $f$ into $g$ while the basepoint moves along a loop, one generally cannot conclude $f_*=g_*$; the two differ by the inner automorphism (conjugation) induced by that loop. To get $f_*=g_*$ one needs $f\\simeq g\\ \\text{rel}\\ \\{x_0\\}$ (or an abelian $\\pi_1(Y,y_0)$)."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.1,
+        6.3
+      ],
+      "yRange": [
+        -0.2,
+        3.3
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.3,
+              0.8
+            ],
+            [
+              0.75,
+              0.917
+            ],
+            [
+              1.2,
+              1.033
+            ],
+            [
+              1.65,
+              1.15
+            ],
+            [
+              2.1,
+              1.267
+            ],
+            [
+              2.55,
+              1.383
+            ],
+            [
+              3.0,
+              1.5
+            ],
+            [
+              3.45,
+              1.617
+            ],
+            [
+              3.9,
+              1.733
+            ],
+            [
+              4.35,
+              1.85
+            ],
+            [
+              4.8,
+              1.967
+            ],
+            [
+              5.25,
+              2.083
+            ],
+            [
+              5.7,
+              2.2
+            ]
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.3,
+              0.8
+            ],
+            [
+              0.75,
+              1.033
+            ],
+            [
+              1.2,
+              1.258
+            ],
+            [
+              1.65,
+              1.468
+            ],
+            [
+              2.1,
+              1.656
+            ],
+            [
+              2.55,
+              1.818
+            ],
+            [
+              3.0,
+              1.95
+            ],
+            [
+              3.45,
+              2.051
+            ],
+            [
+              3.9,
+              2.123
+            ],
+            [
+              4.35,
+              2.168
+            ],
+            [
+              4.8,
+              2.192
+            ],
+            [
+              5.25,
+              2.2
+            ],
+            [
+              5.7,
+              2.2
+            ]
+          ],
+          "color": "#ffd166"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.3,
+              0.8
+            ],
+            [
+              0.75,
+              1.15
+            ],
+            [
+              1.2,
+              1.483
+            ],
+            [
+              1.65,
+              1.786
+            ],
+            [
+              2.1,
+              2.046
+            ],
+            [
+              2.55,
+              2.253
+            ],
+            [
+              3.0,
+              2.4
+            ],
+            [
+              3.45,
+              2.486
+            ],
+            [
+              3.9,
+              2.513
+            ],
+            [
+              4.35,
+              2.486
+            ],
+            [
+              4.8,
+              2.417
+            ],
+            [
+              5.25,
+              2.316
+            ],
+            [
+              5.7,
+              2.2
+            ]
+          ],
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.3,
+            0.8
+          ],
+          "label": "P",
+          "color": "#b388ff"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.7,
+            2.2
+          ],
+          "label": "Q",
+          "color": "#b388ff"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.0,
+            2.85
+          ],
+          "text": "f = H(·,0)"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.0,
+            1.73
+          ],
+          "text": "H(·,1/2)"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.0,
+            1.15
+          ],
+          "text": "g = H(·,1)"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            0.45
+          ],
+          "text": "端点 P、Q 全程不动（rel {0,1}）"
+        }
+      ],
+      "title": "同伦：H(·,t) 把曲线 f 连续形变成 g（同一族曲线）"
+    },
+    "examples": [
+      {
+        "problem": "证明：$\\mathbb{R}^n$ 中任意两条同端点的道路 $\\alpha,\\beta$ 都道路同伦（rel 端点），并由此说明 $\\pi_1(\\mathbb{R}^n,0)$ 是平凡群。",
+        "solution": "令 $H(s,t)=(1-t)\\alpha(s)+t\\,\\beta(s)$，$s,t\\in[0,1]$。它是 $(s,t)$ 的连续映射（坐标为连续函数的线性组合），且 $H(s,0)=\\alpha(s)$、$H(s,1)=\\beta(s)$。由端点相同：$H(0,t)=(1-t)\\alpha(0)+t\\,\\beta(0)=\\alpha(0)$，同理 $H(1,t)=\\alpha(1)$，所以 $H(0,t)$、$H(1,t)$ 与 $t$ 无关，$H$ 是 rel $\\{0,1\\}$ 的道路同伦，故 $[\\alpha]=[\\beta]$。特别地取 $\\beta\\equiv0$（常值道路），得每个以 $0$ 为基点的闭路都满足 $[\\alpha]=[e_0]$，故 $\\pi_1(\\mathbb{R}^n,0)=\\{[e_0]\\}$ 是平凡群（记作 $0$）。同一论证对任何凸集成立，故凸集上的一切闭路都可缩。"
+      },
+      {
+        "problem": "说明 $[0,1]$ 与单点空间 $\\{0\\}$ 同伦等价，并指出哪些常见性质在同伦等价下不被保持。",
+        "solution": "设 $f:[0,1]\\to\\{0\\}$ 是唯一映射，$g:\\{0\\}\\to[0,1]$，$g(0)=0$。则 $f\\circ g=\\mathrm{id}_{\\{0\\}}$（严格相等），而 $g\\circ f$ 是常值映射 $x\\mapsto0$；由 $H(x,t)=(1-t)x$ 知 $g\\circ f\\simeq\\mathrm{id}_{[0,1]}$，于是 $[0,1]\\simeq\\{0\\}$。但两者不同胚（$[0,1]$ 是不可数无限集，$\\{0\\}$ 只有一个点），故同伦等价严格弱于同胚。在同伦等价下不变的是：道路连通分支的个数、$\\pi_1$、可缩性、同调群；会变的是：基数、紧性、有界性（如 $\\mathbb{R}^n\\simeq\\{*\\}$，$\\mathbb{R}^n$ 不紧、无界，而单点空间紧、有界）。"
+      }
+    ],
+    "tags": [
+      "代数拓扑",
+      "同伦",
+      "连续形变",
+      "可缩空间",
+      "同伦不变量"
+    ],
+    "links": [
+      "fundamental-group",
+      "continuity-homeomorphism",
+      "connectedness",
+      "fundamental-group-circle",
+      "covering-space"
+    ]
+  },
+  {
+    "id": "fundamental-group",
+    "title": "基本群",
+    "titleEn": "The Fundamental Group",
+    "branch": "topology",
+    "level": 5,
+    "summary": "以 $x_0$ 为基点的闭路按「相对端点同伦」分类、以道路衔接为乘法构成的群 $\\pi_1(X,x_0)$；它把空间的形状翻译成代数，而且是同伦不变量。",
+    "summaryEn": "The group $\\pi_1(X,x_0)$ of loops based at $x_0$ modulo homotopy relative to the endpoints, with concatenation of paths as the operation. It translates shape into algebra and is a homotopy invariant.",
+    "definition": "固定 $X$ 中一点 $x_0$，称为**基点**。以 $x_0$ 为基点的**闭路**（回路）是连续映射 $\\alpha:[0,1]\\to X$，满足 $\\alpha(0)=\\alpha(1)=x_0$。两个闭路 $\\alpha,\\beta$ 若**相对于端点同伦**，即存在连续 $H:[0,1]\\times[0,1]\\to X$ 使 $H(s,0)=\\alpha(s)$、$H(s,1)=\\beta(s)$ 且 $H(0,t)=H(1,t)=x_0$，就视为同一个元素。把闭路的同伦类记作 $[\\alpha]$，令\n$$\\pi_1(X,x_0)=\\{[\\alpha]:\\alpha\\ \\text{是以}\\ x_0\\ \\text{为基点的闭路}\\}.$$\n\n在 $\\pi_1(X,x_0)$ 上定义**道路的衔接**作为乘法：\n$$(\\alpha\\cdot\\beta)(s)=\\begin{cases}\\alpha(2s),&0\\le s\\le \\tfrac12,\\\\ \\beta(2s-1),&\\tfrac12\\le s\\le 1,\\end{cases}$$\n即先走 $\\alpha$（二倍速）再走 $\\beta$。它与代表元的选取无关（$\\alpha\\simeq\\alpha'$、$\\beta\\simeq\\beta'$ 时 $\\alpha\\cdot\\beta\\simeq\\alpha'\\cdot\\beta'$），并使 $\\pi_1(X,x_0)$ 成为一个**群**：结合律 $([\\alpha][\\beta])[\\gamma]=[\\alpha]([\\beta][\\gamma])$ 成立（两边只是重新分配速度，相差一个重参数化，是同伦 rel 端点的）；单位元是常值闭路 $[e_{x_0}]$（$e_{x_0}(s)\\equiv x_0$）；**逆元是反向道路** $\\bar\\alpha(s)=\\alpha(1-s)$，即 $[\\alpha]^{-1}=[\\bar\\alpha]$，因为先沿 $\\alpha$ 走再原路倒回来可连续缩短成常值闭路。注意这里的乘法是道路的衔接，一般**不交换**，所以基本群一般是非交换群——这正是它比同调群携带更多信息的地方。\n\n基本群依赖基点的选取，但依赖得很轻：若 $\\gamma$ 是从 $x_0$ 到 $x_1$ 的道路，则\n$$\\gamma_\\#:\\pi_1(X,x_0)\\to\\pi_1(X,x_1),\\qquad [\\alpha]\\mapsto[\\bar\\gamma\\cdot\\alpha\\cdot\\gamma]$$\n是同构（先沿 $\\bar\\gamma$ 回到 $x_0$，绕一圈，再沿 $\\gamma$ 到 $x_1$）。因此同一条道路连通分支上任意两个基点的基本群同构；但这个同构依赖 $\\gamma$ 的同伦类，一般**不典范**（没有唯一自然的同构），所以提到 $\\pi_1(X,x_0)$ 时要记住基点，而「$\\pi_1$ 平凡」这样的性质则与基点无关。\n\n最重要的性质是：基本群是**同伦不变量**。连续映射 $f:X\\to Y$ 诱导同态 $f_*:\\pi_1(X,x_0)\\to\\pi_1(Y,f(x_0))$，$[\\alpha]\\mapsto[f\\circ\\alpha]$，满足 $(g\\circ f)_*=g_*\\circ f_*$ 与 $(\\mathrm{id}_X)_*=\\mathrm{id}$；$f$ 是同伦等价时 $f_*$ 是同构。于是计算基本群的通用套路是：把空间换成一个同伦等价的简单模型再算。若 $X$ 道路连通且 $\\pi_1(X,x_0)$ 是平凡群（只有一个元素，常记作 $0$，也写作 $1$），就称 $X$ **单连通**；$\\mathbb{R}^n$、任何凸集、$S^n\\ (n\\ge2)$ 都单连通，而 $S^1$ 不单连通。",
+    "definitionEn": "Fix a point $x_0\\in X$, the **basepoint**. A **loop** based at $x_0$ is a continuous map $\\alpha:[0,1]\\to X$ with $\\alpha(0)=\\alpha(1)=x_0$. Two loops $\\alpha,\\beta$ are identified when they are **homotopic relative to the endpoints**: there is a continuous $H:[0,1]\\times[0,1]\\to X$ with $H(s,0)=\\alpha(s)$, $H(s,1)=\\beta(s)$ and $H(0,t)=H(1,t)=x_0$. Writing $[\\alpha]$ for the class,\n$$\\pi_1(X,x_0)=\\{[\\alpha]:\\alpha\\ \\text{is a loop based at}\\ x_0\\}.$$\n\nThe operation is **concatenation of paths**: $(\\alpha\\cdot\\beta)(s)=\\alpha(2s)$ for $0\\le s\\le\\tfrac12$ and $\\beta(2s-1)$ for $\\tfrac12\\le s\\le1$ — first $\\alpha$, then $\\beta$, both at double speed. It is well defined on classes and turns $\\pi_1(X,x_0)$ into a **group**: associativity holds up to a reparametrisation (a homotopy rel endpoints); the identity is the constant loop $[e_{x_0}]$; the inverse is the **reversed path**, $[\\alpha]^{-1}=[\\bar\\alpha]$ with $\\bar\\alpha(s)=\\alpha(1-s)$, since walking out and retracing one's steps can be contracted to a constant loop. The operation is in general **non-abelian**, which is why $\\pi_1$ carries more information than homology.\n\nChanging the basepoint changes the group only up to isomorphism: for a path $\\gamma$ from $x_0$ to $x_1$ the map $\\gamma_\\#:\\pi_1(X,x_0)\\to\\pi_1(X,x_1)$, $[\\alpha]\\mapsto[\\bar\\gamma\\cdot\\alpha\\cdot\\gamma]$, is an isomorphism. So all basepoints in one path component give isomorphic groups, but the isomorphism depends on the homotopy class of $\\gamma$ and is **not canonical**. Whether $\\pi_1$ is trivial, however, does not depend on the basepoint.\n\nThe crucial property is that $\\pi_1$ is a **homotopy invariant**: a continuous $f:X\\to Y$ induces $f_*:\\pi_1(X,x_0)\\to\\pi_1(Y,f(x_0))$, $[\\alpha]\\mapsto[f\\circ\\alpha]$, with $(g\\circ f)_*=g_*\\circ f_*$ and $(\\mathrm{id}_X)_*=\\mathrm{id}$; if $f$ is a homotopy equivalence then $f_*$ is an isomorphism. Hence the standard strategy: replace the space by a simpler homotopy-equivalent model. A path-connected $X$ with trivial $\\pi_1$ (written $0$, also $1$) is called **simply connected**; $\\mathbb{R}^n$, convex sets and $S^n$ for $n\\ge2$ are simply connected, whereas $S^1$ is not.",
+    "expression": {
+      "text": "π₁(X, x₀)",
+      "symbol": "π₁(X,x₀)",
+      "note": "以 x₀ 为基点的闭路的道路同伦类构成的群，乘法为道路的衔接，逆元为反向道路；一般非交换，且是同伦不变量。",
+      "noteEn": "Group of path-homotopy classes of loops based at x₀, with concatenation as multiplication and the reversed loop as inverse; generally non-abelian, and a homotopy invariant."
+    },
+    "formulas": [
+      {
+        "latex": "\\pi_1(X,x_0)=\\{[\\alpha]:\\alpha\\ \\text{为}\\ x_0\\ \\text{处的闭路}\\},\\qquad [\\alpha]\\cdot[\\beta]=[\\alpha\\cdot\\beta]",
+        "note": "基本群的定义：元素是闭路的**相对端点**道路同伦类，乘法是道路的衔接（先走 α 再走 β）。",
+        "noteEn": "Definition: elements are path-homotopy classes (relative to endpoints) of loops, and the product is concatenation of paths."
+      },
+      {
+        "latex": "(\\alpha\\cdot\\beta)(s)=\\begin{cases}\\alpha(2s),&0\\le s\\le \\tfrac12,\\\\ \\beta(2s-1),&\\tfrac12\\le s\\le 1\\end{cases}",
+        "note": "衔接的具体公式。结合律只能到「同伦 rel 端点」的意义上成立，因为 $(\\alpha\\cdot\\beta)\\cdot\\gamma$ 与 $\\alpha\\cdot(\\beta\\cdot\\gamma)$ 只是速度分配不同（相差一个重参数化）。",
+        "noteEn": "The concatenation formula. Associativity holds only up to homotopy rel endpoints, since the two bracketings differ by a reparametrisation of $[0,1]$."
+      },
+      {
+        "latex": "[\\alpha]^{-1}=[\\bar\\alpha],\\qquad \\bar\\alpha(s)=\\alpha(1-s)",
+        "note": "逆元就是反向道路：先走 $\\alpha$ 再原路倒回，可连续缩短为常值闭路，故 $[\\alpha][\\bar\\alpha]=[e_{x_0}]$。",
+        "noteEn": "The inverse is the reversed path: going along $\\alpha$ and retracing it contracts to a constant loop, so $[\\alpha][\\bar\\alpha]=[e_{x_0}]$."
+      },
+      {
+        "latex": "\\gamma_\\#:\\pi_1(X,x_0)\\xrightarrow{\\ \\cong\\ }\\pi_1(X,x_1),\\qquad [\\alpha]\\mapsto[\\bar\\gamma\\cdot\\alpha\\cdot\\gamma]",
+        "note": "沿连接道路 $\\gamma$（从 $x_0$ 到 $x_1$）搬动基点得到同构；它依赖 $\\gamma$ 的同伦类，因此是「同构但不典范」。",
+        "noteEn": "Moving the basepoint along a path $\\gamma$ from $x_0$ to $x_1$ gives an isomorphism; it depends on the homotopy class of $\\gamma$, so it is an isomorphism that is not canonical."
+      },
+      {
+        "latex": "X\\simeq Y\\ (\\text{道路连通})\\ \\Longrightarrow\\ \\pi_1(X,x_0)\\cong\\pi_1(Y,y_0)",
+        "note": "基本群是同伦不变量，这是计算基本群的主要手段：可缩的空间（$\\mathbb{R}^n$、凸集、单点）基本群都是平凡群 $0$。",
+        "noteEn": "The fundamental group is a homotopy invariant — the main tool for computing it: contractible spaces ($\\mathbb{R}^n$, convex sets, a point) all have trivial $\\pi_1$."
+      }
+    ],
+    "properties": [
+      "群结构：$\\pi_1(X,x_0)$ 在道路衔接下成群；单位元是常值闭路 $[e_{x_0}]$，逆元是反向道路 $[\\bar\\alpha]$；一般**非交换**（例如 $\\pi_1(S^1\\vee S^1)$ 是两个生成元的自由群 $F_2$）。",
+      "只依赖基点所在的道路连通分支：换基点得同构 $[\\alpha]\\mapsto[\\bar\\gamma\\alpha\\gamma]$，但不典范；「$\\pi_1$ 是否平凡」不依赖基点，$\\pi_1$ 是否交换也不依赖基点。",
+      "同伦不变量（且是函子）：连续映射诱导同态 $f_*$，$(g\\circ f)_*=g_*\\circ f_*$、$(\\mathrm{id})_*=\\mathrm{id}$；同伦等价诱导同构。因此可缩空间、$\\mathbb{R}^n$、任何凸集的基本群都平凡。",
+      "单连通：道路连通且 $\\pi_1$ 平凡（记作 $0$，也写作 $1$）。$\\mathbb{R}^n$、凸集、$S^n\\ (n\\ge2)$ 单连通；$S^1$ 不单连通（$\\pi_1(S^1)=\\mathbb{Z}$），挖去一点的平面也不单连通。",
+      "与同调群的关系：$\\pi_1$ 一般非交换、信息更多；把 $\\pi_1$ 交换化（模去换位子群）就得到一阶同调群 $H_1$，即 $H_1(X)\\cong\\pi_1(X)^{\\mathrm{ab}}$（Hurewicz，$X$ 道路连通时成立）。"
+    ],
+    "propertiesEn": [
+      "Group structure: concatenation makes $\\pi_1(X,x_0)$ a group with identity $[e_{x_0}]$ (the constant loop) and inverse $[\\bar\\alpha]$; it is in general **non-abelian** (e.g. $\\pi_1(S^1\\vee S^1)$ is the free group $F_2$ on two generators).",
+      "It depends only on the path component of the basepoint: changing the basepoint gives an isomorphism $[\\alpha]\\mapsto[\\bar\\gamma\\alpha\\gamma]$, but not a canonical one; triviality and commutativity of $\\pi_1$ do not depend on the basepoint.",
+      "It is a homotopy invariant (indeed a functor): a continuous map induces $f_*$ with $(g\\circ f)_*=g_*\\circ f_*$ and $(\\mathrm{id})_*=\\mathrm{id}$, and homotopy equivalences induce isomorphisms. Hence contractible spaces, $\\mathbb{R}^n$ and convex sets have trivial fundamental group.",
+      "Simply connected means path-connected with trivial $\\pi_1$ (denoted $0$, also written $1$). Euclidean spaces, convex sets and $S^n$ for $n\\ge2$ are simply connected; $S^1$ is not ($\\pi_1(S^1)=\\mathbb{Z}$), nor is the punctured plane.",
+      "Relation to homology: $\\pi_1$ is generally non-abelian and richer; abelianising it (dividing by the commutator subgroup) gives the first homology group, $H_1(X)\\cong\\pi_1(X)^{\\mathrm{ab}}$ (Hurewicz, for path-connected $X$)."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.8,
+        3.4
+      ],
+      "yRange": [
+        -2.6,
+        2.6
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.0,
+              0.0
+            ],
+            [
+              1.964,
+              0.379
+            ],
+            [
+              1.857,
+              0.743
+            ],
+            [
+              1.683,
+              1.081
+            ],
+            [
+              1.447,
+              1.38
+            ],
+            [
+              1.16,
+              1.629
+            ],
+            [
+              0.831,
+              1.819
+            ],
+            [
+              0.472,
+              1.944
+            ],
+            [
+              0.095,
+              1.998
+            ],
+            [
+              -0.285,
+              1.98
+            ],
+            [
+              -0.654,
+              1.89
+            ],
+            [
+              -1.0,
+              1.732
+            ],
+            [
+              -1.31,
+              1.511
+            ],
+            [
+              -1.572,
+              1.236
+            ],
+            [
+              -1.778,
+              0.916
+            ],
+            [
+              -1.919,
+              0.563
+            ],
+            [
+              -1.991,
+              0.19
+            ],
+            [
+              -1.991,
+              -0.19
+            ],
+            [
+              -1.919,
+              -0.563
+            ],
+            [
+              -1.778,
+              -0.916
+            ],
+            [
+              -1.572,
+              -1.236
+            ],
+            [
+              -1.31,
+              -1.511
+            ],
+            [
+              -1.0,
+              -1.732
+            ],
+            [
+              -0.654,
+              -1.89
+            ],
+            [
+              -0.285,
+              -1.98
+            ],
+            [
+              0.095,
+              -1.998
+            ],
+            [
+              0.472,
+              -1.944
+            ],
+            [
+              0.831,
+              -1.819
+            ],
+            [
+              1.16,
+              -1.629
+            ],
+            [
+              1.447,
+              -1.38
+            ],
+            [
+              1.683,
+              -1.081
+            ],
+            [
+              1.857,
+              -0.743
+            ],
+            [
+              1.964,
+              -0.379
+            ],
+            [
+              2.0,
+              -0.0
+            ]
+          ],
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.07)"
+        },
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 0.22,
+          "color": "rgba(230,236,255,0.9)",
+          "fill": "rgba(14,18,40,0.95)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.0,
+              0.0
+            ],
+            [
+              2.104,
+              0.01
+            ],
+            [
+              2.204,
+              0.039
+            ],
+            [
+              2.297,
+              0.087
+            ],
+            [
+              2.38,
+              0.152
+            ],
+            [
+              2.448,
+              0.231
+            ],
+            [
+              2.5,
+              0.322
+            ],
+            [
+              2.534,
+              0.42
+            ],
+            [
+              2.549,
+              0.524
+            ],
+            [
+              2.544,
+              0.628
+            ],
+            [
+              2.52,
+              0.73
+            ],
+            [
+              2.476,
+              0.825
+            ],
+            [
+              2.416,
+              0.91
+            ],
+            [
+              2.34,
+              0.982
+            ],
+            [
+              2.252,
+              1.039
+            ],
+            [
+              2.155,
+              1.078
+            ],
+            [
+              2.052,
+              1.098
+            ],
+            [
+              1.948,
+              1.098
+            ],
+            [
+              1.845,
+              1.078
+            ],
+            [
+              1.748,
+              1.039
+            ],
+            [
+              1.66,
+              0.982
+            ],
+            [
+              1.584,
+              0.91
+            ],
+            [
+              1.524,
+              0.825
+            ],
+            [
+              1.48,
+              0.73
+            ],
+            [
+              1.456,
+              0.628
+            ],
+            [
+              1.451,
+              0.524
+            ],
+            [
+              1.466,
+              0.42
+            ],
+            [
+              1.5,
+              0.322
+            ],
+            [
+              1.552,
+              0.231
+            ],
+            [
+              1.62,
+              0.152
+            ],
+            [
+              1.703,
+              0.087
+            ],
+            [
+              1.796,
+              0.039
+            ],
+            [
+              1.896,
+              0.01
+            ],
+            [
+              2.0,
+              0.0
+            ]
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.661,
+            1.167
+          ],
+          "to": [
+            1.167,
+            1.661
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            2.0,
+            0.0
+          ],
+          "label": "x₀",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.05,
+            -0.62
+          ],
+          "text": "挖去的点"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.1,
+            -2.3
+          ],
+          "text": "绕洞一圈：不可收缩"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            1.45
+          ],
+          "text": "不绕洞：可收缩"
+        }
+      ],
+      "title": "基本群：以 x₀ 为基点的闭路按相对端点同伦分类"
+    },
+    "examples": [
+      {
+        "problem": "证明反向道路给出逆元：对任意以 $x_0$ 为基点的闭路 $\\alpha$，恒有 $\\alpha\\cdot\\bar\\alpha\\simeq e_{x_0}\\ \\text{rel}\\ \\{0,1\\}$，其中 $\\bar\\alpha(s)=\\alpha(1-s)$。",
+        "solution": "令 $g_t(s)=2s(1-t)$（$0\\le s\\le\\tfrac12$），$g_t(s)=2(1-t)(1-s)$（$\\tfrac12\\le s\\le1$）：两段在 $s=\\tfrac12$ 处都等于 $1-t$，故 $g_t$ 连续，且 $g_t(0)=g_t(1)=0$。取 $H(s,t)=\\alpha(g_t(s))$。则 $H(0,t)=H(1,t)=\\alpha(0)=x_0$；当 $t=0$ 时 $g_0(s)=2s$（$s\\le\\tfrac12$）、$2-2s$（$s\\ge\\tfrac12$），恰是 $(\\alpha\\cdot\\bar\\alpha)(s)$，故 $H(s,0)=(\\alpha\\cdot\\bar\\alpha)(s)$；当 $t=1$ 时 $g_1\\equiv0$，$H(s,1)=x_0$。于是 $H$ 是 rel $\\{0,1\\}$ 的同伦，$[\\alpha][\\bar\\alpha]=[e_{x_0}]$，即 $[\\alpha]^{-1}=[\\bar\\alpha]$。"
+      },
+      {
+        "problem": "设 $f:X\\to Y$ 连续，$\\alpha,\\beta$ 是 $X$ 中以 $x_0$ 为基点的闭路且 $\\alpha\\simeq\\beta\\ \\text{rel}\\ \\{0,1\\}$。证明 $f_*([\\alpha])=f_*([\\beta])$，即 $f_*$ 良定义；并验证 $(g\\circ f)_*=g_*\\circ f_*$。",
+        "solution": "设 $H$ 是 rel $\\{0,1\\}$ 的同伦，$H(\\cdot,0)=\\alpha$、$H(\\cdot,1)=\\beta$、$H(0,t)=H(1,t)=x_0$。令 $K=f\\circ H$，它连续，且 $K(\\cdot,0)=f\\circ\\alpha$、$K(\\cdot,1)=f\\circ\\beta$、$K(0,t)=K(1,t)=f(x_0)$，所以 $f\\circ\\alpha\\simeq f\\circ\\beta\\ \\text{rel}\\ \\{0,1\\}$，即 $f_*([\\alpha])=[f\\circ\\alpha]=[f\\circ\\beta]=f_*([\\beta])$，良定义。同态性：$f_*(\\alpha\\cdot\\beta)$ 的闭路是 $f\\circ(\\alpha\\cdot\\beta)$，它在 $s\\le\\tfrac12$ 时等于 $(f\\circ\\alpha)(2s)$、在 $s\\ge\\tfrac12$ 时等于 $(f\\circ\\beta)(2s-1)$，正是 $(f\\circ\\alpha)\\cdot(f\\circ\\beta)$，故 $f_*([\\alpha][\\beta])=f_*([\\alpha])f_*([\\beta])$。于是 $((g\\circ f)\\circ\\alpha)=g\\circ(f\\circ\\alpha)$ 直接给出 $(g\\circ f)_*=g_*\\circ f_*$。"
+      }
+    ],
+    "tags": [
+      "代数拓扑",
+      "基本群",
+      "闭路",
+      "同伦不变量",
+      "单连通",
+      "基点"
+    ],
+    "links": [
+      "homotopy",
+      "fundamental-group-circle",
+      "covering-space",
+      "seifert-van-kampen",
+      "connectedness"
+    ]
+  },
+  {
+    "id": "fundamental-group-circle",
+    "title": "圆周的基本群",
+    "titleEn": "The Fundamental Group of the Circle",
+    "branch": "topology",
+    "level": 5,
+    "summary": "$\\pi_1(S^1,x_0)\\cong\\mathbb{Z}$：闭路的同伦类由「绕几圈」这个整数完全决定。这是代数拓扑的第一个非平凡定理，证明靠覆叠空间 $\\mathbb{R}\\to S^1$ 的提升性质。",
+    "summaryEn": "$\\pi_1(S^1,x_0)\\cong\\mathbb{Z}$: the homotopy class of a loop is completely determined by an integer, its winding number. This is the first non-trivial theorem of algebraic topology, proved with the lifting properties of the covering $\\mathbb{R}\\to S^1$.",
+    "definition": "圆周 $S^1=\\{z\\in\\mathbb{C}:|z|=1\\}$ 的基本群是代数拓扑中第一个真正非平凡的例子：\n$$\\pi_1(S^1,x_0)\\cong\\mathbb{Z}\\qquad(x_0=1).$$\n同构由**圈数（绕数）**给出。闭路 $\\omega:[0,1]\\to S^1$（$\\omega(0)=\\omega(1)=1$）可写成 $\\omega(s)=e^{2\\pi i\\,\\Theta(s)}$，其中 $\\Theta:[0,1]\\to\\mathbb{R}$ 连续；$\\Theta$ 就是 $\\omega$ 在覆叠 $p:\\mathbb{R}\\to S^1$、$p(t)=e^{2\\pi it}$ 之下的**提升**（把圆周「展开」成直线的角度函数）。定义\n$$\\deg\\omega=\\Theta(1)-\\Theta(0)\\in\\mathbb{Z},$$\n它与提升的选取无关（换一个提升只能整体平移一个整数 $n$，差被端点相减消掉），并且只依赖 $\\omega$ 的同伦类。于是 $[\\omega]\\mapsto\\deg\\omega$ 给出同构 $\\pi_1(S^1,1)\\cong\\mathbb{Z}$，生成元是绕一圈的闭路 $\\omega_1(s)=e^{2\\pi i s}$，且 $[\\omega_n]=[\\omega_1]^n$（$\\omega_n(s)=e^{2\\pi i n s}$）。\n\n为什么圈数只依赖同伦类？这正是**覆叠空间的提升性质**在起作用。设 $H:[0,1]\\times[0,1]\\to S^1$ 是 $\\omega$ 到 $\\Omega$ 的同伦 rel 端点，取它的提升 $\\widetilde H$（$p\\circ\\widetilde H=H$，$\\widetilde H(0,0)=0$）：由**同伦提升的唯一性**，$\\widetilde H$ 存在且唯一。函数 $t\\mapsto\\widetilde H(1,t)$ 连续，且因为 $H(1,t)=1$ 恒成立，它取值全在 $\\mathbb{Z}$ 中；而 $[0,1]$ 连通、$\\mathbb{Z}$ 离散，故它必为常数，于是 $\\deg\\omega=\\widetilde H(1,0)=\\widetilde H(1,1)=\\deg\\Omega$。反过来，若 $\\omega,\\Omega$ 的圈数相同，把它们的提升 $\\Theta,\\Xi$（都从 $0$ 出发，此时 $\\Theta(1)=\\Xi(1)=n$）做直线同伦 $\\widetilde H(s,t)=(1-t)\\Theta(s)+t\\,\\Xi(s)$，再令 $H=p\\circ\\widetilde H$：由于 $\\widetilde H(0,t)=0$、$\\widetilde H(1,t)=n$，$H$ 是 rel 端点的同伦，故 $\\omega\\simeq\\Omega$。合起来得到一条干净的结论：**两个以 $1$ 为基点的闭路同伦（rel 端点）当且仅当它们的圈数相同**——这就是日常说法「绕了几圈」的严格版本。\n\n群运算与圈数相容：$\\deg(\\alpha\\cdot\\beta)=\\deg\\alpha+\\deg\\beta$（衔接处的提升值相加）、$\\deg\\bar\\alpha=-\\deg\\alpha$，所以 $\\deg$ 是群同态，$\\pi_1(S^1,1)$ 与 $(\\mathbb{Z},+)$ 完全一致。$\\pi_1(S^1)=\\mathbb{Z}\\ne0$ 立刻说明圆周不能收缩成一点；同伦等价地，$\\mathbb{R}^2\\setminus\\{0\\}$ 的基本群也是 $\\mathbb{Z}$，它不是单连通的（而 $\\mathbb{R}^2$ 是单连通的）。在复分析里，这个整数就是闭曲线关于点的**旋转指标**（index）：留数定理、辐角原理用的正是它。",
+    "definitionEn": "The fundamental group of the circle $S^1=\\{z\\in\\mathbb{C}:|z|=1\\}$ is the first genuinely non-trivial example of algebraic topology:\n$$\\pi_1(S^1,x_0)\\cong\\mathbb{Z}\\qquad(x_0=1).$$\nThe isomorphism is given by the **winding number**. A loop $\\omega:[0,1]\\to S^1$ with $\\omega(0)=\\omega(1)=1$ can be written $\\omega(s)=e^{2\\pi i\\,\\Theta(s)}$ with $\\Theta:[0,1]\\to\\mathbb{R}$ continuous; $\\Theta$ is the **lift** of $\\omega$ under the covering $p:\\mathbb{R}\\to S^1$, $p(t)=e^{2\\pi it}$, i.e. an angle function that unrolls the circle onto the line. Define $\\deg\\omega=\\Theta(1)-\\Theta(0)\\in\\mathbb{Z}$; it is independent of the chosen lift (another lift differs by a constant integer, which cancels in the difference) and depends only on the homotopy class of $\\omega$. So $[\\omega]\\mapsto\\deg\\omega$ is an isomorphism $\\pi_1(S^1,1)\\cong\\mathbb{Z}$, with generator the once-round loop $\\omega_1(s)=e^{2\\pi is}$ and $[\\omega_n]=[\\omega_1]^n$ for $\\omega_n(s)=e^{2\\pi i n s}$.\n\nWhy does the degree depend only on the homotopy class? Here the **lifting property** of covering spaces does the work. Let $H:[0,1]\\times[0,1]\\to S^1$ be a homotopy rel endpoints from $\\omega$ to $\\Omega$ and let $\\widetilde H$ be its lift ($p\\circ\\widetilde H=H$, $\\widetilde H(0,0)=0$), which exists and is unique by homotopy lifting. The map $t\\mapsto\\widetilde H(1,t)$ is continuous and integer-valued (since $H(1,t)=1$), while $[0,1]$ is connected and $\\mathbb{Z}$ discrete, so it is constant; hence $\\deg\\omega=\\deg\\Omega$. Conversely, if $\\omega,\\Omega$ have the same degree, lift both from $0$ to get $\\Theta,\\Xi$ with $\\Theta(1)=\\Xi(1)=n$, form the straight-line homotopy $\\widetilde H(s,t)=(1-t)\\Theta(s)+t\\,\\Xi(s)$ in $\\mathbb{R}$, and set $H=p\\circ\\widetilde H$: since $\\widetilde H(0,t)=0$ and $\\widetilde H(1,t)=n$, this is a homotopy rel endpoints, so $\\omega\\simeq\\Omega$. Together: **two loops based at $1$ are homotopic rel endpoints iff they have the same winding number** — the rigorous form of “how many times did it go around”.\n\nThe degree is compatible with the group law: $\\deg(\\alpha\\cdot\\beta)=\\deg\\alpha+\\deg\\beta$ and $\\deg\\bar\\alpha=-\\deg\\alpha$, so it is an isomorphism onto $(\\mathbb{Z},+)$. Since $\\pi_1(S^1)=\\mathbb{Z}\\ne0$, the circle is not contractible; equivalently $\\pi_1(\\mathbb{R}^2\\setminus\\{0\\})\\cong\\mathbb{Z}$, so the punctured plane is not simply connected (whereas $\\mathbb{R}^2$ is). In complex analysis this integer is the **index** of a closed curve about a point, the quantity behind the argument principle and the residue theorem.",
+    "formulas": [
+      {
+        "latex": "\\pi_1(S^1,1)\\cong\\mathbb{Z},\\qquad [\\omega]\\longmapsto\\deg\\omega=\\Theta(1)-\\Theta(0)",
+        "note": "第一个非平凡定理：圆周的基本群是整数加群，同构由圈数（提升端点之差）给出。",
+        "noteEn": "The first non-trivial theorem: the fundamental group of the circle is $\\mathbb{Z}$, the isomorphism being given by the winding number, i.e. the difference of the endpoints of a lift."
+      },
+      {
+        "latex": "\\omega(s)=e^{2\\pi i\\,\\Theta(s)}=p(\\Theta(s)),\\qquad p:\\mathbb{R}\\to S^1,\\ p(t)=e^{2\\pi it}",
+        "note": "把闭路写成提升 $\\Theta$（角度函数）与覆叠映射的复合；$\\Theta$ 的存在唯一性来自道路提升性质，是全部论证的基础。",
+        "noteEn": "Writing the loop as the covering map composed with a lift $\\Theta$ (an angle function); existence and uniqueness of $\\Theta$ come from path lifting and underlie the whole proof."
+      },
+      {
+        "latex": "\\omega_n(s)=e^{2\\pi i\\,n s},\\qquad [\\omega_n]=[\\omega_1]^{n},\\qquad \\deg\\omega_n=n",
+        "note": "绕 $n$ 圈的闭路：以 $[\\omega_1]$ 为生成元时它就是 $n$ 次幂，圈数正是 $n$。$n<0$ 对应反向绕圈。",
+        "noteEn": "The loop winding $n$ times: it is the $n$-th power of the generator $[\\omega_1]$ and has degree $n$; negative $n$ means winding in the opposite direction."
+      },
+      {
+        "latex": "\\deg(\\alpha\\cdot\\beta)=\\deg\\alpha+\\deg\\beta,\\qquad \\deg\\bar\\alpha=-\\deg\\alpha",
+        "note": "圈数把「衔接」翻译成「加法」：这正是 $\\pi_1(S^1,1)\\cong(\\mathbb{Z},+)$ 是同构的原因。",
+        "noteEn": "Winding number turns concatenation into addition — precisely why $\\pi_1(S^1,1)\\cong(\\mathbb{Z},+)$ is an isomorphism."
+      },
+      {
+        "latex": "[\\alpha]=[\\beta]\\ \\text{rel}\\ \\{0,1\\}\\iff \\deg\\alpha=\\deg\\beta",
+        "note": "圈数是闭路同伦类的**完全**不变量：两个闭路同伦当且仅当圈数相同。这个「当且仅当」两个方向分别用同伦提升与直线同伦证明。",
+        "noteEn": "Winding number is a complete invariant of homotopy classes rel endpoints: two loops are homotopic iff their winding numbers agree. The two directions use homotopy lifting and the straight-line homotopy respectively."
+      }
+    ],
+    "properties": [
+      "$\\pi_1(S^1,1)\\cong\\mathbb{Z}$ 是无限循环群，生成元是绕一圈的闭路 $\\omega_1$；每个闭路的同伦类由圈数唯一决定，圈数为 $0$ 正是可收缩（零伦）的闭路。",
+      "证明工具是覆叠空间：$p:\\mathbb{R}\\to S^1$ 的道路提升与同伦提升把「同伦分类」变成「提升端点之差」，这是覆叠空间理论的第一个应用，也是代数拓扑的第一个非平凡定理。",
+      "圈数是同伦不变量：连续形变（rel 端点）不改变圈数，并且圈数相同就同伦，所以「绕几圈」是闭路的完全不变量；它还是复分析中闭曲线的旋转指标。",
+      "同伦等价的应用：$\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$（包含 $i$ 与径向投影 $x\\mapsto x/|x|$ 互为同伦逆），故 $\\pi_1(\\mathbb{R}^2\\setminus\\{0\\})\\cong\\mathbb{Z}$，挖去一点的平面不单连通；而 $\\mathbb{R}^2$ 是单连通的。",
+      "与高维对照：$\\pi_1(S^1)=\\mathbb{Z}\\ne0$，但 $n\\ge2$ 时 $\\pi_1(S^n)=0$（用范坎彭定理把球面拆成两个可缩的开半球）。维数越高、基本群越「平凡」，$S^1$ 是唯一的例外。"
+    ],
+    "propertiesEn": [
+      "$\\pi_1(S^1,1)\\cong\\mathbb{Z}$ is infinite cyclic with generator the once-round loop $\\omega_1$; the homotopy class of a loop is determined by its winding number, and winding number $0$ is exactly the null-homotopic case.",
+      "The proof uses covering spaces: path lifting and homotopy lifting for $p:\\mathbb{R}\\to S^1$ turn “classify loops up to homotopy” into “compare the endpoints of lifts”. This is the first application of covering-space theory and the first non-trivial theorem of algebraic topology.",
+      "The winding number is a homotopy invariant — continuous deformation rel endpoints cannot change it — and conversely equal winding numbers imply homotopy; so it is a complete invariant, the index of a closed curve in complex analysis.",
+      "Homotopy-equivalence application: $\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$ (the inclusion and the radial projection $x\\mapsto x/|x|$ are homotopy inverses), hence $\\pi_1(\\mathbb{R}^2\\setminus\\{0\\})\\cong\\mathbb{Z}$ and the punctured plane is not simply connected, while $\\mathbb{R}^2$ is.",
+      "Contrast with higher dimensions: $\\pi_1(S^1)=\\mathbb{Z}\\ne0$, whereas $\\pi_1(S^n)=0$ for $n\\ge2$ (van Kampen, using two contractible open hemispheres). The higher-dimensional spheres are the “simpler” ones; $S^1$ is the exception."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.4,
+        2.4
+      ],
+      "yRange": [
+        -2.3,
+        2.3
+      ],
+      "elements": [
+        {
+          "type": "circle",
+          "cx": 0,
+          "cy": 0,
+          "r": 1.4,
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.05)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1.4,
+              0.0
+            ],
+            [
+              1.302,
+              0.539
+            ],
+            [
+              1.003,
+              1.003
+            ],
+            [
+              0.547,
+              1.319
+            ],
+            [
+              0.0,
+              1.438
+            ],
+            [
+              -0.554,
+              1.337
+            ],
+            [
+              -1.03,
+              1.03
+            ],
+            [
+              -1.354,
+              0.561
+            ],
+            [
+              -1.475,
+              0.0
+            ],
+            [
+              -1.371,
+              -0.568
+            ],
+            [
+              -1.056,
+              -1.056
+            ],
+            [
+              -0.575,
+              -1.389
+            ],
+            [
+              -0.0,
+              -1.512
+            ],
+            [
+              0.582,
+              -1.406
+            ],
+            [
+              1.083,
+              -1.083
+            ],
+            [
+              1.423,
+              -0.59
+            ],
+            [
+              1.55,
+              -0.0
+            ],
+            [
+              1.441,
+              0.597
+            ],
+            [
+              1.109,
+              1.109
+            ],
+            [
+              0.604,
+              1.458
+            ],
+            [
+              0.0,
+              1.587
+            ],
+            [
+              -0.611,
+              1.475
+            ],
+            [
+              -1.136,
+              1.136
+            ],
+            [
+              -1.493,
+              0.618
+            ],
+            [
+              -1.625,
+              0.0
+            ],
+            [
+              -1.51,
+              -0.625
+            ],
+            [
+              -1.162,
+              -1.162
+            ],
+            [
+              -0.633,
+              -1.527
+            ],
+            [
+              -0.0,
+              -1.662
+            ],
+            [
+              0.64,
+              -1.545
+            ],
+            [
+              1.189,
+              -1.189
+            ],
+            [
+              1.562,
+              -0.647
+            ],
+            [
+              1.7,
+              -0.0
+            ],
+            [
+              1.579,
+              0.654
+            ],
+            [
+              1.215,
+              1.215
+            ],
+            [
+              0.661,
+              1.597
+            ],
+            [
+              0.0,
+              1.737
+            ],
+            [
+              -0.669,
+              1.614
+            ],
+            [
+              -1.242,
+              1.242
+            ],
+            [
+              -1.631,
+              0.676
+            ],
+            [
+              -1.775,
+              0.0
+            ],
+            [
+              -1.649,
+              -0.683
+            ],
+            [
+              -1.268,
+              -1.268
+            ],
+            [
+              -0.69,
+              -1.666
+            ],
+            [
+              -0.0,
+              -1.812
+            ],
+            [
+              0.697,
+              -1.683
+            ],
+            [
+              1.295,
+              -1.295
+            ],
+            [
+              1.701,
+              -0.704
+            ],
+            [
+              1.85,
+              -0.0
+            ]
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.85,
+            0.0
+          ],
+          "to": [
+            1.4,
+            0.0
+          ],
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.0,
+            0.0
+          ],
+          "label": "",
+          "color": "#e6ecff",
+          "r": 3
+        },
+        {
+          "type": "point",
+          "at": [
+            1.4,
+            0.0
+          ],
+          "label": "x₀",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.05,
+            1.75
+          ],
+          "text": "圆周 S¹"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.0,
+            -1.85
+          ],
+          "text": "闭路沿箭头绕 3 圈后再回到 x₀"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.0,
+            -2.12
+          ],
+          "text": "圈数 = 3（提升 θ 从 0 走到 6π）"
+        }
+      ],
+      "title": "绕 n 圈对应整数 n：π₁(S¹) 是整数加群（图中绕 3 圈）"
+    },
+    "examples": [
+      {
+        "problem": "设 $\\omega(s)=e^{2\\pi i s^2}$（$s\\in[0,1]$）。求它的圈数，并判断它与 $\\omega_1(s)=e^{2\\pi i s}$ 是否同伦 rel 端点。",
+        "solution": "取 $\\Theta(s)=s^2$，它连续且 $e^{2\\pi i\\Theta(s)}=\\omega(s)$，故 $\\Theta$ 是 $\\omega$ 从 $0$ 出发的提升（$\\Theta(0)=0$）。于是 $\\deg\\omega=\\Theta(1)-\\Theta(0)=1-0=1$。又 $\\deg\\omega_1=1$。圈数相同，由「圈数相同 $\\iff$ 同伦 rel 端点」得 $\\omega\\simeq\\omega_1\\ \\text{rel}\\ \\{0,1\\}$。（注意 $\\omega$ 的角速度不均匀——$\\Theta$ 不是线性的——但同伦只要求连续形变，不要求速度一致。）"
+      },
+      {
+        "problem": "证明 $\\omega_1$ 不是零伦的（不与常值闭路同伦 rel 端点），并说明 $\\mathbb{R}^2\\setminus\\{0\\}$ 不是单连通的、而 $\\pi_1(\\mathbb{R}^2\\setminus\\{0\\})\\cong\\mathbb{Z}$。",
+        "solution": "常值闭路 $e(s)\\equiv1$ 从 $0$ 出发的提升是 $\\Theta_e\\equiv0$，故 $\\deg e=0$；而 $\\deg\\omega_1=1\\ne0$，由圈数是不变量得 $[\\omega_1]\\ne[e]$，$\\omega_1$ 不可缩。再看 $\\mathbb{R}^2\\setminus\\{0\\}$：包含 $i:S^1\\hookrightarrow\\mathbb{R}^2\\setminus\\{0\\}$ 与径向投影 $r(x)=x/|x|$ 满足 $r\\circ i=\\mathrm{id}_{S^1}$，且 $H(x,t)=(1-t)x+t\\,x/|x|$（全程 $\\ne0$）给出 $i\\circ r\\simeq\\mathrm{id}_{\\mathbb{R}^2\\setminus\\{0\\}}$，所以两者同伦等价，$\\pi_1(\\mathbb{R}^2\\setminus\\{0\\})\\cong\\pi_1(S^1)\\cong\\mathbb{Z}\\ne0$，它不是单连通的（$\\mathbb{R}^2$ 单连通正是因为可以补上原点）。"
+      }
+    ],
+    "tags": [
+      "代数拓扑",
+      "圆周",
+      "圈数",
+      "覆叠空间",
+      "提升",
+      "旋转指标"
+    ],
+    "links": [
+      "fundamental-group",
+      "covering-space",
+      "homotopy",
+      "argument-principle",
+      "monodromy-theorem"
+    ]
+  },
+  {
+    "id": "covering-space",
+    "title": "覆叠空间",
+    "titleEn": "Covering Spaces",
+    "branch": "topology",
+    "level": 5,
+    "summary": "局部同胚、整体多对一的空间 $p:E\\to B$：每点在底空间上有被均匀覆叠的邻域。它的道路提升与同伦提升性质把基本群的计算变成「展开成直线」的问题。",
+    "summaryEn": "A locally homeomorphic, globally many-to-one map $p:E\\to B$: every point of the base has an evenly covered neighbourhood. Its path-lifting and homotopy-lifting properties reduce questions about $\\pi_1$ to unrolling the base onto a line.",
+    "definition": "设 $p:E\\to B$ 是连续满射。若每点 $b\\in B$ 都有开邻域 $U$，使\n$$p^{-1}(U)=\\bigsqcup_{\\alpha}V_\\alpha\\quad(\\text{不交并}),\\qquad p|_{V_\\alpha}:V_\\alpha\\to U\\ \\text{是同胚},$$\n就称 $p$ 是**覆叠映射**，$E$ 是 $B$ 的**覆叠空间**；$U$ 叫被**均匀覆叠**的邻域，各 $V_\\alpha$ 叫**叶**。于是每个 $e\\in E$ 都有一个邻域被同胚映到 $B$ 的开集上——覆叠映射是**局部同胚**；但它一般**不是**整体同胚：$B$ 连通时纤维 $p^{-1}(b)$ 的基数（**重数**，叶片数）是常数，重数 $>1$ 时 $p$ 就不是单射。标准例子是 $p:\\mathbb{R}\\to S^1$，$p(t)=e^{2\\pi it}$：纤维为 $t+\\mathbb{Z}$，在圆周上不含 $1$ 的短弧上每叶都同胚地映到该弧，但 $\\mathbb{R}$ 与 $S^1$ 整体不同胚。\n\n覆叠空间之所以有用，是因为两条**提升性质**：\n- **道路提升**：给定 $e_0\\in p^{-1}(b_0)$ 与道路 $\\gamma:[0,1]\\to B$（$\\gamma(0)=b_0$），存在**唯一**道路 $\\tilde\\gamma:[0,1]\\to E$ 使 $\\tilde\\gamma(0)=e_0$ 且 $p\\circ\\tilde\\gamma=\\gamma$。\n- **同伦提升**：给定 $H:[0,1]\\times[0,1]\\to B$ 与满足 $p\\circ\\widetilde H(\\cdot,0)=H(\\cdot,0)$ 的初始提升 $\\widetilde H(\\cdot,0)$，存在**唯一**的 $\\widetilde H:[0,1]\\times[0,1]\\to E$ 使 $p\\circ\\widetilde H=H$。即覆叠映射是**纤维化**：任何同伦都能唯一提升。\n由唯一性立即得到：同一个 $b_0$ 处出发的两个提升若在某一点相等，则处处相等（比较 $\\tilde\\gamma$ 与 $\\tilde\\gamma'$ 即可）。这两条性质是计算基本群的机器：$\\pi_1(S^1)=\\mathbb{Z}$ 的证明、以及复分析中的单值性定理都靠它。\n\n**Galois 对应**：设 $B$ 道路连通、局部道路连通。则 $B$ 的（总空间连通的）覆叠空间与 $\\pi_1(B,b_0)$ 的**子群**对应：覆叠 $p:(E,e_0)\\to(B,b_0)$ 对应子群 $H=p_*(\\pi_1(E,e_0))\\le\\pi_1(B,b_0)$，而（不指定基点的）同构类对应子群的共轭类。覆叠的重数等于指数 $[\\pi_1(B,b_0):H]$（可以是无穷）。覆叠称为**正规覆叠（Galois 覆叠）**，若 $H$ 是正规子群，等价地说**覆叠变换群**\n$$\\mathrm{Deck}(p)=\\{\\varphi:E\\to E\\ \\text{同胚}:p\\circ\\varphi=p\\}$$\n在每条纤维上传递（自由且传递）。一般地 $\\mathrm{Deck}(p)\\cong N(H)/H$，其中 $N(H)$ 是 $H$ 的正规化子；正规覆叠时 $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)/H$。对应 $H=1$ 的覆叠（总空间单连通）叫**万有覆叠**：它覆叠一切覆叠（对任何覆叠 $q:Y\\to B$ 都存在映射 $E\\to Y$ 使相应的三角形交换），并且 $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$。万有覆叠存在当且仅当 $B$ 道路连通、局部道路连通且**半局部单连通**——最后这条条件常被漏掉。\n\n**提升判据**：设 $Y$ 道路连通、局部道路连通，$f:(Y,y_0)\\to(B,b_0)$ 连续，$p:(E,e_0)\\to(B,b_0)$ 是覆叠，则 $f$ 存在提升 $\\tilde f:(Y,y_0)\\to(E,e_0)$（即 $p\\circ\\tilde f=f$）**当且仅当** $f_*(\\pi_1(Y,y_0))\\subseteq p_*(\\pi_1(E,e_0))$，且提升唯一。常见例子：$\\mathbb{R}\\to S^1$ 是万有覆叠（$\\mathrm{Deck}\\cong\\mathbb{Z}$，由 $t\\mapsto t+n$ 生成）；$S^1\\to S^1$，$z\\mapsto z^n$ 是 $n$ 重覆叠，$H=n\\mathbb{Z}$；$\\mathbb{C}\\to\\mathbb{C}\\setminus\\{0\\}$，$z\\mapsto e^z$ 是万有覆叠（因为 $\\mathbb{C}\\setminus\\{0\\}\\simeq S^1$）；$S^n\\to\\mathbb{RP}^n$（$n\\ge2$）是二重的万有覆叠（$S^n$ 单连通）。",
+    "definitionEn": "Let $p:E\\to B$ be a continuous surjection. If every $b\\in B$ has an open neighbourhood $U$ with\n$$p^{-1}(U)=\\bigsqcup_{\\alpha}V_\\alpha\\quad(\\text{disjoint union}),\\qquad p|_{V_\\alpha}:V_\\alpha\\to U\\ \\text{a homeomorphism},$$\nthen $p$ is a **covering map** and $E$ is a **covering space** of $B$; $U$ is **evenly covered** and the $V_\\alpha$ are **sheets**. Thus every $e\\in E$ has a neighbourhood mapped homeomorphically onto an open set of $B$ — a covering map is a **local homeomorphism** — but it is in general **not** a global homeomorphism: when $B$ is connected the cardinality of the fibre $p^{-1}(b)$ (the **number of sheets**) is constant, and it exceeds $1$ exactly when $p$ is not injective. The standard example is $p:\\mathbb{R}\\to S^1$, $p(t)=e^{2\\pi it}$, with fibres $t+\\mathbb{Z}$: locally a homeomorphism, globally far from one.\n\nThe power of covering spaces comes from two **lifting properties**:\n- **Path lifting:** given $e_0\\in p^{-1}(b_0)$ and a path $\\gamma:[0,1]\\to B$ with $\\gamma(0)=b_0$, there is a **unique** path $\\tilde\\gamma:[0,1]\\to E$ with $\\tilde\\gamma(0)=e_0$ and $p\\circ\\tilde\\gamma=\\gamma$.\n- **Homotopy lifting:** given $H:[0,1]\\times[0,1]\\to B$ and an initial lift $\\widetilde H(\\cdot,0)$ with $p\\circ\\widetilde H(\\cdot,0)=H(\\cdot,0)$, there is a **unique** $\\widetilde H:[0,1]\\times[0,1]\\to E$ with $p\\circ\\widetilde H=H$. So covering maps are **fibrations**.\nUniqueness also gives: two lifts starting at the same point agree everywhere.\n\n**Galois correspondence:** if $B$ is path-connected and locally path-connected, then covering spaces of $B$ with connected total space correspond to **subgroups** $H=p_*(\\pi_1(E,e_0))\\le\\pi_1(B,b_0)$, with isomorphism classes corresponding to conjugacy classes of subgroups. The number of sheets equals the index $[\\pi_1(B,b_0):H]$ (possibly infinite). A covering is **normal (Galois)** if $H$ is normal, equivalently if its **deck transformation group** $\\mathrm{Deck}(p)=\\{\\varphi:E\\to E\\ \\text{a homeomorphism}:p\\circ\\varphi=p\\}$ acts transitively on each fibre. In general $\\mathrm{Deck}(p)\\cong N(H)/H$ with $N(H)$ the normaliser; for a normal covering $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)/H$. The covering with $H=1$ (simply connected total space) is the **universal cover**: it covers every other covering and $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$. A universal cover exists iff $B$ is path-connected, locally path-connected and **semilocally simply connected** — a hypothesis that is often forgotten.\n\n**Lifting criterion:** for a path-connected, locally path-connected $Y$ and a covering $p:(E,e_0)\\to(B,b_0)$, a map $f:(Y,y_0)\\to(B,b_0)$ lifts to $\\tilde f:(Y,y_0)\\to(E,e_0)$ (with $p\\circ\\tilde f=f$) **iff** $f_*(\\pi_1(Y,y_0))\\subseteq p_*(\\pi_1(E,e_0))$, and the lift is unique. Examples: $\\mathbb{R}\\to S^1$ is the universal cover with $\\mathrm{Deck}\\cong\\mathbb{Z}$ generated by $t\\mapsto t+1$; $z\\mapsto z^n$ on $S^1$ is an $n$-sheeted cover with $H=n\\mathbb{Z}$; $z\\mapsto e^z$ is the universal cover $\\mathbb{C}\\to\\mathbb{C}\\setminus\\{0\\}$; and $S^n\\to\\mathbb{RP}^n$ for $n\\ge2$ is the two-sheeted universal cover.",
+    "formulas": [
+      {
+        "latex": "p^{-1}(U)=\\bigsqcup_{\\alpha}V_\\alpha,\\qquad p|_{V_\\alpha}:V_\\alpha\\xrightarrow{\\ \\cong\\ }U",
+        "note": "覆叠的定义：每点都有一个被**均匀覆叠**的邻域 $U$，其原像是不交开集之并，每叶同胚地映到 $U$。这使 $p$ 是局部同胚，但不是整体同胚。",
+        "noteEn": "Definition of a covering: every point has an evenly covered neighbourhood $U$ whose preimage is a disjoint union of open sets, each mapped homeomorphically onto $U$. This makes $p$ a local but not a global homeomorphism."
+      },
+      {
+        "latex": "p\\circ\\tilde\\gamma=\\gamma,\\qquad \\tilde\\gamma(0)=e_0\\quad(\\text{存在且唯一})",
+        "note": "道路提升：给定起点 $e_0$ 与底空间中的道路，提升道路存在且唯一。这是唯一性引理与单值化（monodromy）的根源。",
+        "noteEn": "Path lifting: given a starting point $e_0$ and a path in the base, the lifted path exists and is unique — the source of the uniqueness lemma and of monodromy."
+      },
+      {
+        "latex": "f\\ \\text{可提升为}\\ \\tilde f\\iff f_*(\\pi_1(Y,y_0))\\subseteq p_*(\\pi_1(E,e_0))",
+        "note": "提升判据：判断一个映射能否提升，只需比较基本群的像。用于证明「圆周上没有连续的单值辐角函数」。",
+        "noteEn": "Lifting criterion: a map lifts iff the image of the fundamental groups is contained in the image of $p_*$. It proves, for instance, that no continuous single-valued argument exists on the circle."
+      },
+      {
+        "latex": "\\mathrm{Deck}(p)\\cong N(H)/H,\\qquad H=p_*(\\pi_1(E,e_0))",
+        "note": "覆叠变换群：一般等于正规化子商掉 $H$；当 $H$ 正规（正规覆叠）时 $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)/H$；万有覆叠（$H=1$）时 $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$。",
+        "noteEn": "Deck transformations: in general the normaliser modulo $H$; for a normal covering $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)/H$; for the universal cover ($H=1$) $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$."
+      },
+      {
+        "latex": "[\\pi_1(B,b_0):H]=\\#\\,p^{-1}(b_0)",
+        "note": "重数 = 指数的关系：纤维的基数（叶片数）等于子群 $H$ 在 $\\pi_1(B,b_0)$ 中的指数，可以为无穷（万有覆叠常如此，如 $\\mathbb{R}\\to S^1$）。",
+        "noteEn": "Number of sheets = index: the fibre cardinality equals the index of $H$ in $\\pi_1(B,b_0)$, possibly infinite (as for the universal cover $\\mathbb{R}\\to S^1$)."
+      }
+    ],
+    "properties": [
+      "局部同胚而非整体同胚：覆叠映射是连续满射、开映射，每个点局部是同胚；$B$ 连通时重数（纤维基数）恒定，重数为 $1$ 当且仅当 $p$ 是同胚。",
+      "提升性质：道路提升与同伦提升都**存在且唯一**；由此两个从同一点出发的提升处处相等，并且「提升端点」给出纤维之间的置换（单值化作用）。",
+      "Galois 对应：$B$ 道路连通、局部道路连通且**半局部单连通**时，连通覆叠空间（同构类）与 $\\pi_1(B,b_0)$ 的子群（共轭类）一一对应；重数 = 指数；正规覆叠 $\\iff H$ 正规 $\\iff$ 覆叠变换在纤维上传递。",
+      "万有覆叠：对应 $H=1$，总空间单连通，覆叠一切覆叠，且 $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$。它的存在条件是 $B$ 道路连通、局部道路连通且半局部单连通（三条件缺一不可）。",
+      "$\\pi_1$ 与覆叠互相决定：$\\pi_1(E,e_0)\\cong H\\le\\pi_1(B,b_0)$，所以覆叠空间是「基本群子群的几何实现」，把群论问题（子群、指数、正规性）翻译成空间问题。"
+    ],
+    "propertiesEn": [
+      "Locally a homeomorphism, globally not: a covering map is continuous, surjective and open, and locally a homeomorphism; when $B$ is connected the number of sheets is constant, and it equals $1$ exactly when $p$ is a homeomorphism.",
+      "Lifting properties: both path lifting and homotopy lifting hold with uniqueness; consequently two lifts starting at the same point agree everywhere, and lifting endpoints gives a permutation of the fibre (the monodromy action).",
+      "Galois correspondence: for path-connected, locally path-connected and **semi-locally simply connected** $B$, connected coverings (up to isomorphism) correspond to subgroups of $\\pi_1(B,b_0)$ up to conjugacy; number of sheets = index; normal covering iff $H$ is normal iff deck transformations act transitively on fibres.",
+      "Universal cover: corresponds to $H=1$, has simply connected total space, covers every other covering, and satisfies $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$. It exists precisely when $B$ is path-connected, locally path-connected and semilocally simply connected.",
+      "Fundamental group and coverings determine each other: $\\pi_1(E,e_0)\\cong H\\le\\pi_1(B,b_0)$, so covering spaces are the geometric realisation of subgroups of the fundamental group, translating group theory (subgroups, index, normality) into geometry."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.9,
+        3.7
+      ],
+      "yRange": [
+        -2.45,
+        2.9
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            -2.0,
+            -1.9
+          ],
+          "to": [
+            3.2,
+            -1.9
+          ],
+          "color": "rgba(160,175,220,0.85)"
+        },
+        {
+          "type": "circle",
+          "cx": 0.7,
+          "cy": 0.9,
+          "r": 1.4,
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.0,
+            -1.9
+          ],
+          "to": [
+            2.1,
+            0.9
+          ],
+          "color": "#06d6a0",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.4,
+            -1.9
+          ],
+          "to": [
+            2.1,
+            0.9
+          ],
+          "color": "#06d6a0",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.35,
+            -1.9
+          ],
+          "to": [
+            0.7,
+            2.3
+          ],
+          "color": "#b388ff",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.7,
+            -1.9
+          ],
+          "to": [
+            -0.7,
+            0.9
+          ],
+          "color": "#ff8f5e",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.05,
+            -1.9
+          ],
+          "to": [
+            0.7,
+            -0.5
+          ],
+          "color": "#ffd166",
+          "dash": true
+        },
+        {
+          "type": "point",
+          "at": [
+            -1.4,
+            -1.9
+          ],
+          "color": "rgba(160,175,220,0.85)",
+          "r": 3
+        },
+        {
+          "type": "point",
+          "at": [
+            -0.7,
+            -1.9
+          ],
+          "color": "rgba(160,175,220,0.85)",
+          "r": 3
+        },
+        {
+          "type": "point",
+          "at": [
+            0.0,
+            -1.9
+          ],
+          "color": "#06d6a0",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            0.35,
+            -1.9
+          ],
+          "color": "#b388ff",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            0.7,
+            -1.9
+          ],
+          "color": "#ff8f5e",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            1.05,
+            -1.9
+          ],
+          "color": "#ffd166",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            1.4,
+            -1.9
+          ],
+          "color": "#06d6a0",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            2.1,
+            -1.9
+          ],
+          "color": "rgba(160,175,220,0.85)",
+          "r": 3
+        },
+        {
+          "type": "point",
+          "at": [
+            2.8,
+            -1.9
+          ],
+          "color": "rgba(160,175,220,0.85)",
+          "r": 3
+        },
+        {
+          "type": "point",
+          "at": [
+            2.1,
+            0.9
+          ],
+          "label": "1",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.7,
+            2.3
+          ],
+          "label": "i",
+          "color": "#b388ff"
+        },
+        {
+          "type": "point",
+          "at": [
+            -0.7,
+            0.9
+          ],
+          "label": "−1",
+          "color": "#ff8f5e"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.7,
+            -0.5
+          ],
+          "label": "−i",
+          "color": "#ffd166"
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.4,
+            -2.18
+          ],
+          "text": "−1"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.0,
+            -2.18
+          ],
+          "text": "0"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.7,
+            -2.18
+          ],
+          "text": "1/2"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.4,
+            -2.18
+          ],
+          "text": "1"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.8,
+            -2.18
+          ],
+          "text": "2"
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.15,
+            -1.6
+          ],
+          "text": "数轴（万有覆叠）"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.65,
+            2.0
+          ],
+          "text": "圆周 S¹"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.9,
+            0.3
+          ],
+          "text": "t 与 t+1 映到同一点"
+        }
+      ],
+      "title": "覆叠映射 exp(2πit)：数轴覆叠圆周（每点有无穷多原像）"
+    },
+    "examples": [
+      {
+        "problem": "用提升性质证明：不存在连续映射 $\\theta:S^1\\to\\mathbb{R}$ 使 $e^{i\\theta(z)}=z$ 对一切 $z\\in S^1$ 成立（即辐角不能连续单值化）。",
+        "solution": "反设这样的 $\\theta$ 存在。令 $\\gamma(t)=e^{2\\pi it}$，则 $\\ell_1(t)=\\theta(\\gamma(t))/(2\\pi)$ 是 $\\gamma$ 在覆叠 $p(t)=e^{2\\pi it}$ 下的提升（因为 $p(\\ell_1(t))=e^{2\\pi i\\cdot\\theta(\\gamma(t))/(2\\pi)}=e^{i\\theta(\\gamma(t))}=\\gamma(t)$，这里用了假设 $e^{i\\theta(z)}=z$，取 $z=\\gamma(t)$）。由 $\\gamma(0)=1$ 得 $e^{i\\theta(1)}=1$，故 $\\theta(1)=2\\pi k$（某个 $k\\in\\mathbb{Z}$），即 $\\ell_1(0)=k$。另一方面 $\\ell_2(t)=k+t$ 也是 $\\gamma$ 的提升且 $\\ell_2(0)=k$；由道路提升的**唯一性**有 $\\ell_1\\equiv\\ell_2$，取 $t=1$ 得 $\\theta(1)/(2\\pi)=k+1$，与 $\\theta(1)/(2\\pi)=k$ 矛盾。所以不存在连续的全局辐角函数——这正是「辐角是多值的」的拓扑原因。"
+      },
+      {
+        "problem": "求覆叠 $p:\\mathbb{R}\\to S^1$（$p(t)=e^{2\\pi it}$）的覆叠变换群，并说明它是万有覆叠。",
+        "solution": "设 $\\varphi:\\mathbb{R}\\to\\mathbb{R}$ 满足 $p\\circ\\varphi=p$，即 $e^{2\\pi i\\varphi(t)}=e^{2\\pi it}$，于是 $\\varphi(t)-t\\in\\mathbb{Z}$ 对一切 $t$ 成立。函数 $t\\mapsto\\varphi(t)-t$ 连续且取值在离散集 $\\mathbb{Z}$ 中，而 $\\mathbb{R}$ 连通，故它是常数 $n$，即 $\\varphi(t)=t+n$。反之每个平移 $\\varphi_n(t)=t+n$ 显然满足 $p\\circ\\varphi_n=p$ 且是同胚。所以 $\\mathrm{Deck}(p)=\\{\\varphi_n:n\\in\\mathbb{Z}\\}\\cong\\mathbb{Z}$，与 $\\pi_1(S^1)\\cong\\mathbb{Z}$ 一致（万有覆叠时 $\\mathrm{Deck}(p)\\cong\\pi_1(B,b_0)$）。又 $\\mathbb{R}$ 可缩、特别地单连通，故 $p$ 是万有覆叠。"
+      }
+    ],
+    "tags": [
+      "代数拓扑",
+      "覆叠空间",
+      "提升性质",
+      "万有覆叠",
+      "覆叠变换",
+      "基本群"
+    ],
+    "links": [
+      "fundamental-group",
+      "fundamental-group-circle",
+      "monodromy-theorem",
+      "riemann-surfaces",
+      "homotopy"
+    ]
+  },
+  {
+    "id": "seifert-van-kampen",
+    "title": "塞弗特–范坎彭定理",
+    "titleEn": "The Seifert–Van Kampen Theorem",
+    "branch": "topology",
+    "level": 5,
+    "summary": "把空间拆成两个开集 $U,V$，则 $\\pi_1(U\\cup V)$ 由 $\\pi_1(U)$、$\\pi_1(V)$ 沿 $\\pi_1(U\\cap V)$ 并合而成；交单连通时就是自由积。这是计算基本群最有力的工具。",
+    "summaryEn": "Split a space into open sets $U$ and $V$: then $\\pi_1(U\\cup V)$ is built from $\\pi_1(U)$ and $\\pi_1(V)$ amalgamated over $\\pi_1(U\\cap V)$; when the intersection is simply connected this is just the free product. The strongest tool for computing fundamental groups.",
+    "definition": "塞弗特–范坎彭定理把**空间的粘合**翻译成**群的粘合**。设 $X=U\\cup V$，其中\n- $U,V$ 都是 $X$ 的**开集**；\n- $U$、$V$、$U\\cap V$ **都道路连通**；\n- 基点 $x_0\\in U\\cap V$ 取在交中。\n则由包含映射诱导的同态\n$$\\Phi:\\pi_1(U,x_0)*\\pi_1(V,x_0)\\to\\pi_1(X,x_0)$$\n是满射，其核是集合 $\\{i^U_*(g)\\,i^V_*(g)^{-1}:g\\in\\pi_1(U\\cap V,x_0)\\}$ 生成的**正规闭包**（其中 $i^U:U\\cap V\\hookrightarrow U$、$i^V:U\\cap V\\hookrightarrow V$ 是包含映射）。换句话说\n$$\\pi_1(X,x_0)\\cong\\pi_1(U,x_0)*_{\\pi_1(U\\cap V,x_0)}\\pi_1(V,x_0),$$\n右端是**并合自由积**（amalgamated free product）：先在交 $U\\cap V$ 上把两块「缝」起来，再把其余的生成元自由地放进群里。当交**单连通**（$\\pi_1(U\\cap V,x_0)=0$）时并合退化，得到最常用的特例\n$$\\pi_1(X,x_0)\\cong\\pi_1(U,x_0)*\\pi_1(V,x_0)\\qquad(\\text{自由积}).$$\n\n直观理解：把 $X$ 拆成两块，各自内部的道路都能自由变形；唯一可能的「粘合关系」来自穿过交 $U\\cap V$ 的那部分——同一段路在 $U$ 里看和在 $V$ 里看是同一条，范坎彭定理就是把这种「一条路的两重身份」写成商群。自由积的泛性质 $\\mathrm{Hom}(G*H,K)\\cong\\mathrm{Hom}(G,K)\\times\\mathrm{Hom}(H,K)$ 是它最有用的形式：要给自由积定义一个同态，只需分别给两块定义同态。\n\n**推论（高维球面）**：$n\\ge2$ 时 $\\pi_1(S^n)=0$。取南北半球的两个**开**邻域 $U,V$（把半球略微撑出一些，得到同胚于 $\\mathbb{R}^n$ 的开集，因而可缩，$\\pi_1(U)=\\pi_1(V)=0$），则 $U\\cup V=S^n$，$U\\cap V$ 是赤道附近的开带，与 $S^{n-1}$ 同伦等价、从而道路连通（$n\\ge2$ 时 $S^{n-1}$ 连通）。于是\n$$\\pi_1(S^n)\\cong 0*_{\\pi_1(U\\cap V)}0=0$$\n——不论 $\\pi_1(U\\cap V)$ 是什么，并合两块平凡群只能得到平凡群。**特别注意 $n=2$ 的情形**：此时 $\\pi_1(U\\cap V)=\\pi_1(S^1)=\\mathbb{Z}\\ne0$，交**不**单连通，所以 $\\pi_1(S^2)=0$ **不能**用「交单连通 ⟹ 自由积」的特例，必须用一般的并合形式。\n\n定理还有一个更宽的形式：若 $X$ 被有限多个开集覆盖，且每个非空有限交都道路连通并取同一基点，则结论照旧（可对覆盖逐个迭代）。而「交道路连通」这一条不能省：例如用两个开弧覆盖 $S^1$，它们的交是两个不连通的开弧，此时定理的前提不满足——若强行套用就会得到 $\\pi_1(S^1)=0$ 这种错误结论。\n\n**应用**：$\\pi_1(S^1\\vee S^1,x_0)=\\mathbb{Z}*\\mathbb{Z}=F_2$（两个生成元的自由群，非交换）；连通图的基本群是自由群，秩为 $1-\\chi$（$\\chi$ 为欧拉示性数）；闭曲面的基本群可由多边形表示逐条粘合算出；$\\mathbb{R}^n\\setminus\\{0\\}\\simeq S^{n-1}$ 在 $n\\ge3$ 时单连通，而 $n=2$ 时基本群为 $\\mathbb{Z}$。",
+    "definitionEn": "The Seifert–van Kampen theorem translates **gluing of spaces** into **gluing of groups**. Let $X=U\\cup V$ where\n- $U$ and $V$ are **open** in $X$;\n- $U$, $V$ and $U\\cap V$ are **path-connected**;\n- the basepoint $x_0$ lies in $U\\cap V$.\nThen the homomorphism $\\Phi:\\pi_1(U,x_0)*\\pi_1(V,x_0)\\to\\pi_1(X,x_0)$ induced by the inclusions is surjective, and its kernel is the **normal closure** of $\\{i^U_*(g)\\,i^V_*(g)^{-1}:g\\in\\pi_1(U\\cap V,x_0)\\}$, where $i^U,i^V$ are the inclusions of $U\\cap V$ into $U$ and $V$. Equivalently\n$$\\pi_1(X,x_0)\\cong\\pi_1(U,x_0)*_{\\pi_1(U\\cap V,x_0)}\\pi_1(V,x_0),$$\nan **amalgamated free product**: first sew the two pieces together along the intersection, then add all remaining generators freely. When the intersection is **simply connected** the amalgamation degenerates to the most-used special case $\\pi_1(X,x_0)\\cong\\pi_1(U,x_0)*\\pi_1(V,x_0)$, the free product.\n\nIntuitively, each piece deforms its own loops freely, and the only relations come from loops crossing the intersection: the same path seen inside $U$ and inside $V$ must be identified. The universal property of the free product, $\\mathrm{Hom}(G*H,K)\\cong\\mathrm{Hom}(G,K)\\times\\mathrm{Hom}(H,K)$, is the most useful form: to define a homomorphism out of a free product, define it on each factor.\n\n**Corollary (higher spheres):** $\\pi_1(S^n)=0$ for $n\\ge2$. Take two slightly fattened **open** hemispheres $U,V$, each homeomorphic to $\\mathbb{R}^n$ and hence contractible, so $\\pi_1(U)=\\pi_1(V)=0$. Then $U\\cup V=S^n$ and $U\\cap V$ is an open equatorial band homotopy equivalent to $S^{n-1}$, which is path-connected for $n\\ge2$. Hence $\\pi_1(S^n)\\cong 0*_{\\pi_1(U\\cap V)}0=0$ regardless of $\\pi_1(U\\cap V)$. **Note the case $n=2$:** there $\\pi_1(U\\cap V)=\\pi_1(S^1)=\\mathbb{Z}\\ne0$, the intersection is *not* simply connected, so the free-product special case does not apply; one must use the general amalgamated form (both factors trivial).\n\nA wider form: if $X$ is covered by finitely many open sets whose nonempty finite intersections are path-connected (with a common basepoint), the conclusion still holds, by iteration. The hypothesis on the intersection cannot be dropped: two open arcs covering $S^1$ meet in two disjoint arcs, and applying the theorem blindly would give the false conclusion $\\pi_1(S^1)=0$.\n\n**Applications:** $\\pi_1(S^1\\vee S^1,x_0)=\\mathbb{Z}*\\mathbb{Z}=F_2$, a free group on two generators (non-abelian); the fundamental group of any connected graph is free of rank $1-\\chi$; surface groups come from polygon presentations; and $\\mathbb{R}^n\\setminus\\{0\\}\\simeq S^{n-1}$ is simply connected for $n\\ge3$ while its $\\pi_1$ is $\\mathbb{Z}$ for $n=2$.",
+    "formulas": [
+      {
+        "latex": "\\pi_1(X,x_0)\\cong\\pi_1(U,x_0)*_{\\pi_1(U\\cap V,x_0)}\\pi_1(V,x_0)",
+        "note": "范坎彭定理的主结论：并合自由积。前提是 $U,V$ 为开集、$U,V,U\\cap V$ 道路连通且 $x_0\\in U\\cap V$——条件缺一条结论就可能失效。",
+        "noteEn": "Main conclusion: the amalgamated free product. The hypotheses are that $U,V$ are open, $U,V,U\\cap V$ are path-connected, and $x_0\\in U\\cap V$; dropping any of them can break the conclusion."
+      },
+      {
+        "latex": "\\pi_1(X,x_0)\\cong\\Big(\\pi_1(U,x_0)*\\pi_1(V,x_0)\\Big)\\Big/\\Big\\langle\\!\\Big\\langle\\,i^U_*(g)\\,i^V_*(g)^{-1}:g\\in\\pi_1(U\\cap V,x_0)\\,\\Big\\rangle\\!\\Big\\rangle",
+        "note": "并合的具体写法：把自由积模掉「同一元素在 $U$ 与 $V$ 中的像相等」所生成的正规闭包，这就是「沿交缝起来」的代数含义。",
+        "noteEn": "The explicit form: the free product modulo the normal closure of the relations identifying the images of each element of $\\pi_1(U\\cap V)$ in $U$ and in $V$ — the algebraic meaning of sewing along the intersection."
+      },
+      {
+        "latex": "U\\cap V\\ \\text{单连通}\\ \\Longrightarrow\\ \\pi_1(X,x_0)\\cong\\pi_1(U,x_0)*\\pi_1(V,x_0)",
+        "note": "最常用的特例：交单连通时没有粘合关系，得到自由积。适用于粘合两个圆的楔积、沿可缩子空间粘合等情形。（沿一条曲线粘合闭曲面时交不单连通——$\\pi_1(U\\cap V)=\\mathbb{Z}$——必须用并合形式。）",
+        "noteEn": "The most-used special case: a simply connected intersection contributes no relation, so one gets the free product — e.g. wedges of circles, or gluing along a contractible subspace. (Gluing surfaces along a curve needs the amalgamated form, since then $\\pi_1(U\\cap V)=\\mathbb{Z}$.)"
+      },
+      {
+        "latex": "\\pi_1(S^n,x_0)=0\\qquad(n\\ge2)",
+        "note": "推论：把 $S^n$ 写成两个可缩开半球之并，两块的基本群都平凡，所以整个球面的基本群平凡（$n=2$ 时交不单连通，必须用并合形式）。",
+        "noteEn": "Corollary: writing $S^n$ as the union of two contractible open hemispheres, both factors are trivial, so the sphere is simply connected ($n=2$ needs the amalgamated form since the intersection is not simply connected)."
+      },
+      {
+        "latex": "\\mathrm{Hom}(G*H,K)\\cong\\mathrm{Hom}(G,K)\\times\\mathrm{Hom}(H,K)",
+        "note": "自由积的泛性质：定义自由积上的同态等价于在每一块上分别定义同态。判断群是否同构、给出显式表示时最方便。",
+        "noteEn": "Universal property of the free product: a homomorphism on $G*H$ is the same as a homomorphism on each factor. This is the handiest way to identify the resulting group."
+      }
+    ],
+    "properties": [
+      "条件必须齐备：$U,V$ 要是**开集**，$U$、$V$、$U\\cap V$ 都要**道路连通**，基点必须取在 $U\\cap V$ 中；诱导的同构由**包含映射**给出，不是任意同构。",
+      "交单连通时的特例（自由积）最常用；一般情形是并合自由积，其泛性质是「对每一块给出同态、并在交上一致即可」。",
+      "推论：$n\\ge2$ 时 $\\pi_1(S^n)=0$；$\\pi_1(S^1\\vee S^1)=F_2$；连通图的基本群是自由群，秩 $=1-\\chi$；这些计算都归结为「块的 π₁ + 交中的关系」。",
+      "更宽的形式：有限多个开集覆盖，只要所有非空有限交都道路连通（且含基点），结论仍成立；可对覆盖逐个迭代应用。",
+      "前提不可省：用两个开弧覆盖 $S^1$ 时交不连通，强行套用会得出 $\\pi_1(S^1)=0$ 的错误结论；用两个闭半球覆盖 $S^2$ 也违反开性——这正是定理中「开」与「交道路连通」两条的用处。"
+    ],
+    "propertiesEn": [
+      "All hypotheses are needed: $U,V$ must be **open**, $U$, $V$ and $U\\cap V$ must be **path-connected**, and the basepoint must lie in $U\\cap V$; the isomorphism is induced by the **inclusions**, not by an arbitrary isomorphism.",
+      "The simply-connected-intersection case (free product) is the most-used; the general statement is the amalgamated free product, whose universal property says: give a homomorphism on each piece, agreeing on the intersection.",
+      "Consequences: $\\pi_1(S^n)=0$ for $n\\ge2$; $\\pi_1(S^1\\vee S^1)=F_2$; the fundamental group of a connected graph is free of rank $1-\\chi$. Each computation reduces to “the $\\pi_1$ of the pieces plus the relations from the intersection”.",
+      "Wider form: for a finite open cover whose nonempty finite intersections are path-connected (and contain the basepoint) the conclusion still holds, by iterating over the cover.",
+      "The hypotheses cannot be dropped: for two open arcs covering $S^1$ the intersection is disconnected and a blind application would give the false $\\pi_1(S^1)=0$; two closed hemispheres covering $S^2$ violate openness. This is exactly what the openness and path-connectedness hypotheses are for."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -3.4,
+        3.4
+      ],
+      "yRange": [
+        -2.5,
+        2.5
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              -0.0,
+              1.673
+            ],
+            [
+              -0.3,
+              1.803
+            ],
+            [
+              -0.617,
+              1.879
+            ],
+            [
+              -0.943,
+              1.9
+            ],
+            [
+              -1.267,
+              1.864
+            ],
+            [
+              -1.581,
+              1.774
+            ],
+            [
+              -1.875,
+              1.631
+            ],
+            [
+              -2.139,
+              1.44
+            ],
+            [
+              -2.368,
+              1.207
+            ],
+            [
+              -2.553,
+              0.938
+            ],
+            [
+              -2.689,
+              0.641
+            ],
+            [
+              -2.772,
+              0.325
+            ],
+            [
+              -2.8,
+              0.0
+            ],
+            [
+              -2.772,
+              -0.325
+            ],
+            [
+              -2.689,
+              -0.641
+            ],
+            [
+              -2.553,
+              -0.938
+            ],
+            [
+              -2.368,
+              -1.207
+            ],
+            [
+              -2.139,
+              -1.44
+            ],
+            [
+              -1.875,
+              -1.631
+            ],
+            [
+              -1.581,
+              -1.774
+            ],
+            [
+              -1.267,
+              -1.864
+            ],
+            [
+              -0.943,
+              -1.9
+            ],
+            [
+              -0.617,
+              -1.879
+            ],
+            [
+              -0.3,
+              -1.803
+            ],
+            [
+              0.0,
+              -1.673
+            ],
+            [
+              0.3,
+              -1.803
+            ],
+            [
+              0.617,
+              -1.879
+            ],
+            [
+              0.943,
+              -1.9
+            ],
+            [
+              1.267,
+              -1.864
+            ],
+            [
+              1.581,
+              -1.774
+            ],
+            [
+              1.875,
+              -1.631
+            ],
+            [
+              2.139,
+              -1.44
+            ],
+            [
+              2.368,
+              -1.207
+            ],
+            [
+              2.553,
+              -0.938
+            ],
+            [
+              2.689,
+              -0.641
+            ],
+            [
+              2.772,
+              -0.325
+            ],
+            [
+              2.8,
+              -0.0
+            ],
+            [
+              2.772,
+              0.325
+            ],
+            [
+              2.689,
+              0.641
+            ],
+            [
+              2.553,
+              0.938
+            ],
+            [
+              2.368,
+              1.207
+            ],
+            [
+              2.139,
+              1.44
+            ],
+            [
+              1.875,
+              1.631
+            ],
+            [
+              1.581,
+              1.774
+            ],
+            [
+              1.267,
+              1.864
+            ],
+            [
+              0.943,
+              1.9
+            ],
+            [
+              0.617,
+              1.879
+            ],
+            [
+              0.3,
+              1.803
+            ],
+            [
+              0.0,
+              1.673
+            ]
+          ],
+          "color": "rgba(154,168,224,0.9)",
+          "fill": "rgba(154,168,224,0.10)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.966,
+              0.36
+            ],
+            [
+              0.864,
+              0.706
+            ],
+            [
+              0.698,
+              1.027
+            ],
+            [
+              0.475,
+              1.311
+            ],
+            [
+              0.202,
+              1.548
+            ],
+            [
+              -0.111,
+              1.728
+            ],
+            [
+              -0.452,
+              1.846
+            ],
+            [
+              -0.81,
+              1.898
+            ],
+            [
+              -1.17,
+              1.881
+            ],
+            [
+              -1.521,
+              1.796
+            ],
+            [
+              -1.85,
+              1.645
+            ],
+            [
+              -2.144,
+              1.436
+            ],
+            [
+              -2.394,
+              1.175
+            ],
+            [
+              -2.589,
+              0.871
+            ],
+            [
+              -2.723,
+              0.535
+            ],
+            [
+              -2.791,
+              0.181
+            ],
+            [
+              -2.791,
+              -0.181
+            ],
+            [
+              -2.723,
+              -0.535
+            ],
+            [
+              -2.589,
+              -0.871
+            ],
+            [
+              -2.394,
+              -1.175
+            ],
+            [
+              -2.144,
+              -1.436
+            ],
+            [
+              -1.85,
+              -1.645
+            ],
+            [
+              -1.521,
+              -1.796
+            ],
+            [
+              -1.17,
+              -1.881
+            ],
+            [
+              -0.81,
+              -1.898
+            ],
+            [
+              -0.452,
+              -1.846
+            ],
+            [
+              -0.111,
+              -1.728
+            ],
+            [
+              0.202,
+              -1.548
+            ],
+            [
+              0.475,
+              -1.311
+            ],
+            [
+              0.698,
+              -1.027
+            ],
+            [
+              0.864,
+              -0.706
+            ],
+            [
+              0.966,
+              -0.36
+            ],
+            [
+              1.0,
+              -0.0
+            ]
+          ],
+          "color": "#4cc9f0",
+          "fill": "rgba(76,201,240,0.12)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.8,
+              0.0
+            ],
+            [
+              2.766,
+              0.36
+            ],
+            [
+              2.664,
+              0.706
+            ],
+            [
+              2.498,
+              1.027
+            ],
+            [
+              2.275,
+              1.311
+            ],
+            [
+              2.002,
+              1.548
+            ],
+            [
+              1.689,
+              1.728
+            ],
+            [
+              1.348,
+              1.846
+            ],
+            [
+              0.99,
+              1.898
+            ],
+            [
+              0.63,
+              1.881
+            ],
+            [
+              0.279,
+              1.796
+            ],
+            [
+              -0.05,
+              1.645
+            ],
+            [
+              -0.344,
+              1.436
+            ],
+            [
+              -0.594,
+              1.175
+            ],
+            [
+              -0.789,
+              0.871
+            ],
+            [
+              -0.923,
+              0.535
+            ],
+            [
+              -0.991,
+              0.181
+            ],
+            [
+              -0.991,
+              -0.181
+            ],
+            [
+              -0.923,
+              -0.535
+            ],
+            [
+              -0.789,
+              -0.871
+            ],
+            [
+              -0.594,
+              -1.175
+            ],
+            [
+              -0.344,
+              -1.436
+            ],
+            [
+              -0.05,
+              -1.645
+            ],
+            [
+              0.279,
+              -1.796
+            ],
+            [
+              0.63,
+              -1.881
+            ],
+            [
+              0.99,
+              -1.898
+            ],
+            [
+              1.348,
+              -1.846
+            ],
+            [
+              1.689,
+              -1.728
+            ],
+            [
+              2.002,
+              -1.548
+            ],
+            [
+              2.275,
+              -1.311
+            ],
+            [
+              2.498,
+              -1.027
+            ],
+            [
+              2.664,
+              -0.706
+            ],
+            [
+              2.766,
+              -0.36
+            ],
+            [
+              2.8,
+              -0.0
+            ]
+          ],
+          "color": "#ff6b9d",
+          "fill": "rgba(255,107,157,0.12)"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              -0.0,
+              -1.673
+            ],
+            [
+              0.175,
+              -1.567
+            ],
+            [
+              0.337,
+              -1.442
+            ],
+            [
+              0.485,
+              -1.301
+            ],
+            [
+              0.617,
+              -1.144
+            ],
+            [
+              0.731,
+              -0.975
+            ],
+            [
+              0.826,
+              -0.794
+            ],
+            [
+              0.902,
+              -0.603
+            ],
+            [
+              0.956,
+              -0.406
+            ],
+            [
+              0.989,
+              -0.204
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.989,
+              0.204
+            ],
+            [
+              0.956,
+              0.406
+            ],
+            [
+              0.902,
+              0.603
+            ],
+            [
+              0.826,
+              0.794
+            ],
+            [
+              0.731,
+              0.975
+            ],
+            [
+              0.617,
+              1.144
+            ],
+            [
+              0.485,
+              1.301
+            ],
+            [
+              0.337,
+              1.442
+            ],
+            [
+              0.175,
+              1.567
+            ],
+            [
+              -0.0,
+              1.673
+            ],
+            [
+              0.0,
+              1.673
+            ],
+            [
+              -0.175,
+              1.567
+            ],
+            [
+              -0.337,
+              1.442
+            ],
+            [
+              -0.485,
+              1.301
+            ],
+            [
+              -0.617,
+              1.144
+            ],
+            [
+              -0.731,
+              0.975
+            ],
+            [
+              -0.826,
+              0.794
+            ],
+            [
+              -0.902,
+              0.603
+            ],
+            [
+              -0.956,
+              0.406
+            ],
+            [
+              -0.989,
+              0.204
+            ],
+            [
+              -1.0,
+              0.0
+            ],
+            [
+              -0.989,
+              -0.204
+            ],
+            [
+              -0.956,
+              -0.406
+            ],
+            [
+              -0.902,
+              -0.603
+            ],
+            [
+              -0.826,
+              -0.794
+            ],
+            [
+              -0.731,
+              -0.975
+            ],
+            [
+              -0.617,
+              -1.144
+            ],
+            [
+              -0.485,
+              -1.301
+            ],
+            [
+              -0.337,
+              -1.442
+            ],
+            [
+              -0.175,
+              -1.567
+            ],
+            [
+              -0.0,
+              -1.673
+            ]
+          ],
+          "color": "#ffd166",
+          "fill": "rgba(255,209,102,0.30)"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.0,
+            -0.2
+          ],
+          "label": "x₀",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.95,
+            1.3
+          ],
+          "text": "U"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            1.3
+          ],
+          "text": "V"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.0,
+            1.05
+          ],
+          "text": "U∩V"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.0,
+            -2.2
+          ],
+          "text": "X = U ∪ V：三块都道路连通，基点取在交中"
+        }
+      ],
+      "title": "范坎彭定理：π₁(X) 由 π₁(U) 与 π₁(V) 沿交并合而成"
+    },
+    "examples": [
+      {
+        "problem": "用范坎彭定理计算楔积 $X=S^1\\vee S^1$（两个圆周在公共点 $x_0$ 粘成一点）的基本群。",
+        "solution": "记两个圆周为 $A,B$，公共点为 $x_0$。取 $p\\in A\\setminus\\{x_0\\}$、$q\\in B\\setminus\\{x_0\\}$，令 $U=X\\setminus\\{p\\}$、$V=X\\setminus\\{q\\}$。$X$ 是 Hausdorff 空间、单点是闭集，故 $U,V$ 是开集，且 $x_0\\in U\\cap V$。$U$ 中圆周 $A$ 被挖去一点成为可缩的开弧，故 $U$ 可形变收缩到 $B$，$\\pi_1(U,x_0)\\cong\\mathbb{Z}$；同理 $\\pi_1(V,x_0)\\cong\\mathbb{Z}$。而 $U\\cap V=X\\setminus\\{p,q\\}$ 可形变收缩到 $\\{x_0\\}$，因而是单连通的，$\\pi_1(U\\cap V,x_0)=0$。由 $U\\cup V=X$、三块都道路连通，范坎彭定理给出 $$\\pi_1(X,x_0)\\cong\\mathbb{Z}*\\mathbb{Z}=F_2,$$ 即两个生成元 $a,b$ 生成的自由群：除形式上的关系外没有别的等式，故 $ab\\ne ba$，$\\pi_1(S^1\\vee S^1)$ 非交换。"
+      },
+      {
+        "problem": "用范坎彭定理证明 $\\pi_1(S^2)=0$，并逐条核对定理的条件，说明为什么不能改用「交单连通」的特例。",
+        "solution": "取 $U$ 为「比上半球稍大」的开集、$V$ 为「比下半球稍大」的开集：每个都与 $\\mathbb{R}^2$ 同胚，从而是可缩的，$\\pi_1(U)=\\pi_1(V)=0$；$U\\cup V=S^2$；$U\\cap V$ 是赤道附近的开带，与 $S^1$ 同伦等价，因而是道路连通的（这是 $S^2$ 的情形的关键核对）。条件齐备：$U,V$ 开、$U,V,U\\cap V$ 道路连通、基点 $x_0$ 取在交中。于是 $$\\pi_1(S^2,x_0)\\cong 0*_{\\pi_1(U\\cap V,x_0)}0=0,$$ 因为并合两个平凡群只能得到平凡群，与 $\\pi_1(U\\cap V)=\\pi_1(S^1)=\\mathbb{Z}\\ne0$ 是什么无关。但这里**不能**用「交单连通 ⟹ 自由积」的特例：$\\pi_1(U\\cap V)=\\mathbb{Z}\\ne0$，交并不单连通，必须用带并合的一般形式。（若错误地把交当成单连通而直接写 $\\pi_1(S^2)=0*0=0$，虽然结论对，理由却不成立。）"
+      }
+    ],
+    "tags": [
+      "代数拓扑",
+      "范坎彭定理",
+      "自由积",
+      "并合自由积",
+      "基本群",
+      "楔积"
+    ],
+    "links": [
+      "fundamental-group",
+      "fundamental-group-circle",
+      "surface-classification",
+      "covering-space",
+      "homotopy"
+    ]
+  },
+  {
+    "id": "brouwer-fixed-point",
+    "title": "布劳威尔不动点定理",
+    "titleEn": "The Brouwer Fixed Point Theorem",
+    "branch": "topology",
+    "level": 5,
+    "summary": "闭球上任何连续自映射都有不动点；等价说法是「$S^{n-1}$ 不是 $\\overline{B^n}$ 的收缩核」。一维用中值定理，高维必须用代数拓扑（$\\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}$）。",
+    "summaryEn": "Every continuous self-map of a closed ball has a fixed point; equivalently $S^{n-1}$ is not a retract of $\\overline{B^n}$. The case $n=1$ follows from the intermediate value theorem; higher dimensions require algebraic topology ($\\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}$).",
+    "definition": "**布劳威尔不动点定理**：设 $\\overline{B^n}=\\{x\\in\\mathbb{R}^n:\\|x\\|\\le1\\}$ 是闭单位球，$f:\\overline{B^n}\\to\\overline{B^n}$ 连续，则存在 $x\\in\\overline{B^n}$ 使 $f(x)=x$。它对一切 $n\\ge1$ 成立。一维情形就是中值定理：$f:[0,1]\\to[0,1]$ 连续，令 $g(x)=f(x)-x$，则 $g(0)=f(0)-0\\ge0$、$g(1)=f(1)-1\\le0$，由介值定理存在 $g(x)=0$。高维情形必须动用代数拓扑。注意条件：$\\overline{B^n}$ **紧且凸**（任何与它同胚的紧凸集同样适用），并且映射必须把球映入**自己**——例如 $\\mathbb{R}$ 上的平移 $x\\mapsto x+1$ 就没有不动点。\n\n**等价形式**：这个定理还有一个更便于使用的说法，「每个连续自映射都有不动点」等价于「**$S^{n-1}=\\partial\\overline{B^n}$ 不是 $\\overline{B^n}$ 的收缩核**」，即不存在连续映射 $r:\\overline{B^n}\\to S^{n-1}$ 使 $r|_{S^{n-1}}=\\mathrm{id}_{S^{n-1}}$。两个方向都不难看清：\n- （非收缩核 ⟹ 不动点）若连续 $f$ 没有不动点，即 $f(x)\\ne x$ 对一切 $x$ 成立，就从 $f(x)$ 出发、过 $x$ 作射线，取它与球面的交点\n$$r(x)=f(x)+t(x)\\,(x-f(x)),\\qquad t(x)\\ge1,\\ \\|r(x)\\|=1;$$\n$t(x)$ 是二次方程 $\\|f(x)+t(x-f(x))\\|^2=1$ 在 $t\\ge1$ 中的唯一根，且随 $x$ 连续（$|p(t)|$ 对足够大的 $t$ 严格递增）。于是 $r$ 连续；当 $x\\in S^{n-1}$ 时该射线在 $t=1$ 处离开球面，$r(x)=x$。这就得到一个收缩，与「非收缩核」矛盾。\n- （不动点 ⟹ 非收缩核）若存在收缩 $r$，则 $g(x)=-r(x)$ 是 $\\overline{B^n}$ 到自身的连续映射，由布劳威尔不动点定理有 $x$ 使 $-r(x)=x$；于是 $\\|x\\|=\\|r(x)\\|=1$，故 $x\\in S^{n-1}$，从而 $r(x)=x$，代回得 $x=-x$，即 $x=0$，与 $\\|x\\|=1$ 矛盾。\n\n**代数拓扑证明思路**：只需证明「不存在收缩」。设 $i:S^{n-1}\\hookrightarrow\\overline{B^n}$ 为包含映射。若存在收缩 $r$，则 $r\\circ i=\\mathrm{id}_{S^{n-1}}$，取 $(n-1)$ 阶同伦群得\n$$r_*\\circ i_*=\\mathrm{id}_{\\pi_{n-1}(S^{n-1})}.$$\n但 $\\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}\\ne0$（$S^{n-1}$ 的 $(n-1)$ 阶同伦群由**度**给出，与圆周的 $\\pi_1(S^1)=\\mathbb{Z}$ 同源），而 $\\overline{B^n}$ 可缩、$\\pi_{n-1}(\\overline{B^n})=0$，所以 $i_*$ 是零同态，$r_*\\circ i_*$ 也必须是零同态——与它是恒等同态矛盾。$n=1$ 的情形改用一个更初等的论证：连续满射把连通空间映成连通空间，而 $S^0=\\{-1,1\\}$ 不连通，故不存在收缩 $r:[-1,1]\\to\\{-1,1\\}$。\n\n**应用**：若 $f:\\mathbb{R}^n\\to\\mathbb{R}^n$ 连续且 $f(\\mathbb{R}^n)$ 有界，取足够大的闭球 $\\overline{B}_R\\supseteq f(\\overline{B}_R)$，对 $f|_{\\overline{B}_R}$ 用定理即得不动点（这是「$\\mathbb{R}^n$ 上的布劳威尔型结果」）。在经济学中，纳什均衡的存在性用的是布劳威尔定理的多值推广——角谷（Kakutani）不动点定理；无穷维版本 Schauder 不动点定理则用于证明非线性微分方程、积分方程解的存在性。",
+    "definitionEn": "**Brouwer's fixed point theorem:** let $\\overline{B^n}=\\{x\\in\\mathbb{R}^n:\\|x\\|\\le1\\}$ be the closed unit ball and $f:\\overline{B^n}\\to\\overline{B^n}$ continuous. Then $f(x)=x$ for some $x\\in\\overline{B^n}$. It holds for all $n\\ge1$. For $n=1$ it is the intermediate value theorem: with $g(x)=f(x)-x$ one has $g(0)=f(0)\\ge0$ and $g(1)=f(1)-1\\le0$, so $g$ vanishes somewhere. Higher dimensions need algebraic topology. Note the hypotheses: $\\overline{B^n}$ is **compact and convex** (any compact convex set homeomorphic to it works), and the map must take the ball into **itself** — the translation $x\\mapsto x+1$ on $\\mathbb{R}$ is a counterexample otherwise.\n\n**Equivalent form:** “every continuous self-map has a fixed point” is equivalent to “**$S^{n-1}=\\partial\\overline{B^n}$ is not a retract of $\\overline{B^n}$**”, i.e. there is no continuous $r:\\overline{B^n}\\to S^{n-1}$ with $r|_{S^{n-1}}=\\mathrm{id}_{S^{n-1}}$. Both directions are elementary:\n- (non-retract $\\Rightarrow$ fixed point) If a continuous $f$ had no fixed point, i.e. $f(x)\\ne x$ for all $x$, shoot the ray from $f(x)$ through $x$ and take its intersection with the sphere, $r(x)=f(x)+t(x)(x-f(x))$ with $t(x)\\ge1$ and $\\|r(x)\\|=1$. Here $t(x)$ is the unique root $\\ge1$ of $\\|f(x)+t(x-f(x))\\|^2=1$ and depends continuously on $x$; moreover $r(x)=x$ for $x\\in S^{n-1}$. This is a retraction, contradicting the assumption.\n- (fixed point $\\Rightarrow$ non-retract) If a retraction $r$ existed, then $g(x)=-r(x)$ maps $\\overline{B^n}$ into itself, so by Brouwer there is $x$ with $-r(x)=x$; then $\\|x\\|=\\|r(x)\\|=1$, so $x\\in S^{n-1}$ and $r(x)=x$, giving $x=-x$, i.e. $x=0$, contradicting $\\|x\\|=1$.\n\n**Proof via algebraic topology:** it suffices to rule out a retraction. Let $i:S^{n-1}\\hookrightarrow\\overline{B^n}$ be the inclusion. A retraction $r$ would satisfy $r\\circ i=\\mathrm{id}_{S^{n-1}}$, hence $r_*\\circ i_*=\\mathrm{id}_{\\pi_{n-1}(S^{n-1})}$. But $\\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}\\ne0$ (the $(n-1)$-st homotopy group of the sphere is given by degree, the same phenomenon as $\\pi_1(S^1)=\\mathbb{Z}$), while $\\overline{B^n}$ is contractible with $\\pi_{n-1}(\\overline{B^n})=0$; so $i_*$ is the zero map and $r_*\\circ i_*$ must be zero, contradicting that it is the identity. For $n=1$ a more elementary argument works: a continuous surjection maps connected spaces to connected spaces, but $S^0=\\{-1,1\\}$ is disconnected, so no retraction $[-1,1]\\to\\{-1,1\\}$ exists.\n\n**Applications:** if $f:\\mathbb{R}^n\\to\\mathbb{R}^n$ is continuous with bounded image, choose $R$ with $f(\\overline{B}_R)\\subseteq\\overline{B}_R$ and apply the theorem to $f|_{\\overline{B}_R}$ — this is the Brouwer-type result on $\\mathbb{R}^n$. In economics the existence of Nash equilibria follows from Kakutani's set-valued generalisation of Brouwer; the infinite-dimensional Schauder theorem proves existence of solutions of nonlinear differential and integral equations.",
+    "formulas": [
+      {
+        "latex": "f:\\overline{B^n}\\to\\overline{B^n}\\ \\text{连续}\\ \\Longrightarrow\\ \\exists\\,x\\in\\overline{B^n}:\\ f(x)=x",
+        "note": "布劳威尔不动点定理本体，对一切 $n\\ge1$ 成立。条件是：闭球紧且凸、映射把球映入自身。",
+        "noteEn": "The theorem itself, valid for every $n\\ge1$. The hypotheses: the closed ball is compact and convex, and the map sends the ball into itself."
+      },
+      {
+        "latex": "g(x)=f(x)-x,\\qquad g(0)=f(0)\\ge0,\\quad g(1)=f(1)-1\\le0",
+        "note": "一维情形的证明：$g$ 连续且两端异号（含零点），由介值定理得不动点。高维没有这样简单的手段，必须用代数拓扑。",
+        "noteEn": "Proof in dimension one: $g$ is continuous and changes sign (allowing a zero), so the intermediate value theorem gives a fixed point. No such elementary argument exists in higher dimensions."
+      },
+      {
+        "latex": "\\nexists\\,r:\\overline{B^n}\\to S^{n-1}\\ \\text{连续},\\ r|_{S^{n-1}}=\\mathrm{id}_{S^{n-1}}",
+        "note": "等价形式：$S^{n-1}$ 不是 $\\overline{B^n}$ 的收缩核。定理的两种说法互相等价，证明中真正使用的是这一条。",
+        "noteEn": "Equivalent form: $S^{n-1}$ is not a retract of $\\overline{B^n}$. The two statements are equivalent, and this is the form actually used in the proof."
+      },
+      {
+        "latex": "r(x)=f(x)+t(x)\\,(x-f(x)),\\qquad t(x)\\ge1,\\ \\|r(x)\\|=1",
+        "note": "由「无不动点的 $f$」构造收缩的显式公式：从 $f(x)$ 过 $x$ 作射线交球面于 $r(x)$，$t(x)$ 取 $\\|f(x)+t(x-f(x))\\|^2=1$ 的、$\\ge1$ 的那个根。",
+        "noteEn": "Explicit construction of a retraction from a fixed-point-free $f$: shoot the ray from $f(x)$ through $x$ to the sphere; $t(x)$ is the root $\\ge1$ of $\\|f(x)+t(x-f(x))\\|^2=1$."
+      },
+      {
+        "latex": "r_*\\circ i_*=\\mathrm{id}_{\\pi_{n-1}(S^{n-1})},\\qquad \\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}\\ne0,\\quad \\pi_{n-1}(\\overline{B^n})=0",
+        "note": "矛盾的核心：收缩要求复合是恒等同态，但 $i_*$ 要穿过平凡群 $\\pi_{n-1}(\\overline{B^n})=0$（$\\overline{B^n}$ 可缩），只能是零同态。",
+        "noteEn": "The heart of the contradiction: a retraction would force the composite to be the identity, but $i_*$ factors through the trivial group $\\pi_{n-1}(\\overline{B^n})=0$ since the ball is contractible, so it is zero."
+      }
+    ],
+    "properties": [
+      "对一切 $n\\ge1$ 成立：一维由介值定理（令 $g(x)=f(x)-x$），$n\\ge2$ 必须用代数拓扑，用 $\\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}\\ne0$（或同调群、度）得出矛盾。",
+      "与「非收缩核」等价：$\\overline{B^n}$ 上「连续自映射都有不动点」$\\iff$「不存在连续收缩 $r:\\overline{B^n}\\to S^{n-1}$」。两个方向分别用射线构造与对径技巧（$g=-r$）证明。",
+      "可推广到一切与 $\\overline{B^n}$ 同胚的紧凸集（如 $[0,1]^n$、单纯形）：它们上的连续自映射都有不动点。",
+      "条件不能削弱：把 $\\overline{B^n}$ 换成不含边界的开球或换成 $S^{n-1}$ 本身就可能没有不动点——圆周上的对径映射 $x\\mapsto-x$ 就没有不动点；$\\mathbb{R}$ 上的平移 $x\\mapsto x+1$ 也没有。",
+      "有诸多推广：角谷（Kakutani）定理把定理推广到集值映射（纳什均衡存在性的工具），Schauder 定理推广到 Banach 空间，Lefschetz 不动点定理用同调与 Lefschetz 数给出更一般的判据。"
+    ],
+    "propertiesEn": [
+      "Holds for all $n\\ge1$: for $n=1$ it is the intermediate value theorem applied to $g(x)=f(x)-x$; for $n\\ge2$ one needs algebraic topology — the contradiction comes from $\\pi_{n-1}(S^{n-1})\\cong\\mathbb{Z}\\ne0$ (or from homology, or degree theory).",
+      "Equivalent to the non-retract statement: “every continuous self-map of $\\overline{B^n}$ has a fixed point” iff “there is no continuous retraction $r:\\overline{B^n}\\to S^{n-1}$”. The two directions use the ray construction and the antipodal trick ($g=-r$).",
+      "It extends to every compact convex set homeomorphic to $\\overline{B^n}$ (e.g. $[0,1]^n$, a simplex): every continuous self-map has a fixed point.",
+      "The hypotheses cannot be weakened: replacing the closed ball by an open ball or by $S^{n-1}$ itself may destroy fixed points — the antipodal map $x\\mapsto-x$ on the circle has none, and neither has the translation $x\\mapsto x+1$ on $\\mathbb{R}$.",
+      "Many generalisations exist: Kakutani's theorem for set-valued maps (the tool behind Nash equilibrium existence), Schauder's theorem in Banach spaces, and the Lefschetz fixed point theorem using homology and the Lefschetz number."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "cos(x)",
+          "color": "#4cc9f0",
+          "label": "y = cos x"
+        },
+        {
+          "expr": "x",
+          "color": "#ff6b9d",
+          "label": "y = x"
+        }
+      ],
+      "tangents": [
+        {
+          "expr": "cos(x)",
+          "at": 0.739085,
+          "color": "#ffd166",
+          "label": "不动点 x ≈ 0.7391"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        1.5
+      ],
+      "yRange": [
+        -0.5,
+        1.5
+      ],
+      "title": "y = cos x 与 y = x 的交点即不动点（虚线为该点切线）"
+    },
+    "examples": [
+      {
+        "problem": "用介值定理证明 $[0,1]$ 上的连续自映射必有不动点，并求出 $f(x)=1-x^2$ 在 $[0,1]$ 上的不动点。",
+        "solution": "设 $f:[0,1]\\to[0,1]$ 连续，令 $g(x)=f(x)-x$。$g$ 连续，且 $g(0)=f(0)-0=f(0)\\ge0$（因为 $f(0)\\in[0,1]$）、$g(1)=f(1)-1\\le0$。由介值定理存在 $x\\in[0,1]$ 使 $g(x)=0$，即 $f(x)=x$。对 $f(x)=1-x^2$：解 $x=1-x^2$ 即 $x^2+x-1=0$，得 $x=\\dfrac{-1+\\sqrt5}{2}\\approx0.618$（另一根 $\\dfrac{-1-\\sqrt5}{2}<0$ 不在 $[0,1]$ 内），故 $x=\\dfrac{\\sqrt5-1}{2}$ 是唯一的不动点。"
+      },
+      {
+        "problem": "用布劳威尔不动点定理证明：不存在连续收缩 $r:\\overline{B^n}\\to S^{n-1}$（即 $S^{n-1}$ 不是 $\\overline{B^n}$ 的收缩核）。",
+        "solution": "反设存在这样的 $r$，则 $r(x)\\in S^{n-1}$ 恒成立，特别地 $\\|r(x)\\|=1$。定义 $g(x)=-r(x)$，则 $g$ 是 $\\overline{B^n}$ 到自身的连续映射（因为 $\\|g(x)\\|=1\\le1$）。由布劳威尔不动点定理，存在 $x$ 使 $g(x)=x$，即 $-r(x)=x$，于是 $\\|x\\|=\\|r(x)\\|=1$，故 $x\\in S^{n-1}$。但 $x$ 在球面上时收缩条件给出 $r(x)=x$，代入得 $x=-x$，即 $x=0$，与 $\\|x\\|=1$ 矛盾。故不存在收缩。反过来（非收缩核 ⟹ 不动点）可用定义中的射线构造：若 $f$ 无不动点，从 $f(x)$ 过 $x$ 作射线交球面即得收缩 $r$。"
+      }
+    ],
+    "tags": [
+      "代数拓扑",
+      "不动点",
+      "收缩核",
+      "同伦群",
+      "度",
+      "应用"
+    ],
+    "links": [
+      "homotopy",
+      "fundamental-group-circle",
+      "fundamental-group",
+      "continuity-theorems",
+      "compactness"
+    ]
+  }
+]

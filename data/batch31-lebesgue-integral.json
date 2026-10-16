@@ -1,0 +1,722 @@
+[
+  {
+    "id": "egorov-lusin",
+    "title": "叶戈罗夫定理与鲁津定理",
+    "titleEn": "Egorov's and Lusin's Theorems",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "有限测度集上几乎处处收敛总能加强为几乎一致收敛（叶戈罗夫）；实值可测函数去掉任意小测度集后即成为连续函数（鲁津）。",
+    "summaryEn": "On a finite measure space almost everywhere convergence upgrades to almost uniform convergence (Egorov); a real-valued measurable function becomes continuous after deleting a set of arbitrarily small measure (Lusin).",
+    "definition": "**叶戈罗夫定理**：设 $(X,\\mathcal{M},\\mu)$ 是**有限测度空间**（即 $\\mu(X)<\\infty$），$f_n,f$ 是 $X$ 上的实值可测函数，且 $f_n\\to f$ 几乎处处成立（不收敛的那个零测集可以并入后面要挖掉的集合）。那么对任意 $\\varepsilon>0$，存在可测集 $E\\subset X$，$\\mu(E)<\\varepsilon$，使得在补集 $X\\setminus E$ 上 $f_n$ **一致收敛**于 $f$。一句话：有限测度空间上，**几乎处处收敛 $\\Rightarrow$ 几乎一致收敛**（即去掉任意小测度集后一致收敛）。**$\\mu(X)<\\infty$ 这个条件绝对不能遗漏**，在无限测度空间（如 $\\mathbb{R}$）上定理会失效（见例题）。\n\n**鲁津定理**：设 $f$ 是定义在可测集 $E$（$\\mu(E)<\\infty$）上的**实值**可测函数。那么对任意 $\\varepsilon>0$，存在闭集 $F\\subset E$ 使 $\\mu(E\\setminus F)<\\varepsilon$，且限制 $f|_F$ 连续。一句话：可测函数去掉任意小测度集后即连续——这种性质叫「近似连续」。逆命题也成立：若一个函数在去掉任意小测度集后都连续，则它必可测，所以鲁津定理给出了可测性的等价刻画。直觉上，可测函数可以用简单函数（有限个阶梯）逼近，阶梯只有有限个跳跃点，把跳跃点附近的集合挖掉就能连续。\n\n这两条定理的意义在于：可测性、几乎处处收敛这类「测度意义下」的弱性质，只要付出任意小测度的代价，就能升级为连续、一致收敛这类「拓扑意义下」的强性质。叶戈罗夫定理常用来把 a.e. 收敛局部化为一致收敛再作积分估计；鲁津定理说明可测函数与连续函数只差一个可以任意小的集合。它们是实分析里「几乎」哲学的典范。",
+    "definitionEn": "**Egorov's theorem**: Let $(X,\\mathcal{M},\\mu)$ be a measure space of **finite measure** ($\\mu(X)<\\infty$), and let $f_n,f$ be real-valued measurable functions with $f_n\\to f$ almost everywhere (the null set of non-convergence may be absorbed into the exceptional set). Then for every $\\varepsilon>0$ there is a measurable set $E\\subset X$ with $\\mu(E)<\\varepsilon$ such that $f_n\\to f$ **uniformly** on the complement $X\\setminus E$. In one line: on a finite measure space, almost everywhere convergence implies almost uniform convergence. **The hypothesis $\\mu(X)<\\infty$ cannot be dropped**; on infinite measure spaces such as $\\mathbb{R}$ the theorem may fail (see the example).\n\n**Lusin's theorem**: Let $f$ be a **real-valued** measurable function on a measurable set $E$ with $\\mu(E)<\\infty$. Then for every $\\varepsilon>0$ there is a closed set $F\\subset E$ with $\\mu(E\\setminus F)<\\varepsilon$ such that the restriction $f|_F$ is continuous. In one line: a measurable function becomes continuous after removing a set of arbitrarily small measure; this property is called approximate continuity. The converse holds too: any function that is approximately continuous is measurable, so Lusin's theorem characterizes measurability. Intuitively, measurable functions are limits of simple functions (finitely many steps), and deleting small neighborhoods of the finitely many jump points makes them continuous.\n\nThese theorems show that measure-theoretic properties that are weak (measurability, a.e. convergence) can be upgraded to topological properties that are strong (continuity, uniform convergence) at the cost of an arbitrarily small set. Egorov's theorem is the standard tool for turning a.e. convergence into uniform convergence before estimating integrals, and Lusin's theorem says a measurable function differs from a continuous one on an arbitrarily small set.",
+    "formulas": [
+      {
+        "latex": "\\mu(X)<\\infty,\\quad f_n\\to f\\ \\ \\text{a.e.}\\quad\\Longrightarrow\\quad \\forall\\,\\varepsilon>0\\ \\ \\exists\\,E\\ \\text{可测}:\\ \\mu(E)<\\varepsilon,\\quad f_n\\rightrightarrows f\\ \\ \\text{在}\\ X\\setminus E\\ \\text{上}",
+        "note": "叶戈罗夫定理：前提是 $\\mu(X)<\\infty$，结论是去掉测度小于 $\\varepsilon$ 的集合后一致收敛（$\\rightrightarrows$ 记一致收敛）。",
+        "noteEn": "Egorov's theorem: the hypothesis is $\\mu(X)<\\infty$; the conclusion is uniform convergence ($\\rightrightarrows$) off a set of measure less than $\\varepsilon$."
+      },
+      {
+        "latex": "\\mu(E)<\\infty,\\ \\ f\\ \\text{可测 on}\\ E:\\quad \\forall\\,\\varepsilon>0\\ \\ \\exists\\,F\\subset E\\ \\text{闭}:\\ \\mu(E\\setminus F)<\\varepsilon,\\ \\ f|_F\\ \\text{连续}",
+        "note": "鲁津定理（近似连续）：可测函数在去掉任意小测度集（取闭集 $F$）后连续。",
+        "noteEn": "Lusin's theorem (approximate continuity): after deleting a set of arbitrarily small measure, a measurable function is continuous on the remaining closed set $F$."
+      },
+      {
+        "latex": "f\\ \\text{近似连续}\\quad\\Longleftrightarrow\\quad f\\ \\text{可测}",
+        "note": "鲁津定理的逆：近似连续是可测性的等价刻画（在有限测度集上）。",
+        "noteEn": "Converse of Lusin: approximate continuity is an equivalent description of measurability (on sets of finite measure)."
+      },
+      {
+        "latex": "f_n=\\chi_{[n,n+1)}\\ \\ \\text{on}\\ \\mathbb{R}:\\qquad f_n\\to 0\\ \\ \\text{处处},\\qquad \\text{但}\\ f_n\\ \\text{不是几乎一致收敛}",
+        "note": "反例：说明叶戈罗夫定理中「有限测度」条件不可省——在 $\\mathbb{R}$ 上无论去掉怎样小的集合，都无法获得一致收敛。",
+        "noteEn": "Counterexample: the 'finite measure' hypothesis in Egorov's theorem is essential; on $\\mathbb{R}$ no small removal yields uniform convergence."
+      }
+    ],
+    "expression": {
+      "text": "f_n → f（a.e.）⇒ f_n ⇉ f（a.u.，需 μ(X)<∞）",
+      "symbol": "f_n\\rightrightarrows f",
+      "note": "叶戈罗夫：有限测度下几乎处处收敛升级为几乎一致收敛；鲁津：可测函数的近似连续性。",
+      "noteEn": "Egorov: on finite measure spaces a.e. convergence upgrades to almost uniform convergence; Lusin: measurable functions are approximately continuous."
+    },
+    "properties": [
+      "叶戈罗夫定理中**有限测度条件不可省**：在 $\\mathbb{R}$ 上取 $f_n=\\chi_{[n,n+1)}$，则 $f_n\\to 0$ 处处成立；但若「好集合」$G$ 满足 $\\mu(\\mathbb{R}\\setminus G)<1$，则 $\\mu(G\\cap[n,n+1))\\ge 1-\\mu(\\mathbb{R}\\setminus G)>0$，于是 $\\sup_{x\\in G}f_n(x)=1$ 对一切 $n$ 成立，$f_n$ 在 $G$ 上不可能一致收敛。",
+      "鲁津定理可加强：在欧氏空间中可取 $F$ 为**紧集**；并且 $f|_F$ 可延拓成整个 $\\mathbb{R}$ 上的连续函数（蒂策延拓定理）。",
+      "鲁津定理是可测性的刻画：函数近似连续 $\\iff$ 函数可测（在有限测度集上），因此它既给出构造，也给出判别法。",
+      "在有限测度空间上，几乎处处收敛与几乎一致收敛**等价**：叶戈罗夫定理给出一半；另一半是——若对每个 $k$ 存在例外集 $E_k$（$\\mu(E_k)<1/k$）使 $f_n$ 在 $X\\setminus E_k$ 上一致收敛，则交集 $N=\\bigcap_k E_k$ 满足 $\\mu(N)\\le\\mu(E_k)<1/k$（对一切 $k$），故是零测集；且对每个 $x\\notin N$ 存在某个 $k$ 使 $x\\notin E_k$，从而 $f_n(x)\\to f(x)$，即 $f_n\\to f$ 几乎处处收敛。",
+      "概率语言：概率空间满足 $\\mu(\\Omega)=1<\\infty$，所以随机变量序列的几乎必然收敛自动是几乎一致收敛——这是概率论中可以直接使用叶戈罗夫型结论的原因。"
+    ],
+    "propertiesEn": [
+      "The finite-measure hypothesis in Egorov's theorem cannot be dropped: on $\\mathbb{R}$ take $f_n=\\chi_{[n,n+1)}$, then $f_n\\to0$ everywhere; but if a set $G$ satisfies $\\mu(\\mathbb{R}\\setminus G)<1$, then $\\mu(G\\cap[n,n+1))\\ge 1-\\mu(\\mathbb{R}\\setminus G)>0$, so $\\sup_{x\\in G}f_n(x)=1$ for every $n$ and uniform convergence on $G$ is impossible.",
+      "Lusin's theorem can be strengthened: in Euclidean space $F$ may be taken compact, and $f|_F$ extends to a continuous function on all of $\\mathbb{R}$ (Tietze extension theorem).",
+      "Lusin's theorem characterizes measurability: a function is approximately continuous if and only if it is measurable (on sets of finite measure).",
+      "On finite measure spaces a.e. convergence and almost uniform convergence are equivalent: Egorov gives one direction; for the other, if for every $k$ there is an exceptional set $E_k$ with $\\mu(E_k)<1/k$ such that $f_n$ converges uniformly on $X\\setminus E_k$, then $N=\\bigcap_k E_k$ is a null set, and for every $x\\notin N$ there is some $k$ with $x\\notin E_k$, so $f_n(x)\\to f(x)$; hence $f_n\\to f$ a.e.",
+      "In probabilistic language: a probability space has $\\mu(\\Omega)=1<\\infty$, so almost sure convergence of random variables is automatically almost uniform convergence."
+    ],
+    "examples": [
+      {
+        "problem": "（有限测度条件不能省）在 $\\mathbb{R}$ 上定义 $f_n(x)=\\chi_{[n,n+1)}(x)$。验证 $f_n\\to 0$ 对每个 $x$ 成立，但不成立几乎一致收敛，说明叶戈罗夫定理中 $\\mu(X)<\\infty$ 不可去掉。",
+        "solution": "逐点收敛：固定 $x$，当 $n>x$ 时 $x\\notin[n,n+1)$，所以 $f_n(x)=0$，即 $f_n\\to 0$ 处处成立。设 $G\\subset\\mathbb{R}$ 是任意一个「好集合」，假设 $f_n$ 在 $G$ 上一致收敛到 0，则必须有 $\\sup_{x\\in G}f_n(x)\\to 0$。但若 $\\mu(\\mathbb{R}\\setminus G)<1$，则对每个 $n$ 都有 $\\mu(G\\cap[n,n+1))\\ge 1-\\mu(\\mathbb{R}\\setminus G)>0$，特别地 $G\\cap[n,n+1)\\neq\\varnothing$，从而 $\\sup_{x\\in G}f_n(x)=1$ 对一切 $n$ 成立，矛盾。所以不可能通过去掉测度小于 1 的集合得到一致收敛：叶戈罗夫定理在 $\\mu(\\mathbb{R})=\\infty$ 时确实失效。"
+      },
+      {
+        "problem": "（鲁津定理的操作）设 $D(x)=\\chi_{\\mathbb{Q}}(x)$ 是 $[0,1]$ 上的 Dirichlet 函数。对任意 $\\varepsilon>0$，找出闭集 $F\\subset[0,1]$ 使 $\\mu([0,1]\\setminus F)<\\varepsilon$ 且 $D|_F$ 连续。",
+        "solution": "$\\mathbb{Q}\\cap[0,1]$ 是可数集，因而是零测集。取开集 $U\\supset\\mathbb{Q}\\cap[0,1]$ 使 $\\mu(U)<\\varepsilon$（例如用总长度小于 $\\varepsilon$ 的一列开区间覆盖每个有理点），令 $F=[0,1]\\setminus U$。则 $F$ 是闭集，$\\mu([0,1]\\setminus F)=\\mu(U)<\\varepsilon$，并且 $F$ 中全部是无理数，$D|_F\\equiv 0$ 是常函数，当然连续。这正是鲁津定理的内容：处处不连续的 Dirichlet 函数，在去掉任意小（这里甚至总测度小于 $\\varepsilon$）的集合后变得连续。"
+      }
+    ],
+    "tags": [
+      "实变函数论",
+      "可测函数",
+      "几乎处处收敛",
+      "近似连续"
+    ],
+    "links": [
+      "measurable-functions",
+      "convergence-ae",
+      "measure-space",
+      "continuity",
+      "lebesgue-integral"
+    ]
+  },
+  {
+    "id": "lebesgue-integral",
+    "title": "勒贝格积分的定义",
+    "titleEn": "The Lebesgue Integral",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "对非负可测函数取「不超过它的简单函数积分」的上确界，再把一般可测函数分解为 f=f⁺−f⁻，得到勒贝格积分；∫|f|<∞ 时积分有限。",
+    "summaryEn": "The Lebesgue integral is the supremum of integrals of simple functions lying below a nonnegative measurable function; a general measurable function is split as f=f⁺−f⁻, and the integral is finite exactly when ∫|f|<∞.",
+    "definition": "勒贝格积分的定义分三步。**第一步**，对**非负简单函数** $s=\\sum_{i=1}^{n}a_i\\chi_{A_i}$（$a_i\\ge 0$，$A_i$ 是互不相交的可测集）直接定义 $\\int s\\,d\\mu=\\sum_{i=1}^{n}a_i\\mu(A_i)$：这不过是「高度 × 测度」的加和，可以理解成按值域分层求面积。**第二步**，对**非负可测函数** $f$，用所有从下方不超过它的简单函数去逼近，取上确界：$\\int f\\,d\\mu=\\sup\\{\\int s\\,d\\mu: 0\\le s\\le f,\\ s\\ \\text{简单}\\}$。这个上确界总是有定义的（取 $s\\equiv 0$ 即可），允许等于 $+\\infty$。\n\n**第三步**处理**一般可测函数**。把 $f$ 分解为正部与负部：$f=f^+-f^-$，其中 $f^+=\\max(f,0)$，$f^-=\\max(-f,0)$。当 $\\int f^+$ 与 $\\int f^-$ **不同时为 $+\\infty$** 时，定义 $\\int f\\,d\\mu=\\int f^+d\\mu-\\int f^-d\\mu$；若二者都是 $+\\infty$，积分无定义（避免 $\\infty-\\infty$）。当 $\\int|f|\\,d\\mu=\\int f^++\\int f^-<+\\infty$ 时，称 $f$ 为**勒贝格可积**，记 $f\\in L^1(\\mu)$，此时 $\\int f$ 是有限实数。也就是说：**勒贝格可积 $\\iff \\int|f|<\\infty$**。\n\n与黎曼积分「划分定义域」不同，勒贝格积分「划分值域」：先问「函数值落在第 $k$ 层的点集有多大」，再乘以层高求和。这让它对病态函数同样有效——例如 Dirichlet 函数 $\\chi_{\\mathbb{Q}}$ 黎曼不可积，但作为简单函数立刻得到勒贝格积分为 $\\mu(\\mathbb{Q})=0$。勒贝格积分还带来完备性（$L^1$ 是完备空间）和强大的极限定理（单调收敛、控制收敛），这是它取代黎曼积分成为现代分析基石的根本原因。",
+    "definitionEn": "The Lebesgue integral is built in three steps. **Step 1**: for a **nonnegative simple function** $s=\\sum_{i=1}^{n}a_i\\chi_{A_i}$ (with $a_i\\ge0$ and the $A_i$ pairwise disjoint measurable sets) define $\\int s\\,d\\mu=\\sum_{i=1}^{n}a_i\\mu(A_i)$; this is just 'height times measure', a layered area. **Step 2**: for a **nonnegative measurable function** $f$, approximate from below by simple functions and take the supremum: $\\int f\\,d\\mu=\\sup\\{\\int s\\,d\\mu: 0\\le s\\le f,\\ s\\ \\text{simple}\\}$. This supremum always exists (take $s\\equiv0$) and may equal $+\\infty$.\n\n**Step 3** handles a **general measurable function**. Split it into positive and negative parts: $f=f^+-f^-$ with $f^+=\\max(f,0)$, $f^-=\\max(-f,0)$. When $\\int f^+$ and $\\int f^-$ are **not both $+\\infty$**, define $\\int f\\,d\\mu=\\int f^+d\\mu-\\int f^-d\\mu$; if both are $+\\infty$ the integral is undefined (to avoid $\\infty-\\infty$). If $\\int|f|\\,d\\mu=\\int f^++\\int f^-<+\\infty$, then $f$ is called **Lebesgue integrable**, written $f\\in L^1(\\mu)$, and $\\int f$ is a finite real number. Equivalently, **$f$ is integrable $\\iff \\int|f|<\\infty$**.\n\nUnlike the Riemann integral, which partitions the domain, the Lebesgue integral partitions the range: it asks how large the set is on which the values fall in a given layer, then adds height times measure. That is why it handles pathological functions: the Dirichlet function $\\chi_{\\mathbb{Q}}$ is not Riemann integrable, yet as a simple function it has Lebesgue integral $\\mu(\\mathbb{Q})=0$. Together with completeness of $L^1$ and powerful limit theorems (monotone and dominated convergence), this is why the Lebesgue integral replaced the Riemann integral as the foundation of modern analysis.",
+    "formulas": [
+      {
+        "latex": "\\int_X f\\,d\\mu=\\sup\\Bigl\\{\\int_X s\\,d\\mu:\\ 0\\le s\\le f,\\ s\\ \\text{简单函数}\\Bigr\\}",
+        "note": "非负可测函数的勒贝格积分：用不超过 $f$ 的非负简单函数从下方逼近，取上确界（允许 $+\\infty$）。",
+        "noteEn": "Lebesgue integral of a nonnegative measurable function: the supremum of integrals of nonnegative simple functions below $f$ (value $+\\infty$ allowed)."
+      },
+      {
+        "latex": "\\int_X\\Bigl(\\sum_{i=1}^{n}a_i\\chi_{A_i}\\Bigr)d\\mu=\\sum_{i=1}^{n}a_i\\,\\mu(A_i)\\qquad (a_i\\ge0,\\ A_i\\ \\text{互不相交})",
+        "note": "简单函数的积分：把每层的「高度 × 测度」相加；这是整个定义的起点。",
+        "noteEn": "Integral of a simple function: add 'height times measure' over the layers; this is the starting point of the definition."
+      },
+      {
+        "latex": "f=f^+-f^-,\\qquad \\int_X f\\,d\\mu=\\int_X f^+d\\mu-\\int_X f^-d\\mu\\qquad(\\text{两项不同时为}\\ \\infty)",
+        "note": "一般可测函数的积分 = 正部积分 − 负部积分；要求两项不同时为 $+\\infty$，否则出现无意义的 $\\infty-\\infty$。",
+        "noteEn": "General measurable functions: integral = (integral of positive part) − (integral of negative part); the two terms must not both be $+\\infty$."
+      },
+      {
+        "latex": "f\\in L^1(\\mu)\\iff \\int_X|f|\\,d\\mu=\\int_X f^+d\\mu+\\int_X f^-d\\mu<\\infty",
+        "note": "**勒贝格可积 $\\iff$ $|f|$ 的积分有限**；此时 $\\int f$ 是有限实数，且 $\\bigl|\\int f\\bigr|\\le\\int|f|$。",
+        "noteEn": "$f$ is Lebesgue integrable iff $\\int|f|<\\infty$; then $\\int f$ is a finite real number with $\\bigl|\\int f\\bigr|\\le\\int|f|$."
+      },
+      {
+        "latex": "0\\le s_n\\uparrow f\\ (s_n\\ \\text{简单})\\quad\\Longrightarrow\\quad \\int_X s_n\\,d\\mu\\uparrow\\int_X f\\,d\\mu",
+        "note": "定义自洽性：用任意递增简单函数列逼近 $f$，积分极限都相同（证明依赖单调收敛定理）。",
+        "noteEn": "Consistency of the definition: any increasing sequence of simple functions with $s_n\\uparrow f$ has integrals converging to $\\int f$ (the proof uses monotone convergence)."
+      }
+    ],
+    "expression": {
+      "text": "∫_X f dμ = sup{ ∫_X s dμ : 0 ≤ s ≤ f，s 为简单函数 }",
+      "symbol": "\\int_X f\\,d\\mu",
+      "note": "先定义非负情形（上确界），再用 f=f⁺−f⁻ 推广到一般可测函数；∫|f|<∞ 时可积。",
+      "noteEn": "Define the nonnegative case as a supremum, then extend via f=f⁺−f⁻ to general measurable functions; integrable means ∫|f|<∞."
+    },
+    "properties": [
+      "非负可测函数的积分永远有定义，取值于 $[0,+\\infty]$：不需要有限性，也不会出现 $\\infty-\\infty$。",
+      "两种定义一致：对非负可测 $f$，若 $0\\le s_n\\uparrow f$（$s_n$ 简单），则 $\\int f=\\lim_n\\int s_n$——上确界定义与逼近极限定义等价。",
+      "可积性即绝对可积性：$f\\in L^1\\iff\\int|f|<+\\infty$；此时积分值有限。一般可测函数的积分可以有定义却为 $+\\infty$（例如 $f=1$ 于 $\\mathbb{R}$），但那时 $f\\notin L^1$。",
+      "有界加有限测度保证可积：若 $\\mu(X)<\\infty$ 且 $f$ 可测有界（$|f|\\le M$），则 $\\int|f|\\le M\\mu(X)<\\infty$，故 $f\\in L^1$。",
+      "若 $f$ 可测且 $\\int|f|<\\infty$，则 $|f|<+\\infty$ 几乎处处：可积函数不可能在正测度集上取无穷值。"
+    ],
+    "propertiesEn": [
+      "For a nonnegative measurable function the integral is always defined, with values in $[0,+\\infty]$; no finiteness is needed and $\\infty-\\infty$ never arises.",
+      "The two presentations agree: if $0\\le s_n\\uparrow f$ with $s_n$ simple, then $\\int f=\\lim_n\\int s_n$; the supremum definition equals the limit of increasing approximations.",
+      "Integrability is absolute integrability: $f\\in L^1\\iff\\int|f|<+\\infty$, and then the integral is finite. A general measurable function may have a well-defined integral equal to $+\\infty$ (e.g. $f=1$ on $\\mathbb{R}$) while not being in $L^1$.",
+      "Boundedness plus finite measure implies integrability: if $\\mu(X)<\\infty$ and $f$ is measurable with $|f|\\le M$, then $\\int|f|\\le M\\mu(X)<\\infty$ and $f\\in L^1$.",
+      "If $f$ is measurable and $\\int|f|<\\infty$, then $|f|<+\\infty$ almost everywhere: an integrable function cannot take the value infinity on a set of positive measure."
+    ],
+    "examples": [
+      {
+        "problem": "用定义计算 $f(x)=2\\chi_{[0,1]}(x)+3\\chi_{[1/2,2]}(x)$ 在 $[0,2]$ 上的积分。",
+        "solution": "$f$ 是非负简单函数。按取值分层：$f=2$ 于 $[0,\\tfrac12)$，$f=5$ 于 $[\\tfrac12,1]$，$f=3$ 于 $(1,2]$。于是 $\\int_{[0,2]}f\\,d\\mu=2\\cdot\\mu([0,\\tfrac12))+5\\cdot\\mu([\\tfrac12,1])+3\\cdot\\mu((1,2])=2\\cdot\\tfrac12+5\\cdot\\tfrac12+3\\cdot1=\\tfrac{13}{2}$。也可以直接用简单函数公式：$\\int f=2\\mu([0,1])+3\\mu([1/2,2])=2+3\\cdot\\tfrac32=\\tfrac{13}{2}$，两种算法一致。"
+      },
+      {
+        "problem": "计算 Dirichlet 函数 $D=\\chi_{\\mathbb{Q}\\cap[0,1]}$ 在 $[0,1]$ 上的勒贝格积分，并说明它黎曼不可积。",
+        "solution": "$D$ 是非负简单函数：在 $A=\\mathbb{Q}\\cap[0,1]$ 上取 1，在 $A^c$ 上取 0。故 $\\int_{[0,1]}D\\,d\\mu=1\\cdot\\mu(A)+0\\cdot\\mu(A^c)=0$，因为可数集 $A$ 是零测集。另一方面，$D$ 在 $[0,1]$ 上处处不连续，不连续点集测度为 1，由勒贝格判据（见「黎曼积分与勒贝格积分的关系」）黎曼不可积。这说明勒贝格积分的适用函数类严格大于黎曼积分。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2",
+          "color": "#4cc9f0",
+          "label": "y = x²"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "x^2",
+          "from": 0,
+          "to": 2,
+          "base": 0,
+          "color": "#06d6a0",
+          "label": "∫₀² x² dx = 8/3"
+        }
+      ],
+      "xRange": [
+        -0.4,
+        2.4
+      ],
+      "yRange": [
+        -0.5,
+        4.8
+      ],
+      "title": "勒贝格积分：非负可测函数下方的面积由简单函数从下方逼近取上确界"
+    },
+    "tags": [
+      "实变函数论",
+      "勒贝格积分",
+      "简单函数",
+      "可积性"
+    ],
+    "links": [
+      "simple-functions",
+      "measurable-functions",
+      "integral",
+      "monotone-convergence",
+      "integral-properties"
+    ]
+  },
+  {
+    "id": "integral-properties",
+    "title": "勒贝格积分的性质",
+    "titleEn": "Properties of the Lebesgue Integral",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "勒贝格积分满足线性、几乎处处单调性与 |∫f| ≤ ∫|f|，并且对零测集完全不敏感：改动零测集上的取值不改变积分。",
+    "summaryEn": "The Lebesgue integral is linear and monotone (almost everywhere), satisfies the triangle inequality |∫f| ≤ ∫|f|, and is insensitive to changes on null sets.",
+    "definition": "勒贝格积分的全部使用技巧都建立在几条基本性质上：**线性**、**（几乎处处的）单调性**、**三角不等式**与**零测集无关性**。它们把积分从一个抽象定义变成可以计算、可以估计的对象。使用时要注意函数所处的层次。\n\n对**非负可测函数**：线性对非负系数成立，单调性无条件成立，等式两边允许是 $+\\infty$。对 $L^1$ 中的**可积函数**：线性对任意实数系数成立，且 $|\\int f|\\le\\int|f|$ 保证积分值是有限实数。两种情形的前提都是避免 $\\infty-\\infty$——可积性（$\\int|f|<\\infty$）正是为保证所有运算都有意义而设的安全条件。\n\n「零测集无关性」是最能体现勒贝格积分特点的一条：函数在零测集上取什么值完全不影响积分。因此讨论 $L^1$ 函数时人们习惯把几乎处处相等的函数视为同一个对象，这正是 $L^p$ 空间理论的出发点。一个常用推论是：非负可测函数的积分为 0 当且仅当它几乎处处为 0。",
+    "definitionEn": "All working rules of the Lebesgue integral rest on a few basic properties: **linearity**, **(almost everywhere) monotonicity**, the **triangle inequality**, and **independence of null sets**. They turn the integral from an abstract definition into a computable and estimable object.\n\nFor a **nonnegative measurable function**: linearity holds for nonnegative coefficients, monotonicity is unconditional, and both sides may equal $+\\infty$. For an **integrable function** in $L^1$: linearity holds for arbitrary real coefficients, and $|\\int f|\\le\\int|f|$ guarantees a finite real value. In both cases the point is to avoid $\\infty-\\infty$; integrability ($\\int|f|<\\infty$) is exactly the safety condition that keeps every operation meaningful.\n\nIndependence of null sets is the most characteristic Lebesgue property: the values a function takes on a null set do not affect the integral at all. Hence one identifies functions that are equal almost everywhere, which is the starting point of $L^p$ space theory. A standard corollary: a nonnegative measurable function has integral zero if and only if it vanishes almost everywhere.",
+    "formulas": [
+      {
+        "latex": "\\int_E(\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int_E f\\,d\\mu+\\beta\\int_E g\\,d\\mu\\qquad(f,g\\in L^1,\\ \\alpha,\\beta\\in\\mathbb{R})",
+        "note": "线性（可积情形，任意实系数）；对非负可测函数只需 $\\alpha,\\beta\\ge0$，两边允许 $+\\infty$。",
+        "noteEn": "Linearity for integrable functions with arbitrary real coefficients; for nonnegative measurable functions nonnegative coefficients suffice, and $+\\infty$ is allowed."
+      },
+      {
+        "latex": "f\\le g\\ \\ \\text{a.e.}\\quad\\Longrightarrow\\quad \\int_E f\\,d\\mu\\le\\int_E g\\,d\\mu",
+        "note": "（几乎处处的）单调性；对非负可测函数无需任何可积性假设。",
+        "noteEn": "Monotonicity almost everywhere; for nonnegative measurable functions no integrability assumption is needed."
+      },
+      {
+        "latex": "\\Bigl|\\int_E f\\,d\\mu\\Bigr|\\le\\int_E|f|\\,d\\mu",
+        "note": "三角不等式：勒贝格积分是绝对收敛积分，这与可以条件收敛的反常黎曼积分形成对比。",
+        "noteEn": "Triangle inequality: the Lebesgue integral is absolutely convergent, unlike improper Riemann integrals, which may converge conditionally."
+      },
+      {
+        "latex": "\\mu(N)=0\\ \\Longrightarrow\\ \\int_N f\\,d\\mu=0;\\qquad f=g\\ \\ \\text{a.e.}\\ \\Longrightarrow\\ \\int_E f\\,d\\mu=\\int_E g\\,d\\mu",
+        "note": "零测集无关性：在零测集上改动函数值不改变积分；只关心函数几乎处处的行为。",
+        "noteEn": "Independence of null sets: changing a function on a null set does not change its integral; only the a.e. behaviour matters."
+      },
+      {
+        "latex": "f\\ge0\\ \\ \\text{可测},\\quad \\int_E f\\,d\\mu=0\\quad\\Longrightarrow\\quad f=0\\ \\ \\text{a.e.}",
+        "note": "非负可测函数积分为零 $\\iff$ 几乎处处为零；这是「非负」假定的重要体现（对可变号函数不成立）。",
+        "noteEn": "A nonnegative measurable function has zero integral iff it vanishes a.e.; nonnegativity is essential here (the claim fails for sign-changing functions)."
+      }
+    ],
+    "expression": {
+      "text": "∫(αf+βg)dμ = α∫f dμ + β∫g dμ；|∫f| ≤ ∫|f|；零测集不影响积分",
+      "symbol": "\\int(\\alpha f+\\beta g)\\,d\\mu",
+      "note": "线性和三角不等式在可积函数上使用；零测集无关性使得「几乎处处相等」的函数积分完全相同。",
+      "noteEn": "Use linearity and the triangle inequality for integrable functions; null-set independence makes a.e. equal functions have identical integrals."
+    },
+    "properties": [
+      "线性分层成立：非负可测函数上，对 $\\alpha,\\beta\\ge0$ 有 $\\int(\\alpha f+\\beta g)=\\alpha\\int f+\\beta\\int g$（两边可为 $+\\infty$）；在 $L^1$ 上对任意实系数成立。",
+      "单调性：$f\\le g$ a.e. $\\Rightarrow\\int f\\le\\int g$。特别地 $f\\ge0$ a.e. $\\Rightarrow\\int f\\ge0$；若还有 $\\int f=0$，则 $f=0$ a.e.（用 $\\{f>1/n\\}\\uparrow\\{f>0\\}$ 与测度连续性证明）。",
+      "绝对值不等式：$|\\int_E f|\\le\\int_E|f|$；并且 $f\\in L^1\\iff\\int|f|<\\infty$。勒贝格积分本质上是绝对收敛积分。",
+      "零测集无关性：$\\mu(N)=0\\Rightarrow\\int_N f=0$；$f=g$ a.e. $\\Rightarrow\\int f=\\int g$。可积性与积分值都只依赖函数几乎处处的行为。",
+      "区域可加性：若 $A,B$ 可测且不交，则 $\\int_{A\\cup B}f=\\int_A f+\\int_B f$；配合零测集性质，可把任意可测集上的积分拆成便于计算的部分。"
+    ],
+    "propertiesEn": [
+      "Linearity holds in layers: on nonnegative measurable functions with $\\alpha,\\beta\\ge0$ (values in $[0,+\\infty]$ allowed), and on $L^1$ with arbitrary real coefficients.",
+      "Monotonicity: $f\\le g$ a.e. implies $\\int f\\le\\int g$. In particular $f\\ge0$ a.e. gives $\\int f\\ge0$; if moreover $\\int f=0$ then $f=0$ a.e. (proved via $\\{f>1/n\\}\\uparrow\\{f>0\\}$ and continuity of measure).",
+      "Absolute-value inequality: $|\\int_E f|\\le\\int_E|f|$; and $f\\in L^1\\iff\\int|f|<\\infty$. The Lebesgue integral is inherently absolutely convergent.",
+      "Null-set independence: $\\mu(N)=0\\Rightarrow\\int_N f=0$, and $f=g$ a.e. $\\Rightarrow\\int f=\\int g$. Integrability and the value of the integral depend only on a.e. behaviour.",
+      "Additivity over regions: for disjoint measurable $A,B$, $\\int_{A\\cup B}f=\\int_A f+\\int_B f$, which together with null-set independence splits integrals over arbitrary measurable sets into computable pieces."
+    ],
+    "examples": [
+      {
+        "problem": "设 $g(x)=x^2$（$x$ 为无理数），$g(x)=100$（$x$ 为有理数），$x\\in[0,1]$。求 $\\int_{[0,1]}g\\,d\\mu$。",
+        "solution": "$\\mathbb{Q}\\cap[0,1]$ 是零测集，所以 $g=x^2$ 几乎处处成立。由零测集无关性，$\\int_{[0,1]}g\\,d\\mu=\\int_{[0,1]}x^2\\,d\\mu=\\dfrac13$。注意：无论把有理点上的函数值改成多大（甚至是 $10^{100}$），积分都完全不变——这正是勒贝格积分「看不见零测集」的体现。"
+      },
+      {
+        "problem": "设 $f$ 可测、$f\\ge0$ 且 $\\int_X f\\,d\\mu=0$。证明 $f=0$ 几乎处处。",
+        "solution": "对每个 $n\\ge1$ 记 $E_n=\\{x: f(x)>1/n\\}$。由单调性，$\\int_X f\\,d\\mu\\ge\\int_{E_n}f\\,d\\mu\\ge\\dfrac1n\\mu(E_n)$，所以 $\\mu(E_n)\\le n\\int_X f\\,d\\mu=0$，即每个 $E_n$ 都是零测集。而 $\\{f>0\\}=\\bigcup_{n\\ge1}E_n$ 是可数并，仍为零测集，故 $f=0$ a.e.。"
+      }
+    ],
+    "tags": [
+      "实变函数论",
+      "勒贝格积分",
+      "线性",
+      "零测集"
+    ],
+    "links": [
+      "lebesgue-integral",
+      "simple-functions",
+      "convergence-ae",
+      "monotone-convergence",
+      "fatou-lemma"
+    ]
+  },
+  {
+    "id": "monotone-convergence",
+    "title": "单调收敛定理",
+    "titleEn": "The Monotone Convergence Theorem",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "非负可测函数列若单调递增收敛到 f，则积分列也收敛到 ∫f——交换极限与积分最基本的定理，不需要有限测度，也不需要可积性。",
+    "summaryEn": "If a sequence of nonnegative measurable functions increases monotonically to f, then the integrals converge to ∫f — the most basic limit theorem for integrals, requiring neither finite measure nor integrability.",
+    "definition": "**单调收敛定理**（Levi 定理，Monotone Convergence Theorem）：设 $f_n$ 是非负可测函数且 $f_1\\le f_2\\le\\cdots$；若 $f_n\\uparrow f$ 几乎处处（或逐点）成立，则 $\\int_X f_n\\,d\\mu\\uparrow\\int_X f\\,d\\mu$，即 $\\lim_{n\\to\\infty}\\int_X f_n\\,d\\mu=\\int_X f\\,d\\mu$。**定理不要求 $\\mu(X)<\\infty$，不要求 $f_n$ 可积，也不要求 $f$ 可积**：等号在 $[0,+\\infty]$ 中成立，两端可以同时是 $+\\infty$。\n\n为什么成立？把每个 $f_n$ 想成用简单函数从下方搭起的楼：单调性保证楼越搭越高，而上确界定义保证简单的逼近不会越过 $f$，取极限不损失任何数值。技术上，先用「按值域分层」的简单函数对非负函数验证结论，再用它把「上确界定义」与「递增逼近极限定义」统一起来。\n\n单调收敛定理是整个积分论的发动机：非负级数可以逐项积分（$\\int\\sum f_n=\\sum\\int f_n$），Fubini–Tonelli 定理、法图引理、控制收敛定理都依赖它。它的哲学是：**对非负函数，单调逼近下极限与积分可以无条件交换**。一旦去掉单调性或非负性，结论立刻失效（见性质与例题）。",
+    "definitionEn": "**Monotone Convergence Theorem** (Levi's theorem): let $f_n$ be nonnegative measurable functions with $f_1\\le f_2\\le\\cdots$; if $f_n\\uparrow f$ almost everywhere (or pointwise), then $\\int_X f_n\\,d\\mu\\uparrow\\int_X f\\,d\\mu$, that is, $\\lim_{n\\to\\infty}\\int_X f_n\\,d\\mu=\\int_X f\\,d\\mu$. **No finite measure, no integrability of $f_n$, and no integrability of $f$ is required**: the identity holds in $[0,+\\infty]$, and both sides may be $+\\infty$.\n\nWhy does it hold? Think of each $f_n$ as a tower built from simple functions from below: monotonicity makes the tower grow, and the supremum definition prevents any lower approximation from overshooting $f$, so nothing is lost in the limit. Technically, one first verifies the statement for the layered simple functions and then identifies the two definitions of the integral: supremum and limit of increasing approximations.\n\nThe theorem is the engine of the whole integration theory: it yields term-by-term integration of nonnegative series ($\\int\\sum f_n=\\sum\\int f_n$) and underlies the Fubini–Tonelli theorem, Fatou's lemma and the dominated convergence theorem. Its philosophy: **for nonnegative functions, monotone approximation lets the limit interchange freely with the integral**. Drop monotonicity or nonnegativity and it fails immediately (see the examples).",
+    "formulas": [
+      {
+        "latex": "0\\le f_1\\le f_2\\le\\cdots,\\qquad f_n\\uparrow f\\ \\ (\\text{a.e.})\\qquad\\Longrightarrow\\qquad \\int_X f_n\\,d\\mu\\ \\uparrow\\ \\int_X f\\,d\\mu",
+        "note": "单调收敛定理：非负 + 单调递增 + a.e. 收敛到 $f$，就能交换极限与积分；不要求有限测度与可积性。",
+        "noteEn": "Monotone convergence: nonnegative, nondecreasing, converging a.e. to $f$; no finite-measure or integrability assumptions."
+      },
+      {
+        "latex": "\\lim_{n\\to\\infty}\\int_X f_n\\,d\\mu=\\int_X\\Bigl(\\lim_{n\\to\\infty}f_n\\Bigr)d\\mu\\qquad(f_n\\ge0\\ \\text{单调递增})",
+        "note": "写成极限交换的形式：极限与积分可以互换——两个条件（非负、单调）缺一不可。",
+        "noteEn": "The limit-interchange form: limit and integral commute under the two hypotheses (nonnegative and nondecreasing)."
+      },
+      {
+        "latex": "\\int_X\\sum_{n=1}^{\\infty}f_n\\,d\\mu=\\sum_{n=1}^{\\infty}\\int_X f_n\\,d\\mu\\qquad(f_n\\ge0\\ \\text{可测})",
+        "note": "非负函数级数的逐项积分：对部分和用单调收敛定理；Tonelli 定理的原型。",
+        "noteEn": "Term-by-term integration of nonnegative series: apply the theorem to the partial sums; the prototype of Tonelli's theorem."
+      },
+      {
+        "latex": "f_n\\uparrow f\\ \\text{a.e.},\\quad \\int_X f_{n_0}\\,d\\mu>-\\infty\\ \\text{对某个}\\ n_0\\qquad\\Longrightarrow\\qquad \\lim_n\\int_X f_n\\,d\\mu=\\int_X f\\,d\\mu",
+        "note": "一般版本：去掉非负假设时，只要某一项积分大于 $-\\infty$（排除 $\\infty-\\infty$），结论仍成立。",
+        "noteEn": "General version without nonnegativity: it suffices that $\\int f_{n_0}>-\\infty$ for some $n_0$, ruling out $\\infty-\\infty$."
+      },
+      {
+        "latex": "\\int_X f\\,d\\mu=\\lim_{n\\to\\infty}\\int_X\\min(f,n)\\,d\\mu\\qquad(f\\ge0\\ \\text{可测})",
+        "note": "典型用法：先用有界截断 $\\min(f,n)$ 化归有界情形，再令 $n\\to\\infty$。",
+        "noteEn": "Typical use: truncate to the bounded functions $\\min(f,n)$ and then let $n\\to\\infty$."
+      }
+    ],
+    "expression": {
+      "text": "0 ≤ f_n ↑ f（a.e.）⇒ ∫ f_n dμ ↑ ∫ f dμ",
+      "symbol": "\\int f_n\\,d\\mu \\uparrow \\int f\\,d\\mu",
+      "note": "非负性与单调性缺一不可；不要求有限测度、不要求可积，等号允许 +∞。",
+      "noteEn": "Nonnegativity and monotonicity are both essential; no finite measure or integrability is needed, and $+\\infty$ is allowed."
+    },
+    "properties": [
+      "条件最弱：$\\mu(X)$ 可为 $\\infty$，$f_n$ 与 $f$ 可以不可积，等号允许 $+\\infty$；只需「非负 + 单调递增」两条。这是三大收敛定理中适用范围最广的一条。",
+      "单调性不可省：$f_n=n\\chi_{(0,1/n)}$ 在 $(0,1)$ 上逐点趋于 0，但 $\\int f_n=1$（对一切 $n$）不趋于 $0$；序列不单调，单调收敛定理不适用。",
+      "与法图引理的关系：对非负可测 $f_n$，法图引理是单调收敛定理的直接推论（对 $g_k=\\inf_{n\\ge k}f_n$ 用定理，$g_k\\uparrow\\liminf f_n$）；反过来结合 $f_n\\le f$ 也能从法图引理推出定理，两条路等价。",
+      "应用场景：证明非负级数逐项积分 $\\int\\sum f_n=\\sum\\int f_n$、证明 Tonelli 定理中迭代积分的合法性、以及「先截断、再取极限」的积分估计。",
+      "允许两端同为 $+\\infty$：在 $\\mathbb{R}$ 上取 $f_n=\\chi_{[-n,n]}$，则 $f_n\\uparrow1$，而 $\\int f_n=2n\\to+\\infty=\\int1\\,d\\mu$。这说明结论完全不需要有限测度。"
+    ],
+    "propertiesEn": [
+      "Weakest hypotheses: $\\mu(X)$ may be infinite, $f_n$ and $f$ need not be integrable, and equality may be $+\\infty$; only nonnegativity and monotonicity are required. Among the three limit theorems it has the widest scope.",
+      "Monotonicity cannot be dropped: $f_n=n\\chi_{(0,1/n)}$ tends to 0 pointwise on $(0,1)$, yet $\\int f_n=1$ for all $n$ does not tend to 0; the sequence is not monotone, so the theorem does not apply.",
+      "Relation to Fatou's lemma: for nonnegative measurable $f_n$, Fatou's lemma follows directly from the theorem (apply it to $g_k=\\inf_{n\\ge k}f_n\\uparrow\\liminf f_n$); conversely, the theorem follows from Fatou's lemma together with $f_n\\le f$, so the two are equivalent.",
+      "Applications: term-by-term integration of nonnegative series $\\int\\sum f_n=\\sum\\int f_n$, justification of iterated integrals in Tonelli's theorem, and integral estimates via truncation followed by a limit.",
+      "Both sides may equal $+\\infty$: on $\\mathbb{R}$ take $f_n=\\chi_{[-n,n]}$; then $f_n\\uparrow1$ while $\\int f_n=2n\\to+\\infty=\\int1\\,d\\mu$. No finite measure is needed."
+    ],
+    "examples": [
+      {
+        "problem": "设 $f_n(x)=x^{1/n}$ 于 $[0,1]$。验证 $0\\le f_n\\uparrow f$，并用单调收敛定理求 $\\lim_{n\\to\\infty}\\int_0^1 f_n(x)\\,dx$。",
+        "solution": "对 $x\\in(0,1)$，$x^{1/n}=e^{(\\ln x)/n}$：因 $\\ln x<0$，分母 $n$ 变大时指数 $(\\ln x)/n$ 递增趋于 0，故 $x^{1/n}$ 随 $n$ 单调递增，且 $x^{1/n}\\to1$。即 $f_n\\uparrow f$，其中 $f(x)=1$（$x>0$），$f(0)=0$，也就是 $f=1$ a.e.。由单调收敛定理，$\\lim_{n\\to\\infty}\\int_0^1 x^{1/n}dx=\\int_0^1 1\\,dx=1$。直接计算可验证：$\\int_0^1 x^{1/n}dx=\\dfrac{n}{n+1}\\to1$。"
+      },
+      {
+        "problem": "用单调收敛定理证明 $\\displaystyle\\int_0^{\\infty}\\Bigl(\\sum_{n=1}^{\\infty}2^{-n}e^{-nx}\\Bigr)dx=\\ln 2$。",
+        "solution": "各项非负。记部分和 $S_N=\\sum_{n=1}^{N}2^{-n}e^{-nx}$，则 $S_N\\uparrow f:=\\sum_{n\\ge1}2^{-n}e^{-nx}$。由单调收敛定理逐项积分：$\\int_0^{\\infty}f\\,dx=\\sum_{n\\ge1}2^{-n}\\int_0^{\\infty}e^{-nx}dx=\\sum_{n\\ge1}\\dfrac{2^{-n}}{n}=\\ln 2$（用了 $\\sum_{n\\ge1}\\dfrac{t^n}{n}=-\\ln(1-t)$，$t=\\tfrac12$）。再直接求和函数验证：$f(x)=\\dfrac{e^{-x}}{2-e^{-x}}$，$\\int_0^{\\infty}\\dfrac{e^{-x}}{2-e^{-x}}dx=\\bigl[-\\ln(2-e^{-x})\\bigr]_0^{\\infty}=\\ln 2$，两边结果一致。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^(1/n)",
+          "params": {
+            "n": 1
+          },
+          "color": "#4cc9f0",
+          "label": "f₁ = x（n=1）"
+        },
+        {
+          "expr": "x^(1/n)",
+          "params": {
+            "n": 2
+          },
+          "color": "#ff6b9d",
+          "label": "f₂ = √x（n=2）"
+        },
+        {
+          "expr": "x^(1/n)",
+          "params": {
+            "n": 5
+          },
+          "color": "#06d6a0",
+          "label": "f₅ = x^(1/5)（n=5）"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        1.08
+      ],
+      "title": "单调收敛定理：0 ≤ f_n ↑ 1，∫₀¹f_n dx ↑ 1（f_n = x^(1/n)，n = 1, 2, 5）"
+    },
+    "tags": [
+      "实变函数论",
+      "极限定理",
+      "勒贝格积分",
+      "单调收敛"
+    ],
+    "links": [
+      "lebesgue-integral",
+      "simple-functions",
+      "fatou-lemma",
+      "dominated-convergence",
+      "fubini-tonelli"
+    ]
+  },
+  {
+    "id": "fatou-lemma",
+    "title": "法图引理",
+    "titleEn": "Fatou's Lemma",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "非负可测函数列满足 ∫(liminf f_n) ≤ liminf ∫f_n：不要求收敛、不要求单调，但不等号可以严格小于。",
+    "summaryEn": "For nonnegative measurable functions, ∫(liminf f_n) ≤ liminf ∫f_n; no convergence or monotonicity is needed, and the inequality can be strict.",
+    "definition": "**法图引理**（Fatou's lemma）：设 $f_n\\ge0$ 是 $X$ 上的可测函数，则\n$$\\int_X\\Bigl(\\liminf_{n\\to\\infty}f_n\\Bigr)d\\mu\\ \\le\\ \\liminf_{n\\to\\infty}\\int_X f_n\\,d\\mu.$$\n注意不等号的方向：**函数端取下极限后积分，得到的是较小的一侧**。定理不要求 $f_n$ 收敛、不要求单调、不要求 $\\mu(X)<\\infty$，也不要求 $f_n$ 可积——只需「非负 + 可测」。\n\n直观理解：$\\liminf f_n$ 是「忽略前面有限多项后函数逐点能保证达到的下界」，它的积分不会超过积分列的下极限；而质量（积分）可以在极限过程中逃到无穷远或压缩成尖峰，从而让右侧比左侧大得多。因此不等号可以**严格**成立：滑动尖峰的例子中每个 $\\int f_n$ 都是同一个正数，而 $f_n(x)\\to0$ 处处成立。\n\n两个常用变体。**(i) 可积下界版本**：若 $f_n\\ge g$ a.e. 且 $g\\in L^1$，则仍有 $\\int\\liminf f_n\\le\\liminf\\int f_n$（对非负函数 $f_n-g$ 用法图引理，再用 $\\int g$ 有限作差）。**(ii) 上极限版本（反向法图）**：若 $f_n\\le g$ a.e. 且 $g\\in L^1$，则 $\\limsup\\int f_n\\le\\int\\limsup f_n$。法图引理是控制收敛定理的关键拼图。",
+    "definitionEn": "**Fatou's lemma**: let $f_n\\ge0$ be measurable functions on $X$. Then\n$$\\int_X\\Bigl(\\liminf_{n\\to\\infty}f_n\\Bigr)d\\mu\\ \\le\\ \\liminf_{n\\to\\infty}\\int_X f_n\\,d\\mu.$$\nMind the direction: the integral of the **lower limit** is the smaller side. No convergence, no monotonicity, no finite measure and no integrability of $f_n$ is assumed; only nonnegativity plus measurability.\n\nIntuition: $\\liminf f_n$ is the pointwise lower bound that remains after discarding finitely many terms, so its integral cannot exceed the limit inferior of the integrals; meanwhile mass can escape to infinity or pile up into spikes during the limiting process, which is why the inequality may be **strict**. For sliding spikes every $\\int f_n$ equals the same positive number while $f_n(x)\\to0$ everywhere.\n\nTwo standard variants. **(i) Integrable lower bound**: if $f_n\\ge g$ a.e. with $g\\in L^1$, then still $\\int\\liminf f_n\\le\\liminf\\int f_n$ (apply the lemma to $f_n-g\\ge0$ and subtract the finite $\\int g$). **(ii) Upper limit (reverse Fatou)**: if $f_n\\le g$ a.e. with $g\\in L^1$, then $\\limsup\\int f_n\\le\\int\\limsup f_n$. Fatou's lemma is the key ingredient in the dominated convergence theorem.",
+    "formulas": [
+      {
+        "latex": "f_n\\ge0\\ \\ \\text{可测}\\quad\\Longrightarrow\\quad \\int_X\\Bigl(\\liminf_{n\\to\\infty}f_n\\Bigr)d\\mu\\ \\le\\ \\liminf_{n\\to\\infty}\\int_X f_n\\,d\\mu",
+        "note": "法图引理：不等号方向固定——函数端的下极限积分 $\\le$ 积分列的下极限；可以严格小于。",
+        "noteEn": "Fatou's lemma: the direction is fixed—integral of the liminf on the left, liminf of the integrals on the right; strict inequality can occur."
+      },
+      {
+        "latex": "f_n\\le g\\ \\text{a.e.},\\ \\ g\\in L^1\\quad\\Longrightarrow\\quad \\limsup_{n\\to\\infty}\\int_X f_n\\,d\\mu\\ \\le\\ \\int_X\\limsup_{n\\to\\infty}f_n\\,d\\mu",
+        "note": "反向法图（上极限版本）：上面需要可积控制函数 $g$，方向与法图相反。",
+        "noteEn": "Reverse Fatou (limsup version): an integrable dominating function $g$ is needed and the direction is reversed."
+      },
+      {
+        "latex": "f_n\\ge g\\ \\text{a.e.},\\ \\ g\\in L^1\\quad\\Longrightarrow\\quad \\int_X\\liminf_{n\\to\\infty}f_n\\,d\\mu\\ \\le\\ \\liminf_{n\\to\\infty}\\int_X f_n\\,d\\mu",
+        "note": "一般版本：去掉非负假设时，改用可积的下界函数 $g$（保证积分不出现 $\\infty-\\infty$）。",
+        "noteEn": "General version: without nonnegativity one needs an integrable lower bound $g$ to avoid $\\infty-\\infty$."
+      },
+      {
+        "latex": "\\int_X\\liminf_n f_n\\,d\\mu=\\lim_{k\\to\\infty}\\int_X\\Bigl(\\inf_{n\\ge k}f_n\\Bigr)d\\mu\\le\\lim_k\\inf_{n\\ge k}\\int_X f_n\\,d\\mu=\\liminf_n\\int_X f_n\\,d\\mu",
+        "note": "证明骨架：$\\inf_{n\\ge k}f_n\\uparrow\\liminf f_n$（单调收敛定理），且 $\\inf_{n\\ge k}f_n\\le f_n$ 对 $n\\ge k$ 逐项比较。",
+        "noteEn": "Proof skeleton: $\\inf_{n\\ge k}f_n\\uparrow\\liminf f_n$ (monotone convergence), and $\\inf_{n\\ge k}f_n\\le f_n$ for every $n\\ge k$."
+      }
+    ],
+    "expression": {
+      "text": "∫ liminf f_n dμ ≤ liminf ∫ f_n dμ（f_n ≥ 0 可测）",
+      "symbol": "\\int \\liminf f_n\\,d\\mu \\le \\liminf \\int f_n\\,d\\mu",
+      "note": "只要求非负可测；不需要收敛、单调、有限测度或可积性，但不等号可以严格。",
+      "noteEn": "Only nonnegativity and measurability are assumed; convergence, monotonicity, finite measure and integrability are not needed, but the inequality may be strict."
+    },
+    "properties": [
+      "条件极宽：只需「非负 + 可测」，不要求收敛、不要求单调、不要求 $\\mu(X)<\\infty$、不要求 $f_n$ 可积；积分值允许 $+\\infty$。",
+      "不等号方向固定为 $\\int\\liminf f_n\\le\\liminf\\int f_n$，且可以**严格**：滑动尖峰例子中 $0<\\pi$。方向写反不成立。",
+      "非负性（或可积下界）不可省：在 $\\mathbb{R}$ 上取 $f_n=-\\chi_{[n,n+1)}$，则 $f_n\\to0$ 处处成立，但 $\\int f_n=-1$，于是 $\\int\\liminf f_n=0>-1=\\liminf\\int f_n$，结论失效；此时下界 $g=-1$ 不是可积函数，恰说明一般版本必须假定 $g\\in L^1$。",
+      "与单调收敛、控制收敛的关系：单调收敛定理 $\\Rightarrow$ 法图引理 $\\Rightarrow$ 控制收敛定理（对 $|f_n-f|\\le2g$ 用法图）。法图给出「下界估计」，控制收敛给出「等式」，单调收敛给出「单调下的等式」，三者分工明确。",
+      "常用推论：若 $f_n\\ge0$、$f_n\\to f$ a.e. 且 $\\int f_n\\to L$，则 $\\int f\\le L$——极限函数的积分不超过积分极限，这是估计下界时的标准工具。"
+    ],
+    "propertiesEn": [
+      "Very weak hypotheses: only nonnegative and measurable; no convergence, no monotonicity, no finite measure, no integrability of $f_n$; values in $[0,+\\infty]$ are allowed.",
+      "The direction is fixed as $\\int\\liminf f_n\\le\\liminf\\int f_n$, and it can be **strict**: in the sliding-spike example $0<\\pi$. The reversed inequality is false.",
+      "Nonnegativity (or an integrable lower bound) cannot be dropped: on $\\mathbb{R}$ take $f_n=-\\chi_{[n,n+1)}$; then $f_n\\to0$ everywhere but $\\int f_n=-1$, so $\\int\\liminf f_n=0>-1=\\liminf\\int f_n$ and the lemma fails. Here the lower bound $g=-1$ is not integrable, which is exactly why the general version requires $g\\in L^1$.",
+      "Relation to the other limit theorems: monotone convergence $\\Rightarrow$ Fatou's lemma $\\Rightarrow$ dominated convergence (apply Fatou to $|f_n-f|\\le2g$). Fatou gives a lower-bound estimate, dominated convergence an identity, monotone convergence an identity under monotonicity.",
+      "Standard corollary: if $f_n\\ge0$, $f_n\\to f$ a.e. and $\\int f_n\\to L$, then $\\int f\\le L$; the integral of the limit never exceeds the limit of the integrals—a standard tool for lower bounds."
+    ],
+    "examples": [
+      {
+        "problem": "（严格不等）设 $f_n(x)=\\dfrac{n}{1+n^2(x-n)^2}$，$x\\in\\mathbb{R}$。证明 $f_n\\to0$ 逐点成立，但 $\\int_{\\mathbb{R}}f_n\\,d\\mu=\\pi$ 对一切 $n$ 成立，从而法图引理中的不等号可以严格。",
+        "solution": "固定 $x$：当 $n\\to\\infty$ 时 $|x-n|\\to\\infty$，分母中 $n^2(x-n)^2$ 的量级为 $n^4$，增长快于分子 $n$，故 $f_n(x)\\to0$，于是 $\\int\\liminf f_n=0$。另一方面换元 $u=n(x-n)$：$\\int_{-\\infty}^{\\infty}\\dfrac{n\\,dx}{1+n^2(x-n)^2}=\\int_{-\\infty}^{\\infty}\\dfrac{du}{1+u^2}=\\pi$，与 $n$ 无关。因此 $0=\\int\\liminf f_n<\\liminf\\int f_n=\\pi$：尖峰向右滑动、高度增大、宽度变窄，每个 $f_n$ 的积分保持不变，而逐点极限处处为 0——质量「逃向无穷远」。"
+      },
+      {
+        "problem": "（非负性不可省）在 $\\mathbb{R}$ 上取 $f_n=-\\chi_{[n,n+1)}$。计算 $\\int\\liminf f_n$ 与 $\\liminf\\int f_n$，说明去掉非负（或可积下界）后法图引理失效。",
+        "solution": "对每个 $x$，只有有限多个 $n$ 满足 $x\\in[n,n+1)$，故 $f_n(x)=0$ 最终恒成立，$\\liminf f_n=0$，$\\int\\liminf f_n=0$。而 $\\int_{\\mathbb{R}}f_n\\,d\\mu=-\\mu([n,n+1))=-1$ 对一切 $n$ 成立，$\\liminf\\int f_n=-1$。于是 $0>-1$，法图引理的不等号被打破。此时下界函数 $g=-1$ 不满足 $\\int|g|<\\infty$（在 $\\mathbb{R}$ 上不可积），可见一般版本中「下界可积」的条件必不可少。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "n/(1+n^2*(x-n)^2)",
+          "params": {
+            "n": 1
+          },
+          "color": "#4cc9f0",
+          "label": "f₁（峰在 x=1，∫f₁ = π）"
+        },
+        {
+          "expr": "n/(1+n^2*(x-n)^2)",
+          "params": {
+            "n": 2
+          },
+          "color": "#ff6b9d",
+          "label": "f₂（峰在 x=2，∫f₂ = π）"
+        },
+        {
+          "expr": "n/(1+n^2*(x-n)^2)",
+          "params": {
+            "n": 5
+          },
+          "color": "#06d6a0",
+          "label": "f₅（峰在 x=5，∫f₅ = π）"
+        }
+      ],
+      "xRange": [
+        -1,
+        8
+      ],
+      "yRange": [
+        0,
+        5.6
+      ],
+      "title": "法图引理可严格不等：尖峰右滑，∫f_n ≡ π 不变，而 f_n(x) → 0 逐点"
+    },
+    "tags": [
+      "实变函数论",
+      "极限定理",
+      "勒贝格积分",
+      "法图引理"
+    ],
+    "links": [
+      "monotone-convergence",
+      "dominated-convergence",
+      "lebesgue-integral",
+      "integral-properties",
+      "convergence-ae"
+    ]
+  },
+  {
+    "id": "dominated-convergence",
+    "title": "控制收敛定理",
+    "titleEn": "The Dominated Convergence Theorem",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "若 f_n → f 几乎处处，且所有 |f_n| 被同一个可积函数 g 控制，则 ∫f_n → ∫f——交换极限与积分的主力定理。",
+    "summaryEn": "If f_n → f almost everywhere and all |f_n| are bounded by a single integrable function g, then ∫f_n → ∫f — the workhorse theorem for interchanging limits and integrals.",
+    "definition": "**控制收敛定理**（Lebesgue 控制收敛定理，Dominated Convergence Theorem）：设 $f_n$ 是可测函数，$f_n\\to f$ 几乎处处成立；若存在**可积函数** $g\\in L^1(\\mu)$（即 $\\int_X|g|\\,d\\mu<\\infty$）使得 $|f_n|\\le g$ 几乎处处对一切 $n$ 成立，则 $f\\in L^1(\\mu)$，且\n$$\\int_X f_n\\,d\\mu\\ \\to\\ \\int_X f\\,d\\mu.$$\n更强的结论是 $\\int_X|f_n-f|\\,d\\mu\\to0$，即 $f_n\\to f$ 在 $L^1$ 意义下收敛。**控制函数 $g$ 的可积性是核心条件，绝不能遗漏**。\n\n直观理解：$g$ 像一只「有限能量的盒子」，把整个函数列装在里面，既阻止质量在极限过程中逃向无穷远（像 $\\chi_{[n,n+1)}$ 那样），也阻止质量堆成无限高的尖峰（像 $n\\chi_{(0,1/n)}$ 那样）；能量既然被封住，逐点收敛就自动升级为积分收敛。\n\n与另外两条极限定理的分工：单调收敛定理不需要控制函数，但需要单调性；法图引理既不需要单调也不需要控制（有下界即可），但只得到不等式；控制收敛定理用「可积控制」换取等号与 $L^1$ 收敛，是三者中应用最广的一条。特别注意常用特例：若 $\\mu(X)<\\infty$ 且 $|f_n|\\le M$ 一致有界，则常数函数 $g\\equiv M$ 可积，定理自动可用（有界收敛定理）。",
+    "definitionEn": "**Dominated Convergence Theorem** (Lebesgue): let $f_n$ be measurable functions with $f_n\\to f$ almost everywhere. If there is an **integrable function** $g\\in L^1(\\mu)$ (that is, $\\int_X|g|\\,d\\mu<\\infty$) such that $|f_n|\\le g$ almost everywhere for all $n$, then $f\\in L^1(\\mu)$ and\n$$\\int_X f_n\\,d\\mu\\ \\to\\ \\int_X f\\,d\\mu.$$\nIn fact $\\int_X|f_n-f|\\,d\\mu\\to0$, i.e. $f_n\\to f$ in $L^1$. **The integrability of the dominating function $g$ is the essential hypothesis and cannot be omitted.**\n\nIntuition: $g$ is a box of finite energy holding the whole sequence; it prevents mass from escaping to infinity (as in $\\chi_{[n,n+1)}$) or piling up into unbounded spikes (as in $n\\chi_{(0,1/n)}$). With the energy confined, pointwise convergence automatically upgrades to convergence of integrals.\n\nDivision of labour among the three limit theorems: monotone convergence needs no dominator but needs monotonicity; Fatou's lemma needs neither but yields only an inequality; dominated convergence trades integrable domination for an identity and $L^1$ convergence, which makes it the most widely used of the three. Important special case: if $\\mu(X)<\\infty$ and $|f_n|\\le M$ is uniformly bounded, the constant $g\\equiv M$ is integrable and the theorem applies (bounded convergence theorem).",
+    "formulas": [
+      {
+        "latex": "f_n\\to f\\ \\text{a.e.},\\qquad |f_n|\\le g\\ \\text{a.e.},\\qquad g\\in L^1\\quad\\Longrightarrow\\quad \\int_X f_n\\,d\\mu\\ \\to\\ \\int_X f\\,d\\mu",
+        "note": "控制收敛定理：a.e. 收敛 + 可积控制函数，得到积分收敛；三个条件一个都不能少。",
+        "noteEn": "Dominated convergence: a.e. convergence plus an integrable dominator gives convergence of integrals; no hypothesis can be dropped."
+      },
+      {
+        "latex": "\\int_X|f_n-f|\\,d\\mu\\ \\to\\ 0",
+        "note": "更强结论：$L^1$ 收敛；由此 $f\\in L^1$、$|f|\\le g$ a.e.，且 $|\\int f_n-\\int f|\\le\\int|f_n-f|\\to0$。",
+        "noteEn": "Stronger conclusion: convergence in $L^1$, giving $f\\in L^1$, $|f|\\le g$ a.e., and $|\\int f_n-\\int f|\\le\\int|f_n-f|\\to0$."
+      },
+      {
+        "latex": "\\mu(X)<\\infty,\\quad |f_n|\\le M\\ \\text{a.e.}\\quad\\Longrightarrow\\quad \\int_X f_n\\,d\\mu\\to\\int_X f\\,d\\mu",
+        "note": "有界收敛定理：有限测度空间上可取常数控制函数 $g=M$，因为 $\\int M\\,d\\mu=M\\mu(X)<\\infty$。",
+        "noteEn": "Bounded convergence theorem: on a finite measure space the constant $g=M$ is integrable since $\\int M\\,d\\mu=M\\mu(X)<\\infty$."
+      },
+      {
+        "latex": "|f_n|\\le g_n,\\ \\ f_n\\to f,\\ \\ g_n\\to g\\ \\text{a.e.},\\ \\ g_n,g\\in L^1,\\ \\ \\int g_n\\to\\int g\\quad\\Longrightarrow\\quad \\int f_n\\to\\int f",
+        "note": "广义控制收敛定理：控制函数可以随 $n$ 变化，代价是要求 $g_n\\to g$ 且 $\\int g_n\\to\\int g$（排除控制质量逃逸）。",
+        "noteEn": "Generalized DCT: the dominators may depend on $n$, at the price of requiring $g_n\\to g$ and $\\int g_n\\to\\int g$."
+      },
+      {
+        "latex": "0\\le\\liminf_n\\int_X|f_n-f|\\,d\\mu\\le\\limsup_n\\int_X|f_n-f|\\,d\\mu\\le\\int_X\\limsup_n|f_n-f|\\,d\\mu=0",
+        "note": "证明骨架：对非负函数 $2g-|f_n-f|$ 用法图引理，并用 $\\int2g<\\infty$ 消去；最后 $\\limsup|f_n-f|=0$ a.e.。",
+        "noteEn": "Proof skeleton: apply Fatou to $2g-|f_n-f|\\ge0$ and cancel the finite $\\int2g$; finally $\\limsup|f_n-f|=0$ a.e."
+      }
+    ],
+    "expression": {
+      "text": "f_n → f（a.e.），|f_n| ≤ g（a.e.），g ∈ L¹ ⇒ ∫ f_n → ∫ f",
+      "symbol": "\\int f_n\\,d\\mu \\to \\int f\\,d\\mu",
+      "note": "控制函数必须可积；不需要单调性，也不需要有限测度（有限测度下一致有界即可）。",
+      "noteEn": "The dominator must be integrable; no monotonicity is needed, and finite measure with uniform boundedness suffices."
+    },
+    "properties": [
+      "条件分工：不需要单调（与单调收敛定理不同），不需要非负（与法图引理不同）；但必须存在**同一个可积函数**控制整个序列，这条不能省。",
+      "控制函数不可积则结论可能失效：在 $\\mathbb{R}$ 上取 $f_n=\\chi_{[n,n+1)}$，则 $f_n\\to0$ a.e. 但 $\\int f_n=1\\not\\to0$；此时 $\\sup_n|f_n|=\\chi_{[1,\\infty)}$ 不可积，任何可行的控制函数 $g\\ge\\sup_n|f_n|$ 都有 $\\int g=\\infty$。类似地，$f_n=n\\chi_{(0,1/n)}$ 的逐点上确界在 0 附近不可积。",
+      "结论包含 $L^1$ 收敛：$\\int|f_n-f|\\to0$，因此 $|\\int f_n-\\int f|\\le\\int|f_n-f|\\to0$；不仅如此，$f\\in L^1$ 且 $|f|\\le g$ a.e.。",
+      "有限测度空间上的有界收敛定理：$\\mu(X)<\\infty$ 且 $|f_n|\\le M$ 时取常数控制函数即可。「一致有界 + 有限测度」是控制收敛定理最常触发的场景。",
+      "广义版本允许 $|f_n|\\le g_n$ 且 $g_n$ 随 $n$ 变化，代价是额外要求 $g_n\\to g$、$\\int g_n\\to\\int g$；没有这些附加条件，控制质量可能逃逸，结论不再成立。"
+    ],
+    "propertiesEn": [
+      "Division of labour: no monotonicity is needed (unlike monotone convergence) and no nonnegativity is needed (unlike Fatou), but **one common integrable dominator** for the whole sequence is indispensable.",
+      "Without an integrable dominator the conclusion may fail: on $\\mathbb{R}$ take $f_n=\\chi_{[n,n+1)}$; then $f_n\\to0$ a.e. but $\\int f_n=1\\not\\to0$, since $\\sup_n|f_n|=\\chi_{[1,\\infty)}$ is not integrable and every admissible dominator has infinite integral. Similarly, the pointwise supremum of $f_n=n\\chi_{(0,1/n)}$ is not integrable near 0.",
+      "The conclusion includes $L^1$ convergence: $\\int|f_n-f|\\to0$, hence $|\\int f_n-\\int f|\\le\\int|f_n-f|\\to0$; moreover $f\\in L^1$ and $|f|\\le g$ a.e.",
+      "Bounded convergence theorem on finite measure spaces: if $\\mu(X)<\\infty$ and $|f_n|\\le M$, the constant dominator works. Uniform boundedness plus finite measure is the most common setting for applying the theorem.",
+      "The generalized version allows $|f_n|\\le g_n$ with varying dominators, at the cost of requiring $g_n\\to g$ and $\\int g_n\\to\\int g$; without these conditions mass can escape and the conclusion fails."
+    ],
+    "examples": [
+      {
+        "problem": "求 $\\displaystyle\\lim_{n\\to\\infty}\\int_0^1\\Bigl(1+\\dfrac{x}{n}\\Bigr)^n dx$。",
+        "solution": "对被积函数列 $f_n(x)=(1+x/n)^n$：对每个 $x\\in[0,1]$ 有 $f_n(x)\\to e^x$（$e$ 的标准极限）。控制：对 $t\\ge0$ 与所有整数 $n$ 有 $(1+t/n)^n\\le e^t$（由 $\\ln(1+u)\\le u$ 可得），故 $0\\le f_n(x)\\le e^x\\le e$ 于 $[0,1]$。取可积控制函数 $g\\equiv e$，由控制收敛定理 $\\lim_{n\\to\\infty}\\int_0^1 f_n\\,dx=\\int_0^1 e^xdx=e-1$。"
+      },
+      {
+        "problem": "（控制函数不可省）在 $\\mathbb{R}$ 上取 $f_n=\\chi_{[n,n+1)}$：验证 $f_n\\to0$ 处处成立但 $\\int f_n=1\\not\\to0$，并解释控制收敛定理为何不适用。",
+        "solution": "对固定 $x$，当 $n>x$ 时 $x\\notin[n,n+1)$，故 $f_n(x)\\to0$ 处处成立；但 $\\int_{\\mathbb{R}}f_n\\,d\\mu=\\mu([n,n+1))=1$ 对一切 $n$ 成立，不收敛到 0。若控制收敛定理适用，就必须存在可积函数 $g$ 使 $g\\ge\\sup_n|f_n|=\\chi_{[1,\\infty)}$ a.e.；而 $\\mu([1,\\infty))=\\infty$，这样的 $g$ 不可能可积，定理的前提不满足——这正是该反例被排除的原因。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x)",
+          "color": "#ff6b9d",
+          "label": "g(x) = e⁻ˣ（可积控制函数）"
+        },
+        {
+          "expr": "-exp(-x)",
+          "color": "#ffd166",
+          "label": "−g(x)（下包络）"
+        },
+        {
+          "expr": "exp(-x)*sin(3*x)",
+          "color": "#4cc9f0",
+          "label": "f 例：e⁻ˣ·sin 3x"
+        },
+        {
+          "expr": "exp(-x)*sin(8*x)",
+          "color": "#06d6a0",
+          "label": "f 例：e⁻ˣ·sin 8x"
+        }
+      ],
+      "xRange": [
+        0,
+        6
+      ],
+      "yRange": [
+        -1.15,
+        1.15
+      ],
+      "title": "控制收敛定理：|f_n| ≤ g 且 g 可积 ⇒ ∫f_n → ∫f（两条曲线被 ±e⁻ˣ 夹住）"
+    },
+    "tags": [
+      "实变函数论",
+      "极限定理",
+      "控制收敛",
+      "勒贝格积分"
+    ],
+    "links": [
+      "fatou-lemma",
+      "monotone-convergence",
+      "lebesgue-integral",
+      "convergence-ae",
+      "lp-spaces"
+    ]
+  },
+  {
+    "id": "riemann-vs-lebesgue",
+    "title": "黎曼积分与勒贝格积分的关系",
+    "titleEn": "Riemann versus Lebesgue Integrability",
+    "branch": "real-analysis",
+    "level": 5,
+    "summary": "有界函数黎曼可积 ⟺ 几乎处处连续（不连续点集零测）；黎曼可积蕴含勒贝格可积且值相等，但反常黎曼积分与勒贝格积分并不等价。",
+    "summaryEn": "A bounded function on [a,b] is Riemann integrable iff it is almost everywhere continuous; Riemann integrability implies Lebesgue integrability with the same value, but improper Riemann integrals are not equivalent to Lebesgue integrals.",
+    "definition": "**勒贝格判据**：设 $f$ 是 $[a,b]$ 上的有界函数，则 $f$ 黎曼可积当且仅当它的不连续点集是零测集，即 $f$ 在 $[a,b]$ 上几乎处处连续。这条判据把黎曼可积性完全翻译成测度语言：$\\chi_{\\mathbb{Q}}$ 在 $[0,1]$ 上处处不连续（不连续点集测度为 1），所以黎曼不可积；而 $f(x)=\\sin(1/x)$（$x>0$，补充定义 $f(0)=0$）只有 $x=0$ 一个不连续点，不连续点集测度为 0，所以黎曼可积。\n\n在可积性成立时，两种积分的值一致：**若 $f$ 在 $[a,b]$ 上有界且黎曼可积，则 $f$ 也是勒贝格可积的，且 $\\int_a^b f(x)\\,dx$（黎曼）$=\\int_{[a,b]}f\\,d\\mu$（勒贝格）**。因此微积分的全部计算技术（牛顿–莱布尼茨公式、换元、分部积分）在勒贝格框架中原样有效；勒贝格积分真正拓宽的是可积函数的范围——它把大量病态函数以及 $L^1$ 极限都纳入其中。\n\n但**反常黎曼积分与勒贝格积分不等价**。勒贝格积分是绝对收敛积分：要求 $\\int|f|<\\infty$。反常黎曼积分只要求 $\\lim_{b\\to\\infty}\\int_a^b f$ 存在，允许符号相消造成的条件收敛。经典例子是\n$$\\int_0^{\\infty}\\frac{\\sin x}{x}\\,dx=\\frac{\\pi}{2}\\quad(\\text{反常黎曼收敛}),\\qquad \\int_0^{\\infty}\\Bigl|\\frac{\\sin x}{x}\\Bigr|\\,dx=+\\infty,$$\n所以 $\\dfrac{\\sin x}{x}$ **不是勒贝格可积的**（正部与负部的积分都是 $+\\infty$，勒贝格积分无定义）。反过来，非负函数的反常黎曼积分若有限，则与勒贝格积分一致；绝对收敛的反常积分也一致。",
+    "definitionEn": "**Lebesgue's criterion**: a bounded function $f$ on $[a,b]$ is Riemann integrable if and only if its set of discontinuities has measure zero, i.e. $f$ is continuous almost everywhere on $[a,b]$. This translates Riemann integrability completely into measure language: $\\chi_{\\mathbb{Q}}$ is nowhere continuous on $[0,1]$ (discontinuity set of measure 1), hence not Riemann integrable; while $f(x)=\\sin(1/x)$ (for $x>0$, set $f(0)=0$) is discontinuous only at $x=0$, a null set, hence Riemann integrable.\n\nWhen integrability holds the two integrals agree: **if $f$ is bounded on $[a,b]$ and Riemann integrable, then $f$ is Lebesgue integrable and the Riemann integral $\\int_a^b f(x)\\,dx$ equals the Lebesgue integral $\\int_{[a,b]}f\\,d\\mu$**. All calculus machinery (Newton–Leibniz, substitution, integration by parts) therefore carries over; what the Lebesgue integral genuinely widens is the class of integrable functions, absorbing pathological functions and $L^1$ limits.\n\nHowever, **improper Riemann integrals and Lebesgue integrals are not equivalent**. The Lebesgue integral is absolutely convergent: it requires $\\int|f|<\\infty$. An improper Riemann integral only requires that $\\lim_{b\\to\\infty}\\int_a^b f$ exists, allowing cancellation. The classic example:\n$$\\int_0^{\\infty}\\frac{\\sin x}{x}\\,dx=\\frac{\\pi}{2}\\quad(\\text{improper Riemann convergent}),\\qquad \\int_0^{\\infty}\\Bigl|\\frac{\\sin x}{x}\\Bigr|\\,dx=+\\infty,$$\nso $\\dfrac{\\sin x}{x}$ is **not Lebesgue integrable** (both its positive and negative parts have infinite integral, and the Lebesgue integral is undefined). Conversely, if a nonnegative function has a finite improper Riemann integral, the two integrals agree; the same holds for absolutely convergent improper integrals.",
+    "formulas": [
+      {
+        "latex": "f\\ \\text{有界于}\\ [a,b]:\\qquad f\\in\\mathcal{R}[a,b]\\quad\\Longleftrightarrow\\quad \\mu\\bigl(\\{x\\in[a,b]:\\ f\\ \\text{在}\\ x\\ \\text{处不连续}\\}\\bigr)=0",
+        "note": "勒贝格判据：有界函数黎曼可积 $\\iff$ 不连续点集是零测集（几乎处处连续）。",
+        "noteEn": "Lebesgue's criterion: a bounded function is Riemann integrable iff its set of discontinuities has measure zero."
+      },
+      {
+        "latex": "f\\in\\mathcal{R}[a,b]\\quad\\Longrightarrow\\quad f\\in L^1([a,b]),\\qquad \\int_a^b f(x)\\,dx=\\int_{[a,b]}f\\,d\\mu",
+        "note": "有界黎曼可积 $\\Rightarrow$ 勒贝格可积，且两种积分值相等；初等微积分的计算结论全部继承。",
+        "noteEn": "Bounded Riemann integrable implies Lebesgue integrable with the same value; all elementary calculus results carry over."
+      },
+      {
+        "latex": "\\int_0^{\\infty}\\frac{\\sin x}{x}\\,dx=\\frac{\\pi}{2}\\ \\ (\\text{反常黎曼收敛}),\\qquad \\int_0^{\\infty}\\Bigl|\\frac{\\sin x}{x}\\Bigr|\\,dx=+\\infty\\ \\ (\\text{非勒贝格可积})",
+        "note": "关键反例：$\\sin x/x$ 反常黎曼收敛（条件收敛）但 $\\int|\\sin x/x|=\\infty$，故不是勒贝格可积。",
+        "noteEn": "Key counterexample: $\\sin x/x$ converges as an improper Riemann integral but $\\int|\\sin x/x|=\\infty$, so it is not Lebesgue integrable."
+      },
+      {
+        "latex": "\\int_{n\\pi}^{(n+1)\\pi}\\frac{|\\sin x|}{x}\\,dx\\ \\ge\\ \\frac{1}{(n+1)\\pi}\\int_{n\\pi}^{(n+1)\\pi}|\\sin x|\\,dx=\\frac{2}{(n+1)\\pi}",
+        "note": "发散性证明：逐段估计每段落 $\\ge2/((n+1)\\pi)$，求和得调和级数发散，故 $\\int_0^{\\infty}|\\sin x/x|\\,dx=+\\infty$。",
+        "noteEn": "Divergence proof: each piece is at least $2/((n+1)\\pi)$; summing gives a divergent harmonic series, so $\\int_0^{\\infty}|\\sin x/x|\\,dx=+\\infty$."
+      },
+      {
+        "latex": "f\\ge0,\\quad \\int_a^{\\infty}f(x)\\,dx<+\\infty\\ \\ (\\text{反常黎曼})\\quad\\Longrightarrow\\quad f\\in L^1,\\ \\ \\text{两种积分值相同}",
+        "note": "非负（或绝对收敛）是两类积分「和解」的条件：此时反常黎曼积分与勒贝格积分完全一致。",
+        "noteEn": "Nonnegativity (or absolute convergence) reconciles the two integrals: then the improper Riemann integral and the Lebesgue integral coincide."
+      }
+    ],
+    "expression": {
+      "text": "黎曼可积 ⟺ 有界 + 几乎处处连续；此时两种积分值相等（但有界性/or 绝对收敛是前提）",
+      "symbol": "\\int_a^b f(x)\\,dx=\\int_{[a,b]}f\\,d\\mu",
+      "note": "有界 + 几乎处处连续是有界函数黎曼可积的判据；反常黎曼积分与勒贝格积分只在非负或绝对收敛时一致。",
+      "noteEn": "Bounded plus a.e. continuous characterizes Riemann integrability; improper Riemann and Lebesgue integrals agree only under nonnegativity or absolute convergence."
+    },
+    "properties": [
+      "勒贝格判据只针对**有界函数、有限区间**：只要函数有界且不连续点集零测就黎曼可积；把「有界」去掉（如 $1/x$ 于 $(0,1]$）或把区间换成无穷，就要改用反常积分或勒贝格积分。",
+      "两种积分相容：有界黎曼可积 $\\Rightarrow$ 勒贝格可积且值相等；因此牛顿–莱布尼茨公式、换元法、分部积分等计算结果在勒贝格积分中原样成立。",
+      "勒贝格积分 = 绝对收敛积分：$f\\in L^1\\iff\\int|f|<\\infty$。条件收敛而绝对值发散的 $f$（如 $\\sin x/x$）不构成勒贝格积分。",
+      "非负情形的接口：非负函数的反常黎曼积分有限 $\\iff$ 勒贝格可积（值相等）；对 $[a,b]$ 上无界的非负函数同理。绝对收敛的反常积分也归入勒贝格。",
+      "勒贝格积分严格更广：在有界函数中，黎曼可积 ⟺ 勒贝格可积且几乎处处连续；$\\chi_{\\mathbb{Q}}$ 黎曼不可积但勒贝格可积（积分为 0）；在无穷区间上两类函数类互不包含（$\\sin x/x$ 与 $\\chi_{\\mathbb{Q}}$ 各居其一）。"
+    ],
+    "propertiesEn": [
+      "Lebesgue's criterion concerns **bounded functions on a finite interval**: boundedness plus a null discontinuity set gives Riemann integrability; dropping boundedness (e.g. $1/x$ on $(0,1]$) or using an infinite interval requires improper or Lebesgue integrals.",
+      "The two integrals are compatible: bounded Riemann integrable implies Lebesgue integrable with the same value, so Newton–Leibniz, substitution and integration by parts all carry over.",
+      "The Lebesgue integral is absolutely convergent: $f\\in L^1\\iff\\int|f|<\\infty$. A conditionally convergent function with divergent absolute integral (such as $\\sin x/x$) is not Lebesgue integrable.",
+      "Nonnegative interface: for nonnegative functions a finite improper Riemann integral is equivalent to Lebesgue integrability (same value); the same holds for unbounded nonnegative functions on $[a,b]$ and for absolutely convergent improper integrals.",
+      "The Lebesgue integral is strictly wider: among bounded functions, Riemann integrable ⟺ Lebesgue integrable and a.e. continuous; $\\chi_{\\mathbb{Q}}$ is Lebesgue but not Riemann integrable (integral 0); on unbounded intervals the two classes are incomparable ($\\sin x/x$ versus $\\chi_{\\mathbb{Q}}$)."
+    ],
+    "examples": [
+      {
+        "problem": "用勒贝格判据判断 $f(x)=\\sin\\dfrac1x$（$0<x\\le1$）、$f(0)=0$ 在 $[0,1]$ 上是否黎曼可积；并指出它是否勒贝格可积。",
+        "solution": "$f$ 在 $(0,1]$ 上连续；在 $x=0$ 处，当 $x\\to0^+$ 时 $\\sin(1/x)$ 在 $[-1,1]$ 中无限振荡、没有极限，故 $f$ 在 0 处不连续。于是不连续点集为 $\\{0\\}$，是零测集，由勒贝格判据 $f$ 在 $[0,1]$ 上黎曼可积。又 $|f|\\le1$ 有界，故 $f$ 也勒贝格可积，且两种积分值相等。"
+      },
+      {
+        "problem": "证明 $g(x)=\\dfrac{\\sin x}{x}$ 不是 $(0,\\infty)$ 上的勒贝格可积函数，尽管反常黎曼积分 $\\int_0^{\\infty}\\dfrac{\\sin x}{x}\\,dx$ 收敛（等于 $\\pi/2$）。",
+        "solution": "对每个 $n\\ge0$，在区间 $[n\\pi,(n+1)\\pi]$ 上 $\\dfrac{1}{x}\\ge\\dfrac{1}{(n+1)\\pi}$，故 $\\int_{n\\pi}^{(n+1)\\pi}\\dfrac{|\\sin x|}{x}dx\\ge\\dfrac{1}{(n+1)\\pi}\\int_{n\\pi}^{(n+1)\\pi}|\\sin x|\\,dx=\\dfrac{2}{(n+1)\\pi}$（$\\int_{n\\pi}^{(n+1)\\pi}|\\sin x|dx=2$）。对 $n$ 求和得 $\\int_0^{\\infty}\\Bigl|\\dfrac{\\sin x}{x}\\Bigr|dx\\ge\\sum_{n\\ge0}\\dfrac{2}{(n+1)\\pi}=+\\infty$（调和级数发散），因此 $\\int|g|=+\\infty$，$g\\notin L^1$，勒贝格积分无定义。条件收敛只属于反常黎曼积分；在无穷区间上，两类积分不能互相包含：$g$ 反常黎曼可积而非勒贝格可积，而 $\\chi_{\\mathbb{Q}}$ 在 $(0,\\infty)$ 上勒贝格可积（积分 0）却没有反常黎曼积分。"
+      }
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sin(1/x)",
+          "color": "#4cc9f0",
+          "label": "y = sin(1/x)（x=0 处无定义，无限振荡）"
+        },
+        {
+          "expr": "x*sin(1/x)",
+          "color": "#ff6b9d",
+          "label": "y = x·sin(1/x)（0 处可补定义，连续）"
+        }
+      ],
+      "xRange": [
+        -0.4,
+        0.4
+      ],
+      "yRange": [
+        -1.2,
+        1.2
+      ],
+      "title": "黎曼判据直观：sin(1/x) 只在 x=0 振荡不连续（零测集，故黎曼可积；x=0 处按无定义处理）"
+    },
+    "tags": [
+      "实变函数论",
+      "黎曼积分",
+      "勒贝格积分",
+      "几乎处处连续"
+    ],
+    "links": [
+      "integral",
+      "improper-integral",
+      "lebesgue-integral",
+      "discontinuity-types",
+      "fundamental-theorem"
+    ]
+  }
+]

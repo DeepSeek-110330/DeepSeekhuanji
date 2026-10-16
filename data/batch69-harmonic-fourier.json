@@ -1,0 +1,651 @@
+[
+  {
+    "id": "fourier-transform-l1",
+    "title": "L¹ 上的傅里叶变换",
+    "titleEn": "The Fourier Transform on L¹",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "对 $f\\in L^1(\\mathbb{R}^n)$ 定义 $\\hat f(\\xi)=\\int f(x)e^{-2\\pi i\\,x\\cdot\\xi}dx$（本系列统一把 $2\\pi$ 放进指数）；$\\hat f$ 有界、一致连续并依黎曼–勒贝格引理在无穷远处消失，但它一般不属于 $L^1$，反演必须另加条件。",
+    "summaryEn": "For $f\\in L^1(\\mathbb{R}^n)$ the transform $\\hat f(\\xi)=\\int f(x)e^{-2\\pi i\\,x\\cdot\\xi}dx$ ($2\\pi$ kept in the exponent, the convention used throughout this series) is bounded, uniformly continuous and vanishes at infinity by Riemann–Lebesgue; yet $\\hat f$ need not belong to $L^1$, so inversion needs an extra hypothesis.",
+    "definition": "**先记住本系列的统一约定**：对 $f\\in L^1(\\mathbb{R}^n)$ 定义\n$$\\hat f(\\xi)=\\int_{\\mathbb{R}^n}f(x)e^{-2\\pi i\\,x\\cdot\\xi}\\,dx,\\qquad \\xi\\in\\mathbb{R}^n .$$\n$2\\pi$ 放在指数里，正变换不带任何归一化常数——好处是反演公式与普朗歇尔定理都不出现 $2\\pi$ 因子。它与工科教材常用的 $F(\\omega)=\\int f(t)e^{-i\\omega t}dt$ 只差变量代换 $\\omega=2\\pi\\xi$（那里的 $\\omega$ 是角频率，这里的 $\\xi$ 是频率，单位是「每单位长度的周期数」）。用任何公式前先确认约定。\n\n三条最基本的性质，理由都在积分里。① 由 $|e^{-2\\pi i\\,x\\cdot\\xi}|=1$ 得 $|\\hat f(\\xi)|\\le\\int|f(x)|dx=\\|f\\|_1$，即 $\\|\\hat f\\|_\\infty\\le\\|f\\|_1$：变换把 $L^1$ 映入有界函数，且界与 $\\xi$ 无关。② 由 $|\\hat f(\\xi+h)-\\hat f(\\xi)|\\le\\int|f(x)|\\,|e^{-2\\pi i\\,h\\cdot x}-1|dx$ 和控制收敛定理，$h\\to 0$ 时右端趋于 $0$ 且与控制变量 $\\xi$ 无关，故 $\\hat f$ **一致连续**——注意这不需要 $f$ 连续。③ **黎曼–勒贝格引理**：$|\\xi|\\to\\infty$ 时 $\\hat f(\\xi)\\to0$（对阶梯函数直接积分即可看出，再用 $\\|\\hat f-\\hat g\\|_\\infty\\le\\|f-g\\|_1$ 与 $L^1$ 中稠密性过渡）。②③合起来说明 $f\\mapsto\\hat f$ 是 $L^1(\\mathbb{R}^n)\\to C_0(\\mathbb{R}^n)$（无穷远处消失的连续函数）的有界线性算子，算子范数恰为 $1$：取 $f\\ge0$ 便有 $\\hat f(0)=\\int f=\\|f\\|_1$。\n\n关键的限制是：**$f\\in L^1$ 推不出 $\\hat f\\in L^1$**。最经典的例子是矩形脉冲 $f=\\mathbf 1_{[-1/2,1/2]}$，它的变换是 $\\hat f(\\xi)=\\dfrac{\\sin(\\pi\\xi)}{\\pi\\xi}$（$\\xi\\ne0$）：只有 $1/|\\xi|$ 的衰减，$\\int|\\hat f(\\xi)|d\\xi$ 按调和级数对数发散，所以 $\\hat f\\notin L^1$。后果有两个：反演公式不能无条件写成绝对收敛的积分（见「傅里叶反演与唯一性」），但傅里叶变换**不把 $L^1$ 映入自身**（$f\\in L^1$ 推不出 $\\hat f\\in L^1$，sinc 反例），且 $L^1$ 在**逐点乘法**下也不封闭（如 $x^{-1/2}\\mathbf 1_{(0,1)}\\in L^1$ 而它的平方不属于 $L^1$），所以反演必须附加条件。（$L^1$ 对**卷积**是封闭的：由 Young 不等式 $\\|f*g\\|_1\\le\\|f\\|_1\\|g\\|_1$，$L^1$ 是卷积 Banach 代数。）所以说 $L^1$ 给出了变换「无条件收敛、全局有定义」的一面；要做完整调和分析，还必须走到 $L^2$（普朗歇尔定理把它变成酉算子）与施瓦茨空间 $\\mathcal S$（在变换下封闭）。\n\n常用运算律（都在本约定下）：平移对应调制、$x$ 方向伸缩对应频率方向反向伸缩、卷积对应乘积。若 $f$ 实值，则 $\\hat f(-\\xi)=\\overline{\\hat f(\\xi)}$（共轭对称），于是 $|\\hat f|$ 是偶函数。",
+    "definitionEn": "**Throughout this series we fix one convention**: for $f\\in L^1(\\mathbb{R}^n)$,\n$$\\hat f(\\xi)=\\int_{\\mathbb{R}^n}f(x)e^{-2\\pi i\\,x\\cdot\\xi}\\,dx,\\qquad \\xi\\in\\mathbb{R}^n .$$\nThe factor $2\\pi$ sits in the exponent and the forward transform carries no normalising constant; as a reward neither the inversion formula nor Plancherel's theorem shows any $2\\pi$. It differs from the engineering convention $F(\\omega)=\\int f(t)e^{-i\\omega t}dt$ only by $\\omega=2\\pi\\xi$ ($\\omega$ angular frequency, $\\xi$ frequency). Always check the convention before using a formula.\n\nThree elementary facts follow straight from the integral. (i) Since $|e^{-2\\pi i\\,x\\cdot\\xi}|=1$, $|\\hat f(\\xi)|\\le\\int|f|=\\|f\\|_1$, i.e. $\\|\\hat f\\|_\\infty\\le\\|f\\|_1$. (ii) From $|\\hat f(\\xi+h)-\\hat f(\\xi)|\\le\\int|f(x)|\\,|e^{-2\\pi i\\,h\\cdot x}-1|dx$ and dominated convergence, $\\hat f$ is **uniformly continuous** — continuity of $f$ itself is not needed. (iii) **Riemann–Lebesgue**: $\\hat f(\\xi)\\to0$ as $|\\xi|\\to\\infty$ (check step functions, then use density of step functions in $L^1$ and $\\|\\hat f-\\hat g\\|_\\infty\\le\\|f-g\\|_1$). Hence $f\\mapsto\\hat f$ is a bounded operator $L^1(\\mathbb{R}^n)\\to C_0(\\mathbb{R}^n)$ of norm exactly $1$, because $\\hat f(0)=\\|f\\|_1$ for $f\\ge0$.\n\nThe crucial limitation: **$f\\in L^1$ does not imply $\\hat f\\in L^1$.** For the rectangular pulse $f=\\mathbf 1_{[-1/2,1/2]}$ the transform is $\\hat f(\\xi)=\\sin(\\pi\\xi)/(\\pi\\xi)$, decaying only like $1/|\\xi|$, so $\\int|\\hat f|=\\infty$. Consequently inversion cannot be written as an absolutely convergent integral without an extra hypothesis, and $L^1$ is not closed under pointwise multiplication, and the transform does not map $L^1$ into itself ($L^1$ *is* closed under convolution, by Young's inequality). Thus $L^1$ is the framework in which the transform is everywhere defined and unconditionally convergent, while $L^2$ (Plancherel) and the Schwartz space $\\mathcal S$ (invariant under the transform) are the frameworks where the full calculus works.\n\nElementary rules (all in this convention): translation $\\leftrightarrow$ modulation, dilation in $x$ $\\leftrightarrow$ inverse dilation in frequency, convolution $\\leftrightarrow$ product. For real-valued $f$ one has the conjugate symmetry $\\hat f(-\\xi)=\\overline{\\hat f(\\xi)}$, so $|\\hat f|$ is even.",
+    "formulas": [
+      {
+        "latex": "\\hat f(\\xi)=\\int_{\\mathbb{R}^n}f(x)e^{-2\\pi i\\,x\\cdot\\xi}\\,dx,\\qquad f\\in L^1(\\mathbb{R}^n),\\ \\xi\\in\\mathbb{R}^n",
+        "note": "定义。本系列统一约定：$2\\pi$ 在指数里、正变换无归一化常数；与 $F(\\omega)=\\int f(t)e^{-i\\omega t}dt$ 相差 $\\omega=2\\pi\\xi$。",
+        "noteEn": "Definition. Convention of this series: $2\\pi$ in the exponent, no constant in front; it is related to $F(\\omega)=\\int f e^{-i\\omega t}dt$ by $\\omega=2\\pi\\xi$."
+      },
+      {
+        "latex": "\\|\\hat f\\|_\\infty\\le\\|f\\|_1,\\qquad |\\hat f(\\xi)|\\le\\int_{\\mathbb{R}^n}|f(x)|\\,dx",
+        "note": "有界性：右端与 $\\xi$ 无关，故变换是 $L^1\\to L^\\infty$ 的有界算子，算子范数为 $1$。",
+        "noteEn": "Boundedness: the bound is independent of $\\xi$, so the transform is bounded from $L^1$ to $L^\\infty$ with norm $1$."
+      },
+      {
+        "latex": "\\hat f\\in C_0(\\mathbb{R}^n):\\quad \\hat f\\ \\text{一致连续},\\qquad \\lim_{|\\xi|\\to\\infty}\\hat f(\\xi)=0",
+        "note": "一致连续性由控制收敛得到；无穷远处消失是黎曼–勒贝格引理。两者都不要求 $f$ 连续。",
+        "noteEn": "Uniform continuity comes from dominated convergence; vanishing at infinity is the Riemann–Lebesgue lemma. Neither requires $f$ to be continuous."
+      },
+      {
+        "latex": "\\widehat{f(\\cdot-a)}(\\xi)=e^{-2\\pi i\\,a\\cdot\\xi}\\hat f(\\xi),\\qquad \\widehat{e^{2\\pi i\\,x\\cdot a}f}(\\xi)=\\hat f(\\xi-a),\\qquad \\widehat{f(\\cdot/a)}(\\xi)=a^{n}\\hat f(a\\xi)\\ \\ (a>0)",
+        "note": "平移 $\\leftrightarrow$ 调制、伸缩。伸缩律是「窄函数必有宽频谱」的来源，见不确定性原理。",
+        "noteEn": "Translation $\\leftrightarrow$ modulation, and the dilation rule. Dilation is the source of the narrow-function/wide-spectrum trade-off (uncertainty principle)."
+      },
+      {
+        "latex": "\\mathbf 1_{[-1/2,1/2]}\\ \\longmapsto\\ \\frac{\\sin(\\pi\\xi)}{\\pi\\xi}\\ (\\xi\\ne0),\\qquad \\int_{\\mathbb{R}}\\Bigl|\\frac{\\sin(\\pi\\xi)}{\\pi\\xi}\\Bigr|\\,d\\xi=\\infty",
+        "note": "「$f\\in L^1$ 但 $\\hat f\\notin L^1$」的标准反例：衰减只有 $1/|\\xi|$，积分对数发散。",
+        "noteEn": "The standard counterexample to “$f\\in L^1\\Rightarrow\\hat f\\in L^1$”: decay is only $1/|\\xi|$, so the integral diverges logarithmically."
+      }
+    ],
+    "properties": [
+      "有界性：$\\|\\hat f\\|_\\infty\\le\\|f\\|_1$，且对 $f\\ge0$ 有 $\\hat f(0)=\\|f\\|_1$，故 $L^1\\to C_0$ 的算子范数恰为 $1$。",
+      "正则性：$\\hat f$ 自动一致连续且在无穷远处消失，即 $\\hat f\\in C_0(\\mathbb{R}^n)$；$f$ 本身可以处处不连续。",
+      "不封闭：存在 $f\\in L^1$ 使 $\\hat f\\notin L^1$（矩形脉冲的变换是 sinc 型），所以反演必须附加 $\\hat f\\in L^1$。",
+      "单射性：若 $f\\in L^1$ 且 $\\hat f\\equiv0$，则 $f=0$ a.e.（唯一性，见傅里叶反演与唯一性）；变换的值域含于 $C_0$ 且在其中稠密。",
+      "运算律：平移 $\\leftrightarrow$ 调制、伸缩、卷积化为乘积；实值 $f$ 满足 $\\hat f(-\\xi)=\\overline{\\hat f(\\xi)}$。"
+    ],
+    "propertiesEn": [
+      "Boundedness: $\\|\\hat f\\|_\\infty\\le\\|f\\|_1$, with equality $\\hat f(0)=\\|f\\|_1$ for $f\\ge0$; hence the operator norm $L^1\\to C_0$ is exactly $1$.",
+      "Regularity: $\\hat f$ is automatically uniformly continuous and vanishes at infinity, i.e. $\\hat f\\in C_0(\\mathbb{R}^n)$, even if $f$ is nowhere continuous.",
+      "Not closed: some $f\\in L^1$ have $\\hat f\\notin L^1$ (the pulse gives a sinc-type transform), so inversion needs the extra hypothesis $\\hat f\\in L^1$.",
+      "Injectivity: if $f\\in L^1$ and $\\hat f\\equiv0$ then $f=0$ a.e. (uniqueness); the range lies in $C_0$ and is dense there.",
+      "Rules: translation $\\leftrightarrow$ modulation, dilation, convolution $\\to$ product; for real $f$, $\\hat f(-\\xi)=\\overline{\\hat f(\\xi)}$."
+    ],
+    "expression": {
+      "text": "f̂(ξ) = ∫_ℝⁿ f(x)e^{−2πi x·ξ}dx",
+      "symbol": "\\hat f(\\xi)",
+      "note": "2π 在指数里、正变换无归一化常数；与 F(ω)=∫f(t)e^{−iωt}dt 相差 ω=2πξ。",
+      "noteEn": "2π in the exponent and no normalising constant; related to F(ω)=∫f(t)e^{−iωt}dt by ω=2πξ."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-PI*x^2)",
+          "color": "#4cc9f0",
+          "label": "f(x)=e^(−πx²)"
+        },
+        {
+          "expr": "exp(-PI*x^2)",
+          "color": "#ff6b9d",
+          "label": "f̂(ξ)=e^(−πξ²)：与 f 完全重合（自对偶）"
+        },
+        {
+          "expr": "exp(-PI*(x/2)^2)",
+          "color": "#06d6a0",
+          "label": "g(x)=e^(−π(x/2)²)"
+        },
+        {
+          "expr": "2*exp(-4*PI*x^2)",
+          "color": "#ffd166",
+          "label": "ĝ(ξ)=2e^(−4πξ²)：g 的变换"
+        }
+      ],
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -0.15,
+        2.15
+      ],
+      "title": "高斯 e^(−πx²) 的变换仍是它自己（蓝与粉重合）；x 方向拉伸 2 倍则频谱变窄、峰值加倍（由 1 升到 2；面积 ∫f̂ 守恒，谱变窄必然变高）"
+    },
+    "examples": [
+      {
+        "problem": "求矩形脉冲 $f(x)=1$（$|x|\\le\\tfrac12$）、$f(x)=0$（$|x|>\\tfrac12$）的傅里叶变换，并证明 $\\hat f\\notin L^1$。",
+        "solution": "$\\hat f(0)=\\int_{-1/2}^{1/2}dx=1$。当 $\\xi\\ne0$ 时\n$$\\hat f(\\xi)=\\int_{-1/2}^{1/2}e^{-2\\pi i\\xi x}dx=\\frac{e^{-\\pi i\\xi}-e^{\\pi i\\xi}}{-2\\pi i\\xi}=\\frac{\\sin(\\pi\\xi)}{\\pi\\xi}.$$\n发散性：$\\int_k^{k+1}|\\sin \\pi\\xi|d\\xi=\\tfrac2\\pi$，故\n$$\\int_1^{\\infty}\\Bigl|\\frac{\\sin(\\pi\\xi)}{\\pi\\xi}\\Bigr|d\\xi\\ge\\frac{2}{\\pi}\\sum_{k=1}^{\\infty}\\frac{1}{\\pi(k+1)}=+\\infty,$$\n所以 $\\hat f\\notin L^1$。结论：$f\\in L^1$ 完全不能保证 $\\hat f\\in L^1$；黎曼–勒贝格只说 $\\hat f\\to0$，这里衰减速度恰好只有 $1/|\\xi|$。"
+      },
+      {
+        "problem": "设 $f\\in L^1(\\mathbb{R})$。用黎曼–勒贝格引理证明 $\\lim\\limits_{\\lambda\\to\\infty}\\int_{\\mathbb{R}}f(x)\\sin(\\lambda x)\\,dx=0$。",
+        "solution": "把正弦写成虚部：\n$$\\int_{\\mathbb{R}}f(x)\\sin(\\lambda x)dx=\\mathrm{Im}\\int_{\\mathbb{R}}f(x)e^{i\\lambda x}dx=\\mathrm{Im}\\,\\hat f\\!\\left(-\\frac{\\lambda}{2\\pi}\\right).$$\n（因为 $e^{i\\lambda x}=e^{-2\\pi i x\\xi}$ 当 $\\xi=-\\lambda/(2\\pi)$。）由 $\\lambda\\to\\infty$ 有 $|\\xi|\\to\\infty$，黎曼–勒贝格给出 $\\hat f\\bigl(-\\lambda/(2\\pi)\\bigr)\\to0$，取虚部即得结论。取 $\\lambda=n$ 就得到傅里叶系数 $\\hat f(n)\\to0$ 的机制：可积函数的高频振荡积分必然趋于 $0$。"
+      }
+    ],
+    "tags": [
+      "调和分析",
+      "L¹",
+      "黎曼-勒贝格引理",
+      "一致连续",
+      "C₀"
+    ],
+    "links": [
+      "fourier-transform",
+      "fourier-transform-properties",
+      "fourier-inversion-uniqueness",
+      "plancherel-theorem",
+      "lp-spaces",
+      "fourier-series",
+      "convolution"
+    ]
+  },
+  {
+    "id": "fourier-inversion-uniqueness",
+    "title": "傅里叶反演与唯一性",
+    "titleEn": "Fourier Inversion and Uniqueness",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "若 $f\\in L^1$ 且 $\\hat f\\in L^1$，则 $f(x)=\\int\\hat f(\\xi)e^{2\\pi i x\\cdot\\xi}d\\xi$ 几乎处处成立（$\\hat f\\in L^1$ 这个条件不能省）；由此 $\\hat f=0\\Rightarrow f=0$ a.e.，而 $e^{-\\pi|x|^2}$ 是变换的不动点。",
+    "summaryEn": "If $f\\in L^1$ and $\\hat f\\in L^1$ then $f(x)=\\int\\hat f(\\xi)e^{2\\pi i x\\cdot\\xi}d\\xi$ almost everywhere — the hypothesis $\\hat f\\in L^1$ cannot be dropped; consequently $\\hat f=0\\Rightarrow f=0$ a.e., and $e^{-\\pi|x|^2}$ is a fixed point of the transform.",
+    "definition": "**反演定理**：设 $f\\in L^1(\\mathbb{R}^n)$ 且 $\\hat f\\in L^1(\\mathbb{R}^n)$（使用的约定仍是 $\\hat f(\\xi)=\\int f(x)e^{-2\\pi i x\\cdot\\xi}dx$）。则对几乎处处的 $x$ 有\n$$f(x)=\\int_{\\mathbb{R}^n}\\hat f(\\xi)e^{2\\pi i\\,x\\cdot\\xi}\\,d\\xi .$$\n右端绝对收敛，而且作为 $x$ 的函数连续、在无穷远处趋于 $0$（黎曼–勒贝格），所以正确的读法是：$f$ 几乎处处等于这个连续函数。也就是说，$f$ 在换掉一个零测集后是连续的。**附加条件 $\\hat f\\in L^1$ 不能漏**：一般 $L^1$ 函数的变换衰减不够快（矩形脉冲的变换是 sinc 型，只有 $1/|\\xi|$），此时反演积分不绝对收敛。\n\n那么 $\\hat f\\notin L^1$ 时怎么办？用**部分积分核**做对称截断：\n$$I_R(x)=\\int_{|\\xi|\\le R}\\hat f(\\xi)e^{2\\pi i x\\cdot\\xi}d\\xi .$$\n例如 $f=\\mathbf 1_{[-1,1]}$ 时 $\\hat f(\\xi)=\\sin(2\\pi\\xi)/(\\pi\\xi)$，直接计算给出 $I_R(x)=\\frac1\\pi\\bigl[\\mathrm{Si}(2\\pi R(1+x))+\\mathrm{Si}(2\\pi R(1-x))\\bigr]$（$\\mathrm{Si}(u)=\\int_0^u\\frac{\\sin t}{t}dt$）。当 $R\\to\\infty$，$I_R(x)\\to1$（$|x|<1$）、$\\to0$（$|x|>1$）、$\\to\\frac12$（$x=\\pm1$）：在跳点处恢复到**左右极限的平均值**，这正是狄利克雷–若尔当型结论。所以即使 $\\hat f\\notin L^1$，对称截断仍能逐点恢复函数（跳点给平均值）；而 $\\hat f\\in L^1$ 时整体极限存在，公式在 a.e. 意义下成立。\n\n**唯一性定理**：若 $f\\in L^1$ 且 $\\hat f\\equiv0$，则 $f=0$ a.e.。证明思路（用到卷积定理与反演本身）：取高斯核 $K_t(x)=t^{-n/2}e^{-\\pi|x|^2/t}$，其变换为 $\\widehat{K_t}(\\xi)=e^{-\\pi t|\\xi|^2}$，于是由卷积定理 $\\widehat{f*K_t}=\\hat f\\cdot\\widehat{K_t}=0\\in L^1$；对 $f*K_t$（它属于 $L^1$，且变换属于 $L^1$）用反演公式得 $f*K_t=0$ a.e.。再令 $t\\to0^+$：高斯核是逼近恒等核，$f*K_t\\to f$ 在 $L^1$ 中，故 $f=0$ a.e.。这说明**频域完全决定函数**，是傅里叶方法能用来解方程的理论依据。\n\n**自对偶的高斯**：取 $f(x)=e^{-\\pi|x|^2}$，配方 $ -\\pi|x|^2-2\\pi i x\\cdot\\xi=-\\pi|x+i\\xi|^2-\\pi|\\xi|^2$ 并平移积分路径，立刻得到\n$$\\widehat{e^{-\\pi|\\cdot|^2}}(\\xi)=e^{-\\pi|\\xi|^2},$$\n即 $\\hat f=f$：函数与自己的变换是同一个函数。这正是把 $2\\pi$ 放进指数的好处——在这个酉约定下存在真正的不动点。若换成 $F(\\omega)=\\int f(t)e^{-i\\omega t}dt$，因为此时 $\\|F\\|_2^2=2\\pi\\|f\\|_2^2$（见普朗歇尔定理），必须再引入 $1/\\sqrt{2\\pi}$ 归一化，自对偶函数才变成 $e^{-t^2/2}$；换句话说，**「自对偶函数长什么样」完全由约定决定**，换个约定就要换函数。由自对偶与反演还可读出算子恒等式 $\\mathcal F^2f(x)=f(-x)$、$\\mathcal F^4=\\mathrm{id}$。",
+    "definitionEn": "**Inversion theorem.** Let $f\\in L^1(\\mathbb{R}^n)$ and $\\hat f\\in L^1(\\mathbb{R}^n)$ (same convention $\\hat f(\\xi)=\\int f(x)e^{-2\\pi i x\\cdot\\xi}dx$). Then for almost every $x$,\n$$f(x)=\\int_{\\mathbb{R}^n}\\hat f(\\xi)e^{2\\pi i\\,x\\cdot\\xi}\\,d\\xi .$$\nThe integral on the right converges absolutely and defines a continuous function vanishing at infinity, so the identity holds a.e. and, after modification on a null set, $f$ is continuous. **The hypothesis $\\hat f\\in L^1$ is essential**: for a general $L^1$ function the transform decays too slowly and the inversion integral is not absolutely convergent.\n\nWhen $\\hat f\\notin L^1$ one uses symmetric truncation (the partial integral kernel) $I_R(x)=\\int_{|\\xi|\\le R}\\hat f(\\xi)e^{2\\pi ix\\cdot\\xi}d\\xi$. For $f=\\mathbf 1_{[-1,1]}$ one gets $I_R(x)=\\frac1\\pi[\\mathrm{Si}(2\\pi R(1+x))+\\mathrm{Si}(2\\pi R(1-x))]$ with $\\mathrm{Si}(u)=\\int_0^u\\frac{\\sin t}{t}dt$, which tends to $1$ for $|x|<1$, to $0$ for $|x|>1$ and to $\\frac12$ at $x=\\pm1$: at a jump the symmetric partial integral returns the average of the one-sided limits (Dirichlet–Jordan).\n\n**Uniqueness.** If $f\\in L^1$ and $\\hat f\\equiv0$, then $f=0$ a.e. Idea: with the Gaussian kernel $K_t(x)=t^{-n/2}e^{-\\pi|x|^2/t}$, whose transform is $e^{-\\pi t|\\xi|^2}$, the convolution theorem gives $\\widehat{f*K_t}=\\hat f\\,\\widehat{K_t}=0$, so inversion applied to $f*K_t$ yields $f*K_t=0$ a.e.; letting $t\\to0^+$ and using that $K_t$ is an approximate identity gives $f=0$ a.e. Thus the frequency side determines the function completely.\n\n**Self-dual Gaussian.** Completing the square, $-\\pi|x|^2-2\\pi i\\,x\\cdot\\xi=-\\pi|x+i\\xi|^2-\\pi|\\xi|^2$, and shifting the contour gives $\\widehat{e^{-\\pi|\\cdot|^2}}=e^{-\\pi|\\cdot|^2}$: the Gaussian equals its own transform. This is a benefit of the unitary (2π-in-the-exponent) convention; with $F(\\omega)=\\int f e^{-i\\omega t}dt$ one needs an extra $1/\\sqrt{2\\pi}$ normalisation before $e^{-t^2/2}$ becomes self-dual. One also reads off $\\mathcal F^2f(x)=f(-x)$ and $\\mathcal F^4=\\mathrm{id}$.",
+    "formulas": [
+      {
+        "latex": "f(x)=\\int_{\\mathbb{R}^n}\\hat f(\\xi)e^{2\\pi i\\,x\\cdot\\xi}\\,d\\xi\\qquad\\text{a.e.},\\qquad f\\in L^1,\\ \\hat f\\in L^1",
+        "note": "反演公式。必需条件「$\\hat f\\in L^1$」不能省；右端连续且消失于无穷，等式按 a.e. 理解。",
+        "noteEn": "Inversion. The hypothesis $\\hat f\\in L^1$ is indispensable; the right side is continuous and vanishes at infinity and the identity holds a.e."
+      },
+      {
+        "latex": "\\hat f\\equiv0\\ \\Longrightarrow\\ f=0\\ \\text{a.e.}",
+        "note": "唯一性：变换在 $L^1$ 上单射，即频域完全决定函数；证明用高斯核逼近 + 反演。",
+        "noteEn": "Uniqueness: the transform is injective on $L^1$ — the frequency side determines the function; proved by Gaussian approximation plus inversion."
+      },
+      {
+        "latex": "\\widehat{e^{-\\pi|\\cdot|^2}}(\\xi)=e^{-\\pi|\\xi|^2}",
+        "note": "自对偶高斯：本约定下 $e^{-\\pi|x|^2}$ 是变换的不动点（换约定则要换函数，如 $\\omega$ 约定配 $e^{-t^2/2}$）。",
+        "noteEn": "Self-dual Gaussian: in this convention $e^{-\\pi|x|^2}$ is a fixed point (other conventions need different functions, e.g. $e^{-t^2/2}$)."
+      },
+      {
+        "latex": "\\int_{\\mathbb{R}^n}f(x)\\,\\hat g(x)\\,dx=\\int_{\\mathbb{R}^n}\\hat f(\\xi)\\,g(\\xi)\\,d\\xi\\qquad (f,g\\in L^1)",
+        "note": "乘法公式（富比尼定理直接给出），是唯一性与多数反演论证的技术支点。",
+        "noteEn": "Multiplication formula (immediate from Fubini), the technical pivot of uniqueness and of most inversion arguments."
+      },
+      {
+        "latex": "\\int_{|\\xi|\\le R}\\hat f(\\xi)e^{2\\pi i\\,x\\cdot\\xi}d\\xi\\ \\xrightarrow[\\ R\\to\\infty\\ ]{}\\ \\frac{f(x^+)+f(x^-)}{2}",
+        "note": "部分积分核（对称截断）：$\\hat f\\notin L^1$ 时用它逼近；跳点处给左右极限平均（狄利克雷–若尔当），$\\hat f\\in L^1$ 时极限就是 $f$。",
+        "noteEn": "Partial integral kernel (symmetric truncation): used when $\\hat f\\notin L^1$; at a jump it returns the average of the one-sided limits, and when $\\hat f\\in L^1$ the limit is $f$ itself."
+      }
+    ],
+    "properties": [
+      "反演成立需 $f\\in L^1$ 且 $\\hat f\\in L^1$；此时 $f$ 几乎处处等于一个连续且消失于无穷的函数。",
+      "唯一性（单射性）：$\\hat f=0\\Rightarrow f=0$ a.e.，即「频域决定函数」；这是用傅里叶变换解微分方程、做去卷积的合法性来源。",
+      "自对偶：$e^{-\\pi|x|^2}$ 不变；一般 $e^{-a|x|^2}\\mapsto(\\pi/a)^{n/2}e^{-\\pi^2|\\xi|^2/a}$，只有 $a=\\pi$ 时不变，且自对偶函数随约定而变。",
+      "算子恒等式：$\\mathcal F^2f(x)=f(-x)$（平方是反射）、$\\mathcal F^4=\\mathrm{id}$，故 $\\mathcal F^{-1}=\\mathcal F^3$；在施瓦茨空间上反演无条件成立。",
+      "部分积分核：即使 $\\hat f\\notin L^1$，对称截断 $I_R$ 也按 a.e.（跳点给平均值）收敛，但截断之间没有绝对收敛的极限函数可谈。"
+    ],
+    "propertiesEn": [
+      "Inversion needs both $f\\in L^1$ and $\\hat f\\in L^1$; then $f$ coincides a.e. with a continuous function vanishing at infinity.",
+      "Uniqueness (injectivity): $\\hat f=0\\Rightarrow f=0$ a.e., i.e. the frequency side determines the function; this legitimises solving ODE/PDE and deconvolution by Fourier methods.",
+      "Self-duality: $e^{-\\pi|x|^2}$ is fixed; in general $e^{-a|x|^2}\\mapsto(\\pi/a)^{n/2}e^{-\\pi^2|\\xi|^2/a}$, so only $a=\\pi$ is invariant, and the self-dual function changes with the convention.",
+      "Operator identities: $\\mathcal F^2f(x)=f(-x)$ (the square is a reflection) and $\\mathcal F^4=\\mathrm{id}$, hence $\\mathcal F^{-1}=\\mathcal F^3$; on the Schwartz space inversion is unconditional.",
+      "Partial integral kernel: even when $\\hat f\\notin L^1$, the symmetric truncations $I_R$ converge a.e. (average at jumps), although no absolutely convergent limiting integral exists."
+    ],
+    "expression": {
+      "text": "f(x) = ∫_ℝⁿ f̂(ξ)e^{2πi x·ξ}dξ   （f, f̂ ∈ L¹）",
+      "symbol": "\\mathcal F^{-1}\\hat f(x)=\\int\\hat f(\\xi)e^{2\\pi i x\\cdot\\xi}d\\xi",
+      "note": "反演＝把指数符号翻过来；必须 $\\hat f\\in L^1$，否则只能谈对称截断的部分积分核。",
+      "noteEn": "Inversion just flips the sign in the exponent; it requires $\\hat f\\in L^1$, otherwise only symmetric truncations are available."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "1/(PI*(1+x^2))",
+          "color": "#4cc9f0",
+          "label": "f(x)=1/(π(1+x²))，f̂(ξ)=e^(−2π|ξ|)"
+        },
+        {
+          "expr": "(1 - exp(-2*PI*0.2)*cos(2*PI*0.2*x) + x*exp(-2*PI*0.2)*sin(2*PI*0.2*x))/(PI*(1+x^2))",
+          "color": "#ff6b9d",
+          "label": "截断反演 I_R，R=0.2"
+        },
+        {
+          "expr": "(1 - exp(-2*PI*0.35)*cos(2*PI*0.35*x) + x*exp(-2*PI*0.35)*sin(2*PI*0.35*x))/(PI*(1+x^2))",
+          "color": "#06d6a0",
+          "label": "截断反演 I_R，R=0.35"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -0.06,
+        0.36
+      ],
+      "title": "部分反演积分 I_R(x)=∫_{-R}^{R} e^(−2π|ξ|)e^(2πixξ)dξ：R 增大时逐点逼近 f(x)=1/(π(1+x²))"
+    },
+    "examples": [
+      {
+        "problem": "证明 $\\displaystyle\\int_{\\mathbb{R}}e^{-\\pi x^2}e^{-2\\pi i x\\xi}dx=e^{-\\pi\\xi^2}$（高斯自对偶），并写出一般参数 $a>0$ 时的对应公式。",
+        "solution": "配方：$-\\pi x^2-2\\pi i x\\xi=-\\pi(x+i\\xi)^2-\\pi\\xi^2$，于是\n$$\\hat f(\\xi)=e^{-\\pi\\xi^2}\\int_{\\mathbb{R}}e^{-\\pi(x+i\\xi)^2}dx.$$\n被积函数是整函数、在所涉水平条带内一致衰减，把积分路径从 $\\mathbb{R}$ 平移到 $\\mathbb{R}+i\\xi$ 不改变积分值，故 $\\int_{\\mathbb{R}}e^{-\\pi(x+i\\xi)^2}dx=\\int_{\\mathbb{R}}e^{-\\pi u^2}du=1$，得 $\\hat f(\\xi)=e^{-\\pi\\xi^2}=f(\\xi)$。一般地 $\\int e^{-ax^2}e^{-2\\pi ix\\xi}dx=\\sqrt{\\pi/a}\\,e^{-\\pi^2\\xi^2/a}$，可见只有 $a=\\pi$ 时函数与变换相同——这就是「自对偶」。"
+      },
+      {
+        "problem": "已知 $\\displaystyle\\int_{\\mathbb{R}}\\frac{e^{-2\\pi i x\\xi}}{1+x^2}dx=\\pi e^{-2\\pi|\\xi|}$（$\\xi\\in\\mathbb{R}$，可用留数计算）。用反演公式求 $\\displaystyle\\int_{\\mathbb{R}}e^{-2\\pi|\\xi|}e^{2\\pi i x\\xi}d\\xi$，并由此得到一个实积分公式。",
+        "solution": "令 $g(x)=\\frac1\\pi\\cdot\\frac1{1+x^2}$。由已知公式 $\\hat g(\\xi)=e^{-2\\pi|\\xi|}$，且 $g\\in L^1$、$\\hat g\\in L^1$，反演条件满足，故\n$$g(x)=\\int_{\\mathbb{R}}\\hat g(\\xi)e^{2\\pi i x\\xi}d\\xi=\\int_{\\mathbb{R}}e^{-2\\pi|\\xi|}e^{2\\pi i x\\xi}d\\xi\\ \\Longrightarrow\\ \\int_{\\mathbb{R}}e^{-2\\pi|\\xi|}e^{2\\pi i x\\xi}d\\xi=\\frac{1}{\\pi(1+x^2)}.$$\n取实部（被积函数的虚部是奇函数，积分为 $0$）：\n$$\\int_0^{\\infty}e^{-2\\pi\\xi}\\cos(2\\pi x\\xi)\\,d\\xi=\\frac{1}{2\\pi(1+x^2)}.$$\n核对：$x=0$ 时左边 $=\\frac{1}{2\\pi}$，右边 $=\\frac{1}{2\\pi}$，吻合。"
+      }
+    ],
+    "tags": [
+      "调和分析",
+      "傅里叶反演",
+      "唯一性",
+      "自对偶高斯",
+      "狄利克雷积分"
+    ],
+    "links": [
+      "fourier-transform-l1",
+      "plancherel-theorem",
+      "schwartz-space",
+      "fourier-transform",
+      "fourier-transform-properties",
+      "convolution",
+      "lp-spaces"
+    ]
+  },
+  {
+    "id": "plancherel-theorem",
+    "title": "普朗歇尔定理",
+    "titleEn": "Plancherel's Theorem",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "对 $f\\in L^1\\cap L^2$ 有 $\\|\\hat f\\|_2=\\|f\\|_2$ 与 $\\langle f,g\\rangle=\\langle\\hat f,\\hat g\\rangle$，据此傅里叶变换唯一地延拓为 $L^2(\\mathbb{R}^n)$ 上的酉算子；这正是 $2\\pi$ 约定下不带任何常数的能量守恒。",
+    "summaryEn": "For $f\\in L^1\\cap L^2$ one has $\\|\\hat f\\|_2=\\|f\\|_2$ and $\\langle f,g\\rangle=\\langle\\hat f,\\hat g\\rangle$; hence the transform extends uniquely to a unitary operator on $L^2(\\mathbb{R}^n)$ — energy conservation with no constant at all, thanks to the $2\\pi$-in-the-exponent convention.",
+    "definition": "**定理**（约定仍为 $\\hat f(\\xi)=\\int f(x)e^{-2\\pi i x\\cdot\\xi}dx$）。设 $f,g\\in L^1(\\mathbb{R}^n)\\cap L^2(\\mathbb{R}^n)$。则 $\\hat f\\in L^2$ 且\n$$\\|\\hat f\\|_2=\\|f\\|_2,\\qquad \\langle f,g\\rangle=\\langle\\hat f,\\hat g\\rangle ,\\qquad \\langle f,g\\rangle=\\int f\\bar g .$$\n也就是说，傅里叶变换在内积空间 $L^1\\cap L^2$ 上是**等距**且保持内积的。\n\n证明思路很漂亮：取「自相关」$F=f*f^*$，其中 $f^*(x)=\\overline{f(-x)}$。直接计算得 $F(0)=\\int f\\overline{f}=\\|f\\|_2^2$，而卷积定理加共轭对称给出 $\\hat F(\\xi)=\\hat f(\\xi)\\overline{\\hat f(\\xi)}=|\\hat f(\\xi)|^2\\in L^1$。对 $F$ 用反演公式并令 $x=0$：\n$$\\|f\\|_2^2=F(0)=\\int_{\\mathbb{R}^n}\\hat F(\\xi)\\,d\\xi=\\int_{\\mathbb{R}^n}|\\hat f(\\xi)|^2d\\xi=\\|\\hat f\\|_2^2 .$$\n内积形式由极化恒等式（$\\langle f,g\\rangle=\\frac14\\sum_{k=0}^{3}i^k\\|f+i^kg\\|_2^2$）立即得到。\n\n**延拓到整个 $L^2$**：$L^1\\cap L^2$ 在 $L^2(\\mathbb{R}^n)$ 中稠密，等距映射可唯一延拓为 $L^2(\\mathbb{R}^n)\\to L^2(\\mathbb{R}^n)$ 的等距算子，仍记 $\\mathcal F$。它还是满射：$\\mathcal F^4=\\mathrm{id}$（所以 $\\mathcal F^{-1}=\\mathcal F^3$，逆变换仍是傅里叶变换），于是 $\\mathcal F$ 是**酉算子**。对一般的 $f\\in L^2$，$\\hat f$ 不能用积分公式直接定义，因为 $f$ 不一定属于 $L^1$（例如 $f(x)=1/\\sqrt{1+x^2}$ 属于 $L^2$ 而不属于 $L^1$）；正确做法是取 $f_k\\in L^1\\cap L^2$，$f_k\\to f$ 在 $L^2$ 中，再令 $\\hat f=\\lim_k\\hat f_k$ 在 $L^2$ 中取极限——存在性由等距性质保证，极限与逼近列的选择无关。\n\n**约定提醒**：本约定下 $\\|\\hat f\\|_2=\\|f\\|_2$ 干净得没有任何常数。若改用 $F(\\omega)=\\int f(t)e^{-i\\omega t}dt$，则 $\\|F\\|_2^2=2\\pi\\|f\\|_2^2$，帕塞瓦尔等式必须写成 $\\int|f|^2=\\frac{1}{2\\pi}\\int|F|^2$。这正是有些教材里 Plancherel / Parseval 带 $1/(2\\pi)$、有些带 $1/\\sqrt{2\\pi}$ 的原因——不是定理不同，而是归一化不同。物理与信号处理的语言是：傅里叶变换是 $L^2$ 中的正交变换（「连续版的坐标系旋转」），是量子力学位置表象与动量表象之间的换算，也是时域与频域完全等价这一说法的严格含义。",
+    "definitionEn": "**Theorem** (convention $\\hat f(\\xi)=\\int f(x)e^{-2\\pi i x\\cdot\\xi}dx$). Let $f,g\\in L^1(\\mathbb{R}^n)\\cap L^2(\\mathbb{R}^n)$. Then $\\hat f\\in L^2$ and $\\|\\hat f\\|_2=\\|f\\|_2$, with $\\langle f,g\\rangle=\\langle\\hat f,\\hat g\\rangle$ for $\\langle f,g\\rangle=\\int f\\bar g$: the transform is an isometry preserving inner products on $L^1\\cap L^2$.\n\nProof idea: the autocorrelation $F=f*f^*$ with $f^*(x)=\\overline{f(-x)}$ satisfies $F(0)=\\|f\\|_2^2$ and, by the convolution theorem and conjugate symmetry, $\\hat F=|\\hat f|^2\\in L^1$. Inversion applied to $F$ at $x=0$ gives $\\|f\\|_2^2=F(0)=\\int\\hat F=\\|\\hat f\\|_2^2$; the inner-product form follows by polarisation.\n\n**Extension**: $L^1\\cap L^2$ is dense in $L^2$, so the isometry extends uniquely to an isometry $\\mathcal F:L^2\\to L^2$. It is onto because $\\mathcal F^4=\\mathrm{id}$ (hence $\\mathcal F^{-1}=\\mathcal F^3$), so $\\mathcal F$ is **unitary**. For general $f\\in L^2$ the integral formula may diverge ($f(x)=1/\\sqrt{1+x^2}\\in L^2\\setminus L^1$), so $\\hat f$ is defined as the $L^2$-limit of $\\hat f_k$ for any $f_k\\in L^1\\cap L^2$ with $f_k\\to f$ in $L^2$.\n\n**Convention warning**: here $\\|\\hat f\\|_2=\\|f\\|_2$ carries no constant; with $F(\\omega)=\\int f e^{-i\\omega t}dt$ one has $\\|F\\|_2^2=2\\pi\\|f\\|_2^2$ and Parseval reads $\\int|f|^2=\\frac{1}{2\\pi}\\int|F|^2$. This explains the apparently different constants ($1/(2\\pi)$ or $1/\\sqrt{2\\pi}$) in different textbooks: same theorem, different normalisation. Physically, the Fourier transform is an orthogonal transformation of $L^2$ — a change of coordinates between the position and momentum pictures.",
+    "formulas": [
+      {
+        "latex": "\\|\\hat f\\|_2=\\|f\\|_2,\\qquad \\int_{\\mathbb{R}^n}|\\hat f(\\xi)|^2d\\xi=\\int_{\\mathbb{R}^n}|f(x)|^2dx\\qquad (f\\in L^1\\cap L^2)",
+        "note": "普朗歇尔等式：本约定下没有任何 $2\\pi$ 因子；先对 $L^1\\cap L^2$ 证明，再延拓到 $L^2$。",
+        "noteEn": "Plancherel: no $2\\pi$ factor in this convention; proved first on $L^1\\cap L^2$, then extended to $L^2$."
+      },
+      {
+        "latex": "\\langle f,g\\rangle=\\langle\\hat f,\\hat g\\rangle,\\qquad \\int f\\bar g=\\int\\hat f\\,\\overline{\\hat g}",
+        "note": "帕塞瓦尔（内积形式）：变换保持内积，从而保持角度与正交性，是 $L^2$ 中「换基」的连续类比。",
+        "noteEn": "Parseval (inner-product form): the transform preserves inner products, hence angles and orthogonality — the continuous analogue of a change of basis."
+      },
+      {
+        "latex": "\\mathcal F:L^2(\\mathbb{R}^n)\\to L^2(\\mathbb{R}^n)\\ \\text{是酉算子}:\\quad \\|\\mathcal Ff\\|_2=\\|f\\|_2,\\quad \\mathcal F^{-1}=\\mathcal F^3,\\quad \\mathcal F^4=\\mathrm{id}",
+        "note": "等距 + 满射 = 酉；平方是反射 $\\mathcal F^2f(x)=f(-x)$，故四次回到自身、逆即三次方。",
+        "noteEn": "Isometry plus surjectivity means unitary; the square is the reflection $\\mathcal F^2f(x)=f(-x)$, so the fourth power is the identity and the inverse is the third power."
+      },
+      {
+        "latex": "\\widehat{f(\\cdot/a)}(\\xi)=a^{n}\\hat f(a\\xi)\\ \\ (a>0),\\qquad \\widehat{f(\\cdot-a)}(\\xi)=e^{-2\\pi i\\,a\\cdot\\xi}\\hat f(\\xi),\\qquad \\widehat{e^{2\\pi i\\,x\\cdot a}f}(\\xi)=\\hat f(\\xi-a)",
+        "note": "伸缩、平移与调制。伸缩把 $L^2$ 范数按 $\\sqrt{a^{n}}$ 重标，正好补偿 $\\hat f$ 的自变量伸缩。",
+        "noteEn": "Dilation, translation and modulation. Dilation rescales the $L^2$ norm by $\\sqrt{a^n}$, exactly compensating the rescaling of the argument of $\\hat f$."
+      },
+      {
+        "latex": "f\\in L^2:\\quad \\hat f=\\lim_{k\\to\\infty}\\widehat{f_k}\\ \\text{in}\\ L^2,\\qquad f_k\\in L^1\\cap L^2,\\ \\|f_k-f\\|_2\\to0",
+        "note": "在 $L^2$ 上变换的定义方式：$f$ 未必可积，积分公式可能失效，只能用等距延拓（$L^2$ 极限）。",
+        "noteEn": "How the transform is defined on all of $L^2$: $f$ need not be integrable, so the integral formula may fail and one uses the isometric extension ($L^2$-limit)."
+      }
+    ],
+    "properties": [
+      "酉性：$\\mathcal F$ 是 $L^2(\\mathbb{R}^n)$ 到自身的等距满射，保持内积、范数与正交性，$\\mathcal F^{-1}=\\mathcal F^3$。",
+      "延拓的唯一性：$L^1\\cap L^2$ 在 $L^2$ 中稠密；对一般 $L^2$ 函数 $\\hat f$ 只能定义为 $L^2$ 极限（例：$1/\\sqrt{1+x^2}\\in L^2\\setminus L^1$）。",
+      "算子性质：$\\mathcal F^2f(x)=f(-x)$、$\\mathcal F^4=\\mathrm{id}$；厄米特函数 $h_k(x)=H_k(\\sqrt{2\\pi}x)e^{-\\pi x^2}$ 是特征函数，特征值 $(-i)^k$，故谱为 $\\{1,-i,-1,i\\}$。",
+      "常数随约定：本约定 $\\|\\hat f\\|_2=\\|f\\|_2$；$\\omega$ 约定下 $\\|F\\|_2^2=2\\pi\\|f\\|_2^2$（帕塞瓦尔带 $1/(2\\pi)$），$\\sqrt{2\\pi}$ 归一化则真正酉。",
+      "应用：把难算的实积分换成好算的（如 $\\int(\\sin u/u)^2du=\\pi$、$\\int dx/(1+x^2)^2=\\pi/2$）；也是正交基、投影与不确定性原理的 $L^2$ 基础。"
+    ],
+    "propertiesEn": [
+      "Unitarity: $\\mathcal F$ is a surjective isometry of $L^2(\\mathbb{R}^n)$ preserving inner products, norms and orthogonality, with $\\mathcal F^{-1}=\\mathcal F^3$.",
+      "Uniqueness of the extension: $L^1\\cap L^2$ is dense in $L^2$; for a general $L^2$ function $\\hat f$ is only an $L^2$-limit (e.g. $1/\\sqrt{1+x^2}\\in L^2\\setminus L^1$).",
+      "Operator facts: $\\mathcal F^2f(x)=f(-x)$, $\\mathcal F^4=\\mathrm{id}$; the Hermite functions $h_k(x)=H_k(\\sqrt{2\\pi}x)e^{-\\pi x^2}$ are eigenfunctions with eigenvalues $(-i)^k$, so the spectrum is $\\{1,-i,-1,i\\}$.",
+      "The constant depends on the convention: here $\\|\\hat f\\|_2=\\|f\\|_2$; with the $\\omega$ convention $\\|F\\|_2^2=2\\pi\\|f\\|_2^2$ (Parseval with $1/(2\\pi)$), and a $\\sqrt{2\\pi}$ normalisation makes it genuinely unitary.",
+      "Applications: hard real integrals become easy ($\\int(\\sin u/u)^2du=\\pi$, $\\int dx/(1+x^2)^2=\\pi/2$); it is also the $L^2$ foundation of orthonormal bases, projections and the uncertainty principle."
+    ],
+    "expression": {
+      "text": "‖f̂‖₂ = ‖f‖₂ ,   ⟨f,g⟩ = ⟨f̂,ĝ⟩",
+      "symbol": "\\|\\mathcal Ff\\|_{L^2}=\\|f\\|_{L^2}",
+      "note": "本约定下不带常数；变换延拓为 $L^2$ 上的酉算子（等距 + 满射）。",
+      "noteEn": "No constant in this convention; the transform extends to a unitary operator on $L^2$ (isometry plus surjectivity)."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-PI*x^2/2)",
+          "color": "#4cc9f0",
+          "label": "f(x)=e^(−πx²/2)，‖f‖₂=1"
+        },
+        {
+          "expr": "sqrt(2)*exp(-2*PI*x^2)",
+          "color": "#ff6b9d",
+          "label": "f̂(ξ)=√2·e^(−2πξ²)，‖f̂‖₂=1"
+        }
+      ],
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -0.1,
+        1.6
+      ],
+      "title": "形状与高度都不同，但 L² 范数相等：‖f̂‖₂=‖f‖₂=1（面积法：∫|f|²=∫|f̂|²）"
+    },
+    "examples": [
+      {
+        "problem": "用普朗歇尔定理计算 $\\displaystyle\\int_{\\mathbb{R}}\\Bigl(\\frac{\\sin u}{u}\\Bigr)^2du$。",
+        "solution": "取 $f=\\mathbf 1_{[-1/2,1/2]}$，则 $\\|f\\|_2^2=\\int_{-1/2}^{1/2}dx=1$，且由 L¹ 上的计算 $\\hat f(\\xi)=\\frac{\\sin(\\pi\\xi)}{\\pi\\xi}$。普朗歇尔给出\n$$1=\\|f\\|_2^2=\\|\\hat f\\|_2^2=\\int_{\\mathbb{R}}\\Bigl(\\frac{\\sin(\\pi\\xi)}{\\pi\\xi}\\Bigr)^2d\\xi.$$\n令 $u=\\pi\\xi$，$d\\xi=du/\\pi$，得 $1=\\frac1\\pi\\int_{\\mathbb{R}}\\frac{\\sin^2u}{u^2}du$，即 $\\int_{\\mathbb{R}}\\frac{\\sin^2u}{u^2}du=\\pi$。这道经典积分用留数或分部积分都要绕圈，用 Plancherel 一步到位。"
+      },
+      {
+        "problem": "验证 $f(x)=e^{-\\pi x^2/2}$ 满足 $\\|\\hat f\\|_2=\\|f\\|_2$，并说明这对一切高斯都成立。",
+        "solution": "由 $\\int e^{-ax^2}e^{-2\\pi ix\\xi}dx=\\sqrt{\\pi/a}\\,e^{-\\pi^2\\xi^2/a}$ 取 $a=\\frac\\pi2$，得 $\\hat f(\\xi)=\\sqrt2\\,e^{-2\\pi\\xi^2}$。于是\n$$\\|f\\|_2^2=\\int_{\\mathbb{R}}e^{-\\pi x^2}dx=1,\\qquad \\|\\hat f\\|_2^2=2\\int_{\\mathbb{R}}e^{-4\\pi\\xi^2}d\\xi=2\\cdot\\frac12=1,$$\n两者相等。对任意 $a>0$ 同样成立：$\\|e^{-ax^2}\\|_2^2=\\sqrt{\\pi/(2a)}$，而\n$$\\Bigl\\|\\sqrt{\\pi/a}\\,e^{-\\pi^2\\xi^2/a}\\Bigr\\|_2^2=\\frac\\pi a\\int_{\\mathbb{R}}e^{-2\\pi^2\\xi^2/a}d\\xi=\\frac\\pi a\\sqrt{\\frac{a}{2\\pi}}=\\sqrt{\\frac{\\pi}{2a}},$$\n两边一致，即普朗歇尔等式对一切高斯都成立。"
+      }
+    ],
+    "tags": [
+      "调和分析",
+      "普朗歇尔定理",
+      "帕塞瓦尔等式",
+      "酉算子",
+      "L²"
+    ],
+    "links": [
+      "fourier-transform-l1",
+      "fourier-inversion-uniqueness",
+      "schwartz-space",
+      "uncertainty-principle",
+      "lp-spaces",
+      "inner-product-space",
+      "orthonormal-basis",
+      "fourier-transform"
+    ]
+  },
+  {
+    "id": "schwartz-space",
+    "title": "施瓦茨空间",
+    "titleEn": "Schwartz Space",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "施瓦茨空间 $\\mathcal S$ 由所有「任意阶导数乘以任意多项式都一致有界」的光滑函数组成；傅里叶变换是 $\\mathcal S\\to\\mathcal S$ 的同构，故反演在 $\\mathcal S$ 上无条件成立，且 $\\mathcal S\\subset L^p\\subset\\mathcal S'$（缓增分布）。",
+    "summaryEn": "The Schwartz space $\\mathcal S$ consists of all smooth functions whose every derivative, multiplied by any polynomial, is bounded; the Fourier transform is an isomorphism of $\\mathcal S$, so inversion holds unconditionally there, and $\\mathcal S\\subset L^p\\subset\\mathcal S'$ (tempered distributions).",
+    "definition": "**定义**（约定同前：$\\hat f(\\xi)=\\int f(x)e^{-2\\pi i\\,x\\cdot\\xi}dx$，$2\\pi$ 在指数里）。$\\mathcal S(\\mathbb{R}^n)$ 由所有 $f\\in C^\\infty(\\mathbb{R}^n)$ 组成，要求对一切多重指标 $\\alpha,\\beta$ 成立\n$$\\sup_{x\\in\\mathbb{R}^n}|x^\\alpha\\partial^\\beta f(x)|<\\infty .$$\n等价的说法是：对每个 $\\beta$ 与每个 $N$，存在常数 $C_{\\beta,N}$ 使 $|\\partial^\\beta f(x)|\\le C_{\\beta,N}(1+|x|)^{-N}$，也就是「$f$ 及其一切导数在无穷远处比任何多项式倒数衰减得都快」。这些量 $p_{\\alpha,\\beta}(f)=\\sup_x|x^\\alpha\\partial^\\beta f(x)|$ 构成可数族半范数，$\\mathcal S$ 装备它成为 **Fréchet 空间**（完备、可度量化），但不是巴拿赫空间。\n\n**例子与反例**：$e^{-a|x|^2}$（$a>0$）、一切 $C_c^\\infty$ 函数、$x^k e^{-a|x|^2}$ 都在 $\\mathcal S$ 中。$e^{-|x|}$ 在原点不可导，不是 $C^\\infty$；$\\dfrac{1}{1+x^2}$ 光滑但衰减不够快（$x^3f(x)\\to\\infty$）；任何紧支不光滑的函数也被光滑性排除。由定义立刻推出 $\\mathcal S\\subset L^p$ 对一切 $1\\le p\\le\\infty$ 成立（$|f|\\le C(1+|x|)^{-N}$，取 $N$ 大即可积），而且 $\\mathcal S$ 在 $L^p$（$1\\le p<\\infty$）中稠密，因为 $C_c^\\infty\\subset\\mathcal S$。\n\n**傅里叶变换的核心作用**：分部积分给出两条对偶的运算律\n$$\\widehat{\\partial^\\beta f}(\\xi)=(2\\pi i\\xi)^\\beta\\hat f(\\xi),\\qquad \\widehat{x^\\alpha f}(\\xi)=\\Bigl(\\frac{i}{2\\pi}\\Bigr)^{|\\alpha|}\\partial^\\alpha\\hat f(\\xi).$$\n「求导」与「乘以 $(2\\pi i\\xi)$」交换、「乘以 $x$」与「求导」交换；于是「$f$ 的导数乘多项式有界」这一条件在变换后被原样保留下来（多项式因子被换成导数、导数被换成多项式因子），得到 $\\mathcal F:\\mathcal S\\to\\mathcal S$ 是连续线性双射（拓扑同构），且逆变换仍是傅里叶型：$\\mathcal F^{-1}g(x)=\\int g(\\xi)e^{2\\pi ix\\cdot\\xi}d\\xi=\\mathcal F g(-x)$。特别地，$f\\in\\mathcal S$ 时 $\\hat f\\in\\mathcal S\\subset L^1$，反演公式 $f(x)=\\int\\hat f(\\xi)e^{2\\pi ix\\cdot\\xi}d\\xi$ 对**每个** $x$ **无条件**成立，且一切分部积分、交换次序、求导与积分号都可以放心进行。这就是 $\\mathcal S$ 作为「傅里叶分析最舒服的函数类」的含义。\n\n**缓增分布**：把 $\\mathcal S$ 看作试验函数空间，其连续线性泛函全体记作 $\\mathcal S'(\\mathbb{R}^n)$，称为**缓增分布**。每个 $g\\in L^p$（$1\\le p\\le\\infty$）通过 $\\varphi\\mapsto\\int g\\varphi$ 给出一个缓增分布（由 Hölder 不等式与 $\\varphi\\in\\mathcal S\\subset L^{p'}$ 保证连续），所以有包含链\n$$\\mathcal S\\subset L^p\\subset\\mathcal S'\\qquad(1\\le p\\le\\infty),$$\n其中前一个是稠密嵌入。$\\delta$ 函数、多项式、$e^{ix}$ 都是缓增分布但都不是函数；傅里叶变换可以按 $\\langle\\hat T,\\varphi\\rangle=\\langle T,\\hat\\varphi\\rangle$ 延拓到 $\\mathcal S'$ 上，从此「对广义函数做傅里叶变换」合法，这是分布理论与 PDE 的通用语言（详见下一批的分布理论）。",
+    "definitionEn": "**Definition** (same convention: $2\\pi$ in the exponent). $\\mathcal S(\\mathbb{R}^n)$ consists of all $f\\in C^\\infty(\\mathbb{R}^n)$ such that $\\sup_x|x^\\alpha\\partial^\\beta f(x)|<\\infty$ for all multi-indices $\\alpha,\\beta$. Equivalently, for every $\\beta$ and every $N$ there is $C_{\\beta,N}$ with $|\\partial^\\beta f(x)|\\le C_{\\beta,N}(1+|x|)^{-N}$: $f$ and all its derivatives decay faster than any polynomial. The seminorms $p_{\\alpha,\\beta}$ make $\\mathcal S$ a **Fréchet space** (complete, metrisable), not a Banach space.\n\n**Examples**: $e^{-a|x|^2}$, every $C_c^\\infty$ function, $x^k e^{-a|x|^2}$. Non-examples: $e^{-|x|}$ (not smooth at $0$), $1/(1+x^2)$ (decays too slowly), any compactly supported non-smooth function. It follows that $\\mathcal S\\subset L^p$ for all $1\\le p\\le\\infty$, and $\\mathcal S$ is dense in $L^p$ for $1\\le p<\\infty$.\n\n**Role of the Fourier transform**: integration by parts gives $\\widehat{\\partial^\\beta f}=(2\\pi i\\xi)^\\beta\\hat f$ and $\\widehat{x^\\alpha f}=(i/2\\pi)^{|\\alpha|}\\partial^\\alpha\\hat f$. Differentiation and multiplication by $(2\\pi i\\xi)$ are exchanged, and so are multiplication by $x$ and differentiation; hence the defining decay/boundedness conditions are preserved and $\\mathcal F:\\mathcal S\\to\\mathcal S$ is a topological isomorphism with inverse $\\mathcal F^{-1}g(x)=\\int g(\\xi)e^{2\\pi ix\\cdot\\xi}d\\xi=\\mathcal Fg(-x)$. In particular $f\\in\\mathcal S$ implies $\\hat f\\in\\mathcal S\\subset L^1$, so inversion holds unconditionally for every $x$, and all integrations by parts and interchanges are legitimate.\n\n**Tempered distributions**: the continuous dual $\\mathcal S'$ consists of tempered distributions; every $g\\in L^p$, $1\\le p\\le\\infty$, defines one via $\\varphi\\mapsto\\int g\\varphi$ (Hölder), so $\\mathcal S\\subset L^p\\subset\\mathcal S'$ with the first inclusion dense. The Dirac delta, polynomials and $e^{ix}$ are tempered distributions that are not functions, and the Fourier transform extends to $\\mathcal S'$ by $\\langle\\hat T,\\varphi\\rangle=\\langle T,\\hat\\varphi\\rangle$.",
+    "formulas": [
+      {
+        "latex": "\\mathcal S(\\mathbb{R}^n)=\\Bigl\\{f\\in C^\\infty(\\mathbb{R}^n):\\ \\forall\\,\\alpha,\\beta,\\ \\sup_{x}|x^\\alpha\\partial^\\beta f(x)|<\\infty\\Bigr\\}",
+        "note": "定义：一切导数乘一切多项式都一致有界（等价刻画见下条）；$\\mathcal S$ 是 Fréchet 空间。",
+        "noteEn": "Definition: every derivative times every polynomial is bounded (equivalent form below); $\\mathcal S$ is a Fréchet space."
+      },
+      {
+        "latex": "\\forall\\,\\beta,\\ \\forall N\\ \\exists C_{\\beta,N}:\\qquad |\\partial^\\beta f(x)|\\le C_{\\beta,N}(1+|x|)^{-N}",
+        "note": "等价刻画：$f$ 与各阶导数都快于任意多项式地衰减到 $0$。",
+        "noteEn": "Equivalent form: $f$ and all its derivatives decay faster than any polynomial."
+      },
+      {
+        "latex": "\\widehat{\\partial^\\beta f}(\\xi)=(2\\pi i\\xi)^\\beta\\hat f(\\xi),\\qquad \\widehat{x^\\alpha f}(\\xi)=\\Bigl(\\frac{i}{2\\pi}\\Bigr)^{|\\alpha|}\\partial^\\alpha\\hat f(\\xi)",
+        "note": "求导与乘 $(2\\pi i\\xi)$、乘 $x$ 与求导的互换；正是这对交换让 $\\mathcal S$ 在变换下封闭。",
+        "noteEn": "Differentiation exchanges with multiplication by $(2\\pi i\\xi)$, and multiplication by $x$ with differentiation; this pair is why $\\mathcal S$ is invariant."
+      },
+      {
+        "latex": "\\mathcal F:\\mathcal S\\to\\mathcal S\\ \\text{同构},\\qquad f(x)=\\int_{\\mathbb{R}^n}\\hat f(\\xi)e^{2\\pi i\\,x\\cdot\\xi}\\,d\\xi\\quad(\\text{对每个 }x)",
+        "note": "同构（双射且双向连续），逆变换同为傅里叶型；因此反演在 $\\mathcal S$ 上无条件成立。",
+        "noteEn": "An isomorphism (bijective, both directions continuous), the inverse being of Fourier type; hence inversion is unconditional on $\\mathcal S$."
+      },
+      {
+        "latex": "\\mathcal S\\subset L^p\\subset\\mathcal S'\\quad(1\\le p\\le\\infty),\\qquad \\mathcal S\\ \\text{在}\\ L^p(1\\le p<\\infty)\\ \\text{中稠密}",
+        "note": "包含链：$\\mathcal S$ 稠密嵌入各 $L^p$，$L^p$ 又嵌入缓增分布空间 $\\mathcal S'$（连续对偶）。",
+        "noteEn": "Inclusion chain: $\\mathcal S$ embeds densely into every $L^p$, which in turn embeds into the tempered distributions $\\mathcal S'$."
+      }
+    ],
+    "properties": [
+      "对偶结构：求导 $\\leftrightarrow$ 乘 $(2\\pi i\\xi)$、乘 $x$ $\\leftrightarrow$ 求导（常数 $i/2\\pi$），两条运算律把定义中的「导数」与「多项式」互换，保证变换后仍在 $\\mathcal S$ 内。",
+      "傅里叶变换是 $\\mathcal S$ 的拓扑同构：双射且 $\\mathcal F^{-1}=\\mathcal F^3$ 连续；$\\mathcal F$ 与 $\\mathcal F^{-1}$ 都是傅里叶型算子。",
+      "$\\mathcal S$ 上反演无条件成立：$\\hat f\\in\\mathcal S\\subset L^1$ 自动满足，无需额外的可积性假设；一切分部积分与积分号下求导都合法。",
+      "$\\mathcal S$ 对乘法、卷积、求导、拉普拉斯算子封闭，且在 $L^p$ 中稠密（$1\\le p<\\infty$）；它是 Fréchet 空间（可数半范数族、完备、可度量化）。",
+      "缓增分布：$\\mathcal S'$ 是 $\\mathcal S$ 的连续对偶，含 $\\delta$、多项式、$L^\\infty$ 函数；傅里叶变换可延拓到 $\\mathcal S'$，使广义函数也能做傅里叶分析。"
+    ],
+    "propertiesEn": [
+      "Duality: differentiation $\\leftrightarrow$ multiplication by $(2\\pi i\\xi)$, multiplication by $x$ $\\leftrightarrow$ differentiation (constant $i/2\\pi$); these two rules exchange the “derivatives” and “polynomials” of the definition.",
+      "The Fourier transform is a topological isomorphism of $\\mathcal S$: bijective with continuous inverse $\\mathcal F^{-1}=\\mathcal F^3$.",
+      "Inversion on $\\mathcal S$ is unconditional: $\\hat f\\in\\mathcal S\\subset L^1$ holds automatically and every integration by parts is legitimate.",
+      "$\\mathcal S$ is closed under multiplication, convolution, differentiation and the Laplacian, and is dense in $L^p$ for $1\\le p<\\infty$; it is a Fréchet space.",
+      "Tempered distributions: the continuous dual $\\mathcal S'$ contains the delta, polynomials and $L^\\infty$ functions; the Fourier transform extends to $\\mathcal S'$, making Fourier analysis available for generalised functions."
+    ],
+    "expression": {
+      "text": "𝒮 = { f ∈ C^∞ : sup_x |x^α ∂^β f(x)| < ∞ 对一切 α, β }",
+      "symbol": "\\mathcal S(\\mathbb{R}^n)",
+      "note": "任意阶导数乘任意多项式一致有界；傅里叶变换是 $\\mathcal S\\to\\mathcal S$ 的同构，$\\mathcal S\\subset L^p\\subset\\mathcal S'$。",
+      "noteEn": "Every derivative times every polynomial is bounded; the transform is an isomorphism of $\\mathcal S$, and $\\mathcal S\\subset L^p\\subset\\mathcal S'$."
+    },
+    "examples": [
+      {
+        "problem": "证明 $f(x)=e^{-\\pi|x|^2}\\in\\mathcal S(\\mathbb{R}^n)$，并说明它的变换也在 $\\mathcal S$ 内。",
+        "solution": "对 $\\beta=(\\beta_1,\\dots,\\beta_n)$，直接求导得 $\\partial^\\beta f(x)=P_\\beta(x)e^{-\\pi|x|^2}$，其中 $P_\\beta$ 是多项式（对 $|\\beta|$ 归纳：每求一次导，前面的多项式乘以 $-2\\pi x_j$ 后再加一次多项式，仍是多项式）。于是\n$$|x^\\alpha\\partial^\\beta f(x)|\\le |x|^{|\\alpha|}|P_\\beta(x)|e^{-\\pi|x|^2}\\le C_{\\alpha,\\beta}<\\infty,$$\n因为指数衰减压过任何多项式（$|x|^{|\\alpha|+\\deg P_\\beta}e^{-\\pi|x|^2}$ 在 $\\mathbb{R}^n$ 上有界）。故 $f\\in\\mathcal S$。又 $\\mathcal F$ 把 $\\mathcal S$ 映入 $\\mathcal S$，所以 $\\hat f\\in\\mathcal S$；事实上 $\\hat f=f$（自对偶）。"
+      },
+      {
+        "problem": "用 $\\mathcal S$ 上的运算律求 $f(x)=xe^{-\\pi x^2}$ 的傅里叶变换，并检验结果的奇偶性与实虚性是否合理。",
+        "solution": "已知 $g(x)=e^{-\\pi x^2}$ 满足 $\\hat g=g$。由 $\\widehat{x f}=(i/2\\pi)(\\hat f)'$（取 $n=1$），\n$$\\hat f(\\xi)=\\frac{i}{2\\pi}\\frac{d}{d\\xi}e^{-\\pi\\xi^2}=\\frac{i}{2\\pi}\\bigl(-2\\pi\\xi\\bigr)e^{-\\pi\\xi^2}=-i\\xi e^{-\\pi\\xi^2}.$$\n检验：$f$ 是实值奇函数，按共轭对称性 $\\hat f(-\\xi)=\\overline{\\hat f(\\xi)}$，且奇函数的变换应为奇函数、实奇函数的变换应为纯虚奇函数—— $-i\\xi e^{-\\pi\\xi^2}$ 正是纯虚的奇函数，吻合。"
+      }
+    ],
+    "tags": [
+      "调和分析",
+      "施瓦茨空间",
+      "缓增分布",
+      "傅里叶变换同构",
+      "Fréchet空间"
+    ],
+    "links": [
+      "fourier-transform-l1",
+      "fourier-inversion-uniqueness",
+      "plancherel-theorem",
+      "uncertainty-principle",
+      "lp-spaces",
+      "dual-space",
+      "distribution-theory",
+      "distribution-convolution-fourier"
+    ]
+  },
+  {
+    "id": "uncertainty-principle",
+    "title": "不确定性原理",
+    "titleEn": "The Uncertainty Principle",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "在本约定下 $\\bigl(\\int x^2|f|^2\\bigr)\\bigl(\\int\\xi^2|\\hat f|^2\\bigr)\\ge\\bigl(\\|f\\|_2^2/(4\\pi)\\bigr)^2$，即 $\\Delta x\\,\\Delta\\xi\\ge1/(4\\pi)$；等号成立当且仅当 $f$ 是高斯（的平移与调制），$e^{-\\pi x^2}$ 给出最对称的极值。",
+    "summaryEn": "In this convention $(\\int x^2|f|^2)(\\int\\xi^2|\\hat f|^2)\\ge(\\|f\\|_2^2/4\\pi)^2$, i.e. $\\Delta x\\,\\Delta\\xi\\ge1/(4\\pi)$; equality holds exactly for Gaussians (up to translation and modulation), the symmetric extremiser being $e^{-\\pi x^2}$.",
+    "definition": "**定理**（约定仍是 $\\hat f(\\xi)=\\int f(x)e^{-2\\pi ix\\xi}dx$，先看一维）。设 $f\\in L^2(\\mathbb{R})$，且 $xf\\in L^2$、$\\xi\\hat f\\in L^2$（否则两边为 $+\\infty$，不等式平凡成立）。则\n$$\\Bigl(\\int_{\\mathbb{R}}x^2|f(x)|^2dx\\Bigr)\\Bigl(\\int_{\\mathbb{R}}\\xi^2|\\hat f(\\xi)|^2d\\xi\\Bigr)\\ \\ge\\ \\Bigl(\\frac{\\|f\\|_2^2}{4\\pi}\\Bigr)^{2}.$$\n写成标准差形式（用中心 $x_0=\\int x|f|^2/\\|f\\|_2^2$、$\\xi_0=\\int\\xi|\\hat f|^2/\\|\\hat f\\|_2^2$ 平移，令 $\\Delta x=\\|(x-x_0)f\\|_2/\\|f\\|_2$、$\\Delta\\xi=\\|(\\xi-\\xi_0)\\hat f\\|_2/\\|\\hat f\\|_2$）就是著名的**海森堡不等式**\n$$\\Delta x\\,\\Delta\\xi\\ \\ge\\ \\frac{1}{4\\pi}.$$\n常数 $1/(4\\pi)$ 与约定严格绑定：因为 $2\\pi$ 在指数里，所以出现 $4\\pi$；若改用角频率 $\\omega=2\\pi\\xi$，则 $\\Delta x\\,\\Delta\\omega\\ge\\frac12$，再乘以 $\\hbar$ 就是量子力学课本里的 $\\Delta x\\,\\Delta p\\ge\\frac{\\hbar}{2}$（$p=\\hbar\\omega$）。\n\n**证明**（一维，已中心化 $x_0=0$，此时 $\\xi_0=0$）。分部积分：\n$$\\|f\\|_2^2=\\int|f|^2=-\\int x\\,\\frac{d}{dx}|f|^2\\,dx=-2\\,\\mathrm{Re}\\int x f'(x)\\overline{f(x)}\\,dx\\le2\\int|x f|\\,|f'|\\le2\\|xf\\|_2\\|f'\\|_2 .$$\n再用变换的求导律与普朗歇尔定理，$\\|f'\\|_2=2\\pi\\|\\xi\\hat f\\|_2$，代入得 $\\|f\\|_2^2\\le4\\pi\\|xf\\|_2\\|\\xi\\hat f\\|_2$，两边平方即为所求。\n\n**等号条件（关键）**：证明中用了两次柯西–施瓦茨，取等要求 $f'=-c\\,x f$（$c>0$ 为实数），解这个微分方程得 $f(x)=Ce^{-cx^2/2}$；去掉中心化假设（允许平移与调制）后，等号成立**当且仅当**\n$$f(x)=c\\,e^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}\\qquad(a>0).$$\n也就是说：**唯一取到等号的函数是高斯（乘上平移与频率调制）**，一般函数严格大于。极值代表 $e^{-\\pi x^2}$ 最对称：$\\Delta x=\\Delta\\xi=\\frac{1}{2\\sqrt{\\pi}}$，乘积恰为 $1/(4\\pi)$。\n\n**另一形式（集中不确定性，Donoho–Stark）**：若 $f\\in L^2$ 非零且 $\\operatorname{supp}f$、$\\operatorname{supp}\\hat f$ 的测度都有限，则\n$$|\\operatorname{supp}f|\\cdot|\\operatorname{supp}\\hat f|\\ \\ge\\ 1$$\n（Amrein–Berthier–Benedicks：若测度之积 $<1$，则 $f=0$ a.e.；常数 $1$ 与 $2\\pi$ 约定匹配，$\\omega$ 约定下为 $2\\pi$）。直观地说，**$f$ 与 $\\hat f$ 不可能同时集中在很小的集合上**：把 $f$ 压到很窄的时窗，频谱就必然铺得很开。有限群上的离散版本更整齐：$\\mathbb{Z}_N$ 上 $|\\operatorname{supp}f|\\cdot|\\operatorname{supp}\\hat f|\\ge N$，这正是时频分析里短时傅里叶变换与小波要做多尺度折中的根源，也是量子测量精度限制的数学雏形。",
+    "definitionEn": "**Theorem** (convention $\\hat f(\\xi)=\\int f(x)e^{-2\\pi ix\\xi}dx$; one dimension first). Let $f\\in L^2(\\mathbb{R})$ with $xf\\in L^2$ and $\\xi\\hat f\\in L^2$ (otherwise both sides are infinite). Then $(\\int x^2|f|^2)(\\int\\xi^2|\\hat f|^2)\\ge(\\|f\\|_2^2/4\\pi)^2$. In standard-deviation form, with the centres $x_0,\\xi_0$ removed, this is Heisenberg's inequality $\\Delta x\\,\\Delta\\xi\\ge1/(4\\pi)$. The constant is tied to the convention: with $2\\pi$ in the exponent one gets $4\\pi$; in angular frequency $\\Delta x\\,\\Delta\\omega\\ge\\tfrac12$, which becomes $\\Delta x\\,\\Delta p\\ge\\hbar/2$ in physics ($p=\\hbar\\omega$).\n\n**Proof** (centred): $\\|f\\|_2^2=-\\int x(|f|^2)'dx=-2\\mathrm{Re}\\int xf'\\bar f\\le2\\|xf\\|_2\\|f'\\|_2$, and $\\|f'\\|_2=2\\pi\\|\\xi\\hat f\\|_2$ by the differentiation rule and Plancherel, so $\\|f\\|_2^2\\le4\\pi\\|xf\\|_2\\|\\xi\\hat f\\|_2$.\n\n**Equality case (essential)**: both Cauchy–Schwarz steps must be equalities, forcing $f'=-c\\,xf$ with $c>0$, i.e. a Gaussian; allowing translations and modulations, equality holds **if and only if** $f(x)=ce^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}$, $a>0$. Thus only Gaussians saturate the bound; $e^{-\\pi x^2}$ is the symmetric extremiser with $\\Delta x=\\Delta\\xi=1/(2\\sqrt{\\pi})$.\n\n**Concentration form (Donoho–Stark)**: for nonzero $f\\in L^2$ with both supports of finite measure, $|\\operatorname{supp}f|\\cdot|\\operatorname{supp}\\hat f|\\ge1$ (Amrein–Berthier–Benedicks; the constant is $2\\pi$ in the angular-frequency convention). Thus $f$ and $\\hat f$ cannot both be concentrated on small sets — the discrete version on $\\mathbb{Z}_N$ reads $|\\operatorname{supp}f||\\operatorname{supp}\\hat f|\\ge N$, the root of the time-frequency trade-off in STFT and wavelets and the prototype of quantum measurement limits.",
+    "formulas": [
+      {
+        "latex": "\\Bigl(\\int_{\\mathbb{R}}x^2|f(x)|^2dx\\Bigr)\\Bigl(\\int_{\\mathbb{R}}\\xi^2|\\hat f(\\xi)|^2d\\xi\\Bigr)\\ \\ge\\ \\Bigl(\\frac{\\|f\\|_2^2}{4\\pi}\\Bigr)^{2}",
+        "note": "乘积形式：常数 $(1/4\\pi)^2$ 与本系列的 $2\\pi$ 约定严格匹配，不可与其他约定下的常数混用。",
+        "noteEn": "Product form: the constant $(1/4\\pi)^2$ matches the $2\\pi$-in-the-exponent convention and must not be mixed with constants from other conventions."
+      },
+      {
+        "latex": "\\Delta x\\,\\Delta\\xi\\ \\ge\\ \\frac{1}{4\\pi},\\qquad \\Delta x=\\frac{\\|(x-x_0)f\\|_2}{\\|f\\|_2},\\quad \\Delta\\xi=\\frac{\\|(\\xi-\\xi_0)\\hat f\\|_2}{\\|\\hat f\\|_2}",
+        "note": "海森堡形式（标准差）：证明中已用平移与调制把 $x_0,\\xi_0$ 化为 $0$，故可设中心在原点。",
+        "noteEn": "Heisenberg form (standard deviations); translations and modulations let one assume the centres are at the origin."
+      },
+      {
+        "latex": "\\text{等号}\\iff f(x)=c\\,e^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}\\ (a>0);\\qquad f=e^{-\\pi x^2}\\Rightarrow\\Delta x=\\Delta\\xi=\\frac{1}{2\\sqrt{\\pi}}",
+        "note": "等号当且仅当高斯（含平移与调制）——这是关键：不能写成「一般函数都取等号」。",
+        "noteEn": "Equality holds exactly for Gaussians (up to translation and modulation) — a key point: it is not a statement about general functions."
+      },
+      {
+        "latex": "\\Delta x\\,\\Delta\\omega\\ge\\frac12\\ \\ (\\omega=2\\pi\\xi);\\qquad \\Delta x\\,\\Delta p\\ge\\frac{\\hbar}{2}\\ \\ (p=\\hbar\\omega)",
+        "note": "约定换算：同一不等式在角频率约定下是 $1/2$；乘以 $\\hbar$ 即量子力学的海森堡关系。（$[X,P]=(i/2\\pi)I$ 在频率约定下。）",
+        "noteEn": "Convention change: the same inequality reads $1/2$ in angular frequency, and becomes Heisenberg's quantum relation after multiplying by $\\hbar$."
+      },
+      {
+        "latex": "|\\operatorname{supp}f|\\cdot|\\operatorname{supp}\\hat f|\\ \\ge\\ 1\\qquad(\\text{本约定})",
+        "note": "Donoho–Stark/Amrein–Berthier 集中形式：$f$ 与 $\\hat f$ 不能同时支在很小的集合上；本约定下常数是 $1$，角频率约定下是 $2\\pi$。",
+        "noteEn": "Donoho–Stark / Amrein–Berthier concentration form: $f$ and $\\hat f$ cannot both live on small sets; the constant is $1$ here and $2\\pi$ in the angular-frequency convention."
+      }
+    ],
+    "properties": [
+      "常数与约定绑定：本约定（$2\\pi$ 在指数里）乘积下界为 $(\\|f\\|_2^2/4\\pi)^2$，标准差形式为 $1/(4\\pi)$；角频率约定下为 $1/2$。",
+      "等号刻画：等号成立当且仅当 $f$ 是高斯 $ce^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}$；$e^{-\\pi x^2}$ 是 $\\Delta x=\\Delta\\xi=1/(2\\sqrt{\\pi})$ 的对称极值。无其他取等函数，一般函数严格大于。",
+      "平移与调制不变性：平移 $f$ 不改 $\\Delta x$、调制不改 $\\Delta\\xi$，故极值族是整个高斯轨道；缩放 $f(ax)$ 使 $\\Delta x$ 缩小 $a$ 倍、$\\Delta\\xi$ 放大 $a$ 倍，乘积不变。",
+      "多维版本：$\\bigl(\\int|x|^2|f|^2\\bigr)\\bigl(\\int|\\xi|^2|\\hat f|^2\\bigr)\\ge\\bigl(n\\|f\\|_2^2/(4\\pi)\\bigr)^2$，等号仍由高斯取到（各项独立取等）。",
+      "与量子力学：Robertson 关系 $\\Delta A\\Delta B\\ge\\frac12|\\langle[A,B]\\rangle|$ 的特例；频率约定下位置与频率算子满足 $[X,P]=(i/2\\pi)I$，代入即得 $\\Delta x\\Delta\\xi\\ge1/(4\\pi)$。"
+    ],
+    "propertiesEn": [
+      "The constant is convention-tied: here the product bound is $(\\|f\\|_2^2/4\\pi)^2$ and $\\Delta x\\Delta\\xi\\ge1/(4\\pi)$; in angular frequency the bound is $1/2$.",
+      "Equality characterisation: equality holds iff $f$ is a Gaussian $ce^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}$; $e^{-\\pi x^2}$ achieves $\\Delta x=\\Delta\\xi=1/(2\\sqrt{\\pi})$. No other equality cases exist.",
+      "Invariance: translation does not change $\\Delta x$, modulation does not change $\\Delta\\xi$; dilation $f(ax)$ shrinks $\\Delta x$ by $a$ and stretches $\\Delta\\xi$ by $a$, leaving the product fixed.",
+      "Multidimensional version: $(\\int|x|^2|f|^2)(\\int|\\xi|^2|\\hat f|^2)\\ge(n\\|f\\|_2^2/4\\pi)^2$, again with Gaussians as equality cases.",
+      "Link to quantum mechanics: a special case of Robertson's $\\Delta A\\Delta B\\ge\\frac12|\\langle[A,B]\\rangle|$; in this convention $[X,P]=(i/2\\pi)I$ gives $\\Delta x\\Delta\\xi\\ge1/(4\\pi)$."
+    ],
+    "expression": {
+      "text": "Δx · Δξ ≥ 1/(4π)   （本约定）；等号 ⇔ f 是高斯",
+      "symbol": "\\Delta x\\,\\Delta\\xi\\ge\\frac{1}{4\\pi}",
+      "note": "乘积形式 $(\\int x^2|f|^2)(\\int\\xi^2|\\hat f|^2)\\ge(\\|f\\|_2^2/4\\pi)^2$；等号仅由 $ce^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}$ 取到。",
+      "noteEn": "Product form $(\\int x^2|f|^2)(\\int\\xi^2|\\hat f|^2)\\ge(\\|f\\|_2^2/4\\pi)^2$; equality only for $ce^{-a(x-x_0)^2}e^{2\\pi i\\xi_0x}$."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-PI*x^2)",
+          "color": "#4cc9f0",
+          "label": "e^(−πx²)：自对偶，Δx=Δξ=1/(2√π)（取等号）"
+        },
+        {
+          "expr": "exp(-4*PI*x^2)",
+          "color": "#ff6b9d",
+          "label": "e^(−4πx²)：x 方向压缩 2 倍"
+        },
+        {
+          "expr": "0.5*exp(-PI*x^2/4)",
+          "color": "#ffd166",
+          "label": "0.5·e^(−πξ²/4)：对应频谱展宽 2 倍"
+        }
+      ],
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -0.1,
+        1.15
+      ],
+      "title": "把函数在 x 方向压窄（粉），频谱必然变宽（黄）：Δx·Δξ ≥ 1/(4π)，且乘积不随伸缩改变"
+    },
+    "examples": [
+      {
+        "problem": "验证 $f(x)=e^{-\\pi x^2}$ 恰好取到等号，并求出 $\\Delta x$ 与 $\\Delta\\xi$。",
+        "solution": "$\\|f\\|_2^2=\\int e^{-2\\pi x^2}dx=\\frac{1}{\\sqrt2}$；由 $\\int x^2e^{-2\\pi x^2}dx=\\frac{1}{4\\pi}\\sqrt{\\frac{\\pi}{2\\pi}}=\\frac{1}{4\\pi\\sqrt2}$ 得 $\\int x^2|f|^2dx=\\frac{1}{4\\pi\\sqrt2}$。因 $\\hat f=f$（自对偶），$\\int\\xi^2|\\hat f|^2d\\xi$ 也是 $\\frac{1}{4\\pi\\sqrt2}$。于是\n$$\\text{左边}=\\Bigl(\\frac{1}{4\\pi\\sqrt2}\\Bigr)^2,\\qquad \\text{右边}=\\Bigl(\\frac{\\|f\\|_2^2}{4\\pi}\\Bigr)^2=\\Bigl(\\frac{1/\\sqrt2}{4\\pi}\\Bigr)^2=\\Bigl(\\frac{1}{4\\pi\\sqrt2}\\Bigr)^2,$$\n两者相等，等号成立。又 $\\Delta x^2=\\frac{1/(4\\pi\\sqrt2)}{1/\\sqrt2}=\\frac{1}{4\\pi}$，故 $\\Delta x=\\Delta\\xi=\\frac{1}{2\\sqrt\\pi}$，乘积 $=\\frac{1}{4\\pi}$，达到下界。"
+      },
+      {
+        "problem": "设 $a>0$，$f_a(x)=f(ax)$。证明 $\\Delta x(f_a)=\\Delta x(f)/a$、$\\Delta\\xi(\\hat f_a)=a\\,\\Delta\\xi(\\hat f)$，从而乘积 $\\Delta x\\,\\Delta\\xi$ 在伸缩下不变；并说明高斯族在伸缩轨道上处处取等号。",
+        "solution": "先算范数：$\\|f_a\\|_2^2=\\int|f(ax)|^2dx=\\frac1a\\|f\\|_2^2$；$\\int x^2|f_a(x)|^2dx=\\int x^2|f(ax)|^2dx=\\frac{1}{a^3}\\int u^2|f(u)|^2du$。相除得 $\\Delta x(f_a)^2=\\frac{1}{a^2}\\Delta x(f)^2$，即 $\\Delta x(f_a)=\\frac1a\\Delta x(f)$。再由伸缩律 $\\widehat{f_a}(\\xi)=\\frac1a\\hat f(\\xi/a)$：$\\|\\widehat{f_a}\\|_2^2=\\frac1a\\|\\hat f\\|_2^2$，$\\int\\xi^2|\\widehat{f_a}(\\xi)|^2d\\xi=a\\int u^2|\\hat f(u)|^2du$，故 $\\Delta\\xi(\\widehat{f_a})=a\\,\\Delta\\xi(\\hat f)$。两者相乘得\n$$\\Delta x(f_a)\\,\\Delta\\xi(\\widehat{f_a})=\\Delta x(f)\\,\\Delta\\xi(\\hat f),$$\n对高斯 $f=e^{-\\pi x^2}$（它取等号）而言，整条轨道 $e^{-\\pi a^2x^2}$ 也都取等号：压缩时间必展宽频带，代价彼此抵消。"
+      }
+    ],
+    "tags": [
+      "调和分析",
+      "不确定性原理",
+      "海森堡不等式",
+      "高斯",
+      "时频分析"
+    ],
+    "links": [
+      "plancherel-theorem",
+      "fourier-transform-l1",
+      "fourier-inversion-uniqueness",
+      "schwartz-space",
+      "fourier-transform",
+      "wavelet-transform"
+    ]
+  },
+  {
+    "id": "fourier-series-convergence",
+    "title": "傅里叶级数的收敛性",
+    "titleEn": "Convergence of Fourier Series",
+    "branch": "harmonic-analysis",
+    "level": 5,
+    "summary": "部分和 $S_Nf$ 在 $L^2$ 中无条件收敛、在 $L^p(1<p<\\infty)$ 中收敛，但在 $L^1$ 中不保证；a.e. 收敛是 Carleson 定理（要求 $f\\in L^2$，不能放宽到 $L^1$）；一致收敛需更强条件；跳跃点的吉布斯过冲约 $8.95\\%$ 且不随 $N$ 消失。",
+    "summaryEn": "Partial sums $S_Nf$ always converge in $L^2$ and in $L^p$ for $1<p<\\infty$, but not in $L^1$; almost-everywhere convergence is Carleson's theorem (it needs $f\\in L^2$ and fails for $L^1$); uniform convergence needs more, and the Gibbs overshoot at a jump is about $8.95\\%$ and never disappears.",
+    "definition": "设 $f\\in L^1(\\mathbb{T})$（$\\mathbb{T}=\\mathbb{R}/2\\pi\\mathbb{Z}$），$\\hat f(n)=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x)e^{-inx}dx$，部分和 $S_Nf(x)=\\sum_{|n|\\le N}\\hat f(n)e^{inx}=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x-t)D_N(t)dt$，其中 $D_N$ 是狄利克雷核。（约定提示：本系列一律把 $2\\pi$ 放进指数，即 $L^1(\\mathbb{R})$ 上 $\\hat f(\\xi)=\\int f(x)e^{-2\\pi ix\\xi}dx$；圆周上的对应物正是这里的 $\\hat f(n)=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x)e^{-inx}dx$，$e^{inx}$ 是整数频率、$1/(2\\pi)$ 来自周期长度。）**「傅里叶级数收敛」必须问清是哪种收敛**——四种情形的答案完全不同。\n\n**① $L^2$ 收敛（无条件）**：$\\{e^{inx}\\}$ 是 $L^2(\\mathbb{T})$ 的标准正交基，$S_Nf$ 就是 $f$ 在该基前 $2N+1$ 个向量上的正交投影，于是 $\\|S_Nf-f\\|_2\\to0$，并且 $S_Nf$ 是全体三角多项式中的最佳 $L^2$ 逼近；帕塞瓦尔等式 $\\sum_n|\\hat f(n)|^2=\\frac1{2\\pi}\\int|f|^2$ 同时给出 $\\hat f(n)\\to0$。这里不需要 $f$ 的任何光滑性或连续性。\n\n**② $L^1$ 与 $L^p$ 收敛（有临界）**：M. Riesz（1928）证明 $1<p<\\infty$ 时部分和算子在 $L^p$ 上有界，即 $\\|S_Nf\\|_p\\le C_p\\|f\\|_p$，于是 $S_Nf\\to f$ 在 $L^p$ 中。但 $p=1$ 时算子范数恰是 **Lebesgue 常数**\n$$L_N=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}|D_N(t)|dt\\sim\\frac{4}{\\pi^2}\\ln N\\ \\longrightarrow\\ \\infty ,$$\n它无界；由一致有界原理（Banach–Steinhaus）便知**存在** $f\\in L^1$ 使 $S_Nf$ 在 $L^1$ 中不收敛（事实上这样的 $f$ 构成稠密的 $G_\\delta$ 集）。所以「$f\\in L^1$ 就 $L^1$ 收敛」是错的，$p=1$ 是真正的临界指数。\n\n**③ 逐点 a.e. 收敛（Carleson 定理，条件是 $L^2$）**：Carleson（1966）证明：若 $f\\in L^2(\\mathbb{T})$，则 $S_Nf(x)\\to f(x)$ 对 a.e. 的 $x$ 成立；Hunt（1968）把它推广到 $f\\in L^p(\\mathbb{T})$，$1<p<\\infty$。**注意不能写成「$L^1$ 都行」**：Kolmogorov 在 1923 年构造了 $L^1$ 中傅里叶级数几乎处处发散的函数（1926 年进一步构造出处处发散的例子）。所以 Carleson 定理里的 $L^2$ 是本质的。\n\n**④ 一致收敛（要求更高）**：充分条件例如 $f$ 满足 Hölder 条件 $|f(x)-f(y)|\\le C|x-y|^\\alpha$（$\\alpha>0$，$C^1$ 是 $\\alpha=1$ 的特例，此时误差 $O(N^{-1}\\log N)$），或 $\\sum_n|\\hat f(n)|<\\infty$（由 Weierstrass 判别法；如 $f\\in C^2$ 时 $|\\hat f(n)|=O(n^{-2})$）。仅连续不够：du Bois-Reymond（1873）构造出连续函数，其傅里叶级数在某点发散。若要「连续 $\\Rightarrow$ 一致收敛」，需要改用 Cesàro 平均 $\\sigma_N=\\frac{1}{N+1}\\sum_{k=0}^{N}S_k$（费耶定理），因为它对应非负的费耶核，是好核（狄利克雷核不是）。\n\n**吉布斯现象**：即使 $f$ 分段光滑（狄利克雷–若尔当定理保证逐点收敛到左右极限平均值），部分和在跳跃点附近仍会**过冲**。以 $f(x)=\\operatorname{sgn}(\\sin x)$（跳幅 $2$）为例，记它的前 $M$ 个奇次谐波部分和为 $T_M(x)=\\frac4\\pi\\sum_{k=1}^{M}\\frac{\\sin(2k-1)x}{2k-1}$（即 $S_{2M-1}$）。在 $x$ 靠近跳点 $0$ 时，由 $\\sum_{k=1}^{M}\\frac{\\sin(2k-1)x}{2k-1}\\approx\\frac12\\mathrm{Si}(2Mx)$ 得 $T_M(x)\\approx\\frac2\\pi\\mathrm{Si}(2Mx)$，其最大值在 $x=\\frac{\\pi}{2M}$ 处取到，极限为\n$$\\frac2\\pi\\mathrm{Si}(\\pi)=\\frac2\\pi\\int_0^{\\pi}\\frac{\\sin t}{t}dt=1.1789797\\ldots ,$$\n即比跳变后的水平 $1$ 高出 $0.1789797$，也就是跳幅 $2$ 的 $8.95\\%$。**关键点：这个过冲不随 $M\\to\\infty$ 消失**——最大值的**位置** $x_M\\approx\\pi/(2M)$ 移向跳点、过冲的**宽度**趋于 $0$，但**高度**始终是跳幅的约 $9\\%$，因此 $\\|S_Nf-f\\|_\\infty\\not\\to0$：一致收敛失败，用部分和做逼近时跳点附近总有约 $9\\%$ 的误差（改用费耶平均即可消除）。",
+    "definitionEn": "Let $f\\in L^1(\\mathbb{T})$ with $\\hat f(n)=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x)e^{-inx}dx$ and $S_Nf=\\sum_{|n|\\le N}\\hat f(n)e^{inx}=(2\\pi)^{-1}D_N*f$. One must distinguish four notions of convergence.\n\n(i) **$L^2$, unconditionally**: $\\{e^{inx}\\}$ is an orthonormal basis of $L^2(\\mathbb{T})$, $S_Nf$ is the orthogonal projection onto the first $2N+1$ basis vectors, hence $\\|S_Nf-f\\|_2\\to0$ and Parseval holds. No smoothness is needed.\n\n(ii) **$L^p$ with a critical exponent**: M. Riesz (1928) proved $\\|S_Nf\\|_p\\le C_p\\|f\\|_p$ for $1<p<\\infty$, so $S_Nf\\to f$ in $L^p$. For $p=1$ the operator norm is the Lebesgue constant $L_N=(2\\pi)^{-1}\\int|D_N|\\sim(4/\\pi^2)\\ln N\\to\\infty$, so by the uniform boundedness principle some $f\\in L^1$ has $S_Nf$ diverging in $L^1$ (such $f$ form a dense $G_\\delta$). Thus $p=1$ is genuinely the boundary case.\n\n(iii) **Almost everywhere, with the $L^2$ restriction**: by Carleson (1966), $f\\in L^2(\\mathbb{T})$ implies $S_Nf\\to f$ a.e.; Hunt (1968) extended this to $L^p$, $1<p<\\infty$. It must **not** be stated for all of $L^1$: Kolmogorov (1923) constructed an $L^1$ function whose Fourier series diverges almost everywhere (and in 1926 one diverging everywhere).\n\n(iv) **Uniform convergence, the strongest**: it holds if e.g. $f$ is Hölder of order $\\alpha>0$ (error $O(N^{-1}\\log N)$ for $\\alpha=1$, i.e. for $C^1$), or if $\\sum|\\hat f(n)|<\\infty$ (Weierstrass test; true for $f\\in C^2$). Mere continuity is insufficient (du Bois-Reymond, 1873). Cesàro means $\\sigma_N$ restore uniform convergence for continuous $f$ (Fejér).\n\n**Gibbs phenomenon**: for the square wave $\\operatorname{sgn}(\\sin x)$ (jump $2$), denote by $T_M(x)=\\frac4\\pi\\sum_{k=1}^{M}\\frac{\\sin(2k-1)x}{2k-1}$ the partial sum over the first $M$ odd harmonics (i.e. $S_{2M-1}$). Near the jump one has $T_M(x)\\approx\\frac2\\pi\\mathrm{Si}(2Mx)$, whose maximum is attained at $x=\\pi/(2M)$ and tends to $\\frac2\\pi\\mathrm{Si}(\\pi)=1.1789797\\ldots$, i.e. an overshoot of $8.95\\%$ of the jump $2$. Crucially, **this overshoot does not vanish as $M\\to\\infty$**: only its position moves to the jump and its width shrinks to $0$, while its height stays, so $\\|S_Nf-f\\|_\\infty$ does not tend to $0$.",
+    "formulas": [
+      {
+        "latex": "\\hat f(n)=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x)e^{-inx}dx,\\qquad S_Nf(x)=\\sum_{|n|\\le N}\\hat f(n)e^{inx}=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x-t)D_N(t)\\,dt",
+        "note": "傅里叶系数与部分和；部分和是狄利克雷核的卷积，这是后面所有收敛性讨论的出发点。",
+        "noteEn": "Fourier coefficients and partial sums; the partial sum is a convolution with the Dirichlet kernel, the starting point of every convergence statement."
+      },
+      {
+        "latex": "D_N(t)=\\sum_{|n|\\le N}e^{int}=\\frac{\\sin\\bigl((N+\\tfrac12)t\\bigr)}{\\sin(t/2)},\\qquad L_N=\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi}|D_N(t)|dt\\sim\\frac{4}{\\pi^{2}}\\ln N\\to\\infty",
+        "note": "狄利克雷核与 Lebesgue 常数：核有 $L^1$ 范数 $\\sim\\ln N$ 的无界增长，故 $L^1$ 中部分和不可能一致有界。",
+        "noteEn": "Dirichlet kernel and Lebesgue constant: the kernel's $L^1$ norm grows like $\\ln N$, so partial sums cannot be uniformly bounded on $L^1$."
+      },
+      {
+        "latex": "f\\in L^2(\\mathbb{T}):\\ \\|S_Nf-f\\|_2\\to0;\\qquad f\\in L^p(\\mathbb{T}),\\ 1<p<\\infty:\\ \\|S_Nf-f\\|_p\\to0",
+        "note": "$L^2$ 收敛无条件（正交投影）；$1<p<\\infty$ 由 M. Riesz 的 $L^p$ 有界性给出。$p=1$ 与 $p=\\infty$ 都不成立。",
+        "noteEn": "$L^2$ convergence is unconditional (orthogonal projection); $1<p<\\infty$ follows from M. Riesz's $L^p$ boundedness. Both $p=1$ and $p=\\infty$ fail."
+      },
+      {
+        "latex": "f\\in L^2(\\mathbb{T})\\ \\Longrightarrow\\ S_Nf(x)\\to f(x)\\ \\text{a.e.}\\qquad(\\text{Carleson 1966})",
+        "note": "Carleson 定理：条件是 $L^2$（Hunt 推广到 $L^p,p>1$）；**不能写成对所有 $L^1$ 成立**——Kolmogorov 的 $L^1$ 反例几乎处处发散。",
+        "noteEn": "Carleson's theorem: the hypothesis is $L^2$ (Hunt extended it to $L^p$, $p>1$); it must not be stated for all of $L^1$, where Kolmogorov's counterexample diverges a.e."
+      },
+      {
+        "latex": "\\operatorname{sgn}(\\sin x)=\\frac4\\pi\\sum_{k=1}^{\\infty}\\frac{\\sin(2k-1)x}{2k-1},\\qquad \\max_x S_N(x)\\to\\frac{2}{\\pi}\\mathrm{Si}(\\pi)=1.1789797\\ldots",
+        "note": "吉布斯现象：最大过冲的极限是 $1.1789797\\ldots$，即跳幅（$2$）的 $8.95\\%$；宽度 $\\sim1/N$ 收缩但高度不消失，故 $\\sup$ 范数不收敛。",
+        "noteEn": "Gibbs phenomenon: the limiting maximal overshoot is $1.1789797\\ldots$, i.e. $8.95\\%$ of the jump $2$; the width shrinks like $1/N$ but the height persists, so sup-norm convergence fails."
+      }
+    ],
+    "properties": [
+      "$L^2$ 无条件收敛：$\\{e^{inx}\\}$ 是正交基，$S_Nf$ 是正交投影，故 $\\|S_Nf-f\\|_2\\to0$ 且部分和是最佳 $L^2$ 三角逼近；帕塞瓦尔给出 $\\sum|\\hat f(n)|^2=\\|f\\|_2^2/(2\\pi)$。",
+      "$L^p(1<p<\\infty)$ 收敛（M. Riesz），$p=1$ 与 $p=\\infty$ 都不成立：Lebesgue 常数 $L_N\\sim(4/\\pi^2)\\ln N$ 无界，故存在 $f\\in L^1$ 使 $S_Nf$ 在 $L^1$ 中发散（一致有界原理）。",
+      "a.e. 收敛：Carleson（$L^2$，Hunt 推广到 $L^p,p>1$）；$L^1$ 不成立（Kolmogorov 1923/1926 的反例），也不能把条件写成「连续」或「$L^1$」。",
+      "一致收敛：充分条件为 $\\sum|\\hat f(n)|<\\infty$（如 $f\\in C^2$）或 Hölder 类（$\\alpha>0$，含 $C^1$）；连续不充分（du Bois-Reymond）。改用 Cesàro 平均/$\\sigma_N$（费耶）则连续函数一致收敛。",
+      "吉布斯现象：跳幅 $h$ 的跳跃点附近过冲约为 $0.0895h$（精确 $\\frac2\\pi\\mathrm{Si}(\\pi)-1$ 对应跳幅 $2$），宽度 $\\sim1/N$ 趋于 $0$ 而高度不消失，所以 $\\|S_Nf-f\\|_\\infty\\not\\to0$。"
+    ],
+    "propertiesEn": [
+      "$L^2$ convergence is unconditional: $\\{e^{inx}\\}$ is an orthonormal basis and $S_Nf$ is an orthogonal projection, so $\\|S_Nf-f\\|_2\\to0$; Parseval gives $\\sum|\\hat f(n)|^2=\\|f\\|_2^2/(2\\pi)$.",
+      "$L^p$ convergence holds for $1<p<\\infty$ (M. Riesz) but fails at $p=1$ and $p=\\infty$: the Lebesgue constant $L_N\\sim(4/\\pi^2)\\ln N$ is unbounded, so some $f\\in L^1$ has $S_Nf$ divergent in $L^1$.",
+      "Almost-everywhere convergence: Carleson ($L^2$, extended by Hunt to $L^p$, $p>1$); it fails in $L^1$ (Kolmogorov's counterexamples), so no statement for all integrable functions is possible.",
+      "Uniform convergence: sufficient if $\\sum|\\hat f(n)|<\\infty$ (e.g. $f\\in C^2$) or if $f$ is Hölder of order $\\alpha>0$ (including $C^1$); continuity alone is not enough (du Bois-Reymond). Cesàro means give uniform convergence for continuous $f$ (Fejér).",
+      "Gibbs phenomenon: near a jump of size $h$ the partial sums overshoot by about $0.0895h$; the overshoot width shrinks like $1/N$ but its height persists, so $\\|S_Nf-f\\|_\\infty\\not\\to0$."
+    ],
+    "expression": {
+      "text": "S_Nf(x)=Σ_{|n|≤N} f̂(n)e^{inx} ；max_x S_N ≈ (2/π)Si(π) = 1.17898…（跳幅 2 的 8.95%）",
+      "symbol": "S_Nf(x)=\\sum_{|n|\\le N}\\hat f(n)e^{inx}",
+      "note": "$L^2$ 无条件收敛；$L^1$ 不保证；a.e. 收敛需 $f\\in L^2$（Carleson）；跳跃点过冲约 $9\\%$ 且不随 $N$ 消失。",
+      "noteEn": "$L^2$ convergence is unconditional; $L^1$ fails; a.e. convergence needs $f\\in L^2$ (Carleson); the jump overshoot of about $9\\%$ never disappears."
+    },
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "sign(sin(x))",
+          "color": "#4cc9f0",
+          "label": "方波 sign(sin x)"
+        },
+        {
+          "expr": "(4/PI)*(sin(x) + sin(3*x)/3 + sin(5*x)/5)",
+          "color": "#ff6b9d",
+          "label": "部分和 N=5"
+        },
+        {
+          "expr": "(4/PI)*(sin(x) + sin(3*x)/3 + sin(5*x)/5 + sin(7*x)/7 + sin(9*x)/9 + sin(11*x)/11 + sin(13*x)/13 + sin(15*x)/15 + sin(17*x)/17 + sin(19*x)/19 + sin(21*x)/21)",
+          "color": "#ffd166",
+          "label": "部分和 N=21"
+        }
+      ],
+      "xRange": [
+        -6.3,
+        6.3
+      ],
+      "yRange": [
+        -1.35,
+        1.35
+      ],
+      "title": "方波的部分和：跳点附近过冲不消失（N=5 时 1.188，N=21 时 1.180，极限 1.17898 ≈ 跳幅的 9%）"
+    },
+    "examples": [
+      {
+        "problem": "求 $f(x)=\\operatorname{sgn}(\\sin x)$ 的傅里叶级数，并计算其部分和在跳点附近过冲的极限值（吉布斯常数）。",
+        "solution": "$f$ 是奇函数，故 $a_n=0$，且 $b_n=\\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\sin(nx)dx=\\frac{2}{\\pi}\\int_0^{\\pi}\\sin(nx)dx=\\frac{2}{\\pi}\\cdot\\frac{1-(-1)^n}{n}$，即 $n$ 奇数时 $b_n=\\frac{4}{n\\pi}$、偶数时 $0$：\n$$\\operatorname{sgn}(\\sin x)=\\frac4\\pi\\sum_{k=1}^{\\infty}\\frac{\\sin(2k-1)x}{2k-1}.$$\n在跳点 $x=0$ 处每个部分和都取 $0=\\frac{f(0^+)+f(0^-)}{2}$，与狄利克雷–若尔当定理一致。过冲：记前 $M$ 个奇次谐波的部分和为 $T_M$。当 $x$ 很小时 $\\sum_{k=1}^{M}\\frac{\\sin(2k-1)x}{2k-1}\\approx\\frac12\\int_0^{2Mx}\\frac{\\sin u}{u}du=\\frac12\\mathrm{Si}(2Mx)$，故 $T_M(x)\\approx\\frac2\\pi\\mathrm{Si}(2Mx)$，最大值在 $2Mx=\\pi$（即 $x=\\pi/(2M)$，数值核对：$M=3$ 时最大点在 $x=0.5236=\\pi/6$，$M=21$ 时在 $x=0.0748=\\pi/42$）：\n$$\\max_x T_M(x)\\ \\longrightarrow\\ \\frac2\\pi\\mathrm{Si}(\\pi)=\\frac2\\pi\\cdot1.8519370\\ldots=1.1789797\\ldots$$\n过冲 $=0.1789797\\ldots$，是跳幅 $2$ 的 $8.949\\%$。数值核对（高度**不**随 $M$ 下降，宽度 $\\sim1/M$ 在收缩）：$M=3$（即 $S_5$）时最大值 $1.18836$（$9.418\\%$）；$M=11$（即 $S_{21}$）时 $1.17967$（$8.984\\%$）；$M=51$（即 $S_{101}$）时 $1.17901$（$8.951\\%$）；极限 $8.9490\\%$。"
+      },
+      {
+        "problem": "为什么 $f\\in L^1$ 不能保证 $S_Nf$ 在 $L^1$ 中收敛？请用 Lebesgue 常数说明，并解释这为什么不与 Carleson 定理矛盾。",
+        "solution": "部分和算子 $f\\mapsto S_Nf$ 在 $L^1$ 上的范数等于 $\\|D_N\\|_{L^1}/(2\\pi)=L_N\\sim\\frac4{\\pi^2}\\ln N\\to\\infty$，与 $N$ 有关且无界，因此不可能有与 $N$ 无关的估计 $\\|S_Nf\\|_1\\le C\\|f\\|_1$。由一致有界原理：若对每个 $f\\in L^1$ 序列 $\\{S_Nf\\}$ 都在 $L^1$ 中收敛（特别地范数有界），则算子范数 $\\|S_N\\|_{L^1\\to L^1}$ 必须一致有界，与 $L_N\\to\\infty$ 矛盾。所以**存在** $f\\in L^1$ 使 $S_Nf$ 在 $L^1$ 中发散。数值上 $L_{10}=2.22$、$L_{100}=3.14$、$L_{1000}=4.07$、$L_{10000}=5.00$，每乘 $10$ 约增 $0.933=\\frac4{\\pi^2}\\ln10$，正是对数发散。这与 Carleson 定理不矛盾：Carleson 的假设是 $f\\in L^2$，而 $L^2\\subset L^1$ 只是真子集，$L^1$ 中在外的那些函数完全可能表现得极坏（Kolmogorov 的例子甚至在 $L^1$ 中几乎处处发散）。同理，一致收敛也只在更强条件下才成立。"
+      }
+    ],
+    "tags": [
+      "调和分析",
+      "傅里叶级数",
+      "收敛性",
+      "Carleson定理",
+      "吉布斯现象"
+    ],
+    "links": [
+      "fourier-series",
+      "dirichlet-fejer-kernel",
+      "orthonormal-basis",
+      "lp-spaces",
+      "convergence-ae",
+      "plancherel-theorem"
+    ]
+  }
+]
