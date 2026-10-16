@@ -25,6 +25,7 @@ let panelHistory = []; // 面板浏览历史（「返回上一个」用）
 let currentLang = "zh"; // zh | en  —— 面板语言
 let armAngles = []; // 旋臂基础角度（由 computePositions 填充）
 let armLabels = []; // 旋臂名称漂浮标签
+let armLabelsOn = true; // 旋臂标签显示开关
 let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
 
@@ -782,6 +783,10 @@ function buildArmLabels() {
 const _armProjV = new THREE.Vector3();
 function updateArmLabels() {
   if (!armLabels.length) return;
+  if (!armLabelsOn) {
+    for (const L of armLabels) L.el.style.opacity = 0;
+    return;
+  }
   const w = window.innerWidth, h = window.innerHeight;
   for (const L of armLabels) {
     if (activeBranch && L.branch !== activeBranch) { L.el.style.opacity = 0; continue; }
@@ -887,6 +892,21 @@ document.getElementById("paths-btn").addEventListener("click", (e) => {
 document.getElementById("path-prev").addEventListener("click", () => stepPath(-1));
 document.getElementById("path-next").addEventListener("click", () => stepPath(1));
 document.getElementById("path-exit").addEventListener("click", exitPath);
+
+// 按钮收纳栏（v=27）
+document.getElementById("actions-toggle").addEventListener("click", () => {
+  const actions = document.getElementById("legend-actions");
+  const btn = document.getElementById("actions-toggle");
+  const collapsed = actions.classList.toggle("collapsed");
+  btn.textContent = collapsed ? "»" : "«";
+  btn.setAttribute("aria-expanded", String(!collapsed));
+});
+
+// 旋臂标签显示/屏蔽（v=27）
+document.getElementById("labels-btn").addEventListener("click", () => {
+  armLabelsOn = !armLabelsOn;
+  document.getElementById("labels-btn").classList.toggle("off", !armLabelsOn);
+});
 document.addEventListener("click", (e) => {
   if (!e.target.closest("#paths-menu") && !e.target.closest("#paths-btn")) {
     document.getElementById("paths-menu").classList.add("hidden");
@@ -1264,11 +1284,15 @@ function updateArmSpine() {
 function buildSearch() {
   const input = document.getElementById("search");
   const box = document.getElementById("search-results");
+  const body = document.getElementById("sr-body");
+  const srCount = document.getElementById("sr-count");
+  const srFold = document.getElementById("sr-fold");
+  const searchClear = document.getElementById("search-clear");
   let hits = [];
   let sel = -1;
 
   const paintSel = () => {
-    [...box.children].forEach((el, i) => el.classList.toggle("sel", i === sel));
+    [...body.children].forEach((el, i) => el.classList.toggle("sel", i === sel));
     if (sel >= 0 && box.children[sel]) {
       box.children[sel].scrollIntoView({ block: "nearest" });
     }
@@ -1279,6 +1303,7 @@ function buildSearch() {
     input.value = "";
     hits = [];
     sel = -1;
+    searchClear.style.display = "none";
     const i = dataIndexOf.get(n.id);
     if (i !== undefined) starLayer.setAlphaTarget(i, 1);
     openPanel(n.id);
@@ -1286,6 +1311,7 @@ function buildSearch() {
 
   input.addEventListener("input", () => {
     const q = input.value.trim().toLowerCase();
+    searchClear.style.display = input.value ? "" : "none";
     if (!q) {
       box.classList.add("hidden");
       hits = [];
@@ -1313,9 +1339,12 @@ function buildSearch() {
     pulseIdx = hits.slice(0, 12).map((n) => dataIndexOf.get(n.id)).filter((i) => i !== undefined);
     pulseT0 = performance.now();
 
-    box.innerHTML = "";
+    body.innerHTML = "";
+    box.classList.remove("folded");
+    srFold.textContent = "折叠";
+    srCount.textContent = hits.length ? hits.length + " 条结果" : "";
     if (!hits.length) {
-      box.innerHTML = '<div class="empty">没有找到相关知识点</div>';
+      body.innerHTML = '<div class="empty">没有找到相关知识点</div>';
       sel = -1;
     } else {
       hits.forEach((n) => {
@@ -1329,7 +1358,7 @@ function buildSearch() {
           (n.summary ? `<span class="item-sub">${n.summary}</span>` : "") +
           `</span>`;
         div.addEventListener("click", () => openHit(n));
-        box.appendChild(div);
+        body.appendChild(div);
       });
       sel = 0;
     }
@@ -1341,6 +1370,10 @@ function buildSearch() {
   input.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       box.classList.add("hidden");
+      input.value = "";
+      hits = [];
+      sel = -1;
+      searchClear.style.display = "none";
       input.blur();
       return;
     }
@@ -1361,6 +1394,28 @@ function buildSearch() {
 
   document.addEventListener("click", (e) => {
     if (!e.target.closest("#search-wrap")) box.classList.add("hidden");
+  });
+
+  // 清除（×）：删除搜索记录并收起结果
+  searchClear.addEventListener("click", () => {
+    input.value = "";
+    hits = [];
+    sel = -1;
+    box.classList.add("hidden");
+    searchClear.style.display = "none";
+    input.focus();
+  });
+  // 结果面板：折叠 / 关闭
+  srFold.addEventListener("click", () => {
+    box.classList.toggle("folded");
+    srFold.textContent = box.classList.contains("folded") ? "展开" : "折叠";
+  });
+  document.getElementById("sr-close").addEventListener("click", () => {
+    box.classList.add("hidden");
+    input.value = "";
+    hits = [];
+    sel = -1;
+    searchClear.style.display = "none";
   });
 }
 

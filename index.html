@@ -28,6 +28,7 @@
       </div>
     </div>
     <div id="legend-actions">
+      <button id="actions-toggle" type="button" aria-label="收起按钮" aria-expanded="true">«</button>
       <button
         id="legend-toggle"
         type="button"
@@ -45,6 +46,10 @@
       <button id="paths-btn" type="button">
         <span class="roam-icon">✦</span>
         <span>学习路线</span>
+      </button>
+      <button id="labels-btn" type="button">
+        <span class="roam-icon">✷</span>
+        <span>旋臂标签</span>
       </button>
     </div>
   </aside>
@@ -83,7 +88,15 @@
   <!-- 搜索框 -->
   <div id="search-wrap">
     <input id="search" type="text" placeholder="搜索知识点…" autocomplete="off" />
-    <div id="search-results" class="hidden"></div>
+    <button id="search-clear" type="button" aria-label="清除搜索" style="display:none">×</button>
+    <div id="search-results" class="hidden">
+      <div class="sr-head">
+        <span id="sr-count"></span>
+        <button id="sr-fold" type="button">折叠</button>
+        <button id="sr-close" type="button" aria-label="关闭结果">✕</button>
+      </div>
+      <div id="sr-body"></div>
+    </div>
   </div>
 
   <!-- 引入 KaTeX：渲染数学公式（本地 vendor，不依赖第三方 CDN） -->

@@ -947,3 +947,99 @@ body::after {
   .arm-label { font-size: 10px; }
   #path-hud { bottom: 14px; }
 }
+#labels-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text);
+  font-size: 12.5px;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 10px 26px -18px rgba(0, 0, 0, 0.9);
+  user-select: none;
+}
+#labels-btn:hover {
+  border-color: rgba(140, 165, 255, 0.55);
+  background: rgba(20, 26, 52, 0.94);
+}
+#labels-btn:focus-visible {
+  outline: 2px solid rgba(140, 165, 255, 0.7);
+  outline-offset: 2px;
+}
+#labels-btn .roam-icon {
+  font-size: 10px;
+  color: var(--glow);
+  line-height: 1;
+}
+
+/* ---------- v=27：按钮收纳 / 搜索清除折叠 / 旋臂标签开关 ---------- */
+#actions-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#actions-toggle:hover { border-color: rgba(255, 255, 255, 0.5); }
+#legend-actions.collapsed #legend-toggle,
+#legend-actions.collapsed #roam-btn,
+#legend-actions.collapsed #paths-btn,
+#legend-actions.collapsed #labels-btn { display: none; }
+#labels-btn.off { opacity: 0.45; }
+
+#search { padding-right: 34px; }
+#search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.15s;
+}
+#search-clear:hover { background: rgba(255, 255, 255, 0.25); }
+#search-results .sr-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+#search-results .sr-head #sr-count { flex: 1; }
+#search-results .sr-head button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+#search-results .sr-head button:hover { border-color: rgba(255, 255, 255, 0.5); }
+#search-results.folded #sr-body { display: none; }

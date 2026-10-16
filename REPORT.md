@@ -228,7 +228,7 @@
 
 ## 六、重要提醒
 
-- **改了 `js/` 下任何文件，必须把 `?v=N` 版本号 +1**（当前 v=26），否则浏览器吃旧缓存
+- **改了 `js/` 下任何文件，必须把 `?v=N` 版本号 +1**（当前 v=27），否则浏览器吃旧缓存
 - 加完知识点后必须跑 `python3 data/merge.py`
 - 内容更新后还要跑 `python3 data/build_runtime.py`（生成首屏骨架与详情分片，v=19 起）
 - 改完要上线：`git add -A && git commit && git push`（Pages 自动重建；网络不稳时的应对见 `WORKFLOW.md`「1.2 发布与更新」）
