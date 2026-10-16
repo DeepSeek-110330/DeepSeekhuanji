@@ -936,3 +936,14 @@ body::after {
   #paths-menu { width: calc(100vw - 36px); }
   #path-hud { font-size: 11px; padding: 7px 12px; gap: 7px; }
 }
+
+/* ---------- v=26：移动端打磨 ---------- */
+@media (max-width: 700px) {
+  #topbar { padding: 14px 16px; }
+  #topbar h1 { font-size: 20px; }
+  #topbar .subtitle { font-size: 11px; }
+  #search-wrap { top: 14px; right: 12px; width: min(54vw, 220px); }
+  #panel { width: 100vw; }
+  .arm-label { font-size: 10px; }
+  #path-hud { bottom: 14px; }
+}
