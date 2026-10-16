@@ -689,6 +689,35 @@
       "If the outer function is even, the composite is even (provided the domain is symmetric).",
       "A composite can be decomposed into simpler functions, which makes analyzing its properties easier."
     ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x^2",
+          "color": "#4cc9f0",
+          "label": "g(x) = x²"
+        },
+        {
+          "expr": "2*x+1",
+          "color": "#ff6b9d",
+          "label": "f(u) = 2u + 1"
+        },
+        {
+          "expr": "2*x^2+1",
+          "color": "#06d6a0",
+          "label": "(f∘g)(x) = 2x² + 1"
+        }
+      ],
+      "xRange": [
+        -2.2,
+        2.2
+      ],
+      "yRange": [
+        -1.6,
+        11
+      ],
+      "title": "复合函数：先平方（内层 g(x) = x²）再代入外层 f，得到 (f∘g)(x) = 2x² + 1"
+    },
     "examples": [
       {
         "problem": "已知 $f(x)=x^2+1$，$g(x)=2x-3$，求 $f(g(x))$ 与 $g(f(x))$，并说明两者是否相等。",

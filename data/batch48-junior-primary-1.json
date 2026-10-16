@@ -147,6 +147,38 @@
       "We read and write numbers starting from the highest place: when a place has no unit we write 0 to hold it; when reading, several middle zeros are read as a single 'zero' and trailing zeros are not read.",
       "0 is the smallest natural number and means 'none at all'; the highest place of a written number cannot be 0, for 035 is really just 35."
     ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        12
+      ],
+      "points": [
+        {
+          "at": 0,
+          "label": "0",
+          "color": "#b388ff"
+        },
+        {
+          "at": 9,
+          "label": "9",
+          "color": "#ffd166"
+        },
+        {
+          "at": 10,
+          "label": "10",
+          "color": "#06d6a0"
+        }
+      ],
+      "intervals": [
+        {
+          "from": 9,
+          "to": 10,
+          "color": "#4cc9f0"
+        }
+      ],
+      "title": "满十进一：9 再添 1 就是 10——个位写 0、十位进 1，10 就是「1 个十」"
+    },
     "examples": [
       {
         "problem": "在 6403 中，数字 4 在哪一位上？它表示多少？",
@@ -416,6 +448,26 @@
       "Brackets in different places usually give different results: (3+4)×5=35, while 3+4×5=23.",
       "Zero in a mixed expression also follows the order: 0 can never be a divisor, and adding or subtracting 0 does not change a number."
     ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        10,
+        20
+      ],
+      "points": [
+        {
+          "at": 13,
+          "label": "3+5×2=13",
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 16,
+          "label": "(3+5)×2=16",
+          "color": "#ff6b9d"
+        }
+      ],
+      "title": "先乘除后加减：3 + 5×2 = 3 + 10 = 13；有括号先算括号：(3 + 5)×2 = 16"
+    },
     "examples": [
       {
         "problem": "计算 6 + 2 × 5。",

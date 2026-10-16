@@ -50,6 +50,1290 @@
       "Generating function and integral representation (integer order): e^{(x/2)(t−1/t)} = Σ_{n∈ℤ} J_n(x) tⁿ for t ≠ 0; putting t = e^{iθ} gives J_n(x) = (1/π)∫₀^π cos(nθ − x sinθ) dθ, from which J_{−n} = (−1)ⁿJ_n and |J_n(x)| ≤ 1 follow immediately.",
       "Asymptotics and the modified version: for large x the envelope decays like √(2/(πx)) and the zeros approach spacing π, making J_ν a decaying oscillation; the substitution x → ix yields I_ν, solving x²I″ + xI′ − (x² + ν²)I = 0, which has no zeros on the positive axis and varies monotonically — the basic function of diffusion-type problems."
     ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          0,
+          1
+        ],
+        [
+          0.3,
+          0.97763
+        ],
+        [
+          0.6,
+          0.912
+        ],
+        [
+          0.9,
+          0.80752
+        ],
+        [
+          1.2,
+          0.67113
+        ],
+        [
+          1.5,
+          0.51183
+        ],
+        [
+          1.8,
+          0.33999
+        ],
+        [
+          2.1,
+          0.16661
+        ],
+        [
+          2.4,
+          0.00251
+        ],
+        [
+          2.7,
+          -0.14245
+        ],
+        [
+          3,
+          -0.26005
+        ],
+        [
+          3.3,
+          -0.3443
+        ],
+        [
+          3.6,
+          -0.39177
+        ],
+        [
+          3.9,
+          -0.40183
+        ],
+        [
+          4.2,
+          -0.37656
+        ],
+        [
+          4.5,
+          -0.32054
+        ],
+        [
+          4.8,
+          -0.24043
+        ],
+        [
+          5.1,
+          -0.14433
+        ],
+        [
+          5.4,
+          -0.04121
+        ],
+        [
+          5.7,
+          0.05992
+        ],
+        [
+          6,
+          0.15065
+        ],
+        [
+          6.3,
+          0.22381
+        ],
+        [
+          6.6,
+          0.27404
+        ],
+        [
+          6.9,
+          0.2981
+        ],
+        [
+          7.2,
+          0.29507
+        ],
+        [
+          7.5,
+          0.26634
+        ],
+        [
+          7.8,
+          0.21541
+        ],
+        [
+          8.1,
+          0.14752
+        ],
+        [
+          8.4,
+          0.06916
+        ],
+        [
+          8.7,
+          -0.01252
+        ],
+        [
+          9,
+          -0.09033
+        ],
+        [
+          9.3,
+          -0.15766
+        ],
+        [
+          9.6,
+          -0.20898
+        ],
+        [
+          9.9,
+          -0.24034
+        ],
+        [
+          10.2,
+          -0.24962
+        ],
+        [
+          10.5,
+          -0.23665
+        ],
+        [
+          10.8,
+          -0.2032
+        ],
+        [
+          11.1,
+          -0.15277
+        ],
+        [
+          11.4,
+          -0.09021
+        ],
+        [
+          11.7,
+          -0.02133
+        ],
+        [
+          12,
+          0.04769
+        ],
+        [
+          12.3,
+          0.1108
+        ],
+        [
+          12.6,
+          0.16261
+        ],
+        [
+          12.9,
+          0.19884
+        ],
+        [
+          13.2,
+          0.21669
+        ],
+        [
+          13.5,
+          0.21499
+        ],
+        [
+          13.8,
+          0.19434
+        ],
+        [
+          14.1,
+          0.15695
+        ],
+        [
+          14.4,
+          0.10648
+        ],
+        [
+          14.7,
+          0.04764
+        ],
+        [
+          15,
+          -0.01422
+        ]
+      ],
+      "lines": [
+        {
+          "slope": -0.074579,
+          "intercept": 1,
+          "from": 0,
+          "to": 0.3,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.218738,
+          "intercept": 1.043248,
+          "from": 0.3,
+          "to": 0.6,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.34827,
+          "intercept": 1.120967,
+          "from": 0.6,
+          "to": 0.9,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.454637,
+          "intercept": 1.216697,
+          "from": 0.9,
+          "to": 1.2,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.531017,
+          "intercept": 1.308353,
+          "from": 1.2,
+          "to": 1.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.572804,
+          "intercept": 1.371034,
+          "from": 1.5,
+          "to": 1.8,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.577931,
+          "intercept": 1.380263,
+          "from": 1.8,
+          "to": 2.1,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.546998,
+          "intercept": 1.315302,
+          "from": 2.1,
+          "to": 2.4,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.48319,
+          "intercept": 1.162164,
+          "from": 2.4,
+          "to": 2.7,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.392009,
+          "intercept": 0.915974,
+          "from": 2.7,
+          "to": 3,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.280814,
+          "intercept": 0.582391,
+          "from": 3,
+          "to": 3.3,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.158242,
+          "intercept": 0.177904,
+          "from": 3.3,
+          "to": 3.6,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.033523,
+          "intercept": -0.271085,
+          "from": 3.6,
+          "to": 3.9,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.08423,
+          "intercept": -0.730323,
+          "from": 3.9,
+          "to": 4.2,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.186715,
+          "intercept": -1.160761,
+          "from": 4.2,
+          "to": 4.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.267057,
+          "intercept": -1.5223,
+          "from": 4.5,
+          "to": 4.8,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.320302,
+          "intercept": -1.777875,
+          "from": 4.8,
+          "to": 5.1,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.343749,
+          "intercept": -1.897454,
+          "from": 5.1,
+          "to": 5.4,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.3371,
+          "intercept": -1.861552,
+          "from": 5.4,
+          "to": 5.7,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.302417,
+          "intercept": -1.66386,
+          "from": 5.7,
+          "to": 6,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.243889,
+          "intercept": -1.31269,
+          "from": 6,
+          "to": 6.3,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.167438,
+          "intercept": -0.831046,
+          "from": 6.3,
+          "to": 6.6,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.080196,
+          "intercept": -0.255247,
+          "from": 6.6,
+          "to": 6.9,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.010104,
+          "intercept": 0.367823,
+          "from": 6.9,
+          "to": 7.2,
+          "color": "#4cc9f0",
+          "label": "J₀(x)"
+        },
+        {
+          "slope": -0.09577,
+          "intercept": 0.984615,
+          "from": 7.2,
+          "to": 7.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.169773,
+          "intercept": 1.539636,
+          "from": 7.5,
+          "to": 7.8,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.226301,
+          "intercept": 1.980557,
+          "from": 7.8,
+          "to": 8.1,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.261201,
+          "intercept": 2.263243,
+          "from": 8.1,
+          "to": 8.4,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.272267,
+          "intercept": 2.356197,
+          "from": 8.4,
+          "to": 8.7,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.25937,
+          "intercept": 2.243993,
+          "from": 8.7,
+          "to": 9,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.224405,
+          "intercept": 1.929314,
+          "from": 9,
+          "to": 9.3,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.171078,
+          "intercept": 1.433374,
+          "from": 9.3,
+          "to": 9.6,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.104541,
+          "intercept": 0.794618,
+          "from": 9.6,
+          "to": 9.9,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.03092,
+          "intercept": 0.065766,
+          "from": 9.9,
+          "to": 10.2,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.04323,
+          "intercept": -0.690559,
+          "from": 10.2,
+          "to": 10.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.111487,
+          "intercept": -1.407266,
+          "from": 10.5,
+          "to": 10.8,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.168112,
+          "intercept": -2.018814,
+          "from": 10.8,
+          "to": 11.1,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.208513,
+          "intercept": -2.467259,
+          "from": 11.1,
+          "to": 11.4,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.229611,
+          "intercept": -2.707777,
+          "from": 11.4,
+          "to": 11.7,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.230069,
+          "intercept": -2.713134,
+          "from": 11.7,
+          "to": 12,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.210362,
+          "intercept": -2.476656,
+          "from": 12,
+          "to": 12.3,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.172698,
+          "intercept": -2.013384,
+          "from": 12.3,
+          "to": 12.6,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.120784,
+          "intercept": -1.35927,
+          "from": 12.6,
+          "to": 12.9,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.059478,
+          "intercept": -0.568427,
+          "from": 12.9,
+          "to": 13.2,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.005656,
+          "intercept": 0.291343,
+          "from": 13.2,
+          "to": 13.5,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.068845,
+          "intercept": 1.144398,
+          "from": 13.5,
+          "to": 13.8,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.124609,
+          "intercept": 1.913943,
+          "from": 13.8,
+          "to": 14.1,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.168229,
+          "intercept": 2.528985,
+          "from": 14.1,
+          "to": 14.4,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.196141,
+          "intercept": 2.930913,
+          "from": 14.4,
+          "to": 14.7,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": -0.206221,
+          "intercept": 3.079091,
+          "from": 14.7,
+          "to": 15,
+          "color": "#4cc9f0"
+        },
+        {
+          "slope": 0.494396,
+          "intercept": 0,
+          "from": 0,
+          "to": 0.3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.461274,
+          "intercept": 0.009937,
+          "from": 0.3,
+          "to": 0.6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.397495,
+          "intercept": 0.048204,
+          "from": 0.6,
+          "to": 0.9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.307798,
+          "intercept": 0.128931,
+          "from": 0.9,
+          "to": 1.2,
+          "color": "#ff6b9d",
+          "label": "J₁(x)"
+        },
+        {
+          "slope": 0.198825,
+          "intercept": 0.259699,
+          "from": 1.2,
+          "to": 1.5,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.078601,
+          "intercept": 0.440034,
+          "from": 1.5,
+          "to": 1.8,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.044083,
+          "intercept": 0.660866,
+          "from": 1.8,
+          "to": 2.1,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.160356,
+          "intercept": 0.90504,
+          "from": 2.1,
+          "to": 2.4,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.261946,
+          "intercept": 1.148856,
+          "from": 2.4,
+          "to": 2.7,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.341808,
+          "intercept": 1.364483,
+          "from": 2.7,
+          "to": 3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.394652,
+          "intercept": 1.523014,
+          "from": 3,
+          "to": 3.3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.417326,
+          "intercept": 1.59784,
+          "from": 3.3,
+          "to": 3.6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.409032,
+          "intercept": 1.567981,
+          "from": 3.6,
+          "to": 3.9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.371343,
+          "intercept": 1.420994,
+          "from": 3.9,
+          "to": 4.2,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.308045,
+          "intercept": 1.155142,
+          "from": 4.2,
+          "to": 4.5,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.224798,
+          "intercept": 0.780531,
+          "from": 4.5,
+          "to": 4.8,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.128658,
+          "intercept": 0.319058,
+          "from": 4.8,
+          "to": 5.1,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.027492,
+          "intercept": -0.196888,
+          "from": 5.1,
+          "to": 5.4,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.070657,
+          "intercept": -0.726893,
+          "from": 5.4,
+          "to": 5.7,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.158213,
+          "intercept": -1.22596,
+          "from": 5.7,
+          "to": 6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.228656,
+          "intercept": -1.648622,
+          "from": 6,
+          "to": 6.3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.277023,
+          "intercept": -1.953329,
+          "from": 6.3,
+          "to": 6.6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.30026,
+          "intercept": -2.106698,
+          "from": 6.6,
+          "to": 6.9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.297432,
+          "intercept": -2.087181,
+          "from": 6.9,
+          "to": 7.2,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.269737,
+          "intercept": -1.887777,
+          "from": 7.2,
+          "to": 7.5,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.220361,
+          "intercept": -1.517463,
+          "from": 7.5,
+          "to": 7.8,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.15417,
+          "intercept": -1.001166,
+          "from": 7.8,
+          "to": 8.1,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.077262,
+          "intercept": -0.378212,
+          "from": 8.1,
+          "to": 8.4,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.003557,
+          "intercept": 0.300669,
+          "from": 8.4,
+          "to": 8.7,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.081357,
+          "intercept": 0.977529,
+          "from": 8.7,
+          "to": 9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.14966,
+          "intercept": 1.592248,
+          "from": 9,
+          "to": 9.3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.202964,
+          "intercept": 2.087977,
+          "from": 9.3,
+          "to": 9.6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.237183,
+          "intercept": 2.416484,
+          "from": 9.6,
+          "to": 9.9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.249952,
+          "intercept": 2.542894,
+          "from": 9.9,
+          "to": 10.2,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.240781,
+          "intercept": 2.449349,
+          "from": 10.2,
+          "to": 10.5,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.211055,
+          "intercept": 2.137229,
+          "from": 10.5,
+          "to": 10.8,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.163872,
+          "intercept": 1.627655,
+          "from": 10.8,
+          "to": 11.1,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.103741,
+          "intercept": 0.960197,
+          "from": 11.1,
+          "to": 11.4,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -0.036166,
+          "intercept": 0.189836,
+          "from": 11.4,
+          "to": 11.7,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.032844,
+          "intercept": -0.617573,
+          "from": 11.7,
+          "to": 12,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.097294,
+          "intercept": -1.390977,
+          "from": 12,
+          "to": 12.3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.151722,
+          "intercept": -2.060436,
+          "from": 12.3,
+          "to": 12.6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.191647,
+          "intercept": -2.563494,
+          "from": 12.6,
+          "to": 12.9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.213938,
+          "intercept": -2.851055,
+          "from": 12.9,
+          "to": 13.2,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.217053,
+          "intercept": -2.89217,
+          "from": 13.2,
+          "to": 13.5,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.201137,
+          "intercept": -2.677306,
+          "from": 13.5,
+          "to": 13.8,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.167979,
+          "intercept": -2.219726,
+          "from": 13.8,
+          "to": 14.1,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.120824,
+          "intercept": -1.554839,
+          "from": 14.1,
+          "to": 14.4,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.064065,
+          "intercept": -0.737509,
+          "from": 14.4,
+          "to": 14.7,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0.002843,
+          "intercept": 0.162466,
+          "from": 14.7,
+          "to": 15,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 2.117543,
+          "intercept": -1.504614,
+          "from": 0.2,
+          "to": 0.502,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 1.187593,
+          "intercept": -1.037741,
+          "from": 0.502,
+          "to": 0.8041,
+          "color": "#ffd166",
+          "label": "Y₀(x)"
+        },
+        {
+          "slope": 0.825192,
+          "intercept": -0.746341,
+          "from": 0.8041,
+          "to": 1.1061,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.580588,
+          "intercept": -0.475779,
+          "from": 1.1061,
+          "to": 1.4082,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.374507,
+          "intercept": -0.185582,
+          "from": 1.4082,
+          "to": 1.7102,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.187868,
+          "intercept": 0.133607,
+          "from": 1.7102,
+          "to": 2.0122,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.018653,
+          "intercept": 0.474109,
+          "from": 2.0122,
+          "to": 2.3143,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.129377,
+          "intercept": 0.816694,
+          "from": 2.3143,
+          "to": 2.6163,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.25088,
+          "intercept": 1.134586,
+          "from": 2.6163,
+          "to": 2.9184,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.340936,
+          "intercept": 1.3974,
+          "from": 2.9184,
+          "to": 3.2204,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.396146,
+          "intercept": 1.575199,
+          "from": 3.2204,
+          "to": 3.5224,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.415243,
+          "intercept": 1.642469,
+          "from": 3.5224,
+          "to": 3.8245,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.399351,
+          "intercept": 1.58169,
+          "from": 3.8245,
+          "to": 4.1265,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.351964,
+          "intercept": 1.386148,
+          "from": 4.1265,
+          "to": 4.4286,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.278699,
+          "intercept": 1.061684,
+          "from": 4.4286,
+          "to": 4.7306,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.186845,
+          "intercept": 0.627161,
+          "from": 4.7306,
+          "to": 5.0327,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.084789,
+          "intercept": 0.113548,
+          "from": 5.0327,
+          "to": 5.3347,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.01866,
+          "intercept": -0.438318,
+          "from": 5.3347,
+          "to": 5.6367,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.114961,
+          "intercept": -0.981142,
+          "from": 5.6367,
+          "to": 5.9388,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.196507,
+          "intercept": -1.465426,
+          "from": 5.9388,
+          "to": 6.2408,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.257197,
+          "intercept": -1.844182,
+          "from": 6.2408,
+          "to": 6.5429,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.292878,
+          "intercept": -2.077638,
+          "from": 6.5429,
+          "to": 6.8449,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.301618,
+          "intercept": -2.137463,
+          "from": 6.8449,
+          "to": 7.1469,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.283793,
+          "intercept": -2.010068,
+          "from": 7.1469,
+          "to": 7.449,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.241982,
+          "intercept": -1.698619,
+          "from": 7.449,
+          "to": 7.751,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.180685,
+          "intercept": -1.223508,
+          "from": 7.751,
+          "to": 8.0531,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.105891,
+          "intercept": -0.62118,
+          "from": 8.0531,
+          "to": 8.3551,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.024526,
+          "intercept": 0.058631,
+          "from": 8.3551,
+          "to": 8.6571,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.05615,
+          "intercept": 0.757049,
+          "from": 8.6571,
+          "to": 8.9592,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.129168,
+          "intercept": 1.411231,
+          "from": 8.9592,
+          "to": 9.2612,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.188434,
+          "intercept": 1.960111,
+          "from": 9.2612,
+          "to": 9.5633,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.229222,
+          "intercept": 2.350176,
+          "from": 9.5633,
+          "to": 9.8653,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.248537,
+          "intercept": 2.540721,
+          "from": 9.8653,
+          "to": 10.1673,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.245326,
+          "intercept": 2.508075,
+          "from": 10.1673,
+          "to": 10.4694,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.220518,
+          "intercept": 2.248356,
+          "from": 10.4694,
+          "to": 10.7714,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.176892,
+          "intercept": 1.778444,
+          "from": 10.7714,
+          "to": 11.0735,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.11879,
+          "intercept": 1.135049,
+          "from": 11.0735,
+          "to": 11.3755,
+          "color": "#ffd166"
+        },
+        {
+          "slope": -0.051702,
+          "intercept": 0.371884,
+          "from": 11.3755,
+          "to": 11.6776,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.018237,
+          "intercept": -0.444827,
+          "from": 11.6776,
+          "to": 11.9796,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.084792,
+          "intercept": -1.242133,
+          "from": 11.9796,
+          "to": 12.2816,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.142178,
+          "intercept": -1.946924,
+          "from": 12.2816,
+          "to": 12.5837,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.185548,
+          "intercept": -2.49268,
+          "from": 12.5837,
+          "to": 12.8857,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.211399,
+          "intercept": -2.825792,
+          "from": 12.8857,
+          "to": 13.1878,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.217847,
+          "intercept": -2.91082,
+          "from": 13.1878,
+          "to": 13.4898,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.204755,
+          "intercept": -2.73421,
+          "from": 13.4898,
+          "to": 13.7918,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.173711,
+          "intercept": -2.306058,
+          "from": 13.7918,
+          "to": 14.0939,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.127852,
+          "intercept": -1.659731,
+          "from": 14.0939,
+          "to": 14.3959,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.071557,
+          "intercept": -0.849313,
+          "from": 14.3959,
+          "to": 14.698,
+          "color": "#ffd166"
+        },
+        {
+          "slope": 0.010037,
+          "intercept": 0.054906,
+          "from": 14.698,
+          "to": 15,
+          "color": "#ffd166"
+        }
+      ],
+      "marks": [
+        {
+          "at": [
+            2.4048,
+            0
+          ],
+          "label": "J₀ 的第一个零点 ≈ 2.405"
+        },
+        {
+          "at": [
+            3.832,
+            -0.4028
+          ],
+          "label": "J₀ 的第一个极小 ≈ −0.403"
+        }
+      ],
+      "xRange": [
+        0,
+        15.6
+      ],
+      "yRange": [
+        -1.35,
+        1.3
+      ],
+      "pointColor": "#4cc9f0",
+      "pointSize": 2.6,
+      "title": "贝塞尔函数采样：J₀（蓝点/线）、J₁（粉）、Y₀（黄）——Y₀ 在 x→0⁺ 时发散"
+    },
     "examples": [
       {
         "problem": "用级数定义验证半整数阶公式 $J_{1/2}(x)=\\sqrt{2/(\\pi x)}\\,\\sin x$，并在 $x=2$ 处做数值比较。",

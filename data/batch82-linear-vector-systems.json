@@ -616,6 +616,72 @@
       "Once a fundamental system is fixed, the general solution is an arbitrary linear combination of it; conversely the coefficients expressing a given solution are unique, because a fundamental system is linearly independent.",
       "Differences, finite sums and scalar multiples of solutions are again solutions; taken together they fill the entire solution space."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -2.9,
+        2.9
+      ],
+      "yRange": [
+        -1.7,
+        1.7
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.4,
+            -1.2
+          ],
+          "to": [
+            -2.4,
+            1.2
+          ],
+          "color": "#4cc9f0",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            -2,
+            1
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "type": "label",
+          "at": [
+            -1.45,
+            1.5
+          ],
+          "text": "η=(−2,1)ᵀ：基础解系"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.05,
+            -0.9
+          ],
+          "text": "x = kη（k 任意）"
+        }
+      ],
+      "title": "齐次方程组 x+2y=0 的解空间：过原点的直线，维数 = n−r(A) = 2−1 = 1"
+    },
     "examples": [
       {
         "problem": "求齐次方程组\n$$\\begin{cases}x_1+x_2+x_3+x_4=0,\\\\ x_1+2x_2+3x_3+4x_4=0\\end{cases}$$\n的基础解系与通解。",
@@ -691,6 +757,99 @@
       "Particular and homogeneous solutions combine freely: a particular solution plus any homogeneous solution is again a solution, and the difference of two solutions is homogeneous. Knowing a fundamental system η₁,…,η_{n−r} and one particular solution x* determines the whole solution set.",
       "Recipe: (i) row-reduce the augmented matrix and read off consistency and pivots from the two ranks; (ii) solve the associated homogeneous system for a fundamental system (setting free variables to 1 and 0 in turn); (iii) find one particular solution (often by setting all free variables to 0), then add."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.0,
+        4.6
+      ],
+      "yRange": [
+        -1.6,
+        2.0
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            -0.9,
+            0.45
+          ],
+          "to": [
+            0.9,
+            -0.45
+          ],
+          "color": "rgba(160,175,220,0.8)",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            4.6,
+            -0.8
+          ],
+          "to": [
+            0.6,
+            1.2
+          ],
+          "color": "#4cc9f0",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            0
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3,
+            0
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "#ffd166",
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            0
+          ],
+          "label": "x*=(3,0)"
+        },
+        {
+          "type": "label",
+          "at": [
+            -0.1,
+            -0.95
+          ],
+          "text": "导出组：Ax=0"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.3,
+            0.95
+          ],
+          "text": "η=(−2,1)"
+        }
+      ],
+      "title": "非齐次方程组 x+2y=3 的解集：x=(3,0)+k(−2,1)，过点 (3,0)、与导出组的解直线平行"
+    },
     "examples": [
       {
         "problem": "求解非齐次方程组\n$$\\begin{cases}x_1+x_2+x_3=1,\\\\ x_1+2x_2+3x_3=3,\\\\ 2x_1+3x_2+4x_3=4.\\end{cases}$$",

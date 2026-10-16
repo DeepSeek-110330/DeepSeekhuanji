@@ -203,6 +203,88 @@
       "Lagrange's theorem: quadratic irrationals iff eventually periodic continued fractions — √2=[1;2̄], √3=[1;1,2‾], golden ratio=[1;1̄]. The parity of the period also decides whether x²−dy²=−1 is solvable.",
       "The golden ratio φ=[1;1̄] is the hardest irrational to approximate: every irrational α has infinitely many fractions with |α−p/q|<1/(√5·q²), the constant √5 cannot be improved, and φ is the extremal case (Hurwitz's theorem)."
     ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          0.41421356
+        ],
+        [
+          2,
+          0.34314575
+        ],
+        [
+          5,
+          0.35533906
+        ],
+        [
+          12,
+          0.35324702
+        ],
+        [
+          29,
+          0.35360596
+        ],
+        [
+          70,
+          0.35354437
+        ],
+        [
+          169,
+          0.35355494
+        ],
+        [
+          408,
+          0.35355313
+        ],
+        [
+          985,
+          0.35355344
+        ],
+        [
+          2378,
+          0.35355338
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 0,
+          "intercept": 0.35355339,
+          "from": 0,
+          "to": 2500,
+          "color": "#ffd166",
+          "label": "1/(2√2) ≈ 0.35355"
+        }
+      ],
+      "marks": [
+        {
+          "at": [
+            1,
+            0.41421356
+          ],
+          "label": "q = 1：|√2 − 1| ≈ 0.414"
+        },
+        {
+          "at": [
+            985,
+            0.35355344
+          ],
+          "label": "q = 985：q²·误差 ≈ 0.35355"
+        }
+      ],
+      "xRange": [
+        0,
+        2500
+      ],
+      "yRange": [
+        0.3,
+        0.45
+      ],
+      "pointColor": "#4cc9f0",
+      "pointSize": 4,
+      "title": "√2 的渐近分数：q² × 误差趋于 1/(2√2) ≈ 0.3536，即误差 ≈ 0.3536/q²"
+    },
     "examples": [
       {
         "problem": "把 43/19 展成简单连分数，并求出全部渐近分数。",

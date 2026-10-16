@@ -50,6 +50,222 @@
       "An even degree sum is only necessary, not sufficient: (3, 3, 3, 1) has sum 10 yet is not graphical; Havel–Hakimi and Erdős–Gallai are the exact criteria.",
       "Isomorphic graphs share the same degree sequence, but not conversely: the 6-cycle C6 and the disjoint union C3 ∪ C3 both have degree sequence (2, 2, 2, 2, 2, 2), yet one is connected and the other is not."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        0.2,
+        10.2
+      ],
+      "yRange": [
+        0.2,
+        3.9
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            3.4,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.4,
+            1
+          ],
+          "to": [
+            3.4,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.4,
+            3.4
+          ],
+          "to": [
+            1,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            3.4
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            6.6,
+            1
+          ],
+          "to": [
+            8.8,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.8,
+            1
+          ],
+          "to": [
+            7.7,
+            2.9
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            7.7,
+            2.9
+          ],
+          "to": [
+            6.6,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.8,
+            1
+          ],
+          "to": [
+            8.8,
+            2.9
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.4,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.4,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "C"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "D"
+        },
+        {
+          "type": "point",
+          "at": [
+            6.6,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "P"
+        },
+        {
+          "type": "point",
+          "at": [
+            8.8,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "Q"
+        },
+        {
+          "type": "point",
+          "at": [
+            7.7,
+            2.9
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "R"
+        },
+        {
+          "type": "point",
+          "at": [
+            8.8,
+            2.9
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "S"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            0.5
+          ],
+          "text": "C₄：每个顶点度数都是 2",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            7.7,
+            0.5
+          ],
+          "text": "右图：度数 2、3、2、1，度数和 8",
+          "size": 11
+        }
+      ],
+      "title": "小图两例：左 C₄ 各点度数为 2；右图度数列 2、3、2、1，度数和 8 = 2×4"
+    },
     "examples": [
       {
         "problem": "判断度序列 $(3, 3, 2, 2, 2)$ 是否可图化；若可图化，构造一个实现该度序列的图，并用握手引理核对边数。",
@@ -125,6 +341,277 @@
       "Every tree with n ≥ 2 has at least two leaves (contradiction plus the handshake lemma; see the example); deleting a leaf and its edge leaves a tree, the standard induction step.",
       "A spanning tree exists iff the graph is connected; the spanning trees of the components form a spanning forest. In weighted graphs, Kruskal's (sort edges plus union-find) or Prim's (grow from one vertex) finds a minimum spanning tree in polynomial time, justified by the cut property."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        0.2,
+        10.2
+      ],
+      "yRange": [
+        0.2,
+        3.9
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            3.4,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.4,
+            1
+          ],
+          "to": [
+            3.4,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.4,
+            3.4
+          ],
+          "to": [
+            1,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            3.4
+          ],
+          "to": [
+            1,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            3.4,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.4,
+            1
+          ],
+          "to": [
+            1,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.75)",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            6,
+            1
+          ],
+          "to": [
+            8.4,
+            1
+          ],
+          "color": "#06d6a0",
+          "width": 3
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.4,
+            1
+          ],
+          "to": [
+            8.4,
+            3.4
+          ],
+          "color": "#06d6a0",
+          "width": 3
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.4,
+            3.4
+          ],
+          "to": [
+            6,
+            3.4
+          ],
+          "color": "#06d6a0",
+          "width": 3
+        },
+        {
+          "type": "segment",
+          "from": [
+            6,
+            3.4
+          ],
+          "to": [
+            6,
+            1
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 2,
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            6,
+            1
+          ],
+          "to": [
+            8.4,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 2,
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            8.4,
+            1
+          ],
+          "to": [
+            6,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 2,
+          "dash": true
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.4,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.4,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "C"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "D"
+        },
+        {
+          "type": "point",
+          "at": [
+            6,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            8.4,
+            1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            8.4,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "C"
+        },
+        {
+          "type": "point",
+          "at": [
+            6,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "D"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.2,
+            0.5
+          ],
+          "text": "K₄：4 个顶点、6 条边",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            7.2,
+            0.5
+          ],
+          "text": "生成树（绿）：3 = 4−1 条边，仍连通、无环",
+          "size": 11
+        }
+      ],
+      "title": "K₄ 与它的一棵生成树（绿色 3 = 4−1 条边）：连通、无环，两点间路径唯一"
+    },
     "examples": [
       {
         "problem": "六个城市 A, B, C, D, E, F 之间可修路段的成本（单位：万元）为：AB = 4，AC = 2，BC = 1，BD = 5，CD = 8，CE = 3，DE = 6，EF = 7，DF = 9，BE = 10，AD = 11。求用最少成本把所有城市连成一片的最小生成树与总成本。",
@@ -200,6 +687,184 @@
       "A Hamiltonian cycle in a bipartite graph alternates between the two sides, so |L| = |R| is necessary; a Hamiltonian path forces the side sizes to differ by at most 1.",
       "Dirac's and Ore's conditions are sufficient but far from necessary: C5 has a Hamiltonian cycle, yet its minimum degree 2 < 5/2 and every non-adjacent pair has degree sum 4 < 5, so neither condition holds."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        1.0,
+        7.9
+      ],
+      "yRange": [
+        0.2,
+        6.0
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            5.0
+          ],
+          "to": [
+            3.76,
+            3.1
+          ],
+          "color": "#4cc9f0",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            5.0
+          ],
+          "to": [
+            3.84,
+            3.14
+          ],
+          "color": "#4cc9f0",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            1.0
+          ],
+          "to": [
+            3.76,
+            2.9
+          ],
+          "color": "#4cc9f0",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            1.0
+          ],
+          "to": [
+            3.84,
+            2.86
+          ],
+          "color": "#4cc9f0",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.9,
+            3.0
+          ],
+          "to": [
+            6.8,
+            1.6
+          ],
+          "color": "#ffd166",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            5.0
+          ],
+          "to": [
+            6.8,
+            1.6
+          ],
+          "color": "#ffd166",
+          "width": 2
+        },
+        {
+          "type": "segment",
+          "from": [
+            2.2,
+            1.0
+          ],
+          "to": [
+            6.8,
+            1.6
+          ],
+          "color": "#ffd166",
+          "width": 2
+        },
+        {
+          "type": "point",
+          "at": [
+            2.2,
+            5.0
+          ],
+          "color": "#4cc9f0",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            2.2,
+            1.0
+          ],
+          "color": "#4cc9f0",
+          "r": 4
+        },
+        {
+          "type": "point",
+          "at": [
+            3.9,
+            3.0
+          ],
+          "color": "#ff6b9d",
+          "r": 5
+        },
+        {
+          "type": "point",
+          "at": [
+            6.8,
+            1.6
+          ],
+          "color": "#4cc9f0",
+          "r": 4
+        },
+        {
+          "type": "label",
+          "at": [
+            1.75,
+            5.55
+          ],
+          "text": "北岸：3 座桥",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            1.75,
+            0.55
+          ],
+          "text": "南岸：3 座桥",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            2.3,
+            2.75
+          ],
+          "text": "岛 K：5 座桥",
+          "size": 11,
+          "color": "#ff9fc0"
+        },
+        {
+          "type": "label",
+          "at": [
+            6.35,
+            0.9
+          ],
+          "text": "洛姆塞岛：3 座桥",
+          "size": 11
+        }
+      ],
+      "title": "柯尼斯堡七桥：四块陆地度数 5、3、3、3 全为奇数，不能一笔画走完 7 座桥"
+    },
     "examples": [
       {
         "problem": "把哥尼斯堡七桥问题抽象成图：4 个顶点、7 条边的多重图，四个顶点的度数分别为 3, 3, 3, 5。(1) 是否存在经过每座桥恰好一次的路线（欧拉回路或欧拉路径）？(2) 若拆去北岸与中央岛屿之间两座平行桥中的一座，结论如何变化？",
@@ -275,6 +940,263 @@
       "Augmenting-path characterization: M is maximum iff no augmenting path for M exists (an alternating path whose two ends are unsaturated). This yields the polynomial-time Hungarian algorithm and underlies the proof of Hall's theorem.",
       "Duality and algorithms: in bipartite graphs the maximum matching size equals the minimum vertex cover size (König), matching the max-flow min-cut correspondence; hence every k-regular bipartite graph such as K3,3 has a perfect matching. General graphs lack this duality (C5: maximum matching 2, minimum vertex cover 3)."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        0.3,
+        6.1
+      ],
+      "yRange": [
+        0.2,
+        4.4
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            3.4
+          ],
+          "to": [
+            5.2,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            3.4
+          ],
+          "to": [
+            5.2,
+            2.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            3.4
+          ],
+          "to": [
+            5.2,
+            1.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            2.4
+          ],
+          "to": [
+            5.2,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            2.4
+          ],
+          "to": [
+            5.2,
+            2.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            2.4
+          ],
+          "to": [
+            5.2,
+            1.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.4
+          ],
+          "to": [
+            5.2,
+            3.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.4
+          ],
+          "to": [
+            5.2,
+            2.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.4
+          ],
+          "to": [
+            5.2,
+            1.4
+          ],
+          "color": "rgba(160, 175, 220, 0.42)",
+          "width": 1.5
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            3.4
+          ],
+          "to": [
+            5.2,
+            3.4
+          ],
+          "color": "#06d6a0",
+          "width": 3
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            2.4
+          ],
+          "to": [
+            5.2,
+            2.4
+          ],
+          "color": "#06d6a0",
+          "width": 3
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.2,
+            1.4
+          ],
+          "to": [
+            5.2,
+            1.4
+          ],
+          "color": "#06d6a0",
+          "width": 3
+        },
+        {
+          "type": "point",
+          "at": [
+            1.2,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "L₁"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.2,
+            2.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "L₂"
+        },
+        {
+          "type": "point",
+          "at": [
+            1.2,
+            1.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "L₃"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.2,
+            3.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "R₁"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.2,
+            2.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "R₂"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.2,
+            1.4
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "R₃"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.2,
+            3.95
+          ],
+          "text": "X 部",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            5.2,
+            3.95
+          ],
+          "text": "Y 部",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            3.2,
+            0.55
+          ],
+          "text": "绿色 3 条边两两不相邻，覆盖全部 6 个顶点：完美匹配",
+          "size": 11
+        }
+      ],
+      "title": "K₃,₃ 的一个完美匹配（绿色 3 条边）：两两不相邻且覆盖全部 6 个顶点"
+    },
     "examples": [
       {
         "problem": "五名学生甲、乙、丙、丁、戊申请五个岗位 1, 2, 3, 4, 5，各人会做的岗位为：甲 {1, 2}，乙 {2, 3}，丙 {1, 3, 4}，丁 {4, 5}，戊 {5}。能否安排每人恰好做一项自己会做的岗位、且每个岗位至多一人？用霍尔定理判断并给出一种安排。",
@@ -350,6 +1272,135 @@
       "K5 and K3,3 are the two basic non-planar graphs: K5 is killed by e ≤ 3v − 6, while K3,3 needs the bipartite bound e ≤ 2v − 4. By Kuratowski's theorem every non-planar graph contains a subdivision of one of them, so non-planarity always reduces to these two.",
       "All five Platonic solids obey Euler's formula: tetrahedron 4 − 6 + 4 = 2, cube 8 − 12 + 6 = 2, octahedron 6 − 12 + 8 = 2, dodecahedron 20 − 30 + 12 = 2, icosahedron 12 − 30 + 20 = 2 — every count rechecked ✓."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.3,
+        5.9
+      ],
+      "yRange": [
+        0,
+        4.9
+      ],
+      "elements": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0.5,
+              0.7
+            ],
+            [
+              5.1,
+              0.7
+            ],
+            [
+              2.8,
+              1.9
+            ]
+          ],
+          "fill": "rgba(76, 201, 240, 0.18)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              5.1,
+              0.7
+            ],
+            [
+              2.8,
+              4.1
+            ],
+            [
+              2.8,
+              1.9
+            ]
+          ],
+          "fill": "rgba(255, 107, 157, 0.18)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.8,
+              4.1
+            ],
+            [
+              0.5,
+              0.7
+            ],
+            [
+              2.8,
+              1.9
+            ]
+          ],
+          "fill": "rgba(6, 214, 160, 0.18)",
+          "color": "#06d6a0"
+        },
+        {
+          "type": "point",
+          "at": [
+            0.5,
+            0.7
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "A"
+        },
+        {
+          "type": "point",
+          "at": [
+            5.1,
+            0.7
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "B"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.8,
+            4.1
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "C"
+        },
+        {
+          "type": "point",
+          "at": [
+            2.8,
+            1.9
+          ],
+          "color": "#4cc9f0",
+          "r": 4,
+          "label": "D"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.3,
+            0.35
+          ],
+          "text": "v − e + f = 4 − 6 + 4 = 2",
+          "size": 11
+        },
+        {
+          "type": "label",
+          "at": [
+            2.8,
+            4.55
+          ],
+          "text": "外部面（第 4 个面）",
+          "size": 11
+        }
+      ],
+      "title": "K₄ 的平面画法：v = 4、e = 6、f = 4（含外部面），满足 v − e + f = 2"
+    },
     "examples": [
       {
         "problem": "正方体的顶点与棱构成图 G：8 个顶点、12 条边、每个顶点度 3。(1) 用欧拉公式求面数；(2) 验证各面度数之和等于 2e；(3) 比较 e ≤ 3v − 6 与二部图加强版 e ≤ 2v − 4，哪个取等号？为什么？",

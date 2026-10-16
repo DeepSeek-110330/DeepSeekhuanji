@@ -166,6 +166,44 @@
       "For different bases, take logarithms of both sides, exploiting the exponential–logarithm equivalence",
       "Exponentials are always positive, so $a^{f(x)}=b$ has no solution when $b\\le 0$"
     ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2^x",
+          "color": "#4cc9f0",
+          "label": "y = 2^x（单调递增）"
+        },
+        {
+          "expr": "0.5^x",
+          "color": "#ff6b9d",
+          "label": "y = (1/2)^x（单调递减）"
+        },
+        {
+          "expr": "8",
+          "color": "#ffd166",
+          "label": "y = 8"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "2^x - 8",
+          "from": 3,
+          "to": 4.6,
+          "base": 0,
+          "color": "#06d6a0"
+        }
+      ],
+      "xRange": [
+        -2.5,
+        4.6
+      ],
+      "yRange": [
+        -0.6,
+        11.5
+      ],
+      "title": "解 2^x = 8：递增曲线与 y = 8 交于 x = 3；绿色区域：2^x ≥ 8 ⟺ x ≥ 3"
+    },
     "examples": [
       {
         "problem": "解方程 $4^{x} - 5\\cdot 2^{x} + 4 = 0$。",
@@ -246,6 +284,35 @@
       "The laws apply to positive factors only: $\\log_a(M+N)\\neq \\log_a M+\\log_a N$",
       "The change-of-base formula $\\log_a N=\\frac{\\log_c N}{\\log_c a}$ converts every base to a common one"
     ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2^x",
+          "color": "#4cc9f0",
+          "label": "y = 2^x"
+        },
+        {
+          "expr": "log(x)/log(2)",
+          "color": "#ff6b9d",
+          "label": "y = log₂ x"
+        },
+        {
+          "expr": "x",
+          "color": "#ffd166",
+          "label": "y = x（对称轴）"
+        }
+      ],
+      "xRange": [
+        -3.4,
+        6
+      ],
+      "yRange": [
+        -3.4,
+        6
+      ],
+      "title": "y = 2^x 与 y = log₂ x 互为反函数：两条曲线关于直线 y = x 对称"
+    },
     "examples": [
       {
         "problem": "计算 $\\log_2 8 + \\lg 100 - \\ln e^3$。",
@@ -434,6 +501,35 @@
       "It is an identity between the functions $\\log_a x$ and $\\log_c x$ valid for all $x>0$",
       "For reciprocal base–argument pairs such as $\\log_2 3$ and $\\log_3 2$ the product is always 1"
     ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "log(x)/log(2)",
+          "color": "#4cc9f0",
+          "label": "log₂ x = ln x / ln 2"
+        },
+        {
+          "expr": "log(x)",
+          "color": "#ff6b9d",
+          "label": "ln x"
+        },
+        {
+          "expr": "log(x)/log(10)",
+          "color": "#06d6a0",
+          "label": "log₁₀ x = ln x / ln 10"
+        }
+      ],
+      "xRange": [
+        0,
+        9
+      ],
+      "yRange": [
+        -4.5,
+        4.5
+      ],
+      "title": "换底公式：不同底的对数曲线只差常数倍（log₂x / log₁₀x = log₂10 ≈ 3.32）"
+    },
     "examples": [
       {
         "problem": "计算 $\\log_3 5\\cdot\\log_5 9$。",
@@ -517,6 +613,30 @@
       "In inequalities the base rules the direction: unchanged for $a>1$, reversed for $0<a<1$",
       "Substituting $t=\\log_a x$ turns awkward logarithmic equations into quadratics, then back-substitute $x=a^t$"
     ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "log(x-1)/log(2)",
+          "color": "#4cc9f0",
+          "label": "y = log₂(x − 1)，定义域 x > 1"
+        },
+        {
+          "expr": "3",
+          "color": "#ffd166",
+          "label": "y = 3"
+        }
+      ],
+      "xRange": [
+        -1.5,
+        11.5
+      ],
+      "yRange": [
+        -4,
+        5
+      ],
+      "title": "解 log₂(x − 1) = 3：曲线与 y = 3 交于 x = 9（须先保证真数 x − 1 > 0）"
+    },
     "examples": [
       {
         "problem": "解方程 $\\log_2(x+1)+\\log_2(x-1)=3$。",

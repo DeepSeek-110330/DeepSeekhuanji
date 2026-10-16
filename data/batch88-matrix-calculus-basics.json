@@ -275,6 +275,30 @@
       "Least squares has a geometric meaning: the optimal residual $r=b-Ax^{*}$ is orthogonal to the column space of A ($A^{\\top}r=0$), so $Ax^{*}$ is the orthogonal projection of b; the solution is unique for full column rank, and the pseudoinverse selects the least-norm solution in the rank-deficient case.",
       "Gradient descent uses only first-order information: too large a step diverges, and slow convergence can be accelerated by the Newton direction $-H^{-1}\\nabla f$, at the cost of forming and inverting H."
     ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "2 - 2*x - 2*y",
+      "fy": "-2*x - 4*y",
+      "xRange": [
+        -1,
+        4
+      ],
+      "yRange": [
+        -3.5,
+        2.5
+      ],
+      "contourExpr": "x^2 + 2*x*y + 2*y^2 - 2*x",
+      "marks": [
+        {
+          "at": [
+            2,
+            -1
+          ],
+          "label": "极小点 (2,−1)"
+        }
+      ],
+      "title": "用矩阵微分求二次型极值：−∇f 的箭头都指向唯一极小点 (2,−1)（Hessian 正定）"
+    },
     "examples": [
       {
         "problem": "取 $A=\\begin{pmatrix}1&1\\\\1&2\\\\1&3\\end{pmatrix}$、$b=(3,1,5)^{\\top}$，最小化 $f(x)=\\|Ax-b\\|^{2}$：写出 $\\nabla f$ 与正规方程，解出 $x^{*}$ 并验证它确实最优。",

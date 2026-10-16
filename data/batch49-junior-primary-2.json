@@ -575,6 +575,65 @@
       "A number with only the two factors 1 and itself is prime, and one with further factors is composite; 1 is neither prime nor composite, and 2 is the only even prime.",
       "The greatest common factor and the least common multiple can be found by listing, by prime factorisation or by short division; for two numbers their product equals the product of the two numbers themselves."
     ],
+    "plot": {
+      "type": "numberline",
+      "range": [
+        0,
+        18
+      ],
+      "points": [
+        {
+          "at": 2,
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 3,
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 4,
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 6,
+          "label": "6：最小公倍数",
+          "color": "#ffd166"
+        },
+        {
+          "at": 8,
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 9,
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 10,
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 12,
+          "color": "#ffd166"
+        },
+        {
+          "at": 14,
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 15,
+          "color": "#ff6b9d"
+        },
+        {
+          "at": 16,
+          "color": "#4cc9f0"
+        },
+        {
+          "at": 18,
+          "color": "#ffd166"
+        }
+      ],
+      "title": "2 的倍数（蓝）与 3 的倍数（粉）的重叠处（黄）是公倍数，最小的是 6"
+    },
     "examples": [
       {
         "problem": "写出 12 的所有因数，并判断 1、2、12 各是质数还是合数。",

@@ -575,6 +575,92 @@
       "Products and sums: r(AB) ≤ min{r(A), r(B)}, with equality if one factor is invertible; and r(A+B) ≤ r(A)+r(B), where equality can fail (take A=E and B=−E).",
       "Rank governs solvability and invertibility: an n×n matrix has full rank iff it is invertible iff |A| ≠ 0; Ax=b is consistent iff r(A)=r(A|b), and the solution is unique when r(A) equals the number of unknowns."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.8,
+        6.8
+      ],
+      "yRange": [
+        -0.9,
+        3.9
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.12)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            6,
+            3
+          ],
+          "color": "#ff6b9d",
+          "width": 3,
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            2,
+            1
+          ],
+          "label": "Ae₁"
+        },
+        {
+          "type": "point",
+          "at": [
+            4,
+            2
+          ],
+          "label": "Ae₂"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.65,
+            0.75
+          ],
+          "text": "单位正方形"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.9,
+            1.55
+          ],
+          "text": "像：一条线段，面积 0"
+        }
+      ],
+      "title": "秩-1 矩阵 A=[[2,4],[1,2]] 把单位正方形压成一条线段：像的面积为 0，r(A)=1 < 2"
+    },
     "examples": [
       {
         "problem": "求 $A=\\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&1&1\\end{pmatrix}$ 的秩。",

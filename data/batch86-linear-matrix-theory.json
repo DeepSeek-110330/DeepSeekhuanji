@@ -395,6 +395,35 @@
       "Courant–Fischer and monotonicity corollaries: every λ_k has a min-max characterization; if A ⪯ B (B − A positive semidefinite), then λ_k(A) ≤ λ_k(B) (Weyl monotonicity).",
       "Interlacing: eigenvalues of an (n−1)×(n−1) principal submatrix interlace those of A (λ_k ≤ μ_k ≤ λ_{k+1}); for an m×m principal submatrix, λ_k(A) ≤ μ_k(B) ≤ λ_{k+n−m}(A)."
     ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "2 + sin(2*x)",
+          "color": "#4cc9f0",
+          "label": "R(θ) = 2 + sin 2θ"
+        },
+        {
+          "expr": "3",
+          "color": "#ff6b9d",
+          "label": "λmax = 3"
+        },
+        {
+          "expr": "1",
+          "color": "#06d6a0",
+          "label": "λmin = 1"
+        }
+      ],
+      "xRange": [
+        0,
+        3.1416
+      ],
+      "yRange": [
+        0.6,
+        3.4
+      ],
+      "title": "瑞利商 R(θ)=2+sin2θ（A=[[2,1],[1,2]] 上的单位向量）：最大值 3=λmax、最小值 1=λmin"
+    },
     "examples": [
       {
         "problem": "设 $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$。直接求特征值，并用 Courant–Fischer 定理验证。",

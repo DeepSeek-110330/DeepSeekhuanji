@@ -1186,6 +1186,35 @@
         "If the outer function is even, the composite is even (provided the domain is symmetric).",
         "A composite can be decomposed into simpler functions, which makes analyzing its properties easier."
       ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "x^2",
+            "color": "#4cc9f0",
+            "label": "g(x) = x²"
+          },
+          {
+            "expr": "2*x+1",
+            "color": "#ff6b9d",
+            "label": "f(u) = 2u + 1"
+          },
+          {
+            "expr": "2*x^2+1",
+            "color": "#06d6a0",
+            "label": "(f∘g)(x) = 2x² + 1"
+          }
+        ],
+        "xRange": [
+          -2.2,
+          2.2
+        ],
+        "yRange": [
+          -1.6,
+          11
+        ],
+        "title": "复合函数：先平方（内层 g(x) = x²）再代入外层 f，得到 (f∘g)(x) = 2x² + 1"
+      },
       "examples": [
         {
           "problem": "已知 $f(x)=x^2+1$，$g(x)=2x-3$，求 $f(g(x))$ 与 $g(f(x))$，并说明两者是否相等。",
@@ -2610,7 +2639,191 @@
         "central-limit-theorem",
         "markov-chain",
         "stationary-distribution"
-      ]
+      ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            200,
+            3.3
+          ],
+          [
+            400,
+            3.17
+          ],
+          [
+            600,
+            3.1667
+          ],
+          [
+            800,
+            3.18
+          ],
+          [
+            1000,
+            3.192
+          ],
+          [
+            1200,
+            3.1633
+          ],
+          [
+            1400,
+            3.1629
+          ],
+          [
+            1600,
+            3.1525
+          ],
+          [
+            1800,
+            3.1422
+          ],
+          [
+            2000,
+            3.146
+          ],
+          [
+            2200,
+            3.1509
+          ],
+          [
+            2400,
+            3.1583
+          ],
+          [
+            2600,
+            3.1462
+          ],
+          [
+            2800,
+            3.1343
+          ],
+          [
+            3000,
+            3.144
+          ],
+          [
+            3200,
+            3.1475
+          ],
+          [
+            3400,
+            3.1576
+          ],
+          [
+            3600,
+            3.1567
+          ],
+          [
+            3800,
+            3.1516
+          ],
+          [
+            4000,
+            3.151
+          ],
+          [
+            4200,
+            3.1495
+          ],
+          [
+            4400,
+            3.1509
+          ],
+          [
+            4600,
+            3.1417
+          ],
+          [
+            4800,
+            3.1475
+          ],
+          [
+            5000,
+            3.1472
+          ],
+          [
+            5200,
+            3.1408
+          ],
+          [
+            5400,
+            3.14
+          ],
+          [
+            5600,
+            3.1429
+          ],
+          [
+            5800,
+            3.1407
+          ],
+          [
+            6000,
+            3.1307
+          ],
+          [
+            6200,
+            3.1355
+          ],
+          [
+            6400,
+            3.1369
+          ],
+          [
+            6600,
+            3.1382
+          ],
+          [
+            6800,
+            3.1376
+          ],
+          [
+            7000,
+            3.1423
+          ],
+          [
+            7200,
+            3.1411
+          ],
+          [
+            7400,
+            3.1362
+          ],
+          [
+            7600,
+            3.1363
+          ],
+          [
+            7800,
+            3.1323
+          ],
+          [
+            8000,
+            3.1345
+          ]
+        ],
+        "pointColor": "#06d6a0",
+        "pointSize": 3.2,
+        "lines": [
+          {
+            "slope": 0,
+            "intercept": 3.1416,
+            "color": "#ffd166",
+            "label": "π = 3.1416"
+          }
+        ],
+        "xRange": [
+          0,
+          8500
+        ],
+        "yRange": [
+          2.95,
+          3.35
+        ],
+        "title": "随机投点估计 π：样本量增大时 4×(圆内点数)/n 收敛到 π"
+      }
     },
     {
       "id": "bootstrap-resampling",
@@ -2685,7 +2898,435 @@
         "标准误",
         "置信区间",
         "非参数统计"
-      ]
+      ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          0.402,
+          2.107
+        ],
+        "yRange": [
+          -31.1,
+          411.7
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0.5197,
+                0
+              ],
+              [
+                0.6177,
+                0
+              ],
+              [
+                0.6177,
+                4
+              ],
+              [
+                0.5197,
+                4
+              ]
+            ],
+            "color": "#4cc9f0",
+            "fill": "rgba(76,201,240,0.20)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0.6177,
+                0
+              ],
+              [
+                0.7157,
+                0
+              ],
+              [
+                0.7157,
+                22
+              ],
+              [
+                0.6177,
+                22
+              ]
+            ],
+            "color": "#4cc9f0",
+            "fill": "rgba(76,201,240,0.20)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0.7157,
+                0
+              ],
+              [
+                0.8136,
+                0
+              ],
+              [
+                0.8136,
+                85
+              ],
+              [
+                0.7157,
+                85
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0.8136,
+                0
+              ],
+              [
+                0.9116,
+                0
+              ],
+              [
+                0.9116,
+                180
+              ],
+              [
+                0.8136,
+                180
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0.9116,
+                0
+              ],
+              [
+                1.0095,
+                0
+              ],
+              [
+                1.0095,
+                236
+              ],
+              [
+                0.9116,
+                236
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.0095,
+                0
+              ],
+              [
+                1.1075,
+                0
+              ],
+              [
+                1.1075,
+                311
+              ],
+              [
+                1.0095,
+                311
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.1075,
+                0
+              ],
+              [
+                1.2054,
+                0
+              ],
+              [
+                1.2054,
+                346
+              ],
+              [
+                1.1075,
+                346
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.2054,
+                0
+              ],
+              [
+                1.3034,
+                0
+              ],
+              [
+                1.3034,
+                282
+              ],
+              [
+                1.2054,
+                282
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.3034,
+                0
+              ],
+              [
+                1.4013,
+                0
+              ],
+              [
+                1.4013,
+                264
+              ],
+              [
+                1.3034,
+                264
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.4013,
+                0
+              ],
+              [
+                1.4993,
+                0
+              ],
+              [
+                1.4993,
+                121
+              ],
+              [
+                1.4013,
+                121
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.4993,
+                0
+              ],
+              [
+                1.5972,
+                0
+              ],
+              [
+                1.5972,
+                63
+              ],
+              [
+                1.4993,
+                63
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.5972,
+                0
+              ],
+              [
+                1.6952,
+                0
+              ],
+              [
+                1.6952,
+                49
+              ],
+              [
+                1.5972,
+                49
+              ]
+            ],
+            "color": "#06d6a0",
+            "fill": "rgba(6,214,160,0.30)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.6952,
+                0
+              ],
+              [
+                1.7931,
+                0
+              ],
+              [
+                1.7931,
+                26
+              ],
+              [
+                1.6952,
+                26
+              ]
+            ],
+            "color": "#4cc9f0",
+            "fill": "rgba(76,201,240,0.20)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.7931,
+                0
+              ],
+              [
+                1.8911,
+                0
+              ],
+              [
+                1.8911,
+                7
+              ],
+              [
+                1.7931,
+                7
+              ]
+            ],
+            "color": "#4cc9f0",
+            "fill": "rgba(76,201,240,0.20)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.8911,
+                0
+              ],
+              [
+                1.989,
+                0
+              ],
+              [
+                1.989,
+                4
+              ],
+              [
+                1.8911,
+                4
+              ]
+            ],
+            "color": "#4cc9f0",
+            "fill": "rgba(76,201,240,0.20)"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0.7536,
+              0
+            ],
+            "to": [
+              0.7536,
+              352.9
+            ],
+            "color": "#ffd166",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.6572,
+              0
+            ],
+            "to": [
+              1.6572,
+              352.9
+            ],
+            "color": "#ffd166",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.1668,
+              0
+            ],
+            "to": [
+              1.1668,
+              352.9
+            ],
+            "color": "#ff6b9d",
+            "dash": true
+          },
+          {
+            "type": "label",
+            "at": [
+              0.7536,
+              373.7
+            ],
+            "text": "2.5% ≈ 0.75",
+            "color": "#ffd166"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.6572,
+              373.7
+            ],
+            "text": "97.5% ≈ 1.66",
+            "color": "#ffd166"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.1668,
+              373.7
+            ],
+            "text": "x̄ ≈ 1.17",
+            "color": "#ff6b9d"
+          }
+        ],
+        "title": "自助分布：2000 次重采样下样本均值的直方图（绿柱 = 95% 百分位区间）"
+      }
     },
     {
       "id": "principal-component-analysis",
@@ -2888,7 +3529,442 @@
         "平稳性",
         "自相关",
         "预测"
-      ]
+      ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            0,
+            0.019
+          ],
+          [
+            1,
+            2.434
+          ],
+          [
+            2,
+            2.591
+          ],
+          [
+            3,
+            3.201
+          ],
+          [
+            4,
+            2.812
+          ],
+          [
+            5,
+            2.531
+          ],
+          [
+            6,
+            0.098
+          ],
+          [
+            7,
+            -0.144
+          ],
+          [
+            8,
+            0.13
+          ],
+          [
+            9,
+            -1.626
+          ],
+          [
+            10,
+            -0.172
+          ],
+          [
+            11,
+            1.453
+          ],
+          [
+            12,
+            1.977
+          ],
+          [
+            13,
+            0.011
+          ],
+          [
+            14,
+            0.415
+          ],
+          [
+            15,
+            2.799
+          ],
+          [
+            16,
+            -1.207
+          ],
+          [
+            17,
+            -1.618
+          ],
+          [
+            18,
+            -0.334
+          ],
+          [
+            19,
+            -0.606
+          ],
+          [
+            20,
+            0.106
+          ],
+          [
+            21,
+            -0.019
+          ],
+          [
+            22,
+            -0.247
+          ],
+          [
+            23,
+            -2.214
+          ],
+          [
+            24,
+            -0.707
+          ],
+          [
+            25,
+            -0.186
+          ],
+          [
+            26,
+            0.677
+          ],
+          [
+            27,
+            0.018
+          ],
+          [
+            28,
+            -1.604
+          ],
+          [
+            29,
+            -1.402
+          ],
+          [
+            30,
+            -2.032
+          ],
+          [
+            31,
+            -0.485
+          ],
+          [
+            32,
+            -0.442
+          ],
+          [
+            33,
+            2.189
+          ],
+          [
+            34,
+            2.086
+          ],
+          [
+            35,
+            0.453
+          ],
+          [
+            36,
+            -0.093
+          ],
+          [
+            37,
+            0.144
+          ],
+          [
+            38,
+            0.51
+          ],
+          [
+            39,
+            -0.237
+          ],
+          [
+            40,
+            -1.547
+          ],
+          [
+            41,
+            -0.389
+          ],
+          [
+            42,
+            0.478
+          ],
+          [
+            43,
+            0.083
+          ],
+          [
+            44,
+            -0.521
+          ],
+          [
+            45,
+            -0.159
+          ],
+          [
+            46,
+            -0.032
+          ],
+          [
+            47,
+            -0.534
+          ],
+          [
+            48,
+            -0.317
+          ],
+          [
+            49,
+            0.401
+          ],
+          [
+            50,
+            0.726
+          ],
+          [
+            51,
+            0.853
+          ],
+          [
+            52,
+            0.171
+          ],
+          [
+            53,
+            -0.529
+          ],
+          [
+            54,
+            -0.735
+          ],
+          [
+            55,
+            -0.435
+          ],
+          [
+            56,
+            -0.76
+          ],
+          [
+            57,
+            -0.155
+          ],
+          [
+            58,
+            0.034
+          ],
+          [
+            59,
+            -0.987
+          ],
+          [
+            60,
+            -0.529
+          ],
+          [
+            61,
+            -0.979
+          ],
+          [
+            62,
+            0.173
+          ],
+          [
+            63,
+            1.104
+          ],
+          [
+            64,
+            1.262
+          ],
+          [
+            65,
+            0.823
+          ],
+          [
+            66,
+            0.734
+          ],
+          [
+            67,
+            -0.112
+          ],
+          [
+            68,
+            0.085
+          ],
+          [
+            69,
+            -0.276
+          ],
+          [
+            70,
+            -0.236
+          ],
+          [
+            71,
+            0.477
+          ],
+          [
+            72,
+            -1.187
+          ],
+          [
+            73,
+            -1.745
+          ],
+          [
+            74,
+            -1.051
+          ],
+          [
+            75,
+            -0.329
+          ],
+          [
+            76,
+            1.021
+          ],
+          [
+            77,
+            1.65
+          ],
+          [
+            78,
+            0.49
+          ],
+          [
+            79,
+            0.149
+          ],
+          [
+            80,
+            0.078
+          ],
+          [
+            81,
+            0.296
+          ],
+          [
+            82,
+            -1.31
+          ],
+          [
+            83,
+            -2.63
+          ],
+          [
+            84,
+            -0.898
+          ],
+          [
+            85,
+            -1.673
+          ],
+          [
+            86,
+            -0.153
+          ],
+          [
+            87,
+            0.442
+          ],
+          [
+            88,
+            1.191
+          ],
+          [
+            89,
+            1.776
+          ],
+          [
+            90,
+            0.197
+          ],
+          [
+            91,
+            -0.668
+          ],
+          [
+            92,
+            0.137
+          ],
+          [
+            93,
+            -1.734
+          ],
+          [
+            94,
+            -2.008
+          ],
+          [
+            95,
+            -1.038
+          ],
+          [
+            96,
+            -0.129
+          ],
+          [
+            97,
+            -0.587
+          ],
+          [
+            98,
+            -0.008
+          ],
+          [
+            99,
+            -0.112
+          ]
+        ],
+        "pointColor": "#4cc9f0",
+        "pointSize": 3.0,
+        "lines": [
+          {
+            "slope": 0,
+            "intercept": 0,
+            "color": "#ffd166",
+            "label": "长期均值 0"
+          },
+          {
+            "slope": 0,
+            "intercept": 1.4,
+            "color": "rgba(179,136,255,0.8)",
+            "label": "±σₓ ≈ ±1.40"
+          },
+          {
+            "slope": 0,
+            "intercept": -1.4,
+            "color": "rgba(179,136,255,0.8)"
+          }
+        ],
+        "xRange": [
+          0,
+          100
+        ],
+        "yRange": [
+          -4.0,
+          4.0
+        ],
+        "title": "AR(1) 模拟轨道（φ = 0.7）：围绕长期均值 0 的均值回复波动"
+      }
     },
     {
       "id": "experimental-design-causality",
@@ -3624,6 +4700,222 @@
         "An even degree sum is only necessary, not sufficient: (3, 3, 3, 1) has sum 10 yet is not graphical; Havel–Hakimi and Erdős–Gallai are the exact criteria.",
         "Isomorphic graphs share the same degree sequence, but not conversely: the 6-cycle C6 and the disjoint union C3 ∪ C3 both have degree sequence (2, 2, 2, 2, 2, 2), yet one is connected and the other is not."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          0.2,
+          10.2
+        ],
+        "yRange": [
+          0.2,
+          3.9
+        ],
+        "elements": [
+          {
+            "type": "segment",
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              3.4,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.4,
+              1
+            ],
+            "to": [
+              3.4,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.4,
+              3.4
+            ],
+            "to": [
+              1,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              1,
+              3.4
+            ],
+            "to": [
+              1,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              6.6,
+              1
+            ],
+            "to": [
+              8.8,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              8.8,
+              1
+            ],
+            "to": [
+              7.7,
+              2.9
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              7.7,
+              2.9
+            ],
+            "to": [
+              6.6,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              8.8,
+              1
+            ],
+            "to": [
+              8.8,
+              2.9
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "A"
+          },
+          {
+            "type": "point",
+            "at": [
+              3.4,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "B"
+          },
+          {
+            "type": "point",
+            "at": [
+              3.4,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "C"
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "D"
+          },
+          {
+            "type": "point",
+            "at": [
+              6.6,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "P"
+          },
+          {
+            "type": "point",
+            "at": [
+              8.8,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "Q"
+          },
+          {
+            "type": "point",
+            "at": [
+              7.7,
+              2.9
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "R"
+          },
+          {
+            "type": "point",
+            "at": [
+              8.8,
+              2.9
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "S"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.2,
+              0.5
+            ],
+            "text": "C₄：每个顶点度数都是 2",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              7.7,
+              0.5
+            ],
+            "text": "右图：度数 2、3、2、1，度数和 8",
+            "size": 11
+          }
+        ],
+        "title": "小图两例：左 C₄ 各点度数为 2；右图度数列 2、3、2、1，度数和 8 = 2×4"
+      },
       "examples": [
         {
           "problem": "判断度序列 $(3, 3, 2, 2, 2)$ 是否可图化；若可图化，构造一个实现该度序列的图，并用握手引理核对边数。",
@@ -3699,6 +4991,277 @@
         "Every tree with n ≥ 2 has at least two leaves (contradiction plus the handshake lemma; see the example); deleting a leaf and its edge leaves a tree, the standard induction step.",
         "A spanning tree exists iff the graph is connected; the spanning trees of the components form a spanning forest. In weighted graphs, Kruskal's (sort edges plus union-find) or Prim's (grow from one vertex) finds a minimum spanning tree in polynomial time, justified by the cut property."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          0.2,
+          10.2
+        ],
+        "yRange": [
+          0.2,
+          3.9
+        ],
+        "elements": [
+          {
+            "type": "segment",
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              3.4,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.4,
+              1
+            ],
+            "to": [
+              3.4,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.4,
+              3.4
+            ],
+            "to": [
+              1,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              1,
+              3.4
+            ],
+            "to": [
+              1,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              3.4,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.4,
+              1
+            ],
+            "to": [
+              1,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.75)",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              6,
+              1
+            ],
+            "to": [
+              8.4,
+              1
+            ],
+            "color": "#06d6a0",
+            "width": 3
+          },
+          {
+            "type": "segment",
+            "from": [
+              8.4,
+              1
+            ],
+            "to": [
+              8.4,
+              3.4
+            ],
+            "color": "#06d6a0",
+            "width": 3
+          },
+          {
+            "type": "segment",
+            "from": [
+              8.4,
+              3.4
+            ],
+            "to": [
+              6,
+              3.4
+            ],
+            "color": "#06d6a0",
+            "width": 3
+          },
+          {
+            "type": "segment",
+            "from": [
+              6,
+              3.4
+            ],
+            "to": [
+              6,
+              1
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 2,
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              6,
+              1
+            ],
+            "to": [
+              8.4,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 2,
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              8.4,
+              1
+            ],
+            "to": [
+              6,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 2,
+            "dash": true
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "A"
+          },
+          {
+            "type": "point",
+            "at": [
+              3.4,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "B"
+          },
+          {
+            "type": "point",
+            "at": [
+              3.4,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "C"
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "D"
+          },
+          {
+            "type": "point",
+            "at": [
+              6,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "A"
+          },
+          {
+            "type": "point",
+            "at": [
+              8.4,
+              1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "B"
+          },
+          {
+            "type": "point",
+            "at": [
+              8.4,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "C"
+          },
+          {
+            "type": "point",
+            "at": [
+              6,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "D"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.2,
+              0.5
+            ],
+            "text": "K₄：4 个顶点、6 条边",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              7.2,
+              0.5
+            ],
+            "text": "生成树（绿）：3 = 4−1 条边，仍连通、无环",
+            "size": 11
+          }
+        ],
+        "title": "K₄ 与它的一棵生成树（绿色 3 = 4−1 条边）：连通、无环，两点间路径唯一"
+      },
       "examples": [
         {
           "problem": "六个城市 A, B, C, D, E, F 之间可修路段的成本（单位：万元）为：AB = 4，AC = 2，BC = 1，BD = 5，CD = 8，CE = 3，DE = 6，EF = 7，DF = 9，BE = 10，AD = 11。求用最少成本把所有城市连成一片的最小生成树与总成本。",
@@ -3774,6 +5337,184 @@
         "A Hamiltonian cycle in a bipartite graph alternates between the two sides, so |L| = |R| is necessary; a Hamiltonian path forces the side sizes to differ by at most 1.",
         "Dirac's and Ore's conditions are sufficient but far from necessary: C5 has a Hamiltonian cycle, yet its minimum degree 2 < 5/2 and every non-adjacent pair has degree sum 4 < 5, so neither condition holds."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          1.0,
+          7.9
+        ],
+        "yRange": [
+          0.2,
+          6.0
+        ],
+        "elements": [
+          {
+            "type": "segment",
+            "from": [
+              2.2,
+              5.0
+            ],
+            "to": [
+              3.76,
+              3.1
+            ],
+            "color": "#4cc9f0",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              2.2,
+              5.0
+            ],
+            "to": [
+              3.84,
+              3.14
+            ],
+            "color": "#4cc9f0",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              2.2,
+              1.0
+            ],
+            "to": [
+              3.76,
+              2.9
+            ],
+            "color": "#4cc9f0",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              2.2,
+              1.0
+            ],
+            "to": [
+              3.84,
+              2.86
+            ],
+            "color": "#4cc9f0",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.9,
+              3.0
+            ],
+            "to": [
+              6.8,
+              1.6
+            ],
+            "color": "#ffd166",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              2.2,
+              5.0
+            ],
+            "to": [
+              6.8,
+              1.6
+            ],
+            "color": "#ffd166",
+            "width": 2
+          },
+          {
+            "type": "segment",
+            "from": [
+              2.2,
+              1.0
+            ],
+            "to": [
+              6.8,
+              1.6
+            ],
+            "color": "#ffd166",
+            "width": 2
+          },
+          {
+            "type": "point",
+            "at": [
+              2.2,
+              5.0
+            ],
+            "color": "#4cc9f0",
+            "r": 4
+          },
+          {
+            "type": "point",
+            "at": [
+              2.2,
+              1.0
+            ],
+            "color": "#4cc9f0",
+            "r": 4
+          },
+          {
+            "type": "point",
+            "at": [
+              3.9,
+              3.0
+            ],
+            "color": "#ff6b9d",
+            "r": 5
+          },
+          {
+            "type": "point",
+            "at": [
+              6.8,
+              1.6
+            ],
+            "color": "#4cc9f0",
+            "r": 4
+          },
+          {
+            "type": "label",
+            "at": [
+              1.75,
+              5.55
+            ],
+            "text": "北岸：3 座桥",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              1.75,
+              0.55
+            ],
+            "text": "南岸：3 座桥",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              2.3,
+              2.75
+            ],
+            "text": "岛 K：5 座桥",
+            "size": 11,
+            "color": "#ff9fc0"
+          },
+          {
+            "type": "label",
+            "at": [
+              6.35,
+              0.9
+            ],
+            "text": "洛姆塞岛：3 座桥",
+            "size": 11
+          }
+        ],
+        "title": "柯尼斯堡七桥：四块陆地度数 5、3、3、3 全为奇数，不能一笔画走完 7 座桥"
+      },
       "examples": [
         {
           "problem": "把哥尼斯堡七桥问题抽象成图：4 个顶点、7 条边的多重图，四个顶点的度数分别为 3, 3, 3, 5。(1) 是否存在经过每座桥恰好一次的路线（欧拉回路或欧拉路径）？(2) 若拆去北岸与中央岛屿之间两座平行桥中的一座，结论如何变化？",
@@ -3849,6 +5590,263 @@
         "Augmenting-path characterization: M is maximum iff no augmenting path for M exists (an alternating path whose two ends are unsaturated). This yields the polynomial-time Hungarian algorithm and underlies the proof of Hall's theorem.",
         "Duality and algorithms: in bipartite graphs the maximum matching size equals the minimum vertex cover size (König), matching the max-flow min-cut correspondence; hence every k-regular bipartite graph such as K3,3 has a perfect matching. General graphs lack this duality (C5: maximum matching 2, minimum vertex cover 3)."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          0.3,
+          6.1
+        ],
+        "yRange": [
+          0.2,
+          4.4
+        ],
+        "elements": [
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              3.4
+            ],
+            "to": [
+              5.2,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              3.4
+            ],
+            "to": [
+              5.2,
+              2.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              3.4
+            ],
+            "to": [
+              5.2,
+              1.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              2.4
+            ],
+            "to": [
+              5.2,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              2.4
+            ],
+            "to": [
+              5.2,
+              2.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              2.4
+            ],
+            "to": [
+              5.2,
+              1.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              1.4
+            ],
+            "to": [
+              5.2,
+              3.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              1.4
+            ],
+            "to": [
+              5.2,
+              2.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              1.4
+            ],
+            "to": [
+              5.2,
+              1.4
+            ],
+            "color": "rgba(160, 175, 220, 0.42)",
+            "width": 1.5
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              3.4
+            ],
+            "to": [
+              5.2,
+              3.4
+            ],
+            "color": "#06d6a0",
+            "width": 3
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              2.4
+            ],
+            "to": [
+              5.2,
+              2.4
+            ],
+            "color": "#06d6a0",
+            "width": 3
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              1.4
+            ],
+            "to": [
+              5.2,
+              1.4
+            ],
+            "color": "#06d6a0",
+            "width": 3
+          },
+          {
+            "type": "point",
+            "at": [
+              1.2,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "L₁"
+          },
+          {
+            "type": "point",
+            "at": [
+              1.2,
+              2.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "L₂"
+          },
+          {
+            "type": "point",
+            "at": [
+              1.2,
+              1.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "L₃"
+          },
+          {
+            "type": "point",
+            "at": [
+              5.2,
+              3.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "R₁"
+          },
+          {
+            "type": "point",
+            "at": [
+              5.2,
+              2.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "R₂"
+          },
+          {
+            "type": "point",
+            "at": [
+              5.2,
+              1.4
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "R₃"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.2,
+              3.95
+            ],
+            "text": "X 部",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              5.2,
+              3.95
+            ],
+            "text": "Y 部",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              3.2,
+              0.55
+            ],
+            "text": "绿色 3 条边两两不相邻，覆盖全部 6 个顶点：完美匹配",
+            "size": 11
+          }
+        ],
+        "title": "K₃,₃ 的一个完美匹配（绿色 3 条边）：两两不相邻且覆盖全部 6 个顶点"
+      },
       "examples": [
         {
           "problem": "五名学生甲、乙、丙、丁、戊申请五个岗位 1, 2, 3, 4, 5，各人会做的岗位为：甲 {1, 2}，乙 {2, 3}，丙 {1, 3, 4}，丁 {4, 5}，戊 {5}。能否安排每人恰好做一项自己会做的岗位、且每个岗位至多一人？用霍尔定理判断并给出一种安排。",
@@ -3924,6 +5922,135 @@
         "K5 and K3,3 are the two basic non-planar graphs: K5 is killed by e ≤ 3v − 6, while K3,3 needs the bipartite bound e ≤ 2v − 4. By Kuratowski's theorem every non-planar graph contains a subdivision of one of them, so non-planarity always reduces to these two.",
         "All five Platonic solids obey Euler's formula: tetrahedron 4 − 6 + 4 = 2, cube 8 − 12 + 6 = 2, octahedron 6 − 12 + 8 = 2, dodecahedron 20 − 30 + 12 = 2, icosahedron 12 − 30 + 20 = 2 — every count rechecked ✓."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -0.3,
+          5.9
+        ],
+        "yRange": [
+          0,
+          4.9
+        ],
+        "elements": [
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0.5,
+                0.7
+              ],
+              [
+                5.1,
+                0.7
+              ],
+              [
+                2.8,
+                1.9
+              ]
+            ],
+            "fill": "rgba(76, 201, 240, 0.18)",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                5.1,
+                0.7
+              ],
+              [
+                2.8,
+                4.1
+              ],
+              [
+                2.8,
+                1.9
+              ]
+            ],
+            "fill": "rgba(255, 107, 157, 0.18)",
+            "color": "#ff6b9d"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                2.8,
+                4.1
+              ],
+              [
+                0.5,
+                0.7
+              ],
+              [
+                2.8,
+                1.9
+              ]
+            ],
+            "fill": "rgba(6, 214, 160, 0.18)",
+            "color": "#06d6a0"
+          },
+          {
+            "type": "point",
+            "at": [
+              0.5,
+              0.7
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "A"
+          },
+          {
+            "type": "point",
+            "at": [
+              5.1,
+              0.7
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "B"
+          },
+          {
+            "type": "point",
+            "at": [
+              2.8,
+              4.1
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "C"
+          },
+          {
+            "type": "point",
+            "at": [
+              2.8,
+              1.9
+            ],
+            "color": "#4cc9f0",
+            "r": 4,
+            "label": "D"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.3,
+              0.35
+            ],
+            "text": "v − e + f = 4 − 6 + 4 = 2",
+            "size": 11
+          },
+          {
+            "type": "label",
+            "at": [
+              2.8,
+              4.55
+            ],
+            "text": "外部面（第 4 个面）",
+            "size": 11
+          }
+        ],
+        "title": "K₄ 的平面画法：v = 4、e = 6、f = 4（含外部面），满足 v − e + f = 2"
+      },
       "examples": [
         {
           "problem": "正方体的顶点与棱构成图 G：8 个顶点、12 条边、每个顶点度 3。(1) 用欧拉公式求面数；(2) 验证各面度数之和等于 2e；(3) 比较 e ≤ 3v − 6 与二部图加强版 e ≤ 2v − 4，哪个取等号？为什么？",
@@ -4152,6 +6279,184 @@
         "Combinatorial consequences: maximum bipartite matching becomes a max-flow problem (all capacities 1); integer flows are matchings and min cuts are vertex covers, so König's theorem (maximum matching = minimum vertex cover) is a special case; more generally Menger's theorem states that the maximum number of edge-disjoint s–t paths equals the minimum s–t cut capacity.",
         "Duality: max flow is a linear program whose dual is exactly the min cut problem, so strong duality is the theorem; complementary slackness yields optimality certificates — a flow is optimal iff some cut has every S→T arc saturated and every T→S arc empty."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          0,
+          7.6
+        ],
+        "yRange": [
+          -0.2,
+          4.8
+        ],
+        "elements": [
+          {
+            "type": "segment",
+            "from": [
+              0.8,
+              2.2
+            ],
+            "to": [
+              3.6,
+              4.0
+            ],
+            "color": "#4cc9f0",
+            "width": 2,
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0.8,
+              2.2
+            ],
+            "to": [
+              3.6,
+              0.4
+            ],
+            "color": "#4cc9f0",
+            "width": 2,
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.6,
+              4.0
+            ],
+            "to": [
+              3.6,
+              0.4
+            ],
+            "color": "#ff6b9d",
+            "width": 2,
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.6,
+              4.0
+            ],
+            "to": [
+              6.6,
+              2.2
+            ],
+            "color": "#4cc9f0",
+            "width": 2,
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              3.6,
+              0.4
+            ],
+            "to": [
+              6.6,
+              2.2
+            ],
+            "color": "#4cc9f0",
+            "width": 2,
+            "arrow": true
+          },
+          {
+            "type": "point",
+            "at": [
+              0.8,
+              2.2
+            ],
+            "color": "#ffd166",
+            "r": 5,
+            "label": "s"
+          },
+          {
+            "type": "point",
+            "at": [
+              3.6,
+              4.0
+            ],
+            "color": "#ffd166",
+            "r": 5,
+            "label": "v₁"
+          },
+          {
+            "type": "point",
+            "at": [
+              3.6,
+              0.4
+            ],
+            "color": "#ffd166",
+            "r": 5,
+            "label": "v₂"
+          },
+          {
+            "type": "point",
+            "at": [
+              6.6,
+              2.2
+            ],
+            "color": "#ffd166",
+            "r": 5,
+            "label": "t"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.15,
+              3.5
+            ],
+            "text": "3/3",
+            "size": 12
+          },
+          {
+            "type": "label",
+            "at": [
+              2.15,
+              0.9
+            ],
+            "text": "2/2",
+            "size": 12
+          },
+          {
+            "type": "label",
+            "at": [
+              4.3,
+              2.2
+            ],
+            "text": "1/1",
+            "size": 12
+          },
+          {
+            "type": "label",
+            "at": [
+              5.1,
+              3.5
+            ],
+            "text": "2/2",
+            "size": 12
+          },
+          {
+            "type": "label",
+            "at": [
+              5.1,
+              0.9
+            ],
+            "text": "3/3",
+            "size": 12
+          },
+          {
+            "type": "label",
+            "at": [
+              3.0,
+              4.6
+            ],
+            "text": "最大流 = 最小割 = 5",
+            "size": 11
+          }
+        ],
+        "title": "小流网络：边标「流量/容量」，最大流 = 最小割 = 5（割 {s} 容量 3+2）"
+      },
       "examples": [
         {
           "problem": "网络顶点为 $s,v_1,v_2,v_3,v_4,t$，容量：$s\\to v_1:16$，$s\\to v_2:13$，$v_1\\to v_2:10$，$v_2\\to v_1:4$，$v_1\\to v_3:12$，$v_3\\to v_2:9$，$v_2\\to v_4:14$，$v_4\\to v_3:7$，$v_3\\to t:20$，$v_4\\to t:4$。用增广路求最大流，再找一个最小割验证定理。",
@@ -13049,6 +15354,44 @@
         "For different bases, take logarithms of both sides, exploiting the exponential–logarithm equivalence",
         "Exponentials are always positive, so $a^{f(x)}=b$ has no solution when $b\\le 0$"
       ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "2^x",
+            "color": "#4cc9f0",
+            "label": "y = 2^x（单调递增）"
+          },
+          {
+            "expr": "0.5^x",
+            "color": "#ff6b9d",
+            "label": "y = (1/2)^x（单调递减）"
+          },
+          {
+            "expr": "8",
+            "color": "#ffd166",
+            "label": "y = 8"
+          }
+        ],
+        "fills": [
+          {
+            "expr": "2^x - 8",
+            "from": 3,
+            "to": 4.6,
+            "base": 0,
+            "color": "#06d6a0"
+          }
+        ],
+        "xRange": [
+          -2.5,
+          4.6
+        ],
+        "yRange": [
+          -0.6,
+          11.5
+        ],
+        "title": "解 2^x = 8：递增曲线与 y = 8 交于 x = 3；绿色区域：2^x ≥ 8 ⟺ x ≥ 3"
+      },
       "examples": [
         {
           "problem": "解方程 $4^{x} - 5\\cdot 2^{x} + 4 = 0$。",
@@ -13129,6 +15472,35 @@
         "The laws apply to positive factors only: $\\log_a(M+N)\\neq \\log_a M+\\log_a N$",
         "The change-of-base formula $\\log_a N=\\frac{\\log_c N}{\\log_c a}$ converts every base to a common one"
       ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "2^x",
+            "color": "#4cc9f0",
+            "label": "y = 2^x"
+          },
+          {
+            "expr": "log(x)/log(2)",
+            "color": "#ff6b9d",
+            "label": "y = log₂ x"
+          },
+          {
+            "expr": "x",
+            "color": "#ffd166",
+            "label": "y = x（对称轴）"
+          }
+        ],
+        "xRange": [
+          -3.4,
+          6
+        ],
+        "yRange": [
+          -3.4,
+          6
+        ],
+        "title": "y = 2^x 与 y = log₂ x 互为反函数：两条曲线关于直线 y = x 对称"
+      },
       "examples": [
         {
           "problem": "计算 $\\log_2 8 + \\lg 100 - \\ln e^3$。",
@@ -13317,6 +15689,35 @@
         "It is an identity between the functions $\\log_a x$ and $\\log_c x$ valid for all $x>0$",
         "For reciprocal base–argument pairs such as $\\log_2 3$ and $\\log_3 2$ the product is always 1"
       ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "log(x)/log(2)",
+            "color": "#4cc9f0",
+            "label": "log₂ x = ln x / ln 2"
+          },
+          {
+            "expr": "log(x)",
+            "color": "#ff6b9d",
+            "label": "ln x"
+          },
+          {
+            "expr": "log(x)/log(10)",
+            "color": "#06d6a0",
+            "label": "log₁₀ x = ln x / ln 10"
+          }
+        ],
+        "xRange": [
+          0,
+          9
+        ],
+        "yRange": [
+          -4.5,
+          4.5
+        ],
+        "title": "换底公式：不同底的对数曲线只差常数倍（log₂x / log₁₀x = log₂10 ≈ 3.32）"
+      },
       "examples": [
         {
           "problem": "计算 $\\log_3 5\\cdot\\log_5 9$。",
@@ -13400,6 +15801,30 @@
         "In inequalities the base rules the direction: unchanged for $a>1$, reversed for $0<a<1$",
         "Substituting $t=\\log_a x$ turns awkward logarithmic equations into quadratics, then back-substitute $x=a^t$"
       ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "log(x-1)/log(2)",
+            "color": "#4cc9f0",
+            "label": "y = log₂(x − 1)，定义域 x > 1"
+          },
+          {
+            "expr": "3",
+            "color": "#ffd166",
+            "label": "y = 3"
+          }
+        ],
+        "xRange": [
+          -1.5,
+          11.5
+        ],
+        "yRange": [
+          -4,
+          5
+        ],
+        "title": "解 log₂(x − 1) = 3：曲线与 y = 3 交于 x = 9（须先保证真数 x − 1 > 0）"
+      },
       "examples": [
         {
           "problem": "解方程 $\\log_2(x+1)+\\log_2(x-1)=3$。",
@@ -15000,7 +17425,36 @@
         "normal-distribution",
         "discrete-distributions",
         "central-limit-theorem"
-      ]
+      ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "exp(x^2/2)",
+            "color": "#4cc9f0",
+            "label": "N(0,1)：exp(t²/2)"
+          },
+          {
+            "expr": "1/(1-x)",
+            "color": "#ff6b9d",
+            "label": "Exp(1)：1/(1−t)"
+          },
+          {
+            "expr": "exp(E^x-1)",
+            "color": "#06d6a0",
+            "label": "P(1)：exp(eᵗ−1)"
+          }
+        ],
+        "xRange": [
+          -1.5,
+          0.8
+        ],
+        "yRange": [
+          0,
+          5.4
+        ],
+        "title": "矩母函数：N(0,1)、Exp(1)、P(1) 都过 M(0) = 1，指数分布在 t → 1⁻ 处发散"
+      }
     },
     {
       "id": "law-of-large-numbers",
@@ -15789,7 +18243,36 @@
         "normal-distribution",
         "regression-analysis",
         "continuous-distributions"
-      ]
+      ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "0.5*exp(-x/2)",
+            "color": "#4cc9f0",
+            "label": "k = 2"
+          },
+          {
+            "expr": "0.25*x*exp(-x/2)",
+            "color": "#06d6a0",
+            "label": "k = 4"
+          },
+          {
+            "expr": "x^3*exp(-x/2)/96",
+            "color": "#ff6b9d",
+            "label": "k = 8"
+          }
+        ],
+        "xRange": [
+          0,
+          18
+        ],
+        "yRange": [
+          0,
+          0.55
+        ],
+        "title": "χ² 分布密度：自由度 k = 2、4、8，k 越大峰值越靠右、曲线越平缓"
+      }
     },
     {
       "id": "regression-analysis",
@@ -23672,7 +26155,296 @@
         "banach-space",
         "inner-product-space",
         "vector"
-      ]
+      ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -2.6064,
+          2.6064
+        ],
+        "yRange": [
+          -1.44,
+          1.44
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                -1,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                -1,
+                1
+              ]
+            ],
+            "color": "#ff6b9d",
+            "fill": "rgba(255,107,157,0.07)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                0.9914,
+                0.1305
+              ],
+              [
+                0.9659,
+                0.2588
+              ],
+              [
+                0.9239,
+                0.3827
+              ],
+              [
+                0.866,
+                0.5
+              ],
+              [
+                0.7934,
+                0.6088
+              ],
+              [
+                0.7071,
+                0.7071
+              ],
+              [
+                0.6088,
+                0.7934
+              ],
+              [
+                0.5,
+                0.866
+              ],
+              [
+                0.3827,
+                0.9239
+              ],
+              [
+                0.2588,
+                0.9659
+              ],
+              [
+                0.1305,
+                0.9914
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                -0.1305,
+                0.9914
+              ],
+              [
+                -0.2588,
+                0.9659
+              ],
+              [
+                -0.3827,
+                0.9239
+              ],
+              [
+                -0.5,
+                0.866
+              ],
+              [
+                -0.6088,
+                0.7934
+              ],
+              [
+                -0.7071,
+                0.7071
+              ],
+              [
+                -0.7934,
+                0.6088
+              ],
+              [
+                -0.866,
+                0.5
+              ],
+              [
+                -0.9239,
+                0.3827
+              ],
+              [
+                -0.9659,
+                0.2588
+              ],
+              [
+                -0.9914,
+                0.1305
+              ],
+              [
+                -1.0,
+                0.0
+              ],
+              [
+                -0.9914,
+                -0.1305
+              ],
+              [
+                -0.9659,
+                -0.2588
+              ],
+              [
+                -0.9239,
+                -0.3827
+              ],
+              [
+                -0.866,
+                -0.5
+              ],
+              [
+                -0.7934,
+                -0.6088
+              ],
+              [
+                -0.7071,
+                -0.7071
+              ],
+              [
+                -0.6088,
+                -0.7934
+              ],
+              [
+                -0.5,
+                -0.866
+              ],
+              [
+                -0.3827,
+                -0.9239
+              ],
+              [
+                -0.2588,
+                -0.9659
+              ],
+              [
+                -0.1305,
+                -0.9914
+              ],
+              [
+                -0.0,
+                -1.0
+              ],
+              [
+                0.1305,
+                -0.9914
+              ],
+              [
+                0.2588,
+                -0.9659
+              ],
+              [
+                0.3827,
+                -0.9239
+              ],
+              [
+                0.5,
+                -0.866
+              ],
+              [
+                0.6088,
+                -0.7934
+              ],
+              [
+                0.7071,
+                -0.7071
+              ],
+              [
+                0.7934,
+                -0.6088
+              ],
+              [
+                0.866,
+                -0.5
+              ],
+              [
+                0.9239,
+                -0.3827
+              ],
+              [
+                0.9659,
+                -0.2588
+              ],
+              [
+                0.9914,
+                -0.1305
+              ]
+            ],
+            "color": "#4cc9f0",
+            "fill": "rgba(76,201,240,0.10)"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                -1
+              ]
+            ],
+            "color": "#ffd166",
+            "fill": "rgba(255,209,102,0.12)"
+          },
+          {
+            "type": "label",
+            "at": [
+              -1.25,
+              -0.3
+            ],
+            "text": "ℓ¹",
+            "color": "#ffd166"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.22,
+              -0.3
+            ],
+            "text": "ℓ²",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.32,
+              1.14
+            ],
+            "text": "ℓ∞",
+            "color": "#ff6b9d"
+          }
+        ],
+        "title": "同一半径下的三个单位球：ℓ¹ 菱形 ⊂ ℓ² 圆 ⊂ ℓ∞ 正方形"
+      }
     },
     {
       "id": "banach-space",
@@ -23834,7 +26606,129 @@
         "orthogonality-projection",
         "lp-spaces",
         "fourier-series"
-      ]
+      ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -0.582,
+          3.4
+        ],
+        "yRange": [
+          -0.25,
+          1.95
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "segment",
+            "from": [
+              -0.45,
+              -0.225
+            ],
+            "to": [
+              3.3,
+              1.65
+            ],
+            "color": "#ffd166"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1.2,
+              0.6
+            ],
+            "color": "#06d6a0",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0.6,
+              1.8
+            ],
+            "color": "#4cc9f0",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.2,
+              0.6
+            ],
+            "to": [
+              0.6,
+              1.8
+            ],
+            "color": "#ff6b9d",
+            "dash": true
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.2,
+                0.6
+              ],
+              [
+                1.3968,
+                0.6984
+              ],
+              [
+                1.2984,
+                0.8952
+              ]
+            ],
+            "color": "#ff6b9d"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.55,
+              1.62
+            ],
+            "text": "W = span{(2,1)}",
+            "color": "#ffd166"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.72,
+              1.8
+            ],
+            "text": "v",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.0,
+              0.28
+            ],
+            "text": "p = proj_W v",
+            "color": "#06d6a0"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.05,
+              1.66
+            ],
+            "text": "v − p ⊥ W",
+            "color": "#ff6b9d"
+          }
+        ],
+        "title": "v 到子空间 W = span{(2,1)} 的正交投影：残差 v − p 与 W 垂直"
+      }
     },
     {
       "id": "orthogonality-projection",
@@ -24616,7 +27510,137 @@
         "fredholm-alternative",
         "banach-space",
         "orthonormal-basis"
-      ]
+      ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            1,
+            1.0
+          ],
+          [
+            2,
+            0.7071
+          ],
+          [
+            3,
+            0.5774
+          ],
+          [
+            4,
+            0.5
+          ],
+          [
+            5,
+            0.4472
+          ],
+          [
+            6,
+            0.4082
+          ],
+          [
+            7,
+            0.378
+          ],
+          [
+            8,
+            0.3536
+          ],
+          [
+            9,
+            0.3333
+          ],
+          [
+            10,
+            0.3162
+          ],
+          [
+            11,
+            0.3015
+          ],
+          [
+            12,
+            0.2887
+          ],
+          [
+            13,
+            0.2774
+          ],
+          [
+            14,
+            0.2673
+          ],
+          [
+            15,
+            0.2582
+          ],
+          [
+            16,
+            0.25
+          ],
+          [
+            17,
+            0.2425
+          ],
+          [
+            18,
+            0.2357
+          ],
+          [
+            19,
+            0.2294
+          ],
+          [
+            20,
+            0.2236
+          ],
+          [
+            21,
+            0.2182
+          ],
+          [
+            22,
+            0.2132
+          ],
+          [
+            23,
+            0.2085
+          ],
+          [
+            24,
+            0.2041
+          ]
+        ],
+        "pointColor": "#06d6a0",
+        "pointSize": 3.4,
+        "lines": [
+          {
+            "slope": 0,
+            "intercept": 0,
+            "color": "#ffd166",
+            "label": "sₙ → 0"
+          }
+        ],
+        "marks": [
+          {
+            "at": [
+              1,
+              1
+            ],
+            "label": "s₁ = ‖T‖ = 1",
+            "color": "#ff6b9d"
+          }
+        ],
+        "xRange": [
+          0,
+          25
+        ],
+        "yRange": [
+          -0.04,
+          1.12
+        ],
+        "title": "紧算子的奇异值递减序列：sₙ = 1/√n，唯一聚点 0"
+      }
     },
     {
       "id": "spectrum",
@@ -24698,7 +27722,113 @@
         "spectral-theorem",
         "open-mapping",
         "banach-space"
-      ]
+      ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.5657,
+            0.5657
+          ],
+          [
+            0.0,
+            0.64
+          ],
+          [
+            -0.362,
+            0.362
+          ],
+          [
+            -0.4096,
+            0.0
+          ],
+          [
+            -0.2317,
+            -0.2317
+          ],
+          [
+            -0.0,
+            -0.2621
+          ],
+          [
+            0.1483,
+            -0.1483
+          ],
+          [
+            0.1678,
+            -0.0
+          ],
+          [
+            0.0949,
+            0.0949
+          ],
+          [
+            0.0,
+            0.1074
+          ],
+          [
+            -0.0607,
+            0.0607
+          ],
+          [
+            -0.0687,
+            0.0
+          ],
+          [
+            -0.0389,
+            -0.0389
+          ],
+          [
+            -0.0,
+            -0.044
+          ],
+          [
+            0.0249,
+            -0.0249
+          ],
+          [
+            0.0281,
+            -0.0
+          ],
+          [
+            0.0159,
+            0.0159
+          ],
+          [
+            0.0,
+            0.018
+          ],
+          [
+            -0.0102,
+            0.0102
+          ]
+        ],
+        "pointColor": "#4cc9f0",
+        "pointSize": 4.2,
+        "marks": [
+          {
+            "at": [
+              1,
+              0
+            ],
+            "label": "λ₀ = 1 = ‖T‖",
+            "color": "#ffd166"
+          }
+        ],
+        "xRange": [
+          -2.0755,
+          2.0755
+        ],
+        "yRange": [
+          -1.13,
+          1.13
+        ],
+        "title": "紧正规算子谱点示意：λₙ = 0.8ⁿe^(inπ/4)，以 0 为唯一聚点"
+      }
     },
     {
       "id": "spectral-theorem",
@@ -35614,6 +38744,38 @@
         "We read and write numbers starting from the highest place: when a place has no unit we write 0 to hold it; when reading, several middle zeros are read as a single 'zero' and trailing zeros are not read.",
         "0 is the smallest natural number and means 'none at all'; the highest place of a written number cannot be 0, for 035 is really just 35."
       ],
+      "plot": {
+        "type": "numberline",
+        "range": [
+          0,
+          12
+        ],
+        "points": [
+          {
+            "at": 0,
+            "label": "0",
+            "color": "#b388ff"
+          },
+          {
+            "at": 9,
+            "label": "9",
+            "color": "#ffd166"
+          },
+          {
+            "at": 10,
+            "label": "10",
+            "color": "#06d6a0"
+          }
+        ],
+        "intervals": [
+          {
+            "from": 9,
+            "to": 10,
+            "color": "#4cc9f0"
+          }
+        ],
+        "title": "满十进一：9 再添 1 就是 10——个位写 0、十位进 1，10 就是「1 个十」"
+      },
       "examples": [
         {
           "problem": "在 6403 中，数字 4 在哪一位上？它表示多少？",
@@ -35883,6 +39045,26 @@
         "Brackets in different places usually give different results: (3+4)×5=35, while 3+4×5=23.",
         "Zero in a mixed expression also follows the order: 0 can never be a divisor, and adding or subtracting 0 does not change a number."
       ],
+      "plot": {
+        "type": "numberline",
+        "range": [
+          10,
+          20
+        ],
+        "points": [
+          {
+            "at": 13,
+            "label": "3+5×2=13",
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 16,
+            "label": "(3+5)×2=16",
+            "color": "#ff6b9d"
+          }
+        ],
+        "title": "先乘除后加减：3 + 5×2 = 3 + 10 = 13；有括号先算括号：(3 + 5)×2 = 16"
+      },
       "examples": [
         {
           "problem": "计算 6 + 2 × 5。",
@@ -36552,6 +39734,65 @@
         "A number with only the two factors 1 and itself is prime, and one with further factors is composite; 1 is neither prime nor composite, and 2 is the only even prime.",
         "The greatest common factor and the least common multiple can be found by listing, by prime factorisation or by short division; for two numbers their product equals the product of the two numbers themselves."
       ],
+      "plot": {
+        "type": "numberline",
+        "range": [
+          0,
+          18
+        ],
+        "points": [
+          {
+            "at": 2,
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 3,
+            "color": "#ff6b9d"
+          },
+          {
+            "at": 4,
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 6,
+            "label": "6：最小公倍数",
+            "color": "#ffd166"
+          },
+          {
+            "at": 8,
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 9,
+            "color": "#ff6b9d"
+          },
+          {
+            "at": 10,
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 12,
+            "color": "#ffd166"
+          },
+          {
+            "at": 14,
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 15,
+            "color": "#ff6b9d"
+          },
+          {
+            "at": 16,
+            "color": "#4cc9f0"
+          },
+          {
+            "at": 18,
+            "color": "#ffd166"
+          }
+        ],
+        "title": "2 的倍数（蓝）与 3 的倍数（粉）的重叠处（黄）是公倍数，最小的是 6"
+      },
       "examples": [
         {
           "problem": "写出 12 的所有因数，并判断 1、2、12 各是质数还是合数。",
@@ -46271,7 +49512,129 @@
         "mittag-leffler",
         "laurent-series",
         "residue"
-      ]
+      ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.9239,
+            0.3827
+          ],
+          [
+            0.7071,
+            0.7071
+          ],
+          [
+            0.3827,
+            0.9239
+          ],
+          [
+            0.0,
+            1.0
+          ],
+          [
+            -0.3827,
+            0.9239
+          ],
+          [
+            -0.7071,
+            0.7071
+          ],
+          [
+            -0.9239,
+            0.3827
+          ],
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            -0.9239,
+            -0.3827
+          ],
+          [
+            -0.7071,
+            -0.7071
+          ],
+          [
+            -0.3827,
+            -0.9239
+          ],
+          [
+            -0.0,
+            -1.0
+          ],
+          [
+            0.3827,
+            -0.9239
+          ],
+          [
+            0.7071,
+            -0.7071
+          ],
+          [
+            0.9239,
+            -0.3827
+          ]
+        ],
+        "pointColor": "rgba(150,165,205,0.55)",
+        "pointSize": 2.2,
+        "marks": [
+          {
+            "at": [
+              1.0,
+              0.0
+            ],
+            "label": "z = 1",
+            "color": "#4cc9f0"
+          },
+          {
+            "at": [
+              -0.5,
+              0.866
+            ],
+            "label": "ω",
+            "color": "#4cc9f0"
+          },
+          {
+            "at": [
+              -0.5,
+              -0.866
+            ],
+            "label": "ω̄",
+            "color": "#4cc9f0"
+          },
+          {
+            "at": [
+              0,
+              1
+            ],
+            "label": "极点 i",
+            "color": "#ff6b9d"
+          },
+          {
+            "at": [
+              0,
+              -1
+            ],
+            "label": "极点 −i",
+            "color": "#ff6b9d"
+          }
+        ],
+        "xRange": [
+          -2.5714,
+          2.5714
+        ],
+        "yRange": [
+          -1.4,
+          1.4
+        ],
+        "title": "亚纯函数 (z³−1)/(z²+1)：零点为三个立方根、极点为 ±i（都在单位圆上）"
+      }
     },
     {
       "id": "mittag-leffler",
@@ -63019,6 +66382,85 @@
         "Bordering (raising the order): add one row and one column so that the enlarged determinant fits a known pattern — typically completing a Vandermonde and then comparing powers of a parameter t — provided the link back to the original determinant is kept explicit.",
         "Red line: **there is no diagonal rule beyond order three**; an order-n determinant has n! terms, so hand computation always goes through properties, cofactor expansion or the block-triangular identity."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -0.8,
+          4.4
+        ],
+        "yRange": [
+          -0.7,
+          3.6
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "fill": "rgba(76,201,240,0.15)",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "fill": "rgba(255,107,157,0.15)",
+            "color": "#ff6b9d"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.3,
+              0.8
+            ],
+            "text": "S"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.6,
+              1.45
+            ],
+            "text": "T(S)"
+          }
+        ],
+        "title": "行列式的几何意义：A=[[2,1],[1,2]]（|det A|=3）把面积 1 的单位正方形映成面积 3 的平行四边形"
+      },
       "examples": [
         {
           "problem": "用化三角形的方法计算 $D = \\begin{vmatrix} 1 & 4 & 5 & 4 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & 1 & 3 & 1 \\\\ 0 & 0 & 2 & 4 \\end{vmatrix}$（四阶，注意没有对角线法则可用）。",
@@ -63620,6 +67062,92 @@
         "Products and sums: r(AB) ≤ min{r(A), r(B)}, with equality if one factor is invertible; and r(A+B) ≤ r(A)+r(B), where equality can fail (take A=E and B=−E).",
         "Rank governs solvability and invertibility: an n×n matrix has full rank iff it is invertible iff |A| ≠ 0; Ax=b is consistent iff r(A)=r(A|b), and the solution is unique when r(A) equals the number of unknowns."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -0.8,
+          6.8
+        ],
+        "yRange": [
+          -0.9,
+          3.9
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "fill": "rgba(76,201,240,0.12)",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              6,
+              3
+            ],
+            "color": "#ff6b9d",
+            "width": 3,
+            "arrow": true
+          },
+          {
+            "type": "point",
+            "at": [
+              2,
+              1
+            ],
+            "label": "Ae₁"
+          },
+          {
+            "type": "point",
+            "at": [
+              4,
+              2
+            ],
+            "label": "Ae₂"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.65,
+              0.75
+            ],
+            "text": "单位正方形"
+          },
+          {
+            "type": "label",
+            "at": [
+              3.9,
+              1.55
+            ],
+            "text": "像：一条线段，面积 0"
+          }
+        ],
+        "title": "秩-1 矩阵 A=[[2,4],[1,2]] 把单位正方形压成一条线段：像的面积为 0，r(A)=1 < 2"
+      },
       "examples": [
         {
           "problem": "求 $A=\\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&1&1\\end{pmatrix}$ 的秩。",
@@ -64336,6 +67864,72 @@
         "Once a fundamental system is fixed, the general solution is an arbitrary linear combination of it; conversely the coefficients expressing a given solution are unique, because a fundamental system is linearly independent.",
         "Differences, finite sums and scalar multiples of solutions are again solutions; taken together they fill the entire solution space."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -2.9,
+          2.9
+        ],
+        "yRange": [
+          -1.7,
+          1.7
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "segment",
+            "from": [
+              2.4,
+              -1.2
+            ],
+            "to": [
+              -2.4,
+              1.2
+            ],
+            "color": "#4cc9f0",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              -2,
+              1
+            ],
+            "color": "#ff6b9d",
+            "arrow": true
+          },
+          {
+            "type": "point",
+            "at": [
+              0,
+              0
+            ]
+          },
+          {
+            "type": "label",
+            "at": [
+              -1.45,
+              1.5
+            ],
+            "text": "η=(−2,1)ᵀ：基础解系"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.05,
+              -0.9
+            ],
+            "text": "x = kη（k 任意）"
+          }
+        ],
+        "title": "齐次方程组 x+2y=0 的解空间：过原点的直线，维数 = n−r(A) = 2−1 = 1"
+      },
       "examples": [
         {
           "problem": "求齐次方程组\n$$\\begin{cases}x_1+x_2+x_3+x_4=0,\\\\ x_1+2x_2+3x_3+4x_4=0\\end{cases}$$\n的基础解系与通解。",
@@ -64411,6 +68005,99 @@
         "Particular and homogeneous solutions combine freely: a particular solution plus any homogeneous solution is again a solution, and the difference of two solutions is homogeneous. Knowing a fundamental system η₁,…,η_{n−r} and one particular solution x* determines the whole solution set.",
         "Recipe: (i) row-reduce the augmented matrix and read off consistency and pivots from the two ranks; (ii) solve the associated homogeneous system for a fundamental system (setting free variables to 1 and 0 in turn); (iii) find one particular solution (often by setting all free variables to 0), then add."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -1.0,
+          4.6
+        ],
+        "yRange": [
+          -1.6,
+          2.0
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "segment",
+            "from": [
+              -0.9,
+              0.45
+            ],
+            "to": [
+              0.9,
+              -0.45
+            ],
+            "color": "rgba(160,175,220,0.8)",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              4.6,
+              -0.8
+            ],
+            "to": [
+              0.6,
+              1.2
+            ],
+            "color": "#4cc9f0",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              3,
+              0
+            ],
+            "color": "#ff6b9d",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              3,
+              0
+            ],
+            "to": [
+              1,
+              1
+            ],
+            "color": "#ffd166",
+            "arrow": true
+          },
+          {
+            "type": "point",
+            "at": [
+              3,
+              0
+            ],
+            "label": "x*=(3,0)"
+          },
+          {
+            "type": "label",
+            "at": [
+              -0.1,
+              -0.95
+            ],
+            "text": "导出组：Ax=0"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.3,
+              0.95
+            ],
+            "text": "η=(−2,1)"
+          }
+        ],
+        "title": "非齐次方程组 x+2y=3 的解集：x=(3,0)+k(−2,1)，过点 (3,0)、与导出组的解直线平行"
+      },
       "examples": [
         {
           "problem": "求解非齐次方程组\n$$\\begin{cases}x_1+x_2+x_3=1,\\\\ x_1+2x_2+3x_3=3,\\\\ 2x_1+3x_2+4x_3=4.\\end{cases}$$",
@@ -64487,6 +68174,139 @@
         "A set of pairwise orthogonal nonzero vectors is always linearly independent; conversely, an independent set need not be orthogonal, which is exactly why Gram–Schmidt is needed.",
         "An orthogonal matrix satisfies AᵀA=E ⟺ A⁻¹=Aᵀ and has determinant ±1; orthogonal transformations preserve inner products, lengths and angles."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -0.4,
+          3.9
+        ],
+        "yRange": [
+          -0.4,
+          2.4
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              3,
+              1
+            ],
+            "color": "#4cc9f0",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1,
+              2
+            ],
+            "color": "#ff6b9d",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1.5,
+              0.5
+            ],
+            "color": "#ffd166",
+            "width": 3
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.5,
+              0.5
+            ],
+            "to": [
+              1,
+              2
+            ],
+            "color": "#06d6a0",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.6708,
+              0.5569
+            ],
+            "to": [
+              1.6138,
+              0.7277
+            ],
+            "color": "rgba(160,175,220,0.9)"
+          },
+          {
+            "type": "segment",
+            "from": [
+              1.6138,
+              0.7277
+            ],
+            "to": [
+              1.4431,
+              0.6708
+            ],
+            "color": "rgba(160,175,220,0.9)"
+          },
+          {
+            "type": "point",
+            "at": [
+              3,
+              1
+            ],
+            "label": "α=(3,1)"
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              2
+            ],
+            "label": "β=(1,2)"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.35,
+              0.12
+            ],
+            "text": "proj = (1.5, 0.5)"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.62,
+              0.62
+            ],
+            "text": "θ = 45°"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.95,
+              1.55
+            ],
+            "text": "β − proj ⊥ α"
+          }
+        ],
+        "title": "正交分解：β = 投影 + 垂直分量，α=(3,1) 与 β=(1,2) 的夹角为 45°"
+      },
       "examples": [
         {
           "problem": "把线性无关组 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(0,1,1)^T$，$\\alpha_3=(0,0,1)^T$ 用施密特正交化变成标准正交组。",
@@ -64771,6 +68591,127 @@
         "Having n distinct eigenvalues is sufficient for diagonalizability but not necessary (the identity and scalar matrices are diagonalizable).",
         "If A is diagonalizable, then so are A^k and every polynomial f(A), with eigenvalues λᵢ^k and f(λᵢ); and if A is invertible, so is A⁻¹, with eigenvalues 1/λᵢ."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -1.3,
+          7.0
+        ],
+        "yRange": [
+          -1.7,
+          4.7
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              6,
+              3
+            ],
+            "color": "#ffd166",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1.3,
+              -1.3
+            ],
+            "color": "#b388ff",
+            "dash": true
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "fill": "rgba(76,201,240,0.15)",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                2,
+                3
+              ]
+            ],
+            "fill": "rgba(255,107,157,0.15)",
+            "color": "#ff6b9d"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.28,
+              0.72
+            ],
+            "text": "S"
+          },
+          {
+            "type": "label",
+            "at": [
+              3.45,
+              2.05
+            ],
+            "text": "T(S)"
+          },
+          {
+            "type": "label",
+            "at": [
+              4.6,
+              1.15
+            ],
+            "text": "v₁=(2,1)，λ₁=5"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.8,
+              -1.45
+            ],
+            "text": "v₂=(1,−1)，λ₂=2"
+          }
+        ],
+        "title": "相似对角化：A=[[4,2],[1,3]] 在特征向量基下成为 diag(5,2)（P⁻¹AP=Λ）"
+      },
       "examples": [
         {
           "problem": "把 $A=\\begin{pmatrix}3&-1\\\\-1&3\\end{pmatrix}$ 对角化，即求可逆矩阵 $P$ 使 $P^{-1}AP$ 为对角矩阵。",
@@ -64848,6 +68789,663 @@
         "There exists an orthogonal Q with QᵀAQ=Q⁻¹AQ=Λ; that is, a real symmetric matrix is both orthogonally similar and orthogonally congruent to a diagonal matrix.",
         "Conversely, any real matrix that can be orthogonally diagonalized must be symmetric; the number of positive diagonal entries is the positive inertia index of the associated quadratic form."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -4.2,
+          4.2
+        ],
+        "yRange": [
+          -2.6,
+          2.6
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                0.9962,
+                0.0872
+              ],
+              [
+                0.9848,
+                0.1736
+              ],
+              [
+                0.9659,
+                0.2588
+              ],
+              [
+                0.9397,
+                0.342
+              ],
+              [
+                0.9063,
+                0.4226
+              ],
+              [
+                0.866,
+                0.5
+              ],
+              [
+                0.8192,
+                0.5736
+              ],
+              [
+                0.766,
+                0.6428
+              ],
+              [
+                0.7071,
+                0.7071
+              ],
+              [
+                0.6428,
+                0.766
+              ],
+              [
+                0.5736,
+                0.8192
+              ],
+              [
+                0.5,
+                0.866
+              ],
+              [
+                0.4226,
+                0.9063
+              ],
+              [
+                0.342,
+                0.9397
+              ],
+              [
+                0.2588,
+                0.9659
+              ],
+              [
+                0.1736,
+                0.9848
+              ],
+              [
+                0.0872,
+                0.9962
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                -0.0872,
+                0.9962
+              ],
+              [
+                -0.1736,
+                0.9848
+              ],
+              [
+                -0.2588,
+                0.9659
+              ],
+              [
+                -0.342,
+                0.9397
+              ],
+              [
+                -0.4226,
+                0.9063
+              ],
+              [
+                -0.5,
+                0.866
+              ],
+              [
+                -0.5736,
+                0.8192
+              ],
+              [
+                -0.6428,
+                0.766
+              ],
+              [
+                -0.7071,
+                0.7071
+              ],
+              [
+                -0.766,
+                0.6428
+              ],
+              [
+                -0.8192,
+                0.5736
+              ],
+              [
+                -0.866,
+                0.5
+              ],
+              [
+                -0.9063,
+                0.4226
+              ],
+              [
+                -0.9397,
+                0.342
+              ],
+              [
+                -0.9659,
+                0.2588
+              ],
+              [
+                -0.9848,
+                0.1736
+              ],
+              [
+                -0.9962,
+                0.0872
+              ],
+              [
+                -1.0,
+                0.0
+              ],
+              [
+                -0.9962,
+                -0.0872
+              ],
+              [
+                -0.9848,
+                -0.1736
+              ],
+              [
+                -0.9659,
+                -0.2588
+              ],
+              [
+                -0.9397,
+                -0.342
+              ],
+              [
+                -0.9063,
+                -0.4226
+              ],
+              [
+                -0.866,
+                -0.5
+              ],
+              [
+                -0.8192,
+                -0.5736
+              ],
+              [
+                -0.766,
+                -0.6428
+              ],
+              [
+                -0.7071,
+                -0.7071
+              ],
+              [
+                -0.6428,
+                -0.766
+              ],
+              [
+                -0.5736,
+                -0.8192
+              ],
+              [
+                -0.5,
+                -0.866
+              ],
+              [
+                -0.4226,
+                -0.9063
+              ],
+              [
+                -0.342,
+                -0.9397
+              ],
+              [
+                -0.2588,
+                -0.9659
+              ],
+              [
+                -0.1736,
+                -0.9848
+              ],
+              [
+                -0.0872,
+                -0.9962
+              ],
+              [
+                -0.0,
+                -1.0
+              ],
+              [
+                0.0872,
+                -0.9962
+              ],
+              [
+                0.1736,
+                -0.9848
+              ],
+              [
+                0.2588,
+                -0.9659
+              ],
+              [
+                0.342,
+                -0.9397
+              ],
+              [
+                0.4226,
+                -0.9063
+              ],
+              [
+                0.5,
+                -0.866
+              ],
+              [
+                0.5736,
+                -0.8192
+              ],
+              [
+                0.6428,
+                -0.766
+              ],
+              [
+                0.7071,
+                -0.7071
+              ],
+              [
+                0.766,
+                -0.6428
+              ],
+              [
+                0.8192,
+                -0.5736
+              ],
+              [
+                0.866,
+                -0.5
+              ],
+              [
+                0.9063,
+                -0.4226
+              ],
+              [
+                0.9397,
+                -0.342
+              ],
+              [
+                0.9659,
+                -0.2588
+              ],
+              [
+                0.9848,
+                -0.1736
+              ],
+              [
+                0.9962,
+                -0.0872
+              ]
+            ],
+            "fill": "rgba(76,201,240,0.08)",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                2.0,
+                1.0
+              ],
+              [
+                2.0795,
+                1.1705
+              ],
+              [
+                2.1433,
+                1.3321
+              ],
+              [
+                2.1907,
+                1.4836
+              ],
+              [
+                2.2214,
+                1.6237
+              ],
+              [
+                2.2352,
+                1.7515
+              ],
+              [
+                2.2321,
+                1.866
+              ],
+              [
+                2.2119,
+                1.9663
+              ],
+              [
+                2.1749,
+                2.0516
+              ],
+              [
+                2.1213,
+                2.1213
+              ],
+              [
+                2.0516,
+                2.1749
+              ],
+              [
+                1.9663,
+                2.2119
+              ],
+              [
+                1.866,
+                2.2321
+              ],
+              [
+                1.7515,
+                2.2352
+              ],
+              [
+                1.6237,
+                2.2214
+              ],
+              [
+                1.4836,
+                2.1907
+              ],
+              [
+                1.3321,
+                2.1433
+              ],
+              [
+                1.1705,
+                2.0795
+              ],
+              [
+                1.0,
+                2.0
+              ],
+              [
+                0.8219,
+                1.9052
+              ],
+              [
+                0.6375,
+                1.796
+              ],
+              [
+                0.4483,
+                1.673
+              ],
+              [
+                0.2557,
+                1.5374
+              ],
+              [
+                0.0611,
+                1.39
+              ],
+              [
+                -0.134,
+                1.2321
+              ],
+              [
+                -0.328,
+                1.0647
+              ],
+              [
+                -0.5195,
+                0.8893
+              ],
+              [
+                -0.7071,
+                0.7071
+              ],
+              [
+                -0.8893,
+                0.5195
+              ],
+              [
+                -1.0647,
+                0.328
+              ],
+              [
+                -1.2321,
+                0.134
+              ],
+              [
+                -1.39,
+                -0.0611
+              ],
+              [
+                -1.5374,
+                -0.2557
+              ],
+              [
+                -1.673,
+                -0.4483
+              ],
+              [
+                -1.796,
+                -0.6375
+              ],
+              [
+                -1.9052,
+                -0.8219
+              ],
+              [
+                -2.0,
+                -1.0
+              ],
+              [
+                -2.0795,
+                -1.1705
+              ],
+              [
+                -2.1433,
+                -1.3321
+              ],
+              [
+                -2.1907,
+                -1.4836
+              ],
+              [
+                -2.2214,
+                -1.6237
+              ],
+              [
+                -2.2352,
+                -1.7515
+              ],
+              [
+                -2.2321,
+                -1.866
+              ],
+              [
+                -2.2119,
+                -1.9663
+              ],
+              [
+                -2.1749,
+                -2.0516
+              ],
+              [
+                -2.1213,
+                -2.1213
+              ],
+              [
+                -2.0516,
+                -2.1749
+              ],
+              [
+                -1.9663,
+                -2.2119
+              ],
+              [
+                -1.866,
+                -2.2321
+              ],
+              [
+                -1.7515,
+                -2.2352
+              ],
+              [
+                -1.6237,
+                -2.2214
+              ],
+              [
+                -1.4836,
+                -2.1907
+              ],
+              [
+                -1.3321,
+                -2.1433
+              ],
+              [
+                -1.1705,
+                -2.0795
+              ],
+              [
+                -1.0,
+                -2.0
+              ],
+              [
+                -0.8219,
+                -1.9052
+              ],
+              [
+                -0.6375,
+                -1.796
+              ],
+              [
+                -0.4483,
+                -1.673
+              ],
+              [
+                -0.2557,
+                -1.5374
+              ],
+              [
+                -0.0611,
+                -1.39
+              ],
+              [
+                0.134,
+                -1.2321
+              ],
+              [
+                0.328,
+                -1.0647
+              ],
+              [
+                0.5195,
+                -0.8893
+              ],
+              [
+                0.7071,
+                -0.7071
+              ],
+              [
+                0.8893,
+                -0.5195
+              ],
+              [
+                1.0647,
+                -0.328
+              ],
+              [
+                1.2321,
+                -0.134
+              ],
+              [
+                1.39,
+                0.0611
+              ],
+              [
+                1.5374,
+                0.2557
+              ],
+              [
+                1.673,
+                0.4483
+              ],
+              [
+                1.796,
+                0.6375
+              ],
+              [
+                1.9052,
+                0.8219
+              ]
+            ],
+            "fill": "rgba(255,107,157,0.12)",
+            "color": "#ff6b9d"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1.7,
+              1.7
+            ],
+            "color": "#ffd166",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1.5,
+              -1.5
+            ],
+            "color": "#06d6a0",
+            "arrow": true
+          },
+          {
+            "type": "label",
+            "at": [
+              0.0,
+              1.17
+            ],
+            "text": "单位圆"
+          },
+          {
+            "type": "label",
+            "at": [
+              2.55,
+              1.25
+            ],
+            "text": "主轴 v₁=(1,1)"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.95,
+              -1.42
+            ],
+            "text": "主轴 v₂=(1,−1)"
+          }
+        ],
+        "title": "实对称矩阵的对角化：单位圆在 A=[[2,1],[1,2]] 下变成椭圆，两条主轴正好是正交特征方向 (1,1) 与 (1,−1)"
+      },
       "examples": [
         {
           "problem": "求正交矩阵 $Q$ 把 $A=\\begin{pmatrix}0&1&1\\\\1&0&1\\\\1&1&0\\end{pmatrix}$ 对角化。",
@@ -64925,6 +69523,24 @@
         "The orthogonal method produces coefficients equal to the eigenvalues and preserves lengths and inner products; completing the square avoids the characteristic equation but must also use invertible transformations.",
         "Congruence (CᵀAC with invertible C) and similarity (P⁻¹AP) are different equivalence relations: similarity preserves eigenvalues, congruence preserves the inertia indices."
       ],
+      "plot": {
+        "type": "contour",
+        "expr": "x^2 + 2*x*y + 2*y^2",
+        "xRange": [
+          -4,
+          4
+        ],
+        "yRange": [
+          -4,
+          4
+        ],
+        "levelRange": [
+          0.5,
+          6.5
+        ],
+        "levels": 7,
+        "title": "二次型 f=x²+2xy+2y² 的等值线：同心椭圆，正交变换后化标准形 2.618y₁²+0.382y₂²（两系数皆正）"
+      },
       "examples": [
         {
           "problem": "用正交变换把 $f(x_1,x_2,x_3)=2x_1^2+2x_2^2+2x_3^2+2x_1x_2+2x_1x_3+2x_2x_3$ 化为标准形。",
@@ -65001,6 +69617,24 @@
         "Law of inertia: canonical forms are not unique, but the positive index p and the negative index q are; the rank is r=p+q, and two forms are congruent ⟺ they share the same p and q (equivalently the same normal form).",
         "A positive definite matrix is invertible and has positive diagonal entries; moreover all of its principal minors (not just the leading ones) are positive."
       ],
+      "plot": {
+        "type": "surface3d",
+        "expr": "x^2 + 2*y^2",
+        "xRange": [
+          -1,
+          1
+        ],
+        "yRange": [
+          -1,
+          1
+        ],
+        "density": [
+          22,
+          22
+        ],
+        "color": "#4cc9f0",
+        "title": "正定二次型 f=x²+2y² 的曲面：开口向上的椭圆抛物面，除原点外处处为正（p=2，q=0）"
+      },
       "examples": [
         {
           "problem": "判断 $f(x_1,x_2,x_3)=5x_1^2+x_2^2+5x_3^2+4x_1x_2-8x_1x_3-4x_2x_3$ 是否正定，并在正定时用配方法求出标准形。",
@@ -65152,6 +69786,165 @@
         "In ℝⁿ, putting the new basis vectors as columns of a matrix A makes A the transition matrix from the standard basis, with standard coordinates = A × new coordinates (a quick way to double-check the direction).",
         "A change of basis changes coordinates but never the vector itself; many problems (diagonalization, reducing quadratic forms, orthogonalization) are really about choosing a good basis."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -2.4,
+          3.4
+        ],
+        "yRange": [
+          -0.5,
+          3.6
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1,
+              0
+            ],
+            "color": "rgba(160,175,220,0.5)"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0,
+              1
+            ],
+            "color": "rgba(160,175,220,0.5)"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.15,
+              -0.18
+            ],
+            "text": "e₁"
+          },
+          {
+            "type": "label",
+            "at": [
+              -0.25,
+              1.05
+            ],
+            "text": "e₂"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1,
+              1
+            ],
+            "color": "#ffd166",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              -1,
+              1
+            ],
+            "color": "#b388ff",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1,
+              3
+            ],
+            "color": "#ff6b9d",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              2,
+              2
+            ],
+            "color": "rgba(160,175,220,0.85)",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              2,
+              2
+            ],
+            "to": [
+              1,
+              3
+            ],
+            "color": "rgba(160,175,220,0.85)",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              -1,
+              1
+            ],
+            "to": [
+              1,
+              3
+            ],
+            "color": "rgba(160,175,220,0.85)",
+            "dash": true
+          },
+          {
+            "type": "label",
+            "at": [
+              1.45,
+              0.6
+            ],
+            "text": "β₁=(1,1)"
+          },
+          {
+            "type": "label",
+            "at": [
+              -0.9,
+              1.5
+            ],
+            "text": "β₂=(−1,1)"
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              3
+            ],
+            "label": "x=(1,3)"
+          }
+        ],
+        "title": "换基：x = 2β₁ + β₂ —— 同一向量在 {β₁,β₂} 下坐标为 (2,1)，旧坐标 (1,3) = P·(2,1)，P=[[1,−1],[1,1]]"
+      },
       "examples": [
         {
           "problem": "在 $\\mathbb{R}^2$ 中取旧基 $\\alpha_1=(1,0)$、$\\alpha_2=(0,1)$（标准基），新基 $\\beta_1=(1,1)$、$\\beta_2=(1,-1)$。(1) 写出过渡矩阵 $P$；(2) 求向量 $\\xi=(3,1)$ 在新基下的坐标。",
@@ -65569,6 +70362,705 @@
         "σ₁ = ‖A‖₂ (spectral norm) and √(Σσᵢ²) = ‖A‖_F (Frobenius norm); A and Aᵀ share the same singular values; AᵀA and AAᵀ have the same nonzero eigenvalues, all equal to σᵢ².",
         "Eckart–Young: the truncated SVD A_k = Σ_{i≤k} σᵢuᵢvᵢᵀ is a best rank-k approximation of A in both the spectral and the Frobenius norm, with errors σ_{k+1} and √(Σ_{i>k} σᵢ²) respectively."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -1.9,
+          1.9
+        ],
+        "yRange": [
+          -1.05,
+          1.05
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                0.9962,
+                0.0872
+              ],
+              [
+                0.9848,
+                0.1736
+              ],
+              [
+                0.9659,
+                0.2588
+              ],
+              [
+                0.9397,
+                0.342
+              ],
+              [
+                0.9063,
+                0.4226
+              ],
+              [
+                0.866,
+                0.5
+              ],
+              [
+                0.8192,
+                0.5736
+              ],
+              [
+                0.766,
+                0.6428
+              ],
+              [
+                0.7071,
+                0.7071
+              ],
+              [
+                0.6428,
+                0.766
+              ],
+              [
+                0.5736,
+                0.8192
+              ],
+              [
+                0.5,
+                0.866
+              ],
+              [
+                0.4226,
+                0.9063
+              ],
+              [
+                0.342,
+                0.9397
+              ],
+              [
+                0.2588,
+                0.9659
+              ],
+              [
+                0.1736,
+                0.9848
+              ],
+              [
+                0.0872,
+                0.9962
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                -0.0872,
+                0.9962
+              ],
+              [
+                -0.1736,
+                0.9848
+              ],
+              [
+                -0.2588,
+                0.9659
+              ],
+              [
+                -0.342,
+                0.9397
+              ],
+              [
+                -0.4226,
+                0.9063
+              ],
+              [
+                -0.5,
+                0.866
+              ],
+              [
+                -0.5736,
+                0.8192
+              ],
+              [
+                -0.6428,
+                0.766
+              ],
+              [
+                -0.7071,
+                0.7071
+              ],
+              [
+                -0.766,
+                0.6428
+              ],
+              [
+                -0.8192,
+                0.5736
+              ],
+              [
+                -0.866,
+                0.5
+              ],
+              [
+                -0.9063,
+                0.4226
+              ],
+              [
+                -0.9397,
+                0.342
+              ],
+              [
+                -0.9659,
+                0.2588
+              ],
+              [
+                -0.9848,
+                0.1736
+              ],
+              [
+                -0.9962,
+                0.0872
+              ],
+              [
+                -1.0,
+                0.0
+              ],
+              [
+                -0.9962,
+                -0.0872
+              ],
+              [
+                -0.9848,
+                -0.1736
+              ],
+              [
+                -0.9659,
+                -0.2588
+              ],
+              [
+                -0.9397,
+                -0.342
+              ],
+              [
+                -0.9063,
+                -0.4226
+              ],
+              [
+                -0.866,
+                -0.5
+              ],
+              [
+                -0.8192,
+                -0.5736
+              ],
+              [
+                -0.766,
+                -0.6428
+              ],
+              [
+                -0.7071,
+                -0.7071
+              ],
+              [
+                -0.6428,
+                -0.766
+              ],
+              [
+                -0.5736,
+                -0.8192
+              ],
+              [
+                -0.5,
+                -0.866
+              ],
+              [
+                -0.4226,
+                -0.9063
+              ],
+              [
+                -0.342,
+                -0.9397
+              ],
+              [
+                -0.2588,
+                -0.9659
+              ],
+              [
+                -0.1736,
+                -0.9848
+              ],
+              [
+                -0.0872,
+                -0.9962
+              ],
+              [
+                -0.0,
+                -1.0
+              ],
+              [
+                0.0872,
+                -0.9962
+              ],
+              [
+                0.1736,
+                -0.9848
+              ],
+              [
+                0.2588,
+                -0.9659
+              ],
+              [
+                0.342,
+                -0.9397
+              ],
+              [
+                0.4226,
+                -0.9063
+              ],
+              [
+                0.5,
+                -0.866
+              ],
+              [
+                0.5736,
+                -0.8192
+              ],
+              [
+                0.6428,
+                -0.766
+              ],
+              [
+                0.7071,
+                -0.7071
+              ],
+              [
+                0.766,
+                -0.6428
+              ],
+              [
+                0.8192,
+                -0.5736
+              ],
+              [
+                0.866,
+                -0.5
+              ],
+              [
+                0.9063,
+                -0.4226
+              ],
+              [
+                0.9397,
+                -0.342
+              ],
+              [
+                0.9659,
+                -0.2588
+              ],
+              [
+                0.9848,
+                -0.1736
+              ],
+              [
+                0.9962,
+                -0.0872
+              ]
+            ],
+            "fill": "rgba(76,201,240,0.08)",
+            "color": "#4cc9f0"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0834,
+                0.0872
+              ],
+              [
+                1.1585,
+                0.1736
+              ],
+              [
+                1.2247,
+                0.2588
+              ],
+              [
+                1.2817,
+                0.342
+              ],
+              [
+                1.3289,
+                0.4226
+              ],
+              [
+                1.366,
+                0.5
+              ],
+              [
+                1.3927,
+                0.5736
+              ],
+              [
+                1.4088,
+                0.6428
+              ],
+              [
+                1.4142,
+                0.7071
+              ],
+              [
+                1.4088,
+                0.766
+              ],
+              [
+                1.3927,
+                0.8192
+              ],
+              [
+                1.366,
+                0.866
+              ],
+              [
+                1.3289,
+                0.9063
+              ],
+              [
+                1.2817,
+                0.9397
+              ],
+              [
+                1.2247,
+                0.9659
+              ],
+              [
+                1.1585,
+                0.9848
+              ],
+              [
+                1.0834,
+                0.9962
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.909,
+                0.9962
+              ],
+              [
+                0.8112,
+                0.9848
+              ],
+              [
+                0.7071,
+                0.9659
+              ],
+              [
+                0.5977,
+                0.9397
+              ],
+              [
+                0.4837,
+                0.9063
+              ],
+              [
+                0.366,
+                0.866
+              ],
+              [
+                0.2456,
+                0.8192
+              ],
+              [
+                0.1233,
+                0.766
+              ],
+              [
+                0.0,
+                0.7071
+              ],
+              [
+                -0.1233,
+                0.6428
+              ],
+              [
+                -0.2456,
+                0.5736
+              ],
+              [
+                -0.366,
+                0.5
+              ],
+              [
+                -0.4837,
+                0.4226
+              ],
+              [
+                -0.5977,
+                0.342
+              ],
+              [
+                -0.7071,
+                0.2588
+              ],
+              [
+                -0.8112,
+                0.1736
+              ],
+              [
+                -0.909,
+                0.0872
+              ],
+              [
+                -1.0,
+                0.0
+              ],
+              [
+                -1.0834,
+                -0.0872
+              ],
+              [
+                -1.1585,
+                -0.1736
+              ],
+              [
+                -1.2247,
+                -0.2588
+              ],
+              [
+                -1.2817,
+                -0.342
+              ],
+              [
+                -1.3289,
+                -0.4226
+              ],
+              [
+                -1.366,
+                -0.5
+              ],
+              [
+                -1.3927,
+                -0.5736
+              ],
+              [
+                -1.4088,
+                -0.6428
+              ],
+              [
+                -1.4142,
+                -0.7071
+              ],
+              [
+                -1.4088,
+                -0.766
+              ],
+              [
+                -1.3927,
+                -0.8192
+              ],
+              [
+                -1.366,
+                -0.866
+              ],
+              [
+                -1.3289,
+                -0.9063
+              ],
+              [
+                -1.2817,
+                -0.9397
+              ],
+              [
+                -1.2247,
+                -0.9659
+              ],
+              [
+                -1.1585,
+                -0.9848
+              ],
+              [
+                -1.0834,
+                -0.9962
+              ],
+              [
+                -1.0,
+                -1.0
+              ],
+              [
+                -0.909,
+                -0.9962
+              ],
+              [
+                -0.8112,
+                -0.9848
+              ],
+              [
+                -0.7071,
+                -0.9659
+              ],
+              [
+                -0.5977,
+                -0.9397
+              ],
+              [
+                -0.4837,
+                -0.9063
+              ],
+              [
+                -0.366,
+                -0.866
+              ],
+              [
+                -0.2456,
+                -0.8192
+              ],
+              [
+                -0.1233,
+                -0.766
+              ],
+              [
+                -0.0,
+                -0.7071
+              ],
+              [
+                0.1233,
+                -0.6428
+              ],
+              [
+                0.2456,
+                -0.5736
+              ],
+              [
+                0.366,
+                -0.5
+              ],
+              [
+                0.4837,
+                -0.4226
+              ],
+              [
+                0.5977,
+                -0.342
+              ],
+              [
+                0.7071,
+                -0.2588
+              ],
+              [
+                0.8112,
+                -0.1736
+              ],
+              [
+                0.909,
+                -0.0872
+              ]
+            ],
+            "fill": "rgba(255,107,157,0.12)",
+            "color": "#ff6b9d"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0.5257,
+              0.8507
+            ],
+            "color": "rgba(160,175,220,0.9)",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0.8507,
+              -0.5257
+            ],
+            "color": "rgba(160,175,220,0.9)",
+            "dash": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1.3764,
+              0.8507
+            ],
+            "color": "#ffd166",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0.3249,
+              -0.5257
+            ],
+            "color": "#06d6a0",
+            "arrow": true
+          },
+          {
+            "type": "label",
+            "at": [
+              -0.3,
+              0.75
+            ],
+            "text": "单位圆"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.72,
+              0.87
+            ],
+            "text": "v₁"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.05,
+              -0.25
+            ],
+            "text": "v₂"
+          },
+          {
+            "type": "label",
+            "at": [
+              1.45,
+              1.0
+            ],
+            "text": "σ₁≈1.618"
+          },
+          {
+            "type": "label",
+            "at": [
+              0.72,
+              -0.78
+            ],
+            "text": "σ₂≈0.618"
+          }
+        ],
+        "title": "奇异值分解的几何：A=[[1,1],[0,1]] 把单位圆映成椭圆，两条半轴长就是奇异值 σ₁≈1.618、σ₂≈0.618"
+      },
       "examples": [
         {
           "problem": "用 Gram–Schmidt 正交化求 $A=\\begin{pmatrix}1&1&0\\\\1&0&1\\\\0&1&1\\end{pmatrix}$ 的 QR 分解（要求 $R$ 的对角元为正）。",
@@ -66136,6 +71628,35 @@
         "Courant–Fischer and monotonicity corollaries: every λ_k has a min-max characterization; if A ⪯ B (B − A positive semidefinite), then λ_k(A) ≤ λ_k(B) (Weyl monotonicity).",
         "Interlacing: eigenvalues of an (n−1)×(n−1) principal submatrix interlace those of A (λ_k ≤ μ_k ≤ λ_{k+1}); for an m×m principal submatrix, λ_k(A) ≤ μ_k(B) ≤ λ_{k+n−m}(A)."
       ],
+      "plot": {
+        "type": "function",
+        "functions": [
+          {
+            "expr": "2 + sin(2*x)",
+            "color": "#4cc9f0",
+            "label": "R(θ) = 2 + sin 2θ"
+          },
+          {
+            "expr": "3",
+            "color": "#ff6b9d",
+            "label": "λmax = 3"
+          },
+          {
+            "expr": "1",
+            "color": "#06d6a0",
+            "label": "λmin = 1"
+          }
+        ],
+        "xRange": [
+          0,
+          3.1416
+        ],
+        "yRange": [
+          0.6,
+          3.4
+        ],
+        "title": "瑞利商 R(θ)=2+sin2θ（A=[[2,1],[1,2]] 上的单位向量）：最大值 3=λmax、最小值 1=λmin"
+      },
       "examples": [
         {
           "problem": "设 $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$。直接求特征值，并用 Courant–Fischer 定理验证。",
@@ -66504,6 +72025,397 @@
         "Similarity and congruence are different actions: similarity preserves eigenvalues, trace, determinant and Jordan form (the structure of a linear map), whereas congruence preserves symmetry, rank and inertia indices (the invariants of a quadratic form) but not eigenvalues. Mixing them up produces false invariant claims.",
         "$SO(2)$ is abelian with $R(\\theta)R(\\varphi)=R(\\theta+\\varphi)$ and is isomorphic to the unit circle group $U(1)$ via $R(\\theta)\\leftrightarrow e^{i\\theta}$, while $SO(3)$ is not abelian. Matrix groups thus algebraize geometric symmetry."
       ],
+      "plot": {
+        "type": "geometry",
+        "xRange": [
+          -1.55,
+          1.75
+        ],
+        "yRange": [
+          -1.25,
+          1.25
+        ],
+        "elements": [
+          {
+            "type": "axes"
+          },
+          {
+            "type": "polygon",
+            "points": [
+              [
+                1.077,
+                0.0
+              ],
+              [
+                1.0729,
+                0.0939
+              ],
+              [
+                1.0606,
+                0.187
+              ],
+              [
+                1.0403,
+                0.2787
+              ],
+              [
+                1.012,
+                0.3684
+              ],
+              [
+                0.9761,
+                0.4552
+              ],
+              [
+                0.9327,
+                0.5385
+              ],
+              [
+                0.8822,
+                0.6177
+              ],
+              [
+                0.825,
+                0.6923
+              ],
+              [
+                0.7616,
+                0.7616
+              ],
+              [
+                0.6923,
+                0.825
+              ],
+              [
+                0.6177,
+                0.8822
+              ],
+              [
+                0.5385,
+                0.9327
+              ],
+              [
+                0.4552,
+                0.9761
+              ],
+              [
+                0.3684,
+                1.012
+              ],
+              [
+                0.2787,
+                1.0403
+              ],
+              [
+                0.187,
+                1.0606
+              ],
+              [
+                0.0939,
+                1.0729
+              ],
+              [
+                0.0,
+                1.077
+              ],
+              [
+                -0.0939,
+                1.0729
+              ],
+              [
+                -0.187,
+                1.0606
+              ],
+              [
+                -0.2787,
+                1.0403
+              ],
+              [
+                -0.3684,
+                1.012
+              ],
+              [
+                -0.4552,
+                0.9761
+              ],
+              [
+                -0.5385,
+                0.9327
+              ],
+              [
+                -0.6177,
+                0.8822
+              ],
+              [
+                -0.6923,
+                0.825
+              ],
+              [
+                -0.7616,
+                0.7616
+              ],
+              [
+                -0.825,
+                0.6923
+              ],
+              [
+                -0.8822,
+                0.6177
+              ],
+              [
+                -0.9327,
+                0.5385
+              ],
+              [
+                -0.9761,
+                0.4552
+              ],
+              [
+                -1.012,
+                0.3684
+              ],
+              [
+                -1.0403,
+                0.2787
+              ],
+              [
+                -1.0606,
+                0.187
+              ],
+              [
+                -1.0729,
+                0.0939
+              ],
+              [
+                -1.077,
+                0.0
+              ],
+              [
+                -1.0729,
+                -0.0939
+              ],
+              [
+                -1.0606,
+                -0.187
+              ],
+              [
+                -1.0403,
+                -0.2787
+              ],
+              [
+                -1.012,
+                -0.3684
+              ],
+              [
+                -0.9761,
+                -0.4552
+              ],
+              [
+                -0.9327,
+                -0.5385
+              ],
+              [
+                -0.8822,
+                -0.6177
+              ],
+              [
+                -0.825,
+                -0.6923
+              ],
+              [
+                -0.7616,
+                -0.7616
+              ],
+              [
+                -0.6923,
+                -0.825
+              ],
+              [
+                -0.6177,
+                -0.8822
+              ],
+              [
+                -0.5385,
+                -0.9327
+              ],
+              [
+                -0.4552,
+                -0.9761
+              ],
+              [
+                -0.3684,
+                -1.012
+              ],
+              [
+                -0.2787,
+                -1.0403
+              ],
+              [
+                -0.187,
+                -1.0606
+              ],
+              [
+                -0.0939,
+                -1.0729
+              ],
+              [
+                -0.0,
+                -1.077
+              ],
+              [
+                0.0939,
+                -1.0729
+              ],
+              [
+                0.187,
+                -1.0606
+              ],
+              [
+                0.2787,
+                -1.0403
+              ],
+              [
+                0.3684,
+                -1.012
+              ],
+              [
+                0.4552,
+                -0.9761
+              ],
+              [
+                0.5385,
+                -0.9327
+              ],
+              [
+                0.6177,
+                -0.8822
+              ],
+              [
+                0.6923,
+                -0.825
+              ],
+              [
+                0.7616,
+                -0.7616
+              ],
+              [
+                0.825,
+                -0.6923
+              ],
+              [
+                0.8822,
+                -0.6177
+              ],
+              [
+                0.9327,
+                -0.5385
+              ],
+              [
+                0.9761,
+                -0.4552
+              ],
+              [
+                1.012,
+                -0.3684
+              ],
+              [
+                1.0403,
+                -0.2787
+              ],
+              [
+                1.0606,
+                -0.187
+              ],
+              [
+                1.0729,
+                -0.0939
+              ]
+            ],
+            "fill": "rgba(76,201,240,0.06)",
+            "color": "rgba(76,201,240,0.65)"
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1,
+              0.4
+            ],
+            "color": "#ffd166",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0.1536,
+              1.066
+            ],
+            "color": "#4cc9f0",
+            "arrow": true
+          },
+          {
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              1,
+              -0.4
+            ],
+            "color": "#ff6b9d",
+            "arrow": true
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              0.4
+            ],
+            "label": "v"
+          },
+          {
+            "type": "point",
+            "at": [
+              0.1536,
+              1.066
+            ],
+            "label": "R(60°)v"
+          },
+          {
+            "type": "point",
+            "at": [
+              1,
+              -0.4
+            ],
+            "label": "σv"
+          },
+          {
+            "type": "label",
+            "at": [
+              -0.95,
+              1.0
+            ],
+            "text": "旋转：det=+1"
+          },
+          {
+            "type": "label",
+            "at": [
+              -0.95,
+              -0.85
+            ],
+            "text": "反射：det=−1"
+          }
+        ],
+        "title": "正交群 O(2)：旋转（det=+1）与反射（det=−1）都不改变长度，三个端点都落在同一个圆上"
+      },
       "examples": [
         {
           "problem": "验证 $R(\\theta)=\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\ \\sin\\theta&\\cos\\theta\\end{pmatrix}$ 属于 $SO(2)$，说明它是旋转（写出 $(1,0)$ 的像），并验证它保长度。",
@@ -66879,6 +72791,30 @@
         "Least squares has a geometric meaning: the optimal residual $r=b-Ax^{*}$ is orthogonal to the column space of A ($A^{\\top}r=0$), so $Ax^{*}$ is the orthogonal projection of b; the solution is unique for full column rank, and the pseudoinverse selects the least-norm solution in the rank-deficient case.",
         "Gradient descent uses only first-order information: too large a step diverges, and slow convergence can be accelerated by the Newton direction $-H^{-1}\\nabla f$, at the cost of forming and inverting H."
       ],
+      "plot": {
+        "type": "vectorfield",
+        "fx": "2 - 2*x - 2*y",
+        "fy": "-2*x - 4*y",
+        "xRange": [
+          -1,
+          4
+        ],
+        "yRange": [
+          -3.5,
+          2.5
+        ],
+        "contourExpr": "x^2 + 2*x*y + 2*y^2 - 2*x",
+        "marks": [
+          {
+            "at": [
+              2,
+              -1
+            ],
+            "label": "极小点 (2,−1)"
+          }
+        ],
+        "title": "用矩阵微分求二次型极值：−∇f 的箭头都指向唯一极小点 (2,−1)（Hessian 正定）"
+      },
       "examples": [
         {
           "problem": "取 $A=\\begin{pmatrix}1&1\\\\1&2\\\\1&3\\end{pmatrix}$、$b=(3,1,5)^{\\top}$，最小化 $f(x)=\\|Ax-b\\|^{2}$：写出 $\\nabla f$ 与正规方程，解出 $x^{*}$ 并验证它确实最优。",
@@ -68075,6 +74011,521 @@
         "Prime cannot be relaxed to composite in the lemma: 6 divides 2 × 3 yet divides neither factor — which is why uniqueness needs primes.",
         "There are infinitely many primes; the constructed N = p₁⋯p_k + 1 need not be prime: 2 × 3 × 5 × 7 × 11 × 13 + 1 = 30031 = 59 × 509."
       ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            9,
+            4
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            13,
+            6
+          ],
+          [
+            14,
+            6
+          ],
+          [
+            15,
+            6
+          ],
+          [
+            16,
+            6
+          ],
+          [
+            17,
+            7
+          ],
+          [
+            18,
+            7
+          ],
+          [
+            19,
+            8
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            21,
+            8
+          ],
+          [
+            22,
+            8
+          ],
+          [
+            23,
+            9
+          ],
+          [
+            24,
+            9
+          ],
+          [
+            25,
+            9
+          ],
+          [
+            26,
+            9
+          ],
+          [
+            27,
+            9
+          ],
+          [
+            28,
+            9
+          ],
+          [
+            29,
+            10
+          ],
+          [
+            30,
+            10
+          ],
+          [
+            31,
+            11
+          ],
+          [
+            32,
+            11
+          ],
+          [
+            33,
+            11
+          ],
+          [
+            34,
+            11
+          ],
+          [
+            35,
+            11
+          ],
+          [
+            36,
+            11
+          ],
+          [
+            37,
+            12
+          ],
+          [
+            38,
+            12
+          ],
+          [
+            39,
+            12
+          ],
+          [
+            40,
+            12
+          ],
+          [
+            41,
+            13
+          ],
+          [
+            42,
+            13
+          ],
+          [
+            43,
+            14
+          ],
+          [
+            44,
+            14
+          ],
+          [
+            45,
+            14
+          ],
+          [
+            46,
+            14
+          ],
+          [
+            47,
+            15
+          ],
+          [
+            48,
+            15
+          ],
+          [
+            49,
+            15
+          ],
+          [
+            50,
+            15
+          ],
+          [
+            51,
+            15
+          ],
+          [
+            52,
+            15
+          ],
+          [
+            53,
+            16
+          ],
+          [
+            54,
+            16
+          ],
+          [
+            55,
+            16
+          ],
+          [
+            56,
+            16
+          ],
+          [
+            57,
+            16
+          ],
+          [
+            58,
+            16
+          ],
+          [
+            59,
+            17
+          ],
+          [
+            60,
+            17
+          ],
+          [
+            61,
+            18
+          ],
+          [
+            62,
+            18
+          ],
+          [
+            63,
+            18
+          ],
+          [
+            64,
+            18
+          ],
+          [
+            65,
+            18
+          ],
+          [
+            66,
+            18
+          ],
+          [
+            67,
+            19
+          ],
+          [
+            68,
+            19
+          ],
+          [
+            69,
+            19
+          ],
+          [
+            70,
+            19
+          ],
+          [
+            71,
+            20
+          ],
+          [
+            72,
+            20
+          ],
+          [
+            73,
+            21
+          ],
+          [
+            74,
+            21
+          ],
+          [
+            75,
+            21
+          ],
+          [
+            76,
+            21
+          ],
+          [
+            77,
+            21
+          ],
+          [
+            78,
+            21
+          ],
+          [
+            79,
+            22
+          ],
+          [
+            80,
+            22
+          ],
+          [
+            81,
+            22
+          ],
+          [
+            82,
+            22
+          ],
+          [
+            83,
+            23
+          ],
+          [
+            84,
+            23
+          ],
+          [
+            85,
+            23
+          ],
+          [
+            86,
+            23
+          ],
+          [
+            87,
+            23
+          ],
+          [
+            88,
+            23
+          ],
+          [
+            89,
+            24
+          ],
+          [
+            90,
+            24
+          ],
+          [
+            91,
+            24
+          ],
+          [
+            92,
+            24
+          ],
+          [
+            93,
+            24
+          ],
+          [
+            94,
+            24
+          ],
+          [
+            95,
+            24
+          ],
+          [
+            96,
+            24
+          ],
+          [
+            97,
+            25
+          ],
+          [
+            98,
+            25
+          ],
+          [
+            99,
+            25
+          ],
+          [
+            100,
+            25
+          ]
+        ],
+        "lines": [
+          {
+            "slope": 0,
+            "intercept": 2.88539,
+            "from": 2,
+            "to": 4,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.231637,
+            "intercept": 1.958843,
+            "from": 4,
+            "to": 6,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.249262,
+            "intercept": 1.853095,
+            "from": 6,
+            "to": 8,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.245492,
+            "intercept": 1.88325,
+            "from": 8,
+            "to": 12,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.235406,
+            "intercept": 2.004281,
+            "from": 12,
+            "to": 16,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.224427,
+            "intercept": 2.179954,
+            "from": 16,
+            "to": 22,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.212885,
+            "intercept": 2.433861,
+            "from": 22,
+            "to": 30,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.202298,
+            "intercept": 2.751489,
+            "from": 30,
+            "to": 40,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.193084,
+            "intercept": 3.120028,
+            "from": 40,
+            "to": 52,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.185191,
+            "intercept": 3.530478,
+            "from": 52,
+            "to": 66,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.178429,
+            "intercept": 3.976793,
+            "from": 66,
+            "to": 82,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.172599,
+            "intercept": 4.454854,
+            "from": 82,
+            "to": 100,
+            "color": "#ffd166",
+            "label": "x/ln x（渐近线）"
+          }
+        ],
+        "marks": [
+          {
+            "at": [
+              60,
+              17
+            ],
+            "label": "π(60) = 17"
+          },
+          {
+            "at": [
+              60,
+              14.65
+            ],
+            "label": "60/ln 60 ≈ 14.65"
+          }
+        ],
+        "xRange": [
+          0,
+          100
+        ],
+        "yRange": [
+          0,
+          29
+        ],
+        "pointColor": "#4cc9f0",
+        "pointSize": 2.8,
+        "title": "π(x) 阶梯（点列）与渐近式 x/ln x 的对比：π(100) = 25，100/ln 100 ≈ 21.7"
+      },
       "examples": [
         {
           "problem": "写出 360 的标准分解式与正约数个数，并判断 97 是不是素数。",
@@ -68238,6 +74689,36 @@
         "After reduction a′ is coprime to m′, so its inverse exists uniquely and is computed explicitly by the extended Euclidean algorithm (a′u + m′v = 1).",
         "Homogeneous case: ax ≡ 0 (mod m) has exactly the solutions x ≡ 0 (mod m/d) modulo m — zero divisors of the residue ring made concrete."
       ],
+      "plot": {
+        "type": "numberline",
+        "range": [
+          0,
+          13
+        ],
+        "points": [
+          {
+            "at": 2,
+            "label": "2（最小非负解）",
+            "color": "#06d6a0"
+          },
+          {
+            "at": 5,
+            "label": "5",
+            "color": "#06d6a0"
+          },
+          {
+            "at": 8,
+            "label": "8",
+            "color": "#06d6a0"
+          },
+          {
+            "at": 11,
+            "label": "11",
+            "color": "#06d6a0"
+          }
+        ],
+        "title": "8x ≡ 4 (mod 12)：gcd(8,12) = 4 整除 4，恰有 4 个解 x ≡ 2 (mod 3)"
+      },
       "examples": [
         {
           "problem": "解一次同余方程 $8x \\equiv 12 \\pmod{20}$。",
@@ -68375,6 +74856,206 @@
         "Euler's theorem generalises Fermat's little theorem: taking $m=p$ prime recovers $a^{p-1}\\equiv 1\\pmod p$.",
         "Application: in RSA the exponents satisfy $ed\\equiv 1\\pmod{\\varphi(N)}$ and decryption relies on Euler's theorem (the few cases $\\gcd(m,N)>1$ are handled separately via the Chinese remainder theorem)."
       ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            10
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            13,
+            12
+          ],
+          [
+            14,
+            6
+          ],
+          [
+            15,
+            8
+          ],
+          [
+            16,
+            8
+          ],
+          [
+            17,
+            16
+          ],
+          [
+            18,
+            6
+          ],
+          [
+            19,
+            18
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            21,
+            12
+          ],
+          [
+            22,
+            10
+          ],
+          [
+            23,
+            22
+          ],
+          [
+            24,
+            8
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            26,
+            12
+          ],
+          [
+            27,
+            18
+          ],
+          [
+            28,
+            12
+          ],
+          [
+            29,
+            28
+          ],
+          [
+            30,
+            8
+          ],
+          [
+            31,
+            30
+          ],
+          [
+            32,
+            16
+          ],
+          [
+            33,
+            20
+          ],
+          [
+            34,
+            16
+          ],
+          [
+            35,
+            24
+          ],
+          [
+            36,
+            12
+          ],
+          [
+            37,
+            36
+          ],
+          [
+            38,
+            18
+          ],
+          [
+            39,
+            24
+          ],
+          [
+            40,
+            16
+          ]
+        ],
+        "lines": [
+          {
+            "slope": 1,
+            "intercept": -1,
+            "from": 1,
+            "to": 41,
+            "color": "#ffd166",
+            "label": "y = n − 1"
+          }
+        ],
+        "marks": [
+          {
+            "at": [
+              13,
+              12
+            ],
+            "label": "φ(13) = 12 = p − 1（p 为素数时恒成立）"
+          },
+          {
+            "at": [
+              30,
+              8
+            ],
+            "label": "φ(30) = 8"
+          }
+        ],
+        "xRange": [
+          0,
+          41
+        ],
+        "yRange": [
+          0,
+          42
+        ],
+        "title": "φ(n) 散点（n ≤ 40）：素数处 φ(p) = p − 1 贴着 y = n − 1，合数处下坠"
+      },
       "examples": [
         {
           "problem": "计算 $\\varphi(360)$，并用积性分解复核。",
@@ -68599,6 +75280,82 @@
         "There are exactly $(p-1)/2$ quadratic residues, and for a residue $a$ the congruence $x^2\\equiv a\\pmod p$ has exactly two solutions, $x$ and $-x$.",
         "Modulo 2 every integer is a square ($0=0^2$, $1=1^2$), which is why the theory insists on odd primes."
       ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            4
+          ],
+          [
+            10,
+            1
+          ]
+        ],
+        "marks": [
+          {
+            "at": [
+              1,
+              1
+            ],
+            "label": "1² ≡ 1"
+          },
+          {
+            "at": [
+              3,
+              9
+            ],
+            "label": "3² ≡ 9（与 8² 成对）"
+          }
+        ],
+        "xRange": [
+          -0.5,
+          10.5
+        ],
+        "yRange": [
+          -0.5,
+          10.5
+        ],
+        "pointColor": "#4cc9f0",
+        "pointSize": 4,
+        "title": "模 11 的平方点列 y ≡ r² (mod 11)：非零二次剩余共 (11−1)/2 = 5 个"
+      },
       "examples": [
         {
           "problem": "判断 3 与 5 是否为模 7 的二次剩余。",
@@ -68746,6 +75503,480 @@
         "$d(n)$ is odd iff $n$ is a perfect square (since $\\prod(\\alpha_i+1)$ is odd iff every $\\alpha_i$ is even).",
         "Application: perfect numbers satisfy $\\sigma(n)=2n$ (6, 28, …); every even perfect number has the form $2^{p-1}(2^p-1)$ with $2^p-1$ a Mersenne prime (Euclid–Euler)."
       ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            10
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            13,
+            12
+          ],
+          [
+            14,
+            6
+          ],
+          [
+            15,
+            8
+          ],
+          [
+            16,
+            8
+          ],
+          [
+            17,
+            16
+          ],
+          [
+            18,
+            6
+          ],
+          [
+            19,
+            18
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            21,
+            12
+          ],
+          [
+            22,
+            10
+          ],
+          [
+            23,
+            22
+          ],
+          [
+            24,
+            8
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            26,
+            12
+          ],
+          [
+            27,
+            18
+          ],
+          [
+            28,
+            12
+          ],
+          [
+            29,
+            28
+          ],
+          [
+            30,
+            8
+          ],
+          [
+            31,
+            30
+          ],
+          [
+            32,
+            16
+          ],
+          [
+            33,
+            20
+          ],
+          [
+            34,
+            16
+          ],
+          [
+            35,
+            24
+          ],
+          [
+            36,
+            12
+          ],
+          [
+            37,
+            36
+          ],
+          [
+            38,
+            18
+          ],
+          [
+            39,
+            24
+          ],
+          [
+            40,
+            16
+          ]
+        ],
+        "lines": [
+          {
+            "slope": 2,
+            "intercept": -1,
+            "from": 1,
+            "to": 2,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 1,
+            "intercept": 1,
+            "from": 2,
+            "to": 3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 3,
+            "intercept": -5,
+            "from": 3,
+            "to": 4,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -1,
+            "intercept": 11,
+            "from": 4,
+            "to": 5,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 6,
+            "intercept": -24,
+            "from": 5,
+            "to": 6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -4,
+            "intercept": 36,
+            "from": 6,
+            "to": 7,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 7,
+            "intercept": -41,
+            "from": 7,
+            "to": 8,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -2,
+            "intercept": 31,
+            "from": 8,
+            "to": 9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 5,
+            "intercept": -32,
+            "from": 9,
+            "to": 10,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -6,
+            "intercept": 78,
+            "from": 10,
+            "to": 11,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 16,
+            "intercept": -164,
+            "from": 11,
+            "to": 12,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -14,
+            "intercept": 196,
+            "from": 12,
+            "to": 13,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 10,
+            "intercept": -116,
+            "from": 13,
+            "to": 14,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0,
+            "intercept": 24,
+            "from": 14,
+            "to": 15,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 7,
+            "intercept": -81,
+            "from": 15,
+            "to": 16,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -13,
+            "intercept": 239,
+            "from": 16,
+            "to": 17,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 21,
+            "intercept": -339,
+            "from": 17,
+            "to": 18,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -19,
+            "intercept": 381,
+            "from": 18,
+            "to": 19,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 22,
+            "intercept": -398,
+            "from": 19,
+            "to": 20,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -10,
+            "intercept": 242,
+            "from": 20,
+            "to": 21,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 4,
+            "intercept": -52,
+            "from": 21,
+            "to": 22,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -12,
+            "intercept": 300,
+            "from": 22,
+            "to": 23,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 36,
+            "intercept": -804,
+            "from": 23,
+            "to": 24,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -29,
+            "intercept": 756,
+            "from": 24,
+            "to": 25,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 11,
+            "intercept": -244,
+            "from": 25,
+            "to": 26,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -2,
+            "intercept": 94,
+            "from": 26,
+            "to": 27,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 16,
+            "intercept": -392,
+            "from": 27,
+            "to": 28,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -26,
+            "intercept": 784,
+            "from": 28,
+            "to": 29,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 42,
+            "intercept": -1188,
+            "from": 29,
+            "to": 30,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -40,
+            "intercept": 1272,
+            "from": 30,
+            "to": 31,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 31,
+            "intercept": -929,
+            "from": 31,
+            "to": 32,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -15,
+            "intercept": 543,
+            "from": 32,
+            "to": 33,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 6,
+            "intercept": -150,
+            "from": 33,
+            "to": 34,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -6,
+            "intercept": 258,
+            "from": 34,
+            "to": 35,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 43,
+            "intercept": -1457,
+            "from": 35,
+            "to": 36,
+            "color": "#ff6b9d",
+            "label": "σ(n)"
+          },
+          {
+            "slope": -53,
+            "intercept": 1999,
+            "from": 36,
+            "to": 37,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 22,
+            "intercept": -776,
+            "from": 37,
+            "to": 38,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -4,
+            "intercept": 212,
+            "from": 38,
+            "to": 39,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 34,
+            "intercept": -1270,
+            "from": 39,
+            "to": 40,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 1,
+            "intercept": 0,
+            "from": 1,
+            "to": 41,
+            "color": "#ffd166",
+            "label": "y = n"
+          }
+        ],
+        "marks": [
+          {
+            "at": [
+              24,
+              60
+            ],
+            "label": "σ(24) = 60"
+          },
+          {
+            "at": [
+              30,
+              8
+            ],
+            "label": "φ(30) = 8"
+          }
+        ],
+        "xRange": [
+          0,
+          41
+        ],
+        "yRange": [
+          0,
+          96
+        ],
+        "title": "φ(n)（蓝点）与 σ(n)（粉线）的前 40 项：直线 y = n 把两类算术函数分开"
+      },
       "examples": [
         {
           "problem": "求 $d(28)$ 与 $\\sigma(28)$，并验证 28 是完全数。",
@@ -68975,6 +76206,88 @@
         "Lagrange's theorem: quadratic irrationals iff eventually periodic continued fractions — √2=[1;2̄], √3=[1;1,2‾], golden ratio=[1;1̄]. The parity of the period also decides whether x²−dy²=−1 is solvable.",
         "The golden ratio φ=[1;1̄] is the hardest irrational to approximate: every irrational α has infinitely many fractions with |α−p/q|<1/(√5·q²), the constant √5 cannot be improved, and φ is the extremal case (Hurwitz's theorem)."
       ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            1,
+            0.41421356
+          ],
+          [
+            2,
+            0.34314575
+          ],
+          [
+            5,
+            0.35533906
+          ],
+          [
+            12,
+            0.35324702
+          ],
+          [
+            29,
+            0.35360596
+          ],
+          [
+            70,
+            0.35354437
+          ],
+          [
+            169,
+            0.35355494
+          ],
+          [
+            408,
+            0.35355313
+          ],
+          [
+            985,
+            0.35355344
+          ],
+          [
+            2378,
+            0.35355338
+          ]
+        ],
+        "lines": [
+          {
+            "slope": 0,
+            "intercept": 0.35355339,
+            "from": 0,
+            "to": 2500,
+            "color": "#ffd166",
+            "label": "1/(2√2) ≈ 0.35355"
+          }
+        ],
+        "marks": [
+          {
+            "at": [
+              1,
+              0.41421356
+            ],
+            "label": "q = 1：|√2 − 1| ≈ 0.414"
+          },
+          {
+            "at": [
+              985,
+              0.35355344
+            ],
+            "label": "q = 985：q²·误差 ≈ 0.35355"
+          }
+        ],
+        "xRange": [
+          0,
+          2500
+        ],
+        "yRange": [
+          0.3,
+          0.45
+        ],
+        "pointColor": "#4cc9f0",
+        "pointSize": 4,
+        "title": "√2 的渐近分数：q² × 误差趋于 1/(2√2) ≈ 0.3536，即误差 ≈ 0.3536/q²"
+      },
       "examples": [
         {
           "problem": "把 43/19 展成简单连分数，并求出全部渐近分数。",
@@ -87244,6 +94557,1290 @@
         "Generating function and integral representation (integer order): e^{(x/2)(t−1/t)} = Σ_{n∈ℤ} J_n(x) tⁿ for t ≠ 0; putting t = e^{iθ} gives J_n(x) = (1/π)∫₀^π cos(nθ − x sinθ) dθ, from which J_{−n} = (−1)ⁿJ_n and |J_n(x)| ≤ 1 follow immediately.",
         "Asymptotics and the modified version: for large x the envelope decays like √(2/(πx)) and the zeros approach spacing π, making J_ν a decaying oscillation; the substitution x → ix yields I_ν, solving x²I″ + xI′ − (x² + ν²)I = 0, which has no zeros on the positive axis and varies monotonically — the basic function of diffusion-type problems."
       ],
+      "plot": {
+        "type": "scatter",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            0.3,
+            0.97763
+          ],
+          [
+            0.6,
+            0.912
+          ],
+          [
+            0.9,
+            0.80752
+          ],
+          [
+            1.2,
+            0.67113
+          ],
+          [
+            1.5,
+            0.51183
+          ],
+          [
+            1.8,
+            0.33999
+          ],
+          [
+            2.1,
+            0.16661
+          ],
+          [
+            2.4,
+            0.00251
+          ],
+          [
+            2.7,
+            -0.14245
+          ],
+          [
+            3,
+            -0.26005
+          ],
+          [
+            3.3,
+            -0.3443
+          ],
+          [
+            3.6,
+            -0.39177
+          ],
+          [
+            3.9,
+            -0.40183
+          ],
+          [
+            4.2,
+            -0.37656
+          ],
+          [
+            4.5,
+            -0.32054
+          ],
+          [
+            4.8,
+            -0.24043
+          ],
+          [
+            5.1,
+            -0.14433
+          ],
+          [
+            5.4,
+            -0.04121
+          ],
+          [
+            5.7,
+            0.05992
+          ],
+          [
+            6,
+            0.15065
+          ],
+          [
+            6.3,
+            0.22381
+          ],
+          [
+            6.6,
+            0.27404
+          ],
+          [
+            6.9,
+            0.2981
+          ],
+          [
+            7.2,
+            0.29507
+          ],
+          [
+            7.5,
+            0.26634
+          ],
+          [
+            7.8,
+            0.21541
+          ],
+          [
+            8.1,
+            0.14752
+          ],
+          [
+            8.4,
+            0.06916
+          ],
+          [
+            8.7,
+            -0.01252
+          ],
+          [
+            9,
+            -0.09033
+          ],
+          [
+            9.3,
+            -0.15766
+          ],
+          [
+            9.6,
+            -0.20898
+          ],
+          [
+            9.9,
+            -0.24034
+          ],
+          [
+            10.2,
+            -0.24962
+          ],
+          [
+            10.5,
+            -0.23665
+          ],
+          [
+            10.8,
+            -0.2032
+          ],
+          [
+            11.1,
+            -0.15277
+          ],
+          [
+            11.4,
+            -0.09021
+          ],
+          [
+            11.7,
+            -0.02133
+          ],
+          [
+            12,
+            0.04769
+          ],
+          [
+            12.3,
+            0.1108
+          ],
+          [
+            12.6,
+            0.16261
+          ],
+          [
+            12.9,
+            0.19884
+          ],
+          [
+            13.2,
+            0.21669
+          ],
+          [
+            13.5,
+            0.21499
+          ],
+          [
+            13.8,
+            0.19434
+          ],
+          [
+            14.1,
+            0.15695
+          ],
+          [
+            14.4,
+            0.10648
+          ],
+          [
+            14.7,
+            0.04764
+          ],
+          [
+            15,
+            -0.01422
+          ]
+        ],
+        "lines": [
+          {
+            "slope": -0.074579,
+            "intercept": 1,
+            "from": 0,
+            "to": 0.3,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.218738,
+            "intercept": 1.043248,
+            "from": 0.3,
+            "to": 0.6,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.34827,
+            "intercept": 1.120967,
+            "from": 0.6,
+            "to": 0.9,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.454637,
+            "intercept": 1.216697,
+            "from": 0.9,
+            "to": 1.2,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.531017,
+            "intercept": 1.308353,
+            "from": 1.2,
+            "to": 1.5,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.572804,
+            "intercept": 1.371034,
+            "from": 1.5,
+            "to": 1.8,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.577931,
+            "intercept": 1.380263,
+            "from": 1.8,
+            "to": 2.1,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.546998,
+            "intercept": 1.315302,
+            "from": 2.1,
+            "to": 2.4,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.48319,
+            "intercept": 1.162164,
+            "from": 2.4,
+            "to": 2.7,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.392009,
+            "intercept": 0.915974,
+            "from": 2.7,
+            "to": 3,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.280814,
+            "intercept": 0.582391,
+            "from": 3,
+            "to": 3.3,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.158242,
+            "intercept": 0.177904,
+            "from": 3.3,
+            "to": 3.6,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.033523,
+            "intercept": -0.271085,
+            "from": 3.6,
+            "to": 3.9,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.08423,
+            "intercept": -0.730323,
+            "from": 3.9,
+            "to": 4.2,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.186715,
+            "intercept": -1.160761,
+            "from": 4.2,
+            "to": 4.5,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.267057,
+            "intercept": -1.5223,
+            "from": 4.5,
+            "to": 4.8,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.320302,
+            "intercept": -1.777875,
+            "from": 4.8,
+            "to": 5.1,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.343749,
+            "intercept": -1.897454,
+            "from": 5.1,
+            "to": 5.4,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.3371,
+            "intercept": -1.861552,
+            "from": 5.4,
+            "to": 5.7,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.302417,
+            "intercept": -1.66386,
+            "from": 5.7,
+            "to": 6,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.243889,
+            "intercept": -1.31269,
+            "from": 6,
+            "to": 6.3,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.167438,
+            "intercept": -0.831046,
+            "from": 6.3,
+            "to": 6.6,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.080196,
+            "intercept": -0.255247,
+            "from": 6.6,
+            "to": 6.9,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.010104,
+            "intercept": 0.367823,
+            "from": 6.9,
+            "to": 7.2,
+            "color": "#4cc9f0",
+            "label": "J₀(x)"
+          },
+          {
+            "slope": -0.09577,
+            "intercept": 0.984615,
+            "from": 7.2,
+            "to": 7.5,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.169773,
+            "intercept": 1.539636,
+            "from": 7.5,
+            "to": 7.8,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.226301,
+            "intercept": 1.980557,
+            "from": 7.8,
+            "to": 8.1,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.261201,
+            "intercept": 2.263243,
+            "from": 8.1,
+            "to": 8.4,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.272267,
+            "intercept": 2.356197,
+            "from": 8.4,
+            "to": 8.7,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.25937,
+            "intercept": 2.243993,
+            "from": 8.7,
+            "to": 9,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.224405,
+            "intercept": 1.929314,
+            "from": 9,
+            "to": 9.3,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.171078,
+            "intercept": 1.433374,
+            "from": 9.3,
+            "to": 9.6,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.104541,
+            "intercept": 0.794618,
+            "from": 9.6,
+            "to": 9.9,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.03092,
+            "intercept": 0.065766,
+            "from": 9.9,
+            "to": 10.2,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.04323,
+            "intercept": -0.690559,
+            "from": 10.2,
+            "to": 10.5,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.111487,
+            "intercept": -1.407266,
+            "from": 10.5,
+            "to": 10.8,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.168112,
+            "intercept": -2.018814,
+            "from": 10.8,
+            "to": 11.1,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.208513,
+            "intercept": -2.467259,
+            "from": 11.1,
+            "to": 11.4,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.229611,
+            "intercept": -2.707777,
+            "from": 11.4,
+            "to": 11.7,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.230069,
+            "intercept": -2.713134,
+            "from": 11.7,
+            "to": 12,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.210362,
+            "intercept": -2.476656,
+            "from": 12,
+            "to": 12.3,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.172698,
+            "intercept": -2.013384,
+            "from": 12.3,
+            "to": 12.6,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.120784,
+            "intercept": -1.35927,
+            "from": 12.6,
+            "to": 12.9,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.059478,
+            "intercept": -0.568427,
+            "from": 12.9,
+            "to": 13.2,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.005656,
+            "intercept": 0.291343,
+            "from": 13.2,
+            "to": 13.5,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.068845,
+            "intercept": 1.144398,
+            "from": 13.5,
+            "to": 13.8,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.124609,
+            "intercept": 1.913943,
+            "from": 13.8,
+            "to": 14.1,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.168229,
+            "intercept": 2.528985,
+            "from": 14.1,
+            "to": 14.4,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.196141,
+            "intercept": 2.930913,
+            "from": 14.4,
+            "to": 14.7,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": -0.206221,
+            "intercept": 3.079091,
+            "from": 14.7,
+            "to": 15,
+            "color": "#4cc9f0"
+          },
+          {
+            "slope": 0.494396,
+            "intercept": 0,
+            "from": 0,
+            "to": 0.3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.461274,
+            "intercept": 0.009937,
+            "from": 0.3,
+            "to": 0.6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.397495,
+            "intercept": 0.048204,
+            "from": 0.6,
+            "to": 0.9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.307798,
+            "intercept": 0.128931,
+            "from": 0.9,
+            "to": 1.2,
+            "color": "#ff6b9d",
+            "label": "J₁(x)"
+          },
+          {
+            "slope": 0.198825,
+            "intercept": 0.259699,
+            "from": 1.2,
+            "to": 1.5,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.078601,
+            "intercept": 0.440034,
+            "from": 1.5,
+            "to": 1.8,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.044083,
+            "intercept": 0.660866,
+            "from": 1.8,
+            "to": 2.1,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.160356,
+            "intercept": 0.90504,
+            "from": 2.1,
+            "to": 2.4,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.261946,
+            "intercept": 1.148856,
+            "from": 2.4,
+            "to": 2.7,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.341808,
+            "intercept": 1.364483,
+            "from": 2.7,
+            "to": 3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.394652,
+            "intercept": 1.523014,
+            "from": 3,
+            "to": 3.3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.417326,
+            "intercept": 1.59784,
+            "from": 3.3,
+            "to": 3.6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.409032,
+            "intercept": 1.567981,
+            "from": 3.6,
+            "to": 3.9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.371343,
+            "intercept": 1.420994,
+            "from": 3.9,
+            "to": 4.2,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.308045,
+            "intercept": 1.155142,
+            "from": 4.2,
+            "to": 4.5,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.224798,
+            "intercept": 0.780531,
+            "from": 4.5,
+            "to": 4.8,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.128658,
+            "intercept": 0.319058,
+            "from": 4.8,
+            "to": 5.1,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.027492,
+            "intercept": -0.196888,
+            "from": 5.1,
+            "to": 5.4,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.070657,
+            "intercept": -0.726893,
+            "from": 5.4,
+            "to": 5.7,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.158213,
+            "intercept": -1.22596,
+            "from": 5.7,
+            "to": 6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.228656,
+            "intercept": -1.648622,
+            "from": 6,
+            "to": 6.3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.277023,
+            "intercept": -1.953329,
+            "from": 6.3,
+            "to": 6.6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.30026,
+            "intercept": -2.106698,
+            "from": 6.6,
+            "to": 6.9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.297432,
+            "intercept": -2.087181,
+            "from": 6.9,
+            "to": 7.2,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.269737,
+            "intercept": -1.887777,
+            "from": 7.2,
+            "to": 7.5,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.220361,
+            "intercept": -1.517463,
+            "from": 7.5,
+            "to": 7.8,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.15417,
+            "intercept": -1.001166,
+            "from": 7.8,
+            "to": 8.1,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.077262,
+            "intercept": -0.378212,
+            "from": 8.1,
+            "to": 8.4,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.003557,
+            "intercept": 0.300669,
+            "from": 8.4,
+            "to": 8.7,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.081357,
+            "intercept": 0.977529,
+            "from": 8.7,
+            "to": 9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.14966,
+            "intercept": 1.592248,
+            "from": 9,
+            "to": 9.3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.202964,
+            "intercept": 2.087977,
+            "from": 9.3,
+            "to": 9.6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.237183,
+            "intercept": 2.416484,
+            "from": 9.6,
+            "to": 9.9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.249952,
+            "intercept": 2.542894,
+            "from": 9.9,
+            "to": 10.2,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.240781,
+            "intercept": 2.449349,
+            "from": 10.2,
+            "to": 10.5,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.211055,
+            "intercept": 2.137229,
+            "from": 10.5,
+            "to": 10.8,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.163872,
+            "intercept": 1.627655,
+            "from": 10.8,
+            "to": 11.1,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.103741,
+            "intercept": 0.960197,
+            "from": 11.1,
+            "to": 11.4,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": -0.036166,
+            "intercept": 0.189836,
+            "from": 11.4,
+            "to": 11.7,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.032844,
+            "intercept": -0.617573,
+            "from": 11.7,
+            "to": 12,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.097294,
+            "intercept": -1.390977,
+            "from": 12,
+            "to": 12.3,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.151722,
+            "intercept": -2.060436,
+            "from": 12.3,
+            "to": 12.6,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.191647,
+            "intercept": -2.563494,
+            "from": 12.6,
+            "to": 12.9,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.213938,
+            "intercept": -2.851055,
+            "from": 12.9,
+            "to": 13.2,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.217053,
+            "intercept": -2.89217,
+            "from": 13.2,
+            "to": 13.5,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.201137,
+            "intercept": -2.677306,
+            "from": 13.5,
+            "to": 13.8,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.167979,
+            "intercept": -2.219726,
+            "from": 13.8,
+            "to": 14.1,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.120824,
+            "intercept": -1.554839,
+            "from": 14.1,
+            "to": 14.4,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.064065,
+            "intercept": -0.737509,
+            "from": 14.4,
+            "to": 14.7,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 0.002843,
+            "intercept": 0.162466,
+            "from": 14.7,
+            "to": 15,
+            "color": "#ff6b9d"
+          },
+          {
+            "slope": 2.117543,
+            "intercept": -1.504614,
+            "from": 0.2,
+            "to": 0.502,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 1.187593,
+            "intercept": -1.037741,
+            "from": 0.502,
+            "to": 0.8041,
+            "color": "#ffd166",
+            "label": "Y₀(x)"
+          },
+          {
+            "slope": 0.825192,
+            "intercept": -0.746341,
+            "from": 0.8041,
+            "to": 1.1061,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.580588,
+            "intercept": -0.475779,
+            "from": 1.1061,
+            "to": 1.4082,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.374507,
+            "intercept": -0.185582,
+            "from": 1.4082,
+            "to": 1.7102,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.187868,
+            "intercept": 0.133607,
+            "from": 1.7102,
+            "to": 2.0122,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.018653,
+            "intercept": 0.474109,
+            "from": 2.0122,
+            "to": 2.3143,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.129377,
+            "intercept": 0.816694,
+            "from": 2.3143,
+            "to": 2.6163,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.25088,
+            "intercept": 1.134586,
+            "from": 2.6163,
+            "to": 2.9184,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.340936,
+            "intercept": 1.3974,
+            "from": 2.9184,
+            "to": 3.2204,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.396146,
+            "intercept": 1.575199,
+            "from": 3.2204,
+            "to": 3.5224,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.415243,
+            "intercept": 1.642469,
+            "from": 3.5224,
+            "to": 3.8245,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.399351,
+            "intercept": 1.58169,
+            "from": 3.8245,
+            "to": 4.1265,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.351964,
+            "intercept": 1.386148,
+            "from": 4.1265,
+            "to": 4.4286,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.278699,
+            "intercept": 1.061684,
+            "from": 4.4286,
+            "to": 4.7306,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.186845,
+            "intercept": 0.627161,
+            "from": 4.7306,
+            "to": 5.0327,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.084789,
+            "intercept": 0.113548,
+            "from": 5.0327,
+            "to": 5.3347,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.01866,
+            "intercept": -0.438318,
+            "from": 5.3347,
+            "to": 5.6367,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.114961,
+            "intercept": -0.981142,
+            "from": 5.6367,
+            "to": 5.9388,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.196507,
+            "intercept": -1.465426,
+            "from": 5.9388,
+            "to": 6.2408,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.257197,
+            "intercept": -1.844182,
+            "from": 6.2408,
+            "to": 6.5429,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.292878,
+            "intercept": -2.077638,
+            "from": 6.5429,
+            "to": 6.8449,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.301618,
+            "intercept": -2.137463,
+            "from": 6.8449,
+            "to": 7.1469,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.283793,
+            "intercept": -2.010068,
+            "from": 7.1469,
+            "to": 7.449,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.241982,
+            "intercept": -1.698619,
+            "from": 7.449,
+            "to": 7.751,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.180685,
+            "intercept": -1.223508,
+            "from": 7.751,
+            "to": 8.0531,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.105891,
+            "intercept": -0.62118,
+            "from": 8.0531,
+            "to": 8.3551,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.024526,
+            "intercept": 0.058631,
+            "from": 8.3551,
+            "to": 8.6571,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.05615,
+            "intercept": 0.757049,
+            "from": 8.6571,
+            "to": 8.9592,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.129168,
+            "intercept": 1.411231,
+            "from": 8.9592,
+            "to": 9.2612,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.188434,
+            "intercept": 1.960111,
+            "from": 9.2612,
+            "to": 9.5633,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.229222,
+            "intercept": 2.350176,
+            "from": 9.5633,
+            "to": 9.8653,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.248537,
+            "intercept": 2.540721,
+            "from": 9.8653,
+            "to": 10.1673,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.245326,
+            "intercept": 2.508075,
+            "from": 10.1673,
+            "to": 10.4694,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.220518,
+            "intercept": 2.248356,
+            "from": 10.4694,
+            "to": 10.7714,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.176892,
+            "intercept": 1.778444,
+            "from": 10.7714,
+            "to": 11.0735,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.11879,
+            "intercept": 1.135049,
+            "from": 11.0735,
+            "to": 11.3755,
+            "color": "#ffd166"
+          },
+          {
+            "slope": -0.051702,
+            "intercept": 0.371884,
+            "from": 11.3755,
+            "to": 11.6776,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.018237,
+            "intercept": -0.444827,
+            "from": 11.6776,
+            "to": 11.9796,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.084792,
+            "intercept": -1.242133,
+            "from": 11.9796,
+            "to": 12.2816,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.142178,
+            "intercept": -1.946924,
+            "from": 12.2816,
+            "to": 12.5837,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.185548,
+            "intercept": -2.49268,
+            "from": 12.5837,
+            "to": 12.8857,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.211399,
+            "intercept": -2.825792,
+            "from": 12.8857,
+            "to": 13.1878,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.217847,
+            "intercept": -2.91082,
+            "from": 13.1878,
+            "to": 13.4898,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.204755,
+            "intercept": -2.73421,
+            "from": 13.4898,
+            "to": 13.7918,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.173711,
+            "intercept": -2.306058,
+            "from": 13.7918,
+            "to": 14.0939,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.127852,
+            "intercept": -1.659731,
+            "from": 14.0939,
+            "to": 14.3959,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.071557,
+            "intercept": -0.849313,
+            "from": 14.3959,
+            "to": 14.698,
+            "color": "#ffd166"
+          },
+          {
+            "slope": 0.010037,
+            "intercept": 0.054906,
+            "from": 14.698,
+            "to": 15,
+            "color": "#ffd166"
+          }
+        ],
+        "marks": [
+          {
+            "at": [
+              2.4048,
+              0
+            ],
+            "label": "J₀ 的第一个零点 ≈ 2.405"
+          },
+          {
+            "at": [
+              3.832,
+              -0.4028
+            ],
+            "label": "J₀ 的第一个极小 ≈ −0.403"
+          }
+        ],
+        "xRange": [
+          0,
+          15.6
+        ],
+        "yRange": [
+          -1.35,
+          1.3
+        ],
+        "pointColor": "#4cc9f0",
+        "pointSize": 2.6,
+        "title": "贝塞尔函数采样：J₀（蓝点/线）、J₁（粉）、Y₀（黄）——Y₀ 在 x→0⁺ 时发散"
+      },
       "examples": [
         {
           "problem": "用级数定义验证半整数阶公式 $J_{1/2}(x)=\\sqrt{2/(\\pi x)}\\,\\sin x$，并在 $x=2$ 处做数值比较。",

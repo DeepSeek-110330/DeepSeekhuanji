@@ -50,6 +50,206 @@
       "Euler's theorem generalises Fermat's little theorem: taking $m=p$ prime recovers $a^{p-1}\\equiv 1\\pmod p$.",
       "Application: in RSA the exponents satisfy $ed\\equiv 1\\pmod{\\varphi(N)}$ and decryption relies on Euler's theorem (the few cases $\\gcd(m,N)>1$ are handled separately via the Chinese remainder theorem)."
     ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          19,
+          18
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          21,
+          12
+        ],
+        [
+          22,
+          10
+        ],
+        [
+          23,
+          22
+        ],
+        [
+          24,
+          8
+        ],
+        [
+          25,
+          20
+        ],
+        [
+          26,
+          12
+        ],
+        [
+          27,
+          18
+        ],
+        [
+          28,
+          12
+        ],
+        [
+          29,
+          28
+        ],
+        [
+          30,
+          8
+        ],
+        [
+          31,
+          30
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          33,
+          20
+        ],
+        [
+          34,
+          16
+        ],
+        [
+          35,
+          24
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          37,
+          36
+        ],
+        [
+          38,
+          18
+        ],
+        [
+          39,
+          24
+        ],
+        [
+          40,
+          16
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 1,
+          "intercept": -1,
+          "from": 1,
+          "to": 41,
+          "color": "#ffd166",
+          "label": "y = n − 1"
+        }
+      ],
+      "marks": [
+        {
+          "at": [
+            13,
+            12
+          ],
+          "label": "φ(13) = 12 = p − 1（p 为素数时恒成立）"
+        },
+        {
+          "at": [
+            30,
+            8
+          ],
+          "label": "φ(30) = 8"
+        }
+      ],
+      "xRange": [
+        0,
+        41
+      ],
+      "yRange": [
+        0,
+        42
+      ],
+      "title": "φ(n) 散点（n ≤ 40）：素数处 φ(p) = p − 1 贴着 y = n − 1，合数处下坠"
+    },
     "examples": [
       {
         "problem": "计算 $\\varphi(360)$，并用积性分解复核。",
@@ -274,6 +474,82 @@
       "There are exactly $(p-1)/2$ quadratic residues, and for a residue $a$ the congruence $x^2\\equiv a\\pmod p$ has exactly two solutions, $x$ and $-x$.",
       "Modulo 2 every integer is a square ($0=0^2$, $1=1^2$), which is why the theory insists on odd primes."
     ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          1
+        ]
+      ],
+      "marks": [
+        {
+          "at": [
+            1,
+            1
+          ],
+          "label": "1² ≡ 1"
+        },
+        {
+          "at": [
+            3,
+            9
+          ],
+          "label": "3² ≡ 9（与 8² 成对）"
+        }
+      ],
+      "xRange": [
+        -0.5,
+        10.5
+      ],
+      "yRange": [
+        -0.5,
+        10.5
+      ],
+      "pointColor": "#4cc9f0",
+      "pointSize": 4,
+      "title": "模 11 的平方点列 y ≡ r² (mod 11)：非零二次剩余共 (11−1)/2 = 5 个"
+    },
     "examples": [
       {
         "problem": "判断 3 与 5 是否为模 7 的二次剩余。",
@@ -421,6 +697,480 @@
       "$d(n)$ is odd iff $n$ is a perfect square (since $\\prod(\\alpha_i+1)$ is odd iff every $\\alpha_i$ is even).",
       "Application: perfect numbers satisfy $\\sigma(n)=2n$ (6, 28, …); every even perfect number has the form $2^{p-1}(2^p-1)$ with $2^p-1$ a Mersenne prime (Euclid–Euler)."
     ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          19,
+          18
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          21,
+          12
+        ],
+        [
+          22,
+          10
+        ],
+        [
+          23,
+          22
+        ],
+        [
+          24,
+          8
+        ],
+        [
+          25,
+          20
+        ],
+        [
+          26,
+          12
+        ],
+        [
+          27,
+          18
+        ],
+        [
+          28,
+          12
+        ],
+        [
+          29,
+          28
+        ],
+        [
+          30,
+          8
+        ],
+        [
+          31,
+          30
+        ],
+        [
+          32,
+          16
+        ],
+        [
+          33,
+          20
+        ],
+        [
+          34,
+          16
+        ],
+        [
+          35,
+          24
+        ],
+        [
+          36,
+          12
+        ],
+        [
+          37,
+          36
+        ],
+        [
+          38,
+          18
+        ],
+        [
+          39,
+          24
+        ],
+        [
+          40,
+          16
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 2,
+          "intercept": -1,
+          "from": 1,
+          "to": 2,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 1,
+          "intercept": 1,
+          "from": 2,
+          "to": 3,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 3,
+          "intercept": -5,
+          "from": 3,
+          "to": 4,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -1,
+          "intercept": 11,
+          "from": 4,
+          "to": 5,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 6,
+          "intercept": -24,
+          "from": 5,
+          "to": 6,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -4,
+          "intercept": 36,
+          "from": 6,
+          "to": 7,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 7,
+          "intercept": -41,
+          "from": 7,
+          "to": 8,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -2,
+          "intercept": 31,
+          "from": 8,
+          "to": 9,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 5,
+          "intercept": -32,
+          "from": 9,
+          "to": 10,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -6,
+          "intercept": 78,
+          "from": 10,
+          "to": 11,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 16,
+          "intercept": -164,
+          "from": 11,
+          "to": 12,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -14,
+          "intercept": 196,
+          "from": 12,
+          "to": 13,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 10,
+          "intercept": -116,
+          "from": 13,
+          "to": 14,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 0,
+          "intercept": 24,
+          "from": 14,
+          "to": 15,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 7,
+          "intercept": -81,
+          "from": 15,
+          "to": 16,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -13,
+          "intercept": 239,
+          "from": 16,
+          "to": 17,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 21,
+          "intercept": -339,
+          "from": 17,
+          "to": 18,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -19,
+          "intercept": 381,
+          "from": 18,
+          "to": 19,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 22,
+          "intercept": -398,
+          "from": 19,
+          "to": 20,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -10,
+          "intercept": 242,
+          "from": 20,
+          "to": 21,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 4,
+          "intercept": -52,
+          "from": 21,
+          "to": 22,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -12,
+          "intercept": 300,
+          "from": 22,
+          "to": 23,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 36,
+          "intercept": -804,
+          "from": 23,
+          "to": 24,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -29,
+          "intercept": 756,
+          "from": 24,
+          "to": 25,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 11,
+          "intercept": -244,
+          "from": 25,
+          "to": 26,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -2,
+          "intercept": 94,
+          "from": 26,
+          "to": 27,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 16,
+          "intercept": -392,
+          "from": 27,
+          "to": 28,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -26,
+          "intercept": 784,
+          "from": 28,
+          "to": 29,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 42,
+          "intercept": -1188,
+          "from": 29,
+          "to": 30,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -40,
+          "intercept": 1272,
+          "from": 30,
+          "to": 31,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 31,
+          "intercept": -929,
+          "from": 31,
+          "to": 32,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -15,
+          "intercept": 543,
+          "from": 32,
+          "to": 33,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 6,
+          "intercept": -150,
+          "from": 33,
+          "to": 34,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -6,
+          "intercept": 258,
+          "from": 34,
+          "to": 35,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 43,
+          "intercept": -1457,
+          "from": 35,
+          "to": 36,
+          "color": "#ff6b9d",
+          "label": "σ(n)"
+        },
+        {
+          "slope": -53,
+          "intercept": 1999,
+          "from": 36,
+          "to": 37,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 22,
+          "intercept": -776,
+          "from": 37,
+          "to": 38,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": -4,
+          "intercept": 212,
+          "from": 38,
+          "to": 39,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 34,
+          "intercept": -1270,
+          "from": 39,
+          "to": 40,
+          "color": "#ff6b9d"
+        },
+        {
+          "slope": 1,
+          "intercept": 0,
+          "from": 1,
+          "to": 41,
+          "color": "#ffd166",
+          "label": "y = n"
+        }
+      ],
+      "marks": [
+        {
+          "at": [
+            24,
+            60
+          ],
+          "label": "σ(24) = 60"
+        },
+        {
+          "at": [
+            30,
+            8
+          ],
+          "label": "φ(30) = 8"
+        }
+      ],
+      "xRange": [
+        0,
+        41
+      ],
+      "yRange": [
+        0,
+        96
+      ],
+      "title": "φ(n)（蓝点）与 σ(n)（粉线）的前 40 项：直线 y = n 把两类算术函数分开"
+    },
     "examples": [
       {
         "problem": "求 $d(28)$ 与 $\\sigma(28)$，并验证 28 是完全数。",

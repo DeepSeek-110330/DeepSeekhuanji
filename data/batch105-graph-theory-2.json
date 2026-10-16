@@ -178,6 +178,184 @@
       "Combinatorial consequences: maximum bipartite matching becomes a max-flow problem (all capacities 1); integer flows are matchings and min cuts are vertex covers, so König's theorem (maximum matching = minimum vertex cover) is a special case; more generally Menger's theorem states that the maximum number of edge-disjoint s–t paths equals the minimum s–t cut capacity.",
       "Duality: max flow is a linear program whose dual is exactly the min cut problem, so strong duality is the theorem; complementary slackness yields optimality certificates — a flow is optimal iff some cut has every S→T arc saturated and every T→S arc empty."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        0,
+        7.6
+      ],
+      "yRange": [
+        -0.2,
+        4.8
+      ],
+      "elements": [
+        {
+          "type": "segment",
+          "from": [
+            0.8,
+            2.2
+          ],
+          "to": [
+            3.6,
+            4.0
+          ],
+          "color": "#4cc9f0",
+          "width": 2,
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0.8,
+            2.2
+          ],
+          "to": [
+            3.6,
+            0.4
+          ],
+          "color": "#4cc9f0",
+          "width": 2,
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.6,
+            4.0
+          ],
+          "to": [
+            3.6,
+            0.4
+          ],
+          "color": "#ff6b9d",
+          "width": 2,
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.6,
+            4.0
+          ],
+          "to": [
+            6.6,
+            2.2
+          ],
+          "color": "#4cc9f0",
+          "width": 2,
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            3.6,
+            0.4
+          ],
+          "to": [
+            6.6,
+            2.2
+          ],
+          "color": "#4cc9f0",
+          "width": 2,
+          "arrow": true
+        },
+        {
+          "type": "point",
+          "at": [
+            0.8,
+            2.2
+          ],
+          "color": "#ffd166",
+          "r": 5,
+          "label": "s"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.6,
+            4.0
+          ],
+          "color": "#ffd166",
+          "r": 5,
+          "label": "v₁"
+        },
+        {
+          "type": "point",
+          "at": [
+            3.6,
+            0.4
+          ],
+          "color": "#ffd166",
+          "r": 5,
+          "label": "v₂"
+        },
+        {
+          "type": "point",
+          "at": [
+            6.6,
+            2.2
+          ],
+          "color": "#ffd166",
+          "r": 5,
+          "label": "t"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.15,
+            3.5
+          ],
+          "text": "3/3",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            2.15,
+            0.9
+          ],
+          "text": "2/2",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            4.3,
+            2.2
+          ],
+          "text": "1/1",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            5.1,
+            3.5
+          ],
+          "text": "2/2",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            5.1,
+            0.9
+          ],
+          "text": "3/3",
+          "size": 12
+        },
+        {
+          "type": "label",
+          "at": [
+            3.0,
+            4.6
+          ],
+          "text": "最大流 = 最小割 = 5",
+          "size": 11
+        }
+      ],
+      "title": "小流网络：边标「流量/容量」，最大流 = 最小割 = 5（割 {s} 容量 3+2）"
+    },
     "examples": [
       {
         "problem": "网络顶点为 $s,v_1,v_2,v_3,v_4,t$，容量：$s\\to v_1:16$，$s\\to v_2:13$，$v_1\\to v_2:10$，$v_2\\to v_1:4$，$v_1\\to v_3:12$，$v_3\\to v_2:9$，$v_2\\to v_4:14$，$v_4\\to v_3:7$，$v_3\\to t:20$，$v_4\\to t:4$。用增广路求最大流，再找一个最小割验证定理。",

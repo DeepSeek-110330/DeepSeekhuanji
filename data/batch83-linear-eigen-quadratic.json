@@ -50,6 +50,139 @@
       "A set of pairwise orthogonal nonzero vectors is always linearly independent; conversely, an independent set need not be orthogonal, which is exactly why Gram–Schmidt is needed.",
       "An orthogonal matrix satisfies AᵀA=E ⟺ A⁻¹=Aᵀ and has determinant ±1; orthogonal transformations preserve inner products, lengths and angles."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -0.4,
+        3.9
+      ],
+      "yRange": [
+        -0.4,
+        2.4
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            3,
+            1
+          ],
+          "color": "#4cc9f0",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1,
+            2
+          ],
+          "color": "#ff6b9d",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1.5,
+            0.5
+          ],
+          "color": "#ffd166",
+          "width": 3
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.5,
+            0.5
+          ],
+          "to": [
+            1,
+            2
+          ],
+          "color": "#06d6a0",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.6708,
+            0.5569
+          ],
+          "to": [
+            1.6138,
+            0.7277
+          ],
+          "color": "rgba(160,175,220,0.9)"
+        },
+        {
+          "type": "segment",
+          "from": [
+            1.6138,
+            0.7277
+          ],
+          "to": [
+            1.4431,
+            0.6708
+          ],
+          "color": "rgba(160,175,220,0.9)"
+        },
+        {
+          "type": "point",
+          "at": [
+            3,
+            1
+          ],
+          "label": "α=(3,1)"
+        },
+        {
+          "type": "point",
+          "at": [
+            1,
+            2
+          ],
+          "label": "β=(1,2)"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.35,
+            0.12
+          ],
+          "text": "proj = (1.5, 0.5)"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.62,
+            0.62
+          ],
+          "text": "θ = 45°"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            1.55
+          ],
+          "text": "β − proj ⊥ α"
+        }
+      ],
+      "title": "正交分解：β = 投影 + 垂直分量，α=(3,1) 与 β=(1,2) 的夹角为 45°"
+    },
     "examples": [
       {
         "problem": "把线性无关组 $\\alpha_1=(1,1,1)^T$，$\\alpha_2=(0,1,1)^T$，$\\alpha_3=(0,0,1)^T$ 用施密特正交化变成标准正交组。",
@@ -334,6 +467,127 @@
       "Having n distinct eigenvalues is sufficient for diagonalizability but not necessary (the identity and scalar matrices are diagonalizable).",
       "If A is diagonalizable, then so are A^k and every polynomial f(A), with eigenvalues λᵢ^k and f(λᵢ); and if A is invertible, so is A⁻¹, with eigenvalues 1/λᵢ."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -1.3,
+        7.0
+      ],
+      "yRange": [
+        -1.7,
+        4.7
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            6,
+            3
+          ],
+          "color": "#ffd166",
+          "dash": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1.3,
+            -1.3
+          ],
+          "color": "#b388ff",
+          "dash": true
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.15)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.15)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.28,
+            0.72
+          ],
+          "text": "S"
+        },
+        {
+          "type": "label",
+          "at": [
+            3.45,
+            2.05
+          ],
+          "text": "T(S)"
+        },
+        {
+          "type": "label",
+          "at": [
+            4.6,
+            1.15
+          ],
+          "text": "v₁=(2,1)，λ₁=5"
+        },
+        {
+          "type": "label",
+          "at": [
+            0.8,
+            -1.45
+          ],
+          "text": "v₂=(1,−1)，λ₂=2"
+        }
+      ],
+      "title": "相似对角化：A=[[4,2],[1,3]] 在特征向量基下成为 diag(5,2)（P⁻¹AP=Λ）"
+    },
     "examples": [
       {
         "problem": "把 $A=\\begin{pmatrix}3&-1\\\\-1&3\\end{pmatrix}$ 对角化，即求可逆矩阵 $P$ 使 $P^{-1}AP$ 为对角矩阵。",
@@ -411,6 +665,663 @@
       "There exists an orthogonal Q with QᵀAQ=Q⁻¹AQ=Λ; that is, a real symmetric matrix is both orthogonally similar and orthogonally congruent to a diagonal matrix.",
       "Conversely, any real matrix that can be orthogonally diagonalized must be symmetric; the number of positive diagonal entries is the positive inertia index of the associated quadratic form."
     ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [
+        -4.2,
+        4.2
+      ],
+      "yRange": [
+        -2.6,
+        2.6
+      ],
+      "elements": [
+        {
+          "type": "axes"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.9962,
+              0.0872
+            ],
+            [
+              0.9848,
+              0.1736
+            ],
+            [
+              0.9659,
+              0.2588
+            ],
+            [
+              0.9397,
+              0.342
+            ],
+            [
+              0.9063,
+              0.4226
+            ],
+            [
+              0.866,
+              0.5
+            ],
+            [
+              0.8192,
+              0.5736
+            ],
+            [
+              0.766,
+              0.6428
+            ],
+            [
+              0.7071,
+              0.7071
+            ],
+            [
+              0.6428,
+              0.766
+            ],
+            [
+              0.5736,
+              0.8192
+            ],
+            [
+              0.5,
+              0.866
+            ],
+            [
+              0.4226,
+              0.9063
+            ],
+            [
+              0.342,
+              0.9397
+            ],
+            [
+              0.2588,
+              0.9659
+            ],
+            [
+              0.1736,
+              0.9848
+            ],
+            [
+              0.0872,
+              0.9962
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              -0.0872,
+              0.9962
+            ],
+            [
+              -0.1736,
+              0.9848
+            ],
+            [
+              -0.2588,
+              0.9659
+            ],
+            [
+              -0.342,
+              0.9397
+            ],
+            [
+              -0.4226,
+              0.9063
+            ],
+            [
+              -0.5,
+              0.866
+            ],
+            [
+              -0.5736,
+              0.8192
+            ],
+            [
+              -0.6428,
+              0.766
+            ],
+            [
+              -0.7071,
+              0.7071
+            ],
+            [
+              -0.766,
+              0.6428
+            ],
+            [
+              -0.8192,
+              0.5736
+            ],
+            [
+              -0.866,
+              0.5
+            ],
+            [
+              -0.9063,
+              0.4226
+            ],
+            [
+              -0.9397,
+              0.342
+            ],
+            [
+              -0.9659,
+              0.2588
+            ],
+            [
+              -0.9848,
+              0.1736
+            ],
+            [
+              -0.9962,
+              0.0872
+            ],
+            [
+              -1.0,
+              0.0
+            ],
+            [
+              -0.9962,
+              -0.0872
+            ],
+            [
+              -0.9848,
+              -0.1736
+            ],
+            [
+              -0.9659,
+              -0.2588
+            ],
+            [
+              -0.9397,
+              -0.342
+            ],
+            [
+              -0.9063,
+              -0.4226
+            ],
+            [
+              -0.866,
+              -0.5
+            ],
+            [
+              -0.8192,
+              -0.5736
+            ],
+            [
+              -0.766,
+              -0.6428
+            ],
+            [
+              -0.7071,
+              -0.7071
+            ],
+            [
+              -0.6428,
+              -0.766
+            ],
+            [
+              -0.5736,
+              -0.8192
+            ],
+            [
+              -0.5,
+              -0.866
+            ],
+            [
+              -0.4226,
+              -0.9063
+            ],
+            [
+              -0.342,
+              -0.9397
+            ],
+            [
+              -0.2588,
+              -0.9659
+            ],
+            [
+              -0.1736,
+              -0.9848
+            ],
+            [
+              -0.0872,
+              -0.9962
+            ],
+            [
+              -0.0,
+              -1.0
+            ],
+            [
+              0.0872,
+              -0.9962
+            ],
+            [
+              0.1736,
+              -0.9848
+            ],
+            [
+              0.2588,
+              -0.9659
+            ],
+            [
+              0.342,
+              -0.9397
+            ],
+            [
+              0.4226,
+              -0.9063
+            ],
+            [
+              0.5,
+              -0.866
+            ],
+            [
+              0.5736,
+              -0.8192
+            ],
+            [
+              0.6428,
+              -0.766
+            ],
+            [
+              0.7071,
+              -0.7071
+            ],
+            [
+              0.766,
+              -0.6428
+            ],
+            [
+              0.8192,
+              -0.5736
+            ],
+            [
+              0.866,
+              -0.5
+            ],
+            [
+              0.9063,
+              -0.4226
+            ],
+            [
+              0.9397,
+              -0.342
+            ],
+            [
+              0.9659,
+              -0.2588
+            ],
+            [
+              0.9848,
+              -0.1736
+            ],
+            [
+              0.9962,
+              -0.0872
+            ]
+          ],
+          "fill": "rgba(76,201,240,0.08)",
+          "color": "#4cc9f0"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              2.0,
+              1.0
+            ],
+            [
+              2.0795,
+              1.1705
+            ],
+            [
+              2.1433,
+              1.3321
+            ],
+            [
+              2.1907,
+              1.4836
+            ],
+            [
+              2.2214,
+              1.6237
+            ],
+            [
+              2.2352,
+              1.7515
+            ],
+            [
+              2.2321,
+              1.866
+            ],
+            [
+              2.2119,
+              1.9663
+            ],
+            [
+              2.1749,
+              2.0516
+            ],
+            [
+              2.1213,
+              2.1213
+            ],
+            [
+              2.0516,
+              2.1749
+            ],
+            [
+              1.9663,
+              2.2119
+            ],
+            [
+              1.866,
+              2.2321
+            ],
+            [
+              1.7515,
+              2.2352
+            ],
+            [
+              1.6237,
+              2.2214
+            ],
+            [
+              1.4836,
+              2.1907
+            ],
+            [
+              1.3321,
+              2.1433
+            ],
+            [
+              1.1705,
+              2.0795
+            ],
+            [
+              1.0,
+              2.0
+            ],
+            [
+              0.8219,
+              1.9052
+            ],
+            [
+              0.6375,
+              1.796
+            ],
+            [
+              0.4483,
+              1.673
+            ],
+            [
+              0.2557,
+              1.5374
+            ],
+            [
+              0.0611,
+              1.39
+            ],
+            [
+              -0.134,
+              1.2321
+            ],
+            [
+              -0.328,
+              1.0647
+            ],
+            [
+              -0.5195,
+              0.8893
+            ],
+            [
+              -0.7071,
+              0.7071
+            ],
+            [
+              -0.8893,
+              0.5195
+            ],
+            [
+              -1.0647,
+              0.328
+            ],
+            [
+              -1.2321,
+              0.134
+            ],
+            [
+              -1.39,
+              -0.0611
+            ],
+            [
+              -1.5374,
+              -0.2557
+            ],
+            [
+              -1.673,
+              -0.4483
+            ],
+            [
+              -1.796,
+              -0.6375
+            ],
+            [
+              -1.9052,
+              -0.8219
+            ],
+            [
+              -2.0,
+              -1.0
+            ],
+            [
+              -2.0795,
+              -1.1705
+            ],
+            [
+              -2.1433,
+              -1.3321
+            ],
+            [
+              -2.1907,
+              -1.4836
+            ],
+            [
+              -2.2214,
+              -1.6237
+            ],
+            [
+              -2.2352,
+              -1.7515
+            ],
+            [
+              -2.2321,
+              -1.866
+            ],
+            [
+              -2.2119,
+              -1.9663
+            ],
+            [
+              -2.1749,
+              -2.0516
+            ],
+            [
+              -2.1213,
+              -2.1213
+            ],
+            [
+              -2.0516,
+              -2.1749
+            ],
+            [
+              -1.9663,
+              -2.2119
+            ],
+            [
+              -1.866,
+              -2.2321
+            ],
+            [
+              -1.7515,
+              -2.2352
+            ],
+            [
+              -1.6237,
+              -2.2214
+            ],
+            [
+              -1.4836,
+              -2.1907
+            ],
+            [
+              -1.3321,
+              -2.1433
+            ],
+            [
+              -1.1705,
+              -2.0795
+            ],
+            [
+              -1.0,
+              -2.0
+            ],
+            [
+              -0.8219,
+              -1.9052
+            ],
+            [
+              -0.6375,
+              -1.796
+            ],
+            [
+              -0.4483,
+              -1.673
+            ],
+            [
+              -0.2557,
+              -1.5374
+            ],
+            [
+              -0.0611,
+              -1.39
+            ],
+            [
+              0.134,
+              -1.2321
+            ],
+            [
+              0.328,
+              -1.0647
+            ],
+            [
+              0.5195,
+              -0.8893
+            ],
+            [
+              0.7071,
+              -0.7071
+            ],
+            [
+              0.8893,
+              -0.5195
+            ],
+            [
+              1.0647,
+              -0.328
+            ],
+            [
+              1.2321,
+              -0.134
+            ],
+            [
+              1.39,
+              0.0611
+            ],
+            [
+              1.5374,
+              0.2557
+            ],
+            [
+              1.673,
+              0.4483
+            ],
+            [
+              1.796,
+              0.6375
+            ],
+            [
+              1.9052,
+              0.8219
+            ]
+          ],
+          "fill": "rgba(255,107,157,0.12)",
+          "color": "#ff6b9d"
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1.7,
+            1.7
+          ],
+          "color": "#ffd166",
+          "arrow": true
+        },
+        {
+          "type": "segment",
+          "from": [
+            0,
+            0
+          ],
+          "to": [
+            1.5,
+            -1.5
+          ],
+          "color": "#06d6a0",
+          "arrow": true
+        },
+        {
+          "type": "label",
+          "at": [
+            0.0,
+            1.17
+          ],
+          "text": "单位圆"
+        },
+        {
+          "type": "label",
+          "at": [
+            2.55,
+            1.25
+          ],
+          "text": "主轴 v₁=(1,1)"
+        },
+        {
+          "type": "label",
+          "at": [
+            1.95,
+            -1.42
+          ],
+          "text": "主轴 v₂=(1,−1)"
+        }
+      ],
+      "title": "实对称矩阵的对角化：单位圆在 A=[[2,1],[1,2]] 下变成椭圆，两条主轴正好是正交特征方向 (1,1) 与 (1,−1)"
+    },
     "examples": [
       {
         "problem": "求正交矩阵 $Q$ 把 $A=\\begin{pmatrix}0&1&1\\\\1&0&1\\\\1&1&0\\end{pmatrix}$ 对角化。",
@@ -488,6 +1399,24 @@
       "The orthogonal method produces coefficients equal to the eigenvalues and preserves lengths and inner products; completing the square avoids the characteristic equation but must also use invertible transformations.",
       "Congruence (CᵀAC with invertible C) and similarity (P⁻¹AP) are different equivalence relations: similarity preserves eigenvalues, congruence preserves the inertia indices."
     ],
+    "plot": {
+      "type": "contour",
+      "expr": "x^2 + 2*x*y + 2*y^2",
+      "xRange": [
+        -4,
+        4
+      ],
+      "yRange": [
+        -4,
+        4
+      ],
+      "levelRange": [
+        0.5,
+        6.5
+      ],
+      "levels": 7,
+      "title": "二次型 f=x²+2xy+2y² 的等值线：同心椭圆，正交变换后化标准形 2.618y₁²+0.382y₂²（两系数皆正）"
+    },
     "examples": [
       {
         "problem": "用正交变换把 $f(x_1,x_2,x_3)=2x_1^2+2x_2^2+2x_3^2+2x_1x_2+2x_1x_3+2x_2x_3$ 化为标准形。",
@@ -564,6 +1493,24 @@
       "Law of inertia: canonical forms are not unique, but the positive index p and the negative index q are; the rank is r=p+q, and two forms are congruent ⟺ they share the same p and q (equivalently the same normal form).",
       "A positive definite matrix is invertible and has positive diagonal entries; moreover all of its principal minors (not just the leading ones) are positive."
     ],
+    "plot": {
+      "type": "surface3d",
+      "expr": "x^2 + 2*y^2",
+      "xRange": [
+        -1,
+        1
+      ],
+      "yRange": [
+        -1,
+        1
+      ],
+      "density": [
+        22,
+        22
+      ],
+      "color": "#4cc9f0",
+      "title": "正定二次型 f=x²+2y² 的曲面：开口向上的椭圆抛物面，除原点外处处为正（p=2，q=0）"
+    },
     "examples": [
       {
         "problem": "判断 $f(x_1,x_2,x_3)=5x_1^2+x_2^2+5x_3^2+4x_1x_2-8x_1x_3-4x_2x_3$ 是否正定，并在正定时用配方法求出标准形。",
