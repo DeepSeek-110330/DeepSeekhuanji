@@ -500,7 +500,7 @@
     "examples": [
       {
         "problem": "在单位球面 $S^{2}$ 上取 $p=$ 北极，写出 $\\exp_p$ 的显式公式，证明它在 $|v|=\\pi$ 处奇异，并求出 $\\mathrm{inj}(p)$。",
-        "solution": "单位球面上从北极出发、初速度 $v$ 的测地线是 $\\gamma_v(t)=\\cos\\bigl(t|v|\\bigr)p+\\sin\\bigl(t|v|\\bigr)\\frac{v}{|v|}$（验证：$|\\gamma|=1$，$\\gamma(0)=p$，$\\gamma'(0)=v$，且加速度平行于位置向量，故是测地线），于是 $$\\exp_p(v)=\\cos|v|\\,p+\\sin|v|\\,\\frac{v}{|v|}.$$\\n当 $|v|=\\pi$ 时 $\\exp_p(v)=-p$ 对球面 $|v|=\\pi$ 上**所有** $v$ 都成立，显然不单射；又由 Gauss 引理 $|(d\\exp_p)_v(v)|=|v|=\\pi\\neq0$，而切于球面 $|v|=\\pi$ 的方向全被映到同一点，故 $d\\exp_p$ 在 $|v|=\\pi$ 处处秩为 $n-1=1$，奇异。\\n$|v|<\\pi$ 时单射：若 $\\exp_p(v)=\\exp_p(w)$，比较与 $p$ 的内积得 $\\cos|v|=\\cos|w|$，在 $(0,\\pi)$ 上单调故 $|v|=|w|$，再比较与 $v$ 垂直的部分得 $v=w$。所以 $\\mathrm{inj}(p)=\\pi$（半径 $R$ 的球面为 $\\pi R$），割迹就是单个点 $\\{-p\\}$。"
+        "solution": "单位球面上从北极出发、初速度 $v$ 的测地线是 $\\gamma_v(t)=\\cos\\bigl(t|v|\\bigr)p+\\sin\\bigl(t|v|\\bigr)\\frac{v}{|v|}$（验证：$|\\gamma|=1$，$\\gamma(0)=p$，$\\gamma'(0)=v$，且加速度平行于位置向量，故是测地线），于是 $$\\exp_p(v)=\\cos|v|\\,p+\\sin|v|\\,\\frac{v}{|v|}.$$\\n当 $|v|=\\pi$ 时 $\\exp_p(v)=-p$ 对球面 $|v|=\\pi$ 上**所有** $v$ 都成立，显然不单射；又由 Gauss 引理 $|(d\\exp_p)_v(v)|=|v|=\\pi\\neq0$，而切于球面 $|v|=\\pi$ 的方向全被映到同一点，故 $d\\exp_p$ 在 $|v|=\\pi$ 处处秩为 $n-1=1$，奇异。\\n$|v|<\\pi$ 时单射：若 $\\exp_p(v)=\\exp_p(w)$，比较与 $p$ 的内积得 $\\cos|v|=\\cos|w|$，在 $(0,\\pi)$ 上单调故 $|v|=|w|$，再比较垂直于 $p$（即 $T_pM$ 中的切向分量）的部分，得 $\\sin|v|\\,\\frac{v}{|v|}=\\sin|w|\\,\\frac{w}{|w|}$，由 $\\sin|v|=\\sin|w|\\ne0$ 得 $v=w$。所以 $\\mathrm{inj}(p)=\\pi$（半径 $R$ 的球面为 $\\pi R$），割迹就是单个点 $\\{-p\\}$。"
       },
       {
         "problem": "求平坦环面 $\\mathbb{R}^{2}/\\mathbb{Z}^{2}$（商度量 $dx^{2}+dy^{2}$）上每点的单射半径，并说明为什么它与点无关。",

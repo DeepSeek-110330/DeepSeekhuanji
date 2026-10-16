@@ -654,7 +654,7 @@
     },
     "examples": [
       {
-        "problem": "要测量河岸边 $C$ 点到对岸 $B$ 点的距离。在岸上选两点 $A$、$D$，测得 $AD = 100\\text{ m}$，$\\angle CAD = 60^{\\circ}$，$\\angle ADC = 75^{\\circ}$，求 $CD$（用正弦定理）。",
+        "problem": "要测量河对岸的点 $C$ 到岸边点 $D$ 的距离。在岸上选一点 $A$（与 $D$ 同侧），测得 $AD=100\\text{ m}$，$\\angle CAD=60^{\\circ}$，$\\angle ADC=75^{\\circ}$，求 $CD$（用正弦定理）。",
         "solution": "在 $\\triangle ACD$ 中，$\\angle ACD = 180^{\\circ} - 60^{\\circ} - 75^{\\circ} = 45^{\\circ}$。由正弦定理 $\\dfrac{CD}{\\sin 60^{\\circ}} = \\dfrac{AD}{\\sin 45^{\\circ}}$，得 $CD = \\dfrac{100 \\sin 60^{\\circ}}{\\sin 45^{\\circ}} = \\dfrac{100 \\times \\frac{\\sqrt{3}}{2}}{\\frac{\\sqrt{2}}{2}} = 50\\sqrt{6} \\approx 122.5\\text{ m}$。"
       },
       {
@@ -1123,7 +1123,7 @@
         "solution": "由三角形内角和 $A+B+C = \\pi$，得 $A+B = \\pi - C$，于是 $\\sin(A+B) = \\sin(\\pi - C) = \\sin C$。所以 $\\sin C = \\dfrac{\\sqrt{2}}{2}$。又因为 $0 < C < \\pi$，故 $C = \\dfrac{\\pi}{4}$ 或 $C = \\dfrac{3\\pi}{4}$。"
       },
       {
-        "problem": "在 $\\triangle ABC$ 中，若 $\\tan A + \\tan B + \\tan C = \\tan A\\tan B\\tan C$ 恒成立，试用它化简 $\\tan A\\tan B\\tan C$ 关于 $A+B$ 的表达式。",
+        "problem": "在 $\\triangle ABC$ 中（设三个角都不是直角），证明恒等式 $\\tan A+\\tan B+\\tan C = \\tan A\\tan B\\tan C$。",
         "solution": "由 $A+B = \\pi - C$ 得 $\\tan(A+B) = -\\tan C$，而 $\\tan(A+B) = \\dfrac{\\tan A + \\tan B}{1 - \\tan A\\tan B}$。当 $\\tan A\\tan B \\neq 1$ 时，交叉相乘得 $\\tan A + \\tan B = -\\tan C(1 - \\tan A\\tan B) = -\\tan C + \\tan A\\tan B\\tan C$，移项恰好得到 $\\tan A + \\tan B + \\tan C = \\tan A\\tan B\\tan C$，即该恒等式成立。"
       }
     ],
@@ -1167,9 +1167,9 @@
         "noteEn": "Follows directly from the theorem and the ratio definitions; the most basic trigonometric identity."
       },
       {
-        "latex": "a^2 + b^2 > c^2 \\iff \\text{锐角},\\quad a^2 + b^2 < c^2 \\iff \\text{钝角}",
-        "note": "逆定理与推广，用于由三边判断三角形形状。",
-        "noteEn": "Converse and extension: classify a triangle from its three sides."
+        "latex": "c\\ \\text{为最长边时：}\\quad a^2+b^2>c^2\\iff \\text{角 }C\\text{ 为锐角},\\qquad a^2+b^2<c^2\\iff \\text{角 }C\\text{ 为钝角}",
+        "note": "逆定理与推广：先找出最长边作为 c，再由三边判断三角形形状。",
+        "noteEn": "Converse and extension: first identify the longest side as c, then classify the triangle from its three sides."
       }
     ],
     "expression": {

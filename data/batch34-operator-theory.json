@@ -165,7 +165,7 @@
       },
       {
         "problem": "在 $\\ell^2$ 上定义对角算子 $T(x_1,x_2,\\dots)=(\\lambda_1x_1,\\lambda_2x_2,\\dots)$。证明：$T$ 有界当且仅当 $(\\lambda_n)$ 有界，且此时 $\\|T\\|=\\sup_n|\\lambda_n|$。",
-        "solution": "由基本估计式：$\\|Tx\\|_2^2=\\sum_n|\\lambda_n|^2|x_n|^2\\le M^2\\|x\\|_2^2$（$M=\\sup_n|\\lambda_n|$），故 $\\|T\\|\\le M$。反向：给定 $\\varepsilon>0$，取 $N$ 使 $|\\lambda_N|>M-\\varepsilon$（若 $M=\\infty$，取 $|\\lambda_N|>1/\\varepsilon$），令 $x=e_N$，则 $\\|x\\|_2=1$ 且 $\\|Tx\\|_2=|\\lambda_N|$，故 $\\|T\\|\\ge M-\\varepsilon$（或 $\\ge1/\\varepsilon$）。令 $\\varepsilon\\to0$ 得 $\\|T\\|=M$，于是 $T$ 有界 $\\iff M<\\infty$。当 $M=\\infty$ 时把 $T$ 定义在稠密子空间 $\\{x:\\sum n^2|x_n|^2<\\infty\\}$ 上，就得到无界线性算子的典型例子。"
+        "solution": "由基本估计式：$\\|Tx\\|_2^2=\\sum_n|\\lambda_n|^2|x_n|^2\\le M^2\\|x\\|_2^2$（$M=\\sup_n|\\lambda_n|$），故 $\\|T\\|\\le M$。反向：给定 $\\varepsilon>0$，取 $N$ 使 $|\\lambda_N|>M-\\varepsilon$（若 $M=\\infty$，取 $|\\lambda_N|>1/\\varepsilon$），令 $x=e_N$，则 $\\|x\\|_2=1$ 且 $\\|Tx\\|_2=|\\lambda_N|$，故 $\\|T\\|\\ge M-\\varepsilon$（或 $\\ge1/\\varepsilon$）。令 $\\varepsilon\\to0$ 得 $\\|T\\|=M$，于是 $T$ 有界 $\\iff M<\\infty$。当 $M=\\infty$ 时（例如 $\\lambda_n=n$）把 $T$ 定义在稠密子空间 $\\{x:\\sum n^2|x_n|^2<\\infty\\}$ 上，就得到无界线性算子的典型例子：此时 $\\|Tx\\|_2^2=\\sum n^2|x_n|^2<\\infty$，而 $\\|Te_n\\|=n\\to\\infty$。"
       }
     ],
     "tags": [

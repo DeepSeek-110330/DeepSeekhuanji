@@ -17,8 +17,8 @@
       },
       {
         "latex": "\\text{数轴上：右边的数大于左边的数}",
-        "note": "数轴是最好的比较工具：数越大，它的位置越靠右；0 在最左边。",
-        "noteEn": "The number line is the best comparison tool: the larger a number is, the farther right it sits, with 0 at the left end."
+        "note": "数轴是最好的比较工具：数越大，它的位置越靠右；在研究自然数时，0 位于最左边（学了负数就会知道，0 的左边还有负数）。",
+        "noteEn": "The number line is the best comparison tool: the larger a number is, the farther right it sits; among the natural numbers 0 is leftmost (once negative numbers are learnt, they lie further left)."
       },
       {
         "latex": "\\text{位数多} \\Rightarrow \\text{数大}; \\qquad \\text{位数相同，从最高位比起}",
@@ -32,14 +32,14 @@
       }
     ],
     "properties": [
-      "数轴上右边的数总比左边的数大：0 在最左边，所以 0 比任何其他自然数都小。",
+      "数轴上右边的数总比左边的数大：0 是最小的自然数，所以它比任何其他自然数都小。",
       "比较大小先看位数：位数多的数大（四位数大于一切三位数）；位数相同就从最高位比起，最高位大的数就大，最高位相同再比下一位。",
       "大于号「>」的开口总是朝着大数，像张开的大嘴巴吃掉大的那个数；小于号「<」的尖头朝着小数。",
       "数数时每个东西正好数一次，不重复、不遗漏，最后一个数到的数就是总个数。",
       "两个数比较有且只有三种结果：大于、小于或等于，例如 6 和 4 只可能是 6>4。"
     ],
     "propertiesEn": [
-      "On the number line, a number on the right is always larger: 0 sits at the left end, so it is smaller than every other natural number.",
+      "On the number line, a number on the right is always larger: 0 is the smallest natural number, so it is smaller than every other natural number.",
       "Compare digits first: more digits means larger (any four-digit number beats every three-digit number); with equal digits, compare from the highest place, and if those digits are equal move to the next place.",
       "The sign '>' opens toward the larger number, like a hungry mouth eating the big one, while '<' points at the smaller number.",
       "When counting, each object is counted exactly once, with no repeats and nothing skipped; the last number spoken is the total.",

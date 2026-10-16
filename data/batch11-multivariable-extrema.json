@@ -819,7 +819,7 @@
     "examples": [
       {
         "problem": "用换元公式计算椭圆 $\\frac{x^{2}}{a^{2}}+\\frac{y^{2}}{b^{2}}\\le 1$（$a,b>0$）的面积。",
-        "solution": "作广义极坐标变换 $x=ar\\cos\\theta$，$y=br\\sin\\theta$，它把单位圆盘 $D'$：$0\\le r\\le 1$、$0\\le\\theta\\le 2\\pi$ 映成椭圆区域 $D$。求雅可比行列式：\n$$J=\\begin{vmatrix}a\\cos\\theta & -ar\\sin\\theta\\\\ b\\sin\\theta & br\\cos\\theta\\end{vmatrix}=abr\\cos^{2}\\theta+abr\\sin^{2}\\theta=abr.$$\n于是 $dx\\,dy=abr\\,dr\\,d\\theta$，面积\n$$S(D)=\\iint_{D}|J|\\,dr\\,d\\theta=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{1}abr\\,dr=2\\pi\\cdot ab\\cdot\\frac{1}{2}=\\pi ab,$$\n与椭圆面积公式一致（$a=b$ 时退化为圆面积 $\\pi a^{2}$）。"
+        "solution": "作广义极坐标变换 $x=ar\\cos\\theta$，$y=br\\sin\\theta$，它把单位圆盘 $D'$：$0\\le r\\le 1$、$0\\le\\theta\\le 2\\pi$ 映成椭圆区域 $D$。求雅可比行列式：\n$$J=\\begin{vmatrix}a\\cos\\theta & -ar\\sin\\theta\\\\ b\\sin\\theta & br\\cos\\theta\\end{vmatrix}=abr\\cos^{2}\\theta+abr\\sin^{2}\\theta=abr.$$\n于是 $dx\\,dy=abr\\,dr\\,d\\theta$，面积\n$$S(D)=\\iint_{D'}|J|\\,dr\\,d\\theta=\\int_{0}^{2\\pi}d\\theta\\int_{0}^{1}abr\\,dr=2\\pi\\cdot ab\\cdot\\frac{1}{2}=\\pi ab,$$\n与椭圆面积公式一致（$a=b$ 时退化为圆面积 $\\pi a^{2}$）。"
       },
       {
         "problem": "求变换 $x=u^{2}-v^{2}$、$y=2uv$ 的雅可比行列式，并把 $|J|$ 表示成 $x,y$ 的函数。",

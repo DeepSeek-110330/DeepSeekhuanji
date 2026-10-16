@@ -586,14 +586,14 @@
     "properties": [
       "所有幂函数在 $(0,+\\infty)$ 上都有定义，且都经过点 $(1,1)$",
       "$\\alpha>0$ 时在 $(0,+\\infty)$ 上单调递增，图像过原点（$\\alpha\\neq 0$）；$\\alpha<0$ 时单调递减，图像不过原点",
-      "$\\alpha$ 为整数时定义域为 $\\mathbb{R}$（奇）或含全部实数的偶函数形式；$\\alpha$ 为分数且分母为偶数时定义域限于 $x\\ge 0$",
+      "$\\alpha$ 为正整数时定义域为 $\\mathbb{R}$（$\\alpha$ 为奇数时是奇函数，为偶数时是偶函数）；$\\alpha$ 为负整数时定义域为 $\\{x\\mid x\\ne 0\\}$；$\\alpha$ 为分数且分母为偶数时定义域限于 $x\\ge 0$（分母为奇数时定义域为 $\\mathbb{R}$）",
       "在 $(1,+\\infty)$ 上，$\\alpha$ 越大曲线越陡；在 $(0,1)$ 上则相反",
       "$\\alpha$ 为偶数时为偶函数（关于 $y$ 轴对称），为奇数时为奇函数（关于原点对称）"
     ],
     "propertiesEn": [
       "Every power function is defined on $(0,+\\infty)$ and passes through $(1,1)$",
       "For $\\alpha>0$ it is increasing on $(0,+\\infty)$ and its graph passes through the origin; for $\\alpha<0$ it is decreasing and misses the origin",
-      "For integer $\\alpha$ the domain is $\\mathbb{R}$ (with parity deciding symmetry); for fractional $\\alpha$ with even denominator the domain is restricted to $x\\ge 0$",
+      "For a positive integer $\\alpha$ the domain is $\\mathbb{R}$ (odd $\\alpha$ gives an odd function, even $\\alpha$ an even one); for a negative integer $\\alpha$ the domain is $\\{x\\mid x\\ne 0\\}$; for a fractional $\\alpha$ with even denominator the domain is restricted to $x\\ge 0$ (an odd denominator keeps the domain $\\mathbb{R}$)",
       "On $(1,+\\infty)$ a larger $\\alpha$ gives a steeper curve; on $(0,1)$ the opposite holds",
       "Even $\\alpha$ gives an even function (symmetric about the y-axis), odd $\\alpha$ an odd function (symmetric about the origin)"
     ],
@@ -700,17 +700,17 @@
     },
     "properties": [
       "$e$ 是无理数，约等于 $2.718281828$，无法写成分数",
-      "$e^x$ 是唯一（除零函数外）导数为自身的函数，即 $(e^x)'=e^x$",
+      "$y'=y$ 的一般解是 $y=Ce^{x}$（$C$ 为任意常数）；在指数函数 $a^x$（$a>0$，$a\\ne1$）中，只有底数 $a=e$ 满足 $(a^x)'=a^x$，因为 $(a^x)'=a^x\\ln a$",
       "$\\ln x$ 的导数为 $\\frac{1}{x}$，是分式函数积分的标准来源",
       "$e^x$ 恒大于 0，定义域为 $\\mathbb{R}$、值域为 $(0,+\\infty)$；$\\ln x$ 定义域为 $(0,+\\infty)$、值域为 $\\mathbb{R}$",
-      "两者互为反函数，图像关于 $y=x$ 对称，且都过 $(0,1)$ 与 $(1,0)$"
+      "两者互为反函数，图像关于 $y=x$ 对称；$e^x$ 过点 $(0,1)$，$\\ln x$ 过点 $(1,0)$"
     ],
     "propertiesEn": [
       "$e$ is irrational, approximately $2.718281828$, and cannot be written as a fraction",
-      "$e^x$ is the only (non-trivial) function equal to its own derivative: $(e^x)'=e^x$",
+      "The general solution of $y'=y$ is $y=Ce^{x}$ for any constant $C$; among exponential functions $a^x$ ($a>0$, $a\\ne1$) only the base $a=e$ satisfies $(a^x)'=a^x$, since $(a^x)'=a^x\\ln a$",
       "The derivative of $\\ln x$ is $\\frac{1}{x}$, the standard origin of integrals of reciprocals",
       "$e^x>0$ always, with domain $\\mathbb{R}$ and range $(0,+\\infty)$; $\\ln x$ has domain $(0,+\\infty)$ and range $\\mathbb{R}$",
-      "They are inverse functions, mirror images in $y=x$, passing through $(0,1)$ and $(1,0)$"
+      "They are inverse functions, mirror images in $y=x$: $e^x$ passes through $(0,1)$ and $\\ln x$ through $(1,0)$"
     ],
     "plot": {
       "type": "function",
@@ -864,7 +864,7 @@
       },
       {
         "problem": "碳-14 的半衰期约为 5730 年。某化石中碳-14 的含量只剩原来的 40%，估算化石年龄。",
-        "solution": "由 $N(t)=Ae^{kt}$ 与半衰期 $\\frac{\\ln 2}{|k|}=5730$ 得 $k=-\\frac{\\ln 2}{5730}$。令 $\\frac{N}{A}=0.40$，则 $e^{kt}=0.40$，取自然对数得 $t=\\frac{\\ln 0.40}{k}=\\frac{-0.9163}{-\\ln 2/5730}\\approx 7577$ 年。"
+        "solution": "由 $N(t)=Ae^{kt}$ 与半衰期 $\\frac{\\ln 2}{|k|}=5730$ 得 $k=-\\frac{\\ln 2}{5730}$。令 $\\frac{N}{A}=0.40$，则 $e^{kt}=0.40$，取自然对数得 $t=\\frac{\\ln 0.40}{k}=\\frac{-0.9163}{-\\ln 2/5730}\\approx 7575$ 年。"
       }
     ],
     "tags": [

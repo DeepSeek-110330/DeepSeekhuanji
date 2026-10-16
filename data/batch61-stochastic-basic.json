@@ -449,19 +449,19 @@
     "expression": {
       "text": "f(λ) = σ²/(2π)  为白噪声的谱密度（λ ∈ [−π,π]）",
       "symbol": "f(λ)",
-      "note": "常数谱密度 ⇔ 白噪声；非平坦的谱说明某些频率的方差贡献更大。",
-      "noteEn": "A constant spectral density is equivalent to white noise; a non-flat spectrum means some frequencies carry more variance."
+      "note": "对零均值序列：常数谱密度 ⇔ 白噪声（中心化后等价）；非平坦的谱说明某些频率的方差贡献更大。",
+      "noteEn": "For zero-mean sequences, a constant spectral density is equivalent to white noise (equivalently after centering); a non-flat spectrum means some frequencies carry more variance."
     },
     "properties": [
       "**白噪声只要求零均值、同方差、不同时刻不相关，不要求独立**：不相关 $\\not\\Rightarrow$ 独立。**零均值**、二阶矩有限的独立同分布序列一定是白噪声（均值非零的 iid 序列不是白噪声），反之不成立；只有高斯白噪声（联合正态）能把两者等同，因为联合正态下协方差为 0 即独立。",
-      "白噪声的自协方差为 $R(0)=\\sigma^2$、$R(k)=0\\ (k\\ne0)$，是最短记忆的平稳序列；它的谱密度是常数 $\\sigma^2/(2\\pi)$，这既解释了「白」字，也给出等价刻画：常数谱密度 $\\iff$ 白噪声。",
+      "白噪声的自协方差为 $R(0)=\\sigma^2$、$R(k)=0\\ (k\\ne0)$，是最短记忆的平稳序列；它的谱密度是常数 $\\sigma^2/(2\\pi)$，这既解释了「白」字，也给出等价刻画：对**零均值**宽平稳序列，常数谱密度 $\\iff$ 白噪声（谱只约束自协方差，均值须另行要求；一般序列应先减去均值再谈）。",
       "谱密度的存在性：$\\sum_k|R(k)|<\\infty$（绝对可和）$\\Rightarrow$ $f$ 存在、连续、非负，此时 $f$ 就是 $R$ 的傅里叶级数。一般宽平稳序列只有谱测度 $F$（Wiener–辛钦），$F$ 的原子对应确定性周期成分（如 $\\cos(\\lambda_0t)$ 在 $\\pm\\lambda_0$ 处的谱线）。",
       "谱密度是「方差在频率上的分配」：$\\int_{-\\pi}^{\\pi}f(\\lambda)\\,\\mathrm d\\lambda=R(0)=\\operatorname{Var}X_t$，$f$ 非负且为偶函数（实值序列的谱对称）。谱峰位置给出主频：AR(1) 的谱：$\\varphi>0$ 时在 $\\lambda=0$ 附近最高（低频占优），$\\varphi<0$ 时谱峰移到 $\\lambda=\\pi$（高频占优），MA(1) 取 $\\theta=1$ 时也低频占优、取 $\\theta=-1$ 时高频占优（差分滤掉低频）。",
       "线性滤波把时域卷积化为频域乘法（$f_Y=f_\\varepsilon|H|^2$），白噪声因此是滤波分析里的「单位元」；同一法则用于谱估计的相合性论证与白噪声的混成检验。连续时间的类比要把话说清：布朗运动不是平稳过程，没有通常意义的谱密度，但它的增量是白噪声，$\\mathrm dB_t=\\varepsilon_t\\,\\mathrm dt$ 正是「白噪声是布朗运动的形式导数」的写法。"
     ],
     "propertiesEn": [
       "**White noise requires only zero mean, constant variance and zero correlation across time — not independence**: uncorrelated does not imply independent. A **zero-mean** iid sequence with finite second moments is white noise (a nonzero-mean iid sequence is not), but the converse fails; only Gaussian white noise closes the gap, since zero covariance means independence for jointly normal variables.",
-      "Its autocovariance is R(0) = σ², R(k) = 0 for k ≠ 0, the shortest possible memory; its spectral density is the constant σ²/(2π), which explains the name and yields an equivalent characterisation: constant spectrum ⟺ white noise.",
+      "Its autocovariance is R(0) = σ², R(k) = 0 for k ≠ 0, the shortest possible memory; its spectral density is the constant σ²/(2π), which explains the name and yields an equivalent characterisation for **zero-mean** weakly stationary sequences: constant spectrum ⟺ white noise (the spectrum only constrains the autocovariance; the mean must be required separately).",
       "Existence: absolute summability Σ|R(k)| < ∞ gives a continuous, non-negative f, the Fourier series of R. In general a weakly stationary sequence has only a spectral measure F (Wiener–Khinchin), whose atoms correspond to deterministic periodic components such as cos(λ₀t) with spectral lines at ±λ₀.",
       "The spectral density distributes the variance over frequencies: ∫f = R(0) = Var X_t, with f non-negative and even for real-valued sequences. Peaks locate the dominant frequencies: AR(1) peaks at λ = 0 for φ > 0 and at λ = π for φ < 0, while MA(1) with θ = 1 is likewise low-frequency and with θ = −1 high-frequency (differencing removes low frequencies).",
       "Linear filtering turns convolution into multiplication (f_Y = f_ε|H|²), making white noise the unit element of filter analysis; the same rule underlies consistency of spectral estimators and portmanteau white-noise tests. In continuous time the analogy must be stated carefully: Brownian motion is not stationary and has no ordinary spectral density, but its increments are white noise, written dB_t = ε_t dt — white noise as the formal derivative of Brownian motion."

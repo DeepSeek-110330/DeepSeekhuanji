@@ -5,8 +5,8 @@
     "titleEn": "Large Numbers and Approximation",
     "branch": "elementary-basics",
     "level": 1,
-    "summary": "认识亿以内的数：数位顺序表（个级、万级、亿级）、改写成用「万」「亿」作单位的数，还有省略尾数求近似数——改写用「＝」，省略用「≈」。",
-    "summaryEn": "Meet numbers up to the hundred millions: the place-value table (ones, ten-thousands and hundred-millions groups), rewriting a number in units of 万 or 亿, and rounding a tail off to get an approximate number—rewriting uses '=', rounding uses '≈'.",
+    "summary": "认识大数：数位顺序表（个级、万级、亿级）、改写成用「万」「亿」作单位的数，还有省略尾数求近似数——改写用「＝」，省略用「≈」。",
+    "summaryEn": "Meet large numbers: the place-value table (ones, ten-thousands and hundred-millions groups), rewriting a number in units of 万 or 亿, and rounding a tail off to get an approximate number—rewriting uses '=', rounding uses '≈'.",
     "definition": "数东西时一个一个地数太慢，人们就把 10 个一捆成「十」，10 个十是「一百」，10 个百是「一千」，10 个千是「一万」，10 个万是「十万」……**每相邻两个计数单位之间的进率都是 10**，这样多大的数都能写出来。像 $386000$、$12000000$ 这样比较大的数，我们就叫**大数**。\n\n把数字按位置排好，就有了**数位顺序表**：从右边起，个位、十位、百位、千位组成**个级**；再往左，万位、十万位、百万位、千万位组成**万级**；继续往左是亿位、十亿位……组成**亿级**。**每四位是一级**。同一个数字 3，放在个位上表示 3 个一，放在万位上就表示 3 个万——位置不同，表示的大小就不同。\n\n为了读写方便，我们常常把大数**改写**成用「万」或「亿」作单位的数：把**小数点向左移动 4 位**（即除以 10000）、换成「万」，或**小数点向左移动 8 位**（即除以 100000000）、换成「亿」（只有当末尾的 0 足够多时，才可以简说成\"去掉末尾 4 个（8 个）0\"）。例如 $380000 = 38\\text{万}$，$120000000 = 1.2\\text{亿}$。改写只是换了个说法，**数的大小一点儿也没变，所以用等号「＝」**。\n\n有时候不需要那么精确，只要一个大概的数，就把某一位后面的尾数**省略**掉，得到**近似数**；这时数的大小改变了，**要用约等号「≈」**。例如 $386000 = 38.6\\text{万}$（这是改写），而 $386000 \\approx 39\\text{万}$（这是省略万位后面的尾数）。一句话：**改写是「换衣服」，用「＝」；省略是「取近似」，用「≈」**。",
     "definitionEn": "Counting one by one is slow, so people bundle 10 ones into a 'ten', 10 tens into a 'hundred', 10 hundreds into a 'thousand', 10 thousands into a 'ten-thousand (万)' and 10 ten-thousands into a 'hundred-thousand (十万)'. **Every two neighbouring counting units are related by a ratio of 10**, and so we can write numbers as large as we like. Big numbers such as $386000$ or $12000000$ are what we call **large numbers**.\n\nLining the digits up by position gives the **place-value table**: from the right come ones, tens, hundreds and thousands, which form the **ones group**; next come the ten-thousands, hundred-thousands, millions and ten-millions, forming the **ten-thousands group (万级)**; further left are the hundred-millions (亿位) and so on, forming the **hundred-millions group (亿级)**. **Every four places make one group.** A digit 3 in the ones place means 3 ones, but in the ten-thousands place it means 3 ten-thousands—the position decides its value.\n\nTo write and read such numbers easily we **rewrite** them in units of 万 (ten thousand) or 亿 (hundred million): shift the decimal point **4 places to the left** (divide by 10000) and write 万, or **8 places to the left** (divide by 100000000) and write 亿 (only when there are enough trailing zeros may one say \"drop the last 4 (or 8) zeros\"). For example $380000 = 38\\text{万}$ and $120000000 = 1.2\\text{亿}$. Rewriting only changes the wording, **the size of the number does not change at all, so we use the equals sign '='**.\n\nSometimes we do not need to be exact and only want a rough number; then we **omit** (round off) the tail behind a certain place and get an **approximate number**. This time the size does change, so **we use the approximate-equal sign '≈'**. For example $386000 = 38.6\\text{万}$ (rewriting) but $386000 \\approx 39\\text{万}$ (omitting the tail behind the ten-thousands place). In one sentence: **rewriting is 'changing clothes' and uses '=', while omitting is 'taking an approximation' and uses '≈'**.",
     "formulas": [
@@ -152,7 +152,7 @@
     },
     "properties": [
       "四舍五入时只看被省略部分的最高位：满 5 进一，不满 5 舍去，与后面的数字无关。",
-      "精确到某一位，就看它后面一位上的数字来决定进还是舍，也就是保留到哪一位、看到哪一位。",
+      "精确到某一位，就要看这一位的下一位（也就是被省略部分的最高位）上的数字来决定进还是舍，即「保留到哪一位，就看这一位的下一位」。",
       "近似数与准确数之间用「≈」连接，表示两边大小并不相等，只是大约相等。",
       "连续进位时位数可能增多：$9999$ 精确到万位是 $10000$，从 4 位数变成了 5 位数。",
       "作为近似数，$4.0$ 比 $4$ 精确：$4.0$ 表示精确到十分位，$4$ 只精确到个位。"

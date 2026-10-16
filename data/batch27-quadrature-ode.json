@@ -155,7 +155,7 @@
       },
       {
         "problem": "设 $A=\\begin{pmatrix}1&1\\\\1&1.0001\\end{pmatrix}$，$b=(2,2)^{\\mathsf T}$。求 $\\operatorname{cond}_\\infty(A)$，并考察右端扰动 $\\delta b=(0,10^{-4})^{\\mathsf T}$ 对解的影响。",
-        "solution": "行和为 $2$ 与 $2.0001$，故 $\\|A\\|_\\infty=2.0001$；$A^{-1}=10^4\\begin{pmatrix}1.0001&-1\\\\-1&1\\end{pmatrix}$，行和都是 $10^4\\times2.0001$，于是\n$$\\operatorname{cond}_\\infty(A)=2.0001\\times2.0001\\times10^4\\approx4.0\\times10^4,$$\n严重病态。未扰动时由 $x_1+x_2=2,\\ x_1+1.0001x_2=2$ 得 $x=(2,0)^{\\mathsf T}$；加扰动后 $x'=(1,1)^{\\mathsf T}$。相对误差 $\\frac{\\|\\delta x\\|_\\infty}{\\|x\\|_\\infty}=\\frac12=50\\%$，而右端的相对扰动只有 $\\frac{\\|\\delta b\\|_\\infty}{\\|b\\|_\\infty}=5\\times10^{-5}$——放大了约 $10^4$ 倍，与上界 $\\operatorname{cond}_\\infty(A)\\times5\\times10^{-5}\\approx2$ 相符。"
+        "solution": "行和为 $2$ 与 $2.0001$，故 $\\|A\\|_\\infty=2.0001$；$A^{-1}=10^4\\begin{pmatrix}1.0001&-1\\\\-1&1\\end{pmatrix}$，两行行和（取绝对值）分别为 $10^4\\times2.0001$ 与 $10^4\\times2$，最大者为 $10^4\\times2.0001$，故 $\\|A^{-1}\\|_\\infty=10^4\\times2.0001$，于是\n$$\\operatorname{cond}_\\infty(A)=2.0001\\times2.0001\\times10^4\\approx4.0\\times10^4,$$\n严重病态。未扰动时由 $x_1+x_2=2,\\ x_1+1.0001x_2=2$ 得 $x=(2,0)^{\\mathsf T}$；加扰动后 $x'=(1,1)^{\\mathsf T}$。相对误差 $\\frac{\\|\\delta x\\|_\\infty}{\\|x\\|_\\infty}=\\frac12=50\\%$，而右端的相对扰动只有 $\\frac{\\|\\delta b\\|_\\infty}{\\|b\\|_\\infty}=5\\times10^{-5}$——放大了约 $10^4$ 倍，与上界 $\\operatorname{cond}_\\infty(A)\\times5\\times10^{-5}\\approx2$ 相符。"
       }
     ],
     "tags": [

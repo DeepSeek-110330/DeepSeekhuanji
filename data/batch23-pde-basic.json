@@ -279,8 +279,8 @@
       },
       {
         "latex": "\\left(\\frac{\\partial}{\\partial t}-a\\frac{\\partial}{\\partial x}\\right)\\left(\\frac{\\partial}{\\partial t}+a\\frac{\\partial}{\\partial x}\\right)u=0",
-        "note": "算子因式分解：两个一阶算子分别对应沿 $x-at=\\mathrm{const}$ 与 $x+at=\\mathrm{const}$ 两个方向的导数。",
-        "noteEn": "Operator factorisation: the two first-order factors act as directional derivatives along $x-at=\\mathrm{const}$ and $x+at=\\mathrm{const}$."
+        "note": "算子因式分解：两个一阶算子分别对应沿 $x+at=\\mathrm{const}$ 与 $x-at=\\mathrm{const}$ 两个方向的导数。",
+        "noteEn": "Operator factorisation: the two first-order factors act as directional derivatives along $x+at=\\mathrm{const}$ and $x-at=\\mathrm{const}$."
       },
       {
         "latex": "u(x,t)=F(x-at)+G(x+at)",

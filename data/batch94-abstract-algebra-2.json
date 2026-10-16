@@ -1,0 +1,384 @@
+[
+  {
+    "id": "symmetric-alternating-groups",
+    "title": "对称群与交错群",
+    "titleEn": "Symmetric and Alternating Groups",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "对称群 S_n 由 {1,…,n} 的全部置换在复合下构成，有 n! 个元素；共轭类由轮换型决定，偶置换组成交错群 A_n，n≥5 时 A_n 是单群，S_n 因而不可解。",
+    "summaryEn": "The symmetric group S_n consists of all permutations of {1,…,n} under composition and has n! elements; conjugacy classes are determined by cycle type, and the even permutations form the alternating group A_n, which is simple for n ≥ 5 and makes S_n non-solvable.",
+    "definition": "「置换」是一个集合到自身的双射。集合 $\\{1,2,\\dots,n\\}$ 上全体置换在**复合**下构成群，称为 **$n$ 次对称群**，记作 $S_n$：恒等置换是单位元，每个置换的逆仍是置换，复合满足结合律。$S_n$ 的阶为 $|S_n| = n!$：确定一个置换只需指定 $1,2,\\dots,n$ 的像，第一位有 $n$ 种选择、第二位剩 $n-1$ 种……逐次相乘即得。例如 $|S_3| = 6$、$|S_4| = 24$。本库约定置换的乘法按「先右后左」进行：$(\\sigma\\tau)(i) = \\sigma(\\tau(i))$。\n\n轮换分解与符号。把 $a_1 \\mapsto a_2 \\mapsto \\cdots \\mapsto a_k \\mapsto a_1$（其余元素不动）的置换叫 **$k$-轮换**，记作 $(a_1\\,a_2\\,\\cdots\\,a_k)$；$2$-轮换又叫**对换**。每个置换都能唯一地（不计轮换的次序与每个轮换的书写起点）写成**互不相交**轮换的乘积，互不相交保证这些轮换彼此交换。各轮换长度的多重集称为**轮换型**（按降序写，固定点算成长度 1 的轮换）。两个关键不变量：置换的**阶**等于各轮换长度的最小公倍数；置换的**符号**为 $\\operatorname{sgn}(\\sigma) = \\prod_i (-1)^{k_i-1} = (-1)^{n-c(\\sigma)}$，其中 $k_i$ 是各轮换长度、$c(\\sigma)$ 是轮换个数（含固定点）。每个 $k$-轮换都可写成 $k-1$ 个对换之积，故符号也叫**奇偶性**：$\\operatorname{sgn} = +1$ 的是偶置换，$-1$ 的是奇置换。每个置换都能写成对换之积，且所用对换个数的奇偶性与分解方式无关——这是符号良定义的关键。\n\n共轭类。在 $S_n$ 中做共轭 $\\sigma \\mapsto \\tau\\sigma\\tau^{-1}$，相当于把 $\\sigma$ 轮换分解中的每个字母 $i$ 统一替换为 $\\tau(i)$：例如 $\\tau (1\\,2\\,3)\\tau^{-1} = (\\tau(1)\\,\\tau(2)\\,\\tau(3))$。于是**两个置换共轭当且仅当轮换型相同**：$S_n$ 的共轭类与 $n$ 的整数分拆一一对应，共 $p(n)$ 个。轮换型为 $1^{m_1}2^{m_2}\\cdots$（$m_k$ 是长度 $k$ 的轮换个数）的置换有 $\\dfrac{n!}{\\prod_k k^{m_k}\\,m_k!}$ 个。要注意在交错群 $A_n$ 内部共轭会变细：一个 $S_n$-共轭类在 $A_n$ 中要么保持为单个类，要么**分裂**成两个等大的类，分裂当且仅当轮换长度（含固定点）两两不同且全为奇数——例如 $A_5$ 的 $5$-轮换类分裂为两个各 $12$ 个元素的类，而 $3$-轮换类不分裂。\n\n交错群与单性。符号映射 $\\operatorname{sgn}: S_n \\to \\{\\pm 1\\}$ 是群同态，其核 $\\ker\\operatorname{sgn}$（全体偶置换）称为 **$n$ 次交错群** $A_n$。作为同态核，$A_n \\trianglelefteq S_n$ 是**正规子群**；当 $n \\ge 2$ 时 $[S_n : A_n] = 2$，故 $|A_n| = n!/2$。单性方面：$A_3 \\cong \\mathbb{Z}_3$ 是（交换的）单群；$A_4$ **不单**，它含正规子群 $V_4 = \\{e,\\ (12)(34),\\ (13)(24),\\ (14)(23)\\}$；而 $n \\ge 5$ 时 $A_n$ 是**单群**且非交换。非交换单群不可解，又 $A_n \\le S_n$，所以 $n \\ge 5$ 时 $A_n$ 与 $S_n$ 都不可解——这正是「五次及以上一般方程不能用根式求解」的群论核心。反过来 $n \\le 4$ 时 $S_n$ 可解，例如 $1 \\trianglelefteq V_4 \\trianglelefteq A_4 \\trianglelefteq S_4$ 的各商 $V_4 \\cong \\mathbb{Z}_2 \\times \\mathbb{Z}_2$、$\\mathbb{Z}_3$、$\\mathbb{Z}_2$ 都是交换群。",
+    "definitionEn": "A **permutation** of a set is a bijection from the set to itself. The set of all permutations of $\\{1,2,\\dots,n\\}$ forms a group under **composition**, the **symmetric group** $S_n$: the identity is the unit, inverses of permutations are permutations, and composition is associative. Its order is $|S_n| = n!$, since a permutation is determined by the images of $1,\\dots,n$: there are $n$ choices for the first, $n-1$ for the second, and so on. For instance $|S_3| = 6$ and $|S_4| = 24$. We adopt the convention that permutations act on the right: $(\\sigma\\tau)(i) = \\sigma(\\tau(i))$.\n\nCycle decompositions and signs. A permutation sending $a_1 \\mapsto a_2 \\mapsto \\cdots \\mapsto a_k \\mapsto a_1$ and fixing all other elements is a **$k$-cycle** $(a_1\\,a_2\\,\\cdots\\,a_k)$; a 2-cycle is a **transposition**. Every permutation factors uniquely (up to the order of the cycles and the starting point of each cycle) into **disjoint** cycles, which therefore commute. The multiset of cycle lengths is the **cycle type** (written in decreasing order, fixed points counting as cycles of length 1). Two key invariants: the **order** of a permutation is the least common multiple of its cycle lengths, and its **sign** is $\\operatorname{sgn}(\\sigma) = \\prod_i (-1)^{k_i-1} = (-1)^{n-c(\\sigma)}$, where the $k_i$ are the cycle lengths and $c(\\sigma)$ counts the cycles including fixed points. A $k$-cycle is a product of $k-1$ transpositions, so the sign, also called **parity**, is $+1$ for even and $-1$ for odd permutations. Every permutation is a product of transpositions, and the parity of the number of transpositions used is independent of the factorization — that is what makes the sign well defined.\n\nConjugacy classes. Conjugating by $\\tau$ replaces every letter $i$ in the cycle decomposition of $\\sigma$ by $\\tau(i)$: for example $\\tau (1\\,2\\,3)\\tau^{-1} = (\\tau(1)\\,\\tau(2)\\,\\tau(3))$. Hence **two permutations are conjugate exactly when they have the same cycle type**: conjugacy classes of $S_n$ correspond to partitions of $n$, numbering $p(n)$ in total. A class of cycle type $1^{m_1}2^{m_2}\\cdots$ (with $m_k$ cycles of length $k$) contains $\\dfrac{n!}{\\prod_k k^{m_k}\\,m_k!}$ elements. Inside the alternating group $A_n$ conjugacy becomes finer: an $S_n$-class either stays a single $A_n$-class or **splits** into two classes of equal size, and it splits exactly when the cycle lengths (fixed points included) are pairwise distinct and all odd — for example the 5-cycles of $A_5$ split into two classes of 12, while its 3-cycles do not split.\n\nThe alternating group. The sign map $\\operatorname{sgn}: S_n \\to \\{\\pm 1\\}$ is a group homomorphism, and its kernel — the even permutations — is the **alternating group** $A_n$. As a kernel it is a **normal subgroup**, $A_n \\trianglelefteq S_n$; for $n \\ge 2$ we have $[S_n : A_n] = 2$, so $|A_n| = n!/2$. As for simplicity: $A_3 \\cong \\mathbb{Z}_3$ is simple (abelian); $A_4$ is **not** simple, containing the normal subgroup $V_4 = \\{e,\\ (12)(34),\\ (13)(24),\\ (14)(23)\\}$; for $n \\ge 5$, $A_n$ is **simple** and non-abelian. A non-abelian simple group is not solvable, and since $A_n \\le S_n$, neither $A_n$ nor $S_n$ is solvable for $n \\ge 5$ — the group-theoretic heart of the insolubility of the general quintic. Conversely $S_n$ is solvable for $n \\le 4$: for example $1 \\trianglelefteq V_4 \\trianglelefteq A_4 \\trianglelefteq S_4$ has factors $V_4 \\cong \\mathbb{Z}_2 \\times \\mathbb{Z}_2$, $\\mathbb{Z}_3$ and $\\mathbb{Z}_2$, all abelian.",
+    "formulas": [
+      {
+        "latex": "|S_n| = n!,\\qquad |A_n| = \\frac{n!}{2}\\quad (n \\ge 2)",
+        "note": "对称群有 n! 个元素（确定像的排列数）；偶置换恰占一半，交错群阶为 n!/2。",
+        "noteEn": "The symmetric group has n! elements; even permutations are exactly half of them, so the alternating group has order n!/2."
+      },
+      {
+        "latex": "\\operatorname{sgn}(\\sigma) = (-1)^{n-c(\\sigma)} = \\prod_i (-1)^{k_i-1}",
+        "note": "符号由轮换分解读出：c 是轮换个数（含固定点），k_i 是各轮换长度；每个 k-轮换相当于 k−1 个对换。",
+        "noteEn": "The sign reads off from the cycle decomposition: c counts cycles including fixed points and the k_i are cycle lengths; a k-cycle equals k−1 transpositions."
+      },
+      {
+        "latex": "\\sigma \\sim \\tau \\iff \\sigma \\text{ 与 } \\tau \\text{ 的轮换型相同}",
+        "note": "S_n 中两个置换共轭当且仅当轮换型相同；在 A_n 中类还会按「互异且全奇」规则分裂。",
+        "noteEn": "In S_n two permutations are conjugate iff they share the cycle type; inside A_n a class may split when the cycle lengths are distinct and all odd."
+      },
+      {
+        "latex": "\\#\\{\\sigma : \\text{轮换型 } 1^{m_1}2^{m_2}\\cdots\\} = \\frac{n!}{\\prod_k k^{m_k}\\, m_k!}",
+        "note": "给定轮换型的元素个数；例如 S_6 中轮换型 3+2+1 有 6!/(3·2·1)=120 个元素。",
+        "noteEn": "The size of a conjugacy class: cycle type 3+2+1 in S_6 has 6!/(3·2·1)=120 elements."
+      },
+      {
+        "latex": "n \\ge 5 \\implies A_n \\text{ 单且非交换} \\implies S_n \\text{ 不可解}",
+        "note": "n ≥ 5 时 A_n 单且非交换，故 A_n 与 S_n 都不可解；这是伽罗瓦理论的入口。",
+        "noteEn": "For n ≥ 5, A_n is simple and non-abelian, so neither A_n nor S_n is solvable — the gateway to Galois theory."
+      }
+    ],
+    "properties": [
+      "S_n 的共轭类与 n 的分拆一一对应：两个置换共轭当且仅当轮换型相同；S_4 的类对应 1+1+1+1、2+1+1、2+2、3+1、4，大小依次为 1、6、3、8、6，类方程 24 = 1+6+3+8+6。",
+      "置换的阶等于各轮换长度的最小公倍数（固定点长度为 1，不影响）；例如轮换型 3+2+1 的置换阶为 lcm(3,2,1)=6。",
+      "符号 sgn: S_n → {±1} 是满同态（n ≥ 2），满足 sgn(στ) = sgn(σ)sgn(τ)；偶置换在复合下封闭，故 A_n 是 S_n 的正规子群，指数为 2。",
+      "n ≥ 5 时 A_n 单且非交换，故 A_n 与 S_n 都不可解；n ≤ 4 时 S_n 可解。单性从 n=5 才开始：A_4 含正规子群 V_4 ≅ Z_2×Z_2。",
+      "A_n 中的共轭比 S_n 细：轮换长度（含固定点）互不相同且全为奇数时，S_n-类在 A_n 中分裂为两个等大的类，否则不分裂；如 A_5 的 5-轮换类 24 个分裂为 12+12，而 3-轮换类 20 个不分裂。"
+    ],
+    "propertiesEn": [
+      "Conjugacy classes of S_n correspond to partitions of n: two permutations are conjugate iff they share the cycle type. In S_4 the classes correspond to 1+1+1+1, 2+1+1, 2+2, 3+1, 4 with sizes 1, 6, 3, 8, 6, giving the class equation 24 = 1+6+3+8+6.",
+      "The order of a permutation is the lcm of its cycle lengths (fixed points have length 1 and do not matter); a permutation of cycle type 3+2+1 has order lcm(3,2,1)=6.",
+      "The sign sgn: S_n → {±1} is a surjective homomorphism for n ≥ 2 with sgn(στ) = sgn(σ)sgn(τ); even permutations are closed under composition, so A_n is a normal subgroup of index 2 in S_n.",
+      "For n ≥ 5, A_n is simple and non-abelian, so neither A_n nor S_n is solvable; for n ≤ 4, S_n is solvable. Simplicity begins at n = 5: A_4 contains the normal subgroup V_4 ≅ Z_2×Z_2.",
+      "Conjugacy in A_n is finer than in S_n: an S_n-class splits into two equal A_n-classes exactly when its cycle lengths (fixed points included) are pairwise distinct and all odd, and stays one class otherwise. E.g. the 24 five-cycles of A_5 split 12+12, while its 20 three-cycles do not split."
+    ],
+    "examples": [
+      {
+        "problem": "设 $\\sigma = (1\\,3\\,4)(2\\,6)(5) \\in S_6$。(1) 写出 $\\sigma$ 的轮换型、阶与符号；(2) 求 $S_6$ 中与 $\\sigma$ 共轭的元素个数。",
+        "solution": "(1) $\\sigma$ 已写成互不相交轮换之积：一个 3-轮换 $(1\\,3\\,4)$、一个 2-轮换 $(2\\,6)$、一个固定点 $(5)$，轮换型为 $3+2+1$。元素的阶等于各轮换长度的最小公倍数：$\\operatorname{ord}(\\sigma) = \\operatorname{lcm}(3,2,1) = 6$。验证阶恰为 6：$\\sigma^2 = (1\\,4\\,3) \\ne \\mathrm{id}$，$\\sigma^3 = (2\\,6) \\ne \\mathrm{id}$，而 $\\sigma^6 = \\mathrm{id}$，6 的真因数 1、2、3 都不行，故阶为 6 ✓。符号逐个轮换读出：$\\operatorname{sgn} = (-1)^{3-1} \\cdot (-1)^{2-1} \\cdot (-1)^{1-1} = (+1)(-1)(+1) = -1$，即 $\\sigma$ 是奇置换；等价地用公式 $\\operatorname{sgn}(\\sigma) = (-1)^{n-c} = (-1)^{6-3} = -1$（逆序数验算：$\\sigma$ 的序列为 3,6,4,1,5,2，逆序数 9 是奇数，与 $-1$ 一致）。\n(2) 共轭类大小由轮换型决定：$m_1 = m_2 = m_3 = 1$，代入公式得 $\\dfrac{6!}{3^1\\cdot 1! \\cdot 2^1 \\cdot 1! \\cdot 1^1 \\cdot 1!} = \\dfrac{720}{6} = 120$。验算：按「先选 3 个字母组成 3-轮换、再在剩余 3 个字母中选 2 个组成 2-轮换」也可数出 $\\binom{6}{3}\\cdot 2 \\cdot \\binom{3}{2} \\cdot 1 \\cdot 1 = 20 \\cdot 2 \\cdot 3 = 120$ ✓。"
+      },
+      {
+        "problem": "写出 $S_4$ 的类方程；找出 $A_4$ 的一个非平凡真正规子群，并说明这与「$A_n$ 的单性从 $n = 5$ 才开始」不矛盾。",
+        "solution": "$S_4$ 按轮换型分类，逐类数元素：$1^4$ 型（单位元）1 个；$2\\cdot 1^2$ 型 $\\dfrac{24}{2 \\cdot 2} = 6$ 个；$2^2$ 型 $\\dfrac{24}{2^2 \\cdot 2} = 3$ 个；$3\\cdot 1$ 型 $\\dfrac{24}{3} = 8$ 个；$4$ 型 $\\dfrac{24}{4} = 6$ 个。合计 $1+6+3+8+6 = 24$ ✓，类方程为 $24 = 1+6+3+8+6$。\n取 $V_4 = \\{e,\\ (12)(34),\\ (13)(24),\\ (14)(23)\\}$：三个非单位元自逆，且两两相乘仍在 $V_4$ 中——按「先右后左」验算 $(12)(34) \\cdot (13)(24) = (14)(23)$（逐个检验：$1 \\mapsto 3 \\mapsto 4$，$4 \\mapsto 2 \\mapsto 1$，所以 1 与 4 互换；$2 \\mapsto 4 \\mapsto 3$，所以 2 与 3 互换，结果确为 $(14)(23)$ ✓），故 $V_4 \\cong \\mathbb{Z}_2 \\times \\mathbb{Z}_2$ 是 $A_4$ 的子群，$|V_4| = 4$ 整除 $|A_4| = 12$。它对共轭封闭：共轭保持轮换型，而 $V_4$ 恰由 $A_4$ 中全部「$2^2$ 型」元素（3 个）连同单位元组成，故 $V_4 \\trianglelefteq A_4$ 是正规子群，$A_4$ 不单。\n这与「$A_n$ 对 $n \\ge 5$ 单」不矛盾：单性定理正是从 $n = 5$ 才开始（$A_5$ 是最小非交换单群，阶 60）。验算 $A_4$ 的结构：它的元类大小为 1、3、4、4——3-轮换的 8 个元素在 $A_4$ 中分裂成两个 4 元类（轮换型 $3+1$ 的轮换长度互异且全为奇数，符合分裂规则），类方程 $12 = 1+3+4+4$ ✓。"
+      }
+    ],
+    "links": [
+      "group-definition-examples",
+      "subgroup-coset",
+      "lagrange-theorem",
+      "group-homomorphism-quotient",
+      "group-actions-orbit-stabilizer",
+      "matrix-groups"
+    ],
+    "tags": [
+      "对称群",
+      "交错群",
+      "轮换型",
+      "共轭类",
+      "单群"
+    ]
+  },
+  {
+    "id": "ring-ideal",
+    "title": "环与理想",
+    "titleEn": "Rings and Ideals",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "环是加法成群、乘法结合且由分配律连接两种运算的代数结构；理想是对乘法「吸收」的加法子群，它的作用正是让商环 R/I 良定义。",
+    "summaryEn": "A ring adds an associative multiplication to an abelian group, linked by distributivity; an ideal is an additive subgroup absorbing multiplication, exactly what makes the quotient ring R/I well defined.",
+    "definition": "**环**是集合 $R$ 连同两个运算 $+$、$\\cdot$，满足三组公理：(1) $(R,+)$ 是**阿贝尔群**（加法有零元、负元，且 $a+b = b+a$）；(2) 乘法满足结合律 $a(bc) = (ab)c$；(3) 两种运算由**分配律**连接：$a(b+c) = ab+ac$、$(a+b)c = ac+bc$。**本库统一约定：环都指含单位元 $1 \\ne 0$ 的交换环**（乘法交换）——这样接下来的商环、素理想与模的定理都取最简洁的形式；矩阵环 $M_n(\\mathbb{R})$ 这类非交换环不在本库「环」的默认范围内。标准例子：整数环 $\\mathbb{Z}$、剩余类环 $\\mathbb{Z}_n$（$n \\ge 2$；$\\mathbb{Z}_n$ 是域当且仅当 $n$ 是素数，如 $\\mathbb{Z}_7$ 是域）、域 $F$ 上的多项式环 $F[x]$。\n\n环同态 $\\varphi: R \\to S$ 是保持两种运算与单位元的映射：$\\varphi(a+b) = \\varphi(a)+\\varphi(b)$、$\\varphi(ab) = \\varphi(a)\\varphi(b)$、$\\varphi(1) = 1$。同态的**核** $\\ker\\varphi = \\{r : \\varphi(r) = 0\\}$ 有一个关键特征：它对乘法「**吸收**」——若 $x \\in \\ker\\varphi$，则对任意 $r \\in R$ 有 $\\varphi(rx) = \\varphi(r)\\varphi(x) = 0$，即 $rx \\in \\ker\\varphi$。把这条性质提炼出来就得到**理想**的定义：加法子群 $I \\subseteq R$ 若满足吸收性（$r \\in R$、$x \\in I \\implies rx \\in I$，等价地 $rI \\subseteq I$），就称为 $R$ 的**理想**。例：$\\mathbb{Z}$ 中的 $n\\mathbb{Z} = \\{nk : k \\in \\mathbb{Z}\\}$；$F[x]$ 中的 $(x) = \\{x\\,g(x)\\}$；一切同态的核。要注意理想比子环更强：$\\mathbb{Z} \\subseteq \\mathbb{Q}$ 是子环（甚至是子整环），却不是理想——$\\frac{1}{2} \\in \\mathbb{Q}$、$1 \\in \\mathbb{Z}$，而 $\\frac{1}{2}\\cdot 1 = \\frac{1}{2} \\notin \\mathbb{Z}$，吸收性失败。\n\n理想最重要的作用是允许做**商环** $R/I$：元素是陪集 $r+I$，加法 $(r+I)+(s+I) = (r+s)+I$，乘法 $(r+I)(s+I) = rs+I$。乘法的良定义**正要靠吸收性**：若 $r' = r+x$、$s' = s+y$（$x, y \\in I$），则 $r's' = rs + (ry + sx + xy)$，而 $ry, sx, xy \\in I$，故 $r's'$ 与 $rs$ 只差一个 $I$ 中元素，乘积所在的陪集不变。自然投射 $\\pi: R \\to R/I$、$r \\mapsto r+I$ 是满同态，且 $\\ker\\pi = I$。**理想与商环是一体两面**：每个同态的核都是理想，反之每个理想都是某个满同态的核；同态基本定理把两者锁在一起：$R/\\ker\\varphi \\cong \\operatorname{im}\\varphi$。典型例子：$\\mathbb{Z}/n\\mathbb{Z} = \\mathbb{Z}_n$。\n\n$\\mathbb{Z}$ 的每个理想都是**主理想**：取 $I$ 中最小正元素 $a$，带余除法说明 $I$ 中每个数都是 $a$ 的倍数，故 $I = (a) = a\\mathbb{Z}$。一个真理想 $P \\subsetneq R$ 称为**素理想**，若 $ab \\in P \\implies a \\in P$ 或 $b \\in P$；称为**极大理想**，若严格包含 $P$ 的理想只有 $R$ 本身。商环给出干净的对应：**$I$ 是素理想 $\\iff$ $R/I$ 是整环；$I$ 是极大理想 $\\iff$ $R/I$ 是域**。由于域都是整环，极大理想必是素理想；反之不然。例：$\\mathbb{Z}$ 中 $(p)$（$p$ 素数）既素又极大（$\\mathbb{Z}/(p) = \\mathbb{F}_p$ 是域）；$(0)$ 是素理想但不是极大理想（$\\mathbb{Z}/(0) \\cong \\mathbb{Z}$ 是整环不是域）。",
+    "definitionEn": "A **ring** is a set $R$ with two operations $+$ and $\\cdot$ subject to three groups of axioms: (1) $(R,+)$ is an **abelian group**; (2) multiplication is associative; (3) the distributive laws $a(b+c) = ab+ac$ and $(a+b)c = ac+bc$ link the two operations. **Convention of this library: every ring is commutative with identity $1 \\ne 0$** — this keeps the statements about quotient rings, prime ideals and modules in their cleanest form; non-commutative examples such as matrix rings $M_n(\\mathbb{R})$ lie outside the default scope. Standard examples: the integers $\\mathbb{Z}$, the residue rings $\\mathbb{Z}_n$ ($n \\ge 2$; $\\mathbb{Z}_n$ is a field iff $n$ is prime, e.g. $\\mathbb{Z}_7$ is a field), and polynomial rings $F[x]$ over a field $F$.\n\nA ring homomorphism $\\varphi: R \\to S$ preserves both operations and the identity. Its **kernel** $\\ker\\varphi$ has a key feature: it **absorbs** multiplication — if $x \\in \\ker\\varphi$ then $\\varphi(rx) = \\varphi(r)\\varphi(x) = 0$ for every $r$, i.e. $rx \\in \\ker\\varphi$. Distilling this property gives the definition of an **ideal**: an additive subgroup $I \\subseteq R$ closed under absorption ($r \\in R$, $x \\in I \\implies rx \\in I$, equivalently $rI \\subseteq I$). Examples: $n\\mathbb{Z}$ in $\\mathbb{Z}$; the principal ideal $(x) = \\{x\\,g(x)\\}$ in $F[x]$; kernels of homomorphisms. An ideal is stronger than a subring: $\\mathbb{Z} \\subseteq \\mathbb{Q}$ is a subring (even a subdomain) but not an ideal, since $\\frac{1}{2} \\in \\mathbb{Q}$ and $1 \\in \\mathbb{Z}$ while $\\frac{1}{2}\\cdot 1 \\notin \\mathbb{Z}$.\n\nThe great use of ideals is the **quotient ring** $R/I$: elements are cosets $r+I$, with $(r+I)+(s+I) = (r+s)+I$ and $(r+I)(s+I) = rs+I$. Well-definedness of multiplication **uses absorption**: if $r' = r+x$ and $s' = s+y$ with $x,y \\in I$, then $r's' = rs + (ry+sx+xy)$ with $ry, sx, xy \\in I$, so the coset of the product does not change. The projection $\\pi: R \\to R/I$ is a surjective homomorphism with $\\ker\\pi = I$. Ideals and kernels are two faces of one notion, and the first isomorphism theorem locks them together: $R/\\ker\\varphi \\cong \\operatorname{im}\\varphi$. Basic example: $\\mathbb{Z}/n\\mathbb{Z} = \\mathbb{Z}_n$.\n\nEvery ideal of $\\mathbb{Z}$ is **principal**: taking the smallest positive element $a$ of $I$, division with remainder shows every element of $I$ is a multiple of $a$, so $I = (a) = a\\mathbb{Z}$. A proper ideal $P \\subsetneq R$ is **prime** if $ab \\in P$ implies $a \\in P$ or $b \\in P$, and **maximal** if the only ideal strictly containing it is $R$ itself. The quotient gives a clean dictionary: **$I$ is prime $\\iff$ $R/I$ is an integral domain; $I$ is maximal $\\iff$ $R/I$ is a field.** Since fields are domains, maximal ideals are prime, but not conversely: in $\\mathbb{Z}$, $(p)$ for prime $p$ is both, while $(0)$ is prime but not maximal, since $\\mathbb{Z}/(0) \\cong \\mathbb{Z}$ is a domain but not a field.",
+    "formulas": [
+      {
+        "latex": "(R,+,\\cdot) \\text{ 是环}:\\quad (R,+) \\text{ 阿贝尔群},\\quad a(bc) = (ab)c,\\quad a(b+c) = ab+ac",
+        "note": "环的三组公理：加法成群、乘法结合、分配律连接；本库约定乘法交换且含单位元 1 ≠ 0。",
+        "noteEn": "The axioms of a ring: additive abelian group, associative multiplication, distributivity; in this library rings are commutative with identity 1 ≠ 0."
+      },
+      {
+        "latex": "I \\text{ 是理想} \\iff I \\text{ 是加法子群且 } rI \\subseteq I \\ (\\forall r \\in R)",
+        "note": "理想 = 加法子群 + 吸收性；吸收性正是商环乘法良定义所依赖的性质。",
+        "noteEn": "An ideal is an additive subgroup closed under absorption; absorption is exactly what makes the quotient multiplication well defined."
+      },
+      {
+        "latex": "(r+I)(s+I) = rs+I;\\qquad R/\\ker\\varphi \\cong \\operatorname{im}\\varphi",
+        "note": "商环乘法与同态基本定理：核是理想、理想是核，两者一一对应。",
+        "noteEn": "Quotient multiplication and the first isomorphism theorem: kernels are ideals and ideals are kernels."
+      },
+      {
+        "latex": "R/I \\text{ 是整环} \\iff I \\text{ 是素理想};\\qquad R/I \\text{ 是域} \\iff I \\text{ 是极大理想}",
+        "note": "素理想 / 极大理想与商环类型的对应；极大必素，反之不然。",
+        "noteEn": "Prime and maximal ideals correspond to the quotient being a domain or a field; maximal implies prime, but not conversely."
+      },
+      {
+        "latex": "\\forall I \\text{ 为 } \\mathbb{Z} \\text{ 的理想},\\ \\exists\\, a \\ge 0:\\ I = (a) = a\\mathbb{Z}",
+        "note": "Z 的理想全为主理想；理想包含关系与整除反向对应：(a) ⊆ (b) ⟺ b | a。",
+        "noteEn": "Every ideal of Z is principal; inclusion reverses divisibility: (a) ⊆ (b) iff b divides a."
+      }
+    ],
+    "properties": [
+      "同态基本定理：φ: R → S 是环同态，则 ker φ 是 R 的理想、im φ 是 S 的子环，且 R/ker φ ≅ im φ；「核是理想、理想是核」正是理想概念的来源。",
+      "理想的交 I ∩ J 仍是理想；包含 I 与 J 的最小理想是 I + J = {i + j : i ∈ I, j ∈ J}；但并集一般不是理想——Z 中 2Z ∪ 3Z 不含 2 + 3 = 5。",
+      "一个环是域当且仅当它只有 (0) 与 R 两个理想；对一般环，真理想恰是不含单位元的理想（I = R ⟺ 1 ∈ I ⟺ I 含某个单位）。",
+      "Z 是主理想整环：理想与 (a)（a ≥ 0）一一对应，且 (a) ∩ (b) = (lcm(a,b))、(a) + (b) = (gcd(a,b))——理想的交与和翻译成因数的 lcm 与 gcd。",
+      "极大理想必是素理想（因为域是整环），反之不然：Z[x] 中 (x) 是素理想但不是极大理想（Z[x]/(x) ≅ Z 是整环而非域）；Z 中 (0) 素而不极大。"
+    ],
+    "propertiesEn": [
+      "First isomorphism theorem: for a ring homomorphism φ: R → S, ker φ is an ideal of R, im φ is a subring of S, and R/ker φ ≅ im φ; kernels are ideals and ideals are kernels — the origin of the concept.",
+      "Intersections of ideals are ideals; the smallest ideal containing I and J is I + J = {i + j}; unions usually are not ideals — 2Z ∪ 3Z in Z misses 2 + 3 = 5.",
+      "A ring is a field iff its only ideals are (0) and R; for a general ring, I = R iff I contains a unit (iff 1 ∈ I), so proper ideals contain no units.",
+      "Z is a principal ideal domain: ideals correspond to (a) with a ≥ 0, and (a) ∩ (b) = (lcm(a,b)), (a) + (b) = (gcd(a,b)) — intersection and sum translate into lcm and gcd.",
+      "Maximal ideals are prime (a field is a domain), but not conversely: (x) in Z[x] is prime yet not maximal since Z[x]/(x) ≅ Z is a domain, not a field; (0) in Z is prime but not maximal."
+    ],
+    "examples": [
+      {
+        "problem": "列出 $\\mathbb{Z}_6$ 的全部理想，指出哪些是素理想、哪些是极大理想，并说明 $\\mathbb{Z}_6$ 不是整环。",
+        "solution": "$\\mathbb{Z}_6 = \\{0,1,2,3,4,5\\}$ 的理想必是加法子群且对乘法吸收。逐一检验（穷举全部 64 个子集）：共有 4 个理想——$\\{0\\}$、$\\{0,3\\} = (3)$、$\\{0,2,4\\} = (2)$、$\\mathbb{Z}_6$ 本身，恰好对应 6 的因数 1、2、3、6。\n$\\{0\\}$ 不是素理想：$2 \\cdot 3 = 6 \\equiv 0 \\in \\{0\\}$，但 $2 \\notin \\{0\\}$ 且 $3 \\notin \\{0\\}$；这正说明 2、3 都是零因子，$\\mathbb{Z}_6$ 不是整环。\n$(2) = \\{0,2,4\\}$ 的商环只有两个陪集：偶数 $\\{0,2,4\\}$ 与奇数 $\\{1,3,5\\}$，运算表与 $\\mathbb{Z}_2$ 完全一致，故 $\\mathbb{Z}_6/(2) \\cong \\mathbb{Z}_2$ 是域，从而 $(2)$ 是极大理想（也必是素理想）。同理 $3$ 的倍数只有 $\\{0,3\\}$，商环 $\\mathbb{Z}_6/(3) \\cong \\mathbb{Z}_3$ 是域，$(3)$ 极大且素。验算：$(2) \\cap (3) = \\{0\\}$、$(2) + (3) = \\mathbb{Z}_6$，与 gcd(2,3)=1、lcm(2,3)=6 相符；而 $\\mathbb{Z}_6/(2) \\cong \\mathbb{Z}_2$、$\\mathbb{Z}_6/(3) \\cong \\mathbb{Z}_3$ 的阶 $6/3 = 2$、$6/2 = 3$ 也与陪集计数一致 ✓。"
+      },
+      {
+        "problem": "证明：$\\mathbb{Z}[x]$ 中 $(x)$ 是素理想但不是极大理想；$(2,x)$ 是极大理想。",
+        "solution": "考虑求值同态 $\\varphi: \\mathbb{Z}[x] \\to \\mathbb{Z}$，$\\varphi(f) = f(0)$（取常数项）。它是满环同态（常数多项式映满 $\\mathbb{Z}$），核恰为常数项为零的多项式，即 $(x) = \\{x\\,g(x)\\}$。由同态基本定理 $\\mathbb{Z}[x]/(x) \\cong \\mathbb{Z}$：$\\mathbb{Z}$ 是整环不是域，所以 $(x)$ 是素理想但**不是**极大理想。\n具体验证它不极大：$2 \\notin (x)$，即 $2$ 在 $\\mathbb{Z}[x]/(x)$ 中不是零；而 $2$ 没有乘法逆——若 $2g(x) + xh(x) = 1$，比较常数项得 $2g(0) = 1$，左边是偶数，矛盾 ✓（对任意多项式 $g$、$h$ 都成立）。\n再看 $(2,x) = \\{2a(x) + xb(x)\\}$：多项式属于 $(2,x)$ 当且仅当其常数项为偶数。于是商环 $\\mathbb{Z}[x]/(2,x)$ 只有两个陪集，运算与 $\\mathbb{Z}_2 = \\mathbb{F}_2$ 一致，即 $\\mathbb{Z}[x]/(2,x) \\cong \\mathbb{F}_2$ 是域，所以 $(2,x)$ 是极大理想（也素）。顺带可知 $\\mathbb{Z}[x]$ 不是主理想整环：$(2,x)$ 不是主理想——若 $(2,x) = (f)$，则 $f \\mid 2$，在 $\\mathbb{Z}[x]$ 中只能是 $f = \\pm 1$ 或 $\\pm 2$；$f = \\pm 1$ 使 $(2,x) = \\mathbb{Z}[x]$，与 $1 \\notin (2,x)$（常数项 1 是奇数）矛盾；$f = \\pm 2$ 又与 $x \\in (2,x)$ 但 $x \\notin (2)$ 矛盾 ✓。"
+      }
+    ],
+    "links": [
+      "group-definition-examples",
+      "integral-domain-ufd",
+      "polynomial-ring-irreducibility",
+      "congruence-basics",
+      "matrix-groups"
+    ],
+    "tags": [
+      "环",
+      "理想",
+      "商环",
+      "素理想",
+      "极大理想"
+    ]
+  },
+  {
+    "id": "integral-domain-ufd",
+    "title": "整环与唯一分解环",
+    "titleEn": "Integral Domains and UFDs",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "整环是无零因子的交换环；若每个非零非单位元素都能唯一地（到次序与单位）分解为不可约元之积，就是唯一分解环——Z[√−5] 中 6 = 2·3 = (1+√−5)(1−√−5) 说明整环未必是 UFD。",
+    "summaryEn": "An integral domain is a commutative ring without zero divisors; if every nonzero nonunit factors uniquely (up to order and units) into irreducibles it is a UFD — and Z[√−5] is a domain that fails, since 6 = 2·3 = (1+√−5)(1−√−5).",
+    "definition": "**零因子与整环**。设 $R$ 是含单位元的交换环。非零元 $a \\ne 0$ 称为**零因子**，若存在非零元 $b \\ne 0$ 使 $ab = 0$；没有零因子的交换环称为**整环**。例如 $\\mathbb{Z}$、任何域、域上多项式环 $F[x]$、高斯整数环 $\\mathbb{Z}[\\mathrm{i}]$ 都是整环；$\\mathbb{Z}_7$ 是域（7 素数）因而也是整环；$\\mathbb{Z}_6$ 不是：$2 \\cdot 3 = 6 \\equiv 0$ 而 2、3 都非零；$\\mathbb{Z}_4$ 也不是：$2 \\cdot 2 = 0$。整环的核心红利是**消去律**：若 $a \\ne 0$ 且 $ab = ac$，则 $b = c$——因为 $a(b-c) = 0$ 而 $a \\ne 0$，只能 $b - c = 0$。\n\n整除、单位与相伴。在整环里整除的字典与 $\\mathbb{Z}$ 平行：$a \\mid b \\iff \\exists\\, c:\\ b = ac$。可逆元叫**单位**：$\\mathbb{Z}$ 的单位只有 $\\pm 1$，$F[x]$ 的单位是非零常数，$\\mathbb{Z}[\\mathrm{i}]$ 的单位是 $\\{\\pm 1, \\pm \\mathrm{i}\\}$。若 $a = ub$（$u$ 是单位），就说 $a$ 与 $b$ **相伴**——相伴的元素互相整除，在任何分解中不可区分，所以唯一性只能做到「到次序与单位」。**不可约元**是满足以下条件的非零非单位元 $p$：$p = ab \\implies a$ 或 $b$ 是单位（不可再分）。**素元**是非零非单位元 $p$：$p \\mid ab \\implies p \\mid a$ 或 $p \\mid b$。在整环中**素元一定不可约**；但反向「不可约 $\\implies$ 素」一般不成立，它正是 UFD 与一般整环的分水岭。\n\nUFD 的定义与经典反例。整环 $R$ 称为**唯一分解环**（UFD），若：(存在性) 每个非零非单位元都能写成有限个不可约元之积；(唯一性) 分解不计次序、不计单位因子时唯一——即 $p_1 \\cdots p_r = q_1 \\cdots q_s$ 蕴含 $r = s$ 且适当重排后每对 $p_i$ 与 $q_i$ 相伴。等价刻画：**$R$ 是 UFD $\\iff$ 每个非零非单位元有不可约分解，且每个不可约元都是素元**。标准例子：$\\mathbb{Z}$（算术基本定理）、任何域（无非零非单位元，退化地成立）、$F[x]$、$\\mathbb{Z}[\\mathrm{i}]$、$\\mathbb{Z}[x]$。**反例** $\\mathbb{Z}[\\sqrt{-5}] = \\{a + b\\sqrt{-5} : a, b \\in \\mathbb{Z}\\}$：它是复数环 $\\mathbb{C}$ 的子环，因而是整环，但 $$6 = 2 \\cdot 3 = (1+\\sqrt{-5})(1-\\sqrt{-5}),$$ 两种分解都不可再分、互不相伴（四个因子都不可约，完整验证见例题），所以 $\\mathbb{Z}[\\sqrt{-5}]$ 不是 UFD——「整环 $\\implies$ UFD」是假命题，唯一分解性是额外的要求。\n\n层级链与最大公因数。三种环形成严格层级：**欧几里得整环**（有带余除法，如 $\\mathbb{Z}$、$F[x]$）$\\implies$ **主理想整环**（每个理想都形如 $(a)$）$\\implies$ **UFD**。证明思路：欧几里得整环中取理想里「次数或绝对值最小」的元素即得 PID；PID 中不可约元必素——若 $(p) \\subsetneq (a) \\subsetneq R$，则 $a \\mid p$，写 $p = ab$，$p$ 不可约迫使 $a$ 是单位（$(a) = R$）或 $b$ 是单位（$a$ 与 $p$ 相伴，$(a) = (p)$），都与严格包含矛盾，故 $(p)$ 极大从而素（分解的存在性来自理想升链的终止，此处从略）。反向蕴含都不成立：$\\mathbb{Z}[x]$ 是 UFD 但不是 PID（$(2,x)$ 不是主理想）。在 UFD 中最大公因数总存在（取各不可约因子指数的最小值，到单位）；一般整环中 gcd 可以不存在——$\\mathbb{Z}[\\sqrt{-5}]$ 中 $6$ 与 $2(1+\\sqrt{-5})$ 的公共因子有 $2$ 和 $1+\\sqrt{-5}$，而两者互不整除，没有「最大者」。",
+    "definitionEn": "**Zero divisors and domains.** Let $R$ be a commutative ring with identity. A nonzero element $a \\ne 0$ is a **zero divisor** if $ab = 0$ for some nonzero $b$; a commutative ring with no zero divisors is an **integral domain**. Examples: $\\mathbb{Z}$, every field, polynomial rings $F[x]$, the Gaussian integers $\\mathbb{Z}[\\mathrm{i}]$; $\\mathbb{Z}_7$ is a field (7 prime) and hence a domain. Non-examples: $\\mathbb{Z}_6$ with $2 \\cdot 3 = 0$ and $\\mathbb{Z}_4$ with $2 \\cdot 2 = 0$. The dividend of being a domain is the **cancellation law**: if $a \\ne 0$ and $ab = ac$ then $b = c$, because $a(b-c) = 0$ forces $b - c = 0$.\n\nDivisibility, units, associates. Divisibility in a domain mirrors $\\mathbb{Z}$: $a \\mid b \\iff \\exists c: b = ac$. Invertible elements are **units**: the units of $\\mathbb{Z}$ are $\\pm 1$, of $F[x]$ the nonzero constants, of $\\mathbb{Z}[\\mathrm{i}]$ the four elements $\\{\\pm 1, \\pm \\mathrm{i}\\}$. If $a = ub$ with $u$ a unit, then $a$ and $b$ are **associates**: they divide each other and cannot be told apart by any factorization, so uniqueness can only hold up to order and units. An **irreducible** element is a nonzero nonunit $p$ such that $p = ab$ forces $a$ or $b$ to be a unit. A **prime** element is a nonzero nonunit $p$ such that $p \\mid ab$ implies $p \\mid a$ or $p \\mid b$. In a domain every prime element is irreducible; the converse can fail, and it is exactly the dividing line between UFDs and general domains.\n\nUFDs and the classical counterexample. A domain $R$ is a **unique factorization domain (UFD)** if (existence) every nonzero nonunit is a finite product of irreducibles, and (uniqueness) such a factorization is unique up to order and unit factors — that is, $p_1 \\cdots p_r = q_1 \\cdots q_s$ forces $r = s$ and $p_i$ associate to $q_i$ after reordering. Equivalently, **$R$ is a UFD iff every nonzero nonunit has an irreducible factorization and every irreducible is prime**. Standard examples: $\\mathbb{Z}$ (the Fundamental Theorem of Arithmetic), any field (vacuously), $F[x]$, $\\mathbb{Z}[\\mathrm{i}]$, $\\mathbb{Z}[x]$. **Counterexample**: $\\mathbb{Z}[\\sqrt{-5}] = \\{a + b\\sqrt{-5} : a, b \\in \\mathbb{Z}\\}$ is a subring of $\\mathbb{C}$, hence a domain, yet $$6 = 2 \\cdot 3 = (1+\\sqrt{-5})(1-\\sqrt{-5}),$$ two genuinely different factorizations — all four factors are irreducible and pairwise non-associate (verified in the example). So \"domain implies UFD\" is false; unique factorization is a genuine extra property.\n\nThe hierarchy and gcds. Three classes of rings form a strict chain: **Euclidean domains** (division with remainder, e.g. $\\mathbb{Z}$, $F[x]$) $\\implies$ **principal ideal domains** (every ideal is $(a)$) $\\implies$ **UFDs**. Sketch: in a Euclidean domain a least element of an ideal generates it (PID); in a PID an irreducible $p$ generates a maximal ideal — if $(p) \\subsetneq (a) \\subsetneq R$ then $a \\mid p$, say $p = ab$, and irreducibility forces $a$ to be a unit (so $(a) = R$) or $b$ to be a unit (so $(a) = (p)$), a contradiction; hence irreducibles are prime, and uniqueness follows (existence comes from termination of ascending ideal chains, omitted here). No arrow reverses: $\\mathbb{Z}[x]$ is a UFD but not a PID ($(2,x)$ is not principal). In a UFD greatest common divisors always exist (read off the minimum exponents, up to units); in a general domain they may not — in $\\mathbb{Z}[\\sqrt{-5}]$, the elements $6$ and $2(1+\\sqrt{-5})$ have common divisors $2$ and $1+\\sqrt{-5}$, neither dividing the other, so no gcd exists.",
+    "formulas": [
+      {
+        "latex": "ab = 0 \\implies a = 0 \\text{ 或 } b = 0",
+        "note": "整环的定义式（无零因子）；等价地非零元满足消去律 ab = ac ⇒ b = c。",
+        "noteEn": "The defining property of an integral domain (no zero divisors); equivalently nonzero elements can be canceled."
+      },
+      {
+        "latex": "a \\sim b \\iff a = ub \\quad (u \\text{ 是单位})",
+        "note": "相伴关系：唯一分解只能「到次序与单位」为止；如 Z 中 2 与 −2 相伴，6 = 2·3 = (−2)·(−3) 同一种分解。",
+        "noteEn": "Associates: uniqueness of factorization holds only up to order and units; in Z, 2 ∼ −2, so 6 = 2·3 = (−2)(−3) is the same factorization."
+      },
+      {
+        "latex": "\\text{素元} \\implies \\text{不可约元};\\qquad \\text{UFD 中两者等价}",
+        "note": "素元必不可约；「不可约 ⇒ 素」在且仅在 UFD 中成立，是判别 UFD 的关键。",
+        "noteEn": "Prime elements are irreducible; the converse holds exactly in UFDs, which characterizes them."
+      },
+      {
+        "latex": "\\text{欧几里得整环} \\implies \\text{主理想整环} \\implies \\text{唯一分解环}",
+        "note": "层级链：Z 与 F[x] 在左端（有带余除法），Z[x] 只在右端（是 UFD 但不是 PID）。",
+        "noteEn": "The hierarchy: Z and F[x] are Euclidean, while Z[x] sits only at the right end (a UFD, not a PID)."
+      },
+      {
+        "latex": "6 = 2 \\cdot 3 = (1+\\sqrt{-5})(1-\\sqrt{-5})",
+        "note": "Z[√−5] 的两种不可约分解：四个因子都不可约且两两不相伴，故它不是 UFD。",
+        "noteEn": "Two inequivalent irreducible factorizations in Z[√−5]: all four factors are irreducible and pairwise non-associate, so it is not a UFD."
+      }
+    ],
+    "properties": [
+      "整环的等价刻画：无零因子 ⟺ 乘法消去律成立 ⟺ 两个非零元之积非零；Z_6、Z_4 因有零因子而不是整环，任何域都是整环。",
+      "整环中素元必不可约；Z[√−5] 中的 2 不可约却不是素元（2 | (1+√−5)(1−√−5) 而 2 不整除任一因子），说明「不可约 ⇒ 素」需要额外条件。",
+      "层级链：欧几里得整环 ⇒ 主理想整环 ⇒ UFD，反向均不成立：Z[x] 是 UFD 但不是 PID（(2,x) 不是主理想），而 F[x] 一路满足到链的左端。",
+      "UFD 中 gcd 与 lcm 总存在（到单位）：各不可约因子的指数取 min / max；非 UFD 中 gcd 可不存在，如 Z[√−5] 中 6 与 2(1+√−5)。",
+      "分解的唯一性必须「到单位」：Z 中 6 = 2·3 = (−2)·(−3) 算同一种分解；Z 的单位是 ±1、F[x] 的单位是非零常数、Z[i] 的单位是 ±1、±i——单位越多，相伴类越大。"
+    ],
+    "propertiesEn": [
+      "Characterizations: no zero divisors ⟺ cancellation holds ⟺ products of nonzero elements are nonzero. ℤ_6 and ℤ_4 have zero divisors and are not domains; every field is a domain (e.g. ℤ_7, since 7 is prime).",
+      "In a domain, prime elements are always irreducible; in ℤ[√−5] the element 2 is irreducible but not prime (2 | (1+√−5)(1−√−5) while dividing neither factor), showing that the converse needs extra hypotheses.",
+      "Euclidean ⟹ PID ⟹ UFD, and no arrow reverses: ℤ[x] is a UFD but (2,x) is not principal, while F[x] lies at the Euclidean end of the chain.",
+      "In a UFD, gcds and lcms always exist (up to units), given by the min/max exponents of irreducible factors; in a non-UFD a gcd may fail to exist, as in ℤ[√−5] for 6 and 2(1+√−5).",
+      "Uniqueness must be taken up to units: in ℤ, 6 = 2·3 = (−2)(−3) is the same factorization; the more units a domain has (ℤ: ±1; F[x]: nonzero constants; ℤ[i]: ±1, ±i), the coarser the equivalence."
+    ],
+    "examples": [
+      {
+        "problem": "验证 $\\mathbb{Z}[\\sqrt{-5}]$ 中 $6 = 2 \\cdot 3 = (1+\\sqrt{-5})(1-\\sqrt{-5})$ 是两种本质不同的不可约分解，从而它不是唯一分解环。",
+        "solution": "工具是**范数** $N(a+b\\sqrt{-5}) = a^2 + 5b^2$，它可乘：由 $(a+b\\sqrt{-5})(c+d\\sqrt{-5})$ 的展开式直接计算得 $N(xy) = N(x)N(y)$；又 $N(u) = 1$ 的元素恰是 $\\pm 1$（因为 $a^2 + 5b^2 = 1$ 迫使 $b = 0$、$a = \\pm 1$），即单位群为 $\\{\\pm 1\\}$。\n① 两个乘积都等于 6：$(1+\\sqrt{-5})(1-\\sqrt{-5}) = 1^2 - (\\sqrt{-5})^2 = 1 - (-5) = 6$，而 $2 \\cdot 3 = 6$ ✓。② 四个因子都不可约。看 2：若 $2 = xy$，取范数得 $N(x)N(y) = N(2) = 4$，故 $N(x), N(y) \\in \\{1,2,4\\}$；但 $a^2+5b^2 = 2$ 无整数解（$b \\ne 0$ 时左边 $\\ge 5$，$b = 0$ 时 $a^2 = 2$ 非平方），所以不存在范数为 2 的元素，只能 $N(x) = 1$ 或 $N(y) = 1$，即 x 或 y 是单位——2 不可约 ✓。同法：$N(x)N(y) = 9$ 时可能 $N(x) = N(y) = 3$，而 $a^2+5b^2 = 3$ 同样无解，故 3 不可约 ✓；对 $1 \\pm \\sqrt{-5}$ 有 $N = 6$，$N(x)N(y) = 6$ 时可能 $(N(x), N(y)) = (2,3)$ 或 $(3,2)$，而范数 2、3 都不可实现，故只能有一个因子是单位——$1 \\pm \\sqrt{-5}$ 都不可约 ✓。\n③ 两两不相伴。相伴意味着只差单位 $\\pm 1$：含虚部的因子 $1 \\pm \\sqrt{-5}$ 与实因子 2、3 显然不行；2 与 3 也不相差 $\\pm 1$；再看 $1+\\sqrt{-5}$ 与 $1-\\sqrt{-5}$：$\\dfrac{1+\\sqrt{-5}}{1-\\sqrt{-5}} = \\dfrac{(1+\\sqrt{-5})^2}{6} = \\dfrac{-4+2\\sqrt{-5}}{6} = \\dfrac{-2+\\sqrt{-5}}{3} \\notin \\mathbb{Z}[\\sqrt{-5}]$，故互不整除、必不相伴 ✓。\n所以 6 有两种本质不同的不可约分解，$\\mathbb{Z}[\\sqrt{-5}]$ 不是 UFD。注意它是整环（复数环的子环无零因子），可见「整环 ⇒ UFD」不成立。"
+      },
+      {
+        "problem": "在 $\\mathbb{Z}[\\mathrm{i}]$（高斯整数环）中验证 $5 = (2+\\mathrm{i})(2-\\mathrm{i}) = (1+2\\mathrm{i})(1-2\\mathrm{i})$ 只是同一种分解的重排：两组因子相差单位。",
+        "solution": "$\\mathbb{Z}[\\mathrm{i}] = \\{a + b\\mathrm{i} : a, b \\in \\mathbb{Z}\\}$ 是整环，范数 $N(a+b\\mathrm{i}) = a^2 + b^2$ 可乘，$N = 1$ 的元素即单位为 $\\{\\pm 1, \\pm \\mathrm{i}\\}$。两个乘积都等于 5：$(2+\\mathrm{i})(2-\\mathrm{i}) = 4 - \\mathrm{i}^2 = 4+1 = 5$；$(1+2\\mathrm{i})(1-2\\mathrm{i}) = 1 - 4\\mathrm{i}^2 = 1+4 = 5$ ✓。\n用单位把因子对齐：$\\mathrm{i}(2-\\mathrm{i}) = 2\\mathrm{i} - \\mathrm{i}^2 = 1+2\\mathrm{i}$，$-\\mathrm{i}(2+\\mathrm{i}) = -2\\mathrm{i} - \\mathrm{i}^2 = 1-2\\mathrm{i}$。于是 $(1+2\\mathrm{i})(1-2\\mathrm{i}) = \\mathrm{i}(2-\\mathrm{i}) \\cdot (-\\mathrm{i})(2+\\mathrm{i}) = (\\mathrm{i}\\cdot(-\\mathrm{i}))\\,(2-\\mathrm{i})(2+\\mathrm{i}) = (2+\\mathrm{i})(2-\\mathrm{i})$——两组分解的因子只差单位与次序，正是「唯一性到单位」所允许的差异 ✓。\n事实上 $\\mathbb{Z}[\\mathrm{i}]$ 以范数为欧几里得函数（$a+b\\mathrm{i}$ 除以 $c+d\\mathrm{i}$ 取最近整点的商，余数范数更小），是欧几里得整环、从而是 UFD，不会出现 $\\mathbb{Z}[\\sqrt{-5}]$ 那样的真反例。"
+      }
+    ],
+    "links": [
+      "ring-ideal",
+      "polynomial-ring-irreducibility",
+      "primes-fundamental-theorem",
+      "gcd-euclidean-algorithm",
+      "algebraic-number-theory"
+    ],
+    "tags": [
+      "整环",
+      "唯一分解环",
+      "不可约元",
+      "素元",
+      "高斯整数"
+    ]
+  },
+  {
+    "id": "polynomial-ring-irreducibility",
+    "title": "多项式环与不可约性",
+    "titleEn": "Polynomial Rings and Irreducibility",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "多项式环 R[x] 继承 R 的整环性质；域上的带余除法让 F[x] 从欧几里得整环一路升级为主理想整环与唯一分解环，而 Eisenstein 判别法与有理根定理是判断不可约性的实用工具。",
+    "summaryEn": "The polynomial ring R[x] inherits the domain structure of R; division with remainder over a field makes F[x] Euclidean, hence a PID and a UFD, while Eisenstein's criterion and the rational root theorem decide irreducibility in practice.",
+    "definition": "**多项式环**。设 $R$ 是含单位元的交换环，$R[x]$ 是系数取自 $R$ 的多项式全体，按逐项相加、卷积相乘。两条基本事实。(1) 若 $R$ 是整环，则 $R[x]$ 也是整环，且**次数可加**：$\\deg(fg) = \\deg f + \\deg g$——首项系数之积非零正是「无零因子」的用武之处；反之在 $\\mathbb{Z}_6[x]$ 中 $(2x)(3x) = 6x^2 = 0$，次数不升反降。对整环 $R$，$R[x]$ 的单位恰是 $R$ 的单位：$F[x]$ 的单位是非零常数，$\\mathbb{Z}[x]$ 的单位是 $\\pm 1$。(2) 一般环里做不了除法，但 **$F$ 是域时可以**：对任意 $f$、$g \\ne 0$，存在唯一的 $q, r \\in F[x]$ 使 $f = qg + r$ 且 $\\deg r < \\deg g$（长除法/带余除法）。这一条是后面全部理论的地基。\n\n不可约多项式与「欧几里得 $\\to$ PID $\\to$ UFD」链。设 $F$ 是域。次数 $\\ge 1$ 的 $f \\in F[x]$ 称为**不可约多项式**，若它不能写成两个次数 $\\ge 1$ 的多项式之积；否则称为**可约**（常数与零多项式不参与可约性讨论；乘以非零常数不改变可约性，故不可约性是「到单位」的概念）。由带余除法，$F[x]$ 是**欧几里得整环**（欧几里得函数取次数）；再取理想中次数最低的元素可知每个理想都是主理想 $(f)$，即 $F[x]$ 是**主理想整环（PID）**；又 PID 中不可约元必素，于是 $F[x]$ 是**唯一分解环（UFD）**：每个次数 $\\ge 1$ 的多项式都能唯一分解为不可约多项式之积（到次序与非零常数）。记忆链：**$F$ 域 $\\implies F[x]$ 欧几里得 $\\implies F[x]$ 是 PID $\\implies F[x]$ 是 UFD**。对照 $\\mathbb{Z}[x]$：它是 UFD 但**不是** PID（$(2,x)$ 不是主理想）——从 $R$ 到 $R[x]$，整环性质原样继承，主理想性质可能丢失。\n\n判别工具（一）：根与有理根。低次情形有捷径：**次数为 2 或 3 的多项式不可约 $\\iff$ 在 $F$ 中无根**（若有分解，必含一次因子，而一次因子等价于有根）。次数 $\\ge 4$ 时「无根」不再够用：例如 $x^4+4$ 无有理根却可约。对整系数多项式有**有理根定理**：若既约分数 $p/q$ 是 $f(x) = a_n x^n + \\cdots + a_0$ 的根，则 $p \\mid a_0$、$q \\mid a_n$。这把「f 有没有一次因子」缩成对有限个候选根（常数项因数除以首项系数因数）的试除，例如 $x^3 - 3x + 1$ 的候选根只有 $\\pm 1$。\n\n判别工具（二）：Eisenstein 判别法与 Gauss 引理。**Eisenstein 判别法**：设 $f(x) = a_n x^n + \\cdots + a_0 \\in \\mathbb{Z}[x]$，若存在素数 $p$ 同时满足三条件——(i) $p \\nmid a_n$（首项系数不被 p 整除）；(ii) $p \\mid a_i$ 对**所有** $i < n$（其余系数全被 p 整除）；(iii) $p^2 \\nmid a_0$（常数项不被 $p^2$ 整除）——则 $f$ 在 $\\mathbb{Q}[x]$ 中不可约。三条件缺一不可：$2x^2+4x+2 = (2x+2)(x+1)$ 在 $p=2$ 时违反 (i)、$x^2+4x+4 = (x+2)^2$ 违反 (iii)，而去掉 (ii) 时 $x^2+3x+2 = (x+1)(x+2)$ 成为反例。同时它是**充分不必要**的：$x^2+3x+1$ 在 $\\mathbb{Q}$ 上不可约（判别式 5 非平方）却不满足任何素数的条件。条件差一点时可以换元 $x \\mapsto x+1$ 再试（见例题）。把这一切接到整系数上的是 **Gauss 引理**：本原整系数多项式（系数最大公因数为 1）在 $\\mathbb{Z}[x]$ 中可约当且仅当在 $\\mathbb{Q}[x]$ 中可约——所以「在 Q 上不可约」的问题可以在 Z 上处理，Eisenstein 判别法才顺理成章。",
+    "definitionEn": "**Polynomial rings.** For a commutative ring $R$ with identity, $R[x]$ consists of polynomials with coefficients in $R$, added coefficientwise and multiplied by convolution. Two basic facts. (1) If $R$ is a domain then so is $R[x]$, and degrees add: $\\deg(fg) = \\deg f + \\deg g$ — the product of leading coefficients is nonzero precisely because there are no zero divisors; over $\\mathbb{Z}_6$, by contrast, $(2x)(3x) = 6x^2 = 0$. For a domain $R$ the units of $R[x]$ are exactly those of $R$: nonzero constants in $F[x]$, $\\pm 1$ in $\\mathbb{Z}[x]$. (2) A general ring admits no division, but **a field does**: for all $f$ and $g \\ne 0$ there are unique $q, r \\in F[x]$ with $f = qg + r$ and $\\deg r < \\deg g$. This long division is the foundation of everything below.\n\nIrreducible polynomials and the chain Euclidean → PID → UFD. Let $F$ be a field. A polynomial $f \\in F[x]$ of degree $\\ge 1$ is **irreducible** if it is not a product of two polynomials of positive degree, and **reducible** otherwise (constants take no part; multiplying by a nonzero constant does not change reducibility, so irreducibility is a notion \"up to units\"). Division with remainder makes $F[x]$ a **Euclidean domain** (the degree is a Euclidean function); taking a least-degree element of an ideal shows every ideal is principal, so $F[x]$ is a **principal ideal domain (PID)**; and in a PID irreducibles are prime, so $F[x]$ is a **unique factorization domain (UFD)**: every polynomial of degree $\\ge 1$ factors uniquely into irreducibles, up to order and nonzero constants. Mnemonic chain: **$F$ a field $\\implies F[x]$ Euclidean $\\implies$ PID $\\implies$ UFD**. Contrast $\\mathbb{Z}[x]$: a UFD but **not** a PID ($(2,x)$ is not principal) — passing from $R$ to $R[x]$ preserves domainhood but may lose principality.\n\nTesting irreducibility I: roots and rational roots. For low degrees, a shortcut: **a polynomial of degree 2 or 3 is irreducible iff it has no root in $F$** (any factorization must contain a linear factor, and a linear factor means a root). From degree 4 on \"no root\" fails to suffice: $x^4+4$ has no rational root yet is reducible. For integer polynomials there is the **rational root theorem**: if the fraction $p/q$ in lowest terms is a root of $f(x) = a_n x^n + \\cdots + a_0$, then $p \\mid a_0$ and $q \\mid a_n$. This reduces \"does $f$ have a linear factor over $\\mathbb{Q}$\" to testing finitely many candidates; e.g. $x^3 - 3x + 1$ has only the candidates $\\pm 1$.\n\nTesting irreducibility II: Eisenstein and Gauss. **Eisenstein's criterion**: let $f(x) = a_n x^n + \\cdots + a_0 \\in \\mathbb{Z}[x]$. If some prime $p$ satisfies all three conditions — (i) $p \\nmid a_n$; (ii) $p \\mid a_i$ for **all** $i < n$; (iii) $p^2 \\nmid a_0$ — then $f$ is irreducible in $\\mathbb{Q}[x]$. All three are needed: $2x^2+4x+2 = (2x+2)(x+1)$ violates (i) for $p=2$; $x^2+4x+4 = (x+2)^2$ violates (iii); and without (ii), $x^2+3x+2 = (x+1)(x+2)$ is a counterexample. The criterion is **sufficient but not necessary**: $x^2+3x+1$ is irreducible in $\\mathbb{Q}[x]$ (discriminant 5, not a square) yet satisfies the conditions for no prime. When it narrowly fails, substitute $x \\mapsto x+1$ and retry (see the example). **Gauss's lemma** ties all this to $\\mathbb{Z}$: a primitive integer polynomial (content 1) is reducible in $\\mathbb{Z}[x]$ iff it is reducible in $\\mathbb{Q}[x]$ — which is why a criterion over $\\mathbb{Z}$ such as Eisenstein's yields irreducibility over $\\mathbb{Q}$.",
+    "formulas": [
+      {
+        "latex": "f = qg + r,\\qquad \\deg r < \\deg g",
+        "note": "F[x] 的带余除法（F 是域、g ≠ 0，商 q 与余式 r 唯一）；它是 F[x] 成为欧几里得整环的根据。",
+        "noteEn": "Division with remainder in F[x] (F a field, g ≠ 0; q and r unique) makes F[x] a Euclidean domain."
+      },
+      {
+        "latex": "F \\text{ 域} \\implies F[x] \\text{ 欧几里得} \\implies F[x] \\text{ 是 PID} \\implies F[x] \\text{ 是 UFD}",
+        "note": "链式升级；Z[x] 只在链的末端（是 UFD 但 (2,x) 不是主理想）。",
+        "noteEn": "The chain raising F[x] to a UFD; Z[x] sits only at the end (a UFD, but (2,x) is not principal)."
+      },
+      {
+        "latex": "p \\mid a_i\\ (i < n),\\quad p \\nmid a_n,\\quad p^2 \\nmid a_0 \\implies f \\text{ 在 } \\mathbb{Q}[x] \\text{ 中不可约}",
+        "note": "Eisenstein 判别法：三个条件缺一不可，且 0 被任何素数整除（缺项系数自动满足 (ii)）。",
+        "noteEn": "Eisenstein's criterion: all three conditions are indispensable; note 0 is divisible by every prime, so missing coefficients satisfy (ii) automatically."
+      },
+      {
+        "latex": "f\\left(\\frac{p}{q}\\right) = 0,\\ \\gcd(p, q) = 1 \\implies p \\mid a_0,\\ q \\mid a_n",
+        "note": "有理根定理：候选根有限（常数项因数 / 首项系数因数），据此逐一试根判断一次因子。",
+        "noteEn": "Rational root theorem: only finitely many candidates (divisors of a_0 over divisors of a_n) need to be tested."
+      },
+      {
+        "latex": "\\deg f \\in \\{2, 3\\}:\\ f \\text{ 不可约} \\iff f \\text{ 无根}",
+        "note": "二次、三次看根就够；四次以上不成立（x⁴+4 无有理根却可约）。",
+        "noteEn": "For degrees 2 and 3, irreducible iff no root; this fails from degree 4 (x⁴+4 has no rational root yet factors)."
+      }
+    ],
+    "properties": [
+      "R 整环 ⇒ R[x] 整环，deg(fg) = deg f + deg g，单位群 (R[x])× = R×；R 有零因子则 R[x] 也有（Z_6[x] 中 2x·3x = 0）。",
+      "F 域时 F[x] 是欧几里得整环、PID、UFD；不可约多项式与素元是同一个概念，非常数 f 不可约 ⟺ (f) 是极大理想 ⟺ F[x]/(f) 是域（如 R[x]/(x²+1) ≅ C）。",
+      "二次、三次：不可约 ⟺ 无根；四次及以上「无根」不排除二次×二次的分解——x⁴+4 无有理根却等于 (x²−2x+2)(x²+2x+2)，而 x⁴+1 确实不可约。",
+      "Eisenstein 判别法三条件缺一不可且只是充分条件：2x²+4x+2 违反 p ∤ a_n、x²+4x+4 违反 p² ∤ a_0、去掉 (ii) 时 x²+3x+2 成反例；而 x²+3x+1 不可约却不满足任何素数条件。",
+      "模 p 判别法：本原 f ∈ Z[x] 若首项不被素数 p 整除、且 f 在 F_p[x] 中不可约，则 f 在 Q[x] 中不可约；反之不成立——x²+1 不可约，但模 2 变成 (x+1)²。"
+    ],
+    "propertiesEn": [
+      "If R is a domain so is R[x], with deg(fg) = deg f + deg g and (R[x])× = R×; if R has zero divisors so does R[x] (2x·3x = 0 in ℤ_6[x]).",
+      "For a field F, F[x] is Euclidean, a PID and a UFD; irreducible polynomials are exactly the prime elements, and a nonconstant f is irreducible iff (f) is maximal iff F[x]/(f) is a field (e.g. ℝ[x]/(x²+1) ≅ ℂ).",
+      "Degrees 2 and 3: irreducible iff no root; from degree 4 on, absence of roots does not exclude a factorization into quadratics — x⁴+4 = (x²−2x+2)(x²+2x+2) has no rational root, while x⁴+1 is genuinely irreducible.",
+      "Eisenstein's three conditions are all indispensable and merely sufficient: 2x²+4x+2 violates p ∤ a_n; x²+4x+4 violates p² ∤ a_0; dropping (ii), x²+3x+2 is a counterexample; and x²+3x+1 is irreducible yet Eisenstein never applies.",
+      "Reduction mod p: a primitive f ∈ ℤ[x] is irreducible in ℚ[x] if its leading coefficient is not divisible by some prime p and f stays irreducible in F_p[x]; the converse fails — x²+1 is irreducible but becomes (x+1)² mod 2."
+    ],
+    "examples": [
+      {
+        "problem": "用 Eisenstein 判别法证明 $f(x) = x^4+1$ 在 $\\mathbb{Q}$ 上不可约；再对比 $x^4+4$，说明「无有理根」不能判定四次多项式不可约。",
+        "solution": "直接对 $f$ 用不了 Eisenstein：条件 (ii) 要求常数项 $a_0 = 1$ 也被 $p$ 整除，而没有任何素数整除 1（只查中间系数、漏掉 $a_0$ 的「检验」会像对 $x^2+2x+1 = (x+1)^2$ 那样得出错误结论——那里 $a_0 = 1$ 同样不被 2 整除）。改做换元 $x \\mapsto x+1$：$(x+1)^4+1 = x^4+4x^3+6x^2+4x+2$。取 $p = 2$，核对三条件：除首项外的系数 $4, 6, 4, 2$ 全被 2 整除——条件 (ii) ✓；首项系数 1 不被 2 整除——条件 (i) ✓；常数项 2 被 2 整除但不被 $2^2 = 4$ 整除——条件 (iii) ✓。三条件齐备，故 $(x+1)^4+1$ 在 $\\mathbb{Q}[x]$ 中不可约；而 $x \\mapsto x+1$ 是 $\\mathbb{Q}[x]$ 的环自同构，保持可约性，所以 $x^4+1$ 也不可约。\n对比 $x^4+4$：它也没有有理根——有理根候选只有 $\\pm 1, \\pm 2, \\pm 4$（p | 4、q | 1），而 $x^4+4 \\ge 4$ 排除负数与 0 附近的可能，$f(1) = 5$、$f(-1) = 5$、$f(\\pm 2) = 20$、$f(\\pm 4) = 260$ 全非零——但它**可约**：$(x^2-2x+2)(x^2+2x+2) = x^4 + (2-2)x^3 + (2+2-4)x^2 + (4-4)x + 4 = x^4+4$ ✓。道理是：四次多项式若可约，只可能分成「一次×三次」或「二次×二次」，无有理根只排除前者，排除不了后者。\n两相对照可见 Eisenstein 判别法的价值：它一步就锁定了 $x^4+1$ 的不可约性，而单靠试根对四次以上是不够的。"
+      },
+      {
+        "problem": "用有理根定理判断 $g(x) = x^3-3x+1$ 在 $\\mathbb{Q}$ 上是否可约；再用换元 + Eisenstein 判别法验证一次。",
+        "solution": "三次多项式可约 $\\iff$ 有有理根。设既约分数 $p/q$ 是 g 的根，由有理根定理 $p \\mid 1$、$q \\mid 1$，候选只有 $\\pm 1$。计算：$g(1) = 1-3+1 = -1 \\ne 0$，$g(-1) = -1+3+1 = 3 \\ne 0$，故 g 无有理根，在 $\\mathbb{Q}[x]$ 中不可约 ✓。（顺带算出判别式 $-4 \\cdot (-3)^3 - 27 \\cdot 1^2 = 108 - 27 = 81 = 9^2 > 0$：三个实根，但都不是有理数。）\n换元验证：$g(x-1) = (x-1)^3 - 3(x-1) + 1 = x^3-3x^2+3x-1-3x+3+1 = x^3-3x^2+3$。对素数 $3$：常数项与中间系数 $3, -3, 0$ 全被 3 整除——条件 (ii) ✓；首项系数 1 不被 3 整除——条件 (i) ✓；常数项 3 不被 $3^2 = 9$ 整除——条件 (iii) ✓。Eisenstein 三条件齐备，故 $g(x-1)$ 在 $\\mathbb{Q}[x]$ 中不可约 ✓。（注意换元方向：$x \\mapsto x+1$ 得到的是 $x^3+3x^2-1$，常数项 $-1$ 不被 3 整除，卡在条件 (ii) 上。）而换元 $x \\mapsto x-1$ 是 $\\mathbb{Q}[x]$ 的环自同构（逆换元 $x \\mapsto x+1$），保持可约性：若 $g = uv$ 则 $g(x-1) = u(x-1)v(x-1)$，反之亦然，所以 $g$ 也不可约。两种方法结论一致。"
+      }
+    ],
+    "links": [
+      "ring-ideal",
+      "integral-domain-ufd",
+      "polynomial",
+      "field-extension-algebraic",
+      "galois-theory-intro"
+    ],
+    "tags": [
+      "多项式环",
+      "不可约多项式",
+      "Eisenstein 判别法",
+      "有理根定理",
+      "主理想整环"
+    ]
+  },
+  {
+    "id": "modules-intro",
+    "title": "模初步：环上的「线性空间」",
+    "titleEn": "Modules: Linear Algebra over Rings",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "模把线性空间的标量从域换成环：阿贝尔群配上满足分配律与结合律的纯量乘法；但环上模不一定有基——Z/2 作为 Z-模就不是自由模。",
+    "summaryEn": "Modules replace the field of scalars by a ring: an abelian group with scalar multiplication obeying distributivity and associativity; yet bases may fail to exist — Z/2 is not a free Z-module.",
+    "definition": "**定义**。设 $R$ 是环（本库约定：含单位元的交换环），$M$ 是加法阿贝尔群。纯量乘法 $R \\times M \\to M$、$(r, x) \\mapsto rx$ 若满足四条公理——$r(x+y) = rx+ry$、$(r+s)x = rx+sx$、$(rs)x = r(sx)$、$1x = x$——就称 $M$ 为 **$R$ 上的模**（$R$-模）。前两条是分配律，第三条让纯量乘法与环乘法相容，最后一条排除退化作用。这四条与向量空间的公理逐字对应，唯一的改动是把标量所在的域 $F$ 换成一般环 $R$——所以模就是「系数在环里的线性空间」。\n\n两端特例与丰富例子。取 $R = F$ 为域：$F$-模就是 $F$ 上的**向量空间**，线性代数的全部概念（基、维数、线性映射）都是模论的特例。取 $R = \\mathbb{Z}$：$\\mathbb{Z}$-模就是**阿贝尔群**——整数作用 $n \\cdot a$ 是 $a$ 的 $n$ 次相加，两个概念完全同义；群论里关于阿贝尔群的许多结论（如有限生成阿贝尔群分类）其实是模论定理。中间的一般环给出大量新对象：$R$ 的理想就是它的子模；商环 $R/I$ 是 $R$-模；$R$ 上 $n$ 元列向量 $R^n$ 是 $R$-模。一个漂亮的例子：给定域 $F$ 上向量空间 $V$ 与线性变换 $T: V \\to V$，规定 $x$ 的作用为 $T$、$f(x) \\cdot v = f(T)v$，$V$ 就成了 $F[x]$-模——线性代数中的最小多项式与 Jordan 标准形正是 $F[x]$-模结构定理的翻版（如 $F = \\mathbb{Q}$、$T$ 为 $90^\\circ$ 旋转时 $V \\cong \\mathbb{Q}[x]/(x^2+1)$）。\n\n子模、商模与同态。$N \\subseteq M$ 称为**子模**，若它是加法子群且对纯量乘法封闭：$r \\in R$、$n \\in N \\implies rn \\in N$。在陪集上定义 $r(x+N) = rx+N$，其良定义同样靠封闭性：若 $x' = x+n$，则 $rx' = rx+rn \\in rx+N$。于是得到**商模** $M/N$。模同态 $\\varphi: M \\to M'$ 是保持加法与纯量乘法的映射；核 $\\ker\\varphi$ 与像 $\\operatorname{im}\\varphi$ 都是子模，第一同构定理 $M/\\ker\\varphi \\cong \\operatorname{im}\\varphi$ 与群、环的情形逐字相同。当 $M = R$ 时，子模就是理想——群、环、模三套语言在这里汇合。\n\n基与自由模；不是每个模都有基。生成集与线性无关照搬线性代数：子集 $\\{e_i\\}$ 是**基**，若每个元素都**唯一**地写成有限线性组合 $\\sum r_i e_i$（唯一性是关键）；有基的模称为**自由模**，$n$ 元基的自由模与 $R^n$ 同构，$n$ 称为秩（交换环上良定义）。**与向量空间的分水岭：环上模未必有基。**最简单的反例是 $M = \\mathbb{Z}/2\\mathbb{Z}$ 作为 $\\mathbb{Z}$-模：对唯一非零元 $m$ 有 $2 \\cdot m = 0$，即用非零纯量 2 就把 $m$ 组合成零，所以任何含 $m$ 的集合都线性相关，而 $\\{0\\}$ 生成不出整个模——$\\mathbb{Z}/2$ 没有基（详见过例题）。一般地，在整环上自由模不会被非零纯量「灭掉」：若 $x = \\sum r_i e_i \\ne 0$ 且 $sx = 0$，则某个 $r_j \\ne 0$，而 $\\sum (s r_i) e_i = 0$ 迫使 $s r_j = 0$，整环性给出 $s = 0$。被非零纯量灭掉的元素称为**扭元**，整环上有扭元的模绝不自由。对标量做限制，理论立刻回升：在主理想整环上有限生成模仍有结构定理（自由部分 $\\oplus$ 扭部分），取 $R = \\mathbb{Z}$ 得有限生成阿贝尔群分类，取 $R = F[x]$ 得 Jordan 标准形与有理标准形——线性代数与有限交换群论在此统一。",
+    "definitionEn": "**Definition.** Let $R$ be a ring (commutative with identity, as everywhere in this library) and $M$ an abelian group. A scalar multiplication $R \\times M \\to M$, $(r,x) \\mapsto rx$, makes $M$ an **$R$-module** if it satisfies the four axioms $r(x+y) = rx+ry$, $(r+s)x = rx+sx$, $(rs)x = r(sx)$, $1x = x$. The first two are distributivity, the third ties scalars to multiplication in $R$, and the last rules out degenerate actions. These are exactly the vector-space axioms with the field $F$ of scalars replaced by a ring — modules are \"linear algebra over a ring\".\n\nExamples at both extremes. Over a field $F$, an $F$-module is an $F$-**vector space**: bases, dimension and linear maps from linear algebra are special cases of module theory. Over $\\mathbb{Z}$, a $\\mathbb{Z}$-module is precisely an **abelian group** — $n \\cdot a$ is repeated addition, and the two notions are synonymous; many facts about abelian groups (e.g. their classification) are module theorems. A general ring gives many new objects: ideals of $R$ are its submodules; $R/I$ is an $R$-module; column vectors $R^n$ form an $R$-module. A striking example: for a vector space $V$ over $F$ with a linear operator $T: V \\to V$, letting $x$ act as $T$ and setting $f(x)\\cdot v = f(T)v$ makes $V$ an $F[x]$-module — the minimal polynomial and the Jordan form are the structure theory of $F[x]$-modules in disguise (for $F = \\mathbb{Q}$ and $T$ a 90° rotation, $V \\cong \\mathbb{Q}[x]/(x^2+1)$).\n\nSubmodules, quotients, homomorphisms. A subset $N \\subseteq M$ is a **submodule** if it is an additive subgroup closed under scalars: $n \\in N \\implies rn \\in N$. Defining $r(x+N) = rx+N$ on cosets yields the **quotient module** $M/N$; well-definedness again rests on closure, since $x' = x+n$ gives $rx' = rx+rn \\in rx+N$. A module homomorphism $\\varphi: M \\to M'$ preserves addition and scalars; kernels and images are submodules, and the first isomorphism theorem $M/\\ker\\varphi \\cong \\operatorname{im}\\varphi$ reads exactly as for groups and rings. When $M = R$, submodules are precisely ideals — the languages of groups, rings and modules meet here.\n\nBases, free modules, and failure of bases. Generation and linear independence carry over verbatim: a set $\\{e_i\\}$ is a **basis** if every element is a **unique** finite linear combination $\\sum r_i e_i$ (uniqueness is the point); a module with a basis is **free**, an $n$-element basis gives $M \\cong R^n$, and $n$ is the rank (well defined over a commutative ring). **The watershed: a module over a ring need not have a basis.** The simplest counterexample is $M = \\mathbb{Z}/2\\mathbb{Z}$ as a $\\mathbb{Z}$-module: the single nonzero element $m$ satisfies $2 \\cdot m = 0$, so the nonzero scalar 2 combines $m$ to zero and any set containing $m$ is linearly dependent, while $\\{0\\}$ generates nothing — $\\mathbb{Z}/2$ has no basis. In general, over a domain a free module has no element annihilated by a nonzero scalar: if $x = \\sum r_i e_i \\ne 0$ and $sx = 0$, then some $r_j \\ne 0$ while $\\sum (s r_i) e_i = 0$ forces $s r_j = 0$, hence $s = 0$. Elements killed by a nonzero scalar are **torsion elements**, and a module with torsion is never free over a domain. Restricting the scalars restores the theory: over a principal ideal domain, finitely generated modules satisfy a structure theorem (free part $\\oplus$ torsion part); with $R = \\mathbb{Z}$ it gives the classification of finitely generated abelian groups, and with $R = F[x]$ it gives the Jordan and rational canonical forms — linear algebra and abelian group theory unified.",
+    "formulas": [
+      {
+        "latex": "r(x+y) = rx+ry,\\quad (r+s)x = rx+sx,\\quad (rs)x = r(sx),\\quad 1x = x",
+        "note": "模的四条公理，与向量空间完全相同；区别只在标量取自环 R 而非域。",
+        "noteEn": "The four axioms of a module, identical to those of a vector space; only the scalars come from a ring rather than a field."
+      },
+      {
+        "latex": "F\\text{-模} = F \\text{ 上向量空间};\\qquad \\mathbb{Z}\\text{-模} = \\text{阿贝尔群}",
+        "note": "两个端点的特例：域上模就是线性代数，Z-模就是阿贝尔群——模统一了两者。",
+        "noteEn": "The two extreme cases: modules over a field are vector spaces, Z-modules are abelian groups."
+      },
+      {
+        "latex": "N \\text{ 是子模} \\iff N \\text{ 是加法子群且 } rN \\subseteq N;\\qquad r(x+N) = rx+N",
+        "note": "子模判别与商模作用；商模良定义依赖 N 对纯量乘法封闭。",
+        "noteEn": "Submodule test and the quotient action; well-definedness of the quotient rests on closure under scalars."
+      },
+      {
+        "latex": "M \\text{ 自由} \\iff M \\cong R^n \\iff \\text{每个元素唯一写成 } x = \\sum r_i e_i",
+        "note": "自由模 = 有基的模，坐标表示唯一；交换环上秩 n 良定义（R^m ≅ R^n 迫使 m = n）。",
+        "noteEn": "Free modules have a basis with unique coordinates; over a commutative ring the rank is well defined."
+      },
+      {
+        "latex": "M = \\mathbb{Z}/2:\\quad 2m = 0\\ (\\forall m) \\implies \\text{无基、非自由}",
+        "note": "反例：Z/2 作为 Z-模的元素都被非零纯量 2 灭掉，故不存在线性无关的生成集。",
+        "noteEn": "A counterexample: every element of Z/2 is killed by the nonzero scalar 2, so no independent generating set exists."
+      }
+    ],
+    "properties": [
+      "域上模即向量空间（有基、维数良定义）；Z-模即阿贝尔群；R 自身作为 R-模的子模恰是理想——群、环、模三套语言在特例处重合。",
+      "子模对交与和封闭；N ⊆ M 是子模时 M/N 是模；模同态基本定理 M/ker φ ≅ im φ 与群、环情形形式一致。",
+      "自由模有基：元素唯一写成坐标组合 ∑ r_i e_i；整环上自由模无扭——r x = 0 且 x ≠ 0 迫使 r = 0（Z/2 中 2m = 0 对一切 m 成立，故非自由）。",
+      "有限生成模未必自由：Z/6 ≅ Z/2 ⊕ Z/3（中国剩余定理）是有扭元的模；Z 作为 Z-模自由、秩 1。",
+      "主理想整环上有限生成模的结构定理：M ≅ R^r ⊕ R/(d_1) ⊕ ⋯ ⊕ R/(d_k)（d_1 | d_2 | ⋯）；取 R = F[x] 得 Jordan / 有理标准形，取 R = Z 得有限生成阿贝尔群分类。"
+    ],
+    "propertiesEn": [
+      "Modules over a field are vector spaces (bases, well-defined dimension); modules over ℤ are abelian groups; submodules of R as an R-module are exactly ideals — the three languages coincide at the special cases.",
+      "Submodules are closed under intersections and sums; M/N is a module precisely when N is a submodule; the homomorphism theorem M/ker φ ≅ im φ has the same form as for groups and rings.",
+      "A free module has a basis with unique coordinates; over a domain a free module is torsion-free — r x = 0 with x ≠ 0 forces r = 0 (in ℤ/2, 2m = 0 for all m, so it is not free).",
+      "Finitely generated modules need not be free: ℤ/6 ≅ ℤ/2 ⊕ ℤ/3 (CRT) has torsion; ℤ is free of rank 1 as a ℤ-module.",
+      "Structure theorem over a PID: M ≅ R^r ⊕ R/(d_1) ⊕ ⋯ ⊕ R/(d_k) with d_1 | d_2 | ⋯; taking R = F[x] gives Jordan/rational forms, R = ℤ gives the classification of finitely generated abelian groups."
+    ],
+    "examples": [
+      {
+        "problem": "证明 $\\mathbb{Z}/2\\mathbb{Z}$ 作为 $\\mathbb{Z}$-模没有基（即不是自由模）。",
+        "solution": "$\\mathbb{Z}/2 = \\{\\bar0, \\bar1\\}$，纯量乘法是整数乘法模 2：$n \\cdot \\bar1 = \\overline{n \\bmod 2}$。要成为基，一个子集必须既生成整个模、又线性无关（线性相关：存在不全为零的系数使线性组合为 0）。逐一检查四种候选：\n· 空集只生成 $\\{\\bar0\\}$，不是整个模；\n· $\\{\\bar0\\}$ 也只生成 $\\{\\bar0\\}$（0 的任何倍数还是 0）；\n· $\\{\\bar1\\}$ 确实生成整个模（$\\bar1$ 的整数倍给出 $\\bar0$ 与 $\\bar1$），但它**线性相关**：取系数 $2 \\ne 0$，则 $2 \\cdot \\bar1 = \\bar0$，由定义不能成为基；\n· $\\{\\bar0, \\bar1\\}$ 也线性相关（同样用系数 2），同样不行。\n四种候选全部被排除，故没有基。\n更本质的原因是扭元：自由 $\\mathbb{Z}$-模的非零元都是无限阶的（若 $s e = 0$ 而 $s \\ne 0$，则 $e = 1 \\cdot e = (1+s) \\cdot e$ 有两种不同表示，与基的唯一性矛盾）；而 $\\mathbb{Z}/2$ 中**每个**元素 $m$ 都满足 $2m = \\bar0$（$\\bar0$：$2 \\cdot 0 = 0$；$\\bar1$：$2 \\cdot 1 = 2 \\equiv 0$），从根上排除了基的存在。注意「生成整个模」与「有基」是两回事：$\\{\\bar1\\}$ 能生成，却不自由。"
+      },
+      {
+        "problem": "设 $V = \\mathbb{Q}^2$，$T = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$（90° 旋转）。把 $V$ 看成 $\\mathbb{Q}[x]$-模：$x \\cdot v = Tv$。(1) 验证 $T^2 + I = 0$；(2) 求 $e_1 = (1,0)$ 的零化子 $\\operatorname{Ann}(e_1) = \\{f \\in \\mathbb{Q}[x] : f(T)e_1 = 0\\}$；(3) 证明 $V$ 是循环模并给出同构 $V \\cong \\mathbb{Q}[x]/(x^2+1)$。",
+        "solution": "(1) 直接计算 $T^2 = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}^2 = \\begin{pmatrix} -1 & 0 \\\\ 0 & -1 \\end{pmatrix} = -I$，故 $T^2 + I = 0$ ✓。于是对一切 $v$ 有 $(x^2+1) \\cdot v = (T^2 + I)v = 0$，即 $x^2+1 \\in \\operatorname{Ann}(e_1)$ 甚至零化整个 $V$。\n(2) 先看次数 $\\le 1$ 的多项式：$f(x) = a+bx$ 给出 $f(T)e_1 = (aI + bT)e_1 = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix}\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} a \\\\ b \\end{pmatrix}$，为零当且仅当 $a = b = 0$。再看一般 $f$：用带余除法除以 $x^2+1$ 得 $f = q(x)(x^2+1) + a + bx$，于是 $f(T)e_1 = q(T)\\underbrace{(T^2+I)}_{=0}e_1 + (aI+bT)e_1 = \\begin{pmatrix} a \\\\ b \\end{pmatrix}$，为零当且仅当余式为 0，即 $f \\in (x^2+1)$。所以 $\\operatorname{Ann}(e_1) = (x^2+1)$ ✓。\n(3) 任取 $v = (s,t)$：因 $Te_1 = (0,1)$，有 $v = s\\,e_1 + t\\,Te_1 = (s+tx) \\cdot e_1$，所以 $e_1$ 单独生成整个 $V$（循环模）。映射 $\\varphi: \\mathbb{Q}[x] \\to V$、$\\varphi(f) = f(T)e_1$ 是满 $\\mathbb{Q}[x]$-模同态，核为 $\\operatorname{Ann}(e_1) = (x^2+1)$，由第一同构定理得 $V \\cong \\mathbb{Q}[x]/(x^2+1)$ ✓。注意视角的差别：作为 $\\mathbb{Q}$-向量空间 $V$ 是 2 维；作为 $\\mathbb{Q}[x]$-模它由单个元素生成。$x^2+1$ 恰是 $T$ 的最小多项式；由于 $x^2+1$ 在 $\\mathbb{Q}$ 上不可约，商环 $\\mathbb{Q}[x]/(x^2+1) \\cong \\mathbb{Q}(\\mathrm{i})$ 还是域——同一对象在不同标量环下呈现不同结构，正是模论的语言优势。"
+      }
+    ],
+    "links": [
+      "linear-space-general",
+      "vector-space-basis",
+      "linear-transformation",
+      "minimal-polynomial",
+      "jordan-form",
+      "ring-ideal"
+    ],
+    "tags": [
+      "模",
+      "自由模",
+      "子模",
+      "商模",
+      "阿贝尔群"
+    ]
+  }
+]

@@ -1,0 +1,306 @@
+[
+  {
+    "id": "field-extension-algebraic",
+    "title": "域扩张与代数元",
+    "titleEn": "Field Extensions and Algebraic Elements",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "域扩张 K/F 的次数 [K:F] 是 K 作为 F-向量空间的维数；代数元由最小多项式刻画，单扩张 F(α) 的结构与次数全由它决定。",
+    "summaryEn": "The degree [K:F] of an extension K/F is the dimension of K as an F-vector space; algebraic elements are governed by their minimal polynomials, which determine the structure and degree of simple extensions F(α).",
+    "definition": "**域扩张**说的是一个域 $K$ 包含基域 $F$（$F$ 的加法与乘法就是 $K$ 的运算限制在 $F$ 上），记作 $K/F$。$\\mathbb{C}/\\mathbb{R}$、$\\mathbb{R}/\\mathbb{Q}$、$\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}$ 都是域扩张。研究扩张的第一个数字是**次数**：把 $K$ 看成 $F$ 上的线性空间，定义 $[K:F] = \\dim_F K$；维数有限时称**有限扩张**。例如 $[\\mathbb{C}:\\mathbb{R}] = 2$（基 $\\{1, \\mathrm{i}\\}$），$[\\mathbb{Q}(\\sqrt2):\\mathbb{Q}] = 2$（基 $\\{1, \\sqrt2\\}$），而 $[\\mathbb{R}:\\mathbb{Q}]$ 是无限的——有限维 $\\mathbb{Q}$-向量空间都是可数集，$\\mathbb{R}$ 却不可数。\n\n扩张里的元素不一定来自 $F$，但常常能用一个多项式「抓住」。若存在非零多项式 $f \\in F[x]$ 使 $f(\\alpha) = 0$，称 $\\alpha$ 在 $F$ 上**代数**；否则称 $\\alpha$ 是 $F$ 上的**超越元**。$\\sqrt2$ 在 $\\mathbb{Q}$ 上代数（$x^2 - 2$ 的根），$\\pi$ 在 $\\mathbb{Q}$ 上超越（Lindemann，1882）——超越不是技术性缺陷，而是普遍现象：绝大多数实数都是超越数。在使 $\\alpha$ 为零的多项式中，次数最低的那个**首一**多项式叫作 $\\alpha$ 在 $F$ 上的**最小多项式**，记作 $m_\\alpha$。它有两条决定性性质：$m_\\alpha$ 在 $F[x]$ 中**不可约**（否则次数更低的因式已经把 $\\alpha$ 送为零），并且 $f(\\alpha) = 0 \\iff m_\\alpha \\mid f$——最小多项式整除一切以 $\\alpha$ 为零的多项式。\n\n由 $F$ 和 $\\alpha$ 生成的最小子域 $F(\\alpha)$ 叫**单扩张**。对代数元，它极其可控：**单扩张定理**断言 $F(\\alpha) \\cong F[x]/(m_\\alpha(x))$，特别地 $[F(\\alpha):F] = \\deg m_\\alpha$，而且 $\\{1, \\alpha, \\dots, \\alpha^{n-1}\\}$（$n = \\deg m_\\alpha$）是 $F(\\alpha)$ 的一组 $F$-基。直观地说，对 $\\alpha$ 做加减乘除等价于对 $F[x]$ 中的多项式按 $m_\\alpha$ 取模——例如 $\\alpha = \\sqrt2$ 时 $\\alpha^2 = 2$，任何表达式都能化简成 $a + b\\sqrt2$。若 $\\alpha$ 超越，求值映射 $F[x] \\to F[\\alpha]$ 是单射且不「溢出」，$F[\\alpha]$ 只是多项式环，$F(\\alpha) \\cong F(x)$ 是有理函数域，单扩张的次数为无限。\n\n次数最重要的算术性质是**塔公式** $[K:F] = [K:E]\\,[E:F]$（$F \\subseteq E \\subseteq K$）：中间域把次数拆成两段相乘。它把「先在 $\\mathbb{Q}$ 上添 $\\sqrt2$、再添 $\\sqrt3$」化为两个 2 次步骤，立刻得到 4 次；反过来任何中间域的次数都整除总次数，所以素数次的有限扩张没有真中间域。代数数论里的数域、有限域、以及「方程能否用根号解」的伽罗瓦理论，全都以域扩张为舞台。",
+    "definitionEn": "A **field extension** $K/F$ is a pair of fields with $F \\subseteq K$, the operations of $F$ being those of $K$ restricted to $F$. Familiar examples are $\\mathbb{C}/\\mathbb{R}$, $\\mathbb{R}/\\mathbb{Q}$ and $\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}$. The first numerical invariant is the **degree**: viewing $K$ as a vector space over $F$, set $[K:F] = \\dim_F K$; the extension is **finite** when this dimension is finite. Thus $[\\mathbb{C}:\\mathbb{R}] = 2$ with basis $\\{1, \\mathrm{i}\\}$, $[\\mathbb{Q}(\\sqrt2):\\mathbb{Q}] = 2$ with basis $\\{1, \\sqrt2\\}$, while $[\\mathbb{R}:\\mathbb{Q}]$ is infinite: every finite-dimensional $\\mathbb{Q}$-vector space is countable, but $\\mathbb{R}$ is not.\n\nElements of $K$ need not come from $F$, yet they can often be pinned down by a polynomial. An element $\\alpha$ is **algebraic** over $F$ if $f(\\alpha) = 0$ for some nonzero $f \\in F[x]$; otherwise it is **transcendental** over $F$. Thus $\\sqrt2$ is algebraic over $\\mathbb{Q}$ (a root of $x^2-2$), while $\\pi$ is transcendental (Lindemann, 1882) — transcendence is not a technicality but the typical case: almost all real numbers are transcendental. Among the polynomials vanishing at an algebraic $\\alpha$, the monic one of least degree is the **minimal polynomial** $m_\\alpha$. It is **irreducible** over $F$ (a lower-degree factor would already vanish at $\\alpha$), and $f(\\alpha) = 0 \\iff m_\\alpha \\mid f$: it divides every polynomial vanishing at $\\alpha$.\n\nThe smallest subfield of $K$ containing $F$ and $\\alpha$ is the **simple extension** $F(\\alpha)$. For algebraic $\\alpha$ it is completely controlled: the **simple extension theorem** gives $F(\\alpha) \\cong F[x]/(m_\\alpha(x))$, in particular $[F(\\alpha):F] = \\deg m_\\alpha$, and $\\{1, \\alpha, \\dots, \\alpha^{n-1}\\}$ with $n = \\deg m_\\alpha$ is an $F$-basis. Intuitively, computing in $F(\\alpha)$ means computing with polynomials modulo $m_\\alpha$: for $\\alpha = \\sqrt2$ we have $\\alpha^2 = 2$ and every expression simplifies to $a + b\\sqrt2$. For transcendental $\\alpha$ the evaluation map $F[x] \\to F[\\alpha]$ is injective, $F[\\alpha]$ remains a polynomial ring, and $F(\\alpha) \\cong F(x)$, the field of rational functions; such simple extensions have infinite degree.\n\nDegrees obey the **tower formula** $[K:F] = [K:E]\\,[E:F]$ for every intermediate field $E$. It turns adjoining $\\sqrt2$ and then $\\sqrt3$ over $\\mathbb{Q}$ into two quadratic steps and yields degree $4$ at once; conversely every intermediate degree divides the total degree, so a finite extension of prime degree has no proper intermediate field. Algebraic number fields, finite fields, and Galois theory's question of radical solvability all play out on this stage.",
+    "formulas": [
+      {
+        "latex": "K \\supseteq F:\\quad [K:F] = \\dim_F K",
+        "note": "扩张次数的定义：把 K 当成 F-向量空间量维数；例如 $[\\mathbb{C}:\\mathbb{R}] = 2$、$[\\mathbb{Q}(\\sqrt2):\\mathbb{Q}] = 2$。",
+        "noteEn": "The degree of an extension is the dimension of K as an F-vector space; e.g. [C:R] = 2 and [Q(√2):Q] = 2."
+      },
+      {
+        "latex": "F \\subseteq E \\subseteq K \\implies [K:F] = [K:E]\\,[E:F]",
+        "note": "塔公式（次数乘法性）：中间域把总次数拆成两段相乘，是全部次数计算的引擎。",
+        "noteEn": "Tower formula: degrees multiply across an intermediate field; it drives every degree computation."
+      },
+      {
+        "latex": "f(\\alpha) = 0 \\iff m_{\\alpha} \\mid f,\\qquad [F(\\alpha):F] = \\deg m_{\\alpha}",
+        "note": "最小多项式整除一切以 α 为零的多项式，其次数正好等于单扩张 $F(\\alpha)$ 的次数。",
+        "noteEn": "The minimal polynomial divides every polynomial vanishing at α, and its degree equals the degree of the simple extension F(α)."
+      },
+      {
+        "latex": "F(\\alpha) \\cong F[x]/\\bigl(m_{\\alpha}(x)\\bigr),\\qquad \\{1, \\alpha, \\dots, \\alpha^{n-1}\\}\\ \\text{是}\\ F\\text{-基}",
+        "note": "单扩张定理：$n = \\deg m_\\alpha$；计算 $F(\\alpha)$ 等价于对多项式按 $m_\\alpha$ 取模，幂 $1, \\alpha, \\dots, \\alpha^{n-1}$ 给出基。",
+        "noteEn": "Simple extension theorem: F(α) is F[x] modulo the minimal polynomial, with powers up to α^{n−1} as a basis."
+      },
+      {
+        "latex": "\\alpha \\text{ 超越} \\iff F(\\alpha) \\cong F(x),\\qquad \\mathbb{Q}(\\pi) \\cong \\mathbb{Q}(x)",
+        "note": "超越元给出有理函数域，单扩张次数无限；$\\pi$、$\\mathrm{e}$ 都是经典超越数。",
+        "noteEn": "A transcendental element generates a rational function field and an infinite-degree simple extension; π and e are the classical examples."
+      }
+    ],
+    "properties": [
+      "塔公式与整除性：$F \\subseteq E \\subseteq K$ 时 $[K:F] = [K:E] \\cdot [E:F]$；由此 $[E:F]$ 整除 $[K:F]$，素数次的有限扩张没有真中间域。",
+      "最小多项式的唯一性与共轭：$m_\\alpha$ 是 $F[x]$ 中使 $\\alpha$ 为零的唯一首一不可约多项式；它的其余根称为 $\\alpha$ 的共轭元，对任一这样的根 $\\beta$ 都有 $F(\\alpha) \\cong F(\\beta)$（把 $\\alpha$ 送到 $\\beta$）。",
+      "代数元的封闭性与传递性：$K$ 中在 $F$ 上代数的元素全体构成 $K$ 的子域（对加减乘除封闭）；若 $E/F$ 代数且 $\\alpha$ 在 $E$ 上代数，则 $\\alpha$ 在 $F$ 上代数。",
+      "单扩张中多项式环自动成为域：$\\alpha$ 代数时 $F[\\alpha] = F(\\alpha)$；$\\alpha$ 超越时 $F[\\alpha]$ 只是多项式环，$F(\\alpha)$ 是它的分式域 $F(x)$。",
+      "超越性判据：$\\alpha$ 超越当且仅当 $[F(\\alpha):F]$ 无限；$\\pi$ 与 $\\mathrm{e}$ 在 $\\mathbb{Q}$ 上超越，因此 $[\\mathbb{R}:\\mathbb{Q}]$ 是无限次数扩张。"
+    ],
+    "propertiesEn": [
+      "Tower formula and divisibility: [K:F] = [K:E] · [E:F] for F ⊆ E ⊆ K; hence [E:F] divides [K:F], and a finite extension of prime degree has no proper intermediate field.",
+      "Minimal polynomials are unique, and conjugates define the same simple extension: m_α is the unique monic irreducible polynomial over F vanishing at α, and F(α) ≅ F(β) for every other root β of m_α (sending α to β).",
+      "Algebraicity is closed and transitive: the elements of K algebraic over F form a subfield of K, and if E/F is algebraic while α is algebraic over E, then α is algebraic over F.",
+      "In a simple extension the polynomial ring is already a field: F[α] = F(α) for algebraic α, while for transcendental α the ring F[α] is a genuine polynomial ring whose fraction field is F(x).",
+      "Transcendence criterion: α is transcendental iff [F(α):F] is infinite; π and e are transcendental over Q, so [R:Q] is an infinite extension."
+    ],
+    "examples": [
+      {
+        "problem": "证明 $[\\mathbb{Q}(\\sqrt2, \\sqrt3):\\mathbb{Q}] = 4$，写出它的一组基，并说明 $\\sqrt3 \\notin \\mathbb{Q}(\\sqrt2)$。",
+        "solution": "**第一步：$x^2 - 2$ 在 $\\mathbb{Q}$ 上不可约。** 它的有理根只能是常数项的有理因数 $\\pm 1, \\pm 2$，代入均不为零；二次多项式没有有理根即为不可约。所以 $[\\mathbb{Q}(\\sqrt2):\\mathbb{Q}] = 2$，基为 $\\{1, \\sqrt2\\}$。\n\n**第二步：$\\sqrt3 \\notin \\mathbb{Q}(\\sqrt2)$。** 反设 $\\sqrt3 = a + b\\sqrt2$（$a, b \\in \\mathbb{Q}$）。平方得 $3 = a^2 + 2b^2 + 2ab\\sqrt2$。因为 $1, \\sqrt2$ 在 $\\mathbb{Q}$ 上线性无关，比较两边得 $ab = 0$ 且 $a^2 + 2b^2 = 3$。若 $b = 0$，则 $a^2 = 3$；设 $a = p/q$ 既约，得 $p^2 = 3q^2$，于是 $3 \\mid p$，进而 $3 \\mid q$，矛盾。若 $a = 0$，则 $b^2 = 3/2$，同理 $2p^2 = 3q^2$ 推出 $3 \\mid p$ 与 $3 \\mid q$，仍矛盾。故 $\\sqrt3 \\notin \\mathbb{Q}(\\sqrt2)$。\n\n**第三步：塔公式。** 由第二步，$x^2 - 3$ 在 $\\mathbb{Q}(\\sqrt2)$ 上没有根，二次无根即不可约，故 $[\\mathbb{Q}(\\sqrt2, \\sqrt3):\\mathbb{Q}(\\sqrt2)] = 2$。乘起来：$[\\mathbb{Q}(\\sqrt2, \\sqrt3):\\mathbb{Q}] = 2 \\times 2 = 4$。\n\n**第四步：基。** 取 $x, y \\in \\mathbb{Q}(\\sqrt2, \\sqrt3)$，写 $x = (a + b\\sqrt2) + (c + d\\sqrt2)\\sqrt3$、$y = (e + f\\sqrt2) + (g + h\\sqrt2)\\sqrt3$（即按 $\\mathbb{Q}(\\sqrt2)$-基 $\\{1, \\sqrt3\\}$ 展开）。先证 $1, \\sqrt3$ 在 $\\mathbb{Q}(\\sqrt2)$ 上线性无关：否则 $\\sqrt3 \\in \\mathbb{Q}(\\sqrt2)$，与第二步矛盾。于是 $x = 0$ 迫使前后两项都为零，再用 $1, \\sqrt2$ 在 $\\mathbb{Q}$ 上线性无关，得 $a = b = c = d = 0$——所以 $\\{1, \\sqrt2, \\sqrt3, \\sqrt6\\}$ 在 $\\mathbb{Q}$ 上线性无关。又 $4$ 维空间里的乘法封闭：$\\sqrt2 \\cdot \\sqrt3 = \\sqrt6$、$\\sqrt2 \\cdot \\sqrt6 = 2\\sqrt3$、$\\sqrt3 \\cdot \\sqrt6 = 3\\sqrt2$、$\\sqrt6^2 = 6$，全部仍在其中，故这个 4 维空间本身是域，必等于 $\\mathbb{Q}(\\sqrt2, \\sqrt3)$。数值核对：$\\sqrt2 \\approx 1.414214$、$\\sqrt3 \\approx 1.732051$、$\\sqrt6 \\approx 2.449490$，且 $\\sqrt2 \\cdot \\sqrt3 \\approx 2.449490 = \\sqrt6$ ✓；$3$ 与 $3/2$ 都不是有理数平方（等价于 $3$ 与 $6$ 不是整数平方，已逐一验算）。"
+      },
+      {
+        "problem": "求 $\\alpha = \\sqrt2 + \\sqrt3$ 在 $\\mathbb{Q}$ 上的最小多项式，并说明 $\\mathbb{Q}(\\alpha) = \\mathbb{Q}(\\sqrt2, \\sqrt3)$。",
+        "solution": "**消去根号。** $\\alpha^2 = 2 + 3 + 2\\sqrt6 = 5 + 2\\sqrt6$，故 $\\alpha^2 - 5 = 2\\sqrt6$；两边平方：$(\\alpha^2 - 5)^2 = 24$，即 $\\alpha^4 - 10\\alpha^2 + 1 = 0$。因此 $m_\\alpha$ 整除 $x^4 - 10x^2 + 1$，次数至多 4。\n\n**证明 $x^4 - 10x^2 + 1$ 不可约。** 由 Gauss 引理，任何有理系数因式都可取成首一整系数因式。一次因式对应整数根 $\\pm 1$，而 $f(1) = 1 - 10 + 1 = -8 \\ne 0$、$f(-1) = -8 \\ne 0$。二次因式情形，设 $x^4 - 10x^2 + 1 = (x^2 + ax + b)(x^2 + cx + d)$（$a, b, c, d \\in \\mathbb{Z}$）。比较系数：$a + c = 0$（无三次项），$ad + bc = 0$（无一次项），$bd = 1$，$b + d + ac = -10$。由 $c = -a$，一次项条件变为 $a(d - b) = 0$；由 $bd = 1$ 得 $b = d = 1$ 或 $b = d = -1$（$b, d$ 是整数）。代入 $b + d - a^2 = -10$：$b = d = 1$ 给出 $a^2 = 12$，$b = d = -1$ 给出 $a^2 = 8$，都不是整数平方，矛盾。故 $f$ 不可约。\n\n**结论。** 于是 $m_\\alpha = x^4 - 10x^2 + 1$，$[\\mathbb{Q}(\\alpha):\\mathbb{Q}] = \\deg m_\\alpha = 4$。另一方面 $\\alpha \\in \\mathbb{Q}(\\sqrt2, \\sqrt3)$，故 $\\mathbb{Q}(\\alpha) \\subseteq \\mathbb{Q}(\\sqrt2, \\sqrt3)$；由上一题两者次数都是 4，所以 $\\mathbb{Q}(\\alpha) = \\mathbb{Q}(\\sqrt2, \\sqrt3)$——$\\alpha$ 是整个双二次扩张的一个本原元，$\\mathbb{Q}(\\alpha)$ 的基可取 $\\{1, \\alpha, \\alpha^2, \\alpha^3\\}$。数值核对：$\\alpha \\approx 3.146264$，代入得 $\\alpha^4 - 10\\alpha^2 + 1 \\approx 1.4 \\times 10^{-14}$（浮点误差内为 0）；$\\alpha^2 = 5 + 2\\sqrt6 \\approx 9.898979$ ✓。"
+      }
+    ],
+    "tags": [
+      "域扩张",
+      "代数元",
+      "最小多项式",
+      "超越元",
+      "单扩张"
+    ],
+    "links": [
+      "polynomial-ring-irreducibility",
+      "finite-fields",
+      "galois-theory-intro",
+      "algebraic-number-theory",
+      "vector-space-basis"
+    ]
+  },
+  {
+    "id": "finite-fields",
+    "title": "有限域",
+    "titleEn": "Finite Fields",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "有限域的元素个数必为素数幂 pⁿ，每个素数幂对应的域同构意义下唯一；乘法群 F_q* 是循环群，且每个元素都满足 a^q = a。",
+    "summaryEn": "A finite field has pⁿ elements for some prime p, is unique up to isomorphism for each prime power pⁿ, and its multiplicative group is cyclic with every element satisfying a^q = a.",
+    "definition": "只有有限多个元素的域叫**有限域**（也叫**伽罗瓦域**）。它的特征 $p$ 必是素数：特征为 $0$ 就包含 $\\mathbb{Q}$，元素无穷多；特征为合数 $mn$ 时，$m \\cdot n = mn \\cdot 1 = 0$ 而两个因子都非零，与域无零因子矛盾。于是有限域含**素域** $\\mathbb{F}_p \\cong \\mathbb{Z}/p\\mathbb{Z}$ 作为最小子域，并作为它的有限扩张：设次数为 $n$，元素个数就是 $q = p^n$。反过来，每个素数幂 $q = p^n$ 都恰好实现为一个有限域，且同构意义下唯一，记作 $\\mathbb{F}_q$ 或 $\\operatorname{GF}(q)$。所以「有限群的阶」可以随便取，「有限域的阶」只能是素数幂：6 个元素的域不存在，4、8、9 个元素的域各有一个。\n\n$\\mathbb{F}_q$ 的非零元全体 $\\mathbb{F}_q^\\times$ 是 $q - 1$ 元乘法群，而且它一定是**循环群**——这是有限域理论的核心定理。取一个生成元 $g$（称为**本原元**），则 $\\mathbb{F}_q^\\times = \\{1, g, g^2, \\dots, g^{q-2}\\}$。立刻得到有限域版本的费马小定理：$a^{q-1} = 1$（$a \\ne 0$）；再加上 $0$，就得到对一切 $a$ 成立的 $a^q = a$。换句话说，$\\mathbb{F}_q$ 的每个元素都是多项式 $x^q - x$ 的根，而这个多项式恰有 $q$ 个根且无重根（它的导数在特征 $p$ 下恒等于 $-1$），所以 $\\mathbb{F}_q$ 正是 $x^q - x$ 在 $\\mathbb{F}_p$ 上的**分裂域**——存在性与唯一性由此一并得到。\n\n有限域上最有特色的映射是**弗罗贝尼乌斯映射** $\\sigma(a) = a^p$。它成为域同态，靠的是恒等式 $(x + y)^p = x^p + y^p$：展开 $(x+y)^p = \\sum_k \\binom{p}{k} x^k y^{p-k}$ 后，中间项的二项式系数 $\\binom{p}{k}$（$0 < k < p$）全被 $p$ 整除，在特征 $p$ 下消失——**前提必须是特征 $p$ 的交换环**，一般环里幂映射不是同态：实数域中 $(1+1)^2 = 4 \\ne 1 + 1$。在 $\\mathbb{F}_q$ 上，$\\sigma$ 是单射从而是双射，$\\sigma^n = \\operatorname{id}$，且 $\\sigma$ 的不动域恰为 $\\mathbb{F}_p$（方程 $a^p = a$ 至多 $p$ 个解，而 $\\mathbb{F}_p$ 中每个元素都满足）；再验证 $\\sigma, \\sigma^2, \\dots, \\sigma^{n}$ 互不相同，就得到 $\\operatorname{Gal}(\\mathbb{F}_q/\\mathbb{F}_p) = \\langle \\sigma \\rangle \\cong \\mathbb{Z}/n$——有限域是伽罗瓦群可以显式写出的最舒服的例子。\n\n具体构造：取 $\\mathbb{F}_p$ 上任一 $n$ 次不可约多项式 $f$，$\\mathbb{F}_p[x]/(f)$ 就是 $p^n$ 元域。$\\mathbb{F}_4 = \\mathbb{F}_2[x]/(x^2 + x + 1)$：令 $\\alpha$ 为 $x$ 的类，则 $\\alpha^2 = \\alpha + 1$（特征 2 下 $-\\alpha - 1 = \\alpha + 1$），$\\alpha^3 = 1$，四个元素是 $0, 1, \\alpha, \\alpha + 1$。$\\mathbb{F}_9 = \\mathbb{F}_3[x]/(x^2 + 1)$：令 $\\alpha^2 = -1 = 2$，九个元素为 $a + b\\alpha$（$a, b \\in \\mathbb{F}_3$）。要当心多项式选错：$x^2 + 1$ 在 $\\mathbb{F}_3$ 上不可约，但 $x^2 + 2$ 在 $\\mathbb{F}_3$ 上**可约**——$x = 1$ 是它的根，$x^2 + 2 = (x - 1)(x + 1)$，不能用来构造 $\\mathbb{F}_9$；同一个多项式换一个素域，不可约性可能完全改变（$x^2 + 1$ 在 $\\mathbb{F}_2$ 上就变成 $(x + 1)^2$）。子域结构也完全由次数控制：$\\mathbb{F}_{p^m} \\subseteq \\mathbb{F}_{p^n} \\iff m \\mid n$（如 $\\mathbb{F}_4 \\subseteq \\mathbb{F}_{16}$，而 $\\mathbb{F}_8$ 不是 $\\mathbb{F}_{16}$ 的子域）。有限域是编码论（里德–所罗门码）、密码学（AES 用的正是 $\\mathbb{F}_{256}$）与组合设计的基本语言。",
+    "definitionEn": "A field with finitely many elements is a **finite field** (also called a **Galois field**). Its characteristic $p$ must be prime: characteristic $0$ would contain $\\mathbb{Q}$ and hence infinitely many elements, while characteristic $mn$ would give $m \\cdot n = mn \\cdot 1 = 0$ with both factors nonzero, contradicting the absence of zero divisors. So a finite field contains the **prime field** $\\mathbb{F}_p \\cong \\mathbb{Z}/p\\mathbb{Z}$ and is a finite extension of it: if the degree is $n$, the number of elements is exactly $q = p^n$. Conversely, every prime power $q = p^n$ is realized by a finite field, unique up to isomorphism and written $\\mathbb{F}_q$ or $\\operatorname{GF}(q)$. The order of a finite group is arbitrary, but the order of a finite field must be a prime power: there is no field with 6 elements, while orders 4, 8, 9 each occur exactly once.\n\nThe nonzero elements $\\mathbb{F}_q^\\times$ form a group of order $q-1$ under multiplication, and it is always **cyclic** — the central theorem of the subject. Choosing a generator $g$ (a **primitive element**) gives $\\mathbb{F}_q^\\times = \\{1, g, g^2, \\dots, g^{q-2}\\}$. It follows that $a^{q-1} = 1$ for $a \\ne 0$, and adding $0$ gives $a^q = a$ for all $a$: a finite-field Fermat little theorem. In other words, every element of $\\mathbb{F}_q$ is a root of $x^q - x$, and this polynomial has $q$ distinct roots (its derivative is identically $-1$ in characteristic $p$), so $\\mathbb{F}_q$ is precisely the **splitting field** of $x^q - x$ over $\\mathbb{F}_p$ — existence and uniqueness come together in that one sentence.\n\nThe most characteristic map on a finite field is the **Frobenius map** $\\sigma(a) = a^p$. It is a field homomorphism because $(x + y)^p = x^p + y^p$: expanding $(x+y)^p = \\sum_k \\binom{p}{k} x^k y^{p-k}$, the middle binomial coefficients $\\binom{p}{k}$ ($0 < k < p$) are all divisible by $p$ and vanish in characteristic $p$ — the hypothesis is that the ring has **characteristic p** (and is commutative); in general rings the power map is not a homomorphism, e.g. $(1+1)^2 = 4 \\ne 1 + 1$ in $\\mathbb{R}$. On $\\mathbb{F}_q$ the map $\\sigma$ is injective, hence bijective, with $\\sigma^n = \\operatorname{id}$, and its fixed field is exactly $\\mathbb{F}_p$ (the equation $a^p = a$ has at most $p$ solutions and all elements of $\\mathbb{F}_p$ satisfy it). Since $\\sigma, \\sigma^2, \\dots, \\sigma^{n}$ are pairwise distinct, $\\operatorname{Gal}(\\mathbb{F}_q/\\mathbb{F}_p) = \\langle \\sigma \\rangle \\cong \\mathbb{Z}/n$ — finite fields are the easiest setting where the Galois group can be written down explicitly.\n\nConcretely: for any irreducible $f$ of degree $n$ over $\\mathbb{F}_p$, the quotient $\\mathbb{F}_p[x]/(f)$ is a field with $p^n$ elements. For $\\mathbb{F}_4 = \\mathbb{F}_2[x]/(x^2 + x + 1)$, writing $\\alpha$ for the class of $x$ gives $\\alpha^2 = \\alpha + 1$ (in characteristic 2, $-\\alpha - 1 = \\alpha + 1$) and $\\alpha^3 = 1$, with elements $0, 1, \\alpha, \\alpha + 1$. For $\\mathbb{F}_9 = \\mathbb{F}_3[x]/(x^2 + 1)$ we set $\\alpha^2 = -1 = 2$ and obtain the nine elements $a + b\\alpha$ ($a, b \\in \\mathbb{F}_3$). Choosing the polynomial carelessly fails: $x^2 + 1$ is irreducible over $\\mathbb{F}_3$, but $x^2 + 2$ is **reducible** there — $x = 1$ is a root and $x^2 + 2 = (x-1)(x+1)$ — so it cannot build $\\mathbb{F}_9$; irreducibility can change completely when the prime field changes ($x^2 + 1$ factors as $(x+1)^2$ over $\\mathbb{F}_2$). Subfields are governed by divisibility: $\\mathbb{F}_{p^m} \\subseteq \\mathbb{F}_{p^n} \\iff m \\mid n$ (thus $\\mathbb{F}_4 \\subseteq \\mathbb{F}_{16}$ but $\\mathbb{F}_8$ is not a subfield of $\\mathbb{F}_{16}$). Finite fields are the working language of coding theory (Reed–Solomon codes), cryptography (AES uses $\\mathbb{F}_{256}$) and combinatorial designs.",
+    "formulas": [
+      {
+        "latex": "|\\mathbb{F}_q| = q = p^n,\\qquad \\mathbb{F}_q \\supseteq \\mathbb{F}_p \\cong \\mathbb{Z}/p\\mathbb{Z}",
+        "note": "元素个数必是素数幂；特征 $p$ 的素域 $\\mathbb{F}_p$ 是最小子域，$n = [\\mathbb{F}_q : \\mathbb{F}_p]$。",
+        "noteEn": "The order of a finite field is a prime power; the prime field F_p is the smallest subfield and n = [F_q : F_p]."
+      },
+      {
+        "latex": "\\mathbb{F}_q^{\\times} = \\langle g \\rangle \\cong \\mathbb{Z}/(q-1),\\qquad a^{q-1} = 1\\ (a \\neq 0),\\quad a^q = a",
+        "note": "乘法群循环：本原元 $g$ 的幂跑遍全部非零元；$a^{q-1} = 1$ 是有限域中的费马小定理，加上 0 即 $a^q = a$。",
+        "noteEn": "The multiplicative group is cyclic: powers of a primitive element run through all nonzero elements; a^{q−1} = 1 is Fermat's little theorem here."
+      },
+      {
+        "latex": "(x + y)^p = x^p + y^p\\qquad (\\text{特征 } p \\text{ 的交换环})",
+        "note": "弗罗贝尼乌斯恒等式：**前提是特征 $p$**（中间的 $\\binom{p}{k}$ 被 $p$ 整除），一般环不成立——$\\mathbb{R}$ 中 $(1+1)^2 = 4 \\ne 2$。",
+        "noteEn": "The Frobenius identity holds in a commutative ring of characteristic p; in general rings it fails, e.g. (1+1)² = 4 ≠ 2 in R."
+      },
+      {
+        "latex": "\\mathbb{F}_q = \\mathbb{F}_p[x]/(f(x)),\\qquad \\deg f = n,\\ f \\text{ 在 } \\mathbb{F}_p \\text{ 上不可约}",
+        "note": "构造定理：例如 $\\mathbb{F}_4 = \\mathbb{F}_2[x]/(x^2+x+1)$、$\\mathbb{F}_9 = \\mathbb{F}_3[x]/(x^2+1)$；用 $x^2+2$ 构造 $\\mathbb{F}_9$ 是错的（它在 $\\mathbb{F}_3$ 上可约）。",
+        "noteEn": "Construction: F_q as F_p[x] modulo an irreducible polynomial of degree n; e.g. F_9 requires x²+1, not x²+2, which is reducible over F_3."
+      },
+      {
+        "latex": "\\operatorname{Gal}(\\mathbb{F}_{p^n}/\\mathbb{F}_p) = \\langle \\sigma \\rangle \\cong \\mathbb{Z}/n,\\qquad \\sigma(a) = a^p",
+        "note": "伽罗瓦群由弗罗贝尼乌斯生成：$n$ 次迭代回到恒等，不动域恰为 $\\mathbb{F}_p$。",
+        "noteEn": "The Galois group is cyclic, generated by Frobenius: the n-th iterate is the identity and the fixed field is exactly F_p."
+      }
+    ],
+    "properties": [
+      "存在唯一性：对每个素数幂 $q = p^n$ 存在 $q$ 元域，且任何两个 $q$ 元域同构；$\\mathbb{F}_q$ 是 $x^q - x$ 在 $\\mathbb{F}_p$ 上的分裂域，其元素恰为该多项式的全体根。",
+      "乘法群循环、根集完整：$\\mathbb{F}_q^\\times \\cong \\mathbb{Z}/(q-1)$，本原元存在；每个非零元的乘法阶整除 $q-1$，并且 $x^q - x = \\prod_{a \\in \\mathbb{F}_q} (x - a)$。",
+      "子域准则：$\\mathbb{F}_{p^m} \\subseteq \\mathbb{F}_{p^n} \\iff m \\mid n$；例如 $\\mathbb{F}_8 \\subseteq \\mathbb{F}_{2^6}$，而 $\\mathbb{F}_8$ 不是 $\\mathbb{F}_{16}$ 的子域（$3 \\nmid 4$）。",
+      "弗罗贝尼乌斯自同构：$\\sigma: a \\mapsto a^p$ 是 $\\mathbb{F}_q$ 的 $n$ 阶自同构，不动域为 $\\mathbb{F}_p$，$\\operatorname{Gal}(\\mathbb{F}_q/\\mathbb{F}_p) = \\langle \\sigma \\rangle$ 循环；有限域是完美域，一切代数扩张都可分。",
+      "不可约性必须逐个验证：$x^2 + 1$ 在 $\\mathbb{F}_3$ 上不可约（$-1$ 不是模 3 的平方），在 $\\mathbb{F}_2$ 上却可约：$x^2 + 1 = (x+1)^2$；$x^2 + 2$ 在 $\\mathbb{F}_3$ 上分解为 $(x-1)(x+1)$。选错多项式，商环就不是域。"
+    ],
+    "propertiesEn": [
+      "Existence and uniqueness: for every prime power q = pⁿ there is a field with q elements, and any two fields of order q are isomorphic; F_q is the splitting field of x^q − x over F_p, whose roots are exactly its elements.",
+      "The multiplicative group is cyclic and the roots of x^q − x are all elements: F_q^× ≅ Z/(q−1) has primitive elements, the multiplicative order of every nonzero element divides q−1, and x^q − x = ∏(x − a) over a ∈ F_q.",
+      "Subfield criterion: F_{p^m} embeds in F_{p^n} iff m | n; e.g. F_8 ⊆ F_{2^6}, while F_8 is not a subfield of F_16 since 3 ∤ 4.",
+      "The Frobenius map σ(a) = a^p is an automorphism of F_q of order exactly n with fixed field F_p, and Gal(F_q/F_p) = ⟨σ⟩ is cyclic; finite fields are perfect, so all their algebraic extensions are separable.",
+      "Irreducibility must be checked case by case: x²+1 is irreducible over F_3 (−1 is not a square mod 3) but factors over F_2 as (x+1)²; x²+2 factors over F_3 as (x−1)(x+1). With a reducible polynomial the quotient ring is not a field."
+    ],
+    "examples": [
+      {
+        "problem": "用 $\\mathbb{F}_4 = \\mathbb{F}_2[x]/(x^2 + x + 1)$ 写出全部元素的乘法，并验证 $\\mathbb{F}_4^\\times$ 是循环群。",
+        "solution": "**不可约性检查。** $f(x) = x^2 + x + 1$ 在 $\\mathbb{F}_2$ 上：$f(0) = 1$，$f(1) = 1 + 1 + 1 = 1 \\ne 0$（特征 2），二次多项式无根即不可约，商环确实是域。\n\n**元素与乘法。** 令 $\\alpha$ 为 $x$ 的类，则 $\\alpha^2 + \\alpha + 1 = 0$，即 $\\alpha^2 = \\alpha + 1$（特征 2 下移项不变号）。四个元素是 $0, 1, \\alpha, \\alpha + 1$，乘法全部由 $\\alpha^2 = \\alpha + 1$ 化简：\n\n$\\alpha^2 = \\alpha + 1$；\n$\\alpha^3 = \\alpha \\cdot \\alpha^2 = \\alpha(\\alpha + 1) = \\alpha^2 + \\alpha = (\\alpha + 1) + \\alpha = 2\\alpha + 1 = 1$；\n$(\\alpha + 1)^2 = \\alpha^2 + 2\\alpha + 1 = (\\alpha + 1) + 1 = \\alpha$；\n$\\alpha(\\alpha + 1) = \\alpha^2 + \\alpha = (\\alpha + 1) + \\alpha = 1$。\n\n**验证循环。** 由 $\\alpha^3 = 1$ 且 $\\alpha \\ne 1$，$\\alpha$ 的乘法阶为 3；又 $\\alpha^2 = \\alpha + 1$，故 $\\mathbb{F}_4^\\times = \\{1, \\alpha, \\alpha^2\\} = \\langle \\alpha \\rangle \\cong \\mathbb{Z}/3$ ✓。逐项核对：$1^{-1} = 1$、$\\alpha^{-1} = \\alpha + 1$（因 $\\alpha(\\alpha+1) = 1$）、$(\\alpha+1)^{-1} = \\alpha$；全部 3 个非零元都有逆；封闭性已对全部 16 个元素对逐一验算通过，结合律则对全部 $4^3=64$ 组三元组逐一验算通过（亦可指出结合律自动继承自 $\\mathbb{F}_2[x]$ 的商环结构）。顺带：$x^2 + x + 1$ 的两个根恰好是 $\\alpha$ 与 $\\alpha + 1 = \\alpha^2$，它们互为弗罗贝尼乌斯共轭（$a \\mapsto a^2$）。"
+      },
+      {
+        "problem": "用 $\\mathbb{F}_9 = \\mathbb{F}_3[x]/(x^2 + 1)$ 求乘法群的一个本原元，并验证其阶为 8。",
+        "solution": "**不可约性检查。** $f(x) = x^2 + 1$ 在 $\\mathbb{F}_3$ 上：$f(0) = 1$，$f(1) = 2$，$f(2) = 4 + 1 = 5 \\equiv 2 \\pmod 3$，都非零——无根即不可约（与「模 3 的平方只有 0, 1」一致：$-1$ 不是平方）。作为对照，$x^2 + 2$ 在 $\\mathbb{F}_3$ 上可约：$1^2 + 2 = 3 \\equiv 0$，且 $x^2 + 2 = (x-1)(x+1)$，不能用来构造 $\\mathbb{F}_9$。\n\n**找生成元。** 令 $\\alpha^2 = -1 = 2$，九个元素为 $a + b\\alpha$（$a, b \\in \\mathbb{F}_3$）。先看 $\\alpha$：$\\alpha^2 = 2$、$\\alpha^4 = 2^2 = 4 \\equiv 1$，故 $\\alpha$ 的阶是 4（$\\alpha^2 \\ne 1$），只生成 4 元子群 $\\{1, \\alpha, 2, 2\\alpha\\}$，不是本原元。\n\n试 $g = 1 + \\alpha$，逐次计算（全程模 3，$\\alpha^2 = 2$）：\n$g^2 = (1 + \\alpha)^2 = 1 + 2\\alpha + \\alpha^2 = 1 + 2\\alpha + 2 = 3 + 2\\alpha = 2\\alpha$；\n$g^3 = g \\cdot g^2 = (1+\\alpha) \\cdot 2\\alpha = 2\\alpha + 2\\alpha^2 = 2\\alpha + 4 \\equiv 1 + 2\\alpha$；\n$g^4 = (g^2)^2 = (2\\alpha)^2 = 4\\alpha^2 = 4 \\cdot 2 = 8 \\equiv 2$；\n$g^5 = g \\cdot g^4 = 2(1 + \\alpha) = 2 + 2\\alpha$；\n$g^6 = g^4 \\cdot g^2 = 2 \\cdot 2\\alpha = 4\\alpha \\equiv \\alpha$；\n$g^7 = g \\cdot g^6 = \\alpha(1 + \\alpha) = \\alpha + \\alpha^2 = \\alpha + 2 = 2 + \\alpha$；\n$g^8 = g^4 \\cdot g^4 = 2 \\cdot 2 = 4 \\equiv 1$。\n\n**结论。** 8 个幂 $g, g^2, \\dots, g^8$ 两两不同（依次为 $1+\\alpha, 2\\alpha, 1+2\\alpha, 2, 2+2\\alpha, \\alpha, 2+\\alpha, 1$），其中 $g^8 = 1$ 而 $g^1, g^2, g^4 \\ne 1$，故 $g = 1 + \\alpha$ 的阶恰为 8，$\\mathbb{F}_9^\\times = \\langle 1 + \\alpha \\rangle \\cong \\mathbb{Z}/8$ ✓。数值核对：9 个元素的乘法表、每个非零元的逆、以及上面 8 个幂，已全部用计算逐一验算通过。"
+      }
+    ],
+    "tags": [
+      "有限域",
+      "伽罗瓦域",
+      "本原元",
+      "弗罗贝尼乌斯映射",
+      "素数幂"
+    ],
+    "links": [
+      "field-extension-algebraic",
+      "galois-theory-intro",
+      "fermat-little-theorem",
+      "primitive-roots",
+      "quadratic-residues"
+    ]
+  },
+  {
+    "id": "galois-theory-intro",
+    "title": "伽罗瓦理论初步：群与域的对应",
+    "titleEn": "Galois Theory: Groups and Fields",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "伽罗瓦理论在中间域与伽罗瓦群的子群之间建立反序的一一对应，正规子群对应正规扩张，从而把域的问题翻译成群的问题。",
+    "summaryEn": "Galois theory pairs intermediate fields with subgroups of the Galois group in an inclusion-reversing bijection, with normal subgroups corresponding to normal extensions and translating field questions into group questions.",
+    "definition": "设 $K/F$ 是有限扩张。若 $F$ 上任何不可约多项式只要在 $K$ 里有一个根就**在 $K$ 里完全分裂**（分解为一次因式之积），称 $K/F$ 是**正规扩张**；有限情形下这等价于说 $K$ 是某个 $F$ 上多项式的**分裂域**。若 $K$ 中每个元素的最小多项式都没有重根，称 $K/F$ 是**可分扩张**——特征 $0$ 的域（$\\mathbb{Q}$、$\\mathbb{R}$、$\\mathbb{C}$）上永远成立，有限域上永远成立，但一般特征里会出问题。既正规又可分的扩张叫**伽罗瓦扩张**，它还有一个只用自同构的刻画：$F$ 恰好是被 $K$ 的所有 $F$-自同构固定的元素集合。\n\n具体地，保持 $F$ 中每个元素不动的域自同构 $\\sigma: K \\to K$ 叫 **$F$-自同构**，它们全体在复合下构成群，记作 $\\operatorname{Gal}(K/F)$，称 $K/F$ 的**伽罗瓦群**。对有限扩张，$|\\operatorname{Gal}(K/F)| \\le [K:F]$ 恒成立，且**取等号恰好刻画伽罗瓦扩张**——伽罗瓦扩张的扩张次数被自同构的个数补满，这是用群来「数」域的起点。几个例子：$\\operatorname{Gal}(\\mathbb{C}/\\mathbb{R}) = \\{\\text{恒等}, \\text{复共轭}\\} \\cong \\mathbb{Z}/2$；$\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}) \\cong \\mathbb{Z}/2$（唯一非平凡自同构把 $\\sqrt2$ 送到 $-\\sqrt2$）；$\\operatorname{Gal}(\\mathbb{F}_{p^n}/\\mathbb{F}_p) \\cong \\mathbb{Z}/n$ 由弗罗贝尼乌斯映射生成。\n\n**伽罗瓦基本定理**：设 $K/F$ 是有限伽罗瓦扩张，$G = \\operatorname{Gal}(K/F)$。则中间域 $E$（$F \\subseteq E \\subseteq K$）与 $G$ 的子群 $H$ 之间有一一对应：$\\qquad E \\mapsto \\operatorname{Gal}(K/E),\\qquad H \\mapsto K^H = \\{x \\in K : \\sigma(x) = x,\\ \\forall \\sigma \\in H\\}$。这里 $K^H$ 叫 $H$ 的**不动域**。两条关联要记牢：一是**反序**——$E_1 \\subseteq E_2 \\iff \\operatorname{Gal}(K/E_1) \\supseteq \\operatorname{Gal}(K/E_2)$，子群越大、不动域越小；二是**次数与指数互换**——$[K:K^H] = |H|$、$[K^H:F] = [G:H]$。正规性也有对偶：$H \\trianglelefteq G \\iff K^H/F$ 是伽罗瓦扩张，此时 $\\operatorname{Gal}(K^H/F) \\cong G/H$；「子群链在哪里变正规」与「中间域链在哪里变正规」是同一件事。\n\n把基本定理当双向字典读：左边是域与包含关系，右边是群与子群关系，「有多少中间域」变成「有多少子群」。对多项式 $f$，把它的**伽罗瓦群**定义为分裂域的伽罗瓦群 $\\operatorname{Gal}(f) = \\operatorname{Gal}(E/F)$（$E$ 为 $f$ 在 $F$ 上的分裂域），这是从方程走向群的第一步；下一个知识点会看到，「方程能否用根号解」被翻译成这个群的「可解性」。两个最简单的样本正好展示字典的全貌：$\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}) \\cong \\mathbb{Z}/2$ 只有两个子群，故该扩张只有一个真中间域；$\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2, \\sqrt3)/\\mathbb{Q}) \\cong \\mathbb{Z}/2 \\times \\mathbb{Z}/2$ 有五个子群，对应五个中间域。",
+    "definitionEn": "Let $K/F$ be a finite extension. It is **normal** if every irreducible polynomial over $F$ that has one root in $K$ splits completely in $K$; for finite extensions this is equivalent to $K$ being the **splitting field** of a polynomial over $F$. It is **separable** if the minimal polynomial of every element has no repeated roots — automatic over characteristic $0$ fields (Q, R, C) and over finite fields, but not in general. Extensions that are both normal and separable are **Galois**, and there is a purely automorphism-theoretic characterization: $F$ is exactly the set of elements of $K$ fixed by all $F$-automorphisms.\n\nConcretely, an **F-automorphism** is a field automorphism $\\sigma: K \\to K$ fixing every element of $F$; they form a group under composition, the **Galois group** $\\operatorname{Gal}(K/F)$. For a finite extension $|\\operatorname{Gal}(K/F)| \\le [K:F]$ always, and **equality holds precisely for Galois extensions** — the number of symmetries fills up the degree, the starting point for counting fields with groups. Examples: $\\operatorname{Gal}(\\mathbb{C}/\\mathbb{R}) = \\{\\text{id}, \\text{complex conjugation}\\} \\cong \\mathbb{Z}/2$; $\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}) \\cong \\mathbb{Z}/2$ (the nontrivial automorphism sends $\\sqrt2$ to $-\\sqrt2$); $\\operatorname{Gal}(\\mathbb{F}_{p^n}/\\mathbb{F}_p) \\cong \\mathbb{Z}/n$, generated by Frobenius.\n\n**Fundamental theorem of Galois theory**: let $K/F$ be a finite Galois extension and $G = \\operatorname{Gal}(K/F)$. Then intermediate fields $E$ ($F \\subseteq E \\subseteq K$) correspond bijectively to subgroups $H$ of $G$ via $E \\mapsto \\operatorname{Gal}(K/E)$ and $H \\mapsto K^H = \\{x \\in K : \\sigma(x) = x \\text{ for all } \\sigma \\in H\\}$, the **fixed field** of $H$. Two features are essential: the correspondence is **inclusion-reversing**, $E_1 \\subseteq E_2 \\iff \\operatorname{Gal}(K/E_1) \\supseteq \\operatorname{Gal}(K/E_2)$ (larger subgroup, smaller fixed field); and it interchanges degrees with indices, $[K:K^H] = |H|$ and $[K^H:F] = [G:H]$. Normality is mirrored as well: $H \\trianglelefteq G \\iff K^H/F$ is Galois, in which case $\\operatorname{Gal}(K^H/F) \\cong G/H$ — where a subgroup chain becomes normal and where an intermediate-field chain becomes normal are the same phenomenon.\n\nRead the theorem as a two-way dictionary: fields and inclusions on one side, groups and subgroups on the other; questions about intermediate fields become questions about subgroups. For a polynomial $f$ one defines its **Galois group** $\\operatorname{Gal}(f) = \\operatorname{Gal}(E/F)$, where $E$ is the splitting field of $f$ over $F$ — the first step from equations to groups; the next node shows that radical solvability of $f$ is translated into solvability of this group. Two simplest examples display the whole dictionary: $\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}) \\cong \\mathbb{Z}/2$ has only two subgroups, so that extension has exactly one proper intermediate field; $\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2,\\sqrt3)/\\mathbb{Q}) \\cong \\mathbb{Z}/2 \\times \\mathbb{Z}/2$ has five subgroups, matching five intermediate fields.",
+    "formulas": [
+      {
+        "latex": "K/F \\text{ 有限伽罗瓦} \\iff |\\operatorname{Gal}(K/F)| = [K:F] \\iff F = K^{\\operatorname{Gal}(K/F)}",
+        "note": "伽罗瓦扩张的两个等价刻画：自同构个数补满次数，或不动域恰是基域。",
+        "noteEn": "Two equivalent characterizations of Galois extensions: the automorphism count fills the degree, or the fixed field is exactly the base field."
+      },
+      {
+        "latex": "E \\;\\longleftrightarrow\\; H = \\operatorname{Gal}(K/E),\\qquad E_1 \\subseteq E_2 \\iff \\operatorname{Gal}(K/E_1) \\supseteq \\operatorname{Gal}(K/E_2)",
+        "note": "基本对应与**反序性**：子群越大，不动域越小；把两个方向一起用才能数清中间域。",
+        "noteEn": "The fundamental correspondence, inclusion-reversing: larger subgroups correspond to smaller fixed fields."
+      },
+      {
+        "latex": "[K:K^{H}] = |H|,\\qquad [K^{H}:F] = [G:H]",
+        "note": "次数与指数对偶：算中间域的次数等价于算子群的指数，是最常用的换算。",
+        "noteEn": "Degrees dualize with indices: computing the degree of K^H means computing the index [G:H]."
+      },
+      {
+        "latex": "H \\trianglelefteq G \\iff K^{H}/F \\text{ 伽罗瓦},\\qquad \\operatorname{Gal}(K^{H}/F) \\cong G/H",
+        "note": "正规子群对应正规扩张：此时子域的伽罗瓦群就是商群，群论中的商运算在域这边完全实现。",
+        "noteEn": "Normal subgroups correspond to Galois subextensions, and the corresponding Galois group is exactly G/H."
+      },
+      {
+        "latex": "\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2)/\\mathbb{Q}) \\cong \\mathbb{Z}/2,\\qquad \\operatorname{Gal}(\\mathbb{Q}(\\sqrt2,\\sqrt3)/\\mathbb{Q}) \\cong \\mathbb{Z}/2 \\times \\mathbb{Z}/2",
+        "note": "两个基本例子：二次扩张给出 2 阶群，双二次扩张给出克莱因四元群。",
+        "noteEn": "Two basic examples: a quadratic extension gives Z/2, the biquadratic extension gives the Klein four group."
+      }
+    ],
+    "properties": [
+      "反序字典：$E$ 越小、$\\operatorname{Gal}(K/E)$ 越大；有限伽罗瓦扩张的中间域个数与子群个数相等，次数换算为 $[E:F] = [G : \\operatorname{Gal}(K/E)]$。",
+      "伽罗瓦扩张的等价刻画：有限 $K/F$ 伽罗瓦 $\\iff$ $K$ 是 $F$ 上某个可分多项式的分裂域 $\\iff$ $F$ 等于全体 $F$-自同构的不动域（此时 $|\\operatorname{Aut}_F K| = [K:F]$）。",
+      "可分性不能丢：一般特征下「正规」推不出「伽罗瓦」。例如 $\\mathbb{F}_p(t)/\\mathbb{F}_p(t^p)$：$x^p - t^p = (x - t)^p$ 只有一个根，扩张是分裂域（正规）却不可分，且只有恒等自同构，不动域是整个 $K$ 而不是基域。",
+      "正规子群对应：$H \\trianglelefteq G \\iff K^H/F$ 伽罗瓦；对任何子群 $H$，上层扩张 $K/K^H$ 总是伽罗瓦，且 $[K:K^H] = |H|$——「上层永远好，下层看正规」。",
+      "特征 $0$（更一般地，完美域）中可分性自动成立，于是「正规 $\\iff$ 伽罗瓦」，数域（$\\mathbb{Q}$ 的有限扩张）上的伽罗瓦理论因此最简洁；这也解释了为什么五次方程的故事默认在特征 $0$ 上讲述。"
+    ],
+    "propertiesEn": [
+      "Inclusion-reversing dictionary: smaller E means larger Gal(K/E); a finite Galois extension has equally many intermediate fields and subgroups, with degrees computed as [E:F] = [G : Gal(K/E)].",
+      "Equivalent characterizations: a finite K/F is Galois iff K is the splitting field of some separable polynomial over F iff F equals the fixed field of all F-automorphisms (in which case |Aut_F K| = [K:F]).",
+      "Separability cannot be dropped: in general characteristic, normal does not imply Galois. For F_p(t)/F_p(t^p), the polynomial x^p − t^p = (x − t)^p has a single root, the extension is a splitting field (normal) yet inseparable, and its only automorphism is the identity, whose fixed field is all of K rather than F.",
+      "Normal subgroups: H ⊴ G iff K^H/F is Galois; for any subgroup H the upper extension K/K^H is always Galois with [K:K^H] = |H| — the upper layer is always good, the lower one requires normality.",
+      "Over characteristic 0 (more generally over perfect fields) separability is automatic, so normal iff Galois; number fields (finite extensions of Q) are therefore the cleanest setting, which is why the quintic story is told in characteristic 0."
+    ],
+    "examples": [
+      {
+        "problem": "求 $\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2)/\\mathbb{Q})$，列出伽罗瓦对应，并验证 $\\sigma(a + b\\sqrt2) = a - b\\sqrt2$ 确实是域自同构。",
+        "solution": "**扩张与自同构。** $[\\mathbb{Q}(\\sqrt2):\\mathbb{Q}] = 2$（$x^2 - 2$ 不可约：有理根 $\\pm 1, \\pm 2$ 均不满足）。任何 $\\mathbb{Q}$-自同构 $\\sigma$ 由 $\\sigma(\\sqrt2)$ 决定：$\\mathbb{Q}$ 中的数不动，$\\sigma(a + b\\sqrt2) = a + b\\,\\sigma(\\sqrt2)$。而 $\\sigma(\\sqrt2)^2 = \\sigma(2) = 2$，故 $\\sigma(\\sqrt2) = \\pm\\sqrt2$——至多两种可能，恰好对应恒等与 $\\sigma: \\sqrt2 \\mapsto -\\sqrt2$。\n\n**验证乘法。** 对 $x = a + b\\sqrt2$、$y = c + d\\sqrt2$：\n$\\sigma(xy) = \\sigma\\bigl((ac + 2bd) + (ad + bc)\\sqrt2\\bigr) = (ac + 2bd) - (ad + bc)\\sqrt2$，\n$\\sigma(x)\\,\\sigma(y) = (a - b\\sqrt2)(c - d\\sqrt2) = (ac + 2bd) - (ad + bc)\\sqrt2$，两者相等 ✓。加法和 1 的保持显然，故 $\\sigma$ 是域自同构；$\\sigma^2 = \\operatorname{id}$。于是 $\\operatorname{Gal}(K/\\mathbb{Q}) = \\{\\operatorname{id}, \\sigma\\} \\cong \\mathbb{Z}/2$，且 $|G| = 2 = [K:\\mathbb{Q}]$，$K/\\mathbb{Q}$ 伽罗瓦（它正是 $x^2 - 2$ 的分裂域）。\n\n**伽罗瓦对应。** 子群只有 $\\{e\\}$ 与 $G$：$K^{\\{e\\}} = K$，$K^{G} = \\mathbb{Q}$（不动要求 $a + b\\sqrt2 = a - b\\sqrt2$，即 $b = 0$，剩下的正是 $\\mathbb{Q}$）。次数核对：$[K^{\\{e\\}}:\\mathbb{Q}] = 2 = [G:\\{e\\}]$ ✓，$[K^{G}:\\mathbb{Q}] = 1 = [G:G]$ ✓。反序在两层的例子里表现为 $\\{e\\} \\subset G$ 对应 $K \\supset \\mathbb{Q}$。计算核对：把元素写成 $(a, b)$ 对，对所有随机元素与全部基元素验证 $\\sigma(xy) = \\sigma(x)\\sigma(y)$、$\\sigma^2 = \\operatorname{id}$，并穷举确认自同构恰有两个。"
+      },
+      {
+        "problem": "求 $\\operatorname{Gal}(\\mathbb{Q}(\\sqrt2, \\sqrt3)/\\mathbb{Q})$，列出全部子群与中间域的对应表，并核对反序性与次数公式。",
+        "solution": "**群的结构。** 记 $K = \\mathbb{Q}(\\sqrt2, \\sqrt3)$，$[K:\\mathbb{Q}] = 4$。自同构由 $\\sigma(\\sqrt2) \\in \\{\\pm\\sqrt2\\}$ 与 $\\sigma(\\sqrt3) \\in \\{\\pm\\sqrt3\\}$ 决定，两个符号独立：关系 $\\sqrt2^2 = 2$、$\\sqrt3^2 = 3$ 被保持，乘积关系 $\\sqrt6 = \\sqrt2\\sqrt3$ 自动保持（$\\sigma(\\sqrt6) = \\sigma(\\sqrt2)\\sigma(\\sqrt3)$ 仍是 $\\pm\\sqrt6$），所以四个组合都给出 $\\mathbb{Q}$-自同构。记\n$\\sigma: \\sqrt2 \\mapsto -\\sqrt2,\\ \\sqrt3 \\mapsto \\sqrt3$；$\\quad \\tau: \\sqrt2 \\mapsto \\sqrt2,\\ \\sqrt3 \\mapsto -\\sqrt3$；$\\quad \\sigma\\tau: \\sqrt2 \\mapsto -\\sqrt2,\\ \\sqrt3 \\mapsto -\\sqrt3$。\n每个非单位元平方为 $\\operatorname{id}$（$\\sigma^2 = \\tau^2 = (\\sigma\\tau)^2 = \\operatorname{id}$），且 $\\sigma, \\tau$ 交换，故 $G = \\{\\operatorname{id}, \\sigma, \\tau, \\sigma\\tau\\} \\cong \\mathbb{Z}/2 \\times \\mathbb{Z}/2$（克莱因四元群）。$|G| = 4 = [K:\\mathbb{Q}]$，$K/\\mathbb{Q}$ 伽罗瓦（它是 $(x^2-2)(x^2-3)$ 的分裂域，特征 0 可分）。\n\n**不动域。** 写 $x = a + b\\sqrt2 + c\\sqrt3 + d\\sqrt6$（$a, b, c, d \\in \\mathbb{Q}$）。$\\sigma(x) = a - b\\sqrt2 + c\\sqrt3 - d\\sqrt6$，故 $x \\in K^{\\langle\\sigma\\rangle} \\iff b = d = 0 \\iff x \\in \\mathbb{Q}(\\sqrt3)$。同理 $K^{\\langle\\tau\\rangle} = \\mathbb{Q}(\\sqrt2)$，$K^{\\langle\\sigma\\tau\\rangle} = \\mathbb{Q}(\\sqrt6)$（$\\sigma\\tau$ 把 $\\sqrt6 = \\sqrt2\\sqrt3$ 映回自身），$K^{G} = \\mathbb{Q}$，$K^{\\{\\operatorname{id}\\}} = K$。\n\n**对应表与核对。**\n$\\{\\operatorname{id}\\} \\leftrightarrow K = \\mathbb{Q}(\\sqrt2, \\sqrt3)$，次数 $4 = [G:\\{\\operatorname{id}\\}]$；\n$\\langle\\sigma\\rangle \\leftrightarrow \\mathbb{Q}(\\sqrt3)$，次数 $2 = [G:\\langle\\sigma\\rangle]$；\n$\\langle\\tau\\rangle \\leftrightarrow \\mathbb{Q}(\\sqrt2)$，次数 $2 = [G:\\langle\\tau\\rangle]$；\n$\\langle\\sigma\\tau\\rangle \\leftrightarrow \\mathbb{Q}(\\sqrt6)$，次数 $2$；\n$G \\leftrightarrow \\mathbb{Q}$，次数 $1 = [G:G]$。\n\n反序性检查：$\\{\\operatorname{id}\\} \\subset \\langle\\sigma\\rangle \\subset G$ 正好对应 $K \\supset \\mathbb{Q}(\\sqrt3) \\supset \\mathbb{Q}$ ✓。又因 $G$ 交换，所有子群正规，对应地三个二次中间域都是 $\\mathbb{Q}$ 的伽罗瓦扩张（它们分别是 $x^2-3$、$x^2-2$、$x^2-6$ 的分裂域）✓。验算：在基 $1, \\sqrt2, \\sqrt3, \\sqrt6$ 上（乘法按 $\\sqrt2\\sqrt3 = \\sqrt6$ 化简）穷举验证四个符号映射都保持乘法与加法、并逐一解出每个映射的不动子空间，结果与上表一致。"
+      }
+    ],
+    "tags": [
+      "伽罗瓦对应",
+      "正规扩张",
+      "分裂域",
+      "不动域",
+      "自同构群"
+    ],
+    "links": [
+      "field-extension-algebraic",
+      "finite-fields",
+      "symmetric-alternating-groups",
+      "lagrange-theorem",
+      "solvable-groups-radicals"
+    ]
+  },
+  {
+    "id": "solvable-groups-radicals",
+    "title": "可解群与五次方程的不可解性",
+    "titleEn": "Solvable Groups and Insolubility of the Quintic",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "可解群是导出列终止于单位元的群；伽罗瓦判据把「根式可解」翻译成群可解，而 S₅ 不可解，故一般五次方程没有根式解。",
+    "summaryEn": "A group is solvable when its derived series reaches the identity; Galois's criterion translates radical solvability into solvability of the Galois group, and since S₅ is not solvable the general quintic admits no radical solution.",
+    "definition": "衡量群的「不交换程度」用**换位子** $[a, b] = aba^{-1}b^{-1}$：$[a,b] = e$ 当且仅当 $a, b$ 交换。所有换位子**生成**的正规子群叫**换位子群**（导出子群）$G' = [G, G]$；它是使商群 $G/G'$ 交换的**最小**正规子群，$G/G'$ 是 $G$ 的最大交换商。把这一步迭代下去，就得到**导出列** $G = G^{(0)} \\trianglerighteq G^{(1)} = G' \\trianglerighteq G^{(2)} = G'' \\trianglerighteq \\cdots$，其中 $G^{(k+1)} = [G^{(k)}, G^{(k)}]$。若存在 $n$ 使 $G^{(n)} = \\{e\\}$，称 $G$ 是**可解群**；等价的说法是：存在群链 $G = G_0 \\trianglerighteq G_1 \\trianglerighteq \\cdots \\trianglerighteq G_n = \\{e\\}$，使每个商 $G_i/G_{i+1}$ 都是交换群。\n\n交换群当然可解（$G' = \\{e\\}$）；$S_3$ 也可解：导出列是 $S_3 \\trianglerighteq A_3 \\trianglerighteq \\{e\\}$。对称群的转折出现在 $n = 5$：$S_n' = A_n$（$n \\ge 3$），而 $A_5$ 是**单群**（没有非平凡真正规子群）且非交换，于是 $A_5' = A_5$——对换位子取多少次都不会再缩小。导出列 $S_5 \\trianglerighteq A_5 = A_5 = \\cdots$ 停在 $A_5$，永远到不了 $\\{e\\}$，所以 $S_5$ 不可解；同样的论证对一切 $n \\ge 5$ 成立（$A_n$ 当 $n \\ge 5$ 时都是单的非交换群，$A_5$ 是最小的一个，60 个元素）。\n\n为什么群和方程求根会搅在一起？设 $F$ 是**特征 $0$** 的域（例如 $\\mathbb{Q}$），$f \\in F[x]$，$E$ 是 $f$ 在 $F$ 上的分裂域。称 $f$ **可用根式解**，若它的根可由系数经过有限次四则运算与开方得到；精确地说，存在**根式扩张塔** $F = F_0 \\subseteq F_1 \\subseteq \\cdots \\subseteq F_m$，每个 $F_i = F_{i-1}(\\alpha_i)$ 且 $\\alpha_i^{n_i} \\in F_{i-1}$，使得 $f$ 的全部根都在 $F_m$ 中。**伽罗瓦判据**：在特征 $0$ 下，$f$ 可用根式解 $\\iff \\operatorname{Gal}(f) = \\operatorname{Gal}(E/F)$ 是可解群。一边是「公式里能不能出现根号」，另一边是「导出列能不能降到单位元」——这个翻译就是伽罗瓦理论的主定理。\n\n于是五次方程的命运由 $S_5$ 决定。一般五次方程（系数视为未定元，或泛指没有特殊结构的情形）的伽罗瓦群是 $S_5$，而 $S_5$ 不可解，所以**不存在**用系数与根号表示一般五次方程根的公式（Abel–Ruffini 定理）。这就是「群不可解 $\\Rightarrow$ 方程无根式解」这一方向的用法，它是「根式可解 $\\Rightarrow$ 群可解」的逆否命题——把蕴含方向写反是这一主题最常见的错误。对比之下，$S_2, S_3, S_4$ 都可解，分别对应二次求根公式、卡尔达诺三次公式与费拉里四次公式：五次是第一个失败次数。还要注意「一般」二字：个别五次方程仍可用根式解（例如 $x^5 - 2$ 的伽罗瓦群是 20 阶可解群），不可解性说的是通用公式不存在；下文例题 $x^5 - 4x + 2$ 给出一个具体的无根式解方程。",
+    "definitionEn": "The failure of commutativity is measured by the **commutator** $[a, b] = aba^{-1}b^{-1}$: $[a,b] = e$ iff $a$ and $b$ commute. The subgroup generated by all commutators, $G' = [G, G]$, is normal and is the **smallest** normal subgroup with abelian quotient; $G/G'$ is the largest abelian quotient of $G$. Iterating produces the **derived series** $G = G^{(0)} \\trianglerighteq G^{(1)} = G' \\trianglerighteq G^{(2)} = G'' \\trianglerighteq \\cdots$, where $G^{(k+1)} = [G^{(k)}, G^{(k)}]$. A group $G$ is **solvable** if $G^{(n)} = \\{e\\}$ for some $n$; equivalently, there is a chain $G = G_0 \\trianglerighteq G_1 \\trianglerighteq \\cdots \\trianglerighteq G_n = \\{e\\}$ whose successive quotients are abelian.\n\nAbelian groups are solvable ($G' = \\{e\\}$), and so is $S_3$, whose derived series is $S_3 \\trianglerighteq A_3 \\trianglerighteq \\{e\\}$. The symmetric groups turn at $n = 5$: $S_n' = A_n$ for $n \\ge 3$, while $A_5$ is **simple** (no nontrivial proper normal subgroup) and non-abelian, so $A_5' = A_5$ — no number of commutators shrinks it further. The derived series $S_5 \\trianglerighteq A_5 = A_5 = \\cdots$ stalls at $A_5$ and never reaches $\\{e\\}$, so $S_5$ is not solvable; the same argument works for every $n \\ge 5$ (all $A_n$, $n \\ge 5$, are simple and non-abelian; $A_5$ of order 60 is the smallest).\n\nWhy do groups decide whether equations are solvable by radicals? Let $F$ have **characteristic $0$** (say $F = \\mathbb{Q}$), let $f \\in F[x]$ have splitting field $E$. One says $f$ is **solvable by radicals** if its roots can be obtained from the coefficients using finitely many field operations and extractions of n-th roots; precisely, there exists a **radical tower** $F = F_0 \\subseteq F_1 \\subseteq \\cdots \\subseteq F_m$ with $F_i = F_{i-1}(\\alpha_i)$ and $\\alpha_i^{n_i} \\in F_{i-1}$, such that all roots of $f$ lie in $F_m$. **Galois's criterion**: over a field of characteristic 0, $f$ is solvable by radicals $\\iff \\operatorname{Gal}(f) = \\operatorname{Gal}(E/F)$ is a solvable group. One side asks whether a formula may contain root signs, the other whether a derived series reaches the identity — that translation is the main theorem of Galois theory.\n\nSo the quintic's fate is decided by $S_5$: the general quintic (coefficients treated as indeterminates, or any quintic without special structure) has Galois group $S_5$, which is not solvable; hence **no formula using radicals and the coefficients can solve the general quintic** (Abel–Ruffini). This uses the direction unsolvable group $\\Rightarrow$ no radical solution, the contrapositive of solvable by radicals $\\Rightarrow$ solvable group; reversing that implication is the classic mistake here. By contrast $S_2, S_3, S_4$ are solvable, matching the quadratic formula and the formulas of Cardano (cubic) and Ferrari (quartic): degree 5 is the first failure. The word general matters: some particular quintics are still solvable by radicals (e.g. $x^5 - 2$, whose Galois group has order 20 and is solvable). The example below, $x^5 - 4x + 2$, is a concrete quintic with no radical solution.",
+    "formulas": [
+      {
+        "latex": "[a, b] = aba^{-1}b^{-1},\\qquad G' = [G, G] = \\langle \\{[a, b] : a, b \\in G\\} \\rangle",
+        "note": "换位子度量交换性的缺失（$[a,b] = e$ 当且仅当 $a$、$b$ 交换）；$G'$ 是使 $G/G'$ 交换的最小正规子群。",
+        "noteEn": "Commutators measure the failure of commutativity ([a,b] = e iff a, b commute); G' is the smallest normal subgroup with abelian quotient."
+      },
+      {
+        "latex": "G^{(0)} = G,\\qquad G^{(k+1)} = [G^{(k)}, G^{(k)}]\\qquad (k \\ge 0)",
+        "note": "导出列的定义：不断取换位子群；每一步 $G^{(k+1)}$ 都正规于 $G$。",
+        "noteEn": "The derived series: keep taking commutator subgroups; each G^{(k+1)} is normal in G."
+      },
+      {
+        "latex": "G \\text{ 可解} \\iff \\exists\\, n:\\ G^{(n)} = \\{e\\}",
+        "note": "可解群的定义；等价于存在商群皆为交换群的群链（例如 $S_3 \\trianglerighteq A_3 \\trianglerighteq \\{e\\}$）。",
+        "noteEn": "Definition of solvability, equivalent to the existence of a subnormal chain with abelian factors (e.g. S₃ ⊵ A₃ ⊵ {e})."
+      },
+      {
+        "latex": "S_n' = A_n\\quad (n \\ge 3),\\qquad A_n' = A_n\\quad (n \\ge 5)",
+        "note": "对称群的导出列在 $A_n$ 停住：$S_5 \\trianglerighteq A_5 = A_5 = \\cdots$，故 $n \\ge 5$ 时 $S_n$ 不可解。",
+        "noteEn": "The derived series of S_n stalls at A_n: S₅ ⊵ A₅ = A₅ = ⋯, so S_n is not solvable for n ≥ 5."
+      },
+      {
+        "latex": "f \\text{ 根式可解} \\iff \\operatorname{Gal}(E/F) \\text{ 可解}\\qquad (\\operatorname{char} F = 0)",
+        "note": "伽罗瓦判据（特征 0，条件不能省）：一般五次方程的群是 $S_5$，不可解 $\\Rightarrow$ 无根式公式（Abel–Ruffini）。",
+        "noteEn": "Galois's criterion (characteristic 0): radical solvability is equivalent to solvability of the Galois group; the general quintic has group S₅, hence no radical formula."
+      }
+    ],
+    "properties": [
+      "可解性的封闭性质：交换群可解；可解群的子群与商群可解；若 $N \\trianglelefteq G$ 且 $N$ 与 $G/N$ 都可解，则 $G$ 可解——「可解性的三段论」。",
+      "对称群的界线：$S_n$ 可解 $\\iff n \\le 4$。$A_5$（60 元）是最小的非交换单群；单且非交换的群必不可解，因为导出列第一步就原地不动：$G' = G \\ne \\{e\\}$。",
+      "换位子群的极小性：$G'$ 是所有使 $G/N$ 交换的正规子群 $N$ 中最小的（即 $G' \\subseteq N$ 对一切这样的 $N$ 成立）；$G$ 交换 $\\iff G' = \\{e\\}$；$G/G'$ 是 $G$ 的最大交换商。",
+      "方向纪律：根式可解 $\\Rightarrow$ 伽罗瓦群可解（Abel–Ruffini 方向）；特征 $0$ 时反向也成立（伽罗瓦的工作），合起来才是充要条件。用不可解群只能推出「无根式解」这种否定性结论——把蕴含方向写反是这一主题最常见的错误。",
+      "「一般」与「个别」：一般五次方程没有通用根式公式；个别方程如 $x^5 - 2$（伽罗瓦群是 20 阶可解群 $\\mathbb{Z}/5 \\rtimes \\mathbb{Z}/4$）仍可根式求解。判据是「群可解」，而不是「次数 $\\ge 5$」。"
+    ],
+    "propertiesEn": [
+      "Closure properties: abelian groups are solvable; subgroups and quotients of solvable groups are solvable; if N ⊴ G with both N and G/N solvable, then G is solvable.",
+      "The symmetric groups: S_n is solvable iff n ≤ 4. A₅ (order 60) is the smallest non-abelian simple group, and a simple non-abelian group is never solvable, since its derived series is stuck at once: G' = G ≠ {e}.",
+      "Minimality of the commutator subgroup: G' is the smallest normal subgroup N with G/N abelian (G' ⊆ N for every such N); G is abelian iff G' = {e}, and G/G' is the largest abelian quotient.",
+      "Direction discipline: solvable by radicals implies a solvable Galois group (Abel–Ruffini); over characteristic 0 the converse also holds (Galois), so together they form an equivalence. A non-solvable group can only give the negative conclusion of no radical solution.",
+      "General vs individual: the general quintic has no radical formula, yet particular quintics such as x⁵ − 2 remain solvable by radicals (its Galois group Z/5 ⋊ Z/4 of order 20 is solvable). Solvability depends on the group, not on the degree being ≥ 5."
+    ],
+    "examples": [
+      {
+        "problem": "计算 $S_3$、$S_4$、$S_5$ 的导出列，并判断哪些可解。",
+        "solution": "**$S_3$（6 元，可解）。** 直接算一个换位子：$[(12), (13)] = (12)(13)(12)(13) = (123)$（按右到左复合），所以 $S_3' \\ne \\{e\\}$；另一方面 $S_3/A_3 \\cong \\mathbb{Z}/2$ 交换，故 $S_3' \\subseteq A_3$，而 $A_3$（3 元）的非平凡子群只有自身，所以 $S_3' = A_3$。$A_3$ 交换，$A_3' = \\{e\\}$。导出列：$S_3 \\trianglerighteq A_3 \\trianglerighteq \\{e\\}$，$S_3$ 可解。\n\n**$S_4$（24 元，可解）。** 同样 $S_4/A_4 \\cong \\mathbb{Z}/2$ 交换给 $S_4' \\subseteq A_4$；又换位子 $[(12), (23)] = (132)$ 非平凡，且所有 3-循环在 $S_4$ 中共轭、生成 $A_4$，故 $A_4 \\subseteq S_4'$，于是 $S_4' = A_4$。再算 $A_4$：商 $A_4/V_4 \\cong \\mathbb{Z}/3$（$V_4 = \\{e, (12)(34), (13)(24), (14)(23)\\}$）交换，故 $A_4' \\subseteq V_4$；$A_4$ 非交换给 $A_4' \\ne \\{e\\}$；若 $|A_4'| = 2$，则 $A_4$ 有一个 2 阶正规子群，但 $V_4$ 中任何 2 阶子群在 $A_4$ 中都不正规（$(12)(34)$ 被 $(123)$ 共轭成 $(14)(23)$），矛盾——所以 $A_4' = V_4$。$V_4$ 交换，$V_4' = \\{e\\}$。导出列：$S_4 \\trianglerighteq A_4 \\trianglerighteq V_4 \\trianglerighteq \\{e\\}$，$S_4$ 可解。\n\n**$S_5$（120 元，不可解）。** $S_5' = A_5$（60 元）；$A_5$ 单且非交换，故 $A_5' = A_5$：导出列 $S_5 \\trianglerighteq A_5 = A_5 = \\cdots$ 永远停在 $A_5$，到不了 $\\{e\\}$，$S_5$ 不可解。（这可直接解释为何三次、四次方程有根式公式，而五次没有。）\n\n验算：用穷举法在 3、4、5 个字母的全排列上计算换位子群的闭包，得到阶序列 $6 \\to 3 \\to 1$、$24 \\to 12 \\to 4 \\to 1$、$120 \\to 60 \\to 60$，与手算完全一致；并逐一检查 $A_5$ 的全部子群，确认除 $\\{e\\}$ 与自身外没有正规子群（即 $A_5$ 单）。"
+      },
+      {
+        "problem": "证明 $x^5 - 4x + 2$ 不能用根式求解。",
+        "solution": "**第一步：不可约。** 对素数 $2$ 用 Eisenstein 判别法：除首项系数 1 外，中间系数 $0, 0, 0, -4$ 与常数项 $2$ 全被 2 整除，而 $2$ 不被 $2^2 = 4$ 整除，故 $f = x^5 - 4x + 2$ 在 $\\mathbb{Q}$ 上不可约。不可约多项式的根在伽罗瓦群的作用下被传递置换，所以 $G = \\operatorname{Gal}(f)$ 在 5 个根上**传递**。\n\n**第二步：恰有 3 个实根。** $f'(x) = 5x^4 - 4$，临界点为 $\\pm t$，$t = (4/5)^{1/4} \\approx 0.945742$。局部极大 $f(-t) = 2 + \\frac{16}{5}t \\approx 5.026 > 0$，局部极小 $f(t) = 2 - \\frac{16}{5}t \\approx -1.026 < 0$（把 $x^4 = 4/5$、$x^5 = (4/5)t$ 代入即得）。于是 $f$ 在 $(-\\infty, -t]$ 上从 $-\\infty$ 增到 $5.026$，在 $[-t, t]$ 上降到 $-1.026$，在 $[t, \\infty)$ 上再增到 $+\\infty$：恰有 3 个实根（数值上约为 $-1.5185$、$0.5085$、$1.2436$）。符号核对：$f(-2) = -22$、$f(-1) = 5$、$f(0) = 2$、$f(1) = -1$、$f(2) = 26$，中间变号三次 ✓。剩下 2 个根是一对非实共轭复根（约 $-0.1168 \\pm 1.4384\\,\\mathrm{i}$）。\n\n**第三步：群是对称群。** 复共轭诱导分裂域的一个自同构 $\\sigma \\in G$：它固定 3 个实根，把一对非实共轭根互换，因此在 5 个根上的作用是一个**对换**。现在用两个标准事实：$G$ 传递且次数 5 是素数，所以 $G$ 的作用**本原**（任何块系的大小必须整除 5，只能是 1 或 5）；而本原群若含对换必为全对称群（Jordan 定理）。故 $G \\cong S_5$，从而分裂域次数 $[E:\\mathbb{Q}] = |G| = 120$。\n\n**第四步：不可解。** $S_5$ 不可解（上一题）。由伽罗瓦判据的**逆否形式**：若 $f$ 可用根式解，则 $\\operatorname{Gal}(f)$ 必可解；现在群不可解，故 $f = x^5 - 4x + 2$ 不能用根式求解。∎ 注意方向的用法——是「群不可解 $\\Rightarrow$ 无根式解」，绝不能说成「有根式解推不出群可解」。\n\n验算：不可约性、临界值 $f(\\pm t)$ 的符号、$f$ 在 $-2, -1, 0, 1, 2$ 处的符号、以及 5 个根的数值（3 实 2 复、成共轭对）均已逐一计算核对。"
+      }
+    ],
+    "tags": [
+      "可解群",
+      "换位子群",
+      "导出列",
+      "根式扩张",
+      "五次方程"
+    ],
+    "links": [
+      "galois-theory-intro",
+      "symmetric-alternating-groups",
+      "group-homomorphism-quotient",
+      "lagrange-theorem",
+      "field-extension-algebraic"
+    ]
+  }
+]

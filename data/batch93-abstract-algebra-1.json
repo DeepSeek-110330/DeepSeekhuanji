@@ -1,0 +1,379 @@
+[
+  {
+    "id": "group-definition-examples",
+    "title": "群的定义与例子",
+    "titleEn": "Group: Definition and Examples",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "群是带结合律、单位元与逆元的运算结构（不要求交换律）；Zₙ、Sₙ、GLₙ 与四元数群 Q₈ 是标准例子。",
+    "summaryEn": "A group is a set with an associative operation, an identity and inverses (commutativity is not required); Zₙ, Sₙ, GLₙ and the quaternion group Q₈ are the standard examples.",
+    "definition": "设 $G$ 是一个非空集合，其上定义了一个二元运算（写成乘法 $ab$ 或加法 $a + b$）。若下面四条公理全部成立，就称 $G$（连同这个运算）是一个**群**：**封闭性**——对任意 $a, b \\in G$ 有 $ab \\in G$；**结合律**——$(ab)c = a(bc)$ 对任意 $a, b, c \\in G$ 成立；**单位元**——存在 $e \\in G$，使 $ea = ae = a$ 对一切 $a \\in G$ 成立；**逆元**——对每个 $a \\in G$，存在 $a^{-1} \\in G$ 使 $aa^{-1} = a^{-1}a = e$。四条公理里**没有交换律**：$ab$ 与 $ba$ 一般不相等，这正是群论与中学代数最大的不同。若额外有 $ab = ba$ 对一切 $a, b$ 成立，就叫**阿贝尔群**（交换群）。单位元与每个逆元都唯一；$|G|$（元素个数）称为**群的阶**，可以是有限或无穷。\n\n标准例子成串出现。**数系**：$(\\mathbb{Z}, +)$、$(\\mathbb{Q}, +)$、$(\\mathbb{R}, +)$ 都是无限阿贝尔群；模 n 加法群 $(\\mathbb{Z}/n\\mathbb{Z}, +)$ 是 n 阶循环群，通常记作 $\\mathbb{Z}_n$。乘法方面，模 n 的**可逆元**全体 $(\\mathbb{Z}/n\\mathbb{Z})^{\\times} = \\{a : \\gcd(a, n) = 1\\}$ 在乘法下成群（可逆元之积仍可逆），阶为 $\\varphi(n)$；例如 $(\\mathbb{Z}/5\\mathbb{Z})^{\\times} = \\{1, 2, 3, 4\\}$ 是 4 阶循环群。**置换**：n 个元素的一切置换在复合运算下构成**对称群** $S_n$，$|S_n| = n!$；$S_3$ 有 6 个元素，是最小的非阿贝尔群。**矩阵**：可逆矩阵全体 $GL_n(\\mathbb{R}) = \\{A \\in M_n(\\mathbb{R}) : \\det A \\neq 0\\}$ 在矩阵乘法下成群，$n \\ge 2$ 时非阿贝尔；行列式为 1 的矩阵构成子群 $SL_n(\\mathbb{R})$。**四元数**：$Q_8 = \\{\\pm 1, \\pm i, \\pm j, \\pm k\\}$ 在 $i^2 = j^2 = k^2 = ijk = -1$ 确定的乘法下成群，是 8 阶非阿贝尔群。\n\n为什么值得抽象地定义「群」？因为这四条公理已经足以推出大量共同的结构定理——消去律、幂法则、子群、同态、群作用等（后续节点逐一展开），而它们对整数、置换、矩阵、四元数一概适用。群是「对称性的语言」：任何对象（图形、方程、密码系统）的全部可逆对称操作天然构成群，于是关于它们的问题可以用同一套语言处理。幂记号照常使用：$a^m$ 表示 m 个 a 相乘，并规定 $a^0 = e$、$a^{-m} = (a^{-1})^m$。\n\n最常用的数值刻画是元素的**阶**：使 $a^m = e$ 的最小正整数 $m$ 称为 $a$ 的阶，记 $\\operatorname{ord}(a)$；若这样的 m 不存在，称 a 有无限阶。有限群中每个元素的阶都有限：无穷序列 $e, a, a^2, \\dots$ 必在有限集合中撞车（$a^i = a^j$，$i < j$），两边消去即得 $a^{j-i} = e$，某个正的幂等于 e。**阶的核心性质**：若 $a^m = e$，则 $\\operatorname{ord}(a) \\mid m$。证明用带余除法：写 $m = q\\,\\operatorname{ord}(a) + r$，其中 $0 \\le r < \\operatorname{ord}(a)$，则 $a^r = a^{m - q\\,\\operatorname{ord}(a)} = a^m \\cdot (a^{\\operatorname{ord}(a)})^{-q} = e$，由阶的最小性只能有 $r = 0$。",
+    "definitionEn": "Let $G$ be a nonempty set with a binary operation, written multiplicatively as $ab$. Then $G$ is a **group** if four axioms hold: **closure** — $ab \\in G$ for all $a, b \\in G$; **associativity** — $(ab)c = a(bc)$ for all $a, b, c \\in G$; **identity** — there is $e \\in G$ with $ea = ae = a$ for every $a \\in G$; **inverses** — for each $a \\in G$ there is $a^{-1} \\in G$ with $aa^{-1} = a^{-1}a = e$. **Commutativity is not among the axioms**: $ab$ and $ba$ generally differ, which is the main departure from school algebra. A group with $ab = ba$ for all elements is called **abelian** (commutative). The identity and every inverse are unique; $|G|$, the number of elements, is the **order** of the group, finite or infinite.\n\nExamples come in families. **Number systems**: $(\\mathbb{Z}, +)$, $(\\mathbb{Q}, +)$, $(\\mathbb{R}, +)$ are infinite abelian groups; modular addition $(\\mathbb{Z}/n\\mathbb{Z}, +)$ is the cyclic group of order n, written $\\mathbb{Z}_n$. Multiplicatively, the **units** $(\\mathbb{Z}/n\\mathbb{Z})^{\\times} = \\{a : \\gcd(a, n) = 1\\}$ form a group of order $\\varphi(n)$ (a product of units is a unit); for instance $(\\mathbb{Z}/5\\mathbb{Z})^{\\times} = \\{1, 2, 3, 4\\}$ is cyclic of order 4. **Permutations**: all permutations of n symbols form the **symmetric group** $S_n$ under composition, with $|S_n| = n!$; $S_3$, of order 6, is the smallest non-abelian group. **Matrices**: the invertible matrices $GL_n(\\mathbb{R}) = \\{A \\in M_n(\\mathbb{R}) : \\det A \\neq 0\\}$ form a group under multiplication, non-abelian for $n \\ge 2$, and the determinant-one matrices form the subgroup $SL_n(\\mathbb{R})$. **Quaternions**: $Q_8 = \\{\\pm 1, \\pm i, \\pm j, \\pm k\\}$ with multiplication determined by $i^2 = j^2 = k^2 = ijk = -1$ is a non-abelian group of order 8.\n\nWhy abstract the definition? Because the four axioms already yield a large body of common structure theory — cancellation, power laws, subgroups, homomorphisms, group actions (developed in the following nodes) — valid at once for integers, permutations, matrices and quaternions. Groups are the language of symmetry: the reversible symmetries of any object form a group, so questions about them can all be phrased in one language. Power notation is standard: $a^m$ is a multiplied m times, with $a^0 = e$ and $a^{-m} = (a^{-1})^m$.\n\nThe key numerical invariant is the **order of an element**: the least positive $m$ with $a^m = e$, written $\\operatorname{ord}(a)$; if no such m exists, a has infinite order. In a finite group every element has finite order, since the powers $e, a, a^2, \\dots$ must repeat ($a^i = a^j$ with $i < j$) and cancellation gives $a^{j-i} = e$. **The central property**: if $a^m = e$ then $\\operatorname{ord}(a) \\mid m$. Proof by division with remainder: write $m = q\\,\\operatorname{ord}(a) + r$ with $0 \\le r < \\operatorname{ord}(a)$; then $a^r = a^{m - q\\,\\operatorname{ord}(a)} = a^m (a^{\\operatorname{ord}(a)})^{-q} = e$, so minimality forces $r = 0$.",
+    "formulas": [
+      {
+        "latex": "(ab)c = a(bc),\\qquad ea = ae = a,\\qquad aa^{-1} = a^{-1}a = e",
+        "note": "群运算的三条代数公理（结合律、单位元、逆元）；封闭性属于「二元运算」的定义，而交换律不在群公理之列。",
+        "noteEn": "The three algebraic axioms (associativity, identity, inverses); closure belongs to the operation itself, and commutativity is not required."
+      },
+      {
+        "latex": "i^2 = j^2 = k^2 = ijk = -1",
+        "note": "四元数群 Q₈ = {±1, ±i, ±j, ±k} 的乘法规则：ij = k 而 ji = −k，是 8 阶非阿贝尔群的标准例子。",
+        "noteEn": "The multiplication rule of Q₈ = {±1, ±i, ±j, ±k}: ij = k but ji = −k, a standard non-abelian group of order 8."
+      },
+      {
+        "latex": "(ab)^{-1} = b^{-1}a^{-1},\\qquad (a^{-1})^{-1} = a",
+        "note": "求逆反序：乘积的逆等于各因子逆的倒序乘积；不要写成 (ab)⁻¹ = a⁻¹b⁻¹（一般不成立）。",
+        "noteEn": "Inversion reverses order: (ab)⁻¹ = b⁻¹a⁻¹, not a⁻¹b⁻¹ in general."
+      },
+      {
+        "latex": "a^m = e \\implies \\operatorname{ord}(a) \\mid m",
+        "note": "元素的阶整除任何把 a 的幂化归单位元的指数：对 m 做带余除法、用阶的最小性即证。",
+        "noteEn": "The element order divides every exponent that sends a power to the identity (division with remainder plus minimality)."
+      },
+      {
+        "latex": "|\\mathbb{Z}_n| = n,\\qquad |S_n| = n!,\\qquad |Q_8| = 8,\\qquad |(\\mathbb{Z}/n\\mathbb{Z})^{\\times}| = \\varphi(n)",
+        "note": "四个基本有限群的阶：循环群、对称群、四元数群与模 n 单位群（φ 是欧拉函数）。",
+        "noteEn": "Orders of four basic finite groups: cyclic, symmetric, quaternion, and the unit group modulo n (φ is Euler's totient)."
+      }
+    ],
+    "properties": [
+      "单位元唯一、逆元唯一：(a⁻¹)⁻¹ = a，(ab)⁻¹ = b⁻¹a⁻¹（求逆反序），e⁻¹ = e。",
+      "消去律成立：ab = ac ⟹ b = c，ba = ca ⟹ b = c；方程 ax = b 与 ya = b 各有唯一解 x = a⁻¹b、y = ba⁻¹（两者一般不相等）。",
+      "幂法则：a^(m+n) = a^m·a^n，(a^m)^n = a^(mn) 对一切整数 m、n 成立；但 (ab)^m = a^m·b^m 一般不成立——只有交换的元素才满足，非交换群中要小心。",
+      "若 a^m = e，则 ord(a) | m；有限群中每个元素的阶都有限。",
+      "阶不超过 5 的群必为阿贝尔群（阶 1、2、3、5 必循环；阶 4 只有 Z₄ 与 Z₂×Z₂ 两种，均交换），因此阶 6 的 S₃ 是最小的非阿贝尔群；非阿贝尔的典型代表还有 GLₙ(ℝ)（n ≥ 2）与 Q₈。"
+    ],
+    "propertiesEn": [
+      "The identity and all inverses are unique; (a⁻¹)⁻¹ = a and (ab)⁻¹ = b⁻¹a⁻¹ (inversion reverses order), with e⁻¹ = e.",
+      "Cancellation holds: ab = ac implies b = c, and ba = ca implies b = c; the equations ax = b and ya = b have the unique solutions x = a⁻¹b and y = ba⁻¹ (generally distinct).",
+      "Power laws: a^(m+n) = a^m·a^n and (a^m)^n = a^(mn) for all integers m, n; but (ab)^m = a^m·b^m fails in general — it needs commuting elements.",
+      "If a^m = e then ord(a) divides m; every element of a finite group has finite order.",
+      "Every group of order ≤ 5 is abelian (orders 1, 2, 3, 5 are cyclic; order 4 gives only Z₄ or Z₂×Z₂), so S₃ of order 6 is the smallest non-abelian group; GLₙ(ℝ) (n ≥ 2) and Q₈ are further standard examples."
+    ],
+    "examples": [
+      {
+        "problem": "验证 $(\\mathbb{Z}/5\\mathbb{Z})^{\\times} = \\{1, 2, 3, 4\\}$ 在模 5 乘法下构成群，求出每个元素的阶，并判断它是否为循环群。",
+        "solution": "① 封闭性：若 $5 \\nmid a$ 且 $5 \\nmid b$，由 5 是素数知 $5 \\nmid ab$，所以积仍落在集合内。② 结合律继承自整数乘法。③ 单位元是 1。④ 逆元逐一验证：$1 \\times 1 = 1$；$2 \\times 3 = 6 \\equiv 1 \\pmod 5$，故 $2^{-1} = 3$、$3^{-1} = 2$；$4 \\times 4 = 16 \\equiv 1 \\pmod 5$，故 $4^{-1} = 4$。四条公理齐全，它是一个 4 阶阿贝尔群。再求阶：$\\operatorname{ord}(1) = 1$；$2^2 = 4 \\neq 1$，$2^3 = 8 \\equiv 3 \\neq 1$，$2^4 = 16 \\equiv 1$，故 $\\operatorname{ord}(2) = 4$；$3^2 = 9 \\equiv 4 \\neq 1$，$3^3 = 27 \\equiv 2 \\neq 1$，$3^4 = 81 \\equiv 1 \\pmod 5$，故 $\\operatorname{ord}(3) = 4$；$4^2 = 16 \\equiv 1$，故 $\\operatorname{ord}(4) = 2$。因为存在 4 阶元素，群由 2 生成（$1, 2, 4, 3$ 恰是全部元素，验证：$2^1 = 2$、$2^2 = 4$、$2^3 = 3$、$2^4 = 1$），所以它是循环群。验算：$2^4 = 16 = 5 \\times 3 + 1$ ✓；$3^4 = 81 = 5 \\times 16 + 1$ ✓；$4^2 = 16 = 5 \\times 3 + 1$ ✓。各元素阶 1、4、4、2 全都整除 4——这是后续拉格朗日定理的一个缩影。"
+      },
+      {
+        "problem": "写出四元数群 $Q_8 = \\{\\pm 1, \\pm i, \\pm j, \\pm k\\}$ 各元素的阶，并用 ij 与 ji 的比较说明 Q₈ 非阿贝尔。",
+        "solution": "乘法规则：$i^2 = j^2 = k^2 = -1$，$ij = k$、$jk = i$、$ki = j$，而 $ji = -k$、$kj = -i$、$ik = -j$；1 与 −1 和所有元素交换。① 求阶：1 是单位元，$\\operatorname{ord}(1) = 1$；$(-1)^2 = 1$ 且 $-1 \\neq 1$，故 $\\operatorname{ord}(-1) = 2$；$i^2 = -1 \\neq 1$，$i^4 = (i^2)^2 = 1$，故 $\\operatorname{ord}(i) = 4$；同理 $(-i)^2 = -1$、$(-i)^4 = 1$，故 $\\operatorname{ord}(-i) = 4$；j 与 k 完全对称，$\\operatorname{ord}(\\pm j) = \\operatorname{ord}(\\pm k) = 4$。② 非交换：$ij = k$ 而 $ji = -k$，两个结果差一个符号；因为四个虚单位 $\\pm i, \\pm j, \\pm k$ 互不相同，$k \\neq -k$，所以 $ij \\neq ji$，Q₈ 非阿贝尔。③ 顺带验证：所有元素的阶 1、2、4 都整除 $|Q_8| = 8$，与「元素阶整除群阶」一致。Q₈ 与正方形对称群 $D_4$ 一样是 8 阶非阿贝尔群的典型代表；它也是四元数体 $a + bi + cj + dk$ 中 8 个单位组成的乘法群。"
+      }
+    ],
+    "tags": [
+      "群",
+      "阿贝尔群",
+      "置换群",
+      "四元数群"
+    ],
+    "links": [
+      "subgroup-coset",
+      "group-homomorphism-quotient",
+      "symmetric-alternating-groups",
+      "matrix-groups"
+    ]
+  },
+  {
+    "id": "subgroup-coset",
+    "title": "子群与陪集",
+    "titleEn": "Subgroups and Cosets",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "子群是自身构成群的非空子集（判别法：非空且 ab⁻¹ 封闭）；左陪集 aH 把群划分成与 H 等大的块，其个数即指数。",
+    "summaryEn": "A subgroup is a nonempty subset that is a group itself (test: nonempty and closed under ab⁻¹); left cosets aH partition the group into equal-size blocks, counted by the index.",
+    "definition": "设 $H$ 是群 $G$ 的一个**非空子集**。若 $H$ 在 $G$ 的运算下自身构成群，就称 $H$ 是 $G$ 的**子群**，记 $H \\le G$。由于结合律自动从 G 继承，检验子群不必逐条验证公理，只需两条闭性。**子群判别法（两步版）**：H 非空；对乘法封闭（$a, b \\in H \\Rightarrow ab \\in H$）；对求逆封闭（$a \\in H \\Rightarrow a^{-1} \\in H$）。**一步版**更紧凑：H 非空，且对任意 $a, b \\in H$ 有 $ab^{-1} \\in H$。一步版确实够用：由非空取 $a \\in H$ 并令 $b = a$，得 $e = aa^{-1} \\in H$；再取 $a = e$，得 $b^{-1} \\in H$；最后把 b 换成 $b^{-1}$，得 $ab = a(b^{-1})^{-1} \\in H$。含单位元与逆封闭都是「免费」推出的，不必单独验证。任何群都有**平凡子群** $\\{e\\}$ 与 $G$ 本身，其余子群称为**真子群**。\n\n子群的例子：$n\\mathbb{Z} = \\{nk : k \\in \\mathbb{Z}\\} \\le (\\mathbb{Z}, +)$；偶置换全体 $A_n \\le S_n$；行列式为 1 的矩阵 $SL_n(\\mathbb{R}) \\le GL_n(\\mathbb{R})$。循环群 $\\mathbb{Z}_n$（模 n 加法群）的子群结构特别干净：**Z_n 的子群与 n 的正因数一一对应**。一方面每个子群都形如 $\\langle m \\rangle = \\{0, m, 2m, \\dots\\}$（m 的倍数），其阶为 $n/\\gcd(m, n)$；另一方面对每个正因数 $d \\mid n$，恰有一个 d 阶子群，就是 $\\langle n/d \\rangle = \\{0, \\frac{n}{d}, \\frac{2n}{d}, \\dots, \\frac{(d-1)n}{d}\\}$。例如 $\\mathbb{Z}_{12}$ 的 6 个正因数 1、2、3、4、6、12 恰对应 6 个子群：$\\{0\\}$、$\\langle 6 \\rangle$、$\\langle 4 \\rangle$、$\\langle 3 \\rangle$、$\\langle 2 \\rangle$ 与 $\\mathbb{Z}_{12}$ 自身，阶分别为 1、2、3、4、6、12。\n\n**陪集**是子群的平移。设 $H \\le G$、$a \\in G$：**左陪集** $aH = \\{ah : h \\in H\\}$，**右陪集** $Ha = \\{ha : h \\in H\\}$。两者**一般并不相等**，必须分开处理（左右一致恰好是「正规」的含义）。基本事实一串：映射 $h \\mapsto ah$ 是 H 到 aH 的双射（逆映射 $x \\mapsto a^{-1}x$），故 $|aH| = |H|$；$aH = H$ 当且仅当 $a \\in H$；两个左陪集要么重合要么不交，且 $aH = bH \\iff b^{-1}a \\in H$（右陪集方向相反：$Ha = Hb \\iff ab^{-1} \\in H$）。由于 $a \\in aH$，全体左陪集构成 G 的一个**划分** $G = \\bigsqcup_i a_iH$。左陪集的个数叫 H 在 G 中的**指数**，记 $[G:H]$；映射 $aH \\mapsto Ha^{-1}$ 给出左右陪集之间的一一对应，所以左右个数相同，指数无歧义。\n\n当每个左陪集都与对应的右陪集重合时，子群带有特殊的对称性：若对一切 $a \\in G$ 有 $aH = Ha$，就称 H 是 G 的**正规子群**，记 $H \\trianglelefteq G$；等价地，$aHa^{-1} = H$ 对一切 a 成立（其实只需验证 $aHa^{-1} \\subseteq H$，把 a 换成 $a^{-1}$ 即得反向包含）。交换群的每个子群都正规；**指数为 2 的子群必正规**（此时左右陪集都只能是 H 与它的补集，自然重合）。正规性是「能否做商群」的门槛：下一节点将看到，商群的乘法只在正规子群上良定义。例如在 $S_3$ 中，$A_3 = \\{e, (123), (132)\\}$ 正规，而 $\\{e, (12)\\}$ 不正规——例题会算出 $(13)H$ 与 $H(13)$ 确实不同。",
+    "definitionEn": "Let $H$ be a **nonempty subset** of a group $G$. If $H$ is itself a group under the inherited operation, it is a **subgroup**, written $H \\le G$. Associativity is inherited automatically, so only two closures need checking. **Subgroup test (two-step)**: H is nonempty, closed under products ($a, b \\in H \\Rightarrow ab \\in H$) and closed under inverses ($a \\in H \\Rightarrow a^{-1} \\in H$). **One-step test**: H is nonempty and $ab^{-1} \\in H$ for all $a, b \\in H$. The one-step version suffices: pick $a \\in H$ and put $b = a$, giving $e = aa^{-1} \\in H$; then $a = e$ gives $b^{-1} \\in H$; finally replacing b by $b^{-1}$ gives $ab = a(b^{-1})^{-1} \\in H$. The identity and inverse closure come for free. Every group has the **trivial subgroups** $\\{e\\}$ and $G$ itself; all others are **proper**.\n\nExamples: $n\\mathbb{Z} = \\{nk : k \\in \\mathbb{Z}\\} \\le (\\mathbb{Z}, +)$; the even permutations $A_n \\le S_n$; the determinant-one matrices $SL_n(\\mathbb{R}) \\le GL_n(\\mathbb{R})$. Subgroups of the cyclic group $\\mathbb{Z}_n$ (modular addition) are especially clean: **subgroups of Z_n correspond one-to-one with the positive divisors of n**. Every subgroup has the form $\\langle m \\rangle = \\{0, m, 2m, \\dots\\}$, whose order is $n/\\gcd(m, n)$; conversely each divisor $d \\mid n$ carries exactly one subgroup of order d, namely $\\langle n/d \\rangle = \\{0, \\frac{n}{d}, \\frac{2n}{d}, \\dots, \\frac{(d-1)n}{d}\\}$. For example the six divisors 1, 2, 3, 4, 6, 12 of 12 correspond to the six subgroups of $\\mathbb{Z}_{12}$: $\\{0\\}$, $\\langle 6 \\rangle$, $\\langle 4 \\rangle$, $\\langle 3 \\rangle$, $\\langle 2 \\rangle$ and $\\mathbb{Z}_{12}$ itself, of orders 1, 2, 3, 4, 6, 12.\n\nA **coset** is a translate of a subgroup. For $H \\le G$ and $a \\in G$: the **left coset** is $aH = \\{ah : h \\in H\\}$ and the **right coset** is $Ha = \\{ha : h \\in H\\}$. They are in general **different** and must be kept apart (agreement of left and right is exactly normality). Basic facts: the map $h \\mapsto ah$ is a bijection $H \\to aH$ (inverse $x \\mapsto a^{-1}x$), so $|aH| = |H|$; $aH = H$ iff $a \\in H$; two left cosets are either equal or disjoint, with $aH = bH \\iff b^{-1}a \\in H$ (right cosets reverse the order: $Ha = Hb \\iff ab^{-1} \\in H$). Since $a \\in aH$, the left cosets **partition** G: $G = \\bigsqcup_i a_iH$. Their number is the **index** $[G:H]$; the bijection $aH \\mapsto Ha^{-1}$ matches left and right cosets, so both counts agree.\n\nWhen every left coset equals the corresponding right coset — $aH = Ha$ for all $a \\in G$ — the subgroup is **normal**, written $H \\trianglelefteq G$; equivalently $aHa^{-1} = H$ for all a (checking $aHa^{-1} \\subseteq H$ suffices, since replacing a by $a^{-1}$ gives the reverse inclusion). Every subgroup of an abelian group is normal, and **every subgroup of index 2 is normal** (the only cosets are H and its complement on either side). Normality is the price of forming quotient groups, as the next node shows. For instance in $S_3$ the subgroup $A_3 = \\{e, (123), (132)\\}$ is normal, while $\\{e, (12)\\}$ is not: the example computes the two genuinely different cosets $(13)H$ and $H(13)$.",
+    "formulas": [
+      {
+        "latex": "H \\le G \\iff H \\neq \\varnothing \\ \\text{且}\\ \\forall\\, a, b \\in H:\\ ab^{-1} \\in H",
+        "note": "一步子群判别法：非空 + 对 ab⁻¹ 封闭；它同时给出含单位元、逆封闭与乘法封闭。",
+        "noteEn": "One-step subgroup test: nonempty and closed under ab⁻¹, which already yields identity, inverses and products."
+      },
+      {
+        "latex": "aH = bH \\iff b^{-1}a \\in H,\\qquad Ha = Hb \\iff ab^{-1} \\in H",
+        "note": "左、右陪集相等判别式顺序相反（左用 b⁻¹a，右用 ab⁻¹），不能混用。",
+        "noteEn": "Equality criteria for left and right cosets have opposite orders; do not mix them up."
+      },
+      {
+        "latex": "|aH| = |H|,\\qquad G = \\bigsqcup_{i=1}^{[G:H]} a_iH",
+        "note": "平移 h ↦ ah 是双射，故陪集与子群等势；全体左陪集构成 G 的划分，块数就是指数 [G:H]。",
+        "noteEn": "Translation is a bijection, so |aH| = |H|; the left cosets partition G into [G:H] blocks."
+      },
+      {
+        "latex": "H \\trianglelefteq G \\iff aH = Ha\\ \\ \\forall a \\in G \\iff aHa^{-1} = H\\ \\ \\forall a \\in G",
+        "note": "正规子群的等价刻画；实际验证时可只证 aHa⁻¹ ⊆ H（把 a 换成 a⁻¹ 得反向包含）。",
+        "noteEn": "Equivalent definitions of normality; checking aHa⁻¹ ⊆ H suffices."
+      },
+      {
+        "latex": "\\langle m \\rangle = \\{0, m, 2m, \\ldots\\} \\le \\mathbb{Z}_n,\\qquad |\\langle m \\rangle| = \\frac{n}{\\gcd(m, n)}",
+        "note": "Zₙ 中由 m 生成的子群及其阶；由此每个因数 d | n 恰有一个 d 阶子群 ⟨n/d⟩，子群与因数一一对应。",
+        "noteEn": "The cyclic subgroup generated by m in Zₙ and its order; hence subgroups correspond to divisors d | n, the unique one of order d being ⟨n/d⟩."
+      }
+    ],
+    "properties": [
+      "子群判别法：非空子集 H 是子群当且仅当对任意 a、b ∈ H 有 ab⁻¹ ∈ H；两步版等价描述是「非空 + 乘法封闭 + 逆封闭」。「含单位元」由判别法自动推出，不必单独验证。",
+      "陪集的归属与相等：a ∈ aH，e ∈ H；aH = H ⟺ a ∈ H；aH = bH ⟺ b⁻¹a ∈ H；不满足时两陪集不交（右陪集判别式是 ab⁻¹ ∈ H，顺序相反）。",
+      "划分与等势：全体左陪集两两不交、并集为 G，且每块与 H 等势（h ↦ ah 是双射）；左右陪集由 aH ↦ Ha⁻¹ 一一对应，个数同为指数 [G:H]。",
+      "子群与交并：K ≤ H、H ≤ G 推出 K ≤ G；任意一族子群的交集仍是子群；但两个子群的并一般不是子群——Z₁₂ 中 ⟨3⟩ = {0,3,6,9} 与 ⟨4⟩ = {0,4,8} 的并缺少 3 + 4 = 7。",
+      "正规子群的充分条件与例子：交换群的每个子群都正规；指数 2 的子群必正规；同态的核必正规（反之每个正规子群都是投影的核）。S₃ 中 A₃ = {e, (123), (132)} 正规，而 {e, (12)} 不正规。"
+    ],
+    "propertiesEn": [
+      "Subgroup test: a nonempty subset H is a subgroup iff ab⁻¹ ∈ H for all a, b ∈ H; equivalently, H is nonempty, closed under products and closed under inverses. The identity comes for free.",
+      "Membership and equality: a ∈ aH and e ∈ H; aH = H iff a ∈ H; aH = bH iff b⁻¹a ∈ H, and otherwise the cosets are disjoint (for right cosets the criterion is ab⁻¹ ∈ H).",
+      "Partition and equal size: the left cosets are pairwise disjoint with union G, and each has the same size as H (h ↦ ah is a bijection); the bijection aH ↦ Ha⁻¹ matches left and right cosets, both counted by the index [G:H].",
+      "Subgroups, intersections and unions: K ≤ H and H ≤ G imply K ≤ G; any intersection of subgroups is a subgroup; but the union of two subgroups usually is not — in Z₁₂ the union of ⟨3⟩ = {0,3,6,9} and ⟨4⟩ = {0,4,8} misses 3 + 4 = 7.",
+      "Normal subgroup facts and examples: every subgroup of an abelian group is normal; every subgroup of index 2 is normal; kernels of homomorphisms are normal (conversely every normal subgroup is a projection kernel). In S₃, A₃ = {e, (123), (132)} is normal while {e, (12)} is not."
+    ],
+    "examples": [
+      {
+        "problem": "验证 $H = \\{0, 3, 6, 9\\}$ 是 $(\\mathbb{Z}_{12}, +)$ 的 4 阶子群，写出全部左陪集，并验证它们恰好构成 Z₁₂ 的一个划分。",
+        "solution": "H 恰是 3 的倍数模 12：0、3、6、9，即 $H = \\langle 3 \\rangle$。① 子群验证用一步判别法（加法群把 $ab^{-1}$ 读作 $a - b$）：H 非空；任取 H 中两个元素 m、n（都是 3 的倍数），$m - n$ 仍是 3 的倍数，模 12 之后仍是 3 的倍数（因为 12 也是 3 的倍数），故 $m - n \\in H$。所以 $H \\le \\mathbb{Z}_{12}$，$|H| = 4$。② 左陪集（加法记号写成 $a + H$）：$0 + H = \\{0, 3, 6, 9\\}$；$1 + H = \\{1, 4, 7, 10\\}$；$2 + H = \\{2, 5, 8, 11\\}$。继续列举：$3 + H = 0 + H$（因为 $3 \\in H$），依此类推只有这 3 个不同的陪集。③ 划分验证：三个陪集两两不交，并起来共 $4 + 4 + 4 = 12$ 个元素，恰是全部 Z₁₂；每个整数 k 按 k 除以 3 的余数 0、1、2 落入相应陪集。于是 $[\\mathbb{Z}_{12} : H] = 3$，且 $|H| \\times [\\mathbb{Z}_{12}:H] = 4 \\times 3 = 12 = |\\mathbb{Z}_{12}|$——这正是下一节的拉格朗日定理。"
+      },
+      {
+        "problem": "在 $S_3$ 中取 $H = \\{e, (12)\\}$。验证 H 是子群，计算左右陪集，并说明 $(13)H \\neq H(13)$。",
+        "solution": "① H 是子群：$e \\in H$，$(12)^2 = e$，逆元与乘积都留在 H 中——它是由 (12) 生成的 2 阶循环子群。② 记 $S_3 = \\{e, (12), (13), (23), (123), (132)\\}$（复合约定：$\\sigma \\tau$ 表示先作用 τ 再作用 σ）。左陪集：$eH = \\{e, (12)\\}$；$(13)H = \\{(13), (13)(12)\\}$，而 $(13)(12)$ 逐点计算：$1 \\to_{(12)} 2 \\to_{(13)} 2$、$2 \\to 1 \\to 3$、$3 \\to 3 \\to 1$，即 $(13)(12) = (123)$，所以 $(13)H = \\{(13), (123)\\}$；同理 $(23)H = \\{(23), (23)(12)\\} = \\{(23), (132)\\}$（$(23)(12)$：$1 \\to 2 \\to 3$、$2 \\to 1 \\to 1$、$3 \\to 3 \\to 2$，得 (132)）。右陪集：$He = \\{e, (12)\\}$；$H(13) = \\{(13), (12)(13)\\}$，其中 $(12)(13)$：$1 \\to 3 \\to 3$、$2 \\to 2 \\to 1$、$3 \\to 1 \\to 2$，得 (132)，故 $H(13) = \\{(13), (132)\\}$。③ 对比：$(13)H = \\{(13), (123)\\} \\neq \\{(13), (132)\\} = H(13)$，左右陪集确实可以不同，H 不是正规子群。判断正规性必须比较左右陪集，不能凭直觉——S₃ 的正规子群只有 $\\{e\\}$、$A_3 = \\{e, (123), (132)\\}$ 与 $S_3$ 本身。"
+      }
+    ],
+    "tags": [
+      "子群",
+      "陪集",
+      "正规子群",
+      "指数"
+    ],
+    "links": [
+      "group-definition-examples",
+      "lagrange-theorem",
+      "group-homomorphism-quotient",
+      "symmetric-alternating-groups",
+      "quotient-space"
+    ]
+  },
+  {
+    "id": "lagrange-theorem",
+    "title": "拉格朗日定理",
+    "titleEn": "Lagrange's Theorem",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "有限群中 |G| = |H|·[G:H]、子群阶整除群阶；推论含元素阶整除群阶、费马小定理与欧拉定理，但逆命题不成立（A₄ 无 6 阶子群）。",
+    "summaryEn": "In a finite group |G| = |H|·[G:H], so subgroup orders divide the group order; consequences include element orders dividing |G| and the theorems of Fermat and Euler, while the converse fails (A₄ has no subgroup of order 6).",
+    "definition": "**拉格朗日定理**：设 $G$ 是**有限群**，$H \\le G$，则 $|G| = |H| \\cdot [G:H]$；特别地，子群的阶 $|H|$ 整除群的阶 $|G|$。证明就是数数：上一节点已经知道，全体左陪集把 G 划分成 $[G:H]$ 个两两不交的块，每块恰有 $|H|$ 个元素，于是 $|G| = |H| \\cdot [G:H]$。适用范围要记牢——**G 必须有限**：对无限群可以写出基数等式 $|G| = |H| \\cdot [G:H]$，但「整除」是关于整数的概念，此时没有意义。定理的实用价值在于反向使用：候选子群的阶必须是群阶的因数，不是因数的阶可以直接排除——想在 12 阶群里找 5 阶子群是白费力气，因为 5 不整除 12。\n\n取 $a \\in G$，它生成的**循环子群** $\\langle a \\rangle = \\{e, a, a^2, \\dots, a^{\\operatorname{ord}(a)-1}\\}$ 的阶恰为 $\\operatorname{ord}(a)$。对 $\\langle a \\rangle$ 用拉格朗日定理立得**元素阶整除群阶**：$\\operatorname{ord}(a) \\mid |G|$；取 $m = |G|$ 即得 $a^{|G|} = e$ 对每个元素成立——这是「幂次自动归位」的保证，也是计算大幂时把指数对元素阶取模的依据。例如 $\\mathbb{Z}_{12}$ 中元素的阶只能是 1、2、3、4、6、12（12 的因数），不存在 5 阶元。另一个漂亮的推论：**素数阶群必循环**——设 $|G| = p$ 为素数，取 $a \\neq e$，则 $\\operatorname{ord}(a)$ 整除 p 且大于 1，故 $\\operatorname{ord}(a) = p$，即 $\\langle a \\rangle = G$，于是 $G \\cong \\mathbb{Z}_p$。\n\n**逆命题不成立**：整除群阶的数不一定有对应阶的子群。最小的反例是交错群 $A_4$：$|A_4| = 4!/2 = 12$，它有 1、2、3、4、12 阶子群，却**没有 6 阶子群**——6 是 12 的正因数中唯一「落空」的一个（完整证明见例题，要点如下）。若 $H \\le A_4$ 且 $|H| = 6$，则 $[A_4 : H] = 2$，指数 2 的子群必正规；而正规子群对共轭封闭，必须是若干**共轭类**的并。A₄ 的共轭类大小为 1（单位元）、3（双对换）、4、4（两类 3-轮换），含单位元的类子集和只能是 1、4、5、8、9、12，凑不出 6——矛盾。所以拉格朗日定理给出的是寻找子群的**必要条件，不是充分条件**。\n\n拉格朗日定理在数论里最著名的回声是费马小定理与欧拉定理。取 $G = (\\mathbb{Z}/n\\mathbb{Z})^{\\times}$（模 n 乘法单位群，阶为 $\\varphi(n)$），对任意与 n 互素的 a，由元素阶整除群阶得 $\\operatorname{ord}(a) \\mid \\varphi(n)$，于是 $a^{\\varphi(n)} \\equiv 1 \\pmod n$，这就是**欧拉定理**。再取 n = p 为素数：$\\varphi(p) = p - 1$，便得**费马小定理** $a^{p-1} \\equiv 1 \\pmod p$（$p \\nmid a$）。两条数论基本定理，本质上是同一个群论事实的两次特化。",
+    "definitionEn": "**Lagrange's theorem**: if $G$ is a **finite group** and $H \\le G$, then $|G| = |H| \\cdot [G:H]$; in particular $|H|$ divides $|G|$. The proof is a counting argument: the left cosets partition G into $[G:H]$ disjoint blocks of exactly $|H|$ elements each, so $|G| = |H| \\cdot [G:H]$. Mind the hypothesis — **G must be finite**: for infinite groups the cardinal identity $|G| = |H| \\cdot [G:H]$ still holds, but divisibility is a statement about integers and loses its meaning. The theorem is used in reverse: the order of a subgroup must be a divisor of $|G|$, so non-divisors are ruled out at once — hunting for a subgroup of order 5 in a group of order 12 is hopeless.\n\nFor $a \\in G$ the **cyclic subgroup** $\\langle a \\rangle = \\{e, a, a^2, \\dots, a^{\\operatorname{ord}(a)-1}\\}$ has order $\\operatorname{ord}(a)$. Applying Lagrange to $\\langle a \\rangle$ yields **element orders divide the group order**: $\\operatorname{ord}(a) \\mid |G|$; with $m = |G|$ this gives $a^{|G|} = e$ for every element — the guarantee that powers return home, and the reason exponents may be reduced modulo the element order. For instance every element of $\\mathbb{Z}_{12}$ has order 1, 2, 3, 4, 6 or 12, never 5. Another elegant corollary: **a group of prime order is cyclic** — let $|G| = p$ be prime and $a \\neq e$; then $\\operatorname{ord}(a)$ divides p and exceeds 1, so $\\operatorname{ord}(a) = p$, hence $\\langle a \\rangle = G$ and $G \\cong \\mathbb{Z}_p$.\n\n**The converse fails**: a divisor of the group order need not occur as the order of a subgroup. The smallest counterexample is the alternating group $A_4$: $|A_4| = 4!/2 = 12$, and while subgroups of orders 1, 2, 3, 4 and 12 exist, there is **no subgroup of order 6** — the only divisor of 12 left unrealized (full proof in the example). Sketch: if $|H| = 6$, then $[A_4 : H] = 2$, and an index-2 subgroup is normal; a normal subgroup is closed under conjugation and therefore a union of **conjugacy classes**. The class sizes of $A_4$ are 1 (identity), 3 (double transpositions), 4 and 4 (two classes of 3-cycles); a union of classes containing the identity can have size 1, 4, 5, 8, 9 or 12 only, never 6 — contradiction. Lagrange's theorem gives a **necessary, not a sufficient** condition for the existence of subgroups.\n\nThe most famous echoes of Lagrange's theorem in number theory are Fermat's little theorem and Euler's theorem. Take $G = (\\mathbb{Z}/n\\mathbb{Z})^{\\times}$, the multiplicative unit group modulo n, of order $\\varphi(n)$. For any a coprime to n, element orders dividing the group order give $\\operatorname{ord}(a) \\mid \\varphi(n)$, hence $a^{\\varphi(n)} \\equiv 1 \\pmod n$ — **Euler's theorem**. For $n = p$ prime, $\\varphi(p) = p - 1$, yielding **Fermat's little theorem** $a^{p-1} \\equiv 1 \\pmod p$ (for $p \\nmid a$). The two classical theorems are two specializations of one group-theoretic fact.",
+    "formulas": [
+      {
+        "latex": "|G| = |H| \\cdot [G:H],\\qquad |H| \\mid |G|",
+        "note": "拉格朗日定理（G 有限）：子群阶乘指数等于群阶；对无限群只有基数等式，没有整除结论。",
+        "noteEn": "Lagrange's theorem for finite G: |G| = |H|·[G:H], so |H| divides |G|; for infinite groups only the cardinal identity survives."
+      },
+      {
+        "latex": "\\operatorname{ord}(a) \\mid |G|,\\qquad a^{|G|} = e",
+        "note": "对循环子群 ⟨a⟩ 用定理即得；计算 a 的大幂时指数可对元素阶（或 |G|）取模。",
+        "noteEn": "Apply Lagrange to ⟨a⟩; exponents can be reduced modulo the element order."
+      },
+      {
+        "latex": "|G| = p \\ \\text{为素数} \\implies G \\cong \\mathbb{Z}_p",
+        "note": "素数阶群必循环：非单位元的阶整除 p 且不为 1，只能等于 p，于是它生成整个群。",
+        "noteEn": "A group of prime order is cyclic, generated by any non-identity element."
+      },
+      {
+        "latex": "\\gcd(a, n) = 1 \\implies a^{\\varphi(n)} \\equiv 1 \\pmod n",
+        "note": "欧拉定理：对 (Z/nZ)×（阶 φ(n)）用拉格朗日定理即得；详见数论分支「欧拉定理与欧拉函数」节点。",
+        "noteEn": "Euler's theorem: Lagrange applied in the unit group of order φ(n)."
+      },
+      {
+        "latex": "p \\nmid a \\implies a^{p-1} \\equiv 1 \\pmod p",
+        "note": "费马小定理：欧拉定理取素数模（φ(p) = p − 1）的特例，初等数论与 RSA 的基石。",
+        "noteEn": "Fermat's little theorem: the prime-modulus case (φ(p) = p − 1) of Euler's theorem."
+      }
+    ],
+    "properties": [
+      "|H| 必整除 |G|，且 [G:H] = |G| / |H|；整除结论以 G 有限为前提（无限群中如 Z 与 2Z 等势，基数不提供整除信息）。",
+      "元素阶整除群阶：ord(a) | |G|，于是 a^|G| = e 对所有元素成立；反之 a^m = e 只保证 ord(a) | m（m 本身未必整除 |G|）。",
+      "素数阶群必循环：|G| = p 时 G ≅ Z_p，任意非单位元都是生成元；这是有限群分类的第一步。",
+      "指标的乘法公式：[G:K] = [G:H]·[H:K]（K ≤ H ≤ G，均有限），与 |G| = |H|·[G:H] 是同一套账本的两条记录。",
+      "逆命题不成立：A₄（|A₄| = 12）没有 6 阶子群，而 1、2、3、4、12 阶子群都存在；6 是 12 的因数中唯一落空的。找子群时「整除」只是必要条件。"
+    ],
+    "propertiesEn": [
+      "|H| divides |G|, with [G:H] = |G|/|H|; the divisibility conclusion requires G finite (e.g. Z and 2Z are equinumerous, so cardinal sizes carry no divisibility information).",
+      "Element orders divide the group order: ord(a) | |G|, hence a^|G| = e for every element; conversely a^m = e only forces ord(a) | m (m itself need not divide |G|).",
+      "Groups of prime order are cyclic: |G| = p gives G ≅ Z_p, and every non-identity element generates. This is the first step of finite group classification.",
+      "Multiplicativity of indices: [G:K] = [G:H]·[H:K] for K ≤ H ≤ G (all finite), the same bookkeeping as |G| = |H|·[G:H].",
+      "The converse fails: A₄ (order 12) has no subgroup of order 6, although subgroups of orders 1, 2, 3, 4 and 12 exist; 6 is the only divisor of 12 realized by no subgroup. Divisibility is necessary, not sufficient."
+    ],
+    "examples": [
+      {
+        "problem": "写出 $\\mathbb{Z}_{12}$ 中每个元素的阶，验证它们都是 12 的因数，并说明 Z₁₂ 中不存在 5 阶元素。",
+        "solution": "在加法群 Z₁₂ 中，元素 k 的阶是使 $mk \\equiv 0 \\pmod{12}$ 的最小正整数 m，公式为 $\\operatorname{ord}(k) = 12/\\gcd(k, 12)$。逐个计算：$\\operatorname{ord}(0) = 1$；$\\operatorname{ord}(6) = 2$；$\\operatorname{ord}(4) = \\operatorname{ord}(8) = 3$；$\\operatorname{ord}(3) = \\operatorname{ord}(9) = 4$；$\\operatorname{ord}(2) = \\operatorname{ord}(10) = 6$；$\\operatorname{ord}(1) = \\operatorname{ord}(5) = \\operatorname{ord}(7) = \\operatorname{ord}(11) = 12$。汇总：阶的集合为 $\\{1, 2, 3, 4, 6, 12\\}$，全部是 12 的因数 ✓，与「元素阶整除群阶」一致。特别地没有元素的阶为 5：若 $\\operatorname{ord}(k) = 5$，则由阶整除群阶应有 $5 \\mid 12$，而 $5 \\nmid 12$，矛盾——这也顺带说明 Z₁₂ 没有 5 阶子群（子群阶同样必须整除 12）。抽查验算：对 k = 3，$3 \\times 4 = 12 \\equiv 0$，且 3、6、9 均不 $\\equiv 0 \\pmod{12}$，故 $\\operatorname{ord}(3) = 4$ ✓；对 k = 5，5 的倍数依次为 5, 10, 3, 8, 1, 6, 11, 4, 9, 2, 7, 0，走遍全部 12 个元素、第 12 步才首次回到 0（$5 \\times 12 = 60 = 12 \\times 5$）✓。"
+      },
+      {
+        "problem": "证明交错群 $A_4$ 没有 6 阶子群。",
+        "solution": "记 A₄ 为 4 个字母上的偶置换全体，$|A_4| = 12$。其元素分三类：单位元 e（1 个）；双对换 (12)(34)、(13)(24)、(14)(23)（3 个，阶 2）；3-轮换（8 个，阶 3）。第一步：任何 6 阶子群 H 必正规——因为 $[A_4 : H] = 2$，左陪集只有 H 与 $A_4 \\setminus H$，它们同时就是右陪集，故 $aH = Ha$ 对一切 a 成立。第二步：正规子群是共轭类的并。先算共轭类：在 A₄ 的共轭下，$\\{e\\}$ 自成一类（大小 1）；三个双对换构成一类（大小 3）；8 个 3-轮换分成两类，每类 4 个。于是正规子群必须挑选若干整类，且必含 e，可能的阶是「含 1 的类子集和」：$1$、$1+3 = 4$、$1+4 = 5$、$1+3+4 = 8$、$1+4+4 = 9$、$1+3+4+4 = 12$——凑不出 6。第三步：矛盾——6 阶子群既然必正规，其阶就应出现在上述列表中，但列表中没有 6。故 A₄ 不存在 6 阶子群。∎ 补充对照：A₄ 确实有 1、2、3、4 阶子群（$V_4 = \\{e, (12)(34), (13)(24), (14)(23)\\}$ 是 4 阶正规子群；每个双对换单独生成 2 阶子群；每个 3-轮换生成 3 阶子群），唯独 6 阶缺失——「因数只是必要条件」的鲜活例子。"
+      }
+    ],
+    "tags": [
+      "拉格朗日定理",
+      "元素的阶",
+      "交错群",
+      "费马小定理"
+    ],
+    "links": [
+      "subgroup-coset",
+      "group-definition-examples",
+      "group-homomorphism-quotient",
+      "euler-totient-theorem",
+      "fermat-little-theorem",
+      "symmetric-alternating-groups"
+    ]
+  },
+  {
+    "id": "group-homomorphism-quotient",
+    "title": "群同态与商群",
+    "titleEn": "Group Homomorphisms and Quotient Groups",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "同态是保运算的映射，核必为正规子群；商群 G/N 只对正规 N 良定义，第一同构定理 G/ker φ ≅ im φ 把商与像统一。",
+    "summaryEn": "A homomorphism preserves the operation and has a normal kernel; the quotient G/N is well defined only for normal N, and the first isomorphism theorem identifies G/ker φ with im φ.",
+    "definition": "设 $(G, \\cdot)$ 与 $(H, *)$ 是群。映射 $\\varphi: G \\to H$ 若对一切 $a, b \\in G$ 满足 $\\varphi(ab) = \\varphi(a)\\varphi(b)$，就称**群同态**（两边运算都省略写成乘法）。由定义立刻推出**三条保持**：$\\varphi(e_G) = e_H$（保单位元）、$\\varphi(a^{-1}) = \\varphi(a)^{-1}$（保逆元）、$\\varphi(a^n) = \\varphi(a)^n$（保幂）——证明的套路都是「两边同乘补元素」。**像** $\\operatorname{im}\\varphi = \\{\\varphi(a) : a \\in G\\}$ 是 H 的子群；**核** $\\ker\\varphi = \\{a \\in G : \\varphi(a) = e_H\\}$ 是 G 的子群，而且更强——它是 G 的**正规子群**。正规性一行可证：对 $g \\in G$、$k \\in \\ker\\varphi$，有 $\\varphi(gkg^{-1}) = \\varphi(g)\\varphi(k)\\varphi(g)^{-1} = \\varphi(g)e_H\\varphi(g)^{-1} = e_H$，故 $gkg^{-1} \\in \\ker\\varphi$，这正是正规判据。\n\n例子遍地都是：$\\varphi: \\mathbb{Z} \\to \\mathbb{Z}_n$，$k \\mapsto k \\bmod n$（核 $n\\mathbb{Z}$）；符号同态 $\\operatorname{sgn}: S_n \\to \\{\\pm 1\\}$，把偶置换送到 1、奇置换送到 −1（核是交错群 $A_n$）；行列式 $\\det: GL_n(\\mathbb{R}) \\to \\mathbb{R}^{\\times}$（核 $SL_n(\\mathbb{R})$，值域必须取非零实数的乘法群）；$x \\mapsto e^x$ 是 $(\\mathbb{R}, +) \\to (\\mathbb{R}_{>0}, \\times)$ 的同态（甚至同构）。**同构**是双射的同态，记 $G \\cong H$；同构的两个群在群论意义上完全一样。同态的单射性完全由核控制：$\\varphi$ 是单射当且仅当 $\\ker\\varphi = \\{e_G\\}$。方向「⟹」显然；「⟸」：若 $\\varphi(a) = \\varphi(b)$，则 $\\varphi(ab^{-1}) = \\varphi(a)\\varphi(b)^{-1} = e_H$，即 $ab^{-1} \\in \\ker\\varphi = \\{e\\}$，故 $a = b$。\n\n**商群**登场。设 $N \\trianglelefteq G$，在左陪集集合 $G/N = \\{aN : a \\in G\\}$ 上定义乘法 $(aN)(bN) = (ab)N$。第一关是**良定义**：换代表元 $a' = an_1$、$b' = bn_2$（$n_1, n_2 \\in N$）后，$a'b' = a n_1 b n_2$；要把 $n_1$ 挪过 b，恰好需要正规性提供的 $b^{-1}n_1b \\in N$，于是 $a'b' = ab\\,(b^{-1}n_1b)\\,n_2 \\in abN$，乘积与代表元无关。若 N 不正规，这一步就会失败（例题给出具体反例）。第二关是逐条验证群公理：结合律继承自 G，单位元是 $eN = N$，逆元 $(aN)^{-1} = a^{-1}N$，于是 $G/N$ 成为群，称为**商群**，其阶 $|G/N| = [G:N]$（G 有限时即 $|G|/|N|$）。自然投影 $\\pi: G \\to G/N$，$\\pi(a) = aN$ 是满同态且核为 N。由此得到正规性的本质刻画：**N 正规当且仅当 N 是某个同态的核**。\n\n**第一同构定理**：对任意同态 $\\varphi: G \\to H$ 有 $G/\\ker\\varphi \\cong \\operatorname{im}\\varphi$，同构由 $a\\ker\\varphi \\mapsto \\varphi(a)$ 给出。三点验证：良定义（核中的元素被 φ 抹成单位元，更换代表元不改变结果）、单射（被 φ 抹平的恰好是核：$\\varphi(a) = \\varphi(b)$ 推出 $b^{-1}a \\in \\ker\\varphi$，即两陪集相同）、满射（像上的每个值按定义都取到）。定理把两种视角合而为一：每个商群都是某个同态的像，每个同态的像都（同构于）某个商群。当 G 有限时，两边比较阶数立得 $|G| = |\\ker\\varphi| \\cdot |\\operatorname{im}\\varphi|$。例子：$\\mathbb{Z}/n\\mathbb{Z} \\cong \\mathbb{Z}_n$；$S_n/A_n \\cong \\mathbb{Z}_2$（符号同态）；$GL_n(\\mathbb{R})/SL_n(\\mathbb{R}) \\cong \\mathbb{R}^{\\times}$（行列式）。",
+    "definitionEn": "Let $(G, \\cdot)$ and $(H, *)$ be groups. A map $\\varphi: G \\to H$ is a **homomorphism** if $\\varphi(ab) = \\varphi(a)\\varphi(b)$ for all $a, b \\in G$ (both operations written multiplicatively). Three preservations follow immediately: $\\varphi(e_G) = e_H$ (identity), $\\varphi(a^{-1}) = \\varphi(a)^{-1}$ (inverses) and $\\varphi(a^n) = \\varphi(a)^n$ (powers) — each proved by multiplying both sides by a suitable element. The **image** $\\operatorname{im}\\varphi = \\{\\varphi(a) : a \\in G\\}$ is a subgroup of H; the **kernel** $\\ker\\varphi = \\{a \\in G : \\varphi(a) = e_H\\}$ is a subgroup of G and more: it is a **normal** subgroup. Normality is a one-line computation — for $g \\in G$ and $k \\in \\ker\\varphi$, $\\varphi(gkg^{-1}) = \\varphi(g)\\varphi(k)\\varphi(g)^{-1} = \\varphi(g)e_H\\varphi(g)^{-1} = e_H$, so $gkg^{-1} \\in \\ker\\varphi$, exactly the normality criterion.\n\nExamples abound: $\\varphi: \\mathbb{Z} \\to \\mathbb{Z}_n$, $k \\mapsto k \\bmod n$ (kernel $n\\mathbb{Z}$); the sign homomorphism $\\operatorname{sgn}: S_n \\to \\{\\pm 1\\}$ sending even permutations to 1 and odd ones to −1 (kernel $A_n$); the determinant $\\det: GL_n(\\mathbb{R}) \\to \\mathbb{R}^{\\times}$ (kernel $SL_n(\\mathbb{R})$; the target must be the multiplicative group of nonzero reals); and $x \\mapsto e^x$, a homomorphism (indeed an isomorphism) $(\\mathbb{R}, +) \\to (\\mathbb{R}_{>0}, \\times)$. An **isomorphism** is a bijective homomorphism, written $G \\cong H$; isomorphic groups are indistinguishable as groups. Injectivity is controlled entirely by the kernel: $\\varphi$ is injective iff $\\ker\\varphi = \\{e_G\\}$. The direction ⟹ is clear; for ⟸, if $\\varphi(a) = \\varphi(b)$ then $\\varphi(ab^{-1}) = \\varphi(a)\\varphi(b)^{-1} = e_H$, so $ab^{-1} \\in \\ker\\varphi = \\{e\\}$ and $a = b$.\n\nNow the **quotient group**. Let $N \\trianglelefteq G$ and define a multiplication on the set of left cosets $G/N = \\{aN : a \\in G\\}$ by $(aN)(bN) = (ab)N$. The first hurdle is **well-definedness**: switching to representatives $a' = an_1$, $b' = bn_2$ ($n_1, n_2 \\in N$) gives $a'b' = a n_1 b n_2$; moving $n_1$ past b is exactly what normality supplies via $b^{-1}n_1b \\in N$, so $a'b' = ab\\,(b^{-1}n_1b)\\,n_2 \\in abN$ and the product does not depend on the representatives. For non-normal N this step fails (a concrete counterexample is in the examples). The second hurdle is checking the axioms: associativity is inherited from G, the identity is $eN = N$, inverses are $(aN)^{-1} = a^{-1}N$, and $G/N$ becomes a group, the **quotient**, with order $|G/N| = [G:N]$ (that is, $|G|/|N|$ when G is finite). The natural projection $\\pi: G \\to G/N$, $\\pi(a) = aN$, is a surjective homomorphism with kernel N. This yields the essential characterization: **N is normal iff N is the kernel of some homomorphism**.\n\n**First isomorphism theorem**: for every homomorphism $\\varphi: G \\to H$ there is an isomorphism $G/\\ker\\varphi \\cong \\operatorname{im}\\varphi$ given by $a\\ker\\varphi \\mapsto \\varphi(a)$. Three verifications: well-defined (kernel elements are crushed to the identity, so the result is representative-independent), injective (what φ crushes is exactly the kernel: $\\varphi(a) = \\varphi(b)$ gives $b^{-1}a \\in \\ker\\varphi$, i.e. equal cosets) and surjective (by definition of the image). The theorem unifies two viewpoints: every quotient is an image of a homomorphism, and every image is (isomorphic to) a quotient. For finite G, comparing orders gives $|G| = |\\ker\\varphi| \\cdot |\\operatorname{im}\\varphi|$. Examples: $\\mathbb{Z}/n\\mathbb{Z} \\cong \\mathbb{Z}_n$; $S_n/A_n \\cong \\mathbb{Z}_2$ (sign); $GL_n(\\mathbb{R})/SL_n(\\mathbb{R}) \\cong \\mathbb{R}^{\\times}$ (determinant).",
+    "formulas": [
+      {
+        "latex": "\\varphi(ab) = \\varphi(a)\\varphi(b)\\ \\Longrightarrow\\ \\varphi(e_G) = e_H,\\ \\varphi(a^{-1}) = \\varphi(a)^{-1},\\ \\varphi(a^n) = \\varphi(a)^n",
+        "note": "同态定义及三条保持（单位元、逆元、幂）；证明方式是两边同乘相应元素。",
+        "noteEn": "Homomorphism definition and the three preservations, proved by multiplying both sides by suitable elements."
+      },
+      {
+        "latex": "\\ker\\varphi = \\{a \\in G : \\varphi(a) = e_H\\} \\trianglelefteq G,\\qquad \\varphi\\ \\text{单射} \\iff \\ker\\varphi = \\{e_G\\}",
+        "note": "核必为正规子群；单射判别：核里只有单位元时同态才单射。",
+        "noteEn": "The kernel is normal, and injectivity is equivalent to a trivial kernel."
+      },
+      {
+        "latex": "(aN)(bN) = (ab)N\\ \\text{良定义} \\iff N \\trianglelefteq G,\\qquad |G/N| = [G:N]",
+        "note": "商群乘法的通行证是正规性；商群的阶等于指数（G 有限时为 |G|/|N|）。",
+        "noteEn": "Coset multiplication is well defined iff N is normal; the quotient has order [G:N]."
+      },
+      {
+        "latex": "G/\\ker\\varphi \\cong \\operatorname{im}\\varphi,\\qquad |G| = |\\ker\\varphi| \\cdot |\\operatorname{im}\\varphi|\\ \\ (G\\ \\text{有限})",
+        "note": "第一同构定理：商群与同态像同构；有限情形两边取阶，得核与像的阶之积为 |G|。",
+        "noteEn": "The first isomorphism theorem and its order identity for finite G."
+      },
+      {
+        "latex": "N \\trianglelefteq G \\iff N\\ \\text{是某个同态的核} \\iff aN = Na\\ \\ \\forall a \\in G",
+        "note": "正规性的本质刻画：只有当得了核的子群才是正规子群；自然投影 π: G → G/N 以 N 为核。",
+        "noteEn": "Normal subgroups are exactly the kernels of homomorphisms; the natural projection has kernel N."
+      }
+    ],
+    "properties": [
+      "同态保单位元、保逆元、保幂；像 im φ 是子群，核 ker φ 是正规子群；同态与同态复合仍是同态。",
+      "单射判别：φ 单射 ⟺ ker φ = {e}；双射同态是同构，其逆映射自动也是同态（无需额外验证）。",
+      "商群的乘法只在正规子群上良定义：不正规时 (aN)(bN) = (ab)N 依赖代表元的选取（例题中 S₃ 的 {e, (12)} 显式失败）；商群的阶是 [G:N]。",
+      "第一同构定理：G/ker φ ≅ im φ（每个商都是像、每个像都是商）；G 有限时 |G| = |ker φ|·|im φ|，核与像的阶都整除 |G|。",
+      "正规性速查：交换群的一切子群正规；指数 2 的子群必正规；同态的核必正规，且每个正规子群都是自然投影 G → G/N 的核；非交换群中一般子群可以不正规（如 S₃ 的 {e, (12)}）。"
+    ],
+    "propertiesEn": [
+      "Homomorphisms preserve the identity, inverses and powers; the image is a subgroup and the kernel is a normal subgroup; composites of homomorphisms are homomorphisms.",
+      "Injectivity test: φ is injective iff ker φ = {e}; a bijective homomorphism is an isomorphism and its inverse is automatically a homomorphism.",
+      "Coset multiplication is well defined only for normal subgroups: otherwise (aN)(bN) = (ab)N depends on representatives (the subgroup {e, (12)} of S₃ fails explicitly in the example); the quotient has order [G:N].",
+      "First isomorphism theorem: G/ker φ ≅ im φ (quotients are images and images are quotients); for finite G, |G| = |ker φ|·|im φ|, so both kernels and images divide |G|.",
+      "Normality quick list: all subgroups of abelian groups are normal; index-2 subgroups are normal; kernels are normal and conversely every normal subgroup is the kernel of the natural projection G → G/N; in non-abelian groups generic subgroups may fail to be normal (e.g. {e, (12)} in S₃)."
+    ],
+    "examples": [
+      {
+        "problem": "定义 $\\operatorname{sgn}: S_3 \\to \\{\\pm 1\\}$：偶置换送到 1，奇置换送到 −1。验证它是同态、求核，并用第一同构定理写出商群。",
+        "solution": "$S_3 = \\{e, (12), (13), (23), (123), (132)\\}$。① 同态性：每个置换写成对换之积时，对换个数的奇偶是确定的（3-轮换 $(123) = (13)(12)$ 是两个对换之积，故为偶置换；对换本身是奇置换），而复合的奇偶相加，所以 $\\operatorname{sgn}(\\sigma\\tau) = \\operatorname{sgn}(\\sigma)\\operatorname{sgn}(\\tau)$ 恒成立。抽查：$\\operatorname{sgn}((12)(123)) = \\operatorname{sgn}((23)) = -1 = (-1) \\times 1$ ✓；$\\operatorname{sgn}((123)(132)) = \\operatorname{sgn}(e) = 1 = 1 \\times 1$ ✓。② 求核：$\\ker\\operatorname{sgn} = \\{\\sigma : \\operatorname{sgn}\\sigma = 1\\} = \\{e, (123), (132)\\} = A_3$，它是 3 阶循环群（$(123)^2 = (132)$，$(123)^3 = e$）。③ 第一同构定理：$S_3/A_3 \\cong \\operatorname{im}\\operatorname{sgn} = \\{\\pm 1\\} \\cong \\mathbb{Z}_2$；验算阶数 $|S_3| = 6 = |A_3| \\times |\\{\\pm 1\\}| = 3 \\times 2$ ✓。两个陪集恰是 $A_3 = \\{e, (123), (132)\\}$（偶置换）与 $(12)A_3 = \\{(12), (12)(123), (12)(132)\\} = \\{(12), (23), (13)\\}$（奇置换），分别对应符号 1 与 −1。推广：$\\operatorname{sgn}: S_n \\to \\{\\pm 1\\}$ 的核是 Aₙ，故 $S_n/A_n \\cong \\mathbb{Z}_2$——「奇偶性」直觉的严格化。"
+      },
+      {
+        "problem": "在 $S_3$ 中取子群 $H = \\{e, (12)\\}$。说明用「$(aH)(bH) := (ab)H$」定义商群乘法会失败（给出同一陪集不同代表元得到不同乘积的实例）。",
+        "solution": "H 是子群（$(12)^2 = e$，封闭且自逆）。取 $a = (13)$：因为 $(123) = (13)(12) \\in (13)H$，元素 (13) 与 (123) 代表**同一个左陪集** $(13)H = \\{(13), (123)\\}$。现在用乘法「公式」算同一个陪集与自身的积：① 取代表元 (13)：$(13)(13) = e$，公式给出 $eH = H = \\{e, (12)\\}$。② 取同陪集中的代表元 (123)：$(123)(123) = (132)$，公式给出 $(132)H = \\{(132), (132)(12)\\} = \\{(132), (23)\\}$。两个结果 H 与 (132)H 不同（$e \\notin (132)H$），同一个陪集作为输入却给出不同输出，乘法不良定义。根源是 H 不正规：$(13)H = \\{(13), (123)\\}$ 而 $H(13) = \\{(13), (132)\\}$，左右陪集不一致，正规性证明中「把 n₁ 挪过 b」的一步失效。对照正规子群 A₃：左右陪集一致，$S_3/A_3 \\cong \\mathbb{Z}_2$ 照常运转（见上一例）。结论：**商群必须以正规子群为前提，一般子群不能作商群**。"
+      }
+    ],
+    "tags": [
+      "群同态",
+      "正规子群",
+      "商群",
+      "同构定理"
+    ],
+    "links": [
+      "group-definition-examples",
+      "subgroup-coset",
+      "lagrange-theorem",
+      "symmetric-alternating-groups",
+      "matrix-groups",
+      "ring-ideal"
+    ]
+  },
+  {
+    "id": "group-actions-orbit-stabilizer",
+    "title": "群作用与轨道-稳定子定理",
+    "titleEn": "Group Actions and the Orbit-Stabilizer Theorem",
+    "branch": "abstract-algebra",
+    "level": 5,
+    "summary": "群作用把群元素实现为集合上的置换；轨道-稳定子定理 |G·x| = [G:Stab(x)] 控制轨道大小，共轭作用下即得类方程。",
+    "summaryEn": "A group action realizes group elements as permutations of a set; the orbit-stabilizer theorem |G·x| = [G:Stab(x)] controls orbit sizes and yields the class equation for conjugation.",
+    "definition": "设 G 是群、X 是非空集合。**左作用**是一个映射 $G \\times X \\to X$，$(g, x) \\mapsto g \\cdot x$，满足两条公理：**（A1）** $e \\cdot x = x$ 对一切 x 成立；**（A2）** $(gh) \\cdot x = g \\cdot (h \\cdot x)$ 对一切 g、h、x 成立。等价的观点：每个 g 给出的映射 $x \\mapsto g \\cdot x$ 是 X 的双射（逆是 $g^{-1}$ 给出的映射），于是作用一一对应于同态 $G \\to \\operatorname{Sym}(X)$——把抽象元素实现为置换，称**置换表示**。例子：$S_n$ 作用在 $\\{1, \\dots, n\\}$ 上（$\\sigma \\cdot i = \\sigma(i)$）；$GL_n(\\mathbb{R})$ 左乘作用在 $\\mathbb{R}^n$ 上；正 n 边形的对称群 $D_n$（2n 个元素：n 个旋转与 n 个反射）作用在 n 个顶点上；G 作用在自身上的两大样板——**左乘作用** $g \\cdot x = gx$ 与**共轭作用** $g \\cdot x = gxg^{-1}$。\n\n固定 $x \\in X$。**轨道**是 x 能到达的全部位置：$G \\cdot x = \\{g \\cdot x : g \\in G\\}$；**稳定子**是搬不动 x 的元素：$G_x = \\{g \\in G : g \\cdot x = x\\}$。稳定子是子群：若 $g \\cdot x = h \\cdot x = x$，则 $(gh) \\cdot x = g \\cdot (h \\cdot x) = x$，且 $g^{-1} \\cdot x = x$。**轨道-稳定子定理**：设 G 有限，则 $|G \\cdot x| = [G : G_x] = |G|/|G_x|$——**轨道大小等于稳定子的指数**（等价写法 $|G| = |G_x| \\cdot |G \\cdot x|$）。证明只需一个双射 $G/G_x \\to G \\cdot x$，$gG_x \\mapsto g \\cdot x$：$g \\cdot x = h \\cdot x \\iff h^{-1}g \\cdot x = x \\iff h^{-1}g \\in G_x \\iff gG_x = hG_x$，满射按定义。直观上，x 被搬到轨道中每个位置的方法数一样多，都等于 $|G_x|$。\n\n「y 能由 x 搬过去」是 X 上的**等价关系**（自反用 e、对称借 $g^{-1}$、传递把两个搬运复合），所以 X 分成互不相交的**轨道**：$X = \\bigsqcup_i G \\cdot x_i$，其中每个轨道取一个代表元 $x_i$。数一数两边得到**计数公式** $|X| = \\sum_i [G : G_{x_i}]$；有限群中每个轨道的大小都整除 |G|。这条「按轨道数数」是群论最常用的计数技术，从组合计数（着色、项链）到有限群结构分析无处不在。\n\n把全部工具用到**共轭作用** $g \\cdot x = gxg^{-1}$（G 作用在自身）上：x 的轨道是**共轭类** $\\{gxg^{-1} : g \\in G\\}$，稳定子是**中心化子** $C_G(x) = \\{g \\in G : gx = xg\\}$，于是共轭类大小等于 $[G : C_G(x)]$，整除 |G|。轨道大小为 1 的元素恰是与一切元素交换的元素，其全体就是**中心** $Z(G)$。把 $|G| = \\sum_i |G \\cdot x_i|$ 中固定点的部分单独拿出，得到**类方程** $$|G| = |Z(G)| + \\sum_{i=1}^{k} [G : C_G(x_i)],$$ 其中 $x_1, \\dots, x_k$ 取遍大小大于 1 的共轭类的代表元。两个招牌应用：其一，**p-群的中心非平凡**（$|G| = p^m$ 时非中心项的指数都被 p 整除，于是 p 整除 $|Z(G)|$）；其二，A₄ 无 6 阶子群的另一证明（6 阶子群指数为 2 故正规，而正规子群是共轭类的并，类大小 1、3、4、4 含单位元凑不出 6——与拉格朗日定理节点的例题互相印证）。",
+    "definitionEn": "Let G be a group and X a nonempty set. A **left action** is a map $G \\times X \\to X$, $(g, x) \\mapsto g \\cdot x$, satisfying two axioms: **A1** $e \\cdot x = x$ for all x; **A2** $(gh) \\cdot x = g \\cdot (h \\cdot x)$ for all g, h, x. Equivalently, each g acts as a bijection $x \\mapsto g \\cdot x$ of X (with inverse given by $g^{-1}$), so actions correspond one-to-one to homomorphisms $G \\to \\operatorname{Sym}(X)$ — a **permutation representation**. Examples: $S_n$ acts on $\\{1, \\dots, n\\}$ by $\\sigma \\cdot i = \\sigma(i)$; $GL_n(\\mathbb{R})$ acts on $\\mathbb{R}^n$ by matrix multiplication; the symmetry group $D_n$ of a regular n-gon (2n elements: n rotations and n reflections) acts on its vertices; and G acts on itself in two basic ways — the **left regular action** $g \\cdot x = gx$ and **conjugation** $g \\cdot x = gxg^{-1}$.\n\nFix $x \\in X$. Its **orbit** is the set of all positions reachable from x: $G \\cdot x = \\{g \\cdot x : g \\in G\\}$; its **stabilizer** is the set of elements that leave x fixed: $G_x = \\{g \\in G : g \\cdot x = x\\}$. The stabilizer is a subgroup: if $g \\cdot x = h \\cdot x = x$ then $(gh) \\cdot x = g \\cdot (h \\cdot x) = x$ and $g^{-1} \\cdot x = x$. **Orbit-stabilizer theorem**: for finite G, $|G \\cdot x| = [G : G_x] = |G|/|G_x|$ — the **orbit size equals the index of the stabilizer** (equivalently $|G| = |G_x| \\cdot |G \\cdot x|$). The proof is the bijection $G/G_x \\to G \\cdot x$ given by $gG_x \\mapsto g \\cdot x$: indeed $g \\cdot x = h \\cdot x \\iff h^{-1}g \\cdot x = x \\iff h^{-1}g \\in G_x \\iff gG_x = hG_x$, and surjectivity is definitional. Intuitively, x is carried to every point of its orbit equally often, $|G_x|$ times.\n\nThe relation that y is reached from x by some group element is an **equivalence relation** on X (reflexive via e, symmetric via $g^{-1}$, transitive by composing), so X splits into disjoint **orbits**: $X = \\bigsqcup_i G \\cdot x_i$, one representative $x_i$ per orbit. Counting both sides gives the **counting formula** $|X| = \\sum_i [G : G_{x_i}]$, and in a finite group each orbit size divides |G|. This orbit-counting technique is a standard tool in group theory, from combinatorial enumeration (colorings, necklaces) to the structure of finite groups.\n\nApplied to the **conjugation action** $g \\cdot x = gxg^{-1}$ (G acting on itself), the theory reads: the orbit of x is its **conjugacy class** $\\{gxg^{-1} : g \\in G\\}$ and the stabilizer is the **centralizer** $C_G(x) = \\{g \\in G : gx = xg\\}$; hence class sizes equal the indices $[G : C_G(x)]$ and divide |G|. Elements with orbit size 1 are exactly those commuting with everything, and together they form the **center** $Z(G)$. Separating the fixed points in $|G| = \\sum_i |G \\cdot x_i|$ yields the **class equation** $$|G| = |Z(G)| + \\sum_{i=1}^{k} [G : C_G(x_i)],$$ where $x_1, \\dots, x_k$ run over representatives of the conjugacy classes of size greater than 1. Two standard applications: first, **the center of a p-group is nontrivial** (for $|G| = p^m$ every non-central summand is divisible by p, so p divides $|Z(G)|$); second, another proof that $A_4$ has no subgroup of order 6 (such a subgroup would have index 2 and hence be normal, but a normal subgroup is a union of conjugacy classes, and class sizes 1, 3, 4, 4 cannot sum to 6 while containing the identity — cross-checking the example in the Lagrange node).",
+    "formulas": [
+      {
+        "latex": "e \\cdot x = x,\\qquad (gh) \\cdot x = g \\cdot (h \\cdot x)",
+        "note": "左作用的两条公理；等价于置换表示同态 G → Sym(X)。",
+        "noteEn": "The two axioms of a left action, equivalent to a permutation representation G → Sym(X)."
+      },
+      {
+        "latex": "G \\cdot x = \\{g \\cdot x : g \\in G\\},\\qquad G_x = \\{g \\in G : g \\cdot x = x\\} \\le G",
+        "note": "轨道与稳定子；稳定子必是子群（两条封闭性都由公理直接给出）。",
+        "noteEn": "Orbit and stabilizer; the stabilizer is a subgroup."
+      },
+      {
+        "latex": "|G \\cdot x| = [G : G_x] = \\frac{|G|}{|G_x|}\\qquad (G\\ \\text{有限})",
+        "note": "轨道-稳定子定理：轨道大小 = 稳定子指数；等价形式 |G| = |G_x|·|G·x|。",
+        "noteEn": "Orbit-stabilizer theorem, equivalently |G| = |G_x|·|G·x|."
+      },
+      {
+        "latex": "X = \\bigsqcup_i G \\cdot x_i,\\qquad |X| = \\sum_i [G : G_{x_i}]",
+        "note": "轨道构成划分；计数公式按每个轨道取一个代表元求和，有限群中每项都整除 |G|。",
+        "noteEn": "Orbits partition X; the counting formula, each summand dividing |G| in the finite case."
+      },
+      {
+        "latex": "|G| = |Z(G)| + \\sum_{i=1}^{k} [G : C_G(x_i)]",
+        "note": "类方程：共轭作用下的轨道分解；xᵢ 取每个非中心共轭类的代表元，右端每项都是 |G| 的因数。",
+        "noteEn": "The class equation for conjugation; each summand divides |G|."
+      }
+    ],
+    "properties": [
+      "轨道关系是等价关系（x ~ y ⟺ 存在 g 使 y = g·x），轨道两两不交、并为整个 X；每个元素的轨道大小由稳定子指数给出。",
+      "稳定子是子群；同一轨道上各点的稳定子互相共轭：G_(g·x) = g G_x g⁻¹，因此同轨道上的稳定子都同构（同阶）。",
+      "作用的核是 ⋂(x∈X) G_x，它是置换表示 G → Sym(X) 的核，因此是正规子群；核平凡 ⟺ 作用忠实（G 同构于 Sym(X) 的某个子群）。",
+      "有限群中每个轨道的大小整除群阶（= 稳定子指数）；对共轭作用而言即：共轭类大小整除 |G|，中心元素恰为单点轨道。",
+      "共轭作用的轨道分解就是类方程 |G| = |Z(G)| + Σ[G : C_G(xᵢ)]：p-群中心非平凡、A₄ 无 6 阶子群都由此而来；左陪集集合上的左乘作用对任何子群 H 都有定义（不要求正规），其核 ⋂ gHg⁻¹ 是含于 H 的最大正规子群，H = {e} 时给出凯莱定理（G 同构于置换群的子群）。"
+    ],
+    "propertiesEn": [
+      "The orbit relation (x ~ y iff y = g·x for some g) is an equivalence relation; orbits are pairwise disjoint and their union is X; each orbit size is governed by the stabilizer index.",
+      "The stabilizer is a subgroup; stabilizers of points in one orbit are conjugate: G_(g·x) = g G_x g⁻¹, hence isomorphic (of equal order).",
+      "The kernel of an action is ⋂(x∈X) G_x, the kernel of the permutation representation G → Sym(X); it is normal, and the action is faithful iff the kernel is trivial (G embeds in Sym(X)).",
+      "In a finite group every orbit size divides the group order (= the stabilizer index); for the conjugation action this says conjugacy class sizes divide |G|, and central elements are exactly the singleton orbits.",
+      "The conjugation action gives the class equation |G| = |Z(G)| + Σ[G : C_G(xᵢ)]; it implies that p-groups have nontrivial center and re-proves that A₄ has no subgroup of order 6. The left-multiplication action on cosets G/H is defined for any subgroup H (normality not needed); its kernel ⋂ gHg⁻¹ is the largest normal subgroup contained in H, and H = {e} yields Cayley's theorem: every group embeds into a permutation group."
+    ],
+    "examples": [
+      {
+        "problem": "正方形的对称群 $D_4$（8 个元素）作用在 4 个顶点上。求顶点 1 的轨道与稳定子，验证轨道-稳定子定理；并说明每个顶点被多少个对称「送达」。",
+        "solution": "把顶点逆时针编号 1、2、3、4。$D_4$ 的 8 个元素在顶点上的置换为：恒等 $e$；旋转 $r = (1234)$、$r^2 = (13)(24)$、$r^3 = (1432)$；反射 $s = (24)$（沿顶点 1、3 所在对角线）；以及 $rs = (12)(34)$、$r^2s = (13)$、$r^3s = (14)(23)$（复合约定：先作用右边的置换）。① 轨道：$e \\cdot 1 = 1$，$r \\cdot 1 = 2$，$r^2 \\cdot 1 = 3$，$r^3 \\cdot 1 = 4$，四个顶点全部可达，故 $G \\cdot 1 = \\{1, 2, 3, 4\\}$，轨道大小为 4。② 稳定子：逐一检查把 1 送回 1 的元素——e 固定 1，$s = (24)$ 也固定 1；其余 6 个元素都把 1 送走（$r$ 送到 2、$r^2$ 送到 3、$r^3$ 送到 4、$rs$ 送到 2、$r^2s$ 送到 3、$r^3s$ 送到 4）。所以 $G_1 = \\{e, s\\}$，$|G_1| = 2$。③ 验证轨道-稳定子定理：$|G \\cdot 1| = 4 = [D_4 : G_1] = 8/2$ ✓，即 $|G| = |G_1| \\cdot |G \\cdot 1| = 2 \\times 4 = 8$。④ 「送达次数」：8 个元素把 1 送往 4 个顶点，每个顶点恰有 $|G_1| = 2$ 个元素送达（例如把 1 送到 2 的恰是 $r$ 与 $rs$），这正是定理的直观含义：轨道中每个位置被等量地覆盖。"
+      },
+      {
+        "problem": "求 $S_3$ 的共轭类与类方程，验证每个类的大小等于相应中心化子的指数，并指出 S₃ 的全部正规子群。",
+        "solution": "$S_3 = \\{e, (12), (13), (23), (123), (132)\\}$。① 共轭类：单位元自成一类 $\\{e\\}$；三个对换构成一类——对换的共轭仍是某个对换，且可互相传递（例如 $(13)(12)(13) = (23)$）；两个 3-轮换构成一类（例如 $(12)(123)(12) = (132)$）。② 类方程：$6 = 1 + 3 + 2$；其中第一项 1 就是 $|Z(S_3)|$——中心只有单位元，因为每个非单位元都被某个元素「搬动」。③ 指数验证：中心化子 $C(e) = S_3$，指数 $6/6 = 1$ = 类大小 ✓；$C((12)) = \\{e, (12)\\}$（(13) 不与 (12) 交换：$(13)(12) = (123) \\neq (132) = (12)(13)$，故 (13) 不在其中；其余元素逐一抽查同理），指数 $6/2 = 3$ = 类大小 ✓；$C((123)) = \\langle (123) \\rangle = \\{e, (123), (132)\\}$（任何对换都不与 (123) 交换，如 $(12)(123) = (23) \\neq (13) = (123)(12)$），指数 $6/3 = 2$ = 类大小 ✓。④ 正规子群：正规子群是共轭类的并、且必含 e，可能的阶为 1（$\\{e\\}$）、3（$\\{e\\}$ ∪ 两个 3-轮换 $= A_3$）、4（$\\{e\\}$ ∪ 三个对换，但 4 不整除 6、且该集合连乘法都不封闭，不是子群）、6（全体）。所以正规子群恰为 $\\{e\\}$、$A_3$、$S_3$——这也解释了为什么 $\\{e, (12)\\}$ 这样的 2 阶子群不正规（2 不是「类并」的合法大小），与子群与陪集节点的例题结论一致。"
+      }
+    ],
+    "tags": [
+      "群作用",
+      "轨道",
+      "稳定子",
+      "类方程",
+      "共轭"
+    ],
+    "links": [
+      "group-definition-examples",
+      "subgroup-coset",
+      "group-homomorphism-quotient",
+      "lagrange-theorem",
+      "symmetric-alternating-groups"
+    ]
+  }
+]

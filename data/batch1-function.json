@@ -118,14 +118,14 @@
       "多个限制条件同时出现时，定义域是各条件的交集。",
       "值域由定义域和对应法则共同决定，定义域改变值域可能改变。",
       "分段函数的值域是各段值域的并集。",
-      "若函数有最大值 M、最小值 m，则值域是 [m, M]（当区间为闭区间时）。"
+      "若连续函数在闭区间上有最大值 M、最小值 m，则值域恰为 [m, M]；若不连续，即使有最大值与最小值，值域也未必是区间。"
     ],
     "propertiesEn": [
       "The domain is a prerequisite for studying any function; determine it first in every problem.",
       "When several restrictions occur together, the domain is the intersection of all conditions.",
       "The range is determined jointly by the domain and the rule; changing the domain may change the range.",
       "The range of a piecewise function is the union of the ranges of its pieces.",
-      "If a function has maximum M and minimum m, its range is [m, M] when the interval is closed."
+      "If a continuous function on a closed interval has maximum M and minimum m, its range is exactly [m, M]; without continuity the range need not be an interval even when both extremes are attained."
     ],
     "plot": {
       "type": "numberline",
@@ -438,14 +438,14 @@
       "图像是一条直线，斜率 $k$ 越大（$k>0$ 时）直线越陡。",
       "当 $k>0$ 时函数在 $\\mathbb{R}$ 上单调递增，$k<0$ 时单调递减。",
       "一次函数是一一对应的，因此总是存在反函数，且反函数仍是一次函数。",
-      "两条直线平行的充要条件是斜率相等（$k_1=k_2$），垂直的充要条件是 $k_1k_2=-1$。",
+      "两条直线平行的充要条件是 $k_1=k_2$ 且 $b_1\\ne b_2$（只有斜率相等时两直线还可能重合）；垂直的充要条件是 $k_1k_2=-1$。",
       "一次函数在闭区间 $[m,n]$ 上的值域由端点函数值决定。"
     ],
     "propertiesEn": [
       "The graph is a straight line; when $k>0$, larger $k$ gives a steeper line.",
       "The function increases on $\\mathbb{R}$ when $k>0$ and decreases when $k<0$.",
       "A linear function is one-to-one, so it always has an inverse, and the inverse is again linear.",
-      "Two lines are parallel iff their slopes are equal ($k_1=k_2$) and perpendicular iff $k_1k_2=-1$.",
+      "Two lines are parallel iff $k_1=k_2$ and $b_1\\ne b_2$ (equal slopes alone may mean coincident lines); they are perpendicular iff $k_1k_2=-1$.",
       "On a closed interval $[m,n]$ the range of a linear function is determined by its endpoint values."
     ],
     "plot": {
@@ -559,8 +559,8 @@
     "level": 3,
     "summary": "反函数把原函数的输出重新变成输入，图像与原函数关于 y=x 对称。",
     "summaryEn": "An inverse function turns outputs back into inputs; its graph is the original reflected across y = x.",
-    "definition": "设函数 $y=f(x)$ 的定义域为 $A$、值域为 $B$，且是一一对应的（即不同输入给出不同输出）。如果把 $y$ 看作自变量，按原来的对应关系反推，就能得到一个定义在 $B$ 上的函数，记作 $x=f^{-1}(y)$ 或 $y=f^{-1}(x)$，称为 $f$ 的**反函数**。\n\n通俗地说，反函数就是「倒着走」：原函数把 $x$ 变成 $y$，反函数把 $y$ 变回 $x$。就像把一件商品从货架取出，再放回原来的位置。需要注意，只有当原函数是一一对应（严格单调）时才一定存在反函数；否则同一个输出对应多个输入，就无法唯一地倒推。\n\n反函数的图像与原函数的图像关于直线 $y=x$ 对称，因为两者交换了横纵坐标。求反函数的步骤是：由 $y=f(x)$ 解出 $x=f^{-1}(y)$，再交换字母得到 $y=f^{-1}(x)$，同时牢记反函数的定义域就是原函数的值域。",
-    "definitionEn": "Let $y=f(x)$ have domain $A$ and range $B$ and be one-to-one (distinct inputs give distinct outputs). Treating $y$ as the variable and reversing the correspondence yields a function on $B$, written $x=f^{-1}(y)$ or $y=f^{-1}(x)$, called the **inverse function** of $f$.\n\nIn plain terms, the inverse runs the machine backwards: if $f$ turns $x$ into $y$, then $f^{-1}$ turns $y$ back into $x$, like taking a product off a shelf and putting it back where it came from. An inverse exists only when the original is one-to-one (strictly monotone); otherwise several inputs share an output and the reversal is not unique.\n\nThe graph of the inverse is the reflection of the original across the line $y=x$, since the two exchange horizontal and vertical coordinates. To find it, solve $y=f(x)$ for $x=f^{-1}(y)$, then swap letters to write $y=f^{-1}(x)$, remembering that the domain of the inverse is the range of the original.",
+    "definition": "设函数 $y=f(x)$ 的定义域为 $A$、值域为 $B$，且是一一对应的（即不同输入给出不同输出）。如果把 $y$ 看作自变量，按原来的对应关系反推，就能得到一个定义在 $B$ 上的函数，记作 $x=f^{-1}(y)$ 或 $y=f^{-1}(x)$，称为 $f$ 的**反函数**。\n\n通俗地说，反函数就是「倒着走」：原函数把 $x$ 变成 $y$，反函数把 $y$ 变回 $x$。就像把一件商品从货架取出，再放回原来的位置。需要注意，只有当原函数是一一对应时才一定存在反函数；严格单调是一一对应的充分条件而非必要条件（例如 $f(x)=\\dfrac{1}{x}$ 在 $x\\ne0$ 上并不单调，却依然一一对应）；否则同一个输出对应多个输入，就无法唯一地倒推。\n\n反函数的图像与原函数的图像关于直线 $y=x$ 对称，因为两者交换了横纵坐标。求反函数的步骤是：由 $y=f(x)$ 解出 $x=f^{-1}(y)$，再交换字母得到 $y=f^{-1}(x)$，同时牢记反函数的定义域就是原函数的值域。",
+    "definitionEn": "Let $y=f(x)$ have domain $A$ and range $B$ and be one-to-one (distinct inputs give distinct outputs). Treating $y$ as the variable and reversing the correspondence yields a function on $B$, written $x=f^{-1}(y)$ or $y=f^{-1}(x)$, called the **inverse function** of $f$.\n\nIn plain terms, the inverse runs the machine backwards: if $f$ turns $x$ into $y$, then $f^{-1}$ turns $y$ back into $x$, like taking a product off a shelf and putting it back where it came from. An inverse exists only when the original is one-to-one; strict monotonicity is a sufficient (not necessary) condition for that (e.g. $f(x)=1/x$ on $x\\ne0$ is one-to-one yet not monotone there); otherwise several inputs share an output and the reversal is not unique.\n\nThe graph of the inverse is the reflection of the original across the line $y=x$, since the two exchange horizontal and vertical coordinates. To find it, solve $y=f(x)$ for $x=f^{-1}(y)$, then swap letters to write $y=f^{-1}(x)$, remembering that the domain of the inverse is the range of the original.",
     "formulas": [
       {
         "latex": "y=f(x)\\ \\Longleftrightarrow\\ x=f^{-1}(y)",
@@ -595,14 +595,14 @@
       "noteEn": "f⁻¹ denotes the inverse function, not 1/f; only one-to-one functions have inverses."
     },
     "properties": [
-      "只有一一对应（严格单调）的函数才存在反函数。",
+      "只有一一对应的函数才存在反函数；严格单调是一一对应的充分条件而非必要条件（例如 $f(x)=\\dfrac{1}{x}$ 在 $x\\ne0$ 上一一对应，却不在整个定义域上单调）。",
       "反函数的定义域是原函数的值域，反函数的值域是原函数的定义域。",
       "$f$ 与 $f^{-1}$ 的图像关于直线 $y=x$ 对称。",
       "若 $f$ 是增函数，则 $f^{-1}$ 也是增函数；单调性保持一致。",
       "若点 $(a,b)$ 在原函数图像上，则点 $(b,a)$ 一定在反函数图像上。"
     ],
     "propertiesEn": [
-      "Only a one-to-one (strictly monotone) function has an inverse.",
+      "Only a one-to-one function has an inverse; strict monotonicity is a sufficient (not necessary) condition for being one-to-one (e.g. $f(x)=\\dfrac{1}{x}$ on $x\\ne0$ is one-to-one yet not monotone on its whole domain).",
       "The domain of the inverse is the range of the original, and vice versa.",
       "The graphs of $f$ and $f^{-1}$ are symmetric about the line $y=x$.",
       "If $f$ is increasing then so is $f^{-1}$; monotonicity is preserved.",
@@ -749,14 +749,14 @@
       "零点是数而不是点，指的是图像与 x 轴交点的横坐标。",
       "函数的零点个数等于方程 $f(x)=0$ 的实根个数。",
       "连续函数在端点异号的区间内至少有一个零点（零点存在性定理）。",
-      "若函数在某区间上单调且端点异号，则该区间内有且仅有一个零点。",
+      "若连续函数在某区间上单调且端点异号，则该区间内有且仅有一个零点（存在性由零点存在定理保证，唯一性由单调性保证）。",
       "二次函数的零点个数由判别式 $\\Delta=b^2-4ac$ 的符号决定。"
     ],
     "propertiesEn": [
       "A zero is a number, not a point: it is the x-coordinate of an x-intercept.",
       "The number of zeros equals the number of real roots of $f(x)=0$.",
       "A continuous function with opposite endpoint signs has at least one zero in the interval (intermediate value theorem).",
-      "If a function is monotone on an interval and has opposite endpoint signs, it has exactly one zero there.",
+      "If a continuous function is monotone on an interval and has opposite signs at the endpoints, it has exactly one zero there (existence by the intermediate value theorem, uniqueness by monotonicity).",
       "For a quadratic the number of zeros is decided by the sign of the discriminant $\\Delta=b^2-4ac$."
     ],
     "plot": {

@@ -398,8 +398,8 @@
       },
       {
         "latex": "\\nabla_{\\gamma'}\\gamma'=0",
-        "note": "内蕴定义：切向量沿自身平行移动；等价于速率 |γ'| 为常数。",
-        "noteEn": "Intrinsic definition: the tangent vector is parallel-transported along itself; equivalently the speed is constant."
+        "note": "内蕴定义：切向量沿自身平行移动；此时速率 |γ'| 为常数（反之不成立：单位速率的曲线未必是测地线，球面纬圆即反例）。",
+        "noteEn": "Intrinsic definition: the tangent vector is parallel-transported along itself; the speed is then constant (the converse fails: a unit-speed curve need not be a geodesic — a latitude circle on the sphere is a counterexample)."
       },
       {
         "latex": "u''+\\Gamma^1_{11}(u')^2+2\\Gamma^1_{12}u'v'+\\Gamma^1_{22}(v')^2=0,\\qquad v''+\\Gamma^2_{11}(u')^2+2\\Gamma^2_{12}u'v'+\\Gamma^2_{22}(v')^2=0",

@@ -607,7 +607,7 @@
       },
       {
         "latex": "\\text{若 }u,v\\text{ 在区域 }D\\text{ 内有连续一阶偏导且满足 C-R 方程，则 }f=u+iv\\text{ 在 }D\\text{ 内解析}",
-        "note": "常用的充分条件；导数连续是保证 $u$、$v$ 可微的便捷方式。",
+        "note": "常用的充分条件；$u$、$v$ 的一阶偏导数 $u_x,u_y,v_x,v_y$ 连续是保证 $u$、$v$ 可微的便捷方式。",
         "noteEn": "A commonly used sufficient condition; continuity of the partials is a convenient way to ensure $u$ and $v$ are differentiable."
       },
       {

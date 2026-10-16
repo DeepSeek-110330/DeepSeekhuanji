@@ -412,7 +412,7 @@
     ],
     "properties": [
       "对偶基 $\\varepsilon_i$ 由 $\\varepsilon_i(e_j)=\\delta_{ij}$ 唯一确定；有限维时 $V\\cong V^*$，但任何同构都依赖基的选取，而 $\\iota:V\\to V^{**}$ 是自然的。$\\iota$ 为同构的充要条件是 $\\dim V<\\infty$——无限维时它只是单射，这条条件必须写明。",
-      "零化子的维数公式 $\\dim S+\\dim S^{\\circ}=\\dim V$；并且恒有 $(S^{\\circ})^{\\circ}\\supseteq\\iota(S)\\subseteq V^{**}$，有限维时 $(S^{\\circ})^{\\circ}=\\iota(S)$（即 $S$ 本身）。它把子空间与「约束方程」对偶起来：子空间越大，零化子越小。",
+      "零化子的维数公式 $\\dim S+\\dim S^{\\circ}=\\dim V$（$S$ 为子空间）；并且恒有 $(S^{\\circ})^{\\circ}\\supseteq\\iota(S)\\subseteq V^{**}$，有限维时 $(S^{\\circ})^{\\circ}=\\iota(\\operatorname{span}S)$——当 $S$ 是子空间时这正好是 $\\iota(S)$（即 $S$ 本身）。它把子空间与「约束方程」对偶起来：子空间越大，零化子越小。",
       "线性方程组语言：$Ax=0$ 的解空间等于行空间的零化子（在自然等同 $V^{**}\\cong V$ 之下），取维数立刻得到 $\\operatorname{rank}A+\\dim\\ker A=n$。对偶语言与「与每一行正交」的列向量语言是同一件事的两种说法。",
       "对称双线性型与二次型一一对应（域的特征不等于 2）：$Q(\\alpha)=B(\\alpha,\\alpha)$，极化恒等式反向恢复 $B$。对一般双线性型，极化只恢复对称部分 $\\frac12\\big(B(\\alpha,\\beta)+B(\\beta,\\alpha)\\big)$；反对称型满足 $B(\\alpha,\\alpha)=0$（特征不等于 2 时与反对称等价），此时 $Q\\equiv0$，二次型完全丢失反对称部分的信息。",
       "矩阵表示：$B(x,y)=x^{\\mathsf T}Ay$ 中的 $A=(B(e_i,e_j))$ 唯一；$B$ 对称 $\\iff A$ 对称；换基 $P$ 时 $A\\mapsto P^{\\mathsf T}AP$，因此秩与惯性指数（正负惯性指数、符号差）是 $B$ 的内在不变量——这正是二次型标准形理论的内容。"

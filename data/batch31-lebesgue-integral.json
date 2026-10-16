@@ -330,7 +330,7 @@
       },
       {
         "problem": "用单调收敛定理证明 $\\displaystyle\\int_0^{\\infty}\\Bigl(\\sum_{n=1}^{\\infty}2^{-n}e^{-nx}\\Bigr)dx=\\ln 2$。",
-        "solution": "各项非负。记部分和 $S_N=\\sum_{n=1}^{N}2^{-n}e^{-nx}$，则 $S_N\\uparrow f:=\\sum_{n\\ge1}2^{-n}e^{-nx}$。由单调收敛定理逐项积分：$\\int_0^{\\infty}f\\,dx=\\sum_{n\\ge1}2^{-n}\\int_0^{\\infty}e^{-nx}dx=\\sum_{n\\ge1}\\dfrac{2^{-n}}{n}=\\ln 2$（用了 $\\sum_{n\\ge1}\\dfrac{t^n}{n}=-\\ln(1-t)$，$t=\\tfrac12$）。再直接求和函数验证：$f(x)=\\dfrac{e^{-x}}{2-e^{-x}}$，$\\int_0^{\\infty}\\dfrac{e^{-x}}{2-e^{-x}}dx=\\bigl[-\\ln(2-e^{-x})\\bigr]_0^{\\infty}=\\ln 2$，两边结果一致。"
+        "solution": "各项非负。记部分和 $S_N=\\sum_{n=1}^{N}2^{-n}e^{-nx}$，则 $S_N\\uparrow f:=\\sum_{n\\ge1}2^{-n}e^{-nx}$。由单调收敛定理逐项积分：$\\int_0^{\\infty}f\\,dx=\\sum_{n\\ge1}2^{-n}\\int_0^{\\infty}e^{-nx}dx=\\sum_{n\\ge1}\\dfrac{2^{-n}}{n}=\\ln 2$（用了 $\\sum_{n\\ge1}\\dfrac{t^n}{n}=-\\ln(1-t)$，$t=\\tfrac12$）。再直接求和函数验证：$f(x)=\\dfrac{e^{-x}}{2-e^{-x}}$，$\\int_0^{\\infty}\\dfrac{e^{-x}}{2-e^{-x}}dx=\\bigl[\\ln(2-e^{-x})\\bigr]_0^{\\infty}=\\ln 2$，两边结果一致。"
       }
     ],
     "plot": {

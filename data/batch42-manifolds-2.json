@@ -419,14 +419,14 @@
       "noteEn": "A non-planar minimal surface has $K=-\\kappa_1^2<0$ everywhere; soap films provide the physical examples, and the Plateau problem asks for the least-area surface with prescribed boundary."
     },
     "properties": [
-      "定义与变分等价：$H\\equiv0$ 当且仅当面积第一变分为零，即固定边界下面积局部最小（稳定的肥皂膜还要求二阶变分非负）。",
+      "定义与变分等价：$H\\equiv0$ 当且仅当面积第一变分为零，即固定边界下面积泛函的临界点（驻点）；若要求它还是局部最小，需二阶变分非负（稳定性，如稳定的肥皂膜）。",
       "标准例子：平面、悬链面、螺旋面、Scherk 曲面、Costa 曲面；悬链面与螺旋面局部等距（Meusnier），同属一个 Bonnet 伴随族。",
       "形状：非平面的极小曲面处处 $K=-\\kappa_1^2<0$，每点都是双曲点（鞍点）；直纹极小曲面只有平面与螺旋面。",
       "物理与复分析：肥皂膜是极小曲面的物理解；Plateau 问题（每条可求长闭曲线都张成一片极小曲面，Douglas–Radó 1930 年代）是几何分析的起源之一；等温坐标下 $H=0\\iff\\Delta X=0\\iff$ 存在 Weierstrass 表示。",
       "刚性：Bernstein 定理——$\\mathbb R^3$ 中完备极小图必为平面；极小曲面方程 $\\mathrm{div}\\!\\left(\\frac{\\nabla u}{\\sqrt{1+|\\nabla u|^2}}\\right)=0$ 是几何分析中非线性椭圆 PDE 的源头。"
     ],
     "propertiesEn": [
-      "Definition equals variation: $H\\equiv0$ iff the first variation of area vanishes, i.e. area is locally minimal for fixed boundary (a stable soap film additionally needs a nonnegative second variation).",
+      "Definition equals variation: $H\\equiv0$ iff the first variation of area vanishes, i.e. the surface is a critical (stationary) point of the area functional for a fixed boundary curve; a local minimum additionally requires the second variation to be nonnegative (stability, as with a stable soap film).",
       "Standard examples: the plane, the catenoid, the helicoid, Scherk's surface and Costa's surface; the catenoid and the helicoid are locally isometric (Meusnier) and belong to one Bonnet associate family.",
       "Shape: a non-planar minimal surface has $K=-\\kappa_1^2<0$ everywhere, so every point is hyperbolic (saddle-like); the only ruled minimal surfaces are the plane and the helicoid.",
       "Physics and complex analysis: soap films are the physical minimal surfaces; the Plateau problem (every rectifiable closed curve bounds a minimal surface, Douglas–Radó in the 1930s) helped found geometric analysis; in isothermal coordinates $H=0\\iff\\Delta X=0\\iff$ a Weierstrass representation exists.",
