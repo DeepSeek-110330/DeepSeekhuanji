@@ -1,0 +1,363 @@
+[
+  {
+    "id": "convex-sets-functions",
+    "title": "凸集与凸函数",
+    "titleEn": "Convex Sets and Convex Functions",
+    "branch": "optimization-or",
+    "level": 4,
+    "summary": "凸集是任两点连线都仍在其中的集合；凸函数是弦在图像上方、上图为凸集的函数，可用定义式、一阶或二阶条件判定——定义式判据不要求可导，一阶与二阶判据则分别需要一阶与二阶可微。",
+    "summaryEn": "A convex set contains the segment between any two of its points, and a convex function has every chord above its graph; convexity is tested by the definition, a first-order or a second-order condition; the definition-based test requires no differentiability, while the first- and second-order tests require first- and second-order differentiability respectively.",
+    "definition": "设 $K \\subseteq \\mathbb{R}^n$。若对任意 $x, y \\in K$ 与任意 $\\theta \\in [0,1]$，凸组合点 $\\theta x + (1-\\theta)y$ 仍在 $K$ 内，就称 $K$ 为**凸集**：集合中任意两点的整条连线都不离开集合。线性子空间、直线、半空间、多面体、球与椭球都是凸集；不在一条直线上的三个点组成的集合则不是——相邻两点连线的中点就会掉出去。凸集对**任意多个集合的交**封闭（每条连线同时受所有集合的约束），但并集一般不是：两个不相交的圆盘之并显然不凸。\n\n设 $f$ 的定义域是凸集。若对任意 $x, y \\in \\mathrm{dom}\\, f$ 与 $\\theta \\in [0,1]$ 都有\n$$f\\bigl(\\theta x + (1-\\theta)y\\bigr) \\le \\theta f(x) + (1-\\theta) f(y),$$\n就称 $f$ 为**凸函数**；当 $x \\ne y$、$\\theta \\in (0,1)$ 时不等号严格成立，则称 $f$ **严格凸**。几何意义有两条等价说法：图像上任意两点间的弦位于图像上方；图像以上的区域（**上图**，epigraph）是凸集。凸性是「函数值不出现凹陷」的精确化：$e^x$、$x^2$、$-\\ln x$、$\\|x\\|$ 都是凸函数。\n\n判定凸性有三条常用判据，前提各不相同。**定义式**（上面那条不等式）不需要任何可微性，是适用范围最广的判据。**一阶条件**：$f$ 可微时，$f$ 凸当且仅当对任意 $x, y$ 有 $f(y) \\ge f(x) + \\nabla f(x)^{\\top}(y-x)$——图像永远位于任一点的切平面之上，这给出全局性下界。**二阶条件**：$f$ 二阶可微时，$f$ 凸当且仅当 Hessian 处处半正定，$\\nabla^{2}f(x) \\succeq 0$。注意前提差异：凸函数**不要求可导**，$f(x)=|x|$ 在 $x=0$ 处没有导数，但按定义式是如假包换的凸函数；把二阶判据当成「凸 $\\iff f'' \\ge 0$」而不检查二阶可微，就是把充分条件误当成了普遍等价。\n\n有两种比凸更强的条件。**严格凸**排除平直的弦段，此时极小点至多一个；**强凸**要求存在 $m>0$ 使 $f(y) \\ge f(x) + \\nabla f(x)^{\\top}(y-x) + \\frac{m}{2}\\|y-x\\|^{2}$，等价于（二阶可微时）$\\nabla^{2}f \\succeq mI$，它保证函数「像二次函数一样向上弯」。蕴含关系单向：强凸 $\\Rightarrow$ 严格凸 $\\Rightarrow$ 凸，反之都不成立——$x^{4}$ 严格凸但不强凸，$|x|$ 凸但不严格凸。凸性还能被一批**保凸运算**传递，如非负加权和、逐点取最大值、仿射复合与关于部分变量做最小化；判断复杂函数的凸性，主要靠这些运算与三条判据的组合。",
+    "definitionEn": "A set $K \\subseteq \\mathbb{R}^n$ is **convex** if for all $x, y \\in K$ and every $\\theta \\in [0,1]$ the combination $\\theta x + (1-\\theta)y$ still lies in $K$: the whole segment joining any two points stays inside. Subspaces, lines, half-spaces, polyhedra, balls and ellipsoids are convex, while the three vertices of a triangle are not — the midpoint of an edge falls outside. Convexity is preserved by **arbitrary intersections**, but not by unions: the union of two disjoint disks is not convex.\n\nLet $f$ have convex domain. It is called **convex** if for all $x, y \\in \\mathrm{dom}\\, f$ and $\\theta \\in [0,1]$\n$$f\\bigl(\\theta x + (1-\\theta)y\\bigr) \\le \\theta f(x) + (1-\\theta) f(y);$$\nwhen the inequality is strict for $x \\ne y$ and $\\theta \\in (0,1)$, $f$ is **strictly convex**. Equivalent pictures: every chord joining two graph points lies above the graph, and the region above the graph (the **epigraph**) is a convex set. Convexity is the precise absence of inward bending: $e^x$, $x^2$, $-\\ln x$ and $\\|x\\|$ are convex.\n\nThree tests decide convexity, with different hypotheses. The **definition** needs no differentiability at all. The **first-order condition**: a differentiable $f$ is convex if and only if $f(y) \\ge f(x) + \\nabla f(x)^{\\top}(y-x)$ for all $x, y$ — the graph lies above every tangent hyperplane, which gives a global lower bound. The **second-order condition**: a twice differentiable $f$ is convex if and only if the Hessian is positive semidefinite everywhere, $\\nabla^{2}f(x) \\succeq 0$. Mind the differing hypotheses: convex functions **need not be differentiable** — $f(x)=|x|$ has no derivative at $0$ yet is convex by the definition — and treating the second-order test as the equivalence 「convex $\\iff f'' \\ge 0$」 without checking two-fold differentiability mistakes a sufficient condition for a universal one.\n\nTwo conditions strengthen convexity. **Strict convexity** rules out flat chords and leaves at most one minimizer. **Strong convexity** requires some $m>0$ with $f(y) \\ge f(x) + \\nabla f(x)^{\\top}(y-x) + \\frac{m}{2}\\|y-x\\|^{2}$, equivalently $\\nabla^{2}f \\succeq mI$ when twice differentiable, and forces the function to bend upward like a quadratic. The implications run one way only: strong $\\Rightarrow$ strict $\\Rightarrow$ convex, while $x^{4}$ is strictly but not strongly convex and $|x|$ is convex but not strictly convex. Convexity is also inherited through **convexity-preserving operations** — nonnegative weighted sums, pointwise maxima, composition with affine maps, and partial minimization — which, combined with the three tests, is how convexity of complicated models is checked in practice.",
+    "formulas": [
+      {
+        "latex": "\\theta x + (1-\\theta)y \\in K \\qquad (x, y \\in K,\\ \\theta \\in [0,1])",
+        "note": "凸集的定义：任意两点的连线整条都在集合内。半空间、多面体、球都是凸集；并集一般不凸。",
+        "noteEn": "Definition of a convex set: the segment between any two points stays inside. Half-spaces, polyhedra and balls are convex; unions generally are not."
+      },
+      {
+        "latex": "f\\bigl(\\theta x + (1-\\theta)y\\bigr) \\le \\theta f(x) + (1-\\theta) f(y)",
+        "note": "凸函数的定义式（两参数版 Jensen 不等式）：只涉及函数值与凸组合，不要求任何可导性。",
+        "noteEn": "The definition of convexity (two-point Jensen inequality): only function values and convex combinations appear, no differentiability is needed."
+      },
+      {
+        "latex": "f(y) \\ge f(x) + \\nabla f(x)^{\\top}(y - x) \\qquad (\\forall x, y)",
+        "note": "一阶判据（要求 f 可微）：图像在每点切平面之上，等价于凸性，给出全局下界。",
+        "noteEn": "First-order test (f differentiable): the graph lies above every tangent hyperplane; equivalent to convexity and gives a global lower bound."
+      },
+      {
+        "latex": "\\nabla^{2} f(x) \\succeq 0\\ \\ (\\forall x) \\iff f \\ \\text{凸}",
+        "note": "二阶判据：要求 f 二阶可微，Hessian 处处半正定；对不可微函数（如 |x|）不能这样判定。",
+        "noteEn": "Second-order test: for twice differentiable f, convexity is equivalent to a positive semidefinite Hessian everywhere; unusable for non-differentiable f such as |x|."
+      },
+      {
+        "latex": "f(y) \\ge f(x) + \\nabla f(x)^{\\top}(y-x) + \\frac{m}{2}\\|y-x\\|^{2} \\quad (m > 0)",
+        "note": "强凸的定义；二阶可微时等价于 $\\nabla^{2}f \\succeq mI$，蕴含严格凸，但反之不成立（x⁴ 非强凸）。",
+        "noteEn": "Definition of strong convexity; for twice differentiable f it is equivalent to $\\nabla^{2}f \\succeq mI$ and implies strict convexity, while the converse fails ($x^4$)."
+      }
+    ],
+    "properties": [
+      "凸集对任意多个集合的交封闭：把每个集合的连线条件同时用上即得。并集一般不封闭，两个不相交的区间之并就不是凸集。",
+      "凸函数不要求可导：$f(x)=|x|$ 在 $x=0$ 处不可导，但按定义式是凸函数；一阶判据要求可微、二阶判据要求二阶可微，前提不能省。",
+      "保凸运算（点到）：非负加权和 $\\sum w_i f_i$（$w_i \\ge 0$）仍凸；逐点最大值 $\\max_i f_i$ 仍凸；与仿射映射复合 $f(Ax+b)$ 仍凸；关于部分变量做最小化（投影）后仍凸。",
+      "下水平集必凸：$f$ 凸时对任意实数 $\\alpha$，$\\{x : f(x) \\le \\alpha\\}$ 是凸集；反之不然——所有下水平集都凸的函数称为**拟凸函数**，$\\sqrt{|x|}$ 拟凸却不凸。",
+      "强弱关系单向：强凸 $\\Rightarrow$ 严格凸 $\\Rightarrow$ 凸；$x^{4}$ 严格凸但不强凸，$|x|$ 凸但不严格凸，说明两个方向的反例各自存在。"
+    ],
+    "propertiesEn": [
+      "Convexity is preserved by arbitrary intersections, since every set's segment condition applies simultaneously. Unions generally fail: the union of two disjoint intervals is not convex.",
+      "Convex functions need not be differentiable: $f(x)=|x|$ has no derivative at $0$ yet is convex by the definition; the first-order test requires differentiability and the second-order test requires two-fold differentiability.",
+      "Convexity-preserving operations, point by point: nonnegative weighted sums $\\sum w_i f_i$ with $w_i \\ge 0$; pointwise maxima $\\max_i f_i$; composition with an affine map, $f(Ax+b)$; and minimization over some of the variables.",
+      "Sublevel sets are convex: if f is convex then $\\{x : f(x) \\le \\alpha\\}$ is convex for every real $\\alpha$; the converse fails — functions with all sublevel sets convex are **quasiconvex**, and $\\sqrt{|x|}$ is quasiconvex without being convex.",
+      "The strengths run one way: strong $\\Rightarrow$ strict $\\Rightarrow$ convex; $x^{4}$ is strictly but not strongly convex, and $|x|$ is convex but not strictly convex, so each converse has a counterexample."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [-0.5, 5],
+      "yRange": [-0.5, 4.5],
+      "elements": [
+        { "type": "axes" },
+        { "type": "polygon", "points": [[0, 0], [4, 0], [4.5, 2.5], [2, 4], [0, 2]], "fill": "rgba(247,37,133,0.10)", "color": "#f72585" },
+        { "type": "segment", "from": [0.5, 1], "to": [3.5, 3], "color": "#4cc9f0" },
+        { "type": "point", "at": [0.5, 1], "label": "x", "color": "#ffd166" },
+        { "type": "point", "at": [3.5, 3], "label": "y", "color": "#ffd166" },
+        { "type": "label", "at": [1.1, 2.9], "text": "线段 xy 仍在集合内", "size": 11, "color": "rgba(220,228,250,0.9)" }
+      ],
+      "title": "凸集：任取两点 x、y，连线 xy 完全落在集合内部"
+    },
+    "examples": [
+      {
+        "problem": "判断以下对象的凸性，并用程序复核：(1) $f(x,y)=x^{2}+3xy+4y^{2}$；(2) $g(x)=x^{3}$，分别在 $\\mathbb{R}$ 上与在 $[0,\\infty)$ 上；(3) 集合 $S=\\{(x,y): x>0,\\ xy \\ge 1\\}$。",
+        "solution": "（1）用二阶判据：$\\nabla^{2}f = \\begin{pmatrix}2 & 3 \\\\ 3 & 8\\end{pmatrix}$，顺序主子式为 $2 > 0$ 与 $\\det = 16 - 9 = 7 > 0$，故半正定（实为正定），$f$ 是凸函数；其特征值为 $5 \\pm 3\\sqrt{2} \\approx (0.757,\\ 9.243)$，最小者 $5-3\\sqrt{2}>0$ 还说明 $f$ 是**强凸**的，模数为 $5-3\\sqrt{2}$。程序随机取 $20000$ 组点做中点检验（检验 $f\\bigl(\\frac{x+y}{2}\\bigr) \\le \\frac{f(x)+f(y)}{2}$），零违例。（2）$g''(x)=6x$：在 $\\mathbb{R}$ 上取 $x=1$、$y=-1$、$\\theta=0.3$，则 $g(0.3 \\cdot 1 + 0.7 \\cdot (-1)) = g(-0.4) = -0.064$，而 $0.3 \\cdot g(1) + 0.7 \\cdot g(-1) = -0.4$，有 $-0.064 > -0.4$，违反凸性定义，故 $g$ 在 $\\mathbb{R}$ 上不凸；在 $[0,\\infty)$ 上 $g'' \\ge 0$ 恒成立，$g$ 凸。这两条都由程序复算确认。（3）$x>0$ 时 $xy \\ge 1 \\iff y \\ge \\frac{1}{x}$，所以 $S$ 正是 $h(x)=\\frac{1}{x}$（$x>0$）的**上图**；$h''(x)=\\frac{2}{x^{3}} > 0$，$h$ 在 $(0,\\infty)$ 上凸，而上图保凸，故 $S$ 是凸集。程序用 $100000$ 组随机可行点做中点检验，全部落在 $S$ 内，无一违例。"
+      },
+      {
+        "problem": "用凸性证明均值不等式：对任意 $a, b > 0$ 有 $\\frac{a+b}{2} \\ge \\sqrt{ab}$。",
+        "solution": "取 $f(x) = -\\ln x$（$x>0$）。$f''(x) = \\frac{1}{x^{2}} > 0$，由二阶判据 $f$ 在 $(0,\\infty)$ 上凸。对 $a, b > 0$ 与 $\\theta = \\frac{1}{2}$ 用凸性定义：\n$$f\\Bigl(\\frac{a+b}{2}\\Bigr) \\le \\frac{f(a)+f(b)}{2},$$\n即 $-\\ln\\frac{a+b}{2} \\le -\\frac{\\ln a + \\ln b}{2} = -\\ln\\sqrt{ab}$。两边乘 $-1$、再用 $\\ln$ 的单调性，得 $\\frac{a+b}{2} \\ge \\sqrt{ab}$；由于 $-\\ln x$ 还是严格凸的，等号当且仅当 $a=b$。数值复核：随机取 $10^{5}$ 组 $a, b \\in (10^{-3}, 10^{3})$，$\\frac{a+b}{2} - \\sqrt{ab}$ 的最小值约为 $8 \\times 10^{-11} \\ge 0$，与结论一致。∎"
+      }
+    ],
+    "tags": ["凸集", "凸函数", "强凸", "保凸运算"],
+    "links": ["concavity-inflection", "positive-definite-inertia", "multivariable-extrema", "convex-optimization", "lagrange-multiplier"]
+  },
+  {
+    "id": "convex-optimization",
+    "title": "凸优化问题",
+    "titleEn": "Convex Optimization",
+    "branch": "optimization-or",
+    "level": 5,
+    "summary": "凸优化是目标与不等式约束都为凸函数、等式约束为仿射的优化问题；局部最优必为全局最优，可用一阶条件或 KKT 直接刻画。",
+    "summaryEn": "A convex optimization problem has a convex objective and convex inequality constraints together with affine equality constraints; every local minimizer is global and optimality is characterized by first-order or KKT conditions.",
+    "definition": "**凸优化问题**的标准形式是 $\\min f_0(x)$ s.t. $f_i(x) \\le 0\\ (i=1,\\dots,m)$、$Ax = b$，其中目标 $f_0$ 与所有不等式约束函数 $f_i$ 都是凸函数，而**等式约束必须写成仿射形式** $Ax = b$。这不是约定而是必然：任何等式约束 $h(x)=0$ 都可以改写成两个不等式 $h(x) \\le 0$ 与 $-h(x) \\le 0$，要让它们同时是凸约束，$h$ 必须既凸又凹，即 $h$ 仿射。于是可行域是「凸集交半空间交仿射集」，仍是凸集。像 $x_1x_2=1$ 或 $x^2+y^2=1$ 这样的非仿射等式约束一旦出现，问题就不再是凸优化，本节的正向结论（局部即全局、KKT 充要等）都不再适用。\n\n凸优化最核心的性质是：**局部极小点必是全局极小点**。证明是一步反证：若 $x$ 是局部极小点，而某个可行点 $y$ 满足 $f_0(y) < f_0(x)$，那么对足够小的 $t > 0$，点 $(1-t)x+ty$ 由可行域的凸性仍可行，由目标的凸性满足 $f_0\\bigl((1-t)x+ty\\bigr) \\le (1-t)f_0(x) + t f_0(y) < f_0(x)$，且它任意接近 $x$，与局部极小矛盾。由此凸问题只有一个最优**值**：最优解集是凸集（最优解的凸组合仍可行且仍最优），目标严格凸时最优解至多一个。这一条把凸优化与一般非线性优化彻底分开——后者的山地里遍布局部极小的「假山顶」，而凸问题没有。\n\n对可微的凸问题，最优性有干净的一阶刻画：$x^{*}$ 是全局最优解当且仅当 $\\nabla f_0(x^{*})^{\\top}(y-x^{*}) \\ge 0$ 对一切可行点 $y$ 成立（目标在所有可行方向上都「不下降」）。无约束时它退化为 $\\nabla f_0(x^{*})=0$：**凸问题的驻点自动就是全局最优解**，不需要任何二阶检验；带仿射等式约束 $Ax=b$ 时它化为 $\\nabla f_0(x^{*}) = A^{\\top}\\nu$，即梯度落在 $A$ 的行空间里。目标不可微时用**次梯度**：$x^{*}$ 最优当且仅当 $0 \\in \\partial f_0(x^{*})$，例如 $f(x)=|x|$ 在 $x=0$ 处次梯度区间 $[-1,1]$ 包含 $0$。带不等式约束的完整版本就是 KKT 条件（见关联节点），而凸问题加 Slater 条件时 KKT 还是充要条件，这正是凸优化算法理论的地基。\n\n凸优化是一大类问题的统称：线性规划（线性目标与线性约束）、二次规划（二次目标、线性约束）、二阶锥规划、半定规划、最小二乘、$\\ell_1$ 范数极小化都属其中，它们都有多项式时间或实践中高效的算法（内点法等）。反过来，判断一个问题是不是凸优化，是建模阶段最重要的一步：只要把模型写成凸优化的标准形式，就可以放心地用「求驻点、解 KKT 系统」的办法寻找全局最优。",
+    "definitionEn": "A **convex optimization problem** in standard form reads $\\min f_0(x)$ subject to $f_i(x) \\le 0\\ (i=1,\\dots,m)$ and $Ax=b$, where the objective $f_0$ and all inequality constraint functions $f_i$ are convex while **every equality constraint must be affine**, written as $Ax=b$. This is not a convention but a necessity: any equation $h(x)=0$ can be rewritten as the two inequalities $h(x) \\le 0$ and $-h(x) \\le 0$, and both are convex constraints only if $h$ is simultaneously convex and concave, i.e. affine. The feasible set is therefore an intersection of a convex set, half-spaces and an affine set, hence convex. As soon as a non-affine equality such as $x_1x_2=1$ or $x^2+y^2=1$ appears, the problem leaves the convex class and none of the conclusions below applies.\n\nThe central property is that **any local minimizer is globally optimal**. The proof is a one-step contradiction: if $x$ is locally minimal while some feasible $y$ satisfies $f_0(y) < f_0(x)$, then for all small enough $t>0$ the point $(1-t)x+ty$ is feasible by convexity of the feasible set and obeys $f_0\\bigl((1-t)x+ty\\bigr) \\le (1-t)f_0(x) + t f_0(y) < f_0(x)$, while it is arbitrarily close to $x$ — contradicting local minimality. Consequently a convex problem has a single optimal value: the optimal set is convex (convex combinations of optima remain feasible and optimal), and if the objective is strictly convex there is at most one minimizer. This is what separates convex optimization from general nonlinear programming, whose landscape is littered with local false summits.\n\nFor differentiable convex problems optimality has a clean first-order form: $x^{*}$ is globally optimal if and only if $\\nabla f_0(x^{*})^{\\top}(y-x^{*}) \\ge 0$ for every feasible $y$ — the objective cannot decrease along any feasible direction. Unconstrained, this reduces to $\\nabla f_0(x^{*})=0$: **a stationary point of a convex problem is automatically globally optimal**, with no second-order test needed; with affine equalities $Ax=b$ it becomes $\\nabla f_0(x^{*}) = A^{\\top}\\nu$, meaning the gradient lies in the row space of $A$. When the objective is non-differentiable one uses **subgradients**: $x^{*}$ is optimal iff $0 \\in \\partial f_0(x^{*})$, as with $f(x)=|x|$, whose subdifferential $[-1,1]$ at $0$ contains $0$. The complete version with inequality constraints is the KKT conditions (see the linked node), and for convex problems satisfying Slater's condition KKT is necessary and sufficient — the foundation of convex optimization algorithms.\n\nConvex optimization is a whole family: linear programming, quadratic programming, second-order cone and semidefinite programming, least squares and $\\ell_1$-norm minimization all belong to it, and all admit efficient algorithms in theory and practice (interior-point methods, for instance). Deciding whether a model is convex is therefore the most important step during modelling: once the model is written in convex standard form, one may safely look for the global optimum by solving stationarity equations or the KKT system.",
+    "formulas": [
+      {
+        "latex": "\\min_{x}\\ f_0(x) \\quad \\text{s.t.}\\quad f_i(x) \\le 0\\ (i=1,\\dots,m),\\qquad Ax = b",
+        "note": "凸优化标准形式：$f_0, f_i$ 凸，等式约束必须是仿射的 $Ax=b$；这三条同时成立才叫凸问题。",
+        "noteEn": "Standard form of a convex problem: convex $f_0, f_i$ and affine equality constraints $Ax=b$; all three requirements define the class."
+      },
+      {
+        "latex": "x \\text{ 局部最优} \\implies x \\text{ 全局最优}",
+        "note": "凸问题的核心性质（可行域凸 + 目标凸）：局部极小不可能比别处差，因此凸问题不存在「假局部最优」。",
+        "noteEn": "The core property (convex feasible set plus convex objective): a local minimizer is global, so convex problems have no deceptive local optima."
+      },
+      {
+        "latex": "\\nabla f_0(x^{*})^{\\top}(y - x^{*}) \\ge 0 \\qquad (\\forall\\, y \\text{ 可行})",
+        "note": "可微凸问题的最优性判据：所有可行方向都不让目标下降；反之满足它的可行点一定是全局最优解。",
+        "noteEn": "Optimality criterion for a differentiable convex problem: no feasible direction decreases the objective; conversely any feasible point satisfying it is globally optimal."
+      },
+      {
+        "latex": "\\nabla f_0(x^{*}) = 0 \\iff x^{*} \\text{ 是全局最优解（无约束、可微、凸）}",
+        "note": "无约束可微凸问题：驻点即全局解，不需要二阶条件；非凸问题里同一条式子只能给出候选点。",
+        "noteEn": "For an unconstrained differentiable convex problem, stationary points are global minimizers with no second-order test; in the non-convex case the same equation only yields candidates."
+      },
+      {
+        "latex": "f_0 \\text{ 严格凸} \\implies \\text{最优解至多一个}",
+        "note": "严格凸保证唯一性；非严格凸问题可能有一整段最优解（如常值目标处处最优）。",
+        "noteEn": "Strict convexity gives uniqueness; without it the optimal set can be a whole segment (a constant objective is optimal everywhere)."
+      }
+    ],
+    "properties": [
+      "等式约束必须仿射：$h(x)=0$ 等价于两个不等式，要求二者都凸只能得出 $h$ 仿射；$x^2=1$、$x_1x_2=1$ 这类等式约束会破坏凸性，问题随即脱离凸优化范畴。",
+      "局部极小即全局极小，且最优解集是凸集：两个最优解的任意凸组合仍可行、函数值仍不超过最优值，于是也是最优解；最优值本身唯一。",
+      "不可微时用次梯度：无约束凸问题中 $x^{*}$ 最优当且仅当 $0 \\in \\partial f_0(x^{*})$，例如 $|x|$ 在 $0$ 处 $[-1,1] \\ni 0$。",
+      "严格凸 $\\Rightarrow$ 最优解至多一个（存在即唯一）；非严格凸问题可能有多重最优解，例如常数目标函数处处最优。",
+      "LP、QP、SOCP、SDP、最小二乘都是凸优化的特例；凸问题可用内点法等高效求解，也是「求驻点、解 KKT 系统」这套做法成立的前提。"
+    ],
+    "propertiesEn": [
+      "Equality constraints must be affine: writing $h(x)=0$ as two inequalities forces $h$ to be convex and concave at once, hence affine; equalities such as $x^2=1$ or $x_1x_2=1$ destroy convexity and take the problem outside this class.",
+      "Local minima are global, and the optimal set is convex: any convex combination of two optimal solutions stays feasible with objective value no larger, hence is optimal too; the optimal value itself is unique.",
+      "Non-differentiable case via subgradients: for an unconstrained convex problem $x^{*}$ is optimal iff $0 \\in \\partial f_0(x^{*})$; for $|x|$, the interval $[-1,1]$ at $0$ contains $0$.",
+      "Strict convexity implies at most one minimizer (existence making it unique); without strict convexity there may be multiple optima, as with a constant objective that is optimal everywhere.",
+      "LP, QP, SOCP, SDP and least squares are special cases; convex problems admit efficient algorithms such as interior-point methods, and this class is precisely where solving stationarity or KKT systems is legitimate."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-2*(x-1)",
+      "fy": "-2*(y-2)",
+      "xRange": [-1, 4],
+      "yRange": [0, 5],
+      "contourExpr": "((x-1)^2+(y-2)^2)",
+      "marks": [{ "at": [1, 2], "label": "全局最优 (1, 2)" }],
+      "title": "凸问题的梯度场：所有箭头都指向唯一的全局极小点 (1, 2)"
+    },
+    "examples": [
+      {
+        "problem": "求解凸优化问题 $\\min (x-1)^{2}+(y-2)^{2}$ s.t. $x+y \\le 1$，验证最优性条件并用程序复核。",
+        "solution": "目标 $f=(x-1)^2+(y-2)^2$ 是（强）凸函数，可行域 $x+y \\le 1$ 是半空间（凸集），所以这是凸优化问题，任何局部最优解都全局最优。无约束最优解为 $(1,2)$，但 $1+2 = 3 > 1$ 不可行，故最优解落在边界 $x+y=1$ 上。把 $f$ 限制到这条直线：令 $y = 1-x$，得 $f = (x-1)^{2} + (x+1)^{2} = 2x^{2} + 2$，最小点是 $x=0$，于是 $x^{*} = (0,1)$，$f_{\\min} = 2$（点 $(1,2)$ 到直线 $x+y=1$ 的距离为 $\\frac{|1+2-1|}{\\sqrt{2}} = \\sqrt{2}$，与投影结果一致）。一阶最优性核对：$\\nabla f(0,1) = (-2,-2)$，从边界点出发的任意可行方向 $d$ 满足 $d_1 + d_2 \\le 0$，而 $\\nabla f^{\\top}d = -2(d_1+d_2) \\ge 0$ ✓。写成 KKT 形式：$L = f + \\lambda(x+y-1)$，$\\nabla f + \\lambda(1,1) = 0$ 给出 $\\lambda = 2 \\ge 0$，互补松弛 $\\lambda(x+y-1) = 0$ 成立 ✓。程序复核：在可行域上随机采样 $2 \\times 10^{5}$ 个点，$f$ 的最小值约为 $2.005 \\ge 2$；再用投影梯度法（步长 $0.05$，每步投影回半平面）迭代 $2000$ 步，收敛到 $(0,1)$，$f = 2$，与解析解一致。"
+      },
+      {
+        "problem": "求 $f(x,y)=x^{2}+3xy+4y^{2}-2x-y$ 的全局极小值，并说明为什么只需解 $\\nabla f = 0$。",
+        "solution": "Hessian 为 $H = \\begin{pmatrix}2 & 3 \\\\ 3 & 8\\end{pmatrix}$，特征值 $5 \\pm 3\\sqrt{2} > 0$，故 $f$ 强凸（凸）。这是无约束凸问题，**驻点就是全局最优解**，直接解 $\\nabla f = (2x+3y-2,\\ 3x+8y-1) = (0,0)$：由 $2x+3y=2$、$3x+8y=1$ 解得 $x = \\frac{13}{7}$、$y = -\\frac{4}{7}$。代入得\n$$f_{\\min} = \\frac{169 - 156 + 64 - 182 + 28}{49} = -\\frac{11}{7} \\approx -1.5714.$$\n程序复核：（i）随机采样 $2 \\times 10^{5}$ 个点的最小函数值约为 $-1.57143$，与 $-\\frac{11}{7}$ 一致且不小于它；（ii）从 $(5,5)$ 出发做梯度下降，迭代 $5000$ 步后到达 $(1.85714286,\\ -0.57142857)$，即 $\\bigl(\\frac{13}{7}, -\\frac{4}{7}\\bigr)$。注意：这里能「解驻点就得全局解」，靠的正是凸性；同样的一阶条件用在非凸目标上，只能得到候选点。"
+      }
+    ],
+    "tags": ["凸优化", "全局最优", "次梯度", "一阶最优性条件"],
+    "links": ["convex-sets-functions", "kkt-conditions", "matrix-calculus-optimization", "lagrange-multiplier", "gradient-descent-sgd"]
+  },
+  {
+    "id": "linear-programming",
+    "title": "线性规划与单纯形法",
+    "titleEn": "Linear Programming and the Simplex Method",
+    "branch": "optimization-or",
+    "level": 4,
+    "summary": "线性规划在由线性约束构成的多面体上优化线性目标；若最优值有限，最优解必在顶点取到，单纯形法正是沿顶点转移、用检验数判断最优的算法。",
+    "summaryEn": "Linear programming optimizes a linear objective over a polyhedron; when the optimal value is finite some vertex is optimal, and the simplex method walks from vertex to vertex using reduced costs as its optimality test.",
+    "definition": "**线性规划**（Linear Programming, LP）的目标函数与全部约束都是线性的。**标准形**为 $\\min c^{\\top}x$ s.t. $Ax = b$、$x \\ge 0$：任何 LP 都能化成这个形式——$a^{\\top}x \\le b$ 加上松弛变量 $s \\ge 0$ 变成等式；$a^{\\top}x \\ge b$ 减去盈余变量（surplus variable）；自由变量写成两个非负变量之差 $x = u - v$；$\\max z$ 取负化为 $\\min (-z)$。可行域 $\\{x : Ax = b,\\ x \\ge 0\\}$ 是有限个半空间与超平面之交，即**多面体**，必为凸集；标准形的可行域只要非空就必有**顶点**（基本可行解），顶点对应选出 $m$ 个线性无关的列组成基 $B$，令 $x_B = B^{-1}b \\ge 0$、其余分量取零。\n\n**基本定理**：只要 LP 可行且最优值有限（不是无界的 $\\pm\\infty$），就**一定存在最优解取在某个顶点上**。直观上线性目标的等值面是超平面：若最优解落在某个面的内部而非它的顶点，那么该面（作为凸集）上的一切点都取得同一最优值，其中自然包含顶点。于是最优解只需在有限个顶点里找；虽然顶点个数最多为 $\\binom{n}{m}$ 量级（$m$ 为约束个数、$n$ 为变量个数），逐一枚举不现实，但「只需搜顶点」这一条为所有算法指明了方向。\n\n**单纯形法**（Dantzig, 1947）就是这个方向的实现：① 从一个顶点（基本可行解）出发；② 计算**检验数**（reduced cost）$\\sigma_j = c_j - c_B^{\\top}B^{-1}A_j$，若所有非基变量的检验数都满足 $\\sigma_j \\ge 0$（min 问题约定），当前顶点即为最优解；③ 否则取一个有负检验数的变量进基，做比值检验确定出基变量，沿多面体的一条棱移动到**相邻顶点**，目标值随之下降；④ 若进基方向的比值检验没有任何正分量，说明目标沿这条无界方向可以无限下降，问题**无界**。几何上，单纯形法让目标单调改善地在多面体的棱上行走；顶点有限，只要不走回头路，就在有限步内终止。\n\n两点提醒。**退化**：若某个基本可行解中有基变量取零值，比值检验给出的步长为零，迭代可能原地打转，历史上确实出现过**循环**的算例；采用 Bland 规则（进基、出基变量都选下标最小者）或字典序摄动法，可以保证有限终止。**建模与应用**：生产计划、运输问题、配料、排班、网络流等都能建模成 LP；变量要求取整时属于整数规划（见关联节点）。LP 是多项式时间可解的（内点法在实践与理论上都高效），而它的对偶理论给出影子价格与最优性证书，见关联节点。",
+    "definitionEn": "In **linear programming** (LP) both the objective and all constraints are linear. Its **standard form** is $\\min c^{\\top}x$ subject to $Ax=b$, $x \\ge 0$, and every LP can be brought into it: an inequality $a^{\\top}x \\le b$ gains a slack variable $s \\ge 0$ and becomes an equation; $a^{\\top}x \\ge b$ loses a surplus variable; a free variable becomes a difference $x = u-v$ of two nonnegative ones; and $\\max z$ is turned into $\\min(-z)$. The feasible set $\\{x : Ax=b,\\ x\\ge 0\\}$ is an intersection of finitely many half-spaces and hyperplanes — a **polyhedron**, hence convex; as soon as it is nonempty it contains **vertices** (basic feasible solutions), corresponding to picking $m$ linearly independent columns as a basis $B$ and setting $x_B = B^{-1}b \\ge 0$ with the remaining entries zero.\n\nThe **fundamental theorem**: whenever an LP is feasible and its optimal value is finite (rather than unbounded), **some vertex attains the optimum**. Intuitively the level sets of a linear objective are hyperplanes: if an optimum is interior to a face rather than at one of its vertices, then the whole face — a convex set — attains the same optimal value, vertices included. So the search may be restricted to finitely many vertices; enumerating all $\\binom{n}{m}$ of them is impractical, but the reduction to vertices guides every algorithm.\n\nThe **simplex method** (Dantzig, 1947) implements this: (1) start at a vertex, i.e. a basic feasible solution; (2) compute the **reduced costs** $\\sigma_j = c_j - c_B^{\\top}B^{-1}A_j$; if every nonbasic $\\sigma_j \\ge 0$ (min convention), the current vertex is optimal; (3) otherwise bring a variable with negative reduced cost into the basis, run the ratio test to choose the leaving variable, and move along an edge to an **adjacent vertex**, the objective decreasing all the way; (4) if the ratio test finds no positive entry, the objective decreases without bound along that ray and the LP is **unbounded**. Geometrically the method walks along edges with monotone improvement; since there are finitely many vertices and no revisiting is forced, it terminates in finitely many steps.\n\nTwo cautions. **Degeneracy**: if a basic feasible solution has a basic variable equal to zero, the ratio test yields a zero step, iterations may stall, and genuine **cycling** examples exist; Bland's rule (choose smallest indices for entering and leaving variables) or lexicographic perturbation guarantees finite termination. **Modelling**: production planning, transportation, blending, scheduling and network flows all become LPs, and when variables must be integral one enters integer programming (see the linked node). LPs are solvable in polynomial time (interior-point methods), and duality supplies shadow prices and optimality certificates (see the linked node).",
+    "formulas": [
+      {
+        "latex": "\\min\\ c^{\\top}x \\quad \\text{s.t.}\\quad Ax = b,\\quad x \\ge 0",
+        "note": "LP 标准形；任何线性目标、线性约束的问题都能经松弛变量、盈余变量、自由变量拆分与 max/min 互换化到这一形式。",
+        "noteEn": "The standard form of an LP; slack and surplus variables, splitting free variables, and swapping max for min bring any linear model into it."
+      },
+      {
+        "latex": "a^{\\top}x \\le b \\iff a^{\\top}x + s = b,\\quad s \\ge 0",
+        "note": "松弛变量把不等式化为等式；$\\ge$ 型则减去盈余变量。化标准形后约束右端一般需为非负。",
+        "noteEn": "A slack variable turns an inequality into an equation; a surplus variable is subtracted for $\\ge$ constraints. After the conversion the right-hand side is usually kept nonnegative."
+      },
+      {
+        "latex": "\\sigma_j = c_j - c_B^{\\top}B^{-1}A_j \\ge 0\\ (\\forall j \\notin B) \\implies \\text{当前基本可行解最优}",
+        "note": "检验数最优性判据（min 约定）：所有非基变量检验数非负时不可能再改进，当前顶点即最优解。",
+        "noteEn": "Reduced-cost optimality test (min convention): if every nonbasic reduced cost is nonnegative, no improvement is possible and the current vertex is optimal."
+      },
+      {
+        "latex": "x_B = B^{-1}b \\ge 0,\\qquad x_N = 0",
+        "note": "基本可行解＝顶点：选 m 个线性无关的列作基 B，解出基变量并令非基变量为零。",
+        "noteEn": "Basic feasible solution equals vertex: choose m linearly independent columns as the basis B, solve for the basic variables, and set the nonbasic ones to zero."
+      },
+      {
+        "latex": "\\text{最优值有限} \\implies \\exists\\ \\text{顶点取到最优值}",
+        "note": "基本定理：只需在顶点中寻找最优解；无界或不可行时这一结论没有对象。",
+        "noteEn": "The fundamental theorem: only vertices need to be searched; the statement is vacuous when the LP is unbounded or infeasible."
+      }
+    ],
+    "properties": [
+      "可行域是多面体（凸集），可能为空、有界或无界；LP 的结局只有三种：有最优解（唯一或无穷多）、目标无界、无可行解。",
+      "若最优值有限，则存在顶点最优解；若两个不同顶点同为最优，则连接它们的棱或面上每一点都取同一最优值，即多重最优解（对应于某个非基变量检验数为 0）。",
+      "单纯形法每一步移动到相邻顶点并使目标单调改善（min 问题不增）；顶点有限，只要不循环就有限步终止。",
+      "退化顶点（某基变量取 0）可能让步长为零、迭代停滞甚至循环；Bland 规则或字典序摄动可以保证有限终止。",
+      "化标准形时：$\\le$ 加松弛变量，$\\ge$ 减盈余变量，自由变量拆成 $u-v$；含 $\\ge$ 或等式的模型无法直接读出初始基，需要人工变量配合两阶段法或大 M 法启动单纯形法。"
+    ],
+    "propertiesEn": [
+      "The feasible set is a polyhedron (convex) that may be empty, bounded or unbounded; an LP has only three possible outcomes: an optimum (unique or multiple), an unbounded objective, or infeasibility.",
+      "If the optimal value is finite, an optimal vertex exists; if two distinct vertices are both optimal, every point of the edge or face joining them has the same optimal value — multiple optima, signalled by a zero reduced cost of some nonbasic variable.",
+      "Each simplex step moves to an adjacent vertex and improves the objective monotonically (non-increasing for min); with finitely many vertices, absence of cycling implies finite termination.",
+      "A degenerate vertex (some basic variable zero) can force a zero step, stalling the iteration or even cycling; Bland's rule or lexicographic perturbation restores finite termination.",
+      "Converting to standard form: add slack variables for $\\le$, subtract surplus variables for $\\ge$, split free variables as $u-v$; models with $\\ge$ constraints or equalities lack an immediately readable initial basis and need artificial variables with the two-phase or big-M method."
+    ],
+    "plot": {
+      "type": "geometry",
+      "xRange": [-0.5, 6.5],
+      "yRange": [-0.5, 6.5],
+      "elements": [
+        { "type": "axes" },
+        { "type": "polygon", "points": [[0, 0], [4, 0], [3, 1.5], [2, 2], [0, 2]], "fill": "rgba(247,37,133,0.12)", "color": "#f72585" },
+        { "type": "segment", "from": [4, 0], "to": [0, 6], "color": "#4cc9f0", "dash": true },
+        { "type": "segment", "from": [6, 0], "to": [0, 3], "color": "#06d6a0", "dash": true },
+        { "type": "segment", "from": [0, 2], "to": [4.5, 2], "color": "#b388ff", "dash": true },
+        { "type": "segment", "from": [2.6, 2], "to": [4.2, 0], "color": "#ffd166" },
+        { "type": "point", "at": [3, 1.5], "label": "最优顶点 (3, 1.5)，z = 21", "color": "#ffd166" },
+        { "type": "label", "at": [1.2, 0.7], "text": "可行域", "color": "rgba(247,37,133,0.95)" },
+        { "type": "label", "at": [3.6, 1.0], "text": "5x+4y=21", "size": 11, "color": "#ffd166" }
+      ],
+      "title": "线性规划的可行域（五边形）与最优顶点 (3, 1.5)；虚线为三条约束，金线为最优等值线"
+    },
+    "examples": [
+      {
+        "problem": "某车间生产甲、乙两种产品，每件利润分别为 5 万元与 4 万元。一件甲占用设备 A 6 小时、设备 B 1 小时；一件乙占用 A 4 小时、B 2 小时。设备 A 每周可用 24 小时，B 每周可用 6 小时；市场对乙的需求每周不超过 2 件。如何安排产量使周利润最大？",
+        "solution": "设甲、乙的周产量为 $x_1, x_2$。模型是 $\\max z = 5x_1 + 4x_2$ s.t. $6x_1 + 4x_2 \\le 24$（设备 A）、$x_1 + 2x_2 \\le 6$（设备 B）、$x_2 \\le 2$（市场）、$x_1, x_2 \\ge 0$。可行域是五边形，顶点为 $(0,0)$、$(4,0)$、$(3,1.5)$、$(2,2)$、$(0,2)$；逐顶点计算目标值：$0,\\ 20,\\ 21,\\ 18,\\ 8$，故最优解为 $(3, 1.5)$，最大周利润 $z^{*} = 21$ 万元。解读：设备 A、B 在最优点都满负荷（两条设备约束取等号），而乙的市场上限没有卡住（$1.5 < 2$）；把模型写成 $\\min$ 标准形后，两个设备松弛变量的检验数分别为 $0.75$ 与 $0.5$（非负，符合最优性判据），它们也正是两种设备产能的影子价格。程序复核：用单纯形法（Bland 规则防循环）求得 $x^{*} = (3, 1.5)$、$z^{*} = 21$；再枚举全部 $\\binom{5}{2} = 10$ 组约束交点并筛去不可行的，得到的顶点恰好是上面五个，最大目标值同样为 21，两种算法一致。"
+      },
+      {
+        "problem": "把 LP：$\\min x_1 + 2x_2$ s.t. $x_1 + x_2 \\ge 4$，$x_1 - x_2 \\le 3$，$x_1, x_2 \\ge 0$ 化为标准形，并求解。",
+        "solution": "第一条是 $\\ge$ 型约束，减去盈余变量 $s_1 \\ge 0$：$x_1 + x_2 - s_1 = 4$；第二条是 $\\le$ 型，加上松弛变量 $s_2 \\ge 0$：$x_1 - x_2 + s_2 = 3$。标准形为 $\\min x_1 + 2x_2$ s.t. 这两个等式、$x_1, x_2, s_1, s_2 \\ge 0$。注意初始基不能像纯 $\\le$ 型那样直接读出（盈余变量的系数是 $-1$），一般模型需用两阶段法或大 M 法引入人工变量才能启动单纯形。求解：由 $x_1 \\ge 4 - x_2$ 得 $z = x_1 + 2x_2 \\ge 4 + x_2$；又由 $x_1 \\le 3 + x_2$ 与 $x_1 \\ge 4 - x_2$ 必须有 $4 - x_2 \\le 3 + x_2$，即 $x_2 \\ge 0.5$。于是 $z \\ge 4 + 0.5 = 4.5$，并在 $x_2 = 0.5$、$x_1 = 3.5$ 处取到（此时两条约束都取等号：$3.5 + 0.5 = 4$，$3.5 - 0.5 = 3$）。程序复核：求解器给出 $x^{*} = (3.5,\\ 0.5)$、$z^{*} = 4.5$，与手算一致；并验证了可行域中 $x_2$ 的取值范围是 $[0.5, +\\infty)$、目标值随 $x_2$ 单调递增，故最小值在 $x_2 = 0.5$ 处取到。"
+      }
+    ],
+    "tags": ["线性规划", "单纯形法", "基本可行解", "检验数"],
+    "links": ["lp-duality", "convex-sets-functions", "integer-programming", "network-flow", "matrix-rank"]
+  },
+  {
+    "id": "lp-duality",
+    "title": "线性规划对偶理论",
+    "titleEn": "Linear Programming Duality",
+    "branch": "optimization-or",
+    "level": 5,
+    "summary": "每个线性规划都有对偶问题，两者最优值在有限时相等；弱对偶给出界，互补松弛与影子价格揭示约束资源的边际价值。",
+    "summaryEn": "Every linear program has a dual whose finite optimum coincides with the primal one; weak duality supplies bounds while complementary slackness and shadow prices price the constraints.",
+    "definition": "每个线性规划都有一个**对偶问题**，与原问题共用同一组数据 $(A, b, c)$，但角色互换。以**对称形式**为例：原问题 $\\min c^{\\top}x$ s.t. $Ax \\ge b$、$x \\ge 0$，对偶问题为 $\\max b^{\\top}y$ s.t. $A^{\\top}y \\le c$、$y \\ge 0$——$b$ 与 $c$ 互换位置，$A$ 取转置，$\\min$ 换成 $\\max$，约束方向由 $\\ge$ 翻成 $\\le$。若原问题的约束是等式（**非对称形式**）$\\min c^{\\top}x$ s.t. $Ax = b$、$x \\ge 0$，对偶是 $\\max b^{\\top}y$ s.t. $A^{\\top}y \\le c$，此时 $y$ **没有符号限制**，可以取负值：等式约束允许在两个方向上放松与收紧，对应的乘数自不必非负。写对偶时先逐条看清原约束是等式还是不等式、变量有怎样的符号限制，两种形式不能混用。\n\n**弱对偶**：对任意一对可行解 $x$（原问题）与 $y$（对偶问题），恒有 $b^{\\top}y \\le c^{\\top}x$。证明只有一行：由 $Ax \\ge b$ 与 $y \\ge 0$ 得 $b^{\\top}y \\le (Ax)^{\\top}y = x^{\\top}A^{\\top}y$，再由 $A^{\\top}y \\le c$ 与 $x \\ge 0$ 得 $x^{\\top}A^{\\top}y \\le c^{\\top}x$。于是 $d^{*} \\le p^{*}$——**对偶最优值不超过原问题最优值**（原问题取 $\\min$、对偶取 $\\max$ 的约定下）；方向写反是本节最高频的错误。弱对偶的实用价值是**最优性证书**：只要找到一个原可行解与一个对偶可行解使两者目标值相等，就同时证明了双方都达到最优，对偶间隙为零，无需再迭代。\n\n**强对偶**：若原问题（或对偶问题）有有限的最优值，则另一方也有有限最优值，且 $p^{*} = d^{*}$。这个结论对 LP **无条件成立**：不需要凸性假设、不需要约束规范——LP 的可行域本身就是多面体，凸性是自动的，这是 LP 对偶比一般非线性对偶干净的地方。边界情形要分清：原问题**无界**（$\\min \\to -\\infty$）$\\Rightarrow$ 对偶问题**不可行**；反过来，原问题**不可行**时，对偶问题可能无界，也可能不可行，两种都要允许，因此不存在「对偶不可行 $\\Rightarrow$ 原问题无界」这样的反向推理。\n\n**互补松弛**：设 $x^{*}, y^{*}$ 分别是原、对偶最优解，则对每个 $i$ 有 $y_i^{*}\\bigl(a_i^{\\top}x^{*} - b_i\\bigr) = 0$，对每个 $j$ 有 $x_j^{*}\\bigl(c_j - (A^{\\top}y^{*})_j\\bigr) = 0$。通俗地说：约束有余量（没有顶到）的资源，其影子价格必为零；影子价格为正的资源一定被用尽。**影子价格**正是对偶变量的经济含义：$y_i^{*} = \\partial p^{*}/\\partial b_i$（在最优基不变的范围内），表示第 $i$ 种资源每增加一单位、最优值能改善多少。于是不必重解模型，就能判断追加哪种资源最划算。对偶与互补松弛也是网络流、博弈论中最小-最大定理的共同源头。",
+    "definitionEn": "Every linear program carries a **dual problem** sharing the same data $(A, b, c)$ with roles swapped. In the **symmetric form**: the primal $\\min c^{\\top}x$ subject to $Ax \\ge b$, $x \\ge 0$ has dual $\\max b^{\\top}y$ subject to $A^{\\top}y \\le c$, $y \\ge 0$ — $b$ and $c$ change places, $A$ is transposed, min becomes max and the constraints flip direction. If the primal constraints are equations (the **asymmetric form**) $\\min c^{\\top}x$ subject to $Ax=b$, $x \\ge 0$, the dual is $\\max b^{\\top}y$ subject to $A^{\\top}y \\le c$ with $y$ **free of any sign restriction**: an equality can be relaxed or tightened in both directions, so its multiplier need not be nonnegative. When deriving a dual, check each constraint (equality or inequality) and each variable (sign-restricted or free); the two forms must not be mixed.\n\n**Weak duality**: for any feasible pair $x$ (primal) and $y$ (dual) one always has $b^{\\top}y \\le c^{\\top}x$. The proof is one line: from $Ax \\ge b$ and $y \\ge 0$, $b^{\\top}y \\le (Ax)^{\\top}y = x^{\\top}A^{\\top}y \\le x^{\\top}c$, where the last step uses $A^{\\top}y \\le c$ and $x \\ge 0$. Hence $d^{*} \\le p^{*}$ — **the optimal dual value never exceeds the optimal primal value** in the min-primal/max-dual convention; reversing the inequality is the single most common error. The practical value of weak duality is an **optimality certificate**: once a feasible primal $x$ and a feasible dual $y$ produce equal objective values, both are proved optimal with zero duality gap, no iteration needed.\n\n**Strong duality**: if either problem has a finite optimal value, so does the other, and $p^{*} = d^{*}$. For LPs this holds **unconditionally** — no convexity hypothesis, no constraint qualification: the feasible polyhedron is automatically convex, which is what makes LP duality cleaner than general nonlinear duality. The boundary cases matter: if the primal is **unbounded** ($\\min \\to -\\infty$) the dual is **infeasible**; conversely, an **infeasible** primal may leave the dual unbounded **or** infeasible, so the inference 「dual infeasible $\\Rightarrow$ primal unbounded」 is invalid.\n\n**Complementary slackness**: if $x^{*}$ and $y^{*}$ are optimal for the primal and dual, then $y_i^{*}\\bigl(a_i^{\\top}x^{*} - b_i\\bigr) = 0$ for every $i$ and $x_j^{*}\\bigl(c_j - (A^{\\top}y^{*})_j\\bigr) = 0$ for every $j$. In words: a resource with slack (whose constraint has room) carries zero shadow price, and a resource with positive shadow price is fully used. This **shadow price** is the economic reading of a dual variable: $y_i^{*} = \\partial p^{*}/\\partial b_i$ wherever the optimal basis stays fixed, the improvement of the optimal value per extra unit of resource $i$. One can therefore judge which resource to expand without re-solving the model. Duality and complementary slackness are also the common source of min-max theorems in network flows and game theory.",
+    "formulas": [
+      {
+        "latex": "\\min\\ c^{\\top}x\\ \\text{s.t.}\\ Ax \\ge b,\\ x \\ge 0 \\qquad \\Longleftrightarrow \\qquad \\max\\ b^{\\top}y\\ \\text{s.t.}\\ A^{\\top}y \\le c,\\ y \\ge 0",
+        "note": "对称形式的对偶对：b 与 c 互换、A 转置、min 与 max 互换、约束方向翻转，变量均非负。",
+        "noteEn": "The symmetric dual pair: b and c swap, A is transposed, min becomes max and constraints flip direction, with nonnegative variables throughout."
+      },
+      {
+        "latex": "\\min\\ c^{\\top}x\\ \\text{s.t.}\\ Ax = b,\\ x \\ge 0 \\qquad \\Longleftrightarrow \\qquad \\max\\ b^{\\top}y\\ \\text{s.t.}\\ A^{\\top}y \\le c,\\ y \\text{ 自由}",
+        "note": "非对称形式：等式约束对应对偶变量无符号限制（可正可负），不能与对称形式的 y ≥ 0 混用。",
+        "noteEn": "Asymmetric form: equality constraints produce sign-free dual variables, which must not be confused with the y ≥ 0 of the symmetric form."
+      },
+      {
+        "latex": "b^{\\top}y \\le c^{\\top}x \\qquad \\Longrightarrow \\qquad d^{*} \\le p^{*}",
+        "note": "弱对偶：任何可行对给出界；在此约定下对偶最优值不超过原问题最优值——方向绝不可反。",
+        "noteEn": "Weak duality: any feasible pair gives a bound; here the optimal dual value is at most the optimal primal value — the direction must not be reversed."
+      },
+      {
+        "latex": "p^{*} = d^{*} \\qquad (\\text{一方有有限最优值即可})",
+        "note": "强对偶：对 LP 无条件成立，无需凸性或约束规范；无界、不可行等边界情形另行讨论。",
+        "noteEn": "Strong duality: unconditional for LPs, requiring neither convexity nor a constraint qualification; unbounded and infeasible cases are handled separately."
+      },
+      {
+        "latex": "y_i\\bigl(a_i^{\\top}x - b_i\\bigr) = 0,\\qquad x_j\\bigl(c_j - (A^{\\top}y)_j\\bigr) = 0",
+        "note": "互补松弛：约束有余量则影子价格为零，影子价格为正则约束取等号；乘数即为影子价格 $y_i = \\partial p^{*}/\\partial b_i$。",
+        "noteEn": "Complementary slackness: slack in a constraint forces a zero shadow price, and a positive shadow price forces the constraint to be tight; the multiplier is the shadow price $y_i = \\partial p^{*}/\\partial b_i$."
+      }
+    ],
+    "properties": [
+      "弱对偶方向：在原问题 min、对偶 max 的约定下，任何可行对满足 $b^{\\top}y \\le c^{\\top}x$，即 $d^{*} \\le p^{*}$；对偶最优值永远不超过原问题最优值，反向不等式是错误。",
+      "最优性证书：原可行解 $x$ 与对偶可行解 $y$ 一旦使 $c^{\\top}x = b^{\\top}y$，双方的最优性同时得证（弱对偶夹逼），无需继续迭代。",
+      "LP 强对偶无条件成立：一方有有限最优值，另一方也有且值相等；边界情形为——原问题无界 $\\Rightarrow$ 对偶不可行；原问题不可行 $\\Rightarrow$ 对偶无界或不可行。",
+      "互补松弛：$y_i > 0$ 推出第 $i$ 个原约束取等号；第 $i$ 个约束有余量推出 $y_i = 0$；对偶侧同理，$x_j > 0$ 推出第 $j$ 个对偶约束取等号。",
+      "对偶变量即影子价格：$y_i^{*} = \\partial p^{*}/\\partial b_i$（最优基不变时），度量资源 $i$ 的边际价值；非对称形式的等式约束给出自由的对偶变量，符号约定不可与对称形式混用。"
+    ],
+    "propertiesEn": [
+      "Weak duality direction: in the min-primal/max-dual convention every feasible pair satisfies $b^{\\top}y \\le c^{\\top}x$, so $d^{*} \\le p^{*}$; the optimal dual value never exceeds the optimal primal value, and the reversed inequality is simply wrong.",
+      "Optimality certificate: as soon as a feasible primal x and a feasible dual y give $c^{\\top}x = b^{\\top}y$, both are proved optimal by the weak-duality squeeze, with no further iterations.",
+      "Strong duality holds unconditionally for LPs: a finite optimum on one side forces a finite optimum on the other with equal value; the boundary cases are — unbounded primal $\\Rightarrow$ infeasible dual, and infeasible primal $\\Rightarrow$ dual unbounded or infeasible.",
+      "Complementary slackness: $y_i > 0$ forces the i-th primal constraint to be tight; slack in that constraint forces $y_i = 0$; symmetrically, $x_j > 0$ forces the j-th dual constraint to be tight.",
+      "Dual variables are shadow prices: $y_i^{*} = \\partial p^{*}/\\partial b_i$ while the optimal basis is unchanged, measuring the marginal value of resource i; equality constraints in the asymmetric form yield sign-free dual variables whose convention differs from the symmetric case."
+    ],
+    "examples": [
+      {
+        "problem": "对 LP：$\\min 2x_1 + 3x_2$ s.t. $x_1 + x_2 \\ge 4$、$x_1 + 3x_2 \\ge 6$、$x_1, x_2 \\ge 0$，写出对偶，求出双方最优解，并验证强对偶、互补松弛与影子价格。",
+        "solution": "原问题形如 $\\min c^{\\top}x$、$Ax \\ge b$、$x \\ge 0$，其中 $c = (2,3)^{\\top}$、$b = (4,6)^{\\top}$、$A = \\begin{pmatrix}1 & 1 \\\\ 1 & 3\\end{pmatrix}$，按对称形式对偶为 $\\max 4y_1 + 6y_2$ s.t. $y_1 + y_2 \\le 2$（对应 $x_1$）、$y_1 + 3y_2 \\le 3$（对应 $x_2$）、$y_1, y_2 \\ge 0$。原问题最优解在两条约束的交点 $(x_1, x_2) = (3, 1)$，$p^{*} = 2 \\cdot 3 + 3 \\cdot 1 = 9$。由于 $x_1, x_2 > 0$，互补松弛提示对偶两条约束都应取等号：解 $y_1 + y_2 = 2$、$y_1 + 3y_2 = 3$ 得 $y^{*} = (1.5,\\ 0.5)$，$d^{*} = 4 \\cdot 1.5 + 6 \\cdot 0.5 = 9 = p^{*}$ ✓ 强对偶成立，且 $y^{*} \\ge 0$ 满足对偶可行。影子价格复核：把 $b_1 = 4$ 改为 $4 \\pm 0.5$，程序求解得 $p^{*} = 8.25$ 或 $9.75$，变化率 $1.5 = y_1^{*}$；把 $b_2 = 6$ 改为 $6 \\pm 0.5$，得 $p^{*} = 8.75$ 或 $9.25$，变化率 $0.5 = y_2^{*}$ ✓。再补一条不起作用的约束 $x_2 \\ge 0.5$：它对应第三个对偶变量 $y_3$，最优解处 $x_2 = 1 > 0.5$ 有余量，互补松弛立即给出 $y_3 = 0$（最优值仍为 9，程序确认）。程序还随机采样约 $4.8 \\times 10^{4}$ 对可行解，逐对验证 $c^{\\top}x - b^{\\top}y \\ge 0$，无一违例。"
+      },
+      {
+        "problem": "用弱对偶解释「原问题无界 $\\Rightarrow$ 对偶不可行」。取原问题 $\\min -x_1$ s.t. $x_1 - x_2 \\ge 1$、$x_1, x_2 \\ge 0$。",
+        "solution": "先看原问题：取 $x_2 \\to +\\infty$、$x_1 = 1 + x_2$，约束满足而目标 $-x_1 = -(1 + x_2) \\to -\\infty$，故原问题**无界**。按对称形式写对偶：$\\max\\ 1 \\cdot y$ s.t. $y \\le -1$（对应 $x_1$）、$-y \\le 0$（对应 $x_2$）、$y \\ge 0$。后两条合起来要求 $y \\ge 0$ 且 $y \\le -1$，矛盾，故对偶问题**不可行**。这正是弱对偶的必然结果：若对偶存在可行解 $y$，则任何原可行解都要满足 $b^{\\top}y \\le c^{\\top}x$，目标就有下界，与原问题无界矛盾。注意反向推理不成立：原问题不可行时对偶可能无界也可能不可行，本例证明的只是「原问题无界 $\\Rightarrow$ 对偶不可行」。程序复核：求解器对原问题报告 Unbounded、对对偶问题报告 Infeasible，与手算一致。"
+      }
+    ],
+    "tags": ["对偶", "弱对偶", "强对偶", "影子价格", "互补松弛"],
+    "links": ["linear-programming", "network-flow", "game-theory-nash", "convex-optimization", "integer-programming"]
+  },
+  {
+    "id": "kkt-conditions",
+    "title": "KKT 条件",
+    "titleEn": "The KKT Conditions",
+    "branch": "optimization-or",
+    "level": 5,
+    "summary": "KKT 把拉格朗日乘数法推广到不等式约束：平稳性、原始可行、对偶可行与互补松弛四条件刻画最优解；凸问题加 Slater 条件时它成为充要条件。",
+    "summaryEn": "The KKT conditions extend Lagrange multipliers to inequality constraints through stationarity, primal feasibility, dual feasibility and complementary slackness; for convex problems satisfying Slater's condition they are necessary and sufficient.",
+    "definition": "考虑带不等式与等式约束的问题 $\\min f(x)$ s.t. $g_i(x) \\le 0\\ (i=1,\\dots,m)$、$h_j(x) = 0\\ (j=1,\\dots,p)$。它的**拉格朗日函数**是\n$$L(x, \\lambda, \\nu) = f(x) + \\sum_{i=1}^{m} \\lambda_i g_i(x) + \\sum_{j=1}^{p} \\nu_j h_j(x).$$\n这是等式版拉格朗日乘数法的推广：等式约束的乘数 $\\nu_j$ 与从前一样**自由**，可正可负；而每条不等式约束新增一个乘数 $\\lambda_i$，它必须**非负**，并且只在对应约束「顶到头」（$g_i = 0$）时才可能真正发挥作用。符号差别来自不等式约束的方向：$g_i \\le 0$ 只允许往一侧活动。\n\n**KKT 条件**由四组式子组成，名称来自 Karush–Kuhn–Tucker（Kuhn 与 Tucker 于 1951 年发表，Karush 1939 年的硕士论文中已出现）：① **平稳性** $\\nabla f(x) + \\sum_i \\lambda_i \\nabla g_i(x) + \\sum_j \\nu_j \\nabla h_j(x) = 0$；② **原始可行** $g_i(x) \\le 0$、$h_j(x) = 0$；③ **对偶可行** $\\lambda_i \\ge 0$；④ **互补松弛** $\\lambda_i g_i(x) = 0\\ (i = 1,\\dots,m)$。满足这四组条件的点称为 **KKT 点**，是求解时的主要候选。\n\nKKT 是**必要条件**，但需要**约束规范（constraint qualification）**。常用的规范有三种：LICQ——最优解处活跃约束（取等号的不等式约束与全部等式约束）的梯度线性无关；Slater 条件——对凸问题，存在使所有非仿射不等式严格成立的内点 $g_i(x) < 0$（仿射不等式不要求严格）；以及「约束全为线性函数」这一常见特例，线性约束自动满足规范。缺少约束规范时，最优解可能不是 KKT 点：经典反例是 $\\min x$ s.t. $x^2 \\le 0$，唯一可行点 $x^{*} = 0$ 是最优解，但平稳性 $1 + \\lambda \\cdot 0 = 0$ 对任何 $\\lambda$ 都不成立（此处 $g'(0) = 0$，LICQ 与 Slater 双双失效）。所以「最优解必满足 KKT」这句话必须带上约束规范。\n\n反向的保险来自凸性：若 $f$ 与所有 $g_i$ 都是凸函数、所有 $h_j$ 都是仿射函数（各函数可微，KKT 本身就用到梯度），则**任何一个 KKT 点都是全局最优解**——这一步不需要任何约束规范。把两半拼起来，就得到凸优化里的黄金结论：**凸问题 + Slater 条件 $\\Rightarrow$ $x^{*}$ 全局最优当且仅当存在 $\\lambda \\succeq 0$ 与 $\\nu$ 使 KKT 条件成立**。方向要读准：**充分性靠凸性，必要性靠约束规范**（Slater 或 LICQ），两个前提缺一不可。有了它，凸优化可以交给「解 KKT 系统」来完成，拉格朗日对偶算法与内点法都以此为地基。",
+    "definitionEn": "Consider a problem with inequality and equality constraints, $\\min f(x)$ subject to $g_i(x) \\le 0\\ (i=1,\\dots,m)$ and $h_j(x) = 0\\ (j=1,\\dots,p)$. Its **Lagrangian** is\n$$L(x, \\lambda, \\nu) = f(x) + \\sum_{i=1}^{m} \\lambda_i g_i(x) + \\sum_{j=1}^{p} \\nu_j h_j(x).$$\nThis generalizes the equality-only method of Lagrange multipliers: the multipliers $\\nu_j$ of equality constraints stay **free**, positive or negative, while each inequality constraint contributes a multiplier $\\lambda_i$ that must be **nonnegative** and can become active only when its constraint is tight ($g_i = 0$). The sign difference comes from the one-sided nature of $g_i \\le 0$.\n\nThe **KKT conditions** consist of four groups, named after Karush–Kuhn–Tucker (published by Kuhn and Tucker in 1951, with Karush's 1939 master's thesis anticipating them): (1) **stationarity** $\\nabla f(x) + \\sum_i \\lambda_i \\nabla g_i(x) + \\sum_j \\nu_j \\nabla h_j(x) = 0$; (2) **primal feasibility** $g_i(x) \\le 0$ and $h_j(x) = 0$; (3) **dual feasibility** $\\lambda_i \\ge 0$; (4) **complementary slackness** $\\lambda_i g_i(x) = 0$ for all $i$. A point satisfying all four is a **KKT point**, the main kind of candidate in practice.\n\nThe KKT conditions are **necessary** — but only under a **constraint qualification**. Three common ones: LICQ, requiring the gradients of the active constraints (the tight inequalities together with all equalities) to be linearly independent at the optimum; Slater's condition, requiring for a convex problem an interior point where every non-affine inequality is strict, $g_i(x) < 0$ (affine inequalities need not be strict); and the frequent special case where all constraints are linear, which satisfies the qualifications automatically. Without a qualification the optimum need not be a KKT point: the classic example is $\\min x$ subject to $x^2 \\le 0$, whose only feasible point $x^{*} = 0$ is optimal while stationarity $1 + \\lambda \\cdot 0 = 0$ has no solution for any $\\lambda$ (here $g'(0)=0$, so both LICQ and Slater fail). The statement 「the optimum satisfies KKT」 must therefore always carry the qualification.\n\nThe safety net comes from convexity: if $f$ and all $g_i$ are convex and all $h_j$ are affine (all differentiable, since gradients appear in KKT), then **every KKT point is globally optimal** — no constraint qualification needed for this direction. Combining the two halves gives the central theorem of convex optimization: **for a convex problem satisfying Slater's condition, $x^{*}$ is globally optimal if and only if there exist $\\lambda \\succeq 0$ and $\\nu$ such that KKT holds**. Read the directions carefully: **sufficiency needs convexity, necessity needs a qualification** (Slater or LICQ), and both hypotheses are essential. With this theorem, solving a convex problem reduces to solving the KKT system — the basis of Lagrangian dual algorithms and interior-point methods.",
+    "formulas": [
+      {
+        "latex": "L(x, \\lambda, \\nu) = f(x) + \\sum_{i=1}^{m} \\lambda_i g_i(x) + \\sum_{j=1}^{p} \\nu_j h_j(x)",
+        "note": "拉格朗日函数：等式约束的乘数 ν 自由，不等式约束的乘数 λ 必须非负（min + g ≤ 0 约定）。",
+        "noteEn": "The Lagrangian: multipliers ν of equalities are free, while multipliers λ of inequalities must be nonnegative (min with g ≤ 0 convention)."
+      },
+      {
+        "latex": "\\nabla f(x) + \\sum_{i} \\lambda_i \\nabla g_i(x) + \\sum_{j} \\nu_j \\nabla h_j(x) = 0",
+        "note": "平稳性：目标梯度被活跃约束的梯度组合抵消；等式方向用自由系数，不等式方向只用非负系数。",
+        "noteEn": "Stationarity: the objective gradient is cancelled by a combination of the constraint gradients, with free coefficients for equalities and nonnegative ones for inequalities."
+      },
+      {
+        "latex": "g_i(x) \\le 0,\\qquad h_j(x) = 0,\\qquad \\lambda_i \\ge 0",
+        "note": "原始可行与对偶可行：x 落在可行域内，不等式乘数非负；ν 不受符号限制。",
+        "noteEn": "Primal and dual feasibility: x lies in the feasible set and the inequality multipliers are nonnegative, while ν is unrestricted in sign."
+      },
+      {
+        "latex": "\\lambda_i g_i(x) = 0 \\qquad (i = 1, \\dots, m)",
+        "note": "互补松弛：不起作用的约束乘数为零，乘数为正的约束必取等号；两者也可同时为零。",
+        "noteEn": "Complementary slackness: inactive constraints force zero multipliers and positive multipliers force tight constraints; both may vanish simultaneously."
+      },
+      {
+        "latex": "x^{*} \\text{ 最优} \\iff \\exists\\, \\lambda \\succeq 0,\\ \\nu:\\ \\text{KKT} \\qquad (f, g_i \\text{ 凸},\\ h_j \\text{ 仿射},\\ \\text{Slater})",
+        "note": "凸问题 + Slater：KKT 成为充要条件。充分性只靠凸性，必要性才需要约束规范，方向不能反。",
+        "noteEn": "Convex problem plus Slater: KKT becomes necessary and sufficient. Sufficiency needs only convexity; necessity is where the qualification enters, and the directions must not be swapped."
+      }
+    ],
+    "properties": [
+      "与等式版拉格朗日乘数法的承接：等式约束的乘数 $\\nu_j$ 自由，不等式约束的乘数必须 $\\lambda_i \\ge 0$（min + $g_i \\le 0$ 约定）；少一个非负要求，结论就全错。",
+      "互补松弛把「约束是否起作用」与「乘数是否为零」绑在一起：$g_i(x) < 0$ 推出 $\\lambda_i = 0$；$\\lambda_i > 0$ 推出 $g_i(x) = 0$；两者也可以同时为零。",
+      "必要性需要约束规范：LICQ、Slater 或约束全为线性；缺规范时最优解可能不是 KKT 点（$\\min x$ s.t. $x^2 \\le 0$ 在 $x^{*} = 0$ 处无乘数解）。",
+      "充分性只需凸性、无需约束规范：$f$ 与 $g_i$ 凸、$h_j$ 仿射时，任何 KKT 点都是全局最优解，与「局部极小即全局极小」一脉相承。",
+      "几何意义：平稳性等价于 $-\\nabla f$ 落在活跃约束梯度张成的锥里（λ ≥ 0 即取非负组合，ν 自由即两侧都可用），直观上就是「不存在既保持可行、又能让目标继续下降的方向」。"
+    ],
+    "propertiesEn": [
+      "Link with the equality-only multiplier method: multipliers $\\nu_j$ of equalities are free, while multipliers of inequalities must satisfy $\\lambda_i \\ge 0$ (min with $g_i \\le 0$); dropping that sign requirement breaks every conclusion.",
+      "Complementary slackness couples activity and multipliers: $g_i(x) < 0$ forces $\\lambda_i = 0$, while $\\lambda_i > 0$ forces $g_i(x) = 0$; both may be zero at once.",
+      "Necessity requires a constraint qualification: LICQ, Slater's condition, or purely linear constraints; without one the optimum may fail to be a KKT point ($\\min x$ with $x^2 \\le 0$ has no multiplier at $x^{*}=0$).",
+      "Sufficiency needs only convexity, no qualification: when $f$ and the $g_i$ are convex and the $h_j$ affine, every KKT point is globally optimal, in line with 「local minima are global」.",
+      "Geometric meaning: stationarity says $-\\nabla f$ lies in the cone spanned by the active constraint gradients (λ ≥ 0 gives nonnegative combinations, free ν allows both sides); equivalently, no direction stays feasible while decreasing the objective."
+    ],
+    "examples": [
+      {
+        "problem": "用 KKT 条件求解 $\\min f = x^2 + y^2 + z^2$ s.t. $x + y + z = 3$、$x \\ge 2$，并程序复核最优性。",
+        "solution": "把 $x \\ge 2$ 写成 $g = 2 - x \\le 0$，等式约束记为 $h = x + y + z - 3 = 0$，拉格朗日函数为 $L = x^2 + y^2 + z^2 + \\lambda(2-x) + \\nu(x+y+z-3)$。先试 $\\lambda = 0$（约束不起作用）：平稳性给出 $2x + \\nu = 0$、$2y + \\nu = 0$、$2z + \\nu = 0$，故 $x = y = z$，连同 $h = 0$ 得 $(1,1,1)$——但 $x = 1 < 2$，不满足 $g \\le 0$，不可行，所以约束必须起作用，$x = 2$。于是 $y + z = 1$，平稳性给出 $2y = 2z = -\\nu$，即 $y = z = 0.5$；再由 $x$ 的方程 $2 \\cdot 2 - \\lambda + \\nu = 0$ 与 $2y + \\nu = 0$ 得 $\\nu = -1$、$\\lambda = 4 + \\nu = 3 \\ge 0$ ✓。逐条核对四条件：平稳性 $(4,1,1) + 3 \\cdot (-1,0,0) + (-1)(1,1,1) = (0,0,0)$ ✓；原始可行 $x + y + z = 3$、$x = 2 \\ge 2$ ✓；对偶可行 $\\lambda = 3 \\ge 0$ ✓（$\\nu = -1$ 为负是允许的，等式乘数不受符号限制）；互补松弛 $\\lambda(2-x) = 3 \\cdot 0 = 0$ ✓。问题凸（$f$ 凸，$g$ 与 $h$ 都仿射，仿射不等式不要求严格内点，Slater 自动成立），故 KKT 点是全局最优解，$f_{\\min} = 4 + 0.25 + 0.25 = 4.5$。程序复核：在可行集 $\\{x + y + z = 3,\\ x \\ge 2\\}$ 上随机采样 $3 \\times 10^{5}$ 个点，$f$ 的最小值约为 $4.505 \\ge 4.5$；活跃约束梯度 $\\{(-1,0,0),\\ (1,1,1)\\}$ 线性无关（秩为 2），LICQ 也成立。"
+      },
+      {
+        "problem": "说明约束规范为什么不能省：求解 $\\min f(x) = x$ s.t. $g(x) = x^2 \\le 0$。",
+        "solution": "可行集是 $\\{x : x^2 \\le 0\\} = \\{0\\}$，所以 $x^{*} = 0$ 是唯一可行点，当然也是全局最优解，$f_{\\min} = 0$。但 KKT 平稳性要求 $1 + \\lambda \\cdot 2x = 1 + 0 = 0$，对任何 $\\lambda$ 都不成立：**这个最优解不存在 KKT 乘数**。原因是约束规范双双失效——$g'(0) = 2x\\big|_{x=0} = 0$，LICQ 要求活跃约束的梯度线性无关（单个梯度须非零），此处不满足；Slater 条件也不成立，因为 $g(x) < 0$ 即 $x^2 < 0$ 在实数范围内无解。程序复核：在 $[-3,3]$ 上取 $2 \\times 10^{6}$ 个网格点，满足 $x^2 \\le 0$ 的只有 $x = 0$；并确认不存在任何 $\\lambda$ 使平稳性成立。结论：KKT 的必要性永远依附于约束规范；而充分性方向不受影响——只要问题凸且某个点满足 KKT，它仍是全局最优解。"
+      }
+    ],
+    "tags": ["KKT 条件", "约束规范", "Slater 条件", "互补松弛", "拉格朗日函数"],
+    "links": ["lagrange-multiplier", "convex-optimization", "convex-sets-functions", "lp-duality", "matrix-calculus-optimization"]
+  }
+]

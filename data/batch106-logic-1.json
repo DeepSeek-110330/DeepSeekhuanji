@@ -1,0 +1,353 @@
+[
+  {
+    "id": "propositional-logic",
+    "title": "命题逻辑与真值表",
+    "titleEn": "Propositional Logic and Truth Tables",
+    "branch": "mathematical-logic",
+    "level": 3,
+    "summary": "命题逻辑把原子命题用 ¬、∧、∨、→、↔ 拼成公式，真值表枚举一切赋值，为「重言式、矛盾式、可满足式」提供判定。",
+    "summaryEn": "Propositional logic composes atomic propositions with ¬, ∧, ∨, →, ↔ into formulas; truth tables enumerate all valuations and decide tautologies, contradictions and satisfiable formulas.",
+    "definition": "命题逻辑研究**命题公式**。原子命题 $p, q, r, \\dots$ 是最简单、不再分解的陈述；**联结词** $\\neg$（否定）、$\\wedge$（合取）、$\\vee$（析取）、$\\to$（蕴含）、$\\leftrightarrow$（等值）把较短公式逐层拼成复合公式。联结词的含义完全由**真值表**规定，与命题的实际内容无关：$p\\to q$ 只在前件 $p$ 真、结论 $q$ 假时为假，**其余情形（包括 $p$ 为假的全部情形）都为真**——「前件假则蕴含式为真」是最常被写错的一条，它正是等值式 $p\\to q\\Leftrightarrow\\neg p\\vee q$ 的直接体现。给定一组**真值赋值**（给每个原子命题指定真或假），公式的真值被唯一确定；含 $n$ 个不同原子命题的公式，真值表恰有 $2^n$ 行。\n\n按真值表把公式分成三类：在**一切**赋值下都为真的叫**重言式**（永真式），如 $p\\vee\\neg p$；在一切赋值下都为假的叫**矛盾式**（永假式，也称不可满足式），如 $p\\wedge\\neg p$；**至少存在一组**赋值使其为真的叫**可满足式**。三类的关系要理清：重言式都可满足，可满足式未必重言；矛盾式恰是不可满足式；而 $\\varphi$ 是重言式当且仅当 $\\neg\\varphi$ 不可满足。真值表是最朴素的判决程序：它总能在 $2^n$ 行内给出答案，但规模随 $n$ 指数增长——这提醒我们「判定」与「找证明」是两条不同的路（见 formal-proof-systems）。\n\n两个公式**等值**（记 $\\Leftrightarrow$）指真值表逐行相同；**等值演算**就是在等值定律——德摩根律、双重否定、分配律、蕴含律 $p\\to q\\Leftrightarrow\\neg p\\vee q$、逆否律 $p\\to q\\Leftrightarrow\\neg q\\to\\neg p$ 等——之下的符号变形。这里要区分对象语言里的联结词 $\\leftrightarrow$（本身有真值表）与元语言里的 $\\Leftrightarrow$（断言两式等值，不是公式的一部分）。等值变形保持一切真值，因此可以像代数化简一样把公式化成范式来简化电路或核对论证。反面要牢记：$p\\to q$ 与它的逆命题 $q\\to p$、否命题 $\\neg p\\to\\neg q$ 都**不等值**，只有逆否命题 $\\neg q\\to\\neg p$ 才与原式等值。\n\n五个联结词并不互相独立：$\\{\\neg,\\wedge,\\vee\\}$ 已是**完备联结词集**，能表达一切真值函数；$\\{\\neg,\\to\\}$ 也完备（$\\wedge$、$\\vee$ 可由二者定义）；$n$ 个变元的真值函数共有 $2^{2^n}$ 个（两个变元恰有 16 个），所以「完备集」是把无穷张真值表压进有限符号的办法。反过来，$\\{\\wedge,\\vee\\}$ 不完备（造不出否定），$\\{\\to\\}$ 单独更不行；而**与非**（NAND，$\\uparrow$）与**或非**（NOR，$\\downarrow$）各自单独就是完备集（Sheffer 竖线）——数字电路只用一种逻辑门就能搭建全部组合逻辑，正是这一事实的工程版本。联结词完备性也是后面用极少数公理模式刻画全部重言式的前提（见 formal-proof-systems、soundness-completeness）。",
+    "definitionEn": "Propositional logic studies **propositional formulas**. Atomic propositions $p, q, r, \\dots$ are the simplest indecomposable statements; the **connectives** $\\neg$ (negation), $\\wedge$ (conjunction), $\\vee$ (disjunction), $\\to$ (implication) and $\\leftrightarrow$ (equivalence) combine shorter formulas into compound ones. Their meaning is fixed entirely by **truth tables**, independent of subject matter: $p\\to q$ is false only when the antecedent $p$ is true and the consequent $q$ is false, and **true in every other case—including all cases where $p$ is false**. That vacuous truth is the most frequently misstated line, and it is exactly the equivalence $p\\to q\\Leftrightarrow\\neg p\\vee q$. Once a **truth assignment** maps each atomic proposition to true or false, the formula's truth value is determined; a formula with $n$ distinct atoms has a truth table of exactly $2^n$ rows.\n\nTruth tables sort formulas into three classes: **tautologies** (true under every assignment), such as $p\\vee\\neg p$; **contradictions** (false under every assignment, i.e. unsatisfiable), such as $p\\wedge\\neg p$; and **satisfiable formulas** (true under at least one assignment). The relationships matter: tautologies are satisfiable, satisfiable formulas need not be tautologies, contradictions are exactly the unsatisfiable formulas, and $\\varphi$ is a tautology iff $\\neg\\varphi$ is unsatisfiable. Truth tables are the simplest decision procedure: they always answer within $2^n$ rows but grow exponentially—a reminder that deciding differs from proving (see formal-proof-systems).\n\nTwo formulas are **equivalent** (written $\\Leftrightarrow$) when their truth tables agree row by row; **equational reasoning** rewrites formulas using equivalence laws—De Morgan, double negation, distributivity, the implication law $p\\to q\\Leftrightarrow\\neg p\\vee q$ and contraposition $p\\to q\\Leftrightarrow\\neg q\\to\\neg p$. Keep apart the object-language connective $\\leftrightarrow$ (which itself has a truth table) and the metalanguage symbol $\\Leftrightarrow$ (the assertion that two formulas are equivalent, not part of any formula). Equivalence transformations preserve all truth values, so formulas can be simplified into normal forms much like algebraic expressions. Beware the converse and the inverse: $p\\to q$ is **not** equivalent to $q\\to p$ nor to $\\neg p\\to\\neg q$; only the contrapositive $\\neg q\\to\\neg p$ matches.\n\nThe five connectives are not independent: $\\{\\neg,\\wedge,\\vee\\}$ is **functionally complete**, expressing every truth function; $\\{\\neg,\\to\\}$ is complete too (since $\\wedge$, $\\vee$ are definable from them); there are $2^{2^n}$ truth functions of $n$ variables (16 binary ones), so a complete set compresses all truth tables into finitely many symbols. By contrast $\\{\\wedge,\\vee\\}$ is not complete (it cannot express negation at all), and neither is $\\{\\to\\}$ alone; but **NAND** ($\\uparrow$) and **NOR** ($\\downarrow$) each form a one-element complete set (Sheffer strokes)—the theoretical fact behind building all digital logic from a single gate type. Completeness of connectives also underlies describing all tautologies by a few axiom schemata (see formal-proof-systems, soundness-completeness).",
+    "formulas": [
+      {
+        "latex": "\\neg(p\\wedge q)\\ \\Leftrightarrow\\ \\neg p\\vee\\neg q,\\qquad \\neg(p\\vee q)\\ \\Leftrightarrow\\ \\neg p\\wedge\\neg q",
+        "note": "德摩根律：否定号可以「翻进」括号，∧ 与 ∨ 互换、各项取否；化简含否公式的第一工具。",
+        "noteEn": "De Morgan's laws: negation flips into the brackets, swapping ∧ and ∨ and negating each part."
+      },
+      {
+        "latex": "p\\to q\\ \\Leftrightarrow\\ \\neg p\\vee q\\ \\Leftrightarrow\\ \\neg q\\to\\neg p",
+        "note": "蕴含律与逆否律：蕴含可改写为析取（前件取否或结论真），或换成逆否命题；注意 q→p、¬p→¬q 都不等值。",
+        "noteEn": "The implication law rewrites p→q as ¬p∨q; the contrapositive ¬q→¬p is equivalent too, while q→p and ¬p→¬q are not."
+      },
+      {
+        "latex": "p\\wedge(q\\vee r)\\ \\Leftrightarrow\\ (p\\wedge q)\\vee(p\\wedge r),\\qquad p\\vee(q\\wedge r)\\ \\Leftrightarrow\\ (p\\vee q)\\wedge(p\\vee r)",
+        "note": "分配律：展开或提取公共因子；配合德摩根律可把任意公式化为析取范式或合取范式。",
+        "noteEn": "Distributive laws expand or factor; together with De Morgan they convert any formula into disjunctive or conjunctive normal form."
+      },
+      {
+        "latex": "p\\vee\\neg p\\ \\Leftrightarrow\\ \\mathbf{1},\\qquad p\\wedge\\neg p\\ \\Leftrightarrow\\ \\mathbf{0}",
+        "note": "排中律与矛盾律：1、0 分别表示恒真与恒假；这两条是重言式与矛盾式的原型，化简时最先消去。",
+        "noteEn": "Excluded middle and contradiction: 1 and 0 stand for constantly true and constantly false; the prototypes of tautology and contradiction."
+      },
+      {
+        "latex": "\\{\\neg,\\wedge,\\vee\\},\\quad \\{\\neg,\\to\\},\\quad \\{\\uparrow\\},\\quad \\{\\downarrow\\}\\ \\text{均为完备联结词集}",
+        "note": "上箭头 ↑ 是 NAND、下箭头 ↓ 是 NOR；注意 {∧,∨} 不在其中——它无法表达否定。",
+        "noteEn": "The up-arrow is NAND and the down-arrow is NOR; note {∧,∨} is absent because it cannot express negation."
+      }
+    ],
+    "properties": [
+      "对每一组真值赋值，每个命题公式恰有一个真值；因此等值、重言、矛盾、可满足都可由枚举 2ⁿ 行判定——命题逻辑的判定问题是可解的。",
+      "三类公式互为否定地成对：φ 重言 ⟺ ¬φ 不可满足；φ 矛盾 ⟺ ¬φ 重言；既非重言又非矛盾的公式（偶然式）与它的否定都可满足。",
+      "替换定理：若 A ⇔ B，则在任何公式中把子公式 A 替换为 B，所得公式与原公式等值——这是等值演算「步步保真」的根据。",
+      "联结词完备性是对表达能力的精确刻画：{¬,∧,∨}、{¬,→}、{↑}、{↓} 完备；{∧,∨} 不完备，因为它只能生成单调真值函数，无法实现否定。",
+      "蕴含不可交换：(p→q)→(q→p) 不是重言式（p 假、q 真时整个蕴含着取假值）；等值箭头 ↔ 与单方向箭头 → 有本质区别。"
+    ],
+    "propertiesEn": [
+      "Under each truth assignment every formula has exactly one truth value; equivalence, tautologicity, contradictoriness and satisfiability are all decidable by enumerating the 2ⁿ rows—propositional logic is decidable.",
+      "The three classes come in negated pairs: φ is a tautology iff ¬φ is unsatisfiable, and φ is a contradiction iff ¬φ is a tautology; a contingency (neither) is satisfiable together with its negation.",
+      "Substitution theorem: if A ⇔ B, replacing a subformula A by B inside any formula yields an equivalent formula—this is what makes equational reasoning sound step by step.",
+      "Functional completeness measures expressive power precisely: {¬,∧,∨}, {¬,→}, {↑} and {↓} are complete, while {∧,∨} is not—it generates only monotone truth functions and can never express negation.",
+      "Implication does not commute: (p→q)→(q→p) is not a tautology (it fails when p is false and q is true); the biconditional ↔ and the one-way arrow → are genuinely different connectives."
+    ],
+    "examples": [
+      {
+        "problem": "用真值表判断 $\\varphi=(p\\to q)\\vee(q\\to p)$ 是否重言式；再验证等值式 $\\neg(p\\to q)\\Leftrightarrow p\\wedge\\neg q$ 与 $p\\to q\\Leftrightarrow\\neg q\\to\\neg p$，并说明 $(p\\to q)\\to(q\\to p)$ 为何不是重言式。",
+        "solution": "按 $(p,q)=(1,1),(1,0),(0,1),(0,0)$ 四行枚举。第一式：$p\\to q$ 取 $1,0,1,1$，$q\\to p$ 取 $1,1,0,1$，逐行取析取得 $1,1,1,1$——$\\varphi$ 对全部四组赋值都为真，是**重言式**（含义：任意两个命题间的蕴含至少有一个方向成立）。等值核对：$\\neg(p\\to q)$ 与 $p\\wedge\\neg q$ 都只在 $(1,0)$ 行为真，其余为假，逐行相同；$p\\to q$ 与 $\\neg q\\to\\neg p$ 的真值行同为 $1,0,1,1$，完全一致。而 $(p\\to q)\\to(q\\to p)$ 在 $(0,1)$ 行：前件 $p\\to q=1$、后件 $q\\to p=0$，整个蕴含式取 $0$，故不是重言式——蕴含方向不能交换。以上四类核对由程序枚举 $2^2=4$ 组赋值逐项验证，无一行例外。"
+      },
+      {
+        "problem": "用等值演算证明 $((p\\wedge q)\\to p)$ 是重言式，并用程序逐对核对每一步变形保持等值。",
+        "solution": "逐步变形（每步都是等值式）：\\[(p\\wedge q)\\to p\\ \\Leftrightarrow\\ \\neg(p\\wedge q)\\vee p\\ \\Leftrightarrow\\ (\\neg p\\vee\\neg q)\\vee p\\ \\Leftrightarrow\\ (p\\vee\\neg p)\\vee\\neg q\\ \\Leftrightarrow\\ \\mathbf{1}\\vee\\neg q\\ \\Leftrightarrow\\ \\mathbf{1}.\\] 第一步用蕴含律 $A\\to B\\Leftrightarrow\\neg A\\vee B$；第二步用德摩根律；第三步用交换律与结合律把 $p$ 与 $\\neg p$ 聚到一起；第四步用排中律 $p\\vee\\neg p\\Leftrightarrow\\mathbf{1}$；末步用恒等律 $\\mathbf{1}\\vee\\neg q\\Leftrightarrow\\mathbf{1}$。末式恒真，故原式是重言式——它正是「合取消除」律：$p\\wedge q$ 为真时必有 $p$ 为真。程序对 4 组赋值核对链中各中间公式两两等值、且末项恒真，全部通过。要点：每一步都是等值变形（保真），链条不与任何只单向成立的推理混用；若某一步换成单向推理，等值链即断裂。"
+      }
+    ],
+    "links": [
+      "predicate-logic",
+      "formal-proof-systems",
+      "sufficient-necessary-condition",
+      "sets-operations"
+    ],
+    "tags": ["数理逻辑", "命题逻辑", "真值表", "重言式", "联结词完备性"]
+  },
+  {
+    "id": "predicate-logic",
+    "title": "谓词逻辑与量词",
+    "titleEn": "Predicate Logic and Quantifiers",
+    "branch": "mathematical-logic",
+    "level": 4,
+    "summary": "谓词逻辑引入个体、谓词与量词 ∀、∃，在结构（解释）中定义精确语义，并给出量词否定、量词顺序与变量代入的规则。",
+    "summaryEn": "Predicate logic adds individuals, predicates and the quantifiers ∀, ∃, with precise semantics in structures and careful rules for negation, quantifier order and substitution.",
+    "definition": "谓词逻辑在命题逻辑之上引入**个体变元** $x, y, z, \\dots$、常元、函数符号与谓词（关系）符号：项由变元与函数符号生成，把谓词作用在项上得到**原子公式**（如 $R(x,y)$、$x<y$），再用 $\\neg,\\wedge,\\vee,\\to$ 和**量词** $\\forall$（全称，「对每一个」）、$\\exists$（存在，「至少有一个」）逐层构造合式公式。量词紧接的公式是它的**辖域**；变元的出现分两类：位于该变元量词辖域之内并被它约束的叫**约束出现**，否则叫**自由出现**。例如 $\\exists y\\,(y>x)$ 中 $y$ 约束、$x$ 自由，整个公式其实是关于 $x$ 的一个条件。没有自由变元的公式叫**闭公式**（句子），它直接具有真假；约束变元可以在不与其他变元冲突的前提下改名，公式含义不变。\n\n语义一侧：一个**结构（解释）**给出论域 $D$ 以及各常元、函数符号、谓词符号的指称；**赋值**把自由变元映到 $D$ 中的元素。真值定义为：$\\forall x\\,\\varphi$ 为真当且仅当对 $D$ 中**每个**元素 $a$，把 $x$ 取作 $a$ 时 $\\varphi$ 为真；$\\exists x\\,\\varphi$ 为真当且仅当**存在**至少一个 $a$ 使 $\\varphi$ 为真。因此谓词逻辑的「真」总是相对于结构（与赋值）的：公式**可满足**指存在结构（与赋值）使其真，**逻辑有效（永真）**指在一切结构中都被满足。对命题逻辑来说，「所有赋值」换成了「所有结构」，判定难度随之剧增。全称断言一切、存在许诺一个——两种量词的分工是全部推理规则的源头。\n\n否定一个量化公式的规则是**换量词、否结论**：$\\neg\\forall x\\,\\varphi\\Leftrightarrow\\exists x\\,\\neg\\varphi$（「不是所有都对」＝「存在一个反例」），$\\neg\\exists x\\,\\varphi\\Leftrightarrow\\forall x\\,\\neg\\varphi$（「不存在」＝「全部都无」）。**方向绝不能写反**：$\\neg\\forall$ 变成 $\\exists\\neg$、$\\neg\\exists$ 变成 $\\forall\\neg$；多层量词由外向内逐层外推，如 $\\neg\\forall\\varepsilon\\exists\\delta(\\dots)\\Leftrightarrow\\exists\\varepsilon\\forall\\delta\\,\\neg(\\dots)$，且「否结论」时要把结论内部的等号、不等号一并翻转。另两个易错点：量词与 $\\vee$、$\\wedge$ 没有无条件的分配律——$\\forall x(P\\wedge Q)\\Leftrightarrow\\forall xP\\wedge\\forall xQ$ 与 $\\exists x(P\\vee Q)\\Leftrightarrow\\exists xP\\vee\\exists xQ$ 双向成立，但 $\\forall x(P\\vee Q)$ 只能由 $\\forall xP\\vee\\forall xQ$ 单向推出（反向不成立：每一点各有一个析取项成立，未必有同一点对所有点成立）；同理 $\\exists xP\\wedge\\exists xQ$ 推不出 $\\exists x(P\\wedge Q)$。\n\n同种量词可以交换（$\\forall x\\forall y\\,\\varphi\\Leftrightarrow\\forall y\\forall x\\,\\varphi$），但 $\\forall x\\exists y\\,\\varphi$ 与 $\\exists y\\forall x\\,\\varphi$ 一般**不等值**：$\\exists y$ 是否在 $\\forall x$ 之内，决定 $y$ 能否随 $x$ 变化。经典例子：在自然数中 $\\forall x\\exists y\\,(y>x)$ 为真（每个 $x$ 都有更大的 $y=x+1$），而 $\\exists y\\forall x\\,(y>x)$ 为假（任何 $y$ 都要面对 $x=y$）。分析里「连续」与「一致连续」的差别同源：逐点连续是 $\\forall x\\forall\\varepsilon\\exists\\delta\\forall y(\\dots)$，$\\delta$ 可以依赖点 $x$；一致连续把 $\\exists\\delta$ 提到 $\\forall x$ 之前，$\\delta$ 必须对全部点统一。代入公式时还要避免**变量捕获**：把含 $y$ 的项代入 $\\exists y\\,(y>x)$ 中的 $x$，若直接替换得 $\\exists y\\,(y>y)$（在把 > 解释为通常严格序时为假），$y$ 被量词「吃掉」，含义完全变了；正确做法是先把约束变元换名，得 $\\exists z\\,(z>y)$。",
+    "definitionEn": "Predicate logic adds to propositional logic **individual variables** $x, y, z, \\dots$, constants, function symbols and predicate (relation) symbols. Terms are built from variables and function symbols; applying a predicate to terms yields **atomic formulas** (like $R(x,y)$ or $x<y$), which are combined by $\\neg,\\wedge,\\vee,\\to$ and the **quantifiers** $\\forall$ (for all) and $\\exists$ (there exists) into well-formed formulas. The formula immediately following a quantifier is its **scope**; an occurrence of a variable inside the scope of a quantifier governing that variable is **bound**, otherwise **free**. In $\\exists y\\,(y>x)$, $y$ is bound and $x$ is free—the formula is really a condition about $x$. Formulas without free variables are **closed formulas** (sentences) with definite truth values; bound variables may be renamed without changing meaning.\n\nSemantics: a **structure (interpretation)** provides a domain $D$ together with interpretations of the constants, function symbols and predicates; an **assignment** maps free variables into $D$. Truth is defined by: $\\forall x\\,\\varphi$ is true iff $\\varphi$ is true when $x$ is set to **every** element of $D$; $\\exists x\\,\\varphi$ is true iff there is **at least one** element making $\\varphi$ true. Hence truth in predicate logic is always relative to a structure (and assignment): a formula is **satisfiable** if some structure satisfies it and **valid** (logically true) if every structure does. Compared with propositional logic, every assignment has been replaced by every structure, which makes deciding validity dramatically harder. Universal quantifiers claim everything, existential quantifiers promise one element—this division is the source of all quantifier rules.\n\nNegating a quantified formula means **swap the quantifier, negate the conclusion**: $\\neg\\forall x\\,\\varphi\\Leftrightarrow\\exists x\\,\\neg\\varphi$ (not all equals there is a counterexample) and $\\neg\\exists x\\,\\varphi\\Leftrightarrow\\forall x\\,\\neg\\varphi$ (there is none equals all fail). **The directions must never be reversed**, and the negation is pushed inward level by level. Two further pitfalls: quantifiers distribute over $\\vee$ and $\\wedge$ only one way. $\\forall x(P\\wedge Q)\\Leftrightarrow\\forall xP\\wedge\\forall xQ$ and $\\exists x(P\\vee Q)\\Leftrightarrow\\exists xP\\vee\\exists xQ$ hold both ways, but $\\forall x(P\\vee Q)$ follows only from $\\forall xP\\vee\\forall xQ$ (the converse fails: at each point some disjunct holds, but not the same one everywhere); similarly $\\exists xP\\wedge\\exists xQ$ does not imply $\\exists x(P\\wedge Q)$.\n\nQuantifiers of the same kind commute ($\\forall x\\forall y\\,\\varphi\\Leftrightarrow\\forall y\\forall x\\,\\varphi$), but $\\forall x\\exists y\\,\\varphi$ and $\\exists y\\forall x\\,\\varphi$ are **not** equivalent in general: whether $\\exists y$ sits inside $\\forall x$ decides whether $y$ may depend on $x$. The classic example: in the natural numbers $\\forall x\\exists y\\,(y>x)$ is true (take $y=x+1$) while $\\exists y\\forall x\\,(y>x)$ is false (any $y$ must face $x=y$). The difference between pointwise and uniform continuity is the same phenomenon: pointwise continuity reads $\\forall x\\forall\\varepsilon\\exists\\delta\\forall y(\\dots)$, where $\\delta$ may depend on the point $x$, while uniform continuity puts $\\exists\\delta$ before $\\forall x$ so that $\\delta$ works for all points at once. Finally, substitution must avoid **variable capture**: substituting a term containing $y$ for $x$ in $\\exists y\\,(y>x)$ naively yields $\\exists y\\,(y>y)$, false under the usual strict-order interpretation—the variable $y$ has been swallowed by its own quantifier. Rename the bound variable first: the correct result is $\\exists z\\,(z>y)$.",
+    "formulas": [
+      {
+        "latex": "\\neg\\forall x\\,\\varphi\\ \\Leftrightarrow\\ \\exists x\\,\\neg\\varphi,\\qquad \\neg\\exists x\\,\\varphi\\ \\Leftrightarrow\\ \\forall x\\,\\neg\\varphi",
+        "note": "量词否定律：换量词、否结论。¬∀ 必得 ∃¬，¬∃ 必得 ∀¬——方向写反是最经典的错误。",
+        "noteEn": "Quantifier negation: swap the quantifier and negate the conclusion; ¬∀ must yield ∃¬ and ¬∃ must yield ∀¬."
+      },
+      {
+        "latex": "\\forall x(\\varphi\\wedge\\psi)\\ \\Leftrightarrow\\ \\forall x\\varphi\\wedge\\forall x\\psi,\\qquad \\exists x(\\varphi\\vee\\psi)\\ \\Leftrightarrow\\ \\exists x\\varphi\\vee\\exists x\\psi",
+        "note": "同向联结词可双向分配；换成 ∨ 与 ∧ 之后只剩单向（见下条）。",
+        "noteEn": "Quantifiers distribute both ways over the matching connective; over the opposite connective only one direction survives."
+      },
+      {
+        "latex": "\\forall x\\varphi\\vee\\forall x\\psi\\ \\Rightarrow\\ \\forall x(\\varphi\\vee\\psi),\\qquad \\exists x(\\varphi\\wedge\\psi)\\ \\Rightarrow\\ \\exists x\\varphi\\wedge\\exists x\\psi\\quad(\\text{反向不成立})",
+        "note": "两条单向蕴含。反例：论域 {0,1,2} 上取 P={0}、Q={1,2}，则 ∀x(P∨Q) 真而 ∀xP∨∀xQ 假；取 P={0}、Q={1}，则 ∃xP∧∃xQ 真而 ∃x(P∧Q) 假。",
+        "noteEn": "Two one-way implications. Counterexamples on the domain {0,1,2}: P={0}, Q={1,2} makes ∀x(P∨Q) true but ∀xP∨∀xQ false; P={0}, Q={1} makes ∃xP∧∃xQ true but ∃x(P∧Q) false."
+      },
+      {
+        "latex": "\\exists y\\,\\forall x\\,\\varphi\\ \\models\\ \\forall x\\,\\exists y\\,\\varphi,\\qquad \\forall x\\,\\exists y\\,\\varphi\\ \\nvDash\\ \\exists y\\,\\forall x\\,\\varphi",
+        "note": "量词顺序：∃∀ 更强（同一个 y 对所有 x 管用）；反向不成立，如 (ℕ,<) 上 ∀x∃y(y>x) 真而 ∃y∀x(y>x) 假。",
+        "noteEn": "Quantifier order: ∃∀ is stronger (one y works for all x); the converse fails, e.g. on (ℕ,<), ∀x∃y(y>x) is true but ∃y∀x(y>x) is false."
+      },
+      {
+        "latex": "\\bigl(\\exists y\\,(y>x)\\bigr)[x:=y]\\ =\\ \\exists z\\,(z>y)\\qquad(\\text{朴素代入会得到 }\\exists y\\,(y>y))",
+        "note": "代入先对约束变元改名，避免变量捕获；代入只作用于自由出现的变元。",
+        "noteEn": "Rename bound variables before substitution to avoid capture; substitution affects free occurrences of the variable only."
+      }
+    ],
+    "properties": [
+      "辖域规则：量词只约束其辖域内同名变元的出现；约束变元可在避免冲突时改名（α-换名）而不改变含义，自由变元则是决定公式真假的参数。",
+      "量词否定对偶：¬ 与 ∀∃ 按「换量词、否结论」交换；带范围的量词只换量词、范围原样保留：¬∀x∈M P(x) ⇔ ∃x∈M ¬P(x)。否定等号要变成不等号。",
+      "在非空论域的约定下 ∀xφ 蕴含 ∃xφ（全称实例化）；若允许空结构该推理失效，所以一阶语义通常约定论域非空。",
+      "量词顺序：同类量词可交换；∃y∀x φ 蕴含 ∀x∃y φ 而反之不然。当 φ 不含 x 的自由出现时 ∀xφ ⇔ φ（对 ∃ 与 y 同理），此时两种顺序退化等价。",
+      "判定逻辑有效性远比真值表困难：对含二元谓词符号的语言，一阶逻辑的有效性判定不可解（丘奇）；形式证明因此成为研究有效性的主要工具（见 formal-proof-systems、soundness-completeness）。"
+    ],
+    "propertiesEn": [
+      "Scope rules: a quantifier binds only occurrences of its variable inside its scope; bound variables may be renamed (α-conversion) while free variables are the parameters on which the formula's truth depends.",
+      "Negation dualizes ∀ and ∃ by swapping the quantifier and negating the conclusion; for bounded quantifiers the domain stays fixed: ¬∀x∈M P(x) ⇔ ∃x∈M ¬P(x). Negating an equality turns it into an inequality.",
+      "With the convention of a nonempty domain, ∀xφ entails ∃xφ (universal instantiation); empty domains would break this, which is why the semantics assumes nonempty domains.",
+      "Quantifier order: same-kind quantifiers commute; ∃y∀x φ entails ∀x∃y φ but not conversely. If φ has no free occurrence of x then ∀xφ ⇔ φ (similarly for ∃ and y), and the two orders collapse in such degenerate cases.",
+      "Deciding validity is far harder than a truth table: for languages with a binary predicate symbol, first-order validity is undecidable (Church), so formal proofs become the main tool (see formal-proof-systems, soundness-completeness)."
+    ],
+    "examples": [
+      {
+        "problem": "写出「$f$ 在每点连续」与「$f$ 一致连续」（实值函数）的 ε-δ 句子，指出其中量词顺序的差别；再证明 $f(x)=x^2$ 在 ℝ 上逐点连续但非一致连续，并用程序作精确核对。",
+        "solution": "逐点连续：$\\forall a\\,\\forall\\varepsilon>0\\,\\exists\\delta>0\\,\\forall x\\,(|x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon)$；一致连续：$\\forall\\varepsilon>0\\,\\exists\\delta>0\\,\\forall a\\,\\forall x\\,(|x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\varepsilon)$。差别只在 $\\exists\\delta$ 出现的先后：前者中 $\\delta$ 可以随点 $a$（及 $\\varepsilon$）变化，后者中 $\\delta$ 必须对全体点统一——量词顺序就是数学内容。\\n逐点连续（以 $x^2$ 为例）：给定 $a$ 与 $\\varepsilon>0$，取 $\\delta=\\min\\bigl(1,\\ \\varepsilon/(2|a|+1)\\bigr)$，则 $|x^2-a^2|=|x-a|\\cdot|x+a|\\le\\delta(2|a|+\\delta)\\le\\varepsilon$，故每点连续。\\n非一致连续：取 $\\varepsilon=1$。任给 $\\delta>0$，取 $a=1/\\delta$、$x=a+\\delta/2$：则 $|x-a|=\\delta/2<\\delta$，而 $x^2-a^2=\\delta a+\\delta^2/4=1+\\delta^2/4>1$。即 $\\varepsilon=1$ 对任何 $\\delta$ 都失败——$x^2$ 不一致连续。程序用精确分数对 $\\delta=1,\\tfrac12,\\tfrac14,\\tfrac1{10},\\tfrac1{100},\\tfrac1{1000}$ 复核，均得 $|x-a|<\\delta$ 且 $x^2-a^2\\ge 1$；并对若干 $(a,\\varepsilon)$ 核对界 $\\delta(2a+\\delta)\\le\\varepsilon$ 成立。"
+      },
+      {
+        "problem": "(i) 写出数列极限定义 $\\forall\\varepsilon>0\\,\\exists N\\in\\mathbb{N}\\,\\forall n\\ge N\\,(|a_n-L|<\\varepsilon)$ 的否定；(ii) 用有限模型程序核实两条量词否定律在所有小模型上成立，并给出「∃y∀x 与 ∀x∃y 不等值」的具体见证。",
+        "solution": "(i) 逐层「换量词、否结论」：$\\neg\\forall\\varepsilon\\,\\exists N\\,\\forall n\\,(|a_n-L|<\\varepsilon)\\Leftrightarrow\\exists\\varepsilon>0\\,\\forall N\\in\\mathbb{N}\\,\\exists n\\ge N\\,\\neg(|a_n-L|<\\varepsilon)$。注意否定蕴含的规则：$\\neg(n\\ge N\\Rightarrow|a_n-L|<\\varepsilon)\\Leftrightarrow n\\ge N\\wedge|a_n-L|\\ge\\varepsilon$（前提保留、结论取反）；把该合取式置于量词 $\\exists n\\ge N$ 之下，否定式即 $\\exists\\varepsilon>0\\,\\forall N\\,\\exists n\\ge N\\,(|a_n-L|\\ge\\varepsilon)$——「存在 $\\varepsilon>0$，无论 $N$ 多大总能找到更远的 $n$ 使距离至少 $\\varepsilon$」，正是「不收敛于 $L$」的含义。\\n(ii) 程序在论域 {0,1,2} 上枚举全部 $2^9=512$ 个二元关系 $R$：两式 $\\neg\\forall x\\exists y\\,R(x,y)\\Leftrightarrow\\exists x\\forall y\\,\\neg R(x,y)$ 与 $\\neg\\exists x\\forall y\\,R(x,y)\\Leftrightarrow\\forall x\\exists y\\,\\neg R(x,y)$ 全部成立；并核查 $\\exists y\\forall x\\,R\\Rightarrow\\forall x\\exists y\\,R$ 恒成立而反向不成立（512 个关系中恰有 174 个反例）。具体见证：循环关系 $R=\\{(0,1),(1,2),(2,0)\\}$ 上 $\\forall x\\exists y\\,R(x,y)$ 为真（每个点都有后继），而没有任何 $y$ 使 $\\forall x\\,R(x,y)$ 成立。在自然数上相应的事实是：$\\forall x\\exists y\\,(y>x)$ 真（取 $y=x+1$），$\\exists y\\forall x\\,(y>x)$ 假（取 $x=y$ 会要求 $y>y$）。提醒：有限模型枚举只是批量证据，不是证明；规则本身的证明是对公式结构作归纳。"
+      }
+    ],
+    "links": [
+      "propositional-logic",
+      "formal-proof-systems",
+      "universal-existential-quantifiers",
+      "continuity",
+      "soundness-completeness"
+    ],
+    "tags": ["数理逻辑", "谓词逻辑", "量词", "自由变元", "变量捕获"]
+  },
+  {
+    "id": "formal-proof-systems",
+    "title": "形式系统与形式证明",
+    "titleEn": "Formal Systems and Formal Proofs",
+    "branch": "mathematical-logic",
+    "level": 4,
+    "summary": "形式系统用符号表、公理模式与推理规则把「证明」定义为可机械检查的有穷符号序列；可证性 ⊢ 是纯语法概念，定理集可被机械枚举。",
+    "summaryEn": "A formal system defines proofs as finite, mechanically checkable symbol sequences via axioms and inference rules; provability ⊢ is purely syntactic and the set of theorems is recursively enumerable.",
+    "definition": "形式系统把数学推理拆成四件写清楚的事：**符号表**（哪些符号可用）、**公式形成规则**（哪些符号串是合式公式）、**公理**（通常写成**公理模式**：一条模式经代入得到无穷多条公理，如「对任意公式 $A$、$B$，$A\\to(B\\to A)$ 是公理」）、**推理规则**（从已有公式推出新公式的机械规则；最常用的是**分离规则**（modus ponens，MP）：由 $\\varphi$ 与 $\\varphi\\to\\psi$ 推得 $\\psi$）。一个**形式证明**（演绎、推导）是一个**有穷**公式序列，其中每一项要么是公理实例、要么是显式写出的前提（假设）、要么由前面若干项应用规则得到；序列的末项 $\\varphi$ 就称为可证，记 $\\Gamma\\vdash\\varphi$（$\\Gamma$ 为所用前提的集合；$\\vdash\\varphi$ 表示无须前提，$\\varphi$ 是系统的**定理**）。关键点：证明是一个有穷的、可逐行核对的符号对象——检查「这一行是不是公理模式 $A\\to(B\\to A)$ 的实例」只需模式匹配，不需要理解任何含义。\n\n一个经济得惊人的原型是**希尔伯特式系统**：只把 $\\neg$ 与 $\\to$ 取为初始联结词（$A\\wedge B$ 定义为 $\\neg(A\\to\\neg B)$，$A\\vee B$ 定义为 $\\neg A\\to B$），公理只有三条模式：L1: $A\\to(B\\to A)$；L2: $(A\\to(B\\to C))\\to((A\\to B)\\to(A\\to C))$；L3: $(\\neg A\\to\\neg B)\\to(B\\to A)$；推理规则只有 MP。仅在这样一个小小的系统里，全部重言式就都能被证明（可靠性与完备性见 soundness-completeness）——这说明公理模式不靠数量取胜，而靠代入与规则的组合能力。另一路风格是**自然演绎**与**相继式演算**：它们把「假设、消去假设、反证」等日常动作直接规定为规则，更接近人写证明的直觉；三种风格能证的公式相同，只是书写便利不同。\n\n必须牢牢分清两个符号：**⊢（可证）** 说的是「存在一个有穷证明」——纯符号事实；**⊨（语义蕴含）**说的是「一切模型都满足」——涉及真值。二者字面上毫无关系；它们的一致（$\\vdash\\Rightarrow\\vDash$ 的可靠性与 $\\vDash\\Rightarrow\\vdash$ 的完备性）是两条需要证明的定理，而非定义（详见 soundness-completeness）。日常工作中最有用的元定理是**演绎定理**：$\\Gamma,\\varphi\\vdash\\psi$ 当且仅当 $\\Gamma\\vdash\\varphi\\to\\psi$——它把「从假设出发的推导」翻译成「证明蕴含式」。注意它在命题逻辑中双向成立，而在一阶情形要加限制：若推导中对 $\\varphi$ 中自由出现的变元作了全称概括，则定理失效，通常要求 $\\varphi$ 是闭公式（或不对其自由变元概括）。\n\n机械可检查性带来三条结构性事实。(1) 证明的**检查**容易：给定符号串逐行验证是否公理实例或规则应用，所需步数与证明长度成正比。(2) 定理集合是**递归可枚举**的：按长度从小到大枚举所有符号串、逐个检验是否为合法证明，就能不停列出全部定理——但「$\\varphi$ 可证吗」的判定问题一般**不可解**（一阶逻辑中不可判定），因为搜索可能永不停止：能枚举不等于能判定。(3) 由可证性可定义**相容性**（一致性）：系统不相容当且仅当存在公式 $\\varphi$ 使 $\\varphi$ 与 $\\neg\\varphi$ 都可证（等价于某个矛盾式可证）；在标准系统里，不相容的系统的每个公式都可证（由矛盾「爆炸」），因此相容性是形式系统有意义的最低门槛。希尔伯特纲领要求用有穷、可机械检查的方法证明强系统相容——这一计划与哥德尔结果的历史交锋，见 hilbert-program-godel 与 brouwer-hilbert-controversy。",
+    "definitionEn": "A formal system writes down four things explicitly: its **alphabet** (available symbols), **formation rules** (which symbol strings are well-formed formulas), **axioms** (usually as **axiom schemata**—one pattern stands for infinitely many axioms, e.g. for all formulas $A$, $B$, $A\\to(B\\to A)$ is an axiom), and **inference rules** (mechanical rules deriving new formulas from old ones; the most common is **modus ponens** (MP): from $\\varphi$ and $\\varphi\\to\\psi$ infer $\\psi$). A **formal proof** (derivation) is a **finite** sequence of formulas in which each item is an axiom instance, an explicitly listed premise, or follows from earlier items by a rule; its last formula $\\varphi$ is then provable, written $\\Gamma\\vdash\\varphi$ ($\\Gamma$ collects the premises; $\\vdash\\varphi$ means no premises—$\\varphi$ is a **theorem**). The essential point: a proof is a finite symbolic object that can be checked line by line without any semantics—verifying that a line instantiates $A\\to(B\\to A)$ is pure pattern matching.\n\nA remarkably economical prototype is the **Hilbert-style system** taking only $\\neg$ and $\\to$ as primitive (with $A\\wedge B$ defined as $\\neg(A\\to\\neg B)$ and $A\\vee B$ as $\\neg A\\to B$) and three axiom schemata: L1: $A\\to(B\\to A)$; L2: $(A\\to(B\\to C))\\to((A\\to B)\\to(A\\to C))$; L3: $(\\neg A\\to\\neg B)\\to(B\\to A)$, with MP as the only rule. In this tiny system every tautology is provable (soundness and completeness are treated in soundness-completeness)—axiom schemata win by combination, not by numbers. Alternative styles are **natural deduction** and the **sequent calculus**, which turn assumptions, discharges and proof by contradiction into explicit rules closer to everyday mathematical writing; all three styles prove the same formulas.\n\nKeep two symbols strictly apart: **⊢ (provability)** states that a finite proof exists—a purely symbolic fact; **⊨ (semantic consequence)** states that every model satisfies the conclusion—a fact about truth. On their face they are unrelated; that they match—soundness ($\\vdash\\Rightarrow\\vDash$) and completeness ($\\vDash\\Rightarrow\\vdash$)—requires theorems, not definitions (see soundness-completeness). The most useful metatheorem in practice is the **deduction theorem**: $\\Gamma,\\varphi\\vdash\\psi$ if and only if $\\Gamma\\vdash\\varphi\\to\\psi$, translating a derivation from an assumption into a proof of an implication. It holds both ways in propositional logic, but in first-order systems it needs care: if the derivation generalizes a variable free in $\\varphi$ the theorem fails, so one usually requires $\\varphi$ to be a closed formula.\n\nMechanical checkability yields three structural facts. (1) **Checking** a proof is easy: verifying each line against the schemata and rules takes steps proportional to the proof length. (2) The set of theorems is **recursively enumerable**: enumerating all symbol strings by length and testing each for being a proof lists every theorem—yet the question whether a given $\\varphi$ is provable is in general **undecidable** (as in first-order logic), since the search may never stop: enumerable is not decidable. (3) Provability yields the notion of **consistency**: a system is inconsistent iff some $\\varphi$ and $\\neg\\varphi$ are both provable (equivalently some contradiction is provable); in standard systems an inconsistent system proves every formula by explosion. Consistency is the minimal requirement for a formal system to be meaningful. Hilbert's program demanded that strong systems be shown consistent by finitary, mechanically checkable means—see hilbert-program-godel and brouwer-hilbert-controversy for how that program fared.",
+    "formulas": [
+      {
+        "latex": "\\mathrm{L1}:\\quad \\varphi\\to(\\psi\\to\\varphi)",
+        "note": "公理模式 L1（重复前提）：任何已成立的事实在任何前提下仍成立；模式经代入产生无穷多条公理。",
+        "noteEn": "Axiom schema L1 (repetition of the antecedent); one pattern yields infinitely many axioms by substitution."
+      },
+      {
+        "latex": "\\mathrm{L2}:\\quad (\\varphi\\to(\\psi\\to\\chi))\\to((\\varphi\\to\\psi)\\to(\\varphi\\to\\chi))",
+        "note": "公理模式 L2：把「由 ψ 得到 χ」的链条搬到前提上，是 MP 组合出长证明的关键。",
+        "noteEn": "Axiom schema L2: moves an implication chain onto the antecedent; the key to combining long proofs by MP."
+      },
+      {
+        "latex": "\\mathrm{L3}:\\quad (\\neg\\varphi\\to\\neg\\psi)\\to(\\psi\\to\\varphi)",
+        "note": "公理模式 L3：逆否形式的收尾公理，为否定引入「反证」能力；与 L1、L2、MP 配合足以推出全部重言式。",
+        "noteEn": "Axiom schema L3: a contraposition-style closing axiom giving negation its power; with L1, L2 and MP it suffices for all tautologies."
+      },
+      {
+        "latex": "\\mathrm{MP}:\\quad \\dfrac{\\varphi\\qquad\\varphi\\to\\psi}{\\psi}",
+        "note": "分离规则：希尔伯特式系统中唯一的推理行动；每一步都要求所需公式已经出现在前面。",
+        "noteEn": "Modus ponens: the single inference action of a Hilbert-style system; every application requires its inputs to appear earlier."
+      },
+      {
+        "latex": "\\Gamma,\\varphi\\vdash\\psi\\ \\Longleftrightarrow\\ \\Gamma\\vdash\\varphi\\to\\psi",
+        "note": "演绎定理：假设可以折进蕴含式。命题逻辑双向成立；一阶情形若对前提中的自由变元作概括则失效，通常要求 φ 为闭公式。",
+        "noteEn": "Deduction theorem: an assumption folds into the implication. Two-way in propositional logic; in first-order logic generalizing a free variable of φ invalidates it, so φ is usually required to be closed."
+      }
+    ],
+    "properties": [
+      "可证性单调：Γ⊢φ 且 Γ⊆Δ，则 Δ⊢φ；特别地定理 ⊢φ 在任何额外前提下仍可证——证明只用有穷多前提，可原样搬进更大的上下文。",
+      "证明的有穷性：Γ⊢φ 蕴含存在有穷 Γ₀⊆Γ 使 Γ₀⊢φ；这一步是紧致性定理语法一面的根源（见 compactness-theorem）。",
+      "演绎定理：命题逻辑中 Γ,φ⊢ψ ⟺ Γ⊢φ→ψ；一阶情形若对 φ 的自由变元作了全称概括会失效，故通常要求 φ 为闭公式后再使用。",
+      "相容性：系统不相容 ⟺ 存在 φ 使 φ 与 ¬φ 都可证 ⟺ 一切公式都可证；语义侧「有模型」通过可靠性与完备性同它相连。",
+      "检查容易、寻找困难：证明的机械检查是可行且可判定的；定理集递归可枚举，但「是否可证」一般不可判定——形式证明给出的是验证标准，不是发现算法。"
+    ],
+    "propertiesEn": [
+      "Monotonicity of provability: Γ⊢φ and Γ⊆Δ imply Δ⊢φ; in particular a theorem remains provable under any extra premises—a proof uses finitely many inputs and can be transplanted verbatim.",
+      "Finiteness: Γ⊢φ implies Γ₀⊢φ for some finite Γ₀⊆Γ; this is the syntactic root of the compactness theorem (see compactness-theorem).",
+      "Deduction theorem: Γ,φ⊢ψ iff Γ⊢φ→ψ in propositional logic; in first-order logic generalizing a variable free in φ invalidates it, so φ is usually required to be closed.",
+      "Consistency: a system is inconsistent iff some φ and ¬φ are both provable, iff every formula is provable; the semantic counterpart, having a model, is connected through soundness and completeness.",
+      "Checking is easy, finding is hard: proof checking is a feasible decision procedure and the theorem set is recursively enumerable, but is φ provable is in general undecidable—formal proofs provide a standard of verification, not an algorithm for discovery."
+    ],
+    "examples": [
+      {
+        "problem": "在系统 {L1, L2, L3, MP} 中给出 $A\\to A$ 的形式证明，并用程序逐行机械检查（每行须是公理实例、前提，或由前面两行经 MP 得到）。",
+        "solution": "五行证明：\\[\\begin{aligned}&(1)\\quad A\\to((A\\to A)\\to A) &&[\\mathrm{L1},\\ B:=A\\to A]\\\\&(2)\\quad (A\\to((A\\to A)\\to A))\\to((A\\to(A\\to A))\\to(A\\to A)) &&[\\mathrm{L2},\\ B:=A\\to A,\\ C:=A]\\\\&(3)\\quad (A\\to(A\\to A))\\to(A\\to A) &&[\\mathrm{MP}(1,2)]\\\\&(4)\\quad A\\to(A\\to A) &&[\\mathrm{L1},\\ B:=A]\\\\&(5)\\quad A\\to A &&[\\mathrm{MP}(4,3)]\\end{aligned}\\] 程序把每行与三条公理模式作模式匹配、并穷举前面所有行寻找 MP 前提：五行全部合法，证明通过检查。观察结构：$A\\to A$ 由两条公理模式经两次 MP「拼装」而成——没有任何一行涉及语义讨论，全是符号搬运，这正是「机械可检查」的含义。"
+      },
+      {
+        "problem": "用演绎定理证明 $\\{A\\to B,\\ B\\to C\\}\\vdash A\\to C$，写出被程序检查的五行推导。",
+        "solution": "先做带假设的推导 $\\{A\\to B,\\ B\\to C,\\ A\\}\\vdash C$：\\[\n(1)\\ A\\ [\\text{前提}],\\quad (2)\\ A\\to B\\ [\\text{前提}],\\quad (3)\\ B\\ [\\mathrm{MP}(1,2)],\\quad (4)\\ B\\to C\\ [\\text{前提}],\\quad (5)\\ C\\ [\\mathrm{MP}(3,4)].\\] 程序逐行确认：第 3、5 行分别由 $\\mathrm{MP}(1,2)$ 与 $\\mathrm{MP}(3,4)$ 得到，第 1、2、4 行是前提——推导合法。对命题逻辑，演绎定理 $\\Gamma,\\varphi\\vdash\\psi\\Leftrightarrow\\Gamma\\vdash\\varphi\\to\\psi$ 随即把假设 $A$ 吸收进结论，得 $\\{A\\to B,\\ B\\to C\\}\\vdash A\\to C$。注意演绎定理不是「免费」的普遍规则：搬到一阶系统时必须检查推导中没有对某前提的自由变元作全称概括，否则推理不成立。"
+      }
+    ],
+    "links": [
+      "propositional-logic",
+      "predicate-logic",
+      "soundness-completeness",
+      "hilbert-program-godel",
+      "compactness-theorem"
+    ],
+    "tags": ["数理逻辑", "形式系统", "公理模式", "推理规则", "可证性"]
+  },
+  {
+    "id": "soundness-completeness",
+    "title": "可靠性与完备性",
+    "titleEn": "Soundness and Completeness",
+    "branch": "mathematical-logic",
+    "level": 5,
+    "summary": "可靠性保证可证者皆有效（⊢⇒⊨），完备性保证有效者皆可证（⊨⇒⊢）；一阶逻辑的完备性由哥德尔 1929 年证明，二者使语法与语义完全重合。",
+    "summaryEn": "Soundness says provable implies valid (⊢ ⇒ ⊨); completeness says valid implies provable (⊨ ⇒ ⊢). Gödel proved completeness for first-order logic in 1929, fusing its syntax and semantics.",
+    "definition": "设 $\\Gamma$ 是公式集。**可靠性（soundness）**断言：若 $\\Gamma\\vdash\\varphi$ 则 $\\Gamma\\vDash\\varphi$——凡是能证明的都必然在 $\\Gamma$ 的每个模型里成立。证明思路是对推导长度作归纳：公理模式的每条实例都是逻辑有效式（逐条验算），推理规则保真（若结构满足 $\\varphi$ 与 $\\varphi\\to\\psi$，则它也满足 $\\psi$），于是推导的每一步都保持语义成立，末项结论自然成立。可靠性有两个用途：为系统背书（推不出谬误）；以及一种「否定式工具」——只要在某个结构里找到反例，就知道该公式不可证（因为可证将迫使它在所有结构中为真，矛盾）。\n\n**完备性（completeness）**断言：若 $\\Gamma\\vDash\\varphi$ 则 $\\Gamma\\vdash\\varphi$——凡是普遍成立的都写得出有穷证明。方向务必对照清楚：**可靠性是 ⊢⇒⊨，完备性是 ⊨⇒⊢，写反是逻辑学最出名的低级错误**。完备性定理有个更顺手的模型论形式：**每个相容的句子集都有模型**。两种形式等价：一方面，若 $\\Gamma$ 不能证明 $\\varphi$（即 $\\Gamma\\nvdash\\varphi$），则把 $\\neg\\varphi$ 加入 $\\Gamma$ 仍保持相容，由模型存在得其模型，正是 $\\Gamma\\nvDash\\varphi$ 的见证（这是「有模型 ⇒ 完备性」的推理链）；另一方面，若相容的 $\\Gamma$ 无模型，则对语言中任一句子 $\\varphi$，$\\Gamma\\vDash\\varphi$ 与 $\\Gamma\\vDash\\neg\\varphi$ 都真空成立，由完备性得 $\\Gamma\\vdash\\varphi$ 与 $\\Gamma\\vdash\\neg\\varphi$，与相容性矛盾。一阶逻辑的完备性定理由**哥德尔 1929 年的博士论文**证得（1930 年发表）；要把它与 1931 年的**不完备定理**严格区分——完备性定理说的是纯逻辑（公理极少的谓词演算）足以推出一切逻辑有效式；不完备定理说的是含充分算术、相容、可递归公理化的具体理论（如 PA、ZFC）中存在既不可证也不可否证的句子。一个关于「逻辑」，一个关于「数学理论」，层次与适用范围都不同，二者并不冲突。\n\n命题逻辑的完备性有一套干净的直接证明，核心是**极大相容集**。设 $\\Gamma$ 相容；把所有公式枚举成序列，从 $\\Gamma$ 出发逐个考察：能加 $\\varphi$ 就加 $\\varphi$，否则加 $\\neg\\varphi$——相容性保证二者至少有一个可加。得到的极大相容集 $\\Delta$ 满足：对任意 $\\varphi$，$\\varphi\\in\\Delta$ 与 $\\neg\\varphi\\in\\Delta$ 恰有一个成立；$\\Delta$ 对可证性封闭（$\\Delta\\vdash\\psi\\Rightarrow\\psi\\in\\Delta$）；且 $\\varphi\\wedge\\psi\\in\\Delta$ 当且仅当 $\\varphi,\\psi\\in\\Delta$（$\\vee$ 同理变为「或」）。定义赋值 $v$：$v(p)=\\text{真}$ 当且仅当 $p\\in\\Delta$；对公式结构作归纳即可证明**真值引理**：$v$ 满足 $\\varphi$ 当且仅当 $\\varphi\\in\\Delta$。于是 $\\Delta$（从而 $\\Gamma$）可满足——「相容 ⇒ 可满足」得证，取 $\\Gamma\\cup\\{\\neg\\varphi\\}$（在 $\\Gamma\\nvdash\\varphi$ 时相容）即得完备性。这条路的每一步都只处理有穷符号对象；公式可数时不需要任何选择原则。更初等的替代路线是把公式化为主析取范式，再按成真赋值逐行构造证明。一阶情形沿用同一骨架，只是极大相容集的扩张要加入**见证常元**，模型做成**项模型**（论域取项的同余类）——这就是亨金（1949）给出的证明。\n\n可靠性与完备性把 $\\vdash$ 与 $\\vDash$ 合成一体：形式证明恰好刻画逻辑有效式，不多不少——这是「形式化」概念的精确胜利。直接推论有紧致性定理（见 compactness-theorem）与下勒文海姆–斯科伦定理（可数语言的可满足理论有可数模型），还有一整套相对相容性方法：用模型说明「$T$ 有模型」，从而（在语义有结构可解释的前提下）说明「$T$ 相容」，避免构造有穷主义证明。但完备性有两条边界：它是**存在性**定理——保证证明存在，不保证能有效地找到，也不附带证明长度的上界；并且它不等于可判定性——对含二元谓词符号的语言，一阶逻辑定理的判定问题不可解（丘奇 1936）。历史脉络见 hilbert-program-godel 与 brouwer-hilbert-controversy。",
+    "definitionEn": "For a set $\\Gamma$ of formulas, **soundness** says: if $\\Gamma\\vdash\\varphi$ then $\\Gamma\\vDash\\varphi$—everything provable holds in every model of $\\Gamma$. The proof is an induction on derivation length: every axiom-schema instance is logically valid (checked one by one) and the rules preserve truth (a structure satisfying $\\varphi$ and $\\varphi\\to\\psi$ satisfies $\\psi$), so each step stays semantically true and the last line holds as well. Soundness certifies the system and provides a negative test: one counterexample structure shows a formula unprovable, since provability would force it to hold in every structure.\n\n**Completeness** says: if $\\Gamma\\vDash\\varphi$ then $\\Gamma\\vdash\\varphi$—everything universally true has a finite proof. Compare directions carefully: **soundness is ⊢⇒⊨ and completeness is ⊨⇒⊢; reversing them is the most famous elementary error in logic**. Completeness has a handier model-theoretic form: **every consistent set of sentences has a model**. The two forms are equivalent: if $\\Gamma\\nvdash\\varphi$, adjoining $\\neg\\varphi$ keeps consistency, so by model existence the set $\\Gamma\\cup\\{\\neg\\varphi\\}$ has a model—a witness that $\\Gamma\\nvDash\\varphi$ (model existence implies completeness); conversely, if a consistent $\\Gamma$ had no model, then for any sentence $\\varphi$ both $\\Gamma\\vDash\\varphi$ and $\\Gamma\\vDash\\neg\\varphi$ would hold vacuously, so completeness would give proofs of $\\varphi$ and of $\\neg\\varphi$, contradicting consistency. Gödel proved first-order completeness in his **1929 doctoral dissertation** (published 1930). Do not conflate it with the **incompleteness theorems of 1931**: completeness concerns pure logic (very few axioms, all valid formulas provable), while incompleteness concerns sufficiently strong, consistent, recursively axiomatized arithmetic theories such as PA or ZFC, which contain sentences neither provable nor refutable. One is about logic, the other about mathematical theories; there is no conflict.\n\nPropositional completeness has a clean direct proof via **maximal consistent sets**. Let $\\Gamma$ be consistent; enumerate all formulas and extend step by step, adding $\\varphi$ when possible and $\\neg\\varphi$ otherwise—consistency guarantees one of the two can always be added. The resulting maximal consistent set $\\Delta$ satisfies: for every $\\varphi$ exactly one of $\\varphi\\in\\Delta$, $\\neg\\varphi\\in\\Delta$ holds; $\\Delta$ is closed under provability ($\\Delta\\vdash\\psi\\Rightarrow\\psi\\in\\Delta$); and $\\varphi\\wedge\\psi\\in\\Delta$ iff $\\varphi,\\psi\\in\\Delta$ (similarly $\\vee$). Define a valuation $v$ by $v(p)=\\text{true}$ iff $p\\in\\Delta$; induction on formula structure gives the **truth lemma**: $v$ satisfies $\\varphi$ iff $\\varphi\\in\\Delta$. Hence $\\Delta$, and so $\\Gamma$, is satisfiable: consistent implies satisfiable holds, and applying it to $\\Gamma\\cup\\{\\neg\\varphi\\}$ (consistent whenever $\\Gamma\\nvdash\\varphi$) gives completeness. Every step manipulates finite symbolic objects; for countable languages no choice principle is needed. A more elementary alternative converts formulas to principal disjunctive normal form and constructs proofs row by row. First-order logic uses the same skeleton with **witness constants** added during the maximal-consistent extension, the model being a **term model** (domain of equivalence classes of terms)—this is Henkin's 1949 proof.\n\nSoundness plus completeness fuse $\\vdash$ and $\\vDash$: formal proofs capture exactly the valid formulas—no more, no less. This is the precise triumph of the idea of formalization. Immediate corollaries include the compactness theorem (see compactness-theorem) and the downward Löwenheim–Skolem theorem (satisfiable theories in countable languages have countable models), plus the relative-consistency method: a model shows a theory consistent without finitary proofs. But completeness has limits: it is an **existence** theorem, giving neither the proofs nor length bounds, and it does not imply decidability—theoremhood in first-order logic with a binary predicate is undecidable (Church 1936). For the historical context see hilbert-program-godel and brouwer-hilbert-controversy.",
+    "formulas": [
+      {
+        "latex": "\\Gamma\\vdash\\varphi\\ \\Longrightarrow\\ \\Gamma\\vDash\\varphi",
+        "note": "可靠性（soundness）：可证 ⇒ 有效。公理有效、规则保真，归纳即得；用于「显示反例即证明不可证」。",
+        "noteEn": "Soundness: provable implies valid. Axioms are valid and rules preserve truth, by induction; one counterexample suffices to show unprovability."
+      },
+      {
+        "latex": "\\Gamma\\vDash\\varphi\\ \\Longrightarrow\\ \\Gamma\\vdash\\varphi",
+        "note": "完备性（completeness）：有效 ⇒ 可证。注意方向与可靠性相反，写反是经典错误。",
+        "noteEn": "Completeness: valid implies provable. The direction is opposite to soundness; reversing them is the classic mistake."
+      },
+      {
+        "latex": "\\Gamma\\vdash\\varphi\\ \\Longleftrightarrow\\ \\Gamma\\vDash\\varphi",
+        "note": "两条合起来：一阶逻辑中语法与语义恰好重合（哥德尔 1929）；这一等式也是紧致性定理的来源。",
+        "noteEn": "Together: syntax and semantics coincide exactly in first-order logic (Gödel 1929); this identity is also the source of compactness."
+      },
+      {
+        "latex": "\\Gamma\\ \\text{相容}\\ \\Longleftrightarrow\\ \\Gamma\\ \\text{有模型}",
+        "note": "完备性的模型论形式；与上一条的等价由「Γ⊬φ 时 Γ∪{¬φ} 相容」这一标准事实连接。",
+        "noteEn": "The model-theoretic form of completeness; its equivalence with the previous line goes through the standard fact that Γ∪{¬φ} is consistent whenever Γ⊬φ."
+      },
+      {
+        "latex": "\\Gamma\\ \\text{相容}\\ \\Longrightarrow\\ \\exists\\,\\Delta\\supseteq\\Gamma:\\ \\Delta\\ \\text{极大相容}",
+        "note": "林登鲍姆扩张：相容集总可扩成极大相容集；随后定义赋值并用真值引理 v⊨φ ⟺ φ∈Δ 造出模型。",
+        "noteEn": "Lindenbaum extension: every consistent set extends to a maximal one; a valuation is then defined and the truth lemma v⊨φ iff φ∈Δ produces a model."
+      }
+    ],
+    "properties": [
+      "方向对照（自检用）：⊢⇒⊨ 叫可靠性，⊨⇒⊢ 叫完备性；完备性绝不是「可证者都有效」（那是可靠性）——这对名字是初学逻辑最容易写反的一处。",
+      "「完备」有三种用法：逻辑的完备（⊢ 覆盖 ⊨，哥德尔 1929）；理论的完备（对该理论的每个句子 φ，φ 或 ¬φ 可证——如无端点稠密线序理论；算术理论不完备）；推理规则的完备（如消解反驳完备）。哥德尔 1931 年不完备定理说的是第二种含义，与完备性定理并不矛盾。",
+      "可靠性与相容性：若系统可靠且某句子集有模型，则该集相容——否则可证的矛盾式将在这个模型里也为真。这一「有模型 ⇒ 相容」的路线是相对相容性证明的常客。",
+      "完备性的直接推论：紧致性定理；下勒文海姆–斯科伦定理（可数语言的可满足理论有可数模型，由项模型直接给出）；以及「逻辑有效式恰好就是可证式」这一定性结论。",
+      "边界：完备性是存在性定理（不给出证明本身与长度上界），也不蕴含可判定性——一阶逻辑定理判定不可解（丘奇），命题逻辑则可解（真值表）。可靠、完备、可判定是三个互相独立的问题。"
+    ],
+    "propertiesEn": [
+      "Direction checklist: ⊢⇒⊨ is soundness and ⊨⇒⊢ is completeness; completeness is not everything provable is valid (that is soundness)—this pair is the classic place to write the wrong direction.",
+      "Complete has three uses: completeness of logic (⊢ covers ⊨, Gödel 1929); completeness of a theory (for every sentence φ of the theory, φ or ¬φ is provable—as for dense linear orders without endpoints, while arithmetic theories are incomplete); and completeness of an inference format (resolution is refutation-complete). Gödel's incompleteness of 1931 refers to the second sense and does not contradict the completeness theorem.",
+      "Soundness and consistency: if the system is sound and a set of sentences has a model, the set is consistent—otherwise a provable contradiction would hold in that very model. This model implies consistency route is the standard tool of relative consistency proofs.",
+      "Corollaries of completeness: the compactness theorem; the downward Löwenheim–Skolem theorem (satisfiable theories in countable languages have countable models, supplied by the term model); and the qualitative statement that the valid formulas are exactly the provable ones.",
+      "Limits: completeness is an existence theorem, giving neither proofs nor length bounds, and it does not imply decidability—first-order theoremhood is undecidable (Church) while propositional theoremhood is decidable by truth tables. Soundness, completeness and decidability are three independent issues."
+    ],
+    "examples": [
+      {
+        "problem": "用程序真值表验证 $\\varphi=((p\\wedge q)\\to r)\\leftrightarrow(p\\to(q\\to r))$（输出律）是重言式；再说明：可靠系统不能证明 $\\neg\\varphi$，而完备系统一定能证明 $\\varphi$。",
+        "solution": "枚举 $2^3=8$ 组赋值：两端 $((p\\wedge q)\\to r)$ 与 $(p\\to(q\\to r))$ 的真值逐行相同，故 $\\varphi$ 是重言式（程序逐行核对无例外）；$\\neg\\varphi$ 则对所有赋值为假，即不可满足。\\n第一问：若系统可靠而 $\\vdash\\neg\\varphi$，则 $\\vDash\\neg\\varphi$；但 $\\neg\\varphi$ 在每行都假，不可能有效——矛盾。所以可靠系统绝不能证明 $\\neg\\varphi$：可靠性在此当「排除器」。\\n第二问：若系统（如希尔伯特系统）完备，则 $\\vDash\\varphi$ 直接给出 $\\vdash\\varphi$——存在有穷形式证明；注意这个定理**不告诉我们证明长什么样**，只保证它存在。一句话：可靠性管「不能证什么」，完备性管「能证什么」。"
+      },
+      {
+        "problem": "说明「$\\{p\\to q\\}\\vDash\\neg p\\vee q$」与「$\\{p\\to q\\}\\vdash\\neg p\\vee q$」是两条不同断言：用枚举核对前者，用完备性断言后者；再用一个反例赋值证明 $\\nvDash p\\to(p\\to q)$ 并据此说明该公式不可证。",
+        "solution": "前者是语义断言。枚举全部四组赋值，$p\\to q$ 的模型是 $(p,q)=(1,1),(0,1),(0,0)$ 三行；在这三行上 $\\neg p\\vee q$ 的取值分别为 $1,1,1$，全真，故 $\\{p\\to q\\}\\vDash\\neg p\\vee q$ ✓。后者是语法断言：存在从 $\\{p\\to q\\}$ 出发的有穷证明——它不能由真值表直接读出，要靠完备性定理过渡（⊨⇒⊢）；程序只核对语义、不产出证明，这正体现「完备性是存在性定理」。\\n反方向：枚举发现 $(p,q)=(1,0)$ 使 $p\\to(p\\to q)$ 为假，故 $\\nvDash p\\to(p\\to q)$；由可靠性的逆否形式（可证 ⇒ 有效，故不有效 ⇒ 不可证），任何可靠系统都**证不出**它——尽管它看起来像一条自然成立的蕴含式。两例共同显示：⊢ 与 ⊨ 由两条定理按固定方向连接，推理时要先想清用的是哪一条。"
+      }
+    ],
+    "links": [
+      "formal-proof-systems",
+      "propositional-logic",
+      "predicate-logic",
+      "compactness-theorem",
+      "hilbert-program-godel",
+      "brouwer-hilbert-controversy"
+    ],
+    "tags": ["数理逻辑", "可靠性", "完备性", "哥德尔", "极大一致集"]
+  },
+  {
+    "id": "compactness-theorem",
+    "title": "紧致性定理",
+    "titleEn": "The Compactness Theorem",
+    "branch": "mathematical-logic",
+    "level": 5,
+    "summary": "一阶句子集可满足当且仅当它的每个有限子集可满足——「局部有模型」迫使「整体有模型」，是模型论最常用的存在性工具。",
+    "summaryEn": "A set of first-order sentences is satisfiable iff every finite subset is; local satisfiability forces global satisfiability, making compactness the basic existence tool of model theory.",
+    "definition": "**紧致性定理**：一阶句子集 $\\Gamma$ 可满足，当且仅当 $\\Gamma$ 的**每个有限子集**都可满足。两个方向中「$\\Rightarrow$」是平凡的（同一个模型见证所有子集），内容全在「$\\Leftarrow$」：**只要每个有限子集各有模型，整个 $\\Gamma$（哪怕无穷）就有模型**——「任意有限子集可满足 ⇒ 整体可满足」。它是把局部信息提升为整体对象的典范，也是无穷公理系统的相容性总可以「只用有限步检查」的根据。为什么可信？从证明系统一侧看：任何推导都是**有穷**序列，只能用到 $\\Gamma$ 的有限多条句子——所以「每个有限子集都不矛盾」与「整体推不出矛盾」在语法上本就同义；紧致性把这句话翻译到语义一侧，翻译的桥梁是完备性定理。\n\n经典证明有三条路线。(1) **从完备性定理出发**：若 $\\Gamma$ 无模型，则对任意句子 $\\varphi$，$\\Gamma\\vDash\\varphi$ 与 $\\Gamma\\vDash\\neg\\varphi$ 都真空成立；由完备性，$\\varphi$ 与 $\\neg\\varphi$ 各有一个从**有限**子集出发的证明；把这两个有限子集合并，由可靠性它既语义蕴含 $\\varphi$ 又蕴含 $\\neg\\varphi$，任何结构都无法满足它——与「每个有限子集可满足」矛盾。(2) **亨金–林登鲍姆直接构造**：把 $\\Gamma$ 扩张为极大相容集（必要时加入见证常元），取项模型（论域为项的同余类），真值引理立即给出 $\\Gamma$ 的模型，不经过完备性定理。(3) **超积**：对每个有限子集取一个模型，在指标集（有限子集构成的定向集）上取合适的超滤子，超积模型由 **Łoś 定理** 同时满足 $\\Gamma$ 的每一条句子——证明最短，但先要备好超滤子（与选择原则的关系见 properties）。\n\n紧致性是一阶逻辑「有穷性」的回声：公式是有穷符号串、证明是有穷序列、公理由有穷多条模式给出。因此在二阶逻辑、无穷长公式逻辑或带「存在无穷多个」广义量词的逻辑里它一般失效。一个标准反例：二阶逻辑能用一句话 $\\varphi_{\\text{fin}}$ 说出「论域有限」（「每个单射都是满射」），再加上「至少 $n$ 个互异元素」的句子（借助 $n$ 个常元两两不等）——每个有限子集都可满足（取足够大的有限论域），整体却不可满足（有限论域装不下任意多互异常元）。与此对照，紧致性与下勒文海姆–斯科伦性质一起恰能刻画一阶逻辑（林德斯特伦定理）：满足这些正则条件的最强逻辑就是一阶逻辑。\n\n使用方法几乎总是一样的三步：① 把目标对象（模型、染色、嵌入、赋值）翻译成一阶语言中的句子集 $\\Gamma$；② 逐有限子集证明可满足——通常因为有限情形能构造出显式例子；③ 紧致性给出整体模型，再翻译回目标对象。两个提醒：得到的模型往往是**非构造性**的（项模型、超积都可能很大、不可数、不可显式计算）；结论也不应随意加强——紧致性不控制模型的基数与可计算性，要得到可数模型需与下勒文海姆–斯科伦定理配合。辨析：**逻辑紧致性不是拓扑紧致性**——后者是「每个开覆盖有有穷子覆盖」的空间性质；两者的深层联系在于命题逻辑的紧致性与「紧 Hausdorff 空间族之积仍紧」（Tychonoff 定理的紧 Hausdorff 情形）在 ZF 下等价（细节见 properties）。名字撞车，概念不同，务必分清。",
+    "definitionEn": "The **compactness theorem**: a set $\\Gamma$ of first-order sentences is satisfiable if and only if **every finite subset** of $\\Gamma$ is satisfiable. The direction $\\Rightarrow$ is trivial (one model witnesses all subsets); the content is the converse: **if every finite subcollection has a model, the whole of $\\Gamma$ (however infinite) has one**. It is the paradigm of lifting local information to a global object and the reason consistency of infinite axiom systems can always be checked finitely. Intuitively, any derivation is a finite sequence using finitely many premises from $\\Gamma$, so the statements 'no finite subcollection is contradictory' and '$\\Gamma$ is not contradictory' should agree syntactically; compactness is the semantic counterpart of that remark, with completeness as the bridge.\n\nThree classical proofs. (1) **From completeness**: if $\\Gamma$ has no model, then for any sentence $\\varphi$ both $\\Gamma\\vDash\\varphi$ and $\\Gamma\\vDash\\neg\\varphi$ hold vacuously; by completeness, $\\varphi$ and $\\neg\\varphi$ each have proofs from **finite** subsets; merging those subsets, soundness makes the finite set semantically entail both $\\varphi$ and $\\neg\\varphi$, so no structure can satisfy it—contradicting finite satisfiability. (2) **Direct construction (Henkin–Lindenbaum)**: extend $\\Gamma$ to a maximal consistent set (adding witness constants if needed) and take the term model; the truth lemma immediately yields a model of $\\Gamma$, without detouring through completeness. (3) **Ultraproducts**: attach a model to each finite subset, choose a suitable ultrafilter on the index set (the finite subsets, directed by inclusion), and the ultraproduct satisfies every sentence of $\\Gamma$ by **Łoś's theorem**—the shortest proof, provided ultrafilters are available (see the choice-principle discussion in properties).\n\nCompactness is the echo of the finitary character of first-order logic: formulas are finite strings, proofs finite sequences, axioms given by finitely many schemata. It therefore typically fails in second-order logic or in logics with infinitely long formulas or generalized quantifiers such as there exist infinitely many. A standard counterexample: second-order logic can state in one sentence that the domain is finite (every injective function is surjective); add, for each $n$, a sentence saying that $n$ named constants are pairwise distinct. Every finite subset is satisfiable (take a large enough finite domain), but the whole set is not (a finite domain cannot host arbitrarily many distinct constants). By contrast, compactness together with the downward Löwenheim–Skolem property characterizes first-order logic among regular logics (Lindström's theorem): the strongest such logic is first-order logic.\n\nApplications follow three steps: ① translate the desired object (a model, a coloring, an embedding, a valuation) into a set $\\Gamma$ of sentences; ② show each finite subset of $\\Gamma$ is satisfiable—usually by an explicit construction in the finite case; ③ apply compactness to obtain a global model and translate it back. Two warnings: the models obtained are usually **non-constructive** (term models and ultraproducts may be huge or not explicitly describable), and the conclusion should not be over-strengthened—compactness alone does not control the cardinality or computability of the model; countable models require Löwenheim–Skolem. Also distinguish **logical compactness from topological compactness**: the latter is the open-cover property of a space. Their deep connection is that the compactness theorem for propositional logic is equivalent over ZF to products of compact Hausdorff spaces being compact (the compact-Hausdorff case of Tychonoff's theorem). Same word, different concepts—do not substitute one for the other.",
+    "formulas": [
+      {
+        "latex": "\\Gamma\\ \\text{可满足}\\ \\Longleftrightarrow\\ \\forall\\,\\text{有限}\\ \\Gamma_0\\subseteq\\Gamma:\\ \\Gamma_0\\ \\text{可满足}",
+        "note": "定理陈述。内容在 ⟸ 方向：任意有限子集可满足 ⇒ 整体可满足；「任意有限子集可满足」是应用中最常验证的前提形式。",
+        "noteEn": "The statement. The content is the converse: every finite subset satisfiable implies the whole set is; that hypothesis is what applications usually verify."
+      },
+      {
+        "latex": "\\Gamma\\ \\text{相容}\\ \\Longleftrightarrow\\ \\forall\\,\\text{有限}\\ \\Gamma_0\\subseteq\\Gamma:\\ \\Gamma_0\\ \\text{相容}",
+        "note": "语法孪生版本：证明有穷，矛盾只能牵扯有穷多条前提，故这一侧几乎是定义性的；语义版本才是紧致性定理的内容。",
+        "noteEn": "The syntactic twin: proofs are finite, so a contradiction can involve only finitely many premises—this side is almost definitional; the semantic version is the actual theorem."
+      },
+      {
+        "latex": "\\text{Łoś：}\\quad \\prod_{\\mathcal{U}}M_i\\models\\varphi\\ \\Longleftrightarrow\\ \\{\\,i:\\ M_i\\models\\varphi\\,\\}\\in\\mathcal{U}",
+        "note": "超积路线的引擎：把有限子集的模型作超积，取超滤子使「使每条既定句子成真」的指标集属于超滤子，即得整体模型。",
+        "noteEn": "The engine of the ultraproduct proof: an ultraproduct of models of finite subsets satisfies each sentence whose truth-index set lies in the ultrafilter."
+      },
+      {
+        "latex": "G\\ \\text{的每个有限子图}\\ k\\text{-可染色}\\ \\Longrightarrow\\ G\\ \\text{可}\\ k\\text{-染色}",
+        "note": "de Bruijn–Erdős 定理（k 为正整数），紧致性最著名的组合学应用；与四色定理配合即得任意无限平面图 4-可染色。",
+        "noteEn": "The de Bruijn–Erdős theorem (for a positive integer k), compactness's most famous combinatorial application; with the four-color theorem it yields 4-colorability of every infinite planar graph."
+      },
+      {
+        "latex": "\\mathrm{Th}(\\mathbb{R})\\ \\cup\\ \\{\\,c>\\underbrace{1+\\cdots+1}_{n}\\ :\\ n=1,2,3,\\dots\\,\\}\\ \\text{可满足}",
+        "note": "非标准分析的存在性：每个有限子集用足够大的实数满足；整体模型是含正无穷小量（如 1/c）的有序域。",
+        "noteEn": "Existence in nonstandard analysis: every finite subset is satisfied by a sufficiently large real; the global model is an ordered field with a positive infinitesimal such as 1/c."
+      }
+    ],
+    "properties": [
+      "局部到整体：紧致性允许在无穷公理集的相容性论证中只依赖有限信息——它是一阶逻辑有穷证明系统在语义侧的回声：没有哪个矛盾能用到无穷多条前提。",
+      "非构造性：定理保证模型存在，却不给出可计算的描述；项模型与超积可能不可数、包含「非标准」元素。这既是它的力量，也是使用的纪律（结论是存在性的）。",
+      "失效范围：二阶逻辑因能说「论域有限」而不紧致（有限论域＋任意多互异常元：每有限子集可满足、整体不可满足）；带「存在无穷多」量词或无穷长公式的逻辑也一般失效。紧致性与下勒文海姆–斯科伦性质共同刻画一阶逻辑（林德斯特伦定理）。",
+      "与选择原则的关系（辨析）：对可数语言，紧致性定理在 ZF 内即可证明（亨金构造是显式的）；对任意语言，紧致性定理与布尔素理想定理（BPI）在 ZF 下等价，而 BPI 严格弱于选择公理；完整的 Tychonoff 定理（任意紧空间族之积紧）才与选择公理等价，其紧 Hausdorff 情形则与 BPI 相应。逻辑紧致与拓扑紧致因此是两个概念，只在超滤子/Stone 空间层面深度相连。",
+      "典型应用：非标准分析（含正无穷小量的有序域）；无穷图的染色与嵌入（de Bruijn–Erdős 型定理）；良序性与「有限」不是一阶可公理化的性质（Th(ℕ,<) 加无穷下降链 c₁>c₂>… 的模型）——这些对象都靠「有限情形总可满足」被一次性推出。"
+    ],
+    "propertiesEn": [
+      "Local to global: compactness lets consistency arguments about infinite axiom sets rely on finite information only; it is the semantic echo of the fact that no contradiction can use infinitely many premises.",
+      "Non-constructive character: the theorem guarantees a model without an explicit description; term models and ultraproducts may be uncountable and contain nonstandard elements. This is both its power and the discipline of using it: the conclusions are existence statements.",
+      "Failure elsewhere: second-order logic is not compact because it can say the domain is finite (pair with arbitrarily many distinct constants: every finite subset satisfiable, the whole set not); logics with a quantifier for there exist infinitely many, or with infinitely long formulas, fail as well. Together with the downward Löwenheim–Skolem property, compactness characterizes first-order logic (Lindström).",
+      "Choice principles, carefully: for countable languages the compactness theorem is provable in ZF (Henkin's construction is explicit); for arbitrary languages it is equivalent to the Boolean prime ideal theorem (BPI), which is strictly weaker than the axiom of choice; the full Tychonoff theorem (arbitrary products of compact spaces) is equivalent to AC, while its compact-Hausdorff case matches BPI. Logical and topological compactness are thus distinct notions, deeply linked through ultrafilters and Stone spaces.",
+      "Standard applications: nonstandard analysis (ordered fields with positive infinitesimals); coloring and embedding theorems for infinite graphs (de Bruijn–Erdős: k-colorability of all finite subgraphs implies that of the whole graph); non-first-order-axiomatizability of well-ordering and finiteness—all obtained by making every finite piece satisfiable."
+    ],
+    "examples": [
+      {
+        "problem": "用紧致性定理证明存在含有正无穷小量的有序域。取语言 $\\{+,\\cdot,<,0,1,c\\}$（$c$ 为新常元），令 $\\Gamma=$ 有序域公理 $\\cup\\ \\{c>n:\\ n=1,2,3,\\dots\\}$（$n$ 表示 $1+\\dots+1$ 的缩写）。(a) 验证每个有限子集可满足；(b) 指出无穷小量是谁并说明理由；(c) 用程序对若干有限截断核对可满足性。",
+        "solution": "(a) $\\Gamma$ 的任一个有限子集只含**有穷**多条不等式 $c>n$（设其中最大的为 $N$）以及有穷多条有序域公理。在实数域 $\\mathbb{R}$ 中把 $c$ 解释为大整数 $N+1$：全部有序域公理在 $\\mathbb{R}$ 中为真，且 $N+1>n$ 对每条出现的不等式成立——所以每个有限子集都可满足。\\n(b) 由紧致性，$\\Gamma$ 有模型 $M$。$M$ 是有序域，且 $c$ 在 $M$ 中大于每个标准自然数 $n$（即 $1+\\dots+1$ 的 $n$ 份），特别地 $c>1>0$。于是 $1/c>0$，且对每个 $n\\ge 1$ 有 $0<1/c<1/n$——「比任何 $1/n$ 都小的正数」就是正的**无穷小量**，$M$ 是非阿基米德有序域。实数域只体现了有限截断，整体模型只能由紧致性（或超积）给出，它不是 $\\mathbb{R}$。\\n(c) 程序用精确分数对 $N=1,10,1000,10^6$ 复核：取 $c=N+1$ 时 $c>n$（全部 $n\\le N$）与 $0<1/c<1/n$（全部 $n\\le N$）均成立。注意程序核对的是前提（有限子集可满足），整体模型的存在性是定理的结论，不能被有限计算直接造出。"
+      },
+      {
+        "problem": "设 $G$ 是顶点集为 $\\mathbb{Z}$、两点相邻当且仅当 $|m-n|\\le 3$ 的无限图。(a) 用程序验证有限子图 4-可染色、并说明 3 色不够；(b) 用紧致性定理说明整个无限图 $G$ 可 4-染色，且论证无需对有限规模作归纳。",
+        "solution": "(a) 取染色 $c(m)=m\\bmod 4$：相邻两点差为 1、2 或 3，模 4 均不为 0，故必异色——程序在 $[-3000,3000]$ 的全部相邻对与 500 个随机有限子集上核对冲突数为 0 ✓；换言之每个有限子图都 4-可染（限制全局染色即可）。又 $K_4=\\{0,1,2,3\\}$ 中任两点距离不超过 3，是 $G$ 的完全子图；程序穷举 $3^4$ 种三色分配得 0 种合法、$4^4$ 种中恰有 24 种合法，故 3 色不够、4 色必需。\\n(b) 把「$G$ 有 4-染色」翻译成一阶理论：语言含边谓词 $E$、四个颜色谓词 $C_1,\\dots,C_4$ 以及每个整数 $m$ 的常元 $\\bar m$；$\\Gamma$ 包含「每点恰有一种颜色」「每条边两端异色」「按 $G$ 的实情取 $E(\\bar m,\\bar n)$ 或 $\\neg E(\\bar m,\\bar n)$」「不同常元互不相等」等句子。任取有限 $\\Gamma_0\\subseteq\\Gamma$：它只提到有限多个顶点，在这些顶点诱导出的有限子图上按 (a) 染色即给出 $\\Gamma_0$ 的模型——所以每个有限子集可满足。由紧致性，$\\Gamma$ 有模型，其颜色谓词在常元上的外延就是 $G$ 的一个 4-染色 ✓。整个过程一次覆盖全部有限子图，无需求对规模逐一归纳：紧致性把「每个有限子图可染」的无穷多条件打包成一个存在性结论。同样的论证配上四色定理即得「任意无限平面图 4-可染色」——de Bruijn–Erdős 定理，紧致性最著名的应用。"
+      }
+    ],
+    "links": [
+      "soundness-completeness",
+      "formal-proof-systems",
+      "predicate-logic",
+      "graph-coloring",
+      "axiom-of-choice",
+      "tychonoff-theorem"
+    ],
+    "tags": ["数理逻辑", "紧致性", "超积", "非标准分析", "图染色"]
+  }
+]

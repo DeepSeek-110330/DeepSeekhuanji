@@ -1,0 +1,331 @@
+[
+  {
+    "id": "gradient-descent-sgd",
+    "title": "梯度下降与随机梯度下降",
+    "titleEn": "Gradient Descent and Stochastic Gradient Descent",
+    "branch": "optimization-or",
+    "level": 4,
+    "summary": "沿负梯度方向迭代的一阶优化方法：小步长保证下降，凸且梯度 Lipschitz 连续时函数值以 O(1/k) 收敛；随机梯度下降用无偏的小批量梯度估计把每步代价降到与样本总量无关。",
+    "summaryEn": "The first-order method that repeatedly steps along the negative gradient: small steps guarantee descent and convex Lipschitz-smooth objectives converge at rate O(1/k); stochastic gradient descent replaces the full gradient by an unbiased mini-batch estimate.",
+    "definition": "**梯度下降**（gradient descent）是求解无约束优化问题 $\\min_x f(x)$ 最基础的一阶迭代算法。从初始点 $x_0$ 出发，反复沿**负梯度方向**走一小步：$x_{k+1} = x_k - \\eta \\nabla f(x_k)$，其中 $\\eta > 0$ 称为**学习率**（步长）。负号的来历是一阶展开 $f(x - \\eta\\nabla f(x)) = f(x) - \\eta\\|\\nabla f(x)\\|^2 + o(\\eta)$：只要 $\\nabla f(x) \\neq 0$ 且 $\\eta$ 足够小，函数值就严格下降——负梯度正是函数局部下降最快的方向。迭代在 $\\nabla f(x_k) = 0$ 处自动停住，因此梯度下降找到的总是**驻点**：$f$ 凸时驻点就是全局最优，非凸时可能停在局部极小或鞍点。\n\n步长是最敏感的参数：$\\eta$ 太小收敛慢，太大则震荡甚至发散。设 $\\nabla f$ 满足 **$L$-Lipschitz 连续**（即 $f$ 是 **$L$-光滑**的：$\\|\\nabla f(x) - \\nabla f(y)\\| \\le L\\|x - y\\|$），则由二次上界可得**一步下降引理** $f(x_{k+1}) \\le f(x_k) - \\eta(1 - \\frac{L\\eta}{2})\\|\\nabla f(x_k)\\|^2$，当 $0 < \\eta < 2/L$ 时每步都下降。收敛速度：$f$ 凸且 $L$-光滑时，固定步长 $\\eta = 1/L$ 给出 $f(x_k) - f^* \\le \\frac{L\\|x_0 - x^*\\|^2}{2k}$，即函数值间隙为 $O(1/k)$；对凸函数还有 $\\|\\nabla f(x_k)\\|^2 \\le 2L\\bigl(f(x_k) - f^*\\bigr)$，所以平方梯度范数同样是 $O(1/k)$（梯度范数 $O(1/\\sqrt{k})$）。若 $f$ 还 $\\mu$-强凸，速率升级为线性收敛 $(1 - \\mu/L)^k$；非凸但光滑时只能保证 $\\min_{i \\le k}\\|\\nabla f(x_i)\\| = O(1/\\sqrt{k})$ 且迭代收敛到驻点。\n\n**随机梯度下降**（SGD）处理目标函数为大量样本损失平均的情形：$f(x) = \\frac{1}{n}\\sum_{i=1}^n f_i(x)$。每步都计算全梯度的代价与样本量 $n$ 成正比；SGD 改为每次随机抽取一个样本（或一小批，即 **minibatch**）估计梯度，用估计值代替全梯度走一步。最核心的性质是**无偏性**：$\\mathbb{E}[\\nabla f_i(x)] = \\nabla f(x)$，平均来看每一步方向都是对的；代价是估计的**方差** $\\sigma^2$，用 $b$ 个样本的平均可把它降到约 $\\sigma^2/b$。正因为有噪声，SGD 的单步**不保证下降**（从最优点出发也可能被随机样本拉走），收敛只在期望意义下成立；步长因而通常**衰减**（如 $\\eta_k = \\eta_0/(1+ck)$），满足 $\\sum_k \\eta_k = \\infty$、$\\sum_k \\eta_k^2 < \\infty$ 才能在「一直走得动」与「压住噪声」之间取得平衡。它是现代大规模机器学习的主力算法。\n\n与牛顿迭代对比：把牛顿法用于解 $\\nabla f(x) = 0$ 得到 $x_{k+1} = x_k - [\\nabla^2 f(x_k)]^{-1}\\nabla f(x_k)$，用二阶曲率换取解附近的**二次收敛**，但每步需要形成并求解 $n$ 阶线性方程组（稠密情形 $O(n^3)$），还要求 Hessian 可逆且近似正定；梯度下降每步只算一次梯度（$O(n)$），收敛慢（次线性或线性），却是高维问题的唯一现实选择——这解释了（随机）梯度法为什么统治了深度学习。",
+    "definitionEn": "**Gradient descent** is the most basic first-order algorithm for the unconstrained problem $\\min_x f(x)$. Starting from $x_0$ it repeatedly steps along the **negative gradient**: $x_{k+1} = x_k - \\eta\\nabla f(x_k)$, where $\\eta > 0$ is the **learning rate** (step size). The first-order expansion $f(x - \\eta\\nabla f(x)) = f(x) - \\eta\\|\\nabla f(x)\\|^2 + o(\\eta)$ explains the minus sign: whenever $\\nabla f(x) \\neq 0$ and $\\eta$ is small enough the value strictly decreases, since the negative gradient is the direction of steepest local descent. The iteration halts exactly where $\\nabla f(x_k) = 0$, so it always lands on a **stationary point** — a global minimum when f is convex, but possibly a local minimum or saddle point otherwise.\n\nThe step size is the most delicate parameter: too small converges slowly, too large oscillates or diverges. If $\\nabla f$ is **L-Lipschitz** (f is **L-smooth**: $\\|\\nabla f(x) - \\nabla f(y)\\| \\le L\\|x-y\\|$), the quadratic upper bound gives the **descent lemma** $f(x_{k+1}) \\le f(x_k) - \\eta(1 - L\\eta/2)\\|\\nabla f(x_k)\\|^2$, so every step decreases f as long as $0 < \\eta < 2/L$. Rates: for convex L-smooth f and the fixed step $\\eta = 1/L$ one has $f(x_k) - f^* \\le L\\|x_0-x^*\\|^2/(2k)$, an $O(1/k)$ gap in function value; convexity together with smoothness also yields $\\|\\nabla f(x_k)\\|^2 \\le 2L(f(x_k)-f^*)$, hence the squared gradient norm is $O(1/k)$ too (gradient norm $O(1/\\sqrt k)$). With $\\mu$-strong convexity the rate becomes linear, $(1-\\mu/L)^k$. Without convexity one only gets $\\min_{i\\le k}\\|\\nabla f(x_i)\\| = O(1/\\sqrt k)$ and convergence to a stationary point.\n\n**Stochastic gradient descent** (SGD) targets objectives that are averages of many sample losses, $f(x) = \\frac1n\\sum_i f_i(x)$. A full gradient step costs work proportional to n; SGD instead draws one sample (or a small **mini-batch**) per step and uses that estimate to move. The key property is **unbiasedness**: $\\mathbb{E}[\\nabla f_i(x)] = \\nabla f(x)$, so on average every step points the right way. The price is the **variance** $\\sigma^2$ of the estimate, which averaging b samples reduces to about $\\sigma^2/b$. Because of this noise a single step need not decrease f — even from the optimum a random sample can pull the iterate away — so convergence holds only in expectation and the step size is usually **decayed** (e.g. $\\eta_k = \\eta_0/(1+ck)$) with $\\sum_k \\eta_k = \\infty$ and $\\sum_k \\eta_k^2 < \\infty$, balancing progress against noise. SGD is the workhorse of large-scale machine learning.\n\nCompared with Newton's method applied to $\\nabla f(x) = 0$, $x_{k+1} = x_k - [\\nabla^2 f(x_k)]^{-1}\\nabla f(x_k)$ buys **quadratic convergence** near the solution using second-order curvature, but each step forms and solves an n-by-n linear system ($O(n^3)$ dense) and needs an invertible, nearly positive definite Hessian. Gradient descent uses one gradient per step ($O(n)$) and converges only sublinearly or linearly, yet for high-dimensional problems it is the only practical choice — which is why stochastic gradient methods dominate deep learning.",
+    "formulas": [
+      {
+        "latex": "x_{k+1} = x_k - \\eta\\,\\nabla f(x_k)",
+        "note": "梯度下降的迭代式：沿负梯度方向走步长 η；∇f(x_k) = 0 时迭代停驻，凸问题中该点即全局最优。",
+        "noteEn": "The gradient descent update; the iteration halts at ∇f = 0, the global optimum for convex objectives."
+      },
+      {
+        "latex": "f\\bigl(x - \\eta\\nabla f(x)\\bigr) \\le f(x) - \\eta\\Bigl(1 - \\frac{L\\eta}{2}\\Bigr)\\bigl\\|\\nabla f(x)\\bigr\\|^2",
+        "note": "L-光滑下的一步下降引理；0 < η < 2/L 时右端严格小于 f(x)，即每步严格下降（η ≤ 1/L 是常用选择）。",
+        "noteEn": "The descent lemma under L-smoothness; for 0 < η < 2/L the right-hand side is strictly below f(x), so every step descends."
+      },
+      {
+        "latex": "f(x_k) - f^* \\le \\frac{\\|x_0 - x^*\\|^2}{2\\eta k} \\qquad (\\eta \\le 1/L,\\ k \\ge 1)",
+        "note": "凸 + L-光滑时的 O(1/k) 收敛上界：固定步长 η ≤ 1/L，函数值间隙按 1/k 衰减。",
+        "noteEn": "The O(1/k) bound for convex L-smooth objectives with constant step η ≤ 1/L."
+      },
+      {
+        "latex": "\\|\\nabla f(x_k)\\|^2 \\le 2L\\bigl(f(x_k) - f^*\\bigr)",
+        "note": "凸 + L-光滑导出的梯度—间隙关系；结合上一条得平方梯度范数 O(1/k)，即梯度范数 O(1/√k)。",
+        "noteEn": "Smoothness plus convexity links gradient size to suboptimality; with the previous bound the squared gradient norm is O(1/k)."
+      },
+      {
+        "latex": "\\mathbb{E}\\bigl[\\nabla f_i(x)\\bigr] = \\nabla f(x) = \\frac{1}{n}\\sum_{i=1}^{n}\\nabla f_i(x), \\qquad \\mathbb{E}\\bigl\\|\\nabla f_i(x_k) - \\nabla f(x_k)\\bigr\\|^2 \\le \\sigma^2",
+        "note": "SGD 的无偏性与方差上界；取 b 个样本平均则估计方差降为约 σ²/b（minibatch 的意义）。",
+        "noteEn": "Unbiasedness and variance bound of SGD; averaging b samples cuts the variance to about σ²/b."
+      }
+    ],
+    "properties": [
+      "下降性：f 凸且 L-光滑时，取 η ≤ 1/L 有 $f(x_{k+1}) \\le f(x_k) - \\frac{\\eta}{2}\\|\\nabla f(x_k)\\|^2$，每一步都严格下降；迭代停在且仅停在梯度为零处。",
+      "收敛速度：凸 + L-光滑时函数值与平方梯度范数都以 O(1/k) 收敛（梯度范数 O(1/√k)）；μ-强凸时升级为线性速率，条件数 κ = L/μ 越大越慢；非凸光滑时只能保证收敛到驻点。",
+      "对步长敏感：步长过大会震荡或发散——二次函数 f = ½xᵀQx 的收敛条件是 0 < η < 2/λmax(Q)，超出即发散；SGD 用固定步长只能收敛到最优值附近的一个噪声邻域，需要衰减步长。",
+      "随机性：SGD 用无偏估计换低成本；单步不单调下降，但在最优点处期望位移为零，长期在期望意义下收敛；minibatch 以线性计算量换取方差按 1/b 缩小，且便于并行。",
+      "与牛顿型方法互补：梯度法每步 O(n) 但收敛慢（次线性/线性），牛顿型方法每步 O(n³) 却局部二次收敛；高维、大数据场景下（随机）梯度法是主流。"
+    ],
+    "propertiesEn": [
+      "Descent: for convex L-smooth f with η ≤ 1/L every step strictly decreases f, and the iteration stalls exactly where the gradient vanishes.",
+      "Rates: O(1/k) in function value and squared gradient norm for convex L-smooth problems, linear rate under strong convexity (slower for larger condition number κ = L/μ), and mere stationarity when f is nonconvex.",
+      "Step-size sensitivity: too large a step oscillates or diverges — a quadratic f = ½xᵀQx converges iff 0 < η < 2/λmax(Q); constant-step SGD converges only to a noise neighborhood of the optimum.",
+      "Stochasticity: SGD trades an unbiased estimate for cheap steps; individual steps are not monotone, yet the expected displacement vanishes at the optimum and the process converges expectation-wise; mini-batches reduce variance by 1/b at linear cost.",
+      "Complementarity with Newton-type methods: O(n) steps with slow convergence versus O(n³) steps with quadratic local convergence; gradient (stochastic) methods dominate in high dimensions."
+    ],
+    "plot": {
+      "type": "vectorfield",
+      "fx": "-2*x",
+      "fy": "-8*y",
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
+      "contourExpr": "x^2 + 4*y^2",
+      "density": [
+        14,
+        14
+      ],
+      "arrowScale": 0.85,
+      "marks": [
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "极小点 (0,0)"
+        }
+      ],
+      "title": "f(x,y) = x² + 4y² 的负梯度场 −∇f 与等高线：箭头总指向下降最快的方向"
+    },
+    "examples": [
+      {
+        "problem": "用梯度下降求 $f(x) = x^{2} - 4x$ 的最小值：取 $\\eta = 0.1$、$x_0 = 0$，计算前 5 步并核对收敛规律与 $O(1/k)$ 上界；再取 $\\eta = 1.2$ 演示步长过大导致的发散。",
+        "solution": "梯度 $\\nabla f(x) = 2x - 4$，迭代式为 $x_{k+1} = x_k - 0.1 \\times (2x_k - 4)$。逐步计算：\n$x_1 = 0 - 0.1 \\times (-4) = 0.4$；\n$x_2 = 0.4 - 0.1 \\times (0.8 - 4) = 0.72$；\n$x_3 = 0.72 - 0.1 \\times (1.44 - 4) = 0.976$；\n$x_4 = 0.976 - 0.1 \\times (1.952 - 4) = 1.1808$；\n$x_5 = 1.1808 - 0.1 \\times (2.3616 - 4) = 1.34464$。\n递推规律：$x_{k+1} - 2 = 0.8\\,(x_k - 2)$，故 $x_k = 2 - 2 \\times 0.8^{k} \\to 2$，最小值 $f(2) = -4$。$f(x_5) = 1.34464^{2} - 4 \\times 1.34464 \\approx -3.5705$，与 $f^*$ 的间隙为 $0.4295$。\n理论核对：$f$ 的 $L = 2$，$\\eta = 0.1 \\le 1/L = 0.5$，凸光滑保证 $f(x_k) - f^* \\le \\frac{\\|x_0 - x^*\\|^2}{2\\eta k} = \\frac{20}{k}$；$k = 5$ 时上界为 $4$，实际 $0.4295$，符合 ✓。\n发散对照：取 $\\eta = 1.2$，则 $x_{k+1} - 2 = (1 - 2.4)(x_k - 2) = -1.4\\,(x_k - 2)$，每步误差放大 1.4 倍：$0 \\to 4.8 \\to -1.92 \\to 7.488 \\to -5.6832 \\to \\cdots$，不收敛——二次函数的收敛条件是 $0 < \\eta < 2/\\lambda_{\\max} = 1$。以上数值已用 python3 逐步迭代验证。"
+      },
+      {
+        "problem": "三个数据 $a_1 = 1$、$a_2 = 3$、$a_3 = 5$，损失 $f_i(x) = \\frac{1}{2}(x - a_i)^{2}$，总损失取平均 $f = \\frac{1}{3}(f_1 + f_2 + f_3)$。验证随机梯度的无偏性与方差，并展示 SGD 的单步可以上升（路径不单调）。",
+        "solution": "展开：$f(x) = \\frac{1}{2}x^{2} - 3x + \\frac{35}{6}$，$\\nabla f(x) = x - 3$，最优 $x^* = 3$、$f^* = f(3) = \\frac{4}{3}$。\n无偏性：单样本梯度是 $x - a_i$；在 $x = 3$ 处三条样本梯度为 $3 - a_i = (2, 0, -2)$，平均为 $0$，正好等于 $\\nabla f(3) = 0$ ✓——随机梯度的期望就是真梯度。\n方差：单样本梯度方差 $\\sigma^{2} = \\frac{2^{2} + 0^{2} + (-2)^{2}}{3} = \\frac{8}{3}$；取 2 个样本的平均（有放回）作为梯度估计，方差降为 $\\sigma^{2}/2 = \\frac{4}{3}$（python3 枚举全部 9 种有序抽样确认）。\n非单调性：从最优点 $x_0 = 3$ 出发，步长 $\\eta = 0.5$。先抽到 $a_1 = 1$：$x_1 = 3 - 0.5 \\times (3 - 1) = 2$，损失从 $\\frac{4}{3} \\approx 1.333$ 升到 $f(2) = \\frac{11}{6} \\approx 1.833$——单步反而更差；再抽到 $a_3 = 5$：$x_2 = 2 - 0.5 \\times (2 - 5) = 3.5$，$f(3.5) = \\frac{35}{24} \\approx 1.458$。\n结论：SGD 的路径不单调下降，只有配合衰减步长（满足 Robbins–Monro 条件）才在期望意义下收敛到最优值；单步方向的无偏性保证它长期不会系统性地走错。数值已用 python3 核对。"
+      }
+    ],
+    "tags": [
+      "梯度下降",
+      "随机梯度下降",
+      "学习率",
+      "收敛速度"
+    ],
+    "links": [
+      "gradient",
+      "newton-method",
+      "convex-optimization",
+      "kkt-conditions",
+      "monte-carlo-methods"
+    ]
+  },
+  {
+    "id": "game-theory-nash",
+    "title": "博弈论与纳什均衡",
+    "titleEn": "Game Theory and Nash Equilibrium",
+    "branch": "optimization-or",
+    "level": 5,
+    "summary": "策略式博弈由参与人、策略集与收益函数组成；纳什均衡是没有人能靠单方改策略获益的稳定组合，不等于全局最优；有限博弈必有混合策略均衡，零和博弈由极小极大定理与线性规划对偶刻画。",
+    "summaryEn": "A strategic game is given by players, strategy sets and payoffs; a Nash equilibrium is a profile no player can improve by a unilateral change — not a social optimum. Every finite game has a mixed equilibrium, and zero-sum games are governed by the minimax theorem and linear programming duality.",
+    "definition": "**策略式博弈**（strategic game）由三要素构成：参与人集合 $N = \\{1, \\dots, n\\}$；每个参与人的**策略集** $S_i$（可供选择的全部行动）；收益函数 $u_i$，给出每个策略组合下参与人 $i$ 的所得。全体组合 $S = S_1 \\times \\cdots \\times S_n$ 中每个元素叫一个**策略剖面**。最著名的例子是囚徒困境：两名嫌疑人各自选择合作（沉默）或背叛（招供），理性地各打各的算盘，结果双方都选了背叛，反而比都合作更差——它揭示了博弈论最反直觉的一课：个体理性的选择可以让所有人都更糟。\n\n**占优策略**：不论对手怎么选，$s_i$ 的收益都严格高于 $s_i'$，就称 $s_i$ 严格占优 $s_i'$；如果每人都有一个占优策略，这些策略组成的剖面叫**占优策略均衡**。但大多数博弈没有占优策略，于是需要更普遍也更弱的稳定性概念——**纳什均衡**（Nash equilibrium）：策略组合 $s^* = (s_1^*, \\dots, s_n^*)$ 是纳什均衡，若对每个参与人 $i$，在其他人保持 $s_{-i}^*$ 不变时 $s_i^*$ 都是他的最好反应，即 $u_i(s_i^*, s_{-i}^*) \\ge u_i(s_i, s_{-i}^*)$ 对所有 $s_i \\in S_i$ 成立。一句话：**没有人能通过单方偏离改善自己的收益**。务必强调：纳什均衡是「单方偏离不改善」的固定点，既不是全局最优，也不要求人人满意——囚徒困境的均衡收益 $(1,1)$ 比双方都合作的 $(3,3)$ 更差，但它就是稳定的。\n\n混合策略与存在性。纯策略要求玩家确定地选一个行动；**混合策略** $\\sigma_i$ 是 $S_i$ 上的概率分布，收益取期望。纳什存在性定理（Nash, 1950）：任何**有限博弈**（参与人有限、每个策略集有限）至少有一个混合策略纳什均衡；证明思路是把「每个参与人朝当前的最好反应移动」定义成一个对应，它在紧凸集上满足不动点定理（Kakutani/Brouwer）的条件，不动点恰好是纳什均衡。纯策略均衡可能根本不存在：匹配硬币中两人各出正反面，相同则甲赢 1 元、不同则乙赢 1 元，任何纯组合里总有一方想改变，均衡只能落在混合策略里（双方各以 1/2 的概率出正反面）。求混合均衡用**无差异原理**：均衡中以正概率使用的每个纯策略必须一样好（期望收益相等），否则玩家会把概率全部压到更好的那个上。\n\n零和博弈与计算。两参与人的**零和博弈**（$u_1 + u_2 = 0$）结构特殊：冯·诺依曼极小极大定理断言 $\\max_\\sigma \\min_\\tau u_1(\\sigma, \\tau) = \\min_\\tau \\max_\\sigma u_1(\\sigma, \\tau) = v$，两端给出的混合策略构成纳什均衡，博弈值 $v$ 唯一。这个定理与线性规划对偶定理本质等价：求零和博弈的均衡就是一个线性规划，对偶问题的最优解正是另一方的均衡策略——「对偶即零和博弈」。一般（非零和）博弈没有这么干净：求纳什均衡属于 PPAD-完全问题，至今没有已知的多项式时间算法；而零和情形可以在多项式时间内求解，这是博弈论与最优化最漂亮的交汇之一。",
+    "definitionEn": "A **strategic game** is defined by three ingredients: the player set $N = \\{1, \\dots, n\\}$; each player's **strategy set** $S_i$ (all available actions); and payoff functions $u_i$ giving player i's reward at each strategy profile, an element of $S = S_1 \\times \\cdots \\times S_n$. The best-known example is the prisoner's dilemma: two suspects each choose to cooperate (stay silent) or defect (confess), and both end up defecting, which is worse for both than cooperating — the most counterintuitive lesson of game theory, that individually rational choices can make everyone worse off.\n\nA strategy $s_i$ **strictly dominates** $s_i'$ if it pays strictly more whatever the opponents do; a profile of dominant strategies is a dominant-strategy equilibrium. Since most games have none, one needs the weaker and far more general notion of **Nash equilibrium**: a profile $s^* = (s_1^*, \\dots, s_n^*)$ such that for every player i, holding the others at $s_{-i}^*$, the strategy $s_i^*$ is a best response, i.e. $u_i(s_i^*, s_{-i}^*) \\ge u_i(s_i, s_{-i}^*)$ for all $s_i \\in S_i$. In words: **no player can improve by a unilateral deviation**. Note carefully what this is and is not — it is a fixed point of unilateral deviations, not a social optimum and not a state everyone enjoys; the prisoner's dilemma equilibrium pays both players (1,1), worse than the (3,3) of mutual cooperation, yet it is stable.\n\nMixed strategies and existence. A pure strategy commits to one action; a **mixed strategy** $\\sigma_i$ is a probability distribution over $S_i$, with payoffs replaced by expectations. Nash's existence theorem (1950): every **finite game** (finitely many players with finite strategy sets) has at least one mixed Nash equilibrium. The idea of the proof is to map each player toward a current best response; this correspondence satisfies the hypotheses of a fixed point theorem (Kakutani/Brouwer), and any fixed point is exactly a Nash equilibrium. Pure equilibria may fail to exist altogether: in matching pennies two players simultaneously show heads or tails, player 1 wins a unit when the coins match and player 2 wins otherwise, and every pure profile leaves someone wanting to switch, so equilibrium can only be mixed (each shows heads with probability 1/2). Mixed equilibria are found by the **indifference principle**: every pure strategy played with positive probability must yield the same expected payoff, otherwise probability would flow to the better one.\n\nZero-sum games and computation. Two-player **zero-sum games** ($u_1 + u_2 = 0$) are special: von Neumann's minimax theorem states $\\max_\\sigma \\min_\\tau u_1(\\sigma, \\tau) = \\min_\\tau \\max_\\sigma u_1(\\sigma, \\tau) = v$, the strategies at both ends form a Nash equilibrium, and the game value v is unique. The theorem is essentially equivalent to linear programming duality: solving a zero-sum game is a linear program whose dual optimal solution gives the opponent's equilibrium strategy — duality is a zero-sum game. General-sum games are far messier: computing a Nash equilibrium is PPAD-complete with no known polynomial algorithm, whereas the zero-sum case is solvable in polynomial time — one of the loveliest meetings of game theory and optimization.",
+    "formulas": [
+      {
+        "latex": "G = \\bigl\\langle N,\\ \\{S_i\\}_{i \\in N},\\ \\{u_i\\}_{i \\in N} \\bigr\\rangle",
+        "note": "策略式博弈的三要素：参与人集合 N、每人的策略集 S_i、收益函数 u_i（定义在策略剖面全体 S 上）。",
+        "noteEn": "A strategic game consists of the players N, their strategy sets S_i and payoff functions u_i."
+      },
+      {
+        "latex": "u_i(s_i^{*}, s_{-i}^{*}) \\ge u_i(s_i, s_{-i}^{*}) \\qquad \\forall\\, s_i \\in S_i,\\ \\forall\\, i \\in N",
+        "note": "纳什均衡的定义：其他人保持均衡策略时，没人能靠单方改变策略严格改善收益。",
+        "noteEn": "Nash equilibrium: no player can strictly improve by a unilateral deviation while the others stay put."
+      },
+      {
+        "latex": "u_i(\\sigma) = \\sum_{s \\in S} \\Bigl(\\prod_{j=1}^{n} \\sigma_j(s_j)\\Bigr)\\, u_i(s)",
+        "note": "混合策略剖面 σ 下的期望收益；σ_j(s_j) 是参与人 j 选择纯策略 s_j 的概率。",
+        "noteEn": "Expected payoff under a mixed profile; σ_j(s_j) is the probability that player j plays s_j."
+      },
+      {
+        "latex": "\\begin{pmatrix} (3,3) & (0,5) \\\\ (5,0) & (1,1) \\end{pmatrix}",
+        "note": "囚徒困境的收益双矩阵：行对应玩家 1 的合作/背叛，列对应玩家 2 的合作/背叛，元素为（玩家 1 收益, 玩家 2 收益）。",
+        "noteEn": "The prisoner's dilemma payoff bimatrix: rows are player 1's cooperate/defect, columns player 2's, entries are (payoff of 1, payoff of 2)."
+      },
+      {
+        "latex": "\\max_{\\sigma} \\min_{\\tau} u_1(\\sigma, \\tau) = \\min_{\\tau} \\max_{\\sigma} u_1(\\sigma, \\tau) = v",
+        "note": "零和博弈的极小极大定理（von Neumann）：两端相等给出唯一博弈值 v，最优混合策略对构成纳什均衡，可化为线性规划求解。",
+        "noteEn": "The minimax theorem for zero-sum games: both sides equal the unique value v, and the optimal mixed strategies form a Nash equilibrium computable by linear programming."
+      }
+    ],
+    "properties": [
+      "纳什均衡是单方偏离的固定点，不是全局最优，也不要求收益相同：囚徒困境的均衡 (背叛,背叛) 被 (合作,合作) 帕累托占优，但后者不稳定——合作者会被偷偷背叛的诱惑捅破。",
+      "严格占优策略一定是最好反应，所以占优策略均衡必是纳什均衡；反过来不成立：纳什均衡可能不含任何占优策略（匹配硬币的混合均衡），纯策略均衡甚至可能不存在。",
+      "有限博弈必存在混合策略纳什均衡（纳什存在性定理，用不动点定理证明）；均衡一般不唯一，需要子博弈完美等精炼或帕累托占优、风险占优等选择标准来挑选。",
+      "求解混合均衡的无差异原理：均衡中以正概率使用的每个纯策略，对对手的同一混合策略必须给出相同期望收益；对 2×2 博弈，这化成解一组收益相等的方程。",
+      "零和博弈的均衡值唯一（极小极大值），并可化归为线性规划：对偶变量即双方的均衡策略；一般非零和博弈的均衡计算是 PPAD-完全问题，没有已知的多项式算法。"
+    ],
+    "propertiesEn": [
+      "A Nash equilibrium is a fixed point of unilateral deviations, not a social optimum: in the prisoner's dilemma the equilibrium is Pareto dominated by (cooperate, cooperate), which is unstable because a player could profit by secretly defecting.",
+      "Strictly dominant strategies are automatically best responses, so dominant-strategy equilibria are Nash; conversely a Nash equilibrium may use no dominant strategy, and pure-strategy equilibria may fail to exist.",
+      "Every finite game has a mixed Nash equilibrium (Nash's theorem, proved by a fixed point argument); equilibria are generally non-unique, and refinements such as subgame perfection or selection criteria such as Pareto and risk dominance choose among them.",
+      "Indifference principle: in a mixed equilibrium every pure strategy used with positive probability yields the same expected payoff against the opponent's mix; for 2×2 games this reduces to equalizing payoffs.",
+      "Zero-sum games have a unique equilibrium value equal to the minimax value and a linear programming formulation whose dual yields the equilibrium strategies; general-sum equilibria are PPAD-complete."
+    ],
+    "examples": [
+      {
+        "problem": "囚徒困境：玩家 1、2 各自选择合作 C 或背叛 D，收益为 (C,C) = (3,3)、(C,D) = (0,5)、(D,C) = (5,0)、(D,D) = (1,1)（括号内依次为玩家 1、玩家 2 的收益）。验证「背叛」是双方的严格占优策略、(D,D) 是纳什均衡，并说明 (C,C) 为什么不是。",
+        "solution": "逐列检查玩家 1：若玩家 2 选 C，玩家 1 选 C 得 3、选 D 得 5，D 更好；若玩家 2 选 D，玩家 1 选 C 得 0、选 D 得 1，仍是 D 更好。所以 D 对玩家 1 严格占优；由对称性 D 对玩家 2 也严格占优。\n占优策略的组合一定是纳什均衡：在 (D,D) 处玩家 1 单方改为 C 只得 0 < 1，玩家 2 同理——没有人能单方改善 ✓。\n再看 (C,C)：玩家 1 单方改为 D 立刻可得 5 > 3，所以 (C,C) 不是纳什均衡——它收益更高却会被悄悄背叛捅破。\n结论：唯一的纳什均衡是 (D,D)，双方各得 1，被 (C,C) 的 (3,3) 帕累托占优；「均衡」与「最优」是两回事。以上收益比较已用 python3 逐条验证。"
+      },
+      {
+        "problem": "匹配硬币：两人各出正面 H 或反面 T，相同则甲赢 1 元，不同则乙赢 1 元（零和）。证明没有纯策略纳什均衡，并求出混合策略纳什均衡。",
+        "solution": "纯策略检验：组合 (H,H) 时乙改成 T 即可从 −1 变 +1，不满意；(H,T) 时甲改成 T 从 −1 变 +1；(T,H) 时甲改成 H；(T,T) 时乙改成 H。四种纯组合总有一方想偏离，故无纯策略纳什均衡。\n设甲出 H 的概率为 p、乙出 H 的概率为 q。甲的期望收益 $u_1 = pq - p(1-q) - (1-p)q + (1-p)(1-q) = 4pq - 2p - 2q + 1$。\n用无差异原理：甲出 H 的收益为 $2q - 1$、出 T 的收益为 $1 - 2q$，均衡中两者必须相等——否则甲会把全部概率压到更好的那个——解得 $q = 1/2$；对乙对称得 $p = 1/2$。\n验证 $(p, q) = (1/2, 1/2)$：固定 $q = 1/2$ 时 $u_1 = 2p - 2p - 1 + 1 = 0$ 对一切 p 成立，甲的任何偏离都不改善；固定 $p = 1/2$ 时 $u_2 = -u_1 = 0$ 同理。minimax 交叉检验：$\\max_p \\min_q u_1 = 0$、$\\min_q \\max_p u_1 = 0$，博弈值 $v = 0$（python3 在概率网格上枚举 max-min 与 min-max，确认相等且等于 0）。"
+      }
+    ],
+    "tags": [
+      "博弈论",
+      "纳什均衡",
+      "混合策略",
+      "零和博弈"
+    ],
+    "links": [
+      "lp-duality",
+      "brouwer-fixed-point",
+      "linear-programming",
+      "convex-optimization",
+      "computability-turing"
+    ]
+  },
+  {
+    "id": "dynamic-programming",
+    "title": "动态规划",
+    "titleEn": "Dynamic Programming",
+    "branch": "optimization-or",
+    "level": 4,
+    "summary": "把大问题分解为互相重叠的子问题并逐层记住最优值：最优子结构与无后效性写出 Bellman 方程，背包、最短路都是范例；与贪心的关键区别是每一步比较所有决策而不是只取局部最优。",
+    "summaryEn": "Breaking a problem into overlapping subproblems and tabulating their optima: optimal substructure plus the Bellman recursion cover knapsack and shortest paths, and the crucial difference from greedy is that every decision is compared.",
+    "definition": "**动态规划**（dynamic programming, DP）是求解具有阶段结构的最优化问题的方法：把原问题拆成一系列互相衔接的**子问题**，对每个子问题只记录「最优值」以及达到它的决策，再从最小的子问题出发逐层拼出原问题的答案。它适用的两个前提是：**最优子结构**——原问题的最优解由子问题的最优解组成（否则无从拼装）；**重叠子问题**——不同的计算路径反复遇到同一个子问题（否则表格没有复用的价值，那是分治而不是 DP）。20 世纪 50 年代由 Bellman 系统提出，此后成为运筹学与算法设计的基本范式。\n\n设计一个 DP 就是回答四件事：**阶段**如何划分（递推的层次）；**状态**用什么变量描述——状态必须自足，未来只依赖状态本身、与如何到达无关，这就是**无后效性**（马尔可夫性）；**决策**是什么；以及由决策引起状态变化的**状态转移方程**。转移通常写成 Bellman 方程 $f_k(s) = \\operatorname*{opt}_{a \\in A_k(s)}\\{c_k(s,a) + f_{k+1}(T_k(s,a))\\}$：在每个状态下，把「当前代价 + 下一阶段最优值」对所有可行决策取 min 或 max。注意这里必须**枚举完所有决策**才敢下结论——这正是与贪心算法的分水岭：贪心在每个状态只挑一个局部最优决策且从不回头，只在更强的「贪心选择性质」（如拟阵结构）下才保证全局最优。实现上，自顶向下的**记忆化搜索**与自底向上的**填表**等价，复杂度都等于「状态数 × 每个状态的决策数」。\n\n两个经典范例。**0-1 背包**：$n$ 件物品分别重 $w_i$、值 $v_i$，背包容量 $W$，每件要么拿要么不拿；状态取 $(i, w)$（已考虑前 $i$ 件、剩余容量 $w$），转移为 $dp[i][w] = \\max(dp[i-1][w],\\, dp[i-1][w-w_i] + v_i)$，复杂度 $O(nW)$，远胜枚举 $2^n$ 个子集。**Floyd–Warshall 最短路**：以「允许经过的中间点集合 $\\{1, \\dots, k\\}$」为阶段，$d_{ij}^{(k)} = \\min(d_{ij}^{(k-1)},\\, d_{ik}^{(k-1)} + d_{kj}^{(k-1)})$，$O(n^3)$ 求全源最短路；阶段 $k$ 的转移只用到上一阶段，表格可以原地滚动。更有意思的是，动态规划是马尔可夫决策过程与强化学习的核心：Bellman 方程里把「决策」换成「动作」、把代价换成期望回报，就得到价值函数的递推。\n\n它与两个近亲的区别值得单独记住。与**贪心算法**相比，DP 更慢但更稳：贪心只做局部最优选择而且不可撤销，硬币面额 $\\{1, 3, 4\\}$ 找零 6 元时贪心给出 $4 + 1 + 1$ 三枚，最优却是 $3 + 3$ 两枚；DP 通过枚举所有决策自动避开这类短视。与**分治**相比，两者都靠子问题拼装答案，但分治的子问题互不重叠（如归并排序的两半），DP 的子问题重叠，所以必须把结果存表复用——记忆化就是把递归改成查表的过程。",
+    "definitionEn": "**Dynamic programming** (DP) solves optimization problems with sequential structure by splitting them into chains of interlocking **subproblems**, recording only the optimal value of each subproblem (and the decision achieving it), and assembling the answer from the smallest subproblems upward. Two properties must hold. **Optimal substructure**: an optimal solution is built from optimal solutions of its subproblems, otherwise there is nothing to assemble. **Overlapping subproblems**: different computation paths revisit the same subproblem — without overlap a table is pointless and the technique degenerates into divide and conquer. Bellman formulated the framework in the 1950s, and it has been a cornerstone of algorithms and operations research ever since.\n\nDesigning a DP means answering four questions: how to slice the problem into **stages**; what **state** variable to use — it must be self-contained so that the future depends only on the state and not on how one arrived, the **Markov property** (no aftereffect); what the **decisions** are; and what **transition** they induce. A transition is usually written as the Bellman equation $f_k(s) = \\operatorname*{opt}_{a \\in A_k(s)}\\{c_k(s,a) + f_{k+1}(T_k(s,a))\\}$: in each state optimize the current cost plus the next stage's optimal value over every feasible decision. All decisions must be examined — the watershed with greedy algorithms, which commit to a single locally best decision and never look back, and are globally optimal only under extra structure such as matroids. Top-down **memoization** and bottom-up **tabulation** are equivalent implementations, both costing the number of states times the decisions per state.\n\nTwo classics. **0-1 knapsack**: items of weight $w_i$ and value $v_i$, capacity W, each usable at most once; the state is $(i, w)$ and the transition is $dp[i][w] = \\max(dp[i-1][w], dp[i-1][w-w_i] + v_i)$, giving $O(nW)$ time instead of $2^n$ subsets. **Floyd–Warshall**: stages are the allowed intermediate vertices $\\{1,\\dots,k\\}$ and $d_{ij}^{(k)} = \\min(d_{ij}^{(k-1)}, d_{ik}^{(k-1)}+d_{kj}^{(k-1)})$ yields all-pairs shortest paths in $O(n^3)$; stage k reads only stage k−1, so the table rolls in place. The same Bellman recursion, with decisions replaced by actions and costs by expected rewards, is the core of Markov decision processes and reinforcement learning.\n\nTwo near-neighbours deserve a contrast. Against **greedy**: DP is slower but safe — greedy takes locally best choices irreversibly, so with coin denominations 1, 3, 4 and change 6 the greedy answer 4+1+1 (three coins) is beaten by 3+3 (two coins); DP compares every decision and never falls into such traps. Against **divide and conquer**: both assemble answers from subproblems, but divide-and-conquer subproblems are disjoint (as in merge sort), while DP subproblems overlap and must be stored — memoization is precisely recursion turned into table lookup.",
+    "formulas": [
+      {
+        "latex": "f_k(s) = \\operatorname*{opt}_{a \\in A_k(s)} \\bigl\\{ c_k(s,a) + f_{k+1}\\bigl(T_k(s,a)\\bigr) \\bigr\\}",
+        "note": "Bellman 方程的一般形式：状态 s 在第 k 阶段的最优值，等于对所有可行决策取「当前代价 + 下一阶段最优值」的最优（min 或 max）。",
+        "noteEn": "The Bellman equation: the optimal value at state s in stage k optimizes current cost plus the next stage optimum over all feasible decisions."
+      },
+      {
+        "latex": "dp[i][w] = \\max\\bigl( dp[i-1][w],\\ dp[i-1][w-w_i] + v_i \\bigr) \\qquad (w \\ge w_i)",
+        "note": "0-1 背包的转移：第 i 件物品不拿（保持 dp[i−1][w]）或拿（容量减 w_i、价值加 v_i）。",
+        "noteEn": "0-1 knapsack transition: skip item i, or take it (capacity drops by w_i, value rises by v_i)."
+      },
+      {
+        "latex": "d_{ij}^{(k)} = \\min\\bigl( d_{ij}^{(k-1)},\\ d_{ik}^{(k-1)} + d_{kj}^{(k-1)} \\bigr)",
+        "note": "Floyd–Warshall 递推：只允许经过前 k 个中间点的最短路；k 是阶段，只依赖上一阶段，可原地滚动求全源最短路。",
+        "noteEn": "Floyd–Warshall recursion: shortest paths using only the first k intermediate vertices; stage k depends only on k−1 and can roll in place."
+      },
+      {
+        "latex": "dp[c] = \\min_{x \\le c}\\bigl( dp[c-x] + 1 \\bigr), \\qquad dp[0] = 0",
+        "note": "硬币找零的递推：金额 c 的最少硬币数 = 在所有面额 x ≤ c 的子问题上「加一枚硬币」取最优；边界 dp[0] = 0。",
+        "noteEn": "Coin-change recursion: the fewest coins for amount c, taking the best subproblem over all denominations x ≤ c, with boundary dp[0] = 0."
+      },
+      {
+        "latex": "T = O\\bigl(\\text{状态数} \\times \\text{决策数}\\bigr), \\qquad T_{\\text{0-1 背包}} = O(nW) \\ll 2^{n}",
+        "note": "复杂度框架：时间 = 状态数 × 每个状态的决策数；背包的 O(nW) 远优于枚举 2ⁿ 个子集（W 以数值而非位数计入，故称伪多项式）。",
+        "noteEn": "Complexity template: states times decisions per state; knapsack costs O(nW) instead of enumerating 2ⁿ subsets (pseudo-polynomial: polynomial in the numeric value of W, not in its bit length)."
+      }
+    ],
+    "properties": [
+      "最优子结构：原问题的最优解一定由子问题的最优解构成——否则把某个子问题的解换成更优的就能改进整体，矛盾（剪切—粘贴论证）；这是 DP 正确性的根源。",
+      "无后效性（马尔可夫性）：状态一旦定下，未来演化只依赖状态本身、与到达路径无关；状态设计不当时必须扩维才能恢复无后效性（如把最短路加强为旅行商问题后，必须把「已访问城市集合」并入状态）。",
+      "重叠子问题的价值：记忆化把「同一个子问题反复计算」变成「查一次表」，把指数级暴力降为状态数乘决策数（背包 O(nW) 对 2ⁿ），空间与时间互换。",
+      "与贪心的区别：贪心不可撤销，只在具备贪心选择性质（如拟阵结构）时全局最优；DP 在每个状态枚举全部决策并保留最优值，因此稳健但代价高。硬币 {1,3,4} 找零 6 是经典反例（贪心三枚、最优两枚）。",
+      "与分治的区别：分治的子问题互不重叠（归并排序的两半独立求解），递归形式直接给出复杂度；DP 的子问题重叠，靠表格复用把复杂度压下来，两者共享「分解—求解—合并」的递归思想。"
+    ],
+    "propertiesEn": [
+      "Optimal substructure: an optimal solution is assembled from optimal solutions of subproblems — replacing any piece by a better one would improve the whole (a cut-and-paste argument); this is the source of correctness.",
+      "Markov property: once the state is fixed the future depends only on it, not on the path; a poorly chosen state must be enriched to restore it (turning shortest path into TSP forces the visited-city set into the state).",
+      "The payoff of overlapping subproblems: memoization replaces recomputation by table lookup, turning exponential enumeration into states times decisions (knapsack O(nW) versus 2ⁿ), trading space for time.",
+      "Difference from greedy: greedy commits irreversibly and wins globally only under a greedy-choice property (e.g. matroids); DP compares all decisions and therefore never falls into such traps (coins 1, 3, 4 and change 6).",
+      "Difference from divide and conquer: its subproblems are disjoint (merge sort), while DP subproblems overlap and are reused through a table; both share the decompose-solve-combine pattern."
+    ],
+    "examples": [
+      {
+        "problem": "0-1 背包：容量 $W = 5$，物品的（重量, 价值）为 $(2, 3)$、$(3, 4)$、$(4, 5)$。用动态规划表求能装下的最大总价值，并指出选了哪些物品。",
+        "solution": "记 $dp[i][w]$ 为只考虑前 i 件物品、容量为 w 时的最大价值，转移为 $dp[i][w] = \\max(dp[i-1][w],\\ dp[i-1][w-w_i] + v_i)$（w ≥ w_i 时）。逐行填表（行 i = 0 到 3，列 w = 0 到 5）：\ni = 0：0, 0, 0, 0, 0, 0；\ni = 1（可用物品 (2,3)）：0, 0, 3, 3, 3, 3；\ni = 2（再加物品 (3,4)）：0, 0, 3, 4, 4, 7；\ni = 3（再加物品 (4,5)）：0, 0, 3, 4, 5, 7。\n关键一步：$dp[2][5] = \\max(dp[1][5],\\ dp[1][2] + 4) = \\max(3,\\ 3 + 4) = 7$；最终 $dp[3][5] = 7$。\n回溯：$dp[3][5] = 7 = dp[2][5]$（不拿物品 3）；$dp[2][5] = 7 = dp[1][2] + 4$（拿物品 2）；$dp[1][2] = 3 = dp[0][0] + 3$（拿物品 1）。最优选择是物品 1 与 2，总重 $2 + 3 = 5 \\le 5$、总价值 $3 + 4 = 7$。\n核对：python3 枚举全部 $2^{3} = 8$ 个子集，可行子集中价值最大者正是 {1, 2}，价值 7 ✓（{1, 3} 与 {2, 3} 都超重，单件最多 5）。"
+      },
+      {
+        "problem": "硬币面额 $\\{1, 3, 4\\}$，支付 6 元。贪心法（每次取不超过余款的最大面额）要几枚硬币？动态规划的最优解是几枚？由此说明 DP 与贪心的区别。",
+        "solution": "贪心：6 − 4 = 2，2 − 1 = 1，1 − 1 = 0，用了 4 + 1 + 1 共 3 枚。\nDP：设 $dp[c]$ 为支付 c 元的最少硬币数，$dp[0] = 0$，$dp[c] = \\min_{x \\in \\{1,3,4\\},\\ x \\le c}(dp[c-x] + 1)$。手算：$dp[1] = 1$；$dp[2] = dp[1] + 1 = 2$；$dp[3] = \\min(dp[2]+1,\\ dp[0]+1) = 1$；$dp[4] = \\min(dp[3]+1,\\ dp[1]+1,\\ dp[0]+1) = 1$；$dp[5] = \\min(dp[4]+1,\\ dp[2]+1,\\ dp[1]+1) = 2$；$dp[6] = \\min(dp[5]+1,\\ dp[3]+1,\\ dp[2]+1) = \\min(3,\\ 2,\\ 3) = 2$。\n最优是 3 + 3 两枚，比贪心少一枚。贪心错在第一步贪了面额 4，破坏了后面凑 3 的机会；DP 同时考虑三种面额的第一步，把每种金额的最优值都记在表里——这正是「枚举所有决策、保留最优值」与「只做局部最优」的区别。\npython3 程序验证：dp 表为 [0, 1, 2, 1, 1, 2, 2]，dp[6] = 2 ✓。"
+      }
+    ],
+    "tags": [
+      "动态规划",
+      "最优子结构",
+      "Bellman 方程",
+      "背包问题"
+    ],
+    "links": [
+      "integer-programming",
+      "network-flow",
+      "mathematical-induction",
+      "markov-chain",
+      "computability-turing"
+    ]
+  },
+  {
+    "id": "integer-programming",
+    "title": "整数规划初步",
+    "titleEn": "Integer Programming",
+    "branch": "optimization-or",
+    "level": 5,
+    "summary": "要求变量取整数的线性优化：LP 松弛给出界，直接舍入 LP 最优解既可能不可行也可能错过最优；分支定界用分支加剪枝求整数最优；整数规划是 NP-难问题，全单模结构是 LP 自动给出整数解的例外。",
+    "summaryEn": "Linear optimization with integer variables: the LP relaxation provides bounds while naive rounding may be infeasible or suboptimal; branch and bound searches with pruning; the problem is NP-hard, and totally unimodular structures are the exception where LP already returns integers.",
+    "definition": "**整数规划**（integer programming, IP）要求在优化问题中对部分或全部变量施加整数约束，最典型的形式是 $\\max\\{c^{\\top}x : Ax \\le b,\\ x \\in \\mathbb{Z}^{n}\\}$；若所有变量只能取 0 或 1，称为 **0-1 规划**（选或不选、开或不开）；只有一部分变量要求整数的情形叫混合整数规划。现实中的决策大量天然离散：机器台数、排班人数、路线选择、是否建某个设施——允许「2.5 台机器」的解没有意义，所以整数约束不是数学游戏，而是建模的必需。\n\n求解的起点是把整数约束暂时放松为实数，得到 **LP 松弛**。松弛后的可行集变大，最优值只会更好：对最大化问题有 $z_{LP} \\ge z_{IP}$（最小化则反向），于是 LP 最优值给出整数最优值的一个**界**。一个自然但错误的念头是「先解 LP，再把小数部分舍入」：舍入后的点可能越过约束变得不可行，也可能可行却不是整数最优；而且 LP 最优解通常根本不是整数可行点。正确的思想是**分支定界**（branch and bound）：先解 LP 松弛；若最优解已是整数，它就是答案；否则选一个取分数值的变量 $x_j$，把可行域劈成 $x_j \\le \\lfloor x_j^* \\rfloor$ 与 $x_j \\ge \\lceil x_j^* \\rceil$ 两个子问题——当前分数解被排除，但一切整数解仍然保留——然后递归求解。搜索过程中维护已知最好的整数可行解（incumbent）：一旦某子问题的 LP 界不优于 incumbent，就整棵剪掉。「分支」保证不遗漏，「界」保证不做无用功。\n\n计算的代价：整数规划是 **NP-难**问题——0-1 背包、旅行商、装箱等经典难题都是它的特例；规模一大，精确算法在最坏情况下需要指数时间，实践中只能求近似解或利用问题结构。最漂亮的例外是**全单模矩阵**（totally unimodular matrix）：如果约束矩阵 $A$ 的每个方子阵的行列式都只取 0 或 ±1，而 $b$ 是整数向量，那么 LP 松弛的每个顶点自动是整数点——整数约束「免费」满足。网络流、最短路、指派（运输）问题的约束矩阵都全单模，这正是它们能用普通 LP 或图算法在多项式时间内精确求解的原因。现代求解器把分支定界与割平面、启发式结合（branch-and-cut），是工业运筹的主力工具。",
+    "definitionEn": "**Integer programming** (IP) imposes integrality on some or all variables of an optimization problem, typically $\\max\\{c^{\\top}x : Ax \\le b,\\ x \\in \\mathbb{Z}^{n}\\}$; when every variable must be 0 or 1 the problem is called **0-1 programming** (build or not, choose or not), and requiring only some variables to be integral gives a mixed integer program. Real decisions are often discrete by nature — numbers of machines, staff on a shift, routes taken, whether to open a facility — so a solution reading 2.5 machines is meaningless and integrality is a modeling necessity, not a mathematical curiosity.\n\nThe starting point is to relax integrality to real numbers, obtaining the **LP relaxation**. The relaxed feasible set is larger, so its optimum can only be better: for maximization $z_{LP} \\ge z_{IP}$ (reversed for minimization), and the LP optimum therefore supplies a **bound**. A natural but wrong idea is to solve the LP and round the fractional coordinates: the rounded point may cross a constraint and become infeasible, or may be feasible yet fail to be the integer optimum; worse, the LP optimum is usually not an integer feasible point at all. The right idea is **branch and bound**: solve the LP relaxation; if its optimum is integral, that is the answer; otherwise pick a fractional variable $x_j$ and split the feasible region into $x_j \\le \\lfloor x_j^* \\rfloor$ and $x_j \\ge \\lceil x_j^* \\rceil$ — the fractional solution is excluded while every integer solution survives — and recurse. A best known integer feasible solution (the incumbent) is maintained, and whenever a subproblem's LP bound is no better than the incumbent, its whole subtree is pruned: branching guarantees no loss, bounding guarantees no wasted work.\n\nThe computational price: integer programming is **NP-hard** — 0-1 knapsack, the traveling salesman problem and bin packing are special cases — so exact algorithms may need exponential time and large instances are solved approximately or through structure. The most beautiful exception is a **totally unimodular** (TU) matrix: if every square submatrix of the constraint matrix $A$ has determinant 0 or ±1 and $b$ is integral, then every vertex of the LP relaxation is automatically integral, so integrality comes for free. Constraint matrices of network flows, shortest paths and assignment (transportation) problems are totally unimodular, which is exactly why these discrete problems are solvable exactly in polynomial time by plain LP or graph algorithms. Modern solvers combine branch and bound with cutting planes and heuristics in the branch-and-cut framework that powers industrial operations research.",
+    "formulas": [
+      {
+        "latex": "\\max\\ c^{\\top}x \\quad \\text{s.t.}\\quad Ax \\le b,\\qquad x \\in \\mathbb{Z}^{n}\\ \\ (\\text{0-1 情形}\\ x \\in \\{0,1\\}^{n})",
+        "note": "整数规划的标准形式；约束矩阵 A、右端向量 b、目标系数 c 均为给定数据，变量必须取整数向量。",
+        "noteEn": "Standard form of an integer program; all data are given and the variable vector must be integral."
+      },
+      {
+        "latex": "z_{LP} \\ge z_{IP} \\qquad (\\text{maximize})",
+        "note": "LP 松弛给出上界：放松整数约束后最优值只会更好（最小化问题则 z_LP ≤ z_IP，作出下界）。",
+        "noteEn": "The LP relaxation bounds the IP optimum: relaxing integrality can only improve the value (lower bound for minimization)."
+      },
+      {
+        "latex": "x_j \\le \\bigl\\lfloor x_j^{*} \\bigr\\rfloor \\quad \\text{或} \\quad x_j \\ge \\bigl\\lceil x_j^{*} \\bigr\\rceil",
+        "note": "分支：对取分数值的变量 x_j 把可行域劈成两个子问题，排除当前分数解、保留全部整数解。",
+        "noteEn": "Branching on a fractional variable x_j splits the region, excluding the fractional solution while keeping every integer point."
+      },
+      {
+        "latex": "z_{\\text{node}} \\le z_{\\text{inc}} \\ \\Longrightarrow\\ \\text{剪枝（prune）}",
+        "note": "剪枝规则（最大化问题）：子问题的 LP 界不超过当前最好整数解时，整棵子树被丢弃；incumbent 随新的整数解不断更新。",
+        "noteEn": "Pruning rule (maximization): if a node's LP bound is no better than the incumbent, discard the subtree; the incumbent improves as integer solutions appear."
+      },
+      {
+        "latex": "\\det(\\text{每个方子阵}) \\in \\{-1,\\, 0,\\, 1\\} \\ \\text{且}\\ b \\in \\mathbb{Z}^{m} \\ \\Longrightarrow\\ \\text{LP 松弛的顶点全为整数}",
+        "note": "全单模与整性（Hoffman–Kruskal）：A 全单模且 b 整数时，多边形 {Ax ≤ b, x ≥ 0} 的顶点自动是整数点；网络流、指派等问题的约束矩阵都全单模。",
+        "noteEn": "Total unimodularity buys integrality (Hoffman–Kruskal): with integral b every vertex of {Ax ≤ b, x ≥ 0} is integral, covering network flow and assignment problems."
+      }
+    ],
+    "properties": [
+      "整数约束改变问题本质：实数可行集是凸多面体，整数可行点只是散落的格点；LP 的方法不能直接给出整数解，目标值可能严格变差（z_IP < z_LP），且 LP 最优解舍入后可能不可行、也可能不是整数最优。",
+      "LP 松弛给出界：最大化时 z_IP ≤ z_LP（最小化反向），界越紧分支定界剪得越快；割平面、拉格朗日松弛都是收紧界的手段，现代求解器用分支—切割框架组合它们。",
+      "整数规划是 NP-难：0-1 背包、旅行商、装箱、图着色等都是它的特例；最坏情况下精确求解需要指数时间，大实例通常转向启发式或近似算法，但特殊结构仍有多项式算法。",
+      "全单模矩阵保证「免费整性」：A 全单模且 b 整数时 LP 松弛的顶点自动整数，无需分支定界；网络流、最短路、指派（运输）问题的约束矩阵都全单模，因此可用 LP/图算法精确求解。",
+      "0-1 变量是可加的逻辑语言：x₁ + x₂ ≤ 1 表示两项活动互斥；在 y ≥ 0 的前提下 y ≤ Mx（大 M 约束，M 充分大）表示「x = 0 时 y 必须为 0」；一般整数变量可用若干 0-1 变量做二进制展开——建模能力强是整数规划用途极广的根本原因。"
+    ],
+    "propertiesEn": [
+      "Integrality changes the problem: the real feasible set is a convex polyhedron while integer feasible points are isolated lattice points; LP methods give no integrality, values can strictly worsen (z_IP < z_LP), and rounding an LP optimum may be infeasible or suboptimal.",
+      "Relaxations bound the optimum: z_IP ≤ z_LP for maximization (reversed for minimization), and tighter bounds prune faster; cutting planes and Lagrangian relaxation are standard strengthenings inside branch-and-cut solvers.",
+      "IP is NP-hard: knapsack, TSP, bin packing and graph coloring are special cases; exact methods may need exponential time, large instances go heuristic, though special structures stay polynomial.",
+      "Total unimodularity buys integrality for free: with integral b every LP vertex is integral and branch and bound becomes unnecessary, covering network flow, shortest path and assignment problems.",
+      "0-1 variables form an expressive logical language: x₁ + x₂ ≤ 1 for exclusivity, the big-M constraint y ≤ Mx (with y ≥ 0) for implications, and binary expansions to model general integers — the source of IP's vast modeling power."
+    ],
+    "examples": [
+      {
+        "problem": "整数规划 $\\max\\ z = 5x + 4y$，约束 $6x + 4y \\le 24$、$x + 2y \\le 6$、$x, y \\ge 0$ 且为整数。先解 LP 松弛并尝试舍入，再求出整数最优解。",
+        "solution": "LP 松弛（x、y 允许实数）的可行域是多边形，最优在顶点取得：$(4, 0)$ 给 $z = 20$；$(0, 3)$ 给 $z = 12$；两条约束 $6x + 4y = 24$ 与 $x + 2y = 6$ 的交点为 $(3,\\ 3/2)$，给 $z = 5 \\times 3 + 4 \\times 1.5 = 21$。所以 LP 最优值是 21，在分数点 $(3, 1.5)$ 取得。\n舍入尝试都失败：向下取 $(3, 1)$ 得 $z = 19$，不是最优；$(3, 2)$ 违反 $6 \\times 3 + 4 \\times 2 = 26 > 24$，不可行；$(4, 1)$ 违反 $6 \\times 4 + 4 \\times 1 = 28 > 24$，也不可行。\n整数最优用枚举确认：$x = 0 \\Rightarrow y \\le 3$，$z = 12$；$x = 1 \\Rightarrow y \\le 2$，$z = 13$；$x = 2 \\Rightarrow y \\le 2$，$z = 18$；$x = 3 \\Rightarrow y \\le 1$，$z = 19$；$x = 4 \\Rightarrow y \\le 0$，$z = 20$。最大整数最优值 20 在 $(4, 0)$ 取得。\n结论：$z_{IP} = 20 < z_{LP} = 21$（整数间隙），而舍入 LP 最优解只得到 19，连整数最优的 20 都不是——这就是必须依靠分支定界等精确方法的原因。以上数字已用 python3 枚举与 LP 顶点求解逐一验证。"
+      },
+      {
+        "problem": "对上面同一个问题完整走一遍分支定界：列出每个节点的 LP 值与分支、剪枝理由，最后给出最优整数解。",
+        "solution": "第 0 步（根节点）：解全约束 LP，最优 $(3,\\ 3/2)$、$z = 21$，变量 y 取分数 → 对 y 分支。\n节点 A（加约束 $y \\le 1$）：LP 最优 $(10/3,\\ 1)$，$z = 62/3 \\approx 20.67$，仍含分数 → 对 x 分支。\n节点 A₁（$y \\le 1$、$x \\le 3$）：LP 最优 $(3, 1)$，$z = 19$，已是整数解 → 记入候选答案（incumbent = 19）。\n节点 A₂（$y \\le 1$、$x \\ge 4$）：$6x \\le 24$ 迫使 $x = 4$、$y = 0$，LP 最优 $(4, 0)$、$z = 20$ 且为整数 → 更新 incumbent = 20。\n节点 B（$y \\ge 2$）：LP 最优 $(2, 2)$，$z = 18$；其界 $18 \\le 20$，该子树不可能产生更好的整数解 → 剪枝。\n结论：最优整数解 $(x, y) = (4, 0)$，$z = 20$。全过程只解了 5 个 LP、没有逐个枚举整数点；两个分支 $y \\le 1$ 与 $y \\ge 2$ 覆盖全部整数解、只把分数解排除在外。各节点 LP 值 21、62/3、19、20、18 与整数最优 20 已用 python3 逐一验证 ✓。\n补充：若搜索顺序先到节点 B，会先得到候选 18，随后被 A₂ 的 20 超过——incumbent 在搜索中不断更新，任何界不超过它的子树都被及时剪掉，这正是「界」的价值。"
+      }
+    ],
+    "tags": [
+      "整数规划",
+      "分支定界",
+      "全单模矩阵",
+      "NP-难"
+    ],
+    "links": [
+      "linear-programming",
+      "lp-duality",
+      "network-flow",
+      "computability-turing",
+      "dynamic-programming"
+    ]
+  }
+]

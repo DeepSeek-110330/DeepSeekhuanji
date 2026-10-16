@@ -1,0 +1,539 @@
+[
+  {
+    "id": "beta-function",
+    "title": "贝塔函数与欧拉积分",
+    "titleEn": "Beta Function and Euler Integrals",
+    "branch": "special-functions",
+    "level": 4,
+    "summary": "贝塔函数 B(x,y) 由含参积分定义，满足欧拉关系 B(x,y)=Γ(x)Γ(y)/Γ(x+y)，把一大类定积分归约为伽马值的代数运算。",
+    "summaryEn": "The beta function B(x,y) is defined by a parametric integral and satisfies Euler's relation B(x,y)=Γ(x)Γ(y)/Γ(x+y), reducing a broad class of integrals to algebra with gamma values.",
+    "definition": "**贝塔函数**（Beta function），又称**第一类欧拉积分**，由\n\n$$B(x,y)=\\int_0^1 t^{x-1}(1-t)^{y-1}\\,dt$$\n\n定义。积分的两个端点是两处潜在的奇点：在 $t\\to 0^+$ 处可积要求 $x>0$，在 $t\\to 1^-$ 处可积要求 $y>0$——**两个条件缺一不可**，因此定义域是 $x>0,\\ y>0$ 这个矩形区域。在换元 $t\\mapsto 1-t$ 下积分形式不变，于是立刻得到**对称性** $B(x,y)=B(y,x)$；整数情形 $B(2,3)=B(3,2)$ 从积分式看并不显然，对称性是一个真正的恒等式。\n\n贝塔函数的核心是**欧拉关系**：\n\n$$B(x,y)=\\frac{\\Gamma(x)\\,\\Gamma(y)}{\\Gamma(x+y)}\\qquad(x>0,\\ y>0),$$\n\n其中 $\\Gamma$ 是伽马函数。它把含参积分变成三个伽马值的除法；特别地当 $m,n$ 为正整数时 $B(m,n)=\\frac{(m-1)!\\,(n-1)!}{(m+n-1)!}$，贝塔值退化为阶乘之比。证明思路：把两个伽马积分相乘看成 $(u,v)$ 平面上的二重积分，作变量替换 $u=st,\\ v=s(1-t)$，对 $s$ 积分得 $\\Gamma(x+y)$，余下的 $t$ 积分恰是 $B(x,y)$。\n\n除原始定义外还有多个等价表示。三角形式 $B(x,y)=2\\int_0^{\\pi/2}\\sin^{2x-1}\\theta\\,\\cos^{2y-1}\\theta\\,d\\theta$ 由 $t=\\sin^2\\theta$ 得到，把幂次三角函数纳入射程；有理形式 $\\int_0^\\infty\\frac{t^{x-1}}{(1+t)^{x+y}}\\,dt$ 由 $t=\\frac{u}{1-u}$ 得到。**反射公式** $B(x,1-x)=\\frac{\\pi}{\\sin \\pi x}$（$0<x<1$）给出与三角函数的直接联系，其最重要的特例 $B\\left(\\frac12,\\frac12\\right)=\\pi$ 等价于 $\\Gamma\\left(\\frac12\\right)=\\sqrt{\\pi}$。\n\n贝塔函数的意义在于统一：形形色色的含参积分一旦辨认出 $B$ 的形式，答案立即化为伽马值的代数运算，无需求积分。它与伽马函数一同构成欧拉积分理论的主体，是积分表中的标准条目。",
+    "definitionEn": "The **beta function**, also called the **Euler integral of the first kind**, is defined by \n\n$$B(x,y)=\\int_0^1 t^{x-1}(1-t)^{y-1}\\,dt.$$\n\nThe endpoints are the two potential singularities: integrability at $t\\to 0^+$ requires $x>0$, and at $t\\to 1^-$ it requires $y>0$; **both conditions are needed**, so the domain is the quadrant $x>0,\\ y>0$. The substitution $t\\mapsto 1-t$ leaves the integral unchanged, which yields the **symmetry** $B(x,y)=B(y,x)$ — far from obvious in the integer case $B(2,3)=B(3,2)$.\n\nThe central identity is **Euler's relation** \n\n$$B(x,y)=\\frac{\\Gamma(x)\\,\\Gamma(y)}{\\Gamma(x+y)}\\qquad(x>0,\\ y>0),$$\n\nwhere $\\Gamma$ is the gamma function. It converts the parametric integral into a division of three gamma values; for positive integers it specializes to $B(m,n)=\\frac{(m-1)!(n-1)!}{(m+n-1)!}$. The proof multiplies two gamma integrals into a double integral over the plane and substitutes $u=st,\\ v=s(1-t)$: the $s$-integral produces $\\Gamma(x+y)$ and what remains is exactly $B(x,y)$.\n\nSeveral equivalent representations are available. The trigonometric form $B(x,y)=2\\int_0^{\\pi/2}\\sin^{2x-1}\\theta\\,\\cos^{2y-1}\\theta\\,d\\theta$ comes from $t=\\sin^2\\theta$ and covers powers of trigonometric functions; the rational form $\\int_0^\\infty\\frac{t^{x-1}}{(1+t)^{x+y}}\\,dt$ comes from $t=\\frac{u}{1-u}$. The **reflection formula** $B(x,1-x)=\\frac{\\pi}{\\sin\\pi x}$ ($0<x<1$) links beta values to trigonometry, and its key case $B\\left(\\frac12,\\frac12\\right)=\\pi$ is equivalent to $\\Gamma\\left(\\frac12\\right)=\\sqrt{\\pi}$.\n\nWhy it matters: beta unifies. Once an integral is recognized as $B(x,y)$ its value is immediate algebra with gamma values. Together with the gamma function it forms the core of Euler's integral theory and a standard entry in tables of integrals.",
+    "formulas": [
+      {
+        "latex": "B(x,y)=\\int_0^1 t^{x-1}(1-t)^{y-1}\\,dt\\qquad(x>0,\\ y>0)",
+        "note": "定义（第一类欧拉积分）。两端奇点的可积性分别要求 x>0 与 y>0，这是公式的前提，不能漏写。",
+        "noteEn": "Definition (Euler integral of the first kind). Integrability at the two endpoints requires x>0 and y>0."
+      },
+      {
+        "latex": "B(x,y)=\\frac{\\Gamma(x)\\,\\Gamma(y)}{\\Gamma(x+y)}",
+        "note": "欧拉关系：贝塔函数完全由伽马函数决定；整数情形化为 B(m,n) = (m−1)!(n−1)!/(m+n−1)!，把积分变成阶乘运算。",
+        "noteEn": "Euler's relation: beta is determined by gamma values; for integers it becomes (m−1)!(n−1)!/(m+n−1)!."
+      },
+      {
+        "latex": "B(x,y)=B(y,x)",
+        "note": "对称性：由换元 t→1−t 得到，对一切 x,y>0 成立。",
+        "noteEn": "Symmetry: obtained from t→1−t, valid for all x,y>0."
+      },
+      {
+        "latex": "B(x+1,y)=\\frac{x}{x+y}\\,B(x,y)",
+        "note": "递推公式：反复使用可把参数搬到方便计算的位置，例如把 B(3/2,5/2) 一步步化回 π 值。",
+        "noteEn": "Recursion: iterate to move parameters to convenient places, e.g. reducing B(3/2,5/2) to π-terms."
+      },
+      {
+        "latex": "B(x,y)=2\\int_0^{\\pi/2}\\sin^{2x-1}\\theta\\,\\cos^{2y-1}\\theta\\,d\\theta",
+        "note": "三角形式（t=sin²θ）。取 x=y=1/2 时被积函数为 1，立得 B(1/2,1/2)=π。",
+        "noteEn": "Trigonometric form (t=sin²θ). At x=y=1/2 the integrand is 1, giving B(1/2,1/2)=π."
+      }
+    ],
+    "properties": [
+      "对称性 B(x,y)=B(y,x) 与递推 B(x+1,y)=x/(x+y)·B(x,y) 是全部代数性质的起点；特别地 B(1,y)=1/y（直接算 ∫₀¹(1−t)^{y−1}dt 即得）。",
+      "反射公式 B(x,1−x)=π/sin(πx)（0<x<1）：在 (0,1) 上 B(x,1−x)≥π，等号仅在 x=1/2 处成立，即 B(1/2,1/2)=π 是这类对称值中的最小值。",
+      "单调性与端点行为：固定 y>0 时，B(x,y) 关于 x 在 (0,∞) 上严格递减；x→0⁺ 时 B(x,y)~1/x→∞，而 x→∞ 时 B(x,y)~Γ(y)·x^{−y}→0。",
+      "与二项式系数的桥梁：对整数 0≤k≤n 有 B(k+1,n−k+1)=k!(n−k)!/(n+1)! = 1/((n+1)·C(n,k))，积分 ∫₀¹x^k(1−x)^{n−k}dx 的归一化常数由此读出。",
+      "三种积分表示（0 到 1、0 到 π/2 的三角形式、0 到 ∞ 的有理形式）彼此等价，可按被积函数的形状就近选用；三者的收敛条件都是两个参数为正。"
+    ],
+    "propertiesEn": [
+      "Symmetry B(x,y)=B(y,x) and the recursion B(x+1,y)=x/(x+y)·B(x,y) generate the algebra; in particular B(1,y)=1/y from a direct integration.",
+      "Reflection formula B(x,1−x)=π/sin(πx) for 0<x<1: on (0,1) we have B(x,1−x)≥π with equality only at x=1/2, so B(1/2,1/2)=π is the minimal symmetric value.",
+      "Monotonicity and asymptotics: for fixed y>0, B(x,y) strictly decreases in x on (0,∞); B(x,y)~1/x as x→0⁺ and B(x,y)~Γ(y)·x^{−y}→0 as x→∞.",
+      "Bridge to binomial coefficients: for integers 0≤k≤n, B(k+1,n−k+1)=k!(n−k)!/(n+1)! = 1/((n+1)·C(n,k)), the normalization behind ∫₀¹x^k(1−x)^{n−k}dx.",
+      "The three integral representations (over (0,1), the trigonometric one, and the rational one over (0,∞)) are equivalent; convergence always needs both parameters positive."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "x*(1-x)^2",
+          "color": "#4cc9f0",
+          "label": "x(1−x)²：面积 = B(2,3) = 1/12"
+        },
+        {
+          "expr": "x^0.5*(1-x)^1.5",
+          "color": "#ff6b9d",
+          "label": "√x(1−x)^1.5：面积 = B(3/2,5/2) = π/16"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        -0.02,
+        0.36
+      ],
+      "title": "两条贝塔被积函数：曲线下的面积分别是 1/12 与 π/16"
+    },
+    "examples": [
+      {
+        "problem": "求定积分 $\\int_0^1 x^2(1-x)^4\\,dx$。",
+        "solution": "被积函数正是贝塔函数定义中的形状：$\\int_0^1 x^2(1-x)^4\\,dx=B(3,5)$（对应 $t^{x-1}(1-t)^{y-1}$ 中取 $x=3,\\ y=5$）。由欧拉关系 $B(3,5)=\\frac{\\Gamma(3)\\Gamma(5)}{\\Gamma(8)}=\\frac{2!\\,4!}{7!}=\\frac{48}{5040}=\\frac{1}{105}\\approx0.0095238$。**逐项复算**：展开 $x^2(1-x)^4=x^2-4x^3+6x^4-4x^5+x^6$，逐项积分得 $\\frac13-1+\\frac65-\\frac46+\\frac17=\\frac{35-105+126-70+15}{105}=\\frac{1}{105}$ ✓，与贝塔值一致。"
+      },
+      {
+        "problem": "证明 $B\\left(\\frac12,\\frac12\\right)=\\pi$，并由此导出 $\\Gamma\\left(\\frac12\\right)=\\sqrt{\\pi}$。",
+        "solution": "按定义 $B\\left(\\frac12,\\frac12\\right)=\\int_0^1 t^{-1/2}(1-t)^{-1/2}\\,dt$。作换元 $t=\\sin^2\\theta$（$\\theta$ 从 0 到 $\\frac{\\pi}{2}$）：$dt=2\\sin\\theta\\cos\\theta\\,d\\theta$，而 $t^{-1/2}(1-t)^{-1/2}=\\frac{1}{\\sin\\theta\\cos\\theta}$，两者相乘后三角函数恰好消去，得 $B\\left(\\frac12,\\frac12\\right)=\\int_0^{\\pi/2}2\\,d\\theta=\\pi$。**数值复核**：$\\pi\\approx3.14159265$，与直接数值积分 $\\int_0^1\\frac{dt}{\\sqrt{t(1-t)}}$ 的结果一致 ✓。再由欧拉关系 $B\\left(\\frac12,\\frac12\\right)=\\frac{\\Gamma(1/2)^2}{\\Gamma(1)}=\\Gamma\\left(\\frac12\\right)^2$（$\\Gamma(1)=1$），故 $\\Gamma\\left(\\frac12\\right)=\\sqrt{\\pi}\\approx1.7724539$——这正是正态分布归一化常数 $\\frac{1}{\\sqrt{2\\pi}}$ 中出现的那个 $\\sqrt{\\pi}$。"
+      }
+    ],
+    "tags": [
+      "贝塔函数",
+      "欧拉积分",
+      "伽马函数",
+      "含参积分",
+      "对称性"
+    ],
+    "links": [
+      "gamma-function",
+      "improper-integral",
+      "binomial-theorem",
+      "normal-distribution"
+    ]
+  },
+  {
+    "id": "error-function",
+    "title": "误差函数与正态积分",
+    "titleEn": "Error Function and the Normal Integral",
+    "branch": "special-functions",
+    "level": 4,
+    "summary": "误差函数 erf(x) 由规范化积分 ∫₀ˣe^(−t²)dt 定义，是奇函数且趋向 ±1，与正态分布函数按 Φ(x)=½(1+erf(x/√2)) 直接换算。",
+    "summaryEn": "The error function erf(x) is defined by a normalized integral of e^(−t²); it is odd, tends to ±1, and converts to the normal CDF via Φ(x)=½(1+erf(x/√2)).",
+    "definition": "**误差函数**（error function，又称高斯误差函数）定义为\n\n$$\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\int_0^x e^{-t^2}\\,dt.$$\n\n之所以要为一个积分单独立一个函数，是因为 $e^{-t^2}$ 的原函数**不是初等函数**：$\\int e^{-t^2}dt$ 无法用幂函数、指数、对数、三角函数的有限组合表示。前面的常数 $2/\\sqrt{\\pi}$ 起规范化作用——高斯积分 $\\int_0^\\infty e^{-t^2}dt=\\frac{\\sqrt{\\pi}}{2}$，于是 $\\operatorname{erf}(\\infty)=1$，函数值落在 $(-1,1)$ 内。\n\n从定义可以读出一串基本性质。**奇函数**：换元 $t\\mapsto-t$ 使积分变号，得 $\\operatorname{erf}(-x)=-\\operatorname{erf}(x)$；**严格递增**：导数为 $\\frac{2}{\\sqrt{\\pi}}e^{-x^2}>0$；因此值域为 $(-1,1)$，两条水平渐近线 $y=\\pm1$。在原点附近 $\\operatorname{erf}(x)\\approx\\frac{2}{\\sqrt{\\pi}}x$，是一条线性的「软台阶」；把 $e^{-t^2}$ 展开并逐项积分，得到在**整个实轴收敛**的泰勒级数 $\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{n!\\,(2n+1)}$，所以 erf 是整函数。这是一个交错级数，数值计算时截断误差不超过第一个被略去的项。\n\n误差函数最重要的一重身份是**正态积分的规范化形式**。若 $X\\sim N(0,1)$ 有标准正态分布函数 $\\Phi$，则\n\n$$\\Phi(x)=\\frac{1}{2}\\left(1+\\operatorname{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right),$$\n\n反过来 $\\operatorname{erf}(z)=2\\Phi(z\\sqrt{2})-1$。系数 $x/\\sqrt{2}$ 来自标准化：正态密度的指数是 $-x^2/2$，比 $e^{-t^2}$ 多一个 $1/\\sqrt{2}$ 的缩放。于是查 erf 表与查正态表是同一件事：$P(a\\le X\\le b)=\\frac12\\left(\\operatorname{erf}\\frac{b}{\\sqrt2}-\\operatorname{erf}\\frac{a}{\\sqrt2}\\right)$，$P(|X|\\le a)=\\operatorname{erf}\\frac{a}{\\sqrt2}$。**必须小心这个缩放**：$\\operatorname{erf}(1)\\approx0.8427$ 与 $P(|X|\\le1)\\approx0.6827$ 是两个不同的数。\n\n与之配套的还有**互补误差函数** $\\operatorname{erfc}(x)=1-\\operatorname{erf}(x)$：当 $x$ 很大时 erf 已接近饱和，直接做减法会损失有效数字，因此尾部概率一律用 erfc（或其渐近展开）计算——这是数值库把 erfc 单列的原因。",
+    "definitionEn": "The **error function** (Gauss error function) is defined by \n\n$$\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\int_0^x e^{-t^2}\\,dt.$$\n\nA separate function is needed because $e^{-t^2}$ has **no elementary antiderivative**: $\\int e^{-t^2}dt$ cannot be written as a finite combination of powers, exponentials, logarithms and trigonometric functions. The constant $2/\\sqrt{\\pi}$ normalizes the Gaussian integral $\\int_0^\\infty e^{-t^2}dt=\\frac{\\sqrt{\\pi}}{2}$, so that $\\operatorname{erf}(\\infty)=1$ and the values lie in $(-1,1)$.\n\nBasic properties follow directly. It is **odd**, since $t\\mapsto-t$ flips the sign of the integral; it is **strictly increasing**, with derivative $\\frac{2}{\\sqrt{\\pi}}e^{-x^2}>0$; hence the range is $(-1,1)$ with horizontal asymptotes $y=\\pm1$. Near the origin $\\operatorname{erf}(x)\\approx\\frac{2}{\\sqrt{\\pi}}x$, a linear soft step; expanding $e^{-t^2}$ and integrating termwise gives the Taylor series $\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\sum_{n=0}^\\infty\\frac{(-1)^nx^{2n+1}}{n!(2n+1)}$, convergent on the whole real line, so erf is an **entire function**. Being alternating, its truncation error is bounded by the first omitted term.\n\nMost importantly, erf is the standardized form of the **normal integral**. For a standard normal variable $X\\sim N(0,1)$ with CDF $\\Phi$, \n\n$$\\Phi(x)=\\frac{1}{2}\\left(1+\\operatorname{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right),$$\n\nand conversely $\\operatorname{erf}(z)=2\\Phi(z\\sqrt{2})-1$. The factor $x/\\sqrt{2}$ comes from standardization, since the normal density carries the exponent $-x^2/2$ instead of $-x^2$. Interval probabilities follow: $P(a\\le X\\le b)=\\frac12\\left(\\operatorname{erf}\\frac{b}{\\sqrt2}-\\operatorname{erf}\\frac{a}{\\sqrt2}\\right)$ and $P(|X|\\le a)=\\operatorname{erf}\\frac{a}{\\sqrt2}$. **Mind the scaling**: $\\operatorname{erf}(1)\\approx0.8427$ and $P(|X|\\le1)\\approx0.6827$ are different numbers.\n\nThe companion **complementary error function** $\\operatorname{erfc}(x)=1-\\operatorname{erf}(x)$ handles tails: for large x, erf is saturated and subtracting from 1 loses significant digits, so tail probabilities are computed with erfc (or its asymptotic expansion) — which is why numerical libraries export it separately.",
+    "formulas": [
+      {
+        "latex": "\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\int_0^x e^{-t^2}\\,dt",
+        "note": "定义：被积函数 e^(−t²) 没有初等原函数，erf 是为这个积分专门命名的函数。",
+        "noteEn": "Definition: e^(−t²) has no elementary antiderivative, so erf is introduced for this integral."
+      },
+      {
+        "latex": "\\operatorname{erf}(\\infty)=1,\\qquad \\operatorname{erf}(-x)=-\\operatorname{erf}(x),\\qquad \\int_0^{\\infty}e^{-t^2}\\,dt=\\frac{\\sqrt{\\pi}}{2}",
+        "note": "规范化、奇性与高斯积分（泊松积分）：三者互相配套，常数值 √π/2 正是让 erf 在无穷远处恰好等于 1 的原因。",
+        "noteEn": "Normalization, oddness and the Gaussian (Poisson) integral; the constant √π/2 makes erf tend to 1."
+      },
+      {
+        "latex": "\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\sum_{n=0}^{\\infty}\\frac{(-1)^n x^{2n+1}}{n!\\,(2n+1)}",
+        "note": "泰勒级数（整函数，全实轴收敛）；交错级数的截断误差不超过第一个被略去的项，可用于手工计算。",
+        "noteEn": "Taylor series (entire function). The alternating truncation error is bounded by the first omitted term."
+      },
+      {
+        "latex": "\\Phi(x)=\\frac{1}{2}\\left(1+\\operatorname{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right),\\qquad P(|X|\\le a)=\\operatorname{erf}\\left(\\frac{a}{\\sqrt{2}}\\right)\\quad(X\\sim N(0,1))",
+        "note": "与标准正态分布函数的换算：注意自变量要先除以 √2，系数写错会得到完全不同的数值。",
+        "noteEn": "Conversion to the standard normal CDF: the argument must be divided by √2; wrong scaling gives wrong numbers."
+      },
+      {
+        "latex": "\\operatorname{erfc}(x)=1-\\operatorname{erf}(x)\\sim\\frac{e^{-x^2}}{x\\sqrt{\\pi}}\\qquad(x\\to\\infty)",
+        "note": "互补误差函数与高斯尾部的首项渐近：只在 x 较大时可用，是相对误差意义下的近似。",
+        "noteEn": "Complementary error function and the leading Gaussian-tail asymptotic, valid for large x in the relative sense."
+      }
+    ],
+    "properties": [
+      "奇函数、严格递增（导数 2/√π·e^(−x²)>0）、值域 (−1,1)、水平渐近线 y=±1：图像是一条平滑的 S 形台阶。",
+      "规范化与互补：erf(0)=0、erf(∞)=1 由高斯积分给出；erfc=1−erf 满足 erfc(0)=1、erfc(∞)=0，x 较大时用 erfc 计算尾部可避免大数相减的精度损失。",
+      "泰勒级数在整个实轴收敛（erf 是整函数），且为交错级数：部分和的误差不超过第一个被略去的项，为手算与数值实现提供直接的误差控制。",
+      "与标准正态分布一一对应：Φ(x)=½(1+erf(x/√2))；常用区间概率为 P(|X|≤1)=erf(1/√2)≈0.6827、P(|X|≤2)≈0.9545、P(|X|≤3)≈0.9973。",
+      "小参数与大参数两种面貌：x→0 时 erf(x)≈2x/√π（线性增长）；x→∞ 时 erfc(x)~e^(−x²)/(x√π)，衰减快于任何固定的指数 e^(−cx)。"
+    ],
+    "propertiesEn": [
+      "Odd, strictly increasing (derivative 2/√π·e^(−x²)>0), range (−1,1), horizontal asymptotes y=±1: the graph is a smooth S-shaped step.",
+      "Normalization and complement: erf(0)=0 and erf(∞)=1 come from the Gaussian integral; erfc=1−erf satisfies erfc(0)=1, erfc(∞)=0 and avoids cancellation when computing tails.",
+      "The Taylor series converges on the whole real line (erf is entire) and alternates: the partial-sum error is bounded by the first omitted term, giving direct error control.",
+      "One-to-one with the standard normal: Φ(x)=½(1+erf(x/√2)); interval probabilities include P(|X|≤1)=erf(1/√2)≈0.6827, P(|X|≤2)≈0.9545, P(|X|≤3)≈0.9973.",
+      "Two faces: erf(x)≈2x/√π as x→0 (linear growth), while erfc(x)~e^(−x²)/(x√π) as x→∞, decaying faster than any fixed exponential e^(−cx)."
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(-x^2)",
+          "color": "#4cc9f0",
+          "label": "y = e^(−x²)"
+        }
+      ],
+      "fills": [
+        {
+          "expr": "exp(-x^2)",
+          "from": 0,
+          "to": 1,
+          "base": 0,
+          "color": "#06d6a0",
+          "label": "∫₀¹ e^(−x²) dx = (√π/2)·erf(1) ≈ 0.7468"
+        }
+      ],
+      "xRange": [
+        -2.5,
+        2.5
+      ],
+      "yRange": [
+        -0.05,
+        1.1
+      ],
+      "title": "误差函数的来源：∫₀¹ e^(−x²) dx = (√π/2)·erf(1) ≈ 0.7468"
+    },
+    "examples": [
+      {
+        "problem": "用泰勒级数计算 $\\operatorname{erf}(1)$，保留四位小数，并给出误差估计。",
+        "solution": "把 $x=1$ 代入 $\\operatorname{erf}(x)=\\frac{2}{\\sqrt{\\pi}}\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{n!\\,(2n+1)}$，即 $\\operatorname{erf}(1)=\\frac{2}{\\sqrt{\\pi}}\\left(1-\\frac13+\\frac{1}{2!\\,5}-\\frac{1}{3!\\,7}+\\frac{1}{4!\\,9}-\\frac{1}{5!\\,11}+\\frac{1}{6!\\,13}-\\cdots\\right)$。逐项数值：$1.1283791671-0.3761263890+0.1128379167-0.0268661706+0.0052239776-0.0008548327+0.0001205533-\\cdots$。到 $n=5$ 的部分和为 $0.8425936691$，误差约 $-1.07\\times10^{-4}$（由下一项 $1.21\\times10^{-4}$ 控制）；再加上 $n=6$ 项得 $0.8427142224$，误差约 $+1.3\\times10^{-5}$。取四位小数：$\\operatorname{erf}(1)\\approx0.8427$。**核对**：数值积分给出的值为 $0.8427007929$ ✓。交错级数的截断误差不超过第一个被略去的项，所以精度一目了然。"
+      },
+      {
+        "problem": "设 $X\\sim N(0,1)$，用误差函数求 $P(|X|\\le1)$ 与 $P(|X|\\le1.96)$，并与 Φ 表核对。",
+        "solution": "由 $\\Phi(x)=\\frac12\\left(1+\\operatorname{erf}\\frac{x}{\\sqrt2}\\right)$ 得 $P(|X|\\le a)=2\\Phi(a)-1=\\operatorname{erf}\\left(\\frac{a}{\\sqrt2}\\right)$。$a=1$：$\\frac{a}{\\sqrt2}=0.7071068$，$\\operatorname{erf}(0.7071068)=0.6826894921\\approx0.6827$，即常说的「约 68%」。$a=1.96$：$\\frac{a}{\\sqrt2}=1.3859293$，$\\operatorname{erf}(1.3859293)=0.9500042097\\approx0.9500$。**交叉核对**：$\\Phi(1.96)=\\frac12(1+\\operatorname{erf}(1.3859293))=0.9750021049$，故 $2\\Phi(1.96)-1=0.9500042097$，与直接代入完全一致 ✓。注意别弄错缩放：$\\operatorname{erf}(1)=0.8427$ 对应的是 $P(|X|\\le\\sqrt2)\\approx0.8427$，而不是 $P(|X|\\le1)$。"
+      }
+    ],
+    "tags": [
+      "误差函数",
+      "高斯积分",
+      "正态分布",
+      "erfc",
+      "泰勒级数"
+    ],
+    "links": [
+      "normal-distribution",
+      "central-limit-theorem",
+      "gamma-function",
+      "taylor-series",
+      "improper-integral"
+    ]
+  },
+  {
+    "id": "stirling-formula",
+    "title": "斯特林公式与渐近展开",
+    "titleEn": "Stirling's Formula and Asymptotics",
+    "branch": "special-functions",
+    "level": 4,
+    "summary": "斯特林公式 n!~√(2πn)(n/e)ⁿ 用初等表达式刻画阶乘的渐近大小，相对误差约 1/(12n)，是组合计数、熵估计与概率渐近的基本工具。",
+    "summaryEn": "Stirling's formula n!~√(2πn)(n/e)ⁿ describes the asymptotic size of factorials with relative error about 1/(12n), a basic tool for combinatorial and probabilistic asymptotics.",
+    "definition": "**斯特林公式**说\n\n$$n!\\sim\\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n\\qquad(n\\to\\infty),$$\n\n其中记号 $\\sim$ 的含义是两边之**比值**趋于 1，而不是差趋于 0——事实上 $n!$ 与近似值之差随 $n$ 增大反而越来越大，这正是「渐近」与「近似」的区别所在。历史上 de Moivre 先发现 $n!$ 与 $C\\,n^{n+1/2}e^{-n}$ 只差一个常数，Stirling 定出了这个常数 $C=\\sqrt{2\\pi}$，公式因此得名。\n\n把比值的更多信息展开，可以得到带修正项的精确版本：\n\n$$n!=\\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n\\left(1+\\frac{1}{12n}+\\frac{1}{288n^2}+O\\left(\\frac{1}{n^3}\\right)\\right).$$\n\n首修正 $1/(12n)$ 说明**相对误差的量级是 $O(1/n)$**：$n=20$ 时约 0.42%，$n=10$ 时约 0.83%。取对数得到最常用的形式 $\\ln n!=n\\ln n-n+\\frac12\\ln(2\\pi n)+\\frac{1}{12n}+O(n^{-3})$，丢掉对数项就是粗略的 $\\ln n!=n\\ln n-n+O(\\ln n)$。要注意**斯特林级数本身是发散的渐近级数**：对固定的 $n$ 只能取有限几项，项数取多了反而变差；但截断误差恰由下一个项控制。\n\n公式的等号应当理解为「$n!$ 就是 $\\Gamma(n+1)$ 的大参数展开」：伽马函数 $\\Gamma(z)$ 在 $|\\arg z|<\\pi$ 上有同样的渐近展开，斯特林公式是它在正实轴上的特例。证明有多种途径，例如比较 $\\ln n!=\\sum_{k=1}^n\\ln k$ 与积分 $\\int_1^n\\ln x\\,dx$（欧拉–麦克劳林求和）得到除常数外的全部项，再用 Wallis 公式定出常数 $\\sqrt{2\\pi}$。由于它把乘法型的阶乘翻译成幂、指数与根号，一切涉及阶乘、二项式系数、排列组合与熵的渐近估计都从它出发。",
+    "definitionEn": "**Stirling's formula** states \n\n$$n!\\sim\\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n\\qquad(n\\to\\infty),$$\n\nwhere $\\sim$ means the **ratio** of the two sides tends to 1 — not that the difference vanishes. In fact the absolute difference grows with n; that is the whole point of an asymptotic statement. Historically de Moivre showed that $n!$ differs from $C\\,n^{n+1/2}e^{-n}$ only by a constant, and Stirling determined $C=\\sqrt{2\\pi}$.\n\nExpanding the ratio yields a sharper version: \n\n$$n!=\\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n\\left(1+\\frac{1}{12n}+\\frac{1}{288n^2}+O\\left(\\frac{1}{n^3}\\right)\\right).$$\n\nThe leading correction $1/(12n)$ shows the **relative error is of order $O(1/n)$**: about 0.42% at n=20 and 0.83% at n=10. Taking logarithms gives $\\ln n!=n\\ln n-n+\\frac12\\ln(2\\pi n)+\\frac1{12n}+O(n^{-3})$, whose crude form $\\ln n!=n\\ln n-n+O(\\ln n)$ suffices for many estimates. Note that the Stirling series is a **divergent asymptotic series**: for fixed n only finitely many terms help, and the truncation error is governed by the next term.\n\nThe formula is the large-argument expansion of $\\Gamma(z)$ (with $n!=\\Gamma(n+1)$), valid for $|\\arg z|<\\pi$; the case of integers is its restriction to the positive real axis. Proofs compare $\\ln n!=\\sum_{k=1}^n\\ln k$ with $\\int_1^n\\ln x\\,dx$ (Euler–Maclaurin summation) and fix the constant with Wallis's product. Because it turns factorials into powers, exponentials and square roots, virtually every asymptotic estimate involving factorials, binomial coefficients, permutations or entropy starts here.",
+    "formulas": [
+      {
+        "latex": "n!\\sim\\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n\\qquad(n\\to\\infty)",
+        "note": "斯特林公式：∼ 表示两边之比趋于 1（不是差趋于 0），近似值永远略小于真值。",
+        "noteEn": "Stirling's formula: ∼ means the ratio tends to 1, not the difference; the approximation is always slightly small."
+      },
+      {
+        "latex": "n!=\\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n\\left(1+\\frac{1}{12n}+\\frac{1}{288n^2}+O\\left(\\frac{1}{n^3}\\right)\\right)",
+        "note": "带修正的展开：首修正 1/(12n) 给出相对误差的量级，n=20 时约 0.42%。",
+        "noteEn": "Expansion with corrections: the leading term 1/(12n) sets the relative error, about 0.42% at n=20."
+      },
+      {
+        "latex": "\\ln n!=n\\ln n-n+\\frac{1}{2}\\ln(2\\pi n)+\\frac{1}{12n}+O\\left(\\frac{1}{n^3}\\right)",
+        "note": "对数形式：乘积化求和后主项是 n ln n，适合熵与信息量的估计。",
+        "noteEn": "Logarithmic form: the leading term n ln n after turning products into sums, ideal for entropy estimates."
+      },
+      {
+        "latex": "\\ln n!=n\\ln n-n+O(\\ln n)",
+        "note": "粗糙版本：误差只有对数级，说明 ln n! 由 n ln n−n 主导；不能误写成误差 O(1)。",
+        "noteEn": "Crude form: only logarithmic error, showing that n ln n−n dominates; the error is not O(1)."
+      },
+      {
+        "latex": "\\binom{2n}{n}\\sim\\frac{4^n}{\\sqrt{\\pi n}}",
+        "note": "中心二项系数的经典推论；用对数形式写作 log₂C(2n,n)≈2n−½log₂(πn)，是组合熵估计的起点。",
+        "noteEn": "Classical corollary for central binomial coefficients; in logs, log₂C(2n,n)≈2n−½log₂(πn)."
+      }
+    ],
+    "properties": [
+      "比值 rₙ=n!/(√(2πn)(n/e)ⁿ) 满足 rₙ>1 且严格递减、rₙ→1：近似值永远略小于真值，且相对误差单调减小。",
+      "相对误差的量级是 O(1/n)：n=20 时 r₂₀=1.0041750，而 1+1/(12×20)=1.0041667，两者相差不到 10⁻⁵。",
+      "带二阶修正后精度大幅提升：乘以 (1+1/(12n)+1/(288n²)) 后，n=20 的相对误差降到 3.3×10⁻⁷ 量级（未修正时是 4.2×10⁻³）。",
+      "对数形式 ln n!=n ln n−n+½ln(2πn)+1/(12n)+O(n⁻³) 把乘积化为求和，是熵估计的来源：ln C(2n,n)≈2n ln2−½ln(πn)。",
+      "斯特林级数是发散的渐近级数：对每个固定 n 都有最佳截断项数，多取项不会无限提高精度；相应地 4ⁿ 的指数增长被 √(πn) 这一多项式因子修正。"
+    ],
+    "propertiesEn": [
+      "The ratio rₙ=n!/(√(2πn)(n/e)ⁿ) satisfies rₙ>1, strictly decreases and tends to 1: the approximation is always slightly small, with monotonically decreasing relative error.",
+      "The relative error is of order O(1/n): at n=20, r₂₀=1.0041750 while 1+1/(12×20)=1.0041667 — they agree to within 10⁻⁵.",
+      "The second-order correction helps a lot: multiplying by (1+1/(12n)+1/(288n²)) lowers the relative error at n=20 to about 3.3×10⁻⁷ (from 4.2×10⁻³).",
+      "The logarithmic form turns products into sums and underlies entropy estimates: ln C(2n,n)≈2n ln2−½ln(πn).",
+      "The Stirling series is divergent and asymptotic: for each fixed n there is a best truncation point; correspondingly the exponential growth 4ⁿ is corrected by the polynomial factor √(πn)."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          1,
+          1.084438
+        ],
+        [
+          2,
+          1.042207
+        ],
+        [
+          3,
+          1.028065
+        ],
+        [
+          4,
+          1.021008
+        ],
+        [
+          5,
+          1.016784
+        ],
+        [
+          6,
+          1.013973
+        ],
+        [
+          7,
+          1.011968
+        ],
+        [
+          8,
+          1.010466
+        ],
+        [
+          9,
+          1.009298
+        ],
+        [
+          10,
+          1.008365
+        ],
+        [
+          11,
+          1.007602
+        ],
+        [
+          12,
+          1.006967
+        ],
+        [
+          13,
+          1.00643
+        ],
+        [
+          14,
+          1.005969
+        ],
+        [
+          15,
+          1.00557
+        ],
+        [
+          16,
+          1.005221
+        ],
+        [
+          17,
+          1.004913
+        ],
+        [
+          18,
+          1.00464
+        ],
+        [
+          19,
+          1.004395
+        ],
+        [
+          20,
+          1.004175
+        ]
+      ],
+      "lines": [
+        {
+          "slope": 0,
+          "intercept": 1,
+          "from": 0,
+          "to": 21,
+          "color": "#ffd166",
+          "label": "极限值 1"
+        }
+      ],
+      "xRange": [
+        0,
+        21
+      ],
+      "yRange": [
+        1.0,
+        1.09
+      ],
+      "title": "斯特林比 rₙ = n!/(√(2πn)(n/e)ⁿ)：单调下降趋于 1"
+    },
+    "examples": [
+      {
+        "problem": "用斯特林公式估计 $20!$：先算基本近似，再加修正项，并比较相对误差。",
+        "solution": "取 $n=20$：$\\sqrt{2\\pi n}=\\sqrt{40\\pi}=11.2099824$，$(20/e)^{20}=2.1612762\\times10^{17}$，相乘得 $\\sqrt{40\\pi}(20/e)^{20}=2.4227868468\\times10^{18}$。真值 $20!=2.4329020082\\times10^{18}$，比值 $r_{20}=1.0041750$——真值比基本近似大约 $0.4175\\%$，而 $1+\\frac{1}{12\\times20}=1.0041667$，两者相差不到 $10^{-5}$，与渐近理论完全吻合。加首修正：$2.4227868468\\times10^{18}\\times\\left(1+\\frac{1}{240}\\right)=2.4328817920\\times10^{18}$，相对误差降到 $-8.3\\times10^{-6}$；再加 $\\frac{1}{288\\times400}$ 项得 $2.4329028231\\times10^{18}$，相对误差约 $+3.3\\times10^{-7}$。几项修正就把误差压到百万分之一以下（修正后的绝对误差约 $8.15\\times10^{11}$，虽仍不小，相对意义下可忽略，这正是渐近等式的含义）。"
+      },
+      {
+        "problem": "用中心二项系数的斯特林估计求 $\\binom{100}{50}$ 的大小与二进制比特数。",
+        "solution": "取 $n=50$，由 $\\binom{2n}{n}\\sim\\frac{4^n}{\\sqrt{\\pi n}}\\left(1-\\frac{1}{8n}+\\cdots\\right)$：$4^{50}=2^{100}=1.2676506002\\times10^{30}$，$\\sqrt{50\\pi}=12.5331414$，商为 $1.0114388424\\times10^{29}$，再乘修正因子 $\\left(1-\\frac{1}{400}\\right)$ 得 $1.0089102453\\times10^{29}\\approx1.00891\\times10^{29}$。真值 $\\binom{100}{50}=100891344545564193334812497256=1.0089134455\\times10^{29}$（30 位数），相对误差约 $3.2\\times10^{-6}$ ✓。比特数：$\\log_2\\binom{100}{50}\\approx2n-\\frac12\\log_2(\\pi n)+\\log_2\\left(1-\\frac{1}{8n}\\right)=100-3.6477-0.0036=96.3487$，真值 $96.34872$，即约 $96.35$ bit；若用粗估 $2^{100}$ 会高估约 $12.5$ 倍——高出的正是 $\\sqrt{\\pi n}$ 因子。"
+      }
+    ],
+    "tags": [
+      "斯特林公式",
+      "阶乘",
+      "渐近展开",
+      "二项式系数",
+      "熵"
+    ],
+    "links": [
+      "gamma-function",
+      "central-limit-theorem",
+      "binomial-theorem",
+      "sequence-limit"
+    ]
+  },
+  {
+    "id": "elliptic-integrals",
+    "title": "椭圆积分",
+    "titleEn": "Elliptic Integrals",
+    "branch": "special-functions",
+    "level": 5,
+    "summary": "椭圆积分是含根式 √(三次或四次多项式) 的积分，勒让德将其规范为三类标准型；完全椭圆积分 K(k) 在 k→1⁻ 时对数发散，是单摆大摆角周期与椭圆周长的基本常数。",
+    "summaryEn": "Elliptic integrals contain square roots of cubic or quartic polynomials and reduce to Legendre's three standard kinds; the complete integral K(k) diverges logarithmically as k→1⁻ and governs pendulum periods and ellipse circumferences.",
+    "definition": "**椭圆积分**指形如 $\\int R\\left(t,\\sqrt{P(t)}\\right)dt$ 的积分，其中 $R$ 是有理函数，$P$ 是**三次或四次无重根多项式**（根号内若是二次多项式，配方后即可化归反三角函数的初等情形）。名字来自最经典的场景：计算椭圆的弧长。一般的椭圆积分可用初等代换化为**勒让德三类标准型**。\n\n三类标准型（勒让德形式）是\n\n$$F(\\varphi,k)=\\int_0^{\\varphi}\\frac{d\\theta}{\\sqrt{1-k^2\\sin^2\\theta}},\\qquad E(\\varphi,k)=\\int_0^{\\varphi}\\sqrt{1-k^2\\sin^2\\theta}\\,d\\theta,$$\n\n$$\\Pi(n;\\varphi,k)=\\int_0^{\\varphi}\\frac{d\\theta}{(1-n\\sin^2\\theta)\\sqrt{1-k^2\\sin^2\\theta}},$$\n\n依次称为第一、二、三类。积分上限 $\\varphi$ 叫**振幅**，$k$ 叫**模数**（通常 $0\\le k<1$），$n$ 是第三类的**特征**。**约定警告**：很多文献与软件改用**参数** $m=k^2$ 记同一个函数（写作 $K(m)$），两种约定下同一串数字含义完全不同——按模数解释 $K(0.5)=1.6857503548$，按参数解释 $K(0.5)=K(k=\\sqrt{0.5})=1.8540746773$。引用公式前必须先确认使用的是 $k$ 还是 $m=k^2$。互补模数记 $k'=\\sqrt{1-k^2}$。\n\n当振幅取满 $\\varphi=\\pi/2$ 时称为**完全椭圆积分**，记 $K(k)=F(\\pi/2,k)$、$E(k)=E(\\pi/2,k)$、$\\Pi(n,k)=\\Pi(n;\\pi/2,k)$。换成 $t=\\sin\\theta$ 还有代数形式的定义 $K(k)=\\int_0^1\\frac{dt}{\\sqrt{(1-t^2)(1-k^2t^2)}}$。端点行为是这一族函数的灵魂：$K(0)=E(0)=\\frac{\\pi}{2}$、$E(1)=1$，而 $K(k)$ 在 $k\\to 1^-$ 时**对数发散**：$K(k)\\approx\\ln\\frac{4}{\\sqrt{1-k^2}}=\\ln\\frac{4}{k'}$。数值上 $k=0.999$ 时 $K=4.4955964$，与 $\\ln\\frac{4}{\\sqrt{1-k^2}}=4.4938485$ 只差 0.04%；$k$ 再靠近 1，两者愈发一致。\n\n把椭圆积分当作独立函数来研究有其必然性：阿贝尔与刘维尔证明它们**一般不能用初等函数表示**；而 $K$ 的反演给出复分析中的双周期椭圆函数（雅可比 $\\operatorname{sn}$、$\\operatorname{cn}$、$\\operatorname{dn}$），那一边的故事见知识点「椭圆函数」。本节点立足实积分与几何视角：单摆周期、椭圆弧长与周长等一系列长度与周期问题都要经过 $K$ 与 $E$ 表达。",
+    "definitionEn": "**Elliptic integrals** are integrals of the form $\\int R\\left(t,\\sqrt{P(t)}\\right)dt$, where $R$ is rational and $P$ is a **cubic or quartic polynomial without repeated roots** (with a quadratic under the square root one reduces to elementary inverse-trigonometric form). The name comes from the motivating case: the arc length of an ellipse. In general they reduce to **Legendre's three standard kinds**.\n\nThe standard kinds are \n\n$$F(\\varphi,k)=\\int_0^{\\varphi}\\frac{d\\theta}{\\sqrt{1-k^2\\sin^2\\theta}},\\qquad E(\\varphi,k)=\\int_0^{\\varphi}\\sqrt{1-k^2\\sin^2\\theta}\\,d\\theta,$$\n\n$$\\Pi(n;\\varphi,k)=\\int_0^{\\varphi}\\frac{d\\theta}{(1-n\\sin^2\\theta)\\sqrt{1-k^2\\sin^2\\theta}},$$\n\nthe first, second and third kind respectively. The upper limit $\\varphi$ is the **amplitude**, $k$ the **modulus** (usually $0\\le k<1$), and n the **characteristic**. **Convention warning**: many references and software packages use the **parameter** $m=k^2$ instead of k, writing $K(m)$. The same numbers then mean different things: interpreting 0.5 as a modulus gives $K(0.5)=1.6857503548$, while interpreting it as a parameter gives $K(m=0.5)=K(k=\\sqrt{0.5})=1.8540746773$. Always check which convention a formula uses. The complementary modulus is $k'=\\sqrt{1-k^2}$.\n\nWhen the amplitude is full, $\\varphi=\\pi/2$, the integrals are called **complete**, written $K(k)=F(\\pi/2,k)$, $E(k)=E(\\pi/2,k)$, $\\Pi(n,k)=\\Pi(n;\\pi/2,k)$; with $t=\\sin\\theta$ one also has the algebraic form $K(k)=\\int_0^1\\frac{dt}{\\sqrt{(1-t^2)(1-k^2t^2)}}$. Endpoint behaviour is the soul of the family: $K(0)=E(0)=\\frac{\\pi}{2}$ and $E(1)=1$, while $K(k)$ **diverges logarithmically** as $k\\to1^-$: $K(k)\\approx\\ln\\frac{4}{\\sqrt{1-k^2}}=\\ln\\frac{4}{k'}$. Numerically $K(0.999)=4.4955964$ already agrees with $\\ln\\frac{4}{\\sqrt{1-k^2}}=4.4938485$ to 0.04%, and the agreement improves as k approaches 1.\n\nTreating these as new functions is unavoidable: Abel and Liouville proved that elliptic integrals are **not elementary in general**, and the inverse of $K$ produces the doubly periodic Jacobi elliptic functions $\\operatorname{sn},\\operatorname{cn},\\operatorname{dn}$, whose theory belongs to complex analysis (see the companion node on elliptic functions). This node keeps the real-integral and geometric viewpoint: pendulum periods, ellipse arc length and circumference and related lengths and periods are all expressed through K and E.",
+    "formulas": [
+      {
+        "latex": "K(k)=\\int_0^{\\pi/2}\\frac{d\\theta}{\\sqrt{1-k^2\\sin^2\\theta}}=\\int_0^1\\frac{dt}{\\sqrt{(1-t^2)(1-k^2t^2)}}",
+        "note": "第一类完全椭圆积分（模数约定 k，0≤k<1）；两种积分形式由 t=sinθ 联系。",
+        "noteEn": "Complete elliptic integral of the first kind (modulus k, 0≤k<1); the two forms are linked by t=sinθ."
+      },
+      {
+        "latex": "E(k)=\\int_0^{\\pi/2}\\sqrt{1-k^2\\sin^2\\theta}\\,d\\theta",
+        "note": "第二类完全椭圆积分：椭圆弧长与周长的核心常数；E(0)=π/2，E(1)=1。",
+        "noteEn": "Complete elliptic integral of the second kind: the constant behind ellipse arc length; E(0)=π/2, E(1)=1."
+      },
+      {
+        "latex": "\\Pi(n,k)=\\int_0^{\\pi/2}\\frac{d\\theta}{(1-n\\sin^2\\theta)\\sqrt{1-k^2\\sin^2\\theta}}",
+        "note": "第三类完全椭圆积分：多出一个特征参数 n；n<1 时积分正常，n=1 时端点发散，n>1 需取柯西主值。",
+        "noteEn": "Complete elliptic integral of the third kind: fine for n<1, divergent at the endpoint when n=1, and defined by Cauchy principal value for n>1."
+      },
+      {
+        "latex": "K(0)=E(0)=\\frac{\\pi}{2},\\qquad E(1)=1,\\qquad K(k)\\sim\\ln\\frac{4}{\\sqrt{1-k^2}}\\quad(k\\to1^-)",
+        "note": "端点行为：K 在 k→1⁻ 时对数发散（不是幂次发散），近似式的相对误差随 k 靠近 1 而趋于 0。",
+        "noteEn": "Endpoint behaviour: K diverges logarithmically (not by a power) as k→1⁻; the approximation is relative and improves as k→1."
+      },
+      {
+        "latex": "K(k)=\\frac{\\pi}{2\\,\\operatorname{AGM}\\left(1,\\sqrt{1-k^2}\\right)}",
+        "note": "算术–几何平均（AGM）恒等式：把椭圆积分变成平方根迭代，是数值计算 K 的常用途径；特例 K(1/√2)=Γ(1/4)²/(4√π)≈1.8540746773。",
+        "noteEn": "Arithmetic–geometric mean identity: K becomes a square-root iteration; special value K(1/√2)=Γ(1/4)²/(4√π)≈1.8540746773."
+      }
+    ],
+    "properties": [
+      "单调性与端点值：K(k) 在 [0,1) 上严格递增，从 K(0)=π/2 增至 +∞；E(k) 在 [0,1] 上严格递减，从 E(0)=π/2 减到 E(1)=1。",
+      "发散速率：k→1⁻ 时 K(k)≈ln(4/√(1−k²))=ln(4/k′)；数值对照 k=0.999 时 K=4.4956（近似 4.4938），k=0.9999 时 K=5.6451（近似 5.6449），相对误差随 k→1 趋于 0。",
+      "只依赖模数的平方：K(±k)=K(k)、E(−k)=E(k)；奇异值 K(1/√2)=Γ(1/4)²/(4√π)≈1.8540746773 把椭圆积分与伽马函数联系起来。",
+      "勒让德关系：K(k)E(k′)+E(k)K(k′)−K(k)K(k′)=π/2 对 0<k<1 恒成立；取 k=0.5 数值验证为 2.0415381+3.1646052−3.6353470=1.5707963=π/2。",
+      "不可初等性与求导闭合：由刘维尔定理，K、E 一般不是初等函数，但二者在求导下互相牵连——dK/dk=E/(k(1−k²))−K/k，dE/dk=(E−K)/k（0<k<1）。"
+    ],
+    "propertiesEn": [
+      "Monotonicity and endpoints: K(k) strictly increases on [0,1) from K(0)=π/2 to +∞; E(k) strictly decreases on [0,1] from E(0)=π/2 to E(1)=1.",
+      "Divergence rate: K(k)≈ln(4/√(1−k²))=ln(4/k′) as k→1⁻; numerically K(0.999)=4.4956 versus 4.4938, and K(0.9999)=5.6451 versus 5.6449, with relative error tending to 0.",
+      "Dependence on k²: K(±k)=K(k) and E(−k)=E(k); the singular value K(1/√2)=Γ(1/4)²/(4√π)≈1.8540746773 links elliptic integrals to the gamma function.",
+      "Legendre relation: K(k)E(k′)+E(k)K(k′)−K(k)K(k′)=π/2 for 0<k<1; at k=0.5 the numbers are 2.0415381+3.1646052−3.6353470=1.5707963=π/2.",
+      "Non-elementarity with closed derivatives: by Liouville's theorem K and E are not elementary in general, yet they close under differentiation — dK/dk=E/(k(1−k²))−K/k and dE/dk=(E−K)/k (0<k<1)."
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          0,
+          1.570796
+        ],
+        [
+          0.1,
+          1.574746
+        ],
+        [
+          0.2,
+          1.586868
+        ],
+        [
+          0.3,
+          1.608049
+        ],
+        [
+          0.4,
+          1.64
+        ],
+        [
+          0.5,
+          1.68575
+        ],
+        [
+          0.6,
+          1.750754
+        ],
+        [
+          0.7,
+          1.845694
+        ],
+        [
+          0.8,
+          1.995303
+        ],
+        [
+          0.85,
+          2.109935
+        ],
+        [
+          0.9,
+          2.280549
+        ],
+        [
+          0.95,
+          2.590011
+        ],
+        [
+          0.98,
+          3.02098
+        ],
+        [
+          0.99,
+          3.356601
+        ]
+      ],
+      "marks": [
+        {
+          "at": [
+            0.5,
+            1.68575
+          ],
+          "label": "K(0.5) ≈ 1.686"
+        }
+      ],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        1.4,
+        3.5
+      ],
+      "title": "完全椭圆积分 K(k)：k→1⁻ 时对数发散（k = 0.99 时 K ≈ 3.357）"
+    },
+    "examples": [
+      {
+        "problem": "长为 $L$ 的单摆从最大摆角 $\\theta_0$ 处释放（无阻尼）。证明周期 $T=4\\sqrt{L/g}\\,K\\left(\\sin\\frac{\\theta_0}{2}\\right)$，并计算 $\\theta_0=60^\\circ$ 与 $30^\\circ$ 时 $T/T_0$ 的值（$T_0=2\\pi\\sqrt{L/g}$ 为小角近似周期）。",
+        "solution": "由能量守恒 $\\frac12L\\dot\\theta^2=g(\\cos\\theta-\\cos\\theta_0)$，四分之一周期为 $\\frac{T}{4}=\\sqrt{\\frac{L}{2g}}\\int_0^{\\theta_0}\\frac{d\\theta}{\\sqrt{\\cos\\theta-\\cos\\theta_0}}$。用半角公式并换元 $\\sin\\frac{\\theta}{2}=\\sin\\frac{\\theta_0}{2}\\sin u$，积分化为 $\\sqrt{\\frac{L}{g}}\\int_0^{\\pi/2}\\frac{du}{\\sqrt{1-k^2\\sin^2u}}=\\sqrt{\\frac{L}{g}}\\,K(k)$，其中 $k=\\sin\\frac{\\theta_0}{2}$，于是 $T=4\\sqrt{L/g}\\,K(k)$，即 $T/T_0=\\frac{2}{\\pi}K\\left(\\sin\\frac{\\theta_0}{2}\\right)$。数值（数值积分复算）：$\\theta_0=60^\\circ$ 时 $k=\\sin30^\\circ=0.5$，$K(0.5)=1.6857503548$，$T/T_0=1.0731820$，周期比小角近似长 $7.3\\%$；$\\theta_0=30^\\circ$ 时 $k=\\sin15^\\circ=0.2588190$，$K=1.5981420$，$T/T_0=1.0174088$，只长 $1.7\\%$。当 $\\theta_0\\to180^\\circ$（恰好能摆到最高点附近）时 $k\\to1$，$K$ 对数发散，周期趋于无穷——与「摆在高点附近停留极久」的物理图像一致。"
+      },
+      {
+        "problem": "对椭圆 $x^2/a^2+y^2/b^2=1$（$a\\ge b>0$）：证明周长 $C=4aE(e)$（$e=\\sqrt{1-b^2/a^2}$ 为离心率），并计算 $a=2,\\ b=1$ 的周长，与 Ramanujan 近似 $C\\approx\\pi\\left[3(a+b)-\\sqrt{(3a+b)(a+3b)}\\right]$ 对照。",
+        "solution": "取参数化 $x=a\\sin t,\\ y=b\\cos t$，第一象限的弧长为 $a\\int_0^{\\pi/2}\\sqrt{1-e^2\\cos^2 t}\\,dt=aE(e)$（把 $\\cos t$ 换成 $\\sin t$ 不改变积分值），全周长即 $C=4aE(e)$。取 $a=2,\\ b=1$：$e=\\sqrt{1-\\frac14}=\\frac{\\sqrt3}{2}=0.8660254$，$E(0.8660254)=1.2110560276$（数值积分复算），故 $C=4\\times2\\times1.2110560276=9.6884482205$。Ramanujan 近似：$\\pi\\left[9-\\sqrt{35}\\right]=\\pi\\times3.0839202=9.6884210977$，与精确值只差 $2.7\\times10^{-5}$（相对差约 $2.8\\times10^{-6}$）。**合理性核对**：$2\\pi b=6.2832<C=9.6884<2\\pi a=12.5664$ ✓；当 $a=b=1$ 时 $e=0$，$C=4E(0)=2\\pi$ 退化为圆周长 ✓。"
+      }
+    ],
+    "tags": [
+      "椭圆积分",
+      "完全椭圆积分",
+      "单摆",
+      "椭圆周长",
+      "模数"
+    ],
+    "links": [
+      "elliptic-functions",
+      "improper-integral",
+      "ellipse",
+      "arc-length"
+    ]
+  }
+]

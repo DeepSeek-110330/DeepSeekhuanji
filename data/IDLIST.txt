@@ -571,7 +571,7 @@ algebraic-number-theory
 analytic-number-theory
 rsa-cryptography
 
-## 本批正在生成（22 个，2026-10-16：抽象代数 + 动力系统与分形）
+## 已并入主库（2026-10-16：抽象代数 + 动力系统与分形，22 个）
 
 abstract-algebra（抽象代数）：
 group-definition-examples
@@ -599,3 +599,70 @@ iterated-function-systems
 fractal-dimension
 mandelbrot-julia
 
+## 已并入主库（2026-10-16 晚：特殊函数 + 统计 + 数学史，24 个）
+
+special-functions（特殊函数与数学物理）：
+beta-function
+bessel-functions
+legendre-polynomials
+spherical-harmonics
+orthogonal-polynomials
+error-function
+elliptic-integrals
+stirling-formula
+
+statistics（统计与数据科学）：
+bayesian-inference
+fisher-information
+em-algorithm
+monte-carlo-methods
+bootstrap-resampling
+principal-component-analysis
+time-series-basics
+experimental-design-causality
+
+math-history（数学史与思想）：
+cubic-quartic-history
+group-theory-origins
+non-euclidean-geometry
+rigorization-of-analysis
+cantor-infinity
+hilbert-program-godel
+birth-of-probability
+brouwer-hilbert-controversy
+
+## 本批正在生成（28 个，2026-10-16 深夜：图论 + 数理逻辑与集合论 + 最优化与运筹）
+
+graph-theory（图论）：
+graph-basics
+trees-spanning
+euler-hamilton
+bipartite-matching
+planar-euler-formula
+graph-coloring
+ramsey-theory
+network-flow
+turan-extremal-graph-theory
+
+mathematical-logic（数理逻辑与集合论）：
+propositional-logic
+predicate-logic
+formal-proof-systems
+soundness-completeness
+compactness-theorem
+zfc-axioms
+cardinal-arithmetic
+ordinals-well-ordering
+axiom-of-choice
+computability-turing
+
+optimization-or（最优化与运筹）：
+convex-sets-functions
+convex-optimization
+linear-programming
+lp-duality
+kkt-conditions
+gradient-descent-sgd
+game-theory-nash
+dynamic-programming
+integer-programming

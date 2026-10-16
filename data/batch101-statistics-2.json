@@ -1,0 +1,314 @@
+[
+  {
+    "id": "bootstrap-resampling",
+    "title": "自助法与重采样",
+    "titleEn": "Bootstrap and Resampling",
+    "branch": "statistics",
+    "level": 4,
+    "summary": "把样本当作总体、有放回地反复重采样，用统计量在自助样本间的波动估计标准误并构造置信区间，几乎不依赖分布假设。",
+    "summaryEn": "Treating the sample as a stand-in for the population, resampling with replacement turns the variability of a statistic across resamples into standard errors and confidence intervals with hardly any distributional assumptions.",
+    "definition": "不少估计量的抽样分布没有简单公式：样本均值的标准误是 $s/\\sqrt{n}$，但中位数、分位数、相关系数、$R^2$ 的标准误就没有现成表达式。**自助法（bootstrap）** 的想法是：既然样本能代表总体，就把样本当作总体来「再抽样」——从 $n$ 个观测中**有放回**地抽取 $n$ 个，得到一个自助样本，在每个自助样本上重新计算统计量；反复几千次，统计量取值构成的**自助分布**就近似了它的抽样分布。\n\n更形式化地说，自助法用**经验分布** $\\hat F_n$（把 $1/n$ 的概率放在每个观测上）代替未知的 $F$，重采样就相当于从 $\\hat F_n$ 独立抽取 $n$ 个值——这种「用估计的分布代替真分布」的做法叫**插件原理**。三条操作要点缺一不可：**有放回**（否则每次重采样都等于原样本）、样本量同为 $n$、每次抽取相互独立。\n\n适用条件是数据近似**独立同分布**。对时间序列、聚类、空间数据这类有依赖的样本，普通的逐点重采样会打断依赖结构、低估不确定性，应改用**分块重采样**（取连续的一段作为块再拼接）或整群重采样。此外，自助法只能利用样本里已有的信息：样本没有代表性（非随机抽样、严重无应答）时它无能为力；对样本最大值这类非正则统计量，自助分布甚至可能不收敛。\n\n用自助分布构造区间最常用的方式是**百分位法**：取自助分布的两个分位点作为置信区间的端点。它还常用于估计标准误、做偏差校正、比较两个统计量。与参数方法相比，自助法把「对分布族的假设」换成了「计算量」：只要统计量能在数据上算出来，就能给出它的不确定性；若愿意额外假定分布，也可以从拟合的分布里模拟，这叫**参数自助**。",
+    "definitionEn": "Estimators such as the median, a quantile, a correlation or an $R^2$ seldom have closed-form standard errors. The **bootstrap** replaces the formula by a computer experiment: treat the sample as a stand-in for the population, draw $n$ observations **with replacement** from it, recompute the statistic on each resample, and repeat a few thousand times. The spread of the resulting **bootstrap distribution** approximates the sampling variability of the statistic.\n\nFormally, the bootstrap substitutes the **empirical distribution** $\\hat F_n$ — which puts probability $1/n$ on each observation — for the unknown $F$, and resampling is exactly drawing $n$ values independently from $\\hat F_n$. This is an instance of the **plug-in principle**. Three rules must be respected: draw with replacement, keep the sample size at $n$, and make the draws independent.\n\nThe method requires approximately **iid** data. For time series, clustered or spatial data, plain pointwise resampling destroys the dependence and understates uncertainty; **block** or cluster resampling is needed instead. The bootstrap also cannot create information: an unrepresentative sample stays unrepresentative, and for non-regular statistics such as the sample maximum the bootstrap distribution may fail to converge.\n\nThe **percentile method** is the most common way to turn the bootstrap distribution into an interval: take its two quantiles as endpoints. The bootstrap also delivers standard errors, bias corrections and comparisons of statistics. Compared with parametric theory it trades assumptions for computation: whenever a statistic can be evaluated on data, the bootstrap can attach uncertainty to it; when a distributional family is assumed, one may instead simulate from the fitted distribution — the **parametric bootstrap**.",
+    "formulas": [
+      {
+        "latex": "\\hat F_n(x)=\\frac{1}{n}\\sum_{i=1}^{n}\\mathbf 1_{\\{X_i\\le x\\}}",
+        "note": "经验分布函数：每个观测分得概率 1/n，它是总体的「替身」，自助法的一切都从它出发。",
+        "noteEn": "The empirical distribution function gives each observation probability 1/n; it is the stand-in for the population."
+      },
+      {
+        "latex": "X_1^*,\\dots,X_n^*\\ \\overset{\\text{iid}}{\\sim}\\ \\hat F_n,\\qquad \\hat\\theta^*=\\hat\\theta(X_1^*,\\dots,X_n^*)",
+        "note": "自助样本与自助统计量：有放回、样本量同为 n、抽取相互独立；可能结果有 n^n 种（计次序）。",
+        "noteEn": "The bootstrap sample and bootstrap statistic: draws are with replacement, of size n, mutually independent."
+      },
+      {
+        "latex": "\\widehat{\\mathrm{SE}}_{\\text{boot}}=\\Bigl(\\frac{1}{B-1}\\sum_{b=1}^{B}\\bigl(\\hat\\theta_b^*-\\bar{\\hat\\theta}^{\\,*}\\bigr)^2\\Bigr)^{1/2}",
+        "note": "自助标准误：把 B 次重采样得到的统计量取值看作样本，用它们的标准差估计标准误。",
+        "noteEn": "Bootstrap standard error: the sample standard deviation of the B resampled statistic values."
+      },
+      {
+        "latex": "[\\,\\hat\\theta^*_{\\alpha/2},\\ \\hat\\theta^*_{1-\\alpha/2}\\,]",
+        "note": "百分位置信区间：以自助分布的 α/2 与 1−α/2 分位点为端点；α = 0.05 即 95% 区间。",
+        "noteEn": "Percentile interval: the α/2 and 1−α/2 quantiles of the bootstrap distribution (α = 0.05 for a 95% interval)."
+      },
+      {
+        "latex": "\\operatorname{Var}_{*}(\\bar X^*)=\\frac{1}{n}\\cdot\\frac{1}{n}\\sum_{i=1}^{n}(X_i-\\bar X)^2=\\frac{n-1}{n}\\cdot\\frac{s^2}{n}",
+        "note": "均值这一特例：自助均值的方差 = 经验方差/n；与经典的 s²/n 相差一个因子 (n−1)/n。",
+        "noteEn": "The mean case: the bootstrap variance of the mean equals the empirical variance divided by n, i.e. (n−1)/n times the classical s²/n."
+      }
+    ],
+    "properties": [
+      "插件原理：把样本当作总体的替身、用重采样近似抽样分布，因此不要求总体属于某个分布族——中位数、相关系数、比率、R² 的置信区间都能这样得到。",
+      "前提是数据近似独立同分布；数据有依赖（时间序列、聚类、空间数据）时必须用分块或整群重采样，块长过短仍会低估标准误。",
+      "与参数方法互换假设与计算：参数方法靠分布假设推出公式，自助法只要求能反复计算统计量；B 有限只带来可随意减小的蒙特卡洛误差，与模型误差无关。",
+      "不会创造信息：样本有偏或不能代表总体时，自助分布同样有偏；它也不能修补测量误差与缺失数据造成的偏差。",
+      "对非正则统计量可能失效：样本最大值、最小值的自助分布不收敛，极端分位数在重尾分布下也不可靠；百分位区间只是一阶准确，可用偏差校正法（如 BCa）改进。"
+    ],
+    "propertiesEn": [
+      "Plug-in principle: the sample stands in for the population and resampling approximates sampling distributions, so no distributional family is required — intervals for medians, correlations, ratios and R² all become available.",
+      "The recipe needs approximately iid data; for dependent data (time series, clusters, spatial data) block or cluster resampling is mandatory, and too-short blocks still understate uncertainty.",
+      "It trades assumptions for computation: parametric methods derive formulas from assumptions, while the bootstrap only needs the statistic to be computable; a finite B contributes only Monte Carlo error, which shrinks with B.",
+      "No new information is created: a biased or unrepresentative sample yields a biased bootstrap distribution, and measurement error or missingness is not repaired.",
+      "It can fail for non-regular statistics: the bootstrap distribution of the sample maximum does not converge, extreme quantiles are unreliable in heavy tails, and percentile intervals are only first-order accurate (bias-corrected methods such as BCa improve them)."
+    ],
+    "examples": [
+      {
+        "problem": "某实验室对同一个量测量 5 次，结果为 1、2、3、4、5。用自助法估计样本均值 $\\bar x$ 的标准误，给出 95% 百分位置信区间，并与经典公式 $s/\\sqrt{n}$ 比较。",
+        "solution": "先求基本量：$n=5$，$\\bar x=3$，偏差平方和为 $4+1+0+1+4=10$，经验方差 $=10/5=2$。从经验分布独立抽取 5 个值时，自助均值 $\\bar X^*$ 的方差等于经验方差除以 $n$，即 $2/5=0.4$，故**自助标准误** $=\\sqrt{0.4}\\approx 0.632$。枚举全部 $5^5=3125$ 个自助样本可以验证：自助均值的标准差为 0.6326，与 $\\sqrt{0.4}=0.6325$ 一致，细微差别仅来自 B−1 的分母约定。\n\n经典公式：$s^2=10/4=2.5$，$s/\\sqrt{n}=\\sqrt{2.5/5}=0.7071$。两者相差因子 $\\sqrt{(n-1)/n}=\\sqrt{4/5}$：$0.7071\\times 0.8944\\approx 0.632$，与上面的公式一致——自助法只知道经验方差 2，而经典公式用的是 $s^2=2.5$。\n\n**百分位区间**：自助均值只可能取 $m/5$（$m$ 是 5 次抽取之和，$5\\le m\\le 25$）这些值。按「最小的使累积概率不小于该水平的值」这一离散定义，2.5% 与 97.5% 分位点分别为 1.8 和 4.2，故 95% 百分位区间约为 $[1.8,\\,4.2]$；由于分布离散，该区间实际包含约 96.4% 的自助概率。作为对照，经典 t 区间为 $3\\pm 2.776\\times 0.7071\\approx[1.04,\\,4.96]$。\n\n两点说明：其一，自助均值仍以 $\\bar x=3$ 为中心（$E_*[\\bar X^*]=\\bar x$），这是无偏性的延续；其二，$n=5$ 太小，百分位区间明显偏窄、粗糙（自助分布只知道经验方差，分位数又是离散的）——本例用小样本只是为了能枚举出全部重样本，实际使用至少需要几十个观测。"
+      },
+      {
+        "problem": "AR(1) 序列 $x_t=0.8\\,x_{t-1}+\\varepsilon_t$（$\\varepsilon_t$ 为方差 1 的白噪声），长度 $n=100$。先由理论算出均值的标准误，再比较把序列当作 iid 的普通自助与块长 $L=10$ 的移动分块自助给出的结果。",
+        "solution": "平稳条件下 $\\gamma_0=\\sigma^2/(1-\\varphi^2)=1/(1-0.64)=2.7778$，均值的方差约等于 $\\frac{\\gamma_0}{n}\\cdot\\frac{1+\\varphi}{1-\\varphi}=\\frac{2.7778}{100}\\times 9=0.25$，故**真实标准误 ≈ 0.5**。（等价说法：有效样本量 $n_{\\mathrm{eff}}=n(1-\\varphi)/(1+\\varphi)=100\\times 0.2/1.8\\approx 11.1$，$\\sqrt{\\gamma_0/11.1}=0.5$。）数值检验：模拟 400 条这样的序列，其均值的标准差为 0.499，与理论值吻合。\n\n**把序列当作 iid 重采样**：每条序列上做 400 次普通自助，平均标准误只有 0.157，约为真值的 1/3（量级上等于 $\\sqrt{\\gamma_0/n}=0.167$）——iid 重采样把观测顺序打乱，丢掉了序列的依赖结构，严重低估不确定性。\n\n**移动分块自助**（每次取连续 10 个观测作为块、拼接成新序列）：平均标准误升到 0.343，块长 20 时约 0.352，比普通自助高出一倍多、明显更接近真值 0.5。残存低估来自块长有限；块越长越能保留依赖，但固定 n 下块数减少会增大蒙特卡洛方差，需要折中。结论：**有依赖的数据必须使用分块重采样**，否则置信区间会窄得离谱。"
+      }
+    ],
+    "links": [
+      "statistics-sampling",
+      "sampling-distributions",
+      "interval-estimation",
+      "monte-carlo-methods",
+      "time-series-basics"
+    ],
+    "tags": [
+      "重采样",
+      "标准误",
+      "置信区间",
+      "非参数统计"
+    ]
+  },
+  {
+    "id": "principal-component-analysis",
+    "title": "主成分分析",
+    "titleEn": "Principal Component Analysis",
+    "branch": "statistics",
+    "level": 5,
+    "summary": "主成分分析把中心化后的数据沿方差最大的正交方向重新表示，用少数几个互不相关的主成分完成降维；是否标准化会改变结果。",
+    "summaryEn": "Principal component analysis re-expresses centered data along orthogonal directions of maximal variance, reducing the dimension through a few uncorrelated principal components; standardizing or not changes the answer.",
+    "definition": "变量多且彼此相关时，数据真正的「自由度」往往远小于变量个数。**主成分分析（PCA）** 找出 $p$ 个两两正交的方向 $v_1,\\dots,v_p$：数据投影到 $v_1$ 上的方差最大，投影到 $v_2$ 上的方差次大（且与 $v_1$ 正交），依次类推。这些方向叫**主成分方向**，投影得到的 $z=\\tilde x^{\\top}v_k$ 叫**主成分（得分）**。第一主成分集中了最大的变异性，通常一两个主成分就能保留大部分信息。\n\n计算流程是：先把每个变量**中心化**，再求协方差矩阵，最后做特征分解。中心化不是可选项——不减去均值，最大的就是「离原点的平方和」，数据的整体位置会混进比较，算出的方向一般不再是方差方向。另一个必须交代的选择是**是否标准化**：变量量纲不同或尺度悬殊时，不标准化会让方差最大的那个变量独占第一主成分；标准化（各变量除以自己的标准差）等价于对**相关矩阵**做 PCA。同一批数据用协方差矩阵还是相关矩阵，主方向与方差贡献率都可能不同。\n\n与奇异值分解的关系：对中心化数据矩阵 $\\tilde X$ 作 SVD $\\tilde X=U\\Sigma V^{\\top}$，则 $V$ 的每一列就是主成分方向，得分矩阵为 $U\\Sigma=\\tilde X V$，且 $\\lambda_k=\\sigma_k^2/(n-1)$。因此 PCA 在计算上就是「中心化 + SVD」，数值稳定性也由此而来。\n\n各主成分的方差依次为 $\\lambda_1\\ge\\lambda_2\\ge\\cdots$，第 $k$ 个主成分的**方差贡献率**是 $\\lambda_k/\\sum_j\\lambda_j$；常用累计贡献率（例如达到 85%）或碎石图决定保留几个主成分。PCA 是线性方法：对异常值敏感，也看不穿非线性结构；主成分是「方差最大」的数学方向，未必对应有物理意义的因子，解释时要谨慎。",
+    "definitionEn": "When variables are numerous and correlated, the data often have far fewer effective degrees of freedom than variables. **Principal component analysis (PCA)** finds $p$ mutually orthogonal directions $v_1,\\dots,v_p$ such that the data have maximum variance when projected onto $v_1$, second-largest variance on $v_2$ (orthogonal to $v_1$), and so on. These are the **principal directions**, and the projections $z=\\tilde x^{\\top}v_k$ are the **principal component scores**. The first component captures the most variability, and usually one or two components retain most of the information.\n\nThe recipe is: **center** each variable, form the covariance matrix, and do an eigen-decomposition. Centering is not optional — without subtracting the means the quantity being maximized is the sum of squares about the origin, the data's location leaks into the comparison, and the resulting directions are generally not variance directions. Whether to **standardize** is a second decision that must be stated: when units or scales differ, leaving the data unstandardized lets the largest-variance variable monopolize the first component; standardizing (dividing by each variable's standard deviation) is equivalent to running PCA on the **correlation matrix**. Covariance-based and correlation-based PCA can give different directions and different variance shares.\n\nThe link with the singular value decomposition: if $\\tilde X=U\\Sigma V^{\\top}$, then the columns of $V$ are the principal directions, the score matrix is $U\\Sigma=\\tilde X V$, and $\\lambda_k=\\sigma_k^2/(n-1)$. Computationally, PCA is thus \"centering plus SVD\", which is also why it is numerically stable.\n\nComponent variances decrease, $\\lambda_1\\ge\\lambda_2\\ge\\cdots$, and the **variance share** of the $k$-th component is $\\lambda_k/\\sum_j\\lambda_j$; the cumulative share (say 85%) or a scree plot guides the choice of how many components to keep. PCA is a linear method: it is sensitive to outliers and blind to nonlinear structure. Its directions maximize variance, not meaning, so interpretation must be cautious.",
+    "formulas": [
+      {
+        "latex": "\\tilde X_{ij}=X_{ij}-\\bar x_j\\qquad\\text{或}\\qquad z_{ij}=\\frac{X_{ij}-\\bar x_j}{s_j}",
+        "note": "中心化必须做；第二种写法是标准化，量纲或尺度不同时使用，等价于对相关矩阵做 PCA。",
+        "noteEn": "Centering is mandatory; the second expression standardizes, which is equivalent to using the correlation matrix."
+      },
+      {
+        "latex": "S=\\frac{1}{n-1}\\tilde X^{\\top}\\tilde X",
+        "note": "样本协方差矩阵（p×p，对称半正定）：它把「哪个方向方差大」变成矩阵的特征问题。",
+        "noteEn": "The sample covariance matrix (p×p, symmetric positive semidefinite) turns \"which direction has the most variance\" into an eigenproblem."
+      },
+      {
+        "latex": "S v_k=\\lambda_k v_k,\\qquad \\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_p\\ge 0,\\qquad v_k^{\\top}v_l=\\delta_{kl}",
+        "note": "实对称矩阵可正交对角化：特征值非负、特征向量两两正交；λ_k 就是第 k 个主成分的方差。",
+        "noteEn": "A real symmetric matrix diagonalizes orthogonally: eigenvalues are nonnegative, eigenvectors orthogonal, and λ_k is the variance of the k-th component."
+      },
+      {
+        "latex": "\\text{贡献率}_k=\\frac{\\lambda_k}{\\sum_{j=1}^{p}\\lambda_j}",
+        "note": "方差贡献率 = 该主成分方差占全部方差的比例；累计贡献率用于决定保留几个主成分。",
+        "noteEn": "The variance share is λ_k over the total variance; cumulative shares guide dimension selection."
+      },
+      {
+        "latex": "\\tilde X=U\\Sigma V^{\\top},\\qquad \\lambda_k=\\frac{\\sigma_k^{2}}{n-1},\\qquad Z=\\tilde X V=U\\Sigma",
+        "note": "与 SVD 的关系：主方向是 V 的列，得分是 UΣ；计算上 PCA = 中心化 + SVD。",
+        "noteEn": "Relation to the SVD: principal directions are the columns of V and scores are UΣ, so PCA equals centering plus SVD."
+      }
+    ],
+    "properties": [
+      "主成分两两正交、方差依次递减；不同主成分的得分之间样本协方差为 0，即主成分互不相关。",
+      "最优性：在一切单位方向中 v₁ 使投影方差最大；前 k 个主成分张成的子空间在所有 k 维线性子空间中保留的方差最多、平方重构误差最小（Eckart–Young 定理）。",
+      "中心化必须做；是否标准化是另一项必须交代的选择：量纲不同或尺度悬殊时先标准化（用相关矩阵），否则大尺度变量会主导第一主成分。",
+      "对异常值敏感的线性方法：一个远离主体的点足以把主方向拉向自己；变量之间的非线性关系 PCA 可能识别不出来。",
+      "特征值之和等于总方差；出现相等特征值时对应方向不唯一——在对应的特征子空间内任取一组正交基都是合法的主成分。"
+    ],
+    "propertiesEn": [
+      "Principal components are mutually orthogonal with decreasing variances, and the scores of different components are sample-uncorrelated.",
+      "Optimality: among all unit directions v₁ maximizes projected variance, and the span of the first k components retains the most variance over all k-dimensional linear subspaces, minimizing squared reconstruction error (Eckart–Young).",
+      "Centering is mandatory, and standardizing is a second choice that must be stated: for differing units or scales, standardize first (use the correlation matrix), otherwise the largest-scale variable dominates the first component.",
+      "A linear method sensitive to outliers: a single distant point can pull a principal direction toward itself, and nonlinear relations between variables may be invisible to PCA.",
+      "The eigenvalues sum to the total variance; when eigenvalues tie, the corresponding directions are not unique — any orthonormal basis of that eigenspace is admissible."
+    ],
+    "examples": [
+      {
+        "problem": "对 4 个观测 $(1,1)$、$(2,3)$、$(3,2)$、$(4,4)$ 做 PCA：写出协方差矩阵、两个主成分方向、方差与贡献率，并用 SVD 验证。",
+        "solution": "**中心化**：$\\bar x_1=\\bar x_2=2.5$，偏差为 $(-1.5,-1.5)$、$(-0.5,0.5)$、$(0.5,-0.5)$、$(1.5,1.5)$。\n\n**协方差矩阵**：$S_{11}=S_{22}=\\frac{2.25+0.25+0.25+2.25}{3}=\\frac{5}{3}$，$S_{12}=\\frac{2.25-0.25-0.25+2.25}{3}=\\frac{4}{3}$，即 $S=\\frac{1}{3}\\begin{pmatrix}5&4\\\\4&5\\end{pmatrix}$。\n\n**特征分解**：$(\\frac{5}{3}-\\lambda)^2-(\\frac{4}{3})^2=0\\Rightarrow\\lambda=\\frac{5}{3}\\pm\\frac{4}{3}$，得 $\\lambda_1=3$、$\\lambda_2=\\frac{1}{3}$；特征向量 $v_1=(1,1)/\\sqrt{2}$、$v_2=(1,-1)/\\sqrt{2}$。**贡献率** $=\\frac{3}{10/3}=90\\%$ 与 $\\frac{1/3}{10/3}=10\\%$。第一主成分是两个变量的等权和（二者相关系数 $r=\\frac{4/3}{5/3}=0.8$，高度正相关），第二主成分是它们之差；只保留第一主成分仅损失 10% 的方差。\n\n**得分检验**：$z_1=\\tilde X v_1$ 的取值为 $-3/\\sqrt{2}$、$0$、$0$、$3/\\sqrt{2}$，样本方差 $=\\frac{4.5+0+0+4.5}{3}=3=\\lambda_1$ ✓。\n\n**SVD 对照**：中心化矩阵的奇异值为 $\\sigma_1=\\sqrt{3\\lambda_1}=3$、$\\sigma_2=\\sqrt{3\\lambda_2}=1$，满足 $\\lambda_k=\\sigma_k^2/(n-1)$ ✓。"
+      },
+      {
+        "problem": "在同一批数据上把第二个变量 $y$ 的数值放大 1000 倍（相当于把它的单位换成原来的千分之一）再做 PCA：(a) 不标准化时会得到什么？(b) 若先把两个变量都标准化呢？",
+        "solution": "(a) 放大后的协方差矩阵为 $S'=\\frac{1}{3}\\begin{pmatrix}5&4000\\\\4000&5\\times 10^{6}\\end{pmatrix}$。由 $\\lambda_1\\lambda_2=\\det S'=10^{6}$ 与 $\\lambda_1+\\lambda_2=\\mathrm{tr}\\,S'\\approx 1.6667\\times 10^{6}$ 解得 $\\lambda_1\\approx 1.6667\\times 10^{6}$、$\\lambda_2\\approx 0.6$。贡献率分别约 **99.999964%** 与 0.000036%，第一特征向量 $\\approx(0.0008,\\,1.0000)$——第一主成分几乎完全指向 $y$：放大后的 $y$ 方差压倒一切，两个变量共同的信息被淹没。\n\n(b) 标准化让每个变量回到同尺度，等价于分解**相关矩阵** $R=\\begin{pmatrix}1&0.8\\\\0.8&1\\end{pmatrix}$，其特征值为 $1+0.8=1.8$ 与 $1-0.8=0.2$，贡献率回到 90% 与 10%，第一主方向在标准尺度上仍是 $(1,1)/\\sqrt{2}$。\n\n结论：**标准化与否会改变主方向与贡献率**。量纲不一致时通常用相关矩阵；报告 PCA 结果时必须写清分解的是协方差矩阵还是相关矩阵，否则结果无法复现。"
+      }
+    ],
+    "links": [
+      "eigenvalue-eigenvector",
+      "symmetric-matrix-diagonalization",
+      "matrix-factorization",
+      "covariance-correlation",
+      "least-squares-fitting"
+    ],
+    "tags": [
+      "降维",
+      "特征值",
+      "协方差矩阵",
+      "数据科学"
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [[1, 1], [2, 3], [3, 2], [4, 4]],
+      "lines": [
+        { "slope": 1, "intercept": 0, "color": "#ff6b9d", "label": "第一主成分方向 (1,1)/√2" },
+        { "slope": -1, "intercept": 5, "color": "#ffd166", "label": "第二主成分方向 (1,−1)/√2" }
+      ],
+      "marks": [{ "at": [2.5, 2.5], "label": "重心 (2.5, 2.5)" }],
+      "xRange": [0, 5.5],
+      "yRange": [-0.5, 5.5],
+      "title": "主成分方向：过重心的两条正交轴（方差 3 与 1/3）"
+    }
+  },
+  {
+    "id": "time-series-basics",
+    "title": "时间序列初步",
+    "titleEn": "Basics of Time Series",
+    "branch": "statistics",
+    "level": 5,
+    "summary": "时间序列是按时间编号的随机变量族；平稳性、自相关函数与 AR(1) 模型是描述其记忆结构并做预测的起点。",
+    "summaryEn": "A time series is a family of random variables indexed by time; stationarity, the autocorrelation function and the AR(1) model are the starting point for describing its memory and forecasting it.",
+    "definition": "与「独立抽取」的样本不同，时间序列的观测按时间排列、彼此相关。把一串观测 $\\{x_t\\}$ 看作某个随机过程的一条轨道；分析的目标通常是三类：描述结构（趋势、季节、周期、随机波动）、预测未来、以及控制与干预。第一步往往是把序列分解成**趋势 + 季节性 + 随机波动**，再研究剩余部分的依赖结构。\n\n**平稳性**是时间序列分析的核心假设。**严平稳**要求任意有限维联合分布对时间平移不变；**宽平稳**（又叫协方差平稳）只要求均值是常数、自协方差只依赖时间差。宽平稳是绝大多数工具的用武之地：严平稳加二阶矩有限可以推出宽平稳，反之不成立（对高斯过程两者等价）。直观地说，平稳意味着统计规律不随时间漂移，历史数据才能用来推断未来。\n\n**自协方差与自相关函数（ACF）** 刻画记忆：$\\gamma(k)=\\operatorname{Cov}(x_t,x_{t+k})$ 在宽平稳下与 $t$ 无关，标准化后 $\\rho(k)=\\gamma(k)/\\gamma(0)$。样本 ACF 图是最常用的诊断工具：衰减快说明记忆短；衰减极慢说明有趋势或接近单位根。最简单的平稳序列是**白噪声**：零均值、常数方差、不同时刻互不相关（对应常数谱密度）；白噪声没有可利用的记忆，除了均值之外不可预测，它是模型的「原料」。\n\n最基础的模型是**一阶自回归 AR(1)**：$x_t=\\phi x_{t-1}+\\epsilon_t$。它存在平稳因果解当且仅当 $|\\phi|<1$；平稳时方差为 $\\sigma^2/(1-\\phi^2)$，ACF 按 $\\phi^{|k|}$ 指数衰减。$\\phi$ 越接近 1 记忆越长；$\\phi=1$ 退化为随机游走，方差随时间线性增长、不平稳。带常数项的版本 $x_t=c+\\phi x_{t-1}+\\epsilon_t$ 平稳均值为 $c/(1-\\phi)$。预测也很简单：一步预测 $\\hat x_{t+1}=\\phi x_t$，$h$ 步预测 $\\phi^h x_t$ 逐渐收缩到均值。",
+    "definitionEn": "Unlike an iid sample, a time series is ordered in time and its observations are correlated. One regards the data $\\{x_t\\}$ as a single trajectory of an underlying stochastic process, and analysis usually has three goals: describing structure (trend, seasonality, cycles, irregular noise), forecasting the future, and control or intervention. A first step is often to decompose the series into **trend + seasonal + irregular** parts and then study the dependence in what remains.\n\n**Stationarity** is the central assumption. **Strict stationarity** requires every finite-dimensional joint distribution to be invariant under time shifts; **weak stationarity** (also called covariance stationarity) only asks for a constant mean and an autocovariance that depends solely on the lag. Weak stationarity is where most tools live: strict stationarity with finite second moments implies weak stationarity, but not conversely (for Gaussian processes the two coincide). Intuitively, stationarity means the statistical law does not drift over time, so the past can inform the future.\n\nThe **autocovariance and the autocorrelation function (ACF)** encode memory: $\\gamma(k)=\\operatorname{Cov}(x_t,x_{t+k})$ does not depend on $t$ under weak stationarity, and $\\rho(k)=\\gamma(k)/\\gamma(0)$. The sample ACF plot is the standard diagnostic: fast decay means short memory, extremely slow decay signals trend or a near-unit root. The simplest stationary series is **white noise**: zero mean, constant variance, uncorrelated across time (equivalently a constant spectral density). White noise carries no usable memory and is unpredictable beyond its mean; it is the raw material of models.\n\nThe basic model is the **first-order autoregression, AR(1)**: $x_t=\\phi x_{t-1}+\\epsilon_t$. A stationary causal solution exists exactly when $|\\phi|<1$; then the variance is $\\sigma^2/(1-\\phi^2)$ and the ACF decays exponentially as $\\phi^{|k|}$. The closer $\\phi$ is to 1, the longer the memory; $\\phi=1$ degenerates to a random walk whose variance grows linearly, which is not stationary. With a constant term, $x_t=c+\\phi x_{t-1}+\\epsilon_t$ has stationary mean $c/(1-\\phi)$. Forecasting is easy: $\\hat x_{t+1}=\\phi x_t$ one step ahead, and $\\phi^h x_t$ for $h$ steps, shrinking toward the mean.",
+    "formulas": [
+      {
+        "latex": "x_t=\\phi x_{t-1}+\\epsilon_t,\\qquad \\epsilon_t\\sim \\mathrm{WN}(0,\\sigma^2)",
+        "note": "AR(1)：今天的值由昨天的值乘以系数 φ 加上今天的噪声决定；白噪声 ε 零均值、方差 σ²、互不相关。",
+        "noteEn": "AR(1): today's value is φ times yesterday's plus today's noise; white noise has mean 0, variance σ², and is uncorrelated."
+      },
+      {
+        "latex": "x_t=\\sum_{k=0}^{\\infty}\\phi^{k}\\epsilon_{t-k}\\qquad (|\\phi|<1)",
+        "note": "平稳（因果）解：现在的值写成过去噪声的指数加权和；只有当 |φ|<1 时才存在这样的平稳解，|φ|≥1 时没有。",
+        "noteEn": "The stationary (causal) solution expresses today's value as an exponentially weighted sum of past noise; it exists exactly when |φ|<1."
+      },
+      {
+        "latex": "\\gamma(k)=\\operatorname{Cov}(x_t,x_{t+k}),\\qquad \\rho(k)=\\frac{\\gamma(k)}{\\gamma(0)}",
+        "note": "自协方差与自相关函数：宽平稳下 γ(k) 与 t 无关；ρ(0)=1、ρ(−k)=ρ(k)，衰减速度反映记忆长度。",
+        "noteEn": "Autocovariance and autocorrelation: under weak stationarity γ(k) is free of t, and the rate of decay measures memory."
+      },
+      {
+        "latex": "\\gamma_0=\\frac{\\sigma^{2}}{1-\\phi^{2}},\\qquad \\gamma(k)=\\phi^{|k|}\\gamma_0,\\qquad \\rho(k)=\\phi^{|k|}",
+        "note": "AR(1) 的核心公式：由方差递推 γ₀=φ²γ₀+σ² 得到；自相关按 φ^|k| 指数衰减，φ 越接近 1 记忆越长。",
+        "noteEn": "The core AR(1) formulas, from the recursion γ₀ = φ²γ₀ + σ²; the ACF decays geometrically."
+      },
+      {
+        "latex": "x_t=x_{t-1}+\\epsilon_t\\ \\Longrightarrow\\ \\operatorname{Var}(x_t)=t\\,\\sigma^{2}\\quad(x_0=0)",
+        "note": "随机游走（φ=1）：方差随时间线性增长，不平稳；一阶差分 Δx_t=ε_t 是白噪声，差分把单位根序列变回平稳。",
+        "noteEn": "The random walk (φ=1) has variance growing linearly in t and is not stationary; its first difference is white noise."
+      }
+    ],
+    "properties": [
+      "严平稳要求全部有限维分布对时间平移不变，宽平稳只要求前两阶矩成立（常数均值 + 只依赖滞后的自协方差）；严平稳加二阶矩有限推出宽平稳，反之不然，高斯过程下两者等价。",
+      "ACF 的通用性质：ρ(0)=1、ρ(−k)=ρ(k)、|ρ(k)|≤1；衰减速度度量记忆长度——AR(1) 恰为 φ^|k|，指数衰减是最典型的形态。",
+      "白噪声只要求互不相关，不要求相互独立：独立白噪声是更强的概念；只有当噪声是高斯的（或已知联合分布）时，不相关才与独立等价。",
+      "时间序列不能当作 iid 样本使用：均值的标准误不再是 s/√n，自相关越强「有效样本量」越小；估计、检验与自助法（分块重采样）都要为依赖结构做修正。",
+      "平稳性可以靠变换获得：差分消除趋势或单位根，对数与方差稳定变换处理波动扩张；但差分过度会引入人为的相关结构（常表现为负的滞后一阶自相关），差分次数要适度。"
+    ],
+    "propertiesEn": [
+      "Strict stationarity requires all finite-dimensional distributions to be shift-invariant; weak stationarity only constrains the first two moments (constant mean, lag-only autocovariance). Strict plus finite second moments implies weak, not conversely; for Gaussian processes the two coincide.",
+      "General ACF facts: ρ(0)=1, ρ(−k)=ρ(k), |ρ(k)|≤1; the decay rate measures memory, AR(1) giving exactly φ^|k|.",
+      "White noise demands only uncorrelatedness, not independence: independent white noise is strictly stronger, and the two coincide only for Gaussian (or otherwise fully specified) noise.",
+      "A time series is not an iid sample: the standard error of its mean is no longer s/√n, strong autocorrelation shrinks the effective sample size, and estimation, testing and resampling (block bootstrap) must all account for dependence.",
+      "Stationarity can be engineered: differencing removes trends or unit roots, and logs or variance-stabilizing transforms tame expanding fluctuations; over-differencing, however, injects artificial dependence, typically negative lag-one autocorrelation."
+    ],
+    "examples": [
+      {
+        "problem": "设 AR(1) 序列 $x_t=\\frac{1}{2}x_{t-1}+\\epsilon_t$，$\\epsilon_t$ 为方差 1 的白噪声。求平稳解（若存在）的均值、方差、$\\rho(1)$ 与 $\\rho(2)$，并用数值实验检验。",
+        "solution": "**平稳性**：$|\\varphi|=\\frac{1}{2}<1$，存在平稳解。白噪声均值为 0，平稳时对递推式取期望得 $\\mu=\\frac{1}{2}\\mu$，故 $\\mu=0$。\n\n**方差**：两边取方差时只需用到 $\\epsilon_t$ 与过去的一切不相关（白噪声的定义即给出；独立是更强的充分条件）：$\\operatorname{Var}(x_t)=\\varphi^2\\operatorname{Var}(x_{t-1})+\\sigma^2+2\\varphi\\operatorname{Cov}(x_{t-1},\\epsilon_t)=\\frac{1}{4}\\gamma_0+1$，平稳时 $\\gamma_0$ 与 $t$ 无关，于是 $\\gamma_0=\\frac{4}{3}\\approx 1.3333$。\n\n**自相关**：$\\gamma(1)=\\operatorname{Cov}(x_t,\\varphi x_t+\\epsilon_{t+1})=\\varphi\\gamma_0=\\frac{2}{3}$，故 $\\rho(1)=\\frac{\\gamma(1)}{\\gamma_0}=\\varphi=\\frac{1}{2}$；一般地 $\\rho(k)=\\varphi^{|k|}=2^{-|k|}$，$\\rho(2)=\\frac{1}{4}$。\n\n**数值检验**：模拟 40 万步，样本方差为 1.335，滞后 1、2 的样本自相关为 0.501 与 0.252，与理论值 1.3333、0.5、0.25 一致 ✓。"
+      },
+      {
+        "problem": "随机游走 $x_t=x_{t-1}+\\epsilon_t$（$x_0=0$，$\\epsilon_t$ 为方差 1 的白噪声）：求 $\\operatorname{Var}(x_t)$，判断它是否平稳，并说明一阶差分后的行为。",
+        "solution": "把递推式反复代入：$x_t=\\epsilon_1+\\epsilon_2+\\cdots+\\epsilon_t$。由白噪声的零均值与两两不相关，$E[x_t]=0$，$\\operatorname{Var}(x_t)=\\operatorname{Var}(\\epsilon_1)+\\cdots+\\operatorname{Var}(\\epsilon_t)=t\\sigma^2=t$。方差随 $t$ 无限增长，因此**不是宽平稳**——这也与 $\\varphi=1$ 不满足 $|\\varphi|<1$ 的条件一致：随机游走没有平稳解，初值的影响永远不消退。\n\n**数值检验**：模拟 2 万条路径，$E[x_{100}^2]=100.5$、$E[x_{1000}^2]=1013$，与理论值 100、1000 一致 ✓——波动范围随时间单调扩张。\n\n**差分**：$\\Delta x_t=x_t-x_{t-1}=\\epsilon_t$ 是白噪声，均值与方差都不随时间变化，平稳。这就是「差分消除单位根」的由来。反过来要注意过度差分：序列本来就平稳时再差分，会引入人为的相关结构。"
+      }
+    ],
+    "links": [
+      "stationarity",
+      "white-noise-spectral",
+      "stochastic-process",
+      "bootstrap-resampling",
+      "regression-analysis"
+    ],
+    "tags": [
+      "时间序列",
+      "平稳性",
+      "自相关",
+      "预测"
+    ]
+  },
+  {
+    "id": "experimental-design-causality",
+    "title": "实验设计与因果推断初步",
+    "titleEn": "Experimental Design and Causal Inference",
+    "branch": "statistics",
+    "level": 4,
+    "summary": "随机化把处理分配与潜在混杂切断，配合对照组与盲法识别因果效应；观察研究只能调整已测量的混杂，相关不等于因果。",
+    "summaryEn": "Randomization breaks the link between treatment assignment and potential confounders, so that controls and blinding can identify causal effects; observational studies can adjust only measured confounders, and association is not causation.",
+    "definition": "「相关不等于因果」的准确含义是：两个变量相关，可能是因为其一引起了另一个，可能是因为第三个变量（**混杂变量**）同时影响二者，也可能来自抽样或观测方式的选择效应。因果问题的标准表述建立在**潜在结果**上：对每个个体，记 $Y(1)$ 为接受处理时会出现的结果、$Y(0)$ 为未接受处理时会出现的结果，个体因果效应就是 $Y(1)-Y(0)$。\n\n因果推断的根本困难在于：同一个个体在同一时刻只能处于一种状态，$Y(1)$ 与 $Y(0)$ 至多观测到一个，另一个是**反事实**。于是个体因果效应原则上不可观测，能估计的只是群体层面的量，例如**平均处理效应** $\\tau=E[Y(1)-Y(0)]$。因果推断本质上是一个缺失数据问题：谁接受了处理（分配机制）决定了哪些量可以被识别。\n\n**随机化实验**是识别因果的金标准：把个体**随机**分配到处理组与对照组后，处理分配与潜在结果独立，也与一切混杂变量独立（无论可测量还是不可测量）；因此两组观测均值之差是 $\\tau$ 的无偏估计。设计上还要配**对照组**（控制自然变化与安慰剂效应）与**盲法**（受试者、评估者不知道分组，减少心理暗示与测量偏差；两边都不知情称为双盲），并保证足够的样本量与随机分组的完整执行。\n\n很多问题无法做实验（伦理、成本、时间），只能用**观察研究**，而处理组与对照组本来就不同，混杂无法回避。分层、回归调整、倾向得分可以控制**已测量**的混杂，但无法排除未测量混杂；此时的结论只能说「在调整了若干变量后仍相关」，不能宣称证明了因果。辛普森悖论更提醒我们：同一批数据，分层结论与合并结论可能相反——不看分配机制、只盯汇总数字，甚至可能把方向都搞错。",
+    "definitionEn": "The precise meaning of \"association is not causation\" is this: two variables may be associated because one causes the other, because a third variable — a **confounder** — influences both, or because of selection effects in how data were collected. The standard formulation of causal questions uses **potential outcomes**: for each individual let $Y(1)$ be the outcome that would arise under treatment and $Y(0)$ the outcome without it; the individual causal effect is $Y(1)-Y(0)$.\n\nThe **fundamental difficulty** of causal inference is that an individual can be observed in only one state at a time: of $Y(1)$ and $Y(0)$ at most one is seen, the other being **counterfactual**. Individual effects are therefore unobservable in principle; only population quantities such as the **average treatment effect** $\\tau=E[Y(1)-Y(0)]$ can be estimated. Causal inference is thus a missing-data problem in disguise: the assignment mechanism decides which quantities are identifiable.\n\nA **randomized experiment** is the gold standard: once individuals are randomly assigned to treatment and control, treatment is independent of the potential outcomes and of every confounder, measured or not, so the difference of the two group means is an unbiased estimate of $\\tau$. Sound design adds a **control group** (to absorb natural change and placebo effects) and **blinding** (subjects and evaluators unaware of the assignment, reducing suggestion and measurement bias; both unaware is double blinding), plus adequate sample size and faithful execution of the randomization.\n\nMany questions cannot be randomized (ethics, cost, time), leaving **observational studies** where treated and untreated groups differ by construction and confounding is unavoidable. Stratification, regression adjustment and propensity scores can control **measured** confounders only; unmeasured confounding cannot be excluded, so conclusions are limited to \"associated after adjusting for certain variables\", not proven causation. Simpson's paradox, in which stratified and pooled conclusions point in opposite directions, warns that staring at a grand total while ignoring the assignment mechanism can even get the sign wrong.",
+    "formulas": [
+      {
+        "latex": "\\tau_i=Y_i(1)-Y_i(0)",
+        "note": "个体因果效应由同一人的两个潜在结果定义；每个个体至多观测其中一个，τ_i 原则上无法直接计算。",
+        "noteEn": "The individual causal effect compares two potential outcomes of the same person; at most one is observed, so τ_i is uncomputable in principle."
+      },
+      {
+        "latex": "Y_i=Z_i\\,Y_i(1)+(1-Z_i)\\,Y_i(0),\\qquad Z_i\\in\\{0,1\\}",
+        "note": "观测到的结果等于被分配到的那个潜在结果；这一步依赖「处理只有一种版本、个体之间无干扰」（SUTVA/一致性假设）。",
+        "noteEn": "The observed outcome is the potential outcome selected by the assignment; this relies on a single version of treatment and no interference (SUTVA/consistency)."
+      },
+      {
+        "latex": "\\tau=\\mathbb{E}[Y(1)-Y(0)]=\\mathbb{E}[Y(1)]-\\mathbb{E}[Y(0)]",
+        "note": "平均处理效应（ATE）：群体层面的因果量；期望的线性性把差的期望拆成期望之差。",
+        "noteEn": "The average treatment effect (ATE), a population-level causal quantity; linearity splits the expectation of the difference."
+      },
+      {
+        "latex": "Z\\perp\\!\\!\\perp\\{Y(0),Y(1)\\}\\ \\Longrightarrow\\ \\mathbb{E}[Y\\mid Z=1]-\\mathbb{E}[Y\\mid Z=0]=\\tau",
+        "note": "随机化保证分配独立于潜在结果，于是组间均值差无偏地估计 τ；观察研究里该独立性不成立，差值变成 τ 加混杂偏差。",
+        "noteEn": "Randomization makes assignment independent of the potential outcomes, so the difference in group means is unbiased for τ; without it the difference equals τ plus confounding bias."
+      },
+      {
+        "latex": "\\bar r=\\sum_{s}\\frac{n_s}{n}\\,\\bar r_s",
+        "note": "合并率是分层率的加权平均：各层权重 n_s/n 不同，合并结论可以与每一层的结论都相反——这就是辛普森悖论。",
+        "noteEn": "A pooled rate is a weighted average of stratum rates; unequal weights n_s/n let the pooled conclusion contradict every stratum — Simpson's paradox."
+      }
+    ],
+    "properties": [
+      "随机化在期望意义下消除系统性混杂（包括未测量的变量），使组间结果差异可以归因于处理；这正是随机对照试验被称为金标准的原因。",
+      "对照组控制时间趋势与安慰剂效应；盲法减少心理暗示与测量偏差，双盲同时遮蔽受试者与评估者（有时还包括数据收集与分析者）。",
+      "观察研究只能调整已测量的混杂（分层、回归、倾向得分）；存在未测量混杂时，观察到的差别不能等同于因果效应。",
+      "潜在结果框架把因果推断变成缺失数据问题：个体效应永远不可知，可估计的是群体量（ATE、按协变量分层的条件平均效应）；随机分配与自选择（如按病情用药）暴露出的量完全不同。",
+      "辛普森悖论提醒：分层结论与合并结论可能相反，根源是不同的层权重；报告因果结论必须写清比较对象、分层方式与控制了的变量。"
+    ],
+    "propertiesEn": [
+      "Randomization removes systematic confounding in expectation, including from unmeasured variables, so differences between groups can be attributed to the treatment — the reason randomized controlled trials are the gold standard.",
+      "A control group absorbs temporal trends and placebo effects, while blinding curbs suggestion and measurement bias; double blinding hides the assignment from both subjects and evaluators (sometimes analysts as well).",
+      "Observational studies can adjust only measured confounders (stratification, regression, propensity scores); with unmeasured confounding, an observed difference is not a causal effect.",
+      "The potential-outcomes framework recasts causal inference as a missing-data problem: individual effects are never knowable, only population quantities such as the ATE or covariate-conditional effects; random assignment and self-selection (say, treating the sickest first) expose very different quantities.",
+      "Simpson's paradox warns that stratified and pooled conclusions may conflict because the stratum weights differ; causal claims must state the comparison, the stratification, and the variables that were controlled."
+    ],
+    "examples": [
+      {
+        "problem": "某种疾病有两种治疗方案 A、B，按病情分重症与轻症两层，成功率（构造的示例数据）如下。A：重症 60/100 = 60%，轻症 18/20 = 90%，合计 78/120；B：重症 10/20 = 50%，轻症 80/100 = 80%，合计 90/120。问：A、B 谁更有效？为什么合并比较会给出相反印象？",
+        "solution": "**逐层比较**：重症组 A 的 60% 高于 B 的 50%，轻症组 A 的 90% 高于 B 的 80%——A 在每一层都高出 10 个百分点。**合并比较**：A = 78/120 = 65%，B = 90/120 = 75%，反而是 B 更好。\n\n矛盾来自各层权重：A 的 120 例中重症占 100/120 ≈ 83.3%，而 B 的 120 例中重症只占 20/120 ≈ 16.7%。重症本身成功率低，把 A 的整体数字拖了下来。用加权平均写清楚：A 的合并率 = 0.8333×0.60 + 0.1667×0.90 = 0.65，B 的合并率 = 0.1667×0.50 + 0.8333×0.80 = 0.75——权重不同，两个加权平均就不可比。\n\n机制上，如果医生按病情选择方案（病情影响处理分配），病情就是**混杂变量**；控制它的办法是分层比较（本例中 A 每层都更好），或直接做随机化实验，让两组的病情构成在期望上相同。需要说明：以上数字是为展示机制构造的示例，不是真实临床试验数据。"
+      },
+      {
+        "problem": "4 位病人的潜在结果（康复评分）为：P1（重症）Y(0)=0.2、Y(1)=0.4；P2（重症）Y(0)=0.1、Y(1)=0.2；P3（轻症）Y(0)=0.8、Y(1)=0.9；P4（轻症）Y(0)=0.7、Y(1)=0.8。(i) 求 ATE；(ii) 若医生把两位重症病人分到新疗法、两位轻症留在对照组，观察到的组间差是多少？(iii) 若改为随机选 2 人接受处理，列出全部 6 种分配的组间差并求平均。",
+        "solution": "(i) 个体效应为 0.4−0.2 = 0.2、0.2−0.1 = 0.1、0.9−0.8 = 0.1、0.8−0.7 = 0.1，故 $\\tau=\\frac{0.2+0.1+0.1+0.1}{4}=0.125$：新疗法对**每个人**都有效（+0.1 到 +0.2）。\n\n(ii) 处理组观测到 P1、P2 的 $Y(1)$：$\\frac{0.4+0.2}{2}=0.30$；对照组观测到 P3、P4 的 $Y(0)$：$\\frac{0.8+0.7}{2}=0.75$；组间差 $=0.30-0.75=-0.45$。新疗法看起来「有害」，但差距全部来自**混杂**——重症病人本来恢复评分就低，被分到处理组后把处理组均值拉低了。\n\n(iii) 处理组分别取 {P1,P2}、{P1,P3}、{P1,P4}、{P2,P3}、{P2,P4}、{P3,P4} 时，组间差依次为 −0.45、0.25、0.15、0.10、0.00、0.70，平均 $=\\frac{-0.45+0.25+0.15+0.10+0.00+0.70}{6}=\\frac{0.75}{6}=0.125=\\tau$。随机化不保证每次分配都接近真值（例如此处最不利的一种得到 −0.45），但**平均无偏**；实际实验再配合样本量、重复与统计推断（置信区间、假设检验）来控制单次实验的随机误差。"
+      }
+    ],
+    "links": [
+      "statistics-sampling",
+      "hypothesis-testing",
+      "regression-analysis",
+      "chi-square-anova",
+      "data-collection"
+    ],
+    "tags": [
+      "因果推断",
+      "随机化",
+      "混杂变量",
+      "潜在结果"
+    ]
+  }
+]

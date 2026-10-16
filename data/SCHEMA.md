@@ -75,6 +75,12 @@
 | vector | 向量与空间 | Vectors & Space |
 | abstract-algebra | 抽象代数 | Abstract Algebra |
 | dynamical-systems | 动力系统与分形 | Dynamical Systems & Fractals |
+| special-functions | 特殊函数与数学物理 | Special Functions & Mathematical Physics |
+| statistics | 统计与数据科学 | Statistics & Data Science |
+| math-history | 数学史与思想 | History & Ideas of Mathematics |
+| graph-theory | 图论 | Graph Theory |
+| mathematical-logic | 数理逻辑与集合论 | Mathematical Logic & Set Theory |
+| optimization-or | 最优化与运筹 | Optimization & Operations Research |
 
 ## 绘图规范（plot）
 

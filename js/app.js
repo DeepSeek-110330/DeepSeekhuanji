@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=20";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=20";
+import { renderPlot } from "./plot.js?v=24";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=24";
 
 /* ============================================================
    1. 全局状态
@@ -24,6 +24,9 @@ let currentNode = null; // 当前打开的知识点
 let panelHistory = []; // 面板浏览历史（「返回上一个」用）
 let currentLang = "zh"; // zh | en  —— 面板语言
 let armAngles = []; // 旋臂基础角度（由 computePositions 填充）
+let armLabels = []; // 旋臂名称漂浮标签
+let pulseIdx = []; // 搜索结果脉冲高亮的下标
+let pulseT0 = 0;   // 脉冲起始时刻
 
 /* ============================================================
    2. 加载数据
@@ -609,6 +612,16 @@ function refreshHighlights() {
   const values = new Float32Array(starLayer.count);
   if (selectedIndex >= 0) values[selectedIndex] = 0.9;
   if (hoveredIndex >= 0) values[hoveredIndex] = Math.max(values[hoveredIndex], 1.6);
+  if (pulseT0) {
+    const age = (performance.now() - pulseT0) / 1000;
+    if (age > 1.8) {
+      pulseT0 = 0;
+      pulseIdx = [];
+    } else {
+      const k = (1 - age / 1.8) * Math.abs(Math.sin(age * Math.PI * 3)) * 1.4;
+      for (const i of pulseIdx) values[i] = Math.max(values[i], k);
+    }
+  }
   starLayer.setHighlightArray(values);
   updateLinkColors(); // 悬停时的「脉络高亮」
 }
@@ -720,8 +733,70 @@ panelContent.addEventListener("click", (e) => {
   }
 });
 
+/* 深链接：URL hash 与面板同步（#节点id，可直接分享） */
+function setUrlHash(id) {
+  try {
+    history.replaceState(null, "", id ? "#" + encodeURIComponent(id) : location.pathname + location.search);
+  } catch (e) {}
+}
+
+document.getElementById("panel-share").addEventListener("click", () => {
+  if (!currentNode) return;
+  const btn = document.getElementById("panel-share");
+  const url = location.origin + location.pathname + "#" + encodeURIComponent(currentNode.id);
+  const done = () => {
+    btn.textContent = "✓";
+    setTimeout(() => (btn.textContent = "🔗"), 1100);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(done, done);
+  } else {
+    done();
+  }
+});
+
+/* 旋臂名称漂浮标签 */
+function buildArmLabels() {
+  const wrap = document.createElement("div");
+  wrap.id = "arm-labels";
+  document.body.appendChild(wrap);
+  const outer = new Map();
+  for (const n of DATA.nodes) {
+    const len2 = n.position.x * n.position.x + n.position.y * n.position.y + n.position.z * n.position.z;
+    const cur = outer.get(n.branch);
+    if (!cur || len2 > cur.len2) outer.set(n.branch, { n, len2 });
+  }
+  armLabels = [];
+  for (const [b, { n }] of outer) {
+    const info = DATA.branches[b];
+    const v = new THREE.Vector3(n.position.x, n.position.y, n.position.z);
+    const pos = v.clone().normalize().multiplyScalar(v.length() + 13);
+    const el = document.createElement("div");
+    el.className = "arm-label";
+    el.innerHTML = '<span class="dot" style="background:' + info.color + ';box-shadow:0 0 8px ' + info.color + '"></span>' + info.name;
+    wrap.appendChild(el);
+    armLabels.push({ el, pos, branch: b });
+  }
+}
+
+const _armProjV = new THREE.Vector3();
+function updateArmLabels() {
+  if (!armLabels.length) return;
+  const w = window.innerWidth, h = window.innerHeight;
+  for (const L of armLabels) {
+    if (activeBranch && L.branch !== activeBranch) { L.el.style.opacity = 0; continue; }
+    _armProjV.copy(L.pos).project(camera);
+    const x = ((_armProjV.x + 1) / 2) * w;
+    const y = ((1 - _armProjV.y) / 2) * h;
+    if (_armProjV.z > 1 || x < -80 || x > w + 80 || y < -40 || y > h + 40) { L.el.style.opacity = 0; continue; }
+    L.el.style.opacity = 0.85;
+    L.el.style.transform = "translate(-50%,-50%) translate(" + x + "px, " + y + "px)";
+  }
+}
+
 function closePanel() {
   panel.classList.add("hidden");
+  setUrlHash(null);
   currentNode = null;
   selectedIndex = -1;
   panelHistory = [];
@@ -737,6 +812,7 @@ function openPanel(id, fromBack = false) {
     if (panelHistory.length > 30) panelHistory.shift();
   }
   currentNode = node;
+  setUrlHash(id);
   selectedIndex = dataIndexOf.has(id) ? dataIndexOf.get(id) : -1;
   refreshHighlights();
 
@@ -986,13 +1062,13 @@ function updateFly() {
    仅用于左下角「知识分支」图例列表；银河旋臂的分配顺序仍按 data.branches 的键顺序。
    未来新增分支时，把它的 id 插到这个数组的合适位置。 */
 const BRANCH_DIFFICULTY_ORDER = [
-  "elementary-basics", "elementary", "plane-geometry", "algebra", "set-logic",
+  "elementary-basics", "elementary", "plane-geometry", "algebra", "set-logic", "mathematical-logic",
   "function", "trigonometry", "sequence", "analytic", "solid-geometry",
-  "combinatorics", "probability", "calculus", "linear", "multivariable",
-  "complex", "ode", "pde", "numerical", "real-analysis", "functional-analysis",
-  "dynamical-systems", "differential-geometry", "vector", "number", "abstract-algebra",
+  "combinatorics", "graph-theory", "probability", "statistics", "calculus", "linear", "multivariable",
+  "complex", "ode", "pde", "numerical", "optimization-or", "real-analysis", "functional-analysis",
+  "dynamical-systems", "special-functions", "differential-geometry", "vector", "number", "abstract-algebra",
   "topology", "complex-analysis",
-  "stochastic", "riemannian", "harmonic-analysis", "pde-advanced",
+  "stochastic", "riemannian", "harmonic-analysis", "pde-advanced", "math-history",
 ];
 const branchRank = (key) => {
   const i = BRANCH_DIFFICULTY_ORDER.indexOf(key);
@@ -1135,6 +1211,8 @@ function buildSearch() {
     });
     scored.sort((a, b) => b.score - a.score || a.n.level - b.n.level);
     hits = scored.map((s) => s.n);
+    pulseIdx = hits.slice(0, 12).map((n) => dataIndexOf.get(n.id)).filter((i) => i !== undefined);
+    pulseT0 = performance.now();
 
     box.innerHTML = "";
     if (!hits.length) {
@@ -1234,6 +1312,8 @@ function animate() {
   }
 
   if (starLayer) starLayer.update(elapsed, dt);
+  if (pulseT0) refreshHighlights(); // 搜索脉冲期间逐帧刷新高亮
+  updateArmLabels();
   for (let i = 0; i < bgLayers.length; i++) bgLayers[i].update(elapsed, dt);
 
   renderer.render(scene, camera);
@@ -1274,6 +1354,7 @@ async function main() {
   }
 
   buildLegend();
+  buildArmLabels();
   setupLegendToggle();
   buildSearch();
 
@@ -1282,6 +1363,14 @@ async function main() {
     const n = DATA.nodes[Math.floor(Math.random() * DATA.nodes.length)];
     openPanel(n.id);
   });
+
+  // 深链接：#节点id 直接打开对应知识点（可分享）
+  const openFromHash = () => {
+    const raw = decodeURIComponent((location.hash || "").slice(1));
+    if (raw && nodeById.has(raw) && (!currentNode || currentNode.id !== raw)) openPanel(raw);
+  };
+  window.addEventListener("hashchange", openFromHash);
+  if (location.hash) setTimeout(openFromHash, 350);
 
   // 调试钩子：便于查看渲染统计
   window.__galaxy = {

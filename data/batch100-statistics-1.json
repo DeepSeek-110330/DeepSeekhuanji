@@ -1,0 +1,283 @@
+[
+  {
+    "id": "bayesian-inference",
+    "title": "贝叶斯统计推断",
+    "titleEn": "Bayesian Inference",
+    "branch": "statistics",
+    "level": 5,
+    "summary": "把未知参数看作随机变量：先验分布表达观测前的认识，数据通过似然把它更新为后验分布，点估计、可信区间与预测都由后验导出。",
+    "summaryEn": "Treat the unknown parameter as a random variable: a prior encodes knowledge before the data, the likelihood updates it into the posterior, and estimates, credible intervals and predictions all follow from the posterior.",
+    "definition": "频率派把未知参数 $\\theta$ 看作固定的常数、把数据看作随机的；**贝叶斯统计推断**则把 $\\theta$ 本身视为随机变量：抽样之前先给它一个**先验分布** $\\pi(\\theta)$，用来表达观测前对 $\\theta$ 的认识（可以是无信息的、弱信息的，或来自以往研究的信息型先验）。观测到数据 $x$ 之后，用贝叶斯公式把先验更新为**后验分布**：$$\\pi(\\theta\\mid x)=\\frac{f(x\\mid\\theta)\\,\\pi(\\theta)}{\\int f(x\\mid\\theta)\\,\\pi(\\theta)\\,d\\theta}\\;\\propto\\;f(x\\mid\\theta)\\,\\pi(\\theta).$$ 一句话概括：**后验 $\\propto$ 似然 $\\times$ 先验**。分母只依赖数据、与 $\\theta$ 无关，是归一化常数，往往写不出闭式；因此实践中大量使用比例形式，配合数值积分或蒙特卡洛方法。后验分布是贝叶斯推断的全部起点——它同时携带数据信息与先验信息。\n\n**共轭先验**是让计算变得可行的一类重要选择：如果后验与先验属于同一个分布族，就称该先验为对应似然的共轭先验。经典搭配有三组：二项似然配 Beta 先验、已知方差的正态似然配正态先验、泊松似然配 Gamma 先验（更新规则见公式）。共轭先验的好处是更新只涉及超参数的算术，后验有闭式、便于解释；代价是可选的后验形状受限。**先验的选择是建模决定**：无信息先验（如均匀分布，有时是积分不为 1 的广义先验——只要后验正常即可使用）尽量让数据自己说话；弱信息先验把参数限制在合理尺度内以防极端推断；Jeffreys 先验 $\\pi(\\theta)\\propto\\sqrt{\\det I(\\theta)}$ 由 Fisher 信息构造，在重新参数化下保持不变。在模型正确、参数可识别的正则情形下，样本量增大时数据信息一般会压过先验的影响，后验向真值集中、对温和先验的选择越来越不敏感；但这不是普遍定律，小样本或参数弱可识别时先验仍然举足轻重。\n\n有了后验，一切推断都变成对后验分布的计算。点估计可用**后验均值**、后验中位数或**后验众数**（即最大后验估计 MAP）；当先验在整个参数空间上为常数时，后验众数就是极大似然估计。区间估计用**可信区间**：集合 $C$ 满足 $P(\\theta\\in C\\mid x)=1-\\alpha$，常用等尾可信区间（后验的 $\\alpha/2$ 与 $1-\\alpha/2$ 分位数之间）或最高后验密度区间。**必须把可信区间与频率派的置信区间区分开**：可信区间说的是「给定这组观测数据后，参数落在 $C$ 内的后验概率为 $1-\\alpha$」（参数被当作随机变量）；置信区间说的是「随机区间 $[L(X),U(X)]$ 覆盖固定参数 $\\theta$ 的长期频率为 $1-\\alpha$」——观测到一个具体区间之后，频率派不能再讲「$\\theta$ 以 95% 的概率落在这个区间里」。两者在某些情形下数值恰好一致（如正态均值配平坦先验），但语义完全不同。\n\n贝叶斯框架还自然给出预测：**后验预测分布** $p(\\tilde x\\mid x)=\\int f(\\tilde x\\mid\\theta)\\,\\pi(\\theta\\mid x)\\,d\\theta$ 把参数的不确定性传播到对未来观测的预测上；模型比较则可用贝叶斯因子（后验几率与先验几率之比）。计算方面，后验均值等积分一般没有闭式，常用数值积分、拉普拉斯近似或马尔可夫链蒙特卡洛（MCMC，见 monte-carlo-methods）。正是 MCMC 等计算方法的发展，让贝叶斯方法从「概念优雅但难算」变成了现代统计与机器学习中的常规工具。",
+    "definitionEn": "Frequentists treat the unknown parameter $\\theta$ as a fixed constant and the data as random; **Bayesian inference** treats $\\theta$ itself as a random variable and endows it with a **prior distribution** $\\pi(\\theta)$ describing what is known before the data (it may be non-informative, weakly informative, or informative from earlier studies). After observing data $x$, Bayes' formula turns the prior into the **posterior** $$\\pi(\\theta\\mid x)=\\frac{f(x\\mid\\theta)\\,\\pi(\\theta)}{\\int f(x\\mid\\theta)\\,\\pi(\\theta)\\,d\\theta}\\;\\propto\\;f(x\\mid\\theta)\\,\\pi(\\theta).$$ In one phrase: **posterior $\\propto$ likelihood $\\times$ prior**. The denominator depends only on the data, not on $\\theta$; it is a normalizing constant that frequently has no closed form, so the proportional form combined with numerical integration or Monte Carlo is the working tool. The posterior is the single starting point of Bayesian inference, carrying both the data and the prior information.\n\n**Conjugate priors** make the computation tractable: a prior is conjugate to a likelihood when the posterior stays in the same family. Three classical pairs are the Beta prior with a binomial likelihood, the normal prior with a normal likelihood of known variance, and the Gamma prior with a Poisson likelihood (updating rules below). Conjugacy reduces updating to arithmetic on hyperparameters and yields closed-form, interpretable posteriors, at the price of a restricted menu of shapes. Choosing the prior is a modelling decision: non-informative priors (such as a uniform, sometimes an improper prior whose integral is not one and which is admissible as long as the posterior is proper) let the data speak, weakly informative priors confine the parameter to a sane range, and the Jeffreys prior $\\pi(\\theta)\\propto\\sqrt{\\det I(\\theta)}$ built from Fisher information is invariant under reparametrization. Under a correct, identifiable regular model the data eventually dominate: as the sample grows the posterior concentrates near the truth and turns increasingly insensitive to mild priors. This is not a universal law; in small samples or with weakly identified parameters the prior still matters a great deal.\n\nOnce the posterior is available, every inference becomes a computation with it. Point estimates include the **posterior mean**, the posterior median and the **posterior mode** (the maximum a posteriori, MAP estimate); with a constant prior the posterior mode reduces to the maximum likelihood estimate. Interval inference uses a **credible set**: a set $C$ with $P(\\theta\\in C\\mid x)=1-\\alpha$, usually taken as the equal-tailed interval between the $\\alpha/2$ and $1-\\alpha/2$ posterior quantiles, or as the highest posterior density region. **Credible and frequentist confidence intervals must be kept apart**: a credible interval states that, given the observed data, the posterior probability of $\\theta$ lying in $C$ is $1-\\alpha$ (with $\\theta$ random), whereas a confidence interval states that the random interval $[L(X),U(X)]$ covers the fixed $\\theta$ with long-run frequency $1-\\alpha$; after a specific interval is computed, a frequentist cannot say that $\\theta$ lies in it with probability 95%. The two can coincide numerically (as for a normal mean with a flat prior) but never in meaning.\n\nThe framework also yields prediction: the **posterior predictive distribution** $p(\\tilde x\\mid x)=\\int f(\\tilde x\\mid\\theta)\\,\\pi(\\theta\\mid x)\\,d\\theta$ propagates parameter uncertainty into forecasts of future observations, and models can be compared through Bayes factors (posterior odds versus prior odds). Computationally, integrals such as the posterior mean rarely have closed forms and are handled by numerical integration, the Laplace approximation, or Markov chain Monte Carlo (see monte-carlo-methods). It is largely these computational advances that turned Bayesian methods from an elegant but impractical idea into a standard tool of modern statistics and machine learning.",
+    "formulas": [
+      {
+        "latex": "\\pi(\\theta\\mid x)=\\frac{f(x\\mid\\theta)\\,\\pi(\\theta)}{\\int f(x\\mid\\theta)\\,\\pi(\\theta)\\,d\\theta}\\;\\propto\\;f(x\\mid\\theta)\\,\\pi(\\theta)",
+        "note": "后验公式：分子是似然乘先验，分母是与 θ 无关的归一化常数；实际计算常用比例式「后验 ∝ 似然 × 先验」。",
+        "noteEn": "The posterior is the normalized product of likelihood and prior; in practice the proportional form suffices because the denominator does not depend on θ."
+      },
+      {
+        "latex": "\\pi(\\theta)\\sim\\operatorname{Beta}(a,b)\\;\\Longrightarrow\\;\\pi(\\theta\\mid x)\\sim\\operatorname{Beta}(a+k,\\,b+n-k)",
+        "note": "Beta–二项共轭：n 次试验中成功 k 次后，超参数变为 a+k 与 b+n−k，相当于把成功与失败次数直接加到先验上。",
+        "noteEn": "Beta–binomial conjugacy: after k successes in n trials the posterior is Beta(a+k, b+n−k); successes and failures simply add to the prior hyperparameters."
+      },
+      {
+        "latex": "\\pi(\\theta\\mid x)=N\\!\\left(\\frac{\\mu_0/\\tau^{2}+n\\bar x/\\sigma^{2}}{1/\\tau^{2}+n/\\sigma^{2}},\\;\\frac{1}{1/\\tau^{2}+n/\\sigma^{2}}\\right)",
+        "note": "正态–正态共轭（先验 N(μ₀,τ²)、已知观测方差 σ²）：后验精度 = 先验精度 + 数据精度，后验均值是先验均值与样本均值的精度加权平均。",
+        "noteEn": "Normal–normal conjugacy (prior N(μ₀,τ²), known observation variance σ²): precisions add, and the posterior mean is the precision-weighted average of the prior mean and the sample mean."
+      },
+      {
+        "latex": "\\pi(\\lambda)\\sim\\operatorname{Gamma}(\\alpha,\\beta)\\;\\Longrightarrow\\;\\pi(\\lambda\\mid x)\\sim\\operatorname{Gamma}\\!\\left(\\alpha+\\sum_{i=1}^{n}x_i,\\;\\beta+n\\right)",
+        "note": "Gamma–泊松共轭（Γ(α,β) 按率参数 β 的写法）：α 可看作先验虚拟计数之和、β 看作虚拟观测次数；后验把数据的计数与观测数分别相加。",
+        "noteEn": "Gamma–Poisson conjugacy (rate parametrization): α acts as a prior sum of counts and β as a prior number of observations; the posterior adds the data counts and sample size."
+      },
+      {
+        "latex": "P\\bigl(\\theta\\in C\\mid x\\bigr)=1-\\alpha",
+        "note": "贝叶斯可信区间的定义：给定数据后 θ 落入 C 的后验概率为 1−α；等尾区间取后验的 α/2 与 1−α/2 分位数。",
+        "noteEn": "Definition of a Bayesian credible set: the posterior probability that θ lies in C is 1−α; the equal-tailed version uses the α/2 and 1−α/2 posterior quantiles."
+      }
+    ],
+    "properties": [
+      "后验是似然与先验的乘积再归一化，把数据信息与先验信息合成一个分布；在正则模型下样本量增大时后验一般越来越集中在真值附近、对温和先验的选择越来越不敏感，但小样本时先验影响明显。",
+      "共轭先验使后验与先验同族、更新只是超参数的加减（Beta 加成功与失败次数、Gamma 加计数与试验次数、正态用精度加权），代价是可表达的先验形状受限。",
+      "后验均值、后验中位数与后验众数（MAP）都可用作点估计；后验关于参数对称（如正态）时三者重合；先验为常数时 MAP 与极大似然估计一致；后验均值在平方损失下最优、后验中位数在绝对损失下最优。",
+      "可信区间与置信区间的语义不同：可信区间陈述的是「θ 落入区间内的后验概率」（θ 是随机变量），置信区间陈述的是「随机区间覆盖固定 θ 的长期频率」；二者数值可以巧合地一致，但解释不能互换。",
+      "归一化常数（边际似然）一般无法写出闭式，后验的计算常依靠数值积分或 MCMC；不过 MAP 与比例形式的后验只需核 $\\pi(\\theta)f(x\\mid\\theta)$，不依赖归一化常数。"
+    ],
+    "propertiesEn": [
+      "The posterior is the normalized product of likelihood and prior, merging data and prior information into one distribution; under regular models it concentrates near the true value as the sample grows and becomes increasingly insensitive to the choice of a mild prior, while the prior matters most in small samples.",
+      "Conjugate priors keep prior and posterior in the same family, so updating is arithmetic on hyperparameters (adding successes and failures for Beta, counts and observations for Gamma, combining precisions for the normal); the price is a restricted menu of prior shapes.",
+      "Posterior mean, posterior median and posterior mode (MAP) all serve as point estimates; they coincide for symmetric posteriors such as the normal, and the MAP reduces to the maximum likelihood estimate when the prior is constant. The posterior mean is optimal under squared loss and the posterior median under absolute loss.",
+      "Credible and confidence intervals differ in meaning: a credible interval reports the posterior probability that θ lies inside it (θ being random), while a confidence interval reports the long-run frequency with which a random interval covers a fixed θ; the two can agree numerically yet must not be interpreted interchangeably.",
+      "The normalizing constant (marginal likelihood) usually has no closed form, so the posterior is obtained by numerical integration or MCMC; the MAP and the proportional form need only the kernel $\\pi(\\theta)f(x\\mid\\theta)$, not the constant."
+    ],
+    "examples": [
+      {
+        "problem": "抛掷一枚硬币 10 次，出现 4 次正面。取先验 $\\theta\\sim\\operatorname{Beta}(1,1)$（即 $(0,1)$ 上的均匀分布），求后验分布、后验均值、后验众数与 95% 等尾可信区间；再说明改用先验 $\\operatorname{Beta}(2,2)$ 时后验均值如何变化。",
+        "solution": "设 $\\theta$ 为正面概率，样本的似然正比于 $\\theta^{4}(1-\\theta)^{6}$。先验 $\\operatorname{Beta}(1,1)$ 的密度在 $(0,1)$ 上恒为 1，所以后验 $\\propto\\theta^{4}(1-\\theta)^{6}$，这正是 Beta 分布的核，于是\n$$\\pi(\\theta\\mid x)=\\operatorname{Beta}(1+4,\\ 1+6)=\\operatorname{Beta}(5,7).$$\n后验均值 $=5/(5+7)=5/12\\approx0.4167$；后验众数 $=(5-1)/(5+7-2)=4/10=0.4$，恰好等于样本频率 $4/10$——这正是「均匀先验下 MAP 与极大似然估计一致」的具体体现。95% 等尾可信区间取 $\\operatorname{Beta}(5,7)$ 的 2.5% 与 97.5% 分位数，用 python3 的 scipy 复算得 $[0.1675,\\ 0.6921]$。它应读作：在给定这组数据与先验下，$\\theta$ 落入该区间的后验概率为 0.95。\n若改用先验 $\\operatorname{Beta}(2,2)$（先验均值 0.5，略偏爱「公平硬币」），后验为 $\\operatorname{Beta}(2+4,\\ 2+6)=\\operatorname{Beta}(6,8)$，后验均值 $=6/14\\approx0.4286$，比 0.4167 更靠近 0.5——先验把估计往中心拉了一点，这就是先验影响的直接体现。"
+      },
+      {
+        "problem": "设某个物理量 $\\theta$ 的先验为 $N(0,1)$（单位已选好）。用已知标准差 $\\sigma=2$ 的仪器独立测量 9 次，得到样本均值 $\\bar x=1.2$。求后验分布与 95% 等尾可信区间，并与平坦先验的情形对照。",
+        "solution": "先验精度为 $1/\\tau^{2}=1$，单次观测精度为 $1/\\sigma^{2}=1/4=0.25$，9 次观测贡献 $2.25$，故后验精度 $=1+2.25=3.25$，后验方差 $=1/3.25\\approx0.3077$，后验标准差 $\\approx0.5547$。后验均值是两份信息的精度加权平均：\n$$\\frac{0\\times1+9\\times1.2/4}{3.25}=\\frac{2.7}{3.25}\\approx0.8308,$$\n数据把估计从先验中心 0 拉到了约 0.83。于是后验 $\\approx N(0.8308,\\ 0.3077)$，95% 等尾可信区间 $\\approx0.8308\\pm1.96\\times0.5547=[-0.2564,\\ 1.9180]$（python3 复算一致）。\n若把先验换成整个实轴上的平坦（无信息）先验，后验变为 $N(\\bar x,\\ \\sigma^{2}/n)=N(1.2,\\ 0.4444)$，数值上与频率派的 z 区间一致——但解释不同：贝叶斯给出的是 $\\theta$ 的后验概率陈述，频率派给出的是随机区间的长期覆盖频率。"
+      }
+    ],
+    "tags": ["贝叶斯推断", "后验分布", "共轭先验", "可信区间"],
+    "links": ["conditional-probability-bayes", "point-estimation", "interval-estimation", "fisher-information", "monte-carlo-methods"],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1", "color": "#4cc9f0", "label": "先验 Beta(1,1)：密度恒为 1" },
+        { "expr": "2310*x^4*(1-x)^6", "color": "#ff6b9d", "label": "后验 Beta(5,7)" }
+      ],
+      "xRange": [0, 1],
+      "yRange": [0, 3],
+      "title": "10 次抛掷得 4 次正面：Beta(1,1) 先验与 Beta(5,7) 后验"
+    }
+  },
+  {
+    "id": "fisher-information",
+    "title": "充分统计量与 Fisher 信息",
+    "titleEn": "Sufficient Statistics and Fisher Information",
+    "branch": "statistics",
+    "level": 5,
+    "summary": "充分统计量把样本中关于参数的信息无损压缩，因子分解定理给出判别方法；Fisher 信息度量对数似然对参数的敏感程度，并给出无偏估计方差的下界——Cramér–Rao 下界。",
+    "summaryEn": "A sufficient statistic compresses the sample without losing information about the parameter, as certified by the factorization theorem; the Fisher information measures how sharply the log-likelihood depends on the parameter and yields the Cramér–Rao lower bound on the variance of unbiased estimators.",
+    "definition": "**充分统计量**要回答的问题是：样本里关于参数的信息能不能压缩。设样本 $X=(X_1,\\dots,X_n)$ 的分布依赖未知参数 $\\theta$，$T=T(X)$ 是一个统计量。若在给定 $T=t$ 的条件下，$X$ 的条件分布与 $\\theta$ 无关，就称 $T$ 是 $\\theta$ 的**充分统计量**：一旦知道 $T$ 的取值，样本中剩下的部分不再提供任何关于 $\\theta$ 的信息，$T$ 把信息无损地压缩了。直接用定义验证要计算条件分布，往往不现实；**因子分解定理**（Neyman）给出等价的代数判别：$T$ 充分当且仅当联合密度（离散情形为分布律）可以分解为 $$f(x;\\theta)=g\\bigl(T(x);\\theta\\bigr)\\,h(x),$$ 其中 $g$ 只通过 $T$ 依赖样本、$h$ 与 $\\theta$ 无关。例如：伯努利样本的 $\\sum X_i$ 是 $p$ 的充分统计量；正态样本的 $(\\bar X,S^{2})$ 是 $(\\mu,\\sigma^{2})$ 的充分统计量；泊松样本的 $\\sum X_i$ 是 $\\lambda$ 的充分统计量。\n\n**Fisher 信息**量化「数据把参数钉得有多紧」。记对数似然 $\\ell(\\theta;X)=\\ln f(X;\\theta)$，它关于 $\\theta$ 的导数称为**得分函数**。在正则条件下 $E[\\partial_\\theta\\ell]=0$，于是得分函数的方差就是 Fisher 信息：$$I(\\theta)=\\operatorname{Var}\\bigl(\\partial_\\theta\\ell(\\theta;X)\\bigr)=E\\bigl[(\\partial_\\theta\\ell)^{2}\\bigr]=-E\\bigl[\\partial_\\theta^{2}\\ell\\bigr].$$ 最后一个等号说明信息等于对数似然曲率的**相反数**的期望：似然峰越尖锐（二阶导越负），参数位置被数据限定得越精确，信息越大。两种写法的等价依赖**正则条件**：参数空间是开集、$f$ 对 $\\theta$ 二阶可导、可以在积分号下对 $\\theta$ 求导、且分布的支撑集不依赖 $\\theta$。均匀分布 $U(0,\\theta)$ 是经典反例：支撑依赖 $\\theta$，得分函数的均值不为 0，$-E[\\partial_\\theta^{2}\\ell]$ 甚至为负，两种写法都失效。\n\n**Cramér–Rao 下界**把信息与估计精度联系起来。对独立同分布样本，信息可加：$I_n(\\theta)=nI_1(\\theta)$。若 $\\hat\\theta$ 是 $\\theta$ 的**无偏**估计（$E\\hat\\theta=\\theta$）且方差有限，在上述正则条件下必有 $$\\operatorname{Var}(\\hat\\theta)\\ge\\frac{1}{nI_1(\\theta)}.$$ 这就是 **Cramér–Rao 下界**（信息不等式）。三点必须记牢：它约束的是**无偏**估计的**方差**；偏估计不受它限制（常数估计量方差为 0，代价是偏差）；支撑依赖参数的族不满足条件，其无偏估计的方差可以比 $1/n$ 快得多地衰减（见例题）。达到下界的无偏估计称为**有效估计**，指数族模型中常存在，例如伯努利样本的 $\\bar X$。\n\nFisher 信息还与极大似然估计紧密相连。正则条件下 $\\sqrt{n}(\\hat\\theta_{\\mathrm{MLE}}-\\theta)$ 依分布收敛于 $N\\bigl(0,\\ 1/I_1(\\theta)\\bigr)$，渐近方差恰好是 Cramér–Rao 下界——这就是「MLE 渐近有效」的准确含义，也是报告 MLE 标准误时采用 $1/\\sqrt{nI}$ 的依据。Fisher 信息另有广泛用途：Jeffreys 先验 $\\pi(\\theta)\\propto\\sqrt{\\det I(\\theta)}$ 由它构造并在重参数化下不变；信息越大，区间越短、后验越集中。总结一句：充分性负责「不丢信息」，Fisher 信息负责「量化信息并给出方差极限」。",
+    "definitionEn": "A **sufficient statistic** answers the question of how far a sample can be compressed. Let the distribution of the sample $X=(X_1,\\dots,X_n)$ depend on an unknown parameter $\\theta$, and let $T=T(X)$ be a statistic. If the conditional distribution of $X$ given $T=t$ does not depend on $\\theta$, then $T$ is a **sufficient statistic** for $\\theta$: once $T$ is known, the rest of the sample carries no further information about $\\theta$, so $T$ compresses the information without loss. Checking the definition directly requires a conditional distribution and is rarely practical; the **factorization theorem** (Neyman) gives an algebraic criterion: $T$ is sufficient if and only if the joint density (probability mass function in the discrete case) factors as $$f(x;\\theta)=g\\bigl(T(x);\\theta\\bigr)\\,h(x),$$ where g touches the sample only through T and h is free of θ. For instance, $\\sum X_i$ is sufficient for p in a Bernoulli sample, $(\\bar X,S^{2})$ is sufficient for $(\\mu,\\sigma^{2})$ in a normal sample, and $\\sum X_i$ is sufficient for λ in a Poisson sample.\n\nThe **Fisher information** quantifies how tightly the data pin down the parameter. Write $\\ell(\\theta;X)=\\ln f(X;\\theta)$ for the log-likelihood; its derivative in θ is the **score function**. Under regularity $E[\\partial_\\theta\\ell]=0$, so the variance of the score is the Fisher information: $$I(\\theta)=\\operatorname{Var}\\bigl(\\partial_\\theta\\ell(\\theta;X)\\bigr)=E\\bigl[(\\partial_\\theta\\ell)^{2}\\bigr]=-E\\bigl[\\partial_\\theta^{2}\\ell\\bigr].$$ The last equality says the information is the expectation of the **negative** curvature of the log-likelihood: the sharper the likelihood peak (the more negative the second derivative), the more precisely the data locate the parameter, and the larger the information. The equivalence of the two forms relies on **regularity conditions**: an open parameter space, twice differentiability of f in θ, differentiation under the integral sign, and a support that does not depend on θ. The uniform law $U(0,\\theta)$ is the classical counterexample: its support depends on θ, the score has non-zero mean, and $-E[\\partial_\\theta^{2}\\ell]$ can even be negative, so both formulas fail.\n\nThe **Cramér–Rao bound** links information to estimation accuracy. For i.i.d. samples information is additive, $I_n(\\theta)=nI_1(\\theta)$. If $\\hat\\theta$ is an **unbiased** estimator of θ (that is, $E\\hat\\theta=\\theta$) with finite variance, then under the regularity conditions above $$\\operatorname{Var}(\\hat\\theta)\\ge\\frac{1}{nI_1(\\theta)}.$$ This is the **Cramér–Rao lower bound** (information inequality). Three warnings are essential: it constrains the **variance** of an **unbiased** estimator; biased estimators are not bound by it (a constant estimator has zero variance at the cost of bias); and families whose support depends on the parameter escape it, allowing unbiased estimators whose variance decays far faster than 1/n (see the example). An unbiased estimator attaining the bound is called **efficient**; such estimators often exist in exponential families, for instance $\\bar X$ for a Bernoulli sample.\n\nThe Fisher information is also tied to maximum likelihood. Under regularity, $\\sqrt{n}(\\hat\\theta_{\\mathrm{MLE}}-\\theta)$ converges in distribution to $N\\bigl(0,\\ 1/I_1(\\theta)\\bigr)$, whose variance is exactly the Cramér–Rao bound — the precise meaning of the MLE being asymptotically efficient, and the reason MLE standard errors are reported as $1/\\sqrt{nI}$. Fisher information appears in many other places: the Jeffreys prior $\\pi(\\theta)\\propto\\sqrt{\\det I(\\theta)}$ is built from it and is invariant under reparametrization, and larger information means shorter intervals and more concentrated posteriors. In one sentence: sufficiency prevents information loss, while Fisher information quantifies it and sets the variance limit.",
+    "formulas": [
+      {
+        "latex": "I(\\theta)=E\\!\\left[\\bigl(\\partial_\\theta\\ln f(X;\\theta)\\bigr)^{2}\\right]=-E\\!\\left[\\partial_\\theta^{2}\\ln f(X;\\theta)\\right]",
+        "note": "Fisher 信息的两种等价写法（正则条件下）：得分函数平方的期望等于对数似然二阶导期望的相反数。",
+        "noteEn": "Two equivalent forms of the Fisher information (under regularity): the expected squared score equals minus the expected second derivative of the log-likelihood."
+      },
+      {
+        "latex": "I_n(\\theta)=n\\,I_1(\\theta)",
+        "note": "独立同分布样本的信息可加：n 次观测的信息是单次信息的 n 倍，因此 Cramér–Rao 下界按 1/n 收缩。",
+        "noteEn": "Information is additive for i.i.d. samples: n observations carry n times the information of one, so the Cramér–Rao bound shrinks like 1/n."
+      },
+      {
+        "latex": "\\operatorname{Var}(\\hat\\theta)\\ge\\frac{1}{n\\,I_1(\\theta)}\\qquad(\\hat\\theta\\ \\text{为无偏估计})",
+        "note": "Cramér–Rao 下界：无偏估计的方差不可能低于 1/(nI)；前提是无偏性与正则族（支撑不依赖参数、可在积分号下求导）。",
+        "noteEn": "Cramér–Rao lower bound: no unbiased estimator has variance below 1/(nI); it requires unbiasedness and a regular family (support free of the parameter, differentiation under the integral sign)."
+      },
+      {
+        "latex": "T(X)\\ \\text{充分}\\iff f(x;\\theta)=g\\bigl(T(x);\\theta\\bigr)\\,h(x)",
+        "note": "因子分解定理：充分性等价于联合密度能分解成「只通过 T 依赖样本」与「与 θ 无关」两部分之积。",
+        "noteEn": "Factorization theorem: sufficiency is equivalent to writing the joint density as a product of a part depending on the sample only through T and a part free of θ."
+      },
+      {
+        "latex": "\\sqrt{n}\\,\\bigl(\\hat\\theta_{\\mathrm{MLE}}-\\theta\\bigr)\\;\\xrightarrow{\\;d\\;}\\;N\\!\\left(0,\\ \\frac{1}{I_1(\\theta)}\\right)",
+        "note": "正则条件下 MLE 渐近正态，渐近方差恰为 1/(nI)，即渐近达到 Cramér–Rao 下界——这是用 1/√(nI) 报告 MLE 标准误的依据。",
+        "noteEn": "Under regularity the MLE is asymptotically normal with variance 1/(nI), asymptotically attaining the Cramér–Rao bound — the basis for reporting standard errors as 1/√(nI)."
+      }
+    ],
+    "properties": [
+      "充分统计量不唯一：若 T 充分，任何一对一变换 u(T) 也充分；在常见正则条件下还存在最小充分统计量，它把信息压缩到极致，且任意两个最小充分统计量之间只差一个一一变换。",
+      "因子分解定理把「条件分布与 θ 无关」这个难以直接验证的定义，转化为对密度的代数分解，是实际判定充分性的主要工具。",
+      "Fisher 信息对独立同分布样本可加；在光滑的参数变换 η=g(θ) 下按 I(η)=I(θ)/(g′(θ))² 变换，因此信息不是参数化无关的量（Jeffreys 先验用 √I 来修正这一点，使其重参数化不变）。",
+      "Cramér–Rao 下界的成立需要正则条件与无偏性；支撑依赖参数的族（如 U(0,θ)）落在适用范围之外，其无偏估计方差可达 1/n² 量级、低于任何 1/n 型下界；偏估计量也不受该下界直接约束。",
+      "达到下界的无偏估计称为有效估计，在指数族中常存在；极大似然估计一般在正则条件下渐近有效（渐近方差 1/(nI)），这就是大样本下用 1/√(nI) 作为标准误的理由。"
+    ],
+    "propertiesEn": [
+      "Sufficient statistics are not unique: any one-to-one transform of a sufficient statistic is again sufficient, and under common regularity conditions a minimal sufficient statistic exists that compresses the sample as far as possible, any two of them differing by a one-to-one map.",
+      "The factorization theorem turns the awkward definition (a conditional distribution free of θ) into an algebraic decomposition of the density, and it is the working tool for establishing sufficiency in practice.",
+      "Fisher information is additive for i.i.d. samples, and under a smooth reparametrization η=g(θ) it transforms as I(η)=I(θ)/(g′(θ))², so information is not parametrization-free (the Jeffreys prior uses √I to repair this and become invariant).",
+      "The Cramér–Rao bound requires regularity plus unbiasedness; families whose support depends on the parameter, such as U(0,θ), lie outside its scope, and there unbiased estimators can have variances of order 1/n², below any 1/n-type bound; biased estimators are not directly constrained either.",
+      "An unbiased estimator attaining the bound is called efficient and often exists in exponential families; maximum likelihood estimators are generally asymptotically efficient with variance 1/(nI), which is why 1/√(nI) serves as the large-sample standard error."
+    ],
+    "examples": [
+      {
+        "problem": "设 $X_1,\\dots,X_{100}$ 独立同分布，服从成功概率为 $p\\in(0,1)$ 的伯努利分布。求单次观测的 Fisher 信息 $I_1(p)$，验证两种信息公式给出同一结果，并用 Cramér–Rao 下界说明 $\\bar X$ 是有效估计；最后取 $p=0.3$ 给出数值。",
+        "solution": "单次观测的分布律为 $f(x;p)=p^{x}(1-p)^{1-x}$（$x\\in\\{0,1\\}$），对数似然 $\\ell=x\\ln p+(1-x)\\ln(1-p)$。一阶导与二阶导：\n$$\\partial_p\\ell=\\frac{x}{p}-\\frac{1-x}{1-p},\\qquad \\partial_p^{2}\\ell=-\\frac{x}{p^{2}}-\\frac{1-x}{(1-p)^{2}}.$$\n按第二种写法（二阶导期望的相反数）：\n$$-E[\\partial_p^{2}\\ell]=E\\!\\left[\\frac{x}{p^{2}}+\\frac{1-x}{(1-p)^{2}}\\right]=\\frac{1}{p}+\\frac{1}{1-p}=\\frac{1}{p(1-p)}.$$\n按第一种写法（得分平方的期望）：得分函数只取两个值，$x=1$ 时为 $1/p$，$x=0$ 时为 $-1/(1-p)$，故\n$$E[(\\partial_p\\ell)^{2}]=p\\cdot\\frac{1}{p^{2}}+(1-p)\\cdot\\frac{1}{(1-p)^{2}}=\\frac{1}{p}+\\frac{1}{1-p}=\\frac{1}{p(1-p)}.$$\n两种写法一致，$I_1(p)=1/(p(1-p))$。$\\bar X$ 无偏且 $\\operatorname{Var}(\\bar X)=p(1-p)/n=1/(nI_1(p))$，恰好达到 Cramér–Rao 下界，故为有效估计。取 $p=0.3$：$I_1=1/0.21\\approx4.7619$；$n=100$ 时 Cramér–Rao 下界为 $p(1-p)/n=0.21/100=0.0021$，标准差下界 $\\approx0.0458$，而 $\\operatorname{Var}(\\bar X)$ 正好等于这个下界。"
+      },
+      {
+        "problem": "设 $X_1,\\dots,X_5$ 独立同分布，服从 $U(0,\\theta)$（$\\theta>0$）。有人用 Fisher 信息公式算出 $I(\\theta)=-1/\\theta^{2}$，并据此声称 Cramér–Rao 下界失效。请解释问题出在哪里，并计算无偏估计 $\\hat\\theta=\\frac{6}{5}X_{(5)}$ 的真实方差（$X_{(5)}$ 为最大顺序统计量）。",
+        "solution": "密度 $f(x;\\theta)=1/\\theta$（$0<x<\\theta$），在支撑内部 $\\ell(\\theta)=-\\ln\\theta$，于是 $\\partial_\\theta\\ell=-1/\\theta$、$\\partial_\\theta^{2}\\ell=1/\\theta^{2}$，形式上 $-E[\\partial_\\theta^{2}\\ell]=-1/\\theta^{2}<0$，信息为负数显然荒谬。根源是：**支撑 $(0,\\theta)$ 依赖参数**，不能把求导移到积分号内（边界项不可忽略），正则条件失效；此时得分函数的均值也不为零（$E[-1/\\theta]=-1/\\theta$），两个信息公式既不相等，也不再满足「得分均值为 0」。既然推导 Cramér–Rao 下界的前提不成立，$1/(nI)$ 自然不能作为方差下界。\n真实情况是估计可以更快：$X_{(5)}$ 的期望为 $5\\theta/6$，故 $\\hat\\theta=\\frac{6}{5}X_{(5)}$ 无偏；而 $X_{(5)}$ 的方差为 $\\frac{n\\theta^{2}}{(n+1)^{2}(n+2)}=\\frac{5\\theta^{2}}{252}$，于是\n$$\\operatorname{Var}(\\hat\\theta)=\\left(\\frac{6}{5}\\right)^{2}\\cdot\\frac{5\\theta^{2}}{252}=\\frac{\\theta^{2}}{35}\\approx0.0286\\,\\theta^{2},$$\n衰减速率是 $1/n^{2}$，比 $1/n$ 更快——这说明使用 Cramér–Rao 下界前必须逐条核对条件，非正则族中它不适用，也不能把算出的负数当作 Fisher 信息。"
+      }
+    ],
+    "tags": ["充分统计量", "Fisher 信息", "Cramér–Rao 下界", "极大似然"],
+    "links": ["point-estimation", "bayesian-inference", "interval-estimation", "sampling-distributions", "central-limit-theorem"],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "1/(x*(1-x))", "color": "#4cc9f0", "label": "I(p) = 1/(p(1-p))" }
+      ],
+      "xRange": [0.05, 0.95],
+      "yRange": [0, 25],
+      "title": "伯努利分布的 Fisher 信息：p 接近 0 或 1 时信息急剧增大"
+    }
+  },
+  {
+    "id": "em-algorithm",
+    "title": "EM 算法",
+    "titleEn": "The EM Algorithm",
+    "branch": "statistics",
+    "level": 5,
+    "summary": "当似然含隐变量或缺失数据而难以直接最大化时，EM 交替执行 E 步（在参数当前值下求完全数据对数似然的期望）与 M 步（最大化该期望），观测数据的似然每一步都不降低。",
+    "summaryEn": "When the likelihood involves latent variables or missing data and resists direct maximization, EM alternates an E step — the expected complete-data log-likelihood under the current parameters — with an M step that maximizes it, never decreasing the observed-data likelihood.",
+    "definition": "设观测数据为 $Y$，另有**隐变量**（缺失数据、类别标签等）$Z$。完全数据 $(Y,Z)$ 的对数似然 $\\ln p(Y,Z\\mid\\theta)$ 通常容易写、也容易最大化；但观测数据的似然 $L(\\theta)=p(Y\\mid\\theta)=\\int p(Y,z\\mid\\theta)\\,dz$（$Z$ 离散时为求和）里出现「和或者积分的对数」，直接优化很困难。**EM 算法**（期望最大化，Dempster–Laird–Rubin 1977）用交替的两步绕开这个困难：仍然在完全数据的框架下做极大似然，但把未知的 $Z$ 用它在当前参数下的条件期望代替。\n\n设第 $t$ 轮参数为 $\\theta_t$。**E 步**（期望步）构造 $Q$ 函数：$$Q(\\theta\\mid\\theta_t)=E\\!\\left[\\ln p(Y,Z\\mid\\theta)\\;\\Big|\\;Y,\\theta_t\\right],$$ 期望是对「给定观测数据 $Y$ 与当前参数 $\\theta_t$ 时 $Z$ 的条件分布」取的。注意两点：对数似然里的 $\\theta$ 仍是自由变量，是后面要优化的对象；而求期望用的是旧参数 $\\theta_t$——E 步不改变参数，只计算隐变量的权重（责任度）。**M 步**（最大化步）把 $Q$ 当作目标函数最大化：$$\\theta_{t+1}=\\arg\\max_{\\theta}\\,Q(\\theta\\mid\\theta_t).$$ 若完全数据的极大似然有闭式（指数族通常如此），M 步就是「把完全数据的充分统计量换成其条件期望，再做完全数据的 MLE」，因此每一轮通常比直接对观测似然做数值优化更便宜。\n\nEM 最重要的保证是**单调性**：观测数据的对数似然 $\\ell(\\theta)=\\ln p(Y\\mid\\theta)$ 每一步都不减，即 $\\ell(\\theta_{t+1})\\ge\\ell(\\theta_t)$。它来自分解 $\\ell(\\theta)=Q(\\theta\\mid\\theta_t)-H(\\theta\\mid\\theta_t)$（$H$ 是隐变量条件分布的熵型项）：在 $\\theta_t$ 处被减掉的项恰好补齐，M 步提升前一项，后一项在相邻两步之差是一个 KL 散度、恒非负。**但单调性不等于收敛到全局最优**：EM 只保证似然值不下降，收敛点可以是局部极大、鞍点甚至边界点，极限依赖初值；在混合模型等场景里平稳点常有多个，不同初值可能收敛到不同解，实践中需要多次随机初始化并比较。完全无约束的高斯混合似然甚至无界（让某个分量的方差趋近 0、均值落在某个数据点上，密度趋于无穷），因此实践中要约束方差或加入正则。\n\n收敛判据常用「相邻两轮 $\\ell$ 的增量小于阈值」或「参数变化量小于阈值」。EM 的收敛速度通常线性，接近解时可能很慢，速度由「缺失信息比例」决定（观测数据信息相对完全数据信息缺失了多少）。理论上 EM 与 MM（minorize–maximize）算法同源：E 步构造一个在 $\\theta_t$ 处与 $\\ell$ 相切、且处处不超过 $\\ell$ 的下界替代函数，M 步沿它上升。EM 也可以看作在参数与隐变量分布之间交替的坐标上升：先固定 $Z$ 的后验分布更新 $\\theta$，再固定 $\\theta$ 更新 $Z$ 的后验分布——这正是变分推断中更一般的近似思想的雏形。",
+    "definitionEn": "Suppose we observe data $Y$ and there are **latent variables** (missing data, class labels and so on) $Z$. The complete-data log-likelihood $\\ln p(Y,Z\\mid\\theta)$ is usually easy to write down and maximize, but the observed-data likelihood $L(\\theta)=p(Y\\mid\\theta)=\\int p(Y,z\\mid\\theta)\\,dz$ (a sum when Z is discrete) contains the logarithm of a sum or integral and is hard to optimize directly. The **EM algorithm** (expectation–maximization, Dempster–Laird–Rubin 1977) circumvents this with two alternating steps: it still performs maximum likelihood in the complete-data framework, but replaces the unknown Z by its conditional expectation under the current parameters.\n\nLet the parameters at round t be $\\theta_t$. The **E step** builds the Q function: $$Q(\\theta\\mid\\theta_t)=E\\!\\left[\\ln p(Y,Z\\mid\\theta)\\;\\Big|\\;Y,\\theta_t\\right],$$ where the expectation is taken over the conditional distribution of Z given the observed data Y and the current parameters θ_t. Two points matter: the θ inside the log-likelihood stays a free variable to be optimized, while the expectation uses the old parameter θ_t — the E step does not move the parameters, it only computes latent weights (responsibilities). The **M step** then maximizes Q: $$\\theta_{t+1}=\\arg\\max_{\\theta}\\,Q(\\theta\\mid\\theta_t).$$ When the complete-data MLE has a closed form (typically in exponential families), the M step amounts to replacing complete-data sufficient statistics by their conditional expectations and doing the complete-data MLE, which is why each round is usually cheaper than numerically optimizing the observed likelihood.\n\nThe key guarantee of EM is **monotonicity**: the observed-data log-likelihood $\\ell(\\theta)=\\ln p(Y\\mid\\theta)$ never decreases, $\\ell(\\theta_{t+1})\\ge\\ell(\\theta_t)$. This follows from the decomposition $\\ell(\\theta)=Q(\\theta\\mid\\theta_t)-H(\\theta\\mid\\theta_t)$, where H is an entropy-type term for the latent conditional distribution: at θ_t the subtracted term cancels, the M step lifts the first term, and the change in the second term is a KL divergence, hence non-negative. **Monotonicity does not mean convergence to a global optimum**: EM only guarantees that the likelihood never decreases; limit points may be local maxima, saddle points or boundary points, and they depend on initialization. Mixture models typically have many stationary points, and different starts can converge to different solutions, so repeated random starts are standard practice. An unconstrained Gaussian mixture likelihood is even unbounded (drive one component variance to zero with its mean at a data point and the density blows up), so variances are constrained or regularized in practice.\n\nStopping rules usually compare the increment of ℓ or the change in parameters against a threshold. Convergence is typically linear and can be very slow near the solution, with the rate governed by the fraction of missing information (how much information the complete data carry relative to the observed data). Theoretically EM is a special case of MM (minorize–maximize) algorithms: the E step constructs a surrogate lower bound that touches ℓ at θ_t and stays below ℓ everywhere, and the M step climbs it. EM can also be seen as coordinate ascent alternating between the parameter and the distribution of the latent variables: update θ given the current posterior of Z, then update that posterior given θ — a precursor of the more general approximation idea behind variational inference.",
+    "formulas": [
+      {
+        "latex": "Q(\\theta\\mid\\theta_t)=E\\!\\left[\\ln p(Y,Z\\mid\\theta)\\;\\Big|\\;Y,\\theta_t\\right]=\\sum_z p(z\\mid Y,\\theta_t)\\,\\ln p(Y,z\\mid\\theta)",
+        "note": "E 步：对隐变量 Z 在「给定观测数据 Y 与当前参数 θ_t」下的条件分布取期望；期望中 ln p(Y,Z|θ) 仍是 θ 的待优化函数。",
+        "noteEn": "E step: take the expectation over the conditional distribution of the latent variables Z given the observed data Y and the current parameter θ_t; the log-likelihood inside is still a function of the free parameter θ."
+      },
+      {
+        "latex": "\\theta_{t+1}=\\arg\\max_{\\theta}\\,Q(\\theta\\mid\\theta_t)",
+        "note": "M 步：把 Q 当作完全数据的对数似然来最大化，得到下一轮参数；若完全数据 MLE 有闭式，这一步就有闭式。",
+        "noteEn": "M step: maximize Q as if it were the complete-data log-likelihood; when the complete-data MLE is closed-form, so is this step."
+      },
+      {
+        "latex": "\\ell(\\theta_{t+1})\\ge\\ell(\\theta_t),\\qquad \\ell(\\theta)=\\ln p(Y\\mid\\theta)",
+        "note": "单调性：观测数据的对数似然每步不减。它不保证收敛到全局最优，收敛点依赖初值。",
+        "noteEn": "Monotonicity: the observed-data log-likelihood never decreases from one step to the next; it says nothing about reaching a global maximum, and limits depend on initialization."
+      },
+      {
+        "latex": "\\ell(\\theta)=Q(\\theta\\mid\\theta_t)-H(\\theta\\mid\\theta_t),\\qquad H(\\theta\\mid\\theta_t)=E\\!\\left[\\ln p(Z\\mid Y,\\theta)\\,\\Big|\\,Y,\\theta_t\\right]",
+        "note": "似然分解：M 步提升 Q 项，而 H 项在相邻两步之差是一个 KL 散度、恒非负，两者共同保证似然不减。",
+        "noteEn": "Likelihood decomposition: the M step lifts the Q term, while the difference of the H term between consecutive steps is a KL divergence, hence non-negative; together they force monotone likelihood."
+      },
+      {
+        "latex": "r_{ik}=\\frac{\\pi_k\\,\\mathcal{N}(x_i\\mid\\mu_k,\\Sigma_k)}{\\sum_{j=1}^{K}\\pi_j\\,\\mathcal{N}(x_i\\mid\\mu_j,\\Sigma_j)}",
+        "note": "高斯混合模型的 E 步责任度：第 i 个观测属于第 k 个分量的后验概率；M 步以它为权重做加权平均更新 π、μ、Σ。",
+        "noteEn": "E-step responsibilities for a Gaussian mixture: the posterior probability that observation i belongs to component k; the M step updates π, μ and Σ by weighted averages with these weights."
+      }
+    ],
+    "properties": [
+      "E 步与 M 步严格交替：E 步用旧参数计算隐变量的条件分布（权重），M 步用这些权重更新参数；每一轮都有 Q(θ_{t+1}|θ_t) ≥ Q(θ_t|θ_t)，再由 KL 散度非负推出观测似然不减。",
+      "单调不减不需要凸性或可识别性等额外假设，只要求 M 步真正最大化 Q；但它只说似然值不降，收敛点可能是局部极大或鞍点，完全依赖初值——不能据此宣称「EM 收敛到全局最优」。",
+      "收敛速度通常为线性，比率与缺失信息比例有关；接近最优值时进展可能极慢，因此实践中常用加速技巧，或在末尾切换为直接优化做精修。",
+      "对指数族与缺失数据，M 步等价于「把完全数据的充分统计量换成条件期望，再做完全数据的极大似然」——这是 EM 在混合模型、隐马尔可夫模型与缺失数据问题中易于实施的根源。",
+      "EM 是 MM 算法的一个特例：E 步构造的替代函数在 θ_t 处与对数似然相切、且处处不超过它，M 步最大化该替代函数；这一视角把 EM 与其他单调算法统一起来。"
+    ],
+    "propertiesEn": [
+      "The E and M steps alternate strictly: the E step uses the old parameters to compute the latent conditional distribution (weights), and the M step uses those weights to update the parameters; every round satisfies Q(θ_{t+1}|θ_t) ≥ Q(θ_t|θ_t), and KL non-negativity upgrades this to a non-decreasing observed likelihood.",
+      "Monotonicity needs no convexity or identifiability, only that the M step truly maximizes Q; but it only says the likelihood value never decreases — limits can be local maxima or saddle points and depend entirely on initialization, so one may not claim that EM converges to the global optimum.",
+      "Convergence is typically linear with a rate tied to the fraction of missing information; progress can be extremely slow near the optimum, so acceleration tricks or a final switch to direct optimization are common in practice.",
+      "For exponential families with missing data, the M step amounts to replacing complete-data sufficient statistics by their conditional expectations and then performing the complete-data MLE — the reason EM is easy to implement for mixtures, hidden Markov models and missing-data problems.",
+      "EM is a special case of MM (minorize–maximize) algorithms: the E step builds a surrogate that touches the log-likelihood at θ_t and lies below it everywhere, and the M step maximizes that surrogate; this viewpoint unifies EM with other monotone algorithms."
+    ],
+    "examples": [
+      {
+        "problem": "一维两分量高斯混合：混合权 $\\pi_1=\\pi_2=0.5$，两分量标准差均为 $\\sigma=1$（已知）。数据为 $x=(-1,\\ 0,\\ 4)$，初值 $\\mu_1^{(0)}=-1$、$\\mu_2^{(0)}=2$。写出 E 步责任度，完成一次 EM 迭代（更新 $\\mu$ 与 $\\pi$），并验证观测对数似然不降。",
+        "solution": "分量密度取标准正态 $\\phi(z)=(2\\pi)^{-1/2}e^{-z^{2}/2}$，责任度 $r_{ik}\\propto\\pi_k\\phi(x_i-\\mu_k)$，归一化后得：\n$x=-1$：$r_{11}=0.9890$，$r_{12}=0.0110$；\n$x=0$：$r_{21}=0.8176$，$r_{22}=0.1824$；\n$x=4$：$r_{31}=0.0000275$，$r_{32}=0.9999725$。\n（以 $x=0$ 为例：$0.5\\phi(1)=0.1210$，$0.5\\phi(-2)=0.0270$，故 $r_{21}=0.1210/(0.1210+0.0270)=0.8176$。）\nM 步：$\\mu_k^{\\text{new}}=\\frac{\\sum_i r_{ik}x_i}{\\sum_i r_{ik}}$，$\\pi_k^{\\text{new}}=\\frac{1}{3}\\sum_i r_{ik}$。分量 1：分子 $=0.9890\\times(-1)+0.8176\\times0+0.0000275\\times4=-0.98890$，分母 $=1.80661$，故 $\\mu_1\\approx-0.5474$；分量 2：分子 $=0.0110\\times(-1)+0.1824\\times0+0.99997\\times4=3.98890$，分母 $=1.19339$，故 $\\mu_2\\approx3.3425$。混合权 $\\pi_1=1.80661/3\\approx0.6022$、$\\pi_2\\approx0.3978$。（可核验：两个分子的和 $-0.98890+3.98890=3=(-1)+0+4$，两个分母的和也为 3。）\n把责任度看作「软分类」：点 0 主要归分量 1，点 4 几乎完全归分量 2，所以两个均值分别向各自负责的点移动——这是 EM 与硬性分配聚类的关键差别。\n单调性验证：观测对数似然 $\\ell(\\theta)=\\sum_i\\ln[\\pi_1\\phi(x_i-\\mu_1)+\\pi_2\\phi(x_i-\\mu_2)]$。迭代前各点取值为 $\\ln0.2017=-1.6010$、$\\ln0.1480=-1.9107$、$\\ln0.0270=-3.6121$，合计 $\\ell(\\theta_0)=-7.1238$；迭代后各点为 $-1.5285$、$-1.5730$、$-2.0568$，合计 $\\ell(\\theta_1)=-5.1583>-7.1238$，确实上升（python3 复算一致）。再迭代一步得 $\\mu\\approx(-0.5006,\\ 3.9883)$、$\\pi\\approx(0.6657,\\ 0.3343)$，$\\ell\\approx-4.9162$，继续上升。注意这只说明似然值不降，并不说明收敛到了全局最优。"
+      }
+    ],
+    "tags": ["EM 算法", "隐变量", "高斯混合", "极大似然"],
+    "links": ["point-estimation", "bayesian-inference", "fisher-information", "monte-carlo-methods", "least-squares-fitting"],
+    "plot": {
+      "type": "function",
+      "functions": [
+        { "expr": "0.5*(1/sqrt(2*PI))*exp(-((x+1)^2)/2)+0.5*(1/sqrt(2*PI))*exp(-((x-2)^2)/2)", "color": "#4cc9f0", "label": "迭代前密度（μ = −1, 2）" },
+        { "expr": "0.6022*(1/sqrt(2*PI))*exp(-((x+0.5474)^2)/2)+0.3978*(1/sqrt(2*PI))*exp(-((x-3.3425)^2)/2)", "color": "#ff6b9d", "label": "一轮 EM 后密度（μ ≈ −0.547, 3.343）" }
+      ],
+      "xRange": [-4, 6],
+      "yRange": [0, 0.3],
+      "title": "两分量高斯混合：一次 EM 迭代前后的密度"
+    }
+  },
+  {
+    "id": "monte-carlo-methods",
+    "title": "蒙特卡洛方法与 MCMC 初步",
+    "titleEn": "Monte Carlo Methods and an Introduction to MCMC",
+    "branch": "statistics",
+    "level": 5,
+    "summary": "用随机样本近似期望与概率：大数定律保证收敛、样本方差给出误差；重要性采样处理难以直接抽样的分布，MCMC（以 Metropolis–Hastings 为代表）构造以目标分布为平稳分布的链来间接抽样。",
+    "summaryEn": "Approximate expectations and probabilities by random samples, with the law of large numbers ensuring convergence and the sample variance quantifying the error; importance sampling handles awkward targets, while MCMC — notably Metropolis–Hastings — samples indirectly via a chain whose stationary law is the target.",
+    "definition": "很多量都可以写成某个分布下的期望，例如概率 $P(X\\in A)=E_\\pi[1_A(X)]$ 与积分 $\\int f(x)\\,dx$。**蒙特卡洛方法**的基本思想是：若能独立地从目标分布 $\\pi$ 抽样 $X_1,\\dots,X_n$，就用样本均值 $\\hat\\mu_n=\\frac{1}{n}\\sum_{i=1}^{n}h(X_i)$ 估计 $E_\\pi[h(X)]$。大数定律保证收敛，中心极限定理进一步给出误差量级：$(\\hat\\mu_n-E_\\pi[h])/(\\sigma_h/\\sqrt{n})$ 近似服从 $N(0,1)$，其中 $\\sigma_h^{2}=\\operatorname{Var}_\\pi(h)$，实践中用样本标准差 $\\hat\\sigma_h/\\sqrt{n}$ 作为标准误。误差按 $1/\\sqrt{n}$ 收缩、与维数无关（常数因子除外）——这正是蒙特卡洛在高维积分中胜过确定性网格法（维数灾难）的根本原因；代价是误差是概率意义上的，结果必须附带标准误。\n\n想减小 $\\hat\\sigma_h/\\sqrt{n}$，既可以增大 $n$，也可以更换估计形式来降低方差：对偶变量、控制变量、分层抽样等都是常见的方差缩减手段。其中**重要性采样**最核心：从容易抽样的**提议分布** $q$ 取样本，用权重 $w(x)=\\pi(x)/q(x)$ 修正：$$E_\\pi[h(X)]=E_q\\!\\left[\\frac{\\pi(X)}{q(X)}\\,h(X)\\right].$$ 只要 $q(x)>0$ 在所有满足 $\\pi(x)h(x)\\neq0$ 的地方成立，这个估计就是无偏的；但若 $q$ 的尾部比 $\\pi$ 薄，权重波动会很大甚至方差无穷，估计极不稳定——所以提议分布必须覆盖目标分布的尾部。实践中常用**自归一化**形式 $\\frac{\\sum_i w_i h(x_i)}{\\sum_i w_i}$（有偏但一致），并用权重集中程度诊断「有效样本量」。\n\n当 $\\pi$ 只知道到常数因子、或根本无法直接抽样时（贝叶斯后验、统计物理的配分函数都属于此类），**MCMC**（马尔可夫链蒙特卡洛）换一条路：构造一条以 $\\pi$ 为**平稳分布**的马尔可夫链 $X_0,X_1,\\dots$，运行足够长之后，链的样本近似来自 $\\pi$，用遍历平均估计期望。代表性算法是 **Metropolis–Hastings（MH）**：当前处于 $x$，从提议分布 $q(\\cdot\\mid x)$ 抽候选 $y$，以概率 $$\\alpha(x,y)=\\min\\!\\left(1,\\ \\frac{\\pi(y)\\,q(x\\mid y)}{\\pi(x)\\,q(y\\mid x)}\\right)$$ 接受 $y$，否则留在 $x$。**接受概率的方向必须看清**：分子是「目标分布在候选点的密度 $\\times$ 从候选点提议回到当前点的密度」，分母是「目标分布在当前点的密度 $\\times$ 从当前点提议到候选点的密度」；当 $q$ 对称（如随机游走 $q(y\\mid x)=q(x\\mid y)$）时简化为 $\\min(1,\\ \\pi(y)/\\pi(x))$：候选点更可能就必接受，更不可能则按密度比接受。由于 $\\pi$ 总以比值出现，归一化常数自动约掉；当提议与当前点无关（独立提议）时，$\\alpha=\\min(1,\\ \\pi(y)q(x)/(\\pi(x)q(y)))$，这正是贝叶斯计算中常用的独立 MH 形式。\n\nMH 的接受规则满足**细致平衡** $\\pi(x)P(x\\to y)=\\pi(y)P(y\\to x)$，从而 $\\pi$ 是链的平稳分布（这也是为什么不能再对 $\\alpha$ 乘任何**非对称**的额外因子：两侧同乘对称因子只会减慢混合，不破坏细致平衡）。链样本高度相关，误差大于独立样本的 $\\sigma_h/\\sqrt{n}$；标准误通常用含自相关的公式或**有效样本量** $\\mathrm{ESS}\\approx n/(1+2\\sum_{k\\ge1}\\rho_k)$ 估计。实践惯例包括：丢掉预热期（burn-in）样本；用轨迹图、自相关函数与多条不同初值的链诊断混合是否充分；接受率过高说明步子太小、链移动缓慢，过低说明步子太大、频繁被拒绝，调参目标是让链高效地探索目标分布。**Gibbs 抽样**是 MH 的特例：每次从某个全条件分布 $\\pi(x_j\\mid x_{-j})$ 直接抽样，接受率恒为 1，在条件分布容易抽时特别方便。蒙特卡洛与 MCMC 是贝叶斯推断（见 bayesian-inference）在现代成为常规工具的算力基础。",
+    "definitionEn": "Many quantities can be written as expectations under some distribution, for example the probability $P(X\\in A)=E_\\pi[1_A(X)]$ and the integral $\\int f(x)\\,dx$. The idea of **Monte Carlo** is simple: if independent samples $X_1,\\dots,X_n$ from the target $\\pi$ are available, estimate $E_\\pi[h(X)]$ by the sample average $\\hat\\mu_n=\\frac{1}{n}\\sum_{i=1}^{n}h(X_i)$. The law of large numbers guarantees convergence, and the central limit theorem quantifies the error: $(\\hat\\mu_n-E_\\pi[h])/(\\sigma_h/\\sqrt{n})$ is approximately $N(0,1)$ with $\\sigma_h^{2}=\\operatorname{Var}_\\pi(h)$, estimated in practice by the sample standard deviation over $\\sqrt{n}$. The error shrinks like $1/\\sqrt{n}$ independently of dimension (up to constants) — the reason Monte Carlo beats deterministic grids on high-dimensional integrals, escaping the curse of dimensionality. The price is a probabilistic error, so a standard error must be reported alongside the estimate.\n\nTo shrink $\\hat\\sigma_h/\\sqrt{n}$ one can either increase n or change the estimator to reduce variance (antithetic variates, control variates, stratification). The central technique is **importance sampling**: draw from an easy **proposal distribution** q and correct with the weight $w(x)=\\pi(x)/q(x)$, since $$E_\\pi[h(X)]=E_q\\!\\left[\\frac{\\pi(X)}{q(X)}\\,h(X)\\right].$$ The estimator is unbiased provided $q(x)>0$ wherever $\\pi(x)h(x)\\neq0$; but if q has thinner tails than π the weights fluctuate wildly, the variance may be infinite, and the estimate becomes unstable, so a proposal must cover the tails of the target. In practice one uses the **self-normalized** form $\\frac{\\sum_i w_i h(x_i)}{\\sum_i w_i}$ (biased yet consistent) and monitors weight concentration as a proxy for the effective sample size.\n\nWhen π is known only up to a constant or cannot be sampled directly — Bayesian posteriors and partition functions in statistical physics are typical — **MCMC** (Markov chain Monte Carlo) takes another route: build a Markov chain $X_0,X_1,\\dots$ whose **stationary distribution** is π; after the chain has run long enough its states approximate draws from π, and ergodic averages estimate expectations. The canonical algorithm is **Metropolis–Hastings (MH)**: from the current state x, draw a candidate y from a proposal $q(\\cdot\\mid x)$ and accept it with probability $$\\alpha(x,y)=\\min\\!\\left(1,\\ \\frac{\\pi(y)\\,q(x\\mid y)}{\\pi(x)\\,q(y\\mid x)}\\right),$$ otherwise stay at x. **Mind the direction of the acceptance ratio**: the numerator is the target density at the candidate times the proposal density of returning to the current point, and the denominator is the target density at the current point times the proposal density of moving to the candidate. When q is symmetric (e.g. a random walk with $q(y\\mid x)=q(x\\mid y)$) this collapses to $\\min(1,\\ \\pi(y)/\\pi(x))$: a more likely candidate is always accepted, a less likely one is accepted with the density ratio. Since π appears only in ratios, normalizing constants cancel; when the proposal is independent of the current point, $\\alpha=\\min(1,\\ \\pi(y)q(x)/(\\pi(x)q(y)))$, the independent MH form widely used in Bayesian computation.\n\nThe MH rule satisfies **detailed balance** $\\pi(x)P(x\\to y)=\\pi(y)P(y\\to x)$, so π is stationary for the chain (which is why no **asymmetric** extra factor may be multiplied into α: multiplying both sides by a symmetric factor only slows mixing and does not break detailed balance). Chain samples are strongly correlated and the error exceeds the i.i.d. $\\sigma_h/\\sqrt{n}$; standard errors are estimated with autocorrelation corrections or through the **effective sample size** $\\mathrm{ESS}\\approx n/(1+2\\sum_{k\\ge1}\\rho_k)$. Practical habits include discarding burn-in, diagnosing mixing with trace plots, autocorrelation functions and several chains started from different values, and tuning the proposal so that the chain explores the target efficiently: an acceptance rate that is too high means tiny steps and slow movement, while one that is too low means oversized steps that are mostly rejected. **Gibbs sampling** is the special case of MH that proposes directly from a full conditional $\\pi(x_j\\mid x_{-j})$ and always accepts, which is convenient when those conditionals are easy to sample. Monte Carlo and MCMC are the computational engine that made Bayesian inference (see bayesian-inference) a routine tool of modern statistics.",
+    "formulas": [
+      {
+        "latex": "\\hat\\mu_n=\\frac{1}{n}\\sum_{i=1}^{n}h(X_i)\\;\\xrightarrow{\\;P\\;}\\;E_\\pi[h(X)],\\qquad \\text{SE}\\approx\\frac{\\hat\\sigma_h}{\\sqrt{n}}",
+        "note": "蒙特卡洛估计与标准误：大数定律保证收敛，中心极限定理给出误差按 1/√n 收缩；ŝ_h 是 h(X_i) 的样本标准差。",
+        "noteEn": "Monte Carlo estimate and standard error: the law of large numbers gives convergence and the central limit theorem gives the 1/√n error rate; ŝ_h is the sample standard deviation of h(X_i)."
+      },
+      {
+        "latex": "E_\\pi[h(X)]=E_q\\!\\left[\\frac{\\pi(X)}{q(X)}\\,h(X)\\right],\\qquad w(x)=\\frac{\\pi(x)}{q(x)}",
+        "note": "重要性采样：从提议分布 q 抽样、用权重 w=π/q 修正；要求 q 在 π(x)h(x)≠0 处全为正，否则估计有偏。",
+        "noteEn": "Importance sampling: draw from the proposal q and correct with the weight w=π/q; it requires q>0 wherever π(x)h(x)≠0, otherwise the estimator is biased."
+      },
+      {
+        "latex": "\\alpha(x,y)=\\min\\!\\left(1,\\ \\frac{\\pi(y)\\,q(x\\mid y)}{\\pi(x)\\,q(y\\mid x)}\\right)",
+        "note": "Metropolis–Hastings 接受概率：分子取「候选点的目标密度 × 从候选点提议回到 x 的密度」，分母取「当前点的目标密度 × 从 x 提议到 y 的密度」——方向不能反。",
+        "noteEn": "Metropolis–Hastings acceptance probability: the numerator uses the target density at the candidate times the proposal density of returning to x, the denominator the target density at the current point times the proposal density of moving to y; the direction must not be reversed."
+      },
+      {
+        "latex": "\\pi(x)\\,P(x\\to y)=\\pi(y)\\,P(y\\to x)\\;\\Longrightarrow\\;\\sum_x\\pi(x)P(x\\to y)=\\pi(y)",
+        "note": "细致平衡推出目标 π 是平稳分布：若链的转移对一切 x、y 满足左式，则 π 经过一步转移后保持不变，这正是 MH 接受概率的设计依据。",
+        "noteEn": "Detailed balance implies that π is stationary: if the transition kernel satisfies the left identity for all x and y, then π is unchanged after one step — exactly what the MH acceptance rule is designed to achieve."
+      },
+      {
+        "latex": "\\operatorname{Var}(\\bar h)\\approx\\frac{\\sigma_h^{2}}{n}\\Bigl(1+2\\sum_{k\\ge1}\\rho_k\\Bigr),\\qquad \\mathrm{ESS}\\approx\\frac{n}{1+2\\sum_{k\\ge1}\\rho_k}",
+        "note": "自相关修正：链样本不独立时估计方差被括号中的方差膨胀因子放大，ρ_k 为 k 阶自相关；ESS 衡量「相当于多少个独立样本」。",
+        "noteEn": "Autocorrelation correction: dependent chain samples inflate the variance of the average by the bracketed factor, with ρ_k the order-k autocorrelation; ESS measures the equivalent number of independent samples."
+      }
+    ],
+    "properties": [
+      "误差按 1/√n 收缩且与维数无关（常数因子除外），这是蒙特卡洛在高维积分与高维期望中胜过确定性网格法的根本原因；代价是误差是概率意义上的，需要报告标准误。",
+      "重要性采样的无偏性依赖支撑条件：q 必须在 π(x)h(x)≠0 的地方全为正；提议分布尾部太薄会让权重方差巨大甚至无穷，此时估计极不稳定。",
+      "Metropolis–Hastings 只需要目标分布 π 的比值，归一化常数可以未知——这正好匹配贝叶斯后验 π(θ|x) ∝ f(x|θ)π(θ) 的可用形式。",
+      "MH 的接受概率使链满足细致平衡，故 π 是平稳分布；在不可约、非周期（遍历）等条件下，链的分布收敛到 π、遍历平均收敛到 E_π[h]。Gibbs 抽样是取全条件分布为提议的特例，接受率恒为 1。",
+      "链样本相关、初值有影响：起步阶段（burn-in）样本通常丢弃；自相关使有效样本量小于 n，实践中报告 ESS 或相关稳健的标准误，并用轨迹图、自相关图与多条不同初值的链判断是否收敛。"
+    ],
+    "propertiesEn": [
+      "The error shrinks like 1/√n independently of dimension (up to constants), which is why Monte Carlo beats deterministic grids on high-dimensional integrals and expectations; the price is a probabilistic error that must be reported through a standard error.",
+      "Unbiasedness of importance sampling relies on the support condition q>0 wherever π(x)h(x)≠0; a proposal with too-thin tails makes the weight variance huge or infinite, and the estimate becomes extremely unstable.",
+      "Metropolis–Hastings only uses ratios of the target π, so its normalizing constant may be unknown — exactly the situation of a Bayesian posterior π(θ|x) ∝ f(x|θ)π(θ).",
+      "The MH acceptance probability makes the chain satisfy detailed balance, so π is stationary; under irreducibility and aperiodicity the chain converges to π and ergodic averages converge to E_π[h]. Gibbs sampling is the special case that proposes from full conditionals and always accepts.",
+      "Chain samples are correlated and the initial state matters: early burn-in samples are usually discarded; autocorrelation reduces the effective sample size below n, so one reports ESS or autocorrelation-robust standard errors and judges convergence with trace plots, autocorrelation plots and several chains started from different values."
+    ],
+    "examples": [
+      {
+        "problem": "用蒙特卡洛方法估计 $\\pi=\\int_0^1\\frac{4}{1+x^{2}}\\,dx$：从 $U(0,1)$ 抽取 $n=10000$ 个均匀随机数（如 python3 中 numpy.random.default_rng(2026).uniform(size=10000)），给出估计值、标准误，并与精确值比较。",
+        "solution": "把积分写成期望：令 $h(u)=4/(1+u^{2})$，$u\\sim U(0,1)$，则 $\\pi=E[h(u)]$。用上述 10000 个样本算得 $\\bar h=3.1307$，样本标准差 $\\hat\\sigma_h=0.6443$，标准误 $\\hat\\sigma_h/\\sqrt{10000}=0.00644$。于是 $\\pi\\approx3.1307$，与真值 $3.14159$ 相差 $0.0109$，约合 $1.7$ 个标准误——完全在正常波动范围内。\n理论标准差可以解析验证：$\\sigma_h^{2}=E[h^{2}]-\\pi^{2}=\\int_0^1\\frac{16}{(1+x^{2})^{2}}\\,dx-\\pi^{2}=4+2\\pi-\\pi^{2}\\approx0.4136$，故 $\\sigma_h\\approx0.6431$，与样本值 $0.6443$ 吻合。若样本量增到 $10^{6}$，标准误按 $1/\\sqrt{n}$ 缩小约 10 倍，约为 $0.00064$。"
+      },
+      {
+        "problem": "目标分布为标准正态 $\\pi(x)\\propto e^{-x^{2}/2}$，提议分布取对称随机游走 $q(y\\mid x)=N(x,1)$（即 $y=x+\\xi$，$\\xi\\sim N(0,1)$）。当前状态 $x=0.5$。(1) 求候选 $y=1.2$ 与 $y=-0.3$ 的接受概率。(2) 用两状态链 $\\{A,B\\}$、$\\pi(A)=0.3$、$\\pi(B)=0.7$、提议以 $1/2$ 的概率跳到另一状态，验证细致平衡。",
+        "solution": "(1) 提议 $q$ 对称，故 $\\alpha(x,y)=\\min\\bigl(1,\\ \\pi(y)/\\pi(x)\\bigr)=\\min\\bigl(1,\\ e^{-(y^{2}-x^{2})/2}\\bigr)$，归一化常数 $\\sqrt{2\\pi}$ 在比值中约去。\n对 $y=1.2$：$(y^{2}-x^{2})/2=(1.44-0.25)/2=0.595$，$\\alpha=e^{-0.595}\\approx0.552$；\n对 $y=-0.3$：$(y^{2}-x^{2})/2=(0.09-0.25)/2=-0.08$，$\\alpha=\\min(1,\\ e^{0.08})=\\min(1,\\ 1.083)=1$。\n即向更可能的位置 $y=-0.3$ 移动必然接受，向更不可能的位置 $y=1.2$ 只以约 0.552 的概率接受。注意方向：接受概率的分子用候选点的目标密度。\n(2) 提议对称，$q=1/2$。$A\\to B$：接受率 $\\min(1,\\ \\pi(B)/\\pi(A))=\\min(1,\\ 0.7/0.3)=1$，故 $P(A\\to B)=0.5$；$B\\to A$：接受率 $\\min(1,\\ \\pi(A)/\\pi(B))=0.3/0.7=3/7$，故 $P(B\\to A)=0.5\\times3/7=3/14$。细致平衡：$\\pi(A)P(A\\to B)=0.3\\times0.5=0.15$，$\\pi(B)P(B\\to A)=0.7\\times3/14=0.15$，两边相等。这说明若链已达到 $\\pi=(0.3,\\ 0.7)$，下一步的分布仍是 $\\pi$：目标分布是平稳分布。"
+      }
+    ],
+    "tags": ["蒙特卡洛", "重要性采样", "MCMC", "Metropolis–Hastings"],
+    "links": ["bayesian-inference", "law-of-large-numbers", "central-limit-theorem", "markov-chain", "stationary-distribution"]
+  }
+]

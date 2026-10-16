@@ -1,0 +1,304 @@
+[
+  {
+    "id": "group-theory-origins",
+    "title": "群论的起源：从拉格朗日到伽罗瓦",
+    "titleEn": "From Lagrange to Galois: The Origins of Group Theory",
+    "branch": "math-history",
+    "level": 5,
+    "summary": "五次方程没有求根公式这一难题，引出对根的置换的系统研究：拉格朗日 1770 年的考察、鲁菲尼与阿贝尔的不可能性证明、伽罗瓦 1832 年用「方程的群」给出的可解性判据，共同催生了群的概念。",
+    "summaryEn": "The puzzle of solving equations by radicals drove Lagrange, Ruffini, Abel and finally Galois to study permutations of roots; Galois's group of an equation and his solvability criterion gave birth to the group concept.",
+    "definition": "三次、四次方程早在 16 世纪就被卡尔达诺、费拉里等人用根式（只含系数的四则运算与开方）解出，但五次方程始终没有公式。1770 年拉格朗日发表《关于代数方程解的思考》（Réflexions sur la résolution algébrique des équations），第一次把已知的三次、四次解法放在同一个视角下考察：解法的每一步都对应着根的某个函数（今天称为拉格朗日预解式）在根的置换下如何变化。他发现这套统一方法在五次方程处失效，并直言其中的困难超过了自己所能解决的程度。拉格朗日没有定义群，但「研究根的置换」从此成为方程论的核心工具，他因而被视为群论思想的先驱。\n\n第一个宣称证明「五次方程不能用根式求解」的是意大利人鲁菲尼：1799 年他在《一般方程理论》（Teoria generale delle equazioni）中给出证明，但关键处有一个未加证明的假设（涉及相关置换集合的封闭性），因此长期未被普遍接受。挪威人阿贝尔 1824 年自费刊行了《论代数方程：一般五次方程不能用根式求解的证明》，给出完整严格的证明，终结了「寻找五次公式」的努力；1826 年他还在克雷勒杂志上发表了扩写版。阿贝尔也刻画了哪些特殊方程可以根式求解，可惜 1829 年因病去世，年仅 26 岁。\n\n把问题提升为理论的是伽罗瓦（Évariste Galois, 1811–1832）。他的《论方程根式可解的条件》（Mémoire sur les conditions de résolubilité des équations par radicaux）先后多次提交巴黎科学院都未能发表——1829 年经柯西转交后未见下文，1830 年提交的那份在傅里叶去世后遗失，1831 年又被泊松退回；1832 年 5 月 30 日他在决斗中身受重伤、次日去世，年仅 20 岁，决斗前夜写给朋友谢瓦利埃（Auguste Chevalier）的信中概括了自己的思想。手稿直到 1846 年才由刘维尔整理发表在《纯粹与应用数学杂志》上。伽罗瓦为每个方程配上「方程的群」：保持根之间一切系数在基域中的有理关系的置换的集合。他的核心结论是：方程可用根式解，当且仅当这个群存在一条以正规子群为项的降链，使每一步的商群都是交换群——现代说法即「伽罗瓦群可解」。注意「群」一词是伽罗瓦引入的，而「正规子群」等术语是后来（戴德金等人，19 世纪 70 年代）才出现的；现代教科书写成「伽罗瓦群 = 分裂域上保持基域不动的自同构群」，与伽罗瓦所说的「保持一切有理关系的置换」是一回事。\n\n伽罗瓦的思想生前无人理解，1846 年发表后却迅速改变代数学：凯莱 1854 年在《论群，取决于符号方程 θⁿ = 1》中给出抽象群的公理化定义，并证明每个群都同构于某个置换群的子群（凯莱定理）；若尔当 1870 年的《置换论》（Traité des substitutions）系统整理并发展了伽罗瓦理论。此后群论从「解方程的工具」成长为描述对称性的通用语言，并在 20 世纪与表示论、李群、拓扑学、物理学深度结合。本条目讲述的是历史线索；伽罗瓦对应、可解群与五次方程不可解性的现代证明等理论内容，见关联的抽象代数节点。",
+    "definitionEn": "Cubic and quartic equations were solved by radicals in the 16th century (Cardano, Ferrari), but the quintic resisted every formula for two centuries. In 1770 Lagrange published his Réflexions sur la résolution algébrique des équations, the first systematic comparison of the known solutions from a single viewpoint: each step is governed by how some function of the roots, today called a Lagrange resolvent, behaves under permutations of the roots. He watched this unified method break down for the quintic and admitted that the difficulty exceeded his powers. Lagrange never defined a group, yet the study of permutations of roots became the central tool of equation theory, and he is regarded as a forerunner of group theory.\n\nRuffini (1799, Teoria generale delle equazioni) was the first to claim a proof that the quintic is insoluble by radicals, but his argument contained an unjustified assumption about closure of the relevant permutations, and it was not accepted. In 1824 Abel published at his own expense the memoir proving rigorously that the general quintic has no radical solution, followed by an expanded version in Crelle's Journal in 1826. Abel also characterized which special equations are solvable by radicals, but he died of illness in 1829 at the age of 26.\n\nThe real theory came from Galois (1811–1832). His memoir on the conditions of solvability of equations by radicals was submitted twice to the Paris Academy without success — the first manuscript was lost after its referee Fourier died, the second was rejected by Poisson — and he was mortally wounded in a duel on 30 May 1832 and died the next day, aged 20, having summarized his ideas in a letter to his friend Auguste Chevalier the night before. Liouville finally published the manuscripts in the Journal de mathématiques pures et appliquées in 1846. Galois attached to every equation its group: the set of permutations of the roots that preserve every rational relation with coefficients in the base field. His criterion: the equation is solvable by radicals exactly when this group admits a descending chain of normal subgroups whose quotients are abelian — in modern language, when its Galois group is solvable. The word groupe is Galois's own, while terms such as normal subgroup were introduced later (by Dedekind and others in the 1870s); the modern definition, the automorphism group of the splitting field fixing the base field, describes the same object.\n\nUnappreciated in his lifetime, Galois's ideas transformed algebra after 1846: Cayley gave abstract group axioms in 1854 in On the theory of groups, as depending on the symbolic equation θⁿ = 1, and proved that every group embeds into a group of permutations; Jordan's Traité des substitutions (1870) developed the theory. Group theory then grew from a tool for equations into the language of symmetry, merging in the 20th century with representation theory, Lie groups, topology and physics. This entry tells the historical story; for the modern theory — the Galois correspondence, solvable groups and the proof that the general quintic is insoluble — see the linked abstract-algebra nodes.",
+    "formulas": [
+      {
+        "latex": "x^{n} + a_{n-1}x^{n-1} + \\cdots + a_0 = (x-r_1)(x-r_2)\\cdots(x-r_n)",
+        "note": "韦达定理：系数是根的基本对称函数，对根的任意置换都不变。这是把「方程的系数」与「根的置换」联系起来的出发点，也是拉格朗日方法的起点。",
+        "noteEn": "Vieta's formulas: the coefficients are symmetric functions of the roots, invariant under every permutation of them — the starting point that links coefficients to permutations."
+      },
+      {
+        "latex": "\\mathrm{Gal}(L/K) = \\{\\sigma \\in \\operatorname{Aut}(L) : \\sigma|_K = \\mathrm{id}\\}",
+        "note": "伽罗瓦群：L 是多项式 f 在 K 上的分裂域，群元素是保持 K 逐点不动的自同构；它们把根集映到自身，正是伽罗瓦所说的「保持一切有理关系的置换」。",
+        "noteEn": "The Galois group: L is the splitting field of f over K, and the elements are automorphisms fixing K pointwise; they permute the roots, matching Galois's own description."
+      },
+      {
+        "latex": "|G| = [L:K],\\qquad [L^{H}:K] = [G:H]",
+        "note": "伽罗瓦理论基本定理的定量部分（L/K 为伽罗瓦扩张，H 为 G 的子群）：群的大小等于扩张次数，子群的指数等于不动域 L^H 的次数——「域的问题」由此变成「群的问题」。",
+        "noteEn": "The quantitative part of the fundamental theorem: for a Galois extension L/K and a subgroup H, the order of G equals the degree and the index of H equals the degree of the fixed field — field problems become group problems."
+      },
+      {
+        "latex": "f \\text{ 可用根式解} \\iff \\mathrm{Gal}(f) \\text{ 是可解群}",
+        "note": "伽罗瓦判据（特征 0）：方程根式可解等价于伽罗瓦群存在以正规子群为项、商群为交换群的降链；解法的每一步开方，对应降链的一步交换商群。",
+        "noteEn": "Galois's criterion (characteristic 0): solvability by radicals is equivalent to the Galois group being solvable, i.e. admitting a normal chain with abelian quotients."
+      },
+      {
+        "latex": "n \\ge 5 \\implies \\text{一般 } n \\text{ 次方程不能用根式求解}",
+        "note": "阿贝尔–鲁菲尼定理，原因是 n ≥ 5 时对称群 S_n 不可解（A_n 是单群且非交换）。注意定理说的是「一般方程」，个别五次方程仍可根式求解：x⁵ − 2 的群是 20 阶可解群，它的根就是 2^{1/5}ζ₅^k。",
+        "noteEn": "The Abel–Ruffini theorem: for n ≥ 5 the symmetric group is not solvable, so the general equation has no radical solution. Individual quintics may still be solvable, e.g. x⁵ − 2 with roots 2^{1/5}ζ₅^k."
+      }
+    ],
+    "properties": [
+      "伽罗瓦群作用在方程的 n 个根上，并保持根之间一切系数属于基域的有理关系；方程的可解性研究的就是这组置换的「可解程度」。",
+      "对伽罗瓦扩张 L/K 有 |G| = [L:K]：群越大，扩张次数越高，方程根的「对称性大小」被精确定量。",
+      "根式可解 ⟺ 群可解：存在降链 G = G₀ ⊵ G₁ ⊵ ⋯ ⊵ G_m = 1，使每个 G_i 是 G_{i-1} 的正规子群、商群 G_{i-1}/G_i 交换；每一步开方对应一个交换商群。",
+      "一般 n（≥5）次方程无根式解，因为 S_n 不可解；但这不排除个别方程可解——x⁵ − 2 的五个根都是根式 2^{1/5}ζ₅^k，其伽罗瓦群是 20 阶的仿射群 F₂₀，仍然可解。",
+      "凯莱定理：每个抽象群都同构于某个置换群的子群。因此历史上「群」最先以根的置换群的面貌出现并非偶然。"
+    ],
+    "propertiesEn": [
+      "The Galois group acts on the n roots and preserves every rational relation with coefficients in the base field; solvability asks how solvable this group of permutations is.",
+      "For a Galois extension L/K one has |G| = [L:K]: a larger group means a larger extension degree, quantifying the symmetry of the roots.",
+      "Solvable by radicals holds if and only if the group is solvable: there is a chain G = G₀ ⊵ G₁ ⊵ ⋯ ⊵ G_m = 1 with normal steps and abelian quotients, each adjoining of a radical matching one abelian quotient.",
+      "The general equation of degree n ≥ 5 is not solvable by radicals because S_n is not solvable. Individual equations may still be: the quintic x⁵ − 2 has radical roots and its group is the 20-element affine group F₂₀.",
+      "Cayley's theorem: every abstract group embeds into a permutation group — so the historical appearance of groups as permutation groups of roots was no accident."
+    ],
+    "examples": [
+      {
+        "problem": "求 f(x) = x⁵ − 6x + 3 在 Q 上的伽罗瓦群，并判断方程 f(x) = 0 能否用根式求解。",
+        "solution": "第一步（不可约性）：取素数 3，由于 3 | (−6)、3 | 3 而 3² = 9 ∤ 3，由艾森斯坦判别法 f 在 Q 上不可约，因此伽罗瓦群在 5 个根上传递。第二步（判别式）：对 x⁵ + px + q 有 Δ = 4⁴p⁵ + 5⁵q⁴ = 256·(−6)⁵ + 3125·3⁴ = −1990656 + 253125 = −1737531 = −3⁴·19·1129。对不可约多项式，Δ 是有理数的平方当且仅当群包含于 A₅；这里 Δ 为负、不是平方，所以群不包含于 A₅（同时排除候选 A₅ 与 C₅）。第三步（模素数分解型）：x⁵ − 6x + 3 模 5 不可约，给出 5-轮换；模 2 分解为 (x+1)(x⁴+x³+x²+x+1)，给出 4-轮换；模 17 分解为 (x+2)(x+7)(x−4)(x²−5x−4)，给出对换（轮换型 2·1·1·1）。第四步（排除）：S₅ 的传递子群只有 C₅、D₅（10 阶）、F₂₀（20 阶）、A₅、S₅ 五种。判别式排除 A₅；4-轮换排除 C₅（只有 5-轮换）与 D₅（只有 5-轮换与二二对换）；对换排除 F₂₀（它的非单位元只有 5-轮换、4-轮换、二二对换三种型）。所以 Gal(f) = S₅。第五步（不可解性）：S₅ 的换位子群是 A₅，而 A₅ 的换位子群仍是 A₅（A₅ 是 60 阶单群且非交换），导出列不终止于单位元，故 S₅ 不可解；由伽罗瓦判据，该方程不能用根式求解。数值复算：判别式用公式与根的乘积 ∏(rᵢ−rⱼ)² 两种方法计算一致（均为 −1737531）；sympy 的 galois_group 给出的群恰由 5-轮换 (0 1 2 3 4) 与对换 (0 1) 生成，即 S₅；又逐一验证 A₅ 三个共轭类代表元（3-轮换、5-轮换、二二对换）的正规闭包都等于整个 A₅，确认其单性。"
+      },
+      {
+        "problem": "求 g(x) = x³ − 3x + 1 的伽罗瓦群，写出它的三个根，并说明「方程可用根式解」与群论结论的关系。",
+        "solution": "判别式：对 x³ + px + q 有 Δ = −4p³ − 27q² = −4·(−3)³ − 27·1² = 108 − 27 = 81 = 9²，是有理数的平方，故群包含于 A₃；又 g 模 2 为 x³ + x + 1，在 F₂ 上无根（0 ↦ 1，1 ↦ 1），三次无根即不可约，所以群在 3 个根上传递。传递子群只能是 A₃ ≅ Z/3 或 S₃，判别式为平方排除 S₃，故 Gal(g) = A₃ ≅ Z/3，可解，方程可用根式求解。三角解法：令 x = 2cos θ，利用三倍角公式 4cos³θ − 3cosθ = cos 3θ，得 x³ − 3x + 1 = 2(4cos³θ − 3cosθ) + 1 = 2cos 3θ + 1。令其为零得 cos 3θ = −1/2，在 3θ ∈ (0, 3π) 中取 3θ = 2π/3、4π/3、8π/3，即 θ = 2π/9、4π/9、8π/9，三个根为 x₁ = 2cos(2π/9) ≈ 1.5320888862、x₂ = 2cos(4π/9) ≈ 0.3472963553、x₃ = 2cos(8π/9) ≈ −1.8793852415。Python 复算：三个数值代入 g 的余量都小于 10⁻⁴⁰；sympy 的 galois_group 给出的群由 3-轮换 (0 1 2) 生成，即 C₃。结论：三次方程的伽罗瓦群必为 S₃ 或 A₃，两者都可解，所以三次方程总有根式解——与 16 世纪以来的历史事实一致。"
+      }
+    ],
+    "tags": [
+      "群论起源",
+      "伽罗瓦",
+      "方程可解性",
+      "置换群",
+      "数学史"
+    ],
+    "links": [
+      "cubic-quartic-history",
+      "galois-theory-intro",
+      "solvable-groups-radicals",
+      "symmetric-alternating-groups",
+      "group-definition-examples"
+    ]
+  },
+  {
+    "id": "hilbert-program-godel",
+    "title": "希尔伯特纲领与哥德尔不完备性",
+    "titleEn": "Hilbert's Program and Gödel's Incompleteness",
+    "branch": "math-history",
+    "level": 5,
+    "summary": "希尔伯特 1900 年提出 23 个问题、1920 年代设计「完备、相容、可判定」的形式化纲领；哥德尔 1930 年证明一阶逻辑完备，1931 年却证明充分强、相容、可递归公理化的系统总有不可判定命题、相容性不能自证，图灵 1936 年用停机问题给出判定问题的否定解。",
+    "summaryEn": "Hilbert's 23 problems and his 1920s program of completeness, consistency and decidability met Godel: first-order logic is complete (1930), yet every sufficiently strong consistent recursively axiomatized system has undecidable sentences and cannot prove its own consistency (1931); Turing's halting problem settled decidability in 1936.",
+    "definition": "1900 年巴黎国际数学家大会上，希尔伯特提出著名的 23 个问题，其中第 2 问要求证明算术公理的相容性（不产生矛盾），第 10 问要求给出算法判定任意丢番图方程有无整数解。1920 年代，希尔伯特与阿克曼、贝尔奈斯等人推动「把全部数学形式化」：把命题写成精确的形式语言，把推理写成可机械检查的规则，然后用**有穷主义**（finitary）的元数学方法证明这个形式系统满足三件事——**完备性**（每个真命题都可证）、**相容性**（推不出矛盾）、**可判定性**（存在算法判定任一命题是否可证，即 Entscheidungsproblem，判定问题）。希尔伯特 1926 年在《论无穷》中回应直觉主义的批评：没有人能把我们从康托尔为我们创造的天堂里赶出去。\n\n第一个好消息来自哥德尔：他 1929 年的博士论文（1930 年发表）证明了一阶谓词演算的**完备性定理**——形式证明规则恰好能推出一切逻辑有效的公式。这让人们期待算术理论也能完备。但 1930 年 9 月的柯尼斯堡会议上，哥德尔宣布了相反的结果；1931 年他在《论〈数学原理〉及其相关系统中的形式不可判定命题 I》中正式发表。关键技术是**哥德尔编码**：给每个符号、公式、证明配上自然数，于是「x 是公式 y 的一个证明」成为自然数之间可判定的算术关系 Proof(x, y)，「可证」成为算术可表达的谓词。再用对角线技巧构造自指句 G，它在系统内断言「本句不可证」，即 T ⊢ G ↔ ¬Prov_T(⌜G⌝)。\n\n**第一不完备定理**：设 T 是相容的、可递归公理化（公理集合能机械枚举）且充分强（能解释初等算术，例如包含皮亚诺算术 PA）的形式系统，则存在句子 G，使 T 既不能证明 G，也不能证明 ¬G——系统内存在不可判定的命题。哥德尔 1931 年证明「不能反驳 G」时还假设了 ω-相容性（比相容性强），1936 年罗塞尔用「罗塞尔句」把假设降为相容性，所以现代表述只要求相容。若 T 的公理在标准模型 ℕ 中为真（PA 即如此），则哥德尔句 G 本身为真——它正确断言了自己的不可证性。**第二不完备定理**：这样的 T 不能证明自身的相容性，即 Con(T) 不可在 T 中证明；特别地，有穷主义的原始递归算术 PRA 推不出 Con(PA)。这意味着希尔伯特纲领的核心计划——用有穷主义方法为形式化的数学自证相容性——不可能按原样实现。1936 年根岑用 ε₀ 上的超限归纳给出了 Con(PA) 的证明，但这已越出有穷主义的范围。\n\n第二重打击落在判定问题上：1936 年图灵在《论可计算数及其在判定问题上的应用》中定义图灵机、证明停机问题不可判定，据此判定问题无解；同年丘奇用 λ 演算独立得到同一结论。这些结果与哥德尔定理同源——都靠对角线法构造自指对象，构成「不可证明、不可判定、不可计算」的统一图景。希尔伯特第十问题最终由马蒂亚塞维奇 1970 年完成否定解（基于戴维斯、普特南、罗宾逊 1961 年的工作）：丢番图方程的可解性不可判定。纲领并未彻底死亡：证明论（序数分析）、可计算性理论、逆向数学都是它的后代，只是「完备、相容、可判定」三个目标必须向下修正——对更弱的系统它们仍可同时成立，例如普雷斯伯格算术（只有加法）与实闭域理论都既完备又可判定。",
+    "definitionEn": "At the 1900 International Congress of Mathematicians in Paris, Hilbert proposed his famous 23 problems: the second asks for a proof of the consistency of the arithmetic axioms, the tenth for an algorithm deciding whether an arbitrary Diophantine equation has integer solutions. In the 1920s Hilbert, with Ackermann and Bernays, pushed to formalize all of mathematics: statements written in a precise formal language, inferences in mechanically checkable steps, and then a finitary metamathematical proof that the resulting system is complete (every true statement provable), consistent (no contradiction derivable) and decidable (an algorithm deciding provability, the Entscheidungsproblem). In his 1926 lecture On the Infinite Hilbert replied to the intuitionists: no one shall expel us from the paradise that Cantor has created for us.\n\nThe first good news came from Godel: his 1929 doctoral dissertation (published 1930) proved the completeness theorem for first-order logic — the formal rules of proof yield exactly the logically valid formulas. It was natural to hope that arithmetic itself would be complete as well. But at the Konigsberg conference in September 1930 Godel announced the opposite; the result appeared in 1931 as On Formally Undecidable Propositions of Principia Mathematica and Related Systems I. The key device is Godel numbering: symbols, formulas and proofs are coded by natural numbers, so that x is a proof of y becomes a decidable arithmetic relation Proof(x, y) and provability becomes an arithmetically expressible predicate. A diagonal trick then produces a self-referential sentence G asserting its own unprovability, formally T proves G if and only if not Prov_T of its code.\n\nThe first incompleteness theorem: let T be consistent, recursively axiomatizable (its axioms can be mechanically enumerated) and sufficiently strong (able to interpret elementary arithmetic, e.g. containing Peano arithmetic PA). Then there is a sentence G such that T proves neither G nor its negation — an undecidable statement inside the system. Godel's 1931 proof that the negation is also unprovable assumed omega-consistency, stronger than consistency; in 1936 Rosser removed that hypothesis with his Rosser sentence, so consistency alone suffices. If the axioms of T are true in the standard model of the natural numbers (as for PA), the Godel sentence G is itself true: it correctly asserts its own unprovability. The second incompleteness theorem: such a T cannot prove its own consistency, Con(T) is not provable in T; in particular primitive recursive arithmetic PRA cannot prove Con(PA). So the heart of Hilbert's program, a finitary self-proof of consistency, cannot be carried out as planned. In 1936 Gentzen did prove Con(PA), using transfinite induction up to epsilon-zero — a method beyond the finitary standpoint.\n\nA second blow fell on decidability: in 1936 Turing defined Turing machines in On Computable Numbers, with an Application to the Entscheidungsproblem and proved the halting problem undecidable, hence the Entscheidungsproblem has no solution; Church reached the same conclusion independently with the lambda calculus. These results share the diagonal engine with Godel's theorems, forming one landscape of the unprovable, the undecidable and the uncomputable. Hilbert's tenth problem received its negative solution from Matiyasevich in 1970, building on Davis, Putnam and Robinson (1961): Diophantine solvability is undecidable. The program is not dead: proof theory (ordinal analysis), computability theory and reverse mathematics are its heirs; only its three original goals must be scaled down — for weaker systems all three still hold, as for Presburger arithmetic and the theory of real closed fields.",
+    "formulas": [
+      {
+        "latex": "\\Gamma \\models \\varphi \\iff \\Gamma \\vdash \\varphi",
+        "note": "一阶逻辑的完备性定理（哥德尔 1929/1930）：语义蕴含（一切模型都满足）等价于语法可证。这是「逻辑的完备性」，与算术理论的不完备性不矛盾。",
+        "noteEn": "Godel's completeness theorem for first-order logic: semantic entailment is equivalent to formal provability. This is completeness of logic, not of arithmetic."
+      },
+      {
+        "latex": "T \\vdash G \\leftrightarrow \\neg\\,\\mathrm{Prov}_T(\\ulcorner G \\urcorner)",
+        "note": "哥德尔句的自指等价：G 在 T 内等价于「G 不可证」，⌜G⌝ 是 G 的哥德尔数。构造它需要编码、可表示性与对角线引理。",
+        "noteEn": "The self-referential equivalence defining the Godel sentence: G says, provably in T, that G is unprovable; the corner brackets denote Godel numbers."
+      },
+      {
+        "latex": "\\exists\\, \\varphi\\ \\bigl(\\varphi \\notin \\mathrm{Th}(T)\\ \\wedge\\ \\neg\\varphi \\notin \\mathrm{Th}(T)\\bigr)",
+        "note": "第一不完备定理（Th(T) 为 T 的定理集）：在 T 充分强、相容、可递归公理化时，存在既不可证也不可反驳的命题。三个条件缺一不可。",
+        "noteEn": "The first incompleteness theorem: for T sufficiently strong, consistent and recursively axiomatizable, some sentence belongs to neither Th(T) nor the set of refutable sentences."
+      },
+      {
+        "latex": "\\mathrm{Con}(T) \\notin \\mathrm{Th}(T)",
+        "note": "第二不完备定理：相容性命题（可写成 ¬∃p Proof(p, ⌜0=1⌝)）不能在 T 内证明。由它推出 PRA 不能证明 Con(PA)，希尔伯特纲领的有穷主义自证不可能。",
+        "noteEn": "The second incompleteness theorem: the consistency statement is unprovable in T itself; hence PRA cannot prove Con(PA) and the finitary self-justification of Hilbert's program is impossible."
+      },
+      {
+        "latex": "H = \\{\\langle e, x \\rangle : \\varphi_e(x)\\downarrow\\} \\text{ 不可判定}",
+        "note": "停机问题：H 由「第 e 个程序在第 x 个输入上停机」的数对组成，图灵 1936 年证明没有算法能判定 H，由此判定问题无解，与哥德尔定理互为独立证明。",
+        "noteEn": "The halting problem: no algorithm decides whether program e halts on input x; Turing used this in 1936 to give a negative solution of the Entscheidungsproblem."
+      }
+    ],
+    "properties": [
+      "三个条件缺一不可：相容、可递归公理化、充分强。删掉「充分强」，系统可能既完备又可判定——普雷斯伯格算术（只有加法）与实闭域理论就是这样的例子。",
+      "「逻辑完备」与「算术不完备」不冲突：一阶逻辑的推理规则是完备的，不完备性属于能把算术编码进去的理论，而不是逻辑规则的缺陷。",
+      "两个定理分工明确：第一定理给出不可判定命题的存在（例如哥德尔句，它断言自身不可证），第二定理说明相容性命题本身正是这样的不可判定命题。公理为真的系统中，哥德尔句在标准模型中为真——「真但不可证」并不矛盾。",
+      "对角线法是共同的引擎：哥德尔句（把证明编码后指回自身）、停机问题（程序问自己是否停机）、希尔伯特第十问题（把计算编码成丢番图方程）都靠自指构造。",
+      "不可判定性是相对于系统而言、不是绝对的：把 Con(PA) 作为新公理加入 PA，原系统的哥德尔句就变得可证，但新系统又产生自己的哥德尔句——不完备与相容性不能自证是形式化方法的一般特征。"
+    ],
+    "propertiesEn": [
+      "All three hypotheses are needed: consistency, recursive axiomatizability, sufficient strength. Drop sufficient strength and a system may be both complete and decidable, as Presburger arithmetic and the theory of real closed fields show.",
+      "Completeness of logic and incompleteness of arithmetic do not conflict: the inference rules of first-order logic are complete; incompleteness belongs to theories that can encode arithmetic, not to logic itself.",
+      "The two theorems divide the labor: the first exhibits an undecidable sentence (the Godel sentence asserting its own unprovability), the second shows the consistency statement is one of them. When the axioms are true, the Godel sentence is true in the standard model: true but unprovable is no contradiction.",
+      "Diagonalization is the common engine: the Godel sentence codes proofs and points back at itself, the halting program asks about its own halting, and Hilbert's tenth problem codes computations into Diophantine equations.",
+      "Undecidability is relative to a system, not absolute: adding Con(PA) as a new axiom makes the old Godel sentence provable, yet the extended system has its own Godel sentence — incompleteness is a general feature of formalization."
+    ],
+    "examples": [
+      {
+        "problem": "在希尔伯特式命题演算（公理 A1–A3 加分离规则）中给出 P → P 的证明，按「符号编号 + 素数幂」方案计算公式与证明的哥德尔数，并说明为什么「检查证明」是可机械化的。",
+        "solution": "取符号编号 P ↦ 1、Q ↦ 2、( ↦ 3、) ↦ 4、→ ↦ 5、¬ ↦ 6、∧ ↦ 7；公式 a₁a₂…a_k 编码为 ∏ pᵢ^{aᵢ}（pᵢ 为第 i 个素数），证明编码为各行公式编码的素数幂之积。证明如下：① P → ((P → P) → P)〔公理 A1〕；② (P → ((P → P) → P)) → ((P → (P → P)) → (P → P))〔公理 A2〕；③ (P → (P → P)) → (P → P)〔①②分离〕；④ P → (P → P)〔公理 A1〕；⑤ P → P〔③④分离〕。编码计算：(P → P) 的符号串为 ( P → P )，编码 2³·3¹·5⁵·7¹·11⁴ = 7686525000；第①行公式的编码是 11315671980455102320319117930552926173203475000（47 位十进制数）；整条证明的编码量级约为 10 的 2.19×10¹⁷⁰ 次方——编码爆炸是正常现象，定理只用它的可计算性，不用数值大小。检查一个候选证明只需：分解各素因子读出每行公式、逐行验证它是公理模式 A1—A3 的代入实例或由前行用分离规则得到、末行等于目标公式。这些都是有界的机械操作，因此「p 是 G 的证明」是可判定的原始递归关系 Proof(p, ⌜G⌝)——这正是它能被算术表达、进而谈论「可证性」的前提。Python 复算：实现了上述检查器，接受该证明、拒绝把第④行篡改为 Q → (P → P) 的版本；编码与解码往返一致，各公式编码两两不同。"
+      },
+      {
+        "problem": "设 T 相容、可递归公理化、充分强，G 满足 T ⊢ G ↔ ¬Prov_T(⌜G⌝)。证明 T 不能证明 G，说明 G 的真值，并解释为什么 1931 年的「不可反驳」需要 ω-相容性而 1936 年只需相容性。",
+        "solution": "（1）假设 T ⊢ G。则存在 T 中的证明 p，于是 Σ₁ 命题 Prov_T(⌜G⌝)（断言存在这样的证明）在 ℕ 中为真；T 充分强意味着它能证明一切真的 Σ₁ 命题（Σ₁-完全性），所以 T ⊢ Prov_T(⌜G⌝)。另一方面，由 T ⊢ G 与 T ⊢ G ↔ ¬Prov_T(⌜G⌝) 得 T ⊢ ¬Prov_T(⌜G⌝)。于是 T 同时证明一个命题及其否定，T 不相容，与假设矛盾。故 T ⊬ G。（2）真值：若 T 的公理在 ℕ 中为真（PA 即如此），则等价式在 ℕ 中也真；而由（1），「G 存在证明」为假，所以 G 在 ℕ 中为真——哥德尔句说的「本句不可证」是一句真话，只是系统内证不出来。（3）否定侧：要排除 T ⊢ ¬G，只假设相容性不够——T ⊢ ¬G 意味着 T 断言「G 有证明」，而相容性不排除系统对「存在证明」这类 Σ₁ 命题作出错误判断（ω-不相容的系统正是如此）。哥德尔 1931 年假设的是 ω-相容性：若 T 证明 ∃x P(x)，则存在具体的 n 使 P(n) 成立；1936 年罗塞尔构造罗塞尔句（「任何证明我的证明，都有一个更短的证明我的否定」），只用相容性就得到既不可证也不可反驳的句子。（4）布尔复算：把「G 真」记作 g、「Prov_T(⌜G⌝) 真」记作 p，上述推理约化为约束 g ↔ ¬p 与 p → g（可证蕴含为真）。四种真值组合中只有 (g, p) = (真, 假) 同时满足——Python 枚举验证。这说明 G 不可能被证明，也不会是假话。"
+      }
+    ],
+    "tags": [
+      "希尔伯特纲领",
+      "哥德尔不完备定理",
+      "形式系统",
+      "可判定性",
+      "对角线法"
+    ],
+    "links": [
+      "diophantine-equations",
+      "cantor-infinity",
+      "universal-existential-quantifiers",
+      "brouwer-hilbert-controversy"
+    ]
+  },
+  {
+    "id": "birth-of-probability",
+    "title": "概率论的诞生：从赌局到公理",
+    "titleEn": "From Games of Chance to Axioms",
+    "branch": "math-history",
+    "level": 4,
+    "summary": "1654 年帕斯卡与费马的通信用组合计数解决了赌金分配与骰子问题，确立了概率的早期方法；此后惠更斯、伯努利、棣莫弗、拉普拉斯逐步发展，1933 年柯尔莫哥洛夫用测度论完成公理化，概率论成为严格的数学分支。",
+    "summaryEn": "The 1654 Pascal–Fermat correspondence solved the problem of points and the dice problem by counting; through Huygens, Bernoulli, de Moivre and Laplace the theory grew, until Kolmogorov's 1933 measure-theoretic axioms made probability a rigorous branch of mathematics.",
+    "definition": "1654 年夏天，帕斯卡（Blaise Pascal, 1623–1662）与费马（Pierre de Fermat, 1601–1665）在通信中讨论了赌徒德·梅雷（Chevalier de Méré）提出的问题，这批信件被公认为概率论的起点。第一个问题是**点数问题**（problem of points，亦称赌金分配问题）：两名玩家各押赌注、约定先赢若干局者通吃全部赌金，若比赛因故中断，赌金应如何公平分配？这个问题历史上出现过多个答案（帕西奥利 1494 年、卡尔达诺、塔尔塔利亚等），但都不正确，例如按已赢局数的比例分配；帕斯卡用递推、费马用穷举余下比赛的全部可能剧本，得到同一个正确答案——分配应正比于「假设比赛继续打下去，双方最终获胜的概率」。先赢 3 局、中断时比分 2:1 时，领先者的胜率为 3/4，64 枚赌金应分成 48 与 16。第二个问题是**骰子问题**：掷一颗骰子 4 次至少出现一个 6，与掷两颗骰子 24 次至少出现一次双 6，哪个更有可能？按「次数与概率成比例」的直觉（1/6 掷 4 次、1/36 掷 24 次），两者应当一样；但计算给出前者约 0.5177（大于 1/2），后者约 0.4914（小于 1/2）。直觉失效，只有计算可靠——这正是概率论作为数学分支诞生的契机。\n\n惠更斯（Christiaan Huygens, 1629–1695）1655 年访问巴黎时得知这些问题，回国后写成《论赌博中的推理》（De ratiociniis in ludo aleae, 1657），这是第一本正式出版的概论性著作：全书以 14 条命题展开，核心概念是**期望**——一场赌博的「公道价格」等于收益的概率加权平均 E(X) = Σ xᵢpᵢ。帕斯卡自己的《算术三角形论》（1654 年写成、1665 年出版）用算术三角形（帕斯卡三角）的递推解决点数问题，组合计数从此成为概率的基本工具。\n\n18 世纪，雅各布·伯努利的《猜度术》（Ars Conjectandi, 1713 年遗著出版）把概率从赌博推向对不确定性的「猜度」：他证明了**大数定律的雏形**（他称之为黄金定理）——在独立重复的伯努利试验中，频率依概率收敛于概率 p，为「用频率估计概率」提供了理论依据。棣莫弗（Abraham de Moivre）在《机会的学说》（The Doctrine of Chances, 1718）中系统发展了递推与期望方法，1733 年给出二项分布的正态近似（中心极限定理的最早形式）。拉普拉斯（Pierre-Simon Laplace）1812 年出版《概率的分析理论》、1814 年出版《概率的哲学导论》，把概率用于天文观测与误差分析，并写下古典概型：概率 = 有利情形数 / 等可能情形总数。但 19 世纪的概率论仍缺乏自洽的基础：连续情形、条件概率与「等可能」的适用范围都引起争议（冯·米泽斯 1919 年试图用「集体」的频率主义重新奠基）。\n\n1933 年，柯尔莫哥洛夫（Andrey Kolmogorov）的《概率论基础》（Grundbegriffe der Wahrscheinlichkeitsrechnung）用测度论完成了公理化：概率空间由三要素组成——样本空间 Ω（全部可能结果）、事件域 F（Ω 的子集构成的 σ-代数，对补与可列并封闭）、概率测度 P（F 上满足非负性、P(Ω) = 1 与可列可加性的测度）。从此概率论成为测度论的一部分：连续型分布由密度积分定义，条件概率可用 Radon–Nikodym 导数刻画，「等可能」不再是定义的一部分。此前波莱尔 1909 年关于可列可加性的工作为这一步铺平了道路；此后概率论与分析方法一起催生了随机过程、鞅与布朗运动等现代理论，成为应用最广的数学分支之一。",
+    "definitionEn": "In the summer of 1654 Blaise Pascal (1623–1662) and Pierre de Fermat (1601–1665) exchanged letters about questions raised by the gambler Chevalier de Méré; the correspondence is regarded as the birth of probability theory. The first question is the problem of points: two players stake equal amounts and agree that whoever first wins a fixed number of rounds takes everything; if the game is interrupted, how should the stakes be divided fairly? Earlier answers (Pacioli in 1494, Cardano, Tartaglia and others), such as dividing in proportion to rounds already won, were wrong. Pascal treated the problem recursively and Fermat enumerated all possible continuations of the game; both obtained the same correct answer: the stakes must be split in proportion to the probabilities of eventually winning, assuming play continued. With the target of three wins and an interruption at 2:1, the leader's probability of winning is 3/4, so 64 coins split 48 and 16. The second question is the dice problem: is it more likely to obtain at least one six in four rolls of a die, or at least one double-six in twenty-four rolls of two dice? The intuition that the number of trials should scale with the probabilities (1/6 for four rolls, 1/36 for twenty-four) suggests they are equally likely, but the computations give about 0.5177 (above 1/2) and about 0.4914 (below 1/2). Intuition fails and computation alone decides — the moment probability became mathematics.\n\nChristiaan Huygens (1629–1695) learned of these problems in Paris in 1655 and wrote De ratiociniis in ludo aleae (1657), the first published treatise on the subject: fourteen propositions built on the notion of expectation — the fair price of a game equals the probabilistically weighted average of the payoffs, E(X) = sum of x_i p_i. Pascal's own Traité du triangle arithmétique (written 1654, published 1665) solved the problem of points through the recursion of the arithmetic triangle, making combinatorial counting the fundamental tool of probability.\n\nIn the 18th century Jacob Bernoulli's Ars Conjectandi (published posthumously in 1713) turned probability from gambling toward conjecture: he proved the embryo of the law of large numbers (his golden theorem) — in independent repetitions of a Bernoulli trial the frequency converges in probability to p, justifying the estimation of probabilities by frequencies. Abraham de Moivre developed recursion and expectation systematically in The Doctrine of Chances (1718) and in 1733 gave the normal approximation to the binomial distribution, the earliest form of the central limit theorem. Pierre-Simon Laplace published the Théorie analytique des probabilités in 1812 and the Essai philosophique in 1814, applying probability to astronomy and error analysis and stating the classical model: probability equals the number of favorable cases divided by the number of equally likely cases. Yet the 19th century still lacked a coherent foundation: continuous distributions, conditional probability and the scope of equal likelihood were all contested, and von Mises in 1919 tried to rebuild the subject on frequencies of collectives.\n\nIn 1933 Andrey Kolmogorov's Grundbegriffe der Wahrscheinlichkeitsrechnung gave the measure-theoretic axiomatization: a probability space consists of the sample space Omega (all possible outcomes), the event field F (a sigma-algebra of subsets, closed under complements and countable unions), and the probability measure P (nonnegative, P(Omega) = 1, countably additive). Probability thus became a chapter of measure theory: continuous distributions are defined by densities, conditional probability by Radon–Nikodym derivatives, and equal likelihood is no longer part of the definition. Borel's work of 1909 on countable additivity had paved the way. Afterwards probability and analysis grew together into stochastic processes, martingales and Brownian motion, making probability one of the most widely applied branches of mathematics.",
+    "formulas": [
+      {
+        "latex": "P(a,b) = \\tfrac{1}{2}P(a+1,b) + \\tfrac{1}{2}P(a,b+1), \\qquad P(n,b)=1,\\quad P(a,n)=0",
+        "note": "帕斯卡递推：约定先赢 n 局、当前比分 a:b 时，P(a,b) 是甲最终获胜的概率；边界值直接可读，递推把问题化归到下一局的结果。",
+        "noteEn": "Pascal's recursion: for a race to n wins at score a:b, P(a,b) is the probability that the first player wins; the boundary values are immediate and each step reduces to the next round."
+      },
+      {
+        "latex": "P = \\sum_{k=n-a}^{2n-a-b-1} \\binom{2n-a-b-1}{k}\\, 2^{-(2n-a-b-1)}",
+        "note": "点数问题的组合闭式（费马思路）：最多再赛 2n − a − b − 1 局，甲只要在其中赢下不少于 n − a 局即获胜，每项是一个二项概率。",
+        "noteEn": "The closed combinatorial form (Fermat's method): at most 2n - a - b - 1 further rounds are needed, and the first player wins whenever at least n - a of them go to him."
+      },
+      {
+        "latex": "(\\Omega, \\mathcal{F}, P):\\quad P(\\Omega)=1,\\quad P(A)\\ge 0,\\quad P\\Bigl(\\bigcup_{i=1}^{\\infty} A_i\\Bigr)=\\sum_{i=1}^{\\infty}P(A_i)",
+        "note": "柯尔莫哥洛夫公理：样本空间、事件域（σ-代数）、概率测度三要素；第三式（可列可加性）对两两不交的事件列成立，是一切概率性质的来源。",
+        "noteEn": "The Kolmogorov axioms: sample space, event field (sigma-algebra) and probability measure; countable additivity for pairwise disjoint events is the source of all further properties."
+      },
+      {
+        "latex": "E(X) = \\sum_i x_i\\, p_i",
+        "note": "惠更斯的「公道价格」：赌博或任何随机收益的公平价值等于期望收益。这一思想从 1657 年的书中一直沿用到现代期望的定义。",
+        "noteEn": "Huygens's fair price: the value of a game equals the expectation of its payoff, an idea running from the 1657 treatise to the modern definition of expectation."
+      },
+      {
+        "latex": "P\\Bigl(\\Bigl|\\tfrac{S_n}{n} - p\\Bigr| \\ge \\varepsilon\\Bigr) \\to 0 \\qquad (n \\to \\infty)",
+        "note": "伯努利黄金定理（大数定律的早期形式）：S_n 为 n 次独立重复试验中的成功次数，频率 S_n/n 依概率收敛于 p。伯努利只对伯努利概型证明，一般形式属于 19—20 世纪。",
+        "noteEn": "Bernoulli's golden theorem (an early law of large numbers): the relative frequency S_n/n converges in probability to p; Bernoulli proved it for Bernoulli trials, the general form came much later."
+      }
+    ],
+    "properties": [
+      "点数分配只依赖双方「还需再赢的局数」，与已打局数无关（前提是每局独立、胜率固定）：先赢 3 局时 2:1 与先赢 5 局时 4:3 的比例相同，因为两种情形都要求一方再赢 1 局、另一方再赢 2 局。",
+      "公理化三要素缺一不可：样本空间 Ω、事件域 F（必须对可列并封闭，否则无法表述可列可加性）、概率测度 P。连续情形一般不能对 Ω 的一切子集赋概率（存在不可测集），所以事件域不能省略。",
+      "古典概型（拉普拉斯：有利情形数 / 等可能情形总数）只是公理化的特例，要求样本空间有限且各结果等可能；密度、条件概率与不可测集都超出它的范围。1933 年之后，概率是测度而不是「可能性大小」的直觉。",
+      "期望从「赌博的公道价格」发展为随机变量最基本的数字特征；「公平赌博中赌资的期望在获得新信息后保持不变」正是现代鞅论的雏形。",
+      "伯努利 1713 年的大数定律只覆盖独立重复的伯努利概型；一般独立同分布情形要等切比雪夫、马尔可夫、波莱尔（1909）与柯尔莫哥洛夫（1928—1933）的工作——概率论的严格化与公理化是同一个过程。"
+    ],
+    "propertiesEn": [
+      "The fair division depends only on how many wins each side still needs, not on the number already played (given independent rounds with fixed win probabilities): 2:1 in a race to 3 and 4:3 in a race to 5 split alike, since both mean one side needs one win and the other needs two.",
+      "All three ingredients matter: sample space, event field (closed under countable unions, or countable additivity cannot even be stated), and probability measure. In the continuous case one cannot assign probabilities to all subsets — non-measurable sets exist — so the sigma-algebra is indispensable.",
+      "The classical model (Laplace: favorable over equally likely cases) is only a special case, requiring finitely many equally likely outcomes; densities, conditional probabilities and non-measurable sets lie beyond it. After 1933 probability is a measure, not a bare intuition of likelihood.",
+      "Expectation grew from the fair price of a game into the basic numerical feature of a random variable; the invariance of expected wealth under new information in a fair game is the embryo of modern martingale theory.",
+      "Bernoulli's 1713 law of large numbers covered only Bernoulli trials; the general i.i.d. case waited for Chebyshev, Markov, Borel (1909) and Kolmogorov (1928–1933) — the rigorization and the axiomatization of probability were one process."
+    ],
+    "examples": [
+      {
+        "problem": "（点数问题，1654 年赌局的精确复算）甲、乙各押 32 枚金币，约定先赢 3 局者通吃 64 枚；比赛中断时甲已赢 2 局、乙已赢 1 局。赌金应如何公平分配？",
+        "solution": "关键是「还需要赢几局」：甲差 1 局，乙差 2 局；继续比赛至多再打 2 局（有人先到 3 局立即结束）。递推法（帕斯卡）：设 P 为甲最终获胜的概率。下一局甲赢（概率 1/2）则甲立刻获胜；下一局乙赢（概率 1/2）则比分变为 2:2，此后双方各需 1 局、胜率各半。故 P = (1/2)·1 + (1/2)·(1/2) = 3/4。穷举法（费马）：把「再打两局」的全部剧本列出——甲甲、甲乙、乙甲、乙乙（每局两种结果、等可能）：前三种都是甲先到 3 局，故甲胜概率 3/4。组合闭式：P = Σ_{k=1}^{2} C(2,k)/2² = (2+1)/4 = 3/4。分配：甲得 (3/4)·64 = 48 枚，乙得 16 枚，比例 3:1。对照历史：按已赢局数 2:1 分配（约 42.67 : 21.33）是常见的错误答案，它把「功劳」而非「机会」当作依据。同一方法给出其他比分：先赢 3 局时 2:0 → 7/8（56:8）、1:1 → 1/2（32:32）、1:0 → 11/16（44:20）；对帕西奥利的经典版本「先赢 6 局、中断时 5:3」，正确答案是 7/8（56:8），而不是按 5:3 分配。Python 复算：用递推、穷举全部余局、组合闭式三种独立方法计算，均得 3/4；表中的其余比分与帕西奥利版本也逐一核对一致。"
+      },
+      {
+        "problem": "（德·梅雷的两场赌局）掷一颗骰子 4 次至少出现一个 6，与掷两颗骰子 24 次至少出现一次双 6，各自概率是多少？为什么「按比例放大」的直觉会失败？多少次掷双骰才能让第二个赌局变得有利？",
+        "solution": "用补事件（一次都不出现）计算。第一场：每次不出现 6 的概率是 5/6，4 次都不出现为 (5/6)⁴ = 625/1296 ≈ 0.482253，故 P₁ = 1 − (5/6)⁴ = 671/1296 ≈ 0.517747（大于 1/2）。第二场：每掷一次两颗骰子不出现双 6 的概率是 35/36，24 次都不出现为 (35/36)²⁴ ≈ 0.508596，故 P₂ = 1 − (35/36)²⁴ ≈ 0.491404（小于 1/2）。两者接近，但一个大于 1/2、一个小于 1/2——按 1/6 与 1/36 的比例把 4 次「放大」成 24 次并不成立，因为概率随次数呈指数衰减而不是线性缩放。临界次数：解 (5/6)^m < 1/2 的最小整数是 m = 4（(5/6)³ ≈ 0.5787 > 1/2，而 (5/6)⁴ ≈ 0.4823 < 1/2）；解 (35/36)^n < 1/2 的最小整数是 n = 25（(35/36)²⁴ ≈ 0.5086 > 1/2，而 (35/36)²⁵ ≈ 0.4945 < 1/2）。也就是说，掷 24 次双骰长期亏损，只要再加一次就转为有利——德·梅雷正是在这条临界线附近吃了亏。Python 复算：精确分数 671/1296；1 − (35/36)²⁴ = 11033126465283976852912127963392284191/22452257707354557240087211123792674816 ≈ 0.4914038761；m = 4 与 n = 25 为各自最小的有利整数。"
+      }
+    ],
+    "tags": [
+      "概率史",
+      "帕斯卡与费马",
+      "点数问题",
+      "期望",
+      "公理化"
+    ],
+    "links": [
+      "probability-basics",
+      "conditional-probability-bayes",
+      "expectation-variance",
+      "law-of-large-numbers",
+      "central-limit-theorem"
+    ]
+  },
+  {
+    "id": "brouwer-hilbert-controversy",
+    "title": "数学基础之争：逻辑主义·直觉主义·形式主义",
+    "titleEn": "The Foundational Controversy",
+    "branch": "math-history",
+    "level": 5,
+    "summary": "罗素悖论（1901）引发数学基础的危机：弗雷格与罗素的逻辑主义、布劳威尔的直觉主义、希尔伯特的形式主义在 20 世纪初激烈交锋；哥德尔 1931 年的不完备定理终结了形式主义纲领的原目标，争论随后演化为 ZFC 集合论、构造性数学与证明论等并行传统。",
+    "summaryEn": "Russell's paradox of 1901 shook the foundations: logicism (Frege, Russell), intuitionism (Brouwer) and formalism (Hilbert) clashed in the early 20th century; Godel's 1931 theorem ended the original goal of Hilbert's program, and the controversy matured into parallel traditions — ZFC set theory, constructive mathematics and proof theory.",
+    "definition": "1901 年罗素在分析康托尔集合论时发现了一个悖论：设 R = {x : x ∉ x}，即「由一切不属于自身的集合」组成的集合。问 R ∈ R 是否成立？若 R ∈ R，则 R 满足定义条件，即 R ∉ R；若 R ∉ R，则 R 又满足定义条件而被收入 R，即 R ∈ R。两种可能都自相矛盾。1902 年 6 月罗素把这一发现写信告知弗雷格，而弗雷格的《算术的基本法则》（Grundgesetze der Arithmetik）第二卷（1903）正在付印——该书赖以建立算术的公理模式恰恰会推出这个悖论，弗雷格只能在书末附录中承认学说受损。弗雷格，以及罗素与怀特海合著的《数学原理》（Principia Mathematica, 1910–1913），代表**逻辑主义**路线：数学是逻辑的延伸，全部数学命题都可以从逻辑公理推出；为封堵悖论，罗素与怀特海建立了类型论（以及后来的可化归公理）。逻辑主义最终未能完整实现：类型论技术代价高昂，哥德尔不完备定理也适用于《数学原理》这类系统；数学基础的主要载体后来变成策梅洛 1908 年起发展的公理集合论（今天的 ZFC）。\n\n**直觉主义**的旗手是荷兰人布劳威尔（L. E. J. Brouwer, 1881–1966）。他把数学看作心灵的构造活动而非现成真理的发现：数学对象只有能被构造出来才存在，「存在」不能用反证法从「不存在会矛盾」间接得到。由此他拒绝把排中律 A ∨ ¬A 当作普遍推理规则，也拒绝实无穷（把无穷当作已经完成的整体），只承认可逐步延伸的潜无穷。1907 年博士论文《论数学的基础》、1912 年就职演讲《直觉主义与形式主义》确立了他的纲领；1921 年外尔发表《论数学基础的新危机》声援，1920 年代布劳威尔学派对经典数学发起猛烈批评。需要说明两点：把直觉主义逻辑形式化为公理系统的是海廷（1930），而布劳威尔本人反对这种形式化；他也并非宣布排中律为假——对有限、可判定的命题排中律照用不误，争议在于把它无条件推广到涉及无穷的命题。\n\n希尔伯特（David Hilbert, 1862–1943）的立场常被叫做形式主义，但更准确的名称是**有穷主义纲领（证明论）**：他并不认为数学是无意义的符号游戏，而是主张把数学整体形式化为符号系统，区分有内容的「实在陈述」与为方便而引入的「理想陈述」（例如实无穷），再用绝对可靠的有穷主义方法证明这个系统相容——这样使用无穷就安全了。1928 年他在波洛尼亚会议上把目标概括为三件事：完备性、相容性、可判定性。当布劳威尔在 1920 年代末攻击「形式主义」时，争论白热化：1928 年希尔伯特把布劳威尔从《数学年刊》编委中除名，两人彻底决裂。希尔伯特 1926 年《论无穷》中的名言「没有人能把我们从康托尔为我们创造的天堂里赶出去」，正是对直觉主义限制无穷用法的回应。\n\n1931 年哥德尔的第二不完备定理宣告：相容性不能在有穷主义范围内自证，形式主义纲领的原目标不可达。但争论没有简单的赢家。逻辑主义演化为 ZFC 公理集合论（策梅洛 1908，弗兰克尔、斯科伦、冯·诺伊曼加以完善），至今仍是主流基础。直觉主义的构造性精神在哥德尔—根岑 1933 年的否定翻译之后以另一种方式延续：经典算术 PA 可嵌入海廷算术 HA，二者的相容强度相同——直觉主义不是「更弱的数学」，而是更严格的证明标准；毕晓普 1967 年的《构造性分析》与后来的类型论、计算机辅助证明都属这一传统。形式主义的遗产则是证明论（根岑 1936 年用 ε₀ 超限归纳证明 Con(PA)）、可计算性理论与逆向数学。布劳威尔本人还有另一重身份——拓扑学家：他的不动点定理（1911）、维数不变性等成果至今是拓扑学的基石，而这些证明恰恰大量使用经典方法，与他后来的直觉主义立场形成耐人寻味的张力。",
+    "definitionEn": "In 1901 Russell found a paradox in Cantor's set theory: let R = {x : x is not an element of x}. Is R an element of itself? If R belongs to R, then by definition R does not belong to R; if R does not belong to R, then it satisfies the defining condition and so belongs to R. Both possibilities are contradictory. In June 1902 Russell wrote to Frege, whose Grundgesetze der Arithmetik, volume 2 (1903), was already in press; the axiom scheme on which Frege based arithmetic yields precisely this paradox, and Frege could only acknowledge the damage in an appendix. Frege, and Russell with Whitehead in Principia Mathematica (1910–1913), represent **logicism**: mathematics is an extension of logic and all mathematical propositions follow from logical axioms; to block the paradox they introduced type theory (and later the axiom of reducibility). Logicism was never fully realized — type theory was technically costly, and Godel's incompleteness theorem applies to systems like Principia — and the main vehicle of foundations became the axiomatic set theory initiated by Zermelo in 1908, today's ZFC.\n\n**Intuitionism** was led by the Dutch mathematician L. E. J. Brouwer (1881–1966). For him mathematics is a construction of the mind rather than the discovery of pre-existing truths: a mathematical object exists only once it has been constructed, and existence cannot be established indirectly by refuting non-existence. He therefore rejected the law of excluded middle A or not A as a universal rule of inference, and rejected actual infinity, admitting only the potentially infinite. His doctoral thesis On the Foundations of Mathematics (1907) and his inaugural address Intuitionism and Formalism (1912) established the program; Weyl's 1921 paper The New Foundational Crisis of Mathematics sided with him, and in the 1920s Brouwer's school attacked classical mathematics. Two cautions: it was Heyting (1930) who formalized intuitionistic logic, and Brouwer himself opposed such formalization; nor did he declare excluded middle false — it remains usable for finite decidable statements, the quarrel being its unconditional extension to statements about the infinite.\n\nDavid Hilbert (1862–1943) is often labelled a formalist, but the more accurate name is **finitism (proof theory)**: he did not regard mathematics as meaningless symbol-pushing; rather, all of mathematics should be formalized, with meaningful finitary statements distinguished from ideal statements (such as actual infinity), and finitary metamathematics should then prove the formal system consistent, making infinitary methods safe. In his 1928 Bologna address he summarized the goals as completeness, consistency and decidability. When Brouwer attacked formalism in the late 1920s the dispute escalated: in 1928 Hilbert had Brouwer removed from the editorial board of Mathematische Annalen, and the two broke off relations. Hilbert's 1926 lecture On the Infinite contains the famous line: no one shall expel us from the paradise that Cantor has created for us.\n\nIn 1931 Godel's second incompleteness theorem announced that consistency cannot be proved from within by finitary means, so the original goal of Hilbert's program is unreachable. Yet there is no simple winner. Logicism evolved into ZFC set theory (Zermelo 1908; Fraenkel, Skolem and von Neumann completed it), still the mainstream foundation. The constructive spirit of intuitionism survived differently after the Godel–Gentzen negative translation of 1933: classical arithmetic PA embeds into Heyting arithmetic HA, so the two have the same consistency strength — intuitionism is not weaker mathematics but a stricter standard of proof; Bishop's Foundations of Constructive Analysis (1967), later type theories and computer-assisted proofs belong to this tradition. The legacy of formalism is proof theory (Gentzen proved Con(PA) in 1936 using transfinite induction up to epsilon-zero), computability theory and reverse mathematics. Brouwer himself had a second identity — a topologist: his fixed point theorem (1911) and invariance of dimension remain cornerstones of topology, and their proofs rely heavily on the classical methods his intuitionism later opposed, a tension worth pondering.",
+    "formulas": [
+      {
+        "latex": "R = \\{x \\mid x \\notin x\\} \\implies (R \\in R \\leftrightarrow R \\notin R)",
+        "note": "罗素悖论：设 R 为一切不属于自身的集合之集，则「R ∈ R」与「R ∉ R」互相推出，矛盾。它说明朴素的概括公理（任何性质都定义一个集合）必须限制为分离公理。",
+        "noteEn": "Russell's paradox: if R is the set of all sets not containing themselves, then R in R and R not in R imply each other — so naive comprehension must be replaced by separation."
+      },
+      {
+        "latex": "\\vdash \\neg\\neg(A \\vee \\neg A), \\qquad \\nvdash A \\vee \\neg A",
+        "note": "直觉主义逻辑中：排中律的双重否定形式可证，而排中律本身一般不是定理。布劳威尔拒绝把它当作关于无穷命题的推理规则，海廷 1930 年的形式化精确刻画了这一点。",
+        "noteEn": "In intuitionistic logic the double negation of excluded middle is provable while excluded middle itself is not a theorem; Brouwer refused it as a rule for statements about the infinite, and Heyting's 1930 formalization made this precise."
+      },
+      {
+        "latex": "\\neg\\neg\\neg A \\leftrightarrow \\neg A",
+        "note": "直觉主义逻辑里三重否定坍缩为一次否定：否定命题是稳定的；不能恢复的是「从 ¬¬A 回到 A」的双重否定消去。",
+        "noteEn": "In intuitionistic logic triple negation collapses to single negation: negative statements are stable; what is missing is double-negation elimination from not-not-A back to A."
+      },
+      {
+        "latex": "\\mathrm{PA} \\vdash \\varphi \\iff \\mathrm{HA} \\vdash \\varphi^{N}",
+        "note": "哥德尔—根岑否定翻译（1933）：经典算术的每个定理经过「原子公式加双重否定」的改写，都成为直觉主义算术的定理——两大流派的核心系统相容强度相同。",
+        "noteEn": "The Godel–Gentzen negative translation (1933): every theorem of classical arithmetic becomes, after a double-negation rewriting, a theorem of Heyting arithmetic — the two systems have the same consistency strength."
+      },
+      {
+        "latex": "f \\in C(\\overline{B^{n}}, \\overline{B^{n}}) \\implies \\exists\\, x \\in \\overline{B^{n}},\\ f(x) = x",
+        "note": "布劳威尔不动点定理（1911）：闭球到自身的连续映射必有不动点。它是布劳威尔拓扑工作的代表作，也是他双重身份的标记；该定理在构造性数学中并不普遍成立——存在可计算却没有可计算不动点的映射。",
+        "noteEn": "Brouwer's fixed point theorem (1911): every continuous map of the closed ball into itself has a fixed point — the hallmark of Brouwer the topologist, and not generally valid constructively, since computable maps without computable fixed points exist."
+      }
+    ],
+    "properties": [
+      "三大流派分歧的焦点是「存在」与「无穷」的地位：逻辑主义把数学化归为逻辑（并为此建立类型论）；直觉主义要求存在必须是构造性的，拒绝排中律与实无穷；形式主义用有穷主义元数学为实无穷的使用提供担保。",
+      "直觉主义对排中律的态度不是宣布它为假，而是拒绝把它当作普遍推理规则：对有限、可判定的命题它照常可用，争议在于无穷命题；A ∨ ¬A 不是定理，但 ¬¬(A ∨ ¬A) 与 ¬¬¬A ↔ ¬A 仍可证。",
+      "哥德尔之后：形式主义的原目标（有穷主义自证相容性）被第二不完备定理排除；逻辑主义未能完整实现；直觉主义也没能取代经典数学——三派之争转化为并行的研究传统（ZFC 集合论、构造性数学、证明论与可计算性理论）。",
+      "否定翻译（哥德尔—根岑 1933）表明经典算术与直觉主义算术等相容强度：直觉主义不是「更弱的数学」，而是更严格的证明标准，同一个命题的经典证明可能不被构造性地接受。",
+      "布劳威尔的双重身份构成一种张力：他在拓扑学（不动点定理、维数不变性）中的工作大量使用经典方法与选择式论证，后来成为主流工具；而 1920 年代之后他逐渐退出主流数学界，直觉主义的影响主要在逻辑、可计算性与构造性数学中延续。"
+    ],
+    "propertiesEn": [
+      "The three schools disagree about existence and infinity: logicism reduces mathematics to logic (building type theory to save it); intuitionism demands constructive existence and rejects excluded middle and actual infinity; formalism secures infinitary methods by finitary metamathematics.",
+      "Intuitionism does not declare excluded middle false but refuses it as a universal rule: it stays usable for finite decidable statements, the quarrel being statements about the infinite; A or not-A is not a theorem, while its double negation and the collapse of triple negation are provable.",
+      "After Godel: the original goal of formalism (a finitary self-proof of consistency) is excluded by the second incompleteness theorem; logicism was never completed; intuitionism did not replace classical mathematics — the controversy became parallel traditions: ZFC set theory, constructive mathematics, proof theory and computability.",
+      "The negative translation (Godel–Gentzen 1933) shows classical and intuitionistic arithmetic have the same consistency strength: intuitionism is not weaker mathematics but a stricter standard of proof, and a classical proof of a statement may not be constructively acceptable.",
+      "Brouwer's double identity creates a tension: his topological work (fixed point theorem, invariance of dimension) used classical and choice-like arguments and became a mainstream tool, while after the 1920s he withdrew from mainstream mathematics and intuitionism lived on chiefly in logic, computability and constructive mathematics."
+    ],
+    "examples": [
+      {
+        "problem": "用「罗素子集」的论证证明：不存在包含一切集合的集合（全集）；并说明朴素概括公理（任何性质都定义一个集合）为什么必须修改。再用有限模型复算。",
+        "solution": "对任意集合 A，定义它的罗素子集 R_A = {x ∈ A : x ∉ x}——概括只施加在已知集合 A 的元素上，这是合法的操作。假设 R_A ∈ A。由于 R_A ⊆ A，「R_A ∈ R_A」等价于「R_A ∈ A 且 R_A ∉ R_A」，即等价于「R_A ∉ R_A」：若 R_A ∈ R_A，按定义得 R_A ∉ R_A；若 R_A ∉ R_A，则 R_A ∈ A 且满足定义条件，得 R_A ∈ R_A。两种情形都矛盾，所以 R_A ∉ A——任何集合 A 都不含有自己的罗素子集。若允许全集 U 存在，则 R_U 是集合、按定义 R_U ∈ U；但把上面的论证用于 A = U 又给出 R_U ∉ U，矛盾。这正是朴素概括公理「对任何性质 P，{x : P(x)} 是集合」必须被限制为分离公理「{x ∈ A : P(x)}」的原因（策梅洛 1908）。有限复算：在 16 个良基有限集（秩 ≤ 3）组成的宇宙中，对每个 A 计算 R_A = {x ∈ A : x ∉ x}，结果恒有 R_A = A 且 A ∉ A，无一例外（Python 枚举验证）。若强行把「全集 U」与「R = {x : x ∉ x}」都当作集合（用 4 个布尔变量记录成员关系），约束系统没有任何解：Python 穷举 16 种赋值，模型数为 0——朴素概括与全集假设不能共存。"
+      },
+      {
+        "problem": "用两世界克里普克模型说明：排中律 A ∨ ¬A 不是直觉主义有效式，而 ¬¬(A ∨ ¬A) 是；并说明双重否定消去 ¬¬A → A 也失效。",
+        "solution": "模型：世界 0 与世界 1，且 0 ≤ 1；命题字母 A 只在世界 1 为真，在世界 0 为假。直觉主义（克里普克）语义规定：w ⊩ ¬φ 当且仅当对一切 v ≥ w 都有 v ⊮ φ；其余连接词按通常方式逐世界解释。（1）排中律：在世界 0，A 为假；而 ¬A 要求在 0 及所有后继世界都不满足 A，但后继世界 1 满足 A，所以 ¬A 在 0 处也假。故 A ∨ ¬A 在 0 处不成立——排中律不是有效式，这正是直觉主义拒绝它的语义根据。（2）双重否定的排中律：在世界 1，A 真故 A ∨ ¬A 真；于是「存在一个世界满足 ¬(A ∨ ¬A)」不可能，故 ¬¬(A ∨ ¬A) 在 0、1 两处都为真——排中律的「双重否定」版本仍是逻辑真理。（3）双重否定消去：¬¬A 在 0 处为真（因为 ¬A 在 0 处为假），而 A 在 0 处为假，所以 ¬¬A → A 在 0 处失效——从「不可能不是」推不出「是」。Python 复算：实现了两世界模型上的 ⊩ 语义，逐一验证以上三个判断（A ∨ ¬A 在 0 处假；¬¬(A ∨ ¬A) 在两处真；¬¬A → A 在 0 处假；另验证 ¬¬¬A ↔ ¬A 在两处真），并验证了强制关系的单调性——在 0 处为真的公式在 1 处仍为真。"
+      }
+    ],
+    "tags": [
+      "数学基础",
+      "罗素悖论",
+      "直觉主义",
+      "形式主义",
+      "排中律"
+    ],
+    "links": [
+      "brouwer-fixed-point",
+      "hilbert-program-godel",
+      "cantor-infinity",
+      "universal-existential-quantifiers"
+    ]
+  }
+]

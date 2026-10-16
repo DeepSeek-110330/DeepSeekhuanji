@@ -1,0 +1,322 @@
+[
+  {
+    "id": "zfc-axioms",
+    "title": "集合论公理（ZFC 初步）",
+    "titleEn": "The ZFC Axioms",
+    "branch": "mathematical-logic",
+    "level": 4,
+    "summary": "ZFC 用 ∈ 语言把「集合」的公理写清楚：外延、空集、配对、并集、幂集、分离与替换两条公理模式、无穷、正则，再加上独立加入的第十条选择公理。",
+    "summaryEn": "ZFC pins down sets in the language of ∈ through extensionality, empty set, pairing, union, power set, the separation and replacement schemas, infinity and foundation, topped by the separately added Axiom of Choice.",
+    "definition": "朴素集合论由康托的**概括原则**出发：任何性质都确定一个集合 $\\{x:\\varphi(x)\\}$。罗素悖论说明它不能成立：令 $R=\\{x:x\\notin x\\}$，则 $R\\in R$ 与 $R\\notin R$ 互相推出，矛盾。公理化方案是只保留少量经过审查的公理：把「集合」当作一阶逻辑中唯一的对象，用唯一的非逻辑符号 $\\in$ 描述它（$x\\in y$ 读作「x 是 y 的元素」），所有公理都是这个语言中的句子或模式。**ZFC** 是这类系统中最通行的版本：策梅洛 1908 年提出公理系统，弗兰克尔与斯科伦 1922 年补上替换模式，再加上**选择公理**（Axiom of **C**hoice）——所以名字是 **Z**ermelo–**F**raenkel + **C**hoice。\n\nZFC 的标准公理清单（常写作九条）：**外延公理**（元素相同则集合相等）；**空集公理**（存在不含任何元素的集合 $\\varnothing$）；**配对公理**（对任意 $a,b$ 存在 $\\{a,b\\}$）；**并集公理**（存在 $\\bigcup A=\\{x:\\exists y\\in A,\\ x\\in y\\}$）；**幂集公理**（存在 $\\mathcal P(A)=\\{x:x\\subseteq A\\}$）；**分离公理模式**；**替换公理模式**；**无穷公理**（存在含 $\\varnothing$ 且对 $x\\mapsto x\\cup\\{x\\}$ 封闭的集合，由此得到自然数集）；**正则（基础）公理**（每个非空集合都有与它不交的元素）。带「模式」二字的都是**公理模式**：对每个公式 $\\varphi$ 各给出一条公理，不是单条公理——一阶逻辑无法量化「所有公式」，所以 ZF 不是能写成有限多条公理的理论（若 ZF 相容，这一点本身可以证明）。\n\n分离公理模式是化解罗素悖论的关键：它不允许无中生有地定义 $\\{x:\\varphi(x)\\}$，只允许**从已有集合中切出子集** $\\{x\\in a:\\varphi(x)\\}$。于是 $s=\\{x\\in a:x\\notin x\\}$ 仍是合法集合，但可以证明 $s\\notin a$（若 $s\\in a$，则 $s\\in s$ 与 $s\\notin s$ 等价，矛盾）——悖论被「顶出」了 $a$，化作无害的定理「没有集合包含所有集合」。同样的限制使「所有集合的总体」「所有序数的总体」都只能是**真类**而非集合。\n\n实践中的意义：几乎所有现代数学对象都可以在 ZFC 中编码（数、函数、关系、结构都是某种集合），所以「在集合论中」通常指「在 ZFC 中」。但 ZFC 也并非万能：选择公理、连续统假设等命题在 ZFC 中独立（相容性由哥德尔证明，独立性由科恩证明），公理化只是把地基整理干净。罗素悖论引发的这场危机与随后的进展，见关联的历史节点。",
+    "definitionEn": "Naive set theory starts from Cantor's **comprehension principle** — every property determines a set $\\{x:\\varphi(x)\\}$ — which Russell's paradox refutes: for $R=\\{x:x\\notin x\\}$ each of $R\\in R$ and $R\\notin R$ implies the other. The axiomatic repair keeps only a short audited list of axioms, treating a set as the sole kind of object of a first-order language whose only non-logical symbol is $\\in$, read as membership. **ZFC** is the standard system: Zermelo's axioms of 1908, the replacement schema added by Fraenkel and Skolem in 1922, plus the Axiom of Choice — hence **Z**ermelo–**F**raenkel with **C**hoice.\n\nThe standard list (often counted as nine axioms): **extensionality**; **empty set** ($\\varnothing$); **pairing** ($\\{a,b\\}$); **union** ($\\bigcup A$); **power set** ($\\mathcal P(A)$); the **separation schema**; the **replacement schema**; **infinity** (a set containing $\\varnothing$ and closed under $x\\mapsto x\\cup\\{x\\}$, yielding the natural numbers); **foundation/regularity** (every nonempty set has a disjoint element). The items called schemas are **axiom schemas**: one axiom per formula $\\varphi$, not a single axiom — first-order logic cannot quantify over formulas, so ZF is not finitely axiomatizable (a fact provable if ZF is consistent).\n\nSeparation defuses Russell's paradox by allowing only $\\{x\\in a:\\varphi(x)\\}$, cut from an existing set. Then $s=\\{x\\in a:x\\notin x\\}$ is legal, yet provably $s\\notin a$ (if $s\\in a$, then $s\\in s$ holds exactly when $s\\notin s$, absurd) — the paradox is pushed outside $a$ and becomes the harmless theorem that no set contains every set. Likewise the universe of all sets and the collection of all ordinals are **proper classes**, not sets.\n\nPractically, ZFC encodes all of ordinary mathematics (numbers, functions, relations, structures are all sets), so working in set theory usually means working in ZFC. But ZFC is not omnipotent: the Axiom of Choice and the Continuum Hypothesis are independent of it (consistency by Gödel, independence by Cohen); axiomatization cleans the foundation rather than settling everything.",
+    "formulas": [
+      {
+        "latex": "\\forall A\\,\\forall B\\,\\bigl(\\forall x\\,(x\\in A\\leftrightarrow x\\in B)\\rightarrow A=B\\bigr)",
+        "note": "外延公理：集合由其元素唯一决定——空集唯一性与一切「两个集合相等」的证明都靠它。",
+        "noteEn": "Extensionality: a set is determined by its elements; uniqueness of the empty set and every proof that two sets are equal rely on it."
+      },
+      {
+        "latex": "\\forall p\\,\\forall a\\,\\exists s\\,\\forall x\\,\\bigl(x\\in s\\leftrightarrow(x\\in a\\wedge\\varphi(x,p))\\bigr)",
+        "note": "分离公理**模式**：只允许从已有集合 a 中切割子集，φ 不含 s；每条公式 φ 各给一条公理，不是单条。",
+        "noteEn": "The separation schema cuts subsets only out of an existing set a; φ must not contain s, and each formula yields its own axiom."
+      },
+      {
+        "latex": "\\forall p\\,\\Bigl(\\forall x\\in a\\,\\exists!y\\,\\varphi(x,y,p)\\rightarrow\\exists b\\,\\forall y\\,\\bigl(y\\in b\\leftrightarrow\\exists x\\in a\\,\\varphi(x,y,p)\\bigr)\\Bigr)",
+        "note": "替换公理**模式**：可定义映射的像是集合。它是构造 ω·2、ω^ω、ε₀ 等高阶序数与累积层的工具。",
+        "noteEn": "The replacement schema: the image of a set under a definable map is a set; it builds higher ordinals such as ω·2, ω^ω and ε₀."
+      },
+      {
+        "latex": "\\exists I\\,\\bigl(\\varnothing\\in I\\wedge\\forall x\\,(x\\in I\\rightarrow x\\cup\\{x\\}\\in I)\\bigr)",
+        "note": "无穷公理：存在对后继运算封闭的集合，其中最小的那个就是 ω = {0,1,2,…}。",
+        "noteEn": "Infinity: there is a set closed under the successor operation; the least such set is ω = {0,1,2,…}."
+      },
+      {
+        "latex": "\\forall A\\,\\bigl(A\\neq\\varnothing\\rightarrow\\exists m\\in A\\,(m\\cap A=\\varnothing)\\bigr)",
+        "note": "正则（基础）公理：∈ 是良基关系，排除 x ∈ x 与无穷 ∈-递降链，配合序数理论得到集合的秩。",
+        "noteEn": "Foundation: membership is well-founded, ruling out x ∈ x and infinite descending ∈-chains, and giving every set a rank."
+      }
+    ],
+    "properties": [
+      "外延公理给出集合相等的唯一判据：元素相同即相等，与集合怎样被描述、由哪条公理给出无关；配合存在性公理，它保证指定集合的唯一性（如 ∅ 唯一、配对集唯一）。",
+      "分离与替换是公理模式：对每条公式各取一条，公理集本身是无穷的；事实上（若 ZF 相容）不存在与 ZF 等价的有限公理集，这是它与群论、实数理论等有限公理化理论的根本差别。",
+      "分离公理把概括原则「相对化」了：{x ∈ a : x ∉ x} 是集合但必不属于 a；因此没有全集，罗素悖论转化为一条普通定理；替换公理进一步把可定义映射的像也算作集合。",
+      "正则公理使 ∈ 良基：不存在 x ∈ x，也不存在 x₀ ∋ x₁ ∋ x₂ ∋ ⋯ 的无穷所属链；它保证集合论可以在累积层 V_α 上作超限递归，为序数与基数理论提供舞台。",
+      "ZF 与 ZFC 只差选择公理一条；若 ZF 相容，则 ZF+AC 与 ZF+¬AC 都相容（哥德尔 1938/1940、科恩 1963），所以「某个证明是否用到选择公理」是一个可以严肃回答的问题。"
+    ],
+    "propertiesEn": [
+      "Extensionality gives the only criterion for equality of sets: same elements, same set, regardless of how it was described; with the existence axioms it makes specified sets unique (∅, {a,b}, and so on).",
+      "Separation and replacement are schemas: one axiom per formula, so the axiom set is infinite; in fact (if ZF is consistent) ZF cannot be replaced by finitely many axioms — unlike finitely axiomatized theories such as group theory.",
+      "Separation relativizes comprehension: {x ∈ a : x ∉ x} is a set but provably not an element of a; hence there is no universal set, and Russell's paradox becomes an ordinary theorem. Replacement additionally turns images of definable maps into sets.",
+      "Foundation makes membership well-founded: no set satisfies x ∈ x, and no infinite descending chain x₀ ∋ x₁ ∋ x₂ ∋ ⋯ exists; it legitimizes transfinite recursion over the cumulative hierarchy V_α.",
+      "ZF differs from ZFC by the single Axiom of Choice; if ZF is consistent then both ZF+AC and ZF+¬AC are consistent (Gödel 1938/1940, Cohen 1963), so whether a proof uses Choice is a serious, answerable question."
+    ],
+    "examples": [
+      {
+        "problem": "在 ZF 中证明：（1）空集唯一；（2）不存在「一切集合的集合」（全集）。",
+        "solution": "（1）设 $E_1,E_2$ 都满足空集公理，即对任意 $x$ 有 $x\\notin E_1$ 与 $x\\notin E_2$。于是对任意 $x$，命题 $x\\in E_1$ 与 $x\\in E_2$ 都假，故两者等价；由外延公理得 $E_1=E_2$。∎（2）反设存在全集 $V$——对任意集合 $x$ 都有 $x\\in V$。由分离公理模式，$R=\\{x\\in V:x\\notin x\\}$ 是集合。考察 $R\\in R$ 是否成立：若 $R\\in R$，则由 $R$ 的定义（$R$ 的元素都满足 $x\\notin x$）得 $R\\notin R$，矛盾；若 $R\\notin R$，则 $R$ 满足进入 $R$ 的两个条件（$R\\in V$ 与 $R\\notin R$），故 $R\\in R$，同样矛盾。两分支皆不可能，故这样的 $V$ 不存在。∎ 关键在第二步：分离公理要求 $R$ 有一个「宿主」$V$；一般地 $s=\\{x\\in a:x\\notin x\\}$ 总是合法集合，但定理只是 $s\\notin a$——悖论「跳出」了 $a$，而不是摧毁公理。Python 验证（有限秩 $V_0=\\varnothing$、$V_{n+1}=\\mathcal P(V_n)$）：$|V_0|,\\dots,|V_4|=0,1,2,4,16$；相对化的罗素集 $\\{x\\in V_3:x\\notin x\\}=V_3$，且 $V_3\\notin V_3$、$V_3\\in V_4$——正是「分离的产物跳出宿主、上升一层」的行为。"
+      },
+      {
+        "problem": "设 $A=\\{\\varnothing,\\{\\varnothing\\}\\}$，$B=\\mathcal P(A)$。用 ZF 的基本运算求 $\\{A,B\\}$、$\\bigcup\\{A,B\\}$、$\\{x\\in B:x\\notin A\\}$，并检验 $|B|=2^{|A|}$。",
+        "solution": "A 有 2 个元素：$\\varnothing$ 与 $\\{\\varnothing\\}$。由幂集公理，$B=\\mathcal P(A)=\\{\\varnothing,\\{\\varnothing\\},\\{\\{\\varnothing\\}\\},\\{\\varnothing,\\{\\varnothing\\}\\}\\}$，共 4 个元素，恰为 $2^{|A|}=2^2$——这正是「有限集合的幂集基数是 2 的幂」的来源。配对公理给出 $\\{A,B\\}$：因为 $|A|=2\\neq 4=|B|$，故 $A\\neq B$，$\\{A,B\\}$ 是 2 元集。并集公理给出 $\\bigcup\\{A,B\\}=A\\cup B=B$（因为 $A\\subseteq B$：A 的两个元素 $\\varnothing$、$\\{\\varnothing\\}$ 都在 B 中），共 4 个元素。分离公理作用于 B、A 给出 $\\{x\\in B:x\\notin A\\}=B\\setminus A$，其两个元素分别是 $\\{\\{\\varnothing\\}\\}$ 与 $A$ 自身（即 $\\{\\varnothing,\\{\\varnothing\\}\\}$），其余元素 $\\varnothing$、$\\{\\varnothing\\}$ 被 A 拦下。Python 验算：$|\\{A,B\\}|=2$、$|\\bigcup\\{A,B\\}|=4$、$|B\\setminus A|=2$ 且 $B\\setminus A$ 与分离式逐元素一致，全部通过 ✓。"
+      }
+    ],
+    "tags": ["ZFC", "公理集合论", "罗素悖论", "分离公理模式", "基础危机"],
+    "links": ["sets-operations", "axiom-of-choice", "ordinals-well-ordering", "cantor-infinity", "brouwer-hilbert-controversy"]
+  },
+  {
+    "id": "cardinal-arithmetic",
+    "title": "基数算术",
+    "titleEn": "Cardinal Arithmetic",
+    "branch": "mathematical-logic",
+    "level": 5,
+    "summary": "基数衡量集合的大小；无穷基数的算术出人意料：ℵ₀·ℵ₀=ℵ₀，κ+λ=κ·λ=max{κ,λ}，康托定理 2^κ>κ 让基数无限上升，而 2^{ℵ₀} 是否等于 ℵ₁（CH）与 ZFC 独立。",
+    "summaryEn": "Cardinals measure the size of sets; infinite cardinal arithmetic surprises with ℵ₀·ℵ₀=ℵ₀ and κ+λ=κ·λ=max{κ,λ}, Cantor's theorem 2^κ>κ sends cardinals ascending forever, and whether 2^{ℵ₀}=ℵ₁ (CH) is independent of ZFC.",
+    "definition": "两个集合 **等势**（$|A|=|B|$）当且仅当存在双射；有限集合的基数就是元素个数，无穷集合中 $|\\mathbb N|=\\aleph_0$（可数无穷），$|\\mathbb R|=\\mathfrak c$（连续统）。在冯·诺依曼方案下，基数就是特殊的序数（初始序数）：$\\aleph_0=\\omega$ 是最小无穷基数，$\\aleph_1$ 是最小不可数序数的基数，依此类推。基数比较用单射：$|A|\\le|B|$ 当且仅当存在单射 $A\\to B$；**康托–伯恩斯坦定理**说，若互相都有单射，则存在双射——所以证明两集合等势只需造两个方向相反的单射，不必写出一条显式双射，这是最常用的策略。\n\n三种运算由集合构造定义，在有限基数上与普通算术完全一致：**加法**是不交并（$|A\\sqcup B|=|A|+|B|$，如 3+4=7）；**乘法**是笛卡尔积（$|A\\times B|=|A|\\cdot|B|$，如 $|\\{1,2\\}\\times\\{1,2,3\\}|=6$）；**幂**是函数空间（$\\kappa^{\\lambda}=|A^{B}|$，$A^{B}$ 是 B 到 A 的函数全体，如 $2^3=8$）。\n\n无穷改变一切。$\\aleph_0+\\aleph_0=\\aleph_0$：把两个 $\\mathbb N$ 交错排列 0,0,1,1,2,2,… 即得双射。$\\aleph_0\\cdot\\aleph_0=\\aleph_0$：康托配对函数按反对角线把 $\\mathbb N\\times\\mathbb N$ 排成一列（见例题）。更一般地，在 ZFC 中（这一步依赖选择公理/良序定理）：任意两个无穷基数满足「吸收律」$\\kappa+\\lambda=\\kappa\\cdot\\lambda=\\max\\{\\kappa,\\lambda\\}$。于是 $\\mathfrak c\\cdot\\mathfrak c=\\mathfrak c$（直线与平面「一样多」）、$\\mathfrak c+\\aleph_0=\\mathfrak c$、$\\aleph_0^{\\aleph_0}=2^{\\aleph_0}=\\mathfrak c$。注意吸收律只在无穷时成立：有限时是普通的加乘，绝不能写成 max。\n\n幂运算的深处是**康托定理**：$2^{\\kappa}=|\\mathcal P(\\kappa)|>\\kappa$，对一切基数（有限与无穷）成立，由对角线法证明——不存在满射 $A\\to\\mathcal P(A)$。于是 $\\aleph_0<2^{\\aleph_0}=\\mathfrak c$，且 $\\kappa<2^{\\kappa}<2^{2^{\\kappa}}<\\cdots$ 无限上升，没有最大的基数。康托猜想 $2^{\\aleph_0}$ 恰是下一个基数 $\\aleph_1$，这就是**连续统假设 CH**（希尔伯特第一问题）：哥德尔 1940 年用可构造宇宙证明 ZF+CH 相容，科恩 1963 年用力迫法证明 CH 不能被证明，两者合起来说明 **CH 与 ZFC 独立**；广义连续统假设 GCH（$2^{\\aleph_\\alpha}=\\aleph_{\\alpha+1}$ 对一切 $\\alpha$）同样独立。",
+    "definitionEn": "Two sets are **equipollent** ($|A|=|B|$) when a bijection exists; for finite sets the cardinal is the number of elements, while for infinite sets $|\\mathbb N|=\\aleph_0$ (countably infinite) and $|\\mathbb R|=\\mathfrak c$ (the continuum). In the von Neumann scheme cardinals are special ordinals (initial ordinals): $\\aleph_0=\\omega$, $\\aleph_1$ is the cardinal of the least uncountable ordinal, and so on. Comparison of cardinals uses injections: $|A|\\le|B|$ iff there is an injection $A\\to B$; the **Cantor–Schröder–Bernstein theorem** says that mutual injections yield a bijection — so to prove two sets are equipollent one only needs two injections, not an explicit bijection.\n\nThe three operations come from set constructions and agree with ordinary arithmetic on finite cardinals: **addition** is disjoint union ($|A\\sqcup B|=|A|+|B|$, e.g. 3+4=7); **multiplication** is the Cartesian product ($|A\\times B|=|A|\\cdot|B|$, e.g. $|\\{1,2\\}\\times\\{1,2,3\\}|=6$); **exponentiation** is a set of functions ($\\kappa^{\\lambda}=|A^{B}|$, the set of all functions $B\\to A$, e.g. $2^3=8$).\n\nInfinity changes everything. $\\aleph_0+\\aleph_0=\\aleph_0$, via the interleaving 0,0,1,1,2,2,…; and $\\aleph_0\\cdot\\aleph_0=\\aleph_0$, via the Cantor pairing function enumerating $\\mathbb N\\times\\mathbb N$ by anti-diagonals (see the example). More generally, in ZFC (this step uses the Axiom of Choice via the well-ordering theorem) any two infinite cardinals satisfy the absorption law $\\kappa+\\lambda=\\kappa\\cdot\\lambda=\\max\\{\\kappa,\\lambda\\}$. Hence $\\mathfrak c\\cdot\\mathfrak c=\\mathfrak c$, $\\mathfrak c+\\aleph_0=\\mathfrak c$ and $\\aleph_0^{\\aleph_0}=2^{\\aleph_0}=\\mathfrak c$. The law holds only for infinite cardinals: finitely, one uses ordinary addition and multiplication, never max.\n\nAt the heart of exponentiation lies **Cantor's theorem**: $2^{\\kappa}=|\\mathcal P(\\kappa)|>\\kappa$ for every cardinal, finite or infinite, proved by diagonalization — no surjection $A\\to\\mathcal P(A)$ exists. Thus $\\aleph_0<2^{\\aleph_0}=\\mathfrak c$, and $\\kappa<2^{\\kappa}<2^{2^{\\kappa}}<\\cdots$ ascends forever with no largest cardinal. Cantor's guess that $2^{\\aleph_0}$ is exactly the next cardinal $\\aleph_1$ is the **Continuum Hypothesis (CH)**, Hilbert's first problem: Gödel (1940) proved ZF+CH consistent using the constructible universe, and Cohen (1963) proved by forcing that CH cannot be proved — so **CH is independent of ZFC**; the Generalized Continuum Hypothesis is independent too.",
+    "formulas": [
+      {
+        "latex": "\\kappa+\\lambda=|A\\sqcup B|,\\qquad\\kappa\\cdot\\lambda=|A\\times B|,\\qquad\\kappa^{\\lambda}=|A^{B}|",
+        "note": "三种基数运算的统一来源（κ=|A|、λ=|B|，A^B 是 B 到 A 的函数全体）；有限基数时它们就是普通加、乘、幂。",
+        "noteEn": "The three cardinal operations (κ=|A|, λ=|B|, A^B the set of functions B→A); on finite cardinals they are ordinary addition, multiplication and exponentiation."
+      },
+      {
+        "latex": "\\kappa+\\lambda=\\kappa\\cdot\\lambda=\\max\\{\\kappa,\\lambda\\}\\qquad(\\kappa,\\lambda\\ \\text{为无穷基数})",
+        "note": "无穷吸收律：只在无穷时成立（有限时 |{1,2}×{1,2,3}|=6≠max{2,3}），且证明依赖选择公理。",
+        "noteEn": "The infinite absorption law: it fails for finite cardinals (2×3=6≠max{2,3}) and its proof uses the Axiom of Choice."
+      },
+      {
+        "latex": "\\aleph_0\\cdot\\aleph_0=\\aleph_0,\\qquad\\pi(m,n)=\\frac{(m+n)(m+n+1)}{2}+n",
+        "note": "康托配对函数 π 是 ℕ×ℕ→ℕ 的双射（按反对角线枚举），故 |ℕ×ℕ|=ℵ₀；ℵ₀+ℵ₀=ℵ₀ 同理靠交错排列。",
+        "noteEn": "The Cantor pairing π is a bijection ℕ×ℕ→ℕ (anti-diagonal enumeration), so |ℕ×ℕ|=ℵ₀; ℵ₀+ℵ₀=ℵ₀ follows by interleaving."
+      },
+      {
+        "latex": "\\kappa<2^{\\kappa},\\qquad 2^{\\aleph_0}>\\aleph_0",
+        "note": "康托定理：幂集严格更大，由对角线法证明；于是基数无限上升，没有最大基数。",
+        "noteEn": "Cantor's theorem: the power set is strictly larger, by diagonalization; cardinals then ascend forever with no maximum."
+      },
+      {
+        "latex": "\\mathfrak c=2^{\\aleph_0}=|\\mathbb R|,\\qquad \\mathrm{CH}:\\ 2^{\\aleph_0}=\\aleph_1",
+        "note": "连续统的写法与连续统假设；CH 与 ZFC 独立（哥德尔 1940 相容、科恩 1963 独立）。",
+        "noteEn": "The continuum and the Continuum Hypothesis; CH is independent of ZFC (Gödel 1940 for consistency, Cohen 1963 for independence)."
+      }
+    ],
+    "properties": [
+      "三种运算在有限基数上就是普通算术；「max 律」κ+λ=κ·λ=max{κ,λ} 只在无穷时成立（有限时 2+3=5≠3、2×3=6≠3），其证明依赖选择公理——在 ZF 中一般基数甚至可能不可比。",
+      "无穷基数的吸收性带来反直觉等式：𝔠+𝔠=𝔠、𝔠·𝔠=𝔠、𝔠+ℵ₀=𝔠、ℵ₀^ℵ₀=2^{ℵ₀}=𝔠——「平面与直线一样多」；而在离开选择公理的 ZF 中，一般基数运算与比较会失去这些性质（ℝ 甚至可能是一列可数集的并）。",
+      "康托定理给出无穷的无穷上升：κ<2^κ<2^{2^κ}<⋯，不存在最大基数；特别地 2^{ℵ₀}=𝔠>ℵ₀ 不是「显然」，而是对角线法的结论。",
+      "证明等势的实用判据是康托–伯恩斯坦定理：只需构造两个方向相反的单射即得双射；例如 |ℝ|=|P(ℕ)| 即由此完成，二进小数的二义性只发生在可数多个点上，不影响基数。",
+      "独立性：CH（2^{ℵ₀}=ℵ₁）与 GCH 都与 ZFC 独立（哥德尔 1940、科恩 1963）；在 ZFC 中 2^{ℵ₀} 的取值不被唯一确定，它可以是 ℵ₁、ℵ₂、ℵ_{ω+1} 等许多基数（受共尾性等限制），但永远大于 ℵ₀。"
+    ],
+    "propertiesEn": [
+      "The three operations are ordinary arithmetic on finite cardinals; the max law κ+λ=κ·λ=max{κ,λ} holds only for infinite cardinals (finitely 2+3=5≠3 and 2×3=6≠3), and its proof uses Choice — in ZF general cardinals need not even be comparable.",
+      "Absorption produces counter-intuitive identities: 𝔠+𝔠=𝔠, 𝔠·𝔠=𝔠, 𝔠+ℵ₀=𝔠, ℵ₀^ℵ₀=2^{ℵ₀}=𝔠 — the plane is no bigger than the line; without Choice, general cardinal arithmetic loses these features (ℝ may even be a countable union of countable sets).",
+      "Cantor's theorem makes cardinals ascend without end: κ<2^κ<2^{2^κ}<⋯, and there is no largest cardinal; in particular 2^{ℵ₀}=𝔠>ℵ₀ is a theorem of diagonalization, not a triviality.",
+      "The practical criterion for equipollence is Cantor–Schröder–Bernstein: two opposite injections suffice for a bijection; this is how |ℝ|=|P(ℕ)| is proved, the countable set of dyadic ambiguities being harmless.",
+      "Independence: CH (2^{ℵ₀}=ℵ₁) and GCH are independent of ZFC (Gödel 1940, Cohen 1963); within ZFC the value of 2^{ℵ₀} is not determined — it may be ℵ₁, ℵ₂, ℵ_{ω+1}, etc. (subject to cofinality constraints), but it is always greater than ℵ₀."
+    ],
+    "examples": [
+      {
+        "problem": "用康托配对函数证明 ℵ₀·ℵ₀=ℵ₀：验证 $\\pi(m,n)=\\frac{(m+n)(m+n+1)}{2}+n$ 是 ℕ×ℕ→ℕ 的双射，并写出前 10 个枚举值。",
+        "solution": "π 按反对角线 $k=m+n$ 分组：第 k 条对角线上有 $k+1$ 个数对，之前的数对总数为 $0+1+\\cdots+k=\\frac{k(k+1)}{2}$，所以 $\\tau_k=\\frac{k(k+1)}{2}$ 正是第 k 条对角线的起点；该对角线上第 n 个数对 $(k-n,n)$（n=0,…,k）被 π 送到 $\\tau_k+n$，恰好铺满 $\\{\\tau_k,\\tau_k+1,\\dots,\\tau_k+k\\}$。于是每个自然数被取到恰好一次：π 既是单射又是满射。前 10 个值与数对：（0,0）↦0、(1,0)↦1、(0,1)↦2、(2,0)↦3、(1,1)↦4、(0,2)↦5、(3,0)↦6、(2,1)↦7、(1,2)↦8、(0,3)↦9。因此 $|\\mathbb N\\times\\mathbb N|=\\aleph_0$，即 $\\aleph_0\\cdot\\aleph_0=\\aleph_0$——「平方与自然数一样多」，无穷对有限直觉的第一次胜利。逆公式 $w=\\lfloor(\\sqrt{8z+1}-1)/2\\rfloor$、$(m,n)=(w-(z-\\tau_w),\\ z-\\tau_w)$ 与之配套。Python 验算：在 $[0,200]^2$ 的全部 40401 个数对上 π 无碰撞（单射）；逆公式在 z=0..9999 上往返一致、在 (m,n) 上也往返一致 ✓。仿此 $\\aleph_0+\\aleph_0=\\aleph_0$：把两个 ℕ 交错排列即得双射。"
+      },
+      {
+        "problem": "解释为什么 𝔠=2^{ℵ₀}、且 𝔠·𝔠=𝔠；指出这些式子的证明用到了什么，并给出「有限影子」的数值验证。",
+        "solution": "第一步 $2^{\\aleph_0}=|\\{0,1\\}^{\\mathbb N}|$：0-1 无穷序列与 ℕ 的子集一一对应（特征函数 $\\chi_A(n)=1\\iff n\\in A$），所以 $2^{\\aleph_0}=|\\mathcal P(\\mathbb N)|$。第二步 $|\\mathcal P(\\mathbb N)|=|\\mathbb R|$：每个实数有二进制展开给出一串 0-1（可数多个二进有理数有双重展开，这点瑕疵不影响基数），反向把 ⊆ℕ 送到 $\\sum_{k\\in A}3^{-k}$ 得单射；两方向单射 + 康托–伯恩斯坦即得 $\\mathfrak c=2^{\\aleph_0}=|\\mathbb R|$。第三步 $\\mathfrak c\\cdot\\mathfrak c=|\\mathbb R\\times\\mathbb R|=|\\mathbb R|=\\mathfrak c$：按无穷吸收律 $\\mathfrak c\\cdot\\mathfrak c=\\max\\{\\mathfrak c,\\mathfrak c\\}=\\mathfrak c$——这一步对一般无穷基数使用选择公理（良序定理保证基数可比）。也可绕过一般理论，显式用交错小数构造 $\\mathbb R^2\\to\\mathbb R$ 的单射（处理二义性后用康托–伯恩斯坦），这条路本质上不需要选择公理。有限影子：0-1 串长度 n 与 {0,…,n−1} 的子集一一对应，两者数量都等于 $2^n$——Python 算出 n=0..10 时为 1,2,4,8,16,32,64,128,256,512,1024 ✓；把 n 推向无穷并配合康托–伯恩斯坦，就是 $2^{\\aleph_0}=|\\mathcal P(\\mathbb N)|$ 的证明。注意区分：$\\mathfrak c\\cdot\\mathfrak c=\\mathfrak c$ 是「有无穷大的吸收」；对有限集合 $|A\\times B|=|A|\\cdot|B|$ 是普通乘法，绝不能写成 max。"
+      }
+    ],
+    "tags": ["基数", "连续统假设", "配对函数", "康托定理", "可数"],
+    "links": ["cantor-infinity", "ordinals-well-ordering", "axiom-of-choice", "zfc-axioms", "real-numbers"]
+  },
+  {
+    "id": "ordinals-well-ordering",
+    "title": "序数与良序",
+    "titleEn": "Ordinals and Well-Ordering",
+    "branch": "mathematical-logic",
+    "level": 5,
+    "summary": "良序集是每个非空子集都有最小元的全序集；冯·诺依曼把序数定义为「比自己小的全体序数」，超限归纳与超限递归由此像普通归纳一样运作，而序数算术奇特地对加法、乘法都不交换。",
+    "summaryEn": "A well-ordered set has a least element in every nonempty subset; von Neumann took each ordinal to be the set of all smaller ordinals, so transfinite induction and recursion work like ordinary induction — while ordinal arithmetic is famously non-commutative.",
+    "definition": "**良序**是全序 $(W,<)$ 并满足：每个非空子集都有最小元。$\\mathbb N$ 照常序是良序；$\\mathbb Z$（整条无最小元）、$\\mathbb Q$、开区间 $(0,1)$（无最小元）不是。良序集不含无穷递降链 $x_0>x_1>x_2>\\cdots$（否则这些元素构成的子集没有最小元）。两个良序集若存在保序双射就称**序同构**；康托证明任意两个良序集必有一个同构于另一个的初始段，所以良序集的「长度」可以被完全分类——分类的标尺就是序数。\n\n**冯·诺依曼序数**：一个序数就是「比自己小的全体序数」——满足 $\\alpha=\\{\\beta:\\beta<\\alpha\\}$，等价地：$\\alpha$ 是关于 $\\in$ 传递且被 $\\in$ 良序的集合。展开前几层：$0=\\varnothing$，$1=\\{0\\}$，$2=\\{0,1\\}$，一般的 $n=\\{0,1,\\dots,n-1\\}$；$\\omega=\\{0,1,2,\\dots\\}$ 是最小的无穷序数（也是最小的**极限序数**）。这个定义的美妙之处：序数之间的比较就是所属关系，$\\alpha<\\beta\\iff\\alpha\\in\\beta$；每个良序集恰与唯一一个序数同构，该序数称为它的序型。\n\n**序数算术与超限工具**。后继运算 $\\alpha+1=\\alpha\\cup\\{\\alpha\\}$；极限序数 $\\lambda=\\sup\\{\\beta:\\beta<\\lambda\\}$。加法、乘法、幂都由**超限递归**定义（公式卡给出加法的三条款），并且都非交换：$1+\\omega=\\omega\\neq\\omega+1$（把 1 放在无穷多个自然数之前「看不见」，放在之后却留下新元素），$2\\cdot\\omega=\\omega\\neq\\omega\\cdot2=\\omega+\\omega$。序数一路攀升：$\\omega,\\ \\omega+1,\\ \\omega\\cdot2,\\ \\omega^2,\\ \\omega^{\\omega}=\\sup\\{\\omega^n\\},\\ \\varepsilon_0=\\sup\\{\\omega,\\omega^{\\omega},\\omega^{\\omega^{\\omega}},\\dots\\}$——后者是 $\\omega^{\\alpha}=\\alpha$ 的最小解，仍可数（可数个可数序数之上确界），并在根岑对皮亚诺算术的相容性证明中扮演主角（见关联的历史节点）。工具方面：**超限归纳**说，若对每个 $\\alpha$ 都能在「所有 $\\beta<\\alpha$ 满足 $\\varphi(\\beta)$」的假设下证出 $\\varphi(\\alpha)$，则一切序数满足 $\\varphi$；实用上分三种情形核对：0、后继、极限。**超限递归**说，给定「用更早的值算新值」的规则 $G$，存在唯一的序数函数 $F$ 使 $F(\\alpha)=G(F\\upharpoonright\\alpha)$——序数算术与累积层 $V_\\alpha$ 都由它定义。\n\n**序数与基数的区别**：序数量「型」（顺序结构），基数只量「大小」。同一个基数上可以架许多序数：$\\omega+\\omega$ 与 $\\omega$ 都是可数的（$|\\omega+\\omega|=\\aleph_0=|\\omega|$），但作为序数 $\\omega+\\omega>\\omega$；反之基数 $\\aleph_0$ 本身也是一个序数——最小的无穷序数 $\\omega$（**初始序数**），一般记号 $\\aleph_\\alpha$ 取第 $\\alpha$ 个初始序数。所有序数的总体 $\\mathrm{Ord}$ 是真类：若它作为集合，就自己满足序数定义，于是 $\\mathrm{Ord}\\in\\mathrm{Ord}$，与正则公理矛盾（Burali–Forti）——这条悖论与罗素悖论一起，正是分离公理把概括限制在「已有集合」内的理由。",
+    "definitionEn": "A **well-order** is a total order $(W,<)$ in which every nonempty subset has a least element. $\\mathbb N$ is well-ordered; $\\mathbb Z$, $\\mathbb Q$ and the open interval $(0,1)$ are not. A well-ordered set contains no infinite descending chain $x_0>x_1>x_2>\\cdots$ (those elements would form a subset without least element). Two well-ordered sets are **order-isomorphic** when an order-preserving bijection exists; Cantor showed any two well-ordered sets are comparable — one is isomorphic to an initial segment of the other — so their order types admit a complete classification, and the yardstick is the ordinals.\n\n**Von Neumann ordinals**: an ordinal is the set of all smaller ordinals, $\\alpha=\\{\\beta:\\beta<\\alpha\\}$; equivalently, $\\alpha$ is a transitive set well-ordered by $\\in$. Concretely $0=\\varnothing$, $1=\\{0\\}$, $2=\\{0,1\\}$, $n=\\{0,\\dots,n-1\\}$, and $\\omega=\\{0,1,2,\\dots\\}$ is the least infinite ordinal (and the least **limit ordinal**). The beauty of the definition: comparison of ordinals is membership, $\\alpha<\\beta\\iff\\alpha\\in\\beta$, and every well-ordered set is isomorphic to exactly one ordinal, its order type.\n\n**Ordinal arithmetic and transfinite tools.** Successor: $\\alpha+1=\\alpha\\cup\\{\\alpha\\}$; limit: $\\lambda=\\sup\\{\\beta:\\beta<\\lambda\\}$. Addition, multiplication and exponentiation are defined by **transfinite recursion** (the formula card shows addition), and none is commutative: $1+\\omega=\\omega\\neq\\omega+1$ (placing 1 before infinitely many naturals is invisible, placing it after leaves a new element), and $2\\cdot\\omega=\\omega\\neq\\omega\\cdot2=\\omega+\\omega$. The ordinals climb on: $\\omega,\\ \\omega+1,\\ \\omega\\cdot2,\\ \\omega^2,\\ \\omega^{\\omega}=\\sup\\{\\omega^n\\},\\ \\varepsilon_0=\\sup\\{\\omega,\\omega^{\\omega},\\omega^{\\omega^{\\omega}},\\dots\\}$ — the least solution of $\\omega^{\\alpha}=\\alpha$, still countable (a supremum of countably many countable ordinals), and the hero of Gentzen's consistency proof for Peano arithmetic. Two tools do the work: **transfinite induction** — if for every $\\alpha$ one can prove $\\varphi(\\alpha)$ assuming $\\varphi(\\beta)$ for all $\\beta<\\alpha$, then $\\varphi$ holds for all ordinals; in practice one checks the zero, successor and limit cases. And **transfinite recursion** — given a rule $G$ computing a value from all earlier values, there is a unique ordinal function with $F(\\alpha)=G(F\\upharpoonright\\alpha)$; ordinal arithmetic and the cumulative hierarchy $V_\\alpha$ are defined through it.\n\n**Ordinals versus cardinals**: ordinals measure order type, cardinals only size. One cardinal carries many ordinals: $\\omega+\\omega$ and $\\omega$ are both countable ($|\\omega+\\omega|=\\aleph_0=|\\omega|$), yet $\\omega+\\omega>\\omega$ as ordinals. Conversely the cardinal $\\aleph_0$ is itself an ordinal — the least infinite one, $\\omega$, an **initial ordinal** — and $\\aleph_\\alpha$ denotes the $\\alpha$-th initial ordinal. The collection $\\mathrm{Ord}$ of all ordinals is a proper class: were it a set, it would satisfy the definition of an ordinal itself, giving $\\mathrm{Ord}\\in\\mathrm{Ord}$ and contradicting Foundation (Burali–Forti) — a paradox that, alongside Russell's, motivates restricting comprehension to subsets of existing sets.",
+    "formulas": [
+      {
+        "latex": "\\alpha=\\{\\beta:\\beta<\\alpha\\}",
+        "note": "冯·诺依曼定义：每个序数恰是全体更小序数之集，于是序数之间的比较就是 ∈。",
+        "noteEn": "The von Neumann definition: each ordinal is exactly the set of smaller ordinals, so comparison between ordinals is membership."
+      },
+      {
+        "latex": "\\alpha+1=\\alpha\\cup\\{\\alpha\\},\\qquad\\lambda=\\sup\\{\\beta:\\beta<\\lambda\\}",
+        "note": "后继与极限序数；序数要么是 0，要么是后继，要么是极限——超限论证的三种情形由此而来。",
+        "noteEn": "Successor and limit ordinals; every ordinal is zero, a successor, or a limit — the three cases of transfinite arguments."
+      },
+      {
+        "latex": "\\alpha+0=\\alpha,\\qquad\\alpha+(\\beta+1)=(\\alpha+\\beta)+1,\\qquad\\alpha+\\lambda=\\sup_{\\gamma<\\lambda}(\\alpha+\\gamma)",
+        "note": "序数加法的超限递归定义；由极限条款立得 1+ω=sup{1+n}=ω，而 ω+1=ω∪{ω}≠ω。",
+        "noteEn": "Transfinite recursion defining ordinal addition; the limit clause gives 1+ω=sup{1+n}=ω, while ω+1=ω∪{ω}≠ω."
+      },
+      {
+        "latex": "\\Bigl(\\forall\\alpha\\,\\bigl[(\\forall\\beta<\\alpha\\ \\varphi(\\beta))\\rightarrow\\varphi(\\alpha)\\bigr]\\Bigr)\\Longrightarrow\\forall\\alpha\\,\\varphi(\\alpha)",
+        "note": "超限归纳：假设里已经用了「所有更小序数」，到极限步就是关于上确界的论断。",
+        "noteEn": "Transfinite induction: the hypothesis already covers all smaller ordinals, so the limit case becomes a statement about a supremum."
+      },
+      {
+        "latex": "\\omega^{\\omega}=\\sup\\{\\omega^n:n<\\omega\\},\\qquad\\varepsilon_0=\\sup\\{\\omega,\\omega^{\\omega},\\omega^{\\omega^{\\omega}},\\dots\\},\\qquad\\omega^{\\varepsilon_0}=\\varepsilon_0",
+        "note": "序数的高塔一瞥：ε₀ 是 ω^α=α 的最小解，仍可数，出现在皮亚诺算术相容性的证明中。",
+        "noteEn": "A glimpse of the tower: ε₀ is the least solution of ω^α=α, still countable, and appears in the consistency proof for Peano arithmetic."
+      }
+    ],
+    "properties": [
+      "良序 = 全序 + 每个非空子集有最小元；ℤ、ℚ（照常序）不是良序，但 ℤ 可以换个次序 0,−1,1,−2,2,… 变成良序——集合可良序化与它原有的结构无关；任意集合能否良序化需要选择公理（良序定理）。",
+      "冯·诺依曼定义让序数论成为集合论内部的理论：α<β ⟺ α∈β，最小序数是 0=∅，有限序数就是 n={0,…,n−1}，ω={0,1,2,…} 是最小的无穷序数。",
+      "序数算术非交换、也没有右分配律：1+ω=ω≠ω+1、2·ω=ω≠ω·2；但有结合律，且左分配 α(β+γ)=αβ+αγ 成立——用乘法时必须写明左右。",
+      "超限归纳与超限递归是对整个序数线做归纳与定义的工具：证明分 0、后继、极限三种情形（极限步常用「所有更小序数的上确界」）；定义允许一次性使用全部更早的值，F(α)=G(F↾α)。",
+      "序数量型、基数量大小：ω+ω>ω 而 |ω+ω|=ℵ₀=|ω|；同一个基数 ℵ₀ 对应 ω、ω+1、ω·2、ω²、… 无穷多个序数；所有序数的总体是真类（Burali–Forti），不能是集合。"
+    ],
+    "propertiesEn": [
+      "Well-ordered = totally ordered + every nonempty subset has a least element; ℤ and ℚ (with their usual orders) are not well-ordered, but ℤ can be re-ordered as 0,−1,1,−2,2,… — well-orderability ignores the original structure, and for arbitrary sets it requires the Axiom of Choice (well-ordering theorem).",
+      "The von Neumann definition makes ordinal theory internal to set theory: α<β iff α∈β, the least ordinal is 0=∅, finite ordinals are n={0,…,n−1}, and ω={0,1,2,…} is the least infinite ordinal.",
+      "Ordinal arithmetic is non-commutative and lacks right distributivity: 1+ω=ω≠ω+1, 2·ω=ω≠ω·2; associativity holds, and left distributivity α(β+γ)=αβ+αγ holds — one must keep track of sides.",
+      "Transfinite induction and recursion handle the whole ordinal line: proofs split into the zero, successor and limit cases (the limit case often being a supremum statement); a definition may use all earlier values at once, F(α)=G(F↾α).",
+      "Ordinals measure order type, cardinals only size: ω+ω>ω while |ω+ω|=ℵ₀=|ω|; the single cardinal ℵ₀ carries infinitely many ordinals ω, ω+1, ω·2, ω², …; the collection of all ordinals is a proper class (Burali–Forti), never a set."
+    ],
+    "examples": [
+      {
+        "problem": "按定义计算序数算式：1+ω、ω+1、2·ω、ω·2、(ω+1)+ω、ω+(ω+1)、(ω+1)·ω，并指出哪几对不相等。",
+        "solution": "逐步用递归定义与「上确界」条款：1+ω = sup{1+n : n<ω} = ω（有限数 1,2,3,… 的上确界就是 ω）；ω+1 = ω∪{ω}≠ω，因为它多含元素 ω。2·ω = sup{2·n : n<ω} = sup{0,2,4,…} = ω；而 ω·2 = ω+ω>ω，第 ω 个元素之后还排着 ω 个元素。把加法结合律与上确界配合：(ω+1)+ω = sup_n((ω+1)+n) = sup_n(ω+n+1) = ω+ω = ω·2；ω+(ω+1) = (ω+ω)+1 = ω·2+1≠ω·2——同样的三个符号，因括号不同结果不同。乘法方面 (ω+1)·n = ω·n+1（对每个有限 n 成立，可用归纳验证），故 (ω+1)·ω = sup_n(ω·n+1) = ω²。汇总：1+ω≠ω+1；2·ω≠ω·2；(ω+1)+ω≠ω+(ω+1)（前者 ω·2，后者 ω·2+1）。Python 复核（用 Cantor 标准形实现序数 < ω^ω 的加法与乘法）：1+ω = ω、ω+1 = ω+1、2·ω = ω、ω·2 = ω·2、ω+ω = ω·2、(ω+1)+ω = ω·2、ω+(ω+1) = ω·2+1、(ω+1)·2 = ω·2+1、(ω+1)·ω = ω²、(ω+1)·ω² = ω³、ω·2+1+ω = ω·3，全部与手算一致；有限序数 0..19 上加法乘法与整数算术完全一致（回归测试），结合律抽查通过 ✓。"
+      },
+      {
+        "problem": "用超限归纳证明 0+α=α 对一切序数成立；说明为什么要检查三种情形；再用样例复核。",
+        "solution": "对 α 作超限归纳（即在「所有 β<α 满足 0+β=β」的假设下证 α 的情形），按序数的三种形态展开：（i）$\\alpha=0$：$0+0=0$，由定义的零条款成立 ✓。（ii）后继 $\\alpha=\\beta+1$：$0+\\alpha=0+(\\beta+1)=(0+\\beta)+1=\\beta+1=\\alpha$，其中第二、三步用了递归定义的后继条款与归纳假设 $0+\\beta=\\beta$ ✓。（iii）极限 $\\alpha=\\lambda$：$0+\\lambda=\\sup_{\\gamma<\\lambda}(0+\\gamma)=\\sup_{\\gamma<\\lambda}\\gamma=\\lambda$，第二步用归纳假设，最后一步用极限序数的定义（它是所有更小序数的上确界）✓。三种情形覆盖所有序数，故结论对一切序数成立。∎ 为什么要分三种情形：序数算术的递归定义正好有三条款（零、后继、极限），证明必须在定义「使用」归纳假设的每一个位置相应地走一遍——这一步不是形式主义，漏掉极限条款是超限归纳最常见的错误。对照结果：1+α=α 当且仅当 α≥ω——有限 α 时 1+α=α+1>α；α≥ω 时加法被「吸收」。Python 复核：在 Cantor 标准形实现下，0+α=α 对 13 个样例（0,1,2,3,4,5,ω,ω+1,ω·2,ω·2+1,ω²,ω²+ω·3,ω²+7）全部成立；1+α=α 对 α=0,1,2,3 为 False、对 ω 及 ω²+7 等为 True ✓——与吸收规律一致。"
+      }
+    ],
+    "tags": ["序数", "良序集", "超限归纳", "冯·诺依曼序数", "ε₀"],
+    "links": ["zfc-axioms", "axiom-of-choice", "cardinal-arithmetic", "mathematical-induction", "cantor-infinity"]
+  },
+  {
+    "id": "axiom-of-choice",
+    "title": "选择公理与等价形式",
+    "titleEn": "The Axiom of Choice and Its Equivalents",
+    "branch": "mathematical-logic",
+    "level": 5,
+    "summary": "任意非空集族的笛卡尔积非空——选择公理看似显然，却等价于佐恩引理与良序定理，推出 Banach–Tarski 悖论，并被证明与 ZF 独立（哥德尔 1938、科恩 1963）。",
+    "summaryEn": "Every product of a family of nonempty sets is nonempty — an innocent-looking axiom equivalent to Zorn's lemma and the well-ordering theorem, responsible for the Banach–Tarski paradox and provably independent of ZF (Gödel 1938, Cohen 1963).",
+    "definition": "**选择公理（AC）**：设 $\\{A_i\\}_{i\\in I}$ 是一族非空集合，则笛卡尔积 $\\prod_{i\\in I}A_i\\neq\\varnothing$；等价地说，存在**选择函数** $f$，对族中每个非空集合 $A$ 指定一个元素 $f(A)\\in A$。指标集 $I$ 有限时，由归纳从两个开始反复选取即可证明——所以 AC 的内容只在 $I$ 无穷时显现：「每一个都选得出」并不自动给出「同时全部选完」的机制，无穷多个选择没有有限步骤可以完成。罗素的比喻：无穷多双**鞋**可以规定「选左脚」；无穷多双**袜子**没有可写出的规则，却仍宣称存在一个「同时选择」——这就是 AC。\n\n**等价形式**（在 ZF 上互相等价：任一条加上 ZF 都能推出 AC，AC 也能推出它们）。①**良序定理**（策梅洛 1904）：每个集合都能被良序化。它让每个集合都有序型，从而所有基数都是 $\\aleph_\\alpha$——基数算术的一切便利几乎都建立在它之上。②**佐恩引理**：若非空偏序集 $(P,\\le)$ 中每条链都有上界，则 $P$ 有极大元。条件要逐字读：链是两两可比的子集，上界必须属于 $P$，结论只是**极大元**（没有比它更大的元素）而不是**最大元**（与所有元素可比且最大）。③**Tukey 引理**：非空且具有有限特征的集族（$X$ 属于族，当且仅当 $X$ 的每个有限子集都属于族）按包含关系有极大元。④**基数可比性**：任意两个集合 $A,B$，$|A|\\le|B|$ 与 $|B|\\le|A|$ 必有一个成立。⑤**吉洪诺夫定理**：任意一族紧空间的乘积紧。「任意乘积」这一般形式在 ZF 上等价于 AC。\n\n**应用**：「以包含为序、把链取并集当上界」是佐恩引理的万能模板，由此得到——每个向量空间有基；每个非零含 1 的交换环有极大理想；每个域有代数闭包；每个偏序集能延拓为全序；泛函分析的一般 Hahn–Banach 定理、拓扑学的吉洪诺夫定理、实分析中不可测集（Vitali 集）的存在性，也都经由 AC。这些应用的威力让多数数学家接受 AC；但它是**非构造**的：只断言选择存在，不给任何规则，没有谁能显式写出「袜子选择函数」。构造性数学与直觉主义因此拒绝 AC（见数学基础之争）。\n\n**独立性与代价**：若 ZF 相容，则 AC 与 ZF 独立。哥德尔 1938 年（专著 1940）在可构造宇宙 $L$ 中证明 ZF+AC（连同 GCH）相对相容；科恩 1963 年用力迫法证明 ZF+¬AC 同样相容——存在没有选择函数的集族，$\\mathbb R$ 可以不能被良序化，甚至可以是可数多个可数集的并。代价是一批「反直觉定理」，尤以 **Banach–Tarski 悖论**（1924）著称：在三维及更高维空间中，任意两个有界且内部非空的子集可以分解为**有限多块**，只用平移与旋转就能重拼成彼此（半径 1 与半径 2 的球也不例外）。碎片必然是**不可测**的（否则体积守恒），所以悖论并不与测度论矛盾，而是说明「每个集合都可测」的直觉在此失效；一维、二维没有这种分解（那里存在有限可加、平移不变的面积）。在 ZF+DC 且「所有实数集可测」的 Solovay 模型中，Banach–Tarski 分解不存在（该模型的相容性需假定不可达基数）——可见悖论的根源正是 AC 本身。",
+    "definitionEn": "The **Axiom of Choice (AC)**: for every family $\\{A_i\\}_{i\\in I}$ of nonempty sets, the product $\\prod_{i\\in I}A_i$ is nonempty; equivalently there is a **choice function** $f$ assigning to each nonempty set $A$ in the family an element $f(A)\\in A$. For finite $I$ this is provable in ZF by induction, so the substance of AC appears only for infinite $I$: the mere fact that each set can be picked from does not by itself deliver a mechanism to complete infinitely many picks at once. Russell's metaphor: infinitely many pairs of **shoes** allow the rule of picking the left one; infinitely many pairs of **socks** come with no writable rule, yet a simultaneous choice is still asserted to exist — that is AC.\n\n**Equivalent forms** (over ZF, each equivalent to AC). ①**Well-ordering theorem** (Zermelo 1904): every set can be well-ordered, giving every set an order type and every cardinal the form $\\aleph_\\alpha$ — most of the comfort of cardinal arithmetic rests on it. ②**Zorn's lemma**: if a nonempty poset $(P,\\le)$ has an upper bound for every chain, then $P$ has a maximal element. Read the hypotheses literally: a chain is a totally ordered subset, the upper bound must lie in $P$, and the conclusion is a **maximal** element (nothing larger), not a **greatest** one. ③**Tukey's lemma**: every nonempty family of sets of finite character ($X$ belongs iff all finite subsets of $X$ belong) has a maximal element under inclusion. ④**Comparability of cardinals**: for any sets $A,B$, either $|A|\\le|B|$ or $|B|\\le|A|$. ⑤**Tychonoff's theorem**: products of compact spaces are compact in its general form, which over ZF is equivalent to AC.\n\n**Applications**: ordering by inclusion and taking unions of chains as upper bounds is the universal template, yielding: every vector space has a basis; every commutative ring with identity has a maximal ideal; every field has an algebraic closure; every partial order extends to a total order; the general Hahn–Banach theorem, Tychonoff's theorem, and the existence of non-measurable sets (Vitali) all go through AC. Such power convinces most mathematicians to accept AC — but AC is **non-constructive**: it asserts the existence of choices without a rule, and no explicit sock choice function can be written. Constructive mathematics and intuitionism therefore reject it.\n\n**Independence and its price**: if ZF is consistent, AC is independent of ZF. Gödel (1938, monograph 1940) proved ZF+AC (with GCH) relatively consistent via the constructible universe $L$; Cohen (1963) proved by forcing that ZF+¬AC is consistent too — there can be families without choice functions, $\\mathbb R$ may fail to be well-orderable, and may even be a countable union of countable sets. The price is a series of counter-intuitive theorems, foremost the **Banach–Tarski paradox** (1924): in dimension three and higher, any two bounded subsets with nonempty interior can be decomposed into **finitely many pieces** and reassembled into each other using only translations and rotations (a ball of radius 1 into one of radius 2 included). The pieces must be **non-measurable** (otherwise volume would be preserved), so the paradox contradicts no theorem of measure theory; it shows that measurability of every set of reals fails. In dimensions one and two no such decomposition exists. In Solovay's model of ZF+DC where all sets of reals are measurable (consistency assuming an inaccessible cardinal), Banach–Tarski decompositions do not exist — the paradox stems from AC itself.",
+    "formulas": [
+      {
+        "latex": "\\forall i\\in I\\,(A_i\\neq\\varnothing)\\Longrightarrow\\prod_{i\\in I}A_i\\neq\\varnothing",
+        "note": "AC 的乘积形式：非空集族的笛卡尔积非空；有限族在 ZF 中可证，无穷族一般不可。",
+        "noteEn": "The product form of AC: a product of nonempty sets is nonempty; provable in ZF for finite families, not in general for infinite ones."
+      },
+      {
+        "latex": "\\Bigl(\\forall A\\in\\mathcal F\\ (A\\neq\\varnothing)\\Bigr)\\Longrightarrow\\exists f:\\mathcal F\\to\\bigcup\\mathcal F,\\ \\forall A\\in\\mathcal F\\ (f(A)\\in A)",
+        "note": "选择函数形式：与乘积形式等价；f 要同时对族中每个集合作出选择，这正是「同时选完」的难点。",
+        "noteEn": "The choice-function form, equivalent to the product form: f must pick from every set at once — precisely the hard part."
+      },
+      {
+        "latex": "\\Bigl(\\forall\\ \\text{链}\\ C\\subseteq P\\ \\exists u\\in P\\ \\forall c\\in C\\ (c\\le u)\\Bigr)\\Longrightarrow\\exists m\\in P\\ \\forall x\\in P\\ (m\\le x\\rightarrow x=m)",
+        "note": "佐恩引理：每条链有上界 ⟹ 有极大元。注意上界∈P、极大元≠最大元；应用时最常记错这两处。",
+        "noteEn": "Zorn's lemma: upper bounds for all chains yield a maximal element (not a greatest one), with the bound taken inside P."
+      },
+      {
+        "latex": "\\mathrm{AC}\\ \\Longleftrightarrow\\ \\text{每个集合都能被良序化}",
+        "note": "良序定理（Zermelo 1904）：由此一切基数可比、皆为 ℵ_α；反方向用「选每族的最小元」即得 AC。",
+        "noteEn": "The well-ordering theorem (Zermelo 1904): it makes all cardinals comparable alephs; conversely, picking least elements yields AC."
+      },
+      {
+        "latex": "\\Bigl(X\\in\\mathcal F\\iff X\\text{ 的每个有限子集都属于 }\\mathcal F\\Bigr),\\quad \\mathcal F\\neq\\varnothing\\ \\Longrightarrow\\ (\\mathcal F,\\subseteq)\\ \\text{有极大元}",
+        "note": "Tukey 引理：有限特征集族有极大元，是佐恩引理在代数与图论中的常用等价变体。",
+        "noteEn": "Tukey's lemma: nonempty families of finite character have maximal elements; a handy equivalent of Zorn's lemma."
+      }
+    ],
+    "properties": [
+      "AC 是一条非构造的存在性公理：它保证无穷多个选择「存在」，但不提供任何算法或规则——鞋子型选择不需要它，抽象的袜子型选择才是它的内容，也是构造性数学拒绝它的原因。",
+      "在 ZF 上，AC、佐恩引理、良序定理、Tukey 引理、基数可比性、吉洪诺夫定理等命题互相等价；使用时应指明所依赖的形式，因为各自的假设形态差别很大。",
+      "AC 独立于 ZF：若 ZF 相容，则 ZF+AC 与 ZF+¬AC 都相容（哥德尔 1938/1940 的可构造宇宙、科恩 1963 的力迫法）；因此「这个定理是否用到了 AC」是实质的数学问题，而非措辞问题。",
+      "AC 有严格弱于它的形式：可数选择 AC_ω、依赖选择 DC、超滤引理等推不出 AC；反过来 AC 推 DC。DC 已足以支撑大部分经典分析（测度、递归构造、度量空间），但 ℝ 的良序化仍然做不到。",
+      "佐恩引理的三个易错点必须逐字核对：链是两两可比的子集而非任意子集；上界必须落在偏序集 P 内；结论是极大元而非最大元——绝大多数误用都出在这三处。"
+    ],
+    "propertiesEn": [
+      "AC is a non-constructive existence axiom: it guarantees infinitely many choices without offering any algorithm or rule; shoe-type choices need no AC, and the abstract sock-type choice is exactly its content — hence the constructivist objections.",
+      "Over ZF, AC, Zorn's lemma, the well-ordering theorem, Tukey's lemma, comparability of cardinals and Tychonoff's theorem are all equivalent; one should say which form is being used, since their hypotheses look very different.",
+      "AC is independent of ZF: if ZF is consistent then both ZF+AC and ZF+¬AC are consistent (Gödel's constructible universe 1938/1940; Cohen's forcing 1963); whether a theorem uses AC is therefore a substantive question.",
+      "AC has strictly weaker relatives: countable choice AC_ω, dependent choice DC, and the ultrafilter lemma do not imply AC (while AC implies DC). DC suffices for most of classical analysis — measure theory, recursive constructions, metric spaces — yet still cannot well-order ℝ.",
+      "Three pitfalls in Zorn's lemma must be checked literally: chains are totally ordered subsets, upper bounds must lie in the poset, and the conclusion is a maximal (not greatest) element — almost every misuse is one of these three."
+    ],
+    "examples": [
+      {
+        "problem": "用佐恩引理证明每个向量空间都有基，并在 𝔽₂³ 上验证「极大线性无关组必是基」，数出基的个数。",
+        "solution": "设 V 是任意（可为无穷维）线性空间。取 $\\mathcal L$ 为 V 的全部线性无关子集，按包含关系偏序：非空（∅ 线性无关）。任取链 $\\{S_j\\}$，令 $S=\\bigcup_j S_j$：若 S 线性相关，则有不全为零、只有有限多个非零系数 $c_1,\\dots,c_n$ 的关系 $\\sum c_i v_i=0$，每个 $v_i$ 属于链中某个 $S_{j_i}$；链内元素两两可比，故这些 $S_{j_i}$ 中有一个最大者 $S_J$ 包含全部 $v_i$，于是 $S_J$ 线性相关，矛盾——所以 S 线性无关，是链的上界。由佐恩引理，$\\mathcal L$ 有极大元 B。若 B 不张成 V，取 $v\\notin\\operatorname{span}B$：任何用到 v 的非平凡线性关系移项即得 $v\\in\\operatorname{span}B$，而不用 v 的关系则与 B 的线性无关性矛盾——故 B∪{v} 线性无关，与 B 极大矛盾。所以 B 张成 V，是基。这正是「每个向量空间有基」的标准证明，其中佐恩引理即 AC；没有 AC，这一命题在 ZF 中不可证。𝔽₂³ 验算（Python 暴力枚举）：7 个非零向量中，3 元线性无关组共 28 个，等于 $|GL(3,2)|/3!=168/6$ ✓；每个极大无关组都张成（秩 3），4 元子集必线性相关——极大性、无关性、张成性三者在有限例中一致，正是定理的结论。"
+      },
+      {
+        "problem": "用佐恩引理证明每个偏序集都能延拓为全序（Szpilrajn 1930），并数出偏序 {0<1, 2<3} 的全部线性延拓。",
+        "solution": "设 $(P,\\le)$ 是偏序集。取 $\\mathcal X$ 为 P 上所有包含 $\\le$ 的偏序（以「关系」为元素，序用关系包含 $\\subseteq$）：非空。任取链 $\\{R_j\\}$，其并 $R^*=\\bigcup_j R_j$ 是偏序——自反显然；反对称与传递性只牵涉有限多对元素，每对都落入链中某个 $R_j$，由链的两两可比可把有限多对合并到同一个 $R_J$ 中检验，成立；故 $R^*$ 是上界。佐恩引理给出极大元 $R^{\\max}\\supseteq\\ \\le$。反设 $R^{\\max}$ 不是全序，则存在不可比的 $a,b$。在 $R^{\\max}$ 上定义「把 a 排在 b 前面」的关系 $R'=R^{\\max}\\cup\\{(x,y):x\\,R^{\\max}\\,a,\\ b\\,R^{\\max}\\,y\\}\\cup\\{(x,y):x\\,R^{\\max}\\,a,\\ b=y\\}\\cup\\{(x,y):x=a,\\ b\\,R^{\\max}\\,y\\}\\cup\\{(a,b)\\}$。用 a、b 不可比可以验证 $R'$ 无环，从而仍是偏序且真包含 $R^{\\max}$，与极大性矛盾——故 $R^{\\max}$ 全序，即 $\\le$ 的线性延拓。有限例验证：$P=\\{0,1,2,3\\}$，$\\le$ 由 0<1 与 2<3 生成（两条链，互不可比）。线性延拓就是把两条链交错排成一列：从 4 个位置中选出放 {0,1} 的 2 个（组内顺序固定），共 $\\binom{4}{2}=6$ 种；Python 暴力枚举全部 4!=24 个排列并筛选，恰好得到 6 个 ✓——与公式一致。"
+      }
+    ],
+    "tags": ["选择公理", "佐恩引理", "良序定理", "独立于 ZF", "Banach–Tarski"],
+    "links": ["zfc-axioms", "cardinal-arithmetic", "vector-space-basis", "hahn-banach", "tychonoff-theorem", "brouwer-hilbert-controversy"]
+  },
+  {
+    "id": "computability-turing",
+    "title": "可计算性与图灵机",
+    "titleEn": "Computability and Turing Machines",
+    "branch": "mathematical-logic",
+    "level": 5,
+    "summary": "图灵机把「机械可计算」精确化；丘奇–图灵论题断言它涵盖一切有效可计算性，停机问题则用对角线法证明存在不可判定问题，否定地回答了希尔伯特的判定问题，并与不完备定理同源。",
+    "summaryEn": "Turing machines formalize mechanical computation; the Church–Turing thesis claims they capture all effective computability, and the halting problem is undecidable by a diagonal argument that also answers Hilbert's Entscheidungsproblem.",
+    "definition": "**图灵机**（1936）由四样东西组成：一条向两端无限延伸的**纸带**（分成格，每格写有一个符号，符号取自有限字母表 $\\Gamma$，含空白符）；一个可在纸带上读写并左右移动的**读写头**；一个有限**状态集** $Q$（含初始状态 $q_0$、接受态与拒绝态）；一个**转移函数** $\\delta:Q\\times\\Gamma\\to Q\\times\\Gamma\\times\\{L,R\\}$。每一步：读当前格符号，按 δ 重写该格、左右移动一格、切换状态；δ 某处无定义即为停机（也可设显式停机状态）。输入是写在纸带上的有限字符串；若机器 M 在输入 w 上终会停下，记 $M(w)\\downarrow$，否则 $M(w)\\uparrow$。图灵机的特点是「有限描述 + 无限纸带」：程序只有有限多条指令，却能进行任意长的计算——这正是一切现代计算机的理论模型（状态 + 纸带 ≈ 处理器 + 内存）。\n\n**可计算函数与丘奇–图灵论题**。图灵机计算字符串到字符串的部分函数（编码为自然数即 $\\mathbb N^k\\dashrightarrow\\mathbb N$）；若机器对每个输入都停机并给出 $f(x)$，称 f 为（全）可计算；允许不终止则称部分可计算。若存在总是停机的机器正确判定「$x\\in A$ 是否成立」，称集合 A **可判定**（递归）。**丘奇–图灵论题**断言：一切直觉上「有效可计算」的函数恰好是图灵可计算函数。支持它的证据：丘奇的 λ 演算、哥德尔–克莱尼的递归函数、寄存器机、Post 系统等面貌各异的模型定义出的可计算类完全相同；一切公认可计算的程序都能在图灵机上实现。必须强调：论题是**论题而不是定理**——「有效可计算」是直观概念，不能形式化地证明它恰与图灵机一致；论题的作用是定义：我们规定「可计算」就是指「图灵可计算」。\n\n**停机问题**。设 $H=\\{\\langle M,w\\rangle:M(w)\\downarrow\\}$（把机器 M 与输入 w 编码成对）。**万能图灵机**：存在一台机器 U，读入 $\\langle M,w\\rangle$ 后逐步模拟 M 在 w 上的运行——「程序即数据」的雏形。它立即使 H **半可判定**（递归可枚举）：跑 U，若 M(w) 停机则 U 停机并确认；若 M(w) 不停机，U 也永远运行，给不出否定答案。但 **H 不可判定**（图灵 1936）：不存在总停机的判定机。证明是**对角线论证**：若存在判定机 H，就构造「唱反调」的机器 D——模拟 H（作用于 ⟨x,x⟩，即机器作用于自己），H 说「停」则 D 死循环，H 说「不停」则 D 停机；再问 H 在 $\\langle D,\\langle D\\rangle\\rangle$ 上的输出，两种回答都与 D 的构造矛盾（完整两分支见例题）。\n\n**可判定、半可判定与逻辑**。一般定理：A 半可判定 $\\iff$ A 是某个部分可计算函数的定义域；**A 可判定 $\\iff$ A 与它的补集都半可判定**（并行交错地跑两个半判定机，谁先停机采用谁）。停机问题于是示范了真正的不可判定：H 半可判定，但它的补集不半可判定（否则 H 可判定），故 H 不可判定；更强地，H（及其对角版 K）是 r.e.-完全的：每个 r.e. 集都可归约到它。推论：一阶逻辑有效式的判定问题不可判定——希尔伯特判定问题（Entscheidungsproblem）的否定解；而停机问题也给出**不完备定理的判定论证明**：可递归公理化、相容且充分强的理论，其定理集是 r.e. 但不可判定（哥德尔–罗瑟），若停机可判定则一切 r.e. 集都可判定，矛盾（历史线见关联节点）。最后的计数事实：图灵机只有可数多个有限描述，所以可计算函数只有 $\\aleph_0$ 个，而全体函数 $\\mathbb N\\to\\mathbb N$ 有 $\\mathfrak c=|\\mathbb N^{\\mathbb N}|$ 个——绝大多数函数不可计算。",
+    "definitionEn": "A **Turing machine** (1936) consists of: a **tape** infinite in both directions, divided into cells each holding one symbol from a finite alphabet $\\Gamma$ (including a blank); a **head** that reads, writes and moves left or right; a finite **state set** $Q$ with an initial state $q_0$ and accepting/rejecting states; and a **transition function** $\\delta:Q\\times\\Gamma\\to Q\\times\\Gamma\\times\\{L,R\\}$. Each step: read the current symbol, rewrite the cell, move one cell, and switch state; where δ is undefined the machine halts. Inputs are finite strings on the tape; $M(w)\\downarrow$ means M halts on w, otherwise $M(w)\\uparrow$. The essence is finite description with an infinite tape: finitely many instructions can drive computations of arbitrary length — the theoretical model of every modern computer.\n\n**Computable functions and the Church–Turing thesis.** Turing machines compute partial functions on strings (equivalently $\\mathbb N^k\\dashrightarrow\\mathbb N$); a (total) computable function is one whose machine halts on every input with the right output. A set A is **decidable** (recursive) when some machine always halts with a correct yes/no answer. The **Church–Turing thesis** asserts that the functions computable by an effective procedure are exactly the Turing-computable ones. The evidence: Church's λ-calculus, Gödel–Kleene recursive functions, register machines and Post systems all define the same class, and every accepted computation can be carried out on a Turing machine. Crucially, the thesis is a **thesis, not a theorem** — effective computability is an informal notion and cannot be proved equivalent to a formal one; the thesis functions as a definition of computability.\n\n**The halting problem.** Let $H=\\{\\langle M,w\\rangle:M(w)\\downarrow\\}$. A **universal Turing machine** U reads $\\langle M,w\\rangle$ and simulates M on w — the seed of programs-as-data. Consequently H is **semi-decidable** (recursively enumerable): run U; if M(w) halts, U halts and confirms; if M(w) never halts, U runs forever and can never answer no. Yet **H is undecidable** (Turing 1936): no always-halting decider exists. The proof is the **diagonal argument**: from a hypothetical decider H build the contrary machine D — simulate H on $\\langle x,x\\rangle$ (a machine fed its own code); if H answers that the machine halts, D loops forever, otherwise D halts. Then ask for H's answer on $\\langle D,\\langle D\\rangle\\rangle$; either answer contradicts D's construction (both branches in the example).\n\n**Decidable, semi-decidable, and logic.** In general A is semi-decidable iff A is the domain of some partial computable function, and **A is decidable iff both A and its complement are semi-decidable** (run the two semi-deciders in parallel and take whichever stops first). Thus the halting problem exhibits genuine undecidability: H is semi-decidable, its complement is not, so H is not decidable; indeed H (and its diagonal version K) is r.e.-complete — every r.e. set reduces to it. Consequences: validity in first-order logic is undecidable (Church–Turing), answering Hilbert's Entscheidungsproblem in the negative; and the halting problem yields a computability proof of the incompleteness theorem — a recursively axiomatized, consistent, sufficiently strong theory has a theorem set that is r.e. but undecidable (Gödel–Rosser), whereas a halting decider would make every r.e. set decidable. Finally, counting: finitely described machines are countable, so there are only $\\aleph_0$ computable functions while all functions $\\mathbb N\\to\\mathbb N$ number $\\mathfrak c=|\\mathbb N^{\\mathbb N}|$ — the overwhelming majority are non-computable.",
+    "formulas": [
+      {
+        "latex": "\\delta:Q\\times\\Gamma\\to Q\\times\\Gamma\\times\\{L,R\\}",
+        "note": "图灵机的转移函数；δ 是部分函数——未定义的组合即停机，必要时另设接受/拒绝停机态。",
+        "noteEn": "The transition function of a Turing machine; δ is partial — undefined combinations halt the machine, and accept/reject states may be added."
+      },
+      {
+        "latex": "H=\\{\\langle M,w\\rangle:\\ M(w)\\downarrow\\},\\qquad K=\\{e:\\ \\varphi_e(e)\\downarrow\\}",
+        "note": "停机问题 H 与它的对角版 K（φ_e 是第 e 个部分可计算函数）；K 是 r.e.-完全的。",
+        "noteEn": "The halting set H and its diagonal version K (φ_e the e-th partial computable function); K is r.e.-complete."
+      },
+      {
+        "latex": "D(\\langle M\\rangle)\\downarrow\\iff M(\\langle M\\rangle)\\uparrow\\qquad\\Longrightarrow\\qquad H\\ \\text{不可判定}",
+        "note": "对角线机 D 与「机器作用于自身」唱反调；把 D 代入自己的编码立即得矛盾，故不存在判定机。",
+        "noteEn": "The diagonal machine D contradicts any machine applied to its own code; plugging in D's own encoding gives the contradiction, so no decider exists."
+      },
+      {
+        "latex": "A\\ \\text{半可判定}\\iff A=\\operatorname{dom}\\varphi_e\\ \\text{对某个}\\ e;\\qquad A\\ \\text{可判定}\\iff A\\ \\text{与}\\ \\bar A\\ \\text{都半可判定}",
+        "note": "半可判定 = 能确认「是」（跑机器等着）；可判定 = 「是」「否」都能确认。",
+        "noteEn": "Semi-decidable = yes can be confirmed by running a machine; decidable = both yes and no can be confirmed."
+      },
+      {
+        "latex": "|\\{\\text{可计算函数}\\}|=\\aleph_0<\\mathfrak c=|\\mathbb N^{\\mathbb N}|",
+        "note": "计数论证：机器只有可数多个有限描述，函数却有连续统多个——绝大多数函数不可计算（链基数算术）。",
+        "noteEn": "A counting argument: countably many machine descriptions versus continuum many functions — almost all functions are non-computable."
+      }
+    ],
+    "properties": [
+      "丘奇–图灵论题的地位：论题不是定理——它把直观的「机械可计算」固定为图灵可计算；支持来自 λ 演算、递归函数、寄存器机等模型的完全等价，以及「任何认真设计的计算模型都没有超出图灵机」这一经验事实。",
+      "万能图灵机实现「程序即数据」：存在机器 U 模拟任意 M 在任意 w 上的运行；停机问题的半可判定正靠 U——确认停机只需跑一遍，确认不停机却要排除无穷多计算，做不到。",
+      "不可判定性会传递：若 A 不可判定且 A 可归约到 B（存在可计算 f 使 x∈A ⟺ f(x)∈B），则 B 也不可判定；K 与 H 是 r.e.-完全的，一切 r.e. 问题都归约到它——这是证明别的不可判定问题的标准套路；更广地，Rice 定理指出程序的任何非平凡语义性质都不可判定。",
+      "可判定、半可判定、更差，三层严格分离：∅ 与有限集可判定；停机集 K 半可判定却不可判定；K 的补集连半可判定都不是（由「可判定 ⟺ 与补集皆半可判定」立即得到）——分离全部由对角线法一次完成。",
+      "「证明」与「计算」共享同一对角线技巧：哥德尔自指句与停机问题的唱反调机器是同一论证在两个世界的化身；由停机不可判定能推出充分强、相容、可递归公理化理论的不完全性，丘奇–图灵定理也给出希尔伯特判定问题的否定解——逻辑与计算的边界在此重合。"
+    ],
+    "propertiesEn": [
+      "Status of the Church–Turing thesis: a thesis, not a theorem — it pins the informal notion of mechanical computability to Turing machines; the evidence is the mutual equivalence of λ-calculus, recursive functions, register machines and every seriously designed model.",
+      "The universal machine realizes programs-as-data: some U simulates any M on any w; semi-decidability of the halting problem rests on U — confirming halting takes one run, confirming eternal running would require ruling out infinitely many computations.",
+      "Undecidability propagates: if A is undecidable and A reduces to B (a computable f with x∈A iff f(x)∈B), then B is undecidable; K and H are r.e.-complete, the standard route to proving further undecidability results; more broadly, Rice's theorem: every nontrivial semantic property of programs is undecidable.",
+      "Three strictly separated layers: ∅ and finite sets are decidable; the halting set K is semi-decidable but not decidable; its complement is not even semi-decidable (from the fact that decidable means both it and its complement are semi-decidable) — all separated by one diagonal argument.",
+      "Proof and computation share the same diagonal trick: the Gödel sentence and the contrary halting machine are one argument in two worlds; halting undecidability yields the incompleteness of sufficiently strong, consistent, recursively axiomatized theories, and the Church–Turing theorem answers the Entscheidungsproblem negatively — the limits of logic and computation coincide."
+    ],
+    "examples": [
+      {
+        "problem": "完整写出停机问题不可判定的对角线论证（两分支），并用代码验证其逻辑骨架。",
+        "solution": "假设存在图灵机 H 判定停机问题：对任意 $\\langle M,w\\rangle$，H 总停机，且输出「停机」当且仅当 $M(w)\\downarrow$。构造图灵机 D：输入 x 后先模拟 H 在 $\\langle x,x\\rangle$ 上的运行——即让 x 这台机器作用于自己的编码；若 H 输出「停机」，D 进入死循环；若 H 输出「不停机」，D 立即停机。（D 是 H 加上一个机械分支，仍是图灵机，故有编码 $\\langle D\\rangle$。）现在把 x 取为 $\\langle D\\rangle$，问 H 的输出，只有两种可能：（i）输出「停机」，即 $D(\\langle D\\rangle)\\downarrow$——但按 D 的构造，D 看到「停机」后死循环，故 $D(\\langle D\\rangle)\\uparrow$，与 H 的正确性矛盾。（ii）输出「不停机」，即 $D(\\langle D\\rangle)\\uparrow$——按构造，D 看到「不停机」后立即停机，故 $D(\\langle D\\rangle)\\downarrow$，再次矛盾。两种情形皆矛盾，故判定机 H 不存在，停机问题不可判定。∎ 一句话直觉：D 是「针对你对我自身行为的判定反着来」的机器，任何自称的判定机都会在 D 上自相矛盾。代码验证三件套：（a）对角引理的有限影子——取 5 个函数 $f_i$，令 $g(i)=1-f_i(i)$，验证 g 与每个 $f_i$ 在点 i 处取值都不同（程序输出 g 与全部 $f_i$ 在 5 个点逐一不同）：对角函数永远逃出枚举；（b）两分支编码——对 H 在 $\\langle D,\\langle D\\rangle\\rangle$ 上的两种输出分别推导，程序打印两行的「判定与事实一致性」皆为 False，与上面的矛盾一一对应；（c）有限停机表——4 个迷你程序在输入 0..3 上（预算 300 步）的停机表为 [T,T,T,T]、[T,F,T,F]、[T,F,F,F]、[F,F,F,F]，翻转对角线得 d=[F,T,T,T]，d 与第 i 行在第 i 列都不同——即使缩到有限预算，对角行也不在表中。"
+      },
+      {
+        "problem": "说明停机问题半可判定、其补集不半可判定；并用 Python 的小型计数器机解释器演示「确认停机」与「无法确认」两种行为。",
+        "solution": "半可判定：万能机 U 模拟 M 在 w 上的运行，M(w) 一旦停机，U 就停机并确认 $\\langle M,w\\rangle\\in H$；若 $M(w)\\uparrow$，U 永远运行——所以 H 是 r.e. 的，但（例题 1）不可判定。补集 $\\bar H$ 不半可判定：若 $\\bar H$ 也有半判定机，把两台机器交错并行（每台各跑一步，谁先停机就采用谁的输出），就得到 H 的判定机，与例题 1 矛盾。这正是定理「A 可判定 ⟺ A 与 $\\bar A$ 都半可判定」的用例。Python 演示（计数器机：寄存器 + INC / DEC / JZ / JMP / HALT 指令，程序即有限指令表）：（1）P1（把 r0 翻倍到 r1）：对输入 n=0..5 分别在 1,6,11,16,21,26 步内停机并输出 2n 到 r1，规律为 5n+1 步——「确认停机」。（2）P2（JMP 到自身）：任何输入下跑满预算 2000 步仍不返回——「无法确认」，注意这既不等于证明它不停机，也不能在有限步内确认。（3）P3（判偶数）：输入 0,2,4 停机，输入 1,3,5 死循环（实测停机状态：停、不停、停、不停、停、不停）——同一台机器对不同输入命运不同，而观察者只能在停机时拿到答案。评论：半可判定只承诺「停机能等到」，不承诺「不停机能判出」；若两者都能等到（例如把 P3 的奇数分支也改成可判定的输出），那类问题就升格为可判定——而停机问题一旦可判定就会引出例题 1 的矛盾，所以它恰好停在这个边界上。"
+      }
+    ],
+    "tags": ["图灵机", "停机问题", "丘奇–图灵论题", "可判定性", "递归可枚举"],
+    "links": ["hilbert-program-godel", "predicate-logic", "formal-proof-systems", "cardinal-arithmetic", "soundness-completeness"]
+  }
+]

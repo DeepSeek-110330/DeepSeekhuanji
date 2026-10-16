@@ -1,0 +1,378 @@
+[
+  {
+    "id": "graph-basics",
+    "title": "图的基本概念",
+    "titleEn": "Graph Basics",
+    "branch": "graph-theory",
+    "level": 3,
+    "summary": "图由顶点与边构成；握手引理说各顶点度数之和等于边数的两倍，度序列、路径与连通性是整个图论语言的起点。",
+    "summaryEn": "A graph is a set of vertices joined by edges; the handshake lemma says the degrees sum to twice the edge count, and degree sequences, paths and connectivity form the language all of graph theory speaks.",
+    "definition": "一个**图** $G = (V, E)$ 由**顶点集** $V$ 与**边集** $E$ 组成，每条边连接两个顶点；记 $n = |V|$、$m = |E|$。边没有方向的图叫**无向图**，本节点默认讨论无向图。除非特别说明，还假设图是**简单图**：既不含**自环**（两个端点相同的边），也不含**重边**（同一对顶点之间的多条边）；允许重边的图叫**多重图**。当讨论含自环的图时，统一约定**自环对度数的贡献为 2**——这一约定让下面所有等式在多重图、带自环的图上依然成立。顶点 $v$ 的**度** $\\deg(v)$ 是与它关联的边的条数（重边逐条计数，自环算 2）；度为 0 的顶点叫孤立点。\n\n**握手引理**是图论的第一个基本定理：$\\sum_{v \\in V} \\deg(v) = 2m$。理由只有一句话——每条边恰有两个端点，在求和时被两端各数一次，所以总和恰是边数的两倍。它有一个著名推论：**奇度顶点的个数必为偶数**，因为偶度顶点对总和的贡献是偶数，而总和 $2m$ 本身是偶数。把各顶点度数按从大到小排成一列，得到图的**度序列**；若某个非负整数序列能实现为某简单图的度序列，就称它**可图化**。判断可图化不能只看「总和为偶数」或「最大度小于 n」：它们只是必要条件——例如 $(3, 3, 3, 1)$ 的总和 10 是偶数却不可图化。完整的判据是 **Havel–Hakimi 算法**（每次抹去最大度 $d$，把接下来的 $d$ 个度数各减 1，递归判断）或 **Erdős–Gallai 不等式**（见公式）。\n\n图论还需要描述「怎么走」：**途径**（walk）是边首尾相接的顶点—边交替序列；**迹**（trail）要求边不重复；**路径**（path）进一步要求顶点不重复。首尾重合的闭版本分别叫**闭途径**与**回路**；顶点不重复的回路叫**圈**（长度至少 3）。两个顶点间存在路径就称它们**连通**，任意两点都连通的图叫**连通图**；极大的连通子图叫**连通分支**。两个图若只差顶点重新命名而邻接关系完全一致，就称它们**同构**。度、连通、圈这三个概念贯穿整个图论：度刻画欧拉回路，圈刻画树与二部图，连通性支撑生成树与平面图理论。",
+    "definitionEn": "A **graph** $G = (V, E)$ consists of a **vertex set** $V$ and an **edge set** $E$, each edge joining two vertices; write $n = |V|$ and $m = |E|$. Graphs whose edges carry no direction are **undirected**, our default here. Unless stated otherwise we also assume graphs are **simple**: no **loops** (an edge whose two endpoints coincide) and no **multiple edges** (several edges on the same pair of vertices); graphs allowing multiple edges are **multigraphs**. When loops are present, the standing convention is that **a loop contributes 2 to the degree**. This keeps every identity below valid for multigraphs and loops. The **degree** $\\deg(v)$ counts the edges incident to $v$ (parallel edges one by one, a loop twice); a degree-0 vertex is isolated.\n\nThe **handshake lemma** is the first theorem of graph theory: $\\sum_{v \\in V} \\deg(v) = 2m$. The reason is one sentence long — every edge has two endpoints, so it is counted once at each end. Its famous corollary: **the number of odd-degree vertices is even**, because even-degree vertices contribute an even amount while the total $2m$ is even. Sorting the degrees in non-increasing order gives the **degree sequence**; a non-negative integer sequence realized by some simple graph is called **graphical**. Graphicality cannot be decided by necessary conditions alone: an even total or a maximum degree below n is not enough — $(3, 3, 3, 1)$ has even sum 10 yet is not graphical. The exact criteria are the **Havel–Hakimi algorithm** (repeatedly discard the largest degree $d$ and subtract 1 from the next $d$ degrees, recursively) and the **Erdős–Gallai inequalities** (see the formulas).\n\nGraph theory also needs a vocabulary for \u201cwalking\u201d: a **walk** is an alternating vertex-edge sequence in which consecutive edges meet; a **trail** repeats no edge; a **path** repeats no vertex. Closed versions are closed walks and circuits, and a circuit with no repeated vertex is a **cycle** (length at least 3). Two vertices are connected when a path joins them; a graph is **connected** when every pair is, and a maximal connected subgraph is a **connected component**. Two graphs are **isomorphic** when they differ only by renaming vertices while preserving adjacency. Degree, connectivity and cycles run through the whole subject: degrees drive Eulerian circuits, cycles drive trees and bipartite graphs, and connectivity underlies spanning trees and planarity.",
+    "formulas": [
+      {
+        "latex": "G = (V, E),\\qquad n = |V|,\\qquad m = |E|",
+        "note": "图的记号：n 为顶点数、m 为边数；后面的全部计数都归结到这两个数与各顶点的度数。",
+        "noteEn": "Notation for a graph: n vertices, m edges; all later counting is expressed through them and the degrees."
+      },
+      {
+        "latex": "\\sum_{v \\in V} \\deg(v) = 2m",
+        "note": "握手引理：度数之和等于边数的两倍；简单图、多重图、含自环图（自环算 2 度）一概成立。",
+        "noteEn": "Handshake lemma: the degree sum is twice the number of edges, for simple graphs, multigraphs and loops alike (a loop counts twice)."
+      },
+      {
+        "latex": "\\Bigl|\\{\\, v \\in V : \\deg(v) \\text{ 为奇数} \\,\\}\\Bigr| \\equiv 0 \\pmod 2",
+        "note": "奇度顶点个数必为偶数：所以不存在 7 个顶点、每点度都为 3 的简单图（7 × 3 = 21 是奇数）。",
+        "noteEn": "The number of odd-degree vertices is even: no simple graph on 7 vertices has all degrees 3 (7 × 3 = 21 is odd)."
+      },
+      {
+        "latex": "0 \\le \\deg(v) \\le n - 1, \\qquad m \\le \\binom{n}{2} \\quad (\\text{简单图})",
+        "note": "简单图的度与边数上界；m = C(n, 2) 当且仅当是完全图 K_n。",
+        "noteEn": "Degree and edge bounds for a simple graph; m = C(n, 2) holds exactly for the complete graph K_n."
+      },
+      {
+        "latex": "d_1 \\ge d_2 \\ge \\cdots \\ge d_n \\ \\text{可图化} \\iff \\sum_{i=1}^{k} d_i \\le k(k-1) + \\sum_{i=k+1}^{n} \\min(d_i, k) \\quad (1 \\le k \\le n) \\ \\text{且总和为偶数}",
+        "note": "Erdős–Gallai 判别法：这一族不等式加上总和为偶数，才是可图化的充要条件；只想排除序列时，先查总和是否为偶数。",
+        "noteEn": "Erdős–Gallai criterion: graphical if and only if the sum is even and these inequalities hold for every k; for quick exclusions, check the even sum first."
+      }
+    ],
+    "properties": [
+      "握手引理及其推论对一切无向图成立（重边逐条计数、自环算 2 度）；奇度顶点个数为偶数，因此不存在 7 个顶点、每点度都为 3 的简单图，而 K4（4 点）与 K3,3（6 点）这类 3-正则图的顶点数必为偶数。",
+      "简单图中每个顶点的度满足 0 ≤ deg(v) ≤ n − 1，边数满足 m ≤ C(n, 2)；取到最大边数 C(n, 2) 的图是完全图 K_n，它的每个顶点度都是 n − 1。",
+      "补图：简单图中 deg_G(v) + deg_Ḡ(v) = n − 1，且 m_G + m_Ḡ = C(n, 2)——一个图与它的补图的边恰好拼成完全图。",
+      "度序列「总和为偶数」只是必要条件，不充分：序列 (3, 3, 3, 1) 的总和 10 是偶数却不可图化；Havel–Hakimi 递推与 Erdős–Gallai 不等式才是充要判据。",
+      "同构的图有相同的度序列，但反之不成立：6 个顶点的圈 C6 与两个三角形 C3 ∪ C3 的度序列都是 (2, 2, 2, 2, 2, 2)，前者连通、后者不连通，并不相同。"
+    ],
+    "propertiesEn": [
+      "The handshake lemma and its corollary hold for every undirected graph (parallel edges counted one by one, a loop twice); the number of odd-degree vertices is even, so no simple graph on 7 vertices has all degrees 3, while 3-regular graphs such as K4 (4 vertices) and K3,3 (6 vertices) must have evenly many vertices.",
+      "In a simple graph every degree satisfies 0 ≤ deg(v) ≤ n − 1 and m ≤ C(n, 2); equality in the edge bound holds exactly for the complete graph K_n, whose vertices all have degree n − 1.",
+      "Complement: in a simple graph deg_G(v) + deg_{Ḡ}(v) = n − 1 and m_G + m_Ḡ = C(n, 2) — the edges of a graph and those of its complement exactly tile the complete graph.",
+      "An even degree sum is only necessary, not sufficient: (3, 3, 3, 1) has sum 10 yet is not graphical; Havel–Hakimi and Erdős–Gallai are the exact criteria.",
+      "Isomorphic graphs share the same degree sequence, but not conversely: the 6-cycle C6 and the disjoint union C3 ∪ C3 both have degree sequence (2, 2, 2, 2, 2, 2), yet one is connected and the other is not."
+    ],
+    "examples": [
+      {
+        "problem": "判断度序列 $(3, 3, 2, 2, 2)$ 是否可图化；若可图化，构造一个实现该度序列的图，并用握手引理核对边数。",
+        "solution": "第一步数总和：$3 + 3 + 2 + 2 + 2 = 12$。由握手引理 $2m = 12$，得 $m = 6$——边数必须是 6，这是必要条件。第二步用 Havel–Hakimi 递推：序列 $(3, 3, 2, 2, 2)$，抹去最大度 3，把随后的三个度数各减 1，得 $(2, 1, 1, 2)$，重排为 $(2, 2, 1, 1)$；抹去 2，随后两个度数各减 1，得 $(1, 0, 1)$，重排为 $(1, 1, 0)$；抹去 1，随后的一个度数减 1，得 $(0, 0)$；全部归零，递推正常结束——序列可图化。第三步构造：取 5 个顶点的圈 $v_1 v_2 v_3 v_4 v_5 v_1$（5 条边，每点度 2），再加弦 $v_1 v_3$（1 条边）：此时 $\\deg(v_1) = \\deg(v_3) = 3$，其余三点度都是 2，恰好是 $(3, 3, 2, 2, 2)$；总边数 $5 + 1 = 6 = m$，度数之和 $3 + 3 + 2 + 2 + 2 = 12 = 2 \\times 6$ ✓（已用 python 复核：Havel–Hakimi 判定可图化，所构造图的度数正是该序列）。"
+      },
+      {
+        "problem": "证明：任意图中奇度顶点的个数都是偶数；并回答——是否存在「7 个人，每人恰好认识另外 3 人」的认识关系（把「认识」看成简单图）？",
+        "solution": "由握手引理，$\\sum_{v \\in V} \\deg(v) = 2m$ 是偶数。把顶点按度数的奇偶分成两组：偶度组的度数之和是偶数，于是奇度组的度数之和 $= 2m - \\text{（偶度组之和）}$ 也是偶数；而若干个奇数相加为偶数，只能是加数的个数为偶数——即奇度顶点共有偶数个。再看 7 人问题：若每人恰好认识 3 人，对应的 7 个顶点度数全为 3，奇度顶点有 7 个，是奇数，与上证结论矛盾（等价地，$\\sum \\deg = 7 \\times 3 = 21$ 应是偶数 $2m$，矛盾）。所以这样的群体不存在（python 复核：21 为奇数，不可能等于 2m）。反过来，由这条推论，凡是每个顶点度都为 3 的 3-正则图，顶点数必为偶数，例如 K4 与 K3,3。"
+      }
+    ],
+    "tags": [
+      "图",
+      "顶点与边",
+      "度",
+      "握手引理",
+      "连通性"
+    ],
+    "links": [
+      "counting-principles",
+      "trees-spanning",
+      "euler-hamilton",
+      "bipartite-matching"
+    ]
+  },
+  {
+    "id": "trees-spanning",
+    "title": "树与生成树",
+    "titleEn": "Trees and Spanning Trees",
+    "branch": "graph-theory",
+    "level": 3,
+    "summary": "树是连通且无环的图：它等价于任意两点间有唯一路径，也等价于边数恰为 n−1；每个连通图都含有生成树。",
+    "summaryEn": "A tree is a connected acyclic graph, equivalently one with a unique path between any two vertices or with exactly n−1 edges; every connected graph contains a spanning tree.",
+    "definition": "**树**是连通且无环的图；不含环的图统称**森林**，森林的每个连通分支都是一棵树。单个顶点的平凡图按约定也是树；路径、星形（一个中心连接其余所有顶点）都是树的例子。树中度数为 1 的顶点叫**叶**。树是「最没有冗余」的图：删掉任何一条边都会断开，添加任何一条新边都会成圈。\n\n对 n 个顶点的图 T，以下命题**互相等价**：(i) T 是树（连通且无环）；(ii) T 连通且恰有 $n - 1$ 条边；(iii) T 无环且恰有 $n - 1$ 条边；(iv) T 的任意两个顶点之间**恰有唯一一条路径**。证明的枢纽是森林公式：n 个顶点、c 个连通分支的森林恰有 $m = n - c$ 条边（对边数归纳可得）。由它，(iii) 中 $n - 1 = n - c$ 迫使 $c = 1$，图连通；(ii) 中若含圈，删去圈上一边仍连通，反复操作会得到一个边数不足的连通图，与「连通图至少有 n − 1 条边」矛盾，故无环；至于 (iv)：两点间若有两条不同路径就围出一个圈，若含圈则圈上两点至少有两条路径，两个方向都说明唯一路径与「连通且无环」一致。注意：单独说「恰有 n − 1 条边」**不能**推出是树——例如一个三角形（3 顶点、3 边）与一条 3 顶点的路径（3 顶点、2 边）拼成的 6 顶点图恰有 $5 = 6 - 1$ 条边，却既含圈又不连通；必须配上「连通」或「无环」之一。\n\n**生成树**是包含原图全部顶点的树形子图（即 n 个顶点、$n - 1$ 条边的连通无环子图）。**连通图必有生成树**：只要图里还有圈，删去圈上的一条边，连通性不受影响，反复操作直到无圈；非连通图则对每个连通分支各取生成树，合起来叫**生成森林**。生成树一般远不止一棵：Cayley 公式说完全图 $K_n$ 恰有 $n^{n-2}$ 棵生成树，例如 $K_4$ 有 $4^2 = 16$ 棵。带权图（每条边带长度、成本等权重）中总权重最小的生成树叫**最小生成树**，两个经典算法是：**Kruskal 算法**把边按权重从小到大排序，依次尝试加入，不成圈就收下（用并查集判断两端是否已连通）；**Prim 算法**从一个起点出发，每次把连接「已选顶点」与「未选顶点」的最短边拉进来。两者都基于同一条**割性质**：跨越任意一个割的最短边一定属于某棵最小生成树，因此贪心不会误入歧途。",
+    "definitionEn": "A **tree** is a connected acyclic graph; an acyclic graph in general is a **forest**, and each component of a forest is a tree. The one-vertex graph is a tree by convention, and paths as well as stars (one center joined to all other vertices) are trees. A degree-1 vertex of a tree is called a **leaf**. Trees have no redundancy at all: deleting any edge disconnects them, and adding any new edge creates a cycle.\n\nFor a graph T on n vertices the following are **equivalent**: (i) T is a tree (connected and acyclic); (ii) T is connected and has exactly $n - 1$ edges; (iii) T is acyclic and has exactly $n - 1$ edges; (iv) any two vertices of T are joined by **exactly one path**. The pivot is the forest formula $m = n - c$ for a forest with c components (proved by induction on the number of edges). Hence in (iii), $n - 1 = n - c$ forces $c = 1$ and the graph is connected; in (ii), a cycle could be broken edge by edge while keeping connectivity, producing a connected graph with too few edges, contradicting the fact that a connected graph has at least $n - 1$ edges, so (ii) is acyclic. As for (iv): two distinct paths between a pair of vertices trace out a cycle, and conversely a cycle already gives two paths between its vertices, so the unique-path property matches \u201cconnected and acyclic\u201d in both directions. Beware: \u201cexactly $n - 1$ edges\u201d alone does not make a tree — a triangle (3 vertices, 3 edges) together with a disjoint 3-vertex path (3 vertices, 2 edges) forms a 6-vertex graph with $5 = 6 - 1$ edges that is both cyclic and disconnected; connectedness or acyclicity must accompany the edge count.\n\nA **spanning tree** is a tree-shaped subgraph containing all vertices of the graph (n vertices, $n - 1$ edges, connected and acyclic). **Every connected graph has a spanning tree**: as long as a cycle remains, delete one of its edges — connectivity survives — and repeat; for a disconnected graph one takes a spanning tree inside each component, obtaining a **spanning forest**. Spanning trees are usually far from unique: Cayley's formula states that $K_n$ has exactly $n^{n-2}$ of them, so $K_4$ has $4^2 = 16$. In a weighted graph (edges carry lengths or costs) a spanning tree of least total weight is a **minimum spanning tree**. Two classic algorithms are **Kruskal's**, which sorts the edges by weight and adds each edge that closes no cycle (a union-find structure tracks connectivity), and **Prim's**, which grows from one vertex by repeatedly taking the shortest edge leaving the chosen set. Both rest on the same **cut property**: a cheapest edge across any cut belongs to some minimum spanning tree, so the greedy choice is safe.",
+    "formulas": [
+      {
+        "latex": "T \\text{ 是树} \\iff T \\text{ 连通且无环} \\iff T \\text{ 的任意两顶点间恰有唯一路径}",
+        "note": "树的两个核心刻画；唯一路径性质常用于证明：两条不同路径会围出圈，圈上两点又会有两条路径。",
+        "noteEn": "The two core characterizations of trees; unique paths are used constantly in proofs, since two distinct paths create a cycle."
+      },
+      {
+        "latex": "m = n - 1 \\qquad (T \\text{ 为 } n \\text{ 顶点的树})",
+        "note": "等价链条：连通无环 ⇔ 连通且 m = n − 1 ⇔ 无环且 m = n − 1；单说「m = n − 1」必须有「连通」或「无环」作前提。",
+        "noteEn": "The equivalence chain: connected and acyclic iff connected with m = n − 1 iff acyclic with m = n − 1; the edge count needs connectedness or acyclicity as companion."
+      },
+      {
+        "latex": "G \\text{ 连通} \\iff G \\text{ 含有生成树}, \\qquad \\text{生成树边数} = n - 1",
+        "note": "生成树的存在性刻画，也是「连通图至少有 n − 1 条边」的来源；非连通时对各分支取生成树合成生成森林。",
+        "noteEn": "Existence of spanning trees, which also yields \u201ca connected graph has at least n − 1 edges\u201d; for disconnected graphs one builds a spanning forest."
+      },
+      {
+        "latex": "\\tau(K_n) = n^{n-2}, \\qquad \\tau(K_4) = 4^{4-2} = 16",
+        "note": "Cayley 公式（τ 记生成树棵数）：K4 的 6 条边中取 3 条共 C(6, 3) = 20 种，其中 16 种是生成树、4 种是三角形（python 暴力枚举复核）。",
+        "noteEn": "Cayley's formula (τ counts spanning trees): among the C(6,3) = 20 triples of edges of K4, exactly 16 form spanning trees and 4 form triangles (checked by brute force in Python)."
+      },
+      {
+        "latex": "T \\ (n \\ge 2) \\text{ 至少含两个叶顶点}",
+        "note": "证明用度数之和：若至多一个叶，则度数之和至少为 1 + 2(n − 1) = 2n − 1，但树只有 2m = 2n − 2，矛盾；n = 10 时即 18 < 19（python 复核）。",
+        "noteEn": "Proved via the degree sum: with at most one leaf the sum would be at least 1 + 2(n − 1) = 2n − 1, but a tree has 2m = 2n − 2; for n = 10 this reads 18 < 19 (checked in Python)."
+      }
+    ],
+    "properties": [
+      "树中每条边都是割边（桥）：删去任意一条边，树恰断成两棵子树；反过来，若连通图中能删去一条边后仍连通，说明该边在某个圈上，原图不是树。",
+      "树满足极值性质：保持 n 个顶点与连通性，边数不能少于 n − 1；保持无环，边数不能多于 n − 1——树同时是「最小连通图」与「最大无环图」。",
+      "森林公式：n 个顶点、c 个连通分支的森林恰有 n − c 条边；因此在无环的前提下，边数 n − 1 迫使 c = 1，图必连通，也就是树。",
+      "n ≥ 2 的树至少有两个叶（反证 + 握手引理，见例题）；删去一个叶及其关联边，剩下的图仍是树，这为归纳证明提供标准的归纳步骤。",
+      "生成树存在 ⇔ 图连通；各连通分支的生成树合起来是生成森林。带权图的最小生成树可由 Kruskal（边排序 + 并查集）或 Prim（逐点生长）在多项式时间求出，正确性依据是同一条割性质。"
+    ],
+    "propertiesEn": [
+      "Every edge of a tree is a bridge: deleting any edge splits the tree into two smaller trees; conversely, if deleting an edge of a connected graph leaves it connected, that edge lies on a cycle and the graph was not a tree.",
+      "Trees are extremal: with n vertices and connectivity kept, the edge count cannot drop below n − 1; with acyclicity kept, it cannot rise above n − 1 — a tree is at once the minimal connected graph and the maximal acyclic graph.",
+      "Forest formula: a forest with n vertices and c components has exactly n − c edges; in particular an acyclic graph with n − 1 edges must have c = 1, hence is a tree.",
+      "Every tree with n ≥ 2 has at least two leaves (contradiction plus the handshake lemma; see the example); deleting a leaf and its edge leaves a tree, the standard induction step.",
+      "A spanning tree exists iff the graph is connected; the spanning trees of the components form a spanning forest. In weighted graphs, Kruskal's (sort edges plus union-find) or Prim's (grow from one vertex) finds a minimum spanning tree in polynomial time, justified by the cut property."
+    ],
+    "examples": [
+      {
+        "problem": "六个城市 A, B, C, D, E, F 之间可修路段的成本（单位：万元）为：AB = 4，AC = 2，BC = 1，BD = 5，CD = 8，CE = 3，DE = 6，EF = 7，DF = 9，BE = 10，AD = 11。求用最少成本把所有城市连成一片的最小生成树与总成本。",
+        "solution": "先把边按权重排序：BC(1)、AC(2)、CE(3)、AB(4)、BD(5)、DE(6)、EF(7)、CD(8)、DF(9)、BE(10)、AD(11)。用 Kruskal 算法依次尝试：选 BC(1)；选 AC(2)，此时 {A, B, C} 连通；选 CE(3)，{A, B, C, E} 连通；AB(4) 的两端已连通，加入会成圈，弃掉；选 BD(5)，D 并入；DE(6) 成圈弃掉；选 EF(7)，F 并入——六个城市全部连通。共选 5 = 6 − 1 条边，总成本 $1 + 2 + 3 + 5 + 7 = 18$ 万元，边集 {BC, AC, CE, BD, EF} 无圈且连通，是一棵生成树。已用 python 复核：Kruskal 与 Prim 两种算法独立计算均得总权重 18 ✓。最优性由割性质保证：每一步收下的都是跨当前割的最短边，不会错过任何一棵最小生成树。"
+      },
+      {
+        "problem": "设 T 是一棵 n ≥ 2 个顶点的树。证明：T 至少有两个叶（度为 1 的顶点）。",
+        "solution": "树有 $m = n - 1$ 条边，由握手引理 $\\sum_{v} \\deg(v) = 2(n - 1)$。又因 n ≥ 2 的树连通，每个顶点的度至少为 1。反证：假设 T 至多含一个叶。若一个叶也没有，则所有顶点的度都 ≥ 2，度数之和 ≥ 2n > 2n − 2，矛盾；若恰有一个叶，则其余 n − 1 个点的度都 ≥ 2，度数之和 ≥ 1 + 2(n − 1) = 2n − 1 > 2n − 2，同样矛盾。两种情形都不成立，故 T 至少有两个叶。∎ 例如 n = 10 的树度数之和为 18，若至多一个叶则总和至少 19，确实不可能（python 复核 18 < 19 ✓）。"
+      }
+    ],
+    "tags": [
+      "树",
+      "生成树",
+      "最小生成树",
+      "叶子",
+      "Kruskal 算法"
+    ],
+    "links": [
+      "graph-basics",
+      "euler-hamilton",
+      "bipartite-matching",
+      "counting-principles"
+    ]
+  },
+  {
+    "id": "euler-hamilton",
+    "title": "欧拉回路与哈密顿回路",
+    "titleEn": "Eulerian and Hamiltonian Circuits",
+    "branch": "graph-theory",
+    "level": 4,
+    "summary": "欧拉问题要求经过每条边恰好一次（有简洁的度数判据），哈密顿问题要求经过每个顶点恰好一次（至今没有简单的充要条件，Dirac 与 Ore 只是充分条件）。",
+    "summaryEn": "Eulerian problems traverse every edge exactly once and have a clean degree criterion, while Hamiltonian problems visit every vertex exactly once and admit no known simple criterion; Dirac's and Ore's theorems give sufficient conditions only.",
+    "definition": "**欧拉回路**是经过图中每条边**恰好一次**并且回到出发点的**闭迹**；如果只要求经过每条边恰好一次、不要求回到起点，则称为**欧拉路径**（欧拉迹）。问题的原型是 1736 年欧拉的**哥尼斯堡七桥问题**，它被公认为图论的开端。要注意欧拉问题关心的是**边**：每条边不多不少走一次，至于顶点经过几次、是否重复，不作要求。\n\n判定准则既简单又完整。设 $G$ 忽略孤立点后连通，则：$G$ 有**欧拉回路** $\\iff$ 每个顶点的度都是偶数；$G$ 有**欧拉路径** $\\iff$ 奇度顶点的个数为 $0$ 或 $2$。恰为 $0$ 时，欧拉路径其实就是回路，因此路径条件**不能**写成「奇度顶点恰为 $2$ 个」——那样会漏掉回路这一大情形；恰为 $2$ 时，路径必须以这两个奇度顶点为两个端点。必要性很好想：沿欧拉路径走一遍，除起点与终点外的每个顶点都是「进来一次、出去一次」，度数被两两配对，只能是偶数；起点与终点各多出一次，为奇数。所以奇度顶点只能有 $0$ 个（回到起点）或 $2$ 个（真正的开路径）。充分性可用 **Hierholzer 算法**：先随手走圈，再把还没用到的圈「拼接」进已经走过的圈里，最终覆盖所有边；Fleury 算法提供了另一种可行走法。\n\n**哈密顿路径**是经过图中每个顶点**恰好一次**的路径；闭合版本叫**哈密顿回路**。与欧拉问题只差「边」和「点」一字，难度却天壤之别：**哈密顿问题没有已知的简单充要条件**（「图是否有哈密顿回路」是经典的 NP-完全问题），我们手里只有充分条件与必要条件这两类工具。两个著名的**充分条件**：**Dirac 定理**——若 $n \\ge 3$ 且每个顶点的度都至少 $n/2$，则图必有哈密顿回路；**Ore 定理**——若 $n \\ge 3$ 且任意两个**不相邻**顶点的度数之和都至少 $n$，则图必有哈密顿回路。方向务必记牢：满足条件必存在回路，但存在回路不必满足条件（C5 就是反例）；Ore 的适用范围更广，因为 Dirac 条件成立时 Ore 条件自动满足（每个度都 $\\ge n/2$，不相邻两点的度数之和自然 $\\ge n$），反之不然。常见的**必要条件**：若删去某 $k$ 个顶点后剩下的图连通分支超过 $k$，就不可能有哈密顿回路（对哈密顿路径则是不超过 $k + 1$）。",
+    "definitionEn": "An **Eulerian circuit** is a closed trail that uses every edge of a graph **exactly once**; if the trail must use every edge exactly once but need not return to its starting point, it is an **Eulerian path** (Eulerian trail). The prototype is Euler's 1736 answer to the **Königsberg bridge problem**, commonly regarded as the birth of graph theory. Note that Eulerian questions concern **edges**: every edge is walked exactly once, while vertices may be visited repeatedly.\n\nThe criterion is both simple and complete. Suppose $G$ is connected apart from isolated vertices: $G$ has an **Eulerian circuit** $\\iff$ every vertex has even degree, and $G$ has an **Eulerian path** $\\iff$ the number of odd-degree vertices is $0$ or $2$. When it is $0$ the \u201cpath\u201d is in fact a circuit, so the path condition must **not** be paraphrased as \u201cexactly two odd-degree vertices\u201d — that would lose the circuit case; when it is $2$ the path must start and end at those two odd vertices. Necessity is immediate: along an Eulerian path every vertex other than the two ends is entered and left equally often, pairing up its edges, so its degree is even; each end contributes one unpaired edge and is odd. Hence there can only be $0$ odd vertices (closed circuit) or $2$ (a genuine open path). Sufficiency can be proved by the **Hierholzer algorithm**: walk circles, splice unused circles into the circles already walked, and eventually cover all edges; Fleury's algorithm offers another route.\n\nA **Hamiltonian path** visits every vertex of the graph **exactly once**, and a closed such walk is a **Hamiltonian cycle**. One word apart from the Eulerian problem — \u201cvertex\u201d instead of \u201cedge\u201d — yet worlds apart in difficulty: **no simple necessary and sufficient condition for Hamiltonicity is known** (deciding whether a Hamiltonian cycle exists is NP-complete), so only sufficient and necessary tools are available. Two famous **sufficient conditions**: **Dirac's theorem** — if $n \\ge 3$ and every vertex has degree at least $n/2$, then a Hamiltonian cycle exists; **Ore's theorem** — if $n \\ge 3$ and every pair of **non-adjacent** vertices has degree sum at least $n$, then a Hamiltonian cycle exists. The direction matters: satisfying a condition guarantees a cycle, but a cycle need not satisfy the condition (C5 is the counterexample). Ore's hypothesis is the weaker one: when Dirac's condition holds, every two non-adjacent vertices automatically have degree sum at least $n$, but not conversely. A standard **necessary condition**: if deleting some $k$ vertices leaves more than $k$ connected components, no Hamiltonian cycle exists (for Hamiltonian paths the bound is $k + 1$).",
+    "formulas": [
+      {
+        "latex": "G \\text{ 忽略孤立点后连通，且所有顶点度为偶数} \\iff G \\text{ 含欧拉回路}",
+        "note": "欧拉回路的完整判定：连通性（忽略孤立点）与「全偶度」两个条件都不能少。",
+        "noteEn": "The exact criterion for an Eulerian circuit: connected apart from isolated vertices, with all degrees even."
+      },
+      {
+        "latex": "G \\text{ 忽略孤立点后连通，且奇度顶点数为 } 0 \\text{ 或 } 2 \\iff G \\text{ 含欧拉路径}",
+        "note": "欧拉路径的完整判定：0 个奇度点（实为回路）或 2 个奇度点（路径以它们为端点）；写成「恰 2 个」就漏掉了 0。",
+        "noteEn": "The exact criterion for an Eulerian path: 0 odd-degree vertices (then it is a circuit) or 2 (the path starts and ends at them); writing \u201cexactly 2\u201d silently drops the 0."
+      },
+      {
+        "latex": "n \\ge 3, \\quad \\delta(G) \\ge \\frac{n}{2} \\implies G \\text{ 含哈密顿回路（Dirac）}",
+        "note": "Dirac 定理：δ ≥ n/2 是哈密顿回路的充分条件，不是必要条件；δ 记最小度。",
+        "noteEn": "Dirac's theorem: δ ≥ n/2 guarantees a Hamiltonian cycle; it is sufficient, not necessary (δ is the minimum degree)."
+      },
+      {
+        "latex": "n \\ge 3 \\text{ 时：}\\deg(u) + \\deg(v) \\ge n \\text{ 对一切不相邻顶点对 } u, v \\implies G \\text{ 含哈密顿回路（Ore）}",
+        "note": "Ore 定理：对不相邻顶点对提出度数和要求；δ ≥ n/2 时该条件自动满足，故 Ore 比 Dirac 适用范围更广。",
+        "noteEn": "Ore's theorem constrains the degree sums of non-adjacent pairs; it is automatically satisfied when δ ≥ n/2, so Ore covers more graphs than Dirac."
+      },
+      {
+        "latex": "G \\text{ 含哈密顿回路} \\implies \\forall S \\subseteq V: \\ c(G - S) \\le |S|",
+        "note": "删点必要条件：删去 k 个顶点后连通分支超过 k 个，就必非哈密顿；星形图 K1,3 删去中心剩 3 > 1 个分支。",
+        "noteEn": "A necessary condition: if removing k vertices leaves more than k components the graph is not Hamiltonian; the star K1,3 loses its center and leaves 3 > 1 components."
+      }
+    ],
+    "properties": [
+      "欧拉路径条件中「0 或 2 个奇度顶点」缺一不可：0 个时是回路，2 个时是真正的开路径；又因为奇度顶点个数总是偶数，出现 1、3 个奇度点的情形不可能。",
+      "欧拉判定很快（数度数 + 连通性检查即可，线性时间），哈密顿判定却是 NP-完全的：看起来对称的两个问题，计算复杂度截然不同。",
+      "哈密顿回路的必要条件：对任意子集 S ⊆ V 有 c(G − S) ≤ |S|（对哈密顿路径则 ≤ |S| + 1）。例如星形图 K1,3 删去中心后剩 3 个分支 > 1，故无哈密顿回路。",
+      "二部图的哈密顿回路上左右两侧交替出现，所以必有 |L| = |R|；若只存在哈密顿路径，则两侧顶点数相差不超过 1。",
+      "Dirac 与 Ore 都是充分条件，绝非充要：C5 有哈密顿回路，但最小度 2 < 5/2，且不相邻顶点对的度数和为 4 < 5，两个条件都不满足。"
+    ],
+    "propertiesEn": [
+      "Both options in \u201c0 or 2 odd-degree vertices\u201d are essential: 0 gives a circuit, 2 gives a genuine open path; since the number of odd-degree vertices is always even, 1 or 3 odd vertices can never occur.",
+      "Eulericity is easy to decide (count degrees plus one connectivity check, linear time), whereas Hamiltonicity is NP-complete: an apparently symmetric pair of problems with utterly different complexity.",
+      "Necessary condition for Hamiltonian cycles: c(G − S) ≤ |S| for every subset S of vertices (for Hamiltonian paths, ≤ |S| + 1). The star K1,3, deprived of its center, leaves 3 > 1 components and is not Hamiltonian.",
+      "A Hamiltonian cycle in a bipartite graph alternates between the two sides, so |L| = |R| is necessary; a Hamiltonian path forces the side sizes to differ by at most 1.",
+      "Dirac's and Ore's conditions are sufficient but far from necessary: C5 has a Hamiltonian cycle, yet its minimum degree 2 < 5/2 and every non-adjacent pair has degree sum 4 < 5, so neither condition holds."
+    ],
+    "examples": [
+      {
+        "problem": "把哥尼斯堡七桥问题抽象成图：4 个顶点、7 条边的多重图，四个顶点的度数分别为 3, 3, 3, 5。(1) 是否存在经过每座桥恰好一次的路线（欧拉回路或欧拉路径）？(2) 若拆去北岸与中央岛屿之间两座平行桥中的一座，结论如何变化？",
+        "solution": "(1) 四个顶点的度全是奇数，奇度顶点有 4 个。欧拉路径存在要求奇度顶点数为 0 或 2，4 不在其中——所以无论是欧拉回路（要求 0 个奇度点）还是不要求回到起点的欧拉路径，都不存在，这就是七桥问题无解的原因。核对：度数之和 $3 + 3 + 3 + 5 = 14 = 2 \\times 7$，与 7 座桥吻合（python 复核 ✓）。(2) 拆去两座平行桥中的一座后，它的两个端点度数各减 1：北岸变为 2、中央岛屿变为 4，南岸与东岛保持 3、3。此时图仍连通且恰有 2 个奇度顶点，故存在欧拉路径，且必须以两个奇度顶点为端点；python 用 Hierholzer 算法找出一条：南岸 → 中央岛屿 → 北岸 → 东岛 → 中央岛屿 → 南岸 → 东岛，恰好经过剩下 6 座桥各一次 ✓。"
+      },
+      {
+        "problem": "(1) 用 Dirac 定理判断二部图 K3,3 是否有哈密顿回路，并给出一条；(2) 说明 Dirac 与 Ore 条件只是充分条件：5 阶圈 C5 有哈密顿回路，却不满足这两个条件。",
+        "solution": "(1) K3,3 有 n = 6 个顶点，每个顶点的度都是 3（左右两侧各 3 个点，每个点连对面全部 3 个点），最小度 δ = 3 = n/2，满足 Dirac 定理的条件，因此必有哈密顿回路。具体一条为 $1 \\to 4 \\to 2 \\to 5 \\to 3 \\to 6 \\to 1$（左侧 1, 2, 3，右侧 4, 5, 6；相邻顶点始终分属两侧，6 个顶点各经过一次），python 暴力枚举复核 ✓。(2) C5 的 n = 5，最小度 δ = 2 < 5/2 = 2.5，不满足 Dirac；C5 中不相邻的顶点对度数和均为 2 + 2 = 4 < 5，也不满足 Ore。但 C5 本身就是一条哈密顿回路。这说明两个条件都只是**充分条件**：它们能保证哈密顿回路，却不能用来否定；哈密顿问题至今没有简单的充要条件。"
+      }
+    ],
+    "tags": [
+      "欧拉回路",
+      "一笔画",
+      "哈密顿回路",
+      "Dirac 定理",
+      "NP-完全"
+    ],
+    "links": [
+      "graph-basics",
+      "trees-spanning",
+      "planar-euler-formula",
+      "bipartite-matching"
+    ]
+  },
+  {
+    "id": "bipartite-matching",
+    "title": "二部图与匹配",
+    "titleEn": "Bipartite Graphs and Matchings",
+    "branch": "graph-theory",
+    "level": 4,
+    "summary": "二部图等价于不含奇圈；匹配是两两不相邻的边集，霍尔定理用「任意左点的邻居并集足够大」完整刻画了能饱和左侧全体的匹配何时存在。",
+    "summaryEn": "Bipartite graphs are exactly the graphs without odd cycles; matchings are sets of disjoint edges, and Hall's theorem characterizes when a matching saturates the whole left side by comparing every subset of left vertices with its neighborhood.",
+    "definition": "若可以把图的顶点集分成两部分 $L$ 与 $R$，使**每条边**都连接 $L$ 中的一个点与 $R$ 中的一个点（同一部分内部没有边），就说这个图是**二部图**（二分图），记作 $G = (L \\cup R, E)$。等价说法：二部图恰好是**可以用 2 种颜色染色**使相邻顶点异色的图。核心判定定理：**图是二部图 ⇔ 它不含长度为奇数的圈**，这是完整的等价，两个方向都成立。必要性：沿奇圈行走，颜色必须「黑、白、黑、白……」交替，走完奇数条边后回到起点却要求与起点异色，矛盾；充分性：任取一点，按与它距离的奇偶染两色，若出现同色顶点相邻，沿线走回必然围出一个奇圈。树与森林没有圈，自然都是二部图；$K_{m,n}$（左 m 个点、右 n 个点之间全连线）是二部图的标准例子。\n\n**匹配**是两两没有公共端点的边集；一条边「盖住」它的两个端点。包含边数最多的匹配叫**最大匹配**，其边数记作 $\\nu(G)$；盖住全部顶点的匹配叫**完美匹配**——二部图有完美匹配时显然必须 $|L| = |R|$。匹配刻画的是「互不冲突的配对」：把两组对象一一配上对，每个对象至多参与一对。\n\n**霍尔定理（婚配定理）**给出匹配能饱和整个 L 的完整判据：存在一个盖住 L 中每个顶点的匹配，**当且仅当对任意子集 $S \\subseteq L$ 都有 $|N(S)| \\ge |S|$**，其中 $N(S)$ 是 S 中所有顶点的邻居之并。量词结构是要害：必须对**每一个**子集 S 成立——任意 k 个左顶点，它们的邻居合起来至少要有 k 个——只检查单个顶点的邻居数远远不够。必要性显然：S 中每个顶点都要配到不同的邻居，这些邻居全在 $N(S)$ 里。充分性的标准证明用**增广路**：若匹配没有饱和 L，从某个未饱和的左点出发交替走「非匹配边、匹配边、非匹配边……」，要么找到一条增广路把匹配变大，要么沿着可达点汇出集合 S 使 $|N(S)| = |S| - 1 < |S|$，与条件矛盾。当 $|L| = |R|$ 时，把霍尔条件用于 L 就得到完美匹配的判据。\n\n匹配理论还有两个漂亮的对偶结果：**König 定理**说二部图中最大匹配的边数等于盖住所有边所需的最少顶点数；**k-正则二部图**（每个顶点的度都是 k ≥ 1，两侧大小相同）必有完美匹配。二部匹配可以建模成网络流，用最大流最小割定理统一证明霍尔定理与 König 定理，这也是运筹学中「分配问题」的理论基础。",
+    "definitionEn": "A graph is **bipartite** when its vertex set can be split into two parts $L$ and $R$ so that **every edge** joins a vertex of $L$ to a vertex of $R$ (no edge inside a part); we write $G = (L \\cup R, E)$. Equivalently, bipartite graphs are exactly the graphs that admit a **2-coloring** in which adjacent vertices get different colors. The central criterion: **a graph is bipartite iff it contains no cycle of odd length**, a complete equivalence in both directions. Necessity: walking along an odd cycle forces the colors to alternate, so after an odd number of edges the starting vertex would need the opposite color from itself; sufficiency: color each vertex by the parity of its distance from a fixed vertex, and a same-colored adjacent pair would close an odd cycle. Trees and forests have no cycles at all and are therefore bipartite; $K_{m,n}$ (all edges between m left vertices and n right vertices) is the standard example.\n\nA **matching** is a set of edges no two of which share an endpoint; an edge \u201ccovers\u201d its two endpoints. A matching with the largest possible number of edges is a **maximum matching**, its size written $\\nu(G)$; a matching covering every vertex is **perfect** — for a bipartite graph this forces $|L| = |R|$. Matchings formalize non-conflicting pairings in which each object takes part in at most one pair.\n\n**Hall's theorem** (the marriage theorem) gives the exact criterion for a matching saturating all of L: such a matching exists **if and only if $|N(S)| \\ge |S|$ for every subset $S \\subseteq L$**, where $N(S)$ is the union of the neighborhoods of the vertices in S. The quantifier is the crux: the condition must hold for **every** subset — any k left vertices together need at least k neighbors — and checking single vertices is far from enough. Necessity is clear: each vertex of S needs a distinct neighbor, all lying in $N(S)$. The standard proof of sufficiency uses **augmenting paths**: if a matching fails to saturate L, alternate unmatched and matched edges starting from an unsaturated left vertex; either an augmenting path enlarges the matching, or the reachable left vertices form a set S with $|N(S)| = |S| - 1 < |S|$, contradicting the hypothesis. When $|L| = |R|$, applying Hall's condition to L yields a perfect matching.\n\nTwo beautiful duality results complete the picture: **König's theorem** states that in a bipartite graph the size of a maximum matching equals the minimum number of vertices needed to cover all edges, and every **k-regular bipartite graph** (all degrees k ≥ 1, equal side sizes) has a perfect matching. Bipartite matching can be modeled as network flow, and the max-flow min-cut theorem proves both Hall's and König's theorems — the theoretical core of assignment problems in operations research.",
+    "formulas": [
+      {
+        "latex": "G \\text{ 是二部图} \\iff V(G) = L \\sqcup R \\text{ 且每条边连接 } L \\text{ 与 } R \\iff G \\text{ 不含奇圈}",
+        "note": "二部性的三个等价刻画；「不含奇圈」是最好用的判定（等价说法：2-可染色），两个方向都成立。",
+        "noteEn": "Three equivalent views of bipartiteness; \u201cno odd cycle\u201d is the handiest test (equivalently: 2-colorable), valid in both directions."
+      },
+      {
+        "latex": "\\forall S \\subseteq L: \\ |N(S)| \\ge |S| \\iff G \\text{ 存在饱和 } L \\text{ 全部顶点的匹配}",
+        "note": "霍尔定理：量词「任意子集 S」不能弱化为「任意单点」，否则会误判；反例见例题。",
+        "noteEn": "Hall's theorem: the quantifier over all subsets cannot be weakened to single vertices, or the test misfires; see the counterexample."
+      },
+      {
+        "latex": "|L| = |R| \\text{ 时：霍尔条件} \\iff G \\text{ 有完美匹配}",
+        "note": "完美匹配判据：两侧大小相同时，「饱和 L」就等于「盖住所有顶点」。",
+        "noteEn": "The perfect-matching criterion: with equal sides, saturating L means covering every vertex."
+      },
+      {
+        "latex": "\\nu(G) = \\tau(G) \\qquad (G \\text{ 为二部图})",
+        "note": "König 定理：最大匹配边数（ν）等于最小顶点覆盖点数（τ）；一般图不成立，C5 上 ν = 2 而 τ = 3。",
+        "noteEn": "König's theorem: maximum matching size ν equals minimum vertex cover size τ; it fails for general graphs, where C5 has ν = 2 but τ = 3."
+      },
+      {
+        "latex": "G \\text{ 为 } k\\text{-正则二部图 } (k \\ge 1) \\implies G \\text{ 有完美匹配}",
+        "note": "由霍尔定理证明：S 中每个点贡献 k 条边，全部落在 N(S) 内，故 k|N(S)| ≥ k|S|，即 |N(S)| ≥ |S|。",
+        "noteEn": "Proved by Hall: the k|S| edges leaving S all land in N(S), so k|N(S)| ≥ k|S|, i.e. |N(S)| ≥ |S|."
+      }
+    ],
+    "properties": [
+      "二部性的实质是「没有奇圈」：树、森林、偶圈都是二部图；任何非二部图都含有奇圈。偶圈与奇圈的区分正是二部性的分水岭。",
+      "匹配的边两两不相邻，故 |M| ≤ ⌊n/2⌋；二部图中还有 |M| ≤ min(|L|, |R|)，完美匹配要求 |L| = |R| 且每个顶点都被盖住。",
+      "霍尔条件的量词：必须对全部子集 S ⊆ L 验证 |N(S)| ≥ |S|。只验证单点是常见错误——「每人都有 2 个可选岗位，但 2 个岗位要分给 3 个人」时，整体条件就会失败。",
+      "增广路刻画：匹配 M 是最大匹配 ⇔ 不存在关于 M 的增广路（起点和终点都是未饱和点、边在「非匹配—匹配」间交替的路）。这给出求最大匹配的多项式时间算法（匈牙利算法），也是霍尔定理充分性的证明骨架。",
+      "对偶与算法：二部图中最大匹配大小等于最小顶点覆盖大小（König 定理），并与网络最大流最小割对应；由此可得 k-正则二部图必有完美匹配，例如 K3,3。一般图无此对偶（C5：最大匹配 2、最小顶点覆盖 3）。"
+    ],
+    "propertiesEn": [
+      "Bipartiteness really means \u201cno odd cycle\u201d: trees, forests and even cycles are all bipartite, while every non-bipartite graph contains an odd cycle. The even-versus-odd distinction is the watershed.",
+      "Edges of a matching are pairwise disjoint, so |M| ≤ ⌊n/2⌋; in a bipartite graph also |M| ≤ min(|L|, |R|), and a perfect matching requires |L| = |R| with every vertex covered.",
+      "The quantifier in Hall's condition: one must check |N(S)| ≥ |S| for all subsets S of L. Checking single vertices is a common mistake — three people each having two choices among the same two jobs guarantees no full assignment.",
+      "Augmenting-path characterization: M is maximum iff no augmenting path for M exists (an alternating path whose two ends are unsaturated). This yields the polynomial-time Hungarian algorithm and underlies the proof of Hall's theorem.",
+      "Duality and algorithms: in bipartite graphs the maximum matching size equals the minimum vertex cover size (König), matching the max-flow min-cut correspondence; hence every k-regular bipartite graph such as K3,3 has a perfect matching. General graphs lack this duality (C5: maximum matching 2, minimum vertex cover 3)."
+    ],
+    "examples": [
+      {
+        "problem": "五名学生甲、乙、丙、丁、戊申请五个岗位 1, 2, 3, 4, 5，各人会做的岗位为：甲 {1, 2}，乙 {2, 3}，丙 {1, 3, 4}，丁 {4, 5}，戊 {5}。能否安排每人恰好做一项自己会做的岗位、且每个岗位至多一人？用霍尔定理判断并给出一种安排。",
+        "solution": "把学生看成左部 L、岗位看成右部 R，边表示「会做」。按霍尔定理，需要检验每一个非空子集 $S \\subseteq L$ 是否都满足 $|N(S)| \\ge |S|$（共 $2^5 - 1 = 31$ 个子集）。挑几个最「紧」的看：$\\{甲, 乙\\}$ 的邻居是 {1, 2, 3}，3 ≥ 2；$\\{丁, 戊\\}$ 的邻居是 {4, 5}，2 ≥ 2；$\\{乙, 丁, 戊\\}$ 的邻居是 {2, 3, 4, 5}，4 ≥ 3；$\\{甲, 乙, 丙\\}$ 的邻居是 {1, 2, 3, 4}，4 ≥ 3。python 枚举全部 31 个子集复核，未发现任何违反者，故霍尔条件成立，存在饱和全部五名学生的匹配。一种安排：甲 → 1，乙 → 2，丙 → 3，丁 → 4，戊 → 5——逐项检查都落在各自会做的集合内 ✓；python 的匈牙利算法也求出大小为 5 的匹配 ✓。"
+      },
+      {
+        "problem": "四名申请者 a、b、c、d 与四个岗位 1, 2, 3, 4，可做集合为 a {1, 2}，b {1, 2}，c {1, 2}，d {3, 4}。能否实现完美匹配？霍尔定理在哪个子集处失败？实际最大匹配有多大？",
+        "solution": "考察 S = {a, b, c}：三人合起来只会做 {1, 2} 这两个岗位，$|N(S)| = 2 < 3 = |S|$，霍尔条件失败（python 枚举确认 {a, b, c} 是唯一的违反子集），因此不存在饱和 {a, b, c} 的匹配，更谈不上完美匹配。注意每个**单个**申请者都有至少 2 个选择，逐个看毫无异样——这正说明量词「任意 k 个左顶点」不能弱化为「每个左顶点」。实际最大匹配为 3，例如 a → 1、b → 2、d → 3：三人配对后 {a, b, c} 中剩下的 c 已无岗可配（1、2 都被占用），边数 $3 < 4$；python 的匈牙利算法复核最大匹配大小正是 3 ✓。"
+      }
+    ],
+    "tags": [
+      "二部图",
+      "匹配",
+      "霍尔定理",
+      "奇圈",
+      "增广路"
+    ],
+    "links": [
+      "graph-basics",
+      "graph-coloring",
+      "network-flow",
+      "lp-duality"
+    ]
+  },
+  {
+    "id": "planar-euler-formula",
+    "title": "平面图与欧拉公式",
+    "titleEn": "Planar Graphs and Euler's Formula",
+    "branch": "graph-theory",
+    "level": 4,
+    "summary": "平面图可画在平面上而不让边相交；连通平面图满足 v − e + f = 2（面含外部面），由此得到边数上界与 K5、K3,3 的非平面性。",
+    "summaryEn": "A planar graph can be drawn in the plane without edge crossings; connected planar graphs satisfy v − e + f = 2 with the outer face counted, which yields edge bounds and the non-planarity of K5 and K3,3.",
+    "definition": "如果一个图能画在平面上，使**顶点位置互异、每条边是连续曲线、任意两条边除公共端点外不相交**，就称它是**平面图**，这样的画法叫**平面嵌入**。嵌入把平面分割成若干区域，每个区域叫一个**面**；唯一无界的区域叫**外部面**（无穷面），其余为**内部面**。面是「画法」的属性：同一个平面图的不同嵌入中，面的形状可以不同，但对连通平面图，面的**个数**固定——由下面的欧拉公式决定。\n\n**欧拉公式**：若连通平面图有 v 个顶点、e 条边、f 个面（**含外部面**），则 $v - e + f = 2$。它最早来自多面体：简单多面体的顶点数、棱数、面数总满足这个等式（正四面体 $4 - 6 + 4 = 2$，正方体 $8 - 12 + 6 = 2$，正十二面体 $20 - 30 + 12 = 2$）。证明思路很干净：先取图的一棵生成树（含 $v - 1$ 条边）画好，此时平面只有一个面；再把剩下的 $e - v + 1$ 条边一条条补回去，每补一条边，因为两端已连通，恰好劈开一个已有面、多出一个新面，于是 $f = 1 + (e - v + 1)$，移项即得欧拉公式。对不连通的平面图，公式要改成 $v - e + f = 1 + c$（c 为连通分支数）：外部面只算一次，每个分支单独贡献。\n\n欧拉公式最常用的形式是它的推论。设 G 是 $v \\ge 3$ 的**连通**简单平面图：每个面至少由 3 条边围成（连通性不可省——如 K₂ 加孤立点，唯一的面边界长度为 2），而每条边被两侧的面共用，把各面度数相加时每条边恰好贡献 2，于是 $3f \\le 2e$；代入欧拉公式得 $e \\le 3v - 6$。若无三角形（例如二部图，每个面至少 4 条边），可得更强的 $e \\le 2v - 4$；一般地，围长为 g 时 $e \\le g(v-2)/(g-2)$。这些不等式立刻推出两个经典事实：$K_5$ 有 $e = 10 > 3 \\times 5 - 6 = 9$，$K_{3,3}$ 没有三角形但有 $e = 9 > 2 \\times 6 - 4 = 8$——它们都不是平面图。**库拉托夫斯基（Kuratowski）定理**给出完整刻画：图是平面图当且仅当它不含 $K_5$ 或 $K_{3,3}$ 的**细分**（把某些边替换成长路径得到的图）。\n\n平面图还配有**对偶图**：给定连通平面图的一个嵌入，在每个面里放一个对偶顶点，每条原边两侧的两个面之间连一条对偶边，得到的图 $G^*$ 叫对偶图。对偶满足 $v^* = f$、$e^* = e$、$f^* = v$，自然满足同样的欧拉公式。平面性、对偶性与「简单平面图平均度小于 6」这些事实，共同构成地图染色问题（四色定理）的舞台。",
+    "definitionEn": "A graph is **planar** if it can be drawn in the plane so that **distinct vertices sit at distinct points, every edge is a continuous arc, and two edges meet only at a shared endpoint**; such a drawing is a **planar embedding**. An embedding cuts the plane into regions called **faces**; the unique unbounded region is the **outer face**, the others are inner faces. Faces belong to the drawing: different embeddings of one planar graph may have differently shaped faces, but for a connected planar graph the **number** of faces is fixed — it is determined by Euler's formula below.\n\n**Euler's formula**: if a connected planar graph has v vertices, e edges and f faces (**the outer face included**), then $v - e + f = 2$. It grew out of polyhedra: for a convex polyhedron the counts always satisfy it (tetrahedron $4 - 6 + 4 = 2$, cube $8 - 12 + 6 = 2$, dodecahedron $20 - 30 + 12 = 2$). The proof is clean: draw a spanning tree of the graph first (v − 1 edges), which leaves exactly one face; then add the remaining $e - v + 1$ edges one at a time. Because the endpoints of each such edge are already connected, adding it splits one existing face into two, increasing the face count by 1, so $f = 1 + (e - v + 1)$ and Euler's formula follows. For a disconnected planar graph the formula becomes $v - e + f = 1 + c$ with c components: the outer face is counted once, each component contributing separately.\n\nThe most useful consequences concern **connected** simple planar graphs with $v \\ge 3$ (connectedness cannot be dropped: K₂ plus an isolated vertex has a single face of boundary length 2). Every face is bounded by at least 3 edges while each edge is shared by the faces on its two sides, so summing face degrees counts every edge exactly twice and $3f \\le 2e$; combined with Euler's formula this gives $e \\le 3v - 6$. Without triangles (for instance bipartite graphs, whose faces have length at least 4) the stronger bound $e \\le 2v - 4$ holds; in general, girth g yields $e \\le g(v-2)/(g-2)$. Two classical facts drop out immediately: $K_5$ has $e = 10 > 3 \\times 5 - 6 = 9$, and $K_{3,3}$ is triangle-free yet has $e = 9 > 2 \\times 6 - 4 = 8$ — neither is planar. **Kuratowski's theorem** gives the complete characterization: a graph is planar iff it contains no **subdivision** of $K_5$ or $K_{3,3}$ (a subdivision replaces edges by longer paths).\n\nPlanar graphs come with a **dual graph**: fix an embedding of a connected planar graph, place a dual vertex inside each face, and for every original edge draw a dual edge joining the faces on its two sides. The dual $G^*$ satisfies $v^* = f$, $e^* = e$, $f^* = v$ and obeys the same Euler formula. Planarity, duality and the fact that a simple planar graph has average degree below 6 together form the stage for map-coloring problems (the four-color theorem).",
+    "formulas": [
+      {
+        "latex": "v - e + f = 2 \\qquad (G \\text{ 为连通平面图，} f \\text{ 含外部面})",
+        "note": "欧拉公式：面数必须把外部面算进去，否则公式不成立；不连通时为 v − e + f = 1 + c。",
+        "noteEn": "Euler's formula: the outer face must be included in f; for a disconnected graph it reads v − e + f = 1 + c."
+      },
+      {
+        "latex": "\\sum_{f \\in F} \\deg(f) = 2e",
+        "note": "面度数（围出该面的边数）之和为 2e：每条边被两侧的面各用一次；桥的两侧是同一个面，也计 2 次。",
+        "noteEn": "Face degrees (boundary lengths) sum to 2e: each edge is used once by each side; a bridge borders one face on both sides and still counts twice."
+      },
+      {
+        "latex": "e \\le \\frac{g(v-2)}{g-2} \\qquad (v \\ge 3, \\text{围长 } g)",
+        "note": "围长版边数上界：g = 3 得 e ≤ 3v − 6（简单平面图），g = 4（无三角形，例如二部图）得 e ≤ 2v − 4。",
+        "noteEn": "The girth bound: g = 3 gives e ≤ 3v − 6 for simple planar graphs, and g = 4 (triangle-free, e.g. bipartite) gives e ≤ 2v − 4."
+      },
+      {
+        "latex": "v^* = f, \\qquad e^* = e, \\qquad f^* = v",
+        "note": "对偶图的基本关系（对连通平面图的一个嵌入）：顶点数与面数互换，边数不变。",
+        "noteEn": "Dual-graph relations for an embedding of a connected planar graph: vertex and face counts swap, the edge count stays."
+      },
+      {
+        "latex": "G \\text{ 平面} \\iff G \\text{ 不含 } K_5 \\text{ 或 } K_{3,3} \\text{ 的细分}",
+        "note": "Kuratowski 定理：平面性的完整刻画；细分指把边替换成长路径，细分不改变平面性。",
+        "noteEn": "Kuratowski's theorem: the complete characterization of planarity; subdividing edges into longer paths does not affect planarity."
+      }
+    ],
+    "properties": [
+      "欧拉公式的连通性前提：不连通时 v − e + f = 1 + c（c 为连通分支数）。例如两个不相交的三角形：v = 6、e = 6、f = 3，得 6 − 6 + 3 = 3 = 1 + 2 ✓。计算面数时若不把外部面算进去，公式立刻失效。",
+      "简单平面图有 e ≤ 3v − 6（v ≥ 3）；无三角形（例如二部图）时加强为 e ≤ 2v − 4。取等号当且仅当图**连通**、且每个面（含外部面）都恰由 3 条边 / 4 条边围成——三角剖分与四边形剖分（不连通时一般取不到等号，如三角形加一个孤立点）。",
+      "简单平面图的平均度为 2e/v < 6，因此任何简单平面图都含度数不超过 5 的顶点；这是处理平面图问题的标准归纳起点（五色定理的证明即以此起步）。",
+      "K5 与 K3,3 是两个基本的非平面图：K5 直接用 e ≤ 3v − 6 判非平面，K3,3 需用二部图加强版 e ≤ 2v − 4；由 Kuratowski 定理，任何非平面图都含有这两个图之一的细分，非平面性最终都归结到它们。",
+      "五种正多面体都满足欧拉公式：正四面体 4 − 6 + 4 = 2、正方体 8 − 12 + 6 = 2、正八面体 6 − 12 + 8 = 2、正十二面体 20 − 30 + 12 = 2、正二十面体 12 − 30 + 20 = 2，数值全部复核 ✓。"
+    ],
+    "propertiesEn": [
+      "Euler's formula presumes connectivity: in general v − e + f = 1 + c with c components. Two disjoint triangles give v = 6, e = 6, f = 3 and 6 − 6 + 3 = 3 = 1 + 2 ✓. Leaving out the outer face breaks the formula immediately.",
+      "A simple planar graph satisfies e ≤ 3v − 6 (v ≥ 3); if it is triangle-free (e.g. bipartite) the stronger e ≤ 2v − 4 holds. Equality holds exactly when the graph is **connected** and every face including the outer one has boundary length 3 or 4 — triangulations and quadrangulations (for disconnected graphs equality generally fails, e.g. a triangle plus an isolated vertex).",
+      "The average degree of a simple planar graph is 2e/v < 6, so every such graph contains a vertex of degree at most 5; this is the standard induction step for planar arguments (the five-color theorem starts here).",
+      "K5 and K3,3 are the two basic non-planar graphs: K5 is killed by e ≤ 3v − 6, while K3,3 needs the bipartite bound e ≤ 2v − 4. By Kuratowski's theorem every non-planar graph contains a subdivision of one of them, so non-planarity always reduces to these two.",
+      "All five Platonic solids obey Euler's formula: tetrahedron 4 − 6 + 4 = 2, cube 8 − 12 + 6 = 2, octahedron 6 − 12 + 8 = 2, dodecahedron 20 − 30 + 12 = 2, icosahedron 12 − 30 + 20 = 2 — every count rechecked ✓."
+    ],
+    "examples": [
+      {
+        "problem": "正方体的顶点与棱构成图 G：8 个顶点、12 条边、每个顶点度 3。(1) 用欧拉公式求面数；(2) 验证各面度数之和等于 2e；(3) 比较 e ≤ 3v − 6 与二部图加强版 e ≤ 2v − 4，哪个取等号？为什么？",
+        "solution": "(1) G 是连通平面图，v = 8、e = 12，由 $v - e + f = 2$ 得 $f = 2 - v + e = 2 - 8 + 12 = 6$：平面画法中是 5 个内部面加 1 个外部面，恰好对应正方体的 6 个面（哪个面画成外部面不影响 f 的值）。(2) 每个面都恰由 4 条边围成，面度数总和为 $6 \\times 4 = 24$，而 $2e = 2 \\times 12 = 24$，相等 ✓（python 复核）。(3) $3v - 6 = 18$，$e = 12 < 18$ 未取等；而 $2v - 4 = 12 = e$，取等号。原因：G 是二部图（按顶点坐标的奇偶可染成两色，每条棱连接异色点），没有三角形，且每个面都是四边形，正是 $e \\le 2v - 4$ 取等号的四边形剖分情形。"
+      },
+      {
+        "problem": "用边数不等式证明 K5 与 K3,3 都不是平面图；并说明为什么对 K3,3 必须使用二部图版本的加强不等式。",
+        "solution": "对 K5：v = 5 ≥ 3 且是简单图。若它是平面图，则必须满足 $e \\le 3v - 6 = 3 \\times 5 - 6 = 9$；但 $K_5$ 有 $e = \\binom{5}{2} = 10 > 9$，矛盾，故 K5 非平面。对 K3,3：v = 6、e = 3 × 3 = 9。先试一般不等式：$3v - 6 = 12 \\ge 9$，拦不住它；但 K3,3 是二部图，没有三角形，平面嵌入中每个面至少由 4 条边围成，可以用加强版 $e \\le 2v - 4 = 2 \\times 6 - 4 = 8$；而 $e = 9 > 8$，矛盾，故 K3,3 也非平面。这两个图正是「平面性的基本障碍」：由 Kuratowski 定理，任何非平面图都含有 K5 或 K3,3 的细分（python 复核：10 > 9 ✓；9 ≤ 12 但 9 > 8 ✓）。"
+      }
+    ],
+    "tags": [
+      "平面图",
+      "欧拉公式",
+      "对偶图",
+      "K5 与 K3,3",
+      "库拉托夫斯基定理"
+    ],
+    "links": [
+      "graph-basics",
+      "trees-spanning",
+      "euler-characteristic",
+      "graph-coloring",
+      "euler-hamilton"
+    ]
+  }
+]

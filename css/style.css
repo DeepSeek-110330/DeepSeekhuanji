@@ -793,3 +793,38 @@ body::after {
 
 /* 详情分片加载中的占位（v=19 起） */
 .details-loading { opacity: 0.7; font-style: italic; }
+
+/* ---------- v=23：分享按钮 + 旋臂标签 ---------- */
+#panel-share {
+  position: absolute;
+  top: 62px;
+  right: 64px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#panel-share:hover { border-color: rgba(255, 255, 255, 0.5); }
+
+#arm-labels { position: fixed; inset: 0; pointer-events: none; z-index: 4; }
+.arm-label {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  color: rgba(230, 238, 255, 0.85);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transition: opacity 0.25s;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+.arm-label .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }

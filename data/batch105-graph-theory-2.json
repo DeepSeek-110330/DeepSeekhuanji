@@ -1,0 +1,258 @@
+[
+  {
+    "id": "graph-coloring",
+    "title": "图的染色",
+    "titleEn": "Graph Coloring",
+    "branch": "graph-theory",
+    "level": 4,
+    "summary": "给图的顶点分配颜色使相邻点异色，所需的最少颜色数称为色数；四色定理说平面图 4 色就够。",
+    "summaryEn": "A proper coloring assigns colors to vertices so that adjacent vertices differ; the minimum number of colors is the chromatic number, and planar graphs need at most four.",
+    "definition": "给图 $G=(V,E)$ 的每个顶点分配一种颜色，如果**相邻的两个顶点颜色总不相同**，就称这是一次**正常染色**（proper coloring）。只允许用 $k$ 种颜色时，称 $G$ 为 **$k$-可染的**；使正常染色成为可能的最小颜色数叫作 $G$ 的**色数**，记作 $\\chi(G)$。换个说法，$\\chi(G)$ 就是把顶点集划分成最少数目**独立集**（同色类）的个数，而 $\\chi(G)=1$ 当且仅当图没有边。\n\n两个基准例子锁定直觉：完全图两两相邻，颜色必须两两不同，$\\chi(K_n)=n$；偶圈红蓝交替即可，$\\chi(C_{2k})=2$；奇圈交替到最后一圈会撞色，必须启用第三种颜色，$\\chi(C_{2k+1})=3$。\n\n色数与图的两个基本参数关系密切。**团数** $\\omega(G)$（最大团的大小）给出下界：团内任两点相邻、必须异色，故 $\\chi(G)\\ge\\omega(G)$；**独立数** $\\alpha(G)$ 给出另一个下界 $\\chi(G)\\ge |V|/\\alpha(G)$，因为每个色类都是独立集。上界方面有一个万能但粗糙的贪心论证：按任意顺序逐点染色，每点只需避开已染色邻居的颜色，而邻居数不超过最大度 $\\Delta$，于是 $\\chi(G)\\le\\Delta(G)+1$。\n\n最著名的结论是**四色定理**：任何**平面图**的色数都不超过 4。它由 Appel 与 Haken 于 1976 年公布计算机辅助证明，是第一个本质上依赖计算机验证的著名数学定理；$K_4$ 是平面图且 $\\chi(K_4)=4$，说明 4 不能再小。一般图没有这样的小上界（$\\chi(K_n)=n$），而且判定 $k\\ge 3$ 是否可着色是 NP-完全问题——求色数正是「上界容易、精确值困难」的典型。",
+    "definitionEn": "Assign a color to every vertex of a graph $G=(V,E)$. If adjacent vertices always receive different colors, the assignment is a **proper coloring**. When only k colors are allowed and a proper coloring exists, G is **k-colorable**; the least such k is the **chromatic number** $\\chi(G)$. Equivalently, $\\chi(G)$ is the smallest number of **independent sets** (color classes) whose union is V, and $\\chi(G)=1$ exactly when G has no edge.\n\nTwo benchmarks fix intuition: every two vertices of a complete graph are adjacent, so $\\chi(K_n)=n$; an even cycle alternates two colors, $\\chi(C_{2k})=2$; an odd cycle must repeat a color somewhere, so $\\chi(C_{2k+1})=3$.\n\nThe chromatic number interacts with two basic parameters. The **clique number** $\\omega(G)$ gives a lower bound, since a clique on k vertices needs k distinct colors: $\\chi(G)\\ge\\omega(G)$. The **independence number** $\\alpha(G)$ gives another, because every color class is independent: $\\chi(G)\\ge |V|/\\alpha(G)$. For an upper bound a greedy argument always works: color the vertices in any order, giving each the first color unused by its already colored neighbours; since a vertex has at most $\\Delta$ neighbours, $\\chi(G)\\le\\Delta(G)+1$.\n\nThe most famous result is the **four color theorem**: every **planar** graph satisfies $\\chi\\le 4$. Appel and Haken announced a computer-assisted proof in 1976 — the first famous theorem whose proof depends essentially on machine verification — and $K_4$, planar with $\\chi(K_4)=4$, shows that four cannot be reduced. General graphs admit no such small bound ($\\chi(K_n)=n$), and deciding k-colorability for $k\\ge 3$ is NP-complete: computing the chromatic number is a textbook case of an easy upper bound hiding a hard exact value.",
+    "formulas": [
+      {
+        "latex": "\\chi(G)=\\min\\{k:\\ \\exists\\,c:V\\to\\{1,\\dots,k\\},\\ uv\\in E\\Rightarrow c(u)\\ne c(v)\\}",
+        "note": "色数的定义：正常染色所需的最少颜色数；同色的顶点集（色类）一定是独立集。",
+        "noteEn": "Definition: the least number of colors in a proper coloring; every color class is an independent set."
+      },
+      {
+        "latex": "G\\text{ 二部}\\iff\\chi(G)\\le 2\\iff G\\text{ 不含奇圈}",
+        "note": "二部图能用两色交替染；反之 2-可染图的顶点天然分成两类。含奇圈时两色必在最后一条边上冲突。",
+        "noteEn": "Bipartite ⇔ 2-colorable ⇔ no odd cycle: two colors conflict exactly along an odd cycle."
+      },
+      {
+        "latex": "\\omega(G)\\le\\chi(G),\\qquad \\chi(G)\\ \\ge\\ \\frac{|V|}{\\alpha(G)}",
+        "note": "两个标准下界：团数与独立数。$C_5$ 中 $\\omega=2$、$|V|/\\alpha=5/2$，给出 $\\chi(C_5)\\ge 3$，而真值正是 3。",
+        "noteEn": "The clique and independence bounds; for C5 they give χ ≥ 3, which is attained."
+      },
+      {
+        "latex": "\\chi(G)\\le\\Delta(G)+1",
+        "note": "贪心上界，对一切图成立，但通常不最优：$K_{3,3}$ 的 $\\Delta=3$ 而 $\\chi=2$。",
+        "noteEn": "The greedy upper bound holds for all graphs but is usually loose: K33 has Δ=3 yet χ=2."
+      },
+      {
+        "latex": "G\\text{ 连通且非完全图、非奇圈}\\implies\\chi(G)\\le\\Delta(G)",
+        "note": "Brooks 定理（1941）：把贪心上界收紧一格；连通图中 $\\chi=\\Delta+1$ 的恰好只有完全图与奇圈。",
+        "noteEn": "Brooks' theorem (1941) sharpens the greedy bound; among connected graphs only complete graphs and odd cycles have χ = Δ+1."
+      }
+    ],
+    "properties": [
+      "四色定理：任何平面图 $\\chi\\le 4$（Appel–Haken，1976，计算机辅助；1996 年 Robertson–Sanders–Seymour–Thomas 给出简化证明）；$K_4$ 说明 4 色可能必需。四色猜想早在 1852 年提出，而五色定理（Heawood，1890）容易得多。",
+      "下界可以不取等：$C_5$ 的 $\\omega=2$ 而 $\\chi=3$；用 Mycielski 构造可以造出无三角形但色数任意大的图，最小的例子是 11 个顶点的 Grötzsch 图（$\\chi=4$）。",
+      "贪心上界 $\\chi\\le\\Delta+1$ 与 Brooks 定理合起来给出完整的「最坏情形」图像：连通图中只有完全图与奇圈真正需要 $\\Delta+1$ 种颜色，其余都满足 $\\chi\\le\\Delta$。",
+      "二部性就是 2-可染性：$\\chi\\le 2$ 当且仅当无奇圈；沿 BFS 或 DFS 交替染两色即可线性判定，染色冲突恰好暴露出一条奇圈。",
+      "色多项式 $P_G(k)$ 统计正常 $k$-染色的数目，是 $k$ 的多项式，且 $\\chi(G)=\\min\\{k:P_G(k)>0\\}$；例如 $P_{C_5}(k)=(k-1)^5-(k-1)$，于是 $P_{C_5}(3)=30$、$P_{C_5}(2)=0$。"
+    ],
+    "propertiesEn": [
+      "Four color theorem: every planar graph has χ ≤ 4 (Appel–Haken 1976, computer-assisted; simplified by Robertson–Sanders–Seymour–Thomas in 1996), and K4 shows that four colors can be necessary; the conjecture dates back to 1852, while the five color theorem (Heawood 1890) is much easier.",
+      "Lower bounds need not be tight: ω(C5)=2 while χ(C5)=3, and Mycielski's construction produces triangle-free graphs of arbitrarily large chromatic number, the smallest being the 11-vertex Grötzsch graph with χ=4.",
+      "Together with Brooks' theorem, the greedy bound completes the worst-case picture: among connected graphs only complete graphs and odd cycles really need Δ+1 colors; all others satisfy χ ≤ Δ.",
+      "Bipartiteness is 2-colorability: χ ≤ 2 if and only if there is no odd cycle, decided in linear time by alternating two colors along a BFS or DFS, where a conflict reveals an odd cycle.",
+      "The chromatic polynomial P_G(k), the number of proper k-colorings, is a polynomial in k, and χ(G)=min{k:P_G(k)>0}; for example P_{C5}(k)=(k−1)^5−(k−1) gives P_{C5}(3)=30 and P_{C5}(2)=0."
+    ],
+    "examples": [
+      {
+        "problem": "轮图 $W_5$ 由一个五边形 $C_5$ 与一个中心点组成，中心与五边形的五个顶点都相邻。求 $\\chi(W_5)$，并与贪心上界、Brooks 上界、四色定理对照。",
+        "solution": "记中心为 $h$。先求下界：外圈是奇圈，$\\chi(C_5)=3$，故 $\\chi(W_5)\\ge 3$。若只给 3 种颜色：$C_5$ 不是 2-可染的，外圈必须用满 3 种颜色；而 $h$ 与全部外圈顶点相邻，它的颜色必须与这 3 种都不同——3 色不够，故 $\\chi(W_5)\\ge 4$。再给上界：把外圈按 1, 2, 1, 2, 3 顺次染（逐边检验都异色），$h$ 染 4，得到正常染色，故 $\\chi(W_5)\\le 4$。合起来 $\\chi(W_5)=4$。对照：$\\Delta(W_5)=5$，贪心只保证 $\\chi\\le 6$；Brooks 定理给 $\\chi\\le 5$（$W_5$ 连通、非完全、非奇圈）；$W_5$ 是平面图，四色定理给 $\\chi\\le 4$，恰好取等。穷举复核：3-染色共 $3^6=729$ 种全部失败（0 种），4-染色共 $4^6=4096$ 种中恰有 120 种成立，与 $\\chi=4$ 一致。"
+      },
+      {
+        "problem": "求 $K_{3,3}$ 与 $C_5$ 的色数，并检验贪心上界 $\\Delta+1$ 与 Brooks 上界在这两张图上是否紧。",
+        "solution": "对 $K_{3,3}$：两侧各三点，把一侧全染 1、另一侧全染 2 即正常染色，而它有边故不能 1 色，所以 $\\chi(K_{3,3})=2$。这里 $\\Delta=3$：贪心只保证 $\\chi\\le 4$，Brooks 保证 $\\chi\\le 3$，都比真值松（穷举 2-染色恰有 2 种，即两色互换）。对 $C_5$：奇圈，$\\chi(C_5)=3$，与 $\\Delta+1=2+1=3$ 恰好取等——这正是 Brooks 定理的例外情形（奇圈），因此不矛盾；穷举：2-染色为 0 种，3-染色恰有 30 种（与 $P_{C_5}(3)=2^5-2=30$ 吻合）。结论：$K_{3,3}$ 说明上界只是上界，$C_5$ 说明例外情形真实存在。"
+      }
+    ],
+    "tags": ["图论", "图的染色", "色数", "四色定理", "NP-完全"],
+    "links": ["graph-basics", "planar-euler-formula", "ramsey-theory", "turan-extremal-graph-theory", "bipartite-matching"]
+  },
+  {
+    "id": "ramsey-theory",
+    "title": "拉姆齐定理初步",
+    "titleEn": "Ramsey Theory",
+    "branch": "graph-theory",
+    "level": 5,
+    "summary": "无论怎样对完全图的边作红蓝二染色，点数足够多时必出现同色完全子图；最小的例子是 $R(3,3)=6$。",
+    "summaryEn": "However the edges of a large enough complete graph are two-colored, a monochromatic clique must appear; the smallest example is R(3,3)=6.",
+    "definition": "把完全图 $K_n$ 的每条边染成红色或蓝色。**拉姆齐数** $R(s,t)$ 定义为：保证「出现红色 $K_s$ 或蓝色 $K_t$」（二者出现其一即可）的最小顶点数。用**箭头记号**说就是 $n\\to(s,t)$——$K_n$ 的**每一种**红蓝二染色都含红色 $K_s$ 或蓝色 $K_t$，而 $R(s,t)=\\min\\{n:n\\to(s,t)\\}$。注意两个方向的量词不同：证明 $R(s,t)\\le n$ 必须对**所有**染色论证；证明 $R(s,t)>n$ 只需给出**一种**避开两种单色子图的染色。\n\n最小的非平凡例子是 $R(3,3)=6$，也就是「六个人里必有三人互相认识，或三人互相不认识」——熟人关系看作红边、陌生看作蓝边。两个方向各有味道：$R(3,3)>5$ 靠构造，把 5 个顶点排在正五边形上，五条边染红、五条对角线染蓝，红色图与蓝色图都同构于 $C_5$，都不含三角形；$R(3,3)\\le 6$ 靠鸽笼原理，任取一个顶点 $v$，它的 5 条边中至少有 $\\lceil 5/2\\rceil=3$ 条同色，检查这 3 个另一端点之间的三条边即可收尾（完整论证见例题）。\n\n**Ramsey 定理**（Ramsey 1930；Erdős–Szekeres 1935 独立得到）保证这类数一定存在：对任意 $s,t\\ge 2$，$R(s,t)$ 是有限数；颜色数换成 $k$、边换成 $r$ 元子集（超图情形）结论同样成立，记作 $n\\to(s_1,\\dots,s_k)^r$。**无穷版本**更漂亮：$\\omega\\to(\\omega,\\omega)$——对自然数集的所有二元子集任意红蓝染色，总存在一个无穷子集，其所有二元子集同色。而且无穷版本可以推出有限版本：若每个 $n$ 都存在「无单色 $K_s$、$K_t$」的坏染色，所有坏染色按限制关系构成一棵有限分叉的无穷树，用 König 引理取出一条无穷路径，就得到 $\\mathbb{N}$ 上的坏染色，与无穷版本矛盾。\n\n拉姆齐数体现了「完全无序中必含秩序」，但精确值极难求。目前确定的只有零星几个：$R(3,3)=6$、$R(3,4)=9$、$R(3,5)=14$、$R(4,4)=18$、$R(4,5)=25$，而 $R(5,5)$ 的精确值至今未知。上下界都呈指数增长却相距甚远：$2^{s/2}\\le R(s,s)\\le 4^{s-1}$，确定指数中的最佳常数是当代组合学的著名难题。",
+    "definitionEn": "Color every edge of the complete graph $K_n$ red or blue. The **Ramsey number** $R(s,t)$ is the least number of vertices that guarantees a red $K_s$ or a blue $K_t$ (either one suffices). In **arrow notation**, $n\\to(s,t)$ means every red-blue coloring of $K_n$ contains a red $K_s$ or a blue $K_t$, and $R(s,t)=\\min\\{n:n\\to(s,t)\\}$. Note the two quantifier directions: proving $R(s,t)\\le n$ requires an argument for **every** coloring, while proving $R(s,t)>n$ requires only **one** coloring that avoids both monochromatic subgraphs.\n\nThe smallest nontrivial case is $R(3,3)=6$, the statement that among six people there are three pairwise acquainted or three pairwise unacquainted (acquaintance = red edge, stranger = blue edge). Both directions have content. $R(3,3)>5$ comes from a construction: place 5 vertices on a pentagon, color the sides red and the diagonals blue; the red graph and the blue graph are both copies of $C_5$, hence triangle-free. $R(3,3)\\le 6$ comes from pigeonhole: pick any vertex v; among its 5 edges at least $\\lceil 5/2\\rceil=3$ share a color, and inspecting the three edges among the other endpoints finishes the argument (full proof in the examples).\n\n**Ramsey's theorem** (Ramsey 1930; independently Erdős and Szekeres 1935) guarantees such numbers exist: $R(s,t)$ is finite for all $s,t\\ge 2$. Replacing two colors by k colors and edges by r-subsets (hypergraphs) works as well, written $n\\to(s_1,\\dots,s_k)^r$. The **infinite version** is even cleaner: $\\omega\\to(\\omega,\\omega)$ — any red-blue coloring of the pairs of natural numbers has an infinite subset all of whose pairs share one color. The infinite version implies the finite one: if bad colorings with no monochromatic $K_s$ or $K_t$ existed for every n, they would form an infinite finitely branching tree under restriction, and König's lemma would produce a bad coloring of $\\mathbb{N}$, contradicting the infinite version.\n\nRamsey numbers embody the motto that complete disorder is impossible, yet exact values are extremely hard. Only a few are known: $R(3,3)=6$, $R(3,4)=9$, $R(3,5)=14$, $R(4,4)=18$ and $R(4,5)=25$, while $R(5,5)$ is still unknown. The bounds grow exponentially but remain far apart: $2^{s/2}\\le R(s,s)\\le 4^{s-1}$, and pinning down the best exponent is a famous open problem.",
+    "formulas": [
+      {
+        "latex": "n\\to(s,t):\\ \\text{对 }K_n\\text{ 的任意红蓝二染色，必含红色 }K_s\\text{ 或蓝色 }K_t",
+        "note": "箭头记号的含义；一般 $k$ 色、$r$ 元子集的版本写作 $n\\to(s_1,\\dots,s_k)^r$。",
+        "noteEn": "The arrow notation; the general k-color, r-subset version is written n→(s1,…,sk)^r."
+      },
+      {
+        "latex": "R(s,t)=\\min\\{n:\\ n\\to(s,t)\\},\\qquad R(s,t)=R(t,s),\\qquad R(2,t)=t",
+        "note": "定义与基本性质：红蓝互换给出对称性；$R(2,t)=t$——要躲开红色 $K_2$ 就不能有红边，于是必须点数少于 $t$ 才躲得开蓝色 $K_t$。",
+        "noteEn": "Definition, symmetry by swapping colors, and the base case R(2,t)=t: avoiding a red K2 means avoiding red edges, so at least t vertices force a blue Kt."
+      },
+      {
+        "latex": "R(s,t)\\le R(s-1,t)+R(s,t-1)\\qquad (s,t\\ge 3),\\qquad R(s,t)\\le\\binom{s+t-2}{s-1}",
+        "note": "Erdős–Szekeres 递推（证明见例题）及其迭代推论；取 $s=t$ 得 $R(s,s)\\le\\binom{2s-2}{s-1}<4^{s-1}$。",
+        "noteEn": "The Erdős–Szekeres recurrence and its iterated consequence; for s=t it gives R(s,s) ≤ C(2s−2, s−1) < 4^{s−1}."
+      },
+      {
+        "latex": "R(3,3)=6,\\quad R(3,4)=9,\\quad R(3,5)=14,\\quad R(4,4)=18,\\quad R(4,5)=25",
+        "note": "已知精确值的少数几个（前四个由 Greenwood–Gleason 1955 算出）；$R(5,5)$ 至今未定，已知下界仅 43。",
+        "noteEn": "The few known exact values (the first four due to Greenwood–Gleason 1955); R(5,5) is still open, with 43 only as a lower bound."
+      },
+      {
+        "latex": "2^{s/2}\\ \\le\\ R(s,s)\\ \\le\\ \\binom{2s-2}{s-1}",
+        "note": "对角拉姆齐数的指数级夹逼：下界来自 Erdős 1947 的计数（概率）方法，上界来自递推；两侧差距意味着指数常数仍未确定。",
+        "noteEn": "Exponential bounds for the diagonal case: the lower bound via Erdős's counting (probabilistic) method of 1947, the upper bound via the recurrence."
+      }
+    ],
+    "properties": [
+      "已知值与未知值：$R(3,3)=6$、$R(3,4)=9$、$R(3,5)=14$、$R(4,4)=18$ 由 Greenwood 与 Gleason 于 1955 年确定（$R(4,4)=18$ 的下界正是用模 17 的二次剩余构造，见例题）；$R(4,5)=25$ 直到 1995 年才由 McKay 与 Radziszowski 算清；$R(5,5)$ 至今未知。",
+      "上下界的手段不对称：上界（$R\\le n$）必须对一切染色给出论证，典型工具是鸽笼与递推；下界（$R>n$）只需一个染色构造，典型工具是代数构造（如 Paley 图）或概率方法。",
+      "无穷版本 $\\omega\\to(\\omega,\\omega)$ 可以借助 König 引理推出有限版本——「无穷 ⇒ 有限」的这层逻辑是组合学与数理逻辑的经典交汇点。",
+      "同族现象：对整数集染色得到 Schur 定理（任意有限染色都有同色的 $x,y,x+y$），对算术级数寻找则得到 van der Waerden 定理；它们都是「大结构必含规则子结构」的拉姆齐型结论。",
+      "计算难度：$R(5,5)$ 的精确值至今未知（下界 43 来自构造，上界来自理论估计）；穷举在 $n=6$ 时已需计算机（$K_6$ 有 $2^{15}=32768$ 种染色），而对 $n=43$ 的完全图穷举 $2^{903}$ 种染色完全不现实——这正是下界靠构造、上界靠理论的原因。"
+    ],
+    "propertiesEn": [
+      "Known versus unknown values: R(3,3)=6, R(3,4)=9, R(3,5)=14 and R(4,4)=18 were settled by Greenwood and Gleason in 1955 (their lower bound for R(4,4) uses quadratic residues mod 17, see the examples); R(4,5)=25 was only determined in 1995 by McKay and Radziszowski; R(5,5) remains unknown.",
+      "Upper and lower bounds are proven by different means: R ≤ n needs an argument valid for every coloring (pigeonhole, induction), whereas R > n needs only one explicit coloring (algebraic constructions such as Paley graphs, or probabilistic methods).",
+      "The infinite version ω→(ω,ω) implies the finite one via König's lemma — a classic meeting point of combinatorics and mathematical logic.",
+      "Many Ramsey-type relatives exist: coloring the integers yields Schur's theorem (some monochromatic x, y, x+y), while looking for arithmetic progressions yields van der Waerden's theorem; all say that a large structure must contain a regular substructure.",
+      "Computational difficulty: R(5,5) is still unknown (43 is a lower bound from constructions, upper bounds come from theory); brute force already needs a computer at n=6 (K6 has 2^15 = 32768 colorings), and at n=43 one would face 2^903 colorings — which is why lower bounds come from constructions and upper bounds from theory."
+    ],
+    "examples": [
+      {
+        "problem": "证明 $R(3,3)=6$（两个方向都要给出）。",
+        "solution": "**先证 $R(3,3)>5$（构造）**：把 5 个顶点编号 0,1,2,3,4 排在正五边形上，边 $\\{i,j\\}$ 染红当且仅当 $i-j\\equiv\\pm 1\\pmod 5$（五条边），其余（五条对角线）染蓝。红色图与蓝色图都同构于 $C_5$，而 $C_5$ 不含三角形，故这个染色既没有红三角形也没有蓝三角形，$R(3,3)\\ge 6$。**再证 $R(3,3)\\le 6$（鸽笼）**：设 $K_6$ 已被任意红蓝二染色，取顶点 $v$。$v$ 连出 5 条边，颜色只有两种，由鸽笼原理至少 $\\lceil 5/2\\rceil=3$ 条同色；设 $va,vb,vc$ 为红色。现在看 $a,b,c$ 之间的三条边：若其中有红边（例如 $ab$），则 $v,a,b$ 组成红色三角形；若一条红边都没有，则 $ab,bc,ca$ 全蓝，$a,b,c$ 本身是蓝色三角形。两种情形都出现单色三角形，故 $6\\to(3,3)$，$R(3,3)\\le 6$。**结论**：$R(3,3)=6$。**穷举复核**：$K_5$ 共 $2^{10}=1024$ 种染色，恰有 12 种不含单色三角形（恰好是红图为 $C_5$ 的标号方式数 $4!/2=12$）；$K_6$ 共 $2^{15}=32768$ 种染色，无一能避免。"
+      },
+      {
+        "problem": "证明递推 $R(s,t)\\le R(s-1,t)+R(s,t-1)$，并用它计算 $R(3,3)$ 与 $R(4,4)$ 的上界；说明 $R(4,4)=18$ 还差哪一半。",
+        "solution": "**递推证明**：令 $N=R(s-1,t)+R(s,t-1)$，设 $K_N$ 已任意二染色，取顶点 $v$，它连出 $N-1$ 条边。若其中红边至少 $R(s-1,t)$ 条，把这些红邻居取出，记为顶点集 $A$（$|A|\\ge R(s-1,t)$）：在 $A$ 上若无蓝色 $K_t$，则必有红色 $K_{s-1}$，它与 $v$ 一起组成红色 $K_s$——两种情形都达标。若红边不足 $R(s-1,t)$ 条，则蓝边至少 $(N-1)-(R(s-1,t)-1)=R(s,t-1)$ 条，同样论证。故 $N\\to(s,t)$。**代入基值**：$R(2,t)=t$，于是 $R(3,3)\\le R(2,3)+R(3,2)=3+3=6$；再用 $R(3,4)\\le R(2,4)+R(3,3)=4+6=10$ 与对称性，得 $R(4,4)\\le R(3,4)+R(4,3)\\le 10+10=20$。若已知 $R(3,4)=9$（Greenwood–Gleason），同一递推立即收紧为 $R(4,4)\\le 9+9=18$。**还差的一半**：上界 $\\le 18$ 有了，下界需要构造 17 个点的染色，使红蓝都无 $K_4$。取顶点为模 17 的剩余类，边染红当且仅当两数之差是模 17 的二次剩余（即 $1,2,4,8,9,13,15,16$）：因为 $17\\equiv 1\\pmod 4$，红图的补图与红图同构，逐项检查 4 点组可知红蓝都不含 $K_4$，故 $R(4,4)>17$，即 $R(4,4)\\ge 18$。两半合起来 $R(4,4)=18$。（编程复核：对全部 $\\binom{17}{4}=2380$ 个 4 点组检查，红色 $K_4$ 与蓝色 $K_4$ 的个数都是 0。）"
+      }
+    ],
+    "tags": ["图论", "拉姆齐数", "单色子图", "鸽笼原理", "极值组合"],
+    "links": ["graph-coloring", "graph-basics", "turan-extremal-graph-theory", "counting-principles", "combinatorics-comprehensive"]
+  },
+  {
+    "id": "network-flow",
+    "title": "网络流：最大流最小割",
+    "titleEn": "Network Flow: Max-Flow Min-Cut",
+    "branch": "graph-theory",
+    "level": 4,
+    "summary": "在有容量的有向网络中，最大流的值恰等于最小割的容量；用残量网络上的增广路可以逐步构造出最大流。",
+    "summaryEn": "In a capacitated directed network the maximum flow value equals the minimum cut capacity, and augmenting paths in the residual network construct a maximum flow.",
+    "definition": "**网络**是一张有向图，每条弧 $(u,v)$ 带有非负**容量** $c(u,v)$，并指定两个特殊顶点：**源** $s$ 与**汇** $t$。**流** $f$ 给每条弧指派一个数值 $f(u,v)$，满足两条基本约束：**容量约束** $0\\le f(u,v)\\le c(u,v)$，以及**流守恒**——除 $s$、$t$ 外每个顶点的流入量等于流出量。流的值 $|f|$ 定义为源点的净流出（由守恒它也等于汇点的净流入）。管道网络是标准图景：容量是管子的粗细，流是水流量，水在中间节点既不产生也不消失。\n\n**割**是把顶点集分成含 $s$ 的集合 $S$ 与含 $t$ 的集合 $T$ 的一种划分，割的**容量**只累加从 $S$ 指向 $T$ 的弧：$c(S,T)=\\sum_{u\\in S,\\,v\\in T}c(u,v)$。两个细节最容易记错：只数 $S\\to T$ 方向的弧（从 $T$ 回到 $S$ 的弧不计），而且计的是**容量**而不是流量。对任意流 $f$ 与任意割 $(S,T)$ 都有 $|f|\\le c(S,T)$：流值等于跨割的净流量，其中 $S\\to T$ 的分量受容量限制、$T\\to S$ 的分量非负，于是「最大流 ≤ 最小割」总是成立。\n\n**最大流最小割定理**（Ford–Fulkerson 1956）断言等号成立：最大流的值恰等于最小割的容量。证明是构造性的，围绕**残量网络**展开：每条弧的剩余容量是 $c(u,v)-f(u,v)$，若某条从 $s$ 到 $t$ 的**增广路**上处处还有剩余容量，就沿路把流增大到瓶颈值（沿途最小剩余容量）。当再也找不到增广路时，从 $s$ 出发沿剩余容量为正的弧能到达的顶点构成集合 $S$（$t\\notin S$），它定义的割满足：每条 $S\\to T$ 弧都**饱和**（流量恰等于容量）、每条 $T\\to S$ 弧流量为 0，于是流值恰好等于割容量。「没有增广路 ⇔ 当前流最优 ⇔ 存在同值的割」三件事同时发生。\n\n一个漂亮的推论是**整数性**：容量全为整数时，每步增广的瓶颈值是正整数，算法在有限步内终止，给出**整数最大流**；写成线性规划后约束矩阵是全幺模矩阵，因此存在整数最优解。最大流最小割因此成为组合优化最完美的样板：最优值与最优性证书（割）都能显式拿到。它与二部图匹配、Menger 定理、线性规划对偶都有直接联系；另外，若容量允许实数、又任选增广路，朴素 Ford–Fulkerson 可能不终止（见性质栏），改用 BFS 选最短增广路的 Edmonds–Karp 算法即可保证多项式时间。",
+    "definitionEn": "A **network** is a directed graph in which every arc $(u,v)$ carries a non-negative **capacity** $c(u,v)$, together with two distinguished vertices: a **source** $s$ and a **sink** $t$. A **flow** $f$ assigns a number $f(u,v)$ to each arc subject to two rules: the **capacity constraint** $0\\le f(u,v)\\le c(u,v)$, and **conservation** — at every vertex other than s and t, the total inflow equals the total outflow. The value $|f|$ is the net outflow from the source (by conservation it also equals the net inflow at the sink). The pipe network is the standard picture: capacities are pipe widths, flow is the water, and nothing is created or lost at intermediate vertices.\n\nA **cut** partitions the vertices into a set $S$ containing s and a set $T$ containing t, and its **capacity** adds up only the arcs pointing from S to T: $c(S,T)=\\sum_{u\\in S, v\\in T}c(u,v)$. Two details are easily misremembered: only S→T arcs count (arcs going back from T to S do not), and capacities, not flows, are summed. For every flow and every cut, $|f|\\le c(S,T)$: the flow value equals the net flow across the cut, where the S→T part is limited by capacities and the T→S part is non-negative, giving maximum flow ≤ minimum cut at once.\n\nThe **max-flow min-cut theorem** (Ford–Fulkerson 1956) asserts equality: the maximum flow value equals the minimum cut capacity. The proof is constructive and revolves around the **residual network**: the residual capacity of an arc is $c(u,v)-f(u,v)$, and whenever an **augmenting path** from s to t has positive residual capacity everywhere, the flow is increased along it by the bottleneck value (the smallest residual capacity on the path). When no augmenting path remains, the set $S$ of vertices reachable from s along positive residual arcs ($t\\notin S$) defines a cut in which every S→T arc is **saturated** (flow equals capacity) and every T→S arc carries zero flow; the flow value then equals the cut capacity. Thus the three statements — no augmenting path, the flow is optimal, a cut of equal value exists — hold all at once.\n\nA striking corollary is **integrality**: with integer capacities every augmenting step gains a positive integer, so the algorithm terminates and yields an **integer maximum flow**; in the LP formulation the constraint matrix is totally unimodular, hence integral optimal solutions exist. Max-flow min-cut is therefore the perfect showcase of combinatorial optimization: both the optimal value and an optimality certificate (the cut) can be exhibited explicitly. It connects directly to bipartite matching, Menger's theorem and LP duality; note also that with real capacities and careless augmenting, the naive Ford–Fulkerson method may fail to terminate (see the properties), while choosing shortest augmenting paths by BFS (Edmonds–Karp) guarantees polynomial time.",
+    "formulas": [
+      {
+        "latex": "0\\le f(u,v)\\le c(u,v),\\qquad \\sum_{v}f(u,v)-\\sum_{v}f(v,u)=0\\quad (u\\ne s,t)",
+        "note": "容量约束与流守恒；采用反对称记账 $f(u,v)=-f(v,u)$，两个方向的流量可合并书写。",
+        "noteEn": "Capacity constraints and conservation, with the antisymmetric convention f(u,v)=−f(v,u)."
+      },
+      {
+        "latex": "|f|=\\sum_{v}f(s,v)-\\sum_{v}f(v,s)",
+        "note": "流值：源点的净流出；由守恒它等于汇点的净流入，也等于跨任意割的净流量。",
+        "noteEn": "The value of the flow: net outflow from the source, equal to the net inflow at the sink and to the net flow across any cut."
+      },
+      {
+        "latex": "c(S,T)=\\sum_{u\\in S}\\sum_{v\\in T}c(u,v)",
+        "note": "割容量只算 $S\\to T$ 的弧、只算容量；$T\\to S$ 的弧不进总量（方向写反是经典错误）。",
+        "noteEn": "Cut capacity sums only arcs from S to T, and capacities rather than flows; reverse arcs do not count."
+      },
+      {
+        "latex": "|f|=\\sum_{u\\in S}\\sum_{v\\in T}f(u,v)-\\sum_{v\\in T}\\sum_{u\\in S}f(v,u)\\ \\le\\ c(S,T)",
+        "note": "弱对偶的推导：净流量中第一项不超过割容量、第二项非负，故任意流不超过任意割。",
+        "noteEn": "Weak duality: in the net flow the first term is bounded by the cut capacity and the second is non-negative."
+      },
+      {
+        "latex": "\\max_f|f|=\\min_{(S,T)}c(S,T)",
+        "note": "最大流最小割定理：等号由「无增广路时取残量可达集为 $S$」构造达到；整数容量时两端都有整数最优解。",
+        "noteEn": "The max-flow min-cut theorem: equality is attained by taking S as the residual reachable set when no augmenting path remains."
+      }
+    ],
+    "properties": [
+      "弱对偶与最优性判据：$|f|\\le c(S,T)$ 对一切流与割成立；只要某条流与某个割取等，两者立即都是最优的。算法上「残量网络中不存在 $s\\to t$ 路径」与最优性等价，并顺带给出取等的割。",
+      "整数性：容量为整数时存在整数最大流（Ford–Fulkerson 每步增广整数值，有限步终止）；对应线性规划的约束矩阵全幺模，最优解自动落在整数格点上（与线性规划对偶一节互链）。",
+      "算法与终止性：整数容量下朴素 Ford–Fulkerson 必定终止（流值每步至少 +1，且以割容量为上界）；实数容量时任选增广路可能不终止、甚至收敛到小于最大值的流（Zwick 的构造），但一旦终止，无增广路仍保证最优。Edmonds–Karp 用 BFS 选最短增广路，复杂度 $O(VE^2)$，与容量数值大小无关。",
+      "组合推论：二部图最大匹配可建模为最大流（源到左侧、中间、右侧到汇的容量全取 1），整数流对应匹配、最小割对应最小顶点覆盖，于是 König 定理「最大匹配 = 最小顶点覆盖」是本定理的特例；更一般地，Menger 定理指出边不相交 $s$-$t$ 路径的最大条数等于最小 $s$-$t$ 割的容量。",
+      "对偶语言：最大流是线性规划，其 LP 对偶恰好是最小割问题，「强对偶」即最大流最小割；互补松弛给出最优性证书——流最优当且仅当存在割使每条 $S\\to T$ 弧饱和、每条 $T\\to S$ 弧流量为零。"
+    ],
+    "propertiesEn": [
+      "Weak duality and an optimality criterion: |f| ≤ c(S,T) always holds, and equality for a single flow-cut pair certifies both as optimal; absence of an s→t path in the residual network is equivalent to optimality and produces the matching cut.",
+      "Integrality: integer capacities admit an integer maximum flow (each Ford–Fulkerson augmentation is integral and the process terminates); the LP constraint matrix is totally unimodular, so optimal solutions are automatically integral.",
+      "Termination: with integer capacities naive Ford–Fulkerson terminates (the value grows by at least 1 and is bounded by any cut capacity); with real capacities, careless augmentation may fail to terminate or even converge below the maximum (Zwick's construction), though any terminating run is optimal. Edmonds–Karp picks shortest augmenting paths by BFS in O(VE²), independent of the capacity magnitudes.",
+      "Combinatorial consequences: maximum bipartite matching becomes a max-flow problem (all capacities 1); integer flows are matchings and min cuts are vertex covers, so König's theorem (maximum matching = minimum vertex cover) is a special case; more generally Menger's theorem states that the maximum number of edge-disjoint s–t paths equals the minimum s–t cut capacity.",
+      "Duality: max flow is a linear program whose dual is exactly the min cut problem, so strong duality is the theorem; complementary slackness yields optimality certificates — a flow is optimal iff some cut has every S→T arc saturated and every T→S arc empty."
+    ],
+    "examples": [
+      {
+        "problem": "网络顶点为 $s,v_1,v_2,v_3,v_4,t$，容量：$s\\to v_1:16$，$s\\to v_2:13$，$v_1\\to v_2:10$，$v_2\\to v_1:4$，$v_1\\to v_3:12$，$v_3\\to v_2:9$，$v_2\\to v_4:14$，$v_4\\to v_3:7$，$v_3\\to t:20$，$v_4\\to t:4$。用增广路求最大流，再找一个最小割验证定理。",
+        "solution": "逐步增广：① 沿 $s\\to v_1\\to v_3\\to t$，瓶颈 $\\min(16,12,20)=12$，流值 12；② 沿 $s\\to v_2\\to v_4\\to t$，瓶颈 $\\min(13,14,4)=4$，流值 16；③ 沿 $s\\to v_2\\to v_4\\to v_3\\to t$，四条弧剩余容量为 $13-4=9$、$14-4=10$、$7$、$20-12=8$，瓶颈 $\\min(9,10,7,8)=7$，流值 $16+7=23$。守恒检验：$v_1$ 进 12 出 12；$v_2$ 进 $4+7=11$、出 11；$v_4$ 进 11、出 $7+4=11$；$v_3$ 进 $12+7=19$、出 19，全部平衡。**找割**：在此流下从 $s$ 出发沿剩余容量为正的弧可达 $\\{s,v_1,v_2,v_4\\}$（$s\\to v_1$ 余 4，$s\\to v_2$ 余 2，$v_2\\to v_4$ 余 3；而 $v_1\\to v_3$、$v_4\\to v_3$、$v_4\\to t$ 都已饱和，$t$ 不可达）。取 $S=\\{s,v_1,v_2,v_4\\}$、$T=\\{v_3,t\\}$，则 $S\\to T$ 的弧只有 $v_1\\to v_3$（12）、$v_4\\to v_3$（7）、$v_4\\to t$（4），割容量 $12+7+4=23$，恰等于流值；$T\\to S$ 的弧 $v_3\\to v_2$ 流量为 0，所以净流量也是 23。由最大流最小割定理，23 既是最大流值也是最小割容量。**程序复核**：枚举全部 $2^4=16$ 个含 $s$ 不含 $t$ 的割，最小容量确为 23，且上述割是取到最小值的割；注意 $s$ 的两条出弧总容量 $16+13=29$ 只是平凡上界。"
+      },
+      {
+        "problem": "3 人 A、B、C 各能承担的任务为：A 可做 1、2；B 可做 2、3；C 可做 1、3。用最大流求最大匹配，并读出最小顶点覆盖。",
+        "solution": "**建模**：加源 $s$ 与汇 $t$；$s$ 到每人一条容量 1 的弧（每人至多承担一件事），人到自己能做的任务一条容量 1 的弧（只能承担能做的事），每个任务到 $t$ 一条容量 1 的弧（每件事至多一人做）。**求流**：三条单位增广路 $s\\to A\\to 2\\to t$、$s\\to B\\to 3\\to t$、$s\\to C\\to 1\\to t$ 互不冲突，流值 3；由整数性，它对应匹配 $A{-}2$、$B{-}3$、$C{-}1$，恰好覆盖全部 6 条「能胜任」边中的 3 条互不相邻的边，是完美匹配，故最大匹配为 3。**读覆盖**：$S=\\{s\\}$ 是一个割，容量为 $s\\to A,B,C$ 三条弧之和 $1+1+1=3$；$S'=\\{s,A,B,C,1,2,3\\}$（除 $t$ 外全部）也是割，容量为 $1\\to t$、$2\\to t$、$3\\to t$ 之和 3。两个最小割分别对应顶点覆盖「全部人」$\\{A,B,C\\}$ 与「全部任务」$\\{1,2,3\\}$，大小都是 3——这正是 König 定理：二部图的最大匹配数等于最小顶点覆盖数。**程序复核**：暴力枚举得最大匹配 3、最小顶点覆盖 3，与流值一致。"
+      }
+    ],
+    "tags": ["网络流", "最大流最小割", "增广路", "对偶", "组合优化"],
+    "links": ["graph-basics", "bipartite-matching", "lp-duality", "linear-programming", "integer-programming"]
+  },
+  {
+    "id": "turan-extremal-graph-theory",
+    "title": "极值图论与 Turán 定理",
+    "titleEn": "Extremal Graph Theory: Turán's Theorem",
+    "branch": "graph-theory",
+    "level": 5,
+    "summary": "极值图论问「不含给定子图的图最多有多少条边」；Turán 定理给出 ex(n,K_{r+1})，唯一的极值图是完全 r 部平衡图。",
+    "summaryEn": "Extremal graph theory asks how many edges an F-free graph can have; Turán's theorem gives ex(n,K_{r+1}), attained uniquely by the balanced complete r-partite graph.",
+    "definition": "固定一个禁止出现的图 $F$。用 $\\mathrm{ex}(n,F)$ 表示 $n$ 个顶点、**不含 $F$ 的副本**的图中边数的最大值（子图按通常意义理解，不必是导出子图）。例如 $\\mathrm{ex}(n,K_3)$ 就是「没有三角形的 $n$ 点图最多有几条边」。极值图论不只问这个数值，还问**达到最大值的图长什么样**（极值图的结构与唯一性），以及超过阈值后 $F$ 会出现多少次。顶点数不够时没有约束：$n\\le r$ 时 $\\mathrm{ex}(n,K_{r+1})=\\binom n2$，因为 $K_n$ 本身还装不下 $K_{r+1}$。\n\n历史上第一个非平凡结果是 **Mantel 定理**（1907）：不含三角形的 $n$ 点图至多 $\\lfloor n^2/4\\rfloor$ 条边，唯一极值图是平衡完全二部图。它的推广即 **Turán 定理**（Turán 1941）：不含 $K_{r+1}$ 的 $n$ 点图至多有 $\\left(1-\\frac1r\\right)\\frac{n^2}{2}$ 条边（平衡时的精确值），等号只在**完全 $r$ 部平衡图** $T_r(n)$ 达到——把顶点尽量均匀地分成 $r$ 类，异类之间全连边、同类内部不连边。$T_r(n)$ 不含 $K_{r+1}$ 是鸽笼原理的直接推论：$r+1$ 个顶点分进 $r$ 类，必有两个顶点同类，从而不相邻。\n\n精确记账要注意余数。设 $n=qr+s$（$0\\le s<r$，即 $s=n\\bmod r$），$T_r(n)$ 有 $s$ 个类大小为 $q+1$、$r-s$ 个类大小为 $q$，边数为 $t_r(n)=\\left(1-\\frac1r\\right)\\frac{n^2}{2}-\\frac{s(r-s)}{2r}$；$r\\mid n$ 时第二项为零，退化为干净的 $\\left(1-\\frac1r\\right)\\frac{n^2}{2}$。这里有一个容易踩的坑：**不要**把公式随手写成 $\\left\\lfloor\\left(1-\\frac1r\\right)\\frac{n^2}{2}\\right\\rfloor$。取 $n=12$、$r=8$：该式给出 63，而真值是 $t_8(12)=62$——$\\binom{12}{2}$ 减去 4 个二元类内部的 4 条边，即 $66-4=62$。\n\nTurán 定理是「密度阈值」思想的源头：它把「不含某个团」翻译成「边数不超过某条抛物线」，再由 Erdős–Stone 定理由色数推广到任意禁用图：$\\mathrm{ex}(n,F)=\\left(1-\\frac1{\\chi(F)-1}\\right)\\frac{n^2}{2}+o(n^2)$（$\\chi(F)\\ge 2$），其中 $F=K_{r+1}$（$\\chi=r+1$）正是 Turán 定理。它与色数、团数、独立数、拉姆齐数乃至图极限理论都有紧密联系，是组合学中引用最广的定理之一。",
+    "definitionEn": "Fix a forbidden graph $F$. Let $\\mathrm{ex}(n,F)$ denote the maximum number of edges in an n-vertex graph that contains **no copy of F** as a subgraph (in the ordinary, not necessarily induced, sense). For instance $\\mathrm{ex}(n,K_3)$ is the most edges a triangle-free n-vertex graph can have. Extremal graph theory asks not only for the value but also for the **structure of the extremal graphs** (and their uniqueness), and for how many copies of F must appear once the threshold is passed. When there are too few vertices nothing is forbidden: for $n\\le r$, $\\mathrm{ex}(n,K_{r+1})=\\binom n2$, since $K_n$ itself is too small to contain $K_{r+1}$.\n\nThe first nontrivial result is **Mantel's theorem** (1907): a triangle-free n-vertex graph has at most $\\lfloor n^2/4\\rfloor$ edges, and the unique extremal graph is the balanced complete bipartite graph. Its generalization is **Turán's theorem** (Turán 1941): a $K_{r+1}$-free graph on n vertices has at most $\\left(1-\\frac1r\\right)\\frac{n^2}{2}$ edges (the exact value when r divides n), with equality only for the **balanced complete r-partite graph** $T_r(n)$ — split the vertices as evenly as possible into r classes, join every pair of vertices from different classes and none inside a class. That $T_r(n)$ is $K_{r+1}$-free follows from pigeonhole: r+1 vertices placed into r classes leave two in the same class, hence non-adjacent.\n\nThe exact count requires care with remainders. Write $n=qr+s$ with $0\\le s<r$ (so $s=n\\bmod r$); then $T_r(n)$ has s classes of size $q+1$ and $r-s$ classes of size q, with $t_r(n)=\\left(1-\\frac1r\\right)\\frac{n^2}{2}-\\frac{s(r-s)}{2r}$ edges. When $r\\mid n$ the correction vanishes and the clean form $\\left(1-\\frac1r\\right)\\frac{n^2}{2}$ is exact. One common trap: do **not** replace the formula by $\\left\\lfloor\\left(1-\\frac1r\\right)\\frac{n^2}{2}\\right\\rfloor$. Take $n=12$, $r=8$: the floor version gives 63, while the truth is $t_8(12)=62$, namely $\\binom{12}{2}$ minus the 4 internal edges of the four parts of size 2.\n\nTurán's theorem launched the density threshold paradigm: it translates the absence of a large clique into an edge bound, and the Erdős–Stone theorem extends it to arbitrary forbidden graphs through the chromatic number: $\\mathrm{ex}(n,F)=\\left(1-\\frac1{\\chi(F)-1}\\right)\\frac{n^2}{2}+o(n^2)$ for $\\chi(F)\\ge 2$, of which $F=K_{r+1}$ (so $\\chi=r+1$) is exactly Turán's theorem. The theorem is tightly linked to chromatic and clique numbers, independence numbers, Ramsey numbers and graph limit theory, and is among the most quoted results in combinatorics.",
+    "formulas": [
+      {
+        "latex": "\\mathrm{ex}(n,K_{r+1})=t_r(n)=e\\bigl(T_r(n)\\bigr)",
+        "note": "Turán 定理：数值与极值构造；等号时 $G\\cong T_r(n)$（唯一）。$r=2$ 就是 Mantel 定理。",
+        "noteEn": "Turán's theorem: the value and the extremal construction; equality forces G ≅ T_r(n), uniquely. The case r=2 is Mantel's theorem."
+      },
+      {
+        "latex": "t_r(n)=\\left(1-\\frac1r\\right)\\frac{n^2}{2}-\\frac{s(r-s)}{2r},\\qquad n=qr+s,\\ 0\\le s<r",
+        "note": "一般的精确边数（含余数修正）；$r\\mid n$ 时退化为 $\\left(1-\\frac1r\\right)\\frac{n^2}{2}$。不要写成 floor 形式：$(n,r)=(12,8)$ 时 floor 给 63，正确值是 62。",
+        "noteEn": "The exact edge count with the remainder correction; for r | n it reduces to the clean form. Do not use the floor version: (n,r)=(12,8) yields 63 by flooring but 62 in truth."
+      },
+      {
+        "latex": "\\mathrm{ex}(n,K_3)=\\left\\lfloor\\frac{n^2}{4}\\right\\rfloor=\\left\\lfloor\\frac n2\\right\\rfloor\\left\\lceil\\frac n2\\right\\rceil",
+        "note": "Mantel 定理（$r=2$）：唯一极值图是平衡完全二部图 $K_{\\lfloor n/2\\rfloor,\\lceil n/2\\rceil}$。$r=2$ 时余数修正总小于 1，floor 写法恰好正确。",
+        "noteEn": "Mantel's theorem (r=2): the unique extremal graph is the balanced complete bipartite graph; here the correction is always below 1, so the floor form happens to be correct."
+      },
+      {
+        "latex": "e\\bigl(T_r(n)\\bigr)=\\binom n2-\\sum_i\\binom{n_i}2,\\qquad n_i\\in\\{q,q+1\\}",
+        "note": "完全多部图的边数记账：全部 $\\binom n2$ 条边减去各类内部的边；类规模越平均、减掉的越少，这就是「平衡」最优的原因。",
+        "noteEn": "Edge count of a complete multipartite graph: all pairs minus the pairs inside classes; balancing the class sizes minimizes the loss, which is why balance is optimal."
+      },
+      {
+        "latex": "e(G)>t_r(n)\\ \\Longrightarrow\\ \\omega(G)\\ge r+1\\ \\Longrightarrow\\ \\chi(G)\\ge r+1",
+        "note": "定理的逆否形式：边数一旦超过 Turán 阈值就必含 $K_{r+1}$，色数也随之至少 $r+1$——极值边数与团数、染色之间的桥梁。",
+        "noteEn": "Contrapositive form: exceeding the Turán threshold forces a K_{r+1}, hence ω ≥ r+1 and χ ≥ r+1 — the bridge between extremal edge counts, cliques and coloring."
+      }
+    ],
+    "properties": [
+      "唯一性：等号时 $G\\cong T_r(n)$，即完全 $r$ 部图且各类规模相差不超过 1。经典证明用 Zykov 对称化：对不相邻的两点，把度小者「克隆」成度大者的样子，边数不减且保持 $K_{r+1}$-free，反复操作化为完全多部图，再用均值不等式把各类调平。",
+      "Mantel 情形（$r=2$）：$e\\le\\lfloor n^2/4\\rfloor$，等号唯一取在 $K_{\\lfloor n/2\\rfloor,\\lceil n/2\\rceil}$。一个漂亮证明：三角形-free 时每条边 $uv$ 没有公共邻点，故 $d(u)+d(v)\\le n$；对全部边求和得 $\\sum_v d(v)^2\\le ne$，与 Cauchy–Schwarz 不等式 $\\sum_v d(v)^2\\ge 4e^2/n$ 联立即得 $e\\le n^2/4$。",
+      "与色数、团数的桥梁：$\\omega(G)\\le r$ 等价于 $G$ 不含 $K_{r+1}$，故 $e(G)\\le t_r(n)$；反过来 $e(G)>t_r(n)$ 保证 $\\omega(G)\\ge r+1$ 且 $\\chi(G)\\ge r+1$。染色数与边数之间的这类不等式是 Turán 定理最常见的用法。",
+      "一般禁用图的推广（Erdős–Stone–Simonovits）：$\\mathrm{ex}(n,F)=\\left(1-\\frac1{\\chi(F)-1}\\right)\\frac{n^2}{2}+o(n^2)$，主项只由色数决定；二分图 $F$ 是例外——此时 $\\mathrm{ex}(n,F)=o(n^2)$，例如 $\\mathrm{ex}(n,K_{s,t})=O(n^{2-1/s})$（Kővári–Sós–Turán）。",
+      "超图没有类似的干净定理：Turán 本人提出的三元超图情形（不含完全三元超图 $K_4^{(3)}$ 的最大边数密度的猜想值 $5/9$）至今未解决——「唯一极值图」这样的结论在图的情形其实是相当特殊的。"
+    ],
+    "propertiesEn": [
+      "Uniqueness: equality forces G ≅ T_r(n), a complete r-partite graph whose classes differ in size by at most 1. The classical proof is Zykov symmetrization: for a non-adjacent pair, clone the lower-degree vertex onto the higher-degree one, which never decreases the edge count and preserves K_{r+1}-freeness, reducing the problem to complete multipartite graphs, balanced by AM–GM.",
+      "The Mantel case (r=2): e ≤ ⌊n²/4⌋ with K_{⌊n/2⌋,⌈n/2⌉} as the unique extremal graph. A neat proof: in a triangle-free graph every edge uv satisfies d(u)+d(v) ≤ n, so summing gives Σd² ≤ ne, which combined with Cauchy–Schwarz Σd² ≥ 4e²/n yields e ≤ n²/4.",
+      "Bridge to clique and chromatic numbers: ω(G) ≤ r is the same as K_{r+1}-freeness, hence e(G) ≤ t_r(n); conversely e(G) > t_r(n) forces ω(G) ≥ r+1 and χ(G) ≥ r+1. Inequalities of this type are the most common use of Turán's theorem.",
+      "General forbidden graphs (Erdős–Stone–Simonovits): ex(n,F) = (1 − 1/(χ(F)−1)) n²/2 + o(n²), the leading term depending only on the chromatic number; bipartite F is the exception, where ex(n,F) = o(n²), e.g. ex(n,K_{s,t}) = O(n^{2−1/s}) (Kővári–Sós–Turán).",
+      "Hypergraphs have no comparably clean theorem: the 3-uniform case raised by Turán himself (the density of K_4^{(3)}-free hypergraphs, conjectured to be 5/9) is still open — uniqueness of the extremal graph is in fact special to the graph case."
+    ],
+    "examples": [
+      {
+        "problem": "用 Mantel 定理的证明方法求 $\\mathrm{ex}(6,K_3)$，并指出极值图。",
+        "solution": "设 $G$ 是 6 点无三角形图，边数为 $e$。三角形-free 的关键观察：对每条边 $uv$，$u$ 与 $v$ 没有公共邻点（否则加上该点就是三角形），即 $N(u)\\cap N(v)=\\varnothing$，于是 $d(u)+d(v)=|N(u)\\cup N(v)|\\le 6$。对全部边求和：左边每条边 $uv$ 贡献 $d(u)+d(v)$，顶点 $v$ 恰在 $d(v)$ 条边中出现、每次贡献 $d(v)$，故 $\\sum_{uv\\in E}\\bigl(d(u)+d(v)\\bigr)=\\sum_{v}d(v)^2\\le 6e$。另一方面由 Cauchy–Schwarz 不等式，$\\sum_v d(v)^2\\ge\\frac{(2e)^2}{6}=\\frac{2e^2}{3}$。合并得 $\\frac{2e^2}{3}\\le 6e$，即 $e\\le 9$。构造达到 9：平衡完全二部图 $K_{3,3}$ 有 $3\\times 3=9$ 条边且不含三角形，故 $\\mathrm{ex}(6,K_3)=9=\\lfloor 6^2/4\\rfloor$。**程序复核**：穷举全部 $2^{15}=32768$ 张 6 点图，无三角形者最多 9 条边；恰有 10 张达到 9 条边，全部同构于 $K_{3,3}$（对应把 6 个顶点分成两组的 $\\binom 63/2=10$ 种标号方式），与唯一性吻合。"
+      },
+      {
+        "problem": "求 $\\mathrm{ex}(7,K_4)$，写出极值图并验证其不含 $K_4$；再检验公式在余数不为零时是否正确。",
+        "solution": "用 Turán 公式：$n=7$、$r=3$，写成 $n=qr+s$ 得 $q=2$、$s=1$，于是 $t_3(7)=\\left(1-\\frac13\\right)\\frac{49}{2}-\\frac{1\\cdot 2}{2\\cdot 3}=\\frac{49}{3}-\\frac13=16$。极值图 $T_3(7)$ 把 7 个顶点分成 3 类，规模为 3、2、2（即 $s=1$ 个类大小为 $q+1=3$，$r-s=2$ 个类大小为 $q=2$）；边数是三个类两两之间的完全连接：$3\\times 2+3\\times 2+2\\times 2=6+6+4=16$ ✓（也等于 $\\binom 72-\\binom 32-\\binom 22-\\binom 22=21-3-1-1=16$）。**无 $K_4$ 的理由**：任取 4 个顶点放入 3 个类，鸽笼原理保证有两个同类、不相邻，故不构成 $K_4$。**最优性**：Turán 定理给出 $\\mathrm{ex}(7,K_4)=t_3(7)=16$。**程序复核**：7 点图中边数为 16 的共 $\\binom{21}{16}=20349$ 张，逐张检查含 $K_4$ 的情况，恰好有 105 张不含 $K_4$（= $T_3(7)$ 的全部标号方式数 $\\binom 73\\binom 42/2!=35\\times 3=105$，且它们两两同构，印证唯一性）；而再添一条边（17 条边）后必然出现 $K_4$。**余数检验**：这里 $s=1\\ne 0$，公式里的修正项 $-\\frac{s(r-s)}{2r}=-\\frac13$ 不可省略，$\\frac{49}{3}\\approx 16.333$ 减修正才得整数 16。"
+      }
+    ],
+    "tags": ["极值图论", "Turán 定理", "Mantel 定理", "完全多部图", "禁用子图"],
+    "links": ["graph-basics", "graph-coloring", "ramsey-theory", "combinatorics-comprehensive"]
+  }
+]
