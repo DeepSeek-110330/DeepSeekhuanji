@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=19";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=19";
+import { renderPlot } from "./plot.js?v=20";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=20";
 
 /* ============================================================
    1. 全局状态
@@ -990,7 +990,8 @@ const BRANCH_DIFFICULTY_ORDER = [
   "function", "trigonometry", "sequence", "analytic", "solid-geometry",
   "combinatorics", "probability", "calculus", "linear", "multivariable",
   "complex", "ode", "pde", "numerical", "real-analysis", "functional-analysis",
-  "differential-geometry", "vector", "number", "topology", "complex-analysis",
+  "dynamical-systems", "differential-geometry", "vector", "number", "abstract-algebra",
+  "topology", "complex-analysis",
   "stochastic", "riemannian", "harmonic-analysis", "pde-advanced",
 ];
 const branchRank = (key) => {

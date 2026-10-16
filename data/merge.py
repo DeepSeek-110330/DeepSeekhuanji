@@ -11,7 +11,7 @@ REQUIRED = ["id", "title", "titleEn", "branch", "level", "summary", "summaryEn",
 
 BRANCHES = {"harmonic-analysis","pde-advanced","stochastic","riemannian","topology","complex-analysis","elementary-basics","elementary","plane-geometry","algebra","function","trigonometry","sequence","analytic",
             "calculus","multivariable","complex","ode","pde","numerical","real-analysis","functional-analysis","differential-geometry","linear","probability",
-            "number","vector","set-logic","solid-geometry","combinatorics"}
+            "number","vector","set-logic","solid-geometry","combinatorics","abstract-algebra","dynamical-systems"}
 
 def main():
     base = json.load(open(BASE))

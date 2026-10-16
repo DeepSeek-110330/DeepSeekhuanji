@@ -571,4 +571,31 @@ algebraic-number-theory
 analytic-number-theory
 rsa-cryptography
 
-## 本批正在生成（0 个）
+## 本批正在生成（22 个，2026-10-16：抽象代数 + 动力系统与分形）
+
+abstract-algebra（抽象代数）：
+group-definition-examples
+subgroup-coset
+lagrange-theorem
+group-homomorphism-quotient
+group-actions-orbit-stabilizer
+symmetric-alternating-groups
+ring-ideal
+integral-domain-ufd
+polynomial-ring-irreducibility
+modules-intro
+field-extension-algebraic
+finite-fields
+galois-theory-intro
+solvable-groups-radicals
+
+dynamical-systems（动力系统与分形）：
+discrete-maps-cobweb
+bifurcation-period-doubling
+logistic-map-chaos
+lyapunov-exponent
+lorenz-system
+iterated-function-systems
+fractal-dimension
+mandelbrot-julia
+

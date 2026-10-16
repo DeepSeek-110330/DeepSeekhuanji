@@ -73,6 +73,8 @@
 | probability | 概率统计 | Probability & Statistics |
 | number | 数论与拓展 | Number Theory & Beyond |
 | vector | 向量与空间 | Vectors & Space |
+| abstract-algebra | 抽象代数 | Abstract Algebra |
+| dynamical-systems | 动力系统与分形 | Dynamical Systems & Fractals |
 
 ## 绘图规范（plot）
 

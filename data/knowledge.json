@@ -154,6 +154,16 @@
       "name": "计数原理",
       "nameEn": "Combinatorics",
       "color": "#8ce99a"
+    },
+    "abstract-algebra": {
+      "name": "抽象代数",
+      "nameEn": "Abstract Algebra",
+      "color": "#8338ec"
+    },
+    "dynamical-systems": {
+      "name": "动力系统与分形",
+      "nameEn": "Dynamical Systems & Fractals",
+      "color": "#ffd6e0"
     }
   },
   "nodes": [
