@@ -33,8 +33,9 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 
 ## 硬规则
 
-- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=18**），否则浏览器吃旧缓存，会误以为改动没生效
+- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=19**），否则浏览器吃旧缓存，会误以为改动没生效
 - 加知识点后**必须**跑 `python3 data/merge.py`（校验字段/冲突/分支/链接/图表类型，有错拒绝写入）
+- 内容更新后还要跑 `python3 data/build_runtime.py`（生成首屏骨架 `data/skeleton.json` 与详情分片 `data/parts/`，v=19 起）
 - 生成新内容前先更新 `data/IDLIST.txt`（所有合法 id 清单）
 - 新增分支或图表类型需**三处同步**：`knowledge.json` 的 `branches`、`merge.py` 白名单、`SCHEMA.md`
 - 单批生成 **5~7 个**知识点（超出质量会下降）

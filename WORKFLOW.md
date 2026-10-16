@@ -2,7 +2,7 @@
 
 > **给下一个 AI 会话看的操作手册。** 如果你刚接手这个项目，从头读一遍，然后按第一节启动环境、按第三节继续生成内容。
 >
-> 上次更新：2026-10-16 ｜ 数据 567 个知识点 ｜ 源码版本 v=18（已上线 GitHub Pages）
+> 上次更新：2026-10-16 ｜ 数据 567 个知识点 ｜ 源码版本 v=19（已上线 GitHub Pages）
 
 ---
 
@@ -42,7 +42,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 ### 1.2 发布与更新（GitHub Pages，2026-10-16 起）
 
 - **线上地址**：https://deepseek-110330.github.io/DeepSeekhuanji/ ｜ **仓库**：https://github.com/DeepSeek-110330/DeepSeekhuanji
-- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ `python3 data/merge.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建
+- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ `python3 data/merge.py` → `python3 data/build_runtime.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建
 - **网络不稳时的办法**（国内直连 github.com 时好时坏；先测 `curl -s -o /dev/null -w "%{http_code}" https://github.com`）：
   ① 换手机热点（实测最有效）；② 本地自动换线代理 `python3 ~/.local/tmp/ghproxy.py`，并把 `https_proxy`、`http_proxy` 指向 `http://127.0.0.1:8433`
 - **push 被拒**（远程有新提交）：先 `git pull origin main --no-rebase --allow-unrelated-histories` 合并，再 push
@@ -58,6 +58,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 | **新分支/新图表类型要三处同步** | `data/knowledge.json` 的 `branches`、`data/merge.py` 的白名单、`data/SCHEMA.md` 的表格 |
 | **单批产出 5~7 个** | 子代理单批超过 ~8 个知识点质量会下降（实测有代理写崩过） |
 | **改完要上线** | 内容/代码改完后 `git add -A && git commit && git push`，Pages 约 40 秒后自动重建（见 §1.2） |
+| **改数据要生成分片** | 内容更新后依次跑 `python3 data/merge.py`、`python3 data/build_runtime.py`（首屏骨架 + 详情分片，v=19 起） |
 
 ---
 

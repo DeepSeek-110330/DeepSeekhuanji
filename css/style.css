@@ -790,3 +790,6 @@ body::after {
     font-size: 17px;
   }
 }
+
+/* 详情分片加载中的占位（v=19 起） */
+.details-loading { opacity: 0.7; font-style: italic; }

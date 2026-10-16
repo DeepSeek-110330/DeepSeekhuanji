@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=18";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=18";
+import { renderPlot } from "./plot.js?v=19";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=19";
 
 /* ============================================================
    1. 全局状态
@@ -29,10 +29,44 @@ let armAngles = []; // 旋臂基础角度（由 computePositions 填充）
    2. 加载数据
    ============================================================ */
 async function loadData() {
+  // 首屏只加载「骨架」（轻量字段）；点开知识点时再按分支加载完整内容（见 loadNodeDetails）
   // no-cache：每次都向服务器校验，保证加了新知识点后刷新就能看到
-  const res = await fetch("data/knowledge.json", { cache: "no-cache" });
+  const res = await fetch("data/skeleton.json", { cache: "no-cache" });
   DATA = await res.json();
   DATA.nodes.forEach((n) => nodeById.set(n.id, n));
+}
+
+/* 按需加载：详情分片 data/parts/<branch>.json（一个分支只加载一次，之后走内存缓存） */
+const partsCache = new Map();   // branch -> { nodeId: 详情对象 }
+const partsPending = new Map(); // branch -> Promise（防并发重复请求）
+async function loadNodeDetails(node) {
+  if (node.details) return node.details;
+  const branch = node.branch;
+  if (!partsCache.has(branch)) {
+    if (!partsPending.has(branch)) {
+      partsPending.set(
+        branch,
+        fetch(`data/parts/${branch}.json`, { cache: "no-cache" })
+          .then((r) => {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then((json) => {
+            partsCache.set(branch, json);
+            partsPending.delete(branch);
+            return json;
+          })
+          .catch((err) => {
+            partsPending.delete(branch);
+            throw err;
+          })
+      );
+    }
+    await partsPending.get(branch);
+  }
+  const part = partsCache.get(branch)[node.id] || null;
+  if (part) node.details = part;
+  return part;
 }
 
 /* 固定种子的随机数：保证每次刷新星系布局一致 */
@@ -721,7 +755,27 @@ function openPanel(id, fromBack = false) {
     ? node.summaryEn || node.summary || ""
     : node.summary || "";
 
-  panelContent.innerHTML = buildPanelHTML(node, useEn);
+  panelContent.innerHTML = buildPanelHTML(node, useEn, node.details || null);
+
+  // 详情按需加载：先显示骨架（标题/摘要/配图），拿到分片后补齐正文
+  if (!node.details) {
+    loadNodeDetails(node)
+      .then((details) => {
+        if (!details || currentNode !== node) return;
+        panelContent.innerHTML = buildPanelHTML(node, useEn, details);
+        renderMath();
+        renderNodePlots(node);
+      })
+      .catch(() => {
+        if (currentNode !== node) return;
+        const ph = panelContent.querySelector(".details-loading");
+        if (ph) {
+          ph.textContent = useEn
+            ? "Failed to load content — check your network and tap the topic again."
+            : "内容加载失败——请检查网络后重新点击该知识点。";
+        }
+      });
+  }
 
   // 关联知识点
   panelLinks.innerHTML = "";
@@ -754,19 +808,31 @@ function openPanel(id, fromBack = false) {
   flyTo(id);
 }
 
-/* 组装面板 HTML：定义 / 公式 / 表达式 / 性质 / 例题 */
-function buildPanelHTML(node, useEn) {
+/* 组装面板 HTML：定义 / 公式 / 表达式 / 性质 / 例题
+   details 为 null 时表示分片尚未就绪：先给「加载中」占位（配图不依赖分片，照常渲染） */
+function buildPanelHTML(node, useEn, details) {
   const parts = [];
 
-  const def = useEn ? node.definitionEn || node.definition : node.definition;
-  if (def) {
-    parts.push(section(useEn ? "Definition" : "定义", mdToHTML(def)));
-  } else if (node.content) {
-    parts.push(section(useEn ? "Definition" : "定义", mdToHTML(node.content)));
+  if (!details) {
+    parts.push(
+      section(
+        useEn ? "Content" : "内容",
+        `<span class="details-loading">${useEn ? "Loading…" : "正在加载内容…"}</span>`
+      )
+    );
+    if (node.plot) {
+      parts.push(`<div class="plot-wrap" id="plot-wrap-${node.id}"></div>`);
+    }
+    return parts.join("");
   }
 
-  if (node.formulas && node.formulas.length) {
-    const items = node.formulas
+  const def = useEn ? details.definitionEn || details.definition : details.definition;
+  if (def) {
+    parts.push(section(useEn ? "Definition" : "定义", mdToHTML(def)));
+  }
+
+  if (details.formulas && details.formulas.length) {
+    const items = details.formulas
       .map(
         (f) =>
           `<div class="formula-item"><button type="button" class="copy-tex" data-tex="${escapeHTML(
@@ -781,8 +847,8 @@ function buildPanelHTML(node, useEn) {
     parts.push(section(useEn ? "Key Formulas" : "核心公式", items));
   }
 
-  if (node.expression) {
-    const e = node.expression;
+  if (details.expression) {
+    const e = details.expression;
     parts.push(
       section(
         useEn ? "Expression" : "表达式",
@@ -801,14 +867,14 @@ function buildPanelHTML(node, useEn) {
     parts.push(`<div class="plot-wrap" id="plot-wrap-${node.id}"></div>`);
   }
 
-  const props = useEn ? node.propertiesEn || node.properties : node.properties;
+  const props = useEn ? details.propertiesEn || details.properties : details.properties;
   if (props && props.length) {
     const items = props.map((p) => `<li>${mdToHTML(p)}</li>`).join("");
     parts.push(section(useEn ? "Properties" : "性质", `<ul class="prop-list">${items}</ul>`));
   }
 
-  if (node.examples && node.examples.length) {
-    const items = node.examples
+  if (details.examples && details.examples.length) {
+    const items = details.examples
       .map(
         (ex, i) =>
           `<div class="example"><div class="example-q"><b>${

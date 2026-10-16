@@ -3,7 +3,7 @@
 > **一份自包含的项目快照说明。** 新会话只需要读这一个文件，就能完整恢复项目上下文，
 > 不必重新读取 6.0 MB 的 `knowledge.json`（这正是 token 成本的大头）。
 >
-> 文档版本：2026-10-16 ｜ 数据：567 个知识点 ｜ 源码：v=18 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
+> 文档版本：2026-10-16 ｜ 数据：567 个知识点 ｜ 源码：v=19 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
 
 ---
 
@@ -108,7 +108,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 
 - **线上地址**：https://deepseek-110330.github.io/DeepSeekhuanji/ ；**仓库**：https://github.com/DeepSeek-110330/DeepSeekhuanji （公开）
 - **本地目录已是 git 仓库**（`main` 分支，远程 `origin` 已指向上述仓库）
-- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ 跑 `python3 data/merge.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建，刷新线上地址核验
+- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ 跑 `python3 data/merge.py` → `python3 data/build_runtime.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建，刷新线上地址核验
 - **凭证**：`gh` 在 `~/.local/bin/gh`，已登录 `DeepSeek-110330`（keyring）；git 凭据助手已配好（`gh auth git-credential`）
 - **网络注意**：国内直连 `github.com` 时好时坏（`api.github.com` 一般稳定）。推送前先测：`curl -s -o /dev/null -w "%{http_code}" https://github.com`。不通时的办法：① 换手机热点（实测最有效）；② 本地自动换线代理：`python3 ~/.local/tmp/ghproxy.py`，再把 `https_proxy`、`http_proxy` 设为 `http://127.0.0.1:8433`
 - **push 被拒**（远程有新提交，如在网页上建过文件）：`git pull origin main --no-rebase --allow-unrelated-histories`（必要时加 `-X ours`）合并后再 push
@@ -127,21 +127,25 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 ├── index.html              页面骨架（87 行）
 ├── katex-check.html        全库公式渲染扫描页（开发用）
 ├── plot-test.html          绘图引擎测试页（开发用）
-├── css/style.css           样式（792 行）
+├── css/style.css           样式（795 行）
+├── vendor/                 Three.js 与 KaTeX 本地库（v=19 起，不依赖 CDN）
 ├── js/
-│   ├── app.js              主逻辑：场景/相机/交互/面板/搜索/布局（1237 行）
+│   ├── app.js              主逻辑：场景/相机/交互/面板/搜索/布局（1303 行）
 │   ├── plot.js             绘图引擎：12 种数学图表（1802 行）
 │   └── stars.js            星体渲染：着色器星点 + 星云贴图（350 行）
 └── data/
-    ├── knowledge.json      ★ 运行时唯一数据（约 6.0 MB，由批次合并）
+    ├── knowledge.json      ★ 合并后的完整知识库（约 6.0 MB；本地/工具用）
     ├── batch*.json         93 个批次源文件（每批 4~8 个知识点）
     ├── merge.py            合并 + 校验脚本
+    ├── build_runtime.py    生成首屏骨架与详情分片（merge 后运行）
+    ├── skeleton.json       首屏骨架（约 580 KB，运行时首屏加载）
+    ├── parts/              详情分片 ×30（按需加载）
     ├── SCHEMA.md           数据格式与绘图规范（生成前必读）
     ├── IDLIST.txt          当前所有合法 id 清单（链接校验用）
     └── merge_backup/       （如存在）合并前的备份
 ```
 
-**源码合计 4,268 行**：app.js 1237 + plot.js 1802 + stars.js 350 + css 792 + html 87
+**源码合计 4,337 行**：app.js 1303 + plot.js 1802 + stars.js 350 + css 795 + html 87
 
 ---
 
@@ -1000,7 +1004,7 @@ cd data && python3 merge.py
 
 | 规则 | 说明 |
 |---|---|
-| **改 JS 必升版本号** | 改 `js/` 下任何文件后，把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1（当前 **v=18**）。否则浏览器吃旧缓存，你会以为改动没生效 |
+| **改 JS 必升版本号** | 改 `js/` 下任何文件后，把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1（当前 **v=19**）。否则浏览器吃旧缓存，你会以为改动没生效 |
 | **改数据不用升版本号** | `knowledge.json` 用 `fetch(..., {cache:"no-cache"})` 加载，每次校验，刷新即生效 |
 | **加完必跑合并** | `python3 data/merge.py` |
 | **生成前先更新 IDLIST** | 否则链接校验失败 |
@@ -1008,6 +1012,7 @@ cd data && python3 merge.py
 | **单批 5~7 个** | 超出质量下降 |
 | **不擅自改布局** | 用户明确说过不要移动已有知识点（可提议，先问） |
 | **改完要上线** | 内容/代码改完后 `git add -A && git commit -m "…" && git push`，GitHub Pages 约 40 秒后自动重建生效（见 §2.2） |
+| **改数据要生成分片** | 内容更新后依次跑 `python3 data/merge.py` → `python3 data/build_runtime.py`（生成首屏骨架与详情分片） |
 
 ---
 
@@ -1097,7 +1102,7 @@ cd data && python3 merge.py
 | 正则替换 LaTeX 报 `bad escape \m` | 用字面替换，或 `re.escape()`；替换串用 `lambda m: new` |
 | Python 字符串含 `'` | 用双引号包 |
 | 参数曲面用 u,v 但求值器只认 x,y | 用 `buildEvaluator(expr, params, ["u","v"])` |
-| 浏览器吃旧缓存 | 改 JS 必升 `?v=N`（当前 v=18） |
+| 浏览器吃旧缓存 | 改 JS 必升 `?v=N`（当前 v=19） |
 | 标签页后台导致检查超时 | 先 focus 保持可见，或抽样检查 |
 | `\,^{\circ}` 被 KaTeX 判错 | 空格类命令（`\,` `\;` `\:` `\!` `\quad`）**不能直接加角标**：`\,^{\circ}` 在页面上渲染成红色错误，必须写 `\,{}^{\circ}`（已在旧内容里抓到 5 处） |
 
@@ -1307,7 +1312,7 @@ const radius0    = 26 + (1 - t) * 36;                // 点少 ⇒ 内端外移
 const radialSpan = 42 + Math.min(74, n * 2.0);       // 44~116
 ```
 
-角度抖动从 ±0.16 收到 ±0.10。同时**改 `js/` 就要升 `?v=N`**（现为 **v=18**）。
+角度抖动从 ±0.16 收到 ±0.10。同时**改 `js/` 就要升 `?v=N`**（现为 **v=19**）。
 
 **注意**：这会重新排布所有点（内容与分支归属不变）。用户已于 2026-10-14 明确授权。
 

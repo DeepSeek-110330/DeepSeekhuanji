@@ -30,9 +30,10 @@ python3 -m http.server 8123
 ├── index.html              页面骨架（87 行）
 ├── katex-check.html        全库公式渲染扫描页（开发用）
 ├── plot-test.html          绘图引擎测试页（开发用）
-├── css/style.css           样式：深空主题、玻璃拟态面板（792 行）
+├── css/style.css           样式：深空主题、玻璃拟态面板（795 行）
+├── vendor/                 Three.js 与 KaTeX 本地库（不依赖 CDN）
 ├── js/
-│   ├── app.js              主逻辑：场景、相机、交互、面板、搜索、美化（1237 行）
+│   ├── app.js              主逻辑：场景、相机、交互、面板、搜索、美化（1303 行）
 │   ├── plot.js             绘图引擎：12 种数学图表（1802 行）
 │   └── stars.js            星体渲染：着色器星点、星云贴图（350 行）
 ├── HANDOVER.md             自包含交接文档（给下一个 AI）
@@ -40,7 +41,10 @@ python3 -m http.server 8123
 ├── REPORT.md               进度报告
 ├── AGENTS.md               项目指令
 └── data/
-    ├── knowledge.json      ★ 合并后的知识库（唯一的运行时数据，约 6.0 MB）
+    ├── knowledge.json      ★ 合并后的完整知识库（本地/工具用，约 6.0 MB）
+    ├── build_runtime.py    生成首屏骨架与详情分片
+    ├── skeleton.json       首屏骨架（运行时首屏加载，约 580 KB）
+    ├── parts/              详情分片 ×30（按需加载）
     ├── batch*.json         93 个批次源文件（生成内容，合并后得到 knowledge.json）
     ├── merge.py            合并 + 校验脚本
     ├── SCHEMA.md           数据格式规范（生成内容前必读）
@@ -137,7 +141,7 @@ python3 -m http.server 8123
 ## 开发者须知（重要）
 
 - **改了 `js/` 下的任何文件，必须提升版本号**：把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一改成 `?v=N+1`。否则浏览器会继续用旧缓存，改动看不到。
-  （当前版本：**v=18**）
+  （当前版本：**v=19**）
 - 知识点数据用 `fetch(..., { cache: "no-cache" })` 加载，每次都会向服务器校验，**加完知识点刷新即可看到**。
 - 加知识点后要跑合并脚本：
 
@@ -147,6 +151,8 @@ python3 -m http.server 8123
   ```
 
   脚本会检查字段完整性、id 冲突、非法分支、坏链接、绘图类型，**有错会拒绝写入**。
+
+- **内容更新后还要生成运行时分片**：`python3 data/build_runtime.py`（首屏骨架 + 详情分片，v=19 起）。
 
 - **上线**：`git add -A && git commit -m "…" && git push`；GitHub Pages 约 40 秒后自动重建（网络注意见 `WORKFLOW.md`「1.2 发布与更新」）。
 
