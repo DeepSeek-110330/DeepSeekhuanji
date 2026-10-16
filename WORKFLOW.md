@@ -2,7 +2,7 @@
 
 > **给下一个 AI 会话看的操作手册。** 如果你刚接手这个项目，从头读一遍，然后按第一节启动环境、按第三节继续生成内容。
 >
-> 上次更新：2026-10-15 ｜ 数据 549 个知识点 ｜ 源码版本 v=10
+> 上次更新：2026-10-16 ｜ 数据 567 个知识点 ｜ 源码版本 v=18（已上线 GitHub Pages）
 
 ---
 
@@ -15,14 +15,14 @@
 - 配图**全部由代码实时绘制**（12 种图表类型），不是图片
 - 数据在 `data/knowledge.json`（由 `data/batch*.json` 合并而来）
 
-**当前进度**：549 个知识点，29 条分支，涵盖小学 → 研究生（含线性代数与矩阵微分、拓扑学、复分析、随机过程、黎曼几何、调和分析、PDE 进阶）。
+**当前进度**：567 个知识点，30 条分支（全部填充），涵盖小学 → 研究生（含线性代数与矩阵微分、拓扑学、复分析、随机过程、黎曼几何、调和分析、PDE 进阶、数论与拓展）。**已上线**：<https://deepseek-110330.github.io/DeepSeekhuanji/>
 
 ---
 
 ## 一、启动与验证环境
 
 ```bash
-cd math-galaxy
+cd 数学知识银河
 python3 -m http.server 8123     # 端口固定用 8123
 ```
 
@@ -39,6 +39,14 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 
 ---
 
+### 1.2 发布与更新（GitHub Pages，2026-10-16 起）
+
+- **线上地址**：https://deepseek-110330.github.io/DeepSeekhuanji/ ｜ **仓库**：https://github.com/DeepSeek-110330/DeepSeekhuanji
+- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ `python3 data/merge.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建
+- **网络不稳时的办法**（国内直连 github.com 时好时坏；先测 `curl -s -o /dev/null -w "%{http_code}" https://github.com`）：
+  ① 换手机热点（实测最有效）；② 本地自动换线代理 `python3 ~/.local/tmp/ghproxy.py`，并把 `https_proxy`、`http_proxy` 指向 `http://127.0.0.1:8433`
+- **push 被拒**（远程有新提交）：先 `git pull origin main --no-rebase --allow-unrelated-histories` 合并，再 push
+
 ## 二、硬规则（违反会出问题）
 
 | 规则 | 说明 |
@@ -49,6 +57,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 | **生成前先更新 IDLIST** | `data/IDLIST.txt` 是当前所有合法 id 清单，子代理靠它校验链接。**新增节点要先把它写进去** |
 | **新分支/新图表类型要三处同步** | `data/knowledge.json` 的 `branches`、`data/merge.py` 的白名单、`data/SCHEMA.md` 的表格 |
 | **单批产出 5~7 个** | 子代理单批超过 ~8 个知识点质量会下降（实测有代理写崩过） |
+| **改完要上线** | 内容/代码改完后 `git add -A && git commit && git push`，Pages 约 40 秒后自动重建（见 §1.2） |
 
 ---
 
@@ -230,9 +239,11 @@ const tryRender = (tex, nid) => {
 在 `js/app.js` 的 `computePositions()`：
 
 ```javascript
-const sweep = Math.min(3.6, 2.0 + n * 0.05);      // 臂扫过的角度（弧度）
-const radialSpan = 78 + Math.min(46, n * 1.4);     // 臂的径向长度
-const radius = 30 + s * radialSpan + lvlShift + jitter;
+const t = n / maxN;
+const sweep      = Math.min(3.2, 0.28 + n * 0.086);  // 22°~183°，随节点数缩放
+const radius0    = 26 + (1 - t) * 36;                // 点少 ⇒ 内端外移
+const radialSpan = 42 + Math.min(74, n * 2.0);       // 44~116
+const radius = radius0 + s * radialSpan + lvlShift + jitter;
 const angle = armAngle + s * sweep + radius * 0.006 + jitter;
 ```
 
@@ -240,13 +251,13 @@ const angle = armAngle + s * sweep + radius * 0.006 + jitter;
 - 之后有 **110 轮松弛推挤**（最小间距 7.5），保证光点不重叠
 - 使用固定种子随机数，布局可复现
 
-**已知问题**：`sweep` 与节点数关系不大（最少 117°），导致 1 个点的分支也拖长弧、看起来不均匀。**如果用户要求改善分布**，可改成 `Math.min(3.6, 0.5 + n * 0.10)`——但**要先征得同意**，因为会重新排布所有点。
+**布局已于 2026-10-14 按用户授权改造完毕**：三个尺寸参数都随节点数缩放，使各臂点密度接近（1 个点的臂从 117° 收到 22°，33 个点的臂保持 183°），角度抖动 ±0.16→±0.10。**改造会重新排布所有点——当时已经用户明确同意；后续如需再动布局，仍须先征得确认**（详见 `HANDOVER.md` 第 10 节）。
 
 ---
 
 ## 附录 A：错误目录（★ 最有价值的积累 ★）
 
-这些是 21 轮独立复核累计抓到的 **171 处真实错误**的类型归纳（拓扑/复分析见 `HANDOVER.md` 9.7/9.8 节，随机过程/黎曼几何见 9.9/9.10 节，调和分析/PDE 进阶见 9.11/9.12 节，高中补充见 9.13 节，线性代数见 9.14 节，深水区见 9.15 节，矩阵微分见 9.16 节）。**生成内容时逐条对照，能避掉大部分坑。**
+这些是 22 轮独立复核累计抓到的 **181 处真实错误**的类型归纳（拓扑/复分析见 `HANDOVER.md` 9.7/9.8 节，随机过程/黎曼几何见 9.9/9.10 节，调和分析/PDE 进阶见 9.11/9.12 节，高中补充见 9.13 节，线性代数见 9.14 节，深水区见 9.15 节，矩阵微分见 9.16 节，数论见 9.17 节）。**生成内容时逐条对照，能避掉大部分坑。**
 
 ### A1. 蕴含方向写反（最高频）
 
@@ -415,10 +426,11 @@ gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
 | ~~PDE 深度版（~14 个）~~ | ✅ 已完成（batch72~74） |
 | ~~高中补充（30 个）~~ | ✅ 已完成（batch75~79，2026-10-15） |
 | ~~线性代数（49 个）~~ | ✅ 已完成（batch80~89，2026-10-15；含矩阵微分与深水区） |
-| **数论**（`number` 分支为空） | 整除、同余、素数分布 |
+| ~~数论~~ | ✅ 已完成（18 个，`batch90~92`，2026-10-16；初等/经典/拓展各 6） |
 | 布局优化 | ✅ 已实施（2026-10-14，用户授权） |
+| ~~GitHub Pages 部署~~ | ✅ 已完成（2026-10-16，见 §1.2） |
 
-**说明**：既定方向均已完成；仅剩 `number` 数论与拓展一个空分支。
+**说明**：既定方向均已完成；**30/30 分支全部填充，内容缺口清零**。
 
 ---
 

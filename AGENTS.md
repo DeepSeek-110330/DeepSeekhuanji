@@ -6,9 +6,11 @@
 
 **读 `HANDOVER.md`**（约 81 KB，自包含交接文档）。
 
-它包含：全部 549 个知识点的 id + 名称 + 等级清单、数据格式、12 种图表类型参考、
-内容生成八步工作流、硬规则、171 处历史错误目录（含拓扑 9.7 / 复分析 9.8 / 随机过程 9.9 / 黎曼几何 9.10 / 调和分析 9.11 / PDE 进阶 9.12 / 高中补充 9.13 / 线性代数 9.14 / 深水区 9.15 / 矩阵微分 9.16 专属坑）、遗留工作清单、常用脚本。
+它包含：全部 567 个知识点的 id + 名称 + 等级清单、数据格式、12 种图表类型参考、
+内容生成八步工作流、硬规则、181 处历史错误目录（含拓扑 9.7 / 复分析 9.8 / 随机过程 9.9 / 黎曼几何 9.10 / 调和分析 9.11 / PDE 进阶 9.12 / 高中补充 9.13 / 线性代数 9.14 / 深水区 9.15 / 矩阵微分 9.16 / 数论 9.17 专属坑）、遗留工作清单、常用脚本。
 **读完它即完整恢复项目上下文，无需用户再解释。**
+
+**已上线**：<https://deepseek-110330.github.io/DeepSeekhuanji/>（GitHub Pages；更新流程见 `WORKFLOW.md`「1.2 发布与更新」）
 
 ## ⚠️ 省 token 的关键（用户明确关注成本）
 
@@ -17,8 +19,8 @@
 | 文件 | 原因 |
 |---|---|
 | `data/knowledge.json`（6.0 MB） | HANDOVER.md 第 4 节已有全部知识点清单，足够判断"有什么、缺什么" |
-| `data/batch*.json`（约 5.9 MB，90 个） | 用 `python3 data/merge.py` 的校验结果代替人工阅读 |
-| `js/app.js`、`js/plot.js`（共 2800 行） | 除非要改布局或新增图表类型；HANDOVER.md 第 6、10 节已够用 |
+| `data/batch*.json`（约 6.2 MB，93 个） | 用 `python3 data/merge.py` 的校验结果代替人工阅读 |
+| `js/app.js`、`js/plot.js`（共约 3000 行） | 除非要改布局或新增图表类型；HANDOVER.md 第 6、10 节已够用 |
 
 **需要某个知识点的完整内容时**：用脚本定向提取单个节点，不要整体读入：
 
@@ -31,11 +33,12 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 
 ## 硬规则
 
-- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=10**），否则浏览器吃旧缓存，会误以为改动没生效
+- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=18**），否则浏览器吃旧缓存，会误以为改动没生效
 - 加知识点后**必须**跑 `python3 data/merge.py`（校验字段/冲突/分支/链接/图表类型，有错拒绝写入）
 - 生成新内容前先更新 `data/IDLIST.txt`（所有合法 id 清单）
 - 新增分支或图表类型需**三处同步**：`knowledge.json` 的 `branches`、`merge.py` 白名单、`SCHEMA.md`
 - 单批生成 **5~7 个**知识点（超出质量会下降）
+- 改完要上线：`git add -A && git commit && git push`（Pages 约 40 秒自动重建）
 
 ## 质量要求（用户反复强调"质量第一"）
 
@@ -47,7 +50,7 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 ## 运行与验证
 
 ```bash
-cd math-galaxy && python3 -m http.server 8123
+cd 数学知识银河 && python3 -m http.server 8123
 # 浏览器打开 http://localhost:8123
 ```
 

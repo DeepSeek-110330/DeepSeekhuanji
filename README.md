@@ -4,12 +4,14 @@
 
 纯前端项目——HTML + CSS + JavaScript，**无后端、无数据库、无构建步骤**。
 
+**🌐 在线版（已发布）**：<https://deepseek-110330.github.io/DeepSeekhuanji/> ——仓库：<https://github.com/DeepSeek-110330/DeepSeekhuanji>
+
 ---
 
 ## 快速开始
 
 ```bash
-cd math-galaxy
+cd 数学知识银河
 python3 -m http.server 8123
 ```
 
@@ -24,23 +26,28 @@ python3 -m http.server 8123
 ## 项目结构
 
 ```
-math-galaxy/
-├── index.html              页面骨架（79 行）
-├── css/style.css           样式：深空主题、玻璃拟态面板（659 行）
+数学知识银河/
+├── index.html              页面骨架（87 行）
+├── katex-check.html        全库公式渲染扫描页（开发用）
+├── plot-test.html          绘图引擎测试页（开发用）
+├── css/style.css           样式：深空主题、玻璃拟态面板（792 行）
 ├── js/
-│   ├── app.js              主逻辑：场景、相机、交互、面板、搜索（1035 行）
+│   ├── app.js              主逻辑：场景、相机、交互、面板、搜索、美化（1237 行）
 │   ├── plot.js             绘图引擎：12 种数学图表（1802 行）
-│   └── stars.js            星体渲染：着色器星点、星云贴图（330 行）
-├── plot-test.html          绘图引擎的测试页（开发用）
+│   └── stars.js            星体渲染：着色器星点、星云贴图（350 行）
+├── HANDOVER.md             自包含交接文档（给下一个 AI）
+├── WORKFLOW.md             工作流 + 错误目录
+├── REPORT.md               进度报告
+├── AGENTS.md               项目指令
 └── data/
     ├── knowledge.json      ★ 合并后的知识库（唯一的运行时数据，约 6.0 MB）
-    ├── batch*.json         90 个批次源文件（生成内容，合并后得到 knowledge.json）
+    ├── batch*.json         93 个批次源文件（生成内容，合并后得到 knowledge.json）
     ├── merge.py            合并 + 校验脚本
     ├── SCHEMA.md           数据格式规范（生成内容前必读）
     ├── IDLIST.txt          当前所有合法 id 清单（校验链接用）
-    ├── README.md           本文件
-    ├── REPORT.md           进度报告
-    └── AGENT.md            接手指南（给下一个 AI 会话看）
+    └── merge_backup/       合并前的备份（如存在）
+
+> 自 2026-10-16 起本项目是 git 仓库并托管 GitHub Pages（更新方式见文末「在线版与发布」）。
 ```
 
 ---
@@ -54,7 +61,12 @@ math-galaxy/
 | **双语切换** | 面板右上角「EN / 中文」一键切换中英文内容 |
 | **公式渲染** | KaTeX 渲染 LaTeX 公式 |
 | **12 种数学图表** | 函数图、几何图、等高线、向量场、共形映射、斜率场、坐标轴、散点图、数值积分、3D 曲线、3D 曲面、单位圆——全部用代码实时绘制，可缩放不模糊 |
-| **搜索** | 按标题/摘要/标签搜索，标题精确匹配优先 |
+| **搜索** | 按标题/摘要/标签搜索，标题精确匹配优先；支持键盘导航（↑↓ 选择、Enter 进入、Esc 关闭） |
+| **链接跳转** | 面板内链接可飞往相关知识点；悬停时银河中高亮其路径，支持「← 返回上一个」 |
+| **例题折叠** | 例题默认收起，点「看解答」展开 |
+| **公式一键复制** | 每个公式旁有复制按钮，一键拿到 LaTeX 源码 |
+| **随机漫游** | 一键随机飞往某个知识点，适合闲逛 |
+| **沉浸细节** | 光点呼吸、入场渐显绽放、分支旋臂脊线、面板等级徽章（L# ★） |
 | **分支筛选** | 左下角「知识分支」面板可收放，点击分支只看该分支 |
 | **性能自适应** | 帧率低时自动降低渲染分辨率 |
 
@@ -64,14 +76,14 @@ math-galaxy/
 
 | 项目 | 数量 |
 |---|---|
-| 知识点 | **549 个** |
-| 公式 | 2713 条 |
-| 例题 | 1119 道 |
-| 配图 | 409 张 |
-| 分支 | 29 条（有内容的）／30 条已定义 |
-| 中文正文 | 约 49 万字 |
+| 知识点 | **567 个** |
+| 公式 | 2801 条 |
+| 例题 | 1155 道 |
+| 配图 | 413 张 |
+| 分支 | 30 条（全部有内容）／30 条已定义 |
+| 中文正文 | 约 51 万字 |
 
-覆盖范围：**小学 → 初中 → 高中（三角、数列、解析几何、立体几何、计数原理等）→ 大学（微积分/线性代数（含矩阵微分）/概率统计/复变/ODE/PDE/数值分析/实变/泛函/微分几何）→ 研究生（拓扑学/复分析/随机过程/黎曼几何/调和分析/PDE 进阶）**
+覆盖范围：**小学 → 初中 → 高中（三角、数列、解析几何、立体几何、计数原理等）→ 大学（微积分/线性代数（含矩阵微分）/概率统计/复变/ODE/PDE/数值分析/实变/泛函/微分几何）→ 研究生（拓扑学/复分析/随机过程/黎曼几何/调和分析/PDE 进阶/数论与拓展）**
 
 ---
 
@@ -110,20 +122,13 @@ math-galaxy/
 
 ---
 
-## 发布给别人看
+## 在线版与发布
 
-这是纯静态站点，最简单的做法是把 `math-galaxy` 文件夹拖到 **Netlify Drop**（app.netlify.com/drop），几秒后拿到一个网址。
+**✅ 已发布（GitHub Pages）**：<https://deepseek-110330.github.io/DeepSeekhuanji/>
+仓库：<https://github.com/DeepSeek-110330/DeepSeekhuanji>
 
-上传时只需这几个文件：
-
-```
-index.html
-css/style.css
-js/app.js  js/plot.js  js/stars.js
-data/knowledge.json
-```
-
-（`batch*.json`、`merge.py`、`SCHEMA.md`、`IDLIST.txt`、`plot-test.html` 是开发用的，不必上传。）
+**更新线上版**：把改动 commit 并 push 到 `main` 分支，GitHub Pages 会在约 40 秒后自动重建，刷新线上地址即可看到。
+（网络对 github.com 不稳时的应对见 `WORKFLOW.md`「1.2 发布与更新」；也可把项目文件拖到 [Netlify Drop](https://app.netlify.com/drop) 临时发布——上传 `index.html`、`css/`、`js/`、`data/knowledge.json` 即可。）
 
 **依赖说明**：Three.js 与 KaTeX 通过 CDN（jsdelivr）加载，因此**访问者需要联网**；国内访问 jsdelivr 有时较慢。若要完全离线，需把这两个库下载到本地并改为相对路径引用。
 
@@ -132,7 +137,7 @@ data/knowledge.json
 ## 开发者须知（重要）
 
 - **改了 `js/` 下的任何文件，必须提升版本号**：把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一改成 `?v=N+1`。否则浏览器会继续用旧缓存，改动看不到。
-  （当前版本：**v=10**）
+  （当前版本：**v=18**）
 - 知识点数据用 `fetch(..., { cache: "no-cache" })` 加载，每次都会向服务器校验，**加完知识点刷新即可看到**。
 - 加知识点后要跑合并脚本：
 
@@ -142,5 +147,7 @@ data/knowledge.json
   ```
 
   脚本会检查字段完整性、id 冲突、非法分支、坏链接、绘图类型，**有错会拒绝写入**。
+
+- **上线**：`git add -A && git commit -m "…" && git push`；GitHub Pages 约 40 秒后自动重建（网络注意见 `WORKFLOW.md`「1.2 发布与更新」）。
 
 更多细节（如何继续生成内容、历史踩过的坑）见 **`WORKFLOW.md`**，当前进度见 **`REPORT.md`**。
