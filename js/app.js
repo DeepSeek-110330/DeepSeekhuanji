@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=27";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=27";
+import { renderPlot } from "./plot.js?v=28";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=28";
 
 /* ============================================================
    1. 全局状态
@@ -902,10 +902,15 @@ document.getElementById("actions-toggle").addEventListener("click", () => {
   btn.setAttribute("aria-expanded", String(!collapsed));
 });
 
-// 旋臂标签显示/屏蔽（v=27）
+// 旋臂标签显示/屏蔽（v=27；v=28 起即时生效，不依赖动画帧）
 document.getElementById("labels-btn").addEventListener("click", () => {
   armLabelsOn = !armLabelsOn;
   document.getElementById("labels-btn").classList.toggle("off", !armLabelsOn);
+  if (!armLabelsOn) {
+    for (const L of armLabels) L.el.style.opacity = 0;
+  } else {
+    updateArmLabels(); // 立即按当前视角重新投影显示
+  }
 });
 document.addEventListener("click", (e) => {
   if (!e.target.closest("#paths-menu") && !e.target.closest("#paths-btn")) {
