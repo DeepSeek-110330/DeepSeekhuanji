@@ -3,3 +3,5 @@
 data/merge_backup/
 __pycache__/
 *.pyc
+# 快照压缩包不纳入版本管理
+*.zip
