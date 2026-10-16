@@ -828,3 +828,111 @@ body::after {
   transform: translate(-50%, -50%);
 }
 .arm-label .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+/* ---------- v=25：学习路线 ---------- */
+#paths-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text);
+  font-size: 12.5px;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 10px 26px -18px rgba(0, 0, 0, 0.9);
+  user-select: none;
+}
+#paths-btn:hover {
+  border-color: rgba(140, 165, 255, 0.55);
+  background: rgba(20, 26, 52, 0.94);
+}
+#paths-btn:focus-visible {
+  outline: 2px solid rgba(140, 165, 255, 0.7);
+  outline-offset: 2px;
+}
+#paths-btn .roam-icon {
+  font-size: 10px;
+  color: var(--glow);
+  line-height: 1;
+}
+
+#paths-menu {
+  position: fixed;
+  left: 18px;
+  bottom: 96px;
+  width: 300px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: rgba(10, 14, 32, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 14px 8px;
+  z-index: 30;
+  backdrop-filter: blur(8px);
+}
+#paths-menu.hidden { display: none; }
+#paths-menu h3 {
+  font-size: 13px;
+  color: rgba(230, 238, 255, 0.75);
+  margin: 0 0 8px 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.path-item {
+  padding: 10px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.path-item:hover { background: rgba(255, 255, 255, 0.06); }
+.path-title { font-size: 13px; color: var(--text); }
+.path-desc { font-size: 11px; color: rgba(255, 255, 255, 0.45); margin-top: 3px; }
+
+#path-hud {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(10, 14, 32, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  z-index: 30;
+  backdrop-filter: blur(8px);
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+}
+#path-hud.hidden { display: none; }
+#path-hud .path-hud-label { color: rgba(255, 255, 255, 0.4); font-size: 11px; letter-spacing: 0.4px; }
+#path-hud b { font-weight: 600; }
+#path-hud-step { color: rgba(255, 255, 255, 0.55); }
+#path-hud button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+#path-hud button:hover { border-color: rgba(255, 255, 255, 0.5); }
+#path-hud button:disabled { opacity: 0.35; cursor: default; }
+@media (max-width: 700px) {
+  #paths-menu { width: calc(100vw - 36px); }
+  #path-hud { font-size: 11px; padding: 7px 12px; gap: 7px; }
+}

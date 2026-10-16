@@ -1,0 +1,40 @@
+{
+  "paths": [
+    {
+      "id": "calculus-main",
+      "title": "微积分主线",
+      "desc": "从极限到级数，一门课的完整骨架",
+      "nodes": ["limit", "continuity", "derivative", "differentiation-rules", "mean-value-theorems", "monotonicity-extremum", "taylor-formula", "lhopital", "integral", "fundamental-theorem", "integration-by-parts", "improper-integral", "series", "power-series", "taylor-series", "fourier-series"]
+    },
+    {
+      "id": "linear-twelve",
+      "title": "线性代数十二步",
+      "desc": "行列式 → 矩阵 → 特征值 → 对角化 → SVD",
+      "nodes": ["determinant-definition", "matrix-operations", "inverse-matrix", "matrix-rank", "linear-dependence", "vector-space-basis", "eigenvalue-eigenvector", "symmetric-matrix-diagonalization", "quadratic-form-standard", "linear-transformation", "jordan-form", "matrix-factorization"]
+    },
+    {
+      "id": "probability-stats",
+      "title": "概率与统计之路",
+      "desc": "从抛硬币到大数定律、再到贝叶斯与 PCA",
+      "nodes": ["probability-basics", "conditional-probability-bayes", "random-variable", "normal-distribution", "expectation-variance", "law-of-large-numbers", "central-limit-theorem", "sampling-distributions", "point-estimation", "interval-estimation", "hypothesis-testing", "regression-analysis", "bayesian-inference", "principal-component-analysis"]
+    },
+    {
+      "id": "real-analysis-deep",
+      "title": "分析的深化：走向勒贝格",
+      "desc": "测度、可测函数、三大收敛定理",
+      "nodes": ["set-algebra", "outer-measure", "measurable-sets", "measure-space", "measurable-functions", "convergence-ae", "lebesgue-integral", "monotone-convergence", "dominated-convergence", "riemann-vs-lebesgue", "lp-spaces", "fubini-tonelli", "lebesgue-differentiation"]
+    },
+    {
+      "id": "four-pillars",
+      "title": "现代数学四支柱",
+      "desc": "抽象代数 · 拓扑 · 复分析 · 数论 精选巡礼",
+      "nodes": ["group-definition-examples", "lagrange-theorem", "ring-ideal", "galois-theory-intro", "topological-space", "compactness", "fundamental-group", "conformal-mapping", "riemann-mapping-theorem", "residue-advanced", "primes-fundamental-theorem", "euler-totient-theorem", "rsa-cryptography"]
+    },
+    {
+      "id": "graph-optimization",
+      "title": "图论与优化之旅",
+      "desc": "从七座桥到最大流、再到 KKT 与纳什均衡",
+      "nodes": ["graph-basics", "trees-spanning", "euler-hamilton", "bipartite-matching", "planar-euler-formula", "graph-coloring", "network-flow", "ramsey-theory", "convex-sets-functions", "convex-optimization", "linear-programming", "lp-duality", "kkt-conditions", "game-theory-nash"]
+    }
+  ]
+}

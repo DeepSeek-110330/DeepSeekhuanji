@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>数学知识银河</title>
-  <link rel="stylesheet" href="css/style.css?v=24" />
+  <link rel="stylesheet" href="css/style.css?v=25" />
 </head>
 <body>
   <!-- 3D 画布：银河系本体 -->
@@ -42,6 +42,10 @@
         <span class="roam-icon">✧</span>
         <span>随机漫游</span>
       </button>
+      <button id="paths-btn" type="button">
+        <span class="roam-icon">✦</span>
+        <span>学习路线</span>
+      </button>
     </div>
   </aside>
 
@@ -61,6 +65,20 @@
     <div id="panel-content" class="content"></div>
     <div id="panel-links" class="links"></div>
   </aside>
+
+  <!-- 学习路线：菜单 + 步进条（v=25） -->
+  <div id="paths-menu" class="hidden">
+    <h3>学习路线</h3>
+    <div id="paths-list"></div>
+  </div>
+  <div id="path-hud" class="hidden">
+    <span class="path-hud-label">路线</span>
+    <b id="path-hud-title"></b>
+    <span id="path-hud-step"></span>
+    <button id="path-prev" type="button">← 上一步</button>
+    <button id="path-next" type="button">下一步 →</button>
+    <button id="path-exit" type="button" aria-label="退出路线">✕</button>
+  </div>
 
   <!-- 搜索框 -->
   <div id="search-wrap">
@@ -83,6 +101,6 @@
     }
   </script>
 
-  <script type="module" src="js/app.js?v=24"></script>
+  <script type="module" src="js/app.js?v=25"></script>
 </body>
 </html>

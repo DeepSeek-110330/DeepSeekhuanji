@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=24";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=24";
+import { renderPlot } from "./plot.js?v=25";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=25";
 
 /* ============================================================
    1. 全局状态
@@ -793,6 +793,105 @@ function updateArmLabels() {
     L.el.style.transform = "translate(-50%,-50%) translate(" + x + "px, " + y + "px)";
   }
 }
+
+/* ============================================================
+   9.6 学习路线（v=25）
+   ============================================================ */
+let pathsData = null;
+let pathState = null; // {title, nodes, index}
+
+async function openPathsMenu() {
+  const menu = document.getElementById("paths-menu");
+  const willShow = menu.classList.contains("hidden");
+  menu.classList.toggle("hidden");
+  if (!willShow) return;
+  if (!pathsData) {
+    try {
+      const res = await fetch("data/paths.json", { cache: "no-cache" });
+      pathsData = await res.json();
+    } catch (e) {
+      return;
+    }
+    const list = document.getElementById("paths-list");
+    list.innerHTML = "";
+    for (const p of pathsData.paths) {
+      const div = document.createElement("div");
+      div.className = "path-item";
+      div.innerHTML =
+        '<div class="path-title">' + p.title + "</div>" +
+        '<div class="path-desc">' + p.desc + " · " + p.nodes.length + " 步</div>";
+      div.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        enterPath(p);
+      });
+      list.appendChild(div);
+    }
+  }
+}
+
+function enterPath(path) {
+  pathState = { title: path.title, nodes: path.nodes.slice(), index: 0 };
+  // 清掉分支筛选，避免与路线高亮冲突
+  activeBranch = null;
+  document.querySelectorAll("#legend li").forEach((el) => el.classList.remove("dimmed"));
+  const inPath = new Set(path.nodes);
+  DATA.nodes.forEach((n, i) => {
+    starLayer.setAlphaTarget(i, inPath.has(n.id) ? 1 : 0.06);
+  });
+  updateLinkColors();
+  updateArmSpine();
+  openPanel(path.nodes[0]);
+  updatePathHUD();
+}
+
+function exitPath() {
+  pathState = null;
+  DATA.nodes.forEach((n, i) => starLayer.setAlphaTarget(i, 1));
+  updateLinkColors();
+  updateArmSpine();
+  document.getElementById("path-hud").classList.add("hidden");
+}
+
+function updatePathHUD() {
+  const hud = document.getElementById("path-hud");
+  if (!pathState) {
+    hud.classList.add("hidden");
+    return;
+  }
+  hud.classList.remove("hidden");
+  document.getElementById("path-hud-title").textContent = pathState.title;
+  document.getElementById("path-hud-step").textContent =
+    pathState.index + 1 + " / " + pathState.nodes.length;
+  document.getElementById("path-prev").disabled = pathState.index === 0;
+  document.getElementById("path-next").textContent =
+    pathState.index === pathState.nodes.length - 1 ? "完成 ✓" : "下一步 →";
+}
+
+function stepPath(delta) {
+  if (!pathState) return;
+  const next = pathState.index + delta;
+  if (next < 0) return;
+  if (next >= pathState.nodes.length) {
+    exitPath();
+    return;
+  }
+  pathState.index = next;
+  openPanel(pathState.nodes[next]);
+  updatePathHUD();
+}
+
+document.getElementById("paths-btn").addEventListener("click", (e) => {
+  e.stopPropagation();
+  openPathsMenu();
+});
+document.getElementById("path-prev").addEventListener("click", () => stepPath(-1));
+document.getElementById("path-next").addEventListener("click", () => stepPath(1));
+document.getElementById("path-exit").addEventListener("click", exitPath);
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#paths-menu") && !e.target.closest("#paths-btn")) {
+    document.getElementById("paths-menu").classList.add("hidden");
+  }
+});
 
 function closePanel() {
   panel.classList.add("hidden");
