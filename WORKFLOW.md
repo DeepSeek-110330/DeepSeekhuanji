@@ -2,7 +2,7 @@
 
 > **给下一个 AI 会话看的操作手册。** 如果你刚接手这个项目，从头读一遍，然后按第一节启动环境、按第三节继续生成内容。
 >
-> 上次更新：2026-10-16 ｜ 数据 567 个知识点 ｜ 源码版本 v=19（已上线 GitHub Pages）
+> 上次更新：2026-10-16 ｜ 数据 641 个知识点 ｜ 源码版本 v=26（已上线 GitHub Pages）
 
 ---
 
@@ -15,7 +15,7 @@
 - 配图**全部由代码实时绘制**（12 种图表类型），不是图片
 - 数据在 `data/knowledge.json`（由 `data/batch*.json` 合并而来）
 
-**当前进度**：567 个知识点，30 条分支（全部填充），涵盖小学 → 研究生（含线性代数与矩阵微分、拓扑学、复分析、随机过程、黎曼几何、调和分析、PDE 进阶、数论与拓展）。**已上线**：<https://deepseek-110330.github.io/DeepSeekhuanji/>
+**当前进度**：641 个知识点，38 条分支（全部填充），涵盖小学 → 研究生（含线性代数与矩阵微分、拓扑学、复分析、随机过程、黎曼几何、调和分析、PDE 进阶、数论与拓展、抽象代数、动力系统与分形、特殊函数与数学物理、统计与数据科学、数学史与思想、图论、数理逻辑与集合论、最优化与运筹）。**已上线**：<https://deepseek-110330.github.io/DeepSeekhuanji/>
 
 ---
 
@@ -42,7 +42,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 ### 1.2 发布与更新（GitHub Pages，2026-10-16 起）
 
 - **线上地址**：https://deepseek-110330.github.io/DeepSeekhuanji/ ｜ **仓库**：https://github.com/DeepSeek-110330/DeepSeekhuanji
-- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ `python3 data/merge.py` → `python3 data/build_runtime.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建
+- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ `python3 data/merge.py` → `python3 data/build_runtime.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建（v=26 起：`python3 release.py -m "说明"` 一键完成）
 - **网络不稳时的办法**（国内直连 github.com 时好时坏；先测 `curl -s -o /dev/null -w "%{http_code}" https://github.com`）：
   ① 换手机热点（实测最有效）；② 本地自动换线代理 `python3 ~/.local/tmp/ghproxy.py`，并把 `https_proxy`、`http_proxy` 指向 `http://127.0.0.1:8433`
 - **push 被拒**（远程有新提交）：先 `git pull origin main --no-rebase --allow-unrelated-histories` 合并，再 push
@@ -59,6 +59,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 | **单批产出 5~7 个** | 子代理单批超过 ~8 个知识点质量会下降（实测有代理写崩过） |
 | **改完要上线** | 内容/代码改完后 `git add -A && git commit && git push`，Pages 约 40 秒后自动重建（见 §1.2） |
 | **改数据要生成分片** | 内容更新后依次跑 `python3 data/merge.py`、`python3 data/build_runtime.py`（首屏骨架 + 详情分片，v=19 起） |
+| **发布用 release.py** | `python3 release.py -m "说明"`：自动升 ?v=N → merge → build_runtime → 提交 → 推送（v=26 起） |
 
 ---
 
@@ -258,7 +259,7 @@ const angle = armAngle + s * sweep + radius * 0.006 + jitter;
 
 ## 附录 A：错误目录（★ 最有价值的积累 ★）
 
-这些是 22 轮独立复核累计抓到的 **181 处真实错误**的类型归纳（拓扑/复分析见 `HANDOVER.md` 9.7/9.8 节，随机过程/黎曼几何见 9.9/9.10 节，调和分析/PDE 进阶见 9.11/9.12 节，高中补充见 9.13 节，线性代数见 9.14 节，深水区见 9.15 节，矩阵微分见 9.16 节，数论见 9.17 节）。**生成内容时逐条对照，能避掉大部分坑。**
+这些是 27 轮独立复核累计抓到的 **282 处真实错误**的类型归纳（拓扑/复分析见 `HANDOVER.md` 9.7/9.8 节，随机过程/黎曼几何见 9.9/9.10 节，调和分析/PDE 进阶见 9.11/9.12 节，高中补充见 9.13 节，线性代数见 9.14 节，深水区见 9.15 节，矩阵微分见 9.16 节，数论见 9.17 节，全库审计与新增科目见 9.18 节）。**生成内容时逐条对照，能避掉大部分坑。**
 
 ### A1. 蕴含方向写反（最高频）
 
@@ -428,10 +429,13 @@ gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
 | ~~高中补充（30 个）~~ | ✅ 已完成（batch75~79，2026-10-15） |
 | ~~线性代数（49 个）~~ | ✅ 已完成（batch80~89，2026-10-15；含矩阵微分与深水区） |
 | ~~数论~~ | ✅ 已完成（18 个，`batch90~92`，2026-10-16；初等/经典/拓展各 6） |
+| ~~抽象代数 / 动力系统与分形~~ | ✅ 已完成（14 + 8，`batch93~97`） |
+| ~~特殊函数 / 统计与数据科学 / 数学史与思想~~ | ✅ 已完成（8 + 8 + 8，`batch98~103`） |
+| ~~图论 / 数理逻辑与集合论 / 最优化与运筹~~ | ✅ 已完成（9 + 10 + 9，`batch104~109`） |
 | 布局优化 | ✅ 已实施（2026-10-14，用户授权） |
 | ~~GitHub Pages 部署~~ | ✅ 已完成（2026-10-16，见 §1.2） |
 
-**说明**：既定方向均已完成；**30/30 分支全部填充，内容缺口清零**。
+**说明**：既定方向均已完成；**38/38 分支全部填充，内容缺口清零**。
 
 ---
 

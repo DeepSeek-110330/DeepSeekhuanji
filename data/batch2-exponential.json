@@ -187,10 +187,10 @@
       ],
       "fills": [
         {
-          "expr": "2^x - 8",
+          "expr": "2^x",
           "from": 3,
           "to": 4.6,
-          "base": 0,
+          "base": 8,
           "color": "#06d6a0"
         }
       ],

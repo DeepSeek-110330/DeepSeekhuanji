@@ -3,7 +3,7 @@
 > **一份自包含的项目快照说明。** 新会话只需要读这一个文件，就能完整恢复项目上下文，
 > 不必重新读取 6.0 MB 的 `knowledge.json`（这正是 token 成本的大头）。
 >
-> 文档版本：2026-10-16 ｜ 数据：567 个知识点 ｜ 源码：v=19 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
+> 文档版本：2026-10-16（深夜版）｜ 数据：641 个知识点 ｜ 源码：v=26 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
 
 ---
 
@@ -26,10 +26,10 @@
 
 | 不要读 | 原因 |
 |---|---|
-| `data/knowledge.json`（6.0 MB） | **本文件第 4 节已有全部 567 个知识点的 id + 名称 + 等级**，足够判断"有什么、缺什么"。只有需要精确定位某节点的完整内容时才用脚本定向提取单个节点，**不要整体读入** |
-| `data/batch*.json`（93 个，共约 6.2 MB） | 同上，除非要修改某个批次文件，否则用 `merge.py` 的校验结果代替人工阅读 |
+| `data/knowledge.json`（7.6 MB） | **本文件第 4 节已有全部 641 个知识点的 id + 名称 + 等级**，足够判断"有什么、缺什么"。只有需要精确定位某节点的完整内容时才用脚本定向提取单个节点，**不要整体读入** |
+| `data/batch*.json`（110 个，共约 7.4 MB） | 同上，除非要修改某个批次文件，否则用 `merge.py` 的校验结果代替人工阅读 |
 | `js/plot.js`（1802 行） | 除非要**新增图表类型**，否则本文件第 6 节已够用 |
-| `js/app.js`（1237 行） | 除非要改**布局或交互**，否则不必读；第 10 节已说明布局算法位置与问题 |
+| `js/app.js`（1492 行） | 除非要改**布局或交互**，否则不必读；第 10 节已说明布局算法位置与问题 |
 
 ### 需要精确定位某个知识点时的正确做法
 
@@ -52,12 +52,12 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 1. [一分钟了解](#1-一分钟了解)
 2. [启动与验证](#2-启动与验证)
 3. [文件清单](#3-文件清单)
-4. [★ 知识点全清单（567 个）](#4-知识点全清单567-个) ← 最有价值，避免重读 JSON
+4. [★ 知识点全清单（641 个）](#4-知识点全清单641-个) ← 最有价值，避免重读 JSON
 5. [数据格式](#5-数据格式)
 6. [绘图引擎参考](#6-绘图引擎参考)
 7. [内容生成工作流](#7-内容生成工作流)
 8. [硬规则](#8-硬规则)
-9. [错误目录（181 处历史教训）](#9-错误目录181-处历史教训)
+9. [错误目录（282 处历史教训）](#9-错误目录282-处历史教训)
 10. [遗留工作](#10-遗留工作)
 11. [常用脚本](#11-常用脚本)
 
@@ -75,7 +75,7 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 
 **覆盖范围**：小学 → 初中 → 高中（三角）→ 大学（微积分 / 多元微积分 / 复变 / ODE / PDE / 数值分析 / 实变 / 泛函 / 微分几何 / 概率统计 / 向量与张量）→ 研究生（拓扑学 / 复分析 / 随机过程 / 黎曼几何 / 调和分析 / PDE 进阶）
 
-**当前规模**：567 个知识点、2801 条公式、1155 道例题、413 张配图、30 条分支、约 51 万字中文正文（定义/性质/例题/摘要 + 公式说明的纯汉字数）。
+**当前规模**：641 个知识点、3171 条公式、1302 道例题、481 张配图、38 条分支、约 62 万字中文正文（定义/性质/例题/摘要 + 公式说明的纯汉字数）。
 
 **已上线**：https://deepseek-110330.github.io/DeepSeekhuanji/ —— GitHub Pages，仓库 `DeepSeek-110330/DeepSeekhuanji`（公开）。
 
@@ -108,7 +108,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 
 - **线上地址**：https://deepseek-110330.github.io/DeepSeekhuanji/ ；**仓库**：https://github.com/DeepSeek-110330/DeepSeekhuanji （公开）
 - **本地目录已是 git 仓库**（`main` 分支，远程 `origin` 已指向上述仓库）
-- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ 跑 `python3 data/merge.py` → `python3 data/build_runtime.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建，刷新线上地址核验
+- **更新流程**：改内容 →（若改 `js/` 先升 `?v=N`）→ 跑 `python3 data/merge.py` → `python3 data/build_runtime.py` → `git add -A && git commit -m "…" && git push` → 约 40 秒后 Pages 自动重建，刷新线上地址核验（更省事：`python3 release.py -m "说明"` 一条命令全包）
 - **凭证**：`gh` 在 `~/.local/bin/gh`，已登录 `DeepSeek-110330`（keyring）；git 凭据助手已配好（`gh auth git-credential`）
 - **网络注意**：国内直连 `github.com` 时好时坏（`api.github.com` 一般稳定）。推送前先测：`curl -s -o /dev/null -w "%{http_code}" https://github.com`。不通时的办法：① 换手机热点（实测最有效）；② 本地自动换线代理：`python3 ~/.local/tmp/ghproxy.py`，再把 `https_proxy`、`http_proxy` 设为 `http://127.0.0.1:8433`
 - **push 被拒**（远程有新提交，如在网页上建过文件）：`git pull origin main --no-rebase --allow-unrelated-histories`（必要时加 `-X ours`）合并后再 push
@@ -124,36 +124,38 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 ├── WORKFLOW.md             接手指南（工作流 + 错误目录 + 脚本）
 ├── AGENTS.md               项目协作指令（给 AI 会话）
 ├── HANDOVER.md             本文件（自包含总览）
-├── index.html              页面骨架（87 行）
+├── index.html              页面骨架（106 行）
 ├── katex-check.html        全库公式渲染扫描页（开发用）
 ├── plot-test.html          绘图引擎测试页（开发用）
-├── css/style.css           样式（795 行）
+├── css/style.css           样式（949 行）
 ├── vendor/                 Three.js 与 KaTeX 本地库（v=19 起，不依赖 CDN）
 ├── js/
-│   ├── app.js              主逻辑：场景/相机/交互/面板/搜索/布局（1303 行）
+│   ├── app.js              主逻辑：场景/相机/交互/面板/搜索/布局/路线（1492 行）
 │   ├── plot.js             绘图引擎：12 种数学图表（1802 行）
 │   └── stars.js            星体渲染：着色器星点 + 星云贴图（350 行）
 └── data/
     ├── knowledge.json      ★ 合并后的完整知识库（约 6.0 MB；本地/工具用）
-    ├── batch*.json         93 个批次源文件（每批 4~8 个知识点）
+    ├── batch*.json         110 个批次源文件（每批 4~8 个知识点）
     ├── merge.py            合并 + 校验脚本
     ├── build_runtime.py    生成首屏骨架与详情分片（merge 后运行）
-    ├── skeleton.json       首屏骨架（约 580 KB，运行时首屏加载）
+    ├── release.py          一键发布（升版本号→merge→build→提交→推送）
+    ├── skeleton.json       首屏骨架（约 762 KB，运行时首屏加载）
+    ├── paths.json          学习路线（6 条精选路线，导览功能）
     ├── parts/              详情分片 ×30（按需加载）
     ├── SCHEMA.md           数据格式与绘图规范（生成前必读）
     ├── IDLIST.txt          当前所有合法 id 清单（链接校验用）
     └── merge_backup/       （如存在）合并前的备份
 ```
 
-**源码合计 4,337 行**：app.js 1303 + plot.js 1802 + stars.js 350 + css 795 + html 87
+**源码合计 4,699 行**：app.js 1492 + plot.js 1802 + stars.js 350 + css 949 + html 106
 
 ---
 
-## 4. ★ 知识点全清单（567 个）
+## 4. ★ 知识点全清单（641 个）
 
 > **这一节是新会话恢复上下文的关键。** 有了它就不必读 `knowledge.json`（6.0 MB → 本节约 38 KB，省 99%）。
 
-**总计 567 个知识点，分布在 30 条分支上（30 条全部有内容）。**
+**总计 641 个知识点，分布在 38 条分支上（38 条全部有内容）。**
 
 > 格式：`id` 中文名（L 等级）。等级 1~5，越大越高级、光点越大、离银心越远。
 
@@ -845,7 +847,138 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 - `quadratic-residues` 二次剩余与勒让德符号（L5）
 - `rsa-cryptography` 数论与密码学：RSA（L4）
 
-> **数论批次（2026-10-16）**：`batch90~92` 共新增 18 个知识点（初等 6 / 经典 6 / 拓展 6）。3 组独立复核共抓到 10 处错误（见 9.17），已全部修正。**至此 30 条分支全部填充完毕。**
+> **数论批次（2026-10-16）**：`batch90~92` 共新增 18 个知识点（初等 6 / 经典 6 / 拓展 6）。3 组独立复核共抓到 10 处错误（见 9.17），已全部修正。**当时 30 条分支全部填充完毕（此后又新增 8 条，见 4.33~4.40）。**
+
+### 4.33 抽象代数 `abstract-algebra` — Abstract Algebra（14 个）
+
+
+- `field-extension-algebraic` 域扩张与代数元（L5）
+- `finite-fields` 有限域（L5）
+- `galois-theory-intro` 伽罗瓦理论初步：群与域的对应（L5）
+- `group-actions-orbit-stabilizer` 群作用与轨道-稳定子定理（L5）
+- `group-definition-examples` 群的定义与例子（L5）
+- `group-homomorphism-quotient` 群同态与商群（L5）
+- `integral-domain-ufd` 整环与唯一分解环（L5）
+- `lagrange-theorem` 拉格朗日定理（L5）
+- `modules-intro` 模初步：环上的「线性空间」（L5）
+- `polynomial-ring-irreducibility` 多项式环与不可约性（L5）
+- `ring-ideal` 环与理想（L5）
+- `solvable-groups-radicals` 可解群与五次方程的不可解性（L5）
+- `subgroup-coset` 子群与陪集（L5）
+- `symmetric-alternating-groups` 对称群与交错群（L5）
+
+> **抽象代数批次（2026-10-16）**：`batch93~95` 共新增 14 个知识点（群论 6 / 环与模 4 / 域与伽罗瓦 4）。3 组独立复核共抓到 8 处错误（见 9.18），已全部修正。
+
+
+### 4.34 动力系统与分形 `dynamical-systems` — Dynamical Systems & Fractals（8 个）
+
+
+- `bifurcation-period-doubling` 倍周期分岔与费根鲍姆常数（L5）
+- `discrete-maps-cobweb` 离散映射与蛛网图（L4）
+- `fractal-dimension` 分形与相似维数（L4）
+- `iterated-function-systems` 迭代函数系与分形构造（L4）
+- `logistic-map-chaos` 逻辑斯蒂映射与混沌（L5）
+- `lorenz-system` 洛伦兹系统与蝴蝶效应（L5）
+- `lyapunov-exponent` 李雅普诺夫指数（L4）
+- `mandelbrot-julia` 曼德博集与朱利亚集（L5）
+
+> **动力系统与分形批次（2026-10-16）**：`batch96~97` 共新增 8 个知识点（离散混沌 4 / 洛伦兹与分形 4）。1 组独立复核抓到 8 处错误（见 9.18），已全部修正。
+
+
+### 4.35 特殊函数与数学物理 `special-functions` — Special Functions & Mathematical Physics（8 个）
+
+
+- `bessel-functions` 贝塞尔函数（L5）
+- `beta-function` 贝塔函数与欧拉积分（L4）
+- `elliptic-integrals` 椭圆积分（L5）
+- `error-function` 误差函数与正态积分（L4）
+- `legendre-polynomials` 勒让德多项式（L5）
+- `orthogonal-polynomials` 正交多项式族（Hermite·Laguerre·Chebyshev）（L4）
+- `spherical-harmonics` 球谐函数（L5）
+- `stirling-formula` 斯特林公式与渐近展开（L4）
+
+> **特殊函数与数学物理批次（2026-10-16）**：`batch98~99` 共新增 8 个知识点（积分与渐近 4 / 正交多项式 4）。1 组独立复核抓到 5 处错误（含英文镜像，见 9.18），已全部修正。
+
+
+### 4.36 统计与数据科学 `statistics` — Statistics & Data Science（8 个）
+
+
+- `bayesian-inference` 贝叶斯统计推断（L5）
+- `bootstrap-resampling` 自助法与重采样（L4）
+- `em-algorithm` EM 算法（L5）
+- `experimental-design-causality` 实验设计与因果推断初步（L4）
+- `fisher-information` 充分统计量与 Fisher 信息（L5）
+- `monte-carlo-methods` 蒙特卡洛方法与 MCMC 初步（L5）
+- `principal-component-analysis` 主成分分析（L5）
+- `time-series-basics` 时间序列初步（L5）
+
+> **统计与数据科学批次（2026-10-16）**：`batch100~101` 共新增 8 个知识点（推断与计算 4 / 重采样与因果 4）。1 组独立复核抓到 2 处错误（见 9.18），已全部修正。
+
+
+### 4.37 数学史与思想 `math-history` — History & Ideas of Mathematics（8 个）
+
+
+- `birth-of-probability` 概率论的诞生：从赌局到公理（L4）
+- `brouwer-hilbert-controversy` 数学基础之争：逻辑主义·直觉主义·形式主义（L5）
+- `cantor-infinity` 康托与无穷：不可数的世界（L4）
+- `cubic-quartic-history` 三次方程与四次方程求解史（L4）
+- `group-theory-origins` 群论的起源：从拉格朗日到伽罗瓦（L5）
+- `hilbert-program-godel` 希尔伯特纲领与哥德尔不完备性（L5）
+- `non-euclidean-geometry` 非欧几何的诞生（L4）
+- `rigorization-of-analysis` 分析学的严格化：从直觉到 ε–δ（L4）
+
+> **数学史与思想批次（2026-10-16）**：`batch102~103` 共新增 8 个知识点（方程与非欧 4 / 群论与基础危机 4）。1 组独立复核抓到 2 处错误（另 2 处史实精度升级，见 9.18），已全部修正。
+
+
+### 4.38 图论 `graph-theory` — Graph Theory（9 个）
+
+
+- `bipartite-matching` 二部图与匹配（L4）
+- `euler-hamilton` 欧拉回路与哈密顿回路（L4）
+- `graph-basics` 图的基本概念（L3）
+- `graph-coloring` 图的染色（L4）
+- `network-flow` 网络流：最大流最小割（L4）
+- `planar-euler-formula` 平面图与欧拉公式（L4）
+- `ramsey-theory` 拉姆齐定理初步（L5）
+- `trees-spanning` 树与生成树（L3）
+- `turan-extremal-graph-theory` 极值图论与 Turán 定理（L5）
+
+> **图论批次（2026-10-16）**：`batch104~105` 共新增 9 个知识点（基础 5 / 染色·拉姆齐·网络流·Turán 4）。1 组独立复核抓到 3 处错误（见 9.18），已全部修正。
+
+
+### 4.39 数理逻辑与集合论 `mathematical-logic` — Mathematical Logic & Set Theory（10 个）
+
+
+- `axiom-of-choice` 选择公理与等价形式（L5）
+- `cardinal-arithmetic` 基数算术（L5）
+- `compactness-theorem` 紧致性定理（L5）
+- `computability-turing` 可计算性与图灵机（L5）
+- `formal-proof-systems` 形式系统与形式证明（L4）
+- `ordinals-well-ordering` 序数与良序（L5）
+- `predicate-logic` 谓词逻辑与量词（L4）
+- `propositional-logic` 命题逻辑与真值表（L3）
+- `soundness-completeness` 可靠性与完备性（L5）
+- `zfc-axioms` 集合论公理（ZFC 初步）（L4）
+
+> **数理逻辑与集合论批次（2026-10-16）**：`batch106~107` 共新增 10 个知识点（命题与一阶逻辑 5 / 集合论与可计算性 5）。1 组独立复核抓到 2 处错误（另 2 处补严，见 9.18），已全部修正。
+
+
+### 4.40 最优化与运筹 `optimization-or` — Optimization & Operations Research（9 个）
+
+
+- `convex-optimization` 凸优化问题（L5）
+- `convex-sets-functions` 凸集与凸函数（L4）
+- `dynamic-programming` 动态规划（L4）
+- `game-theory-nash` 博弈论与纳什均衡（L5）
+- `gradient-descent-sgd` 梯度下降与随机梯度下降（L4）
+- `integer-programming` 整数规划初步（L5）
+- `kkt-conditions` KKT 条件（L5）
+- `linear-programming` 线性规划与单纯形法（L4）
+- `lp-duality` 线性规划对偶理论（L5）
+
+> **最优化与运筹批次（2026-10-16）**：`batch108~109` 共新增 9 个知识点（凸与线性规划 5 / 算法与博弈 4）。1 组独立复核抓到 2 处错误（见 9.18），已全部修正。
+
+
 
 ## 5. 数据格式
 
@@ -982,7 +1115,7 @@ cd data && python3 merge.py
 只报确认的真实错误；没有就输出 []。不报格式问题，不复述正确内容。
 ```
 
-**这不是走过场**：22 轮累计抓到 **181 处真实错误**，且都是
+**这不是走过场**：27 轮累计抓到 **282 处真实错误**，且都是
 **数值验算抓不到**的类型（定理条件漏写、蕴含方向写反、符号约定不一致）。
 
 ### 步骤 7：修正 → 重新合并 → 复检
@@ -1004,7 +1137,7 @@ cd data && python3 merge.py
 
 | 规则 | 说明 |
 |---|---|
-| **改 JS 必升版本号** | 改 `js/` 下任何文件后，把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1（当前 **v=19**）。否则浏览器吃旧缓存，你会以为改动没生效 |
+| **改 JS 必升版本号** | 改 `js/` 下任何文件后，把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1（当前 **v=26**）。否则浏览器吃旧缓存，你会以为改动没生效 |
 | **改数据不用升版本号** | `knowledge.json` 用 `fetch(..., {cache:"no-cache"})` 加载，每次校验，刷新即生效 |
 | **加完必跑合并** | `python3 data/merge.py` |
 | **生成前先更新 IDLIST** | 否则链接校验失败 |
@@ -1012,11 +1145,12 @@ cd data && python3 merge.py
 | **单批 5~7 个** | 超出质量下降 |
 | **不擅自改布局** | 用户明确说过不要移动已有知识点（可提议，先问） |
 | **改完要上线** | 内容/代码改完后 `git add -A && git commit -m "…" && git push`，GitHub Pages 约 40 秒后自动重建生效（见 §2.2） |
+| **一键发布** | `python3 release.py -m "说明"`：自动升 ?v=N → merge → build_runtime → 提交 → 推送（v=26 起） |
 | **改数据要生成分片** | 内容更新后依次跑 `python3 data/merge.py` → `python3 data/build_runtime.py`（生成首屏骨架与详情分片） |
 
 ---
 
-## 9. 错误目录（181 处历史教训）
+## 9. 错误目录（282 处历史教训）
 
 > 生成内容时逐条对照，能避掉大部分坑。
 
@@ -1102,7 +1236,7 @@ cd data && python3 merge.py
 | 正则替换 LaTeX 报 `bad escape \m` | 用字面替换，或 `re.escape()`；替换串用 `lambda m: new` |
 | Python 字符串含 `'` | 用双引号包 |
 | 参数曲面用 u,v 但求值器只认 x,y | 用 `buildEvaluator(expr, params, ["u","v"])` |
-| 浏览器吃旧缓存 | 改 JS 必升 `?v=N`（当前 v=19） |
+| 浏览器吃旧缓存 | 改 JS 必升 `?v=N`（当前 v=26） |
 | 标签页后台导致检查超时 | 先 focus 保持可见，或抽样检查 |
 | `\,^{\circ}` 被 KaTeX 判错 | 空格类命令（`\,` `\;` `\:` `\!` `\quad`）**不能直接加角标**：`\,^{\circ}` 在页面上渲染成红色错误，必须写 `\,{}^{\circ}`（已在旧内容里抓到 5 处） |
 
@@ -1274,6 +1408,41 @@ cd data && python3 merge.py
 
 > 分布：二次剩余 4、连分数 2、代数数论 2、素数 1、中国剩余定理 1，共 **10 处**——全部为「前提漏写 / 概念误称」类，数值验算抓不到，再次印证独立复核的必要性。
 
+### 9.18 全库审计与新增科目精选坑（2026-10-16 深夜）
+
+> **全库审计**（11 组独立复核扫旧节点）抓到 59 处，**三轮新科目**（74 个新节点 + 配图轮）复核抓到 32+10 处，均已修正。以下为最具代表性的坑（完整清单见各轮复核记录）。
+
+| 坑 | 正确写法 |
+|---|---|
+| 雅可比换元积分区域记号 $\iint_D$ | 换元后被积式活在参数平面，应写 $\iint_{D'}$（与节点自身记号、积分限一致） |
+| 「0 在最左边」 | 只在自然数范围内成立；数轴 0 左侧还有负数 |
+| 四舍五入「保留到哪一位、看到哪一位」 | 是「保留到哪一位，就**看这一位的下一位**」 |
+| 「认识亿以内的数」却又含亿级 | 改为「认识大数」 |
+| 「有最大最小值 ⇒ 值域 $[m,M]$」 | 需**连续**（反例：阶梯函数）；零点存在定理同样需连续 |
+| 「两直线平行 ⇔ 斜率相等」 | 需 **$b_1\ne b_2$**（否则重合） |
+| 「$e^x$ 是唯一导数为自身的函数」 | 一般解 $y=Ce^x$；在 $a^x$ 中唯 $a=e$ |
+| $E(XY)=E(X)E(Y)$「requires independence」（英文） | 充要条件是不相关 $\operatorname{Cov}=0$；独立只是充分条件 |
+| Gronwall 引理「$\alpha\ge0$ 不可省」 | 只有 $\beta\ge0$ 不可省；结论对任意实数 $\alpha$ 成立 |
+| 测地线「等价于速率为常数」 | 方向反了：测地线 ⇒ 速率常数；反之不成立（球面纬圆） |
+| 极小曲面 $H\equiv0$「面积局部最小」 | 是驻点；最小需二阶变分非负（悬链面反例） |
+| 单位球弱紧归因 Eberlein–Šmulian | 弱紧是 Kakutani；E–Š 负责「弱紧 ⇔ 弱序列紧」 |
+| $\mathbb{R}^n$ 紧⇒有界用覆盖 $\{(-m,m)\}$ | $n\ge2$ 时不是开覆盖；用 $B(0,m)$ |
+| $\mathbb{Z}$ 在 $\mathbb{R}$ 中有无穷多聚点 | 反了：$\mathbb{Z}$ 无聚点；「无处稠密 ≠ 无聚点」应配 Cantor 集 |
+| 覆盖空间 Galois 对应漏「半局部单连通」 | 子群→连通覆叠方向需要它；覆叠→子群方向恒有定义 |
+| 7 顶点克莱因瓶 | 不存在：克莱因瓶剖分至少需 8 顶点（Franklin 定理） |
+| $V_4\cong\mathbb{Z}_2$ | $V_4\cong\mathbb{Z}_2\times\mathbb{Z}_2$（无 4 阶元）；$S_4$ 可解链的商别写错 |
+| Eisenstein 验算漏「$p\mid a_0$」 | 常数项必须被 $p$ 整除但不被 $p^2$ 整除；$x^4+1$ 需换元 $(x+1)^4+1$ |
+| 「导出列在主群停住」 | 应为「在 $A_n$ 停住」 |
+| 倍周期 $\sigma_{12}$ 序号错位 | $\sigma_{12}\approx3.569945604$（$3.569945657$ 是 $\sigma_{13}$） |
+| 「瑞利–贝努埃对流」 | 瑞利–**贝纳德**对流（Bénard） |
+| 「$|z|>2$ 必逃逸」缺前提 | 对 $|c|\le2$ 成立；$c=-2.5$ 有界反例 |
+| $c=-1$ 叫「兔形」朱利亚集 | $c=-1$ 是 basilica；兔形对应 $c\approx-0.1226+0.7449i$ |
+| 欧拉公式等号刻画漏「连通」 | 反例：三角形+孤立点；「每面≥3 边」推导同样需连通 |
+| Ore 定理漏 $n\ge3$ | $n=2$ 时条件空洞成立却无哈密顿回路 |
+| 「直接替换得 $\exists y(y>y)$（恒假）」 | 是偶然式：论域与解释可使其为真 |
+| 凸优化配图用**正**梯度却称「指向极小点」 | 应画 $-\nabla f$（v=26 起站内约定：负梯度配「下降/指向极小」） |
+| 配图 fills「两曲线之间」 | 引擎语义是「曲线 ↔ 水平线 base」；应传**上方曲线+base=下方**（SCHEMA 已改准） |
+
 ## 10. 遗留工作
 
 ### 内容缺口（已清空）
@@ -1282,7 +1451,11 @@ cd data && python3 merge.py
 > 随机过程（24，`batch61~64`）、黎曼几何（20，`batch65~68`）、
 > 调和分析（18，`batch69~71`）、PDE 进阶（14，`batch72~74`）——均于 2026-10-14 完成；
 > 高中补充（30，`batch75~79`）、线性代数（49，`batch80~89`）—— 2026-10-15 完成；
-> **数论与拓展（18，`batch90~92`）—— 2026-10-16 完成。至此全部 30 条分支填充完毕。**
+> 数论与拓展（18，`batch90~92`）—— 2026-10-16 完成；
+> **抽象代数（14，`batch93~95`）、动力系统与分形（8，`batch96~97`）、特殊函数与数学物理（8，`batch98~99`）、
+> 统计与数据科学（8，`batch100~101`）、数学史与思想（8，`batch102~103`）、图论（9，`batch104~105`）、
+> 数理逻辑与集合论（10，`batch106~107`）、最优化与运筹（9，`batch108~109`）—— 均于 2026-10-16 完成。
+> 至此全部 38 条分支填充完毕。**
 
 高中补充实际落地 30 个：集合与逻辑（新分支 3）、不等式（2）、数列（5）、解析几何（6）、
 立体几何（新分支 7）、计数原理（新分支 5）、复数的三角表示（1）、函数模型（1）。
@@ -1295,7 +1468,7 @@ cd data && python3 merge.py
 ### 空分支
 
 - ~~`linear` 线性代数~~ —— 已于 2026-10-15 完成（49 个，`batch80~89`，见 4.31）
-- ~~`number` 数论与拓展~~ —— **已于 2026-10-16 完成（18 个，`batch90~92`，见 4.32）**；至此 **30/30 分支全部填充，内容缺口清零** ✅
+- ~~`number` 数论与拓展~~ —— **已于 2026-10-16 完成（18 个，`batch90~92`，见 4.32）**；至此 **38/38 分支全部填充，内容缺口清零** ✅
 
 ### 布局优化（**已实施**，2026-10-14）
 
@@ -1312,11 +1485,13 @@ const radius0    = 26 + (1 - t) * 36;                // 点少 ⇒ 内端外移
 const radialSpan = 42 + Math.min(74, n * 2.0);       // 44~116
 ```
 
-角度抖动从 ±0.16 收到 ±0.10。同时**改 `js/` 就要升 `?v=N`**（现为 **v=19**）。
+角度抖动从 ±0.16 收到 ±0.10。同时**改 `js/` 就要升 `?v=N`**（现为 **v=26**）。
 
 **注意**：这会重新排布所有点（内容与分支归属不变）。用户已于 2026-10-14 明确授权。
 
 **2026-10-15 追加交互优化（v=9→v=10）**：分支面板限高（约 10 项）与滚动、分支列表按难易排序（仅列表；旋臂分配顺序未动）、相机阻尼 0.055→0.15、缩放锚定鼠标（zoomToCursor）。
+
+**2026-10-16 深夜批次（v=19→v=26）**：首屏骨架+详情分片+本地 vendor（v=19）；新增八个科目分支——抽象代数、动力系统与分形（v=20）、特殊函数与数学物理、统计与数据科学、数学史与思想（v=21）、图论、数理逻辑与集合论、最优化与运筹（v=22），共 74 个新节点；学习路线导览、深链接分享、搜索脉冲、旋臂名称标签（v=23~25）；移动端适配（v=26）；配图补全 45 张（覆盖 68%→75%）；`release.py` 一键发布。
 
 **2026-10-16 交互美化与公网上线（v=11→v=18）**：面板等级徽章（L# ★）、「← 返回上一个」、例题折叠「看解答」、公式一键复制 LaTeX、光点呼吸明暗、悬停高亮链接路径、银河入场渐显绽放、搜索键盘导航（↑↓/Enter/Esc）、「随机漫游」按钮、分支旋臂脊线；星空加密至 19,700 背景星 + 700 微粒。**暗区公式雾气（v=16~17）试做后于 v=18 整体撤除**（用户判定不符预期；星星密度保留）。公网部署见 §2.2。
 
@@ -1430,6 +1605,16 @@ gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
 调试钩子：`window.__galaxy = { renderer, scene, camera, controls, starLayer, bgLayers, getFly }`
 
 ---
+
+### 11.5 一键发布
+
+```bash
+python3 release.py -m "提交说明"        # 全流程（升版本号 + merge + build + 提交 + 推送）
+python3 release.py -m "…" --no-push    # 只提交不推送
+python3 release.py -m "…" --no-bump    # 不升版本号
+```
+
+自动检测 js/css 改动决定是否升 `?v=N`；merge 报错会自动中止。
 
 ## 12. 与用户协作的注意事项
 

@@ -253,8 +253,7 @@
           "intercept": 0.35355339,
           "from": 0,
           "to": 2500,
-          "color": "#ffd166",
-          "label": "1/(2√2) ≈ 0.35355"
+          "color": "#ffd166"
         }
       ],
       "marks": [
