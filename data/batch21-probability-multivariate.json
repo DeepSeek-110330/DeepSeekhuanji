@@ -491,7 +491,36 @@
       "normal-distribution",
       "discrete-distributions",
       "central-limit-theorem"
-    ]
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "exp(x^2/2)",
+          "color": "#4cc9f0",
+          "label": "N(0,1)：exp(t²/2)"
+        },
+        {
+          "expr": "1/(1-x)",
+          "color": "#ff6b9d",
+          "label": "Exp(1)：1/(1−t)"
+        },
+        {
+          "expr": "exp(E^x-1)",
+          "color": "#06d6a0",
+          "label": "P(1)：exp(eᵗ−1)"
+        }
+      ],
+      "xRange": [
+        -1.5,
+        0.8
+      ],
+      "yRange": [
+        0,
+        5.4
+      ],
+      "title": "矩母函数：N(0,1)、Exp(1)、P(1) 都过 M(0) = 1，指数分布在 t → 1⁻ 处发散"
+    }
   },
   {
     "id": "law-of-large-numbers",

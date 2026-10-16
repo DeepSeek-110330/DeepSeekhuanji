@@ -60,16 +60,41 @@
         "solution": "先验精度为 $1/\\tau^{2}=1$，单次观测精度为 $1/\\sigma^{2}=1/4=0.25$，9 次观测贡献 $2.25$，故后验精度 $=1+2.25=3.25$，后验方差 $=1/3.25\\approx0.3077$，后验标准差 $\\approx0.5547$。后验均值是两份信息的精度加权平均：\n$$\\frac{0\\times1+9\\times1.2/4}{3.25}=\\frac{2.7}{3.25}\\approx0.8308,$$\n数据把估计从先验中心 0 拉到了约 0.83。于是后验 $\\approx N(0.8308,\\ 0.3077)$，95% 等尾可信区间 $\\approx0.8308\\pm1.96\\times0.5547=[-0.2564,\\ 1.9180]$（python3 复算一致）。\n若把先验换成整个实轴上的平坦（无信息）先验，后验变为 $N(\\bar x,\\ \\sigma^{2}/n)=N(1.2,\\ 0.4444)$，数值上与频率派的 z 区间一致——但解释不同：贝叶斯给出的是 $\\theta$ 的后验概率陈述，频率派给出的是随机区间的长期覆盖频率。"
       }
     ],
-    "tags": ["贝叶斯推断", "后验分布", "共轭先验", "可信区间"],
-    "links": ["conditional-probability-bayes", "point-estimation", "interval-estimation", "fisher-information", "monte-carlo-methods"],
+    "tags": [
+      "贝叶斯推断",
+      "后验分布",
+      "共轭先验",
+      "可信区间"
+    ],
+    "links": [
+      "conditional-probability-bayes",
+      "point-estimation",
+      "interval-estimation",
+      "fisher-information",
+      "monte-carlo-methods"
+    ],
     "plot": {
       "type": "function",
       "functions": [
-        { "expr": "1", "color": "#4cc9f0", "label": "先验 Beta(1,1)：密度恒为 1" },
-        { "expr": "2310*x^4*(1-x)^6", "color": "#ff6b9d", "label": "后验 Beta(5,7)" }
+        {
+          "expr": "1",
+          "color": "#4cc9f0",
+          "label": "先验 Beta(1,1)：密度恒为 1"
+        },
+        {
+          "expr": "2310*x^4*(1-x)^6",
+          "color": "#ff6b9d",
+          "label": "后验 Beta(5,7)"
+        }
       ],
-      "xRange": [0, 1],
-      "yRange": [0, 3],
+      "xRange": [
+        0,
+        1
+      ],
+      "yRange": [
+        0,
+        3
+      ],
       "title": "10 次抛掷得 4 次正面：Beta(1,1) 先验与 Beta(5,7) 后验"
     }
   },
@@ -134,15 +159,36 @@
         "solution": "密度 $f(x;\\theta)=1/\\theta$（$0<x<\\theta$），在支撑内部 $\\ell(\\theta)=-\\ln\\theta$，于是 $\\partial_\\theta\\ell=-1/\\theta$、$\\partial_\\theta^{2}\\ell=1/\\theta^{2}$，形式上 $-E[\\partial_\\theta^{2}\\ell]=-1/\\theta^{2}<0$，信息为负数显然荒谬。根源是：**支撑 $(0,\\theta)$ 依赖参数**，不能把求导移到积分号内（边界项不可忽略），正则条件失效；此时得分函数的均值也不为零（$E[-1/\\theta]=-1/\\theta$），两个信息公式既不相等，也不再满足「得分均值为 0」。既然推导 Cramér–Rao 下界的前提不成立，$1/(nI)$ 自然不能作为方差下界。\n真实情况是估计可以更快：$X_{(5)}$ 的期望为 $5\\theta/6$，故 $\\hat\\theta=\\frac{6}{5}X_{(5)}$ 无偏；而 $X_{(5)}$ 的方差为 $\\frac{n\\theta^{2}}{(n+1)^{2}(n+2)}=\\frac{5\\theta^{2}}{252}$，于是\n$$\\operatorname{Var}(\\hat\\theta)=\\left(\\frac{6}{5}\\right)^{2}\\cdot\\frac{5\\theta^{2}}{252}=\\frac{\\theta^{2}}{35}\\approx0.0286\\,\\theta^{2},$$\n衰减速率是 $1/n^{2}$，比 $1/n$ 更快——这说明使用 Cramér–Rao 下界前必须逐条核对条件，非正则族中它不适用，也不能把算出的负数当作 Fisher 信息。"
       }
     ],
-    "tags": ["充分统计量", "Fisher 信息", "Cramér–Rao 下界", "极大似然"],
-    "links": ["point-estimation", "bayesian-inference", "interval-estimation", "sampling-distributions", "central-limit-theorem"],
+    "tags": [
+      "充分统计量",
+      "Fisher 信息",
+      "Cramér–Rao 下界",
+      "极大似然"
+    ],
+    "links": [
+      "point-estimation",
+      "bayesian-inference",
+      "interval-estimation",
+      "sampling-distributions",
+      "central-limit-theorem"
+    ],
     "plot": {
       "type": "function",
       "functions": [
-        { "expr": "1/(x*(1-x))", "color": "#4cc9f0", "label": "I(p) = 1/(p(1-p))" }
+        {
+          "expr": "1/(x*(1-x))",
+          "color": "#4cc9f0",
+          "label": "I(p) = 1/(p(1-p))"
+        }
       ],
-      "xRange": [0.05, 0.95],
-      "yRange": [0, 25],
+      "xRange": [
+        0.05,
+        0.95
+      ],
+      "yRange": [
+        0,
+        25
+      ],
       "title": "伯努利分布的 Fisher 信息：p 接近 0 或 1 时信息急剧增大"
     }
   },
@@ -203,16 +249,41 @@
         "solution": "分量密度取标准正态 $\\phi(z)=(2\\pi)^{-1/2}e^{-z^{2}/2}$，责任度 $r_{ik}\\propto\\pi_k\\phi(x_i-\\mu_k)$，归一化后得：\n$x=-1$：$r_{11}=0.9890$，$r_{12}=0.0110$；\n$x=0$：$r_{21}=0.8176$，$r_{22}=0.1824$；\n$x=4$：$r_{31}=0.0000275$，$r_{32}=0.9999725$。\n（以 $x=0$ 为例：$0.5\\phi(1)=0.1210$，$0.5\\phi(-2)=0.0270$，故 $r_{21}=0.1210/(0.1210+0.0270)=0.8176$。）\nM 步：$\\mu_k^{\\text{new}}=\\frac{\\sum_i r_{ik}x_i}{\\sum_i r_{ik}}$，$\\pi_k^{\\text{new}}=\\frac{1}{3}\\sum_i r_{ik}$。分量 1：分子 $=0.9890\\times(-1)+0.8176\\times0+0.0000275\\times4=-0.98890$，分母 $=1.80661$，故 $\\mu_1\\approx-0.5474$；分量 2：分子 $=0.0110\\times(-1)+0.1824\\times0+0.99997\\times4=3.98890$，分母 $=1.19339$，故 $\\mu_2\\approx3.3425$。混合权 $\\pi_1=1.80661/3\\approx0.6022$、$\\pi_2\\approx0.3978$。（可核验：两个分子的和 $-0.98890+3.98890=3=(-1)+0+4$，两个分母的和也为 3。）\n把责任度看作「软分类」：点 0 主要归分量 1，点 4 几乎完全归分量 2，所以两个均值分别向各自负责的点移动——这是 EM 与硬性分配聚类的关键差别。\n单调性验证：观测对数似然 $\\ell(\\theta)=\\sum_i\\ln[\\pi_1\\phi(x_i-\\mu_1)+\\pi_2\\phi(x_i-\\mu_2)]$。迭代前各点取值为 $\\ln0.2017=-1.6010$、$\\ln0.1480=-1.9107$、$\\ln0.0270=-3.6121$，合计 $\\ell(\\theta_0)=-7.1238$；迭代后各点为 $-1.5285$、$-1.5730$、$-2.0568$，合计 $\\ell(\\theta_1)=-5.1583>-7.1238$，确实上升（python3 复算一致）。再迭代一步得 $\\mu\\approx(-0.5006,\\ 3.9883)$、$\\pi\\approx(0.6657,\\ 0.3343)$，$\\ell\\approx-4.9162$，继续上升。注意这只说明似然值不降，并不说明收敛到了全局最优。"
       }
     ],
-    "tags": ["EM 算法", "隐变量", "高斯混合", "极大似然"],
-    "links": ["point-estimation", "bayesian-inference", "fisher-information", "monte-carlo-methods", "least-squares-fitting"],
+    "tags": [
+      "EM 算法",
+      "隐变量",
+      "高斯混合",
+      "极大似然"
+    ],
+    "links": [
+      "point-estimation",
+      "bayesian-inference",
+      "fisher-information",
+      "monte-carlo-methods",
+      "least-squares-fitting"
+    ],
     "plot": {
       "type": "function",
       "functions": [
-        { "expr": "0.5*(1/sqrt(2*PI))*exp(-((x+1)^2)/2)+0.5*(1/sqrt(2*PI))*exp(-((x-2)^2)/2)", "color": "#4cc9f0", "label": "迭代前密度（μ = −1, 2）" },
-        { "expr": "0.6022*(1/sqrt(2*PI))*exp(-((x+0.5474)^2)/2)+0.3978*(1/sqrt(2*PI))*exp(-((x-3.3425)^2)/2)", "color": "#ff6b9d", "label": "一轮 EM 后密度（μ ≈ −0.547, 3.343）" }
+        {
+          "expr": "0.5*(1/sqrt(2*PI))*exp(-((x+1)^2)/2)+0.5*(1/sqrt(2*PI))*exp(-((x-2)^2)/2)",
+          "color": "#4cc9f0",
+          "label": "迭代前密度（μ = −1, 2）"
+        },
+        {
+          "expr": "0.6022*(1/sqrt(2*PI))*exp(-((x+0.5474)^2)/2)+0.3978*(1/sqrt(2*PI))*exp(-((x-3.3425)^2)/2)",
+          "color": "#ff6b9d",
+          "label": "一轮 EM 后密度（μ ≈ −0.547, 3.343）"
+        }
       ],
-      "xRange": [-4, 6],
-      "yRange": [0, 0.3],
+      "xRange": [
+        -4,
+        6
+      ],
+      "yRange": [
+        0,
+        0.3
+      ],
       "title": "两分量高斯混合：一次 EM 迭代前后的密度"
     }
   },
@@ -277,7 +348,202 @@
         "solution": "(1) 提议 $q$ 对称，故 $\\alpha(x,y)=\\min\\bigl(1,\\ \\pi(y)/\\pi(x)\\bigr)=\\min\\bigl(1,\\ e^{-(y^{2}-x^{2})/2}\\bigr)$，归一化常数 $\\sqrt{2\\pi}$ 在比值中约去。\n对 $y=1.2$：$(y^{2}-x^{2})/2=(1.44-0.25)/2=0.595$，$\\alpha=e^{-0.595}\\approx0.552$；\n对 $y=-0.3$：$(y^{2}-x^{2})/2=(0.09-0.25)/2=-0.08$，$\\alpha=\\min(1,\\ e^{0.08})=\\min(1,\\ 1.083)=1$。\n即向更可能的位置 $y=-0.3$ 移动必然接受，向更不可能的位置 $y=1.2$ 只以约 0.552 的概率接受。注意方向：接受概率的分子用候选点的目标密度。\n(2) 提议对称，$q=1/2$。$A\\to B$：接受率 $\\min(1,\\ \\pi(B)/\\pi(A))=\\min(1,\\ 0.7/0.3)=1$，故 $P(A\\to B)=0.5$；$B\\to A$：接受率 $\\min(1,\\ \\pi(A)/\\pi(B))=0.3/0.7=3/7$，故 $P(B\\to A)=0.5\\times3/7=3/14$。细致平衡：$\\pi(A)P(A\\to B)=0.3\\times0.5=0.15$，$\\pi(B)P(B\\to A)=0.7\\times3/14=0.15$，两边相等。这说明若链已达到 $\\pi=(0.3,\\ 0.7)$，下一步的分布仍是 $\\pi$：目标分布是平稳分布。"
       }
     ],
-    "tags": ["蒙特卡洛", "重要性采样", "MCMC", "Metropolis–Hastings"],
-    "links": ["bayesian-inference", "law-of-large-numbers", "central-limit-theorem", "markov-chain", "stationary-distribution"]
+    "tags": [
+      "蒙特卡洛",
+      "重要性采样",
+      "MCMC",
+      "Metropolis–Hastings"
+    ],
+    "links": [
+      "bayesian-inference",
+      "law-of-large-numbers",
+      "central-limit-theorem",
+      "markov-chain",
+      "stationary-distribution"
+    ],
+    "plot": {
+      "type": "scatter",
+      "points": [
+        [
+          200,
+          3.3
+        ],
+        [
+          400,
+          3.17
+        ],
+        [
+          600,
+          3.1667
+        ],
+        [
+          800,
+          3.18
+        ],
+        [
+          1000,
+          3.192
+        ],
+        [
+          1200,
+          3.1633
+        ],
+        [
+          1400,
+          3.1629
+        ],
+        [
+          1600,
+          3.1525
+        ],
+        [
+          1800,
+          3.1422
+        ],
+        [
+          2000,
+          3.146
+        ],
+        [
+          2200,
+          3.1509
+        ],
+        [
+          2400,
+          3.1583
+        ],
+        [
+          2600,
+          3.1462
+        ],
+        [
+          2800,
+          3.1343
+        ],
+        [
+          3000,
+          3.144
+        ],
+        [
+          3200,
+          3.1475
+        ],
+        [
+          3400,
+          3.1576
+        ],
+        [
+          3600,
+          3.1567
+        ],
+        [
+          3800,
+          3.1516
+        ],
+        [
+          4000,
+          3.151
+        ],
+        [
+          4200,
+          3.1495
+        ],
+        [
+          4400,
+          3.1509
+        ],
+        [
+          4600,
+          3.1417
+        ],
+        [
+          4800,
+          3.1475
+        ],
+        [
+          5000,
+          3.1472
+        ],
+        [
+          5200,
+          3.1408
+        ],
+        [
+          5400,
+          3.14
+        ],
+        [
+          5600,
+          3.1429
+        ],
+        [
+          5800,
+          3.1407
+        ],
+        [
+          6000,
+          3.1307
+        ],
+        [
+          6200,
+          3.1355
+        ],
+        [
+          6400,
+          3.1369
+        ],
+        [
+          6600,
+          3.1382
+        ],
+        [
+          6800,
+          3.1376
+        ],
+        [
+          7000,
+          3.1423
+        ],
+        [
+          7200,
+          3.1411
+        ],
+        [
+          7400,
+          3.1362
+        ],
+        [
+          7600,
+          3.1363
+        ],
+        [
+          7800,
+          3.1323
+        ],
+        [
+          8000,
+          3.1345
+        ]
+      ],
+      "pointColor": "#06d6a0",
+      "pointSize": 3.2,
+      "lines": [
+        {
+          "slope": 0,
+          "intercept": 3.1416,
+          "color": "#ffd166",
+          "label": "π = 3.1416"
+        }
+      ],
+      "xRange": [
+        0,
+        8500
+      ],
+      "yRange": [
+        2.95,
+        3.35
+      ],
+      "title": "随机投点估计 π：样本量增大时 4×(圆内点数)/n 收敛到 π"
+    }
   }
 ]

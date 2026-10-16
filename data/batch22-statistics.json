@@ -585,7 +585,36 @@
       "normal-distribution",
       "regression-analysis",
       "continuous-distributions"
-    ]
+    ],
+    "plot": {
+      "type": "function",
+      "functions": [
+        {
+          "expr": "0.5*exp(-x/2)",
+          "color": "#4cc9f0",
+          "label": "k = 2"
+        },
+        {
+          "expr": "0.25*x*exp(-x/2)",
+          "color": "#06d6a0",
+          "label": "k = 4"
+        },
+        {
+          "expr": "x^3*exp(-x/2)/96",
+          "color": "#ff6b9d",
+          "label": "k = 8"
+        }
+      ],
+      "xRange": [
+        0,
+        18
+      ],
+      "yRange": [
+        0,
+        0.55
+      ],
+      "title": "χ² 分布密度：自由度 k = 2、4、8，k 越大峰值越靠右、曲线越平缓"
+    }
   },
   {
     "id": "regression-analysis",
