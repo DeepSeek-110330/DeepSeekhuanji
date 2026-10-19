@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=32";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=32";
+import { renderPlot } from "./plot.js?v=36";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=36";
 
 /* ============================================================
    1. 全局状态
@@ -650,19 +650,29 @@ function updateLinkColors() {
    7. 知识点星体
    ============================================================ */
 function createKnowledgeStars() {
-  const items = DATA.nodes.map((n) => ({
-    position: [n.position.x, n.position.y, n.position.z],
-    color: DATA.branches[n.branch].color,
-    size: 7 + n.level * 2.8,
-    spike: n.level >= 4 ? 0.95 : n.level === 3 ? 0.55 : n.level === 2 ? 0.22 : 0,
-  }));
+  const items = DATA.nodes.map((n, i) => {
+    const seed = (i * 0.6180339887498949) % 1;
+    const grade = n.level / 5;
+    const spikes = n.level >= 5 ? 1.0 : n.level === 4 ? 0.55 : n.level === 3 ? 0.2 : n.level === 2 ? 0.06 : 0;
+    return {
+      position: [n.position.x, n.position.y, n.position.z],
+      color: DATA.branches[n.branch].color,
+      size: (7 + n.level * 2.8) * (0.9 + 0.25 * seed),
+      spike: spikes,
+      grade,
+      seed,
+      rot: seed * Math.PI * 2,
+    };
+  });
 
   starLayer = new StarLayer(items, {
     opacity: 1,
-    twinkle: 0.22,
+    twinkle: REDUCE_MOTION ? 0 : 0.22,
     reveal: true,
     drift: REDUCE_MOTION ? 0 : 1.4,
     driftSpeed: 0.14,
+    rich: true,
+    flash: !REDUCE_MOTION,
   });
   dataIndexOf = new Map(DATA.nodes.map((n, i) => [n.id, i]));
   return starLayer.object;

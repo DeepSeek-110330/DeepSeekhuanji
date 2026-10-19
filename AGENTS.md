@@ -33,7 +33,7 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 
 ## 硬规则
 
-- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=32**），否则浏览器吃旧缓存，会误以为改动没生效
+- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=36**），否则浏览器吃旧缓存，会误以为改动没生效
 - 加知识点后**必须**跑 `python3 data/merge.py`（校验字段/冲突/分支/链接/图表类型，有错拒绝写入）
 - 内容更新后还要跑 `python3 data/build_runtime.py`（生成首屏骨架 `data/skeleton.json` 与详情分片 `data/parts/`，v=19 起）
 - 发布用 `python3 release.py -m "说明"`（一键：升版本号→merge→build→提交→推送，v=26 起）
@@ -60,7 +60,7 @@ cd 数学知识银河 && python3 -m http.server 8123
 
 **验证注意**：标签页不可见时浏览器暂停 `requestAnimationFrame`，逐节点检查会超时——先让标签页可见，或抽样检查。
 
-**知识共鸣（v=29 起；推导卡 v=30；知识点推导 v=32）**：左下「知识共鸣」按钮或 `R` 键进入，依次点两颗星；程序按链接图求最短知识链并给出桥点。相关代码在 `js/app.js` 的「7.5 知识共鸣」段，星体微动在 `js/stars.js` 的 `uDrift` uniform。结果卡的「为什么是这个结果？」推导来自 `data/resonance-notes.json`（可独立扩充，不参与 merge）；没有精选注记的组合只显示结构推导，不冒充定理级证明。
+**知识共鸣（v=29 起；推导卡 v=30；知识点推导 v=31 起）**：左下「知识共鸣」按钮或 `R` 键进入，依次点两颗星；程序按链接图求最短知识链并给出桥点。相关代码在 `js/app.js` 的「7.5 知识共鸣」段，星体微动在 `js/stars.js` 的 `uDrift` uniform。结果卡的「为什么是这个结果？」推导来自 `data/resonance-notes.json`（可独立扩充，不参与 merge）；没有精选注记的组合只显示结构推导，不冒充定理级证明。
 
 **知识点推导（v=31 起；v=32 扩到线性代数）**：详情面板的「推导 / Derivation」区来自 `data/derivations/batchDNN-*.json`，由 `merge.py` 按 id 附加，`build_runtime.py` 放进详情分片。每批 5~7 个、至少 3 步、中英等长；生成后必须独立复核。当前覆盖 273/641（D01~D43，微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28）；未覆盖节点不显示推导区，**不要用模板批量灌水**。
 

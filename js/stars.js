@@ -15,6 +15,9 @@ const STAR_VERTEX = /* glsl */ `
   attribute float aPhase;
   attribute float aHover;
   attribute float aAlpha;
+  attribute float aGrade;
+  attribute float aSeed;
+  attribute float aRot;
 
   uniform float uTime;
   uniform float uPixelRatio;
@@ -24,27 +27,43 @@ const STAR_VERTEX = /* glsl */ `
   uniform float uReveal;
   uniform float uDrift;
   uniform float uDriftSpeed;
+  uniform float uRich;
+  uniform float uFlash;
 
   varying vec3 vColor;
   varying float vSpike;
   varying float vIntensity;
+  varying float vGrade;
+  varying float vSeed;
+  varying float vRot;
+  varying float vHover;
 
   void main() {
     vColor = aColor;
     vSpike = aSpike;
+    vGrade = aGrade;
+    vSeed = aSeed;
+    vRot = aRot;
+    vHover = aHover;
 
-    // 闪烁：低频呼吸（亮度 + 轻微尺寸），避免整体同步闪烁
-    float breath = 0.5 + 0.5 * sin(uTime * 1.6 + aPhase);
-    float tw = mix(1.0, breath, uTwinkle);
-    vIntensity = aAlpha * uOpacity * tw;
+    // 双频呼吸：一个快频 + 一个更慢的频，避免所有星同步闪
+    float breath1 = 0.5 + 0.5 * sin(uTime * 1.05 + aPhase);
+    float breath2 = 0.5 + 0.5 * sin(uTime * 0.31 + aPhase * 2.7 + 1.3);
+    float tw = mix(1.0, 0.74 + 0.18 * breath1 + 0.08 * breath2, uTwinkle);
+
+    // 极少数亮星的偶发微闪（只对知识点层开启）
+    float flash = uFlash * uRich * 0.16 * smoothstep(0.965, 1.0, sin(uTime * 0.21 + aPhase * 9.0));
+
+    // 幂律亮度：暗星更暗，亮星更突出
+    float bright = mix(1.0, 0.80 + 0.28 * aSeed, uRich);
+    vIntensity = aAlpha * uOpacity * (tw + flash) * bright;
 
     // 入场绽放：从中心向外逐圈点亮（uReveal 由 0 到 1）
     float rn = clamp(length(position) / 170.0, 0.0, 1.0);
     float e = smoothstep(0.0, 1.0, (uReveal * 1.5 - 0.5 * rn));
     vIntensity *= e;
 
-    // 星体微动：极慢、极小的三轴漂移。每个点相位不同，
-    // 因此不会整片同步移动；振幅远小于点间距，布局轮廓保持不变。
+    // 星体微动：极慢、极小的三轴漂移，逐点相位不同
     vec3 p = position;
     float dt = uTime * uDriftSpeed;
     p.x += sin(dt * 1.7 + aPhase * 1.3) * uDrift;
@@ -55,8 +74,10 @@ const STAR_VERTEX = /* glsl */ `
     gl_Position = projectionMatrix * mv;
 
     float dist = max(0.001, -mv.z);
+    float gradeScale = mix(1.0, 0.92 + 0.20 * aGrade, uRich);
     float size = aSize * uSizeScale * (1.0 + aHover * 1.2) * (260.0 / dist);
-    size *= mix(0.45, 1.0, e) * mix(1.0, 0.9 + 0.1 * breath, uTwinkle);
+    size *= mix(0.45, 1.0, e) * mix(1.0, 0.9 + 0.1 * breath1, uTwinkle);
+    size *= gradeScale;
     gl_PointSize = clamp(size * uPixelRatio, 1.0, 300.0 * uPixelRatio);
   }
 `;
@@ -65,32 +86,59 @@ const STAR_FRAGMENT = /* glsl */ `
   varying vec3 vColor;
   varying float vSpike;
   varying float vIntensity;
+  varying float vGrade;
+  varying float vSeed;
+  varying float vRot;
+  varying float vHover;
 
   void main() {
     vec2 uv = gl_PointCoord - 0.5;
     float r = length(uv) * 2.0;
     if (r > 1.0) discard;
 
-    // 核心：小而锐利，接近白热
-    float core = pow(max(0.0, 1.0 - r * 2.05), 3.0);
+    // 三层结构：白热核 + 彩色内晕 + 冷色外晕
+    float core = pow(max(0.0, 1.0 - r * 1.55), 7.0);
+    float inner = exp(-r * r * 24.0) * 0.62;
+    float halo = exp(-r * 4.2) * 0.30;
+    float outer = exp(-r * 2.4) * 0.055;
 
-    // 光晕：指数衰减，柔和外扩
-    float halo = exp(-r * 3.6) * 0.40;
+    // 低等级星降饱和，高等级星保留分支色
+    vec3 gray = vec3(dot(vColor, vec3(0.299, 0.587, 0.114)));
+    vec3 base = mix(gray, vColor, mix(0.52, 1.0, vGrade));
 
-    // 十字星芒：亮星才有，营造「星辰」质感
+    // 分级星芒：L4/L5 才有明显星芒，并带每颗星自己的旋转角
     float spike = 0.0;
     if (vSpike > 0.001) {
-      vec2 a = abs(uv);
-      float sx = max(0.0, 1.0 - a.y * 30.0) * max(0.0, 1.0 - a.x * 2.2);
-      float sy = max(0.0, 1.0 - a.x * 30.0) * max(0.0, 1.0 - a.y * 2.2);
-      spike = (sx + sy) * vSpike * 0.45;
+      float c = cos(vRot);
+      float s = sin(vRot);
+      vec2 ruv = mat2(c, -s, s, c) * uv;
+      float len = 0.82 + 0.36 * vSeed;
+      vec2 auv = abs(ruv);
+      float sx = max(0.0, 1.0 - auv.y * 30.0) * max(0.0, 1.0 - auv.x * (2.1 * len));
+      float sy = max(0.0, 1.0 - auv.x * 30.0) * max(0.0, 1.0 - auv.y * (2.1 * len));
+      spike = (sx + sy) * vSpike * 0.38;
+
+      // 对角线星芒：更弱，只给高等级星
+      if (vGrade > 0.85) {
+        float c2 = cos(vRot + 0.7853981634);
+        float s2 = sin(vRot + 0.7853981634);
+        vec2 duv = abs(mat2(c2, -s2, s2, c2) * uv);
+        float dx = max(0.0, 1.0 - duv.y * 34.0) * max(0.0, 1.0 - duv.x * (2.4 * len));
+        float dy = max(0.0, 1.0 - duv.x * 34.0) * max(0.0, 1.0 - duv.y * (2.4 * len));
+        spike += (dx + dy) * vSpike * 0.10;
+      }
     }
 
-    float i = (core + halo + spike) * vIntensity;
+    // 悬停/选中：只做轻微亮度增强，不加常驻大光环
+    float hoverBoost = vHover * 0.10;
+
+    float edge = 1.0 - smoothstep(0.72, 1.0, r);
+    float i = (core * 1.0 + inner * 0.46 + halo * 0.30 + outer * 0.12 + spike + hoverBoost) * vIntensity * 0.9 * edge;
     if (i < 0.003) discard;
 
-    // 核心偏白，外圈保留分支颜色
-    vec3 col = mix(vColor, vec3(1.0), core * 0.6);
+    // 核心偏白，外圈保留分支色，外晕略偏冷
+    vec3 col = mix(base, vec3(1.0), clamp(core * 0.92, 0.0, 0.90));
+    col = mix(col, vec3(0.62, 0.78, 1.0), outer * 0.30);
     gl_FragColor = vec4(col * i, i);
   }
 `;
@@ -113,6 +161,9 @@ export class StarLayer {
     const phases = new Float32Array(n);
     const hover = new Float32Array(n);
     const alpha = new Float32Array(n);
+    const grades = new Float32Array(n);
+    const seeds = new Float32Array(n);
+    const rots = new Float32Array(n);
     const baseAlpha = opts.baseAlpha !== undefined ? opts.baseAlpha : 1;
 
     const col = new THREE.Color();
@@ -128,6 +179,9 @@ export class StarLayer {
       spikes[i] = it.spike || 0;
       phases[i] = Math.random() * Math.PI * 2;
       alpha[i] = baseAlpha;
+      grades[i] = it.grade !== undefined ? it.grade : 0.4;
+      seeds[i] = it.seed !== undefined ? it.seed : Math.random();
+      rots[i] = it.rot !== undefined ? it.rot : Math.random() * Math.PI * 2;
     });
 
     this._alpha = alpha;
@@ -141,6 +195,9 @@ export class StarLayer {
     geo.setAttribute("aPhase", new THREE.BufferAttribute(phases, 1));
     geo.setAttribute("aHover", new THREE.BufferAttribute(hover, 1));
     geo.setAttribute("aAlpha", new THREE.BufferAttribute(alpha, 1));
+    geo.setAttribute("aGrade", new THREE.BufferAttribute(grades, 1));
+    geo.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 1));
+    geo.setAttribute("aRot", new THREE.BufferAttribute(rots, 1));
 
     this.material = new THREE.ShaderMaterial({
       uniforms: {
@@ -152,6 +209,8 @@ export class StarLayer {
         uReveal: { value: opts.reveal ? 0 : 1 },
         uDrift: { value: opts.drift || 0 },
         uDriftSpeed: { value: opts.driftSpeed || 0.16 },
+        uRich: { value: opts.rich ? 1 : 0 },
+        uFlash: { value: opts.flash === false ? 0 : 1 },
       },
       vertexShader: STAR_VERTEX,
       fragmentShader: STAR_FRAGMENT,
