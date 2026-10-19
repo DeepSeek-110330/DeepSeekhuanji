@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=36";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=36";
+import { renderPlot } from "./plot.js?v=37";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=37";
 
 /* ============================================================
    1. 全局状态
@@ -354,6 +354,45 @@ function createNebulae() {
     group.add(sp);
   });
 
+  // —— 暗尘埃带：用正常混合压暗核球，制造银河盘面的尘埃纹理 ——
+  const dustConfigs = [
+    { seed: 71, pos: [-10, -5, 12], scale: [560, 66], rot: 0.42, opacity: 0.18 },
+    { seed: 83, pos: [35, 4, -18], scale: [440, 52], rot: 1.12, opacity: 0.13 },
+    { seed: 97, pos: [-55, 7, -62], scale: [360, 46], rot: -0.55, opacity: 0.10 },
+  ];
+  dustConfigs.forEach((c) => {
+    const tex = makeNebulaTexture({ seed: c.seed, inner: "#04050a", outer: "#0a0d18", size: 192 });
+    const sp = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: tex,
+        transparent: true,
+        opacity: c.opacity,
+        blending: THREE.NormalBlending,
+        depthWrite: false,
+        depthTest: false,
+        rotation: c.rot,
+      })
+    );
+    sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
+    sp.scale.set(c.scale[0], c.scale[1], 1);
+    sp.renderOrder = 0;
+    group.add(sp);
+  });
+
+  // —— 星云丝：很淡的冷色长条，沿盘面增加丝状层次 ——
+  const filamentConfigs = [
+    { seed: 101, pos: [-70, 10, 55], scale: [620, 34], rot: 0.55, opacity: 0.055, inner: "#20306e", outer: "#3d247a" },
+    { seed: 113, pos: [70, -6, -55], scale: [560, 30], rot: 0.48, opacity: 0.045, inner: "#163b78", outer: "#2b1b62" },
+  ];
+  filamentConfigs.forEach((c) => {
+    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 192 });
+    const sp = new THREE.Sprite(addSprite(tex, c.opacity, c.rot));
+    sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
+    sp.scale.set(c.scale[0], c.scale[1], 1);
+    sp.renderOrder = -1;
+    group.add(sp);
+  });
+
   return group;
 }
 
@@ -430,6 +469,7 @@ function createBackgroundStars() {
     });
   }
   const shellLayer = new StarLayer(shell, { opacity: 1, twinkle: 0.10 });
+  shellLayer.spin = 0.00055; // 远景星壳：极慢旋转，制造宇宙纵深
   group.add(shellLayer.object);
   bgLayers.push(shellLayer);
 
@@ -467,6 +507,7 @@ function createBackgroundStars() {
     });
   }
   const dustLayer = new StarLayer(dust, { opacity: 0.6, twinkle: 0.16 });
+  dustLayer.spin = 0.00006; // 银盘星尘：几乎不动，保持与知识点旋臂对齐
   group.add(dustLayer.object);
   bgLayers.push(dustLayer);
 
@@ -488,6 +529,7 @@ function createBackgroundStars() {
     });
   }
   const haloLayer = new StarLayer(halo, { opacity: 0.42, twinkle: 0.12 });
+  haloLayer.spin = -0.00028; // 星系晕：反向慢转，形成差速感
   group.add(haloLayer.object);
   bgLayers.push(haloLayer);
 
@@ -512,6 +554,7 @@ function createBackgroundStars() {
     });
   }
   const motesLayer = new StarLayer(motes, { opacity: 0.6, twinkle: 0.28 });
+  motesLayer.spin = 0.00018; // 深空微尘：略快一点的缓慢漂移
   group.add(motesLayer.object);
   bgLayers.push(motesLayer);
 
@@ -2646,7 +2689,11 @@ function animate() {
   updatePulses(now);
   maybeAmbientPulse(now);
   updateArmLabels();
-  for (let i = 0; i < bgLayers.length; i++) bgLayers[i].update(elapsed, dt);
+  for (let i = 0; i < bgLayers.length; i++) {
+    const layer = bgLayers[i];
+    if (layer.spin) layer.object.rotation.y = elapsed * layer.spin;
+    layer.update(elapsed, dt);
+  }
 
   renderer.render(scene, camera);
   monitorPerf(dt);
