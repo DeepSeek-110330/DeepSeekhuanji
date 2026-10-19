@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=31";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=31";
+import { renderPlot } from "./plot.js?v=32";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=32";
 
 /* ============================================================
    1. 全局状态
@@ -2259,6 +2259,26 @@ function renderMath() {
       throwOnError: false,
     });
   }
+  fitDerivationMath(panelContent);
+}
+
+/** 推导区公式过宽时自动缩小字号；极端长的公式仍保留横向滚动作为兜底 */
+function fitDerivationMath(root) {
+  if (!root) return;
+  root.querySelectorAll(".derivation-steps .katex-display").forEach((el) => {
+    el.style.fontSize = "";
+    for (const scale of [0.92, 0.84, 0.76, 0.68]) {
+      if (el.scrollWidth <= el.clientWidth + 1) break;
+      el.style.fontSize = scale + "em";
+    }
+  });
+  root.querySelectorAll(".derivation-box").forEach((box) => {
+    if (box.dataset.fitBound) return;
+    box.dataset.fitBound = "1";
+    box.addEventListener("toggle", () => {
+      if (box.open) fitDerivationMath(root);
+    });
+  });
 }
 
 /* ============================================================

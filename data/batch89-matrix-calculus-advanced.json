@@ -39,13 +39,13 @@
     "properties": [
       "前提是「单重 + 扰动可微」：重特征值处 $\\lambda_i(A)$ 一般不可微甚至分叉（$A(t)=\\mathrm{diag}(t,-t)$ 的最大特征值为 $|t|$；Jordan 块的扰动展开含 $t^{1/m}$）；奇异值恒非负，$\\sigma_i=0$ 且秩提升时 $\\sigma_i(t)$ 形如 $|ct|$，公式只能给单侧方向导数。",
       "公式本质是方向导数：$\\frac{d}{dt}\\big|_{t=0}\\lambda_i(A+tB)=v_i^{\\top}Bv_i$（对称情形），对 $dA$ 线性；逐元素取 $dA=E_{jk}$ 就能组装出 $\\partial\\lambda_i/\\partial A$ 的每个分量。",
-      "对称情形的梯度 $v_i v_i^{\\top}$ 对称、半正定、秩一、迹为 1（即向 $v_i$ 的正交投影矩阵）；奇异值梯度 $u_i v_i^{\\top}$ 一般非对称，且 $u_i$ 与 $v_i$ 可以独立取反号。",
+      "对称情形的梯度 $v_i v_i^{\\top}$ 对称、半正定、秩一、迹为 1（即向 $v_i$ 的正交投影矩阵）；奇异值梯度 $u_i v_i^{\\top}$ 一般非对称。配对奇异向量只有公共符号自由：$(u_i,v_i)\\to(-u_i,-v_i)$ 时 $u_i v_i^{\\top}$ 不变；单独翻转一个会改变符号并破坏奇异向量方程。",
       "单个 $\\lambda_i$ 不可微并不代表一切失效：关于特征值的对称函数（$\\det$、$\\mathrm{tr}$、$\\|A\\|_F^2$ 等）仍可对 $A$ 光滑求导，此时应使用谱函数组合规则，而不是硬套单个特征值的公式。"
     ],
     "propertiesEn": [
       "The hypotheses are simple eigenvalue plus differentiable perturbation: at repeated eigenvalues $\\lambda_i(A)$ is generally non-differentiable or branches (the largest eigenvalue of $A(t)=\\mathrm{diag}(t,-t)$ is $|t|$; perturbations of a Jordan block expand in powers $t^{1/m}$). Singular values are always nonnegative, so when $\\sigma_i=0$ and the perturbation raises the rank, $\\sigma_i(t)$ behaves like $|ct|$ and the formula only gives a one-sided directional derivative.",
       "The formulas are directional derivatives in disguise: $\\frac{d}{dt}\\big|_{t=0}\\lambda_i(A+tB)=v_i^{\\top}Bv_i$ in the symmetric case, linear in $dA$; testing $dA=E_{jk}$ entry by entry assembles every component of $\\partial\\lambda_i/\\partial A$.",
-      "In the symmetric case the gradient $v_i v_i^{\\top}$ is symmetric, positive semidefinite, rank one, with trace 1 (the orthogonal projector onto $v_i$); the singular-value gradient $u_i v_i^{\\top}$ is generally non-symmetric, and $u_i$ and $v_i$ may be flipped in sign independently.",
+      "In the symmetric case the gradient $v_i v_i^{\\top}$ is symmetric, positive semidefinite, rank one, with trace 1 (the orthogonal projector onto $v_i$); the singular-value gradient $u_i v_i^{\\top}$ is generally non-symmetric. A paired singular-vector pair has only common sign freedom: $(u_i,v_i)\\to(-u_i,-v_i)$ leaves $u_i v_i^{\\top}$ unchanged, while flipping only one vector changes its sign and breaks the singular-vector equations.",
       "Nondifferentiability of an individual $\\lambda_i$ does not break everything: symmetric functions of the eigenvalues ($\\det$, $\\mathrm{tr}$, $\\|A\\|_F^2$, and so on) may still be smooth in $A$, and then one should use the spectral composition rule instead of the single-eigenvalue formula."
     ],
     "examples": [
