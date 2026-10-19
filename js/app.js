@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=37";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=37";
+import { renderPlot } from "./plot.js?v=39";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=39";
 
 /* ============================================================
    1. 全局状态
@@ -30,6 +30,7 @@ let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
 
 /* 知识共鸣：让有链接关系的知识点产生可控的「碰撞—融合」交互 */
+const LINK_OPACITY = 0.34; // 连线基础亮度：比旧版更清晰，但仍低于悬停/共鸣高亮
 const REDUCE_MOTION = window.matchMedia
   ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
   : false;
@@ -612,7 +613,7 @@ function buildLinks() {
       for (let v = 0; v < vertCount; v++) {
         const t = vertCount > 1 ? v / (vertCount - 1) : 0;
         // 中段稍亮，两端收敛，连线看起来像能量流
-        const shape = 0.45 + 0.55 * Math.sin(Math.PI * t);
+        const shape = 0.55 + 0.45 * Math.sin(Math.PI * t);
         const c = cA.clone().lerp(cB, t);
         colors.push(c.r * shape, c.g * shape, c.b * shape);
       }
@@ -642,7 +643,7 @@ function buildLinks() {
   const mat = new THREE.LineBasicMaterial({
     vertexColors: true,
     transparent: true,
-    opacity: 0.22,
+    opacity: LINK_OPACITY,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     fog: true,
@@ -2672,7 +2673,7 @@ function animate() {
   // 连线入场淡入
   if (linksRevealStart && linksObject) {
     const lt = Math.min(1, (performance.now() - linksRevealStart) / 1500);
-    linksObject.material.opacity = 0.22 * (1 - Math.pow(1 - lt, 3));
+    linksObject.material.opacity = LINK_OPACITY * (1 - Math.pow(1 - lt, 3));
     if (lt >= 1) linksRevealStart = 0;
   }
 
