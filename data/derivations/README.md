@@ -58,8 +58,16 @@
 | D25 | 方程与不等式 | `linear-equation-junior`、`inequality`、`linear-inequality-junior`、`linear-system-two-variables`、`polynomial`、`quadratic-equation-junior` |
 | D26 | 代数与几何基础 | `basic-inequality`、`quadratic-inequality`、`axial-symmetry`、`lines-angle-basics`、`intersecting-lines`、`plane-coordinates` |
 | D27 | 平面几何 | `central-symmetry-rotation`、`congruent-triangles`、`parallelogram`、`projection-view`、`rectangle-rhombus-square`、`circle-junior`、`similarity` |
+| D28 | 三角基础 | `triangle`、`pythagorean`、`triangle-area`、`acute-trigonometry`、`angle-radian`、`unit-circle` |
+| D29 | 三角函数 | `sine-function`、`cosine-function`、`tangent-function`、`trigonometric-definition`、`fundamental-identities`、`reduction-formulas` |
+| D30 | 解三角形 | `law-of-sines`、`law-of-cosines`、`triangle-application`、`triangle-identities`、`trig-properties`、`trig-transform` |
+| D31 | 三角恒等变换 | `trigonometric-identities`、`auxiliary-angle`、`inverse-trig-functions`、`sinusoidal-model`、`sum-to-product` |
+| D32 | 数列基础 | `sequence-concept`、`arithmetic-sequence`、`geometric-sequence`、`sequence-summation`、`mathematical-induction`、`series` |
+| D33 | 级数 | `harmonic-series`、`alternating-series`、`power-series`、`taylor-series`、`fourier-series`、`series-convergence-tests` |
+| D34 | 解析几何 | `line-equation`、`circle-equation`、`line-circle-relation`、`parabola`、`ellipse`、`hyperbola`、`conic-comprehensive` |
+| D35 | 计数原理 | `counting-principles`、`permutations`、`combinations`、`binomial-theorem`、`combinatorics-comprehensive` |
 
-当前覆盖：**176 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11）。后续按分支分批推进。
+当前覆盖：**223 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5）。后续按分支分批推进。
 
 ## 命令
 

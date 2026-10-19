@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "batch": "D32",
+    "topic": "数列与级数基础：数列概念、等差与等比数列、求和方法、数学归纳法、无穷级数",
+    "version": 1
+  },
+  "nodes": {
+    "sequence-concept": {
+      "zh": [
+        "定义：数列是按确定次序排列的一列数 $\\{a_n\\}$，第 $n$ 项 $a_n$ 由正整数下标 $n$ 唯一确定。因此数列本质上是定义在 $\\mathbb{N}^*$（或其有限子集 $\\{1,\\dots,N\\}$）上的函数 $a(n)=a_n$，其图像是离散点列 $(n,a_n)$，而不是连续曲线。",
+        "次序不可交换：集合 $\\{1,2,3\\}$ 与排列顺序无关，但数列 $1,2,3,\\dots$ 与 $3,2,1,\\dots$ 是不同数列。通项 $a_n=n$ 与 $b_n=4-n$（$n=1,2,3$）取自同一集合，却对应不同的项与不同的部分和。",
+        "表示方式：通项公式 $a_n=f(n)$ 直接给出第 $n$ 项；递推公式 $a_{n+1}=g(a_n)$ 只给出相邻项的关系；也可用分段或文字描述。通项公式不一定存在，存在时也不唯一，例如 $1,0,1,0,\\dots$ 可写成 $a_n=\\frac{1+(-1)^{n+1}}2$，也可分段定义。",
+        "前 $n$ 项和：$S_n=a_1+\\cdots+a_n$（约定 $S_0=0$）。当 $n\\ge2$ 时，$S_n-S_{n-1}=a_n$：两式相减时 $a_1,\\dots,a_{n-1}$ 全部抵消，只剩第 $n$ 项。",
+        "由 $S_n$ 求 $a_n$ 必须分段：$a_1=S_1$；$n\\ge2$ 时 $a_n=S_n-S_{n-1}$。最后要检验 $n=1$ 能否并入。例如 $S_n=n^2+1$ 给出 $a_1=2$，而 $n\\ge2$ 时 $a_n=n^2-(n-1)^2=2n-1$；$2n-1$ 在 $n=1$ 时为 $1\\ne2$，故只能写成分段式。",
+        "递推公式必须配初始条件：仅给 $a_{n+1}=2a_n+1$ 不能确定数列。取 $a_1=0$ 得 $0,1,3,7,\\dots$（$a_n=2^{n-1}-1$）；取 $a_1=1$ 得 $1,3,7,15,\\dots$（$a_n=2^n-1$）。首项不同，后续各项整体不同。"
+      ],
+      "en": [
+        "Definition: a sequence is a list of numbers $\\{a_n\\}$ in a definite order, the $n$-th term $a_n$ being determined by the positive integer index $n$. Thus a sequence is really a function $a(n)=a_n$ on $\\mathbb{N}^*$ (or on a finite subset $\\{1,\\dots,N\\}$), and its graph is the discrete point set $(n,a_n)$, not a continuous curve.",
+        "Order cannot be ignored: the set $\\{1,2,3\\}$ is order-free, but the sequences $1,2,3,\\dots$ and $3,2,1,\\dots$ are different. The formulas $a_n=n$ and $b_n=4-n$ for $n=1,2,3$ draw on the same set but produce different terms and different partial sums.",
+        "Representations: a general-term formula $a_n=f(n)$ gives the $n$-th term directly; a recurrence $a_{n+1}=g(a_n)$ gives only relations between neighbouring terms; piecewise or verbal rules are also possible. A general-term formula need not exist and need not be unique: $1,0,1,0,\\dots$ is given by $a_n=\\frac{1+(-1)^{n+1}}2$ and also by a piecewise rule.",
+        "Partial sums: $S_n=a_1+\\cdots+a_n$, with the convention $S_0=0$. For $n\\ge2$, $S_n-S_{n-1}=a_n$: in this difference all terms $a_1,\\dots,a_{n-1}$ cancel and only the $n$-th term remains.",
+        "Recovering $a_n$ from $S_n$ is necessarily piecewise: $a_1=S_1$, and $a_n=S_n-S_{n-1}$ for $n\\ge2$; finally check whether the case $n=1$ fits the formula valid for $n\\ge2$. For example, $S_n=n^2+1$ gives $a_1=2$, while for $n\\ge2$, $a_n=n^2-(n-1)^2=2n-1$; since $2n-1=1\\ne2$ at $n=1$, the answer must remain piecewise.",
+        "A recurrence must be accompanied by initial data: $a_{n+1}=2a_n+1$ alone does not determine a sequence. With $a_1=0$ it gives $0,1,3,7,\\dots$ ($a_n=2^{n-1}-1$); with $a_1=1$ it gives $1,3,7,15,\\dots$ ($a_n=2^n-1$). Different first terms produce entirely different sequences."
+      ]
+    },
+    "arithmetic-sequence": {
+      "zh": [
+        "定义：若对一切正整数 $n$ 都有 $a_{n+1}-a_n=d$，其中 $d$ 是与 $n$ 无关的常数，则 $\\{a_n\\}$ 为等差数列，$d$ 为公差。$d$ 可取任意实数：$d>0$ 时递增，$d<0$ 时递减，$d=0$ 时为常数列。首项 $a_1$ 与公差 $d$ 给定后，数列被唯一确定。",
+        "通项：把 $n-1$ 个差式累加，$\\sum_{k=1}^{n-1}(a_{k+1}-a_k)=a_n-a_1=(n-1)d$，故 $a_n=a_1+(n-1)d$。更一般地，对任意正整数 $m,n$，$a_n-a_m=(n-m)d$，即 $a_n=a_m+(n-m)d$；这一步只用到定义，不依赖 $d\\ne0$。",
+        "线性结构：当 $d\\ne0$ 时，$a_n=dn+(a_1-d)$ 是 $n$ 的一次函数，点 $(n,a_n)$ 共线且斜率为 $d$；当 $d=0$ 时退化为常函数。由同一表达式，若 $m+n=p+q$，则 $a_m+a_n=2a_1+(m+n-2)d=a_p+a_q$。",
+        "倒序相加：$S_n=a_1+a_2+\\cdots+a_n$，倒写为 $S_n=a_n+a_{n-1}+\\cdots+a_1$。两式相加，每一列的和都是 $a_1+a_n$，共 $n$ 列，故 $2S_n=n(a_1+a_n)$，即 $S_n=\\frac{n(a_1+a_n)}2$。该推导对 $d=0$ 同样成立。",
+        "另一形式：把 $a_n=a_1+(n-1)d$ 代入，得 $S_n=na_1+\\frac{n(n-1)}2d=\\frac d2 n^2+\\left(a_1-\\frac d2\\right)n$，即 $S_n$ 是常数项为 0 的二次式。反过来，若 $S_n=An^2+Bn$，则 $n\\ge2$ 时 $a_n=S_n-S_{n-1}=2An+(B-A)$，且 $a_1=A+B$ 也符合此式，故 $a_n$ 为等差数列、公差为 $2A$：$S_n=An^2+Bn$ 是等差数列的充要条件。",
+        "最值：由 $S_{n+1}-S_n=a_{n+1}$，$S_n$ 的增减取决于 $a_{n+1}$ 的符号。若 $d<0$ 且 $a_1>0$，则 $S_n$ 在最后一个非负项处最大：取 $n$ 使 $a_n\\ge0$ 且 $a_{n+1}\\le0$；若 $a_{n+1}=0$，则 $S_n=S_{n+1}$，最大值在两个相邻下标同时取得。若 $d<0$ 且 $a_1\\le0$，则所有项非正，$S_n$ 在 $n=1$ 取最大值；$d>0$ 时同理考察最小值。"
+      ],
+      "en": [
+        "Definition: if $a_{n+1}-a_n=d$ for every positive integer $n$, where $d$ is a constant independent of $n$, then $\\{a_n\\}$ is an arithmetic sequence and $d$ is its common difference. The difference may be any real number: the sequence increases for $d>0$, decreases for $d<0$, and is constant for $d=0$. The first term $a_1$ and the difference $d$ determine the sequence uniquely.",
+        "General term: adding the $n-1$ differences gives $\\sum_{k=1}^{n-1}(a_{k+1}-a_k)=a_n-a_1=(n-1)d$, hence $a_n=a_1+(n-1)d$. More generally, for positive integers $m,n$, $a_n-a_m=(n-m)d$, that is, $a_n=a_m+(n-m)d$; this uses only the definition and does not require $d\\ne0$.",
+        "Linear structure: for $d\\ne0$, $a_n=dn+(a_1-d)$ is a linear function of $n$, and the points $(n,a_n)$ are collinear with slope $d$; for $d=0$ it degenerates to a constant function. From the same expression, $m+n=p+q$ implies $a_m+a_n=2a_1+(m+n-2)d=a_p+a_q$.",
+        "Reversing and adding: write $S_n=a_1+a_2+\\cdots+a_n$ and also $S_n=a_n+a_{n-1}+\\cdots+a_1$. Adding column by column gives $n$ columns each equal to $a_1+a_n$, so $2S_n=n(a_1+a_n)$ and $S_n=\\frac{n(a_1+a_n)}2$. The argument also covers $d=0$.",
+        "Second form: substituting $a_n=a_1+(n-1)d$ gives $S_n=na_1+\\frac{n(n-1)}2d=\\frac d2 n^2+\\left(a_1-\\frac d2\\right)n$, a quadratic in $n$ with zero constant term. Conversely, if $S_n=An^2+Bn$, then for $n\\ge2$, $a_n=S_n-S_{n-1}=2An+(B-A)$, and $a_1=A+B$ also satisfies this formula; hence $a_n$ is arithmetic with difference $2A$. Thus $S_n=An^2+Bn$ is a necessary and sufficient condition for an arithmetic sequence.",
+        "Extrema: since $S_{n+1}-S_n=a_{n+1}$, the monotonicity of $S_n$ is governed by the sign of $a_{n+1}$. For $d<0$ and $a_1>0$, $S_n$ is largest at the last nonnegative term: choose $n$ with $a_n\\ge0$ and $a_{n+1}\\le0$. If $a_{n+1}=0$, then $S_n=S_{n+1}$ and the maximum is attained at two consecutive indices. If $d<0$ and $a_1\\le0$, all terms are nonpositive and the maximum is $S_1$; for $d>0$, examine the minimum analogously."
+      ]
+    },
+    "geometric-sequence": {
+      "zh": [
+        "定义：从第 2 项起，每一项与前一项的比都等于同一常数 $q$：$\\frac{a_{n+1}}{a_n}=q$。由于分母为 $a_n$，定义要求 $a_1\\ne0$、各项非零且 $q\\ne0$。若允许 $q=0$，则 $a_2=0$，$\\frac{a_3}{a_2}$ 无定义，因此 $q=0$ 不属于等比数列；由递推 $a_{n+1}=0\\cdot a_n$ 得到的 $a_1,0,0,\\dots$ 必须单独处理。",
+        "通项：由定义 $a_{k+1}=q a_k$，累乘 $\\prod_{k=1}^{n-1}\\frac{a_{k+1}}{a_k}=\\frac{a_n}{a_1}=q^{n-1}$，故 $a_n=a_1q^{n-1}$。对 $1\\le m\\le n$，同理 $a_n=a_mq^{n-m}$；这里用到 $a_m\\ne0$，否则比值无意义。",
+        "符号与增减：$q>0$ 时各项与 $a_1$ 同号；$q<0$ 时正负交替。由 $|a_n|=|a_1||q|^{n-1}$，$|q|>1$ 时绝对值递增，$0<|q|<1$ 时绝对值递减；当 $q>0$ 时，数列本身的单调性还要结合 $a_1$ 的符号判断，而 $q<0$ 时数列为摆动数列。$q=1$ 时各项都等于 $a_1$，是常数列。",
+        "$q=1$ 的求和：$S_n=\\sum_{k=1}^n a_1=na_1$。这是独立情形，不能代入下面的分母 $1-q$。",
+        "$q\\ne1$ 的求和：写出 $S_n=a_1+a_1q+\\cdots+a_1q^{n-1}$ 与 $qS_n=a_1q+\\cdots+a_1q^n$，相减得 $(1-q)S_n=a_1-a_1q^n$，故 $S_n=\\frac{a_1(1-q^n)}{1-q}=\\frac{a_1-a_nq}{1-q}$。推导只用了 $q\\ne1$，因此必须与 $q=1$ 分开陈述。",
+        "中项与下标性质：若 $a,G,b$ 成等比，则 $\\frac Ga=\\frac bG$，故 $G^2=ab$ 且 $G\\ne0$；因 $G^2>0$，必须有 $ab>0$，此时 $G=\\pm\\sqrt{ab}$ 都可取（对应公比 $G/a$）。又 $a_ma_n=a_1^2q^{m+n-2}$，故 $m+n=p+q\\Rightarrow a_ma_n=a_pa_q$，但该式要求各项非零。"
+      ],
+      "en": [
+        "Definition: from the second term on, the ratio of each term to the preceding one equals the same constant $q$: $\\frac{a_{n+1}}{a_n}=q$. Since the denominator is $a_n$, the definition requires $a_1\\ne0$, every term nonzero, and $q\\ne0$. If $q=0$ were allowed, then $a_2=0$ and $\\frac{a_3}{a_2}$ would be undefined, so $q=0$ does not define a geometric sequence; the sequence $a_1,0,0,\\dots$ produced by $a_{n+1}=0\\cdot a_n$ must be treated separately.",
+        "General term: the definition gives $a_{k+1}=q a_k$, so multiplying the ratios yields $\\prod_{k=1}^{n-1}\\frac{a_{k+1}}{a_k}=\\frac{a_n}{a_1}=q^{n-1}$, hence $a_n=a_1q^{n-1}$. For $1\\le m\\le n$, the same argument gives $a_n=a_mq^{n-m}$; this uses $a_m\\ne0$, without which the ratio is undefined.",
+        "Signs and growth: for $q>0$ all terms have the sign of $a_1$; for $q<0$ the signs alternate. Since $|a_n|=|a_1||q|^{n-1}$, the absolute values increase when $|q|>1$ and decrease when $0<|q|<1$. For $q>0$, monotonicity of the sequence itself also depends on the sign of $a_1$; for $q<0$ the sequence oscillates. For $q=1$ every term equals $a_1$, so the sequence is constant.",
+        "Sum for $q=1$: $S_n=\\sum_{k=1}^n a_1=na_1$. This is a separate case and must not be substituted into the denominator $1-q$ below.",
+        "Sum for $q\\ne1$: write $S_n=a_1+a_1q+\\cdots+a_1q^{n-1}$ and $qS_n=a_1q+\\cdots+a_1q^n$. Subtracting gives $(1-q)S_n=a_1-a_1q^n$, hence $S_n=\\frac{a_1(1-q^n)}{1-q}=\\frac{a_1-a_nq}{1-q}$. The derivation uses $q\\ne1$, so this case must be stated separately from $q=1$.",
+        "Geometric mean and index identity: if $a,G,b$ form a geometric sequence, then $\\frac Ga=\\frac bG$, so $G^2=ab$ with $G\\ne0$. Since $G^2>0$, one needs $ab>0$; then both $G=\\pm\\sqrt{ab}$ are admissible (with ratio $G/a$). Also $a_ma_n=a_1^2q^{m+n-2}$, so $m+n=p+q$ implies $a_ma_n=a_pa_q$, provided all terms are nonzero."
+      ]
+    },
+    "sequence-summation": {
+      "zh": [
+        "先看通项：求和前先判断 $a_n$ 的结构。若为等差，用 $S_n=\\frac{n(a_1+a_n)}2$；若为等比，先分 $q=1$ 与 $q\\ne1$；若通项是几类可求和数列的和差，则分组。任何技巧用完后都必须用 $S_1=a_1$ 检验。",
+        "倒序相加：若存在常数 $C$ 使 $a_k+a_{n+1-k}=C$ 对 $k=1,\\dots,n$ 都成立，则把 $S_n$ 正写、倒写后相加，得 $2S_n=nC$，故 $S_n=\\frac{nC}2$。等差数列取 $C=a_1+a_n$ 即得等差求和公式；关键是配对和确实为常数，而不是只对首末两项成立。",
+        "裂项相消：若通项能写成 $a_k=b_k-b_{k+1}$，则 $S_n=\\sum_{k=1}^n(b_k-b_{k+1})=b_1-b_{n+1}$，中间项两两抵消。例如 $\\frac1{k(k+1)}=\\frac1k-\\frac1{k+1}$，故 $S_n=1-\\frac1{n+1}=\\frac n{n+1}$；系数必须配平，如 $\\frac1{k(k+2)}=\\frac12\\left(\\frac1k-\\frac1{k+2}\\right)$。",
+        "裂项后的剩余项：对 $\\frac1{k(k+2)}$，$S_n=\\frac12\\left[\\left(1-\\frac1{n+1}\\right)+\\left(\\frac12-\\frac1{n+2}\\right)\\right]=\\frac12\\left(\\frac32-\\frac1{n+1}-\\frac1{n+2}\\right)$。相隔一项的裂项不会只剩首尾各一项，而是首两项与末两项；必须按实际抵消情况核对。",
+        "错位相减：若 $a_k=kq^{k-1}$（等差乘等比）且 $q\\ne1$，令 $S_n=\\sum_{k=1}^n kq^{k-1}$，则 $qS_n=\\sum_{k=1}^n kq^k$。相减得 $$(1-q)S_n=1+q+\\cdots+q^{n-1}-nq^n=\\frac{1-q^n}{1-q}-nq^n,$$ 故 $S_n=\\frac{1-(n+1)q^n+nq^{n+1}}{(1-q)^2}$。若 $q=1$，通项为 $k$，应直接用等差公式 $S_n=\\frac{n(n+1)}2$，不能除以 $1-q$。",
+        "分组求和与检验：若 $a_k=b_k+c_k$，且两组都能求和，则 $S_n=\\sum b_k+\\sum c_k$，两组都按 $n$ 项计算。例如 $\\sum_{k=1}^n(2k+3^k)=n(n+1)+\\frac{3(3^n-1)}2$。最后代 $n=1$：上式给出 $2+3=5=a_1$，可快速发现项数或系数错误。"
+      ],
+      "en": [
+        "Inspect the general term first: before summing, identify the structure of $a_n$. For an arithmetic sequence use $S_n=\\frac{n(a_1+a_n)}2$; for a geometric one split into $q=1$ and $q\\ne1$; if $a_n$ is a sum or difference of summable pieces, group them. After any technique, check $S_1=a_1$.",
+        "Reversing and adding: if a constant $C$ satisfies $a_k+a_{n+1-k}=C$ for every $k=1,\\dots,n$, add the forward and reversed copies of $S_n$ to get $2S_n=nC$, hence $S_n=\\frac{nC}2$. For an arithmetic sequence $C=a_1+a_n$ recovers the standard formula; the point is that every paired sum is constant, not merely the first and last.",
+        "Telescoping: if the general term can be written $a_k=b_k-b_{k+1}$, then $S_n=\\sum_{k=1}^n(b_k-b_{k+1})=b_1-b_{n+1}$, because interior terms cancel in pairs. For example, $\\frac1{k(k+1)}=\\frac1k-\\frac1{k+1}$ gives $S_n=1-\\frac1{n+1}=\\frac n{n+1}$; the constant factor must be matched, as in $\\frac1{k(k+2)}=\\frac12\\left(\\frac1k-\\frac1{k+2}\\right)$.",
+        "Surviving terms after telescoping: for $\\frac1{k(k+2)}$, $S_n=\\frac12\\left[\\left(1-\\frac1{n+1}\\right)+\\left(\\frac12-\\frac1{n+2}\\right)\\right]=\\frac12\\left(\\frac32-\\frac1{n+1}-\\frac1{n+2}\\right)$. A gap of one in the denominator leaves the first two and the last two terms, not just one term at each end; always check the actual cancellation.",
+        "Shifted subtraction: if $a_k=kq^{k-1}$ (arithmetic times geometric) and $q\\ne1$, let $S_n=\\sum_{k=1}^n kq^{k-1}$ and $qS_n=\\sum_{k=1}^n kq^k$. Subtracting yields $$(1-q)S_n=1+q+\\cdots+q^{n-1}-nq^n=\\frac{1-q^n}{1-q}-nq^n,$$ so $S_n=\\frac{1-(n+1)q^n+nq^{n+1}}{(1-q)^2}$. If $q=1$, the general term is $k$ and the arithmetic formula $S_n=\\frac{n(n+1)}2$ applies; division by $1-q$ is invalid.",
+        "Grouping and checking: if $a_k=b_k+c_k$ and both parts are summable, then $S_n=\\sum b_k+\\sum c_k$, with each part still summed over $n$ terms. For example, $\\sum_{k=1}^n(2k+3^k)=n(n+1)+\\frac{3(3^n-1)}2$. Substituting $n=1$ gives $2+3=5=a_1$, which quickly exposes errors in the number of terms or in a coefficient."
+      ]
+    },
+    "mathematical-induction": {
+      "zh": [
+        "命题形式：设 $n_0$ 为整数，要对一切整数 $n\\ge n_0$ 证明命题 $P(n)$。数学归纳法分两步：奠基，验证 $P(n_0)$；归纳递推，设 $k\\ge n_0$ 且 $P(k)$ 成立，证明 $P(k+1)$ 成立。只有两步都完成，才能断言 $P(n)$ 对一切 $n\\ge n_0$ 成立。",
+        "为何充分：用反证法与整数良序性。若结论不真，令 $m$ 为使 $P(m)$ 不成立的最小整数。由奠基知 $m>n_0$，故 $m-1\\ge n_0$；由 $m$ 的最小性，$P(m-1)$ 成立；对 $k=m-1$ 使用归纳递推，便得 $P(m)$ 成立，矛盾。因此不存在反例。",
+        "奠基不可省：命题“$n>n+1$”的递推步是成立的：若 $k>k+1$，两边加 1 得 $k+1>k+2$；但没有起点成立，结论当然错误。反过来，只验证有限多个起点也不够：$n^2+n+41$ 在 $n=1,\\dots,39$ 时均为质数，但 $n=40$ 时为 $41^2$，不是质数。",
+        "递推必须使用归纳假设：证明 $P(k+1)$ 时，必须把 $P(k)$ 作为前提真正代入；若推导中从未使用“$P(k)$ 成立”，那只是又独立验证了一个情形，不能把结论传递到无穷。书写时应明确标出“由归纳假设”这一步。",
+        "例：证明 $1+3+\\cdots+(2n-1)=n^2$（$n\\ge1$）。奠基：$n=1$ 时左、右均为 1。假设 $n=k$ 时成立，即 $1+3+\\cdots+(2k-1)=k^2$；则 $n=k+1$ 时，左边 $=k^2+(2k+1)=(k+1)^2$，恰为右边。由归纳法，等式对一切正整数 $n$ 成立。",
+        "强归纳与起点：强归纳法假设 $P(n_0),P(n_0+1),\\dots,P(k)$ 全部成立，再证 $P(k+1)$，适合递推依赖多个前项的命题（如斐波那契型）。起点由命题决定：证明 $2^n>n^2$ 要对 $n\\ge5$ 进行，就应在 $n=5$ 奠基，因为 $n=2,3,4$ 时命题不成立。"
+      ],
+      "en": [
+        "Form of the statement: let $n_0$ be an integer and suppose $P(n)$ is to be proved for every integer $n\\ge n_0$. Induction has two steps: the base case, verifying $P(n_0)$; and the inductive step, assuming $k\\ge n_0$ and $P(k)$, then proving $P(k+1)$. Only when both are complete may we conclude that $P(n)$ holds for all $n\\ge n_0$.",
+        "Why this suffices: argue by contradiction using well-ordering. If the conclusion failed, let $m$ be the least integer for which $P(m)$ fails. The base case gives $m>n_0$, hence $m-1\\ge n_0$; by minimality of $m$, $P(m-1)$ holds; applying the inductive step with $k=m-1$ yields $P(m)$, a contradiction. Therefore no counterexample exists.",
+        "The base case cannot be omitted: the inductive step for the false claim “$n>n+1$” is valid — if $k>k+1$, adding 1 gives $k+1>k+2$ — but no starting value satisfies it, so the conclusion is false. Conversely, checking finitely many starting values is not enough: $n^2+n+41$ is prime for $n=1,\\dots,39$, but at $n=40$ it equals $41^2$, which is not prime.",
+        "The inductive step must use the hypothesis: when proving $P(k+1)$, the assumption $P(k)$ has to be genuinely substituted. If the derivation never uses “$P(k)$ holds”, it merely verifies one more isolated case and cannot propagate the conclusion to infinity. The phrase “by the induction hypothesis” should be written explicitly.",
+        "Example: prove $1+3+\\cdots+(2n-1)=n^2$ for $n\\ge1$. Base case: for $n=1$ both sides equal 1. Assume the identity for $n=k$, that is, $1+3+\\cdots+(2k-1)=k^2$. For $n=k+1$, the left side equals $k^2+(2k+1)=(k+1)^2$, exactly the right side. By induction the identity holds for every positive integer $n$.",
+        "Strong induction and the starting point: strong induction assumes $P(n_0),P(n_0+1),\\dots,P(k)$ all hold and then proves $P(k+1)$; it suits statements whose recurrence refers to several earlier terms (Fibonacci type). The starting point is dictated by the statement: to prove $2^n>n^2$ for $n\\ge5$, begin at $n=5$, since the claim fails for $n=2,3,4$."
+      ]
+    },
+    "series": {
+      "zh": [
+        "定义：给定数列 $\\{u_n\\}$，记部分和 $S_n=\\sum_{k=1}^n u_k$。若数列 $\\{S_n\\}$ 收敛于有限数 $S$，则称级数 $\\sum_{n=1}^\\infty u_n$ 收敛，和为 $S$；若 $\\{S_n\\}$ 发散，则级数发散、没有和。级数的敛散性完全由部分和数列的极限决定。",
+        "必要条件：若 $\\sum u_n=S$，则当 $n\\ge2$ 时 $u_n=S_n-S_{n-1}$，令 $n\\to\\infty$ 得 $u_n\\to S-S=0$。因此当 $\\lim_{n\\to\\infty}u_n\\ne0$ 或该极限不存在时，级数必发散；这只是判敛的第一道筛查，给出的是必要条件。",
+        "逆命题不成立：调和级数 $\\sum_{n=1}^\\infty\\frac1n$ 的通项趋于 0，却发散。证明：$$\\begin{aligned}S_{2^m}&=1+\\frac12+\\left(\\frac13+\\frac14\\right)+\\cdots+\\left(\\frac1{2^{m-1}+1}+\\cdots+\\frac1{2^m}\\right)\\\\&\\ge1+\\frac12+\\frac{m-1}{2}=1+\\frac m2\\to\\infty.\\end{aligned}$$ 从第 2 组起每组有 $2^{j-1}$ 项、每项不小于 $\\frac1{2^j}$，故组和不小于 $\\frac12$。通项趋于 0 不能保证收敛。",
+        "几何级数：$\\sum_{n=0}^\\infty ar^n$ 的部分和为 $S_N=a\\frac{1-r^{N+1}}{1-r}$（$r\\ne1$）。当 $|r|<1$ 时 $r^{N+1}\\to0$，级数收敛于 $\\frac a{1-r}$；当 $|r|\\ge1$ 且 $a\\ne0$ 时：$r=1$ 时 $S_N=(N+1)a$ 发散，$r=-1$ 时部分和在 $0,a$ 间振荡，$|r|>1$ 时 $|S_N|$ 无界，均发散。",
+        "线性运算与余项：若 $\\sum u_n=U$、$\\sum v_n=V$ 都收敛，则 $\\sum(\\alpha u_n+\\beta v_n)=\\alpha U+\\beta V$。若 $\\sum u_n$ 收敛而 $\\sum v_n$ 发散，且 $\\alpha\\beta\\ne0$，则 $\\sum(\\alpha u_n+\\beta v_n)$ 必发散：否则由 $v_n=\\frac1\\beta[(\\alpha u_n+\\beta v_n)-\\alpha u_n]$ 会推出 $\\sum v_n$ 收敛，矛盾。收敛时余项 $R_n=S-S_n=\\sum_{k=n+1}^\\infty u_k\\to0$；改变有限项不影响敛散性，但会改变收敛时的和。",
+        "裂项级数与判别顺序：$\\sum_{n=1}^\\infty\\frac1{n(n+1)}$ 的部分和 $S_n=1-\\frac1{n+1}\\to1$，故级数和为 1。实际判断时先看 $u_n\\to0$；若不成立立即发散；若成立，再依据结构选择几何级数、裂项、比较判别法或 $p$-级数（$\\sum1/n^p$ 当 $p>1$ 时收敛，$p\\le1$ 时发散）。通项趋于 0 只是入场券，不是收敛的保证。"
+      ],
+      "en": [
+        "Definition: given a sequence $\\{u_n\\}$, let $S_n=\\sum_{k=1}^n u_k$ be its partial sums. If $\\{S_n\\}$ converges to a finite number $S$, the series $\\sum_{n=1}^\\infty u_n$ is said to converge with sum $S$; if $\\{S_n\\}$ diverges, the series diverges and has no sum. Convergence of a series is decided entirely by the limit of its partial sums.",
+        "Necessary condition: if $\\sum u_n=S$, then for $n\\ge2$, $u_n=S_n-S_{n-1}$; letting $n\\to\\infty$ gives $u_n\\to S-S=0$. Hence if $\\lim_{n\\to\\infty}u_n\\ne0$ or the limit fails to exist, the series must diverge. This is only the first screening test and supplies a necessary condition.",
+        "The converse fails: the harmonic series $\\sum_{n=1}^\\infty\\frac1n$ has terms tending to 0 but diverges. Indeed, $$\\begin{aligned}S_{2^m}&=1+\\frac12+\\left(\\frac13+\\frac14\\right)+\\cdots+\\left(\\frac1{2^{m-1}+1}+\\cdots+\\frac1{2^m}\\right)\\\\&\\ge1+\\frac12+\\frac{m-1}{2}=1+\\frac m2\\to\\infty.\\end{aligned}$$ From the second group on, group $j$ has $2^{j-1}$ terms, each at least $\\frac1{2^j}$, so its sum is at least $\\frac12$. Thus terms tending to 0 do not guarantee convergence.",
+        "Geometric series: the partial sums of $\\sum_{n=0}^\\infty ar^n$ are $S_N=a\\frac{1-r^{N+1}}{1-r}$ for $r\\ne1$. If $|r|<1$, then $r^{N+1}\\to0$ and the series converges to $\\frac a{1-r}$. If $|r|\\ge1$ and $a\\ne0$, it diverges: for $r=1$, $S_N=(N+1)a$ diverges; for $r=-1$, the partial sums oscillate between $0$ and $a$; for $|r|>1$, $|S_N|$ is unbounded.",
+        "Linearity and remainders: if $\\sum u_n=U$ and $\\sum v_n=V$ both converge, then $\\sum(\\alpha u_n+\\beta v_n)=\\alpha U+\\beta V$. If $\\sum u_n$ converges while $\\sum v_n$ diverges and $\\alpha\\beta\\ne0$, then $\\sum(\\alpha u_n+\\beta v_n)$ must diverge; otherwise $v_n=\\frac1\\beta[(\\alpha u_n+\\beta v_n)-\\alpha u_n]$ would force $\\sum v_n$ to converge, a contradiction. For a convergent series the remainder $R_n=S-S_n=\\sum_{k=n+1}^\\infty u_k\\to0$; changing finitely many terms preserves convergence but changes the sum.",
+        "Telescoping series and order of tests: for $\\sum_{n=1}^\\infty\\frac1{n(n+1)}$, the partial sums are $S_n=1-\\frac1{n+1}\\to1$, so the sum is 1. In practice, first check whether $u_n\\to0$; if not, the series diverges immediately. If it does, use the structure to choose a geometric series, telescoping, a comparison test, or the $p$-series ($\\sum1/n^p$ converges for $p>1$ and diverges for $p\\le1$). Terms tending to 0 are only an entry ticket, not a guarantee of convergence."
+      ]
+    }
+  }
+}
