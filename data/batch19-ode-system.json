@@ -60,11 +60,23 @@
       "type": "vectorfield",
       "fx": "-y",
       "fy": "x",
-      "xRange": [-2, 2],
-      "yRange": [-2, 2],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
       "contourExpr": "x^2 + y^2",
       "marks": [
-        { "at": [0, 0], "label": "平衡点（中心）" }
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "平衡点（中心）"
+        }
       ],
       "title": "x' = Ax（A = [[0, -1], [1, 0]]）：轨线是绕原点的圆，中心"
     },
@@ -78,8 +90,18 @@
         "solution": "令 $x_1 = y$，$x_2 = y'$，则 $x_1' = x_2$，$x_2' = y'' = -y = -x_1$，即\n$$x' = \\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix} x.$$\n特征值为 $\\pm i$，对应解为三角函数：$x_1 = c_1\\cos t + c_2\\sin t$，$x_2 = x_1' = -c_1\\sin t + c_2\\cos t$。验证：$x_2' = -c_1\\cos t - c_2\\sin t = -x_1$，满足方程。"
       }
     ],
-    "tags": ["线性方程组", "基解矩阵", "叠加原理"],
-    "links": ["matrix-exponential", "phase-plane", "linear-ode-theory", "constant-coefficient-homogeneous", "ode-basic-concepts"]
+    "tags": [
+      "线性方程组",
+      "基解矩阵",
+      "叠加原理"
+    ],
+    "links": [
+      "matrix-exponential",
+      "phase-plane",
+      "linear-ode-theory",
+      "constant-coefficient-homogeneous",
+      "ode-basic-concepts"
+    ]
   },
   {
     "id": "matrix-exponential",
@@ -125,16 +147,16 @@
       "noteEn": "Converges for every constant matrix A and every real t; it is a fundamental matrix for x' = Ax."
     },
     "properties": [
-      "初始值与可逆性：$e^{A \\cdot 0} = I$，且对一切 $t$ 有 $(e^{At})^{-1} = e^{-At}$，$\\det e^{At} = e^{t\\operatorname{tr}A} > 0$，矩阵指数总可逆",
+      "初始值与可逆性：$e^{A \\cdot 0} = I$，且对一切 $t$ 有 $(e^{At})^{-1} = e^{-At}$，$\\det e^{At} = e^{t\\operatorname{tr}A} \\ne 0$；对实矩阵 $A$ 行列式为正，矩阵指数总可逆。",
       "求导法则：$\\frac{d}{dt}e^{At} = A e^{At} = e^{At}A$，$A$ 与自己的指数总是可交换的",
-      "$AB = BA$ 时才有 $e^{A+B} = e^{A}e^{B}$；$AB \\neq BA$ 时该式一般不成立，这是与标量指数最大的区别",
+      "$AB=BA$ 时 $e^{A+B}=e^{A}e^{B}$；$AB\\neq BA$ 时该式一般不等，不能无条件使用该公式。$AB=BA$ 是充分条件，不是必要条件。",
       "可对角化情形：$A = PDP^{-1} \\Rightarrow e^{At} = Pe^{Dt}P^{-1}$；$e^{At}$ 的特征值是 $e^{\\lambda_i t}$，特征向量与 $A$ 相同",
       "$\\Phi(t) = e^{At}$ 是标准基解矩阵：任意基解矩阵都可写成 $e^{At}C$，初值问题的解为 $x(t) = e^{At}x_0$"
     ],
     "propertiesEn": [
-      "Initial value and invertibility: $e^{A\\cdot 0}=I$, $(e^{At})^{-1}=e^{-At}$, and $\\det e^{At}=e^{t\\operatorname{tr}A}>0$",
+      "Initial value and invertibility: $e^{A\\cdot 0}=I$, $(e^{At})^{-1}=e^{-At}$, and $\\det e^{At}=e^{t\\operatorname{tr}A}\\ne0$; for real $A$ the determinant is positive, and the matrix exponential is always invertible.",
       "Differentiation: $\\frac{d}{dt}e^{At}=Ae^{At}=e^{At}A$; $A$ always commutes with its exponential",
-      "$e^{A+B}=e^{A}e^{B}$ holds only when $AB=BA$; in general it fails, unlike the scalar case",
+      "If $AB=BA$, then $e^{A+B}=e^{A}e^{B}$; if $AB\\neq BA$, the identity generally fails and cannot be used unconditionally. Commutativity is sufficient, not necessary.",
       "Diagonalizable case: $A=PDP^{-1}$ gives $e^{At}=Pe^{Dt}P^{-1}$; the eigenvalues of $e^{At}$ are $e^{\\lambda_i t}$ with the same eigenvectors",
       "$\\Phi(t)=e^{At}$ is the standard fundamental matrix; every other one is $e^{At}C$, and $x(t)=e^{At}x_0$ solves the initial value problem"
     ],
@@ -142,10 +164,22 @@
       "type": "vectorfield",
       "fx": "2*x - y",
       "fy": "x + 2*y",
-      "xRange": [-2, 2],
-      "yRange": [-2, 2],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
       "marks": [
-        { "at": [0, 0], "label": "平衡点：不稳定焦点" }
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "平衡点：不稳定焦点"
+        }
       ],
       "title": "A = [[2, -1], [1, 2]]（λ = 2 ± i）：解 x(t) = e^{At}x₀ 沿螺旋线向外发散"
     },
@@ -159,8 +193,18 @@
         "solution": "特征值为 $\\lambda_1 = 1$，$\\lambda_2 = 2$，对应特征向量 $(1, 0)^{\\mathsf T}$ 与 $(1, 1)^{\\mathsf T}$，故\n$$P = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}, \\qquad D = \\begin{pmatrix} 1 & 0 \\\\ 0 & 2 \\end{pmatrix}, \\qquad P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}.$$\n由公式 $e^{At} = Pe^{Dt}P^{-1}$，其中 $e^{Dt} = \\begin{pmatrix} e^{t} & 0 \\\\ 0 & e^{2t} \\end{pmatrix}$，得\n$$e^{At} = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} e^{t} & 0 \\\\ 0 & e^{2t} \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} e^{t} & e^{2t} - e^{t} \\\\ 0 & e^{2t} \\end{pmatrix}.$$\n检验：$t = 0$ 时得单位矩阵；第一列 $e^{t}(1, 0)^{\\mathsf T}$ 与第二列也分别满足 $x' = Ax$。"
       }
     ],
-    "tags": ["矩阵指数", "基解矩阵", "初值问题"],
-    "links": ["linear-ode-system", "linear-ode-theory", "constant-coefficient-homogeneous", "stability", "laplace-solve-ode"]
+    "tags": [
+      "矩阵指数",
+      "基解矩阵",
+      "初值问题"
+    ],
+    "links": [
+      "linear-ode-system",
+      "linear-ode-theory",
+      "constant-coefficient-homogeneous",
+      "stability",
+      "laplace-solve-ode"
+    ]
   },
   {
     "id": "phase-plane",
@@ -223,10 +267,22 @@
       "type": "vectorfield",
       "fx": "-x",
       "fy": "-2*y",
-      "xRange": [-2, 2],
-      "yRange": [-2, 2],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
       "marks": [
-        { "at": [0, 0], "label": "平衡点：稳定结点" }
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "平衡点：稳定结点"
+        }
       ],
       "title": "x' = -x, y' = -2y 的相平面：轨线汇入稳定结点"
     },
@@ -240,8 +296,18 @@
         "solution": "特征值为 $\\lambda_1 = 1$，$\\lambda_2 = -1$，异号，所以 $(0,0)$ 是**鞍点**，一定不稳定。解为 $x = c_1 e^{t}$，$y = c_2 e^{-t}$。\n沿 $y$ 轴（$c_1 = 0$）的轨线趋于原点，是稳定方向（稳定流形）；沿 $x$ 轴（$c_2 = 0$）的轨线远离原点，是不稳定方向（不稳定流形）。其余轨线先被拉近 $y$ 轴，再沿 $x$ 轴甩出去，形成马鞍形图案——这正是「鞍点」名字的来源。"
       }
     ],
-    "tags": ["相平面", "平衡点", "定性分析"],
-    "links": ["linear-ode-system", "stability", "matrix-exponential", "ode-basic-concepts", "jacobian"]
+    "tags": [
+      "相平面",
+      "平衡点",
+      "定性分析"
+    ],
+    "links": [
+      "linear-ode-system",
+      "stability",
+      "matrix-exponential",
+      "ode-basic-concepts",
+      "jacobian"
+    ]
   },
   {
     "id": "stability",
@@ -304,11 +370,23 @@
       "type": "vectorfield",
       "fx": "-x + y",
       "fy": "-x - y",
-      "xRange": [-2, 2],
-      "yRange": [-2, 2],
+      "xRange": [
+        -2,
+        2
+      ],
+      "yRange": [
+        -2,
+        2
+      ],
       "contourExpr": "x^2 + y^2",
       "marks": [
-        { "at": [0, 0], "label": "平衡点：稳定焦点（渐近稳定）" }
+        {
+          "at": [
+            0,
+            0
+          ],
+          "label": "平衡点：稳定焦点（渐近稳定）"
+        }
       ],
       "title": "稳定焦点 x' = -x + y, y' = -x - y：轨线螺旋卷入原点，V = x² + y² 递减"
     },
@@ -322,8 +400,18 @@
         "solution": "这是线性系统，$A = \\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$，特征值 $\\lambda = \\pm i$，实部为零，线性化不能直接给出结论，需要直接分析。\n沿轨线计算\n$$\\frac{d}{dt}(x^2 + y^2) = 2x x' + 2y y' = 2xy - 2xy = 0,$$\n所以 $x^2 + y^2 \\equiv$ 常数，轨线是以原点为中心的圆。初值在半径为 $\\delta$ 的圆内时，解永远落在该圆上：取 $\\delta = \\varepsilon$ 即知零解**稳定**。但解沿圆周运动，永远不趋近原点，所以**不是渐近稳定**。这说明中心是稳定的平衡点，却不是渐近稳定的——两个概念必须分清。"
       }
     ],
-    "tags": ["稳定性", "李雅普诺夫", "线性化"],
-    "links": ["phase-plane", "linear-ode-system", "jacobian", "matrix-exponential", "ode-basic-concepts"]
+    "tags": [
+      "稳定性",
+      "李雅普诺夫",
+      "线性化"
+    ],
+    "links": [
+      "phase-plane",
+      "linear-ode-system",
+      "jacobian",
+      "matrix-exponential",
+      "ode-basic-concepts"
+    ]
   },
   {
     "id": "ode-power-series",
@@ -385,11 +473,25 @@
     "plot": {
       "type": "function",
       "functions": [
-        { "expr": "1 + x^3/6 + x^6/180 + x^9/12960 + x^12/1710720 + x^15/359251200 + x^18/109930867200", "color": "#4cc9f0", "label": "y₁：y(0)=1, y′(0)=0（截断到 x¹⁸）" },
-        { "expr": "x + x^4/12 + x^7/504 + x^10/45360 + x^13/7076160 + x^16/1698278400", "color": "#ff6b9d", "label": "y₂：y(0)=0, y′(0)=1（截断到 x¹⁶）" }
+        {
+          "expr": "1 + x^3/6 + x^6/180 + x^9/12960 + x^12/1710720 + x^15/359251200 + x^18/109930867200",
+          "color": "#4cc9f0",
+          "label": "y₁：y(0)=1, y′(0)=0（截断到 x¹⁸）"
+        },
+        {
+          "expr": "x + x^4/12 + x^7/504 + x^10/45360 + x^13/7076160 + x^16/1698278400",
+          "color": "#ff6b9d",
+          "label": "y₂：y(0)=0, y′(0)=1（截断到 x¹⁶）"
+        }
       ],
-      "xRange": [-3, 2.6],
-      "yRange": [-2, 9],
+      "xRange": [
+        -3,
+        2.6
+      ],
+      "yRange": [
+        -2,
+        9
+      ],
       "title": "Airy 方程 y″ = xy 的两个幂级数解（截断近似）"
     },
     "examples": [
@@ -402,8 +504,18 @@
         "solution": "设 $y = \\sum_{n=0}^{\\infty} a_n x^n$，则 $y' = \\sum_{n=1}^{\\infty} n a_n x^{n-1}$。两边都写成 $x^m$ 的幂：\n$$\\sum_{m=0}^{\\infty} (m+1)a_{m+1}x^m = \\sum_{m=0}^{\\infty} a_m x^m,$$\n比较系数得 $(m+1)a_{m+1} = a_m$，即递推关系 $a_{m+1} = \\dfrac{a_m}{m+1}$。由 $a_0 = y(0) = 1$：\n$$a_1 = 1, \\quad a_2 = \\frac{1}{2}, \\quad a_3 = \\frac{1}{6}, \\quad \\dots, \\quad a_n = \\frac{1}{n!}.$$\n于是 $y = \\sum_{n=0}^{\\infty} \\dfrac{x^n}{n!} = e^x$——幂级数解法把解直接「算」成了指数函数，也验证了 $y = e^x$ 的泰勒级数就是解法得到的解。"
       }
     ],
-    "tags": ["幂级数", "级数解", "递推关系"],
-    "links": ["power-series", "taylor-series", "linear-ode-theory", "ode-basic-concepts", "series-convergence-tests"]
+    "tags": [
+      "幂级数",
+      "级数解",
+      "递推关系"
+    ],
+    "links": [
+      "power-series",
+      "taylor-series",
+      "linear-ode-theory",
+      "ode-basic-concepts",
+      "series-convergence-tests"
+    ]
   },
   {
     "id": "ode-existence-uniqueness",
@@ -465,12 +577,33 @@
     "plot": {
       "type": "slopefield",
       "expr": "x + y",
-      "xRange": [-3, 3],
-      "yRange": [-3, 3],
+      "xRange": [
+        -3,
+        3
+      ],
+      "yRange": [
+        -3,
+        3
+      ],
       "initial": [
-        { "x": 0, "y": 1, "color": "#ff6b9d", "label": "y(0) = 1" },
-        { "x": 0, "y": -1, "color": "#4cc9f0", "label": "y(0) = -1" },
-        { "x": -2, "y": 2, "color": "#ffd166", "label": "y(-2) = 2" }
+        {
+          "x": 0,
+          "y": 1,
+          "color": "#ff6b9d",
+          "label": "y(0) = 1"
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "color": "#4cc9f0",
+          "label": "y(0) = -1"
+        },
+        {
+          "x": -2,
+          "y": 2,
+          "color": "#ffd166",
+          "label": "y(-2) = 2"
+        }
       ],
       "title": "y' = x + y 的斜率场：过每一点的解曲线唯一，不同解曲线不相交"
     },
@@ -484,7 +617,17 @@
         "solution": "函数 $f(y) = \\sqrt{|y|}$ 连续，但在 $y = 0$ 处不满足李普希茨条件：考察比值\n$$\\frac{|f(y) - f(0)|}{|y - 0|} = \\frac{\\sqrt{|y|}}{|y|} = \\frac{1}{\\sqrt{|y|}} \\to \\infty \\quad (y \\to 0),$$\n不存在使不等式对 $y = 0$ 附近所有点成立的常数 $L$。结果唯一性确实失效：$y \\equiv 0$ 是一个解；而 $y = x^2/4$（$x \\ge 0$）也是解，因为此时 $y' = x/2$，而 $\\sqrt{|y|} = \\sqrt{x^2/4} = x/2$，两者相等。把 $0$ 解与 $x^2/4$ 解在 $x = 0$ 处拼接，还能构造出无穷多个过原点的解。这条反例说明：定理中的李普希茨条件是保证唯一性的关键假设，不能省略。"
       }
     ],
-    "tags": ["存在唯一性", "皮卡迭代", "李普希茨条件"],
-    "links": ["ode-basic-concepts", "separable-ode", "first-order-linear-ode", "linear-ode-theory", "phase-plane"]
+    "tags": [
+      "存在唯一性",
+      "皮卡迭代",
+      "李普希茨条件"
+    ],
+    "links": [
+      "ode-basic-concepts",
+      "separable-ode",
+      "first-order-linear-ode",
+      "linear-ode-theory",
+      "phase-plane"
+    ]
   }
 ]

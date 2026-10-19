@@ -357,14 +357,14 @@
       "降阶要「分两步积分」：先解出 $p=y'$（得一个常数），再积分一次得到 $y$（得第二个常数）。",
       "类型一 $y''=f(x)$ 的解曲线由 $f$ 唯一决定，只差一次函数的自由度，这正是两个积分常数的几何含义。",
       "除以 $p$ 会丢掉 $p\\equiv 0$ 的解，除以 $y$ 会丢掉常数解：例如 $yy''=(y')^{2}$ 中 $y\\equiv C$ 也是解。",
-      "若方程同时显含 $y,y',y''$（如 $y''+y=0$），不能直接降阶，需要特征方程、级数或拉普拉斯变换等方法。"
+      "若方程同时显含 $x$ 与 $y$（如 $y''+xy'+y=0$），则不能直接用「缺 $y$」或「缺 $x$」的代换降阶，需要幂级数、拉普拉斯变换或变量代换等方法。"
     ],
     "propertiesEn": [
       "Recognition rule: if $y$ is absent, put $p=y'$, $p'=y''$; if $x$ is absent, put $p=y'$ and $y''=p\\dfrac{dp}{dy}$.",
       "Reduction takes two integrations: solve first for $p=y'$ (one constant), then integrate again for $y$ (a second constant).",
       "For type 1 the solution curve is determined by $f$ up to an affine function, which is exactly the geometric meaning of the two integration constants.",
       "Dividing by $p$ loses the solutions with $p\\equiv 0$, and dividing by $y$ loses constant solutions: in $yy''=(y')^{2}$, every $y\\equiv C$ is a solution.",
-      "If the equation contains $y,y',y''$ simultaneously (for example $y''+y=0$), this reduction does not apply and one needs the characteristic equation, power series or Laplace transforms."
+      "If the equation contains both $x$ and $y$ (for example $y''+xy'+y=0$), the missing-variable substitutions do not apply directly; one needs power series, Laplace transforms or other changes of variables."
     ],
     "plot": {
       "type": "function",
@@ -425,8 +425,8 @@
     "level": 5,
     "summary": "二阶线性齐次方程的通解是两个线性无关解的线性组合（$W\\neq 0$ 判别）；非齐次方程的通解 = 齐次通解 + 一个特解。",
     "summaryEn": "The general solution of a second-order linear homogeneous equation is a combination of two linearly independent solutions (detected by $W\\neq 0$); for a nonhomogeneous equation it is the homogeneous general solution plus one particular solution.",
-    "definition": "形如 $y''+P(x)y'+Q(x)y=f(x)$ 的方程称为**二阶线性方程**；$f(x)\\equiv 0$ 时为线性**齐次**方程，否则为线性**非齐次**方程。线性方程理论最漂亮的地方在于：无论系数多复杂，解集的结构都可以完整说清楚。\n\n齐次方程 $y''+P(x)y'+Q(x)y=0$ 的解满足**叠加原理**：若 $y_{1},y_{2}$ 是解，则任意常数组合 $C_{1}y_{1}+C_{2}y_{2}$ 仍是解。如果 $y_{1},y_{2}$ 线性无关（不存在不全为零的常数使 $k_{1}y_{1}+k_{2}y_{2}\\equiv 0$），它们的线性组合就给出了全部解。判别线性无关的便捷工具是**朗斯基行列式**\n\n$$W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}:$$\n\n$y_{1},y_{2}$ 线性无关当且仅当 $W(x)\\neq 0$。\n\n非齐次方程的解与它对应的齐次方程密不可分：若 $\\bar y$ 是一个特解，则 $y$ 是方程的解当且仅当 $y-\\bar y$ 是齐次方程的解，因此\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y\\ \\text{齐次通解}}+\\underbrace{\\bar y}_{y^{*}\\ \\text{一个特解}}.$$\n\n推论：非齐次方程任意两个解之差必是齐次解；两非齐次解只有当常数之和为 1 的线性组合才仍是解。\n\n对 $n$ 阶线性齐次方程，同一结论升维成立：恰有 $n$ 个线性无关解（基本解组），它们的任意线性组合就是通解。这背后是解的存在唯一性定理，也是「解集构成线性空间」这一线性代数观点在微分方程中的体现。",
-    "definitionEn": "An equation of the form $y''+P(x)y'+Q(x)y=f(x)$ is a **second-order linear equation**; it is **homogeneous** when $f(x)\\equiv 0$ and **nonhomogeneous** otherwise. The beauty of the linear theory is that, however complicated the coefficients, the structure of the solution set can be described completely.\n\nSolutions of the homogeneous equation $y''+P(x)y'+Q(x)y=0$ obey the **superposition principle**: if $y_{1},y_{2}$ solve it, so does any combination $C_{1}y_{1}+C_{2}y_{2}$. If $y_{1},y_{2}$ are linearly independent (no nontrivial constants satisfy $k_{1}y_{1}+k_{2}y_{2}\\equiv 0$), their combinations give all solutions. Linear independence is detected by the **Wronskian**\n\n$$W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}:$$\n\nthe two solutions are linearly independent exactly when $W(x)\\neq 0$.\n\nNonhomogeneous equations are tied to their homogeneous partners: if $\\bar y$ is one particular solution, then $y$ solves the equation if and only if $y-\\bar y$ solves the homogeneous equation, so\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y\\ \\text{homogeneous general solution}}+\\underbrace{\\bar y}_{y^{*}\\ \\text{one particular solution}}.$$\n\nConsequently, the difference of any two solutions of the nonhomogeneous equation is a homogeneous solution; a linear combination of two nonhomogeneous solutions is again a solution only when the coefficients sum to 1.\n\nFor an $n$-th order linear homogeneous equation the same statement holds in higher dimension: there are exactly $n$ linearly independent solutions (a fundamental system), and their combinations form the general solution. This rests on the existence–uniqueness theorem and expresses the linear-algebra viewpoint that the solution set is a linear space.",
+    "definition": "形如 $y''+P(x)y'+Q(x)y=f(x)$ 的方程称为**二阶线性方程**；$f(x)\\equiv 0$ 时为线性**齐次**方程，否则为线性**非齐次**方程。线性方程理论最漂亮的地方在于：无论系数多复杂，解集的结构都可以完整说清楚。\n\n齐次方程 $y''+P(x)y'+Q(x)y=0$ 的解满足**叠加原理**：若 $y_{1},y_{2}$ 是解，则任意常数组合 $C_{1}y_{1}+C_{2}y_{2}$ 仍是解。如果 $y_{1},y_{2}$ 线性无关（不存在不全为零的常数使 $k_{1}y_{1}+k_{2}y_{2}\\equiv 0$），它们的线性组合就给出了全部解。判别线性无关的便捷工具是**朗斯基行列式**\n\n$$W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}:$$\n\n当 $y_{1},y_{2}$ 是同一二阶线性齐次方程（系数连续）的解时，它们线性无关当且仅当 $W(x)\\neq 0$；对一般可微函数只有 $W(x_0)\\neq0\\Rightarrow$ 线性无关，反向不成立。\n\n非齐次方程的解与它对应的齐次方程密不可分：若 $\\bar y$ 是一个特解，则 $y$ 是方程的解当且仅当 $y-\\bar y$ 是齐次方程的解，因此\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y\\ \\text{齐次通解}}+\\underbrace{\\bar y}_{y^{*}\\ \\text{一个特解}}.$$\n\n推论：非齐次方程任意两个解之差必是齐次解；两非齐次解只有当常数之和为 1 的线性组合才仍是解。\n\n对 $n$ 阶线性齐次方程，同一结论升维成立：恰有 $n$ 个线性无关解（基本解组），它们的任意线性组合就是通解。这背后是解的存在唯一性定理，也是「解集构成线性空间」这一线性代数观点在微分方程中的体现。",
+    "definitionEn": "An equation of the form $y''+P(x)y'+Q(x)y=f(x)$ is a **second-order linear equation**; it is **homogeneous** when $f(x)\\equiv 0$ and **nonhomogeneous** otherwise. The beauty of the linear theory is that, however complicated the coefficients, the structure of the solution set can be described completely.\n\nSolutions of the homogeneous equation $y''+P(x)y'+Q(x)y=0$ obey the **superposition principle**: if $y_{1},y_{2}$ solve it, so does any combination $C_{1}y_{1}+C_{2}y_{2}$. If $y_{1},y_{2}$ are linearly independent (no nontrivial constants satisfy $k_{1}y_{1}+k_{2}y_{2}\\equiv 0$), their combinations give all solutions. Linear independence is detected by the **Wronskian**\n\n$$W(y_{1},y_{2})=y_{1}y_{2}'-y_{1}'y_{2}:$$\n\nwhen $y_1,y_2$ solve the same second-order linear homogeneous equation with continuous coefficients, they are linearly independent exactly when $W(x)\\neq0$; for general differentiable functions only $W(x_0)\\neq0\\Rightarrow$ linear independence holds, not the converse.\n\nNonhomogeneous equations are tied to their homogeneous partners: if $\\bar y$ is one particular solution, then $y$ solves the equation if and only if $y-\\bar y$ solves the homogeneous equation, so\n\n$$y=\\underbrace{C_{1}y_{1}+C_{2}y_{2}}_{Y\\ \\text{homogeneous general solution}}+\\underbrace{\\bar y}_{y^{*}\\ \\text{one particular solution}}.$$\n\nConsequently, the difference of any two solutions of the nonhomogeneous equation is a homogeneous solution; a linear combination of two nonhomogeneous solutions is again a solution only when the coefficients sum to 1.\n\nFor an $n$-th order linear homogeneous equation the same statement holds in higher dimension: there are exactly $n$ linearly independent solutions (a fundamental system), and their combinations form the general solution. This rests on the existence–uniqueness theorem and expresses the linear-algebra viewpoint that the solution set is a linear space.",
     "formulas": [
       {
         "latex": "y''+P(x)y'+Q(x)y=0\\ \\Longrightarrow\\ y=C_{1}y_{1}+C_{2}y_{2}\\quad(W\\neq 0)",
@@ -439,9 +439,9 @@
         "noteEn": "The Wronskian, used to test linear independence."
       },
       {
-        "latex": "y_{1},y_{2}\\ \\text{线性无关}\\iff W(y_{1},y_{2})\\neq 0",
-        "note": "判别定理；在系数连续的区间上 $W$ 或恒不为零、或恒为零。",
-        "noteEn": "The criterion; on an interval of continuity of the coefficients, $W$ is either everywhere nonzero or identically zero."
+        "latex": "y_{1},y_{2}\\ \\text{是同一齐次方程的解}:\\quad y_{1},y_{2}\\ \\text{线性无关}\\iff W(y_{1},y_{2})\\neq 0",
+        "note": "判别定理：只对同一线性齐次方程的解成立；对一般可微函数，$W\\neq0$ 只蕴含线性无关，反向不成立。",
+        "noteEn": "The criterion holds for solutions of the same linear homogeneous equation; for general differentiable functions, $W\\neq0$ implies linear independence but not conversely."
       },
       {
         "latex": "y=Y(x)+y^{*}(x)",

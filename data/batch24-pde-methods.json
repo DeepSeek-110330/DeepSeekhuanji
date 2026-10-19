@@ -141,9 +141,9 @@
         "noteEn": "Completeness: any piecewise smooth function expands in the eigenfunctions, with coefficients given by weighted orthogonality."
       },
       {
-        "latex": "\\lambda=\\frac{\\int_a^b\\left[p(x)\\,(y')^2+q(x)\\,y^2\\right]dx}{\\int_a^b\\rho(x)\\,y^2\\,dx}",
-        "note": "瑞利商：对满足边界条件的 $y$ 成立；当 $p>0,q\\ge0$ 时特征值非负，且最小值给出最小特征值 $\\lambda_1$。",
-        "noteEn": "The Rayleigh quotient, valid for any admissible $y$; if $p>0$, $q\\ge0$ it gives $\\lambda\\ge0$, and its minimum characterizes the smallest eigenvalue $\\lambda_1$."
+        "latex": "\\lambda=\\frac{\\int_a^b\\left[p(x)(y')^2+q(x)y^2\\right]dx-\\bigl[p y y'\\bigr]_a^b}{\\int_a^b\\rho(x)y^2\\,dx}",
+        "note": "瑞利商。Dirichlet/Neumann 边界时边界项为零；一般 Robin 边界必须保留 $-\\bigl[p y y'\\bigr]_a^b$。在 $p>0,q\\ge0$ 且该边界项非负时，可推出 $\\lambda\\ge0$（$q\\ge0$ 是充分条件，不是必要条件）；最小值给出 $\\lambda_1$。",
+        "noteEn": "The Rayleigh quotient. For Dirichlet/Neumann boundaries the boundary term vanishes; for general Robin conditions the term $-\\bigl[p y y'\\bigr]_a^b$ must be retained. If $p>0$, $q\\ge0$ and this boundary term is nonnegative, then $\\lambda\\ge0$ follows ($q\\ge0$ is sufficient, not necessary); the minimum gives $\\lambda_1$."
       }
     ],
     "expression": {
@@ -157,14 +157,14 @@
       "不同特征值的特征函数关于权 $\\rho$ 正交，重特征值的特征函数可以正交化，从而得到一组正交系。",
       "自伴性（拉格朗日恒等式）是正交性的根源：$(p(y_m'y_n-y_my_n'))'=(\\lambda_n-\\lambda_m)\\rho y_my_n$，积分后边界项由边界条件消去。",
       "特征函数系完备：任意分段光滑函数可按它展开成广义傅里叶级数，展开在平均意义下收敛（函数足够光滑时一致收敛）。",
-      "瑞利商把特征值写成变分形式并给出最小特征值的刻画，便于估计与比较特征值。"
+      "瑞利商把特征值写成变分形式并给出最小特征值的刻画；对一般 Robin 边界必须保留边界项，在 $p>0$、$q\\ge0$ 且边界项非负时，可保证 $\\lambda\\ge0$（这些是充分条件，$q\\ge0$ 不是必要条件）。"
     ],
     "propertiesEn": [
       "All eigenvalues are real and form an increasing countable sequence $\\lambda_n\\to\\infty$; for a regular problem with separated boundary conditions each eigenvalue is simple, while periodic boundary conditions may produce repeated eigenvalues.",
       "Eigenfunctions of distinct eigenvalues are orthogonal with weight $\\rho$, and repeated eigendirections can be orthogonalized to obtain an orthogonal system.",
       "Self-adjointness (Lagrange's identity) is the source of orthogonality: $(p(y_m'y_n-y_my_n'))'=(\\lambda_n-\\lambda_m)\\rho y_my_n$, and the boundary terms vanish after integration by the boundary conditions.",
       "The eigenfunction system is complete: any piecewise smooth function expands in a generalized Fourier series, converging in the mean (uniformly when the function is smooth enough).",
-      "The Rayleigh quotient recasts eigenvalues variationally and characterizes the smallest one, which makes eigenvalues easy to estimate and compare."
+      "The Rayleigh quotient gives a variational characterization and the smallest eigenvalue; for general Robin boundaries the boundary term must be retained, and $p>0$, $q\\ge0$ together with a nonnegative boundary term guarantee $\\lambda\\ge0$ (these are sufficient conditions; $q\\ge0$ is not necessary)."
     ],
     "plot": {
       "type": "function",

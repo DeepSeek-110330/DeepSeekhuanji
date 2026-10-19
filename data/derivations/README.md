@@ -74,8 +74,17 @@
 | D41 | 复积分与级数 | `complex-integral`、`cauchy-integral-theorem`、`cauchy-integral-formula`、`complex-power-series`、`complex-taylor-series`、`laurent-series`、`isolated-singularities` |
 | D42 | 留数与复分析 | `residue`、`residue-computation`、`residue-real-integrals`、`argument-principle`、`liouville-theorem`、`harmonic-function`、`elementary-complex-functions` |
 | D43 | 积分变换 | `fourier-transform`、`fourier-transform-properties`、`laplace-transform`、`laplace-transform-properties`、`inverse-laplace-transform`、`laplace-solve-ode`、`convolution` |
+| D44 | 一阶常微分方程 | `ode-basic-concepts`、`separable-ode`、`homogeneous-ode`、`first-order-linear-ode`、`bernoulli-equation`、`exact-equation`、`first-order-applications` |
+| D45 | 高阶线性方程与系统 | `reducible-ode`、`linear-ode-theory`、`constant-coefficient-homogeneous`、`constant-coefficient-nonhomogeneous`、`euler-equation`、`linear-ode-system`、`matrix-exponential` |
+| D46 | 存在唯一性与稳定性 | `ode-existence-uniqueness`、`ode-continuous-dependence`、`ode-maximal-interval`、`ode-comparison`、`stability`、`lyapunov-second-method` |
+| D47 | 相平面与边值 | `phase-plane`、`limit-cycles`、`bifurcation-chaos`、`dynamical-systems`、`ode-boundary-value`、`ode-power-series` |
+| D48 | PDE 基础与经典方程 | `pde-basic-concepts`、`first-order-pde`、`classification-pde`、`wave-equation`、`heat-equation`、`laplace-equation`、`separation-of-variables` |
+| D49 | PDE 解法与理论 | `dalembert-formula`、`fourier-method-pde`、`sturm-liouville`、`green-function`、`dirichlet-neumann`、`maximum-principle`、`pde-well-posedness` |
+| D50 | 数值分析基础 | `numerical-error`、`nonlinear-equations`、`newton-method`、`direct-linear-solvers`、`iterative-linear-solvers`、`interpolation`、`spline-interpolation` |
+| D51 | 数值微积分 | `least-squares-fitting`、`numerical-differentiation`、`numerical-integration`、`gaussian-quadrature` |
+| D52 | 数值 ODE 与条件数 | `matrix-condition`、`euler-methods`、`runge-kutta`、`numerical-stability` |
 
-当前覆盖：**273 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28）。后续按分支分批推进。
+当前覆盖：**328 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28 + 常微分方程 26 + 偏微分方程 14 + 数值分析 15）。后续按分支分批推进。
 
 ## 命令
 
