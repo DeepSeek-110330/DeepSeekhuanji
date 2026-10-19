@@ -22,6 +22,8 @@ const STAR_VERTEX = /* glsl */ `
   uniform float uTwinkle;
   uniform float uOpacity;
   uniform float uReveal;
+  uniform float uDrift;
+  uniform float uDriftSpeed;
 
   varying vec3 vColor;
   varying float vSpike;
@@ -41,7 +43,15 @@ const STAR_VERTEX = /* glsl */ `
     float e = smoothstep(0.0, 1.0, (uReveal * 1.5 - 0.5 * rn));
     vIntensity *= e;
 
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    // 星体微动：极慢、极小的三轴漂移。每个点相位不同，
+    // 因此不会整片同步移动；振幅远小于点间距，布局轮廓保持不变。
+    vec3 p = position;
+    float dt = uTime * uDriftSpeed;
+    p.x += sin(dt * 1.7 + aPhase * 1.3) * uDrift;
+    p.y += cos(dt * 1.3 + aPhase * 2.1) * uDrift * 0.55;
+    p.z += sin(dt * 1.1 + aPhase * 2.7) * uDrift;
+
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
 
     float dist = max(0.001, -mv.z);
@@ -140,6 +150,8 @@ export class StarLayer {
         uTwinkle: { value: opts.twinkle !== undefined ? opts.twinkle : 0.22 },
         uOpacity: { value: opts.opacity !== undefined ? opts.opacity : 1 },
         uReveal: { value: opts.reveal ? 0 : 1 },
+        uDrift: { value: opts.drift || 0 },
+        uDriftSpeed: { value: opts.driftSpeed || 0.16 },
       },
       vertexShader: STAR_VERTEX,
       fragmentShader: STAR_FRAGMENT,

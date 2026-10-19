@@ -18,7 +18,7 @@
 
 | 文件 | 原因 |
 |---|---|
-| `data/knowledge.json`（6.0 MB） | HANDOVER.md 第 4 节已有全部知识点清单，足够判断"有什么、缺什么" |
+| `data/knowledge.json`（7.6 MB） | HANDOVER.md 第 4 节已有全部知识点清单，足够判断"有什么、缺什么" |
 | `data/batch*.json`（约 7.4 MB，110 个） | 用 `python3 data/merge.py` 的校验结果代替人工阅读 |
 | `js/app.js`、`js/plot.js`（共约 3000 行） | 除非要改布局或新增图表类型；HANDOVER.md 第 6、10 节已够用 |
 
@@ -33,7 +33,7 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 
 ## 硬规则
 
-- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=28**），否则浏览器吃旧缓存，会误以为改动没生效
+- **改 `js/` 下任何文件，必须把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1**（当前 **v=29**），否则浏览器吃旧缓存，会误以为改动没生效
 - 加知识点后**必须**跑 `python3 data/merge.py`（校验字段/冲突/分支/链接/图表类型，有错拒绝写入）
 - 内容更新后还要跑 `python3 data/build_runtime.py`（生成首屏骨架 `data/skeleton.json` 与详情分片 `data/parts/`，v=19 起）
 - 发布用 `python3 release.py -m "说明"`（一键：升版本号→merge→build→提交→推送，v=26 起）
@@ -56,9 +56,11 @@ cd 数学知识银河 && python3 -m http.server 8123
 # 浏览器打开 http://localhost:8123
 ```
 
-**端口固定用 8123**：浏览器缓存按「协议+主机+端口」隔离，换端口会导致 CDN 的 Three.js/KaTeX 重新下载（约 3 MB）。
+**端口固定用 8123**：浏览器缓存按「协议+主机+端口」隔离，换端口会导致本地 `vendor/` 的 Three.js/KaTeX 重新缓存（约 3 MB）。
 
 **验证注意**：标签页不可见时浏览器暂停 `requestAnimationFrame`，逐节点检查会超时——先让标签页可见，或抽样检查。
+
+**知识共鸣（v=29）**：左下「知识共鸣」按钮或 `R` 键进入，依次点两颗星；程序按链接图求最短知识链并给出桥点。相关代码在 `js/app.js` 的「7.5 知识共鸣」段，星体微动在 `js/stars.js` 的 `uDrift` uniform。
 
 ## 协作
 

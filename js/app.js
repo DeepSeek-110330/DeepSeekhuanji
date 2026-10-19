@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=28";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=28";
+import { renderPlot } from "./plot.js?v=29";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=29";
 
 /* ============================================================
    1. 全局状态
@@ -25,9 +25,32 @@ let panelHistory = []; // 面板浏览历史（「返回上一个」用）
 let currentLang = "zh"; // zh | en  —— 面板语言
 let armAngles = []; // 旋臂基础角度（由 computePositions 填充）
 let armLabels = []; // 旋臂名称漂浮标签
-let armLabelsOn = true; // 旋臂标签显示开关
+let armLabelsOn = false; // 旋臂标签显示开关（默认收起：38 条标签同时出现会显得拥挤）
 let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
+
+/* 知识共鸣：让有链接关系的知识点产生可控的「碰撞—融合」交互 */
+const REDUCE_MOTION = window.matchMedia
+  ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  : false;
+let resonanceMode = false;
+let resonanceA = -1;           // 第一颗星的节点下标
+let resonancePath = [];        // 两颗星之间的最短知识链
+let resonancePathIds = new Set();
+let resonancePathKeys = new Set();
+let resonanceAnim = null;      // 飞行/碰撞动画状态
+let resonanceGlow = new Map(); // 节点 id -> 临时高亮
+let resonanceMarkers = null;   // { a, b } 两枚选中光环
+let resonanceGhosts = null;    // { a, b } 碰撞用的星体投影
+let resonanceTrails = null;    // { a, b } 两条汇聚能量弧
+let resonanceRipple = null;    // 碰撞涟漪
+let resonancePulses = [];      // 沿连线飞行的能量脉冲
+let resonanceLinkIndex = new Map(); // "idA|idB" -> linkMeta 下标
+let adjacency = new Map();     // 无向邻接表
+let nextAmbientPulse = 0;
+let lastHoverPulse = 0;
+let resonanceToken = 0;        // 防止退出后旧动画回调继续弹结果
+let resonanceAutoRotate = null; // 进入共鸣前的自转状态
 
 /* ============================================================
    2. 加载数据
@@ -539,6 +562,12 @@ function buildLinks() {
         b: target.branch,
         na: node.id,
         nb: tid,
+        key,
+        pa: { x: a.x, y: a.y, z: a.z },
+        pb: { x: b.x, y: b.y, z: b.z },
+        pm: { x: mx, y: my, z: mz },
+        ca: DATA.branches[node.branch].color,
+        cb: DATA.branches[target.branch].color,
       });
     });
   });
@@ -576,7 +605,13 @@ function updateLinkColors() {
 
   linkMeta.forEach((m) => {
     let k;
-    if (focusId) {
+    if (resonancePathKeys.size && resonancePathKeys.has(m.key)) {
+      // 共鸣链路：优先点亮整条知识链
+      k = 2.1;
+    } else if (resonanceMode && resonancePathKeys.size) {
+      // 共鸣进行中，压暗无关连线，让画面保持干净
+      k = 0.025;
+    } else if (focusId) {
       k = m.na === focusId || m.nb === focusId ? 1.45 : 0.06;
     } else {
       const on = !activeBranch || m.a === activeBranch || m.b === activeBranch;
@@ -603,7 +638,13 @@ function createKnowledgeStars() {
     spike: n.level >= 4 ? 0.95 : n.level === 3 ? 0.55 : n.level === 2 ? 0.22 : 0,
   }));
 
-  starLayer = new StarLayer(items, { opacity: 1, twinkle: 0.22, reveal: true });
+  starLayer = new StarLayer(items, {
+    opacity: 1,
+    twinkle: 0.22,
+    reveal: true,
+    drift: REDUCE_MOTION ? 0 : 1.4,
+    driftSpeed: 0.14,
+  });
   dataIndexOf = new Map(DATA.nodes.map((n, i) => [n.id, i]));
   return starLayer.object;
 }
@@ -623,15 +664,753 @@ function refreshHighlights() {
       for (const i of pulseIdx) values[i] = Math.max(values[i], k);
     }
   }
+  // 悬停 / 选中时，把直接相邻的知识点也轻微提亮：关系不再只靠线
+  const focusIdx = hoveredIndex >= 0 ? hoveredIndex : selectedIndex;
+  if (focusIdx >= 0 && adjacency.size) {
+    const focusId = DATA.nodes[focusIdx].id;
+    const neighbors = adjacency.get(focusId);
+    if (neighbors) {
+      const k = hoveredIndex >= 0 ? 0.45 : 0.32;
+      for (const nid of neighbors) {
+        const i = dataIndexOf.get(nid);
+        if (i !== undefined) values[i] = Math.max(values[i], k);
+      }
+    }
+  }
+  // 共鸣链路：整条知识链轻微提亮；碰撞瞬间再额外闪一下
+  for (const id of resonancePathIds) {
+    const i = dataIndexOf.get(id);
+    if (i !== undefined) values[i] = Math.max(values[i], 0.85);
+  }
+  for (const [idx, v] of resonanceGlow) {
+    if (idx >= 0 && idx < values.length) values[idx] = Math.max(values[idx], v);
+  }
   starLayer.setHighlightArray(values);
   updateLinkColors(); // 悬停时的「脉络高亮」
 }
 
 /* ============================================================
+   7.5 知识共鸣（v=29）
+   - 星体微动：在 stars.js 顶点着色器里做极慢、极小的三轴漂移
+   - 能量脉冲：少量光点沿已有连线飞行，让网络「有呼吸」但不喧闹
+   - 知识碰撞：任选两颗星 → 在链接图上求最短知识链 → 投影相撞 →
+     把「桥点 / 共同关联」作为碰撞结果，而不是凭空生成新内容
+   ============================================================ */
+
+function linkKey(a, b) {
+  return a < b ? a + "|" + b : b + "|" + a;
+}
+
+function makeRingTexture() {
+  const size = 128;
+  const cv = document.createElement("canvas");
+  cv.width = cv.height = size;
+  const ctx = cv.getContext("2d");
+  ctx.translate(size / 2, size / 2);
+  ctx.strokeStyle = "rgba(255,255,255,1)";
+  ctx.shadowColor = "rgba(170,210,255,0.95)";
+  ctx.shadowBlur = 20;
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.arc(0, 0, 40, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.globalAlpha = 0.45;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(0, 0, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.minFilter = THREE.LinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.generateMipmaps = false;
+  return tex;
+}
+
+function makeResonanceSprite(texture, scale, opacity) {
+  const material = new THREE.SpriteMaterial({
+    map: texture,
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    depthTest: false,
+  });
+  const sprite = new THREE.Sprite(material);
+  sprite.scale.setScalar(scale);
+  sprite.userData.baseScale = scale;
+  sprite.userData.baseOpacity = opacity;
+  sprite.visible = false;
+  sprite.renderOrder = 6;
+  return sprite;
+}
+
+function makeResonanceTrail() {
+  const geo = new THREE.BufferGeometry();
+  const arr = new Float32Array(25 * 3);
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
+  const mat = new THREE.LineBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const line = new THREE.Line(geo, mat);
+  line.visible = false;
+  line.renderOrder = 5;
+  line.frustumCulled = false;
+  return line;
+}
+
+function fillTrail(line, p0, pc, p1) {
+  const attr = line.geometry.getAttribute("position");
+  const a = attr.array;
+  for (let i = 0; i < 25; i++) {
+    const t = i / 24;
+    const it = 1 - t;
+    a[i * 3] = it * it * p0.x + 2 * it * t * pc.x + t * t * p1.x;
+    a[i * 3 + 1] = it * it * p0.y + 2 * it * t * pc.y + t * t * p1.y;
+    a[i * 3 + 2] = it * it * p0.z + 2 * it * t * pc.z + t * t * p1.z;
+  }
+  attr.needsUpdate = true;
+}
+
+function createResonanceObjects() {
+  const ringTex = makeRingTexture();
+  const glowTex = makeSoftGlowTexture([
+    [0, "rgba(255,255,255,1)"],
+    [0.28, "rgba(190,220,255,0.72)"],
+    [1, "rgba(120,160,255,0)"],
+  ]);
+
+  resonanceMarkers = {
+    a: makeResonanceSprite(ringTex, 16, 0.9),
+    b: makeResonanceSprite(ringTex, 16, 0.9),
+  };
+  resonanceGhosts = {
+    a: makeResonanceSprite(glowTex, 10, 1),
+    b: makeResonanceSprite(glowTex, 10, 1),
+  };
+  resonanceTrails = {
+    a: makeResonanceTrail(),
+    b: makeResonanceTrail(),
+  };
+  resonanceRipple = makeResonanceSprite(ringTex, 10, 0.9);
+  resonancePulses = Array.from({ length: 10 }, () =>
+    makeResonanceSprite(glowTex, 2.6, 0.7)
+  );
+
+  for (const s of [resonanceMarkers.a, resonanceMarkers.b, resonanceGhosts.a, resonanceGhosts.b, resonanceTrails.a, resonanceTrails.b, resonanceRipple, ...resonancePulses]) {
+    scene.add(s);
+  }
+}
+
+function buildAdjacency() {
+  adjacency = new Map(DATA.nodes.map((n) => [n.id, new Set()]));
+  DATA.nodes.forEach((n) => {
+    (n.links || []).forEach((tid) => {
+      if (!adjacency.has(tid) || tid === n.id) return;
+      adjacency.get(n.id).add(tid);
+      adjacency.get(tid).add(n.id);
+    });
+  });
+  resonanceLinkIndex = new Map();
+  linkMeta.forEach((m, i) => resonanceLinkIndex.set(m.key, i));
+}
+
+/** BFS 最短知识链（最多 maxDepth 跳） */
+function shortestPath(aId, bId, maxDepth = 8) {
+  if (aId === bId) return [aId];
+  const parent = new Map([[aId, null]]);
+  let frontier = [aId];
+  for (let depth = 0; depth < maxDepth; depth++) {
+    const next = [];
+    for (const cur of frontier) {
+      const neighbors = adjacency.get(cur);
+      if (!neighbors) continue;
+      for (const nb of neighbors) {
+        if (parent.has(nb)) continue;
+        parent.set(nb, cur);
+        if (nb === bId) {
+          const path = [nb];
+          let x = cur;
+          while (x) {
+            path.push(x);
+            x = parent.get(x);
+          }
+          return path.reverse();
+        }
+        next.push(nb);
+      }
+    }
+    frontier = next;
+    if (!frontier.length) break;
+  }
+  return null;
+}
+
+function commonNeighbors(aId, bId, refLevel = 3) {
+  const sa = adjacency.get(aId) || new Set();
+  const sb = adjacency.get(bId) || new Set();
+  const degree = (id) => (adjacency.get(id) || new Set()).size;
+  return [...sa]
+    .filter((x) => sb.has(x) && x !== aId && x !== bId)
+    .sort((x, y) => {
+      // 优先「难度接近两者平均」的桥点，再优先连接度高的核心概念。
+      // 这样「导数 × 定积分」会落到「微积分基本定理」，而不是随机挑一个高阶节点。
+      const lx = (nodeById.get(x) || {}).level || 3;
+      const ly = (nodeById.get(y) || {}).level || 3;
+      const dx = Math.abs(lx - refLevel);
+      const dy = Math.abs(ly - refLevel);
+      if (dx !== dy) return dx - dy;
+      const gx = degree(x);
+      const gy = degree(y);
+      if (gx !== gy) return gy - gx;
+      return x.localeCompare(y);
+    });
+}
+
+function nodeTitle(id) {
+  const n = nodeById.get(id);
+  if (!n) return id;
+  return currentLang === "en" && n.titleEn ? n.titleEn : n.title;
+}
+
+function setMarker(sprite, id) {
+  if (!sprite) return;
+  const n = nodeById.get(id);
+  if (!n) {
+    sprite.visible = false;
+    return;
+  }
+  sprite.position.set(n.position.x, n.position.y, n.position.z);
+  sprite.material.color.set(DATA.branches[n.branch].color);
+  sprite.material.opacity = sprite.userData.baseOpacity || 0.9;
+  sprite.scale.setScalar(sprite.userData.baseScale || 16);
+  sprite.visible = true;
+}
+
+function updateResonanceHud(text) {
+  const el = document.getElementById("resonance-hud-text");
+  if (el) el.textContent = text;
+}
+
+function hideResonanceCard() {
+  const card = document.getElementById("resonance-card");
+  if (!card) return;
+  card.classList.remove("show");
+  card.classList.add("hidden");
+}
+
+function resetResonanceSelection() {
+  resonanceToken++;
+  resonanceA = -1;
+  resonancePath = [];
+  resonancePathIds = new Set();
+  resonancePathKeys = new Set();
+  resonanceGlow.clear();
+  resonanceAnim = null;
+  if (resonanceMarkers) {
+    resonanceMarkers.a.visible = false;
+    resonanceMarkers.b.visible = false;
+  }
+  if (resonanceGhosts) {
+    resonanceGhosts.a.visible = false;
+    resonanceGhosts.b.visible = false;
+  }
+  if (resonanceTrails) {
+    resonanceTrails.a.visible = false;
+    resonanceTrails.b.visible = false;
+    resonanceTrails.a.material.opacity = 0;
+    resonanceTrails.b.material.opacity = 0;
+  }
+  if (resonanceRipple) {
+    resonanceRipple.visible = false;
+    resonanceRipple.material.opacity = 0;
+  }
+  hideResonanceCard();
+  refreshHighlights();
+}
+
+function setResonanceMode(on) {
+  if (on === resonanceMode) return;
+  resonanceMode = on;
+  document.body.classList.toggle("resonance-on", on);
+  const btn = document.getElementById("resonance-btn");
+  if (btn) {
+    btn.classList.toggle("active", on);
+    btn.setAttribute("aria-pressed", String(on));
+  }
+  const hud = document.getElementById("resonance-hud");
+  if (hud) hud.classList.toggle("hidden", !on);
+  if (on) {
+    closePanel();
+    if (pathState) exitPath();
+    resetResonanceSelection();
+    // 两连击选星时暂停自转，避免星星在两次点击之间转走
+    resonanceAutoRotate = controls.autoRotate;
+    controls.autoRotate = false;
+    updateResonanceHud("依次点击两颗星，看看它们能碰撞出什么");
+    canvas.style.cursor = "crosshair";
+  } else {
+    resetResonanceSelection();
+    if (resonanceAutoRotate !== null) {
+      controls.autoRotate = resonanceAutoRotate;
+      resonanceAutoRotate = null;
+    }
+    canvas.style.cursor = "grab";
+  }
+}
+
+function handleResonanceClick(idx) {
+  if (idx < 0 || resonanceAnim) return;
+  const card = document.getElementById("resonance-card");
+  const resultShown = card && card.classList.contains("show");
+  // 已经出过结果：下一次点击重新从第一颗星开始
+  if (resonancePath.length || resultShown) {
+    resetResonanceSelection();
+    resonanceA = idx;
+    setMarker(resonanceMarkers.a, DATA.nodes[idx].id);
+    updateResonanceHud(`已选「${nodeTitle(DATA.nodes[idx].id)}」 · 再选第二颗星`);
+    refreshHighlights();
+    return;
+  }
+  if (resonanceA < 0) {
+    resonanceA = idx;
+    setMarker(resonanceMarkers.a, DATA.nodes[idx].id);
+    updateResonanceHud(`已选「${nodeTitle(DATA.nodes[idx].id)}」 · 再选第二颗星`);
+    refreshHighlights();
+    return;
+  }
+  if (idx === resonanceA) {
+    updateResonanceHud("请选择另一颗星");
+    return;
+  }
+  launchResonance(resonanceA, idx);
+}
+
+function launchResonance(aIdx, bIdx) {
+  const a = DATA.nodes[aIdx];
+  const b = DATA.nodes[bIdx];
+  if (!a || !b) return;
+
+  const path = shortestPath(a.id, b.id, 8) || [];
+  resonancePath = path;
+  resonancePathIds = new Set(path);
+  resonancePathKeys = new Set();
+  for (let i = 0; i < path.length - 1; i++) {
+    resonancePathKeys.add(linkKey(path[i], path[i + 1]));
+  }
+
+  resonanceA = aIdx;
+  setMarker(resonanceMarkers.a, a.id);
+  setMarker(resonanceMarkers.b, b.id);
+
+  const ap = a.position;
+  const bp = b.position;
+  const mid = {
+    x: (ap.x + bp.x) / 2,
+    y: (ap.y + bp.y) / 2 + 8,
+    z: (ap.z + bp.z) / 2,
+  };
+  const cA = {
+    x: (ap.x + mid.x) / 2,
+    y: Math.max(ap.y, mid.y) + 10,
+    z: (ap.z + mid.z) / 2,
+  };
+  const cB = {
+    x: (bp.x + mid.x) / 2,
+    y: Math.max(bp.y, mid.y) + 10,
+    z: (bp.z + mid.z) / 2,
+  };
+  const now = performance.now();
+  resonanceAnim = {
+    phase: "fly",
+    start: now,
+    duration: REDUCE_MOTION ? 520 : 1150,
+    aIdx,
+    bIdx,
+    aId: a.id,
+    bId: b.id,
+    path,
+    ap: { x: ap.x, y: ap.y, z: ap.z },
+    bp: { x: bp.x, y: bp.y, z: bp.z },
+    mid,
+    cA,
+    cB,
+    impactAt: 0,
+  };
+
+  [resonanceGhosts.a, resonanceGhosts.b].forEach((g) => {
+    g.visible = true;
+    g.material.opacity = 1;
+    g.scale.setScalar(g.userData.baseScale || 10);
+  });
+  resonanceGhosts.a.position.set(ap.x, ap.y, ap.z);
+  resonanceGhosts.b.position.set(bp.x, bp.y, bp.z);
+  resonanceGhosts.a.material.color.set(DATA.branches[a.branch].color);
+  resonanceGhosts.b.material.color.set(DATA.branches[b.branch].color);
+
+  fillTrail(resonanceTrails.a, ap, cA, mid);
+  fillTrail(resonanceTrails.b, bp, cB, mid);
+  resonanceTrails.a.material.color.set(DATA.branches[a.branch].color);
+  resonanceTrails.b.material.color.set(DATA.branches[b.branch].color);
+  resonanceTrails.a.material.opacity = 0.18;
+  resonanceTrails.b.material.opacity = 0.18;
+  resonanceTrails.a.visible = true;
+  resonanceTrails.b.visible = true;
+
+  resonanceRipple.visible = false;
+  updateResonanceHud(
+    path.length ? "两颗星正在靠近…" : "两颗星正在靠近…（暂无已知链路）"
+  );
+  refreshHighlights();
+}
+
+function updateResonance(now) {
+  const pulse = 1 + 0.07 * Math.sin(now * 0.004);
+  for (const m of [resonanceMarkers && resonanceMarkers.a, resonanceMarkers && resonanceMarkers.b]) {
+    if (m && m.visible) m.scale.setScalar((m.userData.baseScale || 16) * pulse);
+  }
+
+  if (!resonanceAnim) return;
+  const anim = resonanceAnim;
+
+  if (anim.phase === "fly") {
+    const t = Math.min(1, (now - anim.start) / anim.duration);
+    const e = 1 - Math.pow(1 - t, 3);
+    const setGhost = (g, p0, pc) => {
+      const it = 1 - e;
+      g.position.set(
+        it * it * p0.x + 2 * it * e * pc.x + e * e * anim.mid.x,
+        it * it * p0.y + 2 * it * e * pc.y + e * e * anim.mid.y,
+        it * it * p0.z + 2 * it * e * pc.z + e * e * anim.mid.z
+      );
+      const s = 8 + 5 * Math.sin(Math.PI * e);
+      g.scale.setScalar(s);
+      g.material.opacity = 1 - 0.2 * t;
+    };
+    setGhost(resonanceGhosts.a, anim.ap, anim.cA);
+    setGhost(resonanceGhosts.b, anim.bp, anim.cB);
+    resonanceTrails.a.material.opacity = 0.18 * (1 - 0.45 * t);
+    resonanceTrails.b.material.opacity = 0.18 * (1 - 0.45 * t);
+
+    if (t >= 1) {
+      anim.phase = "impact";
+      anim.impactAt = now;
+      resonanceGhosts.a.visible = false;
+      resonanceGhosts.b.visible = false;
+      resonanceTrails.a.visible = false;
+      resonanceTrails.b.visible = false;
+      resonanceRipple.position.copy(anim.mid);
+      resonanceRipple.material.color.set(0xffffff);
+      resonanceRipple.material.opacity = 0.9;
+      resonanceRipple.scale.setScalar(8);
+      resonanceRipple.visible = true;
+
+      // 沿知识链放出少量能量脉冲
+      const maxPulses = Math.min(4, Math.max(0, anim.path.length - 1));
+      for (let i = 0; i < maxPulses; i++) {
+        const key = linkKey(anim.path[i], anim.path[i + 1]);
+        const li = resonanceLinkIndex.get(key);
+        if (li !== undefined) {
+          spawnPulse(li, {
+            duration: 1000,
+            size: 3.2,
+            opacity: 0.9,
+            reverse: i % 2 === 1,
+          });
+        }
+      }
+
+      const token = ++resonanceToken;
+      const { aId, bId, path } = anim;
+      setTimeout(() => {
+        if (resonanceMode && token === resonanceToken) {
+          showResonanceResult(aId, bId, path);
+        }
+      }, REDUCE_MOTION ? 260 : 560);
+    }
+  } else if (anim.phase === "impact") {
+    const age = now - anim.impactAt;
+    const t = Math.min(1, age / 850);
+    const e = 1 - Math.pow(1 - t, 3);
+    resonanceRipple.scale.setScalar(8 + 80 * e);
+    resonanceRipple.material.opacity = 0.9 * (1 - e);
+
+    const fade = Math.max(0, 1 - age / 700);
+    for (const id of anim.path) {
+      const i = dataIndexOf.get(id);
+      if (i !== undefined) resonanceGlow.set(i, 0.85 + 1.15 * fade);
+    }
+    refreshHighlights();
+
+    if (t >= 1) {
+      resonanceRipple.visible = false;
+      resonanceRipple.material.opacity = 0;
+      resonanceGlow.clear();
+      anim.phase = "done";
+      resonanceAnim = null;
+      refreshHighlights();
+    }
+  }
+}
+
+function spawnPulse(linkIdx, opts = {}) {
+  const m = linkMeta[linkIdx];
+  if (!m) return;
+  const sprite = resonancePulses.find((s) => !s.visible);
+  if (!sprite) return;
+  sprite.material.color.set(
+    opts.color || (Math.random() < 0.5 ? m.ca : m.cb)
+  );
+  sprite.material.opacity = 0;
+  sprite.visible = true;
+  sprite.userData = {
+    start: performance.now(),
+    duration: opts.duration || 2400,
+    reverse: !!opts.reverse,
+    size: opts.size || 2.6,
+    opacity: opts.opacity || 0.62,
+    linkIdx,
+  };
+}
+
+function updatePulses(now) {
+  for (const s of resonancePulses) {
+    if (!s.visible) continue;
+    const u = s.userData;
+    const m = linkMeta[u.linkIdx];
+    if (!m) {
+      s.visible = false;
+      continue;
+    }
+    const t = (now - u.start) / u.duration;
+    if (t >= 1 || t < 0) {
+      s.visible = false;
+      s.material.opacity = 0;
+      continue;
+    }
+    const tt = u.reverse ? 1 - t : t;
+    const it = 1 - tt;
+    s.position.set(
+      it * it * m.pa.x + 2 * it * tt * m.pm.x + tt * tt * m.pb.x,
+      it * it * m.pa.y + 2 * it * tt * m.pm.y + tt * tt * m.pb.y,
+      it * it * m.pa.z + 2 * it * tt * m.pm.z + tt * tt * m.pb.z
+    );
+    const fade = Math.sin(Math.PI * t);
+    s.material.opacity = u.opacity * fade;
+    s.scale.setScalar(u.size * (0.7 + 0.6 * fade));
+  }
+}
+
+function pulseFromNode(id, limit = 2) {
+  if (!resonancePulses.length || REDUCE_MOTION) return;
+  const candidates = [];
+  for (let i = 0; i < linkMeta.length; i++) {
+    const m = linkMeta[i];
+    if (m.na === id || m.nb === id) candidates.push(i);
+  }
+  if (!candidates.length) return;
+  candidates.sort(() => Math.random() - 0.5);
+  for (let k = 0; k < Math.min(limit, candidates.length); k++) {
+    spawnPulse(candidates[k], {
+      duration: 1600,
+      size: 2.4,
+      opacity: 0.62,
+      reverse: Math.random() < 0.5,
+    });
+  }
+}
+
+function maybeAmbientPulse(now) {
+  if (REDUCE_MOTION || resonanceMode || resonanceAnim || document.hidden) return;
+  if (now < nextAmbientPulse) return;
+  nextAmbientPulse = now + 2600 + Math.random() * 2000;
+  const active = resonancePulses.filter((s) => s.visible).length;
+  if (active >= 4 || !linkMeta.length) return;
+  const count = Math.random() < 0.45 ? 2 : 1;
+  for (let i = 0; i < count && active + i < 4; i++) {
+    spawnPulse(Math.floor(Math.random() * linkMeta.length), {
+      duration: 2600,
+      size: 2.4,
+      opacity: 0.55,
+    });
+  }
+}
+
+function makeNodeChip(id, className) {
+  const n = nodeById.get(id);
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = className || "rc-chip";
+  if (n) {
+    btn.style.setProperty("--node-color", DATA.branches[n.branch].color);
+    const dot = document.createElement("span");
+    dot.className = "rc-dot";
+    const label = document.createElement("span");
+    label.className = "rc-chip-label";
+    label.textContent = nodeTitle(id);
+    btn.append(dot, label);
+  } else {
+    btn.textContent = id;
+  }
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openPanel(id);
+  });
+  return btn;
+}
+
+function showResonanceResult(aId, bId, path) {
+  const card = document.getElementById("resonance-card");
+  const body = document.getElementById("resonance-body");
+  if (!card || !body) return;
+  const a = nodeById.get(aId);
+  const b = nodeById.get(bId);
+  if (!a || !b) return;
+
+  body.innerHTML = "";
+  const pair = document.createElement("div");
+  pair.className = "rc-pair";
+  const addPairNode = (node) => {
+    const span = document.createElement("span");
+    span.className = "rc-pair-node";
+    span.style.setProperty("--node-color", DATA.branches[node.branch].color);
+    const dot = document.createElement("span");
+    dot.className = "rc-dot";
+    const label = document.createElement("span");
+    label.textContent = nodeTitle(node.id);
+    span.append(dot, label);
+    pair.appendChild(span);
+  };
+  addPairNode(a);
+  const times = document.createElement("span");
+  times.className = "rc-times";
+  times.textContent = "×";
+  pair.appendChild(times);
+  addPairNode(b);
+  body.appendChild(pair);
+
+  const direct = path.length === 2;
+  const common = commonNeighbors(aId, bId, (a.level + b.level) / 2);
+  let fusionId = null;
+  let verdict = "";
+
+  if (!path.length) {
+    verdict = "现有链接中尚未连通 · 换两颗试试";
+  } else if (direct) {
+    verdict = "直接相邻";
+    if (common.length) {
+      fusionId = common[0];
+      verdict += ` · 共同关联 ${common.length} 个`;
+    } else {
+      verdict += " · 暂无共同关联";
+    }
+  } else {
+    verdict = `最短知识链 · ${path.length - 1} 跳`;
+    fusionId = path[Math.floor(path.length / 2)];
+  }
+
+  const verdictEl = document.createElement("div");
+  verdictEl.className = "rc-verdict";
+  verdictEl.textContent = verdict;
+  body.appendChild(verdictEl);
+
+  if (fusionId) {
+    const fusion = document.createElement("div");
+    fusion.className = "rc-fusion";
+    const cap = document.createElement("span");
+    cap.className = "rc-fusion-label";
+    cap.textContent = "碰撞结果";
+    const arrow = document.createElement("span");
+    arrow.className = "rc-fusion-arrow";
+    arrow.textContent = "→";
+    fusion.append(cap, arrow, makeNodeChip(fusionId, "rc-fusion-node"));
+    body.appendChild(fusion);
+  }
+
+  if (path.length > 2) {
+    const wrap = document.createElement("div");
+    wrap.className = "rc-path";
+    const cap = document.createElement("span");
+    cap.className = "rc-section-label";
+    cap.textContent = "知识链";
+    wrap.appendChild(cap);
+    const chips = document.createElement("div");
+    chips.className = "rc-path-chips";
+    path.forEach((id, i) => {
+      if (i) {
+        const arrow = document.createElement("span");
+        arrow.className = "rc-path-arrow";
+        arrow.textContent = "→";
+        chips.appendChild(arrow);
+      }
+      chips.appendChild(makeNodeChip(id, "rc-chip rc-path-chip"));
+    });
+    wrap.appendChild(chips);
+    body.appendChild(wrap);
+  }
+
+  if (direct && common.length > 1) {
+    const rest = common.filter((id) => id !== fusionId).slice(0, 4);
+    if (rest.length) {
+      const wrap = document.createElement("div");
+      wrap.className = "rc-common";
+      const cap = document.createElement("span");
+      cap.className = "rc-section-label";
+      cap.textContent = "其他共同关联";
+      wrap.appendChild(cap);
+      const chips = document.createElement("div");
+      chips.className = "rc-path-chips";
+      rest.forEach((id) => {
+        chips.appendChild(makeNodeChip(id, "rc-chip rc-common-chip"));
+      });
+      if (common.length > rest.length + 1) {
+        const more = document.createElement("span");
+        more.className = "rc-more";
+        more.textContent = `+${common.length - rest.length - 1}`;
+        chips.appendChild(more);
+      }
+      wrap.appendChild(chips);
+      body.appendChild(wrap);
+    }
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "rc-actions";
+  if (fusionId) {
+    const open = document.createElement("button");
+    open.type = "button";
+    open.className = "rc-primary";
+    open.textContent = `打开「${nodeTitle(fusionId)}」`;
+    open.addEventListener("click", () => openPanel(fusionId));
+    actions.appendChild(open);
+  }
+  const again = document.createElement("button");
+  again.type = "button";
+  again.className = "rc-secondary";
+  again.textContent = "再选两颗";
+  again.addEventListener("click", () => {
+    resetResonanceSelection();
+    updateResonanceHud("依次点击两颗星，看看它们能碰撞出什么");
+  });
+  actions.appendChild(again);
+  body.appendChild(actions);
+
+  updateResonanceHud("碰撞完成 · 点击结果继续探索");
+  tooltip.style.opacity = "0";
+  card.classList.remove("hidden");
+  requestAnimationFrame(() => card.classList.add("show"));
+}
+
+/* ============================================================
    8. 射线拾取（点击 / 悬停）
    ============================================================ */
-const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
+const _pickV = new THREE.Vector3();
 const tooltip = document.createElement("div");
 tooltip.id = "tooltip";
 document.body.appendChild(tooltip);
@@ -642,13 +1421,32 @@ function updatePointer(e) {
 }
 
 function pick() {
-  if (!starLayer) return -1;
-  // 拾取半径随视距自适应
-  const dist = camera.position.distanceTo(controls.target);
-  raycaster.params.Points.threshold = Math.max(1.8, dist * 0.02);
-  raycaster.setFromCamera(pointer, camera);
-  const hits = raycaster.intersectObject(starLayer.object, false);
-  return hits.length ? hits[0].index : -1;
+  if (!DATA || !starLayer) return -1;
+  // 屏幕空间拾取：在鼠标附近找「画面上最近」的光点，而不是沿射线找最近的点。
+  // 银河中心很密，射线拾取容易被前方更远的星抢走；屏幕距离更符合用户看到的目标。
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const px = (pointer.x * 0.5 + 0.5) * w;
+  const py = (-pointer.y * 0.5 + 0.5) * h;
+  const radius = 16;
+  const r2 = radius * radius;
+  let best = -1;
+  let bestD2 = r2;
+  for (let i = 0; i < DATA.nodes.length; i++) {
+    const p = DATA.nodes[i].position;
+    _pickV.set(p.x, p.y, p.z).project(camera);
+    if (_pickV.z < -1 || _pickV.z > 1) continue;
+    const x = (_pickV.x * 0.5 + 0.5) * w;
+    const y = (-_pickV.y * 0.5 + 0.5) * h;
+    const dx = x - px;
+    const dy = y - py;
+    const d2 = dx * dx + dy * dy;
+    if (d2 < bestD2) {
+      bestD2 = d2;
+      best = i;
+    }
+  }
+  return best;
 }
 
 canvas.addEventListener("pointermove", (e) => {
@@ -657,7 +1455,15 @@ canvas.addEventListener("pointermove", (e) => {
   if (idx !== hoveredIndex) {
     hoveredIndex = idx;
     refreshHighlights();
-    canvas.style.cursor = idx >= 0 ? "pointer" : "grab";
+    canvas.style.cursor = idx >= 0 ? "pointer" : resonanceMode ? "crosshair" : "grab";
+    // 悬停时沿它的连线放出 1~2 个能量脉冲（带冷却，避免扫过星群时刷屏）
+    if (idx >= 0 && !resonanceMode && !resonanceAnim) {
+      const now = performance.now();
+      if (now - lastHoverPulse > 1500) {
+        lastHoverPulse = now;
+        pulseFromNode(DATA.nodes[idx].id, 2);
+      }
+    }
   }
   if (idx >= 0) {
     const n = DATA.nodes[idx];
@@ -687,6 +1493,10 @@ canvas.addEventListener("pointerup", (e) => {
 
   updatePointer(e);
   const idx = pick();
+  if (resonanceMode) {
+    if (idx >= 0) handleResonanceClick(idx);
+    return;
+  }
   if (idx >= 0) openPanel(DATA.nodes[idx].id);
 });
 
@@ -930,6 +1740,7 @@ function closePanel() {
 function openPanel(id, fromBack = false) {
   const node = nodeById.get(id);
   if (!node) return;
+  if (resonanceMode) setResonanceMode(false);
   // 浏览历史：同节点重开不入栈；从「返回」进来也不入栈
   if (!fromBack && currentNode && currentNode.id !== id) {
     panelHistory.push(currentNode.id);
@@ -1470,8 +2281,18 @@ function animate() {
     if (lt >= 1) linksRevealStart = 0;
   }
 
-  if (starLayer) starLayer.update(elapsed, dt);
+  if (starLayer) {
+    // 远景时让星体轻微漂浮；贴近观察时自动收小，避免与静态连线端点错位
+    const dist = camera.position.distanceTo(controls.target);
+    const driftK = Math.max(0, Math.min(1, (dist - 50) / 150));
+    starLayer.material.uniforms.uDrift.value = REDUCE_MOTION ? 0 : 1.4 * driftK;
+    starLayer.update(elapsed, dt);
+  }
   if (pulseT0) refreshHighlights(); // 搜索脉冲期间逐帧刷新高亮
+  const now = performance.now();
+  updateResonance(now);
+  updatePulses(now);
+  maybeAmbientPulse(now);
   updateArmLabels();
   for (let i = 0; i < bgLayers.length; i++) bgLayers[i].update(elapsed, dt);
 
@@ -1500,6 +2321,8 @@ async function main() {
   scene.add(createBackgroundStars());
   scene.add(buildLinks());
   scene.add(createKnowledgeStars());
+  buildAdjacency();
+  createResonanceObjects();
 
   // 入场：连线随星星从暗到亮
   linksObject.material.opacity = 0;
@@ -1509,13 +2332,48 @@ async function main() {
   const populatedBranches = new Set(DATA.nodes.map((n) => n.branch)).size;
   const subtitle = document.querySelector("#topbar .subtitle");
   if (subtitle) {
-    subtitle.textContent = `${DATA.nodes.length} 个知识点 · ${populatedBranches} 条分支 ｜ 点击任意光点，展开一个知识点`;
+    subtitle.textContent = `${DATA.nodes.length} 个知识点 · ${populatedBranches} 条分支 ｜ 点击光点展开 · R 键知识共鸣`;
   }
 
   buildLegend();
   buildArmLabels();
   setupLegendToggle();
   buildSearch();
+
+  // 知识共鸣（v=29）：按钮 / 退出 / 卡片关闭 / 键盘快捷键
+  document.getElementById("resonance-btn")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setResonanceMode(!resonanceMode);
+  });
+  document.getElementById("resonance-exit")?.addEventListener("click", () => {
+    setResonanceMode(false);
+  });
+  document.getElementById("resonance-card-close")?.addEventListener("click", () => {
+    resetResonanceSelection();
+    updateResonanceHud("依次点击两颗星，看看它们能碰撞出什么");
+  });
+  const isTypingTarget = (t) =>
+    !!t &&
+    (t.tagName === "INPUT" ||
+      t.tagName === "TEXTAREA" ||
+      t.tagName === "SELECT" ||
+      t.isContentEditable);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && resonanceMode) {
+      setResonanceMode(false);
+      return;
+    }
+    if (
+      (e.key === "r" || e.key === "R") &&
+      !isTypingTarget(e.target) &&
+      !e.metaKey &&
+      !e.ctrlKey &&
+      !e.altKey
+    ) {
+      e.preventDefault();
+      setResonanceMode(!resonanceMode);
+    }
+  });
 
   // 随机漫游：跳到一颗随机星星
   document.getElementById("roam-btn").addEventListener("click", () => {
@@ -1540,6 +2398,42 @@ async function main() {
     starLayer,
     bgLayers,
     getFly: () => fly,
+    getResonance: () => ({
+      mode: resonanceMode,
+      selected: resonanceA,
+      path: resonancePath,
+      animating: !!resonanceAnim,
+    }),
+    // 调试 / 演示：直接让两个知识点发生共鸣碰撞
+    debugCollide: (aId, bId) => {
+      const ai = dataIndexOf.get(aId);
+      const bi = dataIndexOf.get(bId);
+      if (ai === undefined || bi === undefined) return false;
+      if (!resonanceMode) setResonanceMode(true);
+      if (resonancePath.length || resonanceAnim) resetResonanceSelection();
+      launchResonance(ai, bi);
+      return true;
+    },
+    screenPos: (id) => {
+      const n = nodeById.get(id);
+      if (!n) return null;
+      const v = new THREE.Vector3(
+        n.position.x,
+        n.position.y,
+        n.position.z
+      ).project(camera);
+      return {
+        x: (v.x * 0.5 + 0.5) * window.innerWidth,
+        y: (-v.y * 0.5 + 0.5) * window.innerHeight,
+        z: v.z,
+      };
+    },
+    pickAt: (x, y) => {
+      pointer.x = (x / window.innerWidth) * 2 - 1;
+      pointer.y = -(y / window.innerHeight) * 2 + 1;
+      const idx = pick();
+      return idx >= 0 ? DATA.nodes[idx].id : null;
+    },
   };
 
   const loading = document.getElementById("loading");

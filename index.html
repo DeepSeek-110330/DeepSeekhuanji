@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="数学知识银河：641 个知识点的 3D 星系式数学知识可视化，覆盖小学到研究生，支持中英双语、KaTeX 公式与代码实时绘图。"
+  />
   <title>数学知识银河</title>
-  <link rel="stylesheet" href="css/style.css?v=28" />
+  <link rel="stylesheet" href="css/style.css?v=29" />
 </head>
 <body>
   <!-- 3D 画布：银河系本体 -->
@@ -47,9 +51,13 @@
         <span class="roam-icon">✦</span>
         <span>学习路线</span>
       </button>
-      <button id="labels-btn" type="button">
+      <button id="labels-btn" type="button" class="off">
         <span class="roam-icon">✷</span>
         <span>旋臂标签</span>
+      </button>
+      <button id="resonance-btn" type="button" aria-pressed="false" title="知识共鸣：选择两颗星，让它们碰撞出知识链（快捷键 R）">
+        <span class="roam-icon">⟡</span>
+        <span>知识共鸣</span>
       </button>
     </div>
   </aside>
@@ -99,6 +107,21 @@
     </div>
   </div>
 
+  <!-- 知识共鸣：模式提示 + 碰撞结果卡（v=29） -->
+  <div id="resonance-hud" class="hidden">
+    <span class="resonance-hud-icon">⟡</span>
+    <span id="resonance-hud-text" aria-live="polite">依次点击两颗星，看看它们能碰撞出什么</span>
+    <span class="resonance-hud-key">R / Esc</span>
+    <button id="resonance-exit" type="button" aria-label="退出共鸣模式">✕</button>
+  </div>
+  <div id="resonance-card" class="hidden" role="dialog" aria-label="知识碰撞结果">
+    <div class="rc-head">
+      <span class="rc-kicker">知识共鸣</span>
+      <button id="resonance-card-close" type="button" aria-label="关闭结果">×</button>
+    </div>
+    <div id="resonance-body"></div>
+  </div>
+
   <!-- 引入 KaTeX：渲染数学公式（本地 vendor，不依赖第三方 CDN） -->
   <link rel="stylesheet" href="vendor/katex/katex.min.css" />
   <script defer src="vendor/katex/katex.min.js"></script>
@@ -114,6 +137,6 @@
     }
   </script>
 
-  <script type="module" src="js/app.js?v=28"></script>
+  <script type="module" src="js/app.js?v=29"></script>
 </body>
 </html>
