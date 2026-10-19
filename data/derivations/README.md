@@ -66,8 +66,16 @@
 | D33 | 级数 | `harmonic-series`、`alternating-series`、`power-series`、`taylor-series`、`fourier-series`、`series-convergence-tests` |
 | D34 | 解析几何 | `line-equation`、`circle-equation`、`line-circle-relation`、`parabola`、`ellipse`、`hyperbola`、`conic-comprehensive` |
 | D35 | 计数原理 | `counting-principles`、`permutations`、`combinations`、`binomial-theorem`、`combinatorics-comprehensive` |
+| D36 | 多元基础 | `multivariable-function`、`multivariable-limit`、`partial-derivative`、`total-differential`、`multivariable-chain-rule`、`higher-order-partial` |
+| D37 | 多元极值与重积分 | `directional-derivative`、`gradient`、`multivariable-extrema`、`lagrange-multiplier`、`double-integral`、`double-integral-polar` |
+| D38 | 多元向量分析 | `triple-integral`、`line-integral`、`green-theorem`、`gauss-theorem`、`stokes-theorem`、`jacobian` |
+| D39 | 多元进阶 | `surface-integral`、`divergence-curl`、`multivariable-implicit-differentiation`、`multivariable-taylor` |
+| D40 | 复变基础 | `complex-number`、`complex-plane`、`complex-trig-form`、`complex-function`、`complex-limit-continuity`、`analytic-function`、`cauchy-riemann` |
+| D41 | 复积分与级数 | `complex-integral`、`cauchy-integral-theorem`、`cauchy-integral-formula`、`complex-power-series`、`complex-taylor-series`、`laurent-series`、`isolated-singularities` |
+| D42 | 留数与复分析 | `residue`、`residue-computation`、`residue-real-integrals`、`argument-principle`、`liouville-theorem`、`harmonic-function`、`elementary-complex-functions` |
+| D43 | 积分变换 | `fourier-transform`、`fourier-transform-properties`、`laplace-transform`、`laplace-transform-properties`、`inverse-laplace-transform`、`laplace-solve-ode`、`convolution` |
 
-当前覆盖：**223 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5）。后续按分支分批推进。
+当前覆盖：**273 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28）。后续按分支分批推进。
 
 ## 命令
 
