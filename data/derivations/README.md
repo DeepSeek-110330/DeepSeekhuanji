@@ -32,8 +32,12 @@
 | 批次 | 主题 | 节点 |
 |---|---|---|
 | D01 | 微积分基础 | `limit`、`continuity`、`derivative`、`mean-value-theorems`、`integral`、`fundamental-theorem`、`taylor-formula` |
+| D02 | 极限与连续 | `sequence-limit`、`limit-laws`、`two-important-limits`、`infinitesimal`、`discontinuity-types`、`continuity-theorems`、`lhopital` |
+| D03 | 导数与微分 | `differentiation-rules`、`chain-rule`、`higher-order-derivative`、`implicit-differentiation`、`parametric-derivative`、`differential`、`curvature` |
+| D04 | 导数应用与积分法 | `monotonicity-extremum`、`concavity-inflection`、`curve-sketching`、`optimization`、`antiderivative`、`integration-substitution` |
+| D05 | 积分几何与物理 | `integration-by-parts`、`improper-integral`、`integral-area`、`integral-volume`、`arc-length`、`integral-physics` |
 
-当前覆盖：**7 / 641**。后续按分支分批推进。
+当前覆盖：**33 / 641**（微积分分支 33/33 完成）。后续按分支分批推进。
 
 ## 命令
 

@@ -62,7 +62,7 @@ cd 数学知识银河 && python3 -m http.server 8123
 
 **知识共鸣（v=29 起；推导卡 v=30；知识点推导 v=31）**：左下「知识共鸣」按钮或 `R` 键进入，依次点两颗星；程序按链接图求最短知识链并给出桥点。相关代码在 `js/app.js` 的「7.5 知识共鸣」段，星体微动在 `js/stars.js` 的 `uDrift` uniform。结果卡的「为什么是这个结果？」推导来自 `data/resonance-notes.json`（可独立扩充，不参与 merge）；没有精选注记的组合只显示结构推导，不冒充定理级证明。
 
-**知识点推导（v=31）**：详情面板的「推导 / Derivation」区来自 `data/derivations/batchDNN-*.json`，由 `merge.py` 按 id 附加，`build_runtime.py` 放进详情分片。每批 5~7 个、至少 3 步、中英等长；生成后必须独立复核。当前覆盖 7/641（D01 微积分核心）；未覆盖节点不显示推导区，**不要用模板批量灌水**。
+**知识点推导（v=31）**：详情面板的「推导 / Derivation」区来自 `data/derivations/batchDNN-*.json`，由 `merge.py` 按 id 附加，`build_runtime.py` 放进详情分片。每批 5~7 个、至少 3 步、中英等长；生成后必须独立复核。当前覆盖 33/641（D01~D05，微积分 33/33）；未覆盖节点不显示推导区，**不要用模板批量灌水**。
 
 ## 协作
 
