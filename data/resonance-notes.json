@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "results": {
+    "fundamental-theorem": {
+      "title": "微积分基本定理：微分与积分互为逆运算",
+      "steps": [
+        "设 $f$ 在 $[a,b]$ 上连续，令 $\\Phi(x)=\\int_a^x f(t)\\,dt$。",
+        "由积分中值定理，$\\frac{\\Phi(x+h)-\\Phi(x)}{h}=\\frac1h\\int_x^{x+h}f(t)\\,dt=f(\\xi_h)$，其中 $\\xi_h$ 介于 $x$ 与 $x+h$ 之间。",
+        "当 $h\\to0$ 时 $\\xi_h\\to x$，由 $f$ 的连续性得 $\\Phi'(x)=f(x)$。",
+        "若 $F'=f$，则 $(F-\\Phi)'=0$，故 $F-\\Phi$ 为常数；取 $x=a$ 得 $F(x)-F(a)=\\Phi(x)=\\int_a^x f(t)\\,dt$。"
+      ],
+      "caveat": "第二部分要求 $F$ 在 $[a,b]$ 连续、在 $(a,b)$ 可导且 $F'=f$，并且 $F'$ 黎曼可积；若 $F'$ 不是黎曼可积（例如只作为导数存在），需要更精细的积分版本（如 Henstock–Kurzweil 积分）。"
+    },
+    "continuity": {
+      "title": "可导必连续，但连续不一定可导",
+      "steps": [
+        "设 $f$ 在 $x_0$ 可导，则 $f'(x_0)=\\lim_{x\\to x_0}\\frac{f(x)-f(x_0)}{x-x_0}$ 存在。",
+        "于是 $f(x)-f(x_0)=\\frac{f(x)-f(x_0)}{x-x_0}(x-x_0)\\to f'(x_0)\\cdot0=0$。",
+        "所以 $\\lim_{x\\to x_0}f(x)=f(x_0)$，即 $f$ 在 $x_0$ 连续。",
+        "反过来不成立：$f(x)=|x|$ 在 $0$ 连续，但左右导数分别为 $-1$ 与 $1$，故不可导。"
+      ],
+      "caveat": "这是点态结论：可导点必为连续点；连续点未必可导。"
+    },
+    "vector-group-rank": {
+      "title": "秩：线性相关性的定量刻度",
+      "steps": [
+        "设 $A=(\\alpha_1,\\dots,\\alpha_s)$。齐次方程 $Ax=0$ 有非零解，当且仅当存在不全为零的 $x_i$ 使 $\\sum x_i\\alpha_i=0$，即向量组线性相关。",
+        "解空间维数为 $s-\\operatorname{rank}(A)$（秩–零化度定理）。",
+        "因此线性相关 $\\iff s-\\operatorname{rank}(A)>0\\iff \\operatorname{rank}(A)<s$。",
+        "最大线性无关组含 $r=\\operatorname{rank}(A)$ 个向量；它是用最少向量表示整组的方式。"
+      ],
+      "caveat": "秩–零化度定理对任意域上的有限维矩阵成立；行秩与列秩相等。"
+    },
+    "symmetric-alternating-groups": {
+      "title": "拉格朗日定理与 $S_n/A_n$：子群阶必须整除群阶",
+      "steps": [
+        "设 $G$ 有限，$H\\le G$。左陪集 $gH$ 两两不交且并成 $G$，每个陪集与 $H$ 等势。",
+        "若共有 $[G:H]$ 个左陪集，则 $|G|=|H|\\,[G:H]$，故 $|H|\\mid |G|$。",
+        "$|S_n|=n!$。符号同态 $\\operatorname{sgn}:S_n\\to\\{\\pm1\\}$ 的核是 $A_n$，故 $[S_n:A_n]=2$，$|A_n|=n!/2$。",
+        "所以 $A_n$ 是拉格朗日定理的直接例证；$S_n$ 中任何子群的阶都必须整除 $n!$。"
+      ],
+      "caveat": "拉格朗日定理的逆不成立：$|H|$ 整除 $|G|$ 不保证存在该阶子群；最小反例是 $A_4$（12 阶，无 6 阶子群）。"
+    },
+    "kkt-conditions": {
+      "title": "KKT：不等式约束下的最优性条件",
+      "steps": [
+        "考虑 $\\min f(x)$ s.t. $g_i(x)\\le0$、$h_j(x)=0$，拉格朗日函数 $L=f+\\sum_i\\lambda_i g_i+\\sum_j\\nu_j h_j$。",
+        "在约束品性（如 Slater 条件）下，局部最优解满足：$\\nabla_x L=0$，$g_i(x)\\le0$，$h_j(x)=0$，$\\lambda_i\\ge0$，$\\lambda_i g_i(x)=0$。",
+        "若 $f,g_i$ 凸、$h_j$ 仿射且 Slater 条件成立，则 KKT 条件也是全局最优的充分条件。",
+        "互补松弛 $\\lambda_i g_i(x)=0$ 表示：不起作用的约束乘数为 $0$，起作用的约束才可能带正乘数。"
+      ],
+      "caveat": "KKT 使用梯度，默认 $f,g_i,h_j$ 可微；没有约束品性时 KKT 可能失效。凸性 + Slater 是常用的充分条件组合。"
+    },
+    "fourier-transform-l1": {
+      "title": "从傅里叶级数到傅里叶变换：周期趋于无穷",
+      "steps": [
+        "设 $f$ 以 $T$ 为周期，复指数形式 $f(t)=\\sum_{n\\in\\mathbb Z}c_n e^{2\\pi int/T}$，$c_n=\\frac1T\\int_{-T/2}^{T/2}f(t)e^{-2\\pi int/T}dt$。",
+        "令 $\\xi_n=n/T$，则频率间隔 $\\Delta\\xi=1/T$，形式上有 $f(t)=\\sum_n \\hat f_T(\\xi_n)e^{2\\pi i\\xi_n t}\\Delta\\xi$，其中 $\\hat f_T(\\xi)=\\int_{-T/2}^{T/2}f(t)e^{-2\\pi i\\xi t}dt$。",
+        "当 $T\\to\\infty$ 时，若 $f\\in L^1(\\mathbb R)$，则 $\\hat f_T\\to\\hat f$，黎曼和过渡为积分，得到反演公式 $f(t)=\\int\\hat f(\\xi)e^{2\\pi i\\xi t}d\\xi$（在适当意义下）。",
+        "这就是傅里叶变换作为「非周期极限」的来源。"
+      ],
+      "caveat": "严格反演还需额外条件（例如 $f,\\hat f\\in L^1$，或用 $L^2$/Plancherel、分布意义）。若采用 $F(\\omega)=\\int f(t)e^{-i\\omega t}dt$ 的角频率约定，反演常数为 $1/(2\\pi)$，与本节 $2\\pi$ 在指数里的约定不同，不能混用。"
+    },
+    "martingale": {
+      "title": "伊藤公式为什么会产生鞅",
+      "steps": [
+        "伊藤公式：$f(W_t)-f(W_0)=\\int_0^t f'(W_s)\\,dW_s+\\frac12\\int_0^t f''(W_s)\\,ds$。",
+        "若 $f$ 是线性函数，则 $f''\\equiv0$，$f(W_t)$ 化为随机积分 $\\int f'(W_s)dW_s$；在通常的可积性条件下它是鞅。",
+        "取 $f(x)=e^{\\theta x}$：$d(e^{\\theta W_t})=\\theta e^{\\theta W_t}dW_t+\\frac12\\theta^2 e^{\\theta W_t}dt$。",
+        "减去漂移项，$e^{\\theta W_t-\\theta^2t/2}$ 的随机微分没有 $dt$ 项，因此是鞅。"
+      ],
+      "caveat": "随机积分成为鞅需要适应性/可积性；此处 $\\theta$ 为常数，指数鞅是真正的鞅。若 $\\theta$ 随机或非适应，$e^{\\theta W_t-\\theta^2t/2}$ 不再自动是真正的鞅（可能只是局部鞅，甚至未定义）。"
+    },
+    "factors-multiples": {
+      "title": "最大公因数与算术基本定理",
+      "steps": [
+        "算术基本定理：每个大于 $1$ 的整数可唯一分解为素数幂的乘积 $n=\\prod p_i^{a_i}$（不计次序）。",
+        "若 $m=\\prod p_i^{a_i}$、$n=\\prod p_i^{b_i}$（补零指数），则 $\\gcd(m,n)=\\prod p_i^{\\min(a_i,b_i)}$。",
+        "辗转相除法给出另一种计算：$\\gcd(a,b)=\\gcd(b,a\\bmod b)$，因为 $a=qb+r$ 的任意公因数必整除 $r$。",
+        "因此「因数、倍数与质数」是最大公因数与算术基本定理的交汇点：前者给出分解，后者给出由分解直接读出的 gcd。"
+      ],
+      "caveat": "唯一分解在整数环 $\\mathbb Z$ 中成立，但并非每个整环都成立；例如 $\\mathbb Z[\\sqrt{-5}]$ 会失去唯一分解，需要理想/唯一分解环（UFD）的语言。"
+    },
+    "matrix-operations": {
+      "title": "特征多项式：行列式与特征值的交汇",
+      "steps": [
+        "$\\lambda$ 是 $A$ 的特征值 $\\iff$ 存在 $x\\ne0$ 使 $Ax=\\lambda x\\iff (A-\\lambda I)x=0$ 有非零解。",
+        "后者 $\\iff \\det(A-\\lambda I)=0$。",
+        "因此特征值是特征多项式 $p_A(\\lambda)=\\det(\\lambda I-A)$ 的根；$p_A(0)=\\det(-A)=(-1)^n\\det A$，说明行列式与特征值通过矩阵运算相连。",
+        "例如 $A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ 时 $p_A(\\lambda)=\\lambda^2-(a+d)\\lambda+(ad-bc)$。"
+      ],
+      "caveat": "特征多项式有 $\\det(A-\\lambda I)$ 与 $\\det(\\lambda I-A)$ 两种写法，两者只差符号 $(-1)^n$；根相同，但常数项符号要看约定。"
+    },
+    "generalized-stokes": {
+      "title": "格林、斯托克斯与高斯公式的统一形式",
+      "steps": [
+        "广义斯托克斯定理：$\\int_M d\\omega=\\int_{\\partial M}\\omega$，其中 $M$ 是可定向带边流形，$\\omega$ 是紧支撑的光滑微分形式。",
+        "取 $M\\subset\\mathbb R^2$、$\\omega=P\\,dx+Q\\,dy$，则 $d\\omega=(\\partial_x Q-\\partial_y P)\\,dx\\wedge dy$，得到格林公式。",
+        "取 $M\\subset\\mathbb R^3$ 为曲面、$\\omega$ 为 $1$-形式，得到经典斯托克斯公式；取 $\\omega$ 为 $2$-形式（通量形式），得到高斯公式。",
+        "因此三者不是彼此独立，而是同一个定理在不同维度/形式次数下的特例。"
+      ],
+      "caveat": "需要定向、边界诱导定向与适当的光滑性/紧支撑条件；区域有奇点或边界不光滑时要额外处理。"
+    },
+    "cauchy-integral-formula": {
+      "title": "柯西积分公式：由边界值决定内部值",
+      "steps": [
+        "设 $f$ 在单连通区域 $D$ 内解析，$\\gamma\\subset D$ 是围绕 $z_0$ 的简单闭曲线（逆时针），则 $f(z_0)=\\frac{1}{2\\pi i}\\oint_\\gamma \\frac{f(z)}{z-z_0}dz$。",
+        "证明要点：把 $\\frac{f(z)}{z-z_0}$ 写成 $\\frac{f(z)-f(z_0)}{z-z_0}+\\frac{f(z_0)}{z-z_0}$；第一项在 $z_0$ 处可去，沿小圆积分趋于 $0$。",
+        "第二项沿小圆积分为 $2\\pi i f(z_0)$；由柯西定理，沿 $\\gamma$ 的积分等于沿小圆的积分。",
+        "因此解析函数在内部的值完全由边界值决定；这也是解析函数无穷可微、满足平均值性质与最大模原理的起点。"
+      ],
+      "caveat": "要求 $f$ 在 $\\gamma$ 内部及边界上解析（或在一含闭包的邻域内解析），且 $\\gamma$ 关于 $z_0$ 的绕数为 $1$；多连通区域需用留数或挖洞处理。"
+    },
+    "sampling-distributions": {
+      "title": "从正态分布到抽样分布：中心极限定理的桥梁",
+      "steps": [
+        "设 $X_1,\\dots,X_n$ iid，均值 $\\mu$、方差 $\\sigma^2<\\infty$，样本均值 $\\bar X_n=\\frac1n\\sum X_i$。",
+        "则 $\\mathbb E\\bar X_n=\\mu$，$\\operatorname{Var}\\bar X_n=\\sigma^2/n$；若总体正态，则 $\\bar X_n\\sim N(\\mu,\\sigma^2/n)$ 精确成立。",
+        "中心极限定理：$\\frac{\\sqrt n(\\bar X_n-\\mu)}{\\sigma}\\Rightarrow N(0,1)$，不要求总体正态。",
+        "抽样分布（$t$、$\\chi^2$、$F$）则是在正态总体下由样本方差与均值构造的精确分布；它们把正态分布与假设检验/区间估计连接起来。"
+      ],
+      "caveat": "CLT 需要有限方差与 iid（或适当的相依/异分布条件）；$t/\\chi^2/F$ 的精确抽样分布通常要求总体正态，不能无条件套用。"
+    },
+    "del-operator": {
+      "title": "梯度与方向导数：$\\nabla$ 的统一语言",
+      "steps": [
+        "标量场 $f$ 的梯度 $\\nabla f=(\\partial_x f,\\partial_y f,\\partial_z f)$。",
+        "沿单位向量 $u$ 的方向导数 $D_uf=\\lim_{t\\to0}\\frac{f(x+tu)-f(x)}{t}=\\nabla f\\cdot u$（$f$ 可微时）。",
+        "因此 $\\nabla f$ 指向 $f$ 增长最快的方向，其模长是最大方向导数；$\\nabla$ 把「方向」与「变化率」统一为一个向量。",
+        "散度与旋度则是 $\\nabla$ 与向量场的点积/叉积推广。"
+      ],
+      "caveat": "方向导数公式 $D_uf=\\nabla f\\cdot u$ 需 $f$ 在点处可微；仅偏导数存在不足以保证。$u$ 必须是单位向量，否则要除以 $\\|u\\|$。"
+    }
+  },
+  "pairs": {
+    "limit|derivative": {
+      "result": "continuity",
+      "reason": "导数定义本身是极限；可导必连续，连续性是可导性的直接必要结论，比「定积分」更贴近这一对的核心。"
+    },
+    "matrix-rank|linear-dependence": {
+      "result": "vector-group-rank",
+      "reason": "秩就是最大无关组所含向量的个数，直接定量刻画线性相关；特征值不是这一对的第一层结论。"
+    },
+    "convex-sets-functions|convex-optimization": {
+      "result": "kkt-conditions",
+      "reason": "凸优化问题的标准形式与 KKT 条件直接对应；拉格朗日乘数法只处理等式约束，KKT 才覆盖不等式约束。"
+    },
+    "green-theorem|stokes-theorem": {
+      "result": "generalized-stokes",
+      "reason": "格林公式与经典斯托克斯公式都是广义斯托克斯定理的特例；用统一形式解释比停在其中一个特例更完整。"
+    },
+    "cauchy-integral-theorem|residue": {
+      "result": "cauchy-integral-formula",
+      "reason": "柯西积分公式是柯西积分定理的直接推论，也是留数理论的基础；它比单讲留数更靠前。"
+    },
+    "normal-distribution|central-limit-theorem": {
+      "result": "sampling-distributions",
+      "reason": "中心极限定理说的是样本均值的渐近正态性；抽样分布正是它在有限样本/正态总体下的精确对应。"
+    },
+    "gradient|directional-derivative": {
+      "result": "del-operator",
+      "reason": "梯度与方向导数由同一个 $\\nabla$ 算子统一：方向导数就是梯度在单位方向上的投影。"
+    },
+    "bayesian-inference|conditional-probability-bayes": {
+      "result": null,
+      "title": "贝叶斯公式：从条件概率到后验推断",
+      "steps": [
+        "条件概率定义：$P(A\\mid B)=P(A\\cap B)/P(B)$（$P(B)>0$）。",
+        "对称地 $P(B\\mid A)=P(A\\cap B)/P(A)$（$P(A)>0$）。",
+        "消去 $P(A\\cap B)$，得 $P(A\\mid B)=\\frac{P(B\\mid A)P(A)}{P(B)}$。",
+        "在贝叶斯推断中把 $A$ 换成参数 $\\theta$、$B$ 换成数据 $x$：$\\pi(\\theta\\mid x)=\\frac{f(x\\mid\\theta)\\pi(\\theta)}{m(x)}$，其中 $m(x)=\\int f(x\\mid\\theta)\\pi(\\theta)d\\theta$ 是归一化常数。"
+      ],
+      "caveat": "要求 $P(B)>0$ 或 $m(x)>0$；连续参数情形需用正则条件概率/密度，且先验必须 proper 或至少后验可归一化。"
+    }
+  }
+}

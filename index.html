@@ -8,7 +8,7 @@
     content="数学知识银河：641 个知识点的 3D 星系式数学知识可视化，覆盖小学到研究生，支持中英双语、KaTeX 公式与代码实时绘图。"
   />
   <title>数学知识银河</title>
-  <link rel="stylesheet" href="css/style.css?v=29" />
+  <link rel="stylesheet" href="css/style.css?v=30" />
 </head>
 <body>
   <!-- 3D 画布：银河系本体 -->
@@ -107,7 +107,7 @@
     </div>
   </div>
 
-  <!-- 知识共鸣：模式提示 + 碰撞结果卡（v=29） -->
+  <!-- 知识共鸣：模式提示 + 碰撞结果卡（v=30） -->
   <div id="resonance-hud" class="hidden">
     <span class="resonance-hud-icon">⟡</span>
     <span id="resonance-hud-text" aria-live="polite">依次点击两颗星，看看它们能碰撞出什么</span>
@@ -117,9 +117,13 @@
   <div id="resonance-card" class="hidden" role="dialog" aria-label="知识碰撞结果">
     <div class="rc-head">
       <span class="rc-kicker">知识共鸣</span>
-      <button id="resonance-card-close" type="button" aria-label="关闭结果">×</button>
+      <div class="rc-head-actions">
+        <button id="resonance-derivation-back" type="button" aria-label="返回结果">← 返回结果</button>
+        <button id="resonance-card-close" type="button" aria-label="关闭结果">×</button>
+      </div>
     </div>
     <div id="resonance-body"></div>
+    <div id="resonance-actions" class="rc-actions"></div>
   </div>
 
   <!-- 引入 KaTeX：渲染数学公式（本地 vendor，不依赖第三方 CDN） -->
@@ -137,6 +141,6 @@
     }
   </script>
 
-  <script type="module" src="js/app.js?v=29"></script>
+  <script type="module" src="js/app.js?v=30"></script>
 </body>
 </html>

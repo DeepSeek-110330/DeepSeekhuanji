@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=29";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=29";
+import { renderPlot } from "./plot.js?v=30";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=30";
 
 /* ============================================================
    1. 全局状态
@@ -51,6 +51,9 @@ let nextAmbientPulse = 0;
 let lastHoverPulse = 0;
 let resonanceToken = 0;        // 防止退出后旧动画回调继续弹结果
 let resonanceAutoRotate = null; // 进入共鸣前的自转状态
+let resonanceRenderToken = 0;   // 结果卡异步补充公式时的版本号
+let resonancePathLayers = [];   // BFS 每一层发现的节点数（推导展示用）
+let RESONANCE_NOTES = { pairs: {}, results: {} }; // 精选推导注记
 
 /* ============================================================
    2. 加载数据
@@ -61,6 +64,22 @@ async function loadData() {
   const res = await fetch("data/skeleton.json", { cache: "no-cache" });
   DATA = await res.json();
   DATA.nodes.forEach((n) => nodeById.set(n.id, n));
+}
+
+/* 精选推导注记：只影响「知识共鸣」结果卡，不参与 knowledge.json 的合并 */
+async function loadResonanceNotes() {
+  try {
+    const res = await fetch("data/resonance-notes.json", { cache: "no-cache" });
+    if (!res.ok) return;
+    const json = await res.json();
+    RESONANCE_NOTES = {
+      pairs: json.pairs || {},
+      results: json.results || {},
+    };
+  } catch (err) {
+    // 注记是可选增强；读取失败时退回纯结构推导
+    RESONANCE_NOTES = { pairs: {}, results: {} };
+  }
 }
 
 /* 按需加载：详情分片 data/parts/<branch>.json（一个分支只加载一次，之后走内存缓存） */
@@ -690,7 +709,7 @@ function refreshHighlights() {
 }
 
 /* ============================================================
-   7.5 知识共鸣（v=29）
+   7.5 知识共鸣（v=30）
    - 星体微动：在 stars.js 顶点着色器里做极慢、极小的三轴漂移
    - 能量脉冲：少量光点沿已有连线飞行，让网络「有呼吸」但不喧闹
    - 知识碰撞：任选两颗星 → 在链接图上求最短知识链 → 投影相撞 →
@@ -821,34 +840,44 @@ function buildAdjacency() {
 }
 
 /** BFS 最短知识链（最多 maxDepth 跳） */
-function shortestPath(aId, bId, maxDepth = 8) {
-  if (aId === bId) return [aId];
+function shortestPathInfo(aId, bId, maxDepth = 8) {
+  if (aId === bId) return { path: [aId], layers: [1], distance: 0 };
   const parent = new Map([[aId, null]]);
   let frontier = [aId];
+  const layers = [1];
   for (let depth = 0; depth < maxDepth; depth++) {
     const next = [];
+    let levelCount = 0;
+    let found = false;
     for (const cur of frontier) {
       const neighbors = adjacency.get(cur);
       if (!neighbors) continue;
       for (const nb of neighbors) {
         if (parent.has(nb)) continue;
         parent.set(nb, cur);
-        if (nb === bId) {
-          const path = [nb];
-          let x = cur;
-          while (x) {
-            path.push(x);
-            x = parent.get(x);
-          }
-          return path.reverse();
-        }
-        next.push(nb);
+        levelCount++;
+        if (nb === bId) found = true;
+        else next.push(nb);
       }
+    }
+    layers.push(levelCount);
+    if (found) {
+      const path = [bId];
+      let x = parent.get(bId);
+      while (x) {
+        path.push(x);
+        x = parent.get(x);
+      }
+      return { path: path.reverse(), layers, distance: depth + 1 };
     }
     frontier = next;
     if (!frontier.length) break;
   }
-  return null;
+  return { path: null, layers, distance: -1 };
+}
+
+function shortestPath(aId, bId, maxDepth = 8) {
+  return shortestPathInfo(aId, bId, maxDepth).path;
 }
 
 function commonNeighbors(aId, bId, refLevel = 3) {
@@ -901,6 +930,7 @@ function hideResonanceCard() {
   const card = document.getElementById("resonance-card");
   if (!card) return;
   card.classList.remove("show");
+  card.classList.remove("rc-show-derivation");
   card.classList.add("hidden");
 }
 
@@ -910,6 +940,7 @@ function resetResonanceSelection() {
   resonancePath = [];
   resonancePathIds = new Set();
   resonancePathKeys = new Set();
+  resonancePathLayers = [];
   resonanceGlow.clear();
   resonanceAnim = null;
   if (resonanceMarkers) {
@@ -996,8 +1027,10 @@ function launchResonance(aIdx, bIdx) {
   const b = DATA.nodes[bIdx];
   if (!a || !b) return;
 
-  const path = shortestPath(a.id, b.id, 8) || [];
+  const info = shortestPathInfo(a.id, b.id, 8);
+  const path = info.path || [];
   resonancePath = path;
+  resonancePathLayers = info.layers || [];
   resonancePathIds = new Set(path);
   resonancePathKeys = new Set();
   for (let i = 0; i < path.length - 1; i++) {
@@ -1264,6 +1297,85 @@ function makeNodeChip(id, className) {
   return btn;
 }
 
+function makeTextEl(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text !== undefined && text !== null) el.textContent = text;
+  return el;
+}
+
+function renderMathIn(el) {
+  if (!el || !window.renderMathInElement) return;
+  try {
+    window.renderMathInElement(el, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+      ],
+      throwOnError: false,
+    });
+  } catch (err) {
+    // 单条公式失败不应拖垮整张结果卡
+  }
+}
+
+function appendFormulaSlot(container, resultId, token) {
+  const slot = makeTextEl("div", "rc-formula-slot", "正在读取核心公式…");
+  container.appendChild(slot);
+  const node = nodeById.get(resultId);
+  if (!node) {
+    slot.textContent = "条目不存在。";
+    return;
+  }
+  loadNodeDetails(node)
+    .then((details) => {
+      if (token !== resonanceRenderToken) return;
+      slot.textContent = "";
+      const formula = details && (details.formulas || [])[0];
+      if (!formula) {
+        slot.textContent = "该条目暂无核心公式。";
+        return;
+      }
+      slot.appendChild(makeTextEl("div", "rc-formula-label", "核心公式"));
+      const box = makeTextEl("div", "rc-formula");
+      if (window.katex) {
+        try {
+          box.innerHTML = window.katex.renderToString(formula.latex, {
+            displayMode: true,
+            throwOnError: false,
+          });
+        } catch (err) {
+          box.textContent = formula.latex;
+        }
+      } else {
+        box.textContent = formula.latex;
+      }
+      slot.appendChild(box);
+      if (formula.note) {
+        const note = makeTextEl("div", "rc-formula-note", formula.note);
+        slot.appendChild(note);
+        renderMathIn(note);
+      }
+    })
+    .catch(() => {
+      if (token === resonanceRenderToken) slot.textContent = "核心公式读取失败。";
+    });
+}
+
+function addConceptRow(parent, label, id) {
+  const n = nodeById.get(id);
+  if (!n) return;
+  const row = makeTextEl("div", "rc-compare-row");
+  const tag = makeTextEl("span", "rc-compare-label", label);
+  const dot = makeTextEl("span", "rc-dot");
+  dot.style.setProperty("--node-color", DATA.branches[n.branch].color);
+  const text = makeTextEl("span", "rc-compare-text");
+  text.appendChild(makeTextEl("b", "", n.title));
+  text.appendChild(document.createTextNode("：" + (n.summary || "")));
+  row.append(tag, dot, text);
+  parent.appendChild(row);
+}
+
 function showResonanceResult(aId, bId, path) {
   const card = document.getElementById("resonance-card");
   const body = document.getElementById("resonance-body");
@@ -1273,6 +1385,9 @@ function showResonanceResult(aId, bId, path) {
   if (!a || !b) return;
 
   body.innerHTML = "";
+  card.classList.remove("rc-show-derivation");
+  const actionsHost = document.getElementById("resonance-actions");
+  if (actionsHost) actionsHost.innerHTML = "";
   const pair = document.createElement("div");
   pair.className = "rc-pair";
   const addPairNode = (node) => {
@@ -1294,13 +1409,22 @@ function showResonanceResult(aId, bId, path) {
   addPairNode(b);
   body.appendChild(pair);
 
+  const token = ++resonanceRenderToken;
   const direct = path.length === 2;
+  const info = shortestPathInfo(aId, bId, 8);
+  const layers = info.layers || [];
   const common = commonNeighbors(aId, bId, (a.level + b.level) / 2);
+  const pairNote =
+    RESONANCE_NOTES.pairs[aId + "|" + bId] ||
+    RESONANCE_NOTES.pairs[bId + "|" + aId] ||
+    RESONANCE_NOTES.pairs[linkKey(aId, bId)] ||
+    null;
+
   let fusionId = null;
   let verdict = "";
 
   if (!path.length) {
-    verdict = "现有链接中尚未连通 · 换两颗试试";
+    verdict = "8 跳内未找到知识链 · 换两颗试试";
   } else if (direct) {
     verdict = "直接相邻";
     if (common.length) {
@@ -1313,6 +1437,19 @@ function showResonanceResult(aId, bId, path) {
     verdict = `最短知识链 · ${path.length - 1} 跳`;
     fusionId = path[Math.floor(path.length / 2)];
   }
+
+  // 精选注记可以指定更有教学价值的桥点；只接受确实位于候选集合中的节点
+  if (pairNote && Object.prototype.hasOwnProperty.call(pairNote, "result")) {
+    const preferred = pairNote.result;
+    if (preferred === null) fusionId = null;
+    else if (direct && common.includes(preferred)) fusionId = preferred;
+    else if (!direct && path.includes(preferred)) fusionId = preferred;
+  }
+
+  const resultNote = fusionId ? RESONANCE_NOTES.results[fusionId] || null : null;
+  const pairHasMath = !!(pairNote && (pairNote.steps || pairNote.note));
+  const mathNote = pairHasMath ? pairNote : resultNote;
+  const titleOf = (id) => nodeTitle(id);
 
   const verdictEl = document.createElement("div");
   verdictEl.className = "rc-verdict";
@@ -1331,6 +1468,34 @@ function showResonanceResult(aId, bId, path) {
     fusion.append(cap, arrow, makeNodeChip(fusionId, "rc-fusion-node"));
     body.appendChild(fusion);
   }
+
+  // 一句话回答「为什么是这个结果」
+  const chosenRank = direct && fusionId ? common.indexOf(fusionId) + 1 : 0;
+  const midIndex = path.length ? Math.floor(path.length / 2) : -1;
+  let why = "";
+  if (!path.length) {
+    why = "从第一颗星出发做 BFS，8 跳内没有遇到第二颗星。";
+  } else if (direct) {
+    if (fusionId) {
+      if (pairNote && pairNote.result === fusionId) {
+        why = `知识库精选关联把「${titleOf(fusionId)}」定为这一对的碰撞结果；它同时在 ${common.length} 个共同关联中排第 ${chosenRank}。`;
+      } else {
+        why = `两颗星都直接连接到「${titleOf(fusionId)}」；在 ${common.length} 个共同关联中，它按难度接近度与连接度排第 ${chosenRank}。`;
+      }
+    } else {
+      why = "两颗星直接相邻，但它们的邻接集合没有交集，因此没有第三方桥点。";
+    }
+  } else if (fusionId) {
+    const idx = path.indexOf(fusionId);
+    if (pairNote && pairNote.result === fusionId) {
+      why = `知识库精选关联把「${titleOf(fusionId)}」定为桥点；它位于最短链第 ${idx + 1}/${path.length} 个节点。`;
+    } else {
+      why = `「${titleOf(fusionId)}」是 A→B 最短链（${path.length - 1} 跳）的中点（第 ${idx + 1}/${path.length} 个节点）。`;
+    }
+  } else {
+    why = "最短链已找到，但没有可用的桥点。";
+  }
+  body.appendChild(makeTextEl("div", "rc-why", why));
 
   if (path.length > 2) {
     const wrap = document.createElement("div");
@@ -1354,30 +1519,172 @@ function showResonanceResult(aId, bId, path) {
     body.appendChild(wrap);
   }
 
+  // 可展开的完整推导
+  const details = makeTextEl("details", "rc-derivation");
+  const toggle = makeTextEl(
+    "summary",
+    "rc-derivation-toggle",
+    "为什么是这个结果？查看推导"
+  );
+  details.appendChild(toggle);
+  const derivation = makeTextEl("div", "rc-derivation-body");
+  details.appendChild(derivation);
+  details.open = false;
+  details.addEventListener("toggle", () => {
+    card.classList.toggle("rc-show-derivation", details.open);
+    toggle.textContent = details.open
+      ? "← 收起推导，返回结果"
+      : "为什么是这个结果？查看推导";
+    if (details.open) body.scrollTop = 0;
+  });
+  body.appendChild(details);
+
+  // ① 图结构推导
+  derivation.appendChild(
+    makeTextEl(
+      "div",
+      "rc-derivation-heading",
+      `${titleOf(aId)} × ${titleOf(bId)}${fusionId ? " → " + titleOf(fusionId) : ""}`
+    )
+  );
+  derivation.appendChild(makeTextEl("div", "rc-derivation-title", "① 图结构推导"));
+  if (direct) {
+    derivation.appendChild(
+      makeTextEl("p", "", `两颗星直接相邻：${titleOf(bId)} ∈ N(${titleOf(aId)})。`)
+    );
+    if (common.length) {
+      const names =
+        common.slice(0, 8).map(titleOf).join("、") +
+        (common.length > 8 ? ` 等 ${common.length} 个` : "");
+      derivation.appendChild(
+        makeTextEl("p", "", `共同关联 N(A)∩N(B) 共 ${common.length} 个：${names}。`)
+      );
+      const chosen = nodeById.get(fusionId);
+      if (chosen) {
+        const gap = Math.abs(chosen.level - (a.level + b.level) / 2);
+        const degree = (adjacency.get(fusionId) || new Set()).size;
+        derivation.appendChild(
+          makeTextEl(
+            "p",
+            "",
+            `排序规则：先比难度差 |level(C) − ${((a.level + b.level) / 2).toFixed(1)}|，再比连接度 deg(C)。选中的「${titleOf(fusionId)}」难度差 ${gap.toFixed(1)}、连接度 ${degree}、排名 ${chosenRank}/${common.length}。`
+          )
+        );
+      }
+    } else {
+      derivation.appendChild(
+        makeTextEl(
+          "p",
+          "",
+          "N(A)∩N(B)=∅：没有同时与两颗星相邻的第三方节点，所以没有「碰撞结果」。"
+        )
+      );
+    }
+  } else if (path.length) {
+    const layerText = layers.length
+      ? layers.map((n, i) => `第 ${i} 层 ${n} 个`).join("；")
+      : "（无分层数据）";
+    derivation.appendChild(
+      makeTextEl("p", "", `BFS 分层（从第一颗星出发）：${layerText}。`)
+    );
+    derivation.appendChild(
+      makeTextEl(
+        "p",
+        "",
+        `最短距离 ${path.length - 1} 跳；回溯父指针得到上方知识链。${
+          fusionId
+            ? `取${pairNote && pairNote.result === fusionId ? "精选" : "中点"}节点「${titleOf(fusionId)}」作为桥点。`
+            : ""
+        }`
+      )
+    );
+  } else {
+    derivation.appendChild(
+      makeTextEl("p", "", "BFS 在 8 跳内没有到达第二颗星；当前图谱中二者不连通或距离超过上限。")
+    );
+  }
+
+  if (pairNote && pairNote.reason) {
+    derivation.appendChild(makeTextEl("p", "rc-note-reason", "精选理由：" + pairNote.reason));
+  }
+
   if (direct && common.length > 1) {
     const rest = common.filter((id) => id !== fusionId).slice(0, 4);
     if (rest.length) {
       const wrap = document.createElement("div");
       wrap.className = "rc-common";
-      const cap = document.createElement("span");
-      cap.className = "rc-section-label";
-      cap.textContent = "其他共同关联";
-      wrap.appendChild(cap);
+      wrap.appendChild(makeTextEl("span", "rc-section-label", "其他共同关联"));
       const chips = document.createElement("div");
       chips.className = "rc-path-chips";
       rest.forEach((id) => {
         chips.appendChild(makeNodeChip(id, "rc-chip rc-common-chip"));
       });
       if (common.length > rest.length + 1) {
-        const more = document.createElement("span");
-        more.className = "rc-more";
-        more.textContent = `+${common.length - rest.length - 1}`;
-        chips.appendChild(more);
+        chips.appendChild(
+          makeTextEl("span", "rc-more", `+${common.length - rest.length - 1}`)
+        );
       }
       wrap.appendChild(chips);
-      body.appendChild(wrap);
+      derivation.appendChild(wrap);
     }
   }
+
+  // ② 数学联系
+  derivation.appendChild(makeTextEl("div", "rc-derivation-title", "② 数学联系"));
+  if (mathNote) {
+    if (mathNote.title) {
+      derivation.appendChild(makeTextEl("p", "rc-note-title", mathNote.title));
+    }
+    if (mathNote.note) {
+      derivation.appendChild(makeTextEl("p", "", mathNote.note));
+    }
+    if (mathNote.steps && mathNote.steps.length) {
+      const ol = document.createElement("ol");
+      mathNote.steps.forEach((step) => {
+        ol.appendChild(makeTextEl("li", "", step));
+      });
+      derivation.appendChild(ol);
+    }
+    if (mathNote.caveat) {
+      derivation.appendChild(
+        makeTextEl("div", "rc-caveat", "条件 / 反例：" + mathNote.caveat)
+      );
+    }
+  } else {
+    derivation.appendChild(
+      makeTextEl(
+        "p",
+        "",
+        "这一对没有预置的定理级推导。下面给出三条目的概念摘要与结果条目的核心公式，供核对；图谱上的相邻关系不等同于数学上的蕴含关系。"
+      )
+    );
+  }
+
+  // ③ 概念对照
+  derivation.appendChild(makeTextEl("div", "rc-derivation-title", "③ 概念对照"));
+  const compare = makeTextEl("div", "rc-compare");
+  addConceptRow(compare, "A", aId);
+  addConceptRow(compare, "B", bId);
+  if (fusionId) addConceptRow(compare, "结果", fusionId);
+  derivation.appendChild(compare);
+
+  // ④ 结果条目的核心公式
+  if (fusionId) {
+    derivation.appendChild(
+      makeTextEl("div", "rc-derivation-title", "④ 结果条目的核心公式")
+    );
+    appendFormulaSlot(derivation, fusionId, token);
+  }
+
+  // ⑤ 说明
+  derivation.appendChild(
+    makeTextEl(
+      "div",
+      "rc-disclaimer",
+      "图结构推导（BFS / 共同邻居排序）是严格可复核的；数学联系来自知识库条目或精选注记。没有精选注记时，本卡只说明图谱关系，不声称定理级蕴含。"
+    )
+  );
+  renderMathIn(derivation);
 
   const actions = document.createElement("div");
   actions.className = "rc-actions";
@@ -1398,7 +1705,7 @@ function showResonanceResult(aId, bId, path) {
     updateResonanceHud("依次点击两颗星，看看它们能碰撞出什么");
   });
   actions.appendChild(again);
-  body.appendChild(actions);
+  (actionsHost || body).appendChild(actions);
 
   updateResonanceHud("碰撞完成 · 点击结果继续探索");
   tooltip.style.opacity = "0";
@@ -2313,7 +2620,7 @@ window.addEventListener("resize", () => {
    14. 启动
    ============================================================ */
 async function main() {
-  await loadData();
+  await Promise.all([loadData(), loadResonanceNotes()]);
   computePositions();
 
   scene.add(createNebulae());
@@ -2340,7 +2647,7 @@ async function main() {
   setupLegendToggle();
   buildSearch();
 
-  // 知识共鸣（v=29）：按钮 / 退出 / 卡片关闭 / 键盘快捷键
+  // 知识共鸣（v=30）：按钮 / 退出 / 卡片关闭 / 键盘快捷键
   document.getElementById("resonance-btn")?.addEventListener("click", (e) => {
     e.stopPropagation();
     setResonanceMode(!resonanceMode);
@@ -2351,6 +2658,10 @@ async function main() {
   document.getElementById("resonance-card-close")?.addEventListener("click", () => {
     resetResonanceSelection();
     updateResonanceHud("依次点击两颗星，看看它们能碰撞出什么");
+  });
+  document.getElementById("resonance-derivation-back")?.addEventListener("click", () => {
+    const details = document.querySelector(".rc-derivation");
+    if (details) details.open = false;
   });
   const isTypingTarget = (t) =>
     !!t &&
