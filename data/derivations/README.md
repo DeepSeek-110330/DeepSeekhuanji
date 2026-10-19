@@ -43,8 +43,16 @@
 | D10 | 二次型与对偶 | `inner-product-orthogonality`、`quadratic-form-standard`、`positive-definite-inertia`、`eigenvalue-variational`、`dual-bilinear`、`quotient-space`、`tensor-product` |
 | D11 | 线性空间与变换 | `linear-space-general`、`linear-transformation`、`basis-change`、`subspace-sum-direct`、`nonnegative-matrices`、`sylvester-lyapunov`、`matrix-functions` |
 | D12 | 矩阵微分 | `matrix-derivative-basics`、`matrix-differential-rules`、`matrix-gradient-identities`、`matrix-calculus-optimization`、`matrix-spectral-derivatives`、`matrix-function-derivatives`、`matrix-calculus-chain-rule` |
+| D13 | 概率基础 | `probability-basics`、`conditional-probability-bayes`、`random-variable`、`expectation-variance`、`discrete-distributions`、`continuous-distributions` |
+| D14 | 分布与极限定理 | `normal-distribution`、`random-vector`、`marginal-conditional-independence`、`covariance-correlation`、`law-of-large-numbers`、`central-limit-theorem` |
+| D15 | 统计推断 | `statistics-sampling`、`sampling-distributions`、`point-estimation`、`interval-estimation`、`hypothesis-testing`、`chi-square-anova` |
+| D16 | 概率应用 | `regression-analysis`、`function-of-random-variables`、`moments-mgf`、`data-collection`、`data-analysis` |
+| D17 | 函数基础 | `function-concept`、`domain-range`、`linear-function`、`inverse-variation-function`、`quadratic-function`、`power-function`、`function-zeros` |
+| D18 | 函数性质 | `monotonicity`、`parity`、`periodicity`、`rational-exponent`、`composite-function`、`inverse-function`、`change-of-base` |
+| D19 | 指数函数 | `exponential-function`、`exponential-equation`、`exponential-growth-decay`、`natural-constant-e` |
+| D20 | 对数与模型 | `logarithm`、`logarithmic-function`、`logarithmic-equation`、`function-models` |
 
-当前覆盖：**82 / 641**（微积分 33/33 + 线性代数 49/49 完成）。后续按分支分批推进。
+当前覆盖：**127 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22）。后续按分支分批推进。
 
 ## 命令
 
