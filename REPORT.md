@@ -1,6 +1,6 @@
 # 进度报告 (REPORT)
 
-> 最后更新：2026-10-19 ｜ 数据版本：`knowledge.json`（38 条分支 / 641 个知识点）｜ 源码 v=30 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
+> 最后更新：2026-10-19 ｜ 数据版本：`knowledge.json`（38 条分支 / 641 个知识点）｜ 源码 v=31 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
 
 ---
 
@@ -14,7 +14,8 @@
 | 配图 | 481 |
 | 分支 | 38 条（全部有内容）／38 条已定义 |
 | 中文正文 | 约 65 万字 |
-| 源码 | 6,633 行（app.js 2757 + plot.js 1802 + stars.js 362 + css 1566 + html 146） |
+| 推导覆盖 | **7/641**（首批 D01：微积分 7 个核心节点） |
+| 源码 | 6,700 行（app.js 2772 + plot.js 1802 + stars.js 362 + css 1618 + html 146） |
 | 数据体积 | `knowledge.json` 约 7.6 MB，由 110 个批次文件合并而来 |
 
 ### 分支分布
@@ -237,11 +238,21 @@
 - 顺带修复：`#search-results` 在无查询时仍显示空框的 CSS bug。
 - 拾取升级：射线拾取改为屏幕空间最近点，密集星区点选更准（单次约 0.03 ms）。
 
+### 知识点推导（2026-10-19，v=31）
+
+**目标**：在每个知识点的详情面板里增加「推导 / Derivation」区，中英同步、分步、可核对。
+
+- 数据：`data/derivations/*.json` 叠加层，`merge.py` 按 id 附加 `derivation` / `derivationEn`；不修改 110 个内容批次文件。
+- 渲染：详情面板新增「推导」区，默认展开、可折叠；步骤编号、KaTeX、公式超宽时用 `aligned` 分行。
+- 首批 D01（7 个）：`limit`、`continuity`、`derivative`、`mean-value-theorems`、`integral`、`fundamental-theorem`、`taylor-formula`。
+- 复核：独立复核抓到 5 处问题（FTC 端点与可积性、积分有界性、连续的整体性质等），修正后复检 **0 错误**；全库 KaTeX 扫描 `SCANNED=77,512, ERRORS=0`。
+- 覆盖：**7/641**。剩余按 5~7 个/批推进，每批独立复核；未覆盖节点不显示推导区，不用模板灌水。
+
 ---
 
 ## 六、重要提醒
 
-- **改了 `js/` 下任何文件，必须把 `?v=N` 版本号 +1**（当前 v=30），否则浏览器吃旧缓存
+- **改了 `js/` 下任何文件，必须把 `?v=N` 版本号 +1**（当前 v=31），否则浏览器吃旧缓存
 - 加完知识点后必须跑 `python3 data/merge.py`
 - 内容更新后还要跑 `python3 data/build_runtime.py`（生成首屏骨架与详情分片，v=19 起）
 - 改完要上线：`git add -A && git commit && git push`（Pages 自动重建；网络不稳时的应对见 `WORKFLOW.md`「1.2 发布与更新」）

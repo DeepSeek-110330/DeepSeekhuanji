@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=30";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=30";
+import { renderPlot } from "./plot.js?v=31";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=31";
 
 /* ============================================================
    1. 全局状态
@@ -2177,6 +2177,21 @@ function buildPanelHTML(node, useEn, details) {
             ? `<div class="formula-note">${escapeHTML(useEn ? e.noteEn || e.note : e.note)}</div>`
             : ""
         }`
+      )
+    );
+  }
+
+  if (details.derivation && details.derivation.length) {
+    const steps = useEn
+      ? details.derivationEn || details.derivation
+      : details.derivation;
+    const items = steps.map((s) => `<li>${mdToHTML(s)}</li>`).join("");
+    parts.push(
+      section(
+        useEn ? "Derivation" : "推导",
+        `<details class="derivation-box" open><summary>${
+          useEn ? `${steps.length} steps` : `推导过程（${steps.length} 步）`
+        }</summary><ol class="derivation-steps">${items}</ol></details>`
       )
     );
   }

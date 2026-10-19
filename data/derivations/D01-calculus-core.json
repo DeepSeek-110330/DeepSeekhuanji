@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "batch": "D01",
+    "topic": "微积分基础：极限、连续、导数、中值定理、积分、基本定理、泰勒公式",
+    "version": 1
+  },
+  "nodes": {
+    "limit": {
+      "zh": [
+        "设 $f$ 在 $x_0$ 的某去心邻域内有定义。若对任意 $\\varepsilon>0$，存在 $\\delta>0$，使当 $0<|x-x_0|<\\delta$ 时都有 $|f(x)-L|<\\varepsilon$，则称 $\\lim_{x\\to x_0}f(x)=L$。其中 $\\varepsilon$ 是允许的误差，$\\delta$ 是控制自变量的范围；去心邻域说明极限与 $f(x_0)$ 是否有定义、取什么值无关。",
+        "唯一性：若 $L_1\\ne L_2$，取 $\\varepsilon=|L_1-L_2|/3$。由定义存在 $\\delta_1,\\delta_2>0$。令 $\\delta=\\min(\\delta_1,\\delta_2)$，当 $0<|x-x_0|<\\delta$ 时，$|L_1-L_2|\\le|L_1-f(x)|+|f(x)-L_2|<2\\varepsilon=2|L_1-L_2|/3$，矛盾。因此极限若存在必唯一。",
+        "左右极限判据：$\\lim_{x\\to x_0}f(x)=L$ 当且仅当 $\\lim_{x\\to x_0^-}f(x)=\\lim_{x\\to x_0^+}f(x)=L$。必要性由定义直接得到；充分性取左右两侧对应的 $\\delta_-,\\delta_+$，令 $\\delta=\\min(\\delta_-,\\delta_+)$ 即可。",
+        "例子：证明 $\\lim_{x\\to2}(3x+1)=7$。对任意 $\\varepsilon>0$，取 $\\delta=\\varepsilon/3$。当 $0<|x-2|<\\delta$ 时，$|(3x+1)-7|=3|x-2|<3\\delta=\\varepsilon$，故极限为 $7$。",
+        "注意：极限存在不要求 $f$ 在 $x_0$ 有定义，例如 $\\lim_{x\\to0}\\frac{\\sin x}{x}=1$，而 $\\frac{\\sin x}{x}$ 在 $0$ 处无定义。另外，验证一列 $x_n\\to x_0$ 只能用来否定极限（若 $f(x_n)$ 不趋近同一值），不足以证明极限存在；必须对所有 $x$ 验证 $\\varepsilon$-$\\delta$ 条件。"
+      ],
+      "en": [
+        "Let $f$ be defined on a punctured neighborhood of $x_0$. We say $\\lim_{x\\to x_0}f(x)=L$ if for every $\\varepsilon>0$ there is $\\delta>0$ such that $0<|x-x_0|<\\delta$ implies $|f(x)-L|<\\varepsilon$. Here $\\varepsilon$ is the allowed error and $\\delta$ controls the input range; the punctured neighborhood means the limit is independent of whether $f(x_0)$ is defined and of its value.",
+        "Uniqueness: if $L_1\\ne L_2$, take $\\varepsilon=|L_1-L_2|/3$. By definition there are $\\delta_1,\\delta_2>0$. Let $\\delta=\\min(\\delta_1,\\delta_2)$. For $0<|x-x_0|<\\delta$, $|L_1-L_2|\\le|L_1-f(x)|+|f(x)-L_2|<2\\varepsilon=2|L_1-L_2|/3$, a contradiction. Hence a limit, if it exists, is unique.",
+        "Two-sided criterion: $\\lim_{x\\to x_0}f(x)=L$ if and only if $\\lim_{x\\to x_0^-}f(x)=\\lim_{x\\to x_0^+}f(x)=L$. Necessity is immediate from the definition; for sufficiency take $\\delta=\\min(\\delta_-,\\delta_+)$ from the left and right conditions.",
+        "Example: prove $\\lim_{x\\to2}(3x+1)=7$. Given $\\varepsilon>0$, choose $\\delta=\\varepsilon/3$. If $0<|x-2|<\\delta$, then $|(3x+1)-7|=3|x-2|<3\\delta=\\varepsilon$, so the limit is $7$.",
+        "Caveat: the limit may exist even if $f$ is not defined at $x_0$, e.g. $\\lim_{x\\to0}\\frac{\\sin x}{x}=1$ although $\\frac{\\sin x}{x}$ is undefined at $0$. Also, checking one sequence $x_n\\to x_0$ can only disprove a limit (if $f(x_n)$ fails to approach a common value); it cannot prove existence. One must verify the $\\varepsilon$-$\\delta$ condition for all $x$."
+      ]
+    },
+    "continuity": {
+      "zh": [
+        "定义：$f$ 在 $x_0$ 连续，是指 $\\lim_{x\\to x_0}f(x)=f(x_0)$。等价地，对任意 $\\varepsilon>0$ 存在 $\\delta>0$，使 $|x-x_0|<\\delta$ 时 $|f(x)-f(x_0)|<\\varepsilon$。这同时要求：$f(x_0)$ 有定义、极限存在、极限值等于函数值。",
+        "序列判据：$f$ 在 $x_0$ 连续当且仅当对任意 $x_n\\to x_0$，都有 $f(x_n)\\to f(x_0)$。必要性由定义直接得到；充分性用反证：若不然，存在 $\\varepsilon_0>0$，对每个 $n$ 都能找到 $x_n$ 使 $|x_n-x_0|<1/n$ 但 $|f(x_n)-f(x_0)|\\ge\\varepsilon_0$，这与序列判据矛盾。",
+        "四则运算：若 $f,g$ 在 $x_0$ 连续，则 $f\\pm g$、$fg$ 在 $x_0$ 连续；当 $g(x_0)\\ne0$ 时 $f/g$ 也在 $x_0$ 连续。以和为例，$|(f+g)(x)-(f+g)(x_0)|\\le|f(x)-f(x_0)|+|g(x)-g(x_0)|$，对 $\\varepsilon/2$ 分别取 $\\delta_f,\\delta_g$，再取较小者即可。",
+        "可导必连续：若 $f'(x_0)$ 存在，则 $f(x)-f(x_0)=\\frac{f(x)-f(x_0)}{x-x_0}(x-x_0)\\to f'(x_0)\\cdot0=0$，所以 $\\lim_{x\\to x_0}f(x)=f(x_0)$。反之不成立：$f(x)=|x|$ 在 $0$ 连续，但左右导数分别为 $-1$ 和 $1$，故不可导。",
+        "注意：连续是逐点性质；在区间上连续指每一点连续。闭区间上的连续函数有有界性与最值性；区间上的连续函数具有介值性（闭区间只是充分条件，不是必要条件）。这些整体性质不能只从一点连续推出。"
+      ],
+      "en": [
+        "Definition: $f$ is continuous at $x_0$ if $\\lim_{x\\to x_0}f(x)=f(x_0)$. Equivalently, for every $\\varepsilon>0$ there is $\\delta>0$ such that $|x-x_0|<\\delta$ implies $|f(x)-f(x_0)|<\\varepsilon$. This requires three things at once: $f(x_0)$ is defined, the limit exists, and the limit equals the function value.",
+        "Sequential criterion: $f$ is continuous at $x_0$ if and only if $f(x_n)\\to f(x_0)$ for every sequence $x_n\\to x_0$. Necessity follows directly from the definition. For sufficiency, argue by contradiction: otherwise there is $\\varepsilon_0>0$ such that for every $n$ one can find $x_n$ with $|x_n-x_0|<1/n$ but $|f(x_n)-f(x_0)|\\ge\\varepsilon_0$, contradicting the sequential criterion.",
+        "Algebra of continuous functions: if $f,g$ are continuous at $x_0$, then $f\\pm g$ and $fg$ are continuous at $x_0$; if $g(x_0)\\ne0$, then $f/g$ is also continuous at $x_0$. For the sum, $|(f+g)(x)-(f+g)(x_0)|\\le|f(x)-f(x_0)|+|g(x)-g(x_0)|$; choose $\\delta_f,\\delta_g$ for $\\varepsilon/2$ and take the smaller one.",
+        "Differentiability implies continuity: if $f'(x_0)$ exists, then $f(x)-f(x_0)=\\frac{f(x)-f(x_0)}{x-x_0}(x-x_0)\\to f'(x_0)\\cdot0=0$, hence $\\lim_{x\\to x_0}f(x)=f(x_0)$. The converse is false: $f(x)=|x|$ is continuous at $0$, but its left and right derivatives there are $-1$ and $1$, so it is not differentiable.",
+        "Caveat: continuity is pointwise; continuity on an interval means continuity at every point. A continuous function on a closed interval is bounded and attains its extrema; a continuous function on an interval has the intermediate value property (a closed interval is sufficient but not necessary). These global properties do not follow from continuity at a single point."
+      ]
+    },
+    "derivative": {
+      "zh": [
+        "设 $y=f(x)$ 在 $x_0$ 的某邻域内有定义。给自变量增量 $\\Delta x$，函数增量 $\\Delta y=f(x_0+\\Delta x)-f(x_0)$。若极限 $\\lim_{\\Delta x\\to0}\\frac{\\Delta y}{\\Delta x}$ 存在，则称 $f$ 在 $x_0$ 可导，该极限记作 $f'(x_0)$。",
+        "几何意义：割线过 $(x_0,f(x_0))$ 与 $(x_0+h,f(x_0+h))$，斜率是 $\\frac{f(x_0+h)-f(x_0)}{h}$。当 $h\\to0$ 时，割线趋于切线，因此 $f'(x_0)$ 是曲线在 $x_0$ 处切线的斜率。",
+        "例子：$f(x)=x^2$。$\\frac{(x+h)^2-x^2}{h}=\\frac{2xh+h^2}{h}=2x+h$，令 $h\\to0$ 得 $f'(x)=2x$。",
+        "左右导数：$f'_-(x_0)=\\lim_{h\\to0^-}\\frac{f(x_0+h)-f(x_0)}{h}$，右导数同理。$f'(x_0)$ 存在当且仅当左右导数都存在且相等。例如 $f(x)=|x|$ 在 $0$ 处左导数为 $-1$、右导数为 $1$，故不可导。",
+        "乘积法则的代数准备：在分子中加减 $f(x+h)g(x)$，得 $$\\begin{aligned}&\\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\\\&\\quad=f(x+h)\\frac{g(x+h)-g(x)}{h}\\\\&\\quad\\quad+g(x)\\frac{f(x+h)-f(x)}{h}.\\end{aligned}$$",
+        "可导必连续：由第 1 步，$f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0)\\to0$，故 $f$ 在 $x_0$ 连续。反之不成立，$|x|$ 在 $0$ 连续但不可导。",
+        "令 $h\\to0$。由第 6 步，$f$ 在 $x$ 连续，故 $f(x+h)\\to f(x)$；由 $f,g$ 可导，两个差商分别趋于 $g'(x)$ 与 $f'(x)$。因此 $(fg)'(x)=f(x)g'(x)+g(x)f'(x)$。"
+      ],
+      "en": [
+        "Let $y=f(x)$ be defined in a neighborhood of $x_0$. Give the input an increment $\\Delta x$ and write $\\Delta y=f(x_0+\\Delta x)-f(x_0)$. If the limit $\\lim_{\\Delta x\\to0}\\frac{\\Delta y}{\\Delta x}$ exists, then $f$ is differentiable at $x_0$ and the limit is denoted $f'(x_0)$.",
+        "Geometric meaning: the secant line through $(x_0,f(x_0))$ and $(x_0+h,f(x_0+h))$ has slope $\\frac{f(x_0+h)-f(x_0)}{h}$. As $h\\to0$, the secant line tends to the tangent line, so $f'(x_0)$ is the slope of the tangent to the curve at $x_0$.",
+        "Example: $f(x)=x^2$. Then $\\frac{(x+h)^2-x^2}{h}=\\frac{2xh+h^2}{h}=2x+h$, and letting $h\\to0$ gives $f'(x)=2x$.",
+        "One-sided derivatives: $f'_-(x_0)=\\lim_{h\\to0^-}\\frac{f(x_0+h)-f(x_0)}{h}$, and similarly for the right derivative. The derivative $f'(x_0)$ exists if and only if both one-sided derivatives exist and are equal. For example, $f(x)=|x|$ has left derivative $-1$ and right derivative $1$ at $0$, so it is not differentiable there.",
+        "Algebraic preparation for the product rule: add and subtract $f(x+h)g(x)$ in the numerator to get $$\\begin{aligned}&\\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\\\&\\quad=f(x+h)\\frac{g(x+h)-g(x)}{h}\\\\&\\quad\\quad+g(x)\\frac{f(x+h)-f(x)}{h}.\\end{aligned}$$",
+        "Differentiability implies continuity: from Step 1, $f(x)-f(x_0)=f'(x_0)(x-x_0)+o(x-x_0)\\to0$, so $f$ is continuous at $x_0$. The converse is false: $|x|$ is continuous at $0$ but not differentiable there.",
+        "Let $h\\to0$. By Step 6, $f$ is continuous at $x$, so $f(x+h)\\to f(x)$; since $f$ and $g$ are differentiable, the two difference quotients tend to $g'(x)$ and $f'(x)$. Hence $(fg)'(x)=f(x)g'(x)+g(x)f'(x)$."
+      ]
+    },
+    "mean-value-theorems": {
+      "zh": [
+        "罗尔定理：设 $f$ 在 $[a,b]$ 连续、在 $(a,b)$ 可导，且 $f(a)=f(b)$。由闭区间连续函数的最值定理，$f$ 取得最大值 $M$ 与最小值 $m$。若 $M=m$，$f$ 为常数，任取 $\\xi\\in(a,b)$ 都有 $f'(\\xi)=0$；否则最值至少有一个在内部点 $\\xi\\in(a,b)$ 取得，由费马引理 $f'(\\xi)=0$。",
+        "拉格朗日中值定理：设 $f$ 在 $[a,b]$ 连续、在 $(a,b)$ 可导。令 $$g(x)=f(x)-f(a)-\\frac{f(b)-f(a)}{b-a}(x-a).$$ 则 $g(a)=g(b)=0$，且 $g$ 满足罗尔定理条件，故存在 $\\xi\\in(a,b)$ 使 $g'(\\xi)=0$，即 $$f'(\\xi)=\\frac{f(b)-f(a)}{b-a}.$$",
+        "柯西中值定理：设 $f,g$ 在 $[a,b]$ 连续、在 $(a,b)$ 可导，且 $g'(x)\\ne0$。令 $$h(x)=\\bigl(f(b)-f(a)\\bigr)g(x)-\\bigl(g(b)-g(a)\\bigr)f(x).$$ 则 $h(a)=h(b)$，由罗尔定理存在 $\\xi$ 使 $h'(\\xi)=0$，即 $$\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(\\xi)}{g'(\\xi)}.$$ 这里 $g(b)\\ne g(a)$ 由 $g'\\ne0$ 与拉格朗日中值定理保证。",
+        "推论：若 $f'=0$ 在区间 $I$ 上恒成立，则 $f$ 在 $I$ 上为常数——对任意 $x_1<x_2$ 用拉格朗日中值定理即可。若 $f'>0$ 在 $I$ 上恒成立，则 $f$ 严格递增；$f'<0$ 则严格递减。",
+        "注意：三个定理都要求「闭区间连续、开区间可导」；罗尔定理还要求端点值相等，柯西定理要求 $g'\\ne0$。定理只保证中值点 $\\xi$ 存在，一般不能具体求出，也不能把 $\\xi$ 取成区间中点。"
+      ],
+      "en": [
+        "Rolle's theorem: let $f$ be continuous on $[a,b]$, differentiable on $(a,b)$, and satisfy $f(a)=f(b)$. By the extreme value theorem, $f$ attains a maximum $M$ and a minimum $m$. If $M=m$, then $f$ is constant and any $\\xi\\in(a,b)$ has $f'(\\xi)=0$. Otherwise at least one extremum is attained at an interior point $\\xi\\in(a,b)$, and Fermat's theorem gives $f'(\\xi)=0$.",
+        "Lagrange mean value theorem: let $f$ be continuous on $[a,b]$ and differentiable on $(a,b)$. Define $$g(x)=f(x)-f(a)-\\frac{f(b)-f(a)}{b-a}(x-a).$$ Then $g(a)=g(b)=0$, and $g$ satisfies Rolle's theorem, so there is $\\xi\\in(a,b)$ with $g'(\\xi)=0$, i.e. $$f'(\\xi)=\\frac{f(b)-f(a)}{b-a}.$$",
+        "Cauchy mean value theorem: let $f,g$ be continuous on $[a,b]$, differentiable on $(a,b)$, and $g'(x)\\ne0$. Define $$h(x)=\\bigl(f(b)-f(a)\\bigr)g(x)-\\bigl(g(b)-g(a)\\bigr)f(x).$$ Then $h(a)=h(b)$, and Rolle's theorem gives $\\xi$ with $h'(\\xi)=0$, i.e. $$\\frac{f(b)-f(a)}{g(b)-g(a)}=\\frac{f'(\\xi)}{g'(\\xi)}.$$ Here $g(b)\\ne g(a)$ follows from $g'\\ne0$ and Lagrange's mean value theorem.",
+        "Consequences: if $f'=0$ on an interval $I$, then $f$ is constant on $I$ (apply Lagrange's theorem to any $x_1<x_2$). If $f'>0$ on $I$, then $f$ is strictly increasing; if $f'<0$, it is strictly decreasing.",
+        "Caveat: all three theorems require continuity on the closed interval and differentiability on the open interval; Rolle's theorem also requires equal endpoint values, and Cauchy's theorem requires $g'\\ne0$. The theorem guarantees the existence of the mean point $\\xi$ but generally does not determine it; one cannot simply take $\\xi$ to be the midpoint."
+      ]
+    },
+    "integral": {
+      "zh": [
+        "设 $f$ 在 $[a,b]$ 上有界。在 $[a,b]$ 中插入分点 $a=x_0<x_1<\\cdots<x_n=b$，第 $i$ 个小区间长 $\\Delta x_i=x_i-x_{i-1}$，并在其中任取 $\\xi_i\\in[x_{i-1},x_i]$，作黎曼和 $S=\\sum_{i=1}^n f(\\xi_i)\\Delta x_i$。令 $\\lambda=\\max_i\\Delta x_i$。",
+        "定积分定义：若当 $\\lambda\\to0$ 时，黎曼和 $S$ 趋于一个与分割方式、取样点 $\\xi_i$ 都无关的常数 $I$，则称 $f$ 在 $[a,b]$ 上黎曼可积，并记 $\\int_a^b f(x)\\,dx=I$。",
+        "达布判据：对分割 $P$，记 $M_i=\\sup_{[x_{i-1},x_i]}f$、$m_i=\\inf_{[x_{i-1},x_i]}f$，上、下和分别为 $U(f,P)=\\sum M_i\\Delta x_i$、$L(f,P)=\\sum m_i\\Delta x_i$。则 $f$ 可积当且仅当对任意 $\\varepsilon>0$ 存在分割 $P$ 使 $U(f,P)-L(f,P)<\\varepsilon$；等价地 $\\inf_P U(f,P)=\\sup_P L(f,P)$。这个判据把「取样点」消掉，只比较上、下界。",
+        "例子：$f(x)=x$ 在 $[0,1]$ 上。取右端点 $\\xi_i=i/n$、$\\Delta x=1/n$，则 $$S_n=\\sum_{i=1}^n\\frac{i}{n}\\cdot\\frac1n=\\frac{1}{n^2}\\cdot\\frac{n(n+1)}2=\\frac{n+1}{2n}\\to\\frac12.$$ $f$ 连续，故可积，所以 $\\int_0^1x\\,dx=1/2$。",
+        "基本性质：线性性 $\\int(\\alpha f+\\beta g)=\\alpha\\int f+\\beta\\int g$ 与区间可加性 $\\int_a^c=\\int_a^b+\\int_b^c$ 都可从黎曼和直接得到。闭区间上的连续函数一定黎曼可积：由一致连续性，分割足够细时 $M_i-m_i<\\varepsilon/(b-a)$，从而 $U-L<\\varepsilon$。",
+        "注意：并非所有函数都黎曼可积。狄利克雷函数（有理点取 $1$、无理点取 $0$）的上和恒为 $1$、下和恒为 $0$，故不可积。定积分是带符号面积，不等于几何面积；几何面积应取 $\\int|f|$。"
+      ],
+      "en": [
+        "Assume $f$ is bounded on $[a,b]$. Insert points $a=x_0<x_1<\\cdots<x_n=b$ in $[a,b]$. The $i$-th subinterval has length $\\Delta x_i=x_i-x_{i-1}$; choose any $\\xi_i\\in[x_{i-1},x_i]$ and form the Riemann sum $S=\\sum_{i=1}^n f(\\xi_i)\\Delta x_i$. Let $\\lambda=\\max_i\\Delta x_i$.",
+        "Definition of the definite integral: if, as $\\lambda\\to0$, the Riemann sums $S$ tend to a constant $I$ independent of the partition and of the sample points $\\xi_i$, then $f$ is Riemann integrable on $[a,b]$, and we write $\\int_a^b f(x)\\,dx=I$.",
+        "Darboux criterion: for a partition $P$, let $M_i=\\sup_{[x_{i-1},x_i]}f$ and $m_i=\\inf_{[x_{i-1},x_i]}f$, with upper and lower sums $U(f,P)=\\sum M_i\\Delta x_i$ and $L(f,P)=\\sum m_i\\Delta x_i$. Then $f$ is integrable if and only if for every $\\varepsilon>0$ there is a partition $P$ with $U(f,P)-L(f,P)<\\varepsilon$; equivalently, $\\inf_P U(f,P)=\\sup_P L(f,P)$. This criterion eliminates the sample points and compares only upper and lower bounds.",
+        "Example: $f(x)=x$ on $[0,1]$. Take right endpoints $\\xi_i=i/n$ and $\\Delta x=1/n$. Then $$S_n=\\sum_{i=1}^n\\frac{i}{n}\\cdot\\frac1n=\\frac{1}{n^2}\\cdot\\frac{n(n+1)}2=\\frac{n+1}{2n}\\to\\frac12.$$ Since $f$ is continuous, it is integrable, so $\\int_0^1x\\,dx=1/2$.",
+        "Basic properties: linearity $\\int(\\alpha f+\\beta g)=\\alpha\\int f+\\beta\\int g$ and additivity $\\int_a^c=\\int_a^b+\\int_b^c$ follow directly from Riemann sums. Every continuous function on a closed interval is Riemann integrable: by uniform continuity, for a sufficiently fine partition $M_i-m_i<\\varepsilon/(b-a)$, hence $U-L<\\varepsilon$.",
+        "Caveat: not every function is Riemann integrable. The Dirichlet function (1 at rationals, 0 at irrationals) has upper sums identically 1 and lower sums identically 0, so it is not integrable. The definite integral is a signed area, not geometric area; geometric area should be computed as $\\int|f|$."
+      ]
+    },
+    "fundamental-theorem": {
+      "zh": [
+        "第一部分：设 $f$ 在 $[a,b]$ 连续，令 $\\Phi(x)=\\int_a^x f(t)\\,dt$。对 $x\\in(a,b)$ 及满足 $x+h\\in[a,b]$ 的 $h\\ne0$，由积分中值定理，$$\\frac{\\Phi(x+h)-\\Phi(x)}{h}=\\frac1h\\int_x^{x+h}f(t)\\,dt=f(\\xi_h),$$ 其中 $\\xi_h$ 介于 $x$ 与 $x+h$ 之间。",
+        "当 $h\\to0$ 时 $\\xi_h\\to x$；由 $f$ 的连续性，$f(\\xi_h)\\to f(x)$。所以对 $x\\in(a,b)$ 有 $\\Phi'(x)=f(x)$：连续函数的变上限积分是它的一个原函数。在端点处只有单侧导数：$\\Phi'_+(a)=f(a)$、$\\Phi'_-(b)=f(b)$。",
+        "第二部分：设 $F$ 在 $[a,b]$ 连续、在 $(a,b)$ 可导，且 $F'=f$。由第 2 步 $\\Phi'=f$，故 $(F-\\Phi)'=0$。于是 $F-\\Phi$ 为常数；令 $x=a$，注意 $\\Phi(a)=0$，得 $F(x)-F(a)=\\Phi(x)=\\int_a^x f(t)\\,dt$。",
+        "牛顿–莱布尼茨公式：在上面的条件下，$$\\int_a^b f(x)\\,dx=F(b)-F(a).$$ 这把定积分的计算转化为求原函数在端点的差。",
+        "注意：在第一部分已假设 $f$ 连续时，$F'=f$ 也连续，因此自动黎曼可积，不需要额外假设。更一般地，若 $f$ 黎曼可积且 $F'=f$，牛顿–莱布尼茨公式仍成立。若 $F'$ 不是黎曼可积（导数未必黎曼可积，例如 Volterra 函数的导数），则黎曼积分本身不存在，需要 Henstock–Kurzweil 等更精细的积分。"
+      ],
+      "en": [
+        "First part: let $f$ be continuous on $[a,b]$ and set $\\Phi(x)=\\int_a^x f(t)\\,dt$. For $x\\in(a,b)$ and $h\\ne0$ with $x+h\\in[a,b]$, the mean value theorem for integrals gives $$\\frac{\\Phi(x+h)-\\Phi(x)}{h}=\\frac1h\\int_x^{x+h}f(t)\\,dt=f(\\xi_h),$$ where $\\xi_h$ lies between $x$ and $x+h$.",
+        "As $h\\to0$, $\\xi_h\\to x$; by continuity of $f$, $f(\\xi_h)\\to f(x)$. Hence $\\Phi'(x)=f(x)$ for $x\\in(a,b)$: the integral with variable upper limit is an antiderivative of a continuous function. At the endpoints only one-sided derivatives are meant: $\\Phi'_+(a)=f(a)$ and $\\Phi'_-(b)=f(b)$.",
+        "Second part: let $F$ be continuous on $[a,b]$, differentiable on $(a,b)$, and satisfy $F'=f$. From Step 2, $\\Phi'=f$, so $(F-\\Phi)'=0$. Thus $F-\\Phi$ is constant; evaluating at $x=a$ and using $\\Phi(a)=0$ gives $F(x)-F(a)=\\Phi(x)=\\int_a^x f(t)\\,dt$.",
+        "Newton–Leibniz formula: under the above hypotheses, $$\\int_a^b f(x)\\,dx=F(b)-F(a).$$ This reduces the computation of a definite integral to the difference of an antiderivative at the endpoints.",
+        "Caveat: under the standing assumption that $f$ is continuous, $F'=f$ is also continuous and hence automatically Riemann integrable, so no extra integrability assumption is needed. More generally, if $f$ is Riemann integrable and $F'=f$, the Newton–Leibniz formula still holds. If $F'$ is not Riemann integrable (derivatives need not be Riemann integrable; e.g. the derivative of Volterra's function), the Riemann integral itself does not exist, and a finer integral such as the Henstock–Kurzweil integral is required."
+      ]
+    },
+    "taylor-formula": {
+      "zh": [
+        "目标：用一个次数不超过 $n$ 的多项式 $P_n$ 在 $x_0$ 附近逼近 $f$，并要求它在 $x_0$ 处与 $f$ 有相同的前 $n$ 阶导数：$P_n^{(k)}(x_0)=f^{(k)}(x_0)$，$k=0,1,\\dots,n$。",
+        "设 $P_n(x)=\\sum_{k=0}^n a_k(x-x_0)^k$。逐次求导并在 $x_0$ 取值：$P_n^{(k)}(x_0)=k!a_k$，所以 $a_k=\\frac{f^{(k)}(x_0)}{k!}$。因此 $$T_n(x)=\\sum_{k=0}^n\\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k.$$",
+        "余项：令 $R_n(x)=f(x)-T_n(x)$。若 $f$ 在包含 $x_0,x$ 的区间上有 $n+1$ 阶导数，则存在 $\\xi$ 介于 $x_0$ 与 $x$ 之间，使 $$R_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}.$$",
+        "余项证明要点：固定 $x\\ne x_0$，令 $$F(t)=f(x)-\\sum_{k=0}^n\\frac{f^{(k)}(t)}{k!}(x-t)^k.$$ 则 $F(x)=0$、$F(x_0)=R_n(x)$，且 $F'(t)=-\\frac{f^{(n+1)}(t)}{n!}(x-t)^n$（中间项望远镜相消）。对 $F(t)$ 与 $G(t)=(x-t)^{n+1}$ 在 $[x_0,x]$（或 $[x,x_0]$）上用柯西中值定理，存在 $\\xi$ 使 $$\\frac{F(x)-F(x_0)}{G(x)-G(x_0)}=\\frac{F'(\\xi)}{G'(\\xi)}.$$ 代入 $G(x)=0$、$G(x_0)=(x-x_0)^{n+1}$、$G'(\\xi)=-(n+1)(x-\\xi)^n$，化简即得拉格朗日余项。",
+        "例子：$f(x)=e^x$、$x_0=0$。$T_n(x)=\\sum_{k=0}^n\\frac{x^k}{k!}$，余项 $R_n(x)=\\frac{e^\\xi}{(n+1)!}x^{n+1}$。当 $|x|\\le1$ 时 $|R_n(x)|\\le\\frac{e}{(n+1)!}\\to0$，所以 $e^x=\\sum_{k=0}^\\infty\\frac{x^k}{k!}$ 在 $[-1,1]$ 上成立（事实上对所有 $x$ 成立）。",
+        "注意：拉格朗日余项要求 $f$ 在区间上有 $n+1$ 阶导数；$\\xi$ 依赖于 $x$，一般不能具体求出。佩亚诺余项只要求在 $x_0$ 处 $n$ 阶可导，是局部形式：$R_n(x)=o((x-x_0)^n)$。"
+      ],
+      "en": [
+        "Goal: approximate $f$ near $x_0$ by a polynomial $P_n$ of degree at most $n$ that matches the first $n$ derivatives of $f$ at $x_0$: $P_n^{(k)}(x_0)=f^{(k)}(x_0)$ for $k=0,1,\\dots,n$.",
+        "Write $P_n(x)=\\sum_{k=0}^n a_k(x-x_0)^k$. Differentiating repeatedly and evaluating at $x_0$ gives $P_n^{(k)}(x_0)=k!a_k$, hence $a_k=\\frac{f^{(k)}(x_0)}{k!}$. Therefore $$T_n(x)=\\sum_{k=0}^n\\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k.$$",
+        "Remainder: let $R_n(x)=f(x)-T_n(x)$. If $f$ has $n+1$ derivatives on an interval containing $x_0$ and $x$, then there exists $\\xi$ between $x_0$ and $x$ such that $$R_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}.$$",
+        "Sketch of the remainder proof: fix $x\\ne x_0$ and define $$F(t)=f(x)-\\sum_{k=0}^n\\frac{f^{(k)}(t)}{k!}(x-t)^k.$$ Then $F(x)=0$ and $F(x_0)=R_n(x)$, while $F'(t)=-\\frac{f^{(n+1)}(t)}{n!}(x-t)^n$ (the intermediate terms telescope). Apply Cauchy's mean value theorem to $F(t)$ and $G(t)=(x-t)^{n+1}$ on $[x_0,x]$ (or $[x,x_0]$): there is $\\xi$ such that $$\\frac{F(x)-F(x_0)}{G(x)-G(x_0)}=\\frac{F'(\\xi)}{G'(\\xi)}.$$ Substitute $G(x)=0$, $G(x_0)=(x-x_0)^{n+1}$, and $G'(\\xi)=-(n+1)(x-\\xi)^n$ to obtain the Lagrange remainder.",
+        "Example: $f(x)=e^x$ at $x_0=0$. Then $T_n(x)=\\sum_{k=0}^n\\frac{x^k}{k!}$ and $R_n(x)=\\frac{e^\\xi}{(n+1)!}x^{n+1}$. For $|x|\\le1$, $|R_n(x)|\\le\\frac{e}{(n+1)!}\\to0$, so $e^x=\\sum_{k=0}^\\infty\\frac{x^k}{k!}$ on $[-1,1]$ (and in fact for all $x$).",
+        "Caveat: the Lagrange remainder requires $n+1$ derivatives on the interval; $\\xi$ depends on $x$ and generally cannot be computed explicitly. The Peano remainder requires only $n$ derivatives at $x_0$ and is local: $R_n(x)=o((x-x_0)^n)$."
+      ]
+    }
+  }
+}

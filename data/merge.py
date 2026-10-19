@@ -4,6 +4,7 @@ import json, glob, os, sys
 
 DATA_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.join(DATA_DIR, "knowledge.json")
+DERIV_DIR = os.path.join(DATA_DIR, "derivations")
 
 REQUIRED = ["id", "title", "titleEn", "branch", "level", "summary", "summaryEn",
             "definition", "definitionEn", "formulas", "properties", "propertiesEn",
@@ -12,6 +13,63 @@ REQUIRED = ["id", "title", "titleEn", "branch", "level", "summary", "summaryEn",
 BRANCHES = {"harmonic-analysis","pde-advanced","stochastic","riemannian","topology","complex-analysis","elementary-basics","elementary","plane-geometry","algebra","function","trigonometry","sequence","analytic",
             "calculus","multivariable","complex","ode","pde","numerical","real-analysis","functional-analysis","differential-geometry","linear","probability",
             "number","vector","set-logic","solid-geometry","combinatorics","abstract-algebra","dynamical-systems","special-functions","statistics","math-history","graph-theory","mathematical-logic","optimization-or"}
+
+
+def load_derivations(ids, errors):
+    """读取 data/derivations/*.json，返回 id -> {derivation, derivationEn}。
+
+    推导是叠加层，不写进 batch*.json；这样 641 个节点的正文与 110 个批次文件
+    不会被推导批次反复改写。每个条目必须中英同步、步骤数一致。
+    """
+    entries = {}
+    if not os.path.isdir(DERIV_DIR):
+        return entries
+    for path in sorted(glob.glob(os.path.join(DERIV_DIR, "*.json"))):
+        name = os.path.basename(path)
+        try:
+            with open(path, encoding="utf-8") as f:
+                obj = json.load(f)
+        except Exception as e:
+            errors.append(f"{name}: JSON 解析失败: {e}")
+            continue
+        nodes = obj.get("nodes", obj)
+        if not isinstance(nodes, dict):
+            errors.append(f"{name}: 顶层必须是对象或含 nodes 对象")
+            continue
+        for nid, entry in nodes.items():
+            if nid in entries:
+                errors.append(f"{name}: 推导 id 重复: {nid}")
+                continue
+            if nid not in ids:
+                errors.append(f"{name}: 推导指向不存在的知识点: {nid}")
+                continue
+            zh = entry.get("zh")
+            en = entry.get("en")
+            if not isinstance(zh, list) or not isinstance(en, list):
+                errors.append(f"{nid}: derivation 必须是 zh/en 两个数组")
+                continue
+            if len(zh) != len(en):
+                errors.append(f"{nid}: 推导中英步骤数不一致 ({len(zh)} vs {len(en)})")
+                continue
+            if len(zh) < 3:
+                errors.append(f"{nid}: 推导至少需要 3 步（当前 {len(zh)}）")
+                continue
+            bad = False
+            for i, (z, e) in enumerate(zip(zh, en), 1):
+                if not isinstance(z, str) or not z.strip():
+                    errors.append(f"{nid}: 第 {i} 步中文为空")
+                    bad = True
+                if not isinstance(e, str) or not e.strip():
+                    errors.append(f"{nid}: 第 {i} 步英文为空")
+                    bad = True
+            if bad:
+                continue
+            entries[nid] = {
+                "derivation": zh,
+                "derivationEn": en,
+            }
+    return entries
+
 
 def main():
     base = json.load(open(BASE))
@@ -76,7 +134,15 @@ def main():
             if l not in all_ids:
                 warnings.append(f"{n['id']}: link -> {l} (尚未生成)")
 
+    # 推导叠加层（data/derivations/*.json）
+    derivations = load_derivations(all_ids, errors)
+    for n in merged:
+        d = derivations.get(n["id"])
+        if d:
+            n.update(d)
+
     print(f"节点总数: {len(merged)}  (新增 {len(new_ids)})")
+    print(f"推导覆盖: {len(derivations)}/{len(merged)}")
     print(f"错误: {len(errors)}")
     for e in errors: print("  ✗", e)
     print(f"警告: {len(warnings)}")

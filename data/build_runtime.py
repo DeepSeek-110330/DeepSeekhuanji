@@ -18,6 +18,7 @@ PARTS_DIR = os.path.join(HERE, "parts")
 # 从骨架里剔除的重字段（放进按需分片）
 HEAVY = (
     "definition", "definitionEn",
+    "derivation", "derivationEn",
     "formulas",
     "properties", "propertiesEn",
     "examples", "expression",

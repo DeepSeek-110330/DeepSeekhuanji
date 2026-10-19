@@ -609,6 +609,58 @@ body::after {
   box-shadow: 0 0 8px var(--glow);
 }
 
+.derivation-box {
+  background: rgba(76, 201, 240, 0.05);
+  border-left: 2px solid rgba(76, 201, 240, 0.55);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+}
+.derivation-box summary {
+  font-size: 12.5px;
+  color: #8fe3ff;
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: 0.4px;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.derivation-box summary:hover { opacity: 1; }
+.derivation-box summary::-webkit-details-marker { display: none; }
+.derivation-box summary::before {
+  content: "▸";
+  font-size: 10px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.derivation-box[open] summary::before { transform: rotate(90deg); }
+.derivation-steps {
+  margin: 8px 0 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.derivation-steps li {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #cdd4f0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.derivation-steps li::marker { color: #8fe3ff; }
+.derivation-steps .katex-display {
+  margin: 6px 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
 .example {
   background: rgba(255, 209, 102, 0.06);
   border-left: 2px solid rgba(255, 209, 102, 0.6);

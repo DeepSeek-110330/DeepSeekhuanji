@@ -3,7 +3,7 @@
 > **一份自包含的项目快照说明。** 新会话只需要读这一个文件，就能完整恢复项目上下文，
 > 不必重新读取 7.6 MB 的 `knowledge.json`（这正是 token 成本的大头）。
 >
-> 文档版本：2026-10-19（推导卡版）｜ 数据：641 个知识点 ｜ 源码：v=30 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
+> 文档版本：2026-10-19（推导卡版）｜ 数据：641 个知识点 ｜ 源码：v=31 ｜ 已上线：https://deepseek-110330.github.io/DeepSeekhuanji/
 
 ---
 
@@ -29,7 +29,7 @@
 | `data/knowledge.json`（7.6 MB） | **本文件第 4 节已有全部 641 个知识点的 id + 名称 + 等级**，足够判断"有什么、缺什么"。只有需要精确定位某节点的完整内容时才用脚本定向提取单个节点，**不要整体读入** |
 | `data/batch*.json`（110 个，共约 7.4 MB） | 同上，除非要修改某个批次文件，否则用 `merge.py` 的校验结果代替人工阅读 |
 | `js/plot.js`（1802 行） | 除非要**新增图表类型**，否则本文件第 6 节已够用 |
-| `js/app.js`（2757 行） | 除非要改**布局或交互**，否则不必读；第 10 节已说明布局算法位置与问题 |
+| `js/app.js`（2772 行） | 除非要改**布局或交互**，否则不必读；第 10 节已说明布局算法位置与问题 |
 
 ### 需要精确定位某个知识点时的正确做法
 
@@ -75,7 +75,7 @@ print(json.dumps(n, ensure_ascii=False, indent=2))
 
 **覆盖范围**：小学 → 初中 → 高中（三角）→ 大学（微积分 / 多元微积分 / 复变 / ODE / PDE / 数值分析 / 实变 / 泛函 / 微分几何 / 概率统计 / 向量与张量）→ 研究生（拓扑学 / 复分析 / 随机过程 / 黎曼几何 / 调和分析 / PDE 进阶）
 
-**当前规模**：641 个知识点、3171 条公式、1302 道例题、481 张配图、38 条分支、约 65 万字中文正文（定义/性质/例题/摘要 + 公式说明的纯汉字数）。
+**当前规模**：641 个知识点、3171 条公式、1302 道例题、481 张配图、38 条分支、推导覆盖 7/641（首批 D01）、约 65 万字中文正文（定义/性质/例题/摘要 + 公式说明的纯汉字数）。
 
 **已上线**：https://deepseek-110330.github.io/DeepSeekhuanji/ —— GitHub Pages，仓库 `DeepSeek-110330/DeepSeekhuanji`（公开）。
 
@@ -128,10 +128,10 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 ├── katex-check.html        全库公式渲染扫描页（开发用）
 ├── plot-test.html          绘图引擎测试页（开发用）
 ├── release.py              一键发布（升版本号→merge→build→提交→推送）
-├── css/style.css           样式（1566 行）
+├── css/style.css           样式（1618 行）
 ├── vendor/                 Three.js 与 KaTeX 本地库（v=19 起，不依赖 CDN）
 ├── js/
-│   ├── app.js              主逻辑：场景/相机/交互/面板/搜索/布局/路线/共鸣（2757 行）
+│   ├── app.js              主逻辑：场景/相机/交互/面板/搜索/布局/路线/共鸣（2772 行）
 │   ├── plot.js             绘图引擎：12 种数学图表（1802 行）
 │   └── stars.js            星体渲染：着色器星点 + 星云贴图 + 星体微动（362 行）
 ├── data/
@@ -139,6 +139,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 │   ├── batch*.json         110 个批次源文件（每批 4~8 个知识点）
 │   ├── merge.py            合并 + 校验脚本
 │   ├── build_runtime.py    生成首屏骨架与详情分片（merge 后运行）
+│   ├── derivations/       知识点推导叠加层（D01 起，按 id 附加）
 │   ├── resonance-notes.json 知识共鸣「推导卡」精选注记（结果级 + pair 级）
 │   ├── skeleton.json       首屏骨架（约 764 KB，运行时首屏加载）
 │   ├── paths.json          学习路线（6 条精选路线，导览功能）
@@ -149,7 +150,7 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
 └── 快照/                   历史快照 zip（不纳入版本库）
 ```
 
-**源码合计 6,633 行**：app.js 2757 + plot.js 1802 + stars.js 362 + css 1566 + html 146
+**源码合计 6,700 行**：app.js 2772 + plot.js 1802 + stars.js 362 + css 1618 + html 146
 
 ---
 
@@ -1004,6 +1005,8 @@ curl -s -o /dev/null -w "data  %{http_code}\n" http://localhost:8123/data/knowle
       "formulas": [{ "latex": "…", "note": "中文说明", "noteEn": "英文说明" }],
       "expression": { "text": "…", "symbol": "…", "note": "…", "noteEn": "…" },
       "properties": ["…"], "propertiesEn": ["…"],   // 中英数量必须一一对应
+      "derivation": ["推导第 1 步…", "推导第 2 步…"], // 可选，v=31；从 data/derivations/ 叠加
+      "derivationEn": ["Step 1…", "Step 2…"],         // 与 derivation 等长
       "plot": { "type": "function", … },            // 可选，见第 6 节
       "examples": [{ "problem": "…", "solution": "…" }],
       "tags": ["…"],
@@ -1064,6 +1067,29 @@ for n in d['nodes']:
 ### 步骤 2：写批次文件 `data/batchNN-<主题>.json`
 
 格式见 `SCHEMA.md`。id 要语义化且全局唯一。
+
+### 步骤 2.5：知识点推导（v=31 起）
+
+推导不写进 `batch*.json`，而是放在 `data/derivations/batchDNN-<主题>.json` 叠加层：
+
+```json
+{
+  "meta": { "batch": "D02", "topic": "…" },
+  "nodes": {
+    "node-id": {
+      "zh": ["第 1 步…", "第 2 步…", "第 3 步…"],
+      "en": ["Step 1…", "Step 2…", "Step 3…"]
+    }
+  }
+}
+```
+
+规则：
+- 每个条目至少 3 步；`zh` 与 `en` 必须等长、逐步对应，不能只写中文。
+- 每步优先写「条件 → 推导 → 结论」；公式用 `$...$` 或 `$$...$$`，中文在数学模式里必须包 `\text{}`。
+- 每批 5~7 个知识点；生成后必须另派**独立复核**，重点查条件漏写、蕴含方向、符号约定、英文镜像。
+- 未覆盖的节点不显示推导区；**不要用模板批量灌水**。
+- 改完依次跑 `python3 data/merge.py` → `python3 data/build_runtime.py`；`katex-check.html` 会同时扫描推导公式。
 
 ### 步骤 3：更新 `data/IDLIST.txt`
 
@@ -1139,7 +1165,7 @@ cd data && python3 merge.py
 
 | 规则 | 说明 |
 |---|---|
-| **改 JS 必升版本号** | 改 `js/` 下任何文件后，把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1（当前 **v=30**）。否则浏览器吃旧缓存，你会以为改动没生效 |
+| **改 JS 必升版本号** | 改 `js/` 下任何文件后，把 `index.html`、`js/app.js`、`plot-test.html` 里的 `?v=N` 统一 +1（当前 **v=31**）。否则浏览器吃旧缓存，你会以为改动没生效 |
 | **改数据不用升版本号** | `knowledge.json` 用 `fetch(..., {cache:"no-cache"})` 加载，每次校验，刷新即生效 |
 | **加完必跑合并** | `python3 data/merge.py` |
 | **生成前先更新 IDLIST** | 否则链接校验失败 |
@@ -1238,7 +1264,7 @@ cd data && python3 merge.py
 | 正则替换 LaTeX 报 `bad escape \m` | 用字面替换，或 `re.escape()`；替换串用 `lambda m: new` |
 | Python 字符串含 `'` | 用双引号包 |
 | 参数曲面用 u,v 但求值器只认 x,y | 用 `buildEvaluator(expr, params, ["u","v"])` |
-| 浏览器吃旧缓存 | 改 JS 必升 `?v=N`（当前 v=30） |
+| 浏览器吃旧缓存 | 改 JS 必升 `?v=N`（当前 v=31） |
 | 标签页后台导致检查超时 | 先 focus 保持可见，或抽样检查 |
 | `\,^{\circ}` 被 KaTeX 判错 | 空格类命令（`\,` `\;` `\:` `\!` `\quad`）**不能直接加角标**：`\,^{\circ}` 在页面上渲染成红色错误，必须写 `\,{}^{\circ}`（已在旧内容里抓到 5 处） |
 
@@ -1487,7 +1513,7 @@ const radius0    = 26 + (1 - t) * 36;                // 点少 ⇒ 内端外移
 const radialSpan = 42 + Math.min(74, n * 2.0);       // 44~116
 ```
 
-角度抖动从 ±0.16 收到 ±0.10。同时**改 `js/` 就要升 `?v=N`**（现为 **v=30**）。
+角度抖动从 ±0.16 收到 ±0.10。同时**改 `js/` 就要升 `?v=N`**（现为 **v=31**）。
 
 **注意**：这会重新排布所有点（内容与分支归属不变）。用户已于 2026-10-14 明确授权。
 
@@ -1508,6 +1534,13 @@ const radialSpan = 42 + Math.min(74, n * 2.0);       // 44~116
 - **概念对照与核心公式**：结果卡按需读取详情分片，展示 A/B/结果三条目的摘要与结果条目的第一条核心公式；公式由 KaTeX 渲染。
 - **诚实边界**：没有精选注记的组合只显示结构推导 + 概念摘要，并明确声明「图谱相邻不等同于定理级蕴含」，不凭空编造证明。
 - **交互**：结果卡点「为什么是这个结果？」进入推导视图，顶部「← 返回结果」退回；推导视图只显示推导内容，避免与结果摘要挤在一起。
+
+**2026-10-19 知识点推导批次（v=31）**：把「推导」从共鸣结果卡扩展到每个知识点的详情面板——
+- **叠加层**：新增 `data/derivations/*.json`，按 id 给节点附加 `derivation` / `derivationEn` 两个等长数组；不修改 110 个 `batch*.json`。首批文件 `D01-calculus-core.json`。
+- **数据管线**：`merge.py` 校验 id 存在、中英步骤等长、每步非空、至少 3 步；`build_runtime.py` 把推导放进详情分片，首屏骨架不加载；`katex-check.html` 同步扫描推导中的公式。
+- **面板**：新增「推导 / Derivation」区，按步骤编号、KaTeX 渲染、默认展开、可折叠；中英切换同步。
+- **首批 D01**：覆盖微积分 7 个核心节点——`limit`、`continuity`、`derivative`、`mean-value-theorems`、`integral`、`fundamental-theorem`、`taylor-formula`。独立复核抓到 5 处条件/表述问题（FTC 端点与可积性、积分有界性、连续的整体性质），修正后复检 0 错误。
+- **覆盖进度**：7/641。剩余按 5~7 个/批推进，每批必须独立复核；未覆盖节点不显示推导区，**不用模板灌水**。
 
 **2026-10-16 交互美化与公网上线（v=11→v=18）**：面板等级徽章（L# ★）、「← 返回上一个」、例题折叠「看解答」、公式一键复制 LaTeX、光点呼吸明暗、悬停高亮链接路径、银河入场渐显绽放、搜索键盘导航（↑↓/Enter/Esc）、「随机漫游」按钮、分支旋臂脊线；星空加密至 19,700 背景星 + 700 微粒。**暗区公式雾气（v=16~17）试做后于 v=18 整体撤除**（用户判定不符预期；星星密度保留）。公网部署见 §2.2。
 
@@ -1573,7 +1606,7 @@ def fix(s):
 ### 11.3 KaTeX 全库错误扫描（**首选 `katex-check.html`**）
 
 项目根目录已固化一个扫描页：浏览器打开 `http://localhost:8123/katex-check.html`，
-它会读取 `knowledge.json`、把全库每个 `$...$` 片段（当前 **76,950** 个）用 `throwOnError:true, strict:"warn"` 渲染，
+它会读取 `knowledge.json`、把全库每个 `$...$` 片段（当前 **77,512** 个）用 `throwOnError:true, strict:"warn"` 渲染，
 在页面上打印 `SCANNED= / ERRORS= / 前 25 条错误`。**改完内容必跑，要求 ERRORS=0**。
 
 下面的旧内联脚本等价，作为备用：
