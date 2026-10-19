@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=40";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=40";
+import { renderPlot } from "./plot.js?v=41";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=41";
 
 /* ============================================================
    1. 全局状态
@@ -30,7 +30,7 @@ let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
 
 /* 知识共鸣：让有链接关系的知识点产生可控的「碰撞—融合」交互 */
-const LINK_OPACITY = 0.22; // 在 0.34 基础上降低约 35% // 连线基础亮度：比旧版更清晰，但仍低于悬停/共鸣高亮
+const LINK_OPACITY = 0.19; // 在 0.22 基础上再降低约 14% // 连线基础亮度：比旧版更清晰，但仍低于悬停/共鸣高亮
 const REDUCE_MOTION = window.matchMedia
   ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
   : false;
