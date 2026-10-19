@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "batch": "D22",
+    "topic": "小学基础 2：长度、面积与体积、质量与时间、负数、字母表示数、平均数、鸡兔同笼",
+    "version": 1
+  },
+  "nodes": {
+    "length-units": {
+      "zh": [
+        "长度测量的基准是 1 米。把 1 米平均分成 10 份，每份是 1 分米；把 1 分米平均分成 10 份，每份是 1 厘米；把 1 厘米平均分成 10 份，每份是 1 毫米。因此 $1\\,\\mathrm{m}=10\\,\\mathrm{dm}$，$1\\,\\mathrm{dm}=10\\,\\mathrm{cm}$，$1\\,\\mathrm{cm}=10\\,\\mathrm{mm}$。把这些关系依次代入，就得到 $1\\,\\mathrm{m}=10\\times10=100\\,\\mathrm{cm}$，$1\\,\\mathrm{m}=100\\,\\mathrm{cm}=100\\times10\\,\\mathrm{mm}=1000\\,\\mathrm{mm}$。",
+        "把 3 米化成厘米：1 米 = 100 厘米，3 米就是 3 个 100 厘米，所以 $3\\times100=300$ 厘米。一般地，若 1 个大单位含 $k$ 个小单位，则 $N$ 个大单位含 $Nk$ 个小单位。因此大单位化小单位要乘进率 $k$，小单位化大单位要除以 $k$；单位变小，数值必须变大，可用来判断乘除方向。",
+        "千米是单独的一级：$1\\,\\mathrm{km}=1000\\,\\mathrm{m}$，不是 10。例如 2 千米 350 米 $=2\\times1000+350=2350$ 米；$4800$ 米 $=4$ 千米 $800$ 米 $=4.8$ 千米。",
+        "复合单位先化成同一个单位再计算：1 米 25 厘米 $=100+25=125$ 厘米；3 千米 40 米 $=3\\times1000+40=3040$ 米。注意 3 千米 40 米不是 3400 米，因为 40 米不足 1 千米，只能贡献 40 米。",
+        "换算后用数量级检验：18 厘米 $=18\\times10=180$ 毫米，2 米 $=2\\times100=200$ 厘米，1500 米 $=1500\\div1000=1.5$ 千米。反过来乘或除回去应得到原数，例如 $180\\div10=18$，$1.5\\times1000=1500$。",
+        "选单位要符合物体大小：硬币厚约 1 毫米，手指宽约 1 厘米，门高约 2 米，两个公交站相距约 1 千米。不要把千米与米的进率记成 100：它是 1000；米、分米、厘米、毫米之间相邻进率才是 10。"
+      ],
+      "en": [
+        "The base unit of length is the metre. Dividing 1 m into 10 equal parts gives 1 dm, dividing 1 dm into 10 equal parts gives 1 cm, and dividing 1 cm into 10 equal parts gives 1 mm. Hence $1\\,\\mathrm{m}=10\\,\\mathrm{dm}$, $1\\,\\mathrm{dm}=10\\,\\mathrm{cm}$, and $1\\,\\mathrm{cm}=10\\,\\mathrm{mm}$. Substituting these relations one after another gives $1\\,\\mathrm{m}=10\\times10=100\\,\\mathrm{cm}$ and $1\\,\\mathrm{m}=100\\,\\mathrm{cm}=100\\times10\\,\\mathrm{mm}=1000\\,\\mathrm{mm}$.",
+        "Convert 3 m to centimetres: since 1 m = 100 cm, 3 m consists of three groups of 100 cm, so $3\\times100=300$ cm. In general, if one large unit contains $k$ small units, then $N$ large units contain $Nk$ small units. Thus large to small means multiply by the rate $k$, and small to large means divide by $k$; when the unit becomes smaller, the number must become larger, which tells us the direction.",
+        "The kilometre is a separate step: $1\\,\\mathrm{km}=1000\\,\\mathrm{m}$, not 10. For example, 2 km 350 m $=2\\times1000+350=2350$ m; $4800$ m $=4$ km $800$ m $=4.8$ km.",
+        "For a mixed unit, convert to a single unit before calculating: 1 m 25 cm $=100+25=125$ cm, and 3 km 40 m $=3\\times1000+40=3040$ m. Note that 3 km 40 m is not 3400 m: 40 m is less than 1 km, so it contributes only 40 m.",
+        "Check the magnitude after converting: 18 cm $=18\\times10=180$ mm, 2 m $=2\\times100=200$ cm, and 1500 m $=1500\\div1000=1.5$ km. Multiplying or dividing back must recover the original value, for example $180\\div10=18$ and $1.5\\times1000=1500$.",
+        "Choose a unit that fits the object: a coin is about 1 mm thick, a finger about 1 cm wide, a door about 2 m high, and two bus stops about 1 km apart. Do not remember the kilometre-metre rate as 100: it is 1000; the neighbouring units metre, decimetre, centimetre and millimetre step by 10."
+      ]
+    },
+    "area-volume-units": {
+      "zh": [
+        "面积单位由单位正方形的边长决定：边长 1 厘米的正方形面积是 1 平方厘米，边长 1 分米的正方形面积是 1 平方分米。因为 1 分米 = 10 厘米，把边长 1 分米的正方形沿两个方向各分成 10 份，就得到 $10\\times10=100$ 个边长 1 厘米的小正方形。所以 $1\\,\\mathrm{dm}^2=100\\,\\mathrm{cm}^2$，同理 $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2$。",
+        "一般地，若两个长度单位的比是 $k$，对应面积单位的比就是 $k^2$。米与分米 $k=10$，所以平方米化平方分米乘 100；米与厘米 $k=100$，所以平方米化平方厘米乘 $100^2=10000$。于是 $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2=10000\\,\\mathrm{cm}^2$。常见错误是只乘 10，把面积当成了一维长度。土地面积还用公顷和平方千米：1 公顷 = 10000 平方米，1 平方千米 = 100 公顷 = 1000000 平方米；这里千米与米的长度比是 1000，所以面积比是 $1000^2=10^6$。",
+        "体积单位同理：棱长 1 分米的正方体可以切成 $10\\times10\\times10=1000$ 个棱长 1 厘米的小正方体，所以 $1\\,\\mathrm{dm}^3=1000\\,\\mathrm{cm}^3$。同样 $1\\,\\mathrm{m}^3=1000\\,\\mathrm{dm}^3=10^6\\,\\mathrm{cm}^3$。一般地，长度单位比为 $k$，体积单位比就是 $k^3$。",
+        "面积和体积是不同维度的量，不能互相换算：面积是二维的，单位带平方；体积是三维的，单位带立方。不能比较 1 平方米和 1 立方米的大小，也不能写成 $1\\,\\mathrm{m}^2=100\\,\\mathrm{cm}^2$（应为 10000）或 $1\\,\\mathrm{m}^3=1000\\,\\mathrm{cm}^3$（应为 $10^6$）。",
+        "容积单位与体积单位有固定对应：$1\\,\\mathrm{L}=1\\,\\mathrm{dm}^3$，$1\\,\\mathrm{mL}=1\\,\\mathrm{cm}^3$，所以 $1\\,\\mathrm{L}=1000\\,\\mathrm{mL}$，$1\\,\\mathrm{m}^3=1000\\,\\mathrm{L}$。容积从容器内部测量，体积从外部测量；容器壁占有空间，所以同一容器的体积大于容积。",
+        "例：内棱长 30 厘米（从里面量）的正方体鱼缸，容积 $=30^3=27000$ 立方厘米 $=27000$ 毫升 $=27$ 升；边长 1 米的方桌布，面积 $=1$ 平方米 $=100$ 平方分米 $=10000$ 平方厘米。换算前先判断是长度、面积还是体积，再按 10、100、1000 的进率逐级乘除。"
+      ],
+      "en": [
+        "An area unit is fixed by the side of a unit square: a square of side 1 cm has area 1 cm², and a square of side 1 dm has area 1 dm². Since 1 dm = 10 cm, dividing the 1 dm square into 10 parts in each of its two directions produces $10\\times10=100$ small squares of side 1 cm. Hence $1\\,\\mathrm{dm}^2=100\\,\\mathrm{cm}^2$, and similarly $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2$.",
+        "In general, if the ratio of two length units is $k$, the ratio of the corresponding area units is $k^2$. For metre and decimetre $k=10$, so converting m² to dm² multiplies by 100; for metre and centimetre $k=100$, so m² to cm² multiplies by $100^2=10000$. Thus $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2=10000\\,\\mathrm{cm}^2$. A common mistake is to multiply by 10 only, treating area as one-dimensional. Land area also uses hectares and square kilometres: 1 hectare = 10 000 m² and 1 km² = 100 hectares = 1 000 000 m²; here the length ratio between kilometre and metre is 1000, so the area ratio is $1000^2=10^6$.",
+        "Volume works the same way: a cube of side 1 dm can be cut into $10\\times10\\times10=1000$ cubes of side 1 cm, so $1\\,\\mathrm{dm}^3=1000\\,\\mathrm{cm}^3$. Likewise $1\\,\\mathrm{m}^3=1000\\,\\mathrm{dm}^3=10^6\\,\\mathrm{cm}^3$. In general, a length ratio $k$ gives a volume ratio $k^3$.",
+        "Area and volume have different dimensions and cannot be converted into each other: area is two-dimensional and carries square units, while volume is three-dimensional and carries cubic units. One cannot compare 1 m² with 1 m³, nor write $1\\,\\mathrm{m}^2=100\\,\\mathrm{cm}^2$ (it is 10000) or $1\\,\\mathrm{m}^3=1000\\,\\mathrm{cm}^3$ (it is $10^6$).",
+        "Capacity units correspond to volume units: $1\\,\\mathrm{L}=1\\,\\mathrm{dm}^3$ and $1\\,\\mathrm{mL}=1\\,\\mathrm{cm}^3$, hence $1\\,\\mathrm{L}=1000\\,\\mathrm{mL}$ and $1\\,\\mathrm{m}^3=1000\\,\\mathrm{L}$. Capacity is measured inside a container while volume is measured outside; because the walls take up space, the volume of a container is larger than its capacity.",
+        "Example: a cubic fish tank with inner side 30 cm has capacity $30^3=27000$ cm³ $=27000$ mL $=27$ L; a square tablecloth of side 1 m has area $1$ m² $=100$ dm² $=10000$ cm². Before converting, decide whether the quantity is length, area or volume, then move by the rates 10, 100 or 1000."
+      ]
+    },
+    "mass-time-units": {
+      "zh": [
+        "常用的质量单位是吨、千克、克，相邻两个单位之间的进率是 1000：$1\\,\\mathrm{t}=1000\\,\\mathrm{kg}$，$1\\,\\mathrm{kg}=1000\\,\\mathrm{g}$，所以 $1\\,\\mathrm{t}=10^6\\,\\mathrm{g}$。1 枚 1 元硬币约重 6 克，5 个苹果约重 1 千克，一头大象约重 5 吨。",
+        "质量换算：大单位化小单位乘 1000，小单位化大单位除以 1000。例如 $2.5$ 千克 $=2500$ 克，$6000$ 克 $=6$ 千克，3 吨 200 千克 $=3\\times1000+200=3200$ 千克。复合单位先换成同一个单位再计算。",
+        "时间单位是时、分、秒：$1\\,\\mathrm{h}=60\\,\\mathrm{min}$，$1\\,\\mathrm{min}=60\\,\\mathrm{s}$，所以 $1\\,\\mathrm{h}=60\\times60=3600\\,\\mathrm{s}$；另外 $1$ 日 $=24$ 时。时、分、秒相邻单位之间的进率是 $60$ 而不是 $100$；日与时之间是 $24$，年、月另有规则。",
+        "时间换算例：$180$ 分 $=180\\div60=3$ 时；2 时 15 分 $=2\\times60+15=135$ 分；$5400$ 秒 $=5400\\div60=90$ 分 $=1$ 时 30 分。检验：$135\\div60=2$ 余 15，正好是 2 时 15 分。",
+        "年月日：一年有 12 个月。大月 31 天，是 1、3、5、7、8、10、12 月，共 7 个；小月 30 天，是 4、6、9、11 月，共 4 个；二月平年 28 天、闰年 29 天。平年天数 $=7\\times31+4\\times30+28=217+120+28=365$，闰年再加 1 天，是 366 天。",
+        "闰年判定：公历年份是 4 的倍数的一般是闰年，但整百年必须是 400 的倍数。$2024\\div4=506$，2024 年是闰年；$1900\\div400$ 有余数，1900 年不是闰年；$2000\\div400=5$，2000 年是闰年；$2100\\div400$ 有余数，2100 年也不是闰年。这样规定使历年的平均长度接近回归年。"
+      ],
+      "en": [
+        "The common units of mass are the tonne, kilogram and gram, and every neighbouring pair steps by 1000: $1\\,\\mathrm{t}=1000\\,\\mathrm{kg}$, $1\\,\\mathrm{kg}=1000\\,\\mathrm{g}$, hence $1\\,\\mathrm{t}=10^6\\,\\mathrm{g}$. A 1-yuan coin has mass about 6 g, five apples about 1 kg, and an elephant about 5 t.",
+        "To convert mass, multiply by 1000 when going from a larger unit to a smaller one, and divide by 1000 in the opposite direction. For example, $2.5$ kg $=2500$ g, $6000$ g $=6$ kg, and 3 t 200 kg $=3\\times1000+200=3200$ kg. For a mixed unit, first express everything in one unit.",
+        "The units of time are the hour, minute and second: $1\\,\\mathrm{h}=60\\,\\mathrm{min}$, $1\\,\\mathrm{min}=60\\,\\mathrm{s}$, so $1\\,\\mathrm{h}=60\\times60=3600\\,\\mathrm{s}$; also $1$ day $=24$ h. The rate between neighbouring units of hours, minutes and seconds is 60 rather than 100; a day has 24 hours, and months and years follow their own rules.",
+        "Time conversions: $180$ min $=180\\div60=3$ h; 2 h 15 min $=2\\times60+15=135$ min; $5400$ s $=5400\\div60=90$ min $=1$ h 30 min. Check: $135\\div60=2$ remainder 15, which is exactly 2 h 15 min.",
+        "Calendar: one year has 12 months. Big months have 31 days — January, March, May, July, August, October and December, seven months; small months have 30 days — April, June, September and November, four months; February has 28 days in a common year and 29 in a leap year. A common year has $7\\times31+4\\times30+28=217+120+28=365$ days, and a leap year has one more, 366 days.",
+        "Leap-year rule: a year divisible by 4 is usually a leap year, but a century year must be divisible by 400. Since $2024\\div4=506$, 2024 is a leap year; $1900\\div400$ leaves a remainder, so 1900 is not; $2000\\div400=5$, so 2000 is; $2100\\div400$ leaves a remainder, so 2100 is not either. This rule keeps the average calendar year close to the solar year."
+      ]
+    },
+    "negative-numbers-elementary": {
+      "zh": [
+        "生活中有许多相反意义的量，需要先规定一个基准 0。把一个方向定为正，相反方向就定为负：零上 5 ℃ 记作 $+5$ ℃，零下 5 ℃ 记作 $-5$ ℃；收入 50 元记作 $+50$ 元，支出 50 元记作 $-50$ 元；高出海平面 100 米记作 $+100$ 米，低于海平面 100 米记作 $-100$ 米。比 0 小的数叫负数，负号不能省略；0 既不是正数，也不是负数。",
+        "把数画在数轴上：取一点作原点 0，规定向右为正方向，并取固定的单位长度。正数在 0 的右边，负数在 0 的左边；$-3$ 表示从 0 向左走 3 个单位。每一个数都对应数轴上唯一的一个点，位置由方向和到 0 的距离共同决定。",
+        "数轴上的排序规则是：右边的数总比左边的数大。因此 $-5<-2<0<3$。两个负数比较时，离 0 越远的数反而越小，因为它在数轴上更靠左；不能因为 $5>2$ 就错误地写成 $-5>-2$。",
+        "可以用数轴做加减：从 12 出发向左走 15 个单位，先经过 0，再向左 3 个单位，得到 $12-15=-3$；从 $-3$ 出发向右走 5 个单位，得到 2，即 $-3+5=2$。在 0 两侧且到 0 距离相等的两个数互为相反数，例如 $-3$ 与 3，它们的和是 0。",
+        "一个数到 0 的距离决定了它的大小尺度：$-4$ 和 4 到 0 的距离都是 4，但 $-4<0<4$。对负数来说，到 0 的距离越大，数越小；对正数来说，到 0 的距离越大，数越大。所以比较负数时，先看谁离 0 更远，离得远的更小。",
+        "判断时要连同基准一起看：$-3$ 读作负三，$-3<0$；0 不是负数；温度 $-3$ ℃ 表示比 0 ℃ 低 3 ℃。如果换一个基准点，同一个高度的正负号可能改变，所以写负数时必须说明以什么为 0，例如「以海平面为 0 米」。"
+      ],
+      "en": [
+        "Many quantities in daily life have opposite meanings and need a reference point 0. Choose one direction as positive; the opposite direction is negative. Thus 5 °C above zero is $+5$ °C and 5 °C below zero is $-5$ °C; income of 50 yuan is $+50$ yuan and spending 50 yuan is $-50$ yuan; 100 m above sea level is $+100$ m and 100 m below sea level is $-100$ m. A number less than 0 is negative, its minus sign cannot be omitted, and 0 is neither positive nor negative.",
+        "Draw the numbers on a number line: choose a point as the origin 0, fix the positive direction to the right, and choose a fixed unit length. Positive numbers lie to the right of 0 and negative numbers to the left; $-3$ means moving 3 units left from 0. Each number corresponds to exactly one point, whose position is determined by both the direction and the distance from 0.",
+        "The order rule on the number line is: a number on the right is always greater than one on the left. Hence $-5<-2<0<3$. Between two negative numbers, the one farther from 0 is smaller, because it lies farther left; one must not argue from $5>2$ that $-5>-2$.",
+        "Use the number line for addition and subtraction: starting at 12 and moving 15 units left passes 0 and ends 3 units to its left, so $12-15=-3$; starting at $-3$ and moving 5 units right gives 2, so $-3+5=2$. Two numbers on opposite sides of 0 at equal distance are opposites, such as $-3$ and 3, and their sum is 0.",
+        "The distance from 0 measures the size of a number: both $-4$ and 4 are 4 units from 0, but $-4<0<4$. For negative numbers, a greater distance from 0 means a smaller number; for positive numbers, a greater distance means a larger number. So when comparing negatives, first see which is farther from 0; the farther one is smaller.",
+        "Read a negative number together with its reference point: $-3$ is read negative three and $-3<0$; 0 is not negative; a temperature of $-3$ °C is 3 °C below zero. If the reference point changes, the sign of the same height may change, so a negative number must be explained with its zero reference, such as 'sea level is 0 m'."
+      ]
+    },
+    "letters-for-numbers": {
+      "zh": [
+        "字母可以表示数：$a$ 可以表示任意一个数，$x$ 常表示还不知道的数。在同一个式子里，同一个字母表示同一个数；不同的字母可以表示相同的数，也可以表示不同的数。用字母能把无数种具体情况写成一个式子，例如长方形的面积 $S=ab$。",
+        "书写约定：$a\\times b$ 写作 $ab$ 或 $a\\cdot b$；$3\\times a$ 写作 $3a$，数字一般写在字母前面；$1\\times a$ 简写成 $a$；$a\\times a$ 写作 $a^2$。因此 $a^2=a\\cdot a$，不是 $2a$；而 $2a=a+a$。平方表示两个 $a$ 相乘，系数 2 表示两个 $a$ 相加。",
+        "求值：把字母换成指定的数，再按运算顺序计算。当 $a=5$ 时，$a^2=5\\times5=25$，而 $2a=2\\times5=10$，二者一般不相等；当 $a=3$ 时，$2a+3=2\\times3+3=9$。字母取不同的值，式子的值可能不同。",
+        "用式子表示数量关系：$x$ 的 3 倍多 2 写成 $3x+2$；$a$ 与 $b$ 的和的 2 倍写成 $2(a+b)$，括号不能丢；比 $x$ 少 5 写成 $x-5$。先读清「先算什么」，再决定要不要加括号，括号改变了运算顺序。",
+        "含有未知数的等式叫方程。$x+3=9$ 是方程；$x+3$ 不是等式，$5+3=8$ 没有未知数，所以它们都不是方程。解方程利用等式性质：两边同时减去 3，得 $x=9-3=6$；把 $x=6$ 代回原方程，$6+3=9$，左右两边相等，解正确。",
+        "列方程：小明每天存 2 元，小刚已有 3 元且每天存 1 元。设 $x$ 天后两人存的钱一样多，则小明有 $2x$ 元，小刚有 $x+3$ 元，等量关系是 $2x=x+3$。两边同时减去 $x$，得 $x=3$；检验 $2\\times3=6$，$3+3=6$。字母把未知量变成了可以计算的等式。"
+      ],
+      "en": [
+        "Letters can stand for numbers: $a$ may represent any number, and $x$ often represents an unknown. In one expression the same letter stands for the same number, while different letters may stand for the same or for different numbers. Letters let us write infinitely many cases in one expression, such as the area of a rectangle $S=ab$.",
+        "Writing conventions: $a\\times b$ is written $ab$ or $a\\cdot b$; $3\\times a$ is written $3a$, with the number usually before the letter; $1\\times a$ is written simply $a$; and $a\\times a$ is written $a^2$. Hence $a^2=a\\cdot a$, not $2a$, while $2a=a+a$. The square means two copies of $a$ multiplied, whereas the coefficient 2 means two copies added.",
+        "To evaluate an expression, replace the letter by the given number and follow the order of operations. When $a=5$, $a^2=5\\times5=25$ while $2a=2\\times5=10$, so the two are generally different; when $a=3$, $2a+3=2\\times3+3=9$. Different values of the letter can give different values of the expression.",
+        "Translate words into expressions: '2 more than 3 times $x$' is $3x+2$; 'twice the sum of $a$ and $b$' is $2(a+b)$, and the parentheses cannot be dropped; '5 less than $x$' is $x-5$. Decide which operation comes first, then decide whether parentheses are needed, since parentheses change the order of operations.",
+        "An equation is an equality containing an unknown. $x+3=9$ is an equation; $x+3$ is not an equality, and $5+3=8$ has no unknown, so neither is an equation. Use the properties of equality: subtract 3 from both sides to get $x=9-3=6$; substituting $x=6$ back gives $6+3=9$, so the two sides match and the solution is correct.",
+        "Model with an equation: Xiao Ming saves 2 yuan per day, while Xiao Gang already has 3 yuan and saves 1 yuan per day. Let $x$ be the number of days until they have equal amounts. Then Xiao Ming has $2x$ yuan and Xiao Gang has $x+3$ yuan, so $2x=x+3$. Subtracting $x$ from both sides gives $x=3$; check: $2\\times3=6$ and $3+3=6$. Letters turn the unknown into a computable equation."
+      ]
+    },
+    "average-elementary": {
+      "zh": [
+        "平均数表示一组数据的整体水平：把总数量平均分给总份数。若数据是 $a_1,a_2,\\dots,a_n$，则平均数为 $\\bar{x}=(a_1+a_2+\\cdots+a_n)\\div n$。这里总份数 $n$ 必须与总数量对应，且 $n>0$；各数据的单位要相同。",
+        "例：3、4、8、9 的总和是 $3+4+8+9=24$，总份数 $n=4$，所以平均数 $=24\\div4=6$。6 并不在这四个数中，说明平均数不一定等于某个原始数据；它相当于把多的移给少的，使 4 份都变成 6。",
+        "平均数一定在最小值和最大值之间。设最小值为 $m$、最大值为 $M$，则每个数据都不小于 $m$、不大于 $M$，所以 $nm\\le a_1+\\cdots+a_n\\le nM$。两边同时除以 $n$，得 $m\\le\\bar{x}\\le M$。只有当所有数据都等于 $m$ 或都等于 $M$ 时，才取到端点。",
+        "逆用公式：总数量 $=$ 平均数 $\\times$ 总份数。若 5 个数的平均数是 12，则总和为 $5\\times12=60$；若前 4 个数的和是 47，则第 5 个数是 $60-47=13$。检验：$(47+13)\\div5=60\\div5=12$，符合要求。",
+        "平均数容易受极端值影响：3、4、8、9 的平均数是 6；若把 9 换成 90，总和变成 $3+4+8+90=105$，平均数变成 $105\\div4=26.25$，被极端值拉高了。因此当数据中有特别大或特别小的值时，要说清平均数是否还能代表整体水平。",
+        "平均速度要用总路程除以总时间。上山速度 2 千米/时，下山速度 6 千米/时，若两段路程都是 $d$，则总路程为 $2d$，总时间为 $d/2+d/6=2d/3$，平均速度 $=2d\\div(2d/3)=3$ 千米/时，不是 $(2+6)\\div2=4$。慢速那段用时更长，不能把几个速度直接算术平均；只有各段时间相等时才能那样做。"
+      ],
+      "en": [
+        "The average describes the overall level of a data set: share the total amount equally among all items. For data $a_1,a_2,\\dots,a_n$, the average is $\\bar{x}=(a_1+a_2+\\cdots+a_n)\\div n$. The number $n$ of items must match the total, $n>0$, and all data must use the same unit.",
+        "Example: the total of 3, 4, 8 and 9 is $3+4+8+9=24$, and $n=4$, so the average is $24\\div4=6$. Since 6 is not one of the four values, an average need not equal any original data value; it is the common value obtained by moving excess to cover deficits until all four items equal 6.",
+        "An average always lies between the minimum and the maximum. Let $m$ be the minimum and $M$ the maximum; every value is at least $m$ and at most $M$, so $nm\\le a_1+\\cdots+a_n\\le nM$. Dividing by $n$ gives $m\\le\\bar{x}\\le M$. Equality at an endpoint occurs only when every value equals $m$ or every value equals $M$.",
+        "Use the formula in reverse: total $=$ average $\\times$ number of items. If five numbers have average 12, their total is $5\\times12=60$; if the first four sum to 47, the fifth number is $60-47=13$. Check: $(47+13)\\div5=60\\div5=12$, as required.",
+        "The average is easily affected by extreme values: the average of 3, 4, 8 and 9 is 6; replacing 9 by 90 changes the total to $3+4+8+90=105$ and the average to $105\\div4=26.25$, pulled upward. So when a data set contains an unusually large or small value, state whether the average still represents the overall level.",
+        "Average speed is total distance divided by total time. If the uphill speed is 2 km/h and the downhill speed is 6 km/h over the same distance $d$, the total distance is $2d$ and the total time is $d/2+d/6=2d/3$, so the average speed is $2d\\div(2d/3)=3$ km/h, not $(2+6)\\div2=4$. The slower part takes more time, so separate speeds cannot be averaged directly; that is valid only when the times are equal."
+      ]
+    },
+    "chicken-rabbit": {
+      "zh": [
+        "设鸡有 $c$ 只、兔有 $r$ 只，共有 $h$ 个头、$f$ 只脚。每只鸡 2 只脚，每只兔 4 只脚，所以 $h=c+r$，$f=2c+4r$，且 $c,r$ 都是非负整数。由 $f=2(c+r)+2r=2h+2r$ 可知 $2h\\le f\\le4h$，并且 $f-2h$ 必须是偶数；不满足这些条件时无解。",
+        "假设 $h$ 只全是鸡：一共有 $2h$ 只脚，比实际 $f$ 少了 $f-2h$ 只。每把一只鸡换成一只兔，脚数就增加 $4-2=2$ 只。因此兔的只数 $r=(f-2h)\\div2$，鸡的只数 $c=h-r$。这就是「假设—比较—调整」：先假设，再比较差多少，最后按每差 2 只脚对应一只兔来调整。",
+        "取 $h=35$、$f=94$：假设全是鸡，脚数为 $35\\times2=70$，比 94 少 $94-70=24$。每只兔补 2 只脚，所以兔有 $24\\div2=12$ 只，鸡有 $35-12=23$ 只。验算：$23\\times2+12\\times4=46+48=94$ 只脚，$23+12=35$ 个头，完全符合。",
+        "也可以假设全是兔：$h$ 只兔一共有 $4h$ 只脚，比实际 $f$ 多了 $4h-f$ 只。每把一只兔换成一只鸡，脚数减少 2 只，所以鸡有 $c=(4h-f)\\div2$ 只，兔有 $r=h-c$ 只。对 $h=35,f=94$，$c=(140-94)\\div2=23$，$r=12$，与假设全鸡得到的答案一致，可以互相检验。",
+        "还要检查答案是否合理：若 $h=10,f=25$，$f$ 是奇数，$f-2h=5$ 不能被 2 整除，没有整数解；若 $h=10,f=50$，$r=(50-20)\\div2=15>h$，会算出鸡为 $-5$ 只，不可能。$h=10$ 时，$f=20$ 给出 $r=0,c=10$；$f=40$ 给出 $r=10,c=0$。所以答案必须满足 $0\\le r\\le h$。",
+        "应用：自行车和汽车共 10 辆，一共有 28 个轮子。假设全是自行车，轮子有 $10\\times2=20$ 个，比 28 少 8 个；每辆汽车多 2 个轮子，所以汽车有 $8\\div2=4$ 辆，自行车有 $10-4=6$ 辆。验算：$6\\times2+4\\times4=12+16=28$ 个轮子，$6+4=10$ 辆车。列方程 $2x+4(10-x)=28$ 也能得到 $x=6$，与假设法一致。"
+      ],
+      "en": [
+        "Let there be $c$ chickens and $r$ rabbits, with $h$ heads and $f$ feet. Each chicken has 2 feet and each rabbit 4, so $h=c+r$ and $f=2c+4r$, where $c$ and $r$ are non-negative integers. Since $f=2(c+r)+2r=2h+2r$, we must have $2h\\le f\\le4h$ and $f-2h$ even; if these conditions fail, there is no solution.",
+        "Assume all $h$ animals are chickens: they have $2h$ feet, which is $f-2h$ fewer than the actual number. Replacing one chicken by one rabbit adds $4-2=2$ feet. Therefore the number of rabbits is $r=(f-2h)\\div2$, and the number of chickens is $c=h-r$. This is the 'assume–compare–adjust' method: suppose, compare the gap, then adjust using the fact that every gap of 2 feet means one rabbit.",
+        "For $h=35$ and $f=94$: assuming all chickens gives $35\\times2=70$ feet, a gap of $94-70=24$. Each rabbit adds 2 feet, so there are $24\\div2=12$ rabbits and $35-12=23$ chickens. Check: $23\\times2+12\\times4=46+48=94$ feet and $23+12=35$ heads, exactly as required.",
+        "Assume all are rabbits instead: $h$ rabbits have $4h$ feet, which is $4h-f$ too many. Replacing one rabbit by one chicken removes 2 feet, so there are $c=(4h-f)\\div2$ chickens and $r=h-c$ rabbits. For $h=35,f=94$, $c=(140-94)\\div2=23$ and $r=12$, the same answer as assuming all chickens, which serves as a check.",
+        "Also check that the answer is feasible: if $h=10$ and $f=25$, then $f$ is odd and $f-2h=5$ is not divisible by 2, so there is no integer solution; if $h=10$ and $f=50$, then $r=(50-20)\\div2=15>h$, which would give $c=-5$, impossible. For $h=10$, $f=20$ gives $r=0,c=10$, while $f=40$ gives $r=10,c=0$. Hence any answer must satisfy $0\\le r\\le h$.",
+        "Application: 10 bicycles and cars have 28 wheels in total. Assume all are bicycles: $10\\times2=20$ wheels, a gap of 8; each car adds 2 wheels, so there are $8\\div2=4$ cars and $10-4=6$ bicycles. Check: $6\\times2+4\\times4=12+16=28$ wheels and $6+4=10$ vehicles. The equation $2x+4(10-x)=28$ gives $x=6$, the same result as the assumption method."
+      ]
+    }
+  }
+}

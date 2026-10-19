@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "batch": "D23",
+    "topic": "小学基础 3：分数、小数、百分数、比、因数倍数、运算定律、可能性、角",
+    "version": 1
+  },
+  "nodes": {
+    "fractions-elementary": {
+      "zh": [
+        "设 $a,b$ 为整数且 $b>0$。把单位「1」平均分成 $b$ 份，取其中 $a$ 份（此模型先限定 $0\\le a\\le b$），就得到分数 $\\frac{a}{b}$：分母 $b$ 表示平均分成的份数，分子 $a$ 表示取的份数。平均分是前提——每份必须同样大；其中一份叫分数单位 $\\frac{1}{b}$，所以 $\\frac{a}{b}=a\\times\\frac{1}{b}$。例如把一根绳子平均分成 5 段，取 3 段就是 $\\frac{3}{5}$，它含有 3 个 $\\frac{1}{5}$。",
+        "分数与除法同源：把 $a$ 个物体平均分给 $b$ 个人，每人得到 $a\\div b$ 个；把 $a$ 个物体每个都分成 $b$ 份，每人从每个物体中取 1 份，共得到 $a$ 个 $\\frac{1}{b}$，仍然是 $\\frac{a}{b}$，因此 $a\\div b=\\frac{a}{b}$（$b\\ne 0$）。分子相当于被除数、分母相当于除数；除数不能为 0，所以分母也不能为 0。反过来，$\\frac{a}{b}$ 就是 $a$ 除以 $b$ 的商。",
+        "分数的基本性质：由 $\\frac{a}{b}=a\\div b$ 和商不变规律，分子、分母同乘一个非零数 $m$，商不变：$\\frac{a}{b}=\\frac{am}{bm}$；同除以 $m$ 也成立。据此约分：$\\frac{4}{6}=\\frac{4\\div2}{6\\div2}=\\frac{2}{3}$；通分也用它把分母化成公分母。注意 $m\\ne0$，且只有分子分母同时变，分数值才不变。",
+        "同分母加减：分母相同，分数单位就相同，只需把分数单位的个数相加减：$\\frac{a}{b}\\pm\\frac{c}{b}=\\frac{a\\pm c}{b}$（$b\\ne0$）。异分母时分母不同、单位不同，不能直接加分子；先用基本性质通分到最小公倍数：$\\frac{1}{2}+\\frac{1}{3}=\\frac{3}{6}+\\frac{2}{6}=\\frac{5}{6}$。结果能约分要约成最简分数。",
+        "乘法：$\\frac{a}{b}\\times\\frac{c}{d}=\\frac{ac}{bd}$（$b,d\\ne0$）。设 $a\\le b$、$c\\le d$，把单位 1 先分成 $b$ 份取 $a$ 份，再把这 $a$ 份各分成 $d$ 份取 $c$ 份，就单位 1 而言相当于分成 $bd$ 份、取 $ac$ 份；例如 $\\frac{2}{3}\\times\\frac{3}{4}=\\frac{6}{12}=\\frac{1}{2}$。计算时可先约分再乘，以减少计算量。",
+        "除法：除以 $\\frac{c}{d}$ 就是乘它的倒数 $\\frac{d}{c}$，因为 $\\frac{c}{d}\\times\\frac{d}{c}=1$（$c,d\\ne0$）：$\\frac{a}{b}\\div\\frac{c}{d}=\\frac{a}{b}\\times\\frac{d}{c}=\\frac{ad}{bc}$。例如 $\\frac{1}{2}\\div\\frac{3}{4}=\\frac{1}{2}\\times\\frac{4}{3}=\\frac{2}{3}$。除数不能为 0，所以 $c\\ne0$；算完可用乘法验算：$\\frac{2}{3}\\times\\frac{3}{4}=\\frac{1}{2}$。"
+      ],
+      "en": [
+        "Let $a,b$ be integers with $b>0$. Divide the unit 1 into $b$ equal parts and take $a$ of them (for this model, first assume $0\\le a\\le b$); the result is the fraction $\\frac{a}{b}$. The denominator $b$ counts the equal parts and the numerator $a$ counts the parts taken. Equal division is essential—every part must have the same size. One part is the fraction unit $\\frac{1}{b}$, so $\\frac{a}{b}=a\\times\\frac{1}{b}$. For example, cutting a rope into 5 equal pieces and taking 3 gives $\\frac{3}{5}$, which contains three $\\frac{1}{5}$s.",
+        "Fractions and division have the same origin: sharing $a$ objects equally among $b$ people gives $a\\div b$ each, while splitting each of the $a$ objects into $b$ parts and giving each person one part from every object yields $a$ copies of $\\frac{1}{b}$, again $\\frac{a}{b}$; hence $a\\div b=\\frac{a}{b}$ ($b\\ne 0$). The numerator acts as the dividend and the denominator as the divisor; division by 0 is undefined, so the denominator cannot be 0. Conversely, $\\frac{a}{b}$ is the quotient of $a$ divided by $b$.",
+        "Basic property: from $\\frac{a}{b}=a\\div b$ and the invariance of a quotient, multiplying numerator and denominator by the same non-zero number $m$ leaves the value unchanged: $\\frac{a}{b}=\\frac{am}{bm}$; the same holds for division by $m$. This justifies reducing, $\\frac{4}{6}=\\frac{4\\div2}{6\\div2}=\\frac{2}{3}$, and finding common denominators. Note $m\\ne0$, and both numerator and denominator must be changed together.",
+        "With a common denominator the fraction units agree, so only their counts are added or subtracted: $\\frac{a}{b}\\pm\\frac{c}{b}=\\frac{a\\pm c}{b}$ ($b\\ne0$). With different denominators the units differ, so numerators cannot be added directly; first convert to the least common multiple: $\\frac{1}{2}+\\frac{1}{3}=\\frac{3}{6}+\\frac{2}{6}=\\frac{5}{6}$. Reduce the result to lowest terms when possible.",
+        "Multiplication: $\\frac{a}{b}\\times\\frac{c}{d}=\\frac{ac}{bd}$ ($b,d\\ne0$). Assume $a\\le b$ and $c\\le d$; split the unit into $b$ parts and take $a$, then split each of those $a$ parts into $d$ parts and take $c$; relative to the unit there are $bd$ parts in all and $ac$ of them are taken. For example $\\frac{2}{3}\\times\\frac{3}{4}=\\frac{6}{12}=\\frac{1}{2}$. Reduce before multiplying to simplify the work.",
+        "Division: dividing by $\\frac{c}{d}$ is multiplying by its reciprocal $\\frac{d}{c}$, since $\\frac{c}{d}\\times\\frac{d}{c}=1$ ($c,d\\ne0$): $\\frac{a}{b}\\div\\frac{c}{d}=\\frac{a}{b}\\times\\frac{d}{c}=\\frac{ad}{bc}$. For example $\\frac{1}{2}\\div\\frac{3}{4}=\\frac{1}{2}\\times\\frac{4}{3}=\\frac{2}{3}$. The divisor cannot be 0, so $c\\ne0$; check by multiplication: $\\frac{2}{3}\\times\\frac{3}{4}=\\frac{1}{2}$."
+      ]
+    },
+    "decimals-elementary": {
+      "zh": [
+        "有限小数是分母为 10、100、1000……的分数的另一种写法；无限小数不能这样表示：把单位「1」平均分成 10 份，一份是 $\\frac{1}{10}=0.1$；分成 100 份，一份是 $\\frac{1}{100}=0.01$；分成 1000 份，一份是 $0.001$。小数点右边第一位是十分位、第二位是百分位、第三位是千分位，例如 $0.25=2\\times0.1+5\\times0.01=\\frac{25}{100}$。",
+        "小数点位置决定计数单位：小数点每向右移一位，每个数位上的单位就扩大 10 倍，整个数扩大到原来的 10 倍；向左移一位则缩小到原来的 $\\frac{1}{10}$。如 $0.25\\to2.5\\to25$ 依次乘 10，$0.25\\to0.025$ 除以 10。移动时要补 0 占位，不能改变其他数字的顺序。",
+        "小数末尾添 0 或去 0，大小不变：$0.5=\\frac{5}{10}=\\frac{50}{100}=0.50$，因为分子分母同乘 10。但只有「末尾」的 0 可以这样处理：$0.05=\\frac{5}{100}\\ne\\frac{5}{10}=0.5$，中间的 0 去掉就改变了计数单位。近似数末尾的 0 表示精确到的数位，不能随意去掉。",
+        "比较大小：先比整数部分，整数部分大的数大；整数部分相同，就从十分位起依次比较，第一位不同的数位决定大小。本质上是通分到相同的计数单位再比分子：$0.3=\\frac{30}{100}>\\frac{25}{100}=0.25$。位数多不一定大，如 $0.4>0.35$。",
+        "加减法：把小数点对齐，就是相同数位对齐，再按整数加减法计算，最后在得数中对齐小数点。例如 $1.2-0.35=1.20-0.35=0.85$；缺的数位用 0 补足，避免把十分位与百分位相减。",
+        "乘法先按整数相乘，再看两个因数一共有几位小数，从积的右边起数出同样多位点上小数点；位数不够时先在积的前面补 0：$0.2\\times0.3=\\frac{2}{10}\\times\\frac{3}{10}=\\frac{6}{100}=0.06$。除法先把除数化成整数，被除数同时扩大相同倍数，商不变：$1.2\\div0.4=12\\div4=3$；商的小数点与被除数的小数点对齐。"
+      ],
+      "en": [
+        "A terminating decimal is another notation for a fraction with denominator 10, 100, 1000, …; infinite decimals cannot be represented this way: splitting the unit into 10 equal parts gives $\\frac{1}{10}=0.1$; into 100 parts gives $\\frac{1}{100}=0.01$; into 1000 parts gives $0.001$. To the right of the decimal point the first place is tenths, the second hundredths and the third thousandths, e.g. $0.25=2\\times0.1+5\\times0.01=\\frac{25}{100}$.",
+        "The position of the decimal point fixes the counting unit: moving it one place right multiplies every place value by 10, hence the whole number by 10; moving it one place left divides by 10. Thus $0.25\\to2.5\\to25$ multiplies by 10 each time, while $0.25\\to0.025$ divides by 10. Fill vacant places with 0, and never change the order of the other digits.",
+        "Appending or deleting zeros at the end of a decimal leaves its value unchanged: $0.5=\\frac{5}{10}=\\frac{50}{100}=0.50$, since numerator and denominator are multiplied by 10. Only zeros at the end may be treated this way: $0.05=\\frac{5}{100}\\ne\\frac{5}{10}=0.5$, so deleting an internal zero changes the counting unit. In an approximation, a trailing zero records the precision and must not be dropped.",
+        "To compare decimals, compare the integer parts first; if they agree, compare from the tenths place rightwards, and the first place where the digits differ decides. This is just rewriting both over a common unit: $0.3=\\frac{30}{100}>\\frac{25}{100}=0.25$. More digits do not mean larger: $0.4>0.35$.",
+        "For addition and subtraction, align the decimal points—that is, align equal place values—then compute as with whole numbers and place the point in the result on the same line. For example $1.2-0.35=1.20-0.35=0.85$; fill missing places with 0 so that tenths are never subtracted from hundredths.",
+        "For multiplication, multiply as whole numbers, count the total number of decimal places in both factors, and place the point that many places from the right of the product, padding with leading zeros if there are not enough digits: $0.2\\times0.3=\\frac{2}{10}\\times\\frac{3}{10}=\\frac{6}{100}=0.06$. For division, first make the divisor a whole number and multiply the dividend by the same power of 10, which leaves the quotient unchanged: $1.2\\div0.4=12\\div4=3$; the quotient's point aligns with the dividend's."
+      ]
+    },
+    "percentage-elementary": {
+      "zh": [
+        "百分数表示一个数是另一个数的百分之几，$p\\%=\\frac{p}{100}$。它把「另一个数」看作单位 1（也就是 100 份），再数「一个数」占了多少份，所以 25% 就是 $\\frac{25}{100}=0.25$。百分数也叫百分率或百分比，本质是两个数的倍比关系。",
+        "正因为百分数只描述倍比关系，它不能带单位名称：可以说「绳子长 0.5 米」，不能说「绳子长 50% 米」；50% 只有说清「谁的 50%」才有意义，例如 1 米的 50% 是 0.5 米。百分号 % 不能省略，去掉 % 就变成另一个数了。",
+        "互化：小数化百分数，小数点右移两位并添 %，$0.75=75\\%$；百分数化小数，去掉 % 并把小数点左移两位，$45\\%=0.45$。百分数化分数，先写成 $\\frac{p}{100}$ 再约分：$75\\%=\\frac{75}{100}=\\frac{3}{4}$；分数化百分数，先化成小数再添 %。",
+        "求百分数：先确定「另一个数」（单位 1、总量，且不为 0），再用一个数除以它并乘 100%：$\\frac{\\text{一个数}}{\\text{另一个数}}\\times100\\%$。例如 20 是 50 的百分之几？$20\\div50=0.4=40\\%$。单位 1 找错，答案就会错。",
+        "折扣与成数都是百分数：打八折就是按原价的 80% 出售，增产三成就是增产 30%。原价 400 元打八折，现价 $400\\times80\\%=320$ 元，便宜了 $400-320=80$ 元，占原价的 $80\\div400=20\\%$。",
+        "百分数的增减不能直接相加：先涨 20% 再降 20%，基数变了。$100\\times1.2=120$，$120\\times0.8=96$，最终是原来的 96%，比原来少 4%，不是回到 100。计算利息用「利息=本金×利率×时间」，利率 2% 不带单位，算出的利息才带「元」。"
+      ],
+      "en": [
+        "A percentage states how many hundredths one number is of another: $p\\%=\\frac{p}{100}$. It treats the second number as the unit (100 parts) and counts how many such parts the first number occupies, so 25% means $\\frac{25}{100}=0.25$. Also called a percent rate, it expresses a multiplicative comparison between two numbers.",
+        "Because a percentage describes only a multiplicative comparison, it never carries a unit: we may say a rope is 0.5 m long, but not that it is 50% m long; 50% is meaningful only once we specify 50% of what, e.g. 50% of 1 m is 0.5 m. The sign % cannot be omitted, for without it the number is different.",
+        "Conversions: decimal to percentage—move the point two places right and append %, so $0.75=75\\%$; percentage to decimal—drop % and move the point two places left, so $45\\%=0.45$. Percentage to fraction—write $\\frac{p}{100}$ and reduce: $75\\%=\\frac{75}{100}=\\frac{3}{4}$; fraction to percentage—first convert to a decimal, then append %.",
+        "To find a percentage, identify the base (the unit, the whole, assumed nonzero), then divide the part by it and multiply by 100%: $\\frac{\\text{part}}{\\text{whole}}\\times100\\%$. For instance, what percent of 50 is 20? $20\\div50=0.4=40\\%$. Choosing the wrong base gives a wrong answer.",
+        "Discounts and tenths are percentages: paying eight tenths means paying 80% of the original price, and a three-tenths increase means 30% more. If a 400-yuan coat is sold at eight tenths, the price is $400\\times80\\%=320$ yuan, and the reduction is $400-320=80$ yuan, which is $80\\div400=20\\%$ of the original.",
+        "Percentage changes cannot simply be added, because the base changes. Raise 100 by 20%, then lower the result by 20%: $100\\times1.2=120$ and $120\\times0.8=96$, so the final value is 96% of the original—4% less, not back to 100. Interest uses 'interest = principal × rate × time'; the rate 2% has no unit, while the interest is measured in yuan."
+      ]
+    },
+    "ratio-elementary": {
+      "zh": [
+        "两个数相除又叫做两个数的比：$a:b=a\\div b$（$b\\ne0$）。$a$ 叫前项，$b$ 叫后项，比值是前项除以后项的商。比不是「两个量的差」，也不只是一个分数；它记录的是前者与后者相除所得的倍比关系。",
+        "比、除法、分数可以互相改写：$a:b=a\\div b=\\frac{a}{b}$，但三者的「结果」不同：化简比的结果仍是一个比（如 $2:3$），求比值的结果是一个数（如 $\\frac{2}{3}\\approx0.67$）。写答案时要看清题目问的是哪一个。",
+        "比的基本性质：前项和后项同乘或同除以相同的非零数 $k$，比值不变：$a:b=(ak):(bk)=(a\\div k):(b\\div k)$，因为 $ak\\div bk=a\\div b$。用它化简：$12:18=(12\\div6):(18\\div6)=2:3$，其中 6 是 12 和 18 的最大公因数。两个同类量相比必须先化成相同单位，如 $20\\text{ cm}:1\\text{ m}=20:100=1:5$。",
+        "表示两个比相等的式子叫比例：$a:b=c:d$（$b,d\\ne0$）。两边同乘 $bd$ 得 $ad=bc$，即两个外项的积等于两个内项的积；反过来，若 $ad=bc$ 且 $b,d\\ne0$，两边同除以 $bd$ 就得到 $a:b=c:d$。解比例 $3:4=x:12$：$4x=3\\times12=36$，所以 $x=9$，验算 $9:12=3:4$。",
+        "两个相关联的量，若比值一定，就成正比例：$\\frac{y}{x}=k$（$k$ 一定，$x\\ne0$），如 $y=2x$；若乘积一定且不为 0，就成反比例：$xy=k$（$k\\ne0$ 一定，$x,y\\ne0$），如 $xy=12$。判断时看商一定还是积一定：总价÷数量=单价（一定）成正比例，速度×时间=路程（一定）成反比例。",
+        "按比分配：把 600 克按 $1:2$ 分，先求总份数 $1+2=3$，每份 $600\\div3=200$ 克，再分别乘 1 和 2，得 200 克与 400 克；检验 $200+400=600$ 且 $200:400=1:2$。比例尺也是比：图上距离:实际距离，如 $1:1000$ 表示图上 1 厘米代表实际 1000 厘米，它是长度之比，不是面积之比。"
+      ],
+      "en": [
+        "Dividing one number by another is also called their ratio: $a:b=a\\div b$ ($b\\ne0$). Here $a$ is the first term and $b$ the second, and the value of the ratio is the quotient. A ratio is neither a difference nor merely a fraction: it records the multiplicative comparison obtained by dividing the first quantity by the second.",
+        "Ratios, division and fractions convert into one another: $a:b=a\\div b=\\frac{a}{b}$, but their outputs differ: simplifying a ratio yields a ratio such as $2:3$, while evaluating it yields a number such as $\\frac{2}{3}\\approx0.67$. Read the question to see which one is required.",
+        "Basic property: multiplying or dividing both terms by the same non-zero number $k$ leaves the ratio unchanged, $a:b=(ak):(bk)=(a\\div k):(b\\div k)$, because $ak\\div bk=a\\div b$. Use it to simplify: $12:18=(12\\div6):(18\\div6)=2:3$, where 6 is the greatest common factor of 12 and 18. Two quantities of the same kind must first be converted to the same unit, e.g. $20\\text{ cm}:1\\text{ m}=20:100=1:5$.",
+        "An equality of two ratios is a proportion: $a:b=c:d$ ($b,d\\ne0$). Multiplying both sides by $bd$ gives $ad=bc$: the product of the outer terms equals the product of the inner terms. Conversely, if $ad=bc$ and $b,d\\ne0$, dividing by $bd$ recovers $a:b=c:d$. Solve $3:4=x:12$: $4x=3\\times12=36$, so $x=9$, and $9:12=3:4$ checks.",
+        "Two related quantities are directly proportional when their quotient is constant, $\\frac{y}{x}=k$ ($k$ fixed, $x\\ne0$), e.g. $y=2x$; they are inversely proportional when their product is a nonzero constant, $xy=k$ ($k\\ne0$ fixed, $x,y\\ne0$), e.g. $xy=12$. Decide by asking whether the quotient or the product is fixed: total price ÷ quantity = unit price (fixed) is direct, while speed × time = distance (fixed) is inverse.",
+        "Sharing in a ratio: to split 600 g in the ratio $1:2$, add the parts, $1+2=3$; one part is $600\\div3=200$ g; multiply by 1 and by 2 to get 200 g and 400 g. Check $200+400=600$ and $200:400=1:2$. A scale is also a ratio, drawing distance : real distance; $1:1000$ means 1 cm on the drawing represents 1000 cm in reality, and it is a ratio of lengths, not of areas."
+      ]
+    },
+    "factors-multiples": {
+      "zh": [
+        "在非零自然数范围内，若 $a\\times b=c$，则 $a,b$ 都是 $c$ 的因数，$c$ 是 $a,b$ 的倍数。因数和倍数互相依存：只能说「3 是 12 的因数」「12 是 3 的倍数」，不能说「3 是因数」而不指明对象。找因数可成对进行：$12=1\\times12=2\\times6=3\\times4$，共 6 个。",
+        "因数的个数有限：若 $d$ 是 $n$ 的因数，则 $n=dq$，$q$ 也是因数，且 $d\\le n$（$d,q$ 为正整数），所以因数只能从 $1,2,\\dots,n$ 中取，个数不超过 $n$；最小因数是 1，最大因数是 $n$。倍数却无限：$n,2n,3n,\\dots$ 永不完结，最小倍数是 $n$，没有最大倍数。",
+        "倍数特征可由十进制表示推出。设 $n=10q+r$（$r$ 是个位数字）。因为 $10\\equiv0\\pmod2$、$10\\equiv0\\pmod5$，所以 $n\\equiv r\\pmod2$、$n\\equiv r\\pmod5$：个位是 0、2、4、6、8 的数是 2 的倍数，个位是 0 或 5 的数是 5 的倍数。又 $10\\equiv1\\pmod3$，故 $n\\equiv q+r\\pmod3$；对 $q$ 重复同样的论证，最终得到 $n$ 与各位数字之和同余，如 $123$：$1+2+3=6$，所以 123 是 3 的倍数。",
+        "按因数个数分类：只有 1 和它本身两个因数的数叫质数；除 1 和本身外还有别的因数的数叫合数。1 只有 1 个因数，既不是质数也不是合数。2 是唯一的偶质数：大于 2 的偶数 $2k$（$k>1$）至少有因数 $1,2,2k$，是合数。20 以内的质数是 2、3、5、7、11、13、17、19。0 是偶数，但讨论因数与质数时只在非零自然数范围内进行。",
+        "算术基本定理：每个大于 1 的整数都能唯一地（不计顺序）写成质数的乘积，这叫分解质因数。例如 $12=2\\times2\\times3=2^2\\times3$，$18=2\\times3^2$。分解可用树状图或短除法，一直分到所有因数都是质数为止。",
+        "由质因数分解求最大公因数和最小公倍数：公有质因数取最低次幂得最大公因数，所有出现过的质因数取最高次幂得最小公倍数。$12=2^2\\times3$、$18=2\\times3^2$，所以 $\\gcd(12,18)=2\\times3=6$，$\\operatorname{lcm}(12,18)=2^2\\times3^2=36$。对两个数还有 $\\gcd(a,b)\\times\\operatorname{lcm}(a,b)=ab$：$6\\times36=216=12\\times18$。"
+      ],
+      "en": [
+        "Among the non-zero natural numbers, if $a\\times b=c$, then $a$ and $b$ are factors of $c$, and $c$ is a multiple of $a$ and of $b$. The two notions depend on each other: we say '3 is a factor of 12' and '12 is a multiple of 3', never '3 is a factor' without naming the number. Factors can be found in pairs: $12=1\\times12=2\\times6=3\\times4$, six factors in all.",
+        "A number has finitely many factors: if $d$ is a factor of $n$, then $n=dq$ and $q$ is also a factor, with $d\\le n$ for positive integers, so every factor lies among $1,2,\\dots,n$ and there are at most $n$ of them; the smallest is 1 and the largest is $n$. Multiples, however, are infinite: $n,2n,3n,\\dots$ never end, the smallest is $n$, and there is no largest.",
+        "The divisibility tests follow from decimal notation. Write $n=10q+r$, where $r$ is the units digit. Since $10\\equiv0\\pmod2$ and $10\\equiv0\\pmod5$, we get $n\\equiv r\\pmod2$ and $n\\equiv r\\pmod5$: numbers ending in 0, 2, 4, 6 or 8 are multiples of 2, and those ending in 0 or 5 are multiples of 5. Also $10\\equiv1\\pmod3$, so $n\\equiv q+r\\pmod3$; repeating the argument for $q$ shows $n$ is congruent to its digit sum modulo 3. For 123, $1+2+3=6$, so 123 is a multiple of 3.",
+        "Classify by the number of factors: a number with only the two factors 1 and itself is prime; one with further factors is composite. The number 1 has only one factor, so it is neither prime nor composite. The number 2 is the only even prime: every even number $2k$ with $k>1$ has at least the factors $1,2,2k$ and is composite. The primes below 20 are 2, 3, 5, 7, 11, 13, 17 and 19. The number 0 is even, but factors and primes are discussed only among the non-zero natural numbers.",
+        "Fundamental theorem of arithmetic: every integer greater than 1 can be written uniquely, up to order, as a product of primes—its prime factorisation. For example $12=2\\times2\\times3=2^2\\times3$ and $18=2\\times3^2$. A factor tree or short division carries the process on until every factor is prime.",
+        "From prime factorisations, the greatest common factor takes the lowest power of each shared prime, and the least common multiple takes the highest power of every prime that appears. With $12=2^2\\times3$ and $18=2\\times3^2$, $\\gcd(12,18)=2\\times3=6$ and $\\operatorname{lcm}(12,18)=2^2\\times3^2=36$. For two numbers, $\\gcd(a,b)\\times\\operatorname{lcm}(a,b)=ab$: $6\\times36=216=12\\times18$."
+      ]
+    },
+    "operation-laws-elementary": {
+      "zh": [
+        "加法交换律与结合律：$a+b=b+a$，$(a+b)+c=a+(b+c)$。把 $a$ 个物体和 $b$ 个物体合在一起，先数哪一堆都得到 $a+b$ 个，这就是交换律；三堆合并时先合并前两堆或后两堆，总数不变，这就是结合律。它们对整数、小数、分数都成立。",
+        "乘法交换律与结合律：$a\\times b=b\\times a$，$(a\\times b)\\times c=a\\times(b\\times c)$。把 $a$ 行 $b$ 列的点排成矩形，横着数是 $a\\times b$，竖着数是 $b\\times a$，总数相同；把 $a\\times b$ 个方块再排成 $c$ 层，无论先算哪两个因数，方块总数都是 $abc$。",
+        "乘法分配律：$(a+b)\\times c=a\\times c+b\\times c$。把宽为 $a+b$、高为 $c$ 的长方形分成宽 $a$ 与宽 $b$ 两块，面积分别为 $ac$、$bc$，所以 $(a+b)c=ac+bc$；反过来 $a\\times c+b\\times c=(a+b)\\times c$ 就是提取公因数。注意只有乘法对加法（或减法）分配：$3+4\\times5=23$，而 $(3+4)\\times5=35$，加法对乘法没有分配律。",
+        "减法与除法的性质：$a-b-c=a-(b+c)$，因为连减两次等于一次减去两次减数的和；$a\\div b\\div c=a\\div(b\\times c)$（$b,c\\ne0$），因为除以 $b$ 再除以 $c$ 就是乘 $\\frac{1}{b}$ 再乘 $\\frac{1}{c}$，等于乘 $\\frac{1}{bc}$。但减法、除法不满足交换律：$8-3\\ne3-8$，$8\\div4\\ne4\\div8$。",
+        "用定律简便计算：$25\\times4=100$、$125\\times8=1000$ 是凑整的好搭档。例如 $4\\times27\\times25=(4\\times25)\\times27=100\\times27=2700$（乘法交换律、结合律）；$36\\times99+36=36\\times(99+1)=36\\times100=3600$（乘法分配律）。每一步都依据运算定律保持结果不变；其中分配律用于展开或提取公因数，不只是改变顺序或分组。",
+        "运算顺序不能由定律随意改变：有括号先算括号，没有括号先乘除后加减，同级运算从左到右。$2+3\\times4=2+12=14$，不能先算 $2+3$；$12\\div3\\times2=4\\times2=8$，不能先算 $3\\times2$。定律说明哪些变形（重排、分组、展开或提取公因数）保持结果不变，运算顺序则规定「没有括号时按什么顺序算」，两者要配合使用。"
+      ],
+      "en": [
+        "Commutative and associative laws of addition: $a+b=b+a$ and $(a+b)+c=a+(b+c)$. Combining $a$ objects with $b$ objects gives $a+b$ whichever pile is counted first—this is commutativity. For three piles, merging the first two or the last two first does not change the total—this is associativity. Both hold for integers, decimals and fractions.",
+        "Commutative and associative laws of multiplication: $a\\times b=b\\times a$ and $(a\\times b)\\times c=a\\times(b\\times c)$. Arrange dots in $a$ rows and $b$ columns: counting by rows gives $a\\times b$, by columns $b\\times a$, with the same total. Stacking $a\\times b$ blocks in $c$ layers gives $abc$ blocks whichever pair of factors is multiplied first.",
+        "Distributive law: $(a+b)\\times c=a\\times c+b\\times c$. A rectangle of width $a+b$ and height $c$, split into widths $a$ and $b$, has areas $ac$ and $bc$, hence $(a+b)c=ac+bc$; read backwards, $a\\times c+b\\times c=(a+b)\\times c$ factors out the common factor. Only multiplication distributes over addition (or subtraction): $3+4\\times5=23$, whereas $(3+4)\\times5=35$; addition does not distribute over multiplication.",
+        "Properties of subtraction and division: $a-b-c=a-(b+c)$, since subtracting twice is subtracting the sum of the two subtrahends; $a\\div b\\div c=a\\div(b\\times c)$ ($b,c\\ne0$), since dividing by $b$ then by $c$ means multiplying by $\\frac{1}{b}$ then $\\frac{1}{c}$, i.e. by $\\frac{1}{bc}$. But subtraction and division are not commutative: $8-3\\ne3-8$ and $8\\div4\\ne4\\div8$.",
+        "Laws make mental arithmetic easy: $25\\times4=100$ and $125\\times8=1000$ are useful pairs. For example $4\\times27\\times25=(4\\times25)\\times27=100\\times27=2700$ (commutativity and associativity of multiplication), and $36\\times99+36=36\\times(99+1)=36\\times100=3600$ (distributivity). Each step uses an operation law and preserves the value; distributivity expands or factors out a common factor, rather than merely reordering or regrouping.",
+        "The order of operations cannot be altered at will: compute inside parentheses first; without parentheses do multiplication and division before addition and subtraction; work from left to right within the same level. Thus $2+3\\times4=2+12=14$, not $(2+3)\\times4$; and $12\\div3\\times2=4\\times2=8$, not $12\\div(3\\times2)$. The laws say which transformations (reordering, regrouping, expanding or factoring out) preserve the result, while the order rules say what to compute first when there are no parentheses; both must be respected."
+      ]
+    },
+    "possibility-elementary": {
+      "zh": [
+        "在给定条件下，事件的发生分为三种：一定发生（必然事件）、可能发生也可能不发生（随机事件）、不可能发生（不可能事件）。例如掷一枚正常骰子，「掷出 3 点」是可能的，「掷出 7 点」是不可能的；抛一枚普通硬币，「正面朝上」是可能的，「同时正面和反面朝上」是不可能的。判断前要先写清条件。",
+        "在有限个等可能结果的情形，每个结果出现的可能性相同，事件 $A$ 的可能性可用分数表示：$P(A)=\\frac{\\text{有利于 }A\\text{ 的结果数}}{\\text{所有等可能结果总数}}$。袋中 3 个红球、1 个白球，共 4 个球，大小质地相同、任意摸一个，则 $P(\\text{红})=\\frac34$，$P(\\text{白})=\\frac14$。",
+        "在这个等可能模型里，所有可能结果的概率之和为 1：$\\frac34+\\frac14=1$。这也说明「一定」对应 1，「不可能」对应 0；任何事件的可能性都在 0 与 1 之间。比较大小看分子（分母相同）：$\\frac34>\\frac14$，所以摸到红球的可能性大；在总数相同（或各结果等可能且总数不变）时，某种结果对应的数量越多，可能性越大。",
+        "游戏公平当且仅当双方获胜的可能性相等。上述 3 红 1 白的袋子里，甲摸红赢、乙摸白赢，$P(\\text{甲赢})=\\frac34\\ne\\frac14=P(\\text{乙赢})$，游戏不公平，甲占优势。若要公平，可增加 2 个白球，使红、白各 3 个，双方获胜概率都是 $\\frac36=\\frac12$。",
+        "条件改变，可能性也随之改变。若第一次摸出红球后不放回，袋中剩 2 红 1 白，共 3 个球，第二次摸到红球的概率变为 $\\frac23$，摸到白球变为 $\\frac13$；若放回，则仍是 $\\frac34$ 与 $\\frac14$。所以「摸两次」的问题必须说明放回还是不放回。",
+        "注意：「可能」不等于「可能性是 $\\frac12$」。只有所有结果等可能时才能用「有利结果数÷总数」；「明天下雨」和「明天不下雨」两个结果并不等可能，不能各算 50%。可能性大小由数量或面积等比例决定，不能只看有几种结果。"
+      ],
+      "en": [
+        "Under given conditions an event is certain (must happen), random (may or may not happen) or impossible (cannot happen). With a fair die, rolling a 3 is possible while rolling a 7 is impossible; with an ordinary coin, heads is possible while showing heads and tails at once is impossible. State the conditions before classifying.",
+        "When there are finitely many equally likely outcomes, each outcome has the same chance, and the probability of an event $A$ is the fraction $P(A)=\\frac{\\text{number of outcomes favourable to }A}{\\text{total number of equally likely outcomes}}$. A bag with 3 red and 1 white ball, all identical in size and texture, gives $P(\\text{red})=\\frac34$ and $P(\\text{white})=\\frac14$ for one blind draw.",
+        "In this equally likely model, the probabilities of all possible outcomes sum to 1: $\\frac34+\\frac14=1$. Hence 'certain' corresponds to 1 and 'impossible' to 0, and every probability lies between 0 and 1. With equal denominators, compare numerators: $\\frac34>\\frac14$, so red is more likely; when the total is the same (or the other conditions are unchanged), more items of a given kind mean a greater chance.",
+        "A game is fair exactly when both players have equal chances. In the 3-red, 1-white bag, if A wins on red and B on white, $P(\\text{A wins})=\\frac34\\ne\\frac14=P(\\text{B wins})$, so the game is unfair and favours A. To make it fair, add 2 white balls so that there are 3 of each colour; both winning probabilities become $\\frac36=\\frac12$.",
+        "Changing the conditions changes the probabilities. If the first draw is red and the ball is not replaced, the bag holds 2 red and 1 white, so on the second draw $P(\\text{red})=\\frac23$ and $P(\\text{white})=\\frac13$; with replacement they remain $\\frac34$ and $\\frac14$. Every two-draw question must therefore state whether draws are with or without replacement.",
+        "Caution: 'possible' does not mean probability $\\frac12$. The rule 'favourable outcomes ÷ total outcomes' applies only when all outcomes are equally likely; 'rain tomorrow' and 'no rain tomorrow' are not equally likely and cannot each be assigned 50%. Probability is determined by proportions such as counts or areas, not merely by how many outcomes are listed."
+      ]
+    },
+    "angles-elementary": {
+      "zh": [
+        "从一点引出两条射线就组成一个角：这个点是顶点，两条射线是角的两条边。角也可以看成一条射线绕端点旋转形成的图形。角的大小只由两条边张开的程度决定，与边画得多长无关；比较两个角时，把顶点对齐、一条边重合，再看另一条边张开的大小。",
+        "把一个周角（一整圈）平均分成 360 份，每一份所对的角就是 1 度，记作 $1^\\circ$。因此周角是 $360^\\circ$，平角（两条边成一条直线）是 $180^\\circ$，直角是 $90^\\circ$。度以下还有分、秒：$1^\\circ=60'$，$1'=60''$，是六十进制，不是十进制。",
+        "按大小分类：$0^\\circ<\\alpha<90^\\circ$ 是锐角，$\\alpha=90^\\circ$ 是直角，$90^\\circ<\\alpha<180^\\circ$ 是钝角，$\\alpha=180^\\circ$ 是平角，$\\alpha=360^\\circ$ 是周角。边界要分清：等于 90° 的角不能叫锐角，等于 180° 的角也不能叫钝角；0° 与 360° 的两条边重合，但表示的旋转程度不同。",
+        "由定义直接得到：$1$ 平角 $=180^\\circ=2\\times90^\\circ=2$ 直角；$1$ 周角 $=360^\\circ=2\\times180^\\circ=2$ 平角 $=4$ 直角。反过来，半个平角是 $90^\\circ$，恰好是一个直角；四分之一个周角也是 $90^\\circ$。这些关系常用来验算量角结果。",
+        "量角器是半圆，把半圆平均分成 180 份，每份 $1^\\circ$。量角时做到「中心对顶点、零刻度线对一边」，另一条边所对的刻度就是角的度数；量角器有内、外两圈刻度，先看零刻度线用的是哪一圈，再读同一圈。若一条边没有对准零刻度，就用两条边读数之差计算，例如 $125^\\circ-65^\\circ=60^\\circ$。",
+        "角的加减用六十进制：$35^\\circ40'+25^\\circ35'=60^\\circ75'=61^\\circ15'$，因为 $75'=60'+15'=1^\\circ15'$。两个角相加得 $90^\\circ$ 时互为余角，相加得 $180^\\circ$ 时互为补角；例如 $35^\\circ$ 的余角是 $55^\\circ$，补角是 $145^\\circ$。"
+      ],
+      "en": [
+        "Two rays drawn from one point form an angle: the point is the vertex and the rays are its sides. An angle can also be viewed as what a ray sweeps out while rotating about its endpoint. Its size depends only on how widely the sides open, not on how long they are drawn; to compare two angles, align the vertices and one pair of sides, then compare the openings.",
+        "Divide a full turn into 360 equal parts; the angle subtended by one part is 1 degree, written $1^\\circ$. Hence a full angle is $360^\\circ$, a straight angle (whose sides form a line) is $180^\\circ$, and a right angle is $90^\\circ$. Below degrees are minutes and seconds: $1^\\circ=60'$ and $1'=60''$, a sexagesimal rather than decimal system.",
+        "By size: $0^\\circ<\\alpha<90^\\circ$ is acute, $\\alpha=90^\\circ$ is right, $90^\\circ<\\alpha<180^\\circ$ is obtuse, $\\alpha=180^\\circ$ is straight, and $\\alpha=360^\\circ$ is full. Mind the boundaries: an angle equal to 90° is not acute, and one equal to 180° is not obtuse; at 0° and 360° the sides coincide, but the amounts of rotation differ.",
+        "The definitions give $1$ straight angle $=180^\\circ=2\\times90^\\circ=2$ right angles, and $1$ full angle $=360^\\circ=2\\times180^\\circ=2$ straight angles $=4$ right angles. Conversely, half a straight angle is $90^\\circ$, exactly one right angle, and a quarter of a full angle is also $90^\\circ$. These relations serve as checks on protractor readings.",
+        "A protractor is a semicircle divided into 180 equal parts, each $1^\\circ$. To measure, place the centre on the vertex and the zero line along one side; the mark met by the other side gives the angle. A protractor has inner and outer scales, so first note which zero line is used and read the same scale. If a side is not on zero, subtract the two readings, e.g. $125^\\circ-65^\\circ=60^\\circ$.",
+        "Add and subtract angles in sexagesimal form: $35^\\circ40'+25^\\circ35'=60^\\circ75'=61^\\circ15'$, because $75'=60'+15'=1^\\circ15'$. Two angles are complementary when they sum to $90^\\circ$ and supplementary when they sum to $180^\\circ$; for example, $35^\\circ$ has complement $55^\\circ$ and supplement $145^\\circ$."
+      ]
+    }
+  }
+}

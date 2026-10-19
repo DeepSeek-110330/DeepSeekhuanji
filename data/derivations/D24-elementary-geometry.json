@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "batch": "D24",
+    "topic": "小学基础 4：面积、周长、圆、立体图形、体积、图形的运动、观察物体与统计图表",
+    "version": 1
+  },
+  "nodes": {
+    "area-elementary": {
+      "zh": [
+        "面积是物体表面或封闭图形内部区域的大小。规定边长为 $1$ 厘米的正方形面积为 $1$ 平方厘米，面积用平方厘米、平方分米、平方米等面积单位度量。它度量的是二维区域的大小；周长度量的是围成一圈的边的总长，二者单位不同（平方单位与长度单位），不能直接比较数值大小。",
+        "把长方形划分成边长为 $1$ 的小正方形网格：设 $a,b$ 为正整数（使用同一长度单位）；若长为 $a$、宽为 $b$，每一行有 $a$ 个，共有 $b$ 行，所以小正方形的总数为 $a\\times b$。因此 $S_{\\text{长方形}}=ab$。当 $a=b$ 时得到正方形，$S=a^2$；结果的单位是对应的平方单位。",
+        "设平行四边形的底为 $a$，这条底对应的高为 $h$，即 $h$ 与底垂直。沿高剪下一个直角三角形，把它平移到另一侧，恰好补成一个长为 $a$、宽为 $h$ 的长方形；剪拼只改变位置，不改变面积。因此 $S_{\\text{平行四边形}}=ah$。注意高必须垂直于所选的底，不能用邻边代替高。",
+        "取两个与已知三角形完全一样的三角形（对应边相等），把其中一个旋转 $180^\\circ$ 后与另一个拼合，得到底为 $a$、高为 $h$ 的平行四边形。平行四边形面积是 $ah$，两个三角形面积相等，所以每个三角形的面积 $S=\\frac{1}{2}ah$。若两个三角形只是相似而不全等，就不能拼成这个平行四边形。",
+        "设梯形的上底、下底分别为 $a,b$，高为 $h$，即两底之间的垂直距离。取两个完全一样的梯形，把其中一个旋转 $180^\\circ$ 后拼在一起，得到底为 $a+b$、高为 $h$ 的平行四边形。于是 $2S=(a+b)h$，即 $S=\\frac{(a+b)h}{2}$。上底、下底必须是互相平行的那两条边。",
+        "面积单位换算按长度单位进率的平方：$1\\text{ m}^2=100\\text{ dm}^2$，$1\\text{ dm}^2=100\\text{ cm}^2$。组合图形可以用分割或添补的方法转化为上述基本图形再求和。还要注意：周长相同不能推出面积相同，例如长 $8$、宽 $2$ 与边长 $5$ 的正方形周长都是 $20$，面积却分别为 $16$ 和 $25$。"
+      ],
+      "en": [
+        "Area is the size of the region inside a surface or a closed figure. A square of side $1$ cm has area $1\\text{ cm}^2$, and area is measured in square centimetres, square decimetres, square metres, and so on. Area measures a two-dimensional region, whereas perimeter measures the total length of the boundary; their units differ (square units versus length units), so the two numerical values cannot be compared directly.",
+        "Divide a rectangle into a grid of unit squares of side $1$: Assume $a,b$ are positive integers in the chosen unit; if the length is $a$ and the width is $b$, each row contains $a$ squares and there are $b$ rows, so the total number of squares is $a\\times b$. Hence $S_{\\text{rectangle}}=ab$. When $a=b$ the rectangle is a square and $S=a^2$; the unit of the result is the corresponding square unit.",
+        "Let a parallelogram have base $a$ and let $h$ be the height corresponding to this base, so $h$ is perpendicular to the base. Cut off a right triangle along the height and translate it to the other side; it exactly completes a rectangle of length $a$ and width $h$. Cutting and translating change only position, not area, so $S_{\\text{parallelogram}}=ah$. The height must be perpendicular to the chosen base; a neighbouring side cannot replace the height.",
+        "Take two triangles exactly congruent to the given triangle (all corresponding sides equal), rotate one through $180^\\circ$, and fit it with the other to form a parallelogram with base $a$ and height $h$. The parallelogram has area $ah$, and the two triangles have equal areas, so each triangle has area $S=\\frac{1}{2}ah$. If the two triangles are merely similar but not congruent, they cannot form this parallelogram.",
+        "Let a trapezoid have upper base $a$, lower base $b$ and height $h$, the perpendicular distance between the two bases. Take two identical trapezoids, rotate one through $180^\\circ$ and join them to form a parallelogram with base $a+b$ and height $h$. Thus $2S=(a+b)h$, so $S=\\frac{(a+b)h}{2}$. The upper and lower bases must be the two parallel sides.",
+        "Area units convert by the square of the length conversion factor: $1\\text{ m}^2=100\\text{ dm}^2$ and $1\\text{ dm}^2=100\\text{ cm}^2$. A composite figure can be split or completed into the basic figures above, and the areas then added. Also, equal perimeters do not imply equal areas: a rectangle $8$ by $2$ and a square of side $5$ both have perimeter $20$, but their areas are $16$ and $25$."
+      ]
+    },
+    "perimeter-elementary": {
+      "zh": [
+        "封闭图形一周的长度叫做它的周长。对多边形，周长等于所有边长之和：$C=a+b+c+\\cdots$，单位是厘米、分米、米等长度单位。只有封闭图形才有确定的周长；不封闭的折线只有长度，不能称为周长。",
+        "长方形对边相等。设长为 $a$、宽为 $b$，四条边依次为 $a,b,a,b$，所以 $C=a+b+a+b=2(a+b)$。反过来，已知周长 $C$ 和宽 $b$，则 $a=\\frac{C}{2}-b$，因为 $\\frac{C}{2}=a+b$ 正好是一条长与一条宽的和。",
+        "正方形四条边都等于 $a$，所以 $C=4a$；反过来 $a=\\frac{C}{4}$。例如用一根长 $36$ 厘米的铁丝围成一个正方形（接头处忽略不计），边长是 $36\\div4=9$ 厘米。这里铁丝的总长度被四条相等的边平分。",
+        "三角形的周长是三边之和 $C=a+b+c$；一般多边形逐边相加。求组合图形的周长时，只加最外面一圈的边，内部的分割线不是周长的一部分。把两个图形拼在一起时，拼合处被遮住，不再计入外边界。",
+        "周长与面积是两种不同的量：周长是一维边界的长度，面积是二维区域的大小。周长相等的图形面积不一定相等，例如 $8\\times2$ 的长方形与边长为 $5$ 的正方形周长都为 $20$，面积分别为 $16$ 与 $25$。因此不能由周长直接判断面积，也不能把长度单位与面积单位混用。",
+        "例：长方形花坛长 $8$ 米、宽 $5$ 米，沿花坛走一圈的路程是 $C=2(8+5)=26$ 米。若篱笆总长 $26$ 米且宽为 $5$ 米，则长 $=\\frac{26}{2}-5=8$ 米。计算时应先统一单位，再代入公式。"
+      ],
+      "en": [
+        "The perimeter of a closed figure is the distance all the way round it. For a polygon it equals the sum of all side lengths, $C=a+b+c+\\cdots$, measured in centimetres, decimetres, metres and other length units. Only a closed figure has a definite perimeter; an open broken line has a length but not a perimeter.",
+        "Opposite sides of a rectangle are equal. With length $a$ and width $b$, the four sides are $a,b,a,b$, so $C=a+b+a+b=2(a+b)$. Conversely, given the perimeter $C$ and the width $b$, we get $a=\\frac{C}{2}-b$, because $\\frac{C}{2}=a+b$ is exactly one length plus one width.",
+        "All four sides of a square equal $a$, so $C=4a$; conversely $a=\\frac{C}{4}$. For example, a $36$ cm wire bent into a square (ignoring the join) gives side $36\\div4=9$ cm. The total length of the wire is divided equally among the four sides.",
+        "The perimeter of a triangle is the sum of its three sides, $C=a+b+c$; for a general polygon, add all sides. For a composite figure, add only the edges on the outer boundary; internal dividing lines are not part of the perimeter. When two figures are joined, the joined part is hidden and no longer counts as outer boundary.",
+        "Perimeter and area are different quantities: perimeter is the one-dimensional length of the boundary, while area is the size of the two-dimensional region. Figures with equal perimeters need not have equal areas: an $8\\times2$ rectangle and a square of side $5$ both have perimeter $20$, but their areas are $16$ and $25$. Hence perimeter alone cannot determine area, and length units must not be mixed with area units.",
+        "Example: a rectangular flower bed is $8$ m long and $5$ m wide; walking once around it covers $C=2(8+5)=26$ m. If a fence of total length $26$ m has width $5$ m, then its length is $\\frac{26}{2}-5=8$ m. Convert all lengths to the same unit before substituting into the formula."
+      ]
+    },
+    "circle-elementary": {
+      "zh": [
+        "圆是平面上到定点 $O$（圆心）的距离等于定长 $r$（半径）的所有点组成的图形。圆心决定圆的位置，半径决定圆的大小。通过圆心并且两端都在圆上的线段是直径 $d$；在同一个圆中 $d=2r$，即 $r=\\frac{d}{2}$。",
+        "任意圆的周长 $C$ 与直径 $d$ 的比值是一个常数，记作 $\\pi$。测量表明周长总是直径的 $3$ 倍多，且 $\\pi=3.1415926\\ldots$ 是无限不循环小数，计算时常取 $3.14$。由 $\\frac{C}{d}=\\pi$ 得 $C=\\pi d=2\\pi r$。$\\pi$ 是一个比值，没有单位；周长的单位与半径相同。",
+        "把圆平均分成 $n$ 个全等的小扇形，再交替拼成一个近似长方形：长约为圆周长的一半 $\\pi r$，宽为半径 $r$。拼成图形的面积始终等于圆的面积；$n$ 越大，它的形状越接近长为 $\\pi r$、宽为 $r$ 的长方形，因此圆面积等于该长方形面积 $\\pi r^2$。因此 $S_{\\text{圆}}=\\pi r^2$。注意 $r^2=r\\times r$，不是 $2r$。",
+        "半径 $r=3$ 厘米时，$C=2\\pi r=2\\times3.14\\times3=18.84$ 厘米；$S=\\pi r^2=3.14\\times3^2=3.14\\times9=28.26$ 平方厘米。两个结果的单位不同，不能比较数值大小。若题目给出的是直径 $d$，要先求 $r=\\frac{d}{2}$，再算面积。",
+        "半圆的弧长是圆周长的一半 $\\pi r$，但半圆图形的周长还要加上一条直径 $2r$，所以 $C_{\\text{半圆}}=\\pi r+2r$；面积是圆面积的一半，$S=\\frac{1}{2}\\pi r^2$。例：直径 $8$ 米，则 $r=4$ 米，周长 $=3.14\\times4+8=20.56$ 米，面积 $=3.14\\times16\\div2=25.12$ 平方米。",
+        "圆环由半径为 $R$ 的外圆挖去同心的半径为 $r$ 的内圆得到，其中 $R>r$，面积 $S=\\pi R^2-\\pi r^2=\\pi(R^2-r^2)$。圆心角为 $n^\\circ$ 的扇形占整个圆的 $\\frac{n}{360}$，所以 $S=\\frac{n}{360}\\pi r^2$，其中 $0\\le n\\le360$；它的弧长为 $\\frac{n}{360}\\cdot2\\pi r$。"
+      ],
+      "en": [
+        "A circle is the set of all points in the plane at a fixed distance $r$ (the radius) from a fixed point $O$ (the centre). The centre fixes the position of the circle and the radius fixes its size. A segment through the centre with both ends on the circle is a diameter $d$; in the same circle $d=2r$, that is, $r=\\frac{d}{2}$.",
+        "For every circle the ratio of the circumference $C$ to the diameter $d$ is a constant denoted $\\pi$. Measurements show that the circumference is always a little more than $3$ diameters, and $\\pi=3.1415926\\ldots$ is an infinite non-repeating decimal, usually taken as $3.14$ in calculations. From $\\frac{C}{d}=\\pi$ we get $C=\\pi d=2\\pi r$. The number $\\pi$ is a ratio and has no unit; the circumference has the same unit as the radius.",
+        "Divide a circle into $n$ congruent small sectors and rearrange them alternately into an approximate rectangle whose length is half the circumference $\\pi r$ and whose width is the radius $r$. The rearranged figure always has exactly the circle's area; as $n$ grows, its shape approaches a rectangle of length $\\pi r$ and width $r$, so the circle's area equals $\\pi r^2$. Hence $S_{\\text{circle}}=\\pi r^2$. Note that $r^2=r\\times r$, not $2r$.",
+        "For radius $r=3$ cm, $C=2\\pi r=2\\times3.14\\times3=18.84$ cm and $S=\\pi r^2=3.14\\times3^2=3.14\\times9=28.26\\text{ cm}^2$. The two results have different units, so their numerical values cannot be compared. If the diameter $d$ is given, first find $r=\\frac{d}{2}$ and then compute the area.",
+        "The arc of a semicircle has length equal to half the circumference, $\\pi r$, but the perimeter of the semicircular figure also includes the diameter $2r$, so $C_{\\text{semicircle}}=\\pi r+2r$. Its area is half the circle's area, $S=\\frac{1}{2}\\pi r^2$. Example: with diameter $8$ m, $r=4$ m, the perimeter is $3.14\\times4+8=20.56$ m and the area is $3.14\\times16\\div2=25.12\\text{ m}^2$.",
+        "A ring is obtained by removing a concentric inner circle of radius $r$ from an outer circle of radius $R$, where $R>r$; its area is $S=\\pi R^2-\\pi r^2=\\pi(R^2-r^2)$. A sector with central angle $n^\\circ$ occupies the fraction $\\frac{n}{360}$ of the whole circle, so $S=\\frac{n}{360}\\pi r^2$ with $0\\le n\\le360$; its arc length is $\\frac{n}{360}\\cdot2\\pi r$."
+      ]
+    },
+    "solid-figures-elementary": {
+      "zh": [
+        "立体图形占有空间。围成立体图形的各个面叫做面；两个面相交的线段叫做棱；几条棱相交的点叫做顶点。面可以是平面，也可以是曲面。长方体、正方体、圆柱和球是小学常见的立体图形，它们的面、棱、顶点数目并非各不相同；例如长方体和正方体都是 6 个面、12 条棱、8 个顶点，而圆柱、球的面数不同。",
+        "长方体有 $6$ 个面，分成 $3$ 组相对的面，每组两个面完全相同；有 $12$ 条棱，分成 $3$ 组，每组 $4$ 条棱互相平行且长度相等；有 $8$ 个顶点。验算：每个顶点连着 $3$ 条棱，$8\\times3=24$；每条棱有 $2$ 个端点，$12\\times2=24$，两种数法一致。",
+        "正方体的 $6$ 个面都是完全相同的正方形，$12$ 条棱长度都相等，也有 $8$ 个顶点。因此正方体满足长方体的全部特征，是特殊的长方体，记作正方体 $\\subset$ 长方体。但长方体不一定 $6$ 个面都是正方形，所以反过来不成立。",
+        "圆柱有 $2$ 个同样大的圆形底面，它们互相平行；还有 $1$ 个弯曲的侧面。两个底面圆周是侧面与底面的交界线，但它们不是两个平面相交形成的棱；圆柱没有顶点。把圆柱的侧面沿高剪开展平，得到一个长方形，它的长等于底面周长，宽等于圆柱的高。",
+        "球的表面全部是曲面，没有平面，没有棱，也没有顶点；从球心到球面上任意一点的距离都相等。球放在平面上只与平面接触于一点，因此能向任意方向滚动。圆柱虽然也能滚动，但它有 $2$ 个平面底面，放倒后只能沿一个方向滚动，两者结构不同。",
+        "数面、棱、顶点时要注意「面」包括曲面：圆柱是 $3$ 个面（$2$ 个平面、$1$ 个曲面），不是 $2$ 个面；球是 $1$ 个曲面，不是 $0$ 个面。仅凭「会滚」不能判断图形，仅凭面数也不能区分长方体与正方体；还要结合面的形状、大小以及棱长关系来判断。"
+      ],
+      "en": [
+        "A solid figure occupies space. Each surface enclosing it is called a face; a segment where two faces meet is an edge; a point where several edges meet is a vertex. A face may be flat or curved. Cuboids, cubes, cylinders and spheres are common solids in primary school, and their numbers of faces, edges and vertices are not all different: a cuboid and a cube both have 6 faces, 12 edges and 8 vertices.",
+        "A cuboid has $6$ faces in $3$ pairs of opposite faces, the two faces in each pair being identical; it has $12$ edges in $3$ groups of $4$ parallel equal edges; and it has $8$ vertices. Check: each vertex lies on $3$ edges, giving $8\\times3=24$; each edge has $2$ endpoints, giving $12\\times2=24$. The two counts agree.",
+        "A cube has $6$ faces that are all identical squares, $12$ edges of equal length, and $8$ vertices. Hence a cube satisfies every property of a cuboid and is a special cuboid, written cube $\\subset$ cuboid. A cuboid, however, need not have six square faces, so the converse does not hold.",
+        "A cylinder has $2$ equal circular bases that are parallel to each other, and $1$ curved lateral surface. The two base circles are the boundary curves where the lateral surface meets the bases, but they are not edges formed by two intersecting planes; a cylinder has no vertex. Cutting the lateral surface along a height and unrolling it gives a rectangle whose length is the base circumference and whose width is the height.",
+        "The whole surface of a sphere is curved: it has no flat face, no edge and no vertex, and every point on the surface is at the same distance from the centre. A sphere touches a plane at a single point, so it can roll in any direction. A cylinder can also roll, but it has $2$ flat circular bases and, when laid on its side, rolls in only one direction; the two solids are structurally different.",
+        "When counting faces, edges and vertices, remember that a face may be curved: a cylinder has $3$ faces ($2$ flat and $1$ curved), not $2$; a sphere has $1$ curved surface, not $0$ faces. Being able to roll does not identify a solid, and the number of faces alone does not distinguish a cuboid from a cube; the shapes and sizes of the faces and the edge lengths must also be considered."
+      ]
+    },
+    "solid-volume-elementary": {
+      "zh": [
+        "物体所占空间的大小叫做体积，用立方厘米、立方分米、立方米等体积单位度量。容器内部能容纳物体的体积叫做容积，常用升（L）、毫升（mL）：$1\\text{ L}=1\\text{ dm}^3$，$1\\text{ mL}=1\\text{ cm}^3$。体积从外面度量物体占的空间，容积从里面度量容器能装多少；体积单位与容积单位可以换算（$1\\text{ L}=1\\text{ dm}^3$，$1\\text{ mL}=1\\text{ cm}^3$），但同一容器的体积一般大于容积，不能把二者直接等同。",
+        "设 $a,b,h$ 为正整数（以 $1$ 为单位），把长方体划分成棱长为 $1$ 的单位小正方体：每行 $a$ 个，有 $b$ 行，共 $h$ 层，所以总数为 $a\\times b\\times h$。因此 $V_{\\text{长方体}}=abh$。由于底面积是 $ab$，也可以写成 $V=S_{\\text{底}}h$。当 $a=b=h$ 时得到正方体，$V=a^3$；这里 $a^3=a\\cdot a\\cdot a$，不是 $3a$。",
+        "把圆柱的底面分成许多相等的扇形，再沿高切开，可以拼成一个近似长方体：底面积仍为 $\\pi r^2$，高为 $h$，所以 $V_{\\text{圆柱}}=\\pi r^2h$。分割越细，拼成的立体越接近长方体。这个公式适用于直圆柱，其中 $r$ 是底面半径，$h$ 是两底面之间的垂直距离。",
+        "等底等高时，圆锥的体积是圆柱的 $\\frac{1}{3}$：用装满沙子的圆锥向圆柱里倒，倒 $3$ 次恰好装满，所以 $3V_{\\text{锥}}=V_{\\text{柱}}=\\pi r^2h$，即 $V_{\\text{锥}}=\\frac{1}{3}\\pi r^2h$。条件「等底等高」不能省略；若底面积或高不同，必须分别计算，不能直接取三分之一。",
+        "表面积是所有面的面积之和，单位是平方单位，与体积的立方单位不同。长方体 $S=2(ab+ah+bh)$；正方体 $S=6a^2$；圆柱 $S=2\\pi rh+2\\pi r^2$，其中侧面展开成长方形，还要加上两个底面。例：长 $5$、宽 $3$、高 $4$ 厘米的长方体，$V=60$ 立方厘米，$S=2(15+20+12)=94$ 平方厘米。",
+        "体积单位之间的进率是长度单位进率的立方：$1\\text{ m}^3=1000\\text{ dm}^3$，$1\\text{ dm}^3=1000\\text{ cm}^3$，所以 $1\\text{ m}^3=10^6\\text{ cm}^3$。例：底面半径 $2$ 厘米、高 $6$ 厘米的圆柱与它等底等高的圆锥，$V_{\\text{柱}}=3.14\\times4\\times6=75.36$ 立方厘米，$V_{\\text{锥}}=75.36\\div3=25.12$ 立方厘米。容积换算时 $1\\text{ L}=1\\text{ dm}^3=1000\\text{ mL}$。"
+      ],
+      "en": [
+        "The volume of a solid is the amount of space it occupies, measured in cubic centimetres, cubic decimetres, cubic metres and similar units. The capacity of a container is the volume it can hold inside, commonly measured in litres (L) and millilitres (mL): $1\\text{ L}=1\\text{ dm}^3$ and $1\\text{ mL}=1\\text{ cm}^3$. Volume measures the space occupied from outside, while capacity measures how much a container holds from inside; their units convert ($1\\text{ L}=1\\text{ dm}^3$, $1\\text{ mL}=1\\text{ cm}^3$), but a container's volume is generally greater than its capacity, so the two quantities are not interchangeable.",
+        "Assume $a,b,h$ are positive integers in the chosen unit; divide the cuboid into unit cubes of edge $1$: each row has $a$ cubes, there are $b$ rows and $h$ layers, so the total number is $a\\times b\\times h$. Hence $V_{\\text{cuboid}}=abh$. Since the base area is $ab$, this can also be written $V=S_{\\text{base}}h$. When $a=b=h$ the solid is a cube and $V=a^3$; here $a^3=a\\cdot a\\cdot a$, not $3a$.",
+        "Divide the base of a cylinder into many equal sectors and cut along a height; the pieces rearrange into an approximate cuboid with base area $\\pi r^2$ and height $h$. Therefore $V_{\\text{cylinder}}=\\pi r^2h$. The finer the division, the closer the solid is to a cuboid. This formula applies to a right cylinder, where $r$ is the base radius and $h$ is the perpendicular distance between the two bases.",
+        "When a cone and a cylinder have equal bases and equal heights, the cone's volume is $\\frac{1}{3}$ of the cylinder's: filling the cylinder with sand using the cone takes exactly $3$ cone-loads, so $3V_{\\text{cone}}=V_{\\text{cylinder}}=\\pi r^2h$, hence $V_{\\text{cone}}=\\frac{1}{3}\\pi r^2h$. The condition 'equal bases and equal heights' cannot be omitted; if either differs, compute separately rather than taking one third.",
+        "Surface area is the sum of the areas of all faces, measured in square units, which differ from the cubic units of volume. For a cuboid $S=2(ab+ah+bh)$; for a cube $S=6a^2$; for a cylinder $S=2\\pi rh+2\\pi r^2$, where the lateral surface unrolls to a rectangle and the two bases are added. Example: a cuboid $5$ by $3$ by $4$ cm has $V=60\\text{ cm}^3$ and $S=2(15+20+12)=94\\text{ cm}^2$.",
+        "Volume units convert by the cube of the length conversion factor: $1\\text{ m}^3=1000\\text{ dm}^3$, $1\\text{ dm}^3=1000\\text{ cm}^3$, so $1\\text{ m}^3=10^6\\text{ cm}^3$. Example: a cylinder of base radius $2$ cm and height $6$ cm, together with a cone of the same base and height, has $V_{\\text{cylinder}}=3.14\\times4\\times6=75.36\\text{ cm}^3$ and $V_{\\text{cone}}=75.36\\div3=25.12\\text{ cm}^3$. For capacity, $1\\text{ L}=1\\text{ dm}^3=1000\\text{ mL}$."
+      ]
+    },
+    "figures-motion-elementary": {
+      "zh": [
+        "平移、旋转和轴对称都是平面图形的变换。三者的共同点是：变换前后两个图形全等，即对应边相等、对应角相等，形状和大小都不改变；改变的只是位置或方向。因此可以用对应点、对应边来描述变换前后的关系。",
+        "平移由方向（平移向量）和距离完全确定。图形上每一点都沿同一方向移动同样的距离；对应点之间的连线互相平行（或在同一直线上）且长度相等，对应边也平行且相等。平移不改变图形的方向。例：小车沿直路前进 $10$ 米，车身上每一点都平移了 $10$ 米。",
+        "旋转由旋转中心 $O$、方向（顺时针或逆时针）和角度 $\\theta$ 确定。图形上每一点都绕 $O$ 转过同样的角 $\\theta$，对应点到 $O$ 的距离保持不变。旋转不改变形状和大小，但会改变方向；当 $\\theta=360^\\circ$ 时图形回到原来的位置。描述旋转时，中心、方向、角度三个要素缺一不可。",
+        "如果沿直线 $l$ 对折后，图形在 $l$ 两侧的部分完全重合，那么这个图形是轴对称图形，$l$ 是它的对称轴。此时每一对对应点的连线都被 $l$ 垂直平分；对应线段相等，对应角相等。轴对称会改变图形的方向（左右翻转），所以一般不能由平移或旋转得到。",
+        "常见图形的对称轴条数：线段有 $2$ 条（垂直平分线以及它所在的直线），长方形有 $2$ 条，正方形有 $4$ 条，等腰三角形有 $1$ 条，等边三角形有 $3$ 条，圆有无数条（每条直径所在的直线都是对称轴）。一般的平行四边形（非矩形、非菱形）没有对称轴。",
+        "判断变换要看对应关系，不能只看位置：对应点连线平行、同向且等长（各点位移向量相同），才是平移；对应点绕同一点按同一方向转过相同角度，才是旋转；对应点连线被同一直线垂直平分，是轴对称。例：方格纸上点 $A$ 向右平移 $4$ 格、向上平移 $2$ 格，每一个对应点都作同样的移动，图形形状和大小不变。"
+      ],
+      "en": [
+        "Translation, rotation and axial symmetry are transformations of plane figures. They share one property: the figure and its image are congruent, so corresponding sides and corresponding angles are equal, and neither shape nor size changes; only position or orientation changes. Corresponding points and corresponding sides can therefore be used to describe the relation between the figure and its image.",
+        "A translation is completely determined by a direction (translation vector) and a distance. Every point of the figure moves the same distance in the same direction; segments joining corresponding points are parallel (or collinear) and equal, and corresponding sides are parallel and equal. A translation does not change the orientation of the figure. Example: a car moving $10$ m along a straight road translates every point of its body by $10$ m.",
+        "A rotation is determined by its centre $O$, its direction (clockwise or anticlockwise) and its angle $\\theta$. Every point of the figure turns through the same angle $\\theta$ about $O$, and each corresponding point keeps its distance from $O$. Rotation preserves shape and size but changes orientation; when $\\theta=360^\\circ$ the figure returns to its original position. Centre, direction and angle are all needed to describe a rotation.",
+        "If a figure can be folded along a line $l$ so that the two parts on opposite sides of $l$ coincide exactly, then the figure is axially symmetric and $l$ is an axis of symmetry. Every segment joining a pair of corresponding points is perpendicularly bisected by $l$; corresponding segments and corresponding angles are equal. Axial symmetry reverses orientation (a left-right flip), so in general it cannot be produced by a translation or a rotation.",
+        "Numbers of axes of symmetry for common figures: a line segment has $2$ (its perpendicular bisector and the line containing it), a rectangle has $2$, a square has $4$, an isosceles triangle has $1$, an equilateral triangle has $3$, and a circle has infinitely many (every line through a diameter is an axis). A general parallelogram that is neither a rectangle nor a rhombus has no axis of symmetry.",
+        "To identify a transformation, examine corresponding points rather than position alone: if the segments joining corresponding points are parallel, codirected and equal (the same displacement vector), the transformation is a translation; if corresponding points turn about the same point in the same direction through the same angle, it is a rotation; if the joining segments are perpendicularly bisected by one line, it is axial symmetry. Example: on squared paper, move point $A$ $4$ squares right and $2$ squares up; every corresponding point makes the same move, so shape and size are unchanged."
+      ]
+    },
+    "observing-objects": {
+      "zh": [
+        "观察物体时要说明观察方向。小学通常从前面（正面）、上面、左面三个方向观察，视线分别垂直于对应的面，得到的是正投影视图：从前面看到长 $\\times$ 高，从上面看到长 $\\times$ 宽，从左面看到宽 $\\times$ 高。方向不同，看到的形状可能不同。",
+        "长方体长 $6$、宽 $4$、高 $2$（单位：厘米）：从前面看是 $6\\times2$ 的长方形，从上面看是 $6\\times4$ 的长方形，从左面看是 $4\\times2$ 的长方形。三个视图的边由不同的两条棱决定，所以大小一般不同；只有当相应的两条棱相等时，两个视图才可能相同。",
+        "正方体棱长为 $a$，从前面、上面、左面看到的都是边长为 $a$ 的正方形，三个视图完全相同。反过来，若一个长方体在三个方向上的视图都是同样大小的正方形，则它的长、宽、高都等于 $a$，这个长方体就是正方体。但视图相同并不意味着物体内部结构相同。",
+        "只看一个方向不能确定物体的形状。例：$3\\times3\\times3$ 的正方体与 $3\\times1\\times3$ 的长方体（长 $3$、宽 $1$、高 $3$，把 $3\\times3$ 的面朝前），从前面看都是 $3\\times3$ 的正方形；但从上面看分别是 $3\\times3$ 与 $3\\times1$ 的长方形，从左面看分别是 $3\\times3$ 与 $1\\times3$ 的长方形。因此必须结合多个方向的视图。",
+        "用小正方体搭立体图形时，从上面看到的图形给出「占地」位置，即哪几格有方块；从前面看到的图形给出每一列的最大高度；从左面看到的图形给出每一行的最大高度。先按俯视图摆好位置，再用正视图和左视图确定各位置高度的上限（每列、每行的最大值），据此选择一种满足所有最大值的摆法；搭法不一定唯一。",
+        "三个视图能提供很强的限制，但不一定能唯一确定物体。例：俯视图是 $2\\times2$ 的四个方格，正视图两列的高度都为 $2$，左视图两行的高度都为 $2$；高度矩阵 $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ 与 $\\begin{pmatrix}2&2\\\\2&1\\end{pmatrix}$ 都满足这些视图，却是不同的搭法。因此读图时还要说明是否允许隐藏结构，并检查所有视图是否同时满足。"
+      ],
+      "en": [
+        "When observing an object, state the direction of view. Primary school usually uses three directions: from the front, from above and from the left, with the line of sight perpendicular to the corresponding face. These are orthographic views: from the front one sees length $\\times$ height, from above length $\\times$ width, and from the left width $\\times$ height. Different directions may give different shapes.",
+        "A cuboid of length $6$, width $4$ and height $2$ (in centimetres) looks like a $6\\times2$ rectangle from the front, a $6\\times4$ rectangle from above, and a $4\\times2$ rectangle from the left. The sides of the three views are determined by different pairs of edges, so their sizes generally differ; two views can coincide only when the corresponding pair of edges are equal.",
+        "For a cube of edge $a$, the views from the front, from above and from the left are all squares of side $a$, so the three views are identical. Conversely, if a cuboid has square views of the same size in all three directions, then its length, width and height all equal $a$, so the cuboid is a cube. Identical views, however, do not imply identical internal structure.",
+        "A single view cannot determine the shape of an object. Example: a $3\\times3\\times3$ cube and a $3\\times1\\times3$ cuboid (length $3$, width $1$, height $3$, with a $3\\times3$ face at the front) both look like a $3\\times3$ square from the front; from above they look like $3\\times3$ and $3\\times1$ rectangles respectively, and from the left like $3\\times3$ and $1\\times3$ rectangles. Several directions must therefore be combined.",
+        "When building with unit cubes, the view from above gives the footprint, that is, which grid positions contain cubes; the view from the front gives the maximum height of each column; the view from the left gives the maximum height of each row. Place the cubes according to the top view first, then use the front and left views to bound the height at each position (column/row maxima), and choose one assignment satisfying all maxima; the solid need not be unique.",
+        "Three views impose strong constraints but need not determine the solid uniquely. Example: the top view is a full $2\\times2$ block of four squares, the front view has height $2$ in both columns, and the left view has height $2$ in both rows. The height matrices $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ and $\\begin{pmatrix}2&2\\\\2&1\\end{pmatrix}$ both satisfy these views but describe different arrangements. When reading views, one must therefore state whether hidden structure is allowed and check that all views hold simultaneously."
+      ]
+    },
+    "statistics-charts": {
+      "zh": [
+        "统计图把整理后的数据画成图形，便于读取、比较和分析。读图前先看标题、横轴与纵轴分别表示什么、单位是什么、每一格代表多少；同一组数据用不同统计图表达时，强调的信息不同。小学常见的统计图有条形统计图、折线统计图和扇形统计图。",
+        "条形统计图用直条的长度表示数量的多少，直条越长表示数量越大。比较数量时，各直条必须从同一基线（通常为 $0$）量起，否则长度差会被夸大；读数时用「格数 $\\times$ 每格代表的单位数」，不能直接把格数当作数量。复式条形统计图把两组或多组直条并列画出，便于比较。",
+        "折线统计图把数据点按时间顺序用线段连接：线段上升表示数量增加，下降表示数量减少；在横轴时间间隔相同的前提下，线段越陡，变化越快。它适合观察变化趋势，但相邻数据点之间的连线只是示意，不能据此断定两个时刻之间的实际数值；要读准确值必须看数据点或统计表。",
+        "扇形统计图把总数看作整个圆，即 $100\\%$，每个扇形表示一部分。若某部分的数量为 $m$、总数为 $N$（$N>0$），则它占总数的百分比为 $\\frac{m}{N}\\times100\\%$，对应扇形的圆心角为 $360^\\circ\\times\\frac{m}{N}$。所有部分的百分比之和为 $100\\%$，圆心角之和为 $360^\\circ$；已知百分比求数量时还必须知道总数。",
+        "选择统计图要看目的：比较各类数量的多少，用条形统计图；表示同一对象随时间增减变化，用折线统计图；表示各部分数量与总数的关系，用扇形统计图。只含一组数据的是单式统计图，含两组或多组数据的是复式统计图，便于对照；扇形统计图不适合比较不同总数背景下的绝对数量。",
+        "读图要防止误读：检查纵轴是否从 $0$ 开始、单位和每格数值是否看清、复式图的图例是否对应。例：某班共有 $40$ 人，喜欢篮球的有 $16$ 人，则扇形图中篮球所占百分比为 $16\\div40\\times100\\%=40\\%$，对应圆心角为 $360^\\circ\\times40\\%=144^\\circ$；其余部分合计占 $60\\%$，总和为 $100\\%$。"
+      ],
+      "en": [
+        "A statistical chart draws organized data as a figure for easy reading, comparison and analysis. Before reading a chart, check the title, what the horizontal and vertical axes represent, the unit, and how much one grid square stands for; the same data drawn in different charts emphasizes different information. The common charts in primary school are the bar chart, the line chart and the pie chart.",
+        "A bar chart uses the length of bars to represent amounts: the longer the bar, the larger the amount. To compare amounts, all bars must be measured from the same baseline (usually $0$); otherwise differences in length are exaggerated. Read a value as 'number of grid squares $\\times$ value per square', not as the number of squares alone. A multiple bar chart places two or more sets of bars side by side for comparison.",
+        "A line chart joins data points in time order with segments: a rising segment means an increase, a falling segment a decrease; when the time intervals on the horizontal axis are equal, a steeper segment means a faster change. It is suited to trends, but the segments between adjacent data points are only a guide and do not determine the actual values between those times; exact values must be read from the points or the data table.",
+        "A pie chart takes the total as the whole circle, namely $100\\%$, and each sector represents one part. If a part has amount $m$ and the total is $N$ ($N>0$), its percentage of the total is $\\frac{m}{N}\\times100\\%$, and the corresponding central angle is $360^\\circ\\times\\frac{m}{N}$. All percentages add up to $100\\%$ and all central angles to $360^\\circ$; to recover an amount from a percentage, the total must also be known.",
+        "Choose a chart according to the purpose: to compare amounts of different categories, use a bar chart; to show how one quantity rises and falls over time, use a line chart; to show the relation of parts to the whole, use a pie chart. A single chart contains one data set, while a multiple chart contains two or more sets for comparison; a pie chart is not suitable for comparing absolute amounts when the totals differ.",
+        "Guard against misreading: check whether the vertical axis starts at $0$, whether the unit and the value per grid square are clear, and whether the legend of a multiple chart is matched correctly. Example: in a class of $40$ students, $16$ like basketball, so in a pie chart basketball accounts for $16\\div40\\times100\\%=40\\%$, with central angle $360^\\circ\\times40\\%=144^\\circ$; the remaining parts account for $60\\%$, and the total is $100\\%$."
+      ]
+    }
+  }
+}

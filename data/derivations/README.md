@@ -51,8 +51,15 @@
 | D18 | 函数性质 | `monotonicity`、`parity`、`periodicity`、`rational-exponent`、`composite-function`、`inverse-function`、`change-of-base` |
 | D19 | 指数函数 | `exponential-function`、`exponential-equation`、`exponential-growth-decay`、`natural-constant-e` |
 | D20 | 对数与模型 | `logarithm`、`logarithmic-function`、`logarithmic-equation`、`function-models` |
+| D21 | 小学数与运算 | `counting-comparison`、`whole-numbers`、`addition-subtraction`、`multiplication-division`、`four-operations-order`、`large-numbers`、`rounding-approximation` |
+| D22 | 小学量与负数 | `length-units`、`area-volume-units`、`mass-time-units`、`negative-numbers-elementary`、`letters-for-numbers`、`average-elementary`、`chicken-rabbit` |
+| D23 | 小学分数小数 | `fractions-elementary`、`decimals-elementary`、`percentage-elementary`、`ratio-elementary`、`factors-multiples`、`operation-laws-elementary`、`possibility-elementary`、`angles-elementary` |
+| D24 | 小学几何统计 | `area-elementary`、`perimeter-elementary`、`circle-elementary`、`solid-figures-elementary`、`solid-volume-elementary`、`figures-motion-elementary`、`observing-objects`、`statistics-charts` |
+| D25 | 方程与不等式 | `linear-equation-junior`、`inequality`、`linear-inequality-junior`、`linear-system-two-variables`、`polynomial`、`quadratic-equation-junior` |
+| D26 | 代数与几何基础 | `basic-inequality`、`quadratic-inequality`、`axial-symmetry`、`lines-angle-basics`、`intersecting-lines`、`plane-coordinates` |
+| D27 | 平面几何 | `central-symmetry-rotation`、`congruent-triangles`、`parallelogram`、`projection-view`、`rectangle-rhombus-square`、`circle-junior`、`similarity` |
 
-当前覆盖：**127 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22）。后续按分支分批推进。
+当前覆盖：**176 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11）。后续按分支分批推进。
 
 ## 命令
 

@@ -34957,6 +34957,22 @@
         "linear-inequality-junior",
         "algebraic-expression",
         "linear-function"
+      ],
+      "derivation": [
+        "一元一次方程是只含一个未知数、未知数的次数都是 $1$、两边都是整式的方程，一般形式为 $ax+b=0$。若 $a=0$，方程变成 $b=0$：$b\\ne0$ 时无解，$b=0$ 时任意实数都是解，因此必须要求 $a\\ne0$；此时两边同除以 $a$ 得唯一解 $x=-\\dfrac{b}{a}$。",
+        "等式性质是解方程的依据。若 $a=b$，两边同加 $c$ 得 $a+c=b+c$；反过来，若 $a+c=b+c$，两边同加 $-c$ 又得 $a=b$，所以这是等价变形。两边同乘 $c$ 时，$a=b\\Rightarrow ac=bc$ 对任意 $c$ 成立；但 $c=0$ 时反推不成立（$0=0$ 推不出 $a=b$）。当 $c\\ne0$ 时，$ac=bc\\Rightarrow a=b$，所以两边可以同除 $c$。",
+        "移项法则：由 $a+c=b$ 两边同减 $c$，得 $a=b-c$，即把一项从等号一边移到另一边必须变号；这一步可逆，所以不改变解集。例如 $3x+1=7$ 两边同减 $1$ 得 $3x=6$，再两边同除以 $3\\ne0$ 得 $x=2$。",
+        "解 $\\dfrac{x+1}{2}-\\dfrac{x-2}{3}=1$：最简公分母是 $6\\ne0$，两边同乘 $6$ 得 $3(x+1)-2(x-2)=6$；去括号得 $3x+3-2x+4=6$；合并同类项得 $x+7=6$；移项得 $x=-1$。因为乘的是非零常数 $6$，每一步都等价，没有产生增根。",
+        "检验：把 $x=-1$ 代回左边，$\\dfrac{-1+1}{2}-\\dfrac{-1-2}{3}=0-(-1)=1$，等于右边，所以 $x=-1$ 是解。由于 $a=1\\ne0$，方程只有一个解，检验通过就确认了全部解；若是应用题，还要检查解是否符合实际意义（长度、人数等为正）。",
+        "列方程时也要保持等价：设每本本子 $x$ 元，则每支笔 $x+2$ 元，由「3 支笔的价钱加 2 本本子的价钱等于 26 元」得 $3(x+2)+2x=26$，即 $5x+6=26$，解得 $x=4$。解完代回原题：$3\\times6+2\\times4=26$，且价格为正，符合实际。"
+      ],
+      "derivationEn": [
+        "A linear equation in one variable contains exactly one unknown, the unknown occurs only to the first power, and both sides are polynomials; its general form is $ax+b=0$. If $a=0$, the equation becomes $b=0$: it has no solution when $b\\ne0$, while every real number is a solution when $b=0$. Hence $a\\ne0$ is required, and dividing both sides by $a$ gives the unique solution $x=-\\dfrac{b}{a}$.",
+        "The properties of equality justify the solving steps. If $a=b$, adding $c$ gives $a+c=b+c$; conversely, adding $-c$ to $a+c=b+c$ recovers $a=b$, so the step is reversible. Multiplying gives $a=b\\Rightarrow ac=bc$ for every $c$; however, for $c=0$ the converse fails ($0=0$ does not force $a=b$). When $c\\ne0$, $ac=bc\\Rightarrow a=b$, so division by $c$ is legitimate.",
+        "Transposition: subtracting $c$ from both sides of $a+c=b$ gives $a=b-c$, so a term changes sign when moved across the equals sign. The step is reversible and leaves the solution set unchanged. For $3x+1=7$, subtract $1$ to obtain $3x=6$, then divide by $3\\ne0$ to obtain $x=2$.",
+        "Solve $\\dfrac{x+1}{2}-\\dfrac{x-2}{3}=1$. The least common denominator is $6\\ne0$; multiplying both sides by $6$ gives $3(x+1)-2(x-2)=6$. Expanding yields $3x+3-2x+4=6$, collecting like terms gives $x+7=6$, and transposing gives $x=-1$. Since the multiplier is the nonzero constant $6$, every step is an equivalence and no extraneous root is introduced.",
+        "Check: substituting $x=-1$ into the left side gives $\\dfrac{-1+1}{2}-\\dfrac{-1-2}{3}=0-(-1)=1$, which equals the right side, so $x=-1$ is a solution. Because $a=1\\ne0$, the equation has exactly one solution, so the check confirms the full solution set. In a word problem, also check that the value is admissible (positive length, whole number of people, and so on).",
+        "Modelling must preserve equivalence as well. Let a notebook cost $x$ yuan; then a pen costs $x+2$ yuan. The condition that 3 pens and 2 notebooks cost 26 yuan gives $3(x+2)+2x=26$, that is $5x+6=26$, hence $x=4$. Substituting back gives $3\\times6+2\\times4=26$, and the price is positive, so the answer fits the problem."
       ]
     },
     {
@@ -35103,6 +35119,22 @@
         "linear-function",
         "intersecting-lines",
         "plane-coordinates"
+      ],
+      "derivation": [
+        "二元一次方程组由两个形如 $a_ix+b_iy=c_i$ 的方程联立而成，其中 $a_i,b_i$ 不全为 $0$，且含未知数的项都是一次。解是一对有序实数 $(x,y)$，必须同时满足两个方程；只满足其中一个方程的一对数值不是方程组的解。",
+        "加减消元的合法性：若 $(x,y)$ 同时满足两个方程，则对任意实数 $\\lambda,\\mu$，它也满足 $\\lambda(a_1x+b_1y-c_1)+\\mu(a_2x+b_2y-c_2)=0$。把第二个方程替换为 ①+②，相当于左乘矩阵 $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$，其行列式为 $1\\ne0$，变换可逆，所以新旧方程组同解。对 $x+y=5$、$x-y=1$，相加得 $2x=6$，即 $x=3$。",
+        "代入消元：若 $b_1\\ne0$，由 ① 得 $y=\\dfrac{c_1-a_1x}{b_1}$，代入 ② 得 $(a_2b_1-a_1b_2)x=c_2b_1-b_2c_1$；若 $b_1=0$，则 $a_1\\ne0$，可直接由 ① 得 $x=\\dfrac{c_1}{a_1}$。记 $D=a_1b_2-a_2b_1$，则 $D\\ne0$ 时 $x=\\dfrac{c_1b_2-c_2b_1}{D}$，再回代求 $y$；$D=0$ 时 $x$ 被消尽，必须另判有无穷多解还是无解。",
+        "解 $\\begin{cases}x+y=5\\\\x-y=1\\end{cases}$：①+② 得 $2x=6$，故 $x=3$；代回 ① 得 $3+y=5$，故 $y=2$。检验：$3+2=5$，$3-2=1$，两式都成立，所以解为 $(3,2)$。回代不可省略，因为消元只保证先求出的那个未知数满足组合后的方程。",
+        "一般地，$D=a_1b_2-a_2b_1$。$D\\ne0$ 时两条直线不平行（方向向量不共线），方程组有唯一解；$D=0$ 时两条直线平行或重合：若存在常数 $k$ 使 $a_1=ka_2,\\ b_1=kb_2$ 但 $c_1\\ne kc_2$，则平行、无解；若还有 $c_1=kc_2$，则重合、有无穷多解。例如 $x+y=1$ 与 $2x+2y=3$ 满足 $D=0$ 且 $1:2=1:2\\ne1:3$，故无解。",
+        "几何上，每个二元一次方程对应一条直线，方程组的解就是两条直线的交点坐标；消元相当于用两条直线方程的线性组合替换其中一条，交点保持不变。应用题中设两个未知数、找两个独立的等量关系，解出后要同时代回两个方程，并检查解是否符合实际范围。"
+      ],
+      "derivationEn": [
+        "A system of two linear equations in two variables consists of two equations of the form $a_ix+b_iy=c_i$, where $a_i,b_i$ are not both zero and every term containing an unknown is of degree $1$. A solution is an ordered pair $(x,y)$ that satisfies both equations simultaneously; a pair satisfying only one equation is not a solution of the system.",
+        "Why elimination is legitimate: if $(x,y)$ satisfies both equations, then for all real $\\lambda,\\mu$ it satisfies $\\lambda(a_1x+b_1y-c_1)+\\mu(a_2x+b_2y-c_2)=0$. Replacing the second equation by ①+② is left multiplication by $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$, whose determinant is $1\\ne0$; the transformation is invertible, so the new system is equivalent to the old one. For $x+y=5$ and $x-y=1$, adding gives $2x=6$, hence $x=3$.",
+        "Substitution: if $b_1\\ne0$, the first equation gives $y=\\dfrac{c_1-a_1x}{b_1}$, and substituting into the second gives $(a_2b_1-a_1b_2)x=c_2b_1-b_2c_1$; if $b_1=0$, then $a_1\\ne0$, so the first equation gives $x=\\dfrac{c_1}{a_1}$ directly. Let $D=a_1b_2-a_2b_1$; if $D\\ne0$, then $x=\\dfrac{c_1b_2-c_2b_1}{D}$, and back-substitution gives $y$. If $D=0$, $x$ cancels out and one must decide separately between infinitely many solutions and none.",
+        "Solve $\\begin{cases}x+y=5\\\\x-y=1\\end{cases}$: adding ① and ② gives $2x=6$, so $x=3$; substituting back into ① gives $3+y=5$, so $y=2$. Check: $3+2=5$ and $3-2=1$, so both equations hold and the solution is $(3,2)$. Back-substitution is essential, because elimination only guarantees the value of the unknown that was found first.",
+        "In general, $D=a_1b_2-a_2b_1$. If $D\\ne0$, the lines are not parallel (their direction vectors are not collinear), so the system has a unique solution. If $D=0$, the lines are parallel or coincident: if $a_1=ka_2$ and $b_1=kb_2$ for some constant $k$ but $c_1\\ne kc_2$, the lines are parallel and there is no solution; if also $c_1=kc_2$, they coincide and there are infinitely many solutions. For $x+y=1$ and $2x+2y=3$, $D=0$ and $1:2=1:2\\ne1:3$, so there is no solution.",
+        "Geometrically, each linear equation represents a line and the solution of the system is the intersection point. Elimination replaces one line by a linear combination of the two equations, which leaves the intersection unchanged. In applications, introduce two unknowns and two independent relations; after solving, substitute into both equations and check that the values lie in the admissible range."
       ]
     },
     {
@@ -35211,6 +35243,22 @@
         "linear-equation-junior",
         "linear-system-two-variables",
         "quadratic-equation-junior"
+      ],
+      "derivation": [
+        "一元一次不等式是只含一个未知数、未知数次数为 $1$、两边都是整式的不等式，一般形式可写成 $ax+b>0$（$a\\ne0$；$<,\\ge,\\le$ 同理）。它的解集通常是一个区间：$a>0$ 时为 $x>-\\dfrac{b}{a}$，$a<0$ 时为 $x<-\\dfrac{b}{a}$，而不是一个点。",
+        "性质 3 的证明：设 $a>b$，则 $a-b>0$。若 $c<0$，则 $ac-bc=(a-b)c<0$，所以 $ac<bc$。因此两边同乘或同除一个负数时，不等号必须反向；同乘 $0$ 会使两边都变成 $0$，无法保留原来的大小信息。",
+        "解 $ax+b>0$：先移项得 $ax>-b$。若 $a>0$，两边同除以正数 $a$，方向不变，得 $x>-\\dfrac{b}{a}$；若 $a<0$，两边同除以负数 $a$，方向改变，得 $x<-\\dfrac{b}{a}$。所以「系数化为 1」时必须先看 $a$ 的符号。",
+        "例：解 $5x-2<2(x+5)$。去括号得 $5x-2<2x+10$；两边同减 $2x$ 再加 $2$，得 $3x<12$；两边同除以正数 $3$，方向不变，得 $x<4$。若解 $-2x\\ge-6$，两边同除以 $-2$（负数），则必须把 $\\ge$ 改为 $\\le$，得 $x\\le3$。",
+        "不等式组的解集是各个解集的交集。解 $\\begin{cases}2x-1>3\\\\5-2x\\ge-1\\end{cases}$：由第一个得 $x>2$；由第二个得 $-2x\\ge-6$，除以 $-2$ 变号得 $x\\le3$。取公共部分得 $2<x\\le3$；在数轴上，$2$ 处画空心圈、$3$ 处画实心点。若两个解集没有公共部分，则不等式组无解，解集为 $\\varnothing$。",
+        "等价性检查：移项、合并同类项都是可逆的恒等变形；除以负数虽然变号，但乘回去时再次变号，仍可还原，所以不改变解集。检验时可取端点与区间内的点：$x=3$ 使两个不等式都成立，$x=2$ 不满足第一个，$x=4$ 不满足第二个。去分母时若乘的是含未知数的式子，必须先讨论其正负，不能直接两边相乘。"
+      ],
+      "derivationEn": [
+        "A linear inequality in one variable contains exactly one unknown to the first power and has polynomial expressions on both sides; it can be written as $ax+b>0$ with $a\\ne0$ (similarly for $<,\\ge,\\le$). Its solution set is usually an interval: $x>-\\dfrac{b}{a}$ when $a>0$, and $x<-\\dfrac{b}{a}$ when $a<0$, not a single point.",
+        "Proof of Property 3: let $a>b$, so $a-b>0$. If $c<0$, then $ac-bc=(a-b)c<0$, hence $ac<bc$. Therefore multiplying or dividing both sides by a negative number reverses the inequality. Multiplying by $0$ makes both sides $0$ and destroys the size information.",
+        "Solve $ax+b>0$: transposing gives $ax>-b$. If $a>0$, dividing by the positive number $a$ keeps the direction, so $x>-\\dfrac{b}{a}$. If $a<0$, dividing by the negative number $a$ reverses it, so $x<-\\dfrac{b}{a}$. Thus reducing the coefficient to $1$ requires checking the sign of $a$ first.",
+        "Example: solve $5x-2<2(x+5)$. Expanding gives $5x-2<2x+10$; subtracting $2x$ and adding $2$ on both sides gives $3x<12$; dividing by the positive number $3$ keeps the direction, so $x<4$. For $-2x\\ge-6$, dividing by $-2$ (negative) forces $\\ge$ to become $\\le$, giving $x\\le3$.",
+        "The solution set of a system is the intersection of the individual solution sets. Solve $\\begin{cases}2x-1>3\\\\5-2x\\ge-1\\end{cases}$: the first gives $x>2$; the second gives $-2x\\ge-6$, and division by $-2$ reverses the sign to give $x\\le3$. The common part is $2<x\\le3$; on the number line draw an open circle at $2$ and a solid dot at $3$. If the individual sets do not overlap, the system has no solution and the solution set is $\\varnothing$.",
+        "Checking equivalence: transposition and collecting like terms are reversible identity transformations. Dividing by a negative number reverses the sign, but multiplying back by the same negative number reverses it again, so the solution set is unchanged. To check, test endpoints and interior points: $x=3$ satisfies both inequalities, $x=2$ fails the first, and $x=4$ fails the second. When clearing denominators, if the multiplier contains the unknown, discuss its sign first; do not multiply both sides blindly."
       ]
     },
     {
@@ -35332,6 +35380,22 @@
         "function-zeros",
         "inequality",
         "linear-equation-junior"
+      ],
+      "derivation": [
+        "一元二次方程的一般形式是 $ax^2+bx+c=0$，其中 $a\\ne0$。若 $a=0$，方程退化为一次方程、恒等式或矛盾等式，不再是二次方程；因此 $a\\ne0$ 既是二次项存在的条件，也是后面配方与使用求根公式的前提。",
+        "配方：两边同除以 $a\\ne0$，得 $x^2+\\dfrac{b}{a}x+\\dfrac{c}{a}=0$；移常数项，并在两边同加一次项系数一半的平方 $\\left(\\dfrac{b}{2a}\\right)^2$，得 $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{b^2-4ac}{4a^2}$。加的是同一个数，所以这是恒等变形。",
+        "因为 $4a^2>0$，右边符号由判别式 $\\Delta=b^2-4ac$ 决定：$\\Delta>0$ 时右边为正，开平方得两个不相等的实根；$\\Delta=0$ 时右边为 $0$，得重根 $x=-\\dfrac{b}{2a}$（即两个相等的实根）；$\\Delta<0$ 时右边为负，而实数的平方非负，所以没有实数根（在复数范围内仍有两个根）。",
+        "当 $\\Delta\\ge0$ 时，由 $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{\\Delta}{4a^2}$ 得 $x=-\\dfrac{b}{2a}\\pm\\dfrac{\\sqrt{\\Delta}}{2|a|}$。由于 $\\pm$ 表示两个值，而 $\\dfrac{1}{2|a|}$ 与 $\\dfrac{1}{2a}$ 只相差一个整体符号，这个符号可被 $\\pm$ 吸收，故可统一写成 $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$。分母是 $2a$，根号内是 $b^2-4ac$，使用前必须先整理成一般形式。",
+        "韦达定理：当 $\\Delta\\ge0$ 时，设两根为 $x_1,x_2$，则 $ax^2+bx+c=a(x-x_1)(x-x_2)=ax^2-a(x_1+x_2)x+ax_1x_2$。比较系数得 $x_1+x_2=-\\dfrac{b}{a}$，$x_1x_2=\\dfrac{c}{a}$。它可以在不解方程时求对称式的值，也可以用来检验求出的根。",
+        "例：解 $x^2-2x-3=0$。这里 $a=1,b=-2,c=-3$，$\\Delta=(-2)^2-4\\cdot1\\cdot(-3)=16>0$，故有两个不等实根，$x=\\dfrac{2\\pm4}{2}$，即 $x_1=3$、$x_2=-1$。检验：$x_1+x_2=2=-\\dfrac{b}{a}$，$x_1x_2=-3=\\dfrac{c}{a}$；因式分解 $(x-3)(x+1)=0$ 也给出同样的根。"
+      ],
+      "derivationEn": [
+        "The general form of a quadratic equation is $ax^2+bx+c=0$ with $a\\ne0$. If $a=0$, the equation degenerates into a linear equation, an identity or a contradiction and is no longer quadratic; thus $a\\ne0$ is required for the quadratic term to exist and is also the hypothesis for completing the square and for the quadratic formula.",
+        "Completing the square: divide both sides by $a\\ne0$ to get $x^2+\\dfrac{b}{a}x+\\dfrac{c}{a}=0$. Move the constant term and add the square of half the linear coefficient, $\\left(\\dfrac{b}{2a}\\right)^2$, to both sides; this gives $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{b^2-4ac}{4a^2}$. The same number is added on both sides, so the transformation is an identity.",
+        "Since $4a^2>0$, the sign of the right side is determined by the discriminant $\\Delta=b^2-4ac$. If $\\Delta>0$, the right side is positive and taking square roots gives two distinct real roots. If $\\Delta=0$, it is zero, giving the double root $x=-\\dfrac{b}{2a}$ (two equal real roots). If $\\Delta<0$, it is negative, while a real square is nonnegative, so there is no real root (over the complex numbers there are still two roots).",
+        "For $\\Delta\\ge0$, $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{\\Delta}{4a^2}$ gives $x=-\\dfrac{b}{2a}\\pm\\dfrac{\\sqrt{\\Delta}}{2|a|}$. Because $\\pm$ selects two values and $\\dfrac{1}{2|a|}$ differs from $\\dfrac{1}{2a}$ only by an overall sign, that sign is absorbed by $\\pm$, so the result can be written uniformly as $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. The denominator is $2a$, the radicand is $b^2-4ac$, and the equation must first be put in general form.",
+        "Vieta formulas: when $\\Delta\\ge0$, let the roots be $x_1,x_2$. Then $ax^2+bx+c=a(x-x_1)(x-x_2)=ax^2-a(x_1+x_2)x+ax_1x_2$. Comparing coefficients gives $x_1+x_2=-\\dfrac{b}{a}$ and $x_1x_2=\\dfrac{c}{a}$. These relations evaluate symmetric expressions without solving the equation and also serve as a check on the roots.",
+        "Example: solve $x^2-2x-3=0$. Here $a=1$, $b=-2$, $c=-3$, so $\\Delta=(-2)^2-4\\cdot1\\cdot(-3)=16>0$; there are two distinct real roots, $x=\\dfrac{2\\pm4}{2}$, namely $x_1=3$ and $x_2=-1$. Check: $x_1+x_2=2=-\\dfrac{b}{a}$ and $x_1x_2=-3=\\dfrac{c}{a}$; factoring $(x-3)(x+1)=0$ gives the same roots."
       ]
     },
     {
@@ -36387,6 +36451,22 @@
         "axial-symmetry",
         "central-symmetry-rotation",
         "pythagorean"
+      ],
+      "derivation": [
+        "建立平面直角坐标系：画两条互相垂直、原点重合的数轴，水平的叫 $x$ 轴（横轴），竖直的叫 $y$ 轴（纵轴），交点 $O$ 叫原点。对平面内一点 $P$，分别向两轴作垂线，垂足在 $x$ 轴上的数 $a$ 是横坐标，在 $y$ 轴上的数 $b$ 是纵坐标，记作 $P(a,b)$——横坐标在前，纵坐标在后。",
+        "这种对应是一一对应：每个点有唯一的有序实数对，每个有序实数对 $(a,b)$ 也确定唯一的点。因此 $(3,-2)\\ne(-2,3)$，顺序不能颠倒。各象限符号为：第一象限 $(+,+)$、第二象限 $(-,+)$、第三象限 $(-,-)$、第四象限 $(+,-)$；坐标轴上的点不属于任何象限，$x$ 轴上 $y=0$，$y$ 轴上 $x=0$，原点是 $(0,0)$。",
+        "点到坐标轴的距离：点 $P(a,b)$ 到 $x$ 轴的距离是 $|b|$，到 $y$ 轴的距离是 $|a|$。因为距离非负，而坐标 $a,b$ 可能为负，所以必须取绝对值：例如 $P(-3,2)$ 到 $x$ 轴的距离是 $2$，到 $y$ 轴的距离是 $3$，不能写成 $-3$。",
+        "坐标平移：若点 $P(x,y)$ 向右平移 $h$ 个单位、向上平移 $k$ 个单位（$h,k>0$），则像为 $P'(x+h,y+k)$；向左、向下则分别减去相应单位。更一般地，允许 $h,k$ 为任意实数，用带符号的位移 $(h,k)$ 表示：向右、向上为正，向左、向下为负，平移公式统一为 $(x,y)\\to(x+h,y+k)$。口诀「左减右加、下减上加」正是这个带符号规则的简写。",
+        "为什么是逐坐标相加：平移不改变图形的形状、大小和方向，只改变位置。设 $P(x_1,y_1)$、$Q(x_2,y_2)$ 平移 $(h,k)$ 后的像为 $P'(x_1+h,y_1+k)$、$Q'(x_2+h,y_2+k)$，则 $$\\overrightarrow{P'Q'}=(x_2-x_1,\\ y_2-y_1)=\\overrightarrow{PQ},$$ 由勾股定理 $P'Q'=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}=PQ$，且所有对应线段平行且相等。平移后的图形与原图形全等；这与轴对称不同，反射会改变方向。",
+        "示例与区分：把 $A(-2,1)$ 向右平移 $3$ 个单位、向下平移 $2$ 个单位，得到 $A'(-2+3,\\ 1-2)=(1,-1)$；反过来，由 $A(-2,1)$ 到 $A'(1,-1)$ 的平移向量是 $(3,-2)$。还要与三种对称区分：关于 $x$ 轴为 $(a,-b)$，关于 $y$ 轴为 $(-a,b)$，关于原点为 $(-a,-b)$；平移是 $(a+h,b+k)$，不能把「加」误写成「变相反数」。"
+      ],
+      "derivationEn": [
+        "Set up a Cartesian coordinate system: draw two perpendicular number lines with a common origin, the horizontal one the $x$-axis and the vertical one the $y$-axis, meeting at the origin $O$. For a point $P$, drop perpendiculars to the two axes; the number $a$ where the perpendicular meets the $x$-axis is the abscissa and the number $b$ on the $y$-axis is the ordinate, written $P(a,b)$ — abscissa first, ordinate second.",
+        "This correspondence is one-to-one: each point has a unique ordered pair of real numbers, and each ordered pair $(a,b)$ determines a unique point. Hence $(3,-2)\\ne(-2,3)$; the order cannot be swapped. The signs by quadrant are: quadrant I $(+,+)$, quadrant II $(-,+)$, quadrant III $(-,-)$, quadrant IV $(+,-)$. Points on the axes belong to no quadrant: on the $x$-axis $y=0$, on the $y$-axis $x=0$, and the origin is $(0,0)$.",
+        "Distance from a point to the axes: for $P(a,b)$, the distance to the $x$-axis is $|b|$ and the distance to the $y$-axis is $|a|$. Distance is non-negative while the coordinates $a,b$ may be negative, so absolute values are required: for $P(-3,2)$ the distance to the $x$-axis is $2$ and to the $y$-axis is $3$, never $-3$.",
+        "Coordinate translation: if $P(x,y)$ moves $h$ units right and $k$ units up ($h,k>0$), its image is $P'(x+h,y+k)$; moving left or down subtracts the corresponding number. More generally, allow $h,k$ to be any real numbers and use the signed displacement $(h,k)$, positive to the right and up, negative to the left and down; the translation formula is uniformly $(x,y)\\to(x+h,y+k)$. The rule 'left subtract, right add, down subtract, up add' is just this signed convention in words.",
+        "Why add to each coordinate: translation changes only position, not shape, size or orientation. If $P(x_1,y_1)$ and $Q(x_2,y_2)$ are translated by $(h,k)$ to $P'(x_1+h,y_1+k)$ and $Q'(x_2+h,y_2+k)$, then $$\\overrightarrow{P'Q'}=(x_2-x_1,\\ y_2-y_1)=\\overrightarrow{PQ},$$ by the Pythagorean theorem, $P'Q'=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}=PQ$, and every corresponding segment is parallel and equal. The translated figure is congruent to the original; this differs from axial symmetry, since reflection reverses orientation.",
+        "Example and distinction: translating $A(-2,1)$ by $3$ units right and $2$ units down gives $A'(-2+3,\\ 1-2)=(1,-1)$; conversely, the translation vector from $A(-2,1)$ to $A'(1,-1)$ is $(3,-2)$. Distinguish this from the three symmetries: about the $x$-axis $(a,-b)$, about the $y$-axis $(-a,b)$, about the origin $(-a,-b)$; a translation is $(a+h,b+k)$, and 'adding' must not be replaced by 'changing signs'."
       ]
     },
     {
@@ -36735,6 +36815,22 @@
         "triangle",
         "congruent-triangles",
         "acute-trigonometry"
+      ],
+      "derivation": [
+        "线有三种基本形态：直线两端无限延伸、不可度量；射线有一个端点、另一端无限延伸；线段有两个端点、可以度量。两条基本事实：两点确定一条直线；两点之间的所有连线中线段最短，这条线段的长度就是两点间的距离。",
+        "角是由两条有公共端点的射线组成的图形：公共端点是顶点，两条射线是边；也可以看成一条射线绕端点旋转形成。角的大小只由两条射线张开的程度决定，与边画得多长无关。度量用度、分、秒，且为六十进制：$1^\\circ=60'$，$1'=60''$；大单位化小单位乘 $60$，小单位化大单位除以 $60$。",
+        "余角与补角：若 $\\alpha+\\beta=90^\\circ$，则 $\\alpha,\\beta$ 互为余角；若 $\\alpha+\\beta=180^\\circ$，则互为补角。同角或等角的余角相等：若 $\\alpha+\\gamma=90^\\circ$ 且 $\\beta+\\gamma=90^\\circ$，两式相减得 $\\alpha=\\beta$；补角同理，由 $\\alpha+\\gamma=180^\\circ$ 与 $\\beta+\\gamma=180^\\circ$ 相减得 $\\alpha=\\beta$。若两个参照角相等，把其中一个换成另一个，论证完全相同。",
+        "角平分线：若射线 $OC$ 在 $\\angle AOB$ 的内部，且 $\\angle AOC=\\angle BOC$，则 $OC$ 是 $\\angle AOB$ 的平分线，此时 $\\angle AOC=\\angle BOC=\\frac12\\angle AOB$。反过来，若 $OC$ 平分 $\\angle AOB$，则这两个角相等。定义中的「在内部」不能省略，否则射线在角的外部时也可能与两边张成相等的角，却并不是平分这个角。",
+        "线段与角的加法：若点 $B$ 在线段 $AC$ 上，则 $AB+BC=AC$；若射线 $OC$ 在 $\\angle AOB$ 内部，则 $\\angle AOC+\\angle COB=\\angle AOB$。更一般地，对任意三点 $A,B,C$，有 $AB+BC\\ge AC$，等号成立当且仅当 $B$ 在线段 $AC$ 上；这正是「两点之间线段最短」的另一种写法。",
+        "度分秒计算示例：设 $\\angle A=35^\\circ28'$。其余角为 $90^\\circ-35^\\circ28'=89^\\circ60'-35^\\circ28'=54^\\circ32'$；其补角为 $180^\\circ-35^\\circ28'=179^\\circ60'-35^\\circ28'=144^\\circ32'$。计算时不够减要向上一单位借 $1$，并把 $1^\\circ$ 换成 $60'$；结果要按度、分逐级写清。"
+      ],
+      "derivationEn": [
+        "There are three basic kinds of lines: a line extends without bound in both directions and is not measurable; a ray has one endpoint and extends without bound in one direction; a segment has two endpoints and can be measured. Two basic facts: two points determine exactly one line; among all paths joining two points the segment is shortest, and its length is the distance between the points.",
+        "An angle is formed by two rays with a common endpoint: the endpoint is the vertex and the rays are the sides; it can also be viewed as a ray rotating about its endpoint. The size of an angle is determined only by how far the rays open, not by how long the sides are drawn. It is measured in degrees, minutes and seconds in base 60: $1^\\circ=60'$ and $1'=60''$; multiply by 60 when converting to smaller units and divide by 60 when converting back.",
+        "Complementary and supplementary angles: if $\\alpha+\\beta=90^\\circ$, then $\\alpha$ and $\\beta$ are complementary; if $\\alpha+\\beta=180^\\circ$, they are supplementary. Complements of the same or equal angles are equal: from $\\alpha+\\gamma=90^\\circ$ and $\\beta+\\gamma=90^\\circ$, subtracting gives $\\alpha=\\beta$; for supplements, subtract $\\alpha+\\gamma=180^\\circ$ and $\\beta+\\gamma=180^\\circ$ to get $\\alpha=\\beta$. If the two reference angles are equal, replace one by the other; the argument is identical.",
+        "Angle bisector: if ray $OC$ lies inside $\\angle AOB$ and $\\angle AOC=\\angle BOC$, then $OC$ bisects $\\angle AOB$, and $\\angle AOC=\\angle BOC=\\frac12\\angle AOB$. Conversely, if $OC$ bisects $\\angle AOB$, these two angles are equal. The phrase 'inside' cannot be omitted: a ray outside the angle can also make equal angles with the two sides without bisecting the angle.",
+        "Adding segments and angles: if $B$ lies on segment $AC$, then $AB+BC=AC$; if ray $OC$ lies inside $\\angle AOB$, then $\\angle AOC+\\angle COB=\\angle AOB$. More generally, for any three points $A,B,C$, $AB+BC\\ge AC$, with equality if and only if $B$ lies on segment $AC$; this is another form of 'the segment is the shortest path between two points'.",
+        "Example in degrees, minutes and seconds: let $\\angle A=35^\\circ28'$. Its complement is $90^\\circ-35^\\circ28'=89^\\circ60'-35^\\circ28'=54^\\circ32'$; its supplement is $180^\\circ-35^\\circ28'=179^\\circ60'-35^\\circ28'=144^\\circ32'$. When subtraction is not possible, borrow one unit and replace $1^\\circ$ by $60'$; state the result level by level in degrees and minutes."
       ]
     },
     {
@@ -37215,6 +37311,22 @@
         "lines-angle-basics",
         "triangle",
         "parallelogram"
+      ],
+      "derivation": [
+        "同一平面内两条不同直线的位置关系只有两种：相交于一点，或平行（没有公共点）。相交时形成四个角：有公共顶点且两边互为反向延长线的两个角是对顶角，对顶角相等；有一条公共边、另一边互为反向延长线的两个角是邻补角，邻补角互补。证明对顶角相等：设 $\\alpha$ 与 $\\beta$ 邻补，$\\gamma$ 与 $\\beta$ 也邻补，则 $\\alpha+\\beta=180^\\circ=\\gamma+\\beta$，相减得 $\\alpha=\\gamma$。",
+        "垂直与距离：设点 $P$ 不在直线 $l$ 上，$PO\\perp l$ 于 $O$，$A$ 是 $l$ 上异于 $O$ 的任意一点，则 $\\triangle POA$ 是直角三角形，斜边 $PA$ 大于直角边 $PO$，所以 $PO<PA$。因此垂线段最短，$PO$ 的长度就是点 $P$ 到直线 $l$ 的距离。",
+        "三线八角：两条直线 $a,b$ 被第三条直线 $c$ 所截，在交点处得到八个角。同位角分别在 $a,b$ 的同一侧（都在上方或都在下方），且在截线 $c$ 的同侧；内错角位于 $a,b$ 之间、且在 $c$ 的两侧；同旁内角位于 $a,b$ 之间、且在 $c$ 的同旁。名称只描述位置，不表示大小关系。",
+        "判定方向（由角推线）：若同位角相等，则 $a\\parallel b$。证明用反证：若 $a,b$ 不平行，它们必相交于某点 $R$；由于 $a,b$ 与截线 $c$ 各只有一个交点 $P,Q$，$R$ 不在 $c$ 上，而在 $c$ 的某一侧，于是 $P,Q,R$ 构成三角形；在该侧取得的同位角相等，就会使三角形的一个外角等于与它不相邻的一个内角：例如 $R$ 在 $c$ 上方时，$P$ 处的同位角是 $\\angle QPR$，$Q$ 处的同位角是 $QP$ 的延长线与 $QR$ 所成的外角；而外角定理说外角严格大于任一不相邻内角，矛盾。因此两直线不相交，即平行。内错角相等或同旁内角互补也可化为同位角相等，故同样能判定平行。",
+        "性质方向（由线推角）：若 $a\\parallel b$，则同位角相等。证明：过 $Q$ 作一条直线 $b'$，使它和截线 $c$ 的相应夹角等于 $a$ 处的同位角；由第 4 步，$b'\\parallel a$。但过直线外一点 $Q$ 平行于 $a$ 的直线只有一条（平行公理），所以 $b'=b$，从而 $b$ 处的同位角等于 $a$ 处的同位角。再由对顶角相等、邻补角互补，依次得到内错角相等、同旁内角互补。",
+        "方向不能混：设 $a,b$ 被 $c$ 所截，$\\angle1$ 与 $\\angle2$ 是同位角。若已知 $\\angle1=\\angle2$，结论是 $a\\parallel b$，依据是判定「同位角相等，两直线平行」；若已知 $a\\parallel b$，结论是 $\\angle1=\\angle2$，依据是性质「两直线平行，同位角相等」。两者是互逆命题，已知与求证正好对调。举例：$a\\parallel b$ 且 $\\angle1=70^\\circ$，则同位角 $\\angle2=70^\\circ$，与 $\\angle1$ 成内错角的那个角也为 $70^\\circ$，而与它同旁的内角为 $180^\\circ-70^\\circ=110^\\circ$，不是 $70^\\circ$。"
+      ],
+      "derivationEn": [
+        "In a plane, two distinct lines have only two possible relations: they meet at one point, or they are parallel (no common point). When they meet, four angles are formed: two angles with a common vertex whose sides are opposite rays are vertical angles, and vertical angles are equal; two angles sharing one side while their other sides are opposite rays are adjacent supplementary angles, and they add to $180^\\circ$. Proof that vertical angles are equal: if $\\alpha$ and $\\beta$ are adjacent supplementary, and so are $\\gamma$ and $\\beta$, then $\\alpha+\\beta=180^\\circ=\\gamma+\\beta$, so $\\alpha=\\gamma$.",
+        "Perpendicularity and distance: let $P$ be a point not on line $l$, let $PO\\perp l$ at $O$, and let $A$ be any point of $l$ different from $O$; then $\\triangle POA$ is right-angled, and the hypotenuse $PA$ is longer than the leg $PO$, so $PO<PA$. Hence the perpendicular segment is shortest, and its length $PO$ is the distance from $P$ to the line $l$.",
+        "Eight angles from three lines: two lines $a,b$ cut by a third line $c$ produce eight angles at the intersections. Corresponding angles lie on the same side of $a$ and $b$ (both above or both below) and on the same side of the transversal $c$; alternate interior angles lie between $a$ and $b$ and on opposite sides of $c$; same-side interior angles lie between $a$ and $b$ and on the same side of $c$. The names describe position only, not size.",
+        "Test direction (angles imply lines): if corresponding angles are equal, then $a\\parallel b$. Proof by contradiction: if $a,b$ are not parallel, they meet at some point $R$; since $a$ and $b$ each meet the transversal $c$ at only one point, $P$ and $Q$ respectively, $R$ is not on $c$ but lies on one side of it, so $P,Q,R$ form a triangle; on that side, equal corresponding angles would make an exterior angle of this triangle equal to a non-adjacent interior angle: for instance, if $R$ is above $c$, the corresponding angle at $P$ is $\\angle QPR$, while the corresponding angle at $Q$ is the exterior angle formed by the extension of $QP$ and $QR$; but the exterior-angle theorem says an exterior angle is strictly greater than either non-adjacent interior angle — a contradiction. Hence the lines do not meet, so they are parallel. Equal alternate interior angles or supplementary same-side interior angles can be converted to equal corresponding angles, so they also force parallelism.",
+        "Property direction (lines imply angles): if $a\\parallel b$, then corresponding angles are equal. Proof: through $Q$ draw a line $b'$ making with the transversal $c$ the same corresponding angle as at $a$; by Step 4, $b'\\parallel a$. But through the point $Q$ not on $a$ there is only one line parallel to $a$ (parallel postulate), so $b'=b$; hence the corresponding angle at $b$ equals that at $a$. Vertical angles being equal and adjacent angles being supplementary then give equal alternate interior angles and supplementary same-side interior angles.",
+        "The directions must not be mixed: let $a,b$ be cut by $c$, with $\\angle1$ and $\\angle2$ corresponding angles. If $\\angle1=\\angle2$ is given, the conclusion is $a\\parallel b$, by the test 'equal corresponding angles imply parallel lines'; if $a\\parallel b$ is given, the conclusion is $\\angle1=\\angle2$, by the property 'parallel lines have equal corresponding angles'. These are converse statements, with hypothesis and conclusion interchanged. For example, if $a\\parallel b$ and $\\angle1=70^\\circ$, then the corresponding angle $\\angle2=70^\\circ$, the alternate interior angle paired with $\\angle1$ is also $70^\\circ$, while the same-side interior angle paired with it is $180^\\circ-70^\\circ=110^\\circ$, not $70^\\circ$."
       ]
     },
     {
@@ -37585,6 +37697,22 @@
         "axial-symmetry",
         "similarity",
         "parallelogram"
+      ],
+      "derivation": [
+        "两个三角形能够完全重合，叫做全等三角形，记作 $\\triangle ABC\\cong\\triangle A'B'C'$。书写时对应顶点必须写在对应位置：$A\\leftrightarrow A'$，$B\\leftrightarrow B'$，$C\\leftrightarrow C'$。全等的定义同时要求三组对应边相等、三组对应角相等；判定就是寻找能保证「完全重合」的最少条件。",
+        "SSS：若 $AB=A'B'$，$BC=B'C'$，$CA=C'A'$。把 $B'C'$ 叠到 $BC$ 上，使 $B'$ 与 $B$ 重合、$C'$ 与 $C$ 重合，并让 $A'$ 与 $A$ 在 $BC$ 的同侧。$A$ 与 $A'$ 到 $B,C$ 的距离分别相等，所以它们都是圆 $(B,BA)$ 与圆 $(C,CA)$ 的交点；两圆交点关于连心线 $BC$ 对称，在 $BC$ 同侧至多一个，故 $A'=A$，两三角形完全重合。",
+        "SAS：若 $AB=A'B'$，$AC=A'C'$，且夹角 $\\angle A=\\angle A'$。必要时先沿 $AB$ 翻折，把 $A'$ 移到 $A$，使射线 $A'B'$ 与射线 $AB$ 重合且 $C'$ 与 $C$ 在 $AB$ 同侧；由 $AB=A'B'$ 得 $B'=B$。又因 $\\angle A=\\angle A'$，射线 $A'C'$ 与射线 $AC$ 重合；由 $AC=A'C'$ 得 $C'=C$。三点确定三角形，故两三角形完全重合。这里 $\\angle A$ 必须是边 $AB$ 与 $AC$ 的夹角；若把相等的角换成 $\\angle B$（它不是 $AB$ 与 $AC$ 的夹角），条件就成了 SSA，不能保证全等。",
+        "ASA：若 $\\angle B=\\angle B'$，$BC=B'C'$，$\\angle C=\\angle C'$。把 $B'C'$ 叠到 $BC$ 上，使 $B'=B$，$C'=C$。在直线 $BC$ 的同一侧，过 $B$ 且与 $BC$ 成 $\\angle B$ 的射线只有一条，过 $C$ 且与 $CB$ 成 $\\angle C$ 的射线也只有一条；两条射线的交点唯一，所以 $A'=A$，两三角形重合。",
+        "AAS：若 $\\angle A=\\angle A'$，$\\angle B=\\angle B'$，且 $BC=B'C'$。由内角和，$\\angle C=180^{\\circ}-\\angle A-\\angle B=\\angle C'$。此时 $BC$ 是 $\\angle B$ 与 $\\angle C$ 的夹边，$B'C'$ 是 $\\angle B'$ 与 $\\angle C'$ 的夹边，于是化为 ASA，两三角形全等。HL：若两个直角三角形斜边相等、一条直角边相等，设直角在 $C,C'$，$AB=A'B'$，$AC=A'C'$，则由勾股定理 $BC=\\sqrt{AB^2-AC^2}=\\sqrt{A'B'^2-A'C'^2}=B'C'$，再由 SSS 得全等。HL 只适用于直角三角形。",
+        "SSA 不能判定全等：取 $AB=4$，$\\angle A=30^{\\circ}$，$BC=3$。从 $A$ 出发、与 $AB$ 成 $30^{\\circ}$ 的射线有两条（在 $AB$ 两侧），取其中一条；以 $B$ 为圆心、3 为半径的圆与这条射线有两个交点 $C_1,C_2$，因为 $B$ 到射线的距离为 $4\\sin30^{\\circ}=2<3$。于是 $\\triangle ABC_1$ 与 $\\triangle ABC_2$ 满足两边及其中一边的对角对应相等，却不全等。AAA 也不能判定：边长 1 与边长 2 的两个等边三角形三角都是 $60^{\\circ}$，但它们不全等，只相似。五种判定 SSS、SAS、ASA、AAS、HL 都至少需要一组对应边相等。"
+      ],
+      "derivationEn": [
+        "Two triangles that can coincide exactly are congruent, written $\\triangle ABC\\cong\\triangle A'B'C'$. Corresponding vertices must be written in corresponding positions: $A\\leftrightarrow A'$, $B\\leftrightarrow B'$, $C\\leftrightarrow C'$. The definition requires all three pairs of corresponding sides and all three pairs of corresponding angles to be equal; a criterion seeks the minimal conditions that still force exact coincidence.",
+        "SSS: suppose $AB=A'B'$, $BC=B'C'$, $CA=C'A'$. Place $B'C'$ on $BC$ with $B'=B$, $C'=C$, and put $A'$ on the same side of $BC$ as $A$. Since $A$ and $A'$ have the same distances to $B$ and $C$, both are intersections of the circles $(B,BA)$ and $(C,CA)$; two circle intersections are symmetric about the line of centres $BC$, so there is at most one on each side. Hence $A'=A$ and the triangles coincide.",
+        "SAS: suppose $AB=A'B'$, $AC=A'C'$, and the included angle satisfies $\\angle A=\\angle A'$. Reflect in $AB$ if necessary, then move $A'$ to $A$ so that ray $A'B'$ coincides with ray $AB$ and $C'$ lies on the same side of $AB$ as $C$; then $AB=A'B'$ gives $B'=B$. Since $\\angle A=\\angle A'$, ray $A'C'$ coincides with ray $AC$, and $AC=A'C'$ gives $C'=C$. Three vertices determine the triangle, so the triangles coincide. The angle $\\angle A$ must be included between $AB$ and $AC$; if the equal angle were $\\angle B$, which is not included between $AB$ and $AC$, the data would be SSA, which does not force congruence.",
+        "ASA: suppose $\\angle B=\\angle B'$, $BC=B'C'$, $\\angle C=\\angle C'$. Place $B'C'$ on $BC$ with $B'=B$ and $C'=C$. On the same side of line $BC$, there is exactly one ray from $B$ making angle $\\angle B$ with $BC$, and exactly one ray from $C$ making angle $\\angle C$ with $CB$; their intersection is unique, so $A'=A$ and the triangles coincide.",
+        "AAS: suppose $\\angle A=\\angle A'$, $\\angle B=\\angle B'$, and $BC=B'C'$. The angle sum gives $\\angle C=180^{\\circ}-\\angle A-\\angle B=\\angle C'$. Now $BC$ is included between $\\angle B$ and $\\angle C$, while $B'C'$ is included between $\\angle B'$ and $\\angle C'$, so the situation reduces to ASA and the triangles are congruent. HL: for right triangles with equal hypotenuses and one equal leg, say right angles at $C,C'$, $AB=A'B'$, $AC=A'C'$; Pythagoras gives $BC=\\sqrt{AB^2-AC^2}=\\sqrt{A'B'^2-A'C'^2}=B'C'$, and SSS gives congruence. HL applies only to right triangles.",
+        "SSA does not prove congruence: take $AB=4$, $\\angle A=30^{\\circ}$, $BC=3$. From $A$ there are two rays making $30^{\\circ}$ with $AB$ (one on each side); choose one. The circle centred at $B$ with radius $3$ meets this ray in two points $C_1,C_2$, because the distance from $B$ to the ray is $4\\sin30^{\\circ}=2<3$. Then $\\triangle ABC_1$ and $\\triangle ABC_2$ have two pairs of equal sides and an equal non-included angle, yet they are not congruent. AAA does not prove congruence either: equilateral triangles of side $1$ and side $2$ have all angles $60^{\\circ}$ but are not congruent, only similar. All five criteria SSS, SAS, ASA, AAS and HL require at least one pair of corresponding sides to be equal."
       ]
     },
     {
@@ -37876,6 +38004,22 @@
         "central-symmetry-rotation",
         "rectangle-rhombus-square",
         "plane-coordinates"
+      ],
+      "derivation": [
+        "定义：把一个图形沿直线 $l$ 折叠，若直线两旁的部分能够完全重合，则这个图形是轴对称图形，$l$ 是它的对称轴；若两个图形沿 $l$ 折叠后重合，则这两个图形成轴对称。前者描述一个图形自身的性质，后者描述两个图形的关系；无论哪种，$l$ 都是一条直线，不是线段。",
+        "垂直平分线定理：设 $A\\ne B$，$M$ 是 $AB$ 的中点，直线 $l\\perp AB$ 于 $M$。若 $P=M$，则 $PA=MA=MB=PB$；若 $P\\in l$ 且 $P\\ne M$，则 $PM$ 公共、$AM=MB$、$\\angle PMA=\\angle PMB=90^\\circ$，由 SAS 得 $\\triangle PMA\\cong\\triangle PMB$，所以 $PA=PB$。反过来，若 $PA=PB$ 且 $P\\ne M$，由 SSS 得 $\\triangle PMA\\cong\\triangle PMB$，故 $\\angle PMA=\\angle PMB$；又 $A,M,B$ 共线，这两个角互补，所以各为 $90^\\circ$，即 $PM\\perp AB$，$P$ 在 $AB$ 的垂直平分线上；若 $P=M$，则 $P$ 就是中点，自然在该垂直平分线上。",
+        "对应点的性质：设 $A\\notin l$，$A'$ 是 $A$ 关于 $l$ 的对称点。对任意 $P\\in l$，反射保持 $P$ 不动且保持距离，所以 $PA=PA'$。由第 2 步，$P$ 在 $AA'$ 的垂直平分线上；这对 $l$ 上每个 $P$ 都成立，因此 $l$ 就是 $AA'$ 的垂直平分线。于是 $l\\perp AA'$，且 $l$ 过 $AA'$ 的中点。反过来，若 $l$ 是 $AA'$ 的垂直平分线，则 $l$ 上的点到 $A,A'$ 距离相等，沿 $l$ 折叠时 $A$ 与 $A'$ 重合。若 $A\\in l$，则 $A'=A$，$A$ 在对称轴上，结论平凡。",
+        "线段的两条对称轴：设线段 $AB$ 的两个端点为 $A\\ne B$，并设直线 $l$ 是它的一条对称轴。轴对称把线段映到自身，因而把端点集合 $\\{A,B\\}$ 映到自身，只有两种可能。其一，$A,B$ 各自不动：反射的不动点恰在对称轴上，所以 $A,B$ 都在轴上，轴就是直线 $AB$，此时线段上每一点都不动。其二，$A$ 与 $B$ 互换：由第 3 步，轴是 $AB$ 的垂直平分线。两种情形各给出一条轴，所以线段恰有两条对称轴。",
+        "坐标中的轴对称：关于 $y$ 轴反射时，点 $(a,b)$ 的像为 $(-a,b)$：纵坐标不变，横坐标变相反数；关于 $x$ 轴反射时像为 $(a,-b)$。以 $y$ 轴为例，若 $a\\ne0$，$(a,b)$ 与 $(-a,b)$ 的中点是 $(0,b)$，在 $y$ 轴上，且连线水平、与 $y$ 轴垂直；若 $a=0$，点已在 $y$ 轴上，结论平凡。所以 $y$ 轴正是这对对应点连线的垂直平分线，符合第 3 步。",
+        "等腰三角形与等边三角形：若 $AB=AC$，则 $A$ 与 $BC$ 的中点 $M$ 都到 $B,C$ 距离相等，由第 2 步，直线 $AM$ 是 $BC$ 的垂直平分线。沿 $AM$ 折叠，$B$ 与 $C$ 互换、$A$ 不动，所以 $AM$ 是对称轴，且它既是顶角平分线，也是底边上的中线和高（三线合一），于是 $\\angle B=\\angle C$。等边三角形三条边都相等，对每个顶点作同样的论证，得到三条对称轴。注意：线段有两条对称轴，非等边的等腰三角形有一条，等边三角形有三条，不能一概而论。"
+      ],
+      "derivationEn": [
+        "Definition: fold a figure along a line $l$; if the two parts on opposite sides coincide, the figure is axially symmetric and $l$ is an axis of symmetry. If two figures coincide after folding along $l$, they are symmetric about $l$. The first describes one figure, the second a relation between two figures; in both cases $l$ is a line, not a segment.",
+        "Perpendicular-bisector theorem: let $A\\ne B$, let $M$ be the midpoint of $AB$, and let $l\\perp AB$ at $M$. If $P=M$, then $PA=MA=MB=PB$. If $P\\in l$ and $P\\ne M$, then $PM$ is common, $AM=MB$ and $\\angle PMA=\\angle PMB=90^\\circ$; SAS gives $\\triangle PMA\\cong\\triangle PMB$, hence $PA=PB$. Conversely, if $PA=PB$ and $P\\ne M$, SSS gives $\\triangle PMA\\cong\\triangle PMB$, so $\\angle PMA=\\angle PMB$; since $A,M,B$ are collinear these angles are supplementary, hence both $90^\\circ$, so $PM\\perp AB$ and $P$ lies on the perpendicular bisector of $AB$. If $P=M$, then $P$ is the midpoint and lies on that perpendicular bisector.",
+        "Property of corresponding points: let $A\\notin l$ and let $A'$ be the image of $A$ under reflection in $l$. For any $P\\in l$, reflection fixes $P$ and preserves distances, so $PA=PA'$. By Step 2, $P$ lies on the perpendicular bisector of $AA'$; since this holds for every $P\\in l$, the line $l$ is that perpendicular bisector. Hence $l\\perp AA'$ and $l$ passes through the midpoint of $AA'$. Conversely, if $l$ is the perpendicular bisector of $AA'$, points of $l$ are equidistant from $A$ and $A'$, so folding along $l$ brings $A$ onto $A'$. If $A\\in l$, then $A'=A$ and $A$ lies on the axis; the claim is trivial.",
+        "Two axes of a segment: let the endpoints of segment $AB$ be $A\\ne B$, and let line $l$ be one of its axes of symmetry. The axial symmetry maps the segment to itself, hence maps the endpoint set $\\{A,B\\}$ to itself, leaving only two possibilities. First, $A$ and $B$ are each fixed: the fixed points of a reflection lie exactly on its axis, so both $A$ and $B$ lie on the axis, which is therefore the line $AB$; then every point of the segment is fixed. Second, $A$ and $B$ are interchanged: by Step 3 the axis is the perpendicular bisector of $AB$. Each case gives one axis, so the segment has exactly two axes of symmetry.",
+        "Axial symmetry in coordinates: reflection in the $y$-axis sends $(a,b)$ to $(-a,b)$, keeping the ordinate and reversing the abscissa; reflection in the $x$-axis sends $(a,b)$ to $(a,-b)$. For the $y$-axis, if $a\\ne0$, the midpoint of $(a,b)$ and $(-a,b)$ is $(0,b)$, which lies on the $y$-axis, and the joining segment is horizontal, hence perpendicular to the $y$-axis; if $a=0$, the point already lies on the $y$-axis and the claim is trivial. Thus the $y$-axis is exactly the perpendicular bisector of the joining segment, in agreement with Step 3.",
+        "Isosceles and equilateral triangles: if $AB=AC$, then both $A$ and the midpoint $M$ of $BC$ are equidistant from $B$ and $C$; by Step 2, the line $AM$ is the perpendicular bisector of $BC$. Folding along $AM$ interchanges $B$ and $C$ while fixing $A$, so $AM$ is an axis of symmetry; it is at once the vertex-angle bisector, the median to the base and the altitude to the base (three lines in one), and hence $\\angle B=\\angle C$. In an equilateral triangle all three sides are equal, and the same argument at each vertex gives three axes. Note: a segment has two axes, a non-equilateral isosceles triangle one, and an equilateral triangle three; these counts cannot be conflated."
       ]
     },
     {
@@ -38156,6 +38300,22 @@
         "parallelogram",
         "plane-coordinates",
         "congruent-triangles"
+      ],
+      "derivation": [
+        "把一个图形绕定点 $O$ 转动角 $\\theta$ 得到另一个图形，叫做旋转。$O$ 叫旋转中心，$\\theta$ 叫旋转角；旋转方向（通常约定逆时针为正）也必须给定。旋转通常用旋转中心、方向和角度描述；一般地，改变中心或角度会改变像，但 $180^{\\circ}$ 时方向不影响结果，$0^{\\circ}$、$360^{\\circ}$ 为恒等变换。",
+        "对图形中任意两点 $A,B$，设它们的像为 $A',B'$。由旋转的定义，$OA'=OA$，$OB'=OB$，且 $\\angle AOA'=\\angle BOB'=\\theta$。将射线 $OA,OB$ 同时旋转 $\\theta$ 得到 $OA',OB'$，所以 $\\angle A'OB'=\\angle AOB$。由 SAS 得 $\\triangle OAB\\cong\\triangle OA'B'$，故 $AB=A'B'$。任意两点间的距离都不变，图形因此全等。",
+        "取 $O$ 为坐标原点，设 $A(x,y)\\ne O$。绕 $O$ 旋转 $180^{\\circ}$ 时，射线 $OA$ 变为它的反向射线，且 $OA'=OA$，所以 $\\overrightarrow{OA'}=-\\overrightarrow{OA}$，即 $A'(-x,-y)$。反过来，若 $A'=(-x,-y)$，则 $OA'=OA$，$O$ 是 $AA'$ 的中点，$\\angle AOA'=180^{\\circ}$，故 $A'$ 就是 $A$ 绕 $O$ 旋转 $180^{\\circ}$ 的像。",
+        "一般地，当 $A\\ne O$ 时，$A$ 与 $A'$ 关于 $O$ 成中心对称，当且仅当 $O$ 是线段 $AA'$ 的中点：即 $A,O,A'$ 共线，$OA=OA'$，且 $O$ 在 $A$ 与 $A'$ 之间。充分性：此时 $\\angle AOA'=180^{\\circ}$，绕 $O$ 旋转 $180^{\\circ}$ 把射线 $OA$ 映成反向射线 $OA'$，距离又保持不变，所以 $A\\mapsto A'$；必要性由 $180^{\\circ}$ 旋转直接得到。",
+        "在平行四边形 $ABCD$ 中，设对角线 $AC,BD$ 交于 $O$。由「对角线互相平分」得 $OA=OC$，$OB=OD$，且 $A,O,C$、$B,O,D$ 分别共线。于是绕 $O$ 旋转 $180^{\\circ}$ 时 $A\\leftrightarrow C$、$B\\leftrightarrow D$；旋转把线段映成线段，所以 $AB\\mapsto CD$，$BC\\mapsto DA$，整个平行四边形与自身重合。因此平行四边形是中心对称图形，对称中心是对角线交点。",
+        "中心对称是旋转角恰为 $180^{\\circ}$ 的旋转，不是任意角度的旋转。等边三角形绕中心旋转 $120^{\\circ}$ 可与自身重合，但旋转 $180^{\\circ}$ 不能，所以它不是中心对称图形。还要区分「中心对称」（两个图形之间的关系）与「中心对称图形」（一个图形自身的性质）。例如 $A(3,-1)$ 关于原点对称的点是 $A'(-3,1)$，且 $O$ 是 $AA'$ 的中点。"
+      ],
+      "derivationEn": [
+        "Rotating a figure about a fixed point $O$ through an angle $\\theta$ produces another figure; this is a rotation. $O$ is the centre of rotation, $\\theta$ is the angle of rotation, and the direction (counterclockwise is taken as positive) must also be specified. A rotation is usually described by its centre, direction and angle; in general, changing the centre or the angle changes the image, but at $180^{\\circ}$ the direction does not affect the result, and $0^{\\circ}$ or $360^{\\circ}$ gives the identity.",
+        "For any two points $A,B$ of the figure, let $A',B'$ be their images. By definition of rotation, $OA'=OA$, $OB'=OB$, and $\\angle AOA'=\\angle BOB'=\\theta$. Rotating the rays $OA,OB$ through the same angle $\\theta$ gives $OA',OB'$, hence $\\angle A'OB'=\\angle AOB$. SAS yields $\\triangle OAB\\cong\\triangle OA'B'$, so $AB=A'B'$. Every distance is preserved, so the image is congruent to the original figure.",
+        "Take $O$ as the origin and let $A(x,y)\\ne O$. A rotation of $180^{\\circ}$ about $O$ sends ray $OA$ to the opposite ray and keeps $OA'=OA$, so $\\overrightarrow{OA'}=-\\overrightarrow{OA}$ and $A'=(-x,-y)$. Conversely, if $A'=(-x,-y)$, then $OA'=OA$, $O$ is the midpoint of $AA'$, and $\\angle AOA'=180^{\\circ}$; hence $A'$ is exactly the image of $A$ under the $180^{\\circ}$ rotation about $O$.",
+        "In general, for $A\\ne O$, points $A$ and $A'$ are centrally symmetric about $O$ exactly when $O$ is the midpoint of segment $AA'$: $A,O,A'$ are collinear, $OA=OA'$, and $O$ lies between $A$ and $A'$. Sufficiency: then $\\angle AOA'=180^{\\circ}$, and the $180^{\\circ}$ rotation about $O$ sends ray $OA$ to the opposite ray $OA'$ while preserving distance, so $A\\mapsto A'$. Necessity follows directly from the $180^{\\circ}$ rotation.",
+        "In a parallelogram $ABCD$, let the diagonals $AC,BD$ meet at $O$. Since the diagonals bisect each other, $OA=OC$ and $OB=OD$, and $A,O,C$ and $B,O,D$ are collinear in pairs. The $180^{\\circ}$ rotation about $O$ therefore sends $A\\leftrightarrow C$ and $B\\leftrightarrow D$; a rotation maps segments to segments, so $AB\\mapsto CD$ and $BC\\mapsto DA$, and the whole parallelogram coincides with itself. Thus a parallelogram is centrally symmetric, with the diagonal intersection as its centre.",
+        "Central symmetry is the special rotation through exactly $180^{\\circ}$, not a rotation through an arbitrary angle. An equilateral triangle rotated by $120^{\\circ}$ about its centre coincides with itself, but a $180^{\\circ}$ rotation does not, so it is not a centrally symmetric figure. Distinguish central symmetry (a relation between two figures) from a centrally symmetric figure (a property of one figure). For example, the point symmetric to $A(3,-1)$ about the origin is $A'(-3,1)$, and $O$ is the midpoint of $AA'$."
       ]
     },
     {
@@ -38347,6 +38507,22 @@
         "central-symmetry-rotation",
         "rectangle-rhombus-square",
         "triangle"
+      ],
+      "derivation": [
+        "两组对边分别平行的四边形叫做平行四边形。若 $AB\\parallel CD$ 且 $AD\\parallel BC$，则四边形 $ABCD$ 是平行四边形，记作 $\\square ABCD$；四个顶点必须按绕行顺序书写。定义本身既是判定（两组对边分别平行 $\\Rightarrow$ 平行四边形），也给出最基本的性质（平行四边形的两组对边分别平行）。",
+        "性质：对边相等。连接对角线 $AC$。由 $AB\\parallel CD$，内错角 $\\angle BAC=\\angle DCA$；由 $AD\\parallel BC$，内错角 $\\angle BCA=\\angle DAC$；又 $AC=CA$。在 $\\triangle ABC$ 与 $\\triangle CDA$ 中，$AC$ 是 $\\angle BAC$ 与 $\\angle BCA$ 的夹边，$CA$ 是 $\\angle DCA$ 与 $\\angle DAC$ 的夹边，故由 ASA 得 $\\triangle ABC\\cong\\triangle CDA$。于是 $AB=CD$，$BC=DA$，且 $\\angle ABC=\\angle CDA$。",
+        "由第 2 步已得一组对角相等：$\\angle ABC=\\angle CDA$。连接另一条对角线 $BD$，同理可证 $\\angle BAD=\\angle DCB$，所以平行四边形对角相等。邻角互补则直接来自平行线：$AB\\parallel CD$，$AD$ 为截线，同旁内角 $\\angle DAB+\\angle ADC=180^{\\circ}$；$AD\\parallel BC$，$AB$ 为截线，$\\angle DAB+\\angle ABC=180^{\\circ}$。",
+        "对角线互相平分。设 $AC,BD$ 交于 $O$。由 $AB\\parallel CD$，内错角 $\\angle OAB=\\angle OCD$，$\\angle OBA=\\angle ODC$；由第 2 步 $AB=CD$。在 $\\triangle OAB$ 与 $\\triangle OCD$ 中，$AB$ 是 $\\angle OAB$ 与 $\\angle OBA$ 的夹边，$CD$ 是 $\\angle OCD$ 与 $\\angle ODC$ 的夹边，故 ASA 给出 $\\triangle OAB\\cong\\triangle OCD$，从而 $OA=OC$，$OB=OD$。于是 $O$ 是两条对角线的中点，绕 $O$ 旋转 $180^{\\circ}$ 使 $A\\leftrightarrow C$、$B\\leftrightarrow D$，平行四边形是中心对称图形。",
+        "判定汇总（满足其一即可）：① 两组对边分别平行（定义）；② 两组对边分别相等；③ 一组对边平行且相等；④ 对角线互相平分；⑤ 两组对角分别相等。以 ③ 为例：设 $AB\\parallel CD$ 且 $AB=CD$，连接 $AC$。由平行得 $\\angle BAC=\\angle DCA$，又 $AB=CD$，$AC=CA$，故 $\\triangle ABC\\cong\\triangle CDA$（SAS），于是 $\\angle ACB=\\angle CAD$，所以 $AD\\parallel BC$；两组对边分别平行，故 $ABCD$ 是平行四边形。② 可用 SSS 得两组内错角相等；④ 由对顶角和 SAS 得 $AB=CD$ 且 $AB\\parallel CD$，再用 ③；⑤ 由内角和得邻角互补，从而两组对边分别平行。",
+        "面积：以 $AB=a$ 为底，作 $AB$ 上的高 $h$（从 $D$ 到直线 $AB$ 的垂线段）。对角线 $AC$ 把平行四边形分成 $\\triangle ABC$ 与 $\\triangle CDA$，由第 2 步两者全等，面积相等。因为 $CD\\parallel AB$，$C$ 到 $AB$ 的距离等于 $D$ 到 $AB$ 的距离 $h$，所以 $S_{\\triangle ABC}=\\frac12 ah$，从而 $S_{\\square ABCD}=2\\cdot\\frac12 ah=ah$。注意 $h$ 是底边到对边的垂直距离，不是侧边 $AD$ 的长度；只有矩形中 $AD$ 才等于高。"
+      ],
+      "derivationEn": [
+        "A quadrilateral whose two pairs of opposite sides are parallel is a parallelogram. If $AB\\parallel CD$ and $AD\\parallel BC$, then $ABCD$ is a parallelogram, written $\\square ABCD$; the vertices must be listed in cyclic order. The definition is itself a criterion (both pairs of opposite sides parallel implies parallelogram) and also gives the basic property (the two pairs of opposite sides of a parallelogram are parallel).",
+        "Property: opposite sides are equal. Draw diagonal $AC$. From $AB\\parallel CD$, the alternate interior angles satisfy $\\angle BAC=\\angle DCA$; from $AD\\parallel BC$, $\\angle BCA=\\angle DAC$; also $AC=CA$. In $\\triangle ABC$ and $\\triangle CDA$, side $AC$ is included between $\\angle BAC$ and $\\angle BCA$, while $CA$ is included between $\\angle DCA$ and $\\angle DAC$, so ASA gives $\\triangle ABC\\cong\\triangle CDA$. Hence $AB=CD$, $BC=DA$, and $\\angle ABC=\\angle CDA$.",
+        "Step 2 already gives one pair of equal opposite angles: $\\angle ABC=\\angle CDA$. Drawing the other diagonal $BD$ and repeating the argument gives $\\angle BAD=\\angle DCB$, so opposite angles of a parallelogram are equal. Adjacent angles are supplementary by the parallel lines: with $AB\\parallel CD$ and transversal $AD$, the same-side interior angles satisfy $\\angle DAB+\\angle ADC=180^{\\circ}$; with $AD\\parallel BC$ and transversal $AB$, $\\angle DAB+\\angle ABC=180^{\\circ}$.",
+        "The diagonals bisect each other. Let $AC,BD$ meet at $O$. From $AB\\parallel CD$, the alternate interior angles give $\\angle OAB=\\angle OCD$ and $\\angle OBA=\\angle ODC$; step 2 gives $AB=CD$. In $\\triangle OAB$ and $\\triangle OCD$, $AB$ is included between $\\angle OAB$ and $\\angle OBA$, and $CD$ is included between $\\angle OCD$ and $\\angle ODC$, so ASA yields $\\triangle OAB\\cong\\triangle OCD$. Hence $OA=OC$ and $OB=OD$. Thus $O$ is the midpoint of both diagonals; the $180^{\\circ}$ rotation about $O$ sends $A\\leftrightarrow C$ and $B\\leftrightarrow D$, so the parallelogram is centrally symmetric.",
+        "Criteria (any one suffices): (1) both pairs of opposite sides are parallel (definition); (2) both pairs of opposite sides are equal; (3) one pair of opposite sides is both parallel and equal; (4) the diagonals bisect each other; (5) both pairs of opposite angles are equal. For (3): let $AB\\parallel CD$ and $AB=CD$, and draw $AC$. Parallelism gives $\\angle BAC=\\angle DCA$; with $AB=CD$ and $AC=CA$, SAS gives $\\triangle ABC\\cong\\triangle CDA$, so $\\angle ACB=\\angle CAD$ and hence $AD\\parallel BC$. Both pairs of opposite sides are parallel, so $ABCD$ is a parallelogram. For (2), SSS gives equal alternate interior angles; for (4), vertical angles and SAS give $AB=CD$ and $AB\\parallel CD$, then (3) applies; for (5), the angle sum forces adjacent angles to be supplementary, hence both pairs of opposite sides are parallel.",
+        "Area: take $AB=a$ as the base and let $h$ be the height on $AB$ (the perpendicular segment from $D$ to line $AB$). Diagonal $AC$ splits the parallelogram into $\\triangle ABC$ and $\\triangle CDA$, which are congruent by step 2 and hence have equal areas. Since $CD\\parallel AB$, the distance from $C$ to $AB$ equals the distance $h$ from $D$ to $AB$; with base $AB$, $\\triangle ABC$ has height $h$, so $S_{\\triangle ABC}=\\frac12 ah$, and therefore $S_{\\square ABCD}=2\\cdot\\frac12 ah=ah$. Note that $h$ is the perpendicular distance between the base and the opposite side, not the length of side $AD$; only in a rectangle does $AD$ equal the height."
       ]
     },
     {
@@ -38607,6 +38783,22 @@
         "pythagorean",
         "congruent-triangles",
         "triangle-area"
+      ],
+      "derivation": [
+        "矩形是有一个角是直角的平行四边形；菱形是有一组邻边相等的平行四边形；正方形是既有一个角是直角、又有一组邻边相等的平行四边形。所以三者的共同前提都是「平行四边形」，且正方形是矩形与菱形的公共部分。矩形定义只给一个直角，但平行四边形邻角互补：若 $\\angle A=90^{\\circ}$，则 $\\angle B=180^{\\circ}-90^{\\circ}=90^{\\circ}$，同理 $\\angle C=\\angle D=90^{\\circ}$，故矩形四个角都是直角。",
+        "矩形性质：对角线相等。设 $ABCD$ 是矩形，则 $AB=DC$（平行四边形对边相等），$\\angle ABC=\\angle DCB=90^{\\circ}$，$BC=CB$，由 SAS 得 $\\triangle ABC\\cong\\triangle DCB$，故 $AC=DB$。反过来，若平行四边形 $ABCD$ 的对角线 $AC=DB$，则 $AB=DC$，$BC=CB$，$AC=DB$，由 SSS 得 $\\triangle ABC\\cong\\triangle DCB$，所以 $\\angle ABC=\\angle DCB$；又 $AB\\parallel CD$，同旁内角互补，$\\angle ABC+\\angle DCB=180^{\\circ}$，故各为 $90^{\\circ}$，该平行四边形是矩形。",
+        "菱形性质：四条边相等；对角线互相垂直，并且每条对角线平分一组对角。设 $ABCD$ 是菱形，对角线交于 $O$。由平行四边形对角线互相平分得 $BO=DO$；又 $AB=AD$，$AO=AO$，由 SSS 得 $\\triangle ABO\\cong\\triangle ADO$，故 $\\angle AOB=\\angle AOD$。而 $B,O,D$ 共线，$\\angle AOB$ 与 $\\angle AOD$ 互补，所以各为 $90^{\\circ}$，即 $AC\\perp BD$；同时 $\\angle BAO=\\angle DAO$，即 $AC$ 平分 $\\angle BAD$。",
+        "正方形同时是矩形和菱形，因此同时具有：四边相等、四角为直角、对角线相等且互相垂直平分、每条对角线平分一组对角。反过来，若一个平行四边形既是矩形又是菱形，则它四角为直角且四边相等，按定义就是正方形。用对角线判定时：在平行四边形中，对角线相等 $\\Rightarrow$ 矩形，对角线互相垂直 $\\Rightarrow$ 菱形；两者都成立 $\\Rightarrow$ 正方形。注意「对角线相等且互相垂直」必须配合「平行四边形」（或「互相平分」），否则不能断定它是正方形。",
+        "判定矩形的常用方法：① 有一个角是直角的平行四边形；② 对角线相等的平行四边形；③ 有三个角是直角的四边形（第四个角由内角和 $360^{\\circ}$ 自动为直角）。判定菱形：① 有一组邻边相等的平行四边形；② 对角线互相垂直的平行四边形；③ 四边相等的四边形。常见错误：把「对角线相等的四边形是矩形」当定理——等腰梯形的对角线也相等，但它不是矩形；把「对角线互相垂直的四边形是菱形」当定理——对角线垂直但不互相平分的筝形不是菱形。",
+        "面积：矩形 $S=ab$。菱形的两条对角线互相垂直平分，把菱形分成四个全等的直角三角形，直角边分别为 $\\frac{d_1}{2}$ 与 $\\frac{d_2}{2}$，所以 $S=4\\cdot\\frac12\\cdot\\frac{d_1}{2}\\cdot\\frac{d_2}{2}=\\frac12 d_1d_2$。正方形边长为 $a$ 时 $S=a^2$；若对角线为 $d$，则 $d^2=a^2+a^2=2a^2$，故 $S=a^2=\\frac12 d^2$。正方形可同时用矩形公式和菱形公式计算，结果一致。"
+      ],
+      "derivationEn": [
+        "A rectangle is a parallelogram with one right angle; a rhombus is a parallelogram with a pair of adjacent equal sides; a square is a parallelogram with both one right angle and a pair of adjacent equal sides. All three therefore start from a parallelogram, and a square is the common part of rectangles and rhombuses. The definition of a rectangle gives only one right angle, but adjacent angles of a parallelogram are supplementary: if $\\angle A=90^{\\circ}$, then $\\angle B=180^{\\circ}-90^{\\circ}=90^{\\circ}$, and similarly $\\angle C=\\angle D=90^{\\circ}$; hence all four angles of a rectangle are right angles.",
+        "Rectangle property: the diagonals are equal. Let $ABCD$ be a rectangle. Then $AB=DC$ (opposite sides of a parallelogram), $\\angle ABC=\\angle DCB=90^{\\circ}$, and $BC=CB$, so SAS gives $\\triangle ABC\\cong\\triangle DCB$ and hence $AC=DB$. Conversely, if a parallelogram $ABCD$ has $AC=DB$, then $AB=DC$, $BC=CB$, $AC=DB$, and SSS gives $\\triangle ABC\\cong\\triangle DCB$, so $\\angle ABC=\\angle DCB$. Since $AB\\parallel CD$, these same-side interior angles sum to $180^{\\circ}$; each is $90^{\\circ}$, so the parallelogram is a rectangle.",
+        "Rhombus properties: all four sides are equal; the diagonals are perpendicular, and each diagonal bisects a pair of opposite angles. Let $ABCD$ be a rhombus with diagonals meeting at $O$. Since the diagonals of a parallelogram bisect each other, $BO=DO$; also $AB=AD$ and $AO=AO$, so SSS gives $\\triangle ABO\\cong\\triangle ADO$ and hence $\\angle AOB=\\angle AOD$. Because $B,O,D$ are collinear, these two angles are supplementary, so each is $90^{\\circ}$ and $AC\\perp BD$. Moreover $\\angle BAO=\\angle DAO$, so $AC$ bisects $\\angle BAD$.",
+        "A square is both a rectangle and a rhombus, so it has four equal sides, four right angles, equal diagonals that are perpendicular and bisect each other, and diagonals that bisect the angles. Conversely, a parallelogram that is both a rectangle and a rhombus has four right angles and four equal sides, hence is a square by definition. In terms of diagonals: in a parallelogram, equal diagonals imply a rectangle and perpendicular diagonals imply a rhombus; both together imply a square. The condition 'equal and perpendicular diagonals' must be combined with 'parallelogram' (or 'bisect each other'); otherwise one cannot conclude that it is a square.",
+        "Common criteria for rectangles: (1) a parallelogram with one right angle; (2) a parallelogram with equal diagonals; (3) a quadrilateral with three right angles (the fourth is right by the $360^{\\circ}$ angle sum). Criteria for rhombuses: (1) a parallelogram with a pair of adjacent equal sides; (2) a parallelogram with perpendicular diagonals; (3) a quadrilateral with four equal sides. Common mistakes: treating 'a quadrilateral with equal diagonals is a rectangle' as a theorem — an isosceles trapezoid also has equal diagonals but is not a rectangle; treating 'a quadrilateral with perpendicular diagonals is a rhombus' as a theorem — a kite with perpendicular diagonals that do not bisect each other is not a rhombus.",
+        "Area: for a rectangle, $S=ab$. The diagonals of a rhombus are perpendicular and bisect each other, cutting it into four congruent right triangles with legs $\\frac{d_1}{2}$ and $\\frac{d_2}{2}$; hence $S=4\\cdot\\frac12\\cdot\\frac{d_1}{2}\\cdot\\frac{d_2}{2}=\\frac12 d_1d_2$. For a square of side $a$, $S=a^2$; if its diagonal is $d$, then $d^2=a^2+a^2=2a^2$, so $S=a^2=\\frac12 d^2$. A square can be computed with either the rectangle formula or the rhombus formula, with the same result."
       ]
     },
     {
@@ -38856,6 +39048,22 @@
         "pythagorean",
         "congruent-triangles",
         "similarity"
+      ],
+      "derivation": [
+        "平面内到定点 $O$ 的距离等于定长 $R$（$R>0$）的所有点组成圆，记作 $\\odot O$。$O$ 是圆心，$R$ 是半径；连接圆上两点的线段叫弦，经过圆心的弦叫直径。对任意弦 $AB$，由三角不等式 $AB\\le AO+OB=2R$，等号当且仅当 $O$ 在线段 $AB$ 上，即 $AB$ 为直径；所以直径是最长的弦。",
+        "垂径定理：设 $CD$ 是直径，弦 $AB\\perp CD$ 于 $M$。若 $AB$ 也是直径，则 $M=O$，$AM=BM=R$，且 $C,D$ 分别是弧 $AB$ 的两个中点，结论直接成立；以下设 $AB$ 不是直径。连接 $OA,OB$。在直角三角形 $OAM$ 与 $OBM$ 中，$OA=OB=R$，$OM$ 公共，由 HL 得 $\\triangle OAM\\cong\\triangle OBM$，所以 $AM=BM$，且 $\\angle AOM=\\angle BOM$。由于 $C,O,M,D$ 共线，$OC,OD$ 分别与 $OM$ 同向或反向，故 $\\angle AOC=\\angle BOC$，$\\angle AOD=\\angle BOD$；相等的圆心角所对的弧相等，所以直径 $CD$ 平分弦 $AB$ 及弦所对的两条弧。反过来，若直径 $CD$ 平分非直径弦 $AB$ 于 $M$，则 $OA=OB$，$AM=BM$，所以 $O$ 与 $M$ 都在 $AB$ 的垂直平分线上；$AB$ 不是直径保证 $O\\ne M$，故 $OM\\perp AB$，即 $CD\\perp AB$。",
+        "圆周角定理：设 $A,B,C$ 在圆上，$\\angle ACB$ 所对的弧取不含 $C$ 的 $\\widehat{AB}$，并把该弧所对的圆心角记为 $\\angle AOB$（若该弧为优弧，则取大于 $180^{\\circ}$ 的角）。若 $CA$ 或 $CB$ 为直径，由等腰三角形 $OCB$ 或 $OAC$ 直接得到；以下设 $CA,CB$ 都不是直径。连接 $CO$ 并延长交圆于 $D$。因为 $OA=OC$，$\\triangle OAC$ 为等腰三角形，$\\angle OAC=\\angle OCA$；由外角定理，$\\angle AOD=\\angle OAC+\\angle OCA=2\\angle OCA$。同理 $\\angle DOB=2\\angle OCB$。若圆心 $O$ 在 $\\angle ACB$ 内部，则两式相加得 $\\angle AOB=2\\angle ACB$；若 $O$ 在角外，则 $OA,OB$ 位于 $OD$ 同侧，两式相减仍得同一结论。因此 $\\angle ACB=\\frac12\\angle AOB$。",
+        "由圆周角定理直接得到三条常用结论。① 在同圆或等圆中，同弧或等弧所对的圆周角相等：它们都等于同一圆心角的一半。② 半圆所对的圆周角是直角：直径 $AB$ 所对的圆心角是平角 $180^{\\circ}$，所以圆周角为 $90^{\\circ}$；反过来，若 $\\angle ACB=90^{\\circ}$，则 $\\angle AOB=2\\times90^{\\circ}=180^{\\circ}$，$A,O,B$ 共线，$AB$ 是直径。③ 圆内接四边形对角互补：$\\angle A+\\angle C=\\frac12(\\widehat{BCD}+\\widehat{BAD})=\\frac12\\cdot360^{\\circ}=180^{\\circ}$，同理 $\\angle B+\\angle D=180^{\\circ}$。",
+        "切线的判定与性质：设 $A$ 在圆上。若直线 $\\ell$ 过 $A$ 且 $\\ell\\perp OA$，则 $\\ell$ 是切线。证明：对 $\\ell$ 上任意异于 $A$ 的点 $P$，$\\triangle OAP$ 是直角三角形，$OP^2=OA^2+AP^2>OA^2=R^2$，所以 $P$ 在圆外；故 $\\ell$ 与圆只有公共点 $A$，是切线。反过来，若 $\\ell$ 是切线、切点为 $A$，假设 $\\ell$ 不垂直于 $OA$，从 $O$ 向 $\\ell$ 作垂线，垂足为 $H\\ne A$，则 $OH<OA=R$，$H$ 在圆内，$\\ell$ 与圆还会有另一个交点，矛盾；故 $\\ell\\perp OA$。切线长定理：从圆外一点 $P$ 引两条切线 $PA,PB$，则 $OA=OB$，$OP=OP$，$\\angle OAP=\\angle OBP=90^{\\circ}$，由 HL 得 $\\triangle OAP\\cong\\triangle OBP$，所以 $PA=PB$，且 $OP$ 平分 $\\angle APB$。",
+        "弧长与扇形面积：圆心角为 $n^{\\circ}$ 的弧占整个圆周的 $\\frac{n}{360}$，所以 $l=\\frac{n}{360}\\cdot2\\pi R=\\frac{n\\pi R}{180}$。同样，扇形占整个圆面积的 $\\frac{n}{360}$，所以 $S=\\frac{n}{360}\\cdot\\pi R^2=\\frac{n\\pi R^2}{360}$。把 $l=\\frac{n\\pi R}{180}$ 代入，得 $S=\\frac12\\cdot\\frac{n\\pi R}{180}\\cdot R=\\frac12 lR$。注意 $n$ 用度，不是弧度；$R$ 是半径，不是直径。"
+      ],
+      "derivationEn": [
+        "In the plane, the set of all points at distance $R>0$ from a fixed point $O$ is the circle $\\odot O$. $O$ is the centre and $R$ the radius; a segment joining two points of the circle is a chord, and a chord through the centre is a diameter. For any chord $AB$, the triangle inequality gives $AB\\le AO+OB=2R$, with equality exactly when $O$ lies on segment $AB$, that is, when $AB$ is a diameter. Hence a diameter is the longest chord.",
+        "Perpendicular-diameter theorem: let $CD$ be a diameter and let chord $AB$ meet $CD$ at $M$ with $AB\\perp CD$. If $AB$ is also a diameter, then $M=O$, $AM=BM=R$, and $C,D$ are the midpoints of the two arcs $AB$, so the conclusion is immediate; assume from now on that $AB$ is not a diameter. Join $OA,OB$. In right triangles $OAM$ and $OBM$, $OA=OB=R$ and $OM$ is common, so HL gives $\\triangle OAM\\cong\\triangle OBM$; hence $AM=BM$ and $\\angle AOM=\\angle BOM$. Since $C,O,M,D$ are collinear, $OC$ and $OD$ are respectively in the same or opposite direction as $OM$, so $\\angle AOC=\\angle BOC$ and $\\angle AOD=\\angle BOD$. Equal central angles subtend equal arcs, so diameter $CD$ bisects chord $AB$ and the two arcs it cuts. Conversely, if diameter $CD$ bisects a non-diameter chord $AB$ at $M$, then $OA=OB$ and $AM=BM$, so both $O$ and $M$ lie on the perpendicular bisector of $AB$. Since $AB$ is not a diameter, $O\\ne M$, so $OM\\perp AB$, i.e. $CD\\perp AB$.",
+        "Inscribed angle theorem: let $A,B,C$ lie on a circle; take the arc $\\widehat{AB}$ intercepted by $\\angle ACB$ to be the one not containing $C$, and denote by $\\angle AOB$ the central angle subtending that arc (if the arc is major, take the angle larger than $180^{\\circ}$). If $CA$ or $CB$ is a diameter, the isosceles triangle $OCB$ or $OAC$ gives the result directly; hence assume $CA$ and $CB$ are not diameters. Draw $CO$ and extend it to meet the circle again at $D$. Since $OA=OC$, triangle $OAC$ is isosceles and $\\angle OAC=\\angle OCA$; the exterior-angle theorem gives $\\angle AOD=\\angle OAC+\\angle OCA=2\\angle OCA$. Similarly $\\angle DOB=2\\angle OCB$. If the centre $O$ lies inside $\\angle ACB$, adding the two equations gives $\\angle AOB=2\\angle ACB$; if $O$ lies outside the angle, then $OA$ and $OB$ lie on the same side of $OD$, and subtracting the two equations gives the same conclusion. Hence $\\angle ACB=\\frac12\\angle AOB$.",
+        "Three standard consequences follow directly. (1) In the same circle or in equal circles, angles subtending the same arc or equal arcs are equal, since each is half the same central angle. (2) An angle in a semicircle is a right angle: a diameter $AB$ subtends a straight central angle of $180^{\\circ}$, so the inscribed angle is $90^{\\circ}$; conversely, if $\\angle ACB=90^{\\circ}$, then $\\angle AOB=2\\times90^{\\circ}=180^{\\circ}$, so $A,O,B$ are collinear and $AB$ is a diameter. (3) Opposite angles of a cyclic quadrilateral are supplementary: $\\angle A+\\angle C=\\frac12(\\widehat{BCD}+\\widehat{BAD})=\\frac12\\cdot360^{\\circ}=180^{\\circ}$, and similarly $\\angle B+\\angle D=180^{\\circ}$.",
+        "Tangent criterion and property: let $A$ lie on the circle. If a line $\\ell$ passes through $A$ and $\\ell\\perp OA$, then $\\ell$ is a tangent. Proof: for any point $P\\ne A$ on $\\ell$, triangle $OAP$ is right-angled, so $OP^2=OA^2+AP^2>OA^2=R^2$; hence $P$ is outside the circle, and $\\ell$ has only the common point $A$ with the circle. Conversely, if $\\ell$ is tangent at $A$ and were not perpendicular to $OA$, drop the perpendicular $OH$ from $O$ to $\\ell$ with $H\\ne A$; then $OH<OA=R$, so $H$ is inside the circle and $\\ell$ would meet the circle again, a contradiction. Hence $\\ell\\perp OA$. Tangent-length theorem: from an exterior point $P$, draw tangents $PA,PB$. Then $OA=OB$, $OP=OP$, and $\\angle OAP=\\angle OBP=90^{\\circ}$, so HL gives $\\triangle OAP\\cong\\triangle OBP$; hence $PA=PB$ and $OP$ bisects $\\angle APB$.",
+        "Arc length and sector area: an arc with central angle $n^{\\circ}$ is the fraction $\\frac{n}{360}$ of the whole circumference, so $l=\\frac{n}{360}\\cdot2\\pi R=\\frac{n\\pi R}{180}$. Likewise, the sector is the fraction $\\frac{n}{360}$ of the whole disc, so $S=\\frac{n}{360}\\cdot\\pi R^2=\\frac{n\\pi R^2}{360}$. Substituting $l=\\frac{n\\pi R}{180}$ gives $S=\\frac12\\cdot\\frac{n\\pi R}{180}\\cdot R=\\frac12 lR$. Here $n$ is in degrees, not radians, and $R$ is the radius, not the diameter."
       ]
     },
     {
@@ -39054,6 +39262,22 @@
         "triangle",
         "pythagorean",
         "acute-trigonometry"
+      ],
+      "derivation": [
+        "若两个三角形 $ABC$ 与 $A'B'C'$ 满足 $\\angle A=\\angle A'$，$\\angle B=\\angle B'$，$\\angle C=\\angle C'$，且 $\\frac{AB}{A'B'}=\\frac{BC}{B'C'}=\\frac{CA}{C'A'}=k$，则称它们相似，记作 $\\triangle ABC\\sim\\triangle A'B'C'$，$k$ 叫相似比。对应顶点必须写在对应位置。全等是 $k=1$ 的特殊情形；相似只要求形状相同，允许大小不同。",
+        "基本模型：若 $DE\\parallel BC$，$D$ 在 $AB$ 上，$E$ 在 $AC$ 上，则 $\\triangle ADE\\sim\\triangle ABC$，且 $\\frac{AD}{AB}=\\frac{AE}{AC}=\\frac{DE}{BC}$。证明以「平行线分线段成比例」为前提：由 $DE\\parallel BC$ 得 $\\angle ADE=\\angle ABC$，$\\angle AED=\\angle ACB$。为得到第三组边比，过 $D$ 作 $DF\\parallel AC$ 交 $BC$ 于 $F$，则 $DECF$ 是平行四边形，$DE=FC$。平行线分线段成比例给出 $\\frac{BF}{BC}=\\frac{BD}{BA}$，于是 $\\frac{FC}{BC}=1-\\frac{BF}{BC}=1-\\frac{BD}{BA}=\\frac{AD}{AB}$，即 $\\frac{DE}{BC}=\\frac{AD}{AB}$；又由 $DE\\parallel BC$ 直接得 $\\frac{AE}{AC}=\\frac{AD}{AB}$。",
+        "判定 AA：若 $\\angle A=\\angle A'$，$\\angle B=\\angle B'$，则由内角和 $\\angle C=180^{\\circ}-\\angle A-\\angle B=\\angle C'$。把 $\\triangle A'B'C'$ 经过平移、旋转（必要时翻折）叠到 $\\triangle ABC$ 上，使 $A'$ 与 $A$ 重合，射线 $A'B'$ 与 $AB$ 重合，射线 $A'C'$ 与 $AC$ 重合；设 $B',C'$ 的像分别为 $D,E$。由 $\\angle ADE=\\angle ABC$ 得 $DE\\parallel BC$。于是由基本模型 $\\triangle ADE\\sim\\triangle ABC$，而 $\\triangle ADE$ 与 $\\triangle A'B'C'$ 全等，故 $\\triangle A'B'C'\\sim\\triangle ABC$。",
+        "判定 SAS：若 $\\frac{AB}{A'B'}=\\frac{AC}{A'C'}=k$，且夹角 $\\angle A=\\angle A'$。把 $A'$ 与 $A$ 重合，两边分别沿 $AB,AC$ 放置；在射线 $AB,AC$ 上取 $D,E$，使 $AD=A'B'$，$AE=A'C'$。于是 $\\frac{AD}{AB}=\\frac{A'B'}{AB}=\\frac1k=\\frac{A'C'}{AC}=\\frac{AE}{AC}$，由平行线分线段成比例的逆定理得 $DE\\parallel BC$，于是 $\\triangle ADE\\sim\\triangle ABC$。又 $AD=A'B'$，$AE=A'C'$，$\\angle DAE=\\angle A'$，由 SAS 得 $\\triangle ADE\\cong\\triangle A'B'C'$，故两三角形相似。SSS：若 $\\frac{AB}{A'B'}=\\frac{BC}{B'C'}=\\frac{CA}{C'A'}=k$，同样在射线 $AB,AC$ 上取 $D,E$ 使 $AD=A'B'$，$AE=A'C'$。同样有 $\\frac{AD}{AB}=\\frac{AE}{AC}=\\frac1k$，故 $DE\\parallel BC$，从而 $\\triangle ADE\\sim\\triangle ABC$ 且 $\\frac{DE}{BC}=\\frac{AD}{AB}=\\frac{A'B'}{AB}=\\frac{B'C'}{BC}$，所以 $DE=B'C'$；于是 $\\triangle ADE\\cong\\triangle A'B'C'$（SSS），故 $\\triangle A'B'C'\\sim\\triangle ABC$。",
+        "相似三角形的对应线段成比例。设相似比为 $k$，则对应高、对应中线、对应角平分线的比都等于 $k$。以高为例：若 $\\angle B=90^{\\circ}$，则 $BC$ 上的高就是 $AB$，对应高之比为 $AB/A'B'=k$。否则作 $AD\\perp BC$ 于 $D$，$A'D'\\perp B'C'$ 于 $D'$；在直角三角形 $ABD$ 与 $A'B'D'$ 中，$\\angle ABD$ 与 $\\angle A'B'D'$ 相等（同时等于 $\\angle B=\\angle B'$，或同时等于各自的补角），且 $\\angle ADB=\\angle A'D'B'=90^{\\circ}$，由 AA 得 $\\triangle ABD\\sim\\triangle A'B'D'$，所以 $AD/A'D'=AB/A'B'=k$。中线所在的两个小三角形（如 $\\triangle ABM$ 与 $\\triangle A'B'M'$）有两边成比例且夹角相等，故相似；角平分线所在的两个小三角形有两角相等，故相似，比值同样为 $k$。周长比：$AB+BC+CA=k(A'B'+B'C'+C'A')$，故 $\\frac{C_1}{C_2}=k$。注意周长比是一次比，不是 $k^2$。",
+        "面积比：取 $BC=a$、$BC$ 上的高 $h_a$，则 $S=\\frac12 ah_a$；对应边 $B'C'=a'$、对应高 $h_a'$，由第 5 步 $a=ka'$，$h_a=kh_a'$。于是 $S=\\frac12(ka')(kh_a')=k^2\\cdot\\frac12 a'h_a'=k^2S'$，即 $\\frac{S}{S'}=k^2$。因此相似比为 $1:3$ 时，面积比为 $1:9$，不是 $1:3$。周长比、对应高之比都是一次比 $k$，只有面积是二次比，因为面积由两个长度相乘得到。"
+      ],
+      "derivationEn": [
+        "Two triangles $ABC$ and $A'B'C'$ are similar if $\\angle A=\\angle A'$, $\\angle B=\\angle B'$, $\\angle C=\\angle C'$, and $\\frac{AB}{A'B'}=\\frac{BC}{B'C'}=\\frac{CA}{C'A'}=k$; we write $\\triangle ABC\\sim\\triangle A'B'C'$, and $k$ is the similarity ratio. Corresponding vertices must be written in corresponding positions. Congruence is the special case $k=1$; similarity requires only the same shape and allows different sizes.",
+        "Basic model: if $DE\\parallel BC$, with $D$ on $AB$ and $E$ on $AC$, then $\\triangle ADE\\sim\\triangle ABC$ and $\\frac{AD}{AB}=\\frac{AE}{AC}=\\frac{DE}{BC}$. The proof assumes the basic proportionality theorem for parallel lines. From $DE\\parallel BC$, $\\angle ADE=\\angle ABC$ and $\\angle AED=\\angle ACB$. To obtain the third side ratio, draw $DF\\parallel AC$ meeting $BC$ at $F$; then $DECF$ is a parallelogram, so $DE=FC$. The basic proportionality theorem gives $\\frac{BF}{BC}=\\frac{BD}{BA}$, hence $\\frac{FC}{BC}=1-\\frac{BF}{BC}=1-\\frac{BD}{BA}=\\frac{AD}{AB}$, i.e. $\\frac{DE}{BC}=\\frac{AD}{AB}$. Also $DE\\parallel BC$ directly gives $\\frac{AE}{AC}=\\frac{AD}{AB}$.",
+        "AA criterion: if $\\angle A=\\angle A'$ and $\\angle B=\\angle B'$, the angle sum gives $\\angle C=180^{\\circ}-\\angle A-\\angle B=\\angle C'$. Superimpose $\\triangle A'B'C'$ on $\\triangle ABC$ by translation and rotation (reflecting if necessary), sending $A'$ to $A$, ray $A'B'$ to ray $AB$, and ray $A'C'$ to ray $AC$; let the images of $B',C'$ be $D,E$. Since $\\angle ADE=\\angle ABC$, we get $DE\\parallel BC$. The basic model then gives $\\triangle ADE\\sim\\triangle ABC$, while $\\triangle ADE$ is congruent to $\\triangle A'B'C'$; hence $\\triangle A'B'C'\\sim\\triangle ABC$.",
+        "SAS criterion: if $\\frac{AB}{A'B'}=\\frac{AC}{A'C'}=k$ and the included angle satisfies $\\angle A=\\angle A'$. Place $A'$ on $A$ and the two sides along $AB,AC$; on rays $AB,AC$ choose $D,E$ with $AD=A'B'$ and $AE=A'C'$. Then $\\frac{AD}{AB}=\\frac{A'B'}{AB}=\\frac1k=\\frac{A'C'}{AC}=\\frac{AE}{AC}$, so the converse of the basic proportionality theorem gives $DE\\parallel BC$ and hence $\\triangle ADE\\sim\\triangle ABC$. Also $AD=A'B'$, $AE=A'C'$, and $\\angle DAE=\\angle A'$, so SAS gives $\\triangle ADE\\cong\\triangle A'B'C'$; therefore the original triangles are similar. SSS: if $\\frac{AB}{A'B'}=\\frac{BC}{B'C'}=\\frac{CA}{C'A'}=k$, again choose $D,E$ on rays $AB,AC$ with $AD=A'B'$ and $AE=A'C'$. Again $\\frac{AD}{AB}=\\frac{AE}{AC}=\\frac1k$, so $DE\\parallel BC$, and $\\triangle ADE\\sim\\triangle ABC$ with $\\frac{DE}{BC}=\\frac{AD}{AB}=\\frac{A'B'}{AB}=\\frac{B'C'}{BC}$; hence $DE=B'C'$. Then SSS gives $\\triangle ADE\\cong\\triangle A'B'C'$, so $\\triangle A'B'C'\\sim\\triangle ABC$.",
+        "Corresponding segments of similar triangles are proportional. If the similarity ratio is $k$, then corresponding altitudes, medians and angle bisectors are all in ratio $k$. For an altitude, if $\\angle B=90^{\\circ}$, then the altitude on $BC$ is $AB$, and the ratio of corresponding altitudes is $AB/A'B'=k$. Otherwise drop $AD\\perp BC$ at $D$ and $A'D'\\perp B'C'$ at $D'$; in the right triangles $ABD$ and $A'B'D'$, the angles $\\angle ABD$ and $\\angle A'B'D'$ are equal (both equal $\\angle B=\\angle B'$, or both equal the respective supplements), and $\\angle ADB=\\angle A'D'B'=90^{\\circ}$. AA gives $\\triangle ABD\\sim\\triangle A'B'D'$, hence $AD/A'D'=AB/A'B'=k$. For a median, the two small triangles (such as $\\triangle ABM$ and $\\triangle A'B'M'$) have two proportional sides with equal included angles, hence are similar; for an angle bisector, the two small triangles have two equal angles, hence are similar, again with ratio $k$. Perimeter ratio: $AB+BC+CA=k(A'B'+B'C'+C'A')$, so $\\frac{C_1}{C_2}=k$. The perimeter ratio is first-order, not $k^2$.",
+        "Area ratio: take $BC=a$ and the corresponding altitude $h_a$ on $BC$, so $S=\\frac12 ah_a$; for the other triangle $B'C'=a'$ and the altitude is $h_a'$, with $a=ka'$ and $h_a=kh_a'$ by step 5. Hence $S=\\frac12(ka')(kh_a')=k^2\\cdot\\frac12 a'h_a'=k^2S'$, so $\\frac{S}{S'}=k^2$. Thus a similarity ratio of $1:3$ gives an area ratio of $1:9$, not $1:3$. Perimeter ratios and corresponding altitude ratios are first-order in $k$; only area is second-order, because area is a product of two lengths."
       ]
     },
     {
@@ -39298,6 +39522,22 @@
         "similarity",
         "circle-junior",
         "plane-coordinates"
+      ],
+      "derivation": [
+        "用光线照射物体，在平面（地面或屏幕）上留下的影子叫投影。光线互相平行时（如太阳光）叫平行投影；光线都从同一点发出时（如灯光）叫中心投影。投影由光线和投影面共同决定：平行投影由光线方向决定，中心投影由光源位置决定。",
+        "平行投影下，同一时刻、同一地点，竖直物体的高 $h$ 与影长 $s$ 成比例：$\\frac{h_1}{s_1}=\\frac{h_2}{s_2}$。理由：太阳光线平行，物体竖直、地面水平，物体、影子和光线构成直角三角形；两个物体对应的直角三角形都有一个等于太阳高度角的锐角，因此相似（AA），对应边成比例，即 $h_1:s_1=h_2:s_2$。这里要求两次测量在同一时刻、同一地点，且物体都竖直。",
+        "从正面、左面、上面三个互相垂直的方向分别作正投影，得到主视图、左视图、俯视图。正投影要求投影线垂直于投影面，所以每个视图只保留与该方向垂直的二维尺寸：主视图反映「长 $\\times$ 高」，左视图反映「宽 $\\times$ 高」，俯视图反映「长 $\\times$ 宽」。对长方体等常见几何体，三个视图合起来才能完整反映长、宽、高三个方向的尺寸。",
+        "设长方体的长为 $a$（左右方向）、宽为 $b$（前后方向）、高为 $c$（上下方向）。主视图是 $a\\times c$，左视图是 $b\\times c$，俯视图是 $a\\times b$。于是主视图与俯视图的公共尺寸是 $a$（长对正），主视图与左视图的公共尺寸是 $c$（高平齐），左视图与俯视图的公共尺寸是 $b$（宽相等）。这三条不是孤立口诀，而是三个视图共用同一组长、宽、高的必然结果。",
+        "画视图时，从一个方向能直接看到的轮廓线画实线；被物体本身挡住、不能直接看到的轮廓线画虚线。虚线表示真实存在但被遮挡的边，不是辅助线。若同一条边在一个视图中一部分可见、一部分被遮挡，则可见部分画实线、被遮挡部分画虚线；若虚线与实线重合，按实线处理。",
+        "由三视图还原几何体时，先由俯视图确定底面的长 $a$ 与宽 $b$，再由主视图或左视图读出高 $c$，最后用「长对正、高平齐、宽相等」核对三个尺寸。若题目已说明是实心基本几何体，且三视图除最外圈矩形外没有任何内部轮廓线，则三视图都是矩形时原几何体是长方体，$V=abc$。例如主视图 $4\\times3$、左视图 $2\\times3$、俯视图 $4\\times2$，则 $a=4,b=2,c=3$，$V=4\\times2\\times3=24$。若俯视图是圆、主视图和左视图都是矩形，且两个矩形的宽都等于圆的直径，则原几何体是竖放的圆柱，不能按长方体处理。"
+      ],
+      "derivationEn": [
+        "When light falls on an object, the shadow left on a plane (the ground or a screen) is a projection. If the rays are parallel (sunlight), it is a parallel projection; if all rays come from one point (a lamp), it is a central projection. A projection is determined by the rays and the plane: a parallel projection by the direction of the rays, a central projection by the position of the light source.",
+        "Under parallel projection, at the same time and place, the height $h$ of a vertical object is proportional to its shadow length $s$: $\\frac{h_1}{s_1}=\\frac{h_2}{s_2}$. Reason: the sun's rays are parallel, the objects are vertical and the ground is horizontal, so each object with its shadow and ray forms a right triangle. The two right triangles share an acute angle equal to the sun's elevation, hence are similar (AA), and corresponding sides are proportional: $h_1:s_1=h_2:s_2$. The measurements must be taken at the same time and place, with both objects vertical.",
+        "Orthographic projections from the front, left and top, in three mutually perpendicular directions, give the front view, left view and top view. An orthographic projection uses rays perpendicular to the projection plane, so each view keeps only the two dimensions perpendicular to that direction: the front view records length × height, the left view width × height, and the top view length × width. For common solids such as a cuboid, the three views together give the full length, width and height.",
+        "Let a cuboid have length $a$ (left-right), width $b$ (front-back) and height $c$ (up-down). The front view is $a\\times c$, the left view is $b\\times c$, and the top view is $a\\times b$. Hence front and top share $a$ (length alignment), front and left share $c$ (height alignment), and left and top share $b$ (width equality). These are not isolated mnemonics but consequences of all three views using the same length, width and height.",
+        "When drawing a view, outlines that are directly visible from that direction are drawn solid; outlines blocked by the object itself and not directly visible are drawn dashed. A dashed line represents a real edge that is hidden, not an auxiliary line. If one edge is partly visible and partly hidden in the same view, draw the visible part solid and the hidden part dashed; if a dashed line coincides with a solid line, the solid line takes precedence.",
+        "To reconstruct a solid from its three views, first read the base length $a$ and width $b$ from the top view, then the height $c$ from the front or left view, and finally check the three dimensions with length alignment, height alignment and width equality. If the solid is stated to be a solid basic geometric body and the three views have no internal contours at all beyond the outer rectangle, then three rectangular views determine a cuboid and $V=abc$. For example, front $4\\times3$, left $2\\times3$, top $4\\times2$ give $a=4,b=2,c=3$ and $V=4\\times2\\times3=24$. If the top view is a circle while the front and left views are rectangles whose widths both equal the diameter of the circle, the solid is an upright cylinder and must not be treated as a cuboid."
       ]
     },
     {
@@ -39400,6 +39640,20 @@
         "whole-numbers",
         "addition-subtraction",
         "large-numbers"
+      ],
+      "derivation": [
+        "数数的对象必须是有限的一堆东西。把每个物体与 $1,2,\\dots,n$ 中的一个数一一对应：每个物体只配一个数（不重复），每个数也都有物体可配（不遗漏），最后配到的 $n$ 就是这堆物体的个数。条件是一一对应能够建立；若中间跳过一个数，或某个物体被数了两次，对应就断了，最后的数不再代表总数。",
+        "自然数按“添一”排成顺序：$0,1,2,\\dots$，后一个数比前一个数大 $1$。在数轴上把 $0,1,2,\\dots$ 从左到右标出，$a<b$ 就表示从 $a$ 出发向右走 $b-a$ 个单位才到 $b$，所以 $b$ 在 $a$ 的右边；反过来，右边的数也一定更大。这个“越右越大”就是比较大小的依据。",
+        "先比位数。设 $m$ 位数的范围是 $10^{m-1}$ 到 $10^m-1$：最小的 $m$ 位数是 $10^{m-1}$，最大的 $m$ 位数是 $10^m-1$。因为 $10^m-1<10^m$，所以任意 $m+1$ 位数都大于任意 $m$ 位数。例如三位数最小是 $100$，两位数最大是 $99$，故三位数一定大于两位数。",
+        "位数相同就从最高位比起。设两个数在 $10^k$ 位第一次出现不同数字，分别为 $a_k$ 和 $b_k$，更高位完全相同。把两个数相减，高位相消：$$(a-b)=(a_k-b_k)10^k+\\text{低位差}.$$ 低位差最小是 $-(10^k-1)$。若 $a_k>b_k$，则 $a_k-b_k\\ge1$，于是 $a-b\\ge10^k-(10^k-1)=1>0$，故 $a>b$；若 $a_k<b_k$ 同理 $a<b$。所以只需找到第一个不同的数位，谁的数字大谁就大。",
+        "用符号记录结果：$a>b$ 表示 $a$ 大于 $b$，$a<b$ 表示 $a$ 小于 $b$，$a=b$ 表示两数相等；大于号的开口朝大数，小于号的尖头朝小数。对任意两个数 $a,b$，三种关系 $a>b$、$a=b$、$a<b$ 有且只有一种成立。又因为 $0$ 是最小的自然数，所以对任意自然数 $a$ 都有 $a\\ge0$。例如 $342$ 与 $298$ 都是三位数，百位 $3>2$，故 $342>298$。"
+      ],
+      "derivationEn": [
+        "The objects being counted must form a finite collection. Match each object with exactly one of $1,2,\\dots,n$: no object gets two numbers (no repeats) and no number is left without an object (nothing skipped); the last number $n$ reached is the number of objects. The condition is that such a one-to-one matching exists; if a number is skipped or an object is counted twice, the matching breaks and the last number no longer represents the total.",
+        "The natural numbers are ordered by adding one: $0,1,2,\\dots$, and each number is greater than the previous one by $1$. On the number line mark $0,1,2,\\dots$ from left to right. If $a<b$, then starting from $a$ and moving $b-a$ units to the right reaches $b$, so $b$ lies to the right of $a$; conversely, a number farther right is always larger. This \"farther right means larger\" is the basis for comparing numbers.",
+        "First compare the number of digits. An $m$-digit number lies between $10^{m-1}$ and $10^m-1$: the smallest is $10^{m-1}$ and the largest is $10^m-1$. Since $10^m-1<10^m$, every $(m+1)$-digit number exceeds every $m$-digit number. For example the smallest three-digit number is $100$ and the largest two-digit number is $99$, so any three-digit number is larger.",
+        "With the same number of digits, compare from the highest place. Suppose the digits first differ in the $10^k$ place, where they are $a_k$ and $b_k$, and all higher places agree. Subtracting cancels the higher places: $$(a-b)=(a_k-b_k)10^k+\\text{lower-place difference}.$$ The lower-place difference is at least $-(10^k-1)$. If $a_k>b_k$, then $a_k-b_k\\ge1$, so $a-b\\ge10^k-(10^k-1)=1>0$ and $a>b$; similarly $a_k<b_k$ gives $a<b$. Hence only the first differing place matters: the larger digit there wins.",
+        "Symbols record the result: $a>b$ means $a$ is greater than $b$, $a<b$ means $a$ is less than $b$, and $a=b$ means they are equal; the sign $>$ opens toward the larger number and $<$ points at the smaller. For any two numbers $a,b$, exactly one of $a>b$, $a=b$, $a<b$ holds. Since $0$ is the smallest natural number, $a\\ge0$ for every natural number $a$. For example, $342$ and $298$ both have three digits, and the hundreds digit satisfies $3>2$, so $342>298$."
       ]
     },
     {
@@ -39499,6 +39753,22 @@
         "counting-comparison",
         "large-numbers",
         "rounding-approximation"
+      ],
+      "derivation": [
+        "十进制记数法用 $0,1,\\dots,9$ 十个数字，按位置表示不同的计数单位。若一个自然数从右往左第 $i$ 位（个位为 $i=0$）上的数字是 $d_i$，那么 $$n=d_0+d_1\\cdot10+d_2\\cdot10^2+\\cdots+d_k\\cdot10^k,\\qquad d_i\\in\\{0,1,\\dots,9\\}.$$ 最高位 $d_k\\ne0$（除非 $n=0$）。这条“位值展开式”是读、写、比较大数的根据。",
+        "从右往左，数位依次是个位、十位、百位、千位、万位、十万位……第 $i$ 位的计数单位是 $10^i$。要区分“数位”和“计数单位”：说“百位”指数字站的位置，说“百”指数数的单位。例如 $3257$ 中，$3$ 在千位，$2$ 在百位，$5$ 在十位，$7$ 在个位。",
+        "相邻两个计数单位的进率是 $10$：$10\\cdot10^i=10^{i+1}$。也就是说，$10$ 个一是十，$10$ 个十是一百，$10$ 个百是一千，$10$ 个千是一万；某一位满 $10$ 就要向前一位进 $1$。由位值展开式，$$3257=3\\cdot1000+2\\cdot100+5\\cdot10+7\\cdot1.$$",
+        "同一个数字在不同数位上表示的值不同。数字 $3$ 在个位表示 $3\\cdot10^0=3$，在十位表示 $3\\cdot10^1=30$，在百位表示 $3\\cdot10^2=300$。所以写数时不能只看用了哪些数字，还要看每个数字站在哪一位；这也是 $305$ 与 $350$ 不同的原因。",
+        "哪一位上一个单位也没有，就写 $0$ 占位，否则数位会错乱。例如 $3$ 个千、$0$ 个百、$5$ 个十、$2$ 个一组成的数是 $$3\\cdot1000+0\\cdot100+5\\cdot10+2=3052,$$ 不能写成 $352$。但除 $0$ 本身外，最高位不能是 $0$：$035$ 的展开是 $0\\cdot100+3\\cdot10+5=35$，所以前导零不改变数的大小。",
+        "读法有固定约定：从最高位读起，每一级末尾的 $0$ 都不读；其他数位上连续几个 $0$ 只读一个“零”。例如 $3050$ 读作“三千零五十”，$3005$ 读作“三千零五”。这些是读数规则，不改变数的大小；写数时仍要按数位把 $0$ 补回去。位数还可以快速定大小：最大的四位数 $9999$ 小于最小的五位数 $10000$。"
+      ],
+      "derivationEn": [
+        "Base-ten notation uses the ten digits $0,1,\\dots,9$, and a digit's position tells which counting unit it represents. If the digit in the $i$-th position from the right (ones place $i=0$) is $d_i$, then $$n=d_0+d_1\\cdot10+d_2\\cdot10^2+\\cdots+d_k\\cdot10^k,\\qquad d_i\\in\\{0,1,\\dots,9\\}.$$ The leading digit satisfies $d_k\\ne0$ unless $n=0$. This place-value expansion underlies reading, writing and comparing large numbers.",
+        "From right to left the places are ones, tens, hundreds, thousands, ten-thousands, hundred-thousands, ...; the counting unit of the $i$-th place is $10^i$. Distinguish a place from a counting unit: \"the hundreds place\" names a position, while \"hundred\" names the unit we count with. For example, in $3257$ the $3$ is in the thousands place, $2$ in the hundreds, $5$ in the tens and $7$ in the ones.",
+        "Neighbouring counting units differ by a factor of $10$: $10\\cdot10^i=10^{i+1}$. Thus $10$ ones make a ten, $10$ tens a hundred, $10$ hundreds a thousand, and $10$ thousands a ten-thousand; whenever a place reaches $10$, carry $1$ into the next place. The place-value expansion gives $$3257=3\\cdot1000+2\\cdot100+5\\cdot10+7\\cdot1.$$",
+        "The same digit has different values in different places. The digit $3$ means $3\\cdot10^0=3$ in the ones place, $3\\cdot10^1=30$ in the tens place, and $3\\cdot10^2=300$ in the hundreds place. So writing a number is not just choosing digits; each digit's position matters. This is why $305$ and $350$ are different.",
+        "If a place contains no unit, write $0$ there to hold the position; otherwise the places shift. For example, $3$ thousands, $0$ hundreds, $5$ tens and $2$ ones give $$3\\cdot1000+0\\cdot100+5\\cdot10+2=3052,$$ not $352$. Except for $0$ itself, however, the leading place cannot be $0$: $035$ expands as $0\\cdot100+3\\cdot10+5=35$, so a leading zero does not change the value.",
+        "Reading follows fixed conventions: start from the highest place, do not read zeros at the end of each four-digit group, and read a run of zeros in other positions as a single \"zero\". For example $3050$ is read \"three thousand and fifty\" and $3005$ as \"three thousand and five\". These are reading rules and do not change the value; when writing, the zeros must still be put back in their places. The number of digits also settles size quickly: the largest four-digit number $9999$ is less than the smallest five-digit number $10000$."
       ]
     },
     {
@@ -39609,6 +39879,22 @@
         "counting-comparison",
         "multiplication-division",
         "whole-numbers"
+      ],
+      "derivation": [
+        "加法是“合并”。设集合 $A,B$ 没有公共元素，$|A|=a$，$|B|=b$，把 $A$ 与 $B$ 合在一起得到 $A\\cup B$，则 $$a+b=|A\\cup B|.$$ 这里 $a,b$ 叫加数，结果叫和。条件 $A\\cap B=\\varnothing$ 很重要：若两堆有重复元素，直接相加就会把同一个东西数两次。",
+        "减法是加法的逆运算：已知和 $s$ 与一个加数 $a$，求另一个加数 $b$，使 $a+b=s$。在自然数范围内，这样的 $b$ 存在当且仅当 $s\\ge a$；若存在则唯一，因为 $a+b_1=a+b_2$ 两边消去 $a$ 得 $b_1=b_2$。此时记 $b=s-a$，$s$ 叫被减数，$a$ 叫减数，$b$ 叫差。",
+        "由定义立即得到两组互逆关系：$$(a+b)-a=b,\\qquad (s-a)+a=s.$$ 前一个式子用“和减一个加数得另一个加数”检查加法，后一个用“差加减数得被减数”检查减法。特殊地，$a+0=a$，$a-0=a$，$a-a=0$：加 $0$ 或减 $0$ 都不改变数，自己减自己得到“一个也没有”。",
+        "竖式加法按位值展开进行。例如 $$27+15=(2\\cdot10+7)+(1\\cdot10+5)=3\\cdot10+12.$$ 个位 $7+5=12$ 满十，把 $12$ 写成 $1\\cdot10+2$，个位留 $2$，向十位进 $1$，于是 $$27+15=4\\cdot10+2=42.$$ 这就是“满十进一”，进位的 $1$ 实际是 $10$ 个个位单位换成 $1$ 个十位单位。",
+        "竖式减法在不够减时要“退一当十”。计算 $52-27$：$$52=5\\cdot10+2=4\\cdot10+12,$$ 把 $1$ 个十换成 $10$ 个一，个位 $12-7=5$；十位 $4-2=2$，所以 $$52-27=2\\cdot10+5=25.$$ 若不退位就直接用 $2-7$，在自然数范围内不够减；退位本质上是把同一个数换一种位值写法。",
+        "验算：$52-27=25$，因为 $25+27=52$；$27+15=42$，因为 $42-15=27$。应用题里，“求一共”用加法，“求还剩”或“求多几个”用减法；例如 $23$ 个鸡蛋用了 $15$ 个，剩 $23-15=8$ 个，且 $8+15=23$ 说明结果正确。注意：在自然数范围内，被减数必须不小于减数；学了负数以后，减法才对整个整数范围封闭。"
+      ],
+      "derivationEn": [
+        "Addition means \"putting together\". Let sets $A$ and $B$ be disjoint with $|A|=a$ and $|B|=b$. Combining them gives $A\\cup B$, and $$a+b=|A\\cup B|.$$ Here $a,b$ are the addends and the result is the sum. The condition $A\\cap B=\\varnothing$ matters: if the two collections overlap, adding would count the same object twice.",
+        "Subtraction is the inverse of addition: given the sum $s$ and one addend $a$, find the other addend $b$ such that $a+b=s$. Among natural numbers such a $b$ exists exactly when $s\\ge a$; if it exists it is unique, because $a+b_1=a+b_2$ gives $b_1=b_2$ after cancelling $a$. We write $b=s-a$; $s$ is the minuend, $a$ the subtrahend and $b$ the difference.",
+        "The definition gives two inverse identities at once: $$(a+b)-a=b,\\qquad (s-a)+a=s.$$ The first checks an addition (\"sum minus one addend gives the other\"), the second checks a subtraction (\"difference plus subtrahend gives the minuend\"). In particular $a+0=a$, $a-0=a$ and $a-a=0$: adding or subtracting $0$ changes nothing, and a number minus itself leaves none.",
+        "Column addition follows the place-value expansion. For example $$27+15=(2\\cdot10+7)+(1\\cdot10+5)=3\\cdot10+12.$$ The ones add to $7+5=12$, which is ten or more; write $12=1\\cdot10+2$, keep $2$ in the ones place and carry $1$ to the tens, so $$27+15=4\\cdot10+2=42.$$ This is \"carry one for every ten\": the carried $1$ is ten ones exchanged for one ten.",
+        "Column subtraction borrows \"one ten as ten ones\" when a place is too small. Compute $52-27$: $$52=5\\cdot10+2=4\\cdot10+12.$$ Exchange one ten for ten ones, so the ones give $12-7=5$; the tens give $4-2=2$, hence $$52-27=2\\cdot10+5=25.$$ Without borrowing, $2-7$ cannot be done among natural numbers; borrowing merely rewrites the same number in another place-value form.",
+        "Check: $52-27=25$ since $25+27=52$, and $27+15=42$ since $42-15=27$. In word problems, \"how many altogether\" uses addition, while \"how many are left\" or \"how many more\" uses subtraction; for instance, $23$ eggs with $15$ used leave $23-15=8$, and $8+15=23$ confirms the answer. Note that among natural numbers the minuend must be at least the subtrahend; subtraction becomes closed on all integers only after negative numbers are introduced."
       ]
     },
     {
@@ -39701,6 +39987,22 @@
         "addition-subtraction",
         "factors-multiples",
         "four-operations-order"
+      ],
+      "derivation": [
+        "乘法是求几个相同加数和的简便运算。当 $m$ 是正整数时，$$m\\times n=\\underbrace{n+n+\\cdots+n}_{m\\text{个}}=mn.$$ $m,n$ 叫因数，结果叫积。把 $m$ 行、每行 $n$ 个的点排成矩形，按行数是 $m$ 个 $n$，按列数是 $n$ 个 $m$，两种数法得到同一堆点，所以 $mn=nm$。",
+        "除法是乘法的逆运算：已知积 $p$ 与一个因数 $a\\ne0$，求另一个因数 $b$，使 $ab=p$。若 $ab_1=ab_2=p$，由 $a\\ne0$ 消去 $a$ 得 $b_1=b_2$，所以商唯一，记 $b=p\\div a$。$12$ 个苹果平均放 $4$ 盘，每盘 $12\\div4=3$ 个；每 $3$ 个装一袋，能装 $12\\div3=4$ 袋，两种意义都归结为同一个逆运算。",
+        "除数不能为 $0$。若取 $a=0$，方程 $0\\cdot b=p$ 在 $p\\ne0$ 时无解（任何数乘 $0$ 都得 $0$），在 $p=0$ 时任何 $b$ 都满足，商不唯一。两种情形都不能确定一个商，所以 $p\\div0$ 没有意义。至于 $0$ 作被除数：当 $a\\ne0$ 时 $0\\div a=0$，因为 $a\\cdot0=0$。",
+        "分不完时用有余数的除法。设被除数 $n\\ge0$、除数 $d>0$，不断从 $n$ 里减去 $d$，直到剩下的数小于 $d$ 为止。设减了 $q$ 次，剩下 $r$，则 $$n=dq+r,\\qquad 0\\le r<d.$$ 若 $r\\ge d$，说明还能再减一个 $d$，商应再加 $1$，所以余数必须小于除数。这样的 $q,r$ 也是唯一的：若 $dq+r=dq'+r'$ 且 $0\\le r,r'<d$，则 $d(q-q')=r'-r$，而 $|r'-r|<d$，只能 $q=q'$、$r=r'$。",
+        "例：$17\\div5$。因为 $5\\cdot3=15\\le17<20=5\\cdot4$，所以商 $q=3$，余数 $r=17-15=2$，写成 $17\\div5=3\\cdots\\cdots2$。验算用 $$\\text{被除数}=\\text{除数}\\times\\text{商}+\\text{余数}: \\quad 5\\cdot3+2=17,$$ 并且 $2<5$。若余数不小于除数，例如误算成“商 $2$、余 $7$”，则 $7=5+2$ 说明还能再分一组，正确结果是商 $3$、余 $2$。",
+        "乘法口诀把乘除连在一起：由 $3\\cdot4=12$ 立即得到 $12\\div4=3$ 和 $12\\div3=4$。实际问题中要分清“余数”的含义：$17$ 个苹果每 $5$ 个装一袋，$17\\div5=3\\cdots\\cdots2$ 表示能装满 $3$ 袋、还剩 $2$ 个；若问“至少需要几个袋子”，剩下的 $2$ 个也要装一袋，答案应是 $4$ 个。数学上的商是 $3$，实际取整要看问题。"
+      ],
+      "derivationEn": [
+        "Multiplication is a shortcut for adding equal numbers. For a positive integer $m$, $$m\\times n=\\underbrace{n+n+\\cdots+n}_{m\\text{ terms}}=mn.$$ The numbers $m,n$ are factors and the result is the product. Arrange dots in $m$ rows of $n$: counting by rows gives $m$ copies of $n$, counting by columns gives $n$ copies of $m$, and both count the same dots, so $mn=nm$.",
+        "Division is the inverse of multiplication: given the product $p$ and a factor $a\\ne0$, find the other factor $b$ with $ab=p$. If $ab_1=ab_2=p$, cancelling the non-zero $a$ gives $b_1=b_2$, so the quotient is unique and is written $b=p\\div a$. Twelve apples shared equally onto $4$ plates give $12\\div4=3$ each; packed $3$ to a bag they fill $12\\div3=4$ bags—both meanings are the same inverse operation.",
+        "A divisor can never be $0$. With $a=0$, the equation $0\\cdot b=p$ has no solution when $p\\ne0$ (anything times $0$ is $0$), while when $p=0$ every $b$ satisfies it, so the quotient is not unique. Neither case determines a quotient, so $p\\div0$ is undefined. As for $0$ as dividend, $0\\div a=0$ for $a\\ne0$, since $a\\cdot0=0$.",
+        "When a division does not come out exactly, use division with remainder. Let the dividend be $n\\ge0$ and the divisor $d>0$. Repeatedly subtract $d$ from $n$ until what remains is less than $d$. If $d$ was subtracted $q$ times and $r$ remains, then $$n=dq+r,\\qquad 0\\le r<d.$$ If $r\\ge d$, another $d$ could still be subtracted and the quotient would be one larger, so the remainder must be less than the divisor. The pair $q,r$ is unique: if $dq+r=dq'+r'$ with $0\\le r,r'<d$, then $d(q-q')=r'-r$ and $|r'-r|<d$, forcing $q=q'$ and $r=r'$.",
+        "Example: $17\\div5$. Since $5\\cdot3=15\\le17<20=5\\cdot4$, the quotient is $q=3$ and the remainder is $r=17-15=2$, written $17\\div5=3\\cdots\\cdots2$. Check with $$\\text{dividend}=\\text{divisor}\\times\\text{quotient}+\\text{remainder}: \\quad 5\\cdot3+2=17,$$ and $2<5$. If a remainder were not smaller than the divisor—say the wrong answer \"quotient $2$, remainder $7$\"—then $7=5+2$ allows one more group, so the correct answer is quotient $3$, remainder $2$.",
+        "The multiplication table links the two operations: from $3\\cdot4=12$ we get $12\\div4=3$ and $12\\div3=4$ at once. In applications, interpret the remainder according to the question: $17$ apples packed $5$ to a bag give $17\\div5=3\\cdots\\cdots2$, meaning $3$ full bags and $2$ apples left; if asked for the least number of bags, the remaining $2$ also need a bag, so the answer is $4$. The mathematical quotient is $3$; rounding for the situation is a separate decision."
       ]
     },
     {
@@ -39788,6 +40090,22 @@
         "addition-subtraction",
         "multiplication-division",
         "operation-laws-elementary"
+      ],
+      "derivation": [
+        "四则运算指加、减、乘、除。同一个式子按不同顺序算会得到不同结果：$3+4\\times5$ 若先算 $3+4$ 得 $35$，若先算 $4\\times5$ 得 $23$。为了保证一个式子只有一个确定的答案，数学上采用统一的运算顺序。这是约定，不是能由数的大小证明出来的定理；约定一旦固定，所有人算出的结果才一致。",
+        "第一条规则：只有同级运算时，从左到右算。减法和除法不满足结合律，交换计算次序会改变结果：$$(20-8)-5=7,\\quad 20-(8-5)=17;$$ $$(24\\div4)\\div2=3,\\quad 24\\div(4\\div2)=12.$$ 所以 $20-8-5$ 规定为 $(20-8)-5=7$，$24\\div4\\div2$ 规定为 $(24\\div4)\\div2=3$，即同级运算按书写顺序从左往右进行。",
+        "第二条规则：先乘除，后加减。乘法是求几个相同加数的和，$4\\times5$ 本身是一个“整体” $20$，所以 $3+4\\times5$ 应理解为 $3+(4\\times5)=3+20=23$，而不是 $(3+4)\\times5$。除法和乘法同级，也先于加减：$20-12\\div4=20-3=17$。若把乘除拆开先算加减，就等于改变了算式中“几个几”的分组。",
+        "第三条规则：有括号先算括号里面的。括号的作用正是改变上述默认顺序：$(3+4)\\times5$ 先算 $3+4=7$，再算 $7\\times5=35$。括号有多层时，先算小括号，再算中括号，最后算括号外：$$40-(12+8)\\div4=40-20\\div4=40-5=35.$$ 这里先做小括号 $12+8=20$，再做括号外的除法，最后做减法。",
+        "把三条规则合起来，可以按“加括号”的方式检查一个式子：先给乘除加括号，再给括号内的同级运算从左到右加括号。例如 $$6+2\\times5=6+(2\\times5)=16,$$ $$100-\\left[(12+8)\\div5\\right]\\times3=100-(20\\div5)\\times3=100-4\\times3=88.$$ 每一步都只做当前优先级最高的一处运算，直到算出结果。",
+        "常见错误要避免：$3+4\\times5\\ne(3+4)\\times5$；$20-8+5\\ne20-(8+5)$（前者 $17$，后者 $7$）；$24\\div4\\times2\\ne24\\div(4\\times2)$（前者 $12$，后者 $3$）。括号只能改变顺序，不能改变运算本身；括号内仍要先乘除后加减，且 $0$ 不能作除数。算完后可按原顺序复算一遍，或把结果代回实际情境检查是否合理。"
+      ],
+      "derivationEn": [
+        "The four operations are addition, subtraction, multiplication and division. The same expression can give different results in different orders: in $3+4\\times5$, doing $3+4$ first gives $35$, while doing $4\\times5$ first gives $23$. To ensure one expression has one definite value, mathematics adopts a fixed order of operations. This is a convention, not a theorem provable from the sizes of numbers; once fixed, everyone obtains the same result.",
+        "First rule: when only operations of the same rank occur, work from left to right. Subtraction and division are not associative, and changing the order changes the result: $$(20-8)-5=7,\\quad 20-(8-5)=17;$$ $$(24\\div4)\\div2=3,\\quad 24\\div(4\\div2)=12.$$ Thus $20-8-5$ means $(20-8)-5=7$, and $24\\div4\\div2$ means $(24\\div4)\\div2=3$: same-rank operations proceed in writing order from left to right.",
+        "Second rule: multiplication and division before addition and subtraction. Multiplication is repeated addition, so $4\\times5$ is a single quantity $20$; hence $3+4\\times5$ means $3+(4\\times5)=3+20=23$, not $(3+4)\\times5$. Division has the same rank as multiplication and also comes before addition and subtraction: $20-12\\div4=20-3=17$. Doing the addition or subtraction first would regroup the \"so many groups of\" that the product represents.",
+        "Third rule: work out what is inside brackets first. Brackets exist precisely to override the default order: $(3+4)\\times5$ first gives $3+4=7$, then $7\\times5=35$. With nested brackets, do round brackets first, then square brackets, and finally the outside: $$40-(12+8)\\div4=40-20\\div4=40-5=35.$$ Here the round bracket gives $12+8=20$, then the division outside it is done, and the subtraction last.",
+        "Combining the three rules, check an expression by inserting brackets: first bracket the multiplications and divisions, then bracket same-rank operations inside from left to right. For example $$6+2\\times5=6+(2\\times5)=16,$$ $$100-\\left[(12+8)\\div5\\right]\\times3=100-(20\\div5)\\times3=100-4\\times3=88.$$ At each step perform only the operation of highest current priority, until a single value remains.",
+        "Avoid common errors: $3+4\\times5\\ne(3+4)\\times5$; $20-8+5\\ne20-(8+5)$ (the first is $17$, the second $7$); $24\\div4\\times2\\ne24\\div(4\\times2)$ (the first is $12$, the second $3$). Brackets change only the order, not the operations themselves; inside brackets multiplication and division still come first, and $0$ can never be a divisor. After finishing, recompute in the original order or substitute the result back into the situation to check that it is reasonable."
       ]
     },
     {
@@ -39860,6 +40178,22 @@
         "four-operations-order",
         "multiplication-division",
         "addition-subtraction"
+      ],
+      "derivation": [
+        "加法交换律与结合律：$a+b=b+a$，$(a+b)+c=a+(b+c)$。把 $a$ 个物体和 $b$ 个物体合在一起，先数哪一堆都得到 $a+b$ 个，这就是交换律；三堆合并时先合并前两堆或后两堆，总数不变，这就是结合律。它们对整数、小数、分数都成立。",
+        "乘法交换律与结合律：$a\\times b=b\\times a$，$(a\\times b)\\times c=a\\times(b\\times c)$。把 $a$ 行 $b$ 列的点排成矩形，横着数是 $a\\times b$，竖着数是 $b\\times a$，总数相同；把 $a\\times b$ 个方块再排成 $c$ 层，无论先算哪两个因数，方块总数都是 $abc$。",
+        "乘法分配律：$(a+b)\\times c=a\\times c+b\\times c$。把宽为 $a+b$、高为 $c$ 的长方形分成宽 $a$ 与宽 $b$ 两块，面积分别为 $ac$、$bc$，所以 $(a+b)c=ac+bc$；反过来 $a\\times c+b\\times c=(a+b)\\times c$ 就是提取公因数。注意只有乘法对加法（或减法）分配：$3+4\\times5=23$，而 $(3+4)\\times5=35$，加法对乘法没有分配律。",
+        "减法与除法的性质：$a-b-c=a-(b+c)$，因为连减两次等于一次减去两次减数的和；$a\\div b\\div c=a\\div(b\\times c)$（$b,c\\ne0$），因为除以 $b$ 再除以 $c$ 就是乘 $\\frac{1}{b}$ 再乘 $\\frac{1}{c}$，等于乘 $\\frac{1}{bc}$。但减法、除法不满足交换律：$8-3\\ne3-8$，$8\\div4\\ne4\\div8$。",
+        "用定律简便计算：$25\\times4=100$、$125\\times8=1000$ 是凑整的好搭档。例如 $4\\times27\\times25=(4\\times25)\\times27=100\\times27=2700$（乘法交换律、结合律）；$36\\times99+36=36\\times(99+1)=36\\times100=3600$（乘法分配律）。每一步都依据运算定律保持结果不变；其中分配律用于展开或提取公因数，不只是改变顺序或分组。",
+        "运算顺序不能由定律随意改变：有括号先算括号，没有括号先乘除后加减，同级运算从左到右。$2+3\\times4=2+12=14$，不能先算 $2+3$；$12\\div3\\times2=4\\times2=8$，不能先算 $3\\times2$。定律说明哪些变形（重排、分组、展开或提取公因数）保持结果不变，运算顺序则规定「没有括号时按什么顺序算」，两者要配合使用。"
+      ],
+      "derivationEn": [
+        "Commutative and associative laws of addition: $a+b=b+a$ and $(a+b)+c=a+(b+c)$. Combining $a$ objects with $b$ objects gives $a+b$ whichever pile is counted first—this is commutativity. For three piles, merging the first two or the last two first does not change the total—this is associativity. Both hold for integers, decimals and fractions.",
+        "Commutative and associative laws of multiplication: $a\\times b=b\\times a$ and $(a\\times b)\\times c=a\\times(b\\times c)$. Arrange dots in $a$ rows and $b$ columns: counting by rows gives $a\\times b$, by columns $b\\times a$, with the same total. Stacking $a\\times b$ blocks in $c$ layers gives $abc$ blocks whichever pair of factors is multiplied first.",
+        "Distributive law: $(a+b)\\times c=a\\times c+b\\times c$. A rectangle of width $a+b$ and height $c$, split into widths $a$ and $b$, has areas $ac$ and $bc$, hence $(a+b)c=ac+bc$; read backwards, $a\\times c+b\\times c=(a+b)\\times c$ factors out the common factor. Only multiplication distributes over addition (or subtraction): $3+4\\times5=23$, whereas $(3+4)\\times5=35$; addition does not distribute over multiplication.",
+        "Properties of subtraction and division: $a-b-c=a-(b+c)$, since subtracting twice is subtracting the sum of the two subtrahends; $a\\div b\\div c=a\\div(b\\times c)$ ($b,c\\ne0$), since dividing by $b$ then by $c$ means multiplying by $\\frac{1}{b}$ then $\\frac{1}{c}$, i.e. by $\\frac{1}{bc}$. But subtraction and division are not commutative: $8-3\\ne3-8$ and $8\\div4\\ne4\\div8$.",
+        "Laws make mental arithmetic easy: $25\\times4=100$ and $125\\times8=1000$ are useful pairs. For example $4\\times27\\times25=(4\\times25)\\times27=100\\times27=2700$ (commutativity and associativity of multiplication), and $36\\times99+36=36\\times(99+1)=36\\times100=3600$ (distributivity). Each step uses an operation law and preserves the value; distributivity expands or factors out a common factor, rather than merely reordering or regrouping.",
+        "The order of operations cannot be altered at will: compute inside parentheses first; without parentheses do multiplication and division before addition and subtraction; work from left to right within the same level. Thus $2+3\\times4=2+12=14$, not $(2+3)\\times4$; and $12\\div3\\times2=4\\times2=8$, not $12\\div(3\\times2)$. The laws say which transformations (reordering, regrouping, expanding or factoring out) preserve the result, while the order rules say what to compute first when there are no parentheses; both must be respected."
       ]
     },
     {
@@ -39973,6 +40307,22 @@
         "whole-numbers",
         "rounding-approximation",
         "scientific-notation"
+      ],
+      "derivation": [
+        "大数按“每四位一级”分组：从右往左，个位、十位、百位、千位是个级；万位、十万位、百万位、千万位是万级；亿位、十亿位……是亿级。把每一级看成一个整体，则 $$n=a_0+a_1\\cdot10^4+a_2\\cdot10^8+\\cdots,\\qquad 0\\le a_i<10^4,$$ 最高一级 $a_k\\ne0$（除非 $n=0$）。例如 $$530070000=5\\cdot10^8+3007\\cdot10^4,$$ 即 $5$ 个亿、$3007$ 个万、$0$ 个一。",
+        "改写成用“万”作单位，就是除以 $10^4$ 后再写上“万”：$$n=\\frac{n}{10^4}\\times10^4=\\left(\\frac{n}{10^4}\\right)\\text{万}.$$ 因为 $10^4=10000$，除以 $10^4$ 相当于把小数点向左移 $4$ 位。例如 $$380000=38\\text{万},\\qquad 3086000=308.6\\text{万},\\qquad 530070000=53007\\text{万}.$$ 即使最后四位不全是 $0$，也可以写成小数，仍然是精确值。",
+        "改写成用“亿”作单位同理：$1\\text{亿}=10^8$，$$n=\\left(\\frac{n}{10^8}\\right)\\text{亿},$$ 小数点向左移 $8$ 位。例如 $$120000000=1.2\\text{亿},\\qquad 530070000=5.3007\\text{亿}.$$ “万”和“亿”只是计数单位的名字，$1\\text{亿}=10000\\text{万}$，两种写法可以互相换算。",
+        "改写只换单位，不改变数的大小，所以必须用等号“$=$”。理由是把单位还原：$$\\left(\\frac{n}{10^4}\\right)\\text{万}=\\frac{n}{10^4}\\cdot10^4=n.$$ 例如 $386000=38.6\\text{万}$ 是精确等式；若写成 $386000\\approx39\\text{万}$，那是把万位后面的尾数省略了，属于求近似数，大小已经改变，所以用“$\\approx$”。",
+        "省略尾数求近似数时，先确定保留到哪一位，再看被省略部分的最高位。保留到万位，就看千位：$386000$ 的千位是 $6$，$6\\ge5$，向万位进一，得 $386000\\approx39\\text{万}$；$1234567$ 的千位是 $4$，$4<5$，舍去，得 $1234567\\approx123\\text{万}$。保留到亿位，就看千万位：$530070000$ 的千万位是 $3$，$3<5$，故 $530070000\\approx5\\text{亿}$。",
+        "两种记号不能混：$3086000=308.6\\text{万}$ 是改写，$3086000\\approx309\\text{万}$ 是精确到万位的近似数；前者数没变，后者数变了。近似数末尾的 $0$ 也不能随便去掉：$39\\text{万}$ 表示精确到万位，若写成 $39.0\\text{万}$ 则按约定表示精确到千位，精度不同。最后可用范围检验：$3086000$ 精确到万位得 $309\\text{万}=3090000$，原数与它相差 $4000$，不超过半个万（$5000$），合理。"
+      ],
+      "derivationEn": [
+        "Large numbers are grouped in fours from the right: ones, tens, hundreds and thousands form the ones group; ten-thousands, hundred-thousands, millions and ten-millions form the ten-thousands group; hundred-millions and beyond form the hundred-millions group. Treating each group as one unit, $$n=a_0+a_1\\cdot10^4+a_2\\cdot10^8+\\cdots,\\qquad 0\\le a_i<10^4,$$ with the leading group $a_k\\ne0$ unless $n=0$. For example $$530070000=5\\cdot10^8+3007\\cdot10^4,$$ that is, $5$ hundred-millions, $3007$ ten-thousands and $0$ ones.",
+        "Rewriting in units of ten-thousand (万) means dividing by $10^4$ and attaching 万: $$n=\\frac{n}{10^4}\\times10^4=\\left(\\frac{n}{10^4}\\right)\\text{万}.$$ Since $10^4=10000$, dividing by $10^4$ moves the decimal point $4$ places left. For example $$380000=38\\text{万},\\qquad 3086000=308.6\\text{万},\\qquad 530070000=53007\\text{万}.$$ Even when the last four digits are not all zero, the coefficient may be a decimal; the value is still exact.",
+        "Rewriting in units of hundred-million (亿) is analogous: $1\\text{亿}=10^8$, so $$n=\\left(\\frac{n}{10^8}\\right)\\text{亿},$$ moving the decimal point $8$ places left. For example $$120000000=1.2\\text{亿},\\qquad 530070000=5.3007\\text{亿}.$$ 万 and 亿 are merely names of counting units, with $1\\text{亿}=10000\\text{万}$, so the two forms convert into each other.",
+        "Rewriting changes only the unit, not the value, so it must use the equals sign \"$=$\". The reason is that converting the unit back gives $$\\left(\\frac{n}{10^4}\\right)\\text{万}=\\frac{n}{10^4}\\cdot10^4=n.$$ For example $386000=38.6\\text{万}$ is an exact equality; writing $386000\\approx39\\text{万}$ instead omits the tail behind the ten-thousands place, which is approximation: the value has changed, so \"$\\approx$\" is used.",
+        "To approximate by omitting a tail, first fix the place to keep, then look at the highest digit of the omitted part. Keeping the ten-thousands place means looking at the thousands digit: in $386000$ it is $6$, and $6\\ge5$, so round up to $386000\\approx39\\text{万}$; in $1234567$ it is $4$, and $4<5$, so cut the tail off, giving $1234567\\approx123\\text{万}$. Keeping the hundred-millions place means looking at the ten-millions digit: in $530070000$ it is $3$, and $3<5$, so the result is $530070000\\approx5\\text{亿}$.",
+        "Do not confuse the two notations: $3086000=308.6\\text{万}$ is a rewrite, whereas $3086000\\approx309\\text{万}$ is an approximation to the ten-thousands place; the first keeps the value, the second changes it. Trailing zeros in an approximation cannot be dropped at will: $39\\text{万}$ means accurate to the ten-thousands place, while $39.0\\text{万}$ would, by convention, mean accurate to the thousands place—different precision. A range check confirms the result: $3086000$ rounded to the ten-thousands place is $309\\text{万}=3090000$, which differs from the original by $4000$, no more than half a 万 ($5000$), as it should be."
       ]
     },
     {
@@ -40084,6 +40434,22 @@
         "large-numbers",
         "decimals-elementary",
         "scientific-notation"
+      ],
+      "derivation": [
+        "准确数是与真实值完全相等的数；近似数是与真实值接近、用来代替它的数。把数 $x$ 精确到某一位，就是找这一位上的一个“格点”来代表 $x$，两数之间用“$\\approx$”连接。四舍五入法要两个条件：先指定保留到哪一位，再规定遇到正好一半时向上进一。缺少“保留到哪一位”，近似数就没有确定的精确度。",
+        "先看精确到个位的情形。把 $x$ 写成 $x=n+t$，其中 $n$ 是整数，$0\\le t<1$。$x$ 到 $n$ 的距离是 $t$，到 $n+1$ 的距离是 $1-t$。当 $t<\\tfrac12$ 时 $t<1-t$，离 $n$ 更近，舍去小数得 $n$；当 $t>\\tfrac12$ 时离 $n+1$ 更近，进一得 $n+1$。当 $t=\\tfrac12$ 时两边一样近，四舍五入约定取较大的 $n+1$，这就是“五入”。",
+        "再看任意数位。要保留到 $10^k$ 位，把 $x$ 写成 $$x=A\\cdot10^k+r,\\qquad 0\\le r<10^k,$$ 其中 $A$ 是整数，$r$ 是被省略的尾数。$r$ 的最高位是 $10^{k-1}$ 位，其数字为 $c=\\left\\lfloor r/10^{k-1}\\right\\rfloor\\in\\{0,\\dots,9\\}$。若 $c\\ge5$，则 $r\\ge5\\cdot10^{k-1}=\\tfrac12\\cdot10^k$，尾数达到半格，向上进一；若 $c\\le4$，则 $r<5\\cdot10^{k-1}$，舍去。由于 $r<10^k$，$c$ 只看一位就够，后面的数字不影响判断。",
+        "例：精确到个位，$3.4\\approx3$（十分位 $4<5$），$3.5\\approx4$（十分位 $5\\ge5$），$3.7\\approx4$。精确到百分位，$8.457$ 看千分位 $7$，$7\\ge5$，故 $8.457\\approx8.46$；精确到十分位，直接看百分位 $5$，$5\\ge5$，故 $8.457\\approx8.5$。精确到百位，$3967$ 看十位 $6$，故 $3967\\approx4000$；连续进位也可能增加位数，如 $9999$ 精确到万位得 $10000$。",
+        "精确度由保留到哪一位决定，近似数末尾的 $0$ 不能随意去掉。$4.0$ 表示精确到十分位，真值范围是 $[3.95,4.05)$；$4$ 只精确到个位，范围是 $[3.5,4.5)$。前者范围更窄，所以 $4.0$ 比 $4$ 精确。这里的区间按四舍五入的边界写出：下端包含（正好 $3.95$ 进一得 $4.0$），上端不包含（正好 $4.05$ 会进一得 $4.1$）。",
+        "注意不能“连续四舍五入”。例如把 $0.449$ 精确到十分位，应直接看百分位 $4$，$4<5$，得 $0.449\\approx0.4$；若先精确到百分位得 $0.45$，再精确到十分位得 $0.5$，就把一个本来该舍去的尾数通过两次进位放大了，结果错误。还要注意“五入”是约定：正好为 $5$ 时进一，不是由“离谁更近”唯一决定的。"
+      ],
+      "derivationEn": [
+        "An exact number equals the true value completely; an approximate number is a nearby number used in its place. Rounding $x$ to a given place means choosing a grid point at that place to represent $x$, and the two are joined by \"$\\approx$\". Round-half-up needs two things specified: the place to keep, and the convention that an exact half rounds upward. Without the place, an approximation has no definite precision.",
+        "Consider rounding to the ones place first. Write $x=n+t$ with $n$ an integer and $0\\le t<1$. The distance from $x$ to $n$ is $t$, and to $n+1$ it is $1-t$. If $t<\\tfrac12$, then $t<1-t$, so $n$ is nearer and the fraction is dropped, giving $n$; if $t>\\tfrac12$, then $n+1$ is nearer and we round up to $n+1$. If $t=\\tfrac12$, the two are equally near, and the round-half-up convention chooses the larger, $n+1$—this is the \"five rounds up\" rule.",
+        "Now take an arbitrary place. To keep the $10^k$ place, write $$x=A\\cdot10^k+r,\\qquad 0\\le r<10^k,$$ where $A$ is an integer and $r$ is the omitted tail. The highest place of $r$ is the $10^{k-1}$ place, whose digit is $c=\\left\\lfloor r/10^{k-1}\\right\\rfloor\\in\\{0,\\dots,9\\}$. If $c\\ge5$, then $r\\ge5\\cdot10^{k-1}=\\tfrac12\\cdot10^k$, so the tail reaches half a unit and we round up; if $c\\le4$, then $r<5\\cdot10^{k-1}$ and we cut it off. Since $r<10^k$, this single digit decides, and later digits cannot change the conclusion.",
+        "Examples: to the ones place, $3.4\\approx3$ (tenths digit $4<5$), $3.5\\approx4$ (tenths digit $5\\ge5$) and $3.7\\approx4$. To the hundredths place, $8.457$ looks at the thousandths digit $7\\ge5$, so $8.457\\approx8.46$; to the tenths place, look directly at the hundredths digit $5\\ge5$, so $8.457\\approx8.5$. To the hundreds place, $3967$ looks at the tens digit $6$, so $3967\\approx4000$; repeated carrying can add a digit, as $9999$ to the ten-thousands place becomes $10000$.",
+        "Precision is fixed by the place kept, and trailing zeros in an approximation may not be dropped. $4.0$ is accurate to the tenths place, with true values in $[3.95,4.05)$; $4$ is accurate only to the ones place, with values in $[3.5,4.5)$. The first interval is narrower, so $4.0$ is more precise than $4$. These intervals follow the rounding boundaries: the lower end is included ($3.95$ rounds up to $4.0$) and the upper end is excluded ($4.05$ would round up to $4.1$).",
+        "Never round repeatedly. For example, to round $0.449$ to the tenths place, look directly at the hundredths digit $4<5$, giving $0.449\\approx0.4$. If one first rounds to hundredths to get $0.45$ and then to tenths to get $0.5$, a tail that should have been dropped is magnified by two roundings, and the result is wrong. Also remember that \"five rounds up\" is a convention: an exact $5$ rounds upward, a choice not forced by \"which number is nearer\"."
       ]
     },
     {
@@ -40238,6 +40604,22 @@
         "rounding-approximation",
         "length-units",
         "percentage-elementary"
+      ],
+      "derivation": [
+        "有限小数是分母为 10、100、1000……的分数的另一种写法；无限小数不能这样表示：把单位「1」平均分成 10 份，一份是 $\\frac{1}{10}=0.1$；分成 100 份，一份是 $\\frac{1}{100}=0.01$；分成 1000 份，一份是 $0.001$。小数点右边第一位是十分位、第二位是百分位、第三位是千分位，例如 $0.25=2\\times0.1+5\\times0.01=\\frac{25}{100}$。",
+        "小数点位置决定计数单位：小数点每向右移一位，每个数位上的单位就扩大 10 倍，整个数扩大到原来的 10 倍；向左移一位则缩小到原来的 $\\frac{1}{10}$。如 $0.25\\to2.5\\to25$ 依次乘 10，$0.25\\to0.025$ 除以 10。移动时要补 0 占位，不能改变其他数字的顺序。",
+        "小数末尾添 0 或去 0，大小不变：$0.5=\\frac{5}{10}=\\frac{50}{100}=0.50$，因为分子分母同乘 10。但只有「末尾」的 0 可以这样处理：$0.05=\\frac{5}{100}\\ne\\frac{5}{10}=0.5$，中间的 0 去掉就改变了计数单位。近似数末尾的 0 表示精确到的数位，不能随意去掉。",
+        "比较大小：先比整数部分，整数部分大的数大；整数部分相同，就从十分位起依次比较，第一位不同的数位决定大小。本质上是通分到相同的计数单位再比分子：$0.3=\\frac{30}{100}>\\frac{25}{100}=0.25$。位数多不一定大，如 $0.4>0.35$。",
+        "加减法：把小数点对齐，就是相同数位对齐，再按整数加减法计算，最后在得数中对齐小数点。例如 $1.2-0.35=1.20-0.35=0.85$；缺的数位用 0 补足，避免把十分位与百分位相减。",
+        "乘法先按整数相乘，再看两个因数一共有几位小数，从积的右边起数出同样多位点上小数点；位数不够时先在积的前面补 0：$0.2\\times0.3=\\frac{2}{10}\\times\\frac{3}{10}=\\frac{6}{100}=0.06$。除法先把除数化成整数，被除数同时扩大相同倍数，商不变：$1.2\\div0.4=12\\div4=3$；商的小数点与被除数的小数点对齐。"
+      ],
+      "derivationEn": [
+        "A terminating decimal is another notation for a fraction with denominator 10, 100, 1000, …; infinite decimals cannot be represented this way: splitting the unit into 10 equal parts gives $\\frac{1}{10}=0.1$; into 100 parts gives $\\frac{1}{100}=0.01$; into 1000 parts gives $0.001$. To the right of the decimal point the first place is tenths, the second hundredths and the third thousandths, e.g. $0.25=2\\times0.1+5\\times0.01=\\frac{25}{100}$.",
+        "The position of the decimal point fixes the counting unit: moving it one place right multiplies every place value by 10, hence the whole number by 10; moving it one place left divides by 10. Thus $0.25\\to2.5\\to25$ multiplies by 10 each time, while $0.25\\to0.025$ divides by 10. Fill vacant places with 0, and never change the order of the other digits.",
+        "Appending or deleting zeros at the end of a decimal leaves its value unchanged: $0.5=\\frac{5}{10}=\\frac{50}{100}=0.50$, since numerator and denominator are multiplied by 10. Only zeros at the end may be treated this way: $0.05=\\frac{5}{100}\\ne\\frac{5}{10}=0.5$, so deleting an internal zero changes the counting unit. In an approximation, a trailing zero records the precision and must not be dropped.",
+        "To compare decimals, compare the integer parts first; if they agree, compare from the tenths place rightwards, and the first place where the digits differ decides. This is just rewriting both over a common unit: $0.3=\\frac{30}{100}>\\frac{25}{100}=0.25$. More digits do not mean larger: $0.4>0.35$.",
+        "For addition and subtraction, align the decimal points—that is, align equal place values—then compute as with whole numbers and place the point in the result on the same line. For example $1.2-0.35=1.20-0.35=0.85$; fill missing places with 0 so that tenths are never subtracted from hundredths.",
+        "For multiplication, multiply as whole numbers, count the total number of decimal places in both factors, and place the point that many places from the right of the product, padding with leading zeros if there are not enough digits: $0.2\\times0.3=\\frac{2}{10}\\times\\frac{3}{10}=\\frac{6}{100}=0.06$. For division, first make the divisor a whole number and multiply the dividend by the same power of 10, which leaves the quotient unchanged: $1.2\\div0.4=12\\div4=3$; the quotient's point aligns with the dividend's."
       ]
     },
     {
@@ -40379,6 +40761,22 @@
         "factors-multiples",
         "ratio-elementary",
         "percentage-elementary"
+      ],
+      "derivation": [
+        "设 $a,b$ 为整数且 $b>0$。把单位「1」平均分成 $b$ 份，取其中 $a$ 份（此模型先限定 $0\\le a\\le b$），就得到分数 $\\frac{a}{b}$：分母 $b$ 表示平均分成的份数，分子 $a$ 表示取的份数。平均分是前提——每份必须同样大；其中一份叫分数单位 $\\frac{1}{b}$，所以 $\\frac{a}{b}=a\\times\\frac{1}{b}$。例如把一根绳子平均分成 5 段，取 3 段就是 $\\frac{3}{5}$，它含有 3 个 $\\frac{1}{5}$。",
+        "分数与除法同源：把 $a$ 个物体平均分给 $b$ 个人，每人得到 $a\\div b$ 个；把 $a$ 个物体每个都分成 $b$ 份，每人从每个物体中取 1 份，共得到 $a$ 个 $\\frac{1}{b}$，仍然是 $\\frac{a}{b}$，因此 $a\\div b=\\frac{a}{b}$（$b\\ne 0$）。分子相当于被除数、分母相当于除数；除数不能为 0，所以分母也不能为 0。反过来，$\\frac{a}{b}$ 就是 $a$ 除以 $b$ 的商。",
+        "分数的基本性质：由 $\\frac{a}{b}=a\\div b$ 和商不变规律，分子、分母同乘一个非零数 $m$，商不变：$\\frac{a}{b}=\\frac{am}{bm}$；同除以 $m$ 也成立。据此约分：$\\frac{4}{6}=\\frac{4\\div2}{6\\div2}=\\frac{2}{3}$；通分也用它把分母化成公分母。注意 $m\\ne0$，且只有分子分母同时变，分数值才不变。",
+        "同分母加减：分母相同，分数单位就相同，只需把分数单位的个数相加减：$\\frac{a}{b}\\pm\\frac{c}{b}=\\frac{a\\pm c}{b}$（$b\\ne0$）。异分母时分母不同、单位不同，不能直接加分子；先用基本性质通分到最小公倍数：$\\frac{1}{2}+\\frac{1}{3}=\\frac{3}{6}+\\frac{2}{6}=\\frac{5}{6}$。结果能约分要约成最简分数。",
+        "乘法：$\\frac{a}{b}\\times\\frac{c}{d}=\\frac{ac}{bd}$（$b,d\\ne0$）。设 $a\\le b$、$c\\le d$，把单位 1 先分成 $b$ 份取 $a$ 份，再把这 $a$ 份各分成 $d$ 份取 $c$ 份，就单位 1 而言相当于分成 $bd$ 份、取 $ac$ 份；例如 $\\frac{2}{3}\\times\\frac{3}{4}=\\frac{6}{12}=\\frac{1}{2}$。计算时可先约分再乘，以减少计算量。",
+        "除法：除以 $\\frac{c}{d}$ 就是乘它的倒数 $\\frac{d}{c}$，因为 $\\frac{c}{d}\\times\\frac{d}{c}=1$（$c,d\\ne0$）：$\\frac{a}{b}\\div\\frac{c}{d}=\\frac{a}{b}\\times\\frac{d}{c}=\\frac{ad}{bc}$。例如 $\\frac{1}{2}\\div\\frac{3}{4}=\\frac{1}{2}\\times\\frac{4}{3}=\\frac{2}{3}$。除数不能为 0，所以 $c\\ne0$；算完可用乘法验算：$\\frac{2}{3}\\times\\frac{3}{4}=\\frac{1}{2}$。"
+      ],
+      "derivationEn": [
+        "Let $a,b$ be integers with $b>0$. Divide the unit 1 into $b$ equal parts and take $a$ of them (for this model, first assume $0\\le a\\le b$); the result is the fraction $\\frac{a}{b}$. The denominator $b$ counts the equal parts and the numerator $a$ counts the parts taken. Equal division is essential—every part must have the same size. One part is the fraction unit $\\frac{1}{b}$, so $\\frac{a}{b}=a\\times\\frac{1}{b}$. For example, cutting a rope into 5 equal pieces and taking 3 gives $\\frac{3}{5}$, which contains three $\\frac{1}{5}$s.",
+        "Fractions and division have the same origin: sharing $a$ objects equally among $b$ people gives $a\\div b$ each, while splitting each of the $a$ objects into $b$ parts and giving each person one part from every object yields $a$ copies of $\\frac{1}{b}$, again $\\frac{a}{b}$; hence $a\\div b=\\frac{a}{b}$ ($b\\ne 0$). The numerator acts as the dividend and the denominator as the divisor; division by 0 is undefined, so the denominator cannot be 0. Conversely, $\\frac{a}{b}$ is the quotient of $a$ divided by $b$.",
+        "Basic property: from $\\frac{a}{b}=a\\div b$ and the invariance of a quotient, multiplying numerator and denominator by the same non-zero number $m$ leaves the value unchanged: $\\frac{a}{b}=\\frac{am}{bm}$; the same holds for division by $m$. This justifies reducing, $\\frac{4}{6}=\\frac{4\\div2}{6\\div2}=\\frac{2}{3}$, and finding common denominators. Note $m\\ne0$, and both numerator and denominator must be changed together.",
+        "With a common denominator the fraction units agree, so only their counts are added or subtracted: $\\frac{a}{b}\\pm\\frac{c}{b}=\\frac{a\\pm c}{b}$ ($b\\ne0$). With different denominators the units differ, so numerators cannot be added directly; first convert to the least common multiple: $\\frac{1}{2}+\\frac{1}{3}=\\frac{3}{6}+\\frac{2}{6}=\\frac{5}{6}$. Reduce the result to lowest terms when possible.",
+        "Multiplication: $\\frac{a}{b}\\times\\frac{c}{d}=\\frac{ac}{bd}$ ($b,d\\ne0$). Assume $a\\le b$ and $c\\le d$; split the unit into $b$ parts and take $a$, then split each of those $a$ parts into $d$ parts and take $c$; relative to the unit there are $bd$ parts in all and $ac$ of them are taken. For example $\\frac{2}{3}\\times\\frac{3}{4}=\\frac{6}{12}=\\frac{1}{2}$. Reduce before multiplying to simplify the work.",
+        "Division: dividing by $\\frac{c}{d}$ is multiplying by its reciprocal $\\frac{d}{c}$, since $\\frac{c}{d}\\times\\frac{d}{c}=1$ ($c,d\\ne0$): $\\frac{a}{b}\\div\\frac{c}{d}=\\frac{a}{b}\\times\\frac{d}{c}=\\frac{ad}{bc}$. For example $\\frac{1}{2}\\div\\frac{3}{4}=\\frac{1}{2}\\times\\frac{4}{3}=\\frac{2}{3}$. The divisor cannot be 0, so $c\\ne0$; check by multiplication: $\\frac{2}{3}\\times\\frac{3}{4}=\\frac{1}{2}$."
       ]
     },
     {
@@ -40521,6 +40919,22 @@
         "fractions-elementary",
         "multiplication-division",
         "whole-numbers"
+      ],
+      "derivation": [
+        "在非零自然数范围内，若 $a\\times b=c$，则 $a,b$ 都是 $c$ 的因数，$c$ 是 $a,b$ 的倍数。因数和倍数互相依存：只能说「3 是 12 的因数」「12 是 3 的倍数」，不能说「3 是因数」而不指明对象。找因数可成对进行：$12=1\\times12=2\\times6=3\\times4$，共 6 个。",
+        "因数的个数有限：若 $d$ 是 $n$ 的因数，则 $n=dq$，$q$ 也是因数，且 $d\\le n$（$d,q$ 为正整数），所以因数只能从 $1,2,\\dots,n$ 中取，个数不超过 $n$；最小因数是 1，最大因数是 $n$。倍数却无限：$n,2n,3n,\\dots$ 永不完结，最小倍数是 $n$，没有最大倍数。",
+        "倍数特征可由十进制表示推出。设 $n=10q+r$（$r$ 是个位数字）。因为 $10\\equiv0\\pmod2$、$10\\equiv0\\pmod5$，所以 $n\\equiv r\\pmod2$、$n\\equiv r\\pmod5$：个位是 0、2、4、6、8 的数是 2 的倍数，个位是 0 或 5 的数是 5 的倍数。又 $10\\equiv1\\pmod3$，故 $n\\equiv q+r\\pmod3$；对 $q$ 重复同样的论证，最终得到 $n$ 与各位数字之和同余，如 $123$：$1+2+3=6$，所以 123 是 3 的倍数。",
+        "按因数个数分类：只有 1 和它本身两个因数的数叫质数；除 1 和本身外还有别的因数的数叫合数。1 只有 1 个因数，既不是质数也不是合数。2 是唯一的偶质数：大于 2 的偶数 $2k$（$k>1$）至少有因数 $1,2,2k$，是合数。20 以内的质数是 2、3、5、7、11、13、17、19。0 是偶数，但讨论因数与质数时只在非零自然数范围内进行。",
+        "算术基本定理：每个大于 1 的整数都能唯一地（不计顺序）写成质数的乘积，这叫分解质因数。例如 $12=2\\times2\\times3=2^2\\times3$，$18=2\\times3^2$。分解可用树状图或短除法，一直分到所有因数都是质数为止。",
+        "由质因数分解求最大公因数和最小公倍数：公有质因数取最低次幂得最大公因数，所有出现过的质因数取最高次幂得最小公倍数。$12=2^2\\times3$、$18=2\\times3^2$，所以 $\\gcd(12,18)=2\\times3=6$，$\\operatorname{lcm}(12,18)=2^2\\times3^2=36$。对两个数还有 $\\gcd(a,b)\\times\\operatorname{lcm}(a,b)=ab$：$6\\times36=216=12\\times18$。"
+      ],
+      "derivationEn": [
+        "Among the non-zero natural numbers, if $a\\times b=c$, then $a$ and $b$ are factors of $c$, and $c$ is a multiple of $a$ and of $b$. The two notions depend on each other: we say '3 is a factor of 12' and '12 is a multiple of 3', never '3 is a factor' without naming the number. Factors can be found in pairs: $12=1\\times12=2\\times6=3\\times4$, six factors in all.",
+        "A number has finitely many factors: if $d$ is a factor of $n$, then $n=dq$ and $q$ is also a factor, with $d\\le n$ for positive integers, so every factor lies among $1,2,\\dots,n$ and there are at most $n$ of them; the smallest is 1 and the largest is $n$. Multiples, however, are infinite: $n,2n,3n,\\dots$ never end, the smallest is $n$, and there is no largest.",
+        "The divisibility tests follow from decimal notation. Write $n=10q+r$, where $r$ is the units digit. Since $10\\equiv0\\pmod2$ and $10\\equiv0\\pmod5$, we get $n\\equiv r\\pmod2$ and $n\\equiv r\\pmod5$: numbers ending in 0, 2, 4, 6 or 8 are multiples of 2, and those ending in 0 or 5 are multiples of 5. Also $10\\equiv1\\pmod3$, so $n\\equiv q+r\\pmod3$; repeating the argument for $q$ shows $n$ is congruent to its digit sum modulo 3. For 123, $1+2+3=6$, so 123 is a multiple of 3.",
+        "Classify by the number of factors: a number with only the two factors 1 and itself is prime; one with further factors is composite. The number 1 has only one factor, so it is neither prime nor composite. The number 2 is the only even prime: every even number $2k$ with $k>1$ has at least the factors $1,2,2k$ and is composite. The primes below 20 are 2, 3, 5, 7, 11, 13, 17 and 19. The number 0 is even, but factors and primes are discussed only among the non-zero natural numbers.",
+        "Fundamental theorem of arithmetic: every integer greater than 1 can be written uniquely, up to order, as a product of primes—its prime factorisation. For example $12=2\\times2\\times3=2^2\\times3$ and $18=2\\times3^2$. A factor tree or short division carries the process on until every factor is prime.",
+        "From prime factorisations, the greatest common factor takes the lowest power of each shared prime, and the least common multiple takes the highest power of every prime that appears. With $12=2^2\\times3$ and $18=2\\times3^2$, $\\gcd(12,18)=2\\times3=6$ and $\\operatorname{lcm}(12,18)=2^2\\times3^2=36$. For two numbers, $\\gcd(a,b)\\times\\operatorname{lcm}(a,b)=ab$: $6\\times36=216=12\\times18$."
       ]
     },
     {
@@ -40635,6 +41049,22 @@
         "linear-equation-junior",
         "chicken-rabbit",
         "function-concept"
+      ],
+      "derivation": [
+        "字母可以表示数：$a$ 可以表示任意一个数，$x$ 常表示还不知道的数。在同一个式子里，同一个字母表示同一个数；不同的字母可以表示相同的数，也可以表示不同的数。用字母能把无数种具体情况写成一个式子，例如长方形的面积 $S=ab$。",
+        "书写约定：$a\\times b$ 写作 $ab$ 或 $a\\cdot b$；$3\\times a$ 写作 $3a$，数字一般写在字母前面；$1\\times a$ 简写成 $a$；$a\\times a$ 写作 $a^2$。因此 $a^2=a\\cdot a$，不是 $2a$；而 $2a=a+a$。平方表示两个 $a$ 相乘，系数 2 表示两个 $a$ 相加。",
+        "求值：把字母换成指定的数，再按运算顺序计算。当 $a=5$ 时，$a^2=5\\times5=25$，而 $2a=2\\times5=10$，二者一般不相等；当 $a=3$ 时，$2a+3=2\\times3+3=9$。字母取不同的值，式子的值可能不同。",
+        "用式子表示数量关系：$x$ 的 3 倍多 2 写成 $3x+2$；$a$ 与 $b$ 的和的 2 倍写成 $2(a+b)$，括号不能丢；比 $x$ 少 5 写成 $x-5$。先读清「先算什么」，再决定要不要加括号，括号改变了运算顺序。",
+        "含有未知数的等式叫方程。$x+3=9$ 是方程；$x+3$ 不是等式，$5+3=8$ 没有未知数，所以它们都不是方程。解方程利用等式性质：两边同时减去 3，得 $x=9-3=6$；把 $x=6$ 代回原方程，$6+3=9$，左右两边相等，解正确。",
+        "列方程：小明每天存 2 元，小刚已有 3 元且每天存 1 元。设 $x$ 天后两人存的钱一样多，则小明有 $2x$ 元，小刚有 $x+3$ 元，等量关系是 $2x=x+3$。两边同时减去 $x$，得 $x=3$；检验 $2\\times3=6$，$3+3=6$。字母把未知量变成了可以计算的等式。"
+      ],
+      "derivationEn": [
+        "Letters can stand for numbers: $a$ may represent any number, and $x$ often represents an unknown. In one expression the same letter stands for the same number, while different letters may stand for the same or for different numbers. Letters let us write infinitely many cases in one expression, such as the area of a rectangle $S=ab$.",
+        "Writing conventions: $a\\times b$ is written $ab$ or $a\\cdot b$; $3\\times a$ is written $3a$, with the number usually before the letter; $1\\times a$ is written simply $a$; and $a\\times a$ is written $a^2$. Hence $a^2=a\\cdot a$, not $2a$, while $2a=a+a$. The square means two copies of $a$ multiplied, whereas the coefficient 2 means two copies added.",
+        "To evaluate an expression, replace the letter by the given number and follow the order of operations. When $a=5$, $a^2=5\\times5=25$ while $2a=2\\times5=10$, so the two are generally different; when $a=3$, $2a+3=2\\times3+3=9$. Different values of the letter can give different values of the expression.",
+        "Translate words into expressions: '2 more than 3 times $x$' is $3x+2$; 'twice the sum of $a$ and $b$' is $2(a+b)$, and the parentheses cannot be dropped; '5 less than $x$' is $x-5$. Decide which operation comes first, then decide whether parentheses are needed, since parentheses change the order of operations.",
+        "An equation is an equality containing an unknown. $x+3=9$ is an equation; $x+3$ is not an equality, and $5+3=8$ has no unknown, so neither is an equation. Use the properties of equality: subtract 3 from both sides to get $x=9-3=6$; substituting $x=6$ back gives $6+3=9$, so the two sides match and the solution is correct.",
+        "Model with an equation: Xiao Ming saves 2 yuan per day, while Xiao Gang already has 3 yuan and saves 1 yuan per day. Let $x$ be the number of days until they have equal amounts. Then Xiao Ming has $2x$ yuan and Xiao Gang has $x+3$ yuan, so $2x=x+3$. Subtracting $x$ from both sides gives $x=3$; check: $2\\times3=6$ and $3+3=6$. Letters turn the unknown into a computable equation."
       ]
     },
     {
@@ -41691,6 +42121,22 @@
         "decimals-elementary",
         "addition-subtraction",
         "real-numbers"
+      ],
+      "derivation": [
+        "生活中有许多相反意义的量，需要先规定一个基准 0。把一个方向定为正，相反方向就定为负：零上 5 ℃ 记作 $+5$ ℃，零下 5 ℃ 记作 $-5$ ℃；收入 50 元记作 $+50$ 元，支出 50 元记作 $-50$ 元；高出海平面 100 米记作 $+100$ 米，低于海平面 100 米记作 $-100$ 米。比 0 小的数叫负数，负号不能省略；0 既不是正数，也不是负数。",
+        "把数画在数轴上：取一点作原点 0，规定向右为正方向，并取固定的单位长度。正数在 0 的右边，负数在 0 的左边；$-3$ 表示从 0 向左走 3 个单位。每一个数都对应数轴上唯一的一个点，位置由方向和到 0 的距离共同决定。",
+        "数轴上的排序规则是：右边的数总比左边的数大。因此 $-5<-2<0<3$。两个负数比较时，离 0 越远的数反而越小，因为它在数轴上更靠左；不能因为 $5>2$ 就错误地写成 $-5>-2$。",
+        "可以用数轴做加减：从 12 出发向左走 15 个单位，先经过 0，再向左 3 个单位，得到 $12-15=-3$；从 $-3$ 出发向右走 5 个单位，得到 2，即 $-3+5=2$。在 0 两侧且到 0 距离相等的两个数互为相反数，例如 $-3$ 与 3，它们的和是 0。",
+        "一个数到 0 的距离决定了它的大小尺度：$-4$ 和 4 到 0 的距离都是 4，但 $-4<0<4$。对负数来说，到 0 的距离越大，数越小；对正数来说，到 0 的距离越大，数越大。所以比较负数时，先看谁离 0 更远，离得远的更小。",
+        "判断时要连同基准一起看：$-3$ 读作负三，$-3<0$；0 不是负数；温度 $-3$ ℃ 表示比 0 ℃ 低 3 ℃。如果换一个基准点，同一个高度的正负号可能改变，所以写负数时必须说明以什么为 0，例如「以海平面为 0 米」。"
+      ],
+      "derivationEn": [
+        "Many quantities in daily life have opposite meanings and need a reference point 0. Choose one direction as positive; the opposite direction is negative. Thus 5 °C above zero is $+5$ °C and 5 °C below zero is $-5$ °C; income of 50 yuan is $+50$ yuan and spending 50 yuan is $-50$ yuan; 100 m above sea level is $+100$ m and 100 m below sea level is $-100$ m. A number less than 0 is negative, its minus sign cannot be omitted, and 0 is neither positive nor negative.",
+        "Draw the numbers on a number line: choose a point as the origin 0, fix the positive direction to the right, and choose a fixed unit length. Positive numbers lie to the right of 0 and negative numbers to the left; $-3$ means moving 3 units left from 0. Each number corresponds to exactly one point, whose position is determined by both the direction and the distance from 0.",
+        "The order rule on the number line is: a number on the right is always greater than one on the left. Hence $-5<-2<0<3$. Between two negative numbers, the one farther from 0 is smaller, because it lies farther left; one must not argue from $5>2$ that $-5>-2$.",
+        "Use the number line for addition and subtraction: starting at 12 and moving 15 units left passes 0 and ends 3 units to its left, so $12-15=-3$; starting at $-3$ and moving 5 units right gives 2, so $-3+5=2$. Two numbers on opposite sides of 0 at equal distance are opposites, such as $-3$ and 3, and their sum is 0.",
+        "The distance from 0 measures the size of a number: both $-4$ and 4 are 4 units from 0, but $-4<0<4$. For negative numbers, a greater distance from 0 means a smaller number; for positive numbers, a greater distance means a larger number. So when comparing negatives, first see which is farther from 0; the farther one is smaller.",
+        "Read a negative number together with its reference point: $-3$ is read negative three and $-3<0$; 0 is not negative; a temperature of $-3$ °C is 3 °C below zero. If the reference point changes, the sign of the same height may change, so a negative number must be explained with its zero reference, such as 'sea level is 0 m'."
       ]
     },
     {
@@ -41799,6 +42245,22 @@
         "multiplication-division",
         "inverse-variation-function",
         "similarity"
+      ],
+      "derivation": [
+        "两个数相除又叫做两个数的比：$a:b=a\\div b$（$b\\ne0$）。$a$ 叫前项，$b$ 叫后项，比值是前项除以后项的商。比不是「两个量的差」，也不只是一个分数；它记录的是前者与后者相除所得的倍比关系。",
+        "比、除法、分数可以互相改写：$a:b=a\\div b=\\frac{a}{b}$，但三者的「结果」不同：化简比的结果仍是一个比（如 $2:3$），求比值的结果是一个数（如 $\\frac{2}{3}\\approx0.67$）。写答案时要看清题目问的是哪一个。",
+        "比的基本性质：前项和后项同乘或同除以相同的非零数 $k$，比值不变：$a:b=(ak):(bk)=(a\\div k):(b\\div k)$，因为 $ak\\div bk=a\\div b$。用它化简：$12:18=(12\\div6):(18\\div6)=2:3$，其中 6 是 12 和 18 的最大公因数。两个同类量相比必须先化成相同单位，如 $20\\text{ cm}:1\\text{ m}=20:100=1:5$。",
+        "表示两个比相等的式子叫比例：$a:b=c:d$（$b,d\\ne0$）。两边同乘 $bd$ 得 $ad=bc$，即两个外项的积等于两个内项的积；反过来，若 $ad=bc$ 且 $b,d\\ne0$，两边同除以 $bd$ 就得到 $a:b=c:d$。解比例 $3:4=x:12$：$4x=3\\times12=36$，所以 $x=9$，验算 $9:12=3:4$。",
+        "两个相关联的量，若比值一定，就成正比例：$\\frac{y}{x}=k$（$k$ 一定，$x\\ne0$），如 $y=2x$；若乘积一定且不为 0，就成反比例：$xy=k$（$k\\ne0$ 一定，$x,y\\ne0$），如 $xy=12$。判断时看商一定还是积一定：总价÷数量=单价（一定）成正比例，速度×时间=路程（一定）成反比例。",
+        "按比分配：把 600 克按 $1:2$ 分，先求总份数 $1+2=3$，每份 $600\\div3=200$ 克，再分别乘 1 和 2，得 200 克与 400 克；检验 $200+400=600$ 且 $200:400=1:2$。比例尺也是比：图上距离:实际距离，如 $1:1000$ 表示图上 1 厘米代表实际 1000 厘米，它是长度之比，不是面积之比。"
+      ],
+      "derivationEn": [
+        "Dividing one number by another is also called their ratio: $a:b=a\\div b$ ($b\\ne0$). Here $a$ is the first term and $b$ the second, and the value of the ratio is the quotient. A ratio is neither a difference nor merely a fraction: it records the multiplicative comparison obtained by dividing the first quantity by the second.",
+        "Ratios, division and fractions convert into one another: $a:b=a\\div b=\\frac{a}{b}$, but their outputs differ: simplifying a ratio yields a ratio such as $2:3$, while evaluating it yields a number such as $\\frac{2}{3}\\approx0.67$. Read the question to see which one is required.",
+        "Basic property: multiplying or dividing both terms by the same non-zero number $k$ leaves the ratio unchanged, $a:b=(ak):(bk)=(a\\div k):(b\\div k)$, because $ak\\div bk=a\\div b$. Use it to simplify: $12:18=(12\\div6):(18\\div6)=2:3$, where 6 is the greatest common factor of 12 and 18. Two quantities of the same kind must first be converted to the same unit, e.g. $20\\text{ cm}:1\\text{ m}=20:100=1:5$.",
+        "An equality of two ratios is a proportion: $a:b=c:d$ ($b,d\\ne0$). Multiplying both sides by $bd$ gives $ad=bc$: the product of the outer terms equals the product of the inner terms. Conversely, if $ad=bc$ and $b,d\\ne0$, dividing by $bd$ recovers $a:b=c:d$. Solve $3:4=x:12$: $4x=3\\times12=36$, so $x=9$, and $9:12=3:4$ checks.",
+        "Two related quantities are directly proportional when their quotient is constant, $\\frac{y}{x}=k$ ($k$ fixed, $x\\ne0$), e.g. $y=2x$; they are inversely proportional when their product is a nonzero constant, $xy=k$ ($k\\ne0$ fixed, $x,y\\ne0$), e.g. $xy=12$. Decide by asking whether the quotient or the product is fixed: total price ÷ quantity = unit price (fixed) is direct, while speed × time = distance (fixed) is inverse.",
+        "Sharing in a ratio: to split 600 g in the ratio $1:2$, add the parts, $1+2=3$; one part is $600\\div3=200$ g; multiply by 1 and by 2 to get 200 g and 400 g. Check $200+400=600$ and $200:400=1:2$. A scale is also a ratio, drawing distance : real distance; $1:1000$ means 1 cm on the drawing represents 1000 cm in reality, and it is a ratio of lengths, not of areas."
       ]
     },
     {
@@ -41917,6 +42379,22 @@
         "ratio-elementary",
         "average-elementary",
         "statistics-charts"
+      ],
+      "derivation": [
+        "百分数表示一个数是另一个数的百分之几，$p\\%=\\frac{p}{100}$。它把「另一个数」看作单位 1（也就是 100 份），再数「一个数」占了多少份，所以 25% 就是 $\\frac{25}{100}=0.25$。百分数也叫百分率或百分比，本质是两个数的倍比关系。",
+        "正因为百分数只描述倍比关系，它不能带单位名称：可以说「绳子长 0.5 米」，不能说「绳子长 50% 米」；50% 只有说清「谁的 50%」才有意义，例如 1 米的 50% 是 0.5 米。百分号 % 不能省略，去掉 % 就变成另一个数了。",
+        "互化：小数化百分数，小数点右移两位并添 %，$0.75=75\\%$；百分数化小数，去掉 % 并把小数点左移两位，$45\\%=0.45$。百分数化分数，先写成 $\\frac{p}{100}$ 再约分：$75\\%=\\frac{75}{100}=\\frac{3}{4}$；分数化百分数，先化成小数再添 %。",
+        "求百分数：先确定「另一个数」（单位 1、总量，且不为 0），再用一个数除以它并乘 100%：$\\frac{\\text{一个数}}{\\text{另一个数}}\\times100\\%$。例如 20 是 50 的百分之几？$20\\div50=0.4=40\\%$。单位 1 找错，答案就会错。",
+        "折扣与成数都是百分数：打八折就是按原价的 80% 出售，增产三成就是增产 30%。原价 400 元打八折，现价 $400\\times80\\%=320$ 元，便宜了 $400-320=80$ 元，占原价的 $80\\div400=20\\%$。",
+        "百分数的增减不能直接相加：先涨 20% 再降 20%，基数变了。$100\\times1.2=120$，$120\\times0.8=96$，最终是原来的 96%，比原来少 4%，不是回到 100。计算利息用「利息=本金×利率×时间」，利率 2% 不带单位，算出的利息才带「元」。"
+      ],
+      "derivationEn": [
+        "A percentage states how many hundredths one number is of another: $p\\%=\\frac{p}{100}$. It treats the second number as the unit (100 parts) and counts how many such parts the first number occupies, so 25% means $\\frac{25}{100}=0.25$. Also called a percent rate, it expresses a multiplicative comparison between two numbers.",
+        "Because a percentage describes only a multiplicative comparison, it never carries a unit: we may say a rope is 0.5 m long, but not that it is 50% m long; 50% is meaningful only once we specify 50% of what, e.g. 50% of 1 m is 0.5 m. The sign % cannot be omitted, for without it the number is different.",
+        "Conversions: decimal to percentage—move the point two places right and append %, so $0.75=75\\%$; percentage to decimal—drop % and move the point two places left, so $45\\%=0.45$. Percentage to fraction—write $\\frac{p}{100}$ and reduce: $75\\%=\\frac{75}{100}=\\frac{3}{4}$; fraction to percentage—first convert to a decimal, then append %.",
+        "To find a percentage, identify the base (the unit, the whole, assumed nonzero), then divide the part by it and multiply by 100%: $\\frac{\\text{part}}{\\text{whole}}\\times100\\%$. For instance, what percent of 50 is 20? $20\\div50=0.4=40\\%$. Choosing the wrong base gives a wrong answer.",
+        "Discounts and tenths are percentages: paying eight tenths means paying 80% of the original price, and a three-tenths increase means 30% more. If a 400-yuan coat is sold at eight tenths, the price is $400\\times80\\%=320$ yuan, and the reduction is $400-320=80$ yuan, which is $80\\div400=20\\%$ of the original.",
+        "Percentage changes cannot simply be added, because the base changes. Raise 100 by 20%, then lower the result by 20%: $100\\times1.2=120$ and $120\\times0.8=96$, so the final value is 96% of the original—4% less, not back to 100. Interest uses 'interest = principal × rate × time'; the rate 2% has no unit, while the interest is measured in yuan."
       ]
     },
     {
@@ -42019,6 +42497,22 @@
         "perimeter-elementary",
         "area-volume-units",
         "rounding-approximation"
+      ],
+      "derivation": [
+        "长度测量的基准是 1 米。把 1 米平均分成 10 份，每份是 1 分米；把 1 分米平均分成 10 份，每份是 1 厘米；把 1 厘米平均分成 10 份，每份是 1 毫米。因此 $1\\,\\mathrm{m}=10\\,\\mathrm{dm}$，$1\\,\\mathrm{dm}=10\\,\\mathrm{cm}$，$1\\,\\mathrm{cm}=10\\,\\mathrm{mm}$。把这些关系依次代入，就得到 $1\\,\\mathrm{m}=10\\times10=100\\,\\mathrm{cm}$，$1\\,\\mathrm{m}=100\\,\\mathrm{cm}=100\\times10\\,\\mathrm{mm}=1000\\,\\mathrm{mm}$。",
+        "把 3 米化成厘米：1 米 = 100 厘米，3 米就是 3 个 100 厘米，所以 $3\\times100=300$ 厘米。一般地，若 1 个大单位含 $k$ 个小单位，则 $N$ 个大单位含 $Nk$ 个小单位。因此大单位化小单位要乘进率 $k$，小单位化大单位要除以 $k$；单位变小，数值必须变大，可用来判断乘除方向。",
+        "千米是单独的一级：$1\\,\\mathrm{km}=1000\\,\\mathrm{m}$，不是 10。例如 2 千米 350 米 $=2\\times1000+350=2350$ 米；$4800$ 米 $=4$ 千米 $800$ 米 $=4.8$ 千米。",
+        "复合单位先化成同一个单位再计算：1 米 25 厘米 $=100+25=125$ 厘米；3 千米 40 米 $=3\\times1000+40=3040$ 米。注意 3 千米 40 米不是 3400 米，因为 40 米不足 1 千米，只能贡献 40 米。",
+        "换算后用数量级检验：18 厘米 $=18\\times10=180$ 毫米，2 米 $=2\\times100=200$ 厘米，1500 米 $=1500\\div1000=1.5$ 千米。反过来乘或除回去应得到原数，例如 $180\\div10=18$，$1.5\\times1000=1500$。",
+        "选单位要符合物体大小：硬币厚约 1 毫米，手指宽约 1 厘米，门高约 2 米，两个公交站相距约 1 千米。不要把千米与米的进率记成 100：它是 1000；米、分米、厘米、毫米之间相邻进率才是 10。"
+      ],
+      "derivationEn": [
+        "The base unit of length is the metre. Dividing 1 m into 10 equal parts gives 1 dm, dividing 1 dm into 10 equal parts gives 1 cm, and dividing 1 cm into 10 equal parts gives 1 mm. Hence $1\\,\\mathrm{m}=10\\,\\mathrm{dm}$, $1\\,\\mathrm{dm}=10\\,\\mathrm{cm}$, and $1\\,\\mathrm{cm}=10\\,\\mathrm{mm}$. Substituting these relations one after another gives $1\\,\\mathrm{m}=10\\times10=100\\,\\mathrm{cm}$ and $1\\,\\mathrm{m}=100\\,\\mathrm{cm}=100\\times10\\,\\mathrm{mm}=1000\\,\\mathrm{mm}$.",
+        "Convert 3 m to centimetres: since 1 m = 100 cm, 3 m consists of three groups of 100 cm, so $3\\times100=300$ cm. In general, if one large unit contains $k$ small units, then $N$ large units contain $Nk$ small units. Thus large to small means multiply by the rate $k$, and small to large means divide by $k$; when the unit becomes smaller, the number must become larger, which tells us the direction.",
+        "The kilometre is a separate step: $1\\,\\mathrm{km}=1000\\,\\mathrm{m}$, not 10. For example, 2 km 350 m $=2\\times1000+350=2350$ m; $4800$ m $=4$ km $800$ m $=4.8$ km.",
+        "For a mixed unit, convert to a single unit before calculating: 1 m 25 cm $=100+25=125$ cm, and 3 km 40 m $=3\\times1000+40=3040$ m. Note that 3 km 40 m is not 3400 m: 40 m is less than 1 km, so it contributes only 40 m.",
+        "Check the magnitude after converting: 18 cm $=18\\times10=180$ mm, 2 m $=2\\times100=200$ cm, and 1500 m $=1500\\div1000=1.5$ km. Multiplying or dividing back must recover the original value, for example $180\\div10=18$ and $1.5\\times1000=1500$.",
+        "Choose a unit that fits the object: a coin is about 1 mm thick, a finger about 1 cm wide, a door about 2 m high, and two bus stops about 1 km apart. Do not remember the kilometre-metre rate as 100: it is 1000; the neighbouring units metre, decimetre, centimetre and millimetre step by 10."
       ]
     },
     {
@@ -42417,6 +42911,22 @@
         "solid-volume-elementary",
         "solid-figures-elementary",
         "perimeter-elementary"
+      ],
+      "derivation": [
+        "面积单位由单位正方形的边长决定：边长 1 厘米的正方形面积是 1 平方厘米，边长 1 分米的正方形面积是 1 平方分米。因为 1 分米 = 10 厘米，把边长 1 分米的正方形沿两个方向各分成 10 份，就得到 $10\\times10=100$ 个边长 1 厘米的小正方形。所以 $1\\,\\mathrm{dm}^2=100\\,\\mathrm{cm}^2$，同理 $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2$。",
+        "一般地，若两个长度单位的比是 $k$，对应面积单位的比就是 $k^2$。米与分米 $k=10$，所以平方米化平方分米乘 100；米与厘米 $k=100$，所以平方米化平方厘米乘 $100^2=10000$。于是 $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2=10000\\,\\mathrm{cm}^2$。常见错误是只乘 10，把面积当成了一维长度。土地面积还用公顷和平方千米：1 公顷 = 10000 平方米，1 平方千米 = 100 公顷 = 1000000 平方米；这里千米与米的长度比是 1000，所以面积比是 $1000^2=10^6$。",
+        "体积单位同理：棱长 1 分米的正方体可以切成 $10\\times10\\times10=1000$ 个棱长 1 厘米的小正方体，所以 $1\\,\\mathrm{dm}^3=1000\\,\\mathrm{cm}^3$。同样 $1\\,\\mathrm{m}^3=1000\\,\\mathrm{dm}^3=10^6\\,\\mathrm{cm}^3$。一般地，长度单位比为 $k$，体积单位比就是 $k^3$。",
+        "面积和体积是不同维度的量，不能互相换算：面积是二维的，单位带平方；体积是三维的，单位带立方。不能比较 1 平方米和 1 立方米的大小，也不能写成 $1\\,\\mathrm{m}^2=100\\,\\mathrm{cm}^2$（应为 10000）或 $1\\,\\mathrm{m}^3=1000\\,\\mathrm{cm}^3$（应为 $10^6$）。",
+        "容积单位与体积单位有固定对应：$1\\,\\mathrm{L}=1\\,\\mathrm{dm}^3$，$1\\,\\mathrm{mL}=1\\,\\mathrm{cm}^3$，所以 $1\\,\\mathrm{L}=1000\\,\\mathrm{mL}$，$1\\,\\mathrm{m}^3=1000\\,\\mathrm{L}$。容积从容器内部测量，体积从外部测量；容器壁占有空间，所以同一容器的体积大于容积。",
+        "例：内棱长 30 厘米（从里面量）的正方体鱼缸，容积 $=30^3=27000$ 立方厘米 $=27000$ 毫升 $=27$ 升；边长 1 米的方桌布，面积 $=1$ 平方米 $=100$ 平方分米 $=10000$ 平方厘米。换算前先判断是长度、面积还是体积，再按 10、100、1000 的进率逐级乘除。"
+      ],
+      "derivationEn": [
+        "An area unit is fixed by the side of a unit square: a square of side 1 cm has area 1 cm², and a square of side 1 dm has area 1 dm². Since 1 dm = 10 cm, dividing the 1 dm square into 10 parts in each of its two directions produces $10\\times10=100$ small squares of side 1 cm. Hence $1\\,\\mathrm{dm}^2=100\\,\\mathrm{cm}^2$, and similarly $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2$.",
+        "In general, if the ratio of two length units is $k$, the ratio of the corresponding area units is $k^2$. For metre and decimetre $k=10$, so converting m² to dm² multiplies by 100; for metre and centimetre $k=100$, so m² to cm² multiplies by $100^2=10000$. Thus $1\\,\\mathrm{m}^2=100\\,\\mathrm{dm}^2=10000\\,\\mathrm{cm}^2$. A common mistake is to multiply by 10 only, treating area as one-dimensional. Land area also uses hectares and square kilometres: 1 hectare = 10 000 m² and 1 km² = 100 hectares = 1 000 000 m²; here the length ratio between kilometre and metre is 1000, so the area ratio is $1000^2=10^6$.",
+        "Volume works the same way: a cube of side 1 dm can be cut into $10\\times10\\times10=1000$ cubes of side 1 cm, so $1\\,\\mathrm{dm}^3=1000\\,\\mathrm{cm}^3$. Likewise $1\\,\\mathrm{m}^3=1000\\,\\mathrm{dm}^3=10^6\\,\\mathrm{cm}^3$. In general, a length ratio $k$ gives a volume ratio $k^3$.",
+        "Area and volume have different dimensions and cannot be converted into each other: area is two-dimensional and carries square units, while volume is three-dimensional and carries cubic units. One cannot compare 1 m² with 1 m³, nor write $1\\,\\mathrm{m}^2=100\\,\\mathrm{cm}^2$ (it is 10000) or $1\\,\\mathrm{m}^3=1000\\,\\mathrm{cm}^3$ (it is $10^6$).",
+        "Capacity units correspond to volume units: $1\\,\\mathrm{L}=1\\,\\mathrm{dm}^3$ and $1\\,\\mathrm{mL}=1\\,\\mathrm{cm}^3$, hence $1\\,\\mathrm{L}=1000\\,\\mathrm{mL}$ and $1\\,\\mathrm{m}^3=1000\\,\\mathrm{L}$. Capacity is measured inside a container while volume is measured outside; because the walls take up space, the volume of a container is larger than its capacity.",
+        "Example: a cubic fish tank with inner side 30 cm has capacity $30^3=27000$ cm³ $=27000$ mL $=27$ L; a square tablecloth of side 1 m has area $1$ m² $=100$ dm² $=10000$ cm². Before converting, decide whether the quantity is length, area or volume, then move by the rates 10, 100 or 1000."
       ]
     },
     {
@@ -42493,6 +43003,22 @@
         "area-volume-units",
         "average-elementary",
         "rounding-approximation"
+      ],
+      "derivation": [
+        "常用的质量单位是吨、千克、克，相邻两个单位之间的进率是 1000：$1\\,\\mathrm{t}=1000\\,\\mathrm{kg}$，$1\\,\\mathrm{kg}=1000\\,\\mathrm{g}$，所以 $1\\,\\mathrm{t}=10^6\\,\\mathrm{g}$。1 枚 1 元硬币约重 6 克，5 个苹果约重 1 千克，一头大象约重 5 吨。",
+        "质量换算：大单位化小单位乘 1000，小单位化大单位除以 1000。例如 $2.5$ 千克 $=2500$ 克，$6000$ 克 $=6$ 千克，3 吨 200 千克 $=3\\times1000+200=3200$ 千克。复合单位先换成同一个单位再计算。",
+        "时间单位是时、分、秒：$1\\,\\mathrm{h}=60\\,\\mathrm{min}$，$1\\,\\mathrm{min}=60\\,\\mathrm{s}$，所以 $1\\,\\mathrm{h}=60\\times60=3600\\,\\mathrm{s}$；另外 $1$ 日 $=24$ 时。时、分、秒相邻单位之间的进率是 $60$ 而不是 $100$；日与时之间是 $24$，年、月另有规则。",
+        "时间换算例：$180$ 分 $=180\\div60=3$ 时；2 时 15 分 $=2\\times60+15=135$ 分；$5400$ 秒 $=5400\\div60=90$ 分 $=1$ 时 30 分。检验：$135\\div60=2$ 余 15，正好是 2 时 15 分。",
+        "年月日：一年有 12 个月。大月 31 天，是 1、3、5、7、8、10、12 月，共 7 个；小月 30 天，是 4、6、9、11 月，共 4 个；二月平年 28 天、闰年 29 天。平年天数 $=7\\times31+4\\times30+28=217+120+28=365$，闰年再加 1 天，是 366 天。",
+        "闰年判定：公历年份是 4 的倍数的一般是闰年，但整百年必须是 400 的倍数。$2024\\div4=506$，2024 年是闰年；$1900\\div400$ 有余数，1900 年不是闰年；$2000\\div400=5$，2000 年是闰年；$2100\\div400$ 有余数，2100 年也不是闰年。这样规定使历年的平均长度接近回归年。"
+      ],
+      "derivationEn": [
+        "The common units of mass are the tonne, kilogram and gram, and every neighbouring pair steps by 1000: $1\\,\\mathrm{t}=1000\\,\\mathrm{kg}$, $1\\,\\mathrm{kg}=1000\\,\\mathrm{g}$, hence $1\\,\\mathrm{t}=10^6\\,\\mathrm{g}$. A 1-yuan coin has mass about 6 g, five apples about 1 kg, and an elephant about 5 t.",
+        "To convert mass, multiply by 1000 when going from a larger unit to a smaller one, and divide by 1000 in the opposite direction. For example, $2.5$ kg $=2500$ g, $6000$ g $=6$ kg, and 3 t 200 kg $=3\\times1000+200=3200$ kg. For a mixed unit, first express everything in one unit.",
+        "The units of time are the hour, minute and second: $1\\,\\mathrm{h}=60\\,\\mathrm{min}$, $1\\,\\mathrm{min}=60\\,\\mathrm{s}$, so $1\\,\\mathrm{h}=60\\times60=3600\\,\\mathrm{s}$; also $1$ day $=24$ h. The rate between neighbouring units of hours, minutes and seconds is 60 rather than 100; a day has 24 hours, and months and years follow their own rules.",
+        "Time conversions: $180$ min $=180\\div60=3$ h; 2 h 15 min $=2\\times60+15=135$ min; $5400$ s $=5400\\div60=90$ min $=1$ h 30 min. Check: $135\\div60=2$ remainder 15, which is exactly 2 h 15 min.",
+        "Calendar: one year has 12 months. Big months have 31 days — January, March, May, July, August, October and December, seven months; small months have 30 days — April, June, September and November, four months; February has 28 days in a common year and 29 in a leap year. A common year has $7\\times31+4\\times30+28=217+120+28=365$ days, and a leap year has one more, 366 days.",
+        "Leap-year rule: a year divisible by 4 is usually a leap year, but a century year must be divisible by 400. Since $2024\\div4=506$, 2024 is a leap year; $1900\\div400$ leaves a remainder, so 1900 is not; $2000\\div400=5$, so 2000 is; $2100\\div400$ leaves a remainder, so 2100 is not either. This rule keeps the average calendar year close to the solar year."
       ]
     },
     {
@@ -42803,6 +43329,22 @@
         "solid-volume-elementary",
         "observing-objects",
         "area-volume-units"
+      ],
+      "derivation": [
+        "立体图形占有空间。围成立体图形的各个面叫做面；两个面相交的线段叫做棱；几条棱相交的点叫做顶点。面可以是平面，也可以是曲面。长方体、正方体、圆柱和球是小学常见的立体图形，它们的面、棱、顶点数目并非各不相同；例如长方体和正方体都是 6 个面、12 条棱、8 个顶点，而圆柱、球的面数不同。",
+        "长方体有 $6$ 个面，分成 $3$ 组相对的面，每组两个面完全相同；有 $12$ 条棱，分成 $3$ 组，每组 $4$ 条棱互相平行且长度相等；有 $8$ 个顶点。验算：每个顶点连着 $3$ 条棱，$8\\times3=24$；每条棱有 $2$ 个端点，$12\\times2=24$，两种数法一致。",
+        "正方体的 $6$ 个面都是完全相同的正方形，$12$ 条棱长度都相等，也有 $8$ 个顶点。因此正方体满足长方体的全部特征，是特殊的长方体，记作正方体 $\\subset$ 长方体。但长方体不一定 $6$ 个面都是正方形，所以反过来不成立。",
+        "圆柱有 $2$ 个同样大的圆形底面，它们互相平行；还有 $1$ 个弯曲的侧面。两个底面圆周是侧面与底面的交界线，但它们不是两个平面相交形成的棱；圆柱没有顶点。把圆柱的侧面沿高剪开展平，得到一个长方形，它的长等于底面周长，宽等于圆柱的高。",
+        "球的表面全部是曲面，没有平面，没有棱，也没有顶点；从球心到球面上任意一点的距离都相等。球放在平面上只与平面接触于一点，因此能向任意方向滚动。圆柱虽然也能滚动，但它有 $2$ 个平面底面，放倒后只能沿一个方向滚动，两者结构不同。",
+        "数面、棱、顶点时要注意「面」包括曲面：圆柱是 $3$ 个面（$2$ 个平面、$1$ 个曲面），不是 $2$ 个面；球是 $1$ 个曲面，不是 $0$ 个面。仅凭「会滚」不能判断图形，仅凭面数也不能区分长方体与正方体；还要结合面的形状、大小以及棱长关系来判断。"
+      ],
+      "derivationEn": [
+        "A solid figure occupies space. Each surface enclosing it is called a face; a segment where two faces meet is an edge; a point where several edges meet is a vertex. A face may be flat or curved. Cuboids, cubes, cylinders and spheres are common solids in primary school, and their numbers of faces, edges and vertices are not all different: a cuboid and a cube both have 6 faces, 12 edges and 8 vertices.",
+        "A cuboid has $6$ faces in $3$ pairs of opposite faces, the two faces in each pair being identical; it has $12$ edges in $3$ groups of $4$ parallel equal edges; and it has $8$ vertices. Check: each vertex lies on $3$ edges, giving $8\\times3=24$; each edge has $2$ endpoints, giving $12\\times2=24$. The two counts agree.",
+        "A cube has $6$ faces that are all identical squares, $12$ edges of equal length, and $8$ vertices. Hence a cube satisfies every property of a cuboid and is a special cuboid, written cube $\\subset$ cuboid. A cuboid, however, need not have six square faces, so the converse does not hold.",
+        "A cylinder has $2$ equal circular bases that are parallel to each other, and $1$ curved lateral surface. The two base circles are the boundary curves where the lateral surface meets the bases, but they are not edges formed by two intersecting planes; a cylinder has no vertex. Cutting the lateral surface along a height and unrolling it gives a rectangle whose length is the base circumference and whose width is the height.",
+        "The whole surface of a sphere is curved: it has no flat face, no edge and no vertex, and every point on the surface is at the same distance from the centre. A sphere touches a plane at a single point, so it can roll in any direction. A cylinder can also roll, but it has $2$ flat circular bases and, when laid on its side, rolls in only one direction; the two solids are structurally different.",
+        "When counting faces, edges and vertices, remember that a face may be curved: a cylinder has $3$ faces ($2$ flat and $1$ curved), not $2$; a sphere has $1$ curved surface, not $0$ faces. Being able to roll does not identify a solid, and the number of faces alone does not distinguish a cuboid from a cube; the shapes and sizes of the faces and the edge lengths must also be considered."
       ]
     },
     {
@@ -43053,6 +43595,22 @@
       "links": [
         "lines-angle-basics",
         "intersecting-lines"
+      ],
+      "derivation": [
+        "从一点引出两条射线就组成一个角：这个点是顶点，两条射线是角的两条边。角也可以看成一条射线绕端点旋转形成的图形。角的大小只由两条边张开的程度决定，与边画得多长无关；比较两个角时，把顶点对齐、一条边重合，再看另一条边张开的大小。",
+        "把一个周角（一整圈）平均分成 360 份，每一份所对的角就是 1 度，记作 $1^\\circ$。因此周角是 $360^\\circ$，平角（两条边成一条直线）是 $180^\\circ$，直角是 $90^\\circ$。度以下还有分、秒：$1^\\circ=60'$，$1'=60''$，是六十进制，不是十进制。",
+        "按大小分类：$0^\\circ<\\alpha<90^\\circ$ 是锐角，$\\alpha=90^\\circ$ 是直角，$90^\\circ<\\alpha<180^\\circ$ 是钝角，$\\alpha=180^\\circ$ 是平角，$\\alpha=360^\\circ$ 是周角。边界要分清：等于 90° 的角不能叫锐角，等于 180° 的角也不能叫钝角；0° 与 360° 的两条边重合，但表示的旋转程度不同。",
+        "由定义直接得到：$1$ 平角 $=180^\\circ=2\\times90^\\circ=2$ 直角；$1$ 周角 $=360^\\circ=2\\times180^\\circ=2$ 平角 $=4$ 直角。反过来，半个平角是 $90^\\circ$，恰好是一个直角；四分之一个周角也是 $90^\\circ$。这些关系常用来验算量角结果。",
+        "量角器是半圆，把半圆平均分成 180 份，每份 $1^\\circ$。量角时做到「中心对顶点、零刻度线对一边」，另一条边所对的刻度就是角的度数；量角器有内、外两圈刻度，先看零刻度线用的是哪一圈，再读同一圈。若一条边没有对准零刻度，就用两条边读数之差计算，例如 $125^\\circ-65^\\circ=60^\\circ$。",
+        "角的加减用六十进制：$35^\\circ40'+25^\\circ35'=60^\\circ75'=61^\\circ15'$，因为 $75'=60'+15'=1^\\circ15'$。两个角相加得 $90^\\circ$ 时互为余角，相加得 $180^\\circ$ 时互为补角；例如 $35^\\circ$ 的余角是 $55^\\circ$，补角是 $145^\\circ$。"
+      ],
+      "derivationEn": [
+        "Two rays drawn from one point form an angle: the point is the vertex and the rays are its sides. An angle can also be viewed as what a ray sweeps out while rotating about its endpoint. Its size depends only on how widely the sides open, not on how long they are drawn; to compare two angles, align the vertices and one pair of sides, then compare the openings.",
+        "Divide a full turn into 360 equal parts; the angle subtended by one part is 1 degree, written $1^\\circ$. Hence a full angle is $360^\\circ$, a straight angle (whose sides form a line) is $180^\\circ$, and a right angle is $90^\\circ$. Below degrees are minutes and seconds: $1^\\circ=60'$ and $1'=60''$, a sexagesimal rather than decimal system.",
+        "By size: $0^\\circ<\\alpha<90^\\circ$ is acute, $\\alpha=90^\\circ$ is right, $90^\\circ<\\alpha<180^\\circ$ is obtuse, $\\alpha=180^\\circ$ is straight, and $\\alpha=360^\\circ$ is full. Mind the boundaries: an angle equal to 90° is not acute, and one equal to 180° is not obtuse; at 0° and 360° the sides coincide, but the amounts of rotation differ.",
+        "The definitions give $1$ straight angle $=180^\\circ=2\\times90^\\circ=2$ right angles, and $1$ full angle $=360^\\circ=2\\times180^\\circ=2$ straight angles $=4$ right angles. Conversely, half a straight angle is $90^\\circ$, exactly one right angle, and a quarter of a full angle is also $90^\\circ$. These relations serve as checks on protractor readings.",
+        "A protractor is a semicircle divided into 180 equal parts, each $1^\\circ$. To measure, place the centre on the vertex and the zero line along one side; the mark met by the other side gives the angle. A protractor has inner and outer scales, so first note which zero line is used and read the same scale. If a side is not on zero, subtract the two readings, e.g. $125^\\circ-65^\\circ=60^\\circ$.",
+        "Add and subtract angles in sexagesimal form: $35^\\circ40'+25^\\circ35'=60^\\circ75'=61^\\circ15'$, because $75'=60'+15'=1^\\circ15'$. Two angles are complementary when they sum to $90^\\circ$ and supplementary when they sum to $180^\\circ$; for example, $35^\\circ$ has complement $55^\\circ$ and supplement $145^\\circ$."
       ]
     },
     {
@@ -43235,6 +43793,22 @@
         "area-elementary",
         "length-units",
         "area-volume-units"
+      ],
+      "derivation": [
+        "封闭图形一周的长度叫做它的周长。对多边形，周长等于所有边长之和：$C=a+b+c+\\cdots$，单位是厘米、分米、米等长度单位。只有封闭图形才有确定的周长；不封闭的折线只有长度，不能称为周长。",
+        "长方形对边相等。设长为 $a$、宽为 $b$，四条边依次为 $a,b,a,b$，所以 $C=a+b+a+b=2(a+b)$。反过来，已知周长 $C$ 和宽 $b$，则 $a=\\frac{C}{2}-b$，因为 $\\frac{C}{2}=a+b$ 正好是一条长与一条宽的和。",
+        "正方形四条边都等于 $a$，所以 $C=4a$；反过来 $a=\\frac{C}{4}$。例如用一根长 $36$ 厘米的铁丝围成一个正方形（接头处忽略不计），边长是 $36\\div4=9$ 厘米。这里铁丝的总长度被四条相等的边平分。",
+        "三角形的周长是三边之和 $C=a+b+c$；一般多边形逐边相加。求组合图形的周长时，只加最外面一圈的边，内部的分割线不是周长的一部分。把两个图形拼在一起时，拼合处被遮住，不再计入外边界。",
+        "周长与面积是两种不同的量：周长是一维边界的长度，面积是二维区域的大小。周长相等的图形面积不一定相等，例如 $8\\times2$ 的长方形与边长为 $5$ 的正方形周长都为 $20$，面积分别为 $16$ 与 $25$。因此不能由周长直接判断面积，也不能把长度单位与面积单位混用。",
+        "例：长方形花坛长 $8$ 米、宽 $5$ 米，沿花坛走一圈的路程是 $C=2(8+5)=26$ 米。若篱笆总长 $26$ 米且宽为 $5$ 米，则长 $=\\frac{26}{2}-5=8$ 米。计算时应先统一单位，再代入公式。"
+      ],
+      "derivationEn": [
+        "The perimeter of a closed figure is the distance all the way round it. For a polygon it equals the sum of all side lengths, $C=a+b+c+\\cdots$, measured in centimetres, decimetres, metres and other length units. Only a closed figure has a definite perimeter; an open broken line has a length but not a perimeter.",
+        "Opposite sides of a rectangle are equal. With length $a$ and width $b$, the four sides are $a,b,a,b$, so $C=a+b+a+b=2(a+b)$. Conversely, given the perimeter $C$ and the width $b$, we get $a=\\frac{C}{2}-b$, because $\\frac{C}{2}=a+b$ is exactly one length plus one width.",
+        "All four sides of a square equal $a$, so $C=4a$; conversely $a=\\frac{C}{4}$. For example, a $36$ cm wire bent into a square (ignoring the join) gives side $36\\div4=9$ cm. The total length of the wire is divided equally among the four sides.",
+        "The perimeter of a triangle is the sum of its three sides, $C=a+b+c$; for a general polygon, add all sides. For a composite figure, add only the edges on the outer boundary; internal dividing lines are not part of the perimeter. When two figures are joined, the joined part is hidden and no longer counts as outer boundary.",
+        "Perimeter and area are different quantities: perimeter is the one-dimensional length of the boundary, while area is the size of the two-dimensional region. Figures with equal perimeters need not have equal areas: an $8\\times2$ rectangle and a square of side $5$ both have perimeter $20$, but their areas are $16$ and $25$. Hence perimeter alone cannot determine area, and length units must not be mixed with area units.",
+        "Example: a rectangular flower bed is $8$ m long and $5$ m wide; walking once around it covers $C=2(8+5)=26$ m. If a fence of total length $26$ m has width $5$ m, then its length is $\\frac{26}{2}-5=8$ m. Convert all lengths to the same unit before substituting into the formula."
       ]
     },
     {
@@ -43534,6 +44108,22 @@
         "perimeter-elementary",
         "area-volume-units",
         "parallelogram"
+      ],
+      "derivation": [
+        "面积是物体表面或封闭图形内部区域的大小。规定边长为 $1$ 厘米的正方形面积为 $1$ 平方厘米，面积用平方厘米、平方分米、平方米等面积单位度量。它度量的是二维区域的大小；周长度量的是围成一圈的边的总长，二者单位不同（平方单位与长度单位），不能直接比较数值大小。",
+        "把长方形划分成边长为 $1$ 的小正方形网格：设 $a,b$ 为正整数（使用同一长度单位）；若长为 $a$、宽为 $b$，每一行有 $a$ 个，共有 $b$ 行，所以小正方形的总数为 $a\\times b$。因此 $S_{\\text{长方形}}=ab$。当 $a=b$ 时得到正方形，$S=a^2$；结果的单位是对应的平方单位。",
+        "设平行四边形的底为 $a$，这条底对应的高为 $h$，即 $h$ 与底垂直。沿高剪下一个直角三角形，把它平移到另一侧，恰好补成一个长为 $a$、宽为 $h$ 的长方形；剪拼只改变位置，不改变面积。因此 $S_{\\text{平行四边形}}=ah$。注意高必须垂直于所选的底，不能用邻边代替高。",
+        "取两个与已知三角形完全一样的三角形（对应边相等），把其中一个旋转 $180^\\circ$ 后与另一个拼合，得到底为 $a$、高为 $h$ 的平行四边形。平行四边形面积是 $ah$，两个三角形面积相等，所以每个三角形的面积 $S=\\frac{1}{2}ah$。若两个三角形只是相似而不全等，就不能拼成这个平行四边形。",
+        "设梯形的上底、下底分别为 $a,b$，高为 $h$，即两底之间的垂直距离。取两个完全一样的梯形，把其中一个旋转 $180^\\circ$ 后拼在一起，得到底为 $a+b$、高为 $h$ 的平行四边形。于是 $2S=(a+b)h$，即 $S=\\frac{(a+b)h}{2}$。上底、下底必须是互相平行的那两条边。",
+        "面积单位换算按长度单位进率的平方：$1\\text{ m}^2=100\\text{ dm}^2$，$1\\text{ dm}^2=100\\text{ cm}^2$。组合图形可以用分割或添补的方法转化为上述基本图形再求和。还要注意：周长相同不能推出面积相同，例如长 $8$、宽 $2$ 与边长 $5$ 的正方形周长都是 $20$，面积却分别为 $16$ 和 $25$。"
+      ],
+      "derivationEn": [
+        "Area is the size of the region inside a surface or a closed figure. A square of side $1$ cm has area $1\\text{ cm}^2$, and area is measured in square centimetres, square decimetres, square metres, and so on. Area measures a two-dimensional region, whereas perimeter measures the total length of the boundary; their units differ (square units versus length units), so the two numerical values cannot be compared directly.",
+        "Divide a rectangle into a grid of unit squares of side $1$: Assume $a,b$ are positive integers in the chosen unit; if the length is $a$ and the width is $b$, each row contains $a$ squares and there are $b$ rows, so the total number of squares is $a\\times b$. Hence $S_{\\text{rectangle}}=ab$. When $a=b$ the rectangle is a square and $S=a^2$; the unit of the result is the corresponding square unit.",
+        "Let a parallelogram have base $a$ and let $h$ be the height corresponding to this base, so $h$ is perpendicular to the base. Cut off a right triangle along the height and translate it to the other side; it exactly completes a rectangle of length $a$ and width $h$. Cutting and translating change only position, not area, so $S_{\\text{parallelogram}}=ah$. The height must be perpendicular to the chosen base; a neighbouring side cannot replace the height.",
+        "Take two triangles exactly congruent to the given triangle (all corresponding sides equal), rotate one through $180^\\circ$, and fit it with the other to form a parallelogram with base $a$ and height $h$. The parallelogram has area $ah$, and the two triangles have equal areas, so each triangle has area $S=\\frac{1}{2}ah$. If the two triangles are merely similar but not congruent, they cannot form this parallelogram.",
+        "Let a trapezoid have upper base $a$, lower base $b$ and height $h$, the perpendicular distance between the two bases. Take two identical trapezoids, rotate one through $180^\\circ$ and join them to form a parallelogram with base $a+b$ and height $h$. Thus $2S=(a+b)h$, so $S=\\frac{(a+b)h}{2}$. The upper and lower bases must be the two parallel sides.",
+        "Area units convert by the square of the length conversion factor: $1\\text{ m}^2=100\\text{ dm}^2$ and $1\\text{ dm}^2=100\\text{ cm}^2$. A composite figure can be split or completed into the basic figures above, and the areas then added. Also, equal perimeters do not imply equal areas: a rectangle $8$ by $2$ and a square of side $5$ both have perimeter $20$, but their areas are $16$ and $25$."
       ]
     },
     {
@@ -43713,6 +44303,22 @@
         "circle-junior",
         "perimeter-elementary",
         "area-elementary"
+      ],
+      "derivation": [
+        "圆是平面上到定点 $O$（圆心）的距离等于定长 $r$（半径）的所有点组成的图形。圆心决定圆的位置，半径决定圆的大小。通过圆心并且两端都在圆上的线段是直径 $d$；在同一个圆中 $d=2r$，即 $r=\\frac{d}{2}$。",
+        "任意圆的周长 $C$ 与直径 $d$ 的比值是一个常数，记作 $\\pi$。测量表明周长总是直径的 $3$ 倍多，且 $\\pi=3.1415926\\ldots$ 是无限不循环小数，计算时常取 $3.14$。由 $\\frac{C}{d}=\\pi$ 得 $C=\\pi d=2\\pi r$。$\\pi$ 是一个比值，没有单位；周长的单位与半径相同。",
+        "把圆平均分成 $n$ 个全等的小扇形，再交替拼成一个近似长方形：长约为圆周长的一半 $\\pi r$，宽为半径 $r$。拼成图形的面积始终等于圆的面积；$n$ 越大，它的形状越接近长为 $\\pi r$、宽为 $r$ 的长方形，因此圆面积等于该长方形面积 $\\pi r^2$。因此 $S_{\\text{圆}}=\\pi r^2$。注意 $r^2=r\\times r$，不是 $2r$。",
+        "半径 $r=3$ 厘米时，$C=2\\pi r=2\\times3.14\\times3=18.84$ 厘米；$S=\\pi r^2=3.14\\times3^2=3.14\\times9=28.26$ 平方厘米。两个结果的单位不同，不能比较数值大小。若题目给出的是直径 $d$，要先求 $r=\\frac{d}{2}$，再算面积。",
+        "半圆的弧长是圆周长的一半 $\\pi r$，但半圆图形的周长还要加上一条直径 $2r$，所以 $C_{\\text{半圆}}=\\pi r+2r$；面积是圆面积的一半，$S=\\frac{1}{2}\\pi r^2$。例：直径 $8$ 米，则 $r=4$ 米，周长 $=3.14\\times4+8=20.56$ 米，面积 $=3.14\\times16\\div2=25.12$ 平方米。",
+        "圆环由半径为 $R$ 的外圆挖去同心的半径为 $r$ 的内圆得到，其中 $R>r$，面积 $S=\\pi R^2-\\pi r^2=\\pi(R^2-r^2)$。圆心角为 $n^\\circ$ 的扇形占整个圆的 $\\frac{n}{360}$，所以 $S=\\frac{n}{360}\\pi r^2$，其中 $0\\le n\\le360$；它的弧长为 $\\frac{n}{360}\\cdot2\\pi r$。"
+      ],
+      "derivationEn": [
+        "A circle is the set of all points in the plane at a fixed distance $r$ (the radius) from a fixed point $O$ (the centre). The centre fixes the position of the circle and the radius fixes its size. A segment through the centre with both ends on the circle is a diameter $d$; in the same circle $d=2r$, that is, $r=\\frac{d}{2}$.",
+        "For every circle the ratio of the circumference $C$ to the diameter $d$ is a constant denoted $\\pi$. Measurements show that the circumference is always a little more than $3$ diameters, and $\\pi=3.1415926\\ldots$ is an infinite non-repeating decimal, usually taken as $3.14$ in calculations. From $\\frac{C}{d}=\\pi$ we get $C=\\pi d=2\\pi r$. The number $\\pi$ is a ratio and has no unit; the circumference has the same unit as the radius.",
+        "Divide a circle into $n$ congruent small sectors and rearrange them alternately into an approximate rectangle whose length is half the circumference $\\pi r$ and whose width is the radius $r$. The rearranged figure always has exactly the circle's area; as $n$ grows, its shape approaches a rectangle of length $\\pi r$ and width $r$, so the circle's area equals $\\pi r^2$. Hence $S_{\\text{circle}}=\\pi r^2$. Note that $r^2=r\\times r$, not $2r$.",
+        "For radius $r=3$ cm, $C=2\\pi r=2\\times3.14\\times3=18.84$ cm and $S=\\pi r^2=3.14\\times3^2=3.14\\times9=28.26\\text{ cm}^2$. The two results have different units, so their numerical values cannot be compared. If the diameter $d$ is given, first find $r=\\frac{d}{2}$ and then compute the area.",
+        "The arc of a semicircle has length equal to half the circumference, $\\pi r$, but the perimeter of the semicircular figure also includes the diameter $2r$, so $C_{\\text{semicircle}}=\\pi r+2r$. Its area is half the circle's area, $S=\\frac{1}{2}\\pi r^2$. Example: with diameter $8$ m, $r=4$ m, the perimeter is $3.14\\times4+8=20.56$ m and the area is $3.14\\times16\\div2=25.12\\text{ m}^2$.",
+        "A ring is obtained by removing a concentric inner circle of radius $r$ from an outer circle of radius $R$, where $R>r$; its area is $S=\\pi R^2-\\pi r^2=\\pi(R^2-r^2)$. A sector with central angle $n^\\circ$ occupies the fraction $\\frac{n}{360}$ of the whole circle, so $S=\\frac{n}{360}\\pi r^2$ with $0\\le n\\le360$; its arc length is $\\frac{n}{360}\\cdot2\\pi r$."
       ]
     },
     {
@@ -44080,6 +44686,22 @@
         "solid-figures-elementary",
         "circle-elementary",
         "area-volume-units"
+      ],
+      "derivation": [
+        "物体所占空间的大小叫做体积，用立方厘米、立方分米、立方米等体积单位度量。容器内部能容纳物体的体积叫做容积，常用升（L）、毫升（mL）：$1\\text{ L}=1\\text{ dm}^3$，$1\\text{ mL}=1\\text{ cm}^3$。体积从外面度量物体占的空间，容积从里面度量容器能装多少；体积单位与容积单位可以换算（$1\\text{ L}=1\\text{ dm}^3$，$1\\text{ mL}=1\\text{ cm}^3$），但同一容器的体积一般大于容积，不能把二者直接等同。",
+        "设 $a,b,h$ 为正整数（以 $1$ 为单位），把长方体划分成棱长为 $1$ 的单位小正方体：每行 $a$ 个，有 $b$ 行，共 $h$ 层，所以总数为 $a\\times b\\times h$。因此 $V_{\\text{长方体}}=abh$。由于底面积是 $ab$，也可以写成 $V=S_{\\text{底}}h$。当 $a=b=h$ 时得到正方体，$V=a^3$；这里 $a^3=a\\cdot a\\cdot a$，不是 $3a$。",
+        "把圆柱的底面分成许多相等的扇形，再沿高切开，可以拼成一个近似长方体：底面积仍为 $\\pi r^2$，高为 $h$，所以 $V_{\\text{圆柱}}=\\pi r^2h$。分割越细，拼成的立体越接近长方体。这个公式适用于直圆柱，其中 $r$ 是底面半径，$h$ 是两底面之间的垂直距离。",
+        "等底等高时，圆锥的体积是圆柱的 $\\frac{1}{3}$：用装满沙子的圆锥向圆柱里倒，倒 $3$ 次恰好装满，所以 $3V_{\\text{锥}}=V_{\\text{柱}}=\\pi r^2h$，即 $V_{\\text{锥}}=\\frac{1}{3}\\pi r^2h$。条件「等底等高」不能省略；若底面积或高不同，必须分别计算，不能直接取三分之一。",
+        "表面积是所有面的面积之和，单位是平方单位，与体积的立方单位不同。长方体 $S=2(ab+ah+bh)$；正方体 $S=6a^2$；圆柱 $S=2\\pi rh+2\\pi r^2$，其中侧面展开成长方形，还要加上两个底面。例：长 $5$、宽 $3$、高 $4$ 厘米的长方体，$V=60$ 立方厘米，$S=2(15+20+12)=94$ 平方厘米。",
+        "体积单位之间的进率是长度单位进率的立方：$1\\text{ m}^3=1000\\text{ dm}^3$，$1\\text{ dm}^3=1000\\text{ cm}^3$，所以 $1\\text{ m}^3=10^6\\text{ cm}^3$。例：底面半径 $2$ 厘米、高 $6$ 厘米的圆柱与它等底等高的圆锥，$V_{\\text{柱}}=3.14\\times4\\times6=75.36$ 立方厘米，$V_{\\text{锥}}=75.36\\div3=25.12$ 立方厘米。容积换算时 $1\\text{ L}=1\\text{ dm}^3=1000\\text{ mL}$。"
+      ],
+      "derivationEn": [
+        "The volume of a solid is the amount of space it occupies, measured in cubic centimetres, cubic decimetres, cubic metres and similar units. The capacity of a container is the volume it can hold inside, commonly measured in litres (L) and millilitres (mL): $1\\text{ L}=1\\text{ dm}^3$ and $1\\text{ mL}=1\\text{ cm}^3$. Volume measures the space occupied from outside, while capacity measures how much a container holds from inside; their units convert ($1\\text{ L}=1\\text{ dm}^3$, $1\\text{ mL}=1\\text{ cm}^3$), but a container's volume is generally greater than its capacity, so the two quantities are not interchangeable.",
+        "Assume $a,b,h$ are positive integers in the chosen unit; divide the cuboid into unit cubes of edge $1$: each row has $a$ cubes, there are $b$ rows and $h$ layers, so the total number is $a\\times b\\times h$. Hence $V_{\\text{cuboid}}=abh$. Since the base area is $ab$, this can also be written $V=S_{\\text{base}}h$. When $a=b=h$ the solid is a cube and $V=a^3$; here $a^3=a\\cdot a\\cdot a$, not $3a$.",
+        "Divide the base of a cylinder into many equal sectors and cut along a height; the pieces rearrange into an approximate cuboid with base area $\\pi r^2$ and height $h$. Therefore $V_{\\text{cylinder}}=\\pi r^2h$. The finer the division, the closer the solid is to a cuboid. This formula applies to a right cylinder, where $r$ is the base radius and $h$ is the perpendicular distance between the two bases.",
+        "When a cone and a cylinder have equal bases and equal heights, the cone's volume is $\\frac{1}{3}$ of the cylinder's: filling the cylinder with sand using the cone takes exactly $3$ cone-loads, so $3V_{\\text{cone}}=V_{\\text{cylinder}}=\\pi r^2h$, hence $V_{\\text{cone}}=\\frac{1}{3}\\pi r^2h$. The condition 'equal bases and equal heights' cannot be omitted; if either differs, compute separately rather than taking one third.",
+        "Surface area is the sum of the areas of all faces, measured in square units, which differ from the cubic units of volume. For a cuboid $S=2(ab+ah+bh)$; for a cube $S=6a^2$; for a cylinder $S=2\\pi rh+2\\pi r^2$, where the lateral surface unrolls to a rectangle and the two bases are added. Example: a cuboid $5$ by $3$ by $4$ cm has $V=60\\text{ cm}^3$ and $S=2(15+20+12)=94\\text{ cm}^2$.",
+        "Volume units convert by the cube of the length conversion factor: $1\\text{ m}^3=1000\\text{ dm}^3$, $1\\text{ dm}^3=1000\\text{ cm}^3$, so $1\\text{ m}^3=10^6\\text{ cm}^3$. Example: a cylinder of base radius $2$ cm and height $6$ cm, together with a cone of the same base and height, has $V_{\\text{cylinder}}=3.14\\times4\\times6=75.36\\text{ cm}^3$ and $V_{\\text{cone}}=75.36\\div3=25.12\\text{ cm}^3$. For capacity, $1\\text{ L}=1\\text{ dm}^3=1000\\text{ mL}$."
       ]
     },
     {
@@ -44328,6 +44950,22 @@
         "axial-symmetry",
         "central-symmetry-rotation",
         "congruent-triangles"
+      ],
+      "derivation": [
+        "平移、旋转和轴对称都是平面图形的变换。三者的共同点是：变换前后两个图形全等，即对应边相等、对应角相等，形状和大小都不改变；改变的只是位置或方向。因此可以用对应点、对应边来描述变换前后的关系。",
+        "平移由方向（平移向量）和距离完全确定。图形上每一点都沿同一方向移动同样的距离；对应点之间的连线互相平行（或在同一直线上）且长度相等，对应边也平行且相等。平移不改变图形的方向。例：小车沿直路前进 $10$ 米，车身上每一点都平移了 $10$ 米。",
+        "旋转由旋转中心 $O$、方向（顺时针或逆时针）和角度 $\\theta$ 确定。图形上每一点都绕 $O$ 转过同样的角 $\\theta$，对应点到 $O$ 的距离保持不变。旋转不改变形状和大小，但会改变方向；当 $\\theta=360^\\circ$ 时图形回到原来的位置。描述旋转时，中心、方向、角度三个要素缺一不可。",
+        "如果沿直线 $l$ 对折后，图形在 $l$ 两侧的部分完全重合，那么这个图形是轴对称图形，$l$ 是它的对称轴。此时每一对对应点的连线都被 $l$ 垂直平分；对应线段相等，对应角相等。轴对称会改变图形的方向（左右翻转），所以一般不能由平移或旋转得到。",
+        "常见图形的对称轴条数：线段有 $2$ 条（垂直平分线以及它所在的直线），长方形有 $2$ 条，正方形有 $4$ 条，等腰三角形有 $1$ 条，等边三角形有 $3$ 条，圆有无数条（每条直径所在的直线都是对称轴）。一般的平行四边形（非矩形、非菱形）没有对称轴。",
+        "判断变换要看对应关系，不能只看位置：对应点连线平行、同向且等长（各点位移向量相同），才是平移；对应点绕同一点按同一方向转过相同角度，才是旋转；对应点连线被同一直线垂直平分，是轴对称。例：方格纸上点 $A$ 向右平移 $4$ 格、向上平移 $2$ 格，每一个对应点都作同样的移动，图形形状和大小不变。"
+      ],
+      "derivationEn": [
+        "Translation, rotation and axial symmetry are transformations of plane figures. They share one property: the figure and its image are congruent, so corresponding sides and corresponding angles are equal, and neither shape nor size changes; only position or orientation changes. Corresponding points and corresponding sides can therefore be used to describe the relation between the figure and its image.",
+        "A translation is completely determined by a direction (translation vector) and a distance. Every point of the figure moves the same distance in the same direction; segments joining corresponding points are parallel (or collinear) and equal, and corresponding sides are parallel and equal. A translation does not change the orientation of the figure. Example: a car moving $10$ m along a straight road translates every point of its body by $10$ m.",
+        "A rotation is determined by its centre $O$, its direction (clockwise or anticlockwise) and its angle $\\theta$. Every point of the figure turns through the same angle $\\theta$ about $O$, and each corresponding point keeps its distance from $O$. Rotation preserves shape and size but changes orientation; when $\\theta=360^\\circ$ the figure returns to its original position. Centre, direction and angle are all needed to describe a rotation.",
+        "If a figure can be folded along a line $l$ so that the two parts on opposite sides of $l$ coincide exactly, then the figure is axially symmetric and $l$ is an axis of symmetry. Every segment joining a pair of corresponding points is perpendicularly bisected by $l$; corresponding segments and corresponding angles are equal. Axial symmetry reverses orientation (a left-right flip), so in general it cannot be produced by a translation or a rotation.",
+        "Numbers of axes of symmetry for common figures: a line segment has $2$ (its perpendicular bisector and the line containing it), a rectangle has $2$, a square has $4$, an isosceles triangle has $1$, an equilateral triangle has $3$, and a circle has infinitely many (every line through a diameter is an axis). A general parallelogram that is neither a rectangle nor a rhombus has no axis of symmetry.",
+        "To identify a transformation, examine corresponding points rather than position alone: if the segments joining corresponding points are parallel, codirected and equal (the same displacement vector), the transformation is a translation; if corresponding points turn about the same point in the same direction through the same angle, it is a rotation; if the joining segments are perpendicularly bisected by one line, it is axial symmetry. Example: on squared paper, move point $A$ $4$ squares right and $2$ squares up; every corresponding point makes the same move, so shape and size are unchanged."
       ]
     },
     {
@@ -44516,6 +45154,22 @@
         "projection-view",
         "solid-figures-elementary",
         "solid-volume-elementary"
+      ],
+      "derivation": [
+        "观察物体时要说明观察方向。小学通常从前面（正面）、上面、左面三个方向观察，视线分别垂直于对应的面，得到的是正投影视图：从前面看到长 $\\times$ 高，从上面看到长 $\\times$ 宽，从左面看到宽 $\\times$ 高。方向不同，看到的形状可能不同。",
+        "长方体长 $6$、宽 $4$、高 $2$（单位：厘米）：从前面看是 $6\\times2$ 的长方形，从上面看是 $6\\times4$ 的长方形，从左面看是 $4\\times2$ 的长方形。三个视图的边由不同的两条棱决定，所以大小一般不同；只有当相应的两条棱相等时，两个视图才可能相同。",
+        "正方体棱长为 $a$，从前面、上面、左面看到的都是边长为 $a$ 的正方形，三个视图完全相同。反过来，若一个长方体在三个方向上的视图都是同样大小的正方形，则它的长、宽、高都等于 $a$，这个长方体就是正方体。但视图相同并不意味着物体内部结构相同。",
+        "只看一个方向不能确定物体的形状。例：$3\\times3\\times3$ 的正方体与 $3\\times1\\times3$ 的长方体（长 $3$、宽 $1$、高 $3$，把 $3\\times3$ 的面朝前），从前面看都是 $3\\times3$ 的正方形；但从上面看分别是 $3\\times3$ 与 $3\\times1$ 的长方形，从左面看分别是 $3\\times3$ 与 $1\\times3$ 的长方形。因此必须结合多个方向的视图。",
+        "用小正方体搭立体图形时，从上面看到的图形给出「占地」位置，即哪几格有方块；从前面看到的图形给出每一列的最大高度；从左面看到的图形给出每一行的最大高度。先按俯视图摆好位置，再用正视图和左视图确定各位置高度的上限（每列、每行的最大值），据此选择一种满足所有最大值的摆法；搭法不一定唯一。",
+        "三个视图能提供很强的限制，但不一定能唯一确定物体。例：俯视图是 $2\\times2$ 的四个方格，正视图两列的高度都为 $2$，左视图两行的高度都为 $2$；高度矩阵 $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ 与 $\\begin{pmatrix}2&2\\\\2&1\\end{pmatrix}$ 都满足这些视图，却是不同的搭法。因此读图时还要说明是否允许隐藏结构，并检查所有视图是否同时满足。"
+      ],
+      "derivationEn": [
+        "When observing an object, state the direction of view. Primary school usually uses three directions: from the front, from above and from the left, with the line of sight perpendicular to the corresponding face. These are orthographic views: from the front one sees length $\\times$ height, from above length $\\times$ width, and from the left width $\\times$ height. Different directions may give different shapes.",
+        "A cuboid of length $6$, width $4$ and height $2$ (in centimetres) looks like a $6\\times2$ rectangle from the front, a $6\\times4$ rectangle from above, and a $4\\times2$ rectangle from the left. The sides of the three views are determined by different pairs of edges, so their sizes generally differ; two views can coincide only when the corresponding pair of edges are equal.",
+        "For a cube of edge $a$, the views from the front, from above and from the left are all squares of side $a$, so the three views are identical. Conversely, if a cuboid has square views of the same size in all three directions, then its length, width and height all equal $a$, so the cuboid is a cube. Identical views, however, do not imply identical internal structure.",
+        "A single view cannot determine the shape of an object. Example: a $3\\times3\\times3$ cube and a $3\\times1\\times3$ cuboid (length $3$, width $1$, height $3$, with a $3\\times3$ face at the front) both look like a $3\\times3$ square from the front; from above they look like $3\\times3$ and $3\\times1$ rectangles respectively, and from the left like $3\\times3$ and $1\\times3$ rectangles. Several directions must therefore be combined.",
+        "When building with unit cubes, the view from above gives the footprint, that is, which grid positions contain cubes; the view from the front gives the maximum height of each column; the view from the left gives the maximum height of each row. Place the cubes according to the top view first, then use the front and left views to bound the height at each position (column/row maxima), and choose one assignment satisfying all maxima; the solid need not be unique.",
+        "Three views impose strong constraints but need not determine the solid uniquely. Example: the top view is a full $2\\times2$ block of four squares, the front view has height $2$ in both columns, and the left view has height $2$ in both rows. The height matrices $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ and $\\begin{pmatrix}2&2\\\\2&1\\end{pmatrix}$ both satisfy these views but describe different arrangements. When reading views, one must therefore state whether hidden structure is allowed and check that all views hold simultaneously."
       ]
     },
     {
@@ -44605,6 +45259,22 @@
         "data-analysis",
         "average-elementary",
         "percentage-elementary"
+      ],
+      "derivation": [
+        "统计图把整理后的数据画成图形，便于读取、比较和分析。读图前先看标题、横轴与纵轴分别表示什么、单位是什么、每一格代表多少；同一组数据用不同统计图表达时，强调的信息不同。小学常见的统计图有条形统计图、折线统计图和扇形统计图。",
+        "条形统计图用直条的长度表示数量的多少，直条越长表示数量越大。比较数量时，各直条必须从同一基线（通常为 $0$）量起，否则长度差会被夸大；读数时用「格数 $\\times$ 每格代表的单位数」，不能直接把格数当作数量。复式条形统计图把两组或多组直条并列画出，便于比较。",
+        "折线统计图把数据点按时间顺序用线段连接：线段上升表示数量增加，下降表示数量减少；在横轴时间间隔相同的前提下，线段越陡，变化越快。它适合观察变化趋势，但相邻数据点之间的连线只是示意，不能据此断定两个时刻之间的实际数值；要读准确值必须看数据点或统计表。",
+        "扇形统计图把总数看作整个圆，即 $100\\%$，每个扇形表示一部分。若某部分的数量为 $m$、总数为 $N$（$N>0$），则它占总数的百分比为 $\\frac{m}{N}\\times100\\%$，对应扇形的圆心角为 $360^\\circ\\times\\frac{m}{N}$。所有部分的百分比之和为 $100\\%$，圆心角之和为 $360^\\circ$；已知百分比求数量时还必须知道总数。",
+        "选择统计图要看目的：比较各类数量的多少，用条形统计图；表示同一对象随时间增减变化，用折线统计图；表示各部分数量与总数的关系，用扇形统计图。只含一组数据的是单式统计图，含两组或多组数据的是复式统计图，便于对照；扇形统计图不适合比较不同总数背景下的绝对数量。",
+        "读图要防止误读：检查纵轴是否从 $0$ 开始、单位和每格数值是否看清、复式图的图例是否对应。例：某班共有 $40$ 人，喜欢篮球的有 $16$ 人，则扇形图中篮球所占百分比为 $16\\div40\\times100\\%=40\\%$，对应圆心角为 $360^\\circ\\times40\\%=144^\\circ$；其余部分合计占 $60\\%$，总和为 $100\\%$。"
+      ],
+      "derivationEn": [
+        "A statistical chart draws organized data as a figure for easy reading, comparison and analysis. Before reading a chart, check the title, what the horizontal and vertical axes represent, the unit, and how much one grid square stands for; the same data drawn in different charts emphasizes different information. The common charts in primary school are the bar chart, the line chart and the pie chart.",
+        "A bar chart uses the length of bars to represent amounts: the longer the bar, the larger the amount. To compare amounts, all bars must be measured from the same baseline (usually $0$); otherwise differences in length are exaggerated. Read a value as 'number of grid squares $\\times$ value per square', not as the number of squares alone. A multiple bar chart places two or more sets of bars side by side for comparison.",
+        "A line chart joins data points in time order with segments: a rising segment means an increase, a falling segment a decrease; when the time intervals on the horizontal axis are equal, a steeper segment means a faster change. It is suited to trends, but the segments between adjacent data points are only a guide and do not determine the actual values between those times; exact values must be read from the points or the data table.",
+        "A pie chart takes the total as the whole circle, namely $100\\%$, and each sector represents one part. If a part has amount $m$ and the total is $N$ ($N>0$), its percentage of the total is $\\frac{m}{N}\\times100\\%$, and the corresponding central angle is $360^\\circ\\times\\frac{m}{N}$. All percentages add up to $100\\%$ and all central angles to $360^\\circ$; to recover an amount from a percentage, the total must also be known.",
+        "Choose a chart according to the purpose: to compare amounts of different categories, use a bar chart; to show how one quantity rises and falls over time, use a line chart; to show the relation of parts to the whole, use a pie chart. A single chart contains one data set, while a multiple chart contains two or more sets for comparison; a pie chart is not suitable for comparing absolute amounts when the totals differ.",
+        "Guard against misreading: check whether the vertical axis starts at $0$, whether the unit and the value per grid square are clear, and whether the legend of a multiple chart is matched correctly. Example: in a class of $40$ students, $16$ like basketball, so in a pie chart basketball accounts for $16\\div40\\times100\\%=40\\%$, with central angle $360^\\circ\\times40\\%=144^\\circ$; the remaining parts account for $60\\%$, and the total is $100\\%$."
       ]
     },
     {
@@ -44710,6 +45380,22 @@
         "data-analysis",
         "expectation-variance",
         "multiplication-division"
+      ],
+      "derivation": [
+        "平均数表示一组数据的整体水平：把总数量平均分给总份数。若数据是 $a_1,a_2,\\dots,a_n$，则平均数为 $\\bar{x}=(a_1+a_2+\\cdots+a_n)\\div n$。这里总份数 $n$ 必须与总数量对应，且 $n>0$；各数据的单位要相同。",
+        "例：3、4、8、9 的总和是 $3+4+8+9=24$，总份数 $n=4$，所以平均数 $=24\\div4=6$。6 并不在这四个数中，说明平均数不一定等于某个原始数据；它相当于把多的移给少的，使 4 份都变成 6。",
+        "平均数一定在最小值和最大值之间。设最小值为 $m$、最大值为 $M$，则每个数据都不小于 $m$、不大于 $M$，所以 $nm\\le a_1+\\cdots+a_n\\le nM$。两边同时除以 $n$，得 $m\\le\\bar{x}\\le M$。只有当所有数据都等于 $m$ 或都等于 $M$ 时，才取到端点。",
+        "逆用公式：总数量 $=$ 平均数 $\\times$ 总份数。若 5 个数的平均数是 12，则总和为 $5\\times12=60$；若前 4 个数的和是 47，则第 5 个数是 $60-47=13$。检验：$(47+13)\\div5=60\\div5=12$，符合要求。",
+        "平均数容易受极端值影响：3、4、8、9 的平均数是 6；若把 9 换成 90，总和变成 $3+4+8+90=105$，平均数变成 $105\\div4=26.25$，被极端值拉高了。因此当数据中有特别大或特别小的值时，要说清平均数是否还能代表整体水平。",
+        "平均速度要用总路程除以总时间。上山速度 2 千米/时，下山速度 6 千米/时，若两段路程都是 $d$，则总路程为 $2d$，总时间为 $d/2+d/6=2d/3$，平均速度 $=2d\\div(2d/3)=3$ 千米/时，不是 $(2+6)\\div2=4$。慢速那段用时更长，不能把几个速度直接算术平均；只有各段时间相等时才能那样做。"
+      ],
+      "derivationEn": [
+        "The average describes the overall level of a data set: share the total amount equally among all items. For data $a_1,a_2,\\dots,a_n$, the average is $\\bar{x}=(a_1+a_2+\\cdots+a_n)\\div n$. The number $n$ of items must match the total, $n>0$, and all data must use the same unit.",
+        "Example: the total of 3, 4, 8 and 9 is $3+4+8+9=24$, and $n=4$, so the average is $24\\div4=6$. Since 6 is not one of the four values, an average need not equal any original data value; it is the common value obtained by moving excess to cover deficits until all four items equal 6.",
+        "An average always lies between the minimum and the maximum. Let $m$ be the minimum and $M$ the maximum; every value is at least $m$ and at most $M$, so $nm\\le a_1+\\cdots+a_n\\le nM$. Dividing by $n$ gives $m\\le\\bar{x}\\le M$. Equality at an endpoint occurs only when every value equals $m$ or every value equals $M$.",
+        "Use the formula in reverse: total $=$ average $\\times$ number of items. If five numbers have average 12, their total is $5\\times12=60$; if the first four sum to 47, the fifth number is $60-47=13$. Check: $(47+13)\\div5=60\\div5=12$, as required.",
+        "The average is easily affected by extreme values: the average of 3, 4, 8 and 9 is 6; replacing 9 by 90 changes the total to $3+4+8+90=105$ and the average to $105\\div4=26.25$, pulled upward. So when a data set contains an unusually large or small value, state whether the average still represents the overall level.",
+        "Average speed is total distance divided by total time. If the uphill speed is 2 km/h and the downhill speed is 6 km/h over the same distance $d$, the total distance is $2d$ and the total time is $d/2+d/6=2d/3$, so the average speed is $2d\\div(2d/3)=3$ km/h, not $(2+6)\\div2=4$. The slower part takes more time, so separate speeds cannot be averaged directly; that is valid only when the times are equal."
       ]
     },
     {
@@ -44782,6 +45468,22 @@
         "fractions-elementary",
         "statistics-charts",
         "data-analysis"
+      ],
+      "derivation": [
+        "在给定条件下，事件的发生分为三种：一定发生（必然事件）、可能发生也可能不发生（随机事件）、不可能发生（不可能事件）。例如掷一枚正常骰子，「掷出 3 点」是可能的，「掷出 7 点」是不可能的；抛一枚普通硬币，「正面朝上」是可能的，「同时正面和反面朝上」是不可能的。判断前要先写清条件。",
+        "在有限个等可能结果的情形，每个结果出现的可能性相同，事件 $A$ 的可能性可用分数表示：$P(A)=\\frac{\\text{有利于 }A\\text{ 的结果数}}{\\text{所有等可能结果总数}}$。袋中 3 个红球、1 个白球，共 4 个球，大小质地相同、任意摸一个，则 $P(\\text{红})=\\frac34$，$P(\\text{白})=\\frac14$。",
+        "在这个等可能模型里，所有可能结果的概率之和为 1：$\\frac34+\\frac14=1$。这也说明「一定」对应 1，「不可能」对应 0；任何事件的可能性都在 0 与 1 之间。比较大小看分子（分母相同）：$\\frac34>\\frac14$，所以摸到红球的可能性大；在总数相同（或各结果等可能且总数不变）时，某种结果对应的数量越多，可能性越大。",
+        "游戏公平当且仅当双方获胜的可能性相等。上述 3 红 1 白的袋子里，甲摸红赢、乙摸白赢，$P(\\text{甲赢})=\\frac34\\ne\\frac14=P(\\text{乙赢})$，游戏不公平，甲占优势。若要公平，可增加 2 个白球，使红、白各 3 个，双方获胜概率都是 $\\frac36=\\frac12$。",
+        "条件改变，可能性也随之改变。若第一次摸出红球后不放回，袋中剩 2 红 1 白，共 3 个球，第二次摸到红球的概率变为 $\\frac23$，摸到白球变为 $\\frac13$；若放回，则仍是 $\\frac34$ 与 $\\frac14$。所以「摸两次」的问题必须说明放回还是不放回。",
+        "注意：「可能」不等于「可能性是 $\\frac12$」。只有所有结果等可能时才能用「有利结果数÷总数」；「明天下雨」和「明天不下雨」两个结果并不等可能，不能各算 50%。可能性大小由数量或面积等比例决定，不能只看有几种结果。"
+      ],
+      "derivationEn": [
+        "Under given conditions an event is certain (must happen), random (may or may not happen) or impossible (cannot happen). With a fair die, rolling a 3 is possible while rolling a 7 is impossible; with an ordinary coin, heads is possible while showing heads and tails at once is impossible. State the conditions before classifying.",
+        "When there are finitely many equally likely outcomes, each outcome has the same chance, and the probability of an event $A$ is the fraction $P(A)=\\frac{\\text{number of outcomes favourable to }A}{\\text{total number of equally likely outcomes}}$. A bag with 3 red and 1 white ball, all identical in size and texture, gives $P(\\text{red})=\\frac34$ and $P(\\text{white})=\\frac14$ for one blind draw.",
+        "In this equally likely model, the probabilities of all possible outcomes sum to 1: $\\frac34+\\frac14=1$. Hence 'certain' corresponds to 1 and 'impossible' to 0, and every probability lies between 0 and 1. With equal denominators, compare numerators: $\\frac34>\\frac14$, so red is more likely; when the total is the same (or the other conditions are unchanged), more items of a given kind mean a greater chance.",
+        "A game is fair exactly when both players have equal chances. In the 3-red, 1-white bag, if A wins on red and B on white, $P(\\text{A wins})=\\frac34\\ne\\frac14=P(\\text{B wins})$, so the game is unfair and favours A. To make it fair, add 2 white balls so that there are 3 of each colour; both winning probabilities become $\\frac36=\\frac12$.",
+        "Changing the conditions changes the probabilities. If the first draw is red and the ball is not replaced, the bag holds 2 red and 1 white, so on the second draw $P(\\text{red})=\\frac23$ and $P(\\text{white})=\\frac13$; with replacement they remain $\\frac34$ and $\\frac14$. Every two-draw question must therefore state whether draws are with or without replacement.",
+        "Caution: 'possible' does not mean probability $\\frac12$. The rule 'favourable outcomes ÷ total outcomes' applies only when all outcomes are equally likely; 'rain tomorrow' and 'no rain tomorrow' are not equally likely and cannot each be assigned 50%. Probability is determined by proportions such as counts or areas, not merely by how many outcomes are listed."
       ]
     },
     {
@@ -44857,6 +45559,22 @@
         "linear-equation-junior",
         "linear-system-two-variables",
         "multiplication-division"
+      ],
+      "derivation": [
+        "设鸡有 $c$ 只、兔有 $r$ 只，共有 $h$ 个头、$f$ 只脚。每只鸡 2 只脚，每只兔 4 只脚，所以 $h=c+r$，$f=2c+4r$，且 $c,r$ 都是非负整数。由 $f=2(c+r)+2r=2h+2r$ 可知 $2h\\le f\\le4h$，并且 $f-2h$ 必须是偶数；不满足这些条件时无解。",
+        "假设 $h$ 只全是鸡：一共有 $2h$ 只脚，比实际 $f$ 少了 $f-2h$ 只。每把一只鸡换成一只兔，脚数就增加 $4-2=2$ 只。因此兔的只数 $r=(f-2h)\\div2$，鸡的只数 $c=h-r$。这就是「假设—比较—调整」：先假设，再比较差多少，最后按每差 2 只脚对应一只兔来调整。",
+        "取 $h=35$、$f=94$：假设全是鸡，脚数为 $35\\times2=70$，比 94 少 $94-70=24$。每只兔补 2 只脚，所以兔有 $24\\div2=12$ 只，鸡有 $35-12=23$ 只。验算：$23\\times2+12\\times4=46+48=94$ 只脚，$23+12=35$ 个头，完全符合。",
+        "也可以假设全是兔：$h$ 只兔一共有 $4h$ 只脚，比实际 $f$ 多了 $4h-f$ 只。每把一只兔换成一只鸡，脚数减少 2 只，所以鸡有 $c=(4h-f)\\div2$ 只，兔有 $r=h-c$ 只。对 $h=35,f=94$，$c=(140-94)\\div2=23$，$r=12$，与假设全鸡得到的答案一致，可以互相检验。",
+        "还要检查答案是否合理：若 $h=10,f=25$，$f$ 是奇数，$f-2h=5$ 不能被 2 整除，没有整数解；若 $h=10,f=50$，$r=(50-20)\\div2=15>h$，会算出鸡为 $-5$ 只，不可能。$h=10$ 时，$f=20$ 给出 $r=0,c=10$；$f=40$ 给出 $r=10,c=0$。所以答案必须满足 $0\\le r\\le h$。",
+        "应用：自行车和汽车共 10 辆，一共有 28 个轮子。假设全是自行车，轮子有 $10\\times2=20$ 个，比 28 少 8 个；每辆汽车多 2 个轮子，所以汽车有 $8\\div2=4$ 辆，自行车有 $10-4=6$ 辆。验算：$6\\times2+4\\times4=12+16=28$ 个轮子，$6+4=10$ 辆车。列方程 $2x+4(10-x)=28$ 也能得到 $x=6$，与假设法一致。"
+      ],
+      "derivationEn": [
+        "Let there be $c$ chickens and $r$ rabbits, with $h$ heads and $f$ feet. Each chicken has 2 feet and each rabbit 4, so $h=c+r$ and $f=2c+4r$, where $c$ and $r$ are non-negative integers. Since $f=2(c+r)+2r=2h+2r$, we must have $2h\\le f\\le4h$ and $f-2h$ even; if these conditions fail, there is no solution.",
+        "Assume all $h$ animals are chickens: they have $2h$ feet, which is $f-2h$ fewer than the actual number. Replacing one chicken by one rabbit adds $4-2=2$ feet. Therefore the number of rabbits is $r=(f-2h)\\div2$, and the number of chickens is $c=h-r$. This is the 'assume–compare–adjust' method: suppose, compare the gap, then adjust using the fact that every gap of 2 feet means one rabbit.",
+        "For $h=35$ and $f=94$: assuming all chickens gives $35\\times2=70$ feet, a gap of $94-70=24$. Each rabbit adds 2 feet, so there are $24\\div2=12$ rabbits and $35-12=23$ chickens. Check: $23\\times2+12\\times4=46+48=94$ feet and $23+12=35$ heads, exactly as required.",
+        "Assume all are rabbits instead: $h$ rabbits have $4h$ feet, which is $4h-f$ too many. Replacing one rabbit by one chicken removes 2 feet, so there are $c=(4h-f)\\div2$ chickens and $r=h-c$ rabbits. For $h=35,f=94$, $c=(140-94)\\div2=23$ and $r=12$, the same answer as assuming all chickens, which serves as a check.",
+        "Also check that the answer is feasible: if $h=10$ and $f=25$, then $f$ is odd and $f-2h=5$ is not divisible by 2, so there is no integer solution; if $h=10$ and $f=50$, then $r=(50-20)\\div2=15>h$, which would give $c=-5$, impossible. For $h=10$, $f=20$ gives $r=0,c=10$, while $f=40$ gives $r=10,c=0$. Hence any answer must satisfy $0\\le r\\le h$.",
+        "Application: 10 bicycles and cars have 28 wheels in total. Assume all are bicycles: $10\\times2=20$ wheels, a gap of 8; each car adds 2 wheels, so there are $8\\div2=4$ cars and $10-4=6$ bicycles. Check: $6\\times2+4\\times4=12+16=28$ wheels and $6+4=10$ vehicles. The equation $2x+4(10-x)=28$ gives $x=6$, the same result as the assumption method."
       ]
     },
     {
@@ -59866,6 +60584,22 @@
         "function-zeros",
         "parabola",
         "polynomial"
+      ],
+      "derivation": [
+        "不等式是用 $<,\\le,>,\\ge$ 连接两个式子的命题。对实数 $a,b$，定义 $a>b\\iff a-b>0$；这样就把比较大小转化为判断差的符号，不等式的基本性质和解集的讨论都由此出发。",
+        "由定义可得三条基本性质。若 $a>b$，则 $(a+c)-(b+c)=a-b>0$，故 $a+c>b+c$；若 $c>0$，则 $ac-bc=(a-b)c>0$，故 $ac>bc$；若 $c<0$，则 $(a-b)c<0$，故 $ac<bc$，即两边乘负数必须变号。$c=0$ 时两边都变成 $0$，不等号退化为等号，信息丢失。",
+        "解 $ax^2+bx+c>0$（$a\\ne0$）时，先使二次项系数为正：若 $a<0$，两边乘 $-1$ 并把不等号反向，转化为二次项系数为正的同类问题。因此以下设 $a>0$。当 $\\Delta>0$ 时，设两根为 $x_1<x_2$，则 $ax^2+bx+c=a(x-x_1)(x-x_2)$；在 $x<x_1$、$x_1<x<x_2$、$x>x_2$ 三段上符号依次为正、负、正，所以 $>0$ 的解集是 $(-\\infty,x_1)\\cup(x_2,+\\infty)$，$<0$ 的解集是 $(x_1,x_2)$。",
+        "当 $\\Delta=0$ 时，$ax^2+bx+c=a(x-x_1)^2$。因 $a>0$，它只在 $x=x_1$ 处为 $0$，其余恒正，所以 $>0$ 的解集是 $\\mathbb{R}\\setminus\\{x_1\\}$，$\\ge0$ 的解集是 $\\mathbb{R}$，$<0$ 无解。当 $\\Delta<0$ 时，配方得 $ax^2+bx+c=a\\left[\\left(x+\\dfrac{b}{2a}\\right)^2+\\dfrac{4ac-b^2}{4a^2}\\right]$；此时 $4ac-b^2>0$，方括号内恒正，故 $>0$ 与 $\\ge0$ 的解集都是 $\\mathbb{R}$，$<0$ 无解。",
+        "分式不等式先移项通分，不能直接乘含未知数的分母。例如 $\\dfrac{x-1}{x+2}\\ge0$：临界点为 $-2$（分母为零，必须排除）和 $1$；在 $(-\\infty,-2)$、$(-2,1)$、$(1,+\\infty)$ 上商依次为正、负、正，且 $x=1$ 时分子为 $0$ 而分母不为 $0$，可以取到，所以解集是 $(-\\infty,-2)\\cup[1,+\\infty)$。",
+        "绝对值不等式可用距离解释：当 $a>0$ 时，$|x|<a$ 表示 $x$ 到 $0$ 的距离小于 $a$，故 $-a<x<a$；$|x|>a$ 表示距离大于 $a$，故 $x<-a$ 或 $x>a$。写解集时，取不到的端点用开区间、取到的用闭区间；同时成立的条件取交集，分类讨论的结果取并集。"
+      ],
+      "derivationEn": [
+        "An inequality is a statement joining two expressions by $<,\\le,>,\\ge$. For real numbers $a,b$, define $a>b\\iff a-b>0$. Comparing sizes is thus reduced to deciding the sign of a difference, which is the starting point for both the basic properties and the discussion of solution sets.",
+        "Three basic properties follow from the definition. If $a>b$, then $(a+c)-(b+c)=a-b>0$, so $a+c>b+c$. If $c>0$, then $ac-bc=(a-b)c>0$, so $ac>bc$. If $c<0$, then $(a-b)c<0$, so $ac<bc$: multiplying by a negative number reverses the inequality. For $c=0$ both sides become $0$, the inequality degenerates to equality, and information is lost.",
+        "To solve $ax^2+bx+c>0$ with $a\\ne0$, first make the quadratic coefficient positive: if $a<0$, multiply by $-1$ and reverse the inequality, reducing to the same type of problem with a positive leading coefficient. Hence assume $a>0$ below. If $\\Delta>0$ with roots $x_1<x_2$, then $ax^2+bx+c=a(x-x_1)(x-x_2)$. On $x<x_1$, $x_1<x<x_2$ and $x>x_2$ the sign is positive, negative and positive respectively, so $>0$ has solution $(-\\infty,x_1)\\cup(x_2,+\\infty)$ and $<0$ has solution $(x_1,x_2)$.",
+        "If $\\Delta=0$, then $ax^2+bx+c=a(x-x_1)^2$. Since $a>0$, it vanishes only at $x_1$ and is positive elsewhere, so $>0$ has solution $\\mathbb{R}\\setminus\\{x_1\\}$, $\\ge0$ has solution $\\mathbb{R}$, and $<0$ has no solution. If $\\Delta<0$, completing the square gives $ax^2+bx+c=a\\left[\\left(x+\\dfrac{b}{2a}\\right)^2+\\dfrac{4ac-b^2}{4a^2}\\right]$; here $4ac-b^2>0$, so the bracket is always positive; hence both $>0$ and $\\ge0$ hold for all real $x$, while $<0$ has no solution.",
+        "For a rational inequality, move everything to one side and combine into a single fraction; never multiply directly by a denominator containing the unknown. For $\\dfrac{x-1}{x+2}\\ge0$ the critical points are $-2$ (excluded, since the denominator vanishes) and $1$. The quotient is positive, negative and positive on $(-\\infty,-2)$, $(-2,1)$ and $(1,+\\infty)$, and $x=1$ is allowed because the numerator is $0$ while the denominator is not. The solution set is $(-\\infty,-2)\\cup[1,+\\infty)$.",
+        "Absolute-value inequalities can be read as distances. For $a>0$, $|x|<a$ means the distance from $x$ to $0$ is less than $a$, so $-a<x<a$; $|x|>a$ means the distance is greater than $a$, so $x<-a$ or $x>a$. When writing solution sets, use open endpoints for excluded values and closed endpoints for included ones; simultaneous conditions give an intersection, while cases give a union."
       ]
     },
     {
@@ -59970,6 +60704,22 @@
         "parabola",
         "inequality",
         "derivative"
+      ],
+      "derivation": [
+        "多项式是有限个单项式之和：$P(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_1x+a_0$，其中 $a_n\\ne0$，$n$ 称为次数，$a_n$ 是首项系数，$a_0$ 是常数项。单项式的次数是各字母指数之和；同类项是字母及其指数都相同的项，合并时只把系数相加，例如 $3x^2y-5x^2y=-2x^2y$，次数保持不变。",
+        "次数在运算中的规律：在实数或复数系数下，对非零多项式有 $\\deg(PQ)=\\deg P+\\deg Q$；并且 $\\deg(P+Q)\\le\\max(\\deg P,\\deg Q)$，当最高次项没有完全抵消时取等号；若完全抵消，次数严格小于最大值（和为零多项式时次数无定义）。例如 $(x^2+1)+(-x^2+x)=x+1$，次数由 $2$ 降为 $1$。",
+        "多项式相等是恒等：若两个多项式在无穷多个点处取值相同，则对应项系数相等。因为差 $R=P-Q$ 有无穷多个根；若 $R$ 是非零常数则没有根，若 $R$ 是 $n\\ge1$ 次非零多项式则至多有 $n$ 个根，两种情形都不可能，所以只能 $R\\equiv0$。这条性质是待定系数法的依据。",
+        "带余除法与余数定理：对任意多项式 $P$ 和一次式 $x-a$，存在唯一的商 $Q$ 与常数余数 $r$，使 $P(x)=(x-a)Q(x)+r$。令 $x=a$，得 $r=P(a)$，即除以 $x-a$ 的余数等于 $P(a)$。特别地，$P(a)=0\\iff(x-a)\\mid P(x)$，这就是因式定理。",
+        "例：$P(x)=x^3-6x^2+11x-6$。计算得 $P(1)=0$、$P(2)=0$、$P(3)=0$，由因式定理，$(x-1)$、$(x-2)$、$(x-3)$ 都是 $P(x)$ 的因式。三次多项式除以这三个一次因式的积后次数为 $0$，比较首项系数得 $P(x)=(x-1)(x-2)(x-3)$，在实数域上已分解为不可约的一次因式。",
+        "代数基本定理：次数 $n\\ge1$ 的复系数多项式在复数范围内恰有 $n$ 个根（按重数计算），故可分解为 $a_n\\prod_{k=1}^{n}(x-z_k)$。实系数多项式的非实根成共轭对出现，因此在实数域上可分解为一次因式与无实根二次因式的乘积；这也说明 $n$ 次多项式至多有 $n$ 个实根。"
+      ],
+      "derivationEn": [
+        "A polynomial is a finite sum of monomials: $P(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_1x+a_0$ with $a_n\\ne0$; $n$ is its degree, $a_n$ the leading coefficient and $a_0$ the constant term. The degree of a monomial is the sum of the exponents of its letters. Like terms have identical letters with identical exponents; combining them adds only the coefficients, for example $3x^2y-5x^2y=-2x^2y$, and the degree is unchanged.",
+        "Degree rules under operations: over real or complex coefficients, for nonzero polynomials $\\deg(PQ)=\\deg P+\\deg Q$, while $\\deg(P+Q)\\le\\max(\\deg P,\\deg Q)$, with equality when the highest-degree terms do not cancel completely; if they do, the degree is strictly smaller than the maximum (and is undefined when the sum is the zero polynomial). For example, $(x^2+1)+(-x^2+x)=x+1$ has degree $1$ instead of $2$.",
+        "Equality of polynomials is an identity: if two polynomials take the same value at infinitely many points, their corresponding coefficients are equal. Indeed, the difference $R=P-Q$ has infinitely many roots; a nonzero constant has none, and a nonzero polynomial of degree $n\\ge1$ has at most $n$, so neither case is possible; hence $R\\equiv0$. This fact justifies the method of undetermined coefficients.",
+        "Division with remainder and the remainder theorem: for any polynomial $P$ and any linear polynomial $x-a$, there are a unique quotient $Q$ and a constant remainder $r$ such that $P(x)=(x-a)Q(x)+r$. Setting $x=a$ gives $r=P(a)$, so the remainder on division by $x-a$ equals $P(a)$. In particular, $P(a)=0\\iff(x-a)\\mid P(x)$, which is the factor theorem.",
+        "Example: $P(x)=x^3-6x^2+11x-6$. Direct computation gives $P(1)=0$, $P(2)=0$ and $P(3)=0$, so by the factor theorem $(x-1)$, $(x-2)$ and $(x-3)$ are all factors. Dividing the cubic by their product leaves degree $0$; comparing leading coefficients gives $P(x)=(x-1)(x-2)(x-3)$, already a product of irreducible linear factors over the reals.",
+        "The fundamental theorem of algebra: a complex polynomial of degree $n\\ge1$ has exactly $n$ roots in the complex numbers, counted with multiplicity, so it factors as $a_n\\prod_{k=1}^{n}(x-z_k)$. Nonreal roots of a real-coefficient polynomial occur in conjugate pairs; hence over the reals it factors into linear factors and quadratic factors with no real roots. It also follows that a degree-$n$ polynomial has at most $n$ real roots."
       ]
     },
     {
@@ -63245,6 +63995,22 @@
         "monotonicity-extremum",
         "quadratic-radical",
         "quadratic-function"
+      ],
+      "derivation": [
+        "先确认条件：设 $a\\ge 0$、$b\\ge 0$。令 $x=\\sqrt a$、$y=\\sqrt b$，则 $x,y\\ge0$，且 $a=x^2$、$b=y^2$。这一步要求 $a,b$ 非负，否则 $\\sqrt a,\\sqrt b$ 不是实数，后面的代换不成立。",
+        "对任意实数 $x,y$，平方非负：$(x-y)^2\\ge0$。展开得 $x^2+y^2-2xy\\ge0$，即 $x^2+y^2\\ge2xy$。把 $x^2=a$、$y^2=b$、$xy=\\sqrt{ab}$ 代回，得到 $a+b\\ge2\\sqrt{ab}$。",
+        "两边同除以 $2$，得标准形式 $\\frac{a+b}{2}\\ge\\sqrt{ab}$：两个非负数的算术平均数不小于它们的几何平均数。由于 $a,b\\ge0$，两边都非负，这个不等式在 $a=0$ 或 $b=0$ 时也有意义。",
+        "等号条件：$(x-y)^2=0$ 当且仅当 $x=y$，即 $\\sqrt a=\\sqrt b$，也就等价于 $a=b$。反过来，若 $a=b$，则 $a+b=2a=2\\sqrt{a^2}=2\\sqrt{ab}$，等号成立。因此 $a+b\\ge2\\sqrt{ab}$ 取等号当且仅当 $a=b$；当 $a\\ne b$ 时不等式严格成立。",
+        "求最值的用法（一正、二定、三相等；边界取 $0$ 时单独检查）：若 $ab=P>0$ 为定值，则 $a+b\\ge2\\sqrt P$，当 $a=b=\\sqrt P$ 时取最小值 $2\\sqrt P$；若 $a+b=S>0$ 为定值，则由 $ab\\le\\left(\\frac{a+b}{2}\\right)^2=\\frac{S^2}{4}$，当 $a=b=\\frac S2$ 时积取最大值 $\\frac{S^2}{4}$。例如 $x>0$ 时 $x+\\frac4x\\ge2\\sqrt4=4$，等号在 $x=2$ 时成立。",
+        "反例说明条件不能放宽：取 $a=b=-1$，则 $a+b=-2$，而 $2\\sqrt{ab}=2$，$a+b\\ge2\\sqrt{ab}$ 不成立。另一个常见混淆是 $a^2+b^2\\ge2ab$：它由 $(a-b)^2\\ge0$ 得到，对一切实数成立，但它的两边不是 $a+b$ 与 $2\\sqrt{ab}$，不能把两个不等式的条件混为一谈。"
+      ],
+      "derivationEn": [
+        "First fix the hypotheses: let $a\\ge 0$ and $b\\ge 0$. Set $x=\\sqrt a$ and $y=\\sqrt b$; then $x,y\\ge0$, $a=x^2$ and $b=y^2$. Non-negativity is needed here, since otherwise $\\sqrt a$ and $\\sqrt b$ are not real numbers and the substitution is invalid.",
+        "For all real $x,y$, a square is non-negative: $(x-y)^2\\ge0$. Expanding gives $x^2+y^2-2xy\\ge0$, i.e. $x^2+y^2\\ge2xy$. Substituting $x^2=a$, $y^2=b$ and $xy=\\sqrt{ab}$ yields $a+b\\ge2\\sqrt{ab}$.",
+        "Divide both sides by $2$ to obtain the standard form $\\frac{a+b}{2}\\ge\\sqrt{ab}$: the arithmetic mean of two non-negative numbers is at least their geometric mean. Since $a,b\\ge0$, both sides are non-negative, and the inequality remains meaningful when $a=0$ or $b=0$.",
+        "Equality: $(x-y)^2=0$ if and only if $x=y$, i.e. $\\sqrt a=\\sqrt b$, which is equivalent to $a=b$. Conversely, if $a=b$, then $a+b=2a=2\\sqrt{a^2}=2\\sqrt{ab}$, so equality holds. Hence $a+b\\ge2\\sqrt{ab}$ is an equality exactly when $a=b$; if $a\\ne b$ the inequality is strict.",
+        "Using it for extrema (positive, fixed, equality attainable; check the boundary case $0$ separately): if $ab=P>0$ is fixed, then $a+b\\ge2\\sqrt P$, with minimum $2\\sqrt P$ at $a=b=\\sqrt P$; if $a+b=S>0$ is fixed, then $ab\\le\\left(\\frac{a+b}{2}\\right)^2=\\frac{S^2}{4}$, with maximum $\\frac{S^2}{4}$ at $a=b=\\frac S2$. For example, for $x>0$, $x+\\frac4x\\ge2\\sqrt4=4$, with equality at $x=2$.",
+        "A counterexample shows the hypothesis cannot be dropped: take $a=b=-1$; then $a+b=-2$ while $2\\sqrt{ab}=2$, so $a+b\\ge2\\sqrt{ab}$ fails. Another common confusion is $a^2+b^2\\ge2ab$: it follows from $(a-b)^2\\ge0$ and holds for all real numbers, but its sides are not $a+b$ and $2\\sqrt{ab}$; the hypotheses of the two inequalities must not be conflated."
       ]
     },
     {
@@ -63350,6 +64116,22 @@
         "parabola",
         "basic-inequality",
         "function-zeros"
+      ],
+      "derivation": [
+        "设 $a\\ne0$，考虑 $ax^2+bx+c>0$（或 $\\ge0,<0,\\le0$）。先看二次项系数：若 $a<0$，两边同乘 $-1$，不等号方向改变，化为二次项系数为正的情形。因此下面只需讨论 $a>0$，此时抛物线 $y=ax^2+bx+c$ 开口向上；化正时不等号方向可能改变，所以后面同时给出 $>0$ 与 $<0$ 两种解集。",
+        "计算判别式 $\\Delta=b^2-4ac$。当 $\\Delta>0$ 时，对应方程有两个不同实根，由求根公式 $x_{1,2}=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$，按大小记为 $x_1<x_2$，并且 $ax^2+bx+c=a(x-x_1)(x-x_2)$。这两个根就是抛物线与 $x$ 轴交点的横坐标，也是解集的分界点。",
+        "判断符号：$a>0$ 时，$x<x_1$ 使两个因式都为负，乘积为正；$x_1<x<x_2$ 使两个因式异号，乘积为负；$x>x_2$ 使两个因式都为正，乘积为正。因此 $ax^2+bx+c>0$ 的解集是 $(-\\infty,x_1)\\cup(x_2,+\\infty)$，$<0$ 的解集是 $(x_1,x_2)$；若原不等式含等号，再把端点 $x_1,x_2$ 补入相应区间。",
+        "当 $\\Delta=0$ 时，方程有重根 $x_0=-\\frac{b}{2a}$，且 $ax^2+bx+c=a(x-x_0)^2$。因 $a>0$，该式除 $x=x_0$ 外恒正：所以 $>0$ 的解集是 $\\mathbb{R}\\setminus\\{x_0\\}$，$\\ge0$ 的解集是 $\\mathbb{R}$，$<0$ 的解集是 $\\varnothing$，$\\le0$ 的解集是 $\\{x_0\\}$。",
+        "当 $\\Delta<0$ 时，配方得 $$\\begin{aligned}ax^2+bx+c&=a\\left(x+\\frac{b}{2a}\\right)^2\\\\&\\quad+\\frac{4ac-b^2}{4a}.\\end{aligned}$$ 因为 $a>0$ 且 $4ac-b^2>0$，右边两项都非负且第二项严格为正，所以整个式子对一切实数 $x$ 恒正。于是 $>0$ 与 $\\ge0$ 的解集都是 $\\mathbb{R}$，而 $<0$ 与 $\\le0$ 的解集都是 $\\varnothing$。",
+        "例：解 $-x^2+2x+3\\ge0$。两边乘 $-1$ 并变号得 $x^2-2x-3\\le0$，因式分解为 $(x-3)(x+1)\\le0$，根为 $-1,3$。此时 $a=1>0$，开口向上，函数值 $\\le0$ 在两根之间，故解集为 $[-1,3]$。若忘记先化正而直接套「小于取中间」，就会把开口方向弄反；端点是否取到则由原不等式的 $\\ge$ 决定。"
+      ],
+      "derivationEn": [
+        "Let $a\\ne0$ and consider $ax^2+bx+c>0$ (or $\\ge0,<0,\\le0$). First inspect the leading coefficient: if $a<0$, multiply both sides by $-1$ and reverse the inequality, reducing to the case of a positive leading coefficient. Hence it suffices below to treat $a>0$, where the parabola $y=ax^2+bx+c$ opens upward; reversing the inequality during normalization may change its direction, so both the $>0$ and $<0$ solution sets are given below.",
+        "Compute the discriminant $\\Delta=b^2-4ac$. If $\\Delta>0$, the associated equation has two distinct real roots, given by $x_{1,2}=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$ and ordered as $x_1<x_2$, and $ax^2+bx+c=a(x-x_1)(x-x_2)$. These roots are the $x$-intercepts of the parabola and the dividing points of the solution set.",
+        "Determine signs: for $a>0$, $x<x_1$ makes both factors negative, so the product is positive; $x_1<x<x_2$ makes them have opposite signs, so the product is negative; $x>x_2$ makes both positive, so the product is positive. Hence $ax^2+bx+c>0$ has solution set $(-\\infty,x_1)\\cup(x_2,+\\infty)$, while $<0$ has $(x_1,x_2)$; if the original inequality includes equality, add the endpoints $x_1,x_2$ to the corresponding intervals.",
+        "If $\\Delta=0$, the equation has a repeated root $x_0=-\\frac{b}{2a}$ and $ax^2+bx+c=a(x-x_0)^2$. Since $a>0$, this is positive except at $x=x_0$: thus $>0$ has solution set $\\mathbb{R}\\setminus\\{x_0\\}$, $\\ge0$ has $\\mathbb{R}$, $<0$ has $\\varnothing$, and $\\le0$ has $\\{x_0\\}$.",
+        "If $\\Delta<0$, completing the square gives $$\\begin{aligned}ax^2+bx+c&=a\\left(x+\\frac{b}{2a}\\right)^2\\\\&\\quad+\\frac{4ac-b^2}{4a}.\\end{aligned}$$ Since $a>0$ and $4ac-b^2>0$, both terms on the right are non-negative and the second is strictly positive, so the expression is positive for every real $x$. Therefore $>0$ and $\\ge0$ both have solution set $\\mathbb{R}$, while $<0$ and $\\le0$ both have $\\varnothing$.",
+        "Example: solve $-x^2+2x+3\\ge0$. Multiplying by $-1$ and reversing gives $x^2-2x-3\\le0$, which factors as $(x-3)(x+1)\\le0$ with roots $-1,3$. Now $a=1>0$, so the parabola opens upward and the values $\\le0$ lie between the roots; the solution set is $[-1,3]$. Forgetting to make the leading coefficient positive and applying 'less takes the inside' directly reverses the opening; whether endpoints are included is decided by the $\\ge$ in the original inequality."
       ]
     },
     {

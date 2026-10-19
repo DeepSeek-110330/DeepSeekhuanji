@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "batch": "D25",
+    "topic": "代数 1：一元一次方程、不等式、一元一次不等式（组）、二元一次方程组、多项式、一元二次方程",
+    "version": 1
+  },
+  "nodes": {
+    "linear-equation-junior": {
+      "zh": [
+        "一元一次方程是只含一个未知数、未知数的次数都是 $1$、两边都是整式的方程，一般形式为 $ax+b=0$。若 $a=0$，方程变成 $b=0$：$b\\ne0$ 时无解，$b=0$ 时任意实数都是解，因此必须要求 $a\\ne0$；此时两边同除以 $a$ 得唯一解 $x=-\\dfrac{b}{a}$。",
+        "等式性质是解方程的依据。若 $a=b$，两边同加 $c$ 得 $a+c=b+c$；反过来，若 $a+c=b+c$，两边同加 $-c$ 又得 $a=b$，所以这是等价变形。两边同乘 $c$ 时，$a=b\\Rightarrow ac=bc$ 对任意 $c$ 成立；但 $c=0$ 时反推不成立（$0=0$ 推不出 $a=b$）。当 $c\\ne0$ 时，$ac=bc\\Rightarrow a=b$，所以两边可以同除 $c$。",
+        "移项法则：由 $a+c=b$ 两边同减 $c$，得 $a=b-c$，即把一项从等号一边移到另一边必须变号；这一步可逆，所以不改变解集。例如 $3x+1=7$ 两边同减 $1$ 得 $3x=6$，再两边同除以 $3\\ne0$ 得 $x=2$。",
+        "解 $\\dfrac{x+1}{2}-\\dfrac{x-2}{3}=1$：最简公分母是 $6\\ne0$，两边同乘 $6$ 得 $3(x+1)-2(x-2)=6$；去括号得 $3x+3-2x+4=6$；合并同类项得 $x+7=6$；移项得 $x=-1$。因为乘的是非零常数 $6$，每一步都等价，没有产生增根。",
+        "检验：把 $x=-1$ 代回左边，$\\dfrac{-1+1}{2}-\\dfrac{-1-2}{3}=0-(-1)=1$，等于右边，所以 $x=-1$ 是解。由于 $a=1\\ne0$，方程只有一个解，检验通过就确认了全部解；若是应用题，还要检查解是否符合实际意义（长度、人数等为正）。",
+        "列方程时也要保持等价：设每本本子 $x$ 元，则每支笔 $x+2$ 元，由「3 支笔的价钱加 2 本本子的价钱等于 26 元」得 $3(x+2)+2x=26$，即 $5x+6=26$，解得 $x=4$。解完代回原题：$3\\times6+2\\times4=26$，且价格为正，符合实际。"
+      ],
+      "en": [
+        "A linear equation in one variable contains exactly one unknown, the unknown occurs only to the first power, and both sides are polynomials; its general form is $ax+b=0$. If $a=0$, the equation becomes $b=0$: it has no solution when $b\\ne0$, while every real number is a solution when $b=0$. Hence $a\\ne0$ is required, and dividing both sides by $a$ gives the unique solution $x=-\\dfrac{b}{a}$.",
+        "The properties of equality justify the solving steps. If $a=b$, adding $c$ gives $a+c=b+c$; conversely, adding $-c$ to $a+c=b+c$ recovers $a=b$, so the step is reversible. Multiplying gives $a=b\\Rightarrow ac=bc$ for every $c$; however, for $c=0$ the converse fails ($0=0$ does not force $a=b$). When $c\\ne0$, $ac=bc\\Rightarrow a=b$, so division by $c$ is legitimate.",
+        "Transposition: subtracting $c$ from both sides of $a+c=b$ gives $a=b-c$, so a term changes sign when moved across the equals sign. The step is reversible and leaves the solution set unchanged. For $3x+1=7$, subtract $1$ to obtain $3x=6$, then divide by $3\\ne0$ to obtain $x=2$.",
+        "Solve $\\dfrac{x+1}{2}-\\dfrac{x-2}{3}=1$. The least common denominator is $6\\ne0$; multiplying both sides by $6$ gives $3(x+1)-2(x-2)=6$. Expanding yields $3x+3-2x+4=6$, collecting like terms gives $x+7=6$, and transposing gives $x=-1$. Since the multiplier is the nonzero constant $6$, every step is an equivalence and no extraneous root is introduced.",
+        "Check: substituting $x=-1$ into the left side gives $\\dfrac{-1+1}{2}-\\dfrac{-1-2}{3}=0-(-1)=1$, which equals the right side, so $x=-1$ is a solution. Because $a=1\\ne0$, the equation has exactly one solution, so the check confirms the full solution set. In a word problem, also check that the value is admissible (positive length, whole number of people, and so on).",
+        "Modelling must preserve equivalence as well. Let a notebook cost $x$ yuan; then a pen costs $x+2$ yuan. The condition that 3 pens and 2 notebooks cost 26 yuan gives $3(x+2)+2x=26$, that is $5x+6=26$, hence $x=4$. Substituting back gives $3\\times6+2\\times4=26$, and the price is positive, so the answer fits the problem."
+      ]
+    },
+    "inequality": {
+      "zh": [
+        "不等式是用 $<,\\le,>,\\ge$ 连接两个式子的命题。对实数 $a,b$，定义 $a>b\\iff a-b>0$；这样就把比较大小转化为判断差的符号，不等式的基本性质和解集的讨论都由此出发。",
+        "由定义可得三条基本性质。若 $a>b$，则 $(a+c)-(b+c)=a-b>0$，故 $a+c>b+c$；若 $c>0$，则 $ac-bc=(a-b)c>0$，故 $ac>bc$；若 $c<0$，则 $(a-b)c<0$，故 $ac<bc$，即两边乘负数必须变号。$c=0$ 时两边都变成 $0$，不等号退化为等号，信息丢失。",
+        "解 $ax^2+bx+c>0$（$a\\ne0$）时，先使二次项系数为正：若 $a<0$，两边乘 $-1$ 并把不等号反向，转化为二次项系数为正的同类问题。因此以下设 $a>0$。当 $\\Delta>0$ 时，设两根为 $x_1<x_2$，则 $ax^2+bx+c=a(x-x_1)(x-x_2)$；在 $x<x_1$、$x_1<x<x_2$、$x>x_2$ 三段上符号依次为正、负、正，所以 $>0$ 的解集是 $(-\\infty,x_1)\\cup(x_2,+\\infty)$，$<0$ 的解集是 $(x_1,x_2)$。",
+        "当 $\\Delta=0$ 时，$ax^2+bx+c=a(x-x_1)^2$。因 $a>0$，它只在 $x=x_1$ 处为 $0$，其余恒正，所以 $>0$ 的解集是 $\\mathbb{R}\\setminus\\{x_1\\}$，$\\ge0$ 的解集是 $\\mathbb{R}$，$<0$ 无解。当 $\\Delta<0$ 时，配方得 $ax^2+bx+c=a\\left[\\left(x+\\dfrac{b}{2a}\\right)^2+\\dfrac{4ac-b^2}{4a^2}\\right]$；此时 $4ac-b^2>0$，方括号内恒正，故 $>0$ 与 $\\ge0$ 的解集都是 $\\mathbb{R}$，$<0$ 无解。",
+        "分式不等式先移项通分，不能直接乘含未知数的分母。例如 $\\dfrac{x-1}{x+2}\\ge0$：临界点为 $-2$（分母为零，必须排除）和 $1$；在 $(-\\infty,-2)$、$(-2,1)$、$(1,+\\infty)$ 上商依次为正、负、正，且 $x=1$ 时分子为 $0$ 而分母不为 $0$，可以取到，所以解集是 $(-\\infty,-2)\\cup[1,+\\infty)$。",
+        "绝对值不等式可用距离解释：当 $a>0$ 时，$|x|<a$ 表示 $x$ 到 $0$ 的距离小于 $a$，故 $-a<x<a$；$|x|>a$ 表示距离大于 $a$，故 $x<-a$ 或 $x>a$。写解集时，取不到的端点用开区间、取到的用闭区间；同时成立的条件取交集，分类讨论的结果取并集。"
+      ],
+      "en": [
+        "An inequality is a statement joining two expressions by $<,\\le,>,\\ge$. For real numbers $a,b$, define $a>b\\iff a-b>0$. Comparing sizes is thus reduced to deciding the sign of a difference, which is the starting point for both the basic properties and the discussion of solution sets.",
+        "Three basic properties follow from the definition. If $a>b$, then $(a+c)-(b+c)=a-b>0$, so $a+c>b+c$. If $c>0$, then $ac-bc=(a-b)c>0$, so $ac>bc$. If $c<0$, then $(a-b)c<0$, so $ac<bc$: multiplying by a negative number reverses the inequality. For $c=0$ both sides become $0$, the inequality degenerates to equality, and information is lost.",
+        "To solve $ax^2+bx+c>0$ with $a\\ne0$, first make the quadratic coefficient positive: if $a<0$, multiply by $-1$ and reverse the inequality, reducing to the same type of problem with a positive leading coefficient. Hence assume $a>0$ below. If $\\Delta>0$ with roots $x_1<x_2$, then $ax^2+bx+c=a(x-x_1)(x-x_2)$. On $x<x_1$, $x_1<x<x_2$ and $x>x_2$ the sign is positive, negative and positive respectively, so $>0$ has solution $(-\\infty,x_1)\\cup(x_2,+\\infty)$ and $<0$ has solution $(x_1,x_2)$.",
+        "If $\\Delta=0$, then $ax^2+bx+c=a(x-x_1)^2$. Since $a>0$, it vanishes only at $x_1$ and is positive elsewhere, so $>0$ has solution $\\mathbb{R}\\setminus\\{x_1\\}$, $\\ge0$ has solution $\\mathbb{R}$, and $<0$ has no solution. If $\\Delta<0$, completing the square gives $ax^2+bx+c=a\\left[\\left(x+\\dfrac{b}{2a}\\right)^2+\\dfrac{4ac-b^2}{4a^2}\\right]$; here $4ac-b^2>0$, so the bracket is always positive; hence both $>0$ and $\\ge0$ hold for all real $x$, while $<0$ has no solution.",
+        "For a rational inequality, move everything to one side and combine into a single fraction; never multiply directly by a denominator containing the unknown. For $\\dfrac{x-1}{x+2}\\ge0$ the critical points are $-2$ (excluded, since the denominator vanishes) and $1$. The quotient is positive, negative and positive on $(-\\infty,-2)$, $(-2,1)$ and $(1,+\\infty)$, and $x=1$ is allowed because the numerator is $0$ while the denominator is not. The solution set is $(-\\infty,-2)\\cup[1,+\\infty)$.",
+        "Absolute-value inequalities can be read as distances. For $a>0$, $|x|<a$ means the distance from $x$ to $0$ is less than $a$, so $-a<x<a$; $|x|>a$ means the distance is greater than $a$, so $x<-a$ or $x>a$. When writing solution sets, use open endpoints for excluded values and closed endpoints for included ones; simultaneous conditions give an intersection, while cases give a union."
+      ]
+    },
+    "linear-inequality-junior": {
+      "zh": [
+        "一元一次不等式是只含一个未知数、未知数次数为 $1$、两边都是整式的不等式，一般形式可写成 $ax+b>0$（$a\\ne0$；$<,\\ge,\\le$ 同理）。它的解集通常是一个区间：$a>0$ 时为 $x>-\\dfrac{b}{a}$，$a<0$ 时为 $x<-\\dfrac{b}{a}$，而不是一个点。",
+        "性质 3 的证明：设 $a>b$，则 $a-b>0$。若 $c<0$，则 $ac-bc=(a-b)c<0$，所以 $ac<bc$。因此两边同乘或同除一个负数时，不等号必须反向；同乘 $0$ 会使两边都变成 $0$，无法保留原来的大小信息。",
+        "解 $ax+b>0$：先移项得 $ax>-b$。若 $a>0$，两边同除以正数 $a$，方向不变，得 $x>-\\dfrac{b}{a}$；若 $a<0$，两边同除以负数 $a$，方向改变，得 $x<-\\dfrac{b}{a}$。所以「系数化为 1」时必须先看 $a$ 的符号。",
+        "例：解 $5x-2<2(x+5)$。去括号得 $5x-2<2x+10$；两边同减 $2x$ 再加 $2$，得 $3x<12$；两边同除以正数 $3$，方向不变，得 $x<4$。若解 $-2x\\ge-6$，两边同除以 $-2$（负数），则必须把 $\\ge$ 改为 $\\le$，得 $x\\le3$。",
+        "不等式组的解集是各个解集的交集。解 $\\begin{cases}2x-1>3\\\\5-2x\\ge-1\\end{cases}$：由第一个得 $x>2$；由第二个得 $-2x\\ge-6$，除以 $-2$ 变号得 $x\\le3$。取公共部分得 $2<x\\le3$；在数轴上，$2$ 处画空心圈、$3$ 处画实心点。若两个解集没有公共部分，则不等式组无解，解集为 $\\varnothing$。",
+        "等价性检查：移项、合并同类项都是可逆的恒等变形；除以负数虽然变号，但乘回去时再次变号，仍可还原，所以不改变解集。检验时可取端点与区间内的点：$x=3$ 使两个不等式都成立，$x=2$ 不满足第一个，$x=4$ 不满足第二个。去分母时若乘的是含未知数的式子，必须先讨论其正负，不能直接两边相乘。"
+      ],
+      "en": [
+        "A linear inequality in one variable contains exactly one unknown to the first power and has polynomial expressions on both sides; it can be written as $ax+b>0$ with $a\\ne0$ (similarly for $<,\\ge,\\le$). Its solution set is usually an interval: $x>-\\dfrac{b}{a}$ when $a>0$, and $x<-\\dfrac{b}{a}$ when $a<0$, not a single point.",
+        "Proof of Property 3: let $a>b$, so $a-b>0$. If $c<0$, then $ac-bc=(a-b)c<0$, hence $ac<bc$. Therefore multiplying or dividing both sides by a negative number reverses the inequality. Multiplying by $0$ makes both sides $0$ and destroys the size information.",
+        "Solve $ax+b>0$: transposing gives $ax>-b$. If $a>0$, dividing by the positive number $a$ keeps the direction, so $x>-\\dfrac{b}{a}$. If $a<0$, dividing by the negative number $a$ reverses it, so $x<-\\dfrac{b}{a}$. Thus reducing the coefficient to $1$ requires checking the sign of $a$ first.",
+        "Example: solve $5x-2<2(x+5)$. Expanding gives $5x-2<2x+10$; subtracting $2x$ and adding $2$ on both sides gives $3x<12$; dividing by the positive number $3$ keeps the direction, so $x<4$. For $-2x\\ge-6$, dividing by $-2$ (negative) forces $\\ge$ to become $\\le$, giving $x\\le3$.",
+        "The solution set of a system is the intersection of the individual solution sets. Solve $\\begin{cases}2x-1>3\\\\5-2x\\ge-1\\end{cases}$: the first gives $x>2$; the second gives $-2x\\ge-6$, and division by $-2$ reverses the sign to give $x\\le3$. The common part is $2<x\\le3$; on the number line draw an open circle at $2$ and a solid dot at $3$. If the individual sets do not overlap, the system has no solution and the solution set is $\\varnothing$.",
+        "Checking equivalence: transposition and collecting like terms are reversible identity transformations. Dividing by a negative number reverses the sign, but multiplying back by the same negative number reverses it again, so the solution set is unchanged. To check, test endpoints and interior points: $x=3$ satisfies both inequalities, $x=2$ fails the first, and $x=4$ fails the second. When clearing denominators, if the multiplier contains the unknown, discuss its sign first; do not multiply both sides blindly."
+      ]
+    },
+    "linear-system-two-variables": {
+      "zh": [
+        "二元一次方程组由两个形如 $a_ix+b_iy=c_i$ 的方程联立而成，其中 $a_i,b_i$ 不全为 $0$，且含未知数的项都是一次。解是一对有序实数 $(x,y)$，必须同时满足两个方程；只满足其中一个方程的一对数值不是方程组的解。",
+        "加减消元的合法性：若 $(x,y)$ 同时满足两个方程，则对任意实数 $\\lambda,\\mu$，它也满足 $\\lambda(a_1x+b_1y-c_1)+\\mu(a_2x+b_2y-c_2)=0$。把第二个方程替换为 ①+②，相当于左乘矩阵 $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$，其行列式为 $1\\ne0$，变换可逆，所以新旧方程组同解。对 $x+y=5$、$x-y=1$，相加得 $2x=6$，即 $x=3$。",
+        "代入消元：若 $b_1\\ne0$，由 ① 得 $y=\\dfrac{c_1-a_1x}{b_1}$，代入 ② 得 $(a_2b_1-a_1b_2)x=c_2b_1-b_2c_1$；若 $b_1=0$，则 $a_1\\ne0$，可直接由 ① 得 $x=\\dfrac{c_1}{a_1}$。记 $D=a_1b_2-a_2b_1$，则 $D\\ne0$ 时 $x=\\dfrac{c_1b_2-c_2b_1}{D}$，再回代求 $y$；$D=0$ 时 $x$ 被消尽，必须另判有无穷多解还是无解。",
+        "解 $\\begin{cases}x+y=5\\\\x-y=1\\end{cases}$：①+② 得 $2x=6$，故 $x=3$；代回 ① 得 $3+y=5$，故 $y=2$。检验：$3+2=5$，$3-2=1$，两式都成立，所以解为 $(3,2)$。回代不可省略，因为消元只保证先求出的那个未知数满足组合后的方程。",
+        "一般地，$D=a_1b_2-a_2b_1$。$D\\ne0$ 时两条直线不平行（方向向量不共线），方程组有唯一解；$D=0$ 时两条直线平行或重合：若存在常数 $k$ 使 $a_1=ka_2,\\ b_1=kb_2$ 但 $c_1\\ne kc_2$，则平行、无解；若还有 $c_1=kc_2$，则重合、有无穷多解。例如 $x+y=1$ 与 $2x+2y=3$ 满足 $D=0$ 且 $1:2=1:2\\ne1:3$，故无解。",
+        "几何上，每个二元一次方程对应一条直线，方程组的解就是两条直线的交点坐标；消元相当于用两条直线方程的线性组合替换其中一条，交点保持不变。应用题中设两个未知数、找两个独立的等量关系，解出后要同时代回两个方程，并检查解是否符合实际范围。"
+      ],
+      "en": [
+        "A system of two linear equations in two variables consists of two equations of the form $a_ix+b_iy=c_i$, where $a_i,b_i$ are not both zero and every term containing an unknown is of degree $1$. A solution is an ordered pair $(x,y)$ that satisfies both equations simultaneously; a pair satisfying only one equation is not a solution of the system.",
+        "Why elimination is legitimate: if $(x,y)$ satisfies both equations, then for all real $\\lambda,\\mu$ it satisfies $\\lambda(a_1x+b_1y-c_1)+\\mu(a_2x+b_2y-c_2)=0$. Replacing the second equation by ①+② is left multiplication by $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$, whose determinant is $1\\ne0$; the transformation is invertible, so the new system is equivalent to the old one. For $x+y=5$ and $x-y=1$, adding gives $2x=6$, hence $x=3$.",
+        "Substitution: if $b_1\\ne0$, the first equation gives $y=\\dfrac{c_1-a_1x}{b_1}$, and substituting into the second gives $(a_2b_1-a_1b_2)x=c_2b_1-b_2c_1$; if $b_1=0$, then $a_1\\ne0$, so the first equation gives $x=\\dfrac{c_1}{a_1}$ directly. Let $D=a_1b_2-a_2b_1$; if $D\\ne0$, then $x=\\dfrac{c_1b_2-c_2b_1}{D}$, and back-substitution gives $y$. If $D=0$, $x$ cancels out and one must decide separately between infinitely many solutions and none.",
+        "Solve $\\begin{cases}x+y=5\\\\x-y=1\\end{cases}$: adding ① and ② gives $2x=6$, so $x=3$; substituting back into ① gives $3+y=5$, so $y=2$. Check: $3+2=5$ and $3-2=1$, so both equations hold and the solution is $(3,2)$. Back-substitution is essential, because elimination only guarantees the value of the unknown that was found first.",
+        "In general, $D=a_1b_2-a_2b_1$. If $D\\ne0$, the lines are not parallel (their direction vectors are not collinear), so the system has a unique solution. If $D=0$, the lines are parallel or coincident: if $a_1=ka_2$ and $b_1=kb_2$ for some constant $k$ but $c_1\\ne kc_2$, the lines are parallel and there is no solution; if also $c_1=kc_2$, they coincide and there are infinitely many solutions. For $x+y=1$ and $2x+2y=3$, $D=0$ and $1:2=1:2\\ne1:3$, so there is no solution.",
+        "Geometrically, each linear equation represents a line and the solution of the system is the intersection point. Elimination replaces one line by a linear combination of the two equations, which leaves the intersection unchanged. In applications, introduce two unknowns and two independent relations; after solving, substitute into both equations and check that the values lie in the admissible range."
+      ]
+    },
+    "polynomial": {
+      "zh": [
+        "多项式是有限个单项式之和：$P(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_1x+a_0$，其中 $a_n\\ne0$，$n$ 称为次数，$a_n$ 是首项系数，$a_0$ 是常数项。单项式的次数是各字母指数之和；同类项是字母及其指数都相同的项，合并时只把系数相加，例如 $3x^2y-5x^2y=-2x^2y$，次数保持不变。",
+        "次数在运算中的规律：在实数或复数系数下，对非零多项式有 $\\deg(PQ)=\\deg P+\\deg Q$；并且 $\\deg(P+Q)\\le\\max(\\deg P,\\deg Q)$，当最高次项没有完全抵消时取等号；若完全抵消，次数严格小于最大值（和为零多项式时次数无定义）。例如 $(x^2+1)+(-x^2+x)=x+1$，次数由 $2$ 降为 $1$。",
+        "多项式相等是恒等：若两个多项式在无穷多个点处取值相同，则对应项系数相等。因为差 $R=P-Q$ 有无穷多个根；若 $R$ 是非零常数则没有根，若 $R$ 是 $n\\ge1$ 次非零多项式则至多有 $n$ 个根，两种情形都不可能，所以只能 $R\\equiv0$。这条性质是待定系数法的依据。",
+        "带余除法与余数定理：对任意多项式 $P$ 和一次式 $x-a$，存在唯一的商 $Q$ 与常数余数 $r$，使 $P(x)=(x-a)Q(x)+r$。令 $x=a$，得 $r=P(a)$，即除以 $x-a$ 的余数等于 $P(a)$。特别地，$P(a)=0\\iff(x-a)\\mid P(x)$，这就是因式定理。",
+        "例：$P(x)=x^3-6x^2+11x-6$。计算得 $P(1)=0$、$P(2)=0$、$P(3)=0$，由因式定理，$(x-1)$、$(x-2)$、$(x-3)$ 都是 $P(x)$ 的因式。三次多项式除以这三个一次因式的积后次数为 $0$，比较首项系数得 $P(x)=(x-1)(x-2)(x-3)$，在实数域上已分解为不可约的一次因式。",
+        "代数基本定理：次数 $n\\ge1$ 的复系数多项式在复数范围内恰有 $n$ 个根（按重数计算），故可分解为 $a_n\\prod_{k=1}^{n}(x-z_k)$。实系数多项式的非实根成共轭对出现，因此在实数域上可分解为一次因式与无实根二次因式的乘积；这也说明 $n$ 次多项式至多有 $n$ 个实根。"
+      ],
+      "en": [
+        "A polynomial is a finite sum of monomials: $P(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_1x+a_0$ with $a_n\\ne0$; $n$ is its degree, $a_n$ the leading coefficient and $a_0$ the constant term. The degree of a monomial is the sum of the exponents of its letters. Like terms have identical letters with identical exponents; combining them adds only the coefficients, for example $3x^2y-5x^2y=-2x^2y$, and the degree is unchanged.",
+        "Degree rules under operations: over real or complex coefficients, for nonzero polynomials $\\deg(PQ)=\\deg P+\\deg Q$, while $\\deg(P+Q)\\le\\max(\\deg P,\\deg Q)$, with equality when the highest-degree terms do not cancel completely; if they do, the degree is strictly smaller than the maximum (and is undefined when the sum is the zero polynomial). For example, $(x^2+1)+(-x^2+x)=x+1$ has degree $1$ instead of $2$.",
+        "Equality of polynomials is an identity: if two polynomials take the same value at infinitely many points, their corresponding coefficients are equal. Indeed, the difference $R=P-Q$ has infinitely many roots; a nonzero constant has none, and a nonzero polynomial of degree $n\\ge1$ has at most $n$, so neither case is possible; hence $R\\equiv0$. This fact justifies the method of undetermined coefficients.",
+        "Division with remainder and the remainder theorem: for any polynomial $P$ and any linear polynomial $x-a$, there are a unique quotient $Q$ and a constant remainder $r$ such that $P(x)=(x-a)Q(x)+r$. Setting $x=a$ gives $r=P(a)$, so the remainder on division by $x-a$ equals $P(a)$. In particular, $P(a)=0\\iff(x-a)\\mid P(x)$, which is the factor theorem.",
+        "Example: $P(x)=x^3-6x^2+11x-6$. Direct computation gives $P(1)=0$, $P(2)=0$ and $P(3)=0$, so by the factor theorem $(x-1)$, $(x-2)$ and $(x-3)$ are all factors. Dividing the cubic by their product leaves degree $0$; comparing leading coefficients gives $P(x)=(x-1)(x-2)(x-3)$, already a product of irreducible linear factors over the reals.",
+        "The fundamental theorem of algebra: a complex polynomial of degree $n\\ge1$ has exactly $n$ roots in the complex numbers, counted with multiplicity, so it factors as $a_n\\prod_{k=1}^{n}(x-z_k)$. Nonreal roots of a real-coefficient polynomial occur in conjugate pairs; hence over the reals it factors into linear factors and quadratic factors with no real roots. It also follows that a degree-$n$ polynomial has at most $n$ real roots."
+      ]
+    },
+    "quadratic-equation-junior": {
+      "zh": [
+        "一元二次方程的一般形式是 $ax^2+bx+c=0$，其中 $a\\ne0$。若 $a=0$，方程退化为一次方程、恒等式或矛盾等式，不再是二次方程；因此 $a\\ne0$ 既是二次项存在的条件，也是后面配方与使用求根公式的前提。",
+        "配方：两边同除以 $a\\ne0$，得 $x^2+\\dfrac{b}{a}x+\\dfrac{c}{a}=0$；移常数项，并在两边同加一次项系数一半的平方 $\\left(\\dfrac{b}{2a}\\right)^2$，得 $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{b^2-4ac}{4a^2}$。加的是同一个数，所以这是恒等变形。",
+        "因为 $4a^2>0$，右边符号由判别式 $\\Delta=b^2-4ac$ 决定：$\\Delta>0$ 时右边为正，开平方得两个不相等的实根；$\\Delta=0$ 时右边为 $0$，得重根 $x=-\\dfrac{b}{2a}$（即两个相等的实根）；$\\Delta<0$ 时右边为负，而实数的平方非负，所以没有实数根（在复数范围内仍有两个根）。",
+        "当 $\\Delta\\ge0$ 时，由 $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{\\Delta}{4a^2}$ 得 $x=-\\dfrac{b}{2a}\\pm\\dfrac{\\sqrt{\\Delta}}{2|a|}$。由于 $\\pm$ 表示两个值，而 $\\dfrac{1}{2|a|}$ 与 $\\dfrac{1}{2a}$ 只相差一个整体符号，这个符号可被 $\\pm$ 吸收，故可统一写成 $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$。分母是 $2a$，根号内是 $b^2-4ac$，使用前必须先整理成一般形式。",
+        "韦达定理：当 $\\Delta\\ge0$ 时，设两根为 $x_1,x_2$，则 $ax^2+bx+c=a(x-x_1)(x-x_2)=ax^2-a(x_1+x_2)x+ax_1x_2$。比较系数得 $x_1+x_2=-\\dfrac{b}{a}$，$x_1x_2=\\dfrac{c}{a}$。它可以在不解方程时求对称式的值，也可以用来检验求出的根。",
+        "例：解 $x^2-2x-3=0$。这里 $a=1,b=-2,c=-3$，$\\Delta=(-2)^2-4\\cdot1\\cdot(-3)=16>0$，故有两个不等实根，$x=\\dfrac{2\\pm4}{2}$，即 $x_1=3$、$x_2=-1$。检验：$x_1+x_2=2=-\\dfrac{b}{a}$，$x_1x_2=-3=\\dfrac{c}{a}$；因式分解 $(x-3)(x+1)=0$ 也给出同样的根。"
+      ],
+      "en": [
+        "The general form of a quadratic equation is $ax^2+bx+c=0$ with $a\\ne0$. If $a=0$, the equation degenerates into a linear equation, an identity or a contradiction and is no longer quadratic; thus $a\\ne0$ is required for the quadratic term to exist and is also the hypothesis for completing the square and for the quadratic formula.",
+        "Completing the square: divide both sides by $a\\ne0$ to get $x^2+\\dfrac{b}{a}x+\\dfrac{c}{a}=0$. Move the constant term and add the square of half the linear coefficient, $\\left(\\dfrac{b}{2a}\\right)^2$, to both sides; this gives $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{b^2-4ac}{4a^2}$. The same number is added on both sides, so the transformation is an identity.",
+        "Since $4a^2>0$, the sign of the right side is determined by the discriminant $\\Delta=b^2-4ac$. If $\\Delta>0$, the right side is positive and taking square roots gives two distinct real roots. If $\\Delta=0$, it is zero, giving the double root $x=-\\dfrac{b}{2a}$ (two equal real roots). If $\\Delta<0$, it is negative, while a real square is nonnegative, so there is no real root (over the complex numbers there are still two roots).",
+        "For $\\Delta\\ge0$, $\\left(x+\\dfrac{b}{2a}\\right)^2=\\dfrac{\\Delta}{4a^2}$ gives $x=-\\dfrac{b}{2a}\\pm\\dfrac{\\sqrt{\\Delta}}{2|a|}$. Because $\\pm$ selects two values and $\\dfrac{1}{2|a|}$ differs from $\\dfrac{1}{2a}$ only by an overall sign, that sign is absorbed by $\\pm$, so the result can be written uniformly as $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. The denominator is $2a$, the radicand is $b^2-4ac$, and the equation must first be put in general form.",
+        "Vieta formulas: when $\\Delta\\ge0$, let the roots be $x_1,x_2$. Then $ax^2+bx+c=a(x-x_1)(x-x_2)=ax^2-a(x_1+x_2)x+ax_1x_2$. Comparing coefficients gives $x_1+x_2=-\\dfrac{b}{a}$ and $x_1x_2=\\dfrac{c}{a}$. These relations evaluate symmetric expressions without solving the equation and also serve as a check on the roots.",
+        "Example: solve $x^2-2x-3=0$. Here $a=1$, $b=-2$, $c=-3$, so $\\Delta=(-2)^2-4\\cdot1\\cdot(-3)=16>0$; there are two distinct real roots, $x=\\dfrac{2\\pm4}{2}$, namely $x_1=3$ and $x_2=-1$. Check: $x_1+x_2=2=-\\dfrac{b}{a}$ and $x_1x_2=-3=\\dfrac{c}{a}$; factoring $(x-3)(x+1)=0$ gives the same roots."
+      ]
+    }
+  }
+}
