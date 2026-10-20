@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=41";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture } from "./stars.js?v=41";
+import { renderPlot } from "./plot.js?v=42";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=42";
 
 /* ============================================================
    1. 全局状态
@@ -30,7 +30,7 @@ let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
 
 /* 知识共鸣：让有链接关系的知识点产生可控的「碰撞—融合」交互 */
-const LINK_OPACITY = 0.19; // 在 0.22 基础上再降低约 14% // 连线基础亮度：比旧版更清晰，但仍低于悬停/共鸣高亮
+const LINK_OPACITY = 0.022; // 深空底色下的「引力丝」基础亮度：默认隐入星云，聚焦时亮起
 const REDUCE_MOTION = window.matchMedia
   ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
   : false;
@@ -236,7 +236,7 @@ function computePositions() {
 const canvas = document.getElementById("galaxy");
 const scene = new THREE.Scene();
 // 极轻的雾：只用于让远处的连线淡入背景，成本极低
-scene.fog = new THREE.FogExp2(0x04050e, 0.0016);
+scene.fog = new THREE.FogExp2(0x080a1a, 0.00135);
 
 const camera = new THREE.PerspectiveCamera(
   50,
@@ -244,17 +244,17 @@ const camera = new THREE.PerspectiveCamera(
   0.5,
   4000
 );
-camera.position.set(0, 118, 238);
+camera.position.set(0, 162, 238);
 
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: false, // 点精灵自带柔边；省下 MSAA 的开销
-  alpha: false,
+  alpha: true,
   powerPreference: "high-performance",
   stencil: false,
   depth: true,
 });
-renderer.setClearColor(0x04050e, 1);
+renderer.setClearColor(0x000000, 0);
 
 /* 自适应分辨率：性能不足时自动降采样，保证流畅 */
 const quality = {
@@ -295,7 +295,7 @@ controls.zoomToCursor = true; // 缩放锚定鼠标位置，避免整幅画面�
 controls.minDistance = 18; // 允许贴近星星观察
 controls.maxDistance = 700;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.32;
+controls.autoRotateSpeed = 0.24;
 
 /* 用户一操作就交还完全控制权：中断飞行、暂停自转 */
 controls.addEventListener("start", () => {
@@ -312,20 +312,6 @@ controls.addEventListener("end", () => {
 function createNebulae() {
   const group = new THREE.Group();
 
-  // 贴近银盘的两片「银河带」：扁长形状，制造银河主体光带
-  const bandConfigs = [
-    { seed: 7, pos: [-40, -8, 30], scale: [700, 190], rot: 0.55, opacity: 0.10, inner: "#2a1b6e", outer: "#1257b8" },
-    { seed: 19, pos: [55, 6, -35], scale: [620, 170], rot: 0.6, opacity: 0.09, inner: "#3a1b6e", outer: "#1b3fa8" },
-  ];
-
-  // 外围星云：更饱和的冷色，点缀而非糊成一片
-  const configs = [
-    { seed: 3,  scale: 400, pos: [-185, -26, 155], rot: 0.4,  opacity: 0.28, inner: "#4a1f9e", outer: "#1b5fd8" },
-    { seed: 11, scale: 380, pos: [205, 20, -145],  rot: -0.7, opacity: 0.25, inner: "#6a1f8c", outer: "#1f3fd8" },
-    { seed: 23, scale: 300, pos: [90, -28, 215],   rot: 1.2,  opacity: 0.20, inner: "#0b4c86", outer: "#5f36d8" },
-    { seed: 41, scale: 290, pos: [-145, 28, -205], rot: -1.6, opacity: 0.18, inner: "#6f2a94", outer: "#1560b0" },
-  ];
-
   const addSprite = (tex, opacity, rot) =>
     new THREE.SpriteMaterial({
       map: tex,
@@ -337,8 +323,64 @@ function createNebulae() {
       rotation: rot,
     });
 
+  // —— 星系整体光晕：把银河从「黑底上的点」托成一片发光的深空 ——
+  const halo = new THREE.Sprite(
+    new THREE.SpriteMaterial({
+      map: makeSoftGlowTexture([
+        [0, "rgba(150,130,255,0.42)"],
+        [0.28, "rgba(80,110,220,0.20)"],
+        [0.62, "rgba(38,80,150,0.07)"],
+        [1, "rgba(10,20,50,0)"],
+      ]),
+      transparent: true,
+      opacity: 0.34,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      depthTest: false,
+    })
+  );
+  halo.scale.set(680, 520, 1);
+  halo.position.set(0, -8, 0);
+  halo.renderOrder = -4;
+  group.add(halo);
+
+  // —— 银盘底图：一个真正的旋涡星系，托住 641 个知识点 ——
+  const diskTex = makeSpiralGalaxyTexture({ seed: 808, size: 1024 });
+  const disk = new THREE.Mesh(
+    new THREE.PlaneGeometry(430, 430),
+    new THREE.MeshBasicMaterial({
+      map: diskTex,
+      transparent: true,
+      opacity: 0.52,
+      blending: THREE.NormalBlending,
+      depthWrite: false,
+      depthTest: false,
+      side: THREE.DoubleSide,
+    })
+  );
+  disk.rotation.x = -Math.PI / 2;
+  disk.position.y = -7;
+  disk.renderOrder = -2;
+  group.add(disk);
+
+  // —— 银河带：一条偏暖、一条偏冷，叠出「星河」的层次 ——
+  const bandConfigs = [
+    { seed: 7, pos: [-20, -4, 20], scale: [930, 210], rot: 0.42, opacity: 0.18, inner: "#ffcf9e", outer: "#5a2b8c" },
+    { seed: 19, pos: [45, 12, -30], scale: [800, 190], rot: 0.55, opacity: 0.14, inner: "#8ee7ff", outer: "#3b2a9a" },
+  ];
+
+  // —— 外围星云：冷色为主，少量玫红和金色点缀 ——
+  const configs = [
+    { seed: 3,  scale: 480, pos: [-205, -34, 165], rot: 0.4,  opacity: 0.34, inner: "#6b3bd8", outer: "#1b8fd8" },
+    { seed: 11, scale: 430, pos: [220, 30, -160],  rot: -0.7, opacity: 0.30, inner: "#b13acb", outer: "#2457d8" },
+    { seed: 23, scale: 380, pos: [105, -38, 235],  rot: 1.2,  opacity: 0.25, inner: "#13a0c8", outer: "#7a3fe0" },
+    { seed: 41, scale: 360, pos: [-165, 42, -220], rot: -1.6, opacity: 0.22, inner: "#c74d9d", outer: "#1b5fc0" },
+    { seed: 57, scale: 300, pos: [250, -18, 90],   rot: -1.1, opacity: 0.18, inner: "#f0a36b", outer: "#5b2a9c" },
+    { seed: 73, scale: 260, pos: [-235, 18, -95],  rot: 1.7,  opacity: 0.16, inner: "#74f0d4", outer: "#3346b8" },
+  ];
+
   bandConfigs.forEach((c) => {
-    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 192 });
+    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 256, cutoff: 0.34, power: 1.35 });
     const sp = new THREE.Sprite(addSprite(tex, c.opacity, c.rot));
     sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
     sp.scale.set(c.scale[0], c.scale[1], 1);
@@ -347,7 +389,7 @@ function createNebulae() {
   });
 
   configs.forEach((c) => {
-    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer });
+    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 224, cutoff: 0.35, power: 1.35 });
     const sp = new THREE.Sprite(addSprite(tex, c.opacity, c.rot));
     sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
     sp.scale.setScalar(c.scale);
@@ -355,14 +397,87 @@ function createNebulae() {
     group.add(sp);
   });
 
-  // —— 暗尘埃带：用正常混合压暗核球，制造银河盘面的尘埃纹理 ——
+  // —— 极光丝带：几缕非常大的冷色光帘，提供「梦幻」而不遮住星点 ——
+  const auroraConfigs = [
+    { seed: 301, pos: [-95, 82, -120], scale: [720, 230], rot: 0.18, opacity: 0.24, colorA: "#53e6ff", colorB: "#9b6cff" },
+    { seed: 311, pos: [150, -58, 105], scale: [640, 190], rot: -0.35, opacity: 0.18, colorA: "#ff8fd0", colorB: "#6f8cff" },
+    { seed: 323, pos: [-190, -22, 160], scale: [560, 160], rot: 0.95, opacity: 0.14, colorA: "#77ffd8", colorB: "#3966e8" },
+    { seed: 331, pos: [-230, 42, 62], scale: [560, 150], rot: -0.72, opacity: 0.15, colorA: "#ff79c8", colorB: "#6fe7ff" },
+    { seed: 337, pos: [230, -28, -100], scale: [520, 145], rot: 0.58, opacity: 0.13, colorA: "#7fffd4", colorB: "#9b6cff" },
+  ];
+  auroraConfigs.forEach((c) => {
+    const tex = makeAuroraTexture({ seed: c.seed, colorA: c.colorA, colorB: c.colorB, size: 256 });
+    const sp = new THREE.Sprite(addSprite(tex, c.opacity, c.rot));
+    sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
+    sp.scale.set(c.scale[0], c.scale[1], 1);
+    sp.renderOrder = -4;
+    group.add(sp);
+  });
+
+  // 两团极淡的彩色气体：一冷一暖，把蓝紫底色拉开一点梦幻的色相
+  const tintClouds = [
+    { pos: [-245, -36, 70], scale: [560, 380], color: "#ff79c8", opacity: 0.075 },
+    { pos: [245, 52, -90], scale: [520, 350], color: "#5fe7ff", opacity: 0.075 },
+  ];
+  tintClouds.forEach((c) => {
+    const sp = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeSoftGlowTexture([
+          [0, "rgba(255,255,255,0.55)"],
+          [0.38, "rgba(255,255,255,0.16)"],
+          [1, "rgba(255,255,255,0)"],
+        ]),
+        color: c.color,
+        transparent: true,
+        opacity: c.opacity,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        depthTest: false,
+      })
+    );
+    sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
+    sp.scale.set(c.scale[0], c.scale[1], 1);
+    sp.renderOrder = -4;
+    group.add(sp);
+  });
+
+  // —— 远景星系：深空里若隐若现的其他旋涡，给「浩瀚」一个尺度参照 ——
+  const galaxies = [
+    { seed: 501, pos: [-430, 155, -380], scale: [96, 62], rot: 0.4, opacity: 0.32, core: "#ffe3bd", arm: "#8db8ff" },
+    { seed: 503, pos: [470, -120, -330], scale: [78, 52], rot: -0.8, opacity: 0.26, core: "#ffd7ca", arm: "#c59cff" },
+    { seed: 507, pos: [-380, -160, 430], scale: [70, 46], rot: 1.1, opacity: 0.22, core: "#fff0d0", arm: "#7fe8e0" },
+    { seed: 509, pos: [390, 190, 390], scale: [64, 42], rot: -0.2, opacity: 0.20, core: "#ffe5f0", arm: "#91a8ff" },
+    { seed: 511, pos: [50, 250, -560], scale: [58, 38], rot: 0.7, opacity: 0.18, core: "#fff4dc", arm: "#b8a0ff" },
+    { seed: 513, pos: [-500, -60, -80], scale: [52, 34], rot: -1.2, opacity: 0.16, core: "#ffe0c8", arm: "#8fd0ff" },
+  ];
+  galaxies.forEach((c) => {
+    const tex = makeGalaxyTexture({ seed: c.seed, core: c.core, arm: c.arm, size: 192 });
+    const sp = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: tex,
+        transparent: true,
+        opacity: c.opacity,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        depthTest: false,
+        rotation: c.rot,
+      })
+    );
+    sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
+    sp.scale.set(c.scale[0], c.scale[1], 1);
+    sp.renderOrder = -5;
+    group.add(sp);
+  });
+
+  // —— 暗尘埃带：压暗核球和盘面，制造「气体遮挡」的纵深 ——
   const dustConfigs = [
-    { seed: 71, pos: [-10, -5, 12], scale: [560, 66], rot: 0.42, opacity: 0.18 },
-    { seed: 83, pos: [35, 4, -18], scale: [440, 52], rot: 1.12, opacity: 0.13 },
-    { seed: 97, pos: [-55, 7, -62], scale: [360, 46], rot: -0.55, opacity: 0.10 },
+    { seed: 71, pos: [-10, -5, 12], scale: [620, 72], rot: 0.42, opacity: 0.30 },
+    { seed: 83, pos: [35, 4, -18], scale: [500, 58], rot: 1.12, opacity: 0.17 },
+    { seed: 97, pos: [-55, 7, -62], scale: [420, 50], rot: -0.55, opacity: 0.13 },
+    { seed: 109, pos: [150, 4, 120], scale: [420, 44], rot: 1.85, opacity: 0.10 },
   ];
   dustConfigs.forEach((c) => {
-    const tex = makeNebulaTexture({ seed: c.seed, inner: "#04050a", outer: "#0a0d18", size: 192 });
+    const tex = makeNebulaTexture({ seed: c.seed, inner: "#03040a", outer: "#0a0d18", size: 224 });
     const sp = new THREE.Sprite(
       new THREE.SpriteMaterial({
         map: tex,
@@ -380,13 +495,32 @@ function createNebulae() {
     group.add(sp);
   });
 
-  // —— 星云丝：很淡的冷色长条，沿盘面增加丝状层次 ——
+  // 核心前的暗尘埃带：把白热核球切出一道结构，避免变成一团白色光斑
+  const coreDustTex = makeNebulaTexture({ seed: 131, inner: "#010206", outer: "#04060d", size: 224 });
+  const coreDust = new THREE.Sprite(
+    new THREE.SpriteMaterial({
+      map: coreDustTex,
+      transparent: true,
+      opacity: 0.52,
+      blending: THREE.NormalBlending,
+      depthWrite: false,
+      depthTest: false,
+      rotation: 0.16,
+    })
+  );
+  coreDust.position.set(-4, -2, 3);
+  coreDust.scale.set(300, 50, 1);
+  coreDust.renderOrder = 0;
+  group.add(coreDust);
+
+  // —— 星云丝：沿盘面的细长光丝，增加「气体流动」的方向感 ——
   const filamentConfigs = [
-    { seed: 101, pos: [-70, 10, 55], scale: [620, 34], rot: 0.55, opacity: 0.055, inner: "#20306e", outer: "#3d247a" },
-    { seed: 113, pos: [70, -6, -55], scale: [560, 30], rot: 0.48, opacity: 0.045, inner: "#163b78", outer: "#2b1b62" },
+    { seed: 101, pos: [-80, 16, 55], scale: [680, 38], rot: 0.55, opacity: 0.08, inner: "#4b89ff", outer: "#a45cff" },
+    { seed: 113, pos: [80, -10, -55], scale: [620, 34], rot: 0.48, opacity: 0.07, inner: "#42e8d0", outer: "#7b4cff" },
+    { seed: 127, pos: [30, 38, 100], scale: [520, 28], rot: -0.25, opacity: 0.05, inner: "#ffb07a", outer: "#d04f9f" },
   ];
   filamentConfigs.forEach((c) => {
-    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 192 });
+    const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 224, cutoff: 0.35, power: 1.35 });
     const sp = new THREE.Sprite(addSprite(tex, c.opacity, c.rot));
     sp.position.set(c.pos[0], c.pos[1], c.pos[2]);
     sp.scale.set(c.scale[0], c.scale[1], 1);
@@ -394,53 +528,132 @@ function createNebulae() {
     group.add(sp);
   });
 
+  // —— 星团辉光：在知识点密集处点几团很淡的气体，让星点像嵌在星云里 ——
+  if (DATA && DATA.nodes && DATA.nodes.length) {
+    const clusterTex = makeSoftGlowTexture([
+      [0, "rgba(255,255,255,0.72)"],
+      [0.32, "rgba(255,255,255,0.22)"],
+      [1, "rgba(255,255,255,0)"],
+    ]);
+    for (let i = 0; i < DATA.nodes.length; i += 47) {
+      const node = DATA.nodes[i];
+      if (!node.position) continue;
+      const c = new THREE.Color(DATA.branches[node.branch]?.color || "#9ec7ff");
+      const sp = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: clusterTex,
+          color: c,
+          transparent: true,
+          opacity: 0.055,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          depthTest: false,
+        })
+      );
+      sp.position.set(node.position.x, node.position.y, node.position.z);
+      sp.scale.set(46 + (i % 3) * 10, 34 + (i % 4) * 6, 1);
+      sp.renderOrder = -1;
+      group.add(sp);
+    }
+  }
+
   return group;
 }
 
 function createCore() {
   const group = new THREE.Group();
 
-  // 内层：紧凑的明亮核心
-  const innerTex = makeSoftGlowTexture([
-    [0, "rgba(255,255,255,1)"],
-    [0.25, "rgba(228,238,255,0.55)"],
-    [0.55, "rgba(170,198,255,0.16)"],
-    [1, "rgba(120,160,255,0)"],
-  ]);
-  const inner = new THREE.Sprite(
-    new THREE.SpriteMaterial({
-      map: innerTex,
-      transparent: true,
-      opacity: 0.5,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      depthTest: false,
-    })
-  );
-  inner.scale.setScalar(26);
-  inner.renderOrder = -1;
-  group.add(inner);
+  const glow = (stops, scale, opacity, order) => {
+    const sp = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeSoftGlowTexture(stops),
+        transparent: true,
+        opacity,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        depthTest: false,
+      })
+    );
+    if (Array.isArray(scale)) sp.scale.set(scale[0], scale[1], 1);
+    else sp.scale.setScalar(scale);
+    sp.renderOrder = order;
+    group.add(sp);
+    return sp;
+  };
 
-  // 核球：沿银盘方向铺开的柔光
-  const bulgeTex = makeSoftGlowTexture([
-    [0, "rgba(214,230,255,0.5)"],
-    [0.4, "rgba(150,182,255,0.16)"],
-    [1, "rgba(90,120,215,0)"],
-  ]);
-  const bulge = new THREE.Sprite(
-    new THREE.SpriteMaterial({
-      map: bulgeTex,
-      transparent: true,
-      opacity: 0.5,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      depthTest: false,
-    })
+  // 最外层：冷色星系核光晕，和星云连成一片
+  glow(
+    [
+      [0, "rgba(255,245,225,0.70)"],
+      [0.16, "rgba(255,205,160,0.30)"],
+      [0.42, "rgba(150,130,255,0.13)"],
+      [1, "rgba(20,30,80,0)"],
+    ],
+    [560, 340],
+    0.10,
+    -4
   );
-  bulge.scale.set(230, 78, 1);
-  bulge.position.set(0, 0, 0);
-  bulge.renderOrder = -2;
-  group.add(bulge);
+
+  // 核球：沿银盘方向铺开的暖光，制造「银河中心」的体积感
+  const bulge = glow(
+    [
+      [0, "rgba(255,248,232,0.90)"],
+      [0.22, "rgba(255,215,170,0.42)"],
+      [0.55, "rgba(180,150,255,0.13)"],
+      [1, "rgba(80,70,180,0)"],
+    ],
+    [320, 104],
+    0.24,
+    -3
+  );
+  bulge.position.y = -2;
+
+  // 中层：偏玫红的柔光，给白热核心一点梦幻的色温
+  glow(
+    [
+      [0, "rgba(255,255,255,0.95)"],
+      [0.28, "rgba(255,190,220,0.42)"],
+      [0.62, "rgba(150,120,255,0.12)"],
+      [1, "rgba(40,30,100,0)"],
+    ],
+    [170, 96],
+    0.18,
+    -2
+  );
+
+  // 内层：紧凑的白热核心
+  glow(
+    [
+      [0, "rgba(255,255,255,1)"],
+      [0.20, "rgba(255,248,230,0.72)"],
+      [0.48, "rgba(200,210,255,0.20)"],
+      [1, "rgba(150,170,255,0)"],
+    ],
+    38,
+    0.30,
+    -1
+  );
+
+  // 极细的「星系核环」：给量子/仪表感一个非常克制的落点
+  const ring = (inner, outer, color, opacity) => {
+    const mesh = new THREE.Mesh(
+      new THREE.RingGeometry(inner, outer, 160),
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      })
+    );
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.y = -1.5;
+    mesh.renderOrder = -1;
+    group.add(mesh);
+  };
+  ring(44, 45.1, 0x7fe8ff, 0.06);
+  ring(61, 61.8, 0xb58cff, 0.025);
 
   return group;
 }
@@ -451,7 +664,7 @@ function createBackgroundStars() {
 
   // —— 远景星壳：包裹整个场景，旋转时产生宇宙纵深 ——
   const shell = [];
-  const N1 = 5600;
+  const N1 = 9000;
   for (let i = 0; i < N1; i++) {
     const u = rnd() * 2 - 1;
     const th = rnd() * Math.PI * 2;
@@ -465,7 +678,7 @@ function createBackgroundStars() {
     shell.push({
       position: [Math.cos(th) * s * r, u * r * 0.9, Math.sin(th) * s * r],
       color,
-      size: 1.5 + rnd() * 3.0,
+      size: 1.6 + rnd() * 4.2,
       spike: rnd() > 0.988 ? 0.55 : 0,
     });
   }
@@ -536,7 +749,7 @@ function createBackgroundStars() {
 
   // —— 深空微尘星：散落在整片暗区的闪烁小星，让黑夜不空 ——
   const motes = [];
-  const N4 = 700;
+  const N4 = 1200;
   for (let i = 0; i < N4; i++) {
     const u = rnd() * 2 - 1;
     const th = rnd() * Math.PI * 2;
@@ -550,7 +763,7 @@ function createBackgroundStars() {
     motes.push({
       position: [Math.cos(th) * s * r, u * r * 0.85, Math.sin(th) * s * r],
       color,
-      size: 1.2 + rnd() * 2.0,
+      size: 1.4 + rnd() * 2.8,
       spike: rnd() > 0.975 ? 0.5 : 0,
     });
   }
@@ -558,6 +771,39 @@ function createBackgroundStars() {
   motesLayer.spin = 0.00018; // 深空微尘：略快一点的缓慢漂移
   group.add(motesLayer.object);
   bgLayers.push(motesLayer);
+
+  // —— 银河星带：沿一个倾斜大圆铺开的密集微星，给画面一条「星河」——
+  // 它不是知识点旋臂，而是远景的银河带；相机转动时会像真实星空一样横贯画面。
+  const bandStars = [];
+  const N5 = 6000;
+  const normal = new THREE.Vector3(0.34, 1, 0.16).normalize();
+  const e1 = new THREE.Vector3(1, 0, 0.36).normalize();
+  const e2 = new THREE.Vector3().crossVectors(normal, e1).normalize();
+  for (let i = 0; i < N5; i++) {
+    const th = rnd() * Math.PI * 2;
+    const r = 500 + Math.pow(rnd(), 0.7) * 470;
+    const spread = (rnd() - 0.5) * (18 + r * 0.10);
+    const v = e1
+      .clone()
+      .multiplyScalar(Math.cos(th) * r)
+      .addScaledVector(e2, Math.sin(th) * r * 0.78)
+      .addScaledVector(normal, spread);
+    const tint = rnd();
+    let color = "#dfe9ff";
+    if (tint > 0.91) color = "#ffd6a3";
+    else if (tint > 0.76) color = "#bcd7ff";
+    else if (tint > 0.60) color = "#e6cfff";
+    bandStars.push({
+      position: [v.x, v.y, v.z],
+      color,
+      size: 1.0 + rnd() * 2.4,
+      spike: rnd() > 0.992 ? 0.45 : 0,
+    });
+  }
+  const bandLayer = new StarLayer(bandStars, { opacity: 0.62, twinkle: 0.18 });
+  bandLayer.spin = 0.00012;
+  group.add(bandLayer.object);
+  bgLayers.push(bandLayer);
 
   return group;
 }
@@ -572,6 +818,7 @@ function buildLinks() {
   const done = new Set();
   const cA = new THREE.Color();
   const cB = new THREE.Color();
+  const linkTint = new THREE.Color("#a9c8ff");
   const SEG = 18;
 
   DATA.nodes.forEach((node) => {
@@ -614,7 +861,7 @@ function buildLinks() {
         const t = vertCount > 1 ? v / (vertCount - 1) : 0;
         // 中段稍亮，两端收敛，连线看起来像能量流
         const shape = 0.55 + 0.45 * Math.sin(Math.PI * t);
-        const c = cA.clone().lerp(cB, t);
+        const c = cA.clone().lerp(cB, t).lerp(linkTint, 0.52);
         colors.push(c.r * shape, c.g * shape, c.b * shape);
       }
 
@@ -659,7 +906,7 @@ function updateLinkColors() {
   if (!linksObject) return;
   const attr = linksObject.geometry.getAttribute("color");
   const arr = attr.array;
-  const DIM = 0.05;
+  const DIM = 0.01;
 
   // 悬停或选中的节点优先：它连出去的脉络点亮，其余压暗
   let focusId = null;
@@ -670,15 +917,15 @@ function updateLinkColors() {
     let k;
     if (resonancePathKeys.size && resonancePathKeys.has(m.key)) {
       // 共鸣链路：优先点亮整条知识链
-      k = 2.1;
+      k = 10.0;
     } else if (resonanceMode && resonancePathKeys.size) {
       // 共鸣进行中，压暗无关连线，让画面保持干净
-      k = 0.025;
+      k = 0.015;
     } else if (focusId) {
-      k = m.na === focusId || m.nb === focusId ? 1.45 : 0.06;
+      k = m.na === focusId || m.nb === focusId ? 8.0 : 0.01;
     } else {
       const on = !activeBranch || m.a === activeBranch || m.b === activeBranch;
-      k = on ? 1 : DIM;
+      k = activeBranch ? (on ? 4.0 : DIM) : 1;
     }
     for (let v = 0; v < m.count; v++) {
       const i = (m.start + v) * 3;
@@ -701,7 +948,7 @@ function createKnowledgeStars() {
     return {
       position: [n.position.x, n.position.y, n.position.z],
       color: DATA.branches[n.branch].color,
-      size: (7 + n.level * 2.8) * (0.9 + 0.25 * seed),
+      size: (6.4 + n.level * 2.4) * (0.9 + 0.25 * seed),
       spike: spikes,
       grade,
       seed,
@@ -2123,9 +2370,9 @@ function openPanel(id, fromBack = false) {
   panelTitle.innerHTML =
     node.title +
     (node.titleEn ? `<span class="title-en">${node.titleEn}</span>` : "");
-  panelSummary.textContent = useEn
-    ? node.summaryEn || node.summary || ""
-    : node.summary || "";
+  panelSummary.innerHTML = formatSummary(
+    useEn ? node.summaryEn || node.summary || "" : node.summary || ""
+  );
 
   panelContent.innerHTML = buildPanelHTML(node, useEn, node.details || null);
 
@@ -2295,6 +2542,11 @@ function escapeHTML(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// 摘要里常见 e^{...} 这类纯文本写法：转成上标，避免在面板顶部露出花括号
+function formatSummary(text) {
+  return mdToHTML(text).replace(/\^\{([^{}]+)\}/g, "<sup>$1</sup>");
+}
+
 // 极简 Markdown：**粗体**、`代码`、换行
 function mdToHTML(text) {
   let html = escapeHTML(text);
@@ -2305,13 +2557,16 @@ function mdToHTML(text) {
 
 function renderMath() {
   if (window.renderMathInElement) {
-    window.renderMathInElement(panelContent, {
-      delimiters: [
-        { left: "$$", right: "$$", display: true },
-        { left: "$", right: "$", display: false },
-      ],
-      throwOnError: false,
-    });
+    for (const root of [panelContent, panelSummary]) {
+      if (!root) continue;
+      window.renderMathInElement(root, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+        ],
+        throwOnError: false,
+      });
+    }
   }
   fitDerivationMath(panelContent);
 }
