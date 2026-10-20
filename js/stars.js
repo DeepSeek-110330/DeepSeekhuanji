@@ -607,6 +607,8 @@ export function makeSpiralGalaxyTexture(o = {}) {
   octx.drawImage(cv, 0, 0);
   octx.filter = "none";
 
+
+
   const tex = new THREE.CanvasTexture(out);
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.minFilter = THREE.LinearMipmapLinearFilter;
