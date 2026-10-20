@@ -90,8 +90,12 @@
 | D57 | 度量与希尔伯特空间 | `metric-space`、`complete-metric-space`、`normed-space`、`banach-space`、`inner-product-space`、`orthogonality-projection` |
 | D58 | 基、对偶与算子定理 | `orthonormal-basis`、`bounded-operators`、`dual-space`、`hahn-banach`、`open-mapping`、`closed-graph` |
 | D59 | 紧算子、谱与弱收敛 | `compact-operators`、`spectrum`、`spectral-theorem`、`unbounded-operators`、`weak-convergence`、`fredholm-alternative` |
+| D60 | 点集拓扑 | `topological-space`、`basis-subbasis`、`closed-sets-interior`、`continuity-homeomorphism`、`subspace-product-quotient`、`separation-axioms` |
+| D61 | 紧致、连通与紧化 | `compactness`、`compactness-metric`、`connectedness`、`countability-axioms`、`tychonoff-theorem`、`local-compactification` |
+| D62 | 同伦、基本群与覆叠 | `homotopy`、`fundamental-group`、`fundamental-group-circle`、`covering-space`、`seifert-van-kampen`、`brouwer-fixed-point` |
+| D63 | 同调、曲面与 de Rham | `simplicial-complex`、`simplicial-homology`、`homology-group`、`euler-characteristic`、`surface-classification`、`de-rham-cohomology` |
 
-当前覆盖：**366 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28 + 常微分方程 26 + 偏微分方程 14 + 数值分析 15 + 实变分析 20 + 泛函分析 18）。后续按分支分批推进。
+当前覆盖：**390 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28 + 常微分方程 26 + 偏微分方程 14 + 数值分析 15 + 实变分析 20 + 泛函分析 18 + 拓扑 24）。后续按分支分批推进。
 
 ## 命令
 
