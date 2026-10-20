@@ -83,8 +83,15 @@
 | D50 | 数值分析基础 | `numerical-error`、`nonlinear-equations`、`newton-method`、`direct-linear-solvers`、`iterative-linear-solvers`、`interpolation`、`spline-interpolation` |
 | D51 | 数值微积分 | `least-squares-fitting`、`numerical-differentiation`、`numerical-integration`、`gaussian-quadrature` |
 | D52 | 数值 ODE 与条件数 | `matrix-condition`、`euler-methods`、`runge-kutta`、`numerical-stability` |
+| D53 | 测度论基础 | `set-algebra`、`outer-measure`、`measurable-sets`、`measure-space`、`measurable-functions` |
+| D54 | 逼近与积分 | `simple-functions`、`convergence-ae`、`egorov-lusin`、`lebesgue-integral`、`integral-properties` |
+| D55 | 收敛定理与 Lp | `monotone-convergence`、`fatou-lemma`、`dominated-convergence`、`riemann-vs-lebesgue`、`lp-spaces` |
+| D56 | 乘积测度与微分 | `product-measure`、`fubini-tonelli`、`bounded-variation`、`absolutely-continuous`、`lebesgue-differentiation` |
+| D57 | 度量与希尔伯特空间 | `metric-space`、`complete-metric-space`、`normed-space`、`banach-space`、`inner-product-space`、`orthogonality-projection` |
+| D58 | 基、对偶与算子定理 | `orthonormal-basis`、`bounded-operators`、`dual-space`、`hahn-banach`、`open-mapping`、`closed-graph` |
+| D59 | 紧算子、谱与弱收敛 | `compact-operators`、`spectrum`、`spectral-theorem`、`unbounded-operators`、`weak-convergence`、`fredholm-alternative` |
 
-当前覆盖：**328 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28 + 常微分方程 26 + 偏微分方程 14 + 数值分析 15）。后续按分支分批推进。
+当前覆盖：**366 / 641**（微积分 33 + 线性代数 49 + 概率统计 23 + 函数 22 + 小学 30 + 代数 8 + 平面几何 11 + 三角 23 + 数列 12 + 解析几何 7 + 计数原理 5 + 多元微积分 22 + 复变 28 + 常微分方程 26 + 偏微分方程 14 + 数值分析 15 + 实变分析 20 + 泛函分析 18）。后续按分支分批推进。
 
 ## 命令
 
