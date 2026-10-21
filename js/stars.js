@@ -29,6 +29,10 @@ const STAR_VERTEX = /* glsl */ `
   uniform float uDriftSpeed;
   uniform float uRich;
   uniform float uFlash;
+  uniform float uFlow;
+  uniform float uSpinBase;
+  uniform float uSpinBoost;
+  uniform float uSpinSoft;
 
   varying vec3 vColor;
   varying float vSpike;
@@ -71,6 +75,18 @@ const STAR_VERTEX = /* glsl */ `
     p.x += sin(dt * 1.7 + aPhase * 1.3) * uDrift;
     p.y += cos(dt * 1.3 + aPhase * 2.1) * uDrift * 0.55;
     p.z += sin(dt * 1.1 + aPhase * 2.7) * uDrift;
+
+    // 银河本体差速自转：内侧角速度大于外侧；与连线 shader 使用同一公式
+    if (uFlow > 0.5) {
+      float rad = length(p.xz);
+      if (rad > 0.001) {
+        float ang = atan(p.z, p.x);
+        float omega = uSpinBase + uSpinBoost / (rad + uSpinSoft);
+        float a = ang + uTime * omega;
+        p.x = cos(a) * rad;
+        p.z = sin(a) * rad;
+      }
+    }
 
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
@@ -220,6 +236,10 @@ export class StarLayer {
         uDriftSpeed: { value: opts.driftSpeed || 0.16 },
         uRich: { value: opts.rich ? 1 : 0 },
         uFlash: { value: opts.flash === false ? 0 : 1 },
+        uFlow: { value: opts.flow ? 1 : 0 },
+        uSpinBase: { value: opts.spinBase !== undefined ? opts.spinBase : 0.003 },
+        uSpinBoost: { value: opts.spinBoost !== undefined ? opts.spinBoost : 1.3 },
+        uSpinSoft: { value: opts.spinSoft !== undefined ? opts.spinSoft : 25 },
       },
       vertexShader: STAR_VERTEX,
       fragmentShader: STAR_FRAGMENT,

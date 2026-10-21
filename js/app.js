@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=46";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=46";
+import { renderPlot } from "./plot.js?v=50";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=50";
 
 /* ============================================================
    1. 全局状态
@@ -11,7 +11,20 @@ const nodeById = new Map(); // id -> 节点数据
 let dataIndexOf = new Map(); // id -> Points 中的下标
 let starLayer = null; // 知识点星体图层
 let galaxyGroup = null; // 知识点星体 + 连线 + 共鸣物体，整体缓慢自转
-const GALAXY_SPIN = 0.012; // rad/s：银河本身的自转，不是相机自转
+const GALAXY_SPIN_BASE = 0.004;
+const GALAXY_SPIN_BOOST = 1.8;
+const GALAXY_SPIN_SOFT = 25;
+const _flowV = new THREE.Vector3();
+
+function flowPosition(p, out = _flowV) {
+  const rad = Math.hypot(p.x, p.z);
+  if (rad < 1e-5) { out.set(p.x, p.y, p.z); return out; }
+  const ang = Math.atan2(p.z, p.x);
+  const omega = GALAXY_SPIN_BASE + GALAXY_SPIN_BOOST / (rad + GALAXY_SPIN_SOFT);
+  const a = ang + elapsed * omega;
+  out.set(Math.cos(a) * rad, p.y, Math.sin(a) * rad);
+  return out;
+}
 const bgLayers = []; // 背景星尘图层
 let linksObject = null; // 合并后的连线
 let linkMeta = []; // 每条连线的元信息
@@ -32,12 +45,13 @@ let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
 
 /* 知识共鸣：让有链接关系的知识点产生可控的「碰撞—融合」交互 */
-const LINK_OPACITY = 0.075; // 深空底色下的「引力丝」基础亮度：默认隐入星云，聚焦时亮起
+const LINK_OPACITY = 0.105; // 深空底色下的「引力丝」基础亮度：默认隐入星云，聚焦时亮起
 const REDUCE_MOTION = window.matchMedia
   ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
   : false;
 let resonanceMode = false;
 let resonanceA = -1;           // 第一颗星的节点下标
+let resonanceB = -1;           // 第二颗星的节点下标
 let resonancePath = [];        // 两颗星之间的最短知识链
 let resonancePathIds = new Set();
 let resonancePathKeys = new Set();
@@ -418,7 +432,7 @@ function createBackgroundStars() {
     });
   }
   const shellLayer = new StarLayer(shell, { opacity: 0.68, twinkle: 0.10 });
-  shellLayer.spin = 0.00055; // 远景星壳：极慢旋转，制造宇宙纵深
+  shellLayer.spin = -0.0035; // 远景星壳：极慢旋转，制造宇宙纵深
   group.add(shellLayer.object);
   bgLayers.push(shellLayer);
 
@@ -456,7 +470,7 @@ function createBackgroundStars() {
     });
   }
   const dustLayer = new StarLayer(dust, { opacity: 0.72, twinkle: 0.16, sizeScale: 1.15 });
-  dustLayer.spin = 0.00006; // 银盘星尘：几乎不动，保持与知识点旋臂对齐
+  dustLayer.spin = -0.0015; // 银盘星尘：几乎不动，保持与知识点旋臂对齐
   group.add(dustLayer.object);
   bgLayers.push(dustLayer);
 
@@ -478,7 +492,7 @@ function createBackgroundStars() {
     });
   }
   const haloLayer = new StarLayer(halo, { opacity: 0.28, twinkle: 0.12 });
-  haloLayer.spin = -0.00028; // 星系晕：反向慢转，形成差速感
+  haloLayer.spin = -0.0026; // 星系晕：反向慢转，形成差速感
   group.add(haloLayer.object);
   bgLayers.push(haloLayer);
 
@@ -503,7 +517,7 @@ function createBackgroundStars() {
     });
   }
   const motesLayer = new StarLayer(motes, { opacity: 0.48, twinkle: 0.28 });
-  motesLayer.spin = 0.00018; // 深空微尘：略快一点的缓慢漂移
+  motesLayer.spin = -0.0052; // 深空微尘：略快一点的缓慢漂移
   group.add(motesLayer.object);
   bgLayers.push(motesLayer);
 
@@ -589,13 +603,45 @@ function buildLinks() {
   geo.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
   linkBaseColors = new Float32Array(colors);
 
-  const mat = new THREE.LineBasicMaterial({
-    vertexColors: true,
+  const mat = new THREE.ShaderMaterial({
+    uniforms: {
+      uOpacity: { value: LINK_OPACITY },
+      uTime: { value: 0 },
+      uSpinBase: { value: GALAXY_SPIN_BASE },
+      uSpinBoost: { value: GALAXY_SPIN_BOOST },
+      uSpinSoft: { value: GALAXY_SPIN_SOFT },
+    },
+    vertexShader: /* glsl */ `
+      attribute vec3 color;
+      varying vec3 vColor;
+      uniform float uTime;
+      uniform float uSpinBase;
+      uniform float uSpinBoost;
+      uniform float uSpinSoft;
+      void main() {
+        vColor = color;
+        vec3 p = position;
+        float rad = length(p.xz);
+        if (rad > 0.001) {
+          float ang = atan(p.z, p.x);
+          float omega = uSpinBase + uSpinBoost / (rad + uSpinSoft);
+          float a = ang + uTime * omega;
+          p.x = cos(a) * rad;
+          p.z = sin(a) * rad;
+        }
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      varying vec3 vColor;
+      uniform float uOpacity;
+      void main() {
+        gl_FragColor = vec4(vColor, uOpacity);
+      }
+    `,
     transparent: true,
-    opacity: LINK_OPACITY,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
-    fog: true,
   });
 
   linksObject = new THREE.LineSegments(geo, mat);
@@ -666,6 +712,10 @@ function createKnowledgeStars() {
     driftSpeed: 0.14,
     rich: true,
     flash: !REDUCE_MOTION,
+    flow: true,
+    spinBase: GALAXY_SPIN_BASE,
+    spinBoost: GALAXY_SPIN_BOOST,
+    spinSoft: GALAXY_SPIN_SOFT,
   });
 
   dataIndexOf = new Map(DATA.nodes.map((n, i) => [n.id, i]));
@@ -918,11 +968,24 @@ function setMarker(sprite, id) {
     sprite.visible = false;
     return;
   }
-  sprite.position.set(n.position.x, n.position.y, n.position.z);
+  flowPosition(n.position, _flowV);
+  sprite.position.copy(_flowV);
   sprite.material.color.set(DATA.branches[n.branch].color);
   sprite.material.opacity = sprite.userData.baseOpacity || 0.9;
   sprite.scale.setScalar(sprite.userData.baseScale || 16);
   sprite.visible = true;
+}
+
+function syncResonanceMarkers() {
+  if (!resonanceMarkers || !DATA) return;
+  if (resonanceMarkers.a.visible && resonanceA >= 0 && DATA.nodes[resonanceA]) {
+    flowPosition(DATA.nodes[resonanceA].position, _flowV);
+    resonanceMarkers.a.position.copy(_flowV);
+  }
+  if (resonanceMarkers.b.visible && resonanceB >= 0 && DATA.nodes[resonanceB]) {
+    flowPosition(DATA.nodes[resonanceB].position, _flowV);
+    resonanceMarkers.b.position.copy(_flowV);
+  }
 }
 
 function updateResonanceHud(text) {
@@ -941,6 +1004,7 @@ function hideResonanceCard() {
 function resetResonanceSelection() {
   resonanceToken++;
   resonanceA = -1;
+  resonanceB = -1;
   resonancePath = [];
   resonancePathIds = new Set();
   resonancePathKeys = new Set();
@@ -1042,11 +1106,12 @@ function launchResonance(aIdx, bIdx) {
   }
 
   resonanceA = aIdx;
+  resonanceB = bIdx;
   setMarker(resonanceMarkers.a, a.id);
   setMarker(resonanceMarkers.b, b.id);
 
-  const ap = a.position;
-  const bp = b.position;
+  const ap = flowPosition(a.position, new THREE.Vector3());
+  const bp = flowPosition(b.position, new THREE.Vector3());
   const mid = {
     x: (ap.x + bp.x) / 2,
     y: (ap.y + bp.y) / 2 + 8,
@@ -1232,11 +1297,12 @@ function updatePulses(now) {
     }
     const tt = u.reverse ? 1 - t : t;
     const it = 1 - tt;
-    s.position.set(
+    _flowV.set(
       it * it * m.pa.x + 2 * it * tt * m.pm.x + tt * tt * m.pb.x,
       it * it * m.pa.y + 2 * it * tt * m.pm.y + tt * tt * m.pb.y,
       it * it * m.pa.z + 2 * it * tt * m.pm.z + tt * tt * m.pb.z
     );
+    flowPosition(_flowV, s.position);
     const fade = Math.sin(Math.PI * t);
     s.material.opacity = u.opacity * fade;
     s.scale.setScalar(u.size * (0.7 + 0.6 * fade));
@@ -1745,8 +1811,7 @@ function pick() {
   let bestD2 = r2;
   for (let i = 0; i < DATA.nodes.length; i++) {
     const p = DATA.nodes[i].position;
-    _pickV.set(p.x, p.y, p.z);
-    if (galaxyGroup) _pickV.applyMatrix4(galaxyGroup.matrixWorld);
+    flowPosition(p, _pickV);
     _pickV.project(camera);
     if (_pickV.z < -1 || _pickV.z > 1) continue;
     const x = (_pickV.x * 0.5 + 0.5) * w;
@@ -1913,8 +1978,7 @@ function updateArmLabels() {
   const w = window.innerWidth, h = window.innerHeight;
   for (const L of armLabels) {
     if (activeBranch && L.branch !== activeBranch) { L.el.style.opacity = 0; continue; }
-    _armProjV.copy(L.pos);
-    if (galaxyGroup) _armProjV.applyMatrix4(galaxyGroup.matrixWorld);
+    flowPosition(L.pos, _armProjV);
     _armProjV.project(camera);
     const x = ((_armProjV.x + 1) / 2) * w;
     const y = ((1 - _armProjV.y) / 2) * h;
@@ -2305,8 +2369,7 @@ function flyTo(id) {
   const node = nodeById.get(id);
   if (!node) return;
 
-  const pos = new THREE.Vector3(node.position.x, node.position.y, node.position.z);
-  if (galaxyGroup) pos.applyMatrix4(galaxyGroup.matrixWorld);
+  const pos = flowPosition(node.position, new THREE.Vector3());
   const dir = pos.clone().normalize();
   const offset = dir.multiplyScalar(26).add(new THREE.Vector3(0, 12, 0));
 
@@ -2444,10 +2507,36 @@ function updateArmSpine() {
   const geo = new THREE.BufferGeometry().setFromPoints(
     curve.getPoints(Math.min(160, pts.length * 24))
   );
-  const mat = new THREE.LineBasicMaterial({
-    color: DATA.branches[activeBranch].color,
+  const mat = new THREE.ShaderMaterial({
+    uniforms: {
+      uColor: { value: new THREE.Color(DATA.branches[activeBranch].color) },
+      uOpacity: { value: 0.5 },
+      uTime: { value: elapsed },
+      uSpinBase: { value: GALAXY_SPIN_BASE },
+      uSpinBoost: { value: GALAXY_SPIN_BOOST },
+      uSpinSoft: { value: GALAXY_SPIN_SOFT },
+    },
+    vertexShader: /* glsl */ `
+      uniform float uTime, uSpinBase, uSpinBoost, uSpinSoft;
+      void main() {
+        vec3 p = position;
+        float rad = length(p.xz);
+        if (rad > 0.001) {
+          float ang = atan(p.z, p.x);
+          float omega = uSpinBase + uSpinBoost / (rad + uSpinSoft);
+          float a = ang + uTime * omega;
+          p.x = cos(a) * rad;
+          p.z = sin(a) * rad;
+        }
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      uniform vec3 uColor;
+      uniform float uOpacity;
+      void main() { gl_FragColor = vec4(uColor, uOpacity); }
+    `,
     transparent: true,
-    opacity: 0.5,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
@@ -2633,27 +2722,27 @@ function animate() {
   updateFly();
   controls.update();
 
-  // 银河本体的整体自转：知识点、连线、共鸣物体一起转，和相机自转叠加
-  if (galaxyGroup) galaxyGroup.rotation.y = elapsed * GALAXY_SPIN;
+  if (linksObject) linksObject.material.uniforms.uTime.value = elapsed;
+  if (armSpine) armSpine.material.uniforms.uTime.value = elapsed;
 
   // 连线入场淡入
   if (linksRevealStart && linksObject) {
     const lt = Math.min(1, (performance.now() - linksRevealStart) / 1500);
-    linksObject.material.opacity = LINK_OPACITY * (1 - Math.pow(1 - lt, 3));
+    linksObject.material.uniforms.uOpacity.value = LINK_OPACITY * (1 - Math.pow(1 - lt, 3));
     if (lt >= 1) linksRevealStart = 0;
   }
 
   if (starLayer) {
     // 远景时让星体轻微漂浮；贴近观察时自动收小，避免与静态连线端点错位
-    const dist = camera.position.distanceTo(controls.target);
-    const driftK = Math.max(0, Math.min(1, (dist - 50) / 150));
-    starLayer.material.uniforms.uDrift.value = REDUCE_MOTION ? 0 : 1.4 * driftK;
+    // 差速自转已经负责“流动”；关掉逐星抖动，保证连线端点与星体严格重合
+    starLayer.material.uniforms.uDrift.value = 0;
     starLayer.material.uniforms.uDriftSpeed.value = 0.14;
     starLayer.update(elapsed, dt);
   }
   if (pulseT0) refreshHighlights(); // 搜索脉冲期间逐帧刷新高亮
   const now = performance.now();
   updateResonance(now);
+  syncResonanceMarkers();
   updatePulses(now);
   maybeAmbientPulse(now);
   updateArmLabels();
@@ -2694,7 +2783,7 @@ async function main() {
   createResonanceObjects();
 
   // 入场：连线随星星从暗到亮
-  linksObject.material.opacity = 0;
+  linksObject.material.uniforms.uOpacity.value = 0;
   linksRevealStart = performance.now();
 
   // 顶栏副标题：动态统计
@@ -2791,9 +2880,7 @@ async function main() {
     screenPos: (id) => {
       const n = nodeById.get(id);
       if (!n) return null;
-      const v = new THREE.Vector3(n.position.x, n.position.y, n.position.z);
-      if (galaxyGroup) v.applyMatrix4(galaxyGroup.matrixWorld);
-      v.project(camera);
+      const v = flowPosition(n.position, new THREE.Vector3()).project(camera);
       return {
         x: (v.x * 0.5 + 0.5) * window.innerWidth,
         y: (-v.y * 0.5 + 0.5) * window.innerHeight,
