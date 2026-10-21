@@ -1,482 +1,482 @@
 [
-  {
-    "id": "manifold-integration",
-    "title": "流形上的积分与定向",
-    "titleEn": "Integration on Manifolds and Orientation",
-    "branch": "differential-geometry",
-    "level": 5,
-    "summary": "在可定向流形上积分微分形式：局部就是系数函数的普通重积分，换坐标时用带符号的雅可比行列式，因此积分只依赖定向、不依赖坐标卡；不可定向的莫比乌斯带连体积形式都没有。",
-    "summaryEn": "Integrating differential forms on an oriented manifold: locally it is the ordinary multiple integral of the coefficient, with the signed Jacobian in a change of coordinates, so the integral depends only on the orientation and not on the chart; the non-orientable Möbius band admits no volume form at all.",
-    "definition": "把一元与多元积分搬上流形，最顺手的载体是**微分形式**。设 $M$ 是 $n$ 维**可定向**流形，$\\omega$ 是 $M$ 上的 $n$-形式（顶次形式）。在局部坐标 $(x^1,\\dots,x^n)$ 中 $\\omega$ 唯一地写成\n$$\\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n,$$\n于是它在坐标卡 $U$（参数化 $x=\\varphi(p)$）上的积分就定义为系数函数的普通多重积分\n$$\\int_U\\omega=\\int_{\\varphi(U)}f(x)\\,dx^1\\cdots dx^n.$$\n再取从属于坐标覆盖的单位分解 $\\{\\rho_i\\}$，令 $\\int_M\\omega=\\sum_i\\int_{U_i}\\rho_i\\,\\omega$，就得到与坐标卡选择无关的整体积分。\n\n为什么非要**定向**？因为换坐标 $y=\\psi(x)$ 时，形式的系数按**带符号**的雅可比行列式变换：\n$$dy^1\\wedge\\cdots\\wedge dy^n=\\det\\left(\\frac{\\partial y}{\\partial x}\\right)dx^1\\wedge\\cdots\\wedge dx^n.$$\n普通多重积分换元取绝对值 $|\\det|$，形式积分却必须保留符号——$\\omega$ 自带方向信息。要让各坐标卡的积分互相兼容，就要求一切转换函数的雅可比行列式恒正，这正是**定向**；等价的描述是：存在一张**处处非零的 $n$-形式**（体积形式）$\\Omega$，约定它代表正体积。连通可定向流形恰有两个定向、互为反向；翻转定向，积分整体变号：$\\int_{-M}\\omega=-\\int_M\\omega$。\n\n反面典型是**莫比乌斯带**：沿中线走一圈，横向切向量回来时已经反向（粘合处的微分为 $\\mathrm{diag}(1,-1)$），无法连续地选出一致的定向，因此它不可定向、没有体积形式，$\\int_M\\omega$ 对 2-形式无从谈起。球面、环面、一切李群都可定向。可见「顶次形式能不能整体积分」不是技术细节，而是流形整体拓扑的性质。\n\n积分还统一了熟悉的公式：平面上区域 $D$ 上的 $f\\,dx\\wedge dy$ 的积分就是二重积分；$\\mathbb R^3$ 中曲面上把体积形式沿场 $F$ 内乘收缩成通量形式 $\\iota_F(dx\\wedge dy\\wedge dz)=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy$，它的积分就是通量 $\\iint F\\cdot dS$。并且积分是保定向微分同胚的不变量：$\\int_N\\Phi^*\\omega=\\int_M\\omega$——这正是微积分换元公式在流形上的样子。",
-    "definitionEn": "The natural vehicle for moving one-variable and multivariable integration onto manifolds is the **differential form**. Let $M$ be an $n$-dimensional **orientable** manifold and let $\\omega$ be an $n$-form (a top-degree form) on it. In local coordinates $(x^1,\\dots,x^n)$ it can be written uniquely as\n$$\\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n,$$\nand its integral over the chart $U$ (parametrised by $x=\\varphi(p)$) is defined to be the ordinary multiple integral of the coefficient,\n$$\\int_U\\omega=\\int_{\\varphi(U)}f(x)\\,dx^1\\cdots dx^n.$$\nChoosing a partition of unity $\\{\\rho_i\\}$ subordinate to a coordinate cover and setting $\\int_M\\omega=\\sum_i\\int_{U_i}\\rho_i\\,\\omega$ gives a global integral independent of the charts.\n\nWhy is an **orientation** indispensable? Because under a change of coordinates $y=\\psi(x)$ the coefficient of a form transforms by the **signed** Jacobian:\n$$dy^1\\wedge\\cdots\\wedge dy^n=\\det\\left(\\frac{\\partial y}{\\partial x}\\right)dx^1\\wedge\\cdots\\wedge dx^n.$$\nOrdinary multiple integrals use $|\\det|$ in the substitution rule, whereas form integrals keep the sign, because a form already carries orientation data. For the integrals computed in different charts to agree, every transition function must have positive Jacobian determinant — that is precisely an **orientation**; equivalently, an orientation is a **nowhere-vanishing $n$-form** (a volume form) $\\Omega$ declared positive. A connected orientable manifold has exactly two orientations, opposite to each other; reversing the orientation flips the sign of the integral: $\\int_{-M}\\omega=-\\int_M\\omega$.\n\nThe standard counterexample is the **Möbius band**: walking once around the central circle brings a transverse tangent vector back reversed (the gluing differential is $\\mathrm{diag}(1,-1)$), so no consistent choice of directions exists; the band is non-orientable, carries no volume form, and $\\int_M\\omega$ for a 2-form is meaningless. Spheres, tori and all Lie groups are orientable. Whether a top-degree form can be integrated globally is thus a property of the global topology of the manifold, not a technicality.\n\nThe integral also unifies familiar constructions: on a plane region $D$, integrating $f\\,dx\\wedge dy$ is just the double integral; on a surface in $\\mathbb R^3$, contracting the volume form with a field $F$ gives the flux form $\\iota_F(dx\\wedge dy\\wedge dz)=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy$, whose integral is the flux $\\iint F\\cdot dS$. Finally, the integral is invariant under orientation-preserving diffeomorphisms: $\\int_N\\Phi^*\\omega=\\int_M\\omega$ — the change-of-variables formula in its manifold form.",
-    "formulas": [
-      {
-        "latex": "\\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n,\\qquad \\int_U\\omega=\\int_{\\varphi(U)}f(x)\\,dx^1\\cdots dx^n",
-        "note": "局部定义：$n$-形式的积分就是其系数函数在坐标里的普通多重积分，整体再用单位分解拼装。",
-        "noteEn": "Local definition: the integral of an $n$-form is the ordinary multiple integral of its coordinate coefficient; globally one assembles the pieces with a partition of unity."
-      },
-      {
-        "latex": "y=\\psi(x):\\qquad dy^1\\wedge\\cdots\\wedge dy^n=\\det\\!\\left(\\frac{\\partial y}{\\partial x}\\right)dx^1\\wedge\\cdots\\wedge dx^n",
-        "note": "换元时雅可比的**符号**是本质的：定向一致（$\\det>0$）积分不变，定向相反（$\\det<0$）积分变号。",
-        "noteEn": "The **sign** of the Jacobian is essential: an orientation-preserving change ($\\det>0$) leaves the integral unchanged, an orientation-reversing one flips it."
-      },
-      {
-        "latex": "M\\ \\text{可定向}\\iff \\exists\\,\\Omega\\ \\text{处处非零的}\\ n\\text{-形式}\\iff \\text{存在转换函数雅可比恒正的地图册}",
-        "note": "定向的三种等价描述：非零体积形式、雅可比恒正的地图册、切空间方向的连续选取。",
-        "noteEn": "Three equivalent descriptions of orientability: a nowhere-vanishing volume form, an atlas with positive Jacobian transitions, or a continuous choice of directions in the tangent spaces."
-      },
-      {
-        "latex": "\\int_{-M}\\omega=-\\int_M\\omega,\\qquad \\Phi\\ \\text{保定向}:\\ \\ \\int_M\\Phi^*\\omega=\\int_N\\omega",
-        "note": "反向定向变号；保定向微分同胚的拉回不变——这就是流形版本的换元公式。",
-        "noteEn": "Reversing the orientation flips the sign; the pullback along an orientation-preserving diffeomorphism leaves the integral unchanged — the change-of-variables formula for manifolds."
-      },
-      {
-        "latex": "\\int_M\\omega=\\sum_i\\int_{U_i}\\rho_i\\,\\omega,\\qquad \\{\\rho_i\\}\\ \\text{从属于坐标覆盖的单位分解}",
-        "note": "整体积分由单位分解拼出，与坐标卡、覆盖的选取无关（一致性的保证正是雅可比恒正）。",
-        "noteEn": "The global integral is assembled from a partition of unity and is independent of the charts and the cover; consistency is guaranteed by the positive Jacobians."
-      }
-    ],
-    "expression": {
-      "text": "∫_M ω = Σᵢ∫_{Uᵢ} ρᵢω；局部 ω = f dx¹∧…∧dxⁿ，∫_U ω = ∫ f dx¹…dxⁿ",
-      "symbol": "\\int_M\\omega,\\qquad \\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n",
-      "note": "积分只对 $n$-形式（顶次形式）定义，且必须先在 $M$ 上选定定向；反向定向积分变号。",
-      "noteEn": "The integral is defined only for top-degree $n$-forms, and only after an orientation has been chosen on $M$; reversing it changes the sign."
-    },
-    "properties": [
-      "线性且有方向性：$\\int_M(a\\omega+b\\eta)=a\\int_M\\omega+b\\int_M\\eta$，$\\int_{-M}\\omega=-\\int_M\\omega$；积分只对顶次（$n$-）形式定义。",
-      "可定向性是前提：莫比乌斯带、克莱因瓶、实射影平面不可定向，不存在处处非零的顶次形式；连通可定向流形恰有两个定向。",
-      "坐标无关性：转换函数雅可比行列式恒正，保证两套坐标卡、两组单位分解给出同一个 $\\int_M\\omega$。",
-      "保定向微分同胚不变：$\\int_M\\Phi^*\\omega=\\int_N\\omega$；在 $\\mathbb R^n$ 上退化为多重积分换元公式（差别在符号：普通换元用 $|\\det|$，形式用 $\\det$）。",
-      "与经典积分一致：平面区域的 $dx\\wedge dy$ 积分是二重积分；$\\mathbb R^3$ 中曲面上的通量形式 $\\iota_F(dx\\wedge dy\\wedge dz)$ 的积分是通量积分（见曲面积分）。"
-    ],
-    "propertiesEn": [
-      "Linear and orientation-sensitive: $\\int_M(a\\omega+b\\eta)=a\\int_M\\omega+b\\int_M\\eta$ and $\\int_{-M}\\omega=-\\int_M\\omega$; the integral is defined for top-degree ($n$-)forms only.",
-      "Orientability is a prerequisite: the Möbius band, the Klein bottle and the real projective plane are non-orientable and carry no nowhere-vanishing top form; a connected orientable manifold has exactly two orientations.",
-      "Chart independence: because all transition Jacobians are positive, two atlases and two partitions of unity give the same value of $\\int_M\\omega$.",
-      "Invariance under orientation-preserving diffeomorphisms: $\\int_M\\Phi^*\\omega=\\int_N\\omega$; over $\\mathbb R^n$ this reduces to the substitution rule of multivariable calculus (the difference being the sign: ordinary substitution uses $|\\det|$, forms use $\\det$).",
-      "Consistency with classical integrals: the integral of $dx\\wedge dy$ over a plane region is the double integral; on a surface in $\\mathbb R^3$ the flux form $\\iota_F(dx\\wedge dy\\wedge dz)$ integrates to the flux (see surface integral)."
-    ],
-    "examples": [
-      {
-        "problem": "设 $\\omega=x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy$，$S^2$ 取外法向定向。用球坐标参数化计算 $\\int_{S^2}\\omega$，并说明颠倒参数化次序（反向定向）后结果如何变化。",
-        "solution": "取参数化 $r(\\theta,\\varphi)=(\\sin\\theta\\cos\\varphi,\\ \\sin\\theta\\sin\\varphi,\\ \\cos\\theta)$，$\\theta\\in(0,\\pi)$，$\\varphi\\in(0,2\\pi)$。把 $\\omega$ 沿参数化展开可验证恒等式\n$$r^*\\omega=\\det(r,r_\\theta,r_\\varphi)\\,d\\theta\\wedge d\\varphi,$$\n其中三个向量按行排列。直接计算\n$$r_\\theta\\times r_\\varphi=(\\sin^2\\theta\\cos\\varphi,\\ \\sin^2\\theta\\sin\\varphi,\\ \\sin\\theta\\cos\\theta)=\\sin\\theta\\,r,$$\n故 $\\det(r,r_\\theta,r_\\varphi)=r\\cdot(r_\\theta\\times r_\\varphi)=\\sin\\theta>0$：参数化保定向，$r^*\\omega=\\sin\\theta\\,d\\theta\\wedge d\\varphi$，于是\n$$\\int_{S^2}\\omega=\\int_0^{2\\pi}\\!\\!\\int_0^\\pi\\sin\\theta\\,d\\theta\\,d\\varphi=2\\pi\\cdot 2=4\\pi.$$\n若把参数化换成 $(\\varphi,\\theta)$（交换次序），行列式变号，同样计算得 $-4\\pi$——这正是「反转定向，积分变号」的实例；$4\\pi$ 也正好是单位球面的面积。"
-      },
-      {
-        "problem": "把莫比乌斯带参数化为 $\\Phi(u,t)=\\big((1+t\\cos\\frac u2)\\cos u,\\ (1+t\\cos\\frac u2)\\sin u,\\ t\\sin\\frac u2\\big)$，$u\\in[0,4\\pi)$，$|t|<\\frac12$。验证 $\\Phi(u+2\\pi,-t)=\\Phi(u,t)$，并用粘合处的微分说明它不可定向，从而 2-形式不能整体积分。",
-        "solution": "代入即得：$\\cos\\frac{u+2\\pi}2=-\\cos\\frac u2$，$\\sin\\frac{u+2\\pi}2=-\\sin\\frac u2$，于是\n$$\\Phi(u+2\\pi,-t)=\\Big(\\big(1+t\\cos\\tfrac u2\\big)\\cos u,\\ \\big(1+t\\cos\\tfrac u2\\big)\\sin u,\\ t\\sin\\tfrac u2\\Big)=\\Phi(u,t),$$\n即绕行一圈后带宽方向被翻转。沿中线 $t=0$ 走一圈，把切标架 $(\\Phi_u,\\Phi_t)$ 沿线搬回出发点：$\\Phi_u(u+2\\pi,0)=\\Phi_u(u,0)$ 而 $\\Phi_t(u+2\\pi,0)=-\\Phi_t(u,0)$，即粘合处的线性变换为 $\\mathrm{diag}(1,-1)$，行列式 $-1<0$：定向被翻转，故莫比乌斯带不可定向，不存在处处非零的 2-形式，$\\int_M\\omega$ 无法整体定义（不依赖定向的对象如面积元 $\\sqrt{EG-F^2}\\,du\\,dt$ 仍可积分，但「带符号」的顶次形式积分只对可定向流形有意义）。"
-      }
-    ],
-    "tags": [
-      "微分形式",
-      "定向",
-      "体积形式",
-      "莫比乌斯带",
-      "雅可比行列式"
-    ],
-    "links": [
-      "differential-form",
-      "generalized-stokes",
-      "smooth-manifold",
-      "surface-integral",
-      "jacobian"
-    ]
+ {
+  "id": "manifold-integration",
+  "title": "流形上的积分与定向",
+  "titleEn": "Integration on Manifolds and Orientation",
+  "branch": "differential-geometry",
+  "level": 5,
+  "summary": "在可定向流形上积分微分形式：局部就是系数函数的普通重积分，换坐标时用带符号的雅可比行列式，因此积分只依赖定向、不依赖坐标卡；不可定向的莫比乌斯带连体积形式都没有。",
+  "summaryEn": "Integrating differential forms on an oriented manifold: locally it is the ordinary multiple integral of the coefficient, with the signed Jacobian in a change of coordinates, so the integral depends only on the orientation and not on the chart; the non-orientable Möbius band admits no volume form at all.",
+  "definition": "把一元与多元积分搬上流形，最顺手的载体是**微分形式**。设 $M$ 是 $n$ 维**可定向**流形，$\\omega$ 是 $M$ 上的 $n$-形式（顶次形式）。在局部坐标 $(x^1,\\dots,x^n)$ 中 $\\omega$ 唯一地写成\n$$\\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n,$$\n于是它在坐标卡 $U$（参数化 $x=\\varphi(p)$）上的积分就定义为系数函数的普通多重积分\n$$\\int_U\\omega=\\int_{\\varphi(U)}f(x)\\,dx^1\\cdots dx^n.$$\n再取从属于坐标覆盖的单位分解 $\\{\\rho_i\\}$，令 $\\int_M\\omega=\\sum_i\\int_{U_i}\\rho_i\\,\\omega$，就得到与坐标卡选择无关的整体积分。\n\n为什么非要**定向**？因为换坐标 $y=\\psi(x)$ 时，形式的系数按**带符号**的雅可比行列式变换：\n$$dy^1\\wedge\\cdots\\wedge dy^n=\\det\\left(\\frac{\\partial y}{\\partial x}\\right)dx^1\\wedge\\cdots\\wedge dx^n.$$\n普通多重积分换元取绝对值 $|\\det|$，形式积分却必须保留符号——$\\omega$ 自带方向信息。要让各坐标卡的积分互相兼容，就要求一切转换函数的雅可比行列式恒正，这正是**定向**；等价的描述是：存在一张**处处非零的 $n$-形式**（体积形式）$\\Omega$，约定它代表正体积。连通可定向流形恰有两个定向、互为反向；翻转定向，积分整体变号：$\\int_{-M}\\omega=-\\int_M\\omega$。\n\n反面典型是**莫比乌斯带**：沿中线走一圈，横向切向量回来时已经反向（粘合处的微分为 $\\mathrm{diag}(1,-1)$），无法连续地选出一致的定向，因此它不可定向、没有体积形式，$\\int_M\\omega$ 对 2-形式无从谈起。球面、环面、一切李群都可定向。可见「顶次形式能不能整体积分」不是技术细节，而是流形整体拓扑的性质。\n\n积分还统一了熟悉的公式：平面上区域 $D$ 上的 $f\\,dx\\wedge dy$ 的积分就是二重积分；$\\mathbb R^3$ 中曲面上把体积形式沿场 $F$ 内乘收缩成通量形式 $\\iota_F(dx\\wedge dy\\wedge dz)=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy$，它的积分就是通量 $\\iint F\\cdot dS$。并且积分是保定向微分同胚的不变量：$\\int_N\\Phi^*\\omega=\\int_M\\omega$——这正是微积分换元公式在流形上的样子。",
+  "definitionEn": "The natural vehicle for moving one-variable and multivariable integration onto manifolds is the **differential form**. Let $M$ be an $n$-dimensional **orientable** manifold and let $\\omega$ be an $n$-form (a top-degree form) on it. In local coordinates $(x^1,\\dots,x^n)$ it can be written uniquely as\n$$\\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n,$$\nand its integral over the chart $U$ (parametrised by $x=\\varphi(p)$) is defined to be the ordinary multiple integral of the coefficient,\n$$\\int_U\\omega=\\int_{\\varphi(U)}f(x)\\,dx^1\\cdots dx^n.$$\nChoosing a partition of unity $\\{\\rho_i\\}$ subordinate to a coordinate cover and setting $\\int_M\\omega=\\sum_i\\int_{U_i}\\rho_i\\,\\omega$ gives a global integral independent of the charts.\n\nWhy is an **orientation** indispensable? Because under a change of coordinates $y=\\psi(x)$ the coefficient of a form transforms by the **signed** Jacobian:\n$$dy^1\\wedge\\cdots\\wedge dy^n=\\det\\left(\\frac{\\partial y}{\\partial x}\\right)dx^1\\wedge\\cdots\\wedge dx^n.$$\nOrdinary multiple integrals use $|\\det|$ in the substitution rule, whereas form integrals keep the sign, because a form already carries orientation data. For the integrals computed in different charts to agree, every transition function must have positive Jacobian determinant — that is precisely an **orientation**; equivalently, an orientation is a **nowhere-vanishing $n$-form** (a volume form) $\\Omega$ declared positive. A connected orientable manifold has exactly two orientations, opposite to each other; reversing the orientation flips the sign of the integral: $\\int_{-M}\\omega=-\\int_M\\omega$.\n\nThe standard counterexample is the **Möbius band**: walking once around the central circle brings a transverse tangent vector back reversed (the gluing differential is $\\mathrm{diag}(1,-1)$), so no consistent choice of directions exists; the band is non-orientable, carries no volume form, and $\\int_M\\omega$ for a 2-form is meaningless. Spheres, tori and all Lie groups are orientable. Whether a top-degree form can be integrated globally is thus a property of the global topology of the manifold, not a technicality.\n\nThe integral also unifies familiar constructions: on a plane region $D$, integrating $f\\,dx\\wedge dy$ is just the double integral; on a surface in $\\mathbb R^3$, contracting the volume form with a field $F$ gives the flux form $\\iota_F(dx\\wedge dy\\wedge dz)=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy$, whose integral is the flux $\\iint F\\cdot dS$. Finally, the integral is invariant under orientation-preserving diffeomorphisms: $\\int_N\\Phi^*\\omega=\\int_M\\omega$ — the change-of-variables formula in its manifold form.",
+  "formulas": [
+   {
+    "latex": "\\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n,\\qquad \\int_U\\omega=\\int_{\\varphi(U)}f(x)\\,dx^1\\cdots dx^n",
+    "note": "局部定义：$n$-形式的积分就是其系数函数在坐标里的普通多重积分，整体再用单位分解拼装。",
+    "noteEn": "Local definition: the integral of an $n$-form is the ordinary multiple integral of its coordinate coefficient; globally one assembles the pieces with a partition of unity."
+   },
+   {
+    "latex": "y=\\psi(x):\\qquad dy^1\\wedge\\cdots\\wedge dy^n=\\det\\!\\left(\\frac{\\partial y}{\\partial x}\\right)dx^1\\wedge\\cdots\\wedge dx^n",
+    "note": "换元时雅可比的**符号**是本质的：定向一致（$\\det>0$）积分不变，定向相反（$\\det<0$）积分变号。",
+    "noteEn": "The **sign** of the Jacobian is essential: an orientation-preserving change ($\\det>0$) leaves the integral unchanged, an orientation-reversing one flips it."
+   },
+   {
+    "latex": "M\\ \\text{可定向}\\iff \\exists\\,\\Omega\\ \\text{处处非零的}\\ n\\text{-形式}\\iff \\text{存在转换函数雅可比恒正的地图册}",
+    "note": "定向的三种等价描述：非零体积形式、雅可比恒正的地图册、切空间方向的连续选取。",
+    "noteEn": "Three equivalent descriptions of orientability: a nowhere-vanishing volume form, an atlas with positive Jacobian transitions, or a continuous choice of directions in the tangent spaces."
+   },
+   {
+    "latex": "\\int_{-M}\\omega=-\\int_M\\omega,\\qquad \\Phi\\ \\text{保定向}:\\ \\ \\int_M\\Phi^*\\omega=\\int_N\\omega",
+    "note": "反向定向变号；保定向微分同胚的拉回不变——这就是流形版本的换元公式。",
+    "noteEn": "Reversing the orientation flips the sign; the pullback along an orientation-preserving diffeomorphism leaves the integral unchanged — the change-of-variables formula for manifolds."
+   },
+   {
+    "latex": "\\int_M\\omega=\\sum_i\\int_{U_i}\\rho_i\\,\\omega,\\qquad \\{\\rho_i\\}\\ \\text{从属于坐标覆盖的单位分解}",
+    "note": "整体积分由单位分解拼出，与坐标卡、覆盖的选取无关（一致性的保证正是雅可比恒正）。",
+    "noteEn": "The global integral is assembled from a partition of unity and is independent of the charts and the cover; consistency is guaranteed by the positive Jacobians."
+   }
+  ],
+  "expression": {
+   "text": "∫_M ω = Σᵢ∫_{Uᵢ} ρᵢω；局部 ω = f dx¹∧…∧dxⁿ，∫_U ω = ∫ f dx¹…dxⁿ",
+   "symbol": "\\int_M\\omega,\\qquad \\omega=f\\,dx^1\\wedge\\cdots\\wedge dx^n",
+   "note": "积分只对 $n$-形式（顶次形式）定义，且必须先在 $M$ 上选定定向；反向定向积分变号。",
+   "noteEn": "The integral is defined only for top-degree $n$-forms, and only after an orientation has been chosen on $M$; reversing it changes the sign."
   },
-  {
-    "id": "generalized-stokes",
-    "title": "广义斯托克斯定理",
-    "titleEn": "The Generalized Stokes Theorem",
-    "branch": "differential-geometry",
-    "level": 5,
-    "summary": "∫_M dω = ∫_∂M ω：一个公式统一牛顿—莱布尼茨、格林、经典斯托克斯与高斯公式，是外微分与边界在积分层面的完整表达。",
-    "summaryEn": "∫_M dω = ∫_∂M ω: one formula unifying the Newton–Leibniz formula, Green's theorem, the classical Stokes theorem and the divergence theorem — the integral-level expression of d together with the boundary.",
-    "definition": "设 $M$ 是 $n$ 维**带边定向流形**（允许角），$\\partial M$ 是它的边界，按**诱导定向**取向：若 $N$ 是边界点处的外法向，$(v_1,\\dots,v_{n-1})$ 是 $T_x\\partial M$ 的一组基，则规定 $(v_1,\\dots,v_{n-1})$ 是 $\\partial M$ 的正定向，当且仅当 $(N,v_1,\\dots,v_{n-1})$ 是 $T_xM$ 的正定向（**外法向排在最前**）。设 $\\omega$ 是 $M$ 上光滑的 $(n-1)$-形式，则\n$$\\int_M d\\omega=\\int_{\\partial M}\\omega.$$\n左边是 $n$-形式在外向的 $M$ 上的积分，右边是 $(n-1)$-形式在边界上的积分：一次外微分，正好补上失去的一维。这就是**广义斯托克斯定理**。\n\n它的分量在于「一个公式，四个定理」。$n=1$、0-形式 $\\omega=f$、$M=[a,b]$：$d\\omega=f'\\,dx$，公式退化为**牛顿—莱布尼茨公式** $\\int_a^b f'\\,dx=f(b)-f(a)$；此时诱导定向给右端点 $b$ 符号 $+1$、左端点 $a$ 符号 $-1$，公式里 $f(b)-f(a)$ 的次序正是定向规定出来的。$n=2$ 在平面上：$\\omega=P\\,dx+Q\\,dy$，$d\\omega=\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\wedge dy$，得**格林公式**（$\\partial D$ 取逆时针，即诱导定向）；$n=2$ 在空间曲面上：$\\omega=F_1dx+F_2dy+F_3dz$ 给出**经典斯托克斯公式** $\\oint_{\\partial\\Sigma}\\mathbf F\\cdot d\\mathbf r=\\iint_\\Sigma(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S$（$\\partial\\Sigma$ 与法向 $n$ 成右手系）；$n=3$：$\\omega=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy=\\iota_F(dx\\wedge dy\\wedge dz)$，$d\\omega=(\\nabla\\cdot\\mathbf F)\\,dx\\wedge dy\\wedge dz$，得**高斯公式** $\\oint_{\\partial\\Omega}\\mathbf F\\cdot d\\mathbf S=\\iiint_\\Omega(\\nabla\\cdot\\mathbf F)\\,dV$（$\\partial\\Omega$ 取外法向）。\n\n证明的思路是「化到半空间、再化到一维」。用单位分解把 $\\omega$ 局部化到一张坐标卡，写成 $\\omega=\\sum_i f_i\\,dx^1\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^n$（帽子表示略去该因子），于是 $d\\omega$ 中这一项只含 $\\partial_if_i$；先把 $x^i$ 方向用一元微积分基本定理积分，相邻坐标卡中方向相反的内部贡献成对抵消，最终只有法向（$i=n$）那一项在边界 $\\{x^n=0\\}$ 上留下积分——边界就是这样从一维积分里「掉出来」的。\n\n一个几乎免费的推论：把 $\\omega$ 换成 $d\\eta$（$\\eta$ 是 $(n-2)$-形式）并利用 $d^2=0$，或把定理用在 $\\partial N$ 上，都得到 $\\int_{\\partial\\partial M}\\omega=0$——边界的边界是空的，形式侧对应 $d\\circ d=0$。这条幂零性质是 de Rham 上同调与同调对偶的出发点。",
-    "definitionEn": "Let $M$ be an oriented $n$-dimensional manifold with boundary (corners allowed), and give $\\partial M$ the **induced orientation**: if $N$ is an outward normal at a boundary point and $(v_1,\\dots,v_{n-1})$ is a basis of $T_x\\partial M$, then $(v_1,\\dots,v_{n-1})$ is positively oriented in $\\partial M$ exactly when $(N,v_1,\\dots,v_{n-1})$ is positively oriented in $T_xM$ — the **outward normal comes first**. For every smooth $(n-1)$-form $\\omega$ on $M$,\n$$\\int_M d\\omega=\\int_{\\partial M}\\omega.$$\nThe left side integrates an $n$-form over the oriented $M$, the right side an $(n-1)$-form over the boundary: one exterior derivative compensates exactly one lost dimension. This is the **generalized Stokes theorem**.\n\nIts power lies in the slogan: one formula, four theorems. For $n=1$ with the 0-form $\\omega=f$ on $M=[a,b]$, $d\\omega=f'\\,dx$ and it becomes the **Newton–Leibniz formula** $\\int_a^b f'\\,dx=f(b)-f(a)$; here the induced orientation assigns sign $+1$ to the right endpoint $b$ and $-1$ to the left endpoint $a$, which is exactly where the order $f(b)-f(a)$ comes from. For $n=2$ in the plane, $\\omega=P\\,dx+Q\\,dy$ gives $d\\omega=\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\wedge dy$, namely **Green's theorem** (with $\\partial D$ counterclockwise, the induced orientation). For $n=2$ on a surface in space, $\\omega=F_1dx+F_2dy+F_3dz$ gives the **classical Stokes theorem** $\\oint_{\\partial\\Sigma}\\mathbf F\\cdot d\\mathbf r=\\iint_\\Sigma(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S$, with $\\partial\\Sigma$ oriented by the right-hand rule relative to the normal $n$. For $n=3$, $\\omega=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy=\\iota_F(dx\\wedge dy\\wedge dz)$ and $d\\omega=(\\nabla\\cdot\\mathbf F)\\,dx\\wedge dy\\wedge dz$, yielding the **divergence theorem** $\\oint_{\\partial\\Omega}\\mathbf F\\cdot d\\mathbf S=\\iiint_\\Omega(\\nabla\\cdot\\mathbf F)\\,dV$ with the outward normal.\n\nThe proof reduces everything to a half-space and multivariable integrals to one-variable ones. Localising with a partition of unity, write $\\omega=\\sum_i f_i\\,dx^1\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^n$ (a hat means the factor is omitted); each summand of $d\\omega$ then contains only $\\partial_if_i$. Integrating in the $x^i$ direction by the fundamental theorem of calculus, opposite interior contributions from neighbouring charts cancel pairwise, and only the normal direction $i=n$ leaves an integral over the boundary $\\{x^n=0\\}$: the boundary is what survives one-dimensional integration.\n\nAn almost free corollary: replacing $\\omega$ by $d\\eta$ (with $\\eta$ an $(n-2)$-form) and using $d^2=0$, or applying the theorem on $\\partial N$, yields $\\int_{\\partial\\partial M}\\omega=0$ — the boundary of a boundary is empty, which on the form side is $d\\circ d=0$. This nilpotency is the seed of de Rham cohomology and of the duality between homology and cohomology.",
-    "formulas": [
-      {
-        "latex": "\\int_M d\\omega=\\int_{\\partial M}\\omega",
-        "note": "定理本身：$M$ 是带边定向 $n$ 维流形，$\\omega$ 是光滑的 $(n-1)$-形式，两边各用自己流形上的定向积分。",
-        "noteEn": "The theorem itself: $M$ is an oriented $n$-manifold with boundary, $\\omega$ a smooth $(n-1)$-form, and each side is integrated with the orientation of its own manifold."
-      },
-      {
-        "latex": "N\\ \\text{为外法向}:\\qquad (N,v_1,\\dots,v_{n-1})\\ \\text{在}\\ T_xM\\ \\text{中正}\\iff (v_1,\\dots,v_{n-1})\\ \\text{是}\\ \\partial M\\ \\text{的正定向}",
-        "note": "诱导定向的约定（外法向优先）。平面情形的化身：边界逆时针、区域在行进方向的左侧；它保证下面所有经典公式的符号不出错。",
-        "noteEn": "The induced-orientation convention (outward normal first). In the plane it becomes: the boundary is traversed counterclockwise with the region on the left of the direction of travel; it is what makes the signs of all the classical formulas come out right."
-      },
-      {
-        "latex": "\\int_a^b f'(x)\\,dx=f(b)-f(a)",
-        "note": "牛顿—莱布尼茨公式是 $n=1$、$\\omega=f$ 的特例：诱导定向给 $b$ 正号、$a$ 负号，故 $\\int_{\\partial M}f=f(b)-f(a)$。",
-        "noteEn": "The Newton–Leibniz formula is the case $n=1$, $\\omega=f$: the induced orientation gives $b$ the sign $+1$ and $a$ the sign $-1$, so that $\\int_{\\partial M}f=f(b)-f(a)$."
-      },
-      {
-        "latex": "\\oint_{\\partial D}P\\,dx+Q\\,dy=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy",
-        "note": "格林公式是 $n=2$（平面）的特例：$\\omega=P\\,dx+Q\\,dy$。$\\partial D$ 取诱导定向（逆时针，区域始终在行进方向左侧）；若取顺时针，两边同时变号。",
-        "noteEn": "Green's theorem is the case $n=2$ in the plane with $\\omega=P\\,dx+Q\\,dy$. The boundary $\\partial D$ carries the induced orientation (counterclockwise, region on the left); with the opposite orientation both sides change sign."
-      },
-      {
-        "latex": "\\oint_{\\partial\\Sigma}\\mathbf F\\cdot d\\mathbf r=\\iint_\\Sigma(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S,\\qquad \\oint_{\\partial\\Omega}\\mathbf F\\cdot d\\mathbf S=\\iiint_\\Omega(\\nabla\\cdot\\mathbf F)\\,dV",
-        "note": "经典斯托克斯公式（$\\omega=F_1dx+F_2dy+F_3dz$，$\\partial\\Sigma$ 与法向成右手系）与高斯公式（$\\omega=\\iota_F(dx\\wedge dy\\wedge dz)$，$\\partial\\Omega$ 取外法向）同为特例。",
-        "noteEn": "The classical Stokes theorem ($\\omega=F_1dx+F_2dy+F_3dz$, with $\\partial\\Sigma$ oriented by the right-hand rule relative to the normal) and the divergence theorem ($\\omega=\\iota_F(dx\\wedge dy\\wedge dz)$, with the outward normal on $\\partial\\Omega$) are both special cases."
-      }
-    ],
-    "expression": {
-      "text": "∫_M dω = ∫_{∂M} ω；∂M 取诱导定向（外法向优先）；四大经典定理都是它的特例",
-      "symbol": "\\int_M d\\omega=\\int_{\\partial M}\\omega",
-      "note": "$M$ 为带边定向流形，$\\omega$ 为 $(n-1)$-形式；$d$ 把次数加一、边界把积分降一维。",
-      "noteEn": "$M$ is an oriented manifold with boundary and $\\omega$ an $(n-1)$-form; $d$ raises the degree by one while the boundary lowers the dimension of the integral by one."
-    },
-    "properties": [
-      "统一四大定理：牛顿—莱布尼茨（$n=1$，0-形式）、格林（$n=2$，平面）、经典斯托克斯（$n=2$，曲面）、高斯（$n=3$）都是同一个 $\\int_M d\\omega=\\int_{\\partial M}\\omega$ 的特例。",
-      "推论 $\\int_{\\partial\\partial M}\\omega=0$：边界的边界为空；对偶地 $\\int_{\\partial M}d\\omega=\\int_M d(d\\omega)=0$（$d^2=0$）。这是同调与上同调代数结构的开端。",
-      "定向符号必须两端一致：反转 $M$ 的定向，两个积分同时变号；边界定向写错（例如格林公式里用顺时针）只差一个负号，却使结果完全相反。",
-      "双向使用：可由整体算边界（高斯公式、格林公式把重积分化为边界积分），也可由边界算整体（如把 $\\iint_\\Sigma(\\nabla\\times F)\\cdot dS$ 化为回路积分），或用来证明积分与路径无关。",
-      "适用范围宽：任何带边（可带角）定向流形与任何光滑 $(n-1)$-形式；非紧流形上要求 $\\omega$ 具紧支集以保证积分收敛。它只用 $d$、积分与定向，不涉及任何度量。"
-    ],
-    "propertiesEn": [
-      "One theorem, four classical faces: Newton–Leibniz ($n=1$, 0-forms), Green ($n=2$, plane), classical Stokes ($n=2$, surface) and Gauss ($n=3$) are all special cases of $\\int_M d\\omega=\\int_{\\partial M}\\omega$.",
-      "Corollary $\\int_{\\partial\\partial M}\\omega=0$: the boundary of a boundary is empty; dually $\\int_{\\partial M}d\\omega=\\int_M d(d\\omega)=0$ ($d^2=0$). This is the beginning of the algebraic structure of homology and cohomology.",
-      "Orientation signs must match on both sides: reversing the orientation of $M$ flips both integrals, while a wrong boundary orientation (say clockwise in Green's theorem) produces exactly the opposite answer.",
-      "Used in both directions: to compute boundary integrals from the interior (Gauss, Green), or interior integrals from the boundary (turning $\\iint_\\Sigma(\\nabla\\times F)\\cdot dS$ into a loop integral), and to prove path independence of integrals.",
-      "Very general validity: any oriented manifold with boundary (corners allowed) and any smooth $(n-1)$-form; on non-compact manifolds one asks $\\omega$ to have compact support. Only $d$, integration and orientation are used — no metric is involved."
-    ],
-    "examples": [
-      {
-        "problem": "设 $\\omega=x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy$。利用广义斯托克斯定理计算 $\\int_{S^2}\\omega$（$S^2$ 取外法向定向），并用球坐标参数化直接计算作对照。",
-        "solution": "先算外微分：$d\\omega=3\\,dx\\wedge dy\\wedge dz$（三组 $dy\\wedge dz$ 型的项对称地各贡献一次 $dx\\wedge dy\\wedge dz$）。由于 $S^2=\\partial B^3$（单位球体，$S^2$ 的外法向正是 $B^3$ 的诱导定向），广义斯托克斯定理给出\n$$\\int_{S^2}\\omega=\\int_{B^3}d\\omega=3\\int_{B^3}dx\\wedge dy\\wedge dz=3\\cdot\\frac{4\\pi}{3}=4\\pi.$$\n对照：球坐标参数化下 $r^*\\omega=\\sin\\theta\\,d\\theta\\wedge d\\varphi$，$\\int_0^{2\\pi}\\!\\!\\int_0^\\pi\\sin\\theta\\,d\\theta\\,d\\varphi=4\\pi$，两边一致；这也说明该 2-形式在球面上的积分恰等于球面面积。"
-      },
-      {
-        "problem": "用格林公式计算 $\\oint_{\\partial D}(-y\\,dx+x\\,dy)$，其中 $D$ 是单位圆盘、$\\partial D$ 取逆时针；并一般化说明它与面积的关系，再指出若 $\\partial D$ 取顺时针结果如何。",
-        "solution": "取 $P=-y$，$Q=x$，则\n$$\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}=1-(-1)=2.$$\n由格林公式\n$$\\oint_{\\partial D}(-y\\,dx+x\\,dy)=\\iint_D 2\\,dx\\,dy=2\\,\\mathrm{Area}(D)=2\\pi.$$\n一般地 $\\frac12\\oint_{\\partial D}(-y\\,dx+x\\,dy)=\\mathrm{Area}(D)$，这是用边界积分测面积的经典公式。若 $\\partial D$ 取顺时针（诱导定向的反向），积分值变为 $-2\\pi$——符号完全由定向决定。直接参数化可核对：$x=\\cos t,\\ y=\\sin t$，被积式 $=-y\\,dx+x\\,dy=(\\sin^2t+\\cos^2t)\\,dt=dt$，积分得 $2\\pi$。"
-      }
-    ],
-    "tags": [
-      "广义斯托克斯",
-      "边界",
-      "诱导定向",
-      "格林公式",
-      "高斯公式",
-      "de Rham"
-    ],
-    "links": [
-      "manifold-integration",
-      "exterior-derivative",
-      "differential-form",
-      "green-theorem",
-      "stokes-theorem",
-      "gauss-theorem"
-    ]
+  "properties": [
+   "线性且有方向性：$\\int_M(a\\omega+b\\eta)=a\\int_M\\omega+b\\int_M\\eta$，$\\int_{-M}\\omega=-\\int_M\\omega$；积分只对顶次（$n$-）形式定义。",
+   "可定向性是前提：莫比乌斯带、克莱因瓶、实射影平面不可定向，不存在处处非零的顶次形式；连通可定向流形恰有两个定向。",
+   "坐标无关性：转换函数雅可比行列式恒正，保证两套坐标卡、两组单位分解给出同一个 $\\int_M\\omega$。",
+   "保定向微分同胚不变：$\\int_M\\Phi^*\\omega=\\int_N\\omega$；在 $\\mathbb R^n$ 上退化为多重积分换元公式（差别在符号：普通换元用 $|\\det|$，形式用 $\\det$）。",
+   "与经典积分一致：平面区域的 $dx\\wedge dy$ 积分是二重积分；$\\mathbb R^3$ 中曲面上的通量形式 $\\iota_F(dx\\wedge dy\\wedge dz)$ 的积分是通量积分（见曲面积分）。"
+  ],
+  "propertiesEn": [
+   "Linear and orientation-sensitive: $\\int_M(a\\omega+b\\eta)=a\\int_M\\omega+b\\int_M\\eta$ and $\\int_{-M}\\omega=-\\int_M\\omega$; the integral is defined for top-degree ($n$-)forms only.",
+   "Orientability is a prerequisite: the Möbius band, the Klein bottle and the real projective plane are non-orientable and carry no nowhere-vanishing top form; a connected orientable manifold has exactly two orientations.",
+   "Chart independence: because all transition Jacobians are positive, two atlases and two partitions of unity give the same value of $\\int_M\\omega$.",
+   "Invariance under orientation-preserving diffeomorphisms: $\\int_M\\Phi^*\\omega=\\int_N\\omega$; over $\\mathbb R^n$ this reduces to the substitution rule of multivariable calculus (the difference being the sign: ordinary substitution uses $|\\det|$, forms use $\\det$).",
+   "Consistency with classical integrals: the integral of $dx\\wedge dy$ over a plane region is the double integral; on a surface in $\\mathbb R^3$ the flux form $\\iota_F(dx\\wedge dy\\wedge dz)$ integrates to the flux (see surface integral)."
+  ],
+  "examples": [
+   {
+    "problem": "设 $\\omega=x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy$，$S^2$ 取外法向定向。用球坐标参数化计算 $\\int_{S^2}\\omega$，并说明颠倒参数化次序（反向定向）后结果如何变化。",
+    "solution": "取参数化 $r(\\theta,\\varphi)=(\\sin\\theta\\cos\\varphi,\\ \\sin\\theta\\sin\\varphi,\\ \\cos\\theta)$，$\\theta\\in(0,\\pi)$，$\\varphi\\in(0,2\\pi)$。把 $\\omega$ 沿参数化展开可验证恒等式\n$$r^*\\omega=\\det(r,r_\\theta,r_\\varphi)\\,d\\theta\\wedge d\\varphi,$$\n其中三个向量按行排列。直接计算\n$$r_\\theta\\times r_\\varphi=(\\sin^2\\theta\\cos\\varphi,\\ \\sin^2\\theta\\sin\\varphi,\\ \\sin\\theta\\cos\\theta)=\\sin\\theta\\,r,$$\n故 $\\det(r,r_\\theta,r_\\varphi)=r\\cdot(r_\\theta\\times r_\\varphi)=\\sin\\theta>0$：参数化保定向，$r^*\\omega=\\sin\\theta\\,d\\theta\\wedge d\\varphi$，于是\n$$\\int_{S^2}\\omega=\\int_0^{2\\pi}\\!\\!\\int_0^\\pi\\sin\\theta\\,d\\theta\\,d\\varphi=2\\pi\\cdot 2=4\\pi.$$\n若把参数化换成 $(\\varphi,\\theta)$（交换次序），行列式变号，同样计算得 $-4\\pi$——这正是「反转定向，积分变号」的实例；$4\\pi$ 也正好是单位球面的面积。"
+   },
+   {
+    "problem": "把莫比乌斯带参数化为 $\\Phi(u,t)=\\big((1+t\\cos\\frac u2)\\cos u,\\ (1+t\\cos\\frac u2)\\sin u,\\ t\\sin\\frac u2\\big)$，$u\\in[0,4\\pi)$，$|t|<\\frac12$。验证 $\\Phi(u+2\\pi,-t)=\\Phi(u,t)$，并用粘合处的微分说明它不可定向，从而 2-形式不能整体积分。",
+    "solution": "代入即得：$\\cos\\frac{u+2\\pi}2=-\\cos\\frac u2$，$\\sin\\frac{u+2\\pi}2=-\\sin\\frac u2$，于是\n$$\\Phi(u+2\\pi,-t)=\\Big(\\big(1+t\\cos\\tfrac u2\\big)\\cos u,\\ \\big(1+t\\cos\\tfrac u2\\big)\\sin u,\\ t\\sin\\tfrac u2\\Big)=\\Phi(u,t),$$\n即绕行一圈后带宽方向被翻转。沿中线 $t=0$ 走一圈，把切标架 $(\\Phi_u,\\Phi_t)$ 沿线搬回出发点：$\\Phi_u(u+2\\pi,0)=\\Phi_u(u,0)$ 而 $\\Phi_t(u+2\\pi,0)=-\\Phi_t(u,0)$，即粘合处的线性变换为 $\\mathrm{diag}(1,-1)$，行列式 $-1<0$：定向被翻转，故莫比乌斯带不可定向，不存在处处非零的 2-形式，$\\int_M\\omega$ 无法整体定义（不依赖定向的对象如面积元 $\\sqrt{EG-F^2}\\,du\\,dt$ 仍可积分，但「带符号」的顶次形式积分只对可定向流形有意义）。"
+   }
+  ],
+  "tags": [
+   "微分形式",
+   "定向",
+   "体积形式",
+   "莫比乌斯带",
+   "雅可比行列式"
+  ],
+  "links": [
+   "differential-form",
+   "generalized-stokes",
+   "smooth-manifold",
+   "surface-integral",
+   "jacobian"
+  ]
+ },
+ {
+  "id": "generalized-stokes",
+  "title": "广义斯托克斯定理",
+  "titleEn": "The Generalized Stokes Theorem",
+  "branch": "differential-geometry",
+  "level": 5,
+  "summary": "∫_M dω = ∫_∂M ω：一个公式统一牛顿—莱布尼茨、格林、经典斯托克斯与高斯公式，是外微分与边界在积分层面的完整表达。",
+  "summaryEn": "∫_M dω = ∫_∂M ω: one formula unifying the Newton–Leibniz formula, Green's theorem, the classical Stokes theorem and the divergence theorem — the integral-level expression of d together with the boundary.",
+  "definition": "设 $M$ 是 $n$ 维**带边定向流形**（允许角），$\\partial M$ 是它的边界，按**诱导定向**取向：若 $N$ 是边界点处的外法向，$(v_1,\\dots,v_{n-1})$ 是 $T_x\\partial M$ 的一组基，则规定 $(v_1,\\dots,v_{n-1})$ 是 $\\partial M$ 的正定向，当且仅当 $(N,v_1,\\dots,v_{n-1})$ 是 $T_xM$ 的正定向（**外法向排在最前**）。设 $\\omega$ 是 $M$ 上光滑的 $(n-1)$-形式，则\n$$\\int_M d\\omega=\\int_{\\partial M}\\omega.$$\n左边是 $n$-形式在外向的 $M$ 上的积分，右边是 $(n-1)$-形式在边界上的积分：一次外微分，正好补上失去的一维。这就是**广义斯托克斯定理**。\n\n它的分量在于「一个公式，四个定理」。$n=1$、0-形式 $\\omega=f$、$M=[a,b]$：$d\\omega=f'\\,dx$，公式退化为**牛顿—莱布尼茨公式** $\\int_a^b f'\\,dx=f(b)-f(a)$；此时诱导定向给右端点 $b$ 符号 $+1$、左端点 $a$ 符号 $-1$，公式里 $f(b)-f(a)$ 的次序正是定向规定出来的。$n=2$ 在平面上：$\\omega=P\\,dx+Q\\,dy$，$d\\omega=\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\wedge dy$，得**格林公式**（$\\partial D$ 取逆时针，即诱导定向）；$n=2$ 在空间曲面上：$\\omega=F_1dx+F_2dy+F_3dz$ 给出**经典斯托克斯公式** $\\oint_{\\partial\\Sigma}\\mathbf F\\cdot d\\mathbf r=\\iint_\\Sigma(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S$（$\\partial\\Sigma$ 与法向 $n$ 成右手系）；$n=3$：$\\omega=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy=\\iota_F(dx\\wedge dy\\wedge dz)$，$d\\omega=(\\nabla\\cdot\\mathbf F)\\,dx\\wedge dy\\wedge dz$，得**高斯公式** $\\oint_{\\partial\\Omega}\\mathbf F\\cdot d\\mathbf S=\\iiint_\\Omega(\\nabla\\cdot\\mathbf F)\\,dV$（$\\partial\\Omega$ 取外法向）。\n\n证明的思路是「化到半空间、再化到一维」。用单位分解把 $\\omega$ 局部化到一张坐标卡，写成 $\\omega=\\sum_i f_i\\,dx^1\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^n$（帽子表示略去该因子），于是 $d\\omega$ 中这一项只含 $\\partial_if_i$；先把 $x^i$ 方向用一元微积分基本定理积分，相邻坐标卡中方向相反的内部贡献成对抵消，最终只有法向（$i=n$）那一项在边界 $\\{x^n=0\\}$ 上留下积分——边界就是这样从一维积分里「掉出来」的。\n\n一个几乎免费的推论：把 $\\omega$ 换成 $d\\eta$（$\\eta$ 是 $(n-2)$-形式）并利用 $d^2=0$，或把定理用在 $\\partial N$ 上，都得到 $\\int_{\\partial\\partial M}\\omega=0$——边界的边界是空的，形式侧对应 $d\\circ d=0$。这条幂零性质是 de Rham 上同调与同调对偶的出发点。",
+  "definitionEn": "Let $M$ be an oriented $n$-dimensional manifold with boundary (corners allowed), and give $\\partial M$ the **induced orientation**: if $N$ is an outward normal at a boundary point and $(v_1,\\dots,v_{n-1})$ is a basis of $T_x\\partial M$, then $(v_1,\\dots,v_{n-1})$ is positively oriented in $\\partial M$ exactly when $(N,v_1,\\dots,v_{n-1})$ is positively oriented in $T_xM$ — the **outward normal comes first**. For every smooth $(n-1)$-form $\\omega$ on $M$,\n$$\\int_M d\\omega=\\int_{\\partial M}\\omega.$$\nThe left side integrates an $n$-form over the oriented $M$, the right side an $(n-1)$-form over the boundary: one exterior derivative compensates exactly one lost dimension. This is the **generalized Stokes theorem**.\n\nIts power lies in the slogan: one formula, four theorems. For $n=1$ with the 0-form $\\omega=f$ on $M=[a,b]$, $d\\omega=f'\\,dx$ and it becomes the **Newton–Leibniz formula** $\\int_a^b f'\\,dx=f(b)-f(a)$; here the induced orientation assigns sign $+1$ to the right endpoint $b$ and $-1$ to the left endpoint $a$, which is exactly where the order $f(b)-f(a)$ comes from. For $n=2$ in the plane, $\\omega=P\\,dx+Q\\,dy$ gives $d\\omega=\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\wedge dy$, namely **Green's theorem** (with $\\partial D$ counterclockwise, the induced orientation). For $n=2$ on a surface in space, $\\omega=F_1dx+F_2dy+F_3dz$ gives the **classical Stokes theorem** $\\oint_{\\partial\\Sigma}\\mathbf F\\cdot d\\mathbf r=\\iint_\\Sigma(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S$, with $\\partial\\Sigma$ oriented by the right-hand rule relative to the normal $n$. For $n=3$, $\\omega=F_1\\,dy\\wedge dz+F_2\\,dz\\wedge dx+F_3\\,dx\\wedge dy=\\iota_F(dx\\wedge dy\\wedge dz)$ and $d\\omega=(\\nabla\\cdot\\mathbf F)\\,dx\\wedge dy\\wedge dz$, yielding the **divergence theorem** $\\oint_{\\partial\\Omega}\\mathbf F\\cdot d\\mathbf S=\\iiint_\\Omega(\\nabla\\cdot\\mathbf F)\\,dV$ with the outward normal.\n\nThe proof reduces everything to a half-space and multivariable integrals to one-variable ones. Localising with a partition of unity, write $\\omega=\\sum_i f_i\\,dx^1\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^n$ (a hat means the factor is omitted); each summand of $d\\omega$ then contains only $\\partial_if_i$. Integrating in the $x^i$ direction by the fundamental theorem of calculus, opposite interior contributions from neighbouring charts cancel pairwise, and only the normal direction $i=n$ leaves an integral over the boundary $\\{x^n=0\\}$: the boundary is what survives one-dimensional integration.\n\nAn almost free corollary: replacing $\\omega$ by $d\\eta$ (with $\\eta$ an $(n-2)$-form) and using $d^2=0$, or applying the theorem on $\\partial N$, yields $\\int_{\\partial\\partial M}\\omega=0$ — the boundary of a boundary is empty, which on the form side is $d\\circ d=0$. This nilpotency is the seed of de Rham cohomology and of the duality between homology and cohomology.",
+  "formulas": [
+   {
+    "latex": "\\int_M d\\omega=\\int_{\\partial M}\\omega",
+    "note": "定理本身：$M$ 是带边定向 $n$ 维流形，$\\omega$ 是光滑的 $(n-1)$-形式，两边各用自己流形上的定向积分。",
+    "noteEn": "The theorem itself: $M$ is an oriented $n$-manifold with boundary, $\\omega$ a smooth $(n-1)$-form, and each side is integrated with the orientation of its own manifold."
+   },
+   {
+    "latex": "N\\ \\text{为外法向}:\\qquad (N,v_1,\\dots,v_{n-1})\\ \\text{在}\\ T_xM\\ \\text{中正}\\iff (v_1,\\dots,v_{n-1})\\ \\text{是}\\ \\partial M\\ \\text{的正定向}",
+    "note": "诱导定向的约定（外法向优先）。平面情形的化身：边界逆时针、区域在行进方向的左侧；它保证下面所有经典公式的符号不出错。",
+    "noteEn": "The induced-orientation convention (outward normal first). In the plane it becomes: the boundary is traversed counterclockwise with the region on the left of the direction of travel; it is what makes the signs of all the classical formulas come out right."
+   },
+   {
+    "latex": "\\int_a^b f'(x)\\,dx=f(b)-f(a)",
+    "note": "牛顿—莱布尼茨公式是 $n=1$、$\\omega=f$ 的特例：诱导定向给 $b$ 正号、$a$ 负号，故 $\\int_{\\partial M}f=f(b)-f(a)$。",
+    "noteEn": "The Newton–Leibniz formula is the case $n=1$, $\\omega=f$: the induced orientation gives $b$ the sign $+1$ and $a$ the sign $-1$, so that $\\int_{\\partial M}f=f(b)-f(a)$."
+   },
+   {
+    "latex": "\\oint_{\\partial D}P\\,dx+Q\\,dy=\\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)dx\\,dy",
+    "note": "格林公式是 $n=2$（平面）的特例：$\\omega=P\\,dx+Q\\,dy$。$\\partial D$ 取诱导定向（逆时针，区域始终在行进方向左侧）；若取顺时针，两边同时变号。",
+    "noteEn": "Green's theorem is the case $n=2$ in the plane with $\\omega=P\\,dx+Q\\,dy$. The boundary $\\partial D$ carries the induced orientation (counterclockwise, region on the left); with the opposite orientation both sides change sign."
+   },
+   {
+    "latex": "\\oint_{\\partial\\Sigma}\\mathbf F\\cdot d\\mathbf r=\\iint_\\Sigma(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S,\\qquad \\oint_{\\partial\\Omega}\\mathbf F\\cdot d\\mathbf S=\\iiint_\\Omega(\\nabla\\cdot\\mathbf F)\\,dV",
+    "note": "经典斯托克斯公式（$\\omega=F_1dx+F_2dy+F_3dz$，$\\partial\\Sigma$ 与法向成右手系）与高斯公式（$\\omega=\\iota_F(dx\\wedge dy\\wedge dz)$，$\\partial\\Omega$ 取外法向）同为特例。",
+    "noteEn": "The classical Stokes theorem ($\\omega=F_1dx+F_2dy+F_3dz$, with $\\partial\\Sigma$ oriented by the right-hand rule relative to the normal) and the divergence theorem ($\\omega=\\iota_F(dx\\wedge dy\\wedge dz)$, with the outward normal on $\\partial\\Omega$) are both special cases."
+   }
+  ],
+  "expression": {
+   "text": "∫_M dω = ∫_{∂M} ω；∂M 取诱导定向（外法向优先）；四大经典定理都是它的特例",
+   "symbol": "\\int_M d\\omega=\\int_{\\partial M}\\omega",
+   "note": "$M$ 为带边定向流形，$\\omega$ 为 $(n-1)$-形式；$d$ 把次数加一、边界把积分降一维。",
+   "noteEn": "$M$ is an oriented manifold with boundary and $\\omega$ an $(n-1)$-form; $d$ raises the degree by one while the boundary lowers the dimension of the integral by one."
   },
-  {
-    "id": "lie-derivative",
-    "title": "李导数与李括号",
-    "titleEn": "Lie Derivative and Lie Bracket",
-    "branch": "differential-geometry",
-    "level": 5,
-    "summary": "沿向量场的流对几何对象求导：按定义就是流的拉回对时间的导数，计算上由嘉当魔法公式 L_X = dι_X + ι_X d 主宰，而在向量场上它化为大家熟悉的李括号 [X,Y]。",
-    "summaryEn": "Differentiating geometric objects along the flow of a vector field: by definition it is the time derivative of the flow pullback, computed in practice via Cartan's magic formula L_X = dι_X + ι_X d, and on vector fields it reduces to the Lie bracket [X,Y].",
-    "definition": "让一个流去「推动」几何对象、再看它变化得多快，就得到**李导数**；而它作用在向量场上时，是更初等的**李括号**。先看括号：设 $X,Y$ 是光滑流形上的向量场，把它们看作作用在函数上的求导算子，定义\n$$[X,Y](f)=X(Y(f))-Y(X(f)).$$\n右端对 $f$ 仍是导子（满足 Leibniz 律），因此（局部上）决定一个新的向量场，称为 $X,Y$ 的**李括号**。代入 $X=X^i\\partial_i$、$Y=Y^i\\partial_i$（求和约定），二阶导项 $X^iY^j\\partial_i\\partial_jf$ 与 $Y^jX^i\\partial_j\\partial_if$ 成对抵消，留下坐标公式\n$$[X,Y]^k=X^i\\frac{\\partial Y^k}{\\partial x^i}-Y^i\\frac{\\partial X^k}{\\partial x^i}.$$\n「二阶项自动抵消」正是括号仍是向量场的机制，也是把向量场理解为「一阶微分算子」的好处。\n\n几何上，李括号度量**两个流不可交换的程度**：$[X,Y]=0$ 当且仅当两个流局部可交换，即 $\\phi_t^X\\circ\\phi_s^Y=\\phi_s^Y\\circ\\phi_t^X$；一般的偏差由二阶混合速度给出：$[X,Y]=\\partial_t\\partial_s\\left(\\phi_{-t}^Y\\circ\\phi_{-s}^X\\circ\\phi_t^X\\circ\\phi_s^Y\\right)\\big|_{t=s=0}$。它满足**反对称** $[X,Y]=-[Y,X]$ 与**雅可比恒等式** $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$——这两条使光滑向量场的全体构成一个（无限维）李代数，也是「无穷小流构成李代数」的全部代数内容。\n\n**李导数**把同样的思想推广到任意张量场与微分形式：沿 $X$ 的流 $\\phi_t$ 把 $\\omega$ 拉回，再对时间求导：\n$$\\mathcal L_X\\omega=\\left.\\frac{d}{dt}\\right|_{t=0}\\phi_t^*\\omega.$$\n这是定义，也是全部直觉：$\\mathcal L_X\\omega$ 度量「$\\omega$ 沿 $X$ 的流动被畸变的速度」。两个基本情形：对函数，$\\mathcal L_Xf=\\frac{d}{dt}f(\\phi_t(x))=df(X)=X(f)$，就是方向导数；对向量场，$\\mathcal L_XY=[X,Y]$，两个概念在此会合。$\\mathcal L_X$ 不改变张量的类型（作用在形式上不改变次数），并与缩并、外积按 Leibniz 律相容。\n\n实际计算几乎总用**嘉当魔法公式**（Cartan's magic formula），把「求导」拆成「先缩并再外微分」与「先外微分再缩并」两项：\n$$\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d,$$\n其中 $\\iota_X$ 是**内乘**（把 $X$ 塞进形式的第一个槽位）：$\\iota_X\\omega(Y_1,\\dots,Y_{k-1})=\\omega(X,Y_1,\\dots,Y_{k-1})$，例如 $\\iota_X(dx\\wedge dy)=(\\iota_Xdx)\\,dy-dx\\wedge(\\iota_Xdy)=X^1\\,dy-X^2\\,dx$。由 $d^2=0$ 立得 $\\mathcal L_X\\,d=d\\,\\mathcal L_X$；由分次 Leibniz 律得 $\\mathcal L_X(\\omega\\wedge\\eta)=\\mathcal L_X\\omega\\wedge\\eta+\\omega\\wedge\\mathcal L_X\\eta$；更有 $[\\mathcal L_X,\\mathcal L_Y]=\\mathcal L_{[X,Y]}$——这正是「李括号是李导数的交换子」的精确含义。",
-    "definitionEn": "Pushing geometric objects along a flow and measuring how fast they change gives the **Lie derivative**; on vector fields it reduces to the more elementary **Lie bracket**. Start with the bracket: regard vector fields $X,Y$ on a smooth manifold as derivations acting on functions and set\n$$[X,Y](f)=X(Y(f))-Y(X(f)).$$\nThe right side is again a derivation (it satisfies the Leibniz rule), hence defines (locally) a vector field, the **Lie bracket** of $X$ and $Y$. Substituting $X=X^i\\partial_i$, $Y=Y^i\\partial_i$ (summation convention), the second-order terms $X^iY^j\\partial_i\\partial_jf$ and $Y^jX^i\\partial_j\\partial_if$ cancel in pairs, leaving the coordinate formula\n$$[X,Y]^k=X^i\\frac{\\partial Y^k}{\\partial x^i}-Y^i\\frac{\\partial X^k}{\\partial x^i}.$$\nThis automatic cancellation is precisely why the bracket is a vector field — the reward for viewing vector fields as first-order differential operators.\n\nGeometrically, the bracket measures **how badly two flows fail to commute**: $[X,Y]=0$ iff the flows commute locally, $\\phi_t^X\\circ\\phi_s^Y=\\phi_s^Y\\circ\\phi_t^X$; the general discrepancy is the second mixed velocity $[X,Y]=\\partial_t\\partial_s\\left(\\phi_{-t}^Y\\circ\\phi_{-s}^X\\circ\\phi_t^X\\circ\\phi_s^Y\\right)\\big|_{t=s=0}$. It is **antisymmetric**, $[X,Y]=-[Y,X]$, and satisfies the **Jacobi identity** $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$; these two laws make the smooth vector fields into an (infinite-dimensional) Lie algebra — all the algebra of infinitesimal flows.\n\nThe **Lie derivative** generalises this to arbitrary tensor fields and differential forms: pull $\\omega$ back by the flow $\\phi_t$ of $X$ and differentiate with respect to time,\n$$\\mathcal L_X\\omega=\\left.\\frac{d}{dt}\\right|_{t=0}\\phi_t^*\\omega.$$\nThat is the definition and the whole intuition: $\\mathcal L_X\\omega$ measures how fast $\\omega$ is distorted as it is dragged along by $X$. Two basic cases: for a function, $\\mathcal L_Xf=\\frac{d}{dt}f(\\phi_t(x))=df(X)=X(f)$, the directional derivative; for a vector field, $\\mathcal L_XY=[X,Y]$ — the two notions meet here. The operator $\\mathcal L_X$ preserves tensor type (it does not change the degree of a form) and is compatible with contractions and exterior products by the Leibniz rule.\n\nIn practice one almost always computes with **Cartan's magic formula**, splitting the derivative into contraction-then-d and d-then-contraction:\n$$\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d,$$\nwhere $\\iota_X$ is the **interior product** (feed $X$ into the first slot of the form): $\\iota_X\\omega(Y_1,\\dots,Y_{k-1})=\\omega(X,Y_1,\\dots,Y_{k-1})$, e.g. $\\iota_X(dx\\wedge dy)=(\\iota_Xdx)\\,dy-dx\\wedge(\\iota_Xdy)=X^1\\,dy-X^2\\,dx$. From $d^2=0$ one gets $\\mathcal L_X\\,d=d\\,\\mathcal L_X$; the graded Leibniz rule gives $\\mathcal L_X(\\omega\\wedge\\eta)=\\mathcal L_X\\omega\\wedge\\eta+\\omega\\wedge\\mathcal L_X\\eta$; and moreover $[\\mathcal L_X,\\mathcal L_Y]=\\mathcal L_{[X,Y]}$ — the precise sense in which the Lie bracket is the commutator of Lie derivatives.",
-    "formulas": [
-      {
-        "latex": "[X,Y](f)=X(Y(f))-Y(X(f)),\\qquad [X,Y]^k=X^i\\frac{\\partial Y^k}{\\partial x^i}-Y^i\\frac{\\partial X^k}{\\partial x^i}",
-        "note": "李括号的算子定义与坐标公式（求和约定）。与流的关系：$[X,Y]=0$ 当且仅当两个流局部可交换。",
-        "noteEn": "Operator definition and coordinate formula of the Lie bracket (summation convention). Its link to flows: $[X,Y]=0$ iff the two flows commute locally."
-      },
-      {
-        "latex": "[X,Y]=-[Y,X],\\qquad [X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0",
-        "note": "**反对称**与**雅可比恒等式**：二者使光滑向量场的全体构成李代数，且 $[X,X]=0$。",
-        "noteEn": "**Antisymmetry** and the **Jacobi identity**: together they make the smooth vector fields a Lie algebra, and they force $[X,X]=0$."
-      },
-      {
-        "latex": "\\mathcal L_X\\omega=\\left.\\frac{d}{dt}\\right|_{t=0}\\phi_t^*\\omega,\\qquad \\mathcal L_Xf=X(f),\\qquad \\mathcal L_XY=[X,Y]",
-        "note": "李导数的定义（对流的拉回求导）与两个基本情形：作用在函数上就是方向导数，作用在向量场上就是李括号。",
-        "noteEn": "Definition of the Lie derivative (time derivative of the flow pullback) and its two basic cases: on functions it is the directional derivative, on vector fields the Lie bracket."
-      },
-      {
-        "latex": "\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d,\\qquad \\iota_X\\omega(Y_1,\\dots,Y_{k-1})=\\omega(X,Y_1,\\dots,Y_{k-1})",
-        "note": "**嘉当魔法公式**与内乘的定义：$\\iota_X$ 把 $k$-形式降为 $(k-1)$-形式（$k=0$ 时 $\\iota_X=0$），故两项合成保次数的算子，这正是最常用的计算路径。",
-        "noteEn": "**Cartan's magic formula** and the interior product: $\\iota_X$ lowers a $k$-form to a $(k-1)$-form (and is $0$ on functions), so the two terms combine into a degree-preserving operator — the standard computational route."
-      },
-      {
-        "latex": "\\mathcal L_X\\,d=d\\,\\mathcal L_X,\\qquad \\mathcal L_X(\\omega\\wedge\\eta)=\\mathcal L_X\\omega\\wedge\\eta+\\omega\\wedge\\mathcal L_X\\eta,\\qquad [\\mathcal L_X,\\mathcal L_Y]=\\mathcal L_{[X,Y]}",
-        "note": "结构性质：$\\mathcal L_X$ 与外微分交换、是分次导子，且 $X\\mapsto\\mathcal L_X$ 是李代数同态。",
-        "noteEn": "Structure properties: $\\mathcal L_X$ commutes with $d$, is a graded derivation, and $X\\mapsto\\mathcal L_X$ is a Lie algebra homomorphism."
-      }
-    ],
-    "expression": {
-      "text": "L_X ω = d(ι_X ω) + ι_X(dω)；[X,Y](f) = X(Y(f)) − Y(X(f))；L_X f = X(f)，L_X Y = [X,Y]",
-      "symbol": "\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d",
-      "note": "嘉当魔法公式是计算李导数的通用工具；$\\iota_X$ 为内乘（缩并）。对函数 $k=0$，$\\iota_Xf=0$，于是 $\\mathcal L_Xf=df(X)$。",
-      "noteEn": "Cartan's magic formula is the universal tool for computing Lie derivatives; $\\iota_X$ is the interior product. On functions $\\iota_Xf=0$, so $\\mathcal L_Xf=df(X)$."
-    },
-    "properties": [
-      "反对称与雅可比：$[X,Y]=-[Y,X]$、$[X,X]=0$、$[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$；光滑向量场配以 $[\\,,]$ 构成李代数。",
-      "交换性判据：$[X,Y]=0$ 当且仅当两个流局部可交换，也当且仅当可以局部把二者同时拉直为坐标向量场 $\\partial_u,\\partial_v$（Frobenius 定理的平直情形）；如 $[\\partial_x,\\partial_y]=0$。",
-      "李导数的两个基本情形：$\\mathcal L_Xf=df(X)=X(f)$（方向导数），$\\mathcal L_XY=[X,Y]$；且 $\\mathcal L_X$ 保次数、与外微分交换：$\\mathcal L_X(d\\omega)=d(\\mathcal L_X\\omega)$。",
-      "$\\mathcal L_X$ 对形式由 $d$ 与 $\\iota_X$ 生成，但对 $X$ 不是逐点线性的：$\\mathcal L_{fX}\\omega=f\\,\\mathcal L_X\\omega+df\\wedge\\iota_X\\omega\\ne f\\,\\mathcal L_X\\omega$——与 $[fX,Y]=f[X,Y]-(Yf)X$ 是同一件事，说明李括号不是张量运算。",
-      "体积形式的李导数是散度：在坐标基下 $\\mathcal L_X(dx^1\\wedge\\cdots\\wedge dx^n)=(\\mathrm{div}\\,X)\\,dx^1\\wedge\\cdots\\wedge dx^n$；一般地 $\\mathcal L_X\\omega=0$ 表示 $\\omega$ 沿 $X$ 的流不变（流是 $\\omega$ 的对称）。"
-    ],
-    "propertiesEn": [
-      "Antisymmetry and Jacobi: $[X,Y]=-[Y,X]$, $[X,X]=0$ and $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$; smooth vector fields with $[\\,,]$ form a Lie algebra.",
-      "Commutation criterion: $[X,Y]=0$ iff the two flows commute locally, iff the two fields can be straightened simultaneously to coordinate fields $\\partial_u,\\partial_v$ (the flat case of Frobenius' theorem); e.g. $[\\partial_x,\\partial_y]=0$.",
-      "Two basic cases of the Lie derivative: $\\mathcal L_Xf=df(X)=X(f)$ (directional derivative) and $\\mathcal L_XY=[X,Y]$; moreover $\\mathcal L_X$ preserves degree and commutes with $d$: $\\mathcal L_X(d\\omega)=d(\\mathcal L_X\\omega)$.",
-      "On forms $\\mathcal L_X$ is generated by $d$ and $\\iota_X$, but it is not pointwise linear in $X$: $\\mathcal L_{fX}\\omega=f\\,\\mathcal L_X\\omega+df\\wedge\\iota_X\\omega\\ne f\\,\\mathcal L_X\\omega$ — the same phenomenon as $[fX,Y]=f[X,Y]-(Yf)X$, showing that the bracket is not a tensor operation.",
-      "The Lie derivative of the volume form is the divergence: in coordinates $\\mathcal L_X(dx^1\\wedge\\cdots\\wedge dx^n)=(\\mathrm{div}\\,X)\\,dx^1\\wedge\\cdots\\wedge dx^n$; in general $\\mathcal L_X\\omega=0$ means that $\\omega$ is invariant under the flow of $X$."
-    ],
-    "examples": [
-      {
-        "problem": "对旋转场 $X=-y\\,\\partial_x+x\\,\\partial_y$ 与伸缩场 $Y=x\\,\\partial_x+y\\,\\partial_y$，计算 $[X,Y]$ 并解释其几何含义；再计算 $\\mathcal L_Xf$，其中 $f=x^2+y^2$。",
-        "solution": "用坐标公式：\n$$[X,Y]^1=(-y)\\cdot 1+x\\cdot 0-x\\cdot 0-y\\cdot(-1)=0,\\qquad [X,Y]^2=(-y)\\cdot 0+x\\cdot 1-x\\cdot 1-y\\cdot 0=0,$$\n故 $[X,Y]=0$。几何上 $\\phi_t^X$ 是绕原点旋转角 $t$，$\\phi_s^Y$ 是以倍率 $e^s$ 作中心伸缩；旋转与等比伸缩作为线性映射可交换，两流可交换正是 $[X,Y]=0$ 的含义（交换性 $\\iff$ 括号为零）。对 $f=x^2+y^2$：\n$$\\mathcal L_Xf=X(f)=(-y)\\,(2x)+x\\,(2y)=0,$$\n说明 $f$ 沿旋转流不变：每一条圆 $x^2+y^2=\\mathrm{const}$ 都是流的不变集，与配图中旋转场叠加同心圆的图像一致。"
-      },
-      {
-        "problem": "设 $\\omega=x\\,dy$，$X=-y\\,\\partial_x+x\\,\\partial_y$。分别用嘉当魔法公式与定义（对流的拉回求关于 $t$ 的导数）计算 $\\mathcal L_X\\omega$，并核对结果。",
-        "solution": "内乘：$\\iota_X\\omega=\\omega(X)=x\\cdot dy(X)=x\\cdot x=x^2$，故 $d(\\iota_X\\omega)=2x\\,dx$。又 $d\\omega=dx\\wedge dy$，且\n$$\\iota_X(dx\\wedge dy)=(\\iota_Xdx)\\,dy-dx\\wedge(\\iota_Xdy)=(-y)\\,dy-x\\,dx.$$\n嘉当公式给出\n$$\\mathcal L_X\\omega=d(\\iota_X\\omega)+\\iota_X(d\\omega)=2x\\,dx-y\\,dy-x\\,dx=x\\,dx-y\\,dy.$$\n直接用定义核对：流为 $\\phi_t(x,y)=(x\\cos t-y\\sin t,\\ x\\sin t+y\\cos t)$，于是\n$$\\phi_t^*\\omega=(x\\cos t-y\\sin t)\\,d(x\\sin t+y\\cos t)=(x\\cos t-y\\sin t)(\\sin t\\,dx+\\cos t\\,dy).$$\n对 $t$ 求导并取 $t=0$：$dx$ 系数为 $(x\\cos t-y\\sin t)\\sin t$ 的导数 $x$，$dy$ 系数为 $(x\\cos t-y\\sin t)\\cos t$ 的导数 $-y$，仍得 $\\mathcal L_X\\omega=x\\,dx-y\\,dy$。两种算法一致，验证了嘉当公式。"
-      }
-    ],
-    "tags": [
-      "李导数",
-      "李括号",
-      "嘉当魔法公式",
-      "流",
-      "内乘"
-    ],
-    "links": [
-      "manifold-vector-fields",
-      "differential-form",
-      "exterior-derivative",
-      "smooth-manifold",
-      "generalized-stokes"
-    ],
-    "plot": {
-      "type": "vectorfield",
-      "fx": "-y",
-      "fy": "x",
-      "xRange": [
-        -2.2,
-        2.2
-      ],
-      "yRange": [
-        -2.2,
-        2.2
-      ],
-      "contourExpr": "x^2 + y^2",
-      "marks": [
-        {
-          "at": [
-            0,
-            0
-          ],
-          "label": "不动点（原点）"
-        }
-      ],
-      "title": "旋转场 X=(−y, x)：流沿圆周旋转，圆 x²+y²=const 是流的不变集"
+  "properties": [
+   "统一四大定理：牛顿—莱布尼茨（$n=1$，0-形式）、格林（$n=2$，平面）、经典斯托克斯（$n=2$，曲面）、高斯（$n=3$）都是同一个 $\\int_M d\\omega=\\int_{\\partial M}\\omega$ 的特例。",
+   "推论 $\\int_{\\partial\\partial M}\\omega=0$：边界的边界为空；对偶地 $\\int_{\\partial M}d\\omega=\\int_M d(d\\omega)=0$（$d^2=0$）。这是同调与上同调代数结构的开端。",
+   "定向符号必须两端一致：反转 $M$ 的定向，两个积分同时变号；边界定向写错（例如格林公式里用顺时针）只差一个负号，却使结果完全相反。",
+   "双向使用：可由整体算边界（高斯公式、格林公式把重积分化为边界积分），也可由边界算整体（如把 $\\iint_\\Sigma(\\nabla\\times F)\\cdot dS$ 化为回路积分），或用来证明积分与路径无关。",
+   "适用范围宽：任何带边（可带角）定向流形与任何光滑 $(n-1)$-形式；非紧流形上要求 $\\omega$ 具紧支集以保证积分收敛。它只用 $d$、积分与定向，不涉及任何度量。"
+  ],
+  "propertiesEn": [
+   "One theorem, four classical faces: Newton–Leibniz ($n=1$, 0-forms), Green ($n=2$, plane), classical Stokes ($n=2$, surface) and Gauss ($n=3$) are all special cases of $\\int_M d\\omega=\\int_{\\partial M}\\omega$.",
+   "Corollary $\\int_{\\partial\\partial M}\\omega=0$: the boundary of a boundary is empty; dually $\\int_{\\partial M}d\\omega=\\int_M d(d\\omega)=0$ ($d^2=0$). This is the beginning of the algebraic structure of homology and cohomology.",
+   "Orientation signs must match on both sides: reversing the orientation of $M$ flips both integrals, while a wrong boundary orientation (say clockwise in Green's theorem) produces exactly the opposite answer.",
+   "Used in both directions: to compute boundary integrals from the interior (Gauss, Green), or interior integrals from the boundary (turning $\\iint_\\Sigma(\\nabla\\times F)\\cdot dS$ into a loop integral), and to prove path independence of integrals.",
+   "Very general validity: any oriented manifold with boundary (corners allowed) and any smooth $(n-1)$-form; on non-compact manifolds one asks $\\omega$ to have compact support. Only $d$, integration and orientation are used — no metric is involved."
+  ],
+  "examples": [
+   {
+    "problem": "设 $\\omega=x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy$。利用广义斯托克斯定理计算 $\\int_{S^2}\\omega$（$S^2$ 取外法向定向），并用球坐标参数化直接计算作对照。",
+    "solution": "先算外微分：$d\\omega=3\\,dx\\wedge dy\\wedge dz$（三组 $dy\\wedge dz$ 型的项对称地各贡献一次 $dx\\wedge dy\\wedge dz$）。由于 $S^2=\\partial B^3$（单位球体，$S^2$ 的外法向正是 $B^3$ 的诱导定向），广义斯托克斯定理给出\n$$\\int_{S^2}\\omega=\\int_{B^3}d\\omega=3\\int_{B^3}dx\\wedge dy\\wedge dz=3\\cdot\\frac{4\\pi}{3}=4\\pi.$$\n对照：球坐标参数化下 $r^*\\omega=\\sin\\theta\\,d\\theta\\wedge d\\varphi$，$\\int_0^{2\\pi}\\!\\!\\int_0^\\pi\\sin\\theta\\,d\\theta\\,d\\varphi=4\\pi$，两边一致；这也说明该 2-形式在球面上的积分恰等于球面面积。"
+   },
+   {
+    "problem": "用格林公式计算 $\\oint_{\\partial D}(-y\\,dx+x\\,dy)$，其中 $D$ 是单位圆盘、$\\partial D$ 取逆时针；并一般化说明它与面积的关系，再指出若 $\\partial D$ 取顺时针结果如何。",
+    "solution": "取 $P=-y$，$Q=x$，则\n$$\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}=1-(-1)=2.$$\n由格林公式\n$$\\oint_{\\partial D}(-y\\,dx+x\\,dy)=\\iint_D 2\\,dx\\,dy=2\\,\\mathrm{Area}(D)=2\\pi.$$\n一般地 $\\frac12\\oint_{\\partial D}(-y\\,dx+x\\,dy)=\\mathrm{Area}(D)$，这是用边界积分测面积的经典公式。若 $\\partial D$ 取顺时针（诱导定向的反向），积分值变为 $-2\\pi$——符号完全由定向决定。直接参数化可核对：$x=\\cos t,\\ y=\\sin t$，被积式 $=-y\\,dx+x\\,dy=(\\sin^2t+\\cos^2t)\\,dt=dt$，积分得 $2\\pi$。"
+   }
+  ],
+  "tags": [
+   "广义斯托克斯",
+   "边界",
+   "诱导定向",
+   "格林公式",
+   "高斯公式",
+   "de Rham"
+  ],
+  "links": [
+   "manifold-integration",
+   "exterior-derivative",
+   "differential-form",
+   "green-theorem",
+   "stokes-theorem",
+   "gauss-theorem"
+  ]
+ },
+ {
+  "id": "lie-derivative",
+  "title": "李导数与李括号",
+  "titleEn": "Lie Derivative and Lie Bracket",
+  "branch": "differential-geometry",
+  "level": 5,
+  "summary": "沿向量场的流对几何对象求导：按定义就是流的拉回对时间的导数，计算上由嘉当魔法公式 L_X = dι_X + ι_X d 主宰，而在向量场上它化为大家熟悉的李括号 [X,Y]。",
+  "summaryEn": "Differentiating geometric objects along the flow of a vector field: by definition it is the time derivative of the flow pullback, computed in practice via Cartan's magic formula L_X = dι_X + ι_X d, and on vector fields it reduces to the Lie bracket [X,Y].",
+  "definition": "让一个流去「推动」几何对象、再看它变化得多快，就得到**李导数**；而它作用在向量场上时，是更初等的**李括号**。先看括号：设 $X,Y$ 是光滑流形上的向量场，把它们看作作用在函数上的求导算子，定义\n$$[X,Y](f)=X(Y(f))-Y(X(f)).$$\n右端对 $f$ 仍是导子（满足 Leibniz 律），因此（局部上）决定一个新的向量场，称为 $X,Y$ 的**李括号**。代入 $X=X^i\\partial_i$、$Y=Y^i\\partial_i$（求和约定），二阶导项 $X^iY^j\\partial_i\\partial_jf$ 与 $Y^jX^i\\partial_j\\partial_if$ 成对抵消，留下坐标公式\n$$[X,Y]^k=X^i\\frac{\\partial Y^k}{\\partial x^i}-Y^i\\frac{\\partial X^k}{\\partial x^i}.$$\n「二阶项自动抵消」正是括号仍是向量场的机制，也是把向量场理解为「一阶微分算子」的好处。\n\n几何上，李括号度量**两个流不可交换的程度**：$[X,Y]=0$ 当且仅当两个流局部可交换，即 $\\phi_t^X\\circ\\phi_s^Y=\\phi_s^Y\\circ\\phi_t^X$；一般的偏差由二阶混合速度给出：$[X,Y]=\\partial_t\\partial_s\\left(\\phi_{-t}^Y\\circ\\phi_{-s}^X\\circ\\phi_t^X\\circ\\phi_s^Y\\right)\\big|_{t=s=0}$。它满足**反对称** $[X,Y]=-[Y,X]$ 与**雅可比恒等式** $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$——这两条使光滑向量场的全体构成一个（无限维）李代数，也是「无穷小流构成李代数」的全部代数内容。\n\n**李导数**把同样的思想推广到任意张量场与微分形式：沿 $X$ 的流 $\\phi_t$ 把 $\\omega$ 拉回，再对时间求导：\n$$\\mathcal L_X\\omega=\\left.\\frac{d}{dt}\\right|_{t=0}\\phi_t^*\\omega.$$\n这是定义，也是全部直觉：$\\mathcal L_X\\omega$ 度量「$\\omega$ 沿 $X$ 的流动被畸变的速度」。两个基本情形：对函数，$\\mathcal L_Xf=\\frac{d}{dt}f(\\phi_t(x))=df(X)=X(f)$，就是方向导数；对向量场，$\\mathcal L_XY=[X,Y]$，两个概念在此会合。$\\mathcal L_X$ 不改变张量的类型（作用在形式上不改变次数），并与缩并、外积按 Leibniz 律相容。\n\n实际计算几乎总用**嘉当魔法公式**（Cartan's magic formula），把「求导」拆成「先缩并再外微分」与「先外微分再缩并」两项：\n$$\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d,$$\n其中 $\\iota_X$ 是**内乘**（把 $X$ 塞进形式的第一个槽位）：$\\iota_X\\omega(Y_1,\\dots,Y_{k-1})=\\omega(X,Y_1,\\dots,Y_{k-1})$，例如 $\\iota_X(dx\\wedge dy)=(\\iota_Xdx)\\,dy-dx\\wedge(\\iota_Xdy)=X^1\\,dy-X^2\\,dx$。由 $d^2=0$ 立得 $\\mathcal L_X\\,d=d\\,\\mathcal L_X$；由分次 Leibniz 律得 $\\mathcal L_X(\\omega\\wedge\\eta)=\\mathcal L_X\\omega\\wedge\\eta+\\omega\\wedge\\mathcal L_X\\eta$；更有 $[\\mathcal L_X,\\mathcal L_Y]=\\mathcal L_{[X,Y]}$——这正是「李括号是李导数的交换子」的精确含义。",
+  "definitionEn": "Pushing geometric objects along a flow and measuring how fast they change gives the **Lie derivative**; on vector fields it reduces to the more elementary **Lie bracket**. Start with the bracket: regard vector fields $X,Y$ on a smooth manifold as derivations acting on functions and set\n$$[X,Y](f)=X(Y(f))-Y(X(f)).$$\nThe right side is again a derivation (it satisfies the Leibniz rule), hence defines (locally) a vector field, the **Lie bracket** of $X$ and $Y$. Substituting $X=X^i\\partial_i$, $Y=Y^i\\partial_i$ (summation convention), the second-order terms $X^iY^j\\partial_i\\partial_jf$ and $Y^jX^i\\partial_j\\partial_if$ cancel in pairs, leaving the coordinate formula\n$$[X,Y]^k=X^i\\frac{\\partial Y^k}{\\partial x^i}-Y^i\\frac{\\partial X^k}{\\partial x^i}.$$\nThis automatic cancellation is precisely why the bracket is a vector field — the reward for viewing vector fields as first-order differential operators.\n\nGeometrically, the bracket measures **how badly two flows fail to commute**: $[X,Y]=0$ iff the flows commute locally, $\\phi_t^X\\circ\\phi_s^Y=\\phi_s^Y\\circ\\phi_t^X$; the general discrepancy is the second mixed velocity $[X,Y]=\\partial_t\\partial_s\\left(\\phi_{-t}^Y\\circ\\phi_{-s}^X\\circ\\phi_t^X\\circ\\phi_s^Y\\right)\\big|_{t=s=0}$. It is **antisymmetric**, $[X,Y]=-[Y,X]$, and satisfies the **Jacobi identity** $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$; these two laws make the smooth vector fields into an (infinite-dimensional) Lie algebra — all the algebra of infinitesimal flows.\n\nThe **Lie derivative** generalises this to arbitrary tensor fields and differential forms: pull $\\omega$ back by the flow $\\phi_t$ of $X$ and differentiate with respect to time,\n$$\\mathcal L_X\\omega=\\left.\\frac{d}{dt}\\right|_{t=0}\\phi_t^*\\omega.$$\nThat is the definition and the whole intuition: $\\mathcal L_X\\omega$ measures how fast $\\omega$ is distorted as it is dragged along by $X$. Two basic cases: for a function, $\\mathcal L_Xf=\\frac{d}{dt}f(\\phi_t(x))=df(X)=X(f)$, the directional derivative; for a vector field, $\\mathcal L_XY=[X,Y]$ — the two notions meet here. The operator $\\mathcal L_X$ preserves tensor type (it does not change the degree of a form) and is compatible with contractions and exterior products by the Leibniz rule.\n\nIn practice one almost always computes with **Cartan's magic formula**, splitting the derivative into contraction-then-d and d-then-contraction:\n$$\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d,$$\nwhere $\\iota_X$ is the **interior product** (feed $X$ into the first slot of the form): $\\iota_X\\omega(Y_1,\\dots,Y_{k-1})=\\omega(X,Y_1,\\dots,Y_{k-1})$, e.g. $\\iota_X(dx\\wedge dy)=(\\iota_Xdx)\\,dy-dx\\wedge(\\iota_Xdy)=X^1\\,dy-X^2\\,dx$. From $d^2=0$ one gets $\\mathcal L_X\\,d=d\\,\\mathcal L_X$; the graded Leibniz rule gives $\\mathcal L_X(\\omega\\wedge\\eta)=\\mathcal L_X\\omega\\wedge\\eta+\\omega\\wedge\\mathcal L_X\\eta$; and moreover $[\\mathcal L_X,\\mathcal L_Y]=\\mathcal L_{[X,Y]}$ — the precise sense in which the Lie bracket is the commutator of Lie derivatives.",
+  "formulas": [
+   {
+    "latex": "[X,Y](f)=X(Y(f))-Y(X(f)),\\qquad [X,Y]^k=X^i\\frac{\\partial Y^k}{\\partial x^i}-Y^i\\frac{\\partial X^k}{\\partial x^i}",
+    "note": "李括号的算子定义与坐标公式（求和约定）。与流的关系：$[X,Y]=0$ 当且仅当两个流局部可交换。",
+    "noteEn": "Operator definition and coordinate formula of the Lie bracket (summation convention). Its link to flows: $[X,Y]=0$ iff the two flows commute locally."
+   },
+   {
+    "latex": "[X,Y]=-[Y,X],\\qquad [X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0",
+    "note": "**反对称**与**雅可比恒等式**：二者使光滑向量场的全体构成李代数，且 $[X,X]=0$。",
+    "noteEn": "**Antisymmetry** and the **Jacobi identity**: together they make the smooth vector fields a Lie algebra, and they force $[X,X]=0$."
+   },
+   {
+    "latex": "\\mathcal L_X\\omega=\\left.\\frac{d}{dt}\\right|_{t=0}\\phi_t^*\\omega,\\qquad \\mathcal L_Xf=X(f),\\qquad \\mathcal L_XY=[X,Y]",
+    "note": "李导数的定义（对流的拉回求导）与两个基本情形：作用在函数上就是方向导数，作用在向量场上就是李括号。",
+    "noteEn": "Definition of the Lie derivative (time derivative of the flow pullback) and its two basic cases: on functions it is the directional derivative, on vector fields the Lie bracket."
+   },
+   {
+    "latex": "\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d,\\qquad \\iota_X\\omega(Y_1,\\dots,Y_{k-1})=\\omega(X,Y_1,\\dots,Y_{k-1})",
+    "note": "**嘉当魔法公式**与内乘的定义：$\\iota_X$ 把 $k$-形式降为 $(k-1)$-形式（$k=0$ 时 $\\iota_X=0$），故两项合成保次数的算子，这正是最常用的计算路径。",
+    "noteEn": "**Cartan's magic formula** and the interior product: $\\iota_X$ lowers a $k$-form to a $(k-1)$-form (and is $0$ on functions), so the two terms combine into a degree-preserving operator — the standard computational route."
+   },
+   {
+    "latex": "\\mathcal L_X\\,d=d\\,\\mathcal L_X,\\qquad \\mathcal L_X(\\omega\\wedge\\eta)=\\mathcal L_X\\omega\\wedge\\eta+\\omega\\wedge\\mathcal L_X\\eta,\\qquad [\\mathcal L_X,\\mathcal L_Y]=\\mathcal L_{[X,Y]}",
+    "note": "结构性质：$\\mathcal L_X$ 与外微分交换、是分次导子，且 $X\\mapsto\\mathcal L_X$ 是李代数同态。",
+    "noteEn": "Structure properties: $\\mathcal L_X$ commutes with $d$, is a graded derivation, and $X\\mapsto\\mathcal L_X$ is a Lie algebra homomorphism."
+   }
+  ],
+  "expression": {
+   "text": "L_X ω = d(ι_X ω) + ι_X(dω)；[X,Y](f) = X(Y(f)) − Y(X(f))；L_X f = X(f)，L_X Y = [X,Y]",
+   "symbol": "\\mathcal L_X=d\\circ\\iota_X+\\iota_X\\circ d",
+   "note": "嘉当魔法公式是计算李导数的通用工具；$\\iota_X$ 为内乘（缩并）。对函数 $k=0$，$\\iota_Xf=0$，于是 $\\mathcal L_Xf=df(X)$。",
+   "noteEn": "Cartan's magic formula is the universal tool for computing Lie derivatives; $\\iota_X$ is the interior product. On functions $\\iota_Xf=0$, so $\\mathcal L_Xf=df(X)$."
+  },
+  "properties": [
+   "反对称与雅可比：$[X,Y]=-[Y,X]$、$[X,X]=0$、$[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$；光滑向量场配以 $[\\,,]$ 构成李代数。",
+   "交换性判据：$[X,Y]=0$ 当且仅当两个流局部可交换，也当且仅当可以局部把二者同时拉直为坐标向量场 $\\partial_u,\\partial_v$（Frobenius 定理的平直情形）；如 $[\\partial_x,\\partial_y]=0$。",
+   "李导数的两个基本情形：$\\mathcal L_Xf=df(X)=X(f)$（方向导数），$\\mathcal L_XY=[X,Y]$；且 $\\mathcal L_X$ 保次数、与外微分交换：$\\mathcal L_X(d\\omega)=d(\\mathcal L_X\\omega)$。",
+   "$\\mathcal L_X$ 对形式由 $d$ 与 $\\iota_X$ 生成，但对 $X$ 不是逐点线性的：$\\mathcal L_{fX}\\omega=f\\,\\mathcal L_X\\omega+df\\wedge\\iota_X\\omega\\ne f\\,\\mathcal L_X\\omega$——与 $[fX,Y]=f[X,Y]-(Yf)X$ 是同一件事，说明李括号不是张量运算。",
+   "体积形式的李导数是散度：在坐标基下 $\\mathcal L_X(dx^1\\wedge\\cdots\\wedge dx^n)=(\\mathrm{div}\\,X)\\,dx^1\\wedge\\cdots\\wedge dx^n$；一般地 $\\mathcal L_X\\omega=0$ 表示 $\\omega$ 沿 $X$ 的流不变（流是 $\\omega$ 的对称）。"
+  ],
+  "propertiesEn": [
+   "Antisymmetry and Jacobi: $[X,Y]=-[Y,X]$, $[X,X]=0$ and $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0$; smooth vector fields with $[\\,,]$ form a Lie algebra.",
+   "Commutation criterion: $[X,Y]=0$ iff the two flows commute locally, iff the two fields can be straightened simultaneously to coordinate fields $\\partial_u,\\partial_v$ (the flat case of Frobenius' theorem); e.g. $[\\partial_x,\\partial_y]=0$.",
+   "Two basic cases of the Lie derivative: $\\mathcal L_Xf=df(X)=X(f)$ (directional derivative) and $\\mathcal L_XY=[X,Y]$; moreover $\\mathcal L_X$ preserves degree and commutes with $d$: $\\mathcal L_X(d\\omega)=d(\\mathcal L_X\\omega)$.",
+   "On forms $\\mathcal L_X$ is generated by $d$ and $\\iota_X$, but it is not pointwise linear in $X$: $\\mathcal L_{fX}\\omega=f\\,\\mathcal L_X\\omega+df\\wedge\\iota_X\\omega\\ne f\\,\\mathcal L_X\\omega$ — the same phenomenon as $[fX,Y]=f[X,Y]-(Yf)X$, showing that the bracket is not a tensor operation.",
+   "The Lie derivative of the volume form is the divergence: in coordinates $\\mathcal L_X(dx^1\\wedge\\cdots\\wedge dx^n)=(\\mathrm{div}\\,X)\\,dx^1\\wedge\\cdots\\wedge dx^n$; in general $\\mathcal L_X\\omega=0$ means that $\\omega$ is invariant under the flow of $X$."
+  ],
+  "examples": [
+   {
+    "problem": "对旋转场 $X=-y\\,\\partial_x+x\\,\\partial_y$ 与伸缩场 $Y=x\\,\\partial_x+y\\,\\partial_y$，计算 $[X,Y]$ 并解释其几何含义；再计算 $\\mathcal L_Xf$，其中 $f=x^2+y^2$。",
+    "solution": "用坐标公式：\n$$[X,Y]^1=(-y)\\cdot 1+x\\cdot 0-x\\cdot 0-y\\cdot(-1)=0,\\qquad [X,Y]^2=(-y)\\cdot 0+x\\cdot 1-x\\cdot 1-y\\cdot 0=0,$$\n故 $[X,Y]=0$。几何上 $\\phi_t^X$ 是绕原点旋转角 $t$，$\\phi_s^Y$ 是以倍率 $e^s$ 作中心伸缩；旋转与等比伸缩作为线性映射可交换，两流可交换正是 $[X,Y]=0$ 的含义（交换性 $\\iff$ 括号为零）。对 $f=x^2+y^2$：\n$$\\mathcal L_Xf=X(f)=(-y)\\,(2x)+x\\,(2y)=0,$$\n说明 $f$ 沿旋转流不变：每一条圆 $x^2+y^2=\\mathrm{const}$ 都是流的不变集，与配图中旋转场叠加同心圆的图像一致。"
+   },
+   {
+    "problem": "设 $\\omega=x\\,dy$，$X=-y\\,\\partial_x+x\\,\\partial_y$。分别用嘉当魔法公式与定义（对流的拉回求关于 $t$ 的导数）计算 $\\mathcal L_X\\omega$，并核对结果。",
+    "solution": "内乘：$\\iota_X\\omega=\\omega(X)=x\\cdot dy(X)=x\\cdot x=x^2$，故 $d(\\iota_X\\omega)=2x\\,dx$。又 $d\\omega=dx\\wedge dy$，且\n$$\\iota_X(dx\\wedge dy)=(\\iota_Xdx)\\,dy-dx\\wedge(\\iota_Xdy)=(-y)\\,dy-x\\,dx.$$\n嘉当公式给出\n$$\\mathcal L_X\\omega=d(\\iota_X\\omega)+\\iota_X(d\\omega)=2x\\,dx-y\\,dy-x\\,dx=x\\,dx-y\\,dy.$$\n直接用定义核对：流为 $\\phi_t(x,y)=(x\\cos t-y\\sin t,\\ x\\sin t+y\\cos t)$，于是\n$$\\phi_t^*\\omega=(x\\cos t-y\\sin t)\\,d(x\\sin t+y\\cos t)=(x\\cos t-y\\sin t)(\\sin t\\,dx+\\cos t\\,dy).$$\n对 $t$ 求导并取 $t=0$：$dx$ 系数为 $(x\\cos t-y\\sin t)\\sin t$ 的导数 $x$，$dy$ 系数为 $(x\\cos t-y\\sin t)\\cos t$ 的导数 $-y$，仍得 $\\mathcal L_X\\omega=x\\,dx-y\\,dy$。两种算法一致，验证了嘉当公式。"
+   }
+  ],
+  "tags": [
+   "李导数",
+   "李括号",
+   "嘉当魔法公式",
+   "流",
+   "内乘"
+  ],
+  "links": [
+   "manifold-vector-fields",
+   "differential-form",
+   "exterior-derivative",
+   "smooth-manifold",
+   "generalized-stokes"
+  ],
+  "plot": {
+   "type": "vectorfield",
+   "fx": "-y",
+   "fy": "x",
+   "xRange": [
+    -2.2,
+    2.2
+   ],
+   "yRange": [
+    -2.2,
+    2.2
+   ],
+   "contourExpr": "x^2 + y^2",
+   "marks": [
+    {
+     "at": [
+      0,
+      0
+     ],
+     "label": "不动点（原点）"
     }
-  },
-  {
-    "id": "surface-isometry",
-    "title": "等距与可展曲面",
-    "titleEn": "Isometries and Developable Surfaces",
-    "branch": "differential-geometry",
-    "level": 5,
-    "summary": "等距是保持第一基本形式（从而保持曲面上曲线长度）的映射；能与平面建立等距对应的曲面恰是高斯曲率恒为零的可展曲面，如柱面、锥面与切线面。",
-    "summaryEn": "An isometry is a map preserving the first fundamental form, hence the lengths of curves on the surface; the surfaces that are locally isometric to the plane are exactly the developable ones, characterised by vanishing Gaussian curvature, such as cylinders, cones and tangent developables.",
-    "definition": "设 $S_1,S_2\\subset\\mathbb R^3$ 是两张正则曲面，$\\varphi:S_1\\to S_2$ 是光滑的可逆映射。若对每点 $p\\in S_1$ 与任意切向量 $v,w\\in T_pS_1$，微分 $d\\varphi_p$ 保持内积\n$$\\langle d\\varphi_p(v),d\\varphi_p(w)\\rangle=\\langle v,w\\rangle,$$\n就称 $\\varphi$ 是**等距**（isometry），两张曲面**等距**。用第一基本形式说就是「拉回不变」：$\\varphi^*I_2=I_1$，按参数写出即 $(E_2,F_2,G_2)\\circ\\varphi=(E_1,F_1,G_1)$。等价的直观描述：等距当且仅当**保持曲面上每条曲线的长度**；由极化恒等式，保内积与保长度是一回事，所以等距同时保夹角，也保面积（面积元 $\\sqrt{EG-F^2}\\,du\\,dv$ 只依赖 $E,F,G$）。\n\n关键的「不对称」：第一基本形式 $I$ 是**等距不变量**，第二基本形式 $II$ 却不是。把一张纸卷成圆柱：纸上的长度、角度、面积一丝不变（$I$ 保持），但弯曲方式从平面的 $II=0$ 变成圆柱的 $II\\ne0$。因此 $I$ 决定**内蕴几何**（曲面自己能量出的一切），$II$ 描述曲面在空间中的**外在弯曲**。能像纸那样无拉伸、无压缩地摊平的曲面，称为**可展曲面**；判据是**高斯曲率恒为零**：$S$ 可展 $\\iff K\\equiv0$，等价地 $S$ 局部等距于平面。\n\n为什么判据是 $K$？高斯绝妙定理指出：尽管 $K=\\frac{LN-M^2}{EG-F^2}$ 表面上由第二基本形式的 $L,M,N$ 写出，代入 Gauss 方程（相容性关系的切向部分）后它只依赖 $E,F,G$ 及其导数——$K$ 是**内蕴**量，等距绝不能改变它。于是球面（$K=1/R^2>0$）与平面（$K=0$）不可能等距，任何世界地图必然在某处失真；而平面、柱面、锥面（去顶点）、切线面都满足 $K\\equiv0$，都能无拉伸地摊平。反过来，两张**常**高斯曲率相同的曲面局部等距（Minding 定理），所以柱面与平面局部等距、半径相同的球面之间整体等距。\n\n等距还自动保持**测地线**：测地线方程（Christoffel 符号）只由 $E,F,G$ 决定，等距把测地线映成测地线。例如把圆柱摊平到平面后，螺旋线等长地变成一条直线，而直线是平面的测地线——这是「圆柱上的螺旋线是测地线」的最快证明。局部与整体也要分清：平面卷成圆柱是局部等距，但不是整体的一一对应（它是覆叠映射），谈「展开」时通常指局部等距。",
-    "definitionEn": "Let $S_1,S_2\\subset\\mathbb R^3$ be regular surfaces and let $\\varphi:S_1\\to S_2$ be a smooth invertible map. If at every point $p\\in S_1$ the differential $d\\varphi_p$ preserves inner products of tangent vectors,\n$$\\langle d\\varphi_p(v),d\\varphi_p(w)\\rangle=\\langle v,w\\rangle,$$\nthen $\\varphi$ is called an **isometry** and the two surfaces are **isometric**. In terms of the first fundamental form this says that the pullback is unchanged: $\\varphi^*I_2=I_1$, i.e. $(E_2,F_2,G_2)\\circ\\varphi=(E_1,F_1,G_1)$ in parameters. Equivalently, an isometry is a map that **preserves the length of every curve** on the surface; by polarisation, preserving lengths and preserving inner products are the same, so an isometry also preserves angles and areas (the area element $\\sqrt{EG-F^2}\\,du\\,dv$ depends only on $E,F,G$).\n\nThe crucial asymmetry: the first fundamental form $I$ is an **isometry invariant**, the second fundamental form $II$ is not. Roll a sheet of paper into a cylinder: lengths, angles and areas on the paper are untouched ($I$ is preserved), while the way it bends changes from $II=0$ for the plane to $II\\ne0$ for the cylinder. Thus $I$ determines the **intrinsic geometry** (everything the surface can measure by itself) and $II$ describes the **extrinsic bending** in space. A surface that can be flattened like paper, with no stretching or compression, is called **developable**; the criterion is **vanishing Gaussian curvature**: $S$ is developable iff $K\\equiv0$, equivalently $S$ is locally isometric to the plane.\n\nWhy $K$? Gauss's theorema egregium says that although $K=\\frac{LN-M^2}{EG-F^2}$ is written with $L,M,N$ from the second fundamental form, the Gauss equation makes it depend only on $E,F,G$ and their derivatives — $K$ is **intrinsic** and no isometry can change it. Hence the sphere ($K=1/R^2>0$) and the plane ($K=0$) cannot be isometric and every world map must distort somewhere, whereas the plane, cylinder, cone (minus apex) and tangent developable all satisfy $K\\equiv0$ and can be flattened without stretching. Conversely, surfaces with the same **constant** Gaussian curvature are locally isometric (Minding's theorem), so a cylinder is locally isometric to the plane, and spheres of equal radius are isometric to each other.\n\nIsometries also preserve **geodesics**: the geodesic equations (Christoffel symbols) involve only $E,F,G$, so an isometry maps geodesics to geodesics. For instance, unrolling a cylinder sends a helix to a straight line of the same length, and straight lines are the geodesics of the plane — the quickest proof that a helix is a geodesic of the cylinder. Finally, keep local and global apart: rolling the plane into a cylinder is a local isometry but not a global bijection (it is a covering map); flattening usually means a local isometry.",
-    "formulas": [
-      {
-        "latex": "\\varphi^*I_2=I_1\\iff \\langle d\\varphi_p(v),d\\varphi_p(w)\\rangle=\\langle v,w\\rangle\\quad \\forall p,\\ \\forall v,w\\in T_pS_1\\iff L(\\varphi\\circ\\gamma)=L(\\gamma)",
-        "note": "等距的三种等价说法：保第一基本形式、保切向内积、保每条曲线的长度（极化恒等式把后两者联系起来）。",
-        "noteEn": "Three equivalent descriptions of an isometry: the pullback of $I_2$ equals $I_1$, inner products are preserved, and every curve keeps its length (polarisation links the last two)."
-      },
-      {
-        "latex": "S\\ \\text{可展}\\iff S\\ \\text{局部等距于平面}\\iff K\\equiv0;\\qquad K=\\frac{LN-M^2}{EG-F^2}\\ \\text{只由}\\ E,F,G\\ \\text{决定（绝妙定理）}",
-        "note": "可展曲面的判据与高斯绝妙定理：$K$ 虽是借 $L,M,N$ 写出的，却是内蕴量，等距不能改变它。",
-        "noteEn": "Characterisation of developable surfaces and Gauss's theorema egregium: although $K$ is displayed via $L,M,N$, it is intrinsic and cannot be altered by an isometry."
-      },
-      {
-        "latex": "r(u,v)=(\\cos u,\\sin u,v):\\qquad E=1,\\ F=0,\\ G=1,\\qquad I=du^2+dv^2,\\qquad K\\equiv0",
-        "note": "圆柱面：在 $(u,v)$ 坐标下第一基本形式与平面完全相同，$(u,v)\\mapsto(\\cos u,\\sin u,v)$ 是平面到圆柱的局部等距（卷纸不拉伸）。",
-        "noteEn": "The cylinder: in $(u,v)$ coordinates its first fundamental form equals that of the plane, so $(u,v)\\mapsto(\\cos u,\\sin u,v)$ is a local isometry — paper rolling without stretching."
-      },
-      {
-        "latex": "\\text{球面}:\\ I=R^2d\\theta^2+R^2\\sin^2\\theta\\,d\\varphi^2,\\qquad K=\\frac{1}{R^2}>0:\\ \\text{不可展}",
-        "note": "球面的 $K>0$ 是内蕴障碍：不存在保长度的平面地图；等积投影保面积却保不了长度，墨卡托投影保角却保不了长度。",
-        "noteEn": "For the sphere $K>0$ is an intrinsic obstruction: no length-preserving flat map exists; equal-area projections preserve areas but not lengths, Mercator preserves angles but not lengths."
-      },
-      {
-        "latex": "K_1\\equiv K_2\\equiv c\\ (\\text{常数})\\ \\Longrightarrow\\ S_1,S_2\\ \\text{局部等距（Minding 定理）};\\qquad \\text{等距保持}\\ K\\text{、测地线、面积、夹角}",
-        "note": "Minding 定理：常高斯曲率是局部等距的完全不变量；等距保 $K$、测地线、面积与夹角，是「内蕴几何」的完整清单。",
-        "noteEn": "Minding's theorem: a constant Gaussian curvature is a complete local isometry invariant; isometries preserve $K$, geodesics, areas and angles — the complete list of intrinsic data."
-      }
-    ],
-    "expression": {
-      "text": "φ*I₂ = I₁（等距 ⟺ 保长度）；S 可展 ⟺ K ≡ 0（局部等距于平面）；柱面 I = du² + dv² 与平面相同",
-      "symbol": "\\varphi^*I_2=I_1,\\qquad K\\equiv0",
-      "note": "第一基本形式是等距不变量，第二基本形式会变：柱面与平面局部等距，但平面的主曲率为 $0,0$、圆柱的为 $0,1/R$。",
-      "noteEn": "The first fundamental form is an isometry invariant while the second one changes: the cylinder is locally isometric to the plane, yet their principal curvatures are $0,1/R$ versus $0,0$."
-    },
-    "properties": [
-      "等距当且仅当保第一基本形式，当且仅当保曲线长度；由此自动保夹角与面积（面积元 $\\sqrt{EG-F^2}\\,du\\,dv$ 由 $E,F,G$ 决定），并保测地线（测地线方程只含 $I$ 及其导数）。",
-      "$I$ 是不变量而 $II$ 不是：柱面与平面局部等距，但平面的主曲率为 $0,0$、半径 $R$ 的圆柱为 $0,1/R$，$II$ 明显不同——内蕴几何与外在形状是两套信息。",
-      "可展曲面 $\\iff K\\equiv0$：平面、柱面、锥面（去顶点）、切线面都是；它们可以无拉伸地展平（纸张、钣金与地图的数学基础），而球面等含 $K\\ne0$ 的曲面不能。",
-      "高斯曲率是等距不变量（绝妙定理），等距的两曲面处处 $K$ 相同；Minding 给出反向结果：相同的常曲率曲面局部等距（柱面—平面、锥面—平面、同半径球面之间）。",
-      "局部等距与整体等距不同：把平面卷成圆柱是局部等距而非整体一一对应（它是覆叠映射，无限多条水平线粘到同一个圆上）；「展开」通常指局部等距。"
-    ],
-    "propertiesEn": [
-      "An isometry preserves the first fundamental form iff it preserves curve lengths; consequently it preserves angles and areas (the area element $\\sqrt{EG-F^2}\\,du\\,dv$ is determined by $E,F,G$) and geodesics (their equations involve only $I$ and its derivatives).",
-      "$I$ is invariant, $II$ is not: the cylinder is locally isometric to the plane, yet their principal curvatures are $0,1/R$ and $0,0$ — intrinsic geometry and extrinsic shape are two different sets of information.",
-      "Developable $\\iff K\\equiv0$: planes, cylinders, cones (minus apex) and tangent developables qualify; they can be flattened without stretching (the mathematics behind paper, sheet metal and maps), while surfaces with $K\\ne0$ such as the sphere cannot.",
-      "Gaussian curvature is an isometry invariant (theorema egregium), so isometric surfaces have equal $K$ everywhere; Minding's theorem gives the converse for constant curvature (cylinder–plane, cone–plane, spheres of equal radius).",
-      "Local isometry differs from global isometry: rolling the plane into a cylinder is a local isometry but not a global bijection (it is a covering map gluing infinitely many horizontal lines to one circle); flattening usually means a local isometry."
-    ],
-    "examples": [
-      {
-        "problem": "验证柱面 $r(u,v)=(\\cos u,\\sin u,v)$ 与平面局部等距，并计算它的高斯曲率；再说明螺旋线 $\\gamma(t)=(\\cos t,\\sin t,ct)$ 为什么是柱面上的测地线。",
-        "solution": "$r_u=(-\\sin u,\\cos u,0)$，$r_v=(0,0,1)$，于是\n$$E=r_u\\cdot r_u=1,\\qquad F=r_u\\cdot r_v=0,\\qquad G=r_v\\cdot r_v=1,$$\n故 $I=du^2+dv^2$，与平面在 $(u,v)$ 坐标下的第一基本形式逐项相同：映射 $(u,v)\\mapsto(\\cos u,\\sin u,v)$ 是局部等距。取单位法向 $n=\\frac{r_u\\times r_v}{|r_u\\times r_v|}=(\\cos u,\\sin u,0)$，由 $r_{uu}=(-\\cos u,-\\sin u,0)$、$r_{uv}=0$、$r_{vv}=0$ 得 $L=-1$、$M=0$、$N=0$，于是\n$$K=\\frac{LN-M^2}{EG-F^2}=0,$$\n柱面确是 $K\\equiv0$ 的可展曲面。在 $(u,v)$ 坐标下这映射把 $\\gamma$ 变成平面上的直线 $t\\mapsto(t,ct)$：两者长度相同（$\\int\\sqrt{1+c^2}\\,dt$），而直线是平面的测地线；等距保长度又保测地线，故螺旋线是柱面的测地线。"
-      },
-      {
-        "problem": "证明半径为 $R$ 的球面（哪怕一小片）不能与平面等距。",
-        "solution": "用经纬参数化 $r(\\theta,\\varphi)=(R\\sin\\theta\\cos\\varphi,\\ R\\sin\\theta\\sin\\varphi,\\ R\\cos\\theta)$，算出\n$$E=R^2,\\qquad F=0,\\qquad G=R^2\\sin^2\\theta;\\qquad L=-R,\\qquad M=0,\\qquad N=-R\\sin^2\\theta,$$\n因此\n$$K=\\frac{LN-M^2}{EG-F^2}=\\frac{R^2\\sin^2\\theta}{R^4\\sin^2\\theta}=\\frac{1}{R^2}>0.$$\n若某个开片与平面存在等距 $\\varphi$，则由绝妙定理（$K$ 由第一基本形式决定、等距保持 $K$）必须有 $K_{\\text{球面}}=K_{\\text{平面}}=0$，与 $1/R^2>0$ 矛盾。直观结论：世界地图无论怎么画都会在某处失真——这是内蕴几何的硬约束，不是制图技术的缺陷。"
-      }
-    ],
-    "tags": [
-      "等距",
-      "可展曲面",
-      "第一基本形式",
-      "高斯曲率",
-      "绝妙定理"
-    ],
-    "links": [
-      "first-fundamental-form",
-      "second-fundamental-form",
-      "theorema-egregium",
-      "regular-surface",
-      "geodesic"
-    ],
-    "plot": {
-      "type": "surface3d",
-      "surf": {
-        "x": "cos(u)",
-        "y": "sin(u)",
-        "z": "v"
-      },
-      "uRange": [
-        0,
-        6.2832
-      ],
-      "vRange": [
-        -1.5,
-        1.5
-      ],
-      "density": [
-        48,
-        14
-      ],
-      "color": "#4cc9f0",
-      "title": "柱面 r(u,v)=(cos u, sin u, v)：I=du²+dv² 与平面相同，K≡0（可展）"
-    }
-  },
-  {
-    "id": "minimal-surface",
-    "title": "极小曲面",
-    "titleEn": "Minimal Surfaces",
-    "branch": "differential-geometry",
-    "level": 5,
-    "summary": "平均曲率恒为零的曲面：面积泛函的驻点、肥皂膜的数学模型；悬链面与螺旋面是最经典的两个例子，而且二者局部等距。",
-    "summaryEn": "Surfaces with identically vanishing mean curvature: the stationary points of the area functional and the mathematical model of soap films; the catenoid and the helicoid are the two classical examples, locally isometric to each other.",
-    "definition": "设 $S\\subset\\mathbb R^3$ 是正则曲面，$\\kappa_1,\\kappa_2$ 为其主曲率，**平均曲率** $H=\\frac12(\\kappa_1+\\kappa_2)$。若 $H\\equiv0$，就称 $S$ 是**极小曲面**。名字来自变分：「极小」不是逐点意义上的「面积最小」，而是固定边界曲线时面积泛函的**驻点**——可以类比多元微积分里「梯度为零是极值的必要条件」，只不过函数换成了面积泛函、对象换成了曲面。\n\n为什么驻点条件恰好是 $H=0$？对曲面作法向变分 $V=\\phi N$（$\\phi$ 是任意紧支撑的速率函数），面积的一阶变化为\n$$\\left.\\frac{d}{dt}\\right|_{t=0}\\mathrm{Area}(S_t)=-2\\int_SH\\phi\\,dA.$$\n右端对一切 $\\phi$ 为零当且仅当 $H\\equiv0$：$H$ 就是面积泛函的「梯度」，极小曲面是它的临界点。物理上，肥皂膜在表面张力下收缩到（局部）面积最小，膜上每一点所受的拉扯互相抵消，平衡条件正是 $H=0$，所以肥皂膜实验就是极小曲面的自然实验（真实肥皂膜的平衡还要求二阶变分非负，即稳定性）。在等温坐标中条件等价于坐标函数调和：$\\Delta X=0$，即极小曲面 = 调和等距浸入，这把极小曲面与复分析连在一起（Weierstrass 表示）。\n\n经典例子：**平面**（$\\kappa_1=\\kappa_2=0$，平凡解）；**悬链面**（catenoid）$r(u,v)=(\\cosh v\\cos u,\\ \\cosh v\\sin u,\\ v)$，由悬链线绕轴旋转生成，是两个共轴圆环之间肥皂膜的理想形状；**螺旋面**（helicoid）$r(u,v)=(u\\cos v,\\ u\\sin v,\\ v)$，唯一的直纹极小曲面（与平面并列）；还有 Scherk 曲面（周期上的极小图）与 Costa 曲面（首个完備嵌入的非旋转极小曲面）。一个深刻又出人意料的经典事实（Meusnier，1776）是：**悬链面与螺旋面局部等距**——在参数 $(s,u)$ 下\n$$r_{\\text{hel}}=(\\sinh s\\cos u,\\ \\sinh s\\sin u,\\ u),\\qquad r_{\\text{cat}}=(\\cosh s\\cos u,\\ \\cosh s\\sin u,\\ s)$$\n的第一基本形式都是 $\\cosh^2s\\,(ds^2+du^2)$，于是螺旋面可以无拉伸地弯成悬链面；二者其实是一个单参数伴随族的两端（Bonnet）。\n\n极小曲面处处是「鞍」：由 $H=0$ 得 $K=\\kappa_1\\kappa_2=-\\kappa_1^2\\le0$，只要不是平面就 $K<0$，每点都是双曲点、两个主方向弯曲方向相反，这正是肥皂膜凹陷形态的来源。极小曲面还有刚性的一面：Bernstein 定理断言 $\\mathbb R^3$ 中定义在整个平面上的完备极小图只有平面。",
-    "definitionEn": "Let $S\\subset\\mathbb R^3$ be a regular surface with principal curvatures $\\kappa_1,\\kappa_2$ and **mean curvature** $H=\\frac12(\\kappa_1+\\kappa_2)$. If $H\\equiv0$, then $S$ is called a **minimal surface**. The name comes from the calculus of variations: minimal does not mean pointwise smallest area, but rather that the area functional is **stationary** for fixed boundary curve — the analogue of the necessary condition gradient $=0$ in multivariable calculus, with the function replaced by the area functional and the point by a surface.\n\nWhy is the stationary condition exactly $H=0$? For a normal variation $V=\\phi N$ ($\\phi$ any compactly supported speed), the first variation of area is\n$$\\left.\\frac{d}{dt}\\right|_{t=0}\\mathrm{Area}(S_t)=-2\\int_SH\\phi\\,dA.$$\nThe right side vanishes for all $\\phi$ iff $H\\equiv0$: $H$ is the gradient of the area functional and minimal surfaces are its critical points. Physically, a soap film contracts under surface tension to a (locally) smallest area; the pulls on each patch cancel precisely when $H=0$, so soap films are the natural experiment for minimal surfaces (a real soap film in equilibrium also needs the second variation to be nonnegative, i.e. stability). In isothermal coordinates the condition becomes the harmonicity of the coordinate functions, $\\Delta X=0$: minimal surfaces are harmonic isometric immersions, which ties them to complex analysis through the Weierstrass representation.\n\nClassical examples: the **plane** ($\\kappa_1=\\kappa_2=0$, the trivial solution); the **catenoid** $r(u,v)=(\\cosh v\\cos u,\\ \\cosh v\\sin u,\\ v)$, generated by revolving a catenary, the ideal shape of the soap film spanning two coaxial rings; and the **helicoid** $r(u,v)=(u\\cos v,\\ u\\sin v,\\ v)$, the only ruled minimal surface besides the plane; also Scherk's surface (a periodic minimal graph) and Costa's surface (the first complete embedded non-rotational example). A deep and surprising classical fact (Meusnier, 1776) is that **the catenoid and the helicoid are locally isometric**: in the parameters $(s,u)$,\n$$r_{\\text{hel}}=(\\sinh s\\cos u,\\ \\sinh s\\sin u,\\ u),\\qquad r_{\\text{cat}}=(\\cosh s\\cos u,\\ \\cosh s\\sin u,\\ s)$$\nboth have first fundamental form $\\cosh^2s\\,(ds^2+du^2)$, so the helicoid bends into the catenoid without stretching; the two surfaces are the ends of a one-parameter associate family (Bonnet).\n\nMinimal surfaces are saddle-like everywhere: $H=0$ gives $K=\\kappa_1\\kappa_2=-\\kappa_1^2\\le0$, so unless the surface is a plane, $K<0$ at every point — every point is hyperbolic, with the two principal directions bending oppositely, the source of the characteristic soap-film shape. Minimal surfaces also have a rigid side: Bernstein's theorem states that a complete minimal graph over the whole plane in $\\mathbb R^3$ must be a plane.",
-    "formulas": [
-      {
-        "latex": "H\\equiv0,\\qquad H=\\frac{\\kappa_1+\\kappa_2}{2}=\\frac{EN-2FM+GL}{2(EG-F^2)}",
-        "note": "定义：平均曲率恒为零；式中 $E,F,G$ 与 $L,M,N$ 分别是第一、第二基本形式的系数。",
-        "noteEn": "Definition: the mean curvature vanishes identically; here $E,F,G$ and $L,M,N$ are the coefficients of the first and second fundamental forms."
-      },
-      {
-        "latex": "\\left.\\frac{d}{dt}\\right|_{t=0}\\mathrm{Area}(S_t)=-2\\int_SH\\phi\\,dA\\ \\Longrightarrow\\ (\\,\\forall\\phi:\\ \\delta A=0)\\iff H\\equiv0",
-        "note": "面积第一变分：对法向变分 $V=\\phi N$，面积变化率由 $H$ 控制——$H$ 是面积泛函的梯度。",
-        "noteEn": "First variation of area: for a normal variation $V=\\phi N$ the rate of change of area is governed by $H$ — the gradient of the area functional."
-      },
-      {
-        "latex": "r(u,v)=(\\cosh v\\cos u,\\ \\cosh v\\sin u,\\ v):\\qquad H\\equiv0,\\qquad K=-\\frac{1}{\\cosh^4v}<0",
-        "note": "悬链面（$c=1$）；一般尺度 $r=(c\\cosh\\frac vc\\cos u,\\ c\\cosh\\frac vc\\sin u,\\ v)$ 时 $K=-1/\\big(c^2\\cosh^4\\frac vc\\big)$。",
-        "noteEn": "The catenoid ($c=1$); for the general scale $r=(c\\cosh\\frac vc\\cos u,\\ c\\cosh\\frac vc\\sin u,\\ v)$ one has $K=-1/\\big(c^2\\cosh^4\\frac vc\\big)$."
-      },
-      {
-        "latex": "r(u,v)=(u\\cos v,\\ u\\sin v,\\ v):\\qquad H\\equiv0,\\qquad K=-\\frac{1}{(1+u^2)^2}<0",
-        "note": "螺旋面：直纹极小曲面只有平面与螺旋面；$u$ 是到轴的径向参数，$v$ 兼作转角与高度。",
-        "noteEn": "The helicoid: the only ruled minimal surfaces are the plane and the helicoid; $u$ is the radial parameter and $v$ serves both as angle and height."
-      },
-      {
-        "latex": "r_{\\text{hel}}(s,u)=(\\sinh s\\cos u,\\ \\sinh s\\sin u,\\ u),\\qquad r_{\\text{cat}}(s,u)=(\\cosh s\\cos u,\\ \\cosh s\\sin u,\\ s),\\qquad I=\\cosh^2s\\,(ds^2+du^2)",
-        "note": "Meusnier（1776）：同一参数 $(s,u)$ 下两者的第一基本形式完全相同，故螺旋面与悬链面局部等距，可无拉伸互变（Bonnet 伴随族的两个端点）。",
-        "noteEn": "Meusnier (1776): in the shared parameters $(s,u)$ both surfaces have the same first fundamental form, so the helicoid and the catenoid are locally isometric and can be bent into each other without stretching (the two ends of the Bonnet associate family)."
-      }
-    ],
-    "expression": {
-      "text": "H ≡ 0（面积泛函的第一变分为零）；H = (EN−2FM+GL)/(2(EG−F²))；悬链面与螺旋面局部等距",
-      "symbol": "H=\\frac{\\kappa_1+\\kappa_2}{2}\\equiv0",
-      "note": "非平面的极小曲面处处 $K=-\\kappa_1^2<0$；肥皂膜给出物理实例，Plateau 问题讨论给定边界的最小面积解。",
-      "noteEn": "A non-planar minimal surface has $K=-\\kappa_1^2<0$ everywhere; soap films provide the physical examples, and the Plateau problem asks for the least-area surface with prescribed boundary."
-    },
-    "properties": [
-      "定义与变分等价：$H\\equiv0$ 当且仅当面积第一变分为零，即固定边界下面积泛函的临界点（驻点）；若要求它还是局部最小，需二阶变分非负（稳定性，如稳定的肥皂膜）。",
-      "标准例子：平面、悬链面、螺旋面、Scherk 曲面、Costa 曲面；悬链面与螺旋面局部等距（Meusnier），同属一个 Bonnet 伴随族。",
-      "形状：非平面的极小曲面处处 $K=-\\kappa_1^2<0$，每点都是双曲点（鞍点）；直纹极小曲面只有平面与螺旋面。",
-      "物理与复分析：肥皂膜是极小曲面的物理解；Plateau 问题（每条可求长闭曲线都张成一片极小曲面，Douglas–Radó 1930 年代）是几何分析的起源之一；等温坐标下 $H=0\\iff\\Delta X=0\\iff$ 存在 Weierstrass 表示。",
-      "刚性：Bernstein 定理——$\\mathbb R^3$ 中完备极小图必为平面；极小曲面方程 $\\mathrm{div}\\!\\left(\\frac{\\nabla u}{\\sqrt{1+|\\nabla u|^2}}\\right)=0$ 是几何分析中非线性椭圆 PDE 的源头。"
-    ],
-    "propertiesEn": [
-      "Definition equals variation: $H\\equiv0$ iff the first variation of area vanishes, i.e. the surface is a critical (stationary) point of the area functional for a fixed boundary curve; a local minimum additionally requires the second variation to be nonnegative (stability, as with a stable soap film).",
-      "Standard examples: the plane, the catenoid, the helicoid, Scherk's surface and Costa's surface; the catenoid and the helicoid are locally isometric (Meusnier) and belong to one Bonnet associate family.",
-      "Shape: a non-planar minimal surface has $K=-\\kappa_1^2<0$ everywhere, so every point is hyperbolic (saddle-like); the only ruled minimal surfaces are the plane and the helicoid.",
-      "Physics and complex analysis: soap films are the physical minimal surfaces; the Plateau problem (every rectifiable closed curve bounds a minimal surface, Douglas–Radó in the 1930s) helped found geometric analysis; in isothermal coordinates $H=0\\iff\\Delta X=0\\iff$ a Weierstrass representation exists.",
-      "Rigidity: Bernstein's theorem — a complete minimal graph in $\\mathbb R^3$ must be a plane; the minimal surface equation $\\mathrm{div}\\!\\left(\\frac{\\nabla u}{\\sqrt{1+|\\nabla u|^2}}\\right)=0$ is a source of nonlinear elliptic PDE in geometric analysis."
-    ],
-    "examples": [
-      {
-        "problem": "验证螺旋面 $r(u,v)=(u\\cos v,\\ u\\sin v,\\ v)$ 是极小曲面：计算第一、第二基本形式的系数，证明 $H=0$，并给出高斯曲率。",
-        "solution": "$r_u=(\\cos v,\\sin v,0)$，$r_v=(-u\\sin v,\\ u\\cos v,\\ 1)$，故\n$$E=1,\\qquad F=0,\\qquad G=1+u^2.$$\n又 $r_u\\times r_v=(\\sin v,-\\cos v,u)$，单位法向\n$$n=\\frac{(\\sin v,-\\cos v,u)}{\\sqrt{1+u^2}}.$$\n二阶导数 $r_{uu}=0$，$r_{uv}=(-\\sin v,\\cos v,0)$，$r_{vv}=(-u\\cos v,-u\\sin v,0)$，于是\n$$L=r_{uu}\\cdot n=0,\\qquad M=r_{uv}\\cdot n=-\\frac{1}{\\sqrt{1+u^2}},\\qquad N=r_{vv}\\cdot n=0.$$\n代入平均曲率公式：\n$$H=\\frac{EN-2FM+GL}{2(EG-F^2)}=\\frac{1\\cdot 0-0+(1+u^2)\\cdot 0}{2(1+u^2)}=0,$$\n故螺旋面是极小曲面。高斯曲率\n$$K=\\frac{LN-M^2}{EG-F^2}=-\\frac{1}{(1+u^2)^2}<0,$$\n确实处处为负，符合极小曲面「非平面则鞍形」的一般规律。"
-      },
-      {
-        "problem": "求旋转曲面中面积最小的那些：设曲线 $y=y(x)>0$ 绕 $x$ 轴旋转，面积泛函为 $A=2\\pi\\int_{x_1}^{x_2}y\\sqrt{1+y'^2}\\,dx$。写出极小条件并求解，说明悬链面的来历。",
-        "solution": "被积函数 $F(y,y')=y\\sqrt{1+y'^2}$ 不显含 $x$，用 Beltrami 恒等式 $F-y'\\frac{\\partial F}{\\partial y'}=c$：\n$$y\\sqrt{1+y'^2}-\\frac{y\\,y'^2}{\\sqrt{1+y'^2}}=\\frac{y}{\\sqrt{1+y'^2}}=c.$$\n于是 $y^2=c^2(1+y'^2)$，即 $y'=\\frac{\\sqrt{y^2-c^2}}{c}$，分离变量得 $\\mathrm{arccosh}\\,\\frac yc=\\frac{x-a}{c}$，即\n$$y(x)=c\\cosh\\frac{x-a}{c},$$\n悬链线。把它绕轴旋转就得到悬链面（$H\\equiv0$）——这正是两个圆环之间肥皂膜的形状。当两环距离过大时悬链面不再存在，肥皂膜改取两个圆盘（平凡解），这体现了极小曲面存在性对边界的依赖性（Plateau 问题的现象）。"
-      }
-    ],
-    "tags": [
-      "极小曲面",
-      "平均曲率",
-      "肥皂膜",
-      "悬链面",
-      "螺旋面"
-    ],
-    "links": [
-      "gaussian-mean-curvature",
-      "principal-curvature",
-      "second-fundamental-form",
-      "surface-isometry",
-      "surface-area"
-    ],
-    "plot": {
-      "type": "surface3d",
-      "surf": {
-        "x": "u*cos(v)",
-        "y": "u*sin(v)",
-        "z": "v"
-      },
-      "uRange": [
-        -1.2,
-        1.2
-      ],
-      "vRange": [
-        0,
-        6.2832
-      ],
-      "density": [
-        18,
-        64
-      ],
-      "color": "#b388ff",
-      "title": "螺旋面 r(u,v)=(u cos v, u sin v, v)：H≡0 的极小曲面，K=−1/(1+u²)²"
-    }
+   ],
+   "title": "旋转场 X=(−y, x)：流沿圆周旋转，圆 x²+y²=const 是流的不变集"
   }
+ },
+ {
+  "id": "surface-isometry",
+  "title": "等距与可展曲面",
+  "titleEn": "Isometries and Developable Surfaces",
+  "branch": "differential-geometry",
+  "level": 5,
+  "summary": "等距是保持第一基本形式（从而保持曲面上曲线长度）的映射；能与平面建立等距对应的曲面恰是高斯曲率恒为零的可展曲面，如柱面、锥面与切线面。",
+  "summaryEn": "An isometry is a map preserving the first fundamental form, hence the lengths of curves on the surface; the surfaces that are locally isometric to the plane are exactly the developable ones, characterised by vanishing Gaussian curvature, such as cylinders, cones and tangent developables.",
+  "definition": "设 $S_1,S_2\\subset\\mathbb R^3$ 是两张正则曲面，$\\varphi:S_1\\to S_2$ 是光滑的可逆映射。若对每点 $p\\in S_1$ 与任意切向量 $v,w\\in T_pS_1$，微分 $d\\varphi_p$ 保持内积\n$$\\langle d\\varphi_p(v),d\\varphi_p(w)\\rangle=\\langle v,w\\rangle,$$\n就称 $\\varphi$ 是**等距**（isometry），两张曲面**等距**。用第一基本形式说就是「拉回不变」：$\\varphi^*I_2=I_1$，按参数写出即 $(E_2,F_2,G_2)\\circ\\varphi=(E_1,F_1,G_1)$。等价的直观描述：等距当且仅当**保持曲面上每条曲线的长度**；由极化恒等式，保内积与保长度是一回事，所以等距同时保夹角，也保面积（面积元 $\\sqrt{EG-F^2}\\,du\\,dv$ 只依赖 $E,F,G$）。\n\n关键的「不对称」：第一基本形式 $I$ 是**等距不变量**，第二基本形式 $II$ 却不是。把一张纸卷成圆柱：纸上的长度、角度、面积一丝不变（$I$ 保持），但弯曲方式从平面的 $II=0$ 变成圆柱的 $II\\ne0$。因此 $I$ 决定**内蕴几何**（曲面自己能量出的一切），$II$ 描述曲面在空间中的**外在弯曲**。能像纸那样无拉伸、无压缩地摊平的曲面，称为**可展曲面**；判据是**高斯曲率恒为零**：$S$ 可展 $\\iff K\\equiv0$，等价地 $S$ 局部等距于平面。\n\n为什么判据是 $K$？高斯绝妙定理指出：尽管 $K=\\frac{LN-M^2}{EG-F^2}$ 表面上由第二基本形式的 $L,M,N$ 写出，代入 Gauss 方程（相容性关系的切向部分）后它只依赖 $E,F,G$ 及其导数——$K$ 是**内蕴**量，等距绝不能改变它。于是球面（$K=1/R^2>0$）与平面（$K=0$）不可能等距，任何世界地图必然在某处失真；而平面、柱面、锥面（去顶点）、切线面都满足 $K\\equiv0$，都能无拉伸地摊平。反过来，两张**常**高斯曲率相同的曲面局部等距（Minding 定理），所以柱面与平面局部等距、半径相同的球面之间整体等距。\n\n等距还自动保持**测地线**：测地线方程（Christoffel 符号）只由 $E,F,G$ 决定，等距把测地线映成测地线。例如把圆柱摊平到平面后，螺旋线等长地变成一条直线，而直线是平面的测地线——这是「圆柱上的螺旋线是测地线」的最快证明。局部与整体也要分清：平面卷成圆柱是局部等距，但不是整体的一一对应（它是覆叠映射），谈「展开」时通常指局部等距。",
+  "definitionEn": "Let $S_1,S_2\\subset\\mathbb R^3$ be regular surfaces and let $\\varphi:S_1\\to S_2$ be a smooth invertible map. If at every point $p\\in S_1$ the differential $d\\varphi_p$ preserves inner products of tangent vectors,\n$$\\langle d\\varphi_p(v),d\\varphi_p(w)\\rangle=\\langle v,w\\rangle,$$\nthen $\\varphi$ is called an **isometry** and the two surfaces are **isometric**. In terms of the first fundamental form this says that the pullback is unchanged: $\\varphi^*I_2=I_1$, i.e. $(E_2,F_2,G_2)\\circ\\varphi=(E_1,F_1,G_1)$ in parameters. Equivalently, an isometry is a map that **preserves the length of every curve** on the surface; by polarisation, preserving lengths and preserving inner products are the same, so an isometry also preserves angles and areas (the area element $\\sqrt{EG-F^2}\\,du\\,dv$ depends only on $E,F,G$).\n\nThe crucial asymmetry: the first fundamental form $I$ is an **isometry invariant**, the second fundamental form $II$ is not. Roll a sheet of paper into a cylinder: lengths, angles and areas on the paper are untouched ($I$ is preserved), while the way it bends changes from $II=0$ for the plane to $II\\ne0$ for the cylinder. Thus $I$ determines the **intrinsic geometry** (everything the surface can measure by itself) and $II$ describes the **extrinsic bending** in space. A surface that can be flattened like paper, with no stretching or compression, is called **developable**; the criterion is **vanishing Gaussian curvature**: $S$ is developable iff $K\\equiv0$, equivalently $S$ is locally isometric to the plane.\n\nWhy $K$? Gauss's theorema egregium says that although $K=\\frac{LN-M^2}{EG-F^2}$ is written with $L,M,N$ from the second fundamental form, the Gauss equation makes it depend only on $E,F,G$ and their derivatives — $K$ is **intrinsic** and no isometry can change it. Hence the sphere ($K=1/R^2>0$) and the plane ($K=0$) cannot be isometric and every world map must distort somewhere, whereas the plane, cylinder, cone (minus apex) and tangent developable all satisfy $K\\equiv0$ and can be flattened without stretching. Conversely, surfaces with the same **constant** Gaussian curvature are locally isometric (Minding's theorem), so a cylinder is locally isometric to the plane, and spheres of equal radius are isometric to each other.\n\nIsometries also preserve **geodesics**: the geodesic equations (Christoffel symbols) involve only $E,F,G$, so an isometry maps geodesics to geodesics. For instance, unrolling a cylinder sends a helix to a straight line of the same length, and straight lines are the geodesics of the plane — the quickest proof that a helix is a geodesic of the cylinder. Finally, keep local and global apart: rolling the plane into a cylinder is a local isometry but not a global bijection (it is a covering map); flattening usually means a local isometry.",
+  "formulas": [
+   {
+    "latex": "\\varphi^*I_2=I_1\\iff \\langle d\\varphi_p(v),d\\varphi_p(w)\\rangle=\\langle v,w\\rangle\\quad \\forall p,\\ \\forall v,w\\in T_pS_1\\iff L(\\varphi\\circ\\gamma)=L(\\gamma)",
+    "note": "等距的三种等价说法：保第一基本形式、保切向内积、保每条曲线的长度（极化恒等式把后两者联系起来）。",
+    "noteEn": "Three equivalent descriptions of an isometry: the pullback of $I_2$ equals $I_1$, inner products are preserved, and every curve keeps its length (polarisation links the last two)."
+   },
+   {
+    "latex": "S\\ \\text{可展}\\iff S\\ \\text{局部等距于平面}\\iff K\\equiv0;\\qquad K=\\frac{LN-M^2}{EG-F^2}\\ \\text{只由}\\ E,F,G\\ \\text{决定（绝妙定理）}",
+    "note": "可展曲面的判据与高斯绝妙定理：$K$ 虽是借 $L,M,N$ 写出的，却是内蕴量，等距不能改变它。",
+    "noteEn": "Characterisation of developable surfaces and Gauss's theorema egregium: although $K$ is displayed via $L,M,N$, it is intrinsic and cannot be altered by an isometry."
+   },
+   {
+    "latex": "r(u,v)=(\\cos u,\\sin u,v):\\qquad E=1,\\ F=0,\\ G=1,\\qquad I=du^2+dv^2,\\qquad K\\equiv0",
+    "note": "圆柱面：在 $(u,v)$ 坐标下第一基本形式与平面完全相同，$(u,v)\\mapsto(\\cos u,\\sin u,v)$ 是平面到圆柱的局部等距（卷纸不拉伸）。",
+    "noteEn": "The cylinder: in $(u,v)$ coordinates its first fundamental form equals that of the plane, so $(u,v)\\mapsto(\\cos u,\\sin u,v)$ is a local isometry — paper rolling without stretching."
+   },
+   {
+    "latex": "\\text{球面}:\\ I=R^2d\\theta^2+R^2\\sin^2\\theta\\,d\\varphi^2,\\qquad K=\\frac{1}{R^2}>0:\\ \\text{不可展}",
+    "note": "球面的 $K>0$ 是内蕴障碍：不存在保长度的平面地图；等积投影保面积却保不了长度，墨卡托投影保角却保不了长度。",
+    "noteEn": "For the sphere $K>0$ is an intrinsic obstruction: no length-preserving flat map exists; equal-area projections preserve areas but not lengths, Mercator preserves angles but not lengths."
+   },
+   {
+    "latex": "K_1\\equiv K_2\\equiv c\\ (\\text{常数})\\ \\Longrightarrow\\ S_1,S_2\\ \\text{局部等距（Minding 定理）};\\qquad \\text{等距保持}\\ K\\text{、测地线、面积、夹角}",
+    "note": "Minding 定理：常高斯曲率是局部等距的完全不变量；等距保 $K$、测地线、面积与夹角，是「内蕴几何」的完整清单。",
+    "noteEn": "Minding's theorem: a constant Gaussian curvature is a complete local isometry invariant; isometries preserve $K$, geodesics, areas and angles — the complete list of intrinsic data."
+   }
+  ],
+  "expression": {
+   "text": "φ*I₂ = I₁（等距 ⟺ 保长度）；S 可展 ⟺ K ≡ 0（局部等距于平面）；柱面 I = du² + dv² 与平面相同",
+   "symbol": "\\varphi^*I_2=I_1,\\qquad K\\equiv0",
+   "note": "第一基本形式是等距不变量，第二基本形式会变：柱面与平面局部等距，但平面的主曲率为 $0,0$、圆柱的为 $0,1/R$。",
+   "noteEn": "The first fundamental form is an isometry invariant while the second one changes: the cylinder is locally isometric to the plane, yet their principal curvatures are $0,1/R$ versus $0,0$."
+  },
+  "properties": [
+   "等距当且仅当保第一基本形式，当且仅当保曲线长度；由此自动保夹角与面积（面积元 $\\sqrt{EG-F^2}\\,du\\,dv$ 由 $E,F,G$ 决定），并保测地线（测地线方程只含 $I$ 及其导数）。",
+   "$I$ 是不变量而 $II$ 不是：柱面与平面局部等距，但平面的主曲率为 $0,0$、半径 $R$ 的圆柱为 $0,1/R$，$II$ 明显不同——内蕴几何与外在形状是两套信息。",
+   "可展曲面 $\\iff K\\equiv0$：平面、柱面、锥面（去顶点）、切线面都是；它们可以无拉伸地展平（纸张、钣金与地图的数学基础），而球面等含 $K\\ne0$ 的曲面不能。",
+   "高斯曲率是等距不变量（绝妙定理），等距的两曲面处处 $K$ 相同；Minding 给出反向结果：相同的常曲率曲面局部等距（柱面—平面、锥面—平面、同半径球面之间）。",
+   "局部等距与整体等距不同：把平面卷成圆柱是局部等距而非整体一一对应（它是覆叠映射，无限多条水平线粘到同一个圆上）；「展开」通常指局部等距。"
+  ],
+  "propertiesEn": [
+   "An isometry preserves the first fundamental form iff it preserves curve lengths; consequently it preserves angles and areas (the area element $\\sqrt{EG-F^2}\\,du\\,dv$ is determined by $E,F,G$) and geodesics (their equations involve only $I$ and its derivatives).",
+   "$I$ is invariant, $II$ is not: the cylinder is locally isometric to the plane, yet their principal curvatures are $0,1/R$ and $0,0$ — intrinsic geometry and extrinsic shape are two different sets of information.",
+   "Developable $\\iff K\\equiv0$: planes, cylinders, cones (minus apex) and tangent developables qualify; they can be flattened without stretching (the mathematics behind paper, sheet metal and maps), while surfaces with $K\\ne0$ such as the sphere cannot.",
+   "Gaussian curvature is an isometry invariant (theorema egregium), so isometric surfaces have equal $K$ everywhere; Minding's theorem gives the converse for constant curvature (cylinder–plane, cone–plane, spheres of equal radius).",
+   "Local isometry differs from global isometry: rolling the plane into a cylinder is a local isometry but not a global bijection (it is a covering map gluing infinitely many horizontal lines to one circle); flattening usually means a local isometry."
+  ],
+  "examples": [
+   {
+    "problem": "验证柱面 $r(u,v)=(\\cos u,\\sin u,v)$ 与平面局部等距，并计算它的高斯曲率；再说明螺旋线 $\\gamma(t)=(\\cos t,\\sin t,ct)$ 为什么是柱面上的测地线。",
+    "solution": "$r_u=(-\\sin u,\\cos u,0)$，$r_v=(0,0,1)$，于是\n$$E=r_u\\cdot r_u=1,\\qquad F=r_u\\cdot r_v=0,\\qquad G=r_v\\cdot r_v=1,$$\n故 $I=du^2+dv^2$，与平面在 $(u,v)$ 坐标下的第一基本形式逐项相同：映射 $(u,v)\\mapsto(\\cos u,\\sin u,v)$ 是局部等距。取单位法向 $n=\\frac{r_u\\times r_v}{|r_u\\times r_v|}=(\\cos u,\\sin u,0)$，由 $r_{uu}=(-\\cos u,-\\sin u,0)$、$r_{uv}=0$、$r_{vv}=0$ 得 $L=-1$、$M=0$、$N=0$，于是\n$$K=\\frac{LN-M^2}{EG-F^2}=0,$$\n柱面确是 $K\\equiv0$ 的可展曲面。在 $(u,v)$ 坐标下这映射把 $\\gamma$ 变成平面上的直线 $t\\mapsto(t,ct)$：两者长度相同（$\\int\\sqrt{1+c^2}\\,dt$），而直线是平面的测地线；等距保长度又保测地线，故螺旋线是柱面的测地线。"
+   },
+   {
+    "problem": "证明半径为 $R$ 的球面（哪怕一小片）不能与平面等距。",
+    "solution": "用经纬参数化 $r(\\theta,\\varphi)=(R\\sin\\theta\\cos\\varphi,\\ R\\sin\\theta\\sin\\varphi,\\ R\\cos\\theta)$，算出\n$$E=R^2,\\qquad F=0,\\qquad G=R^2\\sin^2\\theta;\\qquad L=-R,\\qquad M=0,\\qquad N=-R\\sin^2\\theta,$$\n因此\n$$K=\\frac{LN-M^2}{EG-F^2}=\\frac{R^2\\sin^2\\theta}{R^4\\sin^2\\theta}=\\frac{1}{R^2}>0.$$\n若某个开片与平面存在等距 $\\varphi$，则由绝妙定理（$K$ 由第一基本形式决定、等距保持 $K$）必须有 $K_{\\text{球面}}=K_{\\text{平面}}=0$，与 $1/R^2>0$ 矛盾。直观结论：世界地图无论怎么画都会在某处失真——这是内蕴几何的硬约束，不是制图技术的缺陷。"
+   }
+  ],
+  "tags": [
+   "等距",
+   "可展曲面",
+   "第一基本形式",
+   "高斯曲率",
+   "绝妙定理"
+  ],
+  "links": [
+   "first-fundamental-form",
+   "second-fundamental-form",
+   "theorema-egregium",
+   "regular-surface",
+   "geodesic"
+  ],
+  "plot": {
+   "type": "surface3d",
+   "surf": {
+    "x": "cos(u)",
+    "y": "sin(u)",
+    "z": "v"
+   },
+   "uRange": [
+    0,
+    6.2832
+   ],
+   "vRange": [
+    -1.5,
+    1.5
+   ],
+   "density": [
+    48,
+    14
+   ],
+   "color": "#4cc9f0",
+   "title": "柱面 r(u,v)=(cos u, sin u, v)：I=du²+dv² 与平面相同，K≡0（可展）"
+  }
+ },
+ {
+  "id": "minimal-surface",
+  "title": "极小曲面",
+  "titleEn": "Minimal Surfaces",
+  "branch": "differential-geometry",
+  "level": 5,
+  "summary": "平均曲率恒为零的曲面：面积泛函的驻点、肥皂膜的数学模型；悬链面与螺旋面是最经典的两个例子，而且二者局部等距。",
+  "summaryEn": "Surfaces with identically vanishing mean curvature: the stationary points of the area functional and the mathematical model of soap films; the catenoid and the helicoid are the two classical examples, locally isometric to each other.",
+  "definition": "设 $S\\subset\\mathbb R^3$ 是正则曲面，$\\kappa_1,\\kappa_2$ 为其主曲率，**平均曲率** $H=\\frac12(\\kappa_1+\\kappa_2)$。若 $H\\equiv0$，就称 $S$ 是**极小曲面**。名字来自变分：「极小」不是逐点意义上的「面积最小」，而是固定边界曲线时面积泛函的**驻点**——可以类比多元微积分里「梯度为零是极值的必要条件」，只不过函数换成了面积泛函、对象换成了曲面。\n\n为什么驻点条件恰好是 $H=0$？对曲面作法向变分 $V=\\phi N$（$\\phi$ 是任意紧支撑的速率函数），面积的一阶变化为\n$$\\left.\\frac{d}{dt}\\right|_{t=0}\\mathrm{Area}(S_t)=-2\\int_SH\\phi\\,dA.$$\n右端对一切 $\\phi$ 为零当且仅当 $H\\equiv0$：$H$ 就是面积泛函的「梯度」，极小曲面是它的临界点。物理上，肥皂膜在表面张力下收缩到（局部）面积最小，膜上每一点所受的拉扯互相抵消，平衡条件正是 $H=0$，所以肥皂膜实验就是极小曲面的自然实验（真实肥皂膜的平衡还要求二阶变分非负，即稳定性）。在等温坐标中条件等价于坐标函数调和：$\\Delta X=0$，即极小曲面 = 调和等距浸入，这把极小曲面与复分析连在一起（Weierstrass 表示）。\n\n经典例子：**平面**（$\\kappa_1=\\kappa_2=0$，平凡解）；**悬链面**（catenoid）$r(u,v)=(\\cosh v\\cos u,\\ \\cosh v\\sin u,\\ v)$，由悬链线绕轴旋转生成，是两个共轴圆环之间肥皂膜的理想形状；**螺旋面**（helicoid）$r(u,v)=(u\\cos v,\\ u\\sin v,\\ v)$，唯一的直纹极小曲面（与平面并列）；还有 Scherk 曲面（周期上的极小图）与 Costa 曲面（首个完備嵌入的非旋转极小曲面）。一个深刻又出人意料的经典事实（Meusnier，1776）是：**悬链面与螺旋面局部等距**——在参数 $(s,u)$ 下\n$$r_{\\text{hel}}=(\\sinh s\\cos u,\\ \\sinh s\\sin u,\\ u),\\qquad r_{\\text{cat}}=(\\cosh s\\cos u,\\ \\cosh s\\sin u,\\ s)$$\n的第一基本形式都是 $\\cosh^2s\\,(ds^2+du^2)$，于是螺旋面可以无拉伸地弯成悬链面；二者其实是一个单参数伴随族的两端（Bonnet）。\n\n极小曲面满足 $K=\\kappa_1\\kappa_2=-\\kappa_1^2\\le0$。若某点 $\\kappa_1\\ne0$，则该点为双曲点（$K<0$）；$K=0$ 当且仅当该点为平点（$\\kappa_1=\\kappa_2=0$）。非平面极小曲面也可能有孤立平点，因此不能断言「非平面就处处 $K<0$」。在非平点处两个主方向弯曲方向相反，这正是肥皂膜凹陷形态的来源。极小曲面还有刚性的一面：Bernstein 定理断言 $\\mathbb R^3$ 中定义在整个平面上的完备极小图只有平面。",
+  "definitionEn": "Let $S\\subset\\mathbb R^3$ be a regular surface with principal curvatures $\\kappa_1,\\kappa_2$ and **mean curvature** $H=\\frac12(\\kappa_1+\\kappa_2)$. If $H\\equiv0$, then $S$ is called a **minimal surface**. The name comes from the calculus of variations: minimal does not mean pointwise smallest area, but rather that the area functional is **stationary** for fixed boundary curve — the analogue of the necessary condition gradient $=0$ in multivariable calculus, with the function replaced by the area functional and the point by a surface.\n\nWhy is the stationary condition exactly $H=0$? For a normal variation $V=\\phi N$ ($\\phi$ any compactly supported speed), the first variation of area is\n$$\\left.\\frac{d}{dt}\\right|_{t=0}\\mathrm{Area}(S_t)=-2\\int_SH\\phi\\,dA.$$\nThe right side vanishes for all $\\phi$ iff $H\\equiv0$: $H$ is the gradient of the area functional and minimal surfaces are its critical points. Physically, a soap film contracts under surface tension to a (locally) smallest area; the pulls on each patch cancel precisely when $H=0$, so soap films are the natural experiment for minimal surfaces (a real soap film in equilibrium also needs the second variation to be nonnegative, i.e. stability). In isothermal coordinates the condition becomes the harmonicity of the coordinate functions, $\\Delta X=0$: minimal surfaces are harmonic isometric immersions, which ties them to complex analysis through the Weierstrass representation.\n\nClassical examples: the **plane** ($\\kappa_1=\\kappa_2=0$, the trivial solution); the **catenoid** $r(u,v)=(\\cosh v\\cos u,\\ \\cosh v\\sin u,\\ v)$, generated by revolving a catenary, the ideal shape of the soap film spanning two coaxial rings; and the **helicoid** $r(u,v)=(u\\cos v,\\ u\\sin v,\\ v)$, the only ruled minimal surface besides the plane; also Scherk's surface (a periodic minimal graph) and Costa's surface (the first complete embedded non-rotational example). A deep and surprising classical fact (Meusnier, 1776) is that **the catenoid and the helicoid are locally isometric**: in the parameters $(s,u)$,\n$$r_{\\text{hel}}=(\\sinh s\\cos u,\\ \\sinh s\\sin u,\\ u),\\qquad r_{\\text{cat}}=(\\cosh s\\cos u,\\ \\cosh s\\sin u,\\ s)$$\nboth have first fundamental form $\\cosh^2s\\,(ds^2+du^2)$, so the helicoid bends into the catenoid without stretching; the two surfaces are the ends of a one-parameter associate family (Bonnet).\n\nMinimal surfaces are saddle-like everywhere: $H=0$ gives $K=\\kappa_1\\kappa_2=-\\kappa_1^2\\le0$, so unless the surface is a plane, $K<0$ at every point — every point is hyperbolic, with the two principal directions bending oppositely, the source of the characteristic soap-film shape. Minimal surfaces also have a rigid side: Bernstein's theorem states that a complete minimal graph over the whole plane in $\\mathbb R^3$ must be a plane.",
+  "formulas": [
+   {
+    "latex": "H\\equiv0,\\qquad H=\\frac{\\kappa_1+\\kappa_2}{2}=\\frac{EN-2FM+GL}{2(EG-F^2)}",
+    "note": "定义：平均曲率恒为零；式中 $E,F,G$ 与 $L,M,N$ 分别是第一、第二基本形式的系数。",
+    "noteEn": "Definition: the mean curvature vanishes identically; here $E,F,G$ and $L,M,N$ are the coefficients of the first and second fundamental forms."
+   },
+   {
+    "latex": "\\left.\\frac{d}{dt}\\right|_{t=0}\\mathrm{Area}(S_t)=-2\\int_SH\\phi\\,dA\\ \\Longrightarrow\\ (\\,\\forall\\phi:\\ \\delta A=0)\\iff H\\equiv0",
+    "note": "面积第一变分：对法向变分 $V=\\phi N$，面积变化率由 $H$ 控制——$H$ 是面积泛函的梯度。",
+    "noteEn": "First variation of area: for a normal variation $V=\\phi N$ the rate of change of area is governed by $H$ — the gradient of the area functional."
+   },
+   {
+    "latex": "r(u,v)=(\\cosh v\\cos u,\\ \\cosh v\\sin u,\\ v):\\qquad H\\equiv0,\\qquad K=-\\frac{1}{\\cosh^4v}<0",
+    "note": "悬链面（$c=1$）；一般尺度 $r=(c\\cosh\\frac vc\\cos u,\\ c\\cosh\\frac vc\\sin u,\\ v)$ 时 $K=-1/\\big(c^2\\cosh^4\\frac vc\\big)$。",
+    "noteEn": "The catenoid ($c=1$); for the general scale $r=(c\\cosh\\frac vc\\cos u,\\ c\\cosh\\frac vc\\sin u,\\ v)$ one has $K=-1/\\big(c^2\\cosh^4\\frac vc\\big)$."
+   },
+   {
+    "latex": "r(u,v)=(u\\cos v,\\ u\\sin v,\\ v):\\qquad H\\equiv0,\\qquad K=-\\frac{1}{(1+u^2)^2}<0",
+    "note": "螺旋面：直纹极小曲面只有平面与螺旋面；$u$ 是到轴的径向参数，$v$ 兼作转角与高度。",
+    "noteEn": "The helicoid: the only ruled minimal surfaces are the plane and the helicoid; $u$ is the radial parameter and $v$ serves both as angle and height."
+   },
+   {
+    "latex": "r_{\\text{hel}}(s,u)=(\\sinh s\\cos u,\\ \\sinh s\\sin u,\\ u),\\qquad r_{\\text{cat}}(s,u)=(\\cosh s\\cos u,\\ \\cosh s\\sin u,\\ s),\\qquad I=\\cosh^2s\\,(ds^2+du^2)",
+    "note": "Meusnier（1776）：同一参数 $(s,u)$ 下两者的第一基本形式完全相同，故螺旋面与悬链面局部等距，可无拉伸互变（Bonnet 伴随族的两个端点）。",
+    "noteEn": "Meusnier (1776): in the shared parameters $(s,u)$ both surfaces have the same first fundamental form, so the helicoid and the catenoid are locally isometric and can be bent into each other without stretching (the two ends of the Bonnet associate family)."
+   }
+  ],
+  "expression": {
+   "text": "H ≡ 0（面积泛函的第一变分为零）；H = (EN−2FM+GL)/(2(EG−F²))；悬链面与螺旋面局部等距",
+   "symbol": "H=\\frac{\\kappa_1+\\kappa_2}{2}\\equiv0",
+   "note": "非平面的极小曲面处处 $K=-\\kappa_1^2<0$；肥皂膜给出物理实例，Plateau 问题讨论给定边界的最小面积解。",
+   "noteEn": "A non-planar minimal surface has $K=-\\kappa_1^2<0$ everywhere; soap films provide the physical examples, and the Plateau problem asks for the least-area surface with prescribed boundary."
+  },
+  "properties": [
+   "定义与变分等价：$H\\equiv0$ 当且仅当面积第一变分为零，即固定边界下面积泛函的临界点（驻点）；若要求它还是局部最小，需二阶变分非负（稳定性，如稳定的肥皂膜）。",
+   "标准例子：平面、悬链面、螺旋面、Scherk 曲面、Costa 曲面；悬链面与螺旋面局部等距（Meusnier），同属一个 Bonnet 伴随族。",
+   "形状：极小曲面恒有 $K=-\\kappa_1^2\\le0$；$K=0$ 当且仅当该点为平点（$\\kappa_1=\\kappa_2=0$），非平面极小曲面也可有孤立平点，不能断言处处严格小于零；直纹极小曲面只有平面与螺旋面。",
+   "物理与复分析：肥皂膜是极小曲面的物理解；Plateau 问题（每条可求长闭曲线都张成一片极小曲面，Douglas–Radó 1930 年代）是几何分析的起源之一；等温坐标下 $H=0\\iff\\Delta X=0\\iff$ 存在 Weierstrass 表示。",
+   "刚性：Bernstein 定理——$\\mathbb R^3$ 中完备极小图必为平面；极小曲面方程 $\\mathrm{div}\\!\\left(\\frac{\\nabla u}{\\sqrt{1+|\\nabla u|^2}}\\right)=0$ 是几何分析中非线性椭圆 PDE 的源头。"
+  ],
+  "propertiesEn": [
+   "Definition equals variation: $H\\equiv0$ iff the first variation of area vanishes, i.e. the surface is a critical (stationary) point of the area functional for a fixed boundary curve; a local minimum additionally requires the second variation to be nonnegative (stability, as with a stable soap film).",
+   "Standard examples: the plane, the catenoid, the helicoid, Scherk's surface and Costa's surface; the catenoid and the helicoid are locally isometric (Meusnier) and belong to one Bonnet associate family.",
+   "Shape: a non-planar minimal surface has $K=-\\kappa_1^2<0$ everywhere, so every point is hyperbolic (saddle-like); the only ruled minimal surfaces are the plane and the helicoid.",
+   "Physics and complex analysis: soap films are the physical minimal surfaces; the Plateau problem (every rectifiable closed curve bounds a minimal surface, Douglas–Radó in the 1930s) helped found geometric analysis; in isothermal coordinates $H=0\\iff\\Delta X=0\\iff$ a Weierstrass representation exists.",
+   "Rigidity: Bernstein's theorem — a complete minimal graph in $\\mathbb R^3$ must be a plane; the minimal surface equation $\\mathrm{div}\\!\\left(\\frac{\\nabla u}{\\sqrt{1+|\\nabla u|^2}}\\right)=0$ is a source of nonlinear elliptic PDE in geometric analysis."
+  ],
+  "examples": [
+   {
+    "problem": "验证螺旋面 $r(u,v)=(u\\cos v,\\ u\\sin v,\\ v)$ 是极小曲面：计算第一、第二基本形式的系数，证明 $H=0$，并给出高斯曲率。",
+    "solution": "$r_u=(\\cos v,\\sin v,0)$，$r_v=(-u\\sin v,\\ u\\cos v,\\ 1)$，故\n$$E=1,\\qquad F=0,\\qquad G=1+u^2.$$\n又 $r_u\\times r_v=(\\sin v,-\\cos v,u)$，单位法向\n$$n=\\frac{(\\sin v,-\\cos v,u)}{\\sqrt{1+u^2}}.$$\n二阶导数 $r_{uu}=0$，$r_{uv}=(-\\sin v,\\cos v,0)$，$r_{vv}=(-u\\cos v,-u\\sin v,0)$，于是\n$$L=r_{uu}\\cdot n=0,\\qquad M=r_{uv}\\cdot n=-\\frac{1}{\\sqrt{1+u^2}},\\qquad N=r_{vv}\\cdot n=0.$$\n代入平均曲率公式：\n$$H=\\frac{EN-2FM+GL}{2(EG-F^2)}=\\frac{1\\cdot 0-0+(1+u^2)\\cdot 0}{2(1+u^2)}=0,$$\n故螺旋面是极小曲面。高斯曲率\n$$K=\\frac{LN-M^2}{EG-F^2}=-\\frac{1}{(1+u^2)^2}<0,$$\n确实处处为负，符合极小曲面「非平面则鞍形」的一般规律。"
+   },
+   {
+    "problem": "求旋转曲面中面积最小的那些：设曲线 $y=y(x)>0$ 绕 $x$ 轴旋转，面积泛函为 $A=2\\pi\\int_{x_1}^{x_2}y\\sqrt{1+y'^2}\\,dx$。写出极小条件并求解，说明悬链面的来历。",
+    "solution": "被积函数 $F(y,y')=y\\sqrt{1+y'^2}$ 不显含 $x$，用 Beltrami 恒等式 $F-y'\\frac{\\partial F}{\\partial y'}=c$：\n$$y\\sqrt{1+y'^2}-\\frac{y\\,y'^2}{\\sqrt{1+y'^2}}=\\frac{y}{\\sqrt{1+y'^2}}=c.$$\n于是 $y^2=c^2(1+y'^2)$，即 $y'=\\frac{\\sqrt{y^2-c^2}}{c}$，分离变量得 $\\mathrm{arccosh}\\,\\frac yc=\\frac{x-a}{c}$，即\n$$y(x)=c\\cosh\\frac{x-a}{c},$$\n悬链线。把它绕轴旋转就得到悬链面（$H\\equiv0$）——这正是两个圆环之间肥皂膜的形状。当两环距离过大时悬链面不再存在，肥皂膜改取两个圆盘（平凡解），这体现了极小曲面存在性对边界的依赖性（Plateau 问题的现象）。"
+   }
+  ],
+  "tags": [
+   "极小曲面",
+   "平均曲率",
+   "肥皂膜",
+   "悬链面",
+   "螺旋面"
+  ],
+  "links": [
+   "gaussian-mean-curvature",
+   "principal-curvature",
+   "second-fundamental-form",
+   "surface-isometry",
+   "surface-area"
+  ],
+  "plot": {
+   "type": "surface3d",
+   "surf": {
+    "x": "u*cos(v)",
+    "y": "u*sin(v)",
+    "z": "v"
+   },
+   "uRange": [
+    -1.2,
+    1.2
+   ],
+   "vRange": [
+    0,
+    6.2832
+   ],
+   "density": [
+    18,
+    64
+   ],
+   "color": "#b388ff",
+   "title": "螺旋面 r(u,v)=(u cos v, u sin v, v)：H≡0 的极小曲面，K=−1/(1+u²)²"
+  }
+ }
 ]

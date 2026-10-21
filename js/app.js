@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=52";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=52";
+import { renderPlot } from "./plot.js?v=53";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=53";
 
 /* ============================================================
    1. 全局状态

@@ -1,569 +1,569 @@
 [
-  {
-    "id": "harmonic-dirichlet-problem",
-    "title": "调和函数与狄利克雷问题",
-    "titleEn": "Harmonic Functions and the Dirichlet Problem",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "调和函数是满足 $\\Delta u=0$ 的 $C^2$ 函数，等价刻画是「在每一点的某个邻域内是解析函数的实部」；给定边界值求内部解就是狄利克雷问题——在单位圆盘上由泊松积分给出唯一解，在一般区域上却未必可解。",
-    "summaryEn": "Harmonic functions are the $C^2$ solutions of $\\Delta u=0$, characterized locally as real parts of analytic functions. Asking for a harmonic function with prescribed boundary values is the Dirichlet problem: uniquely solvable on the unit disk by the Poisson integral, but not solvable on general domains.",
-    "definition": "设 $u(x,y)$ 在区域 $D$ 内有二阶连续偏导数，且处处满足**拉普拉斯方程** $$\\Delta u=\\frac{\\partial^2u}{\\partial x^2}+\\frac{\\partial^2u}{\\partial y^2}=0,$$ 就称 $u$ 是 $D$ 上的**调和函数**。这一节从复分析的角度看它，与偏微分方程分支的拉普拉斯方程节点互补。调和函数与解析函数的联系是双向的：解析函数 $f=u+iv$ 的实部与虚部都自动调和（把柯西-黎曼方程再求一次偏导即可）；反过来，**调和函数在每一点的某个单连通邻域内必是某个解析函数的实部**——只需在这个小圆盘上把共轭调和函数积分出来。所以「调和」与「解析」只在全局拓扑上才分道扬镳。\n\n这里**「局部」两个字不能省**。整体结论只在单连通区域上成立：$D$ 单连通时每个调和函数都有共轭调和函数 $v$，使 $f=u+iv$ 在 $D$ 上解析。一旦 $D$ 有洞，就可能出现「没有共轭」的调和函数。标准例子是 $D=\\mathbb C\\setminus\\{0\\}$ 上的 $u=\\ln|z|$：它处处调和，共轭的「候选人」是辐角 $\\arg z$，而 $\\arg z$ 多值。若真有单值共轭 $v$，则由柯西-黎曼方程 $v_x=-u_y=\\dfrac{-y}{x^2+y^2}$、$v_y=u_x=\\dfrac{x}{x^2+y^2}$ 沿单位圆积分得 $$\\oint_{|z|=1}\\mathrm dv=\\int_0^{2\\pi}\\mathrm d\\theta=2\\pi\\neq0,$$ 与「单值函数的闭路积分为 $0$」矛盾。于是 $\\ln|z|$ 调和却没有整体共轭；而在任一小圆盘内它都是 $\\operatorname{Re}\\ln z$。\n\n调和函数最有用的定量性质是**平均值性质**：若闭圆盘 $\\overline{B(z_0,r)}\\subset D$，则 $$u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+re^{i\\theta})\\,\\mathrm d\\theta,$$ 中心值等于圆周上的平均值（更强地还等于圆盘上的面积平均）。必要性由格林公式给出；反过来，**若 $u$ 连续且对每点的圆周都有平均值性质，则 $u$ 调和**——**连续性不能省**：只有平均值等式、不假设连续性时条件会明显减弱（经典结论需要换成「两个不同半径」的版本，即 Kuran 定理，才能保证调和）。平均值性质把许多结论一次性推出：若内部某点取到最大值，其圆周平均值等于该点值、故圆周上处处等于最大值，逐次迭代可知 $u$ 在连通区域上为常数——这就是**最大值原理**。\n\n**狄利克雷问题**：给定区域 $D$ 与边界 $\\partial D$ 上的连续函数 $f$，求 $$u\\in C(\\overline D),\\qquad \\Delta u=0\\ \\text{在}\\ D\\ \\text{内},\\qquad u\\big|_{\\partial D}=f.$$ 第三个条件不是装饰：$u=\\ln|z|$ 在去心圆盘 $0<|z|<1$ 内调和，却在中心点 $z=0$ 附近对数发散、无界，不存在连续到 $\\overline D$ 的延拓。**单位圆盘是最漂亮的情形：对任意连续边界值 $f$，解存在且唯一**，解由泊松积分公式显式给出（见「泊松积分公式」节点）：存在性来自泊松核是好核、$u\\to f$；唯一性来自最大值原理（两解之差调和、边界为 $0$，故恒为 $0$）。\n\n但**一般区域上的狄利克雷问题不一定有解**，可解性取决于边界点附近的几何形态。去心圆盘 $D=\\{0<|z|<1\\}$ 是典型反例：取 $f(0)=1$、$f|_{\\{|z|=1\\}}=0$。若解 $u$ 存在，它在 $0$ 的穿孔邻域内有界且调和，由可去奇性定理（有界调和函数在孤立奇点处可被填补）可延拓为整个单位圆盘上的调和函数；而它在 $|z|=1$ 上恒为 $0$，由最大值原理只能恒为 $0$，与 $u(0)=1$ 矛盾。这正是「圆盘特殊」的对照：一般区域需要边界点「正则」（维纳判据），不规则的点（如这一处孤立边界点、以及带细长尖嘴的 Lebesgue 尖点）会让某些边界值不可达。把解算子本身对象化就得到**调和测度** $\\omega_z$：$u(z)=\\int_{\\partial D}f\\,\\mathrm d\\omega_z$，其中 $\\omega_z$ 是 $\\partial D$ 上的概率测度，且对每个可测的边界集 $E$，$z\\mapsto\\omega_z(E)$ 仍调和；圆盘情形 $\\omega_z$ 就是泊松测度。构造一般区域解的方法（Perron 方法、次调和函数（下调和函数）的上包络）与概率论中布朗运动的首出分布，是同一件事的两面。",
-    "definitionEn": "A function $u(x,y)$ with continuous second-order partial derivatives on a region $D$ is called **harmonic** if it satisfies **Laplace's equation** $$\\Delta u=\\frac{\\partial^2u}{\\partial x^2}+\\frac{\\partial^2u}{\\partial y^2}=0$$ everywhere in $D$. The link with analytic functions runs both ways: the real and imaginary parts of an analytic function $f=u+iv$ are automatically harmonic, and conversely **every harmonic function is, near each point, the real part of an analytic function** — one simply integrates its harmonic conjugate on a small disk. So harmonicity and analyticity part company only through global topology.\n\nThe word **locally** cannot be dropped. Globally the equivalence holds only on simply connected regions: if $D$ is simply connected, every harmonic $u$ on $D$ has a harmonic conjugate $v$, so $f=u+iv$ is analytic on all of $D$. As soon as $D$ has a hole there may be harmonic functions without a conjugate. The standard example is $u=\\ln|z|$ on $D=\\mathbb C\\setminus\\{0\\}$: the conjugate 'candidate' is $\\arg z$, which is multivalued; a single-valued conjugate $v$ would satisfy $v_x=-u_y$, $v_y=u_x$, and integrating around the unit circle gives $$\\oint_{|z|=1}\\mathrm dv=\\int_0^{2\\pi}\\mathrm d\\theta=2\\pi\\neq0,$$ contradicting the vanishing of such integrals for single-valued functions. So $\\ln|z|$ is harmonic with no global conjugate, although on every small disk it is $\\operatorname{Re}\\ln z$.\n\nThe most useful quantitative property is the **mean value property**: if $\\overline{B(z_0,r)}\\subset D$ then $$u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+re^{i\\theta})\\,\\mathrm d\\theta,$$ the value at the centre equalling the average over the circle (and, more strongly, over the disk). Necessity follows from Green's formula. Conversely, **if $u$ is continuous and satisfies the mean value property on every circle, then $u$ is harmonic**; **continuity cannot be dropped** — with averages alone and no continuity the condition becomes much weaker (classically one needs the version with two distinct radii, Kuran's theorem). The mean value property instantly yields the **maximum principle**: at an interior maximum the circle average equals the value, hence the function is constant on that circle, and iterating gives constancy on a connected region.\n\nThe **Dirichlet problem** asks: given a region $D$ and a continuous function $f$ on its boundary $\\partial D$, find $$u\\in C(\\overline D),\\qquad \\Delta u=0\\ \\text{in}\\ D,\\qquad u\\big|_{\\partial D}=f.$$ The continuity on the closure is essential: $u=\\ln|z|$ is harmonic on the punctured disk $0<|z|<1$ but blows up logarithmically near the centre $z=0$, so it has no continuous extension to $\\overline D$. **On the unit disk the problem is always solvable and the solution is unique**: existence comes from the Poisson integral (its kernel is a good kernel, so $u\\to f$), uniqueness from the maximum principle (the difference of two solutions is harmonic with zero boundary values).\n\nOn **general domains the Dirichlet problem need not be solvable**; solvability depends on the geometry of the boundary near each point. The punctured disk $D=\\{0<|z|<1\\}$ is the classic counterexample: take $f(0)=1$ and $f\\equiv0$ on $|z|=1$. A solution $u$ would be bounded and harmonic in a punctured neighbourhood of $0$, hence by the removable singularity theorem would extend harmonically to the whole disk; vanishing on $|z|=1$, it would be identically $0$ by the maximum principle, contradicting $u(0)=1$. The boundary points that behave well are called regular, and Wiener's criterion characterizes them. Objectifying the solution operator gives **harmonic measure** $\\omega_z$: $u(z)=\\int_{\\partial D}f\\,\\mathrm d\\omega_z$, where $\\omega_z$ is a probability measure on $\\partial D$ and $z\\mapsto\\omega_z(E)$ is harmonic for every measurable boundary set $E$; on the disk $\\omega_z$ is the Poisson measure. Perron's method (upper envelopes of subharmonic functions) and the first-exit distribution of Brownian motion are two faces of the same construction.",
-    "formulas": [
-      {
-        "latex": "\\Delta u=\\frac{\\partial^{2}u}{\\partial x^{2}}+\\frac{\\partial^{2}u}{\\partial y^{2}}=0",
-        "note": "调和函数的定义方程（拉普拉斯方程）；$C^2$ 解在区域内部自动实解析。",
-        "noteEn": "Laplace's equation, the defining equation of a harmonic function; $C^2$ solutions are automatically real analytic inside the region."
-      },
-      {
-        "latex": "u\\ \\text{在}\\ D\\ \\text{上调和}\\ \\Longleftrightarrow\\ \\text{每点有单连通邻域}\\ U\\ \\text{使}\\ u=\\operatorname{Re}f,\\ f\\ \\text{在}\\ U\\ \\text{上解析}",
-        "note": "「局部是解析函数的实部」：$D$ 单连通时「局部」可升级为整体（$f=u+iv$ 在 $D$ 上解析）。",
-        "noteEn": "Locally the real part of an analytic function; if $D$ is simply connected the local statement upgrades to a global one."
-      },
-      {
-        "latex": "u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+re^{i\\theta})\\,\\mathrm{d}\\theta\\qquad(\\overline{B(z_0,r)}\\subset D)",
-        "note": "平均值性质：必要性由格林公式给出；逆向要假设 $u$ 连续。",
-        "noteEn": "The mean value property; necessity comes from Green's formula, while the converse requires continuity of $u$."
-      },
-      {
-        "latex": "u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{1-r^{2}}{1-2r\\cos(\\theta-t)+r^{2}}f(e^{it})\\,\\mathrm{d}t",
-        "note": "单位圆盘上狄利克雷问题的解（泊松积分）；对任意连续边界值 $f$ 给出唯一的调和解。",
-        "noteEn": "The solution of the Dirichlet problem on the unit disk (Poisson integral), unique for any continuous boundary datum $f$."
-      },
-      {
-        "latex": "u(z)=\\int_{\\partial D}f(\\zeta)\\,\\mathrm{d}\\omega_{z}(\\zeta),\\qquad \\mathrm{d}\\omega_{z}=\\frac{1}{2\\pi}P_r(\\theta-t)\\,\\mathrm{d}t\\ \\ (D=\\Delta)",
-        "note": "调和测度：把「解算子」本身当作研究对象；圆盘情形它就是泊松测度，一般区域由 Perron 方法与维纳判据刻画。",
-        "noteEn": "Harmonic measure makes the solution operator itself the object; on the disk it is the Poisson measure, on general domains it is governed by Perron's method and Wiener's criterion."
-      }
-    ],
-    "properties": [
-      "调和函数在区域内部实解析（无穷可微），满足平均值性质；「局部是解析函数的实部」是它最常用的等价刻画。",
-      "平均值性质与调和性等价，但逆向必须假设 $u$ 连续（去掉连续性后条件显著减弱，需要「两个半径」的版本）。",
-      "调和函数在局部一致收敛下封闭：调和函数列若在紧子集上一致收敛，极限仍调和（局部一致极限可进入泊松积分号）。",
-      "调和函数的内部极值不存在（最大值原理）：非常数调和函数的最大值与最小值只能出现在边界，由此得比较原理与狄利克雷问题解的唯一性。",
-      "调和 $\\iff$ 局部解析实部：单连通区域上整体成立；非单连通区域上可能没有共轭（$u=\\ln|z|$ 在 $\\mathbb C\\setminus\\{0\\}$ 上）。",
-      "狄利克雷问题在单位圆盘上对任意连续边界值可解且唯一（泊松积分），在一般区域上未必可解，可解性由边界点的正则性（维纳判据）决定。"
-    ],
-    "propertiesEn": [
-      "Harmonic functions are real analytic in the interior and satisfy the mean value property; 'locally a real part of an analytic function' is the most useful characterization.",
-      "The mean value property is equivalent to harmonicity, but the converse requires continuity of $u$; dropping it weakens the condition considerably (a two-radius version is then needed).",
-      "Harmonicity is closed under local uniform convergence: a locally uniformly convergent sequence of harmonic functions has a harmonic limit (the limit may be taken inside the Poisson integral).",
-      "No interior extrema (maximum principle): a non-constant harmonic function attains its maximum and minimum only on the boundary, giving comparison and uniqueness for the Dirichlet problem.",
-      "Harmonic if and only if locally the real part of an analytic function: true globally on simply connected regions, while on non-simply-connected ones a conjugate may fail to exist ($u=\\ln|z|$ on $\\mathbb C\\setminus\\{0\\}$).",
-      "The Dirichlet problem is always solvable and unique on the unit disk (Poisson integral), but not always on general domains; solvability is decided by the regularity of boundary points (Wiener's criterion)."
-    ],
-    "plot": {
-      "type": "contour",
-      "expr": "x^2 - y^2",
-      "xRange": [
-        -1.15,
-        1.15
-      ],
-      "yRange": [
-        -1.15,
-        1.15
-      ],
-      "levels": 12,
-      "title": "单位圆盘上的调和函数 u = x² − y²：等值线是两族双曲线（含退化线 y = ±x）；边界值 u|∂Δ = cos 2t 唯一决定内部"
-    },
-    "examples": [
-      {
-        "problem": "验证 $u(x,y)=x^2-y^2$ 在单位圆盘 $\\Delta$ 上调和，给出它对应的狄利克雷问题的边界值，并说明为什么它就是该问题的解。",
-        "solution": "算二阶偏导：$u_{xx}=2$，$u_{yy}=-2$，故 $$\\Delta u=u_{xx}+u_{yy}=2-2=0,$$ $u$ 在 $\\Delta$ 上（其实在整个平面）调和。\n\n在边界 $z=e^{it}$ 上（即 $x=\\cos t,\\ y=\\sin t$）：$$f(e^{it})=u(e^{it})=\\cos^{2}t-\\sin^{2}t=\\cos 2t.$$ 由最大值原理，边界值 $f$ 的狄利克雷问题在 $\\Delta$ 上至多只有一个解，而 $u$ 在闭圆盘上连续、内部调和、边界上等于 $f$，所以 $u$ 就是那个唯一解。用泊松积分核对：$f(e^{it})=\\operatorname{Re}e^{2it}$，而 $$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)e^{2it}\\,\\mathrm dt=r^{2}e^{2i\\theta},$$ 取实部得 $r^{2}\\cos2\\theta=x^{2}-y^{2}$，与 $u$ 一致。"
-      },
-      {
-        "problem": "说明狄利克雷问题在去心圆盘 $D=\\{0<|z|<1\\}$ 上可以「无解」：取边界值 $f(0)=1$、$f|_{\\{|z|=1\\}}=0$（边界为圆周加上孤立点 $0$），证明不存在满足要求的解。",
-        "solution": "反设存在解 $u$：$u$ 在 $D$ 内调和、在 $\\overline D$ 上连续、边界取值如上。\n\n在 $0<|z|<\\delta$ 上 $u$ 有界且调和，由可去奇性定理（有界调和函数在孤立奇点处可延拓）存在以 $0$ 为心的圆盘上的调和函数 $\\tilde u$，满足 $\\tilde u=u$ 于 $D$ 上。于是 $\\tilde u$ 在 $|z|<1$ 内调和、在 $|z|\\le1$ 上连续，且 $\\tilde u|_{\\{|z|=1\\}}=0$。由最大值原理 $\\tilde u\\equiv0$，于是 $1=f(0)=u(0)=\\tilde u(0)=0$，矛盾。\n\n结论：这一段边界值没有对应的解。原因是点 $0$ 对区域 $D$ 而言是非正则边界点；这也正说明「任意连续边界值都有解」是单位圆盘等特殊区域的福利，而不是一般规律。"
-      }
-    ],
-    "tags": [
-      "调和函数",
-      "狄利克雷问题",
-      "平均值性质",
-      "调和测度",
-      "可去奇性"
-    ],
-    "links": [
-      "harmonic-function",
-      "laplace-equation",
-      "poisson-integral",
-      "maximum-principle",
-      "dirichlet-neumann",
-      "riemann-mapping-theorem"
-    ]
+ {
+  "id": "harmonic-dirichlet-problem",
+  "title": "调和函数与狄利克雷问题",
+  "titleEn": "Harmonic Functions and the Dirichlet Problem",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "调和函数是满足 $\\Delta u=0$ 的 $C^2$ 函数，等价刻画是「在每一点的某个邻域内是解析函数的实部」；给定边界值求内部解就是狄利克雷问题——在单位圆盘上由泊松积分给出唯一解，在一般区域上却未必可解。",
+  "summaryEn": "Harmonic functions are the $C^2$ solutions of $\\Delta u=0$, characterized locally as real parts of analytic functions. Asking for a harmonic function with prescribed boundary values is the Dirichlet problem: uniquely solvable on the unit disk by the Poisson integral, but not solvable on general domains.",
+  "definition": "设 $u(x,y)$ 在区域 $D$ 内有二阶连续偏导数，且处处满足**拉普拉斯方程** $$\\Delta u=\\frac{\\partial^2u}{\\partial x^2}+\\frac{\\partial^2u}{\\partial y^2}=0,$$ 就称 $u$ 是 $D$ 上的**调和函数**。这一节从复分析的角度看它，与偏微分方程分支的拉普拉斯方程节点互补。调和函数与解析函数的联系是双向的：解析函数 $f=u+iv$ 的实部与虚部都自动调和（把柯西-黎曼方程再求一次偏导即可）；反过来，**调和函数在每一点的某个单连通邻域内必是某个解析函数的实部**——只需在这个小圆盘上把共轭调和函数积分出来。所以「调和」与「解析」只在全局拓扑上才分道扬镳。\n\n这里**「局部」两个字不能省**。整体结论只在单连通区域上成立：$D$ 单连通时每个调和函数都有共轭调和函数 $v$，使 $f=u+iv$ 在 $D$ 上解析。一旦 $D$ 有洞，就可能出现「没有共轭」的调和函数。标准例子是 $D=\\mathbb C\\setminus\\{0\\}$ 上的 $u=\\ln|z|$：它处处调和，共轭的「候选人」是辐角 $\\arg z$，而 $\\arg z$ 多值。若真有单值共轭 $v$，则由柯西-黎曼方程 $v_x=-u_y=\\dfrac{-y}{x^2+y^2}$、$v_y=u_x=\\dfrac{x}{x^2+y^2}$ 沿单位圆积分得 $$\\oint_{|z|=1}\\mathrm dv=\\int_0^{2\\pi}\\mathrm d\\theta=2\\pi\\neq0,$$ 与「单值函数的闭路积分为 $0$」矛盾。于是 $\\ln|z|$ 调和却没有整体共轭；而在任一小圆盘内它都是 $\\operatorname{Re}\\ln z$。\n\n调和函数最有用的定量性质是**平均值性质**：若闭圆盘 $\\overline{B(z_0,r)}\\subset D$，则 $$u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+re^{i\\theta})\\,\\mathrm d\\theta,$$ 中心值等于圆周上的平均值（更强地还等于圆盘上的面积平均）。必要性由格林公式给出；反过来，**若 $u$ 连续且对每点的圆周都有平均值性质，则 $u$ 调和**——**连续性不能省**：只有平均值等式、不假设连续性时条件会明显减弱（经典结论需要换成「两个不同半径」的版本，即 Kuran 定理，才能保证调和）。平均值性质把许多结论一次性推出：若内部某点取到最大值，其圆周平均值等于该点值、故圆周上处处等于最大值，逐次迭代可知 $u$ 在连通区域上为常数——这就是**最大值原理**。\n\n**狄利克雷问题**：给定区域 $D$ 与边界 $\\partial D$ 上的连续函数 $f$，求 $$u\\in C(\\overline D),\\qquad \\Delta u=0\\ \\text{在}\\ D\\ \\text{内},\\qquad u\\big|_{\\partial D}=f.$$ 第三个条件不是装饰：$u=\\ln|z|$ 在去心圆盘 $0<|z|<1$ 内调和，却在中心点 $z=0$ 附近对数发散、无界，不存在连续到 $\\overline D$ 的延拓。**单位圆盘是最漂亮的情形：对任意连续边界值 $f$，解存在且唯一**，解由泊松积分公式显式给出（见「泊松积分公式」节点）：存在性来自泊松核是好核、$u\\to f$；唯一性来自最大值原理（两解之差调和、边界为 $0$，故恒为 $0$）。\n\n但**一般区域上的狄利克雷问题不一定有解**，可解性取决于边界点附近的几何形态。去心圆盘 $D=\\{0<|z|<1\\}$ 是典型反例：取 $f(0)=1$、$f|_{\\{|z|=1\\}}=0$。若解 $u$ 存在，它在 $0$ 的穿孔邻域内有界且调和，由可去奇性定理（有界调和函数在孤立奇点处可被填补）可延拓为整个单位圆盘上的调和函数；而它在 $|z|=1$ 上恒为 $0$，由最大值原理只能恒为 $0$，与 $u(0)=1$ 矛盾。这正是「圆盘特殊」的对照：一般区域需要边界点「正则」（维纳判据），不规则的点（如这一处孤立边界点、以及带细长尖嘴的 Lebesgue 尖点）会让某些边界值不可达。把解算子本身对象化就得到**调和测度** $\\omega_z$：$u(z)=\\int_{\\partial D}f\\,\\mathrm d\\omega_z$，其中 $\\omega_z$ 是 $\\partial D$ 上的概率测度，且对每个可测的边界集 $E$，$z\\mapsto\\omega_z(E)$ 仍调和；圆盘情形 $\\omega_z$ 就是泊松测度。构造一般区域解的方法（Perron 方法、次调和函数（下调和函数）的上包络）与概率论中布朗运动的首出分布，是同一件事的两面。",
+  "definitionEn": "A function $u(x,y)$ with continuous second-order partial derivatives on a region $D$ is called **harmonic** if it satisfies **Laplace's equation** $$\\Delta u=\\frac{\\partial^2u}{\\partial x^2}+\\frac{\\partial^2u}{\\partial y^2}=0$$ everywhere in $D$. The link with analytic functions runs both ways: the real and imaginary parts of an analytic function $f=u+iv$ are automatically harmonic, and conversely **every harmonic function is, near each point, the real part of an analytic function** — one simply integrates its harmonic conjugate on a small disk. So harmonicity and analyticity part company only through global topology.\n\nThe word **locally** cannot be dropped. Globally the equivalence holds only on simply connected regions: if $D$ is simply connected, every harmonic $u$ on $D$ has a harmonic conjugate $v$, so $f=u+iv$ is analytic on all of $D$. As soon as $D$ has a hole there may be harmonic functions without a conjugate. The standard example is $u=\\ln|z|$ on $D=\\mathbb C\\setminus\\{0\\}$: the conjugate 'candidate' is $\\arg z$, which is multivalued; a single-valued conjugate $v$ would satisfy $v_x=-u_y$, $v_y=u_x$, and integrating around the unit circle gives $$\\oint_{|z|=1}\\mathrm dv=\\int_0^{2\\pi}\\mathrm d\\theta=2\\pi\\neq0,$$ contradicting the vanishing of such integrals for single-valued functions. So $\\ln|z|$ is harmonic with no global conjugate, although on every small disk it is $\\operatorname{Re}\\ln z$.\n\nThe most useful quantitative property is the **mean value property**: if $\\overline{B(z_0,r)}\\subset D$ then $$u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+re^{i\\theta})\\,\\mathrm d\\theta,$$ the value at the centre equalling the average over the circle (and, more strongly, over the disk). Necessity follows from Green's formula. Conversely, **if $u$ is continuous and satisfies the mean value property on every circle, then $u$ is harmonic**; **continuity cannot be dropped** — with averages alone and no continuity the condition becomes much weaker (classically one needs the version with two distinct radii, Kuran's theorem). The mean value property instantly yields the **maximum principle**: at an interior maximum the circle average equals the value, hence the function is constant on that circle, and iterating gives constancy on a connected region.\n\nThe **Dirichlet problem** asks: given a region $D$ and a continuous function $f$ on its boundary $\\partial D$, find $$u\\in C(\\overline D),\\qquad \\Delta u=0\\ \\text{in}\\ D,\\qquad u\\big|_{\\partial D}=f.$$ The continuity on the closure is essential: $u=\\ln|z|$ is harmonic on the punctured disk $0<|z|<1$ but blows up logarithmically near the centre $z=0$, so it has no continuous extension to $\\overline D$. **On the unit disk the problem is always solvable and the solution is unique**: existence comes from the Poisson integral (its kernel is a good kernel, so $u\\to f$), uniqueness from the maximum principle (the difference of two solutions is harmonic with zero boundary values).\n\nOn **general domains the Dirichlet problem need not be solvable**; solvability depends on the geometry of the boundary near each point. The punctured disk $D=\\{0<|z|<1\\}$ is the classic counterexample: take $f(0)=1$ and $f\\equiv0$ on $|z|=1$. A solution $u$ would be bounded and harmonic in a punctured neighbourhood of $0$, hence by the removable singularity theorem would extend harmonically to the whole disk; vanishing on $|z|=1$, it would be identically $0$ by the maximum principle, contradicting $u(0)=1$. The boundary points that behave well are called regular, and Wiener's criterion characterizes them. Objectifying the solution operator gives **harmonic measure** $\\omega_z$: $u(z)=\\int_{\\partial D}f\\,\\mathrm d\\omega_z$, where $\\omega_z$ is a probability measure on $\\partial D$ and $z\\mapsto\\omega_z(E)$ is harmonic for every measurable boundary set $E$; on the disk $\\omega_z$ is the Poisson measure. Perron's method (upper envelopes of subharmonic functions) and the first-exit distribution of Brownian motion are two faces of the same construction.",
+  "formulas": [
+   {
+    "latex": "\\Delta u=\\frac{\\partial^{2}u}{\\partial x^{2}}+\\frac{\\partial^{2}u}{\\partial y^{2}}=0",
+    "note": "调和函数的定义方程（拉普拉斯方程）；$C^2$ 解在区域内部自动实解析。",
+    "noteEn": "Laplace's equation, the defining equation of a harmonic function; $C^2$ solutions are automatically real analytic inside the region."
+   },
+   {
+    "latex": "u\\ \\text{在}\\ D\\ \\text{上调和}\\ \\Longleftrightarrow\\ \\text{每点有单连通邻域}\\ U\\ \\text{使}\\ u=\\operatorname{Re}f,\\ f\\ \\text{在}\\ U\\ \\text{上解析}",
+    "note": "「局部是解析函数的实部」：$D$ 单连通时「局部」可升级为整体（$f=u+iv$ 在 $D$ 上解析）。",
+    "noteEn": "Locally the real part of an analytic function; if $D$ is simply connected the local statement upgrades to a global one."
+   },
+   {
+    "latex": "u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+re^{i\\theta})\\,\\mathrm{d}\\theta\\qquad(\\overline{B(z_0,r)}\\subset D)",
+    "note": "平均值性质：必要性由格林公式给出；逆向要假设 $u$ 连续。",
+    "noteEn": "The mean value property; necessity comes from Green's formula, while the converse requires continuity of $u$."
+   },
+   {
+    "latex": "u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{1-r^{2}}{1-2r\\cos(\\theta-t)+r^{2}}f(e^{it})\\,\\mathrm{d}t",
+    "note": "单位圆盘上狄利克雷问题的解（泊松积分）；对任意连续边界值 $f$ 给出唯一的调和解。",
+    "noteEn": "The solution of the Dirichlet problem on the unit disk (Poisson integral), unique for any continuous boundary datum $f$."
+   },
+   {
+    "latex": "u(z)=\\int_{\\partial D}f(\\zeta)\\,\\mathrm{d}\\omega_{z}(\\zeta),\\qquad \\mathrm{d}\\omega_{z}=\\frac{1}{2\\pi}P_r(\\theta-t)\\,\\mathrm{d}t\\ \\ (D=\\Delta)",
+    "note": "调和测度：把「解算子」本身当作研究对象；圆盘情形它就是泊松测度，一般区域由 Perron 方法与维纳判据刻画。",
+    "noteEn": "Harmonic measure makes the solution operator itself the object; on the disk it is the Poisson measure, on general domains it is governed by Perron's method and Wiener's criterion."
+   }
+  ],
+  "properties": [
+   "调和函数在区域内部实解析（无穷可微），满足平均值性质；「局部是解析函数的实部」是它最常用的等价刻画。",
+   "平均值性质与调和性等价，但逆向必须假设 $u$ 连续（去掉连续性后条件显著减弱，需要「两个半径」的版本）。",
+   "调和函数在局部一致收敛下封闭：调和函数列若在紧子集上一致收敛，极限仍调和（局部一致极限可进入泊松积分号）。",
+   "调和函数的内部极值不存在（最大值原理）：非常数调和函数在区域内部不能取得最大值或最小值；若 $D$ 有界且 $u\\in C(\\overline D)$，则最值在边界取得。由此得比较原理与狄利克雷问题解的唯一性。",
+   "调和 $\\iff$ 局部解析实部：单连通区域上整体成立；非单连通区域上可能没有共轭（$u=\\ln|z|$ 在 $\\mathbb C\\setminus\\{0\\}$ 上）。",
+   "狄利克雷问题在单位圆盘上对任意连续边界值可解且唯一（泊松积分），在一般区域上未必可解，可解性由边界点的正则性（维纳判据）决定。"
+  ],
+  "propertiesEn": [
+   "Harmonic functions are real analytic in the interior and satisfy the mean value property; 'locally a real part of an analytic function' is the most useful characterization.",
+   "The mean value property is equivalent to harmonicity, but the converse requires continuity of $u$; dropping it weakens the condition considerably (a two-radius version is then needed).",
+   "Harmonicity is closed under local uniform convergence: a locally uniformly convergent sequence of harmonic functions has a harmonic limit (the limit may be taken inside the Poisson integral).",
+   "No interior extrema (maximum principle): a non-constant harmonic function attains its maximum and minimum only on the boundary, giving comparison and uniqueness for the Dirichlet problem.",
+   "Harmonic if and only if locally the real part of an analytic function: true globally on simply connected regions, while on non-simply-connected ones a conjugate may fail to exist ($u=\\ln|z|$ on $\\mathbb C\\setminus\\{0\\}$).",
+   "The Dirichlet problem is always solvable and unique on the unit disk (Poisson integral), but not always on general domains; solvability is decided by the regularity of boundary points (Wiener's criterion)."
+  ],
+  "plot": {
+   "type": "contour",
+   "expr": "x^2 - y^2",
+   "xRange": [
+    -1.15,
+    1.15
+   ],
+   "yRange": [
+    -1.15,
+    1.15
+   ],
+   "levels": 12,
+   "title": "单位圆盘上的调和函数 u = x² − y²：等值线是两族双曲线（含退化线 y = ±x）；边界值 u|∂Δ = cos 2t 唯一决定内部"
   },
-  {
-    "id": "poisson-integral",
-    "title": "泊松积分公式",
-    "titleEn": "The Poisson Integral Formula",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "泊松积分公式用泊松核 $P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}}$ 把单位圆周上的连续边界值「卷积」成圆盘内的调和函数；$P_r$ 是正的好核，$r\\to1^{-}$ 时 $u$ 连续地取到边界值，故它正是圆盘上狄利克雷问题的显式解。",
-    "summaryEn": "The Poisson integral convolves continuous boundary data on the unit circle with the Poisson kernel $P_r(\\varphi)=(1-r^{2})/(1-2r\\cos\\varphi+r^{2})$ into a harmonic function on the disk; the kernel is positive and becomes an approximate identity as $r\\to1^{-}$, so the formula is the explicit solution of the Dirichlet problem on the disk.",
-    "definition": "设 $f$ 是单位圆周上给定的连续函数，$z=re^{i\\theta}$（$0\\le r<1$）。**泊松积分公式**是 $$u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)f(e^{it})\\,\\mathrm dt,\\qquad P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}},$$ 其中 $P_r$ 称为**泊松核**。因为 $1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$，公式还有整齐的复形式 $$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{1-|z|^{2}}{|e^{it}-z|^{2}}f(e^{it})\\,\\mathrm dt .$$ 直观上这是一个加权平均：权重 $P_r(\\theta-t)$ 在 $t=\\theta$ 处最大，$r$ 越接近 $1$ 权重越集中在 $t=\\theta$ 附近。边界值因此「越靠越准」地决定内部值，而圆盘内每一点的权重总和恒为 $1$。\n\n三条初等性质让整个机制运转。（1）**正性**：分子 $1-r^{2}>0$，分母 $1-2r\\cos\\varphi+r^{2}=(1-r)^{2}+2r(1-\\cos\\varphi)\\ge(1-r)^{2}>0$，故 $P_r>0$。（2）**归一化**：泊松核有傅里叶展开 $$P_r(\\varphi)=\\sum_{n\\in\\mathbb Z}r^{|n|}e^{in\\varphi}\\qquad(0\\le r<1),$$ 逐项积分（$n\\neq0$ 的项积分为 $0$，$n=0$ 项为 $1$）得 $$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm d\\varphi=1;$$ 这正是「$f\\equiv1$ 时 $u\\equiv1$」。（3）**质量集中**：对每个 $\\delta\\in(0,\\pi]$，$\\sup_{\\delta\\le|\\varphi|\\le\\pi}P_r(\\varphi)=P_r(\\delta)\\to0\\ (r\\to1^{-})$，即 $P_r$ 是**近似恒等核（好核）**。\n\n由这三条即可证明边界行为。先写成 $$u(re^{i\\theta})-f(e^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)\\big[f(e^{it})-f(e^{i\\theta})\\big]\\,\\mathrm dt .$$ 给 $\\varepsilon>0$，由 $f$ 在圆上的（一致）连续性取 $\\delta>0$ 使 $|t-\\theta|<\\delta$ 时 $|f(e^{it})-f(e^{i\\theta})|<\\varepsilon$：这一段的积分被归一化与正性控制在 $\\varepsilon$ 以内，$|t-\\theta|\\ge\\delta$ 的部分被 $\\sup P_r\\to0$ 控制。于是 $r\\to1^{-}$ 时 $u(re^{i\\theta})\\to f(e^{i\\theta})$，且当 $f$ 连续时收敛是一致收敛。所以**泊松积分给出单位圆盘上狄利克雷问题的解**（唯一性由最大值原理，$|u|\\le\\max|f|$ 还给出了稳定性）。若 $f$ 只在某点连续，则收敛只在该点成立——这是调和测度理论中可积边界值情形的雏形。\n\n与柯西积分公式的关系很漂亮：对 $|z|<1$、$\\zeta=e^{it}$ 有 $$\\frac{\\zeta+z}{\\zeta-z}=P_r(\\theta-t)+iQ_r(\\theta-t),\\qquad Q_r(\\varphi)=\\frac{2r\\sin\\varphi}{1-2r\\cos\\varphi+r^{2}},$$ 其中 $Q_r$ 叫**共轭泊松核**。也就是说，泊松核正是柯西核的实部（施瓦茨核）。若 $f$ 是闭圆盘上解析函数的边界值，把柯西积分公式对 $\\zeta-z$ 与 $\\zeta-1/\\bar z$ 两式相减，取实部立刻得到泊松公式：**解析函数实部的边界值经泊松核复现**。虚部则给出共轭调和函数，$$v(z)-v(0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}Q_r(\\theta-t)f(e^{it})\\,\\mathrm dt\\qquad(f\\ \\text{实值}),$$ 注意 $Q_r$ 是奇函数且 $(1/2\\pi)\\int_0^{2\\pi}Q_r=0$，所以它只能把 $v$ 定到相差一个常数。最后，泊松核是单位圆盘格林函数沿边界外法向导数的相反数，故公式 $u(z)=-\\int_{\\partial D}f\\,\\partial_\\nu G\\,\\mathrm ds$ 在圆盘上就是它；同样的构造给出上半平面的核 $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$。",
-    "definitionEn": "Let $f$ be a given continuous function on the unit circle and put $z=re^{i\\theta}$ with $0\\le r<1$. The **Poisson integral formula** reads $$u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)f(e^{it})\\,\\mathrm dt,\\qquad P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}},$$ where $P_r$ is the **Poisson kernel**. Since $1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$, the formula also takes the compact complex form $$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{1-|z|^{2}}{|e^{it}-z|^{2}}f(e^{it})\\,\\mathrm dt .$$ Intuitively $u$ is a weighted average of the boundary values with weights peaking at $t=\\theta$ and concentrating more and more as $r\\to1^{-}$, while the total weight is always $1$.\n\nThree elementary facts make the machine work. (1) **Positivity**: the numerator $1-r^{2}$ is positive and the denominator equals $(1-r)^{2}+2r(1-\\cos\\varphi)\\ge(1-r)^{2}>0$, so $P_r>0$. (2) **Normalisation**: the Fourier expansion $$P_r(\\varphi)=\\sum_{n\\in\\mathbb Z}r^{|n|}e^{in\\varphi}\\qquad(0\\le r<1)$$ gives, term by term, $$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm d\\varphi=1;$$ this is the statement that $u\\equiv1$ when $f\\equiv1$. (3) **Concentration**: for every $\\delta\\in(0,\\pi]$, $\\sup_{\\delta\\le|\\varphi|\\le\\pi}P_r(\\varphi)=P_r(\\delta)\\to0$ as $r\\to1^{-}$, so $P_r$ is an **approximate identity (good kernel)**.\n\nThese three facts prove the boundary behaviour. Writing $$u(re^{i\\theta})-f(e^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)\\big[f(e^{it})-f(e^{i\\theta})\\big]\\,\\mathrm dt,$$ we split the integral where $|t-\\theta|<\\delta$ (controlled by uniform continuity and normalisation) and where it is $\\ge\\delta$ (controlled by $P_r(\\delta)\\to0$). Hence $u(re^{i\\theta})\\to f(e^{i\\theta})$ as $r\\to1^{-}$, uniformly when $f$ is continuous on the whole circle. So **the Poisson integral solves the Dirichlet problem on the unit disk**, uniqueness following from the maximum principle, while $|u|\\le\\max|f|$ gives stability. If $f$ is continuous only at one point, convergence holds only there — the germ of the integrable-boundary-data theory of harmonic measure.\n\nThe relation with Cauchy's integral formula is elegant: for $|z|<1$ and $\\zeta=e^{it}$, $$\\frac{\\zeta+z}{\\zeta-z}=P_r(\\theta-t)+iQ_r(\\theta-t),\\qquad Q_r(\\varphi)=\\frac{2r\\sin\\varphi}{1-2r\\cos\\varphi+r^{2}},$$ the **conjugate Poisson kernel** appearing in the imaginary part. Thus the Poisson kernel is exactly the real part of the Cauchy (Schwarz) kernel. If $f$ is the boundary value of a function analytic on the closed disk, subtracting Cauchy's formula for $\\zeta-z$ and for $\\zeta-1/\\bar z$ and taking real parts yields the Poisson formula: the boundary values of the real part are reproduced by the Poisson kernel. The imaginary part gives the harmonic conjugate, $$v(z)-v(0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}Q_r(\\theta-t)f(e^{it})\\,\\mathrm dt\\qquad(f\\ \\text{real valued}),$$ and since $Q_r$ is odd with vanishing average, $v$ is determined only up to an additive constant. Finally, the Poisson kernel is minus the outward normal derivative of the Green function of the disk, so the formula is the explicit form of $u(z)=-\\int_{\\partial D}f\\,\\partial_\\nu G\\,\\mathrm ds$; the same construction yields the upper half-plane kernel $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$.",
-    "formulas": [
-      {
-        "latex": "P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}},\\qquad P_r(\\theta-t)=\\frac{1-|z|^{2}}{|e^{it}-z|^{2}}\\quad(z=re^{i\\theta})",
-        "note": "泊松核的两种写法（分母 $=1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$）。",
-        "noteEn": "Two forms of the Poisson kernel; the denominator equals $1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$."
-      },
-      {
-        "latex": "u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)\\,f(e^{it})\\,\\mathrm{d}t",
-        "note": "泊松积分公式：以 $f$ 为边界值的圆盘内调和函数（$0\\le r<1$，$f$ 连续）。",
-        "noteEn": "The Poisson integral: the harmonic function in the disk with boundary values $f$ ($0\\le r<1$, $f$ continuous)."
-      },
-      {
-        "latex": "P_r(\\varphi)>0,\\qquad \\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm{d}\\varphi=1",
-        "note": "正性与归一化：$u$ 是真正的加权平均（$f\\equiv1$ 时 $u\\equiv1$）。",
-        "noteEn": "Positivity and normalisation: $u$ is a genuine weighted average ($u\\equiv1$ when $f\\equiv1$)."
-      },
-      {
-        "latex": "P_r(\\varphi)=\\sum_{n\\in\\mathbb Z}r^{|n|}e^{in\\varphi},\\qquad u(re^{i\\theta})=\\sum_{n\\in\\mathbb Z}c_n\\,r^{|n|}e^{in\\theta}",
-        "note": "傅里叶/阿贝尔求和读法（$c_n$ 为 $f$ 的傅里叶系数）：调和函数就是边界傅里叶级数的阿贝尔平均。",
-        "noteEn": "Fourier/Abel-summation reading ($c_n$ the Fourier coefficients of $f$): harmonic functions are Abel means of boundary Fourier series."
-      },
-      {
-        "latex": "\\frac{\\zeta+z}{\\zeta-z}=P_r(\\theta-t)+i\\,Q_r(\\theta-t),\\qquad Q_r(\\varphi)=\\frac{2r\\sin\\varphi}{1-2r\\cos\\varphi+r^{2}}",
-        "note": "柯西核的分解（$\\zeta=e^{it}$）：实部给泊松核（求 $u$），虚部给共轭泊松核（求 $v$，相差常数）。",
-        "noteEn": "Decomposition of the Cauchy kernel ($\\zeta=e^{it}$): real part gives the Poisson kernel for $u$, imaginary part the conjugate kernel for $v$, up to a constant."
-      }
-    ],
-    "properties": [
-      "正性与归一化使 $u$ 成为边界值的加权平均：$f\\ge0$ 且 $f\\not\\equiv0$ 推出 $u>0$，$|u|\\le\\max|f|$（对边界数据的稳定性）。",
-      "对固定的 $t$，$z\\mapsto P_r(\\theta-t)$ 在圆盘内调和（它是解析函数 $(\\zeta+z)/(\\zeta-z)$ 的实部），故 $u$ 调和：$\\Delta u=\\int f\\,\\Delta P_r$ 合法地为零。",
-      "好核性质：$r\\to1^{-}$ 时 $u(re^{i\\theta})\\to f(e^{i\\theta})$，$f$ 连续时一致收敛——这就是圆盘上狄利克雷问题的存在性。",
-      "傅里叶读法：$u(re^{i\\theta})=\\sum_n c_nr^{|n|}e^{in\\theta}$，调和函数即边界傅里叶级数的阿贝尔平均；$f$ 只是可积甚至只是测度时公式仍有意义，由此得到 Herglotz 表示。",
-      "与格林函数/其他区域：$P_r$ 是圆盘格林函数外法向导数的相反数；上半平面有对应的核 $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$，构造完全相同。",
-      "泊松核的等值线是与边界圆内切于 $z=1$ 的圆族（$c$ 为等值线值时圆心 $\\frac{c}{c+1}$、半径 $\\frac{1}{c+1}$，即双曲几何中的极限圆 horocycle），越靠近边界越密集——边界值在 $z=1$ 处的点状集中由几何直接反映。"
-    ],
-    "propertiesEn": [
-      "Positivity plus normalisation make $u$ a weighted average of the boundary values: $f\\ge0$ and $f\\not\\equiv0$ imply $u>0$, and $|u|\\le\\max|f|$ gives stability in the boundary data.",
-      "For fixed $t$ the map $z\\mapsto P_r(\\theta-t)$ is harmonic in the disk (real part of the analytic function $(\\zeta+z)/(\\zeta-z)$), so $u$ is harmonic: $\\Delta u=\\int f\\,\\Delta P_r=0$ legitimately.",
-      "Approximate identity: $u(re^{i\\theta})\\to f(e^{i\\theta})$ as $r\\to1^{-}$, uniformly for continuous $f$ — this is existence for the Dirichlet problem on the disk.",
-      "Fourier reading: $u(re^{i\\theta})=\\sum_n c_nr^{|n|}e^{in\\theta}$, so harmonic functions are Abel means of boundary Fourier series; the formula still makes sense for integrable data or even measures, giving the Herglotz representation.",
-      "Green-function and other domains: $P_r$ is minus the outward normal derivative of the Green function of the disk; the half-plane analogue has kernel $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$ built in the same way.",
-      "For fixed $r$ the level curves of the kernel are circles internally tangent to the unit circle at $z=1$ (centre $\\frac{c}{c+1}$ and radius $\\frac{1}{c+1}$ for level value $c$ — the horocycles of hyperbolic geometry), clustering ever more densely towards the boundary near $z=1$."
-    ],
-    "plot": {
-      "type": "contour",
-      "expr": "(1-x^2-y^2)/(1-2*x+x^2+y^2)",
-      "xRange": [
-        -0.9,
-        0.9
-      ],
-      "yRange": [
-        -0.9,
-        0.9
-      ],
-      "levels": 14,
-      "levelRange": [
-        0,
-        5
-      ],
-      "title": "泊松核 P_r(θ) = (1−|z|²)/|1−z|² 的等值线：等值线是与边界内切于点 z = 1 的圆族（极限圆），越靠近边界越密——边界值「点状」集中于 z = 1"
-    },
-    "examples": [
-      {
-        "problem": "求以 $f(e^{it})=\\cos 2t$ 为边界值的单位圆盘上的调和函数 $u$，并验证它与逐点公式一致。",
-        "solution": "把边界值写成 $f(e^{it})=\\operatorname{Re}e^{2it}$。用泊松核的傅里叶展开 $P_r(\\varphi)=\\sum_n r^{|n|}e^{in\\varphi}$ 逐项积分（只有 $n=2$ 的项存活）：$$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)e^{2it}\\,\\mathrm dt=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\sum_n r^{|n|}e^{in(\\theta-t)}e^{2it}\\,\\mathrm dt=r^{2}e^{2i\\theta}.$$ 取实部得 $$u(re^{i\\theta})=r^{2}\\cos 2\\theta=r^{2}(\\cos^{2}\\theta-\\sin^{2}\\theta)=x^{2}-y^{2}.$$ 验证：$\\Delta(x^{2}-y^{2})=2-2=0$，且在边界 $r\\to1^{-}$ 上 $u\\to\\cos2\\theta=f(e^{i\\theta})$，$|u|\\le1$。也就是说，泊松积分把边界上的二次三角多项式「解析延拓」为同一个解析函数 $z^{2}$ 的实部。"
-      },
-      {
-        "problem": "利用归一化公式计算实积分 $\\displaystyle\\int_0^{2\\pi}\\frac{\\mathrm dt}{1-2r\\cos t+r^{2}}$（$0\\le r<1$），并给出 $r=\\frac12$ 时的值。",
-        "solution": "由归一化 $(1/2\\pi)\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm d\\varphi=1$，即 $$\\frac{1-r^{2}}{2\\pi}\\int_0^{2\\pi}\\frac{\\mathrm dt}{1-2r\\cos t+r^{2}}=1,$$ 解出 $$\\int_0^{2\\pi}\\frac{\\mathrm dt}{1-2r\\cos t+r^{2}}=\\frac{2\\pi}{1-r^{2}}.$$ 取 $r=\\frac12$：积分 $=\\frac{2\\pi}{1-1/4}=\\frac{8\\pi}{3}$。这是泊松核最常用的副产品：它说明 $P_r$ 沿圆周的积分与 $r$ 无关（恒等于 $2\\pi$），也再次印证了泊松核是一个概率密度核。"
-      }
-    ],
-    "tags": [
-      "泊松核",
-      "狄利克雷问题",
-      "好核",
-      "调和函数",
-      "傅里叶级数"
-    ],
-    "links": [
-      "harmonic-function",
-      "harmonic-dirichlet-problem",
-      "cauchy-integral-formula",
-      "maximum-principle",
-      "fourier-series",
-      "harnack-principle"
-    ]
+  "examples": [
+   {
+    "problem": "验证 $u(x,y)=x^2-y^2$ 在单位圆盘 $\\Delta$ 上调和，给出它对应的狄利克雷问题的边界值，并说明为什么它就是该问题的解。",
+    "solution": "算二阶偏导：$u_{xx}=2$，$u_{yy}=-2$，故 $$\\Delta u=u_{xx}+u_{yy}=2-2=0,$$ $u$ 在 $\\Delta$ 上（其实在整个平面）调和。\n\n在边界 $z=e^{it}$ 上（即 $x=\\cos t,\\ y=\\sin t$）：$$f(e^{it})=u(e^{it})=\\cos^{2}t-\\sin^{2}t=\\cos 2t.$$ 由最大值原理，边界值 $f$ 的狄利克雷问题在 $\\Delta$ 上至多只有一个解，而 $u$ 在闭圆盘上连续、内部调和、边界上等于 $f$，所以 $u$ 就是那个唯一解。用泊松积分核对：$f(e^{it})=\\operatorname{Re}e^{2it}$，而 $$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)e^{2it}\\,\\mathrm dt=r^{2}e^{2i\\theta},$$ 取实部得 $r^{2}\\cos2\\theta=x^{2}-y^{2}$，与 $u$ 一致。"
+   },
+   {
+    "problem": "说明狄利克雷问题在去心圆盘 $D=\\{0<|z|<1\\}$ 上可以「无解」：取边界值 $f(0)=1$、$f|_{\\{|z|=1\\}}=0$（边界为圆周加上孤立点 $0$），证明不存在满足要求的解。",
+    "solution": "反设存在解 $u$：$u$ 在 $D$ 内调和、在 $\\overline D$ 上连续、边界取值如上。\n\n在 $0<|z|<\\delta$ 上 $u$ 有界且调和，由可去奇性定理（有界调和函数在孤立奇点处可延拓）存在以 $0$ 为心的圆盘上的调和函数 $\\tilde u$，满足 $\\tilde u=u$ 于 $D$ 上。于是 $\\tilde u$ 在 $|z|<1$ 内调和、在 $|z|\\le1$ 上连续，且 $\\tilde u|_{\\{|z|=1\\}}=0$。由最大值原理 $\\tilde u\\equiv0$，于是 $1=f(0)=u(0)=\\tilde u(0)=0$，矛盾。\n\n结论：这一段边界值没有对应的解。原因是点 $0$ 对区域 $D$ 而言是非正则边界点；这也正说明「任意连续边界值都有解」是单位圆盘等特殊区域的福利，而不是一般规律。"
+   }
+  ],
+  "tags": [
+   "调和函数",
+   "狄利克雷问题",
+   "平均值性质",
+   "调和测度",
+   "可去奇性"
+  ],
+  "links": [
+   "harmonic-function",
+   "laplace-equation",
+   "poisson-integral",
+   "maximum-principle",
+   "dirichlet-neumann",
+   "riemann-mapping-theorem"
+  ]
+ },
+ {
+  "id": "poisson-integral",
+  "title": "泊松积分公式",
+  "titleEn": "The Poisson Integral Formula",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "泊松积分公式用泊松核 $P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}}$ 把单位圆周上的连续边界值「卷积」成圆盘内的调和函数；$P_r$ 是正的好核，$r\\to1^{-}$ 时 $u$ 连续地取到边界值，故它正是圆盘上狄利克雷问题的显式解。",
+  "summaryEn": "The Poisson integral convolves continuous boundary data on the unit circle with the Poisson kernel $P_r(\\varphi)=(1-r^{2})/(1-2r\\cos\\varphi+r^{2})$ into a harmonic function on the disk; the kernel is positive and becomes an approximate identity as $r\\to1^{-}$, so the formula is the explicit solution of the Dirichlet problem on the disk.",
+  "definition": "设 $f$ 是单位圆周上给定的连续函数，$z=re^{i\\theta}$（$0\\le r<1$）。**泊松积分公式**是 $$u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)f(e^{it})\\,\\mathrm dt,\\qquad P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}},$$ 其中 $P_r$ 称为**泊松核**。因为 $1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$，公式还有整齐的复形式 $$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{1-|z|^{2}}{|e^{it}-z|^{2}}f(e^{it})\\,\\mathrm dt .$$ 直观上这是一个加权平均：权重 $P_r(\\theta-t)$ 在 $t=\\theta$ 处最大，$r$ 越接近 $1$ 权重越集中在 $t=\\theta$ 附近。边界值因此「越靠越准」地决定内部值，而圆盘内每一点的权重总和恒为 $1$。\n\n三条初等性质让整个机制运转。（1）**正性**：分子 $1-r^{2}>0$，分母 $1-2r\\cos\\varphi+r^{2}=(1-r)^{2}+2r(1-\\cos\\varphi)\\ge(1-r)^{2}>0$，故 $P_r>0$。（2）**归一化**：泊松核有傅里叶展开 $$P_r(\\varphi)=\\sum_{n\\in\\mathbb Z}r^{|n|}e^{in\\varphi}\\qquad(0\\le r<1),$$ 逐项积分（$n\\neq0$ 的项积分为 $0$，$n=0$ 项为 $1$）得 $$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm d\\varphi=1;$$ 这正是「$f\\equiv1$ 时 $u\\equiv1$」。（3）**质量集中**：对每个 $\\delta\\in(0,\\pi]$，$\\sup_{\\delta\\le|\\varphi|\\le\\pi}P_r(\\varphi)=P_r(\\delta)\\to0\\ (r\\to1^{-})$，即 $P_r$ 是**近似恒等核（好核）**。\n\n由这三条即可证明边界行为。先写成 $$u(re^{i\\theta})-f(e^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)\\big[f(e^{it})-f(e^{i\\theta})\\big]\\,\\mathrm dt .$$ 给 $\\varepsilon>0$，由 $f$ 在圆上的（一致）连续性取 $\\delta>0$ 使 $|t-\\theta|<\\delta$ 时 $|f(e^{it})-f(e^{i\\theta})|<\\varepsilon$：这一段的积分被归一化与正性控制在 $\\varepsilon$ 以内，$|t-\\theta|\\ge\\delta$ 的部分被 $\\sup P_r\\to0$ 控制。于是 $r\\to1^{-}$ 时 $u(re^{i\\theta})\\to f(e^{i\\theta})$，且当 $f$ 连续时收敛是一致收敛。所以**泊松积分给出单位圆盘上狄利克雷问题的解**（唯一性由最大值原理，$|u|\\le\\max|f|$ 还给出了稳定性）。若 $f$ 只在某点连续，则收敛只在该点成立——这是调和测度理论中可积边界值情形的雏形。\n\n与柯西积分公式的关系很漂亮：对 $|z|<1$、$\\zeta=e^{it}$ 有 $$\\frac{\\zeta+z}{\\zeta-z}=P_r(\\theta-t)+iQ_r(\\theta-t),\\qquad Q_r(\\varphi)=\\frac{2r\\sin\\varphi}{1-2r\\cos\\varphi+r^{2}},$$ 其中 $Q_r$ 叫**共轭泊松核**。也就是说，泊松核正是柯西核的实部（施瓦茨核）。若 $f$ 是闭圆盘上解析函数的边界值，把柯西积分公式对 $\\zeta-z$ 与 $\\zeta-1/\\bar z$ 两式相减，取实部立刻得到泊松公式：**解析函数实部的边界值经泊松核复现**。虚部则给出共轭调和函数，$$v(z)-v(0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}Q_r(\\theta-t)f(e^{it})\\,\\mathrm dt\\qquad(f\\ \\text{实值}),$$ 注意 $Q_r$ 是奇函数且 $(1/2\\pi)\\int_0^{2\\pi}Q_r=0$，所以它只能把 $v$ 定到相差一个常数。最后，泊松核是单位圆盘格林函数沿边界外法向导数的相反数，故公式 $u(z)=-\\int_{\\partial D}f\\,\\partial_\\nu G\\,\\mathrm ds$ 在圆盘上就是它；同样的构造给出上半平面的核 $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$。",
+  "definitionEn": "Let $f$ be a given continuous function on the unit circle and put $z=re^{i\\theta}$ with $0\\le r<1$. The **Poisson integral formula** reads $$u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)f(e^{it})\\,\\mathrm dt,\\qquad P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}},$$ where $P_r$ is the **Poisson kernel**. Since $1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$, the formula also takes the compact complex form $$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{1-|z|^{2}}{|e^{it}-z|^{2}}f(e^{it})\\,\\mathrm dt .$$ Intuitively $u$ is a weighted average of the boundary values with weights peaking at $t=\\theta$ and concentrating more and more as $r\\to1^{-}$, while the total weight is always $1$.\n\nThree elementary facts make the machine work. (1) **Positivity**: the numerator $1-r^{2}$ is positive and the denominator equals $(1-r)^{2}+2r(1-\\cos\\varphi)\\ge(1-r)^{2}>0$, so $P_r>0$. (2) **Normalisation**: the Fourier expansion $$P_r(\\varphi)=\\sum_{n\\in\\mathbb Z}r^{|n|}e^{in\\varphi}\\qquad(0\\le r<1)$$ gives, term by term, $$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm d\\varphi=1;$$ this is the statement that $u\\equiv1$ when $f\\equiv1$. (3) **Concentration**: for every $\\delta\\in(0,\\pi]$, $\\sup_{\\delta\\le|\\varphi|\\le\\pi}P_r(\\varphi)=P_r(\\delta)\\to0$ as $r\\to1^{-}$, so $P_r$ is an **approximate identity (good kernel)**.\n\nThese three facts prove the boundary behaviour. Writing $$u(re^{i\\theta})-f(e^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)\\big[f(e^{it})-f(e^{i\\theta})\\big]\\,\\mathrm dt,$$ we split the integral where $|t-\\theta|<\\delta$ (controlled by uniform continuity and normalisation) and where it is $\\ge\\delta$ (controlled by $P_r(\\delta)\\to0$). Hence $u(re^{i\\theta})\\to f(e^{i\\theta})$ as $r\\to1^{-}$, uniformly when $f$ is continuous on the whole circle. So **the Poisson integral solves the Dirichlet problem on the unit disk**, uniqueness following from the maximum principle, while $|u|\\le\\max|f|$ gives stability. If $f$ is continuous only at one point, convergence holds only there — the germ of the integrable-boundary-data theory of harmonic measure.\n\nThe relation with Cauchy's integral formula is elegant: for $|z|<1$ and $\\zeta=e^{it}$, $$\\frac{\\zeta+z}{\\zeta-z}=P_r(\\theta-t)+iQ_r(\\theta-t),\\qquad Q_r(\\varphi)=\\frac{2r\\sin\\varphi}{1-2r\\cos\\varphi+r^{2}},$$ the **conjugate Poisson kernel** appearing in the imaginary part. Thus the Poisson kernel is exactly the real part of the Cauchy (Schwarz) kernel. If $f$ is the boundary value of a function analytic on the closed disk, subtracting Cauchy's formula for $\\zeta-z$ and for $\\zeta-1/\\bar z$ and taking real parts yields the Poisson formula: the boundary values of the real part are reproduced by the Poisson kernel. The imaginary part gives the harmonic conjugate, $$v(z)-v(0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}Q_r(\\theta-t)f(e^{it})\\,\\mathrm dt\\qquad(f\\ \\text{real valued}),$$ and since $Q_r$ is odd with vanishing average, $v$ is determined only up to an additive constant. Finally, the Poisson kernel is minus the outward normal derivative of the Green function of the disk, so the formula is the explicit form of $u(z)=-\\int_{\\partial D}f\\,\\partial_\\nu G\\,\\mathrm ds$; the same construction yields the upper half-plane kernel $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$.",
+  "formulas": [
+   {
+    "latex": "P_r(\\varphi)=\\frac{1-r^{2}}{1-2r\\cos\\varphi+r^{2}},\\qquad P_r(\\theta-t)=\\frac{1-|z|^{2}}{|e^{it}-z|^{2}}\\quad(z=re^{i\\theta})",
+    "note": "泊松核的两种写法（分母 $=1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$）。",
+    "noteEn": "Two forms of the Poisson kernel; the denominator equals $1-2r\\cos(\\theta-t)+r^{2}=|e^{it}-z|^{2}$."
+   },
+   {
+    "latex": "u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)\\,f(e^{it})\\,\\mathrm{d}t",
+    "note": "泊松积分公式：以 $f$ 为边界值的圆盘内调和函数（$0\\le r<1$，$f$ 连续）。",
+    "noteEn": "The Poisson integral: the harmonic function in the disk with boundary values $f$ ($0\\le r<1$, $f$ continuous)."
+   },
+   {
+    "latex": "P_r(\\varphi)>0,\\qquad \\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm{d}\\varphi=1",
+    "note": "正性与归一化：$u$ 是真正的加权平均（$f\\equiv1$ 时 $u\\equiv1$）。",
+    "noteEn": "Positivity and normalisation: $u$ is a genuine weighted average ($u\\equiv1$ when $f\\equiv1$)."
+   },
+   {
+    "latex": "P_r(\\varphi)=\\sum_{n\\in\\mathbb Z}r^{|n|}e^{in\\varphi},\\qquad u(re^{i\\theta})=\\sum_{n\\in\\mathbb Z}c_n\\,r^{|n|}e^{in\\theta}",
+    "note": "傅里叶/阿贝尔求和读法（$c_n$ 为 $f$ 的傅里叶系数）：调和函数就是边界傅里叶级数的阿贝尔平均。",
+    "noteEn": "Fourier/Abel-summation reading ($c_n$ the Fourier coefficients of $f$): harmonic functions are Abel means of boundary Fourier series."
+   },
+   {
+    "latex": "\\frac{\\zeta+z}{\\zeta-z}=P_r(\\theta-t)+i\\,Q_r(\\theta-t),\\qquad Q_r(\\varphi)=\\frac{2r\\sin\\varphi}{1-2r\\cos\\varphi+r^{2}}",
+    "note": "柯西核的分解（$\\zeta=e^{it}$）：实部给泊松核（求 $u$），虚部给共轭泊松核（求 $v$，相差常数）。",
+    "noteEn": "Decomposition of the Cauchy kernel ($\\zeta=e^{it}$): real part gives the Poisson kernel for $u$, imaginary part the conjugate kernel for $v$, up to a constant."
+   }
+  ],
+  "properties": [
+   "正性与归一化使 $u$ 成为边界值的加权平均：$f\\ge0$ 且 $f\\not\\equiv0$ 推出 $u>0$，$|u|\\le\\max|f|$（对边界数据的稳定性）。",
+   "对固定的 $t$，$z\\mapsto P_r(\\theta-t)$ 在圆盘内调和（它是解析函数 $(\\zeta+z)/(\\zeta-z)$ 的实部），故 $u$ 调和：$\\Delta u=\\int f\\,\\Delta P_r$ 合法地为零。",
+   "好核性质：$r\\to1^{-}$ 时 $u(re^{i\\theta})\\to f(e^{i\\theta})$，$f$ 连续时一致收敛——这就是圆盘上狄利克雷问题的存在性。",
+   "傅里叶读法：$u(re^{i\\theta})=\\sum_n c_nr^{|n|}e^{in\\theta}$，调和函数即边界傅里叶级数的阿贝尔平均；$f$ 只是可积甚至只是测度时公式仍有意义，由此得到 Herglotz 表示。",
+   "与格林函数/其他区域：$P_r$ 是圆盘格林函数外法向导数的相反数；上半平面有对应的核 $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$，构造完全相同。",
+   "泊松核的等值线是与边界圆内切于 $z=1$ 的圆族（$c$ 为等值线值时圆心 $\\frac{c}{c+1}$、半径 $\\frac{1}{c+1}$，即双曲几何中的极限圆 horocycle），越靠近边界越密集——边界值在 $z=1$ 处的点状集中由几何直接反映。"
+  ],
+  "propertiesEn": [
+   "Positivity plus normalisation make $u$ a weighted average of the boundary values: $f\\ge0$ and $f\\not\\equiv0$ imply $u>0$, and $|u|\\le\\max|f|$ gives stability in the boundary data.",
+   "For fixed $t$ the map $z\\mapsto P_r(\\theta-t)$ is harmonic in the disk (real part of the analytic function $(\\zeta+z)/(\\zeta-z)$), so $u$ is harmonic: $\\Delta u=\\int f\\,\\Delta P_r=0$ legitimately.",
+   "Approximate identity: $u(re^{i\\theta})\\to f(e^{i\\theta})$ as $r\\to1^{-}$, uniformly for continuous $f$ — this is existence for the Dirichlet problem on the disk.",
+   "Fourier reading: $u(re^{i\\theta})=\\sum_n c_nr^{|n|}e^{in\\theta}$, so harmonic functions are Abel means of boundary Fourier series; the formula still makes sense for integrable data or even measures, giving the Herglotz representation.",
+   "Green-function and other domains: $P_r$ is minus the outward normal derivative of the Green function of the disk; the half-plane analogue has kernel $P_y(x)=\\frac{1}{\\pi}\\frac{y}{x^{2}+y^{2}}$ built in the same way.",
+   "For fixed $r$ the level curves of the kernel are circles internally tangent to the unit circle at $z=1$ (centre $\\frac{c}{c+1}$ and radius $\\frac{1}{c+1}$ for level value $c$ — the horocycles of hyperbolic geometry), clustering ever more densely towards the boundary near $z=1$."
+  ],
+  "plot": {
+   "type": "contour",
+   "expr": "(1-x^2-y^2)/(1-2*x+x^2+y^2)",
+   "xRange": [
+    -0.9,
+    0.9
+   ],
+   "yRange": [
+    -0.9,
+    0.9
+   ],
+   "levels": 14,
+   "levelRange": [
+    0,
+    5
+   ],
+   "title": "泊松核 P_r(θ) = (1−|z|²)/|1−z|² 的等值线：等值线是与边界内切于点 z = 1 的圆族（极限圆），越靠近边界越密——边界值「点状」集中于 z = 1"
   },
-  {
-    "id": "harnack-principle",
-    "title": "哈纳克原理",
-    "titleEn": "Harnack's Principle",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "哈纳克不等式给出正调和函数在同心圆盘上的双边控制；哈纳克原理则断言：单调递增的调和函数列只要在**一点**收敛，就必在每个紧子集上一致收敛，且极限仍调和——它是调和函数紧性、Perron 方法与狄利克雷问题存在性证明的引擎。",
-    "summaryEn": "Harnack's inequality gives two-sided control of a positive harmonic function on concentric disks; Harnack's principle states that a monotone increasing sequence of harmonic functions converging at a single point converges uniformly on every compact subset to a harmonic function — the engine behind compactness, Perron's method and existence for the Dirichlet problem.",
-    "definition": "**哈纳克不等式**：设 $u>0$ 在圆盘 $|z-z_0|<R$ 内调和，则对 $|z-z_0|=r<R$ 有 $$\\frac{R-r}{R+r}\\,u(z_0)\\le u(z)\\le\\frac{R+r}{R-r}\\,u(z_0).$$ 两侧互为倒数，$r\\to0$ 时同时趋于 $u(z_0)$：这是「正调和函数在圆盘内不能剧烈振荡」的定量形式。常用的特殊情形是 $r=R/2$，给出 $$\\frac13u(z_0)\\le u(z)\\le3u(z_0).$$ 注意不等式成立的前提是 $u$ **处处为正**：正性把「零点」挡在外面，而零点附近的调和函数振荡可以任意剧烈。\n\n证明只需一件事：若 $u$ 在 $|z-z_0|<R$ 内调和且连续到圆周，用半径 $R$ 的泊松公式表示它，$$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{R^{2}-|z-z_0|^{2}}{|Re^{it}-(z-z_0)|^{2}}\\,u(z_0+Re^{it})\\,\\mathrm dt .$$ 当 $|z-z_0|=r$ 时分母满足 $(R-r)^{2}\\le|Re^{it}-(z-z_0)|^{2}\\le(R+r)^{2}$；把分母换成两端并用平均值性质 $u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+Re^{it})\\,\\mathrm dt$，立刻得到 $(R^{2}-r^{2})/(R+r)^{2}\\le u(z)/u(z_0)\\le(R^{2}-r^{2})/(R-r)^{2}$，即 $(R-r)/(R+r)\\le u(z)/u(z_0)\\le(R+r)/(R-r)$。所以哈纳克不等式不过是「泊松核被 $(1-r/R)/(1+r/R)$ 与其倒数 $(1+r/R)/(1-r/R)$ 夹住」的翻译。一般区域上，用有限个圆盘覆盖紧集 $K\\subset\\subset D$ 并把这些圆盘沿链式相邻处拼接，可得 $$\\sup_{K}u\\le C_{K,D}\\,\\inf_{K}u,$$ 常数只依赖 $K$ 在 $D$ 中的几何位置。\n\n**哈纳克原理**（也称哈纳克第二定理）：设 $u_1\\le u_2\\le\\cdots$ 是区域 $D$ 上的调和函数列（即每个 $u_{n+1}-u_n$ 调和且 $\\ge0$）。若 $\\{u_n(z_0)\\}$ 在**某一点** $z_0\\in D$ 收敛，则 $\\{u_n\\}$ 在 $D$ 的**每个紧子集上一致收敛**，并且极限 $u=\\lim_{n\\to\\infty}u_n$ 在 $D$ 上调和。\n\n证明思路很干净：$n>m$ 时 $h_{mn}=u_n-u_m\\ge0$ 是正调和函数，哈纳克不等式把它的振荡压住——对紧集 $K\\subset\\subset D$ 有常数 $C$ 使 $$\\sup_K h_{mn}\\le C\\inf_K h_{mn}\\le C\\,h_{mn}(z_0)\\to0\\qquad(m,n\\to\\infty),$$ 于是 $\\{u_n\\}$ 在 $K$ 上一致 Cauchy，从而一致收敛。极限 $u$ 连续；又因每个 $u_n$ 在任意圆盘内都等于自己的泊松积分，令 $n\\to\\infty$（局部一致收敛可以进入积分号）得 $u$ 也满足泊松积分表示，故 $u$ 调和。\n\n为什么它重要：这是「用逼近法造调和函数」的引擎。**Perron 方法**求解狄利克雷问题就靠它：取所有满足 $\\limsup_{z\\to\\zeta}w(z)\\le f(\\zeta)$（对每个边界点 $\\zeta$）的次调和函数（下调和函数）$w$，令 $u=\\sup w$，用哈纳克原理把上确界实现在某个单调列上，即证 $u$ 调和；再配以边界点的正则性判据（维纳判据）就得到可解区域的完整刻画。哈纳克不等式还给出**紧性**：正调和函数族在一点归一化（$u_n(z_0)=1$）后一致有界且等度连续（因为它提供了导数估计 $|\\nabla u(z_0)|\\le\\frac{2}{R}u(z_0)$，其中 $R$ 是到边界的距离），故可抽出一致收敛的子列，极限仍为正调和函数——这正是正常族（normal family）思想在调和函数情形的表现。极端情形也说明问题：$u(z)=\\operatorname{Re}\\frac{1+z}{1-z}=\\frac{1-|z|^{2}}{|1-z|^{2}}$ 是单位圆盘上的正调和函数，它在边界上几乎处处趋于 $0$、却在 $z=1$ 附近爆炸；所以「边界值」在正调和函数的极限中会退化为测度，**Herglotz 定理**把这一点总结为：$\\Delta$ 上全体正调和函数恰是 $\\partial\\Delta$ 上正测度的泊松积分。最后还有一个刘维尔型推论：$\\mathbb R^{2}$ 上处处为正的调和函数必为常数（在哈纳克不等式中固定 $z$ 令 $R\\to\\infty$，两侧都趋于 $1$）。",
-    "definitionEn": "**Harnack's inequality**: if $u>0$ is harmonic in the disk $|z-z_0|<R$, then for $|z-z_0|=r<R$, $$\\frac{R-r}{R+r}\\,u(z_0)\\le u(z)\\le\\frac{R+r}{R-r}\\,u(z_0).$$ The two bounds are reciprocals and both tend to $u(z_0)$ as $r\\to0$: this is the quantitative statement that a positive harmonic function cannot oscillate violently. The common special case $r=R/2$ gives $\\frac13u(z_0)\\le u(z)\\le3u(z_0)$. Positivity is essential: zeros of a harmonic function allow arbitrarily wild oscillation nearby.\n\nThe proof needs only one ingredient, the Poisson representation on the circle of radius $R$ centred at $z_0$, $$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{R^{2}-|z-z_0|^{2}}{|Re^{it}-(z-z_0)|^{2}}\\,u(z_0+Re^{it})\\,\\mathrm dt .$$ For $|z-z_0|=r$ the denominator lies between $(R-r)^{2}$ and $(R+r)^{2}$; replacing it by the two extremes and using the mean value property $u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+Re^{it})\\,\\mathrm dt$ gives exactly $(R-r)/(R+r)\\le u(z)/u(z_0)\\le(R+r)/(R-r)$. So Harnack's inequality is merely the statement that the Poisson kernel is squeezed between $(1-r/R)/(1+r/R)$ and its reciprocal $(1+r/R)/(1-r/R)$. On a general region, covering a compact set $K\\subset\\subset D$ by finitely many disks chained to a base point gives $$\\sup_{K}u\\le C_{K,D}\\,\\inf_{K}u$$ with a constant depending only on the geometry of $K$ inside $D$.\n\n**Harnack's principle** (Harnack's second theorem): let $u_1\\le u_2\\le\\cdots$ be harmonic functions on a region $D$ (equivalently, each difference $u_{n+1}-u_n$ is harmonic and $\\ge0$). If $\\{u_n(z_0)\\}$ converges at a **single point** $z_0\\in D$, then $\\{u_n\\}$ converges uniformly on every compact subset of $D$, and the limit $u$ is harmonic on $D$.\n\nThe proof is clean: for $n>m$ the difference $h_{mn}=u_n-u_m\\ge0$ is positive harmonic, and Harnack's inequality controls its oscillation — for compact $K\\subset\\subset D$ there is a constant $C$ with $$\\sup_K h_{mn}\\le C\\inf_K h_{mn}\\le C\\,h_{mn}(z_0)\\to0\\qquad(m,n\\to\\infty),$$ so $\\{u_n\\}$ is uniformly Cauchy and hence uniformly convergent on $K$. The limit is continuous, and since each $u_n$ equals its own Poisson integral on every disk, passing to the limit inside the integral shows that $u$ does too, so $u$ is harmonic.\n\nWhy it matters: this is the engine for constructing harmonic functions by approximation. **Perron's method** solves the Dirichlet problem with it: take the upper envelope $u=\\sup w$ of all subharmonic $w$ with $\\limsup_{z\\to\\zeta}w(z)\\le f(\\zeta)$ at every boundary point $\\zeta$; Harnack's principle realises the supremum on a monotone sequence and proves $u$ harmonic, and Wiener's criterion then decides which boundary points are regular. Harnack's inequality also yields **compactness**: a family of positive harmonic functions normalised by $u_n(z_0)=1$ is uniformly bounded and equicontinuous (it implies the gradient estimate $|\\nabla u(z_0)|\\le\\frac{2}{R}u(z_0)$, with $R$ the distance to the boundary), so a locally uniformly convergent subsequence exists whose limit is again positive harmonic — normal-family thinking for harmonic functions. The extreme example illustrates the limits: $u(z)=\\operatorname{Re}\\frac{1+z}{1-z}=\\frac{1-|z|^{2}}{|1-z|^{2}}$ is positive harmonic in the disk and tends to $0$ almost everywhere on the boundary while blowing up near $z=1$; hence boundary data degenerate into measures, which is exactly what **Herglotz's theorem** states: the positive harmonic functions on $\\Delta$ are precisely the Poisson integrals of positive measures on $\\partial\\Delta$. One more corollary is a Liouville-type theorem: a positive harmonic function on all of $\\mathbb R^{2}$ is constant (fix $z$ in Harnack's inequality and let $R\\to\\infty$, both bounds tend to $1$).",
-    "formulas": [
-      {
-        "latex": "\\frac{R-r}{R+r}\\,u(z_0)\\le u(z)\\le\\frac{R+r}{R-r}\\,u(z_0),\\qquad |z-z_0|=r<R,\\ u>0\\ \\text{调和}",
-        "note": "哈纳克不等式：正调和函数的双边控制，$r=R/2$ 时即 $\\frac13u(z_0)\\le u(z)\\le3u(z_0)$。",
-        "noteEn": "Harnack's inequality for positive harmonic functions; at $r=R/2$ it reads $\\frac13u(z_0)\\le u(z)\\le3u(z_0)$."
-      },
-      {
-        "latex": "u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{R^{2}-|z-z_0|^{2}}{|Re^{it}-(z-z_0)|^{2}}\\,u(z_0+Re^{it})\\,\\mathrm{d}t",
-        "note": "证明哈纳克不等式所用的泊松表示（半径 $R$ 的圆盘），分母被 $(R\\pm r)^{2}$ 夹住。",
-        "noteEn": "The Poisson representation of radius $R$ used in the proof; its denominator is trapped between $(R-r)^{2}$ and $(R+r)^{2}$."
-      },
-      {
-        "latex": "u_{n+1}\\ge u_n\\ \\text{（调和）},\\quad \\lim_{n\\to\\infty}u_n(z_0)\\ \\text{存在}\\ \\Longrightarrow\\ u_n\\ \\text{在紧子集上一致收敛到调和函数}\\ u",
-        "note": "哈纳克原理：一点收敛即可推出局部一致收敛，极限调和。",
-        "noteEn": "Harnack's principle: convergence at one point forces locally uniform convergence to a harmonic limit."
-      },
-      {
-        "latex": "\\sup_{K}u\\le C_{K,D}\\,\\inf_{K}u\\qquad(u>0\\ \\text{调和},\\ K\\subset\\subset D)",
-        "note": "一般区域上的量化形式（圆盘链式拼接）：正调和函数在紧集上彼此等价。",
-        "noteEn": "The quantitative form on a general region (chaining disks): positive harmonic functions are comparable on compact subsets."
-      },
-      {
-        "latex": "|\\nabla u(z_0)|\\le\\frac{2}{R}\\,u(z_0)\\qquad(u>0\\ \\text{在}\\ |z-z_0|<R\\ \\text{内调和})",
-        "note": "导数形式的哈纳克估计：由不等式取差商得到，给出正调和函数族的等度连续性；等号由 $u=\\operatorname{Re}\\frac{R+(z-z_0)}{R-(z-z_0)}$ 取得。",
-        "noteEn": "Harnack estimate for the gradient, obtained from the inequality by difference quotients; it yields equicontinuity, and equality holds for $u=\\operatorname{Re}\\frac{R+(z-z_0)}{R-(z-z_0)}$."
-      }
-    ],
-    "properties": [
-      "正调和函数在紧集上「等价」：存在只依赖 $K$ 与 $D$ 的常数 $C$ 使 $\\sup_Ku\\le C\\inf_Ku$，因此正调和函数不能出现与自身大小相比的剧烈振荡。",
-      "哈纳克原理：单调递增的调和函数列只要在一点收敛，就在每个紧子集上一致收敛，且极限调和；单调性是不可去掉的关键（一般调和函数列只需要局部一致有界即可用 Weierstrass 型论证）。",
-      "推论（紧性/正常族）：正的调和函数族在一点归一化后一致有界且等度连续，可抽取局部一致收敛的子列，极限仍为正调和函数（调和函数情形的 Montel 思想）。",
-      "推论（刘维尔型）：$\\mathbb R^{2}$ 上处处为正的调和函数恒为常数；有下界的调和函数同理（加常数后即为正）。",
-      "应用：Perron 方法以次调和函数（下调和函数）的上包络构造狄利克雷问题的解，其调和性正是由哈纳克原理保证；配合维纳判据得到可解区域的完整刻画（与调和测度、布朗运动首出分布一致）。"
-    ],
-    "propertiesEn": [
-      "Positive harmonic functions are comparable on compact sets: there is $C=C(K,D)$ with $\\sup_Ku\\le C\\inf_Ku$, so no violent oscillation relative to their own size can occur.",
-      "Harnack's principle: a monotone increasing sequence of harmonic functions converging at one point converges locally uniformly, with harmonic limit; monotonicity is essential (a general locally bounded harmonic sequence needs a Weierstrass-type argument instead).",
-      "Corollary (compactness/normal families): positive harmonic functions normalised at one point are uniformly bounded and equicontinuous, hence admit a locally uniformly convergent subsequence with positive harmonic limit (Montel-type thinking).",
-      "Corollary (Liouville type): a positive harmonic function on all of $\\mathbb R^{2}$ is constant; the same holds for functions bounded below (add a constant to make them positive).",
-      "Application: Perron's method builds the solution of the Dirichlet problem as an upper envelope of subharmonic functions, its harmonicity being supplied by Harnack's principle; with Wiener's criterion this characterises the solvable regions (matching harmonic measure and Brownian first-exit distributions)."
-    ],
-    "examples": [
-      {
-        "problem": "设 $u>0$ 在单位圆盘 $|z|<1$ 内调和。估计 $u\\left(\\frac12\\right)/u(0)$ 与 $u\\left(\\frac{9}{10}\\right)/u(0)$ 的取值范围。",
-        "solution": "在哈纳克不等式中取 $z_0=0$、$R=1$、$|z|=r$：$$\\frac{1-r}{1+r}\\le\\frac{u(z)}{u(0)}\\le\\frac{1+r}{1-r}.$$\n\n取 $r=\\frac12$：$\\frac{1/2}{3/2}=\\frac13\\le\\frac{u(1/2)}{u(0)}\\le3$。\n\n取 $r=\\frac{9}{10}$：$\\frac{0.1}{1.9}=\\frac{1}{19}\\approx0.0526\\le\\frac{u(0.9)}{u(0)}\\le19$。\n\n可见越靠近边界，哈纳克估计越松：界 $\\frac{1\\pm r}{1\\mp r}$ 在 $r\\to1^{-}$ 时分别趋于 $0$ 与 $\\infty$。这与「正调和函数的边界值可以是任意正测度」完全吻合——边界附近的值几乎不受圆心处取值的约束。"
-      },
-      {
-        "problem": "用哈纳克不等式证明：若 $u$ 在 $\\mathbb R^{2}$ 上处处为正且调和，则 $u$ 为常数。",
-        "solution": "固定任意 $z\\in\\mathbb R^{2}$，$z\\neq0$，设 $R>|z|$。把哈纳克不等式用在以 $0$ 为心、半径 $R$ 的圆盘上，取 $z_0=0$、$r=|z|$：$$\\frac{R-|z|}{R+|z|}\\,u(0)\\le u(z)\\le\\frac{R+|z|}{R-|z|}\\,u(0).$$ 令 $R\\to\\infty$，上下界都趋于 $u(0)$（因为 $|z|$ 固定而 $R$ 无界），故 $u(z)=u(0)$ 对一切 $z$ 成立，$u$ 为常数。\n\n这是刘维尔定理在调和函数情形的对应物：$\\mathbb R^{2}$ 上的调和函数只要有下界（加一个常数即可化为正值），就只能取常数值。"
-      },
-      {
-        "problem": "验证 $u(z)=\\operatorname{Re}\\frac{1+z}{1-z}=\\frac{1-|z|^{2}}{|1-z|^{2}}$ 是单位圆盘上的正调和函数，并说明哈纳克不等式的两个界都是**精确**的。",
-        "solution": "正性：$u=\\frac{1-|z|^{2}}{|1-z|^{2}}>0$（$|z|<1$）；调和性：它是解析函数 $\\frac{1+z}{1-z}$（在 $|z|<1$ 内解析）的实部，故调和。且 $u(0)=1$。\n\n沿实轴检查（$z=\\pm r$，$0<r<1$）：$$u(-r)=\\frac{1-r^{2}}{(1+r)^{2}}=\\frac{1-r}{1+r},\\qquad u(r)=\\frac{1-r^{2}}{(1-r)^{2}}=\\frac{1+r}{1-r}.$$ 这正是哈纳克不等式（$z_0=0$，$R=1$）的下界与上界。于是哈纳克不等式是**精确**的：任何改进都必须考虑函数的形状，而不能只依赖 $r$。\n\n这个函数在边界上几乎处处趋于 $0$、在 $z=1$ 附近爆炸，Herglotz 定理指出它的「边界值」是 $\\partial\\Delta$ 上的点测度——这也解释了为什么正调和函数族的极限不必由连续边界函数给出。"
-      }
-    ],
-    "tags": [
-      "哈纳克不等式",
-      "正调和函数",
-      "Perron 方法",
-      "紧性",
-      "Herglotz 表示"
-    ],
-    "links": [
-      "harmonic-function",
-      "maximum-principle",
-      "poisson-integral",
-      "harmonic-dirichlet-problem",
-      "liouville-theorem",
-      "normal-families"
-    ]
+  "examples": [
+   {
+    "problem": "求以 $f(e^{it})=\\cos 2t$ 为边界值的单位圆盘上的调和函数 $u$，并验证它与逐点公式一致。",
+    "solution": "把边界值写成 $f(e^{it})=\\operatorname{Re}e^{2it}$。用泊松核的傅里叶展开 $P_r(\\varphi)=\\sum_n r^{|n|}e^{in\\varphi}$ 逐项积分（只有 $n=2$ 的项存活）：$$\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-t)e^{2it}\\,\\mathrm dt=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\sum_n r^{|n|}e^{in(\\theta-t)}e^{2it}\\,\\mathrm dt=r^{2}e^{2i\\theta}.$$ 取实部得 $$u(re^{i\\theta})=r^{2}\\cos 2\\theta=r^{2}(\\cos^{2}\\theta-\\sin^{2}\\theta)=x^{2}-y^{2}.$$ 验证：$\\Delta(x^{2}-y^{2})=2-2=0$，且在边界 $r\\to1^{-}$ 上 $u\\to\\cos2\\theta=f(e^{i\\theta})$，$|u|\\le1$。也就是说，泊松积分把边界上的二次三角多项式「解析延拓」为同一个解析函数 $z^{2}$ 的实部。"
+   },
+   {
+    "problem": "利用归一化公式计算实积分 $\\displaystyle\\int_0^{2\\pi}\\frac{\\mathrm dt}{1-2r\\cos t+r^{2}}$（$0\\le r<1$），并给出 $r=\\frac12$ 时的值。",
+    "solution": "由归一化 $(1/2\\pi)\\int_0^{2\\pi}P_r(\\varphi)\\,\\mathrm d\\varphi=1$，即 $$\\frac{1-r^{2}}{2\\pi}\\int_0^{2\\pi}\\frac{\\mathrm dt}{1-2r\\cos t+r^{2}}=1,$$ 解出 $$\\int_0^{2\\pi}\\frac{\\mathrm dt}{1-2r\\cos t+r^{2}}=\\frac{2\\pi}{1-r^{2}}.$$ 取 $r=\\frac12$：积分 $=\\frac{2\\pi}{1-1/4}=\\frac{8\\pi}{3}$。这是泊松核最常用的副产品：它说明 $P_r$ 沿圆周的积分与 $r$ 无关（恒等于 $2\\pi$），也再次印证了泊松核是一个概率密度核。"
+   }
+  ],
+  "tags": [
+   "泊松核",
+   "狄利克雷问题",
+   "好核",
+   "调和函数",
+   "傅里叶级数"
+  ],
+  "links": [
+   "harmonic-function",
+   "harmonic-dirichlet-problem",
+   "cauchy-integral-formula",
+   "maximum-principle",
+   "fourier-series",
+   "harnack-principle"
+  ]
+ },
+ {
+  "id": "harnack-principle",
+  "title": "哈纳克原理",
+  "titleEn": "Harnack's Principle",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "哈纳克不等式给出正调和函数在同心圆盘上的双边控制；哈纳克原理则断言：单调递增的调和函数列只要在**一点**收敛，就必在每个紧子集上一致收敛，且极限仍调和——它是调和函数紧性、Perron 方法与狄利克雷问题存在性证明的引擎。",
+  "summaryEn": "Harnack's inequality gives two-sided control of a positive harmonic function on concentric disks; Harnack's principle states that a monotone increasing sequence of harmonic functions converging at a single point converges uniformly on every compact subset to a harmonic function — the engine behind compactness, Perron's method and existence for the Dirichlet problem.",
+  "definition": "**哈纳克不等式**：设 $u>0$ 在圆盘 $|z-z_0|<R$ 内调和，则对 $|z-z_0|=r<R$ 有 $$\\frac{R-r}{R+r}\\,u(z_0)\\le u(z)\\le\\frac{R+r}{R-r}\\,u(z_0).$$ 两侧互为倒数，$r\\to0$ 时同时趋于 $u(z_0)$：这是「正调和函数在圆盘内不能剧烈振荡」的定量形式。常用的特殊情形是 $r=R/2$，给出 $$\\frac13u(z_0)\\le u(z)\\le3u(z_0).$$ 注意不等式成立的前提是 $u$ **处处为正**：正性把「零点」挡在外面，而零点附近的调和函数振荡可以任意剧烈。\n\n证明只需一件事：若 $u$ 在 $|z-z_0|<R$ 内调和且连续到圆周，用半径 $R$ 的泊松公式表示它，$$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{R^{2}-|z-z_0|^{2}}{|Re^{it}-(z-z_0)|^{2}}\\,u(z_0+Re^{it})\\,\\mathrm dt .$$ 当 $|z-z_0|=r$ 时分母满足 $(R-r)^{2}\\le|Re^{it}-(z-z_0)|^{2}\\le(R+r)^{2}$；把分母换成两端并用平均值性质 $u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+Re^{it})\\,\\mathrm dt$，立刻得到 $(R^{2}-r^{2})/(R+r)^{2}\\le u(z)/u(z_0)\\le(R^{2}-r^{2})/(R-r)^{2}$，即 $(R-r)/(R+r)\\le u(z)/u(z_0)\\le(R+r)/(R-r)$。所以哈纳克不等式不过是「泊松核被 $(1-r/R)/(1+r/R)$ 与其倒数 $(1+r/R)/(1-r/R)$ 夹住」的翻译。一般区域上，用有限个圆盘覆盖紧集 $K\\subset\\subset D$ 并把这些圆盘沿链式相邻处拼接，可得 $$\\sup_{K}u\\le C_{K,D}\\,\\inf_{K}u,$$ 常数只依赖 $K$ 在 $D$ 中的几何位置。\n\n**哈纳克原理**（也称哈纳克第二定理）：设 $u_1\\le u_2\\le\\cdots$ 是区域 $D$ 上的调和函数列（即每个 $u_{n+1}-u_n$ 调和且 $\\ge0$）。若 $\\{u_n(z_0)\\}$ 在**某一点** $z_0\\in D$ 收敛，则 $\\{u_n\\}$ 在 $D$ 的**每个紧子集上一致收敛**，并且极限 $u=\\lim_{n\\to\\infty}u_n$ 在 $D$ 上调和。\n\n证明思路很干净：$n>m$ 时 $h_{mn}=u_n-u_m\\ge0$ 是正调和函数，哈纳克不等式把它的振荡压住——对紧集 $K\\subset\\subset D$，在包含 $K\\cup\\{z_0\\}$ 的紧集上有常数 $C$ 使 $$\\sup_{K\\cup\\{z_0\\}} h_{mn}\\le C\\inf_{K\\cup\\{z_0\\}} h_{mn}\\le C\\,h_{mn}(z_0)\\to0\\qquad(m,n\\to\\infty),$$ 于是 $\\{u_n\\}$ 在 $K$ 上一致 Cauchy，从而一致收敛。极限 $u$ 连续；又因每个 $u_n$ 在任意圆盘内都等于自己的泊松积分，令 $n\\to\\infty$（局部一致收敛可以进入积分号）得 $u$ 也满足泊松积分表示，故 $u$ 调和。\n\n为什么它重要：这是「用逼近法造调和函数」的引擎。**Perron 方法**求解狄利克雷问题就靠它：取所有满足 $\\limsup_{z\\to\\zeta}w(z)\\le f(\\zeta)$（对每个边界点 $\\zeta$）的次调和函数（下调和函数）$w$，令 $u=\\sup w$，用哈纳克原理把上确界实现在某个单调列上，即证 $u$ 调和；再配以边界点的正则性判据（维纳判据）就得到可解区域的完整刻画。哈纳克不等式还给出**紧性**：正调和函数族在一点归一化（$u_n(z_0)=1$）后一致有界且等度连续（因为它提供了导数估计 $|\\nabla u(z_0)|\\le\\frac{2}{R}u(z_0)$，其中 $R$ 是到边界的距离），故可抽出一致收敛的子列，极限仍为正调和函数——这正是正常族（normal family）思想在调和函数情形的表现。极端情形也说明问题：$u(z)=\\operatorname{Re}\\frac{1+z}{1-z}=\\frac{1-|z|^{2}}{|1-z|^{2}}$ 是单位圆盘上的正调和函数，它在边界上几乎处处趋于 $0$、却在 $z=1$ 附近爆炸；所以「边界值」在正调和函数的极限中会退化为测度，**Herglotz 定理**把这一点总结为：$\\Delta$ 上全体正调和函数恰是 $\\partial\\Delta$ 上正测度的泊松积分。最后还有一个刘维尔型推论：$\\mathbb R^{2}$ 上处处为正的调和函数必为常数（在哈纳克不等式中固定 $z$ 令 $R\\to\\infty$，两侧都趋于 $1$）。",
+  "definitionEn": "**Harnack's inequality**: if $u>0$ is harmonic in the disk $|z-z_0|<R$, then for $|z-z_0|=r<R$, $$\\frac{R-r}{R+r}\\,u(z_0)\\le u(z)\\le\\frac{R+r}{R-r}\\,u(z_0).$$ The two bounds are reciprocals and both tend to $u(z_0)$ as $r\\to0$: this is the quantitative statement that a positive harmonic function cannot oscillate violently. The common special case $r=R/2$ gives $\\frac13u(z_0)\\le u(z)\\le3u(z_0)$. Positivity is essential: zeros of a harmonic function allow arbitrarily wild oscillation nearby.\n\nThe proof needs only one ingredient, the Poisson representation on the circle of radius $R$ centred at $z_0$, $$u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{R^{2}-|z-z_0|^{2}}{|Re^{it}-(z-z_0)|^{2}}\\,u(z_0+Re^{it})\\,\\mathrm dt .$$ For $|z-z_0|=r$ the denominator lies between $(R-r)^{2}$ and $(R+r)^{2}$; replacing it by the two extremes and using the mean value property $u(z_0)=\\frac{1}{2\\pi}\\int_0^{2\\pi}u(z_0+Re^{it})\\,\\mathrm dt$ gives exactly $(R-r)/(R+r)\\le u(z)/u(z_0)\\le(R+r)/(R-r)$. So Harnack's inequality is merely the statement that the Poisson kernel is squeezed between $(1-r/R)/(1+r/R)$ and its reciprocal $(1+r/R)/(1-r/R)$. On a general region, covering a compact set $K\\subset\\subset D$ by finitely many disks chained to a base point gives $$\\sup_{K}u\\le C_{K,D}\\,\\inf_{K}u$$ with a constant depending only on the geometry of $K$ inside $D$.\n\n**Harnack's principle** (Harnack's second theorem): let $u_1\\le u_2\\le\\cdots$ be harmonic functions on a region $D$ (equivalently, each difference $u_{n+1}-u_n$ is harmonic and $\\ge0$). If $\\{u_n(z_0)\\}$ converges at a **single point** $z_0\\in D$, then $\\{u_n\\}$ converges uniformly on every compact subset of $D$, and the limit $u$ is harmonic on $D$.\n\nThe proof is clean: for $n>m$ the difference $h_{mn}=u_n-u_m\\ge0$ is positive harmonic, and Harnack's inequality controls its oscillation — for compact $K\\subset\\subset D$, on a compact set containing $K\\cup\\{z_0\\}$ there is a constant $C$ with $$\\sup_{K\\cup\\{z_0\\}} h_{mn}\\le C\\inf_{K\\cup\\{z_0\\}} h_{mn}\\le C\\,h_{mn}(z_0)\\to0\\qquad(m,n\\to\\infty),$$ so $\\{u_n\\}$ is uniformly Cauchy and hence uniformly convergent on $K$. The limit is continuous, and since each $u_n$ equals its own Poisson integral on every disk, passing to the limit inside the integral shows that $u$ does too, so $u$ is harmonic.\n\nWhy it matters: this is the engine for constructing harmonic functions by approximation. **Perron's method** solves the Dirichlet problem with it: take the upper envelope $u=\\sup w$ of all subharmonic $w$ with $\\limsup_{z\\to\\zeta}w(z)\\le f(\\zeta)$ at every boundary point $\\zeta$; Harnack's principle realises the supremum on a monotone sequence and proves $u$ harmonic, and Wiener's criterion then decides which boundary points are regular. Harnack's inequality also yields **compactness**: a family of positive harmonic functions normalised by $u_n(z_0)=1$ is uniformly bounded and equicontinuous (it implies the gradient estimate $|\\nabla u(z_0)|\\le\\frac{2}{R}u(z_0)$, with $R$ the distance to the boundary), so a locally uniformly convergent subsequence exists whose limit is again positive harmonic — normal-family thinking for harmonic functions. The extreme example illustrates the limits: $u(z)=\\operatorname{Re}\\frac{1+z}{1-z}=\\frac{1-|z|^{2}}{|1-z|^{2}}$ is positive harmonic in the disk and tends to $0$ almost everywhere on the boundary while blowing up near $z=1$; hence boundary data degenerate into measures, which is exactly what **Herglotz's theorem** states: the positive harmonic functions on $\\Delta$ are precisely the Poisson integrals of positive measures on $\\partial\\Delta$. One more corollary is a Liouville-type theorem: a positive harmonic function on all of $\\mathbb R^{2}$ is constant (fix $z$ in Harnack's inequality and let $R\\to\\infty$, both bounds tend to $1$).",
+  "formulas": [
+   {
+    "latex": "\\frac{R-r}{R+r}\\,u(z_0)\\le u(z)\\le\\frac{R+r}{R-r}\\,u(z_0),\\qquad |z-z_0|=r<R,\\ u>0\\ \\text{调和}",
+    "note": "哈纳克不等式：正调和函数的双边控制，$r=R/2$ 时即 $\\frac13u(z_0)\\le u(z)\\le3u(z_0)$。",
+    "noteEn": "Harnack's inequality for positive harmonic functions; at $r=R/2$ it reads $\\frac13u(z_0)\\le u(z)\\le3u(z_0)$."
+   },
+   {
+    "latex": "u(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi}\\frac{R^{2}-|z-z_0|^{2}}{|Re^{it}-(z-z_0)|^{2}}\\,u(z_0+Re^{it})\\,\\mathrm{d}t",
+    "note": "证明哈纳克不等式所用的泊松表示（半径 $R$ 的圆盘），分母被 $(R\\pm r)^{2}$ 夹住。",
+    "noteEn": "The Poisson representation of radius $R$ used in the proof; its denominator is trapped between $(R-r)^{2}$ and $(R+r)^{2}$."
+   },
+   {
+    "latex": "u_{n+1}\\ge u_n\\ \\text{（调和）},\\quad \\lim_{n\\to\\infty}u_n(z_0)\\ \\text{存在}\\ \\Longrightarrow\\ u_n\\ \\text{在紧子集上一致收敛到调和函数}\\ u",
+    "note": "哈纳克原理：一点收敛即可推出局部一致收敛，极限调和。",
+    "noteEn": "Harnack's principle: convergence at one point forces locally uniform convergence to a harmonic limit."
+   },
+   {
+    "latex": "\\sup_{K}u\\le C_{K,D}\\,\\inf_{K}u\\qquad(u>0\\ \\text{调和},\\ K\\subset\\subset D)",
+    "note": "一般区域上的量化形式（圆盘链式拼接）：正调和函数在紧集上彼此等价。",
+    "noteEn": "The quantitative form on a general region (chaining disks): positive harmonic functions are comparable on compact subsets."
+   },
+   {
+    "latex": "|\\nabla u(z_0)|\\le\\frac{2}{R}\\,u(z_0)\\qquad(u>0\\ \\text{在}\\ |z-z_0|<R\\ \\text{内调和})",
+    "note": "导数形式的哈纳克估计：由不等式取差商得到，给出正调和函数族的等度连续性；等号由 $u=\\operatorname{Re}\\frac{R+(z-z_0)}{R-(z-z_0)}$ 取得。",
+    "noteEn": "Harnack estimate for the gradient, obtained from the inequality by difference quotients; it yields equicontinuity, and equality holds for $u=\\operatorname{Re}\\frac{R+(z-z_0)}{R-(z-z_0)}$."
+   }
+  ],
+  "properties": [
+   "正调和函数在紧集上「等价」：存在只依赖 $K$ 与 $D$ 的常数 $C$ 使 $\\sup_Ku\\le C\\inf_Ku$，因此正调和函数不能出现与自身大小相比的剧烈振荡。",
+   "哈纳克原理：单调递增的调和函数列只要在一点收敛，就在每个紧子集上一致收敛，且极限调和；单调性是不可去掉的关键（一般调和函数列只需要局部一致有界即可用 Weierstrass 型论证）。",
+   "推论（紧性/正常族）：正的调和函数族在一点归一化后一致有界且等度连续，可抽取局部一致收敛的子列，极限仍为正调和函数（调和函数情形的 Montel 思想）。",
+   "推论（刘维尔型）：$\\mathbb R^{2}$ 上处处为正的调和函数恒为常数；有下界的调和函数同理（加常数后即为正）。",
+   "应用：Perron 方法以次调和函数（下调和函数）的上包络构造狄利克雷问题的解，其调和性正是由哈纳克原理保证；配合维纳判据得到可解区域的完整刻画（与调和测度、布朗运动首出分布一致）。"
+  ],
+  "propertiesEn": [
+   "Positive harmonic functions are comparable on compact sets: there is $C=C(K,D)$ with $\\sup_Ku\\le C\\inf_Ku$, so no violent oscillation relative to their own size can occur.",
+   "Harnack's principle: a monotone increasing sequence of harmonic functions converging at one point converges locally uniformly, with harmonic limit; monotonicity is essential (a general locally bounded harmonic sequence needs a Weierstrass-type argument instead).",
+   "Corollary (compactness/normal families): positive harmonic functions normalised at one point are uniformly bounded and equicontinuous, hence admit a locally uniformly convergent subsequence with positive harmonic limit (Montel-type thinking).",
+   "Corollary (Liouville type): a positive harmonic function on all of $\\mathbb R^{2}$ is constant; the same holds for functions bounded below (add a constant to make them positive).",
+   "Application: Perron's method builds the solution of the Dirichlet problem as an upper envelope of subharmonic functions, its harmonicity being supplied by Harnack's principle; with Wiener's criterion this characterises the solvable regions (matching harmonic measure and Brownian first-exit distributions)."
+  ],
+  "examples": [
+   {
+    "problem": "设 $u>0$ 在单位圆盘 $|z|<1$ 内调和。估计 $u\\left(\\frac12\\right)/u(0)$ 与 $u\\left(\\frac{9}{10}\\right)/u(0)$ 的取值范围。",
+    "solution": "在哈纳克不等式中取 $z_0=0$、$R=1$、$|z|=r$：$$\\frac{1-r}{1+r}\\le\\frac{u(z)}{u(0)}\\le\\frac{1+r}{1-r}.$$\n\n取 $r=\\frac12$：$\\frac{1/2}{3/2}=\\frac13\\le\\frac{u(1/2)}{u(0)}\\le3$。\n\n取 $r=\\frac{9}{10}$：$\\frac{0.1}{1.9}=\\frac{1}{19}\\approx0.0526\\le\\frac{u(0.9)}{u(0)}\\le19$。\n\n可见越靠近边界，哈纳克估计越松：界 $\\frac{1\\pm r}{1\\mp r}$ 在 $r\\to1^{-}$ 时分别趋于 $0$ 与 $\\infty$。这与「正调和函数的边界值可以是任意正测度」完全吻合——边界附近的值几乎不受圆心处取值的约束。"
+   },
+   {
+    "problem": "用哈纳克不等式证明：若 $u$ 在 $\\mathbb R^{2}$ 上处处为正且调和，则 $u$ 为常数。",
+    "solution": "固定任意 $z\\in\\mathbb R^{2}$，$z\\neq0$，设 $R>|z|$。把哈纳克不等式用在以 $0$ 为心、半径 $R$ 的圆盘上，取 $z_0=0$、$r=|z|$：$$\\frac{R-|z|}{R+|z|}\\,u(0)\\le u(z)\\le\\frac{R+|z|}{R-|z|}\\,u(0).$$ 令 $R\\to\\infty$，上下界都趋于 $u(0)$（因为 $|z|$ 固定而 $R$ 无界），故 $u(z)=u(0)$ 对一切 $z$ 成立，$u$ 为常数。\n\n这是刘维尔定理在调和函数情形的对应物：$\\mathbb R^{2}$ 上的调和函数只要有下界（加一个常数即可化为正值），就只能取常数值。"
+   },
+   {
+    "problem": "验证 $u(z)=\\operatorname{Re}\\frac{1+z}{1-z}=\\frac{1-|z|^{2}}{|1-z|^{2}}$ 是单位圆盘上的正调和函数，并说明哈纳克不等式的两个界都是**精确**的。",
+    "solution": "正性：$u=\\frac{1-|z|^{2}}{|1-z|^{2}}>0$（$|z|<1$）；调和性：它是解析函数 $\\frac{1+z}{1-z}$（在 $|z|<1$ 内解析）的实部，故调和。且 $u(0)=1$。\n\n沿实轴检查（$z=\\pm r$，$0<r<1$）：$$u(-r)=\\frac{1-r^{2}}{(1+r)^{2}}=\\frac{1-r}{1+r},\\qquad u(r)=\\frac{1-r^{2}}{(1-r)^{2}}=\\frac{1+r}{1-r}.$$ 这正是哈纳克不等式（$z_0=0$，$R=1$）的下界与上界。于是哈纳克不等式是**精确**的：任何改进都必须考虑函数的形状，而不能只依赖 $r$。\n\n这个函数在边界上几乎处处趋于 $0$、在 $z=1$ 附近爆炸，Herglotz 定理指出它的「边界值」是 $\\partial\\Delta$ 上的点测度——这也解释了为什么正调和函数族的极限不必由连续边界函数给出。"
+   }
+  ],
+  "tags": [
+   "哈纳克不等式",
+   "正调和函数",
+   "Perron 方法",
+   "紧性",
+   "Herglotz 表示"
+  ],
+  "links": [
+   "harmonic-function",
+   "maximum-principle",
+   "poisson-integral",
+   "harmonic-dirichlet-problem",
+   "liouville-theorem",
+   "normal-families"
+  ]
+ },
+ {
+  "id": "riemann-surfaces",
+  "title": "黎曼曲面",
+  "titleEn": "Riemann Surfaces",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "黎曼曲面是一维复流形——由图卡覆盖、转换函数全纯的空间，是多值函数「单值化」的舞台；黎曼球面、复环面、$w^{2}=P(z)$ 的代数曲线都是标准例子，代数函数的黎曼面是紧的可定向曲面，其亏格由方程的次数决定。",
+  "summaryEn": "A Riemann surface is a one-dimensional complex manifold — charts glued by holomorphic transition functions — and the stage on which multivalued functions become single-valued; the Riemann sphere, complex tori and the curves $w^{2}=P(z)$ are the standard examples, and the Riemann surface of an algebraic function is a compact orientable surface whose genus is governed by the degree of the equation.",
+  "definition": "**黎曼曲面**是带复结构的连通拓扑空间：设 $X$ 是连通二维拓扑流形（Hausdorff、第二可数），若有一族图卡 $(U_\\alpha,\\varphi_\\alpha)$ 覆盖 $X$，其中 $\\varphi_\\alpha:U_\\alpha\\to\\mathbb C$ 是把 $U_\\alpha$ 同胚到 $\\mathbb C$ 中开集的坐标函数，且任意两张卡重叠处的**转换函数** $\\varphi_\\beta\\circ\\varphi_\\alpha^{-1}$ 在其定义域上全纯（因此是双全纯），就称 $X$ 是黎曼曲面。换句话说：黎曼曲面 = 实二维可定向曲面 + 复（共形）结构。$\\mathbb C$ 的任意区域、单位圆盘是最简单的例子；平面区域上能做的一切（全纯、亚纯、留数、积分、共形映射）都能在黎曼曲面上逐卡定义并与坐标选取无关。\n\n为什么需要它？$\\mathbb C$ 上的一块区域只有一套坐标，而 $\\sqrt z$、$\\log z$、$\\arcsin z$、$\\sqrt{(z-a_1)\\cdots(z-a_n)}$ 这类多值函数无法在任何单连通区域上变成单值函数。**黎曼的原始想法正是造出合适的曲面让它们单值化**：$\\sqrt z$ 的曲面是两片 $\\mathbb C\\setminus\\{0\\}$ 沿割缝粘合（绕原点转一圈换叶），$\\log z$ 的曲面是无穷多叶的螺旋楼梯。这也是解析延拓的几何化：把一个解析元素沿所有路径延拓得到的全部芽收集起来，自然带上黎曼曲面结构，而复现「绕圈」的正是单值群（单值化定理的动力学雏形）。\n\n**标准例子。**（i）**扩充复平面** $\\hat{\\mathbb C}=\\mathbb{CP}^{1}=\\mathbb C\\cup\\{\\infty\\}$（黎曼球面）：两张卡 $z$ 与 $w=1/z$，在重叠 $z\\neq0$ 上转换函数 $w=1/z$ 全纯，$\\infty$ 处 $w=0$ 成了普通点；它是亏格 $0$ 的紧黎曼曲面，球极投影把它实现为单位球面。（ii）**复环面** $\\mathbb C/\\Lambda$，其中 $\\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2$ 由两个 $\\mathbb R$-线性无关的复数生成（即 $\\operatorname{Im}(\\omega_2/\\omega_1)\\neq0$ 的秩 2 格）：商空间在商拓扑与商复结构下是紧黎曼曲面，亏格 1。它上面的全纯函数提升到 $\\mathbb C$ 上是双周期整函数，只能为常数；真正有趣的对象是双周期**亚纯**函数，即椭圆函数。（iii）**代数曲线** $w^{2}=P(z)$ **的黎曼面**：把两个「解」$w=\\pm\\sqrt{P(z)}$ 当成两叶沿割缝粘合，换叶点（分支点）是 $P$ 的单根，另外当 $\\deg P$ 为奇数时 $\\infty$ 也是分支点。所得 $S$ 是 $\\hat{\\mathbb C}$ 的双叶覆叠，**其亏格只由 $n=\\deg P$ 决定**：$g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor$。于是 $w^{2}=z$（$n=1$）与 $w^{2}=z^{2}-1$（$n=2$）都是球面；$w^{2}=P_3(z)$ 与 $w^{2}=P_4(z)$ 都是环面（椭圆曲线，与某个 $\\mathbb C/\\Lambda$ 同构）；$n=5$ 时是亏格 2 的曲面。这份账也可以用**黎曼–胡维茨公式**核对：$2g-2=2(2g'-2)+B$，双叶覆叠（$g'=0$）时 $g=\\frac B2-1$，而分支点数在 $n$ 偶时为 $B=n$、$n$ 奇时为 $B=n+1$，与上式完全一致。（iv）$\\sqrt z$ **的黎曼面**：双叶，枝点为 $0$ 与 $\\infty$，单值群为 $\\mathbb Z/2$；作为曲面它与 $\\hat{\\mathbb C}$ 同构（$w=\\sqrt z$ 本身就是整体坐标）——这提醒我们「曲面的同构类型」与「函数写起来多复杂」是两件不同的事。\n\n**更一般的图景。**由不可约多项式 $P(z,w)=0$ 定义的代数函数，其黎曼面是**紧的可定向（闭）曲面**；由曲面分类定理，它只由一个不变量——亏格 $g$——决定，而 $g$ 又由代数数据（次数、分支点数）算出。反过来，每个紧黎曼曲面都能实现为某条代数曲线的黎曼面。紧黎曼曲面上的全纯函数只有常数，非平凡的对象是亚纯函数、全纯与亚纯微分、留数与阿贝尔积分；亏格 0 只有 $\\hat{\\mathbb C}$，亏格 1 的复结构由模数 $\\tau$（等价地由 $j$ 不变量）参数化，亏格 $g\\ge2$ 由单值化定理写成 $\\Delta/\\Gamma$ 并带上曲率 $-1$ 的双曲度量，其全纯自同构群有限（Hurwitz 界 $|\\operatorname{Aut}|\\le84(g-1)$）。历史上，椭圆积分 $\\int\\mathrm dz/\\sqrt{z^{3}+az+b}$ 的反函数（椭圆函数）正是黎曼研究代数函数单值化的出发点，而黎曼–罗赫定理则把「曲面上能有多少函数、多少微分」变成了线性代数式的计数。",
+  "definitionEn": "A **Riemann surface** is a connected topological surface (Hausdorff, second countable) equipped with a complex structure: a family of charts $(U_\\alpha,\\varphi_\\alpha)$ covering $X$, where each $\\varphi_\\alpha:U_\\alpha\\to\\mathbb C$ maps $U_\\alpha$ homeomorphically onto an open subset of $\\mathbb C$ and every **transition function** $\\varphi_\\beta\\circ\\varphi_\\alpha^{-1}$ is holomorphic (hence biholomorphic) on its domain. In short: a Riemann surface is a two-dimensional orientable real surface together with a complex (conformal) structure. Regions in $\\mathbb C$ and the unit disk are the simplest examples, and everything one does in planar complex analysis — holomorphy, meromorphic functions, residues, integration, conformal maps — can be defined chart by chart and is independent of the charts.\n\nWhy the notion is needed: a planar region carries only one coordinate system, whereas multivalued functions such as $\\sqrt z$, $\\log z$, $\\arcsin z$ or $\\sqrt{(z-a_1)\\cdots(z-a_n)}$ cannot be made single-valued on any simply connected region. **Riemann's original motivation was precisely to build a surface on which they become single-valued**: the surface of $\\sqrt z$ consists of two copies of $\\mathbb C\\setminus\\{0\\}$ glued along a slit (going once around the origin changes the sheet), and the surface of $\\log z$ is an infinite spiral staircase. This also geometrises analytic continuation: collecting all germs obtained by continuing one element along all paths produces a Riemann surface, and the monodromy records what happens when one goes round a loop.\n\n**Standard examples.** (i) The **extended complex plane** $\\hat{\\mathbb C}=\\mathbb{CP}^{1}=\\mathbb C\\cup\\{\\infty\\}$ (the Riemann sphere): charts $z$ and $w=1/z$, with holomorphic transition $w=1/z$ on the overlap, so $\\infty$ becomes an ordinary point; it is the compact genus-$0$ Riemann surface, realised as the unit sphere by stereographic projection. (ii) **Complex tori** $\\mathbb C/\\Lambda$, where $\\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2$ is a rank-two lattice with $\\operatorname{Im}(\\omega_2/\\omega_1)\\neq0$: the quotient is a compact Riemann surface of genus 1. Holomorphic functions on it lift to doubly periodic entire functions, hence constants, so the interesting objects are the doubly periodic **meromorphic** functions, the elliptic functions. (iii) **The Riemann surface of $w^{2}=P(z)$**: glue the two solutions $w=\\pm\\sqrt{P(z)}$ into a double cover of $\\hat{\\mathbb C}$; the branch points are the simple roots of $P$ together with $\\infty$ when $\\deg P$ is odd. Its **genus depends only on $n=\\deg P$**: $g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor$. Hence $w^{2}=z$ ($n=1$) and $w^{2}=z^{2}-1$ ($n=2$) are spheres; $w^{2}=P_3(z)$ and $w^{2}=P_4(z)$ are tori (elliptic curves, isomorphic to some $\\mathbb C/\\Lambda$); and $n=5$ gives genus 2. The same count follows from the **Riemann–Hurwitz formula** $2g-2=2(2g'-2)+B$, which for a double cover of the sphere gives $g=\\frac B2-1$, with $B=n$ for even $n$ and $B=n+1$ for odd $n$. (iv) **The Riemann surface of $\\sqrt z$**: two sheets with branch points $0$ and $\\infty$ and monodromy group $\\mathbb Z/2$; as a surface it is isomorphic to $\\hat{\\mathbb C}$ ($w=\\sqrt z$ is already a global coordinate), a reminder that the isomorphism type of the surface and the apparent complexity of the function are different matters.\n\n**The general picture.** The Riemann surface of an algebraic function defined by an irreducible polynomial $P(z,w)=0$ is a **compact orientable surface**; by the classification of surfaces it is determined by the single invariant $g$, which in turn is computed from the algebraic data. Conversely, every compact Riemann surface arises from an algebraic curve. Holomorphic functions on a compact Riemann surface are constant, so the nontrivial objects are meromorphic functions, holomorphic and meromorphic differentials, residues and abelian integrals. Genus 0 gives only $\\hat{\\mathbb C}$; genus-1 conformal structures are parametrised by the modulus $\\tau$ (equivalently by the $j$-invariant); genus $g\\ge2$ is uniformised as $\\Delta/\\Gamma$ and carries a hyperbolic metric of curvature $-1$, with finite holomorphic automorphism group (Hurwitz bound $|\\operatorname{Aut}|\\le84(g-1)$). Historically the inverse functions of elliptic integrals $\\int\\mathrm dz/\\sqrt{z^{3}+az+b}$ were Riemann's starting point, and the Riemann–Roch theorem turns the question 'how many functions and differentials exist?' into a piece of linear algebra.",
+  "formulas": [
+   {
+    "latex": "\\varphi_\\beta\\circ\\varphi_\\alpha^{-1}\\ \\text{在}\\ \\varphi_\\alpha(U_\\alpha\\cap U_\\beta)\\ \\text{上全纯（双全纯）}",
+    "note": "黎曼曲面的定义条件：转换函数全纯，因此拼贴是保角的（复结构 = 共形结构）。",
+    "noteEn": "The defining condition: transition functions are holomorphic, so the gluing is conformal (complex structure = conformal structure)."
+   },
+   {
+    "latex": "\\widehat{\\mathbb C}=\\mathbb{CP}^{1}=\\mathbb C\\cup\\{\\infty\\}:\\qquad w=\\frac1z\\ \\ \\text{（重叠处的转换函数）}",
+    "note": "黎曼球面：两张卡 $z$ 与 $w$，$\\infty$ 变成普通点；亏格 0 的唯一紧黎曼曲面。",
+    "noteEn": "The Riemann sphere: charts $z$ and $w$, so that $\\infty$ becomes an ordinary point; the unique compact Riemann surface of genus 0."
+   },
+   {
+    "latex": "\\mathbb C/\\Lambda,\\qquad \\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2,\\quad \\operatorname{Im}\\frac{\\omega_2}{\\omega_1}\\neq0",
+    "note": "复环面（亏格 1）：格必须是秩 2 的，否则商空间退化；其上的亚纯函数就是椭圆函数。",
+    "noteEn": "The complex torus (genus 1): the lattice must have rank two, and its meromorphic functions are the elliptic functions."
+   },
+   {
+    "latex": "w^{2}=P(z),\\quad \\deg P=n\\ \\Longrightarrow\\ g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor",
+    "note": "代数曲线 $w^{2}=P(z)$ 的亏格只由次数决定：$n=1,2$ 给出球面，$n=3,4$ 给出环面，$n=5$ 给出亏格 2。",
+    "noteEn": "For $w^{2}=P(z)$ the genus depends only on the degree: $n=1,2$ give the sphere, $n=3,4$ a torus, $n=5$ genus 2."
+   },
+   {
+    "latex": "2g-2=2(2g'-2)+B;\\qquad g'=0:\\ \\ g=\\frac B2-1",
+    "note": "黎曼–胡维茨公式：$B$ 为分支点数（$w^{2}=P(z)$ 时 $n$ 偶取 $B=n$，$n$ 奇取 $B=n+1$），与上面的亏格公式一致。",
+    "noteEn": "The Riemann–Hurwitz formula with $B$ branch points ($B=n$ for even $n$ and $B=n+1$ for odd $n$ when $w^{2}=P(z)$), consistent with the genus formula above."
+   }
+  ],
+  "properties": [
+   "黎曼曲面 = 实二维可定向光滑流形 + 复结构；转换函数全纯（自动保角），所以「共形结构」就是它的全部信息。",
+   "局部与 $\\mathbb C$ 完全一样（全纯/亚纯函数、微分形式、留数、积分逐卡定义且坐标无关），全局性质由拓扑（亏格、基本群、单值群）与代数数据控制。",
+   "紧黎曼曲面上的全纯函数只有常数；亚纯函数构成域，黎曼–罗赫定理用亏格精确控制亚纯函数与亚纯微分空间的维数。",
+   "覆叠与单值化：任意黎曼曲面有万有覆叠（提升复结构后仍是黎曼曲面），$S=\\tilde S/\\Gamma$，$\\Gamma\\cong\\pi_1(S)$；代数函数的黎曼面正是「多值函数单值化」的精确实现（$\\sqrt{\\cdot}$ 对应二重覆叠与单值群 $\\mathbb Z/2$）。",
+   "所以 $w^{2}=P_3$ 与 $w^{2}=P_4$ 都给出亏格 $1$ 的环面（复结构一般不同，由 $j$ 不变量区分），对应的积分是椭圆积分"
+  ],
+  "propertiesEn": [
+   "A Riemann surface is a two-dimensional orientable smooth surface plus a complex structure; transition functions are holomorphic (hence conformal), so the conformal structure is the whole story.",
+   "Locally it is exactly $\\mathbb C$ (holomorphic and meromorphic functions, differential forms, residues and integrals are defined chart by chart and are coordinate-free); global behaviour is governed by topology (genus, fundamental group, monodromy) and algebraic data.",
+   "Holomorphic functions on a compact Riemann surface are constant; meromorphic functions form a field, and the dimensions of holomorphic and meromorphic differential spaces are controlled by Riemann–Roch.",
+   "Coverings and uniformisation: every Riemann surface has a universal cover (still a Riemann surface with the lifted complex structure), $S=\\tilde S/\\Gamma$ with $\\Gamma\\cong\\pi_1(S)$; the Riemann surface of an algebraic function is the precise realisation of 'making a multivalued function single-valued' ($\\sqrt{\\cdot}$ giving a double cover with monodromy $\\mathbb Z/2$).",
+   "Genus is determined by algebraic data: for $w^{2}=P(z)$, $g=\\lfloor(n-1)/2\\rfloor$, which is why $w^{2}=P_3$ and $w^{2}=P_4$ describe the same geometric object (a torus) with elliptic integrals attached — the complexity of the formula and the topology of the surface need not match."
+  ],
+  "plot": {
+   "type": "surface3d",
+   "surf": {
+    "x": "u*cos(v)",
+    "y": "u*sin(v)",
+    "z": "v/3"
+   },
+   "uRange": [
+    0,
+    1
+   ],
+   "vRange": [
+    -6.2832,
+    6.2832
+   ],
+   "density": [
+    16,
+    60
+   ],
+   "color": "#4cc9f0",
+   "title": "√z 的黎曼面示意（螺旋面）：绕原点转一圈并不回到原处，而是攀上另一叶——多值函数在合适的曲面上变成单值"
   },
-  {
-    "id": "riemann-surfaces",
-    "title": "黎曼曲面",
-    "titleEn": "Riemann Surfaces",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "黎曼曲面是一维复流形——由图卡覆盖、转换函数全纯的空间，是多值函数「单值化」的舞台；黎曼球面、复环面、$w^{2}=P(z)$ 的代数曲线都是标准例子，代数函数的黎曼面是紧的可定向曲面，其亏格由方程的次数决定。",
-    "summaryEn": "A Riemann surface is a one-dimensional complex manifold — charts glued by holomorphic transition functions — and the stage on which multivalued functions become single-valued; the Riemann sphere, complex tori and the curves $w^{2}=P(z)$ are the standard examples, and the Riemann surface of an algebraic function is a compact orientable surface whose genus is governed by the degree of the equation.",
-    "definition": "**黎曼曲面**是带复结构的连通拓扑空间：设 $X$ 是连通二维拓扑流形（Hausdorff、第二可数），若有一族图卡 $(U_\\alpha,\\varphi_\\alpha)$ 覆盖 $X$，其中 $\\varphi_\\alpha:U_\\alpha\\to\\mathbb C$ 是把 $U_\\alpha$ 同胚到 $\\mathbb C$ 中开集的坐标函数，且任意两张卡重叠处的**转换函数** $\\varphi_\\beta\\circ\\varphi_\\alpha^{-1}$ 在其定义域上全纯（因此是双全纯），就称 $X$ 是黎曼曲面。换句话说：黎曼曲面 = 实二维可定向曲面 + 复（共形）结构。$\\mathbb C$ 的任意区域、单位圆盘是最简单的例子；平面区域上能做的一切（全纯、亚纯、留数、积分、共形映射）都能在黎曼曲面上逐卡定义并与坐标选取无关。\n\n为什么需要它？$\\mathbb C$ 上的一块区域只有一套坐标，而 $\\sqrt z$、$\\log z$、$\\arcsin z$、$\\sqrt{(z-a_1)\\cdots(z-a_n)}$ 这类多值函数无法在任何单连通区域上变成单值函数。**黎曼的原始想法正是造出合适的曲面让它们单值化**：$\\sqrt z$ 的曲面是两片 $\\mathbb C\\setminus\\{0\\}$ 沿割缝粘合（绕原点转一圈换叶），$\\log z$ 的曲面是无穷多叶的螺旋楼梯。这也是解析延拓的几何化：把一个解析元素沿所有路径延拓得到的全部芽收集起来，自然带上黎曼曲面结构，而复现「绕圈」的正是单值群（单值化定理的动力学雏形）。\n\n**标准例子。**（i）**扩充复平面** $\\hat{\\mathbb C}=\\mathbb{CP}^{1}=\\mathbb C\\cup\\{\\infty\\}$（黎曼球面）：两张卡 $z$ 与 $w=1/z$，在重叠 $z\\neq0$ 上转换函数 $w=1/z$ 全纯，$\\infty$ 处 $w=0$ 成了普通点；它是亏格 $0$ 的紧黎曼曲面，球极投影把它实现为单位球面。（ii）**复环面** $\\mathbb C/\\Lambda$，其中 $\\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2$ 由两个 $\\mathbb R$-线性无关的复数生成（即 $\\operatorname{Im}(\\omega_2/\\omega_1)\\neq0$ 的秩 2 格）：商空间在商拓扑与商复结构下是紧黎曼曲面，亏格 1。它上面的全纯函数提升到 $\\mathbb C$ 上是双周期整函数，只能为常数；真正有趣的对象是双周期**亚纯**函数，即椭圆函数。（iii）**代数曲线** $w^{2}=P(z)$ **的黎曼面**：把两个「解」$w=\\pm\\sqrt{P(z)}$ 当成两叶沿割缝粘合，换叶点（分支点）是 $P$ 的单根，另外当 $\\deg P$ 为奇数时 $\\infty$ 也是分支点。所得 $S$ 是 $\\hat{\\mathbb C}$ 的双叶覆叠，**其亏格只由 $n=\\deg P$ 决定**：$g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor$。于是 $w^{2}=z$（$n=1$）与 $w^{2}=z^{2}-1$（$n=2$）都是球面；$w^{2}=P_3(z)$ 与 $w^{2}=P_4(z)$ 都是环面（椭圆曲线，与某个 $\\mathbb C/\\Lambda$ 同构）；$n=5$ 时是亏格 2 的曲面。这份账也可以用**黎曼–胡维茨公式**核对：$2g-2=2(2g'-2)+B$，双叶覆叠（$g'=0$）时 $g=\\frac B2-1$，而分支点数在 $n$ 偶时为 $B=n$、$n$ 奇时为 $B=n+1$，与上式完全一致。（iv）$\\sqrt z$ **的黎曼面**：双叶，枝点为 $0$ 与 $\\infty$，单值群为 $\\mathbb Z/2$；作为曲面它与 $\\hat{\\mathbb C}$ 同构（$w=\\sqrt z$ 本身就是整体坐标）——这提醒我们「曲面的同构类型」与「函数写起来多复杂」是两件不同的事。\n\n**更一般的图景。**由不可约多项式 $P(z,w)=0$ 定义的代数函数，其黎曼面是**紧的可定向（闭）曲面**；由曲面分类定理，它只由一个不变量——亏格 $g$——决定，而 $g$ 又由代数数据（次数、分支点数）算出。反过来，每个紧黎曼曲面都能实现为某条代数曲线的黎曼面。紧黎曼曲面上的全纯函数只有常数，非平凡的对象是亚纯函数、全纯与亚纯微分、留数与阿贝尔积分；亏格 0 只有 $\\hat{\\mathbb C}$，亏格 1 的复结构由模数 $\\tau$（等价地由 $j$ 不变量）参数化，亏格 $g\\ge2$ 由单值化定理写成 $\\Delta/\\Gamma$ 并带上曲率 $-1$ 的双曲度量，其全纯自同构群有限（Hurwitz 界 $|\\operatorname{Aut}|\\le84(g-1)$）。历史上，椭圆积分 $\\int\\mathrm dz/\\sqrt{z^{3}+az+b}$ 的反函数（椭圆函数）正是黎曼研究代数函数单值化的出发点，而黎曼–罗赫定理则把「曲面上能有多少函数、多少微分」变成了线性代数式的计数。",
-    "definitionEn": "A **Riemann surface** is a connected topological surface (Hausdorff, second countable) equipped with a complex structure: a family of charts $(U_\\alpha,\\varphi_\\alpha)$ covering $X$, where each $\\varphi_\\alpha:U_\\alpha\\to\\mathbb C$ maps $U_\\alpha$ homeomorphically onto an open subset of $\\mathbb C$ and every **transition function** $\\varphi_\\beta\\circ\\varphi_\\alpha^{-1}$ is holomorphic (hence biholomorphic) on its domain. In short: a Riemann surface is a two-dimensional orientable real surface together with a complex (conformal) structure. Regions in $\\mathbb C$ and the unit disk are the simplest examples, and everything one does in planar complex analysis — holomorphy, meromorphic functions, residues, integration, conformal maps — can be defined chart by chart and is independent of the charts.\n\nWhy the notion is needed: a planar region carries only one coordinate system, whereas multivalued functions such as $\\sqrt z$, $\\log z$, $\\arcsin z$ or $\\sqrt{(z-a_1)\\cdots(z-a_n)}$ cannot be made single-valued on any simply connected region. **Riemann's original motivation was precisely to build a surface on which they become single-valued**: the surface of $\\sqrt z$ consists of two copies of $\\mathbb C\\setminus\\{0\\}$ glued along a slit (going once around the origin changes the sheet), and the surface of $\\log z$ is an infinite spiral staircase. This also geometrises analytic continuation: collecting all germs obtained by continuing one element along all paths produces a Riemann surface, and the monodromy records what happens when one goes round a loop.\n\n**Standard examples.** (i) The **extended complex plane** $\\hat{\\mathbb C}=\\mathbb{CP}^{1}=\\mathbb C\\cup\\{\\infty\\}$ (the Riemann sphere): charts $z$ and $w=1/z$, with holomorphic transition $w=1/z$ on the overlap, so $\\infty$ becomes an ordinary point; it is the compact genus-$0$ Riemann surface, realised as the unit sphere by stereographic projection. (ii) **Complex tori** $\\mathbb C/\\Lambda$, where $\\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2$ is a rank-two lattice with $\\operatorname{Im}(\\omega_2/\\omega_1)\\neq0$: the quotient is a compact Riemann surface of genus 1. Holomorphic functions on it lift to doubly periodic entire functions, hence constants, so the interesting objects are the doubly periodic **meromorphic** functions, the elliptic functions. (iii) **The Riemann surface of $w^{2}=P(z)$**: glue the two solutions $w=\\pm\\sqrt{P(z)}$ into a double cover of $\\hat{\\mathbb C}$; the branch points are the simple roots of $P$ together with $\\infty$ when $\\deg P$ is odd. Its **genus depends only on $n=\\deg P$**: $g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor$. Hence $w^{2}=z$ ($n=1$) and $w^{2}=z^{2}-1$ ($n=2$) are spheres; $w^{2}=P_3(z)$ and $w^{2}=P_4(z)$ are tori (elliptic curves, isomorphic to some $\\mathbb C/\\Lambda$); and $n=5$ gives genus 2. The same count follows from the **Riemann–Hurwitz formula** $2g-2=2(2g'-2)+B$, which for a double cover of the sphere gives $g=\\frac B2-1$, with $B=n$ for even $n$ and $B=n+1$ for odd $n$. (iv) **The Riemann surface of $\\sqrt z$**: two sheets with branch points $0$ and $\\infty$ and monodromy group $\\mathbb Z/2$; as a surface it is isomorphic to $\\hat{\\mathbb C}$ ($w=\\sqrt z$ is already a global coordinate), a reminder that the isomorphism type of the surface and the apparent complexity of the function are different matters.\n\n**The general picture.** The Riemann surface of an algebraic function defined by an irreducible polynomial $P(z,w)=0$ is a **compact orientable surface**; by the classification of surfaces it is determined by the single invariant $g$, which in turn is computed from the algebraic data. Conversely, every compact Riemann surface arises from an algebraic curve. Holomorphic functions on a compact Riemann surface are constant, so the nontrivial objects are meromorphic functions, holomorphic and meromorphic differentials, residues and abelian integrals. Genus 0 gives only $\\hat{\\mathbb C}$; genus-1 conformal structures are parametrised by the modulus $\\tau$ (equivalently by the $j$-invariant); genus $g\\ge2$ is uniformised as $\\Delta/\\Gamma$ and carries a hyperbolic metric of curvature $-1$, with finite holomorphic automorphism group (Hurwitz bound $|\\operatorname{Aut}|\\le84(g-1)$). Historically the inverse functions of elliptic integrals $\\int\\mathrm dz/\\sqrt{z^{3}+az+b}$ were Riemann's starting point, and the Riemann–Roch theorem turns the question 'how many functions and differentials exist?' into a piece of linear algebra.",
-    "formulas": [
-      {
-        "latex": "\\varphi_\\beta\\circ\\varphi_\\alpha^{-1}\\ \\text{在}\\ \\varphi_\\alpha(U_\\alpha\\cap U_\\beta)\\ \\text{上全纯（双全纯）}",
-        "note": "黎曼曲面的定义条件：转换函数全纯，因此拼贴是保角的（复结构 = 共形结构）。",
-        "noteEn": "The defining condition: transition functions are holomorphic, so the gluing is conformal (complex structure = conformal structure)."
-      },
-      {
-        "latex": "\\widehat{\\mathbb C}=\\mathbb{CP}^{1}=\\mathbb C\\cup\\{\\infty\\}:\\qquad w=\\frac1z\\ \\ \\text{（重叠处的转换函数）}",
-        "note": "黎曼球面：两张卡 $z$ 与 $w$，$\\infty$ 变成普通点；亏格 0 的唯一紧黎曼曲面。",
-        "noteEn": "The Riemann sphere: charts $z$ and $w$, so that $\\infty$ becomes an ordinary point; the unique compact Riemann surface of genus 0."
-      },
-      {
-        "latex": "\\mathbb C/\\Lambda,\\qquad \\Lambda=\\mathbb Z\\omega_1+\\mathbb Z\\omega_2,\\quad \\operatorname{Im}\\frac{\\omega_2}{\\omega_1}\\neq0",
-        "note": "复环面（亏格 1）：格必须是秩 2 的，否则商空间退化；其上的亚纯函数就是椭圆函数。",
-        "noteEn": "The complex torus (genus 1): the lattice must have rank two, and its meromorphic functions are the elliptic functions."
-      },
-      {
-        "latex": "w^{2}=P(z),\\quad \\deg P=n\\ \\Longrightarrow\\ g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor",
-        "note": "代数曲线 $w^{2}=P(z)$ 的亏格只由次数决定：$n=1,2$ 给出球面，$n=3,4$ 给出环面，$n=5$ 给出亏格 2。",
-        "noteEn": "For $w^{2}=P(z)$ the genus depends only on the degree: $n=1,2$ give the sphere, $n=3,4$ a torus, $n=5$ genus 2."
-      },
-      {
-        "latex": "2g-2=2(2g'-2)+B;\\qquad g'=0:\\ \\ g=\\frac B2-1",
-        "note": "黎曼–胡维茨公式：$B$ 为分支点数（$w^{2}=P(z)$ 时 $n$ 偶取 $B=n$，$n$ 奇取 $B=n+1$），与上面的亏格公式一致。",
-        "noteEn": "The Riemann–Hurwitz formula with $B$ branch points ($B=n$ for even $n$ and $B=n+1$ for odd $n$ when $w^{2}=P(z)$), consistent with the genus formula above."
-      }
-    ],
-    "properties": [
-      "黎曼曲面 = 实二维可定向光滑流形 + 复结构；转换函数全纯（自动保角），所以「共形结构」就是它的全部信息。",
-      "局部与 $\\mathbb C$ 完全一样（全纯/亚纯函数、微分形式、留数、积分逐卡定义且坐标无关），全局性质由拓扑（亏格、基本群、单值群）与代数数据控制。",
-      "紧黎曼曲面上的全纯函数只有常数；亚纯函数构成域，黎曼–罗赫定理用亏格精确控制亚纯函数与亚纯微分空间的维数。",
-      "覆叠与单值化：任意黎曼曲面有万有覆叠（提升复结构后仍是黎曼曲面），$S=\\tilde S/\\Gamma$，$\\Gamma\\cong\\pi_1(S)$；代数函数的黎曼面正是「多值函数单值化」的精确实现（$\\sqrt{\\cdot}$ 对应二重覆叠与单值群 $\\mathbb Z/2$）。",
-      "亏格由代数数据决定：$w^{2}=P(z)$ 时 $g=\\lfloor(n-1)/2\\rfloor$，所以 $w^{2}=P_3$ 与 $w^{2}=P_4$ 给出同一个几何对象（环面），对应的积分是椭圆积分——多值函数的「复杂程度」与曲面的拓扑并不一一对应。"
-    ],
-    "propertiesEn": [
-      "A Riemann surface is a two-dimensional orientable smooth surface plus a complex structure; transition functions are holomorphic (hence conformal), so the conformal structure is the whole story.",
-      "Locally it is exactly $\\mathbb C$ (holomorphic and meromorphic functions, differential forms, residues and integrals are defined chart by chart and are coordinate-free); global behaviour is governed by topology (genus, fundamental group, monodromy) and algebraic data.",
-      "Holomorphic functions on a compact Riemann surface are constant; meromorphic functions form a field, and the dimensions of holomorphic and meromorphic differential spaces are controlled by Riemann–Roch.",
-      "Coverings and uniformisation: every Riemann surface has a universal cover (still a Riemann surface with the lifted complex structure), $S=\\tilde S/\\Gamma$ with $\\Gamma\\cong\\pi_1(S)$; the Riemann surface of an algebraic function is the precise realisation of 'making a multivalued function single-valued' ($\\sqrt{\\cdot}$ giving a double cover with monodromy $\\mathbb Z/2$).",
-      "Genus is determined by algebraic data: for $w^{2}=P(z)$, $g=\\lfloor(n-1)/2\\rfloor$, which is why $w^{2}=P_3$ and $w^{2}=P_4$ describe the same geometric object (a torus) with elliptic integrals attached — the complexity of the formula and the topology of the surface need not match."
-    ],
-    "plot": {
-      "type": "surface3d",
-      "surf": {
-        "x": "u*cos(v)",
-        "y": "u*sin(v)",
-        "z": "v/3"
-      },
-      "uRange": [
-        0,
-        1
-      ],
-      "vRange": [
-        -6.2832,
-        6.2832
-      ],
-      "density": [
-        16,
-        60
-      ],
-      "color": "#4cc9f0",
-      "title": "√z 的黎曼面示意（螺旋面）：绕原点转一圈并不回到原处，而是攀上另一叶——多值函数在合适的曲面上变成单值"
-    },
-    "examples": [
-      {
-        "problem": "求 $w^{2}=z^{4}-1$ 所定义代数曲线的黎曼面的亏格，并用黎曼–胡维茨公式交叉核对。",
-        "solution": "$n=\\deg P=4$，由 $g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor$ 得 $$g=\\left\\lfloor\\frac{3}{2}\\right\\rfloor=1,$$ 即黎曼面是环面（椭圆曲线）。\n\n核对分支点：$P(z)=z^{4}-1$ 有四个单根 $\\pm1,\\pm i$，均为换叶点；由于 $n=4$ 为偶数，$\\infty$ **不是**分支点（在 $\\infty$ 附近展开 $w=z^{2}\\sqrt{1-z^{-4}}$ 是单值的）。于是 $B=4$，双叶覆叠 $g'=0$ 时 $$g=\\frac B2-1=\\frac42-1=1,$$ 与前面的结果一致。相应的积分 $\\int\\frac{\\mathrm dz}{\\sqrt{z^{4}-1}}$ 是椭圆积分，其反函数是椭圆函数——而椭圆函数应生活在环面上，与 $g=1$ 相符。"
-      },
-      {
-        "problem": "求 $w^{2}=z(z-1)(z-2)(z-3)(z-4)$ 的黎曼面的亏格，并说明为什么这个曲面上不存在非平凡的亚纯函数以外的「好」函数。",
-        "solution": "$n=\\deg P=5$，故 $$g=\\left\\lfloor\\frac{5-1}{2}\\right\\rfloor=2.$$ 核对：$P$ 有五个单根，$n$ 为奇数故 $\\infty$ 也是分支点，$B=5+1=6$，于是 $g=\\frac62-1=2$。\n\n曲面上全纯函数的讨论：设 $S$ 是紧黎曼曲面，$f$ 在 $S$ 上全纯。由于 $S$ 紧，连续函数 $|f|$ 在 $S$ 上取到最大值 $M$；设该点附近的一张坐标为圆盘 $\\varphi:U\\to\\Delta$，则 $f\\circ\\varphi^{-1}$ 是圆盘上的全纯函数，且在某个内点 $|f\\circ\\varphi^{-1}|$ 取到最大值，由最大模原理 $f\\circ\\varphi^{-1}$ 在 $\\Delta$ 上为常数，即 $f$ 在 $U$ 上为常数。同样的论证适用于集合 $A=\\{z\\in S:f(z)=f(p)\\}$ 中的每一点（该点处 $|f|$ 也取到最大值 $M$），故 $A$ 既开又闭且非空，由 $S$ 连通得 $A=S$：**$S$ 上只有常值全纯函数**。非平凡的对象必须是亚纯函数（允许极点），例如 $w$ 与 $z$ 本身就在 $S$ 上：$z$ 是二重覆叠投影 $S\\to\\hat{\\mathbb C}$，$w$ 是它的「另一叶」，二者由方程 $w^{2}=P(z)$ 联系；$S$ 上的亚纯函数域由 $z,w$ 生成，$w$ 是 $z$ 的二次代数函数。"
-      },
-      {
-        "problem": "比较 $\\sqrt z$ 与 $\\log z$ 的黎曼面：叶数、枝点与紧性有何不同？",
-        "solution": "$\\sqrt z$：方程 $w^{2}=z$，$n=1$，$g=\\lfloor0/2\\rfloor=0$，即黎曼面是球面；它有两叶（$w$ 与 $-w$），枝点为 $0$ 与 $\\infty$，单值群 $\\mathbb Z/2$。作为黎曼曲面它同构于 $\\hat{\\mathbb C}$——$w=\\sqrt z$ 本身就是整体坐标，绕原点两圈才回到原处。\n\n$\\log z$：它是 $\\mathbb C\\setminus\\{0\\}$ 上「$\\mathrm dz/z$ 的反导数」，其黎曼面是 $\\mathbb C\\setminus\\{0\\}$ 的万有覆叠，无穷多叶；映射 $w\\mapsto e^{w}$ 给出覆叠 $\\mathbb C\\to\\mathbb C\\setminus\\{0\\}$，而 $\\mathbb C$ 单连通，故这个覆叠就是万有覆叠，$\\log z$ 的黎曼面共形等价于 $\\mathbb C$——它是**非紧**的。\n\n结论：代数方程（多项式）会强制曲面紧（$\\sqrt z$ 补上 $\\infty$ 后是球面），而 $\\log z$ 不是代数函数，它的曲面不能紧化。这也正是「代数函数的黎曼面是紧可定向曲面」这一断言的边界。"
-      }
-    ],
-    "tags": [
-      "黎曼曲面",
-      "复流形",
-      "黎曼球面",
-      "亏格",
-      "代数函数",
-      "单值化"
-    ],
-    "links": [
-      "analytic-continuation",
-      "monodromy-theorem",
-      "elliptic-functions",
-      "meromorphic-functions",
-      "uniformization-theorem",
-      "riemann-mapping-theorem",
-      "smooth-manifold"
-    ]
+  "examples": [
+   {
+    "problem": "求 $w^{2}=z^{4}-1$ 所定义代数曲线的黎曼面的亏格，并用黎曼–胡维茨公式交叉核对。",
+    "solution": "$n=\\deg P=4$，由 $g=\\left\\lfloor\\frac{n-1}{2}\\right\\rfloor$ 得 $$g=\\left\\lfloor\\frac{3}{2}\\right\\rfloor=1,$$ 即黎曼面是环面（椭圆曲线）。\n\n核对分支点：$P(z)=z^{4}-1$ 有四个单根 $\\pm1,\\pm i$，均为换叶点；由于 $n=4$ 为偶数，$\\infty$ **不是**分支点（在 $\\infty$ 附近展开 $w=z^{2}\\sqrt{1-z^{-4}}$ 是单值的）。于是 $B=4$，双叶覆叠 $g'=0$ 时 $$g=\\frac B2-1=\\frac42-1=1,$$ 与前面的结果一致。相应的积分 $\\int\\frac{\\mathrm dz}{\\sqrt{z^{4}-1}}$ 是椭圆积分，其反函数是椭圆函数——而椭圆函数应生活在环面上，与 $g=1$ 相符。"
+   },
+   {
+    "problem": "求 $w^{2}=z(z-1)(z-2)(z-3)(z-4)$ 的黎曼面的亏格，并说明为什么这个曲面上不存在非平凡的亚纯函数以外的「好」函数。",
+    "solution": "$n=\\deg P=5$，故 $$g=\\left\\lfloor\\frac{5-1}{2}\\right\\rfloor=2.$$ 核对：$P$ 有五个单根，$n$ 为奇数故 $\\infty$ 也是分支点，$B=5+1=6$，于是 $g=\\frac62-1=2$。\n\n曲面上全纯函数的讨论：设 $S$ 是紧黎曼曲面，$f$ 在 $S$ 上全纯。由于 $S$ 紧，连续函数 $|f|$ 在 $S$ 上取到最大值 $M$；设该点附近的一张坐标为圆盘 $\\varphi:U\\to\\Delta$，则 $f\\circ\\varphi^{-1}$ 是圆盘上的全纯函数，且在某个内点 $|f\\circ\\varphi^{-1}|$ 取到最大值，由最大模原理 $f\\circ\\varphi^{-1}$ 在 $\\Delta$ 上为常数，即 $f$ 在 $U$ 上为常数。同样的论证适用于集合 $A=\\{z\\in S:f(z)=f(p)\\}$ 中的每一点（该点处 $|f|$ 也取到最大值 $M$），故 $A$ 既开又闭且非空，由 $S$ 连通得 $A=S$：**$S$ 上只有常值全纯函数**。非平凡的对象必须是亚纯函数（允许极点），例如 $w$ 与 $z$ 本身就在 $S$ 上：$z$ 是二重覆叠投影 $S\\to\\hat{\\mathbb C}$，$w$ 是它的「另一叶」，二者由方程 $w^{2}=P(z)$ 联系；$S$ 上的亚纯函数域由 $z,w$ 生成，$w$ 是 $z$ 的二次代数函数。"
+   },
+   {
+    "problem": "比较 $\\sqrt z$ 与 $\\log z$ 的黎曼面：叶数、枝点与紧性有何不同？",
+    "solution": "$\\sqrt z$：方程 $w^{2}=z$，$n=1$，$g=\\lfloor0/2\\rfloor=0$，即黎曼面是球面；它有两叶（$w$ 与 $-w$），枝点为 $0$ 与 $\\infty$，单值群 $\\mathbb Z/2$。作为黎曼曲面它同构于 $\\hat{\\mathbb C}$——$w=\\sqrt z$ 本身就是整体坐标，绕原点两圈才回到原处。\n\n$\\log z$：它是 $\\mathbb C\\setminus\\{0\\}$ 上「$\\mathrm dz/z$ 的反导数」，其黎曼面是 $\\mathbb C\\setminus\\{0\\}$ 的万有覆叠，无穷多叶；映射 $w\\mapsto e^{w}$ 给出覆叠 $\\mathbb C\\to\\mathbb C\\setminus\\{0\\}$，而 $\\mathbb C$ 单连通，故这个覆叠就是万有覆叠，$\\log z$ 的黎曼面共形等价于 $\\mathbb C$——它是**非紧**的。\n\n结论：代数方程（多项式）会强制曲面紧（$\\sqrt z$ 补上 $\\infty$ 后是球面），而 $\\log z$ 不是代数函数，它的曲面不能紧化。这也正是「代数函数的黎曼面是紧可定向曲面」这一断言的边界。"
+   }
+  ],
+  "tags": [
+   "黎曼曲面",
+   "复流形",
+   "黎曼球面",
+   "亏格",
+   "代数函数",
+   "单值化"
+  ],
+  "links": [
+   "analytic-continuation",
+   "monodromy-theorem",
+   "elliptic-functions",
+   "meromorphic-functions",
+   "uniformization-theorem",
+   "riemann-mapping-theorem",
+   "smooth-manifold"
+  ]
+ },
+ {
+  "id": "uniformization-theorem",
+  "title": "单值化定理",
+  "titleEn": "The Uniformization Theorem",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "单值化定理：每个单连通的黎曼曲面恰共形等价于三种模型之一——黎曼球面 $\\hat{\\mathbb C}$（椭圆型）、复平面 $\\mathbb C$（抛物型）、单位圆盘 $\\Delta$（双曲型）；一般的黎曼曲面就是这三种万有覆叠之一除以一个离散群。",
+  "summaryEn": "The uniformization theorem: every simply connected Riemann surface is conformally equivalent to exactly one of three models — the Riemann sphere $\\hat{\\mathbb C}$ (elliptic), the complex plane $\\mathbb C$ (parabolic), the unit disk $\\Delta$ (hyperbolic); a general Riemann surface is one of these universal covers modulo a discrete group.",
+  "definition": "**单值化定理**（庞加莱与克贝于 1907 年独立证明）：设 $S$ 是单连通的黎曼曲面，则 $S$ 共形等价于且**仅**等价于下列三者之一：$$\\text{(i)}\\ \\hat{\\mathbb C}\\ \\text{（椭圆型）},\\qquad \\text{(ii)}\\ \\mathbb C\\ \\text{（抛物型）},\\qquad \\text{(iii)}\\ \\Delta=\\{|z|<1\\}\\ \\text{（双曲型）}.$$ 「共形等价」指存在双全纯双射。于是单连通黎曼曲面的模型只有三个，判据是它「有多大」：紧、还是非紧但全纯函数少、还是能被有界全纯函数刻画。\n\n三者**两两不共形等价**，这正是「恰有其一」的根据。$\\hat{\\mathbb C}$ 紧而 $\\mathbb C$、$\\Delta$ 都不紧，且 $\\hat{\\mathbb C}$ 上全纯函数必为常数；$\\mathbb C$ 与 $\\Delta$ 之别用**刘维尔定理**：若有双全纯 $f:\\mathbb C\\to\\Delta$，则 $f$ 是有界整函数，必为常数，与单射矛盾。**皮卡小定理**（非常数整函数至多漏掉一个值）给出更细的判据：若 $\\mathbb C\\setminus\\{0,1\\}$ 的万有覆叠是 $\\mathbb C$，覆盖映射就是一个不取 $0,1$ 的非常数整函数，与皮卡定理矛盾；故它的万有覆叠只能是 $\\Delta$（双曲型）。这一推理模式可以判定绝大多数显式区域的类型。\n\n**一般（非单连通）情形**由覆叠空间理论给出。任意连通黎曼曲面 $S$ 有万有覆叠 $\\tilde S$：赋予提升的复结构后 $\\tilde S$ 仍是黎曼曲面且单连通，并且 $$S=\\tilde S/\\Gamma,\\qquad \\Gamma\\cong\\pi_1(S),$$ 其中 $\\Gamma$ 是 $\\tilde S$ 全纯自同构群的子群，自由、纯不连续（properly discontinuous）地作用。单值化定理立刻把 $\\tilde S$ 限定为三种，曲面据此分为三类：\n\n- **椭圆型**（$\\tilde S=\\hat{\\mathbb C}$）：由于 $\\operatorname{Aut}(\\hat{\\mathbb C})=\\mathrm{PSL}(2,\\mathbb C)$ 的每个非平凡元在 $\\hat{\\mathbb C}$ 上都有不动点，自由的离散作用只能是平凡群，所以唯一的椭圆型黎曼曲面就是 $\\hat{\\mathbb C}$ 自己。\n- **抛物型**（$\\tilde S=\\mathbb C$）：$z\\mapsto az+b$ 中无不动点的只有平移（$a=1,b\\neq0$），故 $\\Gamma$ 只能是平移的离散子群 $\\cong 0$、$\\mathbb Z$ 或 $\\mathbb Z^{2}$。平凡群给出 $\\mathbb C$ 自身；$\\mathbb Z$ 给出柱面 $\\mathbb C/\\mathbb Z\\cong\\mathbb C^{*}$（拓扑上是无界环带），$\\mathbb Z^{2}$ 给出环面 $\\mathbb C/\\Lambda$；再加上去心平面 $\\mathbb C^{*}=\\mathbb C/2\\pi i\\mathbb Z$（由指数映射）。这些都满足「亏格 $\\le1$」。\n- **双曲型**（$\\tilde S=\\Delta$，$S=\\Delta/\\Gamma$，$\\Gamma$ 称为 Fuchsian 群）：所有亏格 $g\\ge2$ 的紧曲面、圆环 $\\{1<|z|<R\\}$、$\\mathbb C\\setminus\\{0,1\\}$ 以及一切「洞足够多」的区域都属此类。\n\n**意义与联系。**三种模型各自携带自然的常曲率度量：$\\hat{\\mathbb C}$ 上有 Fubini–Study 度量（$K=+1$，球面几何）、$\\mathbb C$ 上有欧氏度量（$K=0$）、$\\Delta$ 上有庞加莱度量（$K=-1$，双曲几何）。因此单值化定理断言：黎曼曲面上自然的、共形不变的几何只有这三种曲率符号的可能——这是几何化纲领在二维的完整答案。与**黎曼映射定理**的关系同样清楚：后者说单连通真区域 $D\\subsetneq\\mathbb C$（且 $D\\neq\\mathbb C$）共形等价于 $\\Delta$，正是情形 (iii) 在平面区域上的特例（$D$ 单连通故 $S=D$；$D$ 不能是 $\\hat{\\mathbb C}$，也不能是 $\\mathbb C$）。历史上，这一定理源自庞加莱对代数曲线、自守函数与 Fuchsian/Kleinian 群的研究（克莱因的自守函数论），它把「亏格 $\\ge2$ 的曲面必带双曲度量」变成定理，也是今天 Teichmüller 理论、Kleinian 群与三维几何化纲领的出发点。",
+  "definitionEn": "**The uniformization theorem** (proved independently by Poincaré and Koebe in 1907): a simply connected Riemann surface $S$ is conformally equivalent to exactly one of $$\\text{(i)}\\ \\hat{\\mathbb C}\\ \\text{(elliptic)},\\qquad \\text{(ii)}\\ \\mathbb C\\ \\text{(parabolic)},\\qquad \\text{(iii)}\\ \\Delta=\\{|z|<1\\}\\ \\text{(hyperbolic)},$$ where conformal equivalence means a biholomorphic bijection. Thus there are only three models of simply connected Riemann surfaces, distinguished by how large they are.\n\nThe three are pairwise non-equivalent, which is what makes the trichotomy sharp. $\\hat{\\mathbb C}$ is compact while $\\mathbb C$ and $\\Delta$ are not (and every holomorphic function on $\\hat{\\mathbb C}$ is constant); $\\mathbb C$ differs from $\\Delta$ by **Liouville's theorem** — a biholomorphic $f:\\mathbb C\\to\\Delta$ would be a bounded entire function, hence constant, contradicting injectivity. **Picard's little theorem** (a non-constant entire function omits at most one value) sharpens the classification: if the universal cover of $\\mathbb C\\setminus\\{0,1\\}$ were $\\mathbb C$, the covering map would be a non-constant entire function omitting both $0$ and $1$, contradicting Picard; hence its universal cover must be $\\Delta$. This pattern decides the type of most explicitly given regions.\n\nFor a **general (non-simply-connected) surface**, covering space theory takes over: every connected Riemann surface $S$ has a universal cover $\\tilde S$, which is again a Riemann surface (with the lifted complex structure) and simply connected, and $$S=\\tilde S/\\Gamma,\\qquad \\Gamma\\cong\\pi_1(S),$$ where $\\Gamma$ acts freely and properly discontinuously by holomorphic automorphisms. Uniformization then leaves only three possibilities, giving the classification into **elliptic**, **parabolic** and **hyperbolic** surfaces.\n\n- **Elliptic** ($\\tilde S=\\hat{\\mathbb C}$): every non-identity element of $\\operatorname{Aut}(\\hat{\\mathbb C})=\\mathrm{PSL}(2,\\mathbb C)$ has a fixed point on $\\hat{\\mathbb C}$, so a free discrete action must be trivial — the only elliptic Riemann surface is $\\hat{\\mathbb C}$ itself.\n- **Parabolic** ($\\tilde S=\\mathbb C$): among the affine maps $z\\mapsto az+b$ only translations ($a=1$, $b\\neq0$) are fixed-point free, so $\\Gamma$ is a discrete group of translations, $\\cong\\mathbb Z$ or $\\mathbb Z^{2}$: cylinders $\\mathbb C/\\mathbb Z\\cong\\mathbb C^{*}$ (topologically an unbounded annulus) in the first case, tori $\\mathbb C/\\Lambda$ in the second, together with $\\mathbb C^{*}=\\mathbb C/2\\pi i\\mathbb Z$ from the exponential map. All have genus $\\le1$.\n- **Hyperbolic** ($\\tilde S=\\Delta$, $S=\\Delta/\\Gamma$ with $\\Gamma$ a Fuchsian group): all compact surfaces of genus $g\\ge2$, annuli $\\{1<|z|<R\\}$, $\\mathbb C\\setminus\\{0,1\\}$ and every region with sufficiently many holes.\n\n**Significance.** Each model carries a natural constant-curvature metric: Fubini–Study on $\\hat{\\mathbb C}$ ($K=+1$, spherical geometry), the Euclidean metric on $\\mathbb C$ ($K=0$), the Poincaré metric on $\\Delta$ ($K=-1$, hyperbolic geometry). Uniformization therefore says that only these three curvature signs can occur for a natural conformally invariant geometry on a Riemann surface — the complete two-dimensional answer of the geometrisation programme. The link with the **Riemann mapping theorem** is equally transparent: that theorem states that a simply connected proper subregion $D\\subsetneq\\mathbb C$ is conformally equivalent to $\\Delta$, which is case (iii) for planar domains ($S=D$ simply connected, $D$ neither $\\hat{\\mathbb C}$ nor $\\mathbb C$). Historically the theorem grew out of Poincaré's work on algebraic curves, automorphic functions and Fuchsian/Kleinian groups (Klein's theory of automorphic functions); it turned 'every surface of genus $\\ge2$ carries a hyperbolic metric' into a theorem and is the starting point of Teichmüller theory, Kleinian groups and three-dimensional geometrisation.",
+  "formulas": [
+   {
+    "latex": "S\\ \\text{单连通}\\ \\Longrightarrow\\ S\\cong\\widehat{\\mathbb C},\\quad S\\cong\\mathbb C,\\quad \\text{或}\\quad S\\cong\\Delta\\ \\text{（恰有其一）}",
+    "note": "单值化定理（庞加莱–克贝 1907）：单连通黎曼曲面只有三种共形模型。",
+    "noteEn": "The uniformization theorem (Poincaré–Koebe 1907): a simply connected Riemann surface has exactly one of three conformal models."
+   },
+   {
+    "latex": "S=\\tilde S/\\Gamma,\\qquad \\Gamma\\cong\\pi_1(S)\\ \\text{自由、纯不连续地作用}",
+    "note": "一般曲面 = 万有覆叠除以离散群；$\\tilde S$ 属于三种模型之一，据此定义椭圆型/抛物型/双曲型。",
+    "noteEn": "A general surface is its universal cover modulo a discrete group; since $\\tilde S$ is one of the three models this defines the elliptic/parabolic/hyperbolic types."
+   },
+   {
+    "latex": "K=+1\\ (\\widehat{\\mathbb C}),\\qquad K=0\\ (\\mathbb C),\\qquad K=-1\\ (\\Delta,\\ \\text{庞加莱度量})",
+    "note": "三种模型对应曲率 $+1,0,-1$ 的常曲率共形度量；双曲型曲面自动获得曲率 $-1$ 的完备度量。",
+    "noteEn": "The three models carry constant-curvature conformal metrics with $K=+1,0,-1$; hyperbolic surfaces automatically carry a complete metric of curvature $-1$."
+   },
+   {
+    "latex": "g\\ge2\\ \\Longrightarrow\\ S\\cong\\Delta/\\Gamma,\\qquad \\Gamma\\ \\text{为 Fuchsian 群}",
+    "note": "亏格 $\\ge2$ 的紧黎曼曲面必为双曲型：其万有覆叠既不能是 $\\hat{\\mathbb C}$ 也不能是 $\\mathbb C$（后者的自由作用只能是平移，商空间亏格 $\\le1$）。",
+    "noteEn": "A compact Riemann surface of genus $\\ge2$ is hyperbolic: its universal cover can be neither $\\hat{\\mathbb C}$ nor $\\mathbb C$ (free affine actions are translations, giving genus $\\le1$)."
+   },
+   {
+    "latex": "D\\subsetneq\\mathbb C\\ \\text{单连通}\\ \\Longrightarrow\\ D\\cong\\Delta\\qquad\\text{（黎曼映射定理）}",
+    "note": "黎曼映射定理是情形 (iii) 的平面特例；单值化定理把它推广到任意黎曼曲面与任意拓扑。",
+    "noteEn": "The Riemann mapping theorem is the planar special case of (iii); uniformization extends it to arbitrary Riemann surfaces and topologies."
+   }
+  ],
+  "properties": [
+   "三种模型互不共形等价：$\\hat{\\mathbb C}$ 由紧性区分，$\\mathbb C$ 与 $\\Delta$ 由刘维尔定理区分（皮卡定理给出更细的类型判据，如 $\\mathbb C\\setminus\\{0,1\\}$ 是双曲型）。",
+   "任意黎曼曲面 = 三种万有覆叠之一除以离散群；曲面由此分为椭圆型、抛物型、双曲型三类，分类只依赖复结构与基本群。",
+   "与曲率的统一：三种模型分别带 $K=+1,0,-1$ 的常曲率共形度量；双曲型曲面（如亏格 $\\ge2$）自动获得完备的曲率 $-1$ 度量，且该度量在其共形类中唯一。",
+   "黎曼映射定理是其特例；反过来单值化把共形分类从平面区域推广到任意拓扑的黎曼曲面。",
+   "类型判据很具体：椭圆型只有 $\\hat{\\mathbb C}$；抛物型是 $\\mathbb C$ 的商（柱面 $\\mathbb C/\\mathbb Z\\cong\\mathbb C^{*}$、环面；有界圆环 $\\{1<|z|<R\\}$ 属**双曲型**），亏格 $\\le1$；亏格 $\\ge2$ 的紧曲面、$\\mathbb C\\setminus\\{0,1\\}$、圆环 $\\{1<|z|<R\\}$ 都是双曲型。",
+   "亏格 $\\ge2$ 时双曲结构并不唯一，由 Teichmüller 空间参数化（实维数 $6g-6$）——这是与三维及以上 Mostow 刚性的鲜明对比。"
+  ],
+  "propertiesEn": [
+   "The three models are pairwise non-conformally equivalent: compactness separates $\\hat{\\mathbb C}$, Liouville's theorem separates $\\mathbb C$ from $\\Delta$ (Picard's theorem sharpens the criterion, e.g. $\\mathbb C\\setminus\\{0,1\\}$ is hyperbolic).",
+   "Every Riemann surface is one of the three universal covers modulo a discrete group, giving the elliptic/parabolic/hyperbolic trichotomy determined by the complex structure and the fundamental group.",
+   "Unified curvature: the models carry constant-curvature conformal metrics with $K=+1,0,-1$; hyperbolic surfaces (e.g. genus $\\ge2$) automatically carry a complete curvature $-1$ metric, unique in its conformal class.",
+   "The Riemann mapping theorem is a special case, while uniformization generalises the conformal classification to Riemann surfaces of arbitrary topology.",
+   "Concrete type criteria: the only elliptic surface is $\\hat{\\mathbb C}$; parabolic surfaces are quotients of $\\mathbb C$ (cylinders, annuli, tori, $\\mathbb C^{*}$) and have genus $\\le1$; compact surfaces of genus $\\ge2$, $\\mathbb C\\setminus\\{0,1\\}$ and annuli $\\{1<|z|<R\\}$ are hyperbolic.",
+   "For genus $\\ge2$ the hyperbolic structure is far from unique — hyperbolic structures are parametrised by Teichmüller space of real dimension $6g-6$, in sharp contrast with Mostow rigidity in dimensions three and higher."
+  ],
+  "examples": [
+   {
+    "problem": "确定复环面 $\\mathbb C/\\Lambda$ 的单值化类型与基本群，并说明何时两个环面是共形等价的。",
+    "solution": "商映射 $\\mathbb C\\to\\mathbb C/\\Lambda$ 是覆叠映射，$\\mathbb C$ 单连通，所以 $\\mathbb C/\\Lambda$ 的万有覆叠就是 $\\mathbb C$，即**抛物型**；$\\Gamma=\\Lambda\\cong\\mathbb Z^{2}$ 且 $\\pi_1(\\mathbb C/\\Lambda)\\cong\\mathbb Z^{2}$。退化情形：若 $\\Lambda$ 只由一个周期生成（秩 1），商空间是柱面或环带，同样是抛物型。\n\n共形分类：$\\mathbb C/\\Lambda$ 与 $\\mathbb C/\\Lambda'$ 共形等价当且仅当 $\\Lambda'=c\\Lambda$ 对某个 $c\\in\\mathbb C^{*}$。把 $\\Lambda$ 归一化为 $\\mathbb Z+\\mathbb Z\\tau$（$\\operatorname{Im}\\tau>0$）后，可见环面的共形类型由模数 $\\tau$ 决定，而 $j$ 不变量恰是它的完全分类不变量——这也解释了为什么亏格 1 的复结构与椭圆函数的周期结构由同一份数据控制。"
+   },
+   {
+    "problem": "证明亏格 $g\\ge2$ 的紧黎曼曲面 $S$ 是双曲型，即 $S\\cong\\Delta/\\Gamma$。",
+    "solution": "由单值化定理，万有覆叠 $\\tilde S$ 只能是 $\\hat{\\mathbb C}$、$\\mathbb C$ 或 $\\Delta$。\n\n排除 $\\hat{\\mathbb C}$：若 $\\tilde S=\\hat{\\mathbb C}$，则 $S=\\hat{\\mathbb C}/\\Gamma$，而 $\\operatorname{Aut}(\\hat{\\mathbb C})=\\mathrm{PSL}(2,\\mathbb C)$ 中每个非平凡 Möbius 变换在 $\\hat{\\mathbb C}$ 上都有不动点，与 $\\Gamma$ 的**自由**作用矛盾，故 $\\Gamma$ 平凡、$S=\\hat{\\mathbb C}$，亏格 $0$，矛盾。\n\n排除 $\\mathbb C$：$\\operatorname{Aut}(\\mathbb C)=\\{z\\mapsto az+b\\}$，其中 $a\\neq1$ 的映射有不动点，故 $\\Gamma$ 只能由平移组成：$\\Gamma\\cong\\mathbb Z$（商为柱面/环带）或 $\\Gamma\\cong\\mathbb Z^{2}$（商为环面），此时 $S$ 的亏格 $\\le1$，与 $g\\ge2$ 矛盾。\n\n于是只能是 $\\tilde S=\\Delta$，即 $S\\cong\\Delta/\\Gamma$，并把 $\\Delta$ 上的庞加莱度量（$K=-1$）下降到 $S$ 上——这给出「高亏格紧曲面必为双曲曲面」的标准证明，也把曲面的几何与全纯自同构群（有限群，Hurwitz 界 $84(g-1)$）联系起来。"
+   },
+   {
+    "problem": "说明 $\\mathbb C\\setminus\\{0,1\\}$ 是双曲型，并解释为什么用皮卡定理即可排除抛物型。",
+    "solution": "反设 $\\mathbb C\\setminus\\{0,1\\}$ 的万有覆叠是 $\\mathbb C$，则覆盖映射 $$p:\\mathbb C\\longrightarrow\\mathbb C\\setminus\\{0,1\\}$$ 是满射且局部双全纯，特别地 $p$ 是非常数整函数，且对每个 $z$ 有 $p(z)\\neq0$、$p(z)\\neq1$——即 $p$ 漏掉了两个值 $0$ 与 $1$。\n\n但**皮卡小定理**断言：非常数整函数至多漏掉一个值。矛盾。所以万有覆叠不是 $\\mathbb C$；它也不可能是 $\\hat{\\mathbb C}$：$\\hat{\\mathbb C}$ 上自由且纯不连续的 Möbius 作用只能是平凡的（每个非平凡 Möbius 变换在 $\\hat{\\mathbb C}$ 上都有不动点），那样 $S$ 就只能是 $\\hat{\\mathbb C}$ 本身，与 $\\mathbb C\\setminus\\{0,1\\}$ 非紧矛盾。于是只能是 $\\Delta$：$\\mathbb C\\setminus\\{0,1\\}$ 是双曲型，$\\mathbb C\\setminus\\{0,1\\}=\\Delta/\\Gamma$，$\\Gamma\\cong\\pi_1$（自由群 $F_2$）。这与直观一致：去掉两个点使区域「洞」变多，双曲度量在其中自然生长。"
+   }
+  ],
+  "tags": [
+   "单值化定理",
+   "黎曼曲面",
+   "万有覆叠",
+   "Fuchsian 群",
+   "刘维尔定理",
+   "皮卡定理"
+  ],
+  "links": [
+   "riemann-surfaces",
+   "riemann-mapping-theorem",
+   "hyperbolic-geometry-poincare",
+   "covering-space",
+   "fundamental-group",
+   "liouville-theorem",
+   "picard-theorems"
+  ]
+ },
+ {
+  "id": "hyperbolic-geometry-poincare",
+  "title": "双曲几何与庞加莱模型",
+  "titleEn": "Hyperbolic Geometry and the Poincaré Model",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "庞加莱圆盘把双曲平面实现为单位圆盘配上度量 $ds^{2}=\\frac{4|dz|^{2}}{(1-|z|^{2})^{2}}$：测地线是与边界正交的圆弧，距离由 $\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|$ 给出；施瓦茨–皮克引理说明解析自映射是双曲度量的收缩，而等距群正是把圆盘映到圆盘的 Möbius 变换。",
+  "summaryEn": "The Poincaré disk realises the hyperbolic plane as the unit disk with the metric $ds^{2}=4|dz|^{2}/(1-|z|^{2})^{2}$: geodesics are circular arcs orthogonal to the boundary, distances are $\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|$, analytic self-maps are contractions by Schwarz–Pick, and the isometry group is the group of disk-preserving Möbius transformations.",
+  "definition": "**庞加莱圆盘模型**：取 $\\Delta=\\{|z|<1\\}$，赋予黎曼度量 $$ds^{2}=\\frac{4\\,|dz|^{2}}{(1-|z|^{2})^{2}},\\qquad\\text{即}\\qquad ds=\\frac{2\\,|dz|}{1-|z|^{2}}.$$ 它是欧氏度量的逐点缩放，但缩放因子依赖位置，所以曲率不再是 $0$：把共形度量写成 $ds^{2}=e^{2\\sigma}|dz|^{2}$（这里 $e^{2\\sigma}=\\frac{4}{(1-|z|^{2})^{2}}$），代入公式 $K=-e^{-2\\sigma}\\Delta\\sigma$ 可得 $K\\equiv-1$。这一点最要紧：$\\Delta$ 上存在常负曲率 $-1$ 的完备度量，于是 $\\Delta$ 成为**双曲平面** $\\mathbb H^{2}$ 的模型。离边界越近，度量的「单位尺」越短，一小段欧氏长度在靠近边界处对应越来越大的双曲长度；边界圆周 $\\partial\\Delta$ 在双曲意义下位于**无穷远**。\n\n**测地线**是**与 $\\partial\\Delta$ 正交的圆弧**，直径是其中的特殊情形（过圆心的正交弧恰为直径）；由于模型是共形的，双曲角等于欧氏角，画图与角度计算都很直接。**双曲距离**由 $$\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|,\\qquad \\text{特别地}\\quad \\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}$$ 给出；等价的代数形式是 $\\cosh\\rho(z,w)=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$。（分子分母同时除以 $|1-\\bar wz|$ 即得 $\\rho=\\ln\\frac{|1-\\bar wz|+|z-w|}{|1-\\bar wz|-|z-w|}$，其中 $|1-\\bar wz|^{2}-|z-w|^{2}=(1-|z|^{2})(1-|w|^{2})>0$ 保证了 $\\rho\\ge0$ 且仅当 $z=w$ 时等号成立。）$\\rho$ 满足三角不等式，且在 $|z|\\to1$ 时 $\\rho(0,z)\\to\\infty$：度量完备，边界永远达不到。\n\n**上半平面模型**：$\\mathbb H=\\{z:\\operatorname{Im}z>0\\}$ 配 $$ds^{2}=\\frac{dx^{2}+dy^{2}}{y^{2}},$$ 测地线是垂直于实轴的半圆与竖直线；Cayley 变换 $w=\\frac{z-i}{z+i}$ 把 $\\mathbb H$ 共形（且等距）地映到 $\\Delta$，两个模型完全等价，可按计算方便程度选用（上半平面上平移与伸缩是等距，圆盘上原点附近计算方便）。双曲几何的标志性事实：**三角形内角和小于 $\\pi$**，且角亏恰好是面积——由高斯–博内公式 $A=\\pi-(\\alpha+\\beta+\\gamma)$；顶点落在无穷远的**理想三角形**三个内角都是 $0$，面积恰为 $\\pi$（例如上半平面中顶点为 $0,1,\\infty$ 的理想三角形，面积可直接积分验证为 $\\pi$），三个理想三角形可以铺满整个双曲平面。**平行公设失效**：过直线外一点有无穷多条不相交的直线，其中还有「超平行」的一类（存在公垂线）。\n\n**与复分析的联系**是这套几何的现代动机。**施瓦茨–皮克引理**：若 $f:\\Delta\\to\\Delta$ 解析，则 $$\\rho(f(z),f(w))\\le\\rho(z,w),\\qquad \\frac{|f'(z)|}{1-|f(z)|^{2}}\\le\\frac{1}{1-|z|^{2}},$$ 即**解析自映射是双曲度量的（弱）收缩**；若在一点取等号，则 $f$ 必为双曲等距（$\\Delta$ 的自同构）。而双曲等距群恰恰是**把 $\\Delta$ 映到 $\\Delta$ 的 Möbius 变换**：$$\\operatorname{Aut}(\\Delta)=\\left\\{z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}:\\ a\\in\\Delta,\\ \\theta\\in\\mathbb R\\right\\},\\qquad \\operatorname{Aut}(\\mathbb H)=\\mathrm{PSL}(2,\\mathbb R),$$ 它们可迁地作用，故双曲平面是齐性空间；配合单值化定理，亏格 $\\ge2$ 的紧黎曼曲面自动获得双曲度量，几何与分析在此完全融合。最后，**伪球面**（曳物线绕轴旋转所得的曲面）是 $\\mathbb R^{3}$ 中曲率恒为 $-1$ 的旋转曲面，提供了双曲几何的局部模型；但希尔伯特定理指出完备的双曲平面不能等距浸入 $\\mathbb R^{3}$，所以整体的双曲几何只能由抽象曲面或庞加莱模型来承载。",
+  "definitionEn": "**The Poincaré disk model** takes $\\Delta=\\{|z|<1\\}$ with the Riemannian metric $$ds^{2}=\\frac{4\\,|dz|^{2}}{(1-|z|^{2})^{2}},\\qquad\\text{that is}\\qquad ds=\\frac{2\\,|dz|}{1-|z|^{2}}.$$ It is the Euclidean metric rescaled pointwise, but because the factor depends on position the curvature is no longer zero: writing $ds^{2}=e^{2\\sigma}|dz|^{2}$ with $e^{2\\sigma}=\\frac{4}{(1-|z|^{2})^{2}}$ and using $K=-e^{-2\\sigma}\\Delta\\sigma$ one obtains $K\\equiv-1$. This is the crucial point: $\\Delta$ carries a complete metric of constant curvature $-1$, so $\\Delta$ models the **hyperbolic plane** $\\mathbb H^{2}$. Near the boundary the unit of length shrinks, so small Euclidean distances correspond to ever larger hyperbolic lengths, and the circle $\\partial\\Delta$ lies at **infinity**.\n\n**Geodesics** are the circular arcs **orthogonal to $\\partial\\Delta$**, diameters being the special case of arcs through the centre; since the model is conformal, hyperbolic angles equal Euclidean ones, so pictures and angle computations are transparent. The **hyperbolic distance** is $$\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|,\\qquad \\text{in particular}\\quad \\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|},$$ with the equivalent algebraic form $\\cosh\\rho(z,w)=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$. Since $|1-\\bar wz|^{2}-|z-w|^{2}=(1-|z|^{2})(1-|w|^{2})>0$ for $z,w\\in\\Delta$, the argument of artanh is less than $1$, so $\\rho\\ge0$ with equality only for $z=w$; $\\rho$ satisfies the triangle inequality and $\\rho(0,z)\\to\\infty$ as $|z|\\to1$, so the metric is complete and the boundary is unreachable.\n\n**The upper half-plane model** puts $\\mathbb H=\\{z:\\operatorname{Im}z>0\\}$ with $$ds^{2}=\\frac{dx^{2}+dy^{2}}{y^{2}},$$ whose geodesics are semicircles perpendicular to the real axis together with vertical lines; the Cayley transform $w=\\frac{z-i}{z+i}$ maps $\\mathbb H$ conformally (and isometrically) onto $\\Delta$, so the models are interchangeable. The hallmark facts of hyperbolic geometry: **the angles of a triangle sum to less than $\\pi$** and the defect equals the area, $A=\\pi-(\\alpha+\\beta+\\gamma)$ by Gauss–Bonnet; an **ideal triangle** (vertices at infinity) has all angles $0$ and area exactly $\\pi$ (e.g. the triangle with vertices $0,1,\\infty$ in the upper half-plane, whose area can be verified by direct integration), and three ideal triangles tile the hyperbolic plane. **The parallel postulate fails**: through a point outside a line there are infinitely many non-intersecting lines, including the 'ultraparallel' ones that possess a common perpendicular.\n\n**The link with complex analysis** is the modern motivation. **Schwarz–Pick lemma**: if $f:\\Delta\\to\\Delta$ is analytic then $$\\rho(f(z),f(w))\\le\\rho(z,w),\\qquad \\frac{|f'(z)|}{1-|f(z)|^{2}}\\le\\frac{1}{1-|z|^{2}},$$ i.e. **an analytic self-map is a (weak) contraction of the hyperbolic metric**; equality at one point forces $f$ to be a hyperbolic isometry (an automorphism of $\\Delta$). The isometry group is exactly the group of **Möbius transformations mapping $\\Delta$ onto itself**: $$\\operatorname{Aut}(\\Delta)=\\left\\{z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}:\\ a\\in\\Delta,\\ \\theta\\in\\mathbb R\\right\\},\\qquad \\operatorname{Aut}(\\mathbb H)=\\mathrm{PSL}(2,\\mathbb R),$$ acting transitively, so the hyperbolic plane is a homogeneous space. Combined with uniformization, a compact Riemann surface of genus $\\ge2$ automatically receives a hyperbolic metric, fusing geometry and analysis. Finally, the **pseudosphere** (the surface obtained by rotating a tractrix) is a surface in $\\mathbb R^{3}$ of constant curvature $-1$, providing a local model of hyperbolic geometry; but Hilbert's theorem states that the complete hyperbolic plane cannot be isometrically immersed in $\\mathbb R^{3}$, so global hyperbolic geometry must live on abstract surfaces or in the Poincaré model.",
+  "formulas": [
+   {
+    "latex": "ds^{2}=\\frac{4\\,|dz|^{2}}{(1-|z|^{2})^{2}},\\qquad K\\equiv-1\\qquad(|z|<1)",
+    "note": "庞加莱圆盘度量与常负曲率；$e^{2\\sigma}=\\frac{4}{(1-|z|^{2})^{2}}$ 代入 $K=-e^{-2\\sigma}\\Delta\\sigma$ 得 $K=-1$。",
+    "noteEn": "The Poincaré disk metric and its constant negative curvature; substituting $e^{2\\sigma}=4/(1-|z|^{2})^{2}$ into $K=-e^{-2\\sigma}\\Delta\\sigma$ gives $K=-1$."
+   },
+   {
+    "latex": "\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|,\\qquad \\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}",
+    "note": "双曲距离；等价形式 $\\cosh\\rho=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$，$|z|\\to1$ 时 $\\rho\\to\\infty$（边界在无穷远）。",
+    "noteEn": "Hyperbolic distance; equivalently $\\cosh\\rho=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$, and $\\rho\\to\\infty$ as $|z|\\to1$ (the boundary lies at infinity)."
+   },
+   {
+    "latex": "ds^{2}=\\frac{dx^{2}+dy^{2}}{y^{2}}\\ (y>0);\\qquad w=\\frac{z-i}{z+i}:\\ \\mathbb H\\to\\Delta",
+    "note": "上半平面模型与 Cayley 变换：测地线是垂直于实轴的半圆或竖直线，两个模型等距等价。",
+    "noteEn": "The upper half-plane model and the Cayley transform: geodesics are semicircles orthogonal to the real axis or vertical lines, and the two models are isometric."
+   },
+   {
+    "latex": "\\frac{|f'(z)|}{1-|f(z)|^{2}}\\le\\frac{1}{1-|z|^{2}},\\qquad \\rho(f(z),f(w))\\le\\rho(z,w)\\qquad(f:\\Delta\\to\\Delta\\ \\text{解析})",
+    "note": "施瓦茨–皮克引理：解析自映射是双曲度量的收缩；在一点取等则 $f$ 是自同构（双曲等距）。",
+    "noteEn": "Schwarz–Pick lemma: analytic self-maps contract the hyperbolic metric; equality at one point makes $f$ an automorphism (a hyperbolic isometry)."
+   },
+   {
+    "latex": "\\operatorname{Aut}(\\Delta)=\\left\\{z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}:a\\in\\Delta,\\theta\\in\\mathbb R\\right\\},\\qquad \\operatorname{Aut}(\\mathbb H)=\\mathrm{PSL}(2,\\mathbb R)",
+    "note": "双曲等距群 = 保圆盘的 Möbius 变换群；它们可迁地作用，故双曲平面是齐性空间。",
+    "noteEn": "The hyperbolic isometry group is the group of disk-preserving Möbius transformations; it acts transitively, so the hyperbolic plane is homogeneous."
+   }
+  ],
+  "properties": [
+   "共形（保角）而距离失真：模型中的双曲角等于欧氏角，但靠近边界的「小」欧氏图形是巨大的双曲对象，$\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}\\to\\infty$。",
+   "完备性与曲率：$\\Delta$ 上的双曲度量完备、高斯曲率恒为 $-1$，边界圆是无穷远：测地线可以无限接近边界却永远达不到。",
+   "测地线是与边界正交的圆弧（直径为特例）；平行公设失效——过直线外一点有无穷多条不相交的测地线，还有带公垂线的超平行直线。",
+   "面积与内角：测地三角形面积 $A=\\pi-(\\alpha+\\beta+\\gamma)$（高斯–博内），内角和恒小于 $\\pi$；顶点在无穷远的理想三角形三个内角都为 $0$、面积恰为 $\\pi$，故双曲三角形的面积以 $\\pi$ 为上界——与欧氏几何（内角和 $=\\pi$、面积无上界）和球面几何（内角和 $>\\pi$）形成完整对照。",
+   "与复分析统一：解析自映射是双曲收缩（施瓦茨–皮克），等距群 = $\\Delta$ 的 Möbius 自同构群；由单值化定理，亏格 $\\ge2$ 的紧黎曼曲面 $=\\Delta/\\Gamma$，其全纯自同构群有限（Hurwitz 界 $84(g-1)$）。",
+   "伪球面是 $\\mathbb R^{3}$ 中曲率 $-1$ 的局部模型（曳物线旋转面），但希尔伯特定理说明完备的双曲平面不能等距浸入 $\\mathbb R^{3}$，整体双曲几何必须用抽象曲面或庞加莱模型描述。"
+  ],
+  "propertiesEn": [
+   "Conformal but distance-distorting: hyperbolic angles equal Euclidean ones, yet small Euclidean figures near the boundary are huge hyperbolic objects, since $\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}\\to\\infty$.",
+   "Completeness and curvature: the hyperbolic metric on $\\Delta$ is complete with constant Gaussian curvature $-1$, and the boundary circle lies at infinity — geodesics approach it but never reach it.",
+   "Geodesics are circular arcs orthogonal to the boundary (diameters being the special case); the parallel postulate fails — infinitely many disjoint geodesics pass through an exterior point, including ultraparallel pairs with a common perpendicular.",
+   "Area and angles: a geodesic triangle has area $A=\\pi-(\\alpha+\\beta+\\gamma)$ by Gauss–Bonnet and angle sum always below $\\pi$; an ideal triangle (vertices at infinity) has all angles $0$ and area exactly $\\pi$, so hyperbolic triangle areas are bounded above by $\\pi$ — the exact counterpart of Euclidean geometry (sum $=\\pi$, unbounded area) and spherical geometry (sum $>\\pi$).",
+   "Unified with complex analysis: analytic self-maps contract the hyperbolic metric (Schwarz–Pick) and the isometry group is the Möbius automorphism group of $\\Delta$; by uniformization a compact Riemann surface of genus $\\ge2$ is $\\Delta/\\Gamma$ with finite holomorphic automorphism group (Hurwitz bound $84(g-1)$).",
+   "The pseudosphere (a rotated tractrix) is a local model in $\\mathbb R^{3}$ of curvature $-1$, but Hilbert's theorem forbids an isometric immersion of the complete hyperbolic plane in $\\mathbb R^{3}$, so global hyperbolic geometry needs abstract surfaces or the Poincaré model."
+  ],
+  "plot": {
+   "type": "surface3d",
+   "surf": {
+    "x": "cos(v)/cosh(u)",
+    "y": "sin(v)/cosh(u)",
+    "z": "u-tanh(u)"
+   },
+   "uRange": [
+    0,
+    3
+   ],
+   "vRange": [
+    0,
+    6.2832
+   ],
+   "density": [
+    24,
+    48
+   ],
+   "color": "#b388ff",
+   "title": "伪球面（曳物线旋转面）：曲率恒为 −1 的双曲几何局部模型；完备的双曲平面无法等距嵌入三维欧氏空间，整体几何要靠庞加莱圆盘"
   },
-  {
-    "id": "uniformization-theorem",
-    "title": "单值化定理",
-    "titleEn": "The Uniformization Theorem",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "单值化定理：每个单连通的黎曼曲面恰共形等价于三种模型之一——黎曼球面 $\\hat{\\mathbb C}$（椭圆型）、复平面 $\\mathbb C$（抛物型）、单位圆盘 $\\Delta$（双曲型）；一般的黎曼曲面就是这三种万有覆叠之一除以一个离散群。",
-    "summaryEn": "The uniformization theorem: every simply connected Riemann surface is conformally equivalent to exactly one of three models — the Riemann sphere $\\hat{\\mathbb C}$ (elliptic), the complex plane $\\mathbb C$ (parabolic), the unit disk $\\Delta$ (hyperbolic); a general Riemann surface is one of these universal covers modulo a discrete group.",
-    "definition": "**单值化定理**（庞加莱与克贝于 1907 年独立证明）：设 $S$ 是单连通的黎曼曲面，则 $S$ 共形等价于且**仅**等价于下列三者之一：$$\\text{(i)}\\ \\hat{\\mathbb C}\\ \\text{（椭圆型）},\\qquad \\text{(ii)}\\ \\mathbb C\\ \\text{（抛物型）},\\qquad \\text{(iii)}\\ \\Delta=\\{|z|<1\\}\\ \\text{（双曲型）}.$$ 「共形等价」指存在双全纯双射。于是单连通黎曼曲面的模型只有三个，判据是它「有多大」：紧、还是非紧但全纯函数少、还是能被有界全纯函数刻画。\n\n三者**两两不共形等价**，这正是「恰有其一」的根据。$\\hat{\\mathbb C}$ 紧而 $\\mathbb C$、$\\Delta$ 都不紧，且 $\\hat{\\mathbb C}$ 上全纯函数必为常数；$\\mathbb C$ 与 $\\Delta$ 之别用**刘维尔定理**：若有双全纯 $f:\\mathbb C\\to\\Delta$，则 $f$ 是有界整函数，必为常数，与单射矛盾。**皮卡小定理**（非常数整函数至多漏掉一个值）给出更细的判据：若 $\\mathbb C\\setminus\\{0,1\\}$ 的万有覆叠是 $\\mathbb C$，覆盖映射就是一个不取 $0,1$ 的非常数整函数，与皮卡定理矛盾；故它的万有覆叠只能是 $\\Delta$（双曲型）。这一推理模式可以判定绝大多数显式区域的类型。\n\n**一般（非单连通）情形**由覆叠空间理论给出。任意连通黎曼曲面 $S$ 有万有覆叠 $\\tilde S$：赋予提升的复结构后 $\\tilde S$ 仍是黎曼曲面且单连通，并且 $$S=\\tilde S/\\Gamma,\\qquad \\Gamma\\cong\\pi_1(S),$$ 其中 $\\Gamma$ 是 $\\tilde S$ 全纯自同构群的子群，自由、纯不连续（properly discontinuous）地作用。单值化定理立刻把 $\\tilde S$ 限定为三种，曲面据此分为三类：\n\n- **椭圆型**（$\\tilde S=\\hat{\\mathbb C}$）：由于 $\\operatorname{Aut}(\\hat{\\mathbb C})=\\mathrm{PSL}(2,\\mathbb C)$ 的每个非平凡元在 $\\hat{\\mathbb C}$ 上都有不动点，自由的离散作用只能是平凡群，所以唯一的椭圆型黎曼曲面就是 $\\hat{\\mathbb C}$ 自己。\n- **抛物型**（$\\tilde S=\\mathbb C$）：$z\\mapsto az+b$ 中无不动点的只有平移（$a=1,b\\neq0$），故 $\\Gamma$ 只能是平移的离散子群 $\\cong\\mathbb Z$ 或 $\\mathbb Z^{2}$。前者给出柱面 $\\mathbb C/\\mathbb Z\\cong\\mathbb C^{*}$（拓扑上是无界环带），后者给出环面 $\\mathbb C/\\Lambda$；再加上去心平面 $\\mathbb C^{*}=\\mathbb C/2\\pi i\\mathbb Z$（由指数映射）。这些都满足「亏格 $\\le1$」。\n- **双曲型**（$\\tilde S=\\Delta$，$S=\\Delta/\\Gamma$，$\\Gamma$ 称为 Fuchsian 群）：所有亏格 $g\\ge2$ 的紧曲面、圆环 $\\{1<|z|<R\\}$、$\\mathbb C\\setminus\\{0,1\\}$ 以及一切「洞足够多」的区域都属此类。\n\n**意义与联系。**三种模型各自携带自然的常曲率度量：$\\hat{\\mathbb C}$ 上有 Fubini–Study 度量（$K=+1$，球面几何）、$\\mathbb C$ 上有欧氏度量（$K=0$）、$\\Delta$ 上有庞加莱度量（$K=-1$，双曲几何）。因此单值化定理断言：黎曼曲面上自然的、共形不变的几何只有这三种曲率符号的可能——这是几何化纲领在二维的完整答案。与**黎曼映射定理**的关系同样清楚：后者说单连通真区域 $D\\subsetneq\\mathbb C$（且 $D\\neq\\mathbb C$）共形等价于 $\\Delta$，正是情形 (iii) 在平面区域上的特例（$D$ 单连通故 $S=D$；$D$ 不能是 $\\hat{\\mathbb C}$，也不能是 $\\mathbb C$）。历史上，这一定理源自庞加莱对代数曲线、自守函数与 Fuchsian/Kleinian 群的研究（克莱因的自守函数论），它把「亏格 $\\ge2$ 的曲面必带双曲度量」变成定理，也是今天 Teichmüller 理论、Kleinian 群与三维几何化纲领的出发点。",
-    "definitionEn": "**The uniformization theorem** (proved independently by Poincaré and Koebe in 1907): a simply connected Riemann surface $S$ is conformally equivalent to exactly one of $$\\text{(i)}\\ \\hat{\\mathbb C}\\ \\text{(elliptic)},\\qquad \\text{(ii)}\\ \\mathbb C\\ \\text{(parabolic)},\\qquad \\text{(iii)}\\ \\Delta=\\{|z|<1\\}\\ \\text{(hyperbolic)},$$ where conformal equivalence means a biholomorphic bijection. Thus there are only three models of simply connected Riemann surfaces, distinguished by how large they are.\n\nThe three are pairwise non-equivalent, which is what makes the trichotomy sharp. $\\hat{\\mathbb C}$ is compact while $\\mathbb C$ and $\\Delta$ are not (and every holomorphic function on $\\hat{\\mathbb C}$ is constant); $\\mathbb C$ differs from $\\Delta$ by **Liouville's theorem** — a biholomorphic $f:\\mathbb C\\to\\Delta$ would be a bounded entire function, hence constant, contradicting injectivity. **Picard's little theorem** (a non-constant entire function omits at most one value) sharpens the classification: if the universal cover of $\\mathbb C\\setminus\\{0,1\\}$ were $\\mathbb C$, the covering map would be a non-constant entire function omitting both $0$ and $1$, contradicting Picard; hence its universal cover must be $\\Delta$. This pattern decides the type of most explicitly given regions.\n\nFor a **general (non-simply-connected) surface**, covering space theory takes over: every connected Riemann surface $S$ has a universal cover $\\tilde S$, which is again a Riemann surface (with the lifted complex structure) and simply connected, and $$S=\\tilde S/\\Gamma,\\qquad \\Gamma\\cong\\pi_1(S),$$ where $\\Gamma$ acts freely and properly discontinuously by holomorphic automorphisms. Uniformization then leaves only three possibilities, giving the classification into **elliptic**, **parabolic** and **hyperbolic** surfaces.\n\n- **Elliptic** ($\\tilde S=\\hat{\\mathbb C}$): every non-identity element of $\\operatorname{Aut}(\\hat{\\mathbb C})=\\mathrm{PSL}(2,\\mathbb C)$ has a fixed point on $\\hat{\\mathbb C}$, so a free discrete action must be trivial — the only elliptic Riemann surface is $\\hat{\\mathbb C}$ itself.\n- **Parabolic** ($\\tilde S=\\mathbb C$): among the affine maps $z\\mapsto az+b$ only translations ($a=1$, $b\\neq0$) are fixed-point free, so $\\Gamma$ is a discrete group of translations, $\\cong\\mathbb Z$ or $\\mathbb Z^{2}$: cylinders $\\mathbb C/\\mathbb Z\\cong\\mathbb C^{*}$ (topologically an unbounded annulus) in the first case, tori $\\mathbb C/\\Lambda$ in the second, together with $\\mathbb C^{*}=\\mathbb C/2\\pi i\\mathbb Z$ from the exponential map. All have genus $\\le1$.\n- **Hyperbolic** ($\\tilde S=\\Delta$, $S=\\Delta/\\Gamma$ with $\\Gamma$ a Fuchsian group): all compact surfaces of genus $g\\ge2$, annuli $\\{1<|z|<R\\}$, $\\mathbb C\\setminus\\{0,1\\}$ and every region with sufficiently many holes.\n\n**Significance.** Each model carries a natural constant-curvature metric: Fubini–Study on $\\hat{\\mathbb C}$ ($K=+1$, spherical geometry), the Euclidean metric on $\\mathbb C$ ($K=0$), the Poincaré metric on $\\Delta$ ($K=-1$, hyperbolic geometry). Uniformization therefore says that only these three curvature signs can occur for a natural conformally invariant geometry on a Riemann surface — the complete two-dimensional answer of the geometrisation programme. The link with the **Riemann mapping theorem** is equally transparent: that theorem states that a simply connected proper subregion $D\\subsetneq\\mathbb C$ is conformally equivalent to $\\Delta$, which is case (iii) for planar domains ($S=D$ simply connected, $D$ neither $\\hat{\\mathbb C}$ nor $\\mathbb C$). Historically the theorem grew out of Poincaré's work on algebraic curves, automorphic functions and Fuchsian/Kleinian groups (Klein's theory of automorphic functions); it turned 'every surface of genus $\\ge2$ carries a hyperbolic metric' into a theorem and is the starting point of Teichmüller theory, Kleinian groups and three-dimensional geometrisation.",
-    "formulas": [
-      {
-        "latex": "S\\ \\text{单连通}\\ \\Longrightarrow\\ S\\cong\\widehat{\\mathbb C},\\quad S\\cong\\mathbb C,\\quad \\text{或}\\quad S\\cong\\Delta\\ \\text{（恰有其一）}",
-        "note": "单值化定理（庞加莱–克贝 1907）：单连通黎曼曲面只有三种共形模型。",
-        "noteEn": "The uniformization theorem (Poincaré–Koebe 1907): a simply connected Riemann surface has exactly one of three conformal models."
-      },
-      {
-        "latex": "S=\\tilde S/\\Gamma,\\qquad \\Gamma\\cong\\pi_1(S)\\ \\text{自由、纯不连续地作用}",
-        "note": "一般曲面 = 万有覆叠除以离散群；$\\tilde S$ 属于三种模型之一，据此定义椭圆型/抛物型/双曲型。",
-        "noteEn": "A general surface is its universal cover modulo a discrete group; since $\\tilde S$ is one of the three models this defines the elliptic/parabolic/hyperbolic types."
-      },
-      {
-        "latex": "K=+1\\ (\\widehat{\\mathbb C}),\\qquad K=0\\ (\\mathbb C),\\qquad K=-1\\ (\\Delta,\\ \\text{庞加莱度量})",
-        "note": "三种模型对应曲率 $+1,0,-1$ 的常曲率共形度量；双曲型曲面自动获得曲率 $-1$ 的完备度量。",
-        "noteEn": "The three models carry constant-curvature conformal metrics with $K=+1,0,-1$; hyperbolic surfaces automatically carry a complete metric of curvature $-1$."
-      },
-      {
-        "latex": "g\\ge2\\ \\Longrightarrow\\ S\\cong\\Delta/\\Gamma,\\qquad \\Gamma\\ \\text{为 Fuchsian 群}",
-        "note": "亏格 $\\ge2$ 的紧黎曼曲面必为双曲型：其万有覆叠既不能是 $\\hat{\\mathbb C}$ 也不能是 $\\mathbb C$（后者的自由作用只能是平移，商空间亏格 $\\le1$）。",
-        "noteEn": "A compact Riemann surface of genus $\\ge2$ is hyperbolic: its universal cover can be neither $\\hat{\\mathbb C}$ nor $\\mathbb C$ (free affine actions are translations, giving genus $\\le1$)."
-      },
-      {
-        "latex": "D\\subsetneq\\mathbb C\\ \\text{单连通}\\ \\Longrightarrow\\ D\\cong\\Delta\\qquad\\text{（黎曼映射定理）}",
-        "note": "黎曼映射定理是情形 (iii) 的平面特例；单值化定理把它推广到任意黎曼曲面与任意拓扑。",
-        "noteEn": "The Riemann mapping theorem is the planar special case of (iii); uniformization extends it to arbitrary Riemann surfaces and topologies."
-      }
-    ],
-    "properties": [
-      "三种模型互不共形等价：$\\hat{\\mathbb C}$ 由紧性区分，$\\mathbb C$ 与 $\\Delta$ 由刘维尔定理区分（皮卡定理给出更细的类型判据，如 $\\mathbb C\\setminus\\{0,1\\}$ 是双曲型）。",
-      "任意黎曼曲面 = 三种万有覆叠之一除以离散群；曲面由此分为椭圆型、抛物型、双曲型三类，分类只依赖复结构与基本群。",
-      "与曲率的统一：三种模型分别带 $K=+1,0,-1$ 的常曲率共形度量；双曲型曲面（如亏格 $\\ge2$）自动获得完备的曲率 $-1$ 度量，且该度量在其共形类中唯一。",
-      "黎曼映射定理是其特例；反过来单值化把共形分类从平面区域推广到任意拓扑的黎曼曲面。",
-      "类型判据很具体：椭圆型只有 $\\hat{\\mathbb C}$；抛物型是 $\\mathbb C$ 的商（柱面 $\\mathbb C/\\mathbb Z\\cong\\mathbb C^{*}$、环面；有界圆环 $\\{1<|z|<R\\}$ 属**双曲型**），亏格 $\\le1$；亏格 $\\ge2$ 的紧曲面、$\\mathbb C\\setminus\\{0,1\\}$、圆环 $\\{1<|z|<R\\}$ 都是双曲型。",
-      "亏格 $\\ge2$ 时双曲结构并不唯一，由 Teichmüller 空间参数化（实维数 $6g-6$）——这是与三维及以上 Mostow 刚性的鲜明对比。"
-    ],
-    "propertiesEn": [
-      "The three models are pairwise non-conformally equivalent: compactness separates $\\hat{\\mathbb C}$, Liouville's theorem separates $\\mathbb C$ from $\\Delta$ (Picard's theorem sharpens the criterion, e.g. $\\mathbb C\\setminus\\{0,1\\}$ is hyperbolic).",
-      "Every Riemann surface is one of the three universal covers modulo a discrete group, giving the elliptic/parabolic/hyperbolic trichotomy determined by the complex structure and the fundamental group.",
-      "Unified curvature: the models carry constant-curvature conformal metrics with $K=+1,0,-1$; hyperbolic surfaces (e.g. genus $\\ge2$) automatically carry a complete curvature $-1$ metric, unique in its conformal class.",
-      "The Riemann mapping theorem is a special case, while uniformization generalises the conformal classification to Riemann surfaces of arbitrary topology.",
-      "Concrete type criteria: the only elliptic surface is $\\hat{\\mathbb C}$; parabolic surfaces are quotients of $\\mathbb C$ (cylinders, annuli, tori, $\\mathbb C^{*}$) and have genus $\\le1$; compact surfaces of genus $\\ge2$, $\\mathbb C\\setminus\\{0,1\\}$ and annuli $\\{1<|z|<R\\}$ are hyperbolic.",
-      "For genus $\\ge2$ the hyperbolic structure is far from unique — hyperbolic structures are parametrised by Teichmüller space of real dimension $6g-6$, in sharp contrast with Mostow rigidity in dimensions three and higher."
-    ],
-    "examples": [
-      {
-        "problem": "确定复环面 $\\mathbb C/\\Lambda$ 的单值化类型与基本群，并说明何时两个环面是共形等价的。",
-        "solution": "商映射 $\\mathbb C\\to\\mathbb C/\\Lambda$ 是覆叠映射，$\\mathbb C$ 单连通，所以 $\\mathbb C/\\Lambda$ 的万有覆叠就是 $\\mathbb C$，即**抛物型**；$\\Gamma=\\Lambda\\cong\\mathbb Z^{2}$ 且 $\\pi_1(\\mathbb C/\\Lambda)\\cong\\mathbb Z^{2}$。退化情形：若 $\\Lambda$ 只由一个周期生成（秩 1），商空间是柱面或环带，同样是抛物型。\n\n共形分类：$\\mathbb C/\\Lambda$ 与 $\\mathbb C/\\Lambda'$ 共形等价当且仅当 $\\Lambda'=c\\Lambda$ 对某个 $c\\in\\mathbb C^{*}$。把 $\\Lambda$ 归一化为 $\\mathbb Z+\\mathbb Z\\tau$（$\\operatorname{Im}\\tau>0$）后，可见环面的共形类型由模数 $\\tau$ 决定，而 $j$ 不变量恰是它的完全分类不变量——这也解释了为什么亏格 1 的复结构与椭圆函数的周期结构由同一份数据控制。"
-      },
-      {
-        "problem": "证明亏格 $g\\ge2$ 的紧黎曼曲面 $S$ 是双曲型，即 $S\\cong\\Delta/\\Gamma$。",
-        "solution": "由单值化定理，万有覆叠 $\\tilde S$ 只能是 $\\hat{\\mathbb C}$、$\\mathbb C$ 或 $\\Delta$。\n\n排除 $\\hat{\\mathbb C}$：若 $\\tilde S=\\hat{\\mathbb C}$，则 $S=\\hat{\\mathbb C}/\\Gamma$，而 $\\operatorname{Aut}(\\hat{\\mathbb C})=\\mathrm{PSL}(2,\\mathbb C)$ 中每个非平凡 Möbius 变换在 $\\hat{\\mathbb C}$ 上都有不动点，与 $\\Gamma$ 的**自由**作用矛盾，故 $\\Gamma$ 平凡、$S=\\hat{\\mathbb C}$，亏格 $0$，矛盾。\n\n排除 $\\mathbb C$：$\\operatorname{Aut}(\\mathbb C)=\\{z\\mapsto az+b\\}$，其中 $a\\neq1$ 的映射有不动点，故 $\\Gamma$ 只能由平移组成：$\\Gamma\\cong\\mathbb Z$（商为柱面/环带）或 $\\Gamma\\cong\\mathbb Z^{2}$（商为环面），此时 $S$ 的亏格 $\\le1$，与 $g\\ge2$ 矛盾。\n\n于是只能是 $\\tilde S=\\Delta$，即 $S\\cong\\Delta/\\Gamma$，并把 $\\Delta$ 上的庞加莱度量（$K=-1$）下降到 $S$ 上——这给出「高亏格紧曲面必为双曲曲面」的标准证明，也把曲面的几何与全纯自同构群（有限群，Hurwitz 界 $84(g-1)$）联系起来。"
-      },
-      {
-        "problem": "说明 $\\mathbb C\\setminus\\{0,1\\}$ 是双曲型，并解释为什么用皮卡定理即可排除抛物型。",
-        "solution": "反设 $\\mathbb C\\setminus\\{0,1\\}$ 的万有覆叠是 $\\mathbb C$，则覆盖映射 $$p:\\mathbb C\\longrightarrow\\mathbb C\\setminus\\{0,1\\}$$ 是满射且局部双全纯，特别地 $p$ 是非常数整函数，且对每个 $z$ 有 $p(z)\\neq0$、$p(z)\\neq1$——即 $p$ 漏掉了两个值 $0$ 与 $1$。\n\n但**皮卡小定理**断言：非常数整函数至多漏掉一个值。矛盾。所以万有覆叠不是 $\\mathbb C$；它也不可能是 $\\hat{\\mathbb C}$：$\\hat{\\mathbb C}$ 上自由且纯不连续的 Möbius 作用只能是平凡的（每个非平凡 Möbius 变换在 $\\hat{\\mathbb C}$ 上都有不动点），那样 $S$ 就只能是 $\\hat{\\mathbb C}$ 本身，与 $\\mathbb C\\setminus\\{0,1\\}$ 非紧矛盾。于是只能是 $\\Delta$：$\\mathbb C\\setminus\\{0,1\\}$ 是双曲型，$\\mathbb C\\setminus\\{0,1\\}=\\Delta/\\Gamma$，$\\Gamma\\cong\\pi_1$（自由群 $F_2$）。这与直观一致：去掉两个点使区域「洞」变多，双曲度量在其中自然生长。"
-      }
-    ],
-    "tags": [
-      "单值化定理",
-      "黎曼曲面",
-      "万有覆叠",
-      "Fuchsian 群",
-      "刘维尔定理",
-      "皮卡定理"
-    ],
-    "links": [
-      "riemann-surfaces",
-      "riemann-mapping-theorem",
-      "hyperbolic-geometry-poincare",
-      "covering-space",
-      "fundamental-group",
-      "liouville-theorem",
-      "picard-theorems"
-    ]
-  },
-  {
-    "id": "hyperbolic-geometry-poincare",
-    "title": "双曲几何与庞加莱模型",
-    "titleEn": "Hyperbolic Geometry and the Poincaré Model",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "庞加莱圆盘把双曲平面实现为单位圆盘配上度量 $ds^{2}=\\frac{4|dz|^{2}}{(1-|z|^{2})^{2}}$：测地线是与边界正交的圆弧，距离由 $\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|$ 给出；施瓦茨–皮克引理说明解析自映射是双曲度量的收缩，而等距群正是把圆盘映到圆盘的 Möbius 变换。",
-    "summaryEn": "The Poincaré disk realises the hyperbolic plane as the unit disk with the metric $ds^{2}=4|dz|^{2}/(1-|z|^{2})^{2}$: geodesics are circular arcs orthogonal to the boundary, distances are $\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|$, analytic self-maps are contractions by Schwarz–Pick, and the isometry group is the group of disk-preserving Möbius transformations.",
-    "definition": "**庞加莱圆盘模型**：取 $\\Delta=\\{|z|<1\\}$，赋予黎曼度量 $$ds^{2}=\\frac{4\\,|dz|^{2}}{(1-|z|^{2})^{2}},\\qquad\\text{即}\\qquad ds=\\frac{2\\,|dz|}{1-|z|^{2}}.$$ 它是欧氏度量的逐点缩放，但缩放因子依赖位置，所以曲率不再是 $0$：把共形度量写成 $ds^{2}=e^{2\\sigma}|dz|^{2}$（这里 $e^{2\\sigma}=\\frac{4}{(1-|z|^{2})^{2}}$），代入公式 $K=-e^{-2\\sigma}\\Delta\\sigma$ 可得 $K\\equiv-1$。这一点最要紧：$\\Delta$ 上存在常负曲率 $-1$ 的完备度量，于是 $\\Delta$ 成为**双曲平面** $\\mathbb H^{2}$ 的模型。离边界越近，度量的「单位尺」越短，一小段欧氏长度在靠近边界处对应越来越大的双曲长度；边界圆周 $\\partial\\Delta$ 在双曲意义下位于**无穷远**。\n\n**测地线**是**与 $\\partial\\Delta$ 正交的圆弧**，直径是其中的特殊情形（过圆心的正交弧恰为直径）；由于模型是共形的，双曲角等于欧氏角，画图与角度计算都很直接。**双曲距离**由 $$\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|,\\qquad \\text{特别地}\\quad \\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}$$ 给出；等价的代数形式是 $\\cosh\\rho(z,w)=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$。（分子分母同时除以 $|1-\\bar wz|$ 即得 $\\rho=\\ln\\frac{|1-\\bar wz|+|z-w|}{|1-\\bar wz|-|z-w|}$，其中 $|1-\\bar wz|^{2}-|z-w|^{2}=(1-|z|^{2})(1-|w|^{2})>0$ 保证了 $\\rho\\ge0$ 且仅当 $z=w$ 时等号成立。）$\\rho$ 满足三角不等式，且在 $|z|\\to1$ 时 $\\rho(0,z)\\to\\infty$：度量完备，边界永远达不到。\n\n**上半平面模型**：$\\mathbb H=\\{z:\\operatorname{Im}z>0\\}$ 配 $$ds^{2}=\\frac{dx^{2}+dy^{2}}{y^{2}},$$ 测地线是垂直于实轴的半圆与竖直线；Cayley 变换 $w=\\frac{z-i}{z+i}$ 把 $\\mathbb H$ 共形（且等距）地映到 $\\Delta$，两个模型完全等价，可按计算方便程度选用（上半平面上平移与伸缩是等距，圆盘上原点附近计算方便）。双曲几何的标志性事实：**三角形内角和小于 $\\pi$**，且角亏恰好是面积——由高斯–博内公式 $A=\\pi-(\\alpha+\\beta+\\gamma)$；顶点落在无穷远的**理想三角形**三个内角都是 $0$，面积恰为 $\\pi$（例如上半平面中顶点为 $0,1,\\infty$ 的理想三角形，面积可直接积分验证为 $\\pi$），三个理想三角形可以铺满整个双曲平面。**平行公设失效**：过直线外一点有无穷多条不相交的直线，其中还有「超平行」的一类（存在公垂线）。\n\n**与复分析的联系**是这套几何的现代动机。**施瓦茨–皮克引理**：若 $f:\\Delta\\to\\Delta$ 解析，则 $$\\rho(f(z),f(w))\\le\\rho(z,w),\\qquad \\frac{|f'(z)|}{1-|f(z)|^{2}}\\le\\frac{1}{1-|z|^{2}},$$ 即**解析自映射是双曲度量的（弱）收缩**；若在一点取等号，则 $f$ 必为双曲等距（$\\Delta$ 的自同构）。而双曲等距群恰恰是**把 $\\Delta$ 映到 $\\Delta$ 的 Möbius 变换**：$$\\operatorname{Aut}(\\Delta)=\\left\\{z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}:\\ a\\in\\Delta,\\ \\theta\\in\\mathbb R\\right\\},\\qquad \\operatorname{Aut}(\\mathbb H)=\\mathrm{PSL}(2,\\mathbb R),$$ 它们可迁地作用，故双曲平面是齐性空间；配合单值化定理，亏格 $\\ge2$ 的紧黎曼曲面自动获得双曲度量，几何与分析在此完全融合。最后，**伪球面**（曳物线绕轴旋转所得的曲面）是 $\\mathbb R^{3}$ 中曲率恒为 $-1$ 的旋转曲面，提供了双曲几何的局部模型；但希尔伯特定理指出完备的双曲平面不能等距浸入 $\\mathbb R^{3}$，所以整体的双曲几何只能由抽象曲面或庞加莱模型来承载。",
-    "definitionEn": "**The Poincaré disk model** takes $\\Delta=\\{|z|<1\\}$ with the Riemannian metric $$ds^{2}=\\frac{4\\,|dz|^{2}}{(1-|z|^{2})^{2}},\\qquad\\text{that is}\\qquad ds=\\frac{2\\,|dz|}{1-|z|^{2}}.$$ It is the Euclidean metric rescaled pointwise, but because the factor depends on position the curvature is no longer zero: writing $ds^{2}=e^{2\\sigma}|dz|^{2}$ with $e^{2\\sigma}=\\frac{4}{(1-|z|^{2})^{2}}$ and using $K=-e^{-2\\sigma}\\Delta\\sigma$ one obtains $K\\equiv-1$. This is the crucial point: $\\Delta$ carries a complete metric of constant curvature $-1$, so $\\Delta$ models the **hyperbolic plane** $\\mathbb H^{2}$. Near the boundary the unit of length shrinks, so small Euclidean distances correspond to ever larger hyperbolic lengths, and the circle $\\partial\\Delta$ lies at **infinity**.\n\n**Geodesics** are the circular arcs **orthogonal to $\\partial\\Delta$**, diameters being the special case of arcs through the centre; since the model is conformal, hyperbolic angles equal Euclidean ones, so pictures and angle computations are transparent. The **hyperbolic distance** is $$\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|,\\qquad \\text{in particular}\\quad \\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|},$$ with the equivalent algebraic form $\\cosh\\rho(z,w)=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$. Since $|1-\\bar wz|^{2}-|z-w|^{2}=(1-|z|^{2})(1-|w|^{2})>0$ for $z,w\\in\\Delta$, the argument of artanh is less than $1$, so $\\rho\\ge0$ with equality only for $z=w$; $\\rho$ satisfies the triangle inequality and $\\rho(0,z)\\to\\infty$ as $|z|\\to1$, so the metric is complete and the boundary is unreachable.\n\n**The upper half-plane model** puts $\\mathbb H=\\{z:\\operatorname{Im}z>0\\}$ with $$ds^{2}=\\frac{dx^{2}+dy^{2}}{y^{2}},$$ whose geodesics are semicircles perpendicular to the real axis together with vertical lines; the Cayley transform $w=\\frac{z-i}{z+i}$ maps $\\mathbb H$ conformally (and isometrically) onto $\\Delta$, so the models are interchangeable. The hallmark facts of hyperbolic geometry: **the angles of a triangle sum to less than $\\pi$** and the defect equals the area, $A=\\pi-(\\alpha+\\beta+\\gamma)$ by Gauss–Bonnet; an **ideal triangle** (vertices at infinity) has all angles $0$ and area exactly $\\pi$ (e.g. the triangle with vertices $0,1,\\infty$ in the upper half-plane, whose area can be verified by direct integration), and three ideal triangles tile the hyperbolic plane. **The parallel postulate fails**: through a point outside a line there are infinitely many non-intersecting lines, including the 'ultraparallel' ones that possess a common perpendicular.\n\n**The link with complex analysis** is the modern motivation. **Schwarz–Pick lemma**: if $f:\\Delta\\to\\Delta$ is analytic then $$\\rho(f(z),f(w))\\le\\rho(z,w),\\qquad \\frac{|f'(z)|}{1-|f(z)|^{2}}\\le\\frac{1}{1-|z|^{2}},$$ i.e. **an analytic self-map is a (weak) contraction of the hyperbolic metric**; equality at one point forces $f$ to be a hyperbolic isometry (an automorphism of $\\Delta$). The isometry group is exactly the group of **Möbius transformations mapping $\\Delta$ onto itself**: $$\\operatorname{Aut}(\\Delta)=\\left\\{z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}:\\ a\\in\\Delta,\\ \\theta\\in\\mathbb R\\right\\},\\qquad \\operatorname{Aut}(\\mathbb H)=\\mathrm{PSL}(2,\\mathbb R),$$ acting transitively, so the hyperbolic plane is a homogeneous space. Combined with uniformization, a compact Riemann surface of genus $\\ge2$ automatically receives a hyperbolic metric, fusing geometry and analysis. Finally, the **pseudosphere** (the surface obtained by rotating a tractrix) is a surface in $\\mathbb R^{3}$ of constant curvature $-1$, providing a local model of hyperbolic geometry; but Hilbert's theorem states that the complete hyperbolic plane cannot be isometrically immersed in $\\mathbb R^{3}$, so global hyperbolic geometry must live on abstract surfaces or in the Poincaré model.",
-    "formulas": [
-      {
-        "latex": "ds^{2}=\\frac{4\\,|dz|^{2}}{(1-|z|^{2})^{2}},\\qquad K\\equiv-1\\qquad(|z|<1)",
-        "note": "庞加莱圆盘度量与常负曲率；$e^{2\\sigma}=\\frac{4}{(1-|z|^{2})^{2}}$ 代入 $K=-e^{-2\\sigma}\\Delta\\sigma$ 得 $K=-1$。",
-        "noteEn": "The Poincaré disk metric and its constant negative curvature; substituting $e^{2\\sigma}=4/(1-|z|^{2})^{2}$ into $K=-e^{-2\\sigma}\\Delta\\sigma$ gives $K=-1$."
-      },
-      {
-        "latex": "\\rho(z,w)=2\\operatorname{artanh}\\left|\\frac{z-w}{1-\\bar wz}\\right|,\\qquad \\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}",
-        "note": "双曲距离；等价形式 $\\cosh\\rho=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$，$|z|\\to1$ 时 $\\rho\\to\\infty$（边界在无穷远）。",
-        "noteEn": "Hyperbolic distance; equivalently $\\cosh\\rho=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$, and $\\rho\\to\\infty$ as $|z|\\to1$ (the boundary lies at infinity)."
-      },
-      {
-        "latex": "ds^{2}=\\frac{dx^{2}+dy^{2}}{y^{2}}\\ (y>0);\\qquad w=\\frac{z-i}{z+i}:\\ \\mathbb H\\to\\Delta",
-        "note": "上半平面模型与 Cayley 变换：测地线是垂直于实轴的半圆或竖直线，两个模型等距等价。",
-        "noteEn": "The upper half-plane model and the Cayley transform: geodesics are semicircles orthogonal to the real axis or vertical lines, and the two models are isometric."
-      },
-      {
-        "latex": "\\frac{|f'(z)|}{1-|f(z)|^{2}}\\le\\frac{1}{1-|z|^{2}},\\qquad \\rho(f(z),f(w))\\le\\rho(z,w)\\qquad(f:\\Delta\\to\\Delta\\ \\text{解析})",
-        "note": "施瓦茨–皮克引理：解析自映射是双曲度量的收缩；在一点取等则 $f$ 是自同构（双曲等距）。",
-        "noteEn": "Schwarz–Pick lemma: analytic self-maps contract the hyperbolic metric; equality at one point makes $f$ an automorphism (a hyperbolic isometry)."
-      },
-      {
-        "latex": "\\operatorname{Aut}(\\Delta)=\\left\\{z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}:a\\in\\Delta,\\theta\\in\\mathbb R\\right\\},\\qquad \\operatorname{Aut}(\\mathbb H)=\\mathrm{PSL}(2,\\mathbb R)",
-        "note": "双曲等距群 = 保圆盘的 Möbius 变换群；它们可迁地作用，故双曲平面是齐性空间。",
-        "noteEn": "The hyperbolic isometry group is the group of disk-preserving Möbius transformations; it acts transitively, so the hyperbolic plane is homogeneous."
-      }
-    ],
-    "properties": [
-      "共形（保角）而距离失真：模型中的双曲角等于欧氏角，但靠近边界的「小」欧氏图形是巨大的双曲对象，$\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}\\to\\infty$。",
-      "完备性与曲率：$\\Delta$ 上的双曲度量完备、高斯曲率恒为 $-1$，边界圆是无穷远：测地线可以无限接近边界却永远达不到。",
-      "测地线是与边界正交的圆弧（直径为特例）；平行公设失效——过直线外一点有无穷多条不相交的测地线，还有带公垂线的超平行直线。",
-      "面积与内角：测地三角形面积 $A=\\pi-(\\alpha+\\beta+\\gamma)$（高斯–博内），内角和恒小于 $\\pi$；顶点在无穷远的理想三角形三个内角都为 $0$、面积恰为 $\\pi$，故双曲三角形的面积以 $\\pi$ 为上界——与欧氏几何（内角和 $=\\pi$、面积无上界）和球面几何（内角和 $>\\pi$）形成完整对照。",
-      "与复分析统一：解析自映射是双曲收缩（施瓦茨–皮克），等距群 = $\\Delta$ 的 Möbius 自同构群；由单值化定理，亏格 $\\ge2$ 的紧黎曼曲面 $=\\Delta/\\Gamma$，其全纯自同构群有限（Hurwitz 界 $84(g-1)$）。",
-      "伪球面是 $\\mathbb R^{3}$ 中曲率 $-1$ 的局部模型（曳物线旋转面），但希尔伯特定理说明完备的双曲平面不能等距浸入 $\\mathbb R^{3}$，整体双曲几何必须用抽象曲面或庞加莱模型描述。"
-    ],
-    "propertiesEn": [
-      "Conformal but distance-distorting: hyperbolic angles equal Euclidean ones, yet small Euclidean figures near the boundary are huge hyperbolic objects, since $\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}\\to\\infty$.",
-      "Completeness and curvature: the hyperbolic metric on $\\Delta$ is complete with constant Gaussian curvature $-1$, and the boundary circle lies at infinity — geodesics approach it but never reach it.",
-      "Geodesics are circular arcs orthogonal to the boundary (diameters being the special case); the parallel postulate fails — infinitely many disjoint geodesics pass through an exterior point, including ultraparallel pairs with a common perpendicular.",
-      "Area and angles: a geodesic triangle has area $A=\\pi-(\\alpha+\\beta+\\gamma)$ by Gauss–Bonnet and angle sum always below $\\pi$; an ideal triangle (vertices at infinity) has all angles $0$ and area exactly $\\pi$, so hyperbolic triangle areas are bounded above by $\\pi$ — the exact counterpart of Euclidean geometry (sum $=\\pi$, unbounded area) and spherical geometry (sum $>\\pi$).",
-      "Unified with complex analysis: analytic self-maps contract the hyperbolic metric (Schwarz–Pick) and the isometry group is the Möbius automorphism group of $\\Delta$; by uniformization a compact Riemann surface of genus $\\ge2$ is $\\Delta/\\Gamma$ with finite holomorphic automorphism group (Hurwitz bound $84(g-1)$).",
-      "The pseudosphere (a rotated tractrix) is a local model in $\\mathbb R^{3}$ of curvature $-1$, but Hilbert's theorem forbids an isometric immersion of the complete hyperbolic plane in $\\mathbb R^{3}$, so global hyperbolic geometry needs abstract surfaces or the Poincaré model."
-    ],
-    "plot": {
-      "type": "surface3d",
-      "surf": {
-        "x": "cos(v)/cosh(u)",
-        "y": "sin(v)/cosh(u)",
-        "z": "u-tanh(u)"
-      },
-      "uRange": [
-        0,
-        3
-      ],
-      "vRange": [
-        0,
-        6.2832
-      ],
-      "density": [
-        24,
-        48
-      ],
-      "color": "#b388ff",
-      "title": "伪球面（曳物线旋转面）：曲率恒为 −1 的双曲几何局部模型；完备的双曲平面无法等距嵌入三维欧氏空间，整体几何要靠庞加莱圆盘"
-    },
-    "examples": [
-      {
-        "problem": "用双曲距离公式计算 $\\rho(0,\\frac12)$、$\\rho(0,\\frac34)$ 与 $\\rho(0,\\frac{99}{100})$，并说明当 $|z|\\to1$ 时的趋势。",
-        "solution": "由 $\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}$（即 $2\\operatorname{artanh}|z|$）：\n\n$$\\rho\\left(0,\\tfrac12\\right)=\\ln\\frac{1+1/2}{1-1/2}=\\ln3\\approx1.0986,$$\n$$\\rho\\left(0,\\tfrac34\\right)=\\ln\\frac{7/4}{1/4}=\\ln7\\approx1.9459,$$\n$$\\rho\\left(0,\\tfrac{99}{100}\\right)=\\ln\\frac{199/100}{1/100}=\\ln199\\approx5.2933.$$\n\n欧氏上「差不多」的点 $1/2$ 与 $3/4$，双曲距离却相差近一倍；而 $|z|\\to1^{-}$ 时 $\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}\\to\\infty$：边界点都在无穷远，任何有限的双曲长度为 $1$ 的「尺子」都无法从圆心量到边界。"
-      },
-      {
-        "problem": "验证 $f(z)=\\dfrac{z+\\frac12}{1+\\frac z2}$ 是 $\\Delta$ 的双曲等距（自同构），并检查施瓦茨–皮克引理取等号。",
-        "solution": "$f$ 是 Möbius 变换 $z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}$ 在 $a=-\\frac12$、$\\theta=0$ 的情形，且 $|a|<1$，故 $f$ 把 $\\Delta$ 双全纯地映到 $\\Delta$，属于 $\\operatorname{Aut}(\\Delta)$，是双曲等距。\n\n计算：$f(0)=\\frac12$，$f\\left(\\frac12\\right)=\\frac{1}{1+1/4}=\\frac45$；导数 $f'(0)=1-|a|^{2}=\\frac34$（与施瓦茨–皮克上界 $\\frac{1}{1-0^{2}}=1$ 相比：$\\frac{|f'(0)|}{1-|f(0)|^{2}}=\\frac{3/4}{1-1/4}=1$，取到等号）。\n\n距离检验：$\\rho\\left(\\frac12,\\frac45\\right)$ 用 $\\cosh\\rho=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$ 计算，代入 $z=\\frac12$、$w=\\frac45$：$$\\cosh\\rho=1+\\frac{2\\cdot(3/10)^{2}}{(3/4)(9/25)}=1+\\frac{0.18}{0.27}=\\frac53 .$$ 而 $\\cosh(\\ln3)=\\frac{3+1/3}{2}=\\frac53$，故 $\\rho\\left(\\frac12,\\frac45\\right)=\\ln3=\\rho\\left(0,\\frac12\\right)$——正是 $\\rho(f(0),f(1/2))=\\rho(0,1/2)$，等距性质成立。"
-      },
-      {
-        "problem": "在上半平面模型中，求顶点为 $0,1,\\infty$ 的**理想三角形**的面积，并与高斯–博内公式对照。",
-        "solution": "该区域为 $$\\Omega=\\left\\{(x,y):0<x<1,\\ y>\\sqrt{x-x^{2}}\\right\\},$$ 因为连接 $0$ 与 $1$ 的测地线是圆心 $\\left(\\frac12,0\\right)$、半径 $\\frac12$ 的半圆 $y=\\sqrt{x-x^{2}}$，而连接 $0$ 与 $\\infty$、$1$ 与 $\\infty$ 的测地线分别是竖直线 $x=0$ 与 $x=1$。\n\n用上半平面的面积元 $\\frac{dx\\,\\mathrm dy}{y^{2}}$ 积分：$$A=\\int_0^1\\!\\!\\int_{\\sqrt{x-x^{2}}}^{\\infty}\\frac{\\mathrm dy\\,\\mathrm dx}{y^{2}}=\\int_0^1\\frac{\\mathrm dx}{\\sqrt{x-x^{2}}}.$$ 配方 $x-x^{2}=\\frac14-\\left(x-\\frac12\\right)^{2}$，于是 $$A=\\int_0^1\\frac{\\mathrm dx}{\\sqrt{\\frac14-(x-\\frac12)^{2}}}=\\left[\\arcsin\\!\\left(2x-1\\right)\\right]_0^1=\\frac\\pi2-\\left(-\\frac\\pi2\\right)=\\pi .$$\n\n与高斯–博内一致：理想三角形的三个顶点都在无穷远，两条测地线在每个边界点处都与实轴正交、切向相同，故三个内角都是 $0$，$$A=\\pi-(0+0+0)=\\pi .$$ 这也说明双曲三角形的面积有上界 $\\pi$，与欧氏几何中面积可以任意大形成鲜明对比。"
-      }
-    ],
-    "tags": [
-      "双曲几何",
-      "庞加莱圆盘",
-      "双曲距离",
-      "施瓦茨-皮克引理",
-      "Möbius 变换",
-      "伪球面"
-    ],
-    "links": [
-      "riemann-surfaces",
-      "uniformization-theorem",
-      "schwarz-lemma",
-      "mobius-transformation",
-      "geodesic",
-      "gauss-bonnet"
-    ]
-  }
+  "examples": [
+   {
+    "problem": "用双曲距离公式计算 $\\rho(0,\\frac12)$、$\\rho(0,\\frac34)$ 与 $\\rho(0,\\frac{99}{100})$，并说明当 $|z|\\to1$ 时的趋势。",
+    "solution": "由 $\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}$（即 $2\\operatorname{artanh}|z|$）：\n\n$$\\rho\\left(0,\\tfrac12\\right)=\\ln\\frac{1+1/2}{1-1/2}=\\ln3\\approx1.0986,$$\n$$\\rho\\left(0,\\tfrac34\\right)=\\ln\\frac{7/4}{1/4}=\\ln7\\approx1.9459,$$\n$$\\rho\\left(0,\\tfrac{99}{100}\\right)=\\ln\\frac{199/100}{1/100}=\\ln199\\approx5.2933.$$\n\n欧氏上「差不多」的点 $1/2$ 与 $3/4$，双曲距离却相差近一倍；而 $|z|\\to1^{-}$ 时 $\\rho(0,z)=\\ln\\frac{1+|z|}{1-|z|}\\to\\infty$：边界点都在无穷远，任何有限的双曲长度为 $1$ 的「尺子」都无法从圆心量到边界。"
+   },
+   {
+    "problem": "验证 $f(z)=\\dfrac{z+\\frac12}{1+\\frac z2}$ 是 $\\Delta$ 的双曲等距（自同构），并检查施瓦茨–皮克引理取等号。",
+    "solution": "$f$ 是 Möbius 变换 $z\\mapsto e^{i\\theta}\\frac{z-a}{1-\\bar az}$ 在 $a=-\\frac12$、$\\theta=0$ 的情形，且 $|a|<1$，故 $f$ 把 $\\Delta$ 双全纯地映到 $\\Delta$，属于 $\\operatorname{Aut}(\\Delta)$，是双曲等距。\n\n计算：$f(0)=\\frac12$，$f\\left(\\frac12\\right)=\\frac{1}{1+1/4}=\\frac45$；导数 $f'(0)=1-|a|^{2}=\\frac34$（与施瓦茨–皮克上界 $\\frac{1}{1-0^{2}}=1$ 相比：$\\frac{|f'(0)|}{1-|f(0)|^{2}}=\\frac{3/4}{1-1/4}=1$，取到等号）。\n\n距离检验：$\\rho\\left(\\frac12,\\frac45\\right)$ 用 $\\cosh\\rho=1+\\frac{2|z-w|^{2}}{(1-|z|^{2})(1-|w|^{2})}$ 计算，代入 $z=\\frac12$、$w=\\frac45$：$$\\cosh\\rho=1+\\frac{2\\cdot(3/10)^{2}}{(3/4)(9/25)}=1+\\frac{0.18}{0.27}=\\frac53 .$$ 而 $\\cosh(\\ln3)=\\frac{3+1/3}{2}=\\frac53$，故 $\\rho\\left(\\frac12,\\frac45\\right)=\\ln3=\\rho\\left(0,\\frac12\\right)$——正是 $\\rho(f(0),f(1/2))=\\rho(0,1/2)$，等距性质成立。"
+   },
+   {
+    "problem": "在上半平面模型中，求顶点为 $0,1,\\infty$ 的**理想三角形**的面积，并与高斯–博内公式对照。",
+    "solution": "该区域为 $$\\Omega=\\left\\{(x,y):0<x<1,\\ y>\\sqrt{x-x^{2}}\\right\\},$$ 因为连接 $0$ 与 $1$ 的测地线是圆心 $\\left(\\frac12,0\\right)$、半径 $\\frac12$ 的半圆 $y=\\sqrt{x-x^{2}}$，而连接 $0$ 与 $\\infty$、$1$ 与 $\\infty$ 的测地线分别是竖直线 $x=0$ 与 $x=1$。\n\n用上半平面的面积元 $\\frac{dx\\,\\mathrm dy}{y^{2}}$ 积分：$$A=\\int_0^1\\!\\!\\int_{\\sqrt{x-x^{2}}}^{\\infty}\\frac{\\mathrm dy\\,\\mathrm dx}{y^{2}}=\\int_0^1\\frac{\\mathrm dx}{\\sqrt{x-x^{2}}}.$$ 配方 $x-x^{2}=\\frac14-\\left(x-\\frac12\\right)^{2}$，于是 $$A=\\int_0^1\\frac{\\mathrm dx}{\\sqrt{\\frac14-(x-\\frac12)^{2}}}=\\left[\\arcsin\\!\\left(2x-1\\right)\\right]_0^1=\\frac\\pi2-\\left(-\\frac\\pi2\\right)=\\pi .$$\n\n与高斯–博内一致：理想三角形的三个顶点都在无穷远，两条测地线在每个边界点处都与实轴正交、切向相同，故三个内角都是 $0$，$$A=\\pi-(0+0+0)=\\pi .$$ 这也说明双曲三角形的面积有上界 $\\pi$，与欧氏几何中面积可以任意大形成鲜明对比。"
+   }
+  ],
+  "tags": [
+   "双曲几何",
+   "庞加莱圆盘",
+   "双曲距离",
+   "施瓦茨-皮克引理",
+   "Möbius 变换",
+   "伪球面"
+  ],
+  "links": [
+   "riemann-surfaces",
+   "uniformization-theorem",
+   "schwarz-lemma",
+   "mobius-transformation",
+   "geodesic",
+   "gauss-bonnet"
+  ]
+ }
 ]

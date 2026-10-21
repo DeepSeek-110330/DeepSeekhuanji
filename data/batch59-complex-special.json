@@ -1,609 +1,609 @@
 [
-  {
-    "id": "normal-families",
-    "title": "正规族与蒙泰尔定理",
-    "titleEn": "Normal Families and Montel's Theorem",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "正规族是「任意序列都能抽出内闭一致收敛子列」的解析函数族；蒙泰尔定理证明了只要在紧子集上一致有界就已正规，这是黎曼映射定理与皮卡定理证明的核心工具。",
-    "summaryEn": "A normal family is one in which every sequence of holomorphic functions has a subsequence converging uniformly on compact subsets; Montel's theorem shows that local uniform boundedness alone suffices.",
-    "definition": "设 $\\Omega$ 是复平面上的区域，$\\mathcal{F}$ 是 $\\Omega$ 上一族解析函数。若 $\\mathcal{F}$ 中的**任意**函数序列 $\\{f_n\\}$ 都含有在 $\\Omega$ 的每个紧子集上一致收敛（即**内闭一致收敛**）的子列，就称 $\\mathcal{F}$ 是 $\\Omega$ 上的**正规族**。由 Weierstrass 收敛定理，极限函数自动是 $\\Omega$ 上的解析函数。\n\n判别正规性最常用的工具是**蒙泰尔定理（Montel）**：若 $\\mathcal{F}$ 在 $\\Omega$ 上**局部一致有界**——即对 $\\Omega$ 的每个紧子集 $K$ 都存在常数 $M_K$，使 $|f(z)|\\le M_K$ 对一切 $f\\in\\mathcal{F}$、$z\\in K$ 成立——则 $\\mathcal{F}$ 是正规族。证明思路是把柯西积分公式给出的一致导数估计与 Arzelà–Ascoli 定理（一致有界且等度连续 $\\Rightarrow$ 存在一致收敛子列）拼接起来。\n\n与之配套的是 **Vitali 定理**（收敛版本）：若 $\\mathcal{F}$ 局部一致有界，且函数列 $\\{f_n\\}$ 在 $\\Omega$ 内某个**有聚点的集合**上逐点收敛，则 $\\{f_n\\}$ 在 $\\Omega$ 上内闭一致收敛到一个解析函数。蒙泰尔保证「收敛子列存在」，Vitali 把「一个小集合上的收敛」升级为「整体内闭一致收敛」。\n\n正规族的意义在于把「解析函数族的紧性」变成一个容易验证的条件：它是**黎曼映射定理**证明的核心（对单叶函数族取极限），也是**皮卡定理**（小定理与大定理）、最大模原理的族版本等一大批经典结果的统一基础。",
-    "definitionEn": "Let $\\Omega$ be a domain and $\\mathcal{F}$ a family of functions holomorphic on $\\Omega$. We call $\\mathcal{F}$ a **normal family** if every sequence $\\{f_n\\}\\subset\\mathcal{F}$ contains a subsequence that converges uniformly on every compact subset of $\\Omega$ (locally uniform convergence). By Weierstrass's convergence theorem the limit is again holomorphic on $\\Omega$.\n\n**Montel's theorem.** If $\\mathcal{F}$ is **locally uniformly bounded** — for every compact $K\\subset\\Omega$ there is a constant $M_K$ with $|f(z)|\\le M_K$ for all $f\\in\\mathcal{F}$ and all $z\\in K$ — then $\\mathcal{F}$ is a normal family. The proof combines the Cauchy estimates (uniform control of all derivatives, hence equicontinuity) with the Arzelà–Ascoli theorem.\n\n**Vitali's theorem** is the convergence counterpart: if $\\mathcal{F}$ is locally uniformly bounded and a sequence $\\{f_n\\}\\subset\\mathcal{F}$ converges pointwise on a set $E\\subset\\Omega$ that has a limit point in $\\Omega$, then $\\{f_n\\}$ converges locally uniformly on $\\Omega$ to a holomorphic function.\n\nNormality converts compactness of families of holomorphic functions into a checkable condition; it is the key step in the proofs of the Riemann mapping theorem and of Picard's theorems.",
-    "formulas": [
-      {
-        "latex": "\\forall\\,\\{f_n\\}\\subset\\mathcal{F}\\ \\ \\exists\\,n_k,\\ f:\\quad \\sup_{z\\in K}|f_{n_k}(z)-f(z)|\\to 0\\quad(K\\subset\\Omega\\ \\text{紧})",
-        "note": "正规族的定义：任意序列都有内闭一致收敛的子列，极限 $f$ 自动解析。",
-        "noteEn": "Definition of a normal family: every sequence has a subsequence converging uniformly on compact subsets; the limit is automatically holomorphic."
-      },
-      {
-        "latex": "\\sup_{f\\in\\mathcal{F}}\\sup_{z\\in K}|f(z)|\\le M_K<\\infty\\ \\ (\\forall K\\subset\\Omega\\ \\text{紧})\\ \\Longrightarrow\\ \\mathcal{F}\\ \\text{是正规族}",
-        "note": "蒙泰尔定理（正规性判别）：局部一致有界即可，不必逐点控制极限。",
-        "noteEn": "Montel's theorem: local uniform boundedness is enough to guarantee normality."
-      },
-      {
-        "latex": "|f^{(k)}(z)|\\le\\frac{k!\\,M_K}{r^{k}},\\qquad z\\in K,\\ 0<r<d(z,\\partial K)",
-        "note": "柯西估计：导数在紧子集上被同一个常数控制，这是一致有界族「等度连续」的来源，也是蒙泰尔定理证明的关键一步。",
-        "noteEn": "Cauchy estimates: derivatives are controlled uniformly on compact subsets, which yields equicontinuity — the key step in the proof of Montel's theorem."
-      },
-      {
-        "latex": "E\\subset\\Omega\\ \\text{有聚点在}\\ \\Omega,\\quad f_n(z)\\to f(z)\\ (\\forall z\\in E)\\ \\Longrightarrow\\ f_n\\rightrightarrows f\\ \\text{于}\\ \\Omega\\ \\text{的内闭}",
-        "note": "Vitali 定理（收敛版本）：局部一致有界 + 有聚点集合上收敛 $\\Rightarrow$ 内闭一致收敛。",
-        "noteEn": "Vitali's theorem: local boundedness plus pointwise convergence on a set with a limit point gives locally uniform convergence."
-      },
-      {
-        "latex": "a\\neq b,\\quad f(z)\\notin\\{a,b\\}\\ \\ (\\forall f\\in\\mathcal{F},\\ \\forall z\\in\\Omega)\\ \\Longrightarrow\\ \\mathcal{F}\\ \\text{是正规族}",
-        "note": "蒙泰尔两值定理：解析函数族若一致地取不到两个固定值，就是正规族（亚纯函数族对应「三值定理」）；皮卡小定理可由它推出。",
-        "noteEn": "Montel's two-value theorem: a family of holomorphic functions omitting two fixed values is normal (three values in the meromorphic case); Picard's little theorem follows."
-      }
-    ],
-    "properties": [
-      "【等价性】在本节点的定义下，解析函数族正规 $\\iff$ 局部一致有界：蒙泰尔给出一半，另一半是因为在紧集上一致收敛的函数列必一致有界（无界序列不可能有内闭一致收敛的子列）。",
-      "【球面度量下的推广】若允许极限函数取常值 $\\infty$（球面度量下的收敛，处理亚纯函数族时常用），正规性严格弱于局部一致有界：例如常值族 $\\{n\\}$ 在球面意义下正规，却不局部有界。",
-      "【Vitali 的意义】把恒等定理「搬」到函数族上：只需在一个有聚点的小集合（例如 $\\{1/k\\}$）上验证收敛，就能得到整个区域上的内闭一致收敛。",
-      "【对区域的依赖性】正规性依赖底区域：$\\{z^n\\}$ 在单位圆盘上正规（$|z^n|\\le 1$），在环域 $\\{1/2<|z|<2\\}$ 上却不是正规族。",
-      "【应用主线】黎曼映射定理：对单叶函数族用正规性取极限函数；皮卡定理：用蒙泰尔定理与「省略值」构造矛盾；最大模原理、辐角原理的族版本也常用同样的紧性论证。"
-    ],
-    "propertiesEn": [
-      "Equivalence: in the sense defined here, a family of holomorphic functions is normal if and only if it is locally uniformly bounded — Montel gives one direction, and the other follows because a uniformly convergent sequence is uniformly bounded on each compact set.",
-      "Spherical variant: if limits are allowed to be the constant infinity (convergence in the spherical metric, used for meromorphic families), normality is strictly weaker than local boundedness — the family of constants {n} is normal in this sense but not locally bounded.",
-      "Vitali's theorem transports the identity theorem to families: convergence checked on a small set with a limit point upgrades to locally uniform convergence on the whole domain.",
-      "Normality depends on the domain: {z^n} is normal on the unit disc (|z^n| ≤ 1) but not on the annulus {1/2 < |z| < 2}.",
-      "Main applications: taking limits of univalent families (Riemann mapping theorem), contradiction arguments with omitted values (Picard's theorems), and compactness arguments for maximum-modulus and argument-principle statements."
-    ],
-    "examples": [
-      {
-        "problem": "证明函数族 $\\mathcal{F}=\\{z^n:n\\ge 1\\}$ 在环域 $A=\\{1/2<|z|<2\\}$ 上不是正规族，并解释为什么它在单位圆盘 $\\Delta$ 上却是正规族。",
-        "solution": "用反证法。设存在子列 $z^{n_k}$ 在 $A$ 的每个紧子集上一致收敛到解析函数 $g$。在子区域 $\\{1/2<|z|<1\\}$ 上 $|z|<1$，故 $z^{n_k}\\to 0$ 逐点成立，于是 $g\\equiv 0$ 于该子区域；因 $A$ 连通，由唯一性定理 $g\\equiv 0$ 于 $A$。但 $K=\\{|z|=1\\}\\subset A$ 是紧集，在 $K$ 上 $|z^{n_k}|=1$，故 $\\sup_{K}|z^{n_k}-0|=1\\not\\to 0$，与一致收敛矛盾。所以 $\\mathcal{F}$ 在 $A$ 上不正规。而在 $\\Delta$ 上有 $|z^n|\\le 1$（局部一致有界），由蒙泰尔定理 $\\mathcal{F}$ 在 $\\Delta$ 上是正规族——事实上 $z^n\\rightrightarrows 0$。可见正规性依赖区域。",
-        "solutionEn": "Assume a subsequence z^{n_k} converges locally uniformly on A to a holomorphic g. On {1/2<|z|<1} we have |z|<1, so z^{n_k}→0 and hence g≡0 there; by the identity theorem g≡0 on the connected A. But on the compact circle |z|=1 (contained in A) we have |z^{n_k}|=1, so convergence to 0 is impossible. Hence the family is not normal on A, while on the disc it is normal by Montel (|z^n| ≤ 1)."
-      },
-      {
-        "problem": "设 $\\{f_n\\}$ 是单位圆盘 $\\Delta$ 上的解析函数列，满足 $|f_n(z)|\\le 1$，且对每个 $k=2,3,4,\\dots$ 都有 $f_n(1/k)\\to 0$。证明 $f_n$ 在 $\\Delta$ 上内闭一致收敛于 $0$。",
-        "solution": "由 $|f_n|\\le 1$ 知 $\\{f_n\\}$ 局部一致有界，故是正规族。取 $E=\\{1/k:k\\ge 2\\}\\subset\\Delta$，它在 $\\Delta$ 内有聚点 $0$，且按假设 $f_n$ 在 $E$ 上逐点收敛到 $0$。由 Vitali 定理，$f_n$ 在 $\\Delta$ 上内闭一致收敛到某个解析函数 $g$。极限与逐点极限一致，故 $g(1/k)=0$ 对一切 $k\\ge 2$ 成立；集合 $\\{1/k\\}$ 在 $\\Delta$ 内有聚点 $0$，由唯一性定理 $g\\equiv 0$。因此 $f_n$ 内闭一致收敛于 $0$。",
-        "solutionEn": "Since |f_n| ≤ 1 the family is locally bounded, hence normal. The set E = {1/k : k ≥ 2} has the limit point 0 ∈ Δ and f_n → 0 on E, so by Vitali's theorem f_n converges locally uniformly on Δ to some holomorphic g. Then g(1/k)=0 for all k ≥ 2, so g ≡ 0 by the identity theorem; hence f_n → 0 locally uniformly."
-      }
-    ],
-    "tags": [
-      "复分析",
-      "正规族",
-      "蒙泰尔定理",
-      "紧性",
-      "黎曼映射定理",
-      "皮卡定理"
-    ],
-    "links": [
-      "riemann-mapping-theorem",
-      "picard-theorems",
-      "entire-functions",
-      "maximum-modulus-principle",
-      "analytic-function"
-    ]
+ {
+  "id": "normal-families",
+  "title": "正规族与蒙泰尔定理",
+  "titleEn": "Normal Families and Montel's Theorem",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "正规族是「任意序列都能抽出内闭一致收敛子列」的解析函数族；蒙泰尔定理证明了只要在紧子集上一致有界就已正规，这是黎曼映射定理与皮卡定理证明的核心工具。",
+  "summaryEn": "A normal family is one in which every sequence of holomorphic functions has a subsequence converging uniformly on compact subsets; Montel's theorem shows that local uniform boundedness alone suffices.",
+  "definition": "设 $\\Omega$ 是复平面上的区域，$\\mathcal{F}$ 是 $\\Omega$ 上一族解析函数。若 $\\mathcal{F}$ 中的**任意**函数序列 $\\{f_n\\}$ 都含有在 $\\Omega$ 的每个紧子集上一致收敛（即**内闭一致收敛**）的子列，就称 $\\mathcal{F}$ 是 $\\Omega$ 上的**正规族**。由 Weierstrass 收敛定理，极限函数自动是 $\\Omega$ 上的解析函数。\n\n判别正规性最常用的工具是**蒙泰尔定理（Montel）**：若 $\\mathcal{F}$ 在 $\\Omega$ 上**局部一致有界**——即对 $\\Omega$ 的每个紧子集 $K$ 都存在常数 $M_K$，使 $|f(z)|\\le M_K$ 对一切 $f\\in\\mathcal{F}$、$z\\in K$ 成立——则 $\\mathcal{F}$ 是正规族。证明思路是把柯西积分公式给出的一致导数估计与 Arzelà–Ascoli 定理（一致有界且等度连续 $\\Rightarrow$ 存在一致收敛子列）拼接起来。\n\n与之配套的是 **Vitali 定理**（收敛版本）：若 $\\mathcal{F}$ 局部一致有界，且函数列 $\\{f_n\\}$ 在 $\\Omega$ 内某个**有聚点的集合**上逐点收敛，则 $\\{f_n\\}$ 在 $\\Omega$ 上内闭一致收敛到一个解析函数。蒙泰尔保证「收敛子列存在」，Vitali 把「一个小集合上的收敛」升级为「整体内闭一致收敛」。\n\n正规族的意义在于把「解析函数族的紧性」变成一个容易验证的条件：它是**黎曼映射定理**证明的核心（对单叶函数族取极限），也是**皮卡定理**（小定理与大定理）、最大模原理的族版本等一大批经典结果的统一基础。",
+  "definitionEn": "Let $\\Omega$ be a domain and $\\mathcal{F}$ a family of functions holomorphic on $\\Omega$. We call $\\mathcal{F}$ a **normal family** if every sequence $\\{f_n\\}\\subset\\mathcal{F}$ contains a subsequence that converges uniformly on every compact subset of $\\Omega$ (locally uniform convergence). By Weierstrass's convergence theorem the limit is again holomorphic on $\\Omega$.\n\n**Montel's theorem.** If $\\mathcal{F}$ is **locally uniformly bounded** — for every compact $K\\subset\\Omega$ there is a constant $M_K$ with $|f(z)|\\le M_K$ for all $f\\in\\mathcal{F}$ and all $z\\in K$ — then $\\mathcal{F}$ is a normal family. The proof combines the Cauchy estimates (uniform control of all derivatives, hence equicontinuity) with the Arzelà–Ascoli theorem.\n\n**Vitali's theorem** is the convergence counterpart: if $\\mathcal{F}$ is locally uniformly bounded and a sequence $\\{f_n\\}\\subset\\mathcal{F}$ converges pointwise on a set $E\\subset\\Omega$ that has a limit point in $\\Omega$, then $\\{f_n\\}$ converges locally uniformly on $\\Omega$ to a holomorphic function.\n\nNormality converts compactness of families of holomorphic functions into a checkable condition; it is the key step in the proofs of the Riemann mapping theorem and of Picard's theorems.",
+  "formulas": [
+   {
+    "latex": "\\forall\\,\\{f_n\\}\\subset\\mathcal{F}\\ \\ \\exists\\,n_k,\\ f:\\quad \\sup_{z\\in K}|f_{n_k}(z)-f(z)|\\to 0\\quad(K\\subset\\Omega\\ \\text{紧})",
+    "note": "正规族的定义：任意序列都有内闭一致收敛的子列，极限 $f$ 自动解析。",
+    "noteEn": "Definition of a normal family: every sequence has a subsequence converging uniformly on compact subsets; the limit is automatically holomorphic."
+   },
+   {
+    "latex": "\\sup_{f\\in\\mathcal{F}}\\sup_{z\\in K}|f(z)|\\le M_K<\\infty\\ \\ (\\forall K\\subset\\Omega\\ \\text{紧})\\ \\Longrightarrow\\ \\mathcal{F}\\ \\text{是正规族}",
+    "note": "蒙泰尔定理（正规性判别）：局部一致有界即可，不必逐点控制极限。",
+    "noteEn": "Montel's theorem: local uniform boundedness is enough to guarantee normality."
+   },
+   {
+    "latex": "|f^{(k)}(z)|\\le\\frac{k!\\,M_K}{r^{k}},\\qquad z\\in K,\\ 0<r<d(z,\\partial K)",
+    "note": "柯西估计：导数在紧子集上被同一个常数控制，这是一致有界族「等度连续」的来源，也是蒙泰尔定理证明的关键一步。",
+    "noteEn": "Cauchy estimates: derivatives are controlled uniformly on compact subsets, which yields equicontinuity — the key step in the proof of Montel's theorem."
+   },
+   {
+    "latex": "E\\subset\\Omega\\ \\text{有聚点在}\\ \\Omega,\\quad f_n(z)\\to f(z)\\ (\\forall z\\in E)\\ \\Longrightarrow\\ f_n\\rightrightarrows f\\ \\text{于}\\ \\Omega\\ \\text{的内闭}",
+    "note": "Vitali 定理（收敛版本）：局部一致有界 + 有聚点集合上收敛 $\\Rightarrow$ 内闭一致收敛。",
+    "noteEn": "Vitali's theorem: local boundedness plus pointwise convergence on a set with a limit point gives locally uniform convergence."
+   },
+   {
+    "latex": "a\\neq b,\\quad f(z)\\notin\\{a,b\\}\\ \\ (\\forall f\\in\\mathcal{F},\\ \\forall z\\in\\Omega)\\ \\Longrightarrow\\ \\mathcal{F}\\ \\text{是正规族}",
+    "note": "蒙泰尔两值定理：解析函数族若一致地取不到两个固定值，就是正规族（亚纯函数族对应「三值定理」）；皮卡小定理可由它推出。",
+    "noteEn": "Montel's two-value theorem: a family of holomorphic functions omitting two fixed values is normal (three values in the meromorphic case); Picard's little theorem follows."
+   }
+  ],
+  "properties": [
+   "【等价性】在本节点的定义下，解析函数族正规 $\\iff$ 局部一致有界：蒙泰尔给出一半，另一半是因为在紧集上一致收敛的函数列必一致有界（无界序列不可能有内闭一致收敛的子列）。",
+   "【球面度量下的推广】若允许极限函数取常值 $\\infty$（球面度量下的收敛，处理亚纯函数族时常用），正规性严格弱于局部一致有界：例如常值族 $\\{n\\}$ 在球面意义下正规，却不局部有界。",
+   "【Vitali 的意义】把恒等定理「搬」到函数族上：只需在一个有聚点的小集合（例如 $\\{1/k\\}$）上验证收敛，就能得到整个区域上的内闭一致收敛。",
+   "【对区域的依赖性】正规性依赖底区域：$\\{z^n\\}$ 在单位圆盘上正规（$|z^n|\\le 1$），在环域 $\\{1/2<|z|<2\\}$ 上却不是正规族。",
+   "【应用主线】黎曼映射定理：对单叶函数族用正规性取极限函数；皮卡定理：用蒙泰尔定理与「省略值」构造矛盾；最大模原理、辐角原理的族版本也常用同样的紧性论证。"
+  ],
+  "propertiesEn": [
+   "Equivalence: in the sense defined here, a family of holomorphic functions is normal if and only if it is locally uniformly bounded — Montel gives one direction, and the other follows because a uniformly convergent sequence is uniformly bounded on each compact set.",
+   "Spherical variant: if limits are allowed to be the constant infinity (convergence in the spherical metric, used for meromorphic families), normality is strictly weaker than local boundedness — the family of constants {n} is normal in this sense but not locally bounded.",
+   "Vitali's theorem transports the identity theorem to families: convergence checked on a small set with a limit point upgrades to locally uniform convergence on the whole domain.",
+   "Normality depends on the domain: {z^n} is normal on the unit disc (|z^n| ≤ 1) but not on the annulus {1/2 < |z| < 2}.",
+   "Main applications: taking limits of univalent families (Riemann mapping theorem), contradiction arguments with omitted values (Picard's theorems), and compactness arguments for maximum-modulus and argument-principle statements."
+  ],
+  "examples": [
+   {
+    "problem": "证明函数族 $\\mathcal{F}=\\{z^n:n\\ge 1\\}$ 在环域 $A=\\{1/2<|z|<2\\}$ 上不是正规族，并解释为什么它在单位圆盘 $\\Delta$ 上却是正规族。",
+    "solution": "用反证法。设存在子列 $z^{n_k}$ 在 $A$ 的每个紧子集上一致收敛到解析函数 $g$。在子区域 $\\{1/2<|z|<1\\}$ 上 $|z|<1$，故 $z^{n_k}\\to 0$ 逐点成立，于是 $g\\equiv 0$ 于该子区域；因 $A$ 连通，由唯一性定理 $g\\equiv 0$ 于 $A$。但 $K=\\{|z|=1\\}\\subset A$ 是紧集，在 $K$ 上 $|z^{n_k}|=1$，故 $\\sup_{K}|z^{n_k}-0|=1\\not\\to 0$，与一致收敛矛盾。所以 $\\mathcal{F}$ 在 $A$ 上不正规。而在 $\\Delta$ 上有 $|z^n|\\le 1$（局部一致有界），由蒙泰尔定理 $\\mathcal{F}$ 在 $\\Delta$ 上是正规族——事实上 $z^n\\rightrightarrows 0$。可见正规性依赖区域。",
+    "solutionEn": "Assume a subsequence z^{n_k} converges locally uniformly on A to a holomorphic g. On {1/2<|z|<1} we have |z|<1, so z^{n_k}→0 and hence g≡0 there; by the identity theorem g≡0 on the connected A. But on the compact circle |z|=1 (contained in A) we have |z^{n_k}|=1, so convergence to 0 is impossible. Hence the family is not normal on A, while on the disc it is normal by Montel (|z^n| ≤ 1)."
+   },
+   {
+    "problem": "设 $\\{f_n\\}$ 是单位圆盘 $\\Delta$ 上的解析函数列，满足 $|f_n(z)|\\le 1$，且对每个 $k=2,3,4,\\dots$ 都有 $f_n(1/k)\\to 0$。证明 $f_n$ 在 $\\Delta$ 上内闭一致收敛于 $0$。",
+    "solution": "由 $|f_n|\\le 1$ 知 $\\{f_n\\}$ 局部一致有界，故是正规族。取 $E=\\{1/k:k\\ge 2\\}\\subset\\Delta$，它在 $\\Delta$ 内有聚点 $0$，且按假设 $f_n$ 在 $E$ 上逐点收敛到 $0$。由 Vitali 定理，$f_n$ 在 $\\Delta$ 上内闭一致收敛到某个解析函数 $g$。极限与逐点极限一致，故 $g(1/k)=0$ 对一切 $k\\ge 2$ 成立；集合 $\\{1/k\\}$ 在 $\\Delta$ 内有聚点 $0$，由唯一性定理 $g\\equiv 0$。因此 $f_n$ 内闭一致收敛于 $0$。",
+    "solutionEn": "Since |f_n| ≤ 1 the family is locally bounded, hence normal. The set E = {1/k : k ≥ 2} has the limit point 0 ∈ Δ and f_n → 0 on E, so by Vitali's theorem f_n converges locally uniformly on Δ to some holomorphic g. Then g(1/k)=0 for all k ≥ 2, so g ≡ 0 by the identity theorem; hence f_n → 0 locally uniformly."
+   }
+  ],
+  "tags": [
+   "复分析",
+   "正规族",
+   "蒙泰尔定理",
+   "紧性",
+   "黎曼映射定理",
+   "皮卡定理"
+  ],
+  "links": [
+   "riemann-mapping-theorem",
+   "picard-theorems",
+   "entire-functions",
+   "maximum-modulus-principle",
+   "analytic-function"
+  ]
+ },
+ {
+  "id": "gamma-function",
+  "title": "伽马函数",
+  "titleEn": "The Gamma Function",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "伽马函数 $\\Gamma(z)=\\int_0^\\infty t^{z-1}e^{-t}dt$ 是阶乘在复数域上的解析推广，它满足函数方程 $\\Gamma(z+1)=z\\Gamma(z)$、反射公式 $\\Gamma(z)\\Gamma(1-z)=\\pi/\\sin\\pi z$，在 $z=0,-1,-2,\\dots$ 处有一阶极点。",
+  "summaryEn": "The gamma function Γ(z) = ∫₀^∞ t^{z−1}e^{−t} dt is the analytic extension of the factorial; it satisfies Γ(z+1) = zΓ(z) and the reflection formula Γ(z)Γ(1−z) = π/sin(πz), with simple poles at z = 0, −1, −2, …",
+  "definition": "对 $\\operatorname{Re}z>0$，定义\n\n$$\\Gamma(z)=\\int_0^\\infty t^{\\,z-1}e^{-t}\\,dt .$$\n\n这个积分绝对收敛（被积函数的模为 $t^{\\sigma-1}e^{-t}$，$\\sigma=\\operatorname{Re}z$），并且在该半平面内解析：可以在积分号下求导。由分部积分立刻得到 **函数方程** $\\Gamma(z+1)=z\\Gamma(z)$，配上 $\\Gamma(1)=1$ 就给出 $\\Gamma(n+1)=n!$——这正是「$\\Gamma$ 把阶乘推广到复数」的含义。\n\n利用函数方程可以把 $\\Gamma$ 向左**解析延拓**：解出 $\\Gamma(z)=\\dfrac{\\Gamma(z+n+1)}{z(z+1)\\cdots(z+n)}$，右端在 $\\operatorname{Re}z>-n-1$ 上有意义。这样 $\\Gamma$ 成为整个复平面上的**亚纯函数**：**极点在 $z=0,-1,-2,\\dots$**，每个都是**一阶极点**，且\n\n$$\\operatorname{Res}_{z=-n}\\Gamma=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots).$$\n\n$\\Gamma$ 还满足一串漂亮的关系：**反射公式** $\\Gamma(z)\\Gamma(1-z)=\\dfrac{\\pi}{\\sin\\pi z}$，其特例是 $\\Gamma\\left(\\tfrac12\\right)=\\sqrt{\\pi}$，同时它说明 $\\Gamma$ 永不取零；**勒让德倍数公式** $\\Gamma(z)\\Gamma\\left(z+\\tfrac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z)$；以及**魏尔斯特拉斯无穷乘积** $\\dfrac{1}{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n=1}^{\\infty}\\left(1+\\dfrac{z}{n}\\right)e^{-z/n}$（$\\gamma$ 为欧拉常数），它表明 $1/\\Gamma$ 是整函数。",
+  "definitionEn": "For $\\operatorname{Re}z>0$ define\n\n$$\\Gamma(z)=\\int_0^\\infty t^{\\,z-1}e^{-t}\\,dt .$$\n\nThe integral converges absolutely (its modulus is $t^{\\sigma-1}e^{-t}$, $\\sigma=\\operatorname{Re}z$) and is holomorphic in that half-plane. Integration by parts gives the **functional equation** $\\Gamma(z+1)=z\\Gamma(z)$, and with $\\Gamma(1)=1$ this yields $\\Gamma(n+1)=n!$.\n\nUsing the functional equation one continues $\\Gamma$ to the left via $\\Gamma(z)=\\dfrac{\\Gamma(z+n+1)}{z(z+1)\\cdots(z+n)}$, obtaining a **meromorphic** function on the whole plane: its **poles are exactly $z=0,-1,-2,\\dots$**, each **simple**, with $\\operatorname{Res}_{z=-n}\\Gamma=(-1)^n/n!$.\n\nThe **reflection formula** $\\Gamma(z)\\Gamma(1-z)=\\pi/\\sin\\pi z$ gives $\\Gamma\\left(\\tfrac12\\right)=\\sqrt{\\pi}$ and shows that $\\Gamma$ has no zeros; Legendre's duplication formula reads $\\Gamma(z)\\Gamma\\left(z+\\tfrac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z)$; and the Weierstrass product $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+z/n)e^{-z/n}$ ($\\gamma$ = Euler's constant) exhibits $1/\\Gamma$ as an entire function.",
+  "expression": {
+   "text": "Γ(z) = ∫₀^∞ t^(z−1) e^(−t) dt   (Re z > 0)",
+   "symbol": "Γ(z)",
+   "note": "定义式；对正整数由 Γ(n+1)=n! 回到阶乘。",
+   "noteEn": "The defining integral; for positive integers Γ(n+1)=n! recovers the factorial."
   },
-  {
-    "id": "gamma-function",
-    "title": "伽马函数",
-    "titleEn": "The Gamma Function",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "伽马函数 $\\Gamma(z)=\\int_0^\\infty t^{z-1}e^{-t}dt$ 是阶乘在复数域上的解析推广，它满足函数方程 $\\Gamma(z+1)=z\\Gamma(z)$、反射公式 $\\Gamma(z)\\Gamma(1-z)=\\pi/\\sin\\pi z$，在 $z=0,-1,-2,\\dots$ 处有一阶极点。",
-    "summaryEn": "The gamma function Γ(z) = ∫₀^∞ t^{z−1}e^{−t} dt is the analytic extension of the factorial; it satisfies Γ(z+1) = zΓ(z) and the reflection formula Γ(z)Γ(1−z) = π/sin(πz), with simple poles at z = 0, −1, −2, …",
-    "definition": "对 $\\operatorname{Re}z>0$，定义\n\n$$\\Gamma(z)=\\int_0^\\infty t^{\\,z-1}e^{-t}\\,dt .$$\n\n这个积分绝对收敛（被积函数的模为 $t^{\\sigma-1}e^{-t}$，$\\sigma=\\operatorname{Re}z$），并且在该半平面内解析：可以在积分号下求导。由分部积分立刻得到 **函数方程** $\\Gamma(z+1)=z\\Gamma(z)$，配上 $\\Gamma(1)=1$ 就给出 $\\Gamma(n+1)=n!$——这正是「$\\Gamma$ 把阶乘推广到复数」的含义。\n\n利用函数方程可以把 $\\Gamma$ 向左**解析延拓**：解出 $\\Gamma(z)=\\dfrac{\\Gamma(z+n+1)}{z(z+1)\\cdots(z+n)}$，右端在 $\\operatorname{Re}z>-n-1$ 上有意义。这样 $\\Gamma$ 成为整个复平面上的**亚纯函数**：**极点在 $z=0,-1,-2,\\dots$**，每个都是**一阶极点**，且\n\n$$\\operatorname{Res}_{z=-n}\\Gamma=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots).$$\n\n$\\Gamma$ 还满足一串漂亮的关系：**反射公式** $\\Gamma(z)\\Gamma(1-z)=\\dfrac{\\pi}{\\sin\\pi z}$，其特例是 $\\Gamma\\left(\\tfrac12\\right)=\\sqrt{\\pi}$，同时它说明 $\\Gamma$ 永不取零；**勒让德倍数公式** $\\Gamma(z)\\Gamma\\left(z+\\tfrac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z)$；以及**魏尔斯特拉斯无穷乘积** $\\dfrac{1}{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n=1}^{\\infty}\\left(1+\\dfrac{z}{n}\\right)e^{-z/n}$（$\\gamma$ 为欧拉常数），它表明 $1/\\Gamma$ 是整函数。",
-    "definitionEn": "For $\\operatorname{Re}z>0$ define\n\n$$\\Gamma(z)=\\int_0^\\infty t^{\\,z-1}e^{-t}\\,dt .$$\n\nThe integral converges absolutely (its modulus is $t^{\\sigma-1}e^{-t}$, $\\sigma=\\operatorname{Re}z$) and is holomorphic in that half-plane. Integration by parts gives the **functional equation** $\\Gamma(z+1)=z\\Gamma(z)$, and with $\\Gamma(1)=1$ this yields $\\Gamma(n+1)=n!$.\n\nUsing the functional equation one continues $\\Gamma$ to the left via $\\Gamma(z)=\\dfrac{\\Gamma(z+n+1)}{z(z+1)\\cdots(z+n)}$, obtaining a **meromorphic** function on the whole plane: its **poles are exactly $z=0,-1,-2,\\dots$**, each **simple**, with $\\operatorname{Res}_{z=-n}\\Gamma=(-1)^n/n!$.\n\nThe **reflection formula** $\\Gamma(z)\\Gamma(1-z)=\\pi/\\sin\\pi z$ gives $\\Gamma\\left(\\tfrac12\\right)=\\sqrt{\\pi}$ and shows that $\\Gamma$ has no zeros; Legendre's duplication formula reads $\\Gamma(z)\\Gamma\\left(z+\\tfrac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z)$; and the Weierstrass product $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+z/n)e^{-z/n}$ ($\\gamma$ = Euler's constant) exhibits $1/\\Gamma$ as an entire function.",
-    "expression": {
-      "text": "Γ(z) = ∫₀^∞ t^(z−1) e^(−t) dt   (Re z > 0)",
-      "symbol": "Γ(z)",
-      "note": "定义式；对正整数由 Γ(n+1)=n! 回到阶乘。",
-      "noteEn": "The defining integral; for positive integers Γ(n+1)=n! recovers the factorial."
+  "formulas": [
+   {
+    "latex": "\\Gamma(z)=\\int_0^\\infty t^{\\,z-1}e^{-t}\\,dt\\qquad(\\operatorname{Re}z>0)",
+    "note": "定义式：$\\operatorname{Re}z>0$ 时绝对收敛且解析，是全部分析性质的出发点。",
+    "noteEn": "The definition: absolutely convergent and holomorphic for Re z > 0."
+   },
+   {
+    "latex": "\\Gamma(z+1)=z\\Gamma(z),\\qquad \\Gamma(n+1)=n!\\quad(n=0,1,2,\\dots)",
+    "note": "函数方程与阶乘关系；它也是向左解析延拓的工具。",
+    "noteEn": "Functional equation and its consequence Γ(n+1) = n!; it also drives the continuation to the left."
+   },
+   {
+    "latex": "\\Gamma(z)\\Gamma(1-z)=\\frac{\\pi}{\\sin\\pi z}",
+    "note": "反射公式（余元公式）：给出 $\\Gamma(1/2)=\\sqrt{\\pi}$，并说明 $\\Gamma$ 没有零点。",
+    "noteEn": "Reflection formula: it yields Γ(1/2)=√π and shows that Γ has no zeros."
+   },
+   {
+    "latex": "\\Gamma\\!\\left(\\tfrac12\\right)=\\sqrt{\\pi},\\qquad \\Gamma(z)\\Gamma\\!\\left(z+\\tfrac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z)",
+    "note": "$\\Gamma(1/2)=\\sqrt{\\pi}$ 是反射公式的直接推论；右边是勒让德倍数公式，把 $z$ 与 $2z$ 的取值联系起来。",
+    "noteEn": "Γ(1/2) = √π follows from reflection; the second identity is Legendre's duplication formula."
+   },
+   {
+    "latex": "\\operatorname{Res}_{z=-n}\\Gamma=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots)",
+    "note": "$\\Gamma$ 在 $z=-n$ 处的一阶极点留数：$n=0$ 时为 $1$，$n=1$ 时为 $-1$，$n=2$ 时为 $1/2$。",
+    "noteEn": "Residues at the simple poles z = −n: 1, −1, 1/2, … for n = 0, 1, 2, …"
+   },
+   {
+    "latex": "\\frac{1}{\\Gamma(z)}=z\\,e^{\\gamma z}\\prod_{n=1}^{\\infty}\\left(1+\\frac{z}{n}\\right)e^{-z/n}",
+    "note": "魏尔斯特拉斯无穷乘积（$\\gamma$ 为欧拉常数）：右端是整函数，故 $\\Gamma$ 无零点。",
+    "noteEn": "Weierstrass product (γ = Euler's constant): the right side is entire, so Γ has no zeros."
+   }
+  ],
+  "properties": [
+   "$\\Gamma$ 在 $\\mathbb{C}$ 上亚纯，极点为 $z=0,-1,-2,\\dots$（全是一阶极点，留数 $(-1)^n/n!$），在别处处处解析；$\\Gamma$ 没有零点（$1/\\Gamma$ 是整函数）。",
+   "函数方程 $\\Gamma(z+1)=z\\Gamma(z)$、初值 $\\Gamma(1)=1$ 与正实轴上的对数凸性一起唯一确定 $\\Gamma$（Bohr–Mollerup 定理）；这是在「无穷多个插值函数」中选出 $\\Gamma$ 的本质条件。",
+   "反射公式 $\\Gamma(z)\\Gamma(1-z)=\\pi/\\sin\\pi z$ 把 $z$ 与 $1-z$ 联系起来，立即给出 $\\Gamma(1/2)=\\sqrt{\\pi}$ 与 $\\Gamma(-1/2)=-2\\sqrt{\\pi}$。",
+   "增长估计（Stirling）：当 $|z|\\to\\infty$ 且在带形 $|\\arg z|\\le\\pi-\\delta$ 内时 $\\Gamma(z)\\sim\\sqrt{2\\pi}\\,z^{z-1/2}e^{-z}$；这个估计是推导 $\\zeta$ 函数方程的关键。",
+   "与 Beta 函数的关系：$B(x,y)=\\dfrac{\\Gamma(x)\\Gamma(y)}{\\Gamma(x+y)}=\\int_0^1 t^{x-1}(1-t)^{y-1}dt$，把大量含参数的定积分一次性解决。"
+  ],
+  "propertiesEn": [
+   "Γ is meromorphic on ℂ with poles exactly at z = 0, −1, −2, … (all simple, residues (−1)^n/n!) and is holomorphic elsewhere; Γ has no zeros, so 1/Γ is entire.",
+   "The functional equation Γ(z+1)=zΓ(z), the value Γ(1)=1 and log-convexity on the positive axis determine Γ uniquely (Bohr–Mollerup).",
+   "The reflection formula Γ(z)Γ(1−z)=π/sin πz links z with 1−z and immediately gives Γ(1/2)=√π and Γ(−1/2)=−2√π.",
+   "Growth (Stirling): as |z|→∞ inside |arg z| ≤ π−δ, Γ(z) ∼ √(2π) z^{z−1/2}e^{−z}; this estimate is essential for the functional equation of ζ.",
+   "Relation to the Beta function: B(x,y)=Γ(x)Γ(y)/Γ(x+y)=∫₀¹ t^{x−1}(1−t)^{y−1}dt, which evaluates many parametric integrals at once."
+  ],
+  "plot": {
+   "type": "function",
+   "functions": [
+    {
+     "expr": "exp(-x)",
+     "color": "#06d6a0",
+     "label": "t⁰e^(−t)：面积 = Γ(1) = 1"
     },
-    "formulas": [
-      {
-        "latex": "\\Gamma(z)=\\int_0^\\infty t^{\\,z-1}e^{-t}\\,dt\\qquad(\\operatorname{Re}z>0)",
-        "note": "定义式：$\\operatorname{Re}z>0$ 时绝对收敛且解析，是全部分析性质的出发点。",
-        "noteEn": "The definition: absolutely convergent and holomorphic for Re z > 0."
-      },
-      {
-        "latex": "\\Gamma(z+1)=z\\Gamma(z),\\qquad \\Gamma(n+1)=n!\\quad(n=0,1,2,\\dots)",
-        "note": "函数方程与阶乘关系；它也是向左解析延拓的工具。",
-        "noteEn": "Functional equation and its consequence Γ(n+1) = n!; it also drives the continuation to the left."
-      },
-      {
-        "latex": "\\Gamma(z)\\Gamma(1-z)=\\frac{\\pi}{\\sin\\pi z}",
-        "note": "反射公式（余元公式）：给出 $\\Gamma(1/2)=\\sqrt{\\pi}$，并说明 $\\Gamma$ 没有零点。",
-        "noteEn": "Reflection formula: it yields Γ(1/2)=√π and shows that Γ has no zeros."
-      },
-      {
-        "latex": "\\Gamma\\!\\left(\\tfrac12\\right)=\\sqrt{\\pi},\\qquad \\Gamma(z)\\Gamma\\!\\left(z+\\tfrac12\\right)=2^{1-2z}\\sqrt{\\pi}\\,\\Gamma(2z)",
-        "note": "$\\Gamma(1/2)=\\sqrt{\\pi}$ 是反射公式的直接推论；右边是勒让德倍数公式，把 $z$ 与 $2z$ 的取值联系起来。",
-        "noteEn": "Γ(1/2) = √π follows from reflection; the second identity is Legendre's duplication formula."
-      },
-      {
-        "latex": "\\operatorname{Res}_{z=-n}\\Gamma=\\frac{(-1)^n}{n!}\\qquad(n=0,1,2,\\dots)",
-        "note": "$\\Gamma$ 在 $z=-n$ 处的一阶极点留数：$n=0$ 时为 $1$，$n=1$ 时为 $-1$，$n=2$ 时为 $1/2$。",
-        "noteEn": "Residues at the simple poles z = −n: 1, −1, 1/2, … for n = 0, 1, 2, …"
-      },
-      {
-        "latex": "\\frac{1}{\\Gamma(z)}=z\\,e^{\\gamma z}\\prod_{n=1}^{\\infty}\\left(1+\\frac{z}{n}\\right)e^{-z/n}",
-        "note": "魏尔斯特拉斯无穷乘积（$\\gamma$ 为欧拉常数）：右端是整函数，故 $\\Gamma$ 无零点。",
-        "noteEn": "Weierstrass product (γ = Euler's constant): the right side is entire, so Γ has no zeros."
-      }
-    ],
-    "properties": [
-      "$\\Gamma$ 在 $\\mathbb{C}$ 上亚纯，极点为 $z=0,-1,-2,\\dots$（全是一阶极点，留数 $(-1)^n/n!$），在别处处处解析；$\\Gamma$ 没有零点（$1/\\Gamma$ 是整函数）。",
-      "函数方程 $\\Gamma(z+1)=z\\Gamma(z)$、初值 $\\Gamma(1)=1$ 与正实轴上的对数凸性一起唯一确定 $\\Gamma$（Bohr–Mollerup 定理）；这是在「无穷多个插值函数」中选出 $\\Gamma$ 的本质条件。",
-      "反射公式 $\\Gamma(z)\\Gamma(1-z)=\\pi/\\sin\\pi z$ 把 $z$ 与 $1-z$ 联系起来，立即给出 $\\Gamma(1/2)=\\sqrt{\\pi}$ 与 $\\Gamma(-1/2)=-2\\sqrt{\\pi}$。",
-      "增长估计（Stirling）：当 $|z|\\to\\infty$ 且在带形 $|\\arg z|\\le\\pi-\\delta$ 内时 $\\Gamma(z)\\sim\\sqrt{2\\pi}\\,z^{z-1/2}e^{-z}$；这个估计是推导 $\\zeta$ 函数方程的关键。",
-      "与 Beta 函数的关系：$B(x,y)=\\dfrac{\\Gamma(x)\\Gamma(y)}{\\Gamma(x+y)}=\\int_0^1 t^{x-1}(1-t)^{y-1}dt$，把大量含参数的定积分一次性解决。"
-    ],
-    "propertiesEn": [
-      "Γ is meromorphic on ℂ with poles exactly at z = 0, −1, −2, … (all simple, residues (−1)^n/n!) and is holomorphic elsewhere; Γ has no zeros, so 1/Γ is entire.",
-      "The functional equation Γ(z+1)=zΓ(z), the value Γ(1)=1 and log-convexity on the positive axis determine Γ uniquely (Bohr–Mollerup).",
-      "The reflection formula Γ(z)Γ(1−z)=π/sin πz links z with 1−z and immediately gives Γ(1/2)=√π and Γ(−1/2)=−2√π.",
-      "Growth (Stirling): as |z|→∞ inside |arg z| ≤ π−δ, Γ(z) ∼ √(2π) z^{z−1/2}e^{−z}; this estimate is essential for the functional equation of ζ.",
-      "Relation to the Beta function: B(x,y)=Γ(x)Γ(y)/Γ(x+y)=∫₀¹ t^{x−1}(1−t)^{y−1}dt, which evaluates many parametric integrals at once."
-    ],
-    "plot": {
-      "type": "function",
-      "functions": [
-        {
-          "expr": "exp(-x)",
-          "color": "#06d6a0",
-          "label": "t⁰e^(−t)：面积 = Γ(1) = 1"
-        },
-        {
-          "expr": "exp(-x)*x^2",
-          "color": "#4cc9f0",
-          "label": "t²e^(−t)：面积 = Γ(3) = 2"
-        },
-        {
-          "expr": "exp(-x)*x^3",
-          "color": "#ff6b9d",
-          "label": "t³e^(−t)：面积 = Γ(4) = 6"
-        }
-      ],
-      "xRange": [
-        0,
-        8
-      ],
-      "yRange": [
-        -0.05,
-        1.5
-      ],
-      "title": "Γ(z) = ∫₀^∞ t^(z−1)e^(−t)dt 的被积函数（z = 1, 3, 4）"
+    {
+     "expr": "exp(-x)*x^2",
+     "color": "#4cc9f0",
+     "label": "t²e^(−t)：面积 = Γ(3) = 2"
     },
-    "examples": [
-      {
-        "problem": "直接由定义式证明 $\\Gamma(n+1)=n!$（$n$ 为非负整数），并求出 $\\Gamma\\left(\\tfrac12\\right)$ 与 $\\Gamma\\left(-\\tfrac12\\right)$。",
-        "solution": "对 $z=n+1>0$ 分部积分（$u=t^n,\\ dv=e^{-t}dt$）：$$\\int_0^\\infty t^ne^{-t}dt=\\Big[-t^ne^{-t}\\Big]_0^\\infty+n\\int_0^\\infty t^{n-1}e^{-t}dt=n\\,\\Gamma(n),$$ 反复递推并用 $\\Gamma(1)=\\int_0^\\infty e^{-t}dt=1$，得 $\\Gamma(n+1)=n!$。再在反射公式中取 $z=\\tfrac12$：$\\Gamma\\left(\\tfrac12\\right)^2=\\dfrac{\\pi}{\\sin(\\pi/2)}=\\pi$，而由定义式知 $\\Gamma\\left(\\tfrac12\\right)>0$，故 $\\Gamma\\left(\\tfrac12\\right)=\\sqrt{\\pi}$；最后由 $\\Gamma\\left(\\tfrac12\\right)=\\Gamma\\left(-\\tfrac12+1\\right)=-\\tfrac12\\,\\Gamma\\left(-\\tfrac12\\right)$ 得 $\\Gamma\\left(-\\tfrac12\\right)=-2\\sqrt{\\pi}$。",
-        "solutionEn": "Integration by parts gives Γ(z+1)=zΓ(z) for Re z > 0, and with Γ(1)=1 we get Γ(n+1)=n!. Reflection with z=1/2 gives Γ(1/2)²=π, and Γ(1/2)>0, so Γ(1/2)=√π; then Γ(1/2)=−(1/2)Γ(−1/2) yields Γ(−1/2)=−2√π."
-      },
-      {
-        "problem": "求 $\\Gamma$ 在 $z=-3$ 处的留数，并验证反射公式给出 $\\Gamma\\left(\\tfrac32\\right)\\Gamma\\left(-\\tfrac12\\right)=-\\pi$。",
-        "solution": "由延拓公式，$\\Gamma$ 在 $z=-n$ 处留数为 $\\operatorname{Res}(\\Gamma,-n)=\\dfrac{(-1)^n}{n!}$；取 $n=3$ 得 $\\operatorname{Res}(\\Gamma,-3)=\\dfrac{(-1)^3}{3!}=-\\dfrac16$。再取 $z=\\tfrac32$：$$\\Gamma\\!\\left(\\tfrac32\\right)\\Gamma\\!\\left(1-\\tfrac32\\right)=\\frac{\\pi}{\\sin(3\\pi/2)}=-\\pi .$$ 检验：$\\Gamma\\left(\\tfrac32\\right)=\\tfrac12\\Gamma\\left(\\tfrac12\\right)=\\tfrac{\\sqrt{\\pi}}{2}$，$\\Gamma\\left(-\\tfrac12\\right)=-2\\sqrt{\\pi}$，两者之积为 $-\\pi$，与公式一致。",
-        "solutionEn": "The residue at z = −n is (−1)^n/n!, so Res(Γ,−3) = −1/6. Setting z = 3/2 in the reflection formula gives Γ(3/2)Γ(−1/2) = π/sin(3π/2) = −π, matching (√π/2)(−2√π) = −π."
-      }
-    ],
-    "tags": [
-      "复分析",
-      "特殊函数",
-      "阶乘推广",
-      "亚纯函数",
-      "无穷乘积"
-    ],
-    "links": [
-      "zeta-function",
-      "weierstrass-factorization",
-      "meromorphic-functions",
-      "analytic-continuation",
-      "mittag-leffler"
-    ]
+    {
+     "expr": "exp(-x)*x^3",
+     "color": "#ff6b9d",
+     "label": "t³e^(−t)：面积 = Γ(4) = 6"
+    }
+   ],
+   "xRange": [
+    0,
+    8
+   ],
+   "yRange": [
+    -0.05,
+    1.5
+   ],
+   "title": "Γ(z) = ∫₀^∞ t^(z−1)e^(−t)dt 的被积函数（z = 1, 3, 4）"
   },
-  {
-    "id": "zeta-function",
-    "title": "黎曼 ζ 函数",
-    "titleEn": "The Riemann Zeta Function",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "ζ(s)=Σ n^(−s) 在 Re s>1 由 Dirichlet 级数定义，欧拉乘积把它与素数相连；解析延拓后它在整个平面上只有一个简单极点 s=1（留数 1），其非平凡零点的位置就是黎曼猜想（尚未证明）。",
-    "summaryEn": "ζ(s) = Σ n^{−s} converges for Re s > 1 and its Euler product links it to the primes; after analytic continuation it has a single simple pole at s = 1 (residue 1), and the location of its nontrivial zeros is the Riemann Hypothesis (still unproved).",
-    "definition": "写 $s=\\sigma+it$。当 $\\operatorname{Re}s>1$ 时级数 $\\zeta(s)=\\sum_{n=1}^{\\infty}n^{-s}$ 绝对收敛且内闭一致收敛，因此在右半平面 $\\operatorname{Re}s>1$ 上定义了解析函数 $\\zeta$。**欧拉乘积**\n\n$$\\zeta(s)=\\prod_{p\\ \\text{素数}}\\left(1-p^{-s}\\right)^{-1}$$\n\n等价于算术基本定理（唯一分解），它把 $\\zeta$ 的分析性质翻译成素数的信息——这是解析数论的起点。\n\n$\\zeta$ 可以**解析延拓**为 $\\mathbb{C}\\setminus\\{1\\}$ 上的解析函数（延拓唯一），并且整个复平面上**唯一的极点是 $s=1$ 的简单极点，留数为 $1$**：在 $s=1$ 附近 $\\zeta(s)=\\dfrac{1}{s-1}+\\gamma+\\cdots$（$\\gamma$ 为欧拉常数）。\n\n**函数方程**把 $s$ 与 $1-s$ 联系起来：\n\n$$\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\,\\zeta(1-s).$$\n\n由因子 $\\sin\\left(\\frac{\\pi s}{2}\\right)$ 立刻看出 $s=-2,-4,-6,\\dots$ 是零点，称为**平凡零点**；其余零点全部落在 $0<\\operatorname{Re}s<1$ 的**临界带**内。\n\n关于这些非平凡零点，**黎曼猜想**（1859 年提出，**至今仍是猜想、尚未被证明**）断言：它们的实部全部等于 $\\tfrac12$，即全部落在**临界线** $\\operatorname{Re}s=\\tfrac12$ 上。大量数值计算验证了前若干万亿个零点都在这条线上，但这不构成证明。$\\zeta$ 的零点分布与素数计数函数 $\\pi(x)$ 的误差项密切相关，是数论与复分析最深刻的接口。",
-    "definitionEn": "Write $s=\\sigma+it$. For $\\operatorname{Re}s>1$ the series $\\zeta(s)=\\sum_{n\\ge1}n^{-s}$ converges absolutely and locally uniformly, defining a holomorphic function. The **Euler product** $\\zeta(s)=\\prod_{p}(1-p^{-s})^{-1}$ (over all primes) encodes unique factorization and connects ζ with the primes — the starting point of analytic number theory.\n\n$\\zeta$ has a unique **analytic continuation** to $\\mathbb{C}\\setminus\\{1\\}$, and its **only singularity is a simple pole at $s=1$ with residue $1$**: $\\zeta(s)=\\dfrac{1}{s-1}+\\gamma+\\cdots$ near $s=1$.\n\nThe **functional equation** relates $s$ and $1-s$:\n\n$$\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\,\\zeta(1-s).$$\n\nThe factor $\\sin(\\pi s/2)$ shows that $s=-2,-4,-6,\\dots$ are zeros — the **trivial zeros**; all other zeros lie in the **critical strip** $0<\\operatorname{Re}s<1$.\n\nThe **Riemann Hypothesis** (proposed in 1859 and **still a conjecture, not a theorem**) states that all these nontrivial zeros have real part $\\tfrac12$, i.e. lie on the **critical line** $\\operatorname{Re}s=\\tfrac12$. Massive numerical verification of the first nontrivial zeros is not a proof. The zero distribution governs the error term in the prime counting function $\\pi(x)$, the deepest interface between number theory and complex analysis.",
-    "formulas": [
-      {
-        "latex": "\\zeta(s)=\\sum_{n=1}^{\\infty}\\frac{1}{n^{s}}\\qquad(\\operatorname{Re}s>1)",
-        "note": "定义：右半平面 $\\operatorname{Re}s>1$ 上绝对收敛且内闭一致收敛，故解析。",
-        "noteEn": "The definition: absolutely and locally uniformly convergent for Re s > 1, hence holomorphic there."
-      },
-      {
-        "latex": "\\zeta(s)=\\prod_{p\\ \\text{素数}}\\left(1-p^{-s}\\right)^{-1}",
-        "note": "欧拉乘积：来自素数唯一分解，把分析与数论连在一起（也是 $\\zeta$ 在 $\\operatorname{Re}s>1$ 无零点的理由）。",
-        "noteEn": "Euler product, coming from unique factorization; it also shows ζ has no zeros when Re s > 1."
-      },
-      {
-        "latex": "\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\!\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\,\\zeta(1-s)",
-        "note": "函数方程：联系 $s$ 与 $1-s$；$\\sin(\\pi s/2)$ 给出平凡零点 $s=-2,-4,-6,\\dots$。",
-        "noteEn": "Functional equation linking s and 1−s; the sine factor produces the trivial zeros s = −2, −4, −6, …"
-      },
-      {
-        "latex": "\\zeta(s)=\\frac{1}{s-1}+\\gamma+O(s-1)\\quad(s\\to1),\\qquad \\operatorname*{Res}_{s=1}\\zeta=1",
-        "note": "唯一极点是 $s=1$ 的简单极点，留数为 1（$\\gamma$ 为欧拉常数）。",
-        "noteEn": "The only pole is a simple one at s = 1 with residue 1 (γ = Euler's constant)."
-      },
-      {
-        "latex": "\\zeta(2)=\\frac{\\pi^{2}}{6},\\quad \\zeta(4)=\\frac{\\pi^{4}}{90},\\quad \\zeta(0)=-\\frac12,\\quad \\zeta(-1)=-\\frac{1}{12}",
-        "note": "特殊值：$\\zeta(-1)=-1/12$ 是**解析延拓后的函数值**，绝不能理解为「$1+2+3+\\cdots$ 收敛于 $-1/12$」（该级数在通常意义下发散）。",
-        "noteEn": "Special values; ζ(−1) = −1/12 is the value of the continued function, NOT the statement that 1+2+3+⋯ converges."
-      },
-      {
-        "latex": "\\text{黎曼猜想（未证明）：}\\ \\zeta(s)=0,\\ 0<\\operatorname{Re}s<1\\ \\Longrightarrow\\ \\operatorname{Re}s=\\frac12",
-        "note": "非平凡零点是否全在临界线上——这是黎曼猜想，至今**仍是未证明的猜想**。",
-        "noteEn": "Whether all nontrivial zeros lie on the critical line is the Riemann Hypothesis — still an unproved conjecture."
-      }
-    ],
-    "properties": [
-      "在 $\\operatorname{Re}s>1$ 上绝对收敛、内闭一致收敛，故 $\\zeta$ 解析；欧拉乘积等价于算术基本定理，并说明该区域内无零点。",
-      "解析延拓唯一，$\\mathbb{C}\\setminus\\{1\\}$ 上处处解析；可以证明 $\\zeta$ 在整个半平面 $\\operatorname{Re}s\\ge1$ 上无零点，这一事实等价于素数定理 $\\pi(x)\\sim x/\\ln x$。",
-      "函数方程联系 $\\zeta(s)$ 与 $\\zeta(1-s)$：由它可算出 $\\zeta(0)=-1/2$、$\\zeta(-1)=-1/12$，并说明 $\\zeta(2n)$ 都是 $\\pi^{2n}$ 的有理数倍。",
-      "零点结构：平凡零点 $s=-2,-4,-6,\\dots$；非平凡零点关于实轴与临界线 $\\operatorname{Re}s=1/2$ 对称，且都在临界带 $0<\\operatorname{Re}s<1$ 内。**黎曼猜想（尚未证明）**断言它们全在临界线上。",
-      "与素数分布的联系：素数的精细分布由非平凡零点控制（显式公式），若黎曼猜想成立，$\\pi(x)$ 与 $\\operatorname{li}(x)$ 的偏差约为 $O(\\sqrt{x}\\,\\ln x)$。"
-    ],
-    "propertiesEn": [
-      "Absolute and locally uniform convergence for Re s > 1 makes ζ holomorphic there; the Euler product is equivalent to unique factorization and shows there are no zeros in that half-plane.",
-      "The continuation is unique and holomorphic on ℂ∖{1}; moreover ζ has no zeros with Re s ≥ 1, a fact equivalent to the prime number theorem π(x) ∼ x/ln x.",
-      "The functional equation links ζ(s) with ζ(1−s); it yields ζ(0) = −1/2 and ζ(−1) = −1/12 and shows that all ζ(2n) are rational multiples of π^{2n}.",
-      "Zeros: the trivial ones at s = −2, −4, −6, …; all nontrivial zeros lie in the critical strip 0 < Re s < 1 and are symmetric about the real axis and about Re s = 1/2. The Riemann Hypothesis (unproved) claims they all lie on that line.",
-      "Link to primes: the fine distribution of primes is governed by the nontrivial zeros (explicit formula); on the Riemann Hypothesis the error in li(x) is O(√x ln x)."
-    ],
-    "plot": {
-      "type": "function",
-      "functions": [
-        {
-          "expr": "1 + 1/(2^x) + 1/(3^x) + 1/(4^x)",
-          "color": "#4cc9f0",
-          "label": "部分和 1+2⁻ˣ+3⁻ˣ+4⁻ˣ"
-        },
-        {
-          "expr": "1.6449",
-          "color": "#ff6b9d",
-          "label": "ζ(2) = π²/6 ≈ 1.6449"
-        },
-        {
-          "expr": "1",
-          "color": "#ffd166",
-          "label": "y = 1（s → ∞ 时的极限）"
-        }
-      ],
-      "xRange": [
-        1.1,
-        4
-      ],
-      "yRange": [
-        0.9,
-        2.2
-      ],
-      "title": "ζ(s) 在实轴 s > 1 上的部分和（收敛到 1，且在 s=2 处逼近 π²/6）"
+  "examples": [
+   {
+    "problem": "直接由定义式证明 $\\Gamma(n+1)=n!$（$n$ 为非负整数），并求出 $\\Gamma\\left(\\tfrac12\\right)$ 与 $\\Gamma\\left(-\\tfrac12\\right)$。",
+    "solution": "对 $z=n+1>0$ 分部积分（$u=t^n,\\ dv=e^{-t}dt$）：$$\\int_0^\\infty t^ne^{-t}dt=\\Big[-t^ne^{-t}\\Big]_0^\\infty+n\\int_0^\\infty t^{n-1}e^{-t}dt=n\\,\\Gamma(n),$$ 反复递推并用 $\\Gamma(1)=\\int_0^\\infty e^{-t}dt=1$，得 $\\Gamma(n+1)=n!$。再在反射公式中取 $z=\\tfrac12$：$\\Gamma\\left(\\tfrac12\\right)^2=\\dfrac{\\pi}{\\sin(\\pi/2)}=\\pi$，而由定义式知 $\\Gamma\\left(\\tfrac12\\right)>0$，故 $\\Gamma\\left(\\tfrac12\\right)=\\sqrt{\\pi}$；最后由 $\\Gamma\\left(\\tfrac12\\right)=\\Gamma\\left(-\\tfrac12+1\\right)=-\\tfrac12\\,\\Gamma\\left(-\\tfrac12\\right)$ 得 $\\Gamma\\left(-\\tfrac12\\right)=-2\\sqrt{\\pi}$。",
+    "solutionEn": "Integration by parts gives Γ(z+1)=zΓ(z) for Re z > 0, and with Γ(1)=1 we get Γ(n+1)=n!. Reflection with z=1/2 gives Γ(1/2)²=π, and Γ(1/2)>0, so Γ(1/2)=√π; then Γ(1/2)=−(1/2)Γ(−1/2) yields Γ(−1/2)=−2√π."
+   },
+   {
+    "problem": "求 $\\Gamma$ 在 $z=-3$ 处的留数，并验证反射公式给出 $\\Gamma\\left(\\tfrac32\\right)\\Gamma\\left(-\\tfrac12\\right)=-\\pi$。",
+    "solution": "由延拓公式，$\\Gamma$ 在 $z=-n$ 处留数为 $\\operatorname{Res}(\\Gamma,-n)=\\dfrac{(-1)^n}{n!}$；取 $n=3$ 得 $\\operatorname{Res}(\\Gamma,-3)=\\dfrac{(-1)^3}{3!}=-\\dfrac16$。再取 $z=\\tfrac32$：$$\\Gamma\\!\\left(\\tfrac32\\right)\\Gamma\\!\\left(1-\\tfrac32\\right)=\\frac{\\pi}{\\sin(3\\pi/2)}=-\\pi .$$ 检验：$\\Gamma\\left(\\tfrac32\\right)=\\tfrac12\\Gamma\\left(\\tfrac12\\right)=\\tfrac{\\sqrt{\\pi}}{2}$，$\\Gamma\\left(-\\tfrac12\\right)=-2\\sqrt{\\pi}$，两者之积为 $-\\pi$，与公式一致。",
+    "solutionEn": "The residue at z = −n is (−1)^n/n!, so Res(Γ,−3) = −1/6. Setting z = 3/2 in the reflection formula gives Γ(3/2)Γ(−1/2) = π/sin(3π/2) = −π, matching (√π/2)(−2√π) = −π."
+   }
+  ],
+  "tags": [
+   "复分析",
+   "特殊函数",
+   "阶乘推广",
+   "亚纯函数",
+   "无穷乘积"
+  ],
+  "links": [
+   "zeta-function",
+   "weierstrass-factorization",
+   "meromorphic-functions",
+   "analytic-continuation",
+   "mittag-leffler"
+  ]
+ },
+ {
+  "id": "zeta-function",
+  "title": "黎曼 ζ 函数",
+  "titleEn": "The Riemann Zeta Function",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "ζ(s)=Σ n^(−s) 在 Re s>1 由 Dirichlet 级数定义，欧拉乘积把它与素数相连；解析延拓后它在整个平面上只有一个简单极点 s=1（留数 1），其非平凡零点的位置就是黎曼猜想（尚未证明）。",
+  "summaryEn": "ζ(s) = Σ n^{−s} converges for Re s > 1 and its Euler product links it to the primes; after analytic continuation it has a single simple pole at s = 1 (residue 1), and the location of its nontrivial zeros is the Riemann Hypothesis (still unproved).",
+  "definition": "写 $s=\\sigma+it$。当 $\\operatorname{Re}s>1$ 时级数 $\\zeta(s)=\\sum_{n=1}^{\\infty}n^{-s}$ 绝对收敛且内闭一致收敛，因此在右半平面 $\\operatorname{Re}s>1$ 上定义了解析函数 $\\zeta$。**欧拉乘积**\n\n$$\\zeta(s)=\\prod_{p\\ \\text{素数}}\\left(1-p^{-s}\\right)^{-1}$$\n\n等价于算术基本定理（唯一分解），它把 $\\zeta$ 的分析性质翻译成素数的信息——这是解析数论的起点。\n\n$\\zeta$ 可以**解析延拓**为 $\\mathbb{C}\\setminus\\{1\\}$ 上的解析函数（延拓唯一），并且整个复平面上**唯一的极点是 $s=1$ 的简单极点，留数为 $1$**：在 $s=1$ 附近 $\\zeta(s)=\\dfrac{1}{s-1}+\\gamma+\\cdots$（$\\gamma$ 为欧拉常数）。\n\n**函数方程**把 $s$ 与 $1-s$ 联系起来：\n\n$$\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\,\\zeta(1-s).$$\n\n由因子 $\\sin\\left(\\frac{\\pi s}{2}\\right)$ 立刻看出 $s=-2,-4,-6,\\dots$ 是零点，称为**平凡零点**；其余零点全部落在 $0<\\operatorname{Re}s<1$ 的**临界带**内。\n\n关于这些非平凡零点，**黎曼猜想**（1859 年提出，**至今仍是猜想、尚未被证明**）断言：它们的实部全部等于 $\\tfrac12$，即全部落在**临界线** $\\operatorname{Re}s=\\tfrac12$ 上。大量数值计算验证了前若干万亿个零点都在这条线上，但这不构成证明。$\\zeta$ 的零点分布与素数计数函数 $\\pi(x)$ 的误差项密切相关，是数论与复分析最深刻的接口。",
+  "definitionEn": "Write $s=\\sigma+it$. For $\\operatorname{Re}s>1$ the series $\\zeta(s)=\\sum_{n\\ge1}n^{-s}$ converges absolutely and locally uniformly, defining a holomorphic function. The **Euler product** $\\zeta(s)=\\prod_{p}(1-p^{-s})^{-1}$ (over all primes) encodes unique factorization and connects ζ with the primes — the starting point of analytic number theory.\n\n$\\zeta$ has a unique **analytic continuation** to $\\mathbb{C}\\setminus\\{1\\}$, and its **only singularity is a simple pole at $s=1$ with residue $1$**: $\\zeta(s)=\\dfrac{1}{s-1}+\\gamma+\\cdots$ near $s=1$.\n\nThe **functional equation** relates $s$ and $1-s$:\n\n$$\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\,\\zeta(1-s).$$\n\nThe factor $\\sin(\\pi s/2)$ shows that $s=-2,-4,-6,\\dots$ are zeros — the **trivial zeros**; all other zeros lie in the **critical strip** $0<\\operatorname{Re}s<1$.\n\nThe **Riemann Hypothesis** (proposed in 1859 and **still a conjecture, not a theorem**) states that all these nontrivial zeros have real part $\\tfrac12$, i.e. lie on the **critical line** $\\operatorname{Re}s=\\tfrac12$. Massive numerical verification of the first nontrivial zeros is not a proof. The zero distribution governs the error term in the prime counting function $\\pi(x)$, the deepest interface between number theory and complex analysis.",
+  "formulas": [
+   {
+    "latex": "\\zeta(s)=\\sum_{n=1}^{\\infty}\\frac{1}{n^{s}}\\qquad(\\operatorname{Re}s>1)",
+    "note": "定义：右半平面 $\\operatorname{Re}s>1$ 上绝对收敛且内闭一致收敛，故解析。",
+    "noteEn": "The definition: absolutely and locally uniformly convergent for Re s > 1, hence holomorphic there."
+   },
+   {
+    "latex": "\\zeta(s)=\\prod_{p\\ \\text{素数}}\\left(1-p^{-s}\\right)^{-1}",
+    "note": "欧拉乘积：来自素数唯一分解，把分析与数论连在一起（也是 $\\zeta$ 在 $\\operatorname{Re}s>1$ 无零点的理由）。",
+    "noteEn": "Euler product, coming from unique factorization; it also shows ζ has no zeros when Re s > 1."
+   },
+   {
+    "latex": "\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\!\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\,\\zeta(1-s)",
+    "note": "函数方程：联系 $s$ 与 $1-s$；$\\sin(\\pi s/2)$ 给出平凡零点 $s=-2,-4,-6,\\dots$。",
+    "noteEn": "Functional equation linking s and 1−s; the sine factor produces the trivial zeros s = −2, −4, −6, …"
+   },
+   {
+    "latex": "\\zeta(s)=\\frac{1}{s-1}+\\gamma+O(s-1)\\quad(s\\to1),\\qquad \\operatorname*{Res}_{s=1}\\zeta=1",
+    "note": "唯一极点是 $s=1$ 的简单极点，留数为 1（$\\gamma$ 为欧拉常数）。",
+    "noteEn": "The only pole is a simple one at s = 1 with residue 1 (γ = Euler's constant)."
+   },
+   {
+    "latex": "\\zeta(2)=\\frac{\\pi^{2}}{6},\\quad \\zeta(4)=\\frac{\\pi^{4}}{90},\\quad \\zeta(0)=-\\frac12,\\quad \\zeta(-1)=-\\frac{1}{12}",
+    "note": "特殊值：$\\zeta(-1)=-1/12$ 是**解析延拓后的函数值**，绝不能理解为「$1+2+3+\\cdots$ 收敛于 $-1/12$」（该级数在通常意义下发散）。",
+    "noteEn": "Special values; ζ(−1) = −1/12 is the value of the continued function, NOT the statement that 1+2+3+⋯ converges."
+   },
+   {
+    "latex": "\\text{黎曼猜想（未证明）：}\\ \\zeta(s)=0,\\ 0<\\operatorname{Re}s<1\\ \\Longrightarrow\\ \\operatorname{Re}s=\\frac12",
+    "note": "非平凡零点是否全在临界线上——这是黎曼猜想，至今**仍是未证明的猜想**。",
+    "noteEn": "Whether all nontrivial zeros lie on the critical line is the Riemann Hypothesis — still an unproved conjecture."
+   }
+  ],
+  "properties": [
+   "在 $\\operatorname{Re}s>1$ 上绝对收敛、内闭一致收敛，故 $\\zeta$ 解析；欧拉乘积等价于算术基本定理，并说明该区域内无零点。",
+   "解析延拓唯一，$\\mathbb{C}\\setminus\\{1\\}$ 上处处解析；可以证明 $\\zeta$ 在整个半平面 $\\operatorname{Re}s\\ge1$ 上无零点，这一事实等价于素数定理 $\\pi(x)\\sim x/\\ln x$。",
+   "函数方程联系 $\\zeta(s)$ 与 $\\zeta(1-s)$：由它可算出 $\\zeta(0)=-1/2$、$\\zeta(-1)=-1/12$，并说明 $\\zeta(2n)$ 都是 $\\pi^{2n}$ 的有理数倍。",
+   "零点结构：平凡零点 $s=-2,-4,-6,\\dots$；非平凡零点关于实轴与临界线 $\\operatorname{Re}s=1/2$ 对称，且都在临界带 $0<\\operatorname{Re}s<1$ 内。**黎曼猜想（尚未证明）**断言它们全在临界线上。",
+   "与素数分布的联系：素数的精细分布由非平凡零点控制（显式公式），若黎曼猜想成立，$\\pi(x)$ 与 $\\operatorname{li}(x)$ 的偏差约为 $O(\\sqrt{x}\\,\\ln x)$。"
+  ],
+  "propertiesEn": [
+   "Absolute and locally uniform convergence for Re s > 1 makes ζ holomorphic there; the Euler product is equivalent to unique factorization and shows there are no zeros in that half-plane.",
+   "The continuation is unique and holomorphic on ℂ∖{1}; moreover ζ has no zeros with Re s ≥ 1, a fact equivalent to the prime number theorem π(x) ∼ x/ln x.",
+   "The functional equation links ζ(s) with ζ(1−s); it yields ζ(0) = −1/2 and ζ(−1) = −1/12 and shows that all ζ(2n) are rational multiples of π^{2n}.",
+   "Zeros: the trivial ones at s = −2, −4, −6, …; all nontrivial zeros lie in the critical strip 0 < Re s < 1 and are symmetric about the real axis and about Re s = 1/2. The Riemann Hypothesis (unproved) claims they all lie on that line.",
+   "Link to primes: the fine distribution of primes is governed by the nontrivial zeros (explicit formula); on the Riemann Hypothesis the error in li(x) is O(√x ln x)."
+  ],
+  "plot": {
+   "type": "function",
+   "functions": [
+    {
+     "expr": "1 + 1/(2^x) + 1/(3^x) + 1/(4^x)",
+     "color": "#4cc9f0",
+     "label": "部分和 1+2⁻ˣ+3⁻ˣ+4⁻ˣ"
     },
-    "examples": [
-      {
-        "problem": "用函数方程计算 $\\zeta(-1)$，并说明为什么不能把结论理解成「自然数之和等于 $-1/12$」。",
-        "solution": "在 $\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\zeta(1-s)$ 中取 $s=-1$：$$2^{-1}\\pi^{-2}\\sin\\!\\left(-\\frac{\\pi}{2}\\right)\\Gamma(2)\\,\\zeta(2)=\\frac12\\cdot\\frac{1}{\\pi^{2}}\\cdot(-1)\\cdot 1\\cdot\\frac{\\pi^{2}}{6}=-\\frac{1}{12}.$$ 所以 $\\zeta(-1)=-1/12$。注意这里用的是**延拓后**的 $\\zeta$（$s=-1$ 处级数 $\\sum n$ 发散），因此它是解析延拓的函数值，与「级数 $1+2+3+\\cdots$ 收敛」无关；类似地 $\\zeta(0)=-1/2$ 也只是延拓值。",
-        "solutionEn": "Putting s = −1 in the functional equation gives (1/2)π^{−2}(−1)·1·(π²/6) = −1/12, using ζ(2)=π²/6. Since s = −1 lies outside the half-plane of convergence, this is the value of the continued function, not a statement about the divergent series 1+2+3+⋯."
-      },
-      {
-        "problem": "用部分和估计 $\\zeta(2)$：计算 $\\sum_{n=1}^{10}n^{-2}$ 并给出余项估计。",
-        "solution": "$\\sum_{n=1}^{10}\\dfrac{1}{n^{2}}=1+\\dfrac14+\\dfrac19+\\cdots+\\dfrac{1}{100}\\approx1.5498$，而 $\\zeta(2)=\\dfrac{\\pi^{2}}{6}\\approx1.6449$，误差约 $0.0951$。余项可用积分估计：$$\\sum_{n>10}\\frac{1}{n^{2}}<\\int_{10}^{\\infty}\\frac{dx}{x^{2}}=\\frac{1}{10}=0.1,$$ 与观测的误差相符。这也说明「数值上看到收敛」不足以证明 $\\zeta(2)=\\pi^{2}/6$——后者要用 Fourier 级数或围道积分。",
-        "solutionEn": "The partial sum up to 10 is about 1.5498 while ζ(2)=π²/6≈1.6449, a gap of 0.0951, consistent with the integral bound Σ_{n>10} n^{−2} < ∫₁₀^∞ x^{−2}dx = 0.1. Numerics alone cannot prove ζ(2)=π²/6 — that needs Fourier series or contour integration."
-      }
-    ],
-    "tags": [
-      "复分析",
-      "解析数论",
-      "素数",
-      "黎曼猜想",
-      "函数方程"
-    ],
-    "links": [
-      "gamma-function",
-      "analytic-continuation",
-      "entire-functions",
-      "meromorphic-functions",
-      "harmonic-series"
-    ]
+    {
+     "expr": "1.6449",
+     "color": "#ff6b9d",
+     "label": "ζ(2) = π²/6 ≈ 1.6449"
+    },
+    {
+     "expr": "1",
+     "color": "#ffd166",
+     "label": "y = 1（s → ∞ 时的极限）"
+    }
+   ],
+   "xRange": [
+    1.1,
+    4
+   ],
+   "yRange": [
+    0.9,
+    2.2
+   ],
+   "title": "ζ(s) 在实轴 s > 1 上的部分和（收敛到 1，且在 s=2 处逼近 π²/6）"
   },
-  {
-    "id": "elliptic-functions",
-    "title": "椭圆函数",
-    "titleEn": "Elliptic Functions",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "椭圆函数是定义在复平面上、具有两个不可公度周期的亚纯函数；由刘维尔的论证它必须有极点，最典型的例子是魏尔斯特拉斯 ℘ 函数，满足 (℘')² = 4℘³ − g₂℘ − g₃。",
-    "summaryEn": "Elliptic functions are meromorphic functions on ℂ with two independent periods; by Liouville's argument they must have poles, the prototype being the Weierstrass ℘ function with (℘')² = 4℘³ − g₂℘ − g₃.",
-    "definition": "设 $\\omega_1,\\omega_2\\in\\mathbb{C}$ 满足 $\\omega_1/\\omega_2\\notin\\mathbb{R}$（不可公度）。一个函数 $f$ 若在 $\\mathbb{C}$ 上**亚纯**且满足 $f(z+\\omega_1)=f(z)=f(z+\\omega_2)$，就称为**椭圆函数**（双周期函数）。由两个周期生成的**周期格** $\\Lambda=\\{m\\omega_1+n\\omega_2:m,n\\in\\mathbb{Z}\\}\\cong\\mathbb{Z}^2$ 的商 $\\mathbb{C}/\\Lambda$ 是**复环面**；椭圆函数恰好就是复环面上的亚纯函数。\n\n**Liouville 型定理**说明椭圆函数必然「有极点」：双周期的**整函数**在基本平行四边形（紧集）上有界，从而是有界整函数，必为常数——**不存在非常数的双周期整函数**。所以非平凡的椭圆函数必须是亚纯的；它在基本平行四边形内的极点个数有限（否则极点在紧集内有聚点，与亚纯性矛盾），且至少有 $1$ 个。更进一步，留数之和为零：$\\sum\\operatorname{Res}=0$，因此极点（按重数计）至少要有 $2$ 个——这也解释了椭圆函数比三角函数「多出」一个极点。\n\n标准的构造是**魏尔斯特拉斯 $\\wp$ 函数**：\n\n$$\\wp(z)=\\frac{1}{z^{2}}+\\sum_{\\omega\\in\\Lambda\\setminus\\{0\\}}\\left[\\frac{1}{(z-\\omega)^{2}}-\\frac{1}{\\omega^{2}}\\right],$$\n\n其中和号带撇意味着去掉 $\\omega=0$ 的项（减去 $1/\\omega^2$ 正是为了收敛）。$\\wp$ 是偶函数，以 $\\Lambda$ 为周期，在每个格点处恰为二阶极点，并且满足微分方程\n\n$$\\wp'(z)^{2}=4\\wp(z)^{3}-g_{2}\\wp(z)-g_{3},$$\n\n其中 $g_2=60\\sum'\\omega^{-4}$、$g_3=140\\sum'\\omega^{-6}$，判别式 $\\Delta=g_2^3-27g_3^2\\ne0$。于是 $z\\mapsto(\\wp(z),\\wp'(z))$ 把复环面 $\\mathbb{C}/\\Lambda$ 双全纯地参数化到**椭圆曲线** $y^{2}=4x^{3}-g_{2}x-g_{3}$ 上，并把加法变成曲线上的群律——这正是「椭圆函数」一词的来源：它与椭圆积分互为反函数。\n\n雅可比采用另一套记号构造椭圆函数 $\\mathrm{sn}\\,u,\\ \\mathrm{cn}\\,u,\\ \\mathrm{dn}\\,u$，它们满足 $\\mathrm{sn}^{2}u+\\mathrm{cn}^{2}u=1$、$\\mathrm{dn}^{2}u+k^{2}\\mathrm{sn}^{2}u=1$，在与三角函数的类比中扮演更直接的角色。",
-    "definitionEn": "Let $\\omega_1,\\omega_2\\in\\mathbb{C}$ with $\\omega_1/\\omega_2\\notin\\mathbb{R}$. A **meromorphic** function $f$ on $\\mathbb{C}$ with $f(z+\\omega_1)=f(z)=f(z+\\omega_2)$ is called an **elliptic function** (doubly periodic). The lattice $\\Lambda=\\{m\\omega_1+n\\omega_2\\}$ is isomorphic to $\\mathbb{Z}^2$, and $\\mathbb{C}/\\Lambda$ is a complex torus; elliptic functions are exactly the meromorphic functions on it.\n\nA Liouville-type theorem forces poles: a doubly periodic entire function is bounded on the (compact) fundamental parallelogram, hence constant — **there is no nonconstant doubly periodic entire function**. Thus nontrivial elliptic functions are meromorphic with finitely many poles in the fundamental parallelogram (infinitely many would accumulate, violating meromorphy) and at least one; moreover the residues sum to zero, so at least two poles counted with multiplicity.\n\nThe standard construction is the **Weierstrass $\\wp$ function** $\\wp(z)=\\frac{1}{z^{2}}+\\sum'\\left[\\frac{1}{(z-\\omega)^{2}}-\\frac{1}{\\omega^{2}}\\right]$ (the prime means $\\omega\\ne0$; subtracting $1/\\omega^2$ makes the series converge). It is even, $\\Lambda$-periodic, has a double pole exactly at each lattice point, and satisfies $\\wp'(z)^{2}=4\\wp(z)^{3}-g_{2}\\wp(z)-g_{3}$ with $g_2=60\\sum'\\omega^{-4}$, $g_3=140\\sum'\\omega^{-6}$ and discriminant $\\Delta=g_2^3-27g_3^2\\ne0$. Hence $z\\mapsto(\\wp(z),\\wp'(z))$ parametrizes the **elliptic curve** $y^2=4x^3-g_2x-g_3$ biholomorphically, turning addition of arguments into the group law of the curve — the reason elliptic functions are inverse to elliptic integrals.\n\nJacobi's functions $\\mathrm{sn}$, $\\mathrm{cn}$, $\\mathrm{dn}$ give another normalization, with $\\mathrm{sn}^{2}+\\mathrm{cn}^{2}=1$ and $\\mathrm{dn}^{2}+k^{2}\\mathrm{sn}^{2}=1$.",
-    "formulas": [
-      {
-        "latex": "f(z+\\omega_1)=f(z)=f(z+\\omega_2),\\qquad \\operatorname{Im}\\!\\left(\\frac{\\omega_1}{\\omega_2}\\right)\\neq0",
-        "note": "双周期性：两个周期不可公度，函数在复平面上由基本平行四边形上的取值决定。",
-        "noteEn": "Double periodicity with incommensurable periods; the function is determined by its values on a fundamental parallelogram."
-      },
-      {
-        "latex": "\\Lambda=\\{m\\omega_1+n\\omega_2:\\ m,n\\in\\mathbb{Z}\\}\\cong\\mathbb{Z}^{2},\\qquad \\mathbb{C}/\\Lambda\\ \\text{是复环面}",
-        "note": "周期格与复环面：椭圆函数就是复环面上的亚纯函数。",
-        "noteEn": "The period lattice and the complex torus; elliptic functions are its meromorphic functions."
-      },
-      {
-        "latex": "\\wp(z)=\\frac{1}{z^{2}}+\\sum_{\\omega\\in\\Lambda\\setminus\\{0\\}}\\left[\\frac{1}{(z-\\omega)^{2}}-\\frac{1}{\\omega^{2}}\\right]",
-        "note": "魏尔斯特拉斯 $\\wp$ 函数：偶函数，在每个格点处为二阶极点，和号的撇表示去掉 $\\omega=0$。",
-        "noteEn": "The Weierstrass ℘ function: even, with a double pole at each lattice point; the prime excludes ω = 0."
-      },
-      {
-        "latex": "\\wp'(z)^{2}=4\\wp(z)^{3}-g_{2}\\wp(z)-g_{3},\\qquad g_{2}=60\\!\\sum_{\\omega\\neq0}\\omega^{-4},\\quad g_{3}=140\\!\\sum_{\\omega\\neq0}\\omega^{-6}",
-        "note": "关键微分方程：$(\\wp,\\wp')$ 落在椭圆曲线 $y^{2}=4x^{3}-g_{2}x-g_{3}$ 上；$\\Delta=g_2^3-27g_3^2\\neq0$。",
-        "noteEn": "The fundamental differential equation: (℘,℘′) lies on the elliptic curve y²=4x³−g₂x−g₃, with Δ=g₂³−27g₃²≠0."
-      },
-      {
-        "latex": "\\wp(u+v)=-\\wp(u)-\\wp(v)+\\frac{1}{4}\\left(\\frac{\\wp'(u)-\\wp'(v)}{\\wp(u)-\\wp(v)}\\right)^{2}",
-        "note": "加法公式：把「复环面上的加法」翻译成 $(\\wp,\\wp')$ 的有理运算，也是群律的来源。",
-        "noteEn": "Addition theorem: it translates addition on the torus into rational operations on (℘,℘′), giving the group law."
-      },
-      {
-        "latex": "\\mathrm{sn}^{2}u+\\mathrm{cn}^{2}u=1,\\qquad \\mathrm{dn}^{2}u+k^{2}\\,\\mathrm{sn}^{2}u=1",
-        "note": "雅可比椭圆函数的基本恒等式（$k$ 为模数）；它们与 $\\wp$ 函数只差一个尺度变换。",
-        "noteEn": "Basic identities for Jacobi's elliptic functions (k = modulus); they differ from ℘ only by a scaling."
-      }
-    ],
-    "properties": [
-      "不存在非常数的双周期整函数（Liouville）；椭圆函数在基本平行四边形内极点个数有限且 $\\ge1$，又因留数之和为 $0$，极点按重数计至少为 $2$ 个。",
-      "零点与极点平衡：在一个基本平行四边形内，椭圆函数的零点个数与极点个数相等（均按重数计），且两者之和的差落在周期格 $\\Lambda$ 中。",
-      "结构定理：任何椭圆函数都是 $\\wp$ 与 $\\wp'$ 的有理函数，即 $\\mathbb{C}(\\wp,\\wp')$ 就是椭圆函数域；每个函数还能唯一写成 $R(\\wp)+\\wp'S(\\wp)$ 的形式。",
-      "$\\wp$ 是偶函数、$\\wp'$ 是奇函数；$\\wp'$ 的零点恰是三个半周期点 $\\omega_1/2,\\ \\omega_2/2,\\ (\\omega_1+\\omega_2)/2$（当 $\\Delta\\neq0$ 时互异），对应三次多项式 $4x^{3}-g_2x-g_3$ 的三个根。",
-      "与椭圆积分互为反函数：$z=\\int_{\\wp(z)}^{\\infty}\\dfrac{dt}{\\sqrt{4t^{3}-g_{2}t-g_{3}}}$（符号按分支选取），说明椭圆积分一般不能用初等函数表示。"
-    ],
-    "propertiesEn": [
-      "No nonconstant doubly periodic entire function exists (Liouville); an elliptic function has finitely many poles in the fundamental parallelogram, at least one, and at least two counted with multiplicity since the residues sum to zero.",
-      "Balance of zeros and poles: in one fundamental parallelogram the number of zeros equals the number of poles (both counted with multiplicity), and the difference of the two divisor sums lies in Λ.",
-      "Structure theorem: every elliptic function is a rational function of ℘ and ℘′, i.e. the field of elliptic functions is ℂ(℘,℘′); each one can be written uniquely as R(℘)+℘′S(℘).",
-      "℘ is even and ℘′ is odd; the zeros of ℘′ are precisely the three half-period points ω₁/2, ω₂/2, (ω₁+ω₂)/2 (distinct when Δ≠0), corresponding to the three roots of 4x³−g₂x−g₃.",
-      "Inverse to elliptic integrals: z=∫_{℘(z)}^{∞} dt/√(4t³−g₂t−g₃) (branch-dependent), which is why elliptic integrals are not elementary."
-    ],
-    "plot": {
-      "type": "contour",
-      "expr": "cos(x) + cos(y)",
-      "xRange": [
-        -6.3,
-        6.3
-      ],
-      "yRange": [
-        -6.3,
-        6.3
-      ],
-      "levels": 12,
-      "title": "双周期性格子：cos x + cos y 的等值线在 2π 方向上重复排列，正如周期格 Λ 铺满复平面"
-    },
-    "examples": [
-      {
-        "problem": "由 $\\wp$ 的定义直接验证 $\\wp(-z)=\\wp(z)$、$\\wp'(-z)=-\\wp'(z)$，并说明 $\\wp$ 在哪些点解析、在哪些点有极点。",
-        "solution": "定义中每一项 $\\dfrac{1}{(z-\\omega)^{2}}-\\dfrac{1}{\\omega^{2}}$ 在代换 $z\\mapsto-z$、$\\omega\\mapsto-\\omega$ 下不变（因为 $\\Lambda=-\\Lambda$），故 $\\wp(-z)=\\wp(z)$，即 $\\wp$ 为偶函数；两边求导得 $\\wp'(-z)=-\\wp'(z)$，为奇函数。极点在 $z\\in\\Lambda$ 处：在 $z=0$ 附近 $\\wp(z)=z^{-2}+$（解析部分），故为二阶极点，再由周期性把这一极点搬到每个格点；因此在 $\\mathbb{C}\\setminus\\Lambda$ 上 $\\wp$ 解析（这也说明它的极点一阶不可能：留数为 $0$）。",
-        "solutionEn": "Each term of the defining sum is invariant under z ↦ −z, ω ↦ −ω (since Λ = −Λ), so ℘ is even and ℘′ is odd. Near z = 0, ℘(z) = z^{−2} + (holomorphic), a double pole; periodicity moves this pole to every lattice point. Off Λ, ℘ is holomorphic."
-      },
-      {
-        "problem": "证明 $\\wp'$ 的零点恰为三个半周期点 $\\omega_1/2,\\ \\omega_2/2,\\ (\\omega_1+\\omega_2)/2$，并说明它们给出的正是 $4x^{3}-g_2x-g_3=0$ 的三个根。",
-        "solution": "由 $\\wp'$ 奇函数且以 $\\Lambda$ 为周期：$\\wp'\\left(\\dfrac{\\omega_1}{2}\\right)=-\\wp'\\left(-\\dfrac{\\omega_1}{2}\\right)=-\\wp'\\left(\\dfrac{\\omega_1}{2}+\\omega_1\\right)=-\\wp'\\left(\\dfrac{\\omega_1}{2}\\right)$，故 $\\wp'\\left(\\dfrac{\\omega_1}{2}\\right)=0$；同理 $\\wp'\\left(\\dfrac{\\omega_2}{2}\\right)=\\wp'\\left(\\dfrac{\\omega_1+\\omega_2}{2}\\right)=0$。另一方面 $\\wp'$ 在基本平行四边形内只有一个极点（位于原点，三阶），故其零点（按重数计）恰有 $3$ 个，于是上面三点就是全部零点。把 $\\wp'=0$ 代入微分方程得 $4\\wp^{3}-g_{2}\\wp-g_{3}=0$，所以 $e_1=\\wp\\left(\\dfrac{\\omega_1}{2}\\right)$ 等三个值就是该三次多项式的根；当 $\\Delta\\neq0$ 时它们互不相同。",
-        "solutionEn": "Oddness plus periodicity gives ℘′(ω₁/2)=−℘′(ω₁/2)=0, and likewise for ω₂/2 and (ω₁+ω₂)/2. Since ℘′ has a single pole of order 3 in the fundamental parallelogram, it has exactly three zeros counted with multiplicity, so these are all of them. Substituting ℘′=0 into the differential equation shows the corresponding ℘-values are the three roots of 4x³−g₂x−g₃, distinct when Δ≠0."
-      }
-    ],
-    "tags": [
-      "复分析",
-      "椭圆函数",
-      "双周期",
-      "复环面",
-      "椭圆曲线"
-    ],
-    "links": [
-      "meromorphic-functions",
-      "mittag-leffler",
-      "riemann-surfaces",
-      "uniformization-theorem",
-      "liouville-theorem"
-    ]
+  "examples": [
+   {
+    "problem": "用函数方程计算 $\\zeta(-1)$，并说明为什么不能把结论理解成「自然数之和等于 $-1/12$」。",
+    "solution": "在 $\\zeta(s)=2^{s}\\pi^{\\,s-1}\\sin\\left(\\frac{\\pi s}{2}\\right)\\Gamma(1-s)\\zeta(1-s)$ 中取 $s=-1$：$$2^{-1}\\pi^{-2}\\sin\\!\\left(-\\frac{\\pi}{2}\\right)\\Gamma(2)\\,\\zeta(2)=\\frac12\\cdot\\frac{1}{\\pi^{2}}\\cdot(-1)\\cdot 1\\cdot\\frac{\\pi^{2}}{6}=-\\frac{1}{12}.$$ 所以 $\\zeta(-1)=-1/12$。注意这里用的是**延拓后**的 $\\zeta$（$s=-1$ 处级数 $\\sum n$ 发散），因此它是解析延拓的函数值，与「级数 $1+2+3+\\cdots$ 收敛」无关；类似地 $\\zeta(0)=-1/2$ 也只是延拓值。",
+    "solutionEn": "Putting s = −1 in the functional equation gives (1/2)π^{−2}(−1)·1·(π²/6) = −1/12, using ζ(2)=π²/6. Since s = −1 lies outside the half-plane of convergence, this is the value of the continued function, not a statement about the divergent series 1+2+3+⋯."
+   },
+   {
+    "problem": "用部分和估计 $\\zeta(2)$：计算 $\\sum_{n=1}^{10}n^{-2}$ 并给出余项估计。",
+    "solution": "$\\sum_{n=1}^{10}\\dfrac{1}{n^{2}}=1+\\dfrac14+\\dfrac19+\\cdots+\\dfrac{1}{100}\\approx1.5498$，而 $\\zeta(2)=\\dfrac{\\pi^{2}}{6}\\approx1.6449$，误差约 $0.0951$。余项可用积分估计：$$\\sum_{n>10}\\frac{1}{n^{2}}<\\int_{10}^{\\infty}\\frac{dx}{x^{2}}=\\frac{1}{10}=0.1,$$ 与观测的误差相符。这也说明「数值上看到收敛」不足以证明 $\\zeta(2)=\\pi^{2}/6$——后者要用 Fourier 级数或围道积分。",
+    "solutionEn": "The partial sum up to 10 is about 1.5498 while ζ(2)=π²/6≈1.6449, a gap of 0.0951, consistent with the integral bound Σ_{n>10} n^{−2} < ∫₁₀^∞ x^{−2}dx = 0.1. Numerics alone cannot prove ζ(2)=π²/6 — that needs Fourier series or contour integration."
+   }
+  ],
+  "tags": [
+   "复分析",
+   "解析数论",
+   "素数",
+   "黎曼猜想",
+   "函数方程"
+  ],
+  "links": [
+   "gamma-function",
+   "analytic-continuation",
+   "entire-functions",
+   "meromorphic-functions",
+   "harmonic-series"
+  ]
+ },
+ {
+  "id": "elliptic-functions",
+  "title": "椭圆函数",
+  "titleEn": "Elliptic Functions",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "椭圆函数是定义在复平面上、具有两个不可公度周期的亚纯函数；由刘维尔的论证它必须有极点，最典型的例子是魏尔斯特拉斯 ℘ 函数，满足 (℘')² = 4℘³ − g₂℘ − g₃。",
+  "summaryEn": "Elliptic functions are meromorphic functions on ℂ with two independent periods; by Liouville's argument they must have poles, the prototype being the Weierstrass ℘ function with (℘')² = 4℘³ − g₂℘ − g₃.",
+  "definition": "设 $\\omega_1,\\omega_2\\in\\mathbb{C}$ 满足 $\\omega_1/\\omega_2\\notin\\mathbb{R}$（两周期不共线）。一个函数 $f$ 若在 $\\mathbb{C}$ 上**亚纯**且满足 $f(z+\\omega_1)=f(z)=f(z+\\omega_2)$，就称为**椭圆函数**（双周期函数）。由两个周期生成的**周期格** $\\Lambda=\\{m\\omega_1+n\\omega_2:m,n\\in\\mathbb{Z}\\}\\cong\\mathbb{Z}^2$ 的商 $\\mathbb{C}/\\Lambda$ 是**复环面**；椭圆函数恰好就是复环面上的亚纯函数。\n\n**Liouville 型定理**说明椭圆函数必然「有极点」：双周期的**整函数**在基本平行四边形的闭包（紧集）上有界，从而是有界整函数，必为常数——**不存在非常数的双周期整函数**。所以非平凡的椭圆函数必须是亚纯的；它在基本平行四边形内的极点个数有限（否则极点在紧集内有聚点，与亚纯性矛盾），且至少有 $1$ 个。更进一步，留数之和为零：$\\sum\\operatorname{Res}=0$，因此极点（按重数计）至少要有 $2$ 个——这也解释了椭圆函数比三角函数「多出」一个极点。\n\n标准的构造是**魏尔斯特拉斯 $\\wp$ 函数**：\n\n$$\\wp(z)=\\frac{1}{z^{2}}+\\sum_{\\omega\\in\\Lambda\\setminus\\{0\\}}\\left[\\frac{1}{(z-\\omega)^{2}}-\\frac{1}{\\omega^{2}}\\right],$$\n\n其中和号带撇意味着去掉 $\\omega=0$ 的项（减去 $1/\\omega^2$ 正是为了收敛）。$\\wp$ 是偶函数，以 $\\Lambda$ 为周期，在每个格点处恰为二阶极点，并且满足微分方程\n\n$$\\wp'(z)^{2}=4\\wp(z)^{3}-g_{2}\\wp(z)-g_{3},$$\n\n其中 $g_2=60\\sum'\\omega^{-4}$、$g_3=140\\sum'\\omega^{-6}$，判别式 $\\Delta=g_2^3-27g_3^2\\ne0$。于是 $z\\mapsto(\\wp(z),\\wp'(z))$ 把复环面 $\\mathbb{C}/\\Lambda$ 双全纯地参数化到**椭圆曲线**的仿射部分 $y^{2}=4x^{3}-g_{2}x-g_{3}$ 上（添上无穷远点即得其射影闭包），并把加法变成曲线上的群律——这正是「椭圆函数」一词的来源：它与椭圆积分互为反函数。\n\n雅可比采用另一套记号构造椭圆函数 $\\mathrm{sn}\\,u,\\ \\mathrm{cn}\\,u,\\ \\mathrm{dn}\\,u$，它们满足 $\\mathrm{sn}^{2}u+\\mathrm{cn}^{2}u=1$、$\\mathrm{dn}^{2}u+k^{2}\\mathrm{sn}^{2}u=1$，在与三角函数的类比中扮演更直接的角色。",
+  "definitionEn": "Let $\\omega_1,\\omega_2\\in\\mathbb{C}$ with $\\omega_1/\\omega_2\\notin\\mathbb{R}$. A **meromorphic** function $f$ on $\\mathbb{C}$ with $f(z+\\omega_1)=f(z)=f(z+\\omega_2)$ is called an **elliptic function** (doubly periodic). The lattice $\\Lambda=\\{m\\omega_1+n\\omega_2\\}$ is isomorphic to $\\mathbb{Z}^2$, and $\\mathbb{C}/\\Lambda$ is a complex torus; elliptic functions are exactly the meromorphic functions on it.\n\nA Liouville-type theorem forces poles: a doubly periodic entire function is bounded on the (compact) fundamental parallelogram, hence constant — **there is no nonconstant doubly periodic entire function**. Thus nontrivial elliptic functions are meromorphic with finitely many poles in the fundamental parallelogram (infinitely many would accumulate, violating meromorphy) and at least one; moreover the residues sum to zero, so at least two poles counted with multiplicity.\n\nThe standard construction is the **Weierstrass $\\wp$ function** $\\wp(z)=\\frac{1}{z^{2}}+\\sum'\\left[\\frac{1}{(z-\\omega)^{2}}-\\frac{1}{\\omega^{2}}\\right]$ (the prime means $\\omega\\ne0$; subtracting $1/\\omega^2$ makes the series converge). It is even, $\\Lambda$-periodic, has a double pole exactly at each lattice point, and satisfies $\\wp'(z)^{2}=4\\wp(z)^{3}-g_{2}\\wp(z)-g_{3}$ with $g_2=60\\sum'\\omega^{-4}$, $g_3=140\\sum'\\omega^{-6}$ and discriminant $\\Delta=g_2^3-27g_3^2\\ne0$. Hence $z\\mapsto(\\wp(z),\\wp'(z))$ parametrizes the **elliptic curve** $y^2=4x^3-g_2x-g_3$ biholomorphically, turning addition of arguments into the group law of the curve — the reason elliptic functions are inverse to elliptic integrals.\n\nJacobi's functions $\\mathrm{sn}$, $\\mathrm{cn}$, $\\mathrm{dn}$ give another normalization, with $\\mathrm{sn}^{2}+\\mathrm{cn}^{2}=1$ and $\\mathrm{dn}^{2}+k^{2}\\mathrm{sn}^{2}=1$.",
+  "formulas": [
+   {
+    "latex": "f(z+\\omega_1)=f(z)=f(z+\\omega_2),\\qquad \\operatorname{Im}\\!\\left(\\frac{\\omega_1}{\\omega_2}\\right)\\neq0",
+    "note": "双周期性：两个周期不可公度，函数在复平面上由基本平行四边形上的取值决定。",
+    "noteEn": "Double periodicity with incommensurable periods; the function is determined by its values on a fundamental parallelogram."
+   },
+   {
+    "latex": "\\Lambda=\\{m\\omega_1+n\\omega_2:\\ m,n\\in\\mathbb{Z}\\}\\cong\\mathbb{Z}^{2},\\qquad \\mathbb{C}/\\Lambda\\ \\text{是复环面}",
+    "note": "周期格与复环面：椭圆函数就是复环面上的亚纯函数。",
+    "noteEn": "The period lattice and the complex torus; elliptic functions are its meromorphic functions."
+   },
+   {
+    "latex": "\\wp(z)=\\frac{1}{z^{2}}+\\sum_{\\omega\\in\\Lambda\\setminus\\{0\\}}\\left[\\frac{1}{(z-\\omega)^{2}}-\\frac{1}{\\omega^{2}}\\right]",
+    "note": "魏尔斯特拉斯 $\\wp$ 函数：偶函数，在每个格点处为二阶极点，和号的撇表示去掉 $\\omega=0$。",
+    "noteEn": "The Weierstrass ℘ function: even, with a double pole at each lattice point; the prime excludes ω = 0."
+   },
+   {
+    "latex": "\\wp'(z)^{2}=4\\wp(z)^{3}-g_{2}\\wp(z)-g_{3},\\qquad g_{2}=60\\!\\sum_{\\omega\\neq0}\\omega^{-4},\\quad g_{3}=140\\!\\sum_{\\omega\\neq0}\\omega^{-6}",
+    "note": "关键微分方程：$(\\wp,\\wp')$ 落在椭圆曲线 $y^{2}=4x^{3}-g_{2}x-g_{3}$ 上；$\\Delta=g_2^3-27g_3^2\\neq0$。",
+    "noteEn": "The fundamental differential equation: (℘,℘′) lies on the elliptic curve y²=4x³−g₂x−g₃, with Δ=g₂³−27g₃²≠0."
+   },
+   {
+    "latex": "\\wp(u+v)=-\\wp(u)-\\wp(v)+\\frac{1}{4}\\left(\\frac{\\wp'(u)-\\wp'(v)}{\\wp(u)-\\wp(v)}\\right)^{2}",
+    "note": "加法公式：把「复环面上的加法」翻译成 $(\\wp,\\wp')$ 的有理运算，也是群律的来源。",
+    "noteEn": "Addition theorem: it translates addition on the torus into rational operations on (℘,℘′), giving the group law."
+   },
+   {
+    "latex": "\\mathrm{sn}^{2}u+\\mathrm{cn}^{2}u=1,\\qquad \\mathrm{dn}^{2}u+k^{2}\\,\\mathrm{sn}^{2}u=1",
+    "note": "雅可比椭圆函数的基本恒等式（$k$ 为模数）；它们与 $\\wp$ 函数只差一个尺度变换。",
+    "noteEn": "Basic identities for Jacobi's elliptic functions (k = modulus); they differ from ℘ only by a scaling."
+   }
+  ],
+  "properties": [
+   "不存在非常数的双周期整函数（Liouville）；椭圆函数在基本平行四边形内极点个数有限且 $\\ge1$，又因留数之和为 $0$，极点按重数计至少为 $2$ 个。",
+   "零点与极点平衡：在一个基本平行四边形内，椭圆函数的零点个数与极点个数相等（均按重数计），且两者之和的差落在周期格 $\\Lambda$ 中。",
+   "结构定理：任何椭圆函数都是 $\\wp$ 与 $\\wp'$ 的有理函数，即 $\\mathbb{C}(\\wp,\\wp')$ 就是椭圆函数域；每个函数还能唯一写成 $R(\\wp)+\\wp'S(\\wp)$ 的形式。",
+   "$\\wp$ 是偶函数、$\\wp'$ 是奇函数；$\\wp'$ 的零点恰是三个半周期点 $\\omega_1/2,\\ \\omega_2/2,\\ (\\omega_1+\\omega_2)/2$（当 $\\Delta\\neq0$ 时互异），对应三次多项式 $4x^{3}-g_2x-g_3$ 的三个根。",
+   "与椭圆积分互为反函数：$z=\\int_{\\wp(z)}^{\\infty}\\dfrac{dt}{\\sqrt{4t^{3}-g_{2}t-g_{3}}}$（符号按分支选取），说明椭圆积分一般不能用初等函数表示。"
+  ],
+  "propertiesEn": [
+   "No nonconstant doubly periodic entire function exists (Liouville); an elliptic function has finitely many poles in the fundamental parallelogram, at least one, and at least two counted with multiplicity since the residues sum to zero.",
+   "Balance of zeros and poles: in one fundamental parallelogram the number of zeros equals the number of poles (both counted with multiplicity), and the difference of the two divisor sums lies in Λ.",
+   "Structure theorem: every elliptic function is a rational function of ℘ and ℘′, i.e. the field of elliptic functions is ℂ(℘,℘′); each one can be written uniquely as R(℘)+℘′S(℘).",
+   "℘ is even and ℘′ is odd; the zeros of ℘′ are precisely the three half-period points ω₁/2, ω₂/2, (ω₁+ω₂)/2 (distinct when Δ≠0), corresponding to the three roots of 4x³−g₂x−g₃.",
+   "Inverse to elliptic integrals: z=∫_{℘(z)}^{∞} dt/√(4t³−g₂t−g₃) (branch-dependent), which is why elliptic integrals are not elementary."
+  ],
+  "plot": {
+   "type": "contour",
+   "expr": "cos(x) + cos(y)",
+   "xRange": [
+    -6.3,
+    6.3
+   ],
+   "yRange": [
+    -6.3,
+    6.3
+   ],
+   "levels": 12,
+   "title": "双周期性格子：cos x + cos y 的等值线在 2π 方向上重复排列，正如周期格 Λ 铺满复平面"
   },
-  {
-    "id": "schwarz-christoffel",
-    "title": "施瓦茨–克里斯托费尔变换",
-    "titleEn": "The Schwarz–Christoffel Transformation",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "施瓦茨–克里斯托费尔公式给出把上半平面共形映到多边形内部的显式积分表达式，积分中的幂指数由多边形内角决定，是流体力学与数值保角映射的经典工具。",
-    "summaryEn": "The Schwarz–Christoffel formula gives an explicit integral map from the upper half-plane onto the interior of a polygon, with exponents determined by the interior angles — a classical tool in fluid mechanics and numerical conformal mapping.",
-    "definition": "**施瓦茨–克里斯托费尔（Schwarz–Christoffel）公式**把**上半平面** $\\operatorname{Im}z>0$ 共形映到**多边形内部**。给定实轴上递增的点 $x_1<x_2<\\cdots<x_n$ 与多边形的内角 $\\alpha_k\\pi$（$\\alpha_k>0$），映射由积分给出：\n\n$$w=f(z)=A+C\\int_0^{z}\\prod_{k=1}^{n}\\left(\\zeta-x_k\\right)^{\\alpha_k-1}\\,d\\zeta ,$$\n\n其中 $x_k$ 是实轴上对应多边形**顶点** $w_k=f(x_k)$ 的点，$A$ 与 $C$ 是复常数（决定平移、旋转与伸缩），$n$ 为顶点数。\n\n关键在于**指数的含义**：积分中被积函数在 $x_k$ 附近的因子是 $(\\zeta-x_k)^{\\alpha_k-1}$，于是 $f$ 在顶点附近的行为是 $f(z)-w_k\\approx c\\,(z-x_k)^{\\alpha_k}$——源点处的直线角 $\\pi$ 被乘成多边形的内角 $\\alpha_k\\pi$。也就是说：内角越接近 $\\pi$（凸顶点时即内角越大），指数 $\\alpha_k-1$ 越接近 $0$；而凹顶点（内角 $>\\pi$）内角越大指数越大、越远离 $0$；**内角恰为 $\\pi$（共线点）时指数为 $0$**，该因子变成 $1$，相当于多余的顶点从公式中消失；若内角大于 $\\pi$（凹顶点，$\\alpha_k>1$），指数为正。\n\n特殊情形：三角形取 $n=3$，指数之和 $\\sum(\\alpha_k-1)=-2$；矩形与正 $n$ 边形取 $\\alpha_k=\\dfrac{n-2}{n}$，指数为 $-\\dfrac{2}{n}$（三角形 $-2/3$，正方形 $-1/2$，正六边形 $-1/3$）。矩形的情形 $f(z)=\\int_0^z\\dfrac{d\\zeta}{\\sqrt{(1-\\zeta^{2})(1-k^{2}\\zeta^{2})}}$ 正是第一类椭圆积分，与椭圆函数互为反函数。\n\n应用包括：流体力学中绕过多边形障碍的势流与自由射流、渗流与孔隙介质中的多边形边界问题、静电场在角点附近的场强奇性（场强 $\\sim(z-x_k)^{\\alpha_k-1}$）分析，以及数值保角映射（SC 工具箱）的算法基础。",
-    "definitionEn": "The **Schwarz–Christoffel formula** maps the **upper half-plane** $\\operatorname{Im}z>0$ conformally onto the **interior of a polygon**. Given increasing points $x_1<\\cdots<x_n$ on the real axis and interior angles $\\alpha_k\\pi$, the map is\n\n$$w=f(z)=A+C\\int_0^{z}\\prod_{k=1}^{n}(\\zeta-x_k)^{\\alpha_k-1}\\,d\\zeta,$$\n\nwhere $x_k$ corresponds to the vertex $w_k=f(x_k)$, and $A$, $C$ are complex constants fixing position, orientation and scale.\n\n**Meaning of the exponents:** near $x_k$ the integrand contributes $(\\zeta-x_k)^{\\alpha_k-1}$, so $f(z)-w_k\\approx c(z-x_k)^{\\alpha_k}$: the straight angle $\\pi$ at the source point is multiplied into the interior angle $\\alpha_k\\pi$. Thus for a convex vertex (interior angle $<\\pi$, i.e. $\\alpha_k<1$) the exponent $\\alpha_k-1\\in(-1,0)$ gets closer to $0$ as the angle approaches $\\pi$; an **interior angle of exactly $\\pi$ (a collinear point) gives exponent $0$**, the factor becomes $1$ and the spurious vertex disappears; a reflex vertex (angle $>\\pi$, $\\alpha_k>1$) has a positive exponent.\n\nSpecial cases: for a triangle $n=3$; a rectangle or a regular $n$-gon uses $\\alpha_k=(n-2)/n$ with exponents $-2/n$ (triangle $-2/3$, square $-1/2$, hexagon $-1/3$). The rectangle case reduces to the elliptic integral of the first kind, inverse to elliptic functions.\n\nApplications: potential flow past polygonal obstacles and free jets in fluid mechanics, polygonal boundary problems in porous media, corner singularities of electrostatic fields (field intensity $\\sim(z-x_k)^{\\alpha_k-1}$), and numerical conformal mapping (SC toolboxes).",
-    "formulas": [
-      {
-        "latex": "w=f(z)=A+C\\int_0^{z}\\prod_{k=1}^{n}\\left(\\zeta-x_k\\right)^{\\alpha_k-1}\\,d\\zeta",
-        "note": "施瓦茨–克里斯托费尔公式：上半平面 $\\to$ 多边形内部，$x_k$ 对应顶点，$\\alpha_k\\pi$ 是内角。",
-        "noteEn": "The Schwarz–Christoffel formula: upper half-plane onto a polygon, with x_k the prevertices and α_kπ the interior angles."
-      },
-      {
-        "latex": "f(z)-w_k\\approx c\\,(z-x_k)^{\\alpha_k}\\quad(z\\to x_k),\\qquad \\alpha_k\\pi=\\text{内角}",
-        "note": "指数含义：源点的直线角 $\\pi$ 被乘成内角 $\\alpha_k\\pi$；故指数是 $\\alpha_k-1$。内角为 $\\pi$ 时指数为 $0$，共线点不影响公式。",
-        "noteEn": "Meaning of the exponent: the straight angle π becomes the interior angle α_kπ, so the exponent in the integrand is α_k−1; a collinear point (angle π) gives exponent 0."
-      },
-      {
-        "latex": "\\sum_{k=1}^{n}\\left(\\alpha_k-1\\right)=-2\\qquad\\text{（因}\\ \\sum_{k=1}^{n}\\alpha_k=n-2\\text{）}",
-        "note": "收敛性来源：被积函数在 $\\infty$ 处 $\\sim\\zeta^{-2}$，故从 $0$ 到 $z$ 的积分收敛（无界多边形可把无穷远处的顶点看作内角 $0$，即 $\\alpha=0$）。",
-        "noteEn": "Convergence: the integrand decays like ζ^{−2} at infinity since the exponents sum to −2 (an unbounded polygon is treated by assigning angle 0 to the vertex at infinity)."
-      },
-      {
-        "latex": "n=3:\\ \\alpha_1+\\alpha_2+\\alpha_3=1;\\qquad \\text{正}\\ n\\ \\text{边形}:\\ \\alpha_k=\\frac{n-2}{n},\\ \\text{指数}=-\\frac{2}{n}",
-        "note": "特例：三角形指数之和为 $-2$；正三角形 $-2/3$、正方形 $-1/2$、正六边形 $-1/3$。",
-        "noteEn": "Examples: for a triangle the exponents sum to −2; equilateral triangle −2/3, square −1/2, regular hexagon −1/3."
-      },
-      {
-        "latex": "\\text{矩形}:\\ f(z)=\\int_0^{z}\\frac{d\\zeta}{\\sqrt{(1-\\zeta^{2})(1-k^{2}\\zeta^{2})}}",
-        "note": "矩形对应四个内角 $\\pi/2$（指数 $-1/2$），积分化为第一类椭圆积分，与椭圆函数互为反函数。",
-        "noteEn": "For the rectangle all four angles equal π/2 (exponent −1/2) and the integral becomes the elliptic integral of the first kind, inverse to elliptic functions."
-      }
-    ],
-    "properties": [
-      "边界对应：$f$ 把实轴映为多边形边界（顶点外的点一一对应，$f(x_k)=w_k$ 是顶点），把上半平面映为多边形内部；$A$ 决定位置、$C$ 决定大小与旋转。",
-      "指数的几何意义：指数 $\\alpha_k-1$ 只由内角决定——凸顶点（内角 $<\\pi$）给出负指数，内角越接近 $\\pi$ 指数越接近 $0$，内角为 $\\pi$ 的「伪顶点」指数为 $0$、可删除。",
-      "收敛与自由度：一般内角和给 $\\sum(\\alpha_k-1)=-2$，被积函数在无穷远处像 $\\zeta^{-2}$，积分收敛；映射由 $n$ 个预顶点 $x_k$ 与 $A,C$ 决定，而 $x_k$ 可由 $\\text{SL}(2,\\mathbb{R})$（三个实参数）规范固定。",
-      "顶点附近的局部结构：$f(z)-w_k\\approx c(z-x_k)^{\\alpha_k}$，故内角 $\\alpha_k\\pi$ 与源点直线角 $\\pi$ 的关系是「乘一个 $\\alpha_k$」；角点越尖（$\\alpha_k$ 越小），该处导数的奇性越强。",
-      "应用：多边形障碍的势流、自由射流、多边形孔口的渗流、角点电场奇性的阶、以及数值保角映射（SC 工具箱）都直接使用这一公式。"
-    ],
-    "propertiesEn": [
-      "Boundary correspondence: f maps the real axis onto the polygon boundary (one-to-one except at prevertices, f(x_k)=w_k) and the upper half-plane onto the interior; A fixes position and C the scale and rotation.",
-      "Geometric meaning of exponents: α_k−1 depends only on the interior angle — convex vertices (angle < π) give negative exponents approaching 0 as the angle tends to π, and a collinear point (angle π) has exponent 0 and can be deleted.",
-      "Convergence and degrees of freedom: since Σ(α_k−1)=−2 the integrand behaves like ζ^{−2} at infinity and the integral converges; the map depends on the prevertices x_k and the constants A, C, with three real normalizations fixed by SL(2,ℝ).",
-      "Local behaviour at a vertex: f(z)−w_k ≈ c(z−x_k)^{α_k}, so the interior angle α_kπ is obtained by multiplying the source angle π by α_k; sharper corners have stronger derivative singularities.",
-      "Applications: potential flow past polygonal obstacles, free jets, seepage through polygonal openings, orders of corner singularities in electrostatics, and numerical conformal mapping (SC toolboxes)."
-    ],
-    "plot": {
-      "type": "conformal",
-      "re": "sqrt((sqrt(x^2+y^2)+x)/2)",
-      "im": "sqrt((sqrt(x^2+y^2)-x)/2)",
-      "zRange": [
-        0,
-        1.4
-      ],
-      "density": 9,
-      "title": "局部模型 w = √z：上半平面（平角 π）被映成第一象限（直角 π/2）——正是 SC 公式在正方形顶点附近（α_k = 1/2）的行为"
-    },
-    "examples": [
-      {
-        "problem": "正方形与正三角形的顶点在 SC 公式中对应的指数分别是多少？若某顶点是内角为 $3\\pi/2$ 的凹顶点，指数又是多少？并说明内角趋于 $\\pi$ 时指数的变化趋势。",
-        "solution": "正方形：内角 $=\\pi/2$，故 $\\alpha_k=\\dfrac{1}{2}$，指数 $\\alpha_k-1=-\\dfrac12$；正三角形：内角 $=\\pi/3$，$\\alpha_k=\\dfrac13$，指数 $-\\dfrac23$。内角为 $3\\pi/2$ 的凹顶点：$\\alpha_k=\\dfrac32$，指数 $=+\\dfrac12$。当内角从下方趋于 $\\pi$ 时 $\\alpha_k\\to1$，指数 $\\alpha_k-1\\to0$，该因子趋于 $1$；内角恰为 $\\pi$（共线）时指数为 $0$，顶点实际上不存在，公式自动忽略它。",
-        "solutionEn": "Square: interior angle π/2 so α=1/2 and the exponent is −1/2. Equilateral triangle: α=1/3, exponent −2/3. A reflex vertex with angle 3π/2 has α=3/2 and exponent +1/2. As the interior angle approaches π from below, α→1 and the exponent α−1→0, the factor becoming 1; at exactly π the point is collinear and drops out of the formula."
-      },
-      {
-        "problem": "验证一般 $n$ 边形的指数满足 $\\sum_{k=1}^{n}(\\alpha_k-1)=-2$，并解释它为什么保证了 SC 公式中积分在无穷远处收敛。",
-        "solution": "对内部角为 $\\alpha_k\\pi$ 的 $n$ 边形，内角和为 $(n-2)\\pi$，即 $\\sum\\alpha_k\\pi=(n-2)\\pi$，故 $\\sum_{k=1}^{n}\\alpha_k=n-2$。于是 $$\\sum_{k=1}^{n}(\\alpha_k-1)=\\sum_{k=1}^{n}\\alpha_k-n=(n-2)-n=-2 .$$ 当 $|\\zeta|\\to\\infty$ 时 $\\prod_k(\\zeta-x_k)^{\\alpha_k-1}\\sim\\zeta^{\\sum(\\alpha_k-1)}=\\zeta^{-2}$，即被积函数像 $1/\\zeta^{2}$ 一样衰减，故 $\\int_0^z$ 沿到无穷远的路径收敛（在有限预顶点 $x_k$ 处，因 $\\alpha_k>0$ 使 $|\\zeta-x_k|^{\\alpha_k-1}$ 可积）。",
-        "solutionEn": "The interior angles satisfy Σα_k = n−2, hence Σ(α_k−1) = (n−2)−n = −2. Therefore the integrand decays like ζ^{−2} as |ζ|→∞, so the integral converges at infinity; near each prevertex it is integrable because α_k > 0."
-      }
-    ],
-    "tags": [
-      "复分析",
-      "共形映射",
-      "多边形",
-      "流体力学",
-      "椭圆积分"
-    ],
-    "links": [
-      "conformal-mapping",
-      "mobius-transformation",
-      "elliptic-functions",
-      "riemann-mapping-theorem",
-      "harmonic-function"
-    ]
+  "examples": [
+   {
+    "problem": "由 $\\wp$ 的定义直接验证 $\\wp(-z)=\\wp(z)$、$\\wp'(-z)=-\\wp'(z)$，并说明 $\\wp$ 在哪些点解析、在哪些点有极点。",
+    "solution": "定义中每一项 $\\dfrac{1}{(z-\\omega)^{2}}-\\dfrac{1}{\\omega^{2}}$ 在代换 $z\\mapsto-z$、$\\omega\\mapsto-\\omega$ 下不变（因为 $\\Lambda=-\\Lambda$），故 $\\wp(-z)=\\wp(z)$，即 $\\wp$ 为偶函数；两边求导得 $\\wp'(-z)=-\\wp'(z)$，为奇函数。极点在 $z\\in\\Lambda$ 处：在 $z=0$ 附近 $\\wp(z)=z^{-2}+$（解析部分），故为二阶极点，再由周期性把这一极点搬到每个格点；因此在 $\\mathbb{C}\\setminus\\Lambda$ 上 $\\wp$ 解析（这也说明它的极点一阶不可能：留数为 $0$）。",
+    "solutionEn": "Each term of the defining sum is invariant under z ↦ −z, ω ↦ −ω (since Λ = −Λ), so ℘ is even and ℘′ is odd. Near z = 0, ℘(z) = z^{−2} + (holomorphic), a double pole; periodicity moves this pole to every lattice point. Off Λ, ℘ is holomorphic."
+   },
+   {
+    "problem": "证明 $\\wp'$ 的零点恰为三个半周期点 $\\omega_1/2,\\ \\omega_2/2,\\ (\\omega_1+\\omega_2)/2$，并说明它们给出的正是 $4x^{3}-g_2x-g_3=0$ 的三个根。",
+    "solution": "由 $\\wp'$ 奇函数且以 $\\Lambda$ 为周期：$\\wp'\\left(\\dfrac{\\omega_1}{2}\\right)=-\\wp'\\left(-\\dfrac{\\omega_1}{2}\\right)=-\\wp'\\left(\\dfrac{\\omega_1}{2}+\\omega_1\\right)=-\\wp'\\left(\\dfrac{\\omega_1}{2}\\right)$，故 $\\wp'\\left(\\dfrac{\\omega_1}{2}\\right)=0$；同理 $\\wp'\\left(\\dfrac{\\omega_2}{2}\\right)=\\wp'\\left(\\dfrac{\\omega_1+\\omega_2}{2}\\right)=0$。另一方面 $\\wp'$ 在基本平行四边形内只有一个极点（位于原点，三阶），故其零点（按重数计）恰有 $3$ 个，于是上面三点就是全部零点。把 $\\wp'=0$ 代入微分方程得 $4\\wp^{3}-g_{2}\\wp-g_{3}=0$，所以 $e_1=\\wp\\left(\\dfrac{\\omega_1}{2}\\right)$ 等三个值就是该三次多项式的根；当 $\\Delta\\neq0$ 时它们互不相同。",
+    "solutionEn": "Oddness plus periodicity gives ℘′(ω₁/2)=−℘′(ω₁/2)=0, and likewise for ω₂/2 and (ω₁+ω₂)/2. Since ℘′ has a single pole of order 3 in the fundamental parallelogram, it has exactly three zeros counted with multiplicity, so these are all of them. Substituting ℘′=0 into the differential equation shows the corresponding ℘-values are the three roots of 4x³−g₂x−g₃, distinct when Δ≠0."
+   }
+  ],
+  "tags": [
+   "复分析",
+   "椭圆函数",
+   "双周期",
+   "复环面",
+   "椭圆曲线"
+  ],
+  "links": [
+   "meromorphic-functions",
+   "mittag-leffler",
+   "riemann-surfaces",
+   "uniformization-theorem",
+   "liouville-theorem"
+  ]
+ },
+ {
+  "id": "schwarz-christoffel",
+  "title": "施瓦茨–克里斯托费尔变换",
+  "titleEn": "The Schwarz–Christoffel Transformation",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "施瓦茨–克里斯托费尔公式给出把上半平面共形映到多边形内部的显式积分表达式，积分中的幂指数由多边形内角决定，是流体力学与数值保角映射的经典工具。",
+  "summaryEn": "The Schwarz–Christoffel formula gives an explicit integral map from the upper half-plane onto the interior of a polygon, with exponents determined by the interior angles — a classical tool in fluid mechanics and numerical conformal mapping.",
+  "definition": "**施瓦茨–克里斯托费尔（Schwarz–Christoffel）公式**把**上半平面** $\\operatorname{Im}z>0$ 共形映到**多边形内部**。给定实轴上递增的点 $x_1<x_2<\\cdots<x_n$ 与多边形的内角 $\\alpha_k\\pi$（对通常的有界简单多边形，$0<\\alpha_k<2$；无界多边形在无穷远顶点可出现 $\\alpha_k=0$ 的极限情形），映射由积分给出：\n\n$$w=f(z)=A+C\\int_0^{z}\\prod_{k=1}^{n}\\left(\\zeta-x_k\\right)^{\\alpha_k-1}\\,d\\zeta ,$$\n\n其中 $x_k$ 是实轴上对应多边形**顶点** $w_k=f(x_k)$ 的点，$A$ 与 $C$ 是复常数（决定平移、旋转与伸缩），$n$ 为顶点数。\n\n关键在于**指数的含义**：积分中被积函数在 $x_k$ 附近的因子是 $(\\zeta-x_k)^{\\alpha_k-1}$，于是 $f$ 在顶点附近的行为是 $f(z)-w_k\\approx c\\,(z-x_k)^{\\alpha_k}$——源点处的直线角 $\\pi$ 被乘成多边形的内角 $\\alpha_k\\pi$。也就是说：内角越接近 $\\pi$（凸顶点时即内角越大），指数 $\\alpha_k-1$ 越接近 $0$；而凹顶点（内角 $>\\pi$）内角越大指数越大、越远离 $0$；**内角恰为 $\\pi$（共线点）时指数为 $0$**，该因子变成 $1$，相当于多余的顶点从公式中消失；若内角大于 $\\pi$（凹顶点，$\\alpha_k>1$），指数为正。\n\n特殊情形：三角形取 $n=3$，指数之和 $\\sum(\\alpha_k-1)=-2$；矩形与正 $n$ 边形取 $\\alpha_k=\\dfrac{n-2}{n}$，指数为 $-\\dfrac{2}{n}$（三角形 $-2/3$，正方形 $-1/2$，正六边形 $-1/3$）。矩形的情形 $f(z)=\\int_0^z\\dfrac{d\\zeta}{\\sqrt{(1-\\zeta^{2})(1-k^{2}\\zeta^{2})}}$ 正是第一类椭圆积分，与椭圆函数互为反函数。\n\n应用包括：流体力学中绕过多边形障碍的势流与自由射流、渗流与孔隙介质中的多边形边界问题、静电场在角点附近的场强奇性（场强 $\\sim(z-x_k)^{\\alpha_k-1}$）分析，以及数值保角映射（SC 工具箱）的算法基础。",
+  "definitionEn": "The **Schwarz–Christoffel formula** maps the **upper half-plane** $\\operatorname{Im}z>0$ conformally onto the **interior of a polygon**. Given increasing points $x_1<\\cdots<x_n$ on the real axis and interior angles $\\alpha_k\\pi$, the map is\n\n$$w=f(z)=A+C\\int_0^{z}\\prod_{k=1}^{n}(\\zeta-x_k)^{\\alpha_k-1}\\,d\\zeta,$$\n\nwhere $x_k$ corresponds to the vertex $w_k=f(x_k)$, and $A$, $C$ are complex constants fixing position, orientation and scale.\n\n**Meaning of the exponents:** near $x_k$ the integrand contributes $(\\zeta-x_k)^{\\alpha_k-1}$, so $f(z)-w_k\\approx c(z-x_k)^{\\alpha_k}$: the straight angle $\\pi$ at the source point is multiplied into the interior angle $\\alpha_k\\pi$. Thus for a convex vertex (interior angle $<\\pi$, i.e. $\\alpha_k<1$) the exponent $\\alpha_k-1\\in(-1,0)$ gets closer to $0$ as the angle approaches $\\pi$; an **interior angle of exactly $\\pi$ (a collinear point) gives exponent $0$**, the factor becomes $1$ and the spurious vertex disappears; a reflex vertex (angle $>\\pi$, $\\alpha_k>1$) has a positive exponent.\n\nSpecial cases: for a triangle $n=3$; a rectangle or a regular $n$-gon uses $\\alpha_k=(n-2)/n$ with exponents $-2/n$ (triangle $-2/3$, square $-1/2$, hexagon $-1/3$). The rectangle case reduces to the elliptic integral of the first kind, inverse to elliptic functions.\n\nApplications: potential flow past polygonal obstacles and free jets in fluid mechanics, polygonal boundary problems in porous media, corner singularities of electrostatic fields (field intensity $\\sim(z-x_k)^{\\alpha_k-1}$), and numerical conformal mapping (SC toolboxes).",
+  "formulas": [
+   {
+    "latex": "w=f(z)=A+C\\int_0^{z}\\prod_{k=1}^{n}\\left(\\zeta-x_k\\right)^{\\alpha_k-1}\\,d\\zeta",
+    "note": "施瓦茨–克里斯托费尔公式：上半平面 $\\to$ 多边形内部，$x_k$ 对应顶点，$\\alpha_k\\pi$ 是内角。",
+    "noteEn": "The Schwarz–Christoffel formula: upper half-plane onto a polygon, with x_k the prevertices and α_kπ the interior angles."
+   },
+   {
+    "latex": "f(z)-w_k\\approx c\\,(z-x_k)^{\\alpha_k}\\quad(z\\to x_k),\\qquad \\alpha_k\\pi=\\text{内角}",
+    "note": "指数含义：源点的直线角 $\\pi$ 被乘成内角 $\\alpha_k\\pi$；故指数是 $\\alpha_k-1$。内角为 $\\pi$ 时指数为 $0$，共线点不影响公式。",
+    "noteEn": "Meaning of the exponent: the straight angle π becomes the interior angle α_kπ, so the exponent in the integrand is α_k−1; a collinear point (angle π) gives exponent 0."
+   },
+   {
+    "latex": "\\sum_{k=1}^{n}\\left(\\alpha_k-1\\right)=-2\\qquad\\text{（因}\\ \\sum_{k=1}^{n}\\alpha_k=n-2\\text{）}",
+    "note": "收敛性来源：被积函数在 $\\infty$ 处 $\\sim\\zeta^{-2}$，故从 $0$ 到 $z$ 的积分收敛（无界多边形可把无穷远处的顶点看作内角 $0$，即 $\\alpha=0$）。",
+    "noteEn": "Convergence: the integrand decays like ζ^{−2} at infinity since the exponents sum to −2 (an unbounded polygon is treated by assigning angle 0 to the vertex at infinity)."
+   },
+   {
+    "latex": "n=3:\\ \\alpha_1+\\alpha_2+\\alpha_3=1;\\qquad \\text{正}\\ n\\ \\text{边形}:\\ \\alpha_k=\\frac{n-2}{n},\\ \\text{指数}=-\\frac{2}{n}",
+    "note": "特例：三角形指数之和为 $-2$；正三角形 $-2/3$、正方形 $-1/2$、正六边形 $-1/3$。",
+    "noteEn": "Examples: for a triangle the exponents sum to −2; equilateral triangle −2/3, square −1/2, regular hexagon −1/3."
+   },
+   {
+    "latex": "\\text{矩形}:\\ f(z)=\\int_0^{z}\\frac{d\\zeta}{\\sqrt{(1-\\zeta^{2})(1-k^{2}\\zeta^{2})}}",
+    "note": "矩形对应四个内角 $\\pi/2$（指数 $-1/2$），积分化为第一类椭圆积分，与椭圆函数互为反函数。",
+    "noteEn": "For the rectangle all four angles equal π/2 (exponent −1/2) and the integral becomes the elliptic integral of the first kind, inverse to elliptic functions."
+   }
+  ],
+  "properties": [
+   "边界对应：$f$ 把实轴映为多边形边界（顶点外的点一一对应，$f(x_k)=w_k$ 是顶点），把上半平面映为多边形内部；$A$ 决定位置、$C$ 决定大小与旋转。",
+   "指数的几何意义：指数 $\\alpha_k-1$ 只由内角决定——凸顶点（内角 $<\\pi$）给出负指数，内角越接近 $\\pi$ 指数越接近 $0$，内角为 $\\pi$ 的「伪顶点」指数为 $0$、可删除。",
+   "收敛与自由度：一般内角和给 $\\sum(\\alpha_k-1)=-2$，被积函数在无穷远处像 $\\zeta^{-2}$，积分收敛；映射由 $n$ 个预顶点 $x_k$ 与 $A,C$ 决定，而 $x_k$ 可由 $\\text{SL}(2,\\mathbb{R})$（三个实参数）规范固定。",
+   "顶点附近的局部结构：$f(z)-w_k\\approx c(z-x_k)^{\\alpha_k}$，故内角 $\\alpha_k\\pi$ 与源点直线角 $\\pi$ 的关系是「乘一个 $\\alpha_k$」；角点越尖（$\\alpha_k$ 越小），该处导数的奇性越强。",
+   "应用：多边形障碍的势流、自由射流、多边形孔口的渗流、角点电场奇性的阶、以及数值保角映射（SC 工具箱）都直接使用这一公式。"
+  ],
+  "propertiesEn": [
+   "Boundary correspondence: f maps the real axis onto the polygon boundary (one-to-one except at prevertices, f(x_k)=w_k) and the upper half-plane onto the interior; A fixes position and C the scale and rotation.",
+   "Geometric meaning of exponents: α_k−1 depends only on the interior angle — convex vertices (angle < π) give negative exponents approaching 0 as the angle tends to π, and a collinear point (angle π) has exponent 0 and can be deleted.",
+   "Convergence and degrees of freedom: since Σ(α_k−1)=−2 the integrand behaves like ζ^{−2} at infinity and the integral converges; the map depends on the prevertices x_k and the constants A, C, with three real normalizations fixed by SL(2,ℝ).",
+   "Local behaviour at a vertex: f(z)−w_k ≈ c(z−x_k)^{α_k}, so the interior angle α_kπ is obtained by multiplying the source angle π by α_k; sharper corners have stronger derivative singularities.",
+   "Applications: potential flow past polygonal obstacles, free jets, seepage through polygonal openings, orders of corner singularities in electrostatics, and numerical conformal mapping (SC toolboxes)."
+  ],
+  "plot": {
+   "type": "conformal",
+   "re": "sqrt((sqrt(x^2+y^2)+x)/2)",
+   "im": "sqrt((sqrt(x^2+y^2)-x)/2)",
+   "zRange": [
+    0,
+    1.4
+   ],
+   "density": 9,
+   "title": "局部模型 w = √z：上半平面（平角 π）被映成第一象限（直角 π/2）——正是 SC 公式在正方形顶点附近（α_k = 1/2）的行为"
   },
-  {
-    "id": "residue-advanced",
-    "title": "留数技巧进阶",
-    "titleEn": "Advanced Residue Techniques",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "针对半圆围道失效的积分——幂次与多值函数的积分、需要取主值的实轴极点积分、以及对衰减条件敏感的有理函数积分——钥匙孔围道、log 技巧、Jordan 引理与小半圆引理提供了标准处理方式。",
-    "summaryEn": "For integrals beyond the plain semicircle method — power and multivalued integrands, principal values at real poles, rational integrands with slow decay — the keyhole contour, the log trick, Jordan's lemma and the small-arc lemma are the standard tools.",
-    "definition": "**第一类：幂次与多值函数的积分（钥匙孔围道）。** 沿正实轴上开缝（钥匙孔）的双层围道绕一大圈，配上 $z^{\\alpha-1}$ 或 $\\log z$ 的单值分支，可以处理 $\\int_0^\\infty$ 上带幂次的积分。原型是\n\n$$\\int_0^\\infty \\frac{x^{\\alpha-1}}{1+x}\\,dx=\\frac{\\pi}{\\sin\\pi\\alpha}\\qquad(0<\\alpha<1).$$\n\n**第二类：$\\log$ 技巧。** 取正实轴为割线、分支取 $0<\\arg z<2\\pi$，则沿上、下两岸的 $\\log z$ 相差 $2\\pi i$，于是\n\n$$\\int_0^\\infty f(x)\\,dx=-\\sum_{\\text{极点}}\\operatorname{Res}\\big[f(z)\\log z\\big],$$\n\n只要 $f$ 是有理函数、分母次数至少比分子高 $2$（保证大圆弧上 $f(z)\\log z\\to0$）且实轴上没有极点。代价是要计算含 $\\log z$ 的留数，通常出现高阶导数。\n\n**第三类：偶/奇分解。** 把全直线积分拆成偶部与奇部：\n\n$$\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\int_0^\\infty f_e(x)\\,dx,\\qquad f_e(x)=\\frac{f(x)+f(-x)}{2},$$\n\n（当奇部的积分收敛时其贡献为 $0$）。这样可以把一个 $\\int_0^\\infty$ 的问题转化为半圆围道能直接处理的 $\\int_{-\\infty}^{\\infty}$ 问题。\n\n**第四类：振荡因子的衰减（Jordan 引理）。** 当被积函数含 $e^{iaz}$（$a>0$）时，上半平面的大圆弧上 $|e^{iaz}|=e^{-a\\operatorname{Im}z}\\le1$ 且沿弧的衰减由 $\\int_0^{\\pi}e^{-aR\\sin\\theta}d\\theta\\le\\pi/(aR)$ 控制，故只要 $f$ 在上半平面一致趋于 $0$，圆弧积分就趋于 $0$。若没有振荡因子，则需要 $z f(z)\\to0$ **一致**成立（即 $f$ 比 $1/z$ 衰减更快）才能让大圆弧积分消失。\n\n**第五类：实轴上有极点（主值）。** 实轴上的单极点无法回避，只能取**主值（PV）**：用上半平面内的小半圆弧从上方绕过极点，该小弧贡献 $-i\\pi\\operatorname{Res}$，所以\n\n$$\\operatorname{PV}\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\pi i\\sum_{\\operatorname{Im}z>0}\\operatorname{Res}f+\\pi i\\sum_{\\text{实轴单极点}}\\operatorname{Res}f,$$\n\n即实轴上的单极点只贡献「半留数」。若实轴上的极点是二阶或更高，主值一般发散。\n\n**第六类：三角有理式的整周期积分。** $\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)d\\theta$ 用单位圆围道 $z=e^{i\\theta}$ 化为 $\\oint_{|z|=1}R\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}$，详见「用留数计算实积分」。",
-    "definitionEn": "**(1) Power and multivalued integrands (keyhole contour).** A double-layer contour slit along the positive real axis, combined with a single-valued branch of $z^{\\alpha-1}$ or $\\log z$, evaluates integrals such as $\\int_0^\\infty \\frac{x^{\\alpha-1}}{1+x}dx=\\dfrac{\\pi}{\\sin\\pi\\alpha}$ for $0<\\alpha<1$.\n\n**(2) The log trick.** Choosing the cut on the positive real axis and the branch $0<\\arg z<2\\pi$, the two banks differ by $2\\pi i$ in $\\log z$, giving $\\int_0^\\infty f(x)dx=-\\sum\\operatorname{Res}[f(z)\\log z]$ for rational $f$ whose denominator exceeds the numerator degree by at least 2 (so that $f(z)\\log z\\to0$ on the large arc) and with no poles on the axis.\n\n**(3) Even/odd decomposition.** $\\int_{-\\infty}^{\\infty}f\\,dx=2\\int_0^\\infty f_e\\,dx$ with $f_e(x)=\\tfrac12(f(x)+f(-x))$ — the odd part contributes 0 when its integral converges — reducing a half-line integral to a full-line one.\n\n**(4) Jordan's lemma.** For integrands with $e^{iaz}$, $a>0$, we have $|e^{iaz}|=e^{-a\\operatorname{Im}z}\\le1$ in the upper half-plane and $\\int_0^{\\pi}e^{-aR\\sin\\theta}d\\theta\\le\\pi/(aR)$, so the large arc contributes $0$ whenever $f\\to0$ uniformly there. Without an oscillating factor one needs $zf(z)\\to0$ uniformly, i.e. decay faster than $1/z$.\n\n**(5) Poles on the real axis.** Only the principal value (PV) can be defined: the small semicircle in the upper half-plane contributes $-i\\pi\\operatorname{Res}$, hence $\\operatorname{PV}\\int_{-\\infty}^{\\infty}f=2\\pi i\\sum_{\\operatorname{Im}z>0}\\operatorname{Res}f+\\pi i\\sum_{\\text{real simple poles}}\\operatorname{Res}f$ — real simple poles contribute a 'half residue'. For poles of order ≥ 2 on the axis the principal value usually diverges.\n\n**(6) Trigonometric rationals.** $\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)d\\theta=\\oint_{|z|=1}R\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}$; see the companion node on computing real integrals by residues.",
-    "formulas": [
-      {
-        "latex": "\\int_0^{\\infty}\\frac{x^{\\alpha-1}}{1+x}\\,dx=\\frac{\\pi}{\\sin\\pi\\alpha}\\qquad(0<\\alpha<1)",
-        "note": "钥匙孔围道 + 单值分支 $0<\\arg z<2\\pi$ 的原型结果；$\\alpha=1/2$ 给出 $\\int_0^\\infty\\frac{dx}{\\sqrt{x}\\,(1+x)}=\\pi$。",
-        "noteEn": "The prototype of the keyhole method; α=1/2 gives ∫₀^∞ dx/(√x(1+x)) = π."
-      },
-      {
-        "latex": "\\int_0^{\\infty}f(x)\\,dx=-\\sum_{\\text{极点}}\\operatorname{Res}\\big[f(z)\\log z\\big]\\qquad(0<\\arg z<2\\pi)",
-        "note": "log 技巧：$f$ 为有理函数，分母次数 $\\ge$ 分子次数 $+2$，实轴上无极点；两岸的 $\\log$ 相差 $2\\pi i$ 是全部机制所在。",
-        "noteEn": "The log trick: f rational with denominator degree ≥ numerator degree + 2 and no poles on the axis; the 2πi jump of log across the cut is the whole mechanism."
-      },
-      {
-        "latex": "\\operatorname{PV}\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\pi i\\!\\!\\sum_{\\operatorname{Im}z>0}\\!\\!\\operatorname{Res}f+\\pi i\\!\\!\\sum_{\\text{实轴单极点}}\\!\\!\\operatorname{Res}f",
-        "note": "实轴上有单极点时的主值公式：上半平面给全留数，实轴单极点只给「半留数」$\\pi i\\operatorname{Res}$。",
-        "noteEn": "Principal-value formula: full residues from the upper half-plane, half residues πi·Res from simple poles on the axis."
-      },
-      {
-        "latex": "\\left|\\int_{C_R}f(z)e^{iaz}dz\\right|\\le\\frac{\\pi}{a}\\,\\max_{z\\in C_R}|f(z)|\\ \\to0\\quad(a>0,\\ \\operatorname{Im}z\\ge0)",
-        "note": "Jordan 引理：含 $e^{iaz}$ 的积分只需 $f$ 在上半平面一致趋于 $0$；没有振荡因子时则要求 $zf(z)\\to0$ 一致成立。",
-        "noteEn": "Jordan's lemma: with e^{iaz}, a>0, only uniform decay of f in the upper half-plane is needed; without the oscillating factor one needs zf(z)→0 uniformly."
-      },
-      {
-        "latex": "\\lim_{\\varepsilon\\to0}\\int_{\\text{上半小半圆}}f(z)\\,dz=-i\\pi\\operatorname{Res}_{z=x_0}f\\qquad(x_0\\ \\text{为实轴上的单极点})",
-        "note": "小半圆引理：从上方绕过实轴单极点的代价是 $-i\\pi\\operatorname{Res}$，由此得到主值公式中的 $+\\pi i\\operatorname{Res}$。",
-        "noteEn": "Small-arc lemma: indenting above a simple pole on the axis costs −iπ·Res, which yields the +πi·Res term in the PV formula."
-      },
-      {
-        "latex": "\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\int_0^{\\infty}f_e(x)\\,dx,\\qquad f_e(x)=\\frac{f(x)+f(-x)}{2}",
-        "note": "偶/奇分解：奇部在收敛时积分为 $0$，于是 $\\int_0^\\infty$ 型问题化为半圆围道可解的全直线问题。",
-        "noteEn": "Even/odd decomposition: the odd part integrates to 0 when convergent, turning a half-line problem into a full-line one solvable by the semicircle contour."
-      }
-    ],
-    "properties": [
-      "选围道的判据：被积函数在 $\\int_0^\\infty$ 上带幂次或多值性 $\\Rightarrow$ 钥匙孔围道；纯有理且分母比分子高至少 2 次 $\\Rightarrow$ 可用 log 技巧避开幂次分支的麻烦；含 $e^{iaz}$ 且 $a>0$ $\\Rightarrow$ Jordan 引理（取上半平面，$a<0$ 则取下半平面并注意符号）。",
-      "两个必须核对的条件：大圆弧消失（$zf(z)\\to0$ 一致成立，或 Jordan 引理适用）与小圆弧消失（被积函数在奇点附近不要出现 $1/z$ 型不可积项）。少任一条，公式就失效。",
-      "实轴上极点的处理：只能取主值，单极点贡献半留数 $\\pi i\\operatorname{Res}$；若极点是二阶或更高，主值一般发散，不能套用该公式。",
-      "偶/奇分解的意义：把 $\\int_0^\\infty$（收敛条件弱）与 $\\int_{-\\infty}^\\infty$（半圆围道适用）互相转化，是处理非偶被积函数的常用技巧。",
-      "单位圆法（$\\int_0^{2\\pi}$ 三角有理式）是同一套留数思想在圆周上的版本，本例程的姊妹节点「用留数计算实积分」给出了完整推导与典型例子。"
-    ],
-    "propertiesEn": [
-      "Choosing the contour: powers or multivalued factors on (0,∞) call for a keyhole contour; purely rational integrands with denominator degree ≥ numerator degree + 2 can be handled by the log trick; an oscillating factor e^{iaz}, a>0, calls for Jordan's lemma in the upper half-plane (use the lower half-plane when a<0, minding the sign).",
-      "Two conditions to check: vanishing of the contribution on the large arc (zf(z)→0 uniformly, or Jordan's lemma) and on the small arc (no non-integrable 1/z behavior). If either fails, the formula fails.",
-      "Real-axis poles: only the principal value exists; a simple pole contributes the half residue πi·Res, while a pole of order ≥ 2 usually makes the principal value diverge.",
-      "Even/odd decomposition converts a half-line problem into a full-line one (or conversely), which is the standard trick when the integrand is not even.",
-      "The unit-circle method for ∫₀^{2π} rational functions of sin and cos is the same residue idea on a circle; the companion node on real integrals by residues gives the full derivation and worked examples."
-    ],
-    "plot": {
-      "type": "function",
-      "functions": [
-        {
-          "expr": "1/(1+x^3)",
-          "color": "#4cc9f0",
-          "label": "被积函数 1/(1+x³)"
-        }
-      ],
-      "fills": [
-        {
-          "expr": "1/(1+x^3)",
-          "from": 0,
-          "to": 6,
-          "base": 0,
-          "color": "#06d6a0",
-          "label": "阴影 ≈ 1.195（延伸到 ∞ 为 2π/(3√3) ≈ 1.209）"
-        }
-      ],
-      "xRange": [
-        0,
-        6
-      ],
-      "yRange": [
-        -0.05,
-        1.1
-      ],
-      "title": "用留数算 ∫₀^∞ dx/(1+x³)：扇形围道（0<arg z<2π/3）内只有极点 $e^{i\\pi/3}$，另两个极点都在围道外，无需主值；只有改算 ∫_{−∞}^{∞} 时才需 PV 处理实轴上的 $z=-1$"
-    },
-    "examples": [
-      {
-        "problem": "用钥匙孔围道证明 $\\int_0^{\\infty}\\dfrac{x^{-1/2}}{1+x}\\,dx=\\pi$。",
-        "solution": "取 $f(z)=\\dfrac{z^{-1/2}}{1+z}$，分支取 $0<\\arg z<2\\pi$（割线为正实轴）。围道由半径 $R$ 的大圆、正实轴上沿（$\\arg z\\to0$）、绕原点半径 $\\varepsilon$ 的小圆、正实轴下沿（$\\arg z\\to2\\pi$）组成。围道内只有一个极点 $z=-1$（此处 $\\arg z=\\pi$），留数为 $\\operatorname{Res}f=e^{-i\\pi/2}=-i$，故 $\\oint f\\,dz=2\\pi i(-i)=2\\pi$。大圆上 $|f|\\sim R^{-1/2}$、弧长 $\\sim R$，小圆上 $|f|\\sim\\varepsilon^{-1/2}$、弧长 $\\sim\\varepsilon$，两者都趋于 $0$。上沿给出 $\\int_0^\\infty x^{-1/2}/(1+x)dx=I$；下沿 $\\arg z=2\\pi$ 使 $z^{-1/2}=e^{-i\\pi}x^{-1/2}$，而沿下沿是反向积分，贡献同样为 $+I$。于是 $2I=2\\pi$，得 $I=\\pi$。一般地可得 $\\int_0^\\infty\\frac{x^{\\alpha-1}}{1+x}dx=\\frac{\\pi}{\\sin\\pi\\alpha}$，取 $\\alpha=\\tfrac12$ 即本题。",
-        "solutionEn": "Take f(z)=z^{−1/2}/(1+z) with the branch 0<arg z<2π. The keyhole contour encloses only z=−1 (arg z=π) with residue e^{−iπ/2}=−i, so the contour integral equals 2πi(−i)=2π. Both the large and small arcs tend to 0. Upper bank gives I; the lower bank contributes +I as well (a factor e^{−iπ} combined with reversed orientation), hence 2I=2π and I=π."
-      },
-      {
-        "problem": "用 $\\log$ 技巧计算 $\\int_0^{\\infty}\\dfrac{dx}{(1+x)^{3}}$。",
-        "solution": "取 $f(z)=\\dfrac{1}{(1+z)^{3}}$，它满足「分母次数比分子高 2」的条件，实轴上无极点。按公式 $$\\int_0^\\infty f(x)\\,dx=-\\sum\\operatorname{Res}\\big[f(z)\\log z\\big],$$ 唯一极点是 $z=-1$（三阶）。由三阶极点的留数公式 $$\\operatorname{Res}_{z=-1}\\frac{\\log z}{(1+z)^{3}}=\\frac{1}{2!}\\frac{d^{2}}{dz^{2}}\\log z\\Big|_{z=-1}=\\frac{1}{2}\\left(-\\frac{1}{z^{2}}\\right)\\Big|_{z=-1}=-\\frac12,$$ 于是 $\\int_0^\\infty\\frac{dx}{(1+x)^{3}}=-\\left(-\\frac12\\right)=\\frac12$，与直接积分 $\\int_0^\\infty(1+x)^{-3}dx=\\left[-\\frac{1}{2(1+x)^{2}}\\right]_0^\\infty=\\frac12$ 一致。（注意这里 $\\log z$ 取 $0<\\arg z<2\\pi$ 的分支，故 $\\log(-1)=i\\pi$，但对二阶导数 $\\log''z=-1/z^{2}$ 而言分支常数不起作用。）",
-        "solutionEn": "For f(z)=1/(1+z)³ the hypothesis (denominator degree ≥ numerator + 2, no poles on the axis) holds. The only pole is the triple pole at z=−1, where Res[log z/(1+z)³] = (1/2)(d²/dz²)log z = −1/2 at z=−1. Hence the integral equals −(−1/2) = 1/2, matching the elementary computation."
-      }
-    ],
-    "tags": [
-      "复分析",
-      "留数",
-      "围道积分",
-      "主值",
-      "Jordan 引理"
-    ],
-    "links": [
-      "residue-real-integrals",
-      "residue-computation",
-      "residue",
-      "cauchy-integral-formula",
-      "argument-principle"
-    ]
-  }
+  "examples": [
+   {
+    "problem": "正方形与正三角形的顶点在 SC 公式中对应的指数分别是多少？若某顶点是内角为 $3\\pi/2$ 的凹顶点，指数又是多少？并说明内角趋于 $\\pi$ 时指数的变化趋势。",
+    "solution": "正方形：内角 $=\\pi/2$，故 $\\alpha_k=\\dfrac{1}{2}$，指数 $\\alpha_k-1=-\\dfrac12$；正三角形：内角 $=\\pi/3$，$\\alpha_k=\\dfrac13$，指数 $-\\dfrac23$。内角为 $3\\pi/2$ 的凹顶点：$\\alpha_k=\\dfrac32$，指数 $=+\\dfrac12$。当内角从下方趋于 $\\pi$ 时 $\\alpha_k\\to1$，指数 $\\alpha_k-1\\to0$，该因子趋于 $1$；内角恰为 $\\pi$（共线）时指数为 $0$，顶点实际上不存在，公式自动忽略它。",
+    "solutionEn": "Square: interior angle π/2 so α=1/2 and the exponent is −1/2. Equilateral triangle: α=1/3, exponent −2/3. A reflex vertex with angle 3π/2 has α=3/2 and exponent +1/2. As the interior angle approaches π from below, α→1 and the exponent α−1→0, the factor becoming 1; at exactly π the point is collinear and drops out of the formula."
+   },
+   {
+    "problem": "验证一般 $n$ 边形的指数满足 $\\sum_{k=1}^{n}(\\alpha_k-1)=-2$，并解释它为什么保证了 SC 公式中积分在无穷远处收敛。",
+    "solution": "对内部角为 $\\alpha_k\\pi$ 的 $n$ 边形，内角和为 $(n-2)\\pi$，即 $\\sum\\alpha_k\\pi=(n-2)\\pi$，故 $\\sum_{k=1}^{n}\\alpha_k=n-2$。于是 $$\\sum_{k=1}^{n}(\\alpha_k-1)=\\sum_{k=1}^{n}\\alpha_k-n=(n-2)-n=-2 .$$ 当 $|\\zeta|\\to\\infty$ 时 $\\prod_k(\\zeta-x_k)^{\\alpha_k-1}\\sim\\zeta^{\\sum(\\alpha_k-1)}=\\zeta^{-2}$，即被积函数像 $1/\\zeta^{2}$ 一样衰减，故 $\\int_0^z$ 沿到无穷远的路径收敛（在有限预顶点 $x_k$ 处，因 $\\alpha_k>0$ 使 $|\\zeta-x_k|^{\\alpha_k-1}$ 可积）。",
+    "solutionEn": "The interior angles satisfy Σα_k = n−2, hence Σ(α_k−1) = (n−2)−n = −2. Therefore the integrand decays like ζ^{−2} as |ζ|→∞, so the integral converges at infinity; near each prevertex it is integrable because α_k > 0."
+   }
+  ],
+  "tags": [
+   "复分析",
+   "共形映射",
+   "多边形",
+   "流体力学",
+   "椭圆积分"
+  ],
+  "links": [
+   "conformal-mapping",
+   "mobius-transformation",
+   "elliptic-functions",
+   "riemann-mapping-theorem",
+   "harmonic-function"
+  ]
+ },
+ {
+  "id": "residue-advanced",
+  "title": "留数技巧进阶",
+  "titleEn": "Advanced Residue Techniques",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "针对半圆围道失效的积分——幂次与多值函数的积分、需要取主值的实轴极点积分、以及对衰减条件敏感的有理函数积分——钥匙孔围道、log 技巧、Jordan 引理与小半圆引理提供了标准处理方式。",
+  "summaryEn": "For integrals beyond the plain semicircle method — power and multivalued integrands, principal values at real poles, rational integrands with slow decay — the keyhole contour, the log trick, Jordan's lemma and the small-arc lemma are the standard tools.",
+  "definition": "**第一类：幂次与多值函数的积分（钥匙孔围道）。** 沿正实轴上开缝（钥匙孔）的双层围道绕一大圈，配上 $z^{\\alpha-1}$ 或 $\\log z$ 的单值分支，可以处理 $\\int_0^\\infty$ 上带幂次的积分。原型是\n\n$$\\int_0^\\infty \\frac{x^{\\alpha-1}}{1+x}\\,dx=\\frac{\\pi}{\\sin\\pi\\alpha}\\qquad(0<\\alpha<1).$$\n\n**第二类：$\\log$ 技巧。** 取正实轴为割线、分支取 $0<\\arg z<2\\pi$，则沿上、下两岸的 $\\log z$ 相差 $2\\pi i$，于是\n\n$$\\int_0^\\infty f(x)\\,dx=-\\sum_{\\text{极点}}\\operatorname{Res}\\big[f(z)\\log z\\big],$$\n\n只要 $f$ 是有理函数、分母次数至少比分子高 $2$（保证大圆弧上 $f(z)\\log z\\to0$）且实轴上没有极点。代价是要计算含 $\\log z$ 的留数，通常出现高阶导数。\n\n**第三类：偶/奇分解。** 把全直线积分拆成偶部与奇部：\n\n$$\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\int_0^\\infty f_e(x)\\,dx,\\qquad f_e(x)=\\frac{f(x)+f(-x)}{2},$$\n\n（当奇部的积分收敛时其贡献为 $0$）。这样可以把一个 $\\int_0^\\infty$ 的问题转化为半圆围道能直接处理的 $\\int_{-\\infty}^{\\infty}$ 问题。\n\n**第四类：振荡因子的衰减（Jordan 引理）。** 当被积函数含 $e^{iaz}$（$a>0$）时，上半平面的大圆弧上 $|e^{iaz}|=e^{-a\\operatorname{Im}z}\\le1$ 且沿弧的衰减由 $\\int_0^{\\pi}e^{-aR\\sin\\theta}d\\theta\\le\\pi/(aR)$ 控制，故只要 $f$ 在上半平面一致趋于 $0$，圆弧积分就趋于 $0$。若没有振荡因子，则需要 $z f(z)\\to0$ **一致**成立（即 $f$ 比 $1/z$ 衰减更快）才能让大圆弧积分消失。\n\n**第五类：实轴上有极点（主值）。** 实轴上的单极点无法回避，只能取**主值（PV）**：用上半平面内的小半圆弧从上方绕过极点，该小弧贡献 $-i\\pi\\operatorname{Res}$，所以\n\n$$\\operatorname{PV}\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\pi i\\sum_{\\operatorname{Im}z>0}\\operatorname{Res}f+\\pi i\\sum_{\\text{实轴单极点}}\\operatorname{Res}f,$$\n\n即实轴上的单极点只贡献「半留数」。若实轴上的极点是二阶或更高，主值一般发散。\n\n**第六类：三角有理式的整周期积分。** $\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)d\\theta$ 用单位圆围道 $z=e^{i\\theta}$ 化为 $\\oint_{|z|=1}R\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}$，详见「用留数计算实积分」。",
+  "definitionEn": "**(1) Power and multivalued integrands (keyhole contour).** A double-layer contour slit along the positive real axis, combined with a single-valued branch of $z^{\\alpha-1}$ or $\\log z$, evaluates integrals such as $\\int_0^\\infty \\frac{x^{\\alpha-1}}{1+x}dx=\\dfrac{\\pi}{\\sin\\pi\\alpha}$ for $0<\\alpha<1$.\n\n**(2) The log trick.** Choosing the cut on the positive real axis and the branch $0<\\arg z<2\\pi$, the two banks differ by $2\\pi i$ in $\\log z$, giving $\\int_0^\\infty f(x)dx=-\\sum\\operatorname{Res}[f(z)\\log z]$ for rational $f$ whose denominator exceeds the numerator degree by at least 2 (so that $f(z)\\log z\\to0$ on the large arc) and with no poles on the axis.\n\n**(3) Even/odd decomposition.** $\\int_{-\\infty}^{\\infty}f\\,dx=2\\int_0^\\infty f_e\\,dx$ with $f_e(x)=\\tfrac12(f(x)+f(-x))$ — the odd part contributes 0 when its integral converges — reducing a half-line integral to a full-line one.\n\n**(4) Jordan's lemma.** For integrands with $e^{iaz}$, $a>0$, we have $|e^{iaz}|=e^{-a\\operatorname{Im}z}\\le1$ in the upper half-plane and $\\int_0^{\\pi}e^{-aR\\sin\\theta}d\\theta\\le\\pi/(aR)$, so the large arc contributes $0$ whenever $f\\to0$ uniformly there. Without an oscillating factor one needs $zf(z)\\to0$ uniformly, i.e. decay faster than $1/z$.\n\n**(5) Poles on the real axis.** Only the principal value (PV) can be defined: the small semicircle in the upper half-plane contributes $-i\\pi\\operatorname{Res}$, hence $\\operatorname{PV}\\int_{-\\infty}^{\\infty}f=2\\pi i\\sum_{\\operatorname{Im}z>0}\\operatorname{Res}f+\\pi i\\sum_{\\text{real simple poles}}\\operatorname{Res}f$ — real simple poles contribute a 'half residue'. For poles of order ≥ 2 on the axis the principal value usually diverges.\n\n**(6) Trigonometric rationals.** $\\int_0^{2\\pi}R(\\cos\\theta,\\sin\\theta)d\\theta=\\oint_{|z|=1}R\\left(\\frac{z+z^{-1}}{2},\\frac{z-z^{-1}}{2i}\\right)\\frac{dz}{iz}$; see the companion node on computing real integrals by residues.",
+  "formulas": [
+   {
+    "latex": "\\int_0^{\\infty}\\frac{x^{\\alpha-1}}{1+x}\\,dx=\\frac{\\pi}{\\sin\\pi\\alpha}\\qquad(0<\\alpha<1)",
+    "note": "钥匙孔围道 + 单值分支 $0<\\arg z<2\\pi$ 的原型结果；$\\alpha=1/2$ 给出 $\\int_0^\\infty\\frac{dx}{\\sqrt{x}\\,(1+x)}=\\pi$。",
+    "noteEn": "The prototype of the keyhole method; α=1/2 gives ∫₀^∞ dx/(√x(1+x)) = π."
+   },
+   {
+    "latex": "\\int_0^{\\infty}f(x)\\,dx=-\\sum_{\\text{极点}}\\operatorname{Res}\\big[f(z)\\log z\\big]\\qquad(0<\\arg z<2\\pi)",
+    "note": "log 技巧：$f$ 为有理函数，分母次数 $\\ge$ 分子次数 $+2$，实轴上无极点；两岸的 $\\log$ 相差 $2\\pi i$ 是全部机制所在。",
+    "noteEn": "The log trick: f rational with denominator degree ≥ numerator degree + 2 and no poles on the axis; the 2πi jump of log across the cut is the whole mechanism."
+   },
+   {
+    "latex": "\\operatorname{PV}\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\pi i\\!\\!\\sum_{\\operatorname{Im}z>0}\\!\\!\\operatorname{Res}f+\\pi i\\!\\!\\sum_{\\text{实轴单极点}}\\!\\!\\operatorname{Res}f",
+    "note": "实轴上有单极点时的主值公式：上半平面给全留数，实轴单极点只给「半留数」$\\pi i\\operatorname{Res}$。",
+    "noteEn": "Principal-value formula: full residues from the upper half-plane, half residues πi·Res from simple poles on the axis."
+   },
+   {
+    "latex": "\\left|\\int_{C_R}f(z)e^{iaz}dz\\right|\\le\\frac{\\pi}{a}\\,\\max_{z\\in C_R}|f(z)|\\ \\to0\\quad(a>0,\\ \\operatorname{Im}z\\ge0)",
+    "note": "Jordan 引理：含 $e^{iaz}$ 的积分只需 $f$ 在上半平面一致趋于 $0$；没有振荡因子时则要求 $zf(z)\\to0$ 一致成立。",
+    "noteEn": "Jordan's lemma: with e^{iaz}, a>0, only uniform decay of f in the upper half-plane is needed; without the oscillating factor one needs zf(z)→0 uniformly."
+   },
+   {
+    "latex": "\\lim_{\\varepsilon\\to0}\\int_{\\text{上半小半圆}}f(z)\\,dz=-i\\pi\\operatorname{Res}_{z=x_0}f\\qquad(x_0\\ \\text{为实轴上的单极点})",
+    "note": "小半圆引理：从上方绕过实轴单极点的代价是 $-i\\pi\\operatorname{Res}$，由此得到主值公式中的 $+\\pi i\\operatorname{Res}$。",
+    "noteEn": "Small-arc lemma: indenting above a simple pole on the axis costs −iπ·Res, which yields the +πi·Res term in the PV formula."
+   },
+   {
+    "latex": "\\int_{-\\infty}^{\\infty}f(x)\\,dx=2\\int_0^{\\infty}f_e(x)\\,dx,\\qquad f_e(x)=\\frac{f(x)+f(-x)}{2}",
+    "note": "偶/奇分解：奇部在收敛时积分为 $0$，于是 $\\int_0^\\infty$ 型问题化为半圆围道可解的全直线问题。",
+    "noteEn": "Even/odd decomposition: the odd part integrates to 0 when convergent, turning a half-line problem into a full-line one solvable by the semicircle contour."
+   }
+  ],
+  "properties": [
+   "选围道的判据：被积函数在 $\\int_0^\\infty$ 上带幂次或多值性 $\\Rightarrow$ 钥匙孔围道；纯有理且分母比分子高至少 2 次 $\\Rightarrow$ 可用 log 技巧避开幂次分支的麻烦；含 $e^{iaz}$ 且 $a>0$ $\\Rightarrow$ Jordan 引理（取上半平面，$a<0$ 则取下半平面并注意符号）。",
+   "两个必须核对的条件：大圆弧消失（$zf(z)\\to0$ 一致成立，或 Jordan 引理适用）与小圆弧消失（被积函数在奇点附近不要出现 $1/z$ 型不可积项）。少任一条，公式就失效。",
+   "实轴上极点的处理：只能取主值，单极点贡献半留数 $\\pi i\\operatorname{Res}$；若极点是二阶或更高，主值一般发散，不能套用该公式。",
+   "偶/奇分解的意义：把 $\\int_0^\\infty$（收敛条件弱）与 $\\int_{-\\infty}^\\infty$（半圆围道适用）互相转化，是处理非偶被积函数的常用技巧。",
+   "单位圆法（$\\int_0^{2\\pi}$ 三角有理式）是同一套留数思想在圆周上的版本，本例程的姊妹节点「用留数计算实积分」给出了完整推导与典型例子。"
+  ],
+  "propertiesEn": [
+   "Choosing the contour: powers or multivalued factors on (0,∞) call for a keyhole contour; purely rational integrands with denominator degree ≥ numerator degree + 2 can be handled by the log trick; an oscillating factor e^{iaz}, a>0, calls for Jordan's lemma in the upper half-plane (use the lower half-plane when a<0, minding the sign).",
+   "Two conditions to check: vanishing of the contribution on the large arc (zf(z)→0 uniformly, or Jordan's lemma) and on the small arc (no non-integrable 1/z behavior). If either fails, the formula fails.",
+   "Real-axis poles: only the principal value exists; a simple pole contributes the half residue πi·Res, while a pole of order ≥ 2 usually makes the principal value diverge.",
+   "Even/odd decomposition converts a half-line problem into a full-line one (or conversely), which is the standard trick when the integrand is not even.",
+   "The unit-circle method for ∫₀^{2π} rational functions of sin and cos is the same residue idea on a circle; the companion node on real integrals by residues gives the full derivation and worked examples."
+  ],
+  "plot": {
+   "type": "function",
+   "functions": [
+    {
+     "expr": "1/(1+x^3)",
+     "color": "#4cc9f0",
+     "label": "被积函数 1/(1+x³)"
+    }
+   ],
+   "fills": [
+    {
+     "expr": "1/(1+x^3)",
+     "from": 0,
+     "to": 6,
+     "base": 0,
+     "color": "#06d6a0",
+     "label": "阴影 ≈ 1.195（延伸到 ∞ 为 2π/(3√3) ≈ 1.209）"
+    }
+   ],
+   "xRange": [
+    0,
+    6
+   ],
+   "yRange": [
+    -0.05,
+    1.1
+   ],
+   "title": "用留数算 ∫₀^∞ dx/(1+x³)：扇形围道（0<arg z<2π/3）内只有极点 $e^{i\\pi/3}$，另两个极点都在围道外，无需主值；只有改算 ∫_{−∞}^{∞} 时才需 PV 处理实轴上的 $z=-1$"
+  },
+  "examples": [
+   {
+    "problem": "用钥匙孔围道证明 $\\int_0^{\\infty}\\dfrac{x^{-1/2}}{1+x}\\,dx=\\pi$。",
+    "solution": "取 $f(z)=\\dfrac{z^{-1/2}}{1+z}$，分支取 $0<\\arg z<2\\pi$（割线为正实轴）。围道由半径 $R$ 的大圆、正实轴上沿（$\\arg z\\to0$）、绕原点半径 $\\varepsilon$ 的小圆、正实轴下沿（$\\arg z\\to2\\pi$）组成。围道内只有一个极点 $z=-1$（此处 $\\arg z=\\pi$），留数为 $\\operatorname{Res}f=e^{-i\\pi/2}=-i$，故 $\\oint f\\,dz=2\\pi i(-i)=2\\pi$。大圆上 $|f|\\sim R^{-1/2}$、弧长 $\\sim R$，小圆上 $|f|\\sim\\varepsilon^{-1/2}$、弧长 $\\sim\\varepsilon$，两者都趋于 $0$。上沿给出 $\\int_0^\\infty x^{-1/2}/(1+x)dx=I$；下沿 $\\arg z=2\\pi$ 使 $z^{-1/2}=e^{-i\\pi}x^{-1/2}$，而沿下沿是反向积分，贡献同样为 $+I$。于是 $2I=2\\pi$，得 $I=\\pi$。一般地可得 $\\int_0^\\infty\\frac{x^{\\alpha-1}}{1+x}dx=\\frac{\\pi}{\\sin\\pi\\alpha}$，取 $\\alpha=\\tfrac12$ 即本题。",
+    "solutionEn": "Take f(z)=z^{−1/2}/(1+z) with the branch 0<arg z<2π. The keyhole contour encloses only z=−1 (arg z=π) with residue e^{−iπ/2}=−i, so the contour integral equals 2πi(−i)=2π. Both the large and small arcs tend to 0. Upper bank gives I; the lower bank contributes +I as well (a factor e^{−iπ} combined with reversed orientation), hence 2I=2π and I=π."
+   },
+   {
+    "problem": "用 $\\log$ 技巧计算 $\\int_0^{\\infty}\\dfrac{dx}{(1+x)^{3}}$。",
+    "solution": "取 $f(z)=\\dfrac{1}{(1+z)^{3}}$，它满足「分母次数比分子高 2」的条件，实轴上无极点。按公式 $$\\int_0^\\infty f(x)\\,dx=-\\sum\\operatorname{Res}\\big[f(z)\\log z\\big],$$ 唯一极点是 $z=-1$（三阶）。由三阶极点的留数公式 $$\\operatorname{Res}_{z=-1}\\frac{\\log z}{(1+z)^{3}}=\\frac{1}{2!}\\frac{d^{2}}{dz^{2}}\\log z\\Big|_{z=-1}=\\frac{1}{2}\\left(-\\frac{1}{z^{2}}\\right)\\Big|_{z=-1}=-\\frac12,$$ 于是 $\\int_0^\\infty\\frac{dx}{(1+x)^{3}}=-\\left(-\\frac12\\right)=\\frac12$，与直接积分 $\\int_0^\\infty(1+x)^{-3}dx=\\left[-\\frac{1}{2(1+x)^{2}}\\right]_0^\\infty=\\frac12$ 一致。（注意这里 $\\log z$ 取 $0<\\arg z<2\\pi$ 的分支，故 $\\log(-1)=i\\pi$，但对二阶导数 $\\log''z=-1/z^{2}$ 而言分支常数不起作用。）",
+    "solutionEn": "For f(z)=1/(1+z)³ the hypothesis (denominator degree ≥ numerator + 2, no poles on the axis) holds. The only pole is the triple pole at z=−1, where Res[log z/(1+z)³] = (1/2)(d²/dz²)log z = −1/2 at z=−1. Hence the integral equals −(−1/2) = 1/2, matching the elementary computation."
+   }
+  ],
+  "tags": [
+   "复分析",
+   "留数",
+   "围道积分",
+   "主值",
+   "Jordan 引理"
+  ],
+  "links": [
+   "residue-real-integrals",
+   "residue-computation",
+   "residue",
+   "cauchy-integral-formula",
+   "argument-principle"
+  ]
+ }
 ]

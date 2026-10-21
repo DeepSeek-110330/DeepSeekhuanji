@@ -1,662 +1,662 @@
 [
-  {
-    "id": "monodromy-theorem",
-    "title": "单值性定理",
-    "titleEn": "The Monodromy Theorem",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "在单连通区域内，若一个解析函数芽能沿区域内每一条曲线延拓，则延拓结果只依赖终点，从而在区域上确定一个单值解析函数。",
-    "summaryEn": "In a simply connected domain, if an analytic germ can be continued along every curve, the result depends only on the endpoint and therefore defines a single-valued analytic function.",
-    "definition": "「解析延拓」是把局部给出的解析函数（在某点附近的一个幂级数，称为一个**函数芽**）沿着曲线一点一点传播出去。问题在于：传播的结果通常依赖走哪条路。例如在 $\\mathbb{C}\\setminus\\{0\\}$ 上取 $\\sqrt z$ 在 $z=1$ 附近的那个芽，沿单位圆逆时针走一圈回到 $1$，得到的是 $-\\sqrt z$ 的芽；$\\log z$ 沿同样一圈回来则变成 $\\log z+2\\pi i$。这样的函数是「多值」的，想在区域上谈「函数 $f$」就必须先解决路径依赖。\n\n**单值性定理（Monodromy Theorem）**：设 $D$ 是 $\\mathbb{C}$ 中的**单连通**区域，$f_0$ 是 $D$ 内一点 $z_0$ 附近的一个解析函数芽。若 $f_0$ 能沿 $D$ 内**每一条**从 $z_0$ 出发的曲线作解析延拓，则对 $D$ 内任意点 $z_1$，延拓到 $z_1$ 处得到的函数芽只依赖 $z_1$ 而**不依赖所选曲线**；于是 $D$ 上存在唯一的解析函数 $F$，使 $F$ 在 $z_0$ 附近与 $f_0$ 一致，即 $F$ 就是 $f_0$ 的解析延拓。一句话：**单连通区域上的解析函数芽，只要能沿一切曲线延拓，就自动是单值的**。\n\n「单连通」是本质条件，不能省。所谓单连通，指 $D$ 内任意闭曲线都能在 $D$ 内连续收缩成一点（等价地，$D$ 在扩充复平面中的补集连通，即 $D$ 没有洞）。圆环 $1<|z|<2$、穿孔平面 $\\mathbb{C}\\setminus\\{0\\}$ 都不是单连通的：在 $\\mathbb{C}\\setminus\\{0\\}$ 上，$\\sqrt z$ 沿绕原点一圈的闭路延拓后变号，$\\log z$ 延拓后增加 $2\\pi i$——这两个芽处处可以延拓，却不给出单值函数。要把 $\\sqrt z$、$\\log z$ 定义成单值函数，必须挖掉一条射线（例如 $\\mathbb{C}\\setminus(-\\infty,0]$），把区域改成单连通的。因此多值函数只是「单值化」之前的说法：在 $D$ 的万有覆叠空间（或某个覆叠曲面上），它总是单值的。\n\n定理背后的机制是**同伦不变性**：若两条以 $z_0$ 为起点、以 $z_1$ 为终点的曲线能在 $D$ 内保持端点不动地连续形变（同伦）到彼此，则沿它们延拓所得到 $z_1$ 处的芽相同。而 $D$ 单连通恰好意味着「$D$ 内任意两条同端点的曲线都同伦」，于是延拓结果彻底由终点决定。用覆叠空间的语言说：延拓结果只取决于路径的**同伦类**，所有路径依赖的信息由基本群 $\\pi_1(D,z_0)$ 通过**单值表示**（monodromy representation）刻画；单连通即 $\\pi_1(D,z_0)$ 平凡，表示平凡，多值性消失。这正是覆叠空间思想在复分析中的体现，也是黎曼面、解析延拓与单值化理论的出发点。",
-    "definitionEn": "Analytic continuation propagates a locally given analytic function (a power series near a point, called a **germ**) along curves. The difficulty is that the result usually depends on which route is taken. On $\\mathbb{C}\\setminus\\{0\\}$, for instance, the germ of $\\sqrt z$ near $z=1$ carried once counterclockwise around the unit circle returns as the germ of $-\\sqrt z$, while $\\log z$ returns as $\\log z+2\\pi i$. Such functions are 'multi-valued', and speaking of 'a function $f$' on the region requires resolving this path dependence.\n\n**The monodromy theorem**: let $D$ be a **simply connected** domain in $\\mathbb{C}$ and let $f_0$ be an analytic germ near some point $z_0\\in D$. If $f_0$ can be continued analytically along **every** curve in $D$ starting at $z_0$, then for any $z_1\\in D$ the germ obtained at $z_1$ depends only on $z_1$ and **not on the chosen curve**; consequently there is a unique analytic function $F$ on $D$ that agrees with $f_0$ near $z_0$, i.e. $F$ is the analytic continuation of $f_0$. In one sentence: **a germ on a simply connected domain that can be continued along every curve is automatically single-valued**.\n\nSimple connectedness is essential. A domain is simply connected when every closed curve in it can be contracted to a point inside it (equivalently, its complement in the Riemann sphere is connected, i.e. it has no holes). The annulus $1<|z|<2$ and the punctured plane $\\mathbb{C}\\setminus\\{0\\}$ are not simply connected: on $\\mathbb{C}\\setminus\\{0\\}$ the germ of $\\sqrt z$ changes sign when continued around a loop encircling the origin, and $\\log z$ gains $2\\pi i$. Both germs can be continued everywhere, yet they yield no single-valued function. To define $\\sqrt z$ or $\\log z$ as single-valued functions one must remove a ray as a branch cut (e.g. use $\\mathbb{C}\\setminus(-\\infty,0]$) and thereby make the region simply connected. Multi-valued functions are thus only a pre-'uniformisation' description: on the universal covering space of $D$ (or on a suitable covering surface) they are single-valued.\n\nThe mechanism behind the theorem is **homotopy invariance**: if two curves from $z_0$ to $z_1$ can be deformed into one another inside $D$ while their endpoints stay fixed, the germs obtained at $z_1$ along them coincide. Simple connectedness of $D$ means exactly that any two curves with the same endpoints are homotopic, so the continuation depends only on the endpoint. In covering-space language: the result of continuation depends only on the **homotopy class** of the path, and all path dependence is encoded by the fundamental group $\\pi_1(D,z_0)$ through the **monodromy representation**; when $D$ is simply connected the group is trivial, the representation is trivial and multi-valuedness disappears. This is the covering-space idea inside complex analysis, and it is the starting point of Riemann surfaces, analytic continuation and uniformisation.",
-    "formulas": [
-      {
-        "latex": "D\\ \\text{单连通}\\iff \\pi_1(D,z_0)=\\{1\\}\\iff \\text{任一闭曲线可在 }D\\text{ 内缩成一点}",
-        "note": "单连通的三种等价说法，是单值性定理中不可省略的条件。",
-        "noteEn": "Three equivalent descriptions of simple connectedness; this hypothesis cannot be dropped."
-      },
-      {
-        "latex": "\\gamma\\simeq\\delta\\ (\\text{端点固定})\\ \\Longrightarrow\\ \\text{沿 }\\gamma\\text{ 与沿 }\\delta\\text{ 延拓得到同一个芽}",
-        "note": "同伦不变性：比单值性定理更基本。它只要求两条曲线同伦；单连通保证同端点的曲线全部同伦。",
-        "noteEn": "Homotopy invariance, more basic than the theorem itself: only homotopic paths are required; simple connectedness guarantees that all paths with the same endpoints are homotopic."
-      },
-      {
-        "latex": "\\sqrt{e^{i\\theta}}=e^{i\\theta/2}:\\qquad \\theta=0\\mapsto 1,\\qquad \\theta=2\\pi\\mapsto -1",
-        "note": "$\\sqrt z$ 沿绕原点一圈的闭路延拓后变号；非单连通区域上延拓确实依赖路径。",
-        "noteEn": "Continued around a loop enclosing the origin, $\\sqrt z$ changes sign: on a non-simply-connected domain continuation genuinely depends on the path."
-      },
-      {
-        "latex": "\\log z\\ \\text{沿 }|z|=1\\ \\text{逆时针一圈}:\\quad \\log z\\mapsto \\log z+2\\pi i",
-        "note": "对数的多值性由同一机制产生；挖去一条射线使区域单连通后，$\\operatorname{Log}z=\\ln|z|+i\\arg z$（$\\arg z\\in(-\\pi,\\pi)$）才是单值解析的。",
-        "noteEn": "The multi-valuedness of the logarithm has the same origin; after deleting a ray to make the region simply connected, $\\operatorname{Log}z=\\ln|z|+i\\arg z$ with $\\arg z\\in(-\\pi,\\pi)$ is single-valued and analytic."
-      },
-      {
-        "latex": "F^2=z\\ \\text{在}\\ \\mathbb{C}\\setminus\\{0\\}\\ \\text{上}\\ \\Longrightarrow\\ \\oint_{|z|=1}\\frac{F'(z)}{F(z)}\\,dz=\\frac{1}{2}\\oint_{|z|=1}\\frac{dz}{z}=\\pi i",
-        "note": "由 $2FF'=1$ 得 $\\frac{F'}{F}=\\frac{1}{2z}$。但辐角原理要求该积分是 $2\\pi i$ 的整数倍，而 $\\pi i$ 不是——故这样的单值 $F$ 不存在。",
-        "noteEn": "From $2FF'=1$ we get $F'/F=1/(2z)$; the argument principle, however, forces the integral to be an integer multiple of $2\\pi i$, and $\\pi i$ is not — hence no single-valued $F$ exists."
-      }
-    ],
-    "properties": [
-      "定理内容就是「单连通 + 处处可延拓 $\\Rightarrow$ 单值」两个条件缺一不可：$\\sqrt z$ 在 $\\mathbb{C}\\setminus\\{0\\}$ 上说明区域非单连通会失败，而沿某条曲线延拓被奇点挡住时定理也不适用。",
-      "定理给出的 $F$ 唯一，且它与 $f_0$ 有相同的局部泰勒系数；沿路径传播的代数恒等式（如 $F^2=z$、$e^{F}=z$）保持不变。",
-      "同伦不变性比定理本身更基本：只要求两条曲线同伦。单连通只是「同端点的曲线全都同伦」这一情形的保证。",
-      "覆叠空间视角：多值延拓的结果是 $D$ 的万有覆叠 $\\pi:\\tilde D\\to D$ 上的单值函数，$\\pi_1(D,z_0)$ 的单值表示刻画绕不同闭路后的变化；单值性定理即「$\\pi_1$ 平凡时万有覆叠就是 $D$ 自身」。",
-      "它是构造性工具：只要局部造出一个芽并验证它在区域内处处可延拓，就能断言得到区域上的单值解析函数（例如在单连通区域上定义 $\\log$、$\\sqrt z$ 与对各解析函数取对数原函数）。"
-    ],
-    "propertiesEn": [
-      "The theorem is exactly 'simply connected plus continuable along every curve implies single-valued'; both hypotheses are needed, as $\\sqrt z$ on $\\mathbb{C}\\setminus\\{0\\}$ (not simply connected) and a continuation blocked by a singularity show.",
-      "The resulting $F$ is unique and has the same local Taylor coefficients as $f_0$; algebraic identities such as $F^2=z$ or $e^{F}=z$ propagate along the continuation.",
-      "Homotopy invariance is more basic than the theorem itself and only requires the two curves to be homotopic; simple connectedness is the special case in which all curves with the same endpoints are homotopic.",
-      "Covering-space view: a multi-valued continuation is a single-valued function on the universal cover $\\pi:\\tilde D\\to D$, the dependence on closed loops being encoded by the monodromy representation of $\\pi_1(D,z_0)$; the theorem says that when $\\pi_1$ is trivial the universal cover is $D$ itself.",
-      "It is a constructive tool: producing a local germ and checking continuability along every curve yields a single-valued analytic function on the whole region (as when defining $\\log$, $\\sqrt z$, or a logarithmic primitive of an analytic function)."
-    ],
-    "examples": [
-      {
-        "problem": "证明在 $\\mathbb{C}\\setminus\\{0\\}$ 上不存在解析函数 $F$ 满足 $F(z)^2=z$。",
-        "solution": "反证，设 $F$ 在 $\\mathbb{C}\\setminus\\{0\\}$ 上解析且 $F^2=z$。由 $2FF'=1$ 得 $\\frac{F'(z)}{F(z)}=\\frac{1}{2F(z)^2}=\\frac{1}{2z}$，沿单位圆积分\n$$\\oint_{|z|=1}\\frac{F'(z)}{F(z)}\\,dz=\\frac{1}{2}\\oint_{|z|=1}\\frac{dz}{z}=\\frac{1}{2}\\cdot 2\\pi i=\\pi i.$$\n另一方面 $F$ 在 $|z|\\le 1$ 上无零点（$F^2=z\\ne 0$），由辐角原理该积分等于 $2\\pi i$ 乘以 $F$ 在单位圆内的零点个数，必是 $2\\pi i$ 的整数倍，而 $\\pi i$ 不是整数倍，矛盾。故这样的单值 $F$ 不存在。几何上看，绕原点一圈后 $F$ 必然变成 $-F$，这正是「单连通」不可省的含义。"
-      },
-      {
-        "problem": "说明为什么 $\\log z$ 不能在 $\\mathbb{C}\\setminus\\{0\\}$ 上单值定义，却在 $D=\\mathbb{C}\\setminus(-\\infty,0]$ 上可以。",
-        "solution": "若存在单值解析的 $L$ 使 $e^{L(z)}=z$，则 $L'(z)=\\frac{1}{z}$。单值函数的全微分沿闭曲线积分必为零：\n$$\\oint_{|z|=1}dL=\\oint_{|z|=1}\\frac{dz}{z}=0,$$\n但直接计算 $\\oint_{|z|=1}\\frac{dz}{z}=2\\pi i\\ne 0$，矛盾。所以 $\\mathbb{C}\\setminus\\{0\\}$ 上不存在单值的对数。\n\n而在 $D=\\mathbb{C}\\setminus(-\\infty,0]$（挖掉负实轴这条割线）上，$D$ 是单连通区域（不含原点也没有洞，关于正实轴上的点星形，但**不是**凸区域），$\\operatorname{Log}z=\\ln|z|+i\\arg z$（$\\arg z\\in(-\\pi,\\pi)$）解析且单值，它就是 $z=1$ 附近那个对数芽沿 $D$ 内曲线的延拓。可见把区域改成单连通是获得单值函数的标准办法。"
-      }
-    ],
-    "tags": [
-      "解析延拓",
-      "单连通",
-      "同伦",
-      "覆叠空间",
-      "多值函数"
-    ],
-    "links": [
-      "analytic-continuation",
-      "covering-space",
-      "fundamental-group",
-      "homotopy",
-      "riemann-surfaces",
-      "analytic-function"
-    ]
-  },
-  {
-    "id": "entire-functions",
-    "title": "整函数",
-    "titleEn": "Entire Functions",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "在整个复平面 $\\mathbb{C}$ 上处处解析的函数，等价于一个收敛半径为无穷的幂级数；按最大模的增长阶 $\\rho$ 可分类，多项式阶为 0，$e^z$、$\\sin z$ 阶为 1。",
-    "summaryEn": "A function analytic on the whole complex plane, equivalently a power series with infinite radius of convergence; classified by the order of growth $\\rho$ of its maximum modulus, with polynomials of order 0 and $e^z$, $\\sin z$ of order 1.",
-    "definition": "若复变函数 $f$ 在整个复平面 $\\mathbb{C}$ 上处处可导（处处解析、全纯），就称 $f$ 为**整函数**。整函数在有限点处没有任何奇点。由泰勒定理，$f$ 在 $|z|<R$ 内解析时 $R$ 可取任意大，所以整函数恰好等价于一个**处处收敛的幂级数** $f(z)=\\sum_{n\\ge 0}a_nz^n$（收敛半径 $R=+\\infty$）。多项式、$e^z$、$\\sin z$、$\\cos z$ 都是整函数；$\\frac{1}{z}$（$z=0$ 处不解析）、$\\log z$、$\\tan z$（在 $\\frac{\\pi}{2}+k\\pi$ 处有极点）都不是。\n\n整函数的和、差、积、复合仍是整函数，其唯一性极强：两个整函数只要在一个有聚点的集合上相等就恒等。**有界整函数必为常数**（刘维尔定理，见相关知识点），等价地，非常数整函数的值域无界。由此立刻得到**代数基本定理的复分析证明**：若非常数多项式 $P$ 无处为零，则 $\\frac1P$ 是整函数，又由 $|P(z)|\\to\\infty\\ (|z|\\to\\infty)$ 知 $\\frac1P$ 当 $|z|$ 很大时很小、在闭圆盘上又有界，故有界，由刘维尔定理它是常数，矛盾——所以 $P$ 必有零点。零点同样是整函数的基本信息：解析函数的零点是孤立的，所以除非 $f\\equiv 0$，零点集在 $\\mathbb{C}$ 中**无聚点**；又因 $\\mathbb{C}$ 是可数个紧集之并、每个紧集内零点至多有限，零点全体**至多可数**。\n\n刻画整函数增长最有力的尺子是**最大模** $M(r)=\\max_{|z|=r}|f(z)|$（由最大模原理它也是 $|z|\\le r$ 上的最大模，$M(r)$ 单调不减）。当 $M(r)$ 增长不快于 $r$ 的多项式量级时 $f$ 是多项式；超过这个量级就要用一个数——**增长阶（order）**\n$$\\rho=\\limsup_{r\\to\\infty}\\frac{\\log\\log M(r)}{\\log r}$$\n来度量，$\\rho<+\\infty$ 称有限阶，$\\rho=+\\infty$ 称无穷阶。经典结论：**非常数多项式的阶为 $\\rho=0$**（$M(r)\\sim|a_n|r^n$，故 $\\log\\log M(r)\\sim\\log\\log r$）；**$e^z$ 的阶为 $1$**（$M(r)=e^r$，$\\log\\log M(r)=\\log r$）；**$\\sin z$、$\\cos z$ 的阶都是 $1$**（$|\\sin z|\\le e^{|z|}$，而在虚轴上 $|\\sin(iy)|=\\sinh y$，上下夹逼即得）；$e^{z^2}$ 的阶为 $2$（$M(r)=e^{r^2}$）；$e^{e^z}$ 的阶为 $+\\infty$（$M(r)=e^{e^r}$，$\\log\\log M(r)=r$）。\n\n按阶分类要小心两点。其一，阶并非只能是整数：用 Mittag-Leffler 型级数可以造出任意正实数阶的整函数。其二，**阶为 $0$ 的整函数不一定是多项式**：以 $a_n=2^{2^n}$ 为零点的规范乘积 $\\prod_{n\\ge1}\\left(1-\\frac{z}{a_n}\\right)$ 收敛（$\\sum 1/|a_n|<\\infty$），零点的收敛指数为 $\\lambda=\\limsup\\frac{\\log n}{\\log a_n}=0$，故它是阶为 $0$ 的超越整函数。由 Hadamard 分解定理，阶 $\\rho<+\\infty$ 时 $f(z)=z^me^{g(z)}\\prod E_{\\lfloor\\rho\\rfloor}\\!\\left(\\frac{z}{a_k}\\right)$，其中 $g$ 是次数 $\\le\\rho$ 的多项式；特别地，阶 $<1$ 的**超越**（非多项式）整函数必有无穷多零点（否则 $g$ 只能是常数，$f$ 成为多项式，与「超越（非多项式）」矛盾）。阶为 $1$ 的整函数中，满足 $|f(z)|\\le Ce^{A|z|}$ 者称为指数型函数，是 Laplace 变换与 Paley–Wiener 理论的主角。",
-    "definitionEn": "A complex function $f$ that is differentiable (analytic, holomorphic) at every point of the whole complex plane $\\mathbb{C}$ is called an **entire function**. An entire function has no singularities at finite points. Since an analytic function on $|z|<R$ may be expanded in a Taylor series for arbitrarily large $R$, entire functions are exactly the **everywhere convergent power series** $f(z)=\\sum_{n\\ge0}a_nz^n$, i.e. those with radius of convergence $R=+\\infty$. Polynomials, $e^z$, $\\sin z$ and $\\cos z$ are entire; $1/z$ (not analytic at $0$), $\\log z$ and $\\tan z$ (poles at $\\frac\\pi2+k\\pi$) are not.\n\nSums, differences, products and compositions of entire functions are entire, and uniqueness is very strong: two entire functions that agree on a set with an accumulation point are identical. A **bounded entire function is constant** (Liouville's theorem, see the related node); equivalently, the range of a non-constant entire function is unbounded. This yields the **complex-analytic proof of the fundamental theorem of algebra**: if the non-constant polynomial $P$ had no zero, then $1/P$ would be entire, small for large $|z|$ and bounded on a closed disk, hence bounded, hence constant by Liouville's theorem — a contradiction, so $P$ has a zero. Zeros carry the basic structural information: zeros of an analytic function are isolated, so unless $f\\equiv0$ the zero set has **no accumulation point** in $\\mathbb{C}$; and since $\\mathbb{C}$ is a countable union of compact sets, each containing finitely many zeros, the zero set is **at most countable**.\n\nThe most effective measure of growth is the **maximum modulus** $M(r)=\\max_{|z|=r}|f(z)|$ (by the maximum modulus principle it is also the maximum on $|z|\\le r$, and $M(r)$ is non-decreasing). If $M(r)$ grows no faster than a polynomial in $r$ the function is a polynomial; beyond that one uses a single number, the **order**\n$$\\rho=\\limsup_{r\\to\\infty}\\frac{\\log\\log M(r)}{\\log r},$$\nwith $\\rho<+\\infty$ meaning finite order and $\\rho=+\\infty$ infinite order. Classical values: **a non-constant polynomial has order $\\rho=0$** (for $M(r)\\sim|a_n|r^n$ one gets $\\log\\log M(r)\\sim\\log\\log r$); **$e^z$ has order $1$** ($M(r)=e^r$, $\\log\\log M(r)=\\log r$); **$\\sin z$ and $\\cos z$ both have order $1$** (from $|\\sin z|\\le e^{|z|}$ and $|\\sin(iy)|=\\sinh y$); $e^{z^2}$ has order $2$ ($M(r)=e^{r^2}$); $e^{e^z}$ has order $+\\infty$ ($M(r)=e^{e^r}$, so $\\log\\log M(r)=r$).\n\nTwo cautions about this classification. First, the order need not be an integer: Mittag-Leffler type series realise every positive real order. Second, **an entire function of order $0$ need not be a polynomial**: the canonical product $\\prod_{n\\ge1}(1-z/a_n)$ with $a_n=2^{2^n}$ converges (since $\\sum1/|a_n|<\\infty$) and the exponent of convergence of its zeros is $\\lambda=\\limsup\\frac{\\log n}{\\log a_n}=0$, so it is a transcendental entire function of order $0$. By Hadamard's factorisation theorem, for finite order $\\rho$ one has $f(z)=z^me^{g(z)}\\prod E_{\\lfloor\\rho\\rfloor}(z/a_k)$ with $g$ a polynomial of degree $\\le\\rho$; in particular a **transcendental** (non-polynomial) entire function of order $<1$ must have infinitely many zeros (otherwise $g$ would be constant and $f$ a polynomial, contradicting transcendence). Entire functions of order $1$ with $|f(z)|\\le Ce^{A|z|}$ are called exponential type and are the protagonists of the Laplace transform and the Paley–Wiener theory.",
-    "formulas": [
-      {
-        "latex": "f\\ \\text{整}\\iff f(z)=\\sum_{n=0}^{\\infty}a_nz^n,\\qquad \\limsup_{n\\to\\infty}|a_n|^{1/n}=0",
-        "note": "整函数等价于收敛半径 $R=+\\infty$ 的幂级数；这是判断整函数最方便的标准。",
-        "noteEn": "Entire functions are exactly the power series with radius of convergence $R=+\\infty$; this is the most convenient criterion."
-      },
-      {
-        "latex": "M(r)=\\max_{|z|=r}|f(z)|,\\qquad \\rho=\\limsup_{r\\to\\infty}\\frac{\\log\\log M(r)}{\\log r}",
-        "note": "增长阶的定义：$M(r)$ 是最大模（单调不减），$\\rho$ 度量 $M(r)$ 相对 $r$ 的增长速度。",
-        "noteEn": "Definition of the order: $M(r)$ is the maximum modulus (non-decreasing) and $\\rho$ measures how fast $M(r)$ grows relative to $r$."
-      },
-      {
-        "latex": "\\text{多项式（次数 }n\\text{）}:\\ \\rho=0;\\qquad e^{z}:\\ M(r)=e^{r},\\ \\rho=1;\\qquad \\sin z,\\cos z:\\ \\rho=1",
-        "note": "最重要的一组经典值：多项式阶为 $0$，$e^z$、$\\sin z$、$\\cos z$ 阶为 $1$。",
-        "noteEn": "The key classical values: polynomials have order $0$, while $e^z$, $\\sin z$ and $\\cos z$ have order $1$."
-      },
-      {
-        "latex": "e^{z^2}:\\ M(r)=e^{r^2},\\ \\rho=2;\\qquad e^{e^z}:\\ M(r)=e^{e^r},\\ \\rho=+\\infty",
-        "note": "阶可以是任意正实数，也可以是 $+\\infty$；$e^{e^z}$ 是无穷阶的标准例子。",
-        "noteEn": "The order can be any positive real number, or $+\\infty$; $e^{e^z}$ is the standard example of infinite order."
-      },
-      {
-        "latex": "f\\ \\text{有界整}\\ \\Longrightarrow\\ f\\equiv\\text{常数};\\qquad \\left(\\forall z,\\ |P(z)|>0\\ \\Rightarrow\\ 1/P\\ \\text{有界整}\\ \\Rightarrow\\ \\text{矛盾}\\right)",
-        "note": "刘维尔定理及其推论（代数基本定理的复分析证明）：无零点多项式 $P$ 会使命题矛盾。",
-        "noteEn": "Liouville's theorem and its corollary, the complex-analytic proof of the fundamental theorem of algebra: a zero-free polynomial $P$ leads to a contradiction."
-      },
-      {
-        "latex": "f(z)=z^m e^{g(z)}\\prod_{k=1}^{\\infty}E_{\\lfloor\\rho\\rfloor}\\!\\left(\\frac{z}{a_k}\\right),\\qquad \\deg g\\le\\rho\\quad(\\rho<+\\infty)",
-        "note": "Hadamard 分解：有限阶时初等因子的下标固定为 $\\lfloor\\rho\\rfloor$，指数因子 $g$ 是低次多项式；零点收敛指数 $\\lambda\\le\\rho$。",
-        "noteEn": "Hadamard factorisation: for finite order the elementary factors have the fixed index $\\lfloor\\rho\\rfloor$ and $g$ is a polynomial of low degree; the exponent of convergence of zeros satisfies $\\lambda\\le\\rho$."
-      }
-    ],
-    "properties": [
-      "幂级数刻画：整函数 $\\iff$ 处处收敛的幂级数 $\\iff$ 在扩充复平面上只有 $z=\\infty$ 可能出问题；$f$ 是多项式 $\\iff$ 在 $\\infty$ 处解析或只有极点，$f$ 是超越整函数 $\\iff$ 在 $\\infty$ 处有本性奇点。",
-      "刘维尔定理的直接推论：有界整函数为常数；非常数整函数无界；代数基本定理（任何次数 $\\ge1$ 的复系数多项式都有零点）。",
-      "零点结构：非零整函数的零点都是孤立的，零点集无聚点且至多可数；有限阶 $\\rho$ 时零点的收敛指数 $\\lambda\\le\\rho$（Jensen 公式 / Hadamard 定理）。",
-      "增长阶的经典值：多项式 $\\rho=0$；$e^z,\\sin z,\\cos z$ 为 $1$；$e^{z^2}$ 为 $2$；$e^{e^z}$ 为 $+\\infty$。阶可以是任意正实数；阶为 $0$ 的函数不一定是多项式（如以 $2^{2^n}$ 为零点的乘积），但阶 $<1$ 的**超越**（非多项式）整函数必有无穷多零点。",
-      "封闭性与唯一性：整函数全体对加减乘与复合封闭，构成 $\\mathbb{C}$ 上的整环（含全部多项式）；两个整函数只要在有聚点的集合上相等就恒等。"
-    ],
-    "propertiesEn": [
-      "Power-series characterisation: entire $\\iff$ everywhere convergent power series $\\iff$ only $z=\\infty$ can be a problem on the Riemann sphere; $f$ is a polynomial iff $\\infty$ is at most a pole, and transcendental iff $\\infty$ is an essential singularity.",
-      "Immediate corollaries of Liouville's theorem: bounded entire functions are constant, non-constant entire functions are unbounded, and every polynomial of degree $\\ge1$ with complex coefficients has a zero (fundamental theorem of algebra).",
-      "Zero structure: zeros of a non-zero entire function are isolated, the zero set has no accumulation point and is at most countable; for finite order $\\rho$ the exponent of convergence of the zeros satisfies $\\lambda\\le\\rho$ (Jensen's formula / Hadamard).",
-      "Classical orders: $\\rho=0$ for polynomials, $1$ for $e^z,\\sin z,\\cos z$, $2$ for $e^{z^2}$ and $+\\infty$ for $e^{e^z}$. Any positive real order occurs; order $0$ does not force a polynomial (e.g. the product with zeros $2^{2^n}$), but a **transcendental** (non-polynomial) entire function of order $<1$ must have infinitely many zeros.",
-      "Closure and uniqueness: entire functions form an integral domain over $\\mathbb{C}$ (containing all polynomials) closed under sums, products and composition; two entire functions agreeing on a set with an accumulation point are identical."
-    ],
-    "examples": [
-      {
-        "problem": "求 $f(z)=z^2e^{3z}$ 与 $g(z)=e^{e^z}$ 的增长阶。",
-        "solution": "$f$：$M_f(r)=r^2e^{3r}$，于是 $\\log M_f(r)=2\\log r+3r$，$\\log\\log M_f(r)=\\log(2\\log r+3r)\\sim\\log(3r)\\ (r\\to\\infty)$，故\n$$\\rho_f=\\lim_{r\\to\\infty}\\frac{\\log(2\\log r+3r)}{\\log r}=1.$$\n（含多项式因子与 $e^{3z}$ 型因子不改变阶。）\n\n$g$：由 $|e^{e^z}|=e^{\\operatorname{Re}e^z}$ 在 $z=r$ 处最大得 $M_g(r)=e^{e^r}$，故 $\\log M_g(r)=e^r$，$\\log\\log M_g(r)=r$，于是\n$$\\rho_g=\\lim_{r\\to\\infty}\\frac{r}{\\log r}=+\\infty.$$\n即 $e^z$ 的阶为 $1$，而 $e^{e^z}$ 是无穷阶整函数。"
-      },
-      {
-        "problem": "用刘维尔定理证明代数基本定理：任何次数 $n\\ge1$ 的复系数多项式 $P(z)=a_nz^n+\\cdots+a_0\\ (a_n\\ne0)$ 都有零点。",
-        "solution": "反证，设 $P$ 无处为零，则 $f=\\frac{1}{P}$ 在 $\\mathbb{C}$ 上处处解析，是整函数。\n\n由三角不等式\n$$|P(z)|\\ge |a_n||z|^n-\\sum_{k=0}^{n-1}|a_k||z|^k\\longrightarrow+\\infty\\qquad(|z|\\to\\infty),$$\n存在 $R>0$ 使 $|z|\\ge R$ 时 $|P(z)|\\ge 1$，于是 $|z|\\ge R$ 时 $|f(z)|\\le1$。在紧集 $|z|\\le R$ 上 $|f|$ 连续，故有最大值 $M$。于是 $f$ 在 $\\mathbb{C}$ 上有界（上界 $\\max\\{1,M\\}$），由刘维尔定理 $f$ 必为常数，从而 $P$ 为常数，与 $n\\ge1$ 矛盾。故 $P$ 至少有一个零点。\n\n进一步，反复提取零点因子可把 $P$ 分解为一次因式的乘积 $P(z)=a_n\\prod_{k=1}^{n}(z-z_k)$：设 $z_1$ 是零点，则 $P(z)=(z-z_1)Q(z)$，$Q$ 仍为多项式且次数降一，归纳即得。这说明「整函数无零点 $\\Rightarrow$ 常数」这一刘维尔定理的形式，正是代数基本定理的核心。"
-      }
-    ],
-    "tags": [
-      "整函数",
-      "增长阶",
-      "最大模",
-      "刘维尔定理",
-      "代数基本定理"
-    ],
-    "links": [
-      "liouville-theorem",
-      "complex-taylor-series",
-      "maximum-modulus-principle",
-      "weierstrass-factorization",
-      "picard-theorems",
-      "zeta-function"
-    ]
-  },
-  {
-    "id": "weierstrass-factorization",
-    "title": "魏尔斯特拉斯分解定理",
-    "titleEn": "The Weierstrass Factorization Theorem",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "以任给的无聚点零点列（配重数）构造整函数的无穷乘积定理，因子为初等因子 $E_n(z)=(1-z)e^{z+z^2/2+\\cdots+z^n/n}$；经典例子是 $\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right)$。",
-    "summaryEn": "The infinite-product theorem constructing an entire function with any prescribed zero set having no accumulation point, using the elementary factors $E_n(z)=(1-z)e^{z+z^2/2+\\cdots+z^n/n}$; the classical example is $\\sin(\\pi z)/(\\pi z)=\\prod_{n=1}^{\\infty}(1-z^2/n^2)$.",
-    "definition": "多项式由零点完全决定（至多差一个常数因子），对整函数我们当然希望有类似的描述：已知零点表 $\\{a_n\\}$（各配重数 $m_n$，且无聚点，故 $|a_n|\\to\\infty$），能否造出恰以它们为零点的整函数？直接写 $\\prod_n\\left(1-\\frac{z}{a_n}\\right)$ 常常发散：当 $a_n=n$ 时 $\\sum\\left|\\frac{z}{a_n}\\right|$ 发散（对数发散），乘积根本不收敛。解决办法是给每个因子乘上一个**无处为零**的补偿因子 $e^{Q_n(z)}$——它不影响零点，却能强迫乘积收敛。\n\n补偿因子取成 $e^{Q_n}$ 的幂级数部分和，就得到**魏尔斯特拉斯初等因子**\n$$E_n(z)=(1-z)\\exp\\left(z+\\frac{z^2}{2}+\\cdots+\\frac{z^n}{n}\\right),\\qquad E_0(z)=1-z .$$\n它只有一个零点 $z=1$（一级），且\n$$E_n(z)=1-\\frac{z^{n+1}}{n+1}+O\\left(z^{n+2}\\right)\\qquad(z\\to0),$$\n即指数因子恰好抵消了 $\\log(1-z)=-\\sum_{k\\ge1}\\frac{z^k}{k}$ 的前 $n$ 项，使 $1-E_n(z)$ 在 $0$ 处有 $n+1$ 阶零点。于是只要 $\\sum_n\\left(\\frac{r}{|a_n|}\\right)^{n+1}$ 对每个 $r$ 收敛，乘积 $\\prod E_{p_n}\\left(\\frac{z}{a_n}\\right)$ 就在 $\\mathbb{C}$ 的每个紧集上一致收敛。\n\n**魏尔斯特拉斯分解定理**：设 $\\{a_n\\}\\subset\\mathbb{C}\\setminus\\{0\\}$ 是无聚点的点列，各配重数 $m_n$，$m\\ge0$ 为整数。则存在整函数 $f$，其零点恰为 $z=0$（重数 $m$）与每个 $a_n$（重数 $m_n$），并且可以写成\n$$f(z)=z^m e^{g(z)}\\prod_{n=1}^{\\infty}E_{p_n}\\!\\left(\\frac{z}{a_n}\\right),$$\n其中 $g$ 是整函数、$p_n$ 取合适的非负整数（例如 $p_n=n$，或按 $|a_n|$ 分块选取）使无穷乘积局部一致收敛。反过来，任何非零整函数的零点（记重数）都构成这样一个无聚点的点列，故它总有上述形状。零点给定后，解的唯一自由度就是无处为零的因子 $e^{g(z)}$——这一点与多项式中「唯一自由度是常数因子」形成对照。若再加上增长条件 $\\rho<+\\infty$，Hadamard 定理把它精细化：可取 $p_n=\\lfloor\\rho\\rfloor$ 与常数下标，且 $g$ 是次数 $\\le\\rho$ 的多项式。\n\n**经典例子**：零点为全体非零整数（都取重数 1）的整函数就是 $\\frac{\\sin\\pi z}{\\pi z}$：\n$$\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right).$$\n这里把 $z=\\pm n$ 两个一级零点配成一个因子 $\\left(1-\\frac{z^2}{n^2}\\right)=\\left(1-\\frac{z}{n}\\right)\\left(1+\\frac{z}{n}\\right)$（也可写成 $E_1(\\frac zn)E_1(-\\frac zn)$ 的收敛配对），配对后每项 $1-\\frac{z^2}{n^2}=1+O(n^{-2})$，正是收敛的来源。比较两边 $z^2$ 的系数即得欧拉的 $\\sum_{n\\ge1}\\frac{1}{n^2}=\\frac{\\pi^2}{6}$，比较 $z^4$ 的系数得 $\\sum_{n\\ge1}\\frac{1}{n^4}=\\frac{\\pi^4}{90}$。\n\n这一定理的意义在于：**零点（连同重数）几乎是一个整函数的全部信息**，剩下的只是无处为零的指数因子 $e^{g}$。它与「米塔-列夫勒定理」（管极点、用部分分式）恰好互补，合起来构成整函数与亚纯函数理论的两大结构定理。",
-    "definitionEn": "A polynomial is determined by its zeros up to a constant factor, and one would like the same description for entire functions: given a zero list $\\{a_n\\}$ with multiplicities $m_n$ and no accumulation point (so $|a_n|\\to\\infty$), can an entire function with exactly these zeros be built? Writing $\\prod_n(1-z/a_n)$ directly often diverges: for $a_n=n$ the series $\\sum|z/a_n|$ diverges (logarithmically) and the product does not converge. The remedy is to multiply each factor by a **zero-free** correction factor $e^{Q_n(z)}$, which leaves the zeros untouched but forces convergence.\n\nChoosing the partial sums of the exponential series as correction factors gives the **Weierstrass elementary factors**\n$$E_n(z)=(1-z)\\exp\\left(z+\\frac{z^2}{2}+\\cdots+\\frac{z^n}{n}\\right),\\qquad E_0(z)=1-z,$$\nwhose only zero is the simple zero $z=1$, and\n$$E_n(z)=1-\\frac{z^{n+1}}{n+1}+O\\left(z^{n+2}\\right)\\qquad(z\\to0):$$\nthe exponential factor cancels the first $n$ terms of $\\log(1-z)=-\\sum_{k\\ge1}z^k/k$, so $1-E_n(z)$ vanishes to order $n+1$ at the origin. Consequently, as soon as $\\sum_n(r/|a_n|)^{n+1}$ converges for each $r$, the product $\\prod E_{p_n}(z/a_n)$ converges uniformly on every compact subset of $\\mathbb{C}$.\n\n**The Weierstrass factorization theorem**: let $\\{a_n\\}\\subset\\mathbb{C}\\setminus\\{0\\}$ be a sequence without accumulation point, with multiplicities $m_n$, and let $m\\ge0$ be an integer. Then there is an entire function $f$ whose zeros are exactly $z=0$ (multiplicity $m$) and the points $a_n$ (multiplicities $m_n$), and it can be written as\n$$f(z)=z^m e^{g(z)}\\prod_{n=1}^{\\infty}E_{p_n}\\!\\left(\\frac{z}{a_n}\\right),$$\nwhere $g$ is entire and the non-negative integers $p_n$ are chosen (for instance $p_n=n$, or blockwise according to $|a_n|$) so that the product converges locally uniformly. Conversely the zeros of any non-zero entire function form such a sequence, so every entire function has this shape. Once the zeros are prescribed the only remaining freedom is the zero-free factor $e^{g(z)}$ — the analogue of the constant factor for polynomials. Adding a growth condition $\\rho<+\\infty$, Hadamard's theorem refines this: one may take the constant index $p_n=\\lfloor\\rho\\rfloor$ and $g$ a polynomial of degree $\\le\\rho$.\n\n**The classical example**: the entire function whose zeros are the non-zero integers, each simple, is $\\sin(\\pi z)/(\\pi z)$:\n$$\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right).$$\nEach pair $z=\\pm n$ of simple zeros is combined into one factor $1-\\frac{z^2}{n^2}=\\left(1-\\frac zn\\right)\\left(1+\\frac zn\\right)$ (equivalently the convergent pairing $E_1(z/n)E_1(-z/n)$); after pairing each term is $1+O(n^{-2})$, which is exactly what makes the product converge. Comparing the coefficient of $z^2$ gives Euler's $\\sum_{n\\ge1}1/n^2=\\pi^2/6$, and comparing $z^4$ gives $\\sum_{n\\ge1}1/n^4=\\pi^4/90$.\n\nThe meaning of the theorem is that **the zeros, with multiplicities, are almost all the information an entire function carries**; what remains is only the zero-free exponential factor $e^g$. Together with the Mittag-Leffler theorem (which handles poles by partial fractions) it forms the pair of structure theorems of the theory of entire and meromorphic functions.",
-    "formulas": [
-      {
-        "latex": "E_n(z)=(1-z)\\exp\\!\\left(z+\\frac{z^2}{2}+\\cdots+\\frac{z^n}{n}\\right),\\qquad E_0(z)=1-z",
-        "note": "魏尔斯特拉斯初等因子：唯一零点是 $z=1$，指数因子处处不为零。",
-        "noteEn": "Weierstrass elementary factors: the only zero is $z=1$, while the exponential factor never vanishes."
-      },
-      {
-        "latex": "E_n(z)=1-\\frac{z^{n+1}}{n+1}+O\\!\\left(z^{n+2}\\right)",
-        "note": "收敛的关键：补偿项恰好消去 $\\log(1-z)$ 的前 $n$ 项，余项在 $0$ 处有 $n+1$ 阶零点。",
-        "noteEn": "The key to convergence: the correction cancels the first $n$ terms of $\\log(1-z)$, leaving a term that vanishes to order $n+1$ at the origin."
-      },
-      {
-        "latex": "f(z)=z^m e^{g(z)}\\prod_{n=1}^{\\infty}E_{p_n}\\!\\left(\\frac{z}{a_n}\\right)",
-        "note": "主定理的一般形式：零点表（无聚点、配重数）任给时可构造 $f$；解唯一到相差无处为零因子 $e^{g(z)}$。",
-        "noteEn": "General form of the theorem: any zero list (no accumulation point, multiplicities prescribed) can be realised; the solution is unique up to the zero-free factor $e^{g(z)}$."
-      },
-      {
-        "latex": "\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right)",
-        "note": "经典例子：零点为一切非零整数。配对 $\\pm n$ 后每项 $1+O(n^{-2})$，乘积收敛。",
-        "noteEn": "The classical example with zeros at every non-zero integer; pairing $\\pm n$ makes each term $1+O(n^{-2})$, so the product converges."
-      },
-      {
-        "latex": "\\zeta(2)=\\sum_{n=1}^{\\infty}\\frac{1}{n^2}=\\frac{\\pi^2}{6},\\qquad \\zeta(4)=\\sum_{n=1}^{\\infty}\\frac{1}{n^4}=\\frac{\\pi^4}{90}",
-        "note": "比较 $\\frac{\\sin\\pi z}{\\pi z}$ 的两边在 $z=0$ 附近的 $z^2$、$z^4$ 系数（欧拉的著名推导）。",
-        "noteEn": "Obtained by comparing the coefficients of $z^2$ and $z^4$ on both sides near $z=0$ (Euler's famous derivation)."
-      },
-      {
-        "latex": "p_n=\\lfloor\\rho\\rfloor,\\qquad \\deg g\\le\\rho\\qquad(\\rho<+\\infty)",
-        "note": "Hadamard 精细：有限阶 $\\rho$ 时下标可取常数 $\\lfloor\\rho\\rfloor$，指数因子 $g$ 是次数不超过 $\\rho$ 的多项式。",
-        "noteEn": "Hadamard refinement: for finite order $\\rho$ the index may be taken constant, $\\lfloor\\rho\\rfloor$, and the exponential factor $g$ is a polynomial of degree at most $\\rho$."
-      }
-    ],
-    "properties": [
-      "存在性：任意无聚点、趋于 $\\infty$ 的点列（各配重数）都是一个整函数的零点表；条件不能放宽——解析函数的零点必须孤立，零点有聚点时函数只能恒零。",
-      "自由度：零点给定后，全部解恰为 $e^{g(z)}$ 乘某一个解，$g$ 为整函数；$g$ 一般不能由零点确定（与「多项式只差常数因子」形成对照）。",
-      "收敛机制：指数因子无处为零，因此只影响收敛性、不影响零点；取 $p_n=n$（或按 $|a_n|$ 分块、或取常数 $\\lfloor\\rho\\rfloor$）即可使乘积在每个紧集上一致收敛。",
-      "Hadamard 精细化：阶 $\\rho<+\\infty$ 时初等因子下标为常数 $\\lfloor\\rho\\rfloor$，$g$ 是次数 $\\le\\rho$ 的多项式，且零点收敛指数 $\\lambda\\le\\rho$；由此可由零点分布估计增长，也可由增长限制零点。",
-      "典型实例：$\\frac{\\sin\\pi z}{\\pi z}=\\prod(1-\\frac{z^2}{n^2})$（零点为全体非零整数）；$\\frac{1}{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n\\ge1}(1+\\frac zn)e^{-z/n}$（$E_1$ 型）；由前者比较系数即得 $\\zeta(2k)$ 的欧拉值。",
-      "与米塔-列夫勒定理对偶：魏尔斯特拉斯用无穷乘积安排零点，米塔-列夫勒用部分分式安排极点与主部；对乘积取对数导数即得后者。"
-    ],
-    "propertiesEn": [
-      "Existence: every sequence tending to $\\infty$ without accumulation point (with multiplicities) is the zero set of some entire function; the condition cannot be relaxed — zeros of an analytic function are isolated, and an accumulation point forces the function to vanish identically.",
-      "Freedom: once the zeros are fixed, all solutions are obtained by multiplying one solution by $e^{g(z)}$ with $g$ entire; in general $g$ is not determined by the zeros (contrast with polynomials, where only a constant factor is free).",
-      "Convergence mechanism: the exponential factors never vanish, so they affect only convergence, not the zeros; the choice $p_n=n$ (or blockwise, or the constant $\\lfloor\\rho\\rfloor$) makes the product converge uniformly on compact sets.",
-      "Hadamard refinement: for finite order $\\rho$ the elementary factors have the constant index $\\lfloor\\rho\\rfloor$ and $g$ is a polynomial of degree at most $\\rho$, with the exponent of convergence of zeros satisfying $\\lambda\\le\\rho$; this links zero distribution and growth in both directions.",
-      "Standard instances: $\\sin(\\pi z)/(\\pi z)=\\prod(1-z^2/n^2)$ with the non-zero integers as zeros, and $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+z/n)e^{-z/n}$ of type $E_1$; comparing coefficients in the first gives Euler's values of $\\zeta(2k)$.",
-      "Dual to the Mittag-Leffler theorem: Weierstrass arranges zeros by infinite products while Mittag-Leffler arranges poles and principal parts by partial fractions; taking the logarithmic derivative of a product produces the latter."
-    ],
-    "examples": [
-      {
-        "problem": "用 $\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n\\ge1}\\left(1-\\frac{z^2}{n^2}\\right)$ 计算 $\\sum_{n\\ge1}\\frac{1}{n^2}$ 与 $\\sum_{n\\ge1}\\frac{1}{n^4}$。",
-        "solution": "左边在 $z=0$ 附近的泰勒展开：由 $\\sin w=w-\\frac{w^3}{6}+\\frac{w^5}{120}-\\cdots$（$w=\\pi z$）得\n$$\\frac{\\sin\\pi z}{\\pi z}=1-\\frac{\\pi^2z^2}{6}+\\frac{\\pi^4z^4}{120}-\\cdots .$$\n右边逐项相乘，$z^2$ 的系数是 $-\\sum\\frac{1}{n^2}$，$z^4$ 的系数是所有两两乘积 $\\sum_{m<n}\\frac{1}{m^2n^2}$，而\n$$\\sum_{m<n}\\frac{1}{m^2n^2}=\\frac{1}{2}\\left[\\left(\\sum_{n\\ge1}\\frac{1}{n^2}\\right)^2-\\sum_{n\\ge1}\\frac{1}{n^4}\\right].$$\n比较 $z^2$ 项：$\\sum\\frac{1}{n^2}=\\frac{\\pi^2}{6}$（欧拉 1735 年的结果）。代入 $z^4$ 项：\n$$\\frac{\\pi^4}{120}=\\frac{1}{2}\\left(\\frac{\\pi^4}{36}-S_4\\right)\\ \\Longrightarrow\\ S_4=\\frac{\\pi^4}{36}-\\frac{\\pi^4}{60}=\\frac{\\pi^4}{90},$$\n即 $\\sum_{n\\ge1}\\frac{1}{n^4}=\\frac{\\pi^4}{90}$。这两条都只用到无穷乘积与泰勒展开的系数比较，是魏尔斯特拉斯分解定理「零点决定函数」威力的直接体现。"
-      },
-      {
-        "problem": "为什么不能直接用 $\\prod_{n\\ge1}\\left(1-\\frac{z}{n}\\right)$ 造出以全部正整数为零点的整函数？请给出正确的构造。",
-        "solution": "因为该乘积不收敛：部分积的对数\n$$\\sum_{n=1}^{\\infty}\\log\\left(1-\\frac{z}{n}\\right)=-\\sum_{n=1}^{\\infty}\\left(\\frac{z}{n}+O\\left(\\frac{1}{n^2}\\right)\\right)$$\n中的 $\\sum\\frac{1}{n}$ 发散（调和级数），故部分积的对数按 $-zH_N$ 的量级发散（$\\operatorname{Re}z>0$ 时趋于 $-\\infty$、$\\operatorname{Re}z<0$ 时趋于 $+\\infty$；虚轴上模有界而辐角发散），部分积不收敛到有限值。\n\n修正办法是给每项配上 $E_1$ 型的指数因子：因为\n$$\\left(1-\\frac{z}{n}\\right)e^{z/n}=\\left(1-\\frac{z}{n}\\right)\\left(1+\\frac{z}{n}+O\\left(\\frac{1}{n^2}\\right)\\right)=1+O\\!\\left(\\frac{1}{n^2}\\right),$$\n所以 $\\prod_{n\\ge1}\\left(1-\\frac{z}{n}\\right)e^{z/n}$ 在每个紧集上一致收敛，给出一个整函数；它与 $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+\\frac zn)e^{-z/n}$ 的形式完全一致（换 $z\\to-z$ 即可对照）。\n\n若只想把 $z=1,2,3,\\dots$ 作为零点，也可用对称配对 $\\prod_{n\\ge1}\\left(1-\\frac{z^2}{n^2}\\right)=\\frac{\\sin\\pi z}{\\pi z}$，得到的是零点为全体非零整数的整函数。两种做法都说明：发散时必须使用初等因子（补偿项），而补偿项只影响收敛性、不引入新零点。"
-      }
-    ],
-    "plot": {
-      "type": "function",
-      "functions": [
-        {
-          "expr": "sin(PI*x)/(PI*x)",
-          "color": "#ffd166",
-          "label": "y = sin(πx)/(πx)"
-        },
-        {
-          "expr": "(1 - x^2)",
-          "color": "#4cc9f0",
-          "label": "部分积 N=1：(1-x²)"
-        },
-        {
-          "expr": "(1 - x^2)*(1 - x^2/4)",
-          "color": "#ff6b9d",
-          "label": "部分积 N=2：(1-x²)(1-x²/4)"
-        },
-        {
-          "expr": "(1 - x^2)*(1 - x^2/4)*(1 - x^2/9)",
-          "color": "#06d6a0",
-          "label": "部分积 N=3：(1-x²)(1-x²/4)(1-x²/9)"
-        }
-      ],
-      "xRange": [
-        -3,
-        3
-      ],
-      "yRange": [
-        -2,
-        2
-      ],
-      "title": "sin(πx)/(πx) 及其部分乘积：零点相同的无穷乘积逼近"
+ {
+  "id": "monodromy-theorem",
+  "title": "单值性定理",
+  "titleEn": "The Monodromy Theorem",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "在单连通区域内，若一个解析函数芽能沿区域内每一条曲线延拓，则延拓结果只依赖终点，从而在区域上确定一个单值解析函数。",
+  "summaryEn": "In a simply connected domain, if an analytic germ can be continued along every curve, the result depends only on the endpoint and therefore defines a single-valued analytic function.",
+  "definition": "「解析延拓」是把局部给出的解析函数（在某点附近的一个幂级数，称为一个**函数芽**）沿着曲线一点一点传播出去。问题在于：传播的结果通常依赖走哪条路。例如在 $\\mathbb{C}\\setminus\\{0\\}$ 上取 $\\sqrt z$ 在 $z=1$ 附近的那个芽，沿单位圆逆时针走一圈回到 $1$，得到的是 $-\\sqrt z$ 的芽；$\\log z$ 沿同样一圈回来则变成 $\\log z+2\\pi i$。这样的函数是「多值」的，想在区域上谈「函数 $f$」就必须先解决路径依赖。\n\n**单值性定理（Monodromy Theorem）**：设 $D$ 是 $\\mathbb{C}$ 中的**单连通**区域，$f_0$ 是 $D$ 内一点 $z_0$ 附近的一个解析函数芽。若 $f_0$ 能沿 $D$ 内**每一条**从 $z_0$ 出发的曲线作解析延拓，则对 $D$ 内任意点 $z_1$，延拓到 $z_1$ 处得到的函数芽只依赖 $z_1$ 而**不依赖所选曲线**；于是 $D$ 上存在唯一的解析函数 $F$，使 $F$ 在 $z_0$ 附近与 $f_0$ 一致，即 $F$ 就是 $f_0$ 的解析延拓。一句话：**单连通区域上的解析函数芽，只要能沿一切曲线延拓，就自动是单值的**。\n\n「单连通」是本质条件，不能省。所谓单连通，指 $D$ 内任意闭曲线都能在 $D$ 内连续收缩成一点（等价地，$D$ 在扩充复平面中的补集连通，即 $D$ 没有洞）。圆环 $1<|z|<2$、穿孔平面 $\\mathbb{C}\\setminus\\{0\\}$ 都不是单连通的：在 $\\mathbb{C}\\setminus\\{0\\}$ 上，$\\sqrt z$ 沿绕原点一圈的闭路延拓后变号，$\\log z$ 延拓后增加 $2\\pi i$——这两个芽处处可以延拓，却不给出单值函数。要把 $\\sqrt z$、$\\log z$ 定义成单值函数，必须挖掉一条射线（例如 $\\mathbb{C}\\setminus(-\\infty,0]$），把区域改成单连通的。因此多值函数只是「单值化」之前的说法：在 $D$ 的万有覆叠空间（或某个覆叠曲面上），它总是单值的。\n\n定理背后的机制是**同伦不变性**：若两条以 $z_0$ 为起点、以 $z_1$ 为终点的曲线能在 $D$ 内保持端点不动地连续形变（同伦）到彼此，则沿它们延拓所得到 $z_1$ 处的芽相同。而 $D$ 单连通恰好意味着「$D$ 内任意两条同端点的曲线都同伦」，于是延拓结果彻底由终点决定。用覆叠空间的语言说：延拓结果只取决于路径的**同伦类**，所有路径依赖的信息由基本群 $\\pi_1(D,z_0)$ 通过**单值表示**（monodromy representation）刻画；单连通即 $\\pi_1(D,z_0)$ 平凡，表示平凡，多值性消失。这正是覆叠空间思想在复分析中的体现，也是黎曼面、解析延拓与单值化理论的出发点。",
+  "definitionEn": "Analytic continuation propagates a locally given analytic function (a power series near a point, called a **germ**) along curves. The difficulty is that the result usually depends on which route is taken. On $\\mathbb{C}\\setminus\\{0\\}$, for instance, the germ of $\\sqrt z$ near $z=1$ carried once counterclockwise around the unit circle returns as the germ of $-\\sqrt z$, while $\\log z$ returns as $\\log z+2\\pi i$. Such functions are 'multi-valued', and speaking of 'a function $f$' on the region requires resolving this path dependence.\n\n**The monodromy theorem**: let $D$ be a **simply connected** domain in $\\mathbb{C}$ and let $f_0$ be an analytic germ near some point $z_0\\in D$. If $f_0$ can be continued analytically along **every** curve in $D$ starting at $z_0$, then for any $z_1\\in D$ the germ obtained at $z_1$ depends only on $z_1$ and **not on the chosen curve**; consequently there is a unique analytic function $F$ on $D$ that agrees with $f_0$ near $z_0$, i.e. $F$ is the analytic continuation of $f_0$. In one sentence: **a germ on a simply connected domain that can be continued along every curve is automatically single-valued**.\n\nSimple connectedness is essential. A domain is simply connected when every closed curve in it can be contracted to a point inside it (equivalently, its complement in the Riemann sphere is connected, i.e. it has no holes). The annulus $1<|z|<2$ and the punctured plane $\\mathbb{C}\\setminus\\{0\\}$ are not simply connected: on $\\mathbb{C}\\setminus\\{0\\}$ the germ of $\\sqrt z$ changes sign when continued around a loop encircling the origin, and $\\log z$ gains $2\\pi i$. Both germs can be continued everywhere, yet they yield no single-valued function. To define $\\sqrt z$ or $\\log z$ as single-valued functions one must remove a ray as a branch cut (e.g. use $\\mathbb{C}\\setminus(-\\infty,0]$) and thereby make the region simply connected. Multi-valued functions are thus only a pre-'uniformisation' description: on the universal covering space of $D$ (or on a suitable covering surface) they are single-valued.\n\nThe mechanism behind the theorem is **homotopy invariance**: if two curves from $z_0$ to $z_1$ can be deformed into one another inside $D$ while their endpoints stay fixed, the germs obtained at $z_1$ along them coincide. Simple connectedness of $D$ means exactly that any two curves with the same endpoints are homotopic, so the continuation depends only on the endpoint. In covering-space language: the result of continuation depends only on the **homotopy class** of the path, and all path dependence is encoded by the fundamental group $\\pi_1(D,z_0)$ through the **monodromy representation**; when $D$ is simply connected the group is trivial, the representation is trivial and multi-valuedness disappears. This is the covering-space idea inside complex analysis, and it is the starting point of Riemann surfaces, analytic continuation and uniformisation.",
+  "formulas": [
+   {
+    "latex": "D\\ \\text{单连通}\\iff \\pi_1(D,z_0)=\\{1\\}\\iff \\text{任一闭曲线可在 }D\\text{ 内缩成一点}",
+    "note": "单连通的三种等价说法，是单值性定理中不可省略的条件。",
+    "noteEn": "Three equivalent descriptions of simple connectedness; this hypothesis cannot be dropped."
+   },
+   {
+    "latex": "\\gamma\\simeq\\delta\\ (\\text{端点固定})\\ \\Longrightarrow\\ \\text{沿 }\\gamma\\text{ 与沿 }\\delta\\text{ 延拓得到同一个芽}",
+    "note": "同伦不变性：比单值性定理更基本。它只要求两条曲线同伦；单连通保证同端点的曲线全部同伦。",
+    "noteEn": "Homotopy invariance, more basic than the theorem itself: only homotopic paths are required; simple connectedness guarantees that all paths with the same endpoints are homotopic."
+   },
+   {
+    "latex": "\\sqrt{e^{i\\theta}}=e^{i\\theta/2}:\\qquad \\theta=0\\mapsto 1,\\qquad \\theta=2\\pi\\mapsto -1",
+    "note": "$\\sqrt z$ 沿绕原点一圈的闭路延拓后变号；非单连通区域上延拓确实依赖路径。",
+    "noteEn": "Continued around a loop enclosing the origin, $\\sqrt z$ changes sign: on a non-simply-connected domain continuation genuinely depends on the path."
+   },
+   {
+    "latex": "\\log z\\ \\text{沿 }|z|=1\\ \\text{逆时针一圈}:\\quad \\log z\\mapsto \\log z+2\\pi i",
+    "note": "对数的多值性由同一机制产生；挖去一条射线使区域单连通后，$\\operatorname{Log}z=\\ln|z|+i\\arg z$（$\\arg z\\in(-\\pi,\\pi)$）才是单值解析的。",
+    "noteEn": "The multi-valuedness of the logarithm has the same origin; after deleting a ray to make the region simply connected, $\\operatorname{Log}z=\\ln|z|+i\\arg z$ with $\\arg z\\in(-\\pi,\\pi)$ is single-valued and analytic."
+   },
+   {
+    "latex": "F^2=z\\ \\text{在}\\ \\mathbb{C}\\setminus\\{0\\}\\ \\text{上}\\ \\Longrightarrow\\ \\oint_{|z|=1}\\frac{F'(z)}{F(z)}\\,dz=\\frac{1}{2}\\oint_{|z|=1}\\frac{dz}{z}=\\pi i",
+    "note": "由 $2FF'=1$ 得 $\\frac{F'}{F}=\\frac{1}{2z}$。但辐角原理要求该积分是 $2\\pi i$ 的整数倍，而 $\\pi i$ 不是——故这样的单值 $F$ 不存在。",
+    "noteEn": "From $2FF'=1$ we get $F'/F=1/(2z)$; the argument principle, however, forces the integral to be an integer multiple of $2\\pi i$, and $\\pi i$ is not — hence no single-valued $F$ exists."
+   }
+  ],
+  "properties": [
+   "定理内容就是「单连通 + 处处可延拓 $\\Rightarrow$ 单值」两个条件缺一不可：$\\sqrt z$ 在 $\\mathbb{C}\\setminus\\{0\\}$ 上说明区域非单连通会失败，而沿某条曲线延拓被奇点挡住时定理也不适用。",
+   "定理给出的 $F$ 唯一，且它与 $f_0$ 有相同的局部泰勒系数；沿路径传播的代数恒等式（如 $F^2=z$、$e^{F}=z$）保持不变。",
+   "同伦不变性比定理本身更基本：只要求两条曲线同伦。单连通只是「同端点的曲线全都同伦」这一情形的保证。",
+   "覆叠空间视角：多值延拓的结果是 $D$ 的万有覆叠 $\\pi:\\tilde D\\to D$ 上的单值函数，$\\pi_1(D,z_0)$ 的单值表示刻画绕不同闭路后的变化；单值性定理即「$\\pi_1$ 平凡时万有覆叠就是 $D$ 自身」。",
+   "它是构造性工具：只要局部造出一个芽并验证它在区域内处处可延拓，就能断言得到区域上的单值解析函数（例如在单连通区域上定义 $\\log$、$\\sqrt z$ 与对各解析函数取对数原函数）。"
+  ],
+  "propertiesEn": [
+   "The theorem is exactly 'simply connected plus continuable along every curve implies single-valued'; both hypotheses are needed, as $\\sqrt z$ on $\\mathbb{C}\\setminus\\{0\\}$ (not simply connected) and a continuation blocked by a singularity show.",
+   "The resulting $F$ is unique and has the same local Taylor coefficients as $f_0$; algebraic identities such as $F^2=z$ or $e^{F}=z$ propagate along the continuation.",
+   "Homotopy invariance is more basic than the theorem itself and only requires the two curves to be homotopic; simple connectedness is the special case in which all curves with the same endpoints are homotopic.",
+   "Covering-space view: a multi-valued continuation is a single-valued function on the universal cover $\\pi:\\tilde D\\to D$, the dependence on closed loops being encoded by the monodromy representation of $\\pi_1(D,z_0)$; the theorem says that when $\\pi_1$ is trivial the universal cover is $D$ itself.",
+   "It is a constructive tool: producing a local germ and checking continuability along every curve yields a single-valued analytic function on the whole region (as when defining $\\log$, $\\sqrt z$, or a logarithmic primitive of an analytic function)."
+  ],
+  "examples": [
+   {
+    "problem": "证明在 $\\mathbb{C}\\setminus\\{0\\}$ 上不存在解析函数 $F$ 满足 $F(z)^2=z$。",
+    "solution": "反证，设 $F$ 在 $\\mathbb{C}\\setminus\\{0\\}$ 上解析且 $F^2=z$。由 $2FF'=1$ 得 $\\frac{F'(z)}{F(z)}=\\frac{1}{2F(z)^2}=\\frac{1}{2z}$，沿单位圆积分\n$$\\oint_{|z|=1}\\frac{F'(z)}{F(z)}\\,dz=\\frac{1}{2}\\oint_{|z|=1}\\frac{dz}{z}=\\frac{1}{2}\\cdot 2\\pi i=\\pi i.$$\n另一方面 $F$ 在 $|z|=1$ 上无零点（$F^2=z\\ne 0$），故 $F(e^{it})$ 是一条不经过 $0$ 的闭曲线，它绕 $0$ 的绕数必为整数；而绕数等于 $\\frac{1}{2\\pi i}\\oint_{|z|=1}\\frac{F'(z)}{F(z)}dz=\\frac12$，不是整数，矛盾。故这样的单值 $F$ 不存在。几何上看，绕原点一圈后 $F$ 必然变成 $-F$，这正是「单连通」不可省的含义。"
+   },
+   {
+    "problem": "说明为什么 $\\log z$ 不能在 $\\mathbb{C}\\setminus\\{0\\}$ 上单值定义，却在 $D=\\mathbb{C}\\setminus(-\\infty,0]$ 上可以。",
+    "solution": "若存在单值解析的 $L$ 使 $e^{L(z)}=z$，则 $L'(z)=\\frac{1}{z}$。单值函数的全微分沿闭曲线积分必为零：\n$$\\oint_{|z|=1}dL=\\oint_{|z|=1}\\frac{dz}{z}=0,$$\n但直接计算 $\\oint_{|z|=1}\\frac{dz}{z}=2\\pi i\\ne 0$，矛盾。所以 $\\mathbb{C}\\setminus\\{0\\}$ 上不存在单值的对数。\n\n而在 $D=\\mathbb{C}\\setminus(-\\infty,0]$（挖掉负实轴这条割线）上，$D$ 是单连通区域（不含原点也没有洞，关于正实轴上的点星形，但**不是**凸区域），$\\operatorname{Log}z=\\ln|z|+i\\arg z$（$\\arg z\\in(-\\pi,\\pi)$）解析且单值，它就是 $z=1$ 附近那个对数芽沿 $D$ 内曲线的延拓。可见把区域改成单连通是获得单值函数的标准办法。"
+   }
+  ],
+  "tags": [
+   "解析延拓",
+   "单连通",
+   "同伦",
+   "覆叠空间",
+   "多值函数"
+  ],
+  "links": [
+   "analytic-continuation",
+   "covering-space",
+   "fundamental-group",
+   "homotopy",
+   "riemann-surfaces",
+   "analytic-function"
+  ]
+ },
+ {
+  "id": "entire-functions",
+  "title": "整函数",
+  "titleEn": "Entire Functions",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "在整个复平面 $\\mathbb{C}$ 上处处解析的函数，等价于一个收敛半径为无穷的幂级数；按最大模的增长阶 $\\rho$ 可分类，多项式阶为 0，$e^z$、$\\sin z$ 阶为 1。",
+  "summaryEn": "A function analytic on the whole complex plane, equivalently a power series with infinite radius of convergence; classified by the order of growth $\\rho$ of its maximum modulus, with polynomials of order 0 and $e^z$, $\\sin z$ of order 1.",
+  "definition": "若复变函数 $f$ 在整个复平面 $\\mathbb{C}$ 上处处可导（处处解析、全纯），就称 $f$ 为**整函数**。整函数在有限点处没有任何奇点。由泰勒定理，$f$ 在 $|z|<R$ 内解析时 $R$ 可取任意大，所以整函数恰好等价于一个**处处收敛的幂级数** $f(z)=\\sum_{n\\ge 0}a_nz^n$（收敛半径 $R=+\\infty$）。多项式、$e^z$、$\\sin z$、$\\cos z$ 都是整函数；$\\frac{1}{z}$（$z=0$ 处不解析）、$\\log z$、$\\tan z$（在 $\\frac{\\pi}{2}+k\\pi$ 处有极点）都不是。\n\n整函数的和、差、积、复合仍是整函数，其唯一性极强：两个整函数只要在一个有聚点的集合上相等就恒等。**有界整函数必为常数**（刘维尔定理，见相关知识点），等价地，非常数整函数的值域无界。由此立刻得到**代数基本定理的复分析证明**：若非常数多项式 $P$ 无处为零，则 $\\frac1P$ 是整函数，又由 $|P(z)|\\to\\infty\\ (|z|\\to\\infty)$ 知 $\\frac1P$ 当 $|z|$ 很大时很小、在闭圆盘上又有界，故有界，由刘维尔定理它是常数，矛盾——所以 $P$ 必有零点。零点同样是整函数的基本信息：解析函数的零点是孤立的，所以除非 $f\\equiv 0$，零点集在 $\\mathbb{C}$ 中**无聚点**；又因 $\\mathbb{C}$ 是可数个紧集之并、每个紧集内零点至多有限，零点全体**至多可数**。\n\n刻画整函数增长最有力的尺子是**最大模** $M(r)=\\max_{|z|=r}|f(z)|$（由最大模原理它也是 $|z|\\le r$ 上的最大模，$M(r)$ 单调不减）。当 $M(r)$ 增长不快于 $r$ 的多项式量级时 $f$ 是多项式；超过这个量级就要用一个数——**增长阶（order）**\n$$\\rho=\\limsup_{r\\to\\infty}\\frac{\\log\\log M(r)}{\\log r}$$\n来度量，$\\rho<+\\infty$ 称有限阶，$\\rho=+\\infty$ 称无穷阶。经典结论：**非常数多项式的阶为 $\\rho=0$**（$M(r)\\sim|a_n|r^n$，故 $\\log\\log M(r)\\sim\\log\\log r$）；**$e^z$ 的阶为 $1$**（$M(r)=e^r$，$\\log\\log M(r)=\\log r$）；**$\\sin z$、$\\cos z$ 的阶都是 $1$**（$|\\sin z|\\le e^{|z|}$，而在虚轴上 $|\\sin(iy)|=\\sinh y$，上下夹逼即得）；$e^{z^2}$ 的阶为 $2$（$M(r)=e^{r^2}$）；$e^{e^z}$ 的阶为 $+\\infty$（$M(r)=e^{e^r}$，$\\log\\log M(r)=r$）。\n\n按阶分类要小心两点。其一，阶并非只能是整数：用 Mittag-Leffler 型级数可以造出任意正实数阶的整函数。其二，**阶为 $0$ 的整函数不一定是多项式**：以 $a_n=2^{2^n}$ 为零点的规范乘积 $\\prod_{n\\ge1}\\left(1-\\frac{z}{a_n}\\right)$ 收敛（$\\sum 1/|a_n|<\\infty$），零点的收敛指数为 $\\lambda=\\limsup\\frac{\\log n}{\\log a_n}=0$，故它是阶为 $0$ 的超越整函数。由 Hadamard 分解定理，阶 $\\rho<+\\infty$ 时 $f(z)=z^me^{g(z)}\\prod E_{\\lfloor\\rho\\rfloor}\\!\\left(\\frac{z}{a_k}\\right)$，其中 $g$ 是次数 $\\le\\rho$ 的多项式；特别地，阶 $<1$ 的**超越**（非多项式）整函数必有无穷多零点（否则 $g$ 只能是常数，$f$ 成为多项式，与「超越（非多项式）」矛盾）。阶为 $1$ 的整函数中，满足 $|f(z)|\\le Ce^{A|z|}$ 者称为指数型函数，是 Laplace 变换与 Paley–Wiener 理论的主角。",
+  "definitionEn": "A complex function $f$ that is differentiable (analytic, holomorphic) at every point of the whole complex plane $\\mathbb{C}$ is called an **entire function**. An entire function has no singularities at finite points. Since an analytic function on $|z|<R$ may be expanded in a Taylor series for arbitrarily large $R$, entire functions are exactly the **everywhere convergent power series** $f(z)=\\sum_{n\\ge0}a_nz^n$, i.e. those with radius of convergence $R=+\\infty$. Polynomials, $e^z$, $\\sin z$ and $\\cos z$ are entire; $1/z$ (not analytic at $0$), $\\log z$ and $\\tan z$ (poles at $\\frac\\pi2+k\\pi$) are not.\n\nSums, differences, products and compositions of entire functions are entire, and uniqueness is very strong: two entire functions that agree on a set with an accumulation point are identical. A **bounded entire function is constant** (Liouville's theorem, see the related node); equivalently, the range of a non-constant entire function is unbounded. This yields the **complex-analytic proof of the fundamental theorem of algebra**: if the non-constant polynomial $P$ had no zero, then $1/P$ would be entire, small for large $|z|$ and bounded on a closed disk, hence bounded, hence constant by Liouville's theorem — a contradiction, so $P$ has a zero. Zeros carry the basic structural information: zeros of an analytic function are isolated, so unless $f\\equiv0$ the zero set has **no accumulation point** in $\\mathbb{C}$; and since $\\mathbb{C}$ is a countable union of compact sets, each containing finitely many zeros, the zero set is **at most countable**.\n\nThe most effective measure of growth is the **maximum modulus** $M(r)=\\max_{|z|=r}|f(z)|$ (by the maximum modulus principle it is also the maximum on $|z|\\le r$, and $M(r)$ is non-decreasing). If $M(r)$ grows no faster than a polynomial in $r$ the function is a polynomial; beyond that one uses a single number, the **order**\n$$\\rho=\\limsup_{r\\to\\infty}\\frac{\\log\\log M(r)}{\\log r},$$\nwith $\\rho<+\\infty$ meaning finite order and $\\rho=+\\infty$ infinite order. Classical values: **a non-constant polynomial has order $\\rho=0$** (for $M(r)\\sim|a_n|r^n$ one gets $\\log\\log M(r)\\sim\\log\\log r$); **$e^z$ has order $1$** ($M(r)=e^r$, $\\log\\log M(r)=\\log r$); **$\\sin z$ and $\\cos z$ both have order $1$** (from $|\\sin z|\\le e^{|z|}$ and $|\\sin(iy)|=\\sinh y$); $e^{z^2}$ has order $2$ ($M(r)=e^{r^2}$); $e^{e^z}$ has order $+\\infty$ ($M(r)=e^{e^r}$, so $\\log\\log M(r)=r$).\n\nTwo cautions about this classification. First, the order need not be an integer: Mittag-Leffler type series realise every positive real order. Second, **an entire function of order $0$ need not be a polynomial**: the canonical product $\\prod_{n\\ge1}(1-z/a_n)$ with $a_n=2^{2^n}$ converges (since $\\sum1/|a_n|<\\infty$) and the exponent of convergence of its zeros is $\\lambda=\\limsup\\frac{\\log n}{\\log a_n}=0$, so it is a transcendental entire function of order $0$. By Hadamard's factorisation theorem, for finite order $\\rho$ one has $f(z)=z^me^{g(z)}\\prod E_{\\lfloor\\rho\\rfloor}(z/a_k)$ with $g$ a polynomial of degree $\\le\\rho$; in particular a **transcendental** (non-polynomial) entire function of order $<1$ must have infinitely many zeros (otherwise $g$ would be constant and $f$ a polynomial, contradicting transcendence). Entire functions of order $1$ with $|f(z)|\\le Ce^{A|z|}$ are called exponential type and are the protagonists of the Laplace transform and the Paley–Wiener theory.",
+  "formulas": [
+   {
+    "latex": "f\\ \\text{整}\\iff f(z)=\\sum_{n=0}^{\\infty}a_nz^n,\\qquad \\limsup_{n\\to\\infty}|a_n|^{1/n}=0",
+    "note": "整函数等价于收敛半径 $R=+\\infty$ 的幂级数；这是判断整函数最方便的标准。",
+    "noteEn": "Entire functions are exactly the power series with radius of convergence $R=+\\infty$; this is the most convenient criterion."
+   },
+   {
+    "latex": "M(r)=\\max_{|z|=r}|f(z)|,\\qquad \\rho=\\limsup_{r\\to\\infty}\\frac{\\log\\log M(r)}{\\log r}",
+    "note": "增长阶的定义：$M(r)$ 是最大模（单调不减），$\\rho$ 度量 $M(r)$ 相对 $r$ 的增长速度。",
+    "noteEn": "Definition of the order: $M(r)$ is the maximum modulus (non-decreasing) and $\\rho$ measures how fast $M(r)$ grows relative to $r$."
+   },
+   {
+    "latex": "\\text{多项式（次数 }n\\text{）}:\\ \\rho=0;\\qquad e^{z}:\\ M(r)=e^{r},\\ \\rho=1;\\qquad \\sin z,\\cos z:\\ \\rho=1",
+    "note": "最重要的一组经典值：多项式阶为 $0$，$e^z$、$\\sin z$、$\\cos z$ 阶为 $1$。",
+    "noteEn": "The key classical values: polynomials have order $0$, while $e^z$, $\\sin z$ and $\\cos z$ have order $1$."
+   },
+   {
+    "latex": "e^{z^2}:\\ M(r)=e^{r^2},\\ \\rho=2;\\qquad e^{e^z}:\\ M(r)=e^{e^r},\\ \\rho=+\\infty",
+    "note": "阶可以是任意正实数，也可以是 $+\\infty$；$e^{e^z}$ 是无穷阶的标准例子。",
+    "noteEn": "The order can be any positive real number, or $+\\infty$; $e^{e^z}$ is the standard example of infinite order."
+   },
+   {
+    "latex": "f\\ \\text{有界整}\\ \\Longrightarrow\\ f\\equiv\\text{常数};\\qquad \\left(\\forall z,\\ |P(z)|>0\\ \\Rightarrow\\ 1/P\\ \\text{有界整}\\ \\Rightarrow\\ \\text{矛盾}\\right)",
+    "note": "刘维尔定理及其推论（代数基本定理的复分析证明）：无零点多项式 $P$ 会使命题矛盾。",
+    "noteEn": "Liouville's theorem and its corollary, the complex-analytic proof of the fundamental theorem of algebra: a zero-free polynomial $P$ leads to a contradiction."
+   },
+   {
+    "latex": "f(z)=z^m e^{g(z)}\\prod_{k=1}^{\\infty}E_{\\lfloor\\rho\\rfloor}\\!\\left(\\frac{z}{a_k}\\right),\\qquad \\deg g\\le\\rho\\quad(\\rho<+\\infty)",
+    "note": "Hadamard 分解：有限阶时初等因子的下标固定为 $\\lfloor\\rho\\rfloor$，指数因子 $g$ 是低次多项式；零点收敛指数 $\\lambda\\le\\rho$。",
+    "noteEn": "Hadamard factorisation: for finite order the elementary factors have the fixed index $\\lfloor\\rho\\rfloor$ and $g$ is a polynomial of low degree; the exponent of convergence of zeros satisfies $\\lambda\\le\\rho$."
+   }
+  ],
+  "properties": [
+   "幂级数刻画：整函数 $\\iff$ 处处收敛的幂级数 $\\iff$ 在扩充复平面上只有 $z=\\infty$ 可能出问题；$f$ 是多项式 $\\iff$ 在 $\\infty$ 处解析或只有极点，$f$ 是超越整函数 $\\iff$ 在 $\\infty$ 处有本性奇点。",
+   "刘维尔定理的直接推论：有界整函数为常数；非常数整函数无界；代数基本定理（任何次数 $\\ge1$ 的复系数多项式都有零点）。",
+   "零点结构：非零整函数的零点都是孤立的，零点集无聚点且至多可数；有限阶 $\\rho$ 时零点的收敛指数 $\\lambda\\le\\rho$（Jensen 公式 / Hadamard 定理）。",
+   "增长阶的经典值：多项式 $\\rho=0$；$e^z,\\sin z,\\cos z$ 为 $1$；$e^{z^2}$ 为 $2$；$e^{e^z}$ 为 $+\\infty$。阶可以是任意正实数；阶为 $0$ 的函数不一定是多项式（如以 $2^{2^n}$ 为零点的乘积），但阶 $<1$ 的**超越**（非多项式）整函数必有无穷多零点。",
+   "封闭性与唯一性：整函数全体对加减乘与复合封闭，构成 $\\mathbb{C}$ 上的整环（含全部多项式）；两个整函数只要在有聚点的集合上相等就恒等。"
+  ],
+  "propertiesEn": [
+   "Power-series characterisation: entire $\\iff$ everywhere convergent power series $\\iff$ only $z=\\infty$ can be a problem on the Riemann sphere; $f$ is a polynomial iff $\\infty$ is at most a pole, and transcendental iff $\\infty$ is an essential singularity.",
+   "Immediate corollaries of Liouville's theorem: bounded entire functions are constant, non-constant entire functions are unbounded, and every polynomial of degree $\\ge1$ with complex coefficients has a zero (fundamental theorem of algebra).",
+   "Zero structure: zeros of a non-zero entire function are isolated, the zero set has no accumulation point and is at most countable; for finite order $\\rho$ the exponent of convergence of the zeros satisfies $\\lambda\\le\\rho$ (Jensen's formula / Hadamard).",
+   "Classical orders: $\\rho=0$ for polynomials, $1$ for $e^z,\\sin z,\\cos z$, $2$ for $e^{z^2}$ and $+\\infty$ for $e^{e^z}$. Any positive real order occurs; order $0$ does not force a polynomial (e.g. the product with zeros $2^{2^n}$), but a **transcendental** (non-polynomial) entire function of order $<1$ must have infinitely many zeros.",
+   "Closure and uniqueness: entire functions form an integral domain over $\\mathbb{C}$ (containing all polynomials) closed under sums, products and composition; two entire functions agreeing on a set with an accumulation point are identical."
+  ],
+  "examples": [
+   {
+    "problem": "求 $f(z)=z^2e^{3z}$ 与 $g(z)=e^{e^z}$ 的增长阶。",
+    "solution": "$f$：$M_f(r)=r^2e^{3r}$，于是 $\\log M_f(r)=2\\log r+3r$，$\\log\\log M_f(r)=\\log(2\\log r+3r)\\sim\\log(3r)\\ (r\\to\\infty)$，故\n$$\\rho_f=\\lim_{r\\to\\infty}\\frac{\\log(2\\log r+3r)}{\\log r}=1.$$\n（含多项式因子与 $e^{3z}$ 型因子不改变阶。）\n\n$g$：由 $|e^{e^z}|=e^{\\operatorname{Re}e^z}$ 在 $z=r$ 处最大得 $M_g(r)=e^{e^r}$，故 $\\log M_g(r)=e^r$，$\\log\\log M_g(r)=r$，于是\n$$\\rho_g=\\lim_{r\\to\\infty}\\frac{r}{\\log r}=+\\infty.$$\n即 $e^z$ 的阶为 $1$，而 $e^{e^z}$ 是无穷阶整函数。"
+   },
+   {
+    "problem": "用刘维尔定理证明代数基本定理：任何次数 $n\\ge1$ 的复系数多项式 $P(z)=a_nz^n+\\cdots+a_0\\ (a_n\\ne0)$ 都有零点。",
+    "solution": "反证，设 $P$ 无处为零，则 $f=\\frac{1}{P}$ 在 $\\mathbb{C}$ 上处处解析，是整函数。\n\n由三角不等式\n$$|P(z)|\\ge |a_n||z|^n-\\sum_{k=0}^{n-1}|a_k||z|^k\\longrightarrow+\\infty\\qquad(|z|\\to\\infty),$$\n存在 $R>0$ 使 $|z|\\ge R$ 时 $|P(z)|\\ge 1$，于是 $|z|\\ge R$ 时 $|f(z)|\\le1$。在紧集 $|z|\\le R$ 上 $|f|$ 连续，故有最大值 $M$。于是 $f$ 在 $\\mathbb{C}$ 上有界（上界 $\\max\\{1,M\\}$），由刘维尔定理 $f$ 必为常数，从而 $P$ 为常数，与 $n\\ge1$ 矛盾。故 $P$ 至少有一个零点。\n\n进一步，反复提取零点因子可把 $P$ 分解为一次因式的乘积 $P(z)=a_n\\prod_{k=1}^{n}(z-z_k)$：设 $z_1$ 是零点，则 $P(z)=(z-z_1)Q(z)$，$Q$ 仍为多项式且次数降一，归纳即得。这说明「整函数无零点 $\\Rightarrow$ 常数」这一刘维尔定理的形式，正是代数基本定理的核心。"
+   }
+  ],
+  "tags": [
+   "整函数",
+   "增长阶",
+   "最大模",
+   "刘维尔定理",
+   "代数基本定理"
+  ],
+  "links": [
+   "liouville-theorem",
+   "complex-taylor-series",
+   "maximum-modulus-principle",
+   "weierstrass-factorization",
+   "picard-theorems",
+   "zeta-function"
+  ]
+ },
+ {
+  "id": "weierstrass-factorization",
+  "title": "魏尔斯特拉斯分解定理",
+  "titleEn": "The Weierstrass Factorization Theorem",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "以任给的无聚点零点列（配重数）构造整函数的无穷乘积定理，因子为初等因子 $E_n(z)=(1-z)e^{z+z^2/2+\\cdots+z^n/n}$；经典例子是 $\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right)$。",
+  "summaryEn": "The infinite-product theorem constructing an entire function with any prescribed zero set having no accumulation point, using the elementary factors $E_n(z)=(1-z)e^{z+z^2/2+\\cdots+z^n/n}$; the classical example is $\\sin(\\pi z)/(\\pi z)=\\prod_{n=1}^{\\infty}(1-z^2/n^2)$.",
+  "definition": "多项式由零点完全决定（至多差一个常数因子），对整函数我们当然希望有类似的描述：已知零点表 $\\{a_n\\}$（各配重数 $m_n$，且无聚点，故 $|a_n|\\to\\infty$），能否造出恰以它们为零点的整函数？直接写 $\\prod_n\\left(1-\\frac{z}{a_n}\\right)$ 常常发散：当 $a_n=n$ 时 $\\sum\\left|\\frac{z}{a_n}\\right|$ 发散（对数发散），乘积根本不收敛。解决办法是给每个因子乘上一个**无处为零**的补偿因子 $e^{Q_n(z)}$——它不影响零点，却能强迫乘积收敛。\n\n补偿因子取成 $e^{Q_n}$ 的幂级数部分和，就得到**魏尔斯特拉斯初等因子**\n$$E_n(z)=(1-z)\\exp\\left(z+\\frac{z^2}{2}+\\cdots+\\frac{z^n}{n}\\right),\\qquad E_0(z)=1-z .$$\n它只有一个零点 $z=1$（一级），且\n$$E_n(z)=1-\\frac{z^{n+1}}{n+1}+O\\left(z^{n+2}\\right)\\qquad(z\\to0),$$\n即指数因子恰好抵消了 $\\log(1-z)=-\\sum_{k\\ge1}\\frac{z^k}{k}$ 的前 $n$ 项，使 $1-E_n(z)$ 在 $0$ 处有 $n+1$ 阶零点。于是只要 $\\sum_n\\left(\\frac{r}{|a_n|}\\right)^{n+1}$ 对每个 $r$ 收敛，乘积 $\\prod E_{p_n}\\left(\\frac{z}{a_n}\\right)$ 就在 $\\mathbb{C}$ 的每个紧集上一致收敛。\n\n**魏尔斯特拉斯分解定理**：设 $\\{a_n\\}\\subset\\mathbb{C}\\setminus\\{0\\}$ 是无聚点的点列，各配重数 $m_n$，$m\\ge0$ 为整数。则存在整函数 $f$，其零点恰为 $z=0$（重数 $m$）与每个 $a_n$（重数 $m_n$），并且可以写成\n$$f(z)=z^m e^{g(z)}\\prod_{n=1}^{\\infty}E_{p_n}\\!\\left(\\frac{z}{a_n}\\right),$$\n其中 $g$ 是整函数、$p_n$ 取合适的非负整数（例如 $p_n=n$，或按 $|a_n|$ 分块选取）使无穷乘积局部一致收敛。反过来，任何非零整函数的零点（记重数）都构成这样一个无聚点的点列，故它总有上述形状。零点给定后，解的唯一自由度就是无处为零的因子 $e^{g(z)}$——这一点与多项式中「唯一自由度是常数因子」形成对照。若再加上增长条件 $\\rho<+\\infty$，Hadamard 定理把它精细化：可取 $p_n=\\lfloor\\rho\\rfloor$ 与常数下标，且 $g$ 是次数 $\\le\\rho$ 的多项式。\n\n**经典例子**：零点为全体非零整数（都取重数 1）的整函数就是 $\\frac{\\sin\\pi z}{\\pi z}$：\n$$\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right).$$\n这里把 $z=\\pm n$ 两个一级零点配成一个因子 $\\left(1-\\frac{z^2}{n^2}\\right)=\\left(1-\\frac{z}{n}\\right)\\left(1+\\frac{z}{n}\\right)$（也可写成 $E_1(\\frac zn)E_1(-\\frac zn)$ 的收敛配对），配对后每项 $1-\\frac{z^2}{n^2}=1+O(n^{-2})$，正是收敛的来源。比较两边 $z^2$ 的系数即得欧拉的 $\\sum_{n\\ge1}\\frac{1}{n^2}=\\frac{\\pi^2}{6}$，比较 $z^4$ 的系数得 $\\sum_{n\\ge1}\\frac{1}{n^4}=\\frac{\\pi^4}{90}$。\n\n这一定理的意义在于：**零点（连同重数）几乎是一个整函数的全部信息**，剩下的只是无处为零的指数因子 $e^{g}$。它与「米塔-列夫勒定理」（管极点、用部分分式）恰好互补，合起来构成整函数与亚纯函数理论的两大结构定理。",
+  "definitionEn": "A polynomial is determined by its zeros up to a constant factor, and one would like the same description for entire functions: given a zero list $\\{a_n\\}$ with multiplicities $m_n$ and no accumulation point (so $|a_n|\\to\\infty$), can an entire function with exactly these zeros be built? Writing $\\prod_n(1-z/a_n)$ directly often diverges: for $a_n=n$ the series $\\sum|z/a_n|$ diverges (logarithmically) and the product does not converge. The remedy is to multiply each factor by a **zero-free** correction factor $e^{Q_n(z)}$, which leaves the zeros untouched but forces convergence.\n\nChoosing the partial sums of the exponential series as correction factors gives the **Weierstrass elementary factors**\n$$E_n(z)=(1-z)\\exp\\left(z+\\frac{z^2}{2}+\\cdots+\\frac{z^n}{n}\\right),\\qquad E_0(z)=1-z,$$\nwhose only zero is the simple zero $z=1$, and\n$$E_n(z)=1-\\frac{z^{n+1}}{n+1}+O\\left(z^{n+2}\\right)\\qquad(z\\to0):$$\nthe exponential factor cancels the first $n$ terms of $\\log(1-z)=-\\sum_{k\\ge1}z^k/k$, so $1-E_n(z)$ vanishes to order $n+1$ at the origin. Consequently, as soon as $\\sum_n(r/|a_n|)^{n+1}$ converges for each $r$, the product $\\prod E_{p_n}(z/a_n)$ converges uniformly on every compact subset of $\\mathbb{C}$.\n\n**The Weierstrass factorization theorem**: let $\\{a_n\\}\\subset\\mathbb{C}\\setminus\\{0\\}$ be a sequence without accumulation point, with multiplicities $m_n$, and let $m\\ge0$ be an integer. Then there is an entire function $f$ whose zeros are exactly $z=0$ (multiplicity $m$) and the points $a_n$ (multiplicities $m_n$), and it can be written as\n$$f(z)=z^m e^{g(z)}\\prod_{n=1}^{\\infty}E_{p_n}\\!\\left(\\frac{z}{a_n}\\right),$$\nwhere $g$ is entire and the non-negative integers $p_n$ are chosen (for instance $p_n=n$, or blockwise according to $|a_n|$) so that the product converges locally uniformly. Conversely the zeros of any non-zero entire function form such a sequence, so every entire function has this shape. Once the zeros are prescribed the only remaining freedom is the zero-free factor $e^{g(z)}$ — the analogue of the constant factor for polynomials. Adding a growth condition $\\rho<+\\infty$, Hadamard's theorem refines this: one may take the constant index $p_n=\\lfloor\\rho\\rfloor$ and $g$ a polynomial of degree $\\le\\rho$.\n\n**The classical example**: the entire function whose zeros are the non-zero integers, each simple, is $\\sin(\\pi z)/(\\pi z)$:\n$$\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right).$$\nEach pair $z=\\pm n$ of simple zeros is combined into one factor $1-\\frac{z^2}{n^2}=\\left(1-\\frac zn\\right)\\left(1+\\frac zn\\right)$ (equivalently the convergent pairing $E_1(z/n)E_1(-z/n)$); after pairing each term is $1+O(n^{-2})$, which is exactly what makes the product converge. Comparing the coefficient of $z^2$ gives Euler's $\\sum_{n\\ge1}1/n^2=\\pi^2/6$, and comparing $z^4$ gives $\\sum_{n\\ge1}1/n^4=\\pi^4/90$.\n\nThe meaning of the theorem is that **the zeros, with multiplicities, are almost all the information an entire function carries**; what remains is only the zero-free exponential factor $e^g$. Together with the Mittag-Leffler theorem (which handles poles by partial fractions) it forms the pair of structure theorems of the theory of entire and meromorphic functions.",
+  "formulas": [
+   {
+    "latex": "E_n(z)=(1-z)\\exp\\!\\left(z+\\frac{z^2}{2}+\\cdots+\\frac{z^n}{n}\\right),\\qquad E_0(z)=1-z",
+    "note": "魏尔斯特拉斯初等因子：唯一零点是 $z=1$，指数因子处处不为零。",
+    "noteEn": "Weierstrass elementary factors: the only zero is $z=1$, while the exponential factor never vanishes."
+   },
+   {
+    "latex": "E_n(z)=1-\\frac{z^{n+1}}{n+1}+O\\!\\left(z^{n+2}\\right)",
+    "note": "收敛的关键：补偿项恰好消去 $\\log(1-z)$ 的前 $n$ 项，余项在 $0$ 处有 $n+1$ 阶零点。",
+    "noteEn": "The key to convergence: the correction cancels the first $n$ terms of $\\log(1-z)$, leaving a term that vanishes to order $n+1$ at the origin."
+   },
+   {
+    "latex": "f(z)=z^m e^{g(z)}\\prod_{n=1}^{\\infty}E_{p_n}\\!\\left(\\frac{z}{a_n}\\right)",
+    "note": "主定理的一般形式：零点表（无聚点、配重数）任给时可构造 $f$；解唯一到相差无处为零因子 $e^{g(z)}$。",
+    "noteEn": "General form of the theorem: any zero list (no accumulation point, multiplicities prescribed) can be realised; the solution is unique up to the zero-free factor $e^{g(z)}$."
+   },
+   {
+    "latex": "\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n=1}^{\\infty}\\left(1-\\frac{z^2}{n^2}\\right)",
+    "note": "经典例子：零点为一切非零整数。配对 $\\pm n$ 后每项 $1+O(n^{-2})$，乘积收敛。",
+    "noteEn": "The classical example with zeros at every non-zero integer; pairing $\\pm n$ makes each term $1+O(n^{-2})$, so the product converges."
+   },
+   {
+    "latex": "\\zeta(2)=\\sum_{n=1}^{\\infty}\\frac{1}{n^2}=\\frac{\\pi^2}{6},\\qquad \\zeta(4)=\\sum_{n=1}^{\\infty}\\frac{1}{n^4}=\\frac{\\pi^4}{90}",
+    "note": "比较 $\\frac{\\sin\\pi z}{\\pi z}$ 的两边在 $z=0$ 附近的 $z^2$、$z^4$ 系数（欧拉的著名推导）。",
+    "noteEn": "Obtained by comparing the coefficients of $z^2$ and $z^4$ on both sides near $z=0$ (Euler's famous derivation)."
+   },
+   {
+    "latex": "p_n=\\lfloor\\rho\\rfloor,\\qquad \\deg g\\le\\rho\\qquad(\\rho<+\\infty)",
+    "note": "Hadamard 精细：有限阶 $\\rho$ 时下标可取常数 $\\lfloor\\rho\\rfloor$，指数因子 $g$ 是次数不超过 $\\rho$ 的多项式。",
+    "noteEn": "Hadamard refinement: for finite order $\\rho$ the index may be taken constant, $\\lfloor\\rho\\rfloor$, and the exponential factor $g$ is a polynomial of degree at most $\\rho$."
+   }
+  ],
+  "properties": [
+   "存在性：任意无聚点、趋于 $\\infty$ 的点列（各配重数）都是一个整函数的零点表；条件不能放宽——解析函数的零点必须孤立，零点有聚点时函数只能恒零。",
+   "自由度：零点给定后，全部解恰为 $e^{g(z)}$ 乘某一个解，$g$ 为整函数；$g$ 一般不能由零点确定（与「多项式只差常数因子」形成对照）。",
+   "收敛机制：指数因子无处为零，因此只影响收敛性、不影响零点；取 $p_n=n$（或按 $|a_n|$ 分块、或取常数 $\\lfloor\\rho\\rfloor$）即可使乘积在每个紧集上一致收敛。",
+   "Hadamard 精细化：阶 $\\rho<+\\infty$ 时初等因子下标为常数 $\\lfloor\\rho\\rfloor$，$g$ 是次数 $\\le\\rho$ 的多项式，且零点收敛指数 $\\lambda\\le\\rho$；由此可由零点分布估计增长，也可由增长限制零点。",
+   "典型实例：$\\frac{\\sin\\pi z}{\\pi z}=\\prod(1-\\frac{z^2}{n^2})$（零点为全体非零整数）；$\\frac{1}{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n\\ge1}(1+\\frac zn)e^{-z/n}$（$E_1$ 型）；由前者比较系数即得 $\\zeta(2k)$ 的欧拉值。",
+   "与米塔-列夫勒定理对偶：魏尔斯特拉斯用无穷乘积安排零点，米塔-列夫勒用部分分式安排极点与主部；对乘积取对数导数即得后者。"
+  ],
+  "propertiesEn": [
+   "Existence: every sequence tending to $\\infty$ without accumulation point (with multiplicities) is the zero set of some entire function; the condition cannot be relaxed — zeros of an analytic function are isolated, and an accumulation point forces the function to vanish identically.",
+   "Freedom: once the zeros are fixed, all solutions are obtained by multiplying one solution by $e^{g(z)}$ with $g$ entire; in general $g$ is not determined by the zeros (contrast with polynomials, where only a constant factor is free).",
+   "Convergence mechanism: the exponential factors never vanish, so they affect only convergence, not the zeros; the choice $p_n=n$ (or blockwise, or the constant $\\lfloor\\rho\\rfloor$) makes the product converge uniformly on compact sets.",
+   "Hadamard refinement: for finite order $\\rho$ the elementary factors have the constant index $\\lfloor\\rho\\rfloor$ and $g$ is a polynomial of degree at most $\\rho$, with the exponent of convergence of zeros satisfying $\\lambda\\le\\rho$; this links zero distribution and growth in both directions.",
+   "Standard instances: $\\sin(\\pi z)/(\\pi z)=\\prod(1-z^2/n^2)$ with the non-zero integers as zeros, and $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+z/n)e^{-z/n}$ of type $E_1$; comparing coefficients in the first gives Euler's values of $\\zeta(2k)$.",
+   "Dual to the Mittag-Leffler theorem: Weierstrass arranges zeros by infinite products while Mittag-Leffler arranges poles and principal parts by partial fractions; taking the logarithmic derivative of a product produces the latter."
+  ],
+  "examples": [
+   {
+    "problem": "用 $\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n\\ge1}\\left(1-\\frac{z^2}{n^2}\\right)$ 计算 $\\sum_{n\\ge1}\\frac{1}{n^2}$ 与 $\\sum_{n\\ge1}\\frac{1}{n^4}$。",
+    "solution": "左边在 $z=0$ 附近的泰勒展开：由 $\\sin w=w-\\frac{w^3}{6}+\\frac{w^5}{120}-\\cdots$（$w=\\pi z$）得\n$$\\frac{\\sin\\pi z}{\\pi z}=1-\\frac{\\pi^2z^2}{6}+\\frac{\\pi^4z^4}{120}-\\cdots .$$\n右边逐项相乘，$z^2$ 的系数是 $-\\sum\\frac{1}{n^2}$，$z^4$ 的系数是所有两两乘积 $\\sum_{m<n}\\frac{1}{m^2n^2}$，而\n$$\\sum_{m<n}\\frac{1}{m^2n^2}=\\frac{1}{2}\\left[\\left(\\sum_{n\\ge1}\\frac{1}{n^2}\\right)^2-\\sum_{n\\ge1}\\frac{1}{n^4}\\right].$$\n比较 $z^2$ 项：$\\sum\\frac{1}{n^2}=\\frac{\\pi^2}{6}$（欧拉 1735 年的结果）。代入 $z^4$ 项：\n$$\\frac{\\pi^4}{120}=\\frac{1}{2}\\left(\\frac{\\pi^4}{36}-S_4\\right)\\ \\Longrightarrow\\ S_4=\\frac{\\pi^4}{36}-\\frac{\\pi^4}{60}=\\frac{\\pi^4}{90},$$\n即 $\\sum_{n\\ge1}\\frac{1}{n^4}=\\frac{\\pi^4}{90}$。这两条都只用到无穷乘积与泰勒展开的系数比较，是魏尔斯特拉斯分解定理「零点决定函数」威力的直接体现。"
+   },
+   {
+    "problem": "为什么不能直接用 $\\prod_{n\\ge1}\\left(1-\\frac{z}{n}\\right)$ 造出以全部正整数为零点的整函数？请给出正确的构造。",
+    "solution": "因为该乘积不收敛：部分积的对数\n$$\\sum_{n=1}^{\\infty}\\log\\left(1-\\frac{z}{n}\\right)=-\\sum_{n=1}^{\\infty}\\left(\\frac{z}{n}+O\\left(\\frac{1}{n^2}\\right)\\right)$$\n中的 $\\sum\\frac{1}{n}$ 发散（调和级数），故部分积的对数按 $-zH_N$ 的量级发散（$\\operatorname{Re}z>0$ 时趋于 $-\\infty$、$\\operatorname{Re}z<0$ 时趋于 $+\\infty$；虚轴上模有界而辐角发散），部分积不收敛到有限值。\n\n修正办法是给每项配上 $E_1$ 型的指数因子：因为\n$$\\left(1-\\frac{z}{n}\\right)e^{z/n}=\\left(1-\\frac{z}{n}\\right)\\left(1+\\frac{z}{n}+O\\left(\\frac{1}{n^2}\\right)\\right)=1+O\\!\\left(\\frac{1}{n^2}\\right),$$\n所以 $\\prod_{n\\ge1}\\left(1-\\frac{z}{n}\\right)e^{z/n}$ 在每个紧集上一致收敛，给出一个整函数；它与 $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+\\frac zn)e^{-z/n}$ 的形式完全一致（换 $z\\to-z$ 即可对照）。\n\n若只想把 $z=1,2,3,\\dots$ 作为零点，也可用对称配对 $\\prod_{n\\ge1}\\left(1-\\frac{z^2}{n^2}\\right)=\\frac{\\sin\\pi z}{\\pi z}$，得到的是零点为全体非零整数的整函数。两种做法都说明：发散时必须使用初等因子（补偿项），而补偿项只影响收敛性、不引入新零点。"
+   }
+  ],
+  "plot": {
+   "type": "function",
+   "functions": [
+    {
+     "expr": "sin(PI*x)/(PI*x)",
+     "color": "#ffd166",
+     "label": "y = sin(πx)/(πx)"
     },
-    "tags": [
-      "无穷乘积",
-      "初等因子",
-      "零点",
-      "欧拉公式",
-      "Hadamard"
-    ],
-    "links": [
-      "entire-functions",
-      "mittag-leffler",
-      "complex-power-series",
-      "gamma-function",
-      "zeta-function",
-      "meromorphic-functions"
-    ]
-  },
-  {
-    "id": "meromorphic-functions",
-    "title": "亚纯函数",
-    "titleEn": "Meromorphic Functions",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "区域 $D$ 内除极点外处处解析的函数（奇点只能是极点）；等价于两个解析函数之商，而扩充复平面上的亚纯函数恰是有理函数。",
-    "summaryEn": "A function analytic on a domain except at poles (the only possible singularities); equivalently a quotient of two analytic functions, while the meromorphic functions on the Riemann sphere are exactly the rational functions.",
-    "definition": "设 $D$ 是区域。若函数 $f$ 在 $D$ 的一个离散子集 $P$ 之外处处解析，而 $P$ 中每一点都是 $f$ 的极点，就称 $f$ 是 $D$ 上的**亚纯函数**。换句话说，亚纯函数允许在极点处取 $\\infty$，除极点外处处解析。关键的限定是：**奇点只能是极点**——不能有本性奇点（如 $e^{1/z}$ 在 $0$ 处），不能有支点（如 $\\log z$ 在 $0$ 处），也不能有非孤立奇点。因此亚纯函数比解析函数宽（允许极点），但比一般函数严格得多。\n\n由孤立奇点理论，极点是孤立奇点，所以极点集 $P$ 在 $D$ 内**无聚点**：$D$ 的任一紧集内只有有限多个极点。在每个极点 $a$ 附近 $f$ 有洛朗展开\n$$f(z)=\\sum_{k=1}^{m}\\frac{c_{-k}}{(z-a)^k}+\\sum_{k=0}^{\\infty}c_k(z-a)^k\\qquad(0<|z-a|<\\varepsilon),$$\n负幂部分（洛朗展开的主要部分）称为 $f$ 在 $a$ 处的**主部**，它完全刻画 $f$ 在极点附近的行为，其中 $c_{-1}$ 就是留数。与极点一样，$f$ 的零点也是孤立的（除非 $f\\equiv0$），故零点集与极点集都至多可数。\n\n**等价刻画（核心）**：$D$ 上的亚纯函数恰好是 $D$ 上两个解析函数之商，\n$$f\\ \\text{在}\\ D\\ \\text{上亚纯}\\iff f=\\frac{g}{h},\\qquad g,h\\ \\text{在}\\ D\\ \\text{上解析，且}\\ h\\not\\equiv0 .$$\n「$\\Leftarrow$」是显然的：若 $g,h$ 无公共零点，则 $h$ 的零点（都是孤立的）就是 $f$ 的极点，其余点处 $f$ 解析。「$\\Rightarrow$」需要构造：先取一个在 $D$ 上解析、恰以 $f$ 的全部极点为零点的函数 $h$（这本质上就是魏尔斯特拉斯分解定理的「零点可任意指定」形式：在圆盘上由规范乘积给出，在一般区域上需要 Runge 定理），再令 $g=fh$，由 $h$ 的零点恰好抵消 $f$ 的极点知 $g$ 在 $D$ 上解析，于是 $f=g/h$。由于任意两个亚纯函数都可加、减、乘、除（除以不恒零者），$D$ 上亚纯函数全体构成一个**域** $M(D)$，它正是 $D$ 上解析函数环 $\\mathcal{O}(D)$ 的分式域——这说明「亚纯 = 解析之商」不是一个巧合，而是域论层面的刻画。\n\n**扩充复平面上的情形**：把定义域取成扩充复平面 $\\hat{\\mathbb{C}}=\\mathbb{C}\\cup\\{\\infty\\}$（黎曼球面），则 $\\hat{\\mathbb{C}}$ 上的亚纯函数恰好是**有理函数** $f(z)=\\frac{P(z)}{Q(z)}$（$P,Q$ 为多项式，$Q\\not\\equiv0$）。理由：$\\hat{\\mathbb{C}}$ 是紧集，极点在该紧集内无聚点，故极点只能有有限多个（若有无穷多个极点，紧性给出聚点，而聚点处的奇性不可能是极点，违背亚纯性）；于是乘上 $\\prod_k(z-a_k)^{m_k}$ 把极点全部消去，得到在 $\\mathbb{C}$ 上解析的函数 $g$；又 $f$ 在 $z=\\infty$ 附近必须是解析的或有极点（不能是本性奇点），故 $g$ 在 $\\infty$ 处至多也是极点，这样的整函数必为多项式。因此 $f$ 是多项式之商；反之有理函数显然在 $\\hat{\\mathbb{C}}$ 上亚纯。这也是「有理函数 = 从黎曼球面到自身的解析映射」这一说法的来源；非常数有理函数把 $\\hat{\\mathbb{C}}$ 满射到 $\\hat{\\mathbb{C}}$ 上（与皮卡定理的结论一致）。",
-    "definitionEn": "Let $D$ be a domain. A function $f$ is called **meromorphic** on $D$ if it is analytic on $D$ except on a discrete subset $P$, every point of which is a pole of $f$. In other words, a meromorphic function may take the value $\\infty$ at poles and is analytic everywhere else. The essential restriction is that **singularities can only be poles**: there may be no essential singularity (as with $e^{1/z}$ at $0$), no branch point (as with $\\log z$ at $0$) and no non-isolated singularity. Meromorphic functions are thus more general than analytic ones (poles are allowed) but far more special than arbitrary functions.\n\nBy the theory of isolated singularities, poles are isolated, so the pole set $P$ has **no accumulation point** in $D$: every compact subset of $D$ contains only finitely many poles. Near a pole $a$ the Laurent expansion reads\n$$f(z)=\\sum_{k=1}^{m}\\frac{c_{-k}}{(z-a)^k}+\\sum_{k=0}^{\\infty}c_k(z-a)^k\\qquad(0<|z-a|<\\varepsilon),$$\nand the negative-power part (the principal part) determines the local behaviour, with $c_{-1}$ the residue. As with poles, the zeros of $f$ are isolated unless $f\\equiv0$, so both the zero set and the pole set are at most countable.\n\n**The key characterisation**: meromorphic functions on $D$ are exactly the quotients of two analytic functions on $D$,\n$$f\\ \\text{meromorphic on}\\ D\\iff f=\\frac{g}{h}\\quad\\text{with } g,h \\text{ analytic on } D,\\ h\\not\\equiv0 .$$\nThe implication '$\\Leftarrow$' is immediate: if $g$ and $h$ have no common zero, the (isolated) zeros of $h$ are precisely the poles of $f$, and $f$ is analytic elsewhere. For '$\\Rightarrow$' one constructs an analytic function $h$ on $D$ whose zeros are exactly the poles of $f$ (this is the 'zeros may be prescribed' form of the Weierstrass factorization theorem: on a disk it is given by a canonical product, while a general domain needs Runge's theorem) and sets $g=fh$; the zeros of $h$ cancel the poles of $f$, so $g$ is analytic on $D$ and $f=g/h$. Since meromorphic functions can be added, subtracted, multiplied and divided (by anything not identically zero), they form a **field** $M(D)$, the field of fractions of the ring $\\mathcal{O}(D)$ of analytic functions on $D$; so 'meromorphic = quotient of analytic functions' is a statement about fields, not a coincidence.\n\n**The case of the extended plane**: on the Riemann sphere $\\hat{\\mathbb{C}}=\\mathbb{C}\\cup\\{\\infty\\}$, the meromorphic functions are exactly the **rational functions** $f(z)=P(z)/Q(z)$ with $P,Q$ polynomials, $Q\\not\\equiv0$. Indeed $\\hat{\\mathbb{C}}$ is compact and the poles have no accumulation point there, so there are only finitely many poles (infinitely many would have an accumulation point, and the singularity there could not be a pole, contradicting meromorphy). Multiplying by $\\prod_k(z-a_k)^{m_k}$ removes all poles and yields a function $g$ analytic on $\\mathbb{C}$; since $f$ is analytic or has a pole at $z=\\infty$ (never an essential singularity there), $g$ has at most a pole at $\\infty$, and such an entire function must be a polynomial. Hence $f$ is a quotient of polynomials; conversely rational functions are plainly meromorphic on $\\hat{\\mathbb{C}}$. This is the origin of the slogan 'rational functions are the analytic maps of the Riemann sphere to itself'; a non-constant rational function maps $\\hat{\\mathbb{C}}$ onto $\\hat{\\mathbb{C}}$ (in agreement with Picard's theorem).",
-    "formulas": [
-      {
-        "latex": "f\\ \\text{在}\\ D\\ \\text{上亚纯}\\iff f\\ \\text{在}\\ D\\setminus P\\ \\text{解析，}\\ P\\ \\text{中每点为极点（无本性奇点、无支点）}",
-        "note": "定义的本质就是「奇点只能是极点」；极点集在 $D$ 内无聚点。",
-        "noteEn": "The definition amounts to 'singularities can only be poles'; the pole set has no accumulation point in $D$."
-      },
-      {
-        "latex": "f\\ \\text{亚纯}\\iff f=\\frac{g}{h},\\qquad g,h\\ \\text{在}\\ D\\ \\text{上解析},\\ h\\not\\equiv0",
-        "note": "等价刻画：亚纯函数恰为两个解析函数之商；由此 $M(D)$ 是 $\\mathcal{O}(D)$ 的分式域。",
-        "noteEn": "Equivalent characterisation: meromorphic functions are exactly quotients of two analytic functions; thus $M(D)$ is the field of fractions of $\\mathcal{O}(D)$."
-      },
-      {
-        "latex": "f(z)=\\sum_{k=1}^{m}\\frac{c_{-k}}{(z-a)^k}+\\sum_{k=0}^{\\infty}c_k(z-a)^k\\qquad(0<|z-a|<\\varepsilon)",
-        "note": "极点处的洛朗展开：负幂部分是主部，$c_{-1}$ 是留数，它刻画极点的局部行为。",
-        "noteEn": "Laurent expansion at a pole: the negative-power part is the principal part and $c_{-1}$ is the residue, which encodes the local behaviour."
-      },
-      {
-        "latex": "\\hat{\\mathbb{C}}\\ \\text{上的亚纯函数}\\iff f(z)=\\frac{P(z)}{Q(z)}\\quad(P,Q\\ \\text{多项式},\\ Q\\not\\equiv0)",
-        "note": "紧性 $\\Rightarrow$ 极点有限 $\\Rightarrow$ 消去极点后得整函数且在 $\\infty$ 至多极点 $\\Rightarrow$ 多项式，故只有有理函数。",
-        "noteEn": "Compactness gives finitely many poles; removing them leaves an entire function with at most a pole at $\\infty$, hence a polynomial, so only rational functions occur."
-      },
-      {
-        "latex": "f(z)=\\frac{\\pi\\cos(\\pi z)}{\\sin(\\pi z)}=\\pi\\cot(\\pi z),\\qquad f=\\frac{g}{h},\\quad g=\\pi\\cos(\\pi z),\\ h=\\sin(\\pi z)",
-        "note": "典型实例：$\\cot$ 的极点 $z\\in\\mathbb{Z}$ 正好被整函数 $\\sin(\\pi z)$ 的零点消去。",
-        "noteEn": "A model example: the poles $z\\in\\mathbb{Z}$ of $\\cot$ are exactly cancelled by the zeros of the entire function $\\sin(\\pi z)$."
-      }
-    ],
-    "properties": [
-      "奇点限制：亚纯函数在 $D$ 内除极点外处处解析，不允许本性奇点、支点或非孤立奇点；这正是「亚纯」比「解析」宽、又比任意函数严格的分界。",
-      "极点集在 $D$ 内无聚点（每个紧集内极点有限），零点集同样无聚点；两者都至多可数，极点的主部（等价地洛朗负幂部分）刻画局部行为，$c_{-1}$ 即留数。",
-      "等价刻画：$D$ 上亚纯 $\\iff$ 为 $D$ 上两个解析函数之商；亚纯函数全体 $M(D)$ 构成域，是 $\\mathcal{O}(D)$ 的分式域。",
-      "扩充复平面：$\\hat{\\mathbb{C}}$ 上亚纯函数恰为有理函数（极点有限 $\\Rightarrow$ 消去极点后整函数在 $\\infty$ 至多极点 $\\Rightarrow$ 多项式）。",
-      "辨析例：$\\tan z=\\sin z/\\cos z$ 在 $\\mathbb{C}$ 上亚纯，但在 $\\hat{\\mathbb{C}}$ 上不是（极点以 $\\infty$ 为聚点，$\\infty$ 是**非孤立奇点**，故不是有理函数）；$\\frac{e^{1/z}}{z}$ 不是亚纯（$0$ 处本性奇点）；$\\log z$ 不是（$0$ 是支点而非极点）。"
-    ],
-    "propertiesEn": [
-      "Restriction on singularities: a meromorphic function is analytic on $D$ except at poles, with no essential singularity, branch point or non-isolated singularity allowed; this is the boundary separating meromorphic from merely analytic and from arbitrary functions.",
-      "The pole set has no accumulation point in $D$ (finitely many poles in every compact set) and the same holds for the zeros; both sets are at most countable, and the principal part (the negative-power Laurent part) describes the local behaviour, with $c_{-1}$ the residue.",
-      "Equivalent characterisation: meromorphic on $D$ $\\iff$ a quotient of two analytic functions on $D$; the meromorphic functions form the field $M(D)$, the field of fractions of $\\mathcal{O}(D)$.",
-      "Extended plane: the meromorphic functions on $\\hat{\\mathbb{C}}$ are exactly the rational functions (finitely many poles; killing them leaves an entire function with at most a pole at $\\infty$, i.e. a polynomial).",
-      "Contrasting examples: $\\tan z=\\sin z/\\cos z$ is meromorphic on $\\mathbb{C}$ but not on $\\hat{\\mathbb{C}}$ ($\\infty$ is a limit point of poles — a non-isolated singularity — so it is not rational); $e^{1/z}/z$ is not meromorphic (essential singularity at $0$); $\\log z$ is not (branch point at $0$, not a pole)."
-    ],
-    "examples": [
-      {
-        "problem": "判断 $f(z)=\\frac{1}{\\sin z}$ 的奇点类型，写出它在每个极点处的主部与留数，并判断它是否为 $\\hat{\\mathbb{C}}$ 上的亚纯函数。",
-        "solution": "$\\sin z$ 的零点为 $z=k\\pi\\ (k\\in\\mathbb{Z})$，且都是一级零点，因为 $(\\sin z)'|_{z=k\\pi}=\\cos k\\pi=(-1)^k\\ne0$。因此 $f=1/\\sin z$ 在这些点处有一级极点，其余点解析；特别地 $0$ 处只是极点而非本性奇点，所以 $f$ 是 $\\mathbb{C}$ 上的亚纯函数。\n\n在每个极点附近展开：由 $\\sin(z-k\\pi)=(-1)^k\\sin z$ 得\n$$\\sin z=(-1)^k\\left((z-k\\pi)-\\frac{(z-k\\pi)^3}{6}+\\cdots\\right),$$\n故\n$$f(z)=\\frac{(-1)^k}{z-k\\pi}+O(1)\\qquad(z\\to k\\pi),$$\n即主部为 $\\dfrac{(-1)^k}{z-k\\pi}$，留数为 $(-1)^k$。\n\n但 $f$ 不是 $\\hat{\\mathbb{C}}$ 上的亚纯函数：换 $z=\\frac1w$，$f\\left(\\frac1w\\right)=\\frac{1}{\\sin(1/w)}$ 它的极点 $w=1/(k\\pi)$ 以 $w=0$ 为聚点，故 $z=\\infty$ 是极点的聚点（**非孤立奇点**），$f$ 在 $\\hat{\\mathbb{C}}$ 上不亚纯、不是有理函数。"
-      },
-      {
-        "problem": "用等价刻画说明 $f(z)=\\pi\\cot(\\pi z)$ 是 $\\mathbb{C}$ 上的亚纯函数，并写出相应的两个整函数。",
-        "solution": "把 $f$ 写成显式的商：\n$$f(z)=\\pi\\cot(\\pi z)=\\frac{\\pi\\cos(\\pi z)}{\\sin(\\pi z)} .$$\n分子 $g(z)=\\pi\\cos(\\pi z)$ 与分母 $h(z)=\\sin(\\pi z)$ 都是整函数，$h\\not\\equiv0$，故由等价刻画 $f=g/h$ 在 $\\mathbb{C}$ 上亚纯。\n\n极点位置恰是 $\\sin(\\pi z)$ 的零点 $z\\in\\mathbb{Z}$；由于 $(\\sin\\pi z)'|_{z=k}=(-1)^k\\pi\\ne0$，分子在 $z=k$ 处不为零（$\\cos k\\pi=(-1)^k\\ne0$），故这些都是一级极点，且\n$$\\pi\\cot(\\pi z)=\\frac{(-1)^k\\pi\\cdot(-1)^k}{\\pi(z-k)}+O(1)=\\frac{1}{z-k}+O(1)\\qquad(z\\to k),$$\n即每个极点的主部都是 $\\frac{1}{z-k}$、留数都是 $1$。这也印证了「极点集无聚点」：无论在紧集上取多少个极点，它们都孤立，且每个紧集内只有有限多个。\n\n反过来，这一等价刻画的一般证明思路是：先造出以全部极点为零点的整函数 $h$（借助魏尔斯特拉斯分解定理），再令 $g=fh$ 即为整函数；本例中 $h$ 恰好是一个熟悉的函数 $\\sin(\\pi z)$。"
-      }
-    ],
-    "tags": [
-      "亚纯函数",
-      "极点",
-      "有理函数",
-      "分式域",
-      "黎曼球面"
-    ],
-    "links": [
-      "isolated-singularities",
-      "entire-functions",
-      "weierstrass-factorization",
-      "mittag-leffler",
-      "laurent-series",
-      "residue"
-    ],
-    "plot": {
-      "type": "scatter",
-      "points": [
-        [
-          1.0,
-          0.0
-        ],
-        [
-          0.9239,
-          0.3827
-        ],
-        [
-          0.7071,
-          0.7071
-        ],
-        [
-          0.3827,
-          0.9239
-        ],
-        [
-          0.0,
-          1.0
-        ],
-        [
-          -0.3827,
-          0.9239
-        ],
-        [
-          -0.7071,
-          0.7071
-        ],
-        [
-          -0.9239,
-          0.3827
-        ],
-        [
-          -1.0,
-          0.0
-        ],
-        [
-          -0.9239,
-          -0.3827
-        ],
-        [
-          -0.7071,
-          -0.7071
-        ],
-        [
-          -0.3827,
-          -0.9239
-        ],
-        [
-          -0.0,
-          -1.0
-        ],
-        [
-          0.3827,
-          -0.9239
-        ],
-        [
-          0.7071,
-          -0.7071
-        ],
-        [
-          0.9239,
-          -0.3827
-        ]
-      ],
-      "pointColor": "rgba(150,165,205,0.55)",
-      "pointSize": 2.2,
-      "marks": [
-        {
-          "at": [
-            1.0,
-            0.0
-          ],
-          "label": "z = 1",
-          "color": "#4cc9f0"
-        },
-        {
-          "at": [
-            -0.5,
-            0.866
-          ],
-          "label": "ω",
-          "color": "#4cc9f0"
-        },
-        {
-          "at": [
-            -0.5,
-            -0.866
-          ],
-          "label": "ω̄",
-          "color": "#4cc9f0"
-        },
-        {
-          "at": [
-            0,
-            1
-          ],
-          "label": "极点 i",
-          "color": "#ff6b9d"
-        },
-        {
-          "at": [
-            0,
-            -1
-          ],
-          "label": "极点 −i",
-          "color": "#ff6b9d"
-        }
-      ],
-      "xRange": [
-        -2.5714,
-        2.5714
-      ],
-      "yRange": [
-        -1.4,
-        1.4
-      ],
-      "title": "亚纯函数 (z³−1)/(z²+1)：零点为三个立方根、极点为 ±i（都在单位圆上）"
+    {
+     "expr": "(1 - x^2)",
+     "color": "#4cc9f0",
+     "label": "部分积 N=1：(1-x²)"
+    },
+    {
+     "expr": "(1 - x^2)*(1 - x^2/4)",
+     "color": "#ff6b9d",
+     "label": "部分积 N=2：(1-x²)(1-x²/4)"
+    },
+    {
+     "expr": "(1 - x^2)*(1 - x^2/4)*(1 - x^2/9)",
+     "color": "#06d6a0",
+     "label": "部分积 N=3：(1-x²)(1-x²/4)(1-x²/9)"
     }
+   ],
+   "xRange": [
+    -3,
+    3
+   ],
+   "yRange": [
+    -2,
+    2
+   ],
+   "title": "sin(πx)/(πx) 及其部分乘积：零点相同的无穷乘积逼近"
   },
-  {
-    "id": "mittag-leffler",
-    "title": "米塔-列夫勒定理",
-    "titleEn": "The Mittag-Leffler Theorem",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "给定无聚点的极点列与各点的主部，存在以它们为极点且主部恰如所设的亚纯函数，解唯一到相差一个整函数；与魏尔斯特拉斯（管零点）互为对偶。",
-    "summaryEn": "Given poles without accumulation point and prescribed principal parts, there exists a meromorphic function with exactly those poles and principal parts, unique up to an entire function; it is dual to the Weierstrass theorem on zeros.",
-    "definition": "对亚纯函数而言，最重要的构造问题是**部分分式**：给定极点表 $\\{a_n\\}$（在 $\\mathbb{C}$ 内无聚点）与每个极点处指定的主部 $P_n\\!\\left(\\frac{1}{z-a_n}\\right)$（$P_n$ 是 $1/(z-a_n)$ 的多项式，无常数项），能否造出恰以这些点为极点、主部恰如所设的亚纯函数？直接求和 $\\sum_n P_n\\!\\left(\\frac{1}{z-a_n}\\right)$ 往往发散：例如取 $a_n=n$、$P_n=\\frac{1}{z-n}$ 时每项只按 $\\frac1n$ 衰减，级数不收敛。\n\n**米塔-列夫勒定理**：设 $\\{a_n\\}\\subset\\mathbb{C}$ 无聚点（即 $|a_n|\\to\\infty$），并给定各点的主部 $P_n\\!\\left(\\frac{1}{z-a_n}\\right)$。则存在 $\\mathbb{C}$ 上的亚纯函数 $f$，它以各 $a_n$ 为极点、在 $a_n$ 处的主部恰为 $P_n$，并且可以取成\n$$f(z)=\\sum_{n=1}^{\\infty}\\left[P_n\\!\\left(\\frac{1}{z-a_n}\\right)-Q_n(z)\\right],$$\n其中每个 $Q_n$ 是适当选取的多项式（通常取 $P_n(1/(z-a_n))$ 在原点附近的泰勒多项式），用来抵消远处的增长，使级数在 $\\mathbb{C}$ 的每个紧集上一致收敛。$Q_n$ 在极点之外处处解析，故它**只改变收敛性、不改变极点与主部**。所有这样的函数恰为 $f+\\varphi$，其中 $\\varphi$ 为任意整函数：主部条件无法固定「无处有极点」的部分，正如魏尔斯特拉斯分解中无法固定 $e^{g}$。\n\n**经典例子**：\n$$\\pi\\cot(\\pi z)=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^{2}-n^{2}} .$$\n右边以全体整数为一级极点、留数全为 $1$；关键在于**对称配对**：\n$$\\frac{1}{z-n}+\\frac{1}{z+n}=\\frac{2z}{z^{2}-n^{2}},\\qquad \\left|\\frac{2z}{z^{2}-n^{2}}\\right|\\sim\\frac{2|z|}{n^{2}},$$\n配对后每项按 $\\frac{1}{n^2}$ 衰减，级数可和。把配对写成 $\\frac{1}{z-n}$ 的对称极限，就是 $\\lim_{N\\to\\infty}\\sum_{|n|\\le N}\\frac{1}{z-n}$——「修正项」在这里的具体形态就是配对。\n\n对上述展开逐项求导，得到\n$$\\frac{\\pi^{2}}{\\sin^{2}(\\pi z)}=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{(z-n)^{2}} .$$\n这条双边级数**不需要**任何修正项：因为 $\\sum_{n\\ne0}\\frac{1}{n^{2}}<\\infty$，它本身绝对收敛。这正好说明修正项的出现完全由极点列的密度决定（$\\sum\\frac{1}{|a_n|}$ 是否收敛）。\n\n**与魏尔斯特拉斯分解定理的对偶**：魏尔斯特拉斯用**无穷乘积**安排任意指定的**零点**，米塔-列夫勒用**部分分式**安排任意指定的**极点与主部**。两者由「求对数导数」联系起来：对 $\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n\\ge1}\\left(1-\\frac{z^{2}}{n^{2}}\\right)$ 取对数导数，得 $\\pi\\cot(\\pi z)-\\frac{1}{z}=\\sum_{n\\ge1}\\frac{2z}{z^{2}-n^{2}}$，正是上面的公式；对 $\\frac{1}{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n\\ge1}\\left(1+\\frac{z}{n}\\right)e^{-z/n}$ 取对数导数，得到 digamma 的部分分式展开\n$$\\frac{\\Gamma'(z)}{\\Gamma(z)}=-\\gamma+\\sum_{n=0}^{\\infty}\\left(\\frac{1}{n+1}-\\frac{1}{z+n}\\right),$$\n每个极点 $z=-n$ 的主部 $-\\frac{1}{z+n}$ 都配上一个常数修正项 $\\frac{1}{n+1}$ 以保证收敛（$\\gamma$ 是欧拉常数）。这个对偶关系是本节点与上一节点最值得记住的一点。",
-    "definitionEn": "For meromorphic functions the basic construction problem is that of **partial fractions**: given a pole list $\\{a_n\\}$ with no accumulation point in $\\mathbb{C}$ and, at each pole, a prescribed principal part $P_n(1/(z-a_n))$ (where $P_n$ is a polynomial in $1/(z-a_n)$ without constant term), can one build a meromorphic function having exactly these poles and principal parts? Summing $\\sum_n P_n(1/(z-a_n))$ directly often diverges: for $a_n=n$ and $P_n=1/(z-n)$ each term decays only like $1/n$ and the series fails to converge.\n\n**The Mittag-Leffler theorem**: let $\\{a_n\\}\\subset\\mathbb{C}$ have no accumulation point (so $|a_n|\\to\\infty$) and let principal parts $P_n(1/(z-a_n))$ be prescribed. Then there is a meromorphic function $f$ on $\\mathbb{C}$ having the $a_n$ as its poles with principal parts exactly $P_n$, and it can be written as\n$$f(z)=\\sum_{n=1}^{\\infty}\\left[P_n\\!\\left(\\frac{1}{z-a_n}\\right)-Q_n(z)\\right],$$\nwhere each $Q_n$ is a suitable polynomial (typically the Taylor polynomial of $P_n(1/(z-a_n))$ near the origin) cancelling the growth at infinity, so that the series converges uniformly on compact subsets of $\\mathbb{C}$. Since $Q_n$ is analytic away from the poles, it **affects only convergence, never the poles or principal parts**. All such functions are exactly $f+\\varphi$ with $\\varphi$ an arbitrary entire function: principal-part data cannot pin down the pole-free part, just as the Weierstrass expansion cannot pin down $e^{g}$.\n\n**The classical examples**:\n$$\\pi\\cot(\\pi z)=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^{2}-n^{2}} .$$\nThe right-hand side has simple poles at all integers with residue $1$ everywhere; the key point is the **symmetric pairing**\n$$\\frac{1}{z-n}+\\frac{1}{z+n}=\\frac{2z}{z^{2}-n^{2}},\\qquad \\left|\\frac{2z}{z^{2}-n^{2}}\\right|\\sim\\frac{2|z|}{n^{2}},$$\nafter which each term decays like $1/n^2$ and the series converges. Written in terms of $\\frac{1}{z-n}$, the pairing is precisely the symmetric limit $\\lim_{N\\to\\infty}\\sum_{|n|\\le N}\\frac{1}{z-n}$; the 'correction terms' here take the concrete form of pairing.\n\nDifferentiating this expansion term by term gives\n$$\\frac{\\pi^{2}}{\\sin^{2}(\\pi z)}=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{(z-n)^{2}},$$\na two-sided series that **needs no correction term at all**, because $\\sum_{n\\ne0}1/n^{2}<\\infty$ makes it absolutely convergent. So the appearance of corrections is governed entirely by the density of the pole sequence, i.e. by whether $\\sum 1/|a_n|$ converges.\n\n**Duality with the Weierstrass factorization theorem**: Weierstrass arranges prescribed **zeros** by infinite products, Mittag-Leffler arranges prescribed **poles and principal parts** by partial fractions. The two are linked by the logarithmic derivative: taking it for $\\sin(\\pi z)/(\\pi z)=\\prod_{n\\ge1}(1-z^{2}/n^{2})$ gives $\\pi\\cot(\\pi z)-1/z=\\sum_{n\\ge1}2z/(z^{2}-n^{2})$, exactly the display above; taking it for $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+z/n)e^{-z/n}$ gives the partial-fraction expansion of the digamma function,\n$$\\frac{\\Gamma'(z)}{\\Gamma(z)}=-\\gamma+\\sum_{n=0}^{\\infty}\\left(\\frac{1}{n+1}-\\frac{1}{z+n}\\right),$$\nwhere the principal part $-1/(z+n)$ at each pole of $z=-n$ is paired with the constant correction $1/(n+1)$ to force convergence ($\\gamma$ is Euler's constant). This duality is the one point worth remembering from this node and the previous one.",
-    "formulas": [
-      {
-        "latex": "f(z)=\\sum_{n=1}^{\\infty}\\left[P_n\\!\\left(\\frac{1}{z-a_n}\\right)-Q_n(z)\\right]",
-        "note": "一般构造：$Q_n$ 是修正多项式，只影响收敛性；主部由 $P_n$ 指定，解唯一到相差一个整函数。",
-        "noteEn": "General construction: the polynomials $Q_n$ only affect convergence, the principal parts are the prescribed $P_n$, and the solution is unique up to an entire function."
-      },
-      {
-        "latex": "\\pi\\cot(\\pi z)=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^{2}-n^{2}}",
-        "note": "经典展开：极点为全体整数，各点留数为 $1$；右边由对称配对保证收敛。",
-        "noteEn": "The classical expansion: poles at all integers with residue $1$; the symmetric pairing makes the right-hand side converge."
-      },
-      {
-        "latex": "\\frac{1}{z-n}+\\frac{1}{z+n}=\\frac{2z}{z^{2}-n^{2}},\\qquad \\left|\\frac{2z}{z^{2}-n^{2}}\\right|\\sim\\frac{2|z|}{n^{2}}",
-        "note": "配对是「修正项」的具体形态：把两个对称极点合在一起，衰减从 $\\frac1n$ 提升到 $\\frac{1}{n^2}$。",
-        "noteEn": "Pairing is the concrete form of the correction: combining two symmetric poles improves decay from $1/n$ to $1/n^2$."
-      },
-      {
-        "latex": "\\frac{\\pi^{2}}{\\sin^{2}(\\pi z)}=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{(z-n)^{2}}",
-        "note": "对 $\\pi\\cot$ 的展开逐项求导；极点都是二级的，双边级数绝对收敛（$\\sum 1/n^{2}<\\infty$），无需修正项。",
-        "noteEn": "Obtained by termwise differentiation; all poles are double and the two-sided series converges absolutely ($\\sum1/n^{2}<\\infty$), so no corrections are needed."
-      },
-      {
-        "latex": "\\frac{\\Gamma'(z)}{\\Gamma(z)}=-\\gamma+\\sum_{n=0}^{\\infty}\\left(\\frac{1}{n+1}-\\frac{1}{z+n}\\right)",
-        "note": "digamma 的部分分式展开：极点 $z=-n$ 处主部 $-\\frac{1}{z+n}$，修正项为常数 $\\frac{1}{n+1}$。",
-        "noteEn": "Partial fractions for the digamma function: the principal part at $z=-n$ is $-1/(z+n)$ and the correction is the constant $1/(n+1)$."
-      },
-      {
-        "latex": "\\pi z\\cot(\\pi z)=1-2\\sum_{k=1}^{\\infty}\\zeta(2k)\\,z^{2k}",
-        "note": "由 $\\pi\\cot$ 的展开在 $z=0$ 附近作几何级数展开而得；系数与魏尔斯特拉斯乘积比较 sin 所得 $\\zeta(2k)$ 完全一致（$k=1$ 即 $\\pi^{2}/6$），体现两定理的对偶。",
-        "noteEn": "From expanding the $\\pi\\cot$ series geometrically near $z=0$; the coefficients agree with the values of $\\zeta(2k)$ obtained from the Weierstrass product for $\\sin$ ($\\pi^2/6$ for $k=1$), illustrating the duality."
-      }
+  "tags": [
+   "无穷乘积",
+   "初等因子",
+   "零点",
+   "欧拉公式",
+   "Hadamard"
+  ],
+  "links": [
+   "entire-functions",
+   "mittag-leffler",
+   "complex-power-series",
+   "gamma-function",
+   "zeta-function",
+   "meromorphic-functions"
+  ]
+ },
+ {
+  "id": "meromorphic-functions",
+  "title": "亚纯函数",
+  "titleEn": "Meromorphic Functions",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "区域 $D$ 内除极点外处处解析的函数（奇点只能是极点）；等价于两个解析函数之商，而扩充复平面上的亚纯函数恰是有理函数。",
+  "summaryEn": "A function analytic on a domain except at poles (the only possible singularities); equivalently a quotient of two analytic functions, while the meromorphic functions on the Riemann sphere are exactly the rational functions.",
+  "definition": "设 $D$ 是区域。若函数 $f$ 在 $D$ 的一个离散子集 $P$ 之外处处解析，而 $P$ 中每一点都是 $f$ 的极点，就称 $f$ 是 $D$ 上的**亚纯函数**。换句话说，亚纯函数允许在极点处取 $\\infty$，除极点外处处解析。关键的限定是：**奇点只能是极点**——不能有本性奇点（如 $e^{1/z}$ 在 $0$ 处），不能有支点（如 $\\log z$ 在 $0$ 处），也不能有非孤立奇点。因此亚纯函数比解析函数宽（允许极点），但比一般函数严格得多。\n\n由孤立奇点理论，极点是孤立奇点，所以极点集 $P$ 在 $D$ 内**无聚点**：$D$ 的任一紧集内只有有限多个极点。在每个极点 $a$ 附近 $f$ 有洛朗展开\n$$f(z)=\\sum_{k=1}^{m}\\frac{c_{-k}}{(z-a)^k}+\\sum_{k=0}^{\\infty}c_k(z-a)^k\\qquad(0<|z-a|<\\varepsilon),$$\n负幂部分（洛朗展开的主要部分）称为 $f$ 在 $a$ 处的**主部**，它完全刻画 $f$ 在极点附近的行为，其中 $c_{-1}$ 就是留数。与极点一样，$f$ 的零点也是孤立的（除非 $f\\equiv0$），故零点集与极点集都至多可数。\n\n**等价刻画（核心）**：$D$ 上的亚纯函数恰好是 $D$ 上两个解析函数之商，\n$$f\\ \\text{在}\\ D\\ \\text{上亚纯}\\iff f=\\frac{g}{h},\\qquad g,h\\ \\text{在}\\ D\\ \\text{上解析，且}\\ h\\not\\equiv0 .$$\n「$\\Leftarrow$」是显然的：若 $g,h$ 无公共零点，则 $h$ 的零点（都是孤立的）就是 $f$ 的极点，其余点处 $f$ 解析。「$\\Rightarrow$」需要构造：先取一个在 $D$ 上解析、恰以 $f$ 的全部极点为零点的函数 $h$（这本质上就是魏尔斯特拉斯分解定理的「零点可任意指定」形式：在圆盘上由规范乘积给出，在一般区域上需要 Runge 定理），再令 $g=fh$，由 $h$ 的零点恰好抵消 $f$ 的极点知 $g$ 在 $D$ 上解析，于是 $f=g/h$。由于任意两个亚纯函数都可加、减、乘、除（除以不恒零者），$D$ 上亚纯函数全体构成一个**域** $M(D)$，它正是 $D$ 上解析函数环 $\\mathcal{O}(D)$ 的分式域——这说明「亚纯 = 解析之商」不是一个巧合，而是域论层面的刻画。\n\n**扩充复平面上的情形**：把定义域取成扩充复平面 $\\hat{\\mathbb{C}}=\\mathbb{C}\\cup\\{\\infty\\}$（黎曼球面），则 $\\hat{\\mathbb{C}}$ 上的亚纯函数恰好是**有理函数** $f(z)=\\frac{P(z)}{Q(z)}$（$P,Q$ 为多项式，$Q\\not\\equiv0$）。理由：$\\hat{\\mathbb{C}}$ 是紧集，极点在该紧集内无聚点，故极点只能有有限多个（若有无穷多个极点，紧性给出聚点，而聚点处的奇性不可能是极点，违背亚纯性）；于是乘上 $\\prod_k(z-a_k)^{m_k}$ 把极点全部消去，得到在 $\\mathbb{C}$ 上解析的函数 $g$；又 $f$ 在 $z=\\infty$ 附近必须是解析的或有极点（不能是本性奇点），故 $g$ 在 $\\infty$ 处至多也是极点，这样的整函数必为多项式。因此 $f$ 是多项式之商；反之有理函数显然在 $\\hat{\\mathbb{C}}$ 上亚纯。这也是「有理函数 = 从黎曼球面到自身的解析映射」这一说法的来源；非常数有理函数把 $\\hat{\\mathbb{C}}$ 满射到 $\\hat{\\mathbb{C}}$ 上（与皮卡定理的结论一致）。",
+  "definitionEn": "Let $D$ be a domain. A function $f$ is called **meromorphic** on $D$ if it is analytic on $D$ except on a discrete subset $P$, every point of which is a pole of $f$. In other words, a meromorphic function may take the value $\\infty$ at poles and is analytic everywhere else. The essential restriction is that **singularities can only be poles**: there may be no essential singularity (as with $e^{1/z}$ at $0$), no branch point (as with $\\log z$ at $0$) and no non-isolated singularity. Meromorphic functions are thus more general than analytic ones (poles are allowed) but far more special than arbitrary functions.\n\nBy the theory of isolated singularities, poles are isolated, so the pole set $P$ has **no accumulation point** in $D$: every compact subset of $D$ contains only finitely many poles. Near a pole $a$ the Laurent expansion reads\n$$f(z)=\\sum_{k=1}^{m}\\frac{c_{-k}}{(z-a)^k}+\\sum_{k=0}^{\\infty}c_k(z-a)^k\\qquad(0<|z-a|<\\varepsilon),$$\nand the negative-power part (the principal part) determines the local behaviour, with $c_{-1}$ the residue. As with poles, the zeros of $f$ are isolated unless $f\\equiv0$, so both the zero set and the pole set are at most countable.\n\n**The key characterisation**: meromorphic functions on $D$ are exactly the quotients of two analytic functions on $D$,\n$$f\\ \\text{meromorphic on}\\ D\\iff f=\\frac{g}{h}\\quad\\text{with } g,h \\text{ analytic on } D,\\ h\\not\\equiv0 .$$\nThe implication '$\\Leftarrow$' is immediate: if $g$ and $h$ have no common zero, the (isolated) zeros of $h$ are precisely the poles of $f$, and $f$ is analytic elsewhere. For '$\\Rightarrow$' one constructs an analytic function $h$ on $D$ whose zeros are exactly the poles of $f$ (this is the 'zeros may be prescribed' form of the Weierstrass factorization theorem: on a disk it is given by a canonical product, while a general domain needs Runge's theorem) and sets $g=fh$; the zeros of $h$ cancel the poles of $f$, so $g$ is analytic on $D$ and $f=g/h$. Since meromorphic functions can be added, subtracted, multiplied and divided (by anything not identically zero), they form a **field** $M(D)$, the field of fractions of the ring $\\mathcal{O}(D)$ of analytic functions on $D$; so 'meromorphic = quotient of analytic functions' is a statement about fields, not a coincidence.\n\n**The case of the extended plane**: on the Riemann sphere $\\hat{\\mathbb{C}}=\\mathbb{C}\\cup\\{\\infty\\}$, the meromorphic functions are exactly the **rational functions** $f(z)=P(z)/Q(z)$ with $P,Q$ polynomials, $Q\\not\\equiv0$. Indeed $\\hat{\\mathbb{C}}$ is compact and the poles have no accumulation point there, so there are only finitely many poles (infinitely many would have an accumulation point, and the singularity there could not be a pole, contradicting meromorphy). Multiplying by $\\prod_k(z-a_k)^{m_k}$ removes all poles and yields a function $g$ analytic on $\\mathbb{C}$; since $f$ is analytic or has a pole at $z=\\infty$ (never an essential singularity there), $g$ has at most a pole at $\\infty$, and such an entire function must be a polynomial. Hence $f$ is a quotient of polynomials; conversely rational functions are plainly meromorphic on $\\hat{\\mathbb{C}}$. This is the origin of the slogan 'rational functions are the analytic maps of the Riemann sphere to itself'; a non-constant rational function maps $\\hat{\\mathbb{C}}$ onto $\\hat{\\mathbb{C}}$ (in agreement with Picard's theorem).",
+  "formulas": [
+   {
+    "latex": "f\\ \\text{在}\\ D\\ \\text{上亚纯}\\iff f\\ \\text{在}\\ D\\setminus P\\ \\text{解析，}\\ P\\ \\text{中每点为极点（无本性奇点、无支点）}",
+    "note": "定义的本质就是「奇点只能是极点」；极点集在 $D$ 内无聚点。",
+    "noteEn": "The definition amounts to 'singularities can only be poles'; the pole set has no accumulation point in $D$."
+   },
+   {
+    "latex": "f\\ \\text{亚纯}\\iff f=\\frac{g}{h},\\qquad g,h\\ \\text{在}\\ D\\ \\text{上解析},\\ h\\not\\equiv0",
+    "note": "等价刻画：亚纯函数恰为两个解析函数之商；由此 $M(D)$ 是 $\\mathcal{O}(D)$ 的分式域。",
+    "noteEn": "Equivalent characterisation: meromorphic functions are exactly quotients of two analytic functions; thus $M(D)$ is the field of fractions of $\\mathcal{O}(D)$."
+   },
+   {
+    "latex": "f(z)=\\sum_{k=1}^{m}\\frac{c_{-k}}{(z-a)^k}+\\sum_{k=0}^{\\infty}c_k(z-a)^k\\qquad(0<|z-a|<\\varepsilon)",
+    "note": "极点处的洛朗展开：负幂部分是主部，$c_{-1}$ 是留数，它刻画极点的局部行为。",
+    "noteEn": "Laurent expansion at a pole: the negative-power part is the principal part and $c_{-1}$ is the residue, which encodes the local behaviour."
+   },
+   {
+    "latex": "\\hat{\\mathbb{C}}\\ \\text{上的亚纯函数}\\iff f(z)=\\frac{P(z)}{Q(z)}\\quad(P,Q\\ \\text{多项式},\\ Q\\not\\equiv0)",
+    "note": "紧性 $\\Rightarrow$ 极点有限 $\\Rightarrow$ 消去极点后得整函数且在 $\\infty$ 至多极点 $\\Rightarrow$ 多项式，故只有有理函数。",
+    "noteEn": "Compactness gives finitely many poles; removing them leaves an entire function with at most a pole at $\\infty$, hence a polynomial, so only rational functions occur."
+   },
+   {
+    "latex": "f(z)=\\frac{\\pi\\cos(\\pi z)}{\\sin(\\pi z)}=\\pi\\cot(\\pi z),\\qquad f=\\frac{g}{h},\\quad g=\\pi\\cos(\\pi z),\\ h=\\sin(\\pi z)",
+    "note": "典型实例：$\\cot$ 的极点 $z\\in\\mathbb{Z}$ 正好被整函数 $\\sin(\\pi z)$ 的零点消去。",
+    "noteEn": "A model example: the poles $z\\in\\mathbb{Z}$ of $\\cot$ are exactly cancelled by the zeros of the entire function $\\sin(\\pi z)$."
+   }
+  ],
+  "properties": [
+   "奇点限制：亚纯函数在 $D$ 内除极点外处处解析，不允许本性奇点、支点或非孤立奇点；这正是「亚纯」比「解析」宽、又比任意函数严格的分界。",
+   "极点集在 $D$ 内无聚点（每个紧集内极点有限），零点集同样无聚点；两者都至多可数，极点的主部（等价地洛朗负幂部分）刻画局部行为，$c_{-1}$ 即留数。",
+   "等价刻画：$D$ 上亚纯 $\\iff$ 为 $D$ 上两个解析函数之商；亚纯函数全体 $M(D)$ 构成域，是 $\\mathcal{O}(D)$ 的分式域。",
+   "扩充复平面：$\\hat{\\mathbb{C}}$ 上亚纯函数恰为有理函数（极点有限 $\\Rightarrow$ 消去极点后整函数在 $\\infty$ 至多极点 $\\Rightarrow$ 多项式）。",
+   "辨析例：$\\tan z=\\sin z/\\cos z$ 在 $\\mathbb{C}$ 上亚纯，但在 $\\hat{\\mathbb{C}}$ 上不是（极点以 $\\infty$ 为聚点，$\\infty$ 是**非孤立奇点**，故不是有理函数）；$\\frac{e^{1/z}}{z}$ 不是亚纯（$0$ 处本性奇点）；$\\log z$ 不是（$0$ 是支点而非极点）。"
+  ],
+  "propertiesEn": [
+   "Restriction on singularities: a meromorphic function is analytic on $D$ except at poles, with no essential singularity, branch point or non-isolated singularity allowed; this is the boundary separating meromorphic from merely analytic and from arbitrary functions.",
+   "The pole set has no accumulation point in $D$ (finitely many poles in every compact set) and the same holds for the zeros; both sets are at most countable, and the principal part (the negative-power Laurent part) describes the local behaviour, with $c_{-1}$ the residue.",
+   "Equivalent characterisation: meromorphic on $D$ $\\iff$ a quotient of two analytic functions on $D$; the meromorphic functions form the field $M(D)$, the field of fractions of $\\mathcal{O}(D)$.",
+   "Extended plane: the meromorphic functions on $\\hat{\\mathbb{C}}$ are exactly the rational functions (finitely many poles; killing them leaves an entire function with at most a pole at $\\infty$, i.e. a polynomial).",
+   "Contrasting examples: $\\tan z=\\sin z/\\cos z$ is meromorphic on $\\mathbb{C}$ but not on $\\hat{\\mathbb{C}}$ ($\\infty$ is a limit point of poles — a non-isolated singularity — so it is not rational); $e^{1/z}/z$ is not meromorphic (essential singularity at $0$); $\\log z$ is not (branch point at $0$, not a pole)."
+  ],
+  "examples": [
+   {
+    "problem": "判断 $f(z)=\\frac{1}{\\sin z}$ 的奇点类型，写出它在每个极点处的主部与留数，并判断它是否为 $\\hat{\\mathbb{C}}$ 上的亚纯函数。",
+    "solution": "$\\sin z$ 的零点为 $z=k\\pi\\ (k\\in\\mathbb{Z})$，且都是一级零点，因为 $(\\sin z)'|_{z=k\\pi}=\\cos k\\pi=(-1)^k\\ne0$。因此 $f=1/\\sin z$ 在这些点处有一级极点，其余点解析；特别地 $0$ 处只是极点而非本性奇点，所以 $f$ 是 $\\mathbb{C}$ 上的亚纯函数。\n\n在每个极点附近展开：由 $\\sin(z-k\\pi)=(-1)^k\\sin z$ 得\n$$\\sin z=(-1)^k\\left((z-k\\pi)-\\frac{(z-k\\pi)^3}{6}+\\cdots\\right),$$\n故\n$$f(z)=\\frac{(-1)^k}{z-k\\pi}+O(1)\\qquad(z\\to k\\pi),$$\n即主部为 $\\dfrac{(-1)^k}{z-k\\pi}$，留数为 $(-1)^k$。\n\n但 $f$ 不是 $\\hat{\\mathbb{C}}$ 上的亚纯函数：换 $z=\\frac1w$，$f\\left(\\frac1w\\right)=\\frac{1}{\\sin(1/w)}$ 它的极点 $w=1/(k\\pi)$ 以 $w=0$ 为聚点，故 $z=\\infty$ 是极点的聚点（**非孤立奇点**），$f$ 在 $\\hat{\\mathbb{C}}$ 上不亚纯、不是有理函数。"
+   },
+   {
+    "problem": "用等价刻画说明 $f(z)=\\pi\\cot(\\pi z)$ 是 $\\mathbb{C}$ 上的亚纯函数，并写出相应的两个整函数。",
+    "solution": "把 $f$ 写成显式的商：\n$$f(z)=\\pi\\cot(\\pi z)=\\frac{\\pi\\cos(\\pi z)}{\\sin(\\pi z)} .$$\n分子 $g(z)=\\pi\\cos(\\pi z)$ 与分母 $h(z)=\\sin(\\pi z)$ 都是整函数，$h\\not\\equiv0$，故由等价刻画 $f=g/h$ 在 $\\mathbb{C}$ 上亚纯。\n\n极点位置恰是 $\\sin(\\pi z)$ 的零点 $z\\in\\mathbb{Z}$；由于 $(\\sin\\pi z)'|_{z=k}=(-1)^k\\pi\\ne0$，分子在 $z=k$ 处不为零（$\\cos k\\pi=(-1)^k\\ne0$），故这些都是一级极点，且\n$$\\pi\\cot(\\pi z)=\\frac{(-1)^k\\pi\\cdot(-1)^k}{\\pi(z-k)}+O(1)=\\frac{1}{z-k}+O(1)\\qquad(z\\to k),$$\n即每个极点的主部都是 $\\frac{1}{z-k}$、留数都是 $1$。这也印证了「极点集无聚点」：无论在紧集上取多少个极点，它们都孤立，且每个紧集内只有有限多个。\n\n反过来，这一等价刻画的一般证明思路是：先造出以全部极点为零点的整函数 $h$（借助魏尔斯特拉斯分解定理），再令 $g=fh$ 即为整函数；本例中 $h$ 恰好是一个熟悉的函数 $\\sin(\\pi z)$。"
+   }
+  ],
+  "tags": [
+   "亚纯函数",
+   "极点",
+   "有理函数",
+   "分式域",
+   "黎曼球面"
+  ],
+  "links": [
+   "isolated-singularities",
+   "entire-functions",
+   "weierstrass-factorization",
+   "mittag-leffler",
+   "laurent-series",
+   "residue"
+  ],
+  "plot": {
+   "type": "scatter",
+   "points": [
+    [
+     1.0,
+     0.0
     ],
-    "properties": [
-      "存在性：任意无聚点的极点列与任意指定的主部都可以实现；「无聚点」不可省——极点是孤立奇点，极点列的聚点处不可能是极点。",
-      "唯一性到整函数：两个解之差没有极点，故为整函数（在一般区域 $D$ 上则差一个 $D$ 上的解析函数）；这与魏尔斯特拉斯分解「唯一到 $e^{g}$」完全对应。",
-      "与魏尔斯特拉斯对偶：魏尔斯特拉斯管零点（无穷乘积），米塔-列夫勒管极点与主部（部分分式）；对魏氏乘积取对数导数即得米塔-列夫勒型展开。",
-      "修正项由极点密度决定：$\\sum\\frac{1}{|a_n|}$ 收敛时可直接求和（如 $\\pi^{2}/\\sin^{2}$ 的双边级数），发散时必须配对或减去泰勒多项式（如 $\\pi\\cot$ 的 $\\frac{2z}{z^{2}-n^{2}}$、digamma 的 $\\frac{1}{n+1}$）。",
-      "应用：计算 $\\sum\\frac{1}{n^{2}+a^{2}}$ 型级数、把有理函数的部分分式推广到无穷多个极点、推导 $\\zeta(2k)$，以及 $\\Gamma$、Weierstrass $\\wp$ 等特殊函数的部分分式展开；一般区域上的证明需要 Runge 定理。"
+    [
+     0.9239,
+     0.3827
     ],
-    "propertiesEn": [
-      "Existence: any pole sequence without accumulation point and any prescribed principal parts can be realised; 'no accumulation point' is indispensable since poles are isolated and their limit points cannot be poles.",
-      "Uniqueness up to an entire function: the difference of two solutions has no poles and is therefore entire (on a general domain $D$, it differs by a function analytic on $D$); this matches the 'unique up to $e^{g}$' of the Weierstrass product.",
-      "Duality with Weierstrass: Weierstrass handles zeros by infinite products, Mittag-Leffler handles poles and principal parts by partial fractions; the logarithmic derivative of a Weierstrass product yields the Mittag-Leffler expansion.",
-      "Corrections are dictated by the density of the poles: when $\\sum1/|a_n|$ converges one may sum directly (as with the two-sided series for $\\pi^{2}/\\sin^{2}$), otherwise one must pair terms or subtract Taylor polynomials (as with $2z/(z^{2}-n^{2})$ for $\\pi\\cot$ or $1/(n+1)$ for digamma).",
-      "Applications: evaluating series such as $\\sum1/(n^{2}+a^{2})$, extending partial fractions of rational functions to infinitely many poles, deriving $\\zeta(2k)$, and the partial fractions of $\\Gamma$, the Weierstrass $\\wp$ function and other special functions; the proof on a general domain uses Runge's theorem."
+    [
+     0.7071,
+     0.7071
     ],
-    "examples": [
-      {
-        "problem": "用 $\\pi\\cot(\\pi z)$ 的部分分式展开计算 $\\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}$。",
-        "solution": "取 $z=i$。左边：$\\cot(\\pi i)=\\frac{\\cos(\\pi i)}{\\sin(\\pi i)}=\\frac{\\cosh\\pi}{i\\sinh\\pi}=-i\\coth\\pi$，故\n$$\\pi\\cot(\\pi i)=-\\pi i\\coth\\pi .$$\n右边：$\\frac1z+\\sum_{n\\ge1}\\frac{2z}{z^{2}-n^{2}}$ 在 $z=i$ 处为\n$$\\frac{1}{i}+\\sum_{n=1}^{\\infty}\\frac{2i}{i^{2}-n^{2}}=-i-2i\\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}.$$\n比较并两边除以 $-i$：\n$$\\pi\\coth\\pi=1+2\\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}\\ \\Longrightarrow\\ \\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}=\\frac{\\pi\\coth\\pi-1}{2}\\approx 1.0767 .$$\n（数值检验：$\\coth\\pi\\approx1.0037419$，故右边 $\\approx\\frac{3.1533-1}{2}=1.0767$，与直接求和 $0.5+0.2+0.1+0.0588+\\cdots$ 一致。）"
-      },
-      {
-        "problem": "构造一个以 $z=0,1,2,3,\\dots$ 为一级极点、且在 $z=n$ 处主部为 $\\frac{1}{z-n}$ 的亚纯函数，并说明修正项的作用。",
-        "solution": "直接取 $\\sum_{n\\ge0}\\frac{1}{z-n}$ 不收敛：每项 $\\sim-\\frac1n$，部分和无界。给每项配一个**常数**修正：\n$$f(z)=\\sum_{n=0}^{\\infty}\\left[\\frac{1}{z-n}+\\frac{1}{n+1}\\right].$$\n逐项估计（$z$ 固定、$n\\to\\infty$）：\n$$\\frac{1}{z-n}+\\frac{1}{n+1}=\\frac{(n+1)+(z-n)}{(z-n)(n+1)}=\\frac{z+1}{(z-n)(n+1)}=O\\!\\left(\\frac{1}{n^{2}}\\right),$$\n故级数在 $\\mathbb{C}\\setminus\\{0,1,2,\\dots\\}$ 的每个紧集上一致收敛，定义出一个亚纯函数：每个 $z=n$ 处只有常数项以外的那一项有极点，故主部恰为 $\\frac{1}{z-n}$，而修正项在极点之外处处解析。\n\n按米塔-列夫勒定理，一切满足同样极点与主部条件的函数都形如 $f+\\varphi$，$\\varphi$ 为整函数——例如 $f(z)+e^{z}$ 也是解。这再次说明极点数据只能把函数确定到相差一个整函数。"
-      }
+    [
+     0.3827,
+     0.9239
     ],
-    "tags": [
-      "部分分式",
-      "极点",
-      "主部",
-      "对偶性",
-      "特殊函数"
+    [
+     0.0,
+     1.0
     ],
-    "links": [
-      "meromorphic-functions",
-      "weierstrass-factorization",
-      "laurent-series",
-      "gamma-function",
-      "isolated-singularities",
-      "residue",
-      "zeta-function"
+    [
+     -0.3827,
+     0.9239
+    ],
+    [
+     -0.7071,
+     0.7071
+    ],
+    [
+     -0.9239,
+     0.3827
+    ],
+    [
+     -1.0,
+     0.0
+    ],
+    [
+     -0.9239,
+     -0.3827
+    ],
+    [
+     -0.7071,
+     -0.7071
+    ],
+    [
+     -0.3827,
+     -0.9239
+    ],
+    [
+     -0.0,
+     -1.0
+    ],
+    [
+     0.3827,
+     -0.9239
+    ],
+    [
+     0.7071,
+     -0.7071
+    ],
+    [
+     0.9239,
+     -0.3827
     ]
-  },
-  {
-    "id": "picard-theorems",
-    "title": "皮卡定理",
-    "titleEn": "Picard's Theorems",
-    "branch": "complex-analysis",
-    "level": 5,
-    "summary": "小定理：非常数整函数取到每个复数值，至多一个例外；大定理：本性奇点的去心邻域内，函数取到每个值无穷多次，至多一个例外。它蕴含刘维尔定理与魏尔斯特拉斯定理。",
-    "summaryEn": "Little theorem: a non-constant entire function assumes every complex value with at most one exception. Great theorem: near an essential singularity every value is assumed infinitely often, with at most one exception. Together they imply Liouville's and Weierstrass's theorems.",
-    "definition": "**皮卡小定理**：设 $f$ 是整函数。若 $f$ 不是常数，则 $f$ 取到每一个复数值，**至多有一个例外值**：对任意 $a\\in\\mathbb{C}$，方程 $f(z)=a$ 有解，除非 $a$ 恰是那个唯一的例外值。例：$e^{z}$ 取不到 $0$——这正是「例外值恰好可以有一个」的范例（$e^z$ 非常数、整，值域为 $\\mathbb{C}\\setminus\\{0\\}$）；而 $\\sin z$、$\\cos z$ 与任何非常数多项式都取到一切复数值（例外数为 $0$）。特别地，由「$f$ 无零点」可推出 $f=e^{h}$（$h$ 为整函数），所以恰好漏掉一个值 $a$ 的非常数整函数恰为 $f(z)=a+e^{h(z)}$ 的形状。\n\n**与刘维尔定理的对比**：刘维尔定理只断言「有界整函数必为常数」，皮卡小定理强得多，**它蕴含刘维尔定理**。若 $f$ 有界，$|f(z)|\\le M$，则 $f$ 取不到一切满足 $|w|>M$ 的值 $w$——漏掉的是无穷多个值；若 $f$ 非常数，皮卡小定理说它至多漏掉一个值，矛盾，故 $f$ 只能是常数。可见「值域的全域信息」远比「模的界」有力。（由刘维尔定理又可得代数基本定理。）\n\n**皮卡大定理**：设 $f$ 在去心邻域 $0<|z-z_0|<R$ 内解析，且 $z_0$ 是 $f$ 的**本性奇点**。则对任意 $0<r<R$，像集 $f\\big(\\{z:0<|z-z_0|<r\\}\\big)$ 包含 $\\mathbb{C}$ 中除至多一点以外的全部值；更强地，对每个 $A\\in\\mathbb{C}$（至多一个例外值），方程 $f(z)=A$ 在该去心邻域内都有**无穷多个解**，且这些解以 $z_0$ 为聚点。典型例子：$e^{1/z}$ 在 $0<|z|<\\varepsilon$ 内取到每个非零值无穷多次——解为 $z_k=\\frac{1}{\\log|A|+i(\\arg A+2k\\pi)}\\ (k\\in\\mathbb{Z})$，当 $|k|\\to\\infty$ 时 $z_k\\to0$；唯一例外值是 $0$。\n\n**大定理是小定理的推广**：把非常数整函数 $f$ 放到 $\\hat{\\mathbb{C}}$ 上看，它在 $z=\\infty$ 处或是极点（此时 $f$ 是多项式，取到一切值）或是本性奇点（超越整函数）；对 $z_0=\\infty$ 应用大定理（经 $w=\\frac{1}{z}$ 换元），就得到小定理。大定理也蕴含**魏尔斯特拉斯定理（Casorati–Weierstrass）**：本性奇点附近像集在 $\\mathbb{C}$ 中稠密。因为若像集在某开圆盘内一个值都取不到，就漏掉了无穷多个值，与「至多一个例外」矛盾——所以皮卡大定理（至多一个例外）**严格强于**魏尔斯特拉斯定理（稠密）。对照来看，极点处的行为与本性奇点截然不同：$f(z)=\\frac1z$ 在每个去心邻域 $0<|z|<r$ 内的像只是 $\\{|w|>1/r\\}$，漏掉无穷多个值，且每个非零值至多取一次；可去奇点处（函数有界）同样漏掉无穷多个值。这正是定理要求奇点为**本性奇点**、而不能放宽为「非可去」的用意。\n\n**关于证明的诚实说明**：皮卡定理结论极强，证明也极难。皮卡本人的证明使用了**椭圆模函数**：模函数 $\\lambda$ 把上半平面映满 $\\mathbb{C}\\setminus\\{0,1\\}$，若一个整函数漏掉两个值，就可与 $\\lambda^{-1}$ 复合，造出违背刘维尔定理的（有界）解析函数。现代证明走**正规族理论**（Schottky 定理 + Montel 定理）或双曲度量/Bloch 原理。本节点只陈述定理、解释含义与相互蕴含，不展开证明。",
-    "definitionEn": "**Picard's little theorem**: let $f$ be entire. If $f$ is not constant then $f$ assumes every complex value with **at most one exception**: for every $a\\in\\mathbb{C}$ the equation $f(z)=a$ has a solution, unless $a$ is that single exceptional value. Example: $e^{z}$ never equals $0$ — the model case in which exactly one exception really occurs ($e^z$ is non-constant and entire with range $\\mathbb{C}\\setminus\\{0\\}$); by contrast $\\sin z$, $\\cos z$ and every non-constant polynomial assume all complex values (zero exceptions). In particular, if $f$ has no zero then $f=e^{h}$ with $h$ entire, so a non-constant entire function omitting exactly one value has the form $f(z)=a+e^{h(z)}$.\n\n**Comparison with Liouville's theorem**: Liouville only says that a bounded entire function is constant; Picard's little theorem is far stronger and **implies** it. If $|f(z)|\\le M$, then $f$ misses every value $w$ with $|w|>M$ — infinitely many omissions. If $f$ were non-constant, Picard's little theorem would allow at most one omission, a contradiction, so $f$ is constant. Thus global information about the range is much more powerful than a bound on the modulus. (Liouville's theorem in turn yields the fundamental theorem of algebra.)\n\n**Picard's great theorem**: let $f$ be analytic on the punctured disk $0<|z-z_0|<R$ and let $z_0$ be an **essential singularity** of $f$. Then for every $0<r<R$ the image $f(\\{z:0<|z-z_0|<r\\})$ contains all of $\\mathbb{C}$ with at most one exception; more precisely, for every $A\\in\\mathbb{C}$ (with at most one exceptional value) the equation $f(z)=A$ has **infinitely many solutions** in the punctured neighbourhood, accumulating at $z_0$. A model example: $e^{1/z}$ assumes every non-zero value infinitely often in $0<|z|<\\varepsilon$, with solutions $z_k=1/(\\log|A|+i(\\arg A+2k\\pi))$, $k\\in\\mathbb{Z}$, tending to $0$ as $|k|\\to\\infty$; the only exceptional value is $0$.\n\n**The great theorem generalises the little one**: a non-constant entire function $f$ viewed on $\\hat{\\mathbb{C}}$ either has a pole at $z=\\infty$ (then $f$ is a polynomial and assumes every value) or an essential singularity there (a transcendental entire function); applying the great theorem at $z_0=\\infty$ via $w=1/z$ gives the little theorem. The great theorem also implies the **Casorati–Weierstrass theorem** that the image of a punctured neighbourhood of an essential singularity is dense in $\\mathbb{C}$: if the image missed every value in some open disk it would miss infinitely many values, contradicting 'at most one exception'. Hence Picard's great theorem (at most one exception) is **strictly stronger** than Weierstrass's theorem (density). For contrast, the behaviour at a pole is quite different: in each punctured neighbourhood $0<|z|<r$ the image of $1/z$ is only $\\{|w|>1/r\\}$, so infinitely many values are omitted and every non-zero value is taken at most once; near a removable singularity (a bounded function) infinitely many values are missed as well. This is why the hypothesis must be 'essential singularity' rather than merely 'non-removable'.\n\n**An honest remark on the proofs**: the conclusions are extremely strong and so are the proofs. Picard's own argument used the **elliptic modular function**: the modular function $\\lambda$ maps the upper half plane onto $\\mathbb{C}\\setminus\\{0,1\\}$, so an entire function omitting two values could be composed with $\\lambda^{-1}$ to produce a bounded analytic function, contradicting Liouville's theorem. Modern proofs use **normal family theory** (Schottky's theorem plus Montel's theorem) or hyperbolic metrics and Bloch's principle. This node states the theorems and explains their meaning and mutual implications; it does not reproduce the proofs.",
-    "formulas": [
-      {
-        "latex": "f\\ \\text{整且非常数}\\ \\Longrightarrow\\ \\#\\{a\\in\\mathbb{C}:\\ f(z)\\ne a\\ \\text{对一切}\\ z\\}\\le 1",
-        "note": "皮卡小定理：至多一个例外值（这正是「至多一个」的含义，例外值可以为 0 个、1 个）。",
-        "noteEn": "Picard's little theorem: at most one exceptional value (so the number of exceptions is 0 or 1)."
-      },
-      {
-        "latex": "e^{z}\\ne 0\\ (\\forall z);\\qquad e^{z}=A\\ne0\\iff z=\\ln|A|+i(\\arg A+2k\\pi),\\ k\\in\\mathbb{Z}",
-        "note": "例外值恰好一个的例子：$e^{z}$ 漏掉 $0$，而每个非零值被取到无穷多次。",
-        "noteEn": "The example with exactly one exceptional value: $e^z$ omits $0$, while every non-zero value is assumed infinitely often."
-      },
-      {
-        "latex": "z_0\\ \\text{为}\\ f\\ \\text{的本性奇点}\\ \\Longrightarrow\\ \\forall A\\in\\mathbb{C}\\ (\\text{至多一例外}),\\ f(z)=A\\ \\text{在}\\ 0<|z-z_0|<R\\ \\text{内有无穷多个解}",
-        "note": "皮卡大定理；解以 $z_0$ 为聚点，且例外值也至多一个。",
-        "noteEn": "Picard's great theorem: the solutions accumulate at $z_0$, and there is at most one exceptional value."
-      },
-      {
-        "latex": "\\sin z=A\\iff e^{2iz}-2iAe^{iz}-1=0\\iff e^{iz}=iA\\pm\\sqrt{1-A^{2}}",
-        "note": "$\\sin z$ 例外值为 0 个：上式两根之积为 $-1$，两根都非零，取对数即得无穷多个解。",
-        "noteEn": "$\\sin z$ has no exceptional value: the two roots above have product $-1$, both non-zero, and taking logarithms yields infinitely many solutions."
-      },
-      {
-        "latex": "\\text{皮卡大}\\Longrightarrow\\text{皮卡小}\\Longrightarrow\\text{刘维尔定理};\\qquad \\text{皮卡大}\\Longrightarrow\\text{魏尔斯特拉斯（像集稠密）}",
-        "note": "蕴含链：大定理对小定理、小定理对刘维尔、大定理对魏尔斯特拉斯定理；「至多一个例外」强于「稠密」，也强于「有界 $\\Rightarrow$ 常数」。",
-        "noteEn": "The chain of implications: great $\\Rightarrow$ little, little $\\Rightarrow$ Liouville, great $\\Rightarrow$ Weierstrass; 'at most one exception' is stronger than density and stronger than 'bounded $\\Rightarrow$ constant'."
-      }
-    ],
-    "properties": [
-      "「至多一个例外」是关键：例外值可以真的出现（$e^{z}$、$e^{e^{z}}$ 都只漏 $0$，$e^{z}-1$ 只漏 $1$），但**不可能出现两个**——这对任何非常数整函数都成立。",
-      "恰好一个例外值的非常数整函数有完整刻画：$f(z)=a+e^{h(z)}$，$h$ 为整函数（因为 $f-a$ 是无零点整函数）。多项式、$\\sin z$、$\\cos z$ 的例外数都是 $0$。",
-      "蕴含链：皮卡小 $\\Rightarrow$ 刘维尔定理（有界则漏掉无穷多个值）；皮卡大 $\\Rightarrow$ 皮卡小（对 $z_0=\\infty$ 用大定理）；皮卡大 $\\Rightarrow$ 魏尔斯特拉斯定理（漏掉一整个圆盘的值即漏掉无穷多个值）。皮卡定理因此位于值分布理论的顶端。",
-      "大定理中的「无穷多次」不可省略，它是本性奇点与极点行为的真正分界：$\\frac1z$ 在 $0$ 处（一级极点）把每个非零值恰好取一次且漏掉 $0$，而 $e^{1/z}$（本性奇点）把每个非零值取无穷多次。",
-      "证明很难，需要椭圆模函数或正规族/双曲度量理论（Schottky + Montel）；这也是它常被视为单复变函数论中最深刻的定理之一的原因。"
-    ],
-    "propertiesEn": [
-      "'At most one exception' is the essential point: an exception genuinely occurs for $e^{z}$ and $e^{e^{z}}$ (both omit only $0$) and for $e^{z}-1$ (omits $1$), but **two exceptions are impossible** for any non-constant entire function.",
-      "Non-constant entire functions with exactly one exceptional value are fully described: $f(z)=a+e^{h(z)}$ with $h$ entire (since $f-a$ is a zero-free entire function). Polynomials, $\\sin z$ and $\\cos z$ have no exceptional value at all.",
-      "Chain of implications: Picard little $\\Rightarrow$ Liouville (a bounded function omits infinitely many values); Picard great $\\Rightarrow$ Picard little (applied at $z_0=\\infty$); Picard great $\\Rightarrow$ Weierstrass (missing a whole disk means missing infinitely many values). This places Picard's theorems at the summit of value distribution theory.",
-      "'Infinitely many times' in the great theorem cannot be weakened: it is the real dividing line between essential singularities and poles. At a simple pole, $1/z$ takes each non-zero value exactly once and misses $0$, whereas $e^{1/z}$ at an essential singularity takes each non-zero value infinitely often.",
-      "The proofs are hard and require the elliptic modular function or normal family / hyperbolic metric theory (Schottky plus Montel); this is why the theorems are regarded as among the deepest in one-variable complex analysis."
-    ],
-    "examples": [
-      {
-        "problem": "用皮卡小定理证明刘维尔定理，并说明为什么「无穷多个值被漏掉」是矛盾的关键。",
-        "solution": "设 $f$ 是整函数且有界：存在 $M>0$ 使 $|f(z)|\\le M$ 对一切 $z$ 成立。\n\n反证，设 $f$ 非常数。对任意满足 $|w|>M$ 的复数 $w$，都有 $|f(z)|\\le M<|w|$，故 $f(z)\\ne w$ 对一切 $z$ 成立，即 $f$ 漏掉了集合 $\\{w:|w|>M\\}$ 中的**每一个**值。这是无穷多个互不相同的复数，而皮卡小定理断言非常数整函数至多漏掉一个值，矛盾。因此 $f$ 只能是常数——刘维尔定理得证。\n\n关键确实在于「无穷多个」：刘维尔定理只能把有界性与「值域不含整个外部区域」联系起来，而皮卡小定理把「漏值的个数」限制到至多一个，于是任何漏掉两个以上值（更不用说无穷多个值）的整函数都被迫成为常数。\n\n这一比较也解释了三个定理的强弱：代数基本定理（多项式取到零）$\\Leftarrow$ 刘维尔定理 $\\Leftarrow$ 皮卡小定理，越往后结论越强、证明越难。"
-      },
-      {
-        "problem": "验证皮卡大定理：说明 $f(z)=e^{1/z}$ 在任意去心邻域 $0<|z|<\\varepsilon$ 内取到每个非零值无穷多次，而 $0$ 是唯一的例外值。",
-        "solution": "取定 $A\\ne0$，固定 $A$ 的一个对数值 $\\log A=\\ln|A|+i\\arg A$。方程 $e^{1/z}=A$ 等价于\n$$\\frac{1}{z}=\\log A+2k\\pi i\\quad\\Longleftrightarrow\\quad z_k=\\frac{1}{\\log A+2k\\pi i},\\qquad k\\in\\mathbb{Z}.$$\n（$\\log A+2k\\pi i\\ne0$ 对一切 $k$ 成立，因为 $A\\ne0$ 时 $\\ln|A|$ 与 $\\arg A+2k\\pi$ 不可能同时为零。）\n\n当 $|k|\\to\\infty$ 时 $|\\log A+2k\\pi i|\\to\\infty$，故 $|z_k|\\to0$：给定任意 $\\varepsilon>0$，除有限多个 $k$ 外全部 $z_k$ 都落在 $0<|z|<\\varepsilon$ 内，且以 $0$ 为聚点。所以 $e^{1/z}$ 在每个去心邻域内把 $A$ 取到无穷多次。\n\n另一方面 $e^{1/z}$ 永远不为 $0$：$e^{w}\\ne0$ 对一切 $w$ 成立。所以唯一例外值就是 $A=0$。这正好符合皮卡大定理：$z=0$ 是 $e^{1/z}$ 的本性奇点（$e^{1/z}=1+\\frac1z+\\frac{1}{2z^{2}}+\\cdots$ 有无穷多个负幂项），故在每个去心邻域内函数取到每个值无穷多次，至多一个例外。\n\n与魏尔斯特拉斯定理对照：那里只能断言像集在 $\\mathbb{C}$ 中稠密（每个圆盘内都有值），而皮卡大定理进一步断言「每个值取无穷多次、至多漏一个」——强得多，例如它排除了像集填满某个圆盘却漏掉中心这种稠密而漏值的分布。"
-      }
-    ],
-    "plot": {
-      "type": "function",
-      "functions": [
-        {
-          "expr": "exp(x)",
-          "color": "#4cc9f0",
-          "label": "y = eˣ"
-        },
-        {
-          "expr": "0",
-          "color": "#ff6b9d",
-          "label": "y = 0（例外值，永远取不到）"
-        }
-      ],
-      "xRange": [
-        -3,
-        3
-      ],
-      "yRange": [
-        -1,
-        5
-      ],
-      "title": "y = eˣ 恒正：它取到一切正数，唯独取不到 0（皮卡例外值）"
+   ],
+   "pointColor": "rgba(150,165,205,0.55)",
+   "pointSize": 2.2,
+   "marks": [
+    {
+     "at": [
+      1.0,
+      0.0
+     ],
+     "label": "z = 1",
+     "color": "#4cc9f0"
     },
-    "tags": [
-      "皮卡定理",
-      "例外值",
-      "本性奇点",
-      "值分布",
-      "刘维尔定理"
-    ],
-    "links": [
-      "entire-functions",
-      "isolated-singularities",
-      "liouville-theorem",
-      "meromorphic-functions",
-      "normal-families",
-      "elliptic-functions"
-    ]
+    {
+     "at": [
+      -0.5,
+      0.866
+     ],
+     "label": "ω",
+     "color": "#4cc9f0"
+    },
+    {
+     "at": [
+      -0.5,
+      -0.866
+     ],
+     "label": "ω̄",
+     "color": "#4cc9f0"
+    },
+    {
+     "at": [
+      0,
+      1
+     ],
+     "label": "极点 i",
+     "color": "#ff6b9d"
+    },
+    {
+     "at": [
+      0,
+      -1
+     ],
+     "label": "极点 −i",
+     "color": "#ff6b9d"
+    }
+   ],
+   "xRange": [
+    -2.5714,
+    2.5714
+   ],
+   "yRange": [
+    -1.4,
+    1.4
+   ],
+   "title": "亚纯函数 (z³−1)/(z²+1)：零点为三个立方根、极点为 ±i（都在单位圆上）"
   }
+ },
+ {
+  "id": "mittag-leffler",
+  "title": "米塔-列夫勒定理",
+  "titleEn": "The Mittag-Leffler Theorem",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "给定无聚点的极点列与各点的主部，存在以它们为极点且主部恰如所设的亚纯函数，解唯一到相差一个整函数；与魏尔斯特拉斯（管零点）互为对偶。",
+  "summaryEn": "Given poles without accumulation point and prescribed principal parts, there exists a meromorphic function with exactly those poles and principal parts, unique up to an entire function; it is dual to the Weierstrass theorem on zeros.",
+  "definition": "对亚纯函数而言，最重要的构造问题是**部分分式**：给定极点表 $\\{a_n\\}$（在 $\\mathbb{C}$ 内无聚点）与每个极点处指定的主部 $P_n\\!\\left(\\frac{1}{z-a_n}\\right)$（$P_n$ 是 $1/(z-a_n)$ 的多项式，无常数项），能否造出恰以这些点为极点、主部恰如所设的亚纯函数？直接求和 $\\sum_n P_n\\!\\left(\\frac{1}{z-a_n}\\right)$ 往往发散：例如取 $a_n=n$、$P_n=\\frac{1}{z-n}$ 时每项只按 $\\frac1n$ 衰减，级数不收敛。\n\n**米塔-列夫勒定理**：设 $\\{a_n\\}\\subset\\mathbb{C}$ 无聚点（即 $|a_n|\\to\\infty$），并给定各点的主部 $P_n\\!\\left(\\frac{1}{z-a_n}\\right)$。则存在 $\\mathbb{C}$ 上的亚纯函数 $f$，它以各 $a_n$ 为极点、在 $a_n$ 处的主部恰为 $P_n$，并且可以取成\n$$f(z)=\\sum_{n=1}^{\\infty}\\left[P_n\\!\\left(\\frac{1}{z-a_n}\\right)-Q_n(z)\\right],$$\n其中每个 $Q_n$ 是适当选取的多项式（通常取 $P_n(1/(z-a_n))$ 在原点附近的泰勒多项式），用来抵消远处的增长，使级数在 $\\mathbb{C}$ 的每个紧集上一致收敛。$Q_n$ 在极点之外处处解析，故它**只改变收敛性、不改变极点与主部**。所有这样的函数恰为 $f+\\varphi$，其中 $\\varphi$ 为任意整函数：主部条件无法固定「无处有极点」的部分，正如魏尔斯特拉斯分解中无法固定 $e^{g}$。\n\n**经典例子**：\n$$\\pi\\cot(\\pi z)=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^{2}-n^{2}} .$$\n右边以全体整数为一级极点、留数全为 $1$；关键在于**对称配对**：\n$$\\frac{1}{z-n}+\\frac{1}{z+n}=\\frac{2z}{z^{2}-n^{2}},\\qquad \\left|\\frac{2z}{z^{2}-n^{2}}\\right|\\sim\\frac{2|z|}{n^{2}},$$\n配对后每项按 $\\frac{1}{n^2}$ 衰减，级数可和。把配对写成 $\\frac{1}{z-n}$ 的对称极限，就是 $\\lim_{N\\to\\infty}\\sum_{|n|\\le N}\\frac{1}{z-n}$——「修正项」在这里的具体形态就是配对。\n\n对上述展开逐项求导，得到\n$$\\frac{\\pi^{2}}{\\sin^{2}(\\pi z)}=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{(z-n)^{2}} .$$\n这条双边级数**不需要**任何修正项：因为 $\\sum_{n\\ne0}\\frac{1}{n^{2}}<\\infty$，它本身绝对收敛。这正好说明修正项的出现取决于主部的阶与衰减速度：二阶极点的级数由 $\\sum 1/|a_n|^2$ 控制；简单极点且 $\\sum 1/|a_n|$ 收敛时也无需修正，否则必须配对或减去泰勒多项式。\n\n**与魏尔斯特拉斯分解定理的对偶**：魏尔斯特拉斯用**无穷乘积**安排任意指定的**零点**，米塔-列夫勒用**部分分式**安排任意指定的**极点与主部**。两者由「求对数导数」联系起来：对 $\\frac{\\sin\\pi z}{\\pi z}=\\prod_{n\\ge1}\\left(1-\\frac{z^{2}}{n^{2}}\\right)$ 取对数导数，得 $\\pi\\cot(\\pi z)-\\frac{1}{z}=\\sum_{n\\ge1}\\frac{2z}{z^{2}-n^{2}}$，正是上面的公式；对 $\\frac{1}{\\Gamma(z)}=ze^{\\gamma z}\\prod_{n\\ge1}\\left(1+\\frac{z}{n}\\right)e^{-z/n}$ 取对数导数，得到 digamma 的部分分式展开\n$$\\frac{\\Gamma'(z)}{\\Gamma(z)}=-\\gamma+\\sum_{n=0}^{\\infty}\\left(\\frac{1}{n+1}-\\frac{1}{z+n}\\right),$$\n每个极点 $z=-n$ 的主部 $-\\frac{1}{z+n}$ 都配上一个常数修正项 $\\frac{1}{n+1}$ 以保证收敛（$\\gamma$ 是欧拉常数）。这个对偶关系是本节点与上一节点最值得记住的一点。",
+  "definitionEn": "For meromorphic functions the basic construction problem is that of **partial fractions**: given a pole list $\\{a_n\\}$ with no accumulation point in $\\mathbb{C}$ and, at each pole, a prescribed principal part $P_n(1/(z-a_n))$ (where $P_n$ is a polynomial in $1/(z-a_n)$ without constant term), can one build a meromorphic function having exactly these poles and principal parts? Summing $\\sum_n P_n(1/(z-a_n))$ directly often diverges: for $a_n=n$ and $P_n=1/(z-n)$ each term decays only like $1/n$ and the series fails to converge.\n\n**The Mittag-Leffler theorem**: let $\\{a_n\\}\\subset\\mathbb{C}$ have no accumulation point (so $|a_n|\\to\\infty$) and let principal parts $P_n(1/(z-a_n))$ be prescribed. Then there is a meromorphic function $f$ on $\\mathbb{C}$ having the $a_n$ as its poles with principal parts exactly $P_n$, and it can be written as\n$$f(z)=\\sum_{n=1}^{\\infty}\\left[P_n\\!\\left(\\frac{1}{z-a_n}\\right)-Q_n(z)\\right],$$\nwhere each $Q_n$ is a suitable polynomial (typically the Taylor polynomial of $P_n(1/(z-a_n))$ near the origin) cancelling the growth at infinity, so that the series converges uniformly on compact subsets of $\\mathbb{C}$. Since $Q_n$ is analytic away from the poles, it **affects only convergence, never the poles or principal parts**. All such functions are exactly $f+\\varphi$ with $\\varphi$ an arbitrary entire function: principal-part data cannot pin down the pole-free part, just as the Weierstrass expansion cannot pin down $e^{g}$.\n\n**The classical examples**:\n$$\\pi\\cot(\\pi z)=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^{2}-n^{2}} .$$\nThe right-hand side has simple poles at all integers with residue $1$ everywhere; the key point is the **symmetric pairing**\n$$\\frac{1}{z-n}+\\frac{1}{z+n}=\\frac{2z}{z^{2}-n^{2}},\\qquad \\left|\\frac{2z}{z^{2}-n^{2}}\\right|\\sim\\frac{2|z|}{n^{2}},$$\nafter which each term decays like $1/n^2$ and the series converges. Written in terms of $\\frac{1}{z-n}$, the pairing is precisely the symmetric limit $\\lim_{N\\to\\infty}\\sum_{|n|\\le N}\\frac{1}{z-n}$; the 'correction terms' here take the concrete form of pairing.\n\nDifferentiating this expansion term by term gives\n$$\\frac{\\pi^{2}}{\\sin^{2}(\\pi z)}=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{(z-n)^{2}},$$\na two-sided series that **needs no correction term at all**, because $\\sum_{n\\ne0}1/n^{2}<\\infty$ makes it absolutely convergent. So the appearance of corrections is governed by the order and decay of the principal parts: for double poles the series is controlled by $\\sum 1/|a_n|^2$; for simple poles with $\\sum 1/|a_n|<\\infty$ no correction is needed, otherwise one must pair terms or subtract Taylor polynomials.\n\n**Duality with the Weierstrass factorization theorem**: Weierstrass arranges prescribed **zeros** by infinite products, Mittag-Leffler arranges prescribed **poles and principal parts** by partial fractions. The two are linked by the logarithmic derivative: taking it for $\\sin(\\pi z)/(\\pi z)=\\prod_{n\\ge1}(1-z^{2}/n^{2})$ gives $\\pi\\cot(\\pi z)-1/z=\\sum_{n\\ge1}2z/(z^{2}-n^{2})$, exactly the display above; taking it for $1/\\Gamma(z)=ze^{\\gamma z}\\prod_{n\\ge1}(1+z/n)e^{-z/n}$ gives the partial-fraction expansion of the digamma function,\n$$\\frac{\\Gamma'(z)}{\\Gamma(z)}=-\\gamma+\\sum_{n=0}^{\\infty}\\left(\\frac{1}{n+1}-\\frac{1}{z+n}\\right),$$\nwhere the principal part $-1/(z+n)$ at each pole of $z=-n$ is paired with the constant correction $1/(n+1)$ to force convergence ($\\gamma$ is Euler's constant). This duality is the one point worth remembering from this node and the previous one.",
+  "formulas": [
+   {
+    "latex": "f(z)=\\sum_{n=1}^{\\infty}\\left[P_n\\!\\left(\\frac{1}{z-a_n}\\right)-Q_n(z)\\right]",
+    "note": "一般构造：$Q_n$ 是修正多项式，只影响收敛性；主部由 $P_n$ 指定，解唯一到相差一个整函数。",
+    "noteEn": "General construction: the polynomials $Q_n$ only affect convergence, the principal parts are the prescribed $P_n$, and the solution is unique up to an entire function."
+   },
+   {
+    "latex": "\\pi\\cot(\\pi z)=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^{2}-n^{2}}",
+    "note": "经典展开：极点为全体整数，各点留数为 $1$；右边由对称配对保证收敛。",
+    "noteEn": "The classical expansion: poles at all integers with residue $1$; the symmetric pairing makes the right-hand side converge."
+   },
+   {
+    "latex": "\\frac{1}{z-n}+\\frac{1}{z+n}=\\frac{2z}{z^{2}-n^{2}},\\qquad \\left|\\frac{2z}{z^{2}-n^{2}}\\right|\\sim\\frac{2|z|}{n^{2}}",
+    "note": "配对是「修正项」的具体形态：把两个对称极点合在一起，衰减从 $\\frac1n$ 提升到 $\\frac{1}{n^2}$。",
+    "noteEn": "Pairing is the concrete form of the correction: combining two symmetric poles improves decay from $1/n$ to $1/n^2$."
+   },
+   {
+    "latex": "\\frac{\\pi^{2}}{\\sin^{2}(\\pi z)}=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{(z-n)^{2}}",
+    "note": "对 $\\pi\\cot$ 的展开逐项求导；极点都是二级的，双边级数绝对收敛（$\\sum 1/n^{2}<\\infty$），无需修正项。",
+    "noteEn": "Obtained by termwise differentiation; all poles are double and the two-sided series converges absolutely ($\\sum1/n^{2}<\\infty$), so no corrections are needed."
+   },
+   {
+    "latex": "\\frac{\\Gamma'(z)}{\\Gamma(z)}=-\\gamma+\\sum_{n=0}^{\\infty}\\left(\\frac{1}{n+1}-\\frac{1}{z+n}\\right)",
+    "note": "digamma 的部分分式展开：极点 $z=-n$ 处主部 $-\\frac{1}{z+n}$，修正项为常数 $\\frac{1}{n+1}$。",
+    "noteEn": "Partial fractions for the digamma function: the principal part at $z=-n$ is $-1/(z+n)$ and the correction is the constant $1/(n+1)$."
+   },
+   {
+    "latex": "\\pi z\\cot(\\pi z)=1-2\\sum_{k=1}^{\\infty}\\zeta(2k)\\,z^{2k}",
+    "note": "由 $\\pi\\cot$ 的展开在 $z=0$ 附近作几何级数展开而得；系数与魏尔斯特拉斯乘积比较 sin 所得 $\\zeta(2k)$ 完全一致（$k=1$ 即 $\\pi^{2}/6$），体现两定理的对偶。",
+    "noteEn": "From expanding the $\\pi\\cot$ series geometrically near $z=0$; the coefficients agree with the values of $\\zeta(2k)$ obtained from the Weierstrass product for $\\sin$ ($\\pi^2/6$ for $k=1$), illustrating the duality."
+   }
+  ],
+  "properties": [
+   "存在性：任意无聚点的极点列与任意指定的主部都可以实现；「无聚点」不可省——极点是孤立奇点，极点列的聚点处不可能是极点。",
+   "唯一性到整函数：两个解之差没有极点，故为整函数（在一般区域 $D$ 上则差一个 $D$ 上的解析函数）；这与魏尔斯特拉斯分解「唯一到 $e^{g}$」完全对应。",
+   "与魏尔斯特拉斯对偶：魏尔斯特拉斯管零点（无穷乘积），米塔-列夫勒管极点与主部（部分分式）；对魏氏乘积取对数导数即得米塔-列夫勒型展开。",
+   "修正项由主部的衰减速度决定：主部本身衰减足够快时可直接求和（如二阶极点 $\\pi^{2}/\\sin^{2}$ 的双边级数，因 $\\sum n^{-2}$ 收敛）；简单极点且 $\\sum\\frac{1}{|a_n|}$ 收敛时也可直接求和，否则必须配对或减去泰勒多项式（如 $\\pi\\cot$ 的 $\\frac{2z}{z^{2}-n^{2}}$、digamma 的 $\\frac{1}{n+1}$）。",
+   "应用：计算 $\\sum\\frac{1}{n^{2}+a^{2}}$ 型级数、把有理函数的部分分式推广到无穷多个极点、推导 $\\zeta(2k)$，以及 $\\Gamma$、Weierstrass $\\wp$ 等特殊函数的部分分式展开；一般区域上的证明需要 Runge 定理。"
+  ],
+  "propertiesEn": [
+   "Existence: any pole sequence without accumulation point and any prescribed principal parts can be realised; 'no accumulation point' is indispensable since poles are isolated and their limit points cannot be poles.",
+   "Uniqueness up to an entire function: the difference of two solutions has no poles and is therefore entire (on a general domain $D$, it differs by a function analytic on $D$); this matches the 'unique up to $e^{g}$' of the Weierstrass product.",
+   "Duality with Weierstrass: Weierstrass handles zeros by infinite products, Mittag-Leffler handles poles and principal parts by partial fractions; the logarithmic derivative of a Weierstrass product yields the Mittag-Leffler expansion.",
+   "Corrections are dictated by the order and decay of the principal parts: when the principal parts decay fast enough one may sum directly (for double poles, as in the two-sided series for $\\pi^{2}/\\sin^{2}$, convergence is controlled by $\\sum n^{-2}$); for simple poles with $\\sum1/|a_n|<\\infty$ no correction is needed, otherwise one must pair terms or subtract Taylor polynomials (as with $2z/(z^{2}-n^{2})$ for $\\pi\\cot$ or $1/(n+1)$ for digamma).",
+   "Applications: evaluating series such as $\\sum1/(n^{2}+a^{2})$, extending partial fractions of rational functions to infinitely many poles, deriving $\\zeta(2k)$, and the partial fractions of $\\Gamma$, the Weierstrass $\\wp$ function and other special functions; the proof on a general domain uses Runge's theorem."
+  ],
+  "examples": [
+   {
+    "problem": "用 $\\pi\\cot(\\pi z)$ 的部分分式展开计算 $\\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}$。",
+    "solution": "取 $z=i$。左边：$\\cot(\\pi i)=\\frac{\\cos(\\pi i)}{\\sin(\\pi i)}=\\frac{\\cosh\\pi}{i\\sinh\\pi}=-i\\coth\\pi$，故\n$$\\pi\\cot(\\pi i)=-\\pi i\\coth\\pi .$$\n右边：$\\frac1z+\\sum_{n\\ge1}\\frac{2z}{z^{2}-n^{2}}$ 在 $z=i$ 处为\n$$\\frac{1}{i}+\\sum_{n=1}^{\\infty}\\frac{2i}{i^{2}-n^{2}}=-i-2i\\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}.$$\n比较并两边除以 $-i$：\n$$\\pi\\coth\\pi=1+2\\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}\\ \\Longrightarrow\\ \\sum_{n=1}^{\\infty}\\frac{1}{n^{2}+1}=\\frac{\\pi\\coth\\pi-1}{2}\\approx 1.0767 .$$\n（数值检验：$\\coth\\pi\\approx1.0037419$，故右边 $\\approx\\frac{3.1533-1}{2}=1.0767$，与直接求和 $0.5+0.2+0.1+0.0588+\\cdots$ 一致。）"
+   },
+   {
+    "problem": "构造一个以 $z=0,1,2,3,\\dots$ 为一级极点、且在 $z=n$ 处主部为 $\\frac{1}{z-n}$ 的亚纯函数，并说明修正项的作用。",
+    "solution": "直接取 $\\sum_{n\\ge0}\\frac{1}{z-n}$ 不收敛：每项 $\\sim-\\frac1n$，部分和无界。给每项配一个**常数**修正：\n$$f(z)=\\sum_{n=0}^{\\infty}\\left[\\frac{1}{z-n}+\\frac{1}{n+1}\\right].$$\n逐项估计（$z$ 固定、$n\\to\\infty$）：\n$$\\frac{1}{z-n}+\\frac{1}{n+1}=\\frac{(n+1)+(z-n)}{(z-n)(n+1)}=\\frac{z+1}{(z-n)(n+1)}=O\\!\\left(\\frac{1}{n^{2}}\\right),$$\n故级数在 $\\mathbb{C}\\setminus\\{0,1,2,\\dots\\}$ 的每个紧集上一致收敛，定义出一个亚纯函数：每个 $z=n$ 处只有常数项以外的那一项有极点，故主部恰为 $\\frac{1}{z-n}$，而修正项在极点之外处处解析。\n\n按米塔-列夫勒定理，一切满足同样极点与主部条件的函数都形如 $f+\\varphi$，$\\varphi$ 为整函数——例如 $f(z)+e^{z}$ 也是解。这再次说明极点数据只能把函数确定到相差一个整函数。"
+   }
+  ],
+  "tags": [
+   "部分分式",
+   "极点",
+   "主部",
+   "对偶性",
+   "特殊函数"
+  ],
+  "links": [
+   "meromorphic-functions",
+   "weierstrass-factorization",
+   "laurent-series",
+   "gamma-function",
+   "isolated-singularities",
+   "residue",
+   "zeta-function"
+  ]
+ },
+ {
+  "id": "picard-theorems",
+  "title": "皮卡定理",
+  "titleEn": "Picard's Theorems",
+  "branch": "complex-analysis",
+  "level": 5,
+  "summary": "小定理：非常数整函数取到每个复数值，至多一个例外；大定理：本性奇点的去心邻域内，函数取到每个值无穷多次，至多一个例外。它蕴含刘维尔定理与魏尔斯特拉斯定理。",
+  "summaryEn": "Little theorem: a non-constant entire function assumes every complex value with at most one exception. Great theorem: near an essential singularity every value is assumed infinitely often, with at most one exception. Together they imply Liouville's and Weierstrass's theorems.",
+  "definition": "**皮卡小定理**：设 $f$ 是整函数。若 $f$ 不是常数，则 $f$ 取到每一个复数值，**至多有一个例外值**：对任意 $a\\in\\mathbb{C}$，方程 $f(z)=a$ 有解，除非 $a$ 恰是那个唯一的例外值。例：$e^{z}$ 取不到 $0$——这正是「例外值恰好可以有一个」的范例（$e^z$ 非常数、整，值域为 $\\mathbb{C}\\setminus\\{0\\}$）；而 $\\sin z$、$\\cos z$ 与任何非常数多项式都取到一切复数值（例外数为 $0$）。特别地，由「$f$ 无零点」可推出 $f=e^{h}$（$h$ 为整函数），所以恰好漏掉一个值 $a$ 的非常数整函数恰为 $f(z)=a+e^{h(z)}$ 的形状。\n\n**与刘维尔定理的对比**：刘维尔定理只断言「有界整函数必为常数」，皮卡小定理强得多，**它蕴含刘维尔定理**。若 $f$ 有界，$|f(z)|\\le M$，则 $f$ 取不到一切满足 $|w|>M$ 的值 $w$——漏掉的是无穷多个值；若 $f$ 非常数，皮卡小定理说它至多漏掉一个值，矛盾，故 $f$ 只能是常数。可见「值域的全域信息」远比「模的界」有力。（由刘维尔定理又可得代数基本定理。）\n\n**皮卡大定理**：设 $f$ 在去心邻域 $0<|z-z_0|<R$ 内解析，且 $z_0$ 是 $f$ 的**本性奇点**。则对任意 $0<r<R$，像集 $f\\big(\\{z:0<|z-z_0|<r\\}\\big)$ 包含 $\\mathbb{C}$ 中除至多一点以外的全部值；更强地，对每个 $A\\in\\mathbb{C}$（至多一个例外值），方程 $f(z)=A$ 在该去心邻域内都有**无穷多个解**，且这些解以 $z_0$ 为聚点。典型例子：$e^{1/z}$ 在 $0<|z|<\\varepsilon$ 内取到每个非零值无穷多次——解为 $z_k=\\frac{1}{\\log|A|+i(\\arg A+2k\\pi)}\\ (k\\in\\mathbb{Z})$，当 $|k|\\to\\infty$ 时 $z_k\\to0$；唯一例外值是 $0$。\n\n**大定理是小定理的推广**：把非常数整函数 $f$ 放到 $\\hat{\\mathbb{C}}$ 上看，它在 $z=\\infty$ 处或是极点（此时 $f$ 是多项式，取到一切值）或是本性奇点（超越整函数）；对 $z_0=\\infty$ 应用大定理（经 $w=\\frac{1}{z}$ 换元），就得到小定理。大定理也蕴含**魏尔斯特拉斯定理（Casorati–Weierstrass）**：本性奇点附近像集在 $\\mathbb{C}$ 中稠密。因为若像集在某开圆盘内一个值都取不到，就漏掉了无穷多个值，与「至多一个例外」矛盾——所以皮卡大定理（至多一个例外）**严格强于**魏尔斯特拉斯定理（稠密）。对照来看，极点处的行为与本性奇点截然不同：$f(z)=\\frac1z$ 在每个去心邻域 $0<|z|<r$ 内的像只是 $\\{|w|>1/r\\}$，漏掉无穷多个值，且每个非零值至多取一次；可去奇点处（函数有界）同样漏掉无穷多个值。这正是定理要求奇点为**本性奇点**、而不能放宽为「非可去」的用意。\n\n**关于证明的诚实说明**：皮卡定理结论极强，证明也极难。皮卡本人的证明使用了**椭圆模函数**：模函数 $\\lambda$ 把上半平面映满 $\\mathbb{C}\\setminus\\{0,1\\}$，若一个整函数漏掉两个值，就可与 $\\lambda^{-1}$ 复合，造出违背刘维尔定理的（有界）解析函数。现代证明走**正规族理论**（Schottky 定理 + Montel 定理）或双曲度量/Bloch 原理。本节点只陈述定理、解释含义与相互蕴含，不展开证明。",
+  "definitionEn": "**Picard's little theorem**: let $f$ be entire. If $f$ is not constant then $f$ assumes every complex value with **at most one exception**: for every $a\\in\\mathbb{C}$ the equation $f(z)=a$ has a solution, unless $a$ is that single exceptional value. Example: $e^{z}$ never equals $0$ — the model case in which exactly one exception really occurs ($e^z$ is non-constant and entire with range $\\mathbb{C}\\setminus\\{0\\}$); by contrast $\\sin z$, $\\cos z$ and every non-constant polynomial assume all complex values (zero exceptions). In particular, if $f$ has no zero then $f=e^{h}$ with $h$ entire, so a non-constant entire function omitting exactly one value has the form $f(z)=a+e^{h(z)}$.\n\n**Comparison with Liouville's theorem**: Liouville only says that a bounded entire function is constant; Picard's little theorem is far stronger and **implies** it. If $|f(z)|\\le M$, then $f$ misses every value $w$ with $|w|>M$ — infinitely many omissions. If $f$ were non-constant, Picard's little theorem would allow at most one omission, a contradiction, so $f$ is constant. Thus global information about the range is much more powerful than a bound on the modulus. (Liouville's theorem in turn yields the fundamental theorem of algebra.)\n\n**Picard's great theorem**: let $f$ be analytic on the punctured disk $0<|z-z_0|<R$ and let $z_0$ be an **essential singularity** of $f$. Then for every $0<r<R$ the image $f(\\{z:0<|z-z_0|<r\\})$ contains all of $\\mathbb{C}$ with at most one exception; more precisely, for every $A\\in\\mathbb{C}$ (with at most one exceptional value) the equation $f(z)=A$ has **infinitely many solutions** in the punctured neighbourhood, accumulating at $z_0$. A model example: $e^{1/z}$ assumes every non-zero value infinitely often in $0<|z|<\\varepsilon$, with solutions $z_k=1/(\\log|A|+i(\\arg A+2k\\pi))$, $k\\in\\mathbb{Z}$, tending to $0$ as $|k|\\to\\infty$; the only exceptional value is $0$.\n\n**The great theorem generalises the little one**: a non-constant entire function $f$ viewed on $\\hat{\\mathbb{C}}$ either has a pole at $z=\\infty$ (then $f$ is a polynomial and assumes every value) or an essential singularity there (a transcendental entire function); applying the great theorem at $z_0=\\infty$ via $w=1/z$ gives the little theorem. The great theorem also implies the **Casorati–Weierstrass theorem** that the image of a punctured neighbourhood of an essential singularity is dense in $\\mathbb{C}$: if the image missed every value in some open disk it would miss infinitely many values, contradicting 'at most one exception'. Hence Picard's great theorem (at most one exception) is **strictly stronger** than Weierstrass's theorem (density). For contrast, the behaviour at a pole is quite different: in each punctured neighbourhood $0<|z|<r$ the image of $1/z$ is only $\\{|w|>1/r\\}$, so infinitely many values are omitted and every non-zero value is taken at most once; near a removable singularity (a bounded function) infinitely many values are missed as well. This is why the hypothesis must be 'essential singularity' rather than merely 'non-removable'.\n\n**An honest remark on the proofs**: the conclusions are extremely strong and so are the proofs. Picard's own argument used the **elliptic modular function**: the modular function $\\lambda$ maps the upper half plane onto $\\mathbb{C}\\setminus\\{0,1\\}$, so an entire function omitting two values could be composed with $\\lambda^{-1}$ to produce a bounded analytic function, contradicting Liouville's theorem. Modern proofs use **normal family theory** (Schottky's theorem plus Montel's theorem) or hyperbolic metrics and Bloch's principle. This node states the theorems and explains their meaning and mutual implications; it does not reproduce the proofs.",
+  "formulas": [
+   {
+    "latex": "f\\ \\text{整且非常数}\\ \\Longrightarrow\\ \\#\\{a\\in\\mathbb{C}:\\ f(z)\\ne a\\ \\text{对一切}\\ z\\}\\le 1",
+    "note": "皮卡小定理：至多一个例外值（这正是「至多一个」的含义，例外值可以为 0 个、1 个）。",
+    "noteEn": "Picard's little theorem: at most one exceptional value (so the number of exceptions is 0 or 1)."
+   },
+   {
+    "latex": "e^{z}\\ne 0\\ (\\forall z);\\qquad e^{z}=A\\ne0\\iff z=\\ln|A|+i(\\arg A+2k\\pi),\\ k\\in\\mathbb{Z}",
+    "note": "例外值恰好一个的例子：$e^{z}$ 漏掉 $0$，而每个非零值被取到无穷多次。",
+    "noteEn": "The example with exactly one exceptional value: $e^z$ omits $0$, while every non-zero value is assumed infinitely often."
+   },
+   {
+    "latex": "z_0\\ \\text{为}\\ f\\ \\text{的本性奇点}\\ \\Longrightarrow\\ \\forall A\\in\\mathbb{C}\\ (\\text{至多一例外}),\\ f(z)=A\\ \\text{在}\\ 0<|z-z_0|<R\\ \\text{内有无穷多个解}",
+    "note": "皮卡大定理；解以 $z_0$ 为聚点，且例外值也至多一个。",
+    "noteEn": "Picard's great theorem: the solutions accumulate at $z_0$, and there is at most one exceptional value."
+   },
+   {
+    "latex": "\\sin z=A\\iff e^{2iz}-2iAe^{iz}-1=0\\iff e^{iz}=iA\\pm\\sqrt{1-A^{2}}",
+    "note": "$\\sin z$ 例外值为 0 个：上式两根之积为 $-1$，两根都非零，取对数即得无穷多个解。",
+    "noteEn": "$\\sin z$ has no exceptional value: the two roots above have product $-1$, both non-zero, and taking logarithms yields infinitely many solutions."
+   },
+   {
+    "latex": "\\text{皮卡大}\\Longrightarrow\\text{皮卡小}\\Longrightarrow\\text{刘维尔定理};\\qquad \\text{皮卡大}\\Longrightarrow\\text{魏尔斯特拉斯（像集稠密）}",
+    "note": "蕴含链：大定理对小定理、小定理对刘维尔、大定理对魏尔斯特拉斯定理；「至多一个例外」强于「稠密」，也强于「有界 $\\Rightarrow$ 常数」。",
+    "noteEn": "The chain of implications: great $\\Rightarrow$ little, little $\\Rightarrow$ Liouville, great $\\Rightarrow$ Weierstrass; 'at most one exception' is stronger than density and stronger than 'bounded $\\Rightarrow$ constant'."
+   }
+  ],
+  "properties": [
+   "「至多一个例外」是关键：例外值可以真的出现（$e^{z}$、$e^{e^{z}}$ 都只漏 $0$，$e^{z}-1$ 只漏 $1$），但**不可能出现两个**——这对任何非常数整函数都成立。",
+   "恰好一个例外值的非常数整函数有完整刻画：$f(z)=a+e^{h(z)}$，$h$ 为整函数（因为 $f-a$ 是无零点整函数）。多项式、$\\sin z$、$\\cos z$ 的例外数都是 $0$。",
+   "蕴含链：皮卡小 $\\Rightarrow$ 刘维尔定理（有界则漏掉无穷多个值）；皮卡大 $\\Rightarrow$ 皮卡小（对 $z_0=\\infty$ 用大定理）；皮卡大 $\\Rightarrow$ 魏尔斯特拉斯定理（漏掉一整个圆盘的值即漏掉无穷多个值）。皮卡定理因此位于值分布理论的顶端。",
+   "大定理中的「无穷多次」不可省略，它是本性奇点与极点行为的真正分界：$\\frac1z$ 在 $0$ 处（一级极点）把每个非零值恰好取一次且漏掉 $0$，而 $e^{1/z}$（本性奇点）把每个非零值取无穷多次。",
+   "证明很难，需要椭圆模函数或正规族/双曲度量理论（Schottky + Montel）；这也是它常被视为单复变函数论中最深刻的定理之一的原因。"
+  ],
+  "propertiesEn": [
+   "'At most one exception' is the essential point: an exception genuinely occurs for $e^{z}$ and $e^{e^{z}}$ (both omit only $0$) and for $e^{z}-1$ (omits $1$), but **two exceptions are impossible** for any non-constant entire function.",
+   "Non-constant entire functions with exactly one exceptional value are fully described: $f(z)=a+e^{h(z)}$ with $h$ entire (since $f-a$ is a zero-free entire function). Polynomials, $\\sin z$ and $\\cos z$ have no exceptional value at all.",
+   "Chain of implications: Picard little $\\Rightarrow$ Liouville (a bounded function omits infinitely many values); Picard great $\\Rightarrow$ Picard little (applied at $z_0=\\infty$); Picard great $\\Rightarrow$ Weierstrass (missing a whole disk means missing infinitely many values). This places Picard's theorems at the summit of value distribution theory.",
+   "'Infinitely many times' in the great theorem cannot be weakened: it is the real dividing line between essential singularities and poles. At a simple pole, $1/z$ takes each non-zero value exactly once and misses $0$, whereas $e^{1/z}$ at an essential singularity takes each non-zero value infinitely often.",
+   "The proofs are hard and require the elliptic modular function or normal family / hyperbolic metric theory (Schottky plus Montel); this is why the theorems are regarded as among the deepest in one-variable complex analysis."
+  ],
+  "examples": [
+   {
+    "problem": "用皮卡小定理证明刘维尔定理，并说明为什么「无穷多个值被漏掉」是矛盾的关键。",
+    "solution": "设 $f$ 是整函数且有界：存在 $M>0$ 使 $|f(z)|\\le M$ 对一切 $z$ 成立。\n\n反证，设 $f$ 非常数。对任意满足 $|w|>M$ 的复数 $w$，都有 $|f(z)|\\le M<|w|$，故 $f(z)\\ne w$ 对一切 $z$ 成立，即 $f$ 漏掉了集合 $\\{w:|w|>M\\}$ 中的**每一个**值。这是无穷多个互不相同的复数，而皮卡小定理断言非常数整函数至多漏掉一个值，矛盾。因此 $f$ 只能是常数——刘维尔定理得证。\n\n关键确实在于「无穷多个」：刘维尔定理只能把有界性与「值域不含整个外部区域」联系起来，而皮卡小定理把「漏值的个数」限制到至多一个，于是任何漏掉两个以上值（更不用说无穷多个值）的整函数都被迫成为常数。\n\n这一比较也解释了三个定理的强弱：代数基本定理（多项式取到零）$\\Leftarrow$ 刘维尔定理 $\\Leftarrow$ 皮卡小定理，越往后结论越强、证明越难。"
+   },
+   {
+    "problem": "验证皮卡大定理：说明 $f(z)=e^{1/z}$ 在任意去心邻域 $0<|z|<\\varepsilon$ 内取到每个非零值无穷多次，而 $0$ 是唯一的例外值。",
+    "solution": "取定 $A\\ne0$，固定 $A$ 的一个对数值 $\\log A=\\ln|A|+i\\arg A$。方程 $e^{1/z}=A$ 等价于\n$$\\frac{1}{z}=\\log A+2k\\pi i\\quad\\Longleftrightarrow\\quad z_k=\\frac{1}{\\log A+2k\\pi i},\\qquad k\\in\\mathbb{Z}.$$\n（$\\log A+2k\\pi i\\ne0$ 对一切 $k$ 成立，因为 $A\\ne0$ 时 $\\ln|A|$ 与 $\\arg A+2k\\pi$ 不可能同时为零。）\n\n当 $|k|\\to\\infty$ 时 $|\\log A+2k\\pi i|\\to\\infty$，故 $|z_k|\\to0$：给定任意 $\\varepsilon>0$，除有限多个 $k$ 外全部 $z_k$ 都落在 $0<|z|<\\varepsilon$ 内，且以 $0$ 为聚点。所以 $e^{1/z}$ 在每个去心邻域内把 $A$ 取到无穷多次。\n\n另一方面 $e^{1/z}$ 永远不为 $0$：$e^{w}\\ne0$ 对一切 $w$ 成立。所以唯一例外值就是 $A=0$。这正好符合皮卡大定理：$z=0$ 是 $e^{1/z}$ 的本性奇点（$e^{1/z}=1+\\frac1z+\\frac{1}{2z^{2}}+\\cdots$ 有无穷多个负幂项），故在每个去心邻域内函数取到每个值无穷多次，至多一个例外。\n\n与魏尔斯特拉斯定理对照：那里只能断言像集在 $\\mathbb{C}$ 中稠密（每个圆盘内都有值），而皮卡大定理进一步断言「每个值取无穷多次、至多漏一个」——强得多，例如它排除了像集填满某个圆盘却漏掉中心这种稠密而漏值的分布。"
+   }
+  ],
+  "plot": {
+   "type": "function",
+   "functions": [
+    {
+     "expr": "exp(x)",
+     "color": "#4cc9f0",
+     "label": "y = eˣ"
+    },
+    {
+     "expr": "0",
+     "color": "#ff6b9d",
+     "label": "y = 0（例外值，永远取不到）"
+    }
+   ],
+   "xRange": [
+    -3,
+    3
+   ],
+   "yRange": [
+    -1,
+    5
+   ],
+   "title": "y = eˣ 恒正：它取到一切正数，唯独取不到 0（皮卡例外值）"
+  },
+  "tags": [
+   "皮卡定理",
+   "例外值",
+   "本性奇点",
+   "值分布",
+   "刘维尔定理"
+  ],
+  "links": [
+   "entire-functions",
+   "isolated-singularities",
+   "liouville-theorem",
+   "meromorphic-functions",
+   "normal-families",
+   "elliptic-functions"
+  ]
+ }
 ]
