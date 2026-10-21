@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=44";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=44";
+import { renderPlot } from "./plot.js?v=46";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=46";
 
 /* ============================================================
    1. 全局状态
@@ -10,6 +10,8 @@ let DATA = null; // knowledge.json 的内容
 const nodeById = new Map(); // id -> 节点数据
 let dataIndexOf = new Map(); // id -> Points 中的下标
 let starLayer = null; // 知识点星体图层
+let galaxyGroup = null; // 知识点星体 + 连线 + 共鸣物体，整体缓慢自转
+const GALAXY_SPIN = 0.012; // rad/s：银河本身的自转，不是相机自转
 const bgLayers = []; // 背景星尘图层
 let linksObject = null; // 合并后的连线
 let linkMeta = []; // 每条连线的元信息
@@ -295,7 +297,7 @@ controls.zoomToCursor = true; // 缩放锚定鼠标位置，避免整幅画面�
 controls.minDistance = 18; // 允许贴近星星观察
 controls.maxDistance = 700;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.24;
+controls.autoRotateSpeed = 0.12;
 
 /* 用户一操作就交还完全控制权：中断飞行、暂停自转 */
 controls.addEventListener("start", () => {
@@ -824,7 +826,7 @@ function createResonanceObjects() {
   );
 
   for (const s of [resonanceMarkers.a, resonanceMarkers.b, resonanceGhosts.a, resonanceGhosts.b, resonanceTrails.a, resonanceTrails.b, resonanceRipple, ...resonancePulses]) {
-    scene.add(s);
+    (galaxyGroup || scene).add(s);
   }
 }
 
@@ -1743,7 +1745,9 @@ function pick() {
   let bestD2 = r2;
   for (let i = 0; i < DATA.nodes.length; i++) {
     const p = DATA.nodes[i].position;
-    _pickV.set(p.x, p.y, p.z).project(camera);
+    _pickV.set(p.x, p.y, p.z);
+    if (galaxyGroup) _pickV.applyMatrix4(galaxyGroup.matrixWorld);
+    _pickV.project(camera);
     if (_pickV.z < -1 || _pickV.z > 1) continue;
     const x = (_pickV.x * 0.5 + 0.5) * w;
     const y = (-_pickV.y * 0.5 + 0.5) * h;
@@ -1909,7 +1913,9 @@ function updateArmLabels() {
   const w = window.innerWidth, h = window.innerHeight;
   for (const L of armLabels) {
     if (activeBranch && L.branch !== activeBranch) { L.el.style.opacity = 0; continue; }
-    _armProjV.copy(L.pos).project(camera);
+    _armProjV.copy(L.pos);
+    if (galaxyGroup) _armProjV.applyMatrix4(galaxyGroup.matrixWorld);
+    _armProjV.project(camera);
     const x = ((_armProjV.x + 1) / 2) * w;
     const y = ((1 - _armProjV.y) / 2) * h;
     if (_armProjV.z > 1 || x < -80 || x > w + 80 || y < -40 || y > h + 40) { L.el.style.opacity = 0; continue; }
@@ -2300,6 +2306,7 @@ function flyTo(id) {
   if (!node) return;
 
   const pos = new THREE.Vector3(node.position.x, node.position.y, node.position.z);
+  if (galaxyGroup) pos.applyMatrix4(galaxyGroup.matrixWorld);
   const dir = pos.clone().normalize();
   const offset = dir.multiplyScalar(26).add(new THREE.Vector3(0, 12, 0));
 
@@ -2422,7 +2429,7 @@ function applyBranchFilter() {
 /* 分支筛选时，给该旋臂描一条发光的「骨架线」 */
 function updateArmSpine() {
   if (armSpine) {
-    scene.remove(armSpine);
+    (galaxyGroup || scene).remove(armSpine);
     armSpine.geometry.dispose();
     armSpine.material.dispose();
     armSpine = null;
@@ -2446,7 +2453,7 @@ function updateArmSpine() {
   });
   armSpine = new THREE.Line(geo, mat);
   armSpine.renderOrder = 3;
-  scene.add(armSpine);
+  (galaxyGroup || scene).add(armSpine);
 }
 
 function buildSearch() {
@@ -2626,6 +2633,9 @@ function animate() {
   updateFly();
   controls.update();
 
+  // 银河本体的整体自转：知识点、连线、共鸣物体一起转，和相机自转叠加
+  if (galaxyGroup) galaxyGroup.rotation.y = elapsed * GALAXY_SPIN;
+
   // 连线入场淡入
   if (linksRevealStart && linksObject) {
     const lt = Math.min(1, (performance.now() - linksRevealStart) / 1500);
@@ -2676,8 +2686,10 @@ async function main() {
   scene.add(createNebulae());
   scene.add(createCore());
   scene.add(createBackgroundStars());
-  scene.add(buildLinks());
-  scene.add(createKnowledgeStars());
+  galaxyGroup = new THREE.Group();
+  galaxyGroup.add(buildLinks());
+  galaxyGroup.add(createKnowledgeStars());
+  scene.add(galaxyGroup);
   buildAdjacency();
   createResonanceObjects();
 
@@ -2757,6 +2769,7 @@ async function main() {
     camera,
     controls,
     starLayer,
+    galaxyGroup,
     bgLayers,
     getFly: () => fly,
     getResonance: () => ({
@@ -2778,11 +2791,9 @@ async function main() {
     screenPos: (id) => {
       const n = nodeById.get(id);
       if (!n) return null;
-      const v = new THREE.Vector3(
-        n.position.x,
-        n.position.y,
-        n.position.z
-      ).project(camera);
+      const v = new THREE.Vector3(n.position.x, n.position.y, n.position.z);
+      if (galaxyGroup) v.applyMatrix4(galaxyGroup.matrixWorld);
+      v.project(camera);
       return {
         x: (v.x * 0.5 + 0.5) * window.innerWidth,
         y: (-v.y * 0.5 + 0.5) * window.innerHeight,
