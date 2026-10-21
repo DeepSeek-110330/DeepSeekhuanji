@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=50";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=50";
+import { renderPlot } from "./plot.js?v=52";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=52";
 
 /* ============================================================
    1. 全局状态
@@ -11,17 +11,21 @@ const nodeById = new Map(); // id -> 节点数据
 let dataIndexOf = new Map(); // id -> Points 中的下标
 let starLayer = null; // 知识点星体图层
 let galaxyGroup = null; // 知识点星体 + 连线 + 共鸣物体，整体缓慢自转
-const GALAXY_SPIN_BASE = 0.004;
-const GALAXY_SPIN_BOOST = 1.8;
-const GALAXY_SPIN_SOFT = 25;
+const GALAXY_FLOW_BASE = 0.010;
+const GALAXY_WAVE_AMP = 0.040;
+const GALAXY_WAVE_FREQ = 0.60;
+const GALAXY_WAVE_K = 0.015;
+const GALAXY_WAVE_DECAY = 260;
+let flowElapsed = 0;
 const _flowV = new THREE.Vector3();
 
 function flowPosition(p, out = _flowV) {
   const rad = Math.hypot(p.x, p.z);
   if (rad < 1e-5) { out.set(p.x, p.y, p.z); return out; }
   const ang = Math.atan2(p.z, p.x);
-  const omega = GALAXY_SPIN_BASE + GALAXY_SPIN_BOOST / (rad + GALAXY_SPIN_SOFT);
-  const a = ang + elapsed * omega;
+  const wave = GALAXY_WAVE_AMP * Math.exp(-rad / GALAXY_WAVE_DECAY) *
+    Math.sin(flowElapsed * GALAXY_WAVE_FREQ - rad * GALAXY_WAVE_K);
+  const a = ang + flowElapsed * GALAXY_FLOW_BASE + wave;
   out.set(Math.cos(a) * rad, p.y, Math.sin(a) * rad);
   return out;
 }
@@ -607,25 +611,30 @@ function buildLinks() {
     uniforms: {
       uOpacity: { value: LINK_OPACITY },
       uTime: { value: 0 },
-      uSpinBase: { value: GALAXY_SPIN_BASE },
-      uSpinBoost: { value: GALAXY_SPIN_BOOST },
-      uSpinSoft: { value: GALAXY_SPIN_SOFT },
+      uFlowBase: { value: GALAXY_FLOW_BASE },
+      uWaveAmp: { value: GALAXY_WAVE_AMP },
+      uWaveFreq: { value: GALAXY_WAVE_FREQ },
+      uWaveK: { value: GALAXY_WAVE_K },
+      uWaveDecay: { value: GALAXY_WAVE_DECAY },
     },
     vertexShader: /* glsl */ `
       attribute vec3 color;
       varying vec3 vColor;
       uniform float uTime;
-      uniform float uSpinBase;
-      uniform float uSpinBoost;
-      uniform float uSpinSoft;
+      uniform float uFlowBase;
+      uniform float uWaveAmp;
+      uniform float uWaveFreq;
+      uniform float uWaveK;
+      uniform float uWaveDecay;
       void main() {
         vColor = color;
         vec3 p = position;
         float rad = length(p.xz);
         if (rad > 0.001) {
           float ang = atan(p.z, p.x);
-          float omega = uSpinBase + uSpinBoost / (rad + uSpinSoft);
-          float a = ang + uTime * omega;
+          float wave = uWaveAmp * exp(-rad / uWaveDecay)
+                     * sin(uTime * uWaveFreq - rad * uWaveK);
+          float a = ang + uTime * uFlowBase + wave;
           p.x = cos(a) * rad;
           p.z = sin(a) * rad;
         }
@@ -713,9 +722,11 @@ function createKnowledgeStars() {
     rich: true,
     flash: !REDUCE_MOTION,
     flow: true,
-    spinBase: GALAXY_SPIN_BASE,
-    spinBoost: GALAXY_SPIN_BOOST,
-    spinSoft: GALAXY_SPIN_SOFT,
+    flowBase: GALAXY_FLOW_BASE,
+    waveAmp: GALAXY_WAVE_AMP,
+    waveFreq: GALAXY_WAVE_FREQ,
+    waveK: GALAXY_WAVE_K,
+    waveDecay: GALAXY_WAVE_DECAY,
   });
 
   dataIndexOf = new Map(DATA.nodes.map((n, i) => [n.id, i]));
@@ -2393,7 +2404,7 @@ function flyTo(id) {
 
 function updateFly() {
   if (!fly) {
-    if (!controls.autoRotate && performance.now() > resumeAutoRotateAt) {
+    if (!currentNode && !resonanceMode && !controls.autoRotate && performance.now() > resumeAutoRotateAt) {
       controls.autoRotate = true;
     }
     return;
@@ -2511,20 +2522,23 @@ function updateArmSpine() {
     uniforms: {
       uColor: { value: new THREE.Color(DATA.branches[activeBranch].color) },
       uOpacity: { value: 0.5 },
-      uTime: { value: elapsed },
-      uSpinBase: { value: GALAXY_SPIN_BASE },
-      uSpinBoost: { value: GALAXY_SPIN_BOOST },
-      uSpinSoft: { value: GALAXY_SPIN_SOFT },
+      uTime: { value: flowElapsed },
+      uFlowBase: { value: GALAXY_FLOW_BASE },
+      uWaveAmp: { value: GALAXY_WAVE_AMP },
+      uWaveFreq: { value: GALAXY_WAVE_FREQ },
+      uWaveK: { value: GALAXY_WAVE_K },
+      uWaveDecay: { value: GALAXY_WAVE_DECAY },
     },
     vertexShader: /* glsl */ `
-      uniform float uTime, uSpinBase, uSpinBoost, uSpinSoft;
+      uniform float uTime, uFlowBase, uWaveAmp, uWaveFreq, uWaveK, uWaveDecay;
       void main() {
         vec3 p = position;
         float rad = length(p.xz);
         if (rad > 0.001) {
           float ang = atan(p.z, p.x);
-          float omega = uSpinBase + uSpinBoost / (rad + uSpinSoft);
-          float a = ang + uTime * omega;
+          float wave = uWaveAmp * exp(-rad / uWaveDecay)
+                     * sin(uTime * uWaveFreq - rad * uWaveK);
+          float a = ang + uTime * uFlowBase + wave;
           p.x = cos(a) * rad;
           p.z = sin(a) * rad;
         }
@@ -2722,8 +2736,10 @@ function animate() {
   updateFly();
   controls.update();
 
-  if (linksObject) linksObject.material.uniforms.uTime.value = elapsed;
-  if (armSpine) armSpine.material.uniforms.uTime.value = elapsed;
+  // 面板打开/共鸣选星时暂停流动，保证正在查看的星和知识链不会转走
+  if (!currentNode && !resonanceMode) flowElapsed += dt;
+  if (linksObject) linksObject.material.uniforms.uTime.value = flowElapsed;
+  if (armSpine) armSpine.material.uniforms.uTime.value = flowElapsed;
 
   // 连线入场淡入
   if (linksRevealStart && linksObject) {
@@ -2737,6 +2753,7 @@ function animate() {
     // 差速自转已经负责“流动”；关掉逐星抖动，保证连线端点与星体严格重合
     starLayer.material.uniforms.uDrift.value = 0;
     starLayer.material.uniforms.uDriftSpeed.value = 0.14;
+    starLayer.material.uniforms.uFlowTime.value = flowElapsed;
     starLayer.update(elapsed, dt);
   }
   if (pulseT0) refreshHighlights(); // 搜索脉冲期间逐帧刷新高亮
@@ -2748,7 +2765,7 @@ function animate() {
   updateArmLabels();
   for (let i = 0; i < bgLayers.length; i++) {
     const layer = bgLayers[i];
-    if (layer.spin) layer.object.rotation.y = elapsed * layer.spin;
+    if (layer.spin) layer.object.rotation.y = flowElapsed * layer.spin;
     layer.update(elapsed, dt);
   }
 

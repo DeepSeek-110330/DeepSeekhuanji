@@ -30,9 +30,12 @@ const STAR_VERTEX = /* glsl */ `
   uniform float uRich;
   uniform float uFlash;
   uniform float uFlow;
-  uniform float uSpinBase;
-  uniform float uSpinBoost;
-  uniform float uSpinSoft;
+  uniform float uFlowTime;
+  uniform float uFlowBase;
+  uniform float uWaveAmp;
+  uniform float uWaveFreq;
+  uniform float uWaveK;
+  uniform float uWaveDecay;
 
   varying vec3 vColor;
   varying float vSpike;
@@ -76,13 +79,16 @@ const STAR_VERTEX = /* glsl */ `
     p.y += cos(dt * 1.3 + aPhase * 2.1) * uDrift * 0.55;
     p.z += sin(dt * 1.1 + aPhase * 2.7) * uDrift;
 
-    // 银河本体差速自转：内侧角速度大于外侧；与连线 shader 使用同一公式
+    // 银河流动：共同基座自转 + 由内向外传播的受限密度波。
+    // 基座保证整体形状不被剪切；波的振幅随半径衰减且始终有界，
+    // 所以内圈会先动、外圈跟随，但不会越转越乱。
     if (uFlow > 0.5) {
       float rad = length(p.xz);
       if (rad > 0.001) {
         float ang = atan(p.z, p.x);
-        float omega = uSpinBase + uSpinBoost / (rad + uSpinSoft);
-        float a = ang + uTime * omega;
+        float wave = uWaveAmp * exp(-rad / uWaveDecay)
+                   * sin(uFlowTime * uWaveFreq - rad * uWaveK);
+        float a = ang + uFlowTime * uFlowBase + wave;
         p.x = cos(a) * rad;
         p.z = sin(a) * rad;
       }
@@ -237,9 +243,12 @@ export class StarLayer {
         uRich: { value: opts.rich ? 1 : 0 },
         uFlash: { value: opts.flash === false ? 0 : 1 },
         uFlow: { value: opts.flow ? 1 : 0 },
-        uSpinBase: { value: opts.spinBase !== undefined ? opts.spinBase : 0.003 },
-        uSpinBoost: { value: opts.spinBoost !== undefined ? opts.spinBoost : 1.3 },
-        uSpinSoft: { value: opts.spinSoft !== undefined ? opts.spinSoft : 25 },
+        uFlowTime: { value: 0 },
+        uFlowBase: { value: opts.flowBase !== undefined ? opts.flowBase : 0.01 },
+        uWaveAmp: { value: opts.waveAmp !== undefined ? opts.waveAmp : 0.04 },
+        uWaveFreq: { value: opts.waveFreq !== undefined ? opts.waveFreq : 0.6 },
+        uWaveK: { value: opts.waveK !== undefined ? opts.waveK : 0.015 },
+        uWaveDecay: { value: opts.waveDecay !== undefined ? opts.waveDecay : 260 },
       },
       vertexShader: STAR_VERTEX,
       fragmentShader: STAR_FRAGMENT,
