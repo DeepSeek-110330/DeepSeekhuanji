@@ -140,7 +140,7 @@ const STAR_FRAGMENT = /* glsl */ `
     float hoverBoost = vHover * 0.10;
 
     float edge = 1.0 - smoothstep(0.72, 1.0, r);
-    float i = (core * 1.0 + inner * 0.50 + halo * 0.34 + whiteHalo + heroAura + outer * 0.14 + spike + bloom + hoverBoost) * vIntensity * 0.92 * edge;
+    float i = (core * 1.0 + inner * 0.50 + halo * 0.34 + whiteHalo + heroAura + outer * 0.14 + spike + bloom + hoverBoost) * vIntensity * 0.72 * edge;
     if (i < 0.003) discard;
 
     // 核心偏白，外圈保留分支色，外晕略偏冷

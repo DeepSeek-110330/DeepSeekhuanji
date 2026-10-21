@@ -22,9 +22,9 @@ body {
   height: 100%;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 95% 75% at 50% 42%, #111637 0%, #080b1e 40%, #03040b 100%),
-    radial-gradient(ellipse 55% 50% at 72% 18%, rgba(58, 156, 255, 0.12), transparent 70%),
-    radial-gradient(ellipse 50% 45% at 20% 80%, rgba(174, 72, 190, 0.10), transparent 72%),
+    radial-gradient(ellipse 95% 75% at 50% 42%, #0a0f24 0%, #050814 42%, #010207 100%),
+    radial-gradient(ellipse 55% 50% at 72% 18%, rgba(58, 156, 255, 0.07), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 20% 80%, rgba(174, 72, 190, 0.06), transparent 72%),
     var(--bg);
   color: var(--text);
   font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI",
@@ -40,11 +40,11 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 68% 52% at 50% 54%, rgba(70, 225, 255, 0.13), transparent 72%),
-    radial-gradient(ellipse 58% 48% at 34% 46%, rgba(145, 92, 255, 0.13), transparent 72%),
-    radial-gradient(ellipse 56% 42% at 70% 60%, rgba(255, 118, 196, 0.085), transparent 72%),
-    radial-gradient(ellipse 46% 56% at 84% 18%, rgba(42, 115, 210, 0.075), transparent 75%),
-    radial-gradient(ellipse 44% 52% at 12% 72%, rgba(80, 50, 190, 0.085), transparent 75%);
+    radial-gradient(ellipse 68% 52% at 50% 54%, rgba(70, 225, 255, 0.07), transparent 72%),
+    radial-gradient(ellipse 58% 48% at 34% 46%, rgba(145, 92, 255, 0.07), transparent 72%),
+    radial-gradient(ellipse 56% 42% at 70% 60%, rgba(255, 118, 196, 0.045), transparent 72%),
+    radial-gradient(ellipse 46% 56% at 84% 18%, rgba(42, 115, 210, 0.04), transparent 75%),
+    radial-gradient(ellipse 44% 52% at 12% 72%, rgba(80, 50, 190, 0.04), transparent 75%);
 }
 
 #galaxy {

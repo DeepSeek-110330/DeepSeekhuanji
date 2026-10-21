@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { renderPlot } from "./plot.js?v=42";
-import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=42";
+import { renderPlot } from "./plot.js?v=43";
+import { StarLayer, makeNebulaTexture, makeSoftGlowTexture, makeAuroraTexture, makeGalaxyTexture, makeSpiralGalaxyTexture } from "./stars.js?v=43";
 
 /* ============================================================
    1. 全局状态
@@ -10,7 +10,6 @@ let DATA = null; // knowledge.json 的内容
 const nodeById = new Map(); // id -> 节点数据
 let dataIndexOf = new Map(); // id -> Points 中的下标
 let starLayer = null; // 知识点星体图层
-let starHaloLayer = null; // 知识点星体的柔光层（让每颗星像星团核心而不是 LED）
 const bgLayers = []; // 背景星尘图层
 let linksObject = null; // 合并后的连线
 let linkMeta = []; // 每条连线的元信息
@@ -31,7 +30,7 @@ let pulseIdx = []; // 搜索结果脉冲高亮的下标
 let pulseT0 = 0;   // 脉冲起始时刻
 
 /* 知识共鸣：让有链接关系的知识点产生可控的「碰撞—融合」交互 */
-const LINK_OPACITY = 0.022; // 深空底色下的「引力丝」基础亮度：默认隐入星云，聚焦时亮起
+const LINK_OPACITY = 0.028; // 深空底色下的「引力丝」基础亮度：默认隐入星云，聚焦时亮起
 const REDUCE_MOTION = window.matchMedia
   ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
   : false;
@@ -276,7 +275,6 @@ function applySize() {
   camera.updateProjectionMatrix();
   const pr = Math.min(quality.pr, 2);
   if (starLayer) starLayer.material.uniforms.uPixelRatio.value = pr;
-  if (starHaloLayer) starHaloLayer.material.uniforms.uPixelRatio.value = pr;
   bgLayers.forEach((l) => (l.material.uniforms.uPixelRatio.value = pr));
 }
 
@@ -335,7 +333,7 @@ function createNebulae() {
         [1, "rgba(10,20,50,0)"],
       ]),
       transparent: true,
-      opacity: 0.34,
+      opacity: 0.22,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       depthTest: false,
@@ -353,7 +351,7 @@ function createNebulae() {
     new THREE.MeshBasicMaterial({
       map: diskTex,
       transparent: true,
-      opacity: 0.60,
+      opacity: 0.44,
       blending: THREE.NormalBlending,
       depthWrite: false,
       depthTest: false,
@@ -367,16 +365,16 @@ function createNebulae() {
 
   // —— 银河带：一条偏暖、一条偏冷，叠出「星河」的层次 ——
   const bandConfigs = [
-    { seed: 7, pos: [-20, -4, 20], scale: [930, 210], rot: 0.42, opacity: 0.10, inner: "#ffd7a8", outer: "#4b2a75" },
-    { seed: 19, pos: [45, 12, -30], scale: [800, 190], rot: 0.55, opacity: 0.085, inner: "#9fd8ff", outer: "#2a2a78" },
+    { seed: 7, pos: [-20, -4, 20], scale: [930, 210], rot: 0.42, opacity: 0.060, inner: "#ffd7a8", outer: "#4b2a75" },
+    { seed: 19, pos: [45, 12, -30], scale: [800, 190], rot: 0.55, opacity: 0.050, inner: "#9fd8ff", outer: "#2a2a78" },
   ];
 
   // —— 外围星云：冷色为主，少量玫红和金色点缀 ——
   const configs = [
-    { seed: 3,  scale: 480, pos: [-205, -34, 165], rot: 0.4,  opacity: 0.22, inner: "#6b4fc8", outer: "#1b6fa8" },
-    { seed: 11, scale: 430, pos: [220, 30, -160],  rot: -0.7, opacity: 0.20, inner: "#8a4bcf", outer: "#2457b8" },
-    { seed: 23, scale: 380, pos: [105, -38, 235],  rot: 1.2,  opacity: 0.17, inner: "#1b8fb8", outer: "#4b3bc0" },
-    { seed: 41, scale: 340, pos: [-165, 42, -220], rot: -1.6, opacity: 0.15, inner: "#7a4b9d", outer: "#1b4f9a" },
+    { seed: 3,  scale: 480, pos: [-205, -34, 165], rot: 0.4,  opacity: 0.13, inner: "#6b4fc8", outer: "#1b6fa8" },
+    { seed: 11, scale: 430, pos: [220, 30, -160],  rot: -0.7, opacity: 0.12, inner: "#8a4bcf", outer: "#2457b8" },
+    { seed: 23, scale: 380, pos: [105, -38, 235],  rot: 1.2,  opacity: 0.10, inner: "#1b8fb8", outer: "#4b3bc0" },
+    { seed: 41, scale: 340, pos: [-165, 42, -220], rot: -1.6, opacity: 0.09, inner: "#7a4b9d", outer: "#1b4f9a" },
   ];
 
   bandConfigs.forEach((c) => {
@@ -457,7 +455,7 @@ function createNebulae() {
     new THREE.SpriteMaterial({
       map: coreDustTex,
       transparent: true,
-      opacity: 0.60,
+      opacity: 0.44,
       blending: THREE.NormalBlending,
       depthWrite: false,
       depthTest: false,
@@ -471,8 +469,8 @@ function createNebulae() {
 
   // —— 星云丝：沿盘面的细长光丝，增加「气体流动」的方向感 ——
   const filamentConfigs = [
-    { seed: 101, pos: [-80, 16, 55], scale: [680, 38], rot: 0.55, opacity: 0.065, inner: "#4b89ff", outer: "#9b7cff" },
-    { seed: 113, pos: [80, -10, -55], scale: [620, 34], rot: 0.48, opacity: 0.055, inner: "#42d8d0", outer: "#5b6cff" },
+    { seed: 101, pos: [-80, 16, 55], scale: [680, 38], rot: 0.55, opacity: 0.04, inner: "#4b89ff", outer: "#9b7cff" },
+    { seed: 113, pos: [80, -10, -55], scale: [620, 34], rot: 0.48, opacity: 0.035, inner: "#42d8d0", outer: "#5b6cff" },
   ];
   filamentConfigs.forEach((c) => {
     const tex = makeNebulaTexture({ seed: c.seed, inner: c.inner, outer: c.outer, size: 224, cutoff: 0.35, power: 1.35 });
@@ -499,7 +497,7 @@ function createNebulae() {
           map: clusterTex,
           color: c,
           transparent: true,
-          opacity: 0.055,
+          opacity: 0.028,
           blending: THREE.AdditiveBlending,
           depthWrite: false,
           depthTest: false,
@@ -545,7 +543,7 @@ function createCore() {
       [1, "rgba(20,30,80,0)"],
     ],
     [560, 340],
-    0.10,
+    0.06,
     -4
   );
 
@@ -558,7 +556,7 @@ function createCore() {
       [1, "rgba(80,70,180,0)"],
     ],
     [320, 104],
-    0.24,
+    0.16,
     -3
   );
   bulge.position.y = -2;
@@ -572,7 +570,7 @@ function createCore() {
       [1, "rgba(40,30,100,0)"],
     ],
     [170, 96],
-    0.18,
+    0.12,
     -2
   );
 
@@ -585,7 +583,7 @@ function createCore() {
       [1, "rgba(150,170,255,0)"],
     ],
     38,
-    0.30,
+    0.22,
     -1
   );
 
@@ -598,7 +596,7 @@ function createBackgroundStars() {
 
   // —— 远景星壳：包裹整个场景，旋转时产生宇宙纵深 ——
   const shell = [];
-  const N1 = 9000;
+  const N1 = 5600;
   for (let i = 0; i < N1; i++) {
     const u = rnd() * 2 - 1;
     const th = rnd() * Math.PI * 2;
@@ -616,7 +614,7 @@ function createBackgroundStars() {
       spike: rnd() > 0.988 ? 0.55 : 0,
     });
   }
-  const shellLayer = new StarLayer(shell, { opacity: 1, twinkle: 0.10 });
+  const shellLayer = new StarLayer(shell, { opacity: 0.68, twinkle: 0.10 });
   shellLayer.spin = 0.00055; // 远景星壳：极慢旋转，制造宇宙纵深
   group.add(shellLayer.object);
   bgLayers.push(shellLayer);
@@ -654,7 +652,7 @@ function createBackgroundStars() {
       spike: 0,
     });
   }
-  const dustLayer = new StarLayer(dust, { opacity: 0.6, twinkle: 0.16 });
+  const dustLayer = new StarLayer(dust, { opacity: 0.42, twinkle: 0.16 });
   dustLayer.spin = 0.00006; // 银盘星尘：几乎不动，保持与知识点旋臂对齐
   group.add(dustLayer.object);
   bgLayers.push(dustLayer);
@@ -676,14 +674,14 @@ function createBackgroundStars() {
       spike: 0,
     });
   }
-  const haloLayer = new StarLayer(halo, { opacity: 0.42, twinkle: 0.12 });
+  const haloLayer = new StarLayer(halo, { opacity: 0.28, twinkle: 0.12 });
   haloLayer.spin = -0.00028; // 星系晕：反向慢转，形成差速感
   group.add(haloLayer.object);
   bgLayers.push(haloLayer);
 
   // —— 深空微尘星：散落在整片暗区的闪烁小星，让黑夜不空 ——
   const motes = [];
-  const N4 = 1200;
+  const N4 = 700;
   for (let i = 0; i < N4; i++) {
     const u = rnd() * 2 - 1;
     const th = rnd() * Math.PI * 2;
@@ -701,7 +699,7 @@ function createBackgroundStars() {
       spike: rnd() > 0.975 ? 0.5 : 0,
     });
   }
-  const motesLayer = new StarLayer(motes, { opacity: 0.6, twinkle: 0.28 });
+  const motesLayer = new StarLayer(motes, { opacity: 0.42, twinkle: 0.28 });
   motesLayer.spin = 0.00018; // 深空微尘：略快一点的缓慢漂移
   group.add(motesLayer.object);
   bgLayers.push(motesLayer);
@@ -709,7 +707,7 @@ function createBackgroundStars() {
   // —— 银河星带：沿一个倾斜大圆铺开的密集微星，给画面一条「星河」——
   // 它不是知识点旋臂，而是远景的银河带；相机转动时会像真实星空一样横贯画面。
   const bandStars = [];
-  const N5 = 6000;
+  const N5 = 2400;
   const normal = new THREE.Vector3(0.34, 1, 0.16).normalize();
   const e1 = new THREE.Vector3(1, 0, 0.36).normalize();
   const e2 = new THREE.Vector3().crossVectors(normal, e1).normalize();
@@ -734,75 +732,10 @@ function createBackgroundStars() {
       spike: rnd() > 0.992 ? 0.45 : 0,
     });
   }
-  const bandLayer = new StarLayer(bandStars, { opacity: 0.62, twinkle: 0.18 });
+  const bandLayer = new StarLayer(bandStars, { opacity: 0.34, twinkle: 0.18 });
   bandLayer.spin = 0.00012;
   group.add(bandLayer.object);
   bgLayers.push(bandLayer);
-
-  // —— 知识点星团：每颗知识点不再是一个孤立光点，而是被一圈微小星尘包住 ——
-  const cluster = [];
-  const clusterRnd = seededRandom(771933);
-  DATA.nodes.forEach((node) => {
-    if (!node.position) return;
-    const base = node.position;
-    const n = node.level >= 4 ? 80 : 46;
-    for (let k = 0; k < n; k++) {
-      const u = clusterRnd() * 2 - 1;
-      const th = clusterRnd() * Math.PI * 2;
-      const s = Math.sqrt(Math.max(0, 1 - u * u));
-      const rr = 2.5 + Math.pow(clusterRnd(), 0.72) * (node.level >= 4 ? 12 : 7);
-      const tint = clusterRnd();
-      let color = "#eef4ff";
-      if (tint > 0.9) color = "#ffd6a0";
-      else if (tint > 0.72) color = "#cfe0ff";
-      else if (tint > 0.58) color = "#e8d7ff";
-      cluster.push({
-        position: [
-          base.x + Math.cos(th) * s * rr,
-          base.y + u * rr * 0.72,
-          base.z + Math.sin(th) * s * rr,
-        ],
-        color,
-        size: 0.72 + clusterRnd() * 1.55,
-        spike: 0,
-      });
-    }
-  });
-  const clusterLayer = new StarLayer(cluster, { opacity: 0.95, twinkle: 0.10, sizeScale: 0.80 });
-  group.add(clusterLayer.object);
-  bgLayers.push(clusterLayer);
-
-  // —— 银盘星海：沿 38 条旋臂撒下大量极小的星，填满星点之间的空隙 ——
-  const sea = [];
-  const seaRnd = seededRandom(991177);
-  const seaArms = armAngles.length ? armAngles : [0, Math.PI];
-  for (let i = 0; i < 100000; i++) {
-    const arm = seaArms[Math.floor(seaRnd() * seaArms.length)];
-    const t = Math.pow(seaRnd(), 0.82);
-    const r = 10 + t * 188;
-    const spiral = 0.038 * r - 0.93;
-    const jitter = (seaRnd() - 0.5) * (1.35 - 0.45 * t);
-    const angle = arm + spiral + jitter;
-    const wob = 1.4 + r * 0.035;
-    const tint = seaRnd();
-    let color = "#e8f0ff";
-    if (tint > 0.92) color = "#ffd6a0";
-    else if (tint > 0.78) color = "#c6dcff";
-    else if (tint > 0.64) color = "#e2d0ff";
-    sea.push({
-      position: [
-        Math.cos(angle) * r + (seaRnd() - 0.5) * wob,
-        (seaRnd() - 0.5) * (4 + r * 0.035),
-        Math.sin(angle) * r + (seaRnd() - 0.5) * wob,
-      ],
-      color,
-      size: 0.70 + seaRnd() * 1.55,
-      spike: 0,
-    });
-  }
-  const seaLayer = new StarLayer(sea, { opacity: 0.68, twinkle: 0.14, sizeScale: 0.65 });
-  group.add(seaLayer.object);
-  bgLayers.push(seaLayer);
 
   return group;
 }
@@ -817,7 +750,7 @@ function buildLinks() {
   const done = new Set();
   const cA = new THREE.Color();
   const cB = new THREE.Color();
-  const linkTint = new THREE.Color("#a9c8ff");
+  const linkTint = new THREE.Color("#7f9ac8");
   const SEG = 18;
 
   DATA.nodes.forEach((node) => {
@@ -860,7 +793,7 @@ function buildLinks() {
         const t = vertCount > 1 ? v / (vertCount - 1) : 0;
         // 中段稍亮，两端收敛，连线看起来像能量流
         const shape = 0.55 + 0.45 * Math.sin(Math.PI * t);
-        const c = cA.clone().lerp(cB, t).lerp(linkTint, 0.52);
+        const c = cA.clone().lerp(cB, t).lerp(linkTint, 0.58);
         colors.push(c.r * shape, c.g * shape, c.b * shape);
       }
 
@@ -916,15 +849,15 @@ function updateLinkColors() {
     let k;
     if (resonancePathKeys.size && resonancePathKeys.has(m.key)) {
       // 共鸣链路：优先点亮整条知识链
-      k = 10.0;
+      k = 2.4;
     } else if (resonanceMode && resonancePathKeys.size) {
       // 共鸣进行中，压暗无关连线，让画面保持干净
       k = 0.015;
     } else if (focusId) {
-      k = m.na === focusId || m.nb === focusId ? 8.0 : 0.01;
+      k = m.na === focusId || m.nb === focusId ? 1.9 : 0.05;
     } else {
       const on = !activeBranch || m.a === activeBranch || m.b === activeBranch;
-      k = activeBranch ? (on ? 4.0 : DIM) : 1;
+      k = activeBranch ? (on ? 1.8 : DIM) : 1;
     }
     for (let v = 0; v < m.count; v++) {
       const i = (m.start + v) * 3;
@@ -965,28 +898,8 @@ function createKnowledgeStars() {
     flash: !REDUCE_MOTION,
   });
 
-  // 柔光层：同一位置、放大的点精灵，只保留晕不开星芒；
-  // 让大星像「星团核心」而不是一个孤立亮点。
-  const haloItems = items.map((it, i) => ({
-    ...it,
-    size: it.size * 2.6,
-    spike: 0,
-    color: i % 10 < 7 ? "#dfe8ff" : i % 10 < 9 ? "#ffe3c4" : "#e5d8ff",
-  }));
-  starHaloLayer = new StarLayer(haloItems, {
-    opacity: 0.065,
-    twinkle: REDUCE_MOTION ? 0 : 0.035,
-    sizeScale: 1.0,
-    rich: false,
-    flash: false,
-  });
-  starHaloLayer.object.renderOrder = 1.5;
-
   dataIndexOf = new Map(DATA.nodes.map((n, i) => [n.id, i]));
-  const group = new THREE.Group();
-  group.add(starHaloLayer.object);
-  group.add(starLayer.object);
-  return group;
+  return starLayer.object;
 }
 
 function refreshHighlights() {
@@ -2959,11 +2872,6 @@ function animate() {
     starLayer.material.uniforms.uDrift.value = REDUCE_MOTION ? 0 : 1.4 * driftK;
     starLayer.material.uniforms.uDriftSpeed.value = 0.14;
     starLayer.update(elapsed, dt);
-    if (starHaloLayer) {
-      starHaloLayer.material.uniforms.uDrift.value = REDUCE_MOTION ? 0 : 1.4 * driftK;
-      starHaloLayer.material.uniforms.uDriftSpeed.value = 0.14;
-      starHaloLayer.update(elapsed, dt);
-    }
   }
   if (pulseT0) refreshHighlights(); // 搜索脉冲期间逐帧刷新高亮
   const now = performance.now();
